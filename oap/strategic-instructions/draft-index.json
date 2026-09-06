@@ -1,0 +1,968 @@
+[
+  {
+    "architecture": "1,17,20",
+    "dependencies": [],
+    "id": "000-a",
+    "lr": [
+      "LR-014"
+    ],
+    "path": "000-a-reconcile-bootstrap-repository-and-authority.md",
+    "phase": "DEMONSTRATOR",
+    "plan": "§§1, 12, 16"
+  },
+  {
+    "architecture": "4.1,15,16",
+    "dependencies": [
+      "000"
+    ],
+    "id": "001-a",
+    "lr": [
+      "LR-012",
+      "LR-014"
+    ],
+    "path": "001-a-reproducible-application-development-baseline.md",
+    "phase": "DEMONSTRATOR",
+    "plan": "§12; D01"
+  },
+  {
+    "architecture": "1,17,18,20",
+    "dependencies": [
+      "000",
+      "001"
+    ],
+    "id": "002-a",
+    "lr": [
+      "LR-013",
+      "LR-014"
+    ],
+    "path": "002-a-cpu-only-ci-and-governance-guards.md",
+    "phase": "DEMONSTRATOR",
+    "plan": "§§14.1, 16"
+  },
+  {
+    "architecture": "6,8,10.3,11,14",
+    "dependencies": [
+      "001"
+    ],
+    "id": "003-a",
+    "lr": [
+      "LR-003",
+      "LR-006",
+      "LR-008",
+      "LR-010"
+    ],
+    "path": "003-a-typed-spans-evidence-reviews-results-and-policy.md",
+    "phase": "DEMONSTRATOR",
+    "plan": "§§5.2, 6.2, 8, 13; D01"
+  },
+  {
+    "architecture": "8.1,8.2",
+    "dependencies": [
+      "003"
+    ],
+    "id": "004-a",
+    "lr": [
+      "LR-008",
+      "LR-013",
+      "LR-014"
+    ],
+    "path": "004-a-source-manifests-and-miniature-synthetic-corpus.md",
+    "phase": "DEMONSTRATOR",
+    "plan": "§6; D02"
+  },
+  {
+    "architecture": "8.2,15",
+    "dependencies": [
+      "004"
+    ],
+    "id": "005-a",
+    "lr": [
+      "LR-008",
+      "LR-012",
+      "LR-014"
+    ],
+    "path": "005-a-real-source-inventory-and-permitted-acquisition-recipe.md",
+    "phase": "DEMONSTRATOR",
+    "plan": "§§6.1–6.3; D02"
+  },
+  {
+    "architecture": "8.1,8.2",
+    "dependencies": [
+      "003",
+      "004",
+      "005"
+    ],
+    "id": "006-a",
+    "lr": [
+      "LR-008"
+    ],
+    "path": "006-a-unigram-lexicon-importer.md",
+    "phase": "DEMONSTRATOR",
+    "plan": "§6.3; D02"
+  },
+  {
+    "architecture": "8.1,8.2",
+    "dependencies": [
+      "004",
+      "005",
+      "006"
+    ],
+    "id": "007-a",
+    "lr": [
+      "LR-008",
+      "LR-009"
+    ],
+    "path": "007-a-bigram-trigram-importer-with-censored-absence.md",
+    "phase": "DEMONSTRATOR",
+    "plan": "§6.2; D02"
+  },
+  {
+    "architecture": "8",
+    "dependencies": [
+      "006",
+      "007"
+    ],
+    "id": "008-a",
+    "lr": [
+      "LR-008",
+      "LR-009",
+      "LR-012"
+    ],
+    "path": "008-a-read-only-sparse-lookup-and-fixed-neighbor-index.md",
+    "phase": "DEMONSTRATOR",
+    "plan": "§6.3; D02"
+  },
+  {
+    "architecture": "6,7",
+    "dependencies": [
+      "003"
+    ],
+    "id": "009-a",
+    "lr": [
+      "LR-003",
+      "LR-007"
+    ],
+    "path": "009-a-unicode-token-span-mapping.md",
+    "phase": "DEMONSTRATOR",
+    "plan": "§5.2; D03"
+  },
+  {
+    "architecture": "7",
+    "dependencies": [
+      "009"
+    ],
+    "id": "010-a",
+    "lr": [
+      "LR-007"
+    ],
+    "path": "010-a-protected-markdown-code-url-spans.md",
+    "phase": "DEMONSTRATOR",
+    "plan": "§5.1; D03"
+  },
+  {
+    "architecture": "7,9",
+    "dependencies": [
+      "009",
+      "010"
+    ],
+    "id": "011-a",
+    "lr": [
+      "LR-002",
+      "LR-007",
+      "LR-008"
+    ],
+    "path": "011-a-context-boundaries-and-terminology-exclusions.md",
+    "phase": "DEMONSTRATOR",
+    "plan": "§§5.1, 7; D03–D04"
+  },
+  {
+    "architecture": "9",
+    "dependencies": [
+      "008",
+      "011"
+    ],
+    "id": "012-a",
+    "lr": [
+      "LR-002",
+      "LR-003",
+      "LR-008",
+      "LR-010"
+    ],
+    "path": "012-a-first-deterministic-suspicion-selector.md",
+    "phase": "DEMONSTRATOR",
+    "plan": "§7; D04"
+  },
+  {
+    "architecture": "10.1,10.2",
+    "dependencies": [
+      "003",
+      "009"
+    ],
+    "id": "013-a",
+    "lr": [
+      "LR-003",
+      "LR-004",
+      "LR-005",
+      "LR-006"
+    ],
+    "path": "013-a-versioned-targeted-review-prompt-serializer.md",
+    "phase": "DEMONSTRATOR",
+    "plan": "§8.1–8.3; D05"
+  },
+  {
+    "architecture": "10.3",
+    "dependencies": [
+      "003",
+      "013"
+    ],
+    "id": "014-a",
+    "lr": [
+      "LR-004",
+      "LR-006",
+      "LR-010"
+    ],
+    "path": "014-a-strict-reviewer-response-parser.md",
+    "phase": "DEMONSTRATOR",
+    "plan": "§§8.4–8.5; D05"
+  },
+  {
+    "architecture": "4,10,14",
+    "dependencies": [
+      "013",
+      "014"
+    ],
+    "id": "015-a",
+    "lr": [
+      "LR-005",
+      "LR-010",
+      "LR-012",
+      "LR-013"
+    ],
+    "path": "015-a-isolated-reviewer-http-client-with-fake-upstream.md",
+    "phase": "DEMONSTRATOR",
+    "plan": "§§4, 8, 11.2, 13; D05"
+  },
+  {
+    "architecture": "10,15,16.2",
+    "dependencies": [
+      "005",
+      "015"
+    ],
+    "id": "016-a",
+    "lr": [
+      "LR-004",
+      "LR-005",
+      "LR-010",
+      "LR-012",
+      "LR-014"
+    ],
+    "path": "016-a-early-bounded-live-qwen-reviewer-feasibility.md",
+    "phase": "DEMONSTRATOR",
+    "plan": "§§4.2, 8.5, 14.1; D05"
+  },
+  {
+    "architecture": "11.2",
+    "dependencies": [
+      "008",
+      "012",
+      "014"
+    ],
+    "id": "017-a",
+    "lr": [
+      "LR-006",
+      "LR-008",
+      "LR-009"
+    ],
+    "path": "017-a-initial-strict-word-replacement-acceptance.md",
+    "phase": "DEMONSTRATOR",
+    "plan": "§9.1; D06"
+  },
+  {
+    "architecture": "9,11.2",
+    "dependencies": [
+      "017"
+    ],
+    "id": "018-a",
+    "lr": [
+      "LR-003",
+      "LR-006",
+      "LR-009"
+    ],
+    "path": "018-a-short-phrase-acceptance-boundary.md",
+    "phase": "DEMONSTRATOR",
+    "plan": "§§7.2, 9.1; D06"
+  },
+  {
+    "architecture": "12",
+    "dependencies": [
+      "009",
+      "010",
+      "017",
+      "018"
+    ],
+    "id": "019-a",
+    "lr": [
+      "LR-006",
+      "LR-007",
+      "LR-009"
+    ],
+    "path": "019-a-exact-patcher-and-conflict-group-rollback.md",
+    "phase": "DEMONSTRATOR",
+    "plan": "§10; D06"
+  },
+  {
+    "architecture": "5,11,14",
+    "dependencies": [
+      "012",
+      "015",
+      "017",
+      "018",
+      "019"
+    ],
+    "id": "020-a",
+    "lr": [
+      "LR-001",
+      "LR-002",
+      "LR-005",
+      "LR-007",
+      "LR-010",
+      "LR-011"
+    ],
+    "path": "020-a-completed-text-pipeline-with-zero-one-review-call.md",
+    "phase": "DEMONSTRATOR",
+    "plan": "§§3, 13.3; D06"
+  },
+  {
+    "architecture": "4.1,15",
+    "dependencies": [
+      "020"
+    ],
+    "id": "021-a",
+    "lr": [
+      "LR-007",
+      "LR-013",
+      "LR-014"
+    ],
+    "path": "021-a-offline-cli-with-explicit-private-inspection-output.md",
+    "phase": "DEMONSTRATOR",
+    "plan": "§§11.1, 12, 13.4; D07"
+  },
+  {
+    "architecture": "16,19,20",
+    "dependencies": [
+      "016",
+      "020",
+      "021"
+    ],
+    "id": "022-a",
+    "lr": [
+      "LR-001",
+      "LR-002",
+      "LR-004",
+      "LR-005",
+      "LR-006",
+      "LR-007",
+      "LR-008",
+      "LR-009",
+      "LR-010",
+      "LR-011",
+      "LR-012",
+      "LR-013",
+      "LR-014"
+    ],
+    "path": "022-a-demonstrator-evidence-and-ica-request.md",
+    "phase": "DEMONSTRATOR",
+    "plan": "§15.1; D07"
+  },
+  {
+    "architecture": "16.3",
+    "dependencies": [
+      "003",
+      "021"
+    ],
+    "id": "023-a",
+    "lr": [
+      "LR-013",
+      "LR-014"
+    ],
+    "path": "023-a-annotation-schema-and-evaluation-provenance.md",
+    "phase": "MVP",
+    "plan": "§14.2; M01"
+  },
+  {
+    "architecture": "15,16.3",
+    "dependencies": [
+      "016",
+      "023"
+    ],
+    "id": "024-a",
+    "lr": [
+      "LR-012",
+      "LR-013",
+      "LR-014"
+    ],
+    "path": "024-a-bounded-real-output-collection-workflow.md",
+    "phase": "MVP",
+    "plan": "§§13.4, 14.2; M01"
+  },
+  {
+    "architecture": "7,16.3",
+    "dependencies": [
+      "023",
+      "024"
+    ],
+    "id": "025-a",
+    "lr": [
+      "LR-007",
+      "LR-009",
+      "LR-014"
+    ],
+    "path": "025-a-correct-text-negative-controls.md",
+    "phase": "MVP",
+    "plan": "§§14.2–14.3; M01"
+  },
+  {
+    "architecture": "16.3",
+    "dependencies": [
+      "023",
+      "024",
+      "025"
+    ],
+    "id": "026-a",
+    "lr": [
+      "LR-013",
+      "LR-014"
+    ],
+    "path": "026-a-frozen-calibration-test-split-and-dataset-integrity.md",
+    "phase": "MVP",
+    "plan": "§14.2; M01"
+  },
+  {
+    "architecture": "4.1,8,9",
+    "dependencies": [
+      "003",
+      "005",
+      "026"
+    ],
+    "id": "027-a",
+    "lr": [
+      "LR-008",
+      "LR-012",
+      "LR-014"
+    ],
+    "path": "027-a-optional-cpu-linguistic-analyzer-adapter.md",
+    "phase": "MVP",
+    "plan": "§§6.1, 12; M02"
+  },
+  {
+    "architecture": "9,11.2",
+    "dependencies": [
+      "017",
+      "027"
+    ],
+    "id": "028-a",
+    "lr": [
+      "LR-009",
+      "LR-014"
+    ],
+    "path": "028-a-contextual-morphology-validation.md",
+    "phase": "MVP",
+    "plan": "§7.3; M02"
+  },
+  {
+    "architecture": "8.1,9",
+    "dependencies": [
+      "008",
+      "027"
+    ],
+    "id": "029-a",
+    "lr": [
+      "LR-008",
+      "LR-009"
+    ],
+    "path": "029-a-lemma-statistics-and-normalization-compatibility.md",
+    "phase": "MVP",
+    "plan": "§§6.2–6.3, 7.3; M02"
+  },
+  {
+    "architecture": "9,16.3",
+    "dependencies": [
+      "012",
+      "026",
+      "028",
+      "029"
+    ],
+    "id": "030-a",
+    "lr": [
+      "LR-002",
+      "LR-008",
+      "LR-009",
+      "LR-014"
+    ],
+    "path": "030-a-morphology-aware-detector-calibration-features.md",
+    "phase": "MVP",
+    "plan": "§7; M02–M04"
+  },
+  {
+    "architecture": "9,11.2",
+    "dependencies": [
+      "018",
+      "026",
+      "030"
+    ],
+    "id": "031-a",
+    "lr": [
+      "LR-003",
+      "LR-007",
+      "LR-010"
+    ],
+    "path": "031-a-evidence-driven-short-phrase-grouping.md",
+    "phase": "MVP",
+    "plan": "§7.2; M03"
+  },
+  {
+    "architecture": "11,16.3",
+    "dependencies": [
+      "026",
+      "028",
+      "029",
+      "030",
+      "031"
+    ],
+    "id": "032-a",
+    "lr": [
+      "LR-009",
+      "LR-014"
+    ],
+    "path": "032-a-versioned-strict-acceptance-thresholds.md",
+    "phase": "MVP",
+    "plan": "§9; M04"
+  },
+  {
+    "architecture": "16.3",
+    "dependencies": [
+      "020",
+      "026",
+      "032"
+    ],
+    "id": "033-a",
+    "lr": [
+      "LR-010",
+      "LR-012",
+      "LR-014"
+    ],
+    "path": "033-a-comparative-evaluation-runners.md",
+    "phase": "MVP",
+    "plan": "§14.2; M07"
+  },
+  {
+    "architecture": "16.3",
+    "dependencies": [
+      "025",
+      "026",
+      "033"
+    ],
+    "id": "034-a",
+    "lr": [
+      "LR-014"
+    ],
+    "path": "034-a-quality-report-with-denominators-and-uncertainty.md",
+    "phase": "MVP",
+    "plan": "§14.3; M04, M07"
+  },
+  {
+    "architecture": "5,14",
+    "dependencies": [
+      "020"
+    ],
+    "id": "035-a",
+    "lr": [
+      "LR-010",
+      "LR-011",
+      "LR-012"
+    ],
+    "path": "035-a-bounded-cpu-execution-and-cancellation.md",
+    "phase": "MVP",
+    "plan": "§§12–13; M05"
+  },
+  {
+    "architecture": "14",
+    "dependencies": [
+      "015",
+      "020",
+      "035"
+    ],
+    "id": "036-a",
+    "lr": [
+      "LR-010",
+      "LR-011",
+      "LR-012"
+    ],
+    "path": "036-a-review-admission-queue-timeout-and-fairness.md",
+    "phase": "MVP",
+    "plan": "§§13.1–13.3; M05"
+  },
+  {
+    "architecture": "13",
+    "dependencies": [
+      "020",
+      "036"
+    ],
+    "id": "037-a",
+    "lr": [
+      "LR-001",
+      "LR-005",
+      "LR-011",
+      "LR-014"
+    ],
+    "path": "037-a-narrow-api-capability-and-bypass-reject-contract.md",
+    "phase": "MVP",
+    "plan": "§§11.3–11.4; M06"
+  },
+  {
+    "architecture": "5,13,14",
+    "dependencies": [
+      "037"
+    ],
+    "id": "038-a",
+    "lr": [
+      "LR-001",
+      "LR-011"
+    ],
+    "path": "038-a-full-main-response-capture-and-completion-validation.md",
+    "phase": "MVP",
+    "plan": "§§3, 5, 11.4, 13.3; M06"
+  },
+  {
+    "architecture": "4,5,13",
+    "dependencies": [
+      "020",
+      "037",
+      "038"
+    ],
+    "id": "039-a",
+    "lr": [
+      "LR-001",
+      "LR-005",
+      "LR-006",
+      "LR-011"
+    ],
+    "path": "039-a-repair-adapter-integration-without-recursion.md",
+    "phase": "MVP",
+    "plan": "§§11.1–11.2; M06"
+  },
+  {
+    "architecture": "10.2,13",
+    "dependencies": [
+      "013",
+      "015",
+      "039"
+    ],
+    "id": "040-a",
+    "lr": [
+      "LR-005",
+      "LR-007"
+    ],
+    "path": "040-a-main-history-and-review-isolation-contracts.md",
+    "phase": "MVP",
+    "plan": "§4.1; M06"
+  },
+  {
+    "architecture": "12,13,15",
+    "dependencies": [
+      "039",
+      "040"
+    ],
+    "id": "041-a",
+    "lr": [
+      "LR-007",
+      "LR-013",
+      "LR-014"
+    ],
+    "path": "041-a-envelope-preservation-usage-and-private-metrics.md",
+    "phase": "MVP",
+    "plan": "§§10, 11.4, 13.4; M06"
+  },
+  {
+    "architecture": "14,16.1",
+    "dependencies": [
+      "035",
+      "036",
+      "038",
+      "039",
+      "040",
+      "041"
+    ],
+    "id": "042-a",
+    "lr": [
+      "LR-001",
+      "LR-005",
+      "LR-010",
+      "LR-011",
+      "LR-013"
+    ],
+    "path": "042-a-api-failure-disconnect-and-concurrency-tests.md",
+    "phase": "MVP",
+    "plan": "§§13.3, 14.1; M05–M06"
+  },
+  {
+    "architecture": "16.2",
+    "dependencies": [
+      "016",
+      "039",
+      "042"
+    ],
+    "id": "043-a",
+    "lr": [
+      "LR-001",
+      "LR-005",
+      "LR-010",
+      "LR-012",
+      "LR-014"
+    ],
+    "path": "043-a-bounded-live-complete-main-then-review-integration.md",
+    "phase": "MVP",
+    "plan": "§§14.1, 16; M06"
+  },
+  {
+    "architecture": "16,19,20",
+    "dependencies": [
+      "022",
+      "034",
+      "042",
+      "043"
+    ],
+    "id": "044-a",
+    "lr": [
+      "LR-001",
+      "LR-002",
+      "LR-003",
+      "LR-004",
+      "LR-005",
+      "LR-006",
+      "LR-007",
+      "LR-008",
+      "LR-009",
+      "LR-010",
+      "LR-011",
+      "LR-012",
+      "LR-013",
+      "LR-014"
+    ],
+    "path": "044-a-experimental-mvp-evidence-and-independent-closure-gate.md",
+    "phase": "MVP",
+    "plan": "§§15.2, 16; M07"
+  },
+  {
+    "architecture": "8,11.2",
+    "dependencies": [
+      "005",
+      "029",
+      "034"
+    ],
+    "id": "045-a",
+    "lr": [
+      "LR-008",
+      "LR-009",
+      "LR-014"
+    ],
+    "path": "045-a-collocation-feasibility-and-bounded-integration.md",
+    "phase": "SERVICE",
+    "plan": "§§6.1, 9.1; S02"
+  },
+  {
+    "architecture": "8.1,8.2",
+    "dependencies": [
+      "005",
+      "007",
+      "008",
+      "034"
+    ],
+    "id": "046-a",
+    "lr": [
+      "LR-008",
+      "LR-009",
+      "LR-014"
+    ],
+    "path": "046-a-lower-cutoff-full-statistics-feasibility.md",
+    "phase": "SERVICE",
+    "plan": "§6.2; S02"
+  },
+  {
+    "architecture": "14,16",
+    "dependencies": [
+      "034",
+      "036",
+      "043"
+    ],
+    "id": "047-a",
+    "lr": [
+      "LR-010",
+      "LR-012",
+      "LR-014"
+    ],
+    "path": "047-a-measured-latency-and-resource-budget.md",
+    "phase": "SERVICE",
+    "plan": "§13.2; S03"
+  },
+  {
+    "architecture": "16.3",
+    "dependencies": [
+      "025",
+      "026",
+      "034",
+      "044"
+    ],
+    "id": "048-a",
+    "lr": [
+      "LR-009",
+      "LR-013",
+      "LR-014"
+    ],
+    "path": "048-a-broader-negative-harm-evaluation.md",
+    "phase": "SERVICE",
+    "plan": "§14.3; S01"
+  },
+  {
+    "architecture": "4.1,14,15",
+    "dependencies": [
+      "001",
+      "039",
+      "042"
+    ],
+    "id": "049-a",
+    "lr": [
+      "LR-012",
+      "LR-013",
+      "LR-014"
+    ],
+    "path": "049-a-packaging-and-local-installation-templates.md",
+    "phase": "SERVICE",
+    "plan": "§12; S04"
+  },
+  {
+    "architecture": "14.2,15",
+    "dependencies": [
+      "036",
+      "041",
+      "049"
+    ],
+    "id": "050-a",
+    "lr": [
+      "LR-002",
+      "LR-011",
+      "LR-012"
+    ],
+    "path": "050-a-health-readiness-and-disable-rollback-behavior.md",
+    "phase": "SERVICE",
+    "plan": "§§13.3, 15.3; S04"
+  },
+  {
+    "architecture": "4,13",
+    "dependencies": [
+      "037",
+      "041",
+      "043"
+    ],
+    "id": "051-a",
+    "lr": [
+      "LR-005",
+      "LR-012",
+      "LR-013",
+      "LR-014"
+    ],
+    "path": "051-a-gateway-boundary-and-usage-integration-contract.md",
+    "phase": "SERVICE",
+    "plan": "§11.2; S03"
+  },
+  {
+    "architecture": "14,15,16",
+    "dependencies": [
+      "047",
+      "049",
+      "050",
+      "051"
+    ],
+    "id": "052-a",
+    "lr": [
+      "LR-011",
+      "LR-012",
+      "LR-014"
+    ],
+    "path": "052-a-explicitly-gated-candidate-deployment-rollback-rehearsal.md",
+    "phase": "SERVICE",
+    "plan": "§§11–13; S04"
+  },
+  {
+    "architecture": "7,10,15,16",
+    "dependencies": [
+      "010",
+      "013",
+      "014",
+      "042"
+    ],
+    "id": "053-a",
+    "lr": [
+      "LR-005",
+      "LR-006",
+      "LR-007",
+      "LR-013"
+    ],
+    "path": "053-a-privacy-prompt-injection-and-structural-abuse-suite.md",
+    "phase": "SERVICE",
+    "plan": "§§5, 8.5, 13.4; S01, S05"
+  },
+  {
+    "architecture": "8.2,15,16,20",
+    "dependencies": [
+      "005",
+      "045",
+      "046",
+      "048",
+      "049",
+      "051",
+      "053"
+    ],
+    "id": "054-a",
+    "lr": [
+      "LR-008",
+      "LR-012",
+      "LR-013",
+      "LR-014"
+    ],
+    "path": "054-a-reproducibility-rights-and-truthful-final-documentation.md",
+    "phase": "SERVICE",
+    "plan": "§§6.3, 12, 17; S05"
+  },
+  {
+    "architecture": "16,18,19,20",
+    "dependencies": [
+      "044",
+      "047",
+      "048",
+      "050",
+      "052",
+      "054"
+    ],
+    "id": "055-a",
+    "lr": [
+      "LR-001",
+      "LR-002",
+      "LR-003",
+      "LR-004",
+      "LR-005",
+      "LR-006",
+      "LR-007",
+      "LR-008",
+      "LR-009",
+      "LR-010",
+      "LR-011",
+      "LR-012",
+      "LR-013",
+      "LR-014"
+    ],
+    "path": "055-a-verified-service-evidence-and-independent-handoff.md",
+    "phase": "SERVICE",
+    "plan": "§§15.3–16; S05"
+  }
+]

@@ -1,0 +1,133 @@
+{
+  "schema_version": 1,
+  "package": "llm-slovenian-repair-bootstrap-inputs",
+  "version": "2.0",
+  "prepared_date": "2026-09-06",
+  "entrypoint": "AGENTS.md",
+  "purpose": "Inputs for a strong coding agent to materialize and validate an inactive two-role Concentrated OAP bootstrap from a third temporary directory.",
+  "delivery_layout": "No enclosing directory in ZIP; AGENTS.md is at archive root.",
+  "primary_inputs": [
+    "AGENTS.md",
+    "INSTRUCTIONS.md",
+    "PLAN.md",
+    "ARCHITECTURE.md",
+    "CRITICAL.md"
+  ],
+  "canonical_process_sources": [
+    "sources/concentrated-oap.md",
+    "sources/oap.md"
+  ],
+  "default_destinations": {
+    "repo": "$HOME/codex-work/llm-slovenian-repair",
+    "strategy": "$HOME/codex-supervision/llm-slovenian-repair"
+  },
+  "initial_objective_count": 56,
+  "initial_objective_range": [
+    "000",
+    "055"
+  ],
+  "real_bootstrap_activation": "prohibited_during_generation",
+  "expected_archive_member_count": 18,
+  "hash_scope": "All listed documents. This JSON excludes its own hash; INPUTS.sha256 hashes it and the listed documents, excluding the checksum file itself.",
+  "source_installation_note": "Archive input snapshots under docs/bootstrap; rename source AGENTS.md to BOOTSTRAP-GENERATOR.md. Record path mapping in generated source lock, do not adopt it as operational law.",
+  "runtime_helper_implementation_status": "NOT_IMPLEMENTED_BY_THIS_INPUT_PACKAGE",
+  "runtime_helper_test_status": "TO_BE_EXECUTED_BY_BOOTSTRAP_GENERATOR",
+  "files": [
+    {
+      "path": "AGENTS.md",
+      "bytes": 10695,
+      "sha256": "b8e34ce58afc0cf8d6f4dbfe238237448dc1075ba2e4aff1e340938d8d35267e",
+      "kind": "bootstrap_generator_constitution_only"
+    },
+    {
+      "path": "ARCHITECTURE.md",
+      "bytes": 40194,
+      "sha256": "a16e0f87bdb21f6920aa63119cf5be148b6c8b68bf1337c44006d54b7a7261f7",
+      "kind": "supplied_current_architecture_bootstrap_baseline"
+    },
+    {
+      "path": "CRITICAL.md",
+      "bytes": 10684,
+      "sha256": "a9ea5fa5db2affabf0f85710f41e37e73b108c0236a58b7efb9c17cb36a07e9e",
+      "kind": "empty_canonical_dha_register_seed"
+    },
+    {
+      "path": "INSTRUCTIONS.md",
+      "bytes": 23453,
+      "sha256": "bdbd1cdd4f544a50c08eacd456b761eb303b557a56b1b1ba7cb1afb3f4632f27",
+      "kind": "bootstrap_input_or_package_documentation"
+    },
+    {
+      "path": "PACKAGE-CHECKS.md",
+      "bytes": 1586,
+      "sha256": "18bbd0c1abdd22c48579b285d332c0d21c359d82686cb325659cf3b2e73a3f0b",
+      "kind": "bootstrap_input_or_package_documentation"
+    },
+    {
+      "path": "PLAN.md",
+      "bytes": 45243,
+      "sha256": "d2aa1d98cc5177ac6093ab3aeb79903b192780910ef2d1712839b474fb5adbf0",
+      "kind": "immutable_product_agreement"
+    },
+    {
+      "path": "README.md",
+      "bytes": 3678,
+      "sha256": "195a3d8450e82125cc2b3440a392a01623c433e8311569d599fd754406ce6425",
+      "kind": "bootstrap_input_or_package_documentation"
+    },
+    {
+      "path": "SOURCE-MAP.md",
+      "bytes": 7411,
+      "sha256": "39bae9031940113ab20c657aed7335d6ca776164a8ebe3285bb8e76c7ce3e5de",
+      "kind": "bootstrap_input_or_package_documentation"
+    },
+    {
+      "path": "sources/concentrated-oap.md",
+      "bytes": 77512,
+      "sha256": "9067c7e65f146b9fed19b903fd73e07f58d9b1163436761011a64702d14bf302",
+      "kind": "immutable_user_supplied_source_snapshot"
+    },
+    {
+      "path": "sources/oap.md",
+      "bytes": 84144,
+      "sha256": "68f9610d1cea9ce8a4acbb3d5eea5133439624aa2fa85bfe03470b015b6732a5",
+      "kind": "immutable_user_supplied_source_snapshot"
+    },
+    {
+      "path": "sources/product/ChatGPT-Število slovenskih besed-20260906-1413.md",
+      "bytes": 30393,
+      "sha256": "9b51c3e19db3769344fb91238a411b71f1e287dc06327df1e065c6085baf7c2a",
+      "kind": "immutable_user_supplied_source_snapshot"
+    },
+    {
+      "path": "sources/product/deep-research-report (4).md",
+      "bytes": 53782,
+      "sha256": "a6e532021bbcbee8f8b6d1ff3c136972688c352b9e3a5e4aa1a29e0b1c1c1f2e",
+      "kind": "immutable_user_supplied_source_snapshot"
+    },
+    {
+      "path": "specifications/BOOTSTRAP-ACCEPTANCE.md",
+      "bytes": 12014,
+      "sha256": "5a5616383474ca970b1e1cdfae76289bf4b0f41b004cd03779f6c2d4fa018b4f",
+      "kind": "bootstrap_generation_specification"
+    },
+    {
+      "path": "specifications/OAP-PROTOCOL.md",
+      "bytes": 18705,
+      "sha256": "57b35d7e4c5aba6500b7c2ef091664c1de2ab10aed8073643e6cd9c1104b1115",
+      "kind": "bootstrap_generation_specification"
+    },
+    {
+      "path": "specifications/ROLE-CONTEXT.md",
+      "bytes": 14604,
+      "sha256": "41a082f85f847ee86e2d064ae8a43e532de90958db99e14f1429e2f866cd6904",
+      "kind": "bootstrap_generation_specification"
+    },
+    {
+      "path": "specifications/WORK-PROGRAM.md",
+      "bytes": 19561,
+      "sha256": "b4e06a623619af6542af20fa84669e49b9a81b5e9fca5346203268b5fdab59fa",
+      "kind": "bootstrap_generation_specification"
+    }
+  ]
+}

@@ -1,0 +1,1 @@
+OAP_ROLE=coding. The wrapper has delivered one ready round. Retain coding authority even when inspecting strategic source. Read the repository router and oap/coding-instructions/AGENTS.md; follow its compact read sequence and the exact active order. Reconcile durable state before mutation. Finish only that round, publish its verified report and exit.
