@@ -4,8 +4,8 @@ Revision 1. Reviewed against complete bundled sources after authoring. This is g
 
 - `PLAN.md`: `d2aa1d98cc5177ac6093ab3aeb79903b192780910ef2d1712839b474fb5adbf0`.
 - `ARCHITECTURE.md`: `a16e0f87bdb21f6920aa63119cf5be148b6c8b68bf1337c44006d54b7a7261f7`.
-- `oap/strategic-instructions/AGENTS.md`: `d337bc769133f4b4c263ff06ef884a980d1b09dd33cb8aa7d94ebf15641ae702`.
-- `oap/strategic-instructions/OAP-COMMUNICATION-strategic.md`: `99a5d22e765682f5f3926d8900444564e48d21f320884eb4ef67d501862685ea`.
+- `oap/strategic-instructions/AGENTS.md`: `ac05494856ac8c85c31b77225ac96abe9596f0d0ae50d96e338da7370669fa5c`.
+- `oap/strategic-instructions/OAP-COMMUNICATION-strategic.md`: `6ba11ddcde24ed3d8777f305951d706d3fc4a1869470be9669a9853d3ce15cbf`.
 - `docs/bootstrap/sources/concentrated-oap.md`: `9067c7e65f146b9fed19b903fd73e07f58d9b1163436761011a64702d14bf302` (immutable source revision 2.0 package).
 - `docs/bootstrap/sources/oap.md`: `68f9610d1cea9ce8a4acbb3d5eea5133439624aa2fa85bfe03470b015b6732a5` (immutable source revision 2.0 package).
 - `docs/bootstrap/specifications/ROLE-CONTEXT.md`: `41a082f85f847ee86e2d064ae8a43e532de90958db99e14f1429e2f866cd6904` (immutable source revision 2.0 package).
@@ -121,3 +121,18 @@ it. Repeat after remediation; counts/queue/report prose do not establish complet
 No intentionally omitted executor obligation identified by this generator review.
 Limitations: semantic comparison is fallible human-reviewable generator work;
 structural clause coverage is not formal completeness, independence or authorization.
+
+## Owner layout delta — 2026-09-07
+
+Source: `oap/governance/WORKSPACE-LAYOUT.json`, SHA-256 `cba4ae2226038a44d74bff2eb727bc79e930b34f8f657b1e14c411a4ca09d254`.
+
+The explicit owner decision moves regular strategic files into the selected workspace and only FIFOs into the native home. Original input snapshots and PLAN/ARCHITECTURE/CRITICAL bytes are unchanged. The older uniform private-mode/colocated-FIFO statements have this narrow owner-selected exception, not a universal relaxation.
+
+| Clause | Role | Source and preserved condition |
+|---|---|---|
+| S-PLACEMENT-01 | strategic | Owner layout update, 2026-09-07: regular strategic files, drafts, configuration, logs and both role homes reside in the selected workspace; only the two real FIFOs reside in OAP_FIFO_HOME under the user's native home directory. The exact roots and scoped sync-storage exception are versioned in oap/governance/WORKSPACE-LAYOUT.json at REPO_ROOT. Its permission exception applies only to the selected strategic subtree, whose sync mount does not enforce normal POSIX private modes; ownership/type/symlink checks still apply. Native FIFO directory/files remain 0700/0600. This explicit human layout decision supersedes the original bootstrap's colocated-pipe and uniform-private-mode assumptions. It changes neither role authority nor any activation, source-integrity or live-test gate. Do not put fake pipes or symlinks in the strategic workspace. Native layouts outside this explicit selection retain the original strict mode requirements. PRESERVED: native pipe modes and exact OK remain strict; only named sync subtree excepted from POSIX mode assertion. Owner/type/symlink, role and activation boundaries unchanged. Generator semantic delta review, not independent ICA. |
+| C-PLACEMENT-01 | coding | Owner-selected layout is recorded in oap/governance/WORKSPACE-LAYOUT.json (helper-read metadata, not extra full model context). Use OAP_FIFO_HOME for real control/response pipes; all regular strategic files and role homes stay in STRATEGIC_HOME. Only the named sync subtree has a POSIX-private-mode exception; native FIFO directory/files remain 0700/0600, and other paths stay strict. Ownership/type/symlink, exact OK framing and activation checks remain mandatory. PRESERVED: native pipe modes and exact OK remain strict; only named sync subtree excepted from POSIX mode assertion. Owner/type/symlink, role and activation boundaries unchanged. Generator semantic delta review, not independent ICA. |
+| P-PLACEMENT-01 | coding | Owner update 2026-09-07: resolve pipes as OAP_FIFO_HOME/control.fifo and OAP_FIFO_HOME/response.fifo, not as files inside STRATEGIC_HOME. All regular strategic state/role homes remain in STRATEGIC_HOME. Use the configured native FIFO directory (0700; pipes 0600); no FIFO symlinks or empty-file substitutes. The explicit WORKSPACE-LAYOUT.json record scopes the sync mount's permission semantics; it grants no operational or human acceptance. PRESERVED: native pipe modes and exact OK remain strict; only named sync subtree excepted from POSIX mode assertion. Owner/type/symlink, role and activation boundaries unchanged. Generator semantic delta review, not independent ICA. |
+| SEC-05 | all operational roles | Owner layout update 2026-09-07: only the selected sync strategic subtree in oap/governance/WORKSPACE-LAYOUT.json is excepted from POSIX 0700/0600 assertions. Its access and synchronization follow the owner-selected storage. Ownership, regular-file/type and symlink guards remain. Native OAP_FIFO_HOME and its real FIFOs retain strict 0700/0600. This exception does not spread to other paths or authorize a model, credential copying, live tests or deployment. PRESERVED: native pipe modes and exact OK remain strict; only named sync subtree excepted from POSIX mode assertion. Owner/type/symlink, role and activation boundaries unchanged. Generator semantic delta review, not independent ICA. |
+
+The regular-file relocation includes role homes, drafts, logs and configuration as requested. No FIFO, credentials from another role/home, model call, new scope, human adjudication or activation is generated by this change. Paths are explicit and shared by materializer, doctor and launchers; other private paths still fail on bad modes. This review covers only the owner-directed placement delta; product invariants remain unchanged.

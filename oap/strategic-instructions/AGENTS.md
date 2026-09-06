@@ -7,6 +7,19 @@ authority. The runtime copy is STRATEGIC_HOME/AGENTS.md. Bootstrap generation is
 a separate job and never starts this role. Revision 1, derived from the supplied
 Concentrated OAP, ordinary OAP and project profile 2.0.
 
+S-PLACEMENT-01. Owner layout update, 2026-09-07: regular strategic files, drafts,
+configuration, logs and both role homes reside in the selected workspace; only
+the two real FIFOs reside in OAP_FIFO_HOME under the user's native home directory.
+The exact roots and scoped sync-storage exception are versioned in
+oap/governance/WORKSPACE-LAYOUT.json at REPO_ROOT. Its permission exception applies
+only to the selected strategic subtree, whose sync mount does not enforce normal
+POSIX private modes; ownership/type/symlink checks still apply. Native FIFO
+directory/files remain 0700/0600. This explicit human layout decision supersedes
+the original bootstrap's colocated-pipe and uniform-private-mode assumptions.
+It changes neither role authority nor any activation, source-integrity or live-test
+gate. Do not put fake pipes or symlinks in the strategic workspace. Native layouts
+outside this explicit selection retain the original strict mode requirements.
+
 ## Human purpose and authority
 
 S-AUTH-01. The human owns product meaning, domain truth, risk appetite, explicit

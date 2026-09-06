@@ -43,7 +43,9 @@ def doctor(repo, strategy=None, config=None, accepted_ref=None):
     if strategy:
         for rel in ('control.fifo','response.fifo'):
             try:
-                safe_path(Path(strategy)/rel, kind='fifo', private=True)
+                pipes = fifo_home(repo, strategy)
+                require(not config or config.get('OAP_FIFO_HOME') == str(pipes), 'FIFO_HOME_LAYOUT_CONFLICT')
+                safe_path(pipes/rel, kind='fifo', private=True)
             except OAPError as e:
                 errors.append(str(e))
     result = {'bootstrap_structure': 'invalid' if errors else 'valid', 'errors': errors,
@@ -53,6 +55,11 @@ def doctor(repo, strategy=None, config=None, accepted_ref=None):
               'product_milestone': 'NOT ASSESSED BY BOOTSTRAP', 'checks': checks,
               'tools_present': {t: bool(shutil.which(t)) for t in ('python3','git','gh','codex','tmux')},
               'signals_sent': 0, 'models_started': 0}
+    if strategy:
+        layout = workspace_layout(repo)
+        synced = bool(layout and Path(strategy) == Path(layout['strategic_home']))
+        result['strategic_storage'] = 'owner-selected sync; POSIX private bits not asserted' if synced else 'native private modes'
+        result['fifo_home'] = str(fifo_home(repo, strategy))
     return result
 
 
@@ -144,7 +151,7 @@ def main(argv=None):
             require(args.strategic_home, 'STRATEGIC_HOME_REQUIRED')
             result = refresh_governance(args.repo_root, args.strategic_home, args.accepted_ref, dry_run=args.dry_run, remote=remote)
         elif command == 'doctor':
-            config = runtime_config(args.config) if args.config else None
+            config = runtime_config(args.config, repo=args.repo_root) if args.config else None
             result = doctor(args.repo_root, args.strategic_home or (config['OAP_STRATEGIC_HOME'] if config else None), config, args.accepted_ref or (config['OAP_ACCEPTED_REF'] or None if config else None))
         else:
             config = runtime_config(args.config)

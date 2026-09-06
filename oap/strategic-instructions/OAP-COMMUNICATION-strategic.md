@@ -62,8 +62,8 @@ REPO_ROOT/oap/orders/<ID>-<slug>.md     immutable after publication
 REPO_ROOT/oap/reports/<ID>-<slug>.md    immutable final coding report
 REPO_ROOT/oap/active                  current pointer (absent at bootstrap)
 REPO_ROOT/CRITICAL.md                 canonical append-only live register
-STRATEGIC_HOME/control.fifo           strategy sends; coding wrapper receives
-STRATEGIC_HOME/response.fifo          coding sends; strategy receives
+OAP_FIFO_HOME/control.fifo            strategy sends; coding wrapper receives
+OAP_FIFO_HOME/response.fifo           coding sends; strategy receives
 ```
 
 Select only by the exact active ID. Never newest/highest/mtime or directory order.
@@ -74,7 +74,10 @@ Absence is valid inactive state. An existing empty/malformed pointer is an error
 
 Publishers/wrappers/strategic sessions use role-specific locks. Validate canonical
 paths, ownership, types and symlinks; scope permissions to generated private
-objects. FIFOs/private config are 0600; private directories 0700. Protect legitimate
+objects. Native FIFOs/config are 0600; native private directories 0700. The explicit
+owner layout update in WORKSPACE-LAYOUT.json places only FIFOs in the native home;
+all regular strategic files remain in the named sync subtree, where POSIX private
+modes are not asserted. Ownership/type/symlink checks remain. Protect legitimate
 Git worktrees and existing unrelated files. Private absolute paths stay out of
 public logs and manifests unless truly required and approved.
 

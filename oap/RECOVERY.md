@@ -1,5 +1,9 @@
 # Durable recovery
 
+Resolve both actual pipe paths through OAP_FIFO_HOME. A strategic workspace on
+the explicitly selected sync mount contains regular files only. Never reconstruct
+a missing pipe as an empty regular file or signal a stale pre-relocation path.
+
 No active: inactive/wait outside model. Empty/malformed active: invalid, no guessing.
 Consumed signal + no report: explicit recovery, same ID/branch/PR and first unfinished
 criterion. An interrupted a with PR reuses it, never creates duplicate. Record reason

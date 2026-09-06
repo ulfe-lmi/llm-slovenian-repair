@@ -1,6 +1,6 @@
 {
   "accepted_base": "UNRESOLVED until owner-reviewed baseline publication",
-  "coding_bytes": 33666,
+  "coding_bytes": 35076,
   "coding_read_set": [
     "AGENTS.md",
     "oap/coding-instructions/AGENTS.md",
@@ -213,6 +213,13 @@
       "role_scope": "coding; other roles retain their own law",
       "source": "ARCHITECTURE §§1,19; S-EVOLVE-01/S-ICA-01–03"
     },
+    "C-PLACEMENT-01": {
+      "comparison": "PRESERVED: native pipe modes and exact OK remain strict; only named sync subtree excepted from POSIX mode assertion. Owner/type/symlink, role and activation boundaries unchanged. Generator semantic delta review, not independent ICA.",
+      "file": "oap/coding-instructions/AGENTS.md",
+      "normative_obligation": "Owner-selected layout is recorded in oap/governance/WORKSPACE-LAYOUT.json (helper-read metadata, not extra full model context). Use OAP_FIFO_HOME for real control/response pipes; all regular strategic files and role homes stay in STRATEGIC_HOME. Only the named sync subtree has a POSIX-private-mode exception; native FIFO directory/files remain 0700/0600, and other paths stay strict. Ownership/type/symlink, exact OK framing and activation checks remain mandatory.",
+      "role_scope": "coding",
+      "source": "Owner 2026-09-07 instruction; oap/governance/WORKSPACE-LAYOUT.json; S-PLACEMENT-01"
+    },
     "C-READ-01": {
       "comparison": "PRESERVED: compare stated actor, mandatory verbs, trigger, conditions, exception and failure result with named source. Source rationale omitted; permission qualifiers retained. Generator semantic review, not independent proof.",
       "file": "oap/coding-instructions/AGENTS.md",
@@ -388,6 +395,13 @@
       "role_scope": "coding; other roles retain their own law",
       "source": "OAP-PROTOCOL §4"
     },
+    "P-PLACEMENT-01": {
+      "comparison": "PRESERVED: native pipe modes and exact OK remain strict; only named sync subtree excepted from POSIX mode assertion. Owner/type/symlink, role and activation boundaries unchanged. Generator semantic delta review, not independent ICA.",
+      "file": "OAP-COMMUNICATION-coding-agent.md",
+      "normative_obligation": "Owner update 2026-09-07: resolve pipes as OAP_FIFO_HOME/control.fifo and OAP_FIFO_HOME/response.fifo, not as files inside STRATEGIC_HOME. All regular strategic state/role homes remain in STRATEGIC_HOME. Use the configured native FIFO directory (0700; pipes 0600); no FIFO symlinks or empty-file substitutes. The explicit WORKSPACE-LAYOUT.json record scopes the sync mount's permission semantics; it grants no operational or human acceptance.",
+      "role_scope": "coding",
+      "source": "Owner 2026-09-07 instruction; oap/governance/WORKSPACE-LAYOUT.json; S-PLACEMENT-01"
+    },
     "P-RECOVERY-01": {
       "comparison": "PRESERVED: compare stated actor, mandatory verbs, trigger, conditions, exception and failure result with named source. Source rationale omitted; permission qualifiers retained. Generator semantic review, not independent proof.",
       "file": "OAP-COMMUNICATION-coding-agent.md",
@@ -430,6 +444,13 @@
       "role_scope": "coding; other roles retain their own law",
       "source": "OAP-PROTOCOL §§1,3,5"
     },
+    "S-PLACEMENT-01": {
+      "comparison": "PRESERVED: native pipe modes and exact OK remain strict; only named sync subtree excepted from POSIX mode assertion. Owner/type/symlink, role and activation boundaries unchanged. Generator semantic delta review, not independent ICA.",
+      "file": "oap/strategic-instructions/AGENTS.md",
+      "normative_obligation": "Owner layout update, 2026-09-07: regular strategic files, drafts, configuration, logs and both role homes reside in the selected workspace; only the two real FIFOs reside in OAP_FIFO_HOME under the user's native home directory. The exact roots and scoped sync-storage exception are versioned in oap/governance/WORKSPACE-LAYOUT.json at REPO_ROOT. Its permission exception applies only to the selected strategic subtree, whose sync mount does not enforce normal POSIX private modes; ownership/type/symlink checks still apply. Native FIFO directory/files remain 0700/0600. This explicit human layout decision supersedes the original bootstrap's colocated-pipe and uniform-private-mode assumptions. It changes neither role authority nor any activation, source-integrity or live-test gate. Do not put fake pipes or symlinks in the strategic workspace. Native layouts outside this explicit selection retain the original strict mode requirements.",
+      "role_scope": "strategic",
+      "source": "Owner 2026-09-07 instruction; oap/governance/WORKSPACE-LAYOUT.json; S-PLACEMENT-01"
+    },
     "SEC-01": {
       "comparison": "PRESERVED: compare stated actor, mandatory verbs, trigger, conditions, exception and failure result with named source. Source rationale omitted; permission qualifiers retained. Generator semantic review, not independent proof.",
       "file": "SECURITY.md",
@@ -457,6 +478,13 @@
       "normative_obligation": "D2 actions and applicable DHA gates remain human-controlled. See the relevant active order for exact boundary scope. Rationale for strategic review is in decision policy [source-relative reference: docs/DECISION-POLICY.md]; this link is optional background, not a transitive mandatory full-source coding read.",
       "role_scope": "coding; other roles retain their own law",
       "source": "ARCHITECTURE §15; OAP-PROTOCOL §§1,3"
+    },
+    "SEC-05": {
+      "comparison": "PRESERVED: native pipe modes and exact OK remain strict; only named sync subtree excepted from POSIX mode assertion. Owner/type/symlink, role and activation boundaries unchanged. Generator semantic delta review, not independent ICA.",
+      "file": "SECURITY.md",
+      "normative_obligation": "Owner layout update 2026-09-07: only the selected sync strategic subtree in oap/governance/WORKSPACE-LAYOUT.json is excepted from POSIX 0700/0600 assertions. Its access and synchronization follow the owner-selected storage. Ownership, regular-file/type and symlink guards remain. Native OAP_FIFO_HOME and its real FIFOs retain strict 0700/0600. This exception does not spread to other paths or authorize a model, credential copying, live tests or deployment.",
+      "role_scope": "all operational roles",
+      "source": "Owner 2026-09-07 instruction; oap/governance/WORKSPACE-LAYOUT.json; S-PLACEMENT-01"
     },
     "TEST-01": {
       "comparison": "PRESERVED: compare stated actor, mandatory verbs, trigger, conditions, exception and failure result with named source. Source rationale omitted; permission qualifiers retained. Generator semantic review, not independent proof.",
@@ -494,28 +522,32 @@
       "sha256": "a16e0f87bdb21f6920aa63119cf5be148b6c8b68bf1337c44006d54b7a7261f7"
     },
     "OAP-COMMUNICATION-coding-agent.md": {
-      "bytes": 6277,
-      "sha256": "a9e34b2c48e42de0d3907a16a7252e77030468ac0d2d1e536ee40da4b2d92d1a"
+      "bytes": 6736,
+      "sha256": "6355623830eb5ef47523d04b1a6bf958685f4debd16b62f9f46c3f14de01020b"
     },
     "PLAN.md": {
       "bytes": 45243,
       "sha256": "d2aa1d98cc5177ac6093ab3aeb79903b192780910ef2d1712839b474fb5adbf0"
     },
     "SECURITY.md": {
-      "bytes": 1288,
-      "sha256": "f6c0416e60eb915f6bc07f429902112dee1f5e0e6cacde9e5839b41dc8341f47"
+      "bytes": 1756,
+      "sha256": "0424b58bdaae1d4379364e3470b7cb4b2b729a20456d30e5c1ea59a3edbed7a6"
     },
     "TESTING.md": {
       "bytes": 1152,
       "sha256": "68a3307289f684910281b9d4947336f3a390924e229e7aafce7212b4a0fcc5d1"
     },
     "oap/coding-instructions/AGENTS.md": {
-      "bytes": 7212,
-      "sha256": "7f0e69d1e76b943a984f21c358a2f92fde031be9726c77454bc9b89d15a8a354"
+      "bytes": 7695,
+      "sha256": "55bc5d72200cd3e25e1d8decd629d902ffb732c8808bae8ef36a6081b4416514"
     },
     "oap/governance/DISTILLATION-MAP.md": {
-      "bytes": 59250,
-      "sha256": "ac0e0f9026cda7b3d25ee288080f5c53a1a79ecc4a9973887e9a49155abe126b"
+      "bytes": 63613,
+      "sha256": "a03d4be8d70101dc2d038bc5e8bd98e18fcaf3806539651b37d0e85f2558c2d7"
+    },
+    "oap/governance/WORKSPACE-LAYOUT.json": {
+      "bytes": 688,
+      "sha256": "cba4ae2226038a44d74bff2eb727bc79e930b34f8f657b1e14c411a4ca09d254"
     },
     "oap/prompts/coding-round.md": {
       "bytes": 353,
@@ -530,21 +562,22 @@
       "sha256": "78c0cfd6c58e3702bf73a7418fb9f34e2b6bdc74de4d1f97944aea6da4164b1f"
     },
     "oap/strategic-instructions/AGENTS.md": {
-      "bytes": 18747,
-      "sha256": "d337bc769133f4b4c263ff06ef884a980d1b09dd33cb8aa7d94ebf15641ae702"
+      "bytes": 19704,
+      "sha256": "ac05494856ac8c85c31b77225ac96abe9596f0d0ae50d96e338da7370669fa5c"
     },
     "oap/strategic-instructions/OAP-COMMUNICATION-strategic.md": {
-      "bytes": 22926,
-      "sha256": "99a5d22e765682f5f3926d8900444564e48d21f320884eb4ef67d501862685ea"
+      "bytes": 23172,
+      "sha256": "6ba11ddcde24ed3d8777f305951d706d3fc4a1869470be9669a9853d3ce15cbf"
     },
     "oap/strategic-instructions/strategic_model_init_material.md": {
-      "bytes": 899,
-      "sha256": "f9fc0aee51be34ed912106075149c19b0a21940efa21c8373e26a750ed04a467"
+      "bytes": 1217,
+      "sha256": "813edbc94f0a991abda046a544beb22510a83c9b45dc5282f046dd71a324465d"
     }
   },
+  "layout_revision": "Owner-directed split FIFO layout, 2026-09-07",
   "schema_version": 1,
   "semantic_review": "Generator clause comparison recorded in DISTILLATION-MAP; not independent ICA",
-  "strategic_core_bytes": 128009,
+  "strategic_core_bytes": 130218,
   "tokenizer": "UNMEASURED",
   "tokens": "UNMEASURED"
 }

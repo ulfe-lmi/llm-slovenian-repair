@@ -1,0 +1,8 @@
+{
+  "schema_version": 1,
+  "strategic_home": "/home/ubuntu/workspace/codex-supervision/llm-slovenian-repair",
+  "strategic_storage": "owner-selected-sync",
+  "fifo_home": "/home/ubuntu/.oap-fifos/llm-slovenian-repair",
+  "authority": "Explicit owner instruction, 2026-09-07: create FIFOs in home directory, move everything else into the selected workspace, update files accordingly.",
+  "permission_semantics": "POSIX private mode checks are excepted only for this exact strategic home and descendants on the owner-selected sync mount. Ownership, type and symlink checks remain; local FIFO directory/files retain 0700/0600. This record is not authentication or operational activation."
+}

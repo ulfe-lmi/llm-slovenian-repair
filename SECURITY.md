@@ -1,5 +1,12 @@
 # Operational security
 
+SEC-05. Owner layout update 2026-09-07: only the selected sync strategic subtree
+in oap/governance/WORKSPACE-LAYOUT.json is excepted from POSIX 0700/0600 assertions.
+Its access and synchronization follow the owner-selected storage. Ownership,
+regular-file/type and symlink guards remain. Native OAP_FIFO_HOME and its real
+FIFOs retain strict 0700/0600. This exception does not spread to other paths or
+authorize a model, credential copying, live tests or deployment.
+
 SEC-01. Work only inside the active order and owned disposable fixtures. Keep
 Qwen weights/quantization/vLLM/CUDA/shared GPU, services/ports/network/VPN/firewall,
 gateway, neighboring repositories and other agent profiles unchanged unless

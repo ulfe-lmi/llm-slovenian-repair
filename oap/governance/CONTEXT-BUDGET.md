@@ -1,16 +1,16 @@
-# Context budget
+# Context budget — current layout revision
 
-Exact UTF-8 bytes; configured operational models/tokenizers unresolved, tokens UNMEASURED. No character heuristic reported as tokens. Transitive mandatory coding set includes relevant compact SECURITY/TESTING worst case; active order/source code excluded. Full architecture/PLAN/strategy/roadmap/CRITICAL/OAP are not transitive coding defaults.
+Exact UTF-8 bytes; operational tokenizer/context capacity UNMEASURED. No law was truncated. Active order and code excluded; compact security/testing included. Full PLAN, architecture, strategic law, CRITICAL history and doctrine are not transitive coding defaults.
 
 | File | Bytes | Exact tokens |
 |---|---:|---|
 | AGENTS.md | 651 | UNMEASURED |
-| oap/coding-instructions/AGENTS.md | 7212 | UNMEASURED |
+| oap/coding-instructions/AGENTS.md | 7695 | UNMEASURED |
 | ARCHITECTURE-for-agents.md | 17086 | UNMEASURED |
-| OAP-COMMUNICATION-coding-agent.md | 6277 | UNMEASURED |
-| SECURITY.md | 1288 | UNMEASURED |
+| OAP-COMMUNICATION-coding-agent.md | 6736 | UNMEASURED |
+| SECURITY.md | 1756 | UNMEASURED |
 | TESTING.md | 1152 | UNMEASURED |
 
-Total coding governance: 33666 bytes; hard limit 50,000. Router 2,048; coding law 12,000; compact architecture 20,000; compact communication 10,000. Token targets 400/2200/3800/1800 and total 10,000 remain unmeasured until selected tokenizer available. Do not truncate law.
+Total coding governance: 35076 bytes (hard bound 50,000). Router/law/architecture/communication individual bounds remain 2,048/12,000/20,000/10,000 bytes. Token targets remain 400/2,200/3,800/1,800 and total 10,000, unmeasured until tokenizer selection.
 
-Strategic core full law/protocol/init/PLAN/architecture: 128009 bytes, plus current roadmap/readiness/decision/CRITICAL/state and initial/relevant doctrine. No small-context cap. Complete relevant set measured by doctor and receipt; context capacity separately unverified.
+Full strategic core sources/init/layout: 130218 bytes, plus roadmap, deliberate CRITICAL/reference reads and current state. No coding-size cap applies to strategy. The layout JSON is helper-read metadata, not a new mandatory full coding document.

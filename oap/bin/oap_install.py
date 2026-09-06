@@ -7,10 +7,10 @@ import time
 import tomllib
 from oap_core import (OAPError, require, safe_path, topology, read, jsread, digest,
                       atomic, json_bytes, lock, git, governance, active_id,
-                      matching, git_blob)
+                      matching, git_blob, strategic_path, fifo_home, make_private_dirs)
 
 ENV_KEYS = {
-    "OAP_REPO_ROOT", "OAP_STRATEGIC_HOME", "OAP_GITHUB_REPOSITORY", "CODEX_BIN",
+    "OAP_REPO_ROOT", "OAP_STRATEGIC_HOME", "OAP_FIFO_HOME", "OAP_GITHUB_REPOSITORY", "CODEX_BIN",
     "CODING_CODEX_HOME", "STRATEGIC_CODEX_HOME", "CODING_CODEX_PROFILE", "CODING_CODEX_MODEL",
     "STRATEGIC_CODEX_PROFILE", "STRATEGIC_CODEX_MODEL", "OAP_ACK_DANGER_FULL_ACCESS",
     "OAP_ACK_START_LOOP", "OAP_SETUP_TMUX_SESSION", "OAP_RUN_TMUX_SESSION",
@@ -20,9 +20,10 @@ ENV_KEYS = {
 }
 
 
-def runtime_defaults(repo, strategy):
+def runtime_defaults(repo, strategy, *, layout_repo=None):
     value = {k: "" for k in ENV_KEYS}
     value.update(OAP_REPO_ROOT=str(repo), OAP_STRATEGIC_HOME=str(strategy), CODEX_BIN="codex",
+                 OAP_FIFO_HOME=str(fifo_home(layout_repo or repo, strategy)),
                  CODING_CODEX_HOME=str(strategy / "codex-homes/coding"),
                  STRATEGIC_CODEX_HOME=str(strategy / "codex-homes/strategic"),
                  OAP_ACK_DANGER_FULL_ACCESS="NO", OAP_ACK_START_LOOP="NO",
@@ -37,9 +38,9 @@ def env_bytes(value):
             "\n".join(k + "=" + json.dumps(v, ensure_ascii=False) for k, v in sorted(value.items())) + "\n").encode()
 
 
-def runtime_config(path, environ=None):
+def runtime_config(path, environ=None, *, repo=None):
     import json
-    p = safe_path(path, kind="file", private=True)
+    p = strategic_path(path, repo=repo, kind="file")
     result = {}
     for line in read(p).decode().splitlines():
         if not line or line.startswith("#"):
@@ -72,7 +73,7 @@ def private_files(repo, strategy):
         refs += f"- {name}: `{repo / name}`; bootstrap SHA-256 `{digest(read(repo / name))}`.\n"
     refs += "\nCurrent accepted reference: unresolved until authorized baseline publication.\nCRITICAL grows by exact authorized EOF appends; its bootstrap digest is a seed identity.\n"
     files["SOURCE-REFERENCES.md"] = (refs.encode(), "governance")
-    files["RUNTIME.md"] = (b"# Private runtime\n\nInactive bootstrap. runtime.env is the only runtime authority, parsed as allowlisted JSON-string assignments without execution. Never source it in a shell. Config/FIFOs are 0600; directories 0700. Models, profiles, authentication and activation require deliberate setup; consult runtime.env for the configured repository. No auth/history is copied. Use the repository setup launcher for live role shells; choose each model and authenticate each home deliberately. Operational launch requires doctor and both acknowledgements. A role label is routing, not authentication. Do not enable live Qwen testing merely to start offline OAP.\n", "governance")
+    files["RUNTIME.md"] = (b"# Strategic runtime\n\nInactive bootstrap. runtime.env is the only runtime authority, parsed as allowlisted JSON-string assignments without execution. Never source it in a shell. OAP_FIFO_HOME contains the real control.fifo and response.fifo; it is resolved from the owner-approved WORKSPACE-LAYOUT.json when strategy uses the selected sync folder. Native FIFO directory/files retain 0700/0600. All regular strategic files, configuration, logs, drafts and separate role homes remain in STRATEGIC_HOME. The selected sync mount has its own permission semantics; no POSIX private-mode guarantee is asserted there. Other paths retain strict checks. Models, profiles, authentication and activation require deliberate setup. A role label is routing, not authentication. No activation or live Qwen test is implied by relocation.\n", "governance")
     files["runtime.env"] = (env_bytes(runtime_defaults(repo, strategy)), "private")
     files["workorders/EXECUTION_TIMINGS.md"] = (b"# Execution timings\n\nNo operational execution has occurred. Append ID, observed start/end UTC, implementation/report SHA and evidence reference after actual work. Separate coding time, CI/data waiting, model inference and human annotation; no invented duration.\n", "private")
     files["workorders/STRATEGIC-HANDOFF.md"] = (b"# Strategic handoff\n\nBOOTSTRAP ONLY. Product PLANNED; tests NOT RUN. No active order, PR, remote baseline, ICA or human acceptance. After owner review/publication, reconcile real sources, remote main, local work, CI, role profiles and disabled gates before finalizing 000-a. Do not repeat scaffold generation or execute the queue from this handoff. Preserve same unresolved order/branch/PR after any process replacement.\n", "private")
@@ -112,7 +113,9 @@ def materialize(source_repo, repo, strategy, bootstrap, *, dry_run=False, refres
     repo_files["oap/BOOTSTRAP-MANIFEST.sha256"] = (read(source_repo / "oap/BOOTSTRAP-MANIFEST.sha256"), "generated")
     # All preflight calculations use source bytes; targets need not exist yet.
     private = private_files(source_repo, strategy)
-    private["runtime.env"] = (env_bytes(runtime_defaults(repo, strategy)), "private")
+    private["runtime.env"] = (env_bytes(runtime_defaults(repo, strategy, layout_repo=source_repo)), "private")
+    pipes = fifo_home(source_repo, strategy)
+    require(pipes == strategy or (pipes != bootstrap and Path(bootstrap) not in pipes.parents and pipes not in Path(bootstrap).parents), 'FIFO_BOOTSTRAP_OVERLAP')
     private["SOURCE-REFERENCES.md"] = (private["SOURCE-REFERENCES.md"][0].replace(str(source_repo).encode(), str(repo).encode()), "governance")
     plans, conflicts = [], []
     for root, desired in ((repo, repo_files), (strategy, private)):
@@ -137,9 +140,9 @@ def materialize(source_repo, repo, strategy, bootstrap, *, dry_run=False, refres
     for rel in ["", *dirs]:
         p = strategy / rel
         if p.exists():
-            safe_path(p, kind="dir", private=True)
+            strategic_path(p, repo=source_repo, kind="dir")
     for name in ("control.fifo", "response.fifo"):
-        p = safe_path(strategy / name, missing=True)
+        p = safe_path(pipes / name, missing=True)
         if p.exists():
             safe_path(p, kind="fifo", private=True)
     require(not conflicts, "INSTALL_CONFLICT", ", ".join(conflicts[:8]))
@@ -150,7 +153,8 @@ def materialize(source_repo, repo, strategy, bootstrap, *, dry_run=False, refres
     # Never lock or create anything during dry run. Real publication uses owned parent locks.
     repo.mkdir(parents=True, exist_ok=True)
     strategy.mkdir(parents=True, mode=0o700, exist_ok=True)
-    safe_path(strategy, kind="dir", private=True)
+    strategic_path(strategy, repo=source_repo, kind="dir")
+    make_private_dirs(pipes)
     with lock(strategy / ".bootstrap.lock"):
         for rel in dirs:
             (strategy / rel).mkdir(parents=True, mode=0o700, exist_ok=True)
@@ -169,7 +173,7 @@ def materialize(source_repo, repo, strategy, bootstrap, *, dry_run=False, refres
             mode = 0o600 if root == strategy else (0o755 if rel.startswith("oap/bin/") and rel.endswith((".sh", ".py")) else 0o644)
             atomic(target, data, mode=mode)
         for name in ("control.fifo", "response.fifo"):
-            p = strategy / name
+            p = pipes / name
             if not p.exists():
                 os.mkfifo(p, 0o600)
         for root, desired in ((repo, repo_files), (strategy, private)):
@@ -181,7 +185,8 @@ def materialize(source_repo, repo, strategy, bootstrap, *, dry_run=False, refres
 
 
 def refresh_governance(repo, strategy, accepted_ref, *, dry_run=False, remote=None):
-    repo, strategy = Path(repo), safe_path(strategy, kind="dir", private=True)
+    repo = Path(repo)
+    strategy = strategic_path(strategy, repo=repo, kind="dir")
     governance(repo, "accepted-runtime", accepted_ref)
     # Locks are never inspected by mere file existence: persistent lock files are normal.
     ident = active_id(repo)

@@ -1,5 +1,10 @@
 # Strategic initialization
 
+Owner layout update 2026-09-07: runtime.env supplies OAP_FIFO_HOME for the two
+real native-home FIFOs. All other strategic files and both role homes remain in
+the selected STRATEGIC_HOME workspace. Follow WORKSPACE-LAYOUT.json and the
+full constitution's scoped sync-storage exception; do not assume colocated pipes.
+
 Only OAP_ROLE=strategic, cwd STRATEGIC_HOME, separate strategic CODEX_HOME.
 This is a preloaded project with product PLANNED. Reconcile source references,
 full PLAN/ARCHITECTURE, full role law/communication, roadmap and readiness/decision

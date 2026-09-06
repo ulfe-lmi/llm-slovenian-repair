@@ -1,8 +1,14 @@
 # Inactive two-role runbook
 
+Owner layout update: see [workspace placement](WORKSPACE-PLACEMENT.md).
+All regular strategic files are under the selected workspace; actual FIFOs are
+`OAP_FIFO_HOME/control.fifo` and `OAP_FIFO_HOME/response.fifo` in the native home.
+Use the relocated strategic `runtime.env`; never derive FIFO paths from cwd.
+
 The installed repo is bootstrap infrastructure, uncommitted on a local main unless
 an existing checkout was preserved. The separate strategic workspace contains full
-law, mutable drafts, private role homes and unsignaled FIFOs. No model starts here.
+law, mutable drafts, configuration and role homes; the unsignaled real FIFOs reside
+in OAP_FIFO_HOME. No model starts here.
 
 Review `oap/GENERATED-FILES.json`, `oap/INSTALLATION.json`, source lock, current
 governance map and bootstrap receipt. Run `bash oap/bin/doctor.sh --config

@@ -1,5 +1,10 @@
 # Codex role setup and qualification
 
+The owner-selected layout keeps both role CODEX_HOME directories under
+STRATEGIC_HOME and only actual FIFOs in OAP_FIFO_HOME. See
+[workspace placement](WORKSPACE-PLACEMENT.md) for exact roots and sync-permission
+semantics. Setup still needs no model/auth and never starts an operational round.
+
 Local inspection during generation: codex-cli 0.153.4; tmux 3.4. `codex --help`
 and `codex exec --help` expose --model, --profile, --cd,
 --dangerously-bypass-approvals-and-sandbox; exec also exposes --ephemeral.

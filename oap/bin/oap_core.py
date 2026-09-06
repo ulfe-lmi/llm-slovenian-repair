@@ -46,7 +46,8 @@ CHECKS = {"PASSED", "FAILED", "SKIPPED", "NOT RUN", "BLOCKED", "PENDING", "MISSI
 READ_SET = ["AGENTS.md", "oap/coding-instructions/AGENTS.md", "ARCHITECTURE-for-agents.md",
             "OAP-COMMUNICATION-coding-agent.md", "SECURITY.md", "TESTING.md"]
 GOV_SOURCE = ["PLAN.md", "ARCHITECTURE.md", "oap/strategic-instructions/AGENTS.md",
-              "oap/strategic-instructions/OAP-COMMUNICATION-strategic.md"]
+              "oap/strategic-instructions/OAP-COMMUNICATION-strategic.md",
+              "oap/governance/WORKSPACE-LAYOUT.json"]
 
 
 class OAPError(Exception):
@@ -132,6 +133,57 @@ def json_bytes(value):
     return (json.dumps(value, ensure_ascii=False, indent=2, sort_keys=True) + "\n").encode()
 
 
+def workspace_layout(repo=None):
+    repo = Path(repo) if repo is not None else Path(__file__).resolve().parents[2]
+    path = repo / 'oap/governance/WORKSPACE-LAYOUT.json'
+    safe_path(path, missing=True)
+    if not path.exists():
+        return None
+    value = jsread(path)
+    require(value.get('schema_version') == 1 and value.get('strategic_storage') == 'owner-selected-sync', 'LAYOUT_SCHEMA')
+    require(meaningful(value.get('authority')), 'LAYOUT_AUTHORITY_REFERENCE')
+    s, f = Path(value.get('strategic_home', '')), Path(value.get('fifo_home', ''))
+    require(s.is_absolute() and f.is_absolute() and len(s.parts) >= 4 and len(f.parts) >= 4, 'LAYOUT_ABSOLUTE_PATHS')
+    require(s != Path.home() and f != Path.home(), 'LAYOUT_BROAD_ROOT')
+    require(s != f and s not in f.parents and f not in s.parents, 'LAYOUT_FIFO_OVERLAP')
+    require(f != repo and f not in repo.parents and repo not in f.parents, 'LAYOUT_FIFO_OVERLAP')
+    return value
+
+
+def strategic_path(path, *, repo=None, kind=None, missing=False):
+    """Only the owner's exact sync subtree has different POSIX mode semantics.
+
+    All native/other paths still use strict private modes. No symlink, type,
+    ownership or broad-directory check is bypassed. Launch also checks accepted
+    governance, so candidate-authored layout hashes cannot authorize activation.
+    """
+    p = safe_path(path, kind=kind, missing=missing)
+    layout = workspace_layout(repo)
+    root = Path(layout['strategic_home']) if layout else None
+    synced = root is not None and (p == root or root in p.parents)
+    return safe_path(p, kind=kind, missing=missing, private=not synced)
+
+
+def fifo_home(repo, strategy):
+    layout = workspace_layout(repo)
+    if layout and Path(strategy) == Path(layout['strategic_home']):
+        return safe_path(layout['fifo_home'], kind='dir', private=True, missing=True)
+    return safe_path(strategy, kind='dir', private=True, missing=True)
+
+
+def make_private_dirs(path):
+    """Create only missing directories; never chmod an existing parent tree."""
+    path = safe_path(path, kind='dir', private=True, missing=True)
+    missing = []
+    p = path
+    while not p.exists():
+        missing.append(p)
+        p = p.parent
+    for p in reversed(missing):
+        p.mkdir(mode=0o700)
+        safe_path(p, kind='dir', private=True)
+
+
 def atomic(path, data, *, mode=0o644, immutable=False):
     p = safe_path(path, missing=True)
     safe_path(p.parent, kind="dir")
@@ -152,6 +204,20 @@ def atomic(path, data, *, mode=0o644, immutable=False):
                 os.link(tmp, p, follow_symlinks=False)
             except FileExistsError:
                 require(read(p) == data, "IMMUTABLE_CONFLICT")
+            except OSError as exc:
+                import errno
+                require(exc.errno in (errno.EPERM, errno.EOPNOTSUPP, errno.ENOSYS), 'IMMUTABLE_LINK_FAILED')
+                # Sync mounts may reject hard links and RENAME_NOREPLACE. Serialize
+                # cooperating local writers, recheck the exact final target under
+                # that lock, then atomically rename a completely flushed temporary
+                # file. This is not a distributed lock across multiple machines.
+                guard = p.parent / ('.oap-immutable-' + digest(p.name.encode())[:20] + '.lock')
+                with lock(guard):
+                    safe_path(p, missing=True)
+                    if p.exists():
+                        require(read(p) == data, 'IMMUTABLE_CONFLICT')
+                    else:
+                        os.replace(tmp, p)
         else:
             os.replace(tmp, p)
         d = os.open(p.parent, os.O_RDONLY | os.O_DIRECTORY)
@@ -410,7 +476,7 @@ def governance(repo, mode="bootstrap", accepted_ref=None, allowed_changes=(), st
         # Accepted source integrity is checked against Git, not candidate expected values.
         require(read(repo / "oap/bootstrap-sources.lock.json") == git_blob(repo, accepted_ref, "oap/bootstrap-sources.lock.json"), "SOURCE_LOCK_REWRITE")
     if strategy is not None:
-        st = safe_path(strategy, kind="dir", private=True)
+        st = strategic_path(strategy, repo=repo, kind="dir")
         for p in ("AGENTS.md", "OAP-COMMUNICATION-strategic.md", "strategic_model_init_material.md"):
             rel = "oap/strategic-instructions/" + p
             expected = git_blob(repo, accepted_ref, rel) if mode == "candidate-review" else read(repo / rel)

@@ -1,5 +1,12 @@
 # Coding constitution — revision 1
 
+C-PLACEMENT-01. Owner-selected layout is recorded in oap/governance/WORKSPACE-LAYOUT.json
+(helper-read metadata, not extra full model context). Use OAP_FIFO_HOME for real
+control/response pipes; all regular strategic files and role homes stay in
+STRATEGIC_HOME. Only the named sync subtree has a POSIX-private-mode exception;
+native FIFO directory/files remain 0700/0600, and other paths stay strict.
+Ownership/type/symlink, exact OK framing and activation checks remain mandatory.
+
 C-AUTH-01. Applies only to explicitly selected OAP_ROLE=coding. Reading strategic
 source never changes role; strategy reading this remains strategy. Bootstrap is
 separate. Scope = exact activated order. Never self-assign next scope/ID, merge,

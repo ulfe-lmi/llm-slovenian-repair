@@ -11,7 +11,7 @@ import time
 import tomllib
 from oap_core import (require, OAPError, safe_path, read, jsread, atomic, json_bytes,
                       lock, digest, git, governance, protocol_state, matching, active_id,
-                      fifo, verify_report, GitHub, READ_SET)
+                      fifo, verify_report, GitHub, READ_SET, strategic_path, fifo_home)
 from oap_install import runtime_config
 
 
@@ -19,10 +19,12 @@ def role_context(config, role, *, operational=False, check_selected=True):
     require(role in ("coding", "strategic"), "UNKNOWN_ROLE")
     require(not check_selected or os.environ.get("OAP_ROLE", role) == role, "CONFLICTING_ROLE")
     repo = safe_path(config["OAP_REPO_ROOT"], kind="dir")
-    strategy = safe_path(config["OAP_STRATEGIC_HOME"], kind="dir", private=True)
+    strategy = strategic_path(config["OAP_STRATEGIC_HOME"], repo=repo, kind="dir")
+    pipes = fifo_home(repo, strategy)
+    require(config.get('OAP_FIFO_HOME') == str(pipes), 'FIFO_HOME_LAYOUT_CONFLICT')
     require(repo != strategy and repo not in strategy.parents and strategy not in repo.parents, "NESTED_ROOTS")
-    coding_home = safe_path(config["CODING_CODEX_HOME"], kind="dir", private=True)
-    strategy_home = safe_path(config["STRATEGIC_CODEX_HOME"], kind="dir", private=True)
+    coding_home = strategic_path(config["CODING_CODEX_HOME"], repo=repo, kind="dir")
+    strategy_home = strategic_path(config["STRATEGIC_CODEX_HOME"], repo=repo, kind="dir")
     require(coding_home != strategy_home and coding_home not in strategy_home.parents and strategy_home not in coding_home.parents, "ROLE_HOME_COLLISION")
     require(strategy in coding_home.parents and strategy in strategy_home.parents, "ROLE_HOME_OUTSIDE_PRIVATE")
     current_home = os.environ.get("CODEX_HOME")
@@ -30,7 +32,7 @@ def role_context(config, role, *, operational=False, check_selected=True):
         require(Path(current_home).resolve() not in (coding_home, strategy_home) or os.environ.get("OAP_ROLE") == role, "GENERATOR_HOME_REUSE")
     home = coding_home if role == "coding" else strategy_home
     cwd = repo if role == "coding" else strategy
-    safe_path(home / "config.toml", kind="file", private=True)
+    strategic_path(home / "config.toml", repo=repo, kind="file")
     tomllib.loads(read(home / "config.toml").decode())
     prompt_path = repo / "oap/prompts" / ("coding-round.md" if role == "coding" else "strategic-start.md")
     prompt = read(prompt_path).decode()
@@ -58,7 +60,7 @@ def role_context(config, role, *, operational=False, check_selected=True):
         require(bool(model) != bool(profile), "EXPLICIT_MODEL_OR_PROFILE_REQUIRED")
         if profile:
             require(re.fullmatch(r"[A-Za-z0-9_-]+", profile), "PROFILE_NAME")
-            safe_path(home / (profile + ".config.toml"), kind="file", private=True)
+            strategic_path(home / (profile + ".config.toml"), repo=repo, kind="file")
             tomllib.loads(read(home / (profile + ".config.toml")).decode())
         require(config["OAP_GITHUB_REPOSITORY"] and config["OAP_ACCEPTED_REF"], "REMOTE_BASELINE_REQUIRED")
         require(config["OAP_MERGE_EFFECT"] == "development-only", "MERGE_D2_EFFECT")
@@ -100,7 +102,7 @@ def launch(config, role, *, print_only=False, resume_id=None, once=False, timeou
             return {"result": "exited", "restarted": False}
         while True:
             # OS waits, no model call. The model sees a ready order after this one read.
-            fifo(strategy / "control.fifo", "wait", timeout=timeout)
+            fifo(Path(config['OAP_FIFO_HOME']) / "control.fifo", "wait", timeout=timeout)
             state = protocol_state(repo, strategy=strategy, remote=remote)
             if state["state"] in ("INACTIVE", "REVIEW_READY"):
                 if once:

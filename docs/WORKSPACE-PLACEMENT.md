@@ -1,25 +1,40 @@
-# Workspace placement
+# Workspace placement — owner update 2026-09-07
 
-The coding checkout is `~/workspace/codex-work/llm-slovenian-repair`.
-The owner supplied the existing Git repository, root `.gitignore` and `LICENSE`;
-the latter two are preserved byte-for-byte. The configured upstream is
-`ulfe-lmi/llm-slovenian-repair`. Bootstrap publication does not activate OAP.
+| Purpose | Location |
+|---|---|
+| Coding checkout | `~/workspace/codex-work/llm-slovenian-repair` |
+| Strategic files, drafts, logs, configuration and role homes | `~/workspace/codex-supervision/llm-slovenian-repair` |
+| Control and response FIFOs only | `~/.oap-fifos/llm-slovenian-repair` |
 
-On this machine `~/workspace` is a Dropbox-backed `fuse.rclone` mount. A direct
-attempt to create a named FIFO failed with EIO, leaving an empty regular file;
-a directory requested as 0700 appeared as 0755. That mount cannot satisfy this
-bootstrap's strategic-home contract (real FIFOs, 0700 directories, 0600 files).
-The incomplete strategic copy was removed after checking that its files were
-duplicates; the original strategic workspace remains intact on the local filesystem.
+The owner explicitly selected this layout after the workspace mount's behavior
+was observed. `~/workspace` is Dropbox-backed `fuse.rclone`: it does not support
+named FIFOs and does not preserve requested per-file POSIX private modes. Regular
+strategic files stay there as requested. Native FIFO directory/files retain
+0700/0600; the exact selected strategic subtree uses the sync mount's access
+semantics, with ownership, type and symlink checks still enforced. Other paths
+retain strict private-mode checks. No mount or global configuration was changed.
 
-The strategic home therefore remains temporarily at
-`~/codex-supervision/llm-slovenian-repair`, pending an owner-selected native local
-destination. Its runtime paths can reference this relocated coding checkout.
-Do not weaken private-mode or FIFO checks, create fake FIFO files, or relocate
-credentials to the cloud mount to bypass the incompatibility. No model, agent,
-watcher or service has been activated.
+This sync mount also rejects hard links and no-replace rename flags. Immutable
+publication therefore uses a per-target lock and an existence/content check before
+renaming a fully flushed temporary file when hard linking is unsupported. The
+guard coordinates local helper processes, not independent machines editing the
+same synced file concurrently. OAP's single-host role locks and Git verification
+remain required; a changed existing order/backup is still rejected.
 
-Run scripts using their documented interpreter commands (`bash oap/bin/...sh`
-and `python3 -B oap/bin/...py`); this mount's displayed permission bits do not
-provide normal per-file POSIX mode control. The repository's executable metadata
-is retained for checkouts on native filesystems.
+The versioned `oap/governance/WORKSPACE-LAYOUT.json` records the explicit roots
+and exception. Runtime `OAP_FIFO_HOME` must match the selected layout. Both roles
+use its `control.fifo` and `response.fifo`; neither looks for pipe files inside
+STRATEGIC_HOME. No FIFO symlinks or empty-file substitutes are installed.
+
+Use the `runtime.env` inside the strategic workspace. It is parsed as
+allowlisted data, never sourced as shell code. Setup previews and doctor consume
+the same layout. All regular role-home configuration stays under the strategic
+workspace; no model/profile/authentication is selected by relocation. Exact OK
+framing, no idle model calls, role retention and activation gates are unchanged.
+
+The existing coding `.git`, root `.gitignore` and LICENSE are preserved; normal
+commits/pushes update Git metadata through Git. Upstream is
+`ulfe-lmi/llm-slovenian-repair`. Use documented interpreter commands (`bash` for
+shell helpers, `python3 -B` for Python helpers) on the sync mount. Git retains
+executable metadata for native checkouts. This layout update is not operational,
+live-model, audit or deployment activation.

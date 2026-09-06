@@ -1,5 +1,12 @@
 # Coding communication — revision 1 / project protocol 2.0
 
+P-PLACEMENT-01. Owner update 2026-09-07: resolve pipes as
+OAP_FIFO_HOME/control.fifo and OAP_FIFO_HOME/response.fifo, not as files inside
+STRATEGIC_HOME. All regular strategic state/role homes remain in STRATEGIC_HOME.
+Use the configured native FIFO directory (0700; pipes 0600); no FIFO symlinks or
+empty-file substitutes. The explicit WORKSPACE-LAYOUT.json record scopes the sync
+mount's permission semantics; it grants no operational or human acceptance.
+
 P-STATE-01. GitHub=software truth; immutable orders/reports/active history=protocol
 truth; FIFO=sync only. Role/cwd/home must agree before launch. Read exact ASCII
 active ID plus one LF; absent inactive, malformed invalid. Match one
