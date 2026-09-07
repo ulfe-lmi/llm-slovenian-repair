@@ -65,7 +65,9 @@ def role_context(config, role, *, operational=False, check_selected=True):
         require(config["OAP_GITHUB_REPOSITORY"] and config["OAP_ACCEPTED_REF"], "REMOTE_BASELINE_REQUIRED")
         require(config["OAP_MERGE_EFFECT"] == "development-only", "MERGE_D2_EFFECT")
         version = subprocess.run([config["CODEX_BIN"], "--version"], capture_output=True, text=True, timeout=10)
-        require(version.returncode == 0 and version.stdout.strip() == config["OAP_CLI_QUALIFIED_VERSION"] and config["OAP_CLI_QUALIFIED_VERSION"], "CLI_VERSION_UNQUALIFIED")
+        require(version.returncode == 0 and bool(version.stdout.strip()), "CLI_UNAVAILABLE")
+        expected_version = config["OAP_CLI_QUALIFIED_VERSION"]
+        require(expected_version == "ANY" or version.stdout.strip() == expected_version, "CLI_VERSION_UNQUALIFIED")
         origin = git(repo, "remote", "get-url", "origin").decode().strip()
         expected = config["OAP_GITHUB_REPOSITORY"]
         require(origin in (f"https://github.com/{expected}.git", f"https://github.com/{expected}", f"git@github.com:{expected}.git"), "REMOTE_ORIGIN_MISMATCH")

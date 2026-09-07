@@ -37,6 +37,25 @@ class Processes(unittest.TestCase):
         git(self.repo,'remote','add','origin','https://github.com/synthetic/project.git')
         return cfg,fake
 
+    def test_B28_any_Codex_version_policy_accepts_upgrade(self):
+        cfg,fake=self.configured_fake()
+        cfg['OAP_CLI_QUALIFIED_VERSION']='ANY'
+        with patch.dict(os.environ,{'OAP_ROLE':'coding'}):
+            context=role_context(cfg,'coding',operational=True)
+        self.assertEqual(context['argv'][context['argv'].index('--model')+1],'synthetic coding model č')
+        cfg['OAP_CLI_QUALIFIED_VERSION']='codex-cli older-version'
+        with patch.dict(os.environ,{'OAP_ROLE':'coding'}):
+            self.error('CLI_VERSION_UNQUALIFIED',role_context,cfg,'coding',operational=True)
+
+    def test_B28_any_policy_still_rejects_unusable_Codex(self):
+        cfg,fake=self.configured_fake()
+        cfg['OAP_CLI_QUALIFIED_VERSION']='ANY'
+        bad=write(self.root/'unusable codex', '#!/usr/bin/env python3\nraise SystemExit(9)\n')
+        bad.chmod(0o700)
+        cfg['CODEX_BIN']=str(bad)
+        with patch.dict(os.environ,{'OAP_ROLE':'coding'}):
+            self.error('CLI_UNAVAILABLE',role_context,cfg,'coding',operational=True)
+
     def test_B11_scoped_backup_refresh_actual(self):
         new=self.root/'fresh'
         materialize(SOURCE,new,self.strategy,self.bootstrap)

@@ -29,3 +29,10 @@ configured behavior. An owner-chosen future CLI/version must be requalified.
 Installed `codex debug prompt-input --help` describes a prompt renderer; run only
 in an isolated synthetic home when qualifying discovery, without model requests.
 No operational audit/strategic/coding session is launched for bootstrap acceptance.
+
+Owner version policy update: `OAP_CLI_QUALIFIED_VERSION="ANY"` means an upgrade
+does not fail solely because `codex --version` changed. Operational launch still
+requires the configured executable to exist, exit successfully and return a
+nonempty version. Model/profile TOML parsing, accepted governance, authentication,
+remote and activation gates remain enforced. `ANY` is a compatibility policy,
+not evidence that an untested future CLI preserves every behavior.

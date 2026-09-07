@@ -27,6 +27,7 @@ def runtime_defaults(repo, strategy, *, layout_repo=None):
                  CODING_CODEX_HOME=str(strategy / "codex-homes/coding"),
                  STRATEGIC_CODEX_HOME=str(strategy / "codex-homes/strategic"),
                  OAP_ACK_DANGER_FULL_ACCESS="NO", OAP_ACK_START_LOOP="NO",
+                 OAP_CLI_QUALIFIED_VERSION="ANY",
                  REPAIR_ALLOW_LIVE_TESTS="NO", REPAIR_API_HOST="127.0.0.1",
                  OAP_SETUP_TMUX_SESSION="slovenian-repair-setup", OAP_RUN_TMUX_SESSION="slovenian-repair-run")
     return value
