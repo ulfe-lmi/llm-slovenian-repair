@@ -1,0 +1,40 @@
+name: OAP bootstrap
+
+on:
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  oap-bootstrap-acceptance:
+    name: OAP bootstrap acceptance
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - name: Check out full history
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          fetch-depth: 0
+
+      - name: Require Python 3.12 and tmux
+        shell: bash
+        run: |
+          command -v python3.12
+          python3.12 -c 'import sys; assert sys.version_info[:2] == (3, 12), sys.version'
+          command -v tmux
+          tmux -V
+
+      - name: Resolve accepted baseline
+        run: git cat-file -e 7ca26f1a6d9c110aa3c71a736d185028661d110d^{commit}
+
+      - name: Run bootstrap acceptance
+        run: python3.12 -B -m unittest discover -s oap/tests -v
+
+      - name: Check accepted runtime governance
+        run: python3.12 oap/bin/check_governance.py --repo-root . --mode accepted-runtime --accepted-ref 7ca26f1a6d9c110aa3c71a736d185028661d110d
+
+      - name: Check whitespace
+        run: git diff --check 7ca26f1a6d9c110aa3c71a736d185028661d110d...HEAD

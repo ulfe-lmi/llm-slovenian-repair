@@ -1,12 +1,15 @@
-# Inactive two-role runbook
+# Two-role development runbook
 
 Owner layout update: see [workspace placement](WORKSPACE-PLACEMENT.md).
 All regular strategic files are under the selected workspace; actual FIFOs are
 `OAP_FIFO_HOME/control.fifo` and `OAP_FIFO_HOME/response.fifo` in the native home.
 Use the relocated strategic `runtime.env`; never derive FIFO paths from cwd.
 
-The installed repo is bootstrap infrastructure, uncommitted on a local main unless
-an existing checkout was preserved. The separate strategic workspace contains full
+The installed repo is owner-published bootstrap infrastructure accepted for
+continued development. Role operation is qualified and the development loop has
+been deliberately started. Query current protocol state from `oap/active` or with
+`python3 oap/bin/check_state.py --repo-root PATH --repository OWNER/REPO`. The
+separate strategic workspace contains full
 law, mutable drafts, configuration and role homes; the unsignaled real FIFOs reside
 in OAP_FIFO_HOME. No model starts here.
 
@@ -22,7 +25,7 @@ the helper's own checkout. Identical reruns preserve bytes/modes/mtime; changed
 generated files need explicit --refresh and backups. Private drafts/config/history
 are preserved; divergent law needs accepted-governance refresh, never silent overwrite.
 
-Owner chooses remote/visibility and authorized baseline publication separately.
+The owner-published remote baseline is accepted for continued development.
 Review/stage only manifest-listed related files, never blind git add -A over dirty
 work. Establish protected development branch, required checks and approved merge
 method; inspect merge deployment side effects before allowing strategic merge.
@@ -36,7 +39,9 @@ may invoke configured CLI manually; exiting returns to the same live shell.
 
 Operation: after doctor, deliberate OAP_ACK_DANGER_FULL_ACCESS=YES and
 OAP_ACK_START_LOOP=YES plus qualified roles/baseline enable launch-oap-tmux.sh.
-This bootstrap leaves both NO. Coding waits externally; strategy reconciles and
-publishes first order. No background startup hooks or automatic quit resurrection.
+Coding waits externally; strategy reconciles and publishes orders. No background
+startup hooks or automatic quit resurrection. Live repair testing remains disabled;
+product readiness, ICA, milestone acceptance, release and deployment retain their
+separate gates.
 Publication/signal/review/merge follow full strategic communication. Open D1 gates
 allow contained development only; deployment always has separate human authority.

@@ -133,9 +133,13 @@ class Processes(unittest.TestCase):
         cfg=self.private()
         fake=self.root/'fake model'; shutil.copyfile(SOURCE/'oap/tests/fake_codex.py',fake); fake.chmod(0o700)
         for role in ('coding','strategic'):
-            env=os.environ.copy(); env['OAP_ROLE']=role; env['FAKE_CODEX_EXIT']='7'
+            env=os.environ.copy()
+            for key in ENV_KEYS | {'CODEX_HOME'}:
+                env.pop(key, None)
+            env.update(OAP_ROLE=role,FAKE_CODEX_EXIT='7')
             code=shlex.join([str(fake)])+"\nprintf 'SHELL_SURVIVED:%s:%s:%s\\n' \"$OAP_ROLE\" \"$PWD\" \"$CODEX_HOME\"\nexit\n"
             p=subprocess.run(['bash',str(self.repo/'oap/bin/launch-role-setup-shell.sh'),'--config',str(self.strategy/'runtime.env'),'--role',role],input=code,text=True,capture_output=True,env=env,timeout=8)
+            self.assertEqual(p.returncode,0,p.stderr)
             expected=self.repo if role=='coding' else self.strategy
             self.assertIn(f'SHELL_SURVIVED:{role}:{expected}:{cfg[role.upper()+"_CODEX_HOME"]}',p.stdout)
 
