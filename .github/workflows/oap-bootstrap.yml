@@ -37,4 +37,4 @@ jobs:
         run: python3.12 oap/bin/check_governance.py --repo-root . --mode accepted-runtime --accepted-ref 7ca26f1a6d9c110aa3c71a736d185028661d110d
 
       - name: Check whitespace
-        run: git diff --check
+        run: git diff --check 7ca26f1a6d9c110aa3c71a736d185028661d110d...HEAD

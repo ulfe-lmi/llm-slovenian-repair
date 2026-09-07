@@ -1,4 +1,4 @@
-"""Repeatable B01–B35 acceptance, using real filesystem/Git/FIFOs and fake edges."""
+"""Repeatable B01–B36 acceptance, using real filesystem/Git/FIFOs and fake edges."""
 import concurrent.futures
 import contextlib
 import copy
@@ -27,6 +27,8 @@ def bootstrap_ignore(directory, names):
     if relative == Path('oap'):
         ignored.add('active')
     if relative == Path('oap/orders'):
+        ignored.update(name for name in names if name.endswith('.md'))
+    if relative == Path('oap/reports'):
         ignored.update(name for name in names if name.endswith('.md'))
     return ignored
 
@@ -565,6 +567,19 @@ class Acceptance(unittest.TestCase):
         self.assertEqual(critical_state(read(self.repo/'CRITICAL.md'))['ids'],[])
         self.assertEqual(list((self.repo/'oap/orders').glob('*.md')),[])
         self.assertEqual(list((self.repo/'oap/reports').glob('*.md')),[])
+
+    def B36_live_protocol_history_is_not_copied(self):
+        self.assertTrue((SOURCE/'oap/active').is_file())
+        self.assertTrue(list((SOURCE/'oap/orders').glob('*.md')))
+        self.assertTrue(list((SOURCE/'oap/reports').glob('*.md')))
+
+        self.assertFalse((self.repo/'oap/active').exists())
+        self.assertEqual(list((self.repo/'oap/orders').glob('*.md')),[])
+        self.assertEqual(list((self.repo/'oap/reports').glob('*.md')),[])
+        self.assertTrue((self.repo/'oap/orders/.gitkeep').is_file())
+        self.assertTrue((self.repo/'oap/reports/.gitkeep').is_file())
+        self.assertTrue((self.repo/'oap/templates/REPORT-TEMPLATE.md').is_file())
+        self.assertEqual(protocol_state(self.repo)['state'],'INACTIVE')
 
 
 def lock_probe(path):
