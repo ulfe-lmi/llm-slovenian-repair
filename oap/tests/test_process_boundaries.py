@@ -194,6 +194,16 @@ class Processes(unittest.TestCase):
         self.assertEqual(p.returncode,2)
         self.assertEqual(json.loads(p.stderr)['error'],'INVALID_ACTIVE')
 
+    def test_B19_strategic_prompt_starts_inactive_development_loop(self):
+        prompt=read(SOURCE/'oap/prompts/strategic-start.md').decode()
+        self.assertIn('passed the operational launch gates',prompt)
+        self.assertIn('state is INACTIVE',prompt)
+        self.assertIn('finalize objective 000-a',prompt)
+        self.assertIn('send the exact control signal',prompt)
+        self.assertIn('live repair testing',prompt)
+        self.assertIn('release and deployment retain their separate gates',prompt)
+        self.assertNotIn('Bootstrap activation is disabled',prompt)
+
     def test_B16_extended_transitions_same_PR(self):
         for old,new in [('000-z','000-aa'),('000-az','000-ba')]:
             self.active(old,pr=1); report(self.repo,self.remote,old)
