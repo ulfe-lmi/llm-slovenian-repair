@@ -21,6 +21,16 @@ from oap_runtime import role_context, launch, setup_shell, tmux_plan, tmux_launc
 from oap_cli import doctor
 
 
+def bootstrap_ignore(directory, names):
+    relative = Path(directory).relative_to(SOURCE)
+    ignored = {name for name in names if name in ('.git', '__pycache__', 'INSTALLATION.json') or name.endswith('.lock')}
+    if relative == Path('oap'):
+        ignored.add('active')
+    if relative == Path('oap/orders'):
+        ignored.update(name for name in names if name.endswith('.md'))
+    return ignored
+
+
 def snapshot(root):
     result = {}
     if root.exists():
@@ -35,7 +45,7 @@ class Acceptance(unittest.TestCase):
         self.temp = tempfile.TemporaryDirectory(prefix='oap-owned-fixture-')
         self.root = Path(self.temp.name)
         self.repo = self.root/'coding ž space'
-        shutil.copytree(SOURCE,self.repo,ignore=shutil.ignore_patterns('.git','__pycache__','*.lock','INSTALLATION.json'))
+        shutil.copytree(SOURCE,self.repo,ignore=bootstrap_ignore)
         self.strategy = self.root/'strategy š space'
         self.bootstrap = self.root/'bootstrap č'
         self.bootstrap.mkdir()
