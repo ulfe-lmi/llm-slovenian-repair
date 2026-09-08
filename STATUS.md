@@ -68,3 +68,11 @@ coverage. Its one verifier-first fetch reached 32 rows and produced a
 content-free aggregate: 31 rows had 28 fields and one had an empty terminal
 29th field. This is bounded format evidence only; importer compatibility,
 format correction, redistribution, release, and deployment remain unclaimed.
+Round 006-g adds a verifier-first bounded prefix smoke helper and synthetic
+contract suite. The helper opens the canonical member once, captures 14 preamble
+lines plus the exact header and 32 rows within a 4 MiB envelope, checks the
+aggregate without the optional parser probe, and runs two fresh public importer
+calls under real `source/query=COMPLETE`, `import=PARTIAL` provenance. Real
+acquisition evidence is not recorded until the one ordered fetch is performed;
+full-source import, lookup readiness, linguistic benefit, rights, release,
+deployment, and acceptance remain unclaimed.

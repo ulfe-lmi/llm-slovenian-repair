@@ -138,3 +138,11 @@ verification, but the bounded smoke harness failed before member access, so no
 real importer compatibility evidence was obtained; neither it nor the earlier
 structural sample is a full-source, linguistic-quality, rights, release, or
 deployment claim.
+Round 006-g adds `scripts/smoke_unigram_prefix.py` as the verifier-first
+compatibility boundary. After successful canonical verification it opens the
+selected member once, captures exactly 14 preamble lines, the 834-byte header,
+and 32 data rows within a 4 MiB envelope, checks aggregate-only structure, and
+calls the public importer twice on fresh streams. A successful result is only a
+bounded prefix with `source/query=COMPLETE` and `import=PARTIAL`; it does not
+retain source data or establish full archive import, lookup readiness, language
+quality, rights, redistribution, release, deployment, or acceptance.

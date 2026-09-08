@@ -270,6 +270,7 @@ def classify_rows(
     *,
     requested_row_count: int,
     limits: RowStructureLimits | None = None,
+    include_parser_probe: bool = True,
 ) -> dict[str, object]:
     """Return aggregate-only structure metadata for one bounded row stream."""
 
@@ -329,9 +330,10 @@ def classify_rows(
         quote_errors += int(shape.quote_parse_error)
         if first_failure is None and _is_structurally_failing(shape):
             first_failure = line_number
-        reason = _parser_failure_reason(row)
-        if reason is not None:
-            parser_failures[reason] += 1
+        if include_parser_probe:
+            reason = _parser_failure_reason(row)
+            if reason is not None:
+                parser_failures[reason] += 1
 
     return {
         "schema_version": SCHEMA_VERSION,
@@ -384,6 +386,7 @@ def classify_stream(
     skip_rows: int,
     requested_rows: int,
     limits: RowStructureLimits | None = None,
+    include_parser_probe: bool = True,
 ) -> dict[str, object]:
     """Read one bounded prefix from ``stream`` and classify it exactly once.
 
@@ -399,7 +402,12 @@ def classify_stream(
         requested_rows=requested_rows,
         max_line_bytes=actual_limits.max_line_bytes,
     )
-    return classify_rows(prefix, requested_row_count=requested_rows, limits=actual_limits)
+    return classify_rows(
+        prefix,
+        requested_row_count=requested_rows,
+        limits=actual_limits,
+        include_parser_probe=include_parser_probe,
+    )
 
 
 def main(argv: list[str] | None = None) -> int:

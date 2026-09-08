@@ -136,3 +136,14 @@ both accepted shapes and reject wider extensions. Its one archive fetch passed
 verification, but the bounded smoke harness failed before member access, so no
 real importer compatibility evidence was obtained; the receipt records this
 separately from full-source, linguistic, rights, release, or deployment claims.
+
+Round 006-g adds `scripts/smoke_unigram_prefix.py`, a verifier-first bounded
+compatibility probe. It accepts only the explicit canonical inventory, source ID,
+and acquired artifact; opens the selected ZIP member once; captures exactly the
+14-line preamble, 834-byte header, and 32-row prefix into a 4 MiB maximum
+in-memory envelope; checks the content-free structural aggregate; and calls the
+public importer twice on fresh streams with real source/query `COMPLETE` and
+import `PARTIAL` provenance. Its output contains only finite verification facts,
+aggregates, counts, and result hashes. It does not download, extract, retain
+source data, claim full archive import or lookup readiness, or authorize rights,
+acceptance, release, or deployment.

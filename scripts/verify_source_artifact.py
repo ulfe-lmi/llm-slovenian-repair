@@ -586,12 +586,12 @@ def _verify_artifact_entry(
     if not isinstance(expected_md5, str):
         _artifact_fail("inventory-checksum-invalid")
     try:
-        info = artifact_path.lstat()
+        path_info = artifact_path.lstat()
     except (OSError, ValueError) as exc:
         raise ArtifactVerificationError("artifact-file-invalid") from exc
-    if stat.S_ISLNK(info.st_mode):
+    if stat.S_ISLNK(path_info.st_mode):
         _artifact_fail("artifact-symlink")
-    if not stat.S_ISREG(info.st_mode):
+    if not stat.S_ISREG(path_info.st_mode):
         _artifact_fail("artifact-not-regular")
     try:
         descriptor = os.open(artifact_path, os.O_RDONLY | getattr(os, "O_NOFOLLOW", 0))

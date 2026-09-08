@@ -76,5 +76,12 @@ one had an empty terminal 29th field. The aggregate is diagnostic evidence only;
 no real importer smoke, format correction, compatibility, redistribution, or
 source retention is claimed. The temporary tree and all source bytes were
 removed.
+Round 006-g adds a verifier-first `scripts/smoke_unigram_prefix.py` probe. Its
+bounded contract opens the selected member once, captures 14 preamble lines plus
+the exact header and 32 rows within a 4 MiB envelope, checks the content-free
+aggregate, and runs the public importer twice on fresh streams. Evidence remains
+limited to one verified compatibility prefix and partial import; it does not
+claim full archive import, lookup readiness, linguistic benefit, redistribution
+rights, release, deployment, or acceptance.
 Do not execute the [draft roadmap](oap/strategic-instructions/INITIAL-ROADMAP.md)
 without strategic reconciliation and deliberate owner activation.
