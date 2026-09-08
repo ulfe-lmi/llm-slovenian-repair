@@ -101,9 +101,9 @@
       "sha256": "90caaba5baf598b3aa280f4a25b8cb91efe199b50ba24d81071e37a959113529"
     },
     "docs/OAP-RUNBOOK.md": {
-      "bytes": 3025,
+      "bytes": 4041,
       "class": "generated",
-      "sha256": "cadd960e123737cd89d2189f30e73185167c27a464a38ce200fa209d7fb95f40"
+      "sha256": "5778151864dd9f6f13007c260020628663a6b3a4cb338f8c2e8c20af3b7a0468"
     },
     "docs/READINESS.md": {
       "bytes": 1193,
@@ -216,9 +216,9 @@
       "sha256": "31a5ec142a6a5de77851edac8d3b81537ddd09e0c90b459a8ff666840c1d12dc"
     },
     "oap/README.md": {
-      "bytes": 687,
+      "bytes": 1266,
       "class": "generated",
-      "sha256": "d5bd2a7544baee78e5f1317b12cbb4c6e274397e1eced754668ddb836fb06100"
+      "sha256": "c03e0312b427974b0cd2bb77b6e1f290b6ab015927217d1bffd8922404dc242f"
     },
     "oap/RECOVERY.md": {
       "bytes": 1581,
@@ -290,6 +290,11 @@
       "class": "generated",
       "sha256": "ea2a0bc9e3c198af49f3692e42adb4debb04777b1dee6fa2971bbf1c5eaeea35"
     },
+    "oap/bin/check_transcript.py": {
+      "bytes": 211,
+      "class": "generated",
+      "sha256": "272f67d1434bf89da2b6f7459308bd0c4ee929414fd1823810669c4368623bc0"
+    },
     "oap/bin/doctor.sh": {
       "bytes": 161,
       "class": "generated",
@@ -321,14 +326,14 @@
       "sha256": "d4ae985ab8f17898943265dac4647517907f22976fbe2c930b76cc8f5c6bd71b"
     },
     "oap/bin/oap_cli.py": {
-      "bytes": 10274,
+      "bytes": 10740,
       "class": "generated",
-      "sha256": "bc3a8cd68a44d3a8908f94d11d4748ec1738258442d006fb4e96acaa0b75e2fe"
+      "sha256": "df23704fb08c3891a311e9b69b190b662c661cef6128b7f84b05886d9de3ddf5"
     },
     "oap/bin/oap_core.py": {
-      "bytes": 44845,
+      "bytes": 53092,
       "class": "generated",
-      "sha256": "4da7d9be408263812e8e45316ab9303155555fab59b756deb62be12f34d0b728"
+      "sha256": "f355b595ab1f3b41ed40ddf17bf2c7c1788a559f88447a46efd9f1ea4ce9b1af"
     },
     "oap/bin/oap_fifo.py": {
       "bytes": 192,
@@ -784,6 +789,11 @@
       "bytes": 7588,
       "class": "generated",
       "sha256": "25fe71f56ce0d553eb71f1b180bda0e14734ff8098a05ff3c5bb75402f052140"
+    },
+    "oap/tests/test_transcript_guard.py": {
+      "bytes": 9369,
+      "class": "generated",
+      "sha256": "db8363129ea7ec119345b93486569a2057953107d0dd5a10b88cda08dbbf203b"
     }
   },
   "purpose": "Scoped generated handoff inventory, not permanent runtime freeze",

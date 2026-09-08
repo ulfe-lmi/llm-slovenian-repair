@@ -45,3 +45,20 @@ product readiness, ICA, milestone acceptance, release and deployment retain thei
 separate gates.
 Publication/signal/review/merge follow full strategic communication. Open D1 gates
 allow contained development only; deployment always has separate human authority.
+
+Transcript guard sequence: before implementation, resolve the exact active round,
+explicitly run `git add -f oap/active` even when status is silent, and prove the
+staged pointer with `git show :oap/active` (for example, compare its exact hex
+bytes, including the final LF). Run
+`python3 oap/bin/check_transcript.py --repo-root PATH --index --expected-id NNN-a`.
+Commit all non-report work, including the order and active pointer, then rerun
+`python3 oap/bin/check_transcript.py --repo-root PATH --revision HEAD
+--expected-id NNN-a`. Create the PR before composing the immutable SELF report;
+the report-only commit must have the implementation head as its sole parent and
+must change only the report. CI repeats committed-mode transcript validation at
+the final report head. Publication helpers do not implicitly stage, commit or
+signal the pointer.
+
+The 001-b/001-c active snapshots were not staged in the historical 001 commits;
+they remain recorded as an incident and are not reconstructed as fabricated
+commits.
