@@ -1,0 +1,173 @@
+{
+  "schema_version": 1,
+  "inventory_id": "source-inventory-v1",
+  "snapshot_at": "2026-09-08T23:59:59Z",
+  "project": {
+    "code_license": "Apache-2.0",
+    "external_data_note": "The project code license does not relicense external data; attribution, ShareAlike, release compatibility, and redistribution remain separately reviewable."
+  },
+  "entries": [
+    {
+      "id": "gigafida-2.0-words",
+      "kind": "downloadable",
+      "source_name": "Gigafida 2.0 word lists",
+      "release": "2.0",
+      "issued_date": "2019-11-18",
+      "item_url": "https://www.clarin.si/repository/xmlui/handle/11356/1273?show=full",
+      "publishers": [
+        "Centre for Language Resources and Technologies (University of Ljubljana)",
+        "Jožef Stefan Institute"
+      ],
+      "observed_at": "2026-09-08T00:00:00Z",
+      "publisher_access_label": "Publicly Available",
+      "license": {
+        "name": "CC BY-SA 4.0",
+        "uri": "https://creativecommons.org/licenses/by-sa/4.0/"
+      },
+      "artifact": {
+        "url": "https://www.clarin.si/repository/xmlui/bitstream/handle/11356/1273/GF2.0-words-all.zip?sequence=4&isAllowed=y",
+        "name": "GF2.0-words-all.zip",
+        "media_type": "application/zip",
+        "byte_size": 115865656,
+        "repository_checksum": {
+          "algorithm": "MD5",
+          "value": "b20a959f9c113aeb6504f0d753d36d10"
+        },
+        "container_format": "ZIP",
+        "member_format": "TSV",
+        "project_sha256": null
+      },
+      "source_scope": "Gigafida 2.0 word lists containing all words occurring in the declared release, with frequencies and taxonomy.",
+      "completeness": "DECLARED_RELEASE_SCOPE",
+      "cutoff": "Complete only for the publisher-declared Gigafida 2.0 word-list scope; no project-wide denominator is asserted.",
+      "absence_semantics": "EXACT_WITHIN_DECLARED_SCOPE",
+      "denominator_status": "DECLARED_SCOPE_ONLY",
+      "normalization_tagging": "Publisher word-list representation; preserve the published form and taxonomy fields until a controlled importer qualifies them.",
+      "downstream_objective": "006",
+      "selection_status": "SELECTED_FOR_FUTURE_006",
+      "acquisition_state": "NOT_ACQUIRED",
+      "bulk_access_status": "PUBLISHED_DERIVED_ARCHIVE",
+      "redistribution_status": "SEPARATE_REVIEW_REQUIRED",
+      "acquisition_ready": false,
+      "fallback": false
+    },
+    {
+      "id": "gigafida-2.0-word-ngrams",
+      "kind": "downloadable",
+      "source_name": "Gigafida 2.0 word n-grams",
+      "release": "2.0",
+      "issued_date": "2019-11-18",
+      "item_url": "https://www.clarin.si/repository/xmlui/handle/11356/1274?show=full",
+      "publishers": [
+        "Centre for Language Resources and Technologies (University of Ljubljana)",
+        "Jožef Stefan Institute"
+      ],
+      "observed_at": "2026-09-08T00:00:00Z",
+      "publisher_access_label": "Publicly Available",
+      "license": {
+        "name": "CC BY-SA 4.0",
+        "uri": "https://creativecommons.org/licenses/by-sa/4.0/"
+      },
+      "artifact": {
+        "url": "https://www.clarin.si/repository/xmlui/bitstream/handle/11356/1274/GF2.0-word_sets.zip?sequence=1&isAllowed=y",
+        "name": "GF2.0-word_sets.zip",
+        "media_type": "application/zip",
+        "byte_size": 22327366,
+        "repository_checksum": {
+          "algorithm": "MD5",
+          "value": "22e911e80ecfd2cde4458acd74d83b4b"
+        },
+        "container_format": "ZIP",
+        "member_format": "TSV word-level 2-, 3-, 4- and 5-grams",
+        "project_sha256": null
+      },
+      "source_scope": "Gigafida 2.0 lower-case word-level 2-, 3-, 4- and 5-grams with absolute and relative frequencies, taxonomy, collocation measures, and morphosyntactic tags.",
+      "completeness": "CENSORED",
+      "cutoff": "Minimum relative frequency 2 per million; omitted entries are CENSORED, never exact zero, and the retained data do not form a complete context denominator.",
+      "absence_semantics": "CENSORED_NOT_ZERO",
+      "denominator_status": "UNKNOWN",
+      "normalization_tagging": "Publisher lower-case forms with morphosyntactic tags; normalization and tag compatibility must be qualified before comparison.",
+      "downstream_objective": "007",
+      "selection_status": "SELECTED_FOR_FUTURE_007",
+      "acquisition_state": "NOT_ACQUIRED",
+      "bulk_access_status": "PUBLISHED_DERIVED_ARCHIVE",
+      "redistribution_status": "SEPARATE_REVIEW_REQUIRED",
+      "acquisition_ready": false,
+      "fallback": false
+    },
+    {
+      "id": "sloleks-3.1",
+      "kind": "downloadable",
+      "source_name": "Sloleks 3.1",
+      "release": "3.1",
+      "issued_date": "2026-02-03",
+      "item_url": "https://www.clarin.si/repository/xmlui/handle/11356/2080?show=full",
+      "publishers": [
+        "Centre for Language Resources and Technologies (University of Ljubljana)"
+      ],
+      "observed_at": "2026-09-08T00:00:00Z",
+      "publisher_access_label": "Publicly Available",
+      "license": {
+        "name": "CC BY-SA 4.0",
+        "uri": "https://creativecommons.org/licenses/by-sa/4.0/"
+      },
+      "artifact": {
+        "url": "https://www.clarin.si/repository/xmlui/bitstream/handle/11356/2080/Sloleks.3.1.zip?sequence=1&isAllowed=y",
+        "name": "Sloleks.3.1.zip",
+        "media_type": "application/zip",
+        "byte_size": 275429063,
+        "repository_checksum": {
+          "algorithm": "MD5",
+          "value": "26dc6adcb250d827f94b287201ee9bf7"
+        },
+        "container_format": "ZIP",
+        "member_format": "custom XML with included XSDs",
+        "project_sha256": null
+      },
+      "source_scope": "Sloleks 3.1 lexical entries in the publisher's custom XML format with included XSDs; the publisher describes 372341 entries.",
+      "completeness": "DECLARED_RELEASE_SCOPE",
+      "cutoff": "Complete only for the declared Sloleks 3.1 lexical scope; its frequency and morphology scope is distinct from Gigafida and has no silently combined denominator.",
+      "absence_semantics": "EXACT_WITHIN_DECLARED_SCOPE",
+      "denominator_status": "DECLARED_SCOPE_ONLY",
+      "normalization_tagging": "Publisher custom XML lexical and morphosyntactic representation; use the included XSDs during a separately ordered import.",
+      "downstream_objective": "027",
+      "selection_status": "SELECTED_FOR_FUTURE_027",
+      "acquisition_state": "NOT_ACQUIRED",
+      "bulk_access_status": "PUBLISHED_DERIVED_ARCHIVE",
+      "redistribution_status": "SEPARATE_REVIEW_REQUIRED",
+      "acquisition_ready": false,
+      "fallback": false
+    },
+    {
+      "id": "gigafida-2.2-query-interface",
+      "kind": "query_interface",
+      "source_name": "Gigafida 2.2 query interface",
+      "release": "2.2",
+      "issued_date": "2025-12-08",
+      "item_url": "https://viri.cjvt.si/gigafida/about/version",
+      "publishers": [
+        "Centre for Language Resources and Technologies (University of Ljubljana)"
+      ],
+      "observed_at": "2026-09-08T00:00:00Z",
+      "publisher_access_label": "Terms agreed between the University of Ljubljana and text providers",
+      "license": {
+        "name": "Provider-agreement terms",
+        "uri": null
+      },
+      "artifact": null,
+      "source_scope": "Interactive Gigafida 2.2 query interface reporting 1,160,455,466 words; no verified bulk artifact, API permission, or redistribution authority was observed.",
+      "completeness": "UNAVAILABLE",
+      "cutoff": null,
+      "absence_semantics": "UNAVAILABLE",
+      "denominator_status": "UNKNOWN",
+      "normalization_tagging": "Interactive query representation only; bulk normalization and tagging are unavailable.",
+      "downstream_objective": "NONE",
+      "selection_status": "NOT_SELECTED_QUERY_ONLY",
+      "acquisition_state": "QUERY_ONLY_UNVERIFIED",
+      "bulk_access_status": "UNKNOWN_UNVERIFIED",
+      "redistribution_status": "UNKNOWN_UNVERIFIED",
+      "acquisition_ready": false,
+      "fallback": false
+    }
+  ]
+}

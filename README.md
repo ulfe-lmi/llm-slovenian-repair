@@ -40,6 +40,14 @@ Start with [development](docs/DEVELOPMENT.md), [runbook](docs/OAP-RUNBOOK.md),
 sole live judgment register [CRITICAL](CRITICAL.md). Coding uses the root router
 and compact law; strategy reads full sources from its separate private workspace.
 
+Objective 005 adds the dated [real-source inventory](resources/source-inventory-v1.json)
+and the standard-library-only [offline artifact verifier](scripts/verify_source_artifact.py).
+The inventory records three derived CC BY-SA-labelled publisher artifacts and a
+Gigafida 2.2 provider-agreement query interface. All artifacts remain
+`NOT_ACQUIRED`; the verifier never downloads or extracts them. See
+[data-source acquisition boundaries](docs/DATA-SOURCES.md) for the nonautomatic
+staging recipe, MD5/SHA-256 distinction, and censored/unknown evidence semantics.
+
 The repository is `ulfe-lmi/llm-slovenian-repair`; the owner's [LICENSE](LICENSE)
 contains Apache License 2.0 and is preserved unchanged. Live repair testing is
 disabled. Qwen compatibility, linguistic quality, ICA, milestone acceptance,

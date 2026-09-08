@@ -26,3 +26,12 @@ to `local synthetic tests only`, with repository `LICENSE` terms,
 wording: values at/below synthetic cutoff 4 are represented only by `[0,4]`.
 No importer, real corpus bytes, external rights/access, linguistic benefit, or
 source release facts are established.
+
+Objective 005 records a dated metadata-only inventory in
+[`resources/source-inventory-v1.json`](resources/source-inventory-v1.json) and a
+standard-library offline ZIP verifier in
+[`scripts/verify_source_artifact.py`](scripts/verify_source_artifact.py). Three
+derived publisher archives are selected for future objectives 006, 007, and 027;
+all remain `NOT_ACQUIRED`. Gigafida 2.2 is query-interface evidence only with
+`UNKNOWN_UNVERIFIED` bulk/API and redistribution status. No source bytes were
+downloaded, extracted, imported, or added to the package.
