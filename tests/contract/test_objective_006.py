@@ -4,28 +4,44 @@ from __future__ import annotations
 
 import csv
 import hashlib
+import json
+import subprocess
+import sys
 from io import BytesIO, StringIO
 from pathlib import Path
 from typing import Any
 
 import pytest
 
+from llm_slovenian_repair.contracts import EvidenceCompleteness
 from llm_slovenian_repair.unigram_importer import (
     EXPECTED_HEADER,
     EXPECTED_HEADER_BYTE_LENGTH,
     EXPECTED_HEADER_SHA256,
-    Completeness,
+    REAL_ACQUISITION_SHA256,
+    REAL_INVENTORY_REVISION,
+    REAL_INVENTORY_SHA256,
+    REAL_RELEASE,
+    REAL_SOURCE_ID,
+    REAL_SOURCE_NAME,
+    SYNTHETIC_INVENTORY_REVISION,
+    SYNTHETIC_RELEASE,
+    SYNTHETIC_SOURCE_ID,
+    SYNTHETIC_SOURCE_NAME,
     UnigramImportError,
     UnigramImportFailure,
     UnigramImportLimits,
+    UnigramImportResult,
+    UnigramImportSummary,
     UnigramProvenance,
+    UnigramRecord,
     import_unigrams,
 )
 
 ROOT = Path(__file__).parents[2]
 FIXTURE = ROOT / "tests" / "fixtures" / "unigram" / "synthetic-gigafida.tsv"
-SYNTHETIC_INVENTORY_SHA256 = "0" * 64
-SYNTHETIC_ACQUISITION_SHA256 = "1" * 64
+SYNTHETIC_INVENTORY_SHA256 = "80ace517557091e9383b881320857b7c233b339bf7a6fca2fe5a8799b1e5bfcd"
+SYNTHETIC_ACQUISITION_SHA256 = "84277bb10e13be1984c5929af20fffd3362349488d5366286a0ed75ca4783e0b"
 
 
 def quote_row(values: list[str] | tuple[str, ...]) -> bytes:
@@ -50,16 +66,35 @@ def rows_from_fixture() -> list[list[str]]:
 
 def provenance(**changes: Any) -> UnigramProvenance:
     values: dict[str, Any] = {
-        "source_id": "synthetic-gigafida-unigram",
-        "source_name": "Project-authored synthetic fixture",
-        "release": "fixture-v1",
-        "source_inventory_revision": "synthetic-fixture-v1",
+        "provenance_kind": "project-synthetic",
+        "source_id": SYNTHETIC_SOURCE_ID,
+        "source_name": SYNTHETIC_SOURCE_NAME,
+        "release": SYNTHETIC_RELEASE,
+        "source_inventory_revision": SYNTHETIC_INVENTORY_REVISION,
         "source_inventory_sha256": SYNTHETIC_INVENTORY_SHA256,
         "acquisition_sha256": SYNTHETIC_ACQUISITION_SHA256,
         "evidence_scope": "complete project-authored synthetic query",
-        "source_completeness": Completeness.COMPLETE,
-        "query_completeness": Completeness.COMPLETE,
-        "import_completeness": Completeness.COMPLETE,
+        "source_completeness": EvidenceCompleteness.COMPLETE,
+        "query_completeness": EvidenceCompleteness.COMPLETE,
+        "import_completeness": EvidenceCompleteness.COMPLETE,
+    }
+    values.update(changes)
+    return UnigramProvenance(**values)
+
+
+def real_provenance(**changes: Any) -> UnigramProvenance:
+    values: dict[str, Any] = {
+        "provenance_kind": "real",
+        "source_id": REAL_SOURCE_ID,
+        "source_name": REAL_SOURCE_NAME,
+        "release": REAL_RELEASE,
+        "source_inventory_revision": REAL_INVENTORY_REVISION,
+        "source_inventory_sha256": REAL_INVENTORY_SHA256,
+        "acquisition_sha256": REAL_ACQUISITION_SHA256,
+        "evidence_scope": "publisher-declared release scope; bounded compatibility prefix",
+        "source_completeness": EvidenceCompleteness.COMPLETE,
+        "query_completeness": EvidenceCompleteness.COMPLETE,
+        "import_completeness": EvidenceCompleteness.PARTIAL,
     }
     values.update(changes)
     return UnigramProvenance(**values)
@@ -106,6 +141,57 @@ def test_observed_header_contract_is_exact() -> None:
     assert hashlib.sha256(header_bytes).hexdigest() == EXPECTED_HEADER_SHA256
 
 
+def test_shared_completeness_is_the_only_importer_completeness_type() -> None:
+    assert UnigramProvenance.model_fields["source_completeness"].annotation is EvidenceCompleteness
+    assert "Completeness" not in __import__(
+        "llm_slovenian_repair.unigram_importer", fromlist=["__all__"]
+    ).__all__
+
+
+def test_real_provenance_is_exactly_bound() -> None:
+    value = real_provenance()
+    assert value.source_id == REAL_SOURCE_ID
+    assert value.source_inventory_sha256 == REAL_INVENTORY_SHA256
+    assert value.acquisition_sha256 == REAL_ACQUISITION_SHA256
+
+
+@pytest.mark.parametrize(
+    "changes",
+    [
+        {"source_id": "other-source"},
+        {"source_name": "other-name"},
+        {"release": "other-release"},
+        {"source_inventory_revision": "other-inventory"},
+        {"source_inventory_sha256": "a" * 64},
+        {"acquisition_sha256": "b" * 64},
+        {"header_line_number": 1},
+    ],
+)
+def test_real_provenance_rebinding_and_line_one_are_rejected(changes: dict[str, Any]) -> None:
+    with pytest.raises(ValueError):
+        real_provenance(**changes)
+
+
+def test_root_import_stays_lazy_and_submodule_has_one_entry_point() -> None:
+    output = subprocess.check_output(
+        [
+            sys.executable,
+            "-c",
+            "import sys, llm_slovenian_repair; "
+            "print('llm_slovenian_repair.unigram_importer' in sys.modules)",
+        ],
+        text=True,
+    ).strip()
+    assert output == "False"
+    import llm_slovenian_repair.unigram_importer as importer
+
+    assert "import_unigrams" in importer.__all__
+    assert "parse_unigram_tsv" not in importer.__all__
+    assert "import_unigram_tsv" not in importer.__all__
+    assert not hasattr(importer, "parse_unigram_tsv")
+    assert not hasattr(importer, "import_unigram_tsv")
+
+
 def test_synthetic_import_preserves_identity_ambiguity_and_unicode() -> None:
     result = import_unigrams(BytesIO(fixture_bytes()), provenance())
 
@@ -116,8 +202,8 @@ def test_synthetic_import_preserves_identity_ambiguity_and_unicode() -> None:
     assert result.records[3].derived_lookup_form == "élan"
     assert result.records[0].published_decimal_text[0] == "0.1200"
     assert result.records[-1].absolute_counts == (0, 0, 0, 0, 0, 0, 0, 0)
-    assert result.summary.query_completeness is Completeness.COMPLETE
-    assert result.summary.import_completeness is Completeness.COMPLETE
+    assert result.summary.query_completeness is EvidenceCompleteness.COMPLETE
+    assert result.summary.import_completeness is EvidenceCompleteness.COMPLETE
     assert result.summary.record_count == 5
     assert result.summary.output_sha256
 
@@ -133,11 +219,54 @@ def test_repeated_import_is_immutable_and_deterministic() -> None:
         first.records[0].source_form = "mutated"
 
 
+@pytest.mark.parametrize("field,value", [("schema_version", 99), ("importer_version", "bogus")])
+def test_summary_constant_tampering_is_rejected(field: str, value: Any) -> None:
+    result = import_unigrams(BytesIO(fixture_bytes()), provenance())
+    summary = result.summary.model_dump()
+    summary[field] = value
+    with pytest.raises(ValueError):
+        UnigramImportResult(
+            provenance=result.provenance,
+            limits=result.limits,
+            records=result.records,
+            summary=UnigramImportSummary(**summary),
+        )
+
+
+def test_summary_output_hash_tampering_is_rejected() -> None:
+    result = import_unigrams(BytesIO(fixture_bytes()), provenance())
+    summary = result.summary.model_dump()
+    summary["output_sha256"] = "a" * 64
+    with pytest.raises(ValueError):
+        UnigramImportResult(
+            provenance=result.provenance,
+            limits=result.limits,
+            records=result.records,
+            summary=UnigramImportSummary(**summary),
+        )
+
+
+def test_record_numeric_text_and_key_tampering_is_rejected() -> None:
+    result = import_unigrams(BytesIO(fixture_bytes()), provenance())
+    record = result.records[0].model_dump()
+    record["absolute_counts"] = (2, *record["absolute_counts"][1:])
+    with pytest.raises(ValueError):
+        UnigramRecord(**record)
+    record = result.records[0].model_dump()
+    record["published_decimal_text"] = ("9.9", *record["published_decimal_text"][1:])
+    with pytest.raises(ValueError):
+        UnigramRecord(**record)
+    record = result.records[0].model_dump()
+    record["record_key"] = "a" * 64
+    with pytest.raises(ValueError):
+        UnigramRecord(**record)
+
+
 def test_zero_is_rejected_without_complete_query_scope() -> None:
     expect_failure(
         payload(),
         UnigramImportFailure.ZERO_WITHOUT_COMPLETE_QUERY,
-        query_completeness=Completeness.PARTIAL,
+        query_completeness=EvidenceCompleteness.PARTIAL,
     )
 
 
@@ -224,13 +353,48 @@ def test_input_resources_are_bounded(limits: Any, reason: UnigramImportFailure) 
         import_unigrams(BytesIO(fixture_bytes()), provenance(), limits=limits)
 
 
-def test_header_can_be_at_an_explicit_line_without_weakening_schema() -> None:
+def test_header_line_one_is_rejected_even_for_synthetic_input() -> None:
     one_line = payload([positive_row()], include_preamble=False)
-    result = import_unigrams(
-        BytesIO(one_line), provenance(header_line_number=1), limits=UnigramImportLimits(max_rows=2)
+    with pytest.raises(ValueError):
+        provenance(header_line_number=1)
+    assert one_line
+
+
+def test_006_a_receipt_uses_a_git_revision_field() -> None:
+    receipt = json.loads(
+        (ROOT / "resources/source-acquisitions/gigafida-2.0-words-006-a.json").read_text(
+            encoding="utf-8"
+        )
     )
-    assert result.records[0].row_number == 2
-    assert result.summary.record_count == 1
+    assert receipt["status"] == "PARTIAL_RECOVERY_HANDOFF"
+    assert "project_sha256_observed_locally" not in receipt
+    assert len(receipt["base_revision_observed_locally"]) == 40
+    assert all(
+        character in "0123456789abcdef"
+        for character in receipt["base_revision_observed_locally"]
+    )
+
+
+def test_006_b_receipt_is_finite_and_preserves_blocked_smoke() -> None:
+    receipt = json.loads(
+        (ROOT / "resources/source-acquisitions/gigafida-2.0-words-006-b.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    assert receipt["schema_version"] == 1
+    assert receipt["status"] == "BLOCKED_PARSER_INCOMPATIBILITY"
+    assert receipt["acquisition_evidence"]["006_b_get_count"] == 1
+    assert receipt["acquisition_evidence"]["cumulative_observed_objective_get_count"] == 4
+    assert receipt["acquisition_evidence"]["006_a_exact_one_fetch_condition_satisfied"] is False
+    for field in ("inventory_sha256", "archive_sha256", "header_sha256"):
+        assert len(receipt[field]) == 64
+        assert all(character in "0123456789abcdef" for character in receipt[field])
+    assert receipt["real_importer_smoke"]["status"] == "BLOCKED"
+    assert receipt["real_importer_smoke"]["sampled_row_count"] is None
+    assert receipt["real_importer_smoke"]["input_sha256"] is None
+    assert receipt["real_importer_smoke"]["output_sha256"] is None
+    assert receipt["acquisition_evidence"]["temporary_tree_absent"] is True
+    assert receipt["acquisition_evidence"]["source_data_retained"] is False
 
 
 def test_fixture_is_project_authored_and_not_a_runtime_resource() -> None:

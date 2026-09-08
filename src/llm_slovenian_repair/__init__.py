@@ -44,28 +44,6 @@ if TYPE_CHECKING:
         VerifiedSyntheticCorpus,
         verify_manifest_payload,
     )
-    from .unigram_importer import (
-        EXPECTED_DELIMITER,
-        EXPECTED_ENCODING,
-        EXPECTED_HEADER,
-        EXPECTED_HEADER_BYTE_LENGTH,
-        EXPECTED_HEADER_LINE_NUMBER,
-        EXPECTED_HEADER_SHA256,
-        EXPECTED_MEMBER_NAME,
-        EXPECTED_NEWLINE,
-        IMPORTER_VERSION,
-        Completeness,
-        UnigramImportError,
-        UnigramImportFailure,
-        UnigramImportLimits,
-        UnigramImportResult,
-        UnigramImportSummary,
-        UnigramProvenance,
-        UnigramRecord,
-        import_unigram_tsv,
-        import_unigrams,
-        parse_unigram_tsv,
-    )
 
 
 _LAZY_EXPORTS = MappingProxyType(
@@ -115,31 +93,6 @@ _LAZY_EXPORTS = MappingProxyType(
                 "verify_manifest_payload",
             )
         },
-    **{
-        name: ("unigram_importer", name)
-        for name in (
-            "EXPECTED_DELIMITER",
-            "EXPECTED_ENCODING",
-            "EXPECTED_HEADER",
-            "EXPECTED_HEADER_BYTE_LENGTH",
-            "EXPECTED_HEADER_LINE_NUMBER",
-            "EXPECTED_HEADER_SHA256",
-            "EXPECTED_MEMBER_NAME",
-            "EXPECTED_NEWLINE",
-            "IMPORTER_VERSION",
-            "Completeness",
-            "UnigramImportError",
-            "UnigramImportFailure",
-            "UnigramImportLimits",
-            "UnigramImportResult",
-            "UnigramImportSummary",
-            "UnigramProvenance",
-            "UnigramRecord",
-            "import_unigram_tsv",
-            "import_unigrams",
-            "parse_unigram_tsv",
-        )
-    },
     }
 )
 
@@ -198,24 +151,4 @@ __all__ = [
     "VerifiedSyntheticCorpus",
     "VerificationFailure",
     "verify_manifest_payload",
-    "EXPECTED_DELIMITER",
-    "EXPECTED_ENCODING",
-    "EXPECTED_HEADER",
-    "EXPECTED_HEADER_BYTE_LENGTH",
-    "EXPECTED_HEADER_LINE_NUMBER",
-    "EXPECTED_HEADER_SHA256",
-    "EXPECTED_MEMBER_NAME",
-    "EXPECTED_NEWLINE",
-    "IMPORTER_VERSION",
-    "Completeness",
-    "UnigramImportError",
-    "UnigramImportFailure",
-    "UnigramImportLimits",
-    "UnigramImportResult",
-    "UnigramImportSummary",
-    "UnigramProvenance",
-    "UnigramRecord",
-    "import_unigram_tsv",
-    "import_unigrams",
-    "parse_unigram_tsv",
 ]

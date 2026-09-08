@@ -37,12 +37,17 @@ all remain `NOT_ACQUIRED`. Gigafida 2.2 is query-interface evidence only with
 downloaded, extracted, imported, or added to the package.
 
 Objective 006 implements the bounded frozen `unigram_importer` parser for the
-observed Gigafida 2.0 lower-case form/lemma/POS TSV header. It retains exact 28
-source fields and lossless numeric views, preserves morphology ambiguity, derives
-NFC/casefold lookup values without rewriting source text, and rejects malformed
-UTF-8, controls, counts, zero-without-complete-query, duplicates, bad quoting,
-truncation, and resource-limit violations. Only project-authored synthetic
-fixtures are committed or tested offline. A recovery receipt preserves the
-schema-only handoff facts while recording that three earlier GETs violated the
-exact-one-fetch condition; therefore current real archive verification and real
-importer smoke remain `NOT RUN`, and acceptance 1 is not claimed.
+observed Gigafida 2.0 lower-case form/lemma/POS header. It retains exact 28
+source fields and lossless numeric views, uses shared `EvidenceCompleteness`,
+binds exact real versus project-synthetic provenance, preserves morphology
+ambiguity, derives NFC/casefold lookup values without rewriting source text, and
+rejects malformed UTF-8, controls, counts, zero-without-complete-query,
+duplicates, bad quoting, truncation, and resource-limit violations. Objective-006
+symbols are available only from the lazy submodule's `import_unigrams` seam.
+
+The 006-a recovery receipt remains a historical partial handoff with three prior
+GETs and a false exact-one condition. The 006-b receipt records one verified GET,
+accepted archive verification, and successful cleanup, but its bounded real smoke
+is `BLOCKED`: the first data row has a trailing empty 29th field, outside the
+exact 28-field parser contract. No real importer output, external archive, or row
+is retained, committed, or packaged; real compatibility acceptance is not claimed.

@@ -107,9 +107,9 @@ vocabulary or denominator.
 
 The checked-in `tests/fixtures/unigram/` data is project-authored synthetic data
 under the repository `LICENSE`; it is not a Gigafida sample and is excluded from
-the runtime package. The versioned receipt under
-`resources/source-acquisitions/` records the recovery handoff's schema-only facts
-without source values. It explicitly records three prior GETs, first-two
-pre-verifier inspections, no retained external bytes, and real importer smoke
-`NOT RUN`. Those facts block the order's exact-one-fetch acceptance; the receipt
-does not authorize redistribution or make a current acquisition claim.
+the runtime package. The versioned receipts under
+`resources/source-acquisitions/` preserve the 006-a recovery handoff and the
+006-b controlled attempt. The latter records one exact verified GET and cleanup,
+but its real importer smoke is blocked by a trailing empty 29th field on the first
+data row, outside the exact 28-field parser contract. No external bytes or rows
+are retained, and neither receipt authorizes redistribution or a release claim.

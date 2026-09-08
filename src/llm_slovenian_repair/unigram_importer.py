@@ -28,8 +28,20 @@ from pydantic import (
     model_validator,
 )
 
+from .contracts import EvidenceCompleteness
+
 IMPORTER_VERSION = "unigram-importer-v1"
 SCHEMA_VERSION = 1
+REAL_SOURCE_ID = "gigafida-2.0-words"
+REAL_SOURCE_NAME = "Gigafida 2.0 word lists"
+REAL_RELEASE = "2.0"
+REAL_INVENTORY_REVISION = "source-inventory-v1"
+REAL_INVENTORY_SHA256 = "439bbd51e04e338569b9785c44d1b05c0ea023aae39898aa7d494568d6f49de3"
+REAL_ACQUISITION_SHA256 = "77ac4aa2e77016470a26ebf5b1bd265b9de240e8254d3511d51cb0fcb68a767a"
+SYNTHETIC_SOURCE_ID = "project-synthetic-unigram"
+SYNTHETIC_SOURCE_NAME = "Project-authored synthetic fixture"
+SYNTHETIC_RELEASE = "fixture-v1"
+SYNTHETIC_INVENTORY_REVISION = "project-synthetic-v1"
 EXPECTED_MEMBER_NAME = (
     "GF2.0-words-all-lowercase_forms-lemmas-parts_of_speech-taxonomy-entire.tsv"
 )
@@ -87,14 +99,6 @@ _DECIMAL_RE = re.compile(r"(?:0|[0-9]+)(?:\.[0-9]+)?(?:[eE][+-]?[0-9]+)?")
 _MAX_COUNT = (1 << 63) - 1
 _CHUNK_SIZE = 8192
 _RECORD_KEY_SEPARATOR = "\u241f"
-
-
-class Completeness(StrEnum):
-    """Independent completeness states for source, query, and imported rows."""
-
-    COMPLETE = "COMPLETE"
-    PARTIAL = "PARTIAL"
-    UNKNOWN = "UNKNOWN"
 
 
 class UnigramImportFailure(StrEnum):
@@ -180,6 +184,7 @@ class UnigramProvenance(BaseModel):
 
     model_config = IMPORT_CONFIG
 
+    provenance_kind: StrictStr
     schema_version: StrictInt = SCHEMA_VERSION
     source_id: StrictStr = Field(min_length=1, max_length=128)
     source_name: StrictStr = Field(min_length=1, max_length=256)
@@ -193,12 +198,12 @@ class UnigramProvenance(BaseModel):
     delimiter: StrictStr = EXPECTED_DELIMITER
     encoding: StrictStr = EXPECTED_ENCODING
     newline: StrictStr = EXPECTED_NEWLINE
-    header_line_number: StrictInt = Field(default=EXPECTED_HEADER_LINE_NUMBER, gt=0, le=1024)
+    header_line_number: StrictInt = EXPECTED_HEADER_LINE_NUMBER
     normalization: StrictStr = "source-exact"
     derived_lookup_transform: StrictStr = "NFC_CASEFOLD"
-    source_completeness: Completeness = Completeness.UNKNOWN
-    query_completeness: Completeness = Completeness.UNKNOWN
-    import_completeness: Completeness = Completeness.PARTIAL
+    source_completeness: EvidenceCompleteness = EvidenceCompleteness.UNKNOWN
+    query_completeness: EvidenceCompleteness = EvidenceCompleteness.UNKNOWN
+    import_completeness: EvidenceCompleteness = EvidenceCompleteness.PARTIAL
     evidence_scope: StrictStr = Field(min_length=1, max_length=512)
     redistribution_ready: StrictBool = False
 
@@ -207,6 +212,7 @@ class UnigramProvenance(BaseModel):
         "source_name",
         "release",
         "source_inventory_revision",
+        "provenance_kind",
         "member_name",
         "encoding",
         "newline",
@@ -217,8 +223,33 @@ class UnigramProvenance(BaseModel):
 
     @model_validator(mode="after")
     def validate_contract(self) -> Self:
+        if self.provenance_kind not in {"real", "project-synthetic"}:
+            raise ValueError("unsupported provenance kind")
         if self.schema_version != SCHEMA_VERSION:
             raise ValueError("unsupported schema version")
+        if self.provenance_kind == "real":
+            expected = {
+                "source_id": REAL_SOURCE_ID,
+                "source_name": REAL_SOURCE_NAME,
+                "release": REAL_RELEASE,
+                "source_inventory_revision": REAL_INVENTORY_REVISION,
+                "source_inventory_sha256": REAL_INVENTORY_SHA256,
+                "acquisition_sha256": REAL_ACQUISITION_SHA256,
+            }
+        else:
+            expected = {
+                "source_id": SYNTHETIC_SOURCE_ID,
+                "source_name": SYNTHETIC_SOURCE_NAME,
+                "release": SYNTHETIC_RELEASE,
+                "source_inventory_revision": SYNTHETIC_INVENTORY_REVISION,
+            }
+            if self.source_inventory_sha256 in {"0" * 64, "1" * 64}:
+                raise ValueError("synthetic inventory hash must identify fixture data")
+            if self.acquisition_sha256 in {"0" * 64, "1" * 64}:
+                raise ValueError("synthetic acquisition hash must identify fixture data")
+        for field, value in expected.items():
+            if getattr(self, field) != value:
+                raise ValueError(f"{self.provenance_kind} provenance mismatch: {field}")
         if self.member_name != EXPECTED_MEMBER_NAME:
             raise ValueError("unsupported member name")
         if self.header_fields != EXPECTED_HEADER:
@@ -229,6 +260,8 @@ class UnigramProvenance(BaseModel):
             raise ValueError("unsupported delimiter")
         if self.encoding != EXPECTED_ENCODING or self.newline != EXPECTED_NEWLINE:
             raise ValueError("unsupported encoding or newline")
+        if self.header_line_number != EXPECTED_HEADER_LINE_NUMBER:
+            raise ValueError("header line does not match observed schema")
         if self.normalization != "source-exact":
             raise ValueError("source normalization must remain exact")
         if self.derived_lookup_transform != "NFC_CASEFOLD":
@@ -320,6 +353,34 @@ class UnigramRecord(BaseModel):
             raise ValueError("derived lookup does not match source form")
         if self.derived_lookup_transform != "NFC_CASEFOLD":
             raise ValueError("unsupported lookup transform")
+        for tuple_index, field_index in enumerate(_ABSOLUTE_INDICES):
+            raw_value = self.raw_fields[field_index]
+            if raw_value == "":
+                if (
+                    field_index == _ABSOLUTE_INDICES[0]
+                    or self.absolute_counts[tuple_index] is not None
+                ):
+                    raise ValueError("absolute count does not match raw field")
+                continue
+            if _COUNT_RE.fullmatch(raw_value) is None:
+                raise ValueError("absolute count does not match raw field")
+            expected_count = int(raw_value)
+            if expected_count > _MAX_COUNT or self.absolute_counts[tuple_index] != expected_count:
+                raise ValueError("absolute count does not match raw field")
+        for tuple_index, field_index in enumerate(_DECIMAL_INDICES):
+            raw_value = self.raw_fields[field_index]
+            expected_text = raw_value or None
+            if self.published_decimal_text[tuple_index] != expected_text:
+                raise ValueError("decimal text does not match raw field")
+            if raw_value == "":
+                if self.published_decimals[tuple_index] is not None:
+                    raise ValueError("decimal value does not match raw field")
+            else:
+                if _DECIMAL_RE.fullmatch(raw_value) is None:
+                    raise ValueError("decimal value does not match raw field")
+                expected_decimal = Decimal(raw_value)
+                if self.published_decimals[tuple_index] != expected_decimal:
+                    raise ValueError("decimal value does not match raw field")
         expected_key = _record_key(
             self.source_form, self.lemma, self.lowercase_lemma, self.part_of_speech
         )
@@ -344,9 +405,9 @@ class UnigramImportSummary(BaseModel):
     header_sha256: StrictStr = EXPECTED_HEADER_SHA256
     normalization: StrictStr = "source-exact"
     derived_lookup_transform: StrictStr = "NFC_CASEFOLD"
-    source_completeness: Completeness
-    query_completeness: Completeness
-    import_completeness: Completeness
+    source_completeness: EvidenceCompleteness
+    query_completeness: EvidenceCompleteness
+    import_completeness: EvidenceCompleteness
     max_input_bytes: StrictInt = Field(gt=0)
     max_rows: StrictInt = Field(gt=0)
     max_line_bytes: StrictInt = Field(gt=0)
@@ -356,6 +417,21 @@ class UnigramImportSummary(BaseModel):
     record_count: StrictInt = Field(ge=0)
     input_sha256: StrictStr = Field(pattern=r"[0-9a-f]{64}")
     output_sha256: StrictStr = Field(pattern=r"[0-9a-f]{64}")
+
+    @model_validator(mode="after")
+    def validate_constants(self) -> Self:
+        expected = {
+            "schema_version": SCHEMA_VERSION,
+            "importer_version": IMPORTER_VERSION,
+            "member_name": EXPECTED_MEMBER_NAME,
+            "header_sha256": EXPECTED_HEADER_SHA256,
+            "normalization": "source-exact",
+            "derived_lookup_transform": "NFC_CASEFOLD",
+        }
+        for field, value in expected.items():
+            if getattr(self, field) != value:
+                raise ValueError(f"summary constant mismatch: {field}")
+        return self
 
 
 class UnigramImportResult(BaseModel):
@@ -391,6 +467,14 @@ class UnigramImportResult(BaseModel):
         for field, value in expected.items():
             if getattr(self.summary, field) != value:
                 raise ValueError(f"summary binding mismatch: {field}")
+        if self.summary.output_sha256 != hashlib.sha256(
+            _canonical_json_bytes([_canonical_record(record) for record in self.records])
+        ).hexdigest():
+            raise ValueError("summary binding mismatch: output_sha256")
+        if self.summary.record_count > self.limits.max_rows:
+            raise ValueError("summary binding mismatch: max_rows")
+        if self.summary.input_bytes > self.limits.max_input_bytes:
+            raise ValueError("summary binding mismatch: input_bytes")
         return self
 
 
@@ -587,7 +671,7 @@ def _make_record(
         _parse_count(
             fields[index],
             index=index,
-            query_complete=provenance.query_completeness is Completeness.COMPLETE,
+        query_complete=provenance.query_completeness is EvidenceCompleteness.COMPLETE,
         )
         for index in _ABSOLUTE_INDICES
     )
@@ -713,10 +797,6 @@ def import_unigrams(
     )
 
 
-parse_unigram_tsv = import_unigrams
-import_unigram_tsv = import_unigrams
-
-
 __all__ = [
     "EXPECTED_DELIMITER",
     "EXPECTED_ENCODING",
@@ -727,7 +807,17 @@ __all__ = [
     "EXPECTED_MEMBER_NAME",
     "EXPECTED_NEWLINE",
     "IMPORTER_VERSION",
-    "Completeness",
+    "EvidenceCompleteness",
+    "REAL_ACQUISITION_SHA256",
+    "REAL_INVENTORY_REVISION",
+    "REAL_INVENTORY_SHA256",
+    "REAL_RELEASE",
+    "REAL_SOURCE_ID",
+    "REAL_SOURCE_NAME",
+    "SYNTHETIC_INVENTORY_REVISION",
+    "SYNTHETIC_RELEASE",
+    "SYNTHETIC_SOURCE_ID",
+    "SYNTHETIC_SOURCE_NAME",
     "UnigramImportError",
     "UnigramImportFailure",
     "UnigramImportLimits",
@@ -735,7 +825,5 @@ __all__ = [
     "UnigramImportSummary",
     "UnigramProvenance",
     "UnigramRecord",
-    "import_unigram_tsv",
     "import_unigrams",
-    "parse_unigram_tsv",
 ]
