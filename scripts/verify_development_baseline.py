@@ -12,20 +12,17 @@ import subprocess
 import sys
 import tempfile
 import tomllib
-import zipfile
 from dataclasses import dataclass
 from pathlib import Path
+from threading import Thread
 from time import monotonic
 from typing import Any
 
 PYTHON_SELECTOR = "3.12"
 DEFAULT_COMMAND_TIMEOUT = 300.0
-REQUIRED_PACKAGES = (
-    "llm-slovenian-repair",
-    "pydantic",
-    "pydantic-core",
-    "httpx",
-)
+PROJECT_PACKAGE = "llm-slovenian-repair"
+DIAGNOSTIC_CAPTURE_BYTES = 8192
+DIAGNOSTIC_MAX_BYTES = 4096
 
 
 class DriverError(RuntimeError):
@@ -59,7 +56,6 @@ class WorkspacePaths:
     offline_home: Path
     outside_repository: Path
     pytest_workspace: Path
-    wheelhouse: Path
 
 
 @dataclass(frozen=True)
@@ -97,7 +93,6 @@ def workspace_paths(root: Path) -> WorkspacePaths:
         offline_home=root / "offline-home",
         outside_repository=root / "outside-repository",
         pytest_workspace=root / "pytest-workspace",
-        wheelhouse=root / "wheelhouse",
     )
 
 
@@ -116,8 +111,6 @@ def build_environment(paths: WorkspacePaths) -> dict[str, str]:
         "PYTHONPATH",
         "VIRTUAL_ENV",
         "UV_OFFLINE",
-        "UV_NO_INDEX",
-        "PIP_NO_INDEX",
     ):
         env.pop(name, None)
     env.update(
@@ -140,8 +133,6 @@ def offline_environment(base: dict[str, str], paths: WorkspacePaths) -> dict[str
     env.update(
         {
             "UV_OFFLINE": "1",
-            "UV_NO_INDEX": "1",
-            "PIP_NO_INDEX": "1",
             "UV_PROJECT_ENVIRONMENT": str(paths.offline_environment),
             "HOME": str(paths.offline_home),
         }
@@ -153,38 +144,26 @@ def uv_executable() -> str:
     return shutil.which("uv") or "uv"
 
 
-def locked_versions(repo: Path) -> dict[str, str]:
-    try:
-        lock = tomllib.loads((repo / "uv.lock").read_text(encoding="utf-8"))
-        packages = lock["package"]
-        versions = {
-            package["name"]: package["version"]
-            for package in packages
-            if package["name"] in REQUIRED_PACKAGES
-        }
-    except (KeyError, OSError, TypeError, tomllib.TOMLDecodeError) as exc:
-        raise DriverError("LOCK_METADATA_INVALID") from exc
-    if set(versions) != set(REQUIRED_PACKAGES):
-        raise DriverError("LOCKED_RUNTIME_VERSIONS_MISSING")
-    return versions
+def locked_runtime_versions(repo: Path) -> dict[str, str]:
+    """Return the exact versions in the project's locked runtime closure."""
 
-
-def runtime_package_names(repo: Path) -> list[str]:
     try:
         lock = tomllib.loads((repo / "uv.lock").read_text(encoding="utf-8"))
         packages = {package["name"]: package for package in lock["package"]}
-        pending = ["llm-slovenian-repair"]
-        names: list[str] = []
+        pending = list(packages[PROJECT_PACKAGE].get("dependencies", []))
+        versions: dict[str, str] = {PROJECT_PACKAGE: packages[PROJECT_PACKAGE]["version"]}
         while pending:
-            name = pending.pop()
-            if name in names:
+            name = pending.pop()["name"]
+            if name in versions:
                 continue
             package = packages[name]
-            names.append(name)
-            pending.extend(dependency["name"] for dependency in package.get("dependencies", []))
+            versions[name] = package["version"]
+            pending.extend(package.get("dependencies", []))
     except (KeyError, OSError, TypeError, tomllib.TOMLDecodeError) as exc:
-        raise DriverError("LOCK_RUNTIME_GRAPH_INVALID") from exc
-    return names
+        raise DriverError("LOCK_METADATA_INVALID") from exc
+    if not versions:
+        raise DriverError("LOCKED_RUNTIME_VERSIONS_MISSING")
+    return versions
 
 
 def _pytest_args(*paths: str, ignore_repository_venv: bool = False) -> tuple[str, ...]:
@@ -272,10 +251,10 @@ def build_command_spec(repo: Path, paths: WorkspacePaths, uv: str) -> CommandSpe
 
 
 def offline_command_specs(
+    repo: Path,
     paths: WorkspacePaths,
     uv: str,
     wheel: Path,
-    wheelhouse: Path,
     versions: dict[str, str],
 ) -> list[CommandSpec]:
     offline_python = str(venv_python(paths.offline_environment))
@@ -286,8 +265,8 @@ def offline_command_specs(
         "assert llm_slovenian_repair.__version__ == expected['llm-slovenian-repair']; "
         "assert all(metadata.version(name) == version and "
         "metadata.metadata(name)['Name'].lower().replace('_', '-') == "
-        "name.lower().replace('_', '-') "
-        "for name, version in expected.items())"
+        "name.lower().replace('_', '-') for name, version in expected.items()); "
+        "assert all(metadata.version(name) for name in ('pydantic', 'pydantic-core', 'httpx'))"
     )
     return [
         CommandSpec(
@@ -296,19 +275,21 @@ def offline_command_specs(
             paths.root,
         ),
         CommandSpec(
-            "offline wheel installation with dependencies",
+            "offline runtime-only frozen sync",
             (
                 uv,
-                "pip",
-                "install",
+                "sync",
+                "--frozen",
+                "--no-dev",
+                "--no-install-project",
                 "--python",
-                offline_python,
-                "--offline",
-                "--no-index",
-                "--find-links",
-                str(wheelhouse),
-                str(wheel),
+                PYTHON_SELECTOR,
             ),
+            repo,
+        ),
+        CommandSpec(
+            "offline wheel installation with dependencies",
+            (uv, "pip", "install", "--python", offline_python, "--offline", str(wheel)),
             paths.outside_repository,
         ),
         CommandSpec(
@@ -319,13 +300,88 @@ def offline_command_specs(
     ]
 
 
-def record_command(records: list[dict[str, Any]], label: str, result: str, timeout: float) -> None:
-    records.append(
-        {
-            "label": label,
-            "result": result,
-            "timeout_seconds": timeout,
-        }
+def record_command(
+    records: list[dict[str, Any]],
+    label: str,
+    result: str,
+    timeout: float,
+    *,
+    returncode: int | None = None,
+    diagnostic: str | None = None,
+) -> None:
+    record: dict[str, Any] = {
+        "label": label,
+        "result": result,
+        "timeout_seconds": timeout,
+    }
+    if result in {"FAILED", "TIMEOUT"}:
+        if returncode is not None:
+            record["returncode"] = returncode
+        record["diagnostic"] = diagnostic or ""
+    records.append(record)
+
+
+def _tail(data: bytearray, chunk: bytes) -> None:
+    data.extend(chunk)
+    if len(data) > DIAGNOSTIC_CAPTURE_BYTES:
+        del data[:-DIAGNOSTIC_CAPTURE_BYTES]
+
+
+def _read_tail(stream: Any, target: bytearray) -> None:
+    try:
+        while True:
+            chunk = stream.read(4096)
+            if not chunk:
+                return
+            _tail(target, chunk)
+    finally:
+        stream.close()
+
+
+def _redaction_forms(path: Path) -> tuple[str, ...]:
+    resolved = path.resolve(strict=False)
+    return tuple(dict.fromkeys((str(path), str(resolved), resolved.as_posix())))
+
+
+def sanitize_diagnostic(
+    data: bytes | str,
+    *,
+    repository: Path | None = None,
+    temporary_root: Path | None = None,
+) -> str:
+    """Redact owned paths and bound a diagnostic to valid UTF-8 bytes."""
+
+    text = data.decode("utf-8", errors="replace") if isinstance(data, bytes) else data
+    for path, replacement in (
+        (repository, "<repository>"),
+        (temporary_root, "<temporary-root>"),
+    ):
+        if path is not None:
+            for form in sorted(_redaction_forms(path), key=len, reverse=True):
+                text = text.replace(form, replacement)
+    text = "".join(char if ord(char) >= 32 and ord(char) != 127 else " " for char in text)
+    text = " ".join(text.split())
+    encoded = text.encode("utf-8")
+    if len(encoded) > DIAGNOSTIC_MAX_BYTES:
+        encoded = encoded[-DIAGNOSTIC_MAX_BYTES:]
+        text = encoded.decode("utf-8", errors="ignore")
+    return text
+
+
+def failure_diagnostic(
+    stdout: bytes,
+    stderr: bytes,
+    *,
+    repository: Path | None = None,
+    temporary_root: Path | None = None,
+) -> str:
+    parts: list[bytes] = []
+    if stdout:
+        parts.append(b"stdout: " + stdout)
+    if stderr:
+        parts.append(b"stderr: " + stderr)
+    return sanitize_diagnostic(
+        b" | ".join(parts), repository=repository, temporary_root=temporary_root
     )
 
 
@@ -335,29 +391,69 @@ def run_command(
     env: dict[str, str],
     timeout: float,
     records: list[dict[str, Any]],
+    repository: Path | None = None,
+    temporary_root: Path | None = None,
 ) -> None:
     started = monotonic()
+    stdout_tail = bytearray()
+    stderr_tail = bytearray()
     try:
-        completed = subprocess.run(
+        process = subprocess.Popen(
             list(spec.argv),
             cwd=spec.cwd,
             env=env,
             stdin=subprocess.DEVNULL,
-            stdout=subprocess.DEVNULL,
-            stderr=subprocess.DEVNULL,
-            timeout=timeout,
-            check=False,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
         )
-    except subprocess.TimeoutExpired as exc:
-        record_command(records, spec.label, "TIMEOUT", timeout)
-        raise CommandFailure(spec.label, "TIMEOUT") from exc
     except OSError as exc:
-        record_command(records, spec.label, "FAILED", timeout)
+        diagnostic = sanitize_diagnostic(
+            f"{type(exc).__name__}: {exc}",
+            repository=repository,
+            temporary_root=temporary_root,
+        )
+        record_command(records, spec.label, "FAILED", timeout, diagnostic=diagnostic)
         raise CommandFailure(spec.label, "FAILED") from exc
+    readers = [
+        Thread(target=_read_tail, args=(process.stdout, stdout_tail), daemon=True),
+        Thread(target=_read_tail, args=(process.stderr, stderr_tail), daemon=True),
+    ]
+    for reader in readers:
+        reader.start()
+    timed_out = False
+    try:
+        process.wait(timeout=timeout)
+    except subprocess.TimeoutExpired:
+        timed_out = True
+        process.kill()
+        process.wait()
+    finally:
+        for reader in readers:
+            reader.join(timeout=1)
+        if process.stdout is not None:
+            process.stdout.close()
+        if process.stderr is not None:
+            process.stderr.close()
+    diagnostic = failure_diagnostic(
+        bytes(stdout_tail),
+        bytes(stderr_tail),
+        repository=repository,
+        temporary_root=temporary_root,
+    )
     elapsed = monotonic() - started
-    if completed.returncode != 0:
-        record_command(records, spec.label, "FAILED", timeout)
-        raise CommandFailure(spec.label, "FAILED", completed.returncode)
+    if timed_out:
+        record_command(records, spec.label, "TIMEOUT", timeout, diagnostic=diagnostic)
+        raise CommandFailure(spec.label, "TIMEOUT")
+    if process.returncode != 0:
+        record_command(
+            records,
+            spec.label,
+            "FAILED",
+            timeout,
+            returncode=process.returncode,
+            diagnostic=diagnostic,
+        )
+        raise CommandFailure(spec.label, "FAILED", process.returncode)
     record_command(records, spec.label, "PASSED", timeout)
     if elapsed < 0:  # pragma: no cover - monotonic is only sanity-protected.
         raise DriverError("CLOCK_INVALID")
@@ -370,43 +466,6 @@ def select_wheel(output: Path, records: list[dict[str, Any]], timeout: float) ->
         raise DriverError("EXPECTED_ONE_WHEEL")
     record_command(records, "select built wheel", "PASSED", timeout)
     return wheels[0]
-
-
-def materialize_cached_runtime_wheels(
-    repo: Path,
-    paths: WorkspacePaths,
-    records: list[dict[str, Any]],
-    timeout: float,
-) -> None:
-    """Expose frozen-sync cache entries to the offline wheel resolver."""
-
-    cache_root = paths.cache / "wheels-v6" / "pypi"
-    try:
-        lock = tomllib.loads((repo / "uv.lock").read_text(encoding="utf-8"))
-        packages = {package["name"]: package for package in lock["package"]}
-        paths.wheelhouse.mkdir()
-        for name in runtime_package_names(repo):
-            if name == "llm-slovenian-repair":
-                continue
-            version = packages[name]["version"]
-            candidates = sorted(
-                path
-                for path in (cache_root / name).glob(f"{version}-*")
-                if path.is_dir()
-            )
-            if len(candidates) != 1:
-                record_command(records, "materialize cached runtime wheelhouse", "FAILED", timeout)
-                raise DriverError("CACHED_RUNTIME_WHEEL_MISSING")
-            source = candidates[0]
-            destination = paths.wheelhouse / f"{name.replace('-', '_')}-{source.name}.whl"
-            with zipfile.ZipFile(destination, "w", compression=zipfile.ZIP_DEFLATED) as archive:
-                for path in source.rglob("*"):
-                    if path.is_file():
-                        archive.write(path, path.relative_to(source).as_posix())
-    except (KeyError, OSError, TypeError, tomllib.TOMLDecodeError, zipfile.BadZipFile) as exc:
-        record_command(records, "materialize cached runtime wheelhouse", "FAILED", timeout)
-        raise DriverError("CACHED_RUNTIME_WHEELHOUSE_INVALID") from exc
-    record_command(records, "materialize cached runtime wheelhouse", "PASSED", timeout)
 
 
 def validate_owned_root(root: Path, repo: Path) -> None:
@@ -478,18 +537,36 @@ def run_verification(
             paths.offline_home.mkdir()
             test_repo = prepare_test_workspace(repo, paths)
             env = build_environment(paths)
-            versions = locked_versions(repo)
+            versions = locked_runtime_versions(repo)
             uv = uv_executable()
             for spec in initial_command_specs(repo, paths, uv, test_repo):
-                run_command(spec, env=env, timeout=timeout, records=records)
+                run_command(
+                    spec,
+                    env=env,
+                    timeout=timeout,
+                    records=records,
+                    repository=repo,
+                    temporary_root=owned_root,
+                )
             run_command(
-                build_command_spec(repo, paths, uv), env=env, timeout=timeout, records=records
+                build_command_spec(repo, paths, uv),
+                env=env,
+                timeout=timeout,
+                records=records,
+                repository=repo,
+                temporary_root=owned_root,
             )
             wheel = select_wheel(paths.output, records, timeout)
-            materialize_cached_runtime_wheels(repo, paths, records, timeout)
             offline_env = offline_environment(env, paths)
-            for spec in offline_command_specs(paths, uv, wheel, paths.wheelhouse, versions):
-                run_command(spec, env=offline_env, timeout=timeout, records=records)
+            for spec in offline_command_specs(repo, paths, uv, wheel, versions):
+                run_command(
+                    spec,
+                    env=offline_env,
+                    timeout=timeout,
+                    records=records,
+                    repository=repo,
+                    temporary_root=owned_root,
+                )
         cleanup = "PASSED" if owned_root is not None and not owned_root.exists() else "FAILED"
     except (CommandFailure, DriverError) as exc:
         failure = str(exc)

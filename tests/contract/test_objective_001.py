@@ -194,11 +194,11 @@ def test_driver_command_order_and_offline_dependency_policy() -> None:
         initial = driver.initial_command_specs(ROOT, paths, "uv")
         wheel = paths.output / "llm_slovenian_repair-0.0.0-py3-none-any.whl"
         offline = driver.offline_command_specs(
+            ROOT,
             paths,
             "uv",
             wheel,
-            paths.wheelhouse,
-            {name: "0.0.0" for name in driver.REQUIRED_PACKAGES},
+            {"httpx": "0.0.0", "pydantic": "0.0.0"},
         )
         labels = [
             spec.label
@@ -214,37 +214,108 @@ def test_driver_command_order_and_offline_dependency_policy() -> None:
             "OAP unittest discovery",
             "sdist and wheel build",
             "create fresh offline venv",
+            "offline runtime-only frozen sync",
             "offline wheel installation with dependencies",
             "offline runtime import and metadata",
         ]
-        install = offline[1].argv
-        assert "--offline" in install
-        assert "--no-index" in install
-        assert "--find-links" in install
-        assert "--no-deps" not in install
+        sync = offline[1].argv
+        assert sync[-6:] == (
+            "sync",
+            "--frozen",
+            "--no-dev",
+            "--no-install-project",
+            "--python",
+            "3.12",
+        )
+        install = offline[2].argv
+        assert install == (
+            "uv",
+            "pip",
+            "install",
+            "--python",
+            str(driver.venv_python(paths.offline_environment)),
+            "--offline",
+            str(wheel),
+        )
         assert "--ignore=.venv" in initial[3].argv
 
 
-def test_driver_timeout_and_error_propagation() -> None:
+def test_driver_diagnostic_is_bounded_redacted_and_control_free() -> None:
     driver = load_driver()
     records: list[dict[str, Any]] = []
+    with tempfile.TemporaryDirectory(prefix="llm-slovenian-diagnostic-") as temp_dir:
+        temporary_root = Path(temp_dir)
+        secret = "synthetic-secret-not-output"
+        spec = driver.CommandSpec(
+            "synthetic failure",
+            (
+                sys.executable,
+                "-c",
+                "import os, sys; "
+                "sys.stderr.write('x' * 9000 + os.getcwd() + '\\x1b[31m\\n'); "
+                "raise SystemExit(1)",
+            ),
+            temporary_root,
+        )
+        env = os.environ.copy()
+        env["SYNTHETIC_SECRET"] = secret
+        with pytest.raises(driver.CommandFailure, match="synthetic failure:FAILED:1"):
+            driver.run_command(
+                spec,
+                env=env,
+                timeout=1,
+                records=records,
+                repository=ROOT,
+                temporary_root=temporary_root,
+            )
+    record = records[-1]
+    diagnostic = record["diagnostic"]
+    assert record["label"] == "synthetic failure"
+    assert record["result"] == "FAILED"
+    assert record["returncode"] == 1
+    assert len(diagnostic.encode("utf-8")) <= driver.DIAGNOSTIC_MAX_BYTES
+    assert "\x1b" not in diagnostic
+    assert str(temporary_root) not in diagnostic
+    assert str(ROOT.resolve()) not in diagnostic
+    assert secret not in diagnostic
+    assert "stdout" not in record or record["stdout"] is None
+
+
+def test_driver_success_omits_output_and_timeout_differs_from_nonzero() -> None:
+    driver = load_driver()
+    records: list[dict[str, Any]] = []
+    success = driver.CommandSpec(
+        "synthetic success", (sys.executable, "-c", "print('success output')"), ROOT
+    )
+    driver.run_command(success, env=os.environ.copy(), timeout=1, records=records)
+    assert records[-1] == {
+        "label": "synthetic success",
+        "result": "PASSED",
+        "timeout_seconds": 1,
+    }
+
+    timeout_records: list[dict[str, Any]] = []
     spec = driver.CommandSpec(
         "synthetic timeout", (sys.executable, "-c", "import time; time.sleep(1)"), ROOT
     )
     with pytest.raises(driver.CommandFailure, match="synthetic timeout:TIMEOUT"):
-        driver.run_command(spec, env=os.environ.copy(), timeout=0.01, records=records)
-    assert records[-1]["result"] == "TIMEOUT"
+        driver.run_command(spec, env=os.environ.copy(), timeout=0.01, records=timeout_records)
+    assert timeout_records[-1]["result"] == "TIMEOUT"
+    assert "returncode" not in timeout_records[-1]
+    assert "diagnostic" in timeout_records[-1]
 
-    records = []
+    failure_records: list[dict[str, Any]] = []
     spec = driver.CommandSpec(
         "synthetic failure", (sys.executable, "-c", "raise SystemExit(7)"), ROOT
     )
     with pytest.raises(driver.CommandFailure, match="synthetic failure:FAILED:7"):
-        driver.run_command(spec, env=os.environ.copy(), timeout=1, records=records)
-    assert records[-1]["result"] == "FAILED"
+        driver.run_command(spec, env=os.environ.copy(), timeout=1, records=failure_records)
+    assert failure_records[-1]["result"] == "FAILED"
+    assert failure_records[-1]["returncode"] == 7
+    assert "diagnostic" in failure_records[-1]
 
 
-def test_driver_synthetic_missing_cache_failure_is_explicit(
+def test_driver_synthetic_offline_path_has_no_cache_reconstruction(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
     driver = load_driver()
@@ -255,11 +326,22 @@ def test_driver_synthetic_missing_cache_failure_is_explicit(
         env: dict[str, str],
         timeout: float,
         records: list[dict[str, Any]],
+        **kwargs: Any,
     ) -> None:
         if spec.label == "sdist and wheel build":
             output = Path(spec.argv[-1])
             output.mkdir(exist_ok=True)
             (output / "llm_slovenian_repair-0.0.0-py3-none-any.whl").touch()
+        if spec.label == "offline runtime-only frozen sync":
+            driver.record_command(
+                records,
+                spec.label,
+                "FAILED",
+                timeout,
+                returncode=1,
+                diagnostic="offline cache unavailable",
+            )
+            raise driver.CommandFailure(spec.label, "FAILED", 1)
         records.append({"label": spec.label, "result": "PASSED", "timeout_seconds": timeout})
 
     monkeypatch.setattr(driver, "run_command", fake_run)
@@ -271,5 +353,6 @@ def test_driver_synthetic_missing_cache_failure_is_explicit(
         (repo / "uv.lock").write_bytes(LOCKFILE.read_bytes())
         result = driver.run_verification(repo, parent, 1)
     assert result["result"] == "FAILED"
-    assert result["failure"] == "CACHED_RUNTIME_WHEEL_MISSING"
+    assert result["failure"] == "offline runtime-only frozen sync:FAILED:1"
+    assert result["commands"][-1]["label"] == "offline runtime-only frozen sync"
     assert result["cleanup"] == "PASSED"

@@ -38,16 +38,23 @@ creation and filesystem lookup are unsupported. The driver does not use a fixed
 shared venv or remove caller paths.
 
 The first frozen sync may use the configured package registry to populate the
-isolated cache. The driver then materializes the locked runtime wheel entries
-from that cache into an owned wheelhouse. The second fresh Python 3.12
-environment switches uv to `UV_OFFLINE=1`/`--offline`, disables indexes, and
-installs the built wheel with its full declared runtime dependency closure from
-that wheelhouse; it deliberately does not use `--no-deps`. It then imports the
-package, `pydantic`, `pydantic-core`, and `httpx` from a directory outside the
-repository and checks their locked versions and package metadata. Missing
-cached dependencies fail the proof. Every subprocess has a finite timeout, and
-the owned environment, cache, wheelhouse, and build artifacts are cleaned by
-context-managed temporary-directory cleanup.
+isolated cache. The driver then creates a fresh second Python 3.12 environment
+and runs uv's lock-driven `UV_OFFLINE=1 uv sync --frozen --no-dev
+--no-install-project` against that same cache. This installs the complete exact
+runtime closure without project code or private uv cache-layout assumptions. The
+built project wheel is then installed normally with `uv pip install --offline`
+and its declared dependencies; the lockfile remains the only dependency source.
+The driver imports the package, `pydantic`, `pydantic-core`, and `httpx` from a
+directory outside the repository and checks every locked runtime dependency's
+version and normalized metadata. Every subprocess has a finite timeout. Failed
+commands retain only a bounded, control-free, path-redacted stdout/stderr tail;
+successful records contain no command output. The owned environment, cache, and
+build artifacts are cleaned by context-managed temporary-directory cleanup.
+
+The earlier `fac9f68` Application-baseline failure remains causally unresolved;
+its subprocess output was suppressed before bounded diagnostics were added.
+Future failures will include enough sanitized tail output to identify the
+earliest failing boundary without exposing environment values or private text.
 
 The driver also runs the focused contract tests, full pytest, Ruff, mypy,
 separate OAP unittest discovery, and both sdist/wheel builds in the required
