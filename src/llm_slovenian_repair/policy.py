@@ -40,10 +40,10 @@ class PolicyConfig(BaseModel):
     schema_version: StrictInt = 1
     mode: RepairMode = RepairMode.DETECT_ONLY
 
-    max_review_requests: PolicyNonNegativeInt = 1
-    max_generative_passes: PolicyNonNegativeInt = 1
+    max_review_requests: PolicyPositiveInt = 1
+    max_generative_passes: PolicyPositiveInt = 1
     max_automatic_retries: PolicyNonNegativeInt = 0
-    max_concurrent_reviews: PolicyNonNegativeInt = 1
+    max_concurrent_reviews: PolicyPositiveInt = 1
     max_targets: PolicyPositiveInt = 8
     max_target_words: PolicyPositiveInt = 6
     max_replacement_words: PolicyPositiveInt = 8

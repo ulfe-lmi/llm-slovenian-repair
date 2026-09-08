@@ -40,6 +40,13 @@ class EvidenceCompleteness(StrEnum):
     UNKNOWN = "UNKNOWN"
 
 
+class ContextDenominatorState(StrEnum):
+    """Whether the compatible context denominator is known exactly."""
+
+    KNOWN = "KNOWN"
+    UNKNOWN = "UNKNOWN"
+
+
 class RepairMode(StrEnum):
     """The finite policy modes reserved for later pipeline work."""
 
@@ -53,8 +60,6 @@ class AcceptanceClass(StrEnum):
     """Finite labels for the authority that accepted an edit proposal."""
 
     AUTO_REPAIR = "AUTO_REPAIR"
-    SHADOW = "SHADOW"
-    EXPERIMENTAL = "EXPERIMENTAL"
 
 
 class RepairDisposition(StrEnum):
@@ -70,9 +75,14 @@ class RepairReason(StrEnum):
     """Finite, non-sensitive reasons for a result disposition."""
 
     NO_ELIGIBLE_SUSPICION = "no-eligible-suspicion"
+    DETECT_ONLY = "detect-only"
     SHADOW_REVIEW = "shadow-review"
     INSUFFICIENT_EVIDENCE = "insufficient-evidence"
-    MAIN_CAPTURE_FAILED = "main-capture-failed"
+    NO_ACCEPTED_EDIT = "no-accepted-edit"
+    ANALYSIS_BOUND = "analysis-bound"
+    CORPUS_UNAVAILABLE = "corpus-unavailable"
+    CORPUS_INCOMPATIBLE = "corpus-incompatible"
+    OPTIONAL_REVIEW_FAILURE = "optional-review-failure"
     PATCH_ACCEPTED = "patch-accepted"
 
 
@@ -125,6 +135,13 @@ class EvidenceRecord(BaseModel):
     query_complete: StrictBool = False
     lower_bound: NonNegativeInt | None = None
     upper_bound: NonNegativeInt | None = None
+    context_denominator_state: ContextDenominatorState = Field(
+        default=ContextDenominatorState.UNKNOWN,
+        validation_alias=AliasChoices(
+            "context_denominator_state", "context_denominator_knowledge"
+        ),
+        serialization_alias="context_denominator_state",
+    )
     context_denominator: NonNegativeInt | None = None
 
     @model_validator(mode="after")
@@ -137,25 +154,23 @@ class EvidenceRecord(BaseModel):
         ):
             raise ValueError("lower_bound must not exceed upper_bound")
 
-        if self.context_denominator is not None:
+        if self.context_denominator_state is ContextDenominatorState.KNOWN:
+            if self.context_denominator is None:
+                raise ValueError("KNOWN denominator state requires a denominator")
             known_bounds = [bound for bound in bounds if bound is not None]
             if any(bound > self.context_denominator for bound in known_bounds):
                 raise ValueError("known numerator bounds exceed context_denominator")
+        elif self.context_denominator is not None:
+            raise ValueError("UNKNOWN denominator state requires a null denominator")
 
         if self.state is EvidenceState.EXACT:
-            if self.completeness is not EvidenceCompleteness.COMPLETE:
-                raise ValueError("EXACT evidence must be COMPLETE")
             if self.lower_bound is None or self.upper_bound is None:
                 raise ValueError("EXACT evidence requires equal lower and upper bounds")
             if self.lower_bound != self.upper_bound:
                 raise ValueError("EXACT evidence requires equal lower and upper bounds")
             if self.lower_bound == 0 and not self.query_complete:
                 raise ValueError("EXACT zero requires query_complete=True")
-            if self.cutoff is None:
-                raise ValueError("EXACT evidence requires cutoff metadata")
         elif self.state is EvidenceState.CENSORED:
-            if self.completeness is not EvidenceCompleteness.PARTIAL:
-                raise ValueError("CENSORED evidence must be PARTIAL")
             if self.cutoff is None:
                 raise ValueError("CENSORED evidence requires cutoff metadata")
             if self.lower_bound is None and self.upper_bound is None:
@@ -169,9 +184,9 @@ class EvidenceRecord(BaseModel):
             if self.query_complete:
                 raise ValueError("CENSORED evidence cannot claim a complete query")
         else:
-            if self.completeness is not EvidenceCompleteness.UNKNOWN:
-                raise ValueError("UNAVAILABLE evidence must have UNKNOWN completeness")
-            if any(value is not None for value in (*bounds, self.cutoff, self.context_denominator)):
+            if self.context_denominator_state is not ContextDenominatorState.UNKNOWN:
+                raise ValueError("UNAVAILABLE evidence requires UNKNOWN denominator state")
+            if any(value is not None for value in (*bounds, self.cutoff)):
                 raise ValueError("UNAVAILABLE evidence cannot carry counts or cutoff")
             if self.query_complete:
                 raise ValueError("UNAVAILABLE evidence cannot claim query completeness")
@@ -223,6 +238,12 @@ def _validate_non_overlapping(
     for previous, current in zip(ordered, ordered[1:], strict=False):
         if current.start < previous.end:
             raise ValueError("spans must not overlap")
+
+
+def _validate_unique_review_ids(items: tuple[ReviewProposal, ...]) -> None:
+    ids = [proposal.span_id for proposal in items]
+    if len(ids) != len(set(ids)):
+        raise ValueError("review span_id values must be unique")
 
 
 class SelectionBatch(BaseModel):
@@ -391,16 +412,82 @@ class RepairResult(BaseModel):
     def validate_result(self) -> Self:
         _validate_non_overlapping(self.selected_spans)
         _validate_non_overlapping(self.edits)
+        _validate_unique_review_ids(self.reviews)
+        selected_by_id = {span.span_id: span for span in self.selected_spans}
         for span in self.selected_spans:
             if span.end > len(self.original_text):
                 raise ValueError("selected span is outside original_text")
             if self.original_text[span.start : span.end] != span.original:
                 raise ValueError("selected span does not match original_text")
+        for review in self.reviews:
+            if review.span_id not in selected_by_id:
+                raise ValueError("review must refer to a selected span")
         for edit in self.edits:
             if edit.end > len(self.original_text):
                 raise ValueError("edit is outside original_text")
             if self.original_text[edit.start : edit.end] != edit.original:
                 raise ValueError("edit does not match original_text slice")
+            selected = selected_by_id.get(edit.span_id)
+            if selected is None:
+                raise ValueError("edit must refer to a selected span")
+            if (edit.start, edit.end, edit.original) != (
+                selected.start,
+                selected.end,
+                selected.original,
+            ):
+                raise ValueError("edit must match its selected span")
+            if not any(
+                review.span_id == edit.span_id
+                and not review.keep
+                and review.replacement == edit.replacement
+                for review in self.reviews
+            ):
+                raise ValueError("edit must match a replace proposal")
+
+        if not self.selected_spans and (
+            self.review_call_count or self.reviews or self.edits
+        ):
+            raise ValueError("results without selected spans cannot contain review records")
+        if self.reviews and self.review_call_count != 1:
+            raise ValueError("reviews require one review call")
+        if self.review_call_count == 1 and not self.reviews and not (
+            self.disposition is RepairDisposition.DEGRADED_ORIGINAL
+            and self.reason is RepairReason.OPTIONAL_REVIEW_FAILURE
+        ):
+            raise ValueError("a review call without usable reviews requires optional failure")
+        if self.disposition is RepairDisposition.SHADOW_ORIGINAL and (
+            self.review_call_count != 1 or not self.reviews
+        ):
+            raise ValueError("shadow results require one structured review call")
+        if self.disposition is RepairDisposition.DEGRADED_ORIGINAL:
+            if self.reason is RepairReason.OPTIONAL_REVIEW_FAILURE:
+                if self.review_call_count != 1 or self.reviews:
+                    raise ValueError("optional review failure must be one call without reviews")
+            elif self.review_call_count or self.reviews:
+                raise ValueError("degraded results may only record optional review failure")
+        if self.reason is RepairReason.NO_ELIGIBLE_SUSPICION and self.selected_spans:
+            raise ValueError("no-eligible-suspicion results cannot contain selected spans")
+        if self.reason in {
+            RepairReason.DETECT_ONLY,
+            RepairReason.INSUFFICIENT_EVIDENCE,
+        } and (self.review_call_count or self.reviews or self.edits):
+            raise ValueError("this original result reason cannot contain review records")
+
+        expected_disposition = {
+            RepairReason.NO_ELIGIBLE_SUSPICION: RepairDisposition.ORIGINAL,
+            RepairReason.DETECT_ONLY: RepairDisposition.ORIGINAL,
+            RepairReason.INSUFFICIENT_EVIDENCE: RepairDisposition.ORIGINAL,
+            RepairReason.NO_ACCEPTED_EDIT: RepairDisposition.ORIGINAL,
+            RepairReason.SHADOW_REVIEW: RepairDisposition.SHADOW_ORIGINAL,
+            RepairReason.ANALYSIS_BOUND: RepairDisposition.DEGRADED_ORIGINAL,
+            RepairReason.CORPUS_UNAVAILABLE: RepairDisposition.DEGRADED_ORIGINAL,
+            RepairReason.CORPUS_INCOMPATIBLE: RepairDisposition.DEGRADED_ORIGINAL,
+            RepairReason.OPTIONAL_REVIEW_FAILURE: RepairDisposition.DEGRADED_ORIGINAL,
+            RepairReason.PATCH_ACCEPTED: RepairDisposition.PATCHED,
+        }[self.reason]
+        if self.disposition is not expected_disposition:
+            raise ValueError("reason does not match disposition")
+
         if self.changed:
             if self.final_text == self.original_text:
                 raise ValueError("changed results require different final_text")
@@ -413,6 +500,13 @@ class RepairResult(BaseModel):
                 raise ValueError("unchanged results cannot contain edits")
             if self.disposition is RepairDisposition.PATCHED:
                 raise ValueError("patched disposition requires changed=True")
+        if self.disposition is RepairDisposition.PATCHED:
+            if self.review_call_count != 1 or not self.edits:
+                raise ValueError("patched results require one call and an accepted edit")
+            if any(edit.acceptance_class is not AcceptanceClass.AUTO_REPAIR for edit in self.edits):
+                raise ValueError("patched results require AUTO_REPAIR edits")
+        if self.disposition is RepairDisposition.SHADOW_ORIGINAL and self.edits:
+            raise ValueError("shadow results cannot contain edits")
         return self
 
 
@@ -424,6 +518,7 @@ PolicyMode = RepairMode
 
 __all__ = [
     "AcceptanceClass",
+    "ContextDenominatorState",
     "Edit",
     "EvidenceCompleteness",
     "EvidenceRecord",

@@ -104,6 +104,7 @@ assert module.__version__ == "0.0.0"
 assert module.__all__ == [
     "__version__",
     "AcceptanceClass",
+    "ContextDenominatorState",
     "Edit",
     "EvidenceCompleteness",
     "EvidenceRecord",

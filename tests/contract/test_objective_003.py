@@ -10,6 +10,7 @@ from pydantic import ValidationError
 
 from llm_slovenian_repair import (
     AcceptanceClass,
+    ContextDenominatorState,
     EvidenceCompleteness,
     EvidenceRecord,
     EvidenceState,
@@ -35,7 +36,14 @@ def evidence(
     cutoff: str | None = "synthetic-cutoff",
     query_complete: bool = False,
     denominator: int | None = 20,
+    denominator_state: ContextDenominatorState | None = None,
 ) -> EvidenceRecord:
+    if denominator_state is None:
+        denominator_state = (
+            ContextDenominatorState.KNOWN
+            if denominator is not None
+            else ContextDenominatorState.UNKNOWN
+        )
     return EvidenceRecord(
         evidence_id="ev-1",
         state=state,
@@ -50,6 +58,7 @@ def evidence(
         query_complete=query_complete,
         lower_bound=lower,
         upper_bound=upper,
+        context_denominator_state=denominator_state,
         context_denominator=denominator,
     )
 
@@ -156,6 +165,44 @@ def test_evidence_accepts_exact_censored_and_unavailable_without_fabricated_zero
     assert unavailable.lower_bound is None and unavailable.context_denominator is None
 
 
+def test_evidence_keeps_query_value_and_source_completeness_independent() -> None:
+    partial_exact = evidence(
+        complete=EvidenceCompleteness.PARTIAL,
+        cutoff=None,
+        query_complete=False,
+    )
+    unknown_exact = evidence(
+        complete=EvidenceCompleteness.UNKNOWN,
+        cutoff=None,
+        query_complete=False,
+    )
+    complete_uncut = evidence(complete=EvidenceCompleteness.COMPLETE, cutoff=None)
+    assert partial_exact.lower_bound == unknown_exact.lower_bound == 4
+    assert complete_uncut.cutoff is None
+
+
+def test_evidence_denominator_knowledge_is_explicit_and_serialized() -> None:
+    known = evidence(denominator_state=ContextDenominatorState.KNOWN, denominator=20)
+    unknown = evidence(denominator_state=ContextDenominatorState.UNKNOWN, denominator=None)
+    assert known.model_dump(mode="json")["context_denominator_state"] == "KNOWN"
+    assert unknown.model_dump(mode="json")["context_denominator_state"] == "UNKNOWN"
+    assert EvidenceRecord.model_validate_json(unknown.model_dump_json()) == unknown
+
+    with pytest.raises(ValidationError):
+        evidence(denominator_state=ContextDenominatorState.KNOWN, denominator=None)
+    with pytest.raises(ValidationError):
+        evidence(denominator_state=ContextDenominatorState.UNKNOWN, denominator=20)
+    with pytest.raises(ValidationError):
+        evidence(
+            EvidenceState.UNAVAILABLE,
+            lower=None,
+            upper=None,
+            cutoff=None,
+            denominator=0,
+            denominator_state=ContextDenominatorState.KNOWN,
+        )
+
+
 def test_review_relationships_reject_invalid_proposals_at_validation_boundary() -> None:
     invalid: tuple[dict[str, Any], ...] = (
         {"span_id": "s", "keep": True, "replacement": "x"},
@@ -204,6 +251,8 @@ def test_edits_and_results_reject_identity_bad_slice_and_inconsistent_flags() ->
         replacement="To!",
         acceptance_class=AcceptanceClass.AUTO_REPAIR,
     )
+    selected = span("s", 0, "To")
+    replacement_review = ReviewProposal(span_id="s", keep=False, replacement="To!")
     with pytest.raises(ValidationError):
         RepairResult(
             original_text="To",
@@ -211,6 +260,8 @@ def test_edits_and_results_reject_identity_bad_slice_and_inconsistent_flags() ->
             changed=False,
             disposition=RepairDisposition.ORIGINAL,
             reason=RepairReason.PATCH_ACCEPTED,
+            selected_spans=(selected,),
+            reviews=(replacement_review,),
             edits=(edit,),
         )
     bad_coordinate_edit = OriginalCoordinateEdit(
@@ -228,6 +279,8 @@ def test_edits_and_results_reject_identity_bad_slice_and_inconsistent_flags() ->
             changed=True,
             disposition=RepairDisposition.PATCHED,
             reason=RepairReason.PATCH_ACCEPTED,
+            selected_spans=(selected,),
+            reviews=(replacement_review,),
             edits=(bad_coordinate_edit,),
         )
     result = RepairResult(
@@ -236,12 +289,17 @@ def test_edits_and_results_reject_identity_bad_slice_and_inconsistent_flags() ->
         changed=True,
         disposition=RepairDisposition.PATCHED,
         reason=RepairReason.PATCH_ACCEPTED,
+        selected_spans=(selected,),
+        reviews=(replacement_review,),
         edits=(edit,),
+        review_call_count=1,
     )
     assert result.changed is True
 
 
 def test_result_validates_original_coordinates_and_outcomes() -> None:
+    selected = span("s", 0, "To")
+    review = ReviewProposal(span_id="s", keep=False, replacement="To!")
     edit = OriginalCoordinateEdit(
         span_id="s",
         start=0,
@@ -256,10 +314,187 @@ def test_result_validates_original_coordinates_and_outcomes() -> None:
         changed=True,
         disposition=RepairDisposition.PATCHED,
         reason=RepairReason.PATCH_ACCEPTED,
+        selected_spans=(selected,),
+        reviews=(review,),
         edits=(edit,),
         review_call_count=1,
     )
     assert patched.model_validate_json(json.dumps(patched.model_dump(mode="json"))) == patched
+
+
+def test_result_rejects_unselected_or_unmatched_review_and_edit_records() -> None:
+    selected = span("s", 0, "To")
+    keep = ReviewProposal(span_id="s", keep=True)
+    unknown_review = ReviewProposal(span_id="other", keep=True)
+    with pytest.raises(ValidationError):
+        RepairResult(
+            original_text="To",
+            final_text="To",
+            changed=False,
+            disposition=RepairDisposition.ORIGINAL,
+            reason=RepairReason.NO_ACCEPTED_EDIT,
+            selected_spans=(selected,),
+            reviews=(unknown_review,),
+            review_call_count=1,
+        )
+    with pytest.raises(ValidationError):
+        RepairResult(
+            original_text="To",
+            final_text="To",
+            changed=False,
+            disposition=RepairDisposition.ORIGINAL,
+            reason=RepairReason.NO_ACCEPTED_EDIT,
+            selected_spans=(selected,),
+            reviews=(keep, keep),
+            review_call_count=1,
+        )
+    unmatched_edit = OriginalCoordinateEdit(
+        span_id="s",
+        start=0,
+        end=2,
+        original="To",
+        replacement="Ti",
+        acceptance_class=AcceptanceClass.AUTO_REPAIR,
+    )
+    with pytest.raises(ValidationError):
+        RepairResult(
+            original_text="To",
+            final_text="Ti",
+            changed=True,
+            disposition=RepairDisposition.PATCHED,
+            reason=RepairReason.PATCH_ACCEPTED,
+            selected_spans=(selected,),
+            edits=(unmatched_edit,),
+            review_call_count=1,
+        )
+    mismatched_edit = OriginalCoordinateEdit(
+        span_id="s",
+        start=1,
+        end=3,
+        original="o ",
+        replacement="x",
+        acceptance_class=AcceptanceClass.AUTO_REPAIR,
+    )
+    with pytest.raises(ValidationError):
+        RepairResult(
+            original_text="To ",
+            final_text="Tx",
+            changed=True,
+            disposition=RepairDisposition.PATCHED,
+            reason=RepairReason.PATCH_ACCEPTED,
+            selected_spans=(selected,),
+            reviews=(ReviewProposal(span_id="s", keep=False, replacement="x"),),
+            edits=(mismatched_edit,),
+            review_call_count=1,
+        )
+
+
+def test_result_reason_disposition_and_call_invariants_are_exact() -> None:
+    selected = span("s", 0, "To")
+    keep = ReviewProposal(span_id="s", keep=True)
+    valid_results = (
+        RepairResult(
+            original_text="To",
+            final_text="To",
+            changed=False,
+            disposition=RepairDisposition.ORIGINAL,
+            reason=RepairReason.NO_ELIGIBLE_SUSPICION,
+        ),
+        RepairResult(
+            original_text="To",
+            final_text="To",
+            changed=False,
+            disposition=RepairDisposition.ORIGINAL,
+            reason=RepairReason.DETECT_ONLY,
+            selected_spans=(selected,),
+        ),
+        RepairResult(
+            original_text="To",
+            final_text="To",
+            changed=False,
+            disposition=RepairDisposition.ORIGINAL,
+            reason=RepairReason.NO_ACCEPTED_EDIT,
+            selected_spans=(selected,),
+            reviews=(keep,),
+            review_call_count=1,
+        ),
+        RepairResult(
+            original_text="To",
+            final_text="To",
+            changed=False,
+            disposition=RepairDisposition.SHADOW_ORIGINAL,
+            reason=RepairReason.SHADOW_REVIEW,
+            selected_spans=(selected,),
+            reviews=(keep,),
+            review_call_count=1,
+        ),
+        RepairResult(
+            original_text="To",
+            final_text="To",
+            changed=False,
+            disposition=RepairDisposition.DEGRADED_ORIGINAL,
+            reason=RepairReason.ANALYSIS_BOUND,
+        ),
+        RepairResult(
+            original_text="To",
+            final_text="To",
+            changed=False,
+            disposition=RepairDisposition.DEGRADED_ORIGINAL,
+            reason=RepairReason.OPTIONAL_REVIEW_FAILURE,
+            selected_spans=(selected,),
+            review_call_count=1,
+        ),
+    )
+    assert len(valid_results) == 6
+
+    with pytest.raises(ValidationError):
+        RepairResult(
+            original_text="To",
+            final_text="To",
+            changed=False,
+            disposition=RepairDisposition.ORIGINAL,
+            reason=RepairReason.PATCH_ACCEPTED,
+        )
+    with pytest.raises(ValidationError):
+        RepairResult(
+            original_text="To",
+            final_text="To",
+            changed=False,
+            disposition=RepairDisposition.SHADOW_ORIGINAL,
+            reason=RepairReason.SHADOW_REVIEW,
+            selected_spans=(selected,),
+        )
+    with pytest.raises(ValidationError):
+        RepairResult(
+            original_text="To",
+            final_text="To",
+            changed=False,
+            disposition=RepairDisposition.ORIGINAL,
+            reason=RepairReason.NO_ACCEPTED_EDIT,
+            selected_spans=(selected,),
+            reviews=(keep,),
+            review_call_count=0,
+        )
+    with pytest.raises(ValidationError):
+        RepairResult(
+            original_text="To",
+            final_text="To",
+            changed=False,
+            disposition=RepairDisposition.DEGRADED_ORIGINAL,
+            reason=RepairReason.CORPUS_UNAVAILABLE,
+            selected_spans=(selected,),
+            review_call_count=1,
+        )
+
+    with pytest.raises(ValidationError):
+        OriginalCoordinateEdit(
+            span_id="s",
+            start=0,
+            end=2,
+            original="To",
+            replacement="Ti",
+            acceptance_class="SHADOW",  # type: ignore[arg-type]
+        )
 
 
 def test_policy_defaults_and_architectural_limits() -> None:
@@ -271,6 +506,9 @@ def test_policy_defaults_and_architectural_limits() -> None:
     assert policy.persist_production_text is False
 
     invalid_overrides: tuple[tuple[str, Any], ...] = (
+        ("max_review_requests", 0),
+        ("max_generative_passes", 0),
+        ("max_concurrent_reviews", 0),
         ("max_review_requests", 2),
         ("max_generative_passes", 2),
         ("max_automatic_retries", 1),

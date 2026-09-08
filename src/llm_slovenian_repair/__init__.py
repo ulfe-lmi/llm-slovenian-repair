@@ -4,6 +4,7 @@ __version__ = "0.0.0"
 
 from .contracts import (
     AcceptanceClass,
+    ContextDenominatorState,
     Edit,
     EvidenceCompleteness,
     EvidenceRecord,
@@ -26,6 +27,7 @@ from .policy import Policy, PolicyConfig
 __all__ = [
     "__version__",
     "AcceptanceClass",
+    "ContextDenominatorState",
     "Edit",
     "EvidenceCompleteness",
     "EvidenceRecord",
