@@ -57,3 +57,8 @@ GET and cleanup, but its bounded structural sample stopped before importer
 execution on a row-shape mismatch. No real importer output, external archive, or
 row is retained, committed, or packaged; real compatibility acceptance is not
 claimed.
+Round 006-d adds only a content-free, standard-library row classifier and
+synthetic tests. Its single verifier-first fetch passed archive verification but
+stopped before 32 complete member rows reached the classifier, so its receipt is
+`BLOCKED_ROW_DIAGNOSTIC_INPUT` with null diagnosis aggregates and no importer
+execution. No format correction or compatibility claim is made.

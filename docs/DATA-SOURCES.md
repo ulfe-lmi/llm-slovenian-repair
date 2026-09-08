@@ -116,3 +116,10 @@ blocked at the source-specific terminal tab. 006-c binds exactly one such tab
 without admitting an optional 29th field, but its first-32-row structural sampler
 stopped before importer execution. No external bytes or rows are retained, and
 neither receipt authorizes redistribution or a release claim.
+Round 006-d adds a content-free structural classifier and synthetic contract
+tests. Its one verifier-first archive fetch passed exact artifact verification,
+but the bounded member-prefix handoff failed before 32 complete rows reached the
+classifier. The 006-d receipt records the exact archive/header identities,
+`BLOCKED_ROW_DIAGNOSTIC_INPUT`, null aggregate diagnosis, no importer execution,
+cleanup, and no retained source bytes. It does not select an importer format or
+authorize redistribution.

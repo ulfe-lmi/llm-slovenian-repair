@@ -68,5 +68,12 @@ exact-one-fetch and real importer-smoke evidence are not claimable. No external
 archive or row is retained, committed, or packaged; see the receipt under
 `resources/source-acquisitions/` and the objective-006 report for the precise
 partial boundary.
+Round 006-d adds a standard-library, content-free classifier for bounded
+unigram-row structure. Its synthetic contract suite passes, and one verifier-
+first archive fetch was attempted under the round's exact boundary. The member
+prefix did not deliver 32 complete rows to the classifier, so the 006-d receipt
+is `BLOCKED_ROW_DIAGNOSTIC_INPUT`; no aggregate diagnosis, importer execution,
+format correction, or compatibility claim is made. The temporary tree and all
+source bytes were removed.
 Do not execute the [draft roadmap](oap/strategic-instructions/INITIAL-ROADMAP.md)
 without strategic reconciliation and deliberate owner activation.

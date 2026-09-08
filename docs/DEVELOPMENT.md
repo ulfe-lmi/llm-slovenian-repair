@@ -112,3 +112,11 @@ one verified GET and cleanup, but its real importer smoke is blocked at the firs
 data row by the source-specific terminal tab. The 006-c receipt records one new
 verified GET and cleanup, but its bounded first-32-row structural sampler stopped
 before importer execution; no real compatibility or vocabulary coverage is claimed.
+Round 006-d adds `scripts/diagnose_unigram_rows.py`, a standard-library
+classifier that reports only bounded row-shape aggregates and finite parser
+failure labels. Synthetic tests cover terminal delimiters, field counts,
+quoting, embedded tabs, newline/UTF-8 anomalies, limits, and content-free
+serialization. Its single verifier-first fetch was blocked before 32 complete
+member rows reached the classifier (`requested-row-incomplete`); the receipt
+therefore stores null diagnosis aggregates, records no importer run, and makes
+no format or compatibility claim. The temporary source tree was deleted.
