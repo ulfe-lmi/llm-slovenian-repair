@@ -695,3 +695,88 @@ def test_006_i_receipt_has_complete_fixed_numeric_profile_and_safe_failure() -> 
 
     assert not forbidden.intersection(keys(receipt))
     assert "implementation_head" not in receipt
+
+
+def test_006_j_receipt_refines_marker_identity_and_counterfactual_boundary() -> None:
+    receipt = json.loads(
+        (
+            ROOT
+            / "resources/source-acquisitions/gigafida-2.0-words-006-j.json"
+        ).read_text(encoding="utf-8")
+    )
+    assert receipt["schema_version"] == 1
+    assert receipt["receipt_id"] == "gigafida-2.0-words-006-j"
+    assert receipt["status"] == "BLOCKED_NUMERIC_DIAGNOSTIC_IMPORT"
+    assert receipt["preflight"]["result"] == "PASSED"
+    evidence = receipt["acquisition_evidence"]
+    assert evidence["006_j_get_count"] == 1
+    assert evidence["cumulative_observed_objective_get_count"] == 12
+    assert evidence["counterfactual_importer_call_attempted"] is True
+    assert evidence["second_get_attempted"] is False
+    assert evidence["temporary_environment_absent"] is True
+    assert evidence["temporary_tree_absent"] is True
+    assert evidence["source_data_retained"] is False
+    assert evidence["redistribution_ready"] is False
+    assert receipt["structural_diagnostic"]["rows_read"] == 32
+    assert receipt["structural_diagnostic"]["aggregate"]["csv_field_count_histogram"] == {
+        "28": 31,
+        "29": 1,
+    }
+
+    numeric = receipt["numeric_diagnostic"]
+    marker = numeric["row_1_marker_profile"]
+    assert marker["other_ascii_marker_cell_count"] == 24
+    assert marker["distinct_numeric_marker_count"] == 24
+    assert marker["all_numeric_markers_identical"] is False
+    assert set(marker["refinement_by_column"].values()) == {"ASCII_MIXED_OTHER"}
+    assert marker["evidence_predicates"] == [
+        "NUMERIC_MARKERS_COLUMN_SPECIFIC",
+        "IDENTITY_PROFILE_OUTLIER",
+    ]
+    assert marker["identity_profile_matches_rows_2_to_32"] == 0
+    assert all(
+        item["uniform"] is False for item in marker["family_profiles"].values()
+    )
+    assert not any(marker["same_column_marker_recurrence"].values())
+    counterfactual = receipt["counterfactual_omit_row_1"]
+    assert counterfactual["envelope"] == {
+        "preamble_lines": 14,
+        "header_byte_length": 834,
+        "data_rows": 31,
+        "readline_calls": 46,
+        "header_preserved": True,
+        "preamble_preserved": True,
+        "first_data_row_omitted": True,
+    }
+    assert counterfactual["importer"] == {
+        "attempts": 1,
+        "runs_completed": 0,
+        "record_count": None,
+        "failure": {"reason": "invalid-decimal", "column": 6},
+    }
+
+    forbidden = {
+        "fields",
+        "values",
+        "raw",
+        "records",
+        "row_hash",
+        "decoded_strings",
+        "source_rows",
+        "header_values",
+        "token_text",
+        "code_points",
+        "byte_substrings",
+        "token_length",
+    }
+
+    def keys(value: object) -> list[str]:
+        if isinstance(value, dict):
+            nested = [item for child in value.values() for item in keys(child)]
+            return [key for key in value] + nested
+        if isinstance(value, list):
+            return [item for child in value for item in keys(child)]
+        return []
+
+    assert not forbidden.intersection(keys(receipt))
+    assert "implementation_head" not in receipt

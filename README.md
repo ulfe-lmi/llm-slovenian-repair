@@ -109,5 +109,14 @@ numeric content. The one 006-i importer call returned `invalid-count:5` after
 the complete profile. Its receipt records cumulative eleven GETs, prior failures,
 exact cleanup, and syntax evidence only; no locale/conversion choice, full import,
 redistribution, release, or deployment claim is made.
+Round 006-j keeps importer semantics unchanged and refines the row-1 `OTHER_ASCII`
+boundary with fixed marker, absolute/share/relative-family, identity-equality, and
+NFC-casefold relation predicates. The 24 row-1 markers are content-free
+`ASCII_MIXED_OTHER` observations, all distinct and nonrecurring in their columns;
+the derived identity profile is an outlier. One in-memory envelope omitting only row
+1 reaches the next current-parser boundary, `invalid-decimal:6`, with `max_rows=31`.
+The receipt records one new GET (cumulative twelve), exact cleanup, unresolved row
+role/unit meaning, and no conversion, full-import, redistribution, release, or
+deployment claim.
 Do not execute the [draft roadmap](oap/strategic-instructions/INITIAL-ROADMAP.md)
 without strategic reconciliation and deliberate owner activation.

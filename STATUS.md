@@ -103,3 +103,16 @@ semantics. One importer call then returned the safe `invalid-count:5` boundary.
 The 006-i receipt records one GET (cumulative eleven), preserved prior failures,
 exact cleanup, no retained source data, and no redistribution or compatibility
 acceptance claim.
+
+Round 006-j refines only the content-free numeric diagnostic. It classifies each
+row-1 `OTHER_ASCII` marker into a fixed enum, reports distinctness and uniformity
+within absolute/share/relative families, checks same-column recurrence, and profiles
+the first four identity fields using fixed categories, equality partitions, and
+NFC-casefold booleans. The observed 24 markers are all distinct
+`ASCII_MIXED_OTHER` values, with no same-column recurrence; the row-1 identity
+profile is an outlier and no row-role or unit meaning is selected. A fresh in-memory
+envelope retaining the 14-line preamble and header but omitting row 1 made exactly
+one importer call with `max_rows=31`, reaching `invalid-decimal:6`; the original
+diagnostic call remains `invalid-count:5`. The 006-j receipt records one GET
+(cumulative twelve), exact cleanup, no retained source data, and no redistribution,
+full-import, conversion, release, or deployment authorization.

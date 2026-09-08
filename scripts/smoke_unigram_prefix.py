@@ -701,7 +701,7 @@ def _run_verified_numeric_diagnostic(
     importer = _import_once_for_numeric_diagnostic(envelope)
     counterfactual_envelope = _omit_first_data_row(envelope)
     counterfactual_importer = _import_once_for_counterfactual(counterfactual_envelope)
-    failure = importer["failure"]
+    failure = importer["failure"] or counterfactual_importer["failure"]
     return {
         "schema_version": 1,
         "status": (

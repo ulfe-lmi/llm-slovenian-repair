@@ -179,3 +179,16 @@ bounded. The importer is called once only to report an allowlisted exact
 `reason:column` result. Synthetic tests cover every enum category, overlap
 priority, all columns, conservation, deterministic serialization, structure-first
 failure, mode exclusion, and no-content output.
+
+Round 006-j extends the diagnostic after structural success with a closed
+row-1-marker refinement and a content-free identity profile. It emits only fixed
+marker categories, family distinctness/uniformity, same-column recurrence, identity
+categories, equality partitions, NFC-casefold booleans, and bounded evidence
+predicates; it never emits marker text, values, lengths, hashes, or record objects.
+The observed row-1 profile has 24 distinct `ASCII_MIXED_OTHER` markers, no
+same-column recurrence, and an identity-profile outlier. A counterfactual in-memory
+envelope preserves the original preamble/header and rows 2–32, then calls the
+unchanged importer once with `max_rows=31`; it reaches the safe
+`invalid-decimal:6` boundary while the original envelope remains at
+`invalid-count:5`. Row-role and unit meanings remain unresolved pending strategic
+selection; no importer conversion or production behavior changed.

@@ -179,3 +179,16 @@ returned `invalid-count:5`. These are content-free syntax observations: they do
 not infer locale, grouping, numeric meaning, conversion, denominator completeness,
 full-import compatibility, or redistribution authority. The 006-i receipt records
 one GET (cumulative eleven), preserved 006-f/g/h failures, and exact cleanup.
+
+Round 006-j keeps this verifier-first boundary and adds only content-free
+row-1 refinement. Its fixed marker categories report 24 distinct
+`ASCII_MIXED_OTHER` markers, no same-column recurrence, and column-specific
+absolute/share/relative families. The first four identity fields produce a fixed
+category/equality/NFC-casefold profile that is an outlier against rows 2–32; this
+does not identify metadata, units, missing lexical values, or a permitted skip.
+The helper then builds an in-memory envelope with the original preamble/header and
+rows 2–32, invokes the unchanged importer exactly once with `max_rows=31`, and
+records only the safe `invalid-decimal:6` boundary. One new direct GET brings the
+cumulative objective-006 count to twelve. No source content is retained, and no
+conversion, full import, rights, redistribution, release, or deployment claim is
+made.
