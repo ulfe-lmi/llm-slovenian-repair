@@ -48,6 +48,7 @@ EXPECTED_MEMBER_NAME = (
 EXPECTED_DELIMITER = "\t"
 EXPECTED_ENCODING = "UTF-8"
 EXPECTED_NEWLINE = "CRLF"
+EXPECTED_DATA_RECORD_TERMINATOR = "TAB_BEFORE_CRLF"
 EXPECTED_HEADER_LINE_NUMBER = 15
 EXPECTED_HEADER: tuple[str, ...] = (
     "Oblika z malimi črkami",
@@ -198,6 +199,7 @@ class UnigramProvenance(BaseModel):
     delimiter: StrictStr = EXPECTED_DELIMITER
     encoding: StrictStr = EXPECTED_ENCODING
     newline: StrictStr = EXPECTED_NEWLINE
+    data_record_terminator: StrictStr = EXPECTED_DATA_RECORD_TERMINATOR
     header_line_number: StrictInt = EXPECTED_HEADER_LINE_NUMBER
     normalization: StrictStr = "source-exact"
     derived_lookup_transform: StrictStr = "NFC_CASEFOLD"
@@ -216,6 +218,7 @@ class UnigramProvenance(BaseModel):
         "member_name",
         "encoding",
         "newline",
+        "data_record_terminator",
         "normalization",
         "derived_lookup_transform",
         "evidence_scope",
@@ -260,6 +263,8 @@ class UnigramProvenance(BaseModel):
             raise ValueError("unsupported delimiter")
         if self.encoding != EXPECTED_ENCODING or self.newline != EXPECTED_NEWLINE:
             raise ValueError("unsupported encoding or newline")
+        if self.data_record_terminator != EXPECTED_DATA_RECORD_TERMINATOR:
+            raise ValueError("unsupported data-record terminator")
         if self.header_line_number != EXPECTED_HEADER_LINE_NUMBER:
             raise ValueError("header line does not match observed schema")
         if self.normalization != "source-exact":
@@ -405,6 +410,7 @@ class UnigramImportSummary(BaseModel):
     header_sha256: StrictStr = EXPECTED_HEADER_SHA256
     normalization: StrictStr = "source-exact"
     derived_lookup_transform: StrictStr = "NFC_CASEFOLD"
+    data_record_terminator: StrictStr = EXPECTED_DATA_RECORD_TERMINATOR
     source_completeness: EvidenceCompleteness
     query_completeness: EvidenceCompleteness
     import_completeness: EvidenceCompleteness
@@ -427,6 +433,7 @@ class UnigramImportSummary(BaseModel):
             "header_sha256": EXPECTED_HEADER_SHA256,
             "normalization": "source-exact",
             "derived_lookup_transform": "NFC_CASEFOLD",
+            "data_record_terminator": EXPECTED_DATA_RECORD_TERMINATOR,
         }
         for field, value in expected.items():
             if getattr(self, field) != value:
@@ -454,6 +461,7 @@ class UnigramImportResult(BaseModel):
             "header_sha256": self.provenance.header_sha256,
             "normalization": self.provenance.normalization,
             "derived_lookup_transform": self.provenance.derived_lookup_transform,
+            "data_record_terminator": self.provenance.data_record_terminator,
             "source_completeness": self.provenance.source_completeness,
             "query_completeness": self.provenance.query_completeness,
             "import_completeness": self.provenance.import_completeness,
@@ -585,8 +593,21 @@ def _decode_line(raw_line: bytes, line_number: int) -> str:
         raise _failure(UnigramImportFailure.INVALID_SOURCE_TEXT, str(line_number)) from exc
 
 
-def _parse_quoted_tsv(line: str, limits: UnigramImportLimits, line_number: int) -> tuple[str, ...]:
+def _parse_quoted_tsv(
+    line: str,
+    limits: UnigramImportLimits,
+    line_number: int,
+    *,
+    data_record: bool = False,
+) -> tuple[str, ...]:
     """Parse the observed all-fields-quoted TSV form with no row buffering."""
+
+    if data_record:
+        if not line.endswith("\t"):
+            raise _failure(UnigramImportFailure.INVALID_QUOTING, str(line_number))
+        line = line[:-1]
+    elif line.endswith("\t"):
+        raise _failure(UnigramImportFailure.INVALID_QUOTING, str(line_number))
 
     fields: list[str] = []
     position = 0
@@ -753,7 +774,7 @@ def import_unigrams(
         if len(records) >= actual_limits.max_rows:
             raise _failure(UnigramImportFailure.ROW_LIMIT)
         line = _decode_line(raw_line, row_number)
-        fields = _parse_quoted_tsv(line, actual_limits, row_number)
+        fields = _parse_quoted_tsv(line, actual_limits, row_number, data_record=True)
         record = _make_record(fields, row_number=row_number, provenance=provenance)
         previous = records_by_key.get(record.record_key)
         if previous is not None:
@@ -803,6 +824,7 @@ __all__ = [
     "EXPECTED_HEADER",
     "EXPECTED_HEADER_BYTE_LENGTH",
     "EXPECTED_HEADER_LINE_NUMBER",
+    "EXPECTED_DATA_RECORD_TERMINATOR",
     "EXPECTED_HEADER_SHA256",
     "EXPECTED_MEMBER_NAME",
     "EXPECTED_NEWLINE",

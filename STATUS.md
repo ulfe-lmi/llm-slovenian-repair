@@ -43,11 +43,17 @@ binds exact real versus project-synthetic provenance, preserves morphology
 ambiguity, derives NFC/casefold lookup values without rewriting source text, and
 rejects malformed UTF-8, controls, counts, zero-without-complete-query,
 duplicates, bad quoting, truncation, and resource-limit violations. Objective-006
-symbols are available only from the lazy submodule's `import_unigrams` seam.
+symbols are available only from the lazy submodule's `import_unigrams` seam. The
+source format distinguishes the delimiter-free header from data rows with exactly
+one terminal tab before CRLF (`TAB_BEFORE_CRLF`), consumed as a record terminator
+and not a 29th field.
 
 The 006-a recovery receipt remains a historical partial handoff with three prior
 GETs and a false exact-one condition. The 006-b receipt records one verified GET,
 accepted archive verification, and successful cleanup, but its bounded real smoke
 is `BLOCKED`: the first data row has a trailing empty 29th field, outside the
-exact 28-field parser contract. No real importer output, external archive, or row
-is retained, committed, or packaged; real compatibility acceptance is not claimed.
+exact 28-field parser contract. The 006-c receipt records one additional verified
+GET and cleanup, but its bounded structural sample stopped before importer
+execution on a row-shape mismatch. No real importer output, external archive, or
+row is retained, committed, or packaged; real compatibility acceptance is not
+claimed.

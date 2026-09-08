@@ -96,8 +96,10 @@ caller-owned binary or text stream only; acquisition, ZIP verification, and
 member selection remain outside its entry point. Version 1 is bound to the
 lower-case form/lemma/POS member
 `GF2.0-words-all-lowercase_forms-lemmas-parts_of_speech-taxonomy-entire.tsv`,
-the 28-field all-quoted tab header, UTF-8, and CRLF. It reads incrementally under
-finite byte/row/line/field limits and emits immutable records plus a canonical
+the 28-field all-quoted tab header, UTF-8, and CRLF. The header has no terminal
+tab; each data row has exactly one terminal tab before CRLF, recorded as
+`data_record_terminator=TAB_BEFORE_CRLF`, and that tab is not a semantic field.
+It reads incrementally under finite byte/row/line/field limits and emits immutable records plus a canonical
 hash summary. Exact source fields are retained; `NFC_CASEFOLD` is an exposed
 derived lookup transform. Counts are strict nonnegative integers, published
 relative values use `Decimal` and their original text, and zero is accepted only
@@ -109,7 +111,8 @@ The checked-in `tests/fixtures/unigram/` data is project-authored synthetic data
 under the repository `LICENSE`; it is not a Gigafida sample and is excluded from
 the runtime package. The versioned receipts under
 `resources/source-acquisitions/` preserve the 006-a recovery handoff and the
-006-b controlled attempt. The latter records one exact verified GET and cleanup,
-but its real importer smoke is blocked by a trailing empty 29th field on the first
-data row, outside the exact 28-field parser contract. No external bytes or rows
-are retained, and neither receipt authorizes redistribution or a release claim.
+006-b controlled attempt, and the 006-c bounded corrective smoke. The former
+blocked at the source-specific terminal tab. 006-c binds exactly one such tab
+without admitting an optional 29th field, but its first-32-row structural sampler
+stopped before importer execution. No external bytes or rows are retained, and
+neither receipt authorizes redistribution or a release claim.

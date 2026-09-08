@@ -90,6 +90,9 @@ fixture path is not included in the runtime wheel.
 Objective 006 adds `llm_slovenian_repair.unigram_importer`. It parses a
 caller-supplied UTF-8, CRLF, all-fields-quoted 28-field TSV stream incrementally
 against the observed 28-column Gigafida 2.0 lower-case form/lemma/POS header. The
+header ends immediately after its 28th quoted field, while each data record has
+exactly one terminal tab before CRLF (`data_record_terminator=TAB_BEFORE_CRLF`);
+that tab is a source-record terminator, not a 29th semantic field. The
 module does not open paths, download data, inspect ZIPs, or build a lookup index.
 `UnigramProvenance` binds either the exact real source/archive identity or an
 explicit project-synthetic fixture identity and uses shared
@@ -100,10 +103,12 @@ correspondence, and canonical output hashes. The only public parser entry point
 is `import_unigrams`; the package root remains lazy.
 
 `tests/contract/test_objective_006.py` materializes CRLF bytes from the
-project-authored synthetic fixture and exercises the real parser boundary. The
+project-authored synthetic fixture and exercises the real parser boundary,
+including the distinct header and exact one-tab data-row contracts. The
 fixture includes ambiguous analyses, complete-scope zero, and a decomposed
 Unicode form; no external row/count is copied. The 006-a recovery receipt
 preserves three earlier GETs and its blocked history. The 006-b receipt records
 one verified GET and cleanup, but its real importer smoke is blocked at the first
-data row by a trailing empty 29th field, so it is not source coverage, complete
-vocabulary evidence, or a successful real compatibility claim.
+data row by the source-specific terminal tab. The 006-c receipt records one new
+verified GET and cleanup, but its bounded first-32-row structural sampler stopped
+before importer execution; no real compatibility or vocabulary coverage is claimed.

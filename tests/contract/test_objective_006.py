@@ -15,6 +15,7 @@ import pytest
 
 from llm_slovenian_repair.contracts import EvidenceCompleteness
 from llm_slovenian_repair.unigram_importer import (
+    EXPECTED_DATA_RECORD_TERMINATOR,
     EXPECTED_HEADER,
     EXPECTED_HEADER_BYTE_LENGTH,
     EXPECTED_HEADER_SHA256,
@@ -44,22 +45,29 @@ SYNTHETIC_INVENTORY_SHA256 = "80ace517557091e9383b881320857b7c233b339bf7a6fca2fe
 SYNTHETIC_ACQUISITION_SHA256 = "84277bb10e13be1984c5929af20fffd3362349488d5366286a0ed75ca4783e0b"
 
 
-def quote_row(values: list[str] | tuple[str, ...]) -> bytes:
-    return ("\t".join('"' + value.replace('"', '""') + '"' for value in values)).encode(
+def quote_row(
+    values: list[str] | tuple[str, ...], *, data_record: bool = False
+) -> bytes:
+    encoded = ("\t".join('"' + value.replace('"', '""') + '"' for value in values)).encode(
         "utf-8"
     )
+    return encoded + (b"\t" if data_record else b"")
 
 
 def fixture_bytes() -> bytes:
-    # apply_patch stores text fixtures with the repository's LF convention;
-    # the contract boundary receives the observed source CRLF bytes.
-    return FIXTURE.read_bytes().replace(b"\r\n", b"\n").replace(b"\n", b"\r\n")
+    # apply_patch stores text fixtures with the repository's LF convention and
+    # cannot preserve a terminal tab without triggering diff whitespace checks;
+    # the contract boundary receives the observed source CRLF/terminal-tab bytes.
+    lines = FIXTURE.read_bytes().replace(b"\r\n", b"\n").splitlines()
+    lines[15:] = [line + b"\t" for line in lines[15:]]
+    return b"\r\n".join(lines) + b"\r\n"
 
 
 def rows_from_fixture() -> list[list[str]]:
     lines = fixture_bytes().splitlines()
+    assert all(line.endswith(b"\t") for line in lines[16:])
     return [
-        next(csv.reader([line.decode("utf-8")], delimiter="\t", quotechar='"'))
+        next(csv.reader([line[:-1].decode("utf-8")], delimiter="\t", quotechar='"'))
         for line in lines[15:]
     ]
 
@@ -115,7 +123,7 @@ def payload(
             for index in range(1, 15)
         )
     lines.append(quote_row(header))
-    lines.extend(quote_row(row) for row in base_rows)
+    lines.extend(quote_row(row, data_record=True) for row in base_rows)
     return line_ending.join(lines) + line_ending
 
 
@@ -139,6 +147,25 @@ def test_observed_header_contract_is_exact() -> None:
     assert len(EXPECTED_HEADER) == 28
     assert len(header_bytes) == EXPECTED_HEADER_BYTE_LENGTH == 834
     assert hashlib.sha256(header_bytes).hexdigest() == EXPECTED_HEADER_SHA256
+
+
+def test_header_and_data_record_terminators_are_distinct_and_bound() -> None:
+    lines = fixture_bytes().splitlines(keepends=True)
+    assert not lines[14].removesuffix(b"\r\n").endswith(b"\t")
+    assert all(line.removesuffix(b"\r\n").endswith(b"\t") for line in lines[15:])
+    value = provenance()
+    assert value.data_record_terminator == EXPECTED_DATA_RECORD_TERMINATOR
+    result = import_unigrams(BytesIO(fixture_bytes()), value)
+    assert result.summary.data_record_terminator == EXPECTED_DATA_RECORD_TERMINATOR
+    with pytest.raises(ValueError):
+        provenance(data_record_terminator="OPTIONAL_TRAILING_TAB")
+
+
+def test_header_terminal_tab_is_rejected() -> None:
+    data = payload([positive_row()])
+    lines = data.splitlines(keepends=True)
+    lines[14] = lines[14].replace(b"\r\n", b"\t\r\n")
+    expect_failure(b"".join(lines), UnigramImportFailure.INVALID_QUOTING)
 
 
 def test_shared_completeness_is_the_only_importer_completeness_type() -> None:
@@ -315,6 +342,41 @@ def test_header_columns_and_quoting_are_strict(data: bytes, reason: UnigramImpor
     expect_failure(data, reason)
 
 
+@pytest.mark.parametrize(
+    ("mutator", "reason"),
+    [
+        (
+            lambda data: data.replace(b'"\t\r\n', b'"\r\n', 1),
+            UnigramImportFailure.INVALID_QUOTING,
+        ),
+        (
+            lambda data: data.replace(b'"\t\r\n', b'"\t\t\r\n', 1),
+            UnigramImportFailure.INVALID_QUOTING,
+        ),
+        (
+            lambda data: data.replace(b'"\t\r\n', b'"\t \r\n', 1),
+            UnigramImportFailure.INVALID_QUOTING,
+        ),
+        (
+            lambda data: payload([positive_row() + ["extra"]]),
+            UnigramImportFailure.FIELD_COUNT,
+        ),
+        (
+            lambda data: data.replace(b'"0.1"\t\r\n', b'0.1\t\r\n', 1),
+            UnigramImportFailure.INVALID_QUOTING,
+        ),
+        (
+            lambda data: data.replace(b'"miza"', b'"mi\tza"', 1),
+            UnigramImportFailure.INVALID_SOURCE_TEXT,
+        ),
+    ],
+)
+def test_data_record_terminator_and_shape_negatives(
+    mutator: Any, reason: UnigramImportFailure
+) -> None:
+    expect_failure(mutator(payload([positive_row()])), reason)
+
+
 def test_truncated_and_non_crlf_inputs_fail_at_stream_boundary() -> None:
     expect_failure(fixture_bytes()[:-2], UnigramImportFailure.MISSING_FINAL_NEWLINE)
     expect_failure(
@@ -395,6 +457,45 @@ def test_006_b_receipt_is_finite_and_preserves_blocked_smoke() -> None:
     assert receipt["real_importer_smoke"]["output_sha256"] is None
     assert receipt["acquisition_evidence"]["temporary_tree_absent"] is True
     assert receipt["acquisition_evidence"]["source_data_retained"] is False
+
+
+def test_006_c_receipt_is_finite_and_distinguishes_blocked_structural_smoke() -> None:
+    receipt = json.loads(
+        (ROOT / "resources/source-acquisitions/gigafida-2.0-words-006-c.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    assert receipt["schema_version"] == 1
+    assert receipt["receipt_id"] == "gigafida-2.0-words-006-c"
+    assert receipt["status"] == "BLOCKED_STRUCTURAL_ROW_SMOKE"
+    assert receipt["data_record_terminator"] == EXPECTED_DATA_RECORD_TERMINATOR
+    assert receipt["text_contract"]["data_record_terminator"] == (
+        EXPECTED_DATA_RECORD_TERMINATOR
+    )
+    assert receipt["acquisition_evidence"]["006_c_get_count"] == 1
+    assert receipt["acquisition_evidence"]["cumulative_observed_objective_get_count"] == 5
+    assert receipt["acquisition_evidence"]["006_a_exact_one_fetch_condition_satisfied"] is False
+    assert receipt["acquisition_evidence"]["006_b_blocked_terminator_observation"] == (
+        "trailing-tab-after-28-fields"
+    )
+    for field in ("inventory_sha256", "archive_sha256", "header_sha256"):
+        assert len(receipt[field]) == 64
+        assert all(character in "0123456789abcdef" for character in receipt[field])
+    assert receipt["accepted_offline_verifier"] == "PASSED"
+    assert receipt["structural_sample"]["status"] == "BLOCKED"
+    assert receipt["structural_sample"]["rows_read"] == 32
+    assert receipt["structural_sample"]["rows_qualified"] is None
+    assert receipt["real_importer_smoke"]["status"] == "BLOCKED"
+    assert receipt["real_importer_smoke"]["attempts"] == 1
+    assert receipt["real_importer_smoke"]["runs_completed"] == 0
+    assert receipt["real_importer_smoke"]["sampled_row_count"] is None
+    assert receipt["real_importer_smoke"]["input_sha256"] is None
+    assert receipt["real_importer_smoke"]["output_sha256"] is None
+    assert receipt["acquisition_evidence"]["verifier_before_member_access"] is True
+    assert receipt["acquisition_evidence"]["temporary_tree_absent"] is True
+    assert receipt["acquisition_evidence"]["source_data_retained"] is False
+    assert receipt["acquisition_evidence"]["redistribution_ready"] is False
+    assert "implementation_head" not in receipt
 
 
 def test_fixture_is_project_authored_and_not_a_runtime_resource() -> None:
