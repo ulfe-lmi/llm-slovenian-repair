@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import hashlib
+import importlib
 import json
 import os
 from pathlib import Path
@@ -67,9 +68,9 @@ def assert_failure(call: Any, reason: VerificationFailure) -> None:
 def test_checked_in_fixture_verifies_at_exact_bytes_and_preserves_record_order() -> None:
     verified = verify_manifest_payload(MANIFEST_PATH)
     assert verified.payload_bytes == PAYLOAD_PATH.read_bytes()
-    assert verified.payload_size == 2070
+    assert verified.payload_size == 2097
     assert verified.payload_sha256 == (
-        "c275aa09c38dfe50bdddf40fa3ed2c9f72d4884c609ad674775d077dd98d55aa"
+        "67f47819954e81fd57c766a29a659c5bba5c8ffbbe2d40249b6be960bc795ce1"
     )
     assert [record.record_id for record in verified.records] == [
         "word-positive",
@@ -80,7 +81,12 @@ def test_checked_in_fixture_verifies_at_exact_bytes_and_preserves_record_order()
     assert verified.records[0].evidence.lower_bound == 3
     assert verified.records[1].evidence.lower_bound == 0
     assert verified.records[2].evidence.context_denominator is None
+    assert verified.records[2].evidence.cutoff == (
+        "Values at/below synthetic cutoff 4 are represented only by [0,4]"
+    )
     assert verified.records[3].evidence.state.value == "UNAVAILABLE"
+    assert verified.manifest.authorized_use_scope == "local synthetic tests only"
+    assert verified.manifest.importer_schema_version == "NOT_APPLICABLE_SYNTHETIC_FIXTURE"
 
     manifest_round_trip = SourceManifest.model_validate_json(
         verified.manifest.model_dump_json()
@@ -131,6 +137,143 @@ def test_manifest_rejects_unknown_fields_and_rights_readiness_contradictions() -
         )
         with pytest.raises(ValidationError):
             SourceManifest.model_validate_json(json.dumps(invalid, ensure_ascii=False))
+
+
+@pytest.mark.parametrize(
+    "value",
+    [
+        "synthetic",
+        "PERMITTED",
+        "project-authored synthetic",
+        "PROJECT-AUTHORED_SYNTHETIC",
+        " PROJECT_AUTHORED_SYNTHETIC",
+        True,
+        None,
+    ],
+)
+def test_manifest_requires_exact_serialized_rights_values(value: Any) -> None:
+    data = manifest_data()
+    data["rights_status"] = value
+    with pytest.raises(ValidationError):
+        SourceManifest.model_validate_json(json.dumps(data, ensure_ascii=False))
+
+
+def test_manifest_field_aliases_are_rejected() -> None:
+    aliases = {
+        "source_identity": "source_id",
+        "source_release": "release",
+        "version": "release",
+        "payload_relative_path": "payload_path",
+        "payload_sha256": "sha256",
+        "checksum_sha256": "sha256",
+        "payload_byte_size": "byte_size",
+        "size": "byte_size",
+        "payload_media_format": "media_format",
+        "payload_record_format": "record_format",
+        "payload_encoding": "encoding",
+        "annotation": "annotation_tagging",
+        "tagging": "annotation_tagging",
+        "source_completeness": "completeness",
+        "cutoff": "cutoff_metadata",
+        "threshold": "threshold_metadata",
+        "denominator_state": "denominator_knowledge",
+        "rights": "rights_status",
+        "terms_reference": "license_terms_reference",
+        "license": "license_terms_reference",
+        "attribution_conditions": "attribution_redistribution_conditions",
+        "redistribution_conditions": "attribution_redistribution_conditions",
+    }
+    for alias, canonical in aliases.items():
+        invalid = manifest_data()
+        invalid[alias] = invalid[canonical]
+        with pytest.raises(ValidationError):
+            SourceManifest.model_validate_json(json.dumps(invalid, ensure_ascii=False))
+
+
+def test_only_canonical_manifest_public_names_are_available() -> None:
+    package = importlib.import_module("llm_slovenian_repair")
+    source_manifest = importlib.import_module("llm_slovenian_repair.source_manifest")
+    removed = (
+        "DenominatorKnowledge",
+        "Manifest",
+        "ManifestError",
+        "SourceRightsStatus",
+        "SyntheticCorpusPayload",
+        "SyntheticRecord",
+        "VerifiedCorpus",
+        "load_verified_corpus",
+        "load_verified_manifest",
+    )
+    for name in removed:
+        assert name not in package.__all__
+        assert name not in source_manifest.__all__
+        with pytest.raises(AttributeError):
+            getattr(package, name)
+        with pytest.raises(AttributeError):
+            getattr(source_manifest, name)
+
+
+@pytest.mark.parametrize(
+    ("field", "value"),
+    [
+        ("encoding", "utf-8"),
+        ("encoding", "UTF-8 "),
+        ("record_format", "JSONL"),
+        ("record_format", "csv"),
+        ("media_format", "application/x-ndjson"),
+        ("media_format", "APPLICATION/JSONL"),
+    ],
+)
+def test_manifest_accepts_only_supported_exact_formats(field: str, value: str) -> None:
+    invalid = manifest_data()
+    invalid[field] = value
+    with pytest.raises(ValidationError):
+        SourceManifest.model_validate_json(json.dumps(invalid, ensure_ascii=False))
+
+
+@pytest.mark.parametrize(
+    ("record_format", "media_format"),
+    [("json", "application/jsonl"), ("jsonl", "application/json")],
+)
+def test_manifest_rejects_mismatched_record_and_media_formats(
+    record_format: str, media_format: str
+) -> None:
+    invalid = manifest_data()
+    invalid.update({"record_format": record_format, "media_format": media_format})
+    with pytest.raises(ValidationError):
+        SourceManifest.model_validate_json(json.dumps(invalid, ensure_ascii=False))
+
+
+def test_invalid_manifest_format_is_rejected_before_payload_parsing(tmp_path: Path) -> None:
+    manifest = write_pair(
+        tmp_path / "format-before-payload",
+        b"not-json\n",
+        record_format="JSONL",
+        media_format="application/jsonl",
+    )
+    assert_failure(
+        lambda: verify_manifest_payload(manifest),
+        VerificationFailure.MANIFEST_SCHEMA_INVALID,
+    )
+
+
+@pytest.mark.parametrize(
+    "update",
+    [
+        {"authorized_use_scope": ""},
+        {"authorized_use_scope": "all uses", "use_ready": True},
+        {"license_terms_reference": "Apache License 2.0"},
+        {
+            "attribution_redistribution_conditions": "Project-authored synthetic fixture",
+        },
+        {"importer_schema_version": "synthetic-record-importer-v1"},
+    ],
+)
+def test_synthetic_manifest_readiness_and_provenance_are_bounded(update: dict[str, Any]) -> None:
+    invalid = manifest_data()
+    invalid.update(update)
+    with pytest.raises(ValidationError):
+        SourceManifest.model_validate_json(json.dumps(invalid, ensure_ascii=False))
 
 
 def test_manifest_rejects_checksum_size_and_completeness_contradictions() -> None:

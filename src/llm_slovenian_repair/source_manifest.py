@@ -15,10 +15,9 @@ import stat
 from dataclasses import dataclass
 from enum import StrEnum
 from pathlib import Path, PureWindowsPath
-from typing import Annotated, Any, Self
+from typing import Annotated, Any, Literal, Self
 
 from pydantic import (
-    AliasChoices,
     BaseModel,
     ConfigDict,
     Field,
@@ -26,6 +25,7 @@ from pydantic import (
     StrictFloat,
     StrictInt,
     StrictStr,
+    ValidationError,
     field_validator,
     model_validator,
 )
@@ -48,17 +48,11 @@ class RightsStatus(StrEnum):
     PROHIBITED_RESTRICTED = "PROHIBITED_RESTRICTED"
 
 
-SourceRightsStatus = RightsStatus
-
-
 class ManifestDenominatorKnowledge(StrEnum):
     """Whether the manifest has an explicit corpus denominator."""
 
     KNOWN = "KNOWN"
     UNKNOWN = "UNKNOWN"
-
-
-DenominatorKnowledge = ManifestDenominatorKnowledge
 
 
 class QueryKind(StrEnum):
@@ -103,10 +97,6 @@ class ManifestVerificationError(ValueError):
         suffix = f":{field}" if field is not None else ""
         super().__init__(f"{reason.value}{suffix}")
 
-
-ManifestError = ManifestVerificationError
-
-
 ManifestText = Annotated[StrictStr, Field(min_length=1, max_length=4096)]
 ManifestIdentifier = Annotated[StrictStr, Field(min_length=1, max_length=128)]
 ManifestNonNegativeInt = Annotated[StrictInt, Field(ge=0)]
@@ -142,24 +132,6 @@ def _metadata_text(value: str | None) -> str | None:
     return value
 
 
-def _normalize_rights(value: RightsStatus | str) -> RightsStatus | str:
-    if not isinstance(value, str):
-        return value
-    normalized = value.strip().upper().replace("-", "_").replace("/", "_").replace(" ", "_")
-    aliases = {
-        "PROJECT_AUTHORED_SYNTHETIC": RightsStatus.PROJECT_AUTHORED_SYNTHETIC,
-        "SYNTHETIC": RightsStatus.PROJECT_AUTHORED_SYNTHETIC,
-        "VERIFIED_PERMITTED": RightsStatus.VERIFIED_PERMITTED,
-        "PERMITTED": RightsStatus.VERIFIED_PERMITTED,
-        "UNKNOWN_UNVERIFIED": RightsStatus.UNKNOWN_UNVERIFIED,
-        "UNKNOWN": RightsStatus.UNKNOWN_UNVERIFIED,
-        "PROHIBITED_RESTRICTED": RightsStatus.PROHIBITED_RESTRICTED,
-        "PROHIBITED": RightsStatus.PROHIBITED_RESTRICTED,
-        "RESTRICTED": RightsStatus.PROHIBITED_RESTRICTED,
-    }
-    return aliases.get(normalized, value)
-
-
 def _repository_local_reference(value: str) -> bool:
     lower = value.casefold()
     return lower.startswith(
@@ -181,80 +153,27 @@ class SourceManifest(BaseModel):
     model_config = MANIFEST_CONFIG
 
     schema_version: StrictInt = MANIFEST_SCHEMA_VERSION
-    source_id: ManifestIdentifier = Field(
-        validation_alias=AliasChoices("source_id", "source_identity"),
-        serialization_alias="source_id",
-    )
+    source_id: ManifestIdentifier
     source_name: ManifestText
-    release: ManifestText = Field(
-        validation_alias=AliasChoices("release", "source_release", "version"),
-        serialization_alias="release",
-    )
+    release: ManifestText
     acquisition_reference: ManifestText
-    payload_path: ManifestText = Field(
-        validation_alias=AliasChoices("payload_path", "payload_relative_path"),
-        serialization_alias="payload_path",
-    )
-    sha256: Annotated[StrictStr, Field(pattern=r"[0-9a-f]{64}")] = Field(
-        validation_alias=AliasChoices("sha256", "payload_sha256", "checksum_sha256"),
-        serialization_alias="sha256",
-    )
-    byte_size: Annotated[StrictInt, Field(gt=0)] = Field(
-        validation_alias=AliasChoices("byte_size", "payload_byte_size", "size"),
-        serialization_alias="byte_size",
-    )
-    media_format: ManifestText = Field(
-        validation_alias=AliasChoices("media_format", "payload_media_format"),
-        serialization_alias="media_format",
-    )
-    record_format: ManifestText = Field(
-        validation_alias=AliasChoices("record_format", "payload_record_format"),
-        serialization_alias="record_format",
-    )
-    encoding: ManifestText = Field(
-        validation_alias=AliasChoices("encoding", "payload_encoding"),
-        serialization_alias="encoding",
-    )
+    payload_path: ManifestText
+    sha256: Annotated[StrictStr, Field(pattern=r"[0-9a-f]{64}")]
+    byte_size: Annotated[StrictInt, Field(gt=0)]
+    media_format: Literal["application/jsonl", "application/json"]
+    record_format: Literal["jsonl", "json"]
+    encoding: Literal["UTF-8"]
     normalization: ManifestText
-    annotation_tagging: ManifestText = Field(
-        validation_alias=AliasChoices("annotation_tagging", "annotation", "tagging"),
-        serialization_alias="annotation_tagging",
-    )
-    completeness: EvidenceCompleteness = Field(
-        validation_alias=AliasChoices("completeness", "source_completeness"),
-        serialization_alias="completeness",
-    )
-    cutoff_metadata: ManifestText | None = Field(
-        default=None,
-        validation_alias=AliasChoices("cutoff_metadata", "cutoff"),
-        serialization_alias="cutoff_metadata",
-    )
-    threshold_metadata: ManifestText | None = Field(
-        default=None,
-        validation_alias=AliasChoices("threshold_metadata", "threshold"),
-        serialization_alias="threshold_metadata",
-    )
-    denominator_knowledge: ManifestDenominatorKnowledge = Field(
-        validation_alias=AliasChoices("denominator_knowledge", "denominator_state"),
-        serialization_alias="denominator_knowledge",
-    )
+    annotation_tagging: ManifestText
+    completeness: EvidenceCompleteness
+    cutoff_metadata: ManifestText | None = None
+    threshold_metadata: ManifestText | None = None
+    denominator_knowledge: ManifestDenominatorKnowledge
     denominator: ManifestNonNegativeInt | None = None
-    rights_status: RightsStatus = Field(
-        validation_alias=AliasChoices("rights_status", "rights"),
-        serialization_alias="rights_status",
-    )
-    license_terms_reference: ManifestText = Field(
-        validation_alias=AliasChoices("license_terms_reference", "terms_reference", "license"),
-        serialization_alias="license_terms_reference",
-    )
-    attribution_redistribution_conditions: ManifestText = Field(
-        validation_alias=AliasChoices(
-            "attribution_redistribution_conditions",
-            "attribution_conditions",
-            "redistribution_conditions",
-        ),
-        serialization_alias="attribution_redistribution_conditions",
-    )
+    rights_status: RightsStatus
+    authorized_use_scope: ManifestText
+    license_terms_reference: ManifestText
+    attribution_redistribution_conditions: ManifestText
     importer_schema_version: ManifestText
     record_schema_version: StrictInt = RECORD_SCHEMA_VERSION
     deterministic_build_parameters: dict[str, BuildValue] = Field(min_length=1)
@@ -275,6 +194,7 @@ class SourceManifest(BaseModel):
         "annotation_tagging",
         "cutoff_metadata",
         "threshold_metadata",
+        "authorized_use_scope",
         "license_terms_reference",
         "attribution_redistribution_conditions",
         "importer_schema_version",
@@ -286,11 +206,6 @@ class SourceManifest(BaseModel):
         if value != value.lower():
             raise ValueError("sha256 must be lowercase")
         return value
-
-    @field_validator("rights_status", mode="before")
-    @classmethod
-    def normalize_rights_status(cls, value: RightsStatus | str) -> RightsStatus | str:
-        return _normalize_rights(value)
 
     @field_validator("deterministic_build_parameters")
     @classmethod
@@ -306,6 +221,12 @@ class SourceManifest(BaseModel):
             raise ValueError("unsupported manifest schema version")
         if self.record_schema_version != RECORD_SCHEMA_VERSION:
             raise ValueError("unsupported record schema version")
+        expected_media_format = {
+            "jsonl": "application/jsonl",
+            "json": "application/json",
+        }[self.record_format]
+        if self.media_format != expected_media_format:
+            raise ValueError("media_format does not match record_format")
         if self.completeness is EvidenceCompleteness.PARTIAL and not (
             self.cutoff_metadata or self.threshold_metadata
         ):
@@ -331,15 +252,22 @@ class SourceManifest(BaseModel):
             if not _repository_local_reference(self.acquisition_reference):
                 raise ValueError("synthetic manifest requires repository-local acquisition")
             attribution = self.attribution_redistribution_conditions.casefold()
-            if "project-authored" not in attribution or "synthetic" not in attribution:
+            if (
+                "project-authored" not in attribution
+                or "synthetic" not in attribution
+                or "no external corpus" not in attribution
+            ):
                 raise ValueError("synthetic manifest requires project-authored attribution")
+            license_reference = self.license_terms_reference.casefold()
+            if "repository" not in license_reference or "license" not in license_reference:
+                raise ValueError("synthetic manifest must reference repository LICENSE")
+            if self.use_ready and self.authorized_use_scope != "local synthetic tests only":
+                raise ValueError("synthetic use_ready scope must be local synthetic tests only")
+            if self.importer_schema_version != "NOT_APPLICABLE_SYNTHETIC_FIXTURE":
+                raise ValueError("synthetic fixture must not claim an importer")
         elif self.rights_status is synthetic_rights:
             raise ValueError("project-authored synthetic rights require synthetic=True")
         return self
-
-
-Manifest = SourceManifest
-
 
 class SyntheticCountRecord(BaseModel):
     """One synthetic word, bigram, or trigram count with explicit evidence."""
@@ -384,10 +312,6 @@ class SyntheticCountRecord(BaseModel):
             raise ValueError("record evidence scope must be synthetic")
         return self
 
-
-SyntheticRecord = SyntheticCountRecord
-
-
 class SyntheticCorpus(BaseModel):
     """Bounded ordered records decoded from a checked payload."""
 
@@ -405,10 +329,6 @@ class SyntheticCorpus(BaseModel):
             raise ValueError("record_id values must be unique")
         return self
 
-
-SyntheticCorpusPayload = SyntheticCorpus
-
-
 @dataclass(frozen=True, slots=True)
 class VerifiedSyntheticCorpus:
     """Typed result of verifying one manifest and its exact local payload."""
@@ -424,10 +344,6 @@ class VerifiedSyntheticCorpus:
     @property
     def payload_sha256(self) -> str:
         return hashlib.sha256(self.payload_bytes).hexdigest()
-
-
-VerifiedCorpus = VerifiedSyntheticCorpus
-
 
 def _validate_limit(value: int, reason: VerificationFailure) -> int:
     if isinstance(value, bool) or not isinstance(value, int) or value <= 0:
@@ -563,22 +479,21 @@ def _manifest_from_bytes(data: bytes) -> SourceManifest:
         # Pydantic's strict JSON mode parses enum literals while strict Python
         # validation correctly requires enum objects from typed callers.
         return SourceManifest.model_validate_json(data)
-    except Exception as exc:
+    except ValidationError as exc:
         raise ManifestVerificationError(VerificationFailure.MANIFEST_SCHEMA_INVALID) from exc
 
 
 def _parse_records(
     payload_text: str, record_format: str, max_records: int
 ) -> tuple[SyntheticCountRecord, ...]:
-    normalized_format = record_format.casefold()
     raw_records: list[Any]
     try:
-        if normalized_format == "jsonl":
+        if record_format == "jsonl":
             lines = payload_text.splitlines()
             if not lines or any(not line.strip() for line in lines):
                 raise ValueError("blank JSONL line")
             raw_records = [_parse_json(line) for line in lines]
-        elif normalized_format == "json":
+        elif record_format == "json":
             parsed = _parse_json(payload_text)
             if not isinstance(parsed, list):
                 raise ValueError("JSON payload must be an array")
@@ -604,7 +519,7 @@ def _parse_records(
         return tuple(records)
     except ManifestVerificationError:
         raise
-    except Exception as exc:
+    except (TypeError, ValueError, ValidationError) as exc:
         raise ManifestVerificationError(VerificationFailure.PAYLOAD_RECORD_INVALID) from exc
 
 
@@ -661,31 +576,18 @@ def verify_manifest_payload(
     )
 
 
-load_verified_corpus = verify_manifest_payload
-load_verified_manifest = verify_manifest_payload
-
-
 __all__ = [
     "DEFAULT_MAX_MANIFEST_BYTES",
     "DEFAULT_MAX_PAYLOAD_BYTES",
     "DEFAULT_MAX_RECORDS",
-    "DenominatorKnowledge",
-    "Manifest",
     "ManifestDenominatorKnowledge",
-    "ManifestError",
     "ManifestVerificationError",
     "QueryKind",
     "RightsStatus",
     "SourceManifest",
-    "SourceRightsStatus",
     "SyntheticCorpus",
-    "SyntheticCorpusPayload",
     "SyntheticCountRecord",
-    "SyntheticRecord",
-    "VerifiedCorpus",
     "VerifiedSyntheticCorpus",
     "VerificationFailure",
-    "load_verified_corpus",
-    "load_verified_manifest",
     "verify_manifest_payload",
 ]
