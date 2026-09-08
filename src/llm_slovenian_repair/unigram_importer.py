@@ -48,7 +48,7 @@ EXPECTED_MEMBER_NAME = (
 EXPECTED_DELIMITER = "\t"
 EXPECTED_ENCODING = "UTF-8"
 EXPECTED_NEWLINE = "CRLF"
-EXPECTED_DATA_RECORD_TERMINATOR = "TAB_BEFORE_CRLF"
+EXPECTED_DATA_RECORD_TERMINATOR = "OPTIONAL_SINGLE_EMPTY_TAB_BEFORE_CRLF"
 EXPECTED_HEADER_LINE_NUMBER = 15
 EXPECTED_HEADER: tuple[str, ...] = (
     "Oblika z malimi črkami",
@@ -602,9 +602,7 @@ def _parse_quoted_tsv(
 ) -> tuple[str, ...]:
     """Parse the observed all-fields-quoted TSV form with no row buffering."""
 
-    if data_record:
-        if not line.endswith("\t"):
-            raise _failure(UnigramImportFailure.INVALID_QUOTING, str(line_number))
+    if data_record and line.endswith("\t"):
         line = line[:-1]
     elif line.endswith("\t"):
         raise _failure(UnigramImportFailure.INVALID_QUOTING, str(line_number))

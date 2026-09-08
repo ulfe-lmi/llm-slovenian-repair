@@ -97,8 +97,11 @@ member selection remain outside its entry point. Version 1 is bound to the
 lower-case form/lemma/POS member
 `GF2.0-words-all-lowercase_forms-lemmas-parts_of_speech-taxonomy-entire.tsv`,
 the 28-field all-quoted tab header, UTF-8, and CRLF. The header has no terminal
-tab; each data row has exactly one terminal tab before CRLF, recorded as
-`data_record_terminator=TAB_BEFORE_CRLF`, and that tab is not a semantic field.
+tab; each data row has either the 28 quoted fields ending immediately before CRLF
+or those fields plus one empty terminal tab before CRLF, recorded as
+`data_record_terminator=OPTIONAL_SINGLE_EMPTY_TAB_BEFORE_CRLF`. The optional tab
+is not a semantic field; additional tabs, whitespace, or semantic fields are
+rejected.
 It reads incrementally under finite byte/row/line/field limits and emits immutable records plus a canonical
 hash summary. Exact source fields are retained; `NFC_CASEFOLD` is an exposed
 derived lookup transform. Counts are strict nonnegative integers, published
@@ -128,3 +131,10 @@ and synthetic ZIP-member tests. Its one verifier-first fetch reached exactly 32
 rows; the aggregate records 31 28-field rows and one empty terminal 29th field,
 without retaining content or running an importer smoke. This remains bounded
 format evidence, not importer compatibility or redistribution authorization.
+Round 006-f supersedes the 006-c mandatory-tab documentation with the
+evidence-fixed optional single empty terminal tab contract. Offline tests prove
+both accepted shapes and reject wider extensions. Its one archive fetch passed
+verification, but the bounded smoke harness failed before member access, so no
+real importer compatibility evidence was obtained; neither it nor the earlier
+structural sample is a full-source, linguistic-quality, rights, release, or
+deployment claim.

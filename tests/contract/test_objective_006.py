@@ -46,12 +46,12 @@ SYNTHETIC_ACQUISITION_SHA256 = "84277bb10e13be1984c5929af20fffd3362349488d536628
 
 
 def quote_row(
-    values: list[str] | tuple[str, ...], *, data_record: bool = False
+    values: list[str] | tuple[str, ...], *, terminal_tab: bool = False
 ) -> bytes:
     encoded = ("\t".join('"' + value.replace('"', '""') + '"' for value in values)).encode(
         "utf-8"
     )
-    return encoded + (b"\t" if data_record else b"")
+    return encoded + (b"\t" if terminal_tab else b"")
 
 
 def fixture_bytes() -> bytes:
@@ -59,15 +59,24 @@ def fixture_bytes() -> bytes:
     # cannot preserve a terminal tab without triggering diff whitespace checks;
     # the contract boundary receives the observed source CRLF/terminal-tab bytes.
     lines = FIXTURE.read_bytes().replace(b"\r\n", b"\n").splitlines()
-    lines[15:] = [line + b"\t" for line in lines[15:]]
+    lines[15:] = [
+        line + (b"\t" if index % 2 else b"")
+        for index, line in enumerate(lines[15:])
+    ]
     return b"\r\n".join(lines) + b"\r\n"
 
 
 def rows_from_fixture() -> list[list[str]]:
     lines = fixture_bytes().splitlines()
-    assert all(line.endswith(b"\t") for line in lines[16:])
+    assert [int(line.endswith(b"\t")) for line in lines[15:]] == [0, 1, 0, 1, 0]
     return [
-        next(csv.reader([line[:-1].decode("utf-8")], delimiter="\t", quotechar='"'))
+        next(
+            csv.reader(
+                [line.removesuffix(b"\t").decode("utf-8")],
+                delimiter="\t",
+                quotechar='"',
+            )
+        )
         for line in lines[15:]
     ]
 
@@ -114,6 +123,7 @@ def payload(
     header: tuple[str, ...] = EXPECTED_HEADER,
     line_ending: bytes = b"\r\n",
     include_preamble: bool = True,
+    data_terminal_tab: bool = True,
 ) -> bytes:
     base_rows = rows if rows is not None else rows_from_fixture()
     lines: list[bytes] = []
@@ -123,7 +133,7 @@ def payload(
             for index in range(1, 15)
         )
     lines.append(quote_row(header))
-    lines.extend(quote_row(row, data_record=True) for row in base_rows)
+    lines.extend(quote_row(row, terminal_tab=data_terminal_tab) for row in base_rows)
     return line_ending.join(lines) + line_ending
 
 
@@ -152,13 +162,27 @@ def test_observed_header_contract_is_exact() -> None:
 def test_header_and_data_record_terminators_are_distinct_and_bound() -> None:
     lines = fixture_bytes().splitlines(keepends=True)
     assert not lines[14].removesuffix(b"\r\n").endswith(b"\t")
-    assert all(line.removesuffix(b"\r\n").endswith(b"\t") for line in lines[15:])
+    assert [
+        int(line.removesuffix(b"\r\n").endswith(b"\t")) for line in lines[15:]
+    ] == [0, 1, 0, 1, 0]
     value = provenance()
     assert value.data_record_terminator == EXPECTED_DATA_RECORD_TERMINATOR
     result = import_unigrams(BytesIO(fixture_bytes()), value)
     assert result.summary.data_record_terminator == EXPECTED_DATA_RECORD_TERMINATOR
     with pytest.raises(ValueError):
         provenance(data_record_terminator="OPTIONAL_TRAILING_TAB")
+
+
+def test_optional_terminal_tab_preserves_semantic_and_output_hashes() -> None:
+    row = positive_row()
+    without_tab = import_unigrams(
+        BytesIO(payload([row], data_terminal_tab=False)), provenance()
+    )
+    with_tab = import_unigrams(BytesIO(payload([row])), provenance())
+
+    assert without_tab.records == with_tab.records
+    assert without_tab.summary.output_sha256 == with_tab.summary.output_sha256
+    assert without_tab.summary.input_sha256 != with_tab.summary.input_sha256
 
 
 def test_header_terminal_tab_is_rejected() -> None:
@@ -346,10 +370,6 @@ def test_header_columns_and_quoting_are_strict(data: bytes, reason: UnigramImpor
     ("mutator", "reason"),
     [
         (
-            lambda data: data.replace(b'"\t\r\n', b'"\r\n', 1),
-            UnigramImportFailure.INVALID_QUOTING,
-        ),
-        (
             lambda data: data.replace(b'"\t\r\n', b'"\t\t\r\n', 1),
             UnigramImportFailure.INVALID_QUOTING,
         ),
@@ -360,6 +380,10 @@ def test_header_columns_and_quoting_are_strict(data: bytes, reason: UnigramImpor
         (
             lambda data: payload([positive_row() + ["extra"]]),
             UnigramImportFailure.FIELD_COUNT,
+        ),
+        (
+            lambda data: data.replace(b'"\t\r\n', b'\textra\r\n', 1),
+            UnigramImportFailure.INVALID_QUOTING,
         ),
         (
             lambda data: data.replace(b'"0.1"\t\r\n', b'0.1\t\r\n', 1),
@@ -468,10 +492,8 @@ def test_006_c_receipt_is_finite_and_distinguishes_blocked_structural_smoke() ->
     assert receipt["schema_version"] == 1
     assert receipt["receipt_id"] == "gigafida-2.0-words-006-c"
     assert receipt["status"] == "BLOCKED_STRUCTURAL_ROW_SMOKE"
-    assert receipt["data_record_terminator"] == EXPECTED_DATA_RECORD_TERMINATOR
-    assert receipt["text_contract"]["data_record_terminator"] == (
-        EXPECTED_DATA_RECORD_TERMINATOR
-    )
+    assert receipt["data_record_terminator"] == "TAB_BEFORE_CRLF"
+    assert receipt["text_contract"]["data_record_terminator"] == "TAB_BEFORE_CRLF"
     assert receipt["acquisition_evidence"]["006_c_get_count"] == 1
     assert receipt["acquisition_evidence"]["cumulative_observed_objective_get_count"] == 5
     assert receipt["acquisition_evidence"]["006_a_exact_one_fetch_condition_satisfied"] is False
@@ -496,6 +518,33 @@ def test_006_c_receipt_is_finite_and_distinguishes_blocked_structural_smoke() ->
     assert receipt["acquisition_evidence"]["source_data_retained"] is False
     assert receipt["acquisition_evidence"]["redistribution_ready"] is False
     assert "implementation_head" not in receipt
+
+
+def test_006_f_receipt_preserves_verifier_and_blocked_smoke_boundary() -> None:
+    receipt = json.loads(
+        (ROOT / "resources/source-acquisitions/gigafida-2.0-words-006-f.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    assert receipt["schema_version"] == 1
+    assert receipt["receipt_id"] == "gigafida-2.0-words-006-f"
+    assert receipt["status"] == "BLOCKED_SMOKE_HARNESS_FAILURE"
+    assert receipt["data_record_terminator"] == EXPECTED_DATA_RECORD_TERMINATOR
+    assert receipt["acquisition_evidence"]["006_f_get_count"] == 1
+    assert receipt["acquisition_evidence"]["cumulative_observed_objective_get_count"] == 8
+    assert receipt["acquisition_evidence"]["verifier_before_member_access"] is True
+    assert receipt["acquisition_evidence"]["accepted_offline_verifier"] == "PASSED"
+    assert receipt["acquisition_evidence"]["member_access_attempted"] is False
+    assert receipt["acquisition_evidence"]["temporary_tree_absent"] is True
+    assert receipt["acquisition_evidence"]["source_data_retained"] is False
+    assert receipt["structural_sample"]["rows_read"] is None
+    assert receipt["structural_sample"]["aggregate"] is None
+    assert receipt["real_importer_smoke"]["attempts"] == 0
+    assert receipt["real_importer_smoke"]["runs_completed"] == 0
+    assert receipt["real_importer_smoke"]["input_sha256"] is None
+    assert receipt["real_importer_smoke"]["output_sha256"] is None
+    assert "source_rows" not in receipt
+    assert "header_values" not in receipt
 
 
 def test_fixture_is_project_authored_and_not_a_runtime_resource() -> None:

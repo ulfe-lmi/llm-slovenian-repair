@@ -91,8 +91,11 @@ Objective 006 adds `llm_slovenian_repair.unigram_importer`. It parses a
 caller-supplied UTF-8, CRLF, all-fields-quoted 28-field TSV stream incrementally
 against the observed 28-column Gigafida 2.0 lower-case form/lemma/POS header. The
 header ends immediately after its 28th quoted field, while each data record has
-exactly one terminal tab before CRLF (`data_record_terminator=TAB_BEFORE_CRLF`);
-that tab is a source-record terminator, not a 29th semantic field. The
+either 28 quoted fields ending immediately before CRLF or those same fields plus
+one empty terminal tab before CRLF (`data_record_terminator=`
+`OPTIONAL_SINGLE_EMPTY_TAB_BEFORE_CRLF`); the optional tab is a source-record
+terminator, not a 29th semantic field. Additional tabs, whitespace, or semantic
+fields are rejected. The
 module does not open paths, download data, inspect ZIPs, or build a lookup index.
 `UnigramProvenance` binds either the exact real source/archive identity or an
 explicit project-synthetic fixture identity and uses shared
@@ -104,7 +107,7 @@ is `import_unigrams`; the package root remains lazy.
 
 `tests/contract/test_objective_006.py` materializes CRLF bytes from the
 project-authored synthetic fixture and exercises the real parser boundary,
-including the distinct header and exact one-tab data-row contracts. The
+including the distinct header and the two accepted data-row contracts. The
 fixture includes ambiguous analyses, complete-scope zero, and a decomposed
 Unicode form; no external row/count is copied. The 006-a recovery receipt
 preserves three earlier GETs and its blocked history. The 006-b receipt records
@@ -127,3 +130,9 @@ stream prefix exactly once before one classification. Synthetic tests include a
 header inclusion, and aggregate-count validation. Its single verifier-first
 fetch completed the bounded diagnosis with 31 28-field rows and one empty
 terminal 29th field; no importer compatibility or source retention is implied.
+Round 006-f supersedes the 006-c mandatory-tab assumption with the narrower
+evidence-fixed optional single empty terminal tab contract. Offline tests prove
+both accepted shapes and reject wider extensions. Its one archive fetch passed
+verification, but the bounded smoke harness failed before member access, so no
+real importer compatibility evidence was obtained; the receipt records this
+separately from full-source, linguistic, rights, release, or deployment claims.
