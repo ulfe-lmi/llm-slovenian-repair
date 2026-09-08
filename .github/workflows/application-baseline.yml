@@ -1,0 +1,62 @@
+name: Application baseline
+
+on:
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  application-baseline:
+    name: Application baseline
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - name: Check out full history
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          fetch-depth: 0
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@20cfd1bf945f4377ade1205e4dbc17946fc9a30d
+        with:
+          version: 0.12.10
+          enable-cache: false
+
+      - name: Install Python 3.12
+        run: uv python install 3.12
+
+      - name: Check lock and sync frozen environment
+        run: |
+          uv lock --check
+          uv sync --frozen --all-groups --all-extras --python 3.12
+
+      - name: Run contract tests
+        run: uv run --frozen pytest tests/contract/test_objective_001.py -q
+
+      - name: Run full tests
+        run: uv run --frozen pytest -q
+
+      - name: Check Ruff
+        run: uv run --frozen ruff check src tests
+
+      - name: Check mypy
+        run: uv run --frozen mypy src tests/contract
+
+      - name: Build sdist and wheel
+        run: uv build --no-sources
+
+      - name: Prove offline wheel installation and import
+        shell: bash
+        run: |
+          offline_env="$RUNNER_TEMP/llm-slovenian-repair-wheel-venv"
+          uv venv --python 3.12 "$offline_env"
+          uv pip install --python "$offline_env/bin/python" --offline --no-index --no-deps dist/llm_slovenian_repair-0.0.0-py3-none-any.whl
+          HOME="$RUNNER_TEMP/llm-slovenian-repair-wheel-home" PYTHONDONTWRITEBYTECODE=1 "$offline_env/bin/python" -B -c 'import llm_slovenian_repair; assert llm_slovenian_repair.__version__ == "0.0.0"'
+
+      - name: Check accepted-base whitespace and protected sources
+        run: |
+          git diff --check 82ea1e6f4173934fa47bb34ee6a6f78338d3603a...HEAD
+          git diff --exit-code 82ea1e6f4173934fa47bb34ee6a6f78338d3603a -- PLAN.md ARCHITECTURE.md CRITICAL.md AGENTS.md ARCHITECTURE-for-agents.md OAP-COMMUNICATION-coding-agent.md SECURITY.md TESTING.md oap/bootstrap-sources.lock.json oap/governance oap/coding-instructions oap/strategic-instructions docs/bootstrap

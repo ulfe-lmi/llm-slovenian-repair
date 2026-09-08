@@ -10,7 +10,8 @@ a complete Slovenian model answer, selects suspicious local spans on CPU, option
 asks the existing Qwen in an isolated context, validates independent evidence and
 patches approved spans exactly. No repair application is implemented here.
 
-Start with [runbook](docs/OAP-RUNBOOK.md), [role setup](docs/CODEX-ROLE-SETUP.md),
+Start with [development](docs/DEVELOPMENT.md), [runbook](docs/OAP-RUNBOOK.md),
+[role setup](docs/CODEX-ROLE-SETUP.md),
 [readiness](docs/READINESS.md) and [testing](TESTING.md). Full product agreement is
 [PLAN](PLAN.md), implementation baseline [architecture](ARCHITECTURE.md), and
 sole live judgment register [CRITICAL](CRITICAL.md). Coding uses the root router
