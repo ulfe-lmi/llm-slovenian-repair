@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import importlib.util
 import os
 import subprocess
 import sys
@@ -9,11 +10,24 @@ import tempfile
 import tomllib
 from email import message_from_bytes
 from pathlib import Path
+from typing import Any
 from zipfile import ZipFile
+
+import pytest
 
 ROOT = Path(__file__).resolve().parents[2]
 PYPROJECT = ROOT / "pyproject.toml"
 LOCKFILE = ROOT / "uv.lock"
+DRIVER_PATH = ROOT / "scripts" / "verify_development_baseline.py"
+
+
+def load_driver() -> Any:
+    spec = importlib.util.spec_from_file_location("verify_development_baseline", DRIVER_PATH)
+    assert spec is not None and spec.loader is not None
+    module = importlib.util.module_from_spec(spec)
+    sys.modules[spec.name] = module
+    spec.loader.exec_module(module)
+    return module
 
 
 def read_project() -> dict[str, object]:
@@ -150,3 +164,112 @@ def test_built_wheel_metadata_and_payload() -> None:
                 for name in names
                 for token in ("model", "corpus", "weights")
             )
+
+
+def test_driver_environment_uses_owned_native_paths(monkeypatch: pytest.MonkeyPatch) -> None:
+    driver = load_driver()
+    with tempfile.TemporaryDirectory(prefix="llm-slovenian-driver-test-") as temp_dir:
+        paths = driver.workspace_paths(Path(temp_dir))
+        monkeypatch.setenv("PYTHONPATH", "synthetic-private-value")
+        env = driver.build_environment(paths)
+        assert env["UV_PROJECT_ENVIRONMENT"] == str(paths.project_environment)
+        assert env["UV_CACHE_DIR"] == str(paths.cache)
+        assert env["UV_LINK_MODE"] == "copy"
+        assert env["UV_PYTHON"] == "3.12"
+        assert "PYTHONPATH" not in env
+        assert env["RUFF_CACHE_DIR"] == str(paths.ruff_cache)
+        assert env["MYPY_CACHE_DIR"] == str(paths.mypy_cache)
+
+
+def test_driver_refuses_repository_temp_parent() -> None:
+    driver = load_driver()
+    with pytest.raises(driver.DriverError, match="TEMP_PARENT_INSIDE_REPOSITORY"):
+        driver.resolve_temp_parent(ROOT, ROOT)
+
+
+def test_driver_command_order_and_offline_dependency_policy() -> None:
+    driver = load_driver()
+    with tempfile.TemporaryDirectory(prefix="llm-slovenian-driver-test-") as temp_dir:
+        paths = driver.workspace_paths(Path(temp_dir))
+        initial = driver.initial_command_specs(ROOT, paths, "uv")
+        wheel = paths.output / "llm_slovenian_repair-0.0.0-py3-none-any.whl"
+        offline = driver.offline_command_specs(
+            paths,
+            "uv",
+            wheel,
+            paths.wheelhouse,
+            {name: "0.0.0" for name in driver.REQUIRED_PACKAGES},
+        )
+        labels = [
+            spec.label
+            for spec in initial + [driver.build_command_spec(ROOT, paths, "uv")] + offline
+        ]
+        assert labels == [
+            "uv lock --check",
+            "frozen dependency sync",
+            "focused contract tests",
+            "full pytest",
+            "Ruff",
+            "mypy",
+            "OAP unittest discovery",
+            "sdist and wheel build",
+            "create fresh offline venv",
+            "offline wheel installation with dependencies",
+            "offline runtime import and metadata",
+        ]
+        install = offline[1].argv
+        assert "--offline" in install
+        assert "--no-index" in install
+        assert "--find-links" in install
+        assert "--no-deps" not in install
+        assert "--ignore=.venv" in initial[3].argv
+
+
+def test_driver_timeout_and_error_propagation() -> None:
+    driver = load_driver()
+    records: list[dict[str, Any]] = []
+    spec = driver.CommandSpec(
+        "synthetic timeout", (sys.executable, "-c", "import time; time.sleep(1)"), ROOT
+    )
+    with pytest.raises(driver.CommandFailure, match="synthetic timeout:TIMEOUT"):
+        driver.run_command(spec, env=os.environ.copy(), timeout=0.01, records=records)
+    assert records[-1]["result"] == "TIMEOUT"
+
+    records = []
+    spec = driver.CommandSpec(
+        "synthetic failure", (sys.executable, "-c", "raise SystemExit(7)"), ROOT
+    )
+    with pytest.raises(driver.CommandFailure, match="synthetic failure:FAILED:7"):
+        driver.run_command(spec, env=os.environ.copy(), timeout=1, records=records)
+    assert records[-1]["result"] == "FAILED"
+
+
+def test_driver_synthetic_missing_cache_failure_is_explicit(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    driver = load_driver()
+
+    def fake_run(
+        spec: Any,
+        *,
+        env: dict[str, str],
+        timeout: float,
+        records: list[dict[str, Any]],
+    ) -> None:
+        if spec.label == "sdist and wheel build":
+            output = Path(spec.argv[-1])
+            output.mkdir(exist_ok=True)
+            (output / "llm_slovenian_repair-0.0.0-py3-none-any.whl").touch()
+        records.append({"label": spec.label, "result": "PASSED", "timeout_seconds": timeout})
+
+    monkeypatch.setattr(driver, "run_command", fake_run)
+    with tempfile.TemporaryDirectory(prefix="llm-slovenian-driver-test-") as temp_dir:
+        repo = Path(temp_dir) / "repo"
+        parent = Path(temp_dir) / "native-parent"
+        repo.mkdir()
+        parent.mkdir()
+        (repo / "uv.lock").write_bytes(LOCKFILE.read_bytes())
+        result = driver.run_verification(repo, parent, 1)
+    assert result["result"] == "FAILED"
+    assert result["failure"] == "CACHED_RUNTIME_WHEEL_MISSING"
+    assert result["cleanup"] == "PASSED"

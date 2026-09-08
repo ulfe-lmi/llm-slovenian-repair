@@ -28,33 +28,22 @@ jobs:
       - name: Install Python 3.12
         run: uv python install 3.12
 
-      - name: Check lock and sync frozen environment
-        run: |
-          uv lock --check
-          uv sync --frozen --all-groups --all-extras --python 3.12
-
-      - name: Run contract tests
-        run: uv run --frozen pytest tests/contract/test_objective_001.py -q
-
-      - name: Run full tests
-        run: uv run --frozen pytest -q
-
-      - name: Check Ruff
-        run: uv run --frozen ruff check src tests
-
-      - name: Check mypy
-        run: uv run --frozen mypy src tests/contract
-
-      - name: Build sdist and wheel
-        run: uv build --no-sources
-
-      - name: Prove offline wheel installation and import
+      - name: Run native development baseline driver
         shell: bash
         run: |
-          offline_env="$RUNNER_TEMP/llm-slovenian-repair-wheel-venv"
-          uv venv --python 3.12 "$offline_env"
-          uv pip install --python "$offline_env/bin/python" --offline --no-index --no-deps dist/llm_slovenian_repair-0.0.0-py3-none-any.whl
-          HOME="$RUNNER_TEMP/llm-slovenian-repair-wheel-home" PYTHONDONTWRITEBYTECODE=1 "$offline_env/bin/python" -B -c 'import llm_slovenian_repair; assert llm_slovenian_repair.__version__ == "0.0.0"'
+          python312="$(uv python find 3.12)"
+          "$python312" scripts/verify_development_baseline.py --temp-parent "$RUNNER_TEMP"
+
+      - name: Assert checkout has no temporary environment artifacts
+        shell: bash
+        run: |
+          test ! -e .venv
+          test ! -e dist
+          test ! -e build
+          test ! -e .cache
+          test ! -e .pytest_cache
+          test ! -e .ruff_cache
+          test ! -e .mypy_cache
 
       - name: Check accepted-base whitespace and protected sources
         run: |

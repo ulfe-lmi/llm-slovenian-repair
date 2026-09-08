@@ -23,31 +23,33 @@ operation and eagerly imports no runtime dependency.
 
 ## Reproducible commands
 
-From the repository root, using Python 3.12:
+From the repository root, using Python 3.12 and a native temporary parent:
 
 ```text
-uv lock --check
-uv sync --frozen --all-groups --all-extras --python 3.12
-uv run --frozen pytest tests/contract/test_objective_001.py -q
-uv run --frozen pytest -q
-uv run --frozen ruff check src tests
-uv run --frozen mypy src tests/contract
-uv build --no-sources
-python3 -B -m unittest discover -s oap/tests -v
+python3.12 scripts/verify_development_baseline.py --temp-parent /tmp
 ```
 
-The application workflow also builds both sdist and wheel and performs an
-offline wheel installation/import proof. To reproduce that proof locally after
-the ordinary frozen sync has populated uv's cache:
+The driver is the supported selected-workspace path. It creates one unique
+`TemporaryDirectory` under the explicit native parent, refuses a parent inside
+the repository, and uses that owned root for the project environment, uv cache,
+Ruff/mypy caches, build output, and the second wheel environment. This matters
+because the owner-selected workspace is a sync mount where repository `.venv`
+creation and filesystem lookup are unsupported. The driver does not use a fixed
+shared venv or remove caller paths.
 
-```text
-uv build --no-sources
-uv venv --python 3.12 /tmp/llm-slovenian-repair-wheel-venv
-uv pip install --python /tmp/llm-slovenian-repair-wheel-venv/bin/python --offline --no-index --no-deps dist/llm_slovenian_repair-0.0.0-py3-none-any.whl
-/tmp/llm-slovenian-repair-wheel-venv/bin/python -B -c 'import llm_slovenian_repair; assert llm_slovenian_repair.__version__ == "0.0.0"'
-rm -rf /tmp/llm-slovenian-repair-wheel-venv dist
-```
+The first frozen sync may use the configured package registry to populate the
+isolated cache. The driver then materializes the locked runtime wheel entries
+from that cache into an owned wheelhouse. The second fresh Python 3.12
+environment switches uv to `UV_OFFLINE=1`/`--offline`, disables indexes, and
+installs the built wheel with its full declared runtime dependency closure from
+that wheelhouse; it deliberately does not use `--no-deps`. It then imports the
+package, `pydantic`, `pydantic-core`, and `httpx` from a directory outside the
+repository and checks their locked versions and package metadata. Missing
+cached dependencies fail the proof. Every subprocess has a finite timeout, and
+the owned environment, cache, wheelhouse, and build artifacts are cleaned by
+context-managed temporary-directory cleanup.
 
-The temporary directory and build output above are disposable owned fixtures;
-do not remove unrelated files. The package contains no production entry point,
-service, live-Qwen test, corpus, GPU dependency, downloader, or release step.
+The driver also runs the focused contract tests, full pytest, Ruff, mypy,
+separate OAP unittest discovery, and both sdist/wheel builds in the required
+order. The package contains no production entry point, service, live-Qwen test,
+corpus, GPU dependency, downloader, or release step.
