@@ -69,11 +69,12 @@ archive or row is retained, committed, or packaged; see the receipt under
 `resources/source-acquisitions/` and the objective-006 report for the precise
 partial boundary.
 Round 006-d adds a standard-library, content-free classifier for bounded
-unigram-row structure. Its synthetic contract suite passes, and one verifier-
-first archive fetch was attempted under the round's exact boundary. The member
-prefix did not deliver 32 complete rows to the classifier, so the 006-d receipt
-is `BLOCKED_ROW_DIAGNOSTIC_INPUT`; no aggregate diagnosis, importer execution,
-format correction, or compatibility claim is made. The temporary tree and all
-source bytes were removed.
+unigram-row structure. Round 006-e corrects its prefix handoff with a public
+`classify_stream` boundary and synthetic ZIP-member routing tests. One
+verifier-first 006-e fetch then reached exactly 32 rows: 31 had 28 fields and
+one had an empty terminal 29th field. The aggregate is diagnostic evidence only;
+no real importer smoke, format correction, compatibility, redistribution, or
+source retention is claimed. The temporary tree and all source bytes were
+removed.
 Do not execute the [draft roadmap](oap/strategic-instructions/INITIAL-ROADMAP.md)
 without strategic reconciliation and deliberate owner activation.

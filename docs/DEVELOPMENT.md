@@ -120,3 +120,10 @@ serialization. Its single verifier-first fetch was blocked before 32 complete
 member rows reached the classifier (`requested-row-incomplete`); the receipt
 therefore stores null diagnosis aggregates, records no importer run, and makes
 no format or compatibility claim. The temporary source tree was deleted.
+Round 006-e adds the public `classify_stream` handoff around that classifier.
+The CLI delegates to the same boundary, which reads one caller-owned binary
+stream prefix exactly once before one classification. Synthetic tests include a
+15-line preamble/header ZIP member, exact 32-row routing, double-skip failure,
+header inclusion, and aggregate-count validation. Its single verifier-first
+fetch completed the bounded diagnosis with 31 28-field rows and one empty
+terminal 29th field; no importer compatibility or source retention is implied.

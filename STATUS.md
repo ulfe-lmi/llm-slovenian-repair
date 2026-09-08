@@ -62,3 +62,9 @@ synthetic tests. Its single verifier-first fetch passed archive verification but
 stopped before 32 complete member rows reached the classifier, so its receipt is
 `BLOCKED_ROW_DIAGNOSTIC_INPUT` with null diagnosis aggregates and no importer
 execution. No format correction or compatibility claim is made.
+Round 006-e corrects that diagnostic prefix handoff with a public
+`classify_stream` function, exact 15-line routing, and synthetic ZIP-member
+coverage. Its one verifier-first fetch reached 32 rows and produced a
+content-free aggregate: 31 rows had 28 fields and one had an empty terminal
+29th field. This is bounded format evidence only; importer compatibility,
+format correction, redistribution, release, and deployment remain unclaimed.

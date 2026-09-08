@@ -4,9 +4,10 @@ from __future__ import annotations
 
 import json
 import sys
+import zipfile
 from io import BytesIO
 from pathlib import Path
-from typing import Any, cast
+from typing import Any, Protocol, cast
 
 import pytest
 
@@ -19,6 +20,7 @@ from scripts.diagnose_unigram_rows import (  # noqa: E402
     DiagnosticError,
     RowStructureLimits,
     classify_rows,
+    classify_stream,
 )
 
 
@@ -44,6 +46,98 @@ def row(
 
 def diagnosis(data: bytes, **kwargs: Any) -> dict[str, object]:
     return classify_rows(BytesIO(data), requested_row_count=kwargs.pop("requested", 1), **kwargs)
+
+
+class ReadableBinary(Protocol):
+    def readline(self, size: int = -1, /) -> bytes: ...
+
+
+class CountingBinaryStream:
+    def __init__(self, stream: ReadableBinary) -> None:
+        self.stream = stream
+        self.readline_calls = 0
+
+    def readline(self, size: int = -1, /) -> bytes:
+        self.readline_calls += 1
+        return self.stream.readline(size)
+
+
+def diagnostic_rows() -> list[bytes]:
+    variants = (
+        row(),
+        row(terminal_tabs=1),
+        row(terminal_tabs=2),
+        row(field_count=29),
+        row(embedded_tab=True),
+        row(escaped_quote=True),
+        row(quoted=False),
+    )
+    return [variants[index % len(variants)] for index in range(32)]
+
+
+def synthetic_member() -> bytes:
+    return b"# synthetic preamble\r\n" * 14 + b'"synthetic header"\r\n' + b"".join(
+        diagnostic_rows()
+    )
+
+
+def test_classify_stream_routes_one_prefix_and_classifies_once() -> None:
+    stream = CountingBinaryStream(
+        BytesIO(b"# preamble\r\n" * 15 + b"".join(diagnostic_rows()))
+    )
+    result = classify_stream(stream, skip_rows=15, requested_rows=32)
+
+    assert stream.readline_calls == 15 + 32
+    assert result["requested_row_count"] == result["read_row_count"] == 32
+
+
+def test_double_skip_and_header_inclusion_are_distinguishable() -> None:
+    rows = diagnostic_rows()
+    header = b'"synthetic header"\r\n'
+    with pytest.raises(DiagnosticError, match="requested-row-incomplete"):
+        classify_stream(
+            CountingBinaryStream(BytesIO(b"".join(rows))), skip_rows=14, requested_rows=32
+        )
+
+    included_header = classify_stream(
+        CountingBinaryStream(BytesIO(b"# preamble\r\n" * 14 + header + b"".join(rows))),
+        skip_rows=14,
+        requested_rows=32,
+    )
+    assert included_header["read_row_count"] == 32
+    assert included_header["csv_field_count_histogram"] == {
+        "1": 1,
+        "28": 17,
+        "29": 9,
+        "30": 5,
+    }
+    assert included_header["first_structurally_failing_source_line_number"] == 1
+
+
+def test_zip_member_routes_fifteen_lines_and_thirty_two_rows_without_output(
+    tmp_path: Path,
+) -> None:
+    archive = BytesIO()
+    with zipfile.ZipFile(archive, "w", compression=zipfile.ZIP_DEFLATED) as handle:
+        handle.writestr("synthetic/member.tsv", synthetic_member())
+
+    with zipfile.ZipFile(BytesIO(archive.getvalue())) as handle, handle.open(
+        "synthetic/member.tsv"
+    ) as member:
+        counted = CountingBinaryStream(member)
+        result = classify_stream(counted, skip_rows=15, requested_rows=32)
+
+    assert counted.readline_calls == 15 + 32
+    assert result["read_row_count"] == 32
+    terminal_histogram = cast(dict[str, int], result["terminal_tab_count_histogram"])
+    field_histogram = cast(dict[str, int], result["csv_field_count_histogram"])
+    assert sum(terminal_histogram.values()) == 32
+    assert sum(field_histogram.values()) == 32
+    assert result["first_structurally_failing_source_line_number"] == 4
+    assert cast(int, result["nonempty_field_after_28_count"]) > 0
+    rendered = json.dumps(result, ensure_ascii=False, sort_keys=True)
+    assert "synthetic-" not in rendered
+    assert not list(tmp_path.iterdir())
 
 
 def test_exact_28_fields_without_terminal_tab_is_classified() -> None:
@@ -184,6 +278,108 @@ def test_blocked_real_receipt_is_bounded_and_content_free() -> None:
     assert receipt["real_importer_smoke"]["input_sha256"] is None
     assert receipt["real_importer_smoke"]["output_sha256"] is None
     assert "implementation_head" not in receipt
+
+    forbidden = {"fields", "values", "raw", "row_hash", "decoded_strings"}
+
+    def keys(value: object) -> list[str]:
+        if isinstance(value, dict):
+            nested = [item for child in value.values() for item in keys(child)]
+            return [key for key in value] + nested
+        if isinstance(value, list):
+            return [item for child in value for item in keys(child)]
+        return []
+
+    assert not forbidden.intersection(keys(receipt))
+
+
+def test_complete_real_receipt_has_count_consistent_aggregate_and_new_identity() -> None:
+    receipt = json.loads(
+        (ROOT / "resources/source-acquisitions/gigafida-2.0-words-006-e.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    prior = json.loads(
+        (ROOT / "resources/source-acquisitions/gigafida-2.0-words-006-d.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    assert receipt["receipt_id"] == "gigafida-2.0-words-006-e"
+    assert receipt["receipt_id"] != prior["receipt_id"]
+    assert receipt["status"] == "COMPLETE_ROW_DIAGNOSTIC"
+    assert receipt["acquisition_evidence"]["006_e_get_count"] == 1
+    assert receipt["acquisition_evidence"]["cumulative_observed_objective_get_count"] == 7
+    assert receipt["acquisition_evidence"]["prefix_invocation"] == {
+        "mode": "direct ZipFile.open member stream",
+        "skip_rows": 15,
+        "requested_rows": 32,
+        "logical_readline_count": 47,
+    }
+    assert receipt["real_importer_smoke"]["runs_completed"] == 0
+    assert receipt["source_data_retained"] is False
+    assert receipt["redistribution_ready"] is False
+    assert "implementation_head" not in receipt
+
+    aggregate = receipt["structural_diagnostic"]["aggregate"]
+    expected_keys = {
+        "schema_version",
+        "requested_row_count",
+        "read_row_count",
+        "utf8_valid_row_count",
+        "utf8_invalid_row_count",
+        "crlf_row_count",
+        "lf_row_count",
+        "missing_newline_row_count",
+        "terminal_tab_count_histogram",
+        "csv_field_count_histogram",
+        "empty_final_field_count",
+        "nonempty_field_after_28_count",
+        "fully_all_fields_quoted_count",
+        "embedded_tab_in_quoted_field_row_count",
+        "quote_parse_error_count",
+        "existing_parser_failure_reason_histogram",
+        "min_whole_row_byte_length",
+        "max_whole_row_byte_length",
+        "first_structurally_failing_source_line_number",
+    }
+    assert set(aggregate) == expected_keys
+    assert aggregate["schema_version"] == 1
+    assert aggregate["requested_row_count"] == aggregate["read_row_count"] == 32
+    count_keys = {
+        "utf8_valid_row_count",
+        "utf8_invalid_row_count",
+        "crlf_row_count",
+        "lf_row_count",
+        "missing_newline_row_count",
+        "empty_final_field_count",
+        "nonempty_field_after_28_count",
+        "fully_all_fields_quoted_count",
+        "embedded_tab_in_quoted_field_row_count",
+        "quote_parse_error_count",
+    }
+    for key in count_keys:
+        value = aggregate[key]
+        assert type(value) is int
+        assert 0 <= value <= 32
+
+    for key, expected_histogram_keys in {
+        "terminal_tab_count_histogram": {"0", "1", "2+"},
+        "csv_field_count_histogram": {"28", "29"},
+    }.items():
+        histogram = aggregate[key]
+        assert set(histogram) == expected_histogram_keys
+        assert all(type(value) is int and 0 <= value <= 32 for value in histogram.values())
+        assert sum(histogram.values()) == 32
+    parser_histogram = aggregate["existing_parser_failure_reason_histogram"]
+    assert all(isinstance(key, str) for key in parser_histogram)
+    assert all(type(value) is int and 0 <= value <= 32 for value in parser_histogram.values())
+    assert sum(parser_histogram.values()) <= 32
+
+    minimum = aggregate["min_whole_row_byte_length"]
+    maximum = aggregate["max_whole_row_byte_length"]
+    assert type(minimum) is int and type(maximum) is int
+    assert 0 < minimum <= maximum <= DEFAULT_MAX_LINE_BYTES
+    first_failure = aggregate["first_structurally_failing_source_line_number"]
+    assert first_failure is None or 1 <= first_failure <= 32
 
     forbidden = {"fields", "values", "raw", "row_hash", "decoded_strings"}
 

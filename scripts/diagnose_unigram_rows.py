@@ -14,7 +14,7 @@ import sys
 from collections import Counter
 from dataclasses import dataclass
 from io import BytesIO
-from typing import BinaryIO, Final
+from typing import BinaryIO, Final, Protocol
 
 SCHEMA_VERSION: Final = 1
 MAX_REQUESTED_ROWS: Final = 32
@@ -30,6 +30,12 @@ class DiagnosticError(ValueError):
     def __init__(self, reason: str) -> None:
         self.reason = reason
         super().__init__(reason)
+
+
+class BinaryLineStream(Protocol):
+    """The caller-owned binary stream surface needed for prefix routing."""
+
+    def readline(self, size: int = -1, /) -> bytes: ...
 
 
 @dataclass(frozen=True, slots=True)
@@ -353,7 +359,7 @@ def classify_rows(
 
 
 def _read_prefix(
-    stream: BinaryIO, *, skip_rows: int, requested_rows: int, max_line_bytes: int
+    stream: BinaryLineStream, *, skip_rows: int, requested_rows: int, max_line_bytes: int
 ) -> BytesIO:
     if not 0 <= skip_rows <= 1000:
         raise DiagnosticError("invalid-skip-row-count")
@@ -372,6 +378,30 @@ def _read_prefix(
     return BytesIO(b"".join(rows))
 
 
+def classify_stream(
+    stream: BinaryLineStream,
+    *,
+    skip_rows: int,
+    requested_rows: int,
+    limits: RowStructureLimits | None = None,
+) -> dict[str, object]:
+    """Read one bounded prefix from ``stream`` and classify it exactly once.
+
+    The caller owns the already-open binary stream.  Prefix routing and row
+    classification live at this boundary so callers cannot accidentally apply
+    the preamble skip twice or pass the header into the classifier.
+    """
+
+    actual_limits = limits or RowStructureLimits()
+    prefix = _read_prefix(
+        stream,
+        skip_rows=skip_rows,
+        requested_rows=requested_rows,
+        max_line_bytes=actual_limits.max_line_bytes,
+    )
+    return classify_rows(prefix, requested_row_count=requested_rows, limits=actual_limits)
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--skip-rows", type=int, default=0)
@@ -385,13 +415,12 @@ def main(argv: list[str] | None = None) -> int:
             max_total_bytes=args.max_total_bytes,
             max_line_bytes=args.max_line_bytes,
         )
-        prefix = _read_prefix(
+        result = classify_stream(
             sys.stdin.buffer,
             skip_rows=args.skip_rows,
             requested_rows=args.rows,
-            max_line_bytes=limits.max_line_bytes,
+            limits=limits,
         )
-        result = classify_rows(prefix, requested_row_count=args.rows, limits=limits)
         print(json.dumps(result, ensure_ascii=False, sort_keys=True))
         return 0
     except (DiagnosticError, OSError, ValueError) as error:

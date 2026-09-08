@@ -123,3 +123,8 @@ classifier. The 006-d receipt records the exact archive/header identities,
 `BLOCKED_ROW_DIAGNOSTIC_INPUT`, null aggregate diagnosis, no importer execution,
 cleanup, and no retained source bytes. It does not select an importer format or
 authorize redistribution.
+Round 006-e corrects that handoff with a single public stream-routing boundary
+and synthetic ZIP-member tests. Its one verifier-first fetch reached exactly 32
+rows; the aggregate records 31 28-field rows and one empty terminal 29th field,
+without retaining content or running an importer smoke. This remains bounded
+format evidence, not importer compatibility or redistribution authorization.
