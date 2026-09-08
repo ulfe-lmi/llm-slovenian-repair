@@ -10,6 +10,7 @@ import unittest
 from pathlib import Path
 
 from support import *
+from oap_core import _transcript_order
 
 
 def fixture_ignore(directory, names):
@@ -105,15 +106,32 @@ class TranscriptGuard(unittest.TestCase):
         self.install_report('000-b')
         self.assertEqual(self.guard(index=True, expected_id='000-b')['latest'], '000-b')
 
-    def test_suffix_z_to_aa_is_valid(self):
-        self.install_report('000-z')
-        self.install_report('000-aa')
-        self.assertEqual(self.guard(revision='HEAD', expected_id='000-aa')['latest'], '000-aa')
+    def test_full_suffix_prefixes_through_aa_and_ba_are_valid(self):
+        for last in ('aa', 'ba'):
+            end = SUFFIX_ORDER.index(last) + 1
+            ids = [f'000-{suffix}' for suffix in SUFFIX_ORDER[:end]]
+            self.assertEqual(_transcript_order(ids), ids)
 
-    def test_suffix_az_to_ba_is_valid(self):
-        self.install_report('000-az')
-        self.install_report('000-ba')
-        self.assertEqual(self.guard(index=True, expected_id='000-ba')['latest'], '000-ba')
+    def test_missing_initial_objective_and_suffix_origins_are_rejected(self):
+        cases = [
+            (['001-a'], 'TRANSCRIPT_OBJECTIVE_GAP'),
+            (['000-z', '000-aa'], 'TRANSCRIPT_SUFFIX_GAP'),
+            (['000-a', '000-c'], 'TRANSCRIPT_SUFFIX_GAP'),
+        ]
+        for ids, code in cases:
+            with self.assertRaises(OAPError) as caught:
+                _transcript_order(ids)
+            self.assertEqual(caught.exception.code, code)
+
+    def test_historical_order_uses_its_recorded_governance_base(self):
+        self.install_report('000-a')
+        manifest = jsread(self.repo / 'oap/governance/MANIFEST.json')
+        path = next(iter(manifest['identities']))
+        manifest['identities'][path]['sha256'] = '0' * 64
+        write(self.repo / 'oap/governance/MANIFEST.json', json_bytes(manifest))
+        self.commit_fixture('Change current governance candidate')
+        result = self.guard(revision='HEAD', expected_id='000-a')
+        self.assertEqual(result['reports'], ['000-a'])
 
     def test_same_size_worktree_index_and_committed_mismatches_are_rejected(self):
         self.install_unfinished()

@@ -495,7 +495,7 @@ def governance(repo, mode="bootstrap", accepted_ref=None, allowed_changes=(), st
             "mode": mode, "semantic_proof": False, "human_authorization_proof": False}
 
 
-def validate_order(data, repo, ident=None, filename=None, *, source_ref=None):
+def validate_order(data, repo, ident=None, filename=None):
     m = metadata(data, "oap-metadata")
     validate_id(m.get("id"))
     if ident:
@@ -523,8 +523,7 @@ def validate_order(data, repo, ident=None, filename=None, *, source_ref=None):
     require(isinstance(m.get("relevant_gates"), list), "RELEVANT_GATES")
     require(isinstance(m.get("required_checks"), list) and m["required_checks"] and all(meaningful(c) for c in m["required_checks"]), "REQUIRED_CHECKS")
     # An immutable historical order names the governance at its original base.
-    # Candidate implementation may update current law in that ordered round.
-    current = json.loads(git_blob(repo, source_ref or m.get('governance_ref', m['base_sha']), 'oap/governance/MANIFEST.json'))
+    current = json.loads(git_blob(repo, m.get('governance_ref', m['base_sha']), 'oap/governance/MANIFEST.json'))
     require(m.get("governance") == {p: x["sha256"] for p, x in current["identities"].items()}, "ORDER_GOVERNANCE_IDENTITY")
     sections = section_map(data.decode())
     for k in ORDER_SECTIONS:
@@ -803,13 +802,13 @@ def _transcript_order(ids):
         objective, suffix = ident.split("-", 1)
         grouped.setdefault(int(objective), []).append(suffix)
     objectives = sorted(grouped)
-    require(objectives == list(range(objectives[0], objectives[-1] + 1)),
+    require(objectives[0] == 0 and objectives == list(range(0, objectives[-1] + 1)),
             "TRANSCRIPT_OBJECTIVE_GAP")
     ordered = []
     for objective in objectives:
         suffixes = grouped[objective]
         ranks = sorted(SUFFIX_ORDER.index(suffix) for suffix in suffixes)
-        require(ranks == list(range(ranks[0], ranks[-1] + 1)), "TRANSCRIPT_SUFFIX_GAP")
+        require(ranks == list(range(0, ranks[-1] + 1)), "TRANSCRIPT_SUFFIX_GAP")
         ordered.extend(f"{objective:03}-{SUFFIX_ORDER[rank]}" for rank in ranks)
     return ordered
 
@@ -872,8 +871,7 @@ def check_transcript(repo, *, index=False, revision=None, expected_id=None):
     validated_orders = {}
     for ident in ordered:
         path, data = orders[ident]
-        validated_orders[ident] = validate_order(data, repo, ident, Path(path).name,
-                                                  source_ref=resolved)
+        validated_orders[ident] = validate_order(data, repo, ident, Path(path).name)
     for ident, (path, data) in reports.items():
         order_path, order_data = orders[ident]
         require(path.rsplit("/", 1)[-1] == order_path.rsplit("/", 1)[-1], "REPORT_FILENAME")
