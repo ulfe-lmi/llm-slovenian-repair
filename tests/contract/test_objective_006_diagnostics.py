@@ -16,9 +16,16 @@ if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
 from scripts.diagnose_unigram_rows import (  # noqa: E402
+    ABSOLUTE_COUNT_COLUMNS,
     DEFAULT_MAX_LINE_BYTES,
+    NUMERIC_CATEGORY_ORDER,
+    NUMERIC_COLUMNS,
+    PUBLISHED_DECIMAL_COLUMNS,
     DiagnosticError,
+    NumericTokenCategory,
     RowStructureLimits,
+    classify_numeric_rows,
+    classify_numeric_token,
     classify_rows,
     classify_stream,
 )
@@ -256,6 +263,129 @@ def test_requested_and_total_limits_reject_out_of_range_inputs() -> None:
         diagnosis(row(), requested=33)
     with pytest.raises(DiagnosticError, match="input-too-large"):
         diagnosis(row(), limits=RowStructureLimits(max_total_bytes=10, max_line_bytes=10))
+
+
+def test_numeric_token_priority_is_fixed_and_mutually_exclusive() -> None:
+    expected = {
+        "": NumericTokenCategory.EMPTY,
+        "123": NumericTokenCategory.ASCII_DIGITS,
+        "12.34": NumericTokenCategory.ASCII_DECIMAL_DOT,
+        "12,34": NumericTokenCategory.ASCII_DECIMAL_COMMA,
+        "1.234": NumericTokenCategory.ASCII_GROUPED_DOT_TRIPLETS,
+        "1,234": NumericTokenCategory.ASCII_GROUPED_COMMA_TRIPLETS,
+        "1 234": NumericTokenCategory.ASCII_GROUPED_SPACE_TRIPLETS,
+        "1\u00a0234": NumericTokenCategory.UNICODE_SPACE_GROUPED_TRIPLETS,
+        "1.2e3": NumericTokenCategory.ASCII_SCIENTIFIC_DOT,
+        "1,2e3": NumericTokenCategory.ASCII_SCIENTIFIC_COMMA,
+        "+123": NumericTokenCategory.SIGN_PREFIX,
+        "123%": NumericTokenCategory.PERCENT_SUFFIX,
+        " 123 ": NumericTokenCategory.LEADING_OR_TRAILING_WHITESPACE,
+        "NaN": NumericTokenCategory.OTHER_ASCII,
+        "ž": NumericTokenCategory.OTHER_UNICODE,
+    }
+    assert all(
+        classify_numeric_token(value.encode("utf-8")) is category
+        for value, category in expected.items()
+    )
+    assert tuple(expected.values()) == tuple(NUMERIC_CATEGORY_ORDER)
+
+
+def numeric_row(values: dict[int, str]) -> bytes:
+    row_values = [f"identity-{column}" for column in range(1, 29)]
+    for column in ABSOLUTE_COUNT_COLUMNS:
+        row_values[column - 1] = "1"
+    for column in PUBLISHED_DECIMAL_COLUMNS:
+        row_values[column - 1] = "1.2"
+    for column, value in values.items():
+        row_values[column - 1] = value
+    return row_values_bytes(row_values)
+
+
+def row_values_bytes(values: list[str]) -> bytes:
+    return b"\t".join(
+        b'"' + value.encode("utf-8").replace(b'"', b'""') + b'"' for value in values
+    ) + b"\r\n"
+
+
+def test_numeric_profile_conserves_all_24_columns_and_is_content_free() -> None:
+    categories = (
+        "",
+        "123",
+        "12.34",
+        "12,34",
+        "1.234",
+        "1,234",
+        "1 234",
+        "1\u00a0234",
+        "1.2e3",
+        "1,2e3",
+        "+123",
+        "123%",
+        " 123 ",
+        "NaN",
+        "ž",
+    )
+    rows = [
+        numeric_row(
+            {
+                column: categories[(row + column) % len(categories)]
+                for column in NUMERIC_COLUMNS
+            }
+        )
+        for row in range(len(categories))
+    ]
+    first = classify_numeric_rows(BytesIO(b"".join(rows)), requested_row_count=len(rows))
+    second = classify_numeric_rows(BytesIO(b"".join(rows)), requested_row_count=len(rows))
+    assert first == second
+    assert first["row_count"] == len(categories)
+    assert first["numeric_cell_count"] == len(categories) * 24
+    assert first["absolute_count_cell_count"] == len(categories) * 8
+    assert first["published_decimal_cell_count"] == len(categories) * 16
+    histograms = cast(dict[str, dict[str, object]], first["column_histograms"])
+    assert set(histograms) == {str(column) for column in NUMERIC_COLUMNS}
+    for item in histograms.values():
+        category_histogram = cast(dict[str, int], item["category_histogram"])
+        assert set(category_histogram) == {category.value for category in NUMERIC_CATEGORY_ORDER}
+        assert sum(category_histogram.values()) == len(categories)
+    compatibility = cast(dict[str, dict[str, int]], first["current_parser_compatibility"])
+    assert sum(
+        item["compatible_cell_count"] + item["incompatible_cell_count"]
+        for item in compatibility.values()
+    ) == first["numeric_cell_count"]
+    rendered = json.dumps(first, ensure_ascii=False, sort_keys=True)
+    assert all(fragment not in rendered for fragment in categories if fragment)
+    assert not any(
+        key in rendered
+        for key in (
+            "token",
+            "digits",
+            "prefixes",
+            "suffixes",
+            "code_points",
+            "byte_substrings",
+        )
+    )
+
+
+def test_numeric_profile_first_incompatible_is_row_and_column_ordered() -> None:
+    rows = [numeric_row({}), numeric_row({5: "12,34"}), numeric_row({})]
+    result = classify_numeric_rows(BytesIO(b"".join(rows)), requested_row_count=3)
+    assert result["first_incompatible"] == {
+        "row_ordinal": 2,
+        "column": 5,
+        "semantic_kind": "absolute_count",
+        "category": "ASCII_DECIMAL_COMMA",
+    }
+    assert result["current_parser_compatibility"] == {
+        "absolute_count": {"compatible_cell_count": 23, "incompatible_cell_count": 1},
+        "published_decimal": {"compatible_cell_count": 48, "incompatible_cell_count": 0},
+    }
+
+
+def test_numeric_profile_rejects_structure_before_any_profile() -> None:
+    malformed = numeric_row({5: "1"})[:-2] + b"\n"
+    with pytest.raises(DiagnosticError, match="numeric-structure-invalid"):
+        classify_numeric_rows(BytesIO(malformed), requested_row_count=1)
 
 
 def test_blocked_real_receipt_is_bounded_and_content_free() -> None:

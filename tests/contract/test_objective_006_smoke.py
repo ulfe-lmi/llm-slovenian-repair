@@ -108,6 +108,39 @@ def test_verified_prefix_opens_one_member_and_imports_twice(tmp_path: Path) -> N
     assert "records" not in rendered
 
 
+def test_verified_numeric_diagnostic_profiles_then_imports_once(tmp_path: Path) -> None:
+    archive = write_archive(tmp_path, prefix_bytes())
+    result = smoke._run_verified_numeric_diagnostic(archive, evidence_for(archive))
+
+    assert result["status"] == "COMPLETE_NUMERIC_DIAGNOSTIC"
+    numeric = result["numeric_diagnostic"]
+    assert isinstance(numeric, dict)
+    assert numeric["row_count"] == 32
+    assert numeric["numeric_cell_count"] == 32 * 24
+    assert numeric["first_incompatible"] is None
+    importer = result["current_importer"]
+    assert importer == {
+        "attempts": 1,
+        "runs_completed": 1,
+        "record_count": 32,
+        "failure": None,
+    }
+    rendered = json.dumps(result, ensure_ascii=False, sort_keys=True)
+    assert "value-0-0" not in rendered
+    assert "records" not in rendered
+    assert all(
+        fragment not in rendered
+        for fragment in (
+            "token",
+            "digits",
+            "prefixes",
+            "suffixes",
+            "code_points",
+            "byte_substrings",
+        )
+    )
+
+
 @pytest.mark.parametrize(
     ("mutator", "reason"),
     [
@@ -397,6 +430,35 @@ def test_preflight_and_smoke_arguments_are_mutually_exclusive(tmp_path: Path) ->
     assert completed.returncode == 2
     assert completed.stdout == ""
     assert "--artifact: not allowed with argument --preflight" in completed.stderr
+
+
+def test_diagnostic_and_smoke_arguments_are_mutually_exclusive(tmp_path: Path) -> None:
+    environment = os.environ.copy()
+    environment.pop("PYTHONPATH", None)
+    completed = subprocess.run(
+        [
+            sys.executable,
+            "-I",
+            "-B",
+            str(ROOT / "scripts/smoke_unigram_prefix.py"),
+            "--inventory",
+            str(ROOT / "resources/source-inventory-v1.json"),
+            "--source-id",
+            smoke.EXPECTED_SOURCE_ID,
+            "--artifact",
+            str(tmp_path / "smoke.zip"),
+            "--diagnostic",
+            str(tmp_path / "diagnostic.zip"),
+        ],
+        cwd=tmp_path,
+        env=environment,
+        check=False,
+        capture_output=True,
+        text=True,
+    )
+    assert completed.returncode == 2
+    assert completed.stdout == ""
+    assert "argument --diagnostic: not allowed with argument --artifact" in completed.stderr
 
 
 def test_unavailable_dependency_is_a_bounded_preflight_error(tmp_path: Path) -> None:

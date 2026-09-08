@@ -14,6 +14,7 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import re
 import stat
 import sys
 import zipfile
@@ -466,6 +467,65 @@ def _import_twice(envelope: PrefixEnvelope) -> tuple[Any, Any]:
     return first, second
 
 
+_SAFE_IMPORT_FAILURE_RE = re.compile(r"([a-z]+(?:-[a-z]+)*):([1-9][0-9]*)")
+_SAFE_IMPORT_FAILURE_REASONS = frozenset(
+    {
+        "invalid-count",
+        "count-overflow",
+        "zero-without-complete-query",
+        "invalid-decimal",
+    }
+)
+
+
+def _safe_import_failure(error: ValueError) -> dict[str, object] | None:
+    """Expose only an allowlisted exact ``reason:column`` importer result."""
+
+    match = _SAFE_IMPORT_FAILURE_RE.fullmatch(str(error))
+    if match is None or match.group(1) not in _SAFE_IMPORT_FAILURE_REASONS:
+        return None
+    column = int(match.group(2))
+    if column not in diagnostics.NUMERIC_COLUMNS:
+        return None
+    return {"reason": match.group(1), "column": column}
+
+
+def _import_once_for_numeric_diagnostic(envelope: PrefixEnvelope) -> dict[str, object]:
+    try:
+        from llm_slovenian_repair.unigram_importer import (
+            UnigramImportError,
+            UnigramImportLimits,
+            import_unigrams,
+        )
+    except ImportError as exc:
+        raise PrefixSmokeError("numeric-import-unavailable") from exc
+
+    try:
+        provenance = _real_provenance()
+        limits = UnigramImportLimits(
+            max_input_bytes=MAX_PREFIX_ENVELOPE_BYTES,
+            max_rows=DATA_ROW_COUNT,
+            max_line_bytes=MAX_PREFIX_LINE_BYTES,
+            max_field_bytes=MAX_PREFIX_LINE_BYTES,
+        )
+        result = import_unigrams(BytesIO(envelope.data), provenance, limits=limits)
+    except UnigramImportError as error:
+        return {
+            "attempts": 1,
+            "runs_completed": 0,
+            "record_count": None,
+            "failure": _safe_import_failure(error),
+        }
+    except (ImportError, OSError, TypeError) as exc:
+        raise PrefixSmokeError("numeric-import-unavailable") from exc
+    return {
+        "attempts": 1,
+        "runs_completed": 1,
+        "record_count": len(result.records),
+        "failure": None,
+    }
+
+
 def _run_verified_prefix(
     artifact_path: Path, verification: verifier.ArtifactVerification
 ) -> dict[str, object]:
@@ -534,6 +594,76 @@ def _run_verified_prefix(
     }
 
 
+def _run_verified_numeric_diagnostic(
+    artifact_path: Path, verification: verifier.ArtifactVerification
+) -> dict[str, object]:
+    """Profile numeric syntax after structure, then make exactly one import call."""
+
+    _canonical_verification(verification)
+    envelope = _capture_prefix(artifact_path)
+    try:
+        aggregate = diagnostics.classify_stream(
+            BytesIO(envelope.data),
+            skip_rows=PREAMBLE_LINE_COUNT + 1,
+            requested_rows=DATA_ROW_COUNT,
+            limits=diagnostics.RowStructureLimits(
+                max_rows=DATA_ROW_COUNT,
+                max_total_bytes=MAX_PREFIX_ENVELOPE_BYTES,
+                max_line_bytes=MAX_PREFIX_LINE_BYTES,
+            ),
+            include_parser_probe=False,
+        )
+    except (diagnostics.DiagnosticError, OSError, TypeError, ValueError) as exc:
+        reason = exc.reason if isinstance(exc, diagnostics.DiagnosticError) else "failed"
+        raise PrefixSmokeError(f"diagnostic-{reason}") from exc
+    _expected_aggregate(aggregate)
+    try:
+        numeric = diagnostics.classify_numeric_stream(
+            BytesIO(envelope.data),
+            skip_rows=PREAMBLE_LINE_COUNT + 1,
+            requested_rows=DATA_ROW_COUNT,
+            limits=diagnostics.RowStructureLimits(
+                max_rows=DATA_ROW_COUNT,
+                max_total_bytes=MAX_PREFIX_ENVELOPE_BYTES,
+                max_line_bytes=MAX_PREFIX_LINE_BYTES,
+            ),
+        )
+    except (diagnostics.DiagnosticError, OSError, TypeError, ValueError) as exc:
+        reason = exc.reason if isinstance(exc, diagnostics.DiagnosticError) else "failed"
+        raise PrefixSmokeError(f"numeric-diagnostic-{reason}") from exc
+    importer = _import_once_for_numeric_diagnostic(envelope)
+    failure = importer["failure"]
+    return {
+        "schema_version": 1,
+        "status": (
+            "BLOCKED_NUMERIC_DIAGNOSTIC_IMPORT"
+            if failure is not None
+            else "COMPLETE_NUMERIC_DIAGNOSTIC"
+        ),
+        "verifier": {
+            "result": "PASSED",
+            "source_id": verification.source_id,
+            "byte_size": verification.byte_size,
+            "md5": verification.md5,
+            "archive_sha256": verification.sha256,
+            "member_count": verification.member_count,
+            "total_uncompressed_size": verification.total_uncompressed_size,
+        },
+        "prefix": {
+            "member": EXPECTED_MEMBER_NAME,
+            "preamble_lines": envelope.preamble_lines,
+            "header_byte_length": envelope.header_bytes,
+            "header_sha256": EXPECTED_HEADER_SHA256,
+            "data_rows": envelope.data_rows,
+            "readline_calls": envelope.readline_calls,
+            "envelope_bytes": len(envelope.data),
+        },
+        "structural_aggregate": aggregate,
+        "numeric_diagnostic": numeric,
+        "current_importer": importer,
+    }
+
+
 def run_smoke(
     inventory_path: Path, source_id: str, artifact_path: Path
 ) -> dict[str, object]:
@@ -555,6 +685,27 @@ def run_smoke(
     return _run_verified_prefix(artifact_path, verification)
 
 
+def run_diagnostic(
+    inventory_path: Path, source_id: str, artifact_path: Path
+) -> dict[str, object]:
+    """Verify canonical metadata, then run one bounded numeric diagnosis."""
+
+    if source_id != EXPECTED_SOURCE_ID:
+        _fail("source-id-not-canonical")
+    try:
+        inventory = verifier.load_inventory(inventory_path)
+        entries = [entry for entry in inventory["entries"] if entry.get("id") == source_id]
+        if len(entries) != 1:
+            _fail("source-entry-not-canonical")
+        verification = verifier.verify_artifact(inventory_path, source_id, artifact_path)
+    except PrefixSmokeError:
+        raise
+    except (verifier.InventoryError, verifier.ArtifactVerificationError) as exc:
+        raise PrefixSmokeError(f"verify-{exc.reason}") from exc
+    _canonical_verification(verification)
+    return _run_verified_numeric_diagnostic(artifact_path, verification)
+
+
 def _parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--inventory", required=True, type=Path)
@@ -570,6 +721,11 @@ def _parser() -> argparse.ArgumentParser:
         type=Path,
         help="run the bounded smoke over one already-acquired artifact",
     )
+    modes.add_argument(
+        "--diagnostic",
+        type=Path,
+        help="run the bounded numeric-shape diagnostic over one artifact",
+    )
     return parser
 
 
@@ -578,6 +734,8 @@ def main(argv: list[str] | None = None) -> int:
     try:
         if args.preflight:
             result = run_preflight(args.inventory, args.source_id)
+        elif args.diagnostic is not None:
+            result = run_diagnostic(args.inventory, args.source_id, args.diagnostic)
         else:
             result = run_smoke(args.inventory, args.source_id, args.artifact)
     except (PreflightError, PrefixSmokeError) as exc:

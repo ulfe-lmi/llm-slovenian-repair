@@ -10,11 +10,19 @@ from __future__ import annotations
 
 import argparse
 import json
+import re
 import sys
 from collections import Counter
 from dataclasses import dataclass
+from decimal import Decimal, InvalidOperation
+from enum import StrEnum
 from io import BytesIO
+from pathlib import Path
 from typing import BinaryIO, Final, Protocol
+
+REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
+if str(REPOSITORY_ROOT / "src") not in sys.path:
+    sys.path.insert(0, str(REPOSITORY_ROOT / "src"))
 
 SCHEMA_VERSION: Final = 1
 MAX_REQUESTED_ROWS: Final = 32
@@ -22,6 +30,53 @@ DEFAULT_MAX_TOTAL_BYTES: Final = 4 * 1024 * 1024
 DEFAULT_MAX_LINE_BYTES: Final = 256 * 1024
 _DIAGNOSTIC_INVENTORY_SHA256: Final = "a" * 64
 _DIAGNOSTIC_ACQUISITION_SHA256: Final = "b" * 64
+
+ABSOLUTE_COUNT_COLUMNS: Final = (5, 8, 11, 14, 17, 20, 23, 26)
+PUBLISHED_DECIMAL_COLUMNS: Final = tuple(
+    column
+    for column in range(5, 29)
+    if column not in ABSOLUTE_COUNT_COLUMNS
+)
+NUMERIC_COLUMNS: Final = tuple(range(5, 29))
+
+
+class NumericTokenCategory(StrEnum):
+    """Closed, content-free syntax categories for one numeric cell."""
+
+    EMPTY = "EMPTY"
+    ASCII_DIGITS = "ASCII_DIGITS"
+    ASCII_DECIMAL_DOT = "ASCII_DECIMAL_DOT"
+    ASCII_DECIMAL_COMMA = "ASCII_DECIMAL_COMMA"
+    ASCII_GROUPED_DOT_TRIPLETS = "ASCII_GROUPED_DOT_TRIPLETS"
+    ASCII_GROUPED_COMMA_TRIPLETS = "ASCII_GROUPED_COMMA_TRIPLETS"
+    ASCII_GROUPED_SPACE_TRIPLETS = "ASCII_GROUPED_SPACE_TRIPLETS"
+    UNICODE_SPACE_GROUPED_TRIPLETS = "UNICODE_SPACE_GROUPED_TRIPLETS"
+    ASCII_SCIENTIFIC_DOT = "ASCII_SCIENTIFIC_DOT"
+    ASCII_SCIENTIFIC_COMMA = "ASCII_SCIENTIFIC_COMMA"
+    SIGN_PREFIX = "SIGN_PREFIX"
+    PERCENT_SUFFIX = "PERCENT_SUFFIX"
+    LEADING_OR_TRAILING_WHITESPACE = "LEADING_OR_TRAILING_WHITESPACE"
+    OTHER_ASCII = "OTHER_ASCII"
+    OTHER_UNICODE = "OTHER_UNICODE"
+
+
+NUMERIC_CATEGORY_ORDER: Final = tuple(NumericTokenCategory)
+_ASCII_DIGITS_RE = re.compile(r"[0-9]+")
+_ASCII_DECIMAL_DOT_RE = re.compile(r"(?:0|[0-9]+)\.[0-9]+")
+_ASCII_DECIMAL_COMMA_RE = re.compile(r"(?:0|[0-9]+),[0-9]+")
+_ASCII_GROUPED_DOT_RE = re.compile(r"[0-9]{1,3}(?:\.[0-9]{3})+")
+_ASCII_GROUPED_COMMA_RE = re.compile(r"[0-9]{1,3}(?:,[0-9]{3})+")
+_ASCII_GROUPED_SPACE_RE = re.compile(r"[0-9]{1,3}(?: [0-9]{3})+")
+_ASCII_SCIENTIFIC_DOT_RE = re.compile(
+    r"(?:0|[0-9]+)(?:\.[0-9]+)?[eE][+-]?[0-9]+"
+)
+_ASCII_SCIENTIFIC_COMMA_RE = re.compile(
+    r"(?:0|[0-9]+)(?:,[0-9]+)?[eE][+-]?[0-9]+"
+)
+_CURRENT_DECIMAL_RE = re.compile(
+    r"(?:0|[0-9]+)(?:\.[0-9]+)?(?:[eE][+-]?[0-9]+)?"
+)
+_CURRENT_COUNT_MAX = (1 << 63) - 1
 
 
 class DiagnosticError(ValueError):
@@ -205,6 +260,254 @@ def _parse_shape(body: bytes) -> _RowShape:
         all_semantic_fields_quoted=len(quoted) >= 28 and all(quoted[:28]),
         embedded_tab_in_quoted_field=embedded_tab,
         quote_parse_error=False,
+    )
+
+
+def _parse_semantic_bytes(body: bytes) -> tuple[bytes, ...]:
+    """Parse the already shape-checked 28 semantic fields without decoding them."""
+
+    if body.endswith(b"\t"):
+        body = body[:-1]
+    values: list[bytes] = []
+    position = 0
+    while position < len(body):
+        if body[position] != 34:
+            raise DiagnosticError("numeric-structure-invalid")
+        position += 1
+        value = bytearray()
+        while position < len(body):
+            character = body[position]
+            if character == 34:
+                if position + 1 < len(body) and body[position + 1] == 34:
+                    value.extend(b'"')
+                    position += 2
+                    continue
+                position += 1
+                break
+            value.append(character)
+            position += 1
+        else:
+            raise DiagnosticError("numeric-structure-invalid")
+        values.append(bytes(value))
+        if position == len(body):
+            break
+        if body[position] != 9:
+            raise DiagnosticError("numeric-structure-invalid")
+        position += 1
+        if position == len(body):
+            raise DiagnosticError("numeric-structure-invalid")
+    if len(values) != 28:
+        raise DiagnosticError("numeric-structure-invalid")
+    return tuple(values)
+
+
+def _unicode_text(value: bytes) -> str:
+    try:
+        return value.decode("utf-8")
+    except UnicodeDecodeError as exc:
+        raise DiagnosticError("numeric-invalid-utf8") from exc
+
+
+def classify_numeric_token(value: bytes) -> NumericTokenCategory:
+    """Classify one numeric token using a fixed mutually exclusive priority.
+
+    Priority is EMPTY, boundary whitespace, percent suffix, sign prefix,
+    scientific notation, grouped triplets, ordinary decimal notation, digits,
+    then the ASCII/Unicode fallback.  The classifier records syntax only; it
+    never interprets separators or numeric values.
+    """
+
+    if value == b"":
+        return NumericTokenCategory.EMPTY
+    text = _unicode_text(value)
+    if text != text.strip() or any(character.isspace() for character in text[:1] + text[-1:]):
+        return NumericTokenCategory.LEADING_OR_TRAILING_WHITESPACE
+    if text.endswith("%"):
+        return NumericTokenCategory.PERCENT_SUFFIX
+    if text.startswith(("+", "-")):
+        return NumericTokenCategory.SIGN_PREFIX
+    if _ASCII_SCIENTIFIC_DOT_RE.fullmatch(text):
+        return NumericTokenCategory.ASCII_SCIENTIFIC_DOT
+    if _ASCII_SCIENTIFIC_COMMA_RE.fullmatch(text):
+        return NumericTokenCategory.ASCII_SCIENTIFIC_COMMA
+    if _ASCII_GROUPED_DOT_RE.fullmatch(text):
+        return NumericTokenCategory.ASCII_GROUPED_DOT_TRIPLETS
+    if _ASCII_GROUPED_COMMA_RE.fullmatch(text):
+        return NumericTokenCategory.ASCII_GROUPED_COMMA_TRIPLETS
+    if _ASCII_GROUPED_SPACE_RE.fullmatch(text):
+        return NumericTokenCategory.ASCII_GROUPED_SPACE_TRIPLETS
+    if (
+        len(text) > 1
+        and text[0].isdigit()
+        and all(character.isdigit() or character.isspace() for character in text)
+        and any(character.isspace() and character != " " for character in text)
+        and re.fullmatch(r"[0-9]{1,3}(?:\s[0-9]{3})+", text) is not None
+    ):
+        return NumericTokenCategory.UNICODE_SPACE_GROUPED_TRIPLETS
+    if _ASCII_DECIMAL_DOT_RE.fullmatch(text):
+        return NumericTokenCategory.ASCII_DECIMAL_DOT
+    if _ASCII_DECIMAL_COMMA_RE.fullmatch(text):
+        return NumericTokenCategory.ASCII_DECIMAL_COMMA
+    if _ASCII_DIGITS_RE.fullmatch(text):
+        return NumericTokenCategory.ASCII_DIGITS
+    if value.isascii():
+        return NumericTokenCategory.OTHER_ASCII
+    return NumericTokenCategory.OTHER_UNICODE
+
+
+def _is_current_count_compatible(value: bytes, *, first_column: bool) -> bool:
+    if value == b"":
+        return not first_column
+    if not value.isascii() or _ASCII_DIGITS_RE.fullmatch(value.decode("ascii")) is None:
+        return False
+    if len(value) > 19:
+        return False
+    return int(value) <= _CURRENT_COUNT_MAX
+
+
+def _is_current_decimal_compatible(value: bytes) -> bool:
+    if value == b"":
+        return True
+    text = _unicode_text(value)
+    if _CURRENT_DECIMAL_RE.fullmatch(text) is None:
+        return False
+    try:
+        return Decimal(text).is_finite() and Decimal(text) >= 0
+    except InvalidOperation:
+        return False
+
+
+def _validate_numeric_row(row: bytes) -> tuple[bytes, ...]:
+    if not row.endswith(b"\r\n"):
+        raise DiagnosticError("numeric-structure-invalid")
+    body = row[:-2]
+    shape = _parse_shape(body)
+    if (
+        shape.quote_parse_error
+        or shape.field_count not in (28, 29)
+        or shape.terminal_tab_count not in (0, 1)
+        or shape.nonempty_after_28
+        or not shape.all_semantic_fields_quoted
+    ):
+        raise DiagnosticError("numeric-structure-invalid")
+    try:
+        row.decode("utf-8")
+    except UnicodeDecodeError as exc:
+        raise DiagnosticError("numeric-invalid-utf8") from exc
+    return _parse_semantic_bytes(body)
+
+
+def _numeric_profile(rows: list[bytes]) -> dict[str, object]:
+    histograms: dict[str, dict[str, object]] = {}
+    for column in NUMERIC_COLUMNS:
+        kind = "absolute_count" if column in ABSOLUTE_COUNT_COLUMNS else "published_decimal"
+        histograms[str(column)] = {
+            "semantic_kind": kind,
+            "category_histogram": {
+                category.value: 0 for category in NUMERIC_CATEGORY_ORDER
+            },
+            "current_parser_compatible_cell_count": 0,
+            "current_parser_incompatible_cell_count": 0,
+        }
+
+    compatible = {"absolute_count": 0, "published_decimal": 0}
+    incompatible = {"absolute_count": 0, "published_decimal": 0}
+    first_incompatible: dict[str, object] | None = None
+    for row_ordinal, row in enumerate(rows, start=1):
+        fields = _validate_numeric_row(row)
+        for column in NUMERIC_COLUMNS:
+            kind = "absolute_count" if column in ABSOLUTE_COUNT_COLUMNS else "published_decimal"
+            value = fields[column - 1]
+            category = classify_numeric_token(value)
+            column_data = histograms[str(column)]
+            category_histogram = column_data["category_histogram"]
+            assert isinstance(category_histogram, dict)
+            category_histogram[category.value] += 1
+            if kind == "absolute_count":
+                is_compatible = _is_current_count_compatible(
+                    value, first_column=column == ABSOLUTE_COUNT_COLUMNS[0]
+                )
+            else:
+                is_compatible = _is_current_decimal_compatible(value)
+            if is_compatible:
+                compatible[kind] += 1
+                current_count = column_data["current_parser_compatible_cell_count"]
+                assert isinstance(current_count, int)
+                column_data["current_parser_compatible_cell_count"] = current_count + 1
+            else:
+                incompatible[kind] += 1
+                current_count = column_data["current_parser_incompatible_cell_count"]
+                assert isinstance(current_count, int)
+                column_data["current_parser_incompatible_cell_count"] = current_count + 1
+                if first_incompatible is None:
+                    first_incompatible = {
+                        "row_ordinal": row_ordinal,
+                        "column": column,
+                        "semantic_kind": kind,
+                        "category": category.value,
+                    }
+
+    row_count = len(rows)
+    return {
+        "schema_version": SCHEMA_VERSION,
+        "row_count": row_count,
+        "numeric_cell_count": row_count * len(NUMERIC_COLUMNS),
+        "absolute_count_cell_count": row_count * len(ABSOLUTE_COUNT_COLUMNS),
+        "published_decimal_cell_count": row_count * len(PUBLISHED_DECIMAL_COLUMNS),
+        "column_histograms": histograms,
+        "current_parser_compatibility": {
+            "absolute_count": {
+                "compatible_cell_count": compatible["absolute_count"],
+                "incompatible_cell_count": incompatible["absolute_count"],
+            },
+            "published_decimal": {
+                "compatible_cell_count": compatible["published_decimal"],
+                "incompatible_cell_count": incompatible["published_decimal"],
+            },
+        },
+        "first_incompatible": first_incompatible,
+    }
+
+
+def classify_numeric_rows(
+    stream: BinaryIO,
+    *,
+    requested_row_count: int,
+    limits: RowStructureLimits | None = None,
+) -> dict[str, object]:
+    """Profile exactly one structurally valid bounded row set."""
+
+    actual_limits = limits or RowStructureLimits()
+    if not 1 <= requested_row_count <= MAX_REQUESTED_ROWS:
+        raise DiagnosticError("invalid-requested-row-count")
+    if requested_row_count > actual_limits.max_rows:
+        raise DiagnosticError("requested-row-limit")
+    rows = _line_parts(_read_bounded(stream, actual_limits))
+    if len(rows) != requested_row_count:
+        raise DiagnosticError("numeric-row-count")
+    return _numeric_profile(rows)
+
+
+def classify_numeric_stream(
+    stream: BinaryLineStream,
+    *,
+    skip_rows: int,
+    requested_rows: int,
+    limits: RowStructureLimits | None = None,
+) -> dict[str, object]:
+    """Route one bounded member prefix, then profile its semantic rows once."""
+
+    actual_limits = limits or RowStructureLimits()
+    prefix = _read_prefix(
+        stream,
+        skip_rows=skip_rows,
+        requested_rows=requested_rows,
+        max_line_bytes=actual_limits.max_line_bytes,
+    )
+    return classify_numeric_rows(
+        prefix,
+        requested_row_count=requested_rows,
+        limits=actual_limits,
     )
 
 
