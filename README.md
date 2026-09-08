@@ -120,3 +120,18 @@ role/unit meaning, and no conversion, full-import, redistribution, release, or
 deployment claim.
 Do not execute the [draft roadmap](oap/strategic-instructions/INITIAL-ROADMAP.md)
 without strategic reconciliation and deliberate owner activation.
+
+Round 006-k enforces report immutability from Git history. The two known historical
+006-a and 006-c report rewrites are recorded in
+[`oap/REPORT-HISTORY-INCIDENTS.json`](oap/REPORT-HISTORY-INCIDENTS.json) and are
+accepted only as explicit frozen violations; new report paths must be add-once with
+a report-only actual implementation parent. The guard is used by transcript and
+report verification and by the `OAP report history` CI check.
+
+The round also establishes a reusable external cache for the exact Gigafida archive
+outside Git and the wheel. Its fixed source identity, inventory digest, archive
+digests, ownership/type checks, and verifier-first promotion are enforced by
+[`oap/bin/source_cache.py`](oap/bin/source_cache.py). Cache validation is offline;
+the 006-k receipt records the cumulative twelve legacy GETs plus the current bounded
+acquisition, consumer/revalidation counts, retention until concept verification,
+and no redistribution authorization.

@@ -62,3 +62,20 @@ signal the pointer.
 The 001-b/001-c active snapshots were not staged in the historical 001 commits;
 they remain recorded as an incident and are not reconstructed as fabricated
 commits.
+
+Round 006-k adds the history-aware report guard. `oap/REPORT-HISTORY-INCIDENTS.json`
+is a strict record of the two frozen 006-a/006-c violations; executable identities
+in `oap/bin/oap_core.py` prevent the record from granting another exception.
+Run `python3 oap/bin/check_report_history.py --repo-root PATH --revision HEAD
+--require-manifest` on a full-history checkout. Normal reports are add-once,
+report-only commits whose sole parent is the recorded implementation head.
+
+The objective-006 archive cache is an explicit external experiment resource at
+`OAP_STRATEGIC_HOME/source-cache/concept-verification/gigafida-2.0-words`.
+`python3 oap/bin/source_cache.py plan --strategic-home PATH` and `validate`
+perform no network operation. Promotion consumes only the fixed `part.zip` after
+the checked-in verifier passes; it refuses overwrite, symlinks, hardlinks,
+unexpected files, stale metadata, and arbitrary URLs. Cleanup requires an explicit
+completed/abandoned concept-experiment lifecycle. Acquisition receipts bind the
+twelve legacy GETs and the current generation/count; a valid generation is reused
+with zero later GETs.

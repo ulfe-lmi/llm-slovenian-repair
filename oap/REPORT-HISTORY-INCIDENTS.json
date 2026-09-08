@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "scope": "oap/reports",
+  "incidents": [
+    {
+      "incident_id": "RHI-0001",
+      "path": "oap/reports/006-a-unigram-lexicon-importer.md",
+      "reason": "Historical report metadata repair changed a published report path.",
+      "first_touch": {
+        "commit": "e16c3303aab40a914d7edf22520cbf2bf81f1095",
+        "blob": "1c6ae72871bcd0c5ae7fc19aac3d5c1bd3e438c6",
+        "content_sha256": "6f5fbd33b21bcf7799e6a0652490f5da3bf13b738ad4ed73389f99086970d152",
+        "byte_size": 12344
+      },
+      "mutation": {
+        "commit": "767062ac2b2c543c6bc6fdffae2a3fc3a39a786c",
+        "blob": "39eb8b6e0b39a6632cd48526866e64735196597e",
+        "content_sha256": "b35301f28954364f592ea292c7cde49427b5498044d7e7eff9c2706372569c4f",
+        "byte_size": 13569
+      },
+      "actual_implementation_head": "4f3c3d66dbc8c48b6445e973e3ada61bafb131b5",
+      "frozen_current": {
+        "blob": "39eb8b6e0b39a6632cd48526866e64735196597e",
+        "content_sha256": "b35301f28954364f592ea292c7cde49427b5498044d7e7eff9c2706372569c4f",
+        "byte_size": 13569
+      },
+      "status": "KNOWN_HISTORICAL_VIOLATION_FROZEN",
+      "evidence_scope": "Exact two-touch Git history and frozen final blob only; no immutable SELF or actual-parent proof is inferred."
+    },
+    {
+      "incident_id": "RHI-0002",
+      "path": "oap/reports/006-c-support-observed-terminal-tab-and-complete-smoke.md",
+      "reason": "Historical report reconciliation changed a published report path.",
+      "first_touch": {
+        "commit": "241d069a12f8a9c312e8dec57de43ce61c5bf1a2",
+        "blob": "625e05a2e8e97bd6c37de977c2c5d7c1f215d995",
+        "content_sha256": "b2d8aab338f9ad2a697315900a62cde09cf16200fa0dcad462df088bdbf5fce4",
+        "byte_size": 14093
+      },
+      "mutation": {
+        "commit": "898ccbc04ea1c8450f93ce3f1b7cc0869f97e9f9",
+        "blob": "78f3a03445921b903eca38800a239622bfe121be",
+        "content_sha256": "c4d1a3274c798d382c24476a3518b48f67beeb6b69a17370dbf120134305f3cd",
+        "byte_size": 15655
+      },
+      "actual_implementation_head": "6e626fce9df874f569984bd0d810412f7685f0d8",
+      "frozen_current": {
+        "blob": "78f3a03445921b903eca38800a239622bfe121be",
+        "content_sha256": "c4d1a3274c798d382c24476a3518b48f67beeb6b69a17370dbf120134305f3cd",
+        "byte_size": 15655
+      },
+      "status": "KNOWN_HISTORICAL_VIOLATION_FROZEN",
+      "evidence_scope": "Exact two-touch Git history and frozen final blob only; no immutable SELF or actual-parent proof is inferred."
+    }
+  ]
+}

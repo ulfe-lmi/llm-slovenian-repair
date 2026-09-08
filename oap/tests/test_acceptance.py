@@ -578,14 +578,18 @@ class Acceptance(unittest.TestCase):
     def B31_strategic_head_CI_merge_effect(self):
         self.active(); _,head,_=report(self.repo,self.remote)
         key=f'commits/{head}/check-runs?per_page=100'
-        self.remote.responses[key]={'total_count':1,'check_runs':[{'name':'unit','head_sha':head,'status':'completed','conclusion':'success'}]}
-        strategic_gate(self.remote,1,head,['unit'],merge_effect='development-only')
+        required=['unit', HISTORY_CHECK_NAME]
+        self.remote.responses[key]={'total_count':2,'check_runs':[
+            {'name':'unit','head_sha':head,'status':'completed','conclusion':'success'},
+            {'name':HISTORY_CHECK_NAME,'head_sha':head,'status':'completed','conclusion':'success'},
+        ]}
+        strategic_gate(self.remote,1,head,required,merge_effect='development-only')
         for value in ('pending','cancelled','failure',None):
             self.remote.responses[key]['check_runs'][0]['conclusion']=value
-            self.error('REQUIRED_CHECK_NOT_GREEN',strategic_gate,self.remote,1,head,['unit'],merge_effect='development-only')
-        self.error('REQUIRED_CHECK_MISSING',strategic_gate,self.remote,1,head,['missing'],merge_effect='development-only')
-        self.error('MERGE_D2_EFFECT',strategic_gate,self.remote,1,head,['unit'],merge_effect='production')
-        self.error('REVIEW_HEAD_CHANGED',strategic_gate,self.remote,1,self.base,['unit'],merge_effect='development-only')
+            self.error('REQUIRED_CHECK_NOT_GREEN',strategic_gate,self.remote,1,head,required,merge_effect='development-only')
+        self.error('REQUIRED_CHECK_MISSING',strategic_gate,self.remote,1,head,['missing', HISTORY_CHECK_NAME],merge_effect='development-only')
+        self.error('MERGE_D2_EFFECT',strategic_gate,self.remote,1,head,required,merge_effect='production')
+        self.error('REVIEW_HEAD_CHANGED',strategic_gate,self.remote,1,self.base,required,merge_effect='development-only')
         self.remote.prs[1].update(merged=True,merge_commit_sha=head)
         self.remote.responses['branches/main']={'commit':{'sha':head}}
         self.remote.responses['compare/'+head+'...'+head]={'status':'identical'}

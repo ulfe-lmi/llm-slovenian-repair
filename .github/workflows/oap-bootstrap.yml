@@ -63,3 +63,21 @@ jobs:
 
       - name: Check whitespace
         run: git diff --check 2832fa1e51bdf3641aabbd81feab8ddb64a876da...HEAD
+
+  oap-report-history:
+    name: OAP report history
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - name: Check out full history
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          fetch-depth: 0
+
+      - name: Require Python 3.12
+        run: |
+          command -v python3.12
+          python3.12 -c 'import sys; assert sys.version_info[:2] == (3, 12), sys.version'
+
+      - name: Check report history
+        run: python3.12 oap/bin/check_report_history.py --repo-root . --revision HEAD --require-manifest

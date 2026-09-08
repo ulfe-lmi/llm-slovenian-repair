@@ -192,3 +192,12 @@ unchanged importer once with `max_rows=31`; it reaches the safe
 `invalid-decimal:6` boundary while the original envelope remains at
 `invalid-count:5`. Row-role and unit meanings remain unresolved pending strategic
 selection; no importer conversion or production behavior changed.
+
+Round 006-k adds two offline process boundaries. The report-history helper scans
+actual Git path events and hard-binds the two known historical report incidents;
+temporary Git-history tests cover modification, deletion/recreation, parent drift,
+and a new corrective suffix. The source-cache helper exposes plan, validate,
+promote, repair, and lifecycle-gated cleanup operations. It does not download,
+accept arbitrary paths or URLs, or emit private cache paths/content. The cache
+promotes only after `scripts/verify_source_artifact.py` accepts the exact archive
+identity and every consumer revalidates it.

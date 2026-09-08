@@ -192,3 +192,12 @@ records only the safe `invalid-decimal:6` boundary. One new direct GET brings th
 cumulative objective-006 count to twelve. No source content is retained, and no
 conversion, full import, rights, redistribution, release, or deployment claim is
 made.
+
+Round 006-k retains the verified archive in the owner-selected strategic cache for
+the concept-verification handoff. The cache is outside the repository and package,
+has fixed canonical names and source identity, and is promoted only after the
+existing inventory-bound ZIP verifier passes. Plan and validation are network-free;
+promotion has no downloader and consumes one caller-owned part. A valid generation
+is revalidated for each consumer and reused without another GET. The receipt records
+the twelve historical GETs, the current network count, exact generation, consumer
+and revalidation counts, retention lifecycle, and `redistribution_ready=false`.

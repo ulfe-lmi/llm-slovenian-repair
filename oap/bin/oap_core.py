@@ -56,6 +56,67 @@ TRANSCRIPT_FILENAME_RE = re.compile(
     r"(?P<id>[0-9]{3}-[a-z]{1,2})-[a-z0-9]+(?:-[a-z0-9]+)*\.md\Z"
 )
 
+# These identities are executable protocol law.  The JSON file is a readable
+# durable record, but it cannot create or widen an exception by itself.
+REPORT_HISTORY_MANIFEST = {
+    "schema_version": 1,
+    "scope": "oap/reports",
+    "incidents": [
+        {
+            "incident_id": "RHI-0001",
+            "path": "oap/reports/006-a-unigram-lexicon-importer.md",
+            "reason": "Historical report metadata repair changed a published report path.",
+            "first_touch": {
+                "commit": "e16c3303aab40a914d7edf22520cbf2bf81f1095",
+                "blob": "1c6ae72871bcd0c5ae7fc19aac3d5c1bd3e438c6",
+                "content_sha256": "6f5fbd33b21bcf7799e6a0652490f5da3bf13b738ad4ed73389f99086970d152",
+                "byte_size": 12344,
+            },
+            "mutation": {
+                "commit": "767062ac2b2c543c6bc6fdffae2a3fc3a39a786c",
+                "blob": "39eb8b6e0b39a6632cd48526866e64735196597e",
+                "content_sha256": "b35301f28954364f592ea292c7cde49427b5498044d7e7eff9c2706372569c4f",
+                "byte_size": 13569,
+            },
+            "actual_implementation_head": "4f3c3d66dbc8c48b6445e973e3ada61bafb131b5",
+            "frozen_current": {
+                "blob": "39eb8b6e0b39a6632cd48526866e64735196597e",
+                "content_sha256": "b35301f28954364f592ea292c7cde49427b5498044d7e7eff9c2706372569c4f",
+                "byte_size": 13569,
+            },
+            "status": "KNOWN_HISTORICAL_VIOLATION_FROZEN",
+            "evidence_scope": "Exact two-touch Git history and frozen final blob only; no immutable SELF or actual-parent proof is inferred.",
+        },
+        {
+            "incident_id": "RHI-0002",
+            "path": "oap/reports/006-c-support-observed-terminal-tab-and-complete-smoke.md",
+            "reason": "Historical report reconciliation changed a published report path.",
+            "first_touch": {
+                "commit": "241d069a12f8a9c312e8dec57de43ce61c5bf1a2",
+                "blob": "625e05a2e8e97bd6c37de977c2c5d7c1f215d995",
+                "content_sha256": "b2d8aab338f9ad2a697315900a62cde09cf16200fa0dcad462df088bdbf5fce4",
+                "byte_size": 14093,
+            },
+            "mutation": {
+                "commit": "898ccbc04ea1c8450f93ce3f1b7cc0869f97e9f9",
+                "blob": "78f3a03445921b903eca38800a239622bfe121be",
+                "content_sha256": "c4d1a3274c798d382c24476a3518b48f67beeb6b69a17370dbf120134305f3cd",
+                "byte_size": 15655,
+            },
+            "actual_implementation_head": "6e626fce9df874f569984bd0d810412f7685f0d8",
+            "frozen_current": {
+                "blob": "78f3a03445921b903eca38800a239622bfe121be",
+                "content_sha256": "c4d1a3274c798d382c24476a3518b48f67beeb6b69a17370dbf120134305f3cd",
+                "byte_size": 15655,
+            },
+            "status": "KNOWN_HISTORICAL_VIOLATION_FROZEN",
+            "evidence_scope": "Exact two-touch Git history and frozen final blob only; no immutable SELF or actual-parent proof is inferred.",
+        },
+    ],
+}
+REPORT_HISTORY_MANIFEST_PATH = "oap/REPORT-HISTORY-INCIDENTS.json"
+HISTORY_CHECK_NAME = "OAP report history"
+
 
 class OAPError(Exception):
     def __init__(self, code, detail=""):
@@ -273,6 +334,159 @@ def git_blob(repo, ref, path):
     require(bool(SHA_RE.fullmatch(ref)), "TRUSTED_REF_REQUIRED")
     require(not path.startswith("/") and ".." not in Path(path).parts, "UNSAFE_RELATIVE_PATH")
     return git(repo, "show", f"{ref}:{path}")
+
+
+def _tree_blob(repo, revision, path, *, index=False):
+    require(not path.startswith("/") and ".." not in Path(path).parts, "UNSAFE_RELATIVE_PATH")
+    if index:
+        result = git(repo, "show", ":" + path, check=False)
+        require(result.returncode == 0, "TREE_PATH_MISSING", path)
+        return result.stdout
+    return git_blob(repo, revision, path)
+
+
+def _report_history_events(repo, revision):
+    """Return every add/modify/delete event for report Markdown paths."""
+    raw = git(
+        repo,
+        "log",
+        "--reverse",
+        "--format=@@%H %P",
+        "--name-status",
+        "--diff-filter=AMDR",
+        "--find-renames=0",
+        revision,
+        "--",
+        "oap/reports",
+    ).decode("utf-8", "strict")
+    events, commit, parents = [], None, ()
+    for line in raw.splitlines():
+        if line.startswith("@@"):
+            pieces = line[2:].split()
+            require(len(pieces) >= 1 and SHA_RE.fullmatch(pieces[0]), "REPORT_HISTORY_LOG")
+            commit, parents = pieces[0], tuple(pieces[1:])
+            continue
+        if not line or commit is None:
+            continue
+        fields_ = line.split("\t")
+        status = fields_[0]
+        kind = status[:1]
+        if kind not in {"A", "M", "D", "R"}:
+            continue
+        paths = fields_[1:]
+        require(paths and all(path.startswith("oap/reports/") for path in paths), "REPORT_HISTORY_PATH")
+        if kind == "R":
+            require(len(paths) == 2, "REPORT_HISTORY_RENAME")
+            events.extend(
+                {
+                    "commit": commit,
+                    "parents": parents,
+                    "status": status,
+                    "path": path,
+                }
+                for path in paths
+            )
+        else:
+            require(len(paths) == 1, "REPORT_HISTORY_PATH")
+            events.append(
+                {"commit": commit, "parents": parents, "status": kind, "path": paths[0]}
+            )
+    return [event for event in events if event["path"].endswith(".md")]
+
+
+def _commit_paths(repo, commit):
+    raw = git(repo, "diff-tree", "--no-commit-id", "--name-only", "-r", "-z", commit)
+    return raw.rstrip(b"\0").decode("utf-8", "strict").split("\0") if raw else []
+
+
+def _report_history_manifest(repo, revision):
+    result = git(repo, "cat-file", "-e", f"{revision}:{REPORT_HISTORY_MANIFEST_PATH}", check=False)
+    if result.returncode:
+        return None
+    try:
+        manifest = json.loads(
+            _tree_blob(repo, revision, REPORT_HISTORY_MANIFEST_PATH), object_pairs_hook=unique_pairs
+        )
+    except (ValueError, UnicodeError) as exc:
+        raise OAPError("REPORT_HISTORY_MANIFEST_INVALID") from exc
+    require(manifest == REPORT_HISTORY_MANIFEST, "REPORT_HISTORY_MANIFEST_MISMATCH")
+    return manifest
+
+
+def _require_commit_parent_and_path(repo, commit, parent, path):
+    parents = git(repo, "rev-list", "--parents", "-n", "1", commit).decode().split()
+    require(len(parents) == 2 and parents[1] == parent, "REPORT_PARENT")
+    require(_commit_paths(repo, commit) == [path], "REPORT_ONLY_PATH")
+
+
+def check_report_history(repo, revision="HEAD", *, index=False, require_manifest=False):
+    """Enforce add-once report history and the two frozen historical incidents."""
+    repo = safe_path(repo, kind="dir")
+    resolved = _revision(repo, "HEAD" if index else revision)
+    manifest = _report_history_manifest(repo, resolved) if not index else None
+    if index:
+        result = git(repo, "show", ":" + REPORT_HISTORY_MANIFEST_PATH, check=False)
+        if result.returncode == 0:
+            try:
+                manifest = json.loads(
+                    result.stdout,
+                    object_pairs_hook=unique_pairs,
+                )
+            except (ValueError, UnicodeError) as exc:
+                raise OAPError("REPORT_HISTORY_MANIFEST_INVALID") from exc
+            require(manifest == REPORT_HISTORY_MANIFEST, "REPORT_HISTORY_MANIFEST_MISMATCH")
+    if require_manifest:
+        require(manifest is not None, "REPORT_HISTORY_MANIFEST_MISSING")
+
+    events = _report_history_events(repo, resolved)
+    by_path = {}
+    for event in events:
+        by_path.setdefault(event["path"], []).append(event)
+    tree_paths_raw = git(repo, "ls-tree", "-r", "--name-only", resolved, "--", "oap/reports")
+    tree_paths = {
+        p for p in tree_paths_raw.decode("utf-8", "strict").splitlines() if p.endswith(".md")
+    }
+    incidents = {entry["path"]: entry for entry in REPORT_HISTORY_MANIFEST["incidents"]}
+    known = []
+    mutations = []
+    for path in sorted(tree_paths):
+        path_events = by_path.get(path, [])
+        require(path_events, "REPORT_HISTORY_NO_TOUCH", path)
+        if path in incidents:
+            entry = incidents[path]
+            require(len(path_events) == 2, "REPORT_HISTORY_INCIDENT_SEQUENCE", path)
+            first, mutation = path_events
+            require(first["status"] == "A" and mutation["status"] == "M", "REPORT_HISTORY_INCIDENT_STATUS", path)
+            require(first["commit"] == entry["first_touch"]["commit"], "REPORT_HISTORY_INCIDENT_COMMIT", path)
+            require(mutation["commit"] == entry["mutation"]["commit"], "REPORT_HISTORY_INCIDENT_COMMIT", path)
+            _require_commit_parent_and_path(repo, first["commit"], entry["actual_implementation_head"], path)
+            _require_commit_parent_and_path(repo, mutation["commit"], first["commit"], path)
+            for event, identity in ((first, entry["first_touch"]), (mutation, entry["mutation"])):
+                data = git_blob(repo, event["commit"], path)
+                require(git(repo, "rev-parse", f"{event['commit']}:{path}").decode().strip() == identity["blob"], "REPORT_HISTORY_INCIDENT_BLOB", path)
+                require(len(data) == identity["byte_size"] and digest(data) == identity["content_sha256"], "REPORT_HISTORY_INCIDENT_CONTENT", path)
+            current = _tree_blob(repo, resolved, path, index=index)
+            frozen = entry["frozen_current"]
+            require(git(repo, "rev-parse", f"{resolved}:{path}").decode().strip() == frozen["blob"], "REPORT_HISTORY_FROZEN_BLOB", path)
+            require(len(current) == frozen["byte_size"] and digest(current) == frozen["content_sha256"], "REPORT_HISTORY_FROZEN_CONTENT", path)
+            known.append({"path": path, "status": entry["status"], "evidence_scope": entry["evidence_scope"]})
+            mutations.append(path)
+            continue
+        require(len(path_events) == 1 and path_events[0]["status"] == "A", "REPORT_HISTORY_MUTATION", path)
+        event = path_events[0]
+        data = _tree_blob(repo, resolved, path, index=index)
+        report_meta = metadata(data, "oap-report")
+        implementation = report_meta.get("implementation_head")
+        require(SHA_RE.fullmatch(str(implementation or "")), "REPORT_HISTORY_IMPLEMENTATION_HEAD", path)
+        _require_commit_parent_and_path(repo, event["commit"], implementation, path)
+    require(set(mutations) == set(incidents).intersection(tree_paths), "REPORT_HISTORY_MUTATION_SET")
+    return {
+        "result": "valid",
+        "revision": resolved,
+        "known_incidents": known,
+        "frozen_mutation_paths": sorted(mutations),
+        "report_count": len(tree_paths),
+    }
 
 
 def section_map(text, prefix="## "):
@@ -861,6 +1075,7 @@ def check_transcript(repo, *, index=False, revision=None, expected_id=None):
     reports = _parse_transcript_files(entries, "reports")
     for ident in reports:
         require(ident in orders, "REPORT_ORDER_MISSING")
+    history = check_report_history(repo, resolved, index=index)
     if selected_active is None:
         require(not orders and not reports, "ACTIVE_REQUIRED")
         return {"result": "valid", "mode": "index" if index else "revision",
@@ -894,7 +1109,8 @@ def check_transcript(repo, *, index=False, revision=None, expected_id=None):
             require(ident == active, "TRANSCRIPT_NONCURRENT_UNFINISHED")
     return {"result": "valid", "mode": "index" if index else "revision",
             "revision": resolved, "active": active, "latest": latest,
-            "orders": ordered, "reports": [ident for ident in ordered if ident in reports]}
+            "orders": ordered, "reports": [ident for ident in ordered if ident in reports],
+            "report_history": history}
 
 
 def verify_report(repo, ident, *, commit=None, remote=None):
@@ -902,6 +1118,8 @@ def verify_report(repo, ident, *, commit=None, remote=None):
     validate_id(ident)
     opath, rpath = matching(repo, "orders", ident), matching(repo, "reports", ident)
     require(opath is not None and rpath is not None, "REPORT_OR_ORDER_MISSING")
+    report_commit = commit or git(repo, "log", "-1", "--format=%H", "--", str(rpath.relative_to(repo))).decode().strip()
+    history = check_report_history(repo, report_commit)
     order_data = read(opath)
     order = validate_order(order_data, repo, ident, opath.name)
     require(rpath.name == opath.name, "REPORT_FILENAME")
@@ -909,7 +1127,7 @@ def verify_report(repo, ident, *, commit=None, remote=None):
     r = validate_report(data, order, order_data, str(opath.relative_to(repo)))
     report_rel = str(rpath.relative_to(repo))
     if commit is None:
-        commit = git(repo, "log", "-1", "--format=%H", "--", report_rel).decode().strip()
+        commit = report_commit
     require(SHA_RE.fullmatch(commit or ""), "REPORT_NOT_COMMITTED")
     parents = git(repo, "rev-list", "--parents", "-n", "1", commit).decode().split()
     require(len(parents) == 2 and parents[1] == r["implementation_head"], "REPORT_PARENT")
@@ -929,7 +1147,8 @@ def verify_report(repo, ident, *, commit=None, remote=None):
         require([f["filename"] for f in rc["files"]] == [report_rel], "REMOTE_REPORT_ONLY_PATH")
         blob = remote.api("contents/" + report_rel + "?ref=" + commit)
         require(blob.get("encoding") == "base64" and base64.b64decode(blob["content"]) == data, "REMOTE_REPORT_CONTENT")
-    return {"result": "verified", "scope": "remote" if remote else "local only", "commit": commit, "id": ident}
+    return {"result": "verified", "scope": "remote" if remote else "local only", "commit": commit, "id": ident,
+            "report_history": history}
 
 
 def protocol_state(repo, *, strategy=None, remote=None):
@@ -1008,6 +1227,7 @@ def strategic_gate(remote, pr_number, reviewed_sha, required_checks, *, merge_ef
     require(os.environ.get("OAP_ROLE") == "strategic", "ROLE_REQUIRED")
     require(merge_effect == "development-only", "MERGE_D2_EFFECT")
     require(required_checks, "REQUIRED_CHECKS_MISSING")
+    require(HISTORY_CHECK_NAME in required_checks, "HISTORY_CHECK_REQUIRED")
     pr = remote.pr(pr_number)
     require(pr["state"] == "open" and not pr.get("draft", False), "PR_NOT_REVIEWABLE")
     require(pr["head"]["sha"] == reviewed_sha, "REVIEW_HEAD_CHANGED")

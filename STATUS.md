@@ -116,3 +116,20 @@ one importer call with `max_rows=31`, reaching `invalid-decimal:6`; the original
 diagnostic call remains `invalid-count:5`. The 006-j receipt records one GET
 (cumulative twelve), exact cleanup, no retained source data, and no redistribution,
 full-import, conversion, release, or deployment authorization.
+
+Round 006-k is the process-integrity correction. The executable report-history guard
+scans all report paths through the selected Git revision, enforces add-once
+report-only SELF ancestry, and returns an explicit
+`KNOWN_HISTORICAL_VIOLATION_FROZEN` result for only the exact 006-a and 006-c
+sequences. Transcript/report verification and the named `OAP report history` CI
+check use the same guard; strategic review requires that check at the reviewed head.
+
+The round adds an external objective-006 cache lifecycle with fixed names,
+ownership/type/symlink/hardlink checks, canonical inventory verification, atomic
+promotion, offline reuse, and gated cleanup. The cache is outside Git and the wheel;
+receipts keep the twelve legacy GETs distinct from the current generation, record
+network GET and consumer/revalidation counts, and retain redistribution as false.
+006-k records the 006-i starting-SHA correction, 006-j verification-directory
+cleanup, and the attempted broad-prune boundary as new evidence only. Product
+numeric semantics remain unchanged and blocked; no merge, release, deployment, or
+milestone acceptance is claimed.
