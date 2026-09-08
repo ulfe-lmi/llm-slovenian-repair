@@ -8,6 +8,7 @@ import shutil
 import stat
 import subprocess
 import sys
+import tempfile
 import time
 import unittest
 from unittest.mock import patch
@@ -183,6 +184,23 @@ class Processes(unittest.TestCase):
         with patch.dict(os.environ,{'FAKE_GH_RESPONSES':str(responses)}):
             remote=GitHub('synthetic/project',str(fake))
             self.assertEqual(verify_report(self.repo,'000-a',remote=remote)['scope'],'remote')
+
+    def test_B35_real_disposable_git_stress_retires_owned_roots(self):
+        for iteration in range(20):
+            temporary = tempfile.TemporaryDirectory(prefix='oap-git-stress-')
+            try:
+                repo = Path(temporary.name) / 'repo'
+                repo.mkdir()
+                git(repo, 'init', '-b', 'main')
+                git(repo, 'config', 'user.name', 'Synthetic Git stress')
+                git(repo, 'config', 'user.email', 'synthetic@example.invalid')
+                write(repo / 'sentinel.txt', f'iteration {iteration}\n')
+                git(repo, 'add', '--', 'sentinel.txt')
+                git(repo, '-c', 'commit.gpgsign=false', 'commit', '-m', 'Synthetic stress commit')
+                self.assertTrue(git(repo, 'rev-parse', '--verify', 'HEAD').strip())
+            finally:
+                cleanup_owned_temporary_directory(temporary)
+            self.assertFalse(Path(temporary.name).exists())
 
     def test_B10_helper_help_and_real_entry_failures(self):
         for path in (self.repo/'oap/bin').iterdir():

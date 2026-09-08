@@ -60,3 +60,27 @@ The driver also runs the focused contract tests, full pytest, Ruff, mypy,
 separate OAP unittest discovery, and both sdist/wheel builds in the required
 order. The package contains no production entry point, service, live-Qwen test,
 corpus, GPU dependency, downloader, or release step.
+
+## Source manifest fixture
+
+`llm_slovenian_repair.source_manifest` exposes frozen `SourceManifest` and
+`SyntheticCountRecord` models and the canonical `verify_manifest_payload`
+boundary. The manifest accepts only exact `UTF-8` encoding and `jsonl`/`json`
+record formats, matched to `application/jsonl`/`application/json`; alternate
+field names and public aliases are rejected. The loader accepts a
+caller-supplied fixture root, rejects unsafe paths and symlinks, applies finite
+manifest/payload/record limits, verifies exact byte size and SHA-256, and parses
+UTF-8 JSON or JSONL records without writing or using the network.
+
+`tests/fixtures/corpus/synthetic-manifest.json` and
+`tests/fixtures/corpus/synthetic-counts.jsonl` are project-authored synthetic
+fixtures for `local synthetic tests only`. Their terms reference the repository
+`LICENSE`, attribution states that there is no external corpus, and
+`importer_schema_version` is `NOT_APPLICABLE_SYNTHETIC_FIXTURE`; no importer or
+external permission is asserted. Their records exercise exact positive,
+justified exact zero, censored unknown-denominator, and unavailable evidence
+states. The censored record says values at/below synthetic cutoff 4 are
+represented only by `[0,4]`. They are schema/checksum tests, not Slovenian
+language-quality or corpus evidence. Real source names, releases, formats,
+acquisition methods, rights, terms, and access remain unverified. The test-only
+fixture path is not included in the runtime wheel.

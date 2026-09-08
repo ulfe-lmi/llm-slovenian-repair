@@ -23,6 +23,42 @@ DEFAULT_COMMAND_TIMEOUT = 300.0
 PROJECT_PACKAGE = "llm-slovenian-repair"
 DIAGNOSTIC_CAPTURE_BYTES = 8192
 DIAGNOSTIC_MAX_BYTES = 4096
+PUBLIC_EXPORTS = (
+    "__version__",
+    "AcceptanceClass",
+    "ContextDenominatorState",
+    "Edit",
+    "EvidenceCompleteness",
+    "EvidenceRecord",
+    "EvidenceState",
+    "OriginalCoordinateEdit",
+    "Policy",
+    "PolicyConfig",
+    "RepairDisposition",
+    "RepairMode",
+    "RepairReason",
+    "RepairResult",
+    "RepairSpan",
+    "ReviewProposal",
+    "ReviewProposalBatch",
+    "SelectedSpan",
+    "SelectionBatch",
+    "SpanSelection",
+    "StageTimings",
+    "DEFAULT_MAX_MANIFEST_BYTES",
+    "DEFAULT_MAX_PAYLOAD_BYTES",
+    "DEFAULT_MAX_RECORDS",
+    "ManifestDenominatorKnowledge",
+    "ManifestVerificationError",
+    "QueryKind",
+    "RightsStatus",
+    "SourceManifest",
+    "SyntheticCorpus",
+    "SyntheticCountRecord",
+    "VerifiedSyntheticCorpus",
+    "VerificationFailure",
+    "verify_manifest_payload",
+)
 
 
 class DriverError(RuntimeError):
@@ -259,10 +295,26 @@ def offline_command_specs(
 ) -> list[CommandSpec]:
     offline_python = str(venv_python(paths.offline_environment))
     import_code = (
-        "import importlib.metadata as metadata; "
-        "import llm_slovenian_repair, httpx, pydantic, pydantic_core; "
+        "import importlib.metadata as metadata, pathlib, sys; "
         f"expected = {versions!r}; "
-        "assert llm_slovenian_repair.__version__ == expected['llm-slovenian-repair']; "
+        "root = pathlib.Path.cwd(); "
+        "before_files = sorted(path.relative_to(root).as_posix() for path in root.rglob('*')); "
+        "before_modules = set(sys.modules); "
+        "package = __import__('llm_slovenian_repair'); "
+        "after_modules = set(sys.modules); "
+        f"expected_exports = {list(PUBLIC_EXPORTS)!r}; "
+        "assert not {name for name in after_modules - before_modules if "
+        "name == 'pydantic' or name.startswith('pydantic.') or "
+        "name == 'pydantic_core' or name.startswith('pydantic_core.') or "
+        "name == 'httpx' or name.startswith('httpx.')}; "
+        "assert package.__all__ == expected_exports; "
+        "assert package.__version__ == "
+        f"expected['{PROJECT_PACKAGE}']; "
+        "after_files = sorted(path.relative_to(root).as_posix() for path in root.rglob('*')); "
+        "assert before_files == after_files; "
+        "import httpx, pydantic, pydantic_core; "
+        "assert package.PolicyConfig is "
+        "__import__('llm_slovenian_repair.policy', fromlist=['PolicyConfig']).PolicyConfig; "
         "assert all(metadata.version(name) == version and "
         "metadata.metadata(name)['Name'].lower().replace('_', '-') == "
         "name.lower().replace('_', '-') for name, version in expected.items()); "
