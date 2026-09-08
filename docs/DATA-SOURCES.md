@@ -88,3 +88,28 @@ and query evidence. A publisher archive label is not a measurement of Slovenian
 repair benefit, model compatibility, legal advice, release readiness, or deployment
 authority. Real source bytes, raw samples, query results, credentials, and private
 evaluation text remain outside Git and outside operational logs.
+
+## Objective 006 importer boundary
+
+The importer in `src/llm_slovenian_repair/unigram_importer.py` accepts a
+caller-owned binary or text stream only; acquisition, ZIP verification, and
+member selection remain outside its entry point. Version 1 is bound to the
+lower-case form/lemma/POS member
+`GF2.0-words-all-lowercase_forms-lemmas-parts_of_speech-taxonomy-entire.tsv`,
+the 28-field all-quoted tab header, UTF-8, and CRLF. It reads incrementally under
+finite byte/row/line/field limits and emits immutable records plus a canonical
+hash summary. Exact source fields are retained; `NFC_CASEFOLD` is an exposed
+derived lookup transform. Counts are strict nonnegative integers, published
+relative values use `Decimal` and their original text, and zero is accepted only
+when the explicit query scope is complete. Source, query, and import completeness
+are separate states, so a bounded prefix is never upgraded to a complete
+vocabulary or denominator.
+
+The checked-in `tests/fixtures/unigram/` data is project-authored synthetic data
+under the repository `LICENSE`; it is not a Gigafida sample and is excluded from
+the runtime package. The versioned receipt under
+`resources/source-acquisitions/` records the recovery handoff's schema-only facts
+without source values. It explicitly records three prior GETs, first-two
+pre-verifier inspections, no retained external bytes, and real importer smoke
+`NOT RUN`. Those facts block the order's exact-one-fetch acceptance; the receipt
+does not authorize redistribution or make a current acquisition claim.

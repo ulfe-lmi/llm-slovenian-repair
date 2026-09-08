@@ -84,3 +84,25 @@ represented only by `[0,4]`. They are schema/checksum tests, not Slovenian
 language-quality or corpus evidence. Real source names, releases, formats,
 acquisition methods, rights, terms, and access remain unverified. The test-only
 fixture path is not included in the runtime wheel.
+
+## Bounded unigram importer
+
+Objective 006 adds `llm_slovenian_repair.unigram_importer`. It parses a
+caller-supplied UTF-8, CRLF, all-fields-quoted TSV stream incrementally against
+the observed 28-column Gigafida 2.0 lower-case form/lemma/POS header. The module
+does not open paths, download data, inspect ZIPs, or build a lookup index.
+`UnigramProvenance` records source inventory/acquisition/header identity and
+independent source/query/import completeness states. `UnigramRecord` retains all
+decoded source fields, exact count/decimal text, parsed nonnegative integers and
+`Decimal` values, morphology identity, and an NFC/casefold-derived lookup view.
+Frozen extra-forbid models and finite `UnigramImportFailure` labels keep malformed
+rows, invalid UTF-8/control/surrogate text, noncanonical counts, unsafe zero
+evidence, duplicates, truncation, and resource overages fail closed.
+
+`tests/contract/test_objective_006.py` materializes CRLF bytes from the
+project-authored synthetic fixture and exercises the real parser boundary. The
+fixture includes ambiguous analyses, complete-scope zero, and a decomposed
+Unicode form; no external row/count is copied. The recovery receipt records
+schema facts from a prior interrupted context, three earlier GETs, and real
+importer smoke `NOT RUN`; consequently it is not source coverage, complete
+vocabulary evidence, or a current archive verification.

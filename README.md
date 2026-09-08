@@ -52,5 +52,21 @@ The repository is `ulfe-lmi/llm-slovenian-repair`; the owner's [LICENSE](LICENSE
 contains Apache License 2.0 and is preserved unchanged. Live repair testing is
 disabled. Qwen compatibility, linguistic quality, ICA, milestone acceptance,
 release, and deployment approval are not established.
+
+Objective 006 adds a bounded, side-effect-free `unigram_importer` seam for the
+observed Gigafida 2.0 lower-case form/lemma/POS TSV contract. It requires UTF-8
+CRLF, all-fields-quoted rows and preserves all 28 source fields, nonnegative
+counts, lossless decimal text/`Decimal` views, source/query/import completeness,
+and stable morphology-aware record keys. NFC/casefold lookup values are derived
+views; source text remains authoritative. The parser is incremental, frozen,
+extra-forbid, offline, and never downloads or builds an index. Tests use only
+project-authored synthetic data.
+
+The objective-006 recovery receipt records source identity/schema facts from a
+prior interrupted context, but also records three earlier GETs, so the order's
+exact-one-fetch and real importer-smoke evidence are not claimable. No external
+archive or row is retained, committed, or packaged; see the receipt under
+`resources/source-acquisitions/` and the objective-006 report for the precise
+partial boundary.
 Do not execute the [draft roadmap](oap/strategic-instructions/INITIAL-ROADMAP.md)
 without strategic reconciliation and deliberate owner activation.

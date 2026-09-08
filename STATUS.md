@@ -35,3 +35,14 @@ derived publisher archives are selected for future objectives 006, 007, and 027;
 all remain `NOT_ACQUIRED`. Gigafida 2.2 is query-interface evidence only with
 `UNKNOWN_UNVERIFIED` bulk/API and redistribution status. No source bytes were
 downloaded, extracted, imported, or added to the package.
+
+Objective 006 implements the bounded frozen `unigram_importer` parser for the
+observed Gigafida 2.0 lower-case form/lemma/POS TSV header. It retains exact 28
+source fields and lossless numeric views, preserves morphology ambiguity, derives
+NFC/casefold lookup values without rewriting source text, and rejects malformed
+UTF-8, controls, counts, zero-without-complete-query, duplicates, bad quoting,
+truncation, and resource-limit violations. Only project-authored synthetic
+fixtures are committed or tested offline. A recovery receipt preserves the
+schema-only handoff facts while recording that three earlier GETs violated the
+exact-one-fetch condition; therefore current real archive verification and real
+importer smoke remain `NOT RUN`, and acceptance 1 is not claimed.

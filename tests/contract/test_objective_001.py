@@ -55,6 +55,26 @@ EXPECTED_EXPORTS = [
     "VerifiedSyntheticCorpus",
     "VerificationFailure",
     "verify_manifest_payload",
+    "EXPECTED_DELIMITER",
+    "EXPECTED_ENCODING",
+    "EXPECTED_HEADER",
+    "EXPECTED_HEADER_BYTE_LENGTH",
+    "EXPECTED_HEADER_LINE_NUMBER",
+    "EXPECTED_HEADER_SHA256",
+    "EXPECTED_MEMBER_NAME",
+    "EXPECTED_NEWLINE",
+    "IMPORTER_VERSION",
+    "Completeness",
+    "UnigramImportError",
+    "UnigramImportFailure",
+    "UnigramImportLimits",
+    "UnigramImportResult",
+    "UnigramImportSummary",
+    "UnigramProvenance",
+    "UnigramRecord",
+    "import_unigram_tsv",
+    "import_unigrams",
+    "parse_unigram_tsv",
 ]
 
 
@@ -300,7 +320,14 @@ def test_built_wheel_metadata_and_payload() -> None:
             assert all(
                 not name.startswith("llm_slovenian_repair/")
                 or name.endswith(
-                    ("__init__.py", "contracts.py", "policy.py", "source_manifest.py", "py.typed")
+                    (
+                        "__init__.py",
+                        "contracts.py",
+                        "policy.py",
+                        "source_manifest.py",
+                        "unigram_importer.py",
+                        "py.typed",
+                    )
                 )
                 for name in names
             )
