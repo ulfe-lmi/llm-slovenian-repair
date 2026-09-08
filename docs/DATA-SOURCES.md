@@ -1,7 +1,7 @@
 # Data source inventory
 
 The committed [source inventory](../resources/source-inventory-v1.json) is a dated
-metadata snapshot observed on 2026-09-08. It records three publisher-labelled,
+metadata snapshot observed at `2026-09-08T09:13:23Z`. It records three publisher-labelled,
 derived ZIP artifacts and one Gigafida 2.2 query interface. It does not contain
 source bytes, grant bulk/API access, settle redistribution, or authorize a legal
 or release decision.
@@ -41,22 +41,43 @@ python3.12 scripts/verify_source_artifact.py \
 ```
 
 An operator-controlled acquisition, if separately authorized, is intentionally a
-manual staging step. Use an owned staging path, HTTPS-only redirects, a timeout and
-the inventory's exact maximum, then verify before accepting the file. The following
-is an inspectable template, not a command run by this project or CI:
+manual staging step. Resolve the selected URL and exact byte size from the canonical
+inventory, write only to an owned `*.part` path, require HTTPS for the initial request
+and redirects, and verify before accepting the file. The following is an inspectable
+template, not a command run by this project or CI:
 
 ```text
+selected_id='gigafida-2.0-words'
+selected_url_and_size="$(python3.12 - "$selected_id" <<'PY'
+import sys
+from pathlib import Path
+
+from scripts.verify_source_artifact import load_inventory
+
+source_id = sys.argv[1]
+inventory = load_inventory(Path("resources/source-inventory-v1.json"))
+entry = next(item for item in inventory["entries"] if item["id"] == source_id)
+artifact = entry["artifact"]
+assert isinstance(artifact, dict)
+print(artifact["url"], artifact["byte_size"], sep="\t")
+PY
+)"
+IFS=$'\t' read -r selected_url selected_size <<< "$selected_url_and_size"
+part_path="/owned/staging/${selected_id}.zip.part"
 curl --fail --silent --show-error --location \
   --proto '=https' --proto-redir '=https' --connect-timeout 10 --max-time 600 \
-  --output /owned/staging/source.zip 'PASTE_THE_INVENTORY_ARTIFACT_URL'
+  --max-filesize "$selected_size" --output "$part_path" "$selected_url"
 python3.12 scripts/verify_source_artifact.py \
   --inventory resources/source-inventory-v1.json \
-  --source-id SELECTED_DOWNLOADABLE_SOURCE_ID \
-  --artifact /owned/staging/source.zip
+  --source-id "$selected_id" --artifact "$part_path"
+# Only after separate authorization and successful verification:
+mv -- "$part_path" "/owned/staging/${selected_id}.zip"
 ```
 
-Only a successful verification result and its recorded SHA-256 can support a later
-import order. A failed or partial file must not be renamed into an accepted location.
+The offline verifier checks the exact selected byte size and publisher MD5, and emits
+the computed project SHA-256. Only a successful result with that recorded SHA-256 can
+support a later import order. A failed or partial file must not be renamed into an
+accepted location; the final `mv` remains separately authorized.
 No source artifact was fetched, extracted, imported, or added to this repository for
 objective 005.
 

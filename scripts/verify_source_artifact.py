@@ -22,6 +22,7 @@ from typing import Any, NoReturn
 from urllib.parse import urlparse
 
 INVENTORY_SCHEMA_VERSION = 1
+CANONICAL_SNAPSHOT_AT = "2026-09-08T09:13:23Z"
 MAX_INVENTORY_BYTES = 256 * 1024
 MAX_ARTIFACT_BYTES = 512 * 1024 * 1024
 ALLOWED_SOURCE_IDS = frozenset(
@@ -87,6 +88,24 @@ _ISO_DATE = re.compile(r"^\d{4}-\d{2}-\d{2}$")
 _SHA256 = re.compile(r"^[0-9a-f]{64}$")
 _MD5 = re.compile(r"^[0-9a-f]{32}$")
 
+_CANONICAL_ENTRY_ORDER = (
+    "gigafida-2.0-words",
+    "gigafida-2.0-word-ngrams",
+    "sloleks-3.1",
+    "gigafida-2.2-query-interface",
+)
+_CANONICAL_PROJECT_SHA256 = (
+    "ded7c28548d3acc08df593039c51c8eb4bc3455a991ef6b9cd1f607e890e787d"
+)
+_CANONICAL_ENTRY_SHA256 = {
+    "gigafida-2.0-words": "46a63ab2d00114ca4acb5d72a90d8a481076a15a93471d33aa47a64c3bdacfbc",
+    "gigafida-2.0-word-ngrams": "addf6b6084c93bf7898a99ac9de8fa321a2312b82a31240df813113d111a8924",
+    "sloleks-3.1": "05d0e672881c2b50bdb80bb2197f16408fc9d26753dc26d898844d03fc3a4112",
+    "gigafida-2.2-query-interface": (
+        "890003b281e79fd1fd8a4cc65d1a5aeb0c6e0d91bc0087b4263d24c160a216f7"
+    ),
+}
+
 
 class InventoryError(ValueError):
     """A finite, non-sensitive inventory validation failure."""
@@ -145,7 +164,12 @@ def _keys(value: Any, expected: frozenset[str], reason: str) -> None:
 
 
 def _string(value: Any, field: str, *, max_length: int = 4096) -> str:
-    if not isinstance(value, str) or not value or len(value) > max_length:
+    if (
+        not isinstance(value, str)
+        or not value
+        or value != value.strip()
+        or len(value) > max_length
+    ):
         _fail(f"invalid-{field}")
     if any(ord(character) < 32 or 0x7F <= ord(character) <= 0x9F for character in value):
         _fail(f"unsafe-{field}")
@@ -290,17 +314,20 @@ def _validate_entry(value: Any, snapshot: datetime) -> dict[str, Any]:
         _fail("source-kind-mismatch")
     _string(value["source_name"], "source-name")
     _string(value["release"], "release", max_length=128)
-    _validate_date(value["issued_date"], "issued-date")
+    issued = _validate_date(value["issued_date"], "issued-date")
     item_host = "www.clarin.si" if kind == "downloadable" else "viri.cjvt.si"
     _validate_url(value["item_url"], "item-url", hosts=frozenset({item_host}))
     publishers = _strict_list(value["publishers"], "publishers", maximum=8)
     publisher_values = [_string(item, "publisher", max_length=256) for item in publishers]
     if len(set(publisher_values)) != len(publisher_values):
         _fail("duplicate-publisher")
-    _validate_timestamp(value["observed_at"], "observed-at")
     observed = _validate_timestamp(value["observed_at"], "observed-at")
+    if issued > observed.date():
+        _fail("issued-date-after-observation")
     if observed > snapshot:
         _fail("observation-after-snapshot")
+    if observed != snapshot:
+        _fail("observation-does-not-match-snapshot")
     _string(value["publisher_access_label"], "publisher-access-label")
     _validate_license(value["license"], kind)
     artifact = value["artifact"]
@@ -395,6 +422,13 @@ def _load_json_bytes(data: bytes) -> Any:
         raise InventoryError("inventory-json-invalid") from exc
 
 
+def _canonical_digest(value: Any) -> str:
+    encoded = json.dumps(
+        value, ensure_ascii=False, sort_keys=True, separators=(",", ":")
+    ).encode("utf-8")
+    return hashlib.sha256(encoded).hexdigest()
+
+
 def _read_regular(path: Path, *, missing_reason: str, max_bytes: int) -> bytes:
     try:
         info = path.lstat()
@@ -449,6 +483,8 @@ def validate_inventory(value: Any) -> dict[str, Any]:
     if inventory_id != "source-inventory-v1":
         _fail("invalid-inventory-id")
     snapshot = _validate_timestamp(value["snapshot_at"], "snapshot-at")
+    if value["snapshot_at"] != CANONICAL_SNAPSHOT_AT:
+        _fail("canonical-snapshot-mismatch")
     project = value["project"]
     _keys(project, _PROJECT_KEYS, "invalid-project-metadata")
     assert isinstance(project, dict)
@@ -458,8 +494,13 @@ def validate_inventory(value: Any) -> dict[str, Any]:
     entries = _strict_list(value["entries"], "entries", minimum=4, maximum=4)
     validated = [_validate_entry(entry, snapshot) for entry in entries]
     ids = [entry["id"] for entry in validated]
-    if set(ids) != ALLOWED_SOURCE_IDS or len(ids) != len(set(ids)):
+    if tuple(ids) != _CANONICAL_ENTRY_ORDER:
         _fail("inventory-entry-set-invalid")
+    if _canonical_digest(project) != _CANONICAL_PROJECT_SHA256:
+        _fail("canonical-project-mismatch")
+    for entry in validated:
+        if _canonical_digest(entry) != _CANONICAL_ENTRY_SHA256[entry["id"]]:
+            _fail(f"canonical-entry-mismatch-{entry['id']}")
     return value
 
 
@@ -484,7 +525,10 @@ def _safe_member_name(name: str) -> bool:
         or any(ord(character) < 32 or 0x7F <= ord(character) <= 0x9F for character in name)
     ):
         return False
-    parts = name.split("/")
+    path_name = name[:-1] if name.endswith("/") else name
+    if not path_name:
+        return False
+    parts = path_name.split("/")
     return all(part not in {"", ".", ".."} for part in parts)
 
 
@@ -518,13 +562,17 @@ def _entry_for_id(inventory: dict[str, Any], source_id: str) -> dict[str, Any]:
     _artifact_fail("source-id-not-found")
 
 
-def verify_artifact(
-    inventory_path: Path, source_id: str, artifact_path: Path
+def _verify_artifact_entry(
+    entry: dict[str, Any], source_id: str, artifact_path: Path
 ) -> ArtifactVerification:
-    """Verify one explicit local ZIP against validated publisher metadata."""
+    """Verify a local ZIP against one already selected metadata entry.
 
-    inventory = load_inventory(inventory_path)
-    entry = _entry_for_id(inventory, source_id)
+    This lower seam exists for synthetic ZIP fixtures only.  The public function
+    and CLI always load the canonical, ID-bound inventory before reaching it.
+    """
+
+    if source_id not in DOWNLOADABLE_SOURCE_IDS or entry.get("id") != source_id:
+        _artifact_fail("source-id-not-downloadable")
     artifact = entry["artifact"]
     if not isinstance(artifact, dict):
         _artifact_fail("downloadable-artifact-required")
@@ -604,6 +652,16 @@ def verify_artifact(
         raise ArtifactVerificationError("artifact-read-failed") from exc
     finally:
         os.close(descriptor)
+
+
+def verify_artifact(
+    inventory_path: Path, source_id: str, artifact_path: Path
+) -> ArtifactVerification:
+    """Verify one explicit local ZIP against the canonical inventory."""
+
+    inventory = load_inventory(inventory_path)
+    entry = _entry_for_id(inventory, source_id)
+    return _verify_artifact_entry(entry, source_id, artifact_path)
 
 
 def _result_json(result: ArtifactVerification) -> str:
