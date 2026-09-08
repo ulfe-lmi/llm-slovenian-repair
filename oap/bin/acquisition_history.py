@@ -4,9 +4,9 @@ from __future__ import annotations
 
 import argparse
 import json
-from pathlib import Path
 import re
 import subprocess
+from pathlib import Path
 from typing import Any
 
 SOURCE_ID = "gigafida-2.0-words"
@@ -14,8 +14,11 @@ ARCHIVE_SHA256 = "77ac4aa2e77016470a26ebf5b1bd265b9de240e8254d3511d51cb0fcb68a76
 INVENTORY_SHA256 = "439bbd51e04e338569b9785c44d1b05c0ea023aae39898aa7d494568d6f49de3"
 EXPECTED_MD5 = "b20a959f9c113aeb6504f0d753d36d10"
 EXPECTED_SIZE = 115865656
-LEGACY_COUNTS = {suffix: count for suffix, count in zip("abcdefghij", range(3, 13))}
+LEGACY_COUNTS = {
+    suffix: count for suffix, count in zip("abcdefghij", range(3, 13), strict=True)
+}
 RECEIPT_RE = re.compile(r"gigafida-2\.0-words-006-([a-z]{1,2})\.json\Z")
+PROMOTION_DELETION_REASON = "CACHE_PROMOTION_FAILED; exact part removed; no retry"
 LEGACY_RECEIPT_REPAIR = {
     "resources/source-acquisitions/gigafida-2.0-words-006-a.json": (
         "4f3c3d66dbc8c48b6445e973e3ada61bafb131b5",
@@ -105,10 +108,16 @@ def _legacy_receipt(path: Path, suffix: str, expected: int) -> dict[str, Any]:
     value = _load(path)
     if value.get("source_id") != SOURCE_ID:
         _fail("ACQUISITION_SOURCE_ID")
-    if value.get("expected_byte_size") != EXPECTED_SIZE or value.get("expected_md5") != EXPECTED_MD5:
+    if (
+        value.get("expected_byte_size") != EXPECTED_SIZE
+        or value.get("expected_md5") != EXPECTED_MD5
+    ):
         _fail("ACQUISITION_SOURCE_IDENTITY")
     archive = value.get("archive_sha256", value.get("archive_sha256_from_recovery"))
-    if archive != ARCHIVE_SHA256 or value.get("inventory_sha256", INVENTORY_SHA256) != INVENTORY_SHA256:
+    if (
+        archive != ARCHIVE_SHA256
+        or value.get("inventory_sha256", INVENTORY_SHA256) != INVENTORY_SHA256
+    ):
         _fail("ACQUISITION_SOURCE_IDENTITY")
     evidence = value.get("acquisition_evidence")
     if not isinstance(evidence, dict):
@@ -133,7 +142,7 @@ def _cache_receipt(value: dict[str, Any], prior: int) -> int:
         _fail("ACQUISITION_SOURCE_IDENTITY")
     if value.get("inventory_sha256") != INVENTORY_SHA256:
         _fail("ACQUISITION_SOURCE_IDENTITY")
-    if value.get("cache_state") != "VERIFIED_REUSABLE" or value.get("generation") != ARCHIVE_SHA256:
+    if value.get("generation") != ARCHIVE_SHA256:
         _fail("ACQUISITION_CACHE_STATE")
     if value.get("prior_validation") not in {"MISSING_FETCH_REQUIRED", "INVALID_FETCH_REQUIRED"}:
         _fail("ACQUISITION_PRIOR_VALIDATION")
@@ -141,14 +150,33 @@ def _cache_receipt(value: dict[str, Any], prior: int) -> int:
     cumulative = value.get("cumulative_observed_objective_get_count")
     if network not in {0, 1} or cumulative != prior + network:
         _fail("ACQUISITION_COUNT")
-    if value.get("invalidation_deletion_reason") is not None:
-        _fail("ACQUISITION_DELETION_REASON")
-    if not isinstance(value.get("consumer_count"), int) or value["consumer_count"] < 2:
-        _fail("ACQUISITION_CONSUMERS")
-    if not isinstance(value.get("revalidation_count"), int) or value["revalidation_count"] < 2:
-        _fail("ACQUISITION_REVALIDATIONS")
-    if value.get("redistribution_ready") is not False or value.get("retention") != "UNTIL_CONCEPT_EXPERIMENT_COMPLETION":
-        _fail("ACQUISITION_RETENTION")
+    if value.get("status") == "BLOCKED_CACHE_PROMOTION":
+        if value.get("cache_state") != "MISSING" or network != 1:
+            _fail("ACQUISITION_CACHE_STATE")
+        if value.get("promotion_result") != "FAILED_HARDLINK_BOUNDARY":
+            _fail("ACQUISITION_PROMOTION")
+        if value.get("invalidation_deletion_reason") != PROMOTION_DELETION_REASON:
+            _fail("ACQUISITION_DELETION_REASON")
+        if value.get("consumer_count") != 0 or value.get("revalidation_count") != 0:
+            _fail("ACQUISITION_CONSUMERS")
+        if value.get("retention") != "NONE_AFTER_FAILED_PROMOTION":
+            _fail("ACQUISITION_RETENTION")
+        if value.get("source_data_retained") is not False:
+            _fail("ACQUISITION_RETENTION")
+    else:
+        if value.get("cache_state") != "VERIFIED_REUSABLE":
+            _fail("ACQUISITION_CACHE_STATE")
+        if value.get("invalidation_deletion_reason") is not None:
+            _fail("ACQUISITION_DELETION_REASON")
+        if not isinstance(value.get("consumer_count"), int) or value["consumer_count"] < 2:
+            _fail("ACQUISITION_CONSUMERS")
+        if not isinstance(value.get("revalidation_count"), int) or value["revalidation_count"] < 2:
+            _fail("ACQUISITION_REVALIDATIONS")
+        if (
+            value.get("redistribution_ready") is not False
+            or value.get("retention") != "UNTIL_CONCEPT_EXPERIMENT_COMPLETION"
+        ):
+            _fail("ACQUISITION_RETENTION")
     if value.get("no_content_logged") is not True or value.get("retry_attempted") is not False:
         _fail("ACQUISITION_PRIVACY_OR_RETRY")
     forbidden = {"absolute_path", "private_path", "source_rows", "raw_values", "content"}
@@ -183,7 +211,10 @@ def validate_acquisition_history(repo: str | Path, *, revision: str = "HEAD") ->
         for suffix, path in paths.items():
             if suffix > "k":
                 value = _load(path)
-                if value.get("network_get_count") and value.get("invalidation_deletion_reason") is None:
+                if (
+                    value.get("network_get_count")
+                    and value.get("invalidation_deletion_reason") is None
+                ):
                     _fail("ACQUISITION_ACCIDENTAL_REFETCH")
     return {
         "result": "valid",
@@ -201,7 +232,11 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--revision", default="HEAD")
     args = parser.parse_args(argv)
     try:
-        print(json.dumps(validate_acquisition_history(args.repo_root, revision=args.revision), sort_keys=True))
+        print(
+            json.dumps(
+                validate_acquisition_history(args.repo_root, revision=args.revision), sort_keys=True
+            )
+        )
         return 0
     except AcquisitionHistoryError as exc:
         print(json.dumps({"error": exc.reason}, sort_keys=True))

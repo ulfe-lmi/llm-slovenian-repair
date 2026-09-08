@@ -244,6 +244,12 @@ def inspect(strategic_home: str | Path, *, inventory: str | Path | None = None) 
     if not root.exists():
         return {"state": CACHE_STATE_MISSING, "reason": "CACHE_ROOT_ABSENT", "network_get_count": 0}
     try:
+        if not any(root.iterdir()):
+            return {
+                "state": CACHE_STATE_MISSING,
+                "reason": "CACHE_ROOT_EMPTY",
+                "network_get_count": 0,
+            }
         final, part, metadata = _layout(root)
         if final is None or metadata is None:
             return {
