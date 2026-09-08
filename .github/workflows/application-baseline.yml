@@ -1,0 +1,51 @@
+name: Application baseline
+
+on:
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  application-baseline:
+    name: Application baseline
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - name: Check out full history
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          fetch-depth: 0
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@20cfd1bf945f4377ade1205e4dbc17946fc9a30d
+        with:
+          version: 0.12.10
+          enable-cache: false
+
+      - name: Install Python 3.12
+        run: uv python install 3.12
+
+      - name: Run native development baseline driver
+        shell: bash
+        run: |
+          python312="$(uv python find 3.12)"
+          "$python312" scripts/verify_development_baseline.py --temp-parent "$RUNNER_TEMP"
+
+      - name: Assert checkout has no temporary environment artifacts
+        shell: bash
+        run: |
+          test ! -e .venv
+          test ! -e dist
+          test ! -e build
+          test ! -e .cache
+          test ! -e .pytest_cache
+          test ! -e .ruff_cache
+          test ! -e .mypy_cache
+
+      - name: Check accepted-base whitespace and protected sources
+        run: |
+          git diff --check 82ea1e6f4173934fa47bb34ee6a6f78338d3603a...HEAD
+          git diff --exit-code 82ea1e6f4173934fa47bb34ee6a6f78338d3603a -- PLAN.md ARCHITECTURE.md CRITICAL.md AGENTS.md ARCHITECTURE-for-agents.md OAP-COMMUNICATION-coding-agent.md SECURITY.md TESTING.md oap/bootstrap-sources.lock.json oap/governance oap/coding-instructions oap/strategic-instructions docs/bootstrap
