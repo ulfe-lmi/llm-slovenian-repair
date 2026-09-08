@@ -153,3 +153,10 @@ to the direct interpreter invocation. The helper now bootstraps that path and it
 offline contract is green; the exact source tree was deleted, no retry occurred,
 and the 006-g receipt leaves member, structural, and importer fields null. This
 is a blocked real-smoke result, not a full-source or compatibility acceptance.
+Round 006-h adds `--preflight`, which is mutually exclusive with `--artifact` and
+requires only the canonical inventory and source ID. It validates the installed
+runtime's exact header contract, real COMPLETE/COMPLETE/PARTIAL provenance,
+`import_unigrams` entry point, and the bounded smoke limits, then emits only a
+finite `READY` summary. The direct system-Python dependency failure from 006-g is
+documented as an invocation prerequisite failure; it is not treated as evidence
+that the importer or source format is incompatible.

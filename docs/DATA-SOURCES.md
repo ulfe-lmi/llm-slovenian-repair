@@ -152,3 +152,11 @@ checkout `src` path. The helper now bootstraps that path and its offline contrac
 is green; the acquired tree was deleted with no retry, so the 006-g receipt keeps
 member, structural, and importer observations null. This remains a blocked
 compatibility attempt, not a full-source import or release/rights decision.
+Round 006-h adds an artifact-free `--preflight` mode to close that invocation
+boundary. It loads the canonical inventory entry, validates the exact 834-byte
+header and 28-field count, constructs real source/query `COMPLETE` and import
+`PARTIAL` provenance, and imports the public importer entry point and bounded
+limits. Preflight and artifact arguments are mutually exclusive, and its `READY`
+summary is limited to identities, counts, completeness, hashes, and contract
+labels; it does not emit header or row content. The earlier system-Python
+dependency failure remains historical evidence, not a readiness claim.

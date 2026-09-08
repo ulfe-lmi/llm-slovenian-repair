@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+import os
 import subprocess
 import sys
 import warnings
@@ -301,4 +302,128 @@ def test_cli_serializes_only_bounded_error(tmp_path: Path) -> None:
     )
     assert completed.returncode == 2
     assert json.loads(completed.stderr) == {"error": "source-id-not-canonical"}
+    assert completed.stdout == ""
+
+
+def test_preflight_is_ready_and_content_free() -> None:
+    result = smoke.run_preflight(
+        ROOT / "resources/source-inventory-v1.json", smoke.EXPECTED_SOURCE_ID
+    )
+
+    assert result["status"] == "READY"
+    assert result["mode"] == "PRE_FLIGHT"
+    assert result["inventory"] == {
+        "id": "source-inventory-v1",
+        "entry_count": 4,
+        "source_id": smoke.EXPECTED_SOURCE_ID,
+        "source_name": "Gigafida 2.0 word lists",
+        "release": "2.0",
+    }
+    assert result["header_contract"] == {
+        "byte_length": 834,
+        "sha256": smoke.EXPECTED_HEADER_SHA256,
+        "field_count": 28,
+        "line_number": 15,
+    }
+    assert result["completeness"] == {
+        "source": "COMPLETE",
+        "query": "COMPLETE",
+        "import": "PARTIAL",
+    }
+    rendered = json.dumps(result, ensure_ascii=False, sort_keys=True)
+    assert "Oblika z malimi črkami" not in rendered
+    assert "header_fields" not in rendered
+    assert "records" not in rendered
+
+
+def test_isolated_preflight_bootstraps_from_non_repository_cwd(tmp_path: Path) -> None:
+    environment = os.environ.copy()
+    environment.pop("PYTHONPATH", None)
+    completed = subprocess.run(
+        [
+            sys.executable,
+            "-I",
+            "-B",
+            str(ROOT / "scripts/smoke_unigram_prefix.py"),
+            "--inventory",
+            str(ROOT / "resources/source-inventory-v1.json"),
+            "--source-id",
+            smoke.EXPECTED_SOURCE_ID,
+            "--preflight",
+        ],
+        cwd=tmp_path,
+        env=environment,
+        check=False,
+        capture_output=True,
+        text=True,
+    )
+
+    assert completed.returncode == 0
+    assert completed.stderr == ""
+    result = json.loads(completed.stdout)
+    assert result["status"] == "READY"
+    assert result["completeness"] == {
+        "source": "COMPLETE",
+        "query": "COMPLETE",
+        "import": "PARTIAL",
+    }
+    assert "Oblika z malimi črkami" not in completed.stdout
+
+
+def test_preflight_and_smoke_arguments_are_mutually_exclusive(tmp_path: Path) -> None:
+    environment = os.environ.copy()
+    environment.pop("PYTHONPATH", None)
+    completed = subprocess.run(
+        [
+            sys.executable,
+            "-I",
+            "-B",
+            str(ROOT / "scripts/smoke_unigram_prefix.py"),
+            "--inventory",
+            str(ROOT / "resources/source-inventory-v1.json"),
+            "--source-id",
+            smoke.EXPECTED_SOURCE_ID,
+            "--preflight",
+            "--artifact",
+            str(tmp_path / "not-used.zip"),
+        ],
+        cwd=tmp_path,
+        env=environment,
+        check=False,
+        capture_output=True,
+        text=True,
+    )
+
+    assert completed.returncode == 2
+    assert completed.stdout == ""
+    assert "--artifact: not allowed with argument --preflight" in completed.stderr
+
+
+def test_unavailable_dependency_is_a_bounded_preflight_error(tmp_path: Path) -> None:
+    environment = os.environ.copy()
+    environment.pop("PYTHONPATH", None)
+    completed = subprocess.run(
+        [
+            sys.executable,
+            "-I",
+            "-S",
+            "-B",
+            str(ROOT / "scripts/smoke_unigram_prefix.py"),
+            "--inventory",
+            str(ROOT / "resources/source-inventory-v1.json"),
+            "--source-id",
+            smoke.EXPECTED_SOURCE_ID,
+            "--preflight",
+        ],
+        cwd=tmp_path,
+        env=environment,
+        check=False,
+        capture_output=True,
+        text=True,
+    )
+
+    assert completed.returncode == 2
+    assert json.loads(completed.stderr) == {
+        "error": "preflight-dependency-unavailable"
+    }
     assert completed.stdout == ""

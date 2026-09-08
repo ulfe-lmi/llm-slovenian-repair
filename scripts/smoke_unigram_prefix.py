@@ -1,15 +1,18 @@
 """Run one bounded, content-free smoke over a verified Gigafida ZIP prefix.
 
-The command-line path accepts an explicit canonical inventory, source ID and
-already-acquired artifact.  It verifies the artifact before opening the named
-member, captures only the observed 14-line preamble/header/32-row prefix, and
-then performs two deterministic importer calls over fresh in-memory streams.
-It never downloads, extracts, or emits source fields.
+The command-line path accepts an explicit canonical inventory and source ID. A
+preflight validates the installed importer runtime without an artifact. The
+smoke path additionally accepts an already-acquired artifact, verifies it
+before opening the named member, captures only the observed 14-line
+preamble/header/32-row prefix, and then performs two deterministic importer
+calls over fresh in-memory streams. It never downloads, extracts, or emits
+source fields.
 """
 
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import stat
 import sys
@@ -55,6 +58,14 @@ class PrefixSmokeError(ValueError):
         super().__init__(reason)
 
 
+class PreflightError(ValueError):
+    """A finite, non-content failure while checking CLI runtime readiness."""
+
+    def __init__(self, reason: str) -> None:
+        self.reason = reason
+        super().__init__(reason)
+
+
 class BinaryLineStream(Protocol):
     """The bounded binary line surface needed from a ZIP member."""
 
@@ -72,6 +83,10 @@ class PrefixEnvelope:
 
 def _fail(reason: str) -> None:
     raise PrefixSmokeError(reason)
+
+
+def _preflight_fail(reason: str) -> None:
+    raise PreflightError(reason)
 
 
 def _canonical_verification(verification: verifier.ArtifactVerification) -> None:
@@ -92,6 +107,176 @@ def _canonical_verification(verification: verifier.ArtifactVerification) -> None
     )
     if actual != (EXPECTED_SOURCE_ID, *expected):
         _fail("artifact-identity-mismatch")
+
+
+def _canonical_inventory_entry(
+    inventory_path: Path, source_id: str
+) -> tuple[dict[str, Any], int]:
+    """Load the canonical inventory and return one ID-bound entry."""
+
+    if source_id != EXPECTED_SOURCE_ID:
+        _preflight_fail("source-id-not-canonical")
+    try:
+        inventory = verifier.load_inventory(inventory_path)
+    except verifier.InventoryError as exc:
+        raise PreflightError(f"preflight-verify-{exc.reason}") from exc
+
+    entries = [entry for entry in inventory["entries"] if entry.get("id") == source_id]
+    if len(entries) != 1:
+        _preflight_fail("source-entry-not-canonical")
+    entry = entries[0]
+    artifact = entry.get("artifact")
+    if not isinstance(artifact, dict):
+        _preflight_fail("source-artifact-not-canonical")
+    checksum = artifact.get("repository_checksum")
+    if not isinstance(checksum, dict):
+        _preflight_fail("source-artifact-not-canonical")
+    if (
+        entry.get("source_name") != "Gigafida 2.0 word lists"
+        or entry.get("release") != "2.0"
+        or artifact.get("name") != "GF2.0-words-all.zip"
+        or artifact.get("media_type") != "application/zip"
+        or artifact.get("container_format") != "ZIP"
+        or artifact.get("byte_size") != EXPECTED_ARCHIVE_BYTE_SIZE
+        or checksum.get("algorithm") != "MD5"
+        or checksum.get("value") != EXPECTED_ARCHIVE_MD5
+    ):
+        _preflight_fail("source-artifact-not-canonical")
+    return entry, len(inventory["entries"])
+
+
+def run_preflight(inventory_path: Path, source_id: str) -> dict[str, object]:
+    """Validate the canonical inventory and installed importer runtime."""
+
+    entry, inventory_entry_count = _canonical_inventory_entry(inventory_path, source_id)
+    try:
+        from llm_slovenian_repair.contracts import EvidenceCompleteness
+        from llm_slovenian_repair.unigram_importer import (
+            EXPECTED_DATA_RECORD_TERMINATOR,
+            EXPECTED_HEADER_BYTES,
+            EXPECTED_HEADER_LINE_NUMBER,
+            IMPORTER_VERSION,
+            REAL_ACQUISITION_SHA256,
+            REAL_INVENTORY_REVISION,
+            REAL_INVENTORY_SHA256,
+            REAL_RELEASE,
+            REAL_SOURCE_ID,
+            REAL_SOURCE_NAME,
+            UnigramImportLimits,
+            UnigramProvenance,
+            import_unigrams,
+        )
+        from llm_slovenian_repair.unigram_importer import (
+            EXPECTED_HEADER_SHA256 as IMPORTER_HEADER_SHA256,
+        )
+        from llm_slovenian_repair.unigram_importer import (
+            EXPECTED_MEMBER_NAME as IMPORTER_MEMBER_NAME,
+        )
+    except ImportError as exc:
+        raise PreflightError("preflight-dependency-unavailable") from exc
+
+    if (
+        len(EXPECTED_HEADER_BYTES) != EXPECTED_HEADER_BYTE_LENGTH
+        or hashlib.sha256(EXPECTED_HEADER_BYTES).hexdigest() != EXPECTED_HEADER_SHA256
+        or IMPORTER_HEADER_SHA256 != EXPECTED_HEADER_SHA256
+        or EXPECTED_HEADER_SHA256
+        != "c2ce44548818b72a04691c7060c0e35106393edbfde13336c60d4cd072a00638"
+        or EXPECTED_HEADER_BYTE_LENGTH != 834
+        or IMPORTER_MEMBER_NAME != EXPECTED_MEMBER_NAME
+        or EXPECTED_HEADER_LINE_NUMBER != PREAMBLE_LINE_COUNT + 1
+    ):
+        _preflight_fail("preflight-header-contract-invalid")
+
+    try:
+        provenance = UnigramProvenance(
+            provenance_kind="real",
+            source_id=REAL_SOURCE_ID,
+            source_name=REAL_SOURCE_NAME,
+            release=REAL_RELEASE,
+            source_inventory_revision=REAL_INVENTORY_REVISION,
+            source_inventory_sha256=REAL_INVENTORY_SHA256,
+            acquisition_sha256=REAL_ACQUISITION_SHA256,
+            evidence_scope="publisher-declared release scope; bounded compatibility prefix",
+            source_completeness=EvidenceCompleteness.COMPLETE,
+            query_completeness=EvidenceCompleteness.COMPLETE,
+            import_completeness=EvidenceCompleteness.PARTIAL,
+        )
+        limits = UnigramImportLimits(
+            max_input_bytes=MAX_PREFIX_ENVELOPE_BYTES,
+            max_rows=DATA_ROW_COUNT,
+            max_line_bytes=MAX_PREFIX_LINE_BYTES,
+            max_field_bytes=MAX_PREFIX_LINE_BYTES,
+        )
+    except (TypeError, ValueError) as exc:
+        raise PreflightError("preflight-contract-invalid") from exc
+
+    if (
+        not callable(import_unigrams)
+        or provenance.source_id != EXPECTED_SOURCE_ID
+        or provenance.source_name != entry["source_name"]
+        or provenance.release != entry["release"]
+        or provenance.source_inventory_revision != "source-inventory-v1"
+        or provenance.source_inventory_sha256
+        != "439bbd51e04e338569b9785c44d1b05c0ea023aae39898aa7d494568d6f49de3"
+        or provenance.acquisition_sha256 != EXPECTED_ARCHIVE_SHA256
+        or provenance.source_completeness is not EvidenceCompleteness.COMPLETE
+        or provenance.query_completeness is not EvidenceCompleteness.COMPLETE
+        or provenance.import_completeness is not EvidenceCompleteness.PARTIAL
+        or limits.max_input_bytes != MAX_PREFIX_ENVELOPE_BYTES
+        or limits.max_rows != DATA_ROW_COUNT
+        or limits.max_line_bytes != MAX_PREFIX_LINE_BYTES
+        or limits.max_field_bytes != MAX_PREFIX_LINE_BYTES
+    ):
+        _preflight_fail("preflight-runtime-contract-invalid")
+
+    artifact = entry["artifact"]
+    assert isinstance(artifact, dict)
+    return {
+        "schema_version": 1,
+        "status": "READY",
+        "mode": "PRE_FLIGHT",
+        "inventory": {
+            "id": "source-inventory-v1",
+            "entry_count": inventory_entry_count,
+            "source_id": entry["id"],
+            "source_name": entry["source_name"],
+            "release": entry["release"],
+        },
+        "artifact_identity": {
+            "name": artifact["name"],
+            "expected_byte_size": EXPECTED_ARCHIVE_BYTE_SIZE,
+            "expected_md5": EXPECTED_ARCHIVE_MD5,
+            "archive_sha256": EXPECTED_ARCHIVE_SHA256,
+        },
+        "header_contract": {
+            "byte_length": EXPECTED_HEADER_BYTE_LENGTH,
+            "sha256": EXPECTED_HEADER_SHA256,
+            "field_count": len(EXPECTED_HEADER_BYTES.split(b"\t")),
+            "line_number": EXPECTED_HEADER_LINE_NUMBER,
+        },
+        "importer": {
+            "entry_point": "llm_slovenian_repair.unigram_importer.import_unigrams",
+            "version": IMPORTER_VERSION,
+            "limits": {
+                "max_input_bytes": limits.max_input_bytes,
+                "max_rows": limits.max_rows,
+                "max_line_bytes": limits.max_line_bytes,
+                "max_field_bytes": limits.max_field_bytes,
+                "max_fields": limits.max_fields,
+            },
+        },
+        "completeness": {
+            "source": provenance.source_completeness.value,
+            "query": provenance.query_completeness.value,
+            "import": provenance.import_completeness.value,
+        },
+        "text_contract": {
+            "encoding": "UTF-8",
+            "newline": "CRLF",
+            "delimiter": "TAB",
+            "data_record_terminator": EXPECTED_DATA_RECORD_TERMINATOR,
+        },
+    }
 
 
 def _read_complete_line(stream: BinaryLineStream, limit: int, reason: str) -> bytes:
@@ -374,19 +559,29 @@ def _parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--inventory", required=True, type=Path)
     parser.add_argument("--source-id", required=True)
-    parser.add_argument("--artifact", required=True, type=Path)
+    modes = parser.add_mutually_exclusive_group(required=True)
+    modes.add_argument(
+        "--preflight",
+        action="store_true",
+        help="validate the canonical inventory and installed importer runtime",
+    )
+    modes.add_argument(
+        "--artifact",
+        type=Path,
+        help="run the bounded smoke over one already-acquired artifact",
+    )
     return parser
 
 
 def main(argv: list[str] | None = None) -> int:
     args = _parser().parse_args(argv)
     try:
-        result = run_smoke(args.inventory, args.source_id, args.artifact)
-    except PrefixSmokeError as exc:
+        if args.preflight:
+            result = run_preflight(args.inventory, args.source_id)
+        else:
+            result = run_smoke(args.inventory, args.source_id, args.artifact)
+    except (PreflightError, PrefixSmokeError) as exc:
         print(json.dumps({"error": exc.reason}, sort_keys=True), file=sys.stderr)
-        return 2
-    except Exception:
-        print(json.dumps({"error": "internal-error"}, sort_keys=True), file=sys.stderr)
         return 2
     print(json.dumps(result, ensure_ascii=False, sort_keys=True, separators=(",", ":")))
     return 0

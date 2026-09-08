@@ -88,5 +88,11 @@ CLI stopped before member access because the direct interpreter could not resolv
 the checkout `src` path. That path bootstrap is corrected and tested offline; the
 source tree was deleted, no retry occurred, and the receipt records null member,
 structural, and importer results.
+Round 006-h adds an artifact-free `--preflight` mode that validates the canonical
+inventory entry, exact 834-byte header contract, real COMPLETE/COMPLETE/PARTIAL
+provenance, and installed importer entry point/limits. Preflight and artifact
+smoke arguments are mutually exclusive; the bounded `READY` output contains no
+header or row content. The earlier independent system-Python dependency finding
+is retained as a blocked 006-g fact and does not count as runtime readiness.
 Do not execute the [draft roadmap](oap/strategic-instructions/INITIAL-ROADMAP.md)
 without strategic reconciliation and deliberate owner activation.

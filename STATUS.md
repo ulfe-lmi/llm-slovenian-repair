@@ -76,3 +76,13 @@ calls under real `source/query=COMPLETE`, `import=PARTIAL` provenance. Real
 acquisition evidence is not recorded until the one ordered fetch is performed;
 full-source import, lookup readiness, linguistic benefit, rights, release,
 deployment, and acceptance remain unclaimed.
+
+Round 006-h adds the mutually exclusive `--preflight` CLI mode. It validates the
+canonical inventory entry, the exact 834-byte/28-field header contract, and the
+installed `import_unigrams` runtime plus bounded limits before any artifact is
+opened. Its output is a finite `READY` summary with no header or row content.
+The prior 006-g real attempt passed canonical verification but stopped before
+member access because its direct system-Python invocation lacked the dependency
+closure; the committed source-path correction did not alter that historical
+result. A clean isolated preflight is now the required boundary before the one
+remaining 006-h source action.
