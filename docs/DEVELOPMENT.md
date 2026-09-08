@@ -166,3 +166,16 @@ aggregate, and the first importer admission completed; that importer invocation
 then stopped at `import-invalid-count`. No retry or second GET was made, cleanup
 was verified, and importer hashes/counts remain null. This is blocked bounded
 compatibility evidence, not full-source or linguistic-quality evidence.
+
+Round 006-i adds a `--diagnostic` mode to the verifier-first helper. It reuses
+the artifact-free preflight contract, canonical verification, one selected-member
+capture, and the exact 32-row structural aggregate, then classifies each of the
+768 numeric cells in the eight absolute-count and sixteen published-decimal
+columns. The classifier uses a documented fixed priority and a closed enum; it
+does not emit numeric content, values, lengths, row hashes, or source-derived
+labels. Current-parser compatibility is counted separately for counts and
+decimals, and the first incompatible row/1-based column/semantic kind/category is
+bounded. The importer is called once only to report an allowlisted exact
+`reason:column` result. Synthetic tests cover every enum category, overlap
+priority, all columns, conservation, deterministic serialization, structure-first
+failure, mode exclusion, and no-content output.

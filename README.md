@@ -100,5 +100,14 @@ first importer invocation stopped at the finite `import-invalid-count` boundary;
 no second run or GET occurred, and the source/environment were removed. The new
 receipt records cumulative ten GETs, null importer hashes, and no retained source
 content. This remains blocked compatibility evidence, not a full-source import.
+
+Round 006-i adds a mutually exclusive numeric-shape diagnostic mode to that
+verifier-first helper. It profiles exactly 32 structurally valid rows and all 24
+numeric columns with a closed, fixed-priority syntax enum, recording aggregate
+current-parser compatibility and the first safe incompatibility without emitting
+numeric content. The one 006-i importer call returned `invalid-count:5` after
+the complete profile. Its receipt records cumulative eleven GETs, prior failures,
+exact cleanup, and syntax evidence only; no locale/conversion choice, full import,
+redistribution, release, or deployment claim is made.
 Do not execute the [draft roadmap](oap/strategic-instructions/INITIAL-ROADMAP.md)
 without strategic reconciliation and deliberate owner activation.

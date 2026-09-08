@@ -90,3 +90,16 @@ verification, prefix capture, and structural aggregation, but the first real
 importer invocation stopped at `import-invalid-count`. The exact source and
 environment were removed and verified absent, no retry occurred, and cumulative
 objective-006 GETs are ten. Real importer compatibility remains blocked.
+
+Round 006-i adds a mutually exclusive numeric diagnostic path to the committed
+verifier-first helper. After the same canonical verification, one selected-member
+capture, and the established 32-row structural aggregate, it profiles all 768
+numeric cells across the eight absolute-count and sixteen published-decimal
+columns using fixed syntax categories. The profile records 248/256 count cells
+and 4/512 decimal cells accepted by the current parser, with the first bounded
+incompatibility at row 1, column 5, category `OTHER_ASCII`; these are syntax
+observations only and do not select locale, grouping, decimal, or conversion
+semantics. One importer call then returned the safe `invalid-count:5` boundary.
+The 006-i receipt records one GET (cumulative eleven), preserved prior failures,
+exact cleanup, no retained source data, and no redistribution or compatibility
+acceptance claim.

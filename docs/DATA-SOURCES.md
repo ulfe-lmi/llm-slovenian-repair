@@ -166,3 +166,16 @@ but the first real importer invocation stopped at `import-invalid-count`; the
 helper made no second run or GET. Cleanup removed and verified the exact source
 and environment, and the receipt records cumulative ten GETs, null importer
 hashes, no retained source content, and no redistribution authorization.
+
+Round 006-i adds a mutually exclusive numeric diagnostic path after the same
+preflight, canonical verifier, selected-member capture, and structural aggregate.
+It classifies the eight absolute-count and sixteen published-decimal columns into
+a fixed closed syntax enum, counts current-parser-compatible cells by semantic
+kind, and records the first incompatible row/column/category. The one diagnostic
+profile covered 32 rows and 768 numeric cells; it observed 248 compatible count
+cells and 4 compatible decimal cells, with the first incompatibility at row 1,
+column 5 (`OTHER_ASCII`). The current importer was called exactly once and
+returned `invalid-count:5`. These are content-free syntax observations: they do
+not infer locale, grouping, numeric meaning, conversion, denominator completeness,
+full-import compatibility, or redistribution authority. The 006-i receipt records
+one GET (cumulative eleven), preserved 006-f/g/h failures, and exact cleanup.

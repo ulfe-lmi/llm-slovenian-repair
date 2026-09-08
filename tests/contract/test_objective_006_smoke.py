@@ -21,6 +21,7 @@ if str(ROOT / "src") not in sys.path:
 from llm_slovenian_repair.unigram_importer import EXPECTED_HEADER  # noqa: E402
 from scripts import smoke_unigram_prefix as smoke  # noqa: E402
 from scripts import verify_source_artifact as verifier  # noqa: E402
+from scripts.diagnose_unigram_rows import NUMERIC_CATEGORY_ORDER  # noqa: E402
 
 
 def quote_row(values: list[str] | tuple[str, ...], *, terminal_tab: bool = False) -> bytes:
@@ -564,3 +565,100 @@ def test_006_h_receipt_is_bounded_and_preserves_history() -> None:
         return []
 
     assert not forbidden.intersection(keys(receipt))
+
+
+def test_006_i_receipt_has_complete_fixed_numeric_profile_and_safe_failure() -> None:
+    receipt = json.loads(
+        (
+            ROOT
+            / "resources/source-acquisitions/gigafida-2.0-words-006-i.json"
+        ).read_text(encoding="utf-8")
+    )
+    assert receipt["schema_version"] == 1
+    assert receipt["receipt_id"] == "gigafida-2.0-words-006-i"
+    assert receipt["status"] == "BLOCKED_NUMERIC_DIAGNOSTIC_IMPORT"
+    assert receipt["preflight"]["result"] == "PASSED"
+    assert receipt["preflight"]["isolated_mode"] is True
+    assert receipt["preflight"]["pythonpath"] == "ABSENT"
+    evidence = receipt["acquisition_evidence"]
+    assert evidence["006_i_get_count"] == 1
+    assert evidence["cumulative_observed_objective_get_count"] == 11
+    assert evidence["verifier_before_member_access"] is True
+    assert evidence["numeric_diagnostic_attempted"] is True
+    assert evidence["second_importer_run_attempted"] is False
+    assert evidence["temporary_environment_absent"] is True
+    assert evidence["temporary_tree_absent"] is True
+    assert evidence["source_data_retained"] is False
+    assert evidence["redistribution_ready"] is False
+    assert receipt["prior_rounds"]["006_f"]["status"] == "BLOCKED_SMOKE_HARNESS_FAILURE"
+    assert receipt["prior_rounds"]["006_g"]["status"] == "BLOCKED_SMOKE_HELPER_IMPORT"
+    assert receipt["prior_rounds"]["006_h"]["status"] == "BLOCKED_REAL_IMPORTER_INVALID_COUNT"
+
+    numeric = receipt["numeric_diagnostic"]
+    assert numeric["row_count"] == 32
+    assert numeric["numeric_cell_count"] == 768
+    assert numeric["absolute_count_cell_count"] == 256
+    assert numeric["published_decimal_cell_count"] == 512
+    assert set(numeric["category_enum"]) == {
+        category.value for category in NUMERIC_CATEGORY_ORDER
+    }
+    columns = numeric["column_histograms"]
+    assert set(columns) == {str(column) for column in range(5, 29)}
+    for column in columns.values():
+        assert set(column["category_histogram"]) == set(numeric["category_enum"])
+        assert sum(column["category_histogram"].values()) == 32
+        assert (
+            column["current_parser_compatible_cell_count"]
+            + column["current_parser_incompatible_cell_count"]
+            == 32
+        )
+    assert numeric["current_parser_compatibility"] == {
+        "absolute_count": {
+            "compatible_cell_count": 248,
+            "incompatible_cell_count": 8,
+        },
+        "published_decimal": {
+            "compatible_cell_count": 4,
+            "incompatible_cell_count": 508,
+        },
+    }
+    assert numeric["first_incompatible"] == {
+        "row_ordinal": 1,
+        "column": 5,
+        "semantic_kind": "absolute_count",
+        "category": "OTHER_ASCII",
+    }
+    assert receipt["current_importer"] == {
+        "status": "BLOCKED",
+        "attempts": 1,
+        "runs_completed": 0,
+        "record_count": None,
+        "failure": {"reason": "invalid-count", "column": 5},
+        "failure_boundary": receipt["current_importer"]["failure_boundary"],
+    }
+
+    forbidden = {
+        "fields",
+        "values",
+        "raw",
+        "records",
+        "row_hash",
+        "decoded_strings",
+        "source_rows",
+        "header_values",
+        "token_text",
+        "code_points",
+        "byte_substrings",
+        "token_length",
+    }
+
+    def keys(value: object) -> list[str]:
+        if isinstance(value, dict):
+            nested = [item for child in value.values() for item in keys(child)]
+            return [key for key in value] + nested
+        if isinstance(value, list):
+            return [item for child in value for item in keys(child)]
+        return []
+
+    assert not forbidden.intersection(keys(receipt))
+    assert "implementation_head" not in receipt
