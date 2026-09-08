@@ -6,6 +6,7 @@ import importlib.util
 import os
 import subprocess
 import sys
+import sysconfig
 import tempfile
 import tomllib
 from email import message_from_bytes
@@ -19,6 +20,51 @@ ROOT = Path(__file__).resolve().parents[2]
 PYPROJECT = ROOT / "pyproject.toml"
 LOCKFILE = ROOT / "uv.lock"
 DRIVER_PATH = ROOT / "scripts" / "verify_development_baseline.py"
+EXPECTED_EXPORTS = [
+    "__version__",
+    "AcceptanceClass",
+    "ContextDenominatorState",
+    "Edit",
+    "EvidenceCompleteness",
+    "EvidenceRecord",
+    "EvidenceState",
+    "OriginalCoordinateEdit",
+    "Policy",
+    "PolicyConfig",
+    "RepairDisposition",
+    "RepairMode",
+    "RepairReason",
+    "RepairResult",
+    "RepairSpan",
+    "ReviewProposal",
+    "ReviewProposalBatch",
+    "SelectedSpan",
+    "SelectionBatch",
+    "SpanSelection",
+    "StageTimings",
+    "DEFAULT_MAX_MANIFEST_BYTES",
+    "DEFAULT_MAX_PAYLOAD_BYTES",
+    "DEFAULT_MAX_RECORDS",
+    "DenominatorKnowledge",
+    "Manifest",
+    "ManifestDenominatorKnowledge",
+    "ManifestError",
+    "ManifestVerificationError",
+    "QueryKind",
+    "RightsStatus",
+    "SourceManifest",
+    "SourceRightsStatus",
+    "SyntheticCorpus",
+    "SyntheticCorpusPayload",
+    "SyntheticCountRecord",
+    "SyntheticRecord",
+    "VerifiedCorpus",
+    "VerifiedSyntheticCorpus",
+    "VerificationFailure",
+    "load_verified_corpus",
+    "load_verified_manifest",
+    "verify_manifest_payload",
+]
 
 
 def load_driver() -> Any:
@@ -33,6 +79,17 @@ def load_driver() -> Any:
 def read_project() -> dict[str, object]:
     with PYPROJECT.open("rb") as handle:
         return tomllib.load(handle)
+
+
+def child_environment(home: Path, *, source_tree: bool = False) -> dict[str, str]:
+    env = os.environ.copy()
+    env.pop("PYTHONPATH", None)
+    env["HOME"] = str(home)
+    env["PYTHONDONTWRITEBYTECODE"] = "1"
+    env["PYTHONNOUSERSITE"] = "1"
+    if source_tree:
+        env["PYTHONPATH"] = str(ROOT / "src")
+    return env
 
 
 def test_project_metadata_and_dependency_boundaries() -> None:
@@ -81,7 +138,7 @@ def test_lock_is_frozen_and_has_only_allowed_sources() -> None:
 
 
 def test_installed_import_isolation() -> None:
-    code = r"""
+    code = f"""
 import importlib.metadata
 import pathlib
 import socket
@@ -98,56 +155,18 @@ socket.create_connection = blocked
 socket.socket.connect = blocked
 urllib.request.urlopen = blocked
 
+before_modules = set(sys.modules)
 module = __import__("llm_slovenian_repair")
+after_modules = set(sys.modules)
 assert importlib.metadata.version("llm-slovenian-repair") == "0.0.0"
 assert module.__version__ == "0.0.0"
-assert module.__all__ == [
-    "__version__",
-    "AcceptanceClass",
-    "ContextDenominatorState",
-    "Edit",
-    "EvidenceCompleteness",
-    "EvidenceRecord",
-    "EvidenceState",
-    "OriginalCoordinateEdit",
-    "Policy",
-    "PolicyConfig",
-    "RepairDisposition",
-    "RepairMode",
-    "RepairReason",
-    "RepairResult",
-    "RepairSpan",
-    "ReviewProposal",
-    "ReviewProposalBatch",
-    "SelectedSpan",
-    "SelectionBatch",
-    "SpanSelection",
-    "StageTimings",
-    "DEFAULT_MAX_MANIFEST_BYTES",
-    "DEFAULT_MAX_PAYLOAD_BYTES",
-    "DEFAULT_MAX_RECORDS",
-    "DenominatorKnowledge",
-    "Manifest",
-    "ManifestDenominatorKnowledge",
-    "ManifestError",
-    "ManifestVerificationError",
-    "QueryKind",
-    "RightsStatus",
-    "SourceManifest",
-    "SourceRightsStatus",
-    "SyntheticCorpus",
-    "SyntheticCorpusPayload",
-    "SyntheticCountRecord",
-    "SyntheticRecord",
-    "VerifiedCorpus",
-    "VerifiedSyntheticCorpus",
-    "VerificationFailure",
-    "load_verified_corpus",
-    "load_verified_manifest",
-    "verify_manifest_payload",
-]
-assert "pydantic" in sys.modules
-assert "httpx" not in sys.modules
+assert module.__all__ == {EXPECTED_EXPORTS!r}
+assert set(module.__all__).issubset(dir(module))
+assert not any(
+    name == "pydantic"
+    or name.startswith(("pydantic.", "pydantic_core", "httpx"))
+    for name in after_modules - before_modules
+)
 assert not any(
     name.startswith(("torch", "transformers", "spacy", "stanza")) for name in sys.modules
 )
@@ -171,9 +190,98 @@ assert before == after
     assert completed.returncode == 0, completed.stderr or completed.stdout
 
 
+def test_source_root_import_succeeds_without_runtime_dependencies() -> None:
+    code = r"""
+import builtins
+import pathlib
+import sys
+
+blocked = ("pydantic", "pydantic_core", "httpx")
+original_import = builtins.__import__
+
+def guarded_import(name, *args, **kwargs):
+    if any(name == dependency or name.startswith(dependency + ".") for dependency in blocked):
+        raise ModuleNotFoundError(f"blocked dependency: {name}")
+    return original_import(name, *args, **kwargs)
+
+builtins.__import__ = guarded_import
+root = pathlib.Path.cwd()
+before = sorted(path.relative_to(root).as_posix() for path in root.rglob("*"))
+module = __import__("llm_slovenian_repair")
+assert module.__version__ == "0.0.0"
+assert module.__all__[0] == "__version__"
+assert set(module.__all__).issubset(dir(module))
+assert not any(
+    name == "pydantic"
+    or name.startswith(("pydantic.", "pydantic_core", "httpx"))
+    for name in sys.modules
+)
+after = sorted(path.relative_to(root).as_posix() for path in root.rglob("*"))
+assert before == after
+"""
+    with tempfile.TemporaryDirectory(prefix="llm-slovenian-source-import-") as temp_dir:
+        temp = Path(temp_dir)
+        completed = subprocess.run(
+            [sys.executable, "-B", "-c", code],
+            cwd=temp,
+            env=child_environment(temp / "home", source_tree=True),
+            capture_output=True,
+            text=True,
+            check=False,
+        )
+    assert completed.returncode == 0, completed.stderr or completed.stdout
+
+
+def test_source_lazy_export_loads_dependencies_only_on_first_typed_access() -> None:
+    code = r"""
+import importlib
+import pathlib
+import sys
+
+module = __import__("llm_slovenian_repair")
+before = set(sys.modules)
+directory = dir(module)
+try:
+    module.not_a_documented_export
+except AttributeError:
+    pass
+else:
+    raise AssertionError("unknown exports must raise AttributeError")
+assert dir(module) == directory
+assert "llm_slovenian_repair.contracts" not in sys.modules
+assert "llm_slovenian_repair.policy" not in sys.modules
+assert "pydantic" not in sys.modules
+assert "httpx" not in sys.modules
+
+policy_config = module.PolicyConfig
+assert policy_config is importlib.import_module(
+    "llm_slovenian_repair.policy"
+).PolicyConfig
+assert module.PolicyConfig is policy_config
+assert "pydantic" in sys.modules
+assert "httpx" not in sys.modules
+assert "llm_slovenian_repair.source_manifest" not in sys.modules
+assert dir(module) == directory
+assert pathlib.Path.cwd().is_dir()
+"""
+    with tempfile.TemporaryDirectory(prefix="llm-slovenian-source-lazy-") as temp_dir:
+        temp = Path(temp_dir)
+        completed = subprocess.run(
+            [sys.executable, "-B", "-c", code],
+            cwd=temp,
+            env=child_environment(temp / "home", source_tree=True),
+            capture_output=True,
+            text=True,
+            check=False,
+        )
+    assert completed.returncode == 0, completed.stderr or completed.stdout
+
+
 def test_built_wheel_metadata_and_payload() -> None:
     with tempfile.TemporaryDirectory(prefix="llm-slovenian-wheel-") as temp_dir:
-        output_dir = Path(temp_dir)
+        temp = Path(temp_dir)
+        output_dir = temp / "artifacts"
+        output_dir.mkdir()
         completed = subprocess.run(
             ["uv", "build", "--no-sources", "--wheel", "--out-dir", str(output_dir)],
             cwd=ROOT,
@@ -210,6 +318,96 @@ def test_built_wheel_metadata_and_payload() -> None:
                 for name in names
                 for token in ("model", "corpus", "weights")
             )
+
+        wheel_environment = temp / "wheel-environment"
+        completed = subprocess.run(
+            ["uv", "venv", "--python", sys.executable, str(wheel_environment)],
+            cwd=temp,
+            capture_output=True,
+            text=True,
+            check=False,
+        )
+        assert completed.returncode == 0, completed.stderr or completed.stdout
+        wheel_python = wheel_environment / (
+            "Scripts/python.exe" if os.name == "nt" else "bin/python"
+        )
+        completed = subprocess.run(
+            [
+                "uv",
+                "pip",
+                "install",
+                "--python",
+                str(wheel_python),
+                "--offline",
+                "--no-deps",
+                str(wheels[0]),
+            ],
+            cwd=temp,
+            capture_output=True,
+            text=True,
+            check=False,
+        )
+        assert completed.returncode == 0, completed.stderr or completed.stdout
+
+        outside_repository = temp / "outside-repository"
+        outside_repository.mkdir()
+        bare_import = f"""
+import importlib.metadata as metadata
+import pathlib
+import sys
+
+root = pathlib.Path.cwd()
+before_files = sorted(path.relative_to(root).as_posix() for path in root.rglob('*'))
+before_modules = set(sys.modules)
+module = __import__('llm_slovenian_repair')
+after_modules = set(sys.modules)
+assert metadata.version('llm-slovenian-repair') == '0.0.0'
+assert module.__version__ == '0.0.0'
+assert module.__all__ == {EXPECTED_EXPORTS!r}
+assert set(module.__all__).issubset(dir(module))
+assert not any(
+    name == 'pydantic'
+    or name.startswith(('pydantic.', 'pydantic_core', 'httpx'))
+    for name in after_modules - before_modules
+)
+after_files = sorted(path.relative_to(root).as_posix() for path in root.rglob('*'))
+assert before_files == after_files
+"""
+        completed = subprocess.run(
+            [str(wheel_python), "-B", "-c", bare_import],
+            cwd=outside_repository,
+            env=child_environment(temp / "home"),
+            capture_output=True,
+            text=True,
+            check=False,
+        )
+        assert completed.returncode == 0, completed.stderr or completed.stdout
+
+        lazy_access = r"""
+import importlib
+import sys
+
+module = __import__("llm_slovenian_repair")
+assert "pydantic" not in sys.modules
+assert "httpx" not in sys.modules
+policy_config = module.PolicyConfig
+assert policy_config is importlib.import_module(
+    "llm_slovenian_repair.policy"
+).PolicyConfig
+assert "pydantic" in sys.modules
+assert "httpx" not in sys.modules
+"""
+        dependency_environment = child_environment(temp / "home")
+        dependency_environment["PYTHONPATH"] = sysconfig.get_path("purelib") or ""
+        completed = subprocess.run(
+            [str(wheel_python), "-B", "-c", lazy_access],
+            cwd=outside_repository,
+            env=dependency_environment,
+            capture_output=True,
+            text=True,
+            check=False,
+        )
+        assert completed.returncode == 0, completed.stderr or completed.stdout
 
 
 def test_driver_environment_uses_owned_native_paths(monkeypatch: pytest.MonkeyPatch) -> None:
