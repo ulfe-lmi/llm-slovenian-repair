@@ -5,9 +5,10 @@ import subprocess
 import tempfile
 import unittest
 from pathlib import Path
+from unittest.mock import patch
 
+import source_cache
 from oap_core import OAPError, check_report_history
-from source_cache import CACHE_STATE_INVALID, CACHE_STATE_MISSING, plan
 
 
 def run_git(repo: Path, *args: str) -> str:
@@ -91,8 +92,8 @@ class CachePlanner(unittest.TestCase):
         with tempfile.TemporaryDirectory(prefix="cache-plan-") as temporary:
             strategy = Path(temporary) / "strategy"
             strategy.mkdir()
-            result = plan(strategy)
-            self.assertEqual(result["state"], CACHE_STATE_MISSING)
+            result = source_cache.plan(strategy)
+            self.assertEqual(result["state"], source_cache.CACHE_STATE_MISSING)
             self.assertEqual(result["network_get_count"], 0)
 
     def test_unexpected_cache_file_is_invalid(self) -> None:
@@ -101,8 +102,43 @@ class CachePlanner(unittest.TestCase):
             root = strategy / "source-cache/concept-verification/gigafida-2.0-words"
             root.mkdir(parents=True)
             (root / "unexpected").write_bytes(b"fixture")
-            result = plan(strategy)
-            self.assertEqual(result["state"], CACHE_STATE_INVALID)
+            result = source_cache.plan(strategy)
+            self.assertEqual(result["state"], source_cache.CACHE_STATE_INVALID)
+
+    def test_promotion_renames_when_hardlinks_are_unavailable(self) -> None:
+        data = b"synthetic archive bytes"
+        with tempfile.TemporaryDirectory(prefix="cache-promote-") as temporary:
+            strategy = Path(temporary) / "strategy"
+            root = strategy / "source-cache/concept-verification/gigafida-2.0-words"
+            root.mkdir(parents=True)
+            part = root / source_cache.PART_NAME
+            part.write_bytes(data)
+            import hashlib
+
+            values = {
+                "EXPECTED_SIZE": len(data),
+                "EXPECTED_MD5": hashlib.md5(data, usedforsecurity=False).hexdigest(),
+                "EXPECTED_SHA256": hashlib.sha256(data).hexdigest(),
+                "EXPECTED_GENERATION": hashlib.sha256(data).hexdigest(),
+            }
+            evidence = source_cache.verify_source_artifact.ArtifactVerification(
+                source_id=source_cache.SOURCE_ID,
+                byte_size=len(data),
+                md5=values["EXPECTED_MD5"],
+                sha256=values["EXPECTED_SHA256"],
+                member_count=0,
+                total_uncompressed_size=0,
+            )
+            with patch.multiple(source_cache, **values), patch.object(
+                source_cache.verify_source_artifact, "verify_artifact", return_value=evidence
+            ), patch.object(source_cache.os, "link", side_effect=OSError("fixture filesystem")):
+                result = source_cache.promote(strategy)
+                self.assertEqual(result["state"], source_cache.CACHE_STATE_VERIFIED)
+                self.assertEqual(
+                    source_cache.inspect(strategy)["state"], source_cache.CACHE_STATE_VERIFIED
+                )
+            self.assertTrue((root / source_cache.FINAL_NAME).is_file())
+            self.assertFalse(part.exists())
 
 
 if __name__ == "__main__":

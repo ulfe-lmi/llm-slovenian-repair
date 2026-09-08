@@ -9,21 +9,23 @@ source content.
 from __future__ import annotations
 
 import argparse
-from datetime import UTC, datetime
+import contextlib
+import fcntl
 import hashlib
 import json
 import os
-from pathlib import Path
 import pwd
 import stat
 import sys
+from datetime import UTC, datetime
+from pathlib import Path
 from typing import Any
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
 if str(REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(REPO_ROOT))
 
-from scripts import verify_source_artifact
+from scripts import verify_source_artifact  # noqa: E402
 
 CACHE_SCHEMA_VERSION = 1
 CACHE_STATE_MISSING = "MISSING"
@@ -120,7 +122,11 @@ def cache_root(strategic_home: str | Path) -> Path:
         _fail("CACHE_ROOT_PARENT")
     if root.parent != strategy / "source-cache" / "concept-verification":
         _fail("CACHE_ROOT_PARENT")
-    for parent in (strategy, strategy / "source-cache", strategy / "source-cache" / "concept-verification"):
+    for parent in (
+        strategy,
+        strategy / "source-cache",
+        strategy / "source-cache" / "concept-verification",
+    ):
         if parent.exists():
             _owned(parent, kind="dir")
     return root
@@ -223,7 +229,11 @@ def _verify_final(final: Path, inventory: Path) -> dict[str, Any]:
         result = verify_source_artifact.verify_artifact(inventory, SOURCE_ID, final)
     except Exception as exc:
         raise CacheError("CACHE_VERIFIER_FAILED") from exc
-    if result.byte_size != EXPECTED_SIZE or result.md5 != EXPECTED_MD5 or result.sha256 != EXPECTED_SHA256:
+    if (
+        result.byte_size != EXPECTED_SIZE
+        or result.md5 != EXPECTED_MD5
+        or result.sha256 != EXPECTED_SHA256
+    ):
         _fail("CACHE_VERIFIER_IDENTITY")
     return {"source_id": SOURCE_ID, "byte_size": size, "md5": md5, "sha256": sha}
 
@@ -236,9 +246,17 @@ def inspect(strategic_home: str | Path, *, inventory: str | Path | None = None) 
     try:
         final, part, metadata = _layout(root)
         if final is None or metadata is None:
-            return {"state": CACHE_STATE_INVALID, "reason": "CACHE_ARTIFACT_INCOMPLETE", "network_get_count": 0}
+            return {
+                "state": CACHE_STATE_INVALID,
+                "reason": "CACHE_ARTIFACT_INCOMPLETE",
+                "network_get_count": 0,
+            }
         if part is not None:
-            return {"state": CACHE_STATE_INVALID, "reason": "CACHE_PART_PRESENT", "network_get_count": 0}
+            return {
+                "state": CACHE_STATE_INVALID,
+                "reason": "CACHE_PART_PRESENT",
+                "network_get_count": 0,
+            }
         value = _read_json(metadata)
         _validate_metadata(value)
         summary = _verify_final(final, _inventory_path(inventory))
@@ -290,6 +308,17 @@ def _write_exclusive(path: Path, data: bytes) -> None:
         raise
 
 
+@contextlib.contextmanager
+def _promotion_lock(root: Path):
+    lock_path = root.parent / ("." + ROOT_NAME + ".promotion.lock")
+    fd = os.open(lock_path, os.O_RDWR | os.O_CREAT | os.O_NOFOLLOW, 0o600)
+    try:
+        fcntl.flock(fd, fcntl.LOCK_EX)
+        yield
+    finally:
+        os.close(fd)
+
+
 def promote(strategic_home: str | Path, *, inventory: str | Path | None = None) -> dict[str, Any]:
     """Promote the one fixed part.zip; callers own the download step."""
     root = cache_root(strategic_home)
@@ -305,15 +334,29 @@ def promote(strategic_home: str | Path, *, inventory: str | Path | None = None) 
     _owned(part, kind="file")
     inventory_path = _inventory_path(inventory)
     summary = _verify_final(part, inventory_path)
-    try:
-        os.link(part, final, follow_symlinks=False)
-        part.unlink()
-        os.chmod(final, 0o444, follow_symlinks=False)
-    except FileExistsError as exc:
-        raise CacheError("CACHE_FINAL_EXISTS") from exc
-    except OSError as exc:
-        final.unlink(missing_ok=True)
-        raise CacheError("CACHE_PROMOTION_FAILED") from exc
+    with _promotion_lock(root):
+        if final.exists() or final.is_symlink():
+            _fail("CACHE_FINAL_EXISTS")
+        try:
+            os.link(part, final, follow_symlinks=False)
+            part.unlink()
+        except FileExistsError as exc:
+            raise CacheError("CACHE_FINAL_EXISTS") from exc
+        except OSError:
+            # Some owner-selected sync filesystems reject hard links.  A
+            # rename of the fully verified, fixed part remains atomic and the
+            # lock plus recheck prevents a cooperating writer from replacing a
+            # valid final.
+            if final.exists() or final.is_symlink():
+                raise CacheError("CACHE_FINAL_EXISTS") from None
+            try:
+                os.replace(part, final)
+            except OSError as exc:
+                raise CacheError("CACHE_PROMOTION_FAILED") from exc
+        with contextlib.suppress(OSError):
+            os.chmod(final, 0o444, follow_symlinks=False)
+        # Read-only mode is best effort on the selected sync filesystem;
+        # ownership, type, link-count and digest checks remain mandatory.
     value = {
         "schema_version": CACHE_SCHEMA_VERSION,
         "source_id": SOURCE_ID,
@@ -328,7 +371,12 @@ def promote(strategic_home: str | Path, *, inventory: str | Path | None = None) 
         "created_at": datetime.now(UTC).replace(microsecond=0).isoformat().replace("+00:00", "Z"),
     }
     _write_exclusive(metadata, (json.dumps(value, sort_keys=True, indent=2) + "\n").encode())
-    return {"state": CACHE_STATE_VERIFIED, "action": "ESTABLISHED", "network_get_count": 1, **summary}
+    return {
+        "state": CACHE_STATE_VERIFIED,
+        "action": "ESTABLISHED",
+        "network_get_count": 1,
+        **summary,
+    }
 
 
 def repair_invalid(strategic_home: str | Path) -> dict[str, Any]:
