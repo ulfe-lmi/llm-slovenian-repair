@@ -101,8 +101,29 @@ urllib.request.urlopen = blocked
 module = __import__("llm_slovenian_repair")
 assert importlib.metadata.version("llm-slovenian-repair") == "0.0.0"
 assert module.__version__ == "0.0.0"
-assert module.__all__ == ["__version__"]
-assert "pydantic" not in sys.modules
+assert module.__all__ == [
+    "__version__",
+    "AcceptanceClass",
+    "Edit",
+    "EvidenceCompleteness",
+    "EvidenceRecord",
+    "EvidenceState",
+    "OriginalCoordinateEdit",
+    "Policy",
+    "PolicyConfig",
+    "RepairDisposition",
+    "RepairMode",
+    "RepairReason",
+    "RepairResult",
+    "RepairSpan",
+    "ReviewProposal",
+    "ReviewProposalBatch",
+    "SelectedSpan",
+    "SelectionBatch",
+    "SpanSelection",
+    "StageTimings",
+]
+assert "pydantic" in sys.modules
 assert "httpx" not in sys.modules
 assert not any(
     name.startswith(("torch", "transformers", "spacy", "stanza")) for name in sys.modules
@@ -156,7 +177,7 @@ def test_built_wheel_metadata_and_payload() -> None:
             ]
             assert all(
                 not name.startswith("llm_slovenian_repair/")
-                or name.endswith(("__init__.py", "py.typed"))
+                or name.endswith(("__init__.py", "contracts.py", "policy.py", "py.typed"))
                 for name in names
             )
             assert not any(
