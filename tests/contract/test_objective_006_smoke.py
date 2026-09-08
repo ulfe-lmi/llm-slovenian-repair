@@ -126,6 +126,23 @@ def test_verified_numeric_diagnostic_profiles_then_imports_once(tmp_path: Path) 
         "record_count": 32,
         "failure": None,
     }
+    counterfactual = result["counterfactual_omit_row_1"]
+    assert isinstance(counterfactual, dict)
+    assert counterfactual["envelope"] == {
+        "preamble_lines": 14,
+        "header_byte_length": 834,
+        "data_rows": 31,
+        "readline_calls": 46,
+        "header_preserved": True,
+        "preamble_preserved": True,
+        "first_data_row_omitted": True,
+    }
+    assert counterfactual["importer"] == {
+        "attempts": 1,
+        "runs_completed": 1,
+        "record_count": 31,
+        "failure": None,
+    }
     rendered = json.dumps(result, ensure_ascii=False, sort_keys=True)
     assert "value-0-0" not in rendered
     assert "records" not in rendered
@@ -140,6 +157,22 @@ def test_verified_numeric_diagnostic_profiles_then_imports_once(tmp_path: Path) 
             "byte_substrings",
         )
     )
+
+
+def test_counterfactual_envelope_preserves_prefix_and_omits_only_first_row() -> None:
+    envelope = smoke.PrefixEnvelope(
+        data=prefix_bytes(),
+        preamble_lines=14,
+        header_bytes=834,
+        data_rows=32,
+        readline_calls=47,
+    )
+    counterfactual = smoke._omit_first_data_row(envelope)
+    original_lines = envelope.data.splitlines(keepends=True)
+    counterfactual_lines = counterfactual.data.splitlines(keepends=True)
+    assert counterfactual_lines[:15] == original_lines[:15]
+    assert counterfactual_lines[15:] == original_lines[16:]
+    assert len(counterfactual_lines) == 46
 
 
 @pytest.mark.parametrize(

@@ -20,10 +20,13 @@ from scripts.diagnose_unigram_rows import (  # noqa: E402
     DEFAULT_MAX_LINE_BYTES,
     NUMERIC_CATEGORY_ORDER,
     NUMERIC_COLUMNS,
+    NUMERIC_MARKER_CATEGORY_ORDER,
     PUBLISHED_DECIMAL_COLUMNS,
     DiagnosticError,
     NumericTokenCategory,
     RowStructureLimits,
+    classify_identity_token,
+    classify_numeric_marker,
     classify_numeric_rows,
     classify_numeric_token,
     classify_rows,
@@ -386,6 +389,76 @@ def test_numeric_profile_rejects_structure_before_any_profile() -> None:
     malformed = numeric_row({5: "1"})[:-2] + b"\n"
     with pytest.raises(DiagnosticError, match="numeric-structure-invalid"):
         classify_numeric_rows(BytesIO(malformed), requested_row_count=1)
+
+
+def test_numeric_marker_refinement_covers_fixed_priority_and_no_content() -> None:
+    expected = {
+        b"-": "HYPHEN_MINUS",
+        b"--": "REPEATED_HYPHEN_MINUS",
+        b".": "DOT",
+        b"..": "REPEATED_DOT",
+        b"/": "SLASH",
+        b"%%": "PERCENT_ONLY",
+        b"ABC": "ASCII_LETTERS_ONLY",
+        b"A1": "ASCII_ALNUM",
+        b"?!": "ASCII_PUNCTUATION_OTHER",
+        b"A-": "ASCII_MIXED_OTHER",
+    }
+    assert tuple(category.value for category in NUMERIC_MARKER_CATEGORY_ORDER) == tuple(
+        expected.values()
+    )
+    assert {classify_numeric_marker(value).value for value in expected} == set(expected.values())
+
+
+def test_numeric_profile_refines_marker_row_and_identity_relations() -> None:
+    row_one = ["Forma", "forma", "FORMA", "NOUN"] + ["NaN"] * 24
+    row_two = ["Other", "other", "OTHER", "NOUN"] + ["NaN"] * 24
+    row_three = ["Different", "lemma", "lower", "VERB"] + ["NaN"] * 24
+    data = row_values_bytes(row_one) + row_values_bytes(row_two) + row_values_bytes(row_three)
+    result = classify_numeric_rows(
+        BytesIO(data),
+        requested_row_count=3,
+    )
+    profile = cast(dict[str, object], result["row_1_marker_profile"])
+    assert profile["other_ascii_marker_cell_count"] == 24
+    assert profile["distinct_numeric_marker_count"] == 1
+    assert profile["all_numeric_markers_identical"] is True
+    assert set(cast(dict[str, str], profile["refinement_by_column"]).values()) == {
+        "ASCII_LETTERS_ONLY"
+    }
+    family_profiles = cast(dict[str, dict[str, object]], profile["family_profiles"])
+    assert set(family_profiles) == {"absolute", "share", "relative"}
+    assert all(item["distinct_marker_count"] == 1 for item in family_profiles.values())
+    assert all(cast(dict[str, bool], profile["same_column_marker_recurrence"]).values())
+    identity = cast(dict[str, object], profile["identity_profile"])
+    assert identity["nonempty_mask"] == "1111"
+    assert identity["equality_pattern"] == "ALL_DISTINCT"
+    assert identity["pos_shape_category"] == "ASCII_LETTERS"
+    assert identity["nfc_casefold_relations"] == {
+        "form_equals_lemma": True,
+        "form_equals_lowercase_lemma": True,
+        "lemma_equals_lowercase_lemma": True,
+    }
+    assert profile["identity_profile_matches_rows_2_to_32"] == 1
+    assert profile["evidence_predicates"] == ["NUMERIC_MARKERS_UNIFORM"]
+    rendered = json.dumps(result, ensure_ascii=False, sort_keys=True)
+    assert all(sentinel not in rendered for sentinel in ("Forma", "NaN", "Different", "NOUN"))
+    assert not any(
+        field in rendered
+        for field in ("token", "value", "raw", "length", "hash", "record")
+    )
+
+
+def test_identity_categories_cover_all_closed_values() -> None:
+    values = ("", "ABC", "ž", "!?", "123", "A-1")
+    assert tuple(classify_identity_token(value).value for value in values) == (
+        "EMPTY",
+        "ASCII_LETTERS",
+        "UNICODE_LETTERS",
+        "ASCII_PUNCTUATION",
+        "ALNUM",
+        "MIXED",
+    )
 
 
 def test_blocked_real_receipt_is_bounded_and_content_free() -> None:

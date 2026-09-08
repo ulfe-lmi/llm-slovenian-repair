@@ -12,13 +12,14 @@ import argparse
 import json
 import re
 import sys
+import unicodedata
 from collections import Counter
 from dataclasses import dataclass
 from decimal import Decimal, InvalidOperation
 from enum import StrEnum
 from io import BytesIO
 from pathlib import Path
-from typing import BinaryIO, Final, Protocol
+from typing import BinaryIO, Final, Protocol, cast
 
 REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
 if str(REPOSITORY_ROOT / "src") not in sys.path:
@@ -32,12 +33,20 @@ _DIAGNOSTIC_INVENTORY_SHA256: Final = "a" * 64
 _DIAGNOSTIC_ACQUISITION_SHA256: Final = "b" * 64
 
 ABSOLUTE_COUNT_COLUMNS: Final = (5, 8, 11, 14, 17, 20, 23, 26)
+SHARE_COLUMNS: Final = (6, 9, 12, 15, 18, 21, 24, 27)
+RELATIVE_COLUMNS: Final = (7, 10, 13, 16, 19, 22, 25, 28)
 PUBLISHED_DECIMAL_COLUMNS: Final = tuple(
     column
     for column in range(5, 29)
     if column not in ABSOLUTE_COUNT_COLUMNS
 )
 NUMERIC_COLUMNS: Final = tuple(range(5, 29))
+NUMERIC_FAMILY_COLUMNS: Final = {
+    "absolute": ABSOLUTE_COUNT_COLUMNS,
+    "share": SHARE_COLUMNS,
+    "relative": RELATIVE_COLUMNS,
+}
+IDENTITY_COLUMNS: Final = (1, 2, 3, 4)
 
 
 class NumericTokenCategory(StrEnum):
@@ -60,7 +69,46 @@ class NumericTokenCategory(StrEnum):
     OTHER_UNICODE = "OTHER_UNICODE"
 
 
+class NumericMarkerCategory(StrEnum):
+    """Closed, content-free refinement categories for row-one markers."""
+
+    HYPHEN_MINUS = "HYPHEN_MINUS"
+    REPEATED_HYPHEN_MINUS = "REPEATED_HYPHEN_MINUS"
+    DOT = "DOT"
+    REPEATED_DOT = "REPEATED_DOT"
+    SLASH = "SLASH"
+    PERCENT_ONLY = "PERCENT_ONLY"
+    ASCII_LETTERS_ONLY = "ASCII_LETTERS_ONLY"
+    ASCII_ALNUM = "ASCII_ALNUM"
+    ASCII_PUNCTUATION_OTHER = "ASCII_PUNCTUATION_OTHER"
+    ASCII_MIXED_OTHER = "ASCII_MIXED_OTHER"
+
+
+class IdentityTokenCategory(StrEnum):
+    """Closed, content-free categories for the first four fields."""
+
+    EMPTY = "EMPTY"
+    ASCII_LETTERS = "ASCII_LETTERS"
+    UNICODE_LETTERS = "UNICODE_LETTERS"
+    ASCII_PUNCTUATION = "ASCII_PUNCTUATION"
+    ALNUM = "ALNUM"
+    MIXED = "MIXED"
+
+
+class IdentityEqualityPattern(StrEnum):
+    """The five possible equality partitions of form/lemma/lowercase lemma."""
+
+    ALL_DISTINCT = "ALL_DISTINCT"
+    FORM_EQUALS_LEMMA = "FORM_EQUALS_LEMMA"
+    FORM_EQUALS_LOWERCASE_LEMMA = "FORM_EQUALS_LOWERCASE_LEMMA"
+    LEMMA_EQUALS_LOWERCASE_LEMMA = "LEMMA_EQUALS_LOWERCASE_LEMMA"
+    ALL_EQUAL = "ALL_EQUAL"
+
+
 NUMERIC_CATEGORY_ORDER: Final = tuple(NumericTokenCategory)
+NUMERIC_MARKER_CATEGORY_ORDER: Final = tuple(NumericMarkerCategory)
+IDENTITY_CATEGORY_ORDER: Final = tuple(IdentityTokenCategory)
+IDENTITY_EQUALITY_PATTERN_ORDER: Final = tuple(IdentityEqualityPattern)
 _ASCII_DIGITS_RE = re.compile(r"[0-9]+")
 _ASCII_DECIMAL_DOT_RE = re.compile(r"(?:0|[0-9]+)\.[0-9]+")
 _ASCII_DECIMAL_COMMA_RE = re.compile(r"(?:0|[0-9]+),[0-9]+")
@@ -355,6 +403,167 @@ def classify_numeric_token(value: bytes) -> NumericTokenCategory:
     return NumericTokenCategory.OTHER_UNICODE
 
 
+def _ascii_letter(value: int) -> bool:
+    return 65 <= value <= 90 or 97 <= value <= 122
+
+
+def _ascii_punctuation(value: int) -> bool:
+    return 33 <= value <= 47 or 58 <= value <= 64 or 91 <= value <= 96 or 123 <= value <= 126
+
+
+def classify_numeric_marker(value: bytes) -> NumericMarkerCategory:
+    """Refine an ASCII marker without exposing its content or size."""
+
+    if value == b"-":
+        return NumericMarkerCategory.HYPHEN_MINUS
+    if len(value) >= 2 and all(character == ord("-") for character in value):
+        return NumericMarkerCategory.REPEATED_HYPHEN_MINUS
+    if value == b".":
+        return NumericMarkerCategory.DOT
+    if len(value) >= 2 and all(character == ord(".") for character in value):
+        return NumericMarkerCategory.REPEATED_DOT
+    if value and all(character == ord("/") for character in value):
+        return NumericMarkerCategory.SLASH
+    if value and all(character == ord("%") for character in value):
+        return NumericMarkerCategory.PERCENT_ONLY
+    if value and all(_ascii_letter(character) for character in value):
+        return NumericMarkerCategory.ASCII_LETTERS_ONLY
+    if value and all(
+        _ascii_letter(character) or 48 <= character <= 57 for character in value
+    ):
+        return NumericMarkerCategory.ASCII_ALNUM
+    if value and all(_ascii_punctuation(character) for character in value):
+        return NumericMarkerCategory.ASCII_PUNCTUATION_OTHER
+    return NumericMarkerCategory.ASCII_MIXED_OTHER
+
+
+def classify_identity_token(value: str) -> IdentityTokenCategory:
+    """Classify one identity field with a fixed syntax-only priority."""
+
+    if value == "":
+        return IdentityTokenCategory.EMPTY
+    if all(_ascii_letter(ord(character)) for character in value):
+        return IdentityTokenCategory.ASCII_LETTERS
+    if all(character.isalpha() for character in value):
+        return IdentityTokenCategory.UNICODE_LETTERS
+    if all(_ascii_punctuation(ord(character)) for character in value):
+        return IdentityTokenCategory.ASCII_PUNCTUATION
+    if all(character.isalnum() for character in value):
+        return IdentityTokenCategory.ALNUM
+    return IdentityTokenCategory.MIXED
+
+
+def _identity_equality_pattern(
+    source_form: str, lemma: str, lowercase_lemma: str
+) -> IdentityEqualityPattern:
+    if source_form == lemma == lowercase_lemma:
+        return IdentityEqualityPattern.ALL_EQUAL
+    if source_form == lemma:
+        return IdentityEqualityPattern.FORM_EQUALS_LEMMA
+    if source_form == lowercase_lemma:
+        return IdentityEqualityPattern.FORM_EQUALS_LOWERCASE_LEMMA
+    if lemma == lowercase_lemma:
+        return IdentityEqualityPattern.LEMMA_EQUALS_LOWERCASE_LEMMA
+    return IdentityEqualityPattern.ALL_DISTINCT
+
+
+def _nfc_casefold_equal(left: str, right: str) -> bool:
+    return unicodedata.normalize("NFC", left).casefold() == unicodedata.normalize(
+        "NFC", right
+    ).casefold()
+
+
+def _identity_profile(fields: tuple[bytes, ...]) -> tuple[dict[str, object], tuple[object, ...]]:
+    """Return a content-free row-one identity profile and its comparison key."""
+
+    values = tuple(_unicode_text(fields[column - 1]) for column in IDENTITY_COLUMNS)
+    source_form, lemma, lowercase_lemma, pos = values
+    categories = tuple(classify_identity_token(value).value for value in values)
+    equality = _identity_equality_pattern(source_form, lemma, lowercase_lemma)
+    relations = {
+        "form_equals_lemma": _nfc_casefold_equal(source_form, lemma),
+        "form_equals_lowercase_lemma": _nfc_casefold_equal(
+            source_form, lowercase_lemma
+        ),
+        "lemma_equals_lowercase_lemma": _nfc_casefold_equal(lemma, lowercase_lemma),
+    }
+    profile_key: tuple[object, ...] = (
+        categories,
+        "".join("1" if value else "0" for value in values),
+        equality.value,
+        tuple(relations.values()),
+        categories[3],
+    )
+    profile: dict[str, object] = {
+        "column_categories": {
+            str(column): category
+            for column, category in zip(IDENTITY_COLUMNS, categories, strict=True)
+        },
+        "nonempty_mask": profile_key[1],
+        "equality_pattern": equality.value,
+        "nfc_casefold_relations": relations,
+        "pos_shape_category": categories[3],
+    }
+    return profile, profile_key
+
+
+def _numeric_marker_profile(rows: list[tuple[bytes, ...]]) -> dict[str, object]:
+    row_one = rows[0]
+    marker_values: dict[int, bytes] = {}
+    refinement: dict[str, str] = {}
+    for column in NUMERIC_COLUMNS:
+        value = row_one[column - 1]
+        if classify_numeric_token(value) is NumericTokenCategory.OTHER_ASCII:
+            marker_values[column] = value
+            refinement[str(column)] = classify_numeric_marker(value).value
+
+    distinct_count = len(set(marker_values.values()))
+    family_profiles: dict[str, dict[str, object]] = {}
+    for family, columns in NUMERIC_FAMILY_COLUMNS.items():
+        values = [marker_values[column] for column in columns if column in marker_values]
+        family_distinct_count = len(set(values))
+        family_profiles[family] = {
+            "marker_cell_count": len(values),
+            "distinct_marker_count": family_distinct_count,
+            "uniform": bool(values) and family_distinct_count == 1,
+        }
+
+    recurrence = {
+        str(column): any(row[column - 1] == value for row in rows[1:])
+        for column, value in marker_values.items()
+    }
+    identity_profile, identity_key = _identity_profile(row_one)
+    identity_matches = 0
+    for row in rows[1:]:
+        _, candidate_key = _identity_profile(row)
+        identity_matches += int(candidate_key == identity_key)
+
+    predicates: list[str] = []
+    if marker_values and distinct_count == 1:
+        predicates.append("NUMERIC_MARKERS_UNIFORM")
+    if marker_values and any(
+        cast(int, profile["distinct_marker_count"]) > 1
+        for profile in family_profiles.values()
+    ):
+        predicates.append("NUMERIC_MARKERS_COLUMN_SPECIFIC")
+    if rows[1:] and identity_matches == len(rows) - 1:
+        predicates.append("LEXICAL_RELATIONS_MATCH_ORDINARY_SAMPLE")
+    if rows[1:] and identity_matches == 0:
+        predicates.append("IDENTITY_PROFILE_OUTLIER")
+
+    return {
+        "other_ascii_marker_cell_count": len(marker_values),
+        "distinct_numeric_marker_count": distinct_count,
+        "all_numeric_markers_identical": bool(marker_values) and distinct_count == 1,
+        "refinement_by_column": refinement,
+        "family_profiles": family_profiles,
+        "same_column_marker_recurrence": recurrence,
+        "identity_profile": identity_profile,
+        "identity_profile_matches_rows_2_to_32": identity_matches,
+        "evidence_predicates": predicates,
+    }
+
+
 def _is_current_count_compatible(value: bytes, *, first_column: bool) -> bool:
     if value == b"":
         return not first_column
@@ -413,8 +622,8 @@ def _numeric_profile(rows: list[bytes]) -> dict[str, object]:
     compatible = {"absolute_count": 0, "published_decimal": 0}
     incompatible = {"absolute_count": 0, "published_decimal": 0}
     first_incompatible: dict[str, object] | None = None
-    for row_ordinal, row in enumerate(rows, start=1):
-        fields = _validate_numeric_row(row)
+    validated_rows = [_validate_numeric_row(row) for row in rows]
+    for row_ordinal, fields in enumerate(validated_rows, start=1):
         for column in NUMERIC_COLUMNS:
             kind = "absolute_count" if column in ABSOLUTE_COUNT_COLUMNS else "published_decimal"
             value = fields[column - 1]
@@ -466,6 +675,7 @@ def _numeric_profile(rows: list[bytes]) -> dict[str, object]:
             },
         },
         "first_incompatible": first_incompatible,
+        "row_1_marker_profile": _numeric_marker_profile(validated_rows),
     }
 
 

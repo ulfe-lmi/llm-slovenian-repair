@@ -526,6 +526,73 @@ def _import_once_for_numeric_diagnostic(envelope: PrefixEnvelope) -> dict[str, o
     }
 
 
+def _omit_first_data_row(envelope: PrefixEnvelope) -> PrefixEnvelope:
+    """Build the row-one-omitted counterfactual without rewriting any bytes."""
+
+    lines = envelope.data.splitlines(keepends=True)
+    if len(lines) != PREFIX_READLINE_COUNT:
+        raise PrefixSmokeError("counterfactual-envelope-line-count")
+    if lines[PREAMBLE_LINE_COUNT] != _expected_header_bytes():
+        raise PrefixSmokeError("counterfactual-header-integrity")
+    retained_prefix = b"".join(lines[: PREAMBLE_LINE_COUNT + 1])
+    data = retained_prefix + b"".join(lines[PREAMBLE_LINE_COUNT + 2 :])
+    if not data.startswith(retained_prefix) or data == envelope.data:
+        raise PrefixSmokeError("counterfactual-envelope-integrity")
+    if len(data.splitlines(keepends=True)) != PREAMBLE_LINE_COUNT + DATA_ROW_COUNT:
+        raise PrefixSmokeError("counterfactual-row-omission")
+    return PrefixEnvelope(
+        data=data,
+        preamble_lines=PREAMBLE_LINE_COUNT,
+        header_bytes=envelope.header_bytes,
+        data_rows=DATA_ROW_COUNT - 1,
+        readline_calls=PREFIX_READLINE_COUNT - 1,
+    )
+
+
+def _expected_header_bytes() -> bytes:
+    try:
+        from llm_slovenian_repair.unigram_importer import EXPECTED_HEADER_BYTES
+    except ImportError as exc:
+        raise PrefixSmokeError("counterfactual-header-unavailable") from exc
+    return EXPECTED_HEADER_BYTES
+
+
+def _import_once_for_counterfactual(envelope: PrefixEnvelope) -> dict[str, object]:
+    try:
+        from llm_slovenian_repair.unigram_importer import (
+            UnigramImportError,
+            UnigramImportLimits,
+            import_unigrams,
+        )
+    except ImportError as exc:
+        raise PrefixSmokeError("counterfactual-import-unavailable") from exc
+
+    try:
+        provenance = _real_provenance()
+        limits = UnigramImportLimits(
+            max_input_bytes=MAX_PREFIX_ENVELOPE_BYTES,
+            max_rows=DATA_ROW_COUNT - 1,
+            max_line_bytes=MAX_PREFIX_LINE_BYTES,
+            max_field_bytes=MAX_PREFIX_LINE_BYTES,
+        )
+        result = import_unigrams(BytesIO(envelope.data), provenance, limits=limits)
+    except UnigramImportError as error:
+        return {
+            "attempts": 1,
+            "runs_completed": 0,
+            "record_count": None,
+            "failure": _safe_import_failure(error),
+        }
+    except (ImportError, OSError, TypeError) as exc:
+        raise PrefixSmokeError("counterfactual-import-unavailable") from exc
+    return {
+        "attempts": 1,
+        "runs_completed": 1,
+        "record_count": len(result.records),
+        "failure": None,
+    }
+
+
 def _run_verified_prefix(
     artifact_path: Path, verification: verifier.ArtifactVerification
 ) -> dict[str, object]:
@@ -632,6 +699,8 @@ def _run_verified_numeric_diagnostic(
         reason = exc.reason if isinstance(exc, diagnostics.DiagnosticError) else "failed"
         raise PrefixSmokeError(f"numeric-diagnostic-{reason}") from exc
     importer = _import_once_for_numeric_diagnostic(envelope)
+    counterfactual_envelope = _omit_first_data_row(envelope)
+    counterfactual_importer = _import_once_for_counterfactual(counterfactual_envelope)
     failure = importer["failure"]
     return {
         "schema_version": 1,
@@ -661,6 +730,18 @@ def _run_verified_numeric_diagnostic(
         "structural_aggregate": aggregate,
         "numeric_diagnostic": numeric,
         "current_importer": importer,
+        "counterfactual_omit_row_1": {
+            "envelope": {
+                "preamble_lines": counterfactual_envelope.preamble_lines,
+                "header_byte_length": counterfactual_envelope.header_bytes,
+                "data_rows": counterfactual_envelope.data_rows,
+                "readline_calls": counterfactual_envelope.readline_calls,
+                "header_preserved": True,
+                "preamble_preserved": True,
+                "first_data_row_omitted": True,
+            },
+            "importer": counterfactual_importer,
+        },
     }
 
 
