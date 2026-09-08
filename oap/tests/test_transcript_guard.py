@@ -42,7 +42,7 @@ class TranscriptGuard(unittest.TestCase):
         self.remote = FakeGitHub(self.repo)
 
     def tearDown(self):
-        self.temp.cleanup()
+        cleanup_owned_temporary_directory(self.temp)
 
     def commit_fixture(self, message='Synthetic transcript state'):
         git(self.repo, 'add', '--', '.')

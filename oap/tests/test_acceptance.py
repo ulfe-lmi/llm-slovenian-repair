@@ -62,7 +62,85 @@ class Acceptance(unittest.TestCase):
 
     def tearDown(self):
         self.env.stop()
-        self.temp.cleanup()
+        cleanup_owned_temporary_directory(self.temp)
+
+    def test_B33_git_uses_scoped_maintenance_controls_without_config_writes(self):
+        import tempfile
+
+        with tempfile.TemporaryDirectory(prefix='oap-git-config-fixture-') as global_root:
+            global_config = Path(global_root) / 'global.gitconfig'
+            config_before = (self.repo / '.git' / 'config').read_bytes()
+            with patch.dict(os.environ, {'GIT_CONFIG_GLOBAL': str(global_config)}):
+                with patch('oap_core.subprocess.run', return_value=subprocess.CompletedProcess(
+                    [], 0, b'', b'')) as run:
+                    result = git(self.repo, 'status', '--short', check=False)
+            self.assertEqual(result.returncode, 0)
+            command = run.call_args.args[0]
+            self.assertEqual(command[:3], ['git', '-C', str(self.repo)])
+            self.assertEqual(command[3:9], [
+                '-c', 'gc.auto=0', '-c', 'maintenance.auto=false', '-c', 'gc.autoDetach=false',
+            ])
+            self.assertEqual(command[9:], ['status', '--short'])
+            self.assertEqual(run.call_args.kwargs['env']['GIT_OPTIONAL_LOCKS'], '0')
+            self.assertEqual(config_before, (self.repo / '.git' / 'config').read_bytes())
+            self.assertFalse(global_config.exists())
+
+    def test_B34_cleanup_helper_is_bounded_and_preserves_unexpected_errors(self):
+        import errno
+        root_path = self.root
+        sequence = 0
+
+        class FakeTemporaryDirectory:
+            def __init__(self, outcomes):
+                nonlocal sequence
+                self_root = root_path / f'fake-cleanup-{sequence}'
+                sequence += 1
+                self.root = self_root
+                self.root.mkdir()
+                self.name = str(self_root)
+                self.outcomes = iter(outcomes)
+                self.calls = 0
+
+            def cleanup(self):
+                self.calls += 1
+                outcome = next(self.outcomes)
+                if isinstance(outcome, BaseException):
+                    raise outcome
+                shutil.rmtree(self.root)
+
+        successful = FakeTemporaryDirectory([None])
+        cleanup_owned_temporary_directory(successful)
+        self.assertEqual(successful.calls, 1)
+        self.assertFalse(successful.root.exists())
+
+        retrying = FakeTemporaryDirectory([
+            OSError(errno.ENOTEMPTY, 'transient one'),
+            OSError(errno.ENOTEMPTY, 'transient two'),
+            None,
+        ])
+        with patch('support.time.sleep') as sleep:
+            cleanup_owned_temporary_directory(retrying)
+        self.assertEqual(retrying.calls, 3)
+        self.assertEqual(sleep.call_count, 2)
+        self.assertEqual(sleep.call_args_list[0].args, (CLEANUP_DELAY_SECONDS,))
+
+        unexpected = FakeTemporaryDirectory([PermissionError(errno.EACCES, 'not retryable')])
+        with self.assertRaises(PermissionError):
+            cleanup_owned_temporary_directory(unexpected)
+        self.assertEqual(unexpected.calls, 1)
+
+        exhausted = FakeTemporaryDirectory([
+            OSError(errno.ENOTEMPTY, 'one'),
+            OSError(errno.ENOTEMPTY, 'two'),
+            OSError(errno.ENOTEMPTY, 'three'),
+            OSError(errno.ENOTEMPTY, 'four'),
+            OSError(errno.ENOTEMPTY, 'five'),
+        ])
+        with patch('support.time.sleep'):
+            with self.assertRaises(OSError) as error:
+                cleanup_owned_temporary_directory(exhausted)
+        self.assertEqual(error.exception.errno, errno.ENOTEMPTY)
+        self.assertEqual(exhausted.calls, CLEANUP_ATTEMPTS)
 
     def error(self, code, fn, *args, **kwargs):
         with self.assertRaises(OAPError) as cm:

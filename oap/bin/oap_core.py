@@ -256,7 +256,14 @@ def lock(path):
 def git(repo, *args, check=True):
     env = os.environ.copy()
     env['GIT_OPTIONAL_LOCKS'] = '0'
-    p = subprocess.run(["git", "-C", str(repo), *args], capture_output=True, timeout=30, env=env)
+    command = [
+        "git", "-C", str(repo),
+        "-c", "gc.auto=0",
+        "-c", "maintenance.auto=false",
+        "-c", "gc.autoDetach=false",
+        *args,
+    ]
+    p = subprocess.run(command, capture_output=True, timeout=30, env=env)
     if check:
         require(p.returncode == 0, "GIT_FAILURE", args[0])
     return p.stdout if check else p

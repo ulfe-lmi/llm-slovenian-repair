@@ -1,14 +1,18 @@
 """Synthetic boundary fixtures; all writes stay inside owned TemporaryDirectory."""
 import base64
 import copy
+import errno
 import json
 import os
 from pathlib import Path
 import sys
+import time
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]/'bin'))
 from oap_core import *
 
 SOURCE = Path(__file__).resolve().parents[2]
+CLEANUP_ATTEMPTS = 5
+CLEANUP_DELAY_SECONDS = 0.02
 
 
 class FakeGitHub:
@@ -39,6 +43,23 @@ def write(path, data):
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_bytes(data if isinstance(data, bytes) else data.encode())
     return path
+
+
+def cleanup_owned_temporary_directory(directory):
+    """Retire one owned TemporaryDirectory, tolerating only transient ENOTEMPTY."""
+    root = Path(directory.name)
+    for attempt in range(CLEANUP_ATTEMPTS):
+        try:
+            directory.cleanup()
+            if root.exists():
+                raise OSError(errno.ENOTEMPTY, 'owned temporary root still exists', str(root))
+        except OSError as error:
+            if error.errno != errno.ENOTEMPTY or attempt == CLEANUP_ATTEMPTS - 1:
+                raise
+            time.sleep(CLEANUP_DELAY_SECONDS)
+        else:
+            return
+    raise AssertionError('cleanup retry loop did not return')
 
 
 def commit(repo, message='Synthetic fixture'):
