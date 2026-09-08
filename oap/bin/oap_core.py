@@ -48,6 +48,13 @@ READ_SET = ["AGENTS.md", "oap/coding-instructions/AGENTS.md", "ARCHITECTURE-for-
 GOV_SOURCE = ["PLAN.md", "ARCHITECTURE.md", "oap/strategic-instructions/AGENTS.md",
               "oap/strategic-instructions/OAP-COMMUNICATION-strategic.md",
               "oap/governance/WORKSPACE-LAYOUT.json"]
+SUFFIX_ORDER = tuple(chr(c) for c in range(97, 123)) + tuple(
+    a + b for a in (chr(c) for c in range(97, 123))
+    for b in (chr(c) for c in range(97, 123))
+)
+TRANSCRIPT_FILENAME_RE = re.compile(
+    r"(?P<id>[0-9]{3}-[a-z]{1,2})-[a-z0-9]+(?:-[a-z0-9]+)*\.md\Z"
+)
 
 
 class OAPError(Exception):
@@ -516,12 +523,12 @@ def validate_order(data, repo, ident=None, filename=None):
     require(isinstance(m.get("relevant_gates"), list), "RELEVANT_GATES")
     require(isinstance(m.get("required_checks"), list) and m["required_checks"] and all(meaningful(c) for c in m["required_checks"]), "REQUIRED_CHECKS")
     # An immutable historical order names the governance at its original base.
-    # Candidate implementation may update current law in that ordered round.
     current = json.loads(git_blob(repo, m.get('governance_ref', m['base_sha']), 'oap/governance/MANIFEST.json'))
     require(m.get("governance") == {p: x["sha256"] for p, x in current["identities"].items()}, "ORDER_GOVERNANCE_IDENTITY")
     sections = section_map(data.decode())
     for k in ORDER_SECTIONS:
-        require(k in sections and sections[k].strip(), "ORDER_SECTION", k)
+        require(k in sections, "ORDER_SECTION", k)
+        require(k == "Deferred human adjudication" or sections[k].strip(), "ORDER_SECTION", k)
     require(meaningful(sections['Current verified state'].strip()), "ORDER_CURRENT_STATE_UNRESOLVED")
     # Metadata and control sections must be resolved; arbitrary quoted fixture text is data.
     dha = re.findall(r"(?m)^- Decision: (.+)$", sections["Deferred human adjudication"])
@@ -702,6 +709,185 @@ def validate_report(data, order, order_data, order_path):
     except (KeyError, ValueError, TypeError) as e:
         raise OAPError("REPORT_CHRONOLOGY") from e
     return r
+
+
+def _revision(repo, revision):
+    require(isinstance(revision, str) and (revision == "HEAD" or SHA_RE.fullmatch(revision)),
+            "INVALID_REVISION")
+    resolved = git(repo, "rev-parse", "--verify", "--end-of-options", revision + "^{commit}").decode().strip()
+    require(SHA_RE.fullmatch(resolved), "INVALID_REVISION")
+    return resolved
+
+
+def _index_entries(repo, prefixes):
+    raw = git(repo, "ls-files", "--stage", "-z", "--", *prefixes)
+    entries = {}
+    for record in raw.split(b"\0"):
+        if not record:
+            continue
+        header, path = record.split(b"\t", 1)
+        mode, object_id, stage = header.split()
+        require(mode in (b"100644", b"100755"), "TRANSCRIPT_UNSAFE_TYPE")
+        require(stage == b"0", "INDEX_UNMERGED")
+        require(re.fullmatch(rb"[0-9a-f]{40}", object_id), "INDEX_ENTRY_INVALID")
+        name = path.decode("utf-8")
+        require(name not in entries, "AMBIGUOUS_ID")
+        entries[name] = git(repo, "cat-file", "blob", object_id.decode())
+    return entries
+
+
+def _transcript_entries(repo, *, index, revision):
+    if index:
+        entries = _index_entries(repo, ("oap/orders", "oap/reports"))
+        active_entries = _index_entries(repo, ("oap/active",))
+        return entries, active_entries.get("oap/active")
+    records = git(repo, "ls-tree", "-r", "-z", revision, "--",
+                  "oap/orders", "oap/reports").split(b"\0")
+    entries = {}
+    for record in records:
+        if not record:
+            continue
+        header, raw_path = record.split(b"\t", 1)
+        mode, object_type, object_id = header.split()
+        require(mode in (b"100644", b"100755") and object_type == b"blob", "TRANSCRIPT_UNSAFE_TYPE")
+        require(re.fullmatch(rb"[0-9a-f]{40}", object_id), "TRANSCRIPT_OBJECT_INVALID")
+        path = raw_path.decode("utf-8")
+        entries[path] = git(repo, "cat-file", "blob", object_id.decode())
+    active = _revision_entry(repo, revision, "oap/active")
+    return entries, active
+
+
+def _revision_entry(repo, revision, path):
+    result = git(repo, "ls-tree", "-z", revision, "--", path, check=False)
+    require(result.returncode == 0, "GIT_FAILURE", "ls-tree")
+    records = [record for record in result.stdout.split(b"\0") if record]
+    require(len(records) <= 1, "AMBIGUOUS_ID")
+    if not records:
+        return None
+    header, raw_path = records[0].split(b"\t", 1)
+    mode, object_type, object_id = header.split()
+    require(raw_path.decode("utf-8") == path, "TRANSCRIPT_PATH")
+    require(mode in (b"100644", b"100755") and object_type == b"blob", "TRANSCRIPT_UNSAFE_TYPE")
+    require(re.fullmatch(rb"[0-9a-f]{40}", object_id), "TRANSCRIPT_OBJECT_INVALID")
+    return git(repo, "cat-file", "blob", object_id.decode())
+
+
+def _worktree_active(repo):
+    path = Path(repo) / "oap/active"
+    safe_path(path, missing=True)
+    return read(path, 32) if path.exists() else None
+
+
+def _parse_transcript_files(entries, kind):
+    prefix = "oap/" + kind + "/"
+    result = {}
+    for path, data in entries.items():
+        if not path.startswith(prefix):
+            continue
+        name = path[len(prefix):]
+        if name == ".gitkeep":
+            continue
+        match = TRANSCRIPT_FILENAME_RE.fullmatch(name)
+        require(match is not None, kind.upper() + "_FILENAME")
+        ident = validate_id(match["id"])
+        require(ident not in result, "AMBIGUOUS_ID")
+        result[ident] = (path, data)
+    return result
+
+
+def _transcript_order(ids):
+    require(ids, "TRANSCRIPT_NO_ORDERS")
+    grouped = {}
+    for ident in ids:
+        objective, suffix = ident.split("-", 1)
+        grouped.setdefault(int(objective), []).append(suffix)
+    objectives = sorted(grouped)
+    require(objectives[0] == 0 and objectives == list(range(0, objectives[-1] + 1)),
+            "TRANSCRIPT_OBJECTIVE_GAP")
+    ordered = []
+    for objective in objectives:
+        suffixes = grouped[objective]
+        ranks = sorted(SUFFIX_ORDER.index(suffix) for suffix in suffixes)
+        require(ranks == list(range(0, ranks[-1] + 1)), "TRANSCRIPT_SUFFIX_GAP")
+        ordered.extend(f"{objective:03}-{SUFFIX_ORDER[rank]}" for rank in ranks)
+    return ordered
+
+
+def _validate_committed_report(repo, revision, report_path, report_data, order_path, order_data,
+                               report, implementation_head):
+    report_commit = git(repo, "log", "-1", "--format=%H", revision, "--", report_path).decode().strip()
+    require(SHA_RE.fullmatch(report_commit), "REPORT_NOT_COMMITTED")
+    parents = git(repo, "rev-list", "--parents", "-n", "1", report_commit).decode().split()
+    require(len(parents) == 2 and parents[1] == implementation_head, "REPORT_PARENT")
+    changed = git(repo, "diff-tree", "--no-commit-id", "--name-only", "-r", "-z", report_commit)
+    changed_paths = changed.rstrip(b"\0").decode().split("\0") if changed else []
+    require(changed_paths == [report_path], "REPORT_ONLY_PATH")
+    require(git_blob(repo, report_commit, report_path) == report_data, "REPORT_CONTENT_DRIFT")
+    require(git_blob(repo, revision, order_path) == order_data, "COMMITTED_ORDER_DRIFT")
+    for check in report["checks"]:
+        result = git(repo, "merge-base", "--is-ancestor", check["sha"], implementation_head, check=False)
+        require(result.returncode == 0, "UNOBSERVED_CHECK_SHA")
+
+
+def check_transcript(repo, *, index=False, revision=None, expected_id=None):
+    """Validate published transcript state from the index or one committed tree.
+
+    The selected tree is the source of transcript truth.  The worktree active
+    pointer is compared byte-for-byte so a same-size atomic write cannot hide
+    behind Git's status/stat cache.
+    """
+    repo = safe_path(repo, kind="dir")
+    require(bool(index) ^ (revision is not None), "TRANSCRIPT_MODE_REQUIRED")
+    if expected_id is not None:
+        validate_id(expected_id)
+    resolved = _revision(repo, "HEAD" if index else revision)
+    entries, selected_active = _transcript_entries(repo, index=index, revision=resolved)
+    worktree_active = _worktree_active(repo)
+    if index:
+        require(worktree_active == selected_active, "ACTIVE_INDEX_MISMATCH")
+    else:
+        require(worktree_active == selected_active, "ACTIVE_COMMIT_MISMATCH")
+    if expected_id is not None:
+        require(selected_active == (expected_id + "\n").encode(), "EXPECTED_ACTIVE_MISMATCH")
+
+    orders = _parse_transcript_files(entries, "orders")
+    reports = _parse_transcript_files(entries, "reports")
+    for ident in reports:
+        require(ident in orders, "REPORT_ORDER_MISSING")
+    if selected_active is None:
+        require(not orders and not reports, "ACTIVE_REQUIRED")
+        return {"result": "valid", "mode": "index" if index else "revision",
+                "revision": resolved, "active": None, "orders": [], "reports": []}
+    require(bool(re.fullmatch(rb"[0-9]{3}-[a-z]{1,2}\n", selected_active)), "INVALID_ACTIVE")
+    active = selected_active[:-1].decode("ascii")
+    if not orders:
+        require(not reports, "ACTIVE_ORDER_MISSING")
+        raise OAPError("ACTIVE_ORDER_MISSING")
+    ordered = _transcript_order(list(orders))
+    latest = ordered[-1]
+    require(active in orders, "ACTIVE_ORDER_MISSING")
+    require(active == latest, "TRANSCRIPT_LATEST_MISMATCH")
+
+    validated_orders = {}
+    for ident in ordered:
+        path, data = orders[ident]
+        validated_orders[ident] = validate_order(data, repo, ident, Path(path).name)
+    for ident, (path, data) in reports.items():
+        order_path, order_data = orders[ident]
+        require(path.rsplit("/", 1)[-1] == order_path.rsplit("/", 1)[-1], "REPORT_FILENAME")
+        report = validate_report(data, validated_orders[ident], order_data, order_path)
+        if not index:
+            _validate_committed_report(repo, resolved, path, data, order_path, order_data,
+                                       report, report["implementation_head"])
+        else:
+            _validate_committed_report(repo, resolved, path, data, order_path, order_data,
+                                       report, report["implementation_head"])
+    for ident in ordered:
+        if ident not in reports:
+            require(ident == active, "TRANSCRIPT_NONCURRENT_UNFINISHED")
+    return {"result": "valid", "mode": "index" if index else "revision",
+            "revision": resolved, "active": active, "latest": latest,
+            "orders": ordered, "reports": [ident for ident in ordered if ident in reports]}
 
 
 def verify_report(repo, ident, *, commit=None, remote=None):

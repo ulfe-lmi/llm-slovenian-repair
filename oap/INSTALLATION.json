@@ -82,7 +82,7 @@
     },
     "docs/OAP-RUNBOOK.md": {
       "class": "generated",
-      "sha256": "cadd960e123737cd89d2189f30e73185167c27a464a38ce200fa209d7fb95f40"
+      "sha256": "5778151864dd9f6f13007c260020628663a6b3a4cb338f8c2e8c20af3b7a0468"
     },
     "docs/READINESS.md": {
       "class": "generated",
@@ -182,7 +182,7 @@
     },
     "oap/README.md": {
       "class": "generated",
-      "sha256": "d5bd2a7544baee78e5f1317b12cbb4c6e274397e1eced754668ddb836fb06100"
+      "sha256": "c03e0312b427974b0cd2bb77b6e1f290b6ab015927217d1bffd8922404dc242f"
     },
     "oap/RECOVERY.md": {
       "class": "generated",
@@ -240,6 +240,10 @@
       "class": "generated",
       "sha256": "ea2a0bc9e3c198af49f3692e42adb4debb04777b1dee6fa2971bbf1c5eaeea35"
     },
+    "oap/bin/check_transcript.py": {
+      "class": "generated",
+      "sha256": "272f67d1434bf89da2b6f7459308bd0c4ee929414fd1823810669c4368623bc0"
+    },
     "oap/bin/doctor.sh": {
       "class": "generated",
       "sha256": "ef4ab848d1db94f4b19cf58c3fb14c36f152c78d929a1c9b750477440c821c4b"
@@ -266,11 +270,11 @@
     },
     "oap/bin/oap_cli.py": {
       "class": "generated",
-      "sha256": "bc3a8cd68a44d3a8908f94d11d4748ec1738258442d006fb4e96acaa0b75e2fe"
+      "sha256": "df23704fb08c3891a311e9b69b190b662c661cef6128b7f84b05886d9de3ddf5"
     },
     "oap/bin/oap_core.py": {
       "class": "generated",
-      "sha256": "4da7d9be408263812e8e45316ab9303155555fab59b756deb62be12f34d0b728"
+      "sha256": "f71cd5a6a848a3d1d89065bf315b6f114576885f7a1a3180117915c63da27fac"
     },
     "oap/bin/oap_fifo.py": {
       "class": "generated",
@@ -635,6 +639,10 @@
     "oap/tests/test_split_layout.py": {
       "class": "generated",
       "sha256": "25fe71f56ce0d553eb71f1b180bda0e14734ff8098a05ff3c5bb75402f052140"
+    },
+    "oap/tests/test_transcript_guard.py": {
+      "class": "generated",
+      "sha256": "e238d29823d59d44f790d1a8a894fbdb74207a00981a4c932dc17ee44df23a2e"
     }
   },
   "schema_version": 1

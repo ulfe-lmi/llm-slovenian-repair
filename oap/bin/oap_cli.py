@@ -66,7 +66,7 @@ def doctor(repo, strategy=None, config=None, accepted_ref=None):
 def parser():
     p = argparse.ArgumentParser(description=__doc__)
     sub = p.add_subparsers(dest='command', required=True)
-    for name in ('state','governance','publish','append-critical','verify-report','ica','strategic-gate','doctor','materialize','refresh-governance'):
+    for name in ('state','governance','publish','append-critical','verify-report','transcript','ica','strategic-gate','doctor','materialize','refresh-governance'):
         q = sub.add_parser(name, help=name.replace('-',' ')+'; see options')
         q.add_argument('--repo-root', default=os.environ.get('OAP_REPO_ROOT', str(Path(__file__).resolve().parents[2])))
         if name in ('governance','publish','append-critical','doctor','refresh-governance'):
@@ -87,6 +87,11 @@ def parser():
             q.add_argument('--allow-change', action='append', default=[])
         if name == 'verify-report':
             q.add_argument('--commit')
+        if name == 'transcript':
+            modes = q.add_mutually_exclusive_group(required=True)
+            modes.add_argument('--index', action='store_true')
+            modes.add_argument('--revision')
+            q.add_argument('--expected-id')
         if name == 'ica':
             q.add_argument('--current-main', required=True)
         if name == 'strategic-gate':
@@ -137,6 +142,9 @@ def main(argv=None):
             result = append_critical(args.repo_root, args.source, args.id, accepted_ref=args.accepted_ref, dry_run=args.dry_run)
         elif command == 'verify-report':
             result = verify_report(args.repo_root, args.id, commit=args.commit, remote=remote)
+        elif command == 'transcript':
+            result = check_transcript(args.repo_root, index=args.index, revision=args.revision,
+                                      expected_id=args.expected_id)
         elif command == 'ica':
             result = check_ica(args.repo_root, args.source, args.current_main)
         elif command == 'strategic-gate':

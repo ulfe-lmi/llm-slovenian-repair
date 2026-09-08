@@ -28,13 +28,38 @@ jobs:
           tmux -V
 
       - name: Resolve accepted baseline
-        run: git cat-file -e 7ca26f1a6d9c110aa3c71a736d185028661d110d^{commit}
+        run: git cat-file -e 2832fa1e51bdf3641aabbd81feab8ddb64a876da^{commit}
 
       - name: Run bootstrap acceptance
         run: python3.12 -B -m unittest discover -s oap/tests -v
 
       - name: Check accepted runtime governance
-        run: python3.12 oap/bin/check_governance.py --repo-root . --mode accepted-runtime --accepted-ref 7ca26f1a6d9c110aa3c71a736d185028661d110d
+        run: python3.12 oap/bin/check_governance.py --repo-root . --mode accepted-runtime --accepted-ref 2832fa1e51bdf3641aabbd81feab8ddb64a876da
+
+      - name: Check committed transcript coherence
+        shell: bash
+        run: |
+          expected_id="$(python3.12 - <<'PY'
+          import re
+          from pathlib import Path
+
+          suffixes = tuple(chr(c) for c in range(ord('a'), ord('z') + 1))
+          suffixes += tuple(a + b for a in suffixes for b in suffixes)
+          found = []
+          pattern = re.compile(r'([0-9]{3}-[a-z]{1,2})-[a-z0-9]+(?:-[a-z0-9]+)*\.md\Z')
+          for path in Path('oap/orders').iterdir():
+              match = pattern.fullmatch(path.name)
+              if match:
+                  objective, suffix = match[1].split('-', 1)
+                  found.append((int(objective), suffixes.index(suffix), match[1]))
+          if not found:
+              raise SystemExit('no published order')
+          print(max(found)[2])
+          PY
+          )"
+          test -n "$expected_id"
+          printf 'transcript expected id: %s\n' "$expected_id"
+          python3.12 oap/bin/check_transcript.py --repo-root . --revision HEAD --expected-id "$expected_id"
 
       - name: Check whitespace
-        run: git diff --check 7ca26f1a6d9c110aa3c71a736d185028661d110d...HEAD
+        run: git diff --check 2832fa1e51bdf3641aabbd81feab8ddb64a876da...HEAD
