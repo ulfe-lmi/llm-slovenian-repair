@@ -160,3 +160,9 @@ limits. Preflight and artifact arguments are mutually exclusive, and its `READY`
 summary is limited to identities, counts, completeness, hashes, and contract
 labels; it does not emit header or row content. The earlier system-Python
 dependency failure remains historical evidence, not a readiness claim.
+The exact 006-h preflight passed in an owned isolated environment. Its one direct
+GET passed canonical verification and the bounded 32-row structural aggregate,
+but the first real importer invocation stopped at `import-invalid-count`; the
+helper made no second run or GET. Cleanup removed and verified the exact source
+and environment, and the receipt records cumulative ten GETs, null importer
+hashes, no retained source content, and no redistribution authorization.

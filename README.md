@@ -94,5 +94,11 @@ provenance, and installed importer entry point/limits. Preflight and artifact
 smoke arguments are mutually exclusive; the bounded `READY` output contains no
 header or row content. The earlier independent system-Python dependency finding
 is retained as a blocked 006-g fact and does not count as runtime readiness.
+The exact 006-h preflight passed in an owned isolated environment. Its one direct
+GET passed canonical verification and the bounded structural aggregate, then the
+first importer invocation stopped at the finite `import-invalid-count` boundary;
+no second run or GET occurred, and the source/environment were removed. The new
+receipt records cumulative ten GETs, null importer hashes, and no retained source
+content. This remains blocked compatibility evidence, not a full-source import.
 Do not execute the [draft roadmap](oap/strategic-instructions/INITIAL-ROADMAP.md)
 without strategic reconciliation and deliberate owner activation.

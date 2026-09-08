@@ -160,3 +160,9 @@ runtime's exact header contract, real COMPLETE/COMPLETE/PARTIAL provenance,
 finite `READY` summary. The direct system-Python dependency failure from 006-g is
 documented as an invocation prerequisite failure; it is not treated as evidence
 that the importer or source format is incompatible.
+The exact 006-h run passed this preflight in an owned isolated environment and
+made one direct GET. Canonical verification, member access, the 32-row structural
+aggregate, and the first importer admission completed; that importer invocation
+then stopped at `import-invalid-count`. No retry or second GET was made, cleanup
+was verified, and importer hashes/counts remain null. This is blocked bounded
+compatibility evidence, not full-source or linguistic-quality evidence.

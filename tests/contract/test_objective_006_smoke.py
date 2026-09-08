@@ -427,3 +427,78 @@ def test_unavailable_dependency_is_a_bounded_preflight_error(tmp_path: Path) -> 
         "error": "preflight-dependency-unavailable"
     }
     assert completed.stdout == ""
+
+
+def test_006_h_receipt_is_bounded_and_preserves_history() -> None:
+    receipt = json.loads(
+        (
+            ROOT
+            / "resources/source-acquisitions/gigafida-2.0-words-006-h.json"
+        ).read_text(encoding="utf-8")
+    )
+
+    assert receipt["schema_version"] == 1
+    assert receipt["receipt_id"] == "gigafida-2.0-words-006-h"
+    assert receipt["status"] == "BLOCKED_REAL_IMPORTER_INVALID_COUNT"
+    assert receipt["preflight"]["result"] == "PASSED"
+    assert receipt["preflight"]["isolated_mode"] is True
+    assert receipt["preflight"]["pythonpath"] == "ABSENT"
+    assert receipt["preflight"]["artifact_required"] is False
+    assert receipt["preflight"]["source_accessed"] is False
+    assert receipt["preflight"]["provenance_completeness"] == {
+        "source": "COMPLETE",
+        "query": "COMPLETE",
+        "import": "PARTIAL",
+    }
+    for field in ("inventory_sha256", "archive_sha256", "header_sha256"):
+        assert len(receipt[field]) == 64
+        assert all(character in "0123456789abcdef" for character in receipt[field])
+    evidence = receipt["acquisition_evidence"]
+    assert evidence["006_h_get_count"] == 1
+    assert evidence["cumulative_observed_objective_get_count"] == 10
+    assert evidence["preflight_before_get"] is True
+    assert evidence["verifier_before_member_access"] is True
+    assert evidence["member_access_attempted"] is True
+    assert evidence["temporary_environment_absent"] is True
+    assert evidence["temporary_tree_absent"] is True
+    assert evidence["source_data_retained"] is False
+    assert evidence["retry_attempted"] is False
+    assert receipt["structural_sample"]["status"] == "PASSED"
+    assert receipt["structural_sample"]["rows_read"] == 32
+    assert receipt["structural_sample"]["aggregate"]["csv_field_count_histogram"] == {
+        "28": 31,
+        "29": 1,
+    }
+    assert receipt["real_importer_smoke"] == {
+        **receipt["real_importer_smoke"],
+        "status": "BLOCKED",
+        "attempts": 1,
+        "runs_completed": 0,
+        "input_sha256": None,
+        "output_sha256": None,
+        "failure": "import-invalid-count",
+    }
+    assert receipt["prior_rounds"]["006_g"]["get_count"] == 1
+    assert "HEADER_CONTRACT_UNAVAILABLE" in receipt["prior_rounds"]["006_g"]["failure"]
+
+    forbidden = {
+        "fields",
+        "values",
+        "raw",
+        "records",
+        "row_hash",
+        "decoded_strings",
+        "source_rows",
+        "header_values",
+        "source_content",
+    }
+
+    def keys(value: object) -> list[str]:
+        if isinstance(value, dict):
+            nested = [item for child in value.values() for item in keys(child)]
+            return [key for key in value] + nested
+        if isinstance(value, list):
+            return [item for child in value for item in keys(child)]
+        return []
+
+    assert not forbidden.intersection(keys(receipt))

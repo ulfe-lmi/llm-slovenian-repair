@@ -84,5 +84,9 @@ opened. Its output is a finite `READY` summary with no header or row content.
 The prior 006-g real attempt passed canonical verification but stopped before
 member access because its direct system-Python invocation lacked the dependency
 closure; the committed source-path correction did not alter that historical
-result. A clean isolated preflight is now the required boundary before the one
-remaining 006-h source action.
+result. The exact 006-h preflight then passed in its
+lock-derived isolated environment; its one direct GET passed canonical
+verification, prefix capture, and structural aggregation, but the first real
+importer invocation stopped at `import-invalid-count`. The exact source and
+environment were removed and verified absent, no retry occurred, and cumulative
+objective-006 GETs are ten. Real importer compatibility remains blocked.
