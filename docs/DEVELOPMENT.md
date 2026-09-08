@@ -60,3 +60,21 @@ The driver also runs the focused contract tests, full pytest, Ruff, mypy,
 separate OAP unittest discovery, and both sdist/wheel builds in the required
 order. The package contains no production entry point, service, live-Qwen test,
 corpus, GPU dependency, downloader, or release step.
+
+## Source manifest fixture
+
+`llm_slovenian_repair.source_manifest` exposes frozen `SourceManifest` and
+`SyntheticCountRecord` models and the explicit `verify_manifest_payload` loader.
+The loader accepts a caller-supplied fixture root, rejects unsafe paths and
+symlinks, applies finite manifest/payload/record limits, verifies exact byte size
+and SHA-256, and parses UTF-8 JSON or JSONL records without writing or using the
+network. `load_verified_corpus` is an alias for the same boundary.
+
+`tests/fixtures/corpus/synthetic-manifest.json` and
+`tests/fixtures/corpus/synthetic-counts.jsonl` are project-authored synthetic
+fixtures. Their records exercise exact positive, justified exact zero,
+threshold-censored unknown-denominator, and unavailable evidence states. They
+are schema/checksum tests, not Slovenian language-quality or corpus evidence.
+Real source names, releases, formats, acquisition methods, rights, terms, and
+access remain unverified; repository Apache licensing does not resolve external
+source rights. The test-only fixture path is not included in the runtime wheel.

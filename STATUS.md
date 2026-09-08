@@ -15,3 +15,9 @@ milestone acceptance is NONE; release and deployment approval are not establishe
 derived from generated files. The owner created `ulfe-lmi/llm-slovenian-repair`
 and supplied the unchanged Apache License 2.0 LICENSE. Live repair testing is
 disabled.
+
+The source-manifest seam is implemented for objective 004: frozen manifests and
+synthetic count records verify a bounded local JSON/JSONL payload with exact size
+and SHA-256 checks. The checked-in payload is project-authored synthetic fixture
+evidence only; no real corpus bytes, rights, access, linguistic benefit, or source
+release facts are established.

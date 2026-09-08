@@ -123,6 +123,28 @@ assert module.__all__ == [
     "SelectionBatch",
     "SpanSelection",
     "StageTimings",
+    "DEFAULT_MAX_MANIFEST_BYTES",
+    "DEFAULT_MAX_PAYLOAD_BYTES",
+    "DEFAULT_MAX_RECORDS",
+    "DenominatorKnowledge",
+    "Manifest",
+    "ManifestDenominatorKnowledge",
+    "ManifestError",
+    "ManifestVerificationError",
+    "QueryKind",
+    "RightsStatus",
+    "SourceManifest",
+    "SourceRightsStatus",
+    "SyntheticCorpus",
+    "SyntheticCorpusPayload",
+    "SyntheticCountRecord",
+    "SyntheticRecord",
+    "VerifiedCorpus",
+    "VerifiedSyntheticCorpus",
+    "VerificationFailure",
+    "load_verified_corpus",
+    "load_verified_manifest",
+    "verify_manifest_payload",
 ]
 assert "pydantic" in sys.modules
 assert "httpx" not in sys.modules
@@ -178,7 +200,9 @@ def test_built_wheel_metadata_and_payload() -> None:
             ]
             assert all(
                 not name.startswith("llm_slovenian_repair/")
-                or name.endswith(("__init__.py", "contracts.py", "policy.py", "py.typed"))
+                or name.endswith(
+                    ("__init__.py", "contracts.py", "policy.py", "source_manifest.py", "py.typed")
+                )
                 for name in names
             )
             assert not any(

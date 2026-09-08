@@ -12,6 +12,15 @@ are Python Unicode code-point offsets into the immutable original string; eviden
 states are `EXACT`, `CENSORED`, or `UNAVAILABLE`, and the default policy is
 `detect_only` with finite conservative limits.
 
+Objective 004 adds the frozen `SourceManifest` and `SyntheticCountRecord`
+provenance seam plus `verify_manifest_payload`. The checked-in
+`tests/fixtures/corpus/synthetic-manifest.json` and JSONL payload are tiny,
+project-authored synthetic schema fixtures only. They demonstrate checksum,
+bounded loading, explicit denominator knowledge, and exact/censored/unavailable
+evidence; they are not language-quality or real-corpus evidence. Real candidate
+sources, rights, access, formats, and release facts remain UNVERIFIED, and the
+fixture is excluded from the installed package.
+
 Detection, review calls, strict acceptance, patch composition, live compatibility,
 and linguistic quality remain unimplemented or unproven. The intended library captures
 a complete Slovenian model answer, selects suspicious local spans on CPU, optionally

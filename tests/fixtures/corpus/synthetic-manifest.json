@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "source_id": "project-authored-synthetic-v1",
+  "source_name": "Project-authored synthetic Slovenian-like counts",
+  "release": "synthetic-v1",
+  "acquisition_reference": "repository-local:tests/fixtures/corpus/synthetic-counts.jsonl",
+  "payload_path": "synthetic-counts.jsonl",
+  "sha256": "c275aa09c38dfe50bdddf40fa3ed2c9f72d4884c609ad674775d077dd98d55aa",
+  "byte_size": 2070,
+  "media_format": "application/jsonl",
+  "record_format": "jsonl",
+  "encoding": "UTF-8",
+  "normalization": "NFC metadata; verifier performs no normalization",
+  "annotation_tagging": "synthetic surface-form count records",
+  "completeness": "PARTIAL",
+  "cutoff_metadata": "The miniature payload includes one explicitly threshold-censored query",
+  "threshold_metadata": "Synthetic threshold is local fixture metadata, not a real corpus cutoff",
+  "denominator_knowledge": "UNKNOWN",
+  "denominator": null,
+  "rights_status": "PROJECT_AUTHORED_SYNTHETIC",
+  "license_terms_reference": "Project-authored fixture; no external corpus terms asserted",
+  "attribution_redistribution_conditions": "Project-authored synthetic fixture; repository-local test evidence only",
+  "importer_schema_version": "synthetic-record-importer-v1",
+  "record_schema_version": 1,
+  "deterministic_build_parameters": {
+    "ordering": "record_id fixture order",
+    "encoding": "UTF-8",
+    "source_kind": "synthetic"
+  },
+  "synthetic": true,
+  "redistribution_ready": true,
+  "use_ready": true
+}
