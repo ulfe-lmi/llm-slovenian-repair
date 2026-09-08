@@ -147,3 +147,9 @@ import `PARTIAL` provenance. Its output contains only finite verification facts,
 aggregates, counts, and result hashes. It does not download, extract, retain
 source data, claim full archive import or lookup readiness, or authorize rights,
 acceptance, release, or deployment.
+The ordered 006-g fetch reached canonical verifier success, but the committed
+CLI stopped before member access because its checkout source path was unavailable
+to the direct interpreter invocation. The helper now bootstraps that path and its
+offline contract is green; the exact source tree was deleted, no retry occurred,
+and the 006-g receipt leaves member, structural, and importer fields null. This
+is a blocked real-smoke result, not a full-source or compatibility acceptance.

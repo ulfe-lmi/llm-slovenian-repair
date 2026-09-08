@@ -146,3 +146,9 @@ calls the public importer twice on fresh streams. A successful result is only a
 bounded prefix with `source/query=COMPLETE` and `import=PARTIAL`; it does not
 retain source data or establish full archive import, lookup readiness, language
 quality, rights, redistribution, release, deployment, or acceptance.
+The one ordered 006-g GET passed canonical verification, but the committed CLI
+stopped before member access because the direct interpreter could not resolve the
+checkout `src` path. The helper now bootstraps that path and its offline contract
+is green; the acquired tree was deleted with no retry, so the 006-g receipt keeps
+member, structural, and importer observations null. This remains a blocked
+compatibility attempt, not a full-source import or release/rights decision.

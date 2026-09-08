@@ -83,5 +83,10 @@ aggregate, and runs the public importer twice on fresh streams. Evidence remains
 limited to one verified compatibility prefix and partial import; it does not
 claim full archive import, lookup readiness, linguistic benefit, redistribution
 rights, release, deployment, or acceptance.
+The single 006-g acquisition passed canonical verification but its committed
+CLI stopped before member access because the direct interpreter could not resolve
+the checkout `src` path. That path bootstrap is corrected and tested offline; the
+source tree was deleted, no retry occurred, and the receipt records null member,
+structural, and importer results.
 Do not execute the [draft roadmap](oap/strategic-instructions/INITIAL-ROADMAP.md)
 without strategic reconciliation and deliberate owner activation.

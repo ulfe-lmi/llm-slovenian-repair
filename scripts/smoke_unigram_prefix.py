@@ -22,6 +22,8 @@ from typing import Any, Protocol
 REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
 if str(REPOSITORY_ROOT) not in sys.path:
     sys.path.insert(0, str(REPOSITORY_ROOT))
+if str(REPOSITORY_ROOT / "src") not in sys.path:
+    sys.path.insert(0, str(REPOSITORY_ROOT / "src"))
 
 from scripts import diagnose_unigram_rows as diagnostics  # noqa: E402
 from scripts import verify_source_artifact as verifier  # noqa: E402

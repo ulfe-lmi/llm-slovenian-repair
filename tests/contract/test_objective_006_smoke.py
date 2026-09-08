@@ -214,6 +214,59 @@ def test_public_path_verification_stops_before_member_access(
         )
 
 
+def test_006_g_receipt_preserves_verifier_and_helper_stop_without_content() -> None:
+    receipt = json.loads(
+        (
+            ROOT
+            / "resources/source-acquisitions/gigafida-2.0-words-006-g.json"
+        ).read_text(encoding="utf-8")
+    )
+    assert receipt["schema_version"] == 1
+    assert receipt["receipt_id"] == "gigafida-2.0-words-006-g"
+    assert receipt["status"] == "BLOCKED_SMOKE_HELPER_IMPORT"
+    assert receipt["acquisition_evidence"]["006_g_get_count"] == 1
+    assert receipt["acquisition_evidence"]["cumulative_observed_objective_get_count"] == 9
+    assert receipt["acquisition_evidence"]["verifier_before_member_access"] is True
+    assert receipt["acquisition_evidence"]["accepted_offline_verifier"] == "PASSED"
+    assert receipt["acquisition_evidence"]["member_access_attempted"] is False
+    assert receipt["acquisition_evidence"]["temporary_tree_absent"] is True
+    assert receipt["acquisition_evidence"]["source_data_retained"] is False
+    assert receipt["redistribution_ready"] is False
+    assert receipt["structural_sample"]["aggregate"] is None
+    assert receipt["real_importer_smoke"]["attempts"] == 0
+    assert receipt["real_importer_smoke"]["runs_completed"] == 0
+    assert receipt["real_importer_smoke"]["sampled_row_count"] is None
+    assert receipt["real_importer_smoke"]["input_sha256"] is None
+    assert receipt["real_importer_smoke"]["output_sha256"] is None
+    assert (
+        receipt["real_importer_smoke"]["configured_provenance"]["import_completeness"]
+        == "PARTIAL"
+    )
+    assert receipt["prior_rounds"]["006_f"]["failure"].startswith(
+        "SMOKE_HARNESS_SYNTAX_ERROR"
+    )
+
+    forbidden = {
+        "fields",
+        "values",
+        "raw",
+        "row_hash",
+        "decoded_strings",
+        "source_rows",
+        "header_values",
+    }
+
+    def keys(value: object) -> list[str]:
+        if isinstance(value, dict):
+            nested = [item for child in value.values() for item in keys(child)]
+            return [key for key in value] + nested
+        if isinstance(value, list):
+            return [item for child in value for item in keys(child)]
+        return []
+
+    assert not forbidden.intersection(keys(receipt))
+
+
 def test_verifier_identity_is_required_before_member_access(tmp_path: Path) -> None:
     archive = write_archive(tmp_path, prefix_bytes())
     wrong = verifier.ArtifactVerification(
