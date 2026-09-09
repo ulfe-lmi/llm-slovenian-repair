@@ -1,0 +1,47 @@
+{
+  "ablations": {
+    "detector_only": "MEASURED",
+    "full_pipeline": "PENDING LIVE REVIEWER",
+    "raw_qwen": "NOT RUN",
+    "reviewer_decisions": "PENDING LIVE REVIEWER"
+  },
+  "config_sha256": "0e1b3ee713e51fd59d53c503ae8bf892f7344230acf0ecdf814bee40fe779909",
+  "controlled": {
+    "accepted": "PENDING LIVE REVIEWER",
+    "candidate_precision": 0.7,
+    "candidate_recall": 1.0,
+    "candidates": 10,
+    "correct": "PENDING HUMAN LABELS",
+    "eligible_words": 145,
+    "end_to_end_recovery": "PENDING LIVE REVIEWER",
+    "harmful": "PENDING HUMAN LABELS",
+    "known_errors": 7,
+    "missed": null,
+    "protected_changes": 0,
+    "reviewer_accuracy": "PENDING LIVE REVIEWER"
+  },
+  "dataset": {
+    "count": 32,
+    "path": "heldout.jsonl",
+    "sha256": "fbd90d2f908597a1dd737e417c1d3b030e3ec7e677fe59720833df900ba16fd3"
+  },
+  "decision": "INCONCLUSIVE",
+  "harm": {
+    "harmful_fraction_accepted": "PENDING_HUMAN_LABELS",
+    "harmful_per_1000_eligible_words": "PENDING_HUMAN_LABELS"
+  },
+  "human_review": "AWAITING_HUMAN_REVIEW",
+  "index_sha256": "de2bf3f46fa75178ccaaa172d580b1b7d75e960997f5da674b9b0414dba6db05",
+  "real_workload": {
+    "accepted_edits": null,
+    "benefit_harm": "AWAITING_HUMAN_REVIEW",
+    "completed": 2,
+    "median_p95_total": "PENDING_AGGREGATE",
+    "percent_changed": null,
+    "proposals": null,
+    "protected_diffs": "PENDING_HUMAN_REVIEW",
+    "raw_detector_reviewer_proxy_latency": "PENDING_AGGREGATE",
+    "responses": 8,
+    "reviewer_calls_per_response": null
+  }
+}
