@@ -1,24 +1,1469 @@
 {
   "ablations": {
-    "detector_only": "MEASURED",
-    "full_pipeline": "PENDING LIVE REVIEWER",
-    "raw_qwen": "NOT RUN",
-    "reviewer_decisions": "PENDING LIVE REVIEWER"
+    "detector_only": {
+      "accepted_edits": 0,
+      "candidate_false_positive_cases": 3,
+      "candidate_map": {
+        "h01": [
+          {
+            "end": 18,
+            "evidence": {
+              "alternatives": [
+                [
+                  "še",
+                  5472
+                ]
+              ],
+              "left_bigram": {
+                "count": null,
+                "key": "je točniej",
+                "state": "CENSORED"
+              },
+              "right_bigram": {
+                "count": null,
+                "key": "točniej pojasnil",
+                "state": "CENSORED"
+              },
+              "trigram": {
+                "count": null,
+                "key": "je točniej pojasnil",
+                "state": "CENSORED"
+              },
+              "unigram": {
+                "count": null,
+                "key": "točniej",
+                "state": "UNAVAILABLE"
+              }
+            },
+            "score": 1.0,
+            "start": 11,
+            "text": "točniej"
+          }
+        ],
+        "h02": [
+          {
+            "end": 11,
+            "evidence": {
+              "right_bigram": {
+                "count": null,
+                "key": "rjavo-zlati trak",
+                "state": "CENSORED"
+              },
+              "unigram": {
+                "count": null,
+                "key": "rjavo-zlati",
+                "state": "UNAVAILABLE"
+              }
+            },
+            "score": 1.0,
+            "start": 0,
+            "text": "Rjavo-zlati"
+          }
+        ],
+        "h03": [
+          {
+            "end": 7,
+            "evidence": {
+              "right_bigram": {
+                "count": null,
+                "key": "kitaraš je",
+                "state": "CENSORED"
+              },
+              "unigram": {
+                "count": null,
+                "key": "kitaraš",
+                "state": "UNAVAILABLE"
+              }
+            },
+            "score": 1.0,
+            "start": 0,
+            "text": "Kitaraš"
+          }
+        ],
+        "h04": [
+          {
+            "end": 28,
+            "evidence": {
+              "alternatives": [],
+              "left_bigram": {
+                "count": null,
+                "key": "izmed najslovnijih",
+                "state": "CENSORED"
+              },
+              "right_bigram": {
+                "count": null,
+                "key": "najslovnijih izjav",
+                "state": "CENSORED"
+              },
+              "trigram": {
+                "count": null,
+                "key": "izmed najslovnijih izjav",
+                "state": "CENSORED"
+              },
+              "unigram": {
+                "count": null,
+                "key": "najslovnijih",
+                "state": "UNAVAILABLE"
+              }
+            },
+            "score": 1.0,
+            "start": 16,
+            "text": "najslovnijih"
+          }
+        ],
+        "h05": [],
+        "h06": [
+          {
+            "end": 26,
+            "evidence": {
+              "alternatives": [
+                [
+                  "ostal",
+                  3893
+                ]
+              ],
+              "left_bigram": {
+                "count": null,
+                "key": "je nerazumliv",
+                "state": "CENSORED"
+              },
+              "right_bigram": {
+                "count": null,
+                "key": "nerazumliv brez",
+                "state": "CENSORED"
+              },
+              "trigram": {
+                "count": null,
+                "key": "je nerazumliv brez",
+                "state": "CENSORED"
+              },
+              "unigram": {
+                "count": null,
+                "key": "nerazumliv",
+                "state": "UNAVAILABLE"
+              }
+            },
+            "score": 1.0,
+            "start": 16,
+            "text": "nerazumliv"
+          }
+        ],
+        "h07": [],
+        "h08": [],
+        "h09": [],
+        "h10": [],
+        "h11": [],
+        "h12": [],
+        "h13": [],
+        "h14": [
+          {
+            "end": 30,
+            "evidence": {
+              "left_bigram": {
+                "count": null,
+                "key": "bila presenetliva",
+                "state": "CENSORED"
+              },
+              "unigram": {
+                "count": null,
+                "key": "presenetliva",
+                "state": "UNAVAILABLE"
+              }
+            },
+            "score": 1.0,
+            "start": 18,
+            "text": "presenetliva"
+          }
+        ],
+        "h15": [],
+        "h16": [],
+        "h17": [],
+        "h18": [],
+        "h19": [
+          {
+            "end": 24,
+            "evidence": {
+              "left_bigram": {
+                "count": null,
+                "key": "vsebuje payload",
+                "state": "CENSORED"
+              },
+              "unigram": {
+                "count": null,
+                "key": "payload",
+                "state": "UNAVAILABLE"
+              }
+            },
+            "score": 1.0,
+            "start": 17,
+            "text": "payload"
+          }
+        ],
+        "h20": [],
+        "h21": [],
+        "h22": [],
+        "h23": [],
+        "h24": [
+          {
+            "end": 26,
+            "evidence": {
+              "left_bigram": {
+                "count": null,
+                "key": "je nenavadn",
+                "state": "CENSORED"
+              },
+              "unigram": {
+                "count": null,
+                "key": "nenavadn",
+                "state": "UNAVAILABLE"
+              }
+            },
+            "score": 1.0,
+            "start": 18,
+            "text": "nenavadn"
+          }
+        ],
+        "h25": [],
+        "h26": [],
+        "h27": [],
+        "h28": [
+          {
+            "end": 38,
+            "evidence": {
+              "left_bigram": {
+                "count": null,
+                "key": "izraz endpoint",
+                "state": "CENSORED"
+              },
+              "unigram": {
+                "count": null,
+                "key": "endpoint",
+                "state": "UNAVAILABLE"
+              }
+            },
+            "score": 1.0,
+            "start": 30,
+            "text": "endpoint"
+          }
+        ],
+        "h29": [],
+        "h30": [],
+        "h31": [],
+        "h32": [
+          {
+            "end": 37,
+            "evidence": {
+              "left_bigram": {
+                "count": null,
+                "key": "črka presenetliv",
+                "state": "CENSORED"
+              },
+              "unigram": {
+                "count": null,
+                "key": "presenetliv",
+                "state": "UNAVAILABLE"
+              }
+            },
+            "score": 1.0,
+            "start": 26,
+            "text": "presenetliv"
+          }
+        ]
+      },
+      "candidate_precision": 0.7,
+      "candidate_recall": 1.0,
+      "candidates": 10,
+      "case_count": 32,
+      "cases": 32,
+      "end_to_end_recovery": 0.0,
+      "exact_gold_correct_repairs": 0,
+      "harmful_edits": 0,
+      "known_errors": 7,
+      "known_errors_remaining": 0,
+      "missed_known_errors": 0,
+      "mode": "local-context",
+      "protected_changes": 0,
+      "records_with_text": 0,
+      "threshold": 3
+    },
+    "full_conservative_pipeline": {
+      "accepted_edits": 0,
+      "candidate_map": {
+        "h01": [
+          {
+            "end": 18,
+            "evidence": {
+              "alternatives": [
+                [
+                  "še",
+                  5472
+                ]
+              ],
+              "left_bigram": {
+                "count": null,
+                "key": "je točniej",
+                "state": "CENSORED"
+              },
+              "right_bigram": {
+                "count": null,
+                "key": "točniej pojasnil",
+                "state": "CENSORED"
+              },
+              "trigram": {
+                "count": null,
+                "key": "je točniej pojasnil",
+                "state": "CENSORED"
+              },
+              "unigram": {
+                "count": null,
+                "key": "točniej",
+                "state": "UNAVAILABLE"
+              }
+            },
+            "score": 1.0,
+            "start": 11,
+            "text": "točniej"
+          }
+        ],
+        "h02": [
+          {
+            "end": 11,
+            "evidence": {
+              "right_bigram": {
+                "count": null,
+                "key": "rjavo-zlati trak",
+                "state": "CENSORED"
+              },
+              "unigram": {
+                "count": null,
+                "key": "rjavo-zlati",
+                "state": "UNAVAILABLE"
+              }
+            },
+            "score": 1.0,
+            "start": 0,
+            "text": "Rjavo-zlati"
+          }
+        ],
+        "h03": [
+          {
+            "end": 7,
+            "evidence": {
+              "right_bigram": {
+                "count": null,
+                "key": "kitaraš je",
+                "state": "CENSORED"
+              },
+              "unigram": {
+                "count": null,
+                "key": "kitaraš",
+                "state": "UNAVAILABLE"
+              }
+            },
+            "score": 1.0,
+            "start": 0,
+            "text": "Kitaraš"
+          }
+        ],
+        "h04": [
+          {
+            "end": 28,
+            "evidence": {
+              "alternatives": [],
+              "left_bigram": {
+                "count": null,
+                "key": "izmed najslovnijih",
+                "state": "CENSORED"
+              },
+              "right_bigram": {
+                "count": null,
+                "key": "najslovnijih izjav",
+                "state": "CENSORED"
+              },
+              "trigram": {
+                "count": null,
+                "key": "izmed najslovnijih izjav",
+                "state": "CENSORED"
+              },
+              "unigram": {
+                "count": null,
+                "key": "najslovnijih",
+                "state": "UNAVAILABLE"
+              }
+            },
+            "score": 1.0,
+            "start": 16,
+            "text": "najslovnijih"
+          }
+        ],
+        "h05": [],
+        "h06": [
+          {
+            "end": 26,
+            "evidence": {
+              "alternatives": [
+                [
+                  "ostal",
+                  3893
+                ]
+              ],
+              "left_bigram": {
+                "count": null,
+                "key": "je nerazumliv",
+                "state": "CENSORED"
+              },
+              "right_bigram": {
+                "count": null,
+                "key": "nerazumliv brez",
+                "state": "CENSORED"
+              },
+              "trigram": {
+                "count": null,
+                "key": "je nerazumliv brez",
+                "state": "CENSORED"
+              },
+              "unigram": {
+                "count": null,
+                "key": "nerazumliv",
+                "state": "UNAVAILABLE"
+              }
+            },
+            "score": 1.0,
+            "start": 16,
+            "text": "nerazumliv"
+          }
+        ],
+        "h07": [],
+        "h08": [],
+        "h09": [],
+        "h10": [],
+        "h11": [],
+        "h12": [],
+        "h13": [],
+        "h14": [
+          {
+            "end": 30,
+            "evidence": {
+              "left_bigram": {
+                "count": null,
+                "key": "bila presenetliva",
+                "state": "CENSORED"
+              },
+              "unigram": {
+                "count": null,
+                "key": "presenetliva",
+                "state": "UNAVAILABLE"
+              }
+            },
+            "score": 1.0,
+            "start": 18,
+            "text": "presenetliva"
+          }
+        ],
+        "h15": [],
+        "h16": [],
+        "h17": [],
+        "h18": [],
+        "h19": [
+          {
+            "end": 24,
+            "evidence": {
+              "left_bigram": {
+                "count": null,
+                "key": "vsebuje payload",
+                "state": "CENSORED"
+              },
+              "unigram": {
+                "count": null,
+                "key": "payload",
+                "state": "UNAVAILABLE"
+              }
+            },
+            "score": 1.0,
+            "start": 17,
+            "text": "payload"
+          }
+        ],
+        "h20": [],
+        "h21": [],
+        "h22": [],
+        "h23": [],
+        "h24": [
+          {
+            "end": 26,
+            "evidence": {
+              "left_bigram": {
+                "count": null,
+                "key": "je nenavadn",
+                "state": "CENSORED"
+              },
+              "unigram": {
+                "count": null,
+                "key": "nenavadn",
+                "state": "UNAVAILABLE"
+              }
+            },
+            "score": 1.0,
+            "start": 18,
+            "text": "nenavadn"
+          }
+        ],
+        "h25": [],
+        "h26": [],
+        "h27": [],
+        "h28": [
+          {
+            "end": 38,
+            "evidence": {
+              "left_bigram": {
+                "count": null,
+                "key": "izraz endpoint",
+                "state": "CENSORED"
+              },
+              "unigram": {
+                "count": null,
+                "key": "endpoint",
+                "state": "UNAVAILABLE"
+              }
+            },
+            "score": 1.0,
+            "start": 30,
+            "text": "endpoint"
+          }
+        ],
+        "h29": [],
+        "h30": [],
+        "h31": [],
+        "h32": [
+          {
+            "end": 37,
+            "evidence": {
+              "left_bigram": {
+                "count": null,
+                "key": "črka presenetliv",
+                "state": "CENSORED"
+              },
+              "unigram": {
+                "count": null,
+                "key": "presenetliv",
+                "state": "UNAVAILABLE"
+              }
+            },
+            "score": 1.0,
+            "start": 26,
+            "text": "presenetliv"
+          }
+        ]
+      },
+      "candidate_precision": 0.7,
+      "candidate_recall": 1.0,
+      "candidates": 10,
+      "case_count": 32,
+      "cases": 32,
+      "changed_cases": 0,
+      "end_to_end_recovery": 0.0,
+      "exact_gold_correct_repairs": 0,
+      "harmful_edits": 0,
+      "harmful_fraction_accepted": "NO_ACCEPTED_EDITS",
+      "known_errors": 7,
+      "known_errors_remaining": 7,
+      "missed_known_errors": 7,
+      "proposed_replacements": 0,
+      "protected_changes": 0,
+      "records_with_text": 32,
+      "reviewer_accuracy": 0.0,
+      "reviewer_calls": 0,
+      "reviewer_correct": 0,
+      "reviewer_labelled_candidates": 10,
+      "unlabelled_accepted_edits": 0
+    },
+    "local_context": {
+      "candidate_false_positive_cases": 3,
+      "candidate_map": {
+        "h01": [
+          {
+            "end": 18,
+            "evidence": {
+              "alternatives": [
+                [
+                  "še",
+                  5472
+                ]
+              ],
+              "left_bigram": {
+                "count": null,
+                "key": "je točniej",
+                "state": "CENSORED"
+              },
+              "right_bigram": {
+                "count": null,
+                "key": "točniej pojasnil",
+                "state": "CENSORED"
+              },
+              "trigram": {
+                "count": null,
+                "key": "je točniej pojasnil",
+                "state": "CENSORED"
+              },
+              "unigram": {
+                "count": null,
+                "key": "točniej",
+                "state": "UNAVAILABLE"
+              }
+            },
+            "score": 1.0,
+            "start": 11,
+            "text": "točniej"
+          }
+        ],
+        "h02": [
+          {
+            "end": 11,
+            "evidence": {
+              "right_bigram": {
+                "count": null,
+                "key": "rjavo-zlati trak",
+                "state": "CENSORED"
+              },
+              "unigram": {
+                "count": null,
+                "key": "rjavo-zlati",
+                "state": "UNAVAILABLE"
+              }
+            },
+            "score": 1.0,
+            "start": 0,
+            "text": "Rjavo-zlati"
+          }
+        ],
+        "h03": [
+          {
+            "end": 7,
+            "evidence": {
+              "right_bigram": {
+                "count": null,
+                "key": "kitaraš je",
+                "state": "CENSORED"
+              },
+              "unigram": {
+                "count": null,
+                "key": "kitaraš",
+                "state": "UNAVAILABLE"
+              }
+            },
+            "score": 1.0,
+            "start": 0,
+            "text": "Kitaraš"
+          }
+        ],
+        "h04": [
+          {
+            "end": 28,
+            "evidence": {
+              "alternatives": [],
+              "left_bigram": {
+                "count": null,
+                "key": "izmed najslovnijih",
+                "state": "CENSORED"
+              },
+              "right_bigram": {
+                "count": null,
+                "key": "najslovnijih izjav",
+                "state": "CENSORED"
+              },
+              "trigram": {
+                "count": null,
+                "key": "izmed najslovnijih izjav",
+                "state": "CENSORED"
+              },
+              "unigram": {
+                "count": null,
+                "key": "najslovnijih",
+                "state": "UNAVAILABLE"
+              }
+            },
+            "score": 1.0,
+            "start": 16,
+            "text": "najslovnijih"
+          }
+        ],
+        "h05": [],
+        "h06": [
+          {
+            "end": 26,
+            "evidence": {
+              "alternatives": [
+                [
+                  "ostal",
+                  3893
+                ]
+              ],
+              "left_bigram": {
+                "count": null,
+                "key": "je nerazumliv",
+                "state": "CENSORED"
+              },
+              "right_bigram": {
+                "count": null,
+                "key": "nerazumliv brez",
+                "state": "CENSORED"
+              },
+              "trigram": {
+                "count": null,
+                "key": "je nerazumliv brez",
+                "state": "CENSORED"
+              },
+              "unigram": {
+                "count": null,
+                "key": "nerazumliv",
+                "state": "UNAVAILABLE"
+              }
+            },
+            "score": 1.0,
+            "start": 16,
+            "text": "nerazumliv"
+          }
+        ],
+        "h07": [],
+        "h08": [],
+        "h09": [],
+        "h10": [],
+        "h11": [],
+        "h12": [],
+        "h13": [],
+        "h14": [
+          {
+            "end": 30,
+            "evidence": {
+              "left_bigram": {
+                "count": null,
+                "key": "bila presenetliva",
+                "state": "CENSORED"
+              },
+              "unigram": {
+                "count": null,
+                "key": "presenetliva",
+                "state": "UNAVAILABLE"
+              }
+            },
+            "score": 1.0,
+            "start": 18,
+            "text": "presenetliva"
+          }
+        ],
+        "h15": [],
+        "h16": [],
+        "h17": [],
+        "h18": [],
+        "h19": [
+          {
+            "end": 24,
+            "evidence": {
+              "left_bigram": {
+                "count": null,
+                "key": "vsebuje payload",
+                "state": "CENSORED"
+              },
+              "unigram": {
+                "count": null,
+                "key": "payload",
+                "state": "UNAVAILABLE"
+              }
+            },
+            "score": 1.0,
+            "start": 17,
+            "text": "payload"
+          }
+        ],
+        "h20": [],
+        "h21": [],
+        "h22": [],
+        "h23": [],
+        "h24": [
+          {
+            "end": 26,
+            "evidence": {
+              "left_bigram": {
+                "count": null,
+                "key": "je nenavadn",
+                "state": "CENSORED"
+              },
+              "unigram": {
+                "count": null,
+                "key": "nenavadn",
+                "state": "UNAVAILABLE"
+              }
+            },
+            "score": 1.0,
+            "start": 18,
+            "text": "nenavadn"
+          }
+        ],
+        "h25": [],
+        "h26": [],
+        "h27": [],
+        "h28": [
+          {
+            "end": 38,
+            "evidence": {
+              "left_bigram": {
+                "count": null,
+                "key": "izraz endpoint",
+                "state": "CENSORED"
+              },
+              "unigram": {
+                "count": null,
+                "key": "endpoint",
+                "state": "UNAVAILABLE"
+              }
+            },
+            "score": 1.0,
+            "start": 30,
+            "text": "endpoint"
+          }
+        ],
+        "h29": [],
+        "h30": [],
+        "h31": [],
+        "h32": [
+          {
+            "end": 37,
+            "evidence": {
+              "left_bigram": {
+                "count": null,
+                "key": "črka presenetliv",
+                "state": "CENSORED"
+              },
+              "unigram": {
+                "count": null,
+                "key": "presenetliv",
+                "state": "UNAVAILABLE"
+              }
+            },
+            "score": 1.0,
+            "start": 26,
+            "text": "presenetliv"
+          }
+        ]
+      },
+      "candidate_precision": 0.7,
+      "candidate_recall": 1.0,
+      "candidates": 10,
+      "cases": 32,
+      "known_errors": 7,
+      "mode": "local-context",
+      "threshold": 3
+    },
+    "raw": {
+      "accepted_edits": 0,
+      "candidate_map": {},
+      "candidate_precision": 0.0,
+      "candidate_recall": 0.0,
+      "candidates": 0,
+      "case_count": 32,
+      "cases": 32,
+      "changed": 0,
+      "end_to_end_recovery": 0.0,
+      "exact_gold_correct_repairs": 0,
+      "harmful_edits": 0,
+      "known_errors": 7,
+      "known_errors_remaining": 7,
+      "missed_known_errors": 7,
+      "protected_changes": 0,
+      "records_with_text": 0
+    },
+    "reviewer_without_application": {
+      "accepted_edits": 0,
+      "candidate_map": {
+        "h01": [
+          {
+            "end": 18,
+            "evidence": {
+              "alternatives": [
+                [
+                  "še",
+                  5472
+                ]
+              ],
+              "left_bigram": {
+                "count": null,
+                "key": "je točniej",
+                "state": "CENSORED"
+              },
+              "right_bigram": {
+                "count": null,
+                "key": "točniej pojasnil",
+                "state": "CENSORED"
+              },
+              "trigram": {
+                "count": null,
+                "key": "je točniej pojasnil",
+                "state": "CENSORED"
+              },
+              "unigram": {
+                "count": null,
+                "key": "točniej",
+                "state": "UNAVAILABLE"
+              }
+            },
+            "score": 1.0,
+            "start": 11,
+            "text": "točniej"
+          }
+        ],
+        "h02": [
+          {
+            "end": 11,
+            "evidence": {
+              "right_bigram": {
+                "count": null,
+                "key": "rjavo-zlati trak",
+                "state": "CENSORED"
+              },
+              "unigram": {
+                "count": null,
+                "key": "rjavo-zlati",
+                "state": "UNAVAILABLE"
+              }
+            },
+            "score": 1.0,
+            "start": 0,
+            "text": "Rjavo-zlati"
+          }
+        ],
+        "h03": [
+          {
+            "end": 7,
+            "evidence": {
+              "right_bigram": {
+                "count": null,
+                "key": "kitaraš je",
+                "state": "CENSORED"
+              },
+              "unigram": {
+                "count": null,
+                "key": "kitaraš",
+                "state": "UNAVAILABLE"
+              }
+            },
+            "score": 1.0,
+            "start": 0,
+            "text": "Kitaraš"
+          }
+        ],
+        "h04": [
+          {
+            "end": 28,
+            "evidence": {
+              "alternatives": [],
+              "left_bigram": {
+                "count": null,
+                "key": "izmed najslovnijih",
+                "state": "CENSORED"
+              },
+              "right_bigram": {
+                "count": null,
+                "key": "najslovnijih izjav",
+                "state": "CENSORED"
+              },
+              "trigram": {
+                "count": null,
+                "key": "izmed najslovnijih izjav",
+                "state": "CENSORED"
+              },
+              "unigram": {
+                "count": null,
+                "key": "najslovnijih",
+                "state": "UNAVAILABLE"
+              }
+            },
+            "score": 1.0,
+            "start": 16,
+            "text": "najslovnijih"
+          }
+        ],
+        "h05": [],
+        "h06": [
+          {
+            "end": 26,
+            "evidence": {
+              "alternatives": [
+                [
+                  "ostal",
+                  3893
+                ]
+              ],
+              "left_bigram": {
+                "count": null,
+                "key": "je nerazumliv",
+                "state": "CENSORED"
+              },
+              "right_bigram": {
+                "count": null,
+                "key": "nerazumliv brez",
+                "state": "CENSORED"
+              },
+              "trigram": {
+                "count": null,
+                "key": "je nerazumliv brez",
+                "state": "CENSORED"
+              },
+              "unigram": {
+                "count": null,
+                "key": "nerazumliv",
+                "state": "UNAVAILABLE"
+              }
+            },
+            "score": 1.0,
+            "start": 16,
+            "text": "nerazumliv"
+          }
+        ],
+        "h07": [],
+        "h08": [],
+        "h09": [],
+        "h10": [],
+        "h11": [],
+        "h12": [],
+        "h13": [],
+        "h14": [
+          {
+            "end": 30,
+            "evidence": {
+              "left_bigram": {
+                "count": null,
+                "key": "bila presenetliva",
+                "state": "CENSORED"
+              },
+              "unigram": {
+                "count": null,
+                "key": "presenetliva",
+                "state": "UNAVAILABLE"
+              }
+            },
+            "score": 1.0,
+            "start": 18,
+            "text": "presenetliva"
+          }
+        ],
+        "h15": [],
+        "h16": [],
+        "h17": [],
+        "h18": [],
+        "h19": [
+          {
+            "end": 24,
+            "evidence": {
+              "left_bigram": {
+                "count": null,
+                "key": "vsebuje payload",
+                "state": "CENSORED"
+              },
+              "unigram": {
+                "count": null,
+                "key": "payload",
+                "state": "UNAVAILABLE"
+              }
+            },
+            "score": 1.0,
+            "start": 17,
+            "text": "payload"
+          }
+        ],
+        "h20": [],
+        "h21": [],
+        "h22": [],
+        "h23": [],
+        "h24": [
+          {
+            "end": 26,
+            "evidence": {
+              "left_bigram": {
+                "count": null,
+                "key": "je nenavadn",
+                "state": "CENSORED"
+              },
+              "unigram": {
+                "count": null,
+                "key": "nenavadn",
+                "state": "UNAVAILABLE"
+              }
+            },
+            "score": 1.0,
+            "start": 18,
+            "text": "nenavadn"
+          }
+        ],
+        "h25": [],
+        "h26": [],
+        "h27": [],
+        "h28": [
+          {
+            "end": 38,
+            "evidence": {
+              "left_bigram": {
+                "count": null,
+                "key": "izraz endpoint",
+                "state": "CENSORED"
+              },
+              "unigram": {
+                "count": null,
+                "key": "endpoint",
+                "state": "UNAVAILABLE"
+              }
+            },
+            "score": 1.0,
+            "start": 30,
+            "text": "endpoint"
+          }
+        ],
+        "h29": [],
+        "h30": [],
+        "h31": [],
+        "h32": [
+          {
+            "end": 37,
+            "evidence": {
+              "left_bigram": {
+                "count": null,
+                "key": "črka presenetliv",
+                "state": "CENSORED"
+              },
+              "unigram": {
+                "count": null,
+                "key": "presenetliv",
+                "state": "UNAVAILABLE"
+              }
+            },
+            "score": 1.0,
+            "start": 26,
+            "text": "presenetliv"
+          }
+        ]
+      },
+      "candidate_precision": 0.7,
+      "candidate_recall": 1.0,
+      "candidates": 10,
+      "case_count": 32,
+      "cases": 32,
+      "changed_cases": 0,
+      "end_to_end_recovery": 0.0,
+      "exact_gold_correct_repairs": 0,
+      "harmful_edits": 0,
+      "harmful_fraction_accepted": "NO_ACCEPTED_EDITS",
+      "known_errors": 7,
+      "known_errors_remaining": 7,
+      "missed_known_errors": 7,
+      "proposed_replacements": 0,
+      "protected_changes": 0,
+      "records_with_text": 32,
+      "reviewer_accuracy": 0.0,
+      "reviewer_calls": 0,
+      "reviewer_correct": 0,
+      "reviewer_labelled_candidates": 10,
+      "unlabelled_accepted_edits": 0
+    },
+    "unigram_only": {
+      "candidate_false_positive_cases": 3,
+      "candidate_map": {
+        "h01": [
+          {
+            "end": 18,
+            "evidence": {
+              "alternatives": [
+                [
+                  "še",
+                  5472
+                ]
+              ],
+              "left_bigram": {
+                "count": null,
+                "key": "je točniej",
+                "state": "CENSORED"
+              },
+              "right_bigram": {
+                "count": null,
+                "key": "točniej pojasnil",
+                "state": "CENSORED"
+              },
+              "trigram": {
+                "count": null,
+                "key": "je točniej pojasnil",
+                "state": "CENSORED"
+              },
+              "unigram": {
+                "count": null,
+                "key": "točniej",
+                "state": "UNAVAILABLE"
+              }
+            },
+            "score": 1.0,
+            "start": 11,
+            "text": "točniej"
+          }
+        ],
+        "h02": [
+          {
+            "end": 11,
+            "evidence": {
+              "right_bigram": {
+                "count": null,
+                "key": "rjavo-zlati trak",
+                "state": "CENSORED"
+              },
+              "unigram": {
+                "count": null,
+                "key": "rjavo-zlati",
+                "state": "UNAVAILABLE"
+              }
+            },
+            "score": 1.0,
+            "start": 0,
+            "text": "Rjavo-zlati"
+          }
+        ],
+        "h03": [
+          {
+            "end": 7,
+            "evidence": {
+              "right_bigram": {
+                "count": null,
+                "key": "kitaraš je",
+                "state": "CENSORED"
+              },
+              "unigram": {
+                "count": null,
+                "key": "kitaraš",
+                "state": "UNAVAILABLE"
+              }
+            },
+            "score": 1.0,
+            "start": 0,
+            "text": "Kitaraš"
+          }
+        ],
+        "h04": [
+          {
+            "end": 28,
+            "evidence": {
+              "alternatives": [],
+              "left_bigram": {
+                "count": null,
+                "key": "izmed najslovnijih",
+                "state": "CENSORED"
+              },
+              "right_bigram": {
+                "count": null,
+                "key": "najslovnijih izjav",
+                "state": "CENSORED"
+              },
+              "trigram": {
+                "count": null,
+                "key": "izmed najslovnijih izjav",
+                "state": "CENSORED"
+              },
+              "unigram": {
+                "count": null,
+                "key": "najslovnijih",
+                "state": "UNAVAILABLE"
+              }
+            },
+            "score": 1.0,
+            "start": 16,
+            "text": "najslovnijih"
+          }
+        ],
+        "h05": [],
+        "h06": [
+          {
+            "end": 26,
+            "evidence": {
+              "alternatives": [
+                [
+                  "ostal",
+                  3893
+                ]
+              ],
+              "left_bigram": {
+                "count": null,
+                "key": "je nerazumliv",
+                "state": "CENSORED"
+              },
+              "right_bigram": {
+                "count": null,
+                "key": "nerazumliv brez",
+                "state": "CENSORED"
+              },
+              "trigram": {
+                "count": null,
+                "key": "je nerazumliv brez",
+                "state": "CENSORED"
+              },
+              "unigram": {
+                "count": null,
+                "key": "nerazumliv",
+                "state": "UNAVAILABLE"
+              }
+            },
+            "score": 1.0,
+            "start": 16,
+            "text": "nerazumliv"
+          }
+        ],
+        "h07": [],
+        "h08": [],
+        "h09": [],
+        "h10": [],
+        "h11": [],
+        "h12": [],
+        "h13": [],
+        "h14": [
+          {
+            "end": 30,
+            "evidence": {
+              "left_bigram": {
+                "count": null,
+                "key": "bila presenetliva",
+                "state": "CENSORED"
+              },
+              "unigram": {
+                "count": null,
+                "key": "presenetliva",
+                "state": "UNAVAILABLE"
+              }
+            },
+            "score": 1.0,
+            "start": 18,
+            "text": "presenetliva"
+          }
+        ],
+        "h15": [],
+        "h16": [],
+        "h17": [],
+        "h18": [],
+        "h19": [
+          {
+            "end": 24,
+            "evidence": {
+              "left_bigram": {
+                "count": null,
+                "key": "vsebuje payload",
+                "state": "CENSORED"
+              },
+              "unigram": {
+                "count": null,
+                "key": "payload",
+                "state": "UNAVAILABLE"
+              }
+            },
+            "score": 1.0,
+            "start": 17,
+            "text": "payload"
+          }
+        ],
+        "h20": [],
+        "h21": [],
+        "h22": [],
+        "h23": [],
+        "h24": [
+          {
+            "end": 26,
+            "evidence": {
+              "left_bigram": {
+                "count": null,
+                "key": "je nenavadn",
+                "state": "CENSORED"
+              },
+              "unigram": {
+                "count": null,
+                "key": "nenavadn",
+                "state": "UNAVAILABLE"
+              }
+            },
+            "score": 1.0,
+            "start": 18,
+            "text": "nenavadn"
+          }
+        ],
+        "h25": [],
+        "h26": [],
+        "h27": [],
+        "h28": [
+          {
+            "end": 38,
+            "evidence": {
+              "left_bigram": {
+                "count": null,
+                "key": "izraz endpoint",
+                "state": "CENSORED"
+              },
+              "unigram": {
+                "count": null,
+                "key": "endpoint",
+                "state": "UNAVAILABLE"
+              }
+            },
+            "score": 1.0,
+            "start": 30,
+            "text": "endpoint"
+          }
+        ],
+        "h29": [],
+        "h30": [],
+        "h31": [],
+        "h32": [
+          {
+            "end": 37,
+            "evidence": {
+              "left_bigram": {
+                "count": null,
+                "key": "črka presenetliv",
+                "state": "CENSORED"
+              },
+              "unigram": {
+                "count": null,
+                "key": "presenetliv",
+                "state": "UNAVAILABLE"
+              }
+            },
+            "score": 1.0,
+            "start": 26,
+            "text": "presenetliv"
+          }
+        ]
+      },
+      "candidate_precision": 0.7,
+      "candidate_recall": 1.0,
+      "candidates": 10,
+      "cases": 32,
+      "known_errors": 7,
+      "mode": "unigram-only",
+      "threshold": 3
+    }
   },
+  "automatic_quality_is_not_human_quality": true,
   "config_sha256": "0e1b3ee713e51fd59d53c503ae8bf892f7344230acf0ecdf814bee40fe779909",
   "controlled": {
-    "accepted": "PENDING LIVE REVIEWER",
+    "accepted_edits": 0,
     "candidate_precision": 0.7,
     "candidate_recall": 1.0,
     "candidates": 10,
-    "correct": "PENDING HUMAN LABELS",
-    "eligible_words": 145,
-    "end_to_end_recovery": "PENDING LIVE REVIEWER",
-    "harmful": "PENDING HUMAN LABELS",
+    "cases": 32,
+    "changed_cases": 0,
+    "end_to_end_recovery": 0.0,
+    "exact_gold_correct_repairs": 0,
+    "harmful_edits": 0,
+    "harmful_fraction_accepted": "NO_ACCEPTED_EDITS",
     "known_errors": 7,
-    "missed": null,
+    "known_errors_remaining": 7,
+    "missed_known_errors": 7,
+    "proposed_replacements": 0,
     "protected_changes": 0,
-    "reviewer_accuracy": "PENDING LIVE REVIEWER"
+    "reviewer_accuracy": 0.0,
+    "reviewer_calls": 0,
+    "reviewer_correct": 0,
+    "reviewer_labelled_candidates": 10,
+    "unlabelled_accepted_edits": 0
   },
   "dataset": {
     "count": 32,
@@ -26,6 +1471,27 @@
     "sha256": "fbd90d2f908597a1dd737e417c1d3b030e3ec7e677fe59720833df900ba16fd3"
   },
   "decision": "INCONCLUSIVE",
+  "gate": {
+    "failures": [
+      "recovery_below_reference"
+    ],
+    "missing": [
+      "beneficial_precision",
+      "harmful_fraction"
+    ],
+    "observed": {
+      "beneficial_precision": null,
+      "harmful_fraction": null,
+      "protected_changes": 0,
+      "recovery": 0.0
+    },
+    "required": {
+      "beneficial_precision": 0.8,
+      "harmful_fraction": 0.05,
+      "protected_changes": 0,
+      "recovery": 0.3
+    }
+  },
   "harm": {
     "harmful_fraction_accepted": "PENDING_HUMAN_LABELS",
     "harmful_per_1000_eligible_words": "PENDING_HUMAN_LABELS"
@@ -33,15 +1499,25 @@
   "human_review": "AWAITING_HUMAN_REVIEW",
   "index_sha256": "de2bf3f46fa75178ccaaa172d580b1b7d75e960997f5da674b9b0414dba6db05",
   "real_workload": {
-    "accepted_edits": null,
-    "benefit_harm": "AWAITING_HUMAN_REVIEW",
-    "completed": 2,
-    "median_p95_total": "PENDING_AGGREGATE",
-    "percent_changed": null,
-    "proposals": null,
-    "protected_diffs": "PENDING_HUMAN_REVIEW",
-    "raw_detector_reviewer_proxy_latency": "PENDING_AGGREGATE",
-    "responses": 8,
+    "accepted_edits": 0,
+    "candidates": 0,
+    "candidates_per_1000_eligible_words": 0.0,
+    "eligible_words": 0,
+    "human_benefit_harm": "AWAITING_HUMAN_REVIEW",
+    "latency_seconds": {
+      "detector_seconds": [],
+      "proxy_seconds": [],
+      "raw_seconds": [],
+      "reviewer_seconds": []
+    },
+    "median_total_seconds": null,
+    "p95_total_seconds": null,
+    "percent_changed": 0.0,
+    "proposals": 0,
+    "protected_differences": 0,
+    "responses_attempted": 8,
+    "responses_completed": 0,
+    "reviewer_calls": 0,
     "reviewer_calls_per_response": null
   }
 }

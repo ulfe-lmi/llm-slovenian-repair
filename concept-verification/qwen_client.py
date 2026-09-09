@@ -22,6 +22,14 @@ class Proposal:
     needs_wider_edit: bool
 
 
+def responses_path(path: str) -> str:
+    """Return the one Responses endpoint path used by this experiment."""
+    base = path.rstrip("/")
+    if not base.endswith("/v1"):
+        base += "/v1"
+    return base + "/responses"
+
+
 def parse_proposal(response: object) -> Proposal:
     if not isinstance(response, dict):
         raise ReviewerError("response must be an object")
@@ -87,7 +95,12 @@ def prompt(sentence: str, target: str, variant: str = "frozen-v1") -> str:
 
 class ResponsesReviewer:
     def __init__(
-        self, base_url: str, model: str, timeout: float = 15.0, api_key: str | None = None
+        self,
+        base_url: str,
+        model: str,
+        timeout: float = 15.0,
+        api_key: str | None = None,
+        profile: str | Path | None = None,
     ):
         parsed = urlparse(base_url)
         if parsed.scheme not in ("http", "https") or not parsed.hostname:
@@ -97,9 +110,11 @@ class ResponsesReviewer:
         self.base_path = parsed.path.rstrip("/")
         self.model, self.timeout = model, timeout
         self.api_key = api_key if api_key is not None else os.environ.get("QWEN_API_KEY")
-        profile = os.environ.get("CONCEPT_REVIEWER_PROFILE")
-        if self.api_key is None and profile:
-            profile_path = Path(profile)
+        profile_name = (
+            profile if profile is not None else os.environ.get("CONCEPT_REVIEWER_PROFILE")
+        )
+        if self.api_key is None and profile_name:
+            profile_path = Path(profile_name)
             if profile_path.is_symlink() or not profile_path.is_file():
                 raise ReviewerError("reviewer profile is not a regular file")
             with profile_path.open("rb") as handle:
@@ -136,7 +151,7 @@ class ResponsesReviewer:
         if self.api_key:
             headers["Authorization"] = f"Bearer {self.api_key}"
         try:
-            connection.request("POST", f"{self.base_path}/responses", body=body, headers=headers)
+            connection.request("POST", responses_path(self.base_path), body=body, headers=headers)
             result = connection.getresponse()
             payload = result.read(2_000_001)
         except (OSError, TimeoutError) as exc:

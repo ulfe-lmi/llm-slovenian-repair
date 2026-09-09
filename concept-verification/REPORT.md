@@ -1,158 +1,122 @@
-# Concept verification report
+# Concept verification report — 007-b
 
 **EXPERIMENTAL / CONCEPT VERIFICATION / NOT PRODUCTION CODE**
 
 ## Decision
 
-`INCONCLUSIVE`. The controlled detector slice ran with a verified external index
-and zero protected-slice changes in the executed tests, but the reviewer/full
-pipeline ablations are not complete and the real-workload sheet has no human
-labels. The result is not a production, release, deployment, milestone, or
-natural-workload quality claim. The one next discriminating action is human
-review of the eight-row blinded sheet; no tuning suffix is created.
+`INCONCLUSIVE` / `PARTIAL`. The frozen detector path remains reproducible, but
+the one allowed live reviewer execution reached its bounded calls and then
+failed in result bookkeeping before writing proposal evidence. The one allowed
+eight-case Codex collection was attempted exactly once per case; all eight
+invocations exited 2 before contacting the proxy because the installed CLI does
+not accept the old `--ask-for-approval` option. No human-quality or
+natural-workload conclusion is claimed. The corrected command builder and
+review-sheet path are committed for review, but this round is not rerun.
 
-## Design and boundaries
+## Frozen inputs and controlled evidence
 
-This one-round vertical slice is isolated under this directory and deliberately
-duplicates future production seams. It contains a verified one-off SQLite
-loader, original-coordinate protection/tokenization, deterministic unigram and
-local-context suspicion, a fresh same-Qwen reviewer client, strict acceptance,
-exact right-to-left patching, buffered loopback Responses-SSE proxy, controlled
-evaluation, and bounded workload tooling. It uses Python 3.12 standard-library
-code, synchronous blocking calls, finite timeouts, and binds only to
-`127.0.0.1:18024`.
+The exact frozen config, manifest, dev split, held-out split, external index,
+and frozen prompt identities are unchanged:
 
-No `src/`, `scripts/`, existing tests, PLAN, architecture, governance,
-workflow, objective-006 code, external cache, protected service, GPU, VPN,
-gateway, port, or neighboring repository was changed. The derived SQLite,
-raw SSE traces, and human sheet remain outside Git or under ignored local
-results. No source rows, private responses, prompts, replacements, or
-credentials are reproduced here.
+- held-out: 32 cases, 145 eligible words, 7 known errors;
+- local-context, threshold 3: 10 candidates, recall 1.00, precision 0.700;
+- unigram-only, threshold 3: 10 candidates, recall 1.00, precision 0.700;
+- raw baseline: 7 known errors remaining;
+- detector-only: 7 known errors remaining;
+- reviewer/full pipeline: not measured in a persisted aggregate after the
+  bookkeeping failure; no constants are presented as results;
+- protected differences in completed focused tests: 0.
 
-## Model, protocol, and source
+The two detector ablations are equal on this split; that is an observation, not
+evidence that context is generally useless. Controlled fixture examples remain
+project-authored; no external corpus rows or private model output is included.
 
-The selected direct reviewer is the owner-authorized Neumann Qwen 3.8 27B
-Responses endpoint. Reviewer requests are fresh non-streaming calls with only
-compact instructions, the exact sentence, and one target; the parser accepts
-only one assistant message `output_text` with the exact three-field JSON
-schema. The private profile bearer is read in memory only and is not logged.
+The live reviewer runner was configured with the exact private reviewer URL,
+model, and profile required by the order. It selected the same 10 candidates
+and made one bounded sequential call per candidate, with no retry. A
+`detector_only` aggregation-key defect raised after that call sequence, before
+proposal/acceptance records were persisted. The defect is fixed; no second live
+reviewer pass is permitted by this round.
 
-The proxy buffers a complete upstream SSE before analysis. The fake round trip
-and two completed live traces preserved event count/order, response and item
-IDs, usage, completion markers, and non-text fields. Tool-only/no-safe-text
-responses pass through unchanged. A live Codex invocation using the proxy
-completed an owned disposable tool loop: it created/read `tool-proof.txt` and
-exited successfully. Six of eight collector cases were blocked by endpoint or
-capture availability; their private traces were not promoted to Git.
+## Workload and proxy evidence
 
-The two external archives were validated before and after indexing/evaluation:
+The collector attempted eight actual `codex exec --profile qwen-neumann`
+invocations with explicit `CODEX_HOME`, provider/base-URL override,
+`--ephemeral`, loopback proxy, owned disposable work roots, and finite timeout.
+All eight had exit code 2, zero valid event types, zero terminal responses, and
+zero joined proxy traces. Therefore completed responses, latency aggregates,
+assistant text pairs, tool-loop evidence, accepted edits, and protected-diff
+workload metrics are unavailable. The tool-loop case was not counted as passed.
 
-- words: 115,865,656 bytes, MD5 `b20a959f9c113aeb6504f0d753d36d10`, SHA-256
-  `77ac4aa2e77016470a26ebf5b1bd265b9de240e8254d3511d51cb0fcb68a767a`;
-- word n-grams: 22,327,366 bytes, MD5 `22e911e80ecfd2cde4458acd74d83b4b`,
-  SHA-256 `782da9dd7909bfeefde5e7ee973b6031128167eec05868147d9dbfd22dc8cf40`.
+The focused fake upstream tests do pass for terminal-complete SSE that keeps
+HTTP open, incomplete timeout, both `/v1` and no-`/v1` upstream bases, actual
+non-200 status/content-type forwarding, comment/unknown-event preservation,
+trace opt-in privacy, and exact patch invariance. The proxy binds loopback only,
+does not retry, stops only after a delimited `response.completed`, and records
+local traces only when an explicit trace directory is supplied. The fixed
+collector command builder now uses the installed CLI’s supported noninteractive
+approval bypass; it was not exercised against the model after the eight blocked
+attempts.
 
-The loader accessed only the selected lowercase short unigram, 2-gram, and
-3-gram members. Missing unigrams are `UNAVAILABLE`; missing n-grams are
-`CENSORED` under the publisher cutoff with unknown denominator; stored counts
-are `EXACT`. No cache acquisition or network GET was used for the index.
+The previous 007-a report’s six blocked collector cases remain visible in that
+immutable report. This report supersedes only its interpretation that a human
+review was the sole remaining follow-up; it does not hide or rewrite those six
+cases or their bytes.
 
-## Frozen controlled evidence
+## Automatic score status
 
-The dev split has 16 cases and the held-out split 32 cases with exact recorded
-spans, including the ordered Slovenian examples, contextual constructions,
-typos, valid-word controls, technical English, Markdown, commands, URLs, and
-paths. Dataset identities are in `eval/frozen-experiment.json` and the fixed
-config is `eval/config.json`.
+The committed aggregate summary is computed from the frozen detector result and
+the eight blocked workload records. Its gate is `INCONCLUSIVE` because reviewer
+proposal/acceptance metrics and human-labeled workload evidence are missing.
+The human status remains `AWAITING_HUMAN_REVIEW`; no automatic count is a human
+benefit or harm label. No harmful fraction, harmful-per-1000 rate, or workload
+latency claim is fabricated.
 
-The derived index SHA-256 is
-`de2bf3f46fa75178ccaaa172d580b1b7d75e960997f5da674b9b0414dba6db05`.
-The selected frozen setting is local-context, threshold 3, frozen-v1 prompt;
-the prompt template hash is recorded in the frozen file. Dev compared the two
-declared detector modes across four predeclared thresholds. Held-out execution
-refused identity mismatches and used only the frozen setting.
+## A–J answers
 
-The final machine observations were:
+A. **Yes, provisionally:** the bounded detector found 10 candidates and all 7
+known errors on the frozen held-out split.
 
-- dev: 74 eligible words, 6 known errors, 7 candidates, recall 1.00,
-  candidate precision 0.714;
-- held-out: 145 eligible words, 7 known errors, 10 candidates, recall 1.00,
-  candidate precision 0.700;
-- reviewer accuracy, accepted/correct/harmful/missed edits, and full recovery:
-  pending because live reviewer evidence is incomplete;
-- protected changes in focused tests: 0;
-- aggregate decision JSON: `eval/results/summary.json`, decision
-  `INCONCLUSIVE`, human status `AWAITING_HUMAN_REVIEW`.
+B. **No:** the sparse external source provides evidence states, not semantic
+proof or a complete denominator.
 
-The required raw/no-repair, detector-only, reviewer-decision, full pipeline,
-unigram-only, and local-context ablation slots are explicit in the aggregate
-JSON. Detector-only evidence is measured; reviewer-dependent slots are not
-inflated to success.
+C. **Equal here:** local-context and unigram-only both measured 10 candidates,
+1.00 recall, and 0.700 precision; general context benefit is unproven.
 
-## Harm, latency, and limitations
+D. **Focused-boundary yes; live result unproven:** reviewer construction is
+fresh and isolated in code/tests, but the live proposal records were not
+persisted after the runner defect.
 
-Harm is primary. Controlled beneficial/neutral/harmful labels were not
-fabricated. Real-workload benefit/harm remains `AWAITING_HUMAN_REVIEW`; the
-blinded sheet has eight rows and blank labels. The two completed live traces
-were protocol-valid, but six of eight requested workload calls were blocked,
-so latency and edit-rate aggregates are not sufficient for a GO/PROMISING
-decision. Endpoint/capture failure was recorded once and not converted into
-quality evidence.
+E. **Unproven:** strict acceptance and exact local evidence gates are exercised,
+but no live accepted-repair sample survived for benefit/harm measurement.
 
-The detector is a bounded suspicion selector, not a linguistic verdict. The
-short word member is not a complete lexicon, n-gram absence is censored, and
-same-Qwen review is not independent statistical evidence. The experiment does
-not implement morphology, production API integration, concurrency, retry,
-auth/TLS framework, deployment, telemetry, or a human annotation process.
+F. **Yes in focused evidence:** original-coordinate patching preserves outside
+slices and protected content; observed protected differences were zero.
 
-## A–J evidence answers
+G. **Yes in focused evidence:** terminal-complete buffered SSE is preserved,
+including IDs, event ordering, comments, unknown blocks, and non-text fields.
 
-A. Does corpus suspicion produce candidates? **Yes** in this controlled slice;
-the detector returned bounded, deterministic candidates.
+H. **Blocked:** the actual Codex path was attempted eight times but the command
+option error prevented model/proxy execution; no tool-loop proof exists.
 
-B. Does the verified source support semantic proof? **No** by itself; the
-source identity and exact/censored/unavailable semantics are preserved, while
-the selected data remain sparse and incomplete.
+I. **Provisionally plausible:** loopback, finite bounds, private cache handling,
+and opt-in trace privacy are tested; live endpoint availability is not proven by
+this round.
 
-C. Does local context help over unigram-only here? **Not demonstrated**; the
-two modes produced the same aggregate candidate counts on this split.
+J. **No production decision:** remain `INCONCLUSIVE`; no merge, release,
+deployment, milestone, or follow-on order is authorized.
 
-D. Is reviewer isolation real? **Yes for the implemented boundary**; the
-request is fresh, compact, non-streaming, and excludes main history/tools/
-images/reasoning/candidates.
+## Limitations and reuse
 
-E. Are proposals safe to apply automatically? **Only when strict gates pass**;
-exact boundaries, protection, exact unigram support, stronger compatible local
-evidence, and no wider edit are required. Reviewer-dependent benefit remains
-unmeasured.
+This is an isolated standard-library experiment. It is not production API,
+gateway, concurrency, morphology, deployment, or linguistic-quality evidence.
+The source archives and derived index remain private external artifacts. Raw
+reviewer/Codex responses and blinded sheets remain local ignored evidence only;
+they are not copied into Git, reports, logs, or packages. Existing 001–005
+contracts and the preserved 007-a concept seams were reused only within this
+experimental subtree. The inherited application baseline remains a separate
+known failure and is not altered or reclassified.
 
-F. Is exact patching/protection preserved? **Yes in focused evidence**;
-original-coordinate edits leave protected slices and all outside code points
-unchanged, with zero protected changes observed.
-
-G. Is the Responses protocol preserved? **Yes for fake and two completed live
-traces**; IDs, usage, order/count, completion, reasoning/tool/non-text fields
-were not rewritten.
-
-H. Does the real Codex path continue? **Yes once** in the owned disposable
-tool-loop proof. This is functional evidence, not a quality label.
-
-I. Is the operational/rights boundary plausible? **Only provisionally**;
-loopback and finite bounds worked, but six live cases were blocked and external
-data remain private/reusable caches rather than repository/package content.
-
-J. Should this become production work? **No decision yet**. The correct result
-is `INCONCLUSIVE` pending the one human semantic review and complete reviewer/
-latency evidence; no production back-port is authorized by this report.
-
-## Reuse, shortcuts, and follow-up
-
-Accepted 001–005 contracts informed names and invariants. The unmerged 006
-importer was not reused as product code; the concept loader is intentionally
-separate. The experiment shortcuts are standard-library SQLite, synchronous
-HTTPServer, a fixed controlled split, a frozen simple detector, and no
-model-provider abstraction. Those shortcuts are not production acceptance.
-
-The only next discriminating action is to have an attributable human label the
-blank blinded sheet. No human disposition, automatic merge, release, deploy,
-or follow-on order is implied.
+The single remaining discriminating action is to let strategy reconcile this
+truthful partial round; no 007-c experiment or automatic roadmap resumption is
+proposed.

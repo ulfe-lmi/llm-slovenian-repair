@@ -31,15 +31,27 @@ python3.12 concept-verification/eval/run_eval.py --freeze \
   --output concept-verification/eval/frozen-experiment.json
 python3.12 concept-verification/eval/run_eval.py --phase heldout \
   --config concept-verification/eval/config.json --index EXTERNAL_SQLITE \
-  --frozen concept-verification/eval/frozen-experiment.json --results LOCAL_HELDOUT
-CONCEPT_INDEX=EXTERNAL_SQLITE CONCEPT_UPSTREAM_URL=http://UPSTREAM_HOST:PORT \
+  --frozen concept-verification/eval/frozen-experiment.json \
+  --reviewer-url http://REVIEWER_HOST:PORT/v1 --reviewer-model qwen3.8-27b \
+  --reviewer-profile PRIVATE_REVIEWER_PROFILE --reviewer-timeout 30 \
+  --results LOCAL_HELDOUT_FINAL
+CONCEPT_INDEX=EXTERNAL_SQLITE \
+CONCEPT_UPSTREAM_URL=http://UPSTREAM_HOST:PORT/v1 \
+CONCEPT_REVIEWER_URL=http://REVIEWER_HOST:PORT/v1 \
+CONCEPT_REVIEWER_MODEL=qwen3.8-27b \
+CONCEPT_REVIEWER_PROFILE=PRIVATE_REVIEWER_PROFILE \
+CONCEPT_TRACE_DIR=LOCAL_TRACE CONCEPT_TIMEOUT=30 \
   ./concept-verification/run_proxy.sh
 python3.12 concept-verification/eval/collect.py --cases 8 \
-  --proxy http://127.0.0.1:18024/v1 --results LOCAL_WORKLOAD
-python3.12 concept-verification/eval/score.py --controlled LOCAL_HELDOUT/heldout.json \
-  --workload LOCAL_WORKLOAD --output concept-verification/eval/results/summary.json
-python3.12 concept-verification/eval/review_sheet.py --input LOCAL_WORKLOAD \
-  --output LOCAL_REVIEW_SHEET
+  --codex-bin codex --codex-home PRIVATE_CODEX_HOME --profile qwen-neumann \
+  --provider-id qwen-LSI-A100 --proxy http://127.0.0.1:18024/v1 \
+  --trace-dir LOCAL_TRACE --work-root LOCAL_OWNED_WORK \
+  --results LOCAL_WORKLOAD_FINAL --timeout 120
+python3.12 concept-verification/eval/review_sheet.py --input LOCAL_WORKLOAD_FINAL \
+  --traces LOCAL_TRACE --output LOCAL_REVIEW_SHEET_FINAL
+python3.12 concept-verification/eval/score.py \
+  --controlled LOCAL_HELDOUT_FINAL/heldout.json --workload LOCAL_WORKLOAD_FINAL \
+  --traces LOCAL_TRACE --output concept-verification/eval/results/summary.json
 ```
 
 The two prompt variants and four threshold settings are dev-only. The frozen
@@ -68,8 +80,14 @@ full conservative, unigram-only, and local-context ablations with denominators,
 candidate enrichment, recall, reviewer accuracy, accepted/correct/harmful/
 missed counts, protected changes, recovery, and latency.
 
-Real workload benefit or harm is `AWAITING_HUMAN_REVIEW` until a human labels
-the deterministic blinded sheet. Model self-review is not a human label.
-Eight bounded workload cases include one tool-loop-shaped request; raw traces
-remain under ignored local results. A missing endpoint is recorded once as an
-external availability failure, not converted into a quality success.
+The held-out reviewer command and the eight-case collector command are each run
+once per frozen round. Real workload benefit or harm is
+`AWAITING_HUMAN_REVIEW` until a human labels the deterministic blinded sheet;
+model self-review is not a human label. The collector uses actual
+`codex exec --profile qwen-neumann` with explicit `CODEX_HOME`, provider/base
+URL overrides, `--ephemeral`, and a finite subprocess timeout. Its tool-loop
+case creates and reads `codex-tool-loop-proof.txt` in an owned disposable
+directory. Raw traces remain under the explicitly configured local trace root,
+and tracing disabled writes nothing. A missing endpoint or invalid invocation
+is recorded once as an external availability/protocol failure, not converted
+into a quality success.
