@@ -127,9 +127,10 @@ check use the same guard; strategic review requires that check at the reviewed h
 The round adds an external objective-006 cache lifecycle with fixed names,
 ownership/type/symlink/hardlink checks, canonical inventory verification, atomic
 promotion, offline reuse, and gated cleanup. The cache is outside Git and the wheel;
-receipts keep the twelve legacy GETs distinct from the current generation, record
+receipts keep the twelve legacy GETs distinct from the current generations, record
 network GET and consumer/revalidation counts, and retain redistribution as false.
-006-k records the 006-i starting-SHA correction, 006-j verification-directory
-cleanup, and the attempted broad-prune boundary as new evidence only. Product
-numeric semantics remain unchanged and blocked; no merge, release, deployment, or
-milestone acceptance is claimed.
+006-k records the failed hardlink boundary at cumulative thirteen. 006-l completes
+one same-directory rename-only promotion, two content-free diagnostic consumers and
+three revalidations at cumulative fourteen, retaining the verified generation for
+concept verification. Product numeric semantics remain unchanged and blocked; no
+merge, release, deployment, or milestone acceptance is claimed.

@@ -128,10 +128,17 @@ accepted only as explicit frozen violations; new report paths must be add-once w
 a report-only actual implementation parent. The guard is used by transcript and
 report verification and by the `OAP report history` CI check.
 
-The round also establishes a reusable external cache for the exact Gigafida archive
+The round also established a reusable external cache for the exact Gigafida archive
 outside Git and the wheel. Its fixed source identity, inventory digest, archive
 digests, ownership/type checks, and verifier-first promotion are enforced by
 [`oap/bin/source_cache.py`](oap/bin/source_cache.py). Cache validation is offline;
-the 006-k receipt records the cumulative twelve legacy GETs plus the current bounded
-acquisition, consumer/revalidation counts, retention until concept verification,
-and no redistribution authorization.
+006-k records the failed hardlink boundary and cumulative thirteen GETs; 006-l
+completes one rename-only promotion, two content-free diagnostic consumers, three
+revalidations, and cumulative fourteen GETs. The retained cache remains gated until
+concept-experiment completion and has no redistribution authorization.
+
+Round 006-l closes the cache mechanism and history-negative gaps without changing
+product numeric semantics. Promotion uses one lock-protected same-directory rename,
+reopens and re-verifies the final before exclusive metadata, and cleans only fixed
+artifacts on expected failure. Report-history tests cover implementation-head drift,
+same-path repair, manifest exceptions, and a third touch to a frozen incident.

@@ -136,6 +136,8 @@ def _read_json(path: Path) -> dict[str, Any]:
     _owned(path, kind="file")
     try:
         value = json.loads(path.read_bytes(), object_pairs_hook=_unique_pairs)
+    except CacheError:
+        raise
     except (OSError, ValueError, UnicodeError) as exc:
         raise CacheError("CACHE_METADATA_INVALID") from exc
     if not isinstance(value, dict):
@@ -227,7 +229,13 @@ def _verify_final(final: Path, inventory: Path) -> dict[str, Any]:
         _fail("CACHE_DIGEST_MISMATCH")
     try:
         result = verify_source_artifact.verify_artifact(inventory, SOURCE_ID, final)
-    except Exception as exc:
+    except (
+        OSError,
+        TypeError,
+        UnicodeError,
+        verify_source_artifact.InventoryError,
+        verify_source_artifact.ArtifactVerificationError,
+    ) as exc:
         raise CacheError("CACHE_VERIFIER_FAILED") from exc
     if (
         result.byte_size != EXPECTED_SIZE
@@ -304,14 +312,78 @@ def _write_exclusive(path: Path, data: bytes) -> None:
         fd = os.open(path, flags, 0o600)
     except FileExistsError as exc:
         raise CacheError("CACHE_METADATA_EXISTS") from exc
+    except OSError as exc:
+        raise CacheError("CACHE_METADATA_WRITE_FAILED") from exc
     try:
         with os.fdopen(fd, "wb") as stream:
             stream.write(data)
             stream.flush()
             os.fsync(stream.fileno())
-    except Exception:
-        path.unlink(missing_ok=True)
-        raise
+    except OSError as exc:
+        try:
+            path.unlink(missing_ok=True)
+        except OSError as cleanup_exc:
+            raise CacheError("CACHE_METADATA_CLEANUP_FAILED") from cleanup_exc
+        raise CacheError("CACHE_METADATA_WRITE_FAILED") from exc
+
+
+def _best_effort_fsync_file(path: Path) -> None:
+    """Flush a regular cache file where the selected filesystem supports it."""
+
+    descriptor: int | None = None
+    try:
+        descriptor = os.open(path, os.O_RDONLY | os.O_NOFOLLOW)
+        os.fsync(descriptor)
+    except OSError:
+        # The selected sync mount may not implement fsync for this object.
+        return
+    finally:
+        if descriptor is not None:
+            try:
+                os.close(descriptor)
+            except OSError:
+                pass
+
+
+def _best_effort_fsync_directory(path: Path) -> None:
+    """Flush a directory entry where directory fsync is supported."""
+
+    descriptor: int | None = None
+    try:
+        descriptor = os.open(
+            path,
+            os.O_RDONLY | os.O_NOFOLLOW | getattr(os, "O_DIRECTORY", 0),
+        )
+        os.fsync(descriptor)
+    except OSError:
+        return
+    finally:
+        if descriptor is not None:
+            try:
+                os.close(descriptor)
+            except OSError:
+                pass
+
+
+def _remove_promotion_artifacts(root: Path) -> None:
+    """Remove only the three fixed promotion names under the locked root."""
+
+    for name in (PART_NAME, FINAL_NAME, METADATA_NAME):
+        path = root / name
+        try:
+            info = path.lstat()
+        except FileNotFoundError:
+            continue
+        except OSError as exc:
+            raise CacheError("CACHE_PROMOTION_CLEANUP_FAILED") from exc
+        if stat.S_ISLNK(info.st_mode) or not stat.S_ISREG(info.st_mode):
+            raise CacheError("CACHE_PROMOTION_CLEANUP_FAILED")
+        if info.st_uid != _ubuntu_uid() or info.st_nlink != 1:
+            raise CacheError("CACHE_PROMOTION_CLEANUP_FAILED")
+        try:
+            path.unlink()
+        except OSError as exc:
+            raise CacheError("CACHE_PROMOTION_CLEANUP_FAILED") from exc
 
 
 @contextlib.contextmanager
@@ -329,59 +401,58 @@ def promote(strategic_home: str | Path, *, inventory: str | Path | None = None) 
     """Promote the one fixed part.zip; callers own the download step."""
     root = cache_root(strategic_home)
     _make_dirs(root)
-    _layout(root)
-    final = root / FINAL_NAME
-    part = root / PART_NAME
-    metadata = root / METADATA_NAME
-    if final.exists() or final.is_symlink():
-        _fail("CACHE_FINAL_EXISTS")
-    if metadata.exists() or metadata.is_symlink():
-        _fail("CACHE_METADATA_EXISTS")
-    _owned(part, kind="file")
-    inventory_path = _inventory_path(inventory)
-    summary = _verify_final(part, inventory_path)
     with _promotion_lock(root):
+        _layout(root)
+        final = root / FINAL_NAME
+        part = root / PART_NAME
+        metadata = root / METADATA_NAME
         if final.exists() or final.is_symlink():
             _fail("CACHE_FINAL_EXISTS")
+        if metadata.exists() or metadata.is_symlink():
+            _fail("CACHE_METADATA_EXISTS")
+        _owned(part, kind="file")
+        inventory_path = _inventory_path(inventory)
+        _verify_final(part, inventory_path)
+        _best_effort_fsync_file(part)
         try:
-            os.link(part, final, follow_symlinks=False)
-            part.unlink()
-        except FileExistsError as exc:
-            raise CacheError("CACHE_FINAL_EXISTS") from exc
-        except OSError:
-            # Some owner-selected sync filesystems reject hard links.  A
-            # rename of the fully verified, fixed part remains atomic and the
-            # lock plus recheck prevents a cooperating writer from replacing a
-            # valid final.
-            if final.exists() or final.is_symlink():
-                raise CacheError("CACHE_FINAL_EXISTS") from None
+            os.replace(part, final)
+            _best_effort_fsync_directory(root)
+            _owned(final, kind="file")
+            post_rename_summary = _verify_final(final, inventory_path)
+            with contextlib.suppress(OSError):
+                os.chmod(final, 0o444, follow_symlinks=False)
+            value = {
+                "schema_version": CACHE_SCHEMA_VERSION,
+                "source_id": SOURCE_ID,
+                "canonical_url": CANONICAL_URL,
+                "byte_size": EXPECTED_SIZE,
+                "md5": EXPECTED_MD5,
+                "sha256": EXPECTED_SHA256,
+                "inventory_sha256": EXPECTED_INVENTORY_SHA256,
+                "generation": EXPECTED_GENERATION,
+                "lifecycle": "concept-verification",
+                "redistribution": False,
+                "created_at": datetime.now(UTC).replace(microsecond=0).isoformat().replace("+00:00", "Z"),
+            }
+            _write_exclusive(metadata, (json.dumps(value, sort_keys=True, indent=2) + "\n").encode())
+            _best_effort_fsync_file(metadata)
+            _best_effort_fsync_directory(root)
+            reusable = inspect(strategic_home, inventory=inventory_path)
+            if reusable.get("state") != CACHE_STATE_VERIFIED:
+                _fail("CACHE_POST_PROMOTION_INVALID")
+        except (CacheError, OSError) as exc:
             try:
-                os.replace(part, final)
-            except OSError as exc:
-                raise CacheError("CACHE_PROMOTION_FAILED") from exc
-        with contextlib.suppress(OSError):
-            os.chmod(final, 0o444, follow_symlinks=False)
-        # Read-only mode is best effort on the selected sync filesystem;
-        # ownership, type, link-count and digest checks remain mandatory.
-    value = {
-        "schema_version": CACHE_SCHEMA_VERSION,
-        "source_id": SOURCE_ID,
-        "canonical_url": CANONICAL_URL,
-        "byte_size": EXPECTED_SIZE,
-        "md5": EXPECTED_MD5,
-        "sha256": EXPECTED_SHA256,
-        "inventory_sha256": EXPECTED_INVENTORY_SHA256,
-        "generation": EXPECTED_GENERATION,
-        "lifecycle": "concept-verification",
-        "redistribution": False,
-        "created_at": datetime.now(UTC).replace(microsecond=0).isoformat().replace("+00:00", "Z"),
-    }
-    _write_exclusive(metadata, (json.dumps(value, sort_keys=True, indent=2) + "\n").encode())
+                _remove_promotion_artifacts(root)
+            except CacheError:
+                raise
+            if isinstance(exc, CacheError):
+                raise
+            raise CacheError("CACHE_PROMOTION_FAILED") from exc
     return {
         "state": CACHE_STATE_VERIFIED,
         "action": "ESTABLISHED",
         "network_get_count": 1,
-        **summary,
+        **post_rename_summary,
     }
 
 

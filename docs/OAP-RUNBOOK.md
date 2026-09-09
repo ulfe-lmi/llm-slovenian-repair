@@ -74,8 +74,10 @@ The objective-006 archive cache is an explicit external experiment resource at
 `OAP_STRATEGIC_HOME/source-cache/concept-verification/gigafida-2.0-words`.
 `python3 oap/bin/source_cache.py plan --strategic-home PATH` and `validate`
 perform no network operation. Promotion consumes only the fixed `part.zip` after
-the checked-in verifier passes; it refuses overwrite, symlinks, hardlinks,
-unexpected files, stale metadata, and arbitrary URLs. Cleanup requires an explicit
-completed/abandoned concept-experiment lifecycle. Acquisition receipts bind the
-twelve legacy GETs and the current generation/count; a valid generation is reused
-with zero later GETs.
+the checked-in verifier passes; it uses one lock-protected same-directory rename
+and refuses overwrite, symlinks, hardlinks, unexpected files, stale metadata, and
+arbitrary URLs. Cleanup requires an explicit completed/abandoned concept-experiment
+lifecycle. The 006-k receipt preserves the failed hardlink boundary at cumulative
+thirteen GETs; the immutable 006-l receipt records one verified rename-only
+establishment at cumulative fourteen, two content-free consumers and three
+revalidations. A valid generation is reused with zero later GETs.

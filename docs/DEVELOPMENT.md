@@ -201,3 +201,13 @@ promote, repair, and lifecycle-gated cleanup operations. It does not download,
 accept arbitrary paths or URLs, or emit private cache paths/content. The cache
 promotes only after `scripts/verify_source_artifact.py` accepts the exact archive
 identity and every consumer revalidates it.
+
+Round 006-l replaces the sync-filesystem hardlink/fallback branch with one
+lock-protected same-directory `os.replace`, post-rename canonical verification,
+exclusive metadata, and fixed-artifact cleanup on expected failures. Focused tests
+cover corrupt digests/metadata, duplicate or stale metadata, symlink/hardlink/
+nonregular/wrong-owner seams, overwrite and lifecycle gates, rename/verification/
+metadata failures, and the requested real Git-history negatives. The retained cache
+was consumed twice by the content-free 006-j diagnostic with identical safe results;
+the immutable receipt records cumulative fourteen GETs and the zero-retry,
+zero-redistribution boundary.

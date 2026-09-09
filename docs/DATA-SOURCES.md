@@ -193,11 +193,15 @@ cumulative objective-006 count to twelve. No source content is retained, and no
 conversion, full import, rights, redistribution, release, or deployment claim is
 made.
 
-Round 006-k retains the verified archive in the owner-selected strategic cache for
-the concept-verification handoff. The cache is outside the repository and package,
-has fixed canonical names and source identity, and is promoted only after the
-existing inventory-bound ZIP verifier passes. Plan and validation are network-free;
-promotion has no downloader and consumes one caller-owned part. A valid generation
-is revalidated for each consumer and reused without another GET. The receipt records
-the twelve historical GETs, the current network count, exact generation, consumer
-and revalidation counts, retention lifecycle, and `redistribution_ready=false`.
+Round 006-k attempted to retain the verified archive in the owner-selected strategic
+cache but stopped at the selected filesystem's hardlink boundary; its exact part was
+removed and cumulative GETs reached thirteen. Round 006-l completes the handoff with
+the cache outside the repository and package, fixed canonical names and source
+identity, and promotion only after the existing inventory-bound ZIP verifier passes.
+Plan and validation are network-free; promotion has no downloader and consumes one
+caller-owned part through a lock-protected same-directory `os.replace`. The renamed
+final is reopened, reverified, written with exclusive metadata, and inspected again.
+One new GET brings cumulative objective-006 GETs to fourteen; two sequential
+content-free diagnostic consumers reuse the same generation with three validations.
+The receipt records the prior failure, exact generation, retention lifecycle, and
+`redistribution_ready=false`.
