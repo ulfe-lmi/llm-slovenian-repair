@@ -399,6 +399,8 @@ class CachePlanner(unittest.TestCase):
 class AcquisitionHistory(unittest.TestCase):
     def test_current_generation_is_monotonic_and_prior_receipt_is_untouched(self) -> None:
         root = Path(__file__).resolve().parents[2]
+        if not (root / ".git").exists():
+            self.skipTest("the owned baseline mirror has no Git history")
         prior = (root / "resources/source-acquisitions/gigafida-2.0-words-006-k.json").read_bytes()
         result = acquisition_history.validate_acquisition_history(root, revision="HEAD")
         self.assertEqual(result["legacy_cumulative_get_count"], 12)
