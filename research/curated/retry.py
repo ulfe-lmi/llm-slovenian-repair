@@ -69,10 +69,11 @@ def outcome(record: dict[str, Any], first_gates: dict[str, dict[str, Any]], retr
         candidate = decision["candidate"]
         key = f"{record['case']['id']}-{candidate['start']}"
         initial = first_gates[key]
-        proposal = decision["proposal"]
+        raw_first = decision["proposal"]
+        proposal = raw_first if isinstance(raw_first, Proposal) else Proposal(bool(raw_first["keep"]), raw_first.get("replacement"), bool(raw_first["needs_wider_edit"]))
         final, source = initial, "first-pass"
         if initial["accepted"]:
-            without_retry.append((candidate["start"], candidate["end"], proposal["replacement"]))
+            without_retry.append((candidate["start"], candidate["end"], proposal.replacement))
         if initial["reason"] == "replacement-unigram-uncertain":
             if key not in retries:
                 raise ValueError("missing required single retry")

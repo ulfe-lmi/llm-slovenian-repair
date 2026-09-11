@@ -27,7 +27,15 @@ class VariantExecutionFidelity(unittest.TestCase):
         result = outcome(record, gates, {}, lambda word: {"state": "EXACT", "key": word, "count": 10})
         self.assertEqual(result["corrected"], "Abcd")
 
-    def test_nonthinking_mechanical_does_not_run_english_or_unigram_campaign(self):
+    def test_mechanical_variants_retain_reasoning_and_do_not_run_later_campaign(self):
+        for variant_id, effort in (("nonthinking-mechanical", "none"),
+                                   ("low-thinking-mechanical", "low"),
+                                   ("high-thinking-mechanical", "high"),
+                                   ("xhigh-thinking-mechanical", "xhigh")):
+            with self.subTest(variant=variant_id):
+                self.check_mechanical_variant(variant_id, effort)
+
+    def check_mechanical_variant(self, variant_id, effort):
         scratch = Path(os.environ.get("TMPDIR", str(Path.cwd() / ".research-test-scratch")))
         scratch.mkdir(parents=True, exist_ok=True)
         with tempfile.TemporaryDirectory(dir=scratch) as directory:
@@ -53,7 +61,7 @@ class VariantExecutionFidelity(unittest.TestCase):
                 request = json.loads(body)
                 requests.append(request)
                 response = {"model": "qwen3.8-27b", "status": "completed",
-                            "reasoning": {"effort": "none"},
+                            "reasoning": {"effort": effort},
                             "usage": {"output_tokens": 4, "output_tokens_details": {"reasoning_tokens": 0}},
                             "output": [{"type": "message", "role": "assistant", "content": [
                                 {"type": "output_text", "text": json.dumps({
@@ -65,9 +73,9 @@ class VariantExecutionFidelity(unittest.TestCase):
             with patch.dict(os.environ, {"SYNTHETIC_RESEARCH_CREDENTIAL": "synthetic-placeholder"}), \
                     patch.object(historical_transport._HttpTransport, "request", fake_request), \
                     patch("socket.create_connection", side_effect=AssertionError("network forbidden")):
-                execute_authorized(args, variant_map()["nonthinking-mechanical"])
+                execute_authorized(args, variant_map()[variant_id])
             self.assertEqual(len(requests), 1, "An earlier one-target review must not add direct-GEC or corrective calls")
-            self.assertEqual(requests[0].get("reasoning"), {"effort": "none"})
+            self.assertEqual(requests[0].get("reasoning"), {"effort": effort})
             prompt = requests[0]["input"][0]["content"][0]["text"]
             self.assertIn("Target:", prompt)
             outputs = [json.loads(path.read_text()) for path in (root / "output").rglob("*.json")]

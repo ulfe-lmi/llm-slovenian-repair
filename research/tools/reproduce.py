@@ -29,7 +29,7 @@ def execute_authorized(args: argparse.Namespace, variant: object) -> dict[str, o
     from research.curated.historical_transport import Client
 
     output_root.mkdir(parents=True, exist_ok=True)
-    if variant.id == "nonthinking-mechanical":
+    if variant.id in {"nonthinking-mechanical", "low-thinking-mechanical", "high-thinking-mechanical", "xhigh-thinking-mechanical"}:
         from research.curated.corpus import Corpus
         from research.curated.historical_common import save
         from research.curated.historical_detector import detect
@@ -39,7 +39,7 @@ def execute_authorized(args: argparse.Namespace, variant: object) -> dict[str, o
         from research.curated.protected import protected_intervals
         from research.curated.review import Proposal
 
-        client = Client(endpoint=args.endpoint, credential_env=args.credential_env, timeout=args.timeout_seconds, allow_live=True, reasoning_effort="none")
+        client = Client(endpoint=args.endpoint, credential_env=args.credential_env, timeout=args.timeout_seconds, allow_live=True, reasoning_effort=variant.reasoning)
         corpus = Corpus(index)
         completed = 0
         try:
@@ -49,7 +49,7 @@ def execute_authorized(args: argparse.Namespace, variant: object) -> dict[str, o
                 edits = []
                 calls = []
                 for candidate in candidates:
-                    observation = client.call(output_root / "requests" / str(record.get("id", number)), first_body(text, candidate, reasoning_effort="none"), "reviewer")
+                    observation = client.call(output_root / "requests" / str(record.get("id", number)), first_body(text, candidate, reasoning_effort=variant.reasoning), "reviewer")
                     calls.append(observation)
                     if observation.get("operational_failure"):
                         continue
