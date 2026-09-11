@@ -11,7 +11,13 @@ license grant, or permission to merge or deploy.
 - [`registry/experiments.json`](registry/experiments.json) is the evidence-backed
   catalog. Each record contains its question, authorized variation, frozen
   choices, status, safe numeric metrics, top-level private evidence identities,
-  conclusion, and pending evidence.
+  stable child-run/phase records, readable report/config links, conclusion, and
+  pending evidence. A child status is never inferred from an old RUNNING snapshot.
+- [`reports/`](reports/) and [`configs/`](configs/) contain one data-free,
+  human-readable configuration/result projection per root, including recovery
+  executions, stopped trials, campaign phases, audit views, and the diagnostic.
+  Filled prompts, dataset/gold strings, response bodies, credentials, and private
+  paths are excluded.
 - [`registry/source-manifest.json`](registry/source-manifest.json) maps the actual
   frozen source closure to curated copies and records portability transformations.
 - [`registry/file-census.json`](registry/file-census.json) summarizes the complete
@@ -20,7 +26,8 @@ license grant, or permission to merge or deploy.
   traces, responses, indexes, archives, and credentials remain private-only.
 - [`results/`](results/) contains deterministic gzip projections of the final
   campaign's per-case numeric metrics, category/type summaries, retry ablations,
-  and paired uncertainty. Text, replacements, response bodies, and private
+  paired uncertainty, and the complete safe trial/case/phase projection in
+  `study-evidence.json.gz`. Text, replacements, response bodies, and private
   result-path keys are removed by an allowlist.
 - [`curated/`](curated/) contains faithful source seams: protected spans,
   Gigafida evidence states, the ASCII-hyphen detector view, English eligibility,
@@ -43,7 +50,7 @@ rule. The Levenshtein item is a single read-only diagnostic, not a benchmark.
 | `high-thinking-mechanical` | direct reviewer, high reasoning | stopped |
 | `xhigh-thinking-mechanical` | direct reviewer, xhigh reasoning | completed |
 | `low-plus-validator` | frozen low pass plus validator | completed |
-| `low-unigram-retry` | one word-only unigram retry | completed |
+| `low-unigram-retry` | one contextual JSON unigram retry | completed |
 | `low-word-only-retry` | stopped word-only retry and whitespace continuation | stopped/continued from saved response |
 | `full-hyphen-space-low` | ASCII hyphen-to-space detector view | completed |
 | `full-hyphen-case-low` | first one-way initial-case preservation | completed |
@@ -124,15 +131,32 @@ python3 -B -m research.tools.replay \
   --index PRIVATE_INDEX.sqlite
 ```
 
+Campaign saved samples use the same fail-closed path and must carry the
+`input`/decision envelope, first and retry proposal stages, the frozen detector
+cap (or an explicit null for uncapped), and numeric English evidence:
+
+```sh
+python3 -B -m research.tools.replay \
+  --saved-record PRIVATE_CAMPAIGN_SAMPLE.json \
+  --index PRIVATE_INDEX.sqlite
+```
+
 The private case record is read-only; replay verifies the saved output and emits
 only counts and an output hash. It does not reconstruct a missing response or
 resample a model. Dataset preparation/adapters and official scorer command
 records accept explicit private roots and are never run on import.
 
-Future live reproduction is documentation-only: it must supply an explicit
-endpoint, model, credential reference, data/index roots, resource budget, and a
-deliberate allow-live control. Nothing in this tree acquires data, launches a
-model, or accesses a service by default.
+Missing English evidence never becomes frequency zero; missing detector limits,
+proposal stages, expected final values, or a malformed record abort the replay.
+Both small-study `original/decisions` and campaign `input/decisions/first/retry`
+schemas are accepted. Receipts contain counts and hashes only.
+
+Historical reproduction plans are executable as a no-side-effect contract:
+`python3 -B -m research.tools.reproduce --variant VARIANT ...` validates explicit
+input/index/result roots, credential reference, endpoint/model fields and a
+bounded budget, then emits a plan. It does not run a model. Live execution is a
+separate future authorization boundary; no tree import or default command
+acquires data, launches a model, or accesses a service.
 
 ## Publication boundary and retention
 
@@ -147,7 +171,9 @@ bytes are linked to an exact identity. Missing sources are visible as
 
 The original native trees and archive receipts remain in the owner-selected
 strategic workspace, with the relocation map and reconstruction guide. They are
-not dependencies of a fresh public checkout. The publication guard validates
+not dependencies of a fresh public checkout. `registry/archive-catalog.json`
+records verified archive identities and `registry/file-census.json.gz` keeps the
+full logical-root/relative-path/hash disposition. The publication guard validates
 the actual intended tree, allowlists only the compressed census and numeric
 projections, checks JSON schemas/forbidden fields, refuses symlink/traversal and
 overwrite exports, and can hash short and 16-token private-source windows from

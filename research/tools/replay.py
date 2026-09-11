@@ -14,7 +14,7 @@ from typing import Any
 
 from research.curated.corpus import Corpus
 from research.curated.pipeline import replay
-from research.curated.review import Proposal
+from research.curated.review import Proposal, parse_expression, parse_proposal
 
 
 def digest(path: Path) -> str:
@@ -112,43 +112,135 @@ def replay_fixture(fixture_path: Path, scratch: Path) -> dict[str, Any]:
         index.unlink(missing_ok=True)
 
 
-def replay_private(case_path: Path, index: Path, *, maximum: int | None = 4) -> dict[str, Any]:
-    """Replay one preserved case record; no private text is printed."""
-    record = json.loads(case_path.read_text(encoding="utf-8"))
-    original = record.get("original")
-    decisions = record.get("decisions")
-    if not isinstance(original, str) or not isinstance(decisions, list):
-        raise ValueError("private case record lacks original/decisions")
+class ReplayEvidenceError(ValueError):
+    """A saved record is incomplete or unverifiable; replay fails closed."""
+
+
+def _record_payload(record: dict[str, Any]) -> dict[str, Any]:
+    payload = record.get("input")
+    if isinstance(payload, dict):
+        merged = dict(payload)
+        merged.update({key: value for key, value in record.items() if key != "input"})
+        return merged
+    return record
+
+
+def _proposal(value: Any, *, retry: bool = False) -> Proposal:
+    if isinstance(value, Proposal):
+        return value
+    if isinstance(value, str):
+        value = json.loads(value)
+    if isinstance(value, dict) and set(value) == {"keep", "replacement", "needs_wider_edit"}:
+        return Proposal(bool(value["keep"]), value["replacement"], bool(value["needs_wider_edit"]))
+    return parse_expression(value) if retry else parse_proposal(value)
+
+
+def _saved_original(record: dict[str, Any]) -> str:
+    for key in ("original", "source", "document", "text", "input"):
+        value = record.get(key)
+        if isinstance(value, str):
+            return value
+    raise ReplayEvidenceError("saved record lacks a complete original document")
+
+
+def _saved_decisions(record: dict[str, Any]) -> list[dict[str, Any]]:
+    for key in ("decisions", "first_decisions", "proposal_decisions"):
+        value = record.get(key)
+        if isinstance(value, list) and all(isinstance(item, dict) for item in value):
+            return value
+    raise ReplayEvidenceError("saved record lacks first-stage decisions")
+
+
+def _decision_offset(decision: dict[str, Any]) -> str:
+    for source in (decision, decision.get("candidate"), decision.get("span")):
+        if isinstance(source, dict):
+            value = source.get("start")
+            if isinstance(value, int) and value >= 0:
+                return str(value)
+    raise ReplayEvidenceError("saved decision lacks an original-coordinate start")
+
+
+def _nested_proposal(value: Any) -> Any:
+    if isinstance(value, dict) and "proposal" in value and not {"keep", "replacement", "needs_wider_edit"}.issubset(value):
+        return value["proposal"]
+    return value
+
+
+def _saved_proposal(decision: dict[str, Any], names: tuple[str, ...], *, retry: bool = False) -> Any:
+    for name in names:
+        if name in decision and decision[name] is not None:
+            return _nested_proposal(decision[name])
+    stages = decision.get("stages")
+    if isinstance(stages, dict):
+        stage = stages.get("retry" if retry else "first")
+        if stage is not None:
+            return _nested_proposal(stage)
+    return None
+
+
+def _saved_english(record: dict[str, Any]) -> dict[str, float]:
+    raw = record.get("english_evidence", record.get("english"))
+    if raw is None:
+        return {}
+    values = raw.values() if isinstance(raw, dict) else raw if isinstance(raw, list) else ()
+    frequencies: dict[str, float] = {}
+    for item in values:
+        if not isinstance(item, dict):
+            raise ReplayEvidenceError("English evidence entry is not an object")
+        policy = item.get("english_evidence", item)
+        key = policy.get("casefolded_target") or policy.get("target_key")
+        frequency = policy.get("english_frequency")
+        if not isinstance(key, str):
+            raise ReplayEvidenceError("English evidence is missing a numeric value; zero is not a substitute")
+        if frequency is None and policy.get("english_classification") == "NOT_QUERIED_SLOVENE_AVAILABLE":
+            continue
+        if not isinstance(frequency, (int, float)):
+            raise ReplayEvidenceError("English evidence is missing a numeric value; zero is not a substitute")
+        frequencies[key.casefold()] = float(frequency)
+    return frequencies
+
+
+def replay_saved_record(record: dict[str, Any], index: Path, *, record_name: str = "saved") -> dict[str, Any]:
+    """Replay small-study or campaign input/decisions with zero model calls."""
+    record = _record_payload(record)
+    original = _saved_original(record)
+    decisions = _saved_decisions(record)
+    detector = record.get("detector") if isinstance(record.get("detector"), dict) else {}
+    marker = record["maximum"] if "maximum" in record else detector.get("maximum", _MISSING)
+    if marker is _MISSING:
+        raise ReplayEvidenceError("saved detector maximum/uncapped setting is missing")
+    if marker is not None and (not isinstance(marker, int) or isinstance(marker, bool) or marker < 0):
+        raise ReplayEvidenceError("saved detector maximum is invalid")
     proposals: dict[str, Proposal] = {}
     retries: dict[str, Proposal] = {}
-    frequencies: dict[str, float] = {}
+    frequencies = _saved_english(record)
     for decision in decisions:
-        candidate = decision["candidate"]
-        key = str(candidate["start"])
-        raw = decision.get("first_proposal_raw") or decision.get("first_proposal")
+        key = _decision_offset(decision)
+        raw = _saved_proposal(decision, ("first_proposal_raw", "first_proposal", "first", "proposal"))
         if raw is not None:
-            proposals[key] = Proposal(bool(raw["keep"]), raw.get("replacement"), bool(raw["needs_wider_edit"]))
-        retry = decision.get("retry_proposal_raw")
+            proposals[key] = _proposal(raw)
+        retry = _saved_proposal(decision, ("retry_proposal_raw", "retry_proposal", "retry", "retry_decision"), retry=True)
         if retry is not None:
-            retries[key] = Proposal(False, retry.get("replacement"), False)
-    for evidence in record.get("english_evidence", []):
-        policy = evidence.get("english_evidence", evidence)
-        if policy.get("english_frequency") is not None:
-            frequencies[policy["casefolded_target"]] = policy["english_frequency"]
+            retries[key] = _proposal(retry, retry=True)
+
+    def english_lookup(word: str) -> float:
+        key = word.casefold()
+        if key not in frequencies:
+            raise ReplayEvidenceError("English evidence missing for an evaluated target; zero is not inferred")
+        return frequencies[key]
+
     with Corpus(index) as corpus:
-        result = replay(
-            original,
-            corpus,
-            lambda word: frequencies.get(word, 0.0),
-            proposals,
-            retries,
-            maximum=maximum,
-        )
-    expected = record.get("corrected", record.get("output"))
+        result = replay(original, corpus, english_lookup, proposals, retries, maximum=marker)
+    expected = record.get("corrected", record.get("output", record.get("final")))
     if not isinstance(expected, str) or result["output"] != expected:
-        raise ValueError("private replay output mismatch")
+        raise ReplayEvidenceError("private replay output mismatch or expected output is absent")
     return {
-        "case": case_path.stem,
+        "case": record_name,
+        "schema": "campaign-input-decisions" if "input" in record else "original-decisions",
+        "detector_maximum": marker,
+        "first_stage_decisions": len(proposals),
+        "retry_stage_decisions": len(retries),
+        "english_values": len(frequencies),
         "output_sha256": hashlib.sha256(result["output"].encode()).hexdigest(),
         "detector_candidates": len(result["detector"]["candidates"]),
         "review_calls": result["review_calls"],
@@ -158,12 +250,32 @@ def replay_private(case_path: Path, index: Path, *, maximum: int | None = 4) -> 
     }
 
 
+_MISSING = object()
+
+
+def replay_private(case_path: Path, index: Path, *, maximum: int | None = None) -> dict[str, Any]:
+    """Replay one saved record or a fail-closed collection of records."""
+    document = json.loads(case_path.read_text(encoding="utf-8"))
+    if not isinstance(document, dict):
+        raise ReplayEvidenceError("saved replay document must be an object")
+    rows = document.get("records", document.get("cases"))
+    if isinstance(rows, list):
+        receipts = [replay_saved_record(item, index, record_name=f"{case_path.stem}:{i}") for i, item in enumerate(rows) if isinstance(item, dict)]
+        if len(receipts) != len(rows):
+            raise ReplayEvidenceError("saved replay collection contains a non-object record")
+        return {"records": len(receipts), "receipts": receipts, "network_calls": 0, "model_calls": 0}
+    if maximum is not None and "maximum" not in document and "detector" not in document:
+        document = {**document, "maximum": maximum}
+    return replay_saved_record(document, index, record_name=case_path.stem)
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--fixture", type=Path, default=Path("research/fixtures/replay.json"))
     parser.add_argument("--scratch", type=Path, default=None)
     parser.add_argument("--private-root", type=Path)
     parser.add_argument("--private-case", type=Path)
+    parser.add_argument("--saved-record", type=Path, help="small-study or campaign input/decisions JSON")
     parser.add_argument("--index", type=Path)
     parser.add_argument("--manifest", type=Path)
     parser.add_argument("--limit", type=int)
@@ -172,10 +284,11 @@ def main(argv: list[str] | None = None) -> int:
     if scratch is None:
         raise SystemExit("--scratch or TMPDIR is required; a system temporary directory is not an allowed fallback")
     outputs: dict[str, Any] = {"network_calls": 0, "model_calls": 0}
-    if args.private_case or args.index:
-        if not args.private_case or not args.index:
-            raise SystemExit("--private-case and --index must be supplied together")
-        outputs["private_replay"] = replay_private(args.private_case, args.index)
+    case = args.saved_record or args.private_case
+    if case or args.index:
+        if not case or not args.index:
+            raise SystemExit("--saved-record/--private-case and --index must be supplied together")
+        outputs["private_replay"] = replay_private(case, args.index)
     else:
         outputs["synthetic_replay"] = replay_fixture(args.fixture, scratch / "replay")
     if args.manifest:

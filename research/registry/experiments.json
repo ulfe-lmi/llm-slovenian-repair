@@ -1,8 +1,9 @@
 {
-  "schema_version": 2,
-  "scope": "all enumerated experiment and recovery roots plus one non-benchmark diagnostic",
+  "schema_version": 3,
+  "scope": "all enumerated experiment and recovery roots plus stable child runs/phases and one non-benchmark diagnostic",
   "source_closure": "research/registry/source-manifest.json",
   "numeric_projections": "research/results/*.json.gz",
+  "publication_projections": "research/reports/*.md and research/configs/*.json",
   "experiments": [
     {
       "id": "007-b-replacement",
@@ -14,6 +15,22 @@
       "experiment_id": "007-b-replacement",
       "logical_root": "recovery-executions/007-b-human-replacement-20260909.MnH1Qb",
       "evidence_status": "enumerated-root",
+      "public_report": "research/reports/007-b-replacement.md",
+      "public_configuration": "research/configs/007-b-replacement.json",
+      "public_metrics": "research/results/study-evidence.json.gz",
+      "source_manifest": "research/registry/source-manifest.json",
+      "child_runs": [
+        {
+          "id": "007-b-replacement/heldout",
+          "kind": "recovery-stage",
+          "status": "RECORDED",
+          "source_hash": "310c07d5b73c8e26ddcce444e4407009c3e30db406c336115c3b2c5dfcf4cf60",
+          "result_hash": null,
+          "metrics": {},
+          "public_report": "research/reports/007-b-replacement.md#heldout",
+          "public_configuration": "research/configs/007-b-replacement.json"
+        }
+      ],
       "frozen_choices": {
         "source": "preserved original source identity; curated copies are portability-only projections",
         "model_calls_during_curation": 0,
@@ -81,6 +98,22 @@
       "experiment_id": "007-b-timeout300",
       "logical_root": "recovery-executions/007-b-human-timeout300-20260909.NWGrtX",
       "evidence_status": "enumerated-root",
+      "public_report": "research/reports/007-b-timeout300.md",
+      "public_configuration": "research/configs/007-b-timeout300.json",
+      "public_metrics": "research/results/study-evidence.json.gz",
+      "source_manifest": "research/registry/source-manifest.json",
+      "child_runs": [
+        {
+          "id": "007-b-timeout300/heldout",
+          "kind": "recovery-stage",
+          "status": "RECORDED",
+          "source_hash": "53580ef330f3f95154871d6bd813cfc335677a8eda4ec7e6937627cf19030d92",
+          "result_hash": "390eaa71ee64f0d70572af0829184e924e8cfed1bae0d2d98a6f6b742846d4bb",
+          "metrics": {},
+          "public_report": "research/reports/007-b-timeout300.md#heldout",
+          "public_configuration": "research/configs/007-b-timeout300.json"
+        }
+      ],
       "frozen_choices": {
         "source": "preserved original source identity; curated copies are portability-only projections",
         "model_calls_during_curation": 0,
@@ -220,6 +253,11 @@
       "experiment_id": "nonthinking-mechanical",
       "logical_root": "experiments/nonthinking-mechanical-20260909.5m8LKG",
       "evidence_status": "enumerated-root",
+      "public_report": "research/reports/nonthinking-mechanical.md",
+      "public_configuration": "research/configs/nonthinking-mechanical.json",
+      "public_metrics": "research/results/study-evidence.json.gz",
+      "source_manifest": "research/registry/source-manifest.json",
+      "child_runs": [],
       "frozen_choices": {
         "source": "preserved original source identity; curated copies are portability-only projections",
         "model_calls_during_curation": 0,
@@ -308,6 +346,11 @@
       "experiment_id": "low-thinking-mechanical",
       "logical_root": "experiments/low-thinking-mechanical-20260909.Ih2OFD",
       "evidence_status": "enumerated-root",
+      "public_report": "research/reports/low-thinking-mechanical.md",
+      "public_configuration": "research/configs/low-thinking-mechanical.json",
+      "public_metrics": "research/results/study-evidence.json.gz",
+      "source_manifest": "research/registry/source-manifest.json",
+      "child_runs": [],
       "frozen_choices": {
         "source": "preserved original source identity; curated copies are portability-only projections",
         "model_calls_during_curation": 0,
@@ -396,6 +439,11 @@
       "experiment_id": "high-thinking-mechanical",
       "logical_root": "experiments/high-thinking-mechanical-20260909.50kTrN",
       "evidence_status": "enumerated-root",
+      "public_report": "research/reports/high-thinking-mechanical.md",
+      "public_configuration": "research/configs/high-thinking-mechanical.json",
+      "public_metrics": "research/results/study-evidence.json.gz",
+      "source_manifest": "research/registry/source-manifest.json",
+      "child_runs": [],
       "frozen_choices": {
         "source": "preserved original source identity; curated copies are portability-only projections",
         "model_calls_during_curation": 0,
@@ -463,6 +511,11 @@
       "experiment_id": "xhigh-thinking-mechanical",
       "logical_root": "experiments/xhigh-thinking-mechanical-20260909.ZsPBb5",
       "evidence_status": "enumerated-root",
+      "public_report": "research/reports/xhigh-thinking-mechanical.md",
+      "public_configuration": "research/configs/xhigh-thinking-mechanical.json",
+      "public_metrics": "research/results/study-evidence.json.gz",
+      "source_manifest": "research/registry/source-manifest.json",
+      "child_runs": [],
       "frozen_choices": {
         "source": "preserved original source identity; curated copies are portability-only projections",
         "model_calls_during_curation": 0,
@@ -557,6 +610,11 @@
       "experiment_id": "low-plus-validator",
       "logical_root": "experiments/low-plus-validator-20260909.eKAYe6",
       "evidence_status": "enumerated-root",
+      "public_report": "research/reports/low-plus-validator.md",
+      "public_configuration": "research/configs/low-plus-validator.json",
+      "public_metrics": "research/results/study-evidence.json.gz",
+      "source_manifest": "research/registry/source-manifest.json",
+      "child_runs": [],
       "frozen_choices": {
         "source": "preserved original source identity; curated copies are portability-only projections",
         "model_calls_during_curation": 0,
@@ -649,12 +707,17 @@
       "id": "low-unigram-retry",
       "root": "experiments/low-unigram-retry-20260909.Wb0TI7",
       "kind": "variant",
-      "variation": "low-thinking unigram post-check and one corrective retry",
+      "variation": "low-thinking unigram post-check and one contextual JSON corrective retry",
       "status": "COMPLETED",
-      "question": "What changed when unigram-uncertain proposals received one word-only retry?",
+      "question": "What changed when unigram-uncertain proposals received one contextual corrective retry?",
       "experiment_id": "low-unigram-retry",
       "logical_root": "experiments/low-unigram-retry-20260909.Wb0TI7",
       "evidence_status": "enumerated-root",
+      "public_report": "research/reports/low-unigram-retry.md",
+      "public_configuration": "research/configs/low-unigram-retry.json",
+      "public_metrics": "research/results/study-evidence.json.gz",
+      "source_manifest": "research/registry/source-manifest.json",
+      "child_runs": [],
       "frozen_choices": {
         "source": "preserved original source identity; curated copies are portability-only projections",
         "model_calls_during_curation": 0,
@@ -755,6 +818,11 @@
       "experiment_id": "low-word-only-retry",
       "logical_root": "experiments/low-word-only-retry-20260909.0Hk0P9",
       "evidence_status": "enumerated-root",
+      "public_report": "research/reports/low-word-only-retry.md",
+      "public_configuration": "research/configs/low-word-only-retry.json",
+      "public_metrics": "research/results/study-evidence.json.gz",
+      "source_manifest": "research/registry/source-manifest.json",
+      "child_runs": [],
       "frozen_choices": {
         "source": "preserved original source identity; curated copies are portability-only projections",
         "model_calls_during_curation": 0,
@@ -840,6 +908,11 @@
       "experiment_id": "full-hyphen-space-low",
       "logical_root": "experiments/full-hyphen-space-low-20260909.12wKze",
       "evidence_status": "enumerated-root",
+      "public_report": "research/reports/full-hyphen-space-low.md",
+      "public_configuration": "research/configs/full-hyphen-space-low.json",
+      "public_metrics": "research/results/study-evidence.json.gz",
+      "source_manifest": "research/registry/source-manifest.json",
+      "child_runs": [],
       "frozen_choices": {
         "source": "preserved original source identity; curated copies are portability-only projections",
         "model_calls_during_curation": 0,
@@ -955,6 +1028,11 @@
       "experiment_id": "full-hyphen-case-low",
       "logical_root": "experiments/full-hyphen-case-low-20260909.IFYupt",
       "evidence_status": "enumerated-root",
+      "public_report": "research/reports/full-hyphen-case-low.md",
+      "public_configuration": "research/configs/full-hyphen-case-low.json",
+      "public_metrics": "research/results/study-evidence.json.gz",
+      "source_manifest": "research/registry/source-manifest.json",
+      "child_runs": [],
       "frozen_choices": {
         "source": "preserved original source identity; curated copies are portability-only projections",
         "model_calls_during_curation": 0,
@@ -1076,6 +1154,194 @@
       "experiment_id": "ten-run-initial-case-low",
       "logical_root": "experiments/ten-run-initial-case-low-20260909.87bzTW",
       "evidence_status": "enumerated-root",
+      "public_report": "research/reports/ten-run-initial-case-low.md",
+      "public_configuration": "research/configs/ten-run-initial-case-low.json",
+      "public_metrics": "research/results/study-evidence.json.gz",
+      "source_manifest": "research/registry/source-manifest.json",
+      "child_runs": [
+        {
+          "id": "ten-run-initial-case-low/01",
+          "kind": "trial",
+          "status": "COMPLETED",
+          "source_hash": "bcd1195b428bf432445b9a554620dcd2764a07afc6e3ba13f9fde3b8e4ce61fa",
+          "result_hash": "5a48daf24c6d393fcb1d9c84f516ac504d2b755e51ce1e731a4a5ac0c1fc898d",
+          "metrics": {
+            "applied_edits": 4,
+            "changed_controls": 0,
+            "exact_gold_repairs": 3,
+            "first_calls": 9,
+            "model_calls": 10,
+            "retry_calls": 1,
+            "status": "COMPLETED"
+          },
+          "public_report": "research/reports/ten-run-initial-case-low.md#trial-01",
+          "public_configuration": "research/configs/ten-run-initial-case-low.json"
+        },
+        {
+          "id": "ten-run-initial-case-low/02",
+          "kind": "trial",
+          "status": "COMPLETED",
+          "source_hash": "bcd1195b428bf432445b9a554620dcd2764a07afc6e3ba13f9fde3b8e4ce61fa",
+          "result_hash": "3dac8bbb4489af32f2fa1152ef6166e4a204e78a88e45ec2f352e386a42da178",
+          "metrics": {
+            "applied_edits": 3,
+            "changed_controls": 0,
+            "exact_gold_repairs": 2,
+            "first_calls": 9,
+            "model_calls": 10,
+            "retry_calls": 1,
+            "status": "COMPLETED"
+          },
+          "public_report": "research/reports/ten-run-initial-case-low.md#trial-02",
+          "public_configuration": "research/configs/ten-run-initial-case-low.json"
+        },
+        {
+          "id": "ten-run-initial-case-low/03",
+          "kind": "trial",
+          "status": "COMPLETED",
+          "source_hash": "bcd1195b428bf432445b9a554620dcd2764a07afc6e3ba13f9fde3b8e4ce61fa",
+          "result_hash": "a1ca734737b09b1e2da67d60c6f8e355382cf4d37572a25dc7e04092ad570782",
+          "metrics": {
+            "applied_edits": 3,
+            "changed_controls": 0,
+            "exact_gold_repairs": 2,
+            "first_calls": 9,
+            "model_calls": 10,
+            "retry_calls": 1,
+            "status": "COMPLETED"
+          },
+          "public_report": "research/reports/ten-run-initial-case-low.md#trial-03",
+          "public_configuration": "research/configs/ten-run-initial-case-low.json"
+        },
+        {
+          "id": "ten-run-initial-case-low/04",
+          "kind": "trial",
+          "status": "COMPLETED",
+          "source_hash": "bcd1195b428bf432445b9a554620dcd2764a07afc6e3ba13f9fde3b8e4ce61fa",
+          "result_hash": "9dc80240ac8a8ab9f1a70222707b7c5df4b91cf1ef38125f6cc0bca6da2b9da3",
+          "metrics": {
+            "applied_edits": 6,
+            "changed_controls": 1,
+            "exact_gold_repairs": 4,
+            "first_calls": 9,
+            "model_calls": 10,
+            "retry_calls": 1,
+            "status": "COMPLETED"
+          },
+          "public_report": "research/reports/ten-run-initial-case-low.md#trial-04",
+          "public_configuration": "research/configs/ten-run-initial-case-low.json"
+        },
+        {
+          "id": "ten-run-initial-case-low/05",
+          "kind": "trial",
+          "status": "COMPLETED",
+          "source_hash": "bcd1195b428bf432445b9a554620dcd2764a07afc6e3ba13f9fde3b8e4ce61fa",
+          "result_hash": "d8129ffdaa54224feaf51b46b5c3c70bb534ed9dc97b93a8a213e34dcfd625a9",
+          "metrics": {
+            "applied_edits": 3,
+            "changed_controls": 0,
+            "exact_gold_repairs": 2,
+            "first_calls": 9,
+            "model_calls": 9,
+            "retry_calls": 0,
+            "status": "COMPLETED"
+          },
+          "public_report": "research/reports/ten-run-initial-case-low.md#trial-05",
+          "public_configuration": "research/configs/ten-run-initial-case-low.json"
+        },
+        {
+          "id": "ten-run-initial-case-low/06",
+          "kind": "trial",
+          "status": "STOPPED",
+          "source_hash": "bcd1195b428bf432445b9a554620dcd2764a07afc6e3ba13f9fde3b8e4ce61fa",
+          "result_hash": "7155324e3ab95f906c073ba5bbec1754f3617cee5e021d0aab7298d22568e1bc",
+          "metrics": {
+            "applied_edits": null,
+            "changed_controls": null,
+            "exact_gold_repairs": null,
+            "first_calls": 9,
+            "model_calls": 10,
+            "retry_calls": 1,
+            "status": "STOPPED"
+          },
+          "public_report": "research/reports/ten-run-initial-case-low.md#trial-06",
+          "public_configuration": "research/configs/ten-run-initial-case-low.json",
+          "stopped_reason": "contradictory reply"
+        },
+        {
+          "id": "ten-run-initial-case-low/07",
+          "kind": "trial",
+          "status": "COMPLETED",
+          "source_hash": "bcd1195b428bf432445b9a554620dcd2764a07afc6e3ba13f9fde3b8e4ce61fa",
+          "result_hash": "b9e3f30ed48d10d2c5c8d36a9ad0ac49a419100ffe76d634b35b21b0dff853e1",
+          "metrics": {
+            "applied_edits": 4,
+            "changed_controls": 0,
+            "exact_gold_repairs": 3,
+            "first_calls": 9,
+            "model_calls": 10,
+            "retry_calls": 1,
+            "status": "COMPLETED"
+          },
+          "public_report": "research/reports/ten-run-initial-case-low.md#trial-07",
+          "public_configuration": "research/configs/ten-run-initial-case-low.json"
+        },
+        {
+          "id": "ten-run-initial-case-low/08",
+          "kind": "trial",
+          "status": "COMPLETED",
+          "source_hash": "bcd1195b428bf432445b9a554620dcd2764a07afc6e3ba13f9fde3b8e4ce61fa",
+          "result_hash": "089b9980b4da61abb058cc84f8684f15743f282dbc9e90250fde17aa4b72c612",
+          "metrics": {
+            "applied_edits": 4,
+            "changed_controls": 1,
+            "exact_gold_repairs": 2,
+            "first_calls": 9,
+            "model_calls": 11,
+            "retry_calls": 2,
+            "status": "COMPLETED"
+          },
+          "public_report": "research/reports/ten-run-initial-case-low.md#trial-08",
+          "public_configuration": "research/configs/ten-run-initial-case-low.json"
+        },
+        {
+          "id": "ten-run-initial-case-low/09",
+          "kind": "trial",
+          "status": "STOPPED",
+          "source_hash": "bcd1195b428bf432445b9a554620dcd2764a07afc6e3ba13f9fde3b8e4ce61fa",
+          "result_hash": "eb3a47b515891c9ae737cc6b305f5fea6f532a90991eab9e36d2beabab68a540",
+          "metrics": {
+            "applied_edits": null,
+            "changed_controls": null,
+            "exact_gold_repairs": null,
+            "first_calls": 6,
+            "model_calls": 7,
+            "retry_calls": 1,
+            "status": "STOPPED"
+          },
+          "public_report": "research/reports/ten-run-initial-case-low.md#trial-09",
+          "public_configuration": "research/configs/ten-run-initial-case-low.json",
+          "stopped_reason": "unchanged word-only input contract: word-only input requires one rejected word"
+        },
+        {
+          "id": "ten-run-initial-case-low/10",
+          "kind": "trial",
+          "status": "COMPLETED",
+          "source_hash": "bcd1195b428bf432445b9a554620dcd2764a07afc6e3ba13f9fde3b8e4ce61fa",
+          "result_hash": "0d7053098309b84a5420505ee4c7e6619c00be9e78611b3dd08f48190707c08c",
+          "metrics": {
+            "applied_edits": 4,
+            "changed_controls": 0,
+            "exact_gold_repairs": 3,
+            "first_calls": 9,
+            "model_calls": 10,
+            "retry_calls": 1,
+            "status": "COMPLETED"
+          },
+          "public_report": "research/reports/ten-run-initial-case-low.md#trial-10",
+          "public_configuration": "research/configs/ten-run-initial-case-low.json"
+        }
+      ],
       "frozen_choices": {
         "source": "preserved original source identity; curated copies are portability-only projections",
         "model_calls_during_curation": 0,
@@ -1282,6 +1548,193 @@
       "experiment_id": "ten-run-expression-retry-low",
       "logical_root": "experiments/ten-run-expression-retry-low-20260909.xJhqYm",
       "evidence_status": "enumerated-root",
+      "public_report": "research/reports/ten-run-expression-retry-low.md",
+      "public_configuration": "research/configs/ten-run-expression-retry-low.json",
+      "public_metrics": "research/results/study-evidence.json.gz",
+      "source_manifest": "research/registry/source-manifest.json",
+      "child_runs": [
+        {
+          "id": "ten-run-expression-retry-low/01",
+          "kind": "trial",
+          "status": "COMPLETED",
+          "source_hash": "3ce7d962d95af6d836ebcf268df9d79811c17db95a606bd30c54f6e6ac558249",
+          "result_hash": "6a43e57912e7e494ec9ad3a60c04f1fd65fff67cf6911fc0d9df8c1ddbf38f45",
+          "metrics": {
+            "applied_edits": 3,
+            "changed_controls": 0,
+            "exact_gold_repairs": 2,
+            "first_calls": 9,
+            "model_calls": 10,
+            "retry_calls": 1,
+            "status": "COMPLETED"
+          },
+          "public_report": "research/reports/ten-run-expression-retry-low.md#trial-01",
+          "public_configuration": "research/configs/ten-run-expression-retry-low.json"
+        },
+        {
+          "id": "ten-run-expression-retry-low/02",
+          "kind": "trial",
+          "status": "STOPPED",
+          "source_hash": "3ce7d962d95af6d836ebcf268df9d79811c17db95a606bd30c54f6e6ac558249",
+          "result_hash": "dc017671fdb02df5a85213c1a59591c8f02e086ff0d828ef07d9bf64bee39e12",
+          "metrics": {
+            "applied_edits": null,
+            "changed_controls": null,
+            "exact_gold_repairs": null,
+            "first_calls": 9,
+            "model_calls": 11,
+            "retry_calls": 2,
+            "status": "STOPPED"
+          },
+          "public_report": "research/reports/ten-run-expression-retry-low.md#trial-02",
+          "public_configuration": "research/configs/ten-run-expression-retry-low.json",
+          "stopped_reason": "contradictory reply"
+        },
+        {
+          "id": "ten-run-expression-retry-low/03",
+          "kind": "trial",
+          "status": "COMPLETED",
+          "source_hash": "3ce7d962d95af6d836ebcf268df9d79811c17db95a606bd30c54f6e6ac558249",
+          "result_hash": "4ec0b9a9c6f8c3cee28527eede6d0f9895bd1ea01099f048a0424de1d6589833",
+          "metrics": {
+            "applied_edits": 3,
+            "changed_controls": 0,
+            "exact_gold_repairs": 2,
+            "first_calls": 9,
+            "model_calls": 10,
+            "retry_calls": 1,
+            "status": "COMPLETED"
+          },
+          "public_report": "research/reports/ten-run-expression-retry-low.md#trial-03",
+          "public_configuration": "research/configs/ten-run-expression-retry-low.json"
+        },
+        {
+          "id": "ten-run-expression-retry-low/04",
+          "kind": "trial",
+          "status": "COMPLETED",
+          "source_hash": "3ce7d962d95af6d836ebcf268df9d79811c17db95a606bd30c54f6e6ac558249",
+          "result_hash": "a43dcd8e470e09fbba4b66ee853cf2ccf1a36a907a06453a9678bb66ed649948",
+          "metrics": {
+            "applied_edits": 4,
+            "changed_controls": 0,
+            "exact_gold_repairs": 3,
+            "first_calls": 9,
+            "model_calls": 10,
+            "retry_calls": 1,
+            "status": "COMPLETED"
+          },
+          "public_report": "research/reports/ten-run-expression-retry-low.md#trial-04",
+          "public_configuration": "research/configs/ten-run-expression-retry-low.json"
+        },
+        {
+          "id": "ten-run-expression-retry-low/05",
+          "kind": "trial",
+          "status": "COMPLETED",
+          "source_hash": "3ce7d962d95af6d836ebcf268df9d79811c17db95a606bd30c54f6e6ac558249",
+          "result_hash": "519d045bee878fa6f914b87b55ed5819dd08a1e46bf7cc7effe5fb63ed8358c3",
+          "metrics": {
+            "applied_edits": 7,
+            "changed_controls": 1,
+            "exact_gold_repairs": 5,
+            "first_calls": 9,
+            "model_calls": 11,
+            "retry_calls": 2,
+            "status": "COMPLETED"
+          },
+          "public_report": "research/reports/ten-run-expression-retry-low.md#trial-05",
+          "public_configuration": "research/configs/ten-run-expression-retry-low.json"
+        },
+        {
+          "id": "ten-run-expression-retry-low/06",
+          "kind": "trial",
+          "status": "COMPLETED",
+          "source_hash": "3ce7d962d95af6d836ebcf268df9d79811c17db95a606bd30c54f6e6ac558249",
+          "result_hash": "9e179ddfa4cda478bce3a2c0275ccc2a39011af193cb5fb3b18cab5ea745d2d8",
+          "metrics": {
+            "applied_edits": 6,
+            "changed_controls": 1,
+            "exact_gold_repairs": 4,
+            "first_calls": 9,
+            "model_calls": 11,
+            "retry_calls": 2,
+            "status": "COMPLETED"
+          },
+          "public_report": "research/reports/ten-run-expression-retry-low.md#trial-06",
+          "public_configuration": "research/configs/ten-run-expression-retry-low.json"
+        },
+        {
+          "id": "ten-run-expression-retry-low/07",
+          "kind": "trial",
+          "status": "COMPLETED",
+          "source_hash": "3ce7d962d95af6d836ebcf268df9d79811c17db95a606bd30c54f6e6ac558249",
+          "result_hash": "d1127cb7afdc04a3692615642163303382e730343abc63d082c81c9ce5a24685",
+          "metrics": {
+            "applied_edits": 6,
+            "changed_controls": 1,
+            "exact_gold_repairs": 4,
+            "first_calls": 9,
+            "model_calls": 10,
+            "retry_calls": 1,
+            "status": "COMPLETED"
+          },
+          "public_report": "research/reports/ten-run-expression-retry-low.md#trial-07",
+          "public_configuration": "research/configs/ten-run-expression-retry-low.json"
+        },
+        {
+          "id": "ten-run-expression-retry-low/08",
+          "kind": "trial",
+          "status": "COMPLETED",
+          "source_hash": "3ce7d962d95af6d836ebcf268df9d79811c17db95a606bd30c54f6e6ac558249",
+          "result_hash": "d37101d55c64311ffe2ca5d2abfe307ed75bba6059c73e3a9b2b9fa782a75771",
+          "metrics": {
+            "applied_edits": 5,
+            "changed_controls": 1,
+            "exact_gold_repairs": 2,
+            "first_calls": 9,
+            "model_calls": 11,
+            "retry_calls": 2,
+            "status": "COMPLETED"
+          },
+          "public_report": "research/reports/ten-run-expression-retry-low.md#trial-08",
+          "public_configuration": "research/configs/ten-run-expression-retry-low.json"
+        },
+        {
+          "id": "ten-run-expression-retry-low/09",
+          "kind": "trial",
+          "status": "COMPLETED",
+          "source_hash": "3ce7d962d95af6d836ebcf268df9d79811c17db95a606bd30c54f6e6ac558249",
+          "result_hash": "df40dc72d882f192a839ace3b6cab82b8bd1ba9c087fb6e9dcee13a4a631a947",
+          "metrics": {
+            "applied_edits": 4,
+            "changed_controls": 0,
+            "exact_gold_repairs": 3,
+            "first_calls": 9,
+            "model_calls": 9,
+            "retry_calls": 0,
+            "status": "COMPLETED"
+          },
+          "public_report": "research/reports/ten-run-expression-retry-low.md#trial-09",
+          "public_configuration": "research/configs/ten-run-expression-retry-low.json"
+        },
+        {
+          "id": "ten-run-expression-retry-low/10",
+          "kind": "trial",
+          "status": "COMPLETED",
+          "source_hash": "3ce7d962d95af6d836ebcf268df9d79811c17db95a606bd30c54f6e6ac558249",
+          "result_hash": "165b8e75df20fb8f0acbd05022d4a48860a0b5ffc7b8f64e272318edbcc36411",
+          "metrics": {
+            "applied_edits": 4,
+            "changed_controls": 0,
+            "exact_gold_repairs": 3,
+            "first_calls": 9,
+            "model_calls": 10,
+            "retry_calls": 1,
+            "status": "COMPLETED"
+          },
+          "public_report": "research/reports/ten-run-expression-retry-low.md#trial-10",
+          "public_configuration": "research/configs/ten-run-expression-retry-low.json"
+        }
+      ],
       "frozen_choices": {
         "source": "preserved original source identity; curated copies are portability-only projections",
         "model_calls_during_curation": 0,
@@ -1519,6 +1972,192 @@
       "experiment_id": "ten-run-english-preserve-low",
       "logical_root": "experiments/ten-run-english-preserve-low-20260909.AQnnRH",
       "evidence_status": "enumerated-root",
+      "public_report": "research/reports/ten-run-english-preserve-low.md",
+      "public_configuration": "research/configs/ten-run-english-preserve-low.json",
+      "public_metrics": "research/results/study-evidence.json.gz",
+      "source_manifest": "research/registry/source-manifest.json",
+      "child_runs": [
+        {
+          "id": "ten-run-english-preserve-low/01",
+          "kind": "trial",
+          "status": "COMPLETED",
+          "source_hash": "ff6e8a3fdeb727618e12c9ff8a449171a499eb97c950cda75283fc990f53ecb5",
+          "result_hash": "f95e12d85d6abc019d6a97500d93a18649702519256697db3ed1442ef3bf8ceb",
+          "metrics": {
+            "applied_edits": 4,
+            "changed_controls": 0,
+            "exact_gold_repairs": 3,
+            "first_calls": 8,
+            "model_calls": 9,
+            "retry_calls": 1,
+            "status": "COMPLETED"
+          },
+          "public_report": "research/reports/ten-run-english-preserve-low.md#trial-01",
+          "public_configuration": "research/configs/ten-run-english-preserve-low.json"
+        },
+        {
+          "id": "ten-run-english-preserve-low/02",
+          "kind": "trial",
+          "status": "COMPLETED",
+          "source_hash": "ff6e8a3fdeb727618e12c9ff8a449171a499eb97c950cda75283fc990f53ecb5",
+          "result_hash": "78ec2df7e5c681b9fa64cf35c4639a188f72f11f932bc89ac4b09b0134ad457c",
+          "metrics": {
+            "applied_edits": 4,
+            "changed_controls": 0,
+            "exact_gold_repairs": 3,
+            "first_calls": 8,
+            "model_calls": 10,
+            "retry_calls": 2,
+            "status": "COMPLETED"
+          },
+          "public_report": "research/reports/ten-run-english-preserve-low.md#trial-02",
+          "public_configuration": "research/configs/ten-run-english-preserve-low.json"
+        },
+        {
+          "id": "ten-run-english-preserve-low/03",
+          "kind": "trial",
+          "status": "COMPLETED",
+          "source_hash": "ff6e8a3fdeb727618e12c9ff8a449171a499eb97c950cda75283fc990f53ecb5",
+          "result_hash": "a2030157bb5df6f4589d3b79d92e6ebd769882bba0df6f644f3af75e5daffcfe",
+          "metrics": {
+            "applied_edits": 5,
+            "changed_controls": 0,
+            "exact_gold_repairs": 4,
+            "first_calls": 8,
+            "model_calls": 9,
+            "retry_calls": 1,
+            "status": "COMPLETED"
+          },
+          "public_report": "research/reports/ten-run-english-preserve-low.md#trial-03",
+          "public_configuration": "research/configs/ten-run-english-preserve-low.json"
+        },
+        {
+          "id": "ten-run-english-preserve-low/04",
+          "kind": "trial",
+          "status": "COMPLETED",
+          "source_hash": "ff6e8a3fdeb727618e12c9ff8a449171a499eb97c950cda75283fc990f53ecb5",
+          "result_hash": "6c663d6a167848b9d65b17ed7ab459bf8b920d6efac23b0262a5232eaf219274",
+          "metrics": {
+            "applied_edits": 5,
+            "changed_controls": 0,
+            "exact_gold_repairs": 3,
+            "first_calls": 8,
+            "model_calls": 9,
+            "retry_calls": 1,
+            "status": "COMPLETED"
+          },
+          "public_report": "research/reports/ten-run-english-preserve-low.md#trial-04",
+          "public_configuration": "research/configs/ten-run-english-preserve-low.json"
+        },
+        {
+          "id": "ten-run-english-preserve-low/05",
+          "kind": "trial",
+          "status": "COMPLETED",
+          "source_hash": "ff6e8a3fdeb727618e12c9ff8a449171a499eb97c950cda75283fc990f53ecb5",
+          "result_hash": "2d3fa9204e5834ed9be69e0155ad2e8f85e3af3d739e002dc937cfefa5bb06ed",
+          "metrics": {
+            "applied_edits": 4,
+            "changed_controls": 0,
+            "exact_gold_repairs": 2,
+            "first_calls": 8,
+            "model_calls": 10,
+            "retry_calls": 2,
+            "status": "COMPLETED"
+          },
+          "public_report": "research/reports/ten-run-english-preserve-low.md#trial-05",
+          "public_configuration": "research/configs/ten-run-english-preserve-low.json"
+        },
+        {
+          "id": "ten-run-english-preserve-low/06",
+          "kind": "trial",
+          "status": "COMPLETED",
+          "source_hash": "ff6e8a3fdeb727618e12c9ff8a449171a499eb97c950cda75283fc990f53ecb5",
+          "result_hash": "d0875562d7a28964e78896b2463b6b2ba6634157dfd98874817902be713a4bf7",
+          "metrics": {
+            "applied_edits": 3,
+            "changed_controls": 0,
+            "exact_gold_repairs": 2,
+            "first_calls": 8,
+            "model_calls": 9,
+            "retry_calls": 1,
+            "status": "COMPLETED"
+          },
+          "public_report": "research/reports/ten-run-english-preserve-low.md#trial-06",
+          "public_configuration": "research/configs/ten-run-english-preserve-low.json"
+        },
+        {
+          "id": "ten-run-english-preserve-low/07",
+          "kind": "trial",
+          "status": "COMPLETED",
+          "source_hash": "ff6e8a3fdeb727618e12c9ff8a449171a499eb97c950cda75283fc990f53ecb5",
+          "result_hash": "9ab410092f0a8494680d18051c7a46c53d723f2087d1ceb551f601a54bca4b10",
+          "metrics": {
+            "applied_edits": 3,
+            "changed_controls": 0,
+            "exact_gold_repairs": 2,
+            "first_calls": 8,
+            "model_calls": 10,
+            "retry_calls": 2,
+            "status": "COMPLETED"
+          },
+          "public_report": "research/reports/ten-run-english-preserve-low.md#trial-07",
+          "public_configuration": "research/configs/ten-run-english-preserve-low.json"
+        },
+        {
+          "id": "ten-run-english-preserve-low/08",
+          "kind": "trial",
+          "status": "COMPLETED",
+          "source_hash": "ff6e8a3fdeb727618e12c9ff8a449171a499eb97c950cda75283fc990f53ecb5",
+          "result_hash": "73547122a145c1b26425377324e29377a2e930d005027d17d97a17a2f242f9c5",
+          "metrics": {
+            "applied_edits": 5,
+            "changed_controls": 0,
+            "exact_gold_repairs": 4,
+            "first_calls": 8,
+            "model_calls": 9,
+            "retry_calls": 1,
+            "status": "COMPLETED"
+          },
+          "public_report": "research/reports/ten-run-english-preserve-low.md#trial-08",
+          "public_configuration": "research/configs/ten-run-english-preserve-low.json"
+        },
+        {
+          "id": "ten-run-english-preserve-low/09",
+          "kind": "trial",
+          "status": "COMPLETED",
+          "source_hash": "ff6e8a3fdeb727618e12c9ff8a449171a499eb97c950cda75283fc990f53ecb5",
+          "result_hash": "547a96a07f9641c87877a371e16a237e512930b61931db71b5b8c7b38e701817",
+          "metrics": {
+            "applied_edits": 3,
+            "changed_controls": 0,
+            "exact_gold_repairs": 2,
+            "first_calls": 8,
+            "model_calls": 10,
+            "retry_calls": 2,
+            "status": "COMPLETED"
+          },
+          "public_report": "research/reports/ten-run-english-preserve-low.md#trial-09",
+          "public_configuration": "research/configs/ten-run-english-preserve-low.json"
+        },
+        {
+          "id": "ten-run-english-preserve-low/10",
+          "kind": "trial",
+          "status": "COMPLETED",
+          "source_hash": "ff6e8a3fdeb727618e12c9ff8a449171a499eb97c950cda75283fc990f53ecb5",
+          "result_hash": "5077ac22fbc28cfbbff079b7bc5731ed5274104a4d8f847ab0ecf8867c93c427",
+          "metrics": {
+            "applied_edits": 2,
+            "changed_controls": 0,
+            "exact_gold_repairs": 2,
+            "first_calls": 8,
+            "model_calls": 10,
+            "retry_calls": 2,
+            "status": "COMPLETED"
+          },
+          "public_report": "research/reports/ten-run-english-preserve-low.md#trial-10",
+          "public_configuration": "research/configs/ten-run-english-preserve-low.json"
+        }
+      ],
       "frozen_choices": {
         "source": "preserved original source identity; curated copies are portability-only projections",
         "model_calls_during_curation": 0,
@@ -1802,6 +2441,36 @@
       "experiment_id": "large-evaluation-capped",
       "logical_root": "experiments/large-evaluation-20260909.ZowPyK",
       "evidence_status": "enumerated-root",
+      "public_report": "research/reports/large-evaluation-capped.md",
+      "public_configuration": "research/configs/large-evaluation-capped.json",
+      "public_metrics": "research/results/study-evidence.json.gz",
+      "source_manifest": "research/registry/source-manifest.json",
+      "child_runs": [
+        {
+          "id": "large-evaluation-capped/multigec-dev",
+          "kind": "phase",
+          "status": "RECORDED",
+          "source_hash": "babfbe225acdb3e8df1bd714fc04d85ba28448a888f16982ef23390638088c71",
+          "result_hash": "d34f0378d1ffa5d99d1404d63afb18863ae89c70f300ff00299c4f68483ef0ef",
+          "metrics": {
+            "model_calls": 0
+          },
+          "public_report": "research/reports/large-evaluation-capped.md#phase-multigec-dev",
+          "public_configuration": "research/configs/large-evaluation-capped.json"
+        },
+        {
+          "id": "large-evaluation-capped/multigec-train",
+          "kind": "phase",
+          "status": "RECORDED",
+          "source_hash": "babfbe225acdb3e8df1bd714fc04d85ba28448a888f16982ef23390638088c71",
+          "result_hash": "0fef6de78d17f4cfdf1bb89674139d33969c9aac296cacf9518013d830976b2f",
+          "metrics": {
+            "model_calls": 0
+          },
+          "public_report": "research/reports/large-evaluation-capped.md#phase-multigec-train",
+          "public_configuration": "research/configs/large-evaluation-capped.json"
+        }
+      ],
       "frozen_choices": {
         "source": "preserved original source identity; curated copies are portability-only projections",
         "model_calls_during_curation": 0,
@@ -2033,6 +2702,24 @@
       "experiment_id": "large-evaluation-uncapped",
       "logical_root": "experiments/large-evaluation-uncapped-20260910.faME3U",
       "evidence_status": "enumerated-root",
+      "public_report": "research/reports/large-evaluation-uncapped.md",
+      "public_configuration": "research/configs/large-evaluation-uncapped.json",
+      "public_metrics": "research/results/study-evidence.json.gz",
+      "source_manifest": "research/registry/source-manifest.json",
+      "child_runs": [
+        {
+          "id": "large-evaluation-uncapped/multigec-train",
+          "kind": "phase",
+          "status": "RECORDED",
+          "source_hash": "0687076994cc5fd31357fb1d15a1d63c6c15a4386b484edaa290fa0887b4614c",
+          "result_hash": "d0874fbd99b068a3347953a7eee709d1500e1126ee86fa3465244446fd23c4b1",
+          "metrics": {
+            "model_calls": 0
+          },
+          "public_report": "research/reports/large-evaluation-uncapped.md#phase-multigec-train",
+          "public_configuration": "research/configs/large-evaluation-uncapped.json"
+        }
+      ],
       "frozen_choices": {
         "source": "preserved original source identity; curated copies are portability-only projections",
         "model_calls_during_curation": 0,
@@ -2342,6 +3029,52 @@
       "experiment_id": "dassle-spelling-preparation",
       "logical_root": "experiments/dassle-spelling-preparation-20260910.whOa6K",
       "evidence_status": "enumerated-root",
+      "public_report": "research/reports/dassle-spelling-preparation.md",
+      "public_configuration": "research/configs/dassle-spelling-preparation.json",
+      "public_metrics": "research/results/study-evidence.json.gz",
+      "source_manifest": "research/registry/source-manifest.json",
+      "child_runs": [
+        {
+          "id": "dassle-spelling-preparation/preparation",
+          "kind": "stage",
+          "status": "RECORDED",
+          "source_hash": "1c414b39c9824cab71ddff4f76e02626739dad2f19f38a3042b52ac194bed039",
+          "result_hash": "07823b5eefb7cfce0ce241fb5de1259026eccd1c19a0a5c5d56e7cd22e4185ac",
+          "metrics": {},
+          "public_report": "research/reports/dassle-spelling-preparation.md#preparation",
+          "public_configuration": "research/configs/dassle-spelling-preparation.json"
+        },
+        {
+          "id": "dassle-spelling-preparation/parallel4",
+          "kind": "stage",
+          "status": "RECORDED",
+          "source_hash": "07823b5eefb7cfce0ce241fb5de1259026eccd1c19a0a5c5d56e7cd22e4185ac",
+          "result_hash": "07823b5eefb7cfce0ce241fb5de1259026eccd1c19a0a5c5d56e7cd22e4185ac",
+          "metrics": {},
+          "public_report": "research/reports/dassle-spelling-preparation.md#parallel4",
+          "public_configuration": "research/configs/dassle-spelling-preparation.json"
+        },
+        {
+          "id": "dassle-spelling-preparation/recovery",
+          "kind": "stage",
+          "status": "RECORDED",
+          "source_hash": "b8c5ee919bb23ebd6bb250eaa0c481e36c5762f05d1fd1175a8903d9c5d1ca38",
+          "result_hash": "07823b5eefb7cfce0ce241fb5de1259026eccd1c19a0a5c5d56e7cd22e4185ac",
+          "metrics": {},
+          "public_report": "research/reports/dassle-spelling-preparation.md#recovery",
+          "public_configuration": "research/configs/dassle-spelling-preparation.json"
+        },
+        {
+          "id": "dassle-spelling-preparation/final-scoring",
+          "kind": "stage",
+          "status": "RECORDED",
+          "source_hash": "d43005918bee30a84a452341a20fd7981814eb1ad5719152ac069a31dbd59560",
+          "result_hash": "07823b5eefb7cfce0ce241fb5de1259026eccd1c19a0a5c5d56e7cd22e4185ac",
+          "metrics": {},
+          "public_report": "research/reports/dassle-spelling-preparation.md#final-scoring",
+          "public_configuration": "research/configs/dassle-spelling-preparation.json"
+        }
+      ],
       "frozen_choices": {
         "source": "preserved original source identity; curated copies are portability-only projections",
         "model_calls_during_curation": 0,
@@ -2604,6 +3337,36 @@
       "experiment_id": "dassle-uv-audit",
       "logical_root": "experiments/dassle-uv-audit-20260911.BGeMLs",
       "evidence_status": "enumerated-root",
+      "public_report": "research/reports/dassle-uv-audit.md",
+      "public_configuration": "research/configs/dassle-uv-audit.json",
+      "public_metrics": "research/results/study-evidence.json.gz",
+      "source_manifest": "research/registry/source-manifest.json",
+      "child_runs": [
+        {
+          "id": "dassle-uv-audit/exhaustive-u-v",
+          "kind": "audit-view",
+          "status": "COMPLETE",
+          "source_hash": "6d6fb695d420e22ceda4664c20286242151acccce57c381e7abd26415e17b153",
+          "result_hash": "6d6fb695d420e22ceda4664c20286242151acccce57c381e7abd26415e17b153",
+          "metrics": {
+            "model_calls": 0
+          },
+          "public_report": "research/reports/dassle-uv-audit.md#exhaustive-u-v",
+          "public_configuration": "research/configs/dassle-uv-audit.json"
+        },
+        {
+          "id": "dassle-uv-audit/random-20",
+          "kind": "audit-view",
+          "status": "COMPLETE",
+          "source_hash": "3f7a6f50f83f5b3c3735cb91071abe4da39c53bbd612c88d9b381bbf0e6aa72c",
+          "result_hash": "6d6fb695d420e22ceda4664c20286242151acccce57c381e7abd26415e17b153",
+          "metrics": {
+            "model_calls": 0
+          },
+          "public_report": "research/reports/dassle-uv-audit.md#random-20",
+          "public_configuration": "research/configs/dassle-uv-audit.json"
+        }
+      ],
       "frozen_choices": {
         "source": "preserved original source identity; curated copies are portability-only projections",
         "model_calls_during_curation": 0,
@@ -2693,6 +3456,147 @@
       "experiment_id": "full-campaign8",
       "logical_root": "experiments/full-campaign8-20260911.XLAbaa",
       "evidence_status": "enumerated-root",
+      "public_report": "research/reports/full-campaign8.md",
+      "public_configuration": "research/configs/full-campaign8.json",
+      "public_metrics": "research/results/study-evidence.json.gz",
+      "source_manifest": "research/registry/source-manifest.json",
+      "child_runs": [
+        {
+          "id": "full-campaign8/dassle",
+          "kind": "phase",
+          "status": "COMPLETED",
+          "source_hash": "b8cf04f9b703d62ea3b9c75e1ac3b1ddf020840aea45fd47ac75c56159238ca1",
+          "result_hash": "e61efc4ffd8872d43a55b11040f5d8793eaceafa9783cbead053aab66195e56f",
+          "metrics": {
+            "examples": 7385,
+            "method_records": 29540,
+            "unique_call_records": 13158,
+            "new_model_calls": 9461
+          },
+          "public_report": "research/reports/full-campaign8.md#phase-dassle",
+          "public_configuration": "research/configs/full-campaign8.json"
+        },
+        {
+          "id": "full-campaign8/dassle-preservation",
+          "kind": "phase",
+          "status": "COMPLETED",
+          "source_hash": "b8cf04f9b703d62ea3b9c75e1ac3b1ddf020840aea45fd47ac75c56159238ca1",
+          "result_hash": "5912cffb293ae5729fde3d75c0f551b6588e10b0b9c0ceb4ff42d1e744f1c664",
+          "metrics": {
+            "examples": 7381,
+            "method_records": 29524,
+            "unique_call_records": 11353,
+            "new_model_calls": 8855
+          },
+          "public_report": "research/reports/full-campaign8.md#phase-dassle-preservation",
+          "public_configuration": "research/configs/full-campaign8.json"
+        },
+        {
+          "id": "full-campaign8/multigec-dev",
+          "kind": "phase",
+          "status": "COMPLETED",
+          "source_hash": "b8cf04f9b703d62ea3b9c75e1ac3b1ddf020840aea45fd47ac75c56159238ca1",
+          "result_hash": "d05acc0491c639e212959451d871badf4f2ccb8575759ef61919ff3df74c1197",
+          "metrics": {
+            "examples": 50,
+            "method_records": 200,
+            "unique_call_records": 1591,
+            "new_model_calls": 936
+          },
+          "public_report": "research/reports/full-campaign8.md#phase-multigec-dev",
+          "public_configuration": "research/configs/full-campaign8.json"
+        },
+        {
+          "id": "full-campaign8/multigec-dev-preservation",
+          "kind": "phase",
+          "status": "COMPLETED",
+          "source_hash": "b8cf04f9b703d62ea3b9c75e1ac3b1ddf020840aea45fd47ac75c56159238ca1",
+          "result_hash": "54d6b272fe8fd20feb3595e377a476d1abfcaa2f1be601b5e8264414f892aff2",
+          "metrics": {
+            "examples": 50,
+            "method_records": 200,
+            "unique_call_records": 1152,
+            "new_model_calls": 986
+          },
+          "public_report": "research/reports/full-campaign8.md#phase-multigec-dev-preservation",
+          "public_configuration": "research/configs/full-campaign8.json"
+        },
+        {
+          "id": "full-campaign8/multigec-test",
+          "kind": "phase",
+          "status": "COMPLETED",
+          "source_hash": "b8cf04f9b703d62ea3b9c75e1ac3b1ddf020840aea45fd47ac75c56159238ca1",
+          "result_hash": "ced32526811072f244066a35494e1b73a9b23b34a7470b3f689522eb0051d920",
+          "metrics": {
+            "examples": 49,
+            "method_records": 196,
+            "unique_call_records": 1489,
+            "new_model_calls": 1489
+          },
+          "public_report": "research/reports/full-campaign8.md#phase-multigec-test",
+          "public_configuration": "research/configs/full-campaign8.json"
+        },
+        {
+          "id": "full-campaign8/multigec-train",
+          "kind": "phase",
+          "status": "COMPLETED",
+          "source_hash": "b8cf04f9b703d62ea3b9c75e1ac3b1ddf020840aea45fd47ac75c56159238ca1",
+          "result_hash": "f992acc3f45b19b1359f673febc7437aa3448d7218f8e718e86dc7b591ff13af",
+          "metrics": {
+            "examples": 10,
+            "method_records": 40,
+            "unique_call_records": 252,
+            "new_model_calls": 0
+          },
+          "public_report": "research/reports/full-campaign8.md#phase-multigec-train",
+          "public_configuration": "research/configs/full-campaign8.json"
+        },
+        {
+          "id": "full-campaign8/slobench",
+          "kind": "phase",
+          "status": "COMPLETED",
+          "source_hash": "b8cf04f9b703d62ea3b9c75e1ac3b1ddf020840aea45fd47ac75c56159238ca1",
+          "result_hash": "cccc67896a6088ef1eab12f7928354329b43951fafa8189980a6bfb042db0b1a",
+          "metrics": {
+            "examples": 1232,
+            "method_records": 4928,
+            "unique_call_records": 4461,
+            "new_model_calls": 4461
+          },
+          "public_report": "research/reports/full-campaign8.md#phase-slobench",
+          "public_configuration": "research/configs/full-campaign8.json"
+        },
+        {
+          "id": "full-campaign8/solar-canonical",
+          "kind": "phase",
+          "status": "COMPLETED",
+          "source_hash": "b8cf04f9b703d62ea3b9c75e1ac3b1ddf020840aea45fd47ac75c56159238ca1",
+          "result_hash": "8e6991f8bb00cde148010d448992c670f6368347b0bd3515cbf98ed5f907cba7",
+          "metrics": {
+            "examples": 109,
+            "method_records": 436,
+            "unique_call_records": 3319,
+            "new_model_calls": 3319
+          },
+          "public_report": "research/reports/full-campaign8.md#phase-solar-canonical",
+          "public_configuration": "research/configs/full-campaign8.json"
+        },
+        {
+          "id": "full-campaign8/solar-canonical-preservation",
+          "kind": "phase",
+          "status": "COMPLETED",
+          "source_hash": "b8cf04f9b703d62ea3b9c75e1ac3b1ddf020840aea45fd47ac75c56159238ca1",
+          "result_hash": "00ec176efb53968ca179439095e453c64920a3bcfe656800dfe5382e9491b96d",
+          "metrics": {
+            "examples": 109,
+            "method_records": 436,
+            "unique_call_records": 2409,
+            "new_model_calls": 2409
+          },
+          "public_report": "research/reports/full-campaign8.md#phase-solar-canonical-preservation",
+          "public_configuration": "research/configs/full-campaign8.json"
+        }
+      ],
       "frozen_choices": {
         "source": "preserved original source identity; curated copies are portability-only projections",
         "model_calls_during_curation": 0,
@@ -3077,6 +3981,11 @@
       "experiment_id": "prijigrala-retry10",
       "logical_root": "experiments/prijigrala-retry10-20260911.3E6HOg",
       "evidence_status": "enumerated-root",
+      "public_report": "research/reports/prijigrala-retry10.md",
+      "public_configuration": "research/configs/prijigrala-retry10.json",
+      "public_metrics": "research/results/study-evidence.json.gz",
+      "source_manifest": "research/registry/source-manifest.json",
+      "child_runs": [],
       "frozen_choices": {
         "source": "preserved original source identity; curated copies are portability-only projections",
         "model_calls_during_curation": 0,
@@ -3177,6 +4086,11 @@
           "disposition": "private-only"
         }
       ],
+      "public_report": "research/reports/levenshtein-lookup-diagnostic.md",
+      "public_configuration": "research/configs/levenshtein-lookup-diagnostic.json",
+      "public_metrics": "research/results/study-evidence.json.gz",
+      "source_manifest": "research/registry/source-manifest.json",
+      "child_runs": [],
       "conclusion": "One observation only; no multi-example Levenshtein benchmark or generalized quality result.",
       "pending_evidence": [
         "none; this record is explicitly not a completed benchmark"

@@ -1,0 +1,56 @@
+{
+  "authorized_change": "contextual first-pass unigram gate followed by an expression-only corrective retry",
+  "experiment_id": "low-unigram-retry",
+  "generic_prompt": "You are a narrow Slovenian expression reviewer. Preserve meaning and register. Review only the marked target; do not rewrite the sentence. Return exactly {\"keep\":boolean,\"replacement\":string|null,\"needs_wider_edit\":boolean}. Sentence: {sentence}\nTarget: {target} Answer only the required JSON object.",
+  "historical_status": "COMPLETED",
+  "inference_fields": {
+    "omitted": [
+      "conversation_history",
+      "gold_text",
+      "private_response_body",
+      "credential_value"
+    ],
+    "sent": [
+      "model",
+      "stream",
+      "store",
+      "input",
+      "filled_dataset_text",
+      "include_reasoning",
+      "reasoning"
+    ]
+  },
+  "limits": {
+    "corrective_retry_count": 1,
+    "request_count": "preserved per record",
+    "target_count": 4,
+    "timeout": "preserved per record",
+    "workers": "preserved per record"
+  },
+  "logical_root": "experiments/low-unigram-retry-20260909.Wb0TI7",
+  "question": "What changed when unigram-uncertain proposals received one contextual corrective retry?",
+  "reproduction": {
+    "credential_reference": "RESEARCH_CREDENTIAL_REF",
+    "default_model_calls": 0,
+    "default_network_calls": 0,
+    "entrypoint": "python3 -B -m research.tools.reproduce",
+    "requires_explicit_live_authorization": true
+  },
+  "resource_identity": {
+    "data": "private preserved identity; rows excluded",
+    "english": "private preserved attestation identity; values excluded unless numeric projection",
+    "environment": "private preserved environment identity; no import/network side effect",
+    "index": "private verified identity; path excluded",
+    "source": "research/registry/source-manifest.json"
+  },
+  "result_destination": "research/results/study-evidence.json.gz",
+  "retry_prompt": "You are correcting one local expression in Slovenian after a failed proposed fix.\nYour previous replacement failed the required reference-word-list check. The listed replacement words were not found in that word list.\nThis time, really fix the selected expression: carefully check spelling, word formation, agreement, and the meaning of the complete sentence. Give an established, natural standard Slovenian word or short equivalent, not another invented or malformed form. Do not merely approve or repeat the rejected replacement.\nChange only the original selected span. Preserve the sentence's meaning and register. Do not rewrite anything outside that span. Use at most four words.\nThe word list is incomplete, so absence alone is not proof that the original expression is wrong. If the original is already appropriate, KEEP it instead of forcing an unnecessary substitution. If a wider edit is necessary, decline the local replacement.\nReturn JSON only with exactly these fields: {\"keep\":boolean,\"replacement\":string|null,\"needs_wider_edit\":boolean}.\nFor KEEP use keep=true, replacement=null, needs_wider_edit=false. For a wider edit use keep=true, replacement=null, needs_wider_edit=true. Otherwise return keep=false, a nonempty replacement, and needs_wider_edit=false.\nDo not provide explanations or reasoning. Return a genuine corrected proposal, not an ACCEPT/REJECT verdict.\nOriginal sentence, selected target, and rejected attempt:\n",
+  "schema_version": 2,
+  "source_modules": [
+    "research/curated/historical_detector.py",
+    "research/curated/historical_pipeline.py",
+    "research/curated/historical_methods.py",
+    "research/curated/historical_transport.py",
+    "research/curated/retry.py"
+  ]
+}
