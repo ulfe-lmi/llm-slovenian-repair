@@ -179,7 +179,8 @@ def _saved_proposal(decision: dict[str, Any], names: tuple[str, ...], *, retry: 
 
 
 def _saved_english(record: dict[str, Any]) -> dict[str, float]:
-    raw = record.get("english_evidence", record.get("english"))
+    detector = record.get("detector") if isinstance(record.get("detector"), dict) else {}
+    raw = record.get("english_evidence", record.get("english", detector.get("english")))
     if raw is None:
         return {}
     values = raw.values() if isinstance(raw, dict) else raw if isinstance(raw, list) else ()
@@ -214,14 +215,28 @@ def replay_saved_record(record: dict[str, Any], index: Path, *, record_name: str
     proposals: dict[str, Proposal] = {}
     retries: dict[str, Proposal] = {}
     frequencies = _saved_english(record)
+    recorded_first_failure = False
     for decision in decisions:
         key = _decision_offset(decision)
         raw = _saved_proposal(decision, ("first_proposal_raw", "first_proposal", "first", "proposal"))
         if raw is not None:
             proposals[key] = _proposal(raw)
+        first = decision.get("first")
+        if isinstance(first, dict) and first.get("operational_failure"):
+            recorded_first_failure = True
         retry = _saved_proposal(decision, ("retry_proposal_raw", "retry_proposal", "retry", "retry_decision"), retry=True)
         if retry is not None:
             retries[key] = _proposal(retry, retry=True)
+
+    if recorded_first_failure:
+        expected = record.get("corrected", record.get("output", record.get("final")))
+        if not isinstance(expected, str) or expected != original:
+            raise ReplayEvidenceError("saved first-stage failure must preserve the original output")
+        return {"case": record_name, "schema": "campaign-input-decisions" if "input" in record else "original-decisions",
+                "detector_maximum": marker, "first_stage_decisions": len(proposals), "retry_stage_decisions": len(retries),
+                "english_values": len(frequencies), "output_sha256": hashlib.sha256(expected.encode()).hexdigest(),
+                "detector_candidates": len(decisions), "review_calls": len(decisions), "retry_calls": 0,
+                "operational_failure": True, "network_calls": 0, "model_calls": 0}
 
     def english_lookup(word: str) -> float:
         key = word.casefold()
