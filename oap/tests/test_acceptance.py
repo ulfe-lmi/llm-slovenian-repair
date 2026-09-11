@@ -583,13 +583,13 @@ class Acceptance(unittest.TestCase):
             {'name':'unit','head_sha':head,'status':'completed','conclusion':'success'},
             {'name':HISTORY_CHECK_NAME,'head_sha':head,'status':'completed','conclusion':'success'},
         ]}
-        strategic_gate(self.remote,1,head,required,merge_effect='development-only')
+        strategic_gate(self.remote,1,head,required,merge_effect='development-only',repo=self.repo)
         for value in ('pending','cancelled','failure',None):
             self.remote.responses[key]['check_runs'][0]['conclusion']=value
-            self.error('REQUIRED_CHECK_NOT_GREEN',strategic_gate,self.remote,1,head,required,merge_effect='development-only')
-        self.error('REQUIRED_CHECK_MISSING',strategic_gate,self.remote,1,head,['missing', HISTORY_CHECK_NAME],merge_effect='development-only')
-        self.error('MERGE_D2_EFFECT',strategic_gate,self.remote,1,head,required,merge_effect='production')
-        self.error('REVIEW_HEAD_CHANGED',strategic_gate,self.remote,1,self.base,required,merge_effect='development-only')
+            self.error('REQUIRED_CHECK_NOT_GREEN',strategic_gate,self.remote,1,head,required,merge_effect='development-only',repo=self.repo)
+        self.error('REQUIRED_CHECK_MISSING',strategic_gate,self.remote,1,head,['missing', HISTORY_CHECK_NAME],merge_effect='development-only',repo=self.repo)
+        self.error('MERGE_D2_EFFECT',strategic_gate,self.remote,1,head,required,merge_effect='production',repo=self.repo)
+        self.error('REVIEW_HEAD_CHANGED',strategic_gate,self.remote,1,self.base,required,merge_effect='development-only',repo=self.repo)
         self.remote.prs[1].update(merged=True,merge_commit_sha=head)
         self.remote.responses['branches/main']={'commit':{'sha':head}}
         self.remote.responses['compare/'+head+'...'+head]={'status':'identical'}

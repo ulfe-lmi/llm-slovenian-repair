@@ -66,20 +66,22 @@ def doctor(repo, strategy=None, config=None, accepted_ref=None):
 def parser():
     p = argparse.ArgumentParser(description=__doc__)
     sub = p.add_subparsers(dest='command', required=True)
-    for name in ('state','governance','publish','append-critical','verify-report','transcript','report-history','ica','strategic-gate','doctor','materialize','refresh-governance'):
+    for name in ('state','governance','publish','append-critical','verify-report','forward-recovery','preflight-report','transcript','report-history','ica','strategic-gate','doctor','materialize','refresh-governance'):
         q = sub.add_parser(name, help=name.replace('-',' ')+'; see options')
         q.add_argument('--repo-root', default=os.environ.get('OAP_REPO_ROOT', str(Path(__file__).resolve().parents[2])))
         if name in ('governance','publish','append-critical','doctor','refresh-governance'):
             q.add_argument('--accepted-ref')
         if name in ('state','governance','publish','doctor','materialize','refresh-governance'):
             q.add_argument('--strategic-home', default=os.environ.get('OAP_STRATEGIC_HOME'))
-        if name in ('publish','append-critical','verify-report'):
+        if name in ('publish','append-critical','verify-report','forward-recovery','preflight-report'):
             q.add_argument('--id', required=True)
-        if name in ('publish','append-critical','ica'):
+        if name in ('publish','append-critical','ica','preflight-report'):
             q.add_argument('--source', required=True)
+        if name == 'preflight-report':
+            q.add_argument('--expected-head')
         if name in ('publish','append-critical','materialize','refresh-governance'):
             q.add_argument('--dry-run', action='store_true')
-        if name in ('state','publish','verify-report','strategic-gate','refresh-governance'):
+        if name in ('state','publish','verify-report','forward-recovery','strategic-gate','refresh-governance'):
             q.add_argument('--repository')
             q.add_argument('--gh-bin', default='gh', help='read-only gh executable; fake only in disposable tests')
         if name == 'governance':
@@ -106,6 +108,7 @@ def parser():
             q.add_argument('--merge-effect', default='unverified')
             q.add_argument('--verify-merge', action='store_true')
             q.add_argument('--default-branch', default='main')
+            q.add_argument('--report-id')
         if name == 'doctor':
             q.add_argument('--config')
         if name == 'materialize':
@@ -147,6 +150,11 @@ def main(argv=None):
             result = append_critical(args.repo_root, args.source, args.id, accepted_ref=args.accepted_ref, dry_run=args.dry_run)
         elif command == 'verify-report':
             result = verify_report(args.repo_root, args.id, commit=args.commit, remote=remote)
+        elif command == 'forward-recovery':
+            require(remote is not None, 'REMOTE_REQUIRED')
+            result = prove_forward_report_recovery(args.repo_root, args.id, remote=remote)
+        elif command == 'preflight-report':
+            result = validate_report_draft(args.repo_root, args.source, args.id, expected_head=args.expected_head)
         elif command == 'transcript':
             result = check_transcript(args.repo_root, index=args.index, revision=args.revision,
                                       expected_id=args.expected_id)
@@ -157,7 +165,9 @@ def main(argv=None):
             result = check_ica(args.repo_root, args.source, args.current_main)
         elif command == 'strategic-gate':
             require(remote is not None, 'REMOTE_REQUIRED')
-            result = verify_merge(remote, args.pr, args.default_branch) if args.verify_merge else strategic_gate(remote, args.pr, args.reviewed_sha, args.required_check, merge_effect=args.merge_effect)
+            result = verify_merge(remote, args.pr, args.default_branch) if args.verify_merge else strategic_gate(
+                remote, args.pr, args.reviewed_sha, args.required_check, merge_effect=args.merge_effect,
+                repo=args.repo_root, report_id=args.report_id)
         elif command == 'fifo':
             result = fifo(args.fifo, args.action, timeout=args.timeout)
         elif command == 'materialize':
