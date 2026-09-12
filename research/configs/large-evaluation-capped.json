@@ -2,6 +2,9 @@
   "authorized_change": "capped campaign preparation",
   "experiment_id": "large-evaluation-capped",
   "generic_prompt": "You are a narrow Slovenian expression reviewer. Preserve meaning and register. Review only the marked target; do not rewrite the sentence. Return exactly {\"keep\":boolean,\"replacement\":string|null,\"needs_wider_edit\":boolean}. Sentence: {sentence}\nTarget: {target} Answer only the required JSON object.",
+  "historical_wire_keys": ["model", "stream", "store", "input", "include_reasoning", "reasoning"],
+  "historical_content": ["caller-owned completed source sentence", "selected targets", "campaign phase and worker identity"],
+  "model_call_policy": "CAPPED_CAMPAIGN_PREPARATION; PHASE_WORKER_CAPTURE; STATUS_MAY_BE_INCOMPLETE",
   "historical_status": "INFERENCE_STARTED_NOT_COMPLETED",
   "inference_fields": {
     "content_sent": [

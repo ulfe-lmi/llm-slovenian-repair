@@ -2,6 +2,9 @@
   "authorized_change": "word-only retry and whitespace continuation",
   "experiment_id": "low-word-only-retry",
   "generic_prompt": "You are a narrow Slovenian expression reviewer. Preserve meaning and register. Review only the marked target; do not rewrite the sentence. Return exactly {\"keep\":boolean,\"replacement\":string|null,\"needs_wider_edit\":boolean}. Sentence: {sentence}\nTarget: {target} Answer only the required JSON object.",
+  "historical_wire_keys": ["model", "stream", "store", "input", "include_reasoning", "reasoning"],
+  "historical_content": ["first contextual sentence/target", "raw rejected word only on retry", "saved first response may be continued after framing whitespace"],
+  "model_call_policy": "WORD_ONLY_RETRY; SAVED_RESPONSE_CONTINUATION_WITHOUT_RESAMPLING",
   "historical_status": "STOPPED_WITH_WHITESPACE_CONTINUATION",
   "inference_fields": {
     "content_sent": [

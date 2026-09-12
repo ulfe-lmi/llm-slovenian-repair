@@ -2,6 +2,9 @@
   "authorized_change": "contextual first-pass unigram gate followed by one contextual JSON corrective retry",
   "experiment_id": "low-unigram-retry",
   "generic_prompt": "You are a narrow Slovenian expression reviewer. Preserve meaning and register. Review only the marked target; do not rewrite the sentence. Return exactly {\"keep\":boolean,\"replacement\":string|null,\"needs_wider_edit\":boolean}. Sentence: {sentence}\nTarget: {target} Answer only the required JSON object.",
+  "historical_wire_keys": ["model", "stream", "store", "input", "include_reasoning", "reasoning"],
+  "historical_content": ["first contextual sentence/target", "raw rejected replacement", "missing-word evidence in contextual JSON retry"],
+  "model_call_policy": "REUSE_CALLER_FROZEN_FIRST_STAGE; ONE_CONTEXTUAL_JSON_RETRY",
   "historical_status": "COMPLETED",
   "inference_fields": {
     "content_sent": [

@@ -5,14 +5,14 @@ Synthetic strings/proposals only; no live model answers or benchmark rows.
 from __future__ import annotations
 
 import os
-from pathlib import Path
 import tempfile
 import unittest
+from pathlib import Path
 
 from research.curated.corpus import Corpus
 from research.curated.methods import no_retry
 from research.curated.pipeline import replay
-from research.curated.review import parse_proposal
+from research.curated.review import Proposal, parse_proposal
 from research.tools.replay import _create_fixture_index
 
 
@@ -68,6 +68,26 @@ class StrategicReplayFidelity(unittest.TestCase):
         )
         self.assertFalse(result["operational_failure"])
         self.assertEqual(result["output"], "beta")
+
+    def test_corrective_failure_hides_candidate_edits_but_keeps_diagnostic_field(self) -> None:
+        parent = os.environ.get("TMPDIR")
+        self.assertTrue(parent and not parent.startswith("/tmp"))
+        with tempfile.TemporaryDirectory(prefix="replay-failure-", dir=parent) as name:
+            index = Path(name) / "fixture.sqlite"
+            _create_fixture_index({"unigrams": {"beta": 100}}, index)
+            with Corpus(index) as corpus:
+                result = replay(
+                    "alpha",
+                    corpus,
+                    lambda _: 0.0,
+                    {"0": Proposal(False, "gamma", False)},
+                    retry_failures={"0": {"failure": "TIMEOUT"}},
+                )
+        self.assertTrue(result["operational_failure"])
+        self.assertEqual(result["output"], "alpha")
+        self.assertEqual(result["edits"], [])
+        self.assertEqual(result["candidate_edits_before_failure_fallback"], [])
+        self.assertEqual(result["no_retry_edits"], [])
 
 
 if __name__ == "__main__":

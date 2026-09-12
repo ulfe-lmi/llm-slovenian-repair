@@ -67,3 +67,12 @@ This renders a zero-call plan. With `--allow-live`, the retained historical
 driver executes only against the caller-owned records/index/output roots after
 validating the explicit endpoint, model, credential reference, and bounded
 resource flags. Live use is not enabled by imports or tests.
+
+The driver selection is historical, not a latest-pipeline alias. In particular,
+`low-plus-validator` consumes frozen first-stage decisions without resampling;
+`low-unigram-retry` uses the contextual JSON retry body; the word-only and
+hyphen families use the word parser; the three `ten-run-*` variants preserve
+scheduled trial/STOPPED semantics; `prijigrala-retry10` repeats the raw first
+proposal anchor; and `dassle-uv-audit` executes the owned data-free analyzer.
+Campaign execution uses the retained phase/worker entrypoints with injected
+caller-owned rows. No model/network call is made by plan/import/default modes.

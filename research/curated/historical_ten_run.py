@@ -2,18 +2,18 @@
 
 from __future__ import annotations
 
+import time
 from collections import Counter
 from pathlib import Path
-import time
 from typing import Any
 
 from .english_preserve import classify
-from .historical_common import save, sha
+from .historical_common import save
+from .historical_methods import targeted
 from .historical_pipeline import first_body, retry_body
 from .historical_transport import Client
-from .patching import apply_edits, restore_initial_case
+from .patching import apply_edits
 from .review import Proposal
-from .gating import check
 
 
 class PipelineStop(ValueError):
@@ -109,3 +109,107 @@ def run(cases: list[dict[str, Any]], state: dict[str, Any], pipeline: Any, clien
             "first_gate_reasons": dict(Counter(decision["first_gate"]["reason"] for record in records for decision in record["decisions"])),
             "applied_edits": sum(len(record["edits"]) for record in records), "full_pipeline_seconds": time.monotonic() - started,
             "new_model_calls": client.network_calls}
+
+
+def run_scheduled_trials(
+    records: list[dict[str, Any]],
+    variant_id: str,
+    pipeline: Any,
+    client: Client,
+    output_root: str | Path,
+    *,
+    trials: int = 10,
+    retry_limit: int = 1,
+    model: str = "qwen3.8-27b",
+) -> dict[str, Any]:
+    """Run the original predetermined scheduler with immutable trial paths.
+
+    A stopped trial is recorded and the next already-scheduled trial starts
+    unchanged.  There is no resampling, replacement trial, or shared request
+    directory across trials.
+    """
+    if not 1 <= trials <= 10:
+        raise ValueError("historical ten-run scheduler requires 1 <= trials <= 10")
+    if retry_limit < 0:
+        raise ValueError("retry limit must be non-negative")
+    root = Path(output_root)
+    schedule = {
+        "ten-run-initial-case-low": {"name": "symmetric-initial-case", "retry_kind": "word-only"},
+        "ten-run-expression-retry-low": {"name": "expression-retry", "retry_kind": "expression"},
+        "ten-run-english-preserve-low": {"name": "english-preserve", "retry_kind": "expression"},
+    }.get(variant_id)
+    if schedule is None:
+        raise ValueError("unknown ten-run historical family")
+    save(root / "BATCH-FROZEN.json", {
+        "variant": variant_id,
+        "schedule": schedule["name"],
+        "scheduled_trials": trials,
+        "failed_trial_policy": "record stopped trial and continue next pre-scheduled trial unchanged",
+        "request_identity": "case/target/stage/trial",
+        "max_corrective_retries": retry_limit,
+    })
+    trial_rows: list[dict[str, Any]] = []
+    for trial in range(1, trials + 1):
+        trial_root = root / "trials" / f"{trial:02d}"
+        trial_root.mkdir(parents=True, exist_ok=True)
+        stopped = False
+        completed_cases = 0
+        for number, record in enumerate(records, 1):
+            text = record.get("input", record.get("original"))
+            if not isinstance(text, str):
+                raise ValueError("each ten-run record must contain input")
+            retry_builder = None
+            retry_kind = "expression-retry"
+            if schedule["retry_kind"] == "word-only":
+                from .retry import proposal_replacement, word_only_retry_body
+
+                retry_kind = "word-only-retry"
+                def retry_builder(_text, _candidate, proposal, _gate):
+                    return word_only_retry_body(proposal_replacement(proposal), model=model)
+            result = targeted(
+                text,
+                pipeline,
+                client,
+                trial_root / "records" / str(record.get("id", number)),
+                retry_limit=retry_limit,
+                model=model,
+                retry_builder=retry_builder,
+                retry_kind=retry_kind,
+            )
+            save(trial_root / "records" / (str(record.get("id", number)) + ".json"), {
+                "id": record.get("id", str(number)),
+                "variant": variant_id,
+                "trial": trial,
+                **result,
+            })
+            completed_cases += 1
+            if result.get("operational_failure"):
+                stopped = True
+                break
+        status = "STOPPED" if stopped else "COMPLETE"
+        trial_rows.append({
+            "trial": trial,
+            "status": status,
+            "exit_code": 2 if stopped else 0,
+            "completed_case_instances": completed_cases,
+            "scheduled_case_instances": len(records),
+            "model_calls": client.network_calls,
+            "request_identity": f"trials/{trial:02d}",
+        })
+    summary_status = "COMPLETED" if all(item["status"] == "COMPLETE" for item in trial_rows) else "COMPLETED_WITH_STOPPED_TRIALS"
+    summary = {
+        "status": summary_status,
+        "variant": variant_id,
+        "scheduled_trials": trials,
+        "attempted_trials": len(trial_rows),
+        "complete_trials": sum(item["status"] == "COMPLETE" for item in trial_rows),
+        "stopped_trials": sum(item["status"] == "STOPPED" for item in trial_rows),
+        "trials": trial_rows,
+        "model_calls": client.network_calls,
+        "network_calls": client.network_calls,
+        "records": len(records),
+        "workers": 1,
+        "output_root": "caller-supplied",
+    }
+    save(root / "BATCH-SUMMARY.json", summary)
+    return {"executed": True, **summary}

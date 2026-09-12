@@ -11,8 +11,7 @@ Data-free projection of one preserved historical record. This is an archival res
 
 ## Configuration projection
 
-- Historical wire keys: `model`, `stream`, `store`, `input`, `include_reasoning`, `reasoning`.
-- Content sent in `input`: the completed source sentence and selected target; the contextual retry additionally carries its original sentence/target/rejected replacement/missing-word evidence.
+- Variant-specific wire/content boundary: The DASSLE runner sends caller-owned sentences/targets and records worker incidents without publishing payloads. See [configuration](../configs/dassle-spelling-preparation.json) fields historical_wire_keys, historical_content, and model_call_policy; no later variant's content is inferred.
 - Publicly omitted: source sentences, filled prompts, gold strings, replacements, response bodies, reasoning traces, credentials, and private endpoint/profile values.
 - Detector/gate/retry limits: preserved from the source record; `UNKNOWN` is retained where the source did not expose a value.
 - Resource identities: data, index, English attestation, source, and environment are referenced by identity only; no private path is a runtime dependency.

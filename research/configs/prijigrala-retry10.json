@@ -2,6 +2,9 @@
   "authorized_change": "retry limit ten for one target",
   "experiment_id": "prijigrala-retry10",
   "generic_prompt": "You are a narrow Slovenian expression reviewer. Preserve meaning and register. Review only the marked target; do not rewrite the sentence. Return exactly {\"keep\":boolean,\"replacement\":string|null,\"needs_wider_edit\":boolean}. Sentence: {sentence}\nTarget: {target} Answer only the required JSON object.",
+  "historical_wire_keys": ["model", "stream", "store", "input", "include_reasoning", "reasoning"],
+  "historical_content": ["one caller-selected sentence and target on first call", "same raw first rejected replacement on every context-free retry"],
+  "model_call_policy": "ONE_TARGET; MAXIMUM_TEN_CORRECTIVE_RETRIES; STOP_ON_GATE_OR_FAILURE",
   "historical_status": "COMPLETE",
   "inference_fields": {
     "content_sent": [

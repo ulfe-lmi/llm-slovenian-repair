@@ -2,6 +2,9 @@
   "authorized_change": "xhigh reasoning",
   "experiment_id": "xhigh-thinking-mechanical",
   "generic_prompt": "You are a narrow Slovenian expression reviewer. Preserve meaning and register. Review only the marked target; do not rewrite the sentence. Return exactly {\"keep\":boolean,\"replacement\":string|null,\"needs_wider_edit\":boolean}. Sentence: {sentence}\nTarget: {target} Answer only the required JSON object.",
+  "historical_wire_keys": ["model", "stream", "store", "input", "include_reasoning", "reasoning"],
+  "historical_content": ["completed source sentence", "selected target"],
+  "model_call_policy": "ONE_DIRECT_REVIEW; MECHANICAL_ONLY_ACCEPTANCE; NO_ENGLISH_OR_RETRY",
   "historical_status": "COMPLETED",
   "inference_fields": {
     "content_sent": [

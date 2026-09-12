@@ -2,6 +2,9 @@
   "authorized_change": "timeout budget only",
   "experiment_id": "007-b-timeout300",
   "generic_prompt": "You are a narrow Slovenian expression reviewer. Preserve meaning and register. Review only the marked target; do not rewrite the sentence. Return exactly {\"keep\":boolean,\"replacement\":string|null,\"needs_wider_edit\":boolean}. Sentence: {sentence}\nTarget: {target} Answer only the required JSON object.",
+  "historical_wire_keys": ["model", "stream", "store", "input", "include_reasoning", "reasoning"],
+  "historical_content": ["completed source sentence", "selected target"],
+  "model_call_policy": "CONTROLLED_MODEL_CALLS_PRESERVED; CASE_TRACE_ASSOCIATION_INVALID",
   "historical_status": "COMPLETED_CONTROLLED_WITH_INVALID_TRACE_ASSOCIATION",
   "inference_fields": {
     "content_sent": [

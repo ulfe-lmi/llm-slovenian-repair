@@ -2,6 +2,9 @@
   "authorized_change": "exhaustive and random-sample mechanical audit",
   "experiment_id": "dassle-uv-audit",
   "generic_prompt": "You are a narrow Slovenian expression reviewer. Preserve meaning and register. Review only the marked target; do not rewrite the sentence. Return exactly {\"keep\":boolean,\"replacement\":string|null,\"needs_wider_edit\":boolean}. Sentence: {sentence}\nTarget: {target} Answer only the required JSON object.",
+  "historical_wire_keys": [],
+  "historical_content": ["literal source/reference token edits supplied by caller"],
+  "model_call_policy": "NO_MODEL_CALL_MECHANICAL_AUDIT",
   "historical_status": "COMPLETE_EXHAUSTIVE_MECHANICAL_AUDIT",
   "inference_fields": {
     "content_sent": [

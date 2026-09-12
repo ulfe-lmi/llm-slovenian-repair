@@ -32,7 +32,11 @@ license grant, or permission to merge or deploy.
 - [`curated/`](curated/) contains faithful source seams: protected spans,
   Gigafida evidence states, the ASCII-hyphen detector view, English eligibility,
   contextual/retry schemas, initial-case restoration, unigram gating, exact
-  patching, adapters, scoring, and offline replay boundaries.
+  patching, adapters, scoring, and offline replay boundaries. The executable
+  dispatcher keeps the historical families separate: validator-only frozen
+  proposal reuse, contextual JSON retry, word-only retry/continuation, hyphen
+  and case variants, three ten-trial schedulers, injected campaign workers and
+  phases, retry-limit-ten, and the data-free DASSLE analyzer.
 
 ## Timeline and catalog
 
@@ -164,6 +168,19 @@ input/index/result roots, credential reference, endpoint/model fields and a
 bounded budget, then emits a plan. It does not run a model. Live execution is a
 separate future authorization boundary; no tree import or default command
 acquires data, launches a model, or accesses a service.
+
+With explicit live authorization and caller-owned synthetic/saved inputs, the
+same entrypoint reaches the preserved historical driver for the selected
+family. Early variants do not require later `english.json`; low-plus-validator
+requires frozen first-stage decisions and invokes validator calls only;
+`dassle-uv-audit` invokes literal classification/evaluation with zero calls;
+campaign rows route SloBench through RAW/M1/M2/M3 and other phases through
+M0/M1/M2/M3. Tests use injected fake transports and forbid socket access.
+
+The persistent saved campaign replay was rerun against the current curated
+source: 16,375/16,375 M2 and 16,375/16,375 M3 matches, zero model/network calls.
+Only counts and a receipt hash are retained in private scratch; original
+campaign bytes remain unchanged.
 
 ## Publication boundary and retention
 

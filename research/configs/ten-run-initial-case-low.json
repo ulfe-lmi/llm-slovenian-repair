@@ -2,6 +2,9 @@
   "authorized_change": "symmetric initial-case restoration",
   "experiment_id": "ten-run-initial-case-low",
   "generic_prompt": "You are a narrow Slovenian expression reviewer. Preserve meaning and register. Review only the marked target; do not rewrite the sentence. Return exactly {\"keep\":boolean,\"replacement\":string|null,\"needs_wider_edit\":boolean}. Sentence: {sentence}\nTarget: {target} Answer only the required JSON object.",
+  "historical_wire_keys": ["model", "stream", "store", "input", "include_reasoning", "reasoning"],
+  "historical_content": ["same caller-owned cases in each scheduled trial", "symmetric initial-case adjustment", "raw rejected word on word-only retry"],
+  "model_call_policy": "TEN_PREDETERMINED_TRIALS; NO_ENGLISH_POLICY; STOPPED_TRIALS_CONTINUE_UNCHANGED",
   "historical_status": "COMPLETED_WITH_STOPPED_TRIALS",
   "inference_fields": {
     "content_sent": [

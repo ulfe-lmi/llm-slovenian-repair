@@ -8,11 +8,11 @@ import gzip
 import hashlib
 import json
 import os
-from collections import Counter
-from pathlib import Path
 import re
-from typing import Any, Iterable, Iterator
-
+from collections import Counter
+from collections.abc import Iterator
+from pathlib import Path
+from typing import Any
 
 ROOT_SPECS: tuple[dict[str, Any], ...] = (
     {"id": "007-b-replacement", "root": "recovery-executions/007-b-human-replacement-20260909.MnH1Qb", "kind": "recovery", "variation": "human-authorized replacement execution", "status": "FAILED_BEFORE_PROXY_CONTACT", "question": "Did the owner-authorized replacement reach the model boundary?"},
@@ -35,6 +35,27 @@ ROOT_SPECS: tuple[dict[str, Any], ...] = (
     {"id": "dassle-uv-audit", "root": "experiments/dassle-uv-audit-20260911.BGeMLs", "kind": "audit", "variation": "DASSLE exhaustive u/v mechanical audit and random-20 sample", "status": "COMPLETE_EXHAUSTIVE_MECHANICAL_AUDIT", "question": "How many frozen DASSLE edit units matched the requested u/v categories and sensitivities?"},
     {"id": "full-campaign8", "root": "experiments/full-campaign8-20260911.XLAbaa", "kind": "campaign", "variation": "final full eight-worker A100 campaign", "status": "COMPLETED_LOCAL_CAMPAIGN_REMOTE_SCORING_PENDING", "question": "What did the complete nine-phase eight-worker campaign establish locally, and what remained access-blocked?"},
     {"id": "prijigrala-retry10", "root": "experiments/prijigrala-retry10-20260911.3E6HOg", "kind": "variant", "variation": "one-target contextual review with retry limit ten", "status": "COMPLETE", "question": "What happened in the one-target retry-limit-ten contextual case?"},
+)
+
+ORIGINAL_ATTEMPTS: tuple[dict[str, Any], ...] = (
+    {
+        "id": "007-a-original-attempt",
+        "status": "PARTIAL",
+        "source_evidence": "oap/reports/007-a-isolated-end-to-end-concept-verification.md",
+        "source_evidence_sha256": "report-governed; see immutable OAP report",
+        "replacement_relation": "preserved separately; not merged into 007-b replacement or later studies",
+        "available_mapping": "concept-verification/** and private workload evidence named by the report",
+        "result_claim": "no accepted linguistic conclusion; instrumentation/capture limitations remain explicit",
+    },
+    {
+        "id": "007-b-original-attempt",
+        "status": "PARTIAL",
+        "source_evidence": "oap/reports/007-b-complete-reviewer-and-codex-evaluation.md",
+        "source_evidence_sha256": "report-governed; see immutable OAP report",
+        "replacement_relation": "preserved separately from 007-b-replacement and 007-b-timeout300",
+        "available_mapping": "concept-verification/eval/** and private original execution evidence named by the report",
+        "result_claim": "original instrumentation failure is not retroactively repaired by replacement executions",
+    },
 )
 
 SOURCE_MAP: tuple[tuple[str, str], ...] = (
@@ -62,11 +83,21 @@ SOURCE_MAP: tuple[tuple[str, str], ...] = (
     ("experiments/low-word-only-retry-20260909.0Hk0P9/retry.py", "research/curated/retry.py"),
     ("experiments/low-word-only-retry-20260909.0Hk0P9/continue_whitespace.py", "research/curated/historical_word_continuation.py"),
     ("experiments/low-unigram-retry-20260909.Wb0TI7/retry.py", "research/curated/retry.py"),
+    ("experiments/low-plus-validator-20260909.eKAYe6/validate.py", "research/curated/historical_validator.py"),
+    ("experiments/prijigrala-retry10-20260911.3E6HOg/run_test.py", "research/curated/historical_retry10.py"),
+    ("experiments/dassle-uv-audit-20260911.BGeMLs/analyze.py", "research/curated/historical_dassle.py"),
+    ("experiments/ten-run-initial-case-low-20260909.87bzTW/run_pipeline.py", "research/curated/historical_variants.py"),
+    ("experiments/ten-run-initial-case-low-20260909.87bzTW/run_ten.py", "research/curated/historical_ten_run.py"),
+    ("experiments/ten-run-expression-retry-low-20260909.xJhqYm/run_pipeline.py", "research/curated/historical_variants.py"),
+    ("experiments/ten-run-expression-retry-low-20260909.xJhqYm/run_ten.py", "research/curated/historical_ten_run.py"),
+    ("experiments/ten-run-english-preserve-low-20260909.AQnnRH/run_ten.py", "research/curated/historical_ten_run.py"),
     ("llm-slovenian-repair-campaign8.ewruv3/runner8.py", "research/curated/historical_campaign.py"),
     ("llm-slovenian-repair-campaign8.ewruv3/storage8.py", "research/curated/historical_campaign_storage.py"),
     ("llm-slovenian-repair-campaign8.ewruv3/checkpoint8.py", "research/curated/historical_campaign_checkpoint.py"),
     ("llm-slovenian-repair-campaign8.ewruv3/prepare8.py", "research/curated/historical_campaign_entrypoints.py"),
     ("llm-slovenian-repair-campaign8.ewruv3/launch8.py", "research/curated/historical_campaign_entrypoints.py"),
+    ("llm-slovenian-repair-campaign8.ewruv3/observe8.py", "research/curated/historical_campaign.py"),
+    ("llm-slovenian-repair-campaign8.ewruv3/score8.py", "research/curated/historical_scoring.py"),
 )
 
 FUNCTION_COVERAGE: dict[str, dict[str, list[str]]] = {
@@ -94,11 +125,21 @@ FUNCTION_COVERAGE: dict[str, dict[str, list[str]]] = {
     "experiments/low-word-only-retry-20260909.0Hk0P9/retry.py": {"copied": ["Unigrams equivalent via UnigramIndex", "check", "body_for equivalent word_only_retry_body", "outcome", "parse_word equivalent parse_word_only"], "unavailable": ["run: caller supplies explicit saved state and Client"]},
     "experiments/low-word-only-retry-20260909.0Hk0P9/continue_whitespace.py": {"copied": ["parse_word", "continue_saved"], "unavailable": ["finish: caller invokes continue_saved with saved response and pending item"]},
     "experiments/low-unigram-retry-20260909.Wb0TI7/retry.py": {"copied": ["INSTRUCTION", "Unigrams equivalent via UnigramIndex", "check", "body_for equivalent contextual_retry_body", "outcome", "parse_reply equivalent parse_contextual"], "unavailable": ["run: caller supplies explicit saved state and Client"]},
+    "experiments/low-plus-validator-20260909.eKAYe6/validate.py": {"copied": ["body_for equivalent validator_body", "parse equivalent parse_validator", "run_validator_records (validator-only frozen first-stage execution)"], "unavailable": ["native prepare hash check: private first-pass freeze remains caller-owned"]},
+    "experiments/prijigrala-retry10-20260911.3E6HOg/run_test.py": {"copied": ["sequence", "run_record", "fixed raw first-proposal retry anchor"], "unavailable": ["native main live/profile mirror: explicit caller resources replace private defaults"]},
+    "experiments/dassle-uv-audit-20260911.BGeMLs/analyze.py": {"copied": ["classify", "tagged", "evaluate", "analyze", "run_audit_records"], "unavailable": ["sealed dataset and raw result rows: private-only caller inputs"]},
+    "experiments/ten-run-initial-case-low-20260909.87bzTW/run_pipeline.py": {"copied": ["HistoricalVariantPipeline", "symmetric case rule", "historical detector/gate/patch seam"], "unavailable": ["native frozen 32-case rows: caller-owned saved inputs"]},
+    "experiments/ten-run-initial-case-low-20260909.87bzTW/run_ten.py": {"copied": ["run_scheduled_trials", "stopped-trial continuation", "trial identity paths"], "unavailable": []},
+    "experiments/ten-run-expression-retry-low-20260909.xJhqYm/run_pipeline.py": {"copied": ["HistoricalVariantPipeline", "symmetric case rule", "expression retry family"], "unavailable": ["native frozen 32-case rows: caller-owned saved inputs"]},
+    "experiments/ten-run-expression-retry-low-20260909.xJhqYm/run_ten.py": {"copied": ["run_scheduled_trials", "stopped-trial continuation", "trial identity paths"], "unavailable": []},
+    "experiments/ten-run-english-preserve-low-20260909.AQnnRH/run_ten.py": {"copied": ["run_scheduled_trials", "English-preserve trial family", "stopped-trial continuation", "trial identity paths"], "unavailable": []},
     "llm-slovenian-repair-campaign8.ewruv3/runner8.py": {"copied": ["partition", "process_identity", "run_assigned", "worker status/failure accounting"], "unavailable": ["execute: protected live coordinator is represented by historical_campaign.run and explicit entrypoint"]},
     "llm-slovenian-repair-campaign8.ewruv3/storage8.py": {"copied": ["Storage.source_bytes", "Storage.source_read", "Storage.source_sha", "Storage.source_tree"], "unavailable": []},
     "llm-slovenian-repair-campaign8.ewruv3/checkpoint8.py": {"copied": ["checkpoint_completed_cases"], "unavailable": []},
     "llm-slovenian-repair-campaign8.ewruv3/prepare8.py": {"copied": ["verify", "prepare"], "unavailable": []},
     "llm-slovenian-repair-campaign8.ewruv3/launch8.py": {"copied": ["launch_plan"], "unavailable": ["Popen: live detached launch remains deliberate caller boundary"]},
+    "llm-slovenian-repair-campaign8.ewruv3/observe8.py": {"copied": ["run_assigned worker STATUS and phase-complete observations"], "unavailable": ["native snapshot(): private monitor paths and payloads are not published"]},
+    "llm-slovenian-repair-campaign8.ewruv3/score8.py": {"copied": ["historical_scoring.tokens", "historical_scoring.edits", "historical_scoring.summarize"], "unavailable": ["native remote/scorer subprocess invocation: caller-selected scorer boundary"]},
 }
 
 SAFE_NUMERIC = {
@@ -116,6 +157,21 @@ REPORT_NOTES = {
     "full-campaign8": "Official and custom denominators remain separate. SloBench and MultiGEC-test have no references for correctness/harm interpretation; remote scoring and Deployment B remain blocked/excluded.",
     "prijigrala-retry10": "Clock accounting and logical reconstruction are retained as observations; the one-target result is not a general retry claim.",
     "levenshtein-lookup-diagnostic": "This is one read-only observation, not a benchmark.",
+}
+
+VARIANT_WIRE_CONTRACTS: dict[str, tuple[list[str], list[str], str]] = {
+    "007-b-replacement": ([], [], "NO_MODEL_CALL_PRE_PROXY_FAILURE"),
+    "dassle-uv-audit": ([], ["literal source/reference token edits supplied by caller"], "NO_MODEL_CALL_MECHANICAL_AUDIT"),
+    "low-plus-validator": (["model", "stream", "store", "input", "include_reasoning", "reasoning"], ["frozen first-stage proposal", "original sentence", "selected target", "resulting sentence"], "REUSE_FROZEN_FIRST_STAGE; VALIDATOR_CALLS_ONLY"),
+    "low-unigram-retry": (["model", "stream", "store", "input", "include_reasoning", "reasoning"], ["first contextual sentence/target", "raw rejected replacement", "missing-word evidence in contextual JSON retry"], "REUSE_FROZEN_FIRST_STAGE; ONE_CONTEXTUAL_JSON_RETRY"),
+    "low-word-only-retry": (["model", "stream", "store", "input", "include_reasoning", "reasoning"], ["first contextual sentence/target", "raw rejected word only on retry"], "WORD_ONLY_RETRY; SAVED_RESPONSE_CONTINUATION_WITHOUT_RESAMPLING"),
+    "full-hyphen-space-low": (["model", "stream", "store", "input", "include_reasoning", "reasoning"], ["sentence", "hyphen-space target", "raw rejected word"], "NO_ENGLISH_POLICY; WORD_ONLY_RETRY; HYPHEN_VIEW_ONLY"),
+    "full-hyphen-case-low": (["model", "stream", "store", "input", "include_reasoning", "reasoning"], ["sentence", "hyphen-space target", "one-way initial-case adjustment", "raw rejected word"], "NO_ENGLISH_POLICY; WORD_ONLY_RETRY; ONE_WAY_INITIAL_CASE"),
+    "ten-run-initial-case-low": (["model", "stream", "store", "input", "include_reasoning", "reasoning"], ["same cases per trial", "symmetric case adjustment", "raw rejected word"], "TEN_PREDETERMINED_TRIALS; STOPPED_TRIALS_CONTINUE_UNCHANGED"),
+    "ten-run-expression-retry-low": (["model", "stream", "store", "input", "include_reasoning", "reasoning"], ["same cases per trial", "symmetric case adjustment", "raw rejected expression"], "TEN_PREDETERMINED_TRIALS; STOPPED_TRIALS_CONTINUE_UNCHANGED"),
+    "ten-run-english-preserve-low": (["model", "stream", "store", "input", "include_reasoning", "reasoning"], ["same cases per trial", "numeric English evidence for original absent target", "raw rejected expression"], "TEN_PREDETERMINED_TRIALS; ENGLISH_PRE_REVIEW_SUPPRESSION"),
+    "prijigrala-retry10": (["model", "stream", "store", "input", "include_reasoning", "reasoning"], ["one sentence/target", "same raw first rejected replacement"], "ONE_TARGET; MAXIMUM_TEN_CORRECTIVE_RETRIES"),
+    "levenshtein-lookup-diagnostic": ([], ["one read-only lookup observation"], "NO_MODEL_CALL_UNAVAILABLE_INLINE_LEVENSHTEIN_SOURCE"),
 }
 
 
@@ -277,9 +333,7 @@ def _scalar_metrics(root: Path) -> dict[str, Any]:
         if not isinstance(value, dict):
             continue
         for key, child in value.items():
-            if key in SAFE_NUMERIC and isinstance(child, (int, float, bool)) and key not in values:
-                values[key] = child
-            elif key in SAFE_TEXT and isinstance(child, str) and "\n" not in child and len(child) < 120 and key not in values:
+            if key in SAFE_NUMERIC and isinstance(child, (int, float, bool)) and key not in values or key in SAFE_TEXT and isinstance(child, str) and "\n" not in child and len(child) < 120 and key not in values:
                 values[key] = child
         calls = value.get("calls")
         if isinstance(calls, list) and "model_calls" not in values:
@@ -633,7 +687,11 @@ def _study_evidence(home: Path, record: dict[str, Any]) -> dict[str, Any]:
 def write_publications(records: list[dict[str, Any]], repo: Path) -> None:
     from research.curated.historical import variant_map
     from research.curated.historical_pipeline import reviewer_prompt
-    from research.curated.historical_transport import CONTEXTUAL_RETRY_PROMPT, EXPRESSION_RETRY_PROMPT, WORD_RETRY_PROMPT
+    from research.curated.historical_transport import (
+        CONTEXTUAL_RETRY_PROMPT,
+        EXPRESSION_RETRY_PROMPT,
+        WORD_RETRY_PROMPT,
+    )
     historical_variants = variant_map()
     configs = repo / "research/configs"
     reports = repo / "research/reports"
@@ -641,9 +699,12 @@ def write_publications(records: list[dict[str, Any]], repo: Path) -> None:
     reports.mkdir(parents=True, exist_ok=True)
     for record in records:
         experiment_id = record["experiment_id"]
-        spec = next((item for item in ROOT_SPECS if item["id"] == experiment_id), None)
         variant = {}
         historical = historical_variants.get(experiment_id)
+        wire_keys, content_sent, call_policy = VARIANT_WIRE_CONTRACTS.get(
+            experiment_id,
+            (["model", "stream", "store", "input", "include_reasoning", "reasoning"], ["completed source sentence", "selected target"], "CALLER-OWNED-HISTORICAL-DRIVER"),
+        )
         if historical is not None:
             variant = {
                 "authorized_change": historical.authorized_change,
@@ -660,6 +721,9 @@ def write_publications(records: list[dict[str, Any]], repo: Path) -> None:
             "historical_status": record.get("status"),
             "logical_root": record.get("logical_root"),
             "generic_prompt": reviewer_prompt("{sentence}", "{target}"),
+            "historical_wire_keys": wire_keys,
+            "historical_content": content_sent,
+            "model_call_policy": call_policy,
             "retry_prompt": WORD_RETRY_PROMPT if experiment_id == "low-word-only-retry" else CONTEXTUAL_RETRY_PROMPT if experiment_id == "low-unigram-retry" else EXPRESSION_RETRY_PROMPT,
             "inference_fields": {
                 "sent": ["model", "stream", "store", "input", "include_reasoning", "reasoning"],
@@ -693,7 +757,7 @@ def write_publications(records: list[dict[str, Any]], repo: Path) -> None:
         }
         (configs / f"{experiment_id}.json").write_text(json.dumps(config, ensure_ascii=False, indent=2, sort_keys=True) + "\n", encoding="utf-8")
         metrics = record.get("metrics", {})
-        lines = [f"# {experiment_id}", "", "Data-free projection of one preserved historical record. This is an archival result, not a new experiment, semantic ground truth, product claim, or release decision.", "", "## Identity and question", "", f"- Question: {record.get('question', 'UNKNOWN')}", f"- Authorized change: {record.get('variation', 'UNKNOWN')}", f"- Status: `{record.get('status', 'UNKNOWN')}`; an old `RUNNING` marker is not completion.", f"- Private logical root: `{record.get('logical_root', 'UNKNOWN')}`; native path and payloads are not published.", "", "## Configuration projection", "", "- Historical wire keys: `model`, `stream`, `store`, `input`, `include_reasoning`, `reasoning`.", "- Content sent in `input`: the completed source sentence and selected target; the contextual retry additionally carries its original sentence/target/rejected replacement/missing-word evidence.", "- Publicly omitted: source sentences, filled prompts, gold strings, replacements, response bodies, reasoning traces, credentials, and private endpoint/profile values.", "- Detector/gate/retry limits: preserved from the source record; `UNKNOWN` is retained where the source did not expose a value.", "- Resource identities: data, index, English attestation, source, and environment are referenced by identity only; no private path is a runtime dependency.", "", "## Numeric evidence", "", "The complete data-free numeric projection is linked from [study-evidence](../results/study-evidence.json.gz). Per-case/trial fields retain counts, calls, timing/status where available. Text, proposals, references, filled prompts, response bodies, and private result identities are excluded.", "", "| Metric | Value |", "| --- | ---: |"]
+        lines = [f"# {experiment_id}", "", "Data-free projection of one preserved historical record. This is an archival result, not a new experiment, semantic ground truth, product claim, or release decision.", "", "## Identity and question", "", f"- Question: {record.get('question', 'UNKNOWN')}", f"- Authorized change: {record.get('variation', 'UNKNOWN')}", f"- Status: `{record.get('status', 'UNKNOWN')}`; an old `RUNNING` marker is not completion.", f"- Private logical root: `{record.get('logical_root', 'UNKNOWN')}`; native path and payloads are not published.", "", "## Configuration projection", "", f"- Historical wire keys: `{', '.join(wire_keys) if wire_keys else 'none; mechanical/offline boundary'}`.", f"- Variant-specific content: {', '.join(content_sent) if content_sent else 'no model content; caller-supplied data-free inputs only'}.", f"- Model-call policy: `{call_policy}`.", "- Publicly omitted: source sentences, filled prompts, gold strings, replacements, response bodies, reasoning traces, credentials, and private endpoint/profile values.", "- Detector/gate/retry limits: preserved from the source record; `UNKNOWN` is retained where the source did not expose a value.", "- Resource identities: data, index, English attestation, source, and environment are referenced by identity only; no private path is a runtime dependency.", "", "## Numeric evidence", "", "The complete data-free numeric projection is linked from [study-evidence](../results/study-evidence.json.gz). Per-case/trial fields retain counts, calls, timing/status where available. Text, proposals, references, filled prompts, response bodies, and private result identities are excluded.", "", "| Metric | Value |", "| --- | ---: |"]
         for key, value in sorted(metrics.items()):
             if key == "trial_metrics" or isinstance(value, (dict, list)):
                 continue
@@ -741,7 +805,7 @@ def main(argv: list[str] | None = None) -> int:
         if args.existing_census
         else census(args.strategic_home, records, source_map, result_map)
     )
-    (args.output / "experiments.json").write_text(json.dumps({"schema_version": 3, "scope": "all enumerated experiment and recovery roots plus stable child runs/phases and one non-benchmark diagnostic", "source_closure": "research/registry/source-manifest.json", "numeric_projections": "research/results/*.json.gz", "publication_projections": "research/reports/*.md and research/configs/*.json", "experiments": records}, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    (args.output / "experiments.json").write_text(json.dumps({"schema_version": 3, "scope": "all enumerated experiment and recovery roots plus stable child runs/phases and one non-benchmark diagnostic", "source_closure": "research/registry/source-manifest.json", "numeric_projections": "research/results/*.json.gz", "publication_projections": "research/reports/*.md and research/configs/*.json", "original_attempt_mappings": list(ORIGINAL_ATTEMPTS), "experiments": records}, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     (args.output / "archive-catalog.json").write_text(json.dumps(archive_catalog(args.strategic_home), ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     census_payload = {"schema_version": 2, "scope": "complete file-level census from exact owner manifests or verified native traversal", "entries": rows}
     with gzip.GzipFile(filename=str(args.output / "file-census.json.gz"), mode="wb", mtime=0) as handle:

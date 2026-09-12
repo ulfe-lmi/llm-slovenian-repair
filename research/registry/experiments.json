@@ -4,6 +4,26 @@
   "source_closure": "research/registry/source-manifest.json",
   "numeric_projections": "research/results/*.json.gz",
   "publication_projections": "research/reports/*.md and research/configs/*.json",
+  "original_attempt_mappings": [
+    {
+      "id": "007-a-original-attempt",
+      "status": "PARTIAL",
+      "source_evidence": "oap/reports/007-a-isolated-end-to-end-concept-verification.md",
+      "source_evidence_sha256": "report-governed; see immutable OAP report",
+      "replacement_relation": "preserved separately; not merged into 007-b replacement or later studies",
+      "available_mapping": "concept-verification/** and private workload evidence named by the report",
+      "result_claim": "no accepted linguistic conclusion; instrumentation/capture limitations remain explicit"
+    },
+    {
+      "id": "007-b-original-attempt",
+      "status": "PARTIAL",
+      "source_evidence": "oap/reports/007-b-complete-reviewer-and-codex-evaluation.md",
+      "source_evidence_sha256": "report-governed; see immutable OAP report",
+      "replacement_relation": "preserved separately from 007-b-replacement and 007-b-timeout300",
+      "available_mapping": "concept-verification/eval/** and private original execution evidence named by the report",
+      "result_claim": "original instrumentation failure is not retroactively repaired by replacement executions"
+    }
+  ],
   "experiments": [
     {
       "id": "007-b-replacement",

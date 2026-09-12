@@ -105,7 +105,7 @@ def targeted(
         if initial_gate and initial_gate["reason"] == "replacement-unigram-uncertain":
             for retry_index in range(retry_limit):
                 retry_body_value = (
-                    retry_builder(text, candidate, adjusted, initial_gate)
+                    retry_builder(text, candidate, raw, initial_gate)
                     if retry_builder is not None
                     else retry_body(raw.replacement or "", model=model)
                 )

@@ -2,6 +2,9 @@
   "authorized_change": "one-way initial-case restoration",
   "experiment_id": "full-hyphen-case-low",
   "generic_prompt": "You are a narrow Slovenian expression reviewer. Preserve meaning and register. Review only the marked target; do not rewrite the sentence. Return exactly {\"keep\":boolean,\"replacement\":string|null,\"needs_wider_edit\":boolean}. Sentence: {sentence}\nTarget: {target} Answer only the required JSON object.",
+  "historical_wire_keys": ["model", "stream", "store", "input", "include_reasoning", "reasoning"],
+  "historical_content": ["completed source sentence", "hyphen-space detector target", "one-way initial-case adjustment", "raw rejected word on word-only retry"],
+  "model_call_policy": "NO_ENGLISH_POLICY; WORD_ONLY_RETRY; ONE_WAY_INITIAL_CASE",
   "historical_status": "COMPLETED",
   "inference_fields": {
     "content_sent": [

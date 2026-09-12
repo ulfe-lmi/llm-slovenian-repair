@@ -11,8 +11,7 @@ Data-free projection of one preserved historical record. This is an archival res
 
 ## Configuration projection
 
-- Historical wire keys: `model`, `stream`, `store`, `input`, `include_reasoning`, `reasoning`.
-- Content sent in `input`: the completed source sentence and selected target; the contextual retry additionally carries its original sentence/target/rejected replacement/missing-word evidence.
+- Variant-specific wire/content boundary: The audit sends no model request; it classifies only explicit literal source/result token operations. See [configuration](../configs/dassle-uv-audit.json) fields historical_wire_keys, historical_content, and model_call_policy; no later variant's content is inferred.
 - Publicly omitted: source sentences, filled prompts, gold strings, replacements, response bodies, reasoning traces, credentials, and private endpoint/profile values.
 - Detector/gate/retry limits: preserved from the source record; `UNKNOWN` is retained where the source did not expose a value.
 - Resource identities: data, index, English attestation, source, and environment are referenced by identity only; no private path is a runtime dependency.

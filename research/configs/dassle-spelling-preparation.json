@@ -2,6 +2,9 @@
   "authorized_change": "spelling preparation and four-worker execution",
   "experiment_id": "dassle-spelling-preparation",
   "generic_prompt": "You are a narrow Slovenian expression reviewer. Preserve meaning and register. Review only the marked target; do not rewrite the sentence. Return exactly {\"keep\":boolean,\"replacement\":string|null,\"needs_wider_edit\":boolean}. Sentence: {sentence}\nTarget: {target} Answer only the required JSON object.",
+  "historical_wire_keys": ["model", "stream", "store", "input", "include_reasoning", "reasoning"],
+  "historical_content": ["caller-owned DASSLE sentence and selected target", "phase/worker identity", "raw response capture remains private"],
+  "model_call_policy": "DASSLE_PREPARATION_AND_FOUR_WORKER_RUNNER; RECORDED_INCIDENTS_RETAINED",
   "historical_status": "COMPLETE_LOCAL_EVIDENCE_WITH_RECORDED_INCIDENTS",
   "inference_fields": {
     "content_sent": [

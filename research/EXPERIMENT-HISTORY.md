@@ -9,6 +9,20 @@ remain private. The [catalog](registry/experiments.json), [file identities](regi
 and [source mapping](registry/source-manifest.json) provide the evidence trail.
 Numeric alignment success is not synonymous with linguistic correctness.
 
+## 007-f executable archive correction
+
+The publication recovery retains the useful 007-f replay correction and closes
+the historical-driver boundary. Early variants now use their preserved
+no-English family, validator execution reuses caller-supplied frozen first-pass
+proposals, contextual and word-only retries keep their distinct wire/parser
+contracts, and hyphen/case studies retain their own case rules. The three
+ten-run schedulers record immutable trial identities and continue after a
+STOPPED trial; campaigns route through worker/phase entrypoints with SloBench
+RAW handling; retry10 keeps its fixed first-proposal anchor; and the DASSLE
+u/v analyzer is a literal data-free execution. The current saved replay matches
+all 16,375 M2 and M3 records with zero model/network calls. This is archive
+reproduction evidence only, not a new experiment or a scientific conclusion.
+
 ## How the research question changed
 
 The owner prioritized falsifying the repair concept before completing production

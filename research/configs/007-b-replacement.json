@@ -2,6 +2,9 @@
   "authorized_change": "replacement execution only",
   "experiment_id": "007-b-replacement",
   "generic_prompt": "You are a narrow Slovenian expression reviewer. Preserve meaning and register. Review only the marked target; do not rewrite the sentence. Return exactly {\"keep\":boolean,\"replacement\":string|null,\"needs_wider_edit\":boolean}. Sentence: {sentence}\nTarget: {target} Answer only the required JSON object.",
+  "historical_wire_keys": [],
+  "historical_content": [],
+  "model_call_policy": "NO_MODEL_CALL_PRE_PROXY_FAILURE",
   "historical_status": "FAILED_BEFORE_PROXY_CONTACT",
   "inference_fields": {
     "content_sent": [

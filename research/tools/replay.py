@@ -4,13 +4,13 @@
 from __future__ import annotations
 
 import argparse
-from collections.abc import Mapping
 import hashlib
 import json
 import os
-from pathlib import Path
 import sqlite3
 import stat
+from collections.abc import Mapping
+from pathlib import Path
 from typing import Any
 
 from research.curated.corpus import Corpus
@@ -66,6 +66,15 @@ def verify_manifest(
     """Verify exact private identities using explicit logical-root mappings."""
     document = json.loads(_manifest_bytes(manifest))
     entries = _ledger_entries(document)
+    allowed = {"private-only", "reconstructible-dependency", "duplicate-linked", "published-curated/redacted"}
+    for entry in entries:
+        classification = entry.get("classification")
+        if classification not in allowed:
+            raise ValueError(f"unknown ledger disposition: {classification!r}")
+        if not isinstance(entry.get("relative_path"), str) or not entry["relative_path"]:
+            raise ValueError("ledger entry lacks a relative path")
+        if not isinstance(entry.get("sha256"), str) or len(entry["sha256"]) != 64:
+            raise ValueError("ledger entry lacks a SHA-256 identity")
     checked = 0
     eligible = [
         entry

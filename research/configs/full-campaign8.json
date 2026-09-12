@@ -2,6 +2,9 @@
   "authorized_change": "final eight-worker campaign",
   "experiment_id": "full-campaign8",
   "generic_prompt": "You are a narrow Slovenian expression reviewer. Preserve meaning and register. Review only the marked target; do not rewrite the sentence. Return exactly {\"keep\":boolean,\"replacement\":string|null,\"needs_wider_edit\":boolean}. Sentence: {sentence}\nTarget: {target} Answer only the required JSON object.",
+  "historical_wire_keys": ["model", "stream", "store", "input", "include_reasoning", "reasoning"],
+  "historical_content": ["caller-owned phase sentence/target", "RAW translation only for SloBench", "worker/status/checkpoint identity"],
+  "model_call_policy": "NINE_PHASE_EIGHT_WORKER_RUNNER; SLOBENCH_RAW_TO_M1_M2_M3; OTHER_PHASES_M0_M1_M2_M3",
   "historical_status": "COMPLETED_LOCAL_CAMPAIGN_REMOTE_SCORING_PENDING",
   "inference_fields": {
     "content_sent": [

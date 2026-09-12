@@ -8,17 +8,15 @@ be rendered offline; execution is only possible with explicit resources and
 
 from __future__ import annotations
 
-import argparse
-import json
-import multiprocessing
 import os
-from pathlib import Path
 import time
 import traceback
+from collections.abc import Callable
 from dataclasses import dataclass
-from typing import Any, Callable
+from pathlib import Path
+from typing import Any
 
-from .historical_common import jsonlines, pointer, read, save, sha, utc
+from .historical_common import jsonlines, pointer, read, save, utc
 from .historical_methods import direct, identity, no_retry, targeted
 from .historical_transport import Client
 
@@ -119,7 +117,17 @@ def offline_campaign_plan() -> dict[str, object]:
             "network_calls": 0, "model_calls": 0, "execution": "not started"}
 
 
-def run_assigned(worker: int, phase: str, rows: list[dict[str, Any]], output_root: str | Path, pipeline_factory: Callable[[], Any], client_factory: Callable[[], Client]) -> None:
+def run_assigned(
+    worker: int,
+    phase: str,
+    rows: list[dict[str, Any]],
+    output_root: str | Path,
+    pipeline_factory: Callable[[], Any],
+    client_factory: Callable[[], Client],
+    *,
+    retry_limit: int = FINAL_CAMPAIGN.retry_limit,
+    model: str = "qwen3.8-27b",
+) -> None:
     monitor = Path(output_root) / "workers" / phase / str(worker)
     monitor.mkdir(parents=True, exist_ok=True)
     pipeline, client = pipeline_factory(), client_factory()
@@ -133,12 +141,12 @@ def run_assigned(worker: int, phase: str, rows: list[dict[str, Any]], output_roo
             status("RUNNING", current_index=example["index"], current_id=example["id"])
             try:
                 if phase == "slobench":
-                    raw = one(example, "RAW", pipeline, client, output_root)
+                    raw = one(example, "RAW", pipeline, client, output_root, retry_limit=retry_limit, model=model)
                     for method in ("M1", "M2", "M3"):
-                        one(example, method, pipeline, client, output_root, raw=raw)
+                        one(example, method, pipeline, client, output_root, raw=raw, retry_limit=retry_limit, model=model)
                 else:
                     for method in ("M0", "M1", "M2", "M3"):
-                        one(example, method, pipeline, client, output_root)
+                        one(example, method, pipeline, client, output_root, retry_limit=retry_limit, model=model)
             except Exception:
                 incident = monitor / f"INCIDENT-{example['index']}-{time.time_ns()}.json"
                 save(incident, {"utc": utc(), "phase": phase, "id": example["id"], "index": example["index"], "traceback": traceback.format_exc(), "worker": worker, "requires_separate_reconciliation": True})
@@ -175,6 +183,70 @@ def run(config: dict[str, Any], *, output_root: str | Path, pipeline_factory: Ca
         pipeline.close()
     pointer(Path(output_root) / "RUN-STATUS.json", {"status": status, "completed_benchmarks": completed, "new_network_calls_this_process": client.network_calls, "utc": utc()})
     return {"status": status, "completed_benchmarks": completed, "new_model_calls": client.network_calls}
+
+
+def run_injected(
+    rows: list[dict[str, Any]],
+    *,
+    output_root: str | Path,
+    workers: int,
+    pipeline_factory: Callable[[], Any],
+    client_factory: Callable[[], Client],
+    retry_limit: int = FINAL_CAMPAIGN.retry_limit,
+    model: str = "qwen3.8-27b",
+) -> dict[str, Any]:
+    """Run the owned worker/phase entrypoint over injected private rows.
+
+    This is the caller-owned reproduction seam used by the public CLI.  It
+    exercises ``run_assigned`` and its worker status/checkpoint behavior while
+    keeping rows and resources outside the repository.
+    """
+    if not 1 <= workers <= WORKERS:
+        raise ValueError("campaign workers must be between 1 and 8")
+    if retry_limit < 0:
+        raise ValueError("retry limit must be non-negative")
+    root = Path(output_root)
+    phases: dict[str, list[dict[str, Any]]] = {}
+    for row in rows:
+        phase = str(row.get("benchmark", "unknown"))
+        if not isinstance(row.get("input"), str):
+            raise ValueError("campaign row lacks input")
+        phases.setdefault(phase, []).append(row)
+    worker_statuses: list[dict[str, Any]] = []
+    for phase, phase_rows in phases.items():
+        # The historical scheduler assigned rows by stable index, then started
+        # one owned runner per worker.  SloBench's RAW->M1/M2/M3 branch lives in
+        # run_assigned; all other phases use M0/M1/M2/M3 there.
+        for worker in range(workers):
+            assigned = partition(phase_rows, worker, workers)
+            run_assigned(worker, phase, assigned, root, pipeline_factory, client_factory, retry_limit=retry_limit, model=model)
+            status_path = root / "workers" / phase / str(worker) / "STATUS.json"
+            if status_path.is_file():
+                worker_statuses.append(read(status_path))
+        pointer(root / "phase-complete" / (phase + ".json"), {
+            "phase": phase,
+            "examples": len(phase_rows),
+            "workers": workers,
+            "methods": ["RAW", "M1", "M2", "M3"] if phase == "slobench" else ["M0", "M1", "M2", "M3"],
+            "retry_limit": retry_limit,
+            "model": model,
+            "new_model_calls": sum(int(item.get("new_model_calls", 0)) for item in worker_statuses if item.get("phase") == phase),
+            "status": "COMPLETE" if all(item.get("status") == "COMPLETE" for item in worker_statuses if item.get("phase") == phase) else "RECORDED_WITH_WORKER_INCIDENTS",
+            "utc": utc(),
+        })
+    result = {
+        "status": "INFERENCE_COMPLETE_SCORING_AND_REPORT_PENDING",
+        "phases": list(phases),
+        "workers": workers,
+        "methods": {phase: (["RAW", "M1", "M2", "M3"] if phase == "slobench" else ["M0", "M1", "M2", "M3"]) for phase in phases},
+        "completed_cases": sum(len(value) for value in phases.values()),
+        "worker_statuses": worker_statuses,
+        "new_model_calls": sum(int(item.get("new_model_calls", 0)) for item in worker_statuses),
+        "network_calls": sum(int(item.get("new_model_calls", 0)) for item in worker_statuses),
+        "model_calls": sum(int(item.get("new_model_calls", 0)) for item in worker_statuses),
+    }
+    pointer(root / "RUN-STATUS.json", result)
+    return {"executed": True, "records": result["completed_cases"], "output_root": "caller-supplied", **result}
 
 
 def refuse_live_default(*, allow_live: bool = False) -> None:

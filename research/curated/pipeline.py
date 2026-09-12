@@ -2,15 +2,15 @@
 
 from __future__ import annotations
 
-from collections.abc import Callable, Mapping
 import json
+from collections.abc import Callable, Mapping
 from typing import Any
 
 from .corpus import Corpus
-from .detector import Candidate, detect, tokenize
+from .detector import detect, tokenize
 from .english_preserve import classify
 from .gating import check
-from .patching import restore_initial_case, apply_edits
+from .patching import apply_edits, restore_initial_case
 from .protected import protected_intervals
 from .review import Proposal, parse_expression, parse_proposal
 
@@ -147,13 +147,19 @@ def replay(
     no_retry_output = apply_edits(original, no_retry_edits)
     if corrective_failure:
         output = original
+        # Candidate edits are diagnostic evidence only after a corrective
+        # transport failure.  The public failure contract is fail-closed;
+        # callers can inspect the separate pre-failure field if needed.
+        public_edits: list[tuple[int, int, str]] = []
+    else:
+        public_edits = edits
     return {
         "original": original,
         "output": output,
         "no_retry_output": no_retry_output,
         "detector": prepared,
         "decisions": decisions,
-        "edits": edits,
+        "edits": public_edits,
         "no_retry_edits": no_retry_edits,
         "review_calls": sum(not policy["review_suppressed"] for policy in prepared["english"]),
         "retry_calls": sum(decision["retry_used"] for decision in decisions),

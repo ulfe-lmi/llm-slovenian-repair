@@ -2,14 +2,13 @@
 
 from __future__ import annotations
 
-import hashlib
-from collections import Counter
+from collections.abc import Mapping
 from typing import Any
 
-from .gating import UnigramIndex, check
-from .historical_transport import CONTEXTUAL_RETRY_PROMPT, expression_retry_body, word_retry_body
+from .gating import check
+from .historical_transport import CONTEXTUAL_RETRY_PROMPT, word_retry_body
 from .patching import apply_edits
-from .review import Proposal, ReviewerError, parse_expression, parse_proposal
+from .review import Proposal, parse_proposal
 
 WORD_ONLY_INSTRUCTION = """Ta beseda je napačno zapisana: {word}
 
@@ -25,8 +24,17 @@ def contextual_retry_body(record: dict[str, Any] | str, decision: dict[str, Any]
             raise ValueError("contextual retry requires the saved decision")
         candidate = decision["candidate"]
         gate = decision.get("first_gate", {})
+        proposal = decision["proposal"]
+        if isinstance(proposal, Proposal):
+            replacement = proposal.replacement
+        elif isinstance(proposal, Mapping):
+            replacement = proposal.get("replacement")
+        else:
+            raise ValueError("contextual retry proposal must be a saved mapping or Proposal")
+        if not isinstance(replacement, str):
+            raise ValueError("contextual retry requires the rejected replacement")
         data = {"original_sentence": record["original"], "target": candidate["text"], "target_start": candidate["start"], "target_end": candidate["end"],
-                "rejected_replacement": decision["proposal"]["replacement"],
+                "rejected_replacement": replacement,
                 "replacement_words_not_found": [word["key"] for word in gate.get("unigram", {}).get("words", []) if word.get("state") != "EXACT"]}
     import json
     return {"model": model, "stream": False, "store": False,
@@ -36,6 +44,14 @@ def contextual_retry_body(record: dict[str, Any] | str, decision: dict[str, Any]
 
 def word_only_retry_body(raw_word: str, *, model: str = "qwen3.8-27b") -> dict[str, Any]:
     return word_retry_body(raw_word, model=model)
+
+
+def proposal_replacement(value: Proposal | Mapping[str, Any]) -> str:
+    """Read a raw saved proposal without assuming a dataclass instance."""
+    replacement = value.replacement if isinstance(value, Proposal) else value.get("replacement")
+    if not isinstance(replacement, str):
+        raise ValueError("retry requires a nonempty rejected replacement")
+    return replacement
 
 
 def parse_contextual(response: object) -> Proposal:

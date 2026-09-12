@@ -641,6 +641,96 @@
         "externalized input/index/output roots",
         "kept experimental semantics and variant boundaries"
       ]
+    },
+    {
+      "original_logical_path": "experiments/low-plus-validator-20260909.eKAYe6/validate.py",
+      "original_sha256": "f91fc93e7d134cf9341cc757481ec189bf5ffc862d87766dea6afa6ee8a73718",
+      "curated_path": "research/curated/historical_validator.py",
+      "curated_sha256": "4662ab51810e979f28c2bf5eb8cd5b54f8c481332445ed45d58afbf47a005379",
+      "disposition": "published-curated/redacted",
+      "function_coverage": {"copied": ["body_for equivalent validator_body", "parse equivalent parse_validator", "run_validator_records"], "unavailable": ["private first-pass freeze and rows: caller-owned"]},
+      "transformations": ["removed absolute private roots", "reused frozen first-stage records without resampling", "externalized model/input/output resources"]
+    },
+    {
+      "original_logical_path": "experiments/prijigrala-retry10-20260911.3E6HOg/run_test.py",
+      "original_sha256": "d441ebbdfe30b04007056813d984e29fc44cc67b9b06608240a1644a7da0d880",
+      "curated_path": "research/curated/historical_retry10.py",
+      "curated_sha256": "cff5c5732511f6a92abfb989c8c69ee8ad78b5e99fd817b781ec95b42548d10e",
+      "disposition": "published-curated/redacted",
+      "function_coverage": {"copied": ["sequence", "run_record", "fixed raw first-proposal retry anchor"], "unavailable": ["private dataset/profile/endpoint"]},
+      "transformations": ["externalized caller roots", "preserved ten-retry stop and gate semantics", "excluded source/result payloads"]
+    },
+    {
+      "original_logical_path": "experiments/dassle-uv-audit-20260911.BGeMLs/analyze.py",
+      "original_sha256": "8a6889ee11ffe736042097f30305f5170003f992c2adaaa846c35bacf8763bc3",
+      "curated_path": "research/curated/historical_dassle.py",
+      "curated_sha256": "bd63cdb64b3058c256ea179d29143e9a61e17f9637e4bdd9ea0d980476d27f31",
+      "disposition": "published-curated/redacted",
+      "function_coverage": {"copied": ["classify", "tagged", "evaluate", "analyze", "run_audit_records"], "unavailable": ["sealed source/result rows: private-only caller inputs"]},
+      "transformations": ["removed private absolute roots", "made source/result inputs explicit", "retained data-free literal classification only"]
+    },
+    {
+      "original_logical_path": "experiments/ten-run-initial-case-low-20260909.87bzTW/run_pipeline.py",
+      "original_sha256": "927f1ed9c0e9d778af84b3c5cd5bd172b2b21a8d4e26bf0adf855b78dfdc19e8",
+      "curated_path": "research/curated/historical_variants.py",
+      "curated_sha256": "723f9721d83a3971f2f671fbe68d97a9ff15c60ddaa701969e90a099f7026a1b",
+      "disposition": "published-curated/redacted",
+      "function_coverage": {"copied": ["HistoricalVariantPipeline", "symmetric case rule", "historical detector/gate/patch seam"], "unavailable": ["frozen case rows: caller-owned"]},
+      "transformations": ["preserved original-coordinate offsets", "externalized index and output roots", "kept no-English historical boundary"]
+    },
+    {
+      "original_logical_path": "experiments/ten-run-initial-case-low-20260909.87bzTW/run_ten.py",
+      "original_sha256": "9bb493804afb036f6a502a560cf602f72259d38c4554577da5da6e1af1c91fd0",
+      "curated_path": "research/curated/historical_ten_run.py",
+      "curated_sha256": "8e98f78f2cba4561e3ce3e8811eaba8d2e376e7637377b1f1d514e4a8f11b019",
+      "disposition": "published-curated/redacted",
+      "function_coverage": {"copied": ["run_scheduled_trials", "stopped-trial continuation", "trial identity paths"], "unavailable": []},
+      "transformations": ["parameterized caller-owned records", "preserved ten scheduled trial boundary", "excluded model responses"]
+    },
+    {
+      "original_logical_path": "experiments/ten-run-expression-retry-low-20260909.xJhqYm/run_pipeline.py",
+      "original_sha256": "b9a99e509c11fdad100cc3f03784de8cbe74d1dad0a6efea0a2d67b7f9867722",
+      "curated_path": "research/curated/historical_variants.py",
+      "curated_sha256": "723f9721d83a3971f2f671fbe68d97a9ff15c60ddaa701969e90a099f7026a1b",
+      "disposition": "published-curated/redacted",
+      "function_coverage": {"copied": ["HistoricalVariantPipeline", "symmetric case rule", "expression retry family"], "unavailable": ["frozen case rows: caller-owned"]},
+      "transformations": ["preserved context-free expression retry distinction", "externalized index/output roots", "kept no-English historical boundary"]
+    },
+    {
+      "original_logical_path": "experiments/ten-run-expression-retry-low-20260909.xJhqYm/run_ten.py",
+      "original_sha256": "85ba028a250096fd73635522a79d29258d33e4076537499fe8e05dd8e4e56096",
+      "curated_path": "research/curated/historical_ten_run.py",
+      "curated_sha256": "8e98f78f2cba4561e3ce3e8811eaba8d2e376e7637377b1f1d514e4a8f11b019",
+      "disposition": "published-curated/redacted",
+      "function_coverage": {"copied": ["run_scheduled_trials", "stopped-trial continuation", "trial identity paths"], "unavailable": []},
+      "transformations": ["parameterized caller-owned records", "preserved ten scheduled trial boundary", "excluded model responses"]
+    },
+    {
+      "original_logical_path": "experiments/ten-run-english-preserve-low-20260909.AQnnRH/run_ten.py",
+      "original_sha256": "85ba028a250096fd73635522a79d29258d33e4076537499fe8e05dd8e4e56096",
+      "curated_path": "research/curated/historical_ten_run.py",
+      "curated_sha256": "8e98f78f2cba4561e3ce3e8811eaba8d2e376e7637377b1f1d514e4a8f11b019",
+      "disposition": "published-curated/redacted",
+      "function_coverage": {"copied": ["run_scheduled_trials", "English-preserve trial family", "stopped-trial continuation", "trial identity paths"], "unavailable": []},
+      "transformations": ["kept English evidence caller-owned", "preserved ten scheduled trial boundary", "excluded response payloads"]
+    },
+    {
+      "original_logical_path": "llm-slovenian-repair-campaign8.ewruv3/observe8.py",
+      "original_sha256": "216e98a062e786163cf67e52e1da0ea9d04a8f2e9f407d138ee5fbf504d5e8f1",
+      "curated_path": "research/curated/historical_campaign.py",
+      "curated_sha256": "9567ae35d664999181e9689fdfdb27fbdacc3d6ce47bec3f5c0fed05658060c2",
+      "disposition": "published-curated/redacted",
+      "function_coverage": {"copied": ["run_assigned worker STATUS", "run_injected phase-complete observations"], "unavailable": ["native snapshot(): private monitor payloads and paths"]},
+      "transformations": ["replaced private monitor paths with caller output root", "published counts/statuses only", "excluded raw worker records"]
+    },
+    {
+      "original_logical_path": "llm-slovenian-repair-campaign8.ewruv3/score8.py",
+      "original_sha256": "8815d36e5b38f07ed0d4e05773eb199bb95267cdf3ebf2ec7212cf75d675e623",
+      "curated_path": "research/curated/historical_scoring.py",
+      "curated_sha256": "26dbfdd235790558e12e4a794379d72f1e04fc8869d5bd07f9baee665566dc40",
+      "disposition": "published-curated/redacted",
+      "function_coverage": {"copied": ["tokens", "edits", "edit_key", "overlap", "prf", "summarize"], "unavailable": ["native scorer subprocess invocation: caller-selected scorer boundary"]},
+      "transformations": ["externalized scorer resources", "kept official/custom scoring distinction", "excluded private result rows"]
     }
   ]
 }
