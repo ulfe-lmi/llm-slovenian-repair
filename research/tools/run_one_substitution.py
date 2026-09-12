@@ -404,7 +404,11 @@ def validate_pair(
         raise ExperimentError(f"index pairing mismatch: {phase}/{index}")
     if snapshot.get("id") != expected_id or saved.get("id") != expected_id:
         raise ExperimentError(f"ID pairing mismatch: {phase}/{index}")
-    if not isinstance(expected_input, str) or not isinstance(dataset.get("reference"), str):
+    reference = dataset.get("reference")
+    if not isinstance(expected_input, str) or not (
+        isinstance(reference, str)
+        or (reference is None and dataset.get("reference_status") == "MISSING_BLANK_FIELD")
+    ):
         raise ExperimentError(f"dataset text schema mismatch: {phase}/{index}")
     input_sha = hashlib.sha256(expected_input.encode("utf-8")).hexdigest()
     if snapshot.get("input_sha256") != input_sha or saved.get("input_sha256") != input_sha:

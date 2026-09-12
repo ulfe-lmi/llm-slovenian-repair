@@ -64,9 +64,125 @@ class OneSubstitutionTests(unittest.TestCase):
             "duplicate call": {"decisions": [{"first": first}], "calls": [first, first]},
         }
         for label, record in invalid_records.items():
-            with self.subTest(label=label):
-                with self.assertRaises(driver.ExperimentError):
-                    driver.call_counts(record)
+            with self.subTest(label=label), self.assertRaises(driver.ExperimentError):
+                driver.call_counts(record)
+
+    def test_pair_validator_accepts_blank_reference_only_with_exact_status(self) -> None:
+        original = "vsi"
+        detector = {"candidates": [], "english": []}
+        input_sha = driver.hashlib.sha256(original.encode("utf-8")).hexdigest()
+
+        def pair(reference: object, status: object = "SUPPLIED") -> tuple[dict, dict, dict]:
+            dataset = {
+                "id": "reference-schema",
+                "index": 1,
+                "input": original,
+                "reference": reference,
+                "reference_status": status,
+            }
+            snapshot = {
+                "id": "reference-schema",
+                "index": 1,
+                "input_sha256": input_sha,
+                "detector": detector,
+            }
+            saved = {
+                "id": "reference-schema",
+                "index": 1,
+                "input": original,
+                "input_sha256": input_sha,
+                "method": "M2",
+                "detector": detector,
+                "output": original,
+                "operational_failure": False,
+                "calls": [],
+                "decisions": [],
+            }
+            return dataset, snapshot, saved
+
+        dataset, snapshot, saved = pair(None, "MISSING_BLANK_FIELD")
+        driver.validate_pair(dataset, snapshot, saved, "dassle-spelling", 1)
+
+        dataset, snapshot, saved = pair("vse")
+        driver.validate_pair(dataset, snapshot, saved, "dassle-spelling", 1)
+
+    def test_pair_validator_rejects_missing_or_wrong_blank_status(self) -> None:
+        original = "vsi"
+        detector = {"candidates": [], "english": []}
+        input_sha = driver.hashlib.sha256(original.encode("utf-8")).hexdigest()
+
+        def pair(status: object = "SUPPLIED", *, omit_status: bool = False) -> tuple[dict, dict, dict]:
+            dataset = {
+                "id": "reference-schema",
+                "index": 1,
+                "input": original,
+                "reference": None,
+            }
+            if not omit_status:
+                dataset["reference_status"] = status
+            snapshot = {
+                "id": "reference-schema",
+                "index": 1,
+                "input_sha256": input_sha,
+                "detector": detector,
+            }
+            saved = {
+                "id": "reference-schema",
+                "index": 1,
+                "input": original,
+                "input_sha256": input_sha,
+                "method": "M2",
+                "detector": detector,
+                "output": original,
+                "operational_failure": False,
+                "calls": [],
+                "decisions": [],
+            }
+            return dataset, snapshot, saved
+
+        for label, arguments in (
+            ("missing", {"omit_status": True}),
+            ("wrong", {"status": "SUPPLIED"}),
+        ):
+            with self.subTest(label=label), self.assertRaises(driver.ExperimentError):
+                driver.validate_pair(
+                    *pair(**arguments), "dassle-spelling", 1
+                )
+
+    def test_pair_validator_rejects_every_other_non_string_reference(self) -> None:
+        original = "vsi"
+        detector = {"candidates": [], "english": []}
+        input_sha = driver.hashlib.sha256(original.encode("utf-8")).hexdigest()
+        for reference in (True, 1, 1.5, ["vse"], {"value": "vse"}):
+            dataset = {
+                "id": "reference-schema",
+                "index": 1,
+                "input": original,
+                "reference": reference,
+                "reference_status": "MISSING_BLANK_FIELD",
+            }
+            snapshot = {
+                "id": "reference-schema",
+                "index": 1,
+                "input_sha256": input_sha,
+                "detector": detector,
+            }
+            saved = {
+                "id": "reference-schema",
+                "index": 1,
+                "input": original,
+                "input_sha256": input_sha,
+                "method": "M2",
+                "detector": detector,
+                "output": original,
+                "operational_failure": False,
+                "calls": [],
+                "decisions": [],
+            }
+            with self.subTest(reference_type=type(reference).__name__), self.assertRaises(
+                driver.ExperimentError
+            ):
+                driver.validate_pair(dataset, snapshot, saved, "dassle-spelling", 1)
 
     def test_only_same_length_one_alphabetic_difference_qualifies(self) -> None:
         self.assertEqual(qualifying_candidates("vsi", ["vse"]), ["vse"])
