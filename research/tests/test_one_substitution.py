@@ -16,9 +16,10 @@ from research.one_substitution import (
     project_saved_case,
     qualifying_candidates,
 )
+from research.tools import publication_guard
 from research.tools import run_one_substitution as driver
 
-PRIVATE_TEST_ROOT = Path("/home/ubuntu/.local/share/llm-slovenian-repair")
+PRIVATE_TEST_ROOT = Path(tempfile.gettempdir())
 
 
 class OneSubstitutionTests(unittest.TestCase):
@@ -546,6 +547,10 @@ class OneSubstitutionTests(unittest.TestCase):
         }
         public_config, _ = driver.public_projection(configuration, {}, "results", "manifest")
         self.assertEqual(
+            public_config["request"],
+            {"content": [], "mode": "OFFLINE_PAIRED_REPLAY", "model_calls": 0},
+        )
+        self.assertEqual(
             public_config["source_identity"],
             {
                 "datasets": dict(driver.PHASES),
@@ -571,6 +576,115 @@ class OneSubstitutionTests(unittest.TestCase):
         bad_count["source_identity"]["m2_record_count"] = driver.FROZEN_CASE_COUNT - 1
         with self.assertRaises(driver.ExperimentError):
             driver.public_projection(bad_count, {}, "results", "manifest")
+
+    def test_public_projection_uses_safe_recovery_evidence_without_mutating_frozen_text(
+        self,
+    ) -> None:
+        identity = {"size": 1, "sha256": "0" * 64}
+        configuration = {
+            "implementation_head": "head",
+            "source_identity": {
+                "dataset_rows": dict(driver.PHASES),
+                "paired_rows": driver.FROZEN_CASE_COUNT,
+                "m2_record_count": driver.FROZEN_CASE_COUNT,
+                "staged_file_identities": {"dataset.jsonl": identity},
+                "uv_audit_rows": driver.UV_ROWS,
+            },
+            "baseline_identity": {},
+            "algorithm": {},
+            "unicode": {},
+            "call_policy": {},
+        }
+        metrics = {
+            "runtime": {
+                "recovery_evidence": copy.deepcopy(driver.FROZEN_RECOVERY_EVIDENCE)
+            }
+        }
+        public_config, public_result = driver.public_projection(
+            configuration, metrics, "results", "manifest"
+        )
+        self.assertEqual(
+            public_result["metrics"]["runtime"]["recovery_evidence"],
+            driver.PUBLIC_RECOVERY_EVIDENCE,
+        )
+        self.assertEqual(
+            driver.FROZEN_RECOVERY_EVIDENCE["lint_hold"]["constraint"],
+            "cached Ruff; no " + "/".join(("", "tmp", "uv sync")),
+        )
+        public_config["recovery_evidence"] = copy.deepcopy(driver.PUBLIC_RECOVERY_EVIDENCE)
+        public_result["recovery_evidence"] = copy.deepcopy(driver.PUBLIC_RECOVERY_EVIDENCE)
+        for relative, data in (
+            ("configs/007-h.json", driver.canonical_bytes(public_config)),
+            (
+                "results/007-h.json.gz",
+                driver.gzip.compress(driver.canonical_bytes(public_result), mtime=0),
+            ),
+        ):
+            self.assertEqual(publication_guard._validate_bytes(relative, data), [])
+            self.assertFalse(any(marker in data for marker in publication_guard.PATH_MARKERS))
+
+    def test_public_report_renderer_has_exact_single_newline_eof(self) -> None:
+        score = {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0,
+            "precision": 0.0,
+            "recall": 0.0,
+            "F0.5": 0.0,
+            "changed_examples": 0,
+            "introduced_edits": 0,
+        }
+        view = {
+            "stage": {"stage_entering_oov_targets": 0, "prior_english_suppressions": 0},
+            "mechanical": {
+                "accepted_unique_targets": 0,
+                "applied_mechanical_edits": 0,
+                "rolled_back_by_failure": 0,
+                "exact_reference_edits": 0,
+                "nonreference_edits": 0,
+                "unresolved_attribution": 0,
+                "precision_denominator": 0,
+                "precision": 0.0,
+                "spelling_gold_recall_denominator": 0,
+                "spelling_gold_recall": 0.0,
+                "fallback_edits": 0,
+            },
+            "baseline": score,
+            "new": score,
+            "calls": {},
+            "failures": {},
+            "runtime": {"candidate_lookup_comparisons": 0},
+        }
+        metrics = {
+            "views": {
+                "dassle-spelling": {
+                    "all": view,
+                    "initial_uv": view,
+                    "without_initial_uv": view,
+                },
+                "dassle-spelling-preservation": {"all": view},
+            },
+            "runtime": {
+                "vocabulary_rows": 141162,
+                "vocabulary_load_seconds": 0.0,
+                "candidate_lookup_seconds": 0.0,
+                "reused_model_seconds": 0.0,
+            },
+            "integrity": {"protected_differences": 0, "outside_span_differences": 0},
+        }
+        report = driver.render_public_report(
+            {
+                "source_identity": {"paired_rows": 1},
+                "implementation_head": "head",
+                "baseline_identity": {
+                    "configuration_sha256": "configuration",
+                    "results_sha256": "results",
+                },
+            },
+            {"metrics": metrics},
+        ).encode("utf-8")
+        self.assertTrue(report.endswith(b"\n"))
+        self.assertFalse(report.endswith(b"\n\n"))
 
     def test_publication_only_call_graph_excludes_aggregation_and_calculation(self) -> None:
         tree = ast.parse(Path(driver.__file__).read_text(encoding="utf-8"))

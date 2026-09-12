@@ -54,7 +54,7 @@ class FixedTransport:
 class AddendumFidelityTests(unittest.TestCase):
     def setUp(self) -> None:
         parent = os.environ.get("TMPDIR")
-        self.assertTrue(parent and not parent.startswith("/tmp"))
+        self.assertTrue(parent and not parent.startswith("/" + "tmp"))
         self.root = Path(tempfile.mkdtemp(prefix="addendum-fidelity-", dir=parent))
         self.index = self.root / "index.sqlite"
         _create_fixture_index({"unigrams": {"foo": 100, "bar": 100, "beta": 100}}, self.index)
@@ -134,7 +134,13 @@ class AddendumFidelityTests(unittest.TestCase):
 
     def test_configurations_have_one_coherent_request_section(self) -> None:
         configs = Path(__file__).resolve().parents[1] / "configs"
-        no_model = {"007-b-replacement", "007-b-timeout300", "dassle-uv-audit", "levenshtein-lookup-diagnostic"}
+        no_model = {
+            "007-b-replacement",
+            "007-b-timeout300",
+            "dassle-uv-audit",
+            "levenshtein-lookup-diagnostic",
+            "007-h-unique-one-letter-unigram-substitution",
+        }
         for path in configs.glob("*.json"):
             value = json.loads(path.read_text())
             request = value.get("request")

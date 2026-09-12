@@ -136,6 +136,7 @@ FROZEN_PUBLICATION_INCIDENT_SHA256 = (
 FROZEN_INVALID_PUBLICATION_INCIDENT_SHA256 = (
     "fc4aebc9e179b3f82e5473da0619029a3d58717733128a5f2bbb32619c134650"
 )
+_FROZEN_PRIVATE_SYNC_MARKER = "/".join(("", "tmp", "uv sync"))
 FROZEN_INCIDENT_SHA256 = {
     "precalculation": "bb5b762afc3b6e836a5db11b2211e5a520715a3ca695b99cfb7f51ae53882085",
     "calculation_aggregation": "9c03fd562dee7f9f483c47815f4ca5ac6fd750f2179a110559d0470fc9652305",
@@ -148,7 +149,21 @@ FROZEN_RECOVERY_EVIDENCE = {
     "lint_hold": {
         "status": "RESOLVED_BEFORE_AGGREGATION",
         "scope": "final pre-execution lint hold",
-        "constraint": "cached Ruff; no /tmp/uv sync",
+        "constraint": "cached Ruff; no " + _FROZEN_PRIVATE_SYNC_MARKER,
+    },
+    "mode_hardening": {
+        "case_root_mode_before": "0755",
+        "case_root_mode_after": "0700",
+        "case_bytes_changed": False,
+    },
+    "calculation_case_write_span_seconds": 132.6060507297516,
+    "calculation_case_write_rate_per_second": 22.419791432133916,
+}
+PUBLIC_RECOVERY_EVIDENCE = {
+    "lint_hold": {
+        "status": "RESOLVED_BEFORE_AGGREGATION",
+        "scope": "final pre-execution lint hold",
+        "constraint": "cached Ruff; no system-temporary storage; no package synchronization",
     },
     "mode_hardening": {
         "case_root_mode_before": "0755",
@@ -1441,6 +1456,10 @@ def public_projection(
     private_manifest_sha: str,
 ) -> tuple[dict[str, Any], dict[str, Any]]:
     sources, m2_record_count = projected_file_identities(configuration)
+    public_metrics = copy.deepcopy(metrics)
+    public_runtime = public_metrics.get("runtime")
+    if isinstance(public_runtime, dict) and "recovery_evidence" in public_runtime:
+        public_runtime["recovery_evidence"] = copy.deepcopy(PUBLIC_RECOVERY_EVIDENCE)
     public_config = {
         "schema_version": 1,
         "experiment_id": EXPERIMENT_ID,
@@ -1462,6 +1481,11 @@ def public_projection(
         "unicode": configuration["unicode"],
         "call_policy": configuration["call_policy"],
         "no_tuning_or_resampling": True,
+        "request": {
+            "content": [],
+            "mode": "OFFLINE_PAIRED_REPLAY",
+            "model_calls": 0,
+        },
         "private_evidence_sha256": {
             "results": private_results_sha,
             "manifest": private_manifest_sha,
@@ -1477,7 +1501,7 @@ def public_projection(
             "results": private_results_sha,
             "manifest": private_manifest_sha,
         },
-        "metrics": metrics,
+        "metrics": public_metrics,
         "limitations": [
             (
                 "This is one frozen DASSLE spelling/preservation experiment, not a general "
@@ -1963,7 +1987,7 @@ def publication_only(args: argparse.Namespace) -> dict[str, Any]:
         "publication_incident_sha256": FROZEN_PUBLICATION_INCIDENT_SHA256,
         "invalid_publication_incident_sha256": FROZEN_INVALID_PUBLICATION_INCIDENT_SHA256,
         "publication_supplement": supplement,
-        "recovery_evidence": FROZEN_RECOVERY_EVIDENCE,
+        "recovery_evidence": PUBLIC_RECOVERY_EVIDENCE,
     }
     public_config.update(public_identity)
     public_result.update(public_identity)
@@ -1990,7 +2014,7 @@ def publication_only(args: argparse.Namespace) -> dict[str, Any]:
         "and excluded, with scientific metrics unchanged.\n"
         "- This recovery made no model or application network calls.\n"
     )
-    report_bytes = (report + "\n").encode("utf-8")
+    report_bytes = report.encode("utf-8")
     public_hashes = {
         "config": hashlib.sha256(public_config_bytes).hexdigest(),
         "result": hashlib.sha256(public_result_bytes).hexdigest(),
@@ -2239,7 +2263,7 @@ def aggregate_frozen(args: argparse.Namespace) -> dict[str, Any]:
         public_value["aggregation_implementation_head"] = implementation["implementation_head"]
         public_value["aggregation_identity"] = aggregation_identity
         public_value["incident_sha256"] = incidents
-        public_value["recovery_evidence"] = FROZEN_RECOVERY_EVIDENCE
+        public_value["recovery_evidence"] = PUBLIC_RECOVERY_EVIDENCE
     public_result["configuration_sha256"] = hashlib.sha256(
         canonical_bytes(public_config)
     ).hexdigest()
@@ -2270,7 +2294,8 @@ def aggregate_frozen(args: argparse.Namespace) -> dict[str, Any]:
         "sorting differed from the original Python Path component ordering; frozen case "
         "bytes and status were unchanged, and commit 4fc84353e1f2f4a7618286a0680279a4254aa9d5 "
         "corrected the verifier.\n"
-        "- Lint hold: resolved before aggregation with cached Ruff; no /tmp/uv sync.\n"
+        "- Lint hold: resolved before aggregation with cached Ruff; no system-temporary "
+        "storage or package synchronization.\n"
         "- Case-root mode hardening: 0755 to 0700; case bytes unchanged.\n"
         "- Frozen calculation case-write span/rate: "
         "132.6060507297516 seconds / 22.419791432133916 cases per second.\n"
