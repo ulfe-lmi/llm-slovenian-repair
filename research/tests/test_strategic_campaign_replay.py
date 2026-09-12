@@ -43,10 +43,12 @@ class CampaignReplayShape(unittest.TestCase):
         self.assertEqual(receipt["model_calls"], 0)
 
     def test_verified_global_null_maximum_is_explicit_replay_configuration(self):
-        receipt = self.replay(self.record(suppressed=True), configured_maximum=None)
+        record = self.record(suppressed=True)
+        del record["maximum"]
+        receipt = self.replay(record, configured_maximum=None)
         self.assertIsNone(receipt["detector_maximum"])
         with self.assertRaises(ReplayEvidenceError):
-            self.replay(self.record(suppressed=True))
+            self.replay(record)
 
     def test_recorded_first_call_failure_is_not_missing_proposal_or_keep(self):
         receipt = self.replay(self.record(suppressed=False))
