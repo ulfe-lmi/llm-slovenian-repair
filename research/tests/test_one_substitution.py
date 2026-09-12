@@ -19,6 +19,55 @@ from research.tools import run_one_substitution as driver
 
 
 class OneSubstitutionTests(unittest.TestCase):
+    def test_saved_call_schema_accepts_stage_kinds_and_exact_flattening(self) -> None:
+        first = {"kind": "reviewer", "marker": "first"}
+        retry = {"kind": "expression-retry", "marker": "retry"}
+        second_first = {"kind": "reviewer", "marker": "second"}
+        record = {
+            "decisions": [
+                {"first": first, "retry": retry},
+                {"first": second_first, "retry": None},
+            ],
+            "calls": [first, retry, second_first],
+        }
+        self.assertEqual(driver.call_counts(record), {"first": 2, "retry": 1, "total": 3})
+
+    def test_saved_call_schema_rejects_invalid_stages_and_flattening(self) -> None:
+        first = {"kind": "reviewer", "marker": "first"}
+        retry = {"kind": "expression-retry", "marker": "retry"}
+        second_first = {"kind": "reviewer", "marker": "second"}
+        decisions = [
+            {"first": first, "retry": retry},
+            {"first": second_first, "retry": None},
+        ]
+        valid_calls = [first, retry, second_first]
+        invalid_records = {
+            "wrong first kind": {
+                "decisions": [{"first": {**first, "kind": "expression-retry"}}],
+                "calls": [{**first, "kind": "expression-retry"}],
+            },
+            "wrong retry kind": {
+                "decisions": [{"first": first, "retry": {**retry, "kind": "reviewer"}}],
+                "calls": [first, {**retry, "kind": "reviewer"}],
+            },
+            "non-object stage": {
+                "decisions": [{"first": [], "retry": None}],
+                "calls": [],
+            },
+            "missing call": {"decisions": decisions, "calls": valid_calls[:-1]},
+            "orphan call": {"decisions": decisions, "calls": [*valid_calls, retry]},
+            "order mismatch": {"decisions": decisions, "calls": [retry, first, second_first]},
+            "content mismatch": {
+                "decisions": decisions,
+                "calls": [first, retry, {**second_first, "marker": "changed"}],
+            },
+            "duplicate call": {"decisions": [{"first": first}], "calls": [first, first]},
+        }
+        for label, record in invalid_records.items():
+            with self.subTest(label=label):
+                with self.assertRaises(driver.ExperimentError):
+                    driver.call_counts(record)
+
     def test_only_same_length_one_alphabetic_difference_qualifies(self) -> None:
         self.assertEqual(qualifying_candidates("vsi", ["vse"]), ["vse"])
         self.assertEqual(qualifying_candidates("vsi", ["vsi"]), [])

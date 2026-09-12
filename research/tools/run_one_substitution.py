@@ -364,17 +364,27 @@ def call_counts(record: Mapping[str, Any]) -> dict[str, int]:
     calls = record.get("calls")
     if not isinstance(decisions, list) or not isinstance(calls, list):
         raise ExperimentError("saved M2 record lacks call/decision arrays")
-    first = sum(
-        isinstance(item, dict) and isinstance(item.get("first"), dict) for item in decisions
-    )
-    retry = sum(
-        isinstance(item, dict) and isinstance(item.get("retry"), dict) for item in decisions
-    )
-    if first + retry != len(calls):
-        raise ExperimentError("saved M2 calls do not match saved decision stages")
-    if any(not isinstance(call, dict) or call.get("kind") != "reviewer" for call in calls):
-        raise ExperimentError("saved M2 call kind is not reviewer")
-    return {"first": first, "retry": retry, "total": len(calls)}
+    flattened: list[dict[str, Any]] = []
+    counts = {"first": 0, "retry": 0}
+    expected_kinds = (("first", "reviewer"), ("retry", "expression-retry"))
+    for decision in decisions:
+        if not isinstance(decision, dict):
+            raise ExperimentError("saved M2 decision is not an object")
+        for stage, expected_kind in expected_kinds:
+            call = decision.get(stage)
+            if call is None:
+                continue
+            if not isinstance(call, dict):
+                raise ExperimentError(f"saved M2 {stage} call is not an object")
+            if call.get("kind") != expected_kind:
+                raise ExperimentError(
+                    f"saved M2 {stage} call kind is not {expected_kind}"
+                )
+            flattened.append(call)
+            counts[stage] += 1
+    if calls != flattened:
+        raise ExperimentError("saved M2 calls do not equal decision-stage flattening")
+    return {"first": counts["first"], "retry": counts["retry"], "total": len(flattened)}
 
 
 def validate_pair(
