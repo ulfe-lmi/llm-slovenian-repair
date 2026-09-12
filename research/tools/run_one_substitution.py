@@ -9,6 +9,7 @@ It never imports an HTTP client or calls a model.
 from __future__ import annotations
 
 import argparse
+import copy
 import gzip
 import hashlib
 import json
@@ -62,6 +63,7 @@ IMPLEMENTATION_PATHS = (
     "research/curated/patching.py",
 )
 IMPLEMENTATION_BRANCH = "oap/007-concept-verification"
+PUBLICATION_REMOTE = "origin"
 EXPECTED_INPUTS = {
     "dassle-spelling.jsonl": (
         761_193,
@@ -115,6 +117,7 @@ BASELINE_EXPECTATIONS = {
 }
 
 FROZEN_CALCULATION_HEAD = "939ae8b1482f3b8b5cefba5b0e16d1fde580346d"
+FROZEN_AGGREGATION_HEAD = "5a1808b5227ef3b277ccd1a070b514840bdb310b"
 FROZEN_CONFIGURATION_SHA256 = "10657c4a2a2c53cc6bea9fab4164671dae0196d5c442275da1fb33c0326d27ee"
 FROZEN_INPUT_MANIFEST_SHA256 = "b00a1b8dcd8c4cdf4b181601892a094824af7a3268a4785d56149a05807fa399"
 FROZEN_CASE_IDENTITY_MANIFEST_SHA256 = (
@@ -122,6 +125,12 @@ FROZEN_CASE_IDENTITY_MANIFEST_SHA256 = (
 )
 FROZEN_CASE_BYTES = 49_979_009
 FROZEN_RUN_STATUS_SHA256 = "e8d690988e62fc23147b437066f1a3490d3b547387a6771c5338f0f1ba99f7b9"
+FROZEN_PRIVATE_AGGREGATE_SHA256 = {
+    "results": "9732d27711099630639e2afe40508672c1cdc137dc4a1ef8af7ab0ffda120340",
+    "report": "7f815f1f5f77f33f2f50521050e92f15d455e7eafc387564ddfd4bd0f1e0a02a",
+    "manifest": "b9a6a433ed0a61b9b80eb0cee6a46c6e6c4b112ba177ba6b3d32cfd856b48c9c",
+}
+FROZEN_PUBLICATION_INCIDENT_SHA256 = "cb382883f4b9e179e6149e49a7df7fdb1f494b91cd91670dd31942a6895fb01c"
 FROZEN_INCIDENT_SHA256 = {
     "precalculation": "bb5b762afc3b6e836a5db11b2211e5a520715a3ca695b99cfb7f51ae53882085",
     "calculation_aggregation": "9c03fd562dee7f9f483c47815f4ca5ac6fd750f2179a110559d0470fc9652305",
@@ -289,6 +298,28 @@ def verify_committed_implementation(repo_root: Path, expected_head: str) -> dict
             "sha256": hashlib.sha256(head_bytes).hexdigest(),
         }
     return {"implementation_head": head, "branch": branch, "head_blobs": head_blobs}
+
+
+def verify_remote_implementation(repo_root: Path, expected_head: str) -> str:
+    """Verify the remote branch points at the publication implementation head."""
+    if len(expected_head) != 40 or any(
+        character not in "0123456789abcdef" for character in expected_head
+    ):
+        raise ExperimentError("publication implementation head is not a full lowercase commit SHA")
+    try:
+        output = _git_bytes(
+            repo_root,
+            "ls-remote",
+            PUBLICATION_REMOTE,
+            f"refs/heads/{IMPLEMENTATION_BRANCH}",
+        ).decode("ascii")
+    except UnicodeDecodeError as exc:
+        raise ExperimentError("remote implementation identity is not ASCII") from exc
+    lines = output.splitlines()
+    expected_line = f"{expected_head}\trefs/heads/{IMPLEMENTATION_BRANCH}"
+    if lines != [expected_line]:
+        raise ExperimentError("remote branch does not match publication implementation SHA")
+    return expected_head
 
 
 def write_immutable(path: Path, value: object) -> str:
@@ -1056,7 +1087,9 @@ def build_configuration(
             "dataset_rows": {phase: count for phase, count in PHASES.items()},
             "paired_rows": sum(PHASES.values()),
             "staged_file_identities": {
-                key: value for key, value in input_manifest.items() if key != "m2_records"
+                key: value
+                for key, value in input_manifest.items()
+                if key not in {"m2_records", "m2_record_count"}
             },
             "m2_record_count": input_manifest["m2_record_count"],
             "uv_audit_rows": len(uv_indices),
@@ -1125,6 +1158,7 @@ def safe_score(summary: Mapping[str, Any]) -> dict[str, Any]:
         "reference_N",
         "error_N",
         "gold_edits",
+        "introduced_edits",
         "tp",
         "fp",
         "fn",
@@ -1382,7 +1416,7 @@ def public_projection(
     private_results_sha: str,
     private_manifest_sha: str,
 ) -> tuple[dict[str, Any], dict[str, Any]]:
-    sources = configuration["source_identity"]["staged_file_identities"]
+    sources, m2_record_count = projected_file_identities(configuration)
     public_config = {
         "schema_version": 1,
         "experiment_id": EXPERIMENT_ID,
@@ -1395,7 +1429,8 @@ def public_projection(
         "source_identity": {
             "datasets": configuration["source_identity"]["dataset_rows"],
             "paired_rows": configuration["source_identity"]["paired_rows"],
-            "file_sha256": {key: value["sha256"] for key, value in sources.items()},
+            "m2_record_count": m2_record_count,
+            "file_sha256": sources,
             "uv_audit_rows": configuration["source_identity"]["uv_audit_rows"],
         },
         "baseline_identity": configuration["baseline_identity"],
@@ -1599,6 +1634,432 @@ def compare_prior_public_artifacts(before: Mapping[str, str], after: Mapping[str
         raise ExperimentError(
             "prior public artifact boundary violation: " + json.dumps(details, sort_keys=True)
         )
+
+
+def projected_file_identities(configuration: Mapping[str, Any]) -> tuple[dict[str, str], int]:
+    """Validate staged file identities and keep the M2 count out of file hashes."""
+    source_identity = configuration.get("source_identity")
+    if not isinstance(source_identity, Mapping):
+        raise ExperimentError("source identity is not an object")
+    m2_record_count = source_identity.get("m2_record_count")
+    if type(m2_record_count) is not int or m2_record_count != FROZEN_CASE_COUNT:
+        raise ExperimentError("staged M2 record count is not 2,973")
+    staged = source_identity.get("staged_file_identities")
+    if not isinstance(staged, Mapping):
+        raise ExperimentError("staged file identities are not an object")
+    if "m2_record_count" in staged:
+        if staged["m2_record_count"] != m2_record_count:
+            raise ExperimentError("staged M2 record count disagrees with declared count")
+    file_identities: dict[str, str] = {}
+    for name, identity in staged.items():
+        if name == "m2_record_count":
+            continue
+        if not isinstance(name, str) or not isinstance(identity, Mapping):
+            raise ExperimentError("staged file identity is malformed")
+        if set(identity) != {"size", "sha256"}:
+            raise ExperimentError(f"staged file identity fields are malformed: {name}")
+        size = identity.get("size")
+        sha256 = identity.get("sha256")
+        if type(size) is not int or size < 0 or not isinstance(sha256, str):
+            raise ExperimentError(f"staged file identity values are malformed: {name}")
+        if len(sha256) != 64 or any(character not in "0123456789abcdef" for character in sha256):
+            raise ExperimentError(f"staged file identity hash is malformed: {name}")
+        file_identities[name] = sha256
+    if not file_identities:
+        raise ExperimentError("staged file identities are empty")
+    return file_identities, m2_record_count
+
+
+def verify_frozen_aggregate_outputs(
+    scratch: Path,
+    configuration_sha: str,
+    input_manifest_sha: str,
+    case_digest: str,
+    incidents: Mapping[str, str],
+) -> dict[str, Any]:
+    """Verify the immutable aggregate outputs without recalculating them."""
+    paths = {
+        "results": scratch / "RESULTS.json",
+        "report": scratch / "REPORT.md",
+        "manifest": scratch / "MANIFEST.json",
+    }
+    for name, path in paths.items():
+        require_exact_private_file(path, expected_sha=FROZEN_PRIVATE_AGGREGATE_SHA256[name])
+    results = read_json(paths["results"])
+    manifest = read_json(paths["manifest"])
+    if not isinstance(results, dict) or not isinstance(manifest, dict):
+        raise ExperimentError("frozen private aggregate output is not an object")
+    if (
+        results.get("schema_version") != 1
+        or results.get("experiment_id") != EXPERIMENT_ID
+        or results.get("status") != "COMPLETE_OFFLINE_FROZEN_CASE_AGGREGATION_RECOVERY"
+        or results.get("configuration_sha256") != configuration_sha
+        or results.get("calculation_implementation_head") != FROZEN_CALCULATION_HEAD
+        or results.get("aggregation_implementation_head") != FROZEN_AGGREGATION_HEAD
+        or results.get("incident_sha256") != dict(incidents)
+        or not isinstance(results.get("metrics"), dict)
+    ):
+        raise ExperimentError("frozen private aggregate result identity is invalid")
+    expected_links = {
+        "schema_version": 1,
+        "experiment_id": EXPERIMENT_ID,
+        "status": "COMPLETE_OFFLINE_FROZEN_CASE_AGGREGATION_RECOVERY",
+        "input_manifest_sha256": input_manifest_sha,
+        "configuration_sha256": configuration_sha,
+        "calculation_implementation_head": FROZEN_CALCULATION_HEAD,
+        "aggregation_implementation_head": FROZEN_AGGREGATION_HEAD,
+        "case_identity_manifest_sha256": case_digest,
+        "case_count": FROZEN_CASE_COUNT,
+        "case_bytes": FROZEN_CASE_BYTES,
+        "incident_sha256": dict(incidents),
+        "private_results_sha256": FROZEN_PRIVATE_AGGREGATE_SHA256["results"],
+        "private_report_sha256": FROZEN_PRIVATE_AGGREGATE_SHA256["report"],
+    }
+    for key, expected in expected_links.items():
+        if manifest.get(key) != expected:
+            raise ExperimentError(f"frozen private aggregate link is invalid: {key}")
+    return {"results": results, "manifest": manifest}
+
+
+def _scored_introduced_edits(result: Mapping[str, Any], label: str) -> int:
+    source = result.get("input")
+    output = result.get("output")
+    if not isinstance(source, str) or not isinstance(output, str):
+        raise ExperimentError(f"frozen {label} source/output pair is invalid")
+    try:
+        return len(edits(source, output))
+    except (TypeError, ValueError, KeyError) as exc:
+        raise ExperimentError(f"frozen {label} source/output pair cannot be scored") from exc
+
+
+def derive_publication_supplement(
+    records_by_phase: Mapping[str, list[Mapping[str, Any]]], uv_indices: set[int]
+) -> dict[str, Any]:
+    """Derive only omitted introduced-edit counts from frozen source/output pairs."""
+    view_indices: dict[str, set[int] | None] = {
+        "dassle-spelling/all": None,
+        "dassle-spelling/initial_uv": uv_indices,
+        "dassle-spelling/without_initial_uv": set(
+            range(1, len(records_by_phase["dassle-spelling"]) + 1)
+        )
+        - uv_indices,
+        "dassle-spelling-preservation/all": None,
+    }
+    views: dict[str, Any] = {}
+    for view_name, selected_indices in view_indices.items():
+        phase = view_name.split("/", 1)[0]
+        records = records_by_phase[phase]
+        selected = [
+            record
+            for record in records
+            if selected_indices is None or record.get("index") in selected_indices
+        ]
+        views[view_name] = {
+            "rows": len(selected),
+            "baseline": {
+                "introduced_edits": sum(
+                    _scored_introduced_edits(record["baseline"], f"{view_name} baseline")
+                    for record in selected
+                )
+            },
+            "new": {
+                "introduced_edits": sum(
+                    _scored_introduced_edits(record["new"], f"{view_name} new")
+                    for record in selected
+                )
+            },
+        }
+    return {
+        "schema_version": 1,
+        "field": "introduced_edits",
+        "source": "frozen case baseline/new input/output pairs scored with edits",
+        "views": views,
+    }
+
+
+def apply_publication_supplement(
+    metrics: Mapping[str, Any], supplement: Mapping[str, Any]
+) -> dict[str, Any]:
+    """Copy frozen metrics and expose only the supplement's omitted field."""
+    projected = copy.deepcopy(metrics)
+    views = supplement.get("views")
+    if not isinstance(views, Mapping):
+        raise ExperimentError("publication supplement views are invalid")
+    projected_views = projected.get("views")
+    projected_by_view = projected.get("by_view")
+    if not isinstance(projected_views, Mapping) or not isinstance(projected_by_view, Mapping):
+        raise ExperimentError("frozen metrics views are invalid")
+    for view_name, counts in views.items():
+        if not isinstance(view_name, str) or not isinstance(counts, Mapping):
+            raise ExperimentError("publication supplement view is invalid")
+        phase, short_name = view_name.split("/", 1)
+        if phase not in projected_views or short_name not in projected_views[phase]:
+            raise ExperimentError(f"publication supplement view is unknown: {view_name}")
+        if view_name not in projected_by_view:
+            raise ExperimentError(f"publication supplement flat view is unknown: {view_name}")
+        for score_name in ("baseline", "new"):
+            score_counts = counts.get(score_name)
+            if not isinstance(score_counts, Mapping) or type(
+                score_counts.get("introduced_edits")
+            ) is not int:
+                raise ExperimentError(f"publication supplement count is invalid: {view_name}")
+            expected = score_counts["introduced_edits"]
+            for view in (projected_views[phase][short_name], projected_by_view[view_name]):
+                score = view.get(score_name)
+                if not isinstance(score, dict):
+                    raise ExperimentError(f"frozen score is invalid: {view_name}/{score_name}")
+                if "introduced_edits" in score and score["introduced_edits"] != expected:
+                    raise ExperimentError(
+                        f"frozen introduced-edits count disagrees: {view_name}/{score_name}"
+                    )
+                score["introduced_edits"] = expected
+    return projected
+
+
+def publication_only(args: argparse.Namespace) -> dict[str, Any]:
+    """Publish valid frozen aggregate outputs without calculation or aggregation."""
+    repo_root = Path(args.repo_root).resolve()
+    scratch = Path(args.scratch).resolve()
+    publication_head = args.expected_implementation_head
+    calculation_head = args.calculation_implementation_head
+    if calculation_head != FROZEN_CALCULATION_HEAD:
+        raise ExperimentError("frozen calculation implementation SHA mismatch")
+    if publication_head in {
+        calculation_head,
+        FROZEN_AGGREGATION_HEAD,
+    }:
+        raise ExperimentError("publication implementation must be a distinct committed SHA")
+    verify_remote_implementation(repo_root, publication_head)
+    implementation = verify_committed_implementation(repo_root, publication_head)
+    require_private_dir(scratch)
+    prior_public_snapshot = snapshot_prior_public_artifacts(repo_root)
+    public_paths = {repo_root / relative for relative in PUBLIC_OUTPUT_PATHS}
+    if any(path.exists() or path.is_symlink() for path in public_paths):
+        raise ExperimentError("007-h public output was already published")
+    private_paths = {
+        scratch / "PUBLICATION-RECOVERY.json",
+        scratch / "PUBLICATION-MANIFEST.json",
+    }
+    if any(path.exists() or path.is_symlink() for path in private_paths):
+        raise ExperimentError("publication-only private output was already written")
+
+    configuration_path = scratch / "CONFIGURATION.json"
+    configuration_sha = require_exact_private_file(
+        configuration_path, expected_sha=FROZEN_CONFIGURATION_SHA256
+    )
+    configuration = read_json(configuration_path)
+    if not isinstance(configuration, dict) or (
+        configuration.get("implementation_head") != calculation_head
+        or configuration.get("run_id") != RUN_ID
+        or configuration.get("source_identity", {}).get("paired_rows") != FROZEN_CASE_COUNT
+        or configuration.get("source_identity", {}).get("dataset_rows") != PHASES
+    ):
+        raise ExperimentError("frozen configuration identity is invalid")
+    status_path = scratch / "RUN-STATUS.json"
+    require_exact_private_file(status_path, expected_sha=FROZEN_RUN_STATUS_SHA256)
+    if read_json(status_path) != {
+        "configuration_sha256": FROZEN_CONFIGURATION_SHA256,
+        "run_id": RUN_ID,
+        "status": "EXPERIMENTAL_CALCULATION",
+    }:
+        raise ExperimentError("frozen run status is not publication-pending")
+    input_manifest = verify_frozen_inputs(scratch)
+    input_manifest_sha = sha256_file(scratch / "INPUT-MANIFEST.json")
+    if input_manifest_sha != FROZEN_INPUT_MANIFEST_SHA256 or input_manifest.get(
+        "m2_record_count"
+    ) != FROZEN_CASE_COUNT:
+        raise ExperimentError("frozen input manifest identity is invalid")
+    incidents = verify_frozen_incidents(scratch)
+    pairs = load_pairs(scratch)
+    uv_indices, _uv_mapping = verify_uv_mapping(scratch, pairs["dassle-spelling"])
+    records_by_phase, case_digest, case_bytes = frozen_case_manifest(
+        scratch, pairs, configuration_sha
+    )
+    aggregate_outputs = verify_frozen_aggregate_outputs(
+        scratch,
+        configuration_sha,
+        FROZEN_INPUT_MANIFEST_SHA256,
+        case_digest,
+        incidents,
+    )
+    frozen_results = aggregate_outputs["results"]
+    supplement = derive_publication_supplement(records_by_phase, uv_indices)
+    metrics = apply_publication_supplement(frozen_results["metrics"], supplement)
+
+    publication_configuration = copy.deepcopy(configuration)
+    publication_configuration.update(
+        {
+            "implementation_head": implementation["implementation_head"],
+            "publication_implementation_head": implementation["implementation_head"],
+            "calculation_implementation_head": calculation_head,
+            "aggregation_implementation_head": frozen_results[
+                "aggregation_implementation_head"
+            ],
+            "publication_mode": "PUBLICATION_ONLY_RECOVERY",
+            "incident_sha256": incidents,
+            "publication_incident_sha256": FROZEN_PUBLICATION_INCIDENT_SHA256,
+            "publication_supplement": supplement,
+            "private_aggregate_identity": {
+                "results_sha256": FROZEN_PRIVATE_AGGREGATE_SHA256["results"],
+                "report_sha256": FROZEN_PRIVATE_AGGREGATE_SHA256["report"],
+                "manifest_sha256": FROZEN_PRIVATE_AGGREGATE_SHA256["manifest"],
+                "configuration_sha256": configuration_sha,
+                "input_manifest_sha256": FROZEN_INPUT_MANIFEST_SHA256,
+                "case_identity_manifest_sha256": case_digest,
+            },
+            "recovery_evidence": FROZEN_RECOVERY_EVIDENCE,
+        }
+    )
+    public_config, public_result = public_projection(
+        publication_configuration,
+        metrics,
+        FROZEN_PRIVATE_AGGREGATE_SHA256["results"],
+        FROZEN_PRIVATE_AGGREGATE_SHA256["manifest"],
+    )
+    public_status = "COMPLETE_OFFLINE_PUBLICATION_ONLY_RECOVERY"
+    public_identity = {
+        "status": public_status,
+        "publication_mode": "PUBLICATION_ONLY_RECOVERY",
+        "calculation_implementation_head": calculation_head,
+        "aggregation_implementation_head": publication_configuration[
+            "aggregation_implementation_head"
+        ],
+        "publication_implementation_head": implementation["implementation_head"],
+        "private_aggregate_identity": publication_configuration["private_aggregate_identity"],
+        "publication_incident_sha256": FROZEN_PUBLICATION_INCIDENT_SHA256,
+        "publication_supplement": supplement,
+        "recovery_evidence": FROZEN_RECOVERY_EVIDENCE,
+    }
+    public_config.update(public_identity)
+    public_result.update(public_identity)
+    public_result["configuration_sha256"] = hashlib.sha256(
+        canonical_bytes(public_config)
+    ).hexdigest()
+    public_config_bytes = canonical_bytes(public_config)
+    public_result_bytes = gzip.compress(canonical_bytes(public_result), mtime=0)
+    report = render_public_report(public_configuration, public_result).rstrip()
+    report += (
+        "\n\n## Publication-only recovery\n\n"
+        "- The frozen scientific aggregation was valid; publication projection failed afterward.\n"
+        "- The private aggregate RESULTS, REPORT, and MANIFEST were preserved byte-for-byte.\n"
+        "- The publication supplement exposes only the omitted `introduced_edits` field, "
+        "derived with the existing scorer from frozen source/output pairs.\n"
+        "- No linguistic metric or case was changed; all other metrics are a deep copy of "
+        "the frozen private aggregate.\n"
+        f"- Calculation, aggregation, and publication implementation heads: {calculation_head}, "
+        f"{public_identity['aggregation_implementation_head']}, "
+        f"{implementation['implementation_head']}.\n"
+        f"- Publication-projection incident SHA-256: {FROZEN_PUBLICATION_INCIDENT_SHA256}.\n"
+        "- This recovery made no model or application network calls.\n"
+    )
+    report_bytes = (report + "\n").encode("utf-8")
+    public_hashes = {
+        "config": hashlib.sha256(public_config_bytes).hexdigest(),
+        "result": hashlib.sha256(public_result_bytes).hexdigest(),
+        "report": hashlib.sha256(report_bytes).hexdigest(),
+    }
+    supplement_sha = hashlib.sha256(canonical_bytes(supplement)).hexdigest()
+    recovery = {
+        "schema_version": 1,
+        "experiment_id": EXPERIMENT_ID,
+        "status": public_status,
+        "mode": "PUBLICATION_ONLY_RECOVERY",
+        "calculation_implementation_head": calculation_head,
+        "aggregation_implementation_head": public_identity[
+            "aggregation_implementation_head"
+        ],
+        "publication_implementation_head": implementation["implementation_head"],
+        "configuration_sha256": configuration_sha,
+        "input_manifest_sha256": input_manifest_sha,
+        "case_identity_manifest_sha256": case_digest,
+        "case_count": FROZEN_CASE_COUNT,
+        "case_bytes": case_bytes,
+        "incident_sha256": {
+            **incidents,
+            "publication_projection": FROZEN_PUBLICATION_INCIDENT_SHA256,
+        },
+        "frozen_private_aggregate": dict(FROZEN_PRIVATE_AGGREGATE_SHA256),
+        "supplement_sha256": supplement_sha,
+        "supplement": supplement,
+        "resulting_public_hashes": public_hashes,
+        "private_aggregate_preserved": True,
+        "cases_changed": False,
+        "linguistic_metrics_changed": False,
+        "actual_model_calls": 0,
+        "actual_network_calls": 0,
+    }
+    recovery_sha = write_immutable(scratch / "PUBLICATION-RECOVERY.json", recovery)
+    public_config_path = repo_root / "research/configs/007-h-unique-one-letter-unigram-substitution.json"
+    public_result_path = repo_root / "research/results/007-h-unique-one-letter-unigram-substitution.json.gz"
+    public_report_path = repo_root / "research/reports/007-h-unique-one-letter-unigram-substitution.md"
+    immutable_bytes(public_config_path, public_config_bytes)
+    immutable_bytes(public_result_path, public_result_bytes)
+    immutable_bytes(public_report_path, report_bytes)
+    compare_prior_public_artifacts(
+        prior_public_snapshot, snapshot_prior_public_artifacts(repo_root)
+    )
+    publication_manifest = {
+        "schema_version": 1,
+        "experiment_id": EXPERIMENT_ID,
+        "status": public_status,
+        "mode": "PUBLICATION_ONLY_RECOVERY",
+        "publication_recovery_sha256": recovery_sha,
+        "resulting_public_hashes": public_hashes,
+        "frozen_private_aggregate": dict(FROZEN_PRIVATE_AGGREGATE_SHA256),
+        "supplement_sha256": supplement_sha,
+        "configuration_sha256": configuration_sha,
+        "input_manifest_sha256": input_manifest_sha,
+        "case_identity_manifest_sha256": case_digest,
+        "case_count": FROZEN_CASE_COUNT,
+        "incident_sha256": {
+            **incidents,
+            "publication_projection": FROZEN_PUBLICATION_INCIDENT_SHA256,
+        },
+        "calculation_implementation_head": calculation_head,
+        "aggregation_implementation_head": public_identity[
+            "aggregation_implementation_head"
+        ],
+        "publication_implementation_head": implementation["implementation_head"],
+        "actual_model_calls": 0,
+        "actual_network_calls": 0,
+    }
+    publication_manifest_sha = write_immutable(
+        scratch / "PUBLICATION-MANIFEST.json", publication_manifest
+    )
+    write_status(
+        status_path,
+        {
+            "status": public_status,
+            "run_id": RUN_ID,
+            "configuration_sha256": configuration_sha,
+            "calculation_implementation_head": calculation_head,
+            "aggregation_implementation_head": public_identity[
+                "aggregation_implementation_head"
+            ],
+            "publication_implementation_head": implementation["implementation_head"],
+            "case_identity_manifest_sha256": case_digest,
+            "publication_recovery_sha256": recovery_sha,
+            "publication_manifest_sha256": publication_manifest_sha,
+            "actual_model_calls": 0,
+            "actual_network_calls": 0,
+        },
+    )
+    return {
+        "status": public_status,
+        "calculation_implementation_head": calculation_head,
+        "aggregation_implementation_head": public_identity["aggregation_implementation_head"],
+        "publication_implementation_head": implementation["implementation_head"],
+        "configuration_sha256": configuration_sha,
+        "case_identity_manifest_sha256": case_digest,
+        "publication_recovery_sha256": recovery_sha,
+        "publication_manifest_sha256": publication_manifest_sha,
+        "public_config_sha256": public_hashes["config"],
+        "public_result_sha256": public_hashes["result"],
+        "public_report_sha256": public_hashes["report"],
+        "paired_rows": FROZEN_CASE_COUNT,
+        "actual_model_calls": 0,
+        "actual_network_calls": 0,
+    }
 
 
 def aggregate_frozen(args: argparse.Namespace) -> dict[str, Any]:
@@ -1971,9 +2432,18 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--expected-implementation-head")
     parser.add_argument("--calculation-implementation-head")
     parser.add_argument("--aggregation-only", action="store_true")
+    parser.add_argument("--publication-only", action="store_true")
     args = parser.parse_args(argv)
     try:
-        if args.aggregation_only:
+        if args.aggregation_only and args.publication_only:
+            raise ExperimentError("aggregation-only and publication-only are exclusive")
+        if args.publication_only:
+            if not args.expected_implementation_head or not args.calculation_implementation_head:
+                raise ExperimentError(
+                    "publication-only recovery requires both implementation heads"
+                )
+            result = publication_only(args)
+        elif args.aggregation_only:
             if not args.expected_implementation_head or not args.calculation_implementation_head:
                 raise ExperimentError(
                     "aggregation recovery requires both implementation heads"

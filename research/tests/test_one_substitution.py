@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import ast
+import copy
 import json
 import os
 import sqlite3
@@ -523,6 +524,231 @@ class OneSubstitutionTests(unittest.TestCase):
                 for node in ast.walk(tree)
             )
         )
+
+    def test_public_projection_handles_integer_count_and_refuses_malformed_identity(self) -> None:
+        identity = {"size": 1, "sha256": "0" * 64}
+        configuration = {
+            "implementation_head": "head",
+            "source_identity": {
+                "dataset_rows": dict(driver.PHASES),
+                "paired_rows": driver.FROZEN_CASE_COUNT,
+                "m2_record_count": driver.FROZEN_CASE_COUNT,
+                "staged_file_identities": {
+                    "dataset.jsonl": identity,
+                    "m2_record_count": driver.FROZEN_CASE_COUNT,
+                },
+                "uv_audit_rows": driver.UV_ROWS,
+            },
+            "baseline_identity": {"validated": True},
+            "algorithm": {},
+            "unicode": {},
+            "call_policy": {},
+        }
+        public_config, _ = driver.public_projection(configuration, {}, "results", "manifest")
+        self.assertEqual(
+            public_config["source_identity"],
+            {
+                "datasets": dict(driver.PHASES),
+                "paired_rows": driver.FROZEN_CASE_COUNT,
+                "m2_record_count": driver.FROZEN_CASE_COUNT,
+                "file_sha256": {"dataset.jsonl": "0" * 64},
+                "uv_audit_rows": driver.UV_ROWS,
+            },
+        )
+        malformed = [
+            {"dataset.jsonl": "not-an-identity"},
+            {"dataset.jsonl": {"sha256": "0" * 64}},
+            {"dataset.jsonl": {"size": 1, "sha256": "0" * 64, "extra": True}},
+            {"dataset.jsonl": {"size": 1, "sha256": "g" * 64}},
+            {"m2_record_count": driver.FROZEN_CASE_COUNT - 1},
+        ]
+        for staged in malformed:
+            with self.subTest(staged=staged), self.assertRaises(driver.ExperimentError):
+                bad = copy.deepcopy(configuration)
+                bad["source_identity"]["staged_file_identities"] = staged
+                driver.public_projection(bad, {}, "results", "manifest")
+        bad_count = copy.deepcopy(configuration)
+        bad_count["source_identity"]["m2_record_count"] = driver.FROZEN_CASE_COUNT - 1
+        with self.assertRaises(driver.ExperimentError):
+            driver.public_projection(bad_count, {}, "results", "manifest")
+
+    def test_publication_only_call_graph_excludes_aggregation_and_calculation(self) -> None:
+        tree = ast.parse(Path(driver.__file__).read_text(encoding="utf-8"))
+        functions = {
+            node.name: node
+            for node in ast.walk(tree)
+            if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef))
+        }
+        reachable: set[str] = set()
+        pending = ["publication_only"]
+        while pending:
+            name = pending.pop()
+            if name in reachable:
+                continue
+            reachable.add(name)
+            node = functions.get(name)
+            if node is None:
+                continue
+            pending.extend(
+                call.func.id
+                for call in ast.walk(node)
+                if isinstance(call, ast.Call)
+                and isinstance(call.func, ast.Name)
+                and call.func.id in functions
+            )
+        for forbidden in (
+            "run",
+            "aggregate_frozen",
+            "aggregate",
+            "calculate_case",
+            "load_or_calculate_case",
+        ):
+            self.assertNotIn(forbidden, reachable)
+
+    def test_publication_supplement_derives_exact_introduced_edits_on_synthetic_data(self) -> None:
+        def record(index: int, baseline_output: str, new_output: str) -> dict[str, object]:
+            source = "a b"
+            return {
+                "index": index,
+                "baseline": {"input": source, "output": baseline_output},
+                "new": {"input": source, "output": new_output},
+            }
+
+        records = {
+            "dassle-spelling": [record(1, "x b", "x y"), record(2, "a b", "a z")],
+            "dassle-spelling-preservation": [record(1, "x b", "a b")],
+        }
+        supplement = driver.derive_publication_supplement(records, {1})
+        views = supplement["views"]
+        self.assertEqual(views["dassle-spelling/all"]["baseline"], {"introduced_edits": 1})
+        self.assertEqual(views["dassle-spelling/all"]["new"], {"introduced_edits": 2})
+        self.assertEqual(
+            views["dassle-spelling/initial_uv"],
+            {"rows": 1, "baseline": {"introduced_edits": 1}, "new": {"introduced_edits": 1}},
+        )
+        self.assertEqual(
+            views["dassle-spelling/without_initial_uv"],
+            {"rows": 1, "baseline": {"introduced_edits": 0}, "new": {"introduced_edits": 1}},
+        )
+        self.assertEqual(
+            views["dassle-spelling-preservation/all"],
+            {"rows": 1, "baseline": {"introduced_edits": 1}, "new": {"introduced_edits": 0}},
+        )
+
+    def test_publication_only_refuses_private_hash_or_link_drift(self) -> None:
+        with tempfile.TemporaryDirectory(
+            prefix=".one-sub-private-links-", dir=PRIVATE_TEST_ROOT
+        ) as raw:
+            scratch = Path(raw)
+            os.chmod(scratch, 0o700)
+            report_path = scratch / "REPORT.md"
+            report_path.write_bytes(b"report\n")
+            os.chmod(report_path, 0o600)
+            results = {
+                "schema_version": 1,
+                "experiment_id": driver.EXPERIMENT_ID,
+                "status": "COMPLETE_OFFLINE_FROZEN_CASE_AGGREGATION_RECOVERY",
+                "configuration_sha256": "cfg",
+                "calculation_implementation_head": "calc",
+                "aggregation_implementation_head": "agg",
+                "incident_sha256": {},
+                "metrics": {},
+            }
+            results_path = scratch / "RESULTS.json"
+            results_path.write_bytes(driver.canonical_bytes(results))
+            os.chmod(results_path, 0o600)
+            manifest = {
+                "schema_version": 1,
+                "experiment_id": driver.EXPERIMENT_ID,
+                "status": "COMPLETE_OFFLINE_FROZEN_CASE_AGGREGATION_RECOVERY",
+                "input_manifest_sha256": "input",
+                "configuration_sha256": "cfg",
+                "calculation_implementation_head": "calc",
+                "aggregation_implementation_head": "agg",
+                "case_identity_manifest_sha256": "case",
+                "case_count": driver.FROZEN_CASE_COUNT,
+                "incident_sha256": {},
+                "private_results_sha256": "wrong-results-link",
+                "private_report_sha256": driver.sha256_file(report_path),
+            }
+            manifest_path = scratch / "MANIFEST.json"
+            manifest_path.write_bytes(driver.canonical_bytes(manifest))
+            os.chmod(manifest_path, 0o600)
+            expected = {
+                "results": driver.sha256_file(results_path),
+                "report": driver.sha256_file(report_path),
+                "manifest": driver.sha256_file(manifest_path),
+            }
+            with (
+                patch.object(driver, "FROZEN_PRIVATE_AGGREGATE_SHA256", expected),
+                patch.object(driver, "FROZEN_CALCULATION_HEAD", "calc"),
+                patch.object(driver, "FROZEN_AGGREGATION_HEAD", "agg"),
+                self.assertRaises(driver.ExperimentError),
+            ):
+                driver.verify_frozen_aggregate_outputs(scratch, "cfg", "input", "case", {})
+
+    def test_publication_failure_preserves_status_bytes(self) -> None:
+        with tempfile.TemporaryDirectory(
+            prefix=".one-sub-publication-", dir=PRIVATE_TEST_ROOT
+        ) as raw:
+            root = Path(raw)
+            repo = root / "repo"
+            scratch = root / "scratch"
+            repo.mkdir()
+            scratch.mkdir()
+            os.chmod(scratch, 0o700)
+            configuration = {
+                "implementation_head": "calc",
+                "run_id": driver.RUN_ID,
+                "source_identity": {
+                    "paired_rows": driver.FROZEN_CASE_COUNT,
+                    "dataset_rows": dict(driver.PHASES),
+                },
+            }
+            configuration_data = driver.canonical_bytes(configuration)
+            (scratch / "CONFIGURATION.json").write_bytes(configuration_data)
+            os.chmod(scratch / "CONFIGURATION.json", 0o600)
+            status_data = driver.canonical_bytes(
+                {
+                    "configuration_sha256": driver.hashlib.sha256(configuration_data).hexdigest(),
+                    "run_id": driver.RUN_ID,
+                    "status": "EXPERIMENTAL_CALCULATION",
+                }
+            )
+            (scratch / "RUN-STATUS.json").write_bytes(status_data)
+            os.chmod(scratch / "RUN-STATUS.json", 0o600)
+            (scratch / "INPUT-MANIFEST.json").write_bytes(b"input\n")
+            os.chmod(scratch / "INPUT-MANIFEST.json", 0o600)
+            args = driver.argparse.Namespace(
+                repo_root=repo,
+                scratch=scratch,
+                expected_implementation_head="pub",
+                calculation_implementation_head="calc",
+            )
+            before = (scratch / "RUN-STATUS.json").read_bytes()
+            with (
+                patch.object(driver, "FROZEN_CONFIGURATION_SHA256", driver.hashlib.sha256(configuration_data).hexdigest()),
+                patch.object(driver, "FROZEN_RUN_STATUS_SHA256", driver.hashlib.sha256(status_data).hexdigest()),
+                patch.object(driver, "FROZEN_INPUT_MANIFEST_SHA256", driver.sha256_file(scratch / "INPUT-MANIFEST.json")),
+                patch.object(driver, "FROZEN_CALCULATION_HEAD", "calc"),
+                patch.object(driver, "verify_remote_implementation"),
+                patch.object(driver, "verify_committed_implementation", return_value={"implementation_head": "pub"}),
+                patch.object(driver, "snapshot_prior_public_artifacts", return_value={}),
+                patch.object(driver, "verify_frozen_inputs", return_value={"m2_record_count": driver.FROZEN_CASE_COUNT}),
+                patch.object(driver, "verify_frozen_incidents", return_value={}),
+                patch.object(driver, "load_pairs", return_value={"dassle-spelling": [], "dassle-spelling-preservation": []}),
+                patch.object(driver, "verify_uv_mapping", return_value=(set(), [])),
+                patch.object(driver, "frozen_case_manifest", return_value=({}, "case", 0)),
+                patch.object(
+                    driver,
+                    "verify_frozen_aggregate_outputs",
+                    return_value={"results": {"aggregation_implementation_head": "agg", "metrics": {}}},
+                ),
+                patch.object(driver, "derive_publication_supplement", side_effect=driver.ExperimentError("forced publication failure")),
+                self.assertRaises(driver.ExperimentError),
+            ):
+                driver.publication_only(args)
+            self.assertEqual((scratch / "RUN-STATUS.json").read_bytes(), before)
 
     def test_prior_public_snapshot_is_unchanged_by_reading(self) -> None:
         with tempfile.TemporaryDirectory(prefix=".one-sub-archive-", dir=Path.cwd()) as raw:
