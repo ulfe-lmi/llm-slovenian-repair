@@ -95,9 +95,10 @@ class ForwardRecoveryTests(unittest.TestCase):
         env["TMPDIR"] = str(PERSISTENT_TMPDIR)
         result = subprocess.run(
             ["git", "clone", "--shared", str(REPO), str(self.repo)],
-            capture_output=True, text=True, env=env, timeout=30,
+            capture_output=True, text=True, env=env, timeout=120,
         )
         self.assertEqual(result.returncode, 0, result.stderr)
+        git(self.repo, "checkout", "--detach", PUBLICATION)
         git(self.repo, "config", "user.name", "Synthetic recovery fixture")
         git(self.repo, "config", "user.email", "synthetic@example.invalid")
         self.remote = RecoveryRemote()
