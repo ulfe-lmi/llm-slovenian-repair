@@ -130,7 +130,9 @@ FROZEN_PRIVATE_AGGREGATE_SHA256 = {
     "report": "7f815f1f5f77f33f2f50521050e92f15d455e7eafc387564ddfd4bd0f1e0a02a",
     "manifest": "b9a6a433ed0a61b9b80eb0cee6a46c6e6c4b112ba177ba6b3d32cfd856b48c9c",
 }
-FROZEN_PUBLICATION_INCIDENT_SHA256 = "cb382883f4b9e179e6149e49a7df7fdb1f494b91cd91670dd31942a6895fb01c"
+FROZEN_PUBLICATION_INCIDENT_SHA256 = (
+    "cb382883f4b9e179e6149e49a7df7fdb1f494b91cd91670dd31942a6895fb01c"
+)
 FROZEN_INCIDENT_SHA256 = {
     "precalculation": "bb5b762afc3b6e836a5db11b2211e5a520715a3ca695b99cfb7f51ae53882085",
     "calculation_aggregation": "9c03fd562dee7f9f483c47815f4ca5ac6fd750f2179a110559d0470fc9652305",
@@ -1647,9 +1649,8 @@ def projected_file_identities(configuration: Mapping[str, Any]) -> tuple[dict[st
     staged = source_identity.get("staged_file_identities")
     if not isinstance(staged, Mapping):
         raise ExperimentError("staged file identities are not an object")
-    if "m2_record_count" in staged:
-        if staged["m2_record_count"] != m2_record_count:
-            raise ExperimentError("staged M2 record count disagrees with declared count")
+    if "m2_record_count" in staged and staged["m2_record_count"] != m2_record_count:
+        raise ExperimentError("staged M2 record count disagrees with declared count")
     file_identities: dict[str, str] = {}
     for name, identity in staged.items():
         if name == "m2_record_count":
@@ -1989,9 +1990,15 @@ def publication_only(args: argparse.Namespace) -> dict[str, Any]:
         "actual_network_calls": 0,
     }
     recovery_sha = write_immutable(scratch / "PUBLICATION-RECOVERY.json", recovery)
-    public_config_path = repo_root / "research/configs/007-h-unique-one-letter-unigram-substitution.json"
-    public_result_path = repo_root / "research/results/007-h-unique-one-letter-unigram-substitution.json.gz"
-    public_report_path = repo_root / "research/reports/007-h-unique-one-letter-unigram-substitution.md"
+    public_config_path = (
+        repo_root / "research/configs/007-h-unique-one-letter-unigram-substitution.json"
+    )
+    public_result_path = (
+        repo_root / "research/results/007-h-unique-one-letter-unigram-substitution.json.gz"
+    )
+    public_report_path = (
+        repo_root / "research/reports/007-h-unique-one-letter-unigram-substitution.md"
+    )
     immutable_bytes(public_config_path, public_config_bytes)
     immutable_bytes(public_result_path, public_result_bytes)
     immutable_bytes(public_report_path, report_bytes)

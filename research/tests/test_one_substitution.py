@@ -727,24 +727,54 @@ class OneSubstitutionTests(unittest.TestCase):
             )
             before = (scratch / "RUN-STATUS.json").read_bytes()
             with (
-                patch.object(driver, "FROZEN_CONFIGURATION_SHA256", driver.hashlib.sha256(configuration_data).hexdigest()),
-                patch.object(driver, "FROZEN_RUN_STATUS_SHA256", driver.hashlib.sha256(status_data).hexdigest()),
-                patch.object(driver, "FROZEN_INPUT_MANIFEST_SHA256", driver.sha256_file(scratch / "INPUT-MANIFEST.json")),
+                patch.object(
+                    driver,
+                    "FROZEN_CONFIGURATION_SHA256",
+                    driver.hashlib.sha256(configuration_data).hexdigest(),
+                ),
+                patch.object(
+                    driver,
+                    "FROZEN_RUN_STATUS_SHA256",
+                    driver.hashlib.sha256(status_data).hexdigest(),
+                ),
+                patch.object(
+                    driver,
+                    "FROZEN_INPUT_MANIFEST_SHA256",
+                    driver.sha256_file(scratch / "INPUT-MANIFEST.json"),
+                ),
                 patch.object(driver, "FROZEN_CALCULATION_HEAD", "calc"),
                 patch.object(driver, "verify_remote_implementation"),
-                patch.object(driver, "verify_committed_implementation", return_value={"implementation_head": "pub"}),
+                patch.object(
+                    driver,
+                    "verify_committed_implementation",
+                    return_value={"implementation_head": "pub"},
+                ),
                 patch.object(driver, "snapshot_prior_public_artifacts", return_value={}),
-                patch.object(driver, "verify_frozen_inputs", return_value={"m2_record_count": driver.FROZEN_CASE_COUNT}),
+                patch.object(
+                    driver,
+                    "verify_frozen_inputs",
+                    return_value={"m2_record_count": driver.FROZEN_CASE_COUNT},
+                ),
                 patch.object(driver, "verify_frozen_incidents", return_value={}),
-                patch.object(driver, "load_pairs", return_value={"dassle-spelling": [], "dassle-spelling-preservation": []}),
+                patch.object(
+                    driver,
+                    "load_pairs",
+                    return_value={"dassle-spelling": [], "dassle-spelling-preservation": []},
+                ),
                 patch.object(driver, "verify_uv_mapping", return_value=(set(), [])),
                 patch.object(driver, "frozen_case_manifest", return_value=({}, "case", 0)),
                 patch.object(
                     driver,
                     "verify_frozen_aggregate_outputs",
-                    return_value={"results": {"aggregation_implementation_head": "agg", "metrics": {}}},
+                    return_value={
+                        "results": {"aggregation_implementation_head": "agg", "metrics": {}}
+                    },
                 ),
-                patch.object(driver, "derive_publication_supplement", side_effect=driver.ExperimentError("forced publication failure")),
+                patch.object(
+                    driver,
+                    "derive_publication_supplement",
+                    side_effect=driver.ExperimentError("forced publication failure"),
+                ),
                 self.assertRaises(driver.ExperimentError),
             ):
                 driver.publication_only(args)
