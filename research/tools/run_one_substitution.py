@@ -1937,7 +1937,7 @@ def publication_only(args: argparse.Namespace) -> dict[str, Any]:
     ).hexdigest()
     public_config_bytes = canonical_bytes(public_config)
     public_result_bytes = gzip.compress(canonical_bytes(public_result), mtime=0)
-    report = render_public_report(public_configuration, public_result).rstrip()
+    report = render_public_report(publication_configuration, public_result).rstrip()
     report += (
         "\n\n## Publication-only recovery\n\n"
         "- The frozen scientific aggregation was valid; publication projection failed afterward.\n"
