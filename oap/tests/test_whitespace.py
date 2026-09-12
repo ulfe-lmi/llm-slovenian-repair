@@ -11,6 +11,7 @@ import unittest
 
 ROOT = Path(__file__).resolve().parents[2]
 CLI = ROOT / "oap/bin/check_whitespace.py"
+HISTORY_SOURCE_ENV = "OAP_FORWARD_RECOVERY_HISTORY_SOURCE"
 BASES = (
     "2832fa1e51bdf3641aabbd81feab8ddb64a876da",
     "82ea1e6f4173934fa47bb34ee6a6f78338d3603a",
@@ -33,8 +34,9 @@ class WhitespaceVerifier(unittest.TestCase):
         self.temporary = tempfile.TemporaryDirectory(prefix="oap-whitespace-fixture-")
         self.root = Path(self.temporary.name)
         self.repo = self.root / "repo"
+        source = Path(os.environ.get(HISTORY_SOURCE_ENV, str(ROOT)))
         subprocess.run(
-            ["git", "clone", "--shared", "--no-checkout", str(ROOT), str(self.repo)],
+            ["git", "clone", "--shared", "--no-checkout", str(source), str(self.repo)],
             capture_output=True,
             text=True,
             check=True,
