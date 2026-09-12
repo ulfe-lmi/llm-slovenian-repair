@@ -136,6 +136,26 @@ class StrategicPublicationReview(unittest.TestCase):
         self.assertIn("raw JSON field", result.stderr)
         self.assertNotIn("lib64", result.stderr)
 
+    def test_index_scan_success_count_ignores_worktree_venv(self) -> None:
+        repo = self.root / "index-success-fixture-repo"
+        repo.mkdir()
+        subprocess.run(["git", "init", "--quiet", str(repo)], check=True, capture_output=True)
+        (repo / ".gitignore").write_text(".venv/\n", encoding="utf-8")
+        (repo / "research").mkdir()
+        (repo / "research" / "safe.md").write_text("safe numeric note\n", encoding="utf-8")
+        subprocess.run(
+            ["git", "-C", str(repo), "add", ".gitignore", "research/safe.md"],
+            check=True,
+            capture_output=True,
+        )
+        external = self.root / "success-external-venv"
+        (external / "lib64").mkdir(parents=True)
+        (repo / ".venv").symlink_to(external, target_is_directory=True)
+
+        result = self.cli("--staged-tree", str(repo))
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertIn("publication guard: PASS (1 files)", result.stdout)
+
 
 if __name__ == "__main__":
     unittest.main()

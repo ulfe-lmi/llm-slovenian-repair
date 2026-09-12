@@ -215,6 +215,35 @@ def scan_staged_index(repo_root: Path, *, public_prefix: str = "research") -> li
     return errors
 
 
+def staged_index_file_count(repo_root: Path, *, public_prefix: str = "research") -> int:
+    """Count regular, resolved entries in the public Git index only."""
+    repo_root = repo_root.resolve()
+    pathspec = public_prefix.rstrip("/") + "/"
+    try:
+        result = subprocess.run(
+            ["git", "-C", str(repo_root), "ls-files", "--stage", "-z", "--", pathspec],
+            capture_output=True,
+            check=True,
+        )
+    except (OSError, subprocess.CalledProcessError) as exc:
+        raise ValueError(f"staged-byte count requires a Git worktree: {repo_root}") from exc
+    count = 0
+    for entry in (item for item in result.stdout.split(b"\0") if item):
+        try:
+            metadata, raw_path = entry.split(b"\t", 1)
+            mode_text, _object_id, stage_text = metadata.decode("ascii").split()
+            relative = raw_path.decode("utf-8")
+        except (UnicodeDecodeError, ValueError) as exc:
+            raise ValueError(f"invalid staged index entry: {type(exc).__name__}") from exc
+        if (
+            stage_text == "0"
+            and mode_text in {"100644", "100755"}
+            and relative.startswith(pathspec)
+        ):
+            count += 1
+    return count
+
+
 def _tokens(data: bytes) -> list[str]:
     text = data.decode("utf-8")
     return re.findall(r"[\wÀ-ž]+(?:['’\-][\wÀ-ž]+)*", text.casefold(), re.UNICODE)
@@ -380,10 +409,13 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--staged-tree", type=Path, help="scan Git-index paths/blob bytes (or an explicit materialized tree fixture)")
     args = parser.parse_args(argv)
     root = args.staged_tree or args.root
+    index_file_count: int | None = None
     try:
         staged_root = args.staged_tree
         if staged_root is not None and _git_toplevel(staged_root) is not None:
             errors = scan_staged_index(staged_root)
+            if not errors:
+                index_file_count = staged_index_file_count(staged_root)
         else:
             errors = scan_public(root)
         if args.private_root:
@@ -399,7 +431,8 @@ def main(argv: list[str] | None = None) -> int:
         for error in errors:
             print(error, file=sys.stderr)
         return 1
-    print(f"publication guard: PASS ({sum(1 for _ in iter_regular_files(root))} files)")
+    file_count = index_file_count if index_file_count is not None else sum(1 for _ in iter_regular_files(root))
+    print(f"publication guard: PASS ({file_count} files)")
     return 0
 
 

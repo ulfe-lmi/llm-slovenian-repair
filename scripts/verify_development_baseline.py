@@ -21,6 +21,7 @@ from typing import Any
 PYTHON_SELECTOR = "3.12"
 DEFAULT_COMMAND_TIMEOUT = 300.0
 PROJECT_PACKAGE = "llm-slovenian-repair"
+FORWARD_RECOVERY_HISTORY_SOURCE = "OAP_FORWARD_RECOVERY_HISTORY_SOURCE"
 DIAGNOSTIC_CAPTURE_BYTES = 8192
 DIAGNOSTIC_MAX_BYTES = 4096
 PUBLIC_EXPORTS = (
@@ -138,7 +139,39 @@ def venv_python(environment: Path) -> Path:
     return environment / "bin" / "python"
 
 
-def build_environment(paths: WorkspacePaths) -> dict[str, str]:
+def validate_git_worktree(source: Path) -> Path:
+    """Validate the caller-owned history source used by copied OAP tests."""
+
+    try:
+        resolved = source.expanduser().resolve(strict=True)
+    except OSError as exc:
+        raise DriverError("FORWARD_RECOVERY_HISTORY_SOURCE_UNAVAILABLE") from exc
+    if not resolved.is_dir() or resolved.is_symlink():
+        raise DriverError("FORWARD_RECOVERY_HISTORY_SOURCE_NOT_DIRECTORY")
+    try:
+        result = subprocess.run(
+            ["git", "-C", str(resolved), "rev-parse", "--show-toplevel"],
+            capture_output=True,
+            text=True,
+            check=False,
+            timeout=30,
+        )
+    except (OSError, subprocess.TimeoutExpired) as exc:
+        raise DriverError("FORWARD_RECOVERY_HISTORY_SOURCE_NOT_GIT") from exc
+    if result.returncode != 0:
+        raise DriverError("FORWARD_RECOVERY_HISTORY_SOURCE_NOT_GIT")
+    try:
+        top_level = Path(result.stdout.strip()).resolve(strict=True)
+    except OSError as exc:
+        raise DriverError("FORWARD_RECOVERY_HISTORY_SOURCE_NOT_GIT") from exc
+    if top_level != resolved:
+        raise DriverError("FORWARD_RECOVERY_HISTORY_SOURCE_NOT_WORKTREE_ROOT")
+    return resolved
+
+
+def build_environment(
+    paths: WorkspacePaths, *, forward_recovery_history_source: Path | None = None
+) -> dict[str, str]:
     """Build child-process environment without exposing or logging its values."""
 
     env = os.environ.copy()
@@ -147,6 +180,7 @@ def build_environment(paths: WorkspacePaths) -> dict[str, str]:
         "PYTHONPATH",
         "VIRTUAL_ENV",
         "UV_OFFLINE",
+        FORWARD_RECOVERY_HISTORY_SOURCE,
     ):
         env.pop(name, None)
     env.update(
@@ -161,6 +195,10 @@ def build_environment(paths: WorkspacePaths) -> dict[str, str]:
             "MYPY_CACHE_DIR": str(paths.mypy_cache),
         }
     )
+    if forward_recovery_history_source is not None:
+        env[FORWARD_RECOVERY_HISTORY_SOURCE] = str(
+            validate_git_worktree(forward_recovery_history_source)
+        )
     return env
 
 
@@ -589,6 +627,8 @@ def run_verification(
             paths.offline_home.mkdir()
             test_repo = prepare_test_workspace(repo, paths)
             env = build_environment(paths)
+            if (repo / ".git").exists():
+                env[FORWARD_RECOVERY_HISTORY_SOURCE] = str(validate_git_worktree(repo))
             versions = locked_runtime_versions(repo)
             uv = uv_executable()
             for spec in initial_command_specs(repo, paths, uv, test_repo):

@@ -4,7 +4,6 @@ import copy
 import json
 import os
 from pathlib import Path
-import shutil
 import subprocess
 import tempfile
 import unittest
@@ -19,6 +18,7 @@ from oap_runtime import launch
 
 
 REPO = Path(__file__).resolve().parents[2]
+HISTORY_SOURCE_ENV = "OAP_FORWARD_RECOVERY_HISTORY_SOURCE"
 ORDER = REPO / "oap/orders/007-e-recover-forward-from-an-immutable-invalid-report.md"
 E_NAME = ORDER.name
 E_ORDER_PATH = "oap/orders/" + E_NAME
@@ -39,6 +39,35 @@ def select_scratch(environ):
             continue
         return candidate
     raise ValueError("a persistent TMPDIR or runner-owned RUNNER_TEMP is required; /tmp is rejected")
+
+
+def history_source(environ=None):
+    """Resolve a caller-provided Git worktree, or this checkout by default."""
+    environ = os.environ if environ is None else environ
+    configured = environ.get(HISTORY_SOURCE_ENV)
+    candidate = Path(configured).expanduser() if configured else REPO
+    try:
+        resolved = candidate.resolve(strict=True)
+    except OSError as exc:
+        raise ValueError("forward-recovery history source is unavailable") from exc
+    if not resolved.is_dir() or resolved.is_symlink():
+        raise ValueError("forward-recovery history source must be a real directory")
+    result = subprocess.run(
+        ["git", "-C", str(resolved), "rev-parse", "--show-toplevel"],
+        capture_output=True,
+        text=True,
+        check=False,
+        timeout=30,
+    )
+    if result.returncode != 0:
+        raise ValueError("forward-recovery history source must be a Git worktree")
+    try:
+        top_level = Path(result.stdout.strip()).resolve(strict=True)
+    except OSError as exc:
+        raise ValueError("forward-recovery Git worktree is unavailable") from exc
+    if top_level != resolved:
+        raise ValueError("forward-recovery history source is not the Git worktree root")
+    return resolved
 
 
 PERSISTENT_TMPDIR = select_scratch(os.environ)
@@ -102,15 +131,30 @@ class ForwardRecoveryTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             select_scratch({"TMPDIR": "/tmp"})
 
+    def test_history_source_defaults_to_this_self_contained_worktree(self):
+        if (REPO / ".git").exists():
+            self.assertEqual(history_source({}), REPO.resolve())
+        else:
+            with self.assertRaises(ValueError):
+                history_source({})
+
+    def test_history_source_accepts_only_an_explicit_real_git_worktree(self):
+        self.assertEqual(history_source({HISTORY_SOURCE_ENV: str(self.repo)}), self.repo.resolve())
+        nongit = self.root / "not-a-git-worktree"
+        nongit.mkdir()
+        with self.assertRaises(ValueError):
+            history_source({HISTORY_SOURCE_ENV: str(nongit)})
+
     def setUp(self):
         PERSISTENT_TMPDIR.mkdir(parents=True, exist_ok=True)
         self.temp = tempfile.TemporaryDirectory(prefix="oap-forward-recovery-", dir=PERSISTENT_TMPDIR)
         self.root = Path(self.temp.name)
         self.repo = self.root / "full-history-repo"
+        source = history_source()
         env = os.environ.copy()
         env["TMPDIR"] = str(PERSISTENT_TMPDIR)
         result = subprocess.run(
-            ["git", "clone", "--shared", str(REPO), str(self.repo)],
+            ["git", "clone", "--shared", str(source), str(self.repo)],
             capture_output=True, text=True, env=env, timeout=120,
         )
         self.assertEqual(result.returncode, 0, result.stderr)
