@@ -111,7 +111,9 @@ class OneSubstitutionTests(unittest.TestCase):
         detector = {"candidates": [], "english": []}
         input_sha = driver.hashlib.sha256(original.encode("utf-8")).hexdigest()
 
-        def pair(status: object = "SUPPLIED", *, omit_status: bool = False) -> tuple[dict, dict, dict]:
+        def pair(
+            status: object = "SUPPLIED", *, omit_status: bool = False
+        ) -> tuple[dict, dict, dict]:
             dataset = {
                 "id": "reference-schema",
                 "index": 1,
