@@ -70,6 +70,13 @@ flatten a stopped trial into a success. The private archive catalog records the
 ten verified native relocations and reports zero source-byte deletions with no
 remaining matching temporary roots.
 
+One interrupted diagnostic shell briefly created four small OAP streams under
+`/tmp`; strategy moved those exact files into the persistent private
+`round-007-e-tmp/interrupted-tmp-diagnostics` record and verified all identified
+temporary names absent. No dataset, model, response, or scientific content was
+involved. The immutable 007-e report is preserved; this is its forward archival
+correction.
+
 ## What was measured
 
 The small direct studies retain their original 32-case counts and exact-gold
@@ -182,6 +189,16 @@ explicit prepared sources without printing either side.
 ```sh
 python3 -B -m research.tools.publication_guard --root research \
   --private-root PRIVATE_PREPARED_SOURCE_ROOT
+```
+
+For private identity replay, pass the compressed ledger and explicit
+logical-root-to-current-private-root mappings; do not pass the compact summary:
+
+```sh
+python3 -B -m research.tools.replay \
+  --manifest research/registry/file-census.json.gz \
+  --root-map 'experiments/=/PRIVATE_EXPERIMENT_ROOT' \
+  --root-map 'recovery-executions/=/PRIVATE_RECOVERY_ROOT'
 ```
 
 No dataset, corpus, model, response, credential, human semantic label, or

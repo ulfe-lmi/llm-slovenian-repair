@@ -46,7 +46,7 @@ VARIANTS: tuple[VariantSpec, ...] = (
     VariantSpec("high-thinking-mechanical", None, "Could high-reasoning direct review complete?", "high reasoning", "local-context", "high", 4, 0, "generic targeted review; filled material omitted", _COMMON_SOURCES, "small-study", "STOPPED"),
     VariantSpec("xhigh-thinking-mechanical", None, "What did direct review do with xhigh reasoning?", "xhigh reasoning", "local-context", "xhigh", 4, 0, "generic targeted review; filled material omitted", _COMMON_SOURCES, "small-study", "COMPLETED"),
     VariantSpec("low-plus-validator", None, "How did the separately sampled validator classify first-pass proposals?", "independent validator pass over first-pass proposals", "local-context", "low", 4, 0, "actual validator prompt with complete sentence and selected replacement; filled material omitted", _COMMON_SOURCES + ("research/curated/validation.py",), "small-study", "COMPLETED"),
-    VariantSpec("low-unigram-retry", None, "What changed after one unigram-uncertain corrective retry?", "contextual first-pass unigram gate followed by an expression-only corrective retry", "local-context", "low", 4, 1, "contextual retry program; the first target was selected from sentence context and the corrective prompt deliberately omitted that context", _COMMON_SOURCES + ("research/curated/retry.py",), "small-study-retry", "COMPLETED"),
+    VariantSpec("low-unigram-retry", None, "What changed after one unigram-uncertain corrective retry?", "contextual first-pass unigram gate followed by one contextual JSON corrective retry", "local-context", "low", 4, 1, "contextual retry program; the original sentence, selected target, rejected replacement, and missing-word evidence are sent in the historical retry request", _COMMON_SOURCES + ("research/curated/retry.py",), "small-study-retry", "COMPLETED"),
     VariantSpec("low-word-only-retry", None, "How did strict word-only retry parsing behave after the stop?", "word-only retry and whitespace continuation", "local-context", "low", 4, 1, "generic word-only corrective retry; filled material omitted", _COMMON_SOURCES + ("research/curated/retry.py",), "small-study-retry", "STOPPED_WITH_WHITESPACE_CONTINUATION"),
     VariantSpec("full-hyphen-space-low", None, "What changed after the length-preserving hyphen lookup view?", "ASCII hyphen-to-space detector view", "hyphen-space", "low", 4, 1, "generic contextual review; filled material omitted", _COMMON_SOURCES + ("research/curated/historical_detector.py",), "small-study-retry", "COMPLETED"),
     VariantSpec("full-hyphen-case-low", None, "What changed with the first one-way initial-case rule?", "one-way initial-case restoration", "hyphen-space", "low", 4, 1, "generic contextual review; filled material omitted", _COMMON_SOURCES + ("research/curated/historical_detector.py",), "small-study-retry", "COMPLETED"),
@@ -58,7 +58,7 @@ VARIANTS: tuple[VariantSpec, ...] = (
     VariantSpec("dassle-spelling-preparation", None, "What did the spelling preparation preserve?", "spelling preparation and four-worker execution", "campaign", "low", None, 1, "generic campaign review; source sentences were sent as model input but filled records are excluded from public Git", ("research/curated/historical_campaign.py", "research/curated/historical_scoring.py"), "campaign", "COMPLETE_LOCAL_EVIDENCE_WITH_RECORDED_INCIDENTS"),
     VariantSpec("dassle-uv-audit", None, "How many frozen edit units matched the requested u/v categories?", "exhaustive and random-sample mechanical audit", "audit", "none", None, 0, "no model prompt; mechanical audit only", ("research/curated/historical_scoring.py",), "audit", "COMPLETE_EXHAUSTIVE_MECHANICAL_AUDIT"),
     VariantSpec("full-campaign8", None, "What did the nine-phase eight-worker campaign establish locally?", "final eight-worker campaign", "campaign", "low", None, 1, "generic campaign review with actual runner8 capture, checkpoint and scorer programs; filled material omitted", ("research/curated/historical_campaign.py", "research/curated/historical_campaign_storage.py", "research/curated/historical_campaign_checkpoint.py", "research/curated/historical_campaign_entrypoints.py", "research/curated/historical_scoring.py"), "campaign", "COMPLETED_LOCAL_CAMPAIGN_REMOTE_SCORING_PENDING"),
-    VariantSpec("prijigrala-retry10", None, "What happened in the one-target retry-limit-ten case?", "retry limit ten for one target", "local-context", "low", 4, 10, "generic targeted retry; filled material omitted", ("research/curated/retry.py",), "single-case", "COMPLETE"),
+    VariantSpec("prijigrala-retry10", None, "What happened in the one-target retry-limit-ten case?", "retry limit ten for one target", "local-context", "low", 1, 10, "generic targeted retry; filled material omitted", ("research/curated/retry.py",), "single-case", "COMPLETE"),
 )
 
 
@@ -79,8 +79,10 @@ def reproduction_contract(variant: VariantSpec) -> dict[str, Any]:
             "credential_reference_env": "RESEARCH_CREDENTIAL_REF",
         },
         "inference_fields": {
-            "sent": ["model", "reasoning", "input", "filled_dataset_text", "generic_prompt", "bounded_target_metadata"],
+            "sent": ["model", "stream", "store", "input", "include_reasoning", "reasoning"],
+            "content_sent": ["completed source sentence", "selected target", "variant-specific retry fields when applicable"],
             "omitted": ["conversation_history", "gold_text", "private_response_body", "credentials"],
+            "public_redactions": ["source sentences", "filled prompts", "replacements", "raw responses", "reasoning traces"],
         },
         "resource_budget": {"workers": "explicit", "request_timeout_seconds": "explicit", "max_cases": "explicit", "max_retries": variant.corrective_retries},
         "default_network_calls": 0,
@@ -90,7 +92,7 @@ def reproduction_contract(variant: VariantSpec) -> dict[str, Any]:
 
 
 def reproduction_command(variant: VariantSpec, *, input_root: str = "$RESEARCH_INPUT_ROOT", index_path: str = "$RESEARCH_INDEX_PATH", output_root: str = "$RESEARCH_OUTPUT_ROOT") -> str:
-    args = ["python3", "-B", "-m", "research.tools.reproduce", "--variant", variant.id, "--input-root", input_root, "--index", index_path, "--output-root", output_root, "--workers", "1", "--timeout-seconds", "60", "--max-cases", "0", "--credential-env", "RESEARCH_CREDENTIAL_REF"]
+    args = ["python3", "-B", "-m", "research.tools.reproduce", "--variant", variant.id, "--input-root", input_root, "--index", index_path, "--output-root", output_root, "--endpoint", "$RESEARCH_ENDPOINT", "--model", "$RESEARCH_MODEL", "--workers", "1", "--timeout-seconds", "60", "--max-cases", "0", "--credential-env", "RESEARCH_CREDENTIAL_REF", "--retry-limit", str(variant.corrective_retries)]
     return shlex.join(args)
 
 

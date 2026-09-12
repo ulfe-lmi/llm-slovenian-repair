@@ -27,14 +27,21 @@ PRIOR_ID = "007-d"
 PUBLICATION = "88af5cefb76e5aaf727806ff589df93fa08f0861"
 IMPLEMENTATION = "97eceffa4c1ca60f1b0cea0fef30a4dc54be18df"
 REPOSITORY = "ulfe-lmi/llm-slovenian-repair"
-PERSISTENT_TMPDIR = Path(os.environ.get(
-    "TMPDIR",
-    "/home/ubuntu/.local/share/llm-slovenian-repair/research-runtime-20260911.YJemoq/007-d-scratch/round-007-e-tmp",
-)).resolve()
-if str(PERSISTENT_TMPDIR) == "/tmp" or Path("/tmp") in PERSISTENT_TMPDIR.parents:
-    PERSISTENT_TMPDIR = Path(
-        "/home/ubuntu/.local/share/llm-slovenian-repair/research-runtime-20260911.YJemoq/007-d-scratch/round-007-e-tmp"
-    )
+
+def select_scratch(environ):
+    """Choose an explicit safe scratch root or the runner-owned GHA fallback."""
+    for name in ("TMPDIR", "RUNNER_TEMP"):
+        value = environ.get(name)
+        if not value:
+            continue
+        candidate = Path(value).expanduser().absolute()
+        if candidate == Path("/tmp") or Path("/tmp") in candidate.parents:
+            continue
+        return candidate
+    raise ValueError("a persistent TMPDIR or runner-owned RUNNER_TEMP is required; /tmp is rejected")
+
+
+PERSISTENT_TMPDIR = select_scratch(os.environ)
 
 
 def json_bytes(value):
@@ -86,6 +93,15 @@ class RecoveryRemote:
 
 
 class ForwardRecoveryTests(unittest.TestCase):
+    def test_scratch_selection_requires_an_owned_non_tmp_root(self):
+        self.assertEqual(select_scratch({"TMPDIR": "/persistent/work"}), Path("/persistent/work"))
+        self.assertEqual(select_scratch({"RUNNER_TEMP": "/runner/_temp"}), Path("/runner/_temp"))
+        self.assertEqual(select_scratch({"TMPDIR": "/tmp", "RUNNER_TEMP": "/runner/_temp"}), Path("/runner/_temp"))
+        with self.assertRaises(ValueError):
+            select_scratch({})
+        with self.assertRaises(ValueError):
+            select_scratch({"TMPDIR": "/tmp"})
+
     def setUp(self):
         PERSISTENT_TMPDIR.mkdir(parents=True, exist_ok=True)
         self.temp = tempfile.TemporaryDirectory(prefix="oap-forward-recovery-", dir=PERSISTENT_TMPDIR)

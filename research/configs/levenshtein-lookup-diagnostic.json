@@ -4,18 +4,29 @@
   "generic_prompt": "You are a narrow Slovenian expression reviewer. Preserve meaning and register. Review only the marked target; do not rewrite the sentence. Return exactly {\"keep\":boolean,\"replacement\":string|null,\"needs_wider_edit\":boolean}. Sentence: {sentence}\nTarget: {target} Answer only the required JSON object.",
   "historical_status": "NOT_A_BENCHMARK",
   "inference_fields": {
+    "content_sent": [
+      "completed source sentence",
+      "selected target",
+      "variant-specific retry fields when applicable"
+    ],
     "omitted": [
       "conversation_history",
       "gold_text",
       "private_response_body",
       "credential_value"
     ],
+    "public_redactions": [
+      "source sentences",
+      "filled prompts",
+      "replacements",
+      "raw responses",
+      "reasoning traces"
+    ],
     "sent": [
       "model",
       "stream",
       "store",
       "input",
-      "filled_dataset_text",
       "include_reasoning",
       "reasoning"
     ]

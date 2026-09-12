@@ -18,16 +18,22 @@ python3 -B -m unittest discover -s research/tests -v
 
 ## Private identity replay
 
-Set `PRIVATE_RESEARCH_ROOT` to the persistent native strategic root, then run:
+Set explicit mappings from each logical ledger root to its current private root,
+then run the exact compressed ledger:
 
 ```sh
 python3 -B -m research.tools.replay \
-  --private-root "$PRIVATE_RESEARCH_ROOT" \
-  --manifest research/registry/file-census.json \
+  --manifest research/registry/file-census.json.gz \
+  --root-map 'experiments/=/caller/private/experiments' \
+  --root-map 'recovery-executions/=/caller/private/recovery-executions' \
   --limit 100
 ```
 
-Replay verifies bytes and identities only. It performs zero network/model calls.
+The compact `file-census.json` is only a summary and is rejected by the
+verifier; it is not an entry ledger. Exact mappings also cover relocated native
+roots by using an exact root mapping before a prefix mapping. Replay verifies
+disposition, size, SHA-256, and regular-file/non-symlink identity, and performs
+zero network/model calls.
 The historical live commands remain opt-in documentation and require separately
 authorized data, endpoint, model, credentials, and resource budgets.
 

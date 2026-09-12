@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import argparse
+from collections.abc import Mapping
 import hashlib
 import json
 import os
@@ -33,10 +34,38 @@ def _manifest_bytes(path: Path) -> bytes:
     return path.read_bytes()
 
 
-def verify_manifest(manifest: Path, private_root: Path, limit: int | None = None) -> tuple[int, int]:
-    """Verify exact private identities from the compact JSON or gzip census."""
+def _ledger_entries(document: object) -> list[dict[str, Any]]:
+    if not isinstance(document, dict) or not isinstance(document.get("entries"), list):
+        raise ValueError("an exact file-level ledger is required; use registry/file-census.json.gz, not its summary")
+    entries = document["entries"]
+    if not all(isinstance(entry, dict) for entry in entries):
+        raise ValueError("exact file-level ledger contains a non-object entry")
+    return entries
+
+
+def _mapped_root(logical_root: str, private_root: Path | None, root_map: Mapping[str, Path] | None) -> Path:
+    if root_map:
+        if logical_root in root_map:
+            return root_map[logical_root]
+        for prefix, candidate in root_map.items():
+            if prefix.endswith("/") and logical_root.startswith(prefix):
+                return candidate / logical_root[len(prefix):]
+        raise ValueError(f"no current private root mapping for logical root: {logical_root}")
+    if private_root is None:
+        raise ValueError(f"no current private root mapping for logical root: {logical_root}")
+    return private_root / logical_root
+
+
+def verify_manifest(
+    manifest: Path,
+    private_root: Path | None = None,
+    limit: int | None = None,
+    *,
+    root_map: Mapping[str, Path] | None = None,
+) -> tuple[int, int]:
+    """Verify exact private identities using explicit logical-root mappings."""
     document = json.loads(_manifest_bytes(manifest))
-    entries = document["entries"] if isinstance(document, dict) else document
+    entries = _ledger_entries(document)
     checked = 0
     eligible = [
         entry
@@ -49,12 +78,18 @@ def verify_manifest(manifest: Path, private_root: Path, limit: int | None = None
         relative = Path(entry["relative_path"])
         if any(part in ("", ".", "..") for part in relative.parts):
             raise ValueError("unsafe census path")
-        path = private_root / entry["root"] / relative
+        root = entry.get("root")
+        if not isinstance(root, str) or not root:
+            raise ValueError("ledger entry lacks a logical root")
+        path = _mapped_root(root, private_root, root_map) / relative
         info = path.lstat()
         if stat.S_ISLNK(info.st_mode) or not stat.S_ISREG(info.st_mode):
             raise ValueError(f"private artifact is not a regular file: {entry['root']}/{relative}")
         if digest(path) != entry["sha256"]:
             raise ValueError(f"private artifact hash mismatch: {entry['root']}/{relative}")
+        expected_size = entry.get("size")
+        if expected_size is not None and (not isinstance(expected_size, int) or info.st_size != expected_size):
+            raise ValueError(f"private artifact size mismatch: {entry['root']}/{relative}")
         checked += 1
     return checked, max(0, len(eligible) - checked)
 
@@ -214,6 +249,7 @@ def replay_saved_record(record: dict[str, Any], index: Path, *, record_name: str
         raise ReplayEvidenceError("saved detector maximum is invalid")
     proposals: dict[str, Proposal] = {}
     retries: dict[str, Proposal] = {}
+    retry_failures: dict[str, dict[str, Any]] = {}
     frequencies = _saved_english(record)
     recorded_first_failure = False
     for decision in decisions:
@@ -227,6 +263,12 @@ def replay_saved_record(record: dict[str, Any], index: Path, *, record_name: str
         retry = _saved_proposal(decision, ("retry_proposal_raw", "retry_proposal", "retry", "retry_decision"), retry=True)
         if retry is not None:
             retries[key] = _proposal(retry, retry=True)
+        retry_record = decision.get("retry")
+        if isinstance(retry_record, dict) and retry_record.get("operational_failure"):
+            retry_failures[key] = {
+                "kind": retry_record.get("kind", "expression-retry"),
+                "failure": retry_record.get("failure"),
+            }
 
     if recorded_first_failure:
         expected = record.get("corrected", record.get("output", record.get("final")))
@@ -245,10 +287,25 @@ def replay_saved_record(record: dict[str, Any], index: Path, *, record_name: str
         return frequencies[key]
 
     with Corpus(index) as corpus:
-        result = replay(original, corpus, english_lookup, proposals, retries, maximum=marker)
+        result = replay(
+            original,
+            corpus,
+            english_lookup,
+            proposals,
+            retries,
+            maximum=marker,
+            retry_failures=retry_failures,
+        )
     expected = record.get("corrected", record.get("output", record.get("final")))
     if not isinstance(expected, str) or result["output"] != expected:
         raise ReplayEvidenceError("private replay output mismatch or expected output is absent")
+    expected_no_retry = record.get("no_retry_output")
+    if expected_no_retry is not None and result["no_retry_output"] != expected_no_retry:
+        raise ReplayEvidenceError("private replay no-retry output mismatch")
+    if "operational_failure" in record and bool(result["operational_failure"]) != bool(record["operational_failure"]):
+        raise ReplayEvidenceError("private replay operational-failure flag mismatch")
+    if "no_retry_operational_failure" in record and bool(result["no_retry_operational_failure"]) != bool(record["no_retry_operational_failure"]):
+        raise ReplayEvidenceError("private replay no-retry failure flag mismatch")
     return {
         "case": record_name,
         "schema": "campaign-input-decisions" if "input" in record else "original-decisions",
@@ -260,6 +317,8 @@ def replay_saved_record(record: dict[str, Any], index: Path, *, record_name: str
         "detector_candidates": len(result["detector"]["candidates"]),
         "review_calls": result["review_calls"],
         "retry_calls": result["retry_calls"],
+        "operational_failure": result["operational_failure"],
+        "no_retry_operational_failure": result["no_retry_operational_failure"],
         "network_calls": 0,
         "model_calls": 0,
     }
@@ -293,6 +352,8 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--saved-record", type=Path, help="small-study or campaign input/decisions JSON")
     parser.add_argument("--index", type=Path)
     parser.add_argument("--manifest", type=Path)
+    parser.add_argument("--root-map", action="append", default=[], metavar="LOGICAL_ROOT=CURRENT_PRIVATE_ROOT",
+                        help="map a ledger logical root (or prefix ending /) to its current private root")
     parser.add_argument("--limit", type=int)
     args = parser.parse_args(argv)
     scratch = args.scratch or (Path(os.environ["TMPDIR"]) if os.environ.get("TMPDIR") else None)
@@ -307,10 +368,16 @@ def main(argv: list[str] | None = None) -> int:
     else:
         outputs["synthetic_replay"] = replay_fixture(args.fixture, scratch / "replay")
     if args.manifest:
-        if not args.private_root:
-            raise SystemExit("--private-root is required with --manifest")
+        root_map: dict[str, Path] = {}
+        for item in args.root_map:
+            logical, separator, current = item.partition("=")
+            if not separator or not logical or not current:
+                raise SystemExit("--root-map must be LOGICAL_ROOT=CURRENT_PRIVATE_ROOT")
+            root_map[logical] = Path(current)
+        if not args.private_root and not root_map:
+            raise SystemExit("--private-root or at least one --root-map is required with --manifest")
         outputs["identity_replay"] = dict(
-            zip(("checked", "skipped"), verify_manifest(args.manifest, args.private_root, args.limit), strict=True)
+            zip(("checked", "skipped"), verify_manifest(args.manifest, args.private_root, args.limit, root_map=root_map or None), strict=True)
         )
     print(json.dumps(outputs, sort_keys=True))
     return 0

@@ -213,6 +213,7 @@ class Client:
         transport: ResponseTransport | None = None,
         reuse: Mapping[str, Mapping[str, str]] | None = None,
         reasoning_effort: str = "low",
+        model: str = MODEL,
     ):
         self.endpoint = endpoint
         self.credential_env = credential_env
@@ -221,6 +222,7 @@ class Client:
         self.transport = transport
         self.reuse = dict(reuse or {})
         self.reasoning_effort = reasoning_effort
+        self.model = model
         self.network_calls = 0
 
     def _materialize_reuse(self, path: Path) -> None:
@@ -287,7 +289,7 @@ class Client:
         if not observation["operational_failure"]:
             try:
                 value = json.loads(base64.b64decode(raw["body_base64"]), object_pairs_hook=_unique_pairs)
-                if value.get("status") != "completed" or value.get("model") != MODEL:
+                if value.get("status") != "completed" or value.get("model") != self.model:
                     raise ValueError("incomplete response or wrong model")
                 thinking = _thinking_observation(value, self.reasoning_effort)
                 if not thinking["verified"]:
@@ -298,6 +300,10 @@ class Client:
                 if kind == "reviewer":
                     observation["proposal"] = parse_proposal(value)
                     observation["proposal"] = observation["proposal"].__dict__
+                elif kind == "validator":
+                    from .validation import parse_validator
+
+                    observation["validation"] = parse_validator(value)
                 elif kind == "expression-retry":
                     observation["proposal"] = parse_expression(value).__dict__
                 elif kind == "word-only-retry":
@@ -319,5 +325,5 @@ def request_contract() -> dict[str, object]:
         "response_bound_bytes": 2_000_000,
         "retry": "none; request-only interruption becomes durable failure",
         "default_network_calls": 0,
-        "live_requires": ["allow_live", "endpoint", "credential_env"],
+        "live_requires": ["allow_live", "endpoint", "model", "credential_env"],
     }

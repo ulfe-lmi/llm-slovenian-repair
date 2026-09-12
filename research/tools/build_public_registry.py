@@ -70,6 +70,12 @@ SOURCE_MAP: tuple[tuple[str, str], ...] = (
 )
 
 FUNCTION_COVERAGE: dict[str, dict[str, list[str]]] = {
+    "concept-verification/config.py": {"copied": ["ArchiveSpec", "canonical_bytes", "sha256_bytes", "sha256_file", "load_json"], "unavailable": []},
+    "concept-verification/corpus.py": {"copied": ["Evidence", "prepare", "Corpus", "Corpus.unigram", "Corpus.ngram", "Corpus.alternatives"], "unavailable": ["archive payloads: private-only"]},
+    "concept-verification/protected.py": {"copied": ["Interval", "protected_intervals", "is_protected"], "unavailable": []},
+    "concept-verification/detector.py": {"copied": ["Token", "Candidate", "tokenize", "detect", "candidate_summary"], "unavailable": []},
+    "concept-verification/qwen_client.py": {"copied": ["Proposal", "reviewer_body", "parse_proposal", "parse_expression"], "unavailable": ["credential values and response payloads: private-only"]},
+    "concept-verification/repair.py": {"copied": ["Edit", "mechanical", "restore_initial_case", "apply_edits"], "unavailable": []},
     "experiments/large-evaluation-uncapped-20260910.faME3U/common.py": {"copied": ["digest", "sha", "read", "encoded", "utc", "immutable_bytes", "save", "pointer", "jsonlines", "snapshot", "verify", "result_path"], "unavailable": []},
     "experiments/large-evaluation-uncapped-20260910.faME3U/pipeline_bridge.py": {"copied": ["Pipeline", "first_body", "retry_body", "patch", "parse_first", "parse_retry"], "unavailable": []},
     "experiments/large-evaluation-uncapped-20260910.faME3U/detector_uncapped.py": {"copied": ["Token", "Candidate", "tokenize", "_evidence", "detect", "candidate_summary"], "unavailable": []},
@@ -656,8 +662,10 @@ def write_publications(records: list[dict[str, Any]], repo: Path) -> None:
             "generic_prompt": reviewer_prompt("{sentence}", "{target}"),
             "retry_prompt": WORD_RETRY_PROMPT if experiment_id == "low-word-only-retry" else CONTEXTUAL_RETRY_PROMPT if experiment_id == "low-unigram-retry" else EXPRESSION_RETRY_PROMPT,
             "inference_fields": {
-                "sent": ["model", "stream", "store", "input", "filled_dataset_text", "include_reasoning", "reasoning"],
+                "sent": ["model", "stream", "store", "input", "include_reasoning", "reasoning"],
+                "content_sent": ["completed source sentence", "selected target", "variant-specific retry fields when applicable"],
                 "omitted": ["conversation_history", "gold_text", "private_response_body", "credential_value"],
+                "public_redactions": ["source sentences", "filled prompts", "replacements", "raw responses", "reasoning traces"],
             },
             "limits": {
                 "request_count": "preserved per record",
@@ -685,7 +693,7 @@ def write_publications(records: list[dict[str, Any]], repo: Path) -> None:
         }
         (configs / f"{experiment_id}.json").write_text(json.dumps(config, ensure_ascii=False, indent=2, sort_keys=True) + "\n", encoding="utf-8")
         metrics = record.get("metrics", {})
-        lines = [f"# {experiment_id}", "", "Data-free projection of one preserved historical record. This is an archival result, not a new experiment, semantic ground truth, product claim, or release decision.", "", "## Identity and question", "", f"- Question: {record.get('question', 'UNKNOWN')}", f"- Authorized change: {record.get('variation', 'UNKNOWN')}", f"- Status: `{record.get('status', 'UNKNOWN')}`; an old `RUNNING` marker is not completion.", f"- Private logical root: `{record.get('logical_root', 'UNKNOWN')}`; native path and payloads are not published.", "", "## Configuration projection", "", f"- Generic prompt: `{GENERIC_PROMPT}`", "- Sent fields: model, preserved reasoning setting, generic prompt, bounded target metadata.", "- Omitted fields: conversation history, filled dataset text, gold strings, private response bodies, credentials.", "- Detector/gate/retry limits: preserved from the source record; `UNKNOWN` is retained where the source did not expose a value.", "- Resource identities: data, index, English attestation, source, and environment are referenced by identity only; no private path is a runtime dependency.", "", "## Numeric evidence", "", "The complete data-free numeric projection is linked from [study-evidence](../results/study-evidence.json.gz). Per-case/trial fields retain counts, calls, timing/status where available. Text, proposals, references, filled prompts, response bodies, and private result identities are excluded.", "", "| Metric | Value |", "| --- | ---: |"]
+        lines = [f"# {experiment_id}", "", "Data-free projection of one preserved historical record. This is an archival result, not a new experiment, semantic ground truth, product claim, or release decision.", "", "## Identity and question", "", f"- Question: {record.get('question', 'UNKNOWN')}", f"- Authorized change: {record.get('variation', 'UNKNOWN')}", f"- Status: `{record.get('status', 'UNKNOWN')}`; an old `RUNNING` marker is not completion.", f"- Private logical root: `{record.get('logical_root', 'UNKNOWN')}`; native path and payloads are not published.", "", "## Configuration projection", "", "- Historical wire keys: `model`, `stream`, `store`, `input`, `include_reasoning`, `reasoning`.", "- Content sent in `input`: the completed source sentence and selected target; the contextual retry additionally carries its original sentence/target/rejected replacement/missing-word evidence.", "- Publicly omitted: source sentences, filled prompts, gold strings, replacements, response bodies, reasoning traces, credentials, and private endpoint/profile values.", "- Detector/gate/retry limits: preserved from the source record; `UNKNOWN` is retained where the source did not expose a value.", "- Resource identities: data, index, English attestation, source, and environment are referenced by identity only; no private path is a runtime dependency.", "", "## Numeric evidence", "", "The complete data-free numeric projection is linked from [study-evidence](../results/study-evidence.json.gz). Per-case/trial fields retain counts, calls, timing/status where available. Text, proposals, references, filled prompts, response bodies, and private result identities are excluded.", "", "| Metric | Value |", "| --- | ---: |"]
         for key, value in sorted(metrics.items()):
             if key == "trial_metrics" or isinstance(value, (dict, list)):
                 continue

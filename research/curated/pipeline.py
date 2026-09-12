@@ -64,6 +64,7 @@ def replay(
     mode: str = "local-context",
     threshold: int = 3,
     maximum: int | None = None,
+    retry_failures: Mapping[str, Mapping[str, Any] | str] | None = None,
 ) -> dict[str, Any]:
     """Replay saved proposal values with zero model/network calls.
 
@@ -80,9 +81,11 @@ def replay(
         maximum=maximum,
     )
     retry_proposals = retry_proposals or {}
+    retry_failures = retry_failures or {}
     edits: list[tuple[int, int, str]] = []
     decisions: list[dict[str, Any]] = []
     no_retry_edits: list[tuple[int, int, str]] = []
+    corrective_failure = False
     for candidate, policy in zip(prepared["candidates"], prepared["english"], strict=True):
         key = str(candidate["start"])
         if policy["review_suppressed"]:
@@ -99,6 +102,24 @@ def replay(
             assert isinstance(first.replacement, str)
             no_retry_edits.append((candidate["start"], candidate["end"], first.replacement))
         if first_gate["reason"] == "replacement-unigram-uncertain":
+            if key in retry_failures:
+                corrective_failure = True
+                decisions.append(
+                    {
+                        "key": key,
+                        "candidate": candidate,
+                        "english": policy,
+                        "first_proposal": first,
+                        "first_case": first_case,
+                        "first_gate": first_gate,
+                        "final_proposal": None,
+                        "final_case": None,
+                        "final_gate": None,
+                        "retry_used": True,
+                        "retry_failure": retry_failures[key],
+                    }
+                )
+                continue
             if key not in retry_proposals:
                 raise ValueError(f"saved retry proposal missing for offset {key}")
             retry_used = True
@@ -124,6 +145,8 @@ def replay(
         )
     output = apply_edits(original, edits)
     no_retry_output = apply_edits(original, no_retry_edits)
+    if corrective_failure:
+        output = original
     return {
         "original": original,
         "output": output,
@@ -134,6 +157,10 @@ def replay(
         "no_retry_edits": no_retry_edits,
         "review_calls": sum(not policy["review_suppressed"] for policy in prepared["english"]),
         "retry_calls": sum(decision["retry_used"] for decision in decisions),
+        "operational_failure": corrective_failure,
+        "no_retry_operational_failure": False,
+        "candidate_edits_before_failure_fallback": edits,
+        "first_edits_before_failure_fallback": no_retry_edits,
         "network_calls": 0,
         "model_calls": 0,
     }

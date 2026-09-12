@@ -5,6 +5,7 @@ import tempfile
 import unittest
 
 from research.tools.replay import _create_fixture_index, replay_saved_record
+from research.curated.historical_methods import no_retry
 
 
 class CampaignReplayShape(unittest.TestCase):
@@ -45,6 +46,42 @@ class CampaignReplayShape(unittest.TestCase):
         receipt = self.replay(self.record(suppressed=False))
         self.assertTrue(receipt["operational_failure"])
         self.assertEqual(receipt["model_calls"], 0)
+
+    def test_retry_only_failure_preserves_full_original_but_not_m3_failure(self):
+        record = self.record(suppressed=False)
+        original = "qqqx zzzx"
+        decisions = []
+        english_rows = []
+        first_calls = []
+        for start, target, replacement, accepted in ((0, "qqqx", "abc", True),
+                                                      (5, "zzzx", "xxxx", False)):
+            candidate = {"start": start, "end": start + 4, "text": target, "score": 1.0,
+                         "evidence": {"unigram": {"state": "UNAVAILABLE", "count": None}}}
+            english = {**record["detector"]["english"][0], "casefolded_target": target,
+                       "original_target": target}
+            proposal = {"keep": False, "replacement": replacement, "needs_wider_edit": False}
+            first = {"kind": "reviewer", "operational_failure": False, "proposal": proposal}
+            first_calls.append(first)
+            english_rows.append(english)
+            decisions.append({"candidate": candidate, "english": english, "policy_preserved": False,
+                              "first": first, "first_adjusted": proposal,
+                              "first_gate": {"accepted": accepted,
+                                             "reason": "unigram-exact" if accepted else "replacement-unigram-uncertain"},
+                              "retry": None})
+        failed_retry = {"kind": "expression-retry", "operational_failure": True,
+                        "proposal": None, "failure": "TIMEOUT"}
+        decisions[1]["retry"] = failed_retry
+        record.update(input=original, output=original, decisions=decisions,
+                      calls=first_calls + [failed_retry], no_retry_output="abc zzzx",
+                      no_retry_operational_failure=False)
+        record["detector"].update(candidates=[d["candidate"] for d in decisions],
+                                  english=english_rows, eligible_words=2)
+        receipt = self.replay(record)
+        self.assertTrue(receipt["operational_failure"])
+        self.assertEqual(receipt["model_calls"], 0)
+        ablation = no_retry(original, record)
+        self.assertFalse(ablation["operational_failure"])
+        self.assertEqual(ablation["output"], "abc zzzx")
 
 
 if __name__ == "__main__":

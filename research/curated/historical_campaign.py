@@ -74,7 +74,17 @@ def stored(example: dict[str, Any], method: str, value: dict[str, Any], input_te
             "input": text, "input_sha256": hashlib.sha256(text.encode()).hexdigest(), **value}
 
 
-def one(example: dict[str, Any], method: str, pipeline: Any, client: Client, output_root: str | Path, *, raw: dict[str, Any] | None = None) -> dict[str, Any]:
+def one(
+    example: dict[str, Any],
+    method: str,
+    pipeline: Any,
+    client: Client,
+    output_root: str | Path,
+    *,
+    raw: dict[str, Any] | None = None,
+    retry_limit: int = FINAL_CAMPAIGN.retry_limit,
+    model: str = "qwen3.8-27b",
+) -> dict[str, Any]:
     root = Path(output_root)
     path = root / "results" / "A100" / example["benchmark"] / f"{example['index']:06d}" / (method + ".json")
     text = example["input"] if raw is None else raw["output"]
@@ -90,11 +100,11 @@ def one(example: dict[str, Any], method: str, pipeline: Any, client: Client, out
     elif method == "M0":
         value = identity(text)
     elif method == "RAW":
-        value = direct(text, client, work, translation=True)
+        value = direct(text, client, work, translation=True, model=model)
     elif method == "M1":
-        value = direct(text, client, work)
+        value = direct(text, client, work, model=model)
     elif method == "M2":
-        value = targeted(text, pipeline, client, work)
+        value = targeted(text, pipeline, client, work, retry_limit=retry_limit, model=model)
     elif method == "M3":
         value = no_retry(text, read(root / "results" / "A100" / example["benchmark"] / f"{example['index']:06d}" / "M2.json"))
     else:

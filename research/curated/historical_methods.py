@@ -3,12 +3,12 @@
 from __future__ import annotations
 
 import time
-from collections.abc import Mapping
+from collections.abc import Callable, Mapping
 from pathlib import Path
 from typing import Any
 
 from .corpus import Corpus
-from .historical_pipeline import first_body, patch, retry_body
+from .historical_pipeline import MODEL, first_body, patch, retry_body
 from .historical_transport import _save, text_body
 from .review import Proposal
 
@@ -23,6 +23,8 @@ def direct(
     client_or_completion: Any,
     directory: str | Path | None = None,
     translation: bool = False,
+    *,
+    model: str = MODEL,
 ) -> dict[str, Any]:
     """M1/direct method; a supplied completion is supported for offline replay."""
     if isinstance(client_or_completion, str) and directory is None:
@@ -30,7 +32,7 @@ def direct(
     if directory is None:
         raise TypeError("direct requires a capture directory")
     started = time.monotonic()
-    call = client_or_completion.call(Path(directory) / "call", text_body(text, translation), "translation" if translation else "direct")
+    call = client_or_completion.call(Path(directory) / "call", text_body(text, translation, model=model), "translation" if translation else "direct")
     output = text if call.get("operational_failure") else call.get("text", text)
     return {
         "output": output,
@@ -47,8 +49,20 @@ def _proposal(value: Mapping[str, Any]) -> Proposal:
     return Proposal(bool(value["keep"]), value.get("replacement"), bool(value["needs_wider_edit"]))
 
 
-def targeted(text: str, pipeline: Any, client: Any, directory: str | Path) -> dict[str, Any]:
+def targeted(
+    text: str,
+    pipeline: Any,
+    client: Any,
+    directory: str | Path,
+    *,
+    retry_limit: int = 1,
+    model: str = MODEL,
+    retry_builder: Callable[[str, Mapping[str, Any], Proposal, Mapping[str, Any]], dict[str, Any]] | None = None,
+    retry_kind: str = "expression-retry",
+) -> dict[str, Any]:
     """M2 actual detector/policy/reviewer/gate/retry/patch path."""
+    if retry_limit < 0:
+        raise ValueError("retry limit must be non-negative")
     started = time.monotonic()
     directory = Path(directory)
     prepared = pipeline.detect(text)
@@ -67,7 +81,7 @@ def targeted(text: str, pipeline: Any, client: Any, directory: str | Path) -> di
             decisions.append(decision)
             _save(target_dir / "decision.json", decision)
             continue
-        first = client.call(target_dir / "first", first_body(text, candidate), "reviewer")
+        first = client.call(target_dir / "first", first_body(text, candidate, model=model), "reviewer")
         calls.append(first)
         retry = None
         initial_gate = None
@@ -87,20 +101,35 @@ def targeted(text: str, pipeline: Any, client: Any, directory: str | Path) -> di
             final_case = case
             if initial_gate["accepted"]:
                 first_edits.append((candidate["start"], candidate["end"], adjusted["replacement"]))
-            if initial_gate["reason"] == "replacement-unigram-uncertain":
-                retry = client.call(target_dir / "retry", retry_body(raw.replacement or ""), "expression-retry")
+        retries: list[dict[str, Any]] = []
+        if initial_gate and initial_gate["reason"] == "replacement-unigram-uncertain":
+            for retry_index in range(retry_limit):
+                retry_body_value = (
+                    retry_builder(text, candidate, adjusted, initial_gate)
+                    if retry_builder is not None
+                    else retry_body(raw.replacement or "", model=model)
+                )
+                retry = client.call(
+                    target_dir / f"retry-{retry_index:02d}",
+                    retry_body_value,
+                    retry_kind,
+                )
+                retries.append(retry)
                 calls.append(retry)
                 if retry.get("operational_failure"):
                     any_failed = True
                     final_gate = None
                     final_proposal = None
-                else:
-                    retry_raw = _proposal(retry["proposal"])
-                    final_proposal, final_case, final_gate = pipeline.gate(text, candidate, retry_raw)
-            if final_gate and final_gate["accepted"]:
-                edits.append((candidate["start"], candidate["end"], final_proposal["replacement"]))
+                    break
+                retry_raw = _proposal(retry["proposal"])
+                final_proposal, final_case, final_gate = pipeline.gate(text, candidate, retry_raw)
+                if final_gate["accepted"] or final_gate["reason"] != "replacement-unigram-uncertain":
+                    break
+            retry = retries[-1] if retries else None
+        if final_gate and final_gate["accepted"]:
+            edits.append((candidate["start"], candidate["end"], final_proposal["replacement"]))
         decision = {"candidate": candidate, "english": policy, "policy_preserved": False,
-                    "first": first, "retry": retry, "first_adjusted": adjusted,
+                    "first": first, "retry": retry, "retries": retries, "first_adjusted": adjusted,
                     "first_case": case, "first_gate": initial_gate, "final_gate": final_gate,
                     "final_proposal": final_proposal, "final_case": final_case}
         decisions.append(decision)

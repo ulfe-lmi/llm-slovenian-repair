@@ -10,7 +10,11 @@
       "disposition": "published-curated/redacted",
       "function_coverage": {
         "copied": [
-          "file-level executable source"
+          "ArchiveSpec",
+          "canonical_bytes",
+          "sha256_bytes",
+          "sha256_file",
+          "load_json"
         ],
         "unavailable": []
       },
@@ -28,9 +32,16 @@
       "disposition": "published-curated/redacted",
       "function_coverage": {
         "copied": [
-          "file-level executable source"
+          "Evidence",
+          "prepare",
+          "Corpus",
+          "Corpus.unigram",
+          "Corpus.ngram",
+          "Corpus.alternatives"
         ],
-        "unavailable": []
+        "unavailable": [
+          "archive payloads: private-only"
+        ]
       },
       "transformations": [
         "removed historical absolute paths",
@@ -46,7 +57,9 @@
       "disposition": "published-curated/redacted",
       "function_coverage": {
         "copied": [
-          "file-level executable source"
+          "Interval",
+          "protected_intervals",
+          "is_protected"
         ],
         "unavailable": []
       },
@@ -64,7 +77,11 @@
       "disposition": "published-curated/redacted",
       "function_coverage": {
         "copied": [
-          "file-level executable source"
+          "Token",
+          "Candidate",
+          "tokenize",
+          "detect",
+          "candidate_summary"
         ],
         "unavailable": []
       },
@@ -82,9 +99,14 @@
       "disposition": "published-curated/redacted",
       "function_coverage": {
         "copied": [
-          "file-level executable source"
+          "Proposal",
+          "reviewer_body",
+          "parse_proposal",
+          "parse_expression"
         ],
-        "unavailable": []
+        "unavailable": [
+          "credential values and response payloads: private-only"
+        ]
       },
       "transformations": [
         "removed historical absolute paths",
@@ -100,7 +122,10 @@
       "disposition": "published-curated/redacted",
       "function_coverage": {
         "copied": [
-          "file-level executable source"
+          "Edit",
+          "mechanical",
+          "restore_initial_case",
+          "apply_edits"
         ],
         "unavailable": []
       },
@@ -189,7 +214,7 @@
       "original_logical_path": "experiments/large-evaluation-uncapped-20260910.faME3U/methods.py",
       "original_sha256": "9214a1b59af3cb71283cc2202bb1321273b93bc0dd851ddc4041e6e40dcbe662",
       "curated_path": "research/curated/historical_methods.py",
-      "curated_sha256": "a738f4be72fe9858b6446f3c65eb4618cfd648289d1ac6b525418a5759ebfbba",
+      "curated_sha256": "57532e1087b705388e34114b3ced773845b038bf6b3c5b319a9e1942e06f07fa",
       "disposition": "published-curated/redacted",
       "function_coverage": {
         "copied": [
@@ -320,7 +345,7 @@
       "original_logical_path": "experiments/large-evaluation-uncapped-20260910.faME3U/transport.py",
       "original_sha256": "eaa8ae2859e40235219e6fe286bdba0e11756abd807c8006d9771c19aea63342",
       "curated_path": "research/curated/historical_transport.py",
-      "curated_sha256": "169a0dfbe8904140c028673ea75a20f23eb3db9b70141ca734d92e6ce45f4425",
+      "curated_sha256": "c4cdd8344a97c4982630bb1e6fe72e32750a53ce7ac1d759fe5a52250e8ee518",
       "disposition": "published-curated/redacted",
       "function_coverage": {
         "copied": [
@@ -343,7 +368,7 @@
       "original_logical_path": "experiments/large-evaluation-uncapped-20260910.faME3U/campaign.py",
       "original_sha256": "ed524ac167bfa6f8992955101f3b1d82da76ba28c7ce1b20395a8bc38ad456a3",
       "curated_path": "research/curated/historical_campaign.py",
-      "curated_sha256": "a0c91aaae76fd73a57b6872f652ef4fcabd30b532b25689431f4750d2ce5ea49",
+      "curated_sha256": "d29af7fdeecdae96eb2158c287b78d182ca8cd6c6933d50dbc3768c90636f781",
       "disposition": "published-curated/redacted",
       "function_coverage": {
         "copied": [
@@ -520,7 +545,7 @@
       "original_logical_path": "llm-slovenian-repair-campaign8.ewruv3/runner8.py",
       "original_sha256": "1a4bf946709e56698f3ad78a13e1cbea2e4fc83d11a79ce9c5ae33dd39e13089",
       "curated_path": "research/curated/historical_campaign.py",
-      "curated_sha256": "a0c91aaae76fd73a57b6872f652ef4fcabd30b532b25689431f4750d2ce5ea49",
+      "curated_sha256": "d29af7fdeecdae96eb2158c287b78d182ca8cd6c6933d50dbc3768c90636f781",
       "disposition": "published-curated/redacted",
       "function_coverage": {
         "copied": [
