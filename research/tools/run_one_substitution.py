@@ -125,6 +125,7 @@ FROZEN_RUN_STATUS_SHA256 = "e8d690988e62fc23147b437066f1a3490d3b547387a6771c5338
 FROZEN_INCIDENT_SHA256 = {
     "precalculation": "bb5b762afc3b6e836a5db11b2211e5a520715a3ca695b99cfb7f51ae53882085",
     "calculation_aggregation": "9c03fd562dee7f9f483c47815f4ca5ac6fd750f2179a110559d0470fc9652305",
+    "aggregation_digest_order": "13fd07df713924b784ea2a01d430c310e854e46a231bff9e27ef0b59d806b994",
     "invalid_runtime_shim": "2f31d9c8fa2bebedf117dd1d3b4a7cd294800d14063b1a3ea01096eadca43498",
     "malformed_command": "b53d52bcc7affaa79d75e354f0abc184ebf2ef296d21d14ed1df19da9b1f55dc",
     "preaggregation_review": "a7c89bcb30d27279ecf779394ff6fe9617bcd489bee8d96cc9792622466fc65c",
@@ -654,6 +655,7 @@ def verify_frozen_incidents(scratch: Path) -> dict[str, str]:
     incident_paths = {
         "precalculation": scratch / "PRECALCULATION-INCIDENT.json",
         "calculation_aggregation": scratch / "CALCULATION-AGGREGATION-INCIDENT.json",
+        "aggregation_digest_order": scratch / "AGGREGATION-DIGEST-ORDER-INCIDENT.json",
         "preaggregation_review": scratch / "PREAGGREGATION-STRATEGIC-REVIEW.json",
         "invalid_runtime_shim": scratch.parent
         / "007-h-invalid-runtime-shim-579b6b4-partial/INCIDENT.json",
@@ -676,6 +678,19 @@ def verify_frozen_incidents(scratch: Path) -> dict[str, str]:
         or calculation_incident.get("public_outputs_present") is not False
     ):
         raise ExperimentError("frozen calculation incident identity is invalid")
+    digest_order = read_json(incident_paths["aggregation_digest_order"])
+    if (
+        not isinstance(digest_order, dict)
+        or digest_order.get("calculation_case_count") != FROZEN_CASE_COUNT
+        or digest_order.get("actual_model_calls") != 0
+        or digest_order.get("actual_network_calls") != 0
+        or digest_order.get("aggregate_outputs_present_after_failure") is not False
+        or digest_order.get("case_bytes_changed") is not False
+        or digest_order.get("scientific_result") is not False
+        or digest_order.get("correction_commit") != "4fc84353e1f2f4a7618286a0680279a4254aa9d5"
+        or digest_order.get("failure") != "frozen case identity manifest changed"
+    ):
+        raise ExperimentError("digest-order incident identity is invalid")
     malformed = read_json(incident_paths["malformed_command"])
     invalid = read_json(incident_paths["invalid_runtime_shim"])
     review = read_json(incident_paths["preaggregation_review"])
@@ -1750,7 +1765,12 @@ def aggregate_frozen(args: argparse.Namespace) -> dict[str, Any]:
         f"- Case identity manifest SHA-256: {case_digest}.\n"
         f"- Preaggregation review incident SHA-256: {incidents['preaggregation_review']}.\n"
         "- Incident SHA-256 records include the pre-calculation, prior aggregation, "
-        "preaggregation review, invalid-runtime-shim, and malformed-command incidents.\n"
+        "digest-order, preaggregation review, invalid-runtime-shim, and "
+        "malformed-command incidents.\n"
+        "- The first aggregation-only attempt produced no metrics because relative-string "
+        "sorting differed from the original Python Path component ordering; frozen case "
+        "bytes and status were unchanged, and commit 4fc84353e1f2f4a7618286a0680279a4254aa9d5 "
+        "corrected the verifier.\n"
         "- Lint hold: resolved before aggregation with cached Ruff; no /tmp/uv sync.\n"
         "- Case-root mode hardening: 0755 to 0700; case bytes unchanged.\n"
         "- Frozen calculation case-write span/rate: "

@@ -680,6 +680,76 @@ class OneSubstitutionTests(unittest.TestCase):
                     ):
                         driver.frozen_case_manifest(scratch, pairs, "cfg")
 
+    def test_frozen_case_manifest_uses_component_order_for_phase_directories(self) -> None:
+        phases = {"a": 1, "a-b": 1}
+        pairs: dict[str, list[dict[str, object]]] = {}
+        paths: list[Path] = []
+
+        with tempfile.TemporaryDirectory(
+            prefix=".one-sub-component-order-", dir=PRIVATE_TEST_ROOT
+        ) as raw:
+            scratch = Path(raw) / "scratch"
+            cases_root = scratch / "cases"
+            cases_root.mkdir(parents=True)
+            os.chmod(scratch, 0o700)
+            os.chmod(cases_root, 0o700)
+            for phase in phases:
+                phase_dir = cases_root / phase
+                phase_dir.mkdir()
+                os.chmod(phase_dir, 0o700)
+                dataset = {"id": f"{phase}-case", "index": 1}
+                saved = {"id": f"{phase}-case", "index": 1, "saved": True}
+                pair = {"dataset": dataset, "saved": saved}
+                pairs[phase] = [pair]
+                record = {
+                    "schema_version": 1,
+                    "configuration_sha256": "cfg",
+                    "phase": phase,
+                    "index": 1,
+                    "id": dataset["id"],
+                    "dataset": dataset,
+                    "baseline": saved,
+                }
+                path = phase_dir / "000001.json"
+                path.write_bytes(driver.canonical_bytes(record))
+                os.chmod(path, 0o600)
+                paths.append(path)
+
+            component_order = sorted(paths)
+            relative_string_order = sorted(
+                paths, key=lambda path: str(path.relative_to(scratch))
+            )
+            self.assertNotEqual(component_order, relative_string_order)
+
+            expected = driver.hashlib.sha256()
+            for path in component_order:
+                contents = path.read_bytes()
+                expected.update(
+                    str(path.relative_to(scratch)).encode("utf-8")
+                    + b"\0"
+                    + str(len(contents)).encode("ascii")
+                    + b"\0"
+                    + driver.hashlib.sha256(contents).hexdigest().encode("ascii")
+                    + b"\n"
+                )
+
+            with (
+                patch.object(driver, "PHASES", phases),
+                patch.object(driver, "FROZEN_CASE_COUNT", 2),
+                patch.object(
+                    driver, "FROZEN_CASE_BYTES", sum(path.stat().st_size for path in paths)
+                ),
+                patch.object(
+                    driver,
+                    "FROZEN_CASE_IDENTITY_MANIFEST_SHA256",
+                    expected.hexdigest(),
+                ),
+            ):
+                _, observed, total_bytes = driver.frozen_case_manifest(scratch, pairs, "cfg")
+
+            self.assertEqual(total_bytes, sum(path.stat().st_size for path in paths))
+            self.assertEqual(observed, expected.hexdigest())
+
     def test_aggregation_exception_preserves_status_and_creates_no_outputs(self) -> None:
         with tempfile.TemporaryDirectory(
             prefix=".one-sub-aggregation-", dir=PRIVATE_TEST_ROOT
