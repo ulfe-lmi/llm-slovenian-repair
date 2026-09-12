@@ -17,6 +17,8 @@ from research.one_substitution import (
 )
 from research.tools import run_one_substitution as driver
 
+PRIVATE_TEST_ROOT = Path("/home/ubuntu/.local/share/llm-slovenian-repair")
+
 
 class OneSubstitutionTests(unittest.TestCase):
     def test_saved_call_schema_accepts_stage_kinds_and_exact_flattening(self) -> None:
@@ -579,6 +581,295 @@ class OneSubstitutionTests(unittest.TestCase):
                     before, driver.snapshot_prior_public_artifacts(root)
                 )
 
+    def test_aggregation_only_call_graph_excludes_calculation_entry_points(self) -> None:
+        tree = ast.parse(Path(driver.__file__).read_text(encoding="utf-8"))
+        functions = {
+            node.name: node
+            for node in ast.walk(tree)
+            if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef))
+        }
+        reachable: set[str] = set()
+        pending = ["aggregate_frozen"]
+        while pending:
+            name = pending.pop()
+            if name in reachable:
+                continue
+            reachable.add(name)
+            node = functions.get(name)
+            if node is None:
+                continue
+            for call in ast.walk(node):
+                if (
+                    isinstance(call, ast.Call)
+                    and isinstance(call.func, ast.Name)
+                    and call.func.id in functions
+                ):
+                    pending.append(call.func.id)
+        self.assertNotIn("run", reachable)
+        self.assertNotIn("calculate_case", reachable)
+        self.assertNotIn("load_or_calculate_case", reachable)
+
+    def test_frozen_case_manifest_rejects_case_set_or_identity_drift(self) -> None:
+        dataset = {"id": "case-1", "index": 1}
+        saved = {"id": "case-1", "index": 1, "saved": True}
+        pair = {"dataset": dataset, "saved": saved}
+
+        def make_fixture(
+            root: Path, variant: str
+        ) -> tuple[Path, dict[str, list[dict[str, object]]], str]:
+            scratch = root / "scratch"
+            cases = scratch / "cases" / "phase"
+            cases.mkdir(parents=True)
+            os.chmod(scratch, 0o700)
+            os.chmod(scratch / "cases", 0o700)
+            os.chmod(cases, 0o700)
+            record = {
+                "schema_version": 1,
+                "configuration_sha256": "cfg",
+                "phase": "phase",
+                "index": 1,
+                "id": "case-1",
+                "dataset": dataset,
+                "baseline": saved,
+            }
+            data = driver.canonical_bytes(record)
+            case_path = cases / "000001.json"
+            case_path.write_bytes(data)
+            os.chmod(case_path, 0o600)
+            if variant == "missing":
+                case_path.unlink()
+            elif variant == "additional":
+                extra = cases / "000002.json"
+                extra.write_bytes(data)
+                os.chmod(extra, 0o600)
+            elif variant == "changed":
+                changed = dict(record)
+                changed["dataset"] = {"id": "changed", "index": 1}
+                case_path.write_bytes(driver.canonical_bytes(changed))
+            elif variant == "wrong-config":
+                wrong = dict(record)
+                wrong["configuration_sha256"] = "wrong"
+                case_path.write_bytes(driver.canonical_bytes(wrong))
+            digest = driver.hashlib.sha256()
+            for path in sorted(scratch.glob("cases/phase/*.json")):
+                contents = path.read_bytes()
+                digest.update(
+                    str(path.relative_to(scratch)).encode("utf-8")
+                    + b"\0"
+                    + str(len(contents)).encode("ascii")
+                    + b"\0"
+                    + driver.hashlib.sha256(contents).hexdigest().encode("ascii")
+                    + b"\n"
+                )
+            pairs = {"phase": [pair]}
+            return scratch, pairs, digest.hexdigest()
+
+        with tempfile.TemporaryDirectory(
+            prefix=".one-sub-case-manifest-", dir=PRIVATE_TEST_ROOT
+        ) as raw:
+            root = Path(raw)
+            for variant in ("missing", "additional", "changed", "wrong-config"):
+                with self.subTest(variant=variant):
+                    scratch, pairs, digest = make_fixture(root / variant, variant)
+                    with (
+                        patch.object(driver, "PHASES", {"phase": 1}),
+                        patch.object(driver, "FROZEN_CASE_COUNT", 1),
+                        patch.object(driver, "FROZEN_CASE_BYTES", 10_000),
+                        patch.object(driver, "FROZEN_CASE_IDENTITY_MANIFEST_SHA256", digest),
+                        self.assertRaises(driver.ExperimentError),
+                    ):
+                        driver.frozen_case_manifest(scratch, pairs, "cfg")
+
+    def test_aggregation_exception_preserves_status_and_creates_no_outputs(self) -> None:
+        with tempfile.TemporaryDirectory(
+            prefix=".one-sub-aggregation-", dir=PRIVATE_TEST_ROOT
+        ) as raw:
+            root = Path(raw)
+            repo = root / "repo"
+            scratch = root / "scratch"
+            scratch.mkdir()
+            os.chmod(scratch, 0o700)
+            (repo / "research").mkdir(parents=True)
+            configuration = {
+                "implementation_head": "calc",
+                "run_id": driver.RUN_ID,
+                "source_identity": {
+                    "paired_rows": 0,
+                    "dataset_rows": {"dassle-spelling": 0, "dassle-spelling-preservation": 0},
+                },
+                "baseline_identity": {"summary": {}},
+            }
+            configuration_data = driver.canonical_bytes(configuration)
+            configuration_path = scratch / "CONFIGURATION.json"
+            configuration_path.write_bytes(configuration_data)
+            os.chmod(configuration_path, 0o600)
+            configuration_sha = driver.hashlib.sha256(configuration_data).hexdigest()
+            status_data = driver.canonical_bytes(
+                {
+                    "configuration_sha256": configuration_sha,
+                    "run_id": driver.RUN_ID,
+                    "status": "EXPERIMENTAL_CALCULATION",
+                }
+            )
+            status_path = scratch / "RUN-STATUS.json"
+            status_path.write_bytes(status_data)
+            os.chmod(status_path, 0o600)
+            before_status = status_path.read_bytes()
+            args = driver.argparse.Namespace(
+                repo_root=repo,
+                scratch=scratch,
+                expected_implementation_head="agg",
+                calculation_implementation_head="calc",
+            )
+            with (
+                patch.object(
+                    driver,
+                    "PHASES",
+                    {"dassle-spelling": 0, "dassle-spelling-preservation": 0},
+                ),
+                patch.object(driver, "FROZEN_CASE_COUNT", 0),
+                patch.object(driver, "FROZEN_CALCULATION_HEAD", "calc"),
+                patch.object(driver, "FROZEN_CONFIGURATION_SHA256", configuration_sha),
+                patch.object(
+                    driver,
+                    "FROZEN_RUN_STATUS_SHA256",
+                    driver.hashlib.sha256(status_data).hexdigest(),
+                ),
+                patch.object(
+                    driver,
+                    "verify_committed_implementation",
+                    return_value={"implementation_head": "agg"},
+                ),
+                patch.object(driver, "verify_frozen_inputs", return_value={}),
+                patch.object(driver, "verify_frozen_incidents", return_value={}),
+                patch.object(
+                    driver,
+                    "load_pairs",
+                    return_value={"dassle-spelling": [], "dassle-spelling-preservation": []},
+                ),
+                patch.object(driver, "verify_uv_mapping", return_value=(set(), [])),
+                patch.object(
+                    driver,
+                    "frozen_case_manifest",
+                    return_value=(
+                        {"dassle-spelling": [], "dassle-spelling-preservation": []},
+                        "case",
+                        0,
+                    ),
+                ),
+                patch.object(
+                    driver, "load_vocabulary", return_value=(set(), {}, 0.0, 0)
+                ),
+                patch.object(
+                    driver,
+                    "aggregate",
+                    side_effect=driver.ExperimentError("forced aggregate failure"),
+                ),
+                self.assertRaises(driver.ExperimentError),
+            ):
+                driver.aggregate_frozen(args)
+            self.assertEqual(status_path.read_bytes(), before_status)
+            for name in ("RESULTS.json", "REPORT.md", "MANIFEST.json"):
+                self.assertFalse((scratch / name).exists(), name)
+            for relative in driver.PUBLIC_OUTPUT_PATHS:
+                self.assertFalse((repo / relative).exists(), relative)
+
+    def test_aggregation_identity_retains_distinct_calculation_and_aggregation_heads(self) -> None:
+        with tempfile.TemporaryDirectory(
+            prefix=".one-sub-aggregation-heads-", dir=PRIVATE_TEST_ROOT
+        ) as raw:
+            root = Path(raw)
+            repo = root / "repo"
+            scratch = root / "scratch"
+            scratch.mkdir()
+            os.chmod(scratch, 0o700)
+            (scratch / "INPUT-MANIFEST.json").write_bytes(b"manifest\n")
+            os.chmod(scratch / "INPUT-MANIFEST.json", 0o600)
+            (repo / "research").mkdir(parents=True)
+            for relative in ("research/configs", "research/results", "research/reports"):
+                (repo / relative).mkdir(parents=True)
+            configuration = {
+                "implementation_head": "calc",
+                "run_id": driver.RUN_ID,
+                "source_identity": {
+                    "paired_rows": 0,
+                    "dataset_rows": {"dassle-spelling": 0, "dassle-spelling-preservation": 0},
+                },
+                "baseline_identity": {"summary": {}},
+            }
+            configuration_data = driver.canonical_bytes(configuration)
+            (scratch / "CONFIGURATION.json").write_bytes(configuration_data)
+            os.chmod(scratch / "CONFIGURATION.json", 0o600)
+            configuration_sha = driver.hashlib.sha256(configuration_data).hexdigest()
+            status_data = driver.canonical_bytes(
+                {
+                    "configuration_sha256": configuration_sha,
+                    "run_id": driver.RUN_ID,
+                    "status": "EXPERIMENTAL_CALCULATION",
+                }
+            )
+            (scratch / "RUN-STATUS.json").write_bytes(status_data)
+            os.chmod(scratch / "RUN-STATUS.json", 0o600)
+            args = driver.argparse.Namespace(
+                repo_root=repo,
+                scratch=scratch,
+                expected_implementation_head="agg",
+                calculation_implementation_head="calc",
+            )
+            with (
+                patch.object(
+                    driver,
+                    "PHASES",
+                    {"dassle-spelling": 0, "dassle-spelling-preservation": 0},
+                ),
+                patch.object(driver, "FROZEN_CASE_COUNT", 0),
+                patch.object(driver, "FROZEN_CALCULATION_HEAD", "calc"),
+                patch.object(driver, "FROZEN_CONFIGURATION_SHA256", configuration_sha),
+                patch.object(
+                    driver,
+                    "FROZEN_RUN_STATUS_SHA256",
+                    driver.hashlib.sha256(status_data).hexdigest(),
+                ),
+                patch.object(
+                    driver,
+                    "verify_committed_implementation",
+                    return_value={"implementation_head": "agg"},
+                ),
+                patch.object(driver, "verify_frozen_inputs", return_value={}),
+                patch.object(
+                    driver,
+                    "verify_frozen_incidents",
+                    return_value={"preaggregation_review": "review"},
+                ),
+                patch.object(
+                    driver,
+                    "load_pairs",
+                    return_value={"dassle-spelling": [], "dassle-spelling-preservation": []},
+                ),
+                patch.object(driver, "verify_uv_mapping", return_value=(set(), [])),
+                patch.object(
+                    driver,
+                    "frozen_case_manifest",
+                    return_value=(
+                        {"dassle-spelling": [], "dassle-spelling-preservation": []},
+                        "case",
+                        0,
+                    ),
+                ),
+                patch.object(
+                    driver, "load_vocabulary", return_value=(set(), {}, 0.0, 0)
+                ),
+                patch.object(driver, "aggregate", return_value={"runtime": {}}),
+                patch.object(driver, "public_projection", return_value=({}, {"metrics": {}})),
+                patch.object(driver, "render_public_report", return_value="report\n"),
+            ):
+                result = driver.aggregate_frozen(args)
+            self.assertEqual(result["calculation_implementation_head"], "calc")
+            self.assertEqual(result["aggregation_implementation_head"], "agg")
+            final_status = json.loads((scratch / "RUN-STATUS.json").read_text(encoding="utf-8"))
+            self.assertEqual(final_status["calculation_implementation_head"], "calc")
+            self.assertEqual(final_status["aggregation_implementation_head"], "agg")
+
     def test_unresolved_saved_failure_rolls_back_mechanical_edit(self) -> None:
         original = "Vspešni so tukaj."
         saved = {
@@ -647,7 +938,7 @@ class OneSubstitutionTests(unittest.TestCase):
                 "mechanical": {"targets": target, "lookup_seconds": 0.0, "lookup_comparisons": 1},
                 "integrity": {"protected_differences": 0, "outside_span_differences": 0},
             }
-            return {"dataset": dataset, "baseline": saved}, record
+            return {"dataset": dataset, "saved": saved}, record
 
         spelling = [
             row("spelling", 1, "exact_reference")[0],
@@ -664,6 +955,7 @@ class OneSubstitutionTests(unittest.TestCase):
             patch.object(driver, "row_metrics", return_value={}),
             patch.object(driver, "summarize", return_value={"gold_edits": 2}),
         ):
+            summary = driver.view_summary([spelling[0]], [spelling_records[0]])
             metrics = driver.aggregate(
                 {"dassle-spelling": spelling, "dassle-spelling-preservation": [preservation]},
                 {
@@ -674,6 +966,8 @@ class OneSubstitutionTests(unittest.TestCase):
                 0.0,
                 3,
             )
+        self.assertEqual(summary["rows"], 1)
+        self.assertNotIn("baseline", spelling[0])
         spelling_views = metrics["views"]["dassle-spelling"]
         spelling_all = spelling_views["all"]["mechanical"]
         spelling_uv = spelling_views["initial_uv"]["mechanical"]

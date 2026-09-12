@@ -114,6 +114,37 @@ BASELINE_EXPECTATIONS = {
     },
 }
 
+FROZEN_CALCULATION_HEAD = "939ae8b1482f3b8b5cefba5b0e16d1fde580346d"
+FROZEN_CONFIGURATION_SHA256 = "10657c4a2a2c53cc6bea9fab4164671dae0196d5c442275da1fb33c0326d27ee"
+FROZEN_INPUT_MANIFEST_SHA256 = "b00a1b8dcd8c4cdf4b181601892a094824af7a3268a4785d56149a05807fa399"
+FROZEN_CASE_IDENTITY_MANIFEST_SHA256 = (
+    "4490d7c1e14b28369217d06915bc1fce936160108de615f22f59032a803a46ef"
+)
+FROZEN_CASE_BYTES = 49_979_009
+FROZEN_RUN_STATUS_SHA256 = "e8d690988e62fc23147b437066f1a3490d3b547387a6771c5338f0f1ba99f7b9"
+FROZEN_INCIDENT_SHA256 = {
+    "precalculation": "bb5b762afc3b6e836a5db11b2211e5a520715a3ca695b99cfb7f51ae53882085",
+    "calculation_aggregation": "9c03fd562dee7f9f483c47815f4ca5ac6fd750f2179a110559d0470fc9652305",
+    "invalid_runtime_shim": "2f31d9c8fa2bebedf117dd1d3b4a7cd294800d14063b1a3ea01096eadca43498",
+    "malformed_command": "b53d52bcc7affaa79d75e354f0abc184ebf2ef296d21d14ed1df19da9b1f55dc",
+    "preaggregation_review": "a7c89bcb30d27279ecf779394ff6fe9617bcd489bee8d96cc9792622466fc65c",
+}
+FROZEN_RECOVERY_EVIDENCE = {
+    "lint_hold": {
+        "status": "RESOLVED_BEFORE_AGGREGATION",
+        "scope": "final pre-execution lint hold",
+        "constraint": "cached Ruff; no /tmp/uv sync",
+    },
+    "mode_hardening": {
+        "case_root_mode_before": "0755",
+        "case_root_mode_after": "0700",
+        "case_bytes_changed": False,
+    },
+    "calculation_case_write_span_seconds": 132.6060507297516,
+    "calculation_case_write_rate_per_second": 22.419791432133916,
+}
+FROZEN_CASE_COUNT = sum(PHASES.values())
+
 
 class ExperimentError(RuntimeError):
     """Raised when a frozen source or replay boundary cannot be proved."""
@@ -288,6 +319,16 @@ def write_status(path: Path, value: object) -> None:
         raise ExperimentError(f"refusing symlink status artifact: {path.name}")
     pointer(path, value)
     os.chmod(path, 0o600)
+
+
+def require_exact_private_file(
+    path: Path, *, expected_size: int | None = None, expected_sha: str | None = None
+) -> str:
+    actual = require_private_file(path, expected_size=expected_size, expected_sha=expected_sha)
+    info = path.lstat()
+    if stat.S_IMODE(info.st_mode) != 0o600:
+        raise ExperimentError(f"private file mode mismatch: {path.name}")
+    return actual
 
 
 def verify_staged_inputs(
@@ -487,6 +528,174 @@ def load_pairs(scratch: Path) -> dict[str, list[dict[str, Any]]]:
     if sum(len(rows) for rows in result.values()) != 2_973:
         raise ExperimentError("paired record total is not 2,973")
     return result
+
+
+def verify_frozen_inputs(scratch: Path) -> dict[str, Any]:
+    """Verify the already-staged inputs without rebuilding or rewriting them."""
+    manifest_path = scratch / "INPUT-MANIFEST.json"
+    require_exact_private_file(manifest_path, expected_sha=FROZEN_INPUT_MANIFEST_SHA256)
+    manifest = read_json(manifest_path)
+    if not isinstance(manifest, dict) or manifest.get("m2_record_count") != FROZEN_CASE_COUNT:
+        raise ExperimentError("frozen input manifest count mismatch")
+    expected_files = {
+        "dassle-spelling.jsonl": scratch / "inputs/datasets/dassle-spelling.jsonl",
+        "dassle-spelling-preservation.jsonl": scratch
+        / "inputs/datasets/dassle-spelling-preservation.jsonl",
+        "detector-spelling.jsonl": scratch / "inputs/detector-snapshots/dassle-spelling.jsonl",
+        "detector-preservation.jsonl": scratch
+        / "inputs/detector-snapshots/dassle-spelling-preservation.jsonl",
+        "baseline-configuration.json": scratch / "inputs/baseline/CONFIGURATION.json",
+        "baseline-results.json": scratch / "inputs/baseline/RESULTS.json",
+        "uv-audit-results.json": scratch / "inputs/uv-audit/RESULTS.json",
+        "index.sqlite": scratch / "inputs/index/index.sqlite",
+    }
+    if set(manifest) != set(expected_files) | {"m2_records", "m2_record_count"}:
+        raise ExperimentError("frozen input manifest keys changed")
+    for name, path in expected_files.items():
+        identity = manifest.get(name)
+        if not isinstance(identity, dict):
+            raise ExperimentError(f"frozen input identity is missing: {name}")
+        require_exact_private_file(
+            path,
+            expected_size=identity.get("size"),
+            expected_sha=identity.get("sha256"),
+        )
+    expected_records = {
+        f"{phase}/{index:06d}"
+        for phase, count in PHASES.items()
+        for index in range(1, count + 1)
+    }
+    records = manifest.get("m2_records")
+    if not isinstance(records, dict) or set(records) != expected_records:
+        raise ExperimentError("frozen M2 input identities changed")
+    for identity_name, identity in records.items():
+        phase, serial = identity_name.split("/", 1)
+        path = scratch / "inputs/results/A100" / phase / serial / "M2.json"
+        if not isinstance(identity, dict):
+            raise ExperimentError(f"frozen M2 identity is missing: {identity_name}")
+        require_exact_private_file(
+            path,
+            expected_size=identity.get("size"),
+            expected_sha=identity.get("sha256"),
+        )
+    return manifest
+
+
+def frozen_case_manifest(
+    scratch: Path,
+    pairs_by_phase: Mapping[str, list[dict[str, Any]]],
+    configuration_sha: str,
+) -> tuple[dict[str, list[dict[str, Any]]], str, int]:
+    """Read and identity-check every frozen case, refusing any set drift."""
+    cases = scratch / "cases"
+    require_private_dir(cases)
+    if stat.S_IMODE(cases.stat().st_mode) != 0o700:
+        raise ExperimentError("frozen case root mode mismatch")
+    if {entry.name for entry in cases.iterdir()} != set(PHASES):
+        raise ExperimentError("frozen case phase directories changed")
+    records_by_phase: dict[str, list[dict[str, Any]]] = {}
+    case_paths: list[Path] = []
+    total_bytes = 0
+    for phase, count in PHASES.items():
+        phase_dir = cases / phase
+        require_private_dir(phase_dir)
+        if stat.S_IMODE(phase_dir.stat().st_mode) != 0o700:
+            raise ExperimentError(f"frozen case directory mode mismatch: {phase}")
+        expected_names = {f"{index:06d}.json" for index in range(1, count + 1)}
+        entries = list(phase_dir.iterdir())
+        if {entry.name for entry in entries} != expected_names:
+            raise ExperimentError(f"frozen case paths changed: {phase}")
+        pairs = pairs_by_phase[phase]
+        if len(pairs) != count:
+            raise ExperimentError(f"frozen case pairing count changed: {phase}")
+        phase_records: list[dict[str, Any]] = []
+        for index, pair in enumerate(pairs, 1):
+            path = phase_dir / f"{index:06d}.json"
+            require_exact_private_file(path)
+            record = read_json(path)
+            if not isinstance(record, dict):
+                raise ExperimentError(f"frozen case is not an object: {phase}/{index}")
+            if (
+                record.get("schema_version") != 1
+                or record.get("phase") != phase
+                or record.get("index") != index
+                or record.get("id") != pair["dataset"].get("id")
+                or record.get("configuration_sha256") != configuration_sha
+            ):
+                raise ExperimentError(f"frozen case identity mismatch: {phase}/{index}")
+            if record.get("dataset") != pair["dataset"]:
+                raise ExperimentError(f"frozen dataset identity mismatch: {phase}/{index}")
+            if record.get("baseline") != pair["saved"]:
+                raise ExperimentError(f"frozen baseline identity mismatch: {phase}/{index}")
+            phase_records.append(record)
+            case_paths.append(path)
+            total_bytes += path.stat().st_size
+        records_by_phase[phase] = phase_records
+    if len(case_paths) != FROZEN_CASE_COUNT or total_bytes != FROZEN_CASE_BYTES:
+        raise ExperimentError("frozen case count or byte total changed")
+    digest = hashlib.sha256()
+    for path in sorted(case_paths, key=lambda item: str(item.relative_to(scratch))):
+        data = path.read_bytes()
+        digest.update(
+            str(path.relative_to(scratch)).encode("utf-8")
+            + b"\0"
+            + str(len(data)).encode("ascii")
+            + b"\0"
+            + hashlib.sha256(data).hexdigest().encode("ascii")
+            + b"\n"
+        )
+    case_digest = digest.hexdigest()
+    if case_digest != FROZEN_CASE_IDENTITY_MANIFEST_SHA256:
+        raise ExperimentError("frozen case identity manifest changed")
+    return records_by_phase, case_digest, total_bytes
+
+
+def verify_frozen_incidents(scratch: Path) -> dict[str, str]:
+    incident_paths = {
+        "precalculation": scratch / "PRECALCULATION-INCIDENT.json",
+        "calculation_aggregation": scratch / "CALCULATION-AGGREGATION-INCIDENT.json",
+        "preaggregation_review": scratch / "PREAGGREGATION-STRATEGIC-REVIEW.json",
+        "invalid_runtime_shim": scratch.parent
+        / "007-h-invalid-runtime-shim-579b6b4-partial/INCIDENT.json",
+        "malformed_command": scratch.parent
+        / "007-h-invalid-runtime-shim-579b6b4-partial/PRECALCULATION-COMMAND-INCIDENT.json",
+    }
+    for name, path in incident_paths.items():
+        require_exact_private_file(path, expected_sha=FROZEN_INCIDENT_SHA256[name])
+    calculation_incident = read_json(incident_paths["calculation_aggregation"])
+    if (
+        not isinstance(calculation_incident, dict)
+        or calculation_incident.get("calculation_complete") is not True
+        or calculation_incident.get("calculation_case_count") != FROZEN_CASE_COUNT
+        or calculation_incident.get("calculation_implementation_head") != FROZEN_CALCULATION_HEAD
+        or calculation_incident.get("calculation_case_identity_manifest_sha256")
+        != FROZEN_CASE_IDENTITY_MANIFEST_SHA256
+        or calculation_incident.get("actual_model_calls") != 0
+        or calculation_incident.get("actual_network_calls") != 0
+        or calculation_incident.get("private_aggregate_outputs_present") is not False
+        or calculation_incident.get("public_outputs_present") is not False
+    ):
+        raise ExperimentError("frozen calculation incident identity is invalid")
+    malformed = read_json(incident_paths["malformed_command"])
+    invalid = read_json(incident_paths["invalid_runtime_shim"])
+    review = read_json(incident_paths["preaggregation_review"])
+    if (
+        not isinstance(malformed, dict)
+        or malformed.get("actual_model_calls") != 0
+        or malformed.get("actual_network_calls") != 0
+        or not isinstance(invalid, dict)
+        or invalid.get("case_indices", {}).get("count") != 151
+        or invalid.get("scientific_result") is not False
+        or not isinstance(review, dict)
+        or review.get("case_root_mode_after") != "0700"
+        or review.get("case_bytes_changed_by_directory_hardening") is not False
+        or review.get("case_identity_manifest_sha256_after_hardening")
+        != FROZEN_CASE_IDENTITY_MANIFEST_SHA256
+        or review.get("private_aggregate_outputs_present") is not False
+        or review.get("public_outputs_present") is not False
+    ):
+        raise ExperimentError("instrumentation incident identity is invalid")
+    return dict(FROZEN_INCIDENT_SHA256)
 
 
 def validate_baseline_replay(pairs: dict[str, list[dict[str, Any]]]) -> dict[str, Any]:
@@ -939,7 +1148,7 @@ def view_summary(
         record for record in records if selected is None or record.get("index") in selected
     ]
     baseline_rows = [
-        row_metrics(pair["dataset"], pair["baseline"], "M2") for pair in selected_pairs
+        row_metrics(pair["dataset"], pair["saved"], "M2") for pair in selected_pairs
     ]
     new_rows = [row_metrics(record["dataset"], record["new"], "M2") for record in selected_records]
     return {
@@ -986,7 +1195,7 @@ def aggregate(
         selected_pairs = [pair for pair, _ in selected]
         selected_records = [record for _, record in selected]
         baseline_rows = [
-            row_metrics(pair["dataset"], pair["baseline"], "M2") for pair in selected_pairs
+            row_metrics(pair["dataset"], pair["saved"], "M2") for pair in selected_pairs
         ]
         new_rows = [
             row_metrics(record["dataset"], record["new"], "M2") for record in selected_records
@@ -1377,6 +1586,218 @@ def compare_prior_public_artifacts(before: Mapping[str, str], after: Mapping[str
         )
 
 
+def aggregate_frozen(args: argparse.Namespace) -> dict[str, Any]:
+    """Aggregate only the already-written, identity-checked 007-h case records."""
+    repo_root = Path(args.repo_root).resolve()
+    scratch = Path(args.scratch).resolve()
+    aggregation_head = args.expected_implementation_head
+    calculation_head = args.calculation_implementation_head
+    if calculation_head != FROZEN_CALCULATION_HEAD:
+        raise ExperimentError("frozen calculation implementation SHA mismatch")
+    if aggregation_head == calculation_head:
+        raise ExperimentError("aggregation implementation must be a separate committed SHA")
+    prior_public_snapshot = snapshot_prior_public_artifacts(repo_root)
+    implementation = verify_committed_implementation(repo_root, aggregation_head)
+    require_private_dir(scratch)
+    configuration_path = scratch / "CONFIGURATION.json"
+    configuration_sha = require_exact_private_file(
+        configuration_path, expected_sha=FROZEN_CONFIGURATION_SHA256
+    )
+    configuration = read_json(configuration_path)
+    if not isinstance(configuration, dict):
+        raise ExperimentError("frozen configuration is not an object")
+    if (
+        configuration.get("implementation_head") != calculation_head
+        or configuration.get("run_id") != RUN_ID
+        or configuration.get("source_identity", {}).get("paired_rows") != FROZEN_CASE_COUNT
+        or configuration.get("source_identity", {}).get("dataset_rows") != PHASES
+    ):
+        raise ExperimentError("frozen configuration identity is invalid")
+    status_path = scratch / "RUN-STATUS.json"
+    require_exact_private_file(status_path, expected_sha=FROZEN_RUN_STATUS_SHA256)
+    if read_json(status_path) != {
+        "configuration_sha256": FROZEN_CONFIGURATION_SHA256,
+        "run_id": RUN_ID,
+        "status": "EXPERIMENTAL_CALCULATION",
+    }:
+        raise ExperimentError("frozen run status is not aggregation-pending")
+    verify_frozen_inputs(scratch)
+    incidents = verify_frozen_incidents(scratch)
+    pairs = load_pairs(scratch)
+    uv_indices, uv_mapping = verify_uv_mapping(scratch, pairs["dassle-spelling"])
+    records_by_phase, case_digest, case_bytes = frozen_case_manifest(
+        scratch, pairs, configuration_sha
+    )
+    for relative in PUBLIC_OUTPUT_PATHS:
+        path = repo_root / relative
+        if path.exists() or path.is_symlink():
+            raise ExperimentError("007-h public output was already published")
+    for name in ("RESULTS.json", "REPORT.md", "MANIFEST.json"):
+        path = scratch / name
+        if path.exists() or path.is_symlink():
+            raise ExperimentError(f"frozen private output already exists: {name}")
+
+    vocabulary, buckets, vocabulary_seconds, vocabulary_rows = load_vocabulary(
+        scratch / "inputs/index/index.sqlite"
+    )
+    del vocabulary, buckets
+    metrics = aggregate(
+        pairs, records_by_phase, uv_indices, vocabulary_seconds, vocabulary_rows
+    )
+    metrics["runtime"]["recovery_evidence"] = FROZEN_RECOVERY_EVIDENCE
+    metrics["runtime"]["vocabulary_load_measurement"] = (
+        "aggregation-recovery measurement; original calculation duration unavailable"
+    )
+    aggregation_identity = {
+        "mode": "FROZEN_CASE_AGGREGATION_ONLY",
+        "calculation_implementation_head": calculation_head,
+        "aggregation_implementation_head": implementation["implementation_head"],
+        "configuration_sha256": configuration_sha,
+        "input_manifest_sha256": sha256_file(scratch / "INPUT-MANIFEST.json"),
+        "case_identity_manifest_sha256": case_digest,
+        "case_count": FROZEN_CASE_COUNT,
+        "case_bytes": case_bytes,
+        "incident_sha256": incidents,
+        "recovery_evidence": FROZEN_RECOVERY_EVIDENCE,
+        "actual_model_calls": 0,
+        "actual_network_calls": 0,
+    }
+    private_results = {
+        "schema_version": 1,
+        "experiment_id": EXPERIMENT_ID,
+        "status": "COMPLETE_OFFLINE_FROZEN_CASE_AGGREGATION_RECOVERY",
+        "configuration_sha256": configuration_sha,
+        "calculation_implementation_head": calculation_head,
+        "aggregation_implementation_head": implementation["implementation_head"],
+        "calculation_identity": aggregation_identity,
+        "incident_sha256": incidents,
+        "recovery_evidence": FROZEN_RECOVERY_EVIDENCE,
+        "baseline": configuration["baseline_identity"]["summary"],
+        "uv_mapping": uv_mapping,
+        "metrics": metrics,
+    }
+    private_results_path = scratch / "RESULTS.json"
+    private_results_sha = write_immutable(private_results_path, private_results)
+    private_report = (
+        "# Private 007-h aggregation recovery report\n\n"
+        + json.dumps(private_results, ensure_ascii=False, sort_keys=True, indent=2)
+        + "\n"
+    )
+    private_report_sha = write_private_bytes(
+        scratch / "REPORT.md", private_report.encode("utf-8")
+    )
+    manifest = {
+        "schema_version": 1,
+        "experiment_id": EXPERIMENT_ID,
+        "status": "COMPLETE_OFFLINE_FROZEN_CASE_AGGREGATION_RECOVERY",
+        "input_manifest_sha256": sha256_file(scratch / "INPUT-MANIFEST.json"),
+        "configuration_sha256": configuration_sha,
+        "calculation_implementation_head": calculation_head,
+        "aggregation_implementation_head": implementation["implementation_head"],
+        "case_identity_manifest_sha256": case_digest,
+        "case_count": FROZEN_CASE_COUNT,
+        "case_bytes": case_bytes,
+        "incident_sha256": incidents,
+        "private_results_sha256": private_results_sha,
+        "private_report_sha256": private_report_sha,
+        "case_record_sha256": {
+            f"{phase}/{record['index']:06d}": sha256_file(
+                scratch / "cases" / phase / f"{record['index']:06d}.json"
+            )
+            for phase, records in records_by_phase.items()
+            for record in records
+        },
+    }
+    private_manifest_sha = write_immutable(scratch / "MANIFEST.json", manifest)
+    publication_configuration = dict(configuration)
+    publication_configuration["implementation_head"] = implementation["implementation_head"]
+    publication_configuration["calculation_implementation_head"] = calculation_head
+    publication_configuration["aggregation_identity"] = aggregation_identity
+    publication_configuration["incident_sha256"] = incidents
+    publication_configuration["recovery_evidence"] = FROZEN_RECOVERY_EVIDENCE
+    public_config, public_result = public_projection(
+        publication_configuration, metrics, private_results_sha, private_manifest_sha
+    )
+    public_status = "COMPLETE_OFFLINE_FROZEN_CASE_AGGREGATION_RECOVERY"
+    for public_value in (public_config, public_result):
+        public_value["status"] = public_status
+        public_value["calculation_implementation_head"] = calculation_head
+        public_value["aggregation_implementation_head"] = implementation["implementation_head"]
+        public_value["aggregation_identity"] = aggregation_identity
+        public_value["incident_sha256"] = incidents
+        public_value["recovery_evidence"] = FROZEN_RECOVERY_EVIDENCE
+    public_result["configuration_sha256"] = hashlib.sha256(
+        canonical_bytes(public_config)
+    ).hexdigest()
+    public_config_path = (
+        repo_root / "research/configs/007-h-unique-one-letter-unigram-substitution.json"
+    )
+    public_result_path = (
+        repo_root / "research/results/007-h-unique-one-letter-unigram-substitution.json.gz"
+    )
+    public_report_path = (
+        repo_root / "research/reports/007-h-unique-one-letter-unigram-substitution.md"
+    )
+    immutable_bytes(public_config_path, canonical_bytes(public_config))
+    immutable_bytes(public_result_path, gzip.compress(canonical_bytes(public_result), mtime=0))
+    report = render_public_report(publication_configuration, public_result).rstrip()
+    report += (
+        "\n\n## Aggregation-only recovery identity\n\n"
+        f"- Calculation implementation head: {calculation_head}.\n"
+        f"- Aggregation implementation head: {implementation['implementation_head']}.\n"
+        f"- Frozen configuration SHA-256: {configuration_sha}.\n"
+        f"- Input manifest SHA-256: {aggregation_identity['input_manifest_sha256']}.\n"
+        f"- Case identity manifest SHA-256: {case_digest}.\n"
+        f"- Preaggregation review incident SHA-256: {incidents['preaggregation_review']}.\n"
+        "- Incident SHA-256 records include the pre-calculation, prior aggregation, "
+        "preaggregation review, invalid-runtime-shim, and malformed-command incidents.\n"
+        "- Lint hold: resolved before aggregation with cached Ruff; no /tmp/uv sync.\n"
+        "- Case-root mode hardening: 0755 to 0700; case bytes unchanged.\n"
+        "- Frozen calculation case-write span/rate: "
+        "132.6060507297516 seconds / 22.419791432133916 cases per second.\n"
+        "- Candidate-lookup runtime is reported separately; vocabulary load here is "
+        "recovery-only because the original load duration was not persisted.\n"
+        "- The invalid 151-record runtime-shim attempt is excluded instrumentation, "
+        "not scientific evidence.\n"
+        "- This recovery read every existing case and called no calculation, model, "
+        "or network entry point.\n"
+    )
+    immutable_bytes(public_report_path, (report + "\n").encode("utf-8"))
+    compare_prior_public_artifacts(
+        prior_public_snapshot, snapshot_prior_public_artifacts(repo_root)
+    )
+    write_status(
+        status_path,
+        {
+            "status": public_status,
+            "run_id": RUN_ID,
+            "configuration_sha256": configuration_sha,
+            "calculation_implementation_head": calculation_head,
+            "aggregation_implementation_head": implementation["implementation_head"],
+            "case_identity_manifest_sha256": case_digest,
+            "private_results_sha256": private_results_sha,
+            "private_manifest_sha256": private_manifest_sha,
+            "actual_model_calls": 0,
+            "actual_network_calls": 0,
+        },
+    )
+    return {
+        "status": public_status,
+        "calculation_implementation_head": calculation_head,
+        "aggregation_implementation_head": implementation["implementation_head"],
+        "configuration_sha256": configuration_sha,
+        "case_identity_manifest_sha256": case_digest,
+        "private_results_sha256": private_results_sha,
+        "private_manifest_sha256": private_manifest_sha,
+        "public_config_sha256": sha256_file(public_config_path),
+        "public_result_sha256": sha256_file(public_result_path),
+        "public_report_sha256": sha256_file(public_report_path),
+        "paired_rows": FROZEN_CASE_COUNT,
+        "actual_model_calls": 0,
+        "actual_network_calls": 0,
+    }
+
+
 def run(args: argparse.Namespace) -> dict[str, Any]:
     repo_root = Path(args.repo_root).resolve()
     scratch = Path(args.scratch).resolve()
@@ -1524,13 +1945,35 @@ def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--repo-root", type=Path, default=Path("."))
     parser.add_argument("--scratch", type=Path, required=True)
-    parser.add_argument("--source-root", type=Path, required=True)
-    parser.add_argument("--uv-root", type=Path, required=True)
-    parser.add_argument("--index-source", type=Path, required=True)
-    parser.add_argument("--expected-implementation-head", required=True)
+    parser.add_argument("--source-root", type=Path)
+    parser.add_argument("--uv-root", type=Path)
+    parser.add_argument("--index-source", type=Path)
+    parser.add_argument("--expected-implementation-head")
+    parser.add_argument("--calculation-implementation-head")
+    parser.add_argument("--aggregation-only", action="store_true")
     args = parser.parse_args(argv)
     try:
-        print(json.dumps(run(args), sort_keys=True))
+        if args.aggregation_only:
+            if not args.expected_implementation_head or not args.calculation_implementation_head:
+                raise ExperimentError(
+                    "aggregation recovery requires both implementation heads"
+                )
+            result = aggregate_frozen(args)
+        else:
+            if not all(
+                (
+                    args.source_root,
+                    args.uv_root,
+                    args.index_source,
+                    args.expected_implementation_head,
+                )
+            ):
+                raise ExperimentError(
+                    "normal calculation requires source, vocabulary, index, and "
+                    "implementation inputs"
+                )
+            result = run(args)
+        print(json.dumps(result, sort_keys=True))
     except ExperimentError as exc:
         print(json.dumps({"status": "FAILED", "reason": str(exc)}, sort_keys=True))
         return 1
