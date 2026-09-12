@@ -230,6 +230,9 @@ class ReplayEvidenceError(ValueError):
     """A saved record is incomplete or unverifiable; replay fails closed."""
 
 
+_MISSING = object()
+
+
 def _record_payload(record: dict[str, Any]) -> dict[str, Any]:
     payload = record.get("input")
     if isinstance(payload, dict):
@@ -321,13 +324,14 @@ def replay_saved_record(
     *,
     record_name: str = "saved",
     corpus: Corpus | None = None,
+    configured_maximum: int | None | object = _MISSING,
 ) -> dict[str, Any]:
     """Replay small-study or campaign input/decisions with zero model calls."""
     record = _record_payload(record)
     original = _saved_original(record)
     decisions = _saved_decisions(record)
     detector = record.get("detector") if isinstance(record.get("detector"), dict) else {}
-    marker = record["maximum"] if "maximum" in record else detector.get("maximum", _MISSING)
+    marker = record["maximum"] if "maximum" in record else detector.get("maximum", configured_maximum)
     if marker is _MISSING:
         raise ReplayEvidenceError("saved detector maximum/uncapped setting is missing")
     if marker is not None and (not isinstance(marker, int) or isinstance(marker, bool) or marker < 0):
@@ -418,23 +422,18 @@ def replay_saved_record(
     }
 
 
-_MISSING = object()
-
-
-def replay_private(case_path: Path, index: Path, *, maximum: int | None = None) -> dict[str, Any]:
+def replay_private(case_path: Path, index: Path, *, maximum: int | None | object = _MISSING) -> dict[str, Any]:
     """Replay one saved record or a fail-closed collection of records."""
     document = json.loads(case_path.read_text(encoding="utf-8"))
     if not isinstance(document, dict):
         raise ReplayEvidenceError("saved replay document must be an object")
     rows = document.get("records", document.get("cases"))
     if isinstance(rows, list):
-        receipts = [replay_saved_record(item, index, record_name=f"{case_path.stem}:{i}") for i, item in enumerate(rows) if isinstance(item, dict)]
+        receipts = [replay_saved_record(item, index, record_name=f"{case_path.stem}:{i}", configured_maximum=maximum) for i, item in enumerate(rows) if isinstance(item, dict)]
         if len(receipts) != len(rows):
             raise ReplayEvidenceError("saved replay collection contains a non-object record")
         return {"records": len(receipts), "receipts": receipts, "network_calls": 0, "model_calls": 0}
-    if maximum is not None and "maximum" not in document and "detector" not in document:
-        document = {**document, "maximum": maximum}
-    return replay_saved_record(document, index, record_name=case_path.stem)
+    return replay_saved_record(document, index, record_name=case_path.stem, configured_maximum=maximum)
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -451,6 +450,8 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--representative-roots", action="store_true",
                         help="verify one deterministic private entry for every supplied root mapping")
     parser.add_argument("--limit", type=int)
+    parser.add_argument("--maximum", type=lambda value: None if value.casefold() == "null" else int(value), default=_MISSING,
+                        help="verified global detector maximum; pass null for an explicitly uncapped campaign")
     args = parser.parse_args(argv)
     scratch = args.scratch or (Path(os.environ["TMPDIR"]) if os.environ.get("TMPDIR") else None)
     if scratch is None:
@@ -460,7 +461,7 @@ def main(argv: list[str] | None = None) -> int:
     if case or args.index:
         if not case or not args.index:
             raise SystemExit("--saved-record/--private-case and --index must be supplied together")
-        outputs["private_replay"] = replay_private(case, args.index)
+        outputs["private_replay"] = replay_private(case, args.index, maximum=args.maximum)
     else:
         outputs["synthetic_replay"] = replay_fixture(args.fixture, scratch / "replay")
     if args.manifest:

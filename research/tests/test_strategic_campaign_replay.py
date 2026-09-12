@@ -4,7 +4,7 @@ from pathlib import Path
 import tempfile
 import unittest
 
-from research.tools.replay import _create_fixture_index, replay_saved_record
+from research.tools.replay import ReplayEvidenceError, _create_fixture_index, replay_saved_record
 from research.curated.historical_methods import no_retry
 
 
@@ -28,19 +28,25 @@ class CampaignReplayShape(unittest.TestCase):
                                                                   "failure": "TIMEOUT", "proposal": None},
                                "retry": None}], "edits": [], "no_retry_edits": []}
 
-    def replay(self, record):
+    def replay(self, record, **kwargs):
         scratch = Path(os.environ.get("TMPDIR", str(Path.cwd() / ".research-test-scratch")))
         scratch.mkdir(parents=True, exist_ok=True)
         with tempfile.TemporaryDirectory(dir=scratch) as directory:
             index = Path(directory) / "index.sqlite"
             _create_fixture_index({"unigrams": {"abc": 100}}, index)
-            return replay_saved_record(record, index)
+            return replay_saved_record(record, index, **kwargs)
 
     def test_campaign_nested_english_evidence_is_replayed(self):
         receipt = self.replay(self.record(suppressed=True))
         self.assertEqual(receipt["review_calls"], 0)
         self.assertEqual(receipt["english_values"], 1)
         self.assertEqual(receipt["model_calls"], 0)
+
+    def test_verified_global_null_maximum_is_explicit_replay_configuration(self):
+        receipt = self.replay(self.record(suppressed=True), configured_maximum=None)
+        self.assertIsNone(receipt["detector_maximum"])
+        with self.assertRaises(ReplayEvidenceError):
+            self.replay(self.record(suppressed=True))
 
     def test_recorded_first_call_failure_is_not_missing_proposal_or_keep(self):
         receipt = self.replay(self.record(suppressed=False))
