@@ -9,6 +9,7 @@ records stay in the caller-owned private experiment root.
 from __future__ import annotations
 
 import base64
+import contextlib
 import hashlib
 import http.client
 import json
@@ -31,6 +32,8 @@ WORKERS = 8
 MAX_RESPONSE_BYTES = 2_000_000
 TIMEOUT_SECONDS = 300.0
 CHOICES = frozenset({"USE_CANDIDATE", "KEEP_ORIGINAL", "UNCERTAIN"})
+PRIVATE_DIR_MODE = 0o700
+PRIVATE_FILE_MODE = 0o600
 
 # This is copied byte-for-byte from the owner-supplied frozen prompt.  The
 # hash is checked before a campaign can be frozen; do not edit or rewrap it.
@@ -78,9 +81,7 @@ class ResponseTransport(Protocol):
 
 
 def canonical_bytes(value: object) -> bytes:
-    return (json.dumps(value, ensure_ascii=False, sort_keys=True, indent=2) + "\n").encode(
-        "utf-8"
-    )
+    return (json.dumps(value, ensure_ascii=False, sort_keys=True, indent=2) + "\n").encode("utf-8")
 
 
 def sha256_bytes(value: bytes) -> str:
@@ -114,7 +115,9 @@ def prompt_sha256() -> str:
     return sha256_bytes(FROZEN_PROMPT.encode("utf-8"))
 
 
-def request_body(sentence: str, original: str, candidate: str, *, model: str = MODEL) -> dict[str, Any]:
+def request_body(
+    sentence: str, original: str, candidate: str, *, model: str = MODEL
+) -> dict[str, Any]:
     if model != MODEL:
         raise ValidatorError("validator model is not frozen")
     return {
@@ -124,7 +127,9 @@ def request_body(sentence: str, original: str, candidate: str, *, model: str = M
         "input": [
             {
                 "role": "user",
-                "content": [{"type": "input_text", "text": prompt_text(sentence, original, candidate)}],
+                "content": [
+                    {"type": "input_text", "text": prompt_text(sentence, original, candidate)}
+                ],
             }
         ],
         "include_reasoning": True,
@@ -152,7 +157,10 @@ def parse_response(value: object, *, model: str = MODEL, effort: str = EFFORT) -
     reasoning_tokens = token_details.get("reasoning_tokens")
     input_tokens = usage.get("input_tokens")
     output_tokens = usage.get("output_tokens")
-    if any(type(item) is not int or item < 0 for item in (input_tokens, output_tokens, reasoning_tokens)):
+    if any(
+        type(item) is not int or item < 0
+        for item in (input_tokens, output_tokens, reasoning_tokens)
+    ):
         raise ValidatorError("response token accounting is invalid")
     output = value.get("output")
     if not isinstance(output, list):
@@ -187,7 +195,9 @@ def parse_response(value: object, *, model: str = MODEL, effort: str = EFFORT) -
     }
 
 
-def parse_response_bytes(payload: bytes, *, model: str = MODEL, effort: str = EFFORT) -> dict[str, Any]:
+def parse_response_bytes(
+    payload: bytes, *, model: str = MODEL, effort: str = EFFORT
+) -> dict[str, Any]:
     if len(payload) > MAX_RESPONSE_BYTES:
         raise ValidatorError("response exceeds byte bound")
     try:
@@ -229,7 +239,9 @@ def ordered_candidates(candidates: Iterable[Mapping[str, Any]]) -> list[dict[str
     return result
 
 
-def partitions(candidates: Sequence[Mapping[str, Any]], workers: int = WORKERS) -> dict[int, list[dict[str, Any]]]:
+def partitions(
+    candidates: Sequence[Mapping[str, Any]], workers: int = WORKERS
+) -> dict[int, list[dict[str, Any]]]:
     if type(workers) is not int or not 1 <= workers <= WORKERS:
         raise ValidatorError("worker count is outside the frozen bound")
     ordered = ordered_candidates(candidates)
@@ -256,26 +268,93 @@ def candidate_manifest(candidates: Sequence[Mapping[str, Any]]) -> tuple[list[di
     return manifest, sha256_bytes(canonical_bytes(manifest))
 
 
+def _private_dir(path: Path, *, root: Path | None = None) -> None:
+    """Create/check a private directory tree without repairing permissions."""
+    path = path.absolute()
+    if root is None:
+        root = path
+    else:
+        root = root.absolute()
+        try:
+            path.relative_to(root)
+        except ValueError as exc:
+            raise ValidatorError("private path escapes its root") from exc
+    if root.is_symlink():
+        raise ValidatorError("private root is a symlink")
+    root.mkdir(parents=True, exist_ok=True, mode=PRIVATE_DIR_MODE)
+    current = root
+    parts = path.relative_to(root).parts
+    for part in parts:
+        current = current / part
+        if current.is_symlink():
+            raise ValidatorError(f"private directory is a symlink: {current.name}")
+        if current.exists():
+            info = current.stat()
+            if not current.is_dir() or info.st_uid != os.getuid():
+                raise ValidatorError(f"private directory is not owned: {current.name}")
+            if (info.st_mode & 0o777) != PRIVATE_DIR_MODE:
+                raise ValidatorError(f"private directory mode mismatch: {current.name}")
+        else:
+            with contextlib.suppress(FileExistsError):
+                current.mkdir(mode=PRIVATE_DIR_MODE)
+                # Parallel workers may create the shared ``requests`` parent.
+                # Re-validate it below instead of weakening the type/mode guard.
+        if current.is_symlink():
+            raise ValidatorError(f"private directory is a symlink: {current.name}")
+        if not current.is_dir() or current.stat().st_uid != os.getuid():
+            raise ValidatorError(f"private directory is not owned: {current.name}")
+        if (current.stat().st_mode & 0o777) != PRIVATE_DIR_MODE:
+            raise ValidatorError(f"private directory mode mismatch: {current.name}")
+
+    info = root.stat()
+    if (
+        not root.is_dir()
+        or info.st_uid != os.getuid()
+        or (info.st_mode & 0o777) != PRIVATE_DIR_MODE
+    ):
+        raise ValidatorError("private root ownership or mode mismatch")
+
+
+def _private_file(path: Path) -> None:
+    if path.is_symlink():
+        raise ValidatorError(f"private file is a symlink: {path.name}")
+    try:
+        info = path.stat()
+    except OSError as exc:
+        raise ValidatorError(f"private file is unavailable: {path.name}") from exc
+    if (
+        not path.is_file()
+        or info.st_uid != os.getuid()
+        or (info.st_mode & 0o777) != PRIVATE_FILE_MODE
+    ):
+        raise ValidatorError(f"private file ownership or mode mismatch: {path.name}")
+
+
 def _is_json_object(path: Path) -> bool:
-    return path.is_file() and not path.is_symlink()
+    if not path.is_file() or path.is_symlink():
+        return False
+    _private_file(path)
+    return True
 
 
 def immutable_write(path: Path, data: bytes) -> str:
     """Write a private immutable artifact, refusing replacement or symlinks."""
-    path.parent.mkdir(parents=True, exist_ok=True)
-    if path.exists() and path.is_symlink():
+    _private_dir(path.parent)
+    if path.is_symlink():
         raise ValidatorError(f"refusing symlink artifact: {path.name}")
     if path.exists():
-        if not path.is_file() or path.read_bytes() != data:
+        _private_file(path)
+        if path.read_bytes() != data:
             raise ValidatorError(f"immutable artifact conflict: {path.name}")
         return sha256_bytes(data)
     temporary = path.with_name("." + path.name + ".pending")
     if temporary.exists() or temporary.is_symlink():
         raise ValidatorError(f"temporary artifact already exists: {temporary.name}")
     temporary.write_bytes(data)
-    os.chmod(temporary, 0o600)
+    os.chmod(temporary, PRIVATE_FILE_MODE)
     os.replace(temporary, path)
-    os.chmod(path, 0o600)
+    os.chmod(path, PRIVATE_FILE_MODE)
+    _private_file(path)
     return sha256_bytes(data)
 
 
@@ -294,7 +373,9 @@ class _HttpTransport:
         url = urllib.parse.urlsplit(endpoint)
         if url.scheme not in {"http", "https"} or not url.hostname:
             raise ValidatorError("endpoint must be an explicit HTTP(S) URL")
-        connection_class = http.client.HTTPSConnection if url.scheme == "https" else http.client.HTTPConnection
+        connection_class = (
+            http.client.HTTPSConnection if url.scheme == "https" else http.client.HTTPConnection
+        )
         connection = connection_class(url.hostname, url.port, timeout=timeout)
         try:
             path = url.path or "/"
@@ -304,15 +385,28 @@ class _HttpTransport:
                 path += "?" + url.query
             connection.request("POST", path, body=body, headers=dict(headers))
             response = connection.getresponse()
-            return response.status, {"Content-Type": response.getheader("Content-Type") or ""}, response.read(
-                MAX_RESPONSE_BYTES + 1
+            return (
+                response.status,
+                {"Content-Type": response.getheader("Content-Type") or ""},
+                response.read(MAX_RESPONSE_BYTES + 1),
             )
         finally:
             connection.close()
 
 
 def _safe_raw(value: Mapping[str, Any]) -> dict[str, Any]:
-    return {key: value[key] for key in ("http_status", "content_type", "response_bytes", "body_base64", "http_seconds", "failure") if key in value}
+    return {
+        key: value[key]
+        for key in (
+            "http_status",
+            "content_type",
+            "response_bytes",
+            "body_base64",
+            "http_seconds",
+            "failure",
+        )
+        if key in value
+    }
 
 
 def perform_call(
@@ -324,9 +418,12 @@ def perform_call(
     transport: ResponseTransport | None = None,
     timeout: float = TIMEOUT_SECONDS,
     max_response_bytes: int = MAX_RESPONSE_BYTES,
+    private_root: Path | None = None,
 ) -> dict[str, Any]:
     """Persist request, raw bounded response, then parsed observation exactly once."""
-    directory.mkdir(parents=True, exist_ok=True)
+    _private_dir(directory, root=private_root)
+    if transport is None:
+        validate_live_transport_inputs(endpoint, credential_env)
     request_path = directory / "request.json"
     raw_path = directory / "raw-response.json"
     observation_path = directory / "observation.json"
@@ -337,6 +434,7 @@ def perform_call(
     if observation_path.exists():
         if not _is_json_object(observation_path) or not raw_path.is_file():
             raise ValidatorError("completed observation lacks immutable raw response")
+        _private_file(raw_path)
         observation = json.loads(observation_path.read_text(encoding="utf-8"))
         if not isinstance(observation, dict) or observation.get("request_sha256") != request_sha:
             raise ValidatorError("persisted observation request identity mismatch")
@@ -349,11 +447,18 @@ def perform_call(
         raw = json.loads(raw_path.read_text(encoding="utf-8"))
     else:
         started = time.monotonic()
-        raw_data: dict[str, Any] = {"operational_failure": False}
+        # This immutable marker is written before the transport boundary is
+        # invoked.  A request with no raw response remains UNKNOWN on resume;
+        # completed HTTP/protocol/transport observations retain ATTEMPTED.
+        immutable_json(directory / "dispatch.json", {"dispatch": "ATTEMPTED"})
+        raw_data: dict[str, Any] = {
+            "dispatch": "ATTEMPTED",
+            "dispatch_attempted": True,
+            "operational_failure": False,
+        }
         try:
             if transport is None:
-                if endpoint is None or credential_env is None or not os.environ.get(credential_env):
-                    raise PermissionError("explicit endpoint and credential environment are required")
+                assert endpoint is not None and credential_env is not None
                 authorization = "Bearer " + os.environ[credential_env]
                 actual_transport: ResponseTransport = _HttpTransport()
             else:
@@ -369,14 +474,17 @@ def perform_call(
                 http_status=status,
                 content_type=response_headers.get("Content-Type"),
                 response_bytes=len(payload),
-                body_base64=base64.b64encode(payload).decode("ascii"),
+                body_base64=base64.b64encode(payload[: max_response_bytes + 1]).decode("ascii"),
             )
             if status != 200:
                 raw_data.update(operational_failure=True, failure="HTTP_STATUS")
             elif len(payload) > max_response_bytes:
                 raw_data.update(operational_failure=True, failure="RESPONSE_BOUND")
-        except (OSError, TimeoutError, http.client.HTTPException, PermissionError, ValidatorError) as exc:
-            raw_data.update(operational_failure=True, failure="TIMEOUT" if isinstance(exc, TimeoutError) else type(exc).__name__)
+        except Exception as exc:
+            raw_data.update(
+                operational_failure=True,
+                failure="TIMEOUT" if isinstance(exc, TimeoutError) else type(exc).__name__,
+            )
             raw_data.setdefault("body_base64", None)
         raw_data["http_seconds"] = time.monotonic() - started
         raw = raw_data
@@ -386,6 +494,8 @@ def perform_call(
     observation: dict[str, Any] = {
         "request_sha256": request_sha,
         "response_sha256": sha256_file(raw_path),
+        "dispatch": raw.get("dispatch", "UNKNOWN"),
+        "dispatch_attempted": raw.get("dispatch") == "ATTEMPTED",
         "http_status": raw.get("http_status"),
         "http_seconds": raw.get("http_seconds"),
         "operational_failure": bool(raw.get("operational_failure", True)),
@@ -412,9 +522,12 @@ def perform_call(
 
 def interrupted_observation(directory: Path, body: Mapping[str, Any]) -> dict[str, Any]:
     """Close a request-only interruption without dispatching or resampling."""
+    _private_dir(directory)
     request_bytes = canonical_bytes(body)
     immutable_write(directory / "request.json", request_bytes)
     raw = {
+        "dispatch": "UNKNOWN",
+        "dispatch_attempted": False,
         "operational_failure": True,
         "failure": "INTERRUPTED_UNCERTAIN_DELIVERY_NO_RESAMPLE",
         "http_seconds": None,
@@ -426,6 +539,8 @@ def interrupted_observation(directory: Path, body: Mapping[str, Any]) -> dict[st
     observation = {
         "request_sha256": sha256_bytes(request_bytes),
         "response_sha256": sha256_file(directory / "raw-response.json"),
+        "dispatch": "UNKNOWN",
+        "dispatch_attempted": False,
         "http_status": None,
         "http_seconds": None,
         "operational_failure": True,
@@ -458,26 +573,83 @@ def attribution(source: str, reference: object, edit: Sequence[Any]) -> dict[str
     except (AssertionError, KeyError, TypeError, ValueError) as exc:
         return {"status": "unresolved", "reason": "scorer-failure", "detail": str(exc)}
     if len(isolated) != 1:
-        return {"status": "unresolved", "reason": "isolated-edit-count", "isolated_edit_count": len(isolated)}
+        return {
+            "status": "unresolved",
+            "reason": "isolated-edit-count",
+            "isolated_edit_count": len(isolated),
+        }
     item = isolated[0]
     if item["start"] != int(edit[0]) or item["end"] != int(edit[1]):
         return {"status": "unresolved", "reason": "isolated-edit-span-incompatible"}
-    status = "exact_reference" if edit_key(item) in {edit_key(value) for value in gold} else "non_reference"
-    return {"status": status, "reason": "token-edit-key-membership", "isolated_edit_key": list(edit_key(item)), "gold_edit_count": len(gold)}
-
-
-def integrity(source: str, output: str, allowed_edits: Sequence[Sequence[Any]]) -> dict[str, int]:
-    """Prove exact composition and that protected spans were not touched."""
-    intervals = protected_intervals(source)
-    observed = edits(source, output)
-    protected = sum(is_protected(item["start"], item["end"], intervals) for item in observed)
-    allowed = {(int(item[0]), int(item[1])) for item in allowed_edits}
-    outside = sum(
-        (item["start"], item["end"]) not in allowed
-        for item in observed
-        if not is_protected(item["start"], item["end"], intervals)
+    status = (
+        "exact_reference"
+        if edit_key(item) in {edit_key(value) for value in gold}
+        else "non_reference"
     )
-    return {"protected_differences": protected, "outside_span_differences": outside}
+    return {
+        "status": status,
+        "reason": "token-edit-key-membership",
+        "isolated_edit_key": list(edit_key(item)),
+        "gold_edit_count": len(gold),
+    }
+
+
+def validate_live_transport_inputs(endpoint: str | None, credential_env: str | None) -> None:
+    """Validate live inputs before a request artifact can be written."""
+    if not endpoint or not credential_env or not os.environ.get(credential_env):
+        raise ValidatorError(
+            "explicit endpoint, credential environment, and credential value are required"
+        )
+    parsed = urllib.parse.urlsplit(endpoint)
+    if (
+        parsed.scheme not in {"http", "https"}
+        or not parsed.hostname
+        or parsed.username
+        or parsed.password
+    ):
+        raise ValidatorError("endpoint must be an explicit credential-free HTTP(S) URL")
+
+
+def integrity(source: str, output: str, allowed_edits: Sequence[Sequence[Any]]) -> dict[str, Any]:
+    """Prove output is exactly the original plus the permitted edits."""
+    intervals = protected_intervals(source)
+    normalized: list[tuple[int, int, str]] = []
+    for edit in allowed_edits:
+        if (
+            len(edit) != 3
+            or type(edit[0]) is not int
+            or type(edit[1]) is not int
+            or not isinstance(edit[2], str)
+        ):
+            raise ValidatorError("allowed edit is malformed")
+        start, end, replacement = edit
+        if is_protected(start, end, intervals):
+            raise ValidatorError("allowed edit intersects protected content")
+        normalized.append((start, end, replacement))
+    try:
+        expected = apply_edits(source, normalized)
+    except (AssertionError, TypeError, ValueError) as exc:
+        raise ValidatorError("allowed edits cannot be applied in original coordinates") from exc
+
+    protected_differences = 0
+    for interval in intervals:
+        shift = sum(
+            len(replacement) - (end - start)
+            for start, end, replacement in normalized
+            if end <= interval.start
+        )
+        expected_slice = expected[interval.start + shift : interval.end + shift]
+        actual_slice = output[interval.start + shift : interval.end + shift]
+        if expected_slice != actual_slice:
+            protected_differences += 1
+    exact = output == expected
+    return {
+        "protected_differences": protected_differences,
+        "outside_span_differences": 0 if exact else 1,
+        "exact_expected_output": exact,
+        "expected_output_sha256": sha256_bytes(expected.encode("utf-8")),
+        "actual_output_sha256": sha256_bytes(output.encode("utf-8")),
+    }
 
 
 def distribution(values: Iterable[int | float | None]) -> dict[str, Any]:
