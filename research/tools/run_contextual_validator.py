@@ -1589,6 +1589,9 @@ def public_projection(
 ) -> tuple[dict[str, Any], dict[str, Any]]:
     deployment = configuration.get("deployment", {})
     aggregation_recovery = result.get("aggregation_recovery")
+    request = copy.deepcopy(configuration["request"])
+    request["wire_keys"] = list(request.get("fields", []))
+    request["prompt"] = "owner-supplied frozen 007-i prompt"
     public_config = {
         "schema_version": 1,
         "experiment_id": EXPERIMENT_ID,
@@ -1600,6 +1603,7 @@ def public_projection(
             else None
         ),
         "implementation_head": configuration["implementation_head"],
+        "historical_wire_keys": request["wire_keys"],
         "prior_007h_head": configuration["prior_007h_head"],
         "question": (
             "Can one frozen contextual Qwen validator improve unique one-letter "
@@ -1618,7 +1622,7 @@ def public_projection(
             "endpoint": "private endpoint identity omitted",
             "profile_path": "private profile path omitted",
         },
-        "request": configuration["request"],
+        "request": request,
         "parser": configuration["parser"],
         "scheduling": configuration["scheduling"],
         "limits": configuration["limits"],
