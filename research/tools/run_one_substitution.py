@@ -634,7 +634,7 @@ def frozen_case_manifest(
     if len(case_paths) != FROZEN_CASE_COUNT or total_bytes != FROZEN_CASE_BYTES:
         raise ExperimentError("frozen case count or byte total changed")
     digest = hashlib.sha256()
-    for path in sorted(case_paths, key=lambda item: str(item.relative_to(scratch))):
+    for path in sorted(case_paths):
         data = path.read_bytes()
         digest.update(
             str(path.relative_to(scratch)).encode("utf-8")
