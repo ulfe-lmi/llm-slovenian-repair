@@ -48,6 +48,18 @@ FROZEN_PROFILE_SHA256 = "c79fd658db9c2006c0e542a12946962880e4ee3cec9dc57bc987b62
 FROZEN_PROMPT_SHA256 = protocol.FROZEN_PROMPT_SHA256
 MODEL = protocol.MODEL
 WORKERS = protocol.WORKERS
+FROZEN_LIVE_HEAD = "e85600ffd91164440166ee33a20c3b84af50bfe6"
+FROZEN_LIVE_CONFIGURATION_SHA256 = (
+    "0cbc4738f23bed247fac6a3cd2203086956329eea9ca23ffb8bf8e1351165d21"
+)
+FROZEN_REQUEST_TREE_FILE_COUNT = 2_940
+FROZEN_REQUEST_TREE_TOTAL_BYTES = 4_651_774
+FROZEN_REQUEST_TREE_MANIFEST_SHA256 = (
+    "d46b47754e2ba158ea099bfe556a84164e534610233426819d9114a455aea945"
+)
+FROZEN_CANDIDATE_MANIFEST_SHA256 = (
+    "70544b1dec158f1e72cfaae8fb2547d9ba6ea22c3cd7934e0b7341bce8617854"
+)
 
 
 class ExperimentError(RuntimeError):
@@ -64,6 +76,42 @@ def sha256_bytes(value: bytes) -> str:
 
 def sha256_file(path: Path) -> str:
     return protocol.sha256_file(path)
+
+
+def request_tree_identity(request_root: Path) -> dict[str, Any]:
+    """Hash every persisted request artifact using deterministic sha256sum lines."""
+    require_owned_dir(request_root)
+    files: list[tuple[str, int, str]] = []
+    for path in sorted(
+        request_root.rglob("*"), key=lambda item: item.relative_to(request_root).as_posix()
+    ):
+        if path.is_symlink():
+            raise ExperimentError(f"request tree contains symlink: {path.name}")
+        if path.is_dir():
+            require_owned_dir(path)
+            continue
+        if not path.is_file():
+            raise ExperimentError(f"request tree contains unsupported type: {path.name}")
+        require_private_file(path)
+        relative = path.relative_to(request_root).as_posix()
+        files.append((relative, path.stat().st_size, sha256_file(path)))
+    manifest = "".join(f"{digest}  ./{relative}\n" for relative, _, digest in files)
+    return {
+        "file_count": len(files),
+        "total_bytes": sum(size for _, size, _ in files),
+        "sha256sum_manifest_sha256": sha256_bytes(manifest.encode("utf-8")),
+    }
+
+
+def verify_frozen_request_tree(request_root: Path) -> dict[str, Any]:
+    identity = request_tree_identity(request_root)
+    if identity != {
+        "file_count": FROZEN_REQUEST_TREE_FILE_COUNT,
+        "total_bytes": FROZEN_REQUEST_TREE_TOTAL_BYTES,
+        "sha256sum_manifest_sha256": FROZEN_REQUEST_TREE_MANIFEST_SHA256,
+    }:
+        raise ExperimentError("frozen request tree identity changed")
+    return identity
 
 
 def read_json(path: Path) -> Any:
@@ -655,6 +703,193 @@ def load_prepared(
     }
 
 
+def verify_aggregation_head(
+    repo_root: Path, live_head: str, aggregation_head: str
+) -> dict[str, str]:
+    """Require a distinct, clean local branch head for offline aggregation."""
+    if live_head != FROZEN_LIVE_HEAD:
+        raise ExperimentError("frozen live implementation head mismatch")
+    if (
+        len(aggregation_head) != 40
+        or aggregation_head != aggregation_head.lower()
+        or any(character not in "0123456789abcdef" for character in aggregation_head)
+    ):
+        raise ExperimentError("aggregation head must be a full lowercase commit SHA")
+    try:
+        current_head = subprocess.run(
+            ["git", "-C", str(repo_root), "rev-parse", "--verify", "HEAD"],
+            check=True,
+            capture_output=True,
+            text=True,
+        ).stdout.strip()
+        branch = subprocess.run(
+            ["git", "-C", str(repo_root), "symbolic-ref", "--quiet", "--short", "HEAD"],
+            check=True,
+            capture_output=True,
+            text=True,
+        ).stdout.strip()
+        status = subprocess.run(
+            ["git", "-C", str(repo_root), "status", "--porcelain=v1", "--untracked-files=all"],
+            check=True,
+            capture_output=True,
+        ).stdout
+    except (OSError, subprocess.CalledProcessError) as exc:
+        raise ExperimentError("aggregation Git identity cannot be read") from exc
+    if current_head != aggregation_head:
+        raise ExperimentError("aggregation head is not the current branch head")
+    if current_head == live_head:
+        raise ExperimentError("aggregation head must differ from frozen live head")
+    if branch != "oap/007-concept-verification":
+        raise ExperimentError("aggregation branch is not the active objective branch")
+    if status:
+        raise ExperimentError("aggregation branch must be clean")
+    return {
+        "live_implementation_head": live_head,
+        "aggregation_implementation_head": aggregation_head,
+        "implementation_branch": branch,
+        "working_tree": "clean",
+    }
+
+
+def load_aggregation_prepared(scratch: Path, expected_live_head: str) -> dict[str, Any]:
+    """Load frozen inputs for recovery without validating or touching live inputs."""
+    require_owned_dir(scratch)
+    require_private_file(scratch / "CONFIGURATION.json")
+    configuration = read_json(scratch / "CONFIGURATION.json")
+    if not isinstance(configuration, dict) or configuration.get("experiment_id") != EXPERIMENT_ID:
+        raise ExperimentError("prepared configuration identity mismatch")
+    if expected_live_head != FROZEN_LIVE_HEAD:
+        raise ExperimentError("recovery live head is not the frozen live head")
+    if configuration.get("implementation_head") != expected_live_head:
+        raise ExperimentError("frozen configuration live head mismatch")
+    if sha256_file(scratch / "CONFIGURATION.json") != FROZEN_LIVE_CONFIGURATION_SHA256:
+        raise ExperimentError("frozen configuration bytes changed")
+    if configuration.get("status") != "FROZEN_BEFORE_LIVE_EXECUTION":
+        raise ExperimentError("frozen configuration status changed")
+    require_private_file(scratch / "CANDIDATE-MANIFEST.json")
+    require_private_file(scratch / "CANDIDATES.json")
+    manifest = read_json(scratch / "CANDIDATE-MANIFEST.json")
+    population = read_json(scratch / "CANDIDATES.json")
+    if not isinstance(manifest, list) or not isinstance(population, list):
+        raise ExperimentError("prepared candidate manifest is malformed")
+    recomputed_manifest, recomputed_digest = protocol.candidate_manifest(population)
+    if (
+        recomputed_digest != configuration["source_identity"]["candidate_manifest_sha256"]
+        or manifest != recomputed_manifest
+        or len(population) != EXPECTED_TOTAL
+    ):
+        raise ExperimentError("prepared candidate manifest hash mismatch")
+    pairs, baseline, uv_indices, case_records, case_digest = load_frozen_state(scratch)
+    if case_digest != configuration["source_identity"]["case_identity_manifest_sha256"]:
+        raise ExperimentError("prepared case identity mismatch")
+    require_private_file(scratch / "RUN-STATUS.json")
+    status = read_json(scratch / "RUN-STATUS.json")
+    if (
+        not isinstance(status, dict)
+        or status.get("status") != "VALIDATOR_OBSERVATIONS_COMPLETE"
+        or status.get("scheduled_candidates") != EXPECTED_TOTAL
+        or status.get("observation_records") != EXPECTED_TOTAL
+        or status.get("dispatched_http_requests") != EXPECTED_TOTAL
+        or status.get("uncertain_deliveries") != 0
+    ):
+        raise ExperimentError("validator observations are not in the frozen complete state")
+    for name in ("CASE-RESULTS.json", "RESULTS.json", "MANIFEST.json", "REPORT.md"):
+        if (scratch / name).exists() or (scratch / name).is_symlink():
+            raise ExperimentError(f"private aggregate output already exists: {name}")
+    return {
+        "configuration": configuration,
+        "configuration_sha256": FROZEN_LIVE_CONFIGURATION_SHA256,
+        "population": protocol.ordered_candidates(population),
+        "pairs": pairs,
+        "baseline": baseline,
+        "uv_indices": uv_indices,
+        "case_records": case_records,
+        "candidate_manifest": manifest,
+        "worker_status": status,
+    }
+
+
+def load_completed_observations(
+    scratch: Path, population: list[dict[str, Any]]
+) -> dict[str, dict[str, Any]]:
+    """Read completed observations and prove each request record is unchanged."""
+    request_root = scratch / "requests"
+    require_owned_dir(request_root)
+    expected_ids = {protocol.candidate_path_id(candidate) for candidate in population}
+    actual_dirs: set[str] = set()
+    for path in request_root.iterdir():
+        if path.is_symlink() or not path.is_dir():
+            raise ExperimentError("request tree contains an unexpected entry")
+        require_owned_dir(path)
+        actual_dirs.add(path.name)
+    if actual_dirs != expected_ids:
+        raise ExperimentError("persisted request directories do not match candidates")
+    observations: dict[str, dict[str, Any]] = {}
+    for candidate in population:
+        candidate_id = protocol.candidate_path_id(candidate)
+        directory = request_root / candidate_id
+        expected_names = {"request.json", "dispatch.json", "raw-response.json", "observation.json"}
+        names = {path.name for path in directory.iterdir()}
+        if names != expected_names:
+            raise ExperimentError(f"persisted observation file set is invalid: {candidate_id}")
+        for name in expected_names:
+            require_private_file(directory / name)
+        body = protocol.request_body(
+            candidate["sentence"], candidate["candidate"]["text"], candidate["mechanical_edit"][2]
+        )
+        request_bytes = canonical_bytes(body)
+        request_path = directory / "request.json"
+        if request_path.read_bytes() != request_bytes:
+            raise ExperimentError(f"persisted request bytes changed: {candidate_id}")
+        dispatch = read_json(directory / "dispatch.json")
+        raw = read_json(directory / "raw-response.json")
+        observation = read_json(directory / "observation.json")
+        if not all(
+            isinstance(value, dict) for value in (dispatch, raw, observation)
+        ):
+            raise ExperimentError(f"persisted observation JSON is malformed: {candidate_id}")
+        if (
+            dispatch.get("dispatch") != "ATTEMPTED"
+            or raw.get("dispatch") != "ATTEMPTED"
+            or observation.get("dispatch") != "ATTEMPTED"
+            or observation.get("request_sha256") != sha256_bytes(request_bytes)
+            or observation.get("response_sha256") != sha256_file(directory / "raw-response.json")
+        ):
+            raise ExperimentError(f"persisted observation identity is invalid: {candidate_id}")
+        observations[candidate_id] = observation
+    if len(observations) != EXPECTED_TOTAL:
+        raise ExperimentError("persisted observation count is not 735")
+    return observations
+
+
+def write_aggregation_incident(scratch: Path) -> str:
+    incident = {
+        "schema_version": 1,
+        "run_id": RUN_ID,
+        "status": "AGGREGATION_EVALUATION_ORDER_FAILURE",
+        "stage": "make_views",
+        "exception_class": "KeyError",
+        "exception_message": "valid_response_count",
+        "live_implementation_head": FROZEN_LIVE_HEAD,
+        "configuration_sha256": FROZEN_LIVE_CONFIGURATION_SHA256,
+        "candidate_manifest_sha256": FROZEN_CANDIDATE_MANIFEST_SHA256,
+        "request_tree": {
+            "file_count": FROZEN_REQUEST_TREE_FILE_COUNT,
+            "total_bytes": FROZEN_REQUEST_TREE_TOTAL_BYTES,
+            "sha256sum_manifest_sha256": FROZEN_REQUEST_TREE_MANIFEST_SHA256,
+        },
+        "scheduled_candidates": EXPECTED_TOTAL,
+        "existing_observation_records": EXPECTED_TOTAL,
+        "existing_dispatch_records": EXPECTED_TOTAL,
+        "additional_model_calls": 0,
+        "additional_network_calls": 0,
+        "private_aggregate_outputs_present": False,
+        "public_outputs_present": False,
+        "raw_text_or_traceback_persisted": False,
+    }
+    return immutable_json(scratch / "INCIDENT.json", incident)
+
+
 def _candidate_observation_path(scratch: Path, candidate: dict[str, Any]) -> Path:
     return scratch / "requests" / protocol.candidate_path_id(candidate)
 
@@ -1077,20 +1312,21 @@ def make_views(
             attribution_by_decision[decision][status] += 1
             selected_observations.append(target["observation"])
         validator = observation_metrics(selected_observations)
+        valid_response_count = sum(
+            outcome[key] for key in ("USE_CANDIDATE", "KEEP_ORIGINAL", "UNCERTAIN")
+        )
         validator.update(
             {
                 "decision_counts": dict(outcome),
-                "valid_response_count": sum(
-                    outcome[key] for key in ("USE_CANDIDATE", "KEEP_ORIGINAL", "UNCERTAIN")
-                ),
+                "valid_response_count": valid_response_count,
                 "unconditional_acceptance_rate": (
                     outcome["USE_CANDIDATE"] / len(candidate_selected)
                     if candidate_selected
                     else None
                 ),
                 "valid_response_acceptance_rate": (
-                    outcome["USE_CANDIDATE"] / validator["valid_response_count"]
-                    if validator["valid_response_count"]
+                    outcome["USE_CANDIDATE"] / valid_response_count
+                    if valid_response_count
                     else None
                 ),
                 "attribution": dict(attribution_counts),
@@ -1202,6 +1438,8 @@ def aggregate(
     prepared: dict[str, Any],
     observations: dict[str, dict[str, Any]],
     worker_status: dict[str, Any],
+    *,
+    aggregation_recovery: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     configuration_sha = prepared["configuration_sha256"]
     records: dict[str, list[dict[str, Any]]] = {}
@@ -1242,6 +1480,8 @@ def aggregate(
             else "PARTIAL_SYSTEMIC_VALIDATOR_FAILURE"
         ),
     }
+    if aggregation_recovery is not None:
+        result["aggregation_recovery"] = aggregation_recovery
     immutable_json(scratch / "CASE-RESULTS.json", records)
     private_results_sha = immutable_json(scratch / "RESULTS.json", result)
     private_manifest = {
@@ -1250,6 +1490,7 @@ def aggregate(
         "configuration_sha256": configuration_sha,
         "candidate_manifest_sha256": result["candidate_manifest_sha256"],
         "case_identity_manifest_sha256": result["case_identity_manifest_sha256"],
+        "aggregation_recovery": aggregation_recovery,
         "case_count": 2_973,
         "candidate_count": EXPECTED_TOTAL,
         "private_results_sha256": private_results_sha,
@@ -1275,6 +1516,7 @@ def aggregate(
             "scheduled_candidates": EXPECTED_TOTAL,
             "observation_records": len(observations),
             "dispatched_http_requests": worker_status.get("dispatched_http_requests", 0),
+            "aggregation_recovery": aggregation_recovery,
         },
     )
     result["private_results_sha256"] = private_results_sha
@@ -1283,14 +1525,80 @@ def aggregate(
     return result
 
 
+def aggregate_from_completed_observations(
+    scratch: Path,
+    prepared: dict[str, Any],
+    aggregation_recovery: dict[str, Any],
+    *,
+    transport: protocol.ResponseTransport | None = None,
+) -> dict[str, Any]:
+    """Aggregate persisted observations without crossing the transport boundary."""
+    before = verify_frozen_request_tree(scratch / "requests")
+    observations = load_completed_observations(scratch, prepared["population"])
+    aggregation_recovery["request_tree_before"] = before
+    aggregation_recovery["request_tree_after"] = before
+    # The optional transport is an injected fail-if-called test seam.  Recovery
+    # intentionally never passes it to a request function.
+    del transport
+    result = aggregate(
+        scratch,
+        prepared,
+        observations,
+        prepared["worker_status"],
+        aggregation_recovery=aggregation_recovery,
+    )
+    after = verify_frozen_request_tree(scratch / "requests")
+    if after != before:
+        raise ExperimentError("request tree changed during aggregation")
+    return result
+
+
+def recover_aggregation(
+    repo_root: Path,
+    scratch: Path,
+    *,
+    expected_live_head: str,
+    aggregation_head: str,
+    transport: protocol.ResponseTransport | None = None,
+) -> dict[str, Any]:
+    """Recover the interrupted aggregation from the immutable live evidence."""
+    git_identity = verify_aggregation_head(repo_root, expected_live_head, aggregation_head)
+    prepared = load_aggregation_prepared(scratch, expected_live_head)
+    incident_sha = write_aggregation_incident(scratch)
+    recovery = {
+        **git_identity,
+        "mode": "POST_LIVE_ZERO_DISPATCH_AGGREGATION",
+        "frozen_configuration_sha256": FROZEN_LIVE_CONFIGURATION_SHA256,
+        "incident_sha256": incident_sha,
+        "scheduled_candidates": EXPECTED_TOTAL,
+        "existing_observation_records": EXPECTED_TOTAL,
+        "existing_dispatch_records": EXPECTED_TOTAL,
+        "additional_model_calls": 0,
+        "additional_network_calls": 0,
+        "transport_dispatches_during_aggregation": 0,
+        "request_tree_unchanged": True,
+        "resampling": False,
+    }
+    return aggregate_from_completed_observations(
+        scratch, prepared, recovery, transport=transport
+    )
+
+
 def public_projection(
     configuration: dict[str, Any], result: dict[str, Any]
 ) -> tuple[dict[str, Any], dict[str, Any]]:
     deployment = configuration.get("deployment", {})
+    aggregation_recovery = result.get("aggregation_recovery")
     public_config = {
         "schema_version": 1,
         "experiment_id": EXPERIMENT_ID,
         "status": result["status"],
+        "live_implementation_head": configuration["implementation_head"],
+        "aggregation_implementation_head": (
+            aggregation_recovery["aggregation_implementation_head"]
+            if isinstance(aggregation_recovery, dict)
+            else None
+        ),
         "implementation_head": configuration["implementation_head"],
         "prior_007h_head": configuration["prior_007h_head"],
         "question": (
@@ -1326,10 +1634,38 @@ def public_projection(
             "manifest": result["private_manifest_sha256"],
         },
     }
+    if isinstance(aggregation_recovery, dict):
+        public_config["aggregation_recovery"] = {
+            "mode": aggregation_recovery["mode"],
+            "live_implementation_head": aggregation_recovery["live_implementation_head"],
+            "aggregation_implementation_head": aggregation_recovery[
+                "aggregation_implementation_head"
+            ],
+            "frozen_configuration_sha256": aggregation_recovery[
+                "frozen_configuration_sha256"
+            ],
+            "incident_sha256": aggregation_recovery["incident_sha256"],
+            "scheduled_candidates": aggregation_recovery["scheduled_candidates"],
+            "existing_observation_records": aggregation_recovery[
+                "existing_observation_records"
+            ],
+            "existing_dispatch_records": aggregation_recovery["existing_dispatch_records"],
+            "additional_model_calls": aggregation_recovery["additional_model_calls"],
+            "additional_network_calls": aggregation_recovery["additional_network_calls"],
+            "transport_dispatches_during_aggregation": aggregation_recovery[
+                "transport_dispatches_during_aggregation"
+            ],
+            "request_tree_before": aggregation_recovery["request_tree_before"],
+            "request_tree_after": aggregation_recovery["request_tree_after"],
+            "request_tree_unchanged": aggregation_recovery["request_tree_unchanged"],
+            "resampling": aggregation_recovery["resampling"],
+        }
     public_result = {
         "schema_version": 1,
         "experiment_id": EXPERIMENT_ID,
         "status": result["status"],
+        "live_implementation_head": configuration["implementation_head"],
+        "aggregation_implementation_head": public_config["aggregation_implementation_head"],
         "implementation_head": configuration["implementation_head"],
         "configuration_sha256": sha256_bytes(canonical_bytes(public_config)),
         "private_evidence_sha256": public_config["private_evidence_sha256"],
@@ -1350,6 +1686,8 @@ def public_projection(
             "Live service availability and inherited repository checks remain separate evidence.",
         ],
     }
+    if "aggregation_recovery" in public_config:
+        public_result["aggregation_recovery"] = public_config["aggregation_recovery"]
     return public_config, public_result
 
 
@@ -1371,7 +1709,8 @@ def public_report(result: dict[str, Any], public_config: dict[str, Any]) -> str:
         "## Frozen identity",
         "",
         f"- Scheduled unique candidates: {EXPECTED_TOTAL} (571 spelling; 164 preservation).",
-        f"- Implementation head: {public_config['implementation_head']}.",
+        f"- Frozen live implementation head: {public_config['live_implementation_head']}.",
+        f"- Aggregation implementation head: {public_config['aggregation_implementation_head']}.",
         "- Candidate manifest SHA-256: "
         f"{public_config['source_identity']['candidate_manifest_sha256']}.",
         f"- Prompt SHA-256: {FROZEN_PROMPT_SHA256}.",
@@ -1380,6 +1719,29 @@ def public_report(result: dict[str, Any], public_config: dict[str, Any]) -> str:
         f"{result['metrics'].get('dispatched_http_requests', 0)} / "
         f"{result['metrics'].get('uncertain_deliveries', 0)}.",
         "",
+    ]
+    recovery = public_config.get("aggregation_recovery")
+    if isinstance(recovery, dict):
+        lines += [
+            "## Aggregation recovery",
+            "",
+            "- The deterministic aggregation incident was a KeyError for the derived "
+            "`valid_response_count` field inside `make_views`; no raw traceback or "
+            "private payload was published.",
+            "- Existing observation records / dispatch records: "
+            f"{recovery['existing_observation_records']} / "
+            f"{recovery['existing_dispatch_records']}; additional model/network calls: "
+            f"{recovery['additional_model_calls']} / {recovery['additional_network_calls']}.",
+            "- Request-tree identity before and after: "
+            f"{recovery['request_tree_before']['file_count']} files, "
+            f"{recovery['request_tree_before']['total_bytes']} bytes, "
+            f"{recovery['request_tree_before']['sha256sum_manifest_sha256']} / "
+            f"{recovery['request_tree_after']['sha256sum_manifest_sha256']}; unchanged: "
+            f"{recovery['request_tree_unchanged']}.",
+            f"- Incident identity SHA-256: {recovery['incident_sha256']}.",
+            "",
+        ]
+    lines += [
         "## Required views",
         "",
     ]
@@ -1524,6 +1886,37 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
     repo_root = Path(args.repo_root).resolve()
     scratch = Path(args.scratch).absolute()
     profile_path = Path(args.profile_path).absolute() if args.profile_path else None
+    if args.recover_aggregation:
+        if args.prepare_only:
+            raise ExperimentError("aggregation recovery cannot be prepare-only")
+        if not args.aggregation_head:
+            raise ExperimentError("aggregation recovery requires --aggregation-head")
+        result = recover_aggregation(
+            repo_root,
+            scratch,
+            expected_live_head=args.expected_implementation_head,
+            aggregation_head=args.aggregation_head,
+        )
+        require_private_file(scratch / "CONFIGURATION.json")
+        configuration = read_json(scratch / "CONFIGURATION.json")
+        if not isinstance(configuration, dict):
+            raise ExperimentError("frozen configuration is not an object")
+        paths = write_public(repo_root, configuration, result)
+        return {
+            "status": result["status"],
+            "configuration_sha256": sha256_file(scratch / "CONFIGURATION.json"),
+            "private_results_sha256": result["private_results_sha256"],
+            "private_manifest_sha256": result["private_manifest_sha256"],
+            "private_report_sha256": result["private_report_sha256"],
+            "public": paths,
+            "scheduled_candidates": EXPECTED_TOTAL,
+            "actual_model_calls": result["metrics"]["actual_validator_call_records"],
+            "actual_network_calls": result["metrics"].get("dispatched_http_requests", 0),
+            "additional_model_calls": result["aggregation_recovery"]["additional_model_calls"],
+            "additional_network_calls": result["aggregation_recovery"]["additional_network_calls"],
+        }
+    if args.aggregation_head:
+        raise ExperimentError("--aggregation-head requires --recover-aggregation")
     has_configuration = (scratch / "CONFIGURATION.json").exists()
     if args.prepare_only and has_configuration:
         prepared = load_prepared(
@@ -1610,6 +2003,8 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--endpoint")
     parser.add_argument("--credential-env")
     parser.add_argument("--profile", "--profile-path", dest="profile_path")
+    parser.add_argument("--recover-aggregation", action="store_true")
+    parser.add_argument("--aggregation-head")
     args = parser.parse_args(argv)
     try:
         print(json.dumps(run(args), sort_keys=True))

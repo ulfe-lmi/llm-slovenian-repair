@@ -13,6 +13,7 @@ import threading
 import time
 import unittest
 from pathlib import Path
+from unittest.mock import patch
 
 from research import contextual_validator as protocol
 from research.tools import run_contextual_validator as driver
@@ -69,6 +70,17 @@ class ExceptionTransport(FakeTransport):
     ) -> tuple[int, dict[str, str], bytes]:
         self.calls.append((endpoint, body, headers, timeout))
         raise self.error
+
+
+class FailingTransport:
+    def __init__(self) -> None:
+        self.calls = 0
+
+    def request(
+        self, endpoint: str, body: bytes, headers: dict[str, str], timeout: float
+    ) -> tuple[int, dict[str, str], bytes]:
+        self.calls += 1
+        raise AssertionError("aggregation must not dispatch")
 
 
 def candidate(
@@ -430,6 +442,105 @@ class ContextualValidatorTests(unittest.TestCase):
         self.assertLessEqual(fake.maximum, protocol.WORKERS)
         self.assertEqual(len(fake.calls), 17)
 
+    def test_aggregation_replays_completed_observations_with_zero_transport_calls(self) -> None:
+        population = [candidate(index) for index in range(driver.EXPECTED_TOTAL)]
+        fake = FakeTransport()
+        with tempfile.TemporaryDirectory() as raw_root:
+            root = Path(raw_root)
+            _observations, worker_status = driver.execute_validator(
+                root,
+                population,
+                endpoint="https://synthetic.invalid",
+                credential_env="UNUSED",
+                transport=fake,
+            )
+            pairs = []
+            records = []
+            for index in range(driver.EXPECTED_TOTAL):
+                saved = saved_case()
+                for decision in saved["decisions"]:
+                    decision["first"]["proposal"] = {  # type: ignore[index]
+                        "needs_wider_edit": False,
+                        "keep": True,
+                    }
+                dataset = {
+                    "id": f"case-{index}",
+                    "index": index + 1,
+                    "category": "synthetic",
+                    "problem_type": "synthetic",
+                    "input": saved["input"],
+                    "reference": None,
+                }
+                pairs.append({"dataset": dataset, "saved": saved})
+                records.append(
+                    {
+                        "phase": "dassle-spelling",
+                        "index": index + 1,
+                        "id": f"case-{index}",
+                        "dataset": dataset,
+                        "baseline": saved,
+                        "new": copy.deepcopy(saved),
+                    }
+                )
+            prepared = {
+                "configuration": {
+                    "source_identity": {
+                        "candidate_manifest_sha256": "candidate",
+                        "case_identity_manifest_sha256": "cases",
+                    }
+                },
+                "configuration_sha256": "config",
+                "population": population,
+                "pairs": {
+                    "dassle-spelling": pairs,
+                    "dassle-spelling-preservation": [],
+                },
+                "uv_indices": set(),
+                "case_records": {
+                    "dassle-spelling": records,
+                    "dassle-spelling-preservation": [],
+                },
+                "worker_status": worker_status,
+            }
+            tree = driver.request_tree_identity(root / "requests")
+            failing = FailingTransport()
+            with (
+                patch.object(driver, "FROZEN_REQUEST_TREE_FILE_COUNT", tree["file_count"]),
+                patch.object(driver, "FROZEN_REQUEST_TREE_TOTAL_BYTES", tree["total_bytes"]),
+                patch.object(
+                    driver,
+                    "FROZEN_REQUEST_TREE_MANIFEST_SHA256",
+                    tree["sha256sum_manifest_sha256"],
+                ),
+            ):
+                result = driver.aggregate_from_completed_observations(
+                    root,
+                    prepared,
+                    {
+                        "mode": "TEST_RECOVERY",
+                        "live_implementation_head": "live",
+                        "aggregation_implementation_head": "aggregation",
+                        "frozen_configuration_sha256": "config",
+                        "incident_sha256": "incident",
+                        "scheduled_candidates": driver.EXPECTED_TOTAL,
+                        "existing_observation_records": driver.EXPECTED_TOTAL,
+                        "existing_dispatch_records": driver.EXPECTED_TOTAL,
+                        "additional_model_calls": 0,
+                        "additional_network_calls": 0,
+                        "transport_dispatches_during_aggregation": 0,
+                        "request_tree_unchanged": True,
+                        "resampling": False,
+                    },
+                    transport=failing,
+                )
+            self.assertEqual(failing.calls, 0)
+            self.assertEqual(result["aggregation_recovery"]["additional_network_calls"], 0)
+            self.assertTrue(result["aggregation_recovery"]["request_tree_unchanged"])
+            self.assertEqual(
+                driver.request_tree_identity(root / "requests"),
+                tree,
+            )
+
     def test_projection_scheduled_target_only_semantics_and_shared_observations(self) -> None:
         saved = saved_case()
         scheduled = {(0, 1, "a"), (2, 3, "b")}
@@ -510,6 +621,72 @@ class ContextualValidatorTests(unittest.TestCase):
         self.assertEqual(record["validated_only"]["output"], "X B c")
         self.assertEqual(record["unrestricted_007h"], case["new"])
         self.assertEqual(record["validator_targets"][0]["observation"], observation)
+
+    def test_view_metrics_build_valid_response_rate_before_update(self) -> None:
+        saved = saved_case()
+        for decision in saved["decisions"]:
+            decision["first"]["proposal"] = {  # type: ignore[index]
+                "needs_wider_edit": False,
+                "keep": False,
+            }
+        dataset = {
+            "id": "case",
+            "index": 1,
+            "category": "synthetic",
+            "problem_type": "synthetic",
+            "input": saved["input"],
+            "reference": "X B c",
+        }
+        case = {
+            "phase": "dassle-spelling",
+            "index": 1,
+            "id": "case",
+            "dataset": dataset,
+            "baseline": saved,
+            "new": copy.deepcopy(saved),
+        }
+        item = {
+            **candidate(0, start=0, target="a", replacement="X"),
+            "sentence": saved["input"],
+        }
+        observation = {
+            "decision": "USE_CANDIDATE",
+            "operational_failure": False,
+            "dispatch": "ATTEMPTED",
+            "http_seconds": 0.1,
+            "reasoning_tokens": 1,
+            "output_tokens": 1,
+        }
+        record = driver.make_case_result(
+            "dassle-spelling",
+            case,
+            [item],
+            {protocol.candidate_path_id(item): observation},
+            "config",
+        )
+        metrics = driver.make_views(
+            {
+                "dassle-spelling": [{"dataset": dataset, "saved": saved}],
+                "dassle-spelling-preservation": [],
+            },
+            {"dassle-spelling": [record], "dassle-spelling-preservation": []},
+            [item],
+            {protocol.candidate_path_id(item): observation},
+            {1},
+            {},
+        )
+        self.assertEqual(
+            metrics["views"]["dassle-spelling"]["all"]["validator"][
+                "valid_response_count"
+            ],
+            1,
+        )
+        self.assertEqual(
+            metrics["views"]["dassle-spelling"]["all"]["validator"][
+                "valid_response_acceptance_rate"
+            ],
+            1.0,
+        )
 
     def test_public_projection_redacts_private_endpoint_profile_path_and_payload(self) -> None:
         configuration = {
