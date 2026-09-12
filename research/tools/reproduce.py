@@ -6,6 +6,7 @@ from __future__ import annotations
 import argparse
 import json
 import math
+from collections.abc import Mapping
 from pathlib import Path
 
 from research.curated.historical import plan, validate_live_authorization
@@ -212,12 +213,13 @@ def _run_saved_first_stage_records(
             text = record.get("input", record.get("original"))
             if not isinstance(text, str):
                 raise SystemExit("each saved record must contain a string input")
-            frozen = next(
+            frozen_value = next(
                 (record.get(name) for name in ("first_stage", "first_stage_decisions", "frozen_decisions", "decisions") if isinstance(record.get(name), list)),
                 None,
             )
-            if frozen is None:
+            if not isinstance(frozen_value, list) or not all(isinstance(item, Mapping) for item in frozen_value):
                 raise SystemExit("retry-only live reproduction requires caller-owned frozen first-stage decisions")
+            frozen = [item for item in frozen_value if isinstance(item, Mapping)]
             result = saved_first_stage_retry(
                 text,
                 pipeline,

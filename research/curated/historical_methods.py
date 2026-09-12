@@ -127,7 +127,8 @@ def saved_first_stage_retry(
             first_gate = dict(saved_gate)
         else:
             first_gate = pipeline.gate(text, candidate, first)[2]
-        final_proposal, final_gate = first, first_gate
+        final_proposal: Proposal | None = first
+        final_gate: dict[str, Any] | None = first_gate
         if first_gate.get("accepted") and isinstance(first.replacement, str):
             first_edits.append((candidate["start"], candidate["end"], first.replacement))
         retry_observation = None

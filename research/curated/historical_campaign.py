@@ -8,8 +8,8 @@ be rendered offline; execution is only possible with explicit resources and
 
 from __future__ import annotations
 
-import multiprocessing
 import json
+import multiprocessing
 import os
 import time
 import traceback
@@ -311,6 +311,7 @@ def run_injected(
                         "failure_type": type(exc).__name__,
                     })
         else:
+            context: Any
             try:
                 context = multiprocessing.get_context("fork")
             except ValueError:
@@ -328,7 +329,7 @@ def run_injected(
         phase_statuses: list[dict[str, Any]] = []
         for worker in range(workers):
             status_path = root / "workers" / phase / str(worker) / "STATUS.json"
-            process = processes[worker] if not sequential else None
+            process: Any = processes[worker] if not sequential else None
             exit_code = getattr(process, "exitcode", 0) if process is not None else 0
             incident: str | None = None
             status: dict[str, Any] | None = None
