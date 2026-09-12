@@ -1,0 +1,127 @@
+{
+  "actual": {
+    "dispatched_attempts": 735,
+    "scheduled_candidates": 735,
+    "uncertain_deliveries": 0,
+    "validator_observations": 735
+  },
+  "aggregation_implementation_head": "752569d13d153ee6d16528f4b278a5a567e0b218",
+  "aggregation_recovery": {
+    "additional_model_calls": 0,
+    "additional_network_calls": 0,
+    "aggregation_implementation_head": "752569d13d153ee6d16528f4b278a5a567e0b218",
+    "existing_dispatch_records": 735,
+    "existing_observation_records": 735,
+    "frozen_configuration_sha256": "0cbc4738f23bed247fac6a3cd2203086956329eea9ca23ffb8bf8e1351165d21",
+    "incident_sha256": "598b707790e303811faef0ccf15898686225947d19fce44352bde05f75984f39",
+    "live_implementation_head": "e85600ffd91164440166ee33a20c3b84af50bfe6",
+    "mode": "POST_LIVE_ZERO_DISPATCH_AGGREGATION",
+    "request_tree_after": {
+      "file_count": 2940,
+      "sha256sum_manifest_sha256": "d46b47754e2ba158ea099bfe556a84164e534610233426819d9114a455aea945",
+      "total_bytes": 4651774
+    },
+    "request_tree_before": {
+      "file_count": 2940,
+      "sha256sum_manifest_sha256": "d46b47754e2ba158ea099bfe556a84164e534610233426819d9114a455aea945",
+      "total_bytes": 4651774
+    },
+    "request_tree_unchanged": true,
+    "resampling": false,
+    "scheduled_candidates": 735,
+    "transport_dispatches_during_aggregation": 0
+  },
+  "deployment": {
+    "class": "A100-FP8",
+    "endpoint": "private endpoint identity omitted",
+    "model": "qwen3.8-27b",
+    "profile_path": "private profile path omitted",
+    "profile_sha256": "c79fd658db9c2006c0e542a12946962880e4ee3cec9dc57bc987b62d26c2dd60",
+    "protocol": "Responses non-streaming"
+  },
+  "experiment_id": "007-i-contextual-validator",
+  "implementation_head": "e85600ffd91164440166ee33a20c3b84af50bfe6",
+  "limits": {
+    "attempts_per_candidate": 1,
+    "resampling": false,
+    "response_bound_bytes": 2000000,
+    "timeout_seconds": 300.0
+  },
+  "live_implementation_head": "e85600ffd91164440166ee33a20c3b84af50bfe6",
+  "parser": {
+    "assistant_output_text_fields": 1,
+    "choices": [
+      "KEEP_ORIGINAL",
+      "UNCERTAIN",
+      "USE_CANDIDATE"
+    ],
+    "duplicate_json_keys": "reject",
+    "status": "completed",
+    "surrounding_whitespace_only": true,
+    "token_accounting": "input/output/reasoning nonnegative integers"
+  },
+  "prior_007h_head": "e916a2d9cafd171fbb71bfc70ac2c21222118f6e",
+  "private_evidence_sha256": {
+    "manifest": "04f66e96d4feddaea520c1ccb27724dc5417b4f6535bbe85a5c6cac904395cb0",
+    "results": "913572ae5d16ba29ab8afd6ea59a1dc3f03de90d40136891ea1637eba16f92f9"
+  },
+  "projections": {
+    "baseline_calls_resampled": false,
+    "shared_observation": true,
+    "validated_fallback": "USE_CANDIDATE mechanical edit; every other decision uses saved 007-h baseline fallback",
+    "validated_only": "USE_CANDIDATE mechanical edit; every other decision leaves original target"
+  },
+  "prompt": {
+    "sha256": "572cf2fb4864e66e38a500465e1089062d58aeed4721063fb0c1e466e424230d",
+    "template": "owner-supplied frozen 007-i prompt"
+  },
+  "question": "Can one frozen contextual Qwen validator improve unique one-letter candidate selection without resampling baseline responses?",
+  "request": {
+    "fields": [
+      "model",
+      "stream",
+      "store",
+      "input",
+      "include_reasoning",
+      "reasoning"
+    ],
+    "include_reasoning": true,
+    "reasoning_effort": "low",
+    "serializer": "canonical UTF-8 JSON with one final LF",
+    "store": false,
+    "stream": false
+  },
+  "scheduling": {
+    "in_flight_per_worker": 1,
+    "maximum_in_flight": 8,
+    "partition": "stable ordered position modulo worker count",
+    "partition_key": [
+      "phase",
+      "case_index",
+      "target_start",
+      "target_end",
+      "target_ordinal"
+    ],
+    "scheduled_candidates": 735,
+    "workers": 8
+  },
+  "schema_version": 1,
+  "source_identity": {
+    "candidate_count": 735,
+    "candidate_counts": {
+      "dassle-spelling": 571,
+      "dassle-spelling-preservation": 164
+    },
+    "candidate_manifest_sha256": "70544b1dec158f1e72cfaae8fb2547d9ba6ea22c3cd7934e0b7341bce8617854",
+    "case_identity_manifest_sha256": "4490d7c1e14b28369217d06915bc1fce936160108de615f22f59032a803a46ef",
+    "dataset_rows": {
+      "dassle-spelling": 1487,
+      "dassle-spelling-preservation": 1486
+    },
+    "input_manifest_sha256": "b00a1b8dcd8c4cdf4b181601892a094824af7a3268a4785d56149a05807fa399",
+    "paired_rows": 2973,
+    "uv_audit_rows": 75,
+    "uv_indices_sha256": "a53217b39a0ba20097f3c6cbb34b4e6ab54176740a69f09b8ec09ad2e21a2f5c"
+  },
+  "status": "COMPLETE"
+}

@@ -4274,6 +4274,71 @@
       ]
     },
     {
+      "experiment_id": "007-i-contextual-validator",
+      "logical_root": "007-i-contextual-validator-20260912",
+      "kind": "experiment",
+      "variation": "owner-authorized contextual validation with post-live zero-dispatch aggregation recovery",
+      "status": "COMPLETE",
+      "question": "Can one frozen contextual validator classify the 735 unique 007-h candidates without resampling?",
+      "evidence_status": "private-evidence-with-data-free-public-projection",
+      "public_report": "research/reports/007-i-contextual-validator.md",
+      "public_configuration": "research/configs/007-i-contextual-validator.json",
+      "public_metrics": "research/results/007-i-contextual-validator.json.gz",
+      "source_manifest": "research/registry/source-manifest.json",
+      "child_runs": [],
+      "frozen_choices": {
+        "source": "frozen 007-h candidate population and saved observations",
+        "model_calls_during_aggregation_recovery": 0,
+        "network_calls_during_aggregation_recovery": 0,
+        "dataset_contents_published": false
+      },
+      "metrics": {
+        "scheduled_candidates": 735,
+        "validator_observation_records": 735,
+        "validator_dispatch_records": 735,
+        "decision_counts": {
+          "USE_CANDIDATE": 349,
+          "KEEP_ORIGINAL": 335,
+          "UNCERTAIN": 5,
+          "PROTOCOL_OR_OPERATIONAL_FAILURE": 46
+        },
+        "uncertain_deliveries": 0,
+        "recovery_additional_model_calls": 0,
+        "recovery_additional_network_calls": 0,
+        "request_tree_file_count": 2940,
+        "request_tree_total_bytes": 4651774,
+        "request_tree_manifest_sha256": "d46b47754e2ba158ea099bfe556a84164e534610233426819d9114a455aea945",
+        "live_implementation_head": "e85600ffd91164440166ee33a20c3b84af50bfe6",
+        "aggregation_implementation_head": "752569d13d153ee6d16528f4b278a5a567e0b218"
+      },
+      "evidence_files": [
+        {
+          "logical_path": "research/configs/007-i-contextual-validator.json",
+          "sha256": "30b21bb77c2d9d26ecaa4a0a1de6326cacc24cc0c23c8766da72db117ab163ef",
+          "size": 4583,
+          "disposition": "data-free public projection"
+        },
+        {
+          "logical_path": "research/results/007-i-contextual-validator.json.gz",
+          "sha256": "7f11f0e4c22038f77b137e33adf1bf4145ab5412a9ffcb56da8fce12c86018ef",
+          "size": 8707,
+          "disposition": "data-free public projection"
+        },
+        {
+          "logical_path": "research/reports/007-i-contextual-validator.md",
+          "sha256": "317bfc9e9721819da73bcbc0365ec63c3f5aab7f884f96400709a6f0e0a59af2",
+          "size": 7765,
+          "disposition": "data-free public projection"
+        }
+      ],
+      "conclusion": "The frozen experiment is complete and its aggregation was recovered from persisted observations; this is not a product, linguistic, merge, release, or deployment claim.",
+      "pending_evidence": [
+        "human semantic labels where applicable",
+        "independent review of the aggregate and final report",
+        "no additional recovery evidence is pending"
+      ]
+    },
+    {
       "experiment_id": "levenshtein-lookup-diagnostic",
       "logical_root": "read-only diagnostic referenced by preserved research records",
       "kind": "diagnostic",

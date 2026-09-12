@@ -67,6 +67,7 @@ rule. The Levenshtein item is a single read-only diagnostic, not a benchmark.
 | `dassle-uv-audit` | exhaustive u/v audit and random-20 sample | complete mechanical audit |
 | `full-campaign8` | final eight-worker A100 campaign | local campaign complete; remote scoring pending |
 | `prijigrala-retry10` | one-target retry-limit-ten case | complete |
+| `007-i-contextual-validator` | frozen contextual validator over 007-h unique candidates | complete; aggregation recovered with zero additional calls |
 | `levenshtein-lookup-diagnostic` | one read-only lookup observation | not a benchmark |
 
 The registry is the record for every root and its nested artifacts; it does not
