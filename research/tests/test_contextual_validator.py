@@ -3,6 +3,8 @@
 from __future__ import annotations
 
 import copy
+import http.client
+import inspect
 import json
 import os
 import stat
@@ -55,6 +57,18 @@ class RaisingTransport(FakeTransport):
     ) -> tuple[int, dict[str, str], bytes]:
         self.calls.append((endpoint, body, headers, timeout))
         raise TimeoutError("synthetic timeout")
+
+
+class ExceptionTransport(FakeTransport):
+    def __init__(self, error: BaseException) -> None:
+        super().__init__()
+        self.error = error
+
+    def request(
+        self, endpoint: str, body: bytes, headers: dict[str, str], timeout: float
+    ) -> tuple[int, dict[str, str], bytes]:
+        self.calls.append((endpoint, body, headers, timeout))
+        raise self.error
 
 
 def candidate(
@@ -285,6 +299,83 @@ class ContextualValidatorTests(unittest.TestCase):
             self.assertEqual(uncertain["failure"], "INTERRUPTED_UNCERTAIN_DELIVERY_NO_RESAMPLE")
             self.assertEqual(uncertain["dispatch"], "UNKNOWN")
             self.assertEqual(len(fake.calls), 0)
+
+    def test_bounded_transport_failures_persist_attempted_operational_evidence(self) -> None:
+        errors = (
+            (OSError("synthetic socket error"), "OSError"),
+            (TimeoutError("synthetic timeout"), "TIMEOUT"),
+            (http.client.HTTPException("synthetic HTTP error"), "HTTPException"),
+            (protocol.ValidatorError("synthetic named validator error"), "ValidatorError"),
+            (ValueError("synthetic HTTP parsing error"), "ValueError"),
+        )
+        body = protocol.request_body("Sentence.", "old", "new")
+        with tempfile.TemporaryDirectory() as raw_root:
+            for index, (error, expected_failure) in enumerate(errors):
+                with self.subTest(error=type(error).__name__):
+                    transport = ExceptionTransport(error)
+                    observation = protocol.perform_call(
+                        Path(raw_root) / str(index),
+                        body,
+                        endpoint="https://synthetic.invalid",
+                        transport=transport,
+                    )
+                    self.assertTrue(observation["operational_failure"])
+                    self.assertEqual(observation["dispatch"], "ATTEMPTED")
+                    self.assertEqual(observation["failure"], expected_failure)
+                    self.assertEqual(
+                        json.loads(
+                            (Path(raw_root) / str(index) / "raw-response.json").read_text(
+                                encoding="utf-8"
+                            )
+                        )["dispatch"],
+                        "ATTEMPTED",
+                    )
+                    self.assertEqual(len(transport.calls), 1)
+
+    def test_unexpected_programmer_exception_propagates_without_completed_observation(self) -> None:
+        body = protocol.request_body("Sentence.", "old", "new")
+        with tempfile.TemporaryDirectory() as raw_root:
+            for error in (
+                TypeError("bug"),
+                AssertionError("bug"),
+                RuntimeError("bug"),
+                KeyError("bug"),
+            ):
+                with self.subTest(error=type(error).__name__):
+                    directory = Path(raw_root) / type(error).__name__
+                    transport = ExceptionTransport(error)
+                    with self.assertRaises(type(error)):
+                        protocol.perform_call(
+                            directory,
+                            body,
+                            endpoint="https://synthetic.invalid",
+                            transport=transport,
+                        )
+                    self.assertTrue((directory / "request.json").is_file())
+                    self.assertTrue((directory / "dispatch.json").is_file())
+                    self.assertFalse((directory / "raw-response.json").exists())
+                    self.assertFalse((directory / "observation.json").exists())
+
+    def test_dispatch_without_raw_resumes_as_uncertain_without_second_transport_call(self) -> None:
+        body = protocol.request_body("Sentence.", "old", "new")
+        with tempfile.TemporaryDirectory() as raw_root:
+            directory = Path(raw_root) / "candidate"
+            protocol.immutable_write(directory / "request.json", protocol.canonical_bytes(body))
+            protocol.immutable_json(directory / "dispatch.json", {"dispatch": "ATTEMPTED"})
+            transport = FakeTransport()
+            observation = protocol.perform_call(
+                directory,
+                body,
+                endpoint="https://synthetic.invalid",
+                transport=transport,
+            )
+            self.assertEqual(observation["failure"], "INTERRUPTED_UNCERTAIN_DELIVERY_NO_RESAMPLE")
+            self.assertEqual(observation["dispatch"], "UNKNOWN")
+            self.assertEqual(len(transport.calls), 0)
+
+    def test_live_protocol_has_no_broad_exception_catch(self) -> None:
+        source = inspect.getsource(protocol)
+        self.assertNotIn("except Exception", source)
 
     def test_persistence_is_immutable_and_never_resamples(self) -> None:
         fake = FakeTransport()

@@ -480,7 +480,13 @@ def perform_call(
                 raw_data.update(operational_failure=True, failure="HTTP_STATUS")
             elif len(payload) > max_response_bytes:
                 raw_data.update(operational_failure=True, failure="RESPONSE_BOUND")
-        except Exception as exc:
+        except (
+            OSError,
+            TimeoutError,
+            http.client.HTTPException,
+            ValidatorError,
+            ValueError,
+        ) as exc:
             raw_data.update(
                 operational_failure=True,
                 failure="TIMEOUT" if isinstance(exc, TimeoutError) else type(exc).__name__,
