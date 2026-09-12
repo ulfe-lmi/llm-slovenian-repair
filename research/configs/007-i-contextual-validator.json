@@ -40,7 +40,6 @@
     "protocol": "Responses non-streaming"
   },
   "experiment_id": "007-i-contextual-validator",
-  "implementation_head": "e85600ffd91164440166ee33a20c3b84af50bfe6",
   "historical_wire_keys": [
     "model",
     "stream",
@@ -49,6 +48,7 @@
     "include_reasoning",
     "reasoning"
   ],
+  "implementation_head": "e85600ffd91164440166ee33a20c3b84af50bfe6",
   "limits": {
     "attempts_per_candidate": 1,
     "resampling": false,
