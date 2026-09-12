@@ -61,8 +61,8 @@ jobs:
           printf 'transcript expected id: %s\n' "$expected_id"
           python3.12 oap/bin/check_transcript.py --repo-root . --revision HEAD --expected-id "$expected_id"
 
-      - name: Check whitespace
-        run: git diff --check 2832fa1e51bdf3641aabbd81feab8ddb64a876da...HEAD
+      - name: Check accepted-base whitespace
+        run: python3.12 oap/bin/check_whitespace.py --base 2832fa1e51bdf3641aabbd81feab8ddb64a876da --revision HEAD
 
   oap-report-history:
     name: OAP report history

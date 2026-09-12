@@ -412,7 +412,10 @@ def test_driver_environment_uses_owned_native_paths(monkeypatch: pytest.MonkeyPa
     driver = load_driver()
     with tempfile.TemporaryDirectory(prefix="llm-slovenian-driver-test-") as temp_dir:
         paths = driver.workspace_paths(Path(temp_dir))
+        paths.child_tmp.mkdir(mode=0o700)
         monkeypatch.setenv("PYTHONPATH", "synthetic-private-value")
+        monkeypatch.setenv("TMPDIR", "/tmp/unsafe-inherited-value")
+        monkeypatch.setenv("RUNNER_TEMP", "/runner-owned-temp")
         env = driver.build_environment(paths)
         assert env["UV_PROJECT_ENVIRONMENT"] == str(paths.project_environment)
         assert env["UV_CACHE_DIR"] == str(paths.cache)
@@ -421,6 +424,51 @@ def test_driver_environment_uses_owned_native_paths(monkeypatch: pytest.MonkeyPa
         assert "PYTHONPATH" not in env
         assert env["RUFF_CACHE_DIR"] == str(paths.ruff_cache)
         assert env["MYPY_CACHE_DIR"] == str(paths.mypy_cache)
+        assert env["TMPDIR"] == str(paths.child_tmp)
+        assert Path(env["TMPDIR"]).resolve().parent == paths.root.resolve()
+        assert env["TMPDIR"] != "/tmp/unsafe-inherited-value"
+        assert env["TMPDIR"] != "/runner-owned-temp"
+
+
+def test_github_runner_temp_runs_a_copied_research_fixture_with_owned_tmpdir(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    driver = load_driver()
+    with tempfile.TemporaryDirectory(prefix="llm-slovenian-runner-temp-") as temp_dir:
+        runner_temp = Path(temp_dir) / "runner-temp"
+        runner_temp.mkdir()
+        root = runner_temp / "driver-root"
+        root.mkdir()
+        paths = driver.workspace_paths(root)
+        paths.child_tmp.mkdir(mode=0o700)
+        test_repo = driver.prepare_test_workspace(ROOT, paths)
+        monkeypatch.delenv("TMPDIR", raising=False)
+        monkeypatch.setenv("RUNNER_TEMP", str(runner_temp))
+        env = driver.build_environment(paths)
+        records: list[dict[str, Any]] = []
+        driver.run_command(
+            driver.CommandSpec(
+                "copied research fixture",
+                (
+                    sys.executable,
+                    "-m",
+                    "pytest",
+                    "-p",
+                    "no:cacheprovider",
+                    "research/tests/test_strategic_replay_fidelity.py::StrategicReplayFidelity::test_english_preservation_has_zero_review_and_retry_calls",
+                    "-q",
+                ),
+                test_repo,
+            ),
+            env=env,
+            timeout=30,
+            records=records,
+            repository=ROOT,
+            temporary_root=root,
+        )
+        assert records[-1]["result"] == "PASSED"
+        assert Path(env["TMPDIR"]).resolve().is_relative_to(root.resolve())
+        assert Path(env["TMPDIR"]).resolve().is_dir()
 
 
 def test_driver_refuses_repository_temp_parent() -> None:
