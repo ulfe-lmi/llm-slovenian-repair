@@ -6,7 +6,7 @@ from collections.abc import Mapping
 from pathlib import Path
 from typing import Any
 
-from .historical_common import save
+from .historical_common import safe_component, save
 from .patching import apply_edits, mechanical
 from .review import Proposal
 from .validation import validator_body
@@ -68,9 +68,10 @@ def run_validator_records(
     """Run only bounded validator calls over caller-owned frozen proposals."""
 
     root = Path(output_root)
+    record_ids = [safe_component(record.get("id", number)) for number, record in enumerate(records, 1)]
     completed = 0
     validator_calls = 0
-    for number, record in enumerate(records, 1):
+    for _number, (record_id, record) in enumerate(zip(record_ids, records, strict=True), 1):
         original = _original(record)
         edits: list[tuple[int, int, str]] = []
         decisions: list[dict[str, Any]] = []
@@ -88,7 +89,7 @@ def run_validator_records(
                 model=model,
             )
             call = client.call(
-                root / "records" / str(record.get("id", number)) / "targets" / f"{candidate_number:02d}" / "validator",
+                root / "records" / record_id / "targets" / f"{candidate_number:02d}" / "validator",
                 body,
                 "validator",
             )
@@ -108,9 +109,9 @@ def run_validator_records(
             })
         corrected = apply_edits(original, edits)
         save(
-            root / "records" / (str(record.get("id", number)) + ".json"),
+            root / "records" / (record_id + ".json"),
             {
-                "id": record.get("id", str(number)),
+                "id": record_id,
                 "variant": "low-plus-validator",
                 "original": original,
                 "output": corrected,

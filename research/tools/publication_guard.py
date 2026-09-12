@@ -6,16 +6,15 @@ from __future__ import annotations
 import argparse
 import gzip
 import hashlib
-import io
 import json
 import os
 import re
 import stat
+import subprocess
 import sys
-from pathlib import Path
-from typing import Any, Iterable, Iterator
 import zipfile
-
+from collections.abc import Iterable, Iterator
+from pathlib import Path
 
 ARCHIVE_SUFFIXES = (".tar", ".tar.gz", ".tgz", ".zip", ".7z", ".sqlite", ".db")
 BINARY_SUFFIXES = (".bin", ".onnx", ".pt", ".pth", ".safetensors", ".npy")
@@ -121,7 +120,13 @@ def _validate_bytes(relative: str, data: bytes) -> list[str]:
         except (UnicodeDecodeError, json.JSONDecodeError) as exc:
             errors.append(f"invalid JSON: {relative}: {exc}")
         else:
-                allowed = frozenset({"replacement"}) if relative.casefold() == "fixtures/replay.json" else frozenset()
+                allowed = (
+                    frozenset({"replacement"})
+                    if relative.casefold() == "fixtures/replay.json"
+                    else frozenset({"request"})
+                    if relative.casefold().startswith("configs/")
+                    else frozenset()
+                )
                 errors.extend(f"raw JSON field: {relative}:{path}" for path in _json_keys(parsed, allowed=allowed))
     return errors
 
@@ -139,6 +144,74 @@ def scan_public(root: Path) -> list[str]:
             errors.append(f"unreadable artifact: {relative}: {type(exc).__name__}")
             continue
         errors.extend(_validate_bytes(relative, data))
+    return errors
+
+
+def _git_toplevel(path: Path) -> Path | None:
+    try:
+        result = subprocess.run(
+            ["git", "-C", str(path), "rev-parse", "--show-toplevel"],
+            capture_output=True,
+            check=True,
+            text=True,
+        )
+    except (OSError, subprocess.CalledProcessError):
+        return None
+    return Path(result.stdout.strip()).resolve()
+
+
+def scan_staged_index(repo_root: Path, *, public_prefix: str = "research") -> list[str]:
+    """Scan exactly staged Git-index paths and blob bytes.
+
+    This intentionally never walks the worktree.  Ignored environments,
+    including virtualenv symlink layouts, therefore cannot hide a staged leak
+    or turn an otherwise valid staged check into a false symlink failure.
+    """
+    repo_root = repo_root.resolve()
+    pathspec = public_prefix.rstrip("/") + "/"
+    try:
+        result = subprocess.run(
+            ["git", "-C", str(repo_root), "ls-files", "--stage", "-z", "--", pathspec],
+            capture_output=True,
+            check=True,
+        )
+    except (OSError, subprocess.CalledProcessError) as exc:
+        raise ValueError(f"staged-byte scan requires a Git worktree: {repo_root}") from exc
+    errors: list[str] = []
+    entries = [entry for entry in result.stdout.split(b"\0") if entry]
+    for entry in entries:
+        try:
+            metadata, raw_path = entry.split(b"\t", 1)
+            mode_text, _object_id, stage_text = metadata.decode("ascii").split()
+            relative = raw_path.decode("utf-8")
+        except (UnicodeDecodeError, ValueError) as exc:
+            errors.append(f"invalid staged index entry: {type(exc).__name__}")
+            continue
+        if stage_text != "0":
+            errors.append(f"unmerged staged entry refused: {relative}")
+            continue
+        if mode_text == "120000":
+            errors.append(f"symlink refused: {relative}")
+            continue
+        if mode_text not in {"100644", "100755"}:
+            errors.append(f"unsupported staged file mode {mode_text}: {relative}")
+            continue
+        if not relative.startswith(pathspec):
+            errors.append(f"staged path escaped public prefix: {relative}")
+            continue
+        public_relative = relative[len(pathspec) :]
+        try:
+            blob = subprocess.run(
+                ["git", "-C", str(repo_root), "cat-file", "blob", ":" + relative],
+                capture_output=True,
+                check=True,
+            ).stdout
+        except (OSError, subprocess.CalledProcessError) as exc:
+            errors.append(f"staged blob unavailable: {relative}: {type(exc).__name__}")
+            continue
+        if any(part.casefold() in PRIVATE_COMPONENTS for part in Path(public_relative).parts):
+            errors.append(f"private path: {relative}")
+        errors.extend(f"staged {relative}: {error}" for error in _validate_bytes(public_relative, blob))
     return errors
 
 
@@ -189,8 +262,8 @@ def _private_fragments(path: Path) -> Iterable[bytes]:
                     if info.filename.casefold().endswith(".json"):
                         try:
                             yield from _structured_strings(json.loads(data))
-                        except (UnicodeDecodeError, json.JSONDecodeError):
-                            raise ValueError(f"private structured source is not valid JSON: {info.filename}")
+                        except (UnicodeDecodeError, json.JSONDecodeError) as exc:
+                            raise ValueError(f"private structured source is not valid JSON: {info.filename}") from exc
                     else:
                         yield data
         return
@@ -304,11 +377,15 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--root", type=Path, default=Path("research"))
     parser.add_argument("--private-root", type=Path)
     parser.add_argument("--export-json", nargs=2, metavar=("RELATIVE_PATH", "JSON_FILE"))
-    parser.add_argument("--staged-tree", type=Path, help="scan a materialized Git index/tree instead of the worktree")
+    parser.add_argument("--staged-tree", type=Path, help="scan Git-index paths/blob bytes (or an explicit materialized tree fixture)")
     args = parser.parse_args(argv)
     root = args.staged_tree or args.root
     try:
-        errors = scan_public(root)
+        staged_root = args.staged_tree
+        if staged_root is not None and _git_toplevel(staged_root) is not None:
+            errors = scan_staged_index(staged_root)
+        else:
+            errors = scan_public(root)
         if args.private_root:
             errors.extend(scan_private_overlap(root, args.private_root))
         if args.export_json:

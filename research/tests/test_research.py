@@ -2,17 +2,25 @@ from __future__ import annotations
 
 import json
 import os
-from pathlib import Path
 import tempfile
 import unittest
+from pathlib import Path
 
 from research.curated.corpus import Evidence
-from research.curated.detector import detect, tokenize
 from research.curated.english_preserve import classify
 from research.curated.gating import check
+from research.curated.historical_detector import detect as hyphen_detect
+from research.curated.historical_detector import tokenize as hyphen_tokenize
 from research.curated.patching import apply_edits, mechanical, restore_initial_case
 from research.curated.pipeline import replay
-from research.curated.review import Proposal, ReviewerError, expression_retry_body, parse_expression, parse_proposal, reviewer_body
+from research.curated.review import (
+    Proposal,
+    ReviewerError,
+    expression_retry_body,
+    parse_expression,
+    parse_proposal,
+    reviewer_body,
+)
 from research.tools.publication_guard import export_json, safe_destination, scan_public
 from research.tools.replay import replay_fixture
 
@@ -45,9 +53,9 @@ class ResearchBoundaryTests(unittest.TestCase):
         text = "Vspešni foo-bar\n```\nVspešni\n```"
         corpus = MemoryCorpus({"foo": 20, "bar": 20})
         intervals = __import__("research.curated.protected", fromlist=["protected_intervals"]).protected_intervals(text)
-        tokens = tokenize(text, intervals)
+        tokens = hyphen_tokenize(text, intervals)
         self.assertEqual([token.text for token in tokens], ["Vspešni", "foo", "bar"])
-        candidates = detect(text, corpus, intervals, mode="local-context", maximum=None)
+        candidates = hyphen_detect(text, corpus, intervals, mode="local-context", maximum=None)
         self.assertEqual([candidate.text for candidate in candidates], ["Vspešni"])
 
     def test_english_policy_only_suppresses_original_unavailable_target(self) -> None:
@@ -113,6 +121,12 @@ class PublicationBoundaryTests(unittest.TestCase):
             (root / "tables/summary.csv").write_text("experiment_id,status\nsynthetic,COMPLETE\n", encoding="utf-8")
             (root / "safe.json").write_text('{"metric_count": 1}\n', encoding="utf-8")
             self.assertEqual(scan_public(root), [])
+            (root / "configs").mkdir()
+            (root / "configs/request.json").write_text('{"request": {"mode": "synthetic", "content": ["template"]}}\n', encoding="utf-8")
+            self.assertEqual(scan_public(root), [])
+            (root / "configs/request.json").write_text('{"request": {"input": "private sentence"}}\n', encoding="utf-8")
+            self.assertTrue(any("raw JSON field" in error for error in scan_public(root)))
+            (root / "configs/request.json").unlink()
             (root / "bad.json").write_text('{"input": "private sentence"}\n', encoding="utf-8")
             self.assertTrue(any("raw JSON field" in error for error in scan_public(root)))
             (root / "bad.json").unlink()

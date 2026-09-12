@@ -26,6 +26,7 @@ python3 -B -m research.tools.replay \
   --manifest research/registry/file-census.json.gz \
   --root-map 'experiments/=/caller/private/experiments' \
   --root-map 'recovery-executions/=/caller/private/recovery-executions' \
+  --representative-roots \
   --limit 100
 ```
 
@@ -34,6 +35,7 @@ verifier; it is not an entry ledger. Exact mappings also cover relocated native
 roots by using an exact root mapping before a prefix mapping. Replay verifies
 disposition, size, SHA-256, and regular-file/non-symlink identity, and performs
 zero network/model calls.
+`--representative-roots` additionally checks one deterministic eligible entry for each supplied logical mapping and emits only mapping keys, counts, statuses, and hashes; an unmapped or empty private root is reported as unavailable.
 The historical live commands remain opt-in documentation and require separately
 authorized data, endpoint, model, credentials, and resource budgets.
 

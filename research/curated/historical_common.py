@@ -5,14 +5,28 @@ from __future__ import annotations
 import hashlib
 import json
 import os
-from pathlib import Path
+import re
 import tempfile
 import time
+from pathlib import Path
 from typing import Any
 
 
 def digest(data: bytes) -> str:
     return hashlib.sha256(data).hexdigest()
+
+
+_SAFE_COMPONENT = re.compile(r"[A-Za-z0-9_.-]+")
+
+
+def safe_component(value: object, *, label: str = "record identity") -> str:
+    """Validate a caller-owned path component before any output is created."""
+    if value is None or isinstance(value, bool) or not isinstance(value, (str, int)):
+        raise ValueError(f"{label} is not a safe path component")
+    text = str(value)
+    if not text or text in {".", ".."} or not _SAFE_COMPONENT.fullmatch(text):
+        raise ValueError(f"{label} is not a safe path component")
+    return text
 
 
 def sha(path: str | Path) -> str:
@@ -77,4 +91,8 @@ def verify(config: dict[str, Any]) -> None:
 
 
 def result_path(root: str | Path, benchmark: str, index: int, method: str) -> Path:
-    return Path(root) / "results" / "A100" / benchmark / f"{index:06d}" / (method + ".json")
+    if type(index) is not int or index < 0:
+        raise ValueError("result index must be a non-negative integer")
+    benchmark_name = safe_component(benchmark, label="benchmark identity")
+    method_name = safe_component(method, label="method identity")
+    return Path(root) / "results" / "A100" / benchmark_name / f"{index:06d}" / (method_name + ".json")

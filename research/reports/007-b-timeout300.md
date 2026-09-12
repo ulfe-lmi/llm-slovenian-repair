@@ -11,7 +11,9 @@ Data-free projection of one preserved historical record. This is an archival res
 
 ## Configuration projection
 
-- Variant-specific wire/content boundary: Controlled model calls and the invalid case/trace association remain separate from the replacement attempt. See [configuration](../configs/007-b-timeout300.json) fields historical_wire_keys, historical_content, and model_call_policy; no later variant's content is inferred.
+- Historical execution: the controlled held-out run contacted Qwen for 10 reviewer attempts, all 10 with valid structured decisions. The separate timeout-300 workload recorded 8 attempts and 2 completed responses, but its case/trace association is invalid.
+- Reproduction boundary: no fresh model request; caller-supplied data-free inputs only.
+- Model-call policy: `REPRODUCTION_DEFAULT_ZERO_CALLS; HISTORICAL_HELDOUT_QWEN_CALLS_RECORDED; WORKLOAD_INVALID_TRACE_ASSOCIATION`.
 - Publicly omitted: source sentences, filled prompts, gold strings, replacements, response bodies, reasoning traces, credentials, and private endpoint/profile values.
 - Detector/gate/retry limits: preserved from the source record; `UNKNOWN` is retained where the source did not expose a value.
 - Resource identities: data, index, English attestation, source, and environment are referenced by identity only; no private path is a runtime dependency.
@@ -22,12 +24,29 @@ The complete data-free numeric projection is linked from [study-evidence](../res
 
 | Metric | Value |
 | --- | ---: |
+| `heldout_reviewer_attempts` | `10` |
+| `heldout_valid_reviewer_decisions` | `10` |
+| `heldout_proposed_replacements` | `8` |
+| `heldout_accepted_edits` | `0` |
+| `heldout_exact_gold_repairs` | `0` |
+| `heldout_missed_known_errors` | `7` |
+| `heldout_protected_changes` | `0` |
+| `heldout_controlled_reviewer_calls` | `10` |
+| `heldout_controlled_reviewer_seconds` | `546.032867` |
+| `heldout_median_reviewer_seconds` | `21.44` |
+| `heldout_p95_reviewer_seconds` | `217.03` |
+| `workload_attempts` | `8` |
+| `workload_completed_responses` | `2` |
+| `workload_status` | `INVALID_CASE_TRACE_ASSOCIATION` |
+| `workload_proxy_contact_evidence` | `NOT_VALIDLY_ATTRIBUTABLE` |
+| `reproduction_model_calls` | `0` |
+| `reproduction_network_calls` | `0` |
 
 ## Child runs and phases
 
 | Child ID | Status | Source hash | Result hash |
 | --- | --- | --- | --- |
-| `007-b-timeout300/heldout` | `RECORDED` | `53580ef330f3f95154871d6bd813cfc335677a8eda4ec7e6937627cf19030d92` | `390eaa71ee64f0d70572af0829184e924e8cfed1bae0d2d98a6f6b742846d4bb` |
+| `007-b-timeout300/heldout` | `CONTROLLED_HELDOUT_QWEN_CONTACT_RECORDED` | `53580ef330f3f95154871d6bd813cfc335677a8eda4ec7e6937627cf19030d92` | `390eaa71ee64f0d70572af0829184e924e8cfed1bae0d2d98a6f6b742846d4bb` |
 
 ## Interpretation and limitations
 

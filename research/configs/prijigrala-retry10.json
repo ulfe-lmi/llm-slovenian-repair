@@ -2,15 +2,23 @@
   "authorized_change": "retry limit ten for one target",
   "experiment_id": "prijigrala-retry10",
   "generic_prompt": "You are a narrow Slovenian expression reviewer. Preserve meaning and register. Review only the marked target; do not rewrite the sentence. Return exactly {\"keep\":boolean,\"replacement\":string|null,\"needs_wider_edit\":boolean}. Sentence: {sentence}\nTarget: {target} Answer only the required JSON object.",
-  "historical_wire_keys": ["model", "stream", "store", "input", "include_reasoning", "reasoning"],
-  "historical_content": ["one caller-selected sentence and target on first call", "same raw first rejected replacement on every context-free retry"],
-  "model_call_policy": "ONE_TARGET; MAXIMUM_TEN_CORRECTIVE_RETRIES; STOP_ON_GATE_OR_FAILURE",
+  "historical_content": [
+    "one sentence/target",
+    "same raw first rejected replacement"
+  ],
   "historical_status": "COMPLETE",
+  "historical_wire_keys": [
+    "model",
+    "stream",
+    "store",
+    "input",
+    "include_reasoning",
+    "reasoning"
+  ],
   "inference_fields": {
     "content_sent": [
-      "completed source sentence",
-      "selected target",
-      "variant-specific retry fields when applicable"
+      "one sentence/target",
+      "same raw first rejected replacement"
     ],
     "omitted": [
       "conversation_history",
@@ -42,6 +50,7 @@
     "workers": "preserved per record"
   },
   "logical_root": "experiments/prijigrala-retry10-20260911.3E6HOg",
+  "model_call_policy": "ONE_TARGET; MAXIMUM_TEN_CORRECTIVE_RETRIES",
   "question": "What happened in the one-target retry-limit-ten contextual case?",
   "reproduction": {
     "credential_reference": "RESEARCH_CREDENTIAL_REF",
@@ -49,6 +58,37 @@
     "default_network_calls": 0,
     "entrypoint": "python3 -B -m research.tools.reproduce",
     "requires_explicit_live_authorization": true
+  },
+  "request": {
+    "content": [
+      "one sentence/target",
+      "same raw first rejected replacement"
+    ],
+    "mode": "ONE_TARGET; MAXIMUM_TEN_CORRECTIVE_RETRIES",
+    "prompt": "You are a narrow Slovenian expression reviewer. Preserve meaning and register. Review only the marked target; do not rewrite the sentence. Return exactly {\"keep\":boolean,\"replacement\":string|null,\"needs_wider_edit\":boolean}. Sentence: {sentence}\nTarget: {target} Answer only the required JSON object.",
+    "retry": {
+      "content": [
+        "one sentence/target",
+        "same raw first rejected replacement"
+      ],
+      "prompt": "Ta slovenski izraz je napačno zapisan ali oblikovan:\n\n{expression}\n\nPredlagaj najverjetnejšo pravilno slovensko obliko istega izraza.\nOdgovor lahko vsebuje od 1 do 4 besede.\nVrni samo popravljeni izraz.",
+      "wire_keys": [
+        "model",
+        "stream",
+        "store",
+        "input",
+        "include_reasoning",
+        "reasoning"
+      ]
+    },
+    "wire_keys": [
+      "model",
+      "stream",
+      "store",
+      "input",
+      "include_reasoning",
+      "reasoning"
+    ]
   },
   "resource_identity": {
     "data": "private preserved identity; rows excluded",
@@ -61,6 +101,12 @@
   "retry_prompt": "Ta slovenski izraz je napačno zapisan ali oblikovan:\n\n{expression}\n\nPredlagaj najverjetnejšo pravilno slovensko obliko istega izraza.\nOdgovor lahko vsebuje od 1 do 4 besede.\nVrni samo popravljeni izraz.",
   "schema_version": 2,
   "source_modules": [
+    "research/curated/historical_detector.py",
+    "research/curated/historical_pipeline.py",
+    "research/curated/historical_methods.py",
+    "research/curated/historical_transport.py",
+    "research/curated/english_preserve.py",
+    "research/curated/historical_retry10.py",
     "research/curated/retry.py"
   ]
 }

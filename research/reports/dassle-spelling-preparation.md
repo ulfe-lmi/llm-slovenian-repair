@@ -11,7 +11,9 @@ Data-free projection of one preserved historical record. This is an archival res
 
 ## Configuration projection
 
-- Variant-specific wire/content boundary: The DASSLE runner sends caller-owned sentences/targets and records worker incidents without publishing payloads. See [configuration](../configs/dassle-spelling-preparation.json) fields historical_wire_keys, historical_content, and model_call_policy; no later variant's content is inferred.
+- Historical wire keys: `model, stream, store, input, include_reasoning, reasoning`.
+- Variant-specific content: completed source sentence, selected target.
+- Model-call policy: `CALLER-OWNED-HISTORICAL-DRIVER`.
 - Publicly omitted: source sentences, filled prompts, gold strings, replacements, response bodies, reasoning traces, credentials, and private endpoint/profile values.
 - Detector/gate/retry limits: preserved from the source record; `UNKNOWN` is retained where the source did not expose a value.
 - Resource identities: data, index, English attestation, source, and environment are referenced by identity only; no private path is a runtime dependency.

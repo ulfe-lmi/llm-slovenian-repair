@@ -23,6 +23,14 @@ u/v analyzer is a literal data-free execution. The current saved replay matches
 all 16,375 M2 and M3 records with zero model/network calls. This is archive
 reproduction evidence only, not a new experiment or a scientific conclusion.
 
+The interrupted setup incident is recorded precisely: one stopped diagnostic
+shell briefly wrote possible streams in `/tmp`, named
+`oap_{state,gov,hist,tx}.{out,err}`.
+Strategy moved the four extant files to the persistent private
+`round-007-e-tmp/interrupted-tmp-diagnostics` record—one 1,143-byte state
+output and three empty files—and verified all eight possible names absent.
+There was no scientific data, model output, or dataset content in them.
+
 ## How the research question changed
 
 The owner prioritized falsifying the repair concept before completing production

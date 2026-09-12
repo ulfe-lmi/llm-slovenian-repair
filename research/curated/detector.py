@@ -1,9 +1,9 @@
-"""Faithful frozen local-context detector with the experimental hyphen view.
+"""Faithful raw local-context detector from the original concept source.
 
-This is a curated copy of the detector used by the uncapped and
-English-preservation runs. It only selects suspicions; it does not decide or
-apply corrections. The ASCII-hyphen lookup view is length preserving so all
-reported offsets remain offsets into the original text.
+This detector intentionally searches the original text directly. Later
+hyphen-space studies use :mod:`historical_detector` instead; keeping the two
+views separate prevents a later normalization from changing an earlier study.
+It only selects suspicions and never decides or applies corrections.
 """
 
 from __future__ import annotations
@@ -39,13 +39,12 @@ class Candidate:
 
 
 def tokenize(text: str, intervals: list[Interval]) -> list[Token]:
-    """Tokenize original coordinates through the frozen hyphen lookup view."""
+    """Tokenize the raw source text in original coordinates."""
     tokens: list[Token] = []
-    lookup_view = text.replace("-", " ")
-    for match in WORD_RE.finditer(lookup_view):
+    for match in WORD_RE.finditer(text):
         if is_protected(match.start(), match.end(), intervals):
             continue
-        value = text[match.start() : match.end()]
+        value = match.group(0)
         tokens.append(Token(match.start(), match.end(), value, value.casefold()))
     return tokens
 

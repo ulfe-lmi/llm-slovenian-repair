@@ -9,18 +9,36 @@
       "id": "007-a-original-attempt",
       "status": "PARTIAL",
       "source_evidence": "oap/reports/007-a-isolated-end-to-end-concept-verification.md",
-      "source_evidence_sha256": "report-governed; see immutable OAP report",
+      "source_evidence_sha256": "ac84a66c1d37a80601e0910fd32f4ea547281a787c896f50c8f1630bc188cc19",
       "replacement_relation": "preserved separately; not merged into 007-b replacement or later studies",
-      "available_mapping": "concept-verification/** and private workload evidence named by the report",
+      "available_mapping": [
+        "concept-verification/config.py",
+        "concept-verification/corpus.py",
+        "concept-verification/detector.py",
+        "concept-verification/protected.py",
+        "concept-verification/qwen_client.py",
+        "concept-verification/repair.py",
+        "private evidence identity named by the immutable 007-a report"
+      ],
       "result_claim": "no accepted linguistic conclusion; instrumentation/capture limitations remain explicit"
     },
     {
       "id": "007-b-original-attempt",
       "status": "PARTIAL",
       "source_evidence": "oap/reports/007-b-complete-reviewer-and-codex-evaluation.md",
-      "source_evidence_sha256": "report-governed; see immutable OAP report",
+      "source_evidence_sha256": "9f973123e1a89116e17dd408c5a6da29989d6e27680c44a742a95401f2f95a66",
       "replacement_relation": "preserved separately from 007-b-replacement and 007-b-timeout300",
-      "available_mapping": "concept-verification/eval/** and private original execution evidence named by the report",
+      "available_mapping": [
+        "concept-verification/eval/collect.py",
+        "concept-verification/eval/common.py",
+        "concept-verification/eval/config.json",
+        "concept-verification/eval/frozen-experiment.json",
+        "concept-verification/eval/perturb.py",
+        "concept-verification/eval/review_sheet.py",
+        "concept-verification/eval/run_eval.py",
+        "concept-verification/eval/score.py",
+        "private original execution evidence named by the immutable 007-b report"
+      ],
       "result_claim": "original instrumentation failure is not retroactively repaired by replacement executions"
     }
   ],
@@ -43,10 +61,14 @@
         {
           "id": "007-b-replacement/heldout",
           "kind": "recovery-stage",
-          "status": "RECORDED",
+          "status": "CONTROLLED_HELDOUT_QWEN_CONTACT_RECORDED",
           "source_hash": "310c07d5b73c8e26ddcce444e4407009c3e30db406c336115c3b2c5dfcf4cf60",
           "result_hash": null,
-          "metrics": {},
+          "metrics": {
+            "controlled_reviewer_calls": 10,
+            "cases": 32,
+            "valid_structured_decisions": 4
+          },
           "public_report": "research/reports/007-b-replacement.md#heldout",
           "public_configuration": "research/configs/007-b-replacement.json"
         }
@@ -56,7 +78,27 @@
         "model_calls_during_curation": 0,
         "dataset_contents_published": false
       },
-      "metrics": {},
+      "metrics": {
+        "historical_execution": "CONTROLLED_HELDOUT_QWEN_CONTACT_RECORDED",
+        "heldout_cases": 32,
+        "heldout_selected_candidates": 10,
+        "heldout_completed_reviewer_attempts": 10,
+        "heldout_reviewer_errors": 6,
+        "heldout_valid_structured_decisions": 4,
+        "heldout_keep_decisions": 2,
+        "heldout_replace_decisions": 2,
+        "heldout_proposed_replacements": 2,
+        "heldout_accepted_edits": 0,
+        "heldout_exact_gold_repairs": 0,
+        "heldout_missed_known_errors": 7,
+        "heldout_protected_changes": 0,
+        "heldout_controlled_reviewer_calls": 10,
+        "historical_model_calls": 10,
+        "historical_network_calls": 10,
+        "reproduction_model_calls": 0,
+        "reproduction_network_calls": 0,
+        "workload_status": "NO_VALID_PROXY_CONTACT_EVIDENCE"
+      },
       "evidence_files": [
         {
           "logical_path": "recovery-executions/007-b-human-replacement-20260909.MnH1Qb/AUTHORIZATION.md",
@@ -106,7 +148,28 @@
         "human semantic labels where applicable",
         "official remote scoring where access was blocked",
         "independent reproduction when private data or service access is unavailable"
-      ]
+      ],
+      "historical_execution_evidence": {
+        "historical_execution": "CONTROLLED_HELDOUT_QWEN_CONTACT_RECORDED",
+        "heldout_cases": 32,
+        "heldout_selected_candidates": 10,
+        "heldout_completed_reviewer_attempts": 10,
+        "heldout_reviewer_errors": 6,
+        "heldout_valid_structured_decisions": 4,
+        "heldout_keep_decisions": 2,
+        "heldout_replace_decisions": 2,
+        "heldout_proposed_replacements": 2,
+        "heldout_accepted_edits": 0,
+        "heldout_exact_gold_repairs": 0,
+        "heldout_missed_known_errors": 7,
+        "heldout_protected_changes": 0,
+        "heldout_controlled_reviewer_calls": 10,
+        "historical_model_calls": 10,
+        "historical_network_calls": 10,
+        "reproduction_model_calls": 0,
+        "reproduction_network_calls": 0,
+        "workload_status": "NO_VALID_PROXY_CONTACT_EVIDENCE"
+      }
     },
     {
       "id": "007-b-timeout300",
@@ -126,10 +189,15 @@
         {
           "id": "007-b-timeout300/heldout",
           "kind": "recovery-stage",
-          "status": "RECORDED",
+          "status": "CONTROLLED_HELDOUT_QWEN_CONTACT_RECORDED",
           "source_hash": "53580ef330f3f95154871d6bd813cfc335677a8eda4ec7e6937627cf19030d92",
           "result_hash": "390eaa71ee64f0d70572af0829184e924e8cfed1bae0d2d98a6f6b742846d4bb",
-          "metrics": {},
+          "metrics": {
+            "controlled_reviewer_calls": 10,
+            "reviewer_attempts": 10,
+            "workload_attempts": 8,
+            "workload_completed_responses": 2
+          },
           "public_report": "research/reports/007-b-timeout300.md#heldout",
           "public_configuration": "research/configs/007-b-timeout300.json"
         }
@@ -139,7 +207,28 @@
         "model_calls_during_curation": 0,
         "dataset_contents_published": false
       },
-      "metrics": {},
+      "metrics": {
+        "historical_execution": "CONTROLLED_HELDOUT_QWEN_CONTACT_RECORDED",
+        "heldout_reviewer_attempts": 10,
+        "heldout_valid_reviewer_decisions": 10,
+        "heldout_proposed_replacements": 8,
+        "heldout_accepted_edits": 0,
+        "heldout_exact_gold_repairs": 0,
+        "heldout_missed_known_errors": 7,
+        "heldout_protected_changes": 0,
+        "heldout_controlled_reviewer_calls": 10,
+        "historical_model_calls": 10,
+        "historical_network_calls": 10,
+        "heldout_controlled_reviewer_seconds": 546.032867,
+        "heldout_median_reviewer_seconds": 21.44,
+        "heldout_p95_reviewer_seconds": 217.03,
+        "workload_attempts": 8,
+        "workload_completed_responses": 2,
+        "workload_status": "INVALID_CASE_TRACE_ASSOCIATION",
+        "workload_proxy_contact_evidence": "NOT_VALIDLY_ATTRIBUTABLE",
+        "reproduction_model_calls": 0,
+        "reproduction_network_calls": 0
+      },
       "evidence_files": [
         {
           "logical_path": "recovery-executions/007-b-human-timeout300-20260909.NWGrtX/AUTHORIZATION.md",
@@ -261,7 +350,29 @@
         "human semantic labels where applicable",
         "official remote scoring where access was blocked",
         "independent reproduction when private data or service access is unavailable"
-      ]
+      ],
+      "historical_execution_evidence": {
+        "historical_execution": "CONTROLLED_HELDOUT_QWEN_CONTACT_RECORDED",
+        "heldout_reviewer_attempts": 10,
+        "heldout_valid_reviewer_decisions": 10,
+        "heldout_proposed_replacements": 8,
+        "heldout_accepted_edits": 0,
+        "heldout_exact_gold_repairs": 0,
+        "heldout_missed_known_errors": 7,
+        "heldout_protected_changes": 0,
+        "heldout_controlled_reviewer_calls": 10,
+        "historical_model_calls": 10,
+        "historical_network_calls": 10,
+        "heldout_controlled_reviewer_seconds": 546.032867,
+        "heldout_median_reviewer_seconds": 21.44,
+        "heldout_p95_reviewer_seconds": 217.03,
+        "workload_attempts": 8,
+        "workload_completed_responses": 2,
+        "workload_status": "INVALID_CASE_TRACE_ASSOCIATION",
+        "workload_proxy_contact_evidence": "NOT_VALIDLY_ATTRIBUTABLE",
+        "reproduction_model_calls": 0,
+        "reproduction_network_calls": 0
+      }
     },
     {
       "id": "nonthinking-mechanical",
@@ -469,7 +580,22 @@
         "model_calls_during_curation": 0,
         "dataset_contents_published": false
       },
-      "metrics": {},
+      "metrics": {
+        "requests": 1,
+        "http_status": 400,
+        "http_error": "http-error",
+        "completed_cases": 0,
+        "request_latency_seconds": 0.1319528709864244,
+        "full_pipeline_seconds": 2.078772333014058,
+        "preparation_seconds": 7.409712520980975,
+        "preparation_plus_execution_seconds": 9.492349873005878,
+        "status": "STOPPED",
+        "linguistic_inference": "NONE_FROM_PROTOCOL_FAILURE",
+        "model_calls": 1,
+        "network_calls": 1,
+        "historical_model_calls": 1,
+        "historical_network_calls": 1
+      },
       "evidence_files": [
         {
           "logical_path": "experiments/high-thinking-mechanical-20260909.50kTrN/DESIGN.md",
@@ -519,7 +645,23 @@
         "human semantic labels where applicable",
         "official remote scoring where access was blocked",
         "independent reproduction when private data or service access is unavailable"
-      ]
+      ],
+      "historical_execution_evidence": {
+        "requests": 1,
+        "http_status": 400,
+        "http_error": "http-error",
+        "completed_cases": 0,
+        "request_latency_seconds": 0.1319528709864244,
+        "full_pipeline_seconds": 2.078772333014058,
+        "preparation_seconds": 7.409712520980975,
+        "preparation_plus_execution_seconds": 9.492349873005878,
+        "status": "STOPPED",
+        "linguistic_inference": "NONE_FROM_PROTOCOL_FAILURE",
+        "model_calls": 1,
+        "network_calls": 1,
+        "historical_model_calls": 1,
+        "historical_network_calls": 1
+      }
     },
     {
       "id": "xhigh-thinking-mechanical",
@@ -833,7 +975,7 @@
       "root": "experiments/low-word-only-retry-20260909.0Hk0P9",
       "kind": "variant",
       "variation": "low-thinking word-only corrective retry with continuation",
-      "status": "STOPPED_WITH_WHITESPACE_CONTINUATION",
+      "status": "COMPLETED_WITH_WHITESPACE_ONLY_CONTINUATION",
       "question": "How did strict word-only retry parsing behave at the first stopped execution?",
       "experiment_id": "low-word-only-retry",
       "logical_root": "experiments/low-word-only-retry-20260909.0Hk0P9",
@@ -848,7 +990,29 @@
         "model_calls_during_curation": 0,
         "dataset_contents_published": false
       },
-      "metrics": {},
+      "metrics": {
+        "cases": 32,
+        "initial_status": "STOPPED_ON_OUTER_WHITESPACE",
+        "final_status": "COMPLETED_WITH_WHITESPACE_ONLY_CONTINUATION",
+        "first_pass_calls_reused": 10,
+        "first_pass_calls_executed": 0,
+        "total_word_only_calls": 2,
+        "new_continuation_calls": 1,
+        "first_response_resampled": false,
+        "applied_edits": 4,
+        "applied_retry_edits": 0,
+        "exact_gold_repairs": 3,
+        "unchanged_controls": 25,
+        "protected_differences": 0,
+        "outside_edit_differences": 0,
+        "total_word_only_http_seconds": 20.005273504997604,
+        "median_word_only_http_seconds": 10.002636752498802,
+        "max_word_only_http_seconds": 14.27844430800178,
+        "model_calls": 2,
+        "network_calls": 2,
+        "historical_model_calls": 2,
+        "historical_network_calls": 2
+      },
       "evidence_files": [
         {
           "logical_path": "experiments/low-word-only-retry-20260909.0Hk0P9/DESIGN.md",
@@ -916,7 +1080,30 @@
         "human semantic labels where applicable",
         "official remote scoring where access was blocked",
         "independent reproduction when private data or service access is unavailable"
-      ]
+      ],
+      "historical_execution_evidence": {
+        "cases": 32,
+        "initial_status": "STOPPED_ON_OUTER_WHITESPACE",
+        "final_status": "COMPLETED_WITH_WHITESPACE_ONLY_CONTINUATION",
+        "first_pass_calls_reused": 10,
+        "first_pass_calls_executed": 0,
+        "total_word_only_calls": 2,
+        "new_continuation_calls": 1,
+        "first_response_resampled": false,
+        "applied_edits": 4,
+        "applied_retry_edits": 0,
+        "exact_gold_repairs": 3,
+        "unchanged_controls": 25,
+        "protected_differences": 0,
+        "outside_edit_differences": 0,
+        "total_word_only_http_seconds": 20.005273504997604,
+        "median_word_only_http_seconds": 10.002636752498802,
+        "max_word_only_http_seconds": 14.27844430800178,
+        "model_calls": 2,
+        "network_calls": 2,
+        "historical_model_calls": 2,
+        "historical_network_calls": 2
+      }
     },
     {
       "id": "full-hyphen-space-low",

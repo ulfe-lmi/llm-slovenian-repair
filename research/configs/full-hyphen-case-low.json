@@ -2,15 +2,27 @@
   "authorized_change": "one-way initial-case restoration",
   "experiment_id": "full-hyphen-case-low",
   "generic_prompt": "You are a narrow Slovenian expression reviewer. Preserve meaning and register. Review only the marked target; do not rewrite the sentence. Return exactly {\"keep\":boolean,\"replacement\":string|null,\"needs_wider_edit\":boolean}. Sentence: {sentence}\nTarget: {target} Answer only the required JSON object.",
-  "historical_wire_keys": ["model", "stream", "store", "input", "include_reasoning", "reasoning"],
-  "historical_content": ["completed source sentence", "hyphen-space detector target", "one-way initial-case adjustment", "raw rejected word on word-only retry"],
-  "model_call_policy": "NO_ENGLISH_POLICY; WORD_ONLY_RETRY; ONE_WAY_INITIAL_CASE",
+  "historical_content": [
+    "sentence",
+    "hyphen-space target",
+    "one-way initial-case adjustment",
+    "raw rejected word"
+  ],
   "historical_status": "COMPLETED",
+  "historical_wire_keys": [
+    "model",
+    "stream",
+    "store",
+    "input",
+    "include_reasoning",
+    "reasoning"
+  ],
   "inference_fields": {
     "content_sent": [
-      "completed source sentence",
-      "selected target",
-      "variant-specific retry fields when applicable"
+      "sentence",
+      "hyphen-space target",
+      "one-way initial-case adjustment",
+      "raw rejected word"
     ],
     "omitted": [
       "conversation_history",
@@ -42,6 +54,7 @@
     "workers": "preserved per record"
   },
   "logical_root": "experiments/full-hyphen-case-low-20260909.IFYupt",
+  "model_call_policy": "NO_ENGLISH_POLICY; WORD_ONLY_RETRY; ONE_WAY_INITIAL_CASE",
   "question": "What was measured with the first one-way initial-case preservation rule?",
   "reproduction": {
     "credential_reference": "RESEARCH_CREDENTIAL_REF",
@@ -49,6 +62,41 @@
     "default_network_calls": 0,
     "entrypoint": "python3 -B -m research.tools.reproduce",
     "requires_explicit_live_authorization": true
+  },
+  "request": {
+    "content": [
+      "sentence",
+      "hyphen-space target",
+      "one-way initial-case adjustment",
+      "raw rejected word"
+    ],
+    "mode": "NO_ENGLISH_POLICY; WORD_ONLY_RETRY; ONE_WAY_INITIAL_CASE",
+    "prompt": "You are a narrow Slovenian expression reviewer. Preserve meaning and register. Review only the marked target; do not rewrite the sentence. Return exactly {\"keep\":boolean,\"replacement\":string|null,\"needs_wider_edit\":boolean}. Sentence: {sentence}\nTarget: {target} Answer only the required JSON object.",
+    "retry": {
+      "content": [
+        "sentence",
+        "hyphen-space target",
+        "one-way initial-case adjustment",
+        "raw rejected word"
+      ],
+      "prompt": "Ta beseda je napačno zapisana: {word}\n\nPredlagaj pravilno slovensko obliko. Vrni samo popravljeno besedo.",
+      "wire_keys": [
+        "model",
+        "stream",
+        "store",
+        "input",
+        "include_reasoning",
+        "reasoning"
+      ]
+    },
+    "wire_keys": [
+      "model",
+      "stream",
+      "store",
+      "input",
+      "include_reasoning",
+      "reasoning"
+    ]
   },
   "resource_identity": {
     "data": "private preserved identity; rows excluded",
@@ -58,13 +106,14 @@
     "source": "research/registry/source-manifest.json"
   },
   "result_destination": "research/results/study-evidence.json.gz",
-  "retry_prompt": "Ta slovenski izraz je napačno zapisan ali oblikovan:\n\n{expression}\n\nPredlagaj najverjetnejšo pravilno slovensko obliko istega izraza.\nOdgovor lahko vsebuje od 1 do 4 besede.\nVrni samo popravljeni izraz.",
+  "retry_prompt": "Ta beseda je napačno zapisana: {word}\n\nPredlagaj pravilno slovensko obliko. Vrni samo popravljeno besedo.",
   "schema_version": 2,
   "source_modules": [
     "research/curated/historical_detector.py",
     "research/curated/historical_pipeline.py",
     "research/curated/historical_methods.py",
     "research/curated/historical_transport.py",
-    "research/curated/historical_detector.py"
+    "research/curated/retry.py",
+    "research/curated/historical_variants.py"
   ]
 }

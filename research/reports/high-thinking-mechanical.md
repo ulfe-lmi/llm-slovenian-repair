@@ -11,7 +11,9 @@ Data-free projection of one preserved historical record. This is an archival res
 
 ## Configuration projection
 
-- Variant-specific wire/content boundary: The stopped high-reasoning run is preserved as its own direct-review boundary without later retry or English policy. See [configuration](../configs/high-thinking-mechanical.json) fields historical_wire_keys, historical_content, and model_call_policy; no later variant's content is inferred.
+- Historical wire keys: `model, stream, store, input, include_reasoning, reasoning`.
+- Variant-specific content: completed source sentence, selected target.
+- Model-call policy: `CALLER-OWNED-HISTORICAL-DRIVER`.
 - Publicly omitted: source sentences, filled prompts, gold strings, replacements, response bodies, reasoning traces, credentials, and private endpoint/profile values.
 - Detector/gate/retry limits: preserved from the source record; `UNKNOWN` is retained where the source did not expose a value.
 - Resource identities: data, index, English attestation, source, and environment are referenced by identity only; no private path is a runtime dependency.
@@ -22,6 +24,18 @@ The complete data-free numeric projection is linked from [study-evidence](../res
 
 | Metric | Value |
 | --- | ---: |
+| `requests` | `1` |
+| `http_status` | `400` |
+| `http_error` | `http-error` |
+| `completed_cases` | `0` |
+| `request_latency_seconds` | `0.1319528709864244` |
+| `full_pipeline_seconds` | `2.078772333014058` |
+| `preparation_seconds` | `7.409712520980975` |
+| `preparation_plus_execution_seconds` | `9.492349873005878` |
+| `status` | `STOPPED` |
+| `linguistic_inference` | `NONE_FROM_PROTOCOL_FAILURE` |
+| `model_calls` | `1` |
+| `network_calls` | `1` |
 
 ## Child runs and phases
 

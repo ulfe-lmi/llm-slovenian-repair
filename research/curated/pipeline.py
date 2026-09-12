@@ -7,9 +7,9 @@ from collections.abc import Callable, Mapping
 from typing import Any
 
 from .corpus import Corpus
-from .detector import detect, tokenize
 from .english_preserve import classify
 from .gating import check
+from .historical_detector import detect, tokenize
 from .patching import apply_edits, restore_initial_case
 from .protected import protected_intervals
 from .review import Proposal, parse_expression, parse_proposal

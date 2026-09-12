@@ -108,6 +108,26 @@ class DistinctDispatchTests(unittest.TestCase):
         self.assertIn("Original sentence", transport.calls[1]["input"][0]["content"][0]["text"])
         self.assertFalse((self.inputs / "english.json").exists())
 
+    def test_retry_only_injected_frozen_stage_skips_first_reviewer(self) -> None:
+        for variant_id in ("low-unigram-retry", "low-word-only-retry"):
+            with self.subTest(variant=variant_id):
+                self.args.output_root = str(self.root / (variant_id + "-saved"))
+                (self.inputs / "records.json").write_text(json.dumps([{
+                    "id": "saved-case",
+                    "input": "alpha",
+                    "first_stage": [{
+                        "candidate": {"start": 0, "end": 5, "text": "alpha", "evidence": {"unigram": {"state": "UNAVAILABLE"}}},
+                        "first_proposal": {"keep": False, "replacement": "gamma", "needs_wider_edit": False},
+                        "first_gate": {"accepted": False, "reason": "replacement-unigram-uncertain"},
+                    }],
+                }]))
+                transport = PromptTransport()
+                result = self.run_variant(variant_id, transport)
+                self.assertEqual(result["first_stage_calls_executed"], 0)
+                self.assertEqual(result["first_stage_calls_reused"], 1)
+                self.assertEqual(result["network_calls"], 1)
+                self.assertEqual(len(transport.calls), 1)
+
     def test_word_only_retry_has_its_own_parser_and_no_context(self) -> None:
         transport = PromptTransport()
         self.run_variant("low-word-only-retry", transport)

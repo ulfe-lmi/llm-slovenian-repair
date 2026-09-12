@@ -116,6 +116,26 @@ class StrategicPublicationReview(unittest.TestCase):
         result = self.cli("--root", str(folder), "--staged-tree", str(staged / "research"))
         self.assertNotEqual(result.returncode, 0)
 
+    def test_index_scan_ignores_worktree_venv_but_catches_staged_leak(self) -> None:
+        repo = self.root / "index-fixture-repo"
+        repo.mkdir()
+        subprocess.run(["git", "init", "--quiet", str(repo)], check=True, capture_output=True)
+        (repo / ".gitignore").write_text(".venv/\n", encoding="utf-8")
+        (repo / "research").mkdir()
+        (repo / "research" / "safe.md").write_text("safe numeric note\n", encoding="utf-8")
+        subprocess.run(["git", "-C", str(repo), "add", ".gitignore", "research/safe.md"], check=True, capture_output=True)
+        external = self.root / "external-venv"
+        external.mkdir()
+        (external / "lib64").mkdir()
+        (repo / ".venv").symlink_to(external, target_is_directory=True)
+        (repo / "research" / "leak.json").write_text(json.dumps({"dataset_row": "SYNTHETIC_CANARY"}), encoding="utf-8")
+        subprocess.run(["git", "-C", str(repo), "add", "research/leak.json"], check=True, capture_output=True)
+
+        result = self.cli("--staged-tree", str(repo))
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn("raw JSON field", result.stderr)
+        self.assertNotIn("lib64", result.stderr)
+
 
 if __name__ == "__main__":
     unittest.main()

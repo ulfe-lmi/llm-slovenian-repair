@@ -8,7 +8,7 @@ from pathlib import Path
 from typing import Any
 
 from .english_preserve import classify
-from .historical_common import save
+from .historical_common import safe_component, save
 from .historical_methods import targeted
 from .historical_pipeline import first_body, retry_body
 from .historical_transport import Client
@@ -26,13 +26,14 @@ def prepare(baseline: list[dict[str, Any]], pipeline: Any, english_lookup: Any) 
     for record in baseline:
         case = record["case"]
         prepared = pipeline.detect(case["text"])
-        selected[case["id"]] = prepared["candidates"]
+        case_id = safe_component(case["id"], label="case identity")
+        selected[case_id] = prepared["candidates"]
         eligible += prepared["eligible_words"]
         previous = [item["candidate"] for item in record.get("decisions", [])]
-        if selected[case["id"]] != previous:
-            delta[case["id"]] = {"before": previous, "after": selected[case["id"]]}
-        for candidate in selected[case["id"]]:
-            key = f"{case['id']}-{candidate['start']}"
+        if selected[case_id] != previous:
+            delta[case_id] = {"before": previous, "after": selected[case_id]}
+        for candidate in selected[case_id]:
+            key = f"{case_id}-{candidate['start']}"
             bodies[key] = first_body(case["text"], candidate)
             evidence[key] = classify(candidate, english_lookup)
     return {"mode": "fresh-full-low-expression-retry-english-preserve", "cases": [record["case"] for record in baseline],
@@ -59,9 +60,10 @@ def preserve_initial_case(original: str, proposal: dict[str, Any] | Proposal) ->
 
 def process_case(case: dict[str, Any], candidates: list[dict[str, Any]], state: dict[str, Any], pipeline: Any, client: Client, output_root: str | Path) -> dict[str, Any]:
     root = Path(output_root)
+    case_id = safe_component(case["id"], label="case identity")
     edits, no_retry_edits, decisions, english_records, calls = [], [], [], [], []
     for candidate in candidates:
-        key = f"{case['id']}-{candidate['start']}"
+        key = f"{case_id}-{candidate['start']}"
         english = state["english_evidence"][key]
         if english["original_target"] != candidate["text"]:
             raise ValueError("frozen English evidence target mismatch")
@@ -133,6 +135,7 @@ def run_scheduled_trials(
     if retry_limit < 0:
         raise ValueError("retry limit must be non-negative")
     root = Path(output_root)
+    record_ids = [safe_component(record.get("id", number)) for number, record in enumerate(records, 1)]
     schedule = {
         "ten-run-initial-case-low": {"name": "symmetric-initial-case", "retry_kind": "word-only"},
         "ten-run-expression-retry-low": {"name": "expression-retry", "retry_kind": "expression"},
@@ -154,7 +157,8 @@ def run_scheduled_trials(
         trial_root.mkdir(parents=True, exist_ok=True)
         stopped = False
         completed_cases = 0
-        for number, record in enumerate(records, 1):
+        trial_start_calls = client.network_calls
+        for _number, (record_id, record) in enumerate(zip(record_ids, records, strict=True), 1):
             text = record.get("input", record.get("original"))
             if not isinstance(text, str):
                 raise ValueError("each ten-run record must contain input")
@@ -170,14 +174,14 @@ def run_scheduled_trials(
                 text,
                 pipeline,
                 client,
-                trial_root / "records" / str(record.get("id", number)),
+                trial_root / "records" / record_id,
                 retry_limit=retry_limit,
                 model=model,
                 retry_builder=retry_builder,
                 retry_kind=retry_kind,
             )
-            save(trial_root / "records" / (str(record.get("id", number)) + ".json"), {
-                "id": record.get("id", str(number)),
+            save(trial_root / "records" / (record_id + ".json"), {
+                "id": record_id,
                 "variant": variant_id,
                 "trial": trial,
                 **result,
@@ -193,7 +197,7 @@ def run_scheduled_trials(
             "exit_code": 2 if stopped else 0,
             "completed_case_instances": completed_cases,
             "scheduled_case_instances": len(records),
-            "model_calls": client.network_calls,
+            "model_calls": client.network_calls - trial_start_calls,
             "request_identity": f"trials/{trial:02d}",
         })
     summary_status = "COMPLETED" if all(item["status"] == "COMPLETE" for item in trial_rows) else "COMPLETED_WITH_STOPPED_TRIALS"

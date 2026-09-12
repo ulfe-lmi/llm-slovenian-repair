@@ -5,7 +5,7 @@ from __future__ import annotations
 from pathlib import Path
 from typing import Any
 
-from .historical_common import save
+from .historical_common import safe_component, save
 from .historical_pipeline import first_body, retry_body
 from .patching import apply_edits
 
@@ -70,20 +70,56 @@ def run_record(
     max_retries: int = 10,
     model: str = "qwen3.8-27b",
 ) -> dict[str, Any]:
+    record_id = safe_component(record.get("id", "case"))
     original = record.get("input", record.get("original"))
     if not isinstance(original, str):
         raise ValueError("retry10 record lacks input")
+    prepared = pipeline.detect(original)
+    candidates = prepared.get("candidates")
+    policies = prepared.get("english")
+    if not isinstance(candidates, list) or not isinstance(policies, list) or len(candidates) != len(policies):
+        raise ValueError("retry10 requires the latest pipeline's English policy")
     candidate = record.get("candidate")
     if not isinstance(candidate, dict):
-        prepared = pipeline.detect(original)
-        candidates = prepared["candidates"]
         if len(candidates) != 1:
             raise ValueError("retry10 requires one caller-selected target")
         candidate = candidates[0]
-    steps, status, edits = sequence(original, candidate, pipeline, client, Path(output_root) / "records" / str(record.get("id", "case")), max_retries=max_retries, model=model)
+    else:
+        matches = [item for item in candidates if item.get("start") == candidate.get("start") and item.get("end") == candidate.get("end") and item.get("text") == candidate.get("text")]
+        if len(matches) != 1:
+            raise ValueError("retry10 candidate is not one detected caller-selected target")
+        candidate = matches[0]
+    policy = next(
+        (
+            policy_value
+            for candidate_value, policy_value in zip(candidates, policies, strict=True)
+            if candidate_value == candidate
+        ),
+        None,
+    )
+    if not isinstance(policy, dict):
+        raise ValueError("retry10 English policy does not match the selected target")
+    record_root = Path(output_root) / "records" / record_id
+    if policy.get("review_suppressed"):
+        result = {
+            "id": record_id,
+            "variant": "prijigrala-retry10",
+            "status": "ENGLISH_ATTESTED_PRESERVED",
+            "input": original,
+            "output": original,
+            "steps": [],
+            "applied_edits": [],
+            "model_calls": client.network_calls,
+            "corrective_calls": 0,
+            "fixed_retry_anchor": True,
+            "english_policy": policy,
+        }
+        save(Path(output_root) / "records" / (record_id + ".json"), result)
+        return result
+    steps, status, edits = sequence(original, candidate, pipeline, client, record_root, max_retries=max_retries, model=model)
     output = apply_edits(original, edits)
     result = {
-        "id": record.get("id", "case"),
+        "id": record_id,
         "variant": "prijigrala-retry10",
         "status": status,
         "input": original,
@@ -93,6 +129,7 @@ def run_record(
         "model_calls": client.network_calls,
         "corrective_calls": max(0, len(steps) - 1),
         "fixed_retry_anchor": True,
+        "english_policy": policy,
     }
-    save(Path(output_root) / "records" / (str(record.get("id", "case")) + ".json"), result)
+    save(Path(output_root) / "records" / (record_id + ".json"), result)
     return result

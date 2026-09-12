@@ -5,24 +5,22 @@ from __future__ import annotations
 
 import argparse
 import json
-import re
+import math
 from pathlib import Path
 
 from research.curated.historical import plan, validate_live_authorization
+from research.curated.historical_common import safe_component
 
 
 def _component(value: object) -> str:
-    text = str(value)
-    if not text or not re.fullmatch(r"[A-Za-z0-9_.-]+", text):
-        raise ValueError("record identity is not a safe path component")
-    return text
+    return safe_component(value)
 
 
 def request_directory(output_root: Path, record_id: object, target_start: int, *, stage: str, trial: int = 0) -> Path:
     """Return a stable request identity for one case/target/stage/trial."""
     if type(target_start) is not int or target_start < 0:
         raise ValueError("target start must be a non-negative integer")
-    if trial < 0:
+    if type(trial) is not int or trial < 0:
         raise ValueError("trial must be non-negative")
     return output_root / "requests" / _component(record_id) / f"target-{target_start:08d}" / _component(stage) / f"trial-{trial:04d}"
 
@@ -49,7 +47,11 @@ def _english_values(input_root: Path) -> dict[str, float]:
     value = json.loads(english_path.read_text(encoding="utf-8"))
     if not isinstance(value, dict):
         raise SystemExit("input-root/english.json must be an object of numeric frequencies")
-    result = {str(key).casefold(): float(number) for key, number in value.items() if isinstance(number, (int, float))}
+    result = {}
+    for key, number in value.items():
+        if not isinstance(key, str) or type(number) not in (int, float) or not math.isfinite(float(number)):
+            raise SystemExit("input-root/english.json must contain finite numeric frequencies")
+        result[key.casefold()] = float(number)
     if not result:
         raise SystemExit("input-root/english.json contains no numeric evidence")
     return result
@@ -71,15 +73,39 @@ def _client(args: argparse.Namespace, *, reasoning: str):
 def _early_pipeline(index: Path, variant: object):
     from research.curated.historical_variants import build_historical_pipeline
 
+    hyphen_variants = {
+        "full-hyphen-space-low",
+        "full-hyphen-case-low",
+        "ten-run-initial-case-low",
+        "ten-run-expression-retry-low",
+    }
     case_rule = "one-way" if variant.id == "full-hyphen-case-low" else "symmetric" if variant.id in {"ten-run-initial-case-low", "ten-run-expression-retry-low"} else "none"
-    return build_historical_pipeline(index, maximum=variant.maximum_targets, case_rule=case_rule)
+    return build_historical_pipeline(
+        index,
+        maximum=variant.maximum_targets,
+        case_rule=case_rule,
+        detector_view="hyphen-space" if variant.id in hyphen_variants else "raw",
+    )
 
 
 def _latest_pipeline(index: Path, variant: object, input_root: Path):
     from research.curated.historical_pipeline import Pipeline
 
     english_values = _english_values(input_root)
-    return Pipeline(index, english_lookup=lambda word: english_values[word.casefold()], maximum=variant.maximum_targets)
+
+    def lookup(word: str) -> float:
+        key = word.casefold()
+        if key not in english_values:
+            raise SystemExit("caller-owned English evidence is missing for an evaluated target")
+        return english_values[key]
+
+    return Pipeline(index, english_lookup=lookup, maximum=variant.maximum_targets)
+
+
+def _validate_record_ids(records: list[dict[str, object]]) -> None:
+    """Reject unsafe IDs before creating any caller-owned output."""
+    for number, record in enumerate(records, 1):
+        _component(record.get("id", number))
 
 
 def _run_targeted_records(args: argparse.Namespace, variant: object, records: list[dict[str, object]], input_root: Path, index: Path, output_root: Path) -> dict[str, object]:
@@ -91,6 +117,8 @@ def _run_targeted_records(args: argparse.Namespace, variant: object, records: li
         word_only_retry_body,
     )
 
+    if args.workers != 1:
+        raise SystemExit("targeted historical variants are single-worker; pass --workers 1")
     # These variants predate the later English-preservation study.  They use a
     # separate source-family pipeline, so absence of english.json is intentional.
     pipeline = _early_pipeline(index, variant)
@@ -120,30 +148,102 @@ def _run_targeted_records(args: argparse.Namespace, variant: object, records: li
         retry_kind = "word-only-retry"
     completed = 0
     try:
-        for worker in range(args.workers):
-            assigned = records[worker::args.workers]
-            for number, record in enumerate(assigned, 1):
-                record_id = record.get("id", str(number))
-                text = record.get("input")
-                if not isinstance(text, str):
-                    raise SystemExit("each saved record must contain a string input")
-                for trial in range(trials):
-                    trial_root = output_root / "trials" / f"{trial:02d}" if trials > 1 else output_root
-                    result = targeted(
-                        text,
-                        pipeline,
-                        client,
-                        trial_root / "records" / _component(record_id),
-                        retry_limit=variant.corrective_retries if retry_limit is None else retry_limit,
-                        model=args.model,
-                        retry_builder=retry_builder,
-                        retry_kind=retry_kind,
-                    )
-                    save(trial_root / "records" / (_component(record_id) + ".json"), {"id": record_id, "variant": variant.id, "trial": trial, "worker": worker, **result})
-                completed += 1
+        for number, record in enumerate(records, 1):
+            record_id = _component(record.get("id", number))
+            text = record.get("input")
+            if not isinstance(text, str):
+                raise SystemExit("each saved record must contain a string input")
+            for trial in range(trials):
+                trial_root = output_root / "trials" / f"{trial:02d}" if trials > 1 else output_root
+                result = targeted(
+                    text,
+                    pipeline,
+                    client,
+                    trial_root / "records" / record_id,
+                    retry_limit=variant.corrective_retries if retry_limit is None else retry_limit,
+                    model=args.model,
+                    retry_builder=retry_builder,
+                    retry_kind=retry_kind,
+                )
+                save(trial_root / "records" / (record_id + ".json"), {"id": record_id, "variant": variant.id, "trial": trial, "worker": 0, **result})
+            completed += 1
     finally:
         pipeline.close()
     return {"executed": True, "records": completed, "trials": trials, "workers": args.workers, "model_calls": client.network_calls, "network_calls": client.network_calls, "output_root": "caller-supplied"}
+
+
+def _run_saved_first_stage_records(
+    args: argparse.Namespace,
+    variant: object,
+    records: list[dict[str, object]],
+    index: Path,
+    output_root: Path,
+) -> dict[str, object]:
+    """Run retry-only studies from caller-owned frozen first-stage decisions."""
+    from research.curated.historical_methods import saved_first_stage_retry
+    from research.curated.historical_common import save
+    from research.curated.retry import contextual_retry_body, proposal_replacement, word_only_retry_body
+
+    if args.workers != 1:
+        raise SystemExit("saved-first-stage retry variants are single-worker; pass --workers 1")
+    if variant.id not in {"low-unigram-retry", "low-word-only-retry"}:
+        raise SystemExit("saved-first-stage retry is only valid for the two retry-only studies")
+    pipeline = _early_pipeline(index, variant)
+    client = _client(args, reasoning=variant.reasoning)
+    if variant.id == "low-unigram-retry":
+        def retry_builder(text, candidate, proposal, gate):
+            return contextual_retry_body(
+                {"original": text},
+                {"candidate": dict(candidate), "proposal": proposal.__dict__, "first_gate": dict(gate)},
+                model=args.model,
+            )
+
+        retry_kind = "reviewer"
+    else:
+        def retry_builder(_text, _candidate, proposal, _gate):
+            return word_only_retry_body(proposal_replacement(proposal), model=args.model)
+
+        retry_kind = "word-only-retry"
+    completed = 0
+    reused = 0
+    try:
+        for number, record in enumerate(records, 1):
+            record_id = _component(record.get("id", number))
+            text = record.get("input", record.get("original"))
+            if not isinstance(text, str):
+                raise SystemExit("each saved record must contain a string input")
+            frozen = next(
+                (record.get(name) for name in ("first_stage", "first_stage_decisions", "frozen_decisions", "decisions") if isinstance(record.get(name), list)),
+                None,
+            )
+            if frozen is None:
+                raise SystemExit("retry-only live reproduction requires caller-owned frozen first-stage decisions")
+            result = saved_first_stage_retry(
+                text,
+                pipeline,
+                client,
+                output_root / "records" / record_id,
+                frozen,
+                retry_builder=retry_builder,
+                retry_kind=retry_kind,
+                retry_limit=1 if args.retry_limit is None else args.retry_limit,
+                model=args.model,
+            )
+            save(output_root / "records" / (record_id + ".json"), {"id": record_id, "variant": variant.id, **result})
+            reused += result["first_stage_calls_reused"]
+            completed += 1
+    finally:
+        pipeline.close()
+    return {
+        "executed": True,
+        "records": completed,
+        "workers": 1,
+        "first_stage_calls_reused": reused,
+        "first_stage_calls_executed": 0,
+        "model_calls": client.network_calls,
+        "network_calls": client.network_calls,
+        "output_root": "caller-supplied",
+    }
 
 
 def _run_validator(args: argparse.Namespace, variant: object, records: list[dict[str, object]], input_root: Path, index: Path, output_root: Path) -> dict[str, object]:
@@ -158,15 +258,16 @@ def _run_validator(args: argparse.Namespace, variant: object, records: list[dict
 def _run_campaign(args: argparse.Namespace, variant: object, records: list[dict[str, object]], input_root: Path, index: Path, output_root: Path) -> dict[str, object]:
     from research.curated.historical_campaign import run_injected
 
-    rows = [
-        {
-            "benchmark": str(record.get("benchmark", variant.id)),
-            "id": record.get("id", str(i)),
-            "index": int(record.get("index", i)),
-            "input": record["input"],
-        }
-        for i, record in enumerate(records, 1)
-    ]
+    rows = []
+    for i, record in enumerate(records, 1):
+        benchmark = safe_component(record.get("benchmark", variant.id), label="benchmark identity")
+        record_id = _component(record.get("id", i))
+        index_value = record.get("index", i)
+        if type(index_value) is not int or index_value < 1:
+            raise SystemExit("campaign record index must be a positive integer")
+        if not isinstance(record.get("input"), str):
+            raise SystemExit("campaign record lacks a string input")
+        rows.append({"benchmark": benchmark, "id": record_id, "index": index_value, "input": record["input"]})
     retry_limit = variant.corrective_retries if getattr(args, "retry_limit", None) is None else args.retry_limit
     if retry_limit < 0:
         raise SystemExit("retry-limit must be non-negative")
@@ -193,41 +294,57 @@ def execute_authorized(args: argparse.Namespace, variant: object) -> dict[str, o
     input_root, index, output_root, records = _load_inputs(args)
     if getattr(args, "retry_limit", None) is not None and args.retry_limit < 0:
         raise SystemExit("retry-limit must be non-negative")
+    _validate_record_ids(records)
     output_root.mkdir(parents=True, exist_ok=True)
     if variant.id in {"007-b-replacement", "007-b-timeout300"}:
         raise SystemExit("the preserved 007-b recovery is an explicit failed/invalid historical attempt, not a valid fresh workload")
     if variant.id == "dassle-uv-audit":
         from research.curated.historical_dassle import run_audit_records
 
+        if args.workers != 1:
+            raise SystemExit("DASSLE audit is a single-process mechanical driver; pass --workers 1")
         result = run_audit_records(records)
         from research.curated.historical_common import save
 
         save(output_root / "AUDIT.json", result)
         return {"executed": True, "records": len(records), "workers": args.workers, "model_calls": 0, "network_calls": 0, "output_root": "caller-supplied", **result}
+    if variant.id == "levenshtein-lookup-diagnostic":
+        from research.curated.historical_common import save
+
+        if args.workers != 1:
+            raise SystemExit("the unavailable lookup diagnostic is single-process; pass --workers 1")
+        result = {
+            "status": "UNAVAILABLE_INLINE_LEVENSHTEIN_SOURCE",
+            "records": len(records),
+            "new_model_calls": 0,
+            "network_calls": 0,
+            "source_identity": "no standalone source hash was preserved",
+        }
+        save(output_root / "DIAGNOSTIC.json", result)
+        return {"executed": True, "workers": args.workers, "model_calls": 0, "output_root": "caller-supplied", **result}
     if variant.id in {"nonthinking-mechanical", "low-thinking-mechanical", "high-thinking-mechanical", "xhigh-thinking-mechanical"}:
         if args.workers != 1:
             raise SystemExit("mechanical reproduction is single-worker; pass --workers 1")
-        from research.curated.corpus import Corpus
         from research.curated.historical_common import save
-        from research.curated.historical_detector import detect
         from research.curated.historical_pipeline import first_body
         from research.curated.historical_transport import Client
         from research.curated.patching import apply_edits, mechanical
-        from research.curated.protected import protected_intervals
         from research.curated.review import Proposal
 
         client = Client(endpoint=args.endpoint, credential_env=args.credential_env, timeout=args.timeout_seconds, allow_live=True, reasoning_effort=variant.reasoning, model=args.model)
-        corpus = Corpus(index)
+        pipeline = _early_pipeline(index, variant)
         completed = 0
         try:
             for number, record in enumerate(records[: args.max_cases], 1):
-                text = record["input"]
-                candidates = [candidate.as_dict() for candidate in detect(text, corpus, protected_intervals(text), mode="local-context", threshold=3, maximum=variant.maximum_targets)]
-                edits = []
-                calls = []
+                text = record.get("input")
+                if not isinstance(text, str):
+                    raise SystemExit("each saved record must contain a string input")
+                record_id = _component(record.get("id", number))
+                candidates = pipeline.detect(text)["candidates"]
+                edits, calls = [], []
                 for candidate in candidates:
                     observation = client.call(
-                        request_directory(output_root, record.get("id", number), int(candidate["start"]), stage="first"),
+                        request_directory(output_root, record_id, int(candidate["start"]), stage="first"),
                         first_body(text, candidate, model=args.model, reasoning_effort=variant.reasoning),
                         "reviewer",
                     )
@@ -240,14 +357,20 @@ def execute_authorized(args: argparse.Namespace, variant: object) -> dict[str, o
                     if gate["applied"]:
                         edits.append((candidate["start"], candidate["end"], local.replacement))
                 corrected = apply_edits(text, edits)
-                save(output_root / "records" / f"{record.get('id', number)}.json", {"id": record.get("id", str(number)), "method": "nonthinking-mechanical", "output": corrected, "corrected": corrected, "candidate_count": len(candidates), "calls": len(calls), "network_calls": client.network_calls})
+                save(output_root / "records" / f"{record_id}.json", {"id": record_id, "variant": variant.id, "method": variant.id, "output": corrected, "corrected": corrected, "candidate_count": len(candidates), "calls": len(calls), "network_calls": client.network_calls})
                 completed += 1
         finally:
-            corpus.close()
+            pipeline.close()
         return {"executed": True, "records": completed, "model_calls": client.network_calls, "network_calls": client.network_calls, "output_root": "caller-supplied"}
 
     if variant.id == "low-plus-validator":
         return _run_validator(args, variant, records, input_root, index, output_root)
+    if variant.id in {"low-unigram-retry", "low-word-only-retry"} and any(
+        isinstance(record.get(name), list)
+        for record in records
+        for name in ("first_stage", "first_stage_decisions", "frozen_decisions", "decisions")
+    ):
+        return _run_saved_first_stage_records(args, variant, records, index, output_root)
     if variant.id in {"ten-run-initial-case-low", "ten-run-expression-retry-low", "ten-run-english-preserve-low"}:
         from research.curated.historical_ten_run import run_scheduled_trials
 
@@ -278,7 +401,7 @@ def execute_authorized(args: argparse.Namespace, variant: object) -> dict[str, o
 
         if args.workers != 1:
             raise SystemExit("retry10 is a single-target sequential driver; pass --workers 1")
-        pipeline = _early_pipeline(index, variant)
+        pipeline = _latest_pipeline(index, variant, input_root)
         client = _client(args, reasoning=variant.reasoning)
         try:
             if len(records) != 1:

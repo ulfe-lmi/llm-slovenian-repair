@@ -42,18 +42,36 @@ ORIGINAL_ATTEMPTS: tuple[dict[str, Any], ...] = (
         "id": "007-a-original-attempt",
         "status": "PARTIAL",
         "source_evidence": "oap/reports/007-a-isolated-end-to-end-concept-verification.md",
-        "source_evidence_sha256": "report-governed; see immutable OAP report",
+        "source_evidence_sha256": "ac84a66c1d37a80601e0910fd32f4ea547281a787c896f50c8f1630bc188cc19",
         "replacement_relation": "preserved separately; not merged into 007-b replacement or later studies",
-        "available_mapping": "concept-verification/** and private workload evidence named by the report",
+        "available_mapping": [
+            "concept-verification/config.py",
+            "concept-verification/corpus.py",
+            "concept-verification/detector.py",
+            "concept-verification/protected.py",
+            "concept-verification/qwen_client.py",
+            "concept-verification/repair.py",
+            "private evidence identity named by the immutable 007-a report",
+        ],
         "result_claim": "no accepted linguistic conclusion; instrumentation/capture limitations remain explicit",
     },
     {
         "id": "007-b-original-attempt",
         "status": "PARTIAL",
         "source_evidence": "oap/reports/007-b-complete-reviewer-and-codex-evaluation.md",
-        "source_evidence_sha256": "report-governed; see immutable OAP report",
+        "source_evidence_sha256": "9f973123e1a89116e17dd408c5a6da29989d6e27680c44a742a95401f2f95a66",
         "replacement_relation": "preserved separately from 007-b-replacement and 007-b-timeout300",
-        "available_mapping": "concept-verification/eval/** and private original execution evidence named by the report",
+        "available_mapping": [
+            "concept-verification/eval/collect.py",
+            "concept-verification/eval/common.py",
+            "concept-verification/eval/config.json",
+            "concept-verification/eval/frozen-experiment.json",
+            "concept-verification/eval/perturb.py",
+            "concept-verification/eval/review_sheet.py",
+            "concept-verification/eval/run_eval.py",
+            "concept-verification/eval/score.py",
+            "private original execution evidence named by the immutable 007-b report",
+        ],
         "result_claim": "original instrumentation failure is not retroactively repaired by replacement executions",
     },
 )
@@ -80,6 +98,10 @@ SOURCE_MAP: tuple[tuple[str, str], ...] = (
     ("experiments/ten-run-english-preserve-low-20260909.AQnnRH/expression_retry.py", "research/curated/retry.py"),
     ("experiments/ten-run-english-preserve-low-20260909.AQnnRH/hyphen_detector.py", "research/curated/historical_detector.py"),
     ("experiments/ten-run-english-preserve-low-20260909.AQnnRH/run_pipeline.py", "research/curated/historical_ten_run.py"),
+    ("experiments/full-hyphen-space-low-20260909.12wKze/hyphen_detector.py", "research/curated/historical_detector.py"),
+    ("experiments/full-hyphen-space-low-20260909.12wKze/run_pipeline.py", "research/curated/historical_variants.py"),
+    ("experiments/full-hyphen-case-low-20260909.IFYupt/hyphen_detector.py", "research/curated/historical_detector.py"),
+    ("experiments/full-hyphen-case-low-20260909.IFYupt/run_pipeline.py", "research/curated/historical_variants.py"),
     ("experiments/low-word-only-retry-20260909.0Hk0P9/retry.py", "research/curated/retry.py"),
     ("experiments/low-word-only-retry-20260909.0Hk0P9/continue_whitespace.py", "research/curated/historical_word_continuation.py"),
     ("experiments/low-unigram-retry-20260909.Wb0TI7/retry.py", "research/curated/retry.py"),
@@ -122,6 +144,10 @@ FUNCTION_COVERAGE: dict[str, dict[str, list[str]]] = {
     "experiments/ten-run-english-preserve-low-20260909.AQnnRH/expression_retry.py": {"copied": ["INSTRUCTION", "body_for", "parse_reply"], "unavailable": []},
     "experiments/ten-run-english-preserve-low-20260909.AQnnRH/hyphen_detector.py": {"copied": ["Token", "Candidate", "tokenize", "detect"], "unavailable": []},
     "experiments/ten-run-english-preserve-low-20260909.AQnnRH/run_pipeline.py": {"copied": ["PipelineStop", "prepare", "preserve_initial_case", "process_case", "run"], "unavailable": []},
+    "experiments/full-hyphen-space-low-20260909.12wKze/hyphen_detector.py": {"copied": ["Token", "Candidate", "tokenize", "detect"], "unavailable": []},
+    "experiments/full-hyphen-space-low-20260909.12wKze/run_pipeline.py": {"copied": ["prepare", "process_case", "word-only retry dispatch", "hyphen-space detector selection"], "unavailable": []},
+    "experiments/full-hyphen-case-low-20260909.IFYupt/hyphen_detector.py": {"copied": ["Token", "Candidate", "tokenize", "detect"], "unavailable": []},
+    "experiments/full-hyphen-case-low-20260909.IFYupt/run_pipeline.py": {"copied": ["prepare", "process_case", "one-way case adjustment", "word-only retry dispatch", "hyphen-space detector selection"], "unavailable": []},
     "experiments/low-word-only-retry-20260909.0Hk0P9/retry.py": {"copied": ["Unigrams equivalent via UnigramIndex", "check", "body_for equivalent word_only_retry_body", "outcome", "parse_word equivalent parse_word_only"], "unavailable": ["run: caller supplies explicit saved state and Client"]},
     "experiments/low-word-only-retry-20260909.0Hk0P9/continue_whitespace.py": {"copied": ["parse_word", "continue_saved"], "unavailable": ["finish: caller invokes continue_saved with saved response and pending item"]},
     "experiments/low-unigram-retry-20260909.Wb0TI7/retry.py": {"copied": ["INSTRUCTION", "Unigrams equivalent via UnigramIndex", "check", "body_for equivalent contextual_retry_body", "outcome", "parse_reply equivalent parse_contextual"], "unavailable": ["run: caller supplies explicit saved state and Client"]},
@@ -147,9 +173,97 @@ SAFE_NUMERIC = {
 }
 SAFE_TEXT = {"status", "outcome", "mode", "deployment", "remote_scoring", "inference_coordinator_status"}
 
+STATIC_NUMERIC_PROJECTIONS: dict[str, dict[str, Any]] = {
+    "007-b-replacement": {
+        "historical_execution": "CONTROLLED_HELDOUT_QWEN_CONTACT_RECORDED",
+        "heldout_cases": 32,
+        "heldout_selected_candidates": 10,
+        "heldout_completed_reviewer_attempts": 10,
+        "heldout_reviewer_errors": 6,
+        "heldout_valid_structured_decisions": 4,
+        "heldout_keep_decisions": 2,
+        "heldout_replace_decisions": 2,
+        "heldout_proposed_replacements": 2,
+        "heldout_accepted_edits": 0,
+        "heldout_exact_gold_repairs": 0,
+        "heldout_missed_known_errors": 7,
+        "heldout_protected_changes": 0,
+        "heldout_controlled_reviewer_calls": 10,
+        "historical_model_calls": 10,
+        "historical_network_calls": 10,
+        "reproduction_model_calls": 0,
+        "reproduction_network_calls": 0,
+        "workload_status": "NO_VALID_PROXY_CONTACT_EVIDENCE",
+    },
+    "007-b-timeout300": {
+        "historical_execution": "CONTROLLED_HELDOUT_QWEN_CONTACT_RECORDED",
+        "heldout_reviewer_attempts": 10,
+        "heldout_valid_reviewer_decisions": 10,
+        "heldout_proposed_replacements": 8,
+        "heldout_accepted_edits": 0,
+        "heldout_exact_gold_repairs": 0,
+        "heldout_missed_known_errors": 7,
+        "heldout_protected_changes": 0,
+        "heldout_controlled_reviewer_calls": 10,
+        "historical_model_calls": 10,
+        "historical_network_calls": 10,
+        "heldout_controlled_reviewer_seconds": 546.032867,
+        "heldout_median_reviewer_seconds": 21.44,
+        "heldout_p95_reviewer_seconds": 217.03,
+        "workload_attempts": 8,
+        "workload_completed_responses": 2,
+        "workload_status": "INVALID_CASE_TRACE_ASSOCIATION",
+        "workload_proxy_contact_evidence": "NOT_VALIDLY_ATTRIBUTABLE",
+        "reproduction_model_calls": 0,
+        "reproduction_network_calls": 0,
+    },
+    "low-word-only-retry": {
+        "cases": 32,
+        "initial_status": "STOPPED_ON_OUTER_WHITESPACE",
+        "final_status": "COMPLETED_WITH_WHITESPACE_ONLY_CONTINUATION",
+        "first_pass_calls_reused": 10,
+        "first_pass_calls_executed": 0,
+        "total_word_only_calls": 2,
+        "new_continuation_calls": 1,
+        "first_response_resampled": False,
+        "applied_edits": 4,
+        "applied_retry_edits": 0,
+        "exact_gold_repairs": 3,
+        "unchanged_controls": 25,
+        "protected_differences": 0,
+        "outside_edit_differences": 0,
+        "total_word_only_http_seconds": 20.005273504997604,
+        "median_word_only_http_seconds": 10.002636752498802,
+        "max_word_only_http_seconds": 14.27844430800178,
+        "model_calls": 2,
+        "network_calls": 2,
+        "historical_model_calls": 2,
+        "historical_network_calls": 2,
+    },
+    "high-thinking-mechanical": {
+        "requests": 1,
+        "http_status": 400,
+        "http_error": "http-error",
+        "completed_cases": 0,
+        "request_latency_seconds": 0.1319528709864244,
+        "full_pipeline_seconds": 2.078772333014058,
+        "preparation_seconds": 7.409712520980975,
+        "preparation_plus_execution_seconds": 9.492349873005878,
+        "status": "STOPPED",
+        "linguistic_inference": "NONE_FROM_PROTOCOL_FAILURE",
+        "model_calls": 1,
+        "network_calls": 1,
+        "historical_model_calls": 1,
+        "historical_network_calls": 1,
+    },
+}
+
 GENERIC_PROMPT = "Ali se ti zdi uporaba besede oziroma besedne zveze X najboljša naravna izbira v tem slovenskem stavku? Če ne, s čim bi jo nadomestil?"
 REPORT_NOTES = {
-    "007-b-timeout300": "The timeout-300 association is not valid for case-level interpretation; preserve the controlled receipt without assigning it to a case.",
+    "007-b-replacement": "The historical held-out reviewer execution contacted Qwen; the later replacement workload has no valid proxy-contact evidence. Current reproduction defaults to zero calls and does not recreate the historical workload.",
+    "007-b-timeout300": "The timeout-300 held-out reviewer execution contacted Qwen; the separate eight-attempt workload has two completed responses but invalid case/trace association and no valid per-case semantic result.",
+    "low-word-only-retry": "The initial word-only parser stopped on outer whitespace. The preserved first response was not resampled; one continuation call completed the saved boundary. These are operational observations, not linguistic inference.",
+    "high-thinking-mechanical": "The single high-thinking request returned HTTP 400 and no cases completed. Timing is projected as safe numeric evidence; no linguistic inference is made from the protocol failure.",
     "large-evaluation-capped": "A RUNNING snapshot means inference started, not that the campaign completed.",
     "large-evaluation-uncapped": "The human relevance change paused this campaign; no later phase is inferred.",
     "dassle-spelling-preparation": "Four-worker and recovery incidents remain operational evidence, not a quality label.",
@@ -160,7 +274,8 @@ REPORT_NOTES = {
 }
 
 VARIANT_WIRE_CONTRACTS: dict[str, tuple[list[str], list[str], str]] = {
-    "007-b-replacement": ([], [], "NO_MODEL_CALL_PRE_PROXY_FAILURE"),
+    "007-b-replacement": ([], [], "REPRODUCTION_DEFAULT_ZERO_CALLS; HISTORICAL_HELDOUT_QWEN_CALLS_RECORDED; WORKLOAD_NO_VALID_PROXY_CONTACT_EVIDENCE"),
+    "007-b-timeout300": ([], [], "REPRODUCTION_DEFAULT_ZERO_CALLS; HISTORICAL_HELDOUT_QWEN_CALLS_RECORDED; WORKLOAD_INVALID_TRACE_ASSOCIATION"),
     "dassle-uv-audit": ([], ["literal source/reference token edits supplied by caller"], "NO_MODEL_CALL_MECHANICAL_AUDIT"),
     "low-plus-validator": (["model", "stream", "store", "input", "include_reasoning", "reasoning"], ["frozen first-stage proposal", "original sentence", "selected target", "resulting sentence"], "REUSE_FROZEN_FIRST_STAGE; VALIDATOR_CALLS_ONLY"),
     "low-unigram-retry": (["model", "stream", "store", "input", "include_reasoning", "reasoning"], ["first contextual sentence/target", "raw rejected replacement", "missing-word evidence in contextual JSON retry"], "REUSE_FROZEN_FIRST_STAGE; ONE_CONTEXTUAL_JSON_RETRY"),
@@ -172,6 +287,13 @@ VARIANT_WIRE_CONTRACTS: dict[str, tuple[list[str], list[str], str]] = {
     "ten-run-english-preserve-low": (["model", "stream", "store", "input", "include_reasoning", "reasoning"], ["same cases per trial", "numeric English evidence for original absent target", "raw rejected expression"], "TEN_PREDETERMINED_TRIALS; ENGLISH_PRE_REVIEW_SUPPRESSION"),
     "prijigrala-retry10": (["model", "stream", "store", "input", "include_reasoning", "reasoning"], ["one sentence/target", "same raw first rejected replacement"], "ONE_TARGET; MAXIMUM_TEN_CORRECTIVE_RETRIES"),
     "levenshtein-lookup-diagnostic": ([], ["one read-only lookup observation"], "NO_MODEL_CALL_UNAVAILABLE_INLINE_LEVENSHTEIN_SOURCE"),
+}
+
+HISTORICAL_REQUEST_BOUNDARIES = {
+    "007-b-replacement": "No fresh reproduction request is made; the preserved held-out execution did contact Qwen, while the later workload has no valid proxy-contact evidence.",
+    "007-b-timeout300": "No fresh reproduction request is made; the preserved held-out execution contacted Qwen, while the separate workload has invalid case/trace association.",
+    "dassle-uv-audit": "No model request; caller-supplied literal source/result records are classified mechanically.",
+    "levenshtein-lookup-diagnostic": "No model request; the unavailable inline lookup source remains explicit.",
 }
 
 
@@ -397,6 +519,7 @@ def experiment_records(home: Path) -> list[dict[str, Any]]:
     for spec in ROOT_SPECS:
         root = home / spec["root"]
         metrics = _campaign_metrics(root, _scalar_metrics(root)) if root.is_dir() else {}
+        metrics = {**STATIC_NUMERIC_PROJECTIONS.get(spec["id"], {}), **metrics}
         record = {
             **spec,
             "experiment_id": spec["id"],
@@ -410,6 +533,7 @@ def experiment_records(home: Path) -> list[dict[str, Any]]:
                 "dataset_contents_published": False,
             },
             "metrics": metrics,
+            "historical_execution_evidence": STATIC_NUMERIC_PROJECTIONS.get(spec["id"], {}),
             "evidence_files": [],
             "conclusion": "Recorded historical outcome only; not a product, linguistic, replication, milestone, merge, or release claim.",
             "pending_evidence": ["human semantic labels where applicable", "official remote scoring where access was blocked", "independent reproduction when private data or service access is unavailable"],
@@ -692,6 +816,7 @@ def write_publications(records: list[dict[str, Any]], repo: Path) -> None:
         EXPRESSION_RETRY_PROMPT,
         WORD_RETRY_PROMPT,
     )
+    from research.curated.validation import VALIDATOR_INSTRUCTION
     historical_variants = variant_map()
     configs = repo / "research/configs"
     reports = repo / "research/reports"
@@ -720,17 +845,7 @@ def write_publications(records: list[dict[str, Any]], repo: Path) -> None:
             "authorized_change": variant.get("authorized_change", record.get("variation")),
             "historical_status": record.get("status"),
             "logical_root": record.get("logical_root"),
-            "generic_prompt": reviewer_prompt("{sentence}", "{target}"),
-            "historical_wire_keys": wire_keys,
-            "historical_content": content_sent,
             "model_call_policy": call_policy,
-            "retry_prompt": WORD_RETRY_PROMPT if experiment_id == "low-word-only-retry" else CONTEXTUAL_RETRY_PROMPT if experiment_id == "low-unigram-retry" else EXPRESSION_RETRY_PROMPT,
-            "inference_fields": {
-                "sent": ["model", "stream", "store", "input", "include_reasoning", "reasoning"],
-                "content_sent": ["completed source sentence", "selected target", "variant-specific retry fields when applicable"],
-                "omitted": ["conversation_history", "gold_text", "private_response_body", "credential_value"],
-                "public_redactions": ["source sentences", "filled prompts", "replacements", "raw responses", "reasoning traces"],
-            },
             "limits": {
                 "request_count": "preserved per record",
                 "target_count": variant.get("maximum_targets", "UNKNOWN"),
@@ -746,6 +861,7 @@ def write_publications(records: list[dict[str, Any]], repo: Path) -> None:
                 "environment": "private preserved environment identity; no import/network side effect",
             },
             "result_destination": "research/results/study-evidence.json.gz",
+            "safe_numeric_evidence": _public_numeric(record.get("metrics", {})),
             "reproduction": {
                 "entrypoint": "python3 -B -m research.tools.reproduce",
                 "credential_reference": "RESEARCH_CREDENTIAL_REF",
@@ -755,9 +871,73 @@ def write_publications(records: list[dict[str, Any]], repo: Path) -> None:
             },
             "source_modules": list(historical.source_modules) if historical is not None else ["research/curated/historical.py"],
         }
+        no_model = not wire_keys
+        validator_only = experiment_id == "low-plus-validator"
+        retry_enabled = historical is not None and historical.corrective_retries > 0
+        if no_model:
+            config["request"] = {
+                "mode": call_policy,
+                "model_calls": 0,
+                "content": content_sent,
+            }
+        else:
+            retry_prompt = (
+                WORD_RETRY_PROMPT
+                if experiment_id in {"low-word-only-retry", "full-hyphen-space-low", "full-hyphen-case-low", "ten-run-initial-case-low"}
+                else CONTEXTUAL_RETRY_PROMPT
+                if experiment_id == "low-unigram-retry"
+                else EXPRESSION_RETRY_PROMPT
+            )
+            request: dict[str, Any] = {
+                "mode": call_policy,
+                "wire_keys": wire_keys,
+                "content": content_sent,
+            }
+            if validator_only:
+                request["prompt"] = VALIDATOR_INSTRUCTION
+                config["inference_fields"] = {
+                    "sent": wire_keys,
+                    "content_sent": content_sent,
+                    "omitted": ["conversation_history", "gold_text", "private_response_body", "credential_value"],
+                    "public_redactions": ["source sentences", "filled prompts", "replacements", "raw responses", "reasoning traces"],
+                }
+                config["historical_wire_keys"] = wire_keys
+                config["historical_content"] = content_sent
+            else:
+                request["prompt"] = reviewer_prompt("{sentence}", "{target}")
+                if retry_enabled:
+                    request["retry"] = {"wire_keys": wire_keys, "prompt": retry_prompt, "content": content_sent}
+                config.update(
+                    generic_prompt=reviewer_prompt("{sentence}", "{target}"),
+                    historical_wire_keys=wire_keys,
+                    historical_content=content_sent,
+                    inference_fields={
+                        "sent": wire_keys,
+                        "content_sent": content_sent,
+                        "omitted": ["conversation_history", "gold_text", "private_response_body", "credential_value"],
+                        "public_redactions": ["source sentences", "filled prompts", "replacements", "raw responses", "reasoning traces"],
+                    },
+                )
+                if retry_enabled:
+                    config["retry_prompt"] = retry_prompt
+            config["request"] = request
         (configs / f"{experiment_id}.json").write_text(json.dumps(config, ensure_ascii=False, indent=2, sort_keys=True) + "\n", encoding="utf-8")
         metrics = record.get("metrics", {})
         lines = [f"# {experiment_id}", "", "Data-free projection of one preserved historical record. This is an archival result, not a new experiment, semantic ground truth, product claim, or release decision.", "", "## Identity and question", "", f"- Question: {record.get('question', 'UNKNOWN')}", f"- Authorized change: {record.get('variation', 'UNKNOWN')}", f"- Status: `{record.get('status', 'UNKNOWN')}`; an old `RUNNING` marker is not completion.", f"- Private logical root: `{record.get('logical_root', 'UNKNOWN')}`; native path and payloads are not published.", "", "## Configuration projection", "", f"- Historical wire keys: `{', '.join(wire_keys) if wire_keys else 'none; mechanical/offline boundary'}`.", f"- Variant-specific content: {', '.join(content_sent) if content_sent else 'no model content; caller-supplied data-free inputs only'}.", f"- Model-call policy: `{call_policy}`.", "- Publicly omitted: source sentences, filled prompts, gold strings, replacements, response bodies, reasoning traces, credentials, and private endpoint/profile values.", "- Detector/gate/retry limits: preserved from the source record; `UNKNOWN` is retained where the source did not expose a value.", "- Resource identities: data, index, English attestation, source, and environment are referenced by identity only; no private path is a runtime dependency.", "", "## Numeric evidence", "", "The complete data-free numeric projection is linked from [study-evidence](../results/study-evidence.json.gz). Per-case/trial fields retain counts, calls, timing/status where available. Text, proposals, references, filled prompts, response bodies, and private result identities are excluded.", "", "| Metric | Value |", "| --- | ---: |"]
+        if not wire_keys:
+            lines = [
+                line
+                for line in lines
+                if not line.startswith("- Historical wire keys:")
+                and not line.startswith("- Variant-specific content:")
+            ]
+            for position, line in enumerate(lines):
+                if line.startswith("- Model-call policy:"):
+                    lines.insert(
+                        position,
+                        f"- Request boundary: {HISTORICAL_REQUEST_BOUNDARIES.get(experiment_id, 'no model request; ' + (', '.join(content_sent) if content_sent else 'caller-supplied data-free inputs only'))}",
+                    )
+                    break
         for key, value in sorted(metrics.items()):
             if key == "trial_metrics" or isinstance(value, (dict, list)):
                 continue

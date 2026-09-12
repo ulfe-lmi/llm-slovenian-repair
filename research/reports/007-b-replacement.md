@@ -11,7 +11,9 @@ Data-free projection of one preserved historical record. This is an archival res
 
 ## Configuration projection
 
-- Variant-specific wire/content boundary: No model request was sent because the preserved attempt failed before proxy contact. See [configuration](../configs/007-b-replacement.json) fields historical_wire_keys, historical_content, and model_call_policy; no later variant's content is inferred.
+- Historical execution: the controlled held-out run contacted Qwen for 10 reviewer attempts; six were reviewer errors and four were valid structured decisions. The later workload has no valid proxy-contact evidence.
+- Reproduction boundary: no fresh model request; caller-supplied data-free inputs only.
+- Model-call policy: `REPRODUCTION_DEFAULT_ZERO_CALLS; HISTORICAL_HELDOUT_QWEN_CALLS_RECORDED; WORKLOAD_NO_VALID_PROXY_CONTACT_EVIDENCE`.
 - Publicly omitted: source sentences, filled prompts, gold strings, replacements, response bodies, reasoning traces, credentials, and private endpoint/profile values.
 - Detector/gate/retry limits: preserved from the source record; `UNKNOWN` is retained where the source did not expose a value.
 - Resource identities: data, index, English attestation, source, and environment are referenced by identity only; no private path is a runtime dependency.
@@ -22,12 +24,28 @@ The complete data-free numeric projection is linked from [study-evidence](../res
 
 | Metric | Value |
 | --- | ---: |
+| `heldout_cases` | `32` |
+| `heldout_selected_candidates` | `10` |
+| `heldout_completed_reviewer_attempts` | `10` |
+| `heldout_reviewer_errors` | `6` |
+| `heldout_valid_structured_decisions` | `4` |
+| `heldout_keep_decisions` | `2` |
+| `heldout_replace_decisions` | `2` |
+| `heldout_proposed_replacements` | `2` |
+| `heldout_accepted_edits` | `0` |
+| `heldout_exact_gold_repairs` | `0` |
+| `heldout_missed_known_errors` | `7` |
+| `heldout_protected_changes` | `0` |
+| `heldout_controlled_reviewer_calls` | `10` |
+| `reproduction_model_calls` | `0` |
+| `reproduction_network_calls` | `0` |
+| `workload_status` | `NO_VALID_PROXY_CONTACT_EVIDENCE` |
 
 ## Child runs and phases
 
 | Child ID | Status | Source hash | Result hash |
 | --- | --- | --- | --- |
-| `007-b-replacement/heldout` | `RECORDED` | `310c07d5b73c8e26ddcce444e4407009c3e30db406c336115c3b2c5dfcf4cf60` | `UNAVAILABLE` |
+| `007-b-replacement/heldout` | `CONTROLLED_HELDOUT_QWEN_CONTACT_RECORDED` | `310c07d5b73c8e26ddcce444e4407009c3e30db406c336115c3b2c5dfcf4cf60` | `UNAVAILABLE` |
 
 ## Interpretation and limitations
 

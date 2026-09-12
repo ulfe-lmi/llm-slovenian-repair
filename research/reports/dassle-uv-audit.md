@@ -11,7 +11,8 @@ Data-free projection of one preserved historical record. This is an archival res
 
 ## Configuration projection
 
-- Variant-specific wire/content boundary: The audit sends no model request; it classifies only explicit literal source/result token operations. See [configuration](../configs/dassle-uv-audit.json) fields historical_wire_keys, historical_content, and model_call_policy; no later variant's content is inferred.
+- Request boundary: no model request; literal source/reference token edits supplied by caller.
+- Model-call policy: `NO_MODEL_CALL_MECHANICAL_AUDIT`.
 - Publicly omitted: source sentences, filled prompts, gold strings, replacements, response bodies, reasoning traces, credentials, and private endpoint/profile values.
 - Detector/gate/retry limits: preserved from the source record; `UNKNOWN` is retained where the source did not expose a value.
 - Resource identities: data, index, English attestation, source, and environment are referenced by identity only; no private path is a runtime dependency.

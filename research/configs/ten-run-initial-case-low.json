@@ -2,15 +2,25 @@
   "authorized_change": "symmetric initial-case restoration",
   "experiment_id": "ten-run-initial-case-low",
   "generic_prompt": "You are a narrow Slovenian expression reviewer. Preserve meaning and register. Review only the marked target; do not rewrite the sentence. Return exactly {\"keep\":boolean,\"replacement\":string|null,\"needs_wider_edit\":boolean}. Sentence: {sentence}\nTarget: {target} Answer only the required JSON object.",
-  "historical_wire_keys": ["model", "stream", "store", "input", "include_reasoning", "reasoning"],
-  "historical_content": ["same caller-owned cases in each scheduled trial", "symmetric initial-case adjustment", "raw rejected word on word-only retry"],
-  "model_call_policy": "TEN_PREDETERMINED_TRIALS; NO_ENGLISH_POLICY; STOPPED_TRIALS_CONTINUE_UNCHANGED",
+  "historical_content": [
+    "same cases per trial",
+    "symmetric case adjustment",
+    "raw rejected word"
+  ],
   "historical_status": "COMPLETED_WITH_STOPPED_TRIALS",
+  "historical_wire_keys": [
+    "model",
+    "stream",
+    "store",
+    "input",
+    "include_reasoning",
+    "reasoning"
+  ],
   "inference_fields": {
     "content_sent": [
-      "completed source sentence",
-      "selected target",
-      "variant-specific retry fields when applicable"
+      "same cases per trial",
+      "symmetric case adjustment",
+      "raw rejected word"
     ],
     "omitted": [
       "conversation_history",
@@ -42,6 +52,7 @@
     "workers": "preserved per record"
   },
   "logical_root": "experiments/ten-run-initial-case-low-20260909.87bzTW",
+  "model_call_policy": "TEN_PREDETERMINED_TRIALS; STOPPED_TRIALS_CONTINUE_UNCHANGED",
   "question": "What persisted across ten scheduled trials of the symmetric case rule?",
   "reproduction": {
     "credential_reference": "RESEARCH_CREDENTIAL_REF",
@@ -49,6 +60,39 @@
     "default_network_calls": 0,
     "entrypoint": "python3 -B -m research.tools.reproduce",
     "requires_explicit_live_authorization": true
+  },
+  "request": {
+    "content": [
+      "same cases per trial",
+      "symmetric case adjustment",
+      "raw rejected word"
+    ],
+    "mode": "TEN_PREDETERMINED_TRIALS; STOPPED_TRIALS_CONTINUE_UNCHANGED",
+    "prompt": "You are a narrow Slovenian expression reviewer. Preserve meaning and register. Review only the marked target; do not rewrite the sentence. Return exactly {\"keep\":boolean,\"replacement\":string|null,\"needs_wider_edit\":boolean}. Sentence: {sentence}\nTarget: {target} Answer only the required JSON object.",
+    "retry": {
+      "content": [
+        "same cases per trial",
+        "symmetric case adjustment",
+        "raw rejected word"
+      ],
+      "prompt": "Ta beseda je napačno zapisana: {word}\n\nPredlagaj pravilno slovensko obliko. Vrni samo popravljeno besedo.",
+      "wire_keys": [
+        "model",
+        "stream",
+        "store",
+        "input",
+        "include_reasoning",
+        "reasoning"
+      ]
+    },
+    "wire_keys": [
+      "model",
+      "stream",
+      "store",
+      "input",
+      "include_reasoning",
+      "reasoning"
+    ]
   },
   "resource_identity": {
     "data": "private preserved identity; rows excluded",
@@ -58,13 +102,15 @@
     "source": "research/registry/source-manifest.json"
   },
   "result_destination": "research/results/study-evidence.json.gz",
-  "retry_prompt": "Ta slovenski izraz je napačno zapisan ali oblikovan:\n\n{expression}\n\nPredlagaj najverjetnejšo pravilno slovensko obliko istega izraza.\nOdgovor lahko vsebuje od 1 do 4 besede.\nVrni samo popravljeni izraz.",
+  "retry_prompt": "Ta beseda je napačno zapisana: {word}\n\nPredlagaj pravilno slovensko obliko. Vrni samo popravljeno besedo.",
   "schema_version": 2,
   "source_modules": [
     "research/curated/historical_detector.py",
     "research/curated/historical_pipeline.py",
     "research/curated/historical_methods.py",
     "research/curated/historical_transport.py",
-    "research/curated/historical_detector.py"
+    "research/curated/retry.py",
+    "research/curated/historical_variants.py",
+    "research/curated/historical_ten_run.py"
   ]
 }

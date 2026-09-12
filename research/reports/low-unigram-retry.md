@@ -11,7 +11,9 @@ Data-free projection of one preserved historical record. This is an archival res
 
 ## Configuration projection
 
-- Variant-specific wire/content boundary: The retry family reuses the first-stage proposal and sends one contextual JSON retry with its own content fields. See [configuration](../configs/low-unigram-retry.json) fields historical_wire_keys, historical_content, and model_call_policy; no later variant's content is inferred.
+- Historical wire keys: `model, stream, store, input, include_reasoning, reasoning`.
+- Variant-specific content: first contextual sentence/target, raw rejected replacement, missing-word evidence in contextual JSON retry.
+- Model-call policy: `REUSE_FROZEN_FIRST_STAGE; ONE_CONTEXTUAL_JSON_RETRY`.
 - Publicly omitted: source sentences, filled prompts, gold strings, replacements, response bodies, reasoning traces, credentials, and private endpoint/profile values.
 - Detector/gate/retry limits: preserved from the source record; `UNKNOWN` is retained where the source did not expose a value.
 - Resource identities: data, index, English attestation, source, and environment are referenced by identity only; no private path is a runtime dependency.

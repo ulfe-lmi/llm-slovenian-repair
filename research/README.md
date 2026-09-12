@@ -30,7 +30,7 @@ license grant, or permission to merge or deploy.
   `study-evidence.json.gz`. Text, replacements, response bodies, and private
   result-path keys are removed by an allowlist.
 - [`curated/`](curated/) contains faithful source seams: protected spans,
-  Gigafida evidence states, the ASCII-hyphen detector view, English eligibility,
+  Gigafida evidence states, separate raw and ASCII-hyphen detector views, English eligibility,
   contextual/retry schemas, initial-case restoration, unigram gating, exact
   patching, adapters, scoring, and offline replay boundaries. The executable
   dispatcher keeps the historical families separate: validator-only frozen
@@ -74,12 +74,12 @@ flatten a stopped trial into a success. The private archive catalog records the
 ten verified native relocations and reports zero source-byte deletions with no
 remaining matching temporary roots.
 
-One interrupted diagnostic shell briefly created four small OAP streams under
-`/tmp`; strategy moved those exact files into the persistent private
-`round-007-e-tmp/interrupted-tmp-diagnostics` record and verified all identified
-temporary names absent. No dataset, model, response, or scientific content was
-involved. The immutable 007-e report is preserved; this is its forward archival
-correction.
+One interrupted diagnostic shell briefly wrote the possible streams in `/tmp`,
+named `oap_{state,gov,hist,tx}.{out,err}`. The four extant files were moved into
+the persistent private `round-007-e-tmp/interrupted-tmp-diagnostics` record:
+one 1,143-byte state output and three empty files. They contained no scientific
+data, and all eight possible names were verified absent afterward. The immutable
+007-e report is preserved; this is its forward archival correction.
 
 ## What was measured
 
@@ -171,11 +171,15 @@ acquires data, launches a model, or accesses a service.
 
 With explicit live authorization and caller-owned synthetic/saved inputs, the
 same entrypoint reaches the preserved historical driver for the selected
-family. Early variants do not require later `english.json`; low-plus-validator
+family. Early variants do not require later `english.json`; retry10 does require
+caller-owned English evidence and suppresses strongly attested selected targets;
+low-plus-validator
 requires frozen first-stage decisions and invokes validator calls only;
 `dassle-uv-audit` invokes literal classification/evaluation with zero calls;
 campaign rows route SloBench through RAW/M1/M2/M3 and other phases through
-M0/M1/M2/M3. Tests use injected fake transports and forbid socket access.
+M0/M1/M2/M3. The authorized campaign seam starts one bounded process per worker;
+its explicit sequential seam is test-only. Tests use injected fake transports and
+forbid socket access.
 
 The persistent saved campaign replay was rerun against the current curated
 source: 16,375/16,375 M2 and 16,375/16,375 M3 matches, zero model/network calls.

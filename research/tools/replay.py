@@ -91,16 +91,86 @@ def verify_manifest(
         if not isinstance(root, str) or not root:
             raise ValueError("ledger entry lacks a logical root")
         path = _mapped_root(root, private_root, root_map) / relative
-        info = path.lstat()
+        try:
+            info = path.lstat()
+        except OSError as exc:
+            raise ValueError(f"private artifact is unavailable: {entry['root']}/{relative}") from exc
         if stat.S_ISLNK(info.st_mode) or not stat.S_ISREG(info.st_mode):
             raise ValueError(f"private artifact is not a regular file: {entry['root']}/{relative}")
         if digest(path) != entry["sha256"]:
             raise ValueError(f"private artifact hash mismatch: {entry['root']}/{relative}")
         expected_size = entry.get("size")
-        if expected_size is not None and (not isinstance(expected_size, int) or info.st_size != expected_size):
+        if expected_size is not None and (type(expected_size) is not int or info.st_size != expected_size):
             raise ValueError(f"private artifact size mismatch: {entry['root']}/{relative}")
         checked += 1
     return checked, max(0, len(eligible) - checked)
+
+
+def verify_representative_roots(
+    manifest: Path,
+    *,
+    private_root: Path | None = None,
+    root_map: Mapping[str, Path] | None = None,
+) -> dict[str, Any]:
+    """Verify one deterministic private entry for every supplied mapping.
+
+    The receipt contains only logical mapping keys, counts, statuses, and
+    already-public hashes. Caller-owned filesystem paths and file contents are
+    never returned.
+    """
+    if not root_map and private_root is None:
+        raise ValueError("representative verification requires an explicit root mapping")
+    document = json.loads(_manifest_bytes(manifest))
+    entries = _ledger_entries(document)
+    allowed = {"private-only", "reconstructible-dependency", "duplicate-linked", "published-curated/redacted"}
+    for entry in entries:
+        if entry.get("classification") not in allowed:
+            raise ValueError(f"unknown ledger disposition: {entry.get('classification')!r}")
+        if not isinstance(entry.get("relative_path"), str) or not entry["relative_path"]:
+            raise ValueError("ledger entry lacks a relative path")
+        if not isinstance(entry.get("sha256"), str) or len(entry["sha256"]) != 64:
+            raise ValueError("ledger entry lacks a SHA-256 identity")
+    eligible = [
+        entry
+        for entry in entries
+        if entry.get("classification") in {"private-only", "reconstructible-dependency", "duplicate-linked"}
+    ]
+    mappings = dict(root_map or {"<private-root>": private_root})
+    receipt: list[dict[str, Any]] = []
+    checked = 0
+    for mapping_key in sorted(mappings):
+        matching = [
+            entry for entry in eligible
+            if mapping_key == entry.get("root")
+            or (mapping_key.endswith("/") and isinstance(entry.get("root"), str) and entry["root"].startswith(mapping_key))
+        ]
+        if not matching:
+            receipt.append({"logical_mapping": mapping_key, "status": "UNAVAILABLE", "entries_available": 0, "checked": 0})
+            continue
+        entry = sorted(matching, key=lambda item: (str(item["root"]), str(item["relative_path"])))[0]
+        root = entry.get("root")
+        relative = Path(entry["relative_path"])
+        if not isinstance(root, str) or any(part in ("", ".", "..") for part in relative.parts):
+            raise ValueError("unsafe representative ledger path")
+        path = _mapped_root(root, private_root, root_map) / relative
+        try:
+            info = path.lstat()
+        except OSError as exc:
+            raise ValueError(f"representative private artifact is unavailable for {mapping_key}") from exc
+        if stat.S_ISLNK(info.st_mode) or not stat.S_ISREG(info.st_mode):
+            raise ValueError(f"representative private artifact is not a regular file for {mapping_key}")
+        expected_size = entry.get("size")
+        if (expected_size is not None and info.st_size != expected_size) or digest(path) != entry["sha256"]:
+            raise ValueError(f"representative private artifact identity mismatch for {mapping_key}")
+        checked += 1
+        receipt.append({
+            "logical_mapping": mapping_key,
+            "status": "CHECKED",
+            "entries_available": len(matching),
+            "checked": 1,
+            "sha256": entry["sha256"],
+        })
+    return {"mappings": len(mappings), "checked": checked, "unavailable": len(mappings) - checked, "roots": receipt}
 
 
 def _create_fixture_index(fixture: dict[str, Any], path: Path) -> None:
@@ -245,7 +315,13 @@ def _saved_english(record: dict[str, Any]) -> dict[str, float]:
     return frequencies
 
 
-def replay_saved_record(record: dict[str, Any], index: Path, *, record_name: str = "saved") -> dict[str, Any]:
+def replay_saved_record(
+    record: dict[str, Any],
+    index: Path,
+    *,
+    record_name: str = "saved",
+    corpus: Corpus | None = None,
+) -> dict[str, Any]:
     """Replay small-study or campaign input/decisions with zero model calls."""
     record = _record_payload(record)
     original = _saved_original(record)
@@ -286,8 +362,10 @@ def replay_saved_record(record: dict[str, Any], index: Path, *, record_name: str
         return {"case": record_name, "schema": "campaign-input-decisions" if "input" in record else "original-decisions",
                 "detector_maximum": marker, "first_stage_decisions": len(proposals), "retry_stage_decisions": len(retries),
                 "english_values": len(frequencies), "output_sha256": hashlib.sha256(expected.encode()).hexdigest(),
+                "no_retry_output_sha256": hashlib.sha256(record.get("no_retry_output", expected).encode()).hexdigest(),
                 "detector_candidates": len(decisions), "review_calls": len(decisions), "retry_calls": 0,
-                "operational_failure": True, "network_calls": 0, "model_calls": 0}
+                "operational_failure": True, "no_retry_operational_failure": bool(record.get("no_retry_operational_failure", True)),
+                "network_calls": 0, "model_calls": 0}
 
     def english_lookup(word: str) -> float:
         key = word.casefold()
@@ -295,16 +373,22 @@ def replay_saved_record(record: dict[str, Any], index: Path, *, record_name: str
             raise ReplayEvidenceError("English evidence missing for an evaluated target; zero is not inferred")
         return frequencies[key]
 
-    with Corpus(index) as corpus:
-        result = replay(
+    def replay_one(active_corpus: Corpus) -> dict[str, Any]:
+        return replay(
             original,
-            corpus,
+            active_corpus,
             english_lookup,
             proposals,
             retries,
             maximum=marker,
             retry_failures=retry_failures,
         )
+
+    if corpus is None:
+        with Corpus(index) as active_corpus:
+            result = replay_one(active_corpus)
+    else:
+        result = replay_one(corpus)
     expected = record.get("corrected", record.get("output", record.get("final")))
     if not isinstance(expected, str) or result["output"] != expected:
         raise ReplayEvidenceError("private replay output mismatch or expected output is absent")
@@ -323,6 +407,7 @@ def replay_saved_record(record: dict[str, Any], index: Path, *, record_name: str
         "retry_stage_decisions": len(retries),
         "english_values": len(frequencies),
         "output_sha256": hashlib.sha256(result["output"].encode()).hexdigest(),
+        "no_retry_output_sha256": hashlib.sha256(result["no_retry_output"].encode()).hexdigest(),
         "detector_candidates": len(result["detector"]["candidates"]),
         "review_calls": result["review_calls"],
         "retry_calls": result["retry_calls"],
@@ -363,6 +448,8 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--manifest", type=Path)
     parser.add_argument("--root-map", action="append", default=[], metavar="LOGICAL_ROOT=CURRENT_PRIVATE_ROOT",
                         help="map a ledger logical root (or prefix ending /) to its current private root")
+    parser.add_argument("--representative-roots", action="store_true",
+                        help="verify one deterministic private entry for every supplied root mapping")
     parser.add_argument("--limit", type=int)
     args = parser.parse_args(argv)
     scratch = args.scratch or (Path(os.environ["TMPDIR"]) if os.environ.get("TMPDIR") else None)
@@ -388,6 +475,10 @@ def main(argv: list[str] | None = None) -> int:
         outputs["identity_replay"] = dict(
             zip(("checked", "skipped"), verify_manifest(args.manifest, args.private_root, args.limit, root_map=root_map or None), strict=True)
         )
+        if args.representative_roots:
+            outputs["representative_root_verification"] = verify_representative_roots(
+                args.manifest, private_root=args.private_root, root_map=root_map or None
+            )
     print(json.dumps(outputs, sort_keys=True))
     return 0
 

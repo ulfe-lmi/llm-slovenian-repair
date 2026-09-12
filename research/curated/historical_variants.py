@@ -12,8 +12,9 @@ from collections.abc import Mapping
 from pathlib import Path
 from typing import Any
 
+from . import detector as raw_detector
+from . import historical_detector as hyphen_detector
 from .gating import UnigramIndex, check
-from .historical_detector import detect, tokenize
 from .patching import restore_initial_case
 from .protected import protected_intervals
 from .review import Proposal
@@ -29,12 +30,17 @@ class HistoricalVariantPipeline:
         maximum: int | None,
         threshold: int = 3,
         case_rule: str = "none",
+        detector_view: str = "raw",
     ) -> None:
         if case_rule not in {"none", "one-way", "symmetric"}:
             raise ValueError("unknown historical case rule")
+        if detector_view not in {"raw", "hyphen-space"}:
+            raise ValueError("unknown historical detector view")
         self.maximum = maximum
         self.threshold = threshold
         self.case_rule = case_rule
+        self.detector_view = detector_view
+        self._detector = raw_detector if detector_view == "raw" else hyphen_detector
         self.unigrams = UnigramIndex(index)
         # Corpus is opened lazily by the real Corpus implementation below.  A
         # separate object is used so the detector retains its frozen n-gram
@@ -47,7 +53,7 @@ class HistoricalVariantPipeline:
         intervals = protected_intervals(text)
         candidates = [
             candidate.as_dict()
-            for candidate in detect(
+            for candidate in self._detector.detect(
                 text,
                 self._corpus,
                 intervals,
@@ -74,9 +80,10 @@ class HistoricalVariantPipeline:
         return {
             "candidates": candidates,
             "english": policies,
-            "eligible_words": len(tokenize(text, intervals)),
+            "eligible_words": len(self._detector.tokenize(text, intervals)),
             "protected_intervals": [interval.__dict__ for interval in intervals],
             "detector_mode": "local-context",
+            "detector_view": self.detector_view,
             "threshold": self.threshold,
             "maximum": self.maximum,
             "historical_policy": "none",
@@ -144,7 +151,13 @@ def build_historical_pipeline(
     *,
     maximum: int | None,
     case_rule: str = "none",
+    detector_view: str = "raw",
 ) -> HistoricalVariantPipeline:
     """Build an early-family pipeline with no English lookup side effect."""
 
-    return HistoricalVariantPipeline(index, maximum=maximum, case_rule=case_rule)
+    return HistoricalVariantPipeline(
+        index,
+        maximum=maximum,
+        case_rule=case_rule,
+        detector_view=detector_view,
+    )
