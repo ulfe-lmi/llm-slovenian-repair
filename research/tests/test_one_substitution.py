@@ -605,6 +605,83 @@ class OneSubstitutionTests(unittest.TestCase):
         ):
             self.assertNotIn(forbidden, reachable)
 
+    def test_renderer_uses_existing_fallback_and_stage_counts(self) -> None:
+        score = {
+            "tp": 1,
+            "fp": 0,
+            "fn": 0,
+            "precision": 1.0,
+            "recall": 1.0,
+            "F0.5": 1.0,
+            "changed_examples": 1,
+            "introduced_edits": 1,
+        }
+        view = {
+            "stage": {
+                "stage_entering_oov_targets": 12,
+                "prior_english_suppressions": 0,
+                "C=0": 0,
+                "C=1": 5,
+                "C>1": 0,
+            },
+            "mechanical": {
+                "accepted_unique_targets": 5,
+                "applied_mechanical_edits": 5,
+                "rolled_back_by_failure": 0,
+                "exact_reference_edits": 5,
+                "nonreference_edits": 0,
+                "unresolved_attribution": 0,
+                "precision_denominator": 5,
+                "precision": 1.0,
+                "spelling_gold_recall_denominator": 1,
+                "spelling_gold_recall": 1.0,
+                "fallback_edits": 7,
+            },
+            "baseline": score,
+            "new": score,
+            "calls": {},
+            "failures": {},
+            "runtime": {"candidate_lookup_comparisons": 0},
+        }
+        metrics = {
+            "views": {
+                "dassle-spelling": {
+                    "all": view,
+                    "initial_uv": view,
+                    "without_initial_uv": view,
+                },
+                "dassle-spelling-preservation": {"all": view},
+            },
+            "runtime": {
+                "vocabulary_rows": 141162,
+                "vocabulary_load_seconds": 0.0,
+                "candidate_lookup_seconds": 0.0,
+                "reused_model_seconds": 0.0,
+            },
+            "integrity": {"protected_differences": 0, "outside_span_differences": 0},
+        }
+        report = driver.render_public_report(
+            {
+                "source_identity": {"paired_rows": 1},
+                "implementation_head": "head",
+                "baseline_identity": {
+                    "configuration_sha256": "configuration",
+                    "results_sha256": "results",
+                },
+            },
+            {"metrics": metrics},
+        )
+        self.assertIn("Fallback edits: 7", report)
+        self.assertIn(
+            "Targets not mechanically applied (fallthrough or document rollback): "
+            "12 - 5 = 7",
+            report,
+        )
+        self.assertIn("Exact unigram vocabulary rows: 141162", report)
+        self.assertNotIn("fallback_qwen_edits", report)
+        self.assertNotIn("unchanged/unresolved", report)
+        self.assertNotIn("Exact unigram rows loaded once", report)
+
     def test_publication_supplement_derives_exact_introduced_edits_on_synthetic_data(self) -> None:
         def record(index: int, baseline_output: str, new_output: str) -> dict[str, object]:
             source = "a b"

@@ -133,6 +133,9 @@ FROZEN_PRIVATE_AGGREGATE_SHA256 = {
 FROZEN_PUBLICATION_INCIDENT_SHA256 = (
     "cb382883f4b9e179e6149e49a7df7fdb1f494b91cd91670dd31942a6895fb01c"
 )
+FROZEN_INVALID_PUBLICATION_INCIDENT_SHA256 = (
+    "fc4aebc9e179b3f82e5473da0619029a3d58717733128a5f2bbb32619c134650"
+)
 FROZEN_INCIDENT_SHA256 = {
     "precalculation": "bb5b762afc3b6e836a5db11b2211e5a520715a3ca695b99cfb7f51ae53882085",
     "calculation_aggregation": "9c03fd562dee7f9f483c47815f4ca5ac6fd750f2179a110559d0470fc9652305",
@@ -744,6 +747,25 @@ def verify_frozen_incidents(scratch: Path) -> dict[str, str]:
     ):
         raise ExperimentError("instrumentation incident identity is invalid")
     return dict(FROZEN_INCIDENT_SHA256)
+
+
+def verify_invalid_publication_incident(scratch: Path) -> str:
+    """Verify the excluded, uncommitted publication-render incident."""
+    path = scratch.parent / "007-h-invalid-publication-render-9d660229/INCIDENT.json"
+    require_exact_private_file(path, expected_sha=FROZEN_INVALID_PUBLICATION_INCIDENT_SHA256)
+    incident = read_json(path)
+    if (
+        not isinstance(incident, dict)
+        or incident.get("publication_implementation_head")
+        != "9d6602295700842e92d039f0c099f86888b264fb"
+        or incident.get("published_to_git") is not False
+        or incident.get("frozen_private_aggregate_changed") is not False
+        or incident.get("scientific_metrics_changed") is not False
+        or incident.get("disposition")
+        != "UNCOMMITTED_MISLEADING_PUBLICATION_PRESERVED_EXCLUDED"
+    ):
+        raise ExperimentError("invalid publication incident identity is invalid")
+    return FROZEN_INVALID_PUBLICATION_INCIDENT_SHA256
 
 
 def validate_baseline_replay(pairs: dict[str, list[dict[str, Any]]]) -> dict[str, Any]:
@@ -1486,6 +1508,8 @@ def render_public_report(configuration: Mapping[str, Any], result: Mapping[str, 
         new = view["new"]
         calls = view["calls"]
         failures = view["failures"]
+        stage_entering = stage.get("stage_entering_oov_targets", 0)
+        applied_mechanical = mechanical.get("applied_mechanical_edits", 0)
         lines = [
             f"### {label}",
             f"- Stage-entering OOV / English suppressed: "
@@ -1504,9 +1528,10 @@ def render_public_report(configuration: Mapping[str, Any], result: Mapping[str, 
             f"- Mechanical precision (denominator "
             f"{mechanical.get('precision_denominator')}): "
             f"{mechanical.get('precision')}",
-            f"- Fallback Qwen edits: {mechanical.get('fallback_qwen_edits', 0)}; "
-            f"unchanged/unresolved targets: "
-            f"{stage.get('unchanged_or_unresolved_targets', 0)}",
+            f"- Fallback edits: {mechanical.get('fallback_edits', 0)}",
+            f"- Targets not mechanically applied (fallthrough or document rollback): "
+            f"{stage_entering} - {applied_mechanical} = "
+            f"{stage_entering - applied_mechanical}",
             f"- Lookup comparisons: {view['runtime'].get('candidate_lookup_comparisons', 0)}",
             f"- Calls baseline first/retry/total: "
             f"{calls.get('baseline_first', 0)} / {calls.get('baseline_retry', 0)} / "
@@ -1554,7 +1579,7 @@ def render_public_report(configuration: Mapping[str, Any], result: Mapping[str, 
         f"- Caller-verified committed implementation: {configuration['implementation_head']}.",
         f"- Baseline configuration: {configuration['baseline_identity']['configuration_sha256']}.",
         f"- Baseline results: {configuration['baseline_identity']['results_sha256']}.",
-        f"- Exact unigram rows loaded once: {metrics['runtime']['vocabulary_rows']}.",
+        f"- Exact unigram vocabulary rows: {metrics['runtime']['vocabulary_rows']}.",
         "- Actual experiment model/network calls: 0 / 0.",
         "",
         "## Required views",
@@ -1871,6 +1896,12 @@ def publication_only(args: argparse.Namespace) -> dict[str, Any]:
     ) != FROZEN_CASE_COUNT:
         raise ExperimentError("frozen input manifest identity is invalid")
     incidents = verify_frozen_incidents(scratch)
+    invalid_publication_incident = verify_invalid_publication_incident(scratch)
+    publication_incidents = {
+        **incidents,
+        "publication_projection": FROZEN_PUBLICATION_INCIDENT_SHA256,
+        "invalid_publication_render": invalid_publication_incident,
+    }
     pairs = load_pairs(scratch)
     uv_indices, _uv_mapping = verify_uv_mapping(scratch, pairs["dassle-spelling"])
     records_by_phase, case_digest, case_bytes = frozen_case_manifest(
@@ -1899,6 +1930,7 @@ def publication_only(args: argparse.Namespace) -> dict[str, Any]:
             "publication_mode": "PUBLICATION_ONLY_RECOVERY",
             "incident_sha256": incidents,
             "publication_incident_sha256": FROZEN_PUBLICATION_INCIDENT_SHA256,
+            "invalid_publication_incident_sha256": FROZEN_INVALID_PUBLICATION_INCIDENT_SHA256,
             "publication_supplement": supplement,
             "private_aggregate_identity": {
                 "results_sha256": FROZEN_PRIVATE_AGGREGATE_SHA256["results"],
@@ -1926,8 +1958,10 @@ def publication_only(args: argparse.Namespace) -> dict[str, Any]:
             "aggregation_implementation_head"
         ],
         "publication_implementation_head": implementation["implementation_head"],
+        "incident_sha256": publication_incidents,
         "private_aggregate_identity": publication_configuration["private_aggregate_identity"],
         "publication_incident_sha256": FROZEN_PUBLICATION_INCIDENT_SHA256,
+        "invalid_publication_incident_sha256": FROZEN_INVALID_PUBLICATION_INCIDENT_SHA256,
         "publication_supplement": supplement,
         "recovery_evidence": FROZEN_RECOVERY_EVIDENCE,
     }
@@ -1951,6 +1985,9 @@ def publication_only(args: argparse.Namespace) -> dict[str, Any]:
         f"{public_identity['aggregation_implementation_head']}, "
         f"{implementation['implementation_head']}.\n"
         f"- Publication-projection incident SHA-256: {FROZEN_PUBLICATION_INCIDENT_SHA256}.\n"
+        f"- Invalid publication-render incident SHA-256: "
+        f"{FROZEN_INVALID_PUBLICATION_INCIDENT_SHA256}; the attempt was uncommitted "
+        "and excluded, with scientific metrics unchanged.\n"
         "- This recovery made no model or application network calls.\n"
     )
     report_bytes = (report + "\n").encode("utf-8")
@@ -1975,10 +2012,7 @@ def publication_only(args: argparse.Namespace) -> dict[str, Any]:
         "case_identity_manifest_sha256": case_digest,
         "case_count": FROZEN_CASE_COUNT,
         "case_bytes": case_bytes,
-        "incident_sha256": {
-            **incidents,
-            "publication_projection": FROZEN_PUBLICATION_INCIDENT_SHA256,
-        },
+        "incident_sha256": publication_incidents,
         "frozen_private_aggregate": dict(FROZEN_PRIVATE_AGGREGATE_SHA256),
         "supplement_sha256": supplement_sha,
         "supplement": supplement,
@@ -2018,10 +2052,7 @@ def publication_only(args: argparse.Namespace) -> dict[str, Any]:
         "input_manifest_sha256": input_manifest_sha,
         "case_identity_manifest_sha256": case_digest,
         "case_count": FROZEN_CASE_COUNT,
-        "incident_sha256": {
-            **incidents,
-            "publication_projection": FROZEN_PUBLICATION_INCIDENT_SHA256,
-        },
+        "incident_sha256": publication_incidents,
         "calculation_implementation_head": calculation_head,
         "aggregation_implementation_head": public_identity[
             "aggregation_implementation_head"
