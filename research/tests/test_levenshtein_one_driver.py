@@ -129,7 +129,7 @@ def saved_case() -> dict[str, object]:
 
 class LevenshteinOneDriverTests(unittest.TestCase):
     def test_native_root_is_direct_and_named_recovery_root(self) -> None:
-        with tempfile.TemporaryDirectory(dir=driver.NATIVE_RUNTIME_PARENT) as raw_root:
+        with tempfile.TemporaryDirectory() as raw_root:
             native = Path(raw_root) / "native"
             native.mkdir(mode=0o700)
             os.chmod(native, 0o700)
@@ -276,7 +276,7 @@ class LevenshteinOneDriverTests(unittest.TestCase):
 
     def test_worker_partition_persistence_resume_and_uncertain_delivery(self) -> None:
         values = [candidate(index) for index in range(9)]
-        with tempfile.TemporaryDirectory(dir=driver.NATIVE_RUNTIME_PARENT) as raw_root:
+        with tempfile.TemporaryDirectory() as raw_root:
             root = Path(raw_root)
             request_root = root / "requests"
             request_root.mkdir(mode=0o755)
@@ -297,7 +297,7 @@ class LevenshteinOneDriverTests(unittest.TestCase):
                 transport=transport,
             )
             self.assertEqual(transport.calls, 9)
-        with tempfile.TemporaryDirectory(dir=driver.NATIVE_RUNTIME_PARENT) as raw_root:
+        with tempfile.TemporaryDirectory() as raw_root:
             root = Path(raw_root)
             item = candidate(0)
             directory = root / "requests" / protocol.candidate_path_id(item)
@@ -322,7 +322,7 @@ class LevenshteinOneDriverTests(unittest.TestCase):
 
     def test_default_execution_stops_before_network_and_protected_integrity_is_exact(self) -> None:
         with (
-            tempfile.TemporaryDirectory(dir=driver.NATIVE_RUNTIME_PARENT) as raw_root,
+            tempfile.TemporaryDirectory() as raw_root,
             patch.dict(os.environ, {}, clear=True),
             self.assertRaisesRegex(driver.ExperimentError, "LIVE_CREDENTIAL_MISSING"),
         ):

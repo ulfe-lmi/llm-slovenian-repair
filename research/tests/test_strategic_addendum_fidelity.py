@@ -35,7 +35,13 @@ def _response(output: str) -> dict[str, object]:
         "id": "synthetic",
         "reasoning": {"effort": "low"},
         "usage": {"output_tokens": 3, "output_tokens_details": {"reasoning_tokens": 1}},
-        "output": [{"type": "message", "role": "assistant", "content": [{"type": "output_text", "text": output}]}],
+        "output": [
+            {
+                "type": "message",
+                "role": "assistant",
+                "content": [{"type": "output_text", "text": output}],
+            }
+        ],
     }
 
 
@@ -59,7 +65,9 @@ class AddendumFidelityTests(unittest.TestCase):
         self.index = self.root / "index.sqlite"
         _create_fixture_index({"unigrams": {"foo": 100, "bar": 100, "beta": 100}}, self.index)
 
-    def args(self, records: list[dict[str, object]], *, output: str = "output") -> argparse.Namespace:
+    def args(
+        self, records: list[dict[str, object]], *, output: str = "output"
+    ) -> argparse.Namespace:
         inputs = self.root / "inputs"
         inputs.mkdir(exist_ok=True)
         (inputs / "records.json").write_text(json.dumps(records))
@@ -96,12 +104,20 @@ class AddendumFidelityTests(unittest.TestCase):
         for variant_id in ("full-hyphen-space-low", "full-hyphen-case-low"):
             with self.subTest(variant=variant_id):
                 args = self.args([{"id": "case", "input": "alpha"}], output=variant_id)
-                transport = FixedTransport([
-                    json.dumps({"keep": False, "replacement": "gamma", "needs_wider_edit": False}),
-                    "beta",
-                ])
-                with patch.dict(os.environ, {"SYNTHETIC_RESEARCH_CREDENTIAL": "synthetic-placeholder"}), \
-                        patch.object(historical_transport._HttpTransport, "request", transport.request):
+                transport = FixedTransport(
+                    [
+                        json.dumps(
+                            {"keep": False, "replacement": "gamma", "needs_wider_edit": False}
+                        ),
+                        "beta",
+                    ]
+                )
+                with (
+                    patch.dict(
+                        os.environ, {"SYNTHETIC_RESEARCH_CREDENTIAL": "synthetic-placeholder"}
+                    ),
+                    patch.object(historical_transport._HttpTransport, "request", transport.request),
+                ):
                     result = execute_authorized(args, variant_map()[variant_id])
                 self.assertEqual(result["network_calls"], 2)
                 self.assertIn("Ta beseda", transport.calls[1]["input"][0]["content"][0]["text"])
@@ -117,14 +133,18 @@ class AddendumFidelityTests(unittest.TestCase):
 
         (inputs / "english.json").write_text(json.dumps({"alpha": 0.0}))
         args.output_root = str(self.root / "retry10-fixed-anchor")
-        transport = FixedTransport([
-            json.dumps({"keep": False, "replacement": "gamma", "needs_wider_edit": False}),
-            "delta",
-            "delta",
-        ])
+        transport = FixedTransport(
+            [
+                json.dumps({"keep": False, "replacement": "gamma", "needs_wider_edit": False}),
+                "delta",
+                "delta",
+            ]
+        )
         args.retry_limit = 2
-        with patch.dict(os.environ, {"SYNTHETIC_RESEARCH_CREDENTIAL": "synthetic-placeholder"}), \
-                patch.object(historical_transport._HttpTransport, "request", transport.request):
+        with (
+            patch.dict(os.environ, {"SYNTHETIC_RESEARCH_CREDENTIAL": "synthetic-placeholder"}),
+            patch.object(historical_transport._HttpTransport, "request", transport.request),
+        ):
             result = execute_authorized(args, variant_map()["prijigrala-retry10"])
         retry_prompts = [call["input"][0]["content"][0]["text"] for call in transport.calls[1:]]
         self.assertEqual(len(transport.calls), 3)
@@ -157,15 +177,32 @@ class AddendumFidelityTests(unittest.TestCase):
                 self.assertNotIn("retry_prompt", value)
                 self.assertIn("validat", request["prompt"].casefold())
                 self.assertIn("frozen first-stage", " ".join(request["content"]).casefold())
+            elif value["experiment_id"] == "007-j-levenshtein-one-contextual-validator":
+                self.assertEqual(
+                    request["fields"],
+                    ["model", "stream", "store", "input", "include_reasoning", "reasoning"],
+                )
+                self.assertFalse(request["stream"])
+                self.assertFalse(request["store"])
+                self.assertTrue(request["include_reasoning"])
+                self.assertEqual(request["reasoning_effort"], "low")
             else:
                 self.assertEqual(request["wire_keys"], value["historical_wire_keys"])
                 self.assertIn("prompt", request)
 
     def test_original_attempts_use_exact_report_hashes_and_no_wildcards(self) -> None:
-        catalog = json.loads((Path(__file__).resolve().parents[1] / "registry/experiments.json").read_text())
+        catalog = json.loads(
+            (Path(__file__).resolve().parents[1] / "registry/experiments.json").read_text()
+        )
         mappings = {item["id"]: item for item in catalog["original_attempt_mappings"]}
-        self.assertEqual(mappings["007-a-original-attempt"]["source_evidence_sha256"], "ac84a66c1d37a80601e0910fd32f4ea547281a787c896f50c8f1630bc188cc19")
-        self.assertEqual(mappings["007-b-original-attempt"]["source_evidence_sha256"], "9f973123e1a89116e17dd408c5a6da29989d6e27680c44a742a95401f2f95a66")
+        self.assertEqual(
+            mappings["007-a-original-attempt"]["source_evidence_sha256"],
+            "ac84a66c1d37a80601e0910fd32f4ea547281a787c896f50c8f1630bc188cc19",
+        )
+        self.assertEqual(
+            mappings["007-b-original-attempt"]["source_evidence_sha256"],
+            "9f973123e1a89116e17dd408c5a6da29989d6e27680c44a742a95401f2f95a66",
+        )
         self.assertNotIn("*", json.dumps(mappings))
 
     def test_campaign_uses_distinct_processes_and_disjoint_partitions(self) -> None:
@@ -173,14 +210,29 @@ class AddendumFidelityTests(unittest.TestCase):
             return Pipeline(self.index, english_lookup=lambda _word: 0.0, maximum=None)
 
         def client_factory():
-            return Client(transport=FixedTransport([json.dumps({"keep": True, "replacement": None, "needs_wider_edit": False})]))
+            return Client(
+                transport=FixedTransport(
+                    [json.dumps({"keep": True, "replacement": None, "needs_wider_edit": False})]
+                )
+            )
 
-        rows = [{"benchmark": "synthetic", "id": f"case-{index}", "index": index, "input": "alpha"} for index in range(1, 5)]
-        result = run_injected(rows, output_root=self.root / "campaign", workers=2, pipeline_factory=pipeline_factory, client_factory=client_factory)
+        rows = [
+            {"benchmark": "synthetic", "id": f"case-{index}", "index": index, "input": "alpha"}
+            for index in range(1, 5)
+        ]
+        result = run_injected(
+            rows,
+            output_root=self.root / "campaign",
+            workers=2,
+            pipeline_factory=pipeline_factory,
+            client_factory=client_factory,
+        )
         statuses = [item for item in result["worker_statuses"] if item["phase"] == "synthetic"]
         self.assertEqual(len(statuses), 2)
         self.assertEqual(len({item["pid"] for item in statuses}), 2)
-        self.assertEqual(sorted(statuses[0]["assigned_indices"] + statuses[1]["assigned_indices"]), [1, 2, 3, 4])
+        self.assertEqual(
+            sorted(statuses[0]["assigned_indices"] + statuses[1]["assigned_indices"]), [1, 2, 3, 4]
+        )
         self.assertEqual(result["process_scheduler"], "multiprocessing-worker-processes")
 
     def test_failed_before_status_is_recorded_as_worker_incident(self) -> None:
@@ -198,19 +250,31 @@ class AddendumFidelityTests(unittest.TestCase):
             client_factory=client_factory,
         )
         self.assertEqual(result["status"], "RECORDED_WITH_WORKER_INCIDENTS")
-        status = json.loads((self.root / "failed-worker/workers/synthetic/0/STATUS.json").read_text())
+        status = json.loads(
+            (self.root / "failed-worker/workers/synthetic/0/STATUS.json").read_text()
+        )
         self.assertEqual(status["status"], "WORKER_FAILED_BEFORE_COMPLETION")
         self.assertEqual(status["worker_incident"], "worker exited with code 1")
 
     def test_new_driver_boundaries_reject_unsafe_ids_before_writes(self) -> None:
         with self.assertRaises(ValueError):
-            run_validator_records([{"id": "../escape"}], object(), self.root / "validator", model="qwen3.8-27b")
+            run_validator_records(
+                [{"id": "../escape"}], object(), self.root / "validator", model="qwen3.8-27b"
+            )
         self.assertFalse((self.root / "validator").exists())
         with self.assertRaises(ValueError):
-            run_scheduled_trials([{"id": "", "input": "alpha"}], "ten-run-initial-case-low", object(), object(), self.root / "ten")
+            run_scheduled_trials(
+                [{"id": "", "input": "alpha"}],
+                "ten-run-initial-case-low",
+                object(),
+                object(),
+                self.root / "ten",
+            )
         self.assertFalse((self.root / "ten").exists())
         with self.assertRaises(ValueError):
-            run_record({"id": "../escape", "input": "alpha"}, object(), object(), self.root / "retry10")
+            run_record(
+                {"id": "../escape", "input": "alpha"}, object(), object(), self.root / "retry10"
+            )
         self.assertFalse((self.root / "retry10").exists())
         with self.assertRaises(ValueError):
             safe_component("")
@@ -225,8 +289,20 @@ class AddendumFidelityTests(unittest.TestCase):
         ledger = self.root / "ledger.json.gz"
         entries = {
             "entries": [
-                {"root": "experiments/a", "relative_path": "first.bin", "classification": "private-only", "sha256": hashlib.sha256(b"first").hexdigest(), "size": 5},
-                {"root": "recovery/a", "relative_path": "second.bin", "classification": "private-only", "sha256": hashlib.sha256(b"second").hexdigest(), "size": 6},
+                {
+                    "root": "experiments/a",
+                    "relative_path": "first.bin",
+                    "classification": "private-only",
+                    "sha256": hashlib.sha256(b"first").hexdigest(),
+                    "size": 5,
+                },
+                {
+                    "root": "recovery/a",
+                    "relative_path": "second.bin",
+                    "classification": "private-only",
+                    "sha256": hashlib.sha256(b"second").hexdigest(),
+                    "size": 6,
+                },
             ]
         }
         with gzip.GzipFile(ledger, "wb", mtime=0) as handle:
