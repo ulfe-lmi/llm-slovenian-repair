@@ -61,6 +61,64 @@ separate OAP unittest discovery, and both sdist/wheel builds in the required
 order. The package contains no production entry point, service, live-Qwen test,
 corpus, GPU dependency, downloader, or release step.
 
+## Machine-local development environment (007-k)
+
+The owner-selected workspace is a sync mount where a persistent project-local
+virtual environment and tool caches are unsupported, so ordinary multi-machine
+development uses a machine-local environment. The canonical definition is the
+sourceable helper `scripts/project_env.sh`; it derives every persistent path
+from `$HOME` and the checked-in project name in `pyproject.toml` and hard-codes
+no username, hostname, or absolute path.
+
+| Purpose | Machine-local path |
+| --- | --- |
+| uv/virtual environment | `$HOME/envs/llm-slovenian-repair` |
+| Python bytecode (`PYTHONPYCACHEPREFIX`) | `$HOME/.cache/python-pycache/llm-slovenian-repair` |
+| Ruff cache | `$HOME/.cache/ruff/llm-slovenian-repair` |
+| mypy cache | `$HOME/.cache/mypy/llm-slovenian-repair` |
+| pytest cache | `$HOME/.cache/pytest/llm-slovenian-repair` |
+| project temporary work (`TMPDIR`) | `$HOME/.cache/tmp/llm-slovenian-repair` |
+| uv package cache | uv's default machine-local cache |
+
+First use on each machine:
+
+1. Install compatible uv (`>=0.12.5,<0.13`) and Python 3.12 if absent.
+2. Clone, mount, or open the shared project.
+3. In the shell you develop in: `source scripts/project_env.sh` (once per
+   shell; repeated sourcing is idempotent and keeps the environment `bin`
+   exactly once at the front of `PATH`).
+4. Run `scripts/bootstrap_dev_env.sh` to validate repository identity, the uv
+   constraint, and Python 3.12 availability, then perform the normal locked
+   `uv sync --frozen` into the machine-local target. `uv sync --frozen` alone
+   works identically once the helper is active.
+5. Use ordinary `python`, `uv run`, `pytest`, Ruff, and mypy.
+
+A plain shell cannot receive exported variables from an executed child
+process, so the helper must be sourced (or direnv used); executing it fails
+with a concise instruction. The helper creates only the exact project-specific
+parent and cache directories; it never creates the uv environment itself, and
+existing nonempty user values for the cache/`TMPDIR` variables are preserved.
+
+Optional direnv: the tracked root `.envrc` only sources the canonical helper.
+Install direnv, add its shell hook, and run `direnv allow` once per machine;
+thereafter ordinary `cd` activates the paths. Direnv is optional and is not
+installed or required by the tests.
+
+Multi-machine behavior: dependency updates travel only through the committed
+`pyproject.toml` and `uv.lock`; each machine reruns the locked sync into its
+own `$HOME/envs` path. Environments are never copied or moved between
+machines. The pre-existing repository-local `.venv` and the named transient
+caches (`.pytest_cache`, `.mypy_cache`, `.ruff_cache`) remain in place as
+inactive legacy data: the owner deferred their removal, and this workflow
+neither uses nor recreates them. A locked sync or `uv run` with the helper
+active writes the environment, bytecode, and named caches only to the
+machine-local paths above.
+
+The authoritative baseline driver `scripts/verify_development_baseline.py` is
+unchanged: it still creates one disposable native temporary environment and
+caches, refuses a repository-local parent, and runs the frozen offline
+dependency policy for the application baseline.
+
 ## Source manifest fixture
 
 `llm_slovenian_repair.source_manifest` exposes frozen `SourceManifest` and

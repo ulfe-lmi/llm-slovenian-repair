@@ -33,6 +33,12 @@ a complete Slovenian model answer, selects suspicious local spans on CPU, option
 asks the existing Qwen in an isolated context, validates independent evidence and
 patches approved spans exactly. No repair application is implemented here.
 
+The persistent development environment and tool caches are machine-local
+(`$HOME/envs/llm-slovenian-repair`) via the sourceable `scripts/project_env.sh`
+helper and `scripts/bootstrap_dev_env.sh`; configured shells do not create or use
+a repository `.venv`. The pre-existing repository-local `.venv` and named tool
+caches remain in place as inactive legacy data; the owner deferred their removal.
+
 Start with [development](docs/DEVELOPMENT.md), [runbook](docs/OAP-RUNBOOK.md),
 [role setup](docs/CODEX-ROLE-SETUP.md),
 [readiness](docs/READINESS.md) and [testing](TESTING.md). Full product agreement is

@@ -150,6 +150,9 @@ activemq-data/
 # Environments
 .env
 .envrc
+# The tracked root .envrc hooks the machine-local development
+# environment (007-k); nested .envrc files remain ignored.
+!/.envrc
 .venv
 env/
 venv/
