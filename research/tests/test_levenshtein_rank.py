@@ -1778,7 +1778,7 @@ class FailedRootAdoptionTests(unittest.TestCase):
                 )
                 identity_basis = driver._reuse_identity_basis(configuration)
                 reuse_records = driver.adopt_completed_c_gt_1(
-                    failed, scratch, items, states, identity_basis
+                    failed, scratch, items, states, identity_basis, expected_total=3
                 )
                 self.assertEqual(len(reuse_records), 3)
                 self.assertEqual(
@@ -1817,7 +1817,9 @@ class FailedRootAdoptionTests(unittest.TestCase):
                 decisions = [record["decision"] for record in reuse_records]
                 self.assertEqual(decisions[:2], ["KEEP_ORIGINAL", "USE_CANDIDATE"])
                 self.assertIsNone(decisions[2])
-                carry_records = driver.carry_interrupted_c_gt_1(failed, scratch, items, states)
+                carry_records = driver.carry_interrupted_c_gt_1(
+                    failed, scratch, items, states, expected_total=1
+                )
                 self.assertEqual(len(carry_records), 1)
                 record = carry_records[0]
                 item = by_id[record["candidate_id"]]
@@ -1843,7 +1845,9 @@ class FailedRootAdoptionTests(unittest.TestCase):
                 )
                 self.assertEqual(record["new_calls"], 0)
                 with self.assertRaisesRegex(driver.ExperimentError, "already exists"):
-                    driver.carry_interrupted_c_gt_1(failed, scratch, items, states)
+                    driver.carry_interrupted_c_gt_1(
+                        failed, scratch, items, states, expected_total=1
+                    )
 
     def test_build_live_configuration_adoption_block_and_frozen_regression(self) -> None:
         identity = {
@@ -1931,6 +1935,273 @@ class FailedRootAdoptionTests(unittest.TestCase):
         self.assertEqual(frozen["reuse"]["c_gt_1_reused"], 0)
         self.assertNotIn("c_gt_1_cross_root_reuse_basis", frozen["reuse"])
         self.assertNotIn("c_gt_1_fresh", frozen["population"])
+
+
+
+class ReplayGateNormalizationTests(unittest.TestCase):
+    """The 007-j replay identity gate is persistence-faithful.
+
+    The frozen persistence layer stores in-memory tuples as JSON arrays
+    (attribution.isolated_edit_key carries a tuple inside).  The identity
+    gate compares through the canonical JSON round-trip, so the persisted
+    form of a recomputed row is accepted while real content drift is
+    still rejected.
+    """
+
+    SOURCE = "a b c d"
+
+    def _case_record(self, choice: str) -> dict[str, object]:
+        saved = {
+            "id": "case-1",
+            "index": 1,
+            "input": self.SOURCE,
+            "input_sha256": hashlib.sha256(self.SOURCE.encode()).hexdigest(),
+            "detector": {"candidates": [], "english": []},
+            "decisions": [
+                {
+                    "candidate": {"start": 0, "end": 1, "text": "a"},
+                    "first": None,
+                    "retry": None,
+                    "final_gate": {"accepted": True},
+                    "final_case": {"adjusted_replacement": "A"},
+                },
+            ],
+            "calls": [],
+            "output": self.SOURCE,
+            "edits": [],
+            "operational_failure": False,
+        }
+        case = {
+            "phase": "dassle-spelling",
+            "index": 1,
+            "id": "case-1",
+            "dataset": {"reference": "A b c d"},
+            "baseline": saved,
+            "new": copy.deepcopy(saved),
+        }
+        item = {
+            "phase": "dassle-spelling",
+            "case_index": 1,
+            "case_id": "case-1",
+            "target_ordinal": 0,
+            "target_start": 0,
+            "target_end": 1,
+            "candidate": {"start": 0, "end": 1, "text": "a"},
+            "candidate_form": "A",
+            "operation": "SUBSTITUTION",
+            "mechanical_edit": [0, 1, "A"],
+            "sentence": self.SOURCE,
+        }
+        observation = {"decision": choice, "operational_failure": False, "dispatch": "ATTEMPTED"}
+        return driver.validator_driver.make_case_result(
+            "dassle-spelling",
+            case,
+            [item],
+            {protocol.candidate_path_id(item): observation},
+            "configuration",
+        )
+
+    def test_tuple_and_json_array_forms_compare_equal(self) -> None:
+        self.assertTrue(
+            driver.json_normalized_equal(
+                {"k": [0, 1, ("a",)]}, {"k": [0, 1, ["a"]]}
+            )
+        )
+        self.assertFalse(
+            driver.json_normalized_equal(
+                {"k": [0, 1, ("a",)]}, {"k": [0, 1, ["b"]]}
+            )
+        )
+        self.assertFalse(driver.json_normalized_equal({"k": 1}, {"k": 2}))
+
+    def test_replay_row_matches_its_json_persisted_form(self) -> None:
+        record = self._case_record("USE_CANDIDATE")
+        attribution = record["validator_targets"][0]["attribution"]
+        self.assertEqual(attribution["status"], "exact_reference")
+        self.assertIsInstance(attribution["isolated_edit_key"][2], tuple)
+        persisted = json.loads(driver.canonical_bytes(record))
+        persisted_key = (
+            persisted["validator_targets"][0]["attribution"]["isolated_edit_key"]
+        )
+        self.assertEqual(attribution["isolated_edit_key"][2], ("A",))
+        self.assertEqual(persisted_key[2], ["A"])
+        self.assertTrue(driver.json_normalized_equal(record, persisted))
+
+    def test_content_drift_is_still_rejected(self) -> None:
+        record = self._case_record("USE_CANDIDATE")
+        drifted = copy.deepcopy(record)
+        drifted["validator_targets"][0]["attribution"]["isolated_edit_key"] = [0, 1, ["z"]]
+        self.assertFalse(driver.json_normalized_equal(record, drifted))
+
+
+class SecondFailedRootAdoptionTests(unittest.TestCase):
+    """Adoption of the second failed-instrument root contract (synthetic).
+
+    Mirrors the 090ea8 contract: every C>1 observation completed and
+    persisted (ATTEMPTED or interrupted-uncertain), no request-only
+    interruptions, nothing missing, and a VALIDATOR_OBSERVATIONS_COMPLETE
+    run status frozen as the evidence state.
+    """
+
+    FAILED_NAME = "007-m-rank-ambiguous-levenshtein-candidates-recovery.synthetic090"
+
+    def _build_failed_root(
+        self, parent: Path
+    ) -> tuple[Path, list[dict[str, object]], dict[str, object]]:
+        items = multi_live_items(5)
+        failed = parent / self.FAILED_NAME
+        failed.mkdir(mode=0o700)
+        os.chmod(failed, 0o700)
+        choices = ["KEEP_ORIGINAL", "USE_CANDIDATE", "KEEP_ORIGINAL", "USE_CANDIDATE"]
+        for position, item in enumerate(items):
+            directory = failed / "requests" / protocol.candidate_path_id(item)
+            directory.parent.mkdir(parents=True, exist_ok=True, mode=0o700)
+            os.chmod(directory.parent, 0o700)
+            directory.mkdir(mode=0o700)
+            os.chmod(directory, 0o700)
+            body = protocol.request_body(
+                item["sentence"], item["candidate"]["text"], item["mechanical_edit"][2]
+            )
+            if position == len(items) - 1:
+                protocol.immutable_write(
+                    directory / "request.json", protocol.canonical_bytes(body)
+                )
+                protocol.immutable_json(directory / "dispatch.json", {"dispatch": "ATTEMPTED"})
+                protocol.interrupted_observation(directory, body)
+            else:
+                protocol.perform_call(
+                    directory, body, transport=CaptureTransport(choices[position])
+                )
+        configuration = {
+            "run_id": "007-m",
+            "status": "FROZEN_BEFORE_LIVE_EXECUTION",
+            "implementation_head": "f" * 40,
+            "deployment": {
+                "endpoint": "http://synthetic.invalid/v1",
+                "model": protocol.MODEL,
+                "credential_env": "OAP_007_J_QWEN_BEARER",
+                "profile_sha256": "0" * 64,
+            },
+            "prompt": {"sha256": protocol.FROZEN_PROMPT_SHA256},
+            "parser": prior_j.EXPECTED_PARSER,
+        }
+        driver.validator_driver.immutable_json(failed / "CONFIGURATION.json", configuration)
+        driver.validator_driver.immutable_json(
+            failed / "RUN-STATUS.json",
+            {"status": "VALIDATOR_OBSERVATIONS_COMPLETE", "run_id": "007-m"},
+        )
+        return failed, items, configuration
+
+    @contextlib.contextmanager
+    def _patched(self, failed: Path, **overrides: object):
+        values = {
+            "EXPECTED_SECOND_FAILED_ROOT": self.FAILED_NAME,
+            "EXPECTED_SECOND_FAILED_ROOT_CONFIGURATION": driver.sha256_file(
+                failed / "CONFIGURATION.json"
+            ),
+            "EXPECTED_SECOND_FAILED_ROOT_HEAD": "f" * 40,
+            "EXPECTED_SECOND_FAILED_ROOT_RUN_STATUS": driver.sha256_file(
+                failed / "RUN-STATUS.json"
+            ),
+            "EXPECTED_SECOND_FAILED_ROOT_REQUEST_TREE": (
+                driver.validator_driver.request_tree_identity(failed / "requests")
+            ),
+            "EXPECTED_SECOND_ADOPTED_COMPLETED_ATTEMPTED": 4,
+            "EXPECTED_SECOND_ADOPTED_COMPLETED_UNCERTAIN": 1,
+            "EXPECTED_SECOND_ADOPTED_REQUEST_ONLY": 0,
+            "EXPECTED_SECOND_ADOPTED_FRESH": 0,
+            "EXPECTED_SECOND_ADOPTED_FRESH_COUNTS": {
+                "dassle-spelling": 0,
+                "dassle-spelling-preservation": 0,
+            },
+            "EXPECTED_007M_PROFILE_SHA256": "0" * 64,
+        }
+        values.update(overrides)
+        with contextlib.ExitStack() as stack:
+            for name, value in values.items():
+                stack.enter_context(patch.object(driver, name, value))
+            yield
+
+    def _scratch(self, parent: Path, name: str = "adoption-scratch") -> Path:
+        scratch = parent / name
+        scratch.mkdir(mode=0o700)
+        os.chmod(scratch, 0o700)
+        return scratch
+
+    def test_second_root_census_and_full_adoption(self) -> None:
+        with tempfile.TemporaryDirectory() as raw_root:
+            parent = Path(raw_root)
+            failed, items, configuration = self._build_failed_root(parent)
+            scratch = self._scratch(parent)
+            with self._patched(failed):
+                result = driver.verify_failed_root(failed, scratch, items)
+                self.assertEqual(
+                    result["state_census"],
+                    {
+                        "completed_attempted": 4,
+                        "completed_uncertain_persisted": 1,
+                        "request_only_interrupted": 0,
+                        "missing": 0,
+                    },
+                )
+                self.assertIn("could not aggregate", result["defect"])
+                states = result["states"]
+                identity_basis = driver._reuse_identity_basis(configuration)
+                reuse_records = driver.adopt_completed_c_gt_1(
+                    failed, scratch, items, states, identity_basis, expected_total=5
+                )
+                self.assertEqual(len(reuse_records), 5)
+                self.assertEqual(
+                    [record["state"] for record in reuse_records],
+                    ["completed-attempted"] * 4 + ["interrupted-uncertain"],
+                )
+                for record in reuse_records:
+                    for name in (
+                        "request.json",
+                        "dispatch.json",
+                        "raw-response.json",
+                        "observation.json",
+                    ):
+                        self.assertEqual(
+                            driver.sha256_file(
+                                scratch / "requests" / record["candidate_id"] / name
+                            ),
+                            driver.sha256_file(
+                                failed / "requests" / record["candidate_id"] / name
+                            ),
+                        )
+                carry_records = driver.carry_interrupted_c_gt_1(
+                    failed, scratch, items, states, expected_total=0
+                )
+                self.assertEqual(carry_records, [])
+
+    def test_second_root_run_status_mismatch_is_rejected(self) -> None:
+        with tempfile.TemporaryDirectory() as raw_root:
+            parent = Path(raw_root)
+            failed, items, _configuration = self._build_failed_root(parent)
+            scratch = self._scratch(parent)
+            status_path = failed / "RUN-STATUS.json"
+            original_sha = driver.sha256_file(status_path)
+            status_path.write_bytes(status_path.read_bytes() + b" ")
+            os.chmod(status_path, 0o600)
+            with (
+                self._patched(failed, EXPECTED_SECOND_FAILED_ROOT_RUN_STATUS=original_sha),
+                self.assertRaisesRegex(
+                    driver.validator_driver.ExperimentError, "hash mismatch"
+                ),
+            ):
+                driver.verify_failed_root(failed, scratch, items)
+
+    def test_unpreserved_root_name_is_rejected(self) -> None:
+        with tempfile.TemporaryDirectory() as raw_root:
+            parent = Path(raw_root)
+            failed = parent / "not-an-evidence-root"
+            failed.mkdir(mode=0o700)
+            os.chmod(failed, 0o700)
+            with self.assertRaisesRegex(
+                driver.ExperimentError, "not a preserved 007-m evidence root"
+            ):
+                driver.failed_root_spec(failed.name)
 
 
 if __name__ == "__main__":

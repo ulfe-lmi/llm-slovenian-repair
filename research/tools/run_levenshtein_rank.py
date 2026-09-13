@@ -166,6 +166,37 @@ EXPECTED_ADOPTED_FRESH_COUNTS = {
     "dassle-spelling-preservation": 231,
 }
 
+# Second failed-instrument root, preserved unchanged as evidence.  All 882
+# C>1 observations and the 1035 C=1 observations completed and persisted
+# under 92bee3a (678 fresh calls, zero resampling); only the 007-j replay
+# identity gate blocked its aggregation because it compared in-memory
+# tuple-typed attribution fields against the JSON-normalized persisted rows.
+EXPECTED_SECOND_FAILED_ROOT = (
+    "007-m-rank-ambiguous-levenshtein-candidates-recovery.090ea8"
+)
+EXPECTED_SECOND_FAILED_ROOT_CONFIGURATION = (
+    "6b841ec1765059d462ff9f5761549aa0b3b7687005d5304299ea8bed8eddd816"
+)
+EXPECTED_SECOND_FAILED_ROOT_HEAD = "92bee3a214aa50ef3921f54488545a57d9a95000"
+EXPECTED_SECOND_FAILED_ROOT_RUN_STATUS = (
+    "f071c164926404abb42b64b22434fe839e5e47e68aa77ede1b6993eff115cd82"
+)
+EXPECTED_SECOND_FAILED_ROOT_REQUEST_TREE = {
+    "file_count": 7_668,
+    "total_bytes": 12_140_924,
+    "sha256sum_manifest_sha256": (
+        "6e287f3c835285d5a31132f42c31878dc91099dc91783debb9900123c033b449"
+    ),
+}
+EXPECTED_SECOND_ADOPTED_COMPLETED_ATTEMPTED = 866
+EXPECTED_SECOND_ADOPTED_COMPLETED_UNCERTAIN = 16
+EXPECTED_SECOND_ADOPTED_REQUEST_ONLY = 0
+EXPECTED_SECOND_ADOPTED_FRESH = 0
+EXPECTED_SECOND_ADOPTED_FRESH_COUNTS = {
+    "dassle-spelling": 0,
+    "dassle-spelling-preservation": 0,
+}
+
 LIVE_CODE_FILES = (
     "research/levenshtein_rank.py",
     "research/tools/run_levenshtein_rank.py",
@@ -200,6 +231,15 @@ def read_json(path: Path) -> Any:
         return json.loads(path.read_text(encoding="utf-8"))
     except (OSError, UnicodeDecodeError, json.JSONDecodeError) as exc:
         raise ExperimentError(f"invalid private JSON artifact: {path.name}") from exc
+
+
+def json_normalized_equal(left: object, right: object) -> bool:
+    """Compare values the way the frozen persistence layer stores them.
+
+    Canonical JSON round-trips in-memory tuples to JSON arrays, so this
+    comparison is byte-faithful to what immutable_json persisted.
+    """
+    return canonical_bytes(left) == canonical_bytes(right)
 
 
 def _git(repo_root: Path, *arguments: str) -> str:
@@ -1829,7 +1869,8 @@ def prepare_adopted_live(
         "payloads": census["dispatch"],
     }
     all_c_gt_1 = build_live_candidates(census["dispatch"], population)
-    failed = verify_failed_root(failed_root, scratch, all_c_gt_1)
+    spec = failed_root_spec(failed_root.name)
+    failed = verify_failed_root(failed_root, scratch, all_c_gt_1, spec)
     failed_configuration = read_json(failed_root / "CONFIGURATION.json")
     source_configuration = read_json(source_root / "CONFIGURATION.json")
     deployment = live_deployment(source_configuration, profile_path, credential_env)
@@ -1837,9 +1878,16 @@ def prepare_adopted_live(
     c1_records = copy_c1_observations(source_root, scratch, c1_items)
     identity_basis = _reuse_identity_basis(failed_configuration)
     reuse_records = adopt_completed_c_gt_1(
-        failed_root, scratch, all_c_gt_1, failed["states"], identity_basis
+        failed_root,
+        scratch,
+        all_c_gt_1,
+        failed["states"],
+        identity_basis,
+        expected_total=spec["completed_attempted"] + spec["completed_uncertain"],
     )
-    carry_records = carry_interrupted_c_gt_1(failed_root, scratch, all_c_gt_1, failed["states"])
+    carry_records = carry_interrupted_c_gt_1(
+        failed_root, scratch, all_c_gt_1, failed["states"], expected_total=spec["request_only"]
+    )
     adopted_ids = (
         {record["candidate_id"] for record in reuse_records}
         | {record["candidate_id"] for record in carry_records}
@@ -1849,10 +1897,10 @@ def prepare_adopted_live(
         protocol.candidate_path_id(item) for item in c1_items
     }:
         raise ExperimentError("C=1 and C>1 candidate path identities collide")
-    if len(fresh) != EXPECTED_ADOPTED_FRESH:
+    if len(fresh) != spec["missing"]:
         raise ExperimentError("adopted fresh call count mismatch")
     fresh_counts = {phase: sum(1 for item in fresh if item["phase"] == phase) for phase in PHASES}
-    if fresh_counts != dict(EXPECTED_ADOPTED_FRESH_COUNTS):
+    if fresh_counts != dict(spec["fresh_counts"]):
         raise ExperimentError(f"adopted fresh phase counts mismatch: {fresh_counts}")
     adopted_items = [item for item in all_c_gt_1 if protocol.candidate_path_id(item) in adopted_ids]
     adopted_manifest, _adopted_digest = protocol.candidate_manifest(adopted_items)
@@ -1860,9 +1908,9 @@ def prepare_adopted_live(
         "schema_version": 1,
         "failed_root": failed["failed_root"],
         "failed_root_path": failed["failed_root_path"],
-        "configuration_sha256": EXPECTED_FAILED_ROOT_CONFIGURATION,
-        "run_status_sha256": EXPECTED_FAILED_ROOT_RUN_STATUS,
-        "implementation_head": EXPECTED_FAILED_ROOT_HEAD,
+        "configuration_sha256": failed["configuration_sha256"],
+        "run_status_sha256": failed["run_status_sha256"],
+        "implementation_head": failed["implementation_head"],
         "request_tree": failed["request_tree"],
         "state_census": failed["state_census"],
         "defect": failed["defect"],
@@ -1871,8 +1919,8 @@ def prepare_adopted_live(
         "harness_revision_head": identity["implementation_head"],
         "adoption": {
             "c_gt_1_completed_reused": len(reuse_records),
-            "c_gt_1_completed_reused_attempted": EXPECTED_ADOPTED_COMPLETED_ATTEMPTED,
-            "c_gt_1_completed_reused_uncertain": EXPECTED_ADOPTED_COMPLETED_UNCERTAIN,
+            "c_gt_1_completed_reused_attempted": spec["completed_attempted"],
+            "c_gt_1_completed_reused_uncertain": spec["completed_uncertain"],
             "c_gt_1_interrupted_carried": len(carry_records),
             "c_gt_1_fresh": len(fresh),
         },
@@ -1880,16 +1928,16 @@ def prepare_adopted_live(
     adoption = {
         "failed_root": failed["failed_root"],
         "failed_root_path": failed["failed_root_path"],
-        "failed_root_configuration_sha256": EXPECTED_FAILED_ROOT_CONFIGURATION,
-        "failed_root_run_status_sha256": EXPECTED_FAILED_ROOT_RUN_STATUS,
-        "failed_root_implementation_head": EXPECTED_FAILED_ROOT_HEAD,
+        "failed_root_configuration_sha256": failed["configuration_sha256"],
+        "failed_root_run_status_sha256": failed["run_status_sha256"],
+        "failed_root_implementation_head": failed["implementation_head"],
         "failed_root_request_tree": failed["request_tree"],
         "failed_root_state_census": failed["state_census"],
         "failed_root_defect": failed["defect"],
         "harness_revision_head": identity["implementation_head"],
         "completed_reused": len(reuse_records),
-        "completed_reused_attempted": EXPECTED_ADOPTED_COMPLETED_ATTEMPTED,
-        "completed_reused_uncertain": EXPECTED_ADOPTED_COMPLETED_UNCERTAIN,
+        "completed_reused_attempted": spec["completed_attempted"],
+        "completed_reused_uncertain": spec["completed_uncertain"],
         "interrupted_carried": len(carry_records),
         "fresh": len(fresh),
         "linkage_artifact": "FAILED-ROOT-LINKAGE.json",
@@ -2182,19 +2230,68 @@ def verify_c_gt_1_observations(
     }
 
 
+def failed_root_spec(name: str) -> dict[str, Any]:
+    """Bind one preserved failed-instrument root to its adoption contract."""
+    if name == EXPECTED_FAILED_ROOT:
+        return {
+            "name": name,
+            "configuration_sha256": EXPECTED_FAILED_ROOT_CONFIGURATION,
+            "implementation_head": EXPECTED_FAILED_ROOT_HEAD,
+            "run_status_sha256": EXPECTED_FAILED_ROOT_RUN_STATUS,
+            "run_status_status": "FROZEN_BEFORE_LIVE_EXECUTION",
+            "request_tree": dict(EXPECTED_FAILED_ROOT_REQUEST_TREE),
+            "completed_attempted": EXPECTED_ADOPTED_COMPLETED_ATTEMPTED,
+            "completed_uncertain": EXPECTED_ADOPTED_COMPLETED_UNCERTAIN,
+            "request_only": EXPECTED_ADOPTED_REQUEST_ONLY,
+            "missing": EXPECTED_ADOPTED_FRESH,
+            "fresh_counts": dict(EXPECTED_ADOPTED_FRESH_COUNTS),
+            "defect": (
+                "88ca4dfe verify_c_gt_1_observations rejected the canonical "
+                "interrupted-finalization file set (request + dispatch marker + "
+                "raw/observation UNKNOWN), so the root cannot complete its own "
+                "live resume; preserved unchanged as failed-instrument evidence"
+            ),
+        }
+    if name == EXPECTED_SECOND_FAILED_ROOT:
+        return {
+            "name": name,
+            "configuration_sha256": EXPECTED_SECOND_FAILED_ROOT_CONFIGURATION,
+            "implementation_head": EXPECTED_SECOND_FAILED_ROOT_HEAD,
+            "run_status_sha256": EXPECTED_SECOND_FAILED_ROOT_RUN_STATUS,
+            "run_status_status": "VALIDATOR_OBSERVATIONS_COMPLETE",
+            "request_tree": dict(EXPECTED_SECOND_FAILED_ROOT_REQUEST_TREE),
+            "completed_attempted": EXPECTED_SECOND_ADOPTED_COMPLETED_ATTEMPTED,
+            "completed_uncertain": EXPECTED_SECOND_ADOPTED_COMPLETED_UNCERTAIN,
+            "request_only": EXPECTED_SECOND_ADOPTED_REQUEST_ONLY,
+            "missing": EXPECTED_SECOND_ADOPTED_FRESH,
+            "fresh_counts": dict(EXPECTED_SECOND_ADOPTED_FRESH_COUNTS),
+            "defect": (
+                "92bee3a complete_live_result 007-j replay identity gate "
+                "compared in-memory tuple-typed attribution fields against the "
+                "JSON-normalized persisted rows, so the fully observed root "
+                "could not aggregate; preserved unchanged as failed-instrument "
+                "evidence"
+            ),
+        }
+    raise ExperimentError("failed root is not a preserved 007-m evidence root")
+
+
 def verify_failed_root(
     failed_root: Path,
     scratch: Path,
     c_gt_1_items: list[dict[str, Any]],
+    spec: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Bind the preserved failed-instrument root identity and census its states."""
     validator_driver.require_owned_dir(failed_root)
-    if failed_root.name != EXPECTED_FAILED_ROOT:
-        raise ExperimentError("failed root is not the preserved ffdf13 evidence root")
+    if spec is None:
+        spec = failed_root_spec(failed_root.name)
+    if failed_root.name != spec["name"]:
+        raise ExperimentError("failed root does not match its adoption spec")
     if failed_root.absolute() == scratch.absolute():
         raise ExperimentError("failed root and adoption scratch are the same root")
     validator_driver.require_private_file(
-        failed_root / "CONFIGURATION.json", expected_sha=EXPECTED_FAILED_ROOT_CONFIGURATION
+        failed_root / "CONFIGURATION.json", expected_sha=spec["configuration_sha256"]
     )
     configuration = read_json(failed_root / "CONFIGURATION.json")
     deployment = configuration.get("deployment") if isinstance(configuration, dict) else None
@@ -2204,7 +2301,7 @@ def verify_failed_root(
             isinstance(configuration, dict),
             configuration.get("run_id") == "007-m",
             configuration.get("status") == "FROZEN_BEFORE_LIVE_EXECUTION",
-            configuration.get("implementation_head") == EXPECTED_FAILED_ROOT_HEAD,
+            configuration.get("implementation_head") == spec["implementation_head"],
             isinstance(deployment, dict),
             deployment.get("profile_sha256") == EXPECTED_007M_PROFILE_SHA256,
             deployment.get("model") == protocol.MODEL,
@@ -2216,13 +2313,13 @@ def verify_failed_root(
     ):
         raise ExperimentError("failed root configuration identity drifted")
     validator_driver.require_private_file(
-        failed_root / "RUN-STATUS.json", expected_sha=EXPECTED_FAILED_ROOT_RUN_STATUS
+        failed_root / "RUN-STATUS.json", expected_sha=spec["run_status_sha256"]
     )
     status = read_json(failed_root / "RUN-STATUS.json")
-    if status.get("status") != "FROZEN_BEFORE_LIVE_EXECUTION":
+    if status.get("status") != spec["run_status_status"]:
         raise ExperimentError("failed root run status is not the frozen identity")
     request_tree = validator_driver.request_tree_identity(failed_root / "requests")
-    if request_tree != EXPECTED_FAILED_ROOT_REQUEST_TREE:
+    if request_tree != spec["request_tree"]:
         raise ExperimentError("failed root request tree identity changed")
     states: dict[str, str] = {}
     for item in c_gt_1_items:
@@ -2247,19 +2344,19 @@ def verify_failed_root(
             raise ExperimentError(f"failed root holds an unadoptable C>1 state: {candidate_id}")
     census = Counter(states.values())
     if (
-        census.get("ATTEMPTED", 0) != EXPECTED_ADOPTED_COMPLETED_ATTEMPTED
-        or census.get("INTERRUPTED_4FILE", 0) != EXPECTED_ADOPTED_COMPLETED_UNCERTAIN
-        or census.get("REQUEST_ONLY", 0) != EXPECTED_ADOPTED_REQUEST_ONLY
-        or census.get("MISSING", 0) != EXPECTED_ADOPTED_FRESH
+        census.get("ATTEMPTED", 0) != spec["completed_attempted"]
+        or census.get("INTERRUPTED_4FILE", 0) != spec["completed_uncertain"]
+        or census.get("REQUEST_ONLY", 0) != spec["request_only"]
+        or census.get("MISSING", 0) != spec["missing"]
         or len(states) != len(c_gt_1_items)
     ):
         raise ExperimentError(f"failed root C>1 state census drifted: {dict(census)}")
     return {
         "failed_root": failed_root.name,
         "failed_root_path": str(failed_root.absolute()),
-        "configuration_sha256": EXPECTED_FAILED_ROOT_CONFIGURATION,
-        "run_status_sha256": EXPECTED_FAILED_ROOT_RUN_STATUS,
-        "implementation_head": EXPECTED_FAILED_ROOT_HEAD,
+        "configuration_sha256": spec["configuration_sha256"],
+        "run_status_sha256": spec["run_status_sha256"],
+        "implementation_head": spec["implementation_head"],
         "request_tree": request_tree,
         "state_census": {
             "completed_attempted": census.get("ATTEMPTED", 0),
@@ -2267,12 +2364,7 @@ def verify_failed_root(
             "request_only_interrupted": census.get("REQUEST_ONLY", 0),
             "missing": census.get("MISSING", 0),
         },
-        "defect": (
-            "88ca4dfe verify_c_gt_1_observations rejected the canonical "
-            "interrupted-finalization file set (request + dispatch marker + "
-            "raw/observation UNKNOWN), so the root cannot complete its own "
-            "live resume; preserved unchanged as failed-instrument evidence"
-        ),
+        "defect": spec["defect"],
         "resampled": False,
         "states": states,
     }
@@ -2306,6 +2398,8 @@ def adopt_completed_c_gt_1(
     c_gt_1_items: list[dict[str, Any]],
     states: dict[str, str],
     identity_basis: dict[str, Any],
+    *,
+    expected_total: int,
 ) -> list[dict[str, Any]]:
     """Copy the failed root's completed C>1 observations under exact identity."""
     prior_j.ensure_request_root(scratch)
@@ -2347,7 +2441,7 @@ def adopt_completed_c_gt_1(
                 "identity_basis": identity_basis,
             }
         )
-    if len(records) != EXPECTED_ADOPTED_COMPLETED_ATTEMPTED + EXPECTED_ADOPTED_COMPLETED_UNCERTAIN:
+    if len(records) != expected_total:
         raise ExperimentError("adoption reuse count mismatch")
     return records
 
@@ -2357,6 +2451,8 @@ def carry_interrupted_c_gt_1(
     scratch: Path,
     c_gt_1_items: list[dict[str, Any]],
     states: dict[str, str],
+    *,
+    expected_total: int,
 ) -> list[dict[str, Any]]:
     """Carry request-only interruptions to conservative uncertain observations.
 
@@ -2412,7 +2508,7 @@ def carry_interrupted_c_gt_1(
                 "failure": "INTERRUPTED_UNCERTAIN_DELIVERY_NO_RESAMPLE",
             }
         )
-    if len(records) != EXPECTED_ADOPTED_REQUEST_ONLY:
+    if len(records) != expected_total:
         raise ExperimentError("carry count mismatch")
     return records
 
@@ -2501,11 +2597,15 @@ def complete_live_result(
         ):
             raise ExperimentError(f"007-j replay case count drift: {phase}")
         for replay_row, persisted_row in zip(replay_by_case[phase], persisted_rows, strict=True):
-            if {
+            replay_stripped = {
                 key: value for key, value in replay_row.items() if key != "configuration_sha256"
-            } != {
-                key: value for key, value in persisted_row.items() if key != "configuration_sha256"
-            }:
+            }
+            persisted_stripped = {
+                key: value
+                for key, value in persisted_row.items()
+                if key != "configuration_sha256"
+            }
+            if not json_normalized_equal(replay_stripped, persisted_stripped):
                 raise ExperimentError(
                     f"007-j replay case result drift: {phase}/{replay_row.get('index')}"
                 )
@@ -2522,10 +2622,11 @@ def complete_live_result(
         if not isinstance(persisted_phase, dict):
             raise ExperimentError(f"007-j persisted views lack {phase}")
         for view, replay_view in replay_metrics["views"][phase].items():
-            if persisted_phase.get(view) != replay_view:
+            if not json_normalized_equal(persisted_phase.get(view), replay_view):
                 raise ExperimentError(f"007-j replay view drift: {phase}/{view}")
-    if replay_metrics["global_validator"] != (persisted_metrics.get("metrics") or {}).get(
-        "global_validator"
+    if not json_normalized_equal(
+        replay_metrics["global_validator"],
+        (persisted_metrics.get("metrics") or {}).get("global_validator"),
     ):
         raise ExperimentError("007-j replay global validator drift")
     for slice_name, (tp, fn) in EXPECTED_SLICE_BASELINE.items():
