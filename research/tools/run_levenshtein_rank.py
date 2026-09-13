@@ -8,6 +8,16 @@ C>1 candidate with the predeclared lexicographic tuple, abstains on exact
 top-score ties, and persists private machine-readable census evidence.  Gold
 is used only after ranking, for the reference headroom projection.  No model
 calls, no acquisition, and no new index structure.
+
+Increment 2 harness revision: the failed-instrument root ffdf13 (frozen at
+88ca4dfe, preserved unchanged as evidence) could not complete its own live
+resume because the resume verifier rejected the canonical interrupted
+finalization file set (request + dispatch marker + raw/observation UNKNOWN).
+This revision accepts that state as a distinguishable uncertain delivery and
+adds a cross-root adoption harness: completed C>1 observations are copied
+under exact request/raw/observation/profile/prompt/parser identity,
+request-only interruptions are carried to conservative uncertain observations
+without calls, and only the never-dispatched requests are scheduled fresh.
 """
 
 from __future__ import annotations
@@ -127,6 +137,35 @@ EXPECTED_CENSUS_SHA = {
 # freezing low reasoning, but its bytes differ from the frozen 007-j profile.
 EXPECTED_007M_PROFILE_SHA256 = "0c4aa4900733f37dc6da9b5fba4c5a772f83830b916938b8b89855917d1a1d4e"
 C_GT_1_REUSE_DISABLED = "frozen-profile-identity-mismatch-reuse-disabled-by-strategy"
+
+# Failed-instrument root, preserved unchanged as evidence.  Its frozen
+# verifier (88ca4dfe) rejected the canonical interrupted-finalization file
+# set, so it cannot complete its own live resume.  The adoption harness binds
+# this exact identity; nothing in that root is ever resampled.
+EXPECTED_FAILED_ROOT = "007-m-rank-ambiguous-levenshtein-candidates-recovery.ffdf13"
+EXPECTED_FAILED_ROOT_CONFIGURATION = (
+    "2852655e7ed8cc268f5166195c36a174484ef3f498b8df849873c764eb1d14a5"
+)
+EXPECTED_FAILED_ROOT_HEAD = "88ca4dfe19740aa21156457d42966661f67902ea"
+EXPECTED_FAILED_ROOT_RUN_STATUS = (
+    "f815f59fae53827a9cba672a78c7e5ce104c5ff3ffc25333392ab88eef624061"
+)
+EXPECTED_FAILED_ROOT_REQUEST_TREE = {
+    "file_count": 4_940,
+    "total_bytes": 7_725_994,
+    "sha256sum_manifest_sha256": (
+        "3866111815e7e81d2bfbb1c5075fa94c24439bdc9cd5a8a893d47811ea50f26e"
+    ),
+}
+EXPECTED_ADOPTED_COMPLETED_ATTEMPTED = 188
+EXPECTED_ADOPTED_COMPLETED_UNCERTAIN = 8
+EXPECTED_ADOPTED_REQUEST_ONLY = 8
+EXPECTED_ADOPTED_FRESH = 678
+EXPECTED_ADOPTED_FRESH_COUNTS = {
+    "dassle-spelling": 447,
+    "dassle-spelling-preservation": 231,
+}
+
 LIVE_CODE_FILES = (
     "research/levenshtein_rank.py",
     "research/tools/run_levenshtein_rank.py",
@@ -975,6 +1014,17 @@ def write_public(
 # profile hash is the strategy-accepted 007-m fresh-call identity and differs
 # from the frozen 007-j profile hash, so the exact identity gate can never be
 # satisfied.  reused=0, fresh=882.  No public artifact is published here.
+#
+# Harness revision (this head): verify_c_gt_1_observations accepts the
+# canonical interrupted-finalization file set -- request.json, the stale
+# ATTEMPTED dispatch.json marker, and raw/observation UNKNOWN with
+# INTERRUPTED_UNCERTAIN_DELIVERY_NO_RESAMPLE -- as an uncertain delivery that
+# stays distinguishable from a completed ATTEMPTED observation.  The
+# cross-root adoption harness (prepare_adopted_live) reuses the preserved
+# failed root ffdf13: 196 completed C>1 observations are copied under exact
+# request/raw/observation/profile/prompt/parser identity, 8 request+dispatch
+# interruptions are carried to conservative uncertain observations without
+# any call, and only the remaining 678 requests are scheduled fresh.
 # ---------------------------------------------------------------------------
 
 
@@ -1202,6 +1252,9 @@ def build_live_configuration(
     fresh: list[dict[str, Any]],
     c1_records: list[dict[str, Any]],
     scratch: Path,
+    *,
+    reuse_records: list[dict[str, Any]] = (),
+    adoption: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     return {
         "schema_version": 1,
@@ -1234,6 +1287,13 @@ def build_live_configuration(
             "entering_targets": analysis["entering_targets"],
             "transition_matrix": analysis["transition_matrix"],
             "c0_counts": analysis["c0_counts"],
+            **({
+                "c_gt_1_completed_reused": adoption["completed_reused"],
+                "c_gt_1_completed_reused_attempted": adoption["completed_reused_attempted"],
+                "c_gt_1_completed_reused_uncertain": adoption["completed_reused_uncertain"],
+                "c_gt_1_interrupted_carried": adoption["interrupted_carried"],
+                "c_gt_1_fresh": adoption["fresh"],
+            } if adoption is not None else {}),
         },
         "method": {
             "c0": "exact preserved 007-j behavior; no observation",
@@ -1303,9 +1363,17 @@ def build_live_configuration(
                 "parser/response identity only"
             ),
             "c1_copied_observations": len(c1_records),
-            "c_gt_1_reused": 0,
+            "c_gt_1_reused": len(reuse_records),
             "c_gt_1_fresh": len(fresh),
             "c_gt_1_disabled_reason": C_GT_1_REUSE_DISABLED,
+            **({
+                "c_gt_1_cross_root_reuse_basis": (
+                    "exact request/raw/observation/profile/prompt/parser identity "
+                    "from the preserved failed 007-m root under the strategy-"
+                    "accepted 007-m fresh-call profile"
+                ),
+                "c_gt_1_interrupted_carried": adoption["interrupted_carried"],
+            } if adoption is not None else {}),
         },
         "privacy": {
             "public": "no public artifact is published by increment 2",
@@ -1316,6 +1384,7 @@ def build_live_configuration(
         },
         "no_resampling": True,
         "private_evidence_root": str(scratch),
+        **({"adoption": adoption} if adoption is not None else {}),
     }
 
 
@@ -1328,6 +1397,11 @@ def persist_live_preparation(
     fresh: list[dict[str, Any]],
     census_records: list[dict[str, Any]],
     dispatch_envelope: dict[str, Any],
+    *,
+    reuse_records: list[dict[str, Any]] = (),
+    carry_records: list[dict[str, Any]] = (),
+    linkage: dict[str, Any] | None = None,
+    adopted_items: list[dict[str, Any]] = (),
 ) -> str:
     validator_driver.immutable_json(scratch / "SOURCE.json", source_record)
     if (
@@ -1354,13 +1428,53 @@ def persist_live_preparation(
     validator_driver.immutable_json(scratch / "CANDIDATES.json", fresh)
     validator_driver.immutable_json(scratch / "CANDIDATE-MANIFEST.json", manifest)
     validator_driver.immutable_json(scratch / "FRESH-CALL-MANIFEST.json", fresh)
-    validator_driver.immutable_json(scratch / "REUSE-RECORDS.json", [])
+    validator_driver.immutable_json(scratch / "REUSE-RECORDS.json", list(reuse_records))
+    adoption_config = configuration.get("adoption")
+    if carry_records:
+        if not isinstance(adoption_config, dict) or (
+            sha256_bytes(canonical_bytes(carry_records))
+            != adoption_config["carry_records_sha256"]
+        ):
+            raise ExperimentError("carry records drift from the frozen configuration")
+        validator_driver.immutable_json(scratch / "CARRY-RECORDS.json", carry_records)
+    if linkage is not None:
+        if not isinstance(adoption_config, dict) or (
+            sha256_bytes(canonical_bytes(linkage)) != adoption_config["linkage_sha256"]
+        ):
+            raise ExperimentError("failed-root linkage drifts from the frozen configuration")
+        validator_driver.immutable_json(scratch / "FAILED-ROOT-LINKAGE.json", linkage)
+    if isinstance(adoption_config, dict) and sha256_bytes(canonical_bytes(reuse_records)) != (
+        adoption_config["reuse_records_sha256"]
+    ):
+        raise ExperimentError("reuse records drift from the frozen configuration")
+    if adopted_items:
+        adopted_manifest, _adopted_digest = protocol.candidate_manifest(adopted_items)
+        if not isinstance(adoption_config, dict) or (
+            sha256_bytes(canonical_bytes(adopted_items))
+            != adoption_config["adopted_candidates_sha256"]
+            or sha256_bytes(canonical_bytes(adopted_manifest))
+            != adoption_config["adopted_candidate_manifest_sha256"]
+        ):
+            raise ExperimentError("adopted candidates drift from the frozen configuration")
+        validator_driver.immutable_json(scratch / "ADOPTED-CANDIDATES.json", adopted_items)
+        validator_driver.immutable_json(
+            scratch / "ADOPTED-CANDIDATE-MANIFEST.json", adopted_manifest
+        )
     return validator_driver.immutable_json(scratch / "CONFIGURATION.json", configuration)
 
 
 def _load_prepared_lists(
     scratch: Path,
-) -> tuple[list[dict[str, Any]], list[dict[str, Any]], list[dict[str, Any]]]:
+    *,
+    expected_fresh_total: int,
+    expected_reuse_total: int,
+    expected_carry_total: int,
+) -> tuple[
+    list[dict[str, Any]],
+    list[dict[str, Any]],
+    list[dict[str, Any]],
+    dict[str, Any] | None,
+]:
     c1_items = protocol.ordered_candidates(read_json(scratch / "SOURCE-007J-CANDIDATES.json"))
     if len(c1_items) != EXPECTED_007J_C1_TOTAL:
         raise ExperimentError("prepared 007-j C=1 candidate count mismatch")
@@ -1375,9 +1489,45 @@ def _load_prepared_lists(
     ):
         raise ExperimentError("prepared private artifacts are malformed")
     recomputed, _digest = protocol.candidate_manifest(fresh)
-    if recomputed != manifest or fresh_manifest != fresh or reuse_records != []:
+    if recomputed != manifest or fresh_manifest != fresh:
         raise ExperimentError("prepared fresh manifest or reuse identity mismatch")
-    return c1_items, fresh, c1_records
+    if len(fresh) != expected_fresh_total:
+        raise ExperimentError("prepared fresh candidate count mismatch")
+    if len(reuse_records) != expected_reuse_total:
+        raise ExperimentError("prepared reuse record count mismatch")
+    adopted_bundle = None
+    if expected_reuse_total or expected_carry_total:
+        adopted_items = read_json(scratch / "ADOPTED-CANDIDATES.json")
+        adopted_manifest = read_json(scratch / "ADOPTED-CANDIDATE-MANIFEST.json")
+        carry_records = read_json(scratch / "CARRY-RECORDS.json")
+        linkage = read_json(scratch / "FAILED-ROOT-LINKAGE.json")
+        if not all(
+            isinstance(value, list)
+            for value in (adopted_items, adopted_manifest, carry_records)
+        ) or not isinstance(linkage, dict):
+            raise ExperimentError("prepared adoption artifacts are malformed")
+        recomputed_adopted, _digest = protocol.candidate_manifest(adopted_items)
+        if recomputed_adopted != adopted_manifest:
+            raise ExperimentError("prepared adopted candidate manifest mismatch")
+        if len(adopted_items) != expected_reuse_total + expected_carry_total:
+            raise ExperimentError("prepared adopted candidate count mismatch")
+        if len(carry_records) != expected_carry_total:
+            raise ExperimentError("prepared carry record count mismatch")
+        if (
+            {record["candidate_id"] for record in carry_records}
+            | {record["candidate_id"] for record in reuse_records}
+            != {protocol.candidate_path_id(item) for item in adopted_items}
+        ):
+            raise ExperimentError(
+                "prepared adoption records do not cover the adopted candidates"
+            )
+        adopted_bundle = {
+            "items": adopted_items,
+            "reuse_records": reuse_records,
+            "carry_records": carry_records,
+            "linkage": linkage,
+        }
+    return c1_items, fresh, c1_records, adopted_bundle
 
 
 def verify_c1_observations(
@@ -1458,23 +1608,62 @@ def load_prepared_live(
         raise ExperimentError("prepared dispatch manifest hash mismatch")
     for name, digest in SOURCE_007J_EVIDENCE.items():
         validator_driver.require_private_file(scratch / f"SOURCE-007J-{name}", expected_sha=digest)
-    c1_items, fresh, c1_records = _load_prepared_lists(scratch)
+    adoption = configuration.get("adoption")
+    if isinstance(adoption, dict):
+        expected_fresh_total = adoption["fresh"]
+        expected_reuse_total = adoption["completed_reused"]
+        expected_carry_total = adoption["interrupted_carried"]
+    else:
+        expected_fresh_total = EXPECTED_C_GT_1_TOTAL
+        expected_reuse_total = 0
+        expected_carry_total = 0
+    c1_items, fresh, c1_records, adopted_bundle = _load_prepared_lists(
+        scratch,
+        expected_fresh_total=expected_fresh_total,
+        expected_reuse_total=expected_reuse_total,
+        expected_carry_total=expected_carry_total,
+    )
     pairs, _baseline, uv_indices, records, case_digest = validator_driver.load_frozen_state(scratch)
     if case_digest != prior_j.EXPECTED_PRIOR_CASES:
         raise ExperimentError("staged frozen case identity mismatch on resume")
     c1_observations = verify_c1_observations(scratch, c1_items, c1_records)
-    return {
+    prepared: dict[str, Any] = {
         "configuration": configuration,
         "configuration_sha256": configuration_sha,
         "c1_items": c1_items,
         "c1_observations": c1_observations,
         "c1_records": c1_records,
         "fresh": fresh,
+        "c_gt_1_all": list(fresh),
         "pairs": pairs,
         "records": records,
         "uv_indices": uv_indices,
         "source_root": str(source_root),
     }
+    if adopted_bundle is None:
+        return prepared
+    if not isinstance(adoption, dict):
+        raise ExperimentError("prepared adoption bundle lacks its configuration block")
+    adopted_items = adopted_bundle["items"]
+    if (
+        sha256_bytes(canonical_bytes(adopted_bundle["linkage"]))
+        != adoption["linkage_sha256"]
+        or sha256_bytes(canonical_bytes(adopted_bundle["carry_records"]))
+        != adoption["carry_records_sha256"]
+        or sha256_bytes(canonical_bytes(adopted_bundle["reuse_records"]))
+        != adoption["reuse_records_sha256"]
+        or sha256_file(scratch / "ADOPTED-CANDIDATES.json")
+        != adoption["adopted_candidates_sha256"]
+        or sha256_file(scratch / "ADOPTED-CANDIDATE-MANIFEST.json")
+        != adoption["adopted_candidate_manifest_sha256"]
+    ):
+        raise ExperimentError("prepared adoption artifact identity drifted")
+    verify_c_gt_1_observations(scratch, adopted_items)
+    prepared["c_gt_1_all"] = protocol.ordered_candidates([*fresh, *adopted_items])
+    prepared["adopted_items"] = adopted_items
+    prepared["reuse_records"] = adopted_bundle["reuse_records"]
+    prepared["carry_records"] = adopted_bundle["carry_records"]
+    return prepared
 
 
 def prepare_live(
@@ -1583,6 +1772,207 @@ def prepare_live(
         "c1_observations": c1_observations,
         "c1_records": c1_records,
         "fresh": fresh,
+        "c_gt_1_all": list(fresh),
+        "pairs": pairs,
+        "records": records,
+        "uv_indices": uv_indices,
+        "source_root": str(source_root),
+    }
+
+
+def prepare_adopted_live(
+    repo_root: Path,
+    scratch: Path,
+    source_root: Path,
+    census_root: Path,
+    failed_root: Path,
+    expected_head: str,
+    profile_path: Path,
+    credential_env: str | None,
+) -> dict[str, Any]:
+    """Freeze a new 007-m root that adopts the preserved failed root ffdf13.
+
+    The 1035 C=1 observations are copied from the frozen 007-j source root as
+    before; the 196 completed C>1 observations are copied from the failed root
+    under exact request/raw/observation/profile/prompt/parser identity; the 8
+    request+dispatch interruptions are carried to conservative uncertain
+    observations without any call; only the remaining 678 requests are
+    scheduled fresh.  The failed root is never modified or resampled.
+    """
+    ensure_scratch(scratch)
+    identity = verify_live_implementation_identity(repo_root, expected_head)
+    source = verify_source_root(source_root)
+    request_tree = verify_007j_request_tree(source_root)
+    census_hashes = verify_census_root(census_root)
+    validator_driver.stage_frozen_inputs(source_root, scratch)
+    pairs, _baseline, uv_indices, records, case_digest = validator_driver.load_frozen_state(scratch)
+    if case_digest != prior_j.EXPECTED_PRIOR_CASES:
+        raise ExperimentError("staged frozen case identity mismatch")
+    index_path = scratch / "inputs" / "index" / "index.sqlite"
+    vocabulary, _buckets, _vocabulary_seconds, _vocabulary_rows = baseline_driver.load_vocabulary(
+        index_path
+    )
+    index = IndexQueries(index_path)
+    try:
+        schema = verify_index_schema(index)
+        deletion_index = distance_one.build_deletion_signature_index(vocabulary)
+        _c1_digest, c1_rebuilt = verify_007j_c1_identity(records, vocabulary, deletion_index)
+        c1_items = verify_c1_population(source_root, c1_rebuilt)
+        population, analysis = build_c_gt_1_population(records, vocabulary, deletion_index)
+        census = census_population(population, index, vocabulary, uv_indices)
+    finally:
+        index.close()
+    census_records = census["records"]
+    dispatch_envelope = {
+        "policy": DISPATCH_POLICY,
+        "count": len(census["dispatch"]),
+        "payloads": census["dispatch"],
+    }
+    all_c_gt_1 = build_live_candidates(census["dispatch"], population)
+    failed = verify_failed_root(failed_root, scratch, all_c_gt_1)
+    failed_configuration = read_json(failed_root / "CONFIGURATION.json")
+    source_configuration = read_json(source_root / "CONFIGURATION.json")
+    deployment = live_deployment(source_configuration, profile_path, credential_env)
+    c_gt_1_reuse_reason(deployment["profile_sha256"])
+    c1_records = copy_c1_observations(source_root, scratch, c1_items)
+    identity_basis = _reuse_identity_basis(failed_configuration)
+    reuse_records = adopt_completed_c_gt_1(
+        failed_root, scratch, all_c_gt_1, failed["states"], identity_basis
+    )
+    carry_records = carry_interrupted_c_gt_1(failed_root, scratch, all_c_gt_1, failed["states"])
+    adopted_ids = (
+        {record["candidate_id"] for record in reuse_records}
+        | {record["candidate_id"] for record in carry_records}
+    )
+    fresh = [item for item in all_c_gt_1 if protocol.candidate_path_id(item) not in adopted_ids]
+    if {protocol.candidate_path_id(item) for item in fresh} & {
+        protocol.candidate_path_id(item) for item in c1_items
+    }:
+        raise ExperimentError("C=1 and C>1 candidate path identities collide")
+    if len(fresh) != EXPECTED_ADOPTED_FRESH:
+        raise ExperimentError("adopted fresh call count mismatch")
+    fresh_counts = {phase: sum(1 for item in fresh if item["phase"] == phase) for phase in PHASES}
+    if fresh_counts != dict(EXPECTED_ADOPTED_FRESH_COUNTS):
+        raise ExperimentError(f"adopted fresh phase counts mismatch: {fresh_counts}")
+    adopted_items = [item for item in all_c_gt_1 if protocol.candidate_path_id(item) in adopted_ids]
+    adopted_manifest, _adopted_digest = protocol.candidate_manifest(adopted_items)
+    linkage = {
+        "schema_version": 1,
+        "failed_root": failed["failed_root"],
+        "failed_root_path": failed["failed_root_path"],
+        "configuration_sha256": EXPECTED_FAILED_ROOT_CONFIGURATION,
+        "run_status_sha256": EXPECTED_FAILED_ROOT_RUN_STATUS,
+        "implementation_head": EXPECTED_FAILED_ROOT_HEAD,
+        "request_tree": failed["request_tree"],
+        "state_census": failed["state_census"],
+        "defect": failed["defect"],
+        "preserved_unchanged": True,
+        "resampled": False,
+        "harness_revision_head": identity["implementation_head"],
+        "adoption": {
+            "c_gt_1_completed_reused": len(reuse_records),
+            "c_gt_1_completed_reused_attempted": EXPECTED_ADOPTED_COMPLETED_ATTEMPTED,
+            "c_gt_1_completed_reused_uncertain": EXPECTED_ADOPTED_COMPLETED_UNCERTAIN,
+            "c_gt_1_interrupted_carried": len(carry_records),
+            "c_gt_1_fresh": len(fresh),
+        },
+    }
+    adoption = {
+        "failed_root": failed["failed_root"],
+        "failed_root_path": failed["failed_root_path"],
+        "failed_root_configuration_sha256": EXPECTED_FAILED_ROOT_CONFIGURATION,
+        "failed_root_run_status_sha256": EXPECTED_FAILED_ROOT_RUN_STATUS,
+        "failed_root_implementation_head": EXPECTED_FAILED_ROOT_HEAD,
+        "failed_root_request_tree": failed["request_tree"],
+        "failed_root_state_census": failed["state_census"],
+        "failed_root_defect": failed["defect"],
+        "harness_revision_head": identity["implementation_head"],
+        "completed_reused": len(reuse_records),
+        "completed_reused_attempted": EXPECTED_ADOPTED_COMPLETED_ATTEMPTED,
+        "completed_reused_uncertain": EXPECTED_ADOPTED_COMPLETED_UNCERTAIN,
+        "interrupted_carried": len(carry_records),
+        "fresh": len(fresh),
+        "linkage_artifact": "FAILED-ROOT-LINKAGE.json",
+        "linkage_sha256": sha256_bytes(canonical_bytes(linkage)),
+        "reuse_records_sha256": sha256_bytes(canonical_bytes(reuse_records)),
+        "carry_records_sha256": sha256_bytes(canonical_bytes(carry_records)),
+        "adopted_candidates_sha256": sha256_bytes(canonical_bytes(adopted_items)),
+        "adopted_candidate_manifest_sha256": sha256_bytes(canonical_bytes(adopted_manifest)),
+    }
+    configuration = build_live_configuration(
+        identity,
+        source,
+        request_tree,
+        census_hashes,
+        source_configuration,
+        deployment,
+        analysis,
+        fresh,
+        c1_records,
+        scratch,
+        reuse_records=reuse_records,
+        adoption=adoption,
+    )
+    source_record = {
+        **identity,
+        **source,
+        "census_root": str(census_root),
+        "census_artifacts_sha256": census_hashes,
+        "request_tree": request_tree,
+        "failed_root": failed["failed_root_path"],
+    }
+    index_schema_value = {
+        "index_sha256": sha256_file(index_path),
+        "index_size": index_path.stat().st_size,
+        **schema,
+    }
+    configuration_sha = persist_live_preparation(
+        scratch,
+        configuration,
+        source_record,
+        index_schema_value,
+        c1_records,
+        fresh,
+        census_records,
+        dispatch_envelope,
+        reuse_records=reuse_records,
+        carry_records=carry_records,
+        linkage=linkage,
+        adopted_items=adopted_items,
+    )
+    for name, digest in SOURCE_007J_EVIDENCE.items():
+        validator_driver.copy_file_exact(source_root / name, scratch / f"SOURCE-007J-{name}")
+        validator_driver.require_private_file(scratch / f"SOURCE-007J-{name}", expected_sha=digest)
+    validator_driver.mutable_status(
+        scratch / "RUN-STATUS.json",
+        {
+            "status": "FROZEN_BEFORE_LIVE_EXECUTION",
+            "run_id": RUN_ID,
+            "implementation_head": identity["implementation_head"],
+            "configuration_sha256": configuration_sha,
+            "census_root": EXPECTED_CENSUS_ROOT,
+            "failed_root": EXPECTED_FAILED_ROOT,
+            "c1_copied_observations": EXPECTED_007J_C1_TOTAL,
+            "c_gt_1_reused_observations": len(reuse_records),
+            "c_gt_1_interrupted_carried": len(carry_records),
+            "c_gt_1_fresh_observations": len(fresh),
+            "scheduled_new_calls": len(fresh),
+            "dispatched_http_requests": 0,
+        },
+    )
+    c1_observations = verify_c1_observations(scratch, c1_items, c1_records)
+    verify_c_gt_1_observations(scratch, adopted_items)
+    return {
+        "configuration": configuration,
+        "configuration_sha256": configuration_sha,
+        "c1_items": c1_items,
+        "c1_observations": c1_observations,
+        "c1_records": c1_records,
+        "fresh": fresh,
+        "c_gt_1_all": all_c_gt_1,
+        "adopted_items": adopted_items,
+        "reuse_records": reuse_records,
+        "carry_records": carry_records,
         "pairs": pairs,
         "records": records,
         "uv_indices": uv_indices,
@@ -1667,10 +2057,101 @@ def execute_fresh_007m(
     return statuses
 
 
+C_GT_1_STATE_ATTEMPTED = "ATTEMPTED"
+C_GT_1_STATE_INTERRUPTED_4FILE = "INTERRUPTED_4FILE"
+C_GT_1_STATE_INTERRUPTED_3FILE = "INTERRUPTED_3FILE"
+C_GT_1_STATE_REQUEST_ONLY = "REQUEST_ONLY"
+
+
+def _c_gt_1_directory_state(
+    directory: Path,
+    request_bytes: bytes,
+) -> tuple[str, dict[str, Any]]:
+    """Classify one C>1 request directory under the frozen persistence contract.
+
+    ATTEMPTED: full completed cycle (dispatch marker plus ATTEMPTED
+    raw/observation, including explicit protocol/operational failures).
+    INTERRUPTED_4FILE: the request reached the dispatch marker and the process
+    died before persisting the raw response; the frozen finalizer closed it as
+    raw/observation UNKNOWN without a new call.  The stale ATTEMPTED marker
+    remains and the state stays distinguishable from a completed ATTEMPTED
+    observation.
+    INTERRUPTED_3FILE: the same finalization with no dispatch marker present.
+    REQUEST_ONLY: the pre-finalization crash state (request plus dispatch
+    marker, no raw response); only the failed-root census may observe it.
+    """
+    names = {entry.name for entry in directory.iterdir()}
+    request_sha = sha256_bytes(request_bytes)
+    if names == {"request.json", "dispatch.json", "raw-response.json", "observation.json"}:
+        for name in sorted(names):
+            validator_driver.require_private_file(directory / name)
+        dispatch = read_json(directory / "dispatch.json")
+        raw = read_json(directory / "raw-response.json")
+        observation = read_json(directory / "observation.json")
+        if (
+            dispatch != {"dispatch": "ATTEMPTED"}
+            or (directory / "request.json").read_bytes() != request_bytes
+            or observation.get("request_sha256") != request_sha
+            or observation.get("response_sha256")
+            != sha256_file(directory / "raw-response.json")
+        ):
+            raise ExperimentError(
+                f"persisted C>1 observation identity is invalid: {directory.name}"
+            )
+        if raw.get("dispatch") == "ATTEMPTED" and observation.get("dispatch") == "ATTEMPTED":
+            return C_GT_1_STATE_ATTEMPTED, observation
+        if (
+            raw.get("dispatch") == "UNKNOWN"
+            and raw.get("failure") == "INTERRUPTED_UNCERTAIN_DELIVERY_NO_RESAMPLE"
+            and observation.get("dispatch") == "UNKNOWN"
+            and observation.get("failure") == "INTERRUPTED_UNCERTAIN_DELIVERY_NO_RESAMPLE"
+        ):
+            return C_GT_1_STATE_INTERRUPTED_4FILE, observation
+        raise ExperimentError(
+            f"persisted C>1 observation identity is invalid: {directory.name}"
+        )
+    if names == {"request.json", "raw-response.json", "observation.json"}:
+        for name in sorted(names):
+            validator_driver.require_private_file(directory / name)
+        raw = read_json(directory / "raw-response.json")
+        observation = read_json(directory / "observation.json")
+        if (
+            (directory / "request.json").read_bytes() != request_bytes
+            or raw.get("dispatch") != "UNKNOWN"
+            or raw.get("failure") != "INTERRUPTED_UNCERTAIN_DELIVERY_NO_RESAMPLE"
+            or observation.get("dispatch") != "UNKNOWN"
+            or observation.get("failure") != "INTERRUPTED_UNCERTAIN_DELIVERY_NO_RESAMPLE"
+            or observation.get("request_sha256") != request_sha
+            or observation.get("response_sha256")
+            != sha256_file(directory / "raw-response.json")
+        ):
+            raise ExperimentError(
+                f"persisted C>1 interruption identity is invalid: {directory.name}"
+            )
+        return C_GT_1_STATE_INTERRUPTED_3FILE, observation
+    if names == {"request.json", "dispatch.json"}:
+        validator_driver.require_private_file(directory / "request.json")
+        validator_driver.require_private_file(directory / "dispatch.json")
+        if (
+            (directory / "request.json").read_bytes() != request_bytes
+            or read_json(directory / "dispatch.json") != {"dispatch": "ATTEMPTED"}
+        ):
+            raise ExperimentError(
+                f"persisted C>1 request-only identity is invalid: {directory.name}"
+            )
+        return C_GT_1_STATE_REQUEST_ONLY, {}
+    raise ExperimentError(f"persisted C>1 request set is invalid: {directory.name}")
+
+
 def verify_c_gt_1_observations(
     scratch: Path, fresh: list[dict[str, Any]]
 ) -> tuple[dict[str, dict[str, Any]], dict[str, int]]:
-    """Verify every persisted C>1 observation or uncertain-delivery request."""
+    """Verify every persisted C>1 observation or uncertain-delivery request.
+
+    Completed ATTEMPTED observations count as dispatched; the canonical
+    interrupted finalization (with or without the stale dispatch marker)
+    counts as an uncertain delivery that is never resampled.
+    """
     observations: dict[str, dict[str, Any]] = {}
     dispatched = 0
     uncertain = 0
@@ -1679,49 +2160,14 @@ def verify_c_gt_1_observations(
         candidate_id = protocol.candidate_path_id(item)
         directory = scratch / "requests" / candidate_id
         validator_driver.require_owned_dir(directory)
-        names = {entry.name for entry in directory.iterdir()}
         body = protocol.request_body(
             item["sentence"], item["candidate"]["text"], item["mechanical_edit"][2]
         )
         request_bytes = canonical_bytes(body)
-        request_sha = sha256_bytes(request_bytes)
-        if names == {"request.json", "dispatch.json", "raw-response.json", "observation.json"}:
-            for name in sorted(names):
-                validator_driver.require_private_file(directory / name)
-            dispatch = read_json(directory / "dispatch.json")
-            raw = read_json(directory / "raw-response.json")
-            observation = read_json(directory / "observation.json")
-            if (
-                dispatch != {"dispatch": "ATTEMPTED"}
-                or raw.get("dispatch") != "ATTEMPTED"
-                or observation.get("dispatch") != "ATTEMPTED"
-                or (directory / "request.json").read_bytes() != request_bytes
-                or observation.get("request_sha256") != request_sha
-                or observation.get("response_sha256")
-                != sha256_file(directory / "raw-response.json")
-            ):
-                raise ExperimentError(
-                    f"persisted C>1 observation identity is invalid: {candidate_id}"
-                )
+        state, observation = _c_gt_1_directory_state(directory, request_bytes)
+        if state == C_GT_1_STATE_ATTEMPTED:
             dispatched += 1
-        elif names == {"request.json", "raw-response.json", "observation.json"}:
-            for name in sorted(names):
-                validator_driver.require_private_file(directory / name)
-            raw = read_json(directory / "raw-response.json")
-            observation = read_json(directory / "observation.json")
-            if (
-                (directory / "request.json").read_bytes() != request_bytes
-                or raw.get("dispatch") != "UNKNOWN"
-                or raw.get("failure") != "INTERRUPTED_UNCERTAIN_DELIVERY_NO_RESAMPLE"
-                or observation.get("dispatch") != "UNKNOWN"
-                or observation.get("failure") != "INTERRUPTED_UNCERTAIN_DELIVERY_NO_RESAMPLE"
-                or observation.get("request_sha256") != request_sha
-                or observation.get("response_sha256")
-                != sha256_file(directory / "raw-response.json")
-            ):
-                raise ExperimentError(
-                    f"persisted C>1 interruption identity is invalid: {candidate_id}"
-                )
+        elif state in (C_GT_1_STATE_INTERRUPTED_4FILE, C_GT_1_STATE_INTERRUPTED_3FILE):
             uncertain += 1
         else:
             raise ExperimentError(f"persisted C>1 request set is invalid: {candidate_id}")
@@ -1734,6 +2180,241 @@ def verify_c_gt_1_observations(
         "uncertain": uncertain,
         "operational_failures": failures,
     }
+
+
+def verify_failed_root(
+    failed_root: Path,
+    scratch: Path,
+    c_gt_1_items: list[dict[str, Any]],
+) -> dict[str, Any]:
+    """Bind the preserved failed-instrument root identity and census its states."""
+    validator_driver.require_owned_dir(failed_root)
+    if failed_root.name != EXPECTED_FAILED_ROOT:
+        raise ExperimentError("failed root is not the preserved ffdf13 evidence root")
+    if failed_root.absolute() == scratch.absolute():
+        raise ExperimentError("failed root and adoption scratch are the same root")
+    validator_driver.require_private_file(
+        failed_root / "CONFIGURATION.json", expected_sha=EXPECTED_FAILED_ROOT_CONFIGURATION
+    )
+    configuration = read_json(failed_root / "CONFIGURATION.json")
+    deployment = configuration.get("deployment") if isinstance(configuration, dict) else None
+    prompt = configuration.get("prompt") if isinstance(configuration, dict) else None
+    if not all(
+        (
+            isinstance(configuration, dict),
+            configuration.get("run_id") == "007-m",
+            configuration.get("status") == "FROZEN_BEFORE_LIVE_EXECUTION",
+            configuration.get("implementation_head") == EXPECTED_FAILED_ROOT_HEAD,
+            isinstance(deployment, dict),
+            deployment.get("profile_sha256") == EXPECTED_007M_PROFILE_SHA256,
+            deployment.get("model") == protocol.MODEL,
+            deployment.get("credential_env") == "OAP_007_J_QWEN_BEARER",
+            isinstance(prompt, dict),
+            prompt.get("sha256") == protocol.FROZEN_PROMPT_SHA256,
+            configuration.get("parser") == prior_j.EXPECTED_PARSER,
+        )
+    ):
+        raise ExperimentError("failed root configuration identity drifted")
+    validator_driver.require_private_file(
+        failed_root / "RUN-STATUS.json", expected_sha=EXPECTED_FAILED_ROOT_RUN_STATUS
+    )
+    status = read_json(failed_root / "RUN-STATUS.json")
+    if status.get("status") != "FROZEN_BEFORE_LIVE_EXECUTION":
+        raise ExperimentError("failed root run status is not the frozen identity")
+    request_tree = validator_driver.request_tree_identity(failed_root / "requests")
+    if request_tree != EXPECTED_FAILED_ROOT_REQUEST_TREE:
+        raise ExperimentError("failed root request tree identity changed")
+    states: dict[str, str] = {}
+    for item in c_gt_1_items:
+        candidate_id = protocol.candidate_path_id(item)
+        directory = failed_root / "requests" / candidate_id
+        body = protocol.request_body(
+            item["sentence"], item["candidate"]["text"], item["mechanical_edit"][2]
+        )
+        request_bytes = canonical_bytes(body)
+        if not directory.is_dir():
+            states[candidate_id] = "MISSING"
+            continue
+        validator_driver.require_owned_dir(directory)
+        state, _observation = _c_gt_1_directory_state(directory, request_bytes)
+        if state == C_GT_1_STATE_REQUEST_ONLY:
+            states[candidate_id] = "REQUEST_ONLY"
+        elif state == C_GT_1_STATE_ATTEMPTED:
+            states[candidate_id] = "ATTEMPTED"
+        elif state == C_GT_1_STATE_INTERRUPTED_4FILE:
+            states[candidate_id] = "INTERRUPTED_4FILE"
+        else:
+            raise ExperimentError(f"failed root holds an unadoptable C>1 state: {candidate_id}")
+    census = Counter(states.values())
+    if (
+        census.get("ATTEMPTED", 0) != EXPECTED_ADOPTED_COMPLETED_ATTEMPTED
+        or census.get("INTERRUPTED_4FILE", 0) != EXPECTED_ADOPTED_COMPLETED_UNCERTAIN
+        or census.get("REQUEST_ONLY", 0) != EXPECTED_ADOPTED_REQUEST_ONLY
+        or census.get("MISSING", 0) != EXPECTED_ADOPTED_FRESH
+        or len(states) != len(c_gt_1_items)
+    ):
+        raise ExperimentError(f"failed root C>1 state census drifted: {dict(census)}")
+    return {
+        "failed_root": failed_root.name,
+        "failed_root_path": str(failed_root.absolute()),
+        "configuration_sha256": EXPECTED_FAILED_ROOT_CONFIGURATION,
+        "run_status_sha256": EXPECTED_FAILED_ROOT_RUN_STATUS,
+        "implementation_head": EXPECTED_FAILED_ROOT_HEAD,
+        "request_tree": request_tree,
+        "state_census": {
+            "completed_attempted": census.get("ATTEMPTED", 0),
+            "completed_uncertain_persisted": census.get("INTERRUPTED_4FILE", 0),
+            "request_only_interrupted": census.get("REQUEST_ONLY", 0),
+            "missing": census.get("MISSING", 0),
+        },
+        "defect": (
+            "88ca4dfe verify_c_gt_1_observations rejected the canonical "
+            "interrupted-finalization file set (request + dispatch marker + "
+            "raw/observation UNKNOWN), so the root cannot complete its own "
+            "live resume; preserved unchanged as failed-instrument evidence"
+        ),
+        "resampled": False,
+        "states": states,
+    }
+
+
+def _reuse_identity_basis(failed_configuration: dict[str, Any]) -> dict[str, Any]:
+    deployment = failed_configuration["deployment"]
+    return {
+        "request": (
+            "byte-exact frozen validator request body "
+            "(canonical UTF-8 JSON with one final LF)"
+        ),
+        "raw_response": "byte-exact immutable bounded raw response",
+        "observation": "byte-exact immutable parsed observation",
+        "prompt_sha256": protocol.FROZEN_PROMPT_SHA256,
+        "profile_sha256": EXPECTED_007M_PROFILE_SHA256,
+        "parser": prior_j.EXPECTED_PARSER,
+        "deployment": {
+            "endpoint": deployment["endpoint"],
+            "model": protocol.MODEL,
+            "credential_env": deployment["credential_env"],
+            "profile_sha256": EXPECTED_007M_PROFILE_SHA256,
+        },
+        "source_configuration_sha256": EXPECTED_FAILED_ROOT_CONFIGURATION,
+    }
+
+
+def adopt_completed_c_gt_1(
+    failed_root: Path,
+    scratch: Path,
+    c_gt_1_items: list[dict[str, Any]],
+    states: dict[str, str],
+    identity_basis: dict[str, Any],
+) -> list[dict[str, Any]]:
+    """Copy the failed root's completed C>1 observations under exact identity."""
+    prior_j.ensure_request_root(scratch)
+    records: list[dict[str, Any]] = []
+    for item in c_gt_1_items:
+        candidate_id = protocol.candidate_path_id(item)
+        state = states[candidate_id]
+        if state not in (C_GT_1_STATE_ATTEMPTED, C_GT_1_STATE_INTERRUPTED_4FILE):
+            continue
+        source_dir = failed_root / "requests" / candidate_id
+        destination_dir = scratch / "requests" / candidate_id
+        if destination_dir.exists():
+            raise ExperimentError(f"adoption destination already exists: {candidate_id}")
+        validator_driver.copy_tree_exact(source_dir, destination_dir)
+        body = protocol.request_body(
+            item["sentence"], item["candidate"]["text"], item["mechanical_edit"][2]
+        )
+        destination_state, observation = _c_gt_1_directory_state(
+            destination_dir, canonical_bytes(body)
+        )
+        if destination_state != state:
+            raise ExperimentError(f"adopted C>1 state drifted: {candidate_id}")
+        records.append(
+            {
+                "candidate_id": candidate_id,
+                "stable_key": list(protocol.stable_key(item)),
+                "source_root": failed_root.name,
+                "state": (
+                    "completed-attempted"
+                    if state == C_GT_1_STATE_ATTEMPTED
+                    else "interrupted-uncertain"
+                ),
+                "request_sha256": sha256_file(destination_dir / "request.json"),
+                "dispatch_sha256": sha256_file(destination_dir / "dispatch.json"),
+                "raw_response_sha256": sha256_file(destination_dir / "raw-response.json"),
+                "observation_sha256": sha256_file(destination_dir / "observation.json"),
+                "decision": observation.get("decision"),
+                "new_calls": 0,
+                "identity_basis": identity_basis,
+            }
+        )
+    if len(records) != EXPECTED_ADOPTED_COMPLETED_ATTEMPTED + EXPECTED_ADOPTED_COMPLETED_UNCERTAIN:
+        raise ExperimentError("adoption reuse count mismatch")
+    return records
+
+
+def carry_interrupted_c_gt_1(
+    failed_root: Path,
+    scratch: Path,
+    c_gt_1_items: list[dict[str, Any]],
+    states: dict[str, str],
+) -> list[dict[str, Any]]:
+    """Carry request-only interruptions to conservative uncertain observations.
+
+    Copies the frozen request + dispatch marker bytes, then closes the request
+    with the frozen interrupted_observation finalizer: no transport, no call,
+    no resampling.
+    """
+    prior_j.ensure_request_root(scratch)
+    records: list[dict[str, Any]] = []
+    for item in c_gt_1_items:
+        candidate_id = protocol.candidate_path_id(item)
+        if states[candidate_id] != C_GT_1_STATE_REQUEST_ONLY:
+            continue
+        source_dir = failed_root / "requests" / candidate_id
+        destination_dir = scratch / "requests" / candidate_id
+        if destination_dir.exists():
+            raise ExperimentError(f"carry destination already exists: {candidate_id}")
+        body = protocol.request_body(
+            item["sentence"], item["candidate"]["text"], item["mechanical_edit"][2]
+        )
+        request_bytes = canonical_bytes(body)
+        destination_dir.mkdir(mode=0o700)
+        validator_driver.require_owned_dir(destination_dir)
+        source_request_sha = sha256_file(source_dir / "request.json")
+        source_dispatch_sha = sha256_file(source_dir / "dispatch.json")
+        validator_driver.copy_file_exact(
+            source_dir / "request.json", destination_dir / "request.json"
+        )
+        validator_driver.copy_file_exact(
+            source_dir / "dispatch.json", destination_dir / "dispatch.json"
+        )
+        observation = protocol.interrupted_observation(destination_dir, body)
+        destination_state, _ = _c_gt_1_directory_state(destination_dir, request_bytes)
+        if (
+            destination_state != C_GT_1_STATE_INTERRUPTED_4FILE
+            or observation.get("failure") != "INTERRUPTED_UNCERTAIN_DELIVERY_NO_RESAMPLE"
+        ):
+            raise ExperimentError(
+                f"carried C>1 interruption is not the conservative state: {candidate_id}"
+            )
+        records.append(
+            {
+                "candidate_id": candidate_id,
+                "stable_key": list(protocol.stable_key(item)),
+                "source_root": failed_root.name,
+                "source_request_sha256": source_request_sha,
+                "source_dispatch_sha256": source_dispatch_sha,
+                "request_sha256": sha256_bytes(request_bytes),
+                "dispatch_sha256": sha256_file(destination_dir / "dispatch.json"),
+                "raw_response_sha256": sha256_file(destination_dir / "raw-response.json"),
+                "observation_sha256": sha256_file(destination_dir / "observation.json"),
+                "new_calls": 0,
+                "failure": "INTERRUPTED_UNCERTAIN_DELIVERY_NO_RESAMPLE",
+            }
+        )
+    if len(records) != EXPECTED_ADOPTED_REQUEST_ONLY:
+        raise ExperimentError("carry count mismatch")
+    return records
 
 
 def _slice_tpfpfn(view: dict[str, Any]) -> dict[str, Any]:
@@ -1759,11 +2440,17 @@ def complete_live_result(
     c1_items = prepared["c1_items"]
     c1_observations = prepared["c1_observations"]
     fresh = prepared["fresh"]
+    # The scheduled C>1 population is fresh plus the adopted (reused or
+    # carried) targets; only ``fresh`` receives new calls.
+    c_gt_1_all = prepared.get("c_gt_1_all", fresh)
+    new_ids = {protocol.candidate_path_id(item) for item in fresh}
+    reuse_records = prepared.get("reuse_records", [])
+    carry_records = prepared.get("carry_records", [])
     configuration_sha = prepared["configuration_sha256"]
     observations = {**c1_observations, **c_gt_1_observations}
 
     candidates_by_case: dict[tuple[str, int], list[dict[str, Any]]] = {}
-    for item in [*c1_items, *fresh]:
+    for item in [*c1_items, *c_gt_1_all]:
         candidates_by_case.setdefault((item["phase"], item["case_index"]), []).append(item)
     c1_by_case: dict[tuple[str, int], list[dict[str, Any]]] = {}
     for item in c1_items:
@@ -1847,24 +2534,28 @@ def complete_live_result(
         if fallback.get("tp") != tp or fallback.get("fn") != fn:
             raise ExperimentError(f"007-j replay baseline tp/fn drift for {slice_name}")
 
-    all_items = protocol.ordered_candidates([*c1_items, *fresh])
+    all_items = protocol.ordered_candidates([*c1_items, *c_gt_1_all])
     primary_metrics = validator_driver.make_views(
         pairs, by_case, all_items, observations, uv_indices, worker_status
     )
 
-    fresh_ids = {protocol.candidate_path_id(item) for item in fresh}
+    c_gt_1_ids = {protocol.candidate_path_id(item) for item in c_gt_1_all}
     outcomes: Counter[str] = Counter()
     attribution: Counter[str] = Counter()
     attribution_by_decision = {
         key: Counter() for key in ("USE_CANDIDATE", "KEEP_ORIGINAL", "UNCERTAIN", "FAILURE")
     }
     latencies: list[float] = []
+    new_latencies: list[float] = []
+    inherited_latencies: list[float] = []
     token_totals = {"input_tokens": 0, "output_tokens": 0, "reasoning_tokens": 0}
+    new_token_totals = {"input_tokens": 0, "output_tokens": 0, "reasoning_tokens": 0}
+    inherited_token_totals = {"input_tokens": 0, "output_tokens": 0, "reasoning_tokens": 0}
     accepted = {"exact_reference": 0, "non_reference": 0, "unresolved": 0}
     for phase_records in by_case.values():
         for record in phase_records:
             for target in record["validator_targets"]:
-                if target["candidate_id"] not in fresh_ids:
+                if target["candidate_id"] not in c_gt_1_ids:
                     continue
                 decision = target["decision"] or "FAILURE"
                 outcomes[decision] += 1
@@ -1874,11 +2565,16 @@ def complete_live_result(
                 if decision == "USE_CANDIDATE":
                     accepted[status] += 1
                 observation = target["observation"]
+                is_new_call = target["candidate_id"] in new_ids
+                latency_pool = new_latencies if is_new_call else inherited_latencies
+                token_pool = new_token_totals if is_new_call else inherited_token_totals
                 if observation.get("http_seconds") is not None:
                     latencies.append(float(observation["http_seconds"]))
+                    latency_pool.append(float(observation["http_seconds"]))
                 for key in token_totals:
                     if observation.get(key) is not None:
                         token_totals[key] += int(observation[key])
+                        token_pool[key] += int(observation[key])
 
     paired: dict[str, Any] = {}
     for slice_name, (phase, view) in SLICE_VIEW.items():
@@ -1918,13 +2614,20 @@ def complete_live_result(
         "configuration_sha256": configuration_sha,
         "population": {
             "c1": len(c1_items),
-            "c_gt_1": len(fresh),
-            "scheduled_total": len(c1_items) + len(fresh),
+            "c_gt_1": len(c_gt_1_all),
+            "scheduled_total": len(c1_items) + len(c_gt_1_all),
+            "c_gt_1_new_calls": len(fresh),
             "c_gt_1_by_phase": {
+                phase: sum(1 for item in c_gt_1_all if item["phase"] == phase) for phase in PHASES
+            },
+            "c_gt_1_new_calls_by_phase": {
                 phase: sum(1 for item in fresh if item["phase"] == phase) for phase in PHASES
             },
         },
         "reuse": prepared["configuration"]["reuse"],
+        **({
+            "adoption": prepared["configuration"]["adoption"]
+        } if "adoption" in prepared["configuration"] else {}),
         "observations": {
             "total": len(observations),
             "c1_copied": len(c1_observations),
@@ -1932,6 +2635,15 @@ def complete_live_result(
             "dispatched_http": observation_counts["dispatched"],
             "uncertain_deliveries": observation_counts["uncertain"],
             "operational_failures": observation_counts["operational_failures"],
+            "c_gt_1_new_calls": len(new_ids),
+            "c_gt_1_reused": len(reuse_records),
+            "c_gt_1_reused_attempted": sum(
+                1 for record in reuse_records if record.get("state") == "completed-attempted"
+            ),
+            "c_gt_1_reused_uncertain": sum(
+                1 for record in reuse_records if record.get("state") == "interrupted-uncertain"
+            ),
+            "c_gt_1_interrupted_carried": len(carry_records),
         },
         "c_gt_1_outcomes": {
             "decisions": dict(outcomes),
@@ -1943,7 +2655,11 @@ def complete_live_result(
             "accepted_non_reference": accepted["non_reference"],
             "accepted_unresolved": accepted["unresolved"],
             "latency_seconds": protocol.distribution(latencies),
+            "latency_seconds_new_calls": protocol.distribution(new_latencies),
+            "latency_seconds_inherited": protocol.distribution(inherited_latencies),
             "token_totals": token_totals,
+            "token_totals_new_calls": new_token_totals,
+            "token_totals_inherited": inherited_token_totals,
         },
         "worker_counts": {
             str(worker): {
@@ -1973,7 +2689,8 @@ def complete_live_result(
             "live_aggregate_sha256": aggregate_sha,
             "c1_copied_observations": len(c1_observations),
             "c_gt_1_observations": len(c_gt_1_observations),
-            "c_gt_1_reused_observations": 0,
+            "c_gt_1_reused_observations": len(reuse_records),
+            "c_gt_1_interrupted_carried": len(carry_records),
             "dispatched_http_requests": observation_counts["dispatched"],
             "uncertain_deliveries": observation_counts["uncertain"],
             "operational_failures": observation_counts["operational_failures"],
@@ -1995,6 +2712,7 @@ def _live_summary(
         "configuration_sha256": prepared["configuration_sha256"],
         "population": aggregate["population"],
         "observations": aggregate["observations"],
+        **({"adoption": aggregate["adoption"]} if "adoption" in aggregate else {}),
         "c_gt_1_outcomes": aggregate["c_gt_1_outcomes"],
         "worker_counts": aggregate["worker_counts"],
         "paired_slices": aggregate["paired_slices"],
@@ -2018,9 +2736,11 @@ def blocked_live_result(scratch: Path, prepared: dict[str, Any], reason: str) ->
         "status": "BLOCKED",
         "blocker": reason,
         "offline": {
-            "c1_copied_observations": EXPECTED_007J_C1_TOTAL,
-            "scheduled_new_calls": EXPECTED_C_GT_1_TOTAL,
-            "fresh_candidates_without_dispatch": EXPECTED_C_GT_1_TOTAL,
+            "c1_copied_observations": len(prepared["c1_items"]),
+            "scheduled_new_calls": len(prepared["fresh"]),
+            "fresh_candidates_without_dispatch": len(prepared["fresh"]),
+            "c_gt_1_reused_observations": len(prepared.get("reuse_records", ())),
+            "c_gt_1_interrupted_carried": len(prepared.get("carry_records", ())),
             "dispatched_http_requests": 0,
         },
     }
@@ -2064,15 +2784,28 @@ def run_live(args: argparse.Namespace) -> dict[str, Any]:
             raise ExperimentError("initial live preparation requires the frozen 007-j source root")
         if args.profile is None:
             raise ExperimentError("initial live preparation requires the explicit profile path")
-        prepared = prepare_live(
-            repo_root,
-            scratch,
-            source_root,
-            census_root,
-            args.expected_implementation_head,
-            Path(args.profile).absolute(),
-            args.credential_env,
-        )
+        profile_path = Path(args.profile).absolute()
+        if args.adopt_failed_root is not None:
+            prepared = prepare_adopted_live(
+                repo_root,
+                scratch,
+                source_root,
+                census_root,
+                Path(args.adopt_failed_root).absolute(),
+                args.expected_implementation_head,
+                profile_path,
+                args.credential_env,
+            )
+        else:
+            prepared = prepare_live(
+                repo_root,
+                scratch,
+                source_root,
+                census_root,
+                args.expected_implementation_head,
+                profile_path,
+                args.credential_env,
+            )
     if args.prepare_only:
         return {
             "status": "FROZEN_BEFORE_LIVE_EXECUTION",
@@ -2080,7 +2813,8 @@ def run_live(args: argparse.Namespace) -> dict[str, Any]:
             "scratch": str(scratch),
             "configuration_sha256": prepared["configuration_sha256"],
             "c1_copied_observations": EXPECTED_007J_C1_TOTAL,
-            "c_gt_1_reused_observations": 0,
+            "c_gt_1_reused_observations": len(prepared.get("reuse_records", ())),
+            "c_gt_1_interrupted_carried": len(prepared.get("carry_records", ())),
             "scheduled_new_calls": len(prepared["fresh"]),
             "fresh_calls": 0,
         }
@@ -2099,7 +2833,9 @@ def run_live(args: argparse.Namespace) -> dict[str, Any]:
         if str(exc) != "LIVE_CREDENTIAL_MISSING":
             raise
         return blocked_live_result(scratch, prepared, str(exc))
-    c_gt_1_observations, observation_counts = verify_c_gt_1_observations(scratch, prepared["fresh"])
+    c_gt_1_observations, observation_counts = verify_c_gt_1_observations(
+        scratch, prepared["c_gt_1_all"]
+    )
     aggregate = complete_live_result(
         scratch, prepared, c_gt_1_observations, observation_counts, worker_status
     )
@@ -2223,6 +2959,7 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--census-root", type=Path)
     parser.add_argument("--profile", "--profile-path", dest="profile")
     parser.add_argument("--credential-env")
+    parser.add_argument("--adopt-failed-root", type=Path)
     args = parser.parse_args(argv)
     try:
         print(json.dumps(run(args), ensure_ascii=False, sort_keys=True))

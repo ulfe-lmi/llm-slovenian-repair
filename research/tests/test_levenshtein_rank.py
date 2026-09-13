@@ -8,6 +8,7 @@ continuity proof.  No test encodes a desired live linguistic answer.
 
 from __future__ import annotations
 
+import contextlib
 import copy
 import hashlib
 import importlib.util
@@ -1444,6 +1445,492 @@ class LiveConfigurationFreezeTests(unittest.TestCase):
                 self.assertRaisesRegex(driver.ExperimentError, "accepted 007-m census root"),
             ):
                 driver.verify_census_root(outside)
+
+
+
+class InterruptedFileSetContractTests(unittest.TestCase):
+    """Interrupted file-set contract after the harness revision.
+
+    A crash after the dispatch marker is finalized without a call as the
+    request plus the stale ATTEMPTED marker plus raw/observation UNKNOWN
+    (or the same set without the marker) and verifies as an uncertain
+    delivery that stays distinguishable from a completed ATTEMPTED
+    observation.  An unfinalized request-only set and any identity drift
+    remain rejected.
+    """
+
+    def _prepared(
+        self, root: Path, item: dict[str, object]
+    ) -> tuple[Path, dict[str, object], bytes]:
+        directory = root / "requests" / protocol.candidate_path_id(item)
+        directory.parent.mkdir(parents=True, exist_ok=True, mode=0o700)
+        os.chmod(directory.parent, 0o700)
+        directory.mkdir(mode=0o700)
+        os.chmod(directory, 0o700)
+        body = protocol.request_body(
+            item["sentence"], item["candidate"]["text"], item["mechanical_edit"][2]
+        )
+        return directory, body, protocol.canonical_bytes(body)
+
+    def _completed(self, root: Path, item: dict[str, object], choice: str = "KEEP_ORIGINAL"):
+        directory, body, _request_bytes = self._prepared(root, item)
+        transport = CaptureTransport(choice)
+        observation = protocol.perform_call(directory, body, transport=transport)
+        return directory, transport, observation
+
+    @staticmethod
+    def _rewrite(path: Path, value: object) -> bytes:
+        data = protocol.canonical_bytes(value)
+        path.write_bytes(data)
+        os.chmod(path, 0o600)
+        return data
+
+    def test_crash_after_dispatch_finalizes_without_a_call_and_verifies_as_uncertain(self) -> None:
+        item = multi_live_items(1)[0]
+        with tempfile.TemporaryDirectory() as raw_root:
+            root = Path(raw_root)
+            directory, body, request_bytes = self._prepared(root, item)
+            protocol.immutable_write(directory / "request.json", request_bytes)
+            protocol.immutable_json(directory / "dispatch.json", {"dispatch": "ATTEMPTED"})
+            transport = CaptureTransport()
+            observation = protocol.perform_call(directory, body, transport=transport)
+            self.assertEqual(transport.calls, 0)
+            self.assertEqual(
+                json.loads((directory / "dispatch.json").read_text())["dispatch"], "ATTEMPTED"
+            )
+            self.assertEqual(observation["dispatch"], "UNKNOWN")
+            self.assertEqual(observation["failure"], "INTERRUPTED_UNCERTAIN_DELIVERY_NO_RESAMPLE")
+            observations, counts = driver.verify_c_gt_1_observations(root, [item])
+            self.assertEqual(counts, {"dispatched": 0, "uncertain": 1, "operational_failures": 1})
+            self.assertEqual(
+                observations[protocol.candidate_path_id(item)],
+                json.loads((directory / "observation.json").read_text()),
+            )
+
+    def test_interrupted_state_is_distinguishable_from_completed(self) -> None:
+        items = multi_live_items(2)
+        with tempfile.TemporaryDirectory() as raw_root:
+            root = Path(raw_root)
+            first_transport = CaptureTransport("KEEP_ORIGINAL")
+            directory, body, _request_bytes = self._prepared(root, items[0])
+            protocol.perform_call(directory, body, transport=first_transport)
+            crash_directory, crash_body, crash_bytes = self._prepared(root, items[1])
+            protocol.immutable_write(crash_directory / "request.json", crash_bytes)
+            protocol.immutable_json(crash_directory / "dispatch.json", {"dispatch": "ATTEMPTED"})
+            crash_transport = CaptureTransport()
+            protocol.perform_call(crash_directory, crash_body, transport=crash_transport)
+            self.assertEqual(first_transport.calls, 1)
+            self.assertEqual(crash_transport.calls, 0)
+            _observations, counts = driver.verify_c_gt_1_observations(root, items)
+            self.assertEqual(counts, {"dispatched": 1, "uncertain": 1, "operational_failures": 1})
+
+    def test_three_file_interruption_verifies_as_uncertain(self) -> None:
+        item = multi_live_items(1)[0]
+        with tempfile.TemporaryDirectory() as raw_root:
+            root = Path(raw_root)
+            directory, body, request_bytes = self._prepared(root, item)
+            protocol.immutable_write(directory / "request.json", request_bytes)
+            transport = CaptureTransport()
+            protocol.perform_call(directory, body, transport=transport)
+            self.assertEqual(transport.calls, 0)
+            self.assertEqual(
+                {entry.name for entry in directory.iterdir()},
+                {"request.json", "raw-response.json", "observation.json"},
+            )
+            _observations, counts = driver.verify_c_gt_1_observations(root, [item])
+            self.assertEqual(counts, {"dispatched": 0, "uncertain": 1, "operational_failures": 1})
+
+    def test_unfinalized_request_only_state_is_rejected(self) -> None:
+        item = multi_live_items(1)[0]
+        with tempfile.TemporaryDirectory() as raw_root:
+            root = Path(raw_root)
+            directory, _body, request_bytes = self._prepared(root, item)
+            protocol.immutable_write(directory / "request.json", request_bytes)
+            protocol.immutable_json(directory / "dispatch.json", {"dispatch": "ATTEMPTED"})
+            with self.assertRaisesRegex(driver.ExperimentError, "request set is invalid"):
+                driver.verify_c_gt_1_observations(root, [item])
+
+    def test_completed_observation_with_unknown_raw_is_rejected(self) -> None:
+        item = multi_live_items(1)[0]
+        with tempfile.TemporaryDirectory() as raw_root:
+            root = Path(raw_root)
+            directory, _transport, _observation = self._completed(root, item)
+            raw = json.loads((directory / "raw-response.json").read_text())
+            raw.update(
+                {
+                    "dispatch": "UNKNOWN",
+                    "dispatch_attempted": False,
+                    "operational_failure": True,
+                    "failure": "INTERRUPTED_UNCERTAIN_DELIVERY_NO_RESAMPLE",
+                    "http_seconds": None,
+                    "http_status": None,
+                }
+            )
+            raw_bytes = self._rewrite(directory / "raw-response.json", raw)
+            observation = json.loads((directory / "observation.json").read_text())
+            observation["response_sha256"] = driver.sha256_bytes(raw_bytes)
+            self._rewrite(directory / "observation.json", observation)
+            with self.assertRaisesRegex(driver.ExperimentError, "observation identity"):
+                driver.verify_c_gt_1_observations(root, [item])
+
+    def test_dispatch_marker_drift_is_rejected(self) -> None:
+        item = multi_live_items(1)[0]
+        with tempfile.TemporaryDirectory() as raw_root:
+            root = Path(raw_root)
+            directory, _transport, _observation = self._completed(root, item)
+            self._rewrite(directory / "dispatch.json", {"dispatch": "UNKNOWN"})
+            with self.assertRaisesRegex(driver.ExperimentError, "observation identity"):
+                driver.verify_c_gt_1_observations(root, [item])
+
+    def test_non_interrupted_raw_failure_is_rejected(self) -> None:
+        item = multi_live_items(1)[0]
+        with tempfile.TemporaryDirectory() as raw_root:
+            root = Path(raw_root)
+            directory, body, request_bytes = self._prepared(root, item)
+            protocol.immutable_write(directory / "request.json", request_bytes)
+            protocol.immutable_json(directory / "dispatch.json", {"dispatch": "ATTEMPTED"})
+            protocol.perform_call(directory, body, transport=CaptureTransport())
+            raw = json.loads((directory / "raw-response.json").read_text())
+            raw["failure"] = "TIMEOUT"
+            raw_bytes = self._rewrite(directory / "raw-response.json", raw)
+            observation = json.loads((directory / "observation.json").read_text())
+            observation["response_sha256"] = driver.sha256_bytes(raw_bytes)
+            self._rewrite(directory / "observation.json", observation)
+            with self.assertRaisesRegex(driver.ExperimentError, "observation identity"):
+                driver.verify_c_gt_1_observations(root, [item])
+
+    def test_request_byte_drift_is_rejected(self) -> None:
+        item = multi_live_items(1)[0]
+        with tempfile.TemporaryDirectory() as raw_root:
+            root = Path(raw_root)
+            directory, _transport, _observation = self._completed(root, item)
+            request_path = directory / "request.json"
+            request_path.write_bytes(request_path.read_bytes() + b" ")
+            os.chmod(request_path, 0o600)
+            with self.assertRaisesRegex(driver.ExperimentError, "observation identity"):
+                driver.verify_c_gt_1_observations(root, [item])
+
+    def test_three_file_attempted_content_is_rejected(self) -> None:
+        item = multi_live_items(1)[0]
+        with tempfile.TemporaryDirectory() as raw_root:
+            root = Path(raw_root)
+            directory, _transport, _observation = self._completed(root, item)
+            (directory / "dispatch.json").unlink()
+            with self.assertRaisesRegex(driver.ExperimentError, "interruption identity"):
+                driver.verify_c_gt_1_observations(root, [item])
+
+
+class FailedRootAdoptionTests(unittest.TestCase):
+    """Cross-root adoption of a preserved failed-instrument root (synthetic).
+
+    The fixture mirrors the ffdf13 contract: two completed ATTEMPTED
+    observations, one persisted uncertain finalization, one request-only
+    interruption and one missing target.  All constants are patched to the
+    synthetic identities so no real root is touched.
+    """
+
+    FAILED_NAME = "007-m-rank-ambiguous-levenshtein-candidates-recovery.synthetic"
+
+    def _build_failed_root(
+        self, parent: Path
+    ) -> tuple[Path, list[dict[str, object]], dict[str, object]]:
+        items = multi_live_items(5)
+        failed = parent / self.FAILED_NAME
+        failed.mkdir(mode=0o700)
+        os.chmod(failed, 0o700)
+        for position, item in enumerate(items[:4]):
+            directory = failed / "requests" / protocol.candidate_path_id(item)
+            directory.parent.mkdir(parents=True, exist_ok=True, mode=0o700)
+            os.chmod(directory.parent, 0o700)
+            directory.mkdir(mode=0o700)
+            os.chmod(directory, 0o700)
+            body = protocol.request_body(
+                item["sentence"], item["candidate"]["text"], item["mechanical_edit"][2]
+            )
+            if position == 0:
+                protocol.perform_call(directory, body, transport=CaptureTransport("KEEP_ORIGINAL"))
+            elif position == 1:
+                protocol.perform_call(directory, body, transport=CaptureTransport("USE_CANDIDATE"))
+            else:
+                protocol.immutable_write(
+                    directory / "request.json", protocol.canonical_bytes(body)
+                )
+                protocol.immutable_json(directory / "dispatch.json", {"dispatch": "ATTEMPTED"})
+                if position == 2:
+                    protocol.interrupted_observation(directory, body)
+        configuration = {
+            "run_id": "007-m",
+            "status": "FROZEN_BEFORE_LIVE_EXECUTION",
+            "implementation_head": "f" * 40,
+            "deployment": {
+                "endpoint": "http://synthetic.invalid/v1",
+                "model": protocol.MODEL,
+                "credential_env": "OAP_007_J_QWEN_BEARER",
+                "profile_sha256": "0" * 64,
+            },
+            "prompt": {"sha256": protocol.FROZEN_PROMPT_SHA256},
+            "parser": prior_j.EXPECTED_PARSER,
+        }
+        driver.validator_driver.immutable_json(failed / "CONFIGURATION.json", configuration)
+        driver.validator_driver.immutable_json(
+            failed / "RUN-STATUS.json",
+            {"status": "FROZEN_BEFORE_LIVE_EXECUTION", "run_id": "007-m"},
+        )
+        return failed, items, configuration
+
+    @contextlib.contextmanager
+    def _patched(self, failed: Path, **overrides: object):
+        values = {
+            "EXPECTED_FAILED_ROOT": self.FAILED_NAME,
+            "EXPECTED_FAILED_ROOT_CONFIGURATION": driver.sha256_file(
+                failed / "CONFIGURATION.json"
+            ),
+            "EXPECTED_FAILED_ROOT_HEAD": "f" * 40,
+            "EXPECTED_FAILED_ROOT_RUN_STATUS": driver.sha256_file(failed / "RUN-STATUS.json"),
+            "EXPECTED_FAILED_ROOT_REQUEST_TREE": driver.validator_driver.request_tree_identity(
+                failed / "requests"
+            ),
+            "EXPECTED_ADOPTED_COMPLETED_ATTEMPTED": 2,
+            "EXPECTED_ADOPTED_COMPLETED_UNCERTAIN": 1,
+            "EXPECTED_ADOPTED_REQUEST_ONLY": 1,
+            "EXPECTED_ADOPTED_FRESH": 1,
+            "EXPECTED_007M_PROFILE_SHA256": "0" * 64,
+        }
+        values.update(overrides)
+        with contextlib.ExitStack() as stack:
+            for name, value in values.items():
+                stack.enter_context(patch.object(driver, name, value))
+            yield
+
+    def _scratch(self, parent: Path, name: str = "adoption-scratch") -> Path:
+        scratch = parent / name
+        scratch.mkdir(mode=0o700)
+        os.chmod(scratch, 0o700)
+        return scratch
+
+    def test_verify_failed_root_census_and_tamper_rejection(self) -> None:
+        with tempfile.TemporaryDirectory() as raw_root:
+            parent = Path(raw_root)
+            failed, items, _configuration = self._build_failed_root(parent)
+            scratch = self._scratch(parent)
+            with self._patched(failed):
+                result = driver.verify_failed_root(failed, scratch, items)
+                self.assertEqual(
+                    result["state_census"],
+                    {
+                        "completed_attempted": 2,
+                        "completed_uncertain_persisted": 1,
+                        "request_only_interrupted": 1,
+                        "missing": 1,
+                    },
+                )
+                self.assertFalse(result["resampled"])
+                self.assertEqual(len(result["states"]), 5)
+                request_path = (
+                    failed / "requests" / protocol.candidate_path_id(items[0]) / "request.json"
+                )
+                request_path.write_bytes(request_path.read_bytes() + b" ")
+                os.chmod(request_path, 0o600)
+                with self.assertRaisesRegex(
+                    driver.ExperimentError, "request tree identity changed"
+                ):
+                    driver.verify_failed_root(failed, scratch, items)
+
+    def test_failed_root_census_mismatch_is_rejected(self) -> None:
+        with tempfile.TemporaryDirectory() as raw_root:
+            parent = Path(raw_root)
+            failed, items, _configuration = self._build_failed_root(parent)
+            scratch = self._scratch(parent)
+            with (
+                self._patched(failed, EXPECTED_ADOPTED_COMPLETED_ATTEMPTED=3),
+                self.assertRaisesRegex(driver.ExperimentError, "state census drifted"),
+            ):
+                driver.verify_failed_root(failed, scratch, items)
+
+    def test_failed_root_identity_mismatch_is_rejected(self) -> None:
+        with tempfile.TemporaryDirectory() as raw_root:
+            parent = Path(raw_root)
+            failed, items, _configuration = self._build_failed_root(parent)
+            scratch = self._scratch(parent)
+            configuration_path = failed / "CONFIGURATION.json"
+            original_sha = driver.sha256_file(configuration_path)
+            configuration_path.write_bytes(configuration_path.read_bytes() + b" ")
+            os.chmod(configuration_path, 0o600)
+            with (
+                self._patched(failed, EXPECTED_FAILED_ROOT_CONFIGURATION=original_sha),
+                self.assertRaisesRegex(
+                    driver.validator_driver.ExperimentError, "hash mismatch"
+                ),
+            ):
+                driver.verify_failed_root(failed, scratch, items)
+
+    def test_adopt_copies_completed_and_carry_finalizes_interrupted(self) -> None:
+        with tempfile.TemporaryDirectory() as raw_root:
+            parent = Path(raw_root)
+            failed, items, configuration = self._build_failed_root(parent)
+            scratch = self._scratch(parent)
+            by_id = {protocol.candidate_path_id(item): item for item in items}
+            with self._patched(failed):
+                states = driver.verify_failed_root(failed, scratch, items)["states"]
+                self.assertEqual(
+                    sorted(set(states.values())),
+                    ["ATTEMPTED", "INTERRUPTED_4FILE", "MISSING", "REQUEST_ONLY"],
+                )
+                identity_basis = driver._reuse_identity_basis(configuration)
+                reuse_records = driver.adopt_completed_c_gt_1(
+                    failed, scratch, items, states, identity_basis
+                )
+                self.assertEqual(len(reuse_records), 3)
+                self.assertEqual(
+                    [record["state"] for record in reuse_records],
+                    ["completed-attempted", "completed-attempted", "interrupted-uncertain"],
+                )
+                self.assertEqual(
+                    [record["new_calls"] for record in reuse_records], [0, 0, 0]
+                )
+                for record in reuse_records:
+                    item = by_id[record["candidate_id"]]
+                    source = failed / "requests" / record["candidate_id"]
+                    destination = scratch / "requests" / record["candidate_id"]
+                    for name in (
+                        "request.json",
+                        "dispatch.json",
+                        "raw-response.json",
+                        "observation.json",
+                    ):
+                        self.assertEqual(
+                            driver.sha256_file(destination / name),
+                            driver.sha256_file(source / name),
+                        )
+                    body = protocol.request_body(
+                        item["sentence"], item["candidate"]["text"], item["mechanical_edit"][2]
+                    )
+                    state, _observation = driver._c_gt_1_directory_state(
+                        destination, protocol.canonical_bytes(body)
+                    )
+                    expected_state = (
+                        driver.C_GT_1_STATE_ATTEMPTED
+                        if record["state"] == "completed-attempted"
+                        else driver.C_GT_1_STATE_INTERRUPTED_4FILE
+                    )
+                    self.assertEqual(state, expected_state)
+                decisions = [record["decision"] for record in reuse_records]
+                self.assertEqual(decisions[:2], ["KEEP_ORIGINAL", "USE_CANDIDATE"])
+                self.assertIsNone(decisions[2])
+                carry_records = driver.carry_interrupted_c_gt_1(failed, scratch, items, states)
+                self.assertEqual(len(carry_records), 1)
+                record = carry_records[0]
+                item = by_id[record["candidate_id"]]
+                destination = scratch / "requests" / record["candidate_id"]
+                body = protocol.request_body(
+                    item["sentence"], item["candidate"]["text"], item["mechanical_edit"][2]
+                )
+                state, observation = driver._c_gt_1_directory_state(
+                    destination, protocol.canonical_bytes(body)
+                )
+                self.assertEqual(state, driver.C_GT_1_STATE_INTERRUPTED_4FILE)
+                self.assertEqual(
+                    observation["failure"], "INTERRUPTED_UNCERTAIN_DELIVERY_NO_RESAMPLE"
+                )
+                self.assertIsNone(observation["decision"])
+                self.assertEqual(
+                    driver.sha256_file(destination / "request.json"),
+                    record["source_request_sha256"],
+                )
+                self.assertEqual(
+                    driver.sha256_file(destination / "dispatch.json"),
+                    record["source_dispatch_sha256"],
+                )
+                self.assertEqual(record["new_calls"], 0)
+                with self.assertRaisesRegex(driver.ExperimentError, "already exists"):
+                    driver.carry_interrupted_c_gt_1(failed, scratch, items, states)
+
+    def test_build_live_configuration_adoption_block_and_frozen_regression(self) -> None:
+        identity = {
+            "implementation_head": "f" * 40,
+            "branch": driver.BRANCH,
+            "head_blobs": {"research/levenshtein_rank.py": {"sha256": "0" * 64}},
+        }
+        source = {
+            "source_root": "/native/007j-root",
+            "source_experiment": "007-j-levenshtein-one-contextual-validator",
+            "configuration_sha256": "1" * 64,
+            "candidate_manifest_sha256": "2" * 64,
+            "results_sha256": "3" * 64,
+        }
+        deployment = {
+            "class": "A100-FP8",
+            "model": protocol.MODEL,
+            "endpoint": "http://synthetic.invalid/v1",
+            "profile_path": "/private/profile.toml",
+            "profile_sha256": "0" * 64,
+            "frozen_007j_profile_sha256": prior_j.EXPECTED_PROFILE,
+            "profile_drift": True,
+            "credential_env": "OAP_007_J_QWEN_BEARER",
+            "protocol": "Responses non-streaming",
+        }
+        analysis = {"entering_targets": {}, "transition_matrix": {}, "c0_counts": {}}
+        fresh = multi_live_items(1)
+        c1_records = [{"candidate_id": "c1"}]
+        scratch = Path("/native/scratch")
+        reuse_records = [{"candidate_id": f"adopted-{index}"} for index in range(3)]
+        adoption = {
+            "failed_root": self.FAILED_NAME,
+            "completed_reused": 3,
+            "completed_reused_attempted": 2,
+            "completed_reused_uncertain": 1,
+            "interrupted_carried": 1,
+            "fresh": 1,
+            "linkage_sha256": "1" * 64,
+            "reuse_records_sha256": "2" * 64,
+            "carry_records_sha256": "3" * 64,
+            "adopted_candidates_sha256": "4" * 64,
+            "adopted_candidate_manifest_sha256": "5" * 64,
+        }
+        source_configuration = {
+            "prior_007i_identity": {"configuration_sha256": prior_j.EXPECTED_PRIOR_CONFIG}
+        }
+        configuration = driver.build_live_configuration(
+            identity,
+            source,
+            dict(driver.EXPECTED_007J_REQUEST_TREE),
+            dict(driver.EXPECTED_CENSUS_SHA),
+            source_configuration,
+            deployment,
+            analysis,
+            fresh,
+            c1_records,
+            scratch,
+            reuse_records=reuse_records,
+            adoption=adoption,
+        )
+        self.assertEqual(configuration["adoption"], adoption)
+        self.assertEqual(configuration["population"]["c_gt_1_completed_reused"], 3)
+        self.assertEqual(configuration["population"]["c_gt_1_completed_reused_attempted"], 2)
+        self.assertEqual(configuration["population"]["c_gt_1_completed_reused_uncertain"], 1)
+        self.assertEqual(configuration["population"]["c_gt_1_interrupted_carried"], 1)
+        self.assertEqual(configuration["population"]["c_gt_1_fresh"], 1)
+        self.assertEqual(configuration["reuse"]["c_gt_1_reused"], 3)
+        self.assertEqual(configuration["reuse"]["c_gt_1_interrupted_carried"], 1)
+        self.assertIn("c_gt_1_cross_root_reuse_basis", configuration["reuse"])
+        self.assertEqual(configuration["scheduling"]["scheduled_new_calls"], 1)
+        self.assertEqual(configuration["limits"]["new_call_budget"], 1)
+        frozen = driver.build_live_configuration(
+            identity,
+            source,
+            dict(driver.EXPECTED_007J_REQUEST_TREE),
+            dict(driver.EXPECTED_CENSUS_SHA),
+            source_configuration,
+            deployment,
+            analysis,
+            fresh,
+            c1_records,
+            scratch,
+        )
+        self.assertNotIn("adoption", frozen)
+        self.assertEqual(frozen["reuse"]["c_gt_1_reused"], 0)
+        self.assertNotIn("c_gt_1_cross_root_reuse_basis", frozen["reuse"])
+        self.assertNotIn("c_gt_1_fresh", frozen["population"])
 
 
 if __name__ == "__main__":
