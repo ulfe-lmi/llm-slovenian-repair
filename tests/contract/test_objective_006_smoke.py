@@ -1,0 +1,782 @@
+"""Offline contract tests for the verifier-first real-prefix smoke boundary."""
+
+from __future__ import annotations
+
+import json
+import os
+import subprocess
+import sys
+import warnings
+import zipfile
+from pathlib import Path
+
+import pytest
+
+ROOT = Path(__file__).parents[2]
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
+if str(ROOT / "src") not in sys.path:
+    sys.path.insert(0, str(ROOT / "src"))
+
+from llm_slovenian_repair.unigram_importer import EXPECTED_HEADER  # noqa: E402
+from scripts import smoke_unigram_prefix as smoke  # noqa: E402
+from scripts import verify_source_artifact as verifier  # noqa: E402
+from scripts.diagnose_unigram_rows import NUMERIC_CATEGORY_ORDER  # noqa: E402
+
+
+def quote_row(values: list[str] | tuple[str, ...], *, terminal_tab: bool = False) -> bytes:
+    encoded = ("\t".join('"' + value.replace('"', '""') + '"' for value in values)).encode()
+    return encoded + (b"\t" if terminal_tab else b"") + b"\r\n"
+
+
+def valid_row(index: int) -> list[str]:
+    values = [f"value-{index}-{column}" for column in range(28)]
+    for column in (4, 7, 10, 13, 16, 19, 22, 25):
+        values[column] = "0"
+    for column in (5, 6, 8, 9, 11, 12, 14, 15, 17, 18, 20, 21, 23, 24, 26, 27):
+        values[column] = "0.1"
+    return values
+
+
+def prefix_bytes(rows: list[list[str]] | None = None) -> bytes:
+    lines = [f"# synthetic preamble {index:02d}".encode() + b"\r\n" for index in range(14)]
+    lines.append(quote_row(EXPECTED_HEADER))
+    selected_rows = rows if rows is not None else [valid_row(index) for index in range(32)]
+    lines.extend(
+        quote_row(row, terminal_tab=index == 0) for index, row in enumerate(selected_rows)
+    )
+    return b"".join(lines)
+
+
+def write_archive(root: Path, content: bytes, *, member: str = smoke.EXPECTED_MEMBER_NAME) -> Path:
+    path = root / "source.zip"
+    with zipfile.ZipFile(path, "w", compression=zipfile.ZIP_DEFLATED) as archive:
+        for index in range(4):
+            archive.writestr(f"other-{index}.txt", b"owned synthetic metadata")
+        archive.writestr(member, content)
+    return path
+
+
+def evidence_for(archive: Path) -> verifier.ArtifactVerification:
+    return verifier.ArtifactVerification(
+        source_id="gigafida-2.0-words",
+        byte_size=smoke.EXPECTED_ARCHIVE_BYTE_SIZE,
+        md5=smoke.EXPECTED_ARCHIVE_MD5,
+        sha256=smoke.EXPECTED_ARCHIVE_SHA256,
+        member_count=smoke.EXPECTED_MEMBER_COUNT,
+        total_uncompressed_size=smoke.EXPECTED_TOTAL_UNCOMPRESSED_SIZE,
+    )
+
+
+def test_verified_prefix_opens_one_member_and_imports_twice(tmp_path: Path) -> None:
+    archive = write_archive(tmp_path, prefix_bytes())
+    result = smoke._run_verified_prefix(archive, evidence_for(archive))
+
+    assert result["status"] == "COMPLETE_REAL_PREFIX_SMOKE"
+    assert result["prefix"] == {
+        "member": smoke.EXPECTED_MEMBER_NAME,
+        "preamble_lines": 14,
+        "header_byte_length": 834,
+        "header_sha256": smoke.EXPECTED_HEADER_SHA256,
+        "data_rows": 32,
+        "readline_calls": 47,
+        "envelope_bytes": len(prefix_bytes()),
+    }
+    aggregate = result["structural_aggregate"]
+    assert isinstance(aggregate, dict)
+    assert aggregate["utf8_valid_row_count"] == 32
+    assert aggregate["crlf_row_count"] == 32
+    assert aggregate["csv_field_count_histogram"] == {"28": 31, "29": 1}
+    assert aggregate["terminal_tab_count_histogram"] == {"0": 31, "1": 1, "2+": 0}
+    assert aggregate["empty_final_field_count"] == 1
+    assert aggregate["nonempty_field_after_28_count"] == 0
+    assert aggregate["embedded_tab_in_quoted_field_row_count"] == 0
+    assert aggregate["quote_parse_error_count"] == 0
+    assert aggregate["first_structurally_failing_source_line_number"] is None
+    imported = result["real_importer_smoke"]
+    assert isinstance(imported, dict)
+    assert imported["attempts"] == imported["runs_completed"] == 2
+    assert imported["sampled_row_count"] == 32
+    assert imported["results_equal"] is True
+    assert imported["summary_bindings_equal"] is True
+    assert all(
+        isinstance(imported[key], str) and len(imported[key]) == 64
+        for key in ("input_sha256", "output_sha256")
+    )
+    rendered = json.dumps(result, ensure_ascii=False, sort_keys=True)
+    assert "value-0-0" not in rendered
+    assert "header_values" not in rendered
+    assert "records" not in rendered
+
+
+def test_verified_numeric_diagnostic_profiles_then_imports_once(tmp_path: Path) -> None:
+    archive = write_archive(tmp_path, prefix_bytes())
+    result = smoke._run_verified_numeric_diagnostic(archive, evidence_for(archive))
+
+    assert result["status"] == "COMPLETE_NUMERIC_DIAGNOSTIC"
+    numeric = result["numeric_diagnostic"]
+    assert isinstance(numeric, dict)
+    assert numeric["row_count"] == 32
+    assert numeric["numeric_cell_count"] == 32 * 24
+    assert numeric["first_incompatible"] is None
+    importer = result["current_importer"]
+    assert importer == {
+        "attempts": 1,
+        "runs_completed": 1,
+        "record_count": 32,
+        "failure": None,
+    }
+    counterfactual = result["counterfactual_omit_row_1"]
+    assert isinstance(counterfactual, dict)
+    assert counterfactual["envelope"] == {
+        "preamble_lines": 14,
+        "header_byte_length": 834,
+        "data_rows": 31,
+        "readline_calls": 46,
+        "header_preserved": True,
+        "preamble_preserved": True,
+        "first_data_row_omitted": True,
+    }
+    assert counterfactual["importer"] == {
+        "attempts": 1,
+        "runs_completed": 1,
+        "record_count": 31,
+        "failure": None,
+    }
+    rendered = json.dumps(result, ensure_ascii=False, sort_keys=True)
+    assert "value-0-0" not in rendered
+    assert "records" not in rendered
+    assert all(
+        fragment not in rendered
+        for fragment in (
+            "token",
+            "digits",
+            "prefixes",
+            "suffixes",
+            "code_points",
+            "byte_substrings",
+        )
+    )
+
+
+def test_counterfactual_envelope_preserves_prefix_and_omits_only_first_row() -> None:
+    envelope = smoke.PrefixEnvelope(
+        data=prefix_bytes(),
+        preamble_lines=14,
+        header_bytes=834,
+        data_rows=32,
+        readline_calls=47,
+    )
+    counterfactual = smoke._omit_first_data_row(envelope)
+    original_lines = envelope.data.splitlines(keepends=True)
+    counterfactual_lines = counterfactual.data.splitlines(keepends=True)
+    assert counterfactual_lines[:15] == original_lines[:15]
+    assert counterfactual_lines[15:] == original_lines[16:]
+    assert len(counterfactual_lines) == 46
+
+
+@pytest.mark.parametrize(
+    ("mutator", "reason"),
+    [
+        (lambda data: data[: -len(b"\r\n")], "row-incomplete"),
+        (
+            lambda data: data.replace(quote_row(EXPECTED_HEADER), b'"wrong"\r\n', 1),
+            "header-mismatch",
+        ),
+    ],
+)
+def test_prefix_shape_failures_are_content_free(
+    tmp_path: Path, mutator: object, reason: str
+) -> None:
+    data = mutator(prefix_bytes())  # type: ignore[operator]
+    archive = write_archive(tmp_path, data)
+    with pytest.raises(smoke.PrefixSmokeError, match=reason):
+        smoke._run_verified_prefix(archive, evidence_for(archive))
+
+
+def test_preamble_and_line_bounds_fail_closed(tmp_path: Path) -> None:
+    preamble = prefix_bytes().replace(b"# synthetic preamble 00\r\n", b"# broken", 1)
+    archive = write_archive(tmp_path, preamble)
+    with pytest.raises(smoke.PrefixSmokeError, match="header-mismatch"):
+        smoke._run_verified_prefix(archive, evidence_for(archive))
+
+    long_row = valid_row(0)
+    long_row[0] = "x" * smoke.MAX_PREFIX_LINE_BYTES
+    oversized_line = prefix_bytes([long_row] + [valid_row(index) for index in range(1, 32)])
+    archive = write_archive(tmp_path, oversized_line, member="line-bound.bin")
+    with pytest.raises(smoke.PrefixSmokeError, match="member-missing"):
+        smoke._run_verified_prefix(archive, evidence_for(archive))
+
+    archive = write_archive(tmp_path, oversized_line)
+    with pytest.raises(smoke.PrefixSmokeError, match="row-incomplete"):
+        smoke._run_verified_prefix(archive, evidence_for(archive))
+
+
+def test_prefix_envelope_bound_is_independent_of_line_bound(tmp_path: Path) -> None:
+    rows = []
+    for index in range(32):
+        value = valid_row(index)
+        value[0] = "x" * 132_000
+        rows.append(value)
+    archive = write_archive(tmp_path, prefix_bytes(rows))
+    with pytest.raises(smoke.PrefixSmokeError, match="prefix-too-large"):
+        smoke._run_verified_prefix(archive, evidence_for(archive))
+
+
+@pytest.mark.parametrize(
+    ("member", "reason"),
+    [("missing", "member-missing"), ("wrong", "member-wrong")],
+)
+def test_selected_member_identity_is_required(
+    tmp_path: Path, member: str, reason: str
+) -> None:
+    name = "wrong.tsv" if member == "wrong" else "other.bin"
+    archive = write_archive(tmp_path, prefix_bytes(), member=name)
+    with pytest.raises(smoke.PrefixSmokeError, match=reason):
+        smoke._run_verified_prefix(archive, evidence_for(archive))
+
+
+def test_duplicate_selected_member_is_rejected(tmp_path: Path) -> None:
+    archive = tmp_path / "duplicate.zip"
+    with warnings.catch_warnings():
+        warnings.simplefilter("ignore", UserWarning)
+        with zipfile.ZipFile(archive, "w", compression=zipfile.ZIP_DEFLATED) as handle:
+            for index in range(4):
+                handle.writestr(f"other-{index}.txt", b"owned synthetic metadata")
+            handle.writestr(smoke.EXPECTED_MEMBER_NAME, prefix_bytes())
+            handle.writestr(smoke.EXPECTED_MEMBER_NAME, prefix_bytes())
+    with pytest.raises(smoke.PrefixSmokeError, match="member-duplicate"):
+        smoke._run_verified_prefix(archive, evidence_for(archive))
+
+
+def test_structural_and_importer_failures_are_distinct(tmp_path: Path) -> None:
+    bad_shape = valid_row(0)
+    bad_shape.append("nonempty")
+    archive = write_archive(
+        tmp_path, prefix_bytes([bad_shape] + [valid_row(index) for index in range(1, 32)])
+    )
+    with pytest.raises(smoke.PrefixSmokeError, match="structural-aggregate-mismatch"):
+        smoke._run_verified_prefix(archive, evidence_for(archive))
+
+    bad_import = valid_row(0)
+    bad_import[0] = ""
+    archive = write_archive(
+        tmp_path, prefix_bytes([bad_import] + [valid_row(index) for index in range(1, 32)])
+    )
+    with pytest.raises(smoke.PrefixSmokeError, match="import-record-invalid"):
+        smoke._run_verified_prefix(archive, evidence_for(archive))
+
+
+@pytest.mark.parametrize("kind", ["symlink", "directory"])
+def test_public_path_verification_stops_before_member_access(
+    tmp_path: Path, kind: str
+) -> None:
+    target = tmp_path / "artifact"
+    if kind == "symlink":
+        target.symlink_to(ROOT / "resources/source-inventory-v1.json")
+    else:
+        target.mkdir()
+    with pytest.raises(smoke.PrefixSmokeError, match="verify-artifact-(symlink|not-regular)"):
+        smoke.run_smoke(
+            ROOT / "resources/source-inventory-v1.json", smoke.EXPECTED_SOURCE_ID, target
+        )
+
+
+def test_006_g_receipt_preserves_verifier_and_helper_stop_without_content() -> None:
+    receipt = json.loads(
+        (
+            ROOT
+            / "resources/source-acquisitions/gigafida-2.0-words-006-g.json"
+        ).read_text(encoding="utf-8")
+    )
+    assert receipt["schema_version"] == 1
+    assert receipt["receipt_id"] == "gigafida-2.0-words-006-g"
+    assert receipt["status"] == "BLOCKED_SMOKE_HELPER_IMPORT"
+    assert receipt["acquisition_evidence"]["006_g_get_count"] == 1
+    assert receipt["acquisition_evidence"]["cumulative_observed_objective_get_count"] == 9
+    assert receipt["acquisition_evidence"]["verifier_before_member_access"] is True
+    assert receipt["acquisition_evidence"]["accepted_offline_verifier"] == "PASSED"
+    assert receipt["acquisition_evidence"]["member_access_attempted"] is False
+    assert receipt["acquisition_evidence"]["temporary_tree_absent"] is True
+    assert receipt["acquisition_evidence"]["source_data_retained"] is False
+    assert receipt["redistribution_ready"] is False
+    assert receipt["structural_sample"]["aggregate"] is None
+    assert receipt["real_importer_smoke"]["attempts"] == 0
+    assert receipt["real_importer_smoke"]["runs_completed"] == 0
+    assert receipt["real_importer_smoke"]["sampled_row_count"] is None
+    assert receipt["real_importer_smoke"]["input_sha256"] is None
+    assert receipt["real_importer_smoke"]["output_sha256"] is None
+    assert (
+        receipt["real_importer_smoke"]["configured_provenance"]["import_completeness"]
+        == "PARTIAL"
+    )
+    assert receipt["prior_rounds"]["006_f"]["failure"].startswith(
+        "SMOKE_HARNESS_SYNTAX_ERROR"
+    )
+
+    forbidden = {
+        "fields",
+        "values",
+        "raw",
+        "row_hash",
+        "decoded_strings",
+        "source_rows",
+        "header_values",
+    }
+
+    def keys(value: object) -> list[str]:
+        if isinstance(value, dict):
+            nested = [item for child in value.values() for item in keys(child)]
+            return [key for key in value] + nested
+        if isinstance(value, list):
+            return [item for child in value for item in keys(child)]
+        return []
+
+    assert not forbidden.intersection(keys(receipt))
+
+
+def test_verifier_identity_is_required_before_member_access(tmp_path: Path) -> None:
+    archive = write_archive(tmp_path, prefix_bytes())
+    wrong = verifier.ArtifactVerification(
+        source_id="gigafida-2.0-words",
+        byte_size=1,
+        md5=smoke.EXPECTED_ARCHIVE_MD5,
+        sha256=smoke.EXPECTED_ARCHIVE_SHA256,
+        member_count=5,
+        total_uncompressed_size=smoke.EXPECTED_TOTAL_UNCOMPRESSED_SIZE,
+    )
+    with pytest.raises(smoke.PrefixSmokeError, match="artifact-identity-mismatch"):
+        smoke._run_verified_prefix(archive, wrong)
+
+
+def test_cli_serializes_only_bounded_error(tmp_path: Path) -> None:
+    archive = write_archive(tmp_path, prefix_bytes())
+    completed = subprocess.run(
+        [
+            sys.executable,
+            "scripts/smoke_unigram_prefix.py",
+            "--inventory",
+            str(ROOT / "resources/source-inventory-v1.json"),
+            "--source-id",
+            "wrong-source",
+            "--artifact",
+            str(archive),
+        ],
+        cwd=ROOT,
+        check=False,
+        capture_output=True,
+        text=True,
+    )
+    assert completed.returncode == 2
+    assert json.loads(completed.stderr) == {"error": "source-id-not-canonical"}
+    assert completed.stdout == ""
+
+
+def test_preflight_is_ready_and_content_free() -> None:
+    result = smoke.run_preflight(
+        ROOT / "resources/source-inventory-v1.json", smoke.EXPECTED_SOURCE_ID
+    )
+
+    assert result["status"] == "READY"
+    assert result["mode"] == "PRE_FLIGHT"
+    assert result["inventory"] == {
+        "id": "source-inventory-v1",
+        "entry_count": 4,
+        "source_id": smoke.EXPECTED_SOURCE_ID,
+        "source_name": "Gigafida 2.0 word lists",
+        "release": "2.0",
+    }
+    assert result["header_contract"] == {
+        "byte_length": 834,
+        "sha256": smoke.EXPECTED_HEADER_SHA256,
+        "field_count": 28,
+        "line_number": 15,
+    }
+    assert result["completeness"] == {
+        "source": "COMPLETE",
+        "query": "COMPLETE",
+        "import": "PARTIAL",
+    }
+    rendered = json.dumps(result, ensure_ascii=False, sort_keys=True)
+    assert "Oblika z malimi črkami" not in rendered
+    assert "header_fields" not in rendered
+    assert "records" not in rendered
+
+
+def test_isolated_preflight_bootstraps_from_non_repository_cwd(tmp_path: Path) -> None:
+    environment = os.environ.copy()
+    environment.pop("PYTHONPATH", None)
+    completed = subprocess.run(
+        [
+            sys.executable,
+            "-I",
+            "-B",
+            str(ROOT / "scripts/smoke_unigram_prefix.py"),
+            "--inventory",
+            str(ROOT / "resources/source-inventory-v1.json"),
+            "--source-id",
+            smoke.EXPECTED_SOURCE_ID,
+            "--preflight",
+        ],
+        cwd=tmp_path,
+        env=environment,
+        check=False,
+        capture_output=True,
+        text=True,
+    )
+
+    assert completed.returncode == 0
+    assert completed.stderr == ""
+    result = json.loads(completed.stdout)
+    assert result["status"] == "READY"
+    assert result["completeness"] == {
+        "source": "COMPLETE",
+        "query": "COMPLETE",
+        "import": "PARTIAL",
+    }
+    assert "Oblika z malimi črkami" not in completed.stdout
+
+
+def test_preflight_and_smoke_arguments_are_mutually_exclusive(tmp_path: Path) -> None:
+    environment = os.environ.copy()
+    environment.pop("PYTHONPATH", None)
+    completed = subprocess.run(
+        [
+            sys.executable,
+            "-I",
+            "-B",
+            str(ROOT / "scripts/smoke_unigram_prefix.py"),
+            "--inventory",
+            str(ROOT / "resources/source-inventory-v1.json"),
+            "--source-id",
+            smoke.EXPECTED_SOURCE_ID,
+            "--preflight",
+            "--artifact",
+            str(tmp_path / "not-used.zip"),
+        ],
+        cwd=tmp_path,
+        env=environment,
+        check=False,
+        capture_output=True,
+        text=True,
+    )
+
+    assert completed.returncode == 2
+    assert completed.stdout == ""
+    assert "--artifact: not allowed with argument --preflight" in completed.stderr
+
+
+def test_diagnostic_and_smoke_arguments_are_mutually_exclusive(tmp_path: Path) -> None:
+    environment = os.environ.copy()
+    environment.pop("PYTHONPATH", None)
+    completed = subprocess.run(
+        [
+            sys.executable,
+            "-I",
+            "-B",
+            str(ROOT / "scripts/smoke_unigram_prefix.py"),
+            "--inventory",
+            str(ROOT / "resources/source-inventory-v1.json"),
+            "--source-id",
+            smoke.EXPECTED_SOURCE_ID,
+            "--artifact",
+            str(tmp_path / "smoke.zip"),
+            "--diagnostic",
+            str(tmp_path / "diagnostic.zip"),
+        ],
+        cwd=tmp_path,
+        env=environment,
+        check=False,
+        capture_output=True,
+        text=True,
+    )
+    assert completed.returncode == 2
+    assert completed.stdout == ""
+    assert "argument --diagnostic: not allowed with argument --artifact" in completed.stderr
+
+
+def test_unavailable_dependency_is_a_bounded_preflight_error(tmp_path: Path) -> None:
+    environment = os.environ.copy()
+    environment.pop("PYTHONPATH", None)
+    completed = subprocess.run(
+        [
+            sys.executable,
+            "-I",
+            "-S",
+            "-B",
+            str(ROOT / "scripts/smoke_unigram_prefix.py"),
+            "--inventory",
+            str(ROOT / "resources/source-inventory-v1.json"),
+            "--source-id",
+            smoke.EXPECTED_SOURCE_ID,
+            "--preflight",
+        ],
+        cwd=tmp_path,
+        env=environment,
+        check=False,
+        capture_output=True,
+        text=True,
+    )
+
+    assert completed.returncode == 2
+    assert json.loads(completed.stderr) == {
+        "error": "preflight-dependency-unavailable"
+    }
+    assert completed.stdout == ""
+
+
+def test_006_h_receipt_is_bounded_and_preserves_history() -> None:
+    receipt = json.loads(
+        (
+            ROOT
+            / "resources/source-acquisitions/gigafida-2.0-words-006-h.json"
+        ).read_text(encoding="utf-8")
+    )
+
+    assert receipt["schema_version"] == 1
+    assert receipt["receipt_id"] == "gigafida-2.0-words-006-h"
+    assert receipt["status"] == "BLOCKED_REAL_IMPORTER_INVALID_COUNT"
+    assert receipt["preflight"]["result"] == "PASSED"
+    assert receipt["preflight"]["isolated_mode"] is True
+    assert receipt["preflight"]["pythonpath"] == "ABSENT"
+    assert receipt["preflight"]["artifact_required"] is False
+    assert receipt["preflight"]["source_accessed"] is False
+    assert receipt["preflight"]["provenance_completeness"] == {
+        "source": "COMPLETE",
+        "query": "COMPLETE",
+        "import": "PARTIAL",
+    }
+    for field in ("inventory_sha256", "archive_sha256", "header_sha256"):
+        assert len(receipt[field]) == 64
+        assert all(character in "0123456789abcdef" for character in receipt[field])
+    evidence = receipt["acquisition_evidence"]
+    assert evidence["006_h_get_count"] == 1
+    assert evidence["cumulative_observed_objective_get_count"] == 10
+    assert evidence["preflight_before_get"] is True
+    assert evidence["verifier_before_member_access"] is True
+    assert evidence["member_access_attempted"] is True
+    assert evidence["temporary_environment_absent"] is True
+    assert evidence["temporary_tree_absent"] is True
+    assert evidence["source_data_retained"] is False
+    assert evidence["retry_attempted"] is False
+    assert receipt["structural_sample"]["status"] == "PASSED"
+    assert receipt["structural_sample"]["rows_read"] == 32
+    assert receipt["structural_sample"]["aggregate"]["csv_field_count_histogram"] == {
+        "28": 31,
+        "29": 1,
+    }
+    assert receipt["real_importer_smoke"] == {
+        **receipt["real_importer_smoke"],
+        "status": "BLOCKED",
+        "attempts": 1,
+        "runs_completed": 0,
+        "input_sha256": None,
+        "output_sha256": None,
+        "failure": "import-invalid-count",
+    }
+    assert receipt["prior_rounds"]["006_g"]["get_count"] == 1
+    assert "HEADER_CONTRACT_UNAVAILABLE" in receipt["prior_rounds"]["006_g"]["failure"]
+
+    forbidden = {
+        "fields",
+        "values",
+        "raw",
+        "records",
+        "row_hash",
+        "decoded_strings",
+        "source_rows",
+        "header_values",
+        "source_content",
+    }
+
+    def keys(value: object) -> list[str]:
+        if isinstance(value, dict):
+            nested = [item for child in value.values() for item in keys(child)]
+            return [key for key in value] + nested
+        if isinstance(value, list):
+            return [item for child in value for item in keys(child)]
+        return []
+
+    assert not forbidden.intersection(keys(receipt))
+
+
+def test_006_i_receipt_has_complete_fixed_numeric_profile_and_safe_failure() -> None:
+    receipt = json.loads(
+        (
+            ROOT
+            / "resources/source-acquisitions/gigafida-2.0-words-006-i.json"
+        ).read_text(encoding="utf-8")
+    )
+    assert receipt["schema_version"] == 1
+    assert receipt["receipt_id"] == "gigafida-2.0-words-006-i"
+    assert receipt["status"] == "BLOCKED_NUMERIC_DIAGNOSTIC_IMPORT"
+    assert receipt["preflight"]["result"] == "PASSED"
+    assert receipt["preflight"]["isolated_mode"] is True
+    assert receipt["preflight"]["pythonpath"] == "ABSENT"
+    evidence = receipt["acquisition_evidence"]
+    assert evidence["006_i_get_count"] == 1
+    assert evidence["cumulative_observed_objective_get_count"] == 11
+    assert evidence["verifier_before_member_access"] is True
+    assert evidence["numeric_diagnostic_attempted"] is True
+    assert evidence["second_importer_run_attempted"] is False
+    assert evidence["temporary_environment_absent"] is True
+    assert evidence["temporary_tree_absent"] is True
+    assert evidence["source_data_retained"] is False
+    assert evidence["redistribution_ready"] is False
+    assert receipt["prior_rounds"]["006_f"]["status"] == "BLOCKED_SMOKE_HARNESS_FAILURE"
+    assert receipt["prior_rounds"]["006_g"]["status"] == "BLOCKED_SMOKE_HELPER_IMPORT"
+    assert receipt["prior_rounds"]["006_h"]["status"] == "BLOCKED_REAL_IMPORTER_INVALID_COUNT"
+
+    numeric = receipt["numeric_diagnostic"]
+    assert numeric["row_count"] == 32
+    assert numeric["numeric_cell_count"] == 768
+    assert numeric["absolute_count_cell_count"] == 256
+    assert numeric["published_decimal_cell_count"] == 512
+    assert set(numeric["category_enum"]) == {
+        category.value for category in NUMERIC_CATEGORY_ORDER
+    }
+    columns = numeric["column_histograms"]
+    assert set(columns) == {str(column) for column in range(5, 29)}
+    for column in columns.values():
+        assert set(column["category_histogram"]) == set(numeric["category_enum"])
+        assert sum(column["category_histogram"].values()) == 32
+        assert (
+            column["current_parser_compatible_cell_count"]
+            + column["current_parser_incompatible_cell_count"]
+            == 32
+        )
+    assert numeric["current_parser_compatibility"] == {
+        "absolute_count": {
+            "compatible_cell_count": 248,
+            "incompatible_cell_count": 8,
+        },
+        "published_decimal": {
+            "compatible_cell_count": 4,
+            "incompatible_cell_count": 508,
+        },
+    }
+    assert numeric["first_incompatible"] == {
+        "row_ordinal": 1,
+        "column": 5,
+        "semantic_kind": "absolute_count",
+        "category": "OTHER_ASCII",
+    }
+    assert receipt["current_importer"] == {
+        "status": "BLOCKED",
+        "attempts": 1,
+        "runs_completed": 0,
+        "record_count": None,
+        "failure": {"reason": "invalid-count", "column": 5},
+        "failure_boundary": receipt["current_importer"]["failure_boundary"],
+    }
+
+    forbidden = {
+        "fields",
+        "values",
+        "raw",
+        "records",
+        "row_hash",
+        "decoded_strings",
+        "source_rows",
+        "header_values",
+        "token_text",
+        "code_points",
+        "byte_substrings",
+        "token_length",
+    }
+
+    def keys(value: object) -> list[str]:
+        if isinstance(value, dict):
+            nested = [item for child in value.values() for item in keys(child)]
+            return [key for key in value] + nested
+        if isinstance(value, list):
+            return [item for child in value for item in keys(child)]
+        return []
+
+    assert not forbidden.intersection(keys(receipt))
+    assert "implementation_head" not in receipt
+
+
+def test_006_j_receipt_refines_marker_identity_and_counterfactual_boundary() -> None:
+    receipt = json.loads(
+        (
+            ROOT
+            / "resources/source-acquisitions/gigafida-2.0-words-006-j.json"
+        ).read_text(encoding="utf-8")
+    )
+    assert receipt["schema_version"] == 1
+    assert receipt["receipt_id"] == "gigafida-2.0-words-006-j"
+    assert receipt["status"] == "BLOCKED_NUMERIC_DIAGNOSTIC_IMPORT"
+    assert receipt["preflight"]["result"] == "PASSED"
+    evidence = receipt["acquisition_evidence"]
+    assert evidence["006_j_get_count"] == 1
+    assert evidence["cumulative_observed_objective_get_count"] == 12
+    assert evidence["counterfactual_importer_call_attempted"] is True
+    assert evidence["second_get_attempted"] is False
+    assert evidence["temporary_environment_absent"] is True
+    assert evidence["temporary_tree_absent"] is True
+    assert evidence["source_data_retained"] is False
+    assert evidence["redistribution_ready"] is False
+    assert receipt["structural_diagnostic"]["rows_read"] == 32
+    assert receipt["structural_diagnostic"]["aggregate"]["csv_field_count_histogram"] == {
+        "28": 31,
+        "29": 1,
+    }
+
+    numeric = receipt["numeric_diagnostic"]
+    marker = numeric["row_1_marker_profile"]
+    assert marker["other_ascii_marker_cell_count"] == 24
+    assert marker["distinct_numeric_marker_count"] == 24
+    assert marker["all_numeric_markers_identical"] is False
+    assert set(marker["refinement_by_column"].values()) == {"ASCII_MIXED_OTHER"}
+    assert marker["evidence_predicates"] == [
+        "NUMERIC_MARKERS_COLUMN_SPECIFIC",
+        "IDENTITY_PROFILE_OUTLIER",
+    ]
+    assert marker["identity_profile_matches_rows_2_to_32"] == 0
+    assert all(
+        item["uniform"] is False for item in marker["family_profiles"].values()
+    )
+    assert not any(marker["same_column_marker_recurrence"].values())
+    counterfactual = receipt["counterfactual_omit_row_1"]
+    assert counterfactual["envelope"] == {
+        "preamble_lines": 14,
+        "header_byte_length": 834,
+        "data_rows": 31,
+        "readline_calls": 46,
+        "header_preserved": True,
+        "preamble_preserved": True,
+        "first_data_row_omitted": True,
+    }
+    assert counterfactual["importer"] == {
+        "attempts": 1,
+        "runs_completed": 0,
+        "record_count": None,
+        "failure": {"reason": "invalid-decimal", "column": 6},
+    }
+
+    forbidden = {
+        "fields",
+        "values",
+        "raw",
+        "records",
+        "row_hash",
+        "decoded_strings",
+        "source_rows",
+        "header_values",
+        "token_text",
+        "code_points",
+        "byte_substrings",
+        "token_length",
+    }
+
+    def keys(value: object) -> list[str]:
+        if isinstance(value, dict):
+            nested = [item for child in value.values() for item in keys(child)]
+            return [key for key in value] + nested
+        if isinstance(value, list):
+            return [item for child in value for item in keys(child)]
+        return []
+
+    assert not forbidden.intersection(keys(receipt))
+    assert "implementation_head" not in receipt

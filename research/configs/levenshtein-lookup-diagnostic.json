@@ -1,0 +1,41 @@
+{
+  "authorized_change": "single read-only lookup; inline source unavailable",
+  "experiment_id": "levenshtein-lookup-diagnostic",
+  "historical_status": "NOT_A_BENCHMARK",
+  "limits": {
+    "corrective_retry_count": 0,
+    "request_count": "preserved per record",
+    "target_count": "UNCAPPED",
+    "timeout": "preserved per record",
+    "workers": "preserved per record"
+  },
+  "logical_root": "read-only diagnostic referenced by preserved research records",
+  "model_call_policy": "NO_MODEL_CALL_UNAVAILABLE_INLINE_LEVENSHTEIN_SOURCE",
+  "question": "Can one deterministic lookup illuminate a single diagnostic case?",
+  "reproduction": {
+    "credential_reference": "RESEARCH_CREDENTIAL_REF",
+    "default_model_calls": 0,
+    "default_network_calls": 0,
+    "entrypoint": "python3 -B -m research.tools.reproduce",
+    "requires_explicit_live_authorization": true
+  },
+  "request": {
+    "content": [
+      "one read-only lookup observation"
+    ],
+    "mode": "NO_MODEL_CALL_UNAVAILABLE_INLINE_LEVENSHTEIN_SOURCE",
+    "model_calls": 0
+  },
+  "resource_identity": {
+    "data": "private preserved identity; rows excluded",
+    "english": "private preserved attestation identity; values excluded unless numeric projection",
+    "environment": "private preserved environment identity; no import/network side effect",
+    "index": "private verified identity; path excluded",
+    "source": "research/registry/source-manifest.json"
+  },
+  "result_destination": "research/results/study-evidence.json.gz",
+  "schema_version": 2,
+  "source_modules": [
+    "research/curated/historical_scoring.py"
+  ]
+}

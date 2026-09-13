@@ -1,0 +1,82 @@
+{
+  "authorized_change": "replacement execution only",
+  "experiment_id": "007-b-replacement",
+  "historical_execution": {
+    "heldout": {
+      "accepted_edits": 0,
+      "cases": 32,
+      "completed_reviewer_attempts": 10,
+      "controlled_reviewer_calls": 10,
+      "exact_gold_repairs": 0,
+      "keep_decisions": 2,
+      "missed_known_errors": 7,
+      "proposed_replacements": 2,
+      "protected_changes": 0,
+      "replace_decisions": 2,
+      "reviewer_errors": 6,
+      "selected_candidates": 10,
+      "status": "CONTROLLED_HELDOUT_QWEN_CONTACT_RECORDED",
+      "valid_structured_decisions": 4
+    },
+    "workload": {
+      "status": "NO_VALID_PROXY_CONTACT_EVIDENCE"
+    }
+  },
+  "historical_status": "FAILED_BEFORE_PROXY_CONTACT",
+  "limits": {
+    "corrective_retry_count": 0,
+    "request_count": "preserved per record",
+    "target_count": 4,
+    "timeout": "preserved per record",
+    "workers": "preserved per record"
+  },
+  "logical_root": "recovery-executions/007-b-human-replacement-20260909.MnH1Qb",
+  "model_call_policy": "REPRODUCTION_DEFAULT_ZERO_CALLS; HISTORICAL_HELDOUT_QWEN_CALLS_RECORDED; WORKLOAD_NO_VALID_PROXY_CONTACT_EVIDENCE",
+  "question": "Did the owner-authorized replacement reach the model boundary?",
+  "reproduction": {
+    "credential_reference": "RESEARCH_CREDENTIAL_REF",
+    "default_model_calls": 0,
+    "default_network_calls": 0,
+    "entrypoint": "python3 -B -m research.tools.reproduce",
+    "requires_explicit_live_authorization": true
+  },
+  "request": {
+    "content": [],
+    "mode": "NO_FRESH_REPRODUCTION_REQUEST; HISTORICAL_HELDOUT_QWEN_CONTACT_RECORDED",
+    "model_calls": 0,
+    "network_calls": 0
+  },
+  "resource_identity": {
+    "data": "private preserved identity; rows excluded",
+    "english": "private preserved attestation identity; values excluded unless numeric projection",
+    "environment": "private preserved environment identity; no import/network side effect",
+    "index": "private verified identity; path excluded",
+    "source": "research/registry/source-manifest.json"
+  },
+  "result_destination": "research/results/study-evidence.json.gz",
+  "safe_numeric_evidence": {
+    "heldout_accepted_edits": 0,
+    "heldout_cases": 32,
+    "heldout_completed_reviewer_attempts": 10,
+    "heldout_controlled_reviewer_calls": 10,
+    "heldout_exact_gold_repairs": 0,
+    "heldout_keep_decisions": 2,
+    "heldout_missed_known_errors": 7,
+    "heldout_proposed_replacements": 2,
+    "heldout_protected_changes": 0,
+    "heldout_replace_decisions": 2,
+    "heldout_reviewer_errors": 6,
+    "heldout_selected_candidates": 10,
+    "heldout_valid_structured_decisions": 4,
+    "historical_execution": "CONTROLLED_HELDOUT_QWEN_CONTACT_RECORDED",
+    "historical_model_calls": 10,
+    "historical_network_calls": 10,
+    "reproduction_model_calls": 0,
+    "reproduction_network_calls": 0,
+    "workload_status": "NO_VALID_PROXY_CONTACT_EVIDENCE"
+  },
+  "schema_version": 2,
+  "source_modules": [
+    "research/curated/historical.py"
+  ]
+}

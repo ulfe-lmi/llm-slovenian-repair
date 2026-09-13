@@ -47,5 +47,5 @@ jobs:
 
       - name: Check accepted-base whitespace and protected sources
         run: |
-          git diff --check 82ea1e6f4173934fa47bb34ee6a6f78338d3603a...HEAD
+          python3.12 oap/bin/check_whitespace.py --base 82ea1e6f4173934fa47bb34ee6a6f78338d3603a --revision HEAD
           git diff --exit-code 82ea1e6f4173934fa47bb34ee6a6f78338d3603a -- PLAN.md ARCHITECTURE.md CRITICAL.md AGENTS.md ARCHITECTURE-for-agents.md OAP-COMMUNICATION-coding-agent.md SECURITY.md TESTING.md oap/bootstrap-sources.lock.json oap/governance oap/coding-instructions oap/strategic-instructions docs/bootstrap

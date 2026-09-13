@@ -1,0 +1,18 @@
+{
+  "version": "concept-v1",
+  "label": "EXPERIMENTAL / CONCEPT VERIFICATION / NOT PRODUCTION CODE",
+  "detector_modes": ["unigram-only", "local-context"],
+  "threshold_settings": [1, 3, 10, 100],
+  "prompt_variants": ["frozen-v1", "dev-v2"],
+  "selected_mode": "local-context",
+  "selected_threshold": 3,
+  "selected_prompt_variant": "frozen-v1",
+  "maximum_targets": 4,
+  "hard_maximum_targets": 8,
+  "decision": {
+    "beneficial_precision_reference": 0.8,
+    "harmful_fraction_reference": 0.05,
+    "recovery_reference": 0.3,
+    "protected_changes_required": 0
+  }
+}

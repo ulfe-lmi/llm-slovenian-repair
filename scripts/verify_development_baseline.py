@@ -21,6 +21,7 @@ from typing import Any
 PYTHON_SELECTOR = "3.12"
 DEFAULT_COMMAND_TIMEOUT = 300.0
 PROJECT_PACKAGE = "llm-slovenian-repair"
+FORWARD_RECOVERY_HISTORY_SOURCE = "OAP_FORWARD_RECOVERY_HISTORY_SOURCE"
 DIAGNOSTIC_CAPTURE_BYTES = 8192
 DIAGNOSTIC_MAX_BYTES = 4096
 PUBLIC_EXPORTS = (
@@ -92,6 +93,7 @@ class WorkspacePaths:
     offline_home: Path
     outside_repository: Path
     pytest_workspace: Path
+    child_tmp: Path
 
 
 @dataclass(frozen=True)
@@ -129,6 +131,7 @@ def workspace_paths(root: Path) -> WorkspacePaths:
         offline_home=root / "offline-home",
         outside_repository=root / "outside-repository",
         pytest_workspace=root / "pytest-workspace",
+        child_tmp=root / "child-tmp",
     )
 
 
@@ -138,7 +141,39 @@ def venv_python(environment: Path) -> Path:
     return environment / "bin" / "python"
 
 
-def build_environment(paths: WorkspacePaths) -> dict[str, str]:
+def validate_git_worktree(source: Path) -> Path:
+    """Validate the caller-owned history source used by copied OAP tests."""
+
+    try:
+        resolved = source.expanduser().resolve(strict=True)
+    except OSError as exc:
+        raise DriverError("FORWARD_RECOVERY_HISTORY_SOURCE_UNAVAILABLE") from exc
+    if not resolved.is_dir() or resolved.is_symlink():
+        raise DriverError("FORWARD_RECOVERY_HISTORY_SOURCE_NOT_DIRECTORY")
+    try:
+        result = subprocess.run(
+            ["git", "-C", str(resolved), "rev-parse", "--show-toplevel"],
+            capture_output=True,
+            text=True,
+            check=False,
+            timeout=30,
+        )
+    except (OSError, subprocess.TimeoutExpired) as exc:
+        raise DriverError("FORWARD_RECOVERY_HISTORY_SOURCE_NOT_GIT") from exc
+    if result.returncode != 0:
+        raise DriverError("FORWARD_RECOVERY_HISTORY_SOURCE_NOT_GIT")
+    try:
+        top_level = Path(result.stdout.strip()).resolve(strict=True)
+    except OSError as exc:
+        raise DriverError("FORWARD_RECOVERY_HISTORY_SOURCE_NOT_GIT") from exc
+    if top_level != resolved:
+        raise DriverError("FORWARD_RECOVERY_HISTORY_SOURCE_NOT_WORKTREE_ROOT")
+    return resolved
+
+
+def build_environment(
+    paths: WorkspacePaths, *, forward_recovery_history_source: Path | None = None
+) -> dict[str, str]:
     """Build child-process environment without exposing or logging its values."""
 
     env = os.environ.copy()
@@ -147,6 +182,7 @@ def build_environment(paths: WorkspacePaths) -> dict[str, str]:
         "PYTHONPATH",
         "VIRTUAL_ENV",
         "UV_OFFLINE",
+        FORWARD_RECOVERY_HISTORY_SOURCE,
     ):
         env.pop(name, None)
     env.update(
@@ -159,8 +195,16 @@ def build_environment(paths: WorkspacePaths) -> dict[str, str]:
             "PYTHONDONTWRITEBYTECODE": "1",
             "RUFF_CACHE_DIR": str(paths.ruff_cache),
             "MYPY_CACHE_DIR": str(paths.mypy_cache),
+            # The runner may provide RUNNER_TEMP without TMPDIR. Every child
+            # receives this exact owned path; inherited or absent values never
+            # select /tmp, the repository, or a caller-controlled directory.
+            "TMPDIR": str(paths.child_tmp),
         }
     )
+    if forward_recovery_history_source is not None:
+        env[FORWARD_RECOVERY_HISTORY_SOURCE] = str(
+            validate_git_worktree(forward_recovery_history_source)
+        )
     return env
 
 
@@ -530,6 +574,20 @@ def validate_owned_root(root: Path, repo: Path) -> None:
         raise DriverError("TEMP_ROOT_NOT_OWNED_DIRECTORY")
 
 
+def validate_owned_child_directory(child: Path, root: Path) -> None:
+    """Require a real caller-independent child directory inside one driver root."""
+
+    if child.is_symlink():
+        raise DriverError("CHILD_TMP_NOT_OWNED_DIRECTORY")
+    child_resolved = child.resolve()
+    root_resolved = root.resolve()
+    if child_resolved == root_resolved or root_resolved not in child_resolved.parents:
+        raise DriverError("CHILD_TMP_OUTSIDE_TEMP_ROOT")
+    info = child.lstat()
+    if not stat.S_ISDIR(info.st_mode) or info.st_uid != os.getuid():
+        raise DriverError("CHILD_TMP_NOT_OWNED_DIRECTORY")
+
+
 def prepare_test_workspace(repo: Path, paths: WorkspacePaths) -> Path:
     """Copy readable source into the owned root while excluding review residue."""
 
@@ -587,8 +645,12 @@ def run_verification(
             paths.output.mkdir()
             paths.outside_repository.mkdir()
             paths.offline_home.mkdir()
+            paths.child_tmp.mkdir(mode=0o700)
+            validate_owned_child_directory(paths.child_tmp, owned_root)
             test_repo = prepare_test_workspace(repo, paths)
             env = build_environment(paths)
+            if (repo / ".git").exists():
+                env[FORWARD_RECOVERY_HISTORY_SOURCE] = str(validate_git_worktree(repo))
             versions = locked_runtime_versions(repo)
             uv = uv_executable()
             for spec in initial_command_specs(repo, paths, uv, test_repo):

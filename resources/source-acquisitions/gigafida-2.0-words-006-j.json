@@ -1,0 +1,860 @@
+{
+  "schema_version": 1,
+  "receipt_id": "gigafida-2.0-words-006-j",
+  "status": "BLOCKED_NUMERIC_DIAGNOSTIC_IMPORT",
+  "recorded_at": "2026-09-08T22:08:24Z",
+  "source_id": "gigafida-2.0-words",
+  "source_name": "Gigafida 2.0 word lists",
+  "release": "2.0",
+  "inventory_revision": "source-inventory-v1",
+  "inventory_sha256": "439bbd51e04e338569b9785c44d1b05c0ea023aae39898aa7d494568d6f49de3",
+  "item_url": "https://www.clarin.si/repository/xmlui/handle/11356/1273?show=full",
+  "artifact_url": "https://www.clarin.si/repository/xmlui/bitstream/handle/11356/1273/GF2.0-words-all.zip?sequence=4&isAllowed=y",
+  "artifact_name": "GF2.0-words-all.zip",
+  "publisher_license_label": "CC BY-SA 4.0",
+  "publisher_license_uri": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "expected_byte_size": 115865656,
+  "observed_byte_size": 115865656,
+  "expected_md5": "b20a959f9c113aeb6504f0d753d36d10",
+  "observed_md5": "b20a959f9c113aeb6504f0d753d36d10",
+  "archive_sha256": "77ac4aa2e77016470a26ebf5b1bd265b9de240e8254d3511d51cb0fcb68a767a",
+  "member_count": 5,
+  "uncompressed_total_bytes": 1487654024,
+  "selected_member": "GF2.0-words-all-lowercase_forms-lemmas-parts_of_speech-taxonomy-entire.tsv",
+  "header_line_number": 15,
+  "header_byte_length": 834,
+  "header_sha256": "c2ce44548818b72a04691c7060c0e35106393edbfde13336c60d4cd072a00638",
+  "data_record_terminator": "OPTIONAL_SINGLE_EMPTY_TAB_BEFORE_CRLF",
+  "text_contract": {
+    "encoding": "UTF-8",
+    "newline": "CRLF",
+    "delimiter": "TAB",
+    "field_quoting": "ALL_FIELDS_DOUBLE_QUOTED",
+    "data_record_terminator": "OPTIONAL_SINGLE_EMPTY_TAB_BEFORE_CRLF"
+  },
+  "preflight": {
+    "script": "scripts/smoke_unigram_prefix.py",
+    "command": "LOCK_DERIVED_006_J_PYTHON -I -B scripts/smoke_unigram_prefix.py --inventory resources/source-inventory-v1.json --source-id gigafida-2.0-words --preflight",
+    "result": "PASSED",
+    "inventory_validation": "PASSED",
+    "header_contract": "PASSED",
+    "importer_entry_point": "PASSED",
+    "limits": "PASSED",
+    "interpreter": "Python 3.12.3",
+    "isolated_mode": true,
+    "pythonpath": "ABSENT",
+    "environment": "owned lock-derived disposable development environment; private path omitted",
+    "dependency_closure": "PASSED",
+    "provenance_completeness": {
+      "source": "COMPLETE",
+      "query": "COMPLETE",
+      "import": "PARTIAL"
+    },
+    "artifact_required": false,
+    "source_accessed": false
+  },
+  "verifier": {
+    "script": "scripts/verify_source_artifact.py",
+    "command": "LOCK_DERIVED_006_J_PYTHON -I -B scripts/verify_source_artifact.py --inventory resources/source-inventory-v1.json --source-id gigafida-2.0-words --artifact OWNED_006_J_SOURCE",
+    "result": "PASSED",
+    "identity": "canonical inventory ID-bound standard-library ZIP verifier"
+  },
+  "helper": {
+    "script": "scripts/smoke_unigram_prefix.py",
+    "command": "LOCK_DERIVED_006_J_PYTHON -I -B scripts/smoke_unigram_prefix.py --inventory resources/source-inventory-v1.json --source-id gigafida-2.0-words --diagnostic OWNED_006_J_SOURCE",
+    "result": "PASSED_BOUNDARY_BLOCKED_IMPORT",
+    "identity": "committed verifier-first one-member bounded numeric-diagnostic CLI with row-one omission counterfactual"
+  },
+  "prior_rounds": {
+    "006_a": {
+      "status": "PARTIAL_RECOVERY_HANDOFF",
+      "get_count": 3,
+      "exact_one_fetch_condition_satisfied": false
+    },
+    "006_b": {
+      "status": "BLOCKED_PARSER_INCOMPATIBILITY",
+      "get_count": 1,
+      "failure": "trailing-tab-after-28-fields"
+    },
+    "006_c": {
+      "status": "BLOCKED_STRUCTURAL_ROW_SMOKE",
+      "get_count": 1,
+      "failure": "row-shape-mismatch-before-importer"
+    },
+    "006_d": {
+      "status": "BLOCKED_ROW_DIAGNOSTIC_INPUT",
+      "get_count": 1,
+      "failure": "requested-row-incomplete"
+    },
+    "006_e": {
+      "status": "COMPLETE_ROW_DIAGNOSTIC",
+      "get_count": 1,
+      "failure": "31 28-field rows and one empty terminal 29th field; importer not run"
+    },
+    "006_f": {
+      "status": "BLOCKED_SMOKE_HARNESS_FAILURE",
+      "get_count": 1,
+      "failure": "SMOKE_HARNESS_SYNTAX_ERROR before selected-member access; importer attempts zero"
+    },
+    "006_g": {
+      "status": "BLOCKED_SMOKE_HELPER_IMPORT",
+      "get_count": 1,
+      "failure": "HEADER_CONTRACT_UNAVAILABLE before selected-member access; importer attempts zero"
+    },
+    "006_h": {
+      "status": "BLOCKED_REAL_IMPORTER_INVALID_COUNT",
+      "get_count": 1,
+      "failure": "import-invalid-count after structural aggregate; one attempt and no second run"
+    },
+    "006_i": {
+      "status": "BLOCKED_NUMERIC_DIAGNOSTIC_IMPORT",
+      "get_count": 1,
+      "failure": "row-1 OTHER_ASCII marker identity unresolved; current importer invalid-count:5"
+    }
+  },
+  "acquisition_evidence": {
+    "required_exact_get_count": 1,
+    "006_j_get_count": 1,
+    "cumulative_observed_objective_get_count": 12,
+    "006_a_exact_one_fetch_condition_satisfied": false,
+    "curl_result": "PASSED",
+    "curl_policy": "curl --disable; direct HTTPS; no redirect; no credentials; connect timeout 10 seconds; total timeout 900 seconds; max-filesize 115865656",
+    "single_part_target": true,
+    "preflight_before_get": true,
+    "verifier_before_member_access": true,
+    "accepted_offline_verifier": "PASSED",
+    "member_access_attempted": true,
+    "structural_sample_attempted": true,
+    "numeric_diagnostic_attempted": true,
+    "helper_reached_importer": true,
+    "counterfactual_importer_call_attempted": true,
+    "temporary_environment_absent": true,
+    "temporary_tree_absent": true,
+    "source_data_retained": false,
+    "redistribution_ready": false,
+    "no_content_logged": true,
+    "retry_attempted": false,
+    "second_get_attempted": false
+  },
+  "structural_diagnostic": {
+    "status": "PASSED",
+    "requested_row_count": 32,
+    "rows_read": 32,
+    "rows_qualified": 32,
+    "aggregate": {
+      "crlf_row_count": 32,
+      "csv_field_count_histogram": {
+        "28": 31,
+        "29": 1
+      },
+      "embedded_tab_in_quoted_field_row_count": 0,
+      "empty_final_field_count": 1,
+      "existing_parser_failure_reason_histogram": {},
+      "first_structurally_failing_source_line_number": null,
+      "fully_all_fields_quoted_count": 31,
+      "lf_row_count": 0,
+      "max_whole_row_byte_length": 851,
+      "min_whole_row_byte_length": 231,
+      "missing_newline_row_count": 0,
+      "nonempty_field_after_28_count": 0,
+      "quote_parse_error_count": 0,
+      "read_row_count": 32,
+      "requested_row_count": 32,
+      "schema_version": 1,
+      "terminal_tab_count_histogram": {
+        "0": 31,
+        "1": 1,
+        "2+": 0
+      },
+      "utf8_invalid_row_count": 0,
+      "utf8_valid_row_count": 32
+    },
+    "failure": null,
+    "failure_boundary": "structural aggregate passed before numeric profile and both diagnostic-only importer calls"
+  },
+  "numeric_diagnostic": {
+    "absolute_count_cell_count": 256,
+    "column_histograms": {
+      "10": {
+        "category_histogram": {
+          "ASCII_DECIMAL_COMMA": 28,
+          "ASCII_DECIMAL_DOT": 0,
+          "ASCII_DIGITS": 3,
+          "ASCII_GROUPED_COMMA_TRIPLETS": 0,
+          "ASCII_GROUPED_DOT_TRIPLETS": 0,
+          "ASCII_GROUPED_SPACE_TRIPLETS": 0,
+          "ASCII_SCIENTIFIC_COMMA": 0,
+          "ASCII_SCIENTIFIC_DOT": 0,
+          "EMPTY": 0,
+          "LEADING_OR_TRAILING_WHITESPACE": 0,
+          "OTHER_ASCII": 1,
+          "OTHER_UNICODE": 0,
+          "PERCENT_SUFFIX": 0,
+          "SIGN_PREFIX": 0,
+          "UNICODE_SPACE_GROUPED_TRIPLETS": 0
+        },
+        "current_parser_compatible_cell_count": 3,
+        "current_parser_incompatible_cell_count": 29,
+        "semantic_kind": "published_decimal"
+      },
+      "11": {
+        "category_histogram": {
+          "ASCII_DECIMAL_COMMA": 0,
+          "ASCII_DECIMAL_DOT": 0,
+          "ASCII_DIGITS": 31,
+          "ASCII_GROUPED_COMMA_TRIPLETS": 0,
+          "ASCII_GROUPED_DOT_TRIPLETS": 0,
+          "ASCII_GROUPED_SPACE_TRIPLETS": 0,
+          "ASCII_SCIENTIFIC_COMMA": 0,
+          "ASCII_SCIENTIFIC_DOT": 0,
+          "EMPTY": 0,
+          "LEADING_OR_TRAILING_WHITESPACE": 0,
+          "OTHER_ASCII": 1,
+          "OTHER_UNICODE": 0,
+          "PERCENT_SUFFIX": 0,
+          "SIGN_PREFIX": 0,
+          "UNICODE_SPACE_GROUPED_TRIPLETS": 0
+        },
+        "current_parser_compatible_cell_count": 31,
+        "current_parser_incompatible_cell_count": 1,
+        "semantic_kind": "absolute_count"
+      },
+      "12": {
+        "category_histogram": {
+          "ASCII_DECIMAL_COMMA": 0,
+          "ASCII_DECIMAL_DOT": 0,
+          "ASCII_DIGITS": 0,
+          "ASCII_GROUPED_COMMA_TRIPLETS": 0,
+          "ASCII_GROUPED_DOT_TRIPLETS": 0,
+          "ASCII_GROUPED_SPACE_TRIPLETS": 0,
+          "ASCII_SCIENTIFIC_COMMA": 0,
+          "ASCII_SCIENTIFIC_DOT": 0,
+          "EMPTY": 0,
+          "LEADING_OR_TRAILING_WHITESPACE": 0,
+          "OTHER_ASCII": 1,
+          "OTHER_UNICODE": 0,
+          "PERCENT_SUFFIX": 31,
+          "SIGN_PREFIX": 0,
+          "UNICODE_SPACE_GROUPED_TRIPLETS": 0
+        },
+        "current_parser_compatible_cell_count": 0,
+        "current_parser_incompatible_cell_count": 32,
+        "semantic_kind": "published_decimal"
+      },
+      "13": {
+        "category_histogram": {
+          "ASCII_DECIMAL_COMMA": 31,
+          "ASCII_DECIMAL_DOT": 0,
+          "ASCII_DIGITS": 0,
+          "ASCII_GROUPED_COMMA_TRIPLETS": 0,
+          "ASCII_GROUPED_DOT_TRIPLETS": 0,
+          "ASCII_GROUPED_SPACE_TRIPLETS": 0,
+          "ASCII_SCIENTIFIC_COMMA": 0,
+          "ASCII_SCIENTIFIC_DOT": 0,
+          "EMPTY": 0,
+          "LEADING_OR_TRAILING_WHITESPACE": 0,
+          "OTHER_ASCII": 1,
+          "OTHER_UNICODE": 0,
+          "PERCENT_SUFFIX": 0,
+          "SIGN_PREFIX": 0,
+          "UNICODE_SPACE_GROUPED_TRIPLETS": 0
+        },
+        "current_parser_compatible_cell_count": 0,
+        "current_parser_incompatible_cell_count": 32,
+        "semantic_kind": "published_decimal"
+      },
+      "14": {
+        "category_histogram": {
+          "ASCII_DECIMAL_COMMA": 0,
+          "ASCII_DECIMAL_DOT": 0,
+          "ASCII_DIGITS": 31,
+          "ASCII_GROUPED_COMMA_TRIPLETS": 0,
+          "ASCII_GROUPED_DOT_TRIPLETS": 0,
+          "ASCII_GROUPED_SPACE_TRIPLETS": 0,
+          "ASCII_SCIENTIFIC_COMMA": 0,
+          "ASCII_SCIENTIFIC_DOT": 0,
+          "EMPTY": 0,
+          "LEADING_OR_TRAILING_WHITESPACE": 0,
+          "OTHER_ASCII": 1,
+          "OTHER_UNICODE": 0,
+          "PERCENT_SUFFIX": 0,
+          "SIGN_PREFIX": 0,
+          "UNICODE_SPACE_GROUPED_TRIPLETS": 0
+        },
+        "current_parser_compatible_cell_count": 31,
+        "current_parser_incompatible_cell_count": 1,
+        "semantic_kind": "absolute_count"
+      },
+      "15": {
+        "category_histogram": {
+          "ASCII_DECIMAL_COMMA": 0,
+          "ASCII_DECIMAL_DOT": 0,
+          "ASCII_DIGITS": 0,
+          "ASCII_GROUPED_COMMA_TRIPLETS": 0,
+          "ASCII_GROUPED_DOT_TRIPLETS": 0,
+          "ASCII_GROUPED_SPACE_TRIPLETS": 0,
+          "ASCII_SCIENTIFIC_COMMA": 0,
+          "ASCII_SCIENTIFIC_DOT": 0,
+          "EMPTY": 0,
+          "LEADING_OR_TRAILING_WHITESPACE": 0,
+          "OTHER_ASCII": 1,
+          "OTHER_UNICODE": 0,
+          "PERCENT_SUFFIX": 31,
+          "SIGN_PREFIX": 0,
+          "UNICODE_SPACE_GROUPED_TRIPLETS": 0
+        },
+        "current_parser_compatible_cell_count": 0,
+        "current_parser_incompatible_cell_count": 32,
+        "semantic_kind": "published_decimal"
+      },
+      "16": {
+        "category_histogram": {
+          "ASCII_DECIMAL_COMMA": 31,
+          "ASCII_DECIMAL_DOT": 0,
+          "ASCII_DIGITS": 0,
+          "ASCII_GROUPED_COMMA_TRIPLETS": 0,
+          "ASCII_GROUPED_DOT_TRIPLETS": 0,
+          "ASCII_GROUPED_SPACE_TRIPLETS": 0,
+          "ASCII_SCIENTIFIC_COMMA": 0,
+          "ASCII_SCIENTIFIC_DOT": 0,
+          "EMPTY": 0,
+          "LEADING_OR_TRAILING_WHITESPACE": 0,
+          "OTHER_ASCII": 1,
+          "OTHER_UNICODE": 0,
+          "PERCENT_SUFFIX": 0,
+          "SIGN_PREFIX": 0,
+          "UNICODE_SPACE_GROUPED_TRIPLETS": 0
+        },
+        "current_parser_compatible_cell_count": 0,
+        "current_parser_incompatible_cell_count": 32,
+        "semantic_kind": "published_decimal"
+      },
+      "17": {
+        "category_histogram": {
+          "ASCII_DECIMAL_COMMA": 0,
+          "ASCII_DECIMAL_DOT": 0,
+          "ASCII_DIGITS": 31,
+          "ASCII_GROUPED_COMMA_TRIPLETS": 0,
+          "ASCII_GROUPED_DOT_TRIPLETS": 0,
+          "ASCII_GROUPED_SPACE_TRIPLETS": 0,
+          "ASCII_SCIENTIFIC_COMMA": 0,
+          "ASCII_SCIENTIFIC_DOT": 0,
+          "EMPTY": 0,
+          "LEADING_OR_TRAILING_WHITESPACE": 0,
+          "OTHER_ASCII": 1,
+          "OTHER_UNICODE": 0,
+          "PERCENT_SUFFIX": 0,
+          "SIGN_PREFIX": 0,
+          "UNICODE_SPACE_GROUPED_TRIPLETS": 0
+        },
+        "current_parser_compatible_cell_count": 31,
+        "current_parser_incompatible_cell_count": 1,
+        "semantic_kind": "absolute_count"
+      },
+      "18": {
+        "category_histogram": {
+          "ASCII_DECIMAL_COMMA": 0,
+          "ASCII_DECIMAL_DOT": 0,
+          "ASCII_DIGITS": 0,
+          "ASCII_GROUPED_COMMA_TRIPLETS": 0,
+          "ASCII_GROUPED_DOT_TRIPLETS": 0,
+          "ASCII_GROUPED_SPACE_TRIPLETS": 0,
+          "ASCII_SCIENTIFIC_COMMA": 0,
+          "ASCII_SCIENTIFIC_DOT": 0,
+          "EMPTY": 0,
+          "LEADING_OR_TRAILING_WHITESPACE": 0,
+          "OTHER_ASCII": 1,
+          "OTHER_UNICODE": 0,
+          "PERCENT_SUFFIX": 31,
+          "SIGN_PREFIX": 0,
+          "UNICODE_SPACE_GROUPED_TRIPLETS": 0
+        },
+        "current_parser_compatible_cell_count": 0,
+        "current_parser_incompatible_cell_count": 32,
+        "semantic_kind": "published_decimal"
+      },
+      "19": {
+        "category_histogram": {
+          "ASCII_DECIMAL_COMMA": 30,
+          "ASCII_DECIMAL_DOT": 0,
+          "ASCII_DIGITS": 1,
+          "ASCII_GROUPED_COMMA_TRIPLETS": 0,
+          "ASCII_GROUPED_DOT_TRIPLETS": 0,
+          "ASCII_GROUPED_SPACE_TRIPLETS": 0,
+          "ASCII_SCIENTIFIC_COMMA": 0,
+          "ASCII_SCIENTIFIC_DOT": 0,
+          "EMPTY": 0,
+          "LEADING_OR_TRAILING_WHITESPACE": 0,
+          "OTHER_ASCII": 1,
+          "OTHER_UNICODE": 0,
+          "PERCENT_SUFFIX": 0,
+          "SIGN_PREFIX": 0,
+          "UNICODE_SPACE_GROUPED_TRIPLETS": 0
+        },
+        "current_parser_compatible_cell_count": 1,
+        "current_parser_incompatible_cell_count": 31,
+        "semantic_kind": "published_decimal"
+      },
+      "20": {
+        "category_histogram": {
+          "ASCII_DECIMAL_COMMA": 0,
+          "ASCII_DECIMAL_DOT": 0,
+          "ASCII_DIGITS": 31,
+          "ASCII_GROUPED_COMMA_TRIPLETS": 0,
+          "ASCII_GROUPED_DOT_TRIPLETS": 0,
+          "ASCII_GROUPED_SPACE_TRIPLETS": 0,
+          "ASCII_SCIENTIFIC_COMMA": 0,
+          "ASCII_SCIENTIFIC_DOT": 0,
+          "EMPTY": 0,
+          "LEADING_OR_TRAILING_WHITESPACE": 0,
+          "OTHER_ASCII": 1,
+          "OTHER_UNICODE": 0,
+          "PERCENT_SUFFIX": 0,
+          "SIGN_PREFIX": 0,
+          "UNICODE_SPACE_GROUPED_TRIPLETS": 0
+        },
+        "current_parser_compatible_cell_count": 31,
+        "current_parser_incompatible_cell_count": 1,
+        "semantic_kind": "absolute_count"
+      },
+      "21": {
+        "category_histogram": {
+          "ASCII_DECIMAL_COMMA": 0,
+          "ASCII_DECIMAL_DOT": 0,
+          "ASCII_DIGITS": 0,
+          "ASCII_GROUPED_COMMA_TRIPLETS": 0,
+          "ASCII_GROUPED_DOT_TRIPLETS": 0,
+          "ASCII_GROUPED_SPACE_TRIPLETS": 0,
+          "ASCII_SCIENTIFIC_COMMA": 0,
+          "ASCII_SCIENTIFIC_DOT": 0,
+          "EMPTY": 0,
+          "LEADING_OR_TRAILING_WHITESPACE": 0,
+          "OTHER_ASCII": 1,
+          "OTHER_UNICODE": 0,
+          "PERCENT_SUFFIX": 31,
+          "SIGN_PREFIX": 0,
+          "UNICODE_SPACE_GROUPED_TRIPLETS": 0
+        },
+        "current_parser_compatible_cell_count": 0,
+        "current_parser_incompatible_cell_count": 32,
+        "semantic_kind": "published_decimal"
+      },
+      "22": {
+        "category_histogram": {
+          "ASCII_DECIMAL_COMMA": 31,
+          "ASCII_DECIMAL_DOT": 0,
+          "ASCII_DIGITS": 0,
+          "ASCII_GROUPED_COMMA_TRIPLETS": 0,
+          "ASCII_GROUPED_DOT_TRIPLETS": 0,
+          "ASCII_GROUPED_SPACE_TRIPLETS": 0,
+          "ASCII_SCIENTIFIC_COMMA": 0,
+          "ASCII_SCIENTIFIC_DOT": 0,
+          "EMPTY": 0,
+          "LEADING_OR_TRAILING_WHITESPACE": 0,
+          "OTHER_ASCII": 1,
+          "OTHER_UNICODE": 0,
+          "PERCENT_SUFFIX": 0,
+          "SIGN_PREFIX": 0,
+          "UNICODE_SPACE_GROUPED_TRIPLETS": 0
+        },
+        "current_parser_compatible_cell_count": 0,
+        "current_parser_incompatible_cell_count": 32,
+        "semantic_kind": "published_decimal"
+      },
+      "23": {
+        "category_histogram": {
+          "ASCII_DECIMAL_COMMA": 0,
+          "ASCII_DECIMAL_DOT": 0,
+          "ASCII_DIGITS": 31,
+          "ASCII_GROUPED_COMMA_TRIPLETS": 0,
+          "ASCII_GROUPED_DOT_TRIPLETS": 0,
+          "ASCII_GROUPED_SPACE_TRIPLETS": 0,
+          "ASCII_SCIENTIFIC_COMMA": 0,
+          "ASCII_SCIENTIFIC_DOT": 0,
+          "EMPTY": 0,
+          "LEADING_OR_TRAILING_WHITESPACE": 0,
+          "OTHER_ASCII": 1,
+          "OTHER_UNICODE": 0,
+          "PERCENT_SUFFIX": 0,
+          "SIGN_PREFIX": 0,
+          "UNICODE_SPACE_GROUPED_TRIPLETS": 0
+        },
+        "current_parser_compatible_cell_count": 31,
+        "current_parser_incompatible_cell_count": 1,
+        "semantic_kind": "absolute_count"
+      },
+      "24": {
+        "category_histogram": {
+          "ASCII_DECIMAL_COMMA": 0,
+          "ASCII_DECIMAL_DOT": 0,
+          "ASCII_DIGITS": 0,
+          "ASCII_GROUPED_COMMA_TRIPLETS": 0,
+          "ASCII_GROUPED_DOT_TRIPLETS": 0,
+          "ASCII_GROUPED_SPACE_TRIPLETS": 0,
+          "ASCII_SCIENTIFIC_COMMA": 0,
+          "ASCII_SCIENTIFIC_DOT": 0,
+          "EMPTY": 0,
+          "LEADING_OR_TRAILING_WHITESPACE": 0,
+          "OTHER_ASCII": 1,
+          "OTHER_UNICODE": 0,
+          "PERCENT_SUFFIX": 31,
+          "SIGN_PREFIX": 0,
+          "UNICODE_SPACE_GROUPED_TRIPLETS": 0
+        },
+        "current_parser_compatible_cell_count": 0,
+        "current_parser_incompatible_cell_count": 32,
+        "semantic_kind": "published_decimal"
+      },
+      "25": {
+        "category_histogram": {
+          "ASCII_DECIMAL_COMMA": 31,
+          "ASCII_DECIMAL_DOT": 0,
+          "ASCII_DIGITS": 0,
+          "ASCII_GROUPED_COMMA_TRIPLETS": 0,
+          "ASCII_GROUPED_DOT_TRIPLETS": 0,
+          "ASCII_GROUPED_SPACE_TRIPLETS": 0,
+          "ASCII_SCIENTIFIC_COMMA": 0,
+          "ASCII_SCIENTIFIC_DOT": 0,
+          "EMPTY": 0,
+          "LEADING_OR_TRAILING_WHITESPACE": 0,
+          "OTHER_ASCII": 1,
+          "OTHER_UNICODE": 0,
+          "PERCENT_SUFFIX": 0,
+          "SIGN_PREFIX": 0,
+          "UNICODE_SPACE_GROUPED_TRIPLETS": 0
+        },
+        "current_parser_compatible_cell_count": 0,
+        "current_parser_incompatible_cell_count": 32,
+        "semantic_kind": "published_decimal"
+      },
+      "26": {
+        "category_histogram": {
+          "ASCII_DECIMAL_COMMA": 0,
+          "ASCII_DECIMAL_DOT": 0,
+          "ASCII_DIGITS": 31,
+          "ASCII_GROUPED_COMMA_TRIPLETS": 0,
+          "ASCII_GROUPED_DOT_TRIPLETS": 0,
+          "ASCII_GROUPED_SPACE_TRIPLETS": 0,
+          "ASCII_SCIENTIFIC_COMMA": 0,
+          "ASCII_SCIENTIFIC_DOT": 0,
+          "EMPTY": 0,
+          "LEADING_OR_TRAILING_WHITESPACE": 0,
+          "OTHER_ASCII": 1,
+          "OTHER_UNICODE": 0,
+          "PERCENT_SUFFIX": 0,
+          "SIGN_PREFIX": 0,
+          "UNICODE_SPACE_GROUPED_TRIPLETS": 0
+        },
+        "current_parser_compatible_cell_count": 31,
+        "current_parser_incompatible_cell_count": 1,
+        "semantic_kind": "absolute_count"
+      },
+      "27": {
+        "category_histogram": {
+          "ASCII_DECIMAL_COMMA": 0,
+          "ASCII_DECIMAL_DOT": 0,
+          "ASCII_DIGITS": 0,
+          "ASCII_GROUPED_COMMA_TRIPLETS": 0,
+          "ASCII_GROUPED_DOT_TRIPLETS": 0,
+          "ASCII_GROUPED_SPACE_TRIPLETS": 0,
+          "ASCII_SCIENTIFIC_COMMA": 0,
+          "ASCII_SCIENTIFIC_DOT": 0,
+          "EMPTY": 0,
+          "LEADING_OR_TRAILING_WHITESPACE": 0,
+          "OTHER_ASCII": 1,
+          "OTHER_UNICODE": 0,
+          "PERCENT_SUFFIX": 31,
+          "SIGN_PREFIX": 0,
+          "UNICODE_SPACE_GROUPED_TRIPLETS": 0
+        },
+        "current_parser_compatible_cell_count": 0,
+        "current_parser_incompatible_cell_count": 32,
+        "semantic_kind": "published_decimal"
+      },
+      "28": {
+        "category_histogram": {
+          "ASCII_DECIMAL_COMMA": 31,
+          "ASCII_DECIMAL_DOT": 0,
+          "ASCII_DIGITS": 0,
+          "ASCII_GROUPED_COMMA_TRIPLETS": 0,
+          "ASCII_GROUPED_DOT_TRIPLETS": 0,
+          "ASCII_GROUPED_SPACE_TRIPLETS": 0,
+          "ASCII_SCIENTIFIC_COMMA": 0,
+          "ASCII_SCIENTIFIC_DOT": 0,
+          "EMPTY": 0,
+          "LEADING_OR_TRAILING_WHITESPACE": 0,
+          "OTHER_ASCII": 1,
+          "OTHER_UNICODE": 0,
+          "PERCENT_SUFFIX": 0,
+          "SIGN_PREFIX": 0,
+          "UNICODE_SPACE_GROUPED_TRIPLETS": 0
+        },
+        "current_parser_compatible_cell_count": 0,
+        "current_parser_incompatible_cell_count": 32,
+        "semantic_kind": "published_decimal"
+      },
+      "5": {
+        "category_histogram": {
+          "ASCII_DECIMAL_COMMA": 0,
+          "ASCII_DECIMAL_DOT": 0,
+          "ASCII_DIGITS": 31,
+          "ASCII_GROUPED_COMMA_TRIPLETS": 0,
+          "ASCII_GROUPED_DOT_TRIPLETS": 0,
+          "ASCII_GROUPED_SPACE_TRIPLETS": 0,
+          "ASCII_SCIENTIFIC_COMMA": 0,
+          "ASCII_SCIENTIFIC_DOT": 0,
+          "EMPTY": 0,
+          "LEADING_OR_TRAILING_WHITESPACE": 0,
+          "OTHER_ASCII": 1,
+          "OTHER_UNICODE": 0,
+          "PERCENT_SUFFIX": 0,
+          "SIGN_PREFIX": 0,
+          "UNICODE_SPACE_GROUPED_TRIPLETS": 0
+        },
+        "current_parser_compatible_cell_count": 31,
+        "current_parser_incompatible_cell_count": 1,
+        "semantic_kind": "absolute_count"
+      },
+      "6": {
+        "category_histogram": {
+          "ASCII_DECIMAL_COMMA": 0,
+          "ASCII_DECIMAL_DOT": 0,
+          "ASCII_DIGITS": 0,
+          "ASCII_GROUPED_COMMA_TRIPLETS": 0,
+          "ASCII_GROUPED_DOT_TRIPLETS": 0,
+          "ASCII_GROUPED_SPACE_TRIPLETS": 0,
+          "ASCII_SCIENTIFIC_COMMA": 0,
+          "ASCII_SCIENTIFIC_DOT": 0,
+          "EMPTY": 0,
+          "LEADING_OR_TRAILING_WHITESPACE": 0,
+          "OTHER_ASCII": 1,
+          "OTHER_UNICODE": 0,
+          "PERCENT_SUFFIX": 31,
+          "SIGN_PREFIX": 0,
+          "UNICODE_SPACE_GROUPED_TRIPLETS": 0
+        },
+        "current_parser_compatible_cell_count": 0,
+        "current_parser_incompatible_cell_count": 32,
+        "semantic_kind": "published_decimal"
+      },
+      "7": {
+        "category_histogram": {
+          "ASCII_DECIMAL_COMMA": 31,
+          "ASCII_DECIMAL_DOT": 0,
+          "ASCII_DIGITS": 0,
+          "ASCII_GROUPED_COMMA_TRIPLETS": 0,
+          "ASCII_GROUPED_DOT_TRIPLETS": 0,
+          "ASCII_GROUPED_SPACE_TRIPLETS": 0,
+          "ASCII_SCIENTIFIC_COMMA": 0,
+          "ASCII_SCIENTIFIC_DOT": 0,
+          "EMPTY": 0,
+          "LEADING_OR_TRAILING_WHITESPACE": 0,
+          "OTHER_ASCII": 1,
+          "OTHER_UNICODE": 0,
+          "PERCENT_SUFFIX": 0,
+          "SIGN_PREFIX": 0,
+          "UNICODE_SPACE_GROUPED_TRIPLETS": 0
+        },
+        "current_parser_compatible_cell_count": 0,
+        "current_parser_incompatible_cell_count": 32,
+        "semantic_kind": "published_decimal"
+      },
+      "8": {
+        "category_histogram": {
+          "ASCII_DECIMAL_COMMA": 0,
+          "ASCII_DECIMAL_DOT": 0,
+          "ASCII_DIGITS": 31,
+          "ASCII_GROUPED_COMMA_TRIPLETS": 0,
+          "ASCII_GROUPED_DOT_TRIPLETS": 0,
+          "ASCII_GROUPED_SPACE_TRIPLETS": 0,
+          "ASCII_SCIENTIFIC_COMMA": 0,
+          "ASCII_SCIENTIFIC_DOT": 0,
+          "EMPTY": 0,
+          "LEADING_OR_TRAILING_WHITESPACE": 0,
+          "OTHER_ASCII": 1,
+          "OTHER_UNICODE": 0,
+          "PERCENT_SUFFIX": 0,
+          "SIGN_PREFIX": 0,
+          "UNICODE_SPACE_GROUPED_TRIPLETS": 0
+        },
+        "current_parser_compatible_cell_count": 31,
+        "current_parser_incompatible_cell_count": 1,
+        "semantic_kind": "absolute_count"
+      },
+      "9": {
+        "category_histogram": {
+          "ASCII_DECIMAL_COMMA": 0,
+          "ASCII_DECIMAL_DOT": 0,
+          "ASCII_DIGITS": 0,
+          "ASCII_GROUPED_COMMA_TRIPLETS": 0,
+          "ASCII_GROUPED_DOT_TRIPLETS": 0,
+          "ASCII_GROUPED_SPACE_TRIPLETS": 0,
+          "ASCII_SCIENTIFIC_COMMA": 0,
+          "ASCII_SCIENTIFIC_DOT": 0,
+          "EMPTY": 0,
+          "LEADING_OR_TRAILING_WHITESPACE": 0,
+          "OTHER_ASCII": 1,
+          "OTHER_UNICODE": 0,
+          "PERCENT_SUFFIX": 31,
+          "SIGN_PREFIX": 0,
+          "UNICODE_SPACE_GROUPED_TRIPLETS": 0
+        },
+        "current_parser_compatible_cell_count": 0,
+        "current_parser_incompatible_cell_count": 32,
+        "semantic_kind": "published_decimal"
+      }
+    },
+    "current_parser_compatibility": {
+      "absolute_count": {
+        "compatible_cell_count": 248,
+        "incompatible_cell_count": 8
+      },
+      "published_decimal": {
+        "compatible_cell_count": 4,
+        "incompatible_cell_count": 508
+      }
+    },
+    "first_incompatible": {
+      "category": "OTHER_ASCII",
+      "column": 5,
+      "row_ordinal": 1,
+      "semantic_kind": "absolute_count"
+    },
+    "numeric_cell_count": 768,
+    "published_decimal_cell_count": 512,
+    "row_1_marker_profile": {
+      "all_numeric_markers_identical": false,
+      "distinct_numeric_marker_count": 24,
+      "evidence_predicates": [
+        "NUMERIC_MARKERS_COLUMN_SPECIFIC",
+        "IDENTITY_PROFILE_OUTLIER"
+      ],
+      "family_profiles": {
+        "absolute": {
+          "distinct_marker_count": 8,
+          "marker_cell_count": 8,
+          "uniform": false
+        },
+        "relative": {
+          "distinct_marker_count": 8,
+          "marker_cell_count": 8,
+          "uniform": false
+        },
+        "share": {
+          "distinct_marker_count": 8,
+          "marker_cell_count": 8,
+          "uniform": false
+        }
+      },
+      "identity_profile": {
+        "column_categories": {
+          "1": "MIXED",
+          "2": "ASCII_LETTERS",
+          "3": "MIXED",
+          "4": "MIXED"
+        },
+        "equality_pattern": "ALL_DISTINCT",
+        "nfc_casefold_relations": {
+          "form_equals_lemma": false,
+          "form_equals_lowercase_lemma": false,
+          "lemma_equals_lowercase_lemma": false
+        },
+        "nonempty_mask": "1111",
+        "pos_shape_category": "MIXED"
+      },
+      "identity_profile_matches_rows_2_to_32": 0,
+      "other_ascii_marker_cell_count": 24,
+      "refinement_by_column": {
+        "10": "ASCII_MIXED_OTHER",
+        "11": "ASCII_MIXED_OTHER",
+        "12": "ASCII_MIXED_OTHER",
+        "13": "ASCII_MIXED_OTHER",
+        "14": "ASCII_MIXED_OTHER",
+        "15": "ASCII_MIXED_OTHER",
+        "16": "ASCII_MIXED_OTHER",
+        "17": "ASCII_MIXED_OTHER",
+        "18": "ASCII_MIXED_OTHER",
+        "19": "ASCII_MIXED_OTHER",
+        "20": "ASCII_MIXED_OTHER",
+        "21": "ASCII_MIXED_OTHER",
+        "22": "ASCII_MIXED_OTHER",
+        "23": "ASCII_MIXED_OTHER",
+        "24": "ASCII_MIXED_OTHER",
+        "25": "ASCII_MIXED_OTHER",
+        "26": "ASCII_MIXED_OTHER",
+        "27": "ASCII_MIXED_OTHER",
+        "28": "ASCII_MIXED_OTHER",
+        "5": "ASCII_MIXED_OTHER",
+        "6": "ASCII_MIXED_OTHER",
+        "7": "ASCII_MIXED_OTHER",
+        "8": "ASCII_MIXED_OTHER",
+        "9": "ASCII_MIXED_OTHER"
+      },
+      "same_column_marker_recurrence": {
+        "10": false,
+        "11": false,
+        "12": false,
+        "13": false,
+        "14": false,
+        "15": false,
+        "16": false,
+        "17": false,
+        "18": false,
+        "19": false,
+        "20": false,
+        "21": false,
+        "22": false,
+        "23": false,
+        "24": false,
+        "25": false,
+        "26": false,
+        "27": false,
+        "28": false,
+        "5": false,
+        "6": false,
+        "7": false,
+        "8": false,
+        "9": false
+      }
+    },
+    "row_count": 32,
+    "schema_version": 1
+  },
+  "current_importer": {
+    "attempts": 1,
+    "failure": {
+      "column": 5,
+      "reason": "invalid-count"
+    },
+    "record_count": null,
+    "runs_completed": 0,
+    "status": "BLOCKED",
+    "failure_boundary": "row 1 column 5 current-parser invalid-count boundary"
+  },
+  "counterfactual_omit_row_1": {
+    "envelope": {
+      "data_rows": 31,
+      "first_data_row_omitted": true,
+      "header_byte_length": 834,
+      "header_preserved": true,
+      "preamble_lines": 14,
+      "preamble_preserved": true,
+      "readline_calls": 46
+    },
+    "importer": {
+      "attempts": 1,
+      "failure": {
+        "column": 6,
+        "reason": "invalid-decimal"
+      },
+      "record_count": null,
+      "runs_completed": 0
+    }
+  },
+  "source_data_retained": false,
+  "redistribution_ready": false,
+  "no_content_logged": true,
+  "temporary_tree_absent": true,
+  "temporary_environment_absent": true,
+  "cleanup": "PASSED: exact owned source, environment, cache, cwd, verifier output, and diagnostic output paths removed after receipt capture"
+}

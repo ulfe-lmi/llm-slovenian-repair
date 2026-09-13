@@ -1,0 +1,26 @@
+# Research publication is data-free by construction.
+*.sqlite
+*.sqlite-*
+*.db
+*.db-*
+*.tar
+*.tar.gz
+*.zip
+*.jsonl
+*.csv
+*.bin
+*.safetensors
+*.pt
+*.pth
+*.onnx
+raw/
+traces/
+submissions/
+private/
+dataset/
+datasets/
+__pycache__/
+
+# Data-free aggregate table is an explicit publication artifact.
+!tables/
+!tables/*.csv
