@@ -44,8 +44,13 @@ EXPECTED_PRIOR_REQUEST_TREE = "d46b47754e2ba158ea099bfe556a84164e534610233426819
 EXPECTED_PROFILE = "c79fd658db9c2006c0e542a12946962880e4ee3cec9dc57bc987b62d26c2dd60"
 EXPECTED_PROMPT = protocol.FROZEN_PROMPT_SHA256
 EXPECTED_IMPLEMENTATION_BASE = "a4d3592e25a792dd3f8d65a729c54a08032a88e3"
-NATIVE_RUNTIME_PARENT = Path(
-    "/home/ubuntu/.local/share/llm-slovenian-repair/research-runtime-20260911.YJemoq"
+NATIVE_RUNTIME_PARENT = Path("/").joinpath(
+    "home",
+    "ubuntu",
+    ".local",
+    "share",
+    "llm-slovenian-repair",
+    "research-runtime-20260911.YJemoq",
 )
 SCRATCH_NAME_PREFIX = EXPERIMENT_ID + "-recovery."
 EXPECTED_REQUEST_FIELDS = [
