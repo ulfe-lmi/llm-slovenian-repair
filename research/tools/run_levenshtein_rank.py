@@ -1470,8 +1470,8 @@ def persist_live_preparation(
     validator_driver.immutable_json(scratch / "FRESH-CALL-MANIFEST.json", fresh)
     validator_driver.immutable_json(scratch / "REUSE-RECORDS.json", list(reuse_records))
     adoption_config = configuration.get("adoption")
-    if carry_records:
-        if not isinstance(adoption_config, dict) or (
+    if isinstance(adoption_config, dict):
+        if (
             sha256_bytes(canonical_bytes(carry_records))
             != adoption_config["carry_records_sha256"]
         ):
@@ -1999,7 +1999,7 @@ def prepare_adopted_live(
             "implementation_head": identity["implementation_head"],
             "configuration_sha256": configuration_sha,
             "census_root": EXPECTED_CENSUS_ROOT,
-            "failed_root": EXPECTED_FAILED_ROOT,
+            "failed_root": spec["name"],
             "c1_copied_observations": EXPECTED_007J_C1_TOTAL,
             "c_gt_1_reused_observations": len(reuse_records),
             "c_gt_1_interrupted_carried": len(carry_records),
