@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "purpose": "synthetic boundary fixture; no dataset or model output",
+  "original": "Vspešni so v\n```\nvbesedilo\n```\npayload",
+  "expected_output": "Uspešni so v\n```\nvbesedilo\n```\npayload",
+  "unigrams": {
+    "uspešni": 42,
+    "so": 1000,
+    "v": 1000
+  },
+  "bigrams": {},
+  "trigrams": {},
+  "english_zipf": {
+    "payload": 3.36
+  },
+  "proposals": {
+    "0": {
+      "keep": false,
+      "replacement": "Uspešni",
+      "needs_wider_edit": false
+    }
+  },
+  "retry_proposals": {},
+  "maximum": null
+}

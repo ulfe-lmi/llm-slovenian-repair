@@ -1,0 +1,306 @@
+{
+  "aggregation_implementation_head": "5a1808b5227ef3b277ccd1a070b514840bdb310b",
+  "algorithm": {
+    "candidate_rule": "same Unicode code-point length; exactly one difference; both differing code points alphabetic; all other code points identical",
+    "cardinality": "C=0 falls through; C=1 may continue; C>1 falls through",
+    "case": "existing symmetric initial-case restoration",
+    "english_first": "review_suppressed targets bypass before the mechanical stage",
+    "entry": "detector-selected candidate with original unigram state exactly UNAVAILABLE",
+    "fallback": "saved first/retry decisions are reused for every unresolved target without resampling",
+    "forbidden_selection": "no frequency, context, u/v, morphology, normalization, sorting, or model tie-break",
+    "gates": "existing mechanical gate followed by independent one-word EXACT unigram membership",
+    "lookup": "target.casefold() against every vocabulary form in the exact Python len bucket",
+    "patch": "original-coordinate exact patch; document failure remains fail-closed"
+  },
+  "baseline_identity": {
+    "configuration_sha256": "4c748b8e9711148c008d4157edef209a21531a2412745f230069215d3ddc5d29",
+    "method": "M2",
+    "results_sha256": "3a75c4dac3d77db7c865d363197efc368898c53b8b092abbc14451052354700f",
+    "summary": {
+      "dassle-spelling": {
+        "calls": {
+          "first": 2001,
+          "retry": 209,
+          "total": 2210
+        },
+        "failures": 40,
+        "summary": {
+          "F0.5": 0.6421433127790771,
+          "N": 1487,
+          "accepted_edits": 803,
+          "accepted_edits_per_1000_words": 30.662899037727204,
+          "accepted_retry_edits": 51,
+          "actions": {
+            "KEEP": 974,
+            "REPLACE": 977,
+            "WIDER": 8
+          },
+          "call_latency_seconds": {
+            "max": 132.66399637699942,
+            "mean": 7.876903046590922,
+            "median": 5.831287556000461,
+            "n": 2210,
+            "p95": 18.426914186005888,
+            "sum": 17407.955732965936
+          },
+          "changed_examples": 765,
+          "changed_tokens": 811,
+          "changed_tokens_per_1000_words": 30.96838246525126,
+          "detector_candidates": 2008,
+          "detector_candidates_per_1000_words": 76.67634030853826,
+          "detector_error_examples_covered": 1227,
+          "detector_gold_overlap": 1234,
+          "detector_span_recall": 0.8145214521452145,
+          "english_gold_overlap": 2,
+          "english_suppressed_error_examples": 2,
+          "english_suppressions": 7,
+          "english_suppressions_per_1000_words": 0.26729799908354973,
+          "error_N": 1481,
+          "exact_error_correction_rate": 0.38555030384875083,
+          "exact_error_corrections": 571,
+          "exact_reference_rate": 0.38627187079407804,
+          "exact_reference_success": 574,
+          "example_wall_seconds": {
+            "max": 227.95322004600166,
+            "mean": 20.63369757049709,
+            "median": 14.774097001998598,
+            "n": 1487,
+            "p95": 56.57281263299956,
+            "sum": 30682.30828732918
+          },
+          "failed_corrective_retries": 158,
+          "first_rejections": 214,
+          "first_review_calls": 2001,
+          "fn": 911,
+          "fp": 193,
+          "gold_edits": 1515,
+          "gold_error_fraction_remaining": 0.6013201320132013,
+          "http_seconds": 17407.955732965936,
+          "introduced_edits": 798,
+          "introduced_edits_per_1000_words": 30.471971895524668,
+          "model_calls": 2210,
+          "model_calls_per_1000_words": 84.38979685352069,
+          "nonreference_changes": 193,
+          "operational_failures": 40,
+          "output_tokens": 1194051,
+          "precision": 0.7578419071518193,
+          "preservation_rate": 0.4855413584398117,
+          "reasoning_tokens": 1152392,
+          "recall": 0.39867986798679866,
+          "reference_N": 1486,
+          "retry_calls": 209,
+          "source_tokens": 30429,
+          "source_words": 26188,
+          "tp": 604,
+          "unchanged_errors": 719,
+          "unchanged_examples": 722
+        }
+      },
+      "dassle-spelling-preservation": {
+        "calls": {
+          "first": 920,
+          "retry": 92,
+          "total": 1012
+        },
+        "failures": 23,
+        "summary": {
+          "F0.5": 0.0,
+          "N": 1486,
+          "accepted_edits": 93,
+          "accepted_edits_per_1000_words": 3.549618320610687,
+          "accepted_retry_edits": 23,
+          "actions": {
+            "KEEP": 723,
+            "REPLACE": 170,
+            "WIDER": 4
+          },
+          "call_latency_seconds": {
+            "max": 101.35903692099964,
+            "mean": 8.214901269395254,
+            "median": 6.095315904000017,
+            "n": 1012,
+            "p95": 18.727355301001808,
+            "sum": 8313.480084627998
+          },
+          "changed_examples": 87,
+          "changed_tokens": 97,
+          "changed_tokens_per_1000_words": 3.7022900763358777,
+          "detector_candidates": 925,
+          "detector_candidates_per_1000_words": 35.30534351145038,
+          "detector_error_examples_covered": 0,
+          "detector_gold_overlap": 0,
+          "detector_span_recall": null,
+          "english_gold_overlap": 0,
+          "english_suppressed_error_examples": 0,
+          "english_suppressions": 5,
+          "english_suppressions_per_1000_words": 0.19083969465648856,
+          "error_N": 0,
+          "exact_error_correction_rate": null,
+          "exact_error_corrections": 0,
+          "exact_reference_rate": 0.9414535666218035,
+          "exact_reference_success": 1399,
+          "example_wall_seconds": {
+            "max": 150.19254359099432,
+            "mean": 10.139859698571332,
+            "median": 1.7930551234967425,
+            "n": 1486,
+            "p95": 42.28440992000105,
+            "sum": 15067.831512076998
+          },
+          "failed_corrective_retries": 69,
+          "first_rejections": 97,
+          "first_review_calls": 920,
+          "fn": 0,
+          "fp": 93,
+          "gold_edits": 0,
+          "gold_error_fraction_remaining": null,
+          "http_seconds": 8313.480084627998,
+          "introduced_edits": 93,
+          "introduced_edits_per_1000_words": 3.549618320610687,
+          "model_calls": 1012,
+          "model_calls_per_1000_words": 38.62595419847328,
+          "nonreference_changes": 87,
+          "operational_failures": 23,
+          "output_tokens": 553444,
+          "precision": 0.0,
+          "preservation_rate": 0.9414535666218035,
+          "reasoning_tokens": 525561,
+          "recall": 0.0,
+          "reference_N": 1486,
+          "retry_calls": 92,
+          "source_tokens": 30445,
+          "source_words": 26200,
+          "tp": 0,
+          "unchanged_errors": 0,
+          "unchanged_examples": 1399
+        }
+      }
+    },
+    "validated": true
+  },
+  "calculation_implementation_head": "939ae8b1482f3b8b5cefba5b0e16d1fde580346d",
+  "call_policy": {
+    "live_model_calls": 0,
+    "live_network_calls": 0,
+    "mechanical_targets_consume_first_retry_validator_confirmation": false,
+    "saved_calls_reused_as_projection": true
+  },
+  "experiment_id": "007-h-unique-one-letter-unigram-substitution",
+  "implementation_head": "65ba55ef3ff84bda4202190e589d45721409287b",
+  "incident_sha256": {
+    "aggregation_digest_order": "13fd07df713924b784ea2a01d430c310e854e46a231bff9e27ef0b59d806b994",
+    "calculation_aggregation": "9c03fd562dee7f9f483c47815f4ca5ac6fd750f2179a110559d0470fc9652305",
+    "invalid_publication_render": "fc4aebc9e179b3f82e5473da0619029a3d58717733128a5f2bbb32619c134650",
+    "invalid_runtime_shim": "2f31d9c8fa2bebedf117dd1d3b4a7cd294800d14063b1a3ea01096eadca43498",
+    "malformed_command": "b53d52bcc7affaa79d75e354f0abc184ebf2ef296d21d14ed1df19da9b1f55dc",
+    "preaggregation_review": "a7c89bcb30d27279ecf779394ff6fe9617bcd489bee8d96cc9792622466fc65c",
+    "precalculation": "bb5b762afc3b6e836a5db11b2211e5a520715a3ca695b99cfb7f51ae53882085",
+    "publication_projection": "cb382883f4b9e179e6149e49a7df7fdb1f494b91cd91670dd31942a6895fb01c"
+  },
+  "invalid_publication_incident_sha256": "fc4aebc9e179b3f82e5473da0619029a3d58717733128a5f2bbb32619c134650",
+  "no_tuning_or_resampling": true,
+  "private_aggregate_identity": {
+    "case_identity_manifest_sha256": "4490d7c1e14b28369217d06915bc1fce936160108de615f22f59032a803a46ef",
+    "configuration_sha256": "10657c4a2a2c53cc6bea9fab4164671dae0196d5c442275da1fb33c0326d27ee",
+    "input_manifest_sha256": "b00a1b8dcd8c4cdf4b181601892a094824af7a3268a4785d56149a05807fa399",
+    "manifest_sha256": "b9a6a433ed0a61b9b80eb0cee6a46c6e6c4b112ba177ba6b3d32cfd856b48c9c",
+    "report_sha256": "7f815f1f5f77f33f2f50521050e92f15d455e7eafc387564ddfd4bd0f1e0a02a",
+    "results_sha256": "9732d27711099630639e2afe40508672c1cdc137dc4a1ef8af7ab0ffda120340"
+  },
+  "private_evidence_sha256": {
+    "manifest": "b9a6a433ed0a61b9b80eb0cee6a46c6e6c4b112ba177ba6b3d32cfd856b48c9c",
+    "results": "9732d27711099630639e2afe40508672c1cdc137dc4a1ef8af7ab0ffda120340"
+  },
+  "publication_implementation_head": "65ba55ef3ff84bda4202190e589d45721409287b",
+  "publication_incident_sha256": "cb382883f4b9e179e6149e49a7df7fdb1f494b91cd91670dd31942a6895fb01c",
+  "publication_mode": "PUBLICATION_ONLY_RECOVERY",
+  "publication_supplement": {
+    "field": "introduced_edits",
+    "schema_version": 1,
+    "source": "frozen case baseline/new input/output pairs scored with edits",
+    "views": {
+      "dassle-spelling-preservation/all": {
+        "baseline": {
+          "introduced_edits": 93
+        },
+        "new": {
+          "introduced_edits": 234
+        },
+        "rows": 1486
+      },
+      "dassle-spelling/all": {
+        "baseline": {
+          "introduced_edits": 798
+        },
+        "new": {
+          "introduced_edits": 1050
+        },
+        "rows": 1487
+      },
+      "dassle-spelling/initial_uv": {
+        "baseline": {
+          "introduced_edits": 39
+        },
+        "new": {
+          "introduced_edits": 63
+        },
+        "rows": 75
+      },
+      "dassle-spelling/without_initial_uv": {
+        "baseline": {
+          "introduced_edits": 759
+        },
+        "new": {
+          "introduced_edits": 987
+        },
+        "rows": 1412
+      }
+    }
+  },
+  "question": "Can a complete unique one-code-point unigram lane resolve selected Slovene OOV targets before review while preserving controlled text?",
+  "recovery_evidence": {
+    "calculation_case_write_rate_per_second": 22.419791432133916,
+    "calculation_case_write_span_seconds": 132.6060507297516,
+    "lint_hold": {
+      "constraint": "cached Ruff; no system-temporary storage; no package synchronization",
+      "scope": "final pre-execution lint hold",
+      "status": "RESOLVED_BEFORE_AGGREGATION"
+    },
+    "mode_hardening": {
+      "case_bytes_changed": false,
+      "case_root_mode_after": "0700",
+      "case_root_mode_before": "0755"
+    }
+  },
+  "request": {
+    "content": [],
+    "mode": "OFFLINE_PAIRED_REPLAY",
+    "model_calls": 0
+  },
+  "schema_version": 1,
+  "source_identity": {
+    "datasets": {
+      "dassle-spelling": 1487,
+      "dassle-spelling-preservation": 1486
+    },
+    "file_sha256": {
+      "baseline-configuration.json": "4c748b8e9711148c008d4157edef209a21531a2412745f230069215d3ddc5d29",
+      "baseline-results.json": "3a75c4dac3d77db7c865d363197efc368898c53b8b092abbc14451052354700f",
+      "dassle-spelling-preservation.jsonl": "d77d6942268d5eeb6116eabef0c272e4c2a840991be39142427639c5f9161eff",
+      "dassle-spelling.jsonl": "045825b73ab42d7acb1fc987d10ec15356c2727eefd7e45dff7e2fc77ad4e9b7",
+      "detector-preservation.jsonl": "6e020b7618630d7c25ae643cb565263c147e8b57ebbc4473391f9256b14b3f69",
+      "detector-spelling.jsonl": "d401d58301b2679ca9377cac946daf9574d54528f7d3a867b1b8e8f9bffc1f63",
+      "index.sqlite": "f769235b6af3412e65f0875f4d08231c832f60d8630b43a06ab927c2d32c739f",
+      "uv-audit-results.json": "6d6fb695d420e22ceda4664c20286242151acccce57c381e7abd26415e17b153"
+    },
+    "m2_record_count": 2973,
+    "paired_rows": 2973,
+    "uv_audit_rows": 75
+  },
+  "status": "COMPLETE_OFFLINE_PUBLICATION_ONLY_RECOVERY",
+  "unicode": {
+    "grapheme_partial_targets": "gate failure/unchanged",
+    "normalization": "none",
+    "semantics": "Python string code points"
+  }
+}

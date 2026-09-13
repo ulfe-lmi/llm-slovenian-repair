@@ -1,0 +1,135 @@
+{
+  "authorized_change": "word-only retry and whitespace continuation",
+  "experiment_id": "low-word-only-retry",
+  "generic_prompt": "You are a narrow Slovenian expression reviewer. Preserve meaning and register. Review only the marked target; do not rewrite the sentence. Return exactly {\"keep\":boolean,\"replacement\":string|null,\"needs_wider_edit\":boolean}. Sentence: {sentence}\nTarget: {target} Answer only the required JSON object.",
+  "historical_content": [
+    "first contextual sentence/target",
+    "raw rejected word only on retry"
+  ],
+  "historical_status": "COMPLETED_WITH_WHITESPACE_ONLY_CONTINUATION",
+  "historical_wire_keys": [
+    "model",
+    "stream",
+    "store",
+    "input",
+    "include_reasoning",
+    "reasoning"
+  ],
+  "inference_fields": {
+    "content_sent": [
+      "first contextual sentence/target",
+      "raw rejected word only on retry"
+    ],
+    "omitted": [
+      "conversation_history",
+      "gold_text",
+      "private_response_body",
+      "credential_value"
+    ],
+    "public_redactions": [
+      "source sentences",
+      "filled prompts",
+      "replacements",
+      "raw responses",
+      "reasoning traces"
+    ],
+    "sent": [
+      "model",
+      "stream",
+      "store",
+      "input",
+      "include_reasoning",
+      "reasoning"
+    ]
+  },
+  "initial_historical_status": "STOPPED_ON_OUTER_WHITESPACE",
+  "limits": {
+    "corrective_retry_count": 1,
+    "request_count": "preserved per record",
+    "target_count": 4,
+    "timeout": "preserved per record",
+    "workers": "preserved per record"
+  },
+  "logical_root": "experiments/low-word-only-retry-20260909.0Hk0P9",
+  "model_call_policy": "WORD_ONLY_RETRY; SAVED_RESPONSE_CONTINUATION_WITHOUT_RESAMPLING",
+  "question": "How did strict word-only retry parsing behave at the first stopped execution?",
+  "reproduction": {
+    "credential_reference": "RESEARCH_CREDENTIAL_REF",
+    "default_model_calls": 0,
+    "default_network_calls": 0,
+    "entrypoint": "python3 -B -m research.tools.reproduce",
+    "requires_explicit_live_authorization": true
+  },
+  "request": {
+    "content": [
+      "first contextual sentence/target",
+      "raw rejected word only on retry"
+    ],
+    "mode": "WORD_ONLY_RETRY; SAVED_RESPONSE_CONTINUATION_WITHOUT_RESAMPLING",
+    "prompt": "You are a narrow Slovenian expression reviewer. Preserve meaning and register. Review only the marked target; do not rewrite the sentence. Return exactly {\"keep\":boolean,\"replacement\":string|null,\"needs_wider_edit\":boolean}. Sentence: {sentence}\nTarget: {target} Answer only the required JSON object.",
+    "retry": {
+      "content": [
+        "first contextual sentence/target",
+        "raw rejected word only on retry"
+      ],
+      "prompt": "Ta beseda je napačno zapisana: {word}\n\nPredlagaj pravilno slovensko obliko. Vrni samo popravljeno besedo.",
+      "wire_keys": [
+        "model",
+        "stream",
+        "store",
+        "input",
+        "include_reasoning",
+        "reasoning"
+      ]
+    },
+    "wire_keys": [
+      "model",
+      "stream",
+      "store",
+      "input",
+      "include_reasoning",
+      "reasoning"
+    ]
+  },
+  "resource_identity": {
+    "data": "private preserved identity; rows excluded",
+    "english": "private preserved attestation identity; values excluded unless numeric projection",
+    "environment": "private preserved environment identity; no import/network side effect",
+    "index": "private verified identity; path excluded",
+    "source": "research/registry/source-manifest.json"
+  },
+  "result_destination": "research/results/study-evidence.json.gz",
+  "retry_prompt": "Ta beseda je napačno zapisana: {word}\n\nPredlagaj pravilno slovensko obliko. Vrni samo popravljeno besedo.",
+  "safe_numeric_evidence": {
+    "applied_edits": 4,
+    "applied_retry_edits": 0,
+    "cases": 32,
+    "exact_gold_repairs": 3,
+    "final_status": "COMPLETED_WITH_WHITESPACE_ONLY_CONTINUATION",
+    "first_pass_calls_executed": 0,
+    "first_pass_calls_reused": 10,
+    "first_response_resampled": false,
+    "historical_model_calls": 2,
+    "historical_network_calls": 2,
+    "initial_status": "STOPPED_ON_OUTER_WHITESPACE",
+    "max_word_only_http_seconds": 14.27844430800178,
+    "median_word_only_http_seconds": 10.002636752498802,
+    "model_calls": 2,
+    "network_calls": 2,
+    "new_continuation_calls": 1,
+    "outside_edit_differences": 0,
+    "protected_differences": 0,
+    "total_word_only_calls": 2,
+    "total_word_only_http_seconds": 20.005273504997604,
+    "unchanged_controls": 25
+  },
+  "schema_version": 2,
+  "source_modules": [
+    "research/curated/detector.py",
+    "research/curated/historical_variants.py",
+    "research/curated/historical_methods.py",
+    "research/curated/historical_transport.py",
+    "research/curated/retry.py",
+    "research/curated/historical_word_continuation.py"
+  ]
+}

@@ -1,0 +1,838 @@
+{
+  "schema_version": 1,
+  "scope": "actual source closure named by final campaign configuration and review",
+  "entries": [
+    {
+      "original_logical_path": "concept-verification/config.py",
+      "original_sha256": "851b0ad35e8e9c925f821220a6b0a4182cb879cdb7e4e627423b70a08250b51f",
+      "curated_path": "research/curated/config.py",
+      "curated_sha256": "851b0ad35e8e9c925f821220a6b0a4182cb879cdb7e4e627423b70a08250b51f",
+      "disposition": "published-curated/redacted",
+      "function_coverage": {
+        "copied": [
+          "ArchiveSpec",
+          "canonical_bytes",
+          "sha256_bytes",
+          "sha256_file",
+          "load_json"
+        ],
+        "unavailable": []
+      },
+      "transformations": [
+        "removed historical absolute paths",
+        "externalized input/index/output roots",
+        "kept experimental semantics and variant boundaries"
+      ]
+    },
+    {
+      "original_logical_path": "concept-verification/corpus.py",
+      "original_sha256": "eadb8a7ce786e26abb22b076e976cc5eba4a2cf31da96c87f3403e5139c31c74",
+      "curated_path": "research/curated/corpus.py",
+      "curated_sha256": "6f7f68480825edcf22e70b3fec2140742678f1567aae89eb99f30882c7c962f8",
+      "disposition": "published-curated/redacted",
+      "function_coverage": {
+        "copied": [
+          "Evidence",
+          "prepare",
+          "Corpus",
+          "Corpus.unigram",
+          "Corpus.ngram",
+          "Corpus.alternatives"
+        ],
+        "unavailable": [
+          "archive payloads: private-only"
+        ]
+      },
+      "transformations": [
+        "removed historical absolute paths",
+        "externalized input/index/output roots",
+        "kept experimental semantics and variant boundaries"
+      ]
+    },
+    {
+      "original_logical_path": "concept-verification/protected.py",
+      "original_sha256": "fd1db9bf353da762dda6594b9f7f247743f8835ee7444a3f159b8f14521a8386",
+      "curated_path": "research/curated/protected.py",
+      "curated_sha256": "fd1db9bf353da762dda6594b9f7f247743f8835ee7444a3f159b8f14521a8386",
+      "disposition": "published-curated/redacted",
+      "function_coverage": {
+        "copied": [
+          "Interval",
+          "protected_intervals",
+          "is_protected"
+        ],
+        "unavailable": []
+      },
+      "transformations": [
+        "removed historical absolute paths",
+        "externalized input/index/output roots",
+        "kept experimental semantics and variant boundaries"
+      ]
+    },
+    {
+      "original_logical_path": "concept-verification/detector.py",
+      "original_sha256": "cd9262b36848f1ae5a10963f4e05bc40db207f78b7006550ef4f73fa881616d3",
+      "curated_path": "research/curated/detector.py",
+      "curated_sha256": "e607e74225c64d52500fd7e97dbed40f2a47f53d4451eaf3212a8cab260c5236",
+      "disposition": "published-curated/redacted",
+      "function_coverage": {
+        "copied": [
+          "Token",
+          "Candidate",
+          "tokenize",
+          "detect",
+          "candidate_summary"
+        ],
+        "unavailable": []
+      },
+      "transformations": [
+        "removed historical absolute paths",
+        "externalized input/index/output roots",
+        "kept experimental semantics and variant boundaries"
+      ]
+    },
+    {
+      "original_logical_path": "concept-verification/qwen_client.py",
+      "original_sha256": "feae32a81489cd5043aeac242c23e0ead67592431200e175d8be0f770d9939b2",
+      "curated_path": "research/curated/review.py",
+      "curated_sha256": "3d8c18f98fc40491f600d19efd7c44160cdb71aca98e1f3f5ca1e1915d56ccbf",
+      "disposition": "published-curated/redacted",
+      "function_coverage": {
+        "copied": [
+          "Proposal",
+          "reviewer_body",
+          "parse_proposal",
+          "parse_expression"
+        ],
+        "unavailable": [
+          "credential values and response payloads: private-only"
+        ]
+      },
+      "transformations": [
+        "removed historical absolute paths",
+        "externalized input/index/output roots",
+        "kept experimental semantics and variant boundaries"
+      ]
+    },
+    {
+      "original_logical_path": "concept-verification/repair.py",
+      "original_sha256": "8a3da8c5d727b1971cdf53eff5b5645dad75e4a43b4c7881550c2fee633d290d",
+      "curated_path": "research/curated/patching.py",
+      "curated_sha256": "588b33d7e19adabd0c88ac60fab6ba350302f43250efa629e6a1fd8a98c50e5e",
+      "disposition": "published-curated/redacted",
+      "function_coverage": {
+        "copied": [
+          "Edit",
+          "mechanical",
+          "restore_initial_case",
+          "apply_edits"
+        ],
+        "unavailable": []
+      },
+      "transformations": [
+        "removed historical absolute paths",
+        "externalized input/index/output roots",
+        "kept experimental semantics and variant boundaries"
+      ]
+    },
+    {
+      "original_logical_path": "experiments/large-evaluation-uncapped-20260910.faME3U/common.py",
+      "original_sha256": "ac9d7d5a43d0924cfb12c17d0dfa575695af32390d5a61184934839a16846d41",
+      "curated_path": "research/curated/historical_common.py",
+      "curated_sha256": "30acc32c25b0335f9c8aa6a875bafabd96015ebb5a91297befb0557690d8604d",
+      "disposition": "published-curated/redacted",
+      "function_coverage": {
+        "copied": [
+          "digest",
+          "sha",
+          "read",
+          "encoded",
+          "utc",
+          "immutable_bytes",
+          "save",
+          "pointer",
+          "jsonlines",
+          "snapshot",
+          "verify",
+          "result_path"
+        ],
+        "unavailable": []
+      },
+      "transformations": [
+        "removed historical absolute paths",
+        "externalized input/index/output roots",
+        "kept experimental semantics and variant boundaries"
+      ]
+    },
+    {
+      "original_logical_path": "experiments/large-evaluation-uncapped-20260910.faME3U/pipeline_bridge.py",
+      "original_sha256": "5d518b417c26319c24eac157edea01558c9b5996c11e08535946b7c0f45600bd",
+      "curated_path": "research/curated/historical_pipeline.py",
+      "curated_sha256": "a0fd05f49f5becf41938b6d6fb7bccf31926457ce844fbd73812e5544252f3a3",
+      "disposition": "published-curated/redacted",
+      "function_coverage": {
+        "copied": [
+          "Pipeline",
+          "first_body",
+          "retry_body",
+          "patch",
+          "parse_first",
+          "parse_retry"
+        ],
+        "unavailable": []
+      },
+      "transformations": [
+        "removed historical absolute paths",
+        "externalized input/index/output roots",
+        "kept experimental semantics and variant boundaries"
+      ]
+    },
+    {
+      "original_logical_path": "experiments/large-evaluation-uncapped-20260910.faME3U/detector_uncapped.py",
+      "original_sha256": "564d8f5de7ec1cdef28c9e361670d34ea0000ed3b28b4b6e0a22d7cbf50564ad",
+      "curated_path": "research/curated/historical_detector.py",
+      "curated_sha256": "e1230c9d1efc01fe3dba8317b1b8f1a9844b1c3cfd09394dd94527fb1679d6bc",
+      "disposition": "published-curated/redacted",
+      "function_coverage": {
+        "copied": [
+          "Token",
+          "Candidate",
+          "tokenize",
+          "_evidence",
+          "detect",
+          "candidate_summary"
+        ],
+        "unavailable": []
+      },
+      "transformations": [
+        "removed historical absolute paths",
+        "externalized input/index/output roots",
+        "kept experimental semantics and variant boundaries"
+      ]
+    },
+    {
+      "original_logical_path": "experiments/large-evaluation-uncapped-20260910.faME3U/methods.py",
+      "original_sha256": "9214a1b59af3cb71283cc2202bb1321273b93bc0dd851ddc4041e6e40dcbe662",
+      "curated_path": "research/curated/historical_methods.py",
+      "curated_sha256": "54184624101ba31678e0e30327b0484f69dbf6262831cf58e1e271a40cb28428",
+      "disposition": "published-curated/redacted",
+      "function_coverage": {
+        "copied": [
+          "identity",
+          "direct",
+          "targeted",
+          "no_retry"
+        ],
+        "unavailable": []
+      },
+      "transformations": [
+        "removed historical absolute paths",
+        "externalized input/index/output roots",
+        "kept experimental semantics and variant boundaries"
+      ]
+    },
+    {
+      "original_logical_path": "experiments/large-evaluation-uncapped-20260910.faME3U/metrics.py",
+      "original_sha256": "a78e7ce0d94a7c7960a7de8c1e08ac431a64f52781d677a3297b5879bdcc81fc",
+      "curated_path": "research/curated/historical_scoring.py",
+      "curated_sha256": "26dbfdd235790558e12e4a794379d72f1e04fc8869d5bd07f9baee665566dc40",
+      "disposition": "published-curated/redacted",
+      "function_coverage": {
+        "copied": [
+          "tokens",
+          "edits",
+          "edit_key",
+          "overlap",
+          "prf",
+          "distribution",
+          "row_metrics",
+          "summarize"
+        ],
+        "unavailable": []
+      },
+      "transformations": [
+        "removed historical absolute paths",
+        "externalized input/index/output roots",
+        "kept experimental semantics and variant boundaries"
+      ]
+    },
+    {
+      "original_logical_path": "experiments/large-evaluation-uncapped-20260910.faME3U/aggregate.py",
+      "original_sha256": "71be62e94651eed46ec79f2c6a6a735bebf8eb6f77ce9a704bf809e73dafe2d6",
+      "curated_path": "research/curated/historical_aggregate.py",
+      "curated_sha256": "577149d0a1df1d938ab5ea6716ca0727e04677e9cf6ea4e51ca78a8756c3121c",
+      "disposition": "published-curated/redacted",
+      "function_coverage": {
+        "copied": [
+          "phase"
+        ],
+        "unavailable": []
+      },
+      "transformations": [
+        "removed historical absolute paths",
+        "externalized input/index/output roots",
+        "kept experimental semantics and variant boundaries"
+      ]
+    },
+    {
+      "original_logical_path": "experiments/large-evaluation-uncapped-20260910.faME3U/bootstrap_stats.py",
+      "original_sha256": "a3aff8a6e084b8668c0e2fe4bd6d7b7e12d4cb0e97fe537c70183e7a5e3f549f",
+      "curated_path": "research/curated/historical_bootstrap.py",
+      "curated_sha256": "0ee1812af25b9d0eeff87bd76da116bd252cb256d9198063581ee32e929564e2",
+      "disposition": "published-curated/redacted",
+      "function_coverage": {
+        "copied": [
+          "paired",
+          "SEED",
+          "REPLICATES"
+        ],
+        "unavailable": []
+      },
+      "transformations": [
+        "removed historical absolute paths",
+        "externalized input/index/output roots",
+        "kept experimental semantics and variant boundaries"
+      ]
+    },
+    {
+      "original_logical_path": "experiments/large-evaluation-uncapped-20260910.faME3U/adapters.py",
+      "original_sha256": "391ce129268d63559ea3b0c7831940eacd907221f2f508729d0dbcfdfc969734",
+      "curated_path": "research/curated/historical_adapters.py",
+      "curated_sha256": "843353626eecb59c17ab4059c113fd1d1cfaf27f1f0f00964382b92c21d9686f",
+      "disposition": "published-curated/redacted",
+      "function_coverage": {
+        "copied": [
+          "md_parse",
+          "md_render",
+          "multigec",
+          "canonical_solar",
+          "dassle",
+          "slobench",
+          "preservation",
+          "build"
+        ],
+        "unavailable": []
+      },
+      "transformations": [
+        "removed historical absolute paths",
+        "externalized input/index/output roots",
+        "kept experimental semantics and variant boundaries"
+      ]
+    },
+    {
+      "original_logical_path": "experiments/large-evaluation-uncapped-20260910.faME3U/official_score.py",
+      "original_sha256": "9d3b6b92a3db6a1afa5189ba1d022c22ba5ec3756592ed3f7b953d82e4e1f980",
+      "curated_path": "research/curated/historical_official_score.py",
+      "curated_sha256": "faea7cba40a2c5744e266e94b5addb868dde38ae7a69f63351053ad04ffd7075",
+      "disposition": "published-curated/redacted",
+      "function_coverage": {
+        "copied": [
+          "tokenize",
+          "command",
+          "score_pairs"
+        ],
+        "unavailable": [
+          "main: caller-specific benchmark loop is represented by score_pairs"
+        ]
+      },
+      "transformations": [
+        "removed historical absolute paths",
+        "externalized input/index/output roots",
+        "kept experimental semantics and variant boundaries"
+      ]
+    },
+    {
+      "original_logical_path": "experiments/large-evaluation-uncapped-20260910.faME3U/transport.py",
+      "original_sha256": "eaa8ae2859e40235219e6fe286bdba0e11756abd807c8006d9771c19aea63342",
+      "curated_path": "research/curated/historical_transport.py",
+      "curated_sha256": "c4cdd8344a97c4982630bb1e6fe72e32750a53ce7ac1d759fe5a52250e8ee518",
+      "disposition": "published-curated/redacted",
+      "function_coverage": {
+        "copied": [
+          "text_body",
+          "parse_text",
+          "Client",
+          "Client.call",
+          "_HttpTransport",
+          "request capture and bounded parsing"
+        ],
+        "unavailable": []
+      },
+      "transformations": [
+        "removed historical absolute paths",
+        "externalized input/index/output roots",
+        "kept experimental semantics and variant boundaries"
+      ]
+    },
+    {
+      "original_logical_path": "experiments/large-evaluation-uncapped-20260910.faME3U/campaign.py",
+      "original_sha256": "ed524ac167bfa6f8992955101f3b1d82da76ba28c7ce1b20395a8bc38ad456a3",
+      "curated_path": "research/curated/historical_campaign.py",
+      "curated_sha256": "61f527ef88c414ac3a1e792c8622cf4760bec3d28ebeaa7b868c0a96ae1754c3",
+      "disposition": "published-curated/redacted",
+      "function_coverage": {
+        "copied": [
+          "inherited_records",
+          "stored",
+          "one",
+          "run"
+        ],
+        "unavailable": [
+          "native scorer subprocess dispatch: score drivers are intentionally caller-selected"
+        ]
+      },
+      "transformations": [
+        "removed historical absolute paths",
+        "externalized input/index/output roots",
+        "kept experimental semantics and variant boundaries"
+      ]
+    },
+    {
+      "original_logical_path": "experiments/ten-run-english-preserve-low-20260909.AQnnRH/english_preserve.py",
+      "original_sha256": "54fe6b23d0ba361cf6385e5351f2e7ee26795ae28d0a463b76435befbc230983",
+      "curated_path": "research/curated/english_preserve.py",
+      "curated_sha256": "ca5f20fedeee3a242d7d5c4d91614f32da333244379a3f4cf763c0f0e885cbdc",
+      "disposition": "published-curated/redacted",
+      "function_coverage": {
+        "copied": [
+          "EnglishResourceError",
+          "resource_identity",
+          "load_frozen",
+          "classify"
+        ],
+        "unavailable": []
+      },
+      "transformations": [
+        "removed historical absolute paths",
+        "externalized input/index/output roots",
+        "kept experimental semantics and variant boundaries"
+      ]
+    },
+    {
+      "original_logical_path": "experiments/ten-run-english-preserve-low-20260909.AQnnRH/expression_retry.py",
+      "original_sha256": "665283bccd98440eb9c4ec1befb502eba77f8f7e9c4ad16a5aa6850fe2cee946",
+      "curated_path": "research/curated/retry.py",
+      "curated_sha256": "e748c1647ceec7796942391c4eb49bcff62643d20bfec6182c3febc4b8077356",
+      "disposition": "published-curated/redacted",
+      "function_coverage": {
+        "copied": [
+          "INSTRUCTION",
+          "body_for",
+          "parse_reply"
+        ],
+        "unavailable": []
+      },
+      "transformations": [
+        "removed historical absolute paths",
+        "externalized input/index/output roots",
+        "kept experimental semantics and variant boundaries"
+      ]
+    },
+    {
+      "original_logical_path": "experiments/ten-run-english-preserve-low-20260909.AQnnRH/hyphen_detector.py",
+      "original_sha256": "e4f4aa0d39387516b29783874c90129c2284d94771d84cc731eecdcad37abbb0",
+      "curated_path": "research/curated/historical_detector.py",
+      "curated_sha256": "e1230c9d1efc01fe3dba8317b1b8f1a9844b1c3cfd09394dd94527fb1679d6bc",
+      "disposition": "published-curated/redacted",
+      "function_coverage": {
+        "copied": [
+          "Token",
+          "Candidate",
+          "tokenize",
+          "detect"
+        ],
+        "unavailable": []
+      },
+      "transformations": [
+        "removed historical absolute paths",
+        "externalized input/index/output roots",
+        "kept experimental semantics and variant boundaries"
+      ]
+    },
+    {
+      "original_logical_path": "experiments/ten-run-english-preserve-low-20260909.AQnnRH/run_pipeline.py",
+      "original_sha256": "4cf95a397ecb2cfd81bb5698786b3bf0ce899f7c2fb115b2522adb0785913cad",
+      "curated_path": "research/curated/historical_ten_run.py",
+      "curated_sha256": "806479c102d6b1d1bf5b7f0d6b7ba73e3daf5e633089a0cd4a8e7bb490e4d86c",
+      "disposition": "published-curated/redacted",
+      "function_coverage": {
+        "copied": [
+          "PipelineStop",
+          "prepare",
+          "preserve_initial_case",
+          "process_case",
+          "run"
+        ],
+        "unavailable": []
+      },
+      "transformations": [
+        "removed historical absolute paths",
+        "externalized input/index/output roots",
+        "kept experimental semantics and variant boundaries"
+      ]
+    },
+    {
+      "original_logical_path": "experiments/full-hyphen-space-low-20260909.12wKze/hyphen_detector.py",
+      "original_sha256": "e4f4aa0d39387516b29783874c90129c2284d94771d84cc731eecdcad37abbb0",
+      "curated_path": "research/curated/historical_detector.py",
+      "curated_sha256": "e1230c9d1efc01fe3dba8317b1b8f1a9844b1c3cfd09394dd94527fb1679d6bc",
+      "disposition": "published-curated/redacted",
+      "function_coverage": {
+        "copied": [
+          "Token",
+          "Candidate",
+          "tokenize",
+          "detect"
+        ],
+        "unavailable": []
+      },
+      "transformations": [
+        "removed historical absolute paths",
+        "externalized input/index/output roots",
+        "kept experimental semantics and variant boundaries"
+      ]
+    },
+    {
+      "original_logical_path": "experiments/full-hyphen-space-low-20260909.12wKze/run_pipeline.py",
+      "original_sha256": "5746be2c1ca45b7961bac539e66327c52d0391a774e98209802db5ca3423d313",
+      "curated_path": "research/curated/historical_variants.py",
+      "curated_sha256": "e4f63c464a3641434a64087027ff7099e73d812719f581e3a68747cb50f39afe",
+      "disposition": "published-curated/redacted",
+      "function_coverage": {
+        "copied": [
+          "prepare",
+          "process_case",
+          "word-only retry dispatch",
+          "hyphen-space detector selection"
+        ],
+        "unavailable": []
+      },
+      "transformations": [
+        "removed historical absolute paths",
+        "externalized input/index/output roots",
+        "kept experimental semantics and variant boundaries"
+      ]
+    },
+    {
+      "original_logical_path": "experiments/full-hyphen-case-low-20260909.IFYupt/hyphen_detector.py",
+      "original_sha256": "e4f4aa0d39387516b29783874c90129c2284d94771d84cc731eecdcad37abbb0",
+      "curated_path": "research/curated/historical_detector.py",
+      "curated_sha256": "e1230c9d1efc01fe3dba8317b1b8f1a9844b1c3cfd09394dd94527fb1679d6bc",
+      "disposition": "published-curated/redacted",
+      "function_coverage": {
+        "copied": [
+          "Token",
+          "Candidate",
+          "tokenize",
+          "detect"
+        ],
+        "unavailable": []
+      },
+      "transformations": [
+        "removed historical absolute paths",
+        "externalized input/index/output roots",
+        "kept experimental semantics and variant boundaries"
+      ]
+    },
+    {
+      "original_logical_path": "experiments/full-hyphen-case-low-20260909.IFYupt/run_pipeline.py",
+      "original_sha256": "6362e6c4a25dd62a24566e64a7a544f47830731c505fcbf452f3aeef29f84413",
+      "curated_path": "research/curated/historical_variants.py",
+      "curated_sha256": "e4f63c464a3641434a64087027ff7099e73d812719f581e3a68747cb50f39afe",
+      "disposition": "published-curated/redacted",
+      "function_coverage": {
+        "copied": [
+          "prepare",
+          "process_case",
+          "one-way case adjustment",
+          "word-only retry dispatch",
+          "hyphen-space detector selection"
+        ],
+        "unavailable": []
+      },
+      "transformations": [
+        "removed historical absolute paths",
+        "externalized input/index/output roots",
+        "kept experimental semantics and variant boundaries"
+      ]
+    },
+    {
+      "original_logical_path": "experiments/low-word-only-retry-20260909.0Hk0P9/retry.py",
+      "original_sha256": "a4043fd99a5a21708755fd62e39cc40af52e13f1acf54bafa725a2126b6a7729",
+      "curated_path": "research/curated/retry.py",
+      "curated_sha256": "e748c1647ceec7796942391c4eb49bcff62643d20bfec6182c3febc4b8077356",
+      "disposition": "published-curated/redacted",
+      "function_coverage": {
+        "copied": [
+          "Unigrams equivalent via UnigramIndex",
+          "check",
+          "body_for equivalent word_only_retry_body",
+          "outcome",
+          "parse_word equivalent parse_word_only"
+        ],
+        "unavailable": [
+          "run: caller supplies explicit saved state and Client"
+        ]
+      },
+      "transformations": [
+        "removed historical absolute paths",
+        "externalized input/index/output roots",
+        "kept experimental semantics and variant boundaries"
+      ]
+    },
+    {
+      "original_logical_path": "experiments/low-word-only-retry-20260909.0Hk0P9/continue_whitespace.py",
+      "original_sha256": "cb1571e60a3cbfae59e64eaf913d67e6f5aad71f587c5349bf3cc6eb258aa10b",
+      "curated_path": "research/curated/historical_word_continuation.py",
+      "curated_sha256": "c4a0d19c2d1897d2b0ebbb951a1e900a4bf6fb821ce444a9123ba49d1779770c",
+      "disposition": "published-curated/redacted",
+      "function_coverage": {
+        "copied": [
+          "parse_word",
+          "continue_saved"
+        ],
+        "unavailable": [
+          "finish: caller invokes continue_saved with saved response and pending item"
+        ]
+      },
+      "transformations": [
+        "removed historical absolute paths",
+        "externalized input/index/output roots",
+        "kept experimental semantics and variant boundaries"
+      ]
+    },
+    {
+      "original_logical_path": "experiments/low-unigram-retry-20260909.Wb0TI7/retry.py",
+      "original_sha256": "addb7bc4e313385e186da1608e5f02af0f46f71b39e6ae6f2d6795e05ef04e7b",
+      "curated_path": "research/curated/retry.py",
+      "curated_sha256": "e748c1647ceec7796942391c4eb49bcff62643d20bfec6182c3febc4b8077356",
+      "disposition": "published-curated/redacted",
+      "function_coverage": {
+        "copied": [
+          "INSTRUCTION",
+          "Unigrams equivalent via UnigramIndex",
+          "check",
+          "body_for equivalent contextual_retry_body",
+          "outcome",
+          "parse_reply equivalent parse_contextual"
+        ],
+        "unavailable": [
+          "run: caller supplies explicit saved state and Client"
+        ]
+      },
+      "transformations": [
+        "removed historical absolute paths",
+        "externalized input/index/output roots",
+        "kept experimental semantics and variant boundaries"
+      ]
+    },
+    {
+      "original_logical_path": "experiments/low-plus-validator-20260909.eKAYe6/validate.py",
+      "original_sha256": "f91fc93e7d134cf9341cc757481ec189bf5ffc862d87766dea6afa6ee8a73718",
+      "curated_path": "research/curated/historical_validator.py",
+      "curated_sha256": "8f29aa710b6c16050b22a2188ff2e4ffc2b0a45c4552a69092180a61783d2316",
+      "disposition": "published-curated/redacted",
+      "function_coverage": {
+        "copied": [
+          "body_for equivalent validator_body",
+          "parse equivalent parse_validator",
+          "run_validator_records (validator-only frozen first-stage execution)"
+        ],
+        "unavailable": [
+          "native prepare hash check: private first-pass freeze remains caller-owned"
+        ]
+      },
+      "transformations": [
+        "removed historical absolute paths",
+        "externalized input/index/output roots",
+        "kept experimental semantics and variant boundaries"
+      ]
+    },
+    {
+      "original_logical_path": "experiments/prijigrala-retry10-20260911.3E6HOg/run_test.py",
+      "original_sha256": "d441ebbdfe30b04007056813d984e29fc44cc67b9b06608240a1644a7da0d880",
+      "curated_path": "research/curated/historical_retry10.py",
+      "curated_sha256": "d17830a5682af941d98de8a774440447577a1f23d00efe37f95c5b8f13b37311",
+      "disposition": "published-curated/redacted",
+      "function_coverage": {
+        "copied": [
+          "sequence",
+          "run_record",
+          "fixed raw first-proposal retry anchor"
+        ],
+        "unavailable": [
+          "native main live/profile mirror: explicit caller resources replace private defaults"
+        ]
+      },
+      "transformations": [
+        "removed historical absolute paths",
+        "externalized input/index/output roots",
+        "kept experimental semantics and variant boundaries"
+      ]
+    },
+    {
+      "original_logical_path": "experiments/dassle-uv-audit-20260911.BGeMLs/analyze.py",
+      "original_sha256": "8a6889ee11ffe736042097f30305f5170003f992c2adaaa846c35bacf8763bc3",
+      "curated_path": "research/curated/historical_dassle.py",
+      "curated_sha256": "00be7dcb82da1b7dc332003501e20c71c12e72168160436a042ca794f786403c",
+      "disposition": "published-curated/redacted",
+      "function_coverage": {
+        "copied": [
+          "classify",
+          "tagged",
+          "evaluate",
+          "analyze",
+          "run_audit_records"
+        ],
+        "unavailable": [
+          "sealed dataset and raw result rows: private-only caller inputs"
+        ]
+      },
+      "transformations": [
+        "removed historical absolute paths",
+        "externalized input/index/output roots",
+        "kept experimental semantics and variant boundaries"
+      ]
+    },
+    {
+      "original_logical_path": "experiments/ten-run-initial-case-low-20260909.87bzTW/run_pipeline.py",
+      "original_sha256": "927f1ed9c0e9d778af84b3c5cd5bd172b2b21a8d4e26bf0adf855b78dfdc19e8",
+      "curated_path": "research/curated/historical_variants.py",
+      "curated_sha256": "e4f63c464a3641434a64087027ff7099e73d812719f581e3a68747cb50f39afe",
+      "disposition": "published-curated/redacted",
+      "function_coverage": {
+        "copied": [
+          "HistoricalVariantPipeline",
+          "symmetric case rule",
+          "historical detector/gate/patch seam"
+        ],
+        "unavailable": [
+          "native frozen 32-case rows: caller-owned saved inputs"
+        ]
+      },
+      "transformations": [
+        "removed historical absolute paths",
+        "externalized input/index/output roots",
+        "kept experimental semantics and variant boundaries"
+      ]
+    },
+    {
+      "original_logical_path": "experiments/ten-run-initial-case-low-20260909.87bzTW/run_ten.py",
+      "original_sha256": "9bb493804afb036f6a502a560cf602f72259d38c4554577da5da6e1af1c91fd0",
+      "curated_path": "research/curated/historical_ten_run.py",
+      "curated_sha256": "806479c102d6b1d1bf5b7f0d6b7ba73e3daf5e633089a0cd4a8e7bb490e4d86c",
+      "disposition": "published-curated/redacted",
+      "function_coverage": {
+        "copied": [
+          "run_scheduled_trials",
+          "stopped-trial continuation",
+          "trial identity paths"
+        ],
+        "unavailable": []
+      },
+      "transformations": [
+        "removed historical absolute paths",
+        "externalized input/index/output roots",
+        "kept experimental semantics and variant boundaries"
+      ]
+    },
+    {
+      "original_logical_path": "experiments/ten-run-expression-retry-low-20260909.xJhqYm/run_pipeline.py",
+      "original_sha256": "b9a99e509c11fdad100cc3f03784de8cbe74d1dad0a6efea0a2d67b7f9867722",
+      "curated_path": "research/curated/historical_variants.py",
+      "curated_sha256": "e4f63c464a3641434a64087027ff7099e73d812719f581e3a68747cb50f39afe",
+      "disposition": "published-curated/redacted",
+      "function_coverage": {
+        "copied": [
+          "HistoricalVariantPipeline",
+          "symmetric case rule",
+          "expression retry family"
+        ],
+        "unavailable": [
+          "native frozen 32-case rows: caller-owned saved inputs"
+        ]
+      },
+      "transformations": [
+        "removed historical absolute paths",
+        "externalized input/index/output roots",
+        "kept experimental semantics and variant boundaries"
+      ]
+    },
+    {
+      "original_logical_path": "experiments/ten-run-expression-retry-low-20260909.xJhqYm/run_ten.py",
+      "original_sha256": "85ba028a250096fd73635522a79d29258d33e4076537499fe8e05dd8e4e56096",
+      "curated_path": "research/curated/historical_ten_run.py",
+      "curated_sha256": "806479c102d6b1d1bf5b7f0d6b7ba73e3daf5e633089a0cd4a8e7bb490e4d86c",
+      "disposition": "published-curated/redacted",
+      "function_coverage": {
+        "copied": [
+          "run_scheduled_trials",
+          "stopped-trial continuation",
+          "trial identity paths"
+        ],
+        "unavailable": []
+      },
+      "transformations": [
+        "removed historical absolute paths",
+        "externalized input/index/output roots",
+        "kept experimental semantics and variant boundaries"
+      ]
+    },
+    {
+      "original_logical_path": "experiments/ten-run-english-preserve-low-20260909.AQnnRH/run_ten.py",
+      "original_sha256": "85ba028a250096fd73635522a79d29258d33e4076537499fe8e05dd8e4e56096",
+      "curated_path": "research/curated/historical_ten_run.py",
+      "curated_sha256": "806479c102d6b1d1bf5b7f0d6b7ba73e3daf5e633089a0cd4a8e7bb490e4d86c",
+      "disposition": "published-curated/redacted",
+      "function_coverage": {
+        "copied": [
+          "run_scheduled_trials",
+          "English-preserve trial family",
+          "stopped-trial continuation",
+          "trial identity paths"
+        ],
+        "unavailable": []
+      },
+      "transformations": [
+        "removed historical absolute paths",
+        "externalized input/index/output roots",
+        "kept experimental semantics and variant boundaries"
+      ]
+    },
+    {
+      "original_logical_path": "llm-slovenian-repair-campaign8.ewruv3/runner8.py",
+      "original_status": "genuinely-missing",
+      "destination": "research/curated/historical_campaign.py"
+    },
+    {
+      "original_logical_path": "llm-slovenian-repair-campaign8.ewruv3/storage8.py",
+      "original_status": "genuinely-missing",
+      "destination": "research/curated/historical_campaign_storage.py"
+    },
+    {
+      "original_logical_path": "llm-slovenian-repair-campaign8.ewruv3/checkpoint8.py",
+      "original_status": "genuinely-missing",
+      "destination": "research/curated/historical_campaign_checkpoint.py"
+    },
+    {
+      "original_logical_path": "llm-slovenian-repair-campaign8.ewruv3/prepare8.py",
+      "original_status": "genuinely-missing",
+      "destination": "research/curated/historical_campaign_entrypoints.py"
+    },
+    {
+      "original_logical_path": "llm-slovenian-repair-campaign8.ewruv3/launch8.py",
+      "original_status": "genuinely-missing",
+      "destination": "research/curated/historical_campaign_entrypoints.py"
+    },
+    {
+      "original_logical_path": "llm-slovenian-repair-campaign8.ewruv3/observe8.py",
+      "original_status": "genuinely-missing",
+      "destination": "research/curated/historical_campaign.py"
+    },
+    {
+      "original_logical_path": "llm-slovenian-repair-campaign8.ewruv3/score8.py",
+      "original_status": "genuinely-missing",
+      "destination": "research/curated/historical_scoring.py"
+    }
+  ]
+}

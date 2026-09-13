@@ -1,0 +1,160 @@
+{
+  "candidate_rule": {
+    "accepted": "complete deduplicated vocabulary union at distance one only",
+    "distance": "standard unit-cost Levenshtein over Python Unicode code points",
+    "identity": "distance zero excluded",
+    "normalization": "none",
+    "operations": [
+      "SUBSTITUTION",
+      "INSERTION",
+      "DELETION"
+    ],
+    "ranking": "none",
+    "transposition": "distance two and excluded"
+  },
+  "configuration_sha256": "ff5e76ffab439d6071ce0e4a0c7b78bb42fc64e35f8b9b5dc64b764f64c5798d",
+  "deployment": {
+    "class": "A100-FP8",
+    "endpoint": "private endpoint identity omitted",
+    "model": "qwen3.8-27b",
+    "profile_path": "private profile path omitted",
+    "profile_sha256": "c79fd658db9c2006c0e542a12946962880e4ee3cec9dc57bc987b62d26c2dd60",
+    "protocol": "Responses non-streaming"
+  },
+  "experiment_id": "007-j-levenshtein-one-contextual-validator",
+  "implementation_branch": "oap/007-concept-verification",
+  "implementation_head": "dc1a76e07765532e96a3238abbeae562c135337b",
+  "limits": {
+    "attempts_per_candidate": 1,
+    "new_call_budget": 493,
+    "resampling": false,
+    "response_bound_bytes": 2000000,
+    "timeout_seconds": 300.0
+  },
+  "parser": {
+    "assistant_output_text_fields": 1,
+    "choices": [
+      "KEEP_ORIGINAL",
+      "UNCERTAIN",
+      "USE_CANDIDATE"
+    ],
+    "duplicate_json_keys": "reject",
+    "status": "completed",
+    "surrounding_whitespace_only": true,
+    "token_accounting": "input/output/reasoning nonnegative integers"
+  },
+  "prior_007i_identity": {
+    "candidate_manifest_sha256": "70544b1dec158f1e72cfaae8fb2547d9ba6ea22c3cd7934e0b7341bce8617854",
+    "case_identity_manifest_sha256": "4490d7c1e14b28369217d06915bc1fce936160108de615f22f59032a803a46ef",
+    "configuration_sha256": "0cbc4738f23bed247fac6a3cd2203086956329eea9ca23ffb8bf8e1351165d21",
+    "manifest_sha256": "04f66e96d4feddaea520c1ccb27724dc5417b4f6535bbe85a5c6cac904395cb0",
+    "model": "qwen3.8-27b",
+    "profile_sha256": "c79fd658db9c2006c0e542a12946962880e4ee3cec9dc57bc987b62d26c2dd60",
+    "prompt_sha256": "572cf2fb4864e66e38a500465e1089062d58aeed4721063fb0c1e466e424230d",
+    "request_tree_sha256": "d46b47754e2ba158ea099bfe556a84164e534610233426819d9114a455aea945",
+    "results_sha256": "913572ae5d16ba29ab8afd6ea59a1dc3f03de90d40136891ea1637eba16f92f9"
+  },
+  "privacy": "aggregate metrics, hashes, transition and operation counts only",
+  "prompt": {
+    "sha256": "572cf2fb4864e66e38a500465e1089062d58aeed4721063fb0c1e466e424230d",
+    "template": "owner-supplied frozen 007-i validator prompt"
+  },
+  "request": {
+    "fields": [
+      "model",
+      "stream",
+      "store",
+      "input",
+      "include_reasoning",
+      "reasoning"
+    ],
+    "include_reasoning": true,
+    "reasoning_effort": "low",
+    "serializer": "canonical UTF-8 JSON with one final LF",
+    "store": false,
+    "stream": false
+  },
+  "reuse": {
+    "count": 542,
+    "fresh_count": 493,
+    "fresh_dispatches": 493,
+    "policy": "exact identity only; target text or candidate alone is insufficient"
+  },
+  "run_id": "007-j",
+  "scheduling": {
+    "in_flight_per_worker": 1,
+    "maximum_in_flight": 8,
+    "partition": "stable ordered position modulo worker count",
+    "partition_key": [
+      "phase",
+      "case_index",
+      "target_start",
+      "target_end",
+      "target_ordinal"
+    ],
+    "scheduled_new_calls": 493,
+    "workers": 8
+  },
+  "schema_version": 1,
+  "source_identity": {
+    "candidate_count": 1035,
+    "candidate_counts": {
+      "dassle-spelling": 826,
+      "dassle-spelling-preservation": 209
+    },
+    "candidate_manifest_sha256": "acabcf1b33c38a949c80e81773b8ff3c355386daf768404791aaaed111f1df41",
+    "case_identity_manifest_sha256": "4490d7c1e14b28369217d06915bc1fce936160108de615f22f59032a803a46ef",
+    "dataset_rows": {
+      "dassle-spelling": 1487,
+      "dassle-spelling-preservation": 1486
+    },
+    "entering_targets": {
+      "dassle-spelling": 2001,
+      "dassle-spelling-preservation": 920
+    },
+    "fresh_call_budget": 493,
+    "operation_counts": {
+      "dassle-spelling": {
+        "DELETION": 244,
+        "INSERTION": 159,
+        "SUBSTITUTION": 423
+      },
+      "dassle-spelling-preservation": {
+        "DELETION": 77,
+        "INSERTION": 13,
+        "SUBSTITUTION": 119
+      }
+    },
+    "paired_rows": 2973,
+    "reused_observations": 542,
+    "runtime": {
+      "candidate_search_seconds": 0.09951987018575892,
+      "vocabulary_loading_seconds": 0.31759214599151164,
+      "vocabulary_rows": 141162
+    },
+    "transition_matrix": {
+      "dassle-spelling": {
+        "C=0 -> C=0": 524,
+        "C=0 -> C=1": 403,
+        "C=0 -> C>1": 84,
+        "C=1 -> C>1": 148,
+        "C=1 -> different unique candidate": 0,
+        "C=1 -> same unique candidate": 423,
+        "C>1 -> C=1": 0,
+        "C>1 -> C>1": 419
+      },
+      "dassle-spelling-preservation": {
+        "C=0 -> C=0": 480,
+        "C=0 -> C=1": 90,
+        "C=0 -> C>1": 18,
+        "C=1 -> C>1": 45,
+        "C=1 -> different unique candidate": 0,
+        "C=1 -> same unique candidate": 119,
+        "C>1 -> C=1": 0,
+        "C>1 -> C>1": 168
+      }
+    },
+    "vocabulary_forms": 141162
+  },
+  "status": "COMPLETE"
+}

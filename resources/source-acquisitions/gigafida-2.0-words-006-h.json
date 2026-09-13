@@ -1,0 +1,186 @@
+{
+  "schema_version": 1,
+  "receipt_id": "gigafida-2.0-words-006-h",
+  "status": "BLOCKED_REAL_IMPORTER_INVALID_COUNT",
+  "recorded_at": "2026-09-08T19:04:39Z",
+  "source_id": "gigafida-2.0-words",
+  "source_name": "Gigafida 2.0 word lists",
+  "release": "2.0",
+  "inventory_revision": "source-inventory-v1",
+  "inventory_sha256": "439bbd51e04e338569b9785c44d1b05c0ea023aae39898aa7d494568d6f49de3",
+  "item_url": "https://www.clarin.si/repository/xmlui/handle/11356/1273?show=full",
+  "artifact_url": "https://www.clarin.si/repository/xmlui/bitstream/handle/11356/1273/GF2.0-words-all.zip?sequence=4&isAllowed=y",
+  "artifact_name": "GF2.0-words-all.zip",
+  "publisher_license_label": "CC BY-SA 4.0",
+  "publisher_license_uri": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "expected_byte_size": 115865656,
+  "observed_byte_size": 115865656,
+  "expected_md5": "b20a959f9c113aeb6504f0d753d36d10",
+  "observed_md5": "b20a959f9c113aeb6504f0d753d36d10",
+  "archive_sha256": "77ac4aa2e77016470a26ebf5b1bd265b9de240e8254d3511d51cb0fcb68a767a",
+  "member_count": 5,
+  "uncompressed_total_bytes": 1487654024,
+  "selected_member": "GF2.0-words-all-lowercase_forms-lemmas-parts_of_speech-taxonomy-entire.tsv",
+  "header_line_number": 15,
+  "header_byte_length": 834,
+  "header_sha256": "c2ce44548818b72a04691c7060c0e35106393edbfde13336c60d4cd072a00638",
+  "data_record_terminator": "OPTIONAL_SINGLE_EMPTY_TAB_BEFORE_CRLF",
+  "text_contract": {
+    "encoding": "UTF-8",
+    "newline": "CRLF",
+    "delimiter": "TAB",
+    "field_quoting": "ALL_FIELDS_DOUBLE_QUOTED",
+    "data_record_terminator": "OPTIONAL_SINGLE_EMPTY_TAB_BEFORE_CRLF"
+  },
+  "preflight": {
+    "script": "scripts/smoke_unigram_prefix.py",
+    "command": "python3.12 -I -B scripts/smoke_unigram_prefix.py --inventory resources/source-inventory-v1.json --source-id gigafida-2.0-words --preflight",
+    "result": "PASSED",
+    "inventory_validation": "PASSED",
+    "header_contract": "PASSED",
+    "importer_entry_point": "PASSED",
+    "limits": "PASSED",
+    "interpreter": "Python 3.12.3",
+    "isolated_mode": true,
+    "pythonpath": "ABSENT",
+    "environment": "owned lock-derived disposable development environment; private path omitted",
+    "dependency_closure": "PASSED",
+    "provenance_completeness": {
+      "source": "COMPLETE",
+      "query": "COMPLETE",
+      "import": "PARTIAL"
+    },
+    "artifact_required": false,
+    "source_accessed": false
+  },
+  "verifier": {
+    "script": "scripts/verify_source_artifact.py",
+    "command": "python3.12 -I -B scripts/verify_source_artifact.py --inventory resources/source-inventory-v1.json --source-id gigafida-2.0-words --artifact <owned-006-h-part>",
+    "result": "PASSED",
+    "identity": "canonical inventory ID-bound standard-library ZIP verifier"
+  },
+  "helper": {
+    "script": "scripts/smoke_unigram_prefix.py",
+    "command": "python3.12 -I -B scripts/smoke_unigram_prefix.py --inventory resources/source-inventory-v1.json --source-id gigafida-2.0-words --artifact <owned-006-h-part>",
+    "result": "BLOCKED",
+    "failure": "import-invalid-count",
+    "identity": "committed verifier-first one-member bounded-prefix CLI"
+  },
+  "prior_rounds": {
+    "006_a": {
+      "status": "PARTIAL_RECOVERY_HANDOFF",
+      "get_count": 3,
+      "exact_one_fetch_condition_satisfied": false
+    },
+    "006_b": {
+      "status": "BLOCKED_PARSER_INCOMPATIBILITY",
+      "get_count": 1,
+      "failure": "trailing-tab-after-28-fields"
+    },
+    "006_c": {
+      "status": "BLOCKED_STRUCTURAL_ROW_SMOKE",
+      "get_count": 1,
+      "failure": "row-shape-mismatch-before-importer"
+    },
+    "006_d": {
+      "status": "BLOCKED_ROW_DIAGNOSTIC_INPUT",
+      "get_count": 1,
+      "failure": "requested-row-incomplete"
+    },
+    "006_e": {
+      "status": "COMPLETE_ROW_DIAGNOSTIC",
+      "get_count": 1,
+      "failure": "31 28-field rows and one empty terminal 29th field; importer not run"
+    },
+    "006_f": {
+      "status": "BLOCKED_SMOKE_HARNESS_FAILURE",
+      "get_count": 1,
+      "failure": "SMOKE_HARNESS_SYNTAX_ERROR before selected-member access; importer attempts zero"
+    },
+    "006_g": {
+      "status": "BLOCKED_SMOKE_HELPER_IMPORT",
+      "get_count": 1,
+      "failure": "HEADER_CONTRACT_UNAVAILABLE before selected-member access; importer attempts zero"
+    }
+  },
+  "acquisition_evidence": {
+    "required_exact_get_count": 1,
+    "006_h_get_count": 1,
+    "cumulative_observed_objective_get_count": 10,
+    "006_a_exact_one_fetch_condition_satisfied": false,
+    "curl_result": "PASSED",
+    "curl_policy": "curl --disable; direct HTTPS; no redirect; no credentials; connect timeout 10 seconds; total timeout 900 seconds; max-filesize 115865656",
+    "single_part_target": true,
+    "preflight_before_get": true,
+    "verifier_before_member_access": true,
+    "accepted_offline_verifier": "PASSED",
+    "member_access_attempted": true,
+    "structural_sample_attempted": true,
+    "helper_reached_importer": true,
+    "temporary_environment_absent": true,
+    "temporary_tree_absent": true,
+    "source_data_retained": false,
+    "redistribution_ready": false,
+    "no_content_logged": true,
+    "retry_attempted": false,
+    "second_get_attempted": false
+  },
+  "structural_sample": {
+    "status": "PASSED",
+    "requested_row_count": 32,
+    "rows_read": 32,
+    "rows_qualified": 32,
+    "aggregate": {
+      "schema_version": 1,
+      "requested_row_count": 32,
+      "read_row_count": 32,
+      "utf8_valid_row_count": 32,
+      "utf8_invalid_row_count": 0,
+      "crlf_row_count": 32,
+      "lf_row_count": 0,
+      "missing_newline_row_count": 0,
+      "terminal_tab_count_histogram": {
+        "0": 31,
+        "1": 1,
+        "2+": 0
+      },
+      "csv_field_count_histogram": {
+        "28": 31,
+        "29": 1
+      },
+      "empty_final_field_count": 1,
+      "nonempty_field_after_28_count": 0,
+      "fully_all_fields_quoted_count": 31,
+      "embedded_tab_in_quoted_field_row_count": 0,
+      "quote_parse_error_count": 0,
+      "existing_parser_failure_reason_histogram": {},
+      "min_whole_row_byte_length": 231,
+      "max_whole_row_byte_length": 851,
+      "first_structurally_failing_source_line_number": null
+    },
+    "failure": null,
+    "failure_boundary": "structural aggregate passed before first importer invocation"
+  },
+  "real_importer_smoke": {
+    "status": "BLOCKED",
+    "attempts": 1,
+    "runs_completed": 0,
+    "sampled_row_count": null,
+    "input_sha256": null,
+    "output_sha256": null,
+    "result_equality": null,
+    "summary_bindings_equal": null,
+    "observed_import_completeness": null,
+    "configured_provenance": {
+      "source_completeness": "COMPLETE",
+      "query_completeness": "COMPLETE",
+      "import_completeness": "PARTIAL"
+    },
+    "failure": "import-invalid-count",
+    "failure_boundary": "first real importer invocation after structural aggregate passed; no second run"
+  },
+  "base_revision_observed_locally": "ee2d1b479719009ff1d07829478f241e3f395f7c",
+  "source_data_retained": false,
+  "redistribution_ready": false,
+  "compatibility_scope": "one verifier-passed archive; exact prefix and structural aggregate passed, first importer invocation blocked on invalid count; no compatibility acceptance"
+}

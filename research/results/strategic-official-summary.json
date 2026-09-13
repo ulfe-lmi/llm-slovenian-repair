@@ -1,0 +1,211 @@
+{
+  "kind": "strategic independently extracted official score summary",
+  "new_model_calls": 0,
+  "metrics_are_not_custom_alignment": true,
+  "benchmarks": {
+    "multigec-train": {
+      "source_logical_path": "full-campaign8/official/multigec-train/SCORES.json",
+      "source_sha256": "d313140633ceffcb7ba4cb468aaffc59d84fc2c82e2cc24bb965266c8de74273",
+      "examples": 10,
+      "methods": {
+        "M0": {
+          "ERRANT": {
+            "F0.5": 0.0,
+            "fn": 792,
+            "fp": 0,
+            "precision": 1.0,
+            "recall": 0.0,
+            "tp": 0
+          },
+          "GLEU": 29.7105
+        },
+        "M1": {
+          "ERRANT": {
+            "F0.5": 0.4432,
+            "fn": 553,
+            "fp": 237,
+            "precision": 0.5021,
+            "recall": 0.3018,
+            "tp": 239
+          },
+          "GLEU": 55.8223
+        },
+        "M2": {
+          "ERRANT": {
+            "F0.5": 0.0957,
+            "fn": 774,
+            "fp": 19,
+            "precision": 0.4865,
+            "recall": 0.0227,
+            "tp": 18
+          },
+          "GLEU": 31.4699
+        },
+        "M3": {
+          "ERRANT": {
+            "F0.5": 0.0974,
+            "fn": 774,
+            "fp": 15,
+            "precision": 0.5455,
+            "recall": 0.0227,
+            "tp": 18
+          },
+          "GLEU": 31.5333
+        }
+      }
+    },
+    "multigec-dev": {
+      "source_logical_path": "full-campaign8/official/multigec-dev/SCORES.json",
+      "source_sha256": "479d3a79b1664cda5f546d419d30e819b0e506e9feba3ad6a4cf06d4fd19ba11",
+      "examples": 50,
+      "methods": {
+        "M0": {
+          "ERRANT": {
+            "F0.5": 0.0,
+            "fn": 3573,
+            "fp": 0,
+            "precision": 1.0,
+            "recall": 0.0,
+            "tp": 0
+          },
+          "GLEU": 49.8263
+        },
+        "M1": {
+          "ERRANT": {
+            "F0.5": 0.456,
+            "fn": 2543,
+            "fp": 900,
+            "precision": 0.5337,
+            "recall": 0.2883,
+            "tp": 1030
+          },
+          "GLEU": 64.9078
+        },
+        "M2": {
+          "ERRANT": {
+            "F0.5": 0.0963,
+            "fn": 3492,
+            "fp": 77,
+            "precision": 0.5127,
+            "recall": 0.0227,
+            "tp": 81
+          },
+          "GLEU": 50.9906
+        },
+        "M3": {
+          "ERRANT": {
+            "F0.5": 0.0967,
+            "fn": 3493,
+            "fp": 61,
+            "precision": 0.5674,
+            "recall": 0.0224,
+            "tp": 80
+          },
+          "GLEU": 50.9331
+        }
+      }
+    },
+    "solar-canonical": {
+      "source_logical_path": "full-campaign8/official/solar-canonical/SCORES.json",
+      "source_sha256": "b3f6ad1f621b9ac0f79138024652b8d3192c16ade22ccb615a34bb06e8d30fa8",
+      "examples": 109,
+      "methods": {
+        "M0": {
+          "ERRANT": {
+            "F0.5": 0.0,
+            "fn": 7951,
+            "fp": 0,
+            "precision": 1.0,
+            "recall": 0.0,
+            "tp": 0
+          },
+          "GLEU": 49.0726
+        },
+        "M1": {
+          "ERRANT": {
+            "F0.5": 0.4484,
+            "fn": 5755,
+            "fp": 1938,
+            "precision": 0.5312,
+            "recall": 0.2762,
+            "tp": 2196
+          },
+          "GLEU": 64.1473
+        },
+        "M2": {
+          "ERRANT": {
+            "F0.5": 0.0849,
+            "fn": 7789,
+            "fp": 235,
+            "precision": 0.4081,
+            "recall": 0.0204,
+            "tp": 162
+          },
+          "GLEU": 50.3534
+        },
+        "M3": {
+          "ERRANT": {
+            "F0.5": 0.0845,
+            "fn": 7793,
+            "fp": 191,
+            "precision": 0.4527,
+            "recall": 0.0199,
+            "tp": 158
+          },
+          "GLEU": 50.3398
+        }
+      }
+    },
+    "dassle": {
+      "source_logical_path": "full-campaign8/official/dassle/SCORES.json",
+      "source_sha256": "e944ad5d5e34149ef7261fb2117ffc92bbc2e366b5a054a519dce809587906ad",
+      "examples": 7381,
+      "methods": {
+        "M0": {
+          "ERRANT": {
+            "F0.5": 0.0,
+            "fn": 8578,
+            "fp": 0,
+            "precision": 1.0,
+            "recall": 0.0,
+            "tp": 0
+          },
+          "GLEU": 67.9624
+        },
+        "M1": {
+          "ERRANT": {
+            "F0.5": 0.3883,
+            "fn": 6287,
+            "fp": 2940,
+            "precision": 0.438,
+            "recall": 0.2671,
+            "tp": 2291
+          },
+          "GLEU": 74.7351
+        },
+        "M2": {
+          "ERRANT": {
+            "F0.5": 0.3003,
+            "fn": 7735,
+            "fp": 521,
+            "precision": 0.618,
+            "recall": 0.0983,
+            "tp": 843
+          },
+          "GLEU": 71.4808
+        },
+        "M3": {
+          "ERRANT": {
+            "F0.5": 0.3103,
+            "fn": 7742,
+            "fp": 387,
+            "precision": 0.6836,
+            "recall": 0.0975,
+            "tp": 836
+          },
+          "GLEU": 71.4226
+        }
+      }
+    }
+  }
+}
