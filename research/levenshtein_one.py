@@ -47,15 +47,27 @@ def operation_for_one_edit(source: str, candidate: str) -> Operation | None:
     """Classify a distance-one pair, returning ``None`` for every other pair."""
     if not _word_shaped(source) or not _word_shaped(candidate):
         return None
-    if source == candidate or standard_levenshtein_distance(source, candidate) != 1:
+    if source == candidate:
         return None
     if len(candidate) == len(source):
-        return SUBSTITUTION
+        return SUBSTITUTION if sum(left != right for left, right in zip(source, candidate)) == 1 else None
     if len(candidate) == len(source) + 1:
-        return INSERTION
+        shorter, longer = source, candidate
+        offset = 0
+        while offset < len(shorter) and shorter[offset] == longer[offset]:
+            offset += 1
+        if longer[offset + 1 :] == shorter[offset:]:
+            return INSERTION
+        return None
     if len(candidate) + 1 == len(source):
-        return DELETION
-    raise AssertionError("distance-one length delta must be one")
+        shorter, longer = candidate, source
+        offset = 0
+        while offset < len(shorter) and shorter[offset] == longer[offset]:
+            offset += 1
+        if shorter[offset:] == longer[offset + 1 :]:
+            return DELETION
+        return None
+    return None
 
 
 def deletion_signatures(value: str) -> tuple[str, ...]:
@@ -65,7 +77,7 @@ def deletion_signatures(value: str) -> tuple[str, ...]:
     return tuple(value[:index] + value[index + 1 :] for index in range(len(value)))
 
 
-def build_deletion_signature_index(vocabulary: Iterable[str]) -> dict[str, tuple[str, ...]]:
+def build_deletion_signature_index(vocabulary: Iterable[str]) -> dict[str, set[str]]:
     """Index unique word-shaped vocabulary forms by every deletion signature."""
     index: defaultdict[str, set[str]] = defaultdict(set)
     for form in set(vocabulary):
@@ -73,7 +85,21 @@ def build_deletion_signature_index(vocabulary: Iterable[str]) -> dict[str, tuple
             continue
         for signature in deletion_signatures(form):
             index[signature].add(form)
-    return {signature: tuple(sorted(forms)) for signature, forms in index.items()}
+    return dict(index)
+
+
+def vocabulary_code_points(vocabulary: Iterable[str]) -> tuple[str, ...]:
+    """Return the exact code-point alphabet occurring in word-shaped forms."""
+    return tuple(
+        sorted(
+            {
+                character
+                for form in vocabulary
+                if _word_shaped(form)
+                for character in form
+            }
+        )
+    )
 
 
 def distance_one_candidates(
@@ -81,6 +107,7 @@ def distance_one_candidates(
     vocabulary: Iterable[str],
     *,
     deletion_index: Mapping[str, Iterable[str]] | None = None,
+    alphabet: Iterable[str] | None = None,
 ) -> list[dict[str, str]]:
     """Return the complete deduplicated distance-one candidate union.
 
@@ -91,27 +118,36 @@ def distance_one_candidates(
     """
     if not _word_shaped(lookup_form):
         return []
-    forms = {form for form in vocabulary if _word_shaped(form)}
-    index = deletion_index or build_deletion_signature_index(forms)
+    if isinstance(vocabulary, (set, frozenset)):
+        # The research driver has already verified the vocabulary as a set of
+        # exact forms.  Reusing it avoids copying 141k entries per target.
+        forms = vocabulary
+    else:
+        forms = {form for form in vocabulary if _word_shaped(form)}
     possible: set[str] = set()
 
-    # Insertion into the source: deleting one code point from the vocabulary
-    # candidate yields the source.
-    possible.update(index.get(lookup_form, ()))
-
-    # Deletion from the source: one source deletion is itself a vocabulary form.
+    # Deletion from the source is directly enumerable.  For substitution and
+    # insertion, every code point in a matching vocabulary form must occur in
+    # the finite vocabulary alphabet; membership checks make this complete
+    # without constructing a global signature index for every target.
     possible.update(
         signature for signature in deletion_signatures(lookup_form) if signature in forms
     )
-
-    # Substitution: source and candidate share a deletion signature.  The
-    # final distance check is intentional; repeated code points can create
-    # shared signatures that do not represent a substitution.
-    for signature in deletion_signatures(lookup_form):
-        possible.update(index.get(signature, ()))
+    if alphabet is None:
+        index = deletion_index or build_deletion_signature_index(forms)
+        possible.update(index.get(lookup_form, ()))
+        for signature in deletion_signatures(lookup_form):
+            possible.update(index.get(signature, ()))
+    else:
+        for position in range(len(lookup_form)):
+            for character in alphabet:
+                possible.add(lookup_form[:position] + character + lookup_form[position + 1 :])
+        for position in range(len(lookup_form) + 1):
+            for character in alphabet:
+                possible.add(lookup_form[:position] + character + lookup_form[position:])
 
     result: list[dict[str, str]] = []
-    for form in sorted(possible):
+    for form in sorted(possible & forms):
         operation = operation_for_one_edit(lookup_form, form)
         if operation is not None:
             result.append({"text": form, "operation": operation})

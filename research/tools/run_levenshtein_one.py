@@ -203,7 +203,7 @@ def build_population(
     }
     entering_counts: Counter[str] = Counter()
     lookup_seconds = 0.0
-    index = distance_one.build_deletion_signature_index(vocabulary)
+    deletion_index = distance_one.build_deletion_signature_index(vocabulary)
     for phase, cases in records.items():
         for case in cases:
             baseline = case.get("baseline")
@@ -227,15 +227,33 @@ def build_population(
                 if not isinstance(original, str) or original[start:end] != text:
                     raise ExperimentError("frozen target slice is stale")
                 lookup = text.casefold()
-                old_forms = baseline_driver.qualifying_candidates(
-                    lookup, buckets.get(len(lookup), ())
+                all_one_edit_forms = distance_one.distance_one_candidates(
+                    lookup, vocabulary, deletion_index=deletion_index
                 )
-                if old_forms != target.get("candidate_forms"):
+                old_forms = []
+                for item in all_one_edit_forms:
+                    if item["operation"] != distance_one.SUBSTITUTION:
+                        continue
+                    differences = [
+                        position
+                        for position, (left, right) in enumerate(
+                            zip(lookup, item["text"], strict=True)
+                        )
+                        if left != right
+                    ]
+                    if (
+                        len(differences) == 1
+                        and lookup[differences[0]].isalpha()
+                        and item["text"][differences[0]].isalpha()
+                    ):
+                        old_forms.append(item["text"])
+                frozen_old_forms = target.get("candidate_forms")
+                if not isinstance(frozen_old_forms, list) or set(old_forms) != set(frozen_old_forms):
                     raise ExperimentError("007-i substitution identity drift")
                 old_cardinality = _cardinality(len(old_forms))
                 started = time.monotonic()
                 new_forms = distance_one.distance_one_candidates(
-                    lookup, vocabulary, deletion_index=index
+                    lookup, vocabulary, deletion_index=deletion_index
                 )
                 lookup_seconds += time.monotonic() - started
                 new_cardinality = _cardinality(len(new_forms))

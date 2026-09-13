@@ -11,6 +11,7 @@ from research.levenshtein_one import (
     distance_one_candidates,
     operation_for_one_edit,
     standard_levenshtein_distance,
+    vocabulary_code_points,
 )
 
 
@@ -36,7 +37,9 @@ class LevenshteinOneTests(unittest.TestCase):
     def test_complete_union_is_deduplicated_and_operation_labeled(self) -> None:
         vocabulary = {"abc", "axc", "abxc", "ac", "acb", "axd", "abc"}
         index = build_deletion_signature_index(vocabulary)
-        candidates = distance_one_candidates("abc", vocabulary, deletion_index=index)
+        candidates = distance_one_candidates(
+            "abc", vocabulary, deletion_index=index, alphabet=vocabulary_code_points(vocabulary)
+        )
         self.assertEqual(
             candidates,
             [
