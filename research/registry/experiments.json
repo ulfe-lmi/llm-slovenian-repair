@@ -4274,6 +4274,181 @@
       ]
     },
     {
+      "experiment_id": "007-j-levenshtein-one-contextual-validator",
+      "logical_root": "007-j-levenshtein-one-contextual-validator-20260913",
+      "kind": "experiment",
+      "variation": "standard Unicode-code-point Levenshtein-distance-one expansion with exact 007-i observation reuse",
+      "status": "COMPLETE",
+      "question": "Does complete standard distance-one candidate generation improve contextual validation coverage after the unchanged validator and fallback?",
+      "evidence_status": "private-evidence-with-data-free-public-projection",
+      "public_report": "research/reports/007-j-levenshtein-one-contextual-validator.md",
+      "public_configuration": "research/configs/007-j-levenshtein-one-contextual-validator.json",
+      "public_metrics": "research/results/007-j-levenshtein-one-contextual-validator.json.gz",
+      "source_manifest": "research/registry/source-manifest.json",
+      "child_runs": [],
+      "frozen_choices": {
+        "source": "frozen 007-i inputs, cases, vocabulary, candidate observations and validator protocol",
+        "distance": "standard unit-cost Levenshtein over Python Unicode code points; no normalization or transposition",
+        "reused_observations": 542,
+        "fresh_call_budget": 493,
+        "fresh_calls_dispatched": 493,
+        "dataset_contents_published": false
+      },
+      "metrics": {
+        "cases": 2973,
+        "method_records": 1035,
+        "model_calls": 493,
+        "first_calls": 493,
+        "retry_calls": 0,
+        "review_calls": 493,
+        "applied_edits": 1085,
+        "exact_gold_repairs": 822,
+        "missed_gold_errors": 693,
+        "changed_controls": 93,
+        "unchanged_controls": 1393,
+        "new_model_calls": 493,
+        "inherited_calls": 542,
+        "scheduled_candidates": 1035,
+        "validator_observation_records": 1035,
+        "validator_dispatch_records": 493,
+        "decision_counts": {
+          "USE_CANDIDATE": 601,
+          "KEEP_ORIGINAL": 370,
+          "UNCERTAIN": 6,
+          "PROTOCOL_OR_OPERATIONAL_FAILURE": 58
+        },
+        "fresh_decision_counts": {
+          "USE_CANDIDATE": 289,
+          "KEEP_ORIGINAL": 172,
+          "UNCERTAIN": 3,
+          "PROTOCOL_OR_OPERATIONAL_FAILURE": 29
+        },
+        "uncertain_deliveries": 0,
+        "entering_targets": {
+          "dassle-spelling": 2001,
+          "dassle-spelling-preservation": 920
+        },
+        "candidate_count": 1035,
+        "candidate_counts": {
+          "dassle-spelling": 826,
+          "dassle-spelling-preservation": 209
+        },
+        "reused_observations": 542,
+        "fresh_call_budget": 493,
+        "fresh_calls_dispatched": 493,
+        "operation_counts": {
+          "SUBSTITUTION": 542,
+          "INSERTION": 172,
+          "DELETION": 321
+        },
+        "transition_matrix": {
+          "dassle-spelling": {
+            "C=0 -> C=0": 524,
+            "C=0 -> C=1": 403,
+            "C=0 -> C>1": 84,
+            "C=1 -> same unique candidate": 423,
+            "C=1 -> different unique candidate": 0,
+            "C=1 -> C>1": 148,
+            "C>1 -> C=1": 0,
+            "C>1 -> C>1": 419
+          },
+          "dassle-spelling-preservation": {
+            "C=0 -> C=0": 480,
+            "C=0 -> C=1": 90,
+            "C=0 -> C>1": 18,
+            "C=1 -> same unique candidate": 119,
+            "C=1 -> different unique candidate": 0,
+            "C=1 -> C>1": 45,
+            "C>1 -> C=1": 0,
+            "C>1 -> C>1": 168
+          }
+        },
+        "fresh_latency_seconds": {
+          "n": 493,
+          "sum": 5283.875946435757,
+          "mean": 10.71780110838896,
+          "median": 8.496985418023542,
+          "p95": 24.88524721498834,
+          "max": 58.17827162001049
+        },
+        "fresh_reasoning_tokens": {
+          "n": 464,
+          "sum": 217663,
+          "mean": 469.10129310344826,
+          "median": 403.0,
+          "p95": 973,
+          "max": 1784
+        },
+        "fresh_output_tokens": {
+          "n": 464,
+          "sum": 221025,
+          "mean": 476.3469827586207,
+          "median": 411.0,
+          "p95": 981,
+          "max": 1792
+        },
+        "validated_fallback": {
+          "dassle-spelling": {
+            "tp": 822,
+            "fp": 154,
+            "fn": 693,
+            "precision": 0.8422131147540983,
+            "recall": 0.5425742574257426,
+            "F0.5": 0.7584425170695701,
+            "operational_failures": 32,
+            "introduced_edit_units": 977
+          },
+          "dassle-spelling-preservation": {
+            "tp": 0,
+            "fp": 101,
+            "fn": 0,
+            "precision": 0.0,
+            "recall": 0.0,
+            "F0.5": 0.0,
+            "operational_failures": 23,
+            "introduced_edit_units": 101,
+            "preservation_changed_cases": 93
+          }
+        },
+        "comparison_to_007i_best": {
+          "spelling_tp_delta": 95,
+          "spelling_fp_delta": -18,
+          "spelling_fn_delta": -95,
+          "spelling_F0.5_delta": 0.04723140378449875,
+          "preservation_changed_cases_delta": 2,
+          "preservation_changed_edit_units_delta": 4,
+          "protected_differences": 0,
+          "outside_span_differences": 0
+        }
+      },
+      "evidence_files": [
+        {
+          "logical_path": "research/configs/007-j-levenshtein-one-contextual-validator.json",
+          "sha256": "d82cbe3773917de8ee121be4f57ca54c58090ccee21d177642cb584d4d27a4a8",
+          "size": 5202,
+          "disposition": "data-free public projection"
+        },
+        {
+          "logical_path": "research/results/007-j-levenshtein-one-contextual-validator.json.gz",
+          "sha256": "f8643bcc01df7856218f3e66411c836469d9ecac91a1b6ffa6a9928044998c57",
+          "size": 11047,
+          "disposition": "data-free public projection"
+        },
+        {
+          "logical_path": "research/reports/007-j-levenshtein-one-contextual-validator.md",
+          "sha256": "9f0638684ee873f33d7be442b938d2c4d1fac693ea351d4fb2c05f160c661097",
+          "size": 6019,
+          "disposition": "data-free public projection"
+        }
+      ],
+      "conclusion": "Under the supplied-reference scorer, the expanded candidate set improved aggregate spelling validated+fallback TP by 95, reduced FP by 18 and raised F0.5 by 0.04723140378449875, while initial-u/v declined and preservation changed cases increased by 2; this is not a semantic or product acceptance claim.",
+      "pending_evidence": [
+        "independent review of the aggregate and final report",
+        "human semantic labels for accepted and non-reference proposals",
+        "product, deployment and linguistic benefit evidence remain separate gates"
+      ]
+    },
+    {
       "experiment_id": "007-i-contextual-validator",
       "logical_root": "007-i-contextual-validator-20260912",
       "kind": "experiment",
