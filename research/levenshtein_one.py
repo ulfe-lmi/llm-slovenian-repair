@@ -9,9 +9,8 @@ from __future__ import annotations
 
 from collections import defaultdict
 from collections.abc import Iterable, Mapping
-from typing import TypeAlias
 
-Operation: TypeAlias = str
+type Operation = str
 SUBSTITUTION: Operation = "SUBSTITUTION"
 INSERTION: Operation = "INSERTION"
 DELETION: Operation = "DELETION"
@@ -50,7 +49,11 @@ def operation_for_one_edit(source: str, candidate: str) -> Operation | None:
     if source == candidate:
         return None
     if len(candidate) == len(source):
-        return SUBSTITUTION if sum(left != right for left, right in zip(source, candidate)) == 1 else None
+        return (
+            SUBSTITUTION
+            if sum(left != right for left, right in zip(source, candidate, strict=True)) == 1
+            else None
+        )
     if len(candidate) == len(source) + 1:
         shorter, longer = source, candidate
         offset = 0
@@ -91,14 +94,7 @@ def build_deletion_signature_index(vocabulary: Iterable[str]) -> dict[str, set[s
 def vocabulary_code_points(vocabulary: Iterable[str]) -> tuple[str, ...]:
     """Return the exact code-point alphabet occurring in word-shaped forms."""
     return tuple(
-        sorted(
-            {
-                character
-                for form in vocabulary
-                if _word_shaped(form)
-                for character in form
-            }
-        )
+        sorted({character for form in vocabulary if _word_shaped(form) for character in form})
     )
 
 
@@ -118,7 +114,7 @@ def distance_one_candidates(
     """
     if not _word_shaped(lookup_form):
         return []
-    if isinstance(vocabulary, (set, frozenset)):
+    if isinstance(vocabulary, set | frozenset):
         # The research driver has already verified the vocabulary as a set of
         # exact forms.  Reusing it avoids copying 141k entries per target.
         forms = vocabulary

@@ -44,6 +44,26 @@ EXPECTED_PRIOR_REQUEST_TREE = "d46b47754e2ba158ea099bfe556a84164e534610233426819
 EXPECTED_PROFILE = "c79fd658db9c2006c0e542a12946962880e4ee3cec9dc57bc987b62d26c2dd60"
 EXPECTED_PROMPT = protocol.FROZEN_PROMPT_SHA256
 EXPECTED_IMPLEMENTATION_BASE = "a4d3592e25a792dd3f8d65a729c54a08032a88e3"
+NATIVE_RUNTIME_PARENT = Path(
+    "/home/ubuntu/.local/share/llm-slovenian-repair/research-runtime-20260911.YJemoq"
+)
+SCRATCH_NAME_PREFIX = EXPERIMENT_ID + "-recovery."
+EXPECTED_REQUEST_FIELDS = [
+    "model",
+    "stream",
+    "store",
+    "input",
+    "include_reasoning",
+    "reasoning",
+]
+EXPECTED_PARSER = {
+    "status": "completed",
+    "assistant_output_text_fields": 1,
+    "choices": sorted(protocol.CHOICES),
+    "surrounding_whitespace_only": True,
+    "duplicate_json_keys": "reject",
+    "token_accounting": "input/output/reasoning nonnegative integers",
+}
 
 TRANSITION_EXPECTED = {
     "dassle-spelling": {
@@ -168,6 +188,14 @@ def source_root_identity(source_root: Path) -> dict[str, str]:
 
 
 def ensure_scratch(scratch: Path) -> None:
+    scratch = scratch.absolute()
+    if scratch.parent != NATIVE_RUNTIME_PARENT:
+        raise ExperimentError(
+            "007-j private root must be directly beneath the native runtime parent"
+        )
+    require_private_dir(NATIVE_RUNTIME_PARENT)
+    if not scratch.name.startswith(SCRATCH_NAME_PREFIX):
+        raise ExperimentError("007-j private root name is not a unique recovery root")
     if scratch.exists() or scratch.is_symlink():
         require_private_dir(scratch)
         return
@@ -189,6 +217,14 @@ def _case_path(root: Path, phase: str, index: int) -> Path:
     return root / "cases" / phase / f"{index:06d}.json"
 
 
+def is_english_review_suppressed(target: dict[str, Any]) -> bool:
+    """Return the frozen English-policy suppression decision for a target."""
+    english = target.get("english")
+    if not isinstance(english, dict) or type(english.get("review_suppressed")) is not bool:
+        raise ExperimentError("frozen target lacks the English suppression decision")
+    return english["review_suppressed"]
+
+
 def build_population(
     records: dict[str, list[dict[str, Any]]],
     vocabulary: set[str],
@@ -198,9 +234,7 @@ def build_population(
     transitions: dict[str, Counter[str]] = {
         phase: Counter({key: 0 for key in TRANSITION_EXPECTED[phase]}) for phase in PHASES
     }
-    operation_counts: dict[str, Counter[str]] = {
-        phase: Counter() for phase in PHASES
-    }
+    operation_counts: dict[str, Counter[str]] = {phase: Counter() for phase in PHASES}
     entering_counts: Counter[str] = Counter()
     lookup_seconds = 0.0
     deletion_index = distance_one.build_deletion_signature_index(vocabulary)
@@ -213,14 +247,17 @@ def build_population(
             for ordinal, target in enumerate(targets):
                 if not isinstance(target, dict):
                     raise ExperimentError("frozen target is not an object")
-                english = target.get("english")
                 candidate = target.get("candidate")
-                if not isinstance(english, dict) or not isinstance(candidate, dict):
+                if not isinstance(candidate, dict):
                     raise ExperimentError("frozen target lacks candidate/English policy")
-                if english.get("review_suppressed"):
+                if is_english_review_suppressed(target):
                     continue
                 entering_counts[phase] += 1
-                start, end, text = candidate.get("start"), candidate.get("end"), candidate.get("text")
+                start, end, text = (
+                    candidate.get("start"),
+                    candidate.get("end"),
+                    candidate.get("text"),
+                )
                 if type(start) is not int or type(end) is not int or not isinstance(text, str):
                     raise ExperimentError("frozen target coordinates are invalid")
                 original = baseline.get("input")
@@ -248,7 +285,9 @@ def build_population(
                     ):
                         old_forms.append(item["text"])
                 frozen_old_forms = target.get("candidate_forms")
-                if not isinstance(frozen_old_forms, list) or set(old_forms) != set(frozen_old_forms):
+                if not isinstance(frozen_old_forms, list) or set(old_forms) != set(
+                    frozen_old_forms
+                ):
                     raise ExperimentError("007-i substitution identity drift")
                 old_cardinality = _cardinality(len(old_forms))
                 started = time.monotonic()
@@ -296,7 +335,9 @@ def build_population(
         raise ExperimentError(f"entering population mismatch: {dict(entering_counts)}")
     if {phase: dict(values) for phase, values in transitions.items()} != TRANSITION_EXPECTED:
         raise ExperimentError("candidate transition matrix mismatch")
-    if {phase: len([item for item in population if item["phase"] == phase]) for phase in PHASES} != EXPECTED_CANDIDATES:
+    if {
+        phase: len([item for item in population if item["phase"] == phase]) for phase in PHASES
+    } != EXPECTED_CANDIDATES:
         raise ExperimentError("new unique candidate population mismatch")
     if Counter(item["operation"] for item in population) != Counter(EXPECTED_OPERATIONS):
         raise ExperimentError("new operation population mismatch")
@@ -320,7 +361,11 @@ def prior_population_and_observations(
     if digest != EXPECTED_PRIOR_CANDIDATES:
         raise ExperimentError("007-i candidate manifest identity changed")
     old_observations = validator_driver.load_completed_observations(source_root, old_population)
-    return old_population, old_observations, {"candidate_manifest_sha256": digest, "manifest": manifest}
+    return (
+        old_population,
+        old_observations,
+        {"candidate_manifest_sha256": digest, "manifest": manifest},
+    )
 
 
 def reuse_observations(
@@ -330,6 +375,7 @@ def reuse_observations(
     old_population: list[dict[str, Any]],
     old_observations: dict[str, dict[str, Any]],
     old_configuration: dict[str, Any],
+    deployment: dict[str, Any],
 ) -> tuple[dict[str, dict[str, Any]], list[dict[str, Any]], list[dict[str, Any]]]:
     old_by_id = {protocol.candidate_path_id(item): item for item in old_population}
     reused: dict[str, dict[str, Any]] = {}
@@ -343,33 +389,22 @@ def reuse_observations(
             item["sentence"], item["candidate"]["text"], item["mechanical_edit"][2]
         )
         request_bytes = canonical_bytes(body)
-        exact = old_item is not None and item["operation"] == "SUBSTITUTION"
-        if exact:
-            exact = (
-                old_item["candidate"] == item["candidate"]
-                and old_item["sentence"] == item["sentence"]
-                and old_item["mechanical_edit"] == item["mechanical_edit"]
-            )
         old_request = source_root / "requests" / candidate_id / "request.json"
         old_raw = source_root / "requests" / candidate_id / "raw-response.json"
         old_observation = old_observations.get(candidate_id)
-        if exact:
-            exact = (
-                old_request.read_bytes() == request_bytes
-                and old_observation is not None
-                and old_observation.get("request_sha256") == sha256_bytes(request_bytes)
-                and old_configuration.get("prompt", {}).get("sha256") == EXPECTED_PROMPT
-                and old_configuration.get("deployment", {}).get("model") == protocol.MODEL
-                and old_configuration.get("deployment", {}).get("profile_sha256") == EXPECTED_PROFILE
-                and old_configuration.get("request", {}).get("stream") is False
-                and old_configuration.get("request", {}).get("store") is False
-                and old_configuration.get("request", {}).get("include_reasoning") is True
-                and old_configuration.get("request", {}).get("reasoning_effort") == protocol.EFFORT
-                and old_configuration.get("limits", {}).get("attempts_per_candidate") == 1
-                and old_configuration.get("limits", {}).get("resampling") is False
-                and old_raw.is_file()
-            )
-        if exact:
+        old_request_bytes = old_request.read_bytes() if old_request.is_file() else None
+        old_raw_sha256 = sha256_file(old_raw) if old_raw.is_file() else None
+        reason = reuse_identity_reason(
+            item,
+            old_item,
+            request_bytes,
+            old_request_bytes,
+            old_observation,
+            old_raw_sha256,
+            old_configuration,
+            deployment,
+        )
+        if reason is None:
             target_key = (item["phase"], item["case_index"])
             if target_key not in source_case_hashes:
                 source_case_hashes[target_key] = sha256_file(
@@ -395,6 +430,75 @@ def reuse_observations(
     if len(reused) != EXPECTED_REUSED or len(fresh) != EXPECTED_FRESH:
         raise ExperimentError(f"reuse/fresh population mismatch: {len(reused)}/{len(fresh)}")
     return reused, reuse_records, fresh
+
+
+def reuse_identity_reason(
+    item: dict[str, Any],
+    old_item: dict[str, Any] | None,
+    request_bytes: bytes,
+    old_request_bytes: bytes | None,
+    old_observation: dict[str, Any] | None,
+    old_raw_sha256: str | None,
+    old_configuration: dict[str, Any],
+    deployment: dict[str, Any],
+) -> str | None:
+    """Return a safe reason when an observation cannot be reused exactly."""
+    if old_item is None:
+        return "missing-source-candidate"
+    if item.get("operation") != "SUBSTITUTION":
+        return "operation-is-not-substitution"
+    for key in (
+        "phase",
+        "case_index",
+        "case_id",
+        "target_ordinal",
+        "target_start",
+        "target_end",
+        "candidate",
+        "candidate_form",
+        "mechanical_edit",
+        "sentence",
+    ):
+        if old_item.get(key) != item.get(key):
+            return "source-candidate-identity-mismatch"
+    if old_request_bytes != request_bytes:
+        return "request-bytes-mismatch"
+    if not isinstance(old_observation, dict):
+        return "missing-source-observation"
+    if old_observation.get("request_sha256") != sha256_bytes(request_bytes):
+        return "observation-request-hash-mismatch"
+    if old_raw_sha256 is None or old_observation.get("response_sha256") != old_raw_sha256:
+        return "observation-response-hash-mismatch"
+    if old_configuration.get("prompt", {}).get("sha256") != EXPECTED_PROMPT:
+        return "prompt-identity-mismatch"
+    old_deployment = old_configuration.get("deployment")
+    if not isinstance(old_deployment, dict):
+        return "deployment-identity-mismatch"
+    for key in ("model", "profile_sha256", "profile_path", "endpoint", "protocol"):
+        if old_deployment.get(key) != deployment.get(key):
+            return "deployment-identity-mismatch"
+    old_request = old_configuration.get("request")
+    if (
+        not isinstance(old_request, dict)
+        or old_request.get("fields") != EXPECTED_REQUEST_FIELDS
+        or old_request.get("stream") is not False
+        or old_request.get("store") is not False
+        or old_request.get("include_reasoning") is not True
+        or old_request.get("reasoning_effort") != protocol.EFFORT
+    ):
+        return "request-policy-identity-mismatch"
+    if old_configuration.get("parser") != EXPECTED_PARSER:
+        return "parser-identity-mismatch"
+    old_limits = old_configuration.get("limits")
+    if (
+        not isinstance(old_limits, dict)
+        or old_limits.get("timeout_seconds") != protocol.TIMEOUT_SECONDS
+        or old_limits.get("response_bound_bytes") != protocol.MAX_RESPONSE_BYTES
+        or old_limits.get("attempts_per_candidate") != 1
+        or old_limits.get("resampling") is not False
+    ):
+        return "limit-identity-mismatch"
+    return None
 
 
 def deployment_from_inputs(
@@ -481,6 +585,11 @@ def build_configuration(
             "entering_targets": analysis["entering_targets"],
             "transition_matrix": analysis["transition_matrix"],
             "vocabulary_forms": analysis["vocabulary_forms"],
+            "runtime": {
+                "candidate_search_seconds": analysis["lookup_seconds"],
+                "vocabulary_loading_seconds": analysis["vocabulary_load_seconds"],
+                "vocabulary_rows": analysis["vocabulary_rows"],
+            },
         },
         "code_identity": {"sha256": code_paths, "head_blobs": original_identity["head_blobs"]},
         "candidate_rule": {
@@ -498,27 +607,29 @@ def build_configuration(
             "candidate_manifest_sha256": EXPECTED_PRIOR_CANDIDATES,
             "transition_assertion": True,
         },
-        "prompt": {"sha256": EXPECTED_PROMPT, "template": "owner-supplied frozen 007-i validator prompt"},
+        "prompt": {
+            "sha256": EXPECTED_PROMPT,
+            "template": "owner-supplied frozen 007-i validator prompt",
+        },
         "deployment": deployment,
         "request": {
-            "fields": ["model", "stream", "store", "input", "include_reasoning", "reasoning"],
+            "fields": EXPECTED_REQUEST_FIELDS,
             "stream": False,
             "store": False,
             "include_reasoning": True,
             "reasoning_effort": protocol.EFFORT,
             "serializer": "canonical UTF-8 JSON with one final LF",
         },
-        "parser": {
-            "status": "completed",
-            "assistant_output_text_fields": 1,
-            "choices": sorted(protocol.CHOICES),
-            "surrounding_whitespace_only": True,
-            "duplicate_json_keys": "reject",
-            "token_accounting": "input/output/reasoning nonnegative integers",
-        },
+        "parser": EXPECTED_PARSER,
         "scheduling": {
             "workers": protocol.WORKERS,
-            "partition_key": ["phase", "case_index", "target_start", "target_end", "target_ordinal"],
+            "partition_key": [
+                "phase",
+                "case_index",
+                "target_start",
+                "target_end",
+                "target_ordinal",
+            ],
             "partition": "stable ordered position modulo worker count",
             "in_flight_per_worker": 1,
             "maximum_in_flight": protocol.WORKERS,
@@ -532,7 +643,12 @@ def build_configuration(
             "new_call_budget": EXPECTED_FRESH,
         },
         "persistence": {
-            "order": ["request bytes", "dispatch marker", "bounded raw response/timing", "parsed observation"],
+            "order": [
+                "request bytes",
+                "dispatch marker",
+                "bounded raw response/timing",
+                "parsed observation",
+            ],
             "interrupted_request": "INTERRUPTED_UNCERTAIN_DELIVERY_NO_RESAMPLE",
             "immutable_completed_observations": True,
             "reuse_records": "exact source/case/request/prompt/deployment identity required",
@@ -544,13 +660,27 @@ def build_configuration(
             "reuse_manifest_sha256": sha256_bytes(canonical_bytes(reuse_records)),
         },
         "projections": {
-            "validated_fallback": "USE_CANDIDATE supplied mechanical edit; all other choices use 007-i baseline fallback",
-            "validated_only": "USE_CANDIDATE supplied mechanical edit; all other choices leave original target",
+            "validated_fallback": (
+                "USE_CANDIDATE supplied mechanical edit; all other choices use "
+                "007-i baseline fallback"
+            ),
+            "validated_only": (
+                "USE_CANDIDATE supplied mechanical edit; all other choices leave original target"
+            ),
             "baseline_calls_resampled": False,
             "shared_observation": True,
         },
-        "scorer": {"implementation_head": source_configuration.get("prior_007h_head"), "attribution": "unchanged 007-i scorer"},
-        "privacy": {"public": "aggregate metrics, hashes, transition and operation counts only", "private": "sentences, targets, candidates, prompts, responses, endpoint/profile and credentials"},
+        "scorer": {
+            "implementation_head": source_configuration.get("prior_007h_head"),
+            "attribution": "unchanged 007-i scorer",
+        },
+        "privacy": {
+            "public": "aggregate metrics, hashes, transition and operation counts only",
+            "private": (
+                "sentences, targets, candidates, prompts, responses, endpoint/profile "
+                "and credentials"
+            ),
+        },
         "no_tuning_or_resampling": True,
         "private_evidence_root": str(scratch),
     }
@@ -575,7 +705,9 @@ def persist_preparation(
             "status": "FROZEN_BEFORE_LIVE_EXECUTION",
             "run_id": RUN_ID,
             "configuration_sha256": configuration_sha,
-            "candidate_manifest_sha256": configuration["source_identity"]["candidate_manifest_sha256"],
+            "candidate_manifest_sha256": configuration["source_identity"][
+                "candidate_manifest_sha256"
+            ],
             "scheduled_candidates": len(population),
             "reused_observations": len(reuse_records),
             "fresh_candidates": len(fresh),
@@ -603,10 +735,15 @@ def load_prepared(scratch: Path) -> dict[str, Any]:
     manifest = read_json(scratch / "CANDIDATE-MANIFEST.json")
     fresh = read_json(scratch / "FRESH-CALL-MANIFEST.json")
     reuse_records = read_json(scratch / "REUSE-RECORDS.json")
-    if not isinstance(configuration, dict) or not all(isinstance(value, list) for value in (population, manifest, fresh, reuse_records)):
+    if not isinstance(configuration, dict) or not all(
+        isinstance(value, list) for value in (population, manifest, fresh, reuse_records)
+    ):
         raise ExperimentError("prepared private artifacts are malformed")
     recomputed, digest = protocol.candidate_manifest(population)
-    if recomputed != manifest or digest != configuration["source_identity"]["candidate_manifest_sha256"]:
+    if (
+        recomputed != manifest
+        or digest != configuration["source_identity"]["candidate_manifest_sha256"]
+    ):
         raise ExperimentError("prepared candidate manifest mismatch")
     return {
         "configuration": configuration,
@@ -623,8 +760,10 @@ def execute_fresh(
     fresh: list[dict[str, Any]],
     endpoint: str,
     credential_env: str,
+    *,
+    transport: protocol.ResponseTransport | None = None,
 ) -> dict[int, dict[str, Any]]:
-    if not os.environ.get(credential_env):
+    if transport is None and not os.environ.get(credential_env):
         raise ExperimentError("LIVE_CREDENTIAL_MISSING")
     partitions = protocol.partitions(fresh)
     statuses: dict[int, dict[str, Any]] = {}
@@ -636,7 +775,7 @@ def execute_fresh(
         failures = 0
         for item in partitions[worker_id]:
             observation = validator_driver._call_one(
-                scratch, item, endpoint, credential_env
+                scratch, item, endpoint, credential_env, transport=transport
             )
             observations += 1
             dispatched += int(observation.get("dispatch") == "ATTEMPTED")
@@ -664,17 +803,37 @@ def execute_fresh(
             "run_id": RUN_ID,
             "scheduled_candidates": len(fresh),
             "observation_records": len(fresh),
-            "dispatched_http_requests": sum(value["dispatched_http"] for value in statuses.values()),
-            "protocol_or_operational_failures": sum(value["failures"] for value in statuses.values()),
+            "dispatched_http_requests": sum(
+                value["dispatched_http"] for value in statuses.values()
+            ),
+            "protocol_or_operational_failures": sum(
+                value["failures"] for value in statuses.values()
+            ),
             "workers": protocol.WORKERS,
             "worker_runtime": statuses,
         },
     )
-    immutable_json(scratch / "WORKER-RESULT.json", statuses)
+    worker_result = scratch / "WORKER-RESULT.json"
+    if worker_result.exists() or worker_result.is_symlink():
+        require_private_file(worker_result)
+        previous = read_json(worker_result)
+        if not isinstance(previous, dict):
+            raise ExperimentError("persisted worker result is malformed")
+        for worker_id, current in statuses.items():
+            old = previous.get(str(worker_id), previous.get(worker_id))
+            if not isinstance(old, dict) or any(
+                old.get(key) != current.get(key)
+                for key in ("worker", "assigned", "completed", "dispatched_http", "failures")
+            ):
+                raise ExperimentError("persisted worker assignment/result identity changed")
+    else:
+        immutable_json(worker_result, statuses)
     return statuses
 
 
-def load_fresh_observations(scratch: Path, fresh: list[dict[str, Any]]) -> dict[str, dict[str, Any]]:
+def load_fresh_observations(
+    scratch: Path, fresh: list[dict[str, Any]]
+) -> dict[str, dict[str, Any]]:
     observations: dict[str, dict[str, Any]] = {}
     for item in fresh:
         candidate_id = protocol.candidate_path_id(item)
@@ -724,31 +883,30 @@ def complete_result(
         uv_indices,
         worker_status,
     )
-    fresh_count = len(prepared["fresh"])
-    for phase_views in metrics["views"].values():
-        for view in phase_views.values():
-            baseline_calls = validator_driver.projected_call_counts(
-                [pair["saved"] for pair in pairs[view["phase"]]]
-            ) if "phase" in view else None
-            del baseline_calls
-            # make_views counts validator observations; only the new-call
-            # population is an added call in this experiment.  Reuse remains
-            # separately visible in the result and configuration.
-            for accounting in view["call_accounting"].values():
-                accounting["validator_observations"] = view["scheduled_candidates"]
-                accounting["validator_calls_reused"] = max(
-                    0, view["scheduled_candidates"] - fresh_count
+    reuse_ids = {record["candidate_id"] for record in prepared["reuse_records"]}
+    for phase_records in by_case.values():
+        for record in phase_records:
+            for target in record["validator_targets"]:
+                target["observation_source"] = (
+                    "reuse" if target["candidate_id"] in reuse_ids else "fresh"
                 )
-                accounting["validator_calls_added"] = min(fresh_count, view["scheduled_candidates"])
+    update_view_call_accounting(metrics, prepared["population"], reuse_ids, uv_indices)
+    metrics["candidate_analysis"] = candidate_analysis(by_case, prepared["population"])
     result = {
         "schema_version": 1,
         "experiment_id": EXPERIMENT_ID,
         "configuration_sha256": prepared["configuration_sha256"],
-        "candidate_manifest_sha256": prepared["configuration"]["source_identity"]["candidate_manifest_sha256"],
+        "candidate_manifest_sha256": prepared["configuration"]["source_identity"][
+            "candidate_manifest_sha256"
+        ],
         "case_identity_manifest_sha256": EXPECTED_PRIOR_CASES,
         "status": "COMPLETE",
         "metrics": metrics,
-        "reuse": {"observations": EXPECTED_REUSED, "fresh_calls": EXPECTED_FRESH, "total_observations": EXPECTED_TOTAL},
+        "reuse": {
+            "observations": EXPECTED_REUSED,
+            "fresh_calls": EXPECTED_FRESH,
+            "total_observations": EXPECTED_TOTAL,
+        },
         "source_root": str(source_root),
     }
     immutable_json(scratch / "CASE-RESULTS.json", by_case)
@@ -771,7 +929,37 @@ def complete_result(
     )
     report_sha = immutable_write(
         scratch / "REPORT.md",
-        ("# Private 007-j report\n\n" + json.dumps(result, ensure_ascii=False, sort_keys=True, indent=2) + "\n").encode("utf-8"),
+        (
+            "# Private 007-j report\n\n"
+            + json.dumps(result, ensure_ascii=False, sort_keys=True, indent=2)
+            + "\n"
+        ).encode("utf-8"),
+    )
+    for path in (
+        scratch / "CASE-RESULTS.json",
+        scratch / "RESULTS.json",
+        scratch / "MANIFEST.json",
+        scratch / "REPORT.md",
+    ):
+        require_private_file(path)
+    mutable_status(
+        scratch / "RUN-STATUS.json",
+        {
+            "status": "COMPLETE",
+            "run_id": RUN_ID,
+            "configuration_sha256": prepared["configuration_sha256"],
+            "candidate_manifest_sha256": result["candidate_manifest_sha256"],
+            "reused_observations": EXPECTED_REUSED,
+            "fresh_candidates": EXPECTED_FRESH,
+            "observation_records": len(observations),
+            "scheduled_candidates": EXPECTED_TOTAL,
+            "dispatched_http_requests": metrics["dispatched_http_requests"],
+            "uncertain_deliveries": metrics["uncertain_deliveries"],
+            "aggregate_artifacts_verified": True,
+            "private_results_sha256": result_sha,
+            "private_manifest_sha256": manifest_sha,
+            "private_report_sha256": report_sha,
+        },
     )
     result.update(
         {
@@ -783,12 +971,137 @@ def complete_result(
     return result
 
 
+def _empty_candidate_bucket() -> dict[str, Any]:
+    return {
+        "unique": 0,
+        "attribution": {"exact_reference": 0, "non_reference": 0, "unresolved": 0},
+        "validator": {
+            "USE_CANDIDATE": 0,
+            "KEEP_ORIGINAL": 0,
+            "UNCERTAIN": 0,
+            "FAILURE": 0,
+        },
+        "accepted": {"exact_reference": 0, "non_reference": 0, "unresolved": 0},
+        "rejected": {"exact_reference": 0, "non_reference": 0, "unresolved": 0},
+        "unresolved_attribution": 0,
+        "final_tp_fp_fn": {"TP": 0, "FP": 0, "FN": 0},
+        "final_unresolved": 0,
+        "reference_precision_among_accepted": {
+            "numerator": 0,
+            "denominator": 0,
+            "value": None,
+        },
+    }
+
+
+def _add_candidate_to_bucket(bucket: dict[str, Any], target: dict[str, Any]) -> None:
+    bucket["unique"] += 1
+    attribution = target.get("attribution", {}).get("status")
+    attribution = (
+        attribution if attribution in {"exact_reference", "non_reference"} else "unresolved"
+    )
+    bucket["attribution"][attribution] += 1
+    if attribution == "unresolved":
+        bucket["unresolved_attribution"] += 1
+    decision = target.get("decision") or "FAILURE"
+    if decision not in bucket["validator"]:
+        decision = "FAILURE"
+    bucket["validator"][decision] += 1
+    disposition = "accepted" if decision == "USE_CANDIDATE" else "rejected"
+    bucket[disposition][attribution] += 1
+    applied = target.get("applied_fallback") is True
+    if applied and attribution == "exact_reference":
+        bucket["final_tp_fp_fn"]["TP"] += 1
+    elif applied and attribution == "non_reference":
+        bucket["final_tp_fp_fn"]["FP"] += 1
+    elif not applied and attribution == "exact_reference":
+        bucket["final_tp_fp_fn"]["FN"] += 1
+    elif applied:
+        bucket["final_unresolved"] += 1
+    accepted_exact = bucket["accepted"]["exact_reference"]
+    accepted_non_reference = bucket["accepted"]["non_reference"]
+    denominator = accepted_exact + accepted_non_reference
+    bucket["reference_precision_among_accepted"] = {
+        "numerator": accepted_exact,
+        "denominator": denominator,
+        "value": accepted_exact / denominator if denominator else None,
+    }
+
+
+def candidate_analysis(
+    by_case: dict[str, list[dict[str, Any]]], population: list[dict[str, Any]]
+) -> dict[str, Any]:
+    """Aggregate only data-free operation and validator outcome counts."""
+    targets: dict[str, dict[str, Any]] = {}
+    for records in by_case.values():
+        for record in records:
+            for target in record["validator_targets"]:
+                targets[target["candidate_id"]] = target
+    result: dict[str, Any] = {"all_unique": {}, "new_or_changed": {}}
+    for scope in result:
+        result[scope] = {
+            operation: _empty_candidate_bucket() for operation in distance_one.OPERATIONS
+        }
+    for item in population:
+        candidate_id = protocol.candidate_path_id(item)
+        target = targets.get(candidate_id)
+        if target is None:
+            raise ExperimentError("candidate analysis lacks a validator target")
+        operation = item["operation"]
+        _add_candidate_to_bucket(result["all_unique"][operation], target)
+        if target.get("observation_source") == "fresh":
+            _add_candidate_to_bucket(result["new_or_changed"][operation], target)
+    return result
+
+
+def update_view_call_accounting(
+    metrics: dict[str, Any],
+    population: list[dict[str, Any]],
+    reuse_ids: set[str],
+    uv_indices: set[int],
+) -> None:
+    """Replace aggregate-wide subtraction with exact identities per view."""
+    for phase, phase_views in metrics["views"].items():
+        for view_name, view in phase_views.items():
+            selected_ids = {
+                protocol.candidate_path_id(item)
+                for item in population
+                if item["phase"] == phase
+                and (
+                    view_name == "all"
+                    or (view_name == "initial_uv" and item["case_index"] in uv_indices)
+                    or (view_name == "without_initial_uv" and item["case_index"] not in uv_indices)
+                )
+            }
+            reused = len(selected_ids & reuse_ids)
+            fresh = len(selected_ids - reuse_ids)
+            total = len(selected_ids)
+            if total != view["scheduled_candidates"]:
+                raise ExperimentError("view candidate identity count mismatch")
+            for accounting in view["call_accounting"].values():
+                ordinary_total = accounting["projected_ordinary"]["total"]
+                accounting["validator_observations"] = total
+                accounting["validator_calls_reused"] = reused
+                accounting["validator_calls_added"] = fresh
+                accounting["validator_calls_total"] = total
+                accounting["net_projected"]["total"] = ordinary_total + total
+                accounting["net_projected"]["validator_observations"] = total
+                accounting["delta_vs_baseline"] = (
+                    accounting["net_projected"]["total"] - accounting["baseline"]["total"]
+                )
+                accounting["delta_vs_007h"] = (
+                    accounting["net_projected"]["total"] - accounting["unrestricted_007h"]["total"]
+                )
+
+
 def blocked_result(scratch: Path, prepared: dict[str, Any], reason: str) -> dict[str, Any]:
     result = {
         "schema_version": 1,
         "experiment_id": EXPERIMENT_ID,
         "configuration_sha256": prepared["configuration_sha256"],
-        "candidate_manifest_sha256": prepared["configuration"]["source_identity"]["candidate_manifest_sha256"],
+        "candidate_manifest_sha256": prepared["configuration"]["source_identity"][
+            "candidate_manifest_sha256"
+        ],
         "case_identity_manifest_sha256": EXPECTED_PRIOR_CASES,
         "status": "BLOCKED",
         "blocker": reason,
@@ -822,7 +1135,11 @@ def blocked_result(scratch: Path, prepared: dict[str, Any], reason: str) -> dict
     )
     report_sha = immutable_write(
         scratch / "REPORT.md",
-        ("# Private 007-j report\n\n" + json.dumps(result, ensure_ascii=False, sort_keys=True, indent=2) + "\n").encode("utf-8"),
+        (
+            "# Private 007-j report\n\n"
+            + json.dumps(result, ensure_ascii=False, sort_keys=True, indent=2)
+            + "\n"
+        ).encode("utf-8"),
     )
     mutable_status(
         scratch / "RUN-STATUS.json",
@@ -846,8 +1163,11 @@ def blocked_result(scratch: Path, prepared: dict[str, Any], reason: str) -> dict
     return result
 
 
-def public_projection(configuration: dict[str, Any], result: dict[str, Any]) -> tuple[dict[str, Any], dict[str, Any]]:
+def public_projection(
+    configuration: dict[str, Any], result: dict[str, Any]
+) -> tuple[dict[str, Any], dict[str, Any]]:
     identity = configuration["source_identity"]
+    result_metrics = result.get("metrics")
     public_configuration = {
         "schema_version": 1,
         "experiment_id": EXPERIMENT_ID,
@@ -867,20 +1187,40 @@ def public_projection(configuration: dict[str, Any], result: dict[str, Any]) -> 
             "transition_matrix": identity["transition_matrix"],
             "operation_counts": identity["operation_counts"],
             "vocabulary_forms": identity["vocabulary_forms"],
+            "runtime": identity.get("runtime"),
             "case_identity_manifest_sha256": identity["case_identity_manifest_sha256"],
             "candidate_manifest_sha256": identity["candidate_manifest_sha256"],
         },
         "candidate_rule": configuration["candidate_rule"],
-        "prompt": {"sha256": EXPECTED_PROMPT, "template": "owner-supplied frozen 007-i validator prompt"},
-        "deployment": {"class": "A100-FP8", "model": protocol.MODEL, "protocol": "Responses non-streaming", "profile_sha256": EXPECTED_PROFILE, "endpoint": "private endpoint identity omitted", "profile_path": "private profile path omitted"},
+        "prompt": {
+            "sha256": EXPECTED_PROMPT,
+            "template": "owner-supplied frozen 007-i validator prompt",
+        },
+        "deployment": {
+            "class": "A100-FP8",
+            "model": protocol.MODEL,
+            "protocol": "Responses non-streaming",
+            "profile_sha256": EXPECTED_PROFILE,
+            "endpoint": "private endpoint identity omitted",
+            "profile_path": "private profile path omitted",
+        },
         "request": configuration["request"],
         "parser": configuration["parser"],
         "scheduling": configuration["scheduling"],
         "limits": configuration["limits"],
-        "reuse": {"policy": configuration["reuse"]["policy"], "count": EXPECTED_REUSED, "fresh_count": EXPECTED_FRESH, "fresh_dispatches": result.get("reuse", {}).get("fresh_calls", result.get("offline", {}).get("dispatched_http_requests", 0))},
+        "reuse": {
+            "policy": configuration["reuse"]["policy"],
+            "count": EXPECTED_REUSED,
+            "fresh_count": EXPECTED_FRESH,
+            "fresh_dispatches": result.get("reuse", {}).get(
+                "fresh_calls", result.get("offline", {}).get("dispatched_http_requests", 0)
+            ),
+        },
         "privacy": configuration["privacy"]["public"],
     }
-    public_configuration["configuration_sha256"] = sha256_bytes(canonical_bytes(public_configuration))
+    public_configuration["configuration_sha256"] = sha256_bytes(
+        canonical_bytes(public_configuration)
+    )
     public_result = {
         "schema_version": 1,
         "experiment_id": EXPERIMENT_ID,
@@ -892,17 +1232,30 @@ def public_projection(configuration: dict[str, Any], result: dict[str, Any]) -> 
         "transition_matrix": identity["transition_matrix"],
         "operation_counts": identity["operation_counts"],
         "reuse": public_configuration["reuse"],
+        "candidate_analysis": result_metrics.get("candidate_analysis")
+        if isinstance(result_metrics, dict)
+        else None,
         "metrics": result.get("metrics"),
         "offline": result.get("offline"),
         "blocker": result.get("blocker"),
         "private_evidence_sha256": {
             key: result[key]
-            for key in ("private_results_sha256", "private_manifest_sha256", "private_report_sha256")
+            for key in (
+                "private_results_sha256",
+                "private_manifest_sha256",
+                "private_report_sha256",
+            )
             if key in result
         },
         "limitations": [
-            "This is an owner-authorized bounded research experiment, not product or linguistic acceptance.",
-            "Standard Levenshtein distance is mechanical candidate generation; it does not establish semantic correctness.",
+            (
+                "This is an owner-authorized bounded research experiment, not product "
+                "or linguistic acceptance."
+            ),
+            (
+                "Standard Levenshtein distance is mechanical candidate generation; it "
+                "does not establish semantic correctness."
+            ),
             "Non-reference status is not a semantic-harm label.",
             "No merge, release, deployment, or production integration is authorized.",
         ],
@@ -917,12 +1270,20 @@ def public_report(configuration: dict[str, Any], result: dict[str, Any]) -> str:
         "",
         "EXPERIMENTAL / CONCEPT VERIFICATION / NOT PRODUCTION CODE.",
         "",
-        "The sole variable is complete standard unit-cost Levenshtein distance-one candidate generation over the frozen 007-i vocabulary; validator and fallback identities remain unchanged.",
+        (
+            "The sole variable is complete standard unit-cost Levenshtein distance-one "
+            "candidate generation over the frozen 007-i vocabulary; validator and "
+            "fallback identities remain unchanged."
+        ),
         "",
         "## Frozen identity",
         "",
         f"- Status: {result['status']}.",
-        f"- Candidate population: {identity['candidate_count']} ({identity['candidate_counts']['dassle-spelling']} spelling; {identity['candidate_counts']['dassle-spelling-preservation']} preservation).",
+        (
+            f"- Candidate population: {identity['candidate_count']} "
+            f"({identity['candidate_counts']['dassle-spelling']} spelling; "
+            f"{identity['candidate_counts']['dassle-spelling-preservation']} preservation)."
+        ),
         f"- Reused observations / fresh-call budget: {EXPECTED_REUSED} / {EXPECTED_FRESH}.",
         f"- Candidate manifest SHA-256: {identity['candidate_manifest_sha256']}.",
         f"- Prompt SHA-256: {EXPECTED_PROMPT}.",
@@ -938,7 +1299,11 @@ def public_report(configuration: dict[str, Any], result: dict[str, Any]) -> str:
     lines += ["## Operation counts", ""]
     for phase in PHASES:
         counts = identity["operation_counts"][phase]
-        lines.append(f"- {phase}: SUBSTITUTION {counts.get('SUBSTITUTION', 0)}; INSERTION {counts.get('INSERTION', 0)}; DELETION {counts.get('DELETION', 0)}.")
+        lines.append(
+            f"- {phase}: SUBSTITUTION {counts.get('SUBSTITUTION', 0)}; "
+            f"INSERTION {counts.get('INSERTION', 0)}; "
+            f"DELETION {counts.get('DELETION', 0)}."
+        )
     if result["status"] == "BLOCKED":
         lines += [
             "",
@@ -949,26 +1314,84 @@ def public_report(configuration: dict[str, Any], result: dict[str, Any]) -> str:
             "- Scientific projections and 007-i deltas: NOT RUN; fresh observations are required.",
         ]
     else:
+        result_metrics = result.get("metrics")
+        analysis = (
+            result_metrics.get("candidate_analysis", {}) if isinstance(result_metrics, dict) else {}
+        )
         lines += [
             "",
             "## Scientific execution",
             "",
-            f"- Reused observations / fresh calls / total observations: {EXPECTED_REUSED} / {EXPECTED_FRESH} / {EXPECTED_TOTAL}.",
-            "- Operation-level, four-population, fallback, scorer, runtime, and integrity metrics are retained in the data-free aggregate result.",
+            (
+                f"- Reused observations / fresh calls / total observations: "
+                f"{EXPECTED_REUSED} / {EXPECTED_FRESH} / {EXPECTED_TOTAL}."
+            ),
+            (
+                "- Operation-level, four-population, fallback, scorer, runtime, and "
+                "integrity metrics are retained in the data-free aggregate result."
+            ),
+        ]
+        for scope in ("all_unique", "new_or_changed"):
+            lines += ["", f"### {scope.replace('_', ' ').title()} candidate outcomes", ""]
+            for operation in ("SUBSTITUTION", "INSERTION", "DELETION"):
+                bucket = analysis.get(scope, {}).get(operation, {})
+                validator = bucket.get("validator", {})
+                accepted = bucket.get("accepted", {})
+                rejected = bucket.get("rejected", {})
+                final = bucket.get("final_tp_fp_fn", {})
+                precision = bucket.get("reference_precision_among_accepted", {})
+                lines.append(
+                    f"- {operation}: unique {bucket.get('unique', 0)}; "
+                    "exact/non-reference/unresolved "
+                    f"{bucket.get('attribution', {}).get('exact_reference', 0)}/"
+                    f"{bucket.get('attribution', {}).get('non_reference', 0)}/"
+                    f"{bucket.get('attribution', {}).get('unresolved', 0)}; "
+                    f"USE/KEEP/UNCERTAIN/FAILURE "
+                    f"{validator.get('USE_CANDIDATE', 0)}/{validator.get('KEEP_ORIGINAL', 0)}/"
+                    f"{validator.get('UNCERTAIN', 0)}/{validator.get('FAILURE', 0)}; "
+                    f"accepted exact/non-reference/unresolved "
+                    f"{accepted.get('exact_reference', 0)}/{accepted.get('non_reference', 0)}/"
+                    f"{accepted.get('unresolved', 0)}; rejected "
+                    f"{rejected.get('exact_reference', 0)}/{rejected.get('non_reference', 0)}/"
+                    f"{rejected.get('unresolved', 0)}; TP/FP/FN "
+                    f"{final.get('TP', 0)}/{final.get('FP', 0)}/{final.get('FN', 0)}; "
+                    f"reference precision {precision.get('value')} "
+                    f"({precision.get('numerator', 0)}/"
+                    f"{precision.get('denominator', 0)})."
+                )
+        runtime = identity.get("runtime", {})
+        lines += [
+            "",
+            "### Runtime accounting",
+            "",
+            (
+                f"- Candidate search seconds: {runtime.get('candidate_search_seconds')}; "
+                f"vocabulary loading seconds: {runtime.get('vocabulary_loading_seconds')}; "
+                f"vocabulary rows: {runtime.get('vocabulary_rows')}."
+            ),
         ]
     lines += [
         "",
         "## Boundaries",
         "",
-        "- Reuse requires exact source-row, coordinate, sentence, candidate, request, prompt, deployment, parser, and persisted-response identity; reuse by text alone is rejected.",
+        (
+            "- Reuse requires exact source-row, coordinate, sentence, candidate, request, "
+            "prompt, deployment, parser, and persisted-response identity; reuse by text "
+            "alone is rejected."
+        ),
         "- C=0 and C>1 candidates use the unchanged baseline path; only C=1 reaches validation.",
         "- No baseline response is resampled. PR #8 remains open and unmerged.",
-        "- This report does not authorize integration, merge, release, deployment, or product linguistic acceptance.",
+        (
+            "- This report does not authorize integration, merge, release, deployment, "
+            "or product linguistic acceptance."
+        ),
     ]
     return "\n".join(lines) + "\n"
 
 
-def write_public(repo_root: Path, configuration: dict[str, Any], result: dict[str, Any]) -> dict[str, str]:
+def write_public(
+    repo_root: Path, configuration: dict[str, Any], result: dict[str, Any]
+) -> dict[str, str]:
     public_configuration, public_result = public_projection(configuration, result)
     paths = {
         "config": repo_root / "research/configs/007-j-levenshtein-one-contextual-validator.json",
@@ -976,8 +1399,12 @@ def write_public(repo_root: Path, configuration: dict[str, Any], result: dict[st
         "report": repo_root / "research/reports/007-j-levenshtein-one-contextual-validator.md",
     }
     validator_driver.public_immutable_write(paths["config"], canonical_bytes(public_configuration))
-    validator_driver.public_immutable_write(paths["result"], gzip.compress(canonical_bytes(public_result), mtime=0))
-    validator_driver.public_immutable_write(paths["report"], public_report(configuration, result).encode("utf-8"))
+    validator_driver.public_immutable_write(
+        paths["result"], gzip.compress(canonical_bytes(public_result), mtime=0)
+    )
+    validator_driver.public_immutable_write(
+        paths["report"], public_report(configuration, result).encode("utf-8")
+    )
     return {key: sha256_file(path) for key, path in paths.items()}
 
 
@@ -1009,7 +1436,13 @@ def prepare(
         raise ExperimentError("007-i configuration is not an object")
     deployment = deployment_from_inputs(old_configuration, endpoint, profile_path, credential_env)
     reused, reuse_records, fresh = reuse_observations(
-        source_root, scratch, population, old_population, old_observations, old_configuration
+        source_root,
+        scratch,
+        population,
+        old_population,
+        old_observations,
+        old_configuration,
+        deployment,
     )
     analysis["vocabulary_load_seconds"] = vocabulary_seconds
     analysis["vocabulary_rows"] = vocabulary_rows
@@ -1018,7 +1451,11 @@ def prepare(
         scratch,
         expected_head,
         old_configuration,
-        {**source_identity, "case_identity_manifest_sha256": case_digest, "old_candidate_manifest_sha256": old_manifest["candidate_manifest_sha256"]},
+        {
+            **source_identity,
+            "case_identity_manifest_sha256": case_digest,
+            "old_candidate_manifest_sha256": old_manifest["candidate_manifest_sha256"],
+        },
         population,
         population_digest,
         analysis,
@@ -1046,6 +1483,7 @@ def prepare(
 def run(args: argparse.Namespace) -> dict[str, Any]:
     repo_root = Path(args.repo_root).resolve()
     scratch = Path(args.scratch).absolute()
+    ensure_scratch(scratch)
     source_root = Path(args.source_root).absolute() if args.source_root else None
     if (scratch / "CONFIGURATION.json").exists():
         prepared = load_prepared(scratch)
@@ -1053,13 +1491,24 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         source_root_identity(source_root)
         # A prepared root is safe to resume only with its original frozen
         # inputs.  Load the paired state from the staged copy.
-        pairs, _baseline, uv_indices, records, case_digest = validator_driver.load_frozen_state(scratch)
-        prepared.update({"pairs": pairs, "records": records, "uv_indices": uv_indices, "source_root": source_root})
+        pairs, _baseline, uv_indices, records, case_digest = validator_driver.load_frozen_state(
+            scratch
+        )
+        prepared.update(
+            {
+                "pairs": pairs,
+                "records": records,
+                "uv_indices": uv_indices,
+                "source_root": source_root,
+            }
+        )
         reused = {}
         for item in prepared["population"]:
             candidate_id = protocol.candidate_path_id(item)
             if candidate_id in {record["candidate_id"] for record in prepared["reuse_records"]}:
-                reused[candidate_id] = read_json(scratch / "requests" / candidate_id / "observation.json")
+                reused[candidate_id] = read_json(
+                    scratch / "requests" / candidate_id / "observation.json"
+                )
         prepared["reused"] = reused
     else:
         if source_root is None:
@@ -1078,7 +1527,9 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         return {
             "status": "FROZEN_BEFORE_LIVE_EXECUTION",
             "configuration_sha256": prepared["configuration_sha256"],
-            "candidate_manifest_sha256": prepared["configuration"]["source_identity"]["candidate_manifest_sha256"],
+            "candidate_manifest_sha256": prepared["configuration"]["source_identity"][
+                "candidate_manifest_sha256"
+            ],
             "reused_observations": EXPECTED_REUSED,
             "fresh_candidates": EXPECTED_FRESH,
             "fresh_calls": 0,
@@ -1088,7 +1539,11 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
     if isinstance(existing, dict) and existing.get("status") in {"COMPLETE", "BLOCKED"}:
         result = existing
         public = write_public(repo_root, configuration, result)
-        return {"status": result["status"], "public": public, "configuration_sha256": prepared["configuration_sha256"]}
+        return {
+            "status": result["status"],
+            "public": public,
+            "configuration_sha256": prepared["configuration_sha256"],
+        }
     deployment = configuration["deployment"]
     try:
         worker_status = execute_fresh(
@@ -1099,7 +1554,12 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
             raise
         result = blocked_result(scratch, prepared, str(exc))
         public = write_public(repo_root, configuration, result)
-        return {"status": result["status"], "blocker": str(exc), "public": public, "configuration_sha256": prepared["configuration_sha256"]}
+        return {
+            "status": result["status"],
+            "blocker": str(exc),
+            "public": public,
+            "configuration_sha256": prepared["configuration_sha256"],
+        }
     fresh_observations = load_fresh_observations(scratch, prepared["fresh"])
     observations = {**prepared["reused"], **fresh_observations}
     result = complete_result(
@@ -1113,7 +1573,12 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         worker_status,
     )
     public = write_public(repo_root, configuration, result)
-    return {"status": result["status"], "public": public, "configuration_sha256": prepared["configuration_sha256"], "fresh_calls": EXPECTED_FRESH}
+    return {
+        "status": result["status"],
+        "public": public,
+        "configuration_sha256": prepared["configuration_sha256"],
+        "fresh_calls": EXPECTED_FRESH,
+    }
 
 
 def main(argv: list[str] | None = None) -> int:
