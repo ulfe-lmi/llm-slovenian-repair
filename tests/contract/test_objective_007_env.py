@@ -250,13 +250,34 @@ def test_envrc_only_delegates_to_the_canonical_helper() -> None:
     assert "curl" not in text and "wget" not in text and "export" not in text
 
 
-def test_gitignore_retains_environment_ignores() -> None:
+def test_gitignore_retains_environment_ignores(fake_home: Path) -> None:
+    # Hermetic since 007-l: exercise the real Git ignore engine in a
+    # disposable repository owned by the test, independent of the source
+    # tree's .git (the baseline driver copies the source without it).
+    repo = fake_home / "ignore-repo"
+    repo.mkdir()
+    init = subprocess.run(
+        ["git", "init", "-q", str(repo)],
+        capture_output=True,
+        text=True,
+        timeout=TIMEOUT,
+    )
+    assert init.returncode == 0, (init.stdout, init.stderr)
+    (repo / ".gitignore").write_bytes((ROOT / ".gitignore").read_bytes())
+    # Directory-only patterns need the directory type to be verifiable.
+    for directory in (".pytest_cache", ".mypy_cache", ".ruff_cache"):
+        (repo / directory).mkdir()
+
     def ignored(path: str) -> bool:
         result = subprocess.run(
-            ["git", "-C", str(ROOT), "check-ignore", "-q", path],
+            ["git", "-C", str(repo), "check-ignore", "--no-index", "-q", path],
             capture_output=True,
+            text=True,
             timeout=TIMEOUT,
         )
+        # 0 = ignored, 1 = not ignored; anything else is a Git error and is
+        # a test failure, not a clean "not ignored".
+        assert result.returncode in (0, 1), (path, result.stdout, result.stderr)
         return result.returncode == 0
 
     for path in (
