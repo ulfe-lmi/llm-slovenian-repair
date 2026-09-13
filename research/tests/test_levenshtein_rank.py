@@ -2033,6 +2033,169 @@ class ReplayGateNormalizationTests(unittest.TestCase):
         drifted["validator_targets"][0]["attribution"]["isolated_edit_key"] = [0, 1, ["z"]]
         self.assertFalse(driver.json_normalized_equal(record, drifted))
 
+    def _old_schema_accounting(self) -> dict[str, object]:
+        """The persisted pre-revision 007-j call-accounting schema (synthetic)."""
+        return {
+            "validated_fallback": {
+                "baseline": {"first": 30, "retry": 4, "total": 34},
+                "net_projected": {
+                    "first": 20,
+                    "retry": 2,
+                    "total": 47,
+                    "validator_observations": 25,
+                },
+                "delta_vs_baseline": 13,
+                "delta_vs_007h": 21,
+                "ordinary_avoided_vs_baseline": {
+                    "first": 10,
+                    "retry": 2,
+                    "total": 12,
+                },
+                "ordinary_avoided_vs_007h": {
+                    "first": 1,
+                    "retry": 0,
+                    "total": 1,
+                },
+                "unrestricted_007h": {"first": 21, "retry": 2, "total": 23},
+                "projected_ordinary": {"first": 20, "retry": 2, "total": 22},
+                "validator_calls_added": 9,
+                "validator_calls_reused": 16,
+                "validator_calls_total": 25,
+                "validator_observations": 25,
+            },
+            "validated_only": {
+                "baseline": {"first": 30, "retry": 4, "total": 34},
+                "net_projected": {
+                    "first": 15,
+                    "retry": 1,
+                    "total": 41,
+                    "validator_observations": 25,
+                },
+                "delta_vs_baseline": 7,
+                "delta_vs_007h": 15,
+                "ordinary_avoided_vs_baseline": {
+                    "first": 15,
+                    "retry": 3,
+                    "total": 18,
+                },
+                "ordinary_avoided_vs_007h": {
+                    "first": 6,
+                    "retry": 1,
+                    "total": 7,
+                },
+                "unrestricted_007h": {"first": 21, "retry": 2, "total": 23},
+                "projected_ordinary": {"first": 15, "retry": 1, "total": 16},
+                "validator_calls_added": 9,
+                "validator_calls_reused": 16,
+                "validator_calls_total": 25,
+                "validator_observations": 25,
+            },
+        }
+
+    def _new_schema_accounting(self) -> dict[str, object]:
+        """The current driver's successor call-accounting schema (synthetic).
+
+        Same baseline and projected ordinary first/retry as the old schema;
+        the additive validator-observation constant is 25 in both (old net
+        total 47 = 22 + 25; old only total 41 = 16 + 25).
+        """
+        accounting: dict[str, dict[str, object]] = {}
+        for view_name, projected, added in (
+            ("validated_fallback", {"first": 20, "retry": 2, "total": 22}, 9),
+            ("validated_only", {"first": 15, "retry": 1, "total": 16}, 9),
+        ):
+            baseline = {"first": 30, "retry": 4, "total": 34}
+            unrestricted = {"first": 21, "retry": 2, "total": 23}
+            net = {
+                "first": projected["first"],
+                "retry": projected["retry"],
+                "total": int(projected["total"]) + 25,
+            }
+            accounting[view_name] = {
+                "baseline": baseline,
+                "unrestricted_007h": unrestricted,
+                "projected_ordinary": projected,
+                "ordinary_avoided_vs_baseline": {
+                    "first": baseline["first"] - int(projected["first"]),
+                    "retry": baseline["retry"] - int(projected["retry"]),
+                    "total": baseline["total"] - int(projected["total"]),
+                },
+                "ordinary_avoided_vs_007h": {
+                    "first": unrestricted["first"] - int(projected["first"]),
+                    "retry": unrestricted["retry"] - int(projected["retry"]),
+                    "total": unrestricted["total"] - int(projected["total"]),
+                },
+                "validator_calls_added": added,
+                "net_projected": net,
+                "delta_vs_baseline": net["total"] - baseline["total"],
+                "delta_vs_007h": net["total"] - unrestricted["total"],
+            }
+        return accounting
+
+    def _view(self, accounting: dict[str, object]) -> dict[str, object]:
+        return {
+            "rows": 2,
+            "scheduled_candidates": 3,
+            "validated_fallback": {"tp": 1, "fn": 0, "fp": 0},
+            "validated_only": {"tp": 0, "fn": 1, "fp": 0},
+            "call_accounting": accounting,
+        }
+
+    def test_schema_revision_of_call_accounting_is_tolerated(self) -> None:
+        """Old persisted vs new emitter schema: equal substance passes the gate.
+
+        The additive validator-observation constant, the extra old-schema
+        keys (validator_observations, validator_calls_reused/total,
+        net_projected.validator_observations) and the reinterpreted
+        validator_calls_added all differ, while the baseline and projected
+        ordinary first/retry counts agree.
+        """
+        persisted = self._view(self._old_schema_accounting())
+        replay = self._view(self._new_schema_accounting())
+        self.assertFalse(
+            driver.json_normalized_equal(
+                persisted["call_accounting"], replay["call_accounting"]
+            ),
+            "precondition: the raw schemas must still differ byte-wise",
+        )
+        self.assertIsNone(driver.replay_view_drift_error(persisted, replay))
+
+    def test_accounting_substance_drift_is_still_rejected(self) -> None:
+        persisted = self._view(self._old_schema_accounting())
+        replay = self._view(self._new_schema_accounting())
+        first = replay["call_accounting"]["validated_fallback"]["projected_ordinary"]
+        first = copy.deepcopy(first)
+        first["first"] = 19
+        replay["call_accounting"]["validated_fallback"]["projected_ordinary"] = first
+        self.assertEqual(
+            driver.replay_view_drift_error(persisted, replay), "accounting"
+        )
+        retry = replay["call_accounting"]["validated_only"]["projected_ordinary"]
+        retry = copy.deepcopy(retry)
+        retry["retry"] = 2
+        replay["call_accounting"]["validated_only"]["projected_ordinary"] = retry
+        replay["call_accounting"]["validated_fallback"]["projected_ordinary"] = first
+        first["first"] = 20
+        replay["call_accounting"]["validated_fallback"]["projected_ordinary"] = first
+        baseline = copy.deepcopy(replay["call_accounting"]["validated_fallback"]["baseline"])
+        baseline["total"] = 35
+        replay["call_accounting"]["validated_fallback"]["baseline"] = baseline
+        self.assertEqual(
+            driver.replay_view_drift_error(persisted, replay), "accounting"
+        )
+
+    def test_non_accounting_view_drift_still_raises_view_reason(self) -> None:
+        persisted = self._view(self._old_schema_accounting())
+        replay = self._view(self._new_schema_accounting())
+        replay["validated_fallback"] = {"tp": 2, "fn": 0, "fp": 0}
+        self.assertEqual(driver.replay_view_drift_error(persisted, replay), "view")
+        replay = self._view(self._new_schema_accounting())
+        del replay["rows"]
+        self.assertEqual(driver.replay_view_drift_error(persisted, replay), "view")
+        self.assertEqual(
+            driver.replay_view_drift_error("corrupted", replay), "view"
+        )
+
 
 class SecondFailedRootAdoptionTests(unittest.TestCase):
     """Adoption of the second failed-instrument root contract (synthetic).

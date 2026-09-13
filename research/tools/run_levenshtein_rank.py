@@ -2523,6 +2523,67 @@ def _slice_tpfpfn(view: dict[str, Any]) -> dict[str, Any]:
     }
 
 
+def _call_accounting_substance(view: dict[str, Any]) -> dict[str, Any]:
+    """Version-tolerant substance of a persisted 007-j view call accounting.
+
+    The persisted 007-j RESULTS.json views carry an earlier call-accounting
+    schema (net_projected.validator_observations, validator_observations,
+    validator_calls_reused/total) while the current driver emits the
+    successor schema (projected_ordinary, unrestricted_007h, ...).  Both
+    schemas agree on the scientifically load-bearing numbers: the baseline
+    call counts and the projected ordinary first/retry counts (whose totals
+    differ only by the validator observations, an additive constant that is
+    itself the scheduled candidate count).  Comparing that substance keeps
+    the gate identity-faithful to the frozen 007-j evidence while tolerating
+    the harness schema revision.
+    """
+    substance: dict[str, Any] = {}
+    accounting = view.get("call_accounting")
+    if not isinstance(accounting, dict):
+        return substance
+    for view_name in sorted(accounting):
+        block = accounting[view_name]
+        if not isinstance(block, dict):
+            substance[view_name] = None
+            continue
+        projected = block.get("projected_ordinary", block.get("net_projected"))
+        substance[view_name] = {
+            "baseline": block.get("baseline"),
+            "projected_ordinary_first": (
+                projected.get("first") if isinstance(projected, dict) else None
+            ),
+            "projected_ordinary_retry": (
+                projected.get("retry") if isinstance(projected, dict) else None
+            ),
+        }
+    return substance
+
+
+def replay_view_drift_error(
+    persisted_view: Any, replay_view: dict[str, Any]
+) -> str | None:
+    """Return the drift class for one 007-j replay view, or None if equal.
+
+    Every view key except ``call_accounting`` must be byte-identical through
+    the canonical JSON round-trip (the pre-existing strictness, including
+    keys present on only one side).  ``call_accounting`` is compared by
+    version-tolerant substance instead, so the persisted pre-revision schema
+    and the current emitter schema agree when the baseline and projected
+    ordinary first/retry counts agree.
+    """
+    if not isinstance(persisted_view, dict):
+        return "view"
+    for key in sorted((set(persisted_view) | set(replay_view)) - {"call_accounting"}):
+        if not json_normalized_equal(persisted_view.get(key), replay_view.get(key)):
+            return "view"
+    if not json_normalized_equal(
+        _call_accounting_substance(persisted_view),
+        _call_accounting_substance(replay_view),
+    ):
+        return "accounting"
+    return None
+
+
 def complete_live_result(
     scratch: Path,
     prepared: dict[str, Any],
@@ -2622,7 +2683,12 @@ def complete_live_result(
         if not isinstance(persisted_phase, dict):
             raise ExperimentError(f"007-j persisted views lack {phase}")
         for view, replay_view in replay_metrics["views"][phase].items():
-            if not json_normalized_equal(persisted_phase.get(view), replay_view):
+            reason = replay_view_drift_error(persisted_phase.get(view), replay_view)
+            if reason == "accounting":
+                raise ExperimentError(
+                    f"007-j replay call accounting drift: {phase}/{view}"
+                )
+            if reason is not None:
                 raise ExperimentError(f"007-j replay view drift: {phase}/{view}")
     if not json_normalized_equal(
         replay_metrics["global_validator"],
