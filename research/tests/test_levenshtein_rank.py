@@ -2367,5 +2367,188 @@ class SecondFailedRootAdoptionTests(unittest.TestCase):
                 driver.failed_root_spec(failed.name)
 
 
+
+class HybridCompositionTests(unittest.TestCase):
+    """Zero-call hybrid case-row composition (approved aggregation fix).
+
+    The hybrid keeps the exact 007-j validated-fallback behavior for C=0/C=1
+    and every edit unrelated to a C>1 target; only the C>1 target spans are
+    replaced with the CPU winner on USE_CANDIDATE or the original target
+    text on KEEP_ORIGINAL/UNCERTAIN/FAILURE.  All shapes are synthetic and
+    data-free.
+    """
+
+    SOURCE = "dassle spelling test"
+
+    def _fallback(
+        self,
+        edits: list[list[object]],
+        output: str,
+        operational_failure: bool = False,
+        projection_failure: str | None = None,
+    ) -> dict[str, object]:
+        return {
+            "id": "case-1",
+            "index": 1,
+            "method": "M2",
+            "input": self.SOURCE,
+            "input_sha256": hashlib.sha256(self.SOURCE.encode()).hexdigest(),
+            "detector": {"candidates": [], "english": []},
+            "decisions": [],
+            "calls": [],
+            "edits": edits,
+            "output": output,
+            "operational_failure": operational_failure,
+            "projection_failure": projection_failure,
+            "wall_seconds": 0.0,
+        }
+
+    def _target(
+        self, candidate_id: str, start: int, end: int, form: str, decision: str
+    ) -> dict[str, object]:
+        return {
+            "candidate_id": candidate_id,
+            "mechanical_edit": [start, end, form],
+            "decision": decision,
+        }
+
+    def _record(
+        self, fallback: dict[str, object], targets: list[dict[str, object]]
+    ) -> dict[str, object]:
+        return {"validated_fallback": fallback, "validator_targets": targets}
+
+    def test_use_replaces_overlapping_baseline_edit_and_keeps_unrelated(self) -> None:
+        base = self._fallback([[0, 6, "Dassle"], [7, 15, "speling"]], "Dassle speling test")
+        record = self._record(
+            base,
+            [
+                self._target("c1-a", 7, 15, "speling", "USE_CANDIDATE"),
+                self._target("cg-a", 0, 6, "dasle", "USE_CANDIDATE"),
+            ],
+        )
+        row = driver.hybrid_case_row(record, {"cg-a"})
+        self.assertEqual(row["output"], "dasle speling test")
+        self.assertEqual(row["edits"], [[7, 15, "speling"], [0, 6, "dasle"]])
+        self.assertFalse(row["operational_failure"])
+        self.assertIsNone(row["projection_failure"])
+        integrity = protocol.integrity(self.SOURCE, row["output"], row["edits"])
+        self.assertTrue(integrity["exact_expected_output"])
+
+    def test_keep_uncertain_and_failure_keep_original_target(self) -> None:
+        for decision in ("KEEP_ORIGINAL", "UNCERTAIN", "FAILURE"):
+            with self.subTest(decision=decision):
+                record = self._record(
+                    self._fallback([[0, 6, "Dassle"]], "Dassle spelling test"),
+                    [self._target("cg-a", 0, 6, "dasle", decision)],
+                )
+                row = driver.hybrid_case_row(record, {"cg-a"})
+                self.assertEqual(row["output"], self.SOURCE)
+                self.assertEqual(row["edits"], [])
+                self.assertFalse(row["operational_failure"])
+        # Unrelated edits survive a KEEP decision on the C>1 target.
+        record = self._record(
+            self._fallback([[0, 6, "Dassle"], [7, 15, "speling"]], "Dassle speling test"),
+            [self._target("cg-a", 0, 6, "dasle", "KEEP_ORIGINAL")],
+        )
+        row = driver.hybrid_case_row(record, {"cg-a"})
+        self.assertEqual(row["output"], "dassle speling test")
+        self.assertEqual(row["edits"], [[7, 15, "speling"]])
+        # With no base edits at all the row is the unchanged original.
+        base = self._fallback([], self.SOURCE)
+        row = driver.hybrid_case_row(
+            self._record(base, [self._target("cg-a", 0, 6, "dasle", "KEEP_ORIGINAL")]),
+            {"cg-a"},
+        )
+        self.assertTrue(driver.json_normalized_equal(row, base))
+
+    def test_no_c_gt_1_case_returns_fallback_byte_identically(self) -> None:
+        base = self._fallback([[0, 6, "Dassle"]], "Dassle spelling test")
+        record = self._record(
+            base, [self._target("c1-a", 0, 6, "Dassle", "USE_CANDIDATE")]
+        )
+        row = driver.hybrid_case_row(record, set())
+        self.assertTrue(driver.json_normalized_equal(row, base))
+        failed_base = self._fallback(
+            [],
+            self.SOURCE,
+            operational_failure=True,
+            projection_failure="SAVED_FALLBACK_OPERATIONAL_FAILURE",
+        )
+        row = driver.hybrid_case_row(self._record(failed_base, []), set())
+        self.assertTrue(driver.json_normalized_equal(row, failed_base))
+        self.assertTrue(row["operational_failure"])
+
+    def test_rolled_back_base_applies_winner_from_original(self) -> None:
+        base = self._fallback(
+            [],
+            self.SOURCE,
+            operational_failure=True,
+            projection_failure="SAVED_FALLBACK_COMPOSITION: ValueError",
+        )
+        record = self._record(
+            base, [self._target("cg-a", 0, 6, "dasle", "USE_CANDIDATE")]
+        )
+        row = driver.hybrid_case_row(record, {"cg-a"})
+        self.assertEqual(row["output"], "dasle spelling test")
+        self.assertEqual(row["edits"], [[0, 6, "dasle"]])
+        self.assertFalse(row["operational_failure"])
+        self.assertIsNone(row["projection_failure"])
+
+    def test_conflicting_and_out_of_range_winners_roll_back(self) -> None:
+        record = self._record(
+            self._fallback([], self.SOURCE),
+            [
+                self._target("cg-a", 0, 6, "dasle", "USE_CANDIDATE"),
+                self._target("cg-b", 4, 10, "le", "USE_CANDIDATE"),
+            ],
+        )
+        row = driver.hybrid_case_row(record, {"cg-a", "cg-b"})
+        self.assertEqual(row["output"], self.SOURCE)
+        self.assertEqual(row["edits"], [])
+        self.assertTrue(row["operational_failure"])
+        self.assertEqual(row["projection_failure"], "HYBRID_COMPOSITION: ValueError")
+        record = self._record(
+            self._fallback([[7, 15, "speling"]], "dassle speling test"),
+            [self._target("cg-a", 0, 99, "x", "USE_CANDIDATE")],
+        )
+        row = driver.hybrid_case_row(record, {"cg-a"})
+        self.assertEqual(row["output"], self.SOURCE)
+        self.assertEqual(row["edits"], [])
+        self.assertTrue(row["operational_failure"])
+        self.assertEqual(row["projection_failure"], "HYBRID_COMPOSITION: ValueError")
+
+    def test_recompute_case_result_gate(self) -> None:
+        recomputed = {
+            phase: [] for phase in driver.PHASES
+        }
+        recomputed["dassle-spelling"] = [
+            {"index": 1, "edits": [[0, 6, "dasle"]], "attribution": [0, 1, ("a",)]}
+        ]
+        persisted = json.loads(driver.canonical_bytes(recomputed))
+        driver._verify_case_results_match("007-m", recomputed, persisted)
+        drifted = json.loads(driver.canonical_bytes(recomputed))
+        drifted["dassle-spelling"][0]["edits"] = [[0, 6, "other"]]
+        with self.assertRaisesRegex(
+            driver.ExperimentError, "007-m recompute case result drift"
+        ):
+            driver._verify_case_results_match("007-m", recomputed, drifted)
+        short = json.loads(driver.canonical_bytes(recomputed))
+        short["dassle-spelling"] = []
+        with self.assertRaisesRegex(
+            driver.ExperimentError, "007-m recompute case count drift"
+        ):
+            driver._verify_case_results_match("007-m", recomputed, short)
+        missing = json.loads(driver.canonical_bytes(recomputed))
+        del missing["dassle-spelling-preservation"]
+        with self.assertRaisesRegex(
+            driver.ExperimentError, "007-m recompute case count drift"
+        ):
+            driver._verify_case_results_match("007-m", recomputed, missing)
+        with self.assertRaisesRegex(
+            driver.ExperimentError, "007-m recompute case results are malformed"
+        ):
+            driver._verify_case_results_match("007-m", recomputed, [])
+
+
 if __name__ == "__main__":
     unittest.main()

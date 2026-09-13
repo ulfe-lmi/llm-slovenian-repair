@@ -35,12 +35,20 @@ import time
 from collections import Counter
 from collections.abc import Mapping
 from concurrent.futures import ThreadPoolExecutor
+from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
 
 from research import contextual_validator as protocol
 from research import levenshtein_one as distance_one
 from research import levenshtein_rank as rank
+from research.curated.historical_scoring import (
+    row_metrics as scoring_row_metrics,
+)
+from research.curated.historical_scoring import (
+    summarize as scoring_summarize,
+)
+from research.curated.patching import apply_edits
 from research.one_substitution import mechanical_substitution
 from research.tools import run_contextual_validator as validator_driver
 from research.tools import run_levenshtein_one as prior_j
@@ -1611,9 +1619,11 @@ def verify_c1_observations(
 def load_prepared_live(
     scratch: Path,
     repo_root: Path,
-    expected_head: str,
+    expected_head: str | None,
     source_root: Path,
     census_root: Path,
+    *,
+    recompute: bool = False,
 ) -> dict[str, Any]:
     validator_driver.require_private_file(scratch / "CONFIGURATION.json")
     configuration = read_json(scratch / "CONFIGURATION.json")
@@ -1625,9 +1635,19 @@ def load_prepared_live(
     status = read_json(scratch / "RUN-STATUS.json")
     if status.get("configuration_sha256") != configuration_sha:
         raise ExperimentError("prepared live configuration hash mismatch")
-    identity = verify_live_implementation_identity(repo_root, expected_head)
-    if identity["implementation_head"] != configuration.get("implementation_head"):
-        raise ExperimentError("prepared live implementation head mismatch")
+    if recompute:
+        # The hybrid recompute may run on a later harness-revision head; the
+        # worktree is not bound to the freeze head.  Input fidelity is proved
+        # instead by byte-matching the recomputed case results against the
+        # persisted artifacts, and both heads are recorded in the artifacts.
+        recompute_head = _git(repo_root, "rev-parse", "--verify", "HEAD").strip()
+        if not recompute_head:
+            raise ExperimentError("recompute head cannot be read")
+    else:
+        identity = verify_live_implementation_identity(repo_root, expected_head)
+        if identity["implementation_head"] != configuration.get("implementation_head"):
+            raise ExperimentError("prepared live implementation head mismatch")
+        recompute_head = None
     verify_source_root(source_root)
     if (
         verify_007j_request_tree(source_root)
@@ -1680,6 +1700,8 @@ def load_prepared_live(
         "uv_indices": uv_indices,
         "source_root": str(source_root),
     }
+    if recompute:
+        prepared["recompute_head"] = recompute_head
     if adopted_bundle is None:
         return prepared
     if not isinstance(adoption, dict):
@@ -3011,7 +3033,464 @@ def run_live(args: argparse.Namespace) -> dict[str, Any]:
     return summary
 
 
+def hybrid_case_row(record: dict[str, Any], c_gt_1_ids: set[str]) -> dict[str, Any]:
+    """Project the approved hybrid case row with zero new calls.
+
+    The exact 007-j validated-fallback row is the base: C=0/C=1 decisions
+    and every edit unrelated to a C>1 target keep their frozen behavior.
+    Only the C>1 target spans are replaced: base edits overlapping a target
+    span are dropped, and the CPU winner edit is applied when the decision
+    is USE_CANDIDATE; KEEP_ORIGINAL, UNCERTAIN and FAILURE leave the target
+    span at the original text.  A case without C>1 targets returns the base
+    row byte-identically; a composition conflict rolls the row back to the
+    original with an explicit HYBRID_COMPOSITION projection failure.
+    """
+    base = record["validated_fallback"]
+    targets = [
+        target
+        for target in record["validator_targets"]
+        if target["candidate_id"] in c_gt_1_ids
+    ]
+    if not targets:
+        return copy.deepcopy(base)
+    spans = [
+        (int(target["mechanical_edit"][0]), int(target["mechanical_edit"][1]))
+        for target in targets
+    ]
+    winners = [
+        copy.deepcopy(target["mechanical_edit"])
+        for target in targets
+        if target["decision"] == "USE_CANDIDATE"
+    ]
+
+    def overlaps(edit: Any) -> bool:
+        start, end = int(edit[0]), int(edit[1])
+        return any(start < span_end and span_start < end for span_start, span_end in spans)
+
+    retained = [edit for edit in base["edits"] if not overlaps(edit)]
+    if (
+        not winners
+        and len(retained) == len(base["edits"])
+        and not base.get("operational_failure")
+    ):
+        return copy.deepcopy(base)
+    source = base["input"]
+    hybrid_edits: list[list[Any]] = [*retained, *winners]
+    try:
+        output = apply_edits(source, [tuple(edit) for edit in hybrid_edits])
+        projection_failure: str | None = None
+        operational_failure = False
+    except (AssertionError, ValueError) as exc:
+        output = source
+        hybrid_edits = []
+        projection_failure = "HYBRID_COMPOSITION: " + type(exc).__name__
+        operational_failure = True
+    return {
+        "id": base["id"],
+        "index": base["index"],
+        "method": "M2",
+        "input": source,
+        "input_sha256": base["input_sha256"],
+        "detector": base["detector"],
+        "decisions": base["decisions"],
+        "calls": base["calls"],
+        "edits": hybrid_edits,
+        "output": output,
+        "operational_failure": operational_failure,
+        "projection_failure": projection_failure,
+        "wall_seconds": 0.0,
+    }
+
+
+def _verify_case_results_match(
+    name: str,
+    recomputed: dict[str, list[dict[str, Any]]],
+    persisted: Any,
+) -> None:
+    """Byte-match recomputed case results against the persisted artifacts.
+
+    The canonical JSON round-trip neutralizes in-memory tuple types, so the
+    persisted form of the recomputed rows is accepted while any real content
+    drift, count drift or missing phase is rejected before a hybrid
+    artifact may be written.
+    """
+    if not isinstance(persisted, dict):
+        raise ExperimentError(f"{name} recompute case results are malformed")
+    for phase in PHASES:
+        persisted_rows = persisted.get(phase)
+        if not isinstance(persisted_rows, list) or len(persisted_rows) != len(
+            recomputed[phase]
+        ):
+            raise ExperimentError(f"{name} recompute case count drift: {phase}")
+        for recomputed_row, persisted_row in zip(
+            recomputed[phase], persisted_rows, strict=True
+        ):
+            if not json_normalized_equal(recomputed_row, persisted_row):
+                raise ExperimentError(
+                    f"{name} recompute case result drift: {phase}/{recomputed_row.get('index')}"
+                )
+
+
+def recompute_hybrid(
+    scratch: Path,
+    repo_root: Path,
+    source_root: Path,
+    census_root: Path,
+) -> dict[str, Any]:
+    """Recompute the approved hybrid aggregation with zero new calls.
+
+    The completed live root is loaded without the worktree-head gate (the
+    recompute head is recorded alongside the frozen head), every source,
+    census, staged-state and observation identity is re-verified, and the
+    007-m and 007-j case results are recomputed and byte-matched against
+    the persisted artifacts before any hybrid artifact is written.  Only
+    HYBRID-CASE-PROJECTIONS.json, HYBRID-AGGREGATE.json and
+    RECOMPUTE-STATUS.json are created; RUN-STATUS.json and
+    LIVE-AGGREGATE.json are never touched.
+    """
+    prepared = load_prepared_live(
+        scratch, repo_root, None, source_root, census_root, recompute=True
+    )
+    configuration = prepared["configuration"]
+    recompute_head = prepared["recompute_head"]
+    status = read_json(scratch / "RUN-STATUS.json")
+    if status.get("status") != "LIVE_CENSUS_COMPLETE":
+        raise ExperimentError("recompute requires a LIVE_CENSUS_COMPLETE root")
+    aggregate_path = scratch / "LIVE-AGGREGATE.json"
+    aggregate = read_json(aggregate_path)
+    if not isinstance(aggregate, dict) or aggregate.get("status") != (
+        "LIVE_CENSUS_COMPLETE"
+    ):
+        raise ExperimentError("live aggregate is not complete")
+    if sha256_file(aggregate_path) != status.get("live_aggregate_sha256"):
+        raise ExperimentError("live aggregate sha mismatch on recompute")
+    persisted_007m = read_json(scratch / "CASE-RESULTS-007M.json")
+    persisted_replay = read_json(scratch / "CASE-RESULTS-007J-REPLAY.json")
+    if not isinstance(persisted_007m, dict) or not isinstance(persisted_replay, dict):
+        raise ExperimentError("persisted case results are malformed")
+    for key, name in (
+        ("case_results_007m", "CASE-RESULTS-007M.json"),
+        ("case_results_007j_replay", "CASE-RESULTS-007J-REPLAY.json"),
+    ):
+        if sha256_file(scratch / name) != (aggregate.get("artifacts_sha256") or {}).get(key):
+            raise ExperimentError(f"persisted {name} sha mismatch on recompute")
+
+    pairs = prepared["pairs"]
+    records = prepared["records"]
+    uv_indices = prepared["uv_indices"]
+    c1_items = prepared["c1_items"]
+    c1_observations = prepared["c1_observations"]
+    c_gt_1_all = prepared["c_gt_1_all"]
+    configuration_sha = prepared["configuration_sha256"]
+    c_gt_1_observations, observation_counts = verify_c_gt_1_observations(
+        scratch, c_gt_1_all
+    )
+    persisted_observations = aggregate.get("observations") or {}
+    if (
+        observation_counts["dispatched"] != persisted_observations.get("dispatched_http")
+        or observation_counts["uncertain"] != persisted_observations.get("uncertain_deliveries")
+        or observation_counts["operational_failures"]
+        != persisted_observations.get("operational_failures")
+        or len(c1_observations) != persisted_observations.get("c1_copied")
+        or len(c_gt_1_observations) != persisted_observations.get("c_gt_1")
+    ):
+        raise ExperimentError("observation count drift on recompute")
+    observations = {**c1_observations, **c_gt_1_observations}
+
+    candidates_by_case: dict[tuple[str, int], list[dict[str, Any]]] = {}
+    for item in [*c1_items, *c_gt_1_all]:
+        candidates_by_case.setdefault((item["phase"], item["case_index"]), []).append(item)
+    c1_by_case: dict[tuple[str, int], list[dict[str, Any]]] = {}
+    for item in c1_items:
+        c1_by_case.setdefault((item["phase"], item["case_index"]), []).append(item)
+
+    by_case: dict[str, list[dict[str, Any]]] = {phase: [] for phase in PHASES}
+    for phase, cases in records.items():
+        for case in cases:
+            value = validator_driver.make_case_result(
+                phase,
+                case,
+                candidates_by_case.get((phase, case["index"]), []),
+                observations,
+                configuration_sha,
+            )
+            value["experiment_id"] = EXPERIMENT_ID
+            by_case[phase].append(value)
+    replay_by_case: dict[str, list[dict[str, Any]]] = {phase: [] for phase in PHASES}
+    for phase, cases in records.items():
+        for case in cases:
+            value = validator_driver.make_case_result(
+                phase,
+                case,
+                c1_by_case.get((phase, case["index"]), []),
+                c1_observations,
+                configuration_sha,
+            )
+            value["experiment_id"] = prior_j.EXPERIMENT_ID
+            replay_by_case[phase].append(value)
+    reuse_ids = {
+        record["candidate_id"]
+        for record in read_json(scratch / "SOURCE-007J-REUSE-RECORDS.json")
+    }
+    for phase_records in replay_by_case.values():
+        for record in phase_records:
+            for target in record["validator_targets"]:
+                target["observation_source"] = (
+                    "reuse" if target["candidate_id"] in reuse_ids else "fresh"
+                )
+
+    _verify_case_results_match("007-m", by_case, persisted_007m)
+    _verify_case_results_match("007-j", replay_by_case, persisted_replay)
+
+    c_gt_1_ids = {protocol.candidate_path_id(item) for item in c_gt_1_all}
+    hybrid_by_case: dict[tuple[str, int], dict[str, Any]] = {}
+    hybrid_rows_by_phase: dict[str, list[dict[str, Any]]] = {phase: [] for phase in PHASES}
+    cases_with_targets = 0
+    winner_edits_applied = 0
+    base_edits_removed = 0
+    rollbacks = 0
+    for phase in PHASES:
+        for record in by_case[phase]:
+            case_targets = [
+                target
+                for target in record["validator_targets"]
+                if target["candidate_id"] in c_gt_1_ids
+            ]
+            row = hybrid_case_row(record, c_gt_1_ids)
+            if case_targets:
+                cases_with_targets += 1
+            if case_targets and row is not record["validated_fallback"]:
+                base_edits_removed += sum(
+                    1
+                    for edit in record["validated_fallback"]["edits"]
+                    if edit not in row["edits"]
+                )
+            row["integrity"] = protocol.integrity(row["input"], row["output"], row["edits"])
+            audit = [
+                {
+                    "candidate_id": target["candidate_id"],
+                    "decision": target["decision"],
+                    "mechanical_edit": target["mechanical_edit"],
+                    "applied_hybrid": (
+                        target["decision"] == "USE_CANDIDATE"
+                        and target["mechanical_edit"] in row["edits"]
+                    ),
+                }
+                for target in case_targets
+            ]
+            row["c_gt_1"] = audit
+            winner_edits_applied += sum(
+                1 for entry in audit if entry["applied_hybrid"]
+            )
+            if row.get("projection_failure"):
+                rollbacks += 1
+            hybrid_by_case[(phase, record["index"])] = row
+            hybrid_rows_by_phase[phase].append(row)
+
+    selection_names: dict[str, set[int] | None] = {
+        "all": None,
+        "initial_uv": uv_indices,
+        "without_initial_uv": set(range(1, PHASES["dassle-spelling"] + 1)) - uv_indices,
+    }
+
+    def hybrid_view(phase: str, selected: set[int] | None) -> dict[str, Any]:
+        pairs_selected = [
+            pair
+            for pair in pairs[phase]
+            if selected is None or pair["dataset"]["index"] in selected
+        ]
+        metric_rows = [
+            scoring_row_metrics(
+                pair["dataset"],
+                hybrid_by_case[(phase, pair["dataset"]["index"])],
+                "M2",
+            )
+            for pair in pairs_selected
+        ]
+        summary = scoring_summarize(metric_rows)
+        return {
+            "rows": len(pairs_selected),
+            "tp": summary["tp"],
+            "fp": summary["fp"],
+            "fn": summary["fn"],
+            "precision": summary["precision"],
+            "recall": summary["recall"],
+            "F0.5": summary["F0.5"],
+            "operational_failures": summary["operational_failures"],
+            "changed_examples": summary["changed_examples"],
+            "unchanged_errors": summary["unchanged_errors"],
+            "introduced_edits": summary["introduced_edits"],
+            "exact_reference_success": summary["exact_reference_success"],
+            "preservation_rate": summary["preservation_rate"],
+        }
+
+    hybrid_views: dict[str, Any] = {}
+    for phase in PHASES:
+        names = ("all",) if phase != "dassle-spelling" else (
+            "all",
+            "initial_uv",
+            "without_initial_uv",
+        )
+        hybrid_views[phase] = {name: hybrid_view(phase, selection_names[name]) for name in names}
+
+    paired: dict[str, Any] = {}
+    persisted_paired = aggregate.get("paired_slices") or {}
+    for slice_name, (phase, view) in SLICE_VIEW.items():
+        hybrid = hybrid_views[phase][view]
+        baseline = (persisted_paired.get(slice_name) or {}).get("007j_validated_fallback")
+        diagnostic = (persisted_paired.get(slice_name) or {}).get("007j_validated_only")
+        primary_only = (persisted_paired.get(slice_name) or {}).get("007m_validated_only")
+        if not isinstance(baseline, dict) or not isinstance(diagnostic, dict):
+            raise ExperimentError(f"persisted paired slice missing for {slice_name}")
+        paired[slice_name] = {
+            "007m_hybrid": {key: hybrid[key] for key in ("tp", "fp", "fn", "precision", "recall")},
+            "007j_validated_fallback": baseline,
+            "007j_validated_only": diagnostic,
+            "007m_validated_only": primary_only,
+            "delta_vs_007j_validated_fallback": {
+                key: hybrid[key] - baseline[key] for key in ("tp", "fp", "fn")
+            },
+        }
+
+    preservation_phase = "dassle-spelling-preservation"
+    preservation_metric_rows = [
+        scoring_row_metrics(
+            pair["dataset"],
+            hybrid_by_case[(preservation_phase, pair["dataset"]["index"])],
+            "M2",
+        )
+        for pair in pairs[preservation_phase]
+    ]
+    preservation = {
+        "007m_hybrid": {
+            "hybrid_cases": sum(row["changed"] for row in preservation_metric_rows),
+            "hybrid_edit_units": sum(
+                row["introduced_edits"] for row in preservation_metric_rows
+            ),
+        },
+        "007j_validated_fallback": (aggregate.get("preservation") or {}).get(
+            "007j_validated_fallback"
+        ),
+        "integrity_007m_hybrid": {
+            "protected_differences": sum(
+                row["integrity"]["protected_differences"]
+                for row in hybrid_rows_by_phase[preservation_phase]
+            ),
+            "outside_span_differences": sum(
+                row["integrity"]["outside_span_differences"]
+                for row in hybrid_rows_by_phase[preservation_phase]
+            ),
+            "exact_expected_output_failures": sum(
+                not row["integrity"]["exact_expected_output"]
+                for row in hybrid_rows_by_phase[preservation_phase]
+            ),
+        },
+    }
+
+    projections = {phase: hybrid_rows_by_phase[phase] for phase in PHASES}
+    projections_sha = validator_driver.immutable_json(
+        scratch / "HYBRID-CASE-PROJECTIONS.json", projections
+    )
+    hybrid_aggregate = {
+        "schema_version": 1,
+        "experiment_id": EXPERIMENT_ID,
+        "run_id": RUN_ID,
+        "status": "HYBRID_RECOMPUTE_COMPLETE",
+        "frozen_implementation_head": configuration["implementation_head"],
+        "recompute_head": recompute_head,
+        "configuration_sha256": prepared["configuration_sha256"],
+        "live_aggregate_sha256": sha256_file(aggregate_path),
+        "population": aggregate["population"],
+        "observations": aggregate["observations"],
+        "c_gt_1_outcomes": aggregate["c_gt_1_outcomes"],
+        "hybrid_composition": {
+            "base": "007-j validated_fallback row per case",
+            "policy": (
+                "retain base edits not overlapping any C>1 target span; apply the "
+                "CPU winner edit on USE_CANDIDATE; KEEP_ORIGINAL/UNCERTAIN/FAILURE "
+                "keep the original target text; composition conflict rolls back to "
+                "the original with a HYBRID_COMPOSITION failure"
+            ),
+            "cases_with_c_gt_1_targets": cases_with_targets,
+            "winner_edits_applied": winner_edits_applied,
+            "base_edits_removed": base_edits_removed,
+            "rollbacks": rollbacks,
+            "new_calls": 0,
+            "resampled": False,
+        },
+        "paired_slices": paired,
+        "preservation": preservation,
+        "views": hybrid_views,
+        "artifacts_sha256": {
+            "case_results_007m": (aggregate.get("artifacts_sha256") or {}).get(
+                "case_results_007m"
+            ),
+            "case_results_007j_replay": (aggregate.get("artifacts_sha256") or {}).get(
+                "case_results_007j_replay"
+            ),
+            "hybrid_case_projections": projections_sha,
+        },
+    }
+    hybrid_sha = validator_driver.immutable_json(
+        scratch / "HYBRID-AGGREGATE.json", hybrid_aggregate
+    )
+    validator_driver.mutable_status(
+        scratch / "RECOMPUTE-STATUS.json",
+        {
+            "status": "HYBRID_RECOMPUTE_COMPLETE",
+            "run_id": RUN_ID,
+            "frozen_implementation_head": configuration["implementation_head"],
+            "recompute_head": recompute_head,
+            "configuration_sha256": prepared["configuration_sha256"],
+            "live_aggregate_sha256": sha256_file(aggregate_path),
+            "case_results_verified": True,
+            "hybrid_case_projections_sha256": projections_sha,
+            "hybrid_aggregate_sha256": hybrid_sha,
+            "new_calls": 0,
+            "resampled": False,
+            "finished_utc": datetime.now(UTC).strftime("%Y-%m-%dT%H:%M:%SZ"),
+        },
+    )
+    return {
+        "status": "HYBRID_RECOMPUTE_COMPLETE",
+        "run_id": RUN_ID,
+        "scratch": str(scratch),
+        "frozen_implementation_head": configuration["implementation_head"],
+        "recompute_head": recompute_head,
+        "case_results_verified": True,
+        "hybrid_composition": hybrid_aggregate["hybrid_composition"],
+        "paired_slices": {
+            slice_name: {
+                key: paired[slice_name][key]
+                for key in ("007m_hybrid", "delta_vs_007j_validated_fallback")
+            }
+            for slice_name in SLICE_VIEW
+        },
+        "preservation": preservation,
+        "artifacts_sha256": {
+            "hybrid_case_projections": projections_sha,
+            "hybrid_aggregate": hybrid_sha,
+        },
+        "new_calls": 0,
+    }
+
+
+def run_recompute_hybrid(args: argparse.Namespace) -> dict[str, Any]:
+    repo_root = Path(args.repo_root).resolve()
+    scratch = Path(args.scratch).absolute()
+    if args.census_root:
+        census_root = Path(args.census_root).absolute()
+    else:
+        census_root = NATIVE_RUNTIME_PARENT / EXPECTED_CENSUS_ROOT
+    source_root = Path(args.source_root).absolute() if args.source_root else None
+    if source_root is None:
+        raise ExperimentError("hybrid recompute requires the frozen 007-j source root")
+    return recompute_hybrid(scratch, repo_root, source_root, census_root)
+
+
 def run(args: argparse.Namespace) -> dict[str, Any]:
+    if args.recompute_hybrid:
+        return run_recompute_hybrid(args)
     if args.live:
         return run_live(args)
     repo_root = Path(args.repo_root).resolve()
@@ -3127,6 +3606,7 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--profile", "--profile-path", dest="profile")
     parser.add_argument("--credential-env")
     parser.add_argument("--adopt-failed-root", type=Path)
+    parser.add_argument("--recompute-hybrid", action="store_true")
     args = parser.parse_args(argv)
     try:
         print(json.dumps(run(args), ensure_ascii=False, sort_keys=True))
