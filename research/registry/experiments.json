@@ -4514,6 +4514,185 @@
       ]
     },
     {
+      "child_runs": [],
+      "conclusion": "The frozen CPU top-1 selection plus the frozen validator is a conservative tradeoff relative to 007-j: spelling precision +0.0329237965273913 and F0.5 +0.014733407064356663 with preservation introduced edit units reduced from 101 to 83, in exchange for 23 fewer TP (recall -0.015181518151815232); the initial-u/v slice improves (+7 TP, no FP delta) while the non-initial-u/v slice loses 30 TP against 40 removed FP; this is same-sample exploratory evidence, not held-out confirmation, semantic, or product acceptance.",
+      "evidence_files": [
+        {
+          "disposition": "data-free public projection",
+          "logical_path": "research/configs/007-m-rank-ambiguous-levenshtein-candidates.json",
+          "sha256": "41e1482a9ee100f5a3da6d31cd0646765271d874e2b7ef98593a50f5e7d2b5a0",
+          "size": 8838
+        },
+        {
+          "disposition": "data-free public projection",
+          "logical_path": "research/results/007-m-rank-ambiguous-levenshtein-candidates.json.gz",
+          "sha256": "12a3913991c221566d5c0b3d0b16bca9e3e45a49af46c14f958e5526978bd134",
+          "size": 4419
+        },
+        {
+          "disposition": "data-free public projection",
+          "logical_path": "research/reports/007-m-rank-ambiguous-levenshtein-candidates.md",
+          "sha256": "89cb14a196e2f7ea1c66fdc429aa3cc375e8da1fd08066916bc9da31ecb9b634",
+          "size": 9022
+        }
+      ],
+      "evidence_status": "private-evidence-with-data-free-public-projection",
+      "experiment_id": "007-m-rank-ambiguous-levenshtein-candidates",
+      "frozen_choices": {
+        "dataset_contents_published": false,
+        "fresh_call_budget": 0,
+        "fresh_calls_dispatched": 0,
+        "new_model_calls_in_final_root": 0,
+        "ranking_rule": "predeclared lexicographic tuple: trigram exactness flag, trigram exact count, exact bigram side count, sum of exact bigram counts, unigram exact count; frozen before gold analysis; exact top tie selects nothing; no runner-up is ever tried",
+        "resampling": false,
+        "reused_c1_observations": 1035,
+        "reused_c_gt_1_observations": 882,
+        "source": "frozen 007-j inputs, cases, vocabulary, candidate observations and validator protocol"
+      },
+      "kind": "experiment",
+      "logical_root": "007-m-rank-ambiguous-levenshtein-candidates-20260913",
+      "metrics": {
+        "actual_experiment_calls": {
+          "090ea8": 678,
+          "ffdf13": 188,
+          "total": 866
+        },
+        "applied_edits": 997,
+        "cases": 2973,
+        "changed_controls": 78,
+        "census": {
+          "candidate_pairs": 4372,
+          "operation_pairs": {
+            "DELETION": 845,
+            "INSERTION": 726,
+            "SUBSTITUTION": 2801
+          },
+          "reference_absent": 474,
+          "reference_present": 408,
+          "set_size": {
+            "max": 50,
+            "median": 3.0,
+            "min": 2,
+            "p90": 9,
+            "p95": 14,
+            "p99": 29
+          },
+          "targets": 882,
+          "targets_by_phase": {
+            "dassle-spelling": 651,
+            "dassle-spelling-preservation": 231
+          },
+          "tied_top": 0,
+          "top_k_among_present": {
+            "top1": 247,
+            "top10": 408,
+            "top2": 349,
+            "top3": 376,
+            "top5": 399
+          },
+          "unique_top": 882
+        },
+        "comparison_to_007j_validated_fallback": {
+          "outside_span_differences": 0,
+          "preservation_changed_cases_delta": -15,
+          "preservation_changed_edit_units_delta": -18,
+          "protected_differences": 0,
+          "spelling_F0.5_delta": 0.014733407064356663,
+          "spelling_fn_delta": 23,
+          "spelling_fp_delta": -40,
+          "spelling_tp_delta": -23
+        },
+        "cross_root_reused_observations": {
+          "090ea8_to_final_root": 882,
+          "ffdf13_to_090ea8": 196
+        },
+        "decision_counts": {
+          "FAILURE": 87,
+          "KEEP_ORIGINAL": 509,
+          "UNCERTAIN": 16,
+          "USE_CANDIDATE": 270
+        },
+        "distinct_calls": 866,
+        "exact_gold_repairs": 799,
+        "failed_instrument_roots": [
+          {
+            "attempted_observations": 188,
+            "implementation_head": "88ca4dfe19740aa21156457d42966661f67902ea",
+            "root": "007-m-rank-ambiguous-levenshtein-candidates-recovery.ffdf13",
+            "uncertain_observations": 8
+          },
+          {
+            "fresh_dispatched": 678,
+            "implementation_head": "92bee3a214aa50ef3921f54488545a57d9a95000",
+            "root": "007-m-rank-ambiguous-levenshtein-candidates-recovery.090ea8"
+          }
+        ],
+        "final_root": "007-m-rank-ambiguous-levenshtein-candidates-recovery.ec2962",
+        "first_calls": 866,
+        "hybrid": {
+          "dassle-spelling": {
+            "F0.5": 0.7731759241339268,
+            "fn": 716,
+            "fp": 114,
+            "precision": 0.8751369112814896,
+            "recall": 0.5273927392739274,
+            "tp": 799
+          },
+          "dassle-spelling-preservation": {
+            "fp": 83,
+            "preservation_changed_cases": 78,
+            "preservation_changed_edit_units": 83
+          }
+        },
+        "hybrid_composition": {
+          "base_edits_removed": 158,
+          "cases_with_c_gt_1_targets": 751,
+          "rollbacks": 0,
+          "winner_edits_applied": 270
+        },
+        "inherited_calls": 882,
+        "latency_seconds": {
+          "max": 184.56243890197948,
+          "mean": 16.193259791632915,
+          "median": 11.124804617022164,
+          "n": 866,
+          "p95": 33.48273886600509,
+          "sum": 14023.362979554106
+        },
+        "method_records": 1917,
+        "missed_gold_errors": 716,
+        "model_calls": 866,
+        "new_model_calls": 866,
+        "retry_calls": 0,
+        "review_calls": 866,
+        "token_totals": {
+          "input_tokens": 173422,
+          "output_tokens": 393685,
+          "reasoning_tokens": 388375
+        },
+        "token_totals_new_calls": {
+          "input_tokens": 0,
+          "output_tokens": 0,
+          "reasoning_tokens": 0
+        },
+        "uncertain_deliveries": 16,
+        "unchanged_controls": 1408
+      },
+      "pending_evidence": [
+        "independent review of the aggregate and final report",
+        "fresh-evidence confirmation of the top-1 tradeoff on new or held-out data",
+        "human semantic labels for accepted and non-reference proposals",
+        "product, deployment and linguistic benefit evidence remain separate gates"
+      ],
+      "public_configuration": "research/configs/007-m-rank-ambiguous-levenshtein-candidates.json",
+      "public_metrics": "research/results/007-m-rank-ambiguous-levenshtein-candidates.json.gz",
+      "public_report": "research/reports/007-m-rank-ambiguous-levenshtein-candidates.md",
+      "question": "Does the frozen CPU top-1 ranking plus the frozen contextual validator improve upon 007-j for ambiguous (C>1) distance-one candidates?",
+      "source_manifest": "research/registry/source-manifest.json",
+      "status": "COMPLETE",
+      "variation": "frozen lexicographic CPU ranking of ambiguous Levenshtein-distance-one candidates with one frozen validator call per target and zero new calls in the final root"
+    },
+    {
       "experiment_id": "levenshtein-lookup-diagnostic",
       "logical_root": "read-only diagnostic referenced by preserved research records",
       "kind": "diagnostic",

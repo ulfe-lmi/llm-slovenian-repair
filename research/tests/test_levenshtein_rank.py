@@ -10,19 +10,23 @@ from __future__ import annotations
 
 import contextlib
 import copy
+import gzip
 import hashlib
 import importlib.util
 import inspect
 import json
 import os
+import subprocess
 import tempfile
 import threading
 import unittest
 from pathlib import Path
+from typing import Any
 from unittest.mock import patch
 
 from research import contextual_validator as protocol
 from research import levenshtein_rank as rank
+from research.tools import publication_guard
 from research.tools import run_levenshtein_one as prior_j
 from research.tools import run_levenshtein_rank as driver
 
@@ -2549,6 +2553,684 @@ class HybridCompositionTests(unittest.TestCase):
         ):
             driver._verify_case_results_match("007-m", recomputed, [])
 
+# ---------------------------------------------------------------------------
+# Increment 3: final zero-call root verification and data-free publication.
+#
+# Synthetic roots only: every frozen fact the final verifier binds is patched
+# to a synthetic value, so no test ever opens a private durable root.  The
+# publication git guard is exercised in a throwaway repository.  No test
+# encodes a desired live linguistic answer.
+# ---------------------------------------------------------------------------
+
+SYN_FINAL_ROOT = "007-m-rank-ambiguous-levenshtein-candidates-recovery.syntheticfinal"
+SYN_CENSUS_ROOT_NAME = "007-m-rank-ambiguous-levenshtein-candidates-census.synthetic"
+SYN_FAILED_ROOT_NAME = "007-m-rank-ambiguous-levenshtein-candidates-recovery.synthetic090"
+SYN_SOURCE_ROOT_NAME = "007-j-levenshtein-one-contextual-validator-recovery.54KmUx"
+SYN_FROZEN_HEAD = "f" * 40
+SYN_RECOMPUTE_HEAD = "a" * 40
+SYN_DATASET_ROWS = {"dassle-spelling": 2, "dassle-spelling-preservation": 1}
+SYN_BLOBS = {
+    relative: hashlib.sha256(relative.encode("utf-8") + b"synthetic").hexdigest()
+    for relative in (
+        *driver.SHARED_CODE_FILES,
+        "research/tests/test_levenshtein_rank.py",
+        "research/tools/run_levenshtein_rank.py",
+    )
+}
+SYN_007J_REQUEST_TREE = {
+    "file_count": 8,
+    "total_bytes": 1024,
+    "sha256sum_manifest_sha256": "6" * 64,
+}
+SYN_HEADLINE = {
+    "spelling-all": {
+        "tp": 10,
+        "fp": 2,
+        "fn": 4,
+        "precision": 0.833,
+        "recall": 0.714,
+        "baseline_tp": 11,
+        "baseline_fp": 3,
+        "baseline_fn": 3,
+        "delta_tp": -1,
+        "delta_fp": -1,
+        "delta_fn": 1,
+    },
+    "spelling-initial-uv": {
+        "tp": 2,
+        "fp": 0,
+        "fn": 1,
+        "precision": 1.0,
+        "recall": 0.667,
+        "baseline_tp": 1,
+        "baseline_fp": 0,
+        "baseline_fn": 2,
+        "delta_tp": 1,
+        "delta_fp": 0,
+        "delta_fn": -1,
+    },
+    "spelling-without-initial-uv": {
+        "tp": 8,
+        "fp": 2,
+        "fn": 3,
+        "precision": 0.8,
+        "recall": 0.727,
+        "baseline_tp": 10,
+        "baseline_fp": 3,
+        "baseline_fn": 1,
+        "delta_tp": -2,
+        "delta_fp": -1,
+        "delta_fn": 2,
+    },
+    "preservation-all": {"fp": 1, "baseline_fp": 2, "delta_fp": -1},
+}
+SYN_F05 = 0.75
+SYN_OBSERVATIONS = {
+    "c1_copied": 3,
+    "c_gt_1": 2,
+    "c_gt_1_interrupted_carried": 0,
+    "c_gt_1_new_calls": 0,
+    "c_gt_1_reused": 2,
+    "c_gt_1_reused_attempted": 2,
+    "c_gt_1_reused_uncertain": 0,
+    "dispatched_http": 2,
+    "operational_failures": 0,
+    "total": 5,
+    "uncertain_deliveries": 0,
+}
+SYN_POPULATION = {
+    "c1": 3,
+    "c_gt_1": 2,
+    "c_gt_1_by_phase": {"dassle-spelling": 2, "dassle-spelling-preservation": 0},
+    "c_gt_1_new_calls": 0,
+    "c_gt_1_new_calls_by_phase": {"dassle-spelling": 0, "dassle-spelling-preservation": 0},
+    "scheduled_total": 5,
+}
+SYN_COMPOSITION = {
+    "base": "007-j validated_fallback row per case",
+    "policy": "synthetic hybrid composition policy",
+    "cases_with_c_gt_1_targets": 2,
+    "winner_edits_applied": 1,
+    "base_edits_removed": 0,
+    "rollbacks": 0,
+    "new_calls": 0,
+    "resampled": False,
+}
+SYN_OUTCOMES = {
+    "accepted_exact_reference": 1,
+    "accepted_non_reference": 0,
+    "accepted_unresolved": 0,
+    "attribution": {"exact_reference": 1, "non_reference": 1},
+    "attribution_by_decision": {
+        "FAILURE": {"exact_reference": 0, "non_reference": 0},
+        "KEEP_ORIGINAL": {"exact_reference": 0, "non_reference": 1},
+        "UNCERTAIN": {"exact_reference": 0, "non_reference": 0},
+        "USE_CANDIDATE": {"exact_reference": 1, "non_reference": 0},
+    },
+    "decisions": {"FAILURE": 0, "KEEP_ORIGINAL": 1, "UNCERTAIN": 0, "USE_CANDIDATE": 1},
+    "latency_seconds": {
+        "max": 1.5,
+        "mean": 1.25,
+        "median": 1.25,
+        "n": 2,
+        "p95": 1.5,
+        "sum": 2.5,
+    },
+    "token_totals": {"input_tokens": 10, "output_tokens": 20, "reasoning_tokens": 30},
+    "token_totals_new_calls": {
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "reasoning_tokens": 0,
+    },
+}
+SYN_PRESERVATION = {
+    "007m_hybrid": {"hybrid_cases": 1, "hybrid_edit_units": 1},
+    "007j_validated_fallback": {
+        "validated_fallback_cases": 2,
+        "validated_fallback_edit_units": 2,
+        "validated_only_cases": 1,
+        "validated_only_edit_units": 1,
+    },
+    "integrity_007m_hybrid": {
+        "exact_expected_output_failures": 0,
+        "outside_span_differences": 0,
+        "protected_differences": 0,
+    },
+}
+SYN_CENSUS_SUMMARY = {
+    "totals": {
+        "total_candidate_pairs": 4,
+        "operation_composition": {"DELETION": 1, "INSERTION": 1, "SUBSTITUTION": 2},
+        "unique_top": 2,
+        "tied_top": 0,
+        "reference_present": 2,
+        "reference_absent": 0,
+        "reference_group_tied": 0,
+        "set_size": {"min": 2, "median": 2.0, "p90": 3, "p95": 3, "p99": 3, "max": 3},
+        "top_k_coverage": {
+            "1": {"certain": {"count": 1, "rate_among_present": 0.5}},
+            "2": {"certain": {"count": 2, "rate_among_present": 1.0}},
+            "3": {"certain": {"count": 2, "rate_among_present": 1.0}},
+            "5": {"certain": {"count": 2, "rate_among_present": 1.0}},
+            "10": {"certain": {"count": 2, "rate_among_present": 1.0}},
+        },
+    },
+    "slices": {
+        "spelling-all": {"baseline": {"ceiling": 0.9}},
+        "spelling-initial-uv": {"baseline": {"ceiling": 1.0}},
+        "spelling-without-initial-uv": {"baseline": {"ceiling": 0.8}},
+    },
+    "runtime": {
+        "vocabulary_loading_seconds": 0.1,
+        "vocabulary_rows": 7,
+        "candidate_search_seconds": 0.2,
+        "ranking_seconds": 0.3,
+        "headroom_seconds": 0.4,
+    },
+}
+
+
+class FinalPublicationTests(unittest.TestCase):
+    """Hermetic contracts for the final zero-call root and its publication."""
+
+    @staticmethod
+    def _git(repo: Path, *arguments: str) -> str:
+        completed = subprocess.run(
+            ["git", "-C", str(repo), *arguments],
+            capture_output=True,
+            text=True,
+        )
+        if completed.returncode != 0:
+            raise AssertionError(completed.stderr or completed.stdout)
+        return completed.stdout
+
+    def _build_final_root(
+        self, parent: Path
+    ) -> tuple[Path, dict[str, Any], dict[str, object]]:
+        """Build a synthetic zero-call final root and its patch values."""
+        scratch = parent / SYN_FINAL_ROOT
+        scratch.mkdir(mode=0o700)
+        os.chmod(scratch, 0o700)
+
+        items = multi_live_items(2)
+        for position, item in enumerate(items):
+            directory = scratch / "requests" / protocol.candidate_path_id(item)
+            directory.parent.mkdir(parents=True, exist_ok=True, mode=0o700)
+            os.chmod(directory.parent, 0o700)
+            directory.mkdir(mode=0o700)
+            os.chmod(directory, 0o700)
+            body = protocol.request_body(
+                item["sentence"], item["candidate"]["text"], item["mechanical_edit"][2]
+            )
+            protocol.perform_call(
+                directory,
+                body,
+                transport=CaptureTransport(["USE_CANDIDATE", "KEEP_ORIGINAL"][position]),
+            )
+        request_tree = driver.validator_driver.request_tree_identity(scratch / "requests")
+
+        rows_007m = {
+            "dassle-spelling": [{"index": index, "edits": []} for index in range(2)],
+            "dassle-spelling-preservation": [{"index": 0, "edits": []}],
+        }
+        driver.validator_driver.immutable_json(scratch / "CASE-RESULTS-007M.json", rows_007m)
+        driver.validator_driver.immutable_json(
+            scratch / "CASE-RESULTS-007J-REPLAY.json", copy.deepcopy(rows_007m)
+        )
+        projection_sha = driver.validator_driver.immutable_json(
+            scratch / "HYBRID-CASE-PROJECTIONS.json", copy.deepcopy(rows_007m)
+        )
+
+        census_sha = {
+            "RANK-POPULATION.json": driver.validator_driver.immutable_json(
+                scratch / "RANK-POPULATION.json", {"population": []}
+            ),
+            "CENSUS-SUMMARY.json": "7" * 64,
+            "DISPATCH-MANIFEST.json": driver.validator_driver.immutable_json(
+                scratch / "DISPATCH-MANIFEST.json", {"dispatch": []}
+            ),
+        }
+
+        linkage = {
+            "adoption": {
+                "c_gt_1_completed_reused": 2,
+                "c_gt_1_completed_reused_attempted": 2,
+                "c_gt_1_completed_reused_uncertain": 0,
+                "c_gt_1_fresh": 0,
+                "c_gt_1_interrupted_carried": 0,
+            },
+            "configuration_sha256": "1" * 64,
+            "defect": "synthetic failed-instrument defect",
+            "failed_root": SYN_FAILED_ROOT_NAME,
+            "failed_root_path": f"/synthetic/{SYN_FAILED_ROOT_NAME}",
+            "harness_revision_head": SYN_FROZEN_HEAD,
+            "implementation_head": SYN_RECOMPUTE_HEAD,
+            "preserved_unchanged": True,
+            "request_tree": request_tree,
+            "resampled": False,
+            "run_status_sha256": "2" * 64,
+            "schema_version": 1,
+            "state_census": {
+                "completed_attempted": 2,
+                "completed_uncertain_persisted": 0,
+                "missing": 0,
+                "request_only_interrupted": 0,
+            },
+        }
+        driver.validator_driver.immutable_json(scratch / "FAILED-ROOT-LINKAGE.json", linkage)
+        configuration = {
+            "run_id": driver.RUN_ID,
+            "status": "FROZEN_BEFORE_LIVE_EXECUTION",
+            "implementation_head": SYN_FROZEN_HEAD,
+            "adoption": {
+                "linkage_sha256": driver.sha256_bytes(driver.canonical_bytes(linkage))
+            },
+        }
+        driver.validator_driver.immutable_json(scratch / "CONFIGURATION.json", configuration)
+        driver.validator_driver.immutable_json(
+            scratch / "LIVE-AGGREGATE.json", {"status": "LIVE_CENSUS_COMPLETE"}
+        )
+        configuration_sha = driver.sha256_file(scratch / "CONFIGURATION.json")
+        live_sha = driver.sha256_file(scratch / "LIVE-AGGREGATE.json")
+
+        paired_slices = {}
+        for slice_name, facts in SYN_HEADLINE.items():
+            metrics = ("tp", "fp", "fn") if "tp" in facts else ("fp",)
+            paired_slices[slice_name] = {
+                "007m_hybrid": {metric: facts[metric] for metric in metrics},
+                "007j_validated_fallback": {
+                    metric: facts["baseline_" + metric] for metric in metrics
+                },
+                "delta_vs_007j_validated_fallback": {
+                    metric: facts["delta_" + metric] for metric in metrics
+                },
+            }
+        hybrid = {
+            "status": "HYBRID_RECOMPUTE_COMPLETE",
+            "experiment_id": driver.EXPERIMENT_ID,
+            "run_id": driver.RUN_ID,
+            "frozen_implementation_head": SYN_FROZEN_HEAD,
+            "recompute_head": SYN_RECOMPUTE_HEAD,
+            "configuration_sha256": configuration_sha,
+            "live_aggregate_sha256": live_sha,
+            "artifacts_sha256": {
+                "case_results_007m": driver.sha256_file(
+                    scratch / "CASE-RESULTS-007M.json"
+                ),
+                "case_results_007j_replay": driver.sha256_file(
+                    scratch / "CASE-RESULTS-007J-REPLAY.json"
+                ),
+                "hybrid_case_projections": projection_sha,
+            },
+            "observations": SYN_OBSERVATIONS,
+            "population": SYN_POPULATION,
+            "hybrid_composition": SYN_COMPOSITION,
+            "c_gt_1_outcomes": SYN_OUTCOMES,
+            "paired_slices": paired_slices,
+            "preservation": SYN_PRESERVATION,
+            "views": {"dassle-spelling": {"all": {"F0.5": SYN_F05}}},
+        }
+        hybrid_sha = driver.validator_driver.immutable_json(
+            scratch / "HYBRID-AGGREGATE.json", hybrid
+        )
+        run_status = {
+            "aggregate_artifacts_verified": True,
+            "c1_copied_observations": 3,
+            "c_gt_1_interrupted_carried": 0,
+            "c_gt_1_observations": 2,
+            "c_gt_1_reused_observations": 2,
+            "configuration_sha256": configuration_sha,
+            "dispatched_http_requests": 2,
+            "implementation_head": SYN_FROZEN_HEAD,
+            "live_aggregate_sha256": live_sha,
+            "operational_failures": 0,
+            "run_id": driver.RUN_ID,
+            "status": "LIVE_CENSUS_COMPLETE",
+            "uncertain_deliveries": 0,
+            "workers": 8,
+        }
+        driver.validator_driver.immutable_json(scratch / "RUN-STATUS.json", run_status)
+        driver.validator_driver.immutable_json(
+            scratch / "RECOMPUTE-STATUS.json",
+            {
+                "status": "HYBRID_RECOMPUTE_COMPLETE",
+                "run_id": driver.RUN_ID,
+                "frozen_implementation_head": SYN_FROZEN_HEAD,
+                "recompute_head": SYN_RECOMPUTE_HEAD,
+                "configuration_sha256": configuration_sha,
+                "live_aggregate_sha256": live_sha,
+                "hybrid_aggregate_sha256": hybrid_sha,
+                "hybrid_case_projections_sha256": projection_sha,
+                "case_results_verified": True,
+                "new_calls": 0,
+                "resampled": False,
+                "finished_utc": "2026-09-13T00:00:00Z",
+            },
+        )
+        driver.validator_driver.immutable_json(
+            scratch / "WORKER-RESULT.json",
+            {
+                str(worker): {
+                    "assigned": 0,
+                    "completed": 0,
+                    "dispatched_http": 0,
+                    "failures": 0,
+                }
+                for worker in range(8)
+            },
+        )
+        driver.validator_driver.immutable_json(
+            scratch / "C1-OBSERVATION-RECORDS.json",
+            [{"index": position} for position in range(1_035)],
+        )
+        source = {
+            "branch": driver.BRANCH,
+            "candidate_manifest_sha256": "3" * 64,
+            "configuration_sha256": "4" * 64,
+            "results_sha256": "5" * 64,
+            "source_experiment": "007-j-levenshtein-one-contextual-validator",
+            "implementation_head": SYN_FROZEN_HEAD,
+            "head_blobs": {
+                relative: {"sha256": digest} for relative, digest in SYN_BLOBS.items()
+            },
+            "request_tree": dict(SYN_007J_REQUEST_TREE),
+            "census_artifacts_sha256": dict(census_sha),
+            "census_root": f"/synthetic/{SYN_CENSUS_ROOT_NAME}",
+            "failed_root": f"/synthetic/{SYN_FAILED_ROOT_NAME}",
+            "source_root": f"/synthetic/{SYN_SOURCE_ROOT_NAME}",
+        }
+        driver.validator_driver.immutable_json(scratch / "SOURCE.json", source)
+
+        patch_values: dict[str, object] = {
+            "EXPECTED_FINAL_ROOT": SYN_FINAL_ROOT,
+            "EXPECTED_FINAL_CONFIGURATION": configuration_sha,
+            "EXPECTED_FINAL_LIVE_AGGREGATE": live_sha,
+            "EXPECTED_FINAL_HYBRID_AGGREGATE": hybrid_sha,
+            "EXPECTED_FINAL_HYBRID_PROJECTIONS": projection_sha,
+            "EXPECTED_FINAL_FROZEN_HEAD": SYN_FROZEN_HEAD,
+            "EXPECTED_FINAL_RECOMPUTE_HEAD": SYN_RECOMPUTE_HEAD,
+            "EXPECTED_FINAL_REQUEST_TREE": request_tree,
+            "EXPECTED_FINAL_DATASET_ROWS": SYN_DATASET_ROWS,
+            "EXPECTED_FINAL_HEAD_BLOBS": SYN_BLOBS,
+            "EXPECTED_FINAL_RUN_STATUS": run_status,
+            "EXPECTED_FINAL_OBSERVATIONS": SYN_OBSERVATIONS,
+            "EXPECTED_FINAL_OUTCOMES": SYN_OUTCOMES,
+            "EXPECTED_FINAL_POPULATION": SYN_POPULATION,
+            "EXPECTED_FINAL_HYBRID_COMPOSITION": SYN_COMPOSITION,
+            "EXPECTED_FINAL_HEADLINE": SYN_HEADLINE,
+            "EXPECTED_FINAL_SPELLING_F05": SYN_F05,
+            "EXPECTED_FINAL_PRESERVATION": SYN_PRESERVATION,
+            "EXPECTED_FINAL_FAILED_LINKAGE": {
+                key: value for key, value in linkage.items() if key != "failed_root_path"
+            },
+            "EXPECTED_007J_CANDIDATE_MANIFEST": "3" * 64,
+            "EXPECTED_007J_CONFIGURATION": "4" * 64,
+            "EXPECTED_007J_RESULTS": "5" * 64,
+            "EXPECTED_007J_REQUEST_TREE": dict(SYN_007J_REQUEST_TREE),
+            "EXPECTED_CENSUS_SHA": dict(census_sha),
+            "EXPECTED_CENSUS_ROOT": SYN_CENSUS_ROOT_NAME,
+            "EXPECTED_SECOND_FAILED_ROOT": SYN_FAILED_ROOT_NAME,
+        }
+        return scratch, hybrid, patch_values
+
+    @contextlib.contextmanager
+    def _patched_final(self, values: dict[str, object], **overrides: object):
+        merged = dict(values)
+        merged.update(overrides)
+        with contextlib.ExitStack() as stack:
+            for name, value in merged.items():
+                stack.enter_context(patch.object(driver, name, value))
+            yield
+
+    def _synthetic_git_repo(self, parent: Path) -> Path:
+        repo = parent / "gitrepo"
+        repo.mkdir(mode=0o700)
+        self._git(repo, "init", "-q")
+        self._git(repo, "checkout", "-q", "-b", driver.BRANCH)
+        self._git(repo, "config", "user.name", "Synthetic Publication")
+        self._git(repo, "config", "user.email", "publication@example.invalid")
+        for relative in driver.SHARED_CODE_FILES:
+            path = repo / relative
+            path.parent.mkdir(parents=True, exist_ok=True)
+            path.write_bytes(b"synthetic " + relative.encode("utf-8"))
+        self._git(repo, "add", "-A")
+        self._git(repo, "commit", "-q", "-m", "synthetic publication head")
+        return repo
+
+    def test_synthetic_final_root_verifies_and_projects_private_records(self) -> None:
+        with tempfile.TemporaryDirectory() as raw:
+            parent = Path(raw)
+            scratch, hybrid, values = self._build_final_root(parent)
+            with self._patched_final(values):
+                verified = driver.verify_final_root_state(scratch)
+                self.assertEqual(
+                    verified["HYBRID-AGGREGATE.json"],
+                    values["EXPECTED_FINAL_HYBRID_AGGREGATE"],
+                )
+                self.assertEqual(
+                    verified["CASE-RESULTS-007M.json"],
+                    driver.sha256_file(scratch / "CASE-RESULTS-007M.json"),
+                )
+                manifest = driver.final_private_manifest(verified)
+                self.assertEqual(manifest, driver.final_private_manifest(verified))
+                self.assertEqual(manifest["c_gt_1_new_calls"], 0)
+                self.assertEqual(manifest["actual_experiment_calls"], 866)
+                self.assertEqual(manifest["final_root"], SYN_FINAL_ROOT)
+                self.assertFalse(manifest["resampled"])
+                report = driver.final_private_report(hybrid, SYN_CENSUS_SUMMARY)
+                self.assertEqual(report, driver.final_private_report(hybrid, SYN_CENSUS_SUMMARY))
+                self.assertTrue(report.startswith("# Private 007-m report\n"))
+
+    def test_tampered_final_artifact_is_rejected(self) -> None:
+        with tempfile.TemporaryDirectory() as raw:
+            parent = Path(raw)
+            scratch, _hybrid, values = self._build_final_root(parent)
+            with self._patched_final(values):
+                driver.verify_final_root_state(scratch)
+                (scratch / "LIVE-AGGREGATE.json").write_bytes(b"tampered")
+                with self.assertRaisesRegex(
+                    driver.validator_driver.ExperimentError, "hash mismatch"
+                ):
+                    driver.verify_final_root_state(scratch)
+
+    def test_recompute_status_drift_is_rejected(self) -> None:
+        for key, drift in (("new_calls", 1), ("case_results_verified", False)):
+            with self.subTest(key=key), tempfile.TemporaryDirectory() as raw:
+                parent = Path(raw)
+                scratch, _hybrid, values = self._build_final_root(parent)
+                recompute = json.loads(
+                    (scratch / "RECOMPUTE-STATUS.json").read_text(encoding="utf-8")
+                )
+                recompute[key] = drift
+                (scratch / "RECOMPUTE-STATUS.json").write_bytes(
+                    protocol.canonical_bytes(recompute)
+                )
+                with (
+                    self._patched_final(values),
+                    self.assertRaisesRegex(
+                        driver.ExperimentError,
+                        f"final RECOMPUTE-STATUS {key} drift",
+                    ),
+                ):
+                    driver.verify_final_root_state(scratch)
+
+    def test_outcome_decision_drift_is_rejected(self) -> None:
+        with tempfile.TemporaryDirectory() as raw:
+            parent = Path(raw)
+            scratch, _hybrid, values = self._build_final_root(parent)
+            drifted = copy.deepcopy(SYN_OUTCOMES)
+            drifted["decisions"]["USE_CANDIDATE"] = 2
+            with (
+                self._patched_final(values, EXPECTED_FINAL_OUTCOMES=drifted),
+                self.assertRaisesRegex(
+                    driver.ExperimentError,
+                    "final HYBRID-AGGREGATE outcomes decisions drift",
+                ),
+            ):
+                driver.verify_final_root_state(scratch)
+
+    def test_headline_slice_drift_is_rejected(self) -> None:
+        with tempfile.TemporaryDirectory() as raw:
+            parent = Path(raw)
+            scratch, _hybrid, values = self._build_final_root(parent)
+            drifted = copy.deepcopy(SYN_HEADLINE)
+            drifted["spelling-all"]["tp"] = 9
+            with (
+                self._patched_final(values, EXPECTED_FINAL_HEADLINE=drifted),
+                self.assertRaisesRegex(
+                    driver.ExperimentError, "final headline spelling-all tp drift"
+                ),
+            ):
+                driver.verify_final_root_state(scratch)
+
+    def test_wrong_root_name_is_rejected(self) -> None:
+        with tempfile.TemporaryDirectory() as raw:
+            parent = Path(raw)
+            scratch, _hybrid, values = self._build_final_root(parent)
+            renamed = parent / "other-root"
+            scratch.rename(renamed)
+            with (
+                self._patched_final(values),
+                self.assertRaisesRegex(
+                    driver.ExperimentError, "strategy-accepted 007-m root"
+                ),
+            ):
+                driver.verify_final_root_state(renamed)
+
+    def test_public_final_projection_is_data_free_and_self_hashed(self) -> None:
+        with tempfile.TemporaryDirectory() as raw:
+            parent = Path(raw)
+            _scratch, hybrid, values = self._build_final_root(parent)
+            verified = {
+                "CASE-RESULTS-007M.json": "e" * 64,
+                "CASE-RESULTS-007J-REPLAY.json": "f" * 64,
+                "FAILED-ROOT-LINKAGE.json": "b" * 64,
+            }
+            config, result = driver.public_final_projection(
+                hybrid,
+                SYN_CENSUS_SUMMARY,
+                verified,
+                {"manifest": "9" * 64, "report": "8" * 64},
+            )
+            unsigned = {
+                key: value for key, value in config.items() if key != "configuration_sha256"
+            }
+            self.assertEqual(
+                config["configuration_sha256"],
+                driver.sha256_bytes(driver.canonical_bytes(unsigned)),
+            )
+            self.assertEqual(result["configuration_sha256"], config["configuration_sha256"])
+            self.assertEqual(result["status"], "COMPLETE")
+            self.assertIsNone(result["blocker"])
+            self.assertEqual(config["limits"]["new_call_budget"], 0)
+            self.assertFalse(config["limits"]["resampling"])
+            self.assertEqual(config["private_evidence"]["manifest_sha256"], "9" * 64)
+            self.assertEqual(result["private_evidence_sha256"]["private_manifest_sha256"], "9" * 64)
+            lineage = result["lineage"]
+            self.assertEqual(
+                lineage["actual_experiment_calls"],
+                {"ffdf13": 188, "090ea8": 678, "total": 866},
+            )
+            self.assertEqual(
+                lineage["cross_root_reused_observations"],
+                {"ffdf13_to_090ea8": 196, "090ea8_to_final_root": 882},
+            )
+            self.assertEqual(lineage["final_root_new_calls"], 0)
+            self.assertFalse(lineage["resampled"])
+            self.assertEqual(len(lineage["failed_instrument_roots"]), 2)
+            config_name = f"configs/{driver.EXPERIMENT_ID}.json"
+            result_name = f"results/{driver.EXPERIMENT_ID}.json.gz"
+            self.assertEqual(
+                publication_guard._validate_bytes(config_name, driver.canonical_bytes(config)),
+                [],
+            )
+            self.assertEqual(
+                publication_guard._validate_bytes(
+                    result_name, gzip.compress(driver.canonical_bytes(result), mtime=0)
+                ),
+                [],
+            )
+            rendered = (
+                driver.canonical_bytes(config) + driver.canonical_bytes(result)
+            ).decode("utf-8")
+            for token in ("kova", "dola", "belo", "lepa", "bela", "belal", "dolq"):
+                self.assertNotIn(token, rendered)
+            encoded = rendered.encode("utf-8")
+            for marker in publication_guard.PATH_MARKERS:
+                self.assertNotIn(marker, encoded)
+
+    def test_public_write_is_immutable(self) -> None:
+        with tempfile.TemporaryDirectory() as raw:
+            repo = Path(raw)
+            _scratch, hybrid, _values = self._build_final_root(repo)
+            verified = {
+                "CASE-RESULTS-007M.json": "e" * 64,
+                "CASE-RESULTS-007J-REPLAY.json": "f" * 64,
+                "FAILED-ROOT-LINKAGE.json": "b" * 64,
+            }
+            config, result = driver.public_final_projection(
+                hybrid,
+                SYN_CENSUS_SUMMARY,
+                verified,
+                {"manifest": "9" * 64, "report": "8" * 64},
+            )
+            first = driver.write_public(repo, config, result)
+            self.assertEqual(driver.write_public(repo, config, result), first)
+            drifted = dict(config)
+            drifted["run_id"] = "drifted"
+            with self.assertRaisesRegex(
+                driver.validator_driver.ExperimentError, "public artifact conflict"
+            ):
+                driver.write_public(repo, drifted, result)
+
+    def test_publication_git_guard_binds_frozen_lineage(self) -> None:
+        with tempfile.TemporaryDirectory() as raw:
+            repo = self._synthetic_git_repo(Path(raw))
+            head = self._git(repo, "rev-parse", "HEAD").strip()
+            blobs = {
+                relative: driver.sha256_bytes((repo / relative).read_bytes())
+                for relative in driver.SHARED_CODE_FILES
+            }
+            with (
+                patch.object(driver, "EXPECTED_FINAL_RECOMPUTE_HEAD", head),
+                patch.object(driver, "EXPECTED_FINAL_HEAD_BLOBS", blobs),
+            ):
+                self.assertEqual(driver._final_publication_git_guard(repo), head)
+                (repo / driver.SHARED_CODE_FILES[0]).write_bytes(b"drifted")
+                self._git(repo, "add", "-A")
+                self._git(repo, "commit", "-q", "-m", "shared code drift")
+                with self.assertRaisesRegex(
+                    driver.ExperimentError, "shared scientific code drifted"
+                ):
+                    driver._final_publication_git_guard(repo)
+                self._git(repo, "checkout", "-q", "-b", "other-branch")
+                with self.assertRaisesRegex(driver.ExperimentError, "publication branch mismatch"):
+                    driver._final_publication_git_guard(repo)
+
+    def test_publication_git_guard_rejects_non_descendant_head(self) -> None:
+        with tempfile.TemporaryDirectory() as raw:
+            repo = self._synthetic_git_repo(Path(raw))
+            ancestor = self._git(repo, "rev-parse", "HEAD").strip()
+            self._git(repo, "checkout", "-q", "--detach")
+            self._git(repo, "branch", "-q", "-D", driver.BRANCH)
+            self._git(repo, "checkout", "-q", "--orphan", "orphan")
+            self._git(repo, "add", "-A")
+            self._git(repo, "commit", "-q", "-m", "orphan head")
+            self._git(repo, "branch", "-q", "-M", driver.BRANCH)
+            head = self._git(repo, "rev-parse", "HEAD").strip()
+            self.assertNotEqual(head, ancestor)
+            blobs = {
+                relative: driver.sha256_bytes((repo / relative).read_bytes())
+                for relative in driver.SHARED_CODE_FILES
+            }
+            with (
+                patch.object(driver, "EXPECTED_FINAL_RECOMPUTE_HEAD", ancestor),
+                patch.object(driver, "EXPECTED_FINAL_HEAD_BLOBS", blobs),
+                self.assertRaisesRegex(
+                    driver.ExperimentError, "recompute-head descendant"
+                ),
+            ):
+                driver._final_publication_git_guard(repo)
 
 if __name__ == "__main__":
     unittest.main()

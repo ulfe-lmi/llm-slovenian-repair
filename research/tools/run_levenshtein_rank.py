@@ -205,6 +205,295 @@ EXPECTED_SECOND_ADOPTED_FRESH_COUNTS = {
     "dassle-spelling-preservation": 0,
 }
 
+# Increment 3: final zero-call root and strategy-reviewed durable facts.
+# The final root ec2962 adopted every completed observation from the
+# preserved failed-instrument root 090ea8 (866 attempted plus 16
+# uncertain-delivery observations) and the 1035 C=1 observations with zero
+# new calls; the hybrid recompute verified both case-result projections
+# byte-for-byte before writing the hybrid aggregate.  The actual experiment
+# calls were made across the preserved roots (188 in ffdf13, 678 in 090ea8);
+# cross-root reuse and actual calls are reported distinctly.
+EXPECTED_FINAL_ROOT = "007-m-rank-ambiguous-levenshtein-candidates-recovery.ec2962"
+EXPECTED_FINAL_CONFIGURATION = (
+    "0026a1a9d27652c36e2c5a960b10fafc1c9a93b0690d93b09089aa58884f5c26"
+)
+EXPECTED_FINAL_LIVE_AGGREGATE = (
+    "a30a2114563688adb18954237b97cfd4d6094a0e73566c2b29fd8f14c823ae7f"
+)
+EXPECTED_FINAL_HYBRID_AGGREGATE = (
+    "cea2c167ad640fecb03408bdad98fb07c24dba2c9a4e014fe35bd512cd27c4be"
+)
+EXPECTED_FINAL_HYBRID_PROJECTIONS = (
+    "3c779d96fd06237326902a5162c09f0588482491333d9f72be551eb9040f012c"
+)
+EXPECTED_FINAL_FROZEN_HEAD = "537aa6a3ff03c60dd1b2c7f697c577940d52e88d"
+EXPECTED_FINAL_RECOMPUTE_HEAD = "f3fecab35c64ae202f6fed51d46e472b52270eb3"
+EXPECTED_007J_PROFILE_SHA256 = (
+    "c79fd658db9c2006c0e542a12946962880e4ee3cec9dc57bc987b62d26c2dd60"
+)
+EXPECTED_FINAL_REQUEST_TREE = {
+    "file_count": 7_668,
+    "total_bytes": 12_140_924,
+    "sha256sum_manifest_sha256": (
+        "6e287f3c835285d5a31132f42c31878dc91099dc91783debb9900123c033b449"
+    ),
+}
+EXPECTED_FINAL_DATASET_ROWS = {
+    "dassle-spelling": 1_487,
+    "dassle-spelling-preservation": 1_486,
+}
+# Code identity recorded in the final root SOURCE.json at the frozen head.
+EXPECTED_FINAL_HEAD_BLOBS = {
+    "research/contextual_validator.py": (
+        "e6857ec388068c4b001eec48517505aa02d6f03781b0c3854bdeccce4bc99b64"
+    ),
+    "research/curated/historical_scoring.py": (
+        "26dbfdd235790558e12e4a794379d72f1e04fc8869d5bd07f9baee665566dc40"
+    ),
+    "research/curated/patching.py": (
+        "588b33d7e19adabd0c88ac60fab6ba350302f43250efa629e6a1fd8a98c50e5e"
+    ),
+    "research/levenshtein_rank.py": (
+        "5eb2771026fbdd2850ea4629a0f600502338ebd1918c1430386105904cfff586"
+    ),
+    "research/one_substitution.py": (
+        "0fdc338e4560d33f4ad961f0fe86b65d03033db67e259154322b4ba976002196"
+    ),
+    "research/tests/test_levenshtein_rank.py": (
+        "7b15057605c2bdeb60d7d6cd17a103a68744e2ad32b91e2366f341c86a55acf1"
+    ),
+    "research/tools/run_contextual_validator.py": (
+        "214d1b0368ef2798cb52132313a3667c432d4dd99a4b3c1bca994e14346a9ff6"
+    ),
+    "research/tools/run_levenshtein_rank.py": (
+        "20da0a886cf3b61e76bf5789056b596fc5ec1608a94820b0f900debcbe48a942"
+    ),
+}
+# The six scientific files that must be byte-identical to the frozen head at
+# any publication head; the two 007-m increment files may legitimately differ.
+SHARED_CODE_FILES = (
+    "research/contextual_validator.py",
+    "research/curated/historical_scoring.py",
+    "research/curated/patching.py",
+    "research/levenshtein_rank.py",
+    "research/one_substitution.py",
+    "research/tools/run_contextual_validator.py",
+)
+EXPECTED_FINAL_RUN_STATUS = {
+    "aggregate_artifacts_verified": True,
+    "c1_copied_observations": 1_035,
+    "c_gt_1_interrupted_carried": 0,
+    "c_gt_1_observations": 882,
+    "c_gt_1_reused_observations": 882,
+    "configuration_sha256": EXPECTED_FINAL_CONFIGURATION,
+    "dispatched_http_requests": 866,
+    "implementation_head": EXPECTED_FINAL_FROZEN_HEAD,
+    "live_aggregate_sha256": EXPECTED_FINAL_LIVE_AGGREGATE,
+    "operational_failures": 87,
+    "run_id": RUN_ID,
+    "status": "LIVE_CENSUS_COMPLETE",
+    "uncertain_deliveries": 16,
+    "workers": 8,
+}
+EXPECTED_FINAL_OBSERVATIONS = {
+    "c1_copied": 1_035,
+    "c_gt_1": 882,
+    "c_gt_1_interrupted_carried": 0,
+    "c_gt_1_new_calls": 0,
+    "c_gt_1_reused": 882,
+    "c_gt_1_reused_attempted": 866,
+    "c_gt_1_reused_uncertain": 16,
+    "dispatched_http": 866,
+    "operational_failures": 87,
+    "total": 1_917,
+    "uncertain_deliveries": 16,
+}
+EXPECTED_FINAL_OUTCOMES = {
+    "accepted_exact_reference": 219,
+    "accepted_non_reference": 51,
+    "accepted_unresolved": 0,
+    "attribution": {"exact_reference": 247, "non_reference": 635},
+    "attribution_by_decision": {
+        "FAILURE": {"exact_reference": 13, "non_reference": 74},
+        "KEEP_ORIGINAL": {"exact_reference": 13, "non_reference": 496},
+        "UNCERTAIN": {"exact_reference": 2, "non_reference": 14},
+        "USE_CANDIDATE": {"exact_reference": 219, "non_reference": 51},
+    },
+    "decisions": {
+        "FAILURE": 87,
+        "KEEP_ORIGINAL": 509,
+        "UNCERTAIN": 16,
+        "USE_CANDIDATE": 270,
+    },
+    "latency_seconds": {
+        "max": 184.56243890197948,
+        "mean": 16.193259791632915,
+        "median": 11.124804617022164,
+        "n": 866,
+        "p95": 33.48273886600509,
+        "sum": 14023.362979554106,
+    },
+    "token_totals": {
+        "input_tokens": 173_422,
+        "output_tokens": 393_685,
+        "reasoning_tokens": 388_375,
+    },
+    "token_totals_new_calls": {
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "reasoning_tokens": 0,
+    },
+}
+EXPECTED_FINAL_POPULATION = {
+    "c1": 1_035,
+    "c_gt_1": 882,
+    "c_gt_1_by_phase": {
+        "dassle-spelling": 651,
+        "dassle-spelling-preservation": 231,
+    },
+    "c_gt_1_new_calls": 0,
+    "c_gt_1_new_calls_by_phase": {
+        "dassle-spelling": 0,
+        "dassle-spelling-preservation": 0,
+    },
+    "scheduled_total": 1_917,
+}
+EXPECTED_FINAL_HYBRID_COMPOSITION = {
+    "base": "007-j validated_fallback row per case",
+    "policy": (
+        "retain base edits not overlapping any C>1 target span; apply the "
+        "CPU winner edit on USE_CANDIDATE; KEEP_ORIGINAL/UNCERTAIN/FAILURE "
+        "keep the original target text; composition conflict rolls back to "
+        "the original with a HYBRID_COMPOSITION failure"
+    ),
+    "cases_with_c_gt_1_targets": 751,
+    "winner_edits_applied": 270,
+    "base_edits_removed": 158,
+    "rollbacks": 0,
+    "new_calls": 0,
+    "resampled": False,
+}
+# Headline paired-slice facts (hybrid is the primary projection).
+EXPECTED_FINAL_HEADLINE = {
+    "spelling-all": {
+        "tp": 799,
+        "fp": 114,
+        "fn": 716,
+        "precision": 0.8751369112814896,
+        "recall": 0.5273927392739274,
+        "baseline_tp": 822,
+        "baseline_fp": 154,
+        "baseline_fn": 693,
+        "delta_tp": -23,
+        "delta_fp": -40,
+        "delta_fn": 23,
+    },
+    "spelling-initial-uv": {
+        "tp": 49,
+        "fp": 7,
+        "fn": 26,
+        "baseline_tp": 42,
+        "baseline_fp": 7,
+        "baseline_fn": 33,
+        "delta_tp": 7,
+        "delta_fp": 0,
+        "delta_fn": -7,
+    },
+    "spelling-without-initial-uv": {
+        "tp": 750,
+        "fp": 107,
+        "fn": 690,
+        "baseline_tp": 780,
+        "baseline_fp": 147,
+        "baseline_fn": 660,
+        "delta_tp": -30,
+        "delta_fp": -40,
+        "delta_fn": 30,
+    },
+    "preservation-all": {
+        "fp": 83,
+        "baseline_fp": 101,
+        "delta_fp": -18,
+    },
+}
+EXPECTED_FINAL_SPELLING_F05 = 0.7731759241339268
+EXPECTED_FINAL_PRESERVATION = {
+    "007m_hybrid": {"hybrid_cases": 78, "hybrid_edit_units": 83},
+    "007j_validated_fallback": {
+        "validated_fallback_cases": 93,
+        "validated_fallback_edit_units": 101,
+        "validated_only_cases": 87,
+        "validated_only_edit_units": 94,
+    },
+    "integrity_007m_hybrid": {
+        "exact_expected_output_failures": 0,
+        "outside_span_differences": 0,
+        "protected_differences": 0,
+    },
+}
+EXPECTED_FINAL_FAILED_LINKAGE = {
+    "adoption": {
+        "c_gt_1_completed_reused": 882,
+        "c_gt_1_completed_reused_attempted": 866,
+        "c_gt_1_completed_reused_uncertain": 16,
+        "c_gt_1_fresh": 0,
+        "c_gt_1_interrupted_carried": 0,
+    },
+    "configuration_sha256": EXPECTED_SECOND_FAILED_ROOT_CONFIGURATION,
+    "defect": (
+        "92bee3a complete_live_result 007-j replay identity gate compared "
+        "in-memory tuple-typed attribution fields against the JSON-normalized "
+        "persisted rows, so the fully observed root could not aggregate; "
+        "preserved unchanged as failed-instrument evidence"
+    ),
+    "failed_root": EXPECTED_SECOND_FAILED_ROOT,
+    "harness_revision_head": EXPECTED_FINAL_FROZEN_HEAD,
+    "implementation_head": EXPECTED_SECOND_FAILED_ROOT_HEAD,
+    "preserved_unchanged": True,
+    "request_tree": EXPECTED_FINAL_REQUEST_TREE,
+    "resampled": False,
+    "run_status_sha256": EXPECTED_SECOND_FAILED_ROOT_RUN_STATUS,
+    "schema_version": 1,
+    "state_census": {
+        "completed_attempted": 866,
+        "completed_uncertain_persisted": 16,
+        "missing": 0,
+        "request_only_interrupted": 0,
+    },
+}
+EXPECTED_FAILED_ROOT_DEFECT = (
+    "88ca4dfe verify_c_gt_1_observations rejected the canonical "
+    "interrupted-finalization file set (request + dispatch marker + "
+    "raw/observation UNKNOWN), so the root cannot complete its own live "
+    "resume; preserved unchanged as failed-instrument evidence"
+)
+EXPECTED_FINAL_CENSUS_POPULATION = {
+    "dassle-spelling": 651,
+    "dassle-spelling-preservation": 231,
+    "total": 882,
+}
+EXPECTED_FINAL_CENSUS_FACTS = {
+    "total_candidate_pairs": 4_372,
+    "operation_composition": {
+        "DELETION": 845,
+        "INSERTION": 726,
+        "SUBSTITUTION": 2_801,
+    },
+    "unique_top": 882,
+    "tied_top": 0,
+    "reference_present": 408,
+    "reference_absent": 474,
+    "reference_group_tied": 0,
+    "set_size": {"min": 2, "median": 3.0, "p90": 9, "p95": 14, "p99": 29, "max": 50},
+    "top_k_counts": {"1": 247, "2": 349, "3": 376, "5": 399, "10": 408},
+    "top1_rate_among_present": 0.6053921568627451,
+    "recall_ceiling": {
+        "spelling-all": 0.8118811881188119,
+        "spelling-initial-uv": 0.8933333333333333,
+        "spelling-without-initial-uv": 0.8076388888888889,
+    },
+}
+
 LIVE_CODE_FILES = (
     "research/levenshtein_rank.py",
     "research/tools/run_levenshtein_rank.py",
@@ -3488,7 +3777,727 @@ def run_recompute_hybrid(args: argparse.Namespace) -> dict[str, Any]:
     return recompute_hybrid(scratch, repo_root, source_root, census_root)
 
 
+# ---------------------------------------------------------------------------
+# Increment 3: aggregation verification and final data-free publication.
+#
+# The completed private root ec2962 adopted all 882 C>1 observations (866
+# attempted plus 16 uncertain-delivery) and all 1035 C=1 observations from the
+# preserved failed-instrument root 090ea8 with zero new calls; the hybrid
+# recompute recomputed and byte-matched both case-result projections before
+# writing the hybrid aggregate.  The actual experiment calls were made across
+# the preserved roots (188 in ffdf13, 678 in 090ea8); cross-root reuse and
+# actual calls are reported distinctly.  This step verifies the final root
+# against the strategy-reviewed frozen facts, writes the deterministic
+# private MANIFEST.json and REPORT.md, and projects the data-free public
+# configuration and aggregate result.  It makes no model calls, resamples
+# nothing, and changes no prior record.
+# ---------------------------------------------------------------------------
+
+
+def _expect_block(mapping: Any, key: str, expected: Any, label: str) -> None:
+    if not isinstance(mapping, dict) or mapping.get(key) != expected:
+        raise ExperimentError(f"{label} {key} drift")
+
+
+def verify_final_root_state(scratch: Path) -> dict[str, str]:
+    """Verify the final zero-call root end-to-end against frozen facts."""
+    validator_driver.require_owned_dir(scratch)
+    if scratch.name != EXPECTED_FINAL_ROOT:
+        raise ExperimentError("final root is not the strategy-accepted 007-m root")
+    for name, digest in (
+        ("CONFIGURATION.json", EXPECTED_FINAL_CONFIGURATION),
+        ("LIVE-AGGREGATE.json", EXPECTED_FINAL_LIVE_AGGREGATE),
+        ("HYBRID-AGGREGATE.json", EXPECTED_FINAL_HYBRID_AGGREGATE),
+        ("HYBRID-CASE-PROJECTIONS.json", EXPECTED_FINAL_HYBRID_PROJECTIONS),
+    ):
+        validator_driver.require_private_file(scratch / name, expected_sha=digest)
+    if read_json(scratch / "RUN-STATUS.json") != EXPECTED_FINAL_RUN_STATUS:
+        raise ExperimentError("final RUN-STATUS content drift")
+
+    recompute = read_json(scratch / "RECOMPUTE-STATUS.json")
+    for key, expected in (
+        ("status", "HYBRID_RECOMPUTE_COMPLETE"),
+        ("run_id", RUN_ID),
+        ("frozen_implementation_head", EXPECTED_FINAL_FROZEN_HEAD),
+        ("recompute_head", EXPECTED_FINAL_RECOMPUTE_HEAD),
+        ("configuration_sha256", EXPECTED_FINAL_CONFIGURATION),
+        ("live_aggregate_sha256", EXPECTED_FINAL_LIVE_AGGREGATE),
+        ("hybrid_aggregate_sha256", EXPECTED_FINAL_HYBRID_AGGREGATE),
+        ("hybrid_case_projections_sha256", EXPECTED_FINAL_HYBRID_PROJECTIONS),
+        ("case_results_verified", True),
+        ("new_calls", 0),
+        ("resampled", False),
+    ):
+        if not isinstance(recompute, dict) or recompute.get(key) != expected:
+            raise ExperimentError(f"final RECOMPUTE-STATUS {key} drift")
+    if not isinstance(recompute.get("finished_utc"), str) or not (
+        recompute["finished_utc"].endswith("Z")
+        and len(recompute["finished_utc"]) == 20
+    ):
+        raise ExperimentError("final RECOMPUTE-STATUS finished_utc drift")
+
+    hybrid = read_json(scratch / "HYBRID-AGGREGATE.json")
+    for key, expected in (
+        ("status", "HYBRID_RECOMPUTE_COMPLETE"),
+        ("experiment_id", EXPERIMENT_ID),
+        ("run_id", RUN_ID),
+        ("frozen_implementation_head", EXPECTED_FINAL_FROZEN_HEAD),
+        ("recompute_head", EXPECTED_FINAL_RECOMPUTE_HEAD),
+        ("configuration_sha256", EXPECTED_FINAL_CONFIGURATION),
+        ("live_aggregate_sha256", EXPECTED_FINAL_LIVE_AGGREGATE),
+    ):
+        if not isinstance(hybrid, dict) or hybrid.get(key) != expected:
+            raise ExperimentError(f"final HYBRID-AGGREGATE {key} drift")
+    _expect_block(
+        hybrid,
+        "artifacts_sha256",
+        {
+            "case_results_007m": sha256_file(scratch / "CASE-RESULTS-007M.json"),
+            "case_results_007j_replay": sha256_file(
+                scratch / "CASE-RESULTS-007J-REPLAY.json"
+            ),
+            "hybrid_case_projections": EXPECTED_FINAL_HYBRID_PROJECTIONS,
+        },
+        "final HYBRID-AGGREGATE",
+    )
+    for key, expected in (
+        ("observations", EXPECTED_FINAL_OBSERVATIONS),
+        ("population", EXPECTED_FINAL_POPULATION),
+        ("hybrid_composition", EXPECTED_FINAL_HYBRID_COMPOSITION),
+    ):
+        _expect_block(hybrid, key, expected, "final HYBRID-AGGREGATE")
+    outcomes = hybrid.get("c_gt_1_outcomes")
+    for key, expected in EXPECTED_FINAL_OUTCOMES.items():
+        _expect_block(outcomes, key, expected, "final HYBRID-AGGREGATE outcomes")
+    paired = hybrid.get("paired_slices")
+    if not isinstance(paired, dict):
+        raise ExperimentError("final HYBRID-AGGREGATE paired_slices drift")
+    for slice_name, facts in EXPECTED_FINAL_HEADLINE.items():
+        entry = paired.get(slice_name)
+        if not isinstance(entry, dict):
+            raise ExperimentError(f"final paired slice missing: {slice_name}")
+        for projection in ("007m_hybrid", "007j_validated_fallback"):
+            block = entry.get(projection)
+            if not isinstance(block, dict):
+                raise ExperimentError(f"final paired slice missing {projection}")
+        hybrid_view = entry["007m_hybrid"]
+        baseline = entry["007j_validated_fallback"]
+        delta = entry.get("delta_vs_007j_validated_fallback")
+        metrics = ("tp", "fp", "fn") if "tp" in facts else ("fp",)
+        for metric in metrics:
+            if hybrid_view.get(metric) != facts[metric]:
+                raise ExperimentError(f"final headline {slice_name} {metric} drift")
+            if baseline.get(metric) != facts["baseline_" + metric]:
+                raise ExperimentError(f"final baseline {slice_name} {metric} drift")
+            if not isinstance(delta, dict) or delta.get(metric) != facts["delta_" + metric]:
+                raise ExperimentError(f"final delta {slice_name} {metric} drift")
+    if (
+        hybrid.get("views", {}).get("dassle-spelling", {}).get("all", {}).get("F0.5")
+        != EXPECTED_FINAL_SPELLING_F05
+    ):
+        raise ExperimentError("final headline spelling F0.5 drift")
+    _expect_block(hybrid, "preservation", EXPECTED_FINAL_PRESERVATION, "final")
+
+    projections = read_json(scratch / "HYBRID-CASE-PROJECTIONS.json")
+    if not isinstance(projections, dict) or {
+        phase: len(rows) for phase, rows in projections.items()
+    } != EXPECTED_FINAL_DATASET_ROWS:
+        raise ExperimentError("final hybrid projection row drift")
+    for name in ("CASE-RESULTS-007M.json", "CASE-RESULTS-007J-REPLAY.json"):
+        rows = read_json(scratch / name)
+        if not isinstance(rows, dict) or {
+            phase: len(phase_rows) for phase, phase_rows in rows.items()
+        } != EXPECTED_FINAL_DATASET_ROWS:
+            raise ExperimentError(f"final case results row drift: {name}")
+
+    workers = read_json(scratch / "WORKER-RESULT.json")
+    if not isinstance(workers, dict) or set(workers) != {str(w) for w in range(8)}:
+        raise ExperimentError("final WORKER-RESULT worker drift")
+    for worker, status in workers.items():
+        for key in ("assigned", "completed", "dispatched_http", "failures"):
+            if not isinstance(status, dict) or status.get(key) != 0:
+                raise ExperimentError(f"final WORKER-RESULT {worker} {key} drift")
+    c1_records = read_json(scratch / "C1-OBSERVATION-RECORDS.json")
+    if not isinstance(c1_records, list) or len(c1_records) != 1_035:
+        raise ExperimentError("final C=1 observation record drift")
+
+    linkage = read_json(scratch / "FAILED-ROOT-LINKAGE.json")
+    for key, expected in EXPECTED_FINAL_FAILED_LINKAGE.items():
+        if not isinstance(linkage, dict) or linkage.get(key) != expected:
+            raise ExperimentError(f"final FAILED-ROOT-LINKAGE {key} drift")
+    if (
+        not isinstance(linkage, dict)
+        or not isinstance(linkage.get("failed_root_path"), str)
+        or linkage["failed_root_path"].rstrip("/").rsplit("/", 1)[-1]
+        != EXPECTED_SECOND_FAILED_ROOT
+    ):
+        raise ExperimentError("final FAILED-ROOT-LINKAGE failed_root_path drift")
+    if (
+        sha256_bytes(canonical_bytes(linkage))
+        != (
+            read_json(scratch / "CONFIGURATION.json")
+            .get("adoption", {})
+            .get("linkage_sha256")
+        )
+    ):
+        raise ExperimentError("final FAILED-ROOT-LINKAGE canonical hash drift")
+
+    source = read_json(scratch / "SOURCE.json")
+    for key, expected in (
+        ("branch", BRANCH),
+        ("candidate_manifest_sha256", EXPECTED_007J_CANDIDATE_MANIFEST),
+        ("configuration_sha256", EXPECTED_007J_CONFIGURATION),
+        ("results_sha256", EXPECTED_007J_RESULTS),
+        ("source_experiment", "007-j-levenshtein-one-contextual-validator"),
+        ("implementation_head", EXPECTED_FINAL_FROZEN_HEAD),
+        ("head_blobs", {
+            relative: {"sha256": digest}
+            for relative, digest in EXPECTED_FINAL_HEAD_BLOBS.items()
+        }),
+        ("request_tree", EXPECTED_007J_REQUEST_TREE),
+        ("census_artifacts_sha256", dict(EXPECTED_CENSUS_SHA)),
+    ):
+        if not isinstance(source, dict) or source.get(key) != expected:
+            raise ExperimentError(f"final SOURCE {key} drift")
+    for key, expected_name in (
+        ("census_root", EXPECTED_CENSUS_ROOT),
+        ("failed_root", EXPECTED_SECOND_FAILED_ROOT),
+        (
+            "source_root",
+            "007-j-levenshtein-one-contextual-validator-recovery.54KmUx",
+        ),
+    ):
+        value = source.get(key)
+        if not isinstance(value, str) or value.rstrip("/").rsplit("/", 1)[-1] != expected_name:
+            raise ExperimentError(f"final SOURCE {key} drift")
+
+    for name, digest in (
+        ("RANK-POPULATION.json", EXPECTED_CENSUS_SHA["RANK-POPULATION.json"]),
+        ("DISPATCH-MANIFEST.json", EXPECTED_CENSUS_SHA["DISPATCH-MANIFEST.json"]),
+    ):
+        validator_driver.require_private_file(scratch / name, expected_sha=digest)
+    if validator_driver.request_tree_identity(scratch / "requests") != (
+        EXPECTED_FINAL_REQUEST_TREE
+    ):
+        raise ExperimentError("final request tree identity drift")
+    return {
+        "CONFIGURATION.json": EXPECTED_FINAL_CONFIGURATION,
+        "LIVE-AGGREGATE.json": EXPECTED_FINAL_LIVE_AGGREGATE,
+        "HYBRID-AGGREGATE.json": EXPECTED_FINAL_HYBRID_AGGREGATE,
+        "HYBRID-CASE-PROJECTIONS.json": EXPECTED_FINAL_HYBRID_PROJECTIONS,
+        "CASE-RESULTS-007M.json": sha256_file(scratch / "CASE-RESULTS-007M.json"),
+        "CASE-RESULTS-007J-REPLAY.json": sha256_file(
+            scratch / "CASE-RESULTS-007J-REPLAY.json"
+        ),
+        "FAILED-ROOT-LINKAGE.json": sha256_file(scratch / "FAILED-ROOT-LINKAGE.json"),
+        "CENSUS-SUMMARY.json": EXPECTED_CENSUS_SHA["CENSUS-SUMMARY.json"],
+    }
+
+
+def _final_publication_git_guard(repo_root: Path) -> str:
+    """Bind the publication head to the frozen recompute lineage."""
+    head = _git(repo_root, "rev-parse", "--verify", "HEAD").strip()
+    branch = _git(repo_root, "symbolic-ref", "--quiet", "--short", "HEAD").strip()
+    if branch != BRANCH:
+        raise ExperimentError("publication branch mismatch")
+    completed = subprocess.run(
+        [
+            "git",
+            "-C",
+            str(repo_root),
+            "merge-base",
+            "--is-ancestor",
+            EXPECTED_FINAL_RECOMPUTE_HEAD,
+            "HEAD",
+        ],
+        capture_output=True,
+    )
+    if completed.returncode != 0:
+        raise ExperimentError("publication head is not a recompute-head descendant")
+    for relative in SHARED_CODE_FILES:
+        blob = _git_bytes(repo_root, "show", f"HEAD:{relative}")
+        if sha256_bytes(blob) != EXPECTED_FINAL_HEAD_BLOBS[relative]:
+            raise ExperimentError(f"shared scientific code drifted: {relative}")
+    return head
+
+
+def verify_final_root(
+    scratch: Path, repo_root: Path, census_root: Path, source_root: Path
+) -> dict[str, str]:
+    verified = verify_final_root_state(scratch)
+    if verify_census_root(census_root) != dict(EXPECTED_CENSUS_SHA):
+        raise ExperimentError("census root identity drift on publication")
+    census_summary = read_json(census_root / "CENSUS-SUMMARY.json")
+    if census_summary.get("population") != EXPECTED_FINAL_CENSUS_POPULATION:
+        raise ExperimentError("census population drift on publication")
+    totals = census_summary.get("totals")
+    for key, expected in EXPECTED_FINAL_CENSUS_FACTS.items():
+        if key == "top_k_counts":
+            coverage = (totals or {}).get("top_k_coverage")
+            for rank_key, count in expected.items():
+                entry = (coverage or {}).get(rank_key, {}).get("certain", {})
+                if entry.get("count") != count:
+                    raise ExperimentError(f"census top-{rank_key} count drift")
+        elif key == "top1_rate_among_present":
+            coverage = (totals or {}).get("top_k_coverage", {}).get(
+                "1", {}
+            ).get("certain", {})
+            if coverage.get("rate_among_present") != expected:
+                raise ExperimentError("census top-1 rate drift")
+        elif key == "recall_ceiling":
+            for slice_name, ceiling in expected.items():
+                observed = (
+                    (census_summary.get("slices") or {})
+                    .get(slice_name, {})
+                    .get("baseline", {})
+                    .get("ceiling")
+                )
+                if observed != ceiling:
+                    raise ExperimentError(f"census ceiling drift: {slice_name}")
+        elif (totals or {}).get(key) != expected:
+            raise ExperimentError(f"census totals {key} drift")
+    verify_source_root(source_root)
+    if verify_007j_request_tree(source_root) != EXPECTED_007J_REQUEST_TREE:
+        raise ExperimentError("007-j request tree identity changed on publication")
+    publication_head = _final_publication_git_guard(repo_root)
+    verified["publication_head"] = publication_head
+    return verified
+
+
+def final_private_manifest(verified: dict[str, str]) -> dict[str, Any]:
+    return {
+        "schema_version": 1,
+        "experiment_id": EXPERIMENT_ID,
+        "run_id": RUN_ID,
+        "status": "COMPLETE",
+        "final_root": EXPECTED_FINAL_ROOT,
+        "configuration_sha256": EXPECTED_FINAL_CONFIGURATION,
+        "live_aggregate_sha256": EXPECTED_FINAL_LIVE_AGGREGATE,
+        "hybrid_aggregate_sha256": EXPECTED_FINAL_HYBRID_AGGREGATE,
+        "hybrid_case_projections_sha256": EXPECTED_FINAL_HYBRID_PROJECTIONS,
+        "case_results_007m_sha256": verified["CASE-RESULTS-007M.json"],
+        "case_results_007j_replay_sha256": verified["CASE-RESULTS-007J-REPLAY.json"],
+        "failed_root_linkage_sha256": verified["FAILED-ROOT-LINKAGE.json"],
+        "frozen_implementation_head": EXPECTED_FINAL_FROZEN_HEAD,
+        "recompute_head": EXPECTED_FINAL_RECOMPUTE_HEAD,
+        "c1_observations": 1_035,
+        "c_gt_1_observations": 882,
+        "c_gt_1_new_calls": 0,
+        "actual_experiment_calls": 866,
+        "uncertain_deliveries": 16,
+        "operational_failures": 87,
+        "resampled": False,
+    }
+
+
+def final_private_report(hybrid: dict[str, Any], census_summary: dict[str, Any]) -> str:
+    payload = {
+        "schema_version": 1,
+        "experiment_id": EXPERIMENT_ID,
+        "run_id": RUN_ID,
+        "status": "COMPLETE",
+        "configuration_sha256": EXPECTED_FINAL_CONFIGURATION,
+        "frozen_implementation_head": EXPECTED_FINAL_FROZEN_HEAD,
+        "recompute_head": EXPECTED_FINAL_RECOMPUTE_HEAD,
+        "population": hybrid["population"],
+        "observations": hybrid["observations"],
+        "c_gt_1_outcomes": hybrid["c_gt_1_outcomes"],
+        "paired_slices": hybrid["paired_slices"],
+        "preservation": hybrid["preservation"],
+        "views": hybrid["views"],
+        "hybrid_composition": hybrid["hybrid_composition"],
+        "census_totals": census_summary["totals"],
+        "census_slices": census_summary["slices"],
+        "census_runtime": census_summary["runtime"],
+    }
+    return (
+        "# Private 007-m report\n\n"
+        + json.dumps(payload, indent=2, sort_keys=True)
+        + "\n"
+    )
+
+
+def public_final_projection(
+    hybrid: dict[str, Any],
+    census_summary: dict[str, Any],
+    verified: dict[str, str],
+    private_hashes: dict[str, str],
+) -> tuple[dict[str, Any], dict[str, Any]]:
+    """Build the data-free public final configuration and aggregate result."""
+    public_configuration = {
+        "schema_version": 1,
+        "experiment_id": EXPERIMENT_ID,
+        "run_id": RUN_ID,
+        "status": "COMPLETE",
+        "implementation_branch": BRANCH,
+        "implementation_head": EXPECTED_FINAL_FROZEN_HEAD,
+        "recompute_head": EXPECTED_FINAL_RECOMPUTE_HEAD,
+        "candidate_rule": {
+            "accepted": "complete deduplicated vocabulary union at distance one only",
+            "distance": "standard unit-cost Levenshtein over Python Unicode code points",
+            "identity": "distance zero excluded",
+            "normalization": "none",
+            "operations": ["SUBSTITUTION", "INSERTION", "DELETION"],
+            "ranking": "predeclared lexicographic tuple; see ranking_rule",
+            "transposition": "distance two and excluded",
+        },
+        "deployment": {
+            "class": "A100-FP8",
+            "endpoint": "private endpoint identity omitted",
+            "frozen_007j_profile_sha256": EXPECTED_007J_PROFILE_SHA256,
+            "model": protocol.MODEL,
+            "profile_path": "private profile path omitted",
+            "profile_sha256": EXPECTED_007M_PROFILE_SHA256,
+            "protocol": "Responses non-streaming",
+        },
+        "frozen_source_identity": {
+            "case_identity_manifest_sha256": prior_j.EXPECTED_PRIOR_CASES,
+            "candidate_manifest_sha256": EXPECTED_007J_CANDIDATE_MANIFEST,
+            "configuration_sha256": EXPECTED_007J_CONFIGURATION,
+            "request_tree": EXPECTED_007J_REQUEST_TREE,
+            "results_sha256": EXPECTED_007J_RESULTS,
+            "source_experiment": "007-j-levenshtein-one-contextual-validator",
+        },
+        "limits": {
+            "attempts_per_candidate": 1,
+            "new_call_budget": 0,
+            "resampling": False,
+            "response_bound_bytes": 2_000_000,
+            "timeout_seconds": 300.0,
+        },
+        "method": {
+            "c0": "exact preserved 007-j behavior; no observation",
+            "c1": "exact preserved 007-j observations, copied byte-exact; zero new calls",
+            "c_gt_1": (
+                "the unique CPU top is the only candidate the frozen validator "
+                "sees; USE_CANDIDATE applies only it through unchanged gates; "
+                "KEEP_ORIGINAL, UNCERTAIN, protocol or operational failure, and "
+                "a tied top keep the original target; no runner-up is tried"
+            ),
+            "hybrid_composition": EXPECTED_FINAL_HYBRID_COMPOSITION["policy"],
+            "primary_projection": (
+                "hybrid: the 007-j validated_fallback row per case with each "
+                "C>1 target span replaced by the 007-m decision outcome"
+            ),
+            "diagnostic_projection": (
+                "validated_only over the scheduled targets is a diagnostic that "
+                "drops preserved 007-j fallback edits; it is not the primary result"
+            ),
+        },
+        "parser": prior_j.EXPECTED_PARSER,
+        "population": {
+            "c0_counts": {"dassle-spelling": 524, "dassle-spelling-preservation": 480},
+            "c1_counts": dict(EXPECTED_007J_C1_COUNTS),
+            "c1_total": EXPECTED_007J_C1_TOTAL,
+            "c_gt_1_counts": dict(EXPECTED_C_GT_1),
+            "c_gt_1_total": EXPECTED_C_GT_1_TOTAL,
+            "entering_targets": {
+                "dassle-spelling": 2_001,
+                "dassle-spelling-preservation": 920,
+            },
+            "scheduled_total": 1_917,
+            "transition_matrix": {
+                "dassle-spelling": {
+                    "C=0 -> C=0": 524,
+                    "C=0 -> C=1": 403,
+                    "C=0 -> C>1": 84,
+                    "C=1 -> C>1": 148,
+                    "C=1 -> different unique candidate": 0,
+                    "C=1 -> same unique candidate": 423,
+                    "C>1 -> C=1": 0,
+                    "C>1 -> C>1": 419,
+                },
+                "dassle-spelling-preservation": {
+                    "C=0 -> C=0": 480,
+                    "C=0 -> C=1": 90,
+                    "C=0 -> C>1": 18,
+                    "C=1 -> C>1": 45,
+                    "C=1 -> different unique candidate": 0,
+                    "C=1 -> same unique candidate": 119,
+                    "C>1 -> C=1": 0,
+                    "C>1 -> C>1": 168,
+                },
+            },
+        },
+        "private_evidence": {
+            "census_root": EXPECTED_CENSUS_ROOT,
+            "census_superseded_root": SUPERSEDED_CENSUS_ROOT,
+            "configuration_sha256": EXPECTED_FINAL_CONFIGURATION,
+            "failed_instrument_roots": [
+                EXPECTED_FAILED_ROOT,
+                EXPECTED_SECOND_FAILED_ROOT,
+            ],
+            "final_root": EXPECTED_FINAL_ROOT,
+            "manifest_sha256": private_hashes["manifest"],
+            "report_sha256": private_hashes["report"],
+            "live_aggregate_sha256": EXPECTED_FINAL_LIVE_AGGREGATE,
+            "hybrid_aggregate_sha256": EXPECTED_FINAL_HYBRID_AGGREGATE,
+            "hybrid_case_projections_sha256": EXPECTED_FINAL_HYBRID_PROJECTIONS,
+            "case_results_007m_sha256": verified["CASE-RESULTS-007M.json"],
+            "case_results_007j_replay_sha256": verified["CASE-RESULTS-007J-REPLAY.json"],
+            "failed_root_linkage_sha256": verified["FAILED-ROOT-LINKAGE.json"],
+        },
+        "privacy": "aggregate metrics, hashes, transition and operation counts only",
+        "prompt": {
+            "sha256": protocol.FROZEN_PROMPT_SHA256,
+            "template": "owner-supplied frozen 007-i validator prompt",
+        },
+        "public_census": {
+            "candidate_pairs": 4_372,
+            "operation_pairs": {
+                "DELETION": 845,
+                "INSERTION": 726,
+                "SUBSTITUTION": 2_801,
+            },
+            "reference_absent": 474,
+            "reference_present": 408,
+            "set_size": {
+                "min": 2,
+                "median": 3.0,
+                "p90": 9,
+                "p95": 14,
+                "p99": 29,
+                "max": 50,
+            },
+            "tied_top": 0,
+            "top_k_coverage_among_present": {
+                "top1": 247,
+                "top10": 408,
+                "top2": 349,
+                "top3": 376,
+                "top5": 399,
+            },
+            "unique_top": 882,
+        },
+        "public_lineage": {
+            "actual_experiment_calls": {
+                "090ea8": 678,
+                "ffdf13": 188,
+                "total": 866,
+            },
+            "cross_root_reused_observations": {
+                "090ea8_to_final_root": 882,
+                "ffdf13_to_090ea8": 196,
+            },
+            "final_root_new_calls": 0,
+            "resampled": False,
+            "uncertain_deliveries": 16,
+        },
+        "ranking_rule": {
+            "order": "lexicographic descending",
+            "tuple": [
+                "trigram_exact_flag",
+                "trigram_exact_count",
+                "exact_bigram_side_count",
+                "sum_of_exact_bigram_counts",
+                "unigram_exact_count",
+            ],
+            "substitution": (
+                "hypothetical candidate into the frozen immediate left/right "
+                "context only"
+            ),
+            "evidence_states": ["EXACT", "CENSORED", "UNAVAILABLE"],
+            "absence_contract": dict(EXPECTED_INDEX_META),
+            "placeholder_semantics": (
+                "numeric placeholders after exactness flags are comparison "
+                "machinery only; missing or censored evidence is never reported "
+                "as zero"
+            ),
+            "tie_policy": (
+                "exact top-score tie selects nothing; no validator call; "
+                "original retained"
+            ),
+            "non_scored_fields": ["operation", "candidate_text_order"],
+            "gold": (
+                "structurally absent from ranking and score inputs; post-ranking "
+                "headroom analysis only"
+            ),
+        },
+        "request": {
+            "fields": [
+                "model",
+                "stream",
+                "store",
+                "input",
+                "include_reasoning",
+                "reasoning",
+            ],
+            "include_reasoning": True,
+            "reasoning_effort": "low",
+            "serializer": "canonical UTF-8 JSON with one final LF",
+            "store": False,
+            "stream": False,
+        },
+        "reuse": {
+            "c1_copied_observations": 1_035,
+            "c_gt_1_reused": 882,
+            "policy": (
+                "exact case/coordinate/sentence/candidate/request/prompt/"
+                "deployment/parser/response identity only"
+            ),
+        },
+        "scheduling": {
+            "in_flight_per_worker": 1,
+            "maximum_in_flight": 8,
+            "partition": "stable ordered position modulo worker count",
+            "partition_key": [
+                "phase",
+                "case_index",
+                "target_start",
+                "target_end",
+                "target_ordinal",
+            ],
+            "scheduled_new_calls": 0,
+            "workers": 8,
+        },
+    }
+    public_configuration["configuration_sha256"] = sha256_bytes(
+        canonical_bytes(public_configuration)
+    )
+    public_result = {
+        "schema_version": 1,
+        "experiment_id": EXPERIMENT_ID,
+        "run_id": RUN_ID,
+        "status": "COMPLETE",
+        "blocker": None,
+        "implementation_head": EXPECTED_FINAL_FROZEN_HEAD,
+        "recompute_head": EXPECTED_FINAL_RECOMPUTE_HEAD,
+        "configuration_sha256": public_configuration["configuration_sha256"],
+        "population": hybrid["population"],
+        "observations": hybrid["observations"],
+        "c_gt_1_outcomes": hybrid["c_gt_1_outcomes"],
+        "paired_slices": hybrid["paired_slices"],
+        "views": hybrid["views"],
+        "preservation": hybrid["preservation"],
+        "hybrid_composition": hybrid["hybrid_composition"],
+        "census": {
+            "totals": census_summary["totals"],
+            "slices": census_summary["slices"],
+            "runtime": census_summary["runtime"],
+        },
+        "lineage": {
+            "final_root": EXPECTED_FINAL_ROOT,
+            "census_root": EXPECTED_CENSUS_ROOT,
+            "census_superseded_diagnostic_root": SUPERSEDED_CENSUS_ROOT,
+            "failed_instrument_roots": [
+                {
+                    "root": EXPECTED_FAILED_ROOT,
+                    "implementation_head": EXPECTED_FAILED_ROOT_HEAD,
+                    "defect": EXPECTED_FAILED_ROOT_DEFECT,
+                    "attempted_observations": 188,
+                    "uncertain_observations": 8,
+                    "request_only_interrupted": 8,
+                },
+                {
+                    "root": EXPECTED_SECOND_FAILED_ROOT,
+                    "implementation_head": EXPECTED_SECOND_FAILED_ROOT_HEAD,
+                    "defect": EXPECTED_FINAL_FAILED_LINKAGE["defect"],
+                    "fresh_dispatched": 678,
+                },
+            ],
+            "actual_experiment_calls": {
+                "ffdf13": 188,
+                "090ea8": 678,
+                "total": 866,
+            },
+            "cross_root_reused_observations": {
+                "ffdf13_to_090ea8": 196,
+                "090ea8_to_final_root": 882,
+            },
+            "final_root_new_calls": 0,
+            "uncertain_deliveries": 16,
+            "resampled": False,
+        },
+        "private_evidence_sha256": {
+            "private_manifest_sha256": private_hashes["manifest"],
+            "private_report_sha256": private_hashes["report"],
+            "private_results_sha256": EXPECTED_FINAL_HYBRID_AGGREGATE,
+        },
+        "limitations": [
+            (
+                "Same-sample exploratory projection on the frozen 007-j "
+                "population; not held-out confirmation, human linguistic "
+                "acceptance, or production readiness."
+            ),
+            (
+                "The hybrid view is the primary 007-m result; the validated_only "
+                "view is a diagnostic that drops the preserved 007-j fallback "
+                "edits."
+            ),
+            "Gold is post-ranking headroom analysis only and cannot affect selection.",
+            "Non-reference status is not a semantic-harm label.",
+            "No merge, release, deployment, or product linguistic acceptance is authorized.",
+        ],
+    }
+    return public_configuration, public_result
+
+
+def publish_final(
+    scratch: Path, repo_root: Path, census_root: Path, source_root: Path
+) -> dict[str, Any]:
+    verified = verify_final_root(scratch, repo_root, census_root, source_root)
+    hybrid = read_json(scratch / "HYBRID-AGGREGATE.json")
+    census_summary = read_json(census_root / "CENSUS-SUMMARY.json")
+    manifest_sha = validator_driver.immutable_json(
+        scratch / "MANIFEST.json", final_private_manifest(verified)
+    )
+    report_sha = validator_driver.immutable_write(
+        scratch / "REPORT.md",
+        final_private_report(hybrid, census_summary).encode("utf-8"),
+    )
+    public_configuration, public_result = public_final_projection(
+        hybrid,
+        census_summary,
+        verified,
+        {"manifest": manifest_sha, "report": report_sha},
+    )
+    public = write_public(repo_root, public_configuration, public_result)
+    return {
+        "status": "COMPLETE",
+        "run_id": RUN_ID,
+        "scratch": str(scratch),
+        "frozen_implementation_head": EXPECTED_FINAL_FROZEN_HEAD,
+        "recompute_head": EXPECTED_FINAL_RECOMPUTE_HEAD,
+        "publication_head": verified["publication_head"],
+        "new_calls": 0,
+        "resampled": False,
+        "private": {
+            "manifest_sha256": manifest_sha,
+            "report_sha256": report_sha,
+            "hybrid_aggregate_sha256": EXPECTED_FINAL_HYBRID_AGGREGATE,
+        },
+        "public": public,
+        "headline": {
+            slice_name: {
+                key: facts[key]
+                for key in ("tp", "fp", "fn", "delta_tp", "delta_fp", "delta_fn")
+            }
+            for slice_name, facts in (
+                (name, EXPECTED_FINAL_HEADLINE[name])
+                for name in (
+                    "spelling-all",
+                    "spelling-initial-uv",
+                    "spelling-without-initial-uv",
+                )
+            )
+        },
+    }
+
+
+def run_publish_final(args: argparse.Namespace) -> dict[str, Any]:
+    repo_root = Path(args.repo_root).resolve()
+    scratch = Path(args.scratch).absolute()
+    if args.census_root:
+        census_root = Path(args.census_root).absolute()
+    else:
+        census_root = NATIVE_RUNTIME_PARENT / EXPECTED_CENSUS_ROOT
+    source_root = Path(args.source_root).absolute()
+    return publish_final(scratch, repo_root, census_root, source_root)
+
+
 def run(args: argparse.Namespace) -> dict[str, Any]:
+    if args.publish_final:
+        return run_publish_final(args)
     if args.recompute_hybrid:
         return run_recompute_hybrid(args)
     if args.live:
@@ -3607,6 +4616,7 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--credential-env")
     parser.add_argument("--adopt-failed-root", type=Path)
     parser.add_argument("--recompute-hybrid", action="store_true")
+    parser.add_argument("--publish-final", action="store_true")
     args = parser.parse_args(argv)
     try:
         print(json.dumps(run(args), ensure_ascii=False, sort_keys=True))

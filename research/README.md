@@ -69,6 +69,7 @@ rule. The Levenshtein item is a single read-only diagnostic, not a benchmark.
 | `prijigrala-retry10` | one-target retry-limit-ten case | complete |
 | `007-i-contextual-validator` | frozen contextual validator over 007-h unique candidates | complete; aggregation recovered with zero additional calls |
 | `007-j-levenshtein-one-contextual-validator` | standard Levenshtein-distance-one expansion with exact 007-i reuse | complete; 493 fresh validator calls and four-view comparison published |
+| `007-m-rank-ambiguous-levenshtein-candidates` | frozen CPU top-1 ranking of ambiguous (C>1) distance-one candidates with one frozen validator call per target | complete; 866 reused validator observations, zero new calls in the final root, hybrid tradeoff published |
 | `levenshtein-lookup-diagnostic` | one read-only lookup observation | not a benchmark |
 
 The registry is the record for every root and its nested artifacts; it does not

@@ -177,7 +177,10 @@ class AddendumFidelityTests(unittest.TestCase):
                 self.assertNotIn("retry_prompt", value)
                 self.assertIn("validat", request["prompt"].casefold())
                 self.assertIn("frozen first-stage", " ".join(request["content"]).casefold())
-            elif value["experiment_id"] == "007-j-levenshtein-one-contextual-validator":
+            elif value["experiment_id"] in (
+                "007-j-levenshtein-one-contextual-validator",
+                "007-m-rank-ambiguous-levenshtein-candidates",
+            ):
                 self.assertEqual(
                     request["fields"],
                     ["model", "stream", "store", "input", "include_reasoning", "reasoning"],
