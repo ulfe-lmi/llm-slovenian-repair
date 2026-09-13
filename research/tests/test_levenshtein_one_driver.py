@@ -278,6 +278,9 @@ class LevenshteinOneDriverTests(unittest.TestCase):
         values = [candidate(index) for index in range(9)]
         with tempfile.TemporaryDirectory(dir=driver.NATIVE_RUNTIME_PARENT) as raw_root:
             root = Path(raw_root)
+            request_root = root / "requests"
+            request_root.mkdir(mode=0o755)
+            os.chmod(request_root, 0o755)
             transport = FakeTransport()
             first = driver.execute_fresh(
                 root, values, "https://synthetic.invalid", "MISSING", transport=transport
@@ -285,6 +288,7 @@ class LevenshteinOneDriverTests(unittest.TestCase):
             self.assertEqual(sum(item["completed"] for item in first.values()), 9)
             self.assertEqual(sum(item["dispatched_http"] for item in first.values()), 9)
             self.assertEqual(transport.calls, 9)
+            self.assertEqual(request_root.stat().st_mode & 0o777, 0o700)
             driver.execute_fresh(
                 root,
                 list(reversed(values)),

@@ -209,6 +209,24 @@ def ensure_scratch(scratch: Path) -> None:
     require_private_dir(scratch)
 
 
+def ensure_request_root(scratch: Path) -> None:
+    """Ensure the shared request parent remains a private owned directory."""
+    request_root = scratch / "requests"
+    if request_root.is_symlink():
+        raise ExperimentError("private request root is a symlink")
+    if not request_root.exists():
+        request_root.mkdir(mode=0o700)
+    try:
+        info = request_root.lstat()
+    except OSError as exc:
+        raise ExperimentError("private request root is unavailable") from exc
+    if not stat.S_ISDIR(info.st_mode) or info.st_uid != os.getuid():
+        raise ExperimentError("private request root ownership/type mismatch")
+    if stat.S_IMODE(info.st_mode) != 0o700:
+        os.chmod(request_root, 0o700)
+    require_private_dir(request_root)
+
+
 def stage_inputs(source_root: Path, scratch: Path) -> None:
     """Copy only the frozen 007-i input/case trees into the new private root."""
     validator_driver.stage_frozen_inputs(source_root, scratch)
@@ -382,6 +400,7 @@ def reuse_observations(
     old_configuration: dict[str, Any],
     deployment: dict[str, Any],
 ) -> tuple[dict[str, dict[str, Any]], list[dict[str, Any]], list[dict[str, Any]]]:
+    ensure_request_root(scratch)
     old_by_id = {protocol.candidate_path_id(item): item for item in old_population}
     reused: dict[str, dict[str, Any]] = {}
     reuse_records: list[dict[str, Any]] = []
@@ -770,6 +789,7 @@ def execute_fresh(
 ) -> dict[int, dict[str, Any]]:
     if transport is None and not os.environ.get(credential_env):
         raise ExperimentError("LIVE_CREDENTIAL_MISSING")
+    ensure_request_root(scratch)
     partitions = protocol.partitions(fresh)
     statuses: dict[int, dict[str, Any]] = {}
 
