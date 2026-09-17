@@ -832,4 +832,3 @@ LONG_PARAGRAPH_FIXTURE = dict(
          "numbering) exercising long spans and repeated substrings; the trailing "
          "newline is never prose.",
 )
-

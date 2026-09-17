@@ -123,12 +123,13 @@ Categories:
 - Final: `prose-1`, `literal-link-1` (`[brez cilja]`), `prose-mid`,
   `link-label`, `prose-after` PROSE_CANDIDATE; `link-open`,
   `link-close-paren`, `link-dest`, `link-close` PROTECTED [P].
-- Rationale (construct interpretation): `[slomljen( in ](osamljen)` **is** a
-  well-formed CommonMark link — link labels may contain parentheses, and the
-  destination is a relative URI. `[brez cilja]` (no destination/definition)
-  correctly remains literal prose. The draft's premise about the first
-  construct was wrong; the re-declaration follows the frozen policy (link
-  label prose; link syntax and destination protected).
+- Rationale (construct interpretation): the construct (label `[slomljen( in ]`
+  followed by destination `(osamljen)`) **is** a well-formed CommonMark link —
+  link labels may contain parentheses, and the destination is a relative URI.
+  `[brez cilja]` (no destination/definition) correctly remains literal prose.
+  The draft's premise about the first construct was wrong; the re-declaration
+  follows the frozen policy (link label prose; link syntax and destination
+  protected).
 
 ### F41 (yaml-front-matter) — (C)
 - Original: `front-matter` = `title:`..`author: Ana` with P0/P1

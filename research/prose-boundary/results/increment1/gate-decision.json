@@ -1,0 +1,23 @@
+{
+ "schema": "008a-gate-decision/1",
+ "gate": "increment-1 strategy review checkpoint (order 008-a increment 1 step 9)",
+ "summary_sha256": "06961c54a49a8e68f175153c46f60d869865fc8ac497c17c1e80cf556a5d333b",
+ "proceed_conditions": {
+  "hard_coordinate_fidelity": true,
+  "no_code_point_bisection": true,
+  "byte_codepoint_round_trip": true,
+  "self_test_negative_probes": true,
+  "recognized_code_math_never_exposed": true,
+  "link_destinations_protected": true,
+  "prose_containers_expose_leaves": true,
+  "bounded_deterministic": true,
+  "stock_cli_crosscheck": true
+ },
+ "decision": "PROCEED_TO_INCREMENT_2",
+ "stop_condition_predeclared": "Any Hard invariant failure on the fixture suite stops the round with NO-GO evidence; work is not continued merely because it was planned.",
+ "evaluator_implementation_notes": {
+  "D0_autolink_destinations": "Frozen policy intent 'link destinations remain protected' is implemented for CommonMark autolinks: the only S.Link whose original source slice starts with byte '<' is an autolink, and its inner Text leaf is the destination, so it is not candidate prose. Deterministic source-byte test; no content parsing.",
+  "D1_policy_token_families": "The frozen policy names container families (e.g. S.Head, S.TableCell); the adapter emits level-suffixed tokens (S.Head:N, S.List:ol:N). A family entry matches its own token or any '<entry>:<suffix>' token. This implements the frozen rule 'ancestor set intersects PROSE_CONTAINERS' without weakening or extending the named set."
+ },
+ "single_round_note": "This round executes as a single reported round per the order's publication structure (one final report-only commit). The strategy review gate is enforced by the strategy final-head review before merge; this file and the OAP report record the gate-crossing evidence for that review."
+}

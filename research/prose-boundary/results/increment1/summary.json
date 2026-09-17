@@ -1,0 +1,6765 @@
+{
+ "schema": "008a-increment1-summary/1",
+ "fixture_file_sha256": "a2325de9a0bb4f04e84c2227710b5b62dad6e733503c08cab43e47839fd7cc00",
+ "config_sha256": "622a1479d46cfce956267c546e3997eda460f084a555aeced7b88ae69a8f255f",
+ "adapter_bin_sha256": "5df9a11d56b5bdec90c3ca09298802723975306f77e43e74ad1a72eb427c44bf",
+ "fixtures": 50,
+ "profiles": [
+  "P0",
+  "P1",
+  "P2"
+ ],
+ "total_events": 1288,
+ "hard_invariants": {
+  "coordinate_invariants": true,
+  "byte_codepoint_round_trip": true,
+  "self_test_negative_probes": true,
+  "structural_policy_all_profiles": true,
+  "no_unexpected_event_kinds": true,
+  "cli_crosscheck_all_fixtures": true,
+  "deterministic_rerun_identical": true,
+  "invalid_utf8_rejected_cleanly": true
+ },
+ "all_hard_ok": true,
+ "coordinate_violations": [],
+ "reversibility_failures": [],
+ "self_test": {
+  "coordinate_bisection_caught": true,
+  "round_trip_reversible_at_boundary": true,
+  "protected_exposure_caught": true,
+  "prose_missing_caught": true,
+  "cli_offset_mismatch_caught": true
+ },
+ "cli_mismatches": [],
+ "unexpected_kinds": {},
+ "exit_code_probes": {
+  "invalid_utf8_exit_code": 3,
+  "invalid_utf8_output": "{\"invalid_utf8\":true}"
+ },
+ "tradeoffs": {
+  "neutral_regions_with_exposed_bytes": 2,
+  "protected_region_exposures": 0,
+  "prose_candidate_missing_bytes": 0
+ },
+ "per_fixture": {
+  "F01": {
+   "id": "F01",
+   "class": 1,
+   "class_name": "plain-slovenian-prose",
+   "profiles": {
+    "P0": {
+     "adapter_exit": 0,
+     "event_count": 3,
+     "region_results": [
+      {
+       "name": "prose",
+       "role": "PROSE_CANDIDATE",
+       "start": 0,
+       "end": 78,
+       "ok": true,
+       "missing_bytes": 0
+      }
+     ],
+     "policy_ok": true,
+     "cli_crosscheck_ok": true,
+     "candidate_bytes": 78
+    },
+    "P1": {
+     "adapter_exit": 0,
+     "event_count": 3,
+     "region_results": [
+      {
+       "name": "prose",
+       "role": "PROSE_CANDIDATE",
+       "start": 0,
+       "end": 78,
+       "ok": true,
+       "missing_bytes": 0
+      }
+     ],
+     "policy_ok": true,
+     "cli_crosscheck_ok": true,
+     "candidate_bytes": 78
+    },
+    "P2": {
+     "adapter_exit": 0,
+     "event_count": 3,
+     "region_results": [
+      {
+       "name": "prose",
+       "role": "PROSE_CANDIDATE",
+       "start": 0,
+       "end": 78,
+       "ok": true,
+       "missing_bytes": 0
+      }
+     ],
+     "policy_ok": true,
+     "cli_crosscheck_ok": true,
+     "candidate_bytes": 78
+    }
+   }
+  },
+  "F02": {
+   "id": "F02",
+   "class": 2,
+   "class_name": "prose-inline-code",
+   "profiles": {
+    "P0": {
+     "adapter_exit": 0,
+     "event_count": 5,
+     "region_results": [
+      {
+       "name": "prose-before",
+       "role": "PROSE_CANDIDATE",
+       "start": 0,
+       "end": 13,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "inline-code",
+       "role": "PROTECTED",
+       "start": 13,
+       "end": 25,
+       "ok": true,
+       "exposed_bytes": 0
+      },
+      {
+       "name": "prose-after",
+       "role": "PROSE_CANDIDATE",
+       "start": 25,
+       "end": 45,
+       "ok": true,
+       "missing_bytes": 0
+      }
+     ],
+     "policy_ok": true,
+     "cli_crosscheck_ok": true,
+     "candidate_bytes": 33
+    },
+    "P1": {
+     "adapter_exit": 0,
+     "event_count": 5,
+     "region_results": [
+      {
+       "name": "prose-before",
+       "role": "PROSE_CANDIDATE",
+       "start": 0,
+       "end": 13,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "inline-code",
+       "role": "PROTECTED",
+       "start": 13,
+       "end": 25,
+       "ok": true,
+       "exposed_bytes": 0
+      },
+      {
+       "name": "prose-after",
+       "role": "PROSE_CANDIDATE",
+       "start": 25,
+       "end": 45,
+       "ok": true,
+       "missing_bytes": 0
+      }
+     ],
+     "policy_ok": true,
+     "cli_crosscheck_ok": true,
+     "candidate_bytes": 33
+    },
+    "P2": {
+     "adapter_exit": 0,
+     "event_count": 5,
+     "region_results": [
+      {
+       "name": "prose-before",
+       "role": "PROSE_CANDIDATE",
+       "start": 0,
+       "end": 13,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "inline-code",
+       "role": "PROTECTED",
+       "start": 13,
+       "end": 25,
+       "ok": true,
+       "exposed_bytes": 0
+      },
+      {
+       "name": "prose-after",
+       "role": "PROSE_CANDIDATE",
+       "start": 25,
+       "end": 45,
+       "ok": true,
+       "missing_bytes": 0
+      }
+     ],
+     "policy_ok": true,
+     "cli_crosscheck_ok": true,
+     "candidate_bytes": 33
+    }
+   }
+  },
+  "F03": {
+   "id": "F03",
+   "class": 3,
+   "class_name": "multi-backtick-inline-code",
+   "profiles": {
+    "P0": {
+     "adapter_exit": 0,
+     "event_count": 5,
+     "region_results": [
+      {
+       "name": "prose-before",
+       "role": "PROSE_CANDIDATE",
+       "start": 0,
+       "end": 21,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "inline-code",
+       "role": "PROTECTED",
+       "start": 21,
+       "end": 32,
+       "ok": true,
+       "exposed_bytes": 0
+      },
+      {
+       "name": "prose-after",
+       "role": "PROSE_CANDIDATE",
+       "start": 32,
+       "end": 53,
+       "ok": true,
+       "missing_bytes": 0
+      }
+     ],
+     "policy_ok": true,
+     "cli_crosscheck_ok": true,
+     "candidate_bytes": 42
+    },
+    "P1": {
+     "adapter_exit": 0,
+     "event_count": 5,
+     "region_results": [
+      {
+       "name": "prose-before",
+       "role": "PROSE_CANDIDATE",
+       "start": 0,
+       "end": 21,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "inline-code",
+       "role": "PROTECTED",
+       "start": 21,
+       "end": 32,
+       "ok": true,
+       "exposed_bytes": 0
+      },
+      {
+       "name": "prose-after",
+       "role": "PROSE_CANDIDATE",
+       "start": 32,
+       "end": 53,
+       "ok": true,
+       "missing_bytes": 0
+      }
+     ],
+     "policy_ok": true,
+     "cli_crosscheck_ok": true,
+     "candidate_bytes": 42
+    },
+    "P2": {
+     "adapter_exit": 0,
+     "event_count": 5,
+     "region_results": [
+      {
+       "name": "prose-before",
+       "role": "PROSE_CANDIDATE",
+       "start": 0,
+       "end": 21,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "inline-code",
+       "role": "PROTECTED",
+       "start": 21,
+       "end": 32,
+       "ok": true,
+       "exposed_bytes": 0
+      },
+      {
+       "name": "prose-after",
+       "role": "PROSE_CANDIDATE",
+       "start": 32,
+       "end": 53,
+       "ok": true,
+       "missing_bytes": 0
+      }
+     ],
+     "policy_ok": true,
+     "cli_crosscheck_ok": true,
+     "candidate_bytes": 42
+    }
+   }
+  },
+  "F04": {
+   "id": "F04",
+   "class": 4,
+   "class_name": "prose-fenced-python",
+   "profiles": {
+    "P0": {
+     "adapter_exit": 0,
+     "event_count": 9,
+     "region_results": [
+      {
+       "name": "prose-before",
+       "role": "PROSE_CANDIDATE",
+       "start": 0,
+       "end": 10,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "fence",
+       "role": "PROTECTED",
+       "start": 12,
+       "end": 40,
+       "ok": true,
+       "exposed_bytes": 0
+      },
+      {
+       "name": "prose-after",
+       "role": "PROSE_CANDIDATE",
+       "start": 42,
+       "end": 61,
+       "ok": true,
+       "missing_bytes": 0
+      }
+     ],
+     "policy_ok": true,
+     "cli_crosscheck_ok": true,
+     "candidate_bytes": 29
+    },
+    "P1": {
+     "adapter_exit": 0,
+     "event_count": 9,
+     "region_results": [
+      {
+       "name": "prose-before",
+       "role": "PROSE_CANDIDATE",
+       "start": 0,
+       "end": 10,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "fence",
+       "role": "PROTECTED",
+       "start": 12,
+       "end": 40,
+       "ok": true,
+       "exposed_bytes": 0
+      },
+      {
+       "name": "prose-after",
+       "role": "PROSE_CANDIDATE",
+       "start": 42,
+       "end": 61,
+       "ok": true,
+       "missing_bytes": 0
+      }
+     ],
+     "policy_ok": true,
+     "cli_crosscheck_ok": true,
+     "candidate_bytes": 29
+    },
+    "P2": {
+     "adapter_exit": 0,
+     "event_count": 9,
+     "region_results": [
+      {
+       "name": "prose-before",
+       "role": "PROSE_CANDIDATE",
+       "start": 0,
+       "end": 10,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "fence",
+       "role": "PROTECTED",
+       "start": 12,
+       "end": 40,
+       "ok": true,
+       "exposed_bytes": 0
+      },
+      {
+       "name": "prose-after",
+       "role": "PROSE_CANDIDATE",
+       "start": 42,
+       "end": 61,
+       "ok": true,
+       "missing_bytes": 0
+      }
+     ],
+     "policy_ok": true,
+     "cli_crosscheck_ok": true,
+     "candidate_bytes": 29
+    }
+   }
+  },
+  "F05": {
+   "id": "F05",
+   "class": 5,
+   "class_name": "tilde-fences",
+   "profiles": {
+    "P0": {
+     "adapter_exit": 0,
+     "event_count": 9,
+     "region_results": [
+      {
+       "name": "prose-before",
+       "role": "PROSE_CANDIDATE",
+       "start": 0,
+       "end": 13,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "fence",
+       "role": "PROTECTED",
+       "start": 15,
+       "end": 29,
+       "ok": true,
+       "exposed_bytes": 0
+      },
+      {
+       "name": "prose-after",
+       "role": "PROSE_CANDIDATE",
+       "start": 31,
+       "end": 37,
+       "ok": true,
+       "missing_bytes": 0
+      }
+     ],
+     "policy_ok": true,
+     "cli_crosscheck_ok": true,
+     "candidate_bytes": 19
+    },
+    "P1": {
+     "adapter_exit": 0,
+     "event_count": 9,
+     "region_results": [
+      {
+       "name": "prose-before",
+       "role": "PROSE_CANDIDATE",
+       "start": 0,
+       "end": 13,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "fence",
+       "role": "PROTECTED",
+       "start": 15,
+       "end": 29,
+       "ok": true,
+       "exposed_bytes": 0
+      },
+      {
+       "name": "prose-after",
+       "role": "PROSE_CANDIDATE",
+       "start": 31,
+       "end": 37,
+       "ok": true,
+       "missing_bytes": 0
+      }
+     ],
+     "policy_ok": true,
+     "cli_crosscheck_ok": true,
+     "candidate_bytes": 19
+    },
+    "P2": {
+     "adapter_exit": 0,
+     "event_count": 9,
+     "region_results": [
+      {
+       "name": "prose-before",
+       "role": "PROSE_CANDIDATE",
+       "start": 0,
+       "end": 13,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "fence",
+       "role": "PROTECTED",
+       "start": 15,
+       "end": 29,
+       "ok": true,
+       "exposed_bytes": 0
+      },
+      {
+       "name": "prose-after",
+       "role": "PROSE_CANDIDATE",
+       "start": 31,
+       "end": 37,
+       "ok": true,
+       "missing_bytes": 0
+      }
+     ],
+     "policy_ok": true,
+     "cli_crosscheck_ok": true,
+     "candidate_bytes": 19
+    }
+   }
+  },
+  "F06": {
+   "id": "F06",
+   "class": 6,
+   "class_name": "variable-length-fences",
+   "profiles": {
+    "P0": {
+     "adapter_exit": 0,
+     "event_count": 9,
+     "region_results": [
+      {
+       "name": "prose-before",
+       "role": "PROSE_CANDIDATE",
+       "start": 0,
+       "end": 18,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "fence",
+       "role": "PROTECTED",
+       "start": 20,
+       "end": 45,
+       "ok": true,
+       "exposed_bytes": 0
+      },
+      {
+       "name": "prose-after",
+       "role": "PROSE_CANDIDATE",
+       "start": 47,
+       "end": 53,
+       "ok": true,
+       "missing_bytes": 0
+      }
+     ],
+     "policy_ok": true,
+     "cli_crosscheck_ok": true,
+     "candidate_bytes": 24
+    },
+    "P1": {
+     "adapter_exit": 0,
+     "event_count": 9,
+     "region_results": [
+      {
+       "name": "prose-before",
+       "role": "PROSE_CANDIDATE",
+       "start": 0,
+       "end": 18,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "fence",
+       "role": "PROTECTED",
+       "start": 20,
+       "end": 45,
+       "ok": true,
+       "exposed_bytes": 0
+      },
+      {
+       "name": "prose-after",
+       "role": "PROSE_CANDIDATE",
+       "start": 47,
+       "end": 53,
+       "ok": true,
+       "missing_bytes": 0
+      }
+     ],
+     "policy_ok": true,
+     "cli_crosscheck_ok": true,
+     "candidate_bytes": 24
+    },
+    "P2": {
+     "adapter_exit": 0,
+     "event_count": 9,
+     "region_results": [
+      {
+       "name": "prose-before",
+       "role": "PROSE_CANDIDATE",
+       "start": 0,
+       "end": 18,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "fence",
+       "role": "PROTECTED",
+       "start": 20,
+       "end": 45,
+       "ok": true,
+       "exposed_bytes": 0
+      },
+      {
+       "name": "prose-after",
+       "role": "PROSE_CANDIDATE",
+       "start": 47,
+       "end": 53,
+       "ok": true,
+       "missing_bytes": 0
+      }
+     ],
+     "policy_ok": true,
+     "cli_crosscheck_ok": true,
+     "candidate_bytes": 24
+    }
+   }
+  },
+  "F07": {
+   "id": "F07",
+   "class": 7,
+   "class_name": "unfinished-fenced-code",
+   "profiles": {
+    "P0": {
+     "adapter_exit": 0,
+     "event_count": 6,
+     "region_results": [
+      {
+       "name": "prose-before",
+       "role": "PROSE_CANDIDATE",
+       "start": 0,
+       "end": 30,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "unfenced",
+       "role": "PROTECTED",
+       "start": 32,
+       "end": 49,
+       "ok": true,
+       "exposed_bytes": 0
+      }
+     ],
+     "policy_ok": true,
+     "cli_crosscheck_ok": true,
+     "candidate_bytes": 30
+    },
+    "P1": {
+     "adapter_exit": 0,
+     "event_count": 6,
+     "region_results": [
+      {
+       "name": "prose-before",
+       "role": "PROSE_CANDIDATE",
+       "start": 0,
+       "end": 30,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "unfenced",
+       "role": "PROTECTED",
+       "start": 32,
+       "end": 49,
+       "ok": true,
+       "exposed_bytes": 0
+      }
+     ],
+     "policy_ok": true,
+     "cli_crosscheck_ok": true,
+     "candidate_bytes": 30
+    },
+    "P2": {
+     "adapter_exit": 0,
+     "event_count": 6,
+     "region_results": [
+      {
+       "name": "prose-before",
+       "role": "PROSE_CANDIDATE",
+       "start": 0,
+       "end": 30,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "unfenced",
+       "role": "PROTECTED",
+       "start": 32,
+       "end": 49,
+       "ok": true,
+       "exposed_bytes": 0
+      }
+     ],
+     "policy_ok": true,
+     "cli_crosscheck_ok": true,
+     "candidate_bytes": 30
+    }
+   }
+  },
+  "F08": {
+   "id": "F08",
+   "class": 8,
+   "class_name": "markdown-inside-code",
+   "profiles": {
+    "P0": {
+     "adapter_exit": 0,
+     "event_count": 9,
+     "region_results": [
+      {
+       "name": "prose-before",
+       "role": "PROSE_CANDIDATE",
+       "start": 0,
+       "end": 28,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "fence",
+       "role": "PROTECTED",
+       "start": 30,
+       "end": 89,
+       "ok": true,
+       "exposed_bytes": 0
+      },
+      {
+       "name": "prose-after",
+       "role": "PROSE_CANDIDATE",
+       "start": 91,
+       "end": 101,
+       "ok": true,
+       "missing_bytes": 0
+      }
+     ],
+     "policy_ok": true,
+     "cli_crosscheck_ok": true,
+     "candidate_bytes": 38
+    },
+    "P1": {
+     "adapter_exit": 0,
+     "event_count": 9,
+     "region_results": [
+      {
+       "name": "prose-before",
+       "role": "PROSE_CANDIDATE",
+       "start": 0,
+       "end": 28,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "fence",
+       "role": "PROTECTED",
+       "start": 30,
+       "end": 89,
+       "ok": true,
+       "exposed_bytes": 0
+      },
+      {
+       "name": "prose-after",
+       "role": "PROSE_CANDIDATE",
+       "start": 91,
+       "end": 101,
+       "ok": true,
+       "missing_bytes": 0
+      }
+     ],
+     "policy_ok": true,
+     "cli_crosscheck_ok": true,
+     "candidate_bytes": 38
+    },
+    "P2": {
+     "adapter_exit": 0,
+     "event_count": 9,
+     "region_results": [
+      {
+       "name": "prose-before",
+       "role": "PROSE_CANDIDATE",
+       "start": 0,
+       "end": 28,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "fence",
+       "role": "PROTECTED",
+       "start": 30,
+       "end": 89,
+       "ok": true,
+       "exposed_bytes": 0
+      },
+      {
+       "name": "prose-after",
+       "role": "PROSE_CANDIDATE",
+       "start": 91,
+       "end": 101,
+       "ok": true,
+       "missing_bytes": 0
+      }
+     ],
+     "policy_ok": true,
+     "cli_crosscheck_ok": true,
+     "candidate_bytes": 38
+    }
+   }
+  },
+  "F09": {
+   "id": "F09",
+   "class": 9,
+   "class_name": "math-inside-code",
+   "profiles": {
+    "P0": {
+     "adapter_exit": 0,
+     "event_count": 9,
+     "region_results": [
+      {
+       "name": "prose-before",
+       "role": "PROSE_CANDIDATE",
+       "start": 0,
+       "end": 15,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "fence",
+       "role": "PROTECTED",
+       "start": 17,
+       "end": 46,
+       "ok": true,
+       "exposed_bytes": 0
+      },
+      {
+       "name": "prose-after",
+       "role": "PROSE_CANDIDATE",
+       "start": 48,
+       "end": 56,
+       "ok": true,
+       "missing_bytes": 0
+      }
+     ],
+     "policy_ok": true,
+     "cli_crosscheck_ok": true,
+     "candidate_bytes": 23
+    },
+    "P1": {
+     "adapter_exit": 0,
+     "event_count": 9,
+     "region_results": [
+      {
+       "name": "prose-before",
+       "role": "PROSE_CANDIDATE",
+       "start": 0,
+       "end": 15,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "fence",
+       "role": "PROTECTED",
+       "start": 17,
+       "end": 46,
+       "ok": true,
+       "exposed_bytes": 0
+      },
+      {
+       "name": "prose-after",
+       "role": "PROSE_CANDIDATE",
+       "start": 48,
+       "end": 56,
+       "ok": true,
+       "missing_bytes": 0
+      }
+     ],
+     "policy_ok": true,
+     "cli_crosscheck_ok": true,
+     "candidate_bytes": 23
+    },
+    "P2": {
+     "adapter_exit": 0,
+     "event_count": 9,
+     "region_results": [
+      {
+       "name": "prose-before",
+       "role": "PROSE_CANDIDATE",
+       "start": 0,
+       "end": 15,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "fence",
+       "role": "PROTECTED",
+       "start": 17,
+       "end": 46,
+       "ok": true,
+       "exposed_bytes": 0
+      },
+      {
+       "name": "prose-after",
+       "role": "PROSE_CANDIDATE",
+       "start": 48,
+       "end": 56,
+       "ok": true,
+       "missing_bytes": 0
+      }
+     ],
+     "policy_ok": true,
+     "cli_crosscheck_ok": true,
+     "candidate_bytes": 23
+    }
+   }
+  },
+  "F10": {
+   "id": "F10",
+   "class": 10,
+   "class_name": "dollar-inline-math",
+   "profiles": {
+    "P0": {
+     "adapter_exit": 0,
+     "event_count": 3,
+     "region_results": [
+      {
+       "name": "prose-before",
+       "role": "PROSE_CANDIDATE",
+       "start": 0,
+       "end": 12,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "math",
+       "role": "PROSE_CANDIDATE",
+       "start": 12,
+       "end": 25,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "prose-after",
+       "role": "PROSE_CANDIDATE",
+       "start": 25,
+       "end": 47,
+       "ok": true,
+       "missing_bytes": 0
+      }
+     ],
+     "policy_ok": true,
+     "cli_crosscheck_ok": true,
+     "candidate_bytes": 47
+    },
+    "P1": {
+     "adapter_exit": 0,
+     "event_count": 5,
+     "region_results": [
+      {
+       "name": "prose-before",
+       "role": "PROSE_CANDIDATE",
+       "start": 0,
+       "end": 12,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "math",
+       "role": "PROTECTED",
+       "start": 12,
+       "end": 25,
+       "ok": true,
+       "exposed_bytes": 0
+      },
+      {
+       "name": "prose-after",
+       "role": "PROSE_CANDIDATE",
+       "start": 25,
+       "end": 47,
+       "ok": true,
+       "missing_bytes": 0
+      }
+     ],
+     "policy_ok": true,
+     "cli_crosscheck_ok": true,
+     "candidate_bytes": 34
+    },
+    "P2": {
+     "adapter_exit": 0,
+     "event_count": 5,
+     "region_results": [
+      {
+       "name": "prose-before",
+       "role": "PROSE_CANDIDATE",
+       "start": 0,
+       "end": 12,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "math",
+       "role": "PROTECTED",
+       "start": 12,
+       "end": 25,
+       "ok": true,
+       "exposed_bytes": 0
+      },
+      {
+       "name": "prose-after",
+       "role": "PROSE_CANDIDATE",
+       "start": 25,
+       "end": 47,
+       "ok": true,
+       "missing_bytes": 0
+      }
+     ],
+     "policy_ok": true,
+     "cli_crosscheck_ok": true,
+     "candidate_bytes": 34
+    }
+   }
+  },
+  "F11": {
+   "id": "F11",
+   "class": 11,
+   "class_name": "dollar-display-math",
+   "profiles": {
+    "P0": {
+     "adapter_exit": 0,
+     "event_count": 9,
+     "region_results": [
+      {
+       "name": "prose-before",
+       "role": "PROSE_CANDIDATE",
+       "start": 0,
+       "end": 10,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "display-math",
+       "role": "PROSE_CANDIDATE",
+       "start": 12,
+       "end": 24,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "prose-after",
+       "role": "PROSE_CANDIDATE",
+       "start": 26,
+       "end": 40,
+       "ok": true,
+       "missing_bytes": 0
+      }
+     ],
+     "policy_ok": true,
+     "cli_crosscheck_ok": true,
+     "candidate_bytes": 36
+    },
+    "P1": {
+     "adapter_exit": 0,
+     "event_count": 9,
+     "region_results": [
+      {
+       "name": "prose-before",
+       "role": "PROSE_CANDIDATE",
+       "start": 0,
+       "end": 10,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "display-math",
+       "role": "PROTECTED",
+       "start": 12,
+       "end": 24,
+       "ok": true,
+       "exposed_bytes": 0
+      },
+      {
+       "name": "prose-after",
+       "role": "PROSE_CANDIDATE",
+       "start": 26,
+       "end": 40,
+       "ok": true,
+       "missing_bytes": 0
+      }
+     ],
+     "policy_ok": true,
+     "cli_crosscheck_ok": true,
+     "candidate_bytes": 24
+    },
+    "P2": {
+     "adapter_exit": 0,
+     "event_count": 9,
+     "region_results": [
+      {
+       "name": "prose-before",
+       "role": "PROSE_CANDIDATE",
+       "start": 0,
+       "end": 10,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "display-math",
+       "role": "PROTECTED",
+       "start": 12,
+       "end": 24,
+       "ok": true,
+       "exposed_bytes": 0
+      },
+      {
+       "name": "prose-after",
+       "role": "PROSE_CANDIDATE",
+       "start": 26,
+       "end": 40,
+       "ok": true,
+       "missing_bytes": 0
+      }
+     ],
+     "policy_ok": true,
+     "cli_crosscheck_ok": true,
+     "candidate_bytes": 24
+    }
+   }
+  },
+  "F12": {
+   "id": "F12",
+   "class": 12,
+   "class_name": "paren-tex",
+   "profiles": {
+    "P0": {
+     "adapter_exit": 0,
+     "event_count": 3,
+     "region_results": [
+      {
+       "name": "prose",
+       "role": "PROSE_CANDIDATE",
+       "start": 0,
+       "end": 37,
+       "ok": true,
+       "missing_bytes": 0
+      }
+     ],
+     "policy_ok": true,
+     "cli_crosscheck_ok": true,
+     "candidate_bytes": 37
+    },
+    "P1": {
+     "adapter_exit": 0,
+     "event_count": 3,
+     "region_results": [
+      {
+       "name": "prose",
+       "role": "PROSE_CANDIDATE",
+       "start": 0,
+       "end": 37,
+       "ok": true,
+       "missing_bytes": 0
+      }
+     ],
+     "policy_ok": true,
+     "cli_crosscheck_ok": true,
+     "candidate_bytes": 37
+    },
+    "P2": {
+     "adapter_exit": 0,
+     "event_count": 3,
+     "region_results": [
+      {
+       "name": "prose",
+       "role": "PROSE_CANDIDATE",
+       "start": 0,
+       "end": 37,
+       "ok": true,
+       "missing_bytes": 0
+      }
+     ],
+     "policy_ok": true,
+     "cli_crosscheck_ok": true,
+     "candidate_bytes": 37
+    }
+   }
+  },
+  "F13": {
+   "id": "F13",
+   "class": 13,
+   "class_name": "bracket-tex",
+   "profiles": {
+    "P0": {
+     "adapter_exit": 0,
+     "event_count": 7,
+     "region_results": [
+      {
+       "name": "prose",
+       "role": "PROSE_CANDIDATE",
+       "start": 0,
+       "end": 40,
+       "ok": true,
+       "missing_bytes": 0
+      }
+     ],
+     "policy_ok": true,
+     "cli_crosscheck_ok": true,
+     "candidate_bytes": 40
+    },
+    "P1": {
+     "adapter_exit": 0,
+     "event_count": 7,
+     "region_results": [
+      {
+       "name": "prose",
+       "role": "PROSE_CANDIDATE",
+       "start": 0,
+       "end": 40,
+       "ok": true,
+       "missing_bytes": 0
+      }
+     ],
+     "policy_ok": true,
+     "cli_crosscheck_ok": true,
+     "candidate_bytes": 40
+    },
+    "P2": {
+     "adapter_exit": 0,
+     "event_count": 7,
+     "region_results": [
+      {
+       "name": "prose",
+       "role": "PROSE_CANDIDATE",
+       "start": 0,
+       "end": 40,
+       "ok": true,
+       "missing_bytes": 0
+      }
+     ],
+     "policy_ok": true,
+     "cli_crosscheck_ok": true,
+     "candidate_bytes": 40
+    }
+   }
+  },
+  "F14": {
+   "id": "F14",
+   "class": 14,
+   "class_name": "begintex-align",
+   "profiles": {
+    "P0": {
+     "adapter_exit": 0,
+     "event_count": 16,
+     "region_results": [
+      {
+       "name": "prose-before",
+       "role": "PROSE_CANDIDATE",
+       "start": 0,
+       "end": 7,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "gap-1",
+       "role": "NEUTRAL",
+       "start": 7,
+       "end": 9,
+       "ok": true,
+       "exposed_bytes": 0,
+       "tradeoff_recorded": false
+      },
+      {
+       "name": "begin-line",
+       "role": "PROSE_CANDIDATE",
+       "start": 9,
+       "end": 22,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "softbreak-1",
+       "role": "NEUTRAL",
+       "start": 22,
+       "end": 23,
+       "ok": true,
+       "exposed_bytes": 0,
+       "tradeoff_recorded": false
+      },
+      {
+       "name": "line-a",
+       "role": "PROSE_CANDIDATE",
+       "start": 23,
+       "end": 30,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "escape-1",
+       "role": "PROTECTED",
+       "start": 30,
+       "end": 31,
+       "ok": true,
+       "exposed_bytes": 0
+      },
+      {
+       "name": "literal-backslash",
+       "role": "PROSE_CANDIDATE",
+       "start": 31,
+       "end": 32,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "softbreak-2",
+       "role": "NEUTRAL",
+       "start": 32,
+       "end": 33,
+       "ok": true,
+       "exposed_bytes": 0,
+       "tradeoff_recorded": false
+      },
+      {
+       "name": "line-c",
+       "role": "PROSE_CANDIDATE",
+       "start": 33,
+       "end": 39,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "softbreak-3",
+       "role": "NEUTRAL",
+       "start": 39,
+       "end": 40,
+       "ok": true,
+       "exposed_bytes": 0,
+       "tradeoff_recorded": false
+      },
+      {
+       "name": "end-line",
+       "role": "PROSE_CANDIDATE",
+       "start": 40,
+       "end": 51,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "gap-2",
+       "role": "NEUTRAL",
+       "start": 51,
+       "end": 53,
+       "ok": true,
+       "exposed_bytes": 0,
+       "tradeoff_recorded": false
+      },
+      {
+       "name": "prose-after",
+       "role": "PROSE_CANDIDATE",
+       "start": 53,
+       "end": 67,
+       "ok": true,
+       "missing_bytes": 0
+      }
+     ],
+     "policy_ok": true,
+     "cli_crosscheck_ok": true,
+     "candidate_bytes": 59
+    },
+    "P1": {
+     "adapter_exit": 0,
+     "event_count": 16,
+     "region_results": [
+      {
+       "name": "prose-before",
+       "role": "PROSE_CANDIDATE",
+       "start": 0,
+       "end": 7,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "gap-1",
+       "role": "NEUTRAL",
+       "start": 7,
+       "end": 9,
+       "ok": true,
+       "exposed_bytes": 0,
+       "tradeoff_recorded": false
+      },
+      {
+       "name": "begin-line",
+       "role": "PROSE_CANDIDATE",
+       "start": 9,
+       "end": 22,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "softbreak-1",
+       "role": "NEUTRAL",
+       "start": 22,
+       "end": 23,
+       "ok": true,
+       "exposed_bytes": 0,
+       "tradeoff_recorded": false
+      },
+      {
+       "name": "line-a",
+       "role": "PROSE_CANDIDATE",
+       "start": 23,
+       "end": 30,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "escape-1",
+       "role": "PROTECTED",
+       "start": 30,
+       "end": 31,
+       "ok": true,
+       "exposed_bytes": 0
+      },
+      {
+       "name": "literal-backslash",
+       "role": "PROSE_CANDIDATE",
+       "start": 31,
+       "end": 32,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "softbreak-2",
+       "role": "NEUTRAL",
+       "start": 32,
+       "end": 33,
+       "ok": true,
+       "exposed_bytes": 0,
+       "tradeoff_recorded": false
+      },
+      {
+       "name": "line-c",
+       "role": "PROSE_CANDIDATE",
+       "start": 33,
+       "end": 39,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "softbreak-3",
+       "role": "NEUTRAL",
+       "start": 39,
+       "end": 40,
+       "ok": true,
+       "exposed_bytes": 0,
+       "tradeoff_recorded": false
+      },
+      {
+       "name": "end-line",
+       "role": "PROSE_CANDIDATE",
+       "start": 40,
+       "end": 51,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "gap-2",
+       "role": "NEUTRAL",
+       "start": 51,
+       "end": 53,
+       "ok": true,
+       "exposed_bytes": 0,
+       "tradeoff_recorded": false
+      },
+      {
+       "name": "prose-after",
+       "role": "PROSE_CANDIDATE",
+       "start": 53,
+       "end": 67,
+       "ok": true,
+       "missing_bytes": 0
+      }
+     ],
+     "policy_ok": true,
+     "cli_crosscheck_ok": true,
+     "candidate_bytes": 59
+    },
+    "P2": {
+     "adapter_exit": 0,
+     "event_count": 16,
+     "region_results": [
+      {
+       "name": "prose-before",
+       "role": "PROSE_CANDIDATE",
+       "start": 0,
+       "end": 7,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "gap-1",
+       "role": "NEUTRAL",
+       "start": 7,
+       "end": 9,
+       "ok": true,
+       "exposed_bytes": 0,
+       "tradeoff_recorded": false
+      },
+      {
+       "name": "begin-line",
+       "role": "PROSE_CANDIDATE",
+       "start": 9,
+       "end": 22,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "softbreak-1",
+       "role": "NEUTRAL",
+       "start": 22,
+       "end": 23,
+       "ok": true,
+       "exposed_bytes": 0,
+       "tradeoff_recorded": false
+      },
+      {
+       "name": "line-a",
+       "role": "PROSE_CANDIDATE",
+       "start": 23,
+       "end": 30,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "escape-1",
+       "role": "PROTECTED",
+       "start": 30,
+       "end": 31,
+       "ok": true,
+       "exposed_bytes": 0
+      },
+      {
+       "name": "literal-backslash",
+       "role": "PROSE_CANDIDATE",
+       "start": 31,
+       "end": 32,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "softbreak-2",
+       "role": "NEUTRAL",
+       "start": 32,
+       "end": 33,
+       "ok": true,
+       "exposed_bytes": 0,
+       "tradeoff_recorded": false
+      },
+      {
+       "name": "line-c",
+       "role": "PROSE_CANDIDATE",
+       "start": 33,
+       "end": 39,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "softbreak-3",
+       "role": "NEUTRAL",
+       "start": 39,
+       "end": 40,
+       "ok": true,
+       "exposed_bytes": 0,
+       "tradeoff_recorded": false
+      },
+      {
+       "name": "end-line",
+       "role": "PROSE_CANDIDATE",
+       "start": 40,
+       "end": 51,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "gap-2",
+       "role": "NEUTRAL",
+       "start": 51,
+       "end": 53,
+       "ok": true,
+       "exposed_bytes": 0,
+       "tradeoff_recorded": false
+      },
+      {
+       "name": "prose-after",
+       "role": "PROSE_CANDIDATE",
+       "start": 53,
+       "end": 67,
+       "ok": true,
+       "missing_bytes": 0
+      }
+     ],
+     "policy_ok": true,
+     "cli_crosscheck_ok": true,
+     "candidate_bytes": 59
+    }
+   }
+  },
+  "F15": {
+   "id": "F15",
+   "class": 15,
+   "class_name": "malformed-tex",
+   "profiles": {
+    "P0": {
+     "adapter_exit": 0,
+     "event_count": 6,
+     "region_results": [
+      {
+       "name": "line-1",
+       "role": "PROSE_CANDIDATE",
+       "start": 0,
+       "end": 26,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "blank-line",
+       "role": "NEUTRAL",
+       "start": 26,
+       "end": 28,
+       "ok": true,
+       "exposed_bytes": 0,
+       "tradeoff_recorded": false
+      },
+      {
+       "name": "line-2",
+       "role": "PROSE_CANDIDATE",
+       "start": 28,
+       "end": 47,
+       "ok": true,
+       "missing_bytes": 0
+      }
+     ],
+     "policy_ok": true,
+     "cli_crosscheck_ok": true,
+     "candidate_bytes": 45
+    },
+    "P1": {
+     "adapter_exit": 0,
+     "event_count": 6,
+     "region_results": [
+      {
+       "name": "line-1",
+       "role": "PROSE_CANDIDATE",
+       "start": 0,
+       "end": 26,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "blank-line",
+       "role": "NEUTRAL",
+       "start": 26,
+       "end": 28,
+       "ok": true,
+       "exposed_bytes": 0,
+       "tradeoff_recorded": false
+      },
+      {
+       "name": "line-2",
+       "role": "PROSE_CANDIDATE",
+       "start": 28,
+       "end": 47,
+       "ok": true,
+       "missing_bytes": 0
+      }
+     ],
+     "policy_ok": true,
+     "cli_crosscheck_ok": true,
+     "candidate_bytes": 45
+    },
+    "P2": {
+     "adapter_exit": 0,
+     "event_count": 6,
+     "region_results": [
+      {
+       "name": "line-1",
+       "role": "PROSE_CANDIDATE",
+       "start": 0,
+       "end": 26,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "blank-line",
+       "role": "NEUTRAL",
+       "start": 26,
+       "end": 28,
+       "ok": true,
+       "exposed_bytes": 0,
+       "tradeoff_recorded": false
+      },
+      {
+       "name": "line-2",
+       "role": "PROSE_CANDIDATE",
+       "start": 28,
+       "end": 47,
+       "ok": true,
+       "missing_bytes": 0
+      }
+     ],
+     "policy_ok": true,
+     "cli_crosscheck_ok": true,
+     "candidate_bytes": 45
+    }
+   }
+  },
+  "F16": {
+   "id": "F16",
+   "class": 16,
+   "class_name": "paired-dollar-currency",
+   "profiles": {
+    "P0": {
+     "adapter_exit": 0,
+     "event_count": 3,
+     "region_results": [
+      {
+       "name": "prose",
+       "role": "PROSE_CANDIDATE",
+       "start": 0,
+       "end": 62,
+       "ok": true,
+       "missing_bytes": 0
+      }
+     ],
+     "policy_ok": true,
+     "cli_crosscheck_ok": true,
+     "candidate_bytes": 62
+    },
+    "P1": {
+     "adapter_exit": 0,
+     "event_count": 9,
+     "region_results": [
+      {
+       "name": "prose",
+       "role": "PROSE_CANDIDATE",
+       "start": 0,
+       "end": 62,
+       "ok": true,
+       "missing_bytes": 0
+      }
+     ],
+     "policy_ok": true,
+     "cli_crosscheck_ok": true,
+     "candidate_bytes": 62
+    },
+    "P2": {
+     "adapter_exit": 0,
+     "event_count": 9,
+     "region_results": [
+      {
+       "name": "prose",
+       "role": "PROSE_CANDIDATE",
+       "start": 0,
+       "end": 62,
+       "ok": true,
+       "missing_bytes": 0
+      }
+     ],
+     "policy_ok": true,
+     "cli_crosscheck_ok": true,
+     "candidate_bytes": 62
+    }
+   }
+  },
+  "F17": {
+   "id": "F17",
+   "class": 17,
+   "class_name": "escaped-dollars",
+   "profiles": {
+    "P0": {
+     "adapter_exit": 0,
+     "event_count": 7,
+     "region_results": [
+      {
+       "name": "prose-1",
+       "role": "PROSE_CANDIDATE",
+       "start": 0,
+       "end": 8,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "escape-1",
+       "role": "PROTECTED",
+       "start": 8,
+       "end": 9,
+       "ok": true,
+       "exposed_bytes": 0
+      },
+      {
+       "name": "prose-2",
+       "role": "PROSE_CANDIDATE",
+       "start": 9,
+       "end": 29,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "escape-2",
+       "role": "PROTECTED",
+       "start": 29,
+       "end": 30,
+       "ok": true,
+       "exposed_bytes": 0
+      },
+      {
+       "name": "dollar-1",
+       "role": "PROSE_CANDIDATE",
+       "start": 30,
+       "end": 31,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "escape-3",
+       "role": "PROTECTED",
+       "start": 31,
+       "end": 32,
+       "ok": true,
+       "exposed_bytes": 0
+      },
+      {
+       "name": "dollar-2",
+       "role": "PROSE_CANDIDATE",
+       "start": 32,
+       "end": 33,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "escape-4",
+       "role": "PROTECTED",
+       "start": 33,
+       "end": 34,
+       "ok": true,
+       "exposed_bytes": 0
+      },
+      {
+       "name": "prose-3",
+       "role": "PROSE_CANDIDATE",
+       "start": 34,
+       "end": 43,
+       "ok": true,
+       "missing_bytes": 0
+      }
+     ],
+     "policy_ok": true,
+     "cli_crosscheck_ok": true,
+     "candidate_bytes": 39
+    },
+    "P1": {
+     "adapter_exit": 0,
+     "event_count": 7,
+     "region_results": [
+      {
+       "name": "prose-1",
+       "role": "PROSE_CANDIDATE",
+       "start": 0,
+       "end": 8,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "escape-1",
+       "role": "PROTECTED",
+       "start": 8,
+       "end": 9,
+       "ok": true,
+       "exposed_bytes": 0
+      },
+      {
+       "name": "prose-2",
+       "role": "PROSE_CANDIDATE",
+       "start": 9,
+       "end": 29,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "escape-2",
+       "role": "PROTECTED",
+       "start": 29,
+       "end": 30,
+       "ok": true,
+       "exposed_bytes": 0
+      },
+      {
+       "name": "dollar-1",
+       "role": "PROSE_CANDIDATE",
+       "start": 30,
+       "end": 31,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "escape-3",
+       "role": "PROTECTED",
+       "start": 31,
+       "end": 32,
+       "ok": true,
+       "exposed_bytes": 0
+      },
+      {
+       "name": "dollar-2",
+       "role": "PROSE_CANDIDATE",
+       "start": 32,
+       "end": 33,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "escape-4",
+       "role": "PROTECTED",
+       "start": 33,
+       "end": 34,
+       "ok": true,
+       "exposed_bytes": 0
+      },
+      {
+       "name": "prose-3",
+       "role": "PROSE_CANDIDATE",
+       "start": 34,
+       "end": 43,
+       "ok": true,
+       "missing_bytes": 0
+      }
+     ],
+     "policy_ok": true,
+     "cli_crosscheck_ok": true,
+     "candidate_bytes": 39
+    },
+    "P2": {
+     "adapter_exit": 0,
+     "event_count": 7,
+     "region_results": [
+      {
+       "name": "prose-1",
+       "role": "PROSE_CANDIDATE",
+       "start": 0,
+       "end": 8,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "escape-1",
+       "role": "PROTECTED",
+       "start": 8,
+       "end": 9,
+       "ok": true,
+       "exposed_bytes": 0
+      },
+      {
+       "name": "prose-2",
+       "role": "PROSE_CANDIDATE",
+       "start": 9,
+       "end": 29,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "escape-2",
+       "role": "PROTECTED",
+       "start": 29,
+       "end": 30,
+       "ok": true,
+       "exposed_bytes": 0
+      },
+      {
+       "name": "dollar-1",
+       "role": "PROSE_CANDIDATE",
+       "start": 30,
+       "end": 31,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "escape-3",
+       "role": "PROTECTED",
+       "start": 31,
+       "end": 32,
+       "ok": true,
+       "exposed_bytes": 0
+      },
+      {
+       "name": "dollar-2",
+       "role": "PROSE_CANDIDATE",
+       "start": 32,
+       "end": 33,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "escape-4",
+       "role": "PROTECTED",
+       "start": 33,
+       "end": 34,
+       "ok": true,
+       "exposed_bytes": 0
+      },
+      {
+       "name": "prose-3",
+       "role": "PROSE_CANDIDATE",
+       "start": 34,
+       "end": 43,
+       "ok": true,
+       "missing_bytes": 0
+      }
+     ],
+     "policy_ok": true,
+     "cli_crosscheck_ok": true,
+     "candidate_bytes": 39
+    }
+   }
+  },
+  "F18": {
+   "id": "F18",
+   "class": 18,
+   "class_name": "emphasis-strong-prose",
+   "profiles": {
+    "P0": {
+     "adapter_exit": 0,
+     "event_count": 11,
+     "region_results": [
+      {
+       "name": "prose-1",
+       "role": "PROSE_CANDIDATE",
+       "start": 0,
+       "end": 6,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "emph-delim-open",
+       "role": "PROTECTED",
+       "start": 6,
+       "end": 7,
+       "ok": true,
+       "exposed_bytes": 0
+      },
+      {
+       "name": "emph-text",
+       "role": "PROSE_CANDIDATE",
+       "start": 7,
+       "end": 17,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "emph-delim-close",
+       "role": "PROTECTED",
+       "start": 17,
+       "end": 18,
+       "ok": true,
+       "exposed_bytes": 0
+      },
+      {
+       "name": "prose-2",
+       "role": "PROSE_CANDIDATE",
+       "start": 18,
+       "end": 22,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "strong-delim-open",
+       "role": "PROTECTED",
+       "start": 22,
+       "end": 24,
+       "ok": true,
+       "exposed_bytes": 0
+      },
+      {
+       "name": "strong-text",
+       "role": "PROSE_CANDIDATE",
+       "start": 24,
+       "end": 30,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "strong-delim-close",
+       "role": "PROTECTED",
+       "start": 30,
+       "end": 32,
+       "ok": true,
+       "exposed_bytes": 0
+      },
+      {
+       "name": "prose-3",
+       "role": "PROSE_CANDIDATE",
+       "start": 32,
+       "end": 42,
+       "ok": true,
+       "missing_bytes": 0
+      }
+     ],
+     "policy_ok": true,
+     "cli_crosscheck_ok": true,
+     "candidate_bytes": 36
+    },
+    "P1": {
+     "adapter_exit": 0,
+     "event_count": 11,
+     "region_results": [
+      {
+       "name": "prose-1",
+       "role": "PROSE_CANDIDATE",
+       "start": 0,
+       "end": 6,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "emph-delim-open",
+       "role": "PROTECTED",
+       "start": 6,
+       "end": 7,
+       "ok": true,
+       "exposed_bytes": 0
+      },
+      {
+       "name": "emph-text",
+       "role": "PROSE_CANDIDATE",
+       "start": 7,
+       "end": 17,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "emph-delim-close",
+       "role": "PROTECTED",
+       "start": 17,
+       "end": 18,
+       "ok": true,
+       "exposed_bytes": 0
+      },
+      {
+       "name": "prose-2",
+       "role": "PROSE_CANDIDATE",
+       "start": 18,
+       "end": 22,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "strong-delim-open",
+       "role": "PROTECTED",
+       "start": 22,
+       "end": 24,
+       "ok": true,
+       "exposed_bytes": 0
+      },
+      {
+       "name": "strong-text",
+       "role": "PROSE_CANDIDATE",
+       "start": 24,
+       "end": 30,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "strong-delim-close",
+       "role": "PROTECTED",
+       "start": 30,
+       "end": 32,
+       "ok": true,
+       "exposed_bytes": 0
+      },
+      {
+       "name": "prose-3",
+       "role": "PROSE_CANDIDATE",
+       "start": 32,
+       "end": 42,
+       "ok": true,
+       "missing_bytes": 0
+      }
+     ],
+     "policy_ok": true,
+     "cli_crosscheck_ok": true,
+     "candidate_bytes": 36
+    },
+    "P2": {
+     "adapter_exit": 0,
+     "event_count": 11,
+     "region_results": [
+      {
+       "name": "prose-1",
+       "role": "PROSE_CANDIDATE",
+       "start": 0,
+       "end": 6,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "emph-delim-open",
+       "role": "PROTECTED",
+       "start": 6,
+       "end": 7,
+       "ok": true,
+       "exposed_bytes": 0
+      },
+      {
+       "name": "emph-text",
+       "role": "PROSE_CANDIDATE",
+       "start": 7,
+       "end": 17,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "emph-delim-close",
+       "role": "PROTECTED",
+       "start": 17,
+       "end": 18,
+       "ok": true,
+       "exposed_bytes": 0
+      },
+      {
+       "name": "prose-2",
+       "role": "PROSE_CANDIDATE",
+       "start": 18,
+       "end": 22,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "strong-delim-open",
+       "role": "PROTECTED",
+       "start": 22,
+       "end": 24,
+       "ok": true,
+       "exposed_bytes": 0
+      },
+      {
+       "name": "strong-text",
+       "role": "PROSE_CANDIDATE",
+       "start": 24,
+       "end": 30,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "strong-delim-close",
+       "role": "PROTECTED",
+       "start": 30,
+       "end": 32,
+       "ok": true,
+       "exposed_bytes": 0
+      },
+      {
+       "name": "prose-3",
+       "role": "PROSE_CANDIDATE",
+       "start": 32,
+       "end": 42,
+       "ok": true,
+       "missing_bytes": 0
+      }
+     ],
+     "policy_ok": true,
+     "cli_crosscheck_ok": true,
+     "candidate_bytes": 36
+    }
+   }
+  },
+  "F19": {
+   "id": "F19",
+   "class": 19,
+   "class_name": "heading-prose",
+   "profiles": {
+    "P0": {
+     "adapter_exit": 0,
+     "event_count": 6,
+     "region_results": [
+      {
+       "name": "head-marker",
+       "role": "PROTECTED",
+       "start": 0,
+       "end": 2,
+       "ok": true,
+       "exposed_bytes": 0
+      },
+      {
+       "name": "head-text",
+       "role": "PROSE_CANDIDATE",
+       "start": 2,
+       "end": 23,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "prose-after",
+       "role": "PROSE_CANDIDATE",
+       "start": 25,
+       "end": 47,
+       "ok": true,
+       "missing_bytes": 0
+      }
+     ],
+     "policy_ok": true,
+     "cli_crosscheck_ok": true,
+     "candidate_bytes": 43
+    },
+    "P1": {
+     "adapter_exit": 0,
+     "event_count": 6,
+     "region_results": [
+      {
+       "name": "head-marker",
+       "role": "PROTECTED",
+       "start": 0,
+       "end": 2,
+       "ok": true,
+       "exposed_bytes": 0
+      },
+      {
+       "name": "head-text",
+       "role": "PROSE_CANDIDATE",
+       "start": 2,
+       "end": 23,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "prose-after",
+       "role": "PROSE_CANDIDATE",
+       "start": 25,
+       "end": 47,
+       "ok": true,
+       "missing_bytes": 0
+      }
+     ],
+     "policy_ok": true,
+     "cli_crosscheck_ok": true,
+     "candidate_bytes": 43
+    },
+    "P2": {
+     "adapter_exit": 0,
+     "event_count": 6,
+     "region_results": [
+      {
+       "name": "head-marker",
+       "role": "PROTECTED",
+       "start": 0,
+       "end": 2,
+       "ok": true,
+       "exposed_bytes": 0
+      },
+      {
+       "name": "head-text",
+       "role": "PROSE_CANDIDATE",
+       "start": 2,
+       "end": 23,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "prose-after",
+       "role": "PROSE_CANDIDATE",
+       "start": 25,
+       "end": 47,
+       "ok": true,
+       "missing_bytes": 0
+      }
+     ],
+     "policy_ok": true,
+     "cli_crosscheck_ok": true,
+     "candidate_bytes": 43
+    }
+   }
+  },
+  "F20": {
+   "id": "F20",
+   "class": 20,
+   "class_name": "list-item-prose",
+   "profiles": {
+    "P0": {
+     "adapter_exit": 0,
+     "event_count": 14,
+     "region_results": [
+      {
+       "name": "prose-before",
+       "role": "PROSE_CANDIDATE",
+       "start": 0,
+       "end": 7,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "bullet-1",
+       "role": "PROTECTED",
+       "start": 8,
+       "end": 10,
+       "ok": true,
+       "exposed_bytes": 0
+      },
+      {
+       "name": "item-1",
+       "role": "PROSE_CANDIDATE",
+       "start": 10,
+       "end": 22,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "bullet-2",
+       "role": "PROTECTED",
+       "start": 23,
+       "end": 25,
+       "ok": true,
+       "exposed_bytes": 0
+      },
+      {
+       "name": "item-2",
+       "role": "PROSE_CANDIDATE",
+       "start": 25,
+       "end": 38,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "prose-after",
+       "role": "PROSE_CANDIDATE",
+       "start": 40,
+       "end": 54,
+       "ok": true,
+       "missing_bytes": 0
+      }
+     ],
+     "policy_ok": true,
+     "cli_crosscheck_ok": true,
+     "candidate_bytes": 46
+    },
+    "P1": {
+     "adapter_exit": 0,
+     "event_count": 14,
+     "region_results": [
+      {
+       "name": "prose-before",
+       "role": "PROSE_CANDIDATE",
+       "start": 0,
+       "end": 7,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "bullet-1",
+       "role": "PROTECTED",
+       "start": 8,
+       "end": 10,
+       "ok": true,
+       "exposed_bytes": 0
+      },
+      {
+       "name": "item-1",
+       "role": "PROSE_CANDIDATE",
+       "start": 10,
+       "end": 22,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "bullet-2",
+       "role": "PROTECTED",
+       "start": 23,
+       "end": 25,
+       "ok": true,
+       "exposed_bytes": 0
+      },
+      {
+       "name": "item-2",
+       "role": "PROSE_CANDIDATE",
+       "start": 25,
+       "end": 38,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "prose-after",
+       "role": "PROSE_CANDIDATE",
+       "start": 40,
+       "end": 54,
+       "ok": true,
+       "missing_bytes": 0
+      }
+     ],
+     "policy_ok": true,
+     "cli_crosscheck_ok": true,
+     "candidate_bytes": 46
+    },
+    "P2": {
+     "adapter_exit": 0,
+     "event_count": 14,
+     "region_results": [
+      {
+       "name": "prose-before",
+       "role": "PROSE_CANDIDATE",
+       "start": 0,
+       "end": 7,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "bullet-1",
+       "role": "PROTECTED",
+       "start": 8,
+       "end": 10,
+       "ok": true,
+       "exposed_bytes": 0
+      },
+      {
+       "name": "item-1",
+       "role": "PROSE_CANDIDATE",
+       "start": 10,
+       "end": 22,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "bullet-2",
+       "role": "PROTECTED",
+       "start": 23,
+       "end": 25,
+       "ok": true,
+       "exposed_bytes": 0
+      },
+      {
+       "name": "item-2",
+       "role": "PROSE_CANDIDATE",
+       "start": 25,
+       "end": 38,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "prose-after",
+       "role": "PROSE_CANDIDATE",
+       "start": 40,
+       "end": 54,
+       "ok": true,
+       "missing_bytes": 0
+      }
+     ],
+     "policy_ok": true,
+     "cli_crosscheck_ok": true,
+     "candidate_bytes": 46
+    }
+   }
+  },
+  "F21": {
+   "id": "F21",
+   "class": 21,
+   "class_name": "blockquote-prose",
+   "profiles": {
+    "P0": {
+     "adapter_exit": 0,
+     "event_count": 13,
+     "region_results": [
+      {
+       "name": "prose-before",
+       "role": "PROSE_CANDIDATE",
+       "start": 0,
+       "end": 6,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "quote-mark-1",
+       "role": "PROTECTED",
+       "start": 7,
+       "end": 9,
+       "ok": true,
+       "exposed_bytes": 0
+      },
+      {
+       "name": "quote-1",
+       "role": "PROSE_CANDIDATE",
+       "start": 9,
+       "end": 29,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "quote-mark-2",
+       "role": "PROTECTED",
+       "start": 30,
+       "end": 32,
+       "ok": true,
+       "exposed_bytes": 0
+      },
+      {
+       "name": "quote-2",
+       "role": "PROSE_CANDIDATE",
+       "start": 32,
+       "end": 53,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "prose-after",
+       "role": "PROSE_CANDIDATE",
+       "start": 55,
+       "end": 65,
+       "ok": true,
+       "missing_bytes": 0
+      }
+     ],
+     "policy_ok": true,
+     "cli_crosscheck_ok": true,
+     "candidate_bytes": 57
+    },
+    "P1": {
+     "adapter_exit": 0,
+     "event_count": 13,
+     "region_results": [
+      {
+       "name": "prose-before",
+       "role": "PROSE_CANDIDATE",
+       "start": 0,
+       "end": 6,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "quote-mark-1",
+       "role": "PROTECTED",
+       "start": 7,
+       "end": 9,
+       "ok": true,
+       "exposed_bytes": 0
+      },
+      {
+       "name": "quote-1",
+       "role": "PROSE_CANDIDATE",
+       "start": 9,
+       "end": 29,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "quote-mark-2",
+       "role": "PROTECTED",
+       "start": 30,
+       "end": 32,
+       "ok": true,
+       "exposed_bytes": 0
+      },
+      {
+       "name": "quote-2",
+       "role": "PROSE_CANDIDATE",
+       "start": 32,
+       "end": 53,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "prose-after",
+       "role": "PROSE_CANDIDATE",
+       "start": 55,
+       "end": 65,
+       "ok": true,
+       "missing_bytes": 0
+      }
+     ],
+     "policy_ok": true,
+     "cli_crosscheck_ok": true,
+     "candidate_bytes": 57
+    },
+    "P2": {
+     "adapter_exit": 0,
+     "event_count": 13,
+     "region_results": [
+      {
+       "name": "prose-before",
+       "role": "PROSE_CANDIDATE",
+       "start": 0,
+       "end": 6,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "quote-mark-1",
+       "role": "PROTECTED",
+       "start": 7,
+       "end": 9,
+       "ok": true,
+       "exposed_bytes": 0
+      },
+      {
+       "name": "quote-1",
+       "role": "PROSE_CANDIDATE",
+       "start": 9,
+       "end": 29,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "quote-mark-2",
+       "role": "PROTECTED",
+       "start": 30,
+       "end": 32,
+       "ok": true,
+       "exposed_bytes": 0
+      },
+      {
+       "name": "quote-2",
+       "role": "PROSE_CANDIDATE",
+       "start": 32,
+       "end": 53,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "prose-after",
+       "role": "PROSE_CANDIDATE",
+       "start": 55,
+       "end": 65,
+       "ok": true,
+       "missing_bytes": 0
+      }
+     ],
+     "policy_ok": true,
+     "cli_crosscheck_ok": true,
+     "candidate_bytes": 57
+    }
+   }
+  },
+  "F22": {
+   "id": "F22",
+   "class": 22,
+   "class_name": "link-prose-label-url",
+   "profiles": {
+    "P0": {
+     "adapter_exit": 0,
+     "event_count": 7,
+     "region_results": [
+      {
+       "name": "prose-before",
+       "role": "PROSE_CANDIDATE",
+       "start": 0,
+       "end": 9,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "bracket-open",
+       "role": "PROTECTED",
+       "start": 9,
+       "end": 10,
+       "ok": true,
+       "exposed_bytes": 0
+      },
+      {
+       "name": "label",
+       "role": "PROSE_CANDIDATE",
+       "start": 10,
+       "end": 26,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "bracket-close-paren",
+       "role": "PROTECTED",
+       "start": 26,
+       "end": 28,
+       "ok": true,
+       "exposed_bytes": 0
+      },
+      {
+       "name": "dest",
+       "role": "PROTECTED",
+       "start": 28,
+       "end": 54,
+       "ok": true,
+       "exposed_bytes": 0
+      },
+      {
+       "name": "paren-close",
+       "role": "PROTECTED",
+       "start": 54,
+       "end": 55,
+       "ok": true,
+       "exposed_bytes": 0
+      },
+      {
+       "name": "prose-after",
+       "role": "PROSE_CANDIDATE",
+       "start": 55,
+       "end": 71,
+       "ok": true,
+       "missing_bytes": 0
+      }
+     ],
+     "policy_ok": true,
+     "cli_crosscheck_ok": true,
+     "candidate_bytes": 41
+    },
+    "P1": {
+     "adapter_exit": 0,
+     "event_count": 7,
+     "region_results": [
+      {
+       "name": "prose-before",
+       "role": "PROSE_CANDIDATE",
+       "start": 0,
+       "end": 9,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "bracket-open",
+       "role": "PROTECTED",
+       "start": 9,
+       "end": 10,
+       "ok": true,
+       "exposed_bytes": 0
+      },
+      {
+       "name": "label",
+       "role": "PROSE_CANDIDATE",
+       "start": 10,
+       "end": 26,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "bracket-close-paren",
+       "role": "PROTECTED",
+       "start": 26,
+       "end": 28,
+       "ok": true,
+       "exposed_bytes": 0
+      },
+      {
+       "name": "dest",
+       "role": "PROTECTED",
+       "start": 28,
+       "end": 54,
+       "ok": true,
+       "exposed_bytes": 0
+      },
+      {
+       "name": "paren-close",
+       "role": "PROTECTED",
+       "start": 54,
+       "end": 55,
+       "ok": true,
+       "exposed_bytes": 0
+      },
+      {
+       "name": "prose-after",
+       "role": "PROSE_CANDIDATE",
+       "start": 55,
+       "end": 71,
+       "ok": true,
+       "missing_bytes": 0
+      }
+     ],
+     "policy_ok": true,
+     "cli_crosscheck_ok": true,
+     "candidate_bytes": 41
+    },
+    "P2": {
+     "adapter_exit": 0,
+     "event_count": 7,
+     "region_results": [
+      {
+       "name": "prose-before",
+       "role": "PROSE_CANDIDATE",
+       "start": 0,
+       "end": 9,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "bracket-open",
+       "role": "PROTECTED",
+       "start": 9,
+       "end": 10,
+       "ok": true,
+       "exposed_bytes": 0
+      },
+      {
+       "name": "label",
+       "role": "PROSE_CANDIDATE",
+       "start": 10,
+       "end": 26,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "bracket-close-paren",
+       "role": "PROTECTED",
+       "start": 26,
+       "end": 28,
+       "ok": true,
+       "exposed_bytes": 0
+      },
+      {
+       "name": "dest",
+       "role": "PROTECTED",
+       "start": 28,
+       "end": 54,
+       "ok": true,
+       "exposed_bytes": 0
+      },
+      {
+       "name": "paren-close",
+       "role": "PROTECTED",
+       "start": 54,
+       "end": 55,
+       "ok": true,
+       "exposed_bytes": 0
+      },
+      {
+       "name": "prose-after",
+       "role": "PROSE_CANDIDATE",
+       "start": 55,
+       "end": 71,
+       "ok": true,
+       "missing_bytes": 0
+      }
+     ],
+     "policy_ok": true,
+     "cli_crosscheck_ok": true,
+     "candidate_bytes": 41
+    }
+   }
+  },
+  "F23": {
+   "id": "F23",
+   "class": 23,
+   "class_name": "image-syntax",
+   "profiles": {
+    "P0": {
+     "adapter_exit": 0,
+     "event_count": 9,
+     "region_results": [
+      {
+       "name": "prose-before",
+       "role": "PROSE_CANDIDATE",
+       "start": 0,
+       "end": 7,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "image",
+       "role": "PROTECTED",
+       "start": 7,
+       "end": 51,
+       "ok": true,
+       "exposed_bytes": 0
+      },
+      {
+       "name": "prose-after",
+       "role": "PROSE_CANDIDATE",
+       "start": 53,
+       "end": 60,
+       "ok": true,
+       "missing_bytes": 0
+      }
+     ],
+     "policy_ok": true,
+     "cli_crosscheck_ok": true,
+     "candidate_bytes": 14
+    },
+    "P1": {
+     "adapter_exit": 0,
+     "event_count": 9,
+     "region_results": [
+      {
+       "name": "prose-before",
+       "role": "PROSE_CANDIDATE",
+       "start": 0,
+       "end": 7,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "image",
+       "role": "PROTECTED",
+       "start": 7,
+       "end": 51,
+       "ok": true,
+       "exposed_bytes": 0
+      },
+      {
+       "name": "prose-after",
+       "role": "PROSE_CANDIDATE",
+       "start": 53,
+       "end": 60,
+       "ok": true,
+       "missing_bytes": 0
+      }
+     ],
+     "policy_ok": true,
+     "cli_crosscheck_ok": true,
+     "candidate_bytes": 14
+    },
+    "P2": {
+     "adapter_exit": 0,
+     "event_count": 9,
+     "region_results": [
+      {
+       "name": "prose-before",
+       "role": "PROSE_CANDIDATE",
+       "start": 0,
+       "end": 7,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "image",
+       "role": "PROTECTED",
+       "start": 7,
+       "end": 51,
+       "ok": true,
+       "exposed_bytes": 0
+      },
+      {
+       "name": "prose-after",
+       "role": "PROSE_CANDIDATE",
+       "start": 53,
+       "end": 60,
+       "ok": true,
+       "missing_bytes": 0
+      }
+     ],
+     "policy_ok": true,
+     "cli_crosscheck_ok": true,
+     "candidate_bytes": 14
+    }
+   }
+  },
+  "F24": {
+   "id": "F24",
+   "class": 24,
+   "class_name": "autolink",
+   "profiles": {
+    "P0": {
+     "adapter_exit": 0,
+     "event_count": 7,
+     "region_results": [
+      {
+       "name": "prose-1",
+       "role": "PROSE_CANDIDATE",
+       "start": 0,
+       "end": 12,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "bare-url",
+       "role": "PROSE_CANDIDATE",
+       "start": 12,
+       "end": 34,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "prose-2",
+       "role": "PROSE_CANDIDATE",
+       "start": 34,
+       "end": 38,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "angle-autolink",
+       "role": "PROTECTED",
+       "start": 38,
+       "end": 64,
+       "ok": true,
+       "exposed_bytes": 0
+      },
+      {
+       "name": "prose-3",
+       "role": "PROSE_CANDIDATE",
+       "start": 64,
+       "end": 77,
+       "ok": true,
+       "missing_bytes": 0
+      }
+     ],
+     "policy_ok": true,
+     "cli_crosscheck_ok": true,
+     "candidate_bytes": 51
+    },
+    "P1": {
+     "adapter_exit": 0,
+     "event_count": 7,
+     "region_results": [
+      {
+       "name": "prose-1",
+       "role": "PROSE_CANDIDATE",
+       "start": 0,
+       "end": 12,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "bare-url",
+       "role": "PROSE_CANDIDATE",
+       "start": 12,
+       "end": 34,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "prose-2",
+       "role": "PROSE_CANDIDATE",
+       "start": 34,
+       "end": 38,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "angle-autolink",
+       "role": "PROTECTED",
+       "start": 38,
+       "end": 64,
+       "ok": true,
+       "exposed_bytes": 0
+      },
+      {
+       "name": "prose-3",
+       "role": "PROSE_CANDIDATE",
+       "start": 64,
+       "end": 77,
+       "ok": true,
+       "missing_bytes": 0
+      }
+     ],
+     "policy_ok": true,
+     "cli_crosscheck_ok": true,
+     "candidate_bytes": 51
+    },
+    "P2": {
+     "adapter_exit": 0,
+     "event_count": 7,
+     "region_results": [
+      {
+       "name": "prose-1",
+       "role": "PROSE_CANDIDATE",
+       "start": 0,
+       "end": 12,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "bare-url",
+       "role": "PROSE_CANDIDATE",
+       "start": 12,
+       "end": 34,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "prose-2",
+       "role": "PROSE_CANDIDATE",
+       "start": 34,
+       "end": 38,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "angle-autolink",
+       "role": "PROTECTED",
+       "start": 38,
+       "end": 64,
+       "ok": true,
+       "exposed_bytes": 0
+      },
+      {
+       "name": "prose-3",
+       "role": "PROSE_CANDIDATE",
+       "start": 64,
+       "end": 77,
+       "ok": true,
+       "missing_bytes": 0
+      }
+     ],
+     "policy_ok": true,
+     "cli_crosscheck_ok": true,
+     "candidate_bytes": 51
+    }
+   }
+  },
+  "F25": {
+   "id": "F25",
+   "class": 25,
+   "class_name": "table-prose-and-code",
+   "profiles": {
+    "P0": {
+     "adapter_exit": 0,
+     "event_count": 17,
+     "region_results": [
+      {
+       "name": "prose-before",
+       "role": "PROSE_CANDIDATE",
+       "start": 0,
+       "end": 8,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "cell-1",
+       "role": "PROSE_CANDIDATE",
+       "start": 12,
+       "end": 20,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "cell-code-1",
+       "role": "PROTECTED",
+       "start": 23,
+       "end": 37,
+       "ok": true,
+       "exposed_bytes": 0
+      },
+      {
+       "name": "row-2-text",
+       "role": "PROSE_CANDIDATE",
+       "start": 72,
+       "end": 85,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "cell-code-2",
+       "role": "PROTECTED",
+       "start": 88,
+       "end": 95,
+       "ok": true,
+       "exposed_bytes": 0
+      },
+      {
+       "name": "prose-after",
+       "role": "PROSE_CANDIDATE",
+       "start": 99,
+       "end": 106,
+       "ok": true,
+       "missing_bytes": 0
+      }
+     ],
+     "policy_ok": true,
+     "cli_crosscheck_ok": true,
+     "candidate_bytes": 79
+    },
+    "P1": {
+     "adapter_exit": 0,
+     "event_count": 24,
+     "region_results": [
+      {
+       "name": "prose-before",
+       "role": "PROSE_CANDIDATE",
+       "start": 0,
+       "end": 8,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "cell-1",
+       "role": "PROSE_CANDIDATE",
+       "start": 12,
+       "end": 20,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "cell-code-1",
+       "role": "PROTECTED",
+       "start": 23,
+       "end": 37,
+       "ok": true,
+       "exposed_bytes": 0
+      },
+      {
+       "name": "row-2-text",
+       "role": "PROSE_CANDIDATE",
+       "start": 72,
+       "end": 85,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "cell-code-2",
+       "role": "PROTECTED",
+       "start": 88,
+       "end": 95,
+       "ok": true,
+       "exposed_bytes": 0
+      },
+      {
+       "name": "prose-after",
+       "role": "PROSE_CANDIDATE",
+       "start": 99,
+       "end": 106,
+       "ok": true,
+       "missing_bytes": 0
+      }
+     ],
+     "policy_ok": true,
+     "cli_crosscheck_ok": true,
+     "candidate_bytes": 36
+    },
+    "P2": {
+     "adapter_exit": 0,
+     "event_count": 24,
+     "region_results": [
+      {
+       "name": "prose-before",
+       "role": "PROSE_CANDIDATE",
+       "start": 0,
+       "end": 8,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "cell-1",
+       "role": "PROSE_CANDIDATE",
+       "start": 12,
+       "end": 20,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "cell-code-1",
+       "role": "PROTECTED",
+       "start": 23,
+       "end": 37,
+       "ok": true,
+       "exposed_bytes": 0
+      },
+      {
+       "name": "row-2-text",
+       "role": "PROSE_CANDIDATE",
+       "start": 72,
+       "end": 85,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "cell-code-2",
+       "role": "PROTECTED",
+       "start": 88,
+       "end": 95,
+       "ok": true,
+       "exposed_bytes": 0
+      },
+      {
+       "name": "prose-after",
+       "role": "PROSE_CANDIDATE",
+       "start": 99,
+       "end": 106,
+       "ok": true,
+       "missing_bytes": 0
+      }
+     ],
+     "policy_ok": true,
+     "cli_crosscheck_ok": true,
+     "candidate_bytes": 36
+    }
+   }
+  },
+  "F26": {
+   "id": "F26",
+   "class": 26,
+   "class_name": "raw-html",
+   "profiles": {
+    "P0": {
+     "adapter_exit": 0,
+     "event_count": 13,
+     "region_results": [
+      {
+       "name": "prose-before",
+       "role": "PROSE_CANDIDATE",
+       "start": 0,
+       "end": 18,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "html-block",
+       "role": "PROTECTED",
+       "start": 20,
+       "end": 54,
+       "ok": true,
+       "exposed_bytes": 0
+      },
+      {
+       "name": "prose-mid",
+       "role": "PROSE_CANDIDATE",
+       "start": 56,
+       "end": 63,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "html-open",
+       "role": "PROTECTED",
+       "start": 63,
+       "end": 66,
+       "ok": true,
+       "exposed_bytes": 0
+      },
+      {
+       "name": "html-text",
+       "role": "PROSE_CANDIDATE",
+       "start": 66,
+       "end": 76,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "html-close",
+       "role": "PROTECTED",
+       "start": 76,
+       "end": 80,
+       "ok": true,
+       "exposed_bytes": 0
+      },
+      {
+       "name": "prose-after",
+       "role": "PROSE_CANDIDATE",
+       "start": 80,
+       "end": 84,
+       "ok": true,
+       "missing_bytes": 0
+      }
+     ],
+     "policy_ok": true,
+     "cli_crosscheck_ok": true,
+     "candidate_bytes": 39
+    },
+    "P1": {
+     "adapter_exit": 0,
+     "event_count": 13,
+     "region_results": [
+      {
+       "name": "prose-before",
+       "role": "PROSE_CANDIDATE",
+       "start": 0,
+       "end": 18,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "html-block",
+       "role": "PROTECTED",
+       "start": 20,
+       "end": 54,
+       "ok": true,
+       "exposed_bytes": 0
+      },
+      {
+       "name": "prose-mid",
+       "role": "PROSE_CANDIDATE",
+       "start": 56,
+       "end": 63,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "html-open",
+       "role": "PROTECTED",
+       "start": 63,
+       "end": 66,
+       "ok": true,
+       "exposed_bytes": 0
+      },
+      {
+       "name": "html-text",
+       "role": "PROSE_CANDIDATE",
+       "start": 66,
+       "end": 76,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "html-close",
+       "role": "PROTECTED",
+       "start": 76,
+       "end": 80,
+       "ok": true,
+       "exposed_bytes": 0
+      },
+      {
+       "name": "prose-after",
+       "role": "PROSE_CANDIDATE",
+       "start": 80,
+       "end": 84,
+       "ok": true,
+       "missing_bytes": 0
+      }
+     ],
+     "policy_ok": true,
+     "cli_crosscheck_ok": true,
+     "candidate_bytes": 39
+    },
+    "P2": {
+     "adapter_exit": 0,
+     "event_count": 13,
+     "region_results": [
+      {
+       "name": "prose-before",
+       "role": "PROSE_CANDIDATE",
+       "start": 0,
+       "end": 18,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "html-block",
+       "role": "PROTECTED",
+       "start": 20,
+       "end": 54,
+       "ok": true,
+       "exposed_bytes": 0
+      },
+      {
+       "name": "prose-mid",
+       "role": "PROSE_CANDIDATE",
+       "start": 56,
+       "end": 63,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "html-open",
+       "role": "PROTECTED",
+       "start": 63,
+       "end": 66,
+       "ok": true,
+       "exposed_bytes": 0
+      },
+      {
+       "name": "html-text",
+       "role": "PROSE_CANDIDATE",
+       "start": 66,
+       "end": 76,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "html-close",
+       "role": "PROTECTED",
+       "start": 76,
+       "end": 80,
+       "ok": true,
+       "exposed_bytes": 0
+      },
+      {
+       "name": "prose-after",
+       "role": "PROSE_CANDIDATE",
+       "start": 80,
+       "end": 84,
+       "ok": true,
+       "missing_bytes": 0
+      }
+     ],
+     "policy_ok": true,
+     "cli_crosscheck_ok": true,
+     "candidate_bytes": 39
+    }
+   }
+  },
+  "F27": {
+   "id": "F27",
+   "class": 27,
+   "class_name": "bare-json",
+   "profiles": {
+    "P0": {
+     "adapter_exit": 0,
+     "event_count": 15,
+     "region_results": [
+      {
+       "name": "prose-before",
+       "role": "PROSE_CANDIDATE",
+       "start": 0,
+       "end": 6,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "json-open",
+       "role": "PROSE_CANDIDATE",
+       "start": 8,
+       "end": 9,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "newline-1",
+       "role": "NEUTRAL",
+       "start": 9,
+       "end": 10,
+       "ok": true,
+       "exposed_bytes": 0,
+       "tradeoff_recorded": false
+      },
+      {
+       "name": "indent-1",
+       "role": "NEUTRAL",
+       "start": 10,
+       "end": 12,
+       "ok": true,
+       "exposed_bytes": 0,
+       "tradeoff_recorded": false
+      },
+      {
+       "name": "line-1",
+       "role": "PROSE_CANDIDATE",
+       "start": 12,
+       "end": 25,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "newline-2",
+       "role": "NEUTRAL",
+       "start": 25,
+       "end": 26,
+       "ok": true,
+       "exposed_bytes": 0,
+       "tradeoff_recorded": false
+      },
+      {
+       "name": "indent-2",
+       "role": "NEUTRAL",
+       "start": 26,
+       "end": 28,
+       "ok": true,
+       "exposed_bytes": 0,
+       "tradeoff_recorded": false
+      },
+      {
+       "name": "line-2",
+       "role": "PROSE_CANDIDATE",
+       "start": 28,
+       "end": 41,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "newline-3",
+       "role": "NEUTRAL",
+       "start": 41,
+       "end": 42,
+       "ok": true,
+       "exposed_bytes": 0,
+       "tradeoff_recorded": false
+      },
+      {
+       "name": "json-close",
+       "role": "PROSE_CANDIDATE",
+       "start": 42,
+       "end": 43,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "prose-after",
+       "role": "PROSE_CANDIDATE",
+       "start": 45,
+       "end": 54,
+       "ok": true,
+       "missing_bytes": 0
+      }
+     ],
+     "policy_ok": true,
+     "cli_crosscheck_ok": true,
+     "candidate_bytes": 43
+    },
+    "P1": {
+     "adapter_exit": 0,
+     "event_count": 15,
+     "region_results": [
+      {
+       "name": "prose-before",
+       "role": "PROSE_CANDIDATE",
+       "start": 0,
+       "end": 6,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "json-open",
+       "role": "PROSE_CANDIDATE",
+       "start": 8,
+       "end": 9,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "newline-1",
+       "role": "NEUTRAL",
+       "start": 9,
+       "end": 10,
+       "ok": true,
+       "exposed_bytes": 0,
+       "tradeoff_recorded": false
+      },
+      {
+       "name": "indent-1",
+       "role": "NEUTRAL",
+       "start": 10,
+       "end": 12,
+       "ok": true,
+       "exposed_bytes": 0,
+       "tradeoff_recorded": false
+      },
+      {
+       "name": "line-1",
+       "role": "PROSE_CANDIDATE",
+       "start": 12,
+       "end": 25,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "newline-2",
+       "role": "NEUTRAL",
+       "start": 25,
+       "end": 26,
+       "ok": true,
+       "exposed_bytes": 0,
+       "tradeoff_recorded": false
+      },
+      {
+       "name": "indent-2",
+       "role": "NEUTRAL",
+       "start": 26,
+       "end": 28,
+       "ok": true,
+       "exposed_bytes": 0,
+       "tradeoff_recorded": false
+      },
+      {
+       "name": "line-2",
+       "role": "PROSE_CANDIDATE",
+       "start": 28,
+       "end": 41,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "newline-3",
+       "role": "NEUTRAL",
+       "start": 41,
+       "end": 42,
+       "ok": true,
+       "exposed_bytes": 0,
+       "tradeoff_recorded": false
+      },
+      {
+       "name": "json-close",
+       "role": "PROSE_CANDIDATE",
+       "start": 42,
+       "end": 43,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "prose-after",
+       "role": "PROSE_CANDIDATE",
+       "start": 45,
+       "end": 54,
+       "ok": true,
+       "missing_bytes": 0
+      }
+     ],
+     "policy_ok": true,
+     "cli_crosscheck_ok": true,
+     "candidate_bytes": 43
+    },
+    "P2": {
+     "adapter_exit": 0,
+     "event_count": 15,
+     "region_results": [
+      {
+       "name": "prose-before",
+       "role": "PROSE_CANDIDATE",
+       "start": 0,
+       "end": 6,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "json-open",
+       "role": "PROSE_CANDIDATE",
+       "start": 8,
+       "end": 9,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "newline-1",
+       "role": "NEUTRAL",
+       "start": 9,
+       "end": 10,
+       "ok": true,
+       "exposed_bytes": 0,
+       "tradeoff_recorded": false
+      },
+      {
+       "name": "indent-1",
+       "role": "NEUTRAL",
+       "start": 10,
+       "end": 12,
+       "ok": true,
+       "exposed_bytes": 0,
+       "tradeoff_recorded": false
+      },
+      {
+       "name": "line-1",
+       "role": "PROSE_CANDIDATE",
+       "start": 12,
+       "end": 25,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "newline-2",
+       "role": "NEUTRAL",
+       "start": 25,
+       "end": 26,
+       "ok": true,
+       "exposed_bytes": 0,
+       "tradeoff_recorded": false
+      },
+      {
+       "name": "indent-2",
+       "role": "NEUTRAL",
+       "start": 26,
+       "end": 28,
+       "ok": true,
+       "exposed_bytes": 0,
+       "tradeoff_recorded": false
+      },
+      {
+       "name": "line-2",
+       "role": "PROSE_CANDIDATE",
+       "start": 28,
+       "end": 41,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "newline-3",
+       "role": "NEUTRAL",
+       "start": 41,
+       "end": 42,
+       "ok": true,
+       "exposed_bytes": 0,
+       "tradeoff_recorded": false
+      },
+      {
+       "name": "json-close",
+       "role": "PROSE_CANDIDATE",
+       "start": 42,
+       "end": 43,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "prose-after",
+       "role": "PROSE_CANDIDATE",
+       "start": 45,
+       "end": 54,
+       "ok": true,
+       "missing_bytes": 0
+      }
+     ],
+     "policy_ok": true,
+     "cli_crosscheck_ok": true,
+     "candidate_bytes": 43
+    }
+   }
+  },
+  "F28": {
+   "id": "F28",
+   "class": 28,
+   "class_name": "yaml-toml-config",
+   "profiles": {
+    "P0": {
+     "adapter_exit": 0,
+     "event_count": 18,
+     "region_results": [
+      {
+       "name": "prose-before",
+       "role": "PROSE_CANDIDATE",
+       "start": 0,
+       "end": 11,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "toml-line-1",
+       "role": "PROSE_CANDIDATE",
+       "start": 13,
+       "end": 27,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "newline-1",
+       "role": "NEUTRAL",
+       "start": 27,
+       "end": 28,
+       "ok": true,
+       "exposed_bytes": 0,
+       "tradeoff_recorded": false
+      },
+      {
+       "name": "toml-line-2",
+       "role": "PROSE_CANDIDATE",
+       "start": 28,
+       "end": 44,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "blank-1",
+       "role": "NEUTRAL",
+       "start": 44,
+       "end": 46,
+       "ok": true,
+       "exposed_bytes": 0,
+       "tradeoff_recorded": false
+      },
+      {
+       "name": "yaml-line-1",
+       "role": "PROSE_CANDIDATE",
+       "start": 46,
+       "end": 60,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "newline-2",
+       "role": "NEUTRAL",
+       "start": 60,
+       "end": 61,
+       "ok": true,
+       "exposed_bytes": 0,
+       "tradeoff_recorded": false
+      },
+      {
+       "name": "indent-1",
+       "role": "NEUTRAL",
+       "start": 61,
+       "end": 63,
+       "ok": true,
+       "exposed_bytes": 0,
+       "tradeoff_recorded": false
+      },
+      {
+       "name": "yaml-line-2",
+       "role": "PROSE_CANDIDATE",
+       "start": 63,
+       "end": 78,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "prose-after",
+       "role": "PROSE_CANDIDATE",
+       "start": 80,
+       "end": 89,
+       "ok": true,
+       "missing_bytes": 0
+      }
+     ],
+     "policy_ok": true,
+     "cli_crosscheck_ok": true,
+     "candidate_bytes": 79
+    },
+    "P1": {
+     "adapter_exit": 0,
+     "event_count": 18,
+     "region_results": [
+      {
+       "name": "prose-before",
+       "role": "PROSE_CANDIDATE",
+       "start": 0,
+       "end": 11,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "toml-line-1",
+       "role": "PROSE_CANDIDATE",
+       "start": 13,
+       "end": 27,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "newline-1",
+       "role": "NEUTRAL",
+       "start": 27,
+       "end": 28,
+       "ok": true,
+       "exposed_bytes": 0,
+       "tradeoff_recorded": false
+      },
+      {
+       "name": "toml-line-2",
+       "role": "PROSE_CANDIDATE",
+       "start": 28,
+       "end": 44,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "blank-1",
+       "role": "NEUTRAL",
+       "start": 44,
+       "end": 46,
+       "ok": true,
+       "exposed_bytes": 0,
+       "tradeoff_recorded": false
+      },
+      {
+       "name": "yaml-line-1",
+       "role": "PROSE_CANDIDATE",
+       "start": 46,
+       "end": 60,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "newline-2",
+       "role": "NEUTRAL",
+       "start": 60,
+       "end": 61,
+       "ok": true,
+       "exposed_bytes": 0,
+       "tradeoff_recorded": false
+      },
+      {
+       "name": "indent-1",
+       "role": "NEUTRAL",
+       "start": 61,
+       "end": 63,
+       "ok": true,
+       "exposed_bytes": 0,
+       "tradeoff_recorded": false
+      },
+      {
+       "name": "yaml-line-2",
+       "role": "PROSE_CANDIDATE",
+       "start": 63,
+       "end": 78,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "prose-after",
+       "role": "PROSE_CANDIDATE",
+       "start": 80,
+       "end": 89,
+       "ok": true,
+       "missing_bytes": 0
+      }
+     ],
+     "policy_ok": true,
+     "cli_crosscheck_ok": true,
+     "candidate_bytes": 79
+    },
+    "P2": {
+     "adapter_exit": 0,
+     "event_count": 18,
+     "region_results": [
+      {
+       "name": "prose-before",
+       "role": "PROSE_CANDIDATE",
+       "start": 0,
+       "end": 11,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "toml-line-1",
+       "role": "PROSE_CANDIDATE",
+       "start": 13,
+       "end": 27,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "newline-1",
+       "role": "NEUTRAL",
+       "start": 27,
+       "end": 28,
+       "ok": true,
+       "exposed_bytes": 0,
+       "tradeoff_recorded": false
+      },
+      {
+       "name": "toml-line-2",
+       "role": "PROSE_CANDIDATE",
+       "start": 28,
+       "end": 44,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "blank-1",
+       "role": "NEUTRAL",
+       "start": 44,
+       "end": 46,
+       "ok": true,
+       "exposed_bytes": 0,
+       "tradeoff_recorded": false
+      },
+      {
+       "name": "yaml-line-1",
+       "role": "PROSE_CANDIDATE",
+       "start": 46,
+       "end": 60,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "newline-2",
+       "role": "NEUTRAL",
+       "start": 60,
+       "end": 61,
+       "ok": true,
+       "exposed_bytes": 0,
+       "tradeoff_recorded": false
+      },
+      {
+       "name": "indent-1",
+       "role": "NEUTRAL",
+       "start": 61,
+       "end": 63,
+       "ok": true,
+       "exposed_bytes": 0,
+       "tradeoff_recorded": false
+      },
+      {
+       "name": "yaml-line-2",
+       "role": "PROSE_CANDIDATE",
+       "start": 63,
+       "end": 78,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "prose-after",
+       "role": "PROSE_CANDIDATE",
+       "start": 80,
+       "end": 89,
+       "ok": true,
+       "missing_bytes": 0
+      }
+     ],
+     "policy_ok": true,
+     "cli_crosscheck_ok": true,
+     "candidate_bytes": 79
+    }
+   }
+  },
+  "F29": {
+   "id": "F29",
+   "class": 29,
+   "class_name": "shell-commands",
+   "profiles": {
+    "P0": {
+     "adapter_exit": 0,
+     "event_count": 15,
+     "region_results": [
+      {
+       "name": "prose-before",
+       "role": "PROSE_CANDIDATE",
+       "start": 0,
+       "end": 18,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "shell-line-1",
+       "role": "PROSE_CANDIDATE",
+       "start": 20,
+       "end": 33,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "newline-1",
+       "role": "NEUTRAL",
+       "start": 33,
+       "end": 34,
+       "ok": true,
+       "exposed_bytes": 0,
+       "tradeoff_recorded": false
+      },
+      {
+       "name": "heading-marker",
+       "role": "PROTECTED",
+       "start": 34,
+       "end": 36,
+       "ok": true,
+       "exposed_bytes": 0
+      },
+      {
+       "name": "heading-text",
+       "role": "PROSE_CANDIDATE",
+       "start": 36,
+       "end": 44,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "newline-2",
+       "role": "NEUTRAL",
+       "start": 44,
+       "end": 45,
+       "ok": true,
+       "exposed_bytes": 0,
+       "tradeoff_recorded": false
+      },
+      {
+       "name": "shell-line-2",
+       "role": "PROSE_CANDIDATE",
+       "start": 45,
+       "end": 60,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "prose-after",
+       "role": "PROSE_CANDIDATE",
+       "start": 62,
+       "end": 72,
+       "ok": true,
+       "missing_bytes": 0
+      }
+     ],
+     "policy_ok": true,
+     "cli_crosscheck_ok": true,
+     "candidate_bytes": 64
+    },
+    "P1": {
+     "adapter_exit": 0,
+     "event_count": 16,
+     "region_results": [
+      {
+       "name": "prose-before",
+       "role": "PROSE_CANDIDATE",
+       "start": 0,
+       "end": 18,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "shell-line-1",
+       "role": "PROSE_CANDIDATE",
+       "start": 20,
+       "end": 33,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "newline-1",
+       "role": "NEUTRAL",
+       "start": 33,
+       "end": 34,
+       "ok": true,
+       "exposed_bytes": 0,
+       "tradeoff_recorded": false
+      },
+      {
+       "name": "heading-marker",
+       "role": "PROTECTED",
+       "start": 34,
+       "end": 36,
+       "ok": true,
+       "exposed_bytes": 0
+      },
+      {
+       "name": "heading-text",
+       "role": "PROSE_CANDIDATE",
+       "start": 36,
+       "end": 44,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "newline-2",
+       "role": "NEUTRAL",
+       "start": 44,
+       "end": 45,
+       "ok": true,
+       "exposed_bytes": 0,
+       "tradeoff_recorded": false
+      },
+      {
+       "name": "shell-line-2",
+       "role": "PROSE_CANDIDATE",
+       "start": 45,
+       "end": 60,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "prose-after",
+       "role": "PROSE_CANDIDATE",
+       "start": 62,
+       "end": 72,
+       "ok": true,
+       "missing_bytes": 0
+      }
+     ],
+     "policy_ok": true,
+     "cli_crosscheck_ok": true,
+     "candidate_bytes": 64
+    },
+    "P2": {
+     "adapter_exit": 0,
+     "event_count": 16,
+     "region_results": [
+      {
+       "name": "prose-before",
+       "role": "PROSE_CANDIDATE",
+       "start": 0,
+       "end": 18,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "shell-line-1",
+       "role": "PROSE_CANDIDATE",
+       "start": 20,
+       "end": 33,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "newline-1",
+       "role": "NEUTRAL",
+       "start": 33,
+       "end": 34,
+       "ok": true,
+       "exposed_bytes": 0,
+       "tradeoff_recorded": false
+      },
+      {
+       "name": "heading-marker",
+       "role": "PROTECTED",
+       "start": 34,
+       "end": 36,
+       "ok": true,
+       "exposed_bytes": 0
+      },
+      {
+       "name": "heading-text",
+       "role": "PROSE_CANDIDATE",
+       "start": 36,
+       "end": 44,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "newline-2",
+       "role": "NEUTRAL",
+       "start": 44,
+       "end": 45,
+       "ok": true,
+       "exposed_bytes": 0,
+       "tradeoff_recorded": false
+      },
+      {
+       "name": "shell-line-2",
+       "role": "PROSE_CANDIDATE",
+       "start": 45,
+       "end": 60,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "prose-after",
+       "role": "PROSE_CANDIDATE",
+       "start": 62,
+       "end": 72,
+       "ok": true,
+       "missing_bytes": 0
+      }
+     ],
+     "policy_ok": true,
+     "cli_crosscheck_ok": true,
+     "candidate_bytes": 64
+    }
+   }
+  },
+  "F30": {
+   "id": "F30",
+   "class": 30,
+   "class_name": "paths",
+   "profiles": {
+    "P0": {
+     "adapter_exit": 0,
+     "event_count": 3,
+     "region_results": [
+      {
+       "name": "prose",
+       "role": "PROSE_CANDIDATE",
+       "start": 0,
+       "end": 72,
+       "ok": true,
+       "missing_bytes": 0
+      }
+     ],
+     "policy_ok": true,
+     "cli_crosscheck_ok": true,
+     "candidate_bytes": 72
+    },
+    "P1": {
+     "adapter_exit": 0,
+     "event_count": 3,
+     "region_results": [
+      {
+       "name": "prose",
+       "role": "PROSE_CANDIDATE",
+       "start": 0,
+       "end": 72,
+       "ok": true,
+       "missing_bytes": 0
+      }
+     ],
+     "policy_ok": true,
+     "cli_crosscheck_ok": true,
+     "candidate_bytes": 72
+    },
+    "P2": {
+     "adapter_exit": 0,
+     "event_count": 3,
+     "region_results": [
+      {
+       "name": "prose",
+       "role": "PROSE_CANDIDATE",
+       "start": 0,
+       "end": 72,
+       "ok": true,
+       "missing_bytes": 0
+      }
+     ],
+     "policy_ok": true,
+     "cli_crosscheck_ok": true,
+     "candidate_bytes": 72
+    }
+   }
+  },
+  "F31": {
+   "id": "F31",
+   "class": 31,
+   "class_name": "env-vars",
+   "profiles": {
+    "P0": {
+     "adapter_exit": 0,
+     "event_count": 3,
+     "region_results": [
+      {
+       "name": "prose",
+       "role": "PROSE_CANDIDATE",
+       "start": 0,
+       "end": 53,
+       "ok": true,
+       "missing_bytes": 0
+      }
+     ],
+     "policy_ok": true,
+     "cli_crosscheck_ok": true,
+     "candidate_bytes": 53
+    },
+    "P1": {
+     "adapter_exit": 0,
+     "event_count": 7,
+     "region_results": [
+      {
+       "name": "prose",
+       "role": "PROSE_CANDIDATE",
+       "start": 0,
+       "end": 53,
+       "ok": true,
+       "missing_bytes": 0
+      }
+     ],
+     "policy_ok": true,
+     "cli_crosscheck_ok": true,
+     "candidate_bytes": 53
+    },
+    "P2": {
+     "adapter_exit": 0,
+     "event_count": 7,
+     "region_results": [
+      {
+       "name": "prose",
+       "role": "PROSE_CANDIDATE",
+       "start": 0,
+       "end": 53,
+       "ok": true,
+       "missing_bytes": 0
+      }
+     ],
+     "policy_ok": true,
+     "cli_crosscheck_ok": true,
+     "candidate_bytes": 53
+    }
+   }
+  },
+  "F32": {
+   "id": "F32",
+   "class": 32,
+   "class_name": "identifier-heavy",
+   "profiles": {
+    "P0": {
+     "adapter_exit": 0,
+     "event_count": 3,
+     "region_results": [
+      {
+       "name": "prose",
+       "role": "PROSE_CANDIDATE",
+       "start": 0,
+       "end": 57,
+       "ok": true,
+       "missing_bytes": 0
+      }
+     ],
+     "policy_ok": true,
+     "cli_crosscheck_ok": true,
+     "candidate_bytes": 57
+    },
+    "P1": {
+     "adapter_exit": 0,
+     "event_count": 3,
+     "region_results": [
+      {
+       "name": "prose",
+       "role": "PROSE_CANDIDATE",
+       "start": 0,
+       "end": 57,
+       "ok": true,
+       "missing_bytes": 0
+      }
+     ],
+     "policy_ok": true,
+     "cli_crosscheck_ok": true,
+     "candidate_bytes": 57
+    },
+    "P2": {
+     "adapter_exit": 0,
+     "event_count": 3,
+     "region_results": [
+      {
+       "name": "prose",
+       "role": "PROSE_CANDIDATE",
+       "start": 0,
+       "end": 57,
+       "ok": true,
+       "missing_bytes": 0
+      }
+     ],
+     "policy_ok": true,
+     "cli_crosscheck_ok": true,
+     "candidate_bytes": 57
+    }
+   }
+  },
+  "F33": {
+   "id": "F33",
+   "class": 33,
+   "class_name": "slovenian-carons",
+   "profiles": {
+    "P0": {
+     "adapter_exit": 0,
+     "event_count": 3,
+     "region_results": [
+      {
+       "name": "prose",
+       "role": "PROSE_CANDIDATE",
+       "start": 0,
+       "end": 48,
+       "ok": true,
+       "missing_bytes": 0
+      }
+     ],
+     "policy_ok": true,
+     "cli_crosscheck_ok": true,
+     "candidate_bytes": 48
+    },
+    "P1": {
+     "adapter_exit": 0,
+     "event_count": 3,
+     "region_results": [
+      {
+       "name": "prose",
+       "role": "PROSE_CANDIDATE",
+       "start": 0,
+       "end": 48,
+       "ok": true,
+       "missing_bytes": 0
+      }
+     ],
+     "policy_ok": true,
+     "cli_crosscheck_ok": true,
+     "candidate_bytes": 48
+    },
+    "P2": {
+     "adapter_exit": 0,
+     "event_count": 3,
+     "region_results": [
+      {
+       "name": "prose",
+       "role": "PROSE_CANDIDATE",
+       "start": 0,
+       "end": 48,
+       "ok": true,
+       "missing_bytes": 0
+      }
+     ],
+     "policy_ok": true,
+     "cli_crosscheck_ok": true,
+     "candidate_bytes": 48
+    }
+   }
+  },
+  "F34": {
+   "id": "F34",
+   "class": 34,
+   "class_name": "emoji",
+   "profiles": {
+    "P0": {
+     "adapter_exit": 0,
+     "event_count": 3,
+     "region_results": [
+      {
+       "name": "prose",
+       "role": "PROSE_CANDIDATE",
+       "start": 0,
+       "end": 69,
+       "ok": true,
+       "missing_bytes": 0
+      }
+     ],
+     "policy_ok": true,
+     "cli_crosscheck_ok": true,
+     "candidate_bytes": 69
+    },
+    "P1": {
+     "adapter_exit": 0,
+     "event_count": 3,
+     "region_results": [
+      {
+       "name": "prose",
+       "role": "PROSE_CANDIDATE",
+       "start": 0,
+       "end": 69,
+       "ok": true,
+       "missing_bytes": 0
+      }
+     ],
+     "policy_ok": true,
+     "cli_crosscheck_ok": true,
+     "candidate_bytes": 69
+    },
+    "P2": {
+     "adapter_exit": 0,
+     "event_count": 3,
+     "region_results": [
+      {
+       "name": "prose",
+       "role": "PROSE_CANDIDATE",
+       "start": 0,
+       "end": 69,
+       "ok": true,
+       "missing_bytes": 0
+      }
+     ],
+     "policy_ok": true,
+     "cli_crosscheck_ok": true,
+     "candidate_bytes": 69
+    }
+   }
+  },
+  "F35": {
+   "id": "F35",
+   "class": 35,
+   "class_name": "decomposed-unicode",
+   "profiles": {
+    "P0": {
+     "adapter_exit": 0,
+     "event_count": 3,
+     "region_results": [
+      {
+       "name": "prose",
+       "role": "PROSE_CANDIDATE",
+       "start": 0,
+       "end": 47,
+       "ok": true,
+       "missing_bytes": 0
+      }
+     ],
+     "policy_ok": true,
+     "cli_crosscheck_ok": true,
+     "candidate_bytes": 47
+    },
+    "P1": {
+     "adapter_exit": 0,
+     "event_count": 3,
+     "region_results": [
+      {
+       "name": "prose",
+       "role": "PROSE_CANDIDATE",
+       "start": 0,
+       "end": 47,
+       "ok": true,
+       "missing_bytes": 0
+      }
+     ],
+     "policy_ok": true,
+     "cli_crosscheck_ok": true,
+     "candidate_bytes": 47
+    },
+    "P2": {
+     "adapter_exit": 0,
+     "event_count": 3,
+     "region_results": [
+      {
+       "name": "prose",
+       "role": "PROSE_CANDIDATE",
+       "start": 0,
+       "end": 47,
+       "ok": true,
+       "missing_bytes": 0
+      }
+     ],
+     "policy_ok": true,
+     "cli_crosscheck_ok": true,
+     "candidate_bytes": 47
+    }
+   }
+  },
+  "F36": {
+   "id": "F36",
+   "class": 36,
+   "class_name": "crlf",
+   "profiles": {
+    "P0": {
+     "adapter_exit": 0,
+     "event_count": 8,
+     "region_results": [
+      {
+       "name": "line-1",
+       "role": "PROSE_CANDIDATE",
+       "start": 0,
+       "end": 13,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "line-2",
+       "role": "PROSE_CANDIDATE",
+       "start": 15,
+       "end": 29,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "line-3",
+       "role": "PROSE_CANDIDATE",
+       "start": 33,
+       "end": 48,
+       "ok": true,
+       "missing_bytes": 0
+      }
+     ],
+     "policy_ok": true,
+     "cli_crosscheck_ok": true,
+     "candidate_bytes": 42
+    },
+    "P1": {
+     "adapter_exit": 0,
+     "event_count": 8,
+     "region_results": [
+      {
+       "name": "line-1",
+       "role": "PROSE_CANDIDATE",
+       "start": 0,
+       "end": 13,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "line-2",
+       "role": "PROSE_CANDIDATE",
+       "start": 15,
+       "end": 29,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "line-3",
+       "role": "PROSE_CANDIDATE",
+       "start": 33,
+       "end": 48,
+       "ok": true,
+       "missing_bytes": 0
+      }
+     ],
+     "policy_ok": true,
+     "cli_crosscheck_ok": true,
+     "candidate_bytes": 42
+    },
+    "P2": {
+     "adapter_exit": 0,
+     "event_count": 8,
+     "region_results": [
+      {
+       "name": "line-1",
+       "role": "PROSE_CANDIDATE",
+       "start": 0,
+       "end": 13,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "line-2",
+       "role": "PROSE_CANDIDATE",
+       "start": 15,
+       "end": 29,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "line-3",
+       "role": "PROSE_CANDIDATE",
+       "start": 33,
+       "end": 48,
+       "ok": true,
+       "missing_bytes": 0
+      }
+     ],
+     "policy_ok": true,
+     "cli_crosscheck_ok": true,
+     "candidate_bytes": 42
+    }
+   }
+  },
+  "F37": {
+   "id": "F37",
+   "class": 37,
+   "class_name": "malformed-links",
+   "profiles": {
+    "P0": {
+     "adapter_exit": 0,
+     "event_count": 11,
+     "region_results": [
+      {
+       "name": "prose-1",
+       "role": "PROSE_CANDIDATE",
+       "start": 0,
+       "end": 7,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "literal-link-1",
+       "role": "PROSE_CANDIDATE",
+       "start": 7,
+       "end": 19,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "prose-mid",
+       "role": "PROSE_CANDIDATE",
+       "start": 19,
+       "end": 23,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "link-open",
+       "role": "PROTECTED",
+       "start": 23,
+       "end": 24,
+       "ok": true,
+       "exposed_bytes": 0
+      },
+      {
+       "name": "link-label",
+       "role": "PROSE_CANDIDATE",
+       "start": 24,
+       "end": 37,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "link-close-paren",
+       "role": "PROTECTED",
+       "start": 37,
+       "end": 39,
+       "ok": true,
+       "exposed_bytes": 0
+      },
+      {
+       "name": "link-dest",
+       "role": "PROTECTED",
+       "start": 39,
+       "end": 47,
+       "ok": true,
+       "exposed_bytes": 0
+      },
+      {
+       "name": "link-close",
+       "role": "PROTECTED",
+       "start": 47,
+       "end": 48,
+       "ok": true,
+       "exposed_bytes": 0
+      },
+      {
+       "name": "prose-after",
+       "role": "PROSE_CANDIDATE",
+       "start": 48,
+       "end": 55,
+       "ok": true,
+       "missing_bytes": 0
+      }
+     ],
+     "policy_ok": true,
+     "cli_crosscheck_ok": true,
+     "candidate_bytes": 43
+    },
+    "P1": {
+     "adapter_exit": 0,
+     "event_count": 11,
+     "region_results": [
+      {
+       "name": "prose-1",
+       "role": "PROSE_CANDIDATE",
+       "start": 0,
+       "end": 7,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "literal-link-1",
+       "role": "PROSE_CANDIDATE",
+       "start": 7,
+       "end": 19,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "prose-mid",
+       "role": "PROSE_CANDIDATE",
+       "start": 19,
+       "end": 23,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "link-open",
+       "role": "PROTECTED",
+       "start": 23,
+       "end": 24,
+       "ok": true,
+       "exposed_bytes": 0
+      },
+      {
+       "name": "link-label",
+       "role": "PROSE_CANDIDATE",
+       "start": 24,
+       "end": 37,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "link-close-paren",
+       "role": "PROTECTED",
+       "start": 37,
+       "end": 39,
+       "ok": true,
+       "exposed_bytes": 0
+      },
+      {
+       "name": "link-dest",
+       "role": "PROTECTED",
+       "start": 39,
+       "end": 47,
+       "ok": true,
+       "exposed_bytes": 0
+      },
+      {
+       "name": "link-close",
+       "role": "PROTECTED",
+       "start": 47,
+       "end": 48,
+       "ok": true,
+       "exposed_bytes": 0
+      },
+      {
+       "name": "prose-after",
+       "role": "PROSE_CANDIDATE",
+       "start": 48,
+       "end": 55,
+       "ok": true,
+       "missing_bytes": 0
+      }
+     ],
+     "policy_ok": true,
+     "cli_crosscheck_ok": true,
+     "candidate_bytes": 43
+    },
+    "P2": {
+     "adapter_exit": 0,
+     "event_count": 11,
+     "region_results": [
+      {
+       "name": "prose-1",
+       "role": "PROSE_CANDIDATE",
+       "start": 0,
+       "end": 7,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "literal-link-1",
+       "role": "PROSE_CANDIDATE",
+       "start": 7,
+       "end": 19,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "prose-mid",
+       "role": "PROSE_CANDIDATE",
+       "start": 19,
+       "end": 23,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "link-open",
+       "role": "PROTECTED",
+       "start": 23,
+       "end": 24,
+       "ok": true,
+       "exposed_bytes": 0
+      },
+      {
+       "name": "link-label",
+       "role": "PROSE_CANDIDATE",
+       "start": 24,
+       "end": 37,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "link-close-paren",
+       "role": "PROTECTED",
+       "start": 37,
+       "end": 39,
+       "ok": true,
+       "exposed_bytes": 0
+      },
+      {
+       "name": "link-dest",
+       "role": "PROTECTED",
+       "start": 39,
+       "end": 47,
+       "ok": true,
+       "exposed_bytes": 0
+      },
+      {
+       "name": "link-close",
+       "role": "PROTECTED",
+       "start": 47,
+       "end": 48,
+       "ok": true,
+       "exposed_bytes": 0
+      },
+      {
+       "name": "prose-after",
+       "role": "PROSE_CANDIDATE",
+       "start": 48,
+       "end": 55,
+       "ok": true,
+       "missing_bytes": 0
+      }
+     ],
+     "policy_ok": true,
+     "cli_crosscheck_ok": true,
+     "candidate_bytes": 43
+    }
+   }
+  },
+  "F38": {
+   "id": "F38",
+   "class": 38,
+   "class_name": "mixed-malformed",
+   "profiles": {
+    "P0": {
+     "adapter_exit": 0,
+     "event_count": 9,
+     "region_results": [
+      {
+       "name": "prose-before",
+       "role": "PROSE_CANDIDATE",
+       "start": 0,
+       "end": 4,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "heading",
+       "role": "PROSE_CANDIDATE",
+       "start": 7,
+       "end": 13,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "rest",
+       "role": "NEUTRAL",
+       "start": 15,
+       "end": 91,
+       "ok": true,
+       "exposed_bytes": 0,
+       "tradeoff_recorded": false
+      }
+     ],
+     "policy_ok": true,
+     "cli_crosscheck_ok": true,
+     "candidate_bytes": 10
+    },
+    "P1": {
+     "adapter_exit": 0,
+     "event_count": 9,
+     "region_results": [
+      {
+       "name": "prose-before",
+       "role": "PROSE_CANDIDATE",
+       "start": 0,
+       "end": 4,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "heading",
+       "role": "PROSE_CANDIDATE",
+       "start": 7,
+       "end": 13,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "rest",
+       "role": "NEUTRAL",
+       "start": 15,
+       "end": 91,
+       "ok": true,
+       "exposed_bytes": 0,
+       "tradeoff_recorded": false
+      }
+     ],
+     "policy_ok": true,
+     "cli_crosscheck_ok": true,
+     "candidate_bytes": 10
+    },
+    "P2": {
+     "adapter_exit": 0,
+     "event_count": 9,
+     "region_results": [
+      {
+       "name": "prose-before",
+       "role": "PROSE_CANDIDATE",
+       "start": 0,
+       "end": 4,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "heading",
+       "role": "PROSE_CANDIDATE",
+       "start": 7,
+       "end": 13,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "rest",
+       "role": "NEUTRAL",
+       "start": 15,
+       "end": 91,
+       "ok": true,
+       "exposed_bytes": 0,
+       "tradeoff_recorded": false
+      }
+     ],
+     "policy_ok": true,
+     "cli_crosscheck_ok": true,
+     "candidate_bytes": 10
+    }
+   }
+  },
+  "F39": {
+   "id": "F39",
+   "class": 39,
+   "class_name": "gfm-task-list",
+   "profiles": {
+    "P0": {
+     "adapter_exit": 0,
+     "event_count": 20,
+     "region_results": [
+      {
+       "name": "prose-before",
+       "role": "PROSE_CANDIDATE",
+       "start": 0,
+       "end": 7,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "task-1",
+       "role": "PROSE_CANDIDATE",
+       "start": 14,
+       "end": 22,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "task-2",
+       "role": "PROSE_CANDIDATE",
+       "start": 29,
+       "end": 35,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "prose-after",
+       "role": "PROSE_CANDIDATE",
+       "start": 37,
+       "end": 43,
+       "ok": true,
+       "missing_bytes": 0
+      }
+     ],
+     "policy_ok": true,
+     "cli_crosscheck_ok": true,
+     "candidate_bytes": 35
+    },
+    "P1": {
+     "adapter_exit": 0,
+     "event_count": 16,
+     "region_results": [
+      {
+       "name": "prose-before",
+       "role": "PROSE_CANDIDATE",
+       "start": 0,
+       "end": 7,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "task-1",
+       "role": "PROSE_CANDIDATE",
+       "start": 14,
+       "end": 22,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "task-2",
+       "role": "PROSE_CANDIDATE",
+       "start": 29,
+       "end": 35,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "prose-after",
+       "role": "PROSE_CANDIDATE",
+       "start": 37,
+       "end": 43,
+       "ok": true,
+       "missing_bytes": 0
+      }
+     ],
+     "policy_ok": true,
+     "cli_crosscheck_ok": true,
+     "candidate_bytes": 27
+    },
+    "P2": {
+     "adapter_exit": 0,
+     "event_count": 16,
+     "region_results": [
+      {
+       "name": "prose-before",
+       "role": "PROSE_CANDIDATE",
+       "start": 0,
+       "end": 7,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "task-1",
+       "role": "PROSE_CANDIDATE",
+       "start": 14,
+       "end": 22,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "task-2",
+       "role": "PROSE_CANDIDATE",
+       "start": 29,
+       "end": 35,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "prose-after",
+       "role": "PROSE_CANDIDATE",
+       "start": 37,
+       "end": 43,
+       "ok": true,
+       "missing_bytes": 0
+      }
+     ],
+     "policy_ok": true,
+     "cli_crosscheck_ok": true,
+     "candidate_bytes": 27
+    }
+   }
+  },
+  "F40": {
+   "id": "F40",
+   "class": 40,
+   "class_name": "gfm-strikethrough",
+   "profiles": {
+    "P0": {
+     "adapter_exit": 0,
+     "event_count": 3,
+     "region_results": [
+      {
+       "name": "prose-1",
+       "role": "PROSE_CANDIDATE",
+       "start": 0,
+       "end": 12,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "strike-text",
+       "role": "PROSE_CANDIDATE",
+       "start": 14,
+       "end": 19,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "prose-2",
+       "role": "PROSE_CANDIDATE",
+       "start": 21,
+       "end": 34,
+       "ok": true,
+       "missing_bytes": 0
+      }
+     ],
+     "policy_ok": true,
+     "cli_crosscheck_ok": true,
+     "candidate_bytes": 34
+    },
+    "P1": {
+     "adapter_exit": 0,
+     "event_count": 7,
+     "region_results": [
+      {
+       "name": "prose-1",
+       "role": "PROSE_CANDIDATE",
+       "start": 0,
+       "end": 12,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "strike-text",
+       "role": "NEUTRAL",
+       "start": 14,
+       "end": 19,
+       "ok": true,
+       "exposed_bytes": 5,
+       "tradeoff_recorded": true
+      },
+      {
+       "name": "prose-2",
+       "role": "PROSE_CANDIDATE",
+       "start": 21,
+       "end": 34,
+       "ok": true,
+       "missing_bytes": 0
+      }
+     ],
+     "policy_ok": true,
+     "cli_crosscheck_ok": true,
+     "candidate_bytes": 30
+    },
+    "P2": {
+     "adapter_exit": 0,
+     "event_count": 7,
+     "region_results": [
+      {
+       "name": "prose-1",
+       "role": "PROSE_CANDIDATE",
+       "start": 0,
+       "end": 12,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "strike-text",
+       "role": "NEUTRAL",
+       "start": 14,
+       "end": 19,
+       "ok": true,
+       "exposed_bytes": 5,
+       "tradeoff_recorded": true
+      },
+      {
+       "name": "prose-2",
+       "role": "PROSE_CANDIDATE",
+       "start": 21,
+       "end": 34,
+       "ok": true,
+       "missing_bytes": 0
+      }
+     ],
+     "policy_ok": true,
+     "cli_crosscheck_ok": true,
+     "candidate_bytes": 30
+    }
+   }
+  },
+  "F41": {
+   "id": "F41",
+   "class": 41,
+   "class_name": "yaml-front-matter",
+   "profiles": {
+    "P0": {
+     "adapter_exit": 0,
+     "event_count": 9,
+     "region_results": [
+      {
+       "name": "rule-1",
+       "role": "PROTECTED",
+       "start": 0,
+       "end": 3,
+       "ok": true,
+       "exposed_bytes": 0
+      },
+      {
+       "name": "newline-1",
+       "role": "NEUTRAL",
+       "start": 3,
+       "end": 4,
+       "ok": true,
+       "exposed_bytes": 0,
+       "tradeoff_recorded": false
+      },
+      {
+       "name": "title-line",
+       "role": "PROSE_CANDIDATE",
+       "start": 4,
+       "end": 21,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "newline-2",
+       "role": "NEUTRAL",
+       "start": 21,
+       "end": 22,
+       "ok": true,
+       "exposed_bytes": 0,
+       "tradeoff_recorded": false
+      },
+      {
+       "name": "author-line",
+       "role": "PROSE_CANDIDATE",
+       "start": 22,
+       "end": 33,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "newline-3",
+       "role": "NEUTRAL",
+       "start": 33,
+       "end": 34,
+       "ok": true,
+       "exposed_bytes": 0,
+       "tradeoff_recorded": false
+      },
+      {
+       "name": "setext-rule",
+       "role": "PROTECTED",
+       "start": 34,
+       "end": 37,
+       "ok": true,
+       "exposed_bytes": 0
+      },
+      {
+       "name": "gap-1",
+       "role": "NEUTRAL",
+       "start": 37,
+       "end": 39,
+       "ok": true,
+       "exposed_bytes": 0,
+       "tradeoff_recorded": false
+      },
+      {
+       "name": "prose-after",
+       "role": "PROSE_CANDIDATE",
+       "start": 39,
+       "end": 56,
+       "ok": true,
+       "missing_bytes": 0
+      }
+     ],
+     "policy_ok": true,
+     "cli_crosscheck_ok": true,
+     "candidate_bytes": 45
+    },
+    "P1": {
+     "adapter_exit": 0,
+     "event_count": 9,
+     "region_results": [
+      {
+       "name": "rule-1",
+       "role": "PROTECTED",
+       "start": 0,
+       "end": 3,
+       "ok": true,
+       "exposed_bytes": 0
+      },
+      {
+       "name": "newline-1",
+       "role": "NEUTRAL",
+       "start": 3,
+       "end": 4,
+       "ok": true,
+       "exposed_bytes": 0,
+       "tradeoff_recorded": false
+      },
+      {
+       "name": "title-line",
+       "role": "PROSE_CANDIDATE",
+       "start": 4,
+       "end": 21,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "newline-2",
+       "role": "NEUTRAL",
+       "start": 21,
+       "end": 22,
+       "ok": true,
+       "exposed_bytes": 0,
+       "tradeoff_recorded": false
+      },
+      {
+       "name": "author-line",
+       "role": "PROSE_CANDIDATE",
+       "start": 22,
+       "end": 33,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "newline-3",
+       "role": "NEUTRAL",
+       "start": 33,
+       "end": 34,
+       "ok": true,
+       "exposed_bytes": 0,
+       "tradeoff_recorded": false
+      },
+      {
+       "name": "setext-rule",
+       "role": "PROTECTED",
+       "start": 34,
+       "end": 37,
+       "ok": true,
+       "exposed_bytes": 0
+      },
+      {
+       "name": "gap-1",
+       "role": "NEUTRAL",
+       "start": 37,
+       "end": 39,
+       "ok": true,
+       "exposed_bytes": 0,
+       "tradeoff_recorded": false
+      },
+      {
+       "name": "prose-after",
+       "role": "PROSE_CANDIDATE",
+       "start": 39,
+       "end": 56,
+       "ok": true,
+       "missing_bytes": 0
+      }
+     ],
+     "policy_ok": true,
+     "cli_crosscheck_ok": true,
+     "candidate_bytes": 45
+    },
+    "P2": {
+     "adapter_exit": 0,
+     "event_count": 6,
+     "region_results": [
+      {
+       "name": "rule-1",
+       "role": "PROTECTED",
+       "start": 0,
+       "end": 3,
+       "ok": true,
+       "exposed_bytes": 0
+      },
+      {
+       "name": "newline-1",
+       "role": "NEUTRAL",
+       "start": 3,
+       "end": 4,
+       "ok": true,
+       "exposed_bytes": 0,
+       "tradeoff_recorded": false
+      },
+      {
+       "name": "title-line",
+       "role": "PROTECTED",
+       "start": 4,
+       "end": 21,
+       "ok": true,
+       "exposed_bytes": 0
+      },
+      {
+       "name": "newline-2",
+       "role": "NEUTRAL",
+       "start": 21,
+       "end": 22,
+       "ok": true,
+       "exposed_bytes": 0,
+       "tradeoff_recorded": false
+      },
+      {
+       "name": "author-line",
+       "role": "PROTECTED",
+       "start": 22,
+       "end": 33,
+       "ok": true,
+       "exposed_bytes": 0
+      },
+      {
+       "name": "newline-3",
+       "role": "NEUTRAL",
+       "start": 33,
+       "end": 34,
+       "ok": true,
+       "exposed_bytes": 0,
+       "tradeoff_recorded": false
+      },
+      {
+       "name": "setext-rule",
+       "role": "PROTECTED",
+       "start": 34,
+       "end": 37,
+       "ok": true,
+       "exposed_bytes": 0
+      },
+      {
+       "name": "gap-1",
+       "role": "NEUTRAL",
+       "start": 37,
+       "end": 39,
+       "ok": true,
+       "exposed_bytes": 0,
+       "tradeoff_recorded": false
+      },
+      {
+       "name": "prose-after",
+       "role": "PROSE_CANDIDATE",
+       "start": 39,
+       "end": 56,
+       "ok": true,
+       "missing_bytes": 0
+      }
+     ],
+     "policy_ok": true,
+     "cli_crosscheck_ok": true,
+     "candidate_bytes": 17
+    }
+   }
+  },
+  "F42": {
+   "id": "F42",
+   "class": 42,
+   "class_name": "nested-list-prose",
+   "profiles": {
+    "P0": {
+     "adapter_exit": 0,
+     "event_count": 22,
+     "region_results": [
+      {
+       "name": "prose-before",
+       "role": "PROSE_CANDIDATE",
+       "start": 0,
+       "end": 8,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "item-1",
+       "role": "PROSE_CANDIDATE",
+       "start": 11,
+       "end": 14,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "item-1-1",
+       "role": "PROSE_CANDIDATE",
+       "start": 19,
+       "end": 26,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "item-1-2",
+       "role": "PROSE_CANDIDATE",
+       "start": 31,
+       "end": 38,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "item-2",
+       "role": "PROSE_CANDIDATE",
+       "start": 41,
+       "end": 44,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "prose-after",
+       "role": "PROSE_CANDIDATE",
+       "start": 46,
+       "end": 52,
+       "ok": true,
+       "missing_bytes": 0
+      }
+     ],
+     "policy_ok": true,
+     "cli_crosscheck_ok": true,
+     "candidate_bytes": 34
+    },
+    "P1": {
+     "adapter_exit": 0,
+     "event_count": 22,
+     "region_results": [
+      {
+       "name": "prose-before",
+       "role": "PROSE_CANDIDATE",
+       "start": 0,
+       "end": 8,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "item-1",
+       "role": "PROSE_CANDIDATE",
+       "start": 11,
+       "end": 14,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "item-1-1",
+       "role": "PROSE_CANDIDATE",
+       "start": 19,
+       "end": 26,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "item-1-2",
+       "role": "PROSE_CANDIDATE",
+       "start": 31,
+       "end": 38,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "item-2",
+       "role": "PROSE_CANDIDATE",
+       "start": 41,
+       "end": 44,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "prose-after",
+       "role": "PROSE_CANDIDATE",
+       "start": 46,
+       "end": 52,
+       "ok": true,
+       "missing_bytes": 0
+      }
+     ],
+     "policy_ok": true,
+     "cli_crosscheck_ok": true,
+     "candidate_bytes": 34
+    },
+    "P2": {
+     "adapter_exit": 0,
+     "event_count": 22,
+     "region_results": [
+      {
+       "name": "prose-before",
+       "role": "PROSE_CANDIDATE",
+       "start": 0,
+       "end": 8,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "item-1",
+       "role": "PROSE_CANDIDATE",
+       "start": 11,
+       "end": 14,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "item-1-1",
+       "role": "PROSE_CANDIDATE",
+       "start": 19,
+       "end": 26,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "item-1-2",
+       "role": "PROSE_CANDIDATE",
+       "start": 31,
+       "end": 38,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "item-2",
+       "role": "PROSE_CANDIDATE",
+       "start": 41,
+       "end": 44,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "prose-after",
+       "role": "PROSE_CANDIDATE",
+       "start": 46,
+       "end": 52,
+       "ok": true,
+       "missing_bytes": 0
+      }
+     ],
+     "policy_ok": true,
+     "cli_crosscheck_ok": true,
+     "candidate_bytes": 34
+    }
+   }
+  },
+  "F43": {
+   "id": "F43",
+   "class": 43,
+   "class_name": "thematic-break",
+   "profiles": {
+    "P0": {
+     "adapter_exit": 0,
+     "event_count": 7,
+     "region_results": [
+      {
+       "name": "prose-before",
+       "role": "PROSE_CANDIDATE",
+       "start": 0,
+       "end": 8,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "rule",
+       "role": "PROTECTED",
+       "start": 10,
+       "end": 13,
+       "ok": true,
+       "exposed_bytes": 0
+      },
+      {
+       "name": "prose-after",
+       "role": "PROSE_CANDIDATE",
+       "start": 15,
+       "end": 23,
+       "ok": true,
+       "missing_bytes": 0
+      }
+     ],
+     "policy_ok": true,
+     "cli_crosscheck_ok": true,
+     "candidate_bytes": 16
+    },
+    "P1": {
+     "adapter_exit": 0,
+     "event_count": 7,
+     "region_results": [
+      {
+       "name": "prose-before",
+       "role": "PROSE_CANDIDATE",
+       "start": 0,
+       "end": 8,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "rule",
+       "role": "PROTECTED",
+       "start": 10,
+       "end": 13,
+       "ok": true,
+       "exposed_bytes": 0
+      },
+      {
+       "name": "prose-after",
+       "role": "PROSE_CANDIDATE",
+       "start": 15,
+       "end": 23,
+       "ok": true,
+       "missing_bytes": 0
+      }
+     ],
+     "policy_ok": true,
+     "cli_crosscheck_ok": true,
+     "candidate_bytes": 16
+    },
+    "P2": {
+     "adapter_exit": 0,
+     "event_count": 7,
+     "region_results": [
+      {
+       "name": "prose-before",
+       "role": "PROSE_CANDIDATE",
+       "start": 0,
+       "end": 8,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "rule",
+       "role": "PROTECTED",
+       "start": 10,
+       "end": 13,
+       "ok": true,
+       "exposed_bytes": 0
+      },
+      {
+       "name": "prose-after",
+       "role": "PROSE_CANDIDATE",
+       "start": 15,
+       "end": 23,
+       "ok": true,
+       "missing_bytes": 0
+      }
+     ],
+     "policy_ok": true,
+     "cli_crosscheck_ok": true,
+     "candidate_bytes": 16
+    }
+   }
+  },
+  "F44": {
+   "id": "F44",
+   "class": 44,
+   "class_name": "reference-link",
+   "profiles": {
+    "P0": {
+     "adapter_exit": 0,
+     "event_count": 7,
+     "region_results": [
+      {
+       "name": "prose-1",
+       "role": "PROSE_CANDIDATE",
+       "start": 0,
+       "end": 5,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "label",
+       "role": "PROSE_CANDIDATE",
+       "start": 6,
+       "end": 12,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "ref-syntax",
+       "role": "PROTECTED",
+       "start": 12,
+       "end": 18,
+       "ok": true,
+       "exposed_bytes": 0
+      },
+      {
+       "name": "prose-2",
+       "role": "PROSE_CANDIDATE",
+       "start": 18,
+       "end": 26,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "definition",
+       "role": "PROTECTED",
+       "start": 28,
+       "end": 56,
+       "ok": true,
+       "exposed_bytes": 0
+      }
+     ],
+     "policy_ok": true,
+     "cli_crosscheck_ok": true,
+     "candidate_bytes": 19
+    },
+    "P1": {
+     "adapter_exit": 0,
+     "event_count": 7,
+     "region_results": [
+      {
+       "name": "prose-1",
+       "role": "PROSE_CANDIDATE",
+       "start": 0,
+       "end": 5,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "label",
+       "role": "PROSE_CANDIDATE",
+       "start": 6,
+       "end": 12,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "ref-syntax",
+       "role": "PROTECTED",
+       "start": 12,
+       "end": 18,
+       "ok": true,
+       "exposed_bytes": 0
+      },
+      {
+       "name": "prose-2",
+       "role": "PROSE_CANDIDATE",
+       "start": 18,
+       "end": 26,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "definition",
+       "role": "PROTECTED",
+       "start": 28,
+       "end": 56,
+       "ok": true,
+       "exposed_bytes": 0
+      }
+     ],
+     "policy_ok": true,
+     "cli_crosscheck_ok": true,
+     "candidate_bytes": 19
+    },
+    "P2": {
+     "adapter_exit": 0,
+     "event_count": 7,
+     "region_results": [
+      {
+       "name": "prose-1",
+       "role": "PROSE_CANDIDATE",
+       "start": 0,
+       "end": 5,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "label",
+       "role": "PROSE_CANDIDATE",
+       "start": 6,
+       "end": 12,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "ref-syntax",
+       "role": "PROTECTED",
+       "start": 12,
+       "end": 18,
+       "ok": true,
+       "exposed_bytes": 0
+      },
+      {
+       "name": "prose-2",
+       "role": "PROSE_CANDIDATE",
+       "start": 18,
+       "end": 26,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "definition",
+       "role": "PROTECTED",
+       "start": 28,
+       "end": 56,
+       "ok": true,
+       "exposed_bytes": 0
+      }
+     ],
+     "policy_ok": true,
+     "cli_crosscheck_ok": true,
+     "candidate_bytes": 19
+    }
+   }
+  },
+  "F45": {
+   "id": "F45",
+   "class": 45,
+   "class_name": "crlf-carons",
+   "profiles": {
+    "P0": {
+     "adapter_exit": 0,
+     "event_count": 5,
+     "region_results": [
+      {
+       "name": "line-1",
+       "role": "PROSE_CANDIDATE",
+       "start": 0,
+       "end": 13,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "line-2",
+       "role": "PROSE_CANDIDATE",
+       "start": 15,
+       "end": 26,
+       "ok": true,
+       "missing_bytes": 0
+      }
+     ],
+     "policy_ok": true,
+     "cli_crosscheck_ok": true,
+     "candidate_bytes": 24
+    },
+    "P1": {
+     "adapter_exit": 0,
+     "event_count": 5,
+     "region_results": [
+      {
+       "name": "line-1",
+       "role": "PROSE_CANDIDATE",
+       "start": 0,
+       "end": 13,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "line-2",
+       "role": "PROSE_CANDIDATE",
+       "start": 15,
+       "end": 26,
+       "ok": true,
+       "missing_bytes": 0
+      }
+     ],
+     "policy_ok": true,
+     "cli_crosscheck_ok": true,
+     "candidate_bytes": 24
+    },
+    "P2": {
+     "adapter_exit": 0,
+     "event_count": 5,
+     "region_results": [
+      {
+       "name": "line-1",
+       "role": "PROSE_CANDIDATE",
+       "start": 0,
+       "end": 13,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "line-2",
+       "role": "PROSE_CANDIDATE",
+       "start": 15,
+       "end": 26,
+       "ok": true,
+       "missing_bytes": 0
+      }
+     ],
+     "policy_ok": true,
+     "cli_crosscheck_ok": true,
+     "candidate_bytes": 24
+    }
+   }
+  },
+  "F47": {
+   "id": "F47",
+   "class": 47,
+   "class_name": "windows-paths",
+   "profiles": {
+    "P0": {
+     "adapter_exit": 0,
+     "event_count": 3,
+     "region_results": [
+      {
+       "name": "prose",
+       "role": "PROSE_CANDIDATE",
+       "start": 0,
+       "end": 46,
+       "ok": true,
+       "missing_bytes": 0
+      }
+     ],
+     "policy_ok": true,
+     "cli_crosscheck_ok": true,
+     "candidate_bytes": 46
+    },
+    "P1": {
+     "adapter_exit": 0,
+     "event_count": 3,
+     "region_results": [
+      {
+       "name": "prose",
+       "role": "PROSE_CANDIDATE",
+       "start": 0,
+       "end": 46,
+       "ok": true,
+       "missing_bytes": 0
+      }
+     ],
+     "policy_ok": true,
+     "cli_crosscheck_ok": true,
+     "candidate_bytes": 46
+    },
+    "P2": {
+     "adapter_exit": 0,
+     "event_count": 3,
+     "region_results": [
+      {
+       "name": "prose",
+       "role": "PROSE_CANDIDATE",
+       "start": 0,
+       "end": 46,
+       "ok": true,
+       "missing_bytes": 0
+      }
+     ],
+     "policy_ok": true,
+     "cli_crosscheck_ok": true,
+     "candidate_bytes": 46
+    }
+   }
+  },
+  "F48": {
+   "id": "F48",
+   "class": 48,
+   "class_name": "angle-autolink-mailto",
+   "profiles": {
+    "P0": {
+     "adapter_exit": 0,
+     "event_count": 11,
+     "region_results": [
+      {
+       "name": "prose-1",
+       "role": "PROSE_CANDIDATE",
+       "start": 0,
+       "end": 8,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "mailto",
+       "role": "PROTECTED",
+       "start": 8,
+       "end": 23,
+       "ok": true,
+       "exposed_bytes": 0
+      },
+      {
+       "name": "prose-2",
+       "role": "PROSE_CANDIDATE",
+       "start": 23,
+       "end": 27,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "url-autolink",
+       "role": "PROTECTED",
+       "start": 27,
+       "end": 53,
+       "ok": true,
+       "exposed_bytes": 0
+      },
+      {
+       "name": "prose-3",
+       "role": "PROSE_CANDIDATE",
+       "start": 53,
+       "end": 54,
+       "ok": true,
+       "missing_bytes": 0
+      }
+     ],
+     "policy_ok": true,
+     "cli_crosscheck_ok": true,
+     "candidate_bytes": 13
+    },
+    "P1": {
+     "adapter_exit": 0,
+     "event_count": 11,
+     "region_results": [
+      {
+       "name": "prose-1",
+       "role": "PROSE_CANDIDATE",
+       "start": 0,
+       "end": 8,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "mailto",
+       "role": "PROTECTED",
+       "start": 8,
+       "end": 23,
+       "ok": true,
+       "exposed_bytes": 0
+      },
+      {
+       "name": "prose-2",
+       "role": "PROSE_CANDIDATE",
+       "start": 23,
+       "end": 27,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "url-autolink",
+       "role": "PROTECTED",
+       "start": 27,
+       "end": 53,
+       "ok": true,
+       "exposed_bytes": 0
+      },
+      {
+       "name": "prose-3",
+       "role": "PROSE_CANDIDATE",
+       "start": 53,
+       "end": 54,
+       "ok": true,
+       "missing_bytes": 0
+      }
+     ],
+     "policy_ok": true,
+     "cli_crosscheck_ok": true,
+     "candidate_bytes": 13
+    },
+    "P2": {
+     "adapter_exit": 0,
+     "event_count": 11,
+     "region_results": [
+      {
+       "name": "prose-1",
+       "role": "PROSE_CANDIDATE",
+       "start": 0,
+       "end": 8,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "mailto",
+       "role": "PROTECTED",
+       "start": 8,
+       "end": 23,
+       "ok": true,
+       "exposed_bytes": 0
+      },
+      {
+       "name": "prose-2",
+       "role": "PROSE_CANDIDATE",
+       "start": 23,
+       "end": 27,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "url-autolink",
+       "role": "PROTECTED",
+       "start": 27,
+       "end": 53,
+       "ok": true,
+       "exposed_bytes": 0
+      },
+      {
+       "name": "prose-3",
+       "role": "PROSE_CANDIDATE",
+       "start": 53,
+       "end": 54,
+       "ok": true,
+       "missing_bytes": 0
+      }
+     ],
+     "policy_ok": true,
+     "cli_crosscheck_ok": true,
+     "candidate_bytes": 13
+    }
+   }
+  },
+  "F49": {
+   "id": "F49",
+   "class": 49,
+   "class_name": "unclosed-backtick",
+   "profiles": {
+    "P0": {
+     "adapter_exit": 0,
+     "event_count": 8,
+     "region_results": [
+      {
+       "name": "line-1",
+       "role": "PROSE_CANDIDATE",
+       "start": 0,
+       "end": 26,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "blank-line",
+       "role": "NEUTRAL",
+       "start": 26,
+       "end": 28,
+       "ok": true,
+       "exposed_bytes": 0,
+       "tradeoff_recorded": false
+      },
+      {
+       "name": "line-2",
+       "role": "PROSE_CANDIDATE",
+       "start": 28,
+       "end": 34,
+       "ok": true,
+       "missing_bytes": 0
+      }
+     ],
+     "policy_ok": true,
+     "cli_crosscheck_ok": true,
+     "candidate_bytes": 32
+    },
+    "P1": {
+     "adapter_exit": 0,
+     "event_count": 8,
+     "region_results": [
+      {
+       "name": "line-1",
+       "role": "PROSE_CANDIDATE",
+       "start": 0,
+       "end": 26,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "blank-line",
+       "role": "NEUTRAL",
+       "start": 26,
+       "end": 28,
+       "ok": true,
+       "exposed_bytes": 0,
+       "tradeoff_recorded": false
+      },
+      {
+       "name": "line-2",
+       "role": "PROSE_CANDIDATE",
+       "start": 28,
+       "end": 34,
+       "ok": true,
+       "missing_bytes": 0
+      }
+     ],
+     "policy_ok": true,
+     "cli_crosscheck_ok": true,
+     "candidate_bytes": 32
+    },
+    "P2": {
+     "adapter_exit": 0,
+     "event_count": 8,
+     "region_results": [
+      {
+       "name": "line-1",
+       "role": "PROSE_CANDIDATE",
+       "start": 0,
+       "end": 26,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "blank-line",
+       "role": "NEUTRAL",
+       "start": 26,
+       "end": 28,
+       "ok": true,
+       "exposed_bytes": 0,
+       "tradeoff_recorded": false
+      },
+      {
+       "name": "line-2",
+       "role": "PROSE_CANDIDATE",
+       "start": 28,
+       "end": 34,
+       "ok": true,
+       "missing_bytes": 0
+      }
+     ],
+     "policy_ok": true,
+     "cli_crosscheck_ok": true,
+     "candidate_bytes": 32
+    }
+   }
+  },
+  "F50": {
+   "id": "F50",
+   "class": 50,
+   "class_name": "crlf-fenced-code",
+   "profiles": {
+    "P0": {
+     "adapter_exit": 0,
+     "event_count": 10,
+     "region_results": [
+      {
+       "name": "prose-before",
+       "role": "PROSE_CANDIDATE",
+       "start": 0,
+       "end": 5,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "fence",
+       "role": "PROTECTED",
+       "start": 9,
+       "end": 23,
+       "ok": true,
+       "exposed_bytes": 0
+      },
+      {
+       "name": "prose-after",
+       "role": "PROSE_CANDIDATE",
+       "start": 26,
+       "end": 29,
+       "ok": true,
+       "missing_bytes": 0
+      }
+     ],
+     "policy_ok": true,
+     "cli_crosscheck_ok": true,
+     "candidate_bytes": 8
+    },
+    "P1": {
+     "adapter_exit": 0,
+     "event_count": 10,
+     "region_results": [
+      {
+       "name": "prose-before",
+       "role": "PROSE_CANDIDATE",
+       "start": 0,
+       "end": 5,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "fence",
+       "role": "PROTECTED",
+       "start": 9,
+       "end": 23,
+       "ok": true,
+       "exposed_bytes": 0
+      },
+      {
+       "name": "prose-after",
+       "role": "PROSE_CANDIDATE",
+       "start": 26,
+       "end": 29,
+       "ok": true,
+       "missing_bytes": 0
+      }
+     ],
+     "policy_ok": true,
+     "cli_crosscheck_ok": true,
+     "candidate_bytes": 8
+    },
+    "P2": {
+     "adapter_exit": 0,
+     "event_count": 10,
+     "region_results": [
+      {
+       "name": "prose-before",
+       "role": "PROSE_CANDIDATE",
+       "start": 0,
+       "end": 5,
+       "ok": true,
+       "missing_bytes": 0
+      },
+      {
+       "name": "fence",
+       "role": "PROTECTED",
+       "start": 9,
+       "end": 23,
+       "ok": true,
+       "exposed_bytes": 0
+      },
+      {
+       "name": "prose-after",
+       "role": "PROSE_CANDIDATE",
+       "start": 26,
+       "end": 29,
+       "ok": true,
+       "missing_bytes": 0
+      }
+     ],
+     "policy_ok": true,
+     "cli_crosscheck_ok": true,
+     "candidate_bytes": 8
+    }
+   }
+  },
+  "F46": {
+   "id": "F46",
+   "class": 46,
+   "class_name": "long-paragraph-stress",
+   "profiles": {
+    "P0": {
+     "adapter_exit": 0,
+     "event_count": 3,
+     "region_results": [
+      {
+       "name": "long-prose",
+       "role": "PROSE_CANDIDATE",
+       "start": 0,
+       "end": 2129,
+       "ok": true,
+       "missing_bytes": 0
+      }
+     ],
+     "policy_ok": true,
+     "cli_crosscheck_ok": true,
+     "candidate_bytes": 2129
+    },
+    "P1": {
+     "adapter_exit": 0,
+     "event_count": 3,
+     "region_results": [
+      {
+       "name": "long-prose",
+       "role": "PROSE_CANDIDATE",
+       "start": 0,
+       "end": 2129,
+       "ok": true,
+       "missing_bytes": 0
+      }
+     ],
+     "policy_ok": true,
+     "cli_crosscheck_ok": true,
+     "candidate_bytes": 2129
+    },
+    "P2": {
+     "adapter_exit": 0,
+     "event_count": 3,
+     "region_results": [
+      {
+       "name": "long-prose",
+       "role": "PROSE_CANDIDATE",
+       "start": 0,
+       "end": 2129,
+       "ok": true,
+       "missing_bytes": 0
+      }
+     ],
+     "policy_ok": true,
+     "cli_crosscheck_ok": true,
+     "candidate_bytes": 2129
+    }
+   }
+  }
+ },
+ "utf8_notes": {
+  "carons_emoji_decomposed": [
+   "F33",
+   "F34",
+   "F35",
+   "F45"
+  ],
+  "crlf_fixtures": [
+   "F36",
+   "F45",
+   "F50"
+  ]
+ },
+ "math_behaviour": {
+  "inline_math_fixture": "F10",
+  "display_math_fixture": "F11",
+  "currency_fixture": "F16",
+  "escaped_dollars_fixture": "F17",
+  "math_extension_available_in_0_13_4": true,
+  "math_feature_gate": "none (Options::ENABLE_MATH bitflag; not a Cargo feature)"
+ },
+ "malformed_input_fixtures": [
+  "F07",
+  "F15",
+  "F37",
+  "F38",
+  "F49"
+ ]
+}
