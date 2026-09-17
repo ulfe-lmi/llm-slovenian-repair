@@ -7,9 +7,12 @@ Query current protocol state from `oap/active` or with
 ulfe-lmi/llm-slovenian-repair`. The first typed contract/policy seam is implemented:
 strict frozen models represent original-coordinate spans, explicit evidence
 uncertainty, narrow proposals, edits, results, and bounded v1 policy defaults.
-Detection, review, acceptance, patching, and product functionality remain PLANNED,
-linguistic
-evaluation NOT RUN, Qwen compatibility UNVERIFIED, and ICA NOT RUN. Human
+Detection, review, acceptance, and patching remain PLANNED as product
+functionality. Linguistic evaluation is layered: reference-based benchmark
+linguistic evaluation HAS run (full-campaign8 and 007-h/007-i/007-j/007-m on the
+A100-FP8 regime, same-sample exploratory, reference-based); the
+human-labelled target-distribution evaluation required by PLAN section 14.2
+remains NOT RUN. Qwen compatibility UNVERIFIED, and ICA NOT RUN. Human
 milestone acceptance is NONE; release and deployment approval are not established.
 56 inert draft objectives are a coverage hypothesis. No completion percentage is
 derived from generated files. The owner created `ulfe-lmi/llm-slovenian-repair`
@@ -134,3 +137,13 @@ one same-directory rename-only promotion, two content-free diagnostic consumers 
 three revalidations at cumulative fourteen, retaining the verified generation for
 concept verification. Product numeric semantics remain unchanged and blocked; no
 merge, release, deployment, or milestone acceptance is claimed.
+
+Objective 007 (isolated end-to-end concept verification) progressed through
+rounds 007-a..007-n on branch `oap/007-concept-verification` (PR #8, open and
+unmerged): the isolated concept prototype, the complete preserved research trail
+(registry, data-free reports/configs/results, file census, archive catalog), the
+full local A100-FP8 campaign (full-campaign8), and the frozen 007-m candidate
+method. The 007-o closure round published the current authoritative research state
+in `research/RESEARCH-STATE.md`; the machine-invalid 007-n report is classified
+INVALID_QUARANTINED by the 007-o order's forward-recovery linkage. No merge,
+release, deployment, or milestone acceptance is claimed.

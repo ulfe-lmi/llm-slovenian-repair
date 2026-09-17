@@ -8,6 +8,17 @@ license grant, or permission to merge or deploy.
 
 ## Start here
 
+- [`RESEARCH-STATE.md`](RESEARCH-STATE.md) is the single authoritative
+  CURRENT research state for objective 007 (published by the 007-o
+  closure round): the full experiment ledger, exact metric progression,
+  evidence hierarchy, claims audit, PLAN matrix, deployment-validity
+  matrix, open questions, research debt, the 008/009 sequencing decision,
+  and the no-further-tuning boundary, with a machine-readable block that
+  `tests/test_research_state_consistency.py` re-derives from the primary
+  records. START HERE for the current state.
+- [`EXPERIMENT-HISTORY.md`](EXPERIMENT-HISTORY.md) is a 007-d-era archival
+  snapshot (historical synthesis). It is superseded as current state by
+  RESEARCH-STATE.md and must not be read as moving status.
 - [`registry/experiments.json`](registry/experiments.json) is the evidence-backed
   catalog. Each record contains its question, authorized variation, frozen
   choices, status, safe numeric metrics, top-level private evidence identities,
