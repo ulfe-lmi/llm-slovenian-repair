@@ -23,6 +23,7 @@ import time
 
 ID_RE = re.compile(r"[0-9]{3}-[a-z]{1,2}\Z")
 SHA_RE = re.compile(r"[0-9a-f]{40}(?:[0-9a-f]{24})?\Z")
+COMMIT_RE = re.compile(r"[0-9a-f]{40}\Z")
 HASH_RE = re.compile(r"[0-9a-f]{64}\Z")
 MAX_FILE = 2_000_000
 CRIT_SECTIONS = (
@@ -55,6 +56,68 @@ SUFFIX_ORDER = tuple(chr(c) for c in range(97, 123)) + tuple(
 TRANSCRIPT_FILENAME_RE = re.compile(
     r"(?P<id>[0-9]{3}-[a-z]{1,2})-[a-z0-9]+(?:-[a-z0-9]+)*\.md\Z"
 )
+
+# These identities are executable protocol law.  The JSON file is a readable
+# durable record, but it cannot create or widen an exception by itself.
+REPORT_HISTORY_MANIFEST = {
+    "schema_version": 1,
+    "scope": "oap/reports",
+    "incidents": [
+        {
+            "incident_id": "RHI-0001",
+            "path": "oap/reports/006-a-unigram-lexicon-importer.md",
+            "reason": "Historical report metadata repair changed a published report path.",
+            "first_touch": {
+                "commit": "e16c3303aab40a914d7edf22520cbf2bf81f1095",
+                "blob": "1c6ae72871bcd0c5ae7fc19aac3d5c1bd3e438c6",
+                "content_sha256": "6f5fbd33b21bcf7799e6a0652490f5da3bf13b738ad4ed73389f99086970d152",
+                "byte_size": 12344,
+            },
+            "mutation": {
+                "commit": "767062ac2b2c543c6bc6fdffae2a3fc3a39a786c",
+                "blob": "39eb8b6e0b39a6632cd48526866e64735196597e",
+                "content_sha256": "b35301f28954364f592ea292c7cde49427b5498044d7e7eff9c2706372569c4f",
+                "byte_size": 13569,
+            },
+            "actual_implementation_head": "4f3c3d66dbc8c48b6445e973e3ada61bafb131b5",
+            "frozen_current": {
+                "blob": "39eb8b6e0b39a6632cd48526866e64735196597e",
+                "content_sha256": "b35301f28954364f592ea292c7cde49427b5498044d7e7eff9c2706372569c4f",
+                "byte_size": 13569,
+            },
+            "status": "KNOWN_HISTORICAL_VIOLATION_FROZEN",
+            "evidence_scope": "Exact two-touch Git history and frozen final blob only; no immutable SELF or actual-parent proof is inferred.",
+        },
+        {
+            "incident_id": "RHI-0002",
+            "path": "oap/reports/006-c-support-observed-terminal-tab-and-complete-smoke.md",
+            "reason": "Historical report reconciliation changed a published report path.",
+            "first_touch": {
+                "commit": "241d069a12f8a9c312e8dec57de43ce61c5bf1a2",
+                "blob": "625e05a2e8e97bd6c37de977c2c5d7c1f215d995",
+                "content_sha256": "b2d8aab338f9ad2a697315900a62cde09cf16200fa0dcad462df088bdbf5fce4",
+                "byte_size": 14093,
+            },
+            "mutation": {
+                "commit": "898ccbc04ea1c8450f93ce3f1b7cc0869f97e9f9",
+                "blob": "78f3a03445921b903eca38800a239622bfe121be",
+                "content_sha256": "c4d1a3274c798d382c24476a3518b48f67beeb6b69a17370dbf120134305f3cd",
+                "byte_size": 15655,
+            },
+            "actual_implementation_head": "6e626fce9df874f569984bd0d810412f7685f0d8",
+            "frozen_current": {
+                "blob": "78f3a03445921b903eca38800a239622bfe121be",
+                "content_sha256": "c4d1a3274c798d382c24476a3518b48f67beeb6b69a17370dbf120134305f3cd",
+                "byte_size": 15655,
+            },
+            "status": "KNOWN_HISTORICAL_VIOLATION_FROZEN",
+            "evidence_scope": "Exact two-touch Git history and frozen final blob only; no immutable SELF or actual-parent proof is inferred.",
+        },
+    ],
+}
+REPORT_HISTORY_MANIFEST_PATH = "oap/REPORT-HISTORY-INCIDENTS.json"
+HISTORY_CHECK_NAME = "OAP report history"
+FORWARD_RECOVERY_SCHEMA = 1
 
 
 class OAPError(Exception):
@@ -273,6 +336,159 @@ def git_blob(repo, ref, path):
     require(bool(SHA_RE.fullmatch(ref)), "TRUSTED_REF_REQUIRED")
     require(not path.startswith("/") and ".." not in Path(path).parts, "UNSAFE_RELATIVE_PATH")
     return git(repo, "show", f"{ref}:{path}")
+
+
+def _tree_blob(repo, revision, path, *, index=False):
+    require(not path.startswith("/") and ".." not in Path(path).parts, "UNSAFE_RELATIVE_PATH")
+    if index:
+        result = git(repo, "show", ":" + path, check=False)
+        require(result.returncode == 0, "TREE_PATH_MISSING", path)
+        return result.stdout
+    return git_blob(repo, revision, path)
+
+
+def _report_history_events(repo, revision):
+    """Return every add/modify/delete event for report Markdown paths."""
+    raw = git(
+        repo,
+        "log",
+        "--reverse",
+        "--format=@@%H %P",
+        "--name-status",
+        "--diff-filter=AMDR",
+        "--find-renames=0",
+        revision,
+        "--",
+        "oap/reports",
+    ).decode("utf-8", "strict")
+    events, commit, parents = [], None, ()
+    for line in raw.splitlines():
+        if line.startswith("@@"):
+            pieces = line[2:].split()
+            require(len(pieces) >= 1 and SHA_RE.fullmatch(pieces[0]), "REPORT_HISTORY_LOG")
+            commit, parents = pieces[0], tuple(pieces[1:])
+            continue
+        if not line or commit is None:
+            continue
+        fields_ = line.split("\t")
+        status = fields_[0]
+        kind = status[:1]
+        if kind not in {"A", "M", "D", "R"}:
+            continue
+        paths = fields_[1:]
+        require(paths and all(path.startswith("oap/reports/") for path in paths), "REPORT_HISTORY_PATH")
+        if kind == "R":
+            require(len(paths) == 2, "REPORT_HISTORY_RENAME")
+            events.extend(
+                {
+                    "commit": commit,
+                    "parents": parents,
+                    "status": status,
+                    "path": path,
+                }
+                for path in paths
+            )
+        else:
+            require(len(paths) == 1, "REPORT_HISTORY_PATH")
+            events.append(
+                {"commit": commit, "parents": parents, "status": kind, "path": paths[0]}
+            )
+    return [event for event in events if event["path"].endswith(".md")]
+
+
+def _commit_paths(repo, commit):
+    raw = git(repo, "diff-tree", "--no-commit-id", "--name-only", "-r", "-z", commit)
+    return raw.rstrip(b"\0").decode("utf-8", "strict").split("\0") if raw else []
+
+
+def _report_history_manifest(repo, revision):
+    result = git(repo, "cat-file", "-e", f"{revision}:{REPORT_HISTORY_MANIFEST_PATH}", check=False)
+    if result.returncode:
+        return None
+    try:
+        manifest = json.loads(
+            _tree_blob(repo, revision, REPORT_HISTORY_MANIFEST_PATH), object_pairs_hook=unique_pairs
+        )
+    except (ValueError, UnicodeError) as exc:
+        raise OAPError("REPORT_HISTORY_MANIFEST_INVALID") from exc
+    require(manifest == REPORT_HISTORY_MANIFEST, "REPORT_HISTORY_MANIFEST_MISMATCH")
+    return manifest
+
+
+def _require_commit_parent_and_path(repo, commit, parent, path):
+    parents = git(repo, "rev-list", "--parents", "-n", "1", commit).decode().split()
+    require(len(parents) == 2 and parents[1] == parent, "REPORT_PARENT")
+    require(_commit_paths(repo, commit) == [path], "REPORT_ONLY_PATH")
+
+
+def check_report_history(repo, revision="HEAD", *, index=False, require_manifest=False):
+    """Enforce add-once report history and the two frozen historical incidents."""
+    repo = safe_path(repo, kind="dir")
+    resolved = _revision(repo, "HEAD" if index else revision)
+    manifest = _report_history_manifest(repo, resolved) if not index else None
+    if index:
+        result = git(repo, "show", ":" + REPORT_HISTORY_MANIFEST_PATH, check=False)
+        if result.returncode == 0:
+            try:
+                manifest = json.loads(
+                    result.stdout,
+                    object_pairs_hook=unique_pairs,
+                )
+            except (ValueError, UnicodeError) as exc:
+                raise OAPError("REPORT_HISTORY_MANIFEST_INVALID") from exc
+            require(manifest == REPORT_HISTORY_MANIFEST, "REPORT_HISTORY_MANIFEST_MISMATCH")
+    if require_manifest:
+        require(manifest is not None, "REPORT_HISTORY_MANIFEST_MISSING")
+
+    events = _report_history_events(repo, resolved)
+    by_path = {}
+    for event in events:
+        by_path.setdefault(event["path"], []).append(event)
+    tree_paths_raw = git(repo, "ls-tree", "-r", "--name-only", resolved, "--", "oap/reports")
+    tree_paths = {
+        p for p in tree_paths_raw.decode("utf-8", "strict").splitlines() if p.endswith(".md")
+    }
+    incidents = {entry["path"]: entry for entry in REPORT_HISTORY_MANIFEST["incidents"]}
+    known = []
+    mutations = []
+    for path in sorted(tree_paths):
+        path_events = by_path.get(path, [])
+        require(path_events, "REPORT_HISTORY_NO_TOUCH", path)
+        if path in incidents:
+            entry = incidents[path]
+            require(len(path_events) == 2, "REPORT_HISTORY_INCIDENT_SEQUENCE", path)
+            first, mutation = path_events
+            require(first["status"] == "A" and mutation["status"] == "M", "REPORT_HISTORY_INCIDENT_STATUS", path)
+            require(first["commit"] == entry["first_touch"]["commit"], "REPORT_HISTORY_INCIDENT_COMMIT", path)
+            require(mutation["commit"] == entry["mutation"]["commit"], "REPORT_HISTORY_INCIDENT_COMMIT", path)
+            _require_commit_parent_and_path(repo, first["commit"], entry["actual_implementation_head"], path)
+            _require_commit_parent_and_path(repo, mutation["commit"], first["commit"], path)
+            for event, identity in ((first, entry["first_touch"]), (mutation, entry["mutation"])):
+                data = git_blob(repo, event["commit"], path)
+                require(git(repo, "rev-parse", f"{event['commit']}:{path}").decode().strip() == identity["blob"], "REPORT_HISTORY_INCIDENT_BLOB", path)
+                require(len(data) == identity["byte_size"] and digest(data) == identity["content_sha256"], "REPORT_HISTORY_INCIDENT_CONTENT", path)
+            current = _tree_blob(repo, resolved, path, index=index)
+            frozen = entry["frozen_current"]
+            require(git(repo, "rev-parse", f"{resolved}:{path}").decode().strip() == frozen["blob"], "REPORT_HISTORY_FROZEN_BLOB", path)
+            require(len(current) == frozen["byte_size"] and digest(current) == frozen["content_sha256"], "REPORT_HISTORY_FROZEN_CONTENT", path)
+            known.append({"path": path, "status": entry["status"], "evidence_scope": entry["evidence_scope"]})
+            mutations.append(path)
+            continue
+        require(len(path_events) == 1 and path_events[0]["status"] == "A", "REPORT_HISTORY_MUTATION", path)
+        event = path_events[0]
+        data = _tree_blob(repo, resolved, path, index=index)
+        report_meta = metadata(data, "oap-report")
+        implementation = report_meta.get("implementation_head")
+        require(SHA_RE.fullmatch(str(implementation or "")), "REPORT_HISTORY_IMPLEMENTATION_HEAD", path)
+        _require_commit_parent_and_path(repo, event["commit"], implementation, path)
+    require(set(mutations) == set(incidents).intersection(tree_paths), "REPORT_HISTORY_MUTATION_SET")
+    return {
+        "result": "valid",
+        "revision": resolved,
+        "known_incidents": known,
+        "frozen_mutation_paths": sorted(mutations),
+        "report_count": len(tree_paths),
+    }
 
 
 def section_map(text, prefix="## "):
@@ -584,10 +800,232 @@ class GitHub:
         return self.api("pulls?state=all&head=" + quote(self.repository.split("/")[0] + ":" + branch, safe=""))
 
 
-def transition(repo, new, remote):
+def _commit_identity(repo, commit, path):
+    """Return the exact Git object identity and bytes for one committed path."""
+    require(COMMIT_RE.fullmatch(commit), "RECOVERY_COMMIT_ID")
+    data = git_blob(repo, commit, path)
+    blob = git(repo, "rev-parse", f"{commit}:{path}").decode().strip()
+    require(COMMIT_RE.fullmatch(blob), "RECOVERY_BLOB_ID")
+    return {"blob": blob, "bytes": len(data), "sha256": digest(data), "data": data}
+
+
+def _commit_parent_and_only_path(repo, commit, parent, path, *, code="REPORT_PARENT"):
+    parents = git(repo, "rev-list", "--parents", "-n", "1", commit).decode().split()
+    require(len(parents) == 2 and parents[1] == parent, code)
+    require(_commit_paths(repo, commit) == [path], "REPORT_ONLY_PATH")
+
+
+def _recovery_path(path, kind, ident):
+    """Validate the only two path shapes a recovery receipt may name."""
+    code = {"reports": "RECOVERY_REPORT_PATH", "orders": "RECOVERY_ORDER_PATH"}[kind]
+    require(isinstance(path, str), code)
+    parsed = Path(path)
+    require(not parsed.is_absolute() and str(parsed) == path and len(parsed.parts) == 3,
+            code)
+    require(parsed.parts[:2] == ("oap", kind), code)
+    match = TRANSCRIPT_FILENAME_RE.fullmatch(parsed.name)
+    require(match is not None and match["id"] == ident, code)
+    return parsed
+
+
+def _committed_recovery_path(repo, revision, kind, ident, declared):
+    """Bind a receipt path to the unique matching path in the named tree."""
+    code = {"reports": "RECOVERY_REPORT_PATH", "orders": "RECOVERY_ORDER_PATH"}[kind]
+    paths = []
+    for path in git(repo, "ls-tree", "-r", "--name-only", revision, "--", "oap/" + kind).decode("utf-8", "strict").splitlines():
+        parsed = Path(path)
+        match = TRANSCRIPT_FILENAME_RE.fullmatch(parsed.name)
+        if len(parsed.parts) == 3 and parsed.parts[:2] == ("oap", kind) and match and match["id"] == ident:
+            paths.append(path)
+    require(len(paths) == 1 and paths[0] == declared, code)
+
+
+def _prove_transcript_recovery_context(repo, publication, new_order, new_order_data,
+                                       new_order_path, prior_report, prior_report_path,
+                                       *, revision, index, report_data, report_path):
+    """Bind quarantine to the selected transcript tree and its ancestry."""
+    resolved = _revision(repo, "HEAD" if index else revision)
+    entries, _ = _transcript_entries(repo, index=index, revision=resolved)
+    orders = _parse_transcript_files(entries, "orders")
+    require(new_order["id"] in orders, "RECOVERY_ORDER_NOT_SELECTED")
+    selected_order_path, selected_order_data = orders[new_order["id"]]
+    require(selected_order_path == new_order_path and selected_order_data == new_order_data,
+            "RECOVERY_ORDER_SELECTION")
+    ordered = _transcript_order(list(orders))
+    prior_id = new_order["prior_report_recovery"]["prior_id"]
+    require(prior_id in ordered and ordered.index(new_order["id"]) == ordered.index(prior_id) + 1,
+            "RECOVERY_TRANSCRIPT_SEQUENCE")
+    require(report_path == prior_report_path and report_data == prior_report["data"],
+            "RECOVERY_REPORT_SELECTION")
+    require(publication != resolved or index, "RECOVERY_TRANSCRIPT_CHRONOLOGY")
+    require(git(repo, "merge-base", "--is-ancestor", publication, resolved, check=False).returncode == 0,
+            "RECOVERY_TRANSCRIPT_ANCESTRY")
+
+    # A committed correction must have been introduced by a descendant commit
+    # after the fixed publication. An index correction is necessarily uncommitted
+    # during pre-publication review, so its staged addition is the evidence.
+    introductions = git(repo, "log", "--reverse", "--format=%H", "--diff-filter=A",
+                        resolved, "--", new_order_path).decode().splitlines()
+    exists_in_revision = git(repo, "cat-file", "-e", f"{resolved}:{new_order_path}", check=False).returncode == 0
+    if index and not exists_in_revision:
+        staged = git(repo, "diff", "--cached", "--name-status", "-z", "--", new_order_path, check=False)
+        require(staged.returncode == 0 and b"\0" in staged.stdout and
+                staged.stdout.split(b"\0", 1)[0] in (b"A", b"M"),
+                "RECOVERY_TRANSCRIPT_CHRONOLOGY")
+    else:
+        require(len(introductions) == 1, "RECOVERY_TRANSCRIPT_CHRONOLOGY")
+        introduced = introductions[0]
+        require(introduced != publication and
+                git(repo, "merge-base", "--is-ancestor", publication, introduced, check=False).returncode == 0 and
+                git(repo, "merge-base", "--is-ancestor", introduced, resolved, check=False).returncode == 0,
+                "RECOVERY_TRANSCRIPT_CHRONOLOGY")
+
+
+def _historical_report_recovery(repo, new_order, new_order_data, *, remote=None,
+                                transcript_revision=None, transcript_index=False,
+                                transcript_report_data=None, transcript_report_path=None,
+                                new_order_path=None):
+    """Prove a published invalid report can only be followed by its exact next order.
+
+    This is deliberately a structural proof.  It never repairs or treats the prior
+    report as accepted; callers use the returned quarantine record to keep that
+    distinction visible in transcript output.
+    """
+    recovery = new_order.get("prior_report_recovery")
+    require(isinstance(recovery, dict), "RECOVERY_LINKAGE_MISSING")
+    require(recovery.get("schema_version") == FORWARD_RECOVERY_SCHEMA, "RECOVERY_SCHEMA")
+    prior_id = recovery.get("prior_id")
+    validate_id(prior_id)
+    require(prior_id != new_order["id"], "RECOVERY_SAME_ID")
+    require(recovery.get("classification") == "INVALID_QUARANTINED", "RECOVERY_CLASSIFICATION")
+    require(recovery.get("corrective_id") == new_order["id"], "RECOVERY_CORRECTIVE_ID")
+    require(meaningful(recovery.get("reason")), "RECOVERY_REASON")
+    prior_objective, prior_suffix = prior_id.split("-", 1)
+    objective, suffix = new_order["id"].split("-", 1)
+    require(prior_objective == objective, "RECOVERY_NUMERIC_ADVANCE")
+    require(suffix == suffix_next(prior_suffix), "RECOVERY_SUFFIX_SEQUENCE")
+    require(recovery.get("repository") == new_order["repository"], "RECOVERY_REPOSITORY")
+    require(recovery.get("branch") == new_order["branch"], "RECOVERY_BRANCH")
+    require(type(new_order.get("pr")) is int and recovery.get("pr") == new_order["pr"], "RECOVERY_PR")
+    report_path = str(_recovery_path(recovery.get("report_path"), "reports", prior_id))
+    order_path = str(_recovery_path(recovery.get("order_path"), "orders", prior_id))
+    require(Path(report_path).name == Path(order_path).name, "RECOVERY_ORDER_PATH")
+    publication = recovery.get("publication_commit")
+    implementation_parent = recovery.get("implementation_parent")
+    require(COMMIT_RE.fullmatch(str(publication or "")), "RECOVERY_PUBLICATION_COMMIT")
+    require(COMMIT_RE.fullmatch(str(implementation_parent or "")), "RECOVERY_IMPLEMENTATION_PARENT")
+    require(recovery.get("validation_error") == "REPORT_CHECK", "RECOVERY_VALIDATION_ERROR")
+    require(recovery.get("authority") and meaningful(recovery.get("authority")), "RECOVERY_AUTHORITY")
+    require(recovery.get("evidence_scope") and meaningful(recovery.get("evidence_scope")), "RECOVERY_EVIDENCE_SCOPE")
+    report_sha = recovery.get("report_sha256")
+    require(HASH_RE.fullmatch(str(report_sha or "")), "RECOVERY_REPORT_SHA")
+    order_sha = recovery.get("order_sha256")
+    require(HASH_RE.fullmatch(str(order_sha or "")), "RECOVERY_ORDER_SHA")
+    report_blob = recovery.get("report_blob")
+    require(COMMIT_RE.fullmatch(str(report_blob or "")), "RECOVERY_REPORT_BLOB")
+    _committed_recovery_path(repo, publication, "reports", prior_id, report_path)
+    _committed_recovery_path(repo, publication, "orders", prior_id, order_path)
+    prior_order = _commit_identity(repo, publication, order_path)
+    prior_report = _commit_identity(repo, publication, report_path)
+    require(prior_order["sha256"] == order_sha, "RECOVERY_ORDER_BYTES")
+    require(prior_report["blob"] == report_blob, "RECOVERY_REPORT_BLOB")
+    require(prior_report["sha256"] == report_sha, "RECOVERY_REPORT_BYTES")
+    require(prior_report["bytes"] == len(prior_report["data"]), "RECOVERY_REPORT_BYTES")
+    require(git(repo, "rev-parse", f"{publication}^{{commit}}").decode().strip() == publication, "RECOVERY_PUBLICATION_COMMIT")
+    _commit_parent_and_only_path(repo, publication, implementation_parent, report_path,
+                                 code="RECOVERY_REPORT_PARENT")
+    events = [e for e in _report_history_events(repo, publication) if e["path"] == report_path]
+    require(len(events) == 1 and events[0]["status"] == "A" and events[0]["commit"] == publication,
+            "RECOVERY_REPORT_FIRST_PUBLICATION")
+    prior_order_meta = validate_order(prior_order["data"], repo, prior_id, Path(order_path).name)
+    prior_report_meta = metadata(prior_report["data"], "oap-report")
+    require(prior_report_meta.get("id") == prior_id, "RECOVERY_REPORT_ID")
+    require(prior_report_meta.get("order_path") == order_path, "RECOVERY_REPORT_ORDER")
+    require(prior_report_meta.get("implementation_head") == implementation_parent, "RECOVERY_IMPLEMENTATION_PARENT")
+    require(prior_report_meta.get("pr_mode") == prior_order_meta["pr_mode"] and prior_report_meta.get("pr") == prior_order_meta["pr"],
+            "RECOVERY_PRIOR_PR")
+    try:
+        validate_report(prior_report["data"], prior_order_meta, prior_order["data"], order_path)
+    except OAPError as error:
+        require(error.code == "REPORT_CHECK", "RECOVERY_VALIDATION_ERROR", error.code)
+    else:
+        raise OAPError("RECOVERY_PRIOR_REPORT_VALID")
+
+    if transcript_revision is not None:
+        require(isinstance(new_order_data, bytes) and isinstance(transcript_report_data, bytes),
+                "RECOVERY_TRANSCRIPT_SELECTION")
+        require(isinstance(new_order_path, str), "RECOVERY_ORDER_PATH")
+        _prove_transcript_recovery_context(
+            repo, publication, new_order, new_order_data, new_order_path, prior_report, report_path,
+            revision=transcript_revision, index=transcript_index,
+            report_data=transcript_report_data, report_path=transcript_report_path,
+        )
+
+    # The history checker is an independent proof that existing incidents and the
+    # old report path remain frozen; it does not validate report check claims.
+    # Transcript ancestry is checked first so a disconnected tree cannot hide
+    # behind a copied report path and receive a less-specific history error.
+    check_report_history(repo, publication, require_manifest=True)
+    history_revision = "HEAD" if transcript_revision is None else transcript_revision
+    check_report_history(repo, history_revision, index=transcript_index, require_manifest=True)
+
+    if remote is not None:
+        require(remote.repository == new_order["repository"], "RECOVERY_REMOTE_REPOSITORY")
+        pr = remote.pr(new_order["pr"])
+        require(pr.get("state") == "open" and pr.get("merged") is not True and not pr.get("draft", False),
+                "RECOVERY_PR_NOT_OPEN")
+        require(pr.get("head", {}).get("sha") == publication and pr.get("head", {}).get("ref") == new_order["branch"],
+                "RECOVERY_REMOTE_HEAD")
+        require(pr.get("base", {}).get("ref") == new_order["default_branch"], "RECOVERY_REMOTE_BASE")
+        require(pr.get("base", {}).get("repo", {}).get("full_name") == new_order["repository"], "RECOVERY_REMOTE_REPOSITORY")
+        peers = remote.branch_prs(new_order["branch"])
+        require(len(peers) == 1 and peers[0].get("number") == new_order["pr"], "RECOVERY_DUPLICATE_PR")
+    return {
+        "result": "forward recovery structurally proved",
+        "id": new_order["id"],
+        "prior_id": prior_id,
+        "classification": "INVALID_QUARANTINED",
+        "validation_error": "REPORT_CHECK",
+        "publication_commit": publication,
+        "report_path": report_path,
+        "order_path": order_path,
+        "report_blob": report_blob,
+        "report_sha256": report_sha,
+        "order_sha256": order_sha,
+        "remote_verified": remote is not None,
+    }
+
+
+def prove_forward_report_recovery(repo, ident, *, remote=None, order_data=None, order_path=None,
+                                  transcript_revision=None, transcript_index=False,
+                                  transcript_report_data=None, transcript_report_path=None):
+    """Public structural recovery entry point used by publication and transcripts."""
+    repo = Path(repo)
+    validate_id(ident)
+    if order_data is None:
+        path = matching(repo, "orders", ident)
+        require(path is not None, "ACTIVE_ORDER_MISSING")
+        order_path, order_data = str(path.relative_to(repo)), read(path)
+    else:
+        require(isinstance(order_path, str), "RECOVERY_ORDER_PATH")
+    _recovery_path(order_path, "orders", ident)
+    current_order_path = order_path
+    order = validate_order(order_data, repo, ident, Path(order_path).name)
+    return _historical_report_recovery(
+        repo, order, order_data, remote=remote,
+        transcript_revision=transcript_revision, transcript_index=transcript_index,
+        transcript_report_data=transcript_report_data, transcript_report_path=transcript_report_path,
+        new_order_path=current_order_path,
+    )
+
+
+def transition(repo, new, remote, *, new_order_data=None, new_order_path=None):
     old_id = active_id(repo)
     if old_id == new["id"]:
         require(matching(repo, "reports", old_id) is None, "COMPLETED_REPLAY")
+        if new.get("prior_report_recovery") is not None:
+            prove_forward_report_recovery(repo, new["id"], remote=remote,
+                                          order_data=new_order_data, order_path=new_order_path)
         return
     if old_id is None:
         require(new["id"] == "000-a", "INITIAL_ORDER_ID")
@@ -597,9 +1035,21 @@ def transition(repo, new, remote):
     old_path = matching(repo, "orders", old_id)
     require(old_path is not None, "ACTIVE_ORDER_MISSING")
     old = validate_order(read(old_path), repo, old_id, old_path.name)
-    require(matching(repo, "reports", old_id) is not None, "PRIOR_REPORT_MISSING")
-    verify_report(repo, old_id, remote=remote)
-    previous_report = metadata(read(matching(repo, "reports", old_id)), "oap-report")
+    recovery = new.get("prior_report_recovery")
+    report_path = matching(repo, "reports", old_id)
+    require(report_path is not None, "PRIOR_REPORT_MISSING")
+    if recovery is not None:
+        require(isinstance(recovery, dict) and recovery.get("prior_id") == old_id,
+                "RECOVERY_ACTIVE_MISMATCH")
+        proof = prove_forward_report_recovery(
+            repo, new["id"], remote=remote, order_data=new_order_data, order_path=new_order_path,
+        )
+        require(str(report_path.relative_to(repo)) == proof["report_path"], "RECOVERY_REPORT_PATH")
+        require(read(report_path) == git_blob(repo, proof["publication_commit"], proof["report_path"]),
+                "RECOVERY_REPORT_BYTES")
+    else:
+        verify_report(repo, old_id, remote=remote)
+    previous_report = metadata(read(report_path), "oap-report")
     pr = remote.pr(previous_report["pr"])
     if new["objective"] == old["objective"]:
         require(new["id"].split("-")[1] == suffix_next(old_id.split("-")[1]), "ROUND_SEQUENCE")
@@ -624,12 +1074,14 @@ def publish(repo, source, ident, *, strategy=None, accepted_ref=None, dry_run=Fa
     target = repo / "oap/orders" / Path(source).name
     require(matching(repo, "reports", ident) is None, "COMPLETED_REPLAY")
     if dry_run:
-        transition(repo, m, remote)
+        transition(repo, m, remote, new_order_data=data,
+                   new_order_path=str(target.relative_to(repo)))
         if target.exists():
             require(read(target) == data, "IMMUTABLE_CONFLICT")
         return {"result": "valid dry run", "writes": 0}
     with lock(repo / "oap/.publish.lock"):
-        transition(repo, m, remote)
+        transition(repo, m, remote, new_order_data=data,
+                   new_order_path=str(target.relative_to(repo)))
         peers = remote.branch_prs(m["branch"])
         require(len(peers) <= 1, "DUPLICATE_PR")
         if m["pr_mode"] == "AMEND_EXISTING_PR":
@@ -703,7 +1155,7 @@ def validate_report(data, order, order_data, order_path):
         require(meaningful(r.get(k)), "REPORT_FIELD", k)
     require(isinstance(r.get("checks"), list) and r["checks"], "REPORT_CHECKS")
     for c in r["checks"]:
-        require(meaningful(c.get("command")) and c.get("result") in CHECKS and SHA_RE.fullmatch(str(c.get("sha", ""))), "REPORT_CHECK")
+        require(meaningful(c.get("command")) and c.get("result") in CHECKS and COMMIT_RE.fullmatch(str(c.get("sha", ""))), "REPORT_CHECK")
         require(c.get("publication_head_claim") is not True, "FUTURE_CI_CLAIM")
     require(re.fullmatch(r"NONE|APPENDED CRIT-[0-9]{4}|MITIGATION UPDATED CRIT-[0-9]{4}|CANDIDATE REPORTED", str(r.get("critical_action"))), "REPORT_CRITICAL_ACTION")
     if "critical_action" in order:
@@ -716,6 +1168,35 @@ def validate_report(data, order, order_data, order_path):
     except (KeyError, ValueError, TypeError) as e:
         raise OAPError("REPORT_CHRONOLOGY") from e
     return r
+
+
+def validate_report_draft(repo, source, ident, *, expected_head=None):
+    """Validate an unpublished report against the actual implementation head."""
+    repo = Path(repo)
+    validate_id(ident)
+    require(active_id(repo) == ident, "DRAFT_ACTIVE_MISMATCH")
+    require(matching(repo, "reports", ident) is None, "DRAFT_REPORT_ALREADY_PUBLISHED")
+    opath = matching(repo, "orders", ident)
+    require(opath is not None, "DRAFT_ORDER_MISSING")
+    order_data = read(opath)
+    order = validate_order(order_data, repo, ident, opath.name)
+    data = read(source)
+    report = validate_report(data, order, order_data, str(opath.relative_to(repo)))
+    actual = git(repo, "rev-parse", "HEAD").decode().strip()
+    require(COMMIT_RE.fullmatch(actual), "DRAFT_HEAD_INVALID")
+    if expected_head is not None:
+        require(COMMIT_RE.fullmatch(str(expected_head)), "DRAFT_HEAD_INVALID")
+        require(expected_head == actual, "DRAFT_HEAD_MISMATCH")
+    require(report["implementation_head"] == actual, "DRAFT_IMPLEMENTATION_HEAD")
+    for check in report["checks"]:
+        require(COMMIT_RE.fullmatch(check["sha"]), "REPORT_CHECK")
+        require(git(repo, "cat-file", "-e", check["sha"] + "^{commit}", check=False).returncode == 0,
+                "DRAFT_CHECK_MISSING")
+        require(git(repo, "merge-base", "--is-ancestor", check["sha"], actual, check=False).returncode == 0,
+                "DRAFT_CHECK_ANCESTRY")
+    return {"result": "valid unpublished report draft", "id": ident,
+            "order_path": str(opath.relative_to(repo)), "implementation_head": actual,
+            "publication_verified": False, "remote_verified": False}
 
 
 def _revision(repo, revision):
@@ -862,6 +1343,7 @@ def check_transcript(repo, *, index=False, revision=None, expected_id=None):
     for ident in reports:
         require(ident in orders, "REPORT_ORDER_MISSING")
     if selected_active is None:
+        history = check_report_history(repo, resolved, index=index)
         require(not orders and not reports, "ACTIVE_REQUIRED")
         return {"result": "valid", "mode": "index" if index else "revision",
                 "revision": resolved, "active": None, "orders": [], "reports": []}
@@ -879,22 +1361,52 @@ def check_transcript(repo, *, index=False, revision=None, expected_id=None):
     for ident in ordered:
         path, data = orders[ident]
         validated_orders[ident] = validate_order(data, repo, ident, Path(path).name)
+    quarantined = []
+    validated_report_ids = []
     for ident, (path, data) in reports.items():
         order_path, order_data = orders[ident]
         require(path.rsplit("/", 1)[-1] == order_path.rsplit("/", 1)[-1], "REPORT_FILENAME")
-        report = validate_report(data, validated_orders[ident], order_data, order_path)
+        try:
+            report = validate_report(data, validated_orders[ident], order_data, order_path)
+        except OAPError as error:
+            if error.code != "REPORT_CHECK":
+                raise
+            links = []
+            for candidate in ordered:
+                if candidate == ident or candidate not in validated_orders:
+                    continue
+                candidate_recovery = validated_orders[candidate].get("prior_report_recovery")
+                if isinstance(candidate_recovery, dict) and candidate_recovery.get("prior_id") == ident:
+                    links.append(candidate)
+            require(len(links) == 1, "RECOVERY_LINKAGE_MISSING")
+            proof = prove_forward_report_recovery(
+                repo, links[0], order_data=orders[links[0]][1], order_path=orders[links[0]][0],
+                transcript_revision=resolved, transcript_index=index,
+                transcript_report_data=data, transcript_report_path=path,
+            )
+            quarantined.append({"id": ident, "classification": "INVALID_QUARANTINED",
+                                "validation_error": error.code, "corrective_id": links[0],
+                                "publication_commit": proof["publication_commit"],
+                                "report_path": path})
+            continue
         if not index:
             _validate_committed_report(repo, resolved, path, data, order_path, order_data,
                                        report, report["implementation_head"])
         else:
             _validate_committed_report(repo, resolved, path, data, order_path, order_data,
                                        report, report["implementation_head"])
+        validated_report_ids.append(ident)
     for ident in ordered:
         if ident not in reports:
             require(ident == active, "TRANSCRIPT_NONCURRENT_UNFINISHED")
+    # Run the shared history guard after any invalid-report recovery proof. This
+    # preserves ancestry as the first boundary for a disconnected copied tree;
+    # the guard still gates every successful transcript result.
+    history = check_report_history(repo, resolved, index=index)
     return {"result": "valid", "mode": "index" if index else "revision",
             "revision": resolved, "active": active, "latest": latest,
-            "orders": ordered, "reports": [ident for ident in ordered if ident in reports]}
+            "orders": ordered, "reports": [ident for ident in ordered if ident in validated_report_ids],
+            "quarantined_reports": quarantined, "report_history": history}
 
 
 def verify_report(repo, ident, *, commit=None, remote=None):
@@ -902,6 +1414,8 @@ def verify_report(repo, ident, *, commit=None, remote=None):
     validate_id(ident)
     opath, rpath = matching(repo, "orders", ident), matching(repo, "reports", ident)
     require(opath is not None and rpath is not None, "REPORT_OR_ORDER_MISSING")
+    report_commit = commit or git(repo, "log", "-1", "--format=%H", "--", str(rpath.relative_to(repo))).decode().strip()
+    history = check_report_history(repo, report_commit)
     order_data = read(opath)
     order = validate_order(order_data, repo, ident, opath.name)
     require(rpath.name == opath.name, "REPORT_FILENAME")
@@ -909,7 +1423,7 @@ def verify_report(repo, ident, *, commit=None, remote=None):
     r = validate_report(data, order, order_data, str(opath.relative_to(repo)))
     report_rel = str(rpath.relative_to(repo))
     if commit is None:
-        commit = git(repo, "log", "-1", "--format=%H", "--", report_rel).decode().strip()
+        commit = report_commit
     require(SHA_RE.fullmatch(commit or ""), "REPORT_NOT_COMMITTED")
     parents = git(repo, "rev-list", "--parents", "-n", "1", commit).decode().split()
     require(len(parents) == 2 and parents[1] == r["implementation_head"], "REPORT_PARENT")
@@ -929,7 +1443,8 @@ def verify_report(repo, ident, *, commit=None, remote=None):
         require([f["filename"] for f in rc["files"]] == [report_rel], "REMOTE_REPORT_ONLY_PATH")
         blob = remote.api("contents/" + report_rel + "?ref=" + commit)
         require(blob.get("encoding") == "base64" and base64.b64decode(blob["content"]) == data, "REMOTE_REPORT_CONTENT")
-    return {"result": "verified", "scope": "remote" if remote else "local only", "commit": commit, "id": ident}
+    return {"result": "verified", "scope": "remote" if remote else "local only", "commit": commit, "id": ident,
+            "report_history": history}
 
 
 def protocol_state(repo, *, strategy=None, remote=None):
@@ -941,6 +1456,14 @@ def protocol_state(repo, *, strategy=None, remote=None):
     path = matching(repo, "orders", ident)
     require(path is not None, "ACTIVE_ORDER_MISSING")
     order = validate_order(read(path), repo, ident, path.name)
+    recovery = None
+    if order.get("prior_report_recovery") is not None:
+        # Before the corrective report exists, only the initial publisher
+        # transition may require the quarantined publication to remain the
+        # remote PR head. Once the corrective order is active, local structural
+        # recovery must remain usable across implementation/report descendants;
+        # the current report, when present, is verified remotely below.
+        recovery = prove_forward_report_recovery(repo, ident)
     state = "READY"
     if matching(repo, "reports", ident):
         state = "PUBLICATION_RECONCILIATION_REQUIRED"
@@ -950,7 +1473,10 @@ def protocol_state(repo, *, strategy=None, remote=None):
     elif strategy and (Path(strategy) / "workorders/consumed.json").exists():
         if jsread(Path(strategy) / "workorders/consumed.json").get("id") == ident:
             state = "RECOVERY_REQUIRED"
-    return {"state": state, "id": ident, "branch": order["branch"], "pr": order["pr"], "critical": critical}
+    result = {"state": state, "id": ident, "branch": order["branch"], "pr": order["pr"], "critical": critical}
+    if recovery is not None:
+        result["prior_report_recovery"] = recovery
+    return result
 
 
 def fifo(path, action, *, timeout=None):
@@ -1004,13 +1530,21 @@ def fifo(path, action, *, timeout=None):
         os.close(fd)
 
 
-def strategic_gate(remote, pr_number, reviewed_sha, required_checks, *, merge_effect):
+def strategic_gate(remote, pr_number, reviewed_sha, required_checks, *, merge_effect,
+                   repo=None, report_id=None):
     require(os.environ.get("OAP_ROLE") == "strategic", "ROLE_REQUIRED")
     require(merge_effect == "development-only", "MERGE_D2_EFFECT")
     require(required_checks, "REQUIRED_CHECKS_MISSING")
+    require(HISTORY_CHECK_NAME in required_checks, "HISTORY_CHECK_REQUIRED")
+    require(repo is not None, "REPORT_REPOSITORY_REQUIRED")
     pr = remote.pr(pr_number)
     require(pr["state"] == "open" and not pr.get("draft", False), "PR_NOT_REVIEWABLE")
     require(pr["head"]["sha"] == reviewed_sha, "REVIEW_HEAD_CHANGED")
+    repo = Path(repo)
+    ident = report_id or active_id(repo)
+    require(ident is not None, "ACTIVE_REQUIRED")
+    verified = verify_report(repo, ident, remote=remote)
+    require(verified["commit"] == reviewed_sha, "REVIEW_REPORT_HEAD_MISMATCH")
     runs = remote.api(f"commits/{reviewed_sha}/check-runs?per_page=100")
     require(runs.get("total_count", 0) <= 100, "CHECK_PAGINATION_REQUIRED")
     by_name = {}
@@ -1020,7 +1554,8 @@ def strategic_gate(remote, pr_number, reviewed_sha, required_checks, *, merge_ef
         require(name in by_name, "REQUIRED_CHECK_MISSING")
         require(all(c.get("head_sha") == reviewed_sha and c.get("status") == "completed" and c.get("conclusion") == "success" for c in by_name[name]), "REQUIRED_CHECK_NOT_GREEN")
     return {"result": "structural development gate valid", "reviewed_sha": reviewed_sha,
-            "merge_performed": False, "semantic_review_required": True, "deployment_authorized": False}
+            "merge_performed": False, "semantic_review_required": True, "deployment_authorized": False,
+            "report_verified": True}
 
 
 def verify_merge(remote, pr_number, default_branch):

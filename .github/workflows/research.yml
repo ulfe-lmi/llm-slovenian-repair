@@ -1,0 +1,42 @@
+name: Research reproducibility
+
+on:
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  research-reproducibility:
+    name: Research reproducibility
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          fetch-depth: 0
+
+      - name: Require Python 3.12
+        run: |
+          command -v python3.12
+          python3.12 -c 'import sys; assert sys.version_info[:2] == (3, 12), sys.version'
+
+      - name: Run offline research tests
+        env:
+          TMPDIR: ${{ runner.temp }}/research-runtime
+        run: |
+          mkdir -p "$TMPDIR"
+          python3.12 -B -m unittest discover -s research/tests -v
+
+      - name: Rebuild numeric table
+        env:
+          TMPDIR: ${{ runner.temp }}/research-runtime
+        run: python3.12 -B -m research.tools.rebuild_tables --check
+
+      - name: Validate public research artifacts
+        env:
+          TMPDIR: ${{ runner.temp }}/research-runtime
+        run: python3.12 -B -m research.tools.publication_guard --root research
