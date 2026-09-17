@@ -87,11 +87,21 @@ class ResearchStateConsistencyTest(unittest.TestCase):
     def setUpClass(cls):
         cls.text = STATE_PATH.read_text(encoding="utf-8")
         cls.block = extract_machine_block(cls.text)
+        # The Application-baseline driver runs the suite in a file-copy
+        # pytest workspace that excludes .git; the git-identity assertions
+        # need the real repository history and skip there. All numeric
+        # re-derivation assertions still run in that workspace.
+        cls.git_history_available = (REPO_ROOT / ".git").exists()
 
     # ------------------------------------------------------------------ #
     # 1. identities                                                       #
     # ------------------------------------------------------------------ #
     def test_quarantined_007n_git_identity(self):
+        if not self.git_history_available:
+            self.skipTest(
+                "git history unavailable in this test workspace "
+                "(file copy without .git); runs in a real checkout"
+            )
         q = self.block["identities"]["quarantined_007n"]
         pub = q["publication_commit"]
         git("cat-file", "-e", pub)  # publication commit exists
@@ -110,6 +120,11 @@ class ResearchStateConsistencyTest(unittest.TestCase):
         self.assertEqual(q["validation_error"], "REPORT_CHECK")
 
     def test_main_is_ancestor_of_reviewed_head(self):
+        if not self.git_history_available:
+            self.skipTest(
+                "git history unavailable in this test workspace "
+                "(file copy without .git); runs in a real checkout"
+            )
         ident = self.block["identities"]
         main_sha = ident["main_sha"]
         head = ident["reviewed_branch_head_sha"]
@@ -123,6 +138,11 @@ class ResearchStateConsistencyTest(unittest.TestCase):
             )
 
     def test_branch_and_pr_match_committed_007o_order(self):
+        if not self.git_history_available:
+            self.skipTest(
+                "git history unavailable in this test workspace "
+                "(file copy without .git); runs in a real checkout"
+            )
         ident = self.block["identities"]
         order_text = git("show", "HEAD:" + ORDER_007O)
         match = re.search(
