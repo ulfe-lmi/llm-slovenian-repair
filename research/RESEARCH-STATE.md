@@ -192,7 +192,7 @@ harm labels.
 | 007-m (rank ambiguous Levenshtein candidates) | COMPLETE | Does a predeclared CPU top-1 ranking of ambiguous (C>1) candidates improve the frozen method? | Frozen CPU ranking + one frozen validator call per C>1 target; 882 C>1 targets (651 spelling + 231 preservation), 4,372 candidate pairs; hybrid primary result 799/114/716 (section 5); headroom census (top-1 covers 60.54% of present gold). | Two failed instrument roots preserved (ffdf13: 188 calls; 090ea8: 678 calls); final zero-call root ec2962 adopted all 882 observations and recomputed the hybrid projections byte-for-byte. |
 | 007-n (restore deterministic application baseline) | COMPLETE (implementation accepted; report quarantined) | Is the Application baseline deterministic and green? | Deterministic buffered terminal-SSE capture in the concept proxy and ZipInfo/stat_result typing repair; implementation independently accepted (diff review, focused concept suite 19/19, 25/25 consecutive iterations of the formerly flaky terminal-SSE test). | The 007-n REPORT is machine-invalid (unfinalized placeholder token in `checks[5].command`) and is classified INVALID_QUARANTINED by this order; its evidence claims are re-verified here. |
 
-### 4.2 Registry roots (all 24 entries of `research/registry/experiments.json`)
+### 4.2 Registry roots (24 entries at the 007-o snapshot; 25 after the 008-b update)
 
 Population/denominator notes: the 32-case suite = 7 labelled errors + 25
 controls; ten-run studies repeat the same 32 examples (320 instances measure
@@ -776,6 +776,67 @@ data, and a new PR.
   report records the literal temp parent path used). Final-head CI is
   awaited and recorded at the report publication commit.
 
+## 16. Post-merge acceptance update (objective 008, round 008-b)
+
+This section is the additive post-merge acceptance update recorded by the
+008-b corrective suffix (D0; classification rationale in the 008-b report).
+It changes no scientific result and rewrites nothing in the 007 narrative
+(sections 1-15): the only narrative byte changed outside the machine block
+is the section 4.2 heading line, which now states both registry counts.
+
+(a) PR #8 (the objective 007 closure container) was development-only merged
+2026-09-17: merge commit `7d2cc9ee37c1fc8c2a3eba238f89bc9bb242f9d9`, whose
+second parent is the reviewed 007-o head
+`4a029287f27e038d5c34c39b26ca836be7c6914b`; strategy receipt
+`workorders/007-o-final-head-review-20260917.md`. The repository workflows
+are pull_request-triggered, so the merge had no deployment side effect. The
+machine block now tracks the current accepted main.
+
+(b) The 007-o review point remains fully recorded in the 007 narrative
+(sections 1-15), the unchanged quarantined 007-n identity fields, and the
+committed 007-o order and report; this identity update is additive and
+records the accepted post-merge state. It is not a rewrite of the 007
+narrative.
+
+(c) Rationale: the frozen 007-o snapshot test's live-ref and report-count
+assertions are structurally unsatisfiable at any post-merge head
+(demonstrated at 008-a; disclosed in the 008-a report as a dilemma
+candidate; classified D0 by strategy). The only viable non-weakening remedy
+is this additive identity update as a corrective suffix. No test logic
+changed; every numeric re-derivation assertion remains binding.
+
+(d) 008-a outcome GO (`research/prose-boundary/REPORT.md`;
+`oap/reports/008-a-qualify-prose-boundary-parser.md`): 50 frozen fixtures x
+3 profiles, 1,288 parser events, 0 coordinate violations, 0
+protected-region exposures (under the documented D0 autolink rule), 0
+missing prose bytes, 100 deterministically selected preserved outputs
+(2,670 unique texts; 100 percent plain prose - recorded representativeness
+limitation), 22 class-7 differential spans (18 number, 4 upper-identifier;
+110 bytes), 0 safety-class false exposures, markdown-rs challenger
+NOT_TRIGGERED.
+
+(e) 008-a final-head CI was red on Research reproducibility and Application
+baseline solely through the stale snapshot assertions (as predicted in the
+008-a report before push); this round restores all four required checks to
+green at its final head.
+
+(f) Correction: `research/prose-boundary/REPORT.md`'s "4,910 input bytes"
+is the pre-publication-rework fixture total; the committed post-rework suite
+totals 4,907 bytes (F30 reworded 73 -> 70 bytes); no semantic change.
+
+(g) Carried into 008-c: (i) the D0 autolink-destination rule (the config's
+literal `candidate_rule` does not encode it; the 183 autolink-destination
+bytes of F24/F48 are protected only by that documented D0 evaluator rule;
+008-c must implement it in the runtime and amend the committed config rule
+text); (ii) the D1 policy token-family matching note; (iii) the recorded
+neutral tradeoffs (strikethrough/superscript/subscript exposed; image alt
+text protected).
+
+(h) Sequencing: 008-c (parser-first protection architecture; next order on
+this branch/PR) freezes the effective pipeline; objective 009 remains
+reserved for the fresh human-labelled linguistic confirmation; the 007-m
+linguistic system stays frozen.
+
 ## Machine-readable state block (research-state-machine-v1)
 
 This fenced block is the machine-readable core of the numbers quoted above.
@@ -788,11 +849,11 @@ model/network calls.
 {
   "schema": "research-state-machine-v1",
   "identities": {
-    "main_sha": "ee2d1b479719009ff1d07829478f241e3f395f7c",
+    "main_sha": "7d2cc9ee37c1fc8c2a3eba238f89bc9bb242f9d9",
     "branch": "oap/007-concept-verification",
     "pr_number": 8,
-    "reviewed_branch_head_sha": "735c9830db95cbb02fc80446b6d28f62a56f10c9",
-    "reviewed_branch_head_parent_sha": "b61f8e2e6b454a0969e5f2ac9009d4da87b8b215",
+    "reviewed_branch_head_sha": "7d2cc9ee37c1fc8c2a3eba238f89bc9bb242f9d9",
+    "reviewed_branch_head_parent_sha": "4a029287f27e038d5c34c39b26ca836be7c6914b",
     "quarantined_007n": {
       "classification": "INVALID_QUARANTINED",
       "validation_error": "REPORT_CHECK",
@@ -807,8 +868,8 @@ model/network calls.
     "frozen_007m_configuration_sha256": "0026a1a9d27652c36e2c5a960b10fafc1c9a93b0690d93b09089aa58884f5c26",
     "frozen_007m_prompt_sha256": "572cf2fb4864e66e38a500465e1089062d58aeed4721063fb0c1e466e424230d",
     "frozen_007m_final_root_manifest_sha256": "3fb4aef33542e7fa3f357acb905b75f4d7e7551783f83a422b5d1ea6272c25f8",
-    "registry_entries": 24,
-    "oap_reports_reviewed": 43,
+    "registry_entries": 25,
+    "oap_reports_reviewed": 45,
     "frozen_report_history_incidents": 2
   },
   "official_scorer": {

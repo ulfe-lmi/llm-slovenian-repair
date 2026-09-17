@@ -1,6 +1,6 @@
 {
   "schema_version": 3,
-  "scope": "all enumerated experiment and recovery roots plus stable child runs/phases and one non-benchmark diagnostic",
+  "scope": "all enumerated experiment and recovery roots plus stable child runs/phases, non-benchmark diagnostics, and the 008-a parser-qualification study (committed data-free subtree)",
   "source_closure": "research/registry/source-manifest.json",
   "numeric_projections": "research/results/*.json.gz",
   "publication_projections": "research/reports/*.md and research/configs/*.json",
@@ -4720,6 +4720,100 @@
       "conclusion": "One observation only; no multi-example Levenshtein benchmark or generalized quality result.",
       "pending_evidence": [
         "none; this record is explicitly not a completed benchmark"
+      ]
+    },
+    {
+      "experiment_id": "008-a-qualify-prose-boundary-parser",
+      "logical_root": "research/prose-boundary (committed data-free research subtree; no private root)",
+      "kind": "study",
+      "variation": "falsification-first structural segmentation qualification of pulldown-cmark 0.13.4",
+      "status": "COMPLETE",
+      "question": "Does pulldown-cmark 0.13.4 provide sufficiently accurate, conservative and source-faithful structural segmentation of actual LLM-generated Markdown-like output to replace the Markdown-sensitive part of the current hand-written protection logic?",
+      "frozen_choices": {
+        "candidate": "pulldown-cmark 0.13.4 (MIT; registry checksum e9f068eba8e7071c5f9511831b44f32c740d5adf574e990f946ddb53db2f314e; upstream tag v0.13.4)",
+        "fixtures_frozen_before_first_parser_run": true,
+        "new_model_calls": 0,
+        "dataset": "50 project-authored adversarial fixtures (38 required classes + 12 extras) + 100 deterministically selected preserved outputs (private; counts/hashes only in public artifacts)"
+      },
+      "metrics": {
+        "model_calls": 0,
+        "fixtures": 50,
+        "parser_profiles": 3,
+        "parser_events": 1288,
+        "coordinate_violations": 0,
+        "protected_region_exposures": 0,
+        "prose_candidate_missing_bytes": 0,
+        "representative_corpus_samples": 100,
+        "corpus_unique_texts": 2670,
+        "differential_disagreement_spans": 22,
+        "differential_false_exposures": 0
+      },
+      "evidence_files": [
+        {
+          "disposition": "data-free public projection",
+          "logical_path": "research/prose-boundary/config/experiment-008a.json",
+          "sha256": "c02a415a064d731672d98a4e0b0f6e829356323dbb00b409cc05fddd89db9300",
+          "size": 11784
+        },
+        {
+          "disposition": "data-free public projection",
+          "logical_path": "research/prose-boundary/identity/candidate-identity.json",
+          "sha256": "671d7cded433bbc0a3e1f60fcb4a2da7d89f2a79e254f6a5b57ac80eb38d9c0d",
+          "size": 4634
+        },
+        {
+          "disposition": "data-free public projection",
+          "logical_path": "research/prose-boundary/fixtures/fixtures.json",
+          "sha256": "ad2fcef95dc044e941bf346c64dc5e71d42b43a75e4334f88a0dcd012a26adc9",
+          "size": 69220
+        },
+        {
+          "disposition": "data-free public projection",
+          "logical_path": "research/prose-boundary/results/increment1/summary.json",
+          "sha256": "fa1ef6fbd229031c012d97e0ff3db80e0a173c63180164b865d18d2adb1ed021",
+          "size": 135044
+        },
+        {
+          "disposition": "data-free public projection",
+          "logical_path": "research/prose-boundary/results/increment1/gate-decision.json",
+          "sha256": "0afb138ec2e05822016f4debb74aeff43f49f4e83d7122ef70bfd0d14b52f554",
+          "size": 1831
+        },
+        {
+          "disposition": "data-free public projection",
+          "logical_path": "research/prose-boundary/results/increment2/selection-receipt.json",
+          "sha256": "cb27cb462cf9b33e42ce1e77db5ef5d9a33d0a3fc411aea39a08587ec8b1391b",
+          "size": 9751
+        },
+        {
+          "disposition": "data-free public projection",
+          "logical_path": "research/prose-boundary/results/increment2/differential-summary.json",
+          "sha256": "287319ffccaa357af88142f000c28fb373d45164b07231c86290f977a460c08c",
+          "size": 44281
+        },
+        {
+          "disposition": "data-free public projection",
+          "logical_path": "research/prose-boundary/results/increment2/challenger-decision.json",
+          "sha256": "8c056bc94cf514c6fe46277998deb3dd5d4208a80ac2727695ec5f818863c68f",
+          "size": 1121
+        },
+        {
+          "disposition": "data-free public projection",
+          "logical_path": "research/prose-boundary/REPORT.md",
+          "sha256": "7458ac7afdeb3726e2c4c40a10cad3fe0fe8a42a4aa04970a76ee21a0ed3e540",
+          "size": 20256
+        }
+      ],
+      "evidence_status": "public-data-free",
+      "public_report": "research/prose-boundary/REPORT.md",
+      "public_configuration": "research/prose-boundary/config/experiment-008a.json",
+      "public_metrics": "research/prose-boundary/results/increment1/summary.json",
+      "source_manifest": "none (no private source; committed data-free research subtree)",
+      "child_runs": [],
+      "conclusion": "GO: on 50 frozen fixtures x 3 profiles (1,288 parser events) all 8 hard invariants hold (exact source-range fidelity, no UTF-8 bisection, zero protected-region exposures under the documented D0 autolink rule, zero missing prose bytes, deterministic bounded recovery, stock-CLI cross-check). On 100 deterministically selected preserved outputs (2,670 unique texts; 100 percent plain prose - recorded representativeness limitation) the differential against the current regex protection is 22 disagreement spans, all class 7 (18 number, 4 upper-identifier; 110 bytes), zero safety-class false exposures; markdown-rs challenger NOT_TRIGGERED. Structural qualification only: not linguistic acceptance, not production integration; 008-c (parser-first protection architecture) follows on the same PR; objective 009 reserved.",
+      "pending_evidence": [
+        "008-c: parser-first protection architecture with 4-way rule classification and differential regression gates",
+        "009: fresh human-labelled target-distribution linguistic confirmation of the frozen effective pipeline"
       ]
     }
   ]
