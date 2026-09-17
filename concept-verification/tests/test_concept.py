@@ -4,6 +4,8 @@ from __future__ import annotations
 
 import http.client
 import json
+import select
+import socket
 import sqlite3
 import sys
 import tempfile
@@ -22,7 +24,7 @@ from eval.collect import build_codex_command, main as collect_main  # noqa: E402
 from eval.review_sheet import main as review_sheet_main  # noqa: E402
 from eval.run_eval import _evaluate  # noqa: E402
 from protected import protected_intervals  # noqa: E402
-from proxy import ConceptProxy, RepairEngine, transform_sse  # noqa: E402
+from proxy import ConceptProxy, ProxyError, RepairEngine, _bounded_read, transform_sse  # noqa: E402
 from qwen_client import ReviewerError, parse_proposal  # noqa: E402
 from repair import accept, apply_edits  # noqa: E402
 
@@ -316,6 +318,155 @@ class ConceptTests(unittest.TestCase):
             proxy.server_close()
             upstream_thread.join(2)
             upstream.server_close()
+
+    _STATUS_SSE_HEADERS = b"HTTP/1.1 200 OK\r\nContent-Type: text/event-stream\r\n\r\n"
+
+    def _single_segment_sse_response(
+        self, status_headers: bytes, body: bytes
+    ) -> tuple[http.client.HTTPResponse, socket.socket, socket.socket]:
+        """Real http.client response plumbing over a socketpair.
+
+        Status, headers and body are sent as one segment, so ``begin()``
+        (the same status/header parsing as ``getresponse``) over-reads the
+        body into the buffered reader while the raw socket stays quiet.
+        """
+        client_socket, server_socket = socket.socketpair()
+        server_socket.sendall(status_headers + body)
+        client_socket.settimeout(5.0)
+        response = http.client.HTTPResponse(client_socket)
+        response.begin()
+        return response, client_socket, server_socket
+
+    def test_bounded_read_drains_buffered_terminal_event_on_quiet_socket(self) -> None:
+        body = (
+            b": keep this comment\n\n"
+            b'event: unknown\ndata: {"type":"unknown.event"}\n\n'
+            b'data: {"type":"response.completed","response":{}}\n\n'
+        )
+        response, client_socket, server_socket = self._single_segment_sse_response(
+            self._STATUS_SSE_HEADERS, body
+        )
+        try:
+            raw_socket = response.fp.raw._sock
+            ready, _, _ = select.select([raw_socket], [], [], 0.2)
+            self.assertFalse(ready)  # precondition: wire quiet, no EOF, body buffered
+            started = time.monotonic()
+            out = _bounded_read(response, 1_000_000, 2.0, require_complete_sse=True)
+            self.assertLess(time.monotonic() - started, 1.0)
+            self.assertEqual(out, body)
+        finally:
+            client_socket.close()
+            server_socket.close()
+
+    def test_bounded_read_negative_paths_fail_without_success(self) -> None:
+        # Malformed SSE JSON is rejected, not silently kept.
+        response, a, b = self._single_segment_sse_response(
+            self._STATUS_SSE_HEADERS, b"data: {broken\n\n"
+        )
+        try:
+            with self.assertRaisesRegex(ProxyError, "malformed"):
+                _bounded_read(response, 1_000_000, 2.0, require_complete_sse=True)
+        finally:
+            a.close()
+            b.close()
+        # Bodies over the byte bound are rejected before completion.
+        response, a, b = self._single_segment_sse_response(self._STATUS_SSE_HEADERS, b"x" * 40)
+        try:
+            with self.assertRaisesRegex(ProxyError, "exceeds capture bound"):
+                _bounded_read(response, 10, 2.0)
+        finally:
+            a.close()
+            b.close()
+        # EOF without a terminal event is an incomplete stream, never success.
+        response, a, b = self._single_segment_sse_response(
+            self._STATUS_SSE_HEADERS, b'data: {"type":"response.created"}\n\n'
+        )
+        b.close()
+        try:
+            with self.assertRaisesRegex(ProxyError, "incomplete"):
+                _bounded_read(response, 1_000_000, 2.0, require_complete_sse=True)
+        finally:
+            a.close()
+        # An open connection with no terminal event hits the capture deadline.
+        response, a, b = self._single_segment_sse_response(
+            self._STATUS_SSE_HEADERS, b'data: {"type":"response.created"}\n\n'
+        )
+        started = time.monotonic()
+        try:
+            with self.assertRaisesRegex(ProxyError, "timeout"):
+                _bounded_read(response, 1_000_000, 0.3, require_complete_sse=True)
+        finally:
+            a.close()
+            b.close()
+        self.assertLessEqual(time.monotonic() - started, 1.5)
+        # Known-length bodies keep the plain finite-body behavior.
+        response, a, b = self._single_segment_sse_response(
+            b"HTTP/1.1 200 OK\r\nContent-Type: application/json\r\nContent-Length: 5\r\n\r\n",
+            b"hello",
+        )
+        try:
+            self.assertEqual(response.length, 5)
+            self.assertEqual(_bounded_read(response, 100, 2.0), b"hello")
+        finally:
+            a.close()
+            b.close()
+
+    def test_proxy_delivers_buffered_terminal_event_without_eof(self) -> None:
+        source = (
+            b": keep this comment\n\n"
+            b'event: unknown\ndata: {"type":"unknown.event"}\n\n'
+            b'data: {"type":"response.completed","response":{}}\n\n'
+        )
+
+        status_headers = self._STATUS_SSE_HEADERS
+
+        class Upstream(BaseHTTPRequestHandler):
+            protocol_version = "HTTP/1.1"
+
+            def do_POST(self) -> None:  # noqa: N802
+                self.rfile.read(int(self.headers["Content-Length"]))
+                # One write: status, headers and the complete SSE body share a
+                # single segment, so the proxy client's header parsing
+                # over-reads the body into its buffered reader. The connection
+                # is then held open by the keep-alive loop: no EOF is ever
+                # available during the exchange.
+                self.wfile.write(status_headers + source)
+                self.wfile.flush()
+                time.sleep(1.5)
+
+            def log_message(self, *_args: object) -> None:
+                return
+
+        class Engine:
+            def repair(self, value: str) -> str:
+                return value
+
+        upstream = HTTPServer(("127.0.0.1", 0), Upstream)
+        proxy = ConceptProxy(
+            ("127.0.0.1", 0), f"http://127.0.0.1:{upstream.server_port}", Engine(), timeout=5.0
+        )
+        upstream_thread = threading.Thread(target=upstream.handle_request)
+        proxy_thread = threading.Thread(target=proxy.handle_request)
+        upstream_thread.start()
+        proxy_thread.start()
+        try:
+            client = http.client.HTTPConnection("127.0.0.1", proxy.server_port, timeout=2)
+            client.request("POST", "/v1/responses", body=b"{}", headers={"Content-Length": "2"})
+            started = time.monotonic()
+            response = client.getresponse()
+            result = response.read()
+            self.assertEqual(response.status, 200)
+            self.assertEqual(result, source)
+            self.assertIn(b"response.completed", result)
+            self.assertLess(time.monotonic() - started, 1.5)  # delivered before the hold ends
+            client.close()
+            proxy_thread.join(2)
+            self.assertFalse(proxy_thread.is_alive())
+        finally:
+            proxy.server_close()
+            upstream.server_close()
+            proxy_thread.join(2)
+            upstream_thread.join(2)
 
     def test_proxy_incomplete_stream_times_out_and_normalizes_path(self) -> None:
         paths: list[str] = []

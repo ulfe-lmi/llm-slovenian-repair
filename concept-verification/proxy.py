@@ -83,7 +83,15 @@ def _bounded_read(
     *,
     require_complete_sse: bool = False,
 ) -> bytes:
-    """Read within byte/time limits, stopping at a complete SSE event."""
+    """Read within byte/time limits, stopping at a complete SSE event.
+
+    Readiness spans two layers: header parsing (``getresponse``) may already
+    have over-read body bytes into the buffered reader, which ``select`` on
+    the raw socket cannot see.  A non-blocking drain consumes buffered and
+    immediately available bytes first, so a fully delimited terminal event
+    already in the buffer terminates the read without EOF even while the
+    HTTP/1.1 connection stays open.
+    """
     if response.length is not None:
         if response.length > maximum:
             raise ProxyError("upstream response exceeds capture bound")
@@ -98,28 +106,62 @@ def _bounded_read(
     chunks: list[bytes] = []
     total = 0
     deadline = time.monotonic() + timeout
-    while True:
-        remaining = deadline - time.monotonic()
-        if remaining <= 0:
-            raise ProxyError("upstream capture timeout")
-        ready, _, _ = select.select([raw_socket], [], [], min(remaining, 0.5))
-        if not ready:
-            continue
-        piece = response.read1(min(65536, maximum - total + 1))
-        if not piece:
+    previous_timeout = raw_socket.gettimeout()
+
+    def probe() -> bool:
+        # Non-consuming readiness check across both layers: a non-blocking
+        # peek fills the buffered reader from the socket at most once and
+        # never advances the position, so it reports bytes the reader
+        # already holds (header parsing may have over-read the body) as
+        # well as immediately available wire bytes.
+        raw_socket.settimeout(0.0)
+        try:
+            return bool(response.fp.peek(1))
+        except (BlockingIOError, InterruptedError):
+            return False
+        finally:
+            raw_socket.settimeout(previous_timeout)
+
+    def drain() -> bytes:
+        # Consume what the probe (or select) found. read1 is only called
+        # while data is known to be available: an empty read1 would make
+        # HTTPResponse close the connection, which must be reserved for a
+        # genuine EOF.
+        raw_socket.settimeout(0.0)
+        try:
+            return response.read1(min(65536, maximum - total + 1))
+        except (BlockingIOError, InterruptedError):
+            return b""
+        finally:
+            raw_socket.settimeout(previous_timeout)
+
+    try:
+        while True:
+            remaining = deadline - time.monotonic()
+            if remaining <= 0:
+                raise ProxyError("upstream capture timeout")
+            if not probe():
+                ready, _, _ = select.select([raw_socket], [], [], remaining)
+                if not ready:
+                    continue
+            piece = drain()
+            if not piece:
+                # Readable, but nothing came back: the connection closed.
+                raw = b"".join(chunks)
+                if require_complete_sse:
+                    raise ProxyError("upstream SSE is incomplete")
+                return raw
+            total += len(piece)
+            if total > maximum:
+                raise ProxyError("upstream response exceeds capture bound")
+            chunks.append(piece)
             raw = b"".join(chunks)
             if require_complete_sse:
-                raise ProxyError("upstream SSE is incomplete")
-            return raw
-        total += len(piece)
-        if total > maximum:
-            raise ProxyError("upstream response exceeds capture bound")
-        chunks.append(piece)
-        raw = b"".join(chunks)
-        if require_complete_sse:
-            complete = _complete_prefix(raw)
-            if complete is not None:
-                return complete
+                complete = _complete_prefix(raw)
+                if complete is not None:
+                    return complete
+    finally:
+        raw_socket.settimeout(previous_timeout)
 
 
 def _nested_output_text(value: object) -> list[tuple[dict[str, object], str]]:

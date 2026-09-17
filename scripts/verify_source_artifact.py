@@ -615,25 +615,25 @@ def _verify_artifact_entry(
                         _artifact_fail("zip-member-count-limit")
                     names: set[str] = set()
                     total_uncompressed = 0
-                    for info in infos:
-                        if not _safe_member_name(info.filename):
+                    for member in infos:
+                        if not _safe_member_name(member.filename):
                             _artifact_fail("zip-unsafe-member-name")
-                        if info.filename in names:
+                        if member.filename in names:
                             _artifact_fail("zip-duplicate-member")
-                        names.add(info.filename)
-                        mode = (info.external_attr >> 16) & 0o170000
+                        names.add(member.filename)
+                        mode = (member.external_attr >> 16) & 0o170000
                         if mode == stat.S_IFLNK:
                             _artifact_fail("zip-symlink-member")
-                        if info.is_dir() or (mode and mode != stat.S_IFREG):
+                        if member.is_dir() or (mode and mode != stat.S_IFREG):
                             _artifact_fail("zip-nonregular-member")
-                        if info.flag_bits & 0x1:
+                        if member.flag_bits & 0x1:
                             _artifact_fail("zip-encrypted-member")
-                        if info.file_size > limits.max_member_uncompressed_size:
+                        if member.file_size > limits.max_member_uncompressed_size:
                             _artifact_fail("zip-member-size-limit")
-                        compressed_size = max(info.compress_size, 1)
-                        if info.file_size / compressed_size > limits.max_compression_ratio:
+                        compressed_size = max(member.compress_size, 1)
+                        if member.file_size / compressed_size > limits.max_compression_ratio:
                             _artifact_fail("zip-compression-ratio-limit")
-                        total_uncompressed += info.file_size
+                        total_uncompressed += member.file_size
                         if total_uncompressed > limits.max_total_uncompressed_size:
                             _artifact_fail("zip-total-size-limit")
         except zipfile.BadZipFile as exc:
