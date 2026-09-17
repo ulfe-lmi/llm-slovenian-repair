@@ -1,0 +1,165 @@
+{
+ "schema": "008a-experiment-config/1",
+ "frozen_note": "Frozen before any parser execution on the fixture suite or the representative corpus (order 008-a, requirement 3). Post-hoc changes require a recorded strategy-approved rationale.",
+ "order": "008-a",
+ "candidate": {
+  "name": "pulldown-cmark",
+  "version": "0.13.4",
+  "registry_checksum_sha256": "e9f068eba8e7071c5f9511831b44f32c740d5adf574e990f946ddb53db2f314e",
+  "identity_file": "research/prose-boundary/identity/candidate-identity.json"
+ },
+ "profiles": {
+  "P0": {"options": [], "description": "CommonMark core (Options::empty())"},
+  "P1": {"options": ["ENABLE_TABLES", "ENABLE_STRIKETHROUGH", "ENABLE_TASKLISTS", "ENABLE_MATH"], "description": "core + tables + strikethrough + tasklists + math"},
+  "P2": {"options": ["ENABLE_TABLES", "ENABLE_STRIKETHROUGH", "ENABLE_TASKLISTS", "ENABLE_MATH", "ENABLE_YAML_STYLE_METADATA_BLOCKS"], "description": "P1 + YAML-style metadata blocks (front matter is named by the frozen structural policy)"}
+ },
+ "measurement_adapter": {
+  "path": "research/prose-boundary/adapter/",
+  "label": "MEASUREMENT ADAPTER - research-only, NOT a runtime interface",
+  "rationale": "The stock CLI --events mode emits offset ranges only in Rust Debug text format, which is not a stable machine-readable contract for a deterministic evaluator. The adapter uses the identical pinned crate (0.13.4, same registry checksum) and adds no dependencies; the stock CLI is still used for independent offset cross-checks.",
+  "binary": "prose-boundary-meas",
+  "input": "complete UTF-8 document on stdin",
+  "output": "one JSON line per event: {\"i\":<idx>,\"k\":\"<kind token>\",\"s\":<start_byte>,\"e\":<end_byte>} followed by {\"eof\":true}",
+  "exit_codes": {"0": "ok", "3": "stdin not valid UTF-8", "5": "usage or write error"}
+ },
+ "structural_policy": {
+  "candidate_rule": "A Text event is candidate prose iff its open-tag ancestor set intersects PROSE_CONTAINERS and does not intersect NON_PROSE_CONTAINERS.",
+  "PROSE_CONTAINERS": ["S.Para", "S.Head", "S.Item", "S.Quote", "S.TableCell", "S.Link", "S.Emph", "S.Strong"],
+  "NON_PROSE_CONTAINERS": ["S.CodeBlock:Fenced", "S.CodeBlock:Indented", "S.HtmlBlock", "S.Image", "S.Meta"],
+  "notes": [
+   "Link destinations/titles and image structure are never Text events, so they are protected by construction.",
+   "Strikethrough/superscript/subscript content is conservatively suppressed (policy names emphasis/strong only); recorded as a tradeoff, not a failure.",
+   "Markdown syntax/delimiters, list markers, heading markers, quote markers, line endings, table pipes and math delimiters are never Text events and thus never candidate prose.",
+   "Bare JSON, YAML/TOML/config, shell, paths, env vars, identifier-heavy tokens, TeX and dialect-missed URLs are residual semantic categories: exposure is the bounded second-stage problem, not a safety failure."
+  ]
+ },
+ "coordinate_contract": {
+  "unit": "byte offsets into the original UTF-8 input bytes",
+  "invariants": [
+   "0 <= s <= e <= len(input_bytes) for every event range",
+   "s and e lie on UTF-8 code-point boundaries (no code-point bisection)",
+   "input_bytes[s:e] is the exact intended original source slice",
+   "byte<->code-point mapping is deterministic and exactly reversible: cp = len(bytes[:s].decode('utf-8')); byte = len(text[:cp].encode('utf-8'))"
+  ],
+  "disqualification": "Any source-coordinate failure is an immediate NO-GO until explained and repaired upstream or through a trivial mapping layer (order predeclared acceptance, Hard)."
+ },
+ "increment1": {
+  "predeclared_order": [
+   "1 install/pin candidate in reproducible machine-local environment",
+   "2 establish exact CLI/library identity (version, checksum, tag, license, MSRV, dependencies)",
+   "3 run difficult-case fixture suite (50 fixtures, 38 required classes + 12 extras)",
+   "4 verify event semantics",
+   "5 verify exact source ranges",
+   "6 verify UTF-8 behaviour",
+   "7 inspect malformed-input recovery",
+   "8 inspect math behaviour",
+   "9 STOP for strategy review (gate checkpoint)"
+  ],
+  "stop_condition": "If the fundamental source-range premise fails (any Hard invariant violation on the fixture suite), stop the round and report NO-GO evidence; do not continue merely because work was planned.",
+  "gate_checkpoint": {
+   "description": "Increment 1 evidence is durably committed and the predeclared conditions below are evaluated before any Increment 2 work. This round executes as a single reported round (the order's declared single-report publication structure), so the strategy review gate is enforced by the strategy final-head review before merge; the gate-crossing decision and evidence are recorded in results/increment1/gate-decision.json and in the OAP report.",
+   "proceed_conditions": [
+    "Hard: 100% exact source-range fidelity on the fixture suite (all profiles)",
+    "Hard: no range splits a UTF-8 code point (all profiles)",
+    "Hard: structurally recognized code and math are never exposed as candidate prose (P1/P2 for math; all profiles for code/HTML)",
+    "Hard: link destinations remain protected; prose-bearing containers expose textual leaves",
+    "Hard: processing bounded and deterministic (identical rerun -> identical bytes)",
+    "Stock-CLI cross-check: adapter event ranges agree with the stock CLI --events ranges on all fixtures"
+   ]
+  },
+  "stock_cli_crosscheck": {
+   "binary": "pulldown-cmark (cargo install pulldown-cmark --version 0.13.4, private root)",
+   "invocation": "--events plus the profile flags --enable-tables --enable-strikethrough --enable-tasklists --enable-math for P1 (and the P2-equivalent set where applicable); P0 = no flags",
+   "comparison": "multiset of (event-top-kind, start_byte, end_byte) must match the adapter output"
+  }
+ },
+ "increment2": {
+  "precondition": "Increment 1 gate checkpoint proceeds (all proceed_conditions true).",
+  "corpus_selection": {
+   "sources_logical_roots": [
+    "007-i-contextual-validator.20260912",
+    "007-j-levenshtein-one-contextual-validator-recovery.54KmUx",
+    "007-m-rank-ambiguous-levenshtein-candidates-recovery.ec2962"
+   ],
+   "resolution": "roots resolved at run time from the machine's persistent research runtime parent (private path, never committed); case files cases/dassle-spelling/*.json and cases/dassle-spelling-preservation/*.json; field dataset.input is the preserved real LLM output",
+   "population": "unique dataset.input texts across the three roots and both benchmark directories, deduplicated by sha256 of the text bytes",
+   "sample_size": 100,
+   "sampling": "first 100 entries in ascending sha256 order of the unique population (deterministic, non-curated)",
+   "constraints": [
+    "no new model generation",
+    "no future objective-009 confirmation examples",
+    "raw text never leaves the private root; receipt carries counts/categories/hashes only"
+   ]
+  },
+  "differential": {
+   "side_a": "research/curated/protected.py protected_intervals (current hand-written protection, code-point coordinates)",
+   "side_b": "adapter profile P2 candidate-prose set (frozen structural policy), byte coordinates mapped to code points",
+   "disagreement_unit": "maximal span of the symmetric difference of the two protected sets",
+   "consequence_classes": {
+    "1": "parser correctly exposes over-protected prose (B exposes, A protected, content prose-like)",
+    "2": "parser correctly protects previously exposed non-prose (B protected, A exposed, content machine-like)",
+    "3": "parser falsely exposes machine-significant content (B exposes, A protected, content parser-recognized-machine: code/HTML/math/link-dest/image) - SAFETY class",
+    "4": "parser unnecessarily suppresses valid prose (B protected, A exposed, content prose-like)",
+    "5": "source-coordinate mismatch (both protect the same construct but boundaries differ)",
+    "6": "malformed-input safety difference (example flagged malformed; protection state differs)",
+    "7": "expected residual semantic category (content in residual set: paren/bracket TeX, begin-end TeX, bare JSON, YAML/TOML/config, shell, paths, env vars, identifier-heavy tokens, numbers, dialect-missed URLs/autolinks)",
+    "8": "unresolved needing inspection (classifier cannot decide deterministically)"
+   },
+   "classification_priority": ["3", "6", "5", "4", "1", "2", "7", "8"],
+   "content_kind_rules": {
+    "prose": "tokens are alphabetic (Latin incl. Slovenian diacritics), no digits/underscore/structural punctuation, >=60% alphabetic bytes",
+    "machine_priority_order": ["url", "path", "shell", "tex", "structured", "identifier", "number", "code_like"],
+    "parser_recognized_machine": ["code", "html", "math", "link_dest", "image"],
+    "residual_semantic": ["paren_tex", "bracket_tex", "begintex", "bare_json", "yaml_toml_config", "shell", "path", "env_var", "identifier", "number", "dialect_url"],
+    "span_rule": "classify maximal whitespace-free sub-tokens; span kind = majority kind with priority-order tiebreak; if mixed and no majority, kind = mixed"
+   }
+  },
+  "challenger": {
+   "candidate": "markdown-rs 1.0.0",
+   "trigger_conditions": [
+    "incorrect or unusable source ranges",
+    "relevant GFM incompatibility",
+    "unsafe malformed-input handling",
+    "unacceptable math/currency behaviour",
+    "structural misclassification affecting actual Qwen output",
+    "another failure markdown-rs plausibly addresses"
+   ],
+   "decision_recorded": "trigger decision (triggered/not-triggered with evidence) is recorded either way in results/increment2/challenger-decision.json",
+   "note": "tree-sitter-markdown is not revived absent materially new evidence contradicting the maintainers' warning; Pandoc is a diagnostic oracle only, not a runtime candidate"
+  },
+  "acceptance": {
+   "hard": [
+    "100% exact source-range fidelity on the deterministic fixture suite",
+    "no range splits a UTF-8 sequence",
+    "structurally recognized code and math are never exposed as candidate prose",
+    "HTML/metadata protected per frozen policy; link destinations remain protected",
+    "prose-bearing Markdown containers still expose their textual leaves",
+    "malformed structural cases follow documented deterministic behaviour",
+    "no parse/re-render/reconstruction requirement; processing bounded and deterministic"
+   ],
+   "safety": "zero false exposures of protected machine content in the frozen adversarial suite for constructs the parser claims to recognize structurally",
+   "coverage": "report actual over-protection losses in headings/lists/blockquotes/table cells/link labels/emphasis-strong; no arbitrary percentage",
+   "residual": "GO requires remaining exposed machine-significant content to fall into the bounded residual set, not evidence of fundamental unsuitability"
+  },
+  "outcome_states": {
+   "GO": "structural/source-range contract validated; residual gaps bounded and suitable for a second stage",
+   "CONDITIONAL_GO": "core parser suitable; one or more bounded questions need a targeted follow-up",
+   "NO_GO": "fundamental assumption fails (unreliable source spans, unsafe recovery on relevant constructs, unacceptable common-format failures, or residual problem not actually small); trigger the challenger path"
+  }
+ },
+ "privacy": {
+  "rules": [
+   "no raw private LLM outputs in Git or public reports",
+   "public artifacts carry counts/categories/hashes only",
+   "no private absolute paths in committed documents",
+   "selection receipt: counts/categories/hashes only"
+  ]
+ },
+ "determinism": {
+  "rules": [
+   "fixed seedless sampling (sha256 ascending order)",
+   "no wall-clock values in any committed aggregate that affects classification",
+   "identical rerun of every committed tool on the same inputs produces identical output bytes"
+  ]
+ }
+}

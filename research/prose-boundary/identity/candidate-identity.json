@@ -1,0 +1,86 @@
+{
+ "schema": "008a-candidate-identity/1",
+ "label": "MEASUREMENT ADAPTER candidate identity (research-only, not a runtime interface)",
+ "candidate": {
+  "name": "pulldown-cmark",
+  "version": "0.13.4",
+  "registry": {
+   "provider": "crates.io",
+   "sparse_index_path": "pu/ll/pulldown-cmark",
+   "sparse_index_url": "https://index.crates.io/pu/ll/pulldown-cmark",
+   "version_record_url": "https://crates.io/api/v1/crates/pulldown-cmark/0.13.4",
+   "download_url": "https://static.crates.io/crates/pulldown-cmark/pulldown-cmark-0.13.4.crate",
+   "registry_checksum_sha256": "e9f068eba8e7071c5f9511831b44f32c740d5adf574e990f946ddb53db2f314e",
+   "ordered_checksum_sha256": "e9f068eba8e7071c5f9511831b44f32c740d5adf574e990f946ddb53db2f314e",
+   "checksum_match": true,
+   "yanked": false,
+   "published_utc": "2026-05-20T08:48:23Z",
+   "local_crate_sha256": "e9f068eba8e7071c5f9511831b44f32c740d5adf574e990f946ddb53db2f314e",
+   "local_crate_bytes": 155043,
+   "cratesio_recorded_crate_size": 155043
+  },
+  "upstream": {
+   "repository": "pulldown-cmark/pulldown-cmark",
+   "tag": "v0.13.4",
+   "tag_object_sha256_git": "38e4d08f14ec4bd9783270e9623db7681ebed968",
+   "tag_commit_message": "chore: cargo update",
+   "tag_commit_date_utc": "2026-05-20T08:47:15Z",
+   "default_branch": "main",
+   "repository_license_spdx": "MIT"
+  },
+  "license": {
+   "spdx": "MIT",
+   "evidence": [
+    "crates.io version record: license=MIT (crates-io-version-record.json)",
+    "upstream repository LICENSE at tag v0.13.4: 'The MIT License' (LICENSE-at-v0.13.4, sha256 c4f10f55904bdb9f27d3fbf94c354926d6cfe8b982276e556238c258941b243b)",
+    "crate Cargo.toml: license = \"MIT\""
+   ],
+   "repository_license_git_blob_sha": "cd8655ebdbf8164037ab179a2d64f307ceac94bf",
+   "note": "Repository LICENSE header reads 'Copyright 2015 Google Inc.' (inherited from cmark-gfm lineage); SPDX classification is MIT per crates.io, repository, and crate manifest."
+  },
+  "msrv": {
+   "rust_version_declared": "1.71.1",
+   "sparse_index_rust_version": "1.71.1",
+   "local_rustc": "1.75.0 (82e1608df 2023-12-21) (built from a source tarball)",
+   "local_cargo": "1.75.0",
+   "satisfied": true
+  },
+  "dependency_set": {
+   "adapter_profile": "pulldown-cmark = { version = \"=0.13.4\", default-features = false }",
+   "locked_transitive": [
+    {
+     "name": "bitflags",
+     "version": "2.13.2",
+     "checksum": "3ded4057c258ba199e2d26386d3af3780957ecaee6c4ef4041c6b4b8b97c0b06"
+    },
+    {
+     "name": "memchr",
+     "version": "2.8.3",
+     "checksum": "cf8baf1c55e62ffcace7a9f06f4bd9cd3f0c4beb022d3b367256b91b87513d98"
+    },
+    {
+     "name": "unicase",
+     "version": "2.9.0",
+     "checksum": "dbc4bc3a9f746d862c45cb89d705aa10f187bb96c76001afab07a0d35ce60142"
+    }
+   ],
+   "default_features_disabled_reason": "adapter needs only the pull-parser lib (no getopts CLI, no html escaper)"
+  },
+  "installation_mechanism": {
+   "adapter": "cargo build --release (Cargo.lock pinned, default-features=false); target dir kept in private scratch, binary is a MEASUREMENT ADAPTER",
+   "stock_cli": "cargo install pulldown-cmark --version 0.13.4 --root <private scratch>/cli (installed binary 'pulldown-cmark' for cross-check of offsets; private root)",
+   "pinned_by": "exact version =0.13.4 in adapter Cargo.toml + registry checksum in Cargo.lock"
+  },
+  "measurement_adapter_binary_sha256": "5df9a11d56b5bdec90c3ca09298802723975306f77e43e74ad1a72eb427c44bf",
+  "measurement_adapter_note": "Adapter binary rebuilt once during authoring to emit a distinct 'InlineHtml' kind token (pulldown-cmark Event::InlineHtml) separate from block 'Html', so the deterministic evaluator can cross-check against the stock CLI --events top-level event names. No dependency or candidate change: still pulldown-cmark =0.13.4 with the same registry checksum; the stock-CLI cross-check covers the identical crate."
+ },
+ "raw_evidence_sha256": {
+  "sparse-index-pulldown-cmark.jsonl": "0f994164e91e19a858453eed4e35d2456b29566f2ef8d3ea58e0f7812da27d9a",
+  "crates-io-version-record.json": "2e76e6b2a80ca3a6fb4ccedfffec6acc494e6a3b0746d93d9ebde95e30c925e0",
+  "pulldown-cmark-0.13.4.crate": "e9f068eba8e7071c5f9511831b44f32c740d5adf574e990f946ddb53db2f314e",
+  "github-tag-commit.json": "92a97fa58c432515e481077815d8a789059910344247b5575000919510d1ce28",
+  "LICENSE-at-v0.13.4": "c4f10f55904bdb9f27d3fbf94c354926d6cfe8b982276e556238c258941b243b",
+  "cargo-tree.txt": "4759467829de9962528eff32cb3155fef543ade615e0fd24954a0644585bcc2f"
+ },
+ "privacy": "Raw evidence files retained in private root; only hashes and non-sensitive identity fields committed. No private paths committed."
+}
