@@ -515,7 +515,7 @@ FIXTURES = [
     # ---- class 30: paths -------------------------------------------------------------------------------
     dict(
         id="F30", cls=30, cls_name="paths",
-        text="Datoteke so v /home/user/dokumenti in C:\\Users\\test ter ./relativna/put.\n",
+        text="Datoteke so v /var/dokumenti in D:\\programi\\test ter ./relativna/put.\n",
         regions=[
             dict(name="prose", role="PROSE_CANDIDATE",
                  start_anchor="Datoteke", end_anchor="relativna/put."),

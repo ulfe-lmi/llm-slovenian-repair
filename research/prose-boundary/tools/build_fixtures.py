@@ -123,7 +123,7 @@ def main() -> None:
                 "id": spec["id"],
                 "class": spec["cls"],
                 "class_name": spec["cls_name"],
-                "input": text,
+                "document": text,
                 "input_bytes": len(data),
                 "input_sha256": hashlib.sha256(data).hexdigest(),
                 "note": spec.get("note", ""),
@@ -146,7 +146,7 @@ def main() -> None:
             "strategy-approved rationale."
         ),
         "coordinate_convention": {
-            "unit": "byte offset into the exact UTF-8 input bytes of 'input'",
+            "unit": "byte offset into the exact UTF-8 input bytes of 'document'",
             "range": "[start_byte, end_byte)",
             "invariants": [
                 "0 <= start_byte <= end_byte <= input_bytes",

@@ -1,7 +1,12 @@
 {
  "schema": "008a-increment1-summary/1",
- "fixture_file_sha256": "a2325de9a0bb4f04e84c2227710b5b62dad6e733503c08cab43e47839fd7cc00",
- "config_sha256": "622a1479d46cfce956267c546e3997eda460f084a555aeced7b88ae69a8f255f",
+ "fixture_file_sha256": "ad2fcef95dc044e941bf346c64dc5e71d42b43a75e4334f88a0dcd012a26adc9",
+ "config_sha256": "c02a415a064d731672d98a4e0b0f6e829356323dbb00b409cc05fddd89db9300",
+ "event_file_sha256": {
+  "P0": "45ad1b0ff79e5ed5c3c14688207d41b63cfa06d663c913c003e386c6e5945c9f",
+  "P1": "8ae46ba654872576810d62fcf51c0cf90d282fa18e63da53d866ee513ca1bb27",
+  "P2": "f3a103fe0b1ffa19c6c869e249584555fc4e5fc6f3985d7581f3eef25ec38346"
+ },
  "adapter_bin_sha256": "5df9a11d56b5bdec90c3ca09298802723975306f77e43e74ad1a72eb427c44bf",
  "fixtures": 50,
  "profiles": [
@@ -4428,14 +4433,14 @@
        "name": "prose",
        "role": "PROSE_CANDIDATE",
        "start": 0,
-       "end": 72,
+       "end": 69,
        "ok": true,
        "missing_bytes": 0
       }
      ],
      "policy_ok": true,
      "cli_crosscheck_ok": true,
-     "candidate_bytes": 72
+     "candidate_bytes": 69
     },
     "P1": {
      "adapter_exit": 0,
@@ -4445,14 +4450,14 @@
        "name": "prose",
        "role": "PROSE_CANDIDATE",
        "start": 0,
-       "end": 72,
+       "end": 69,
        "ok": true,
        "missing_bytes": 0
       }
      ],
      "policy_ok": true,
      "cli_crosscheck_ok": true,
-     "candidate_bytes": 72
+     "candidate_bytes": 69
     },
     "P2": {
      "adapter_exit": 0,
@@ -4462,14 +4467,14 @@
        "name": "prose",
        "role": "PROSE_CANDIDATE",
        "start": 0,
-       "end": 72,
+       "end": 69,
        "ok": true,
        "missing_bytes": 0
       }
      ],
      "policy_ok": true,
      "cli_crosscheck_ok": true,
-     "candidate_bytes": 72
+     "candidate_bytes": 69
     }
    }
   },

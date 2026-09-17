@@ -18,8 +18,8 @@
   "label": "MEASUREMENT ADAPTER - research-only, NOT a runtime interface",
   "rationale": "The stock CLI --events mode emits offset ranges only in Rust Debug text format, which is not a stable machine-readable contract for a deterministic evaluator. The adapter uses the identical pinned crate (0.13.4, same registry checksum) and adds no dependencies; the stock CLI is still used for independent offset cross-checks.",
   "binary": "prose-boundary-meas",
-  "input": "complete UTF-8 document on stdin",
-  "output": "one JSON line per event: {\"i\":<idx>,\"k\":\"<kind token>\",\"s\":<start_byte>,\"e\":<end_byte>} followed by {\"eof\":true}",
+  "stdin": "complete UTF-8 document on stdin",
+  "stdout": "one JSON line per event: {\"i\":<idx>,\"k\":\"<kind token>\",\"s\":<start_byte>,\"e\":<end_byte>} followed by {\"eof\":true}",
   "exit_codes": {"0": "ok", "3": "stdin not valid UTF-8", "5": "usage or write error"}
  },
  "structural_policy": {

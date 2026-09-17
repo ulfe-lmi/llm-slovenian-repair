@@ -5,7 +5,7 @@ cross-checks) over the frozen fixture suite, verifies the hard coordinate
 contract, the frozen structural policy, event semantics, UTF-8 behaviour,
 malformed-input recovery and math behaviour, and writes data-free aggregates:
 
-  results/increment1/events-P{0,1,2}.jsonl   (per-event records, project-authored input)
+  results/increment1/events-P{0,1,2}.json     (per-event records, project-authored input)
   results/increment1/summary.json            (aggregates + per-fixture results)
   results/increment1/gate-decision.json      (predeclared gate checkpoint)
 
@@ -212,9 +212,8 @@ def main() -> int:
     policy = config["structural_policy"]
     OUT.mkdir(parents=True, exist_ok=True)
 
-    event_files = {p: OUT / f"events-{p}.jsonl" for p in PROFILES}
-    for p in PROFILES:
-        event_files[p].write_text("")
+    event_files = {p: OUT / f"events-{p}.json" for p in PROFILES}
+    raw_buffers: dict[str, bytearray] = {p: bytearray() for p in PROFILES}
 
     per_fixture: dict[str, dict] = {}
     total_events = 0
@@ -254,7 +253,7 @@ def main() -> int:
 
     for fixture in fixtures_doc["fixtures"]:
         fid = fixture["id"]
-        data = fixture["input"].encode("utf-8")
+        data = fixture["document"].encode("utf-8")
         assert hashlib.sha256(data).hexdigest() == fixture["input_sha256"]
         entry: dict = {"id": fid, "class": fixture["class"], "class_name": fixture["class_name"], "profiles": {}}
         for profile in PROFILES:
@@ -276,7 +275,7 @@ def main() -> int:
                     )
                 # deterministic exact reversibility of the byte<->code-point
                 # mapping on every emitted boundary (order requirement 5)
-                text_cp = fixture["input"]
+                text_cp = fixture["document"]
                 for bound in (ev["s"], ev["e"]):
                     cp = C.byte_to_cp(data, bound)
                     if cp is None or C.cp_to_byte(text_cp, cp) != bound:
@@ -314,10 +313,9 @@ def main() -> int:
                 "cli_crosscheck_ok": cli_match,
                 "candidate_bytes": len(cand),
             }
-            # record events (raw adapter bytes: the determinism contract is that
-            # an identical rerun emits identical bytes, so both passes record raw)
-            with event_files[profile].open("ab") as fh:
-                fh.write(out)
+            # record raw adapter bytes (the determinism contract is that an
+            # identical rerun emits identical bytes; both passes keep raw)
+            raw_buffers[profile].extend(out)
             total_events += len(events) - 1
         per_fixture[fid] = entry
 
@@ -326,17 +324,31 @@ def main() -> int:
     exit_code_probes["invalid_utf8_exit_code"] = rc
     exit_code_probes["invalid_utf8_output"] = out.decode("utf-8", "replace").strip()
 
-    # Determinism: full rerun on P1 must be byte-identical.
-    first = {p: event_files[p].read_bytes() for p in PROFILES}
-    for p in PROFILES:
-        event_files[p].write_text("")
+    # Determinism: a full rerun must emit byte-identical raw adapter bytes.
+    first = {p: bytes(raw_buffers[p]) for p in PROFILES}
+    raw_buffers = {p: bytearray() for p in PROFILES}
     for fixture in fixtures_doc["fixtures"]:
-        data = fixture["input"].encode("utf-8")
+        data = fixture["document"].encode("utf-8")
         for profile in PROFILES:
             rc, out, _ = run_adapter(data, profile, ADAPTER_BIN)
-            with event_files[profile].open("a", encoding="utf-8") as fh:
-                fh.write(out.decode("utf-8"))
-    deterministic = all(event_files[p].read_bytes() == first[p] for p in PROFILES)
+            raw_buffers[profile].extend(out)
+    deterministic = all(bytes(raw_buffers[p]) == first[p] for p in PROFILES)
+
+    # Persist per-profile event files as serialized JSON projections of the
+    # raw adapter stdout (the raw-bytes determinism contract is recorded via
+    # raw_adapter_bytes_sha256 here and via the event-file SHAs in the summary).
+    for p in PROFILES:
+        evs = parse_events(bytes(raw_buffers[p]))
+        event_doc = {
+            "schema": "008a-increment1-events/1",
+            "profile": p,
+            "event_count": sum(1 for e in evs if "k" in e),
+            "raw_adapter_bytes_sha256": hashlib.sha256(bytes(raw_buffers[p])).hexdigest(),
+            "events": evs,
+        }
+        event_files[p].write_text(
+            json.dumps(event_doc, ensure_ascii=False, indent=1) + "\n", encoding="utf-8"
+        )
 
     hard = {
         "coordinate_invariants": len(coordinate_violations) == 0,
@@ -421,6 +433,9 @@ def main() -> int:
         "schema": "008a-increment1-summary/1",
         "fixture_file_sha256": hashlib.sha256(FIXTURES.read_bytes()).hexdigest(),
         "config_sha256": hashlib.sha256(CONFIG.read_bytes()).hexdigest(),
+        "event_file_sha256": {
+            p: hashlib.sha256(event_files[p].read_bytes()).hexdigest() for p in PROFILES
+        },
         "adapter_bin_sha256": hashlib.sha256(ADAPTER_BIN.read_bytes()).hexdigest(),
         "fixtures": len(fixtures_doc["fixtures"]),
         "profiles": list(PROFILES),

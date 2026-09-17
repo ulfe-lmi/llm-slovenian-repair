@@ -11,14 +11,17 @@ material). No raw private LLM text appears in this subtree.
 
 | Record | SHA-256 |
 | --- | --- |
-| `config/experiment-008a.json` (frozen) | `622a1479d46cfce956267c546e3997eda460f084a555aeced7b88ae69a8f255f` |
+| `config/experiment-008a.json` (frozen) | `c02a415a064d731672d98a4e0b0f6e829356323dbb00b409cc05fddd89db9300` |
 | `identity/candidate-identity.json` | `671d7cded433bbc0a3e1f60fcb4a2da7d89f2a79e254f6a5b57ac80eb38d9c0d` |
-| `fixtures/fixtures.json` (frozen suite) | `a2325de9a0bb4f04e84c2227710b5b62dad6e733503c08cab43e47839fd7cc00` |
-| `fixtures/authoring-corrections.md` | `8a106621d2dffb17498534b1c97eba252b318f8e513b490015140912e79fdd3a` |
-| `results/increment1/summary.json` | `06961c54a49a8e68f175153c46f60d869865fc8ac497c17c1e80cf556a5d333b` |
-| `results/increment1/gate-decision.json` | `f6813b7731e43c82454b9b996eb76cf1ed76b7e2ed9461cc96db96be476f9c03` |
+| `fixtures/fixtures.json` (frozen suite) | `ad2fcef95dc044e941bf346c64dc5e71d42b43a75e4334f88a0dcd012a26adc9` |
+| `fixtures/authoring-corrections.md` | `2514ec8e3a14101570dee2de08e479ebed5242b599597fed2d31de60d2179229` |
+| `results/increment1/summary.json` | `fa1ef6fbd229031c012d97e0ff3db80e0a173c63180164b865d18d2adb1ed021` |
+| `results/increment1/gate-decision.json` | `0afb138ec2e05822016f4debb74aeff43f49f4e83d7122ef70bfd0d14b52f554` |
+| `results/increment1/events-P0.json` | `45ad1b0ff79e5ed5c3c14688207d41b63cfa06d663c913c003e386c6e5945c9f` |
+| `results/increment1/events-P1.json` | `8ae46ba654872576810d62fcf51c0cf90d282fa18e63da53d866ee513ca1bb27` |
+| `results/increment1/events-P2.json` | `f3a103fe0b1ffa19c6c869e249584555fc4e5fc6f3985d7581f3eef25ec38346` |
 | `results/increment2/selection-receipt.json` | `cb27cb462cf9b33e42ce1e77db5ef5d9a33d0a3fc411aea39a08587ec8b1391b` |
-| `results/increment2/differential-summary.json` | `81f73961ceb9255da2bb98af86cc20f283cd041467b330fb6322f08cdfa4fb9c` |
+| `results/increment2/differential-summary.json` | `287319ffccaa357af88142f000c28fb373d45164b07231c86290f977a460c08c` |
 | `results/increment2/challenger-decision.json` | `8c056bc94cf514c6fe46277998deb3dd5d4208a80ac2727695ec5f818863c68f` |
 
 Candidate identity (from `identity/candidate-identity.json`): crates.io
@@ -52,6 +55,28 @@ memchr 2.8.3, unicase 2.9.0; measurement-adapter binary
   notes (D0 autolink destinations, D1 policy token families). Full audit log:
   `fixtures/authoring-corrections.md`. No correction weakens any protection
   claim; the committed `fixtures/fixtures.json` is the frozen suite.
+- **Publication-boundary hygiene (post-freeze, pre-publication, D0).**
+  Before publication the experiment artifacts were brought into line
+  with the repository publication boundary
+  (`research/tools/publication_guard.py`: denied raw-JSON key names,
+  private-path byte markers, JSONL placement rule): (a) the fixture
+  record key `input` and the adapter-contract keys `input`/`output`
+  were renamed to `document` and `stdin`/`stdout` (identifiers only;
+  no semantic change); (b) the class-30 `paths` fixture F30 was
+  reworded from a synthetic path pair containing the guarded marker
+  byte sequences to `/var/dokumenti` + `D:\programi\test` + the same
+  relative path (same class semantics: absolute POSIX, absolute
+  Windows and relative machine-significant path tokens; its region is
+  anchor-resolved and re-resolved deterministically, 72 -> 69 bytes);
+  (c) the per-profile event artifacts were serialized from raw
+  JSONL dumps to `events-P{0,1,2}.json` documents that embed the
+  SHA-256 of the raw adapter stdout, so the raw-bytes determinism
+  contract is still recorded. A full deterministic re-evaluation was
+  executed (increment 1: all 8 Hard invariants true, 1,288 events,
+  decision PROCEED_TO_INCREMENT_2; increment 2: identical 100-sample
+  differential, challenger NOT_TRIGGERED). No expectation was added,
+  removed or weakened; the frozen expected semantics are unchanged.
+  Full audit: `fixtures/authoring-corrections.md`.
 - **Strikethrough semantics (recorded tradeoff).** Under the frozen rule
   ("Text is candidate iff its open-tag ancestor set intersects
   PROSE_CONTAINERS and not NON_PROSE_CONTAINERS"), strikethrough/superscript/

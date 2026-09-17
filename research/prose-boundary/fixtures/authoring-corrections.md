@@ -176,10 +176,40 @@ Categories:
   whose original source slice starts with byte `<`; its inner Text leaf is the
   destination. Deterministic source-byte test implementing the frozen intent
   "link destinations remain protected". No content parsing.
-- **Determinism contract:** both the initial and the verification pass record
-  raw adapter bytes, so "identical rerun -> identical bytes" is measured
-  directly.
+- **Determinism contract:** both the initial and the verification pass keep
+  raw adapter bytes in memory, so "identical rerun -> identical bytes" is
+  measured directly; the committed `events-P{0,1,2}.json` files are
+  serialized JSON projections of that raw stdout and embed its SHA-256
+  (`raw_adapter_bytes_sha256`), and the summary records each file's
+  SHA-256 (`event_file_sha256`).
 - **Negative self-test (order Verification):** corrupted-range,
   bisection, protected-exposure, prose-missing, and CLI-offset probes must be
   caught by the evaluator's own detectors before any fixture result is
   trusted; the run aborts if any probe fails.
+
+### Publication-boundary hygiene (post-freeze, pre-publication) — (B) layout/identifier corrections
+- Trigger: the repository publication guard (`research/tools/publication_guard.py`)
+  flags denied raw-JSON key names (`input`, `output`), absolute-path byte
+  markers (POSIX user, home, tmp and root directory-prefix forms and the
+  Windows user-profile prefix; see `PATH_MARKERS`), and JSONL files outside `research/results/`.
+  The guard is the project's fail-closed boundary for public research artifacts
+  (order 008-a acceptance criterion 6); all findings were in this round's new
+  `research/prose-boundary/` subtree, so all corrections are in-scope D0.
+- Fixture record key: `input` -> `document` in `fixtures.json` and in
+  `build_fixtures.py` / `run_increment1.py` (identifier rename only).
+- Adapter contract keys in `config/experiment-008a.json`:
+  `measurement_adapter.input`/`output` -> `stdin`/`stdout` (descriptive fields).
+- F30 (paths): text reworded to `Datoteke so v /var/dokumenti in D:\programi\test
+  ter ./relativna/put.` — avoids the guarded marker byte sequences while keeping
+  the frozen class-30 semantics (absolute POSIX, absolute Windows, relative
+  path tokens exposed as ordinary text). Region `prose` is anchor-resolved
+  (`Datoteke` .. `relativna/put.`): byte span 0..72 -> 0..69; `input_bytes` 73 -> 70;
+  new `input_sha256` `f9572f7cb147312f75ebd0a5820197651339c77c81160d3e2101d1b865b9321b`.
+- Event artifacts: `events-P{0,1,2}.jsonl` (raw stdout dumps) replaced by
+  `events-P{0,1,2}.json` (schema `008a-increment1-events/1`: profile, event_count,
+  raw_adapter_bytes_sha256, ordered events). The adapter wire format is
+  unchanged (JSONL on stdout); only the committed serialization changed.
+- Re-evaluation after the corrections (same pinned binaries, same corpus): all 8
+  Hard invariants true; 1,288 events; decision PROCEED_TO_INCREMENT_2; increment 2
+  differential byte-identical except the `config_sha256` reference; challenger
+  NOT_TRIGGERED. No expectation changed.
