@@ -644,8 +644,9 @@ census manifest is that verification record).
    on four component families, which would have made the dev safety metric
    measure a wrong target: (a) **md-images** fragments carry surrounding
    heading/prose lines; the oracle labelled the whole fragment PROTECTED -
-   now plain-text lines are PROSE, the `![...](...)` span PROTECTED, and
-   heading markers NEUTRAL; (b) **md-autolinks** - the oracle accepted
+   now plain-text lines are PROSE, the image span PROTECTED (exclamation-mark
+   plus bracketed label plus parenthesised destination), and heading markers
+   NEUTRAL; (b) **md-autolinks** - the oracle accepted
    diacritic email autolinks, but the pinned parser (pulldown-cmark 0.13.4)
    auto-links ASCII email addresses only, so `<pošta@primer.si>` is literal
    prose to the parser; the oracle's autolink rule was pinned to the
