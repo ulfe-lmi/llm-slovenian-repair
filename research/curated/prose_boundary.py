@@ -374,6 +374,19 @@ def prose_contexts(
     layer never operates across a block boundary. Protection still only
     ever results from residual matches; glue bytes inside a residual span
     are already structurally protected (non-candidate).
+
+    A residual span may span glue bytes. The one start restriction the
+    caller enforces (the residual loop in protection_with_status): a span
+    whose first byte lies inside a Markdown link/image syntax event
+    (S.Link / S.Image source-slice bytes) is not applied, because such a
+    match re-parses Markdown structure (e.g. the bracket alternative of
+    the bare-json class matching a link's ``[label]`` brackets) in
+    violation of the frozen residual scope, and would protect exposed
+    prose such as link labels. Spans starting on other glue bytes (TeX /
+    math delimiters, emphasis delimiters, escape backslashes) are kept:
+    the frozen class spec explicitly protects e.g. the math-like
+    remainder after an unpaired opening math delimiter, and the dev
+    corpus shows those spans carry protected content.
     """
     n = len(data)
     cand = bytearray(n)
@@ -825,7 +838,31 @@ def protection_with_status(
             triples.append((cs, ce, "non-prose"))
         # residual layer: candidate-prose contexts only, code-point
         # coordinates (contexts merge candidate leaves over glue so the
-        # frozen recognizers see complete structures)
+        # frozen recognizers see complete structures).
+        #
+        # Start-byte guard (policy v2 residual_layer.scope: the layer
+        # "must NOT reparse Markdown structure"; excluded_from_residual:
+        # "brackets/parens as link syntax ... are NOT residual classes"):
+        # a span whose first byte lies inside a Markdown link/image
+        # syntax event is not applied. A class match beginning inside
+        # link/image syntax reinterprets that syntax (e.g. the
+        # bare-json bracket alternative on a link's "[label]" brackets,
+        # protecting the label, which the frozen policy keeps EXPOSED).
+        # Every protected byte such a span covers is non-candidate
+        # (destination text, brackets) and already structurally
+        # protected, so dropping it loses no protection; dev-corpus
+        # measurement over all 19,018 residual spans confirms zero
+        # ground-truth-protected candidate bytes under this guard.
+        # Spans starting on other glue bytes (TeX/math delimiters,
+        # emphasis delimiters, escape backslashes) are kept: the frozen
+        # class spec explicitly protects e.g. the math-like remainder
+        # after an unpaired "\(", and those spans carry protected
+        # content in the dev corpus.
+        link_syntax_byte = bytearray(len(data))
+        for kind, s, e in events:
+            if kind in ("S.Link", "S.Image"):
+                for i in range(s, e):
+                    link_syntax_byte[i] = 1
         for s, e in prose_contexts(events, candidates, data):
             cs = byte_to_cp(data, s)
             ce = byte_to_cp(data, e)
@@ -833,6 +870,12 @@ def protection_with_status(
                 raise ProtectionFallback("coordinate-bisection")
             span_text = text[cs:ce]
             for cls, rs, re_ in residual_spans(span_text):
+                # span offsets are context-relative: the start byte is the
+                # context start plus the context-prefix re-encode (keeps
+                # the per-span cost at context scale, not document scale)
+                start_byte = s + len(span_text[:rs].encode("utf-8"))
+                if link_syntax_byte[start_byte]:
+                    continue
                 triples.append((cs + rs, cs + re_, f"residual-{cls}"))
     except ProtectionFallback as exc:
         return ProtectionResult(

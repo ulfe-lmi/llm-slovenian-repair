@@ -452,6 +452,19 @@ class EndToEndInvariantTests(unittest.TestCase):
         shutil.rmtree(cls._scratch, ignore_errors=True)
 
     def test_invariants_1_to_7_on_dev_documents(self):
+        # Pin a deterministic replacement for this run. choose_replacement's
+        # default count floor (200) is calibrated for the full 3000-document
+        # self-corpus, so the 200-document subcorpus this test consumes has
+        # no candidate at that floor. The pinning rule is identical apart
+        # from the floor: most frequent all-alphabetic unigram of length
+        # 4-12, tie broken by (-count, lexicographic), computed over the
+        # same docs[:200] slice run_invariants uses.
+        docs = E2E.load_dev_documents(DEV_CORPUS)
+        _ident, uni = E2E.build_self_corpus(
+            [text for _id, text, _label in docs[:200]],
+            self._scratch / "replacement-pin.sqlite",
+        )
+        replacement = E2E.choose_replacement(uni, min_count=1)
         report = E2E.run_invariants(
             DEV_CORPUS,
             HELPER,
@@ -460,6 +473,7 @@ class EndToEndInvariantTests(unittest.TestCase):
             corpus_docs=200,
             full_zero_check=False,
             scratch=self._scratch,
+            replacement=replacement,
         )
         self.assertIn(report["protection_mode"], ("parser-first", "legacy-fallback"))
         self.assertTrue(report["seeded"], "seeded adjacency required")

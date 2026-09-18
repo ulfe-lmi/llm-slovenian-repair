@@ -161,14 +161,17 @@ def build_self_corpus(texts: Sequence[str], path: Path) -> tuple[dict, Counter]:
     return identity, uni
 
 
-def choose_replacement(uni: Counter) -> str:
+def choose_replacement(uni: Counter, min_count: int = 200) -> str:
     """Deterministic replacement word: most frequent plain alphabetic
-    unigram key of length 4-12 with count >= 200 (tie: lexicographic)."""
+    unigram key of length 4-12 with count >= min_count (tie: lexicographic).
+    The default floor of 200 is calibrated for the full 3000-document
+    self-corpus; the deterministic focused test pins the identical rule on
+    its 200-document subcorpus with min_count=1."""
     pool = [
         (k, c)
         for k, c in uni.items()
         if 4 <= len(k) <= 12
-        and c >= 200
+        and c >= min_count
         and k[0].isalpha()
         and k[-1].isalpha()
         and all(ch.isalpha() for ch in k)
@@ -252,13 +255,15 @@ def run_invariants(
     corpus_docs: int | None = None,
     full_zero_check: bool = True,
     scratch: Path,
+    replacement: str | None = None,
 ) -> dict:
     scratch.mkdir(parents=True, exist_ok=True)
     docs = load_dev_documents(dev_root)
     corpus_texts = [text for _id, text, _label in (docs[:corpus_docs] if corpus_docs else docs)]
     index_path = scratch / "self-corpus.sqlite"
     corpus_identity, uni = build_self_corpus(corpus_texts, index_path)
-    replacement = choose_replacement(uni)
+    if replacement is None:
+        replacement = choose_replacement(uni)
 
     flags = {
         "1_detector_input_outside_protected": True,
@@ -435,7 +440,7 @@ def run_invariants(
             seeded.append({
                 "doc_id": doc_id,
                 "error_word": ERROR_WORD,
-                "replacement": replacement,
+                "replacement_word": replacement,
                 "edit_applied": bool(edited_error and error_removed),
             })
         if not seeded:

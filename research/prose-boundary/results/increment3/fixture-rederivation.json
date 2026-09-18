@@ -10,8 +10,8 @@
   "structural_protected_exposed_bytes": 0,
   "structural_prose_missing_bytes": 0,
   "policy_v2_protected_exposed_bytes": 0,
-  "policy_v2_prose_residual_bytes": 368,
-  "prose_regions_with_residual": 27,
+  "policy_v2_prose_residual_bytes": 333,
+  "prose_regions_with_residual": 24,
   "structural_view_zero_violations": true,
   "policy_v2_zero_protected_exposure": true
  },
@@ -890,7 +890,7 @@
      "start": 10,
      "end": 26,
      "structural_missing_bytes": 0,
-     "policy_v2_residual_protected_bytes": 16
+     "policy_v2_residual_protected_bytes": 0
     },
     {
      "name": "bracket-close-paren",
@@ -1569,7 +1569,7 @@
      "start": 24,
      "end": 37,
      "structural_missing_bytes": 0,
-     "policy_v2_residual_protected_bytes": 13
+     "policy_v2_residual_protected_bytes": 0
     },
     {
      "name": "link-close-paren",
@@ -1904,7 +1904,7 @@
      "start": 6,
      "end": 12,
      "structural_missing_bytes": 0,
-     "policy_v2_residual_protected_bytes": 6
+     "policy_v2_residual_protected_bytes": 0
     },
     {
      "name": "ref-syntax",
