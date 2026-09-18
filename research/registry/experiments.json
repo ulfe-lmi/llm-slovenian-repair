@@ -4903,12 +4903,11 @@
         "dev_protected_bytes_total": 526315,
         "dev_protected_bytes_exposed": 0,
         "dev_coordinate_violations": 0,
-        "dev_expected_prose_bytes_exposed_rate": 0.9798500691855476,
+        "dev_expected_prose_bytes_exposed_rate": 0.9846278770376754,
         "dev_unnecessary_suppression_by_container": {
           "S.Emph": 110,
           "S.Head": 436,
           "S.Item": 3531,
-          "S.Link": 9126,
           "S.Para": 20271,
           "S.TableCell": 575,
           "unknown": 4439
@@ -4920,9 +4919,9 @@
         "end_to_end_invariants": "7/7",
         "helper_invocations_per_document": 1,
         "performance_ms_per_document_median": {
-          "1kb": 44.73864403553307,
-          "10kb": 66.3911200244911,
-          "50kb": 263.57103302143514
+          "1kb": 43.53548196377233,
+          "10kb": 64.35684696771204,
+          "50kb": 249.88881300669163
         }
       },
       "evidence_files": [
