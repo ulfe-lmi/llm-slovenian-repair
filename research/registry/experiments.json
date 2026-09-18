@@ -5159,7 +5159,7 @@
         {
           "disposition": "008-e order committed at activation (carries the prior_report_recovery quarantine linkage)",
           "logical_path": "oap/orders/008-e-report-republication-and-transcript-recovery.md",
-          "sha256": "b8c8b11f49634fa5cd3f81dce64952d206aecbab2250cedd6efd6f8c76ef80f",
+          "sha256": "b8c8b11f49634fa5cd3f81dce64952d206aecbab2250cedd6efd6f8c76ef80f0",
           "size": 47380
         },
         {
@@ -5171,8 +5171,8 @@
         {
           "disposition": "ledger projection at the 008-e final head (byte-identical between implementation head and final head). Self-referential citation: a literal content hash of this file containing its own hash has no SHA-256 fixed point, so the cited sha256 is the hash of the canonical form - the exact committed bytes with this one 64-hex-digit sha256 field (the only self-referential field) replaced by 64 zero digits; the cited size is the actual file size; every other byte is exact",
           "logical_path": "research/registry/experiments.json",
-          "sha256": "96c789c54debdcc714c4ca19a85b38dc46ad296d25a34e713b28e9bc13d9b6eb",
-          "size": 252676
+          "sha256": "638333a7b085c05a36a10f29522acdccbfab9dd43e1408cc79b8fb8ba1d2339b",
+          "size": 252677
         }
       ],
       "evidence_status": "public-data-free",
