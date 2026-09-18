@@ -1,0 +1,142 @@
+{
+ "doc_id": "dev-001602",
+ "byte_length": 633,
+ "cp_length": 617,
+ "regions": [
+  {
+   "start_byte": 0,
+   "end_byte": 2,
+   "start_cp": 0,
+   "end_cp": 2,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 2,
+   "end_byte": 231,
+   "start_cp": 2,
+   "end_cp": 227,
+   "component_id": "comp-prose-travel-dev-0002",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 231,
+   "end_byte": 232,
+   "start_cp": 227,
+   "end_cp": 228,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 232,
+   "end_byte": 233,
+   "start_cp": 228,
+   "end_cp": 229,
+   "component_id": "comp-code-rust-dev-0003",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 233,
+   "end_byte": 295,
+   "start_cp": 229,
+   "end_cp": 289,
+   "component_id": "comp-code-rust-dev-0003",
+   "category": "code",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 295,
+   "end_byte": 296,
+   "start_cp": 289,
+   "end_cp": 290,
+   "component_id": "comp-code-rust-dev-0003",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 296,
+   "end_byte": 297,
+   "start_cp": 290,
+   "end_cp": 291,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 297,
+   "end_byte": 300,
+   "start_cp": 291,
+   "end_cp": 294,
+   "component_id": "comp-code-cpp-dev-0010",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 300,
+   "end_byte": 301,
+   "start_cp": 294,
+   "end_cp": 295,
+   "component_id": "comp-code-cpp-dev-0010",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 301,
+   "end_byte": 588,
+   "start_cp": 295,
+   "end_cp": 579,
+   "component_id": "comp-code-cpp-dev-0010",
+   "category": "code",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 588,
+   "end_byte": 589,
+   "start_cp": 579,
+   "end_cp": 580,
+   "component_id": "comp-code-cpp-dev-0010",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 589,
+   "end_byte": 592,
+   "start_cp": 580,
+   "end_cp": 583,
+   "component_id": "comp-code-cpp-dev-0010",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 592,
+   "end_byte": 633,
+   "start_cp": 583,
+   "end_cp": 617,
+   "component_id": "template",
+   "category": null,
+   "role": "PROSE",
+   "template_owned": true
+  }
+ ],
+ "invariants": {
+  "tiling_complete": true,
+  "no_contradictory_overlaps": true,
+  "cp_range_exact": true
+ }
+}

@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-002782",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T11-interactions",
+ "byte_length": 1200,
+ "cp_length": 1184,
+ "sha256": "56e88bde2cb00a6d47d4b0acc4d52608c803294557ac2730c8fd91e882d8a3e8",
+ "document": "`/* Fragment 2: fiktna oseba Ana, pot docs/vir.txt, vir https`.\r\n```\r\n-- Testni SQL fragment: razpoloži\r\nCREATE TABLE razpolozi (\r\n  id INT PRIMARY KEY,\r\n  \"seStez\" TEXT,\r\n  \"razdelek2\" TEXT,\r\n  opomba TEXT\r\n);\r\nINSERT INTO razpolozi (id, \"seStez\", \"razdelek2\", opomba)\r\nVALUES (1, '**poudarek** *zvezdice*', '_podčrtano_', '12 $ / dan');\r\nUPDATE razpolozi SET opomba = 'Vir: https://primer.si/koda' WHERE id = 1;\r\nSELECT id, \"seStez\", \"razdelek2\", opomba FROM razpolozi ORDER BY id;\r\n# komentar z \\frac{a}{b}\r\n```\r\nV testnem projektu Spomin 2024 sta osebi Luka in Meta poudarila, da bolečine v vratu in ramenskem predelu niso vedno znak resnega stanja. Vendar pa je smiselno, da osebo sprejme zdravnik, zlasti če se pojavi omedlevica ali motnja govora (na primer ob nenadnem slabem počutju).\r\nV laboratoriju projekta Merjač (stanica 4) je dr. Ana Kovač zapisala: »Med segrevanjem, in sicer ob dveh tisoč stopinjah Celzija, se material obnaša, kot bi šlo za tekočino,« in pojasnila, zakaj poskusne vzorce ob segrevanju obnašajo nepričakovano elastičnost. Rezultati iz leta 2021 so nato odprli pot k novi metodologiji, v kateri je pomembna vsaka mera, tudi tista, ki se zdi nesmiselna.",
+ "components": [
+  {
+   "component_id": "comp-code-cpp-dev-0010",
+   "category": "code",
+   "start_byte": 0,
+   "end_byte": 62
+  },
+  {
+   "component_id": "comp-code-sql-dev-0009",
+   "category": "code",
+   "start_byte": 65,
+   "end_byte": 516
+  },
+  {
+   "component_id": "comp-prose-medicine-explainer-dev-0007",
+   "category": "prose",
+   "start_byte": 518,
+   "end_byte": 797
+  },
+  {
+   "component_id": "comp-prose-science-dev-0011",
+   "category": "prose",
+   "start_byte": 799,
+   "end_byte": 1200
+  }
+ ]
+}

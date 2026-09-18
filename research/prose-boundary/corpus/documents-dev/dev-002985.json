@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-002985",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T5-lists",
+ "byte_length": 800,
+ "cp_length": 778,
+ "sha256": "b459159b1737734ce01b4f12b7eb4962fd52f886924fd82d5608dd1dd53c1081",
+ "document": "- Svetovna in slovenska zgodovina se v tem projektu prepleta, ker so izmišljeni potniki v dnevnik zapisali potovanja, ki so trajala po letih, ne po dnevih. »Kadar je letnica omenjena,« je dodala Eva, »je besedilo preprosteje razumljivo, čeprav manj natančno.« Njena skupina je zato izbrala kratka navodila, da so besedila ostala čitljiva.\n- `#include <iostream>`\n- Pri planinskem vzponu po Javorniku v marcu 2023 so bile poti močno zamrznjene, zato priporočam uporabo čevljev z dobrim oprijemom. Vreme je bilo hladno (okrog 5 stopinj pod ničlo), a razgledi so bili nagrajenje vredni.\n- „Prvi korak, drugi noga,“ je rekla Ana, a mladi smučarji v projektni skupini so še vedno poskušali izbrati pravo pozicijo. Ko je padal sneg, so se vsi odločili za krajši premor pri topli čaju.",
+ "components": [
+  {
+   "component_id": "comp-prose-history-dev-0005",
+   "category": "prose",
+   "start_byte": 2,
+   "end_byte": 346
+  },
+  {
+   "component_id": "comp-code-cpp-dev-0001",
+   "category": "code",
+   "start_byte": 349,
+   "end_byte": 370
+  },
+  {
+   "component_id": "comp-prose-travel-dev-0009",
+   "category": "prose",
+   "start_byte": 373,
+   "end_byte": 595
+  },
+  {
+   "component_id": "comp-prose-sports-dev-0012",
+   "category": "prose",
+   "start_byte": 598,
+   "end_byte": 800
+  }
+ ]
+}

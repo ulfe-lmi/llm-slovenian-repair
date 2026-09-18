@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-002768",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T8-quote-fenced",
+ "byte_length": 539,
+ "cp_length": 529,
+ "sha256": "96125fe612ab66069240770f196eda86b65a2123bbf17e38f1828e2ebcf67b15",
+ "document": "> Ana je zapisala, da se v starejših pisarnah pogosto uporabljajo tiskalniki, ki se povezujejo po kablu, čeprav so mlajši sodelavci privrženci brezžičnih rešitev. Takšna razmerja, čeprav na videz nevidna, vplivajo na to, kako hitro potuje dokument. (V projektu so to opazovali tri tedne.) `#!/usr/bin/env bash`\n```\nint main(void) { char *napis = \"Tekst: *poudarjeno* in _podčrtano_\"; char *cena = \"Cena: 10 $ (dolar)\"; char *url = \"https://primer.si/koda\"; (void)napis; (void)cena; (void)url; return 0; } /* Markov podatek */\n```",
+ "components": [
+  {
+   "component_id": "comp-prose-computing-dev-0005",
+   "category": "prose",
+   "start_byte": 2,
+   "end_byte": 297
+  },
+  {
+   "component_id": "comp-code-shell-bash-dev-0009",
+   "category": "code",
+   "start_byte": 298,
+   "end_byte": 319
+  },
+  {
+   "component_id": "comp-code-c-dev-0002",
+   "category": "code",
+   "start_byte": 320,
+   "end_byte": 539
+  }
+ ]
+}

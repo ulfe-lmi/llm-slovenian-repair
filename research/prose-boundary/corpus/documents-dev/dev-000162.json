@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-000162",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T9-prose-malformed-prose",
+ "byte_length": 589,
+ "cp_length": 568,
+ "sha256": "7bfd3b875009e59ef39c41ba486b848c9461ef03f2da04c4bf30e459e2f19613",
+ "document": "Sara je pojasnila, da se povprečje včasih zdi napačno, če manjkajo posamezni dnevi. “V takih primerih je bolje reči, da je slika neenakomerna,“ je dodala in pokazala še stolpec z najmanjšo vrednostjo. Skupina se je odločila, da bo za leto 2025 zbrala tudi podatke o vremenu. Tako bo lažje razložila razmerja med posameznimi tedeni.\n{\"naslov\": \"Testna vsebina projekta Lipa\", \nAna je v razredni testni delavnici najprej preverila, ali je sklep odprt (tako je ohišje varno), in šele nato prižgala majhno utripalko. V zapisniku je zapisala „Preizkus 2024 je brez napake.“",
+ "components": [
+  {
+   "component_id": "comp-prose-statistics-dev-0005",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 345
+  },
+  {
+   "component_id": "comp-malformed-truncated-json-dev-0001",
+   "category": "malformed",
+   "start_byte": 346,
+   "end_byte": 389
+  },
+  {
+   "component_id": "comp-prose-electronics-dev-0001",
+   "category": "prose",
+   "start_byte": 390,
+   "end_byte": 589
+  }
+ ]
+}

@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-001756",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T8-quote-fenced",
+ "byte_length": 847,
+ "cp_length": 835,
+ "sha256": "60cdf9edecb9ae9dab8f99c51695df88ee96f5552dbbcc05cd6ae3d179cb6d34",
+ "document": "> Uprava za vzorčne javne storitve je junija 2024 (ob povišanem obsegu zahtev) pripravila pregled časa čakanja v treh oddelkih. Najkrajši termin so dodelili za menjavo osebne listine, in sicer za pet minut, medtem ko je posodabljanje drugih obrazcev trajalo do dvajset dni. V vložku za potrdilo so uporabniki lahko izbrali osebni prevzem ali poštno oddajo. Po mnenju odgovorne osebe, Anje Laki, je tak postopek najbolj preprost za starejše uporabnike. `// Vir: https://primer.si/koda`\n```\n/* Testni fragment 2: izmišljena oseba Jana, projekt Lipa. */ SELECT 'Jana' AS `ime`, '2,30 $' AS `cena`, 'https://primer.si/koda' AS `url`, 'docs/vir.txt' AS `pot`, TRIM('**poudarek** in _podčrtano_') AS `opomba`, 'razdelek2' AS `razdelek2`, 'seStez' AS `seStez`, 'ž' AS `HRAŠNA_VREDNOST` FROM (SELECT 2 AS `en`) AS `t` WHERE (`t`.`en` = 2);\n```",
+ "components": [
+  {
+   "component_id": "comp-prose-administration-dev-0007",
+   "category": "prose",
+   "start_byte": 2,
+   "end_byte": 459
+  },
+  {
+   "component_id": "comp-code-cpp-dev-0002",
+   "category": "code",
+   "start_byte": 460,
+   "end_byte": 492
+  },
+  {
+   "component_id": "comp-code-sql-dev-0002",
+   "category": "code",
+   "start_byte": 493,
+   "end_byte": 847
+  }
+ ]
+}

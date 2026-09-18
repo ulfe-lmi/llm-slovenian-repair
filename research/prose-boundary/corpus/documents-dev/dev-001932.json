@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-001932",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T8-quote-fenced",
+ "byte_length": 856,
+ "cp_length": 846,
+ "sha256": "518da66bf9bd806392c33e7d1453001699350dad1b19b7a3bd3a8ae134fcec6b",
+ "document": "> V projektu Sona (manjša fizikalna raziskava) je Maja spremljala vibracije tankih folij pri nizkih temperaturah. Zapisovala je, da se pri približno sto in dvanajst kelvinov material odzove drugače, in to je bilo vidno že po prvih dneh. Leta dvotisoč in osemnajst je ekipa poskusila ponoviti meritve, a je veter v prostoru vplival na števce. `#include <string>`\r\n```\r\n#!/usr/bin/env bash\r\n# Prvi fragment: testni podatki (URL: https://primer.si/koda)\r\n# Oseba: Ana, projekt: vzorčni vir\r\n# Poti: src/modul.py, docs/vir.txt\r\nseStez='src/modul.py'\r\nrazdelek2='docs/vir.txt'\r\noznaka='HRAŠNA_VREDNOST'\r\nopis='**poudarjeno** in _podčrtano_ z *zvezdicami*'\r\nvaluta='10 $'\r\noklepaji='(vzorčni)'\r\necho \"pot: $seStez\"\r\necho \"razdelek: $razdelek2\"\r\necho \"oznaka: $oznaka\"\r\necho \"$opis\"\r\necho \"cena: $valuta\"\r\necho \"oklepaji: $oklepaji\"\r\necho 'znak: `'\r\n```",
+ "components": [
+  {
+   "component_id": "comp-prose-science-dev-0001",
+   "category": "prose",
+   "start_byte": 2,
+   "end_byte": 347
+  },
+  {
+   "component_id": "comp-code-cpp-dev-0008",
+   "category": "code",
+   "start_byte": 348,
+   "end_byte": 367
+  },
+  {
+   "component_id": "comp-code-shell-bash-dev-0009",
+   "category": "code",
+   "start_byte": 369,
+   "end_byte": 856
+  }
+ ]
+}

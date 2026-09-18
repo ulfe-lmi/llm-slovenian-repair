@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-000590",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T8-quote-fenced",
+ "byte_length": 557,
+ "cp_length": 548,
+ "sha256": "76e1ca5e2f0ffb9a6b586a1d848025fe33d3dc15805d9b0b37b5e41dd7f97707",
+ "document": "> Mojca je v razredu (po imenu Tista) povedala, da zanka ni nikoli le ponavljanje brez razloga. »Ponovi,« je zapisala na tablo, »dokler se števec ne ustavi.« Nato je pokazala, da funkcija deluje kot majhen stroj, ki prejme ime, preveri starost in vrne, ali udeleženec sodeluje v projektu. `# Testni projekt: Povzetek; avtor: Maja Lipovnik`\n```\n#include <string>\n// Projekt: *Lipa*, šentjanž\n// Preveri src/modul.py\nstd::string seStez(int razdelek2) {\n    // žlahtna vrednost: 2 $\n    return \"vrednost \" + std::to_string(razdelek2 * 2) + \" $\";\n}\n```",
+ "components": [
+  {
+   "component_id": "comp-prose-programming-explainer-dev-0007",
+   "category": "prose",
+   "start_byte": 2,
+   "end_byte": 294
+  },
+  {
+   "component_id": "comp-code-python-dev-0008",
+   "category": "code",
+   "start_byte": 295,
+   "end_byte": 345
+  },
+  {
+   "component_id": "comp-code-cpp-dev-0003",
+   "category": "code",
+   "start_byte": 346,
+   "end_byte": 557
+  }
+ ]
+}

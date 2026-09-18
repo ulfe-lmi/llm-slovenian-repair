@@ -1,0 +1,102 @@
+{
+ "doc_id": "dev-002151",
+ "byte_length": 907,
+ "cp_length": 896,
+ "regions": [
+  {
+   "start_byte": 0,
+   "end_byte": 225,
+   "start_cp": 0,
+   "end_cp": 222,
+   "component_id": "comp-prose-electronics-dev-0008",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 225,
+   "end_byte": 226,
+   "start_cp": 222,
+   "end_cp": 223,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 226,
+   "end_byte": 430,
+   "start_cp": 223,
+   "end_cp": 427,
+   "component_id": "comp-structured-json-dev-0002",
+   "category": "structured",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 430,
+   "end_byte": 431,
+   "start_cp": 427,
+   "end_cp": 428,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 431,
+   "end_byte": 828,
+   "start_cp": 428,
+   "end_cp": 817,
+   "component_id": "comp-prose-electronics-dev-0012",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 828,
+   "end_byte": 829,
+   "start_cp": 817,
+   "end_cp": 818,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 829,
+   "end_byte": 831,
+   "start_cp": 818,
+   "end_cp": 820,
+   "component_id": "comp-math-paren-tex-dev-0007",
+   "category": "math",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 831,
+   "end_byte": 905,
+   "start_cp": 820,
+   "end_cp": 894,
+   "component_id": "comp-math-paren-tex-dev-0007",
+   "category": "math",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 905,
+   "end_byte": 907,
+   "start_cp": 894,
+   "end_cp": 896,
+   "component_id": "comp-math-paren-tex-dev-0007",
+   "category": "math",
+   "role": "NEUTRAL",
+   "template_owned": false
+  }
+ ],
+ "invariants": {
+  "tiling_complete": true,
+  "no_contradictory_overlaps": true,
+  "cp_range_exact": true
+ }
+}

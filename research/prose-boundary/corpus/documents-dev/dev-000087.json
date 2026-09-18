@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-000087",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T11-interactions",
+ "byte_length": 1137,
+ "cp_length": 1119,
+ "sha256": "52ee2ddc23f1c95138c0cf1d4f2ad9ec1afe9c0bc00cd458a43864e98e49e7c0",
+ "document": "`int main(void) { char *cena1 = \"1 $\"; char *cena2 = \"2 EUR\";`.\n```\nfn povzetek2(seStez: bool) -> String { /* Testni projekt Lipa: č, š, ž, **poudarek** in _podčrtano_ */ let razdelek2 = 2; let besedilo = format!(\"_Podčrtano_ ({} $, `{}`)\", razdelek2, \"ž\"); let pot = \"docs/vir.txt\"; let url = \"https://primer.si/koda\"; format!(\"{} | {} | {} | {}\", seStez, besedilo, pot, url) }\n# komentar z \\frac{a}{b}\n```\nZa odrasle v programu Večer 2024 so pripravili delavnice, ki potekajo po petih, z odmorom in s kratkim pogovorom o tem, kaj sploh želijo vedeti. Ana, vodja razreda, je povedala, da se učenci najlaše učijo, ko lahko takoj uporabijo besede v pogovoru. Tudi učbenik je preprost, z barvnimi slikami in z vprašanji na koncu vsake strani. Nihče ni imel vtisa, da gre za šolo; vsi so se strinjali, da gre za učenje.\nV projektu Spomini doline je Anica Zorman zapisala, da so stari kmečki registri vsebovali opombe o pridelku, davkih in poplavah. Zapis so razdelili po letnicah, ne pa po dnevih, zato je besedilo preprosteje za primerjanje. Njen sopotnik Marko je dodal, da takšni listi ohranjajo glas lokalne skupnosti.",
+ "components": [
+  {
+   "component_id": "comp-code-c-dev-0005",
+   "category": "code",
+   "start_byte": 0,
+   "end_byte": 62
+  },
+  {
+   "component_id": "comp-code-rust-dev-0002",
+   "category": "code",
+   "start_byte": 64,
+   "end_byte": 413
+  },
+  {
+   "component_id": "comp-prose-education-dev-0012",
+   "category": "prose",
+   "start_byte": 414,
+   "end_byte": 832
+  },
+  {
+   "component_id": "comp-prose-history-dev-0001",
+   "category": "prose",
+   "start_byte": 833,
+   "end_byte": 1137
+  }
+ ]
+}

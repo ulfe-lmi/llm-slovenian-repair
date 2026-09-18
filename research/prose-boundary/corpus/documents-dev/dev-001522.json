@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-001522",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T5-lists",
+ "byte_length": 1062,
+ "cp_length": 1028,
+ "sha256": "86d268d9988ce96cea980ca21dc146d968f7155ca58bc7ebbe920f15607f2910",
+ "document": "- Čiščenje oken je lažje, če najprej sproti počistimo rob in nato s suho krpo zberemo preostali prah. Marko je v projektu Prijetna hiša ugotovil, da je bolje delati ob jutru, ko je videti, kje se naberejo madeži. (Če je zunaj topleje, najprej odpreš okno.) Sicer pa je ena majhna posoda z blagom dovolj za dnevni red.\n- `/* Primer 1: pot in cena, črka ž */ int main(void) { const c`\n- „Zdravje ni samo odsotnost bolečine“ je poudaril Marko, ko je v projektu Zdravi pogovori spregovoril o pomenu počitka. Vsak človek se mora poslušati in poznati svoje omejitve. Obremenjenost se lahko kaže različno, na primer v napetosti ali v slabšem spanju. Če se nelagodje ne umiri, mora biti naslednji korak obisk zdravnika.\n- Slovenska pesniška tradicija ima svojo tišino. V izmišljenem projektu Glas in tišina, ki raziskuje naravno, se pojavi motiv dreves. Izmišljena pesnica Anja Horvat v zbirki iz leta 2015 piše: »Drevo ne govori, a se v šumu zdi, da je vprašanje.« Ta stavek se v evropskem kontekstu pogosto pojavi kot znak identitete.",
+ "components": [
+  {
+   "component_id": "comp-prose-everyday-advice-dev-0003",
+   "category": "prose",
+   "start_byte": 2,
+   "end_byte": 327
+  },
+  {
+   "component_id": "comp-code-c-dev-0009",
+   "category": "code",
+   "start_byte": 330,
+   "end_byte": 394
+  },
+  {
+   "component_id": "comp-prose-medicine-explainer-dev-0003",
+   "category": "prose",
+   "start_byte": 397,
+   "end_byte": 735
+  },
+  {
+   "component_id": "comp-prose-literature-dev-0008",
+   "category": "prose",
+   "start_byte": 738,
+   "end_byte": 1062
+  }
+ ]
+}

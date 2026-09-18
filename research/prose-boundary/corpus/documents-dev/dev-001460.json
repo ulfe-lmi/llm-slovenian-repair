@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-001460",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T9-prose-malformed-prose",
+ "byte_length": 715,
+ "cp_length": 701,
+ "sha256": "b35525b42491a836a693f4179e1fa167541044500c9239f782dc4dbd09a1db5c",
+ "document": "Varčnost pri računih za ogrevanje v projektu Topla hiša ni vedno leva stvar, če je v prostoru prehladno. Leta 2023 so mnogi domovi dobili termometre, ki opozarjajo, ko temperatura pade pod 18 stopinj. (V takih dneh je bolje zapreti okno, ki ga obvečer nismo nujno potrebovali.) Pri starejših gradnjah je koristno preveriti tudi, ali se okno res dobro zapre.\nV projektu Morska črta je Ana izračunala, da se je prodaja v letu 2023 povečala za 12 odstotkov. To je pomenilo, da je v juliju na tri prodane kosove v povprečju padlo eno novo naročilo. Ekipa je rezultat zapisala v testno interno poročilo in ga označila za preverjeno.\n`avtorizacija: Mira Kovač; projekt: Gora Bled; opomba = \"testna vsebina\";",
+ "components": [
+  {
+   "component_id": "comp-prose-everyday-advice-dev-0009",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 363
+  },
+  {
+   "component_id": "comp-prose-statistics-dev-0006",
+   "category": "prose",
+   "start_byte": 364,
+   "end_byte": 640
+  },
+  {
+   "component_id": "comp-malformed-unmatched-backtick-dev-0003",
+   "category": "malformed",
+   "start_byte": 641,
+   "end_byte": 715
+  }
+ ]
+}

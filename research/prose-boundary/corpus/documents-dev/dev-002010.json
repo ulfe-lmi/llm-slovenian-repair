@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-002010",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T9-prose-malformed-prose",
+ "byte_length": 963,
+ "cp_length": 948,
+ "sha256": "7979efef6a809c8d17fb8a4ba4eb5a95e2e017fe46009b769574c7992835751c",
+ "document": "V soboto, ko je bilo poleti 24 stopinj, je ekipa izmišljene skupine Brez napetosti v parku izvedla pet minut ogrevanja, nato pa še enajstmetrovski udarec in tri kratke teke. Igralka, ki jo je projekt imenoval Eva, je po tem dejala, da je bila noga rahlo utrujena, vendar da je bil zrak svež. 'Naslednjič bomo dodali še malo plavanja,' je opozorila ob zbiranju opreme. Na koncu so opremo zložili, zapisnik pa sta podpisala le dva člana.\nUprava za vzorčne javne storitve je junija 2024 (ob povišanem obsegu zahtev) pripravila pregled časa čakanja v treh oddelkih. Najkrajši termin so dodelili za menjavo osebne listine, in sicer za pet minut, medtem ko je posodabljanje drugih obrazcev trajalo do dvajset dni. V vložku za potrdilo so uporabniki lahko izbrali osebni prevzem ali poštno oddajo. Po mnenju odgovorne osebe, Anje Laki, je tak postopek najbolj preprost za starejše uporabnike.\n`avtorizacija: Ana Novak; projekt: Modra Reka; izpis = \"test\";",
+ "components": [
+  {
+   "component_id": "comp-prose-sports-dev-0005",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 442
+  },
+  {
+   "component_id": "comp-prose-administration-dev-0007",
+   "category": "prose",
+   "start_byte": 443,
+   "end_byte": 900
+  },
+  {
+   "component_id": "comp-malformed-unmatched-backtick-dev-0001",
+   "category": "malformed",
+   "start_byte": 901,
+   "end_byte": 963
+  }
+ ]
+}

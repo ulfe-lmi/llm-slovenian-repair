@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-001244",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T2-prose-math-prose",
+ "byte_length": 864,
+ "cp_length": 840,
+ "sha256": "507a75a86e3d6aafd20f4cb0f41f947c444312626ae854698c7326d31bddac96",
+ "document": "Luka je poskušal sestaviti majhno svetilko in je ob tem zamenjal dve upornosti, kar je spremenilo sij. V opombi (datum: 12. marec 2025) je navedel, da baterija po dolgi rabi zmanjša napetost, zato se element hitreje utruši. Pozneje je preizkusil novo ploščico, jo preveril s merilcem in ugotovil, da je stik pri sponki ohlapen. »Moram preveriti vez,« je rekel in poskrbel za varno montažo.\nP(E \\cap F_{\\text{Borič}}) = P(E) + P(F_{\\text{Borič}}) - P(E \\cup F_{\\text{Borič}}) = \\frac{\\sqrt{3}}{4} \\text{ (seštevek verjetnosti)}\nV vprašanjih za projekt Zdravo mesto 2025 so otroci zaskrbljeni zaradi »bolečin v trebuhu« po školski malici. Raje ne govorimo o diagnozi; zabeležimo, kdaj se pojavi, koliko traja in kakšna je hrana (na primer po mlečnih izdelkih). Pri vsakem nepričakovanem ponovnem pojavi naj starš pokliče zdravniško ambulanto.",
+ "components": [
+  {
+   "component_id": "comp-prose-electronics-dev-0012",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 397
+  },
+  {
+   "component_id": "comp-math-probability-dev-0004",
+   "category": "math",
+   "start_byte": 398,
+   "end_byte": 538
+  },
+  {
+   "component_id": "comp-prose-medicine-explainer-dev-0012",
+   "category": "prose",
+   "start_byte": 539,
+   "end_byte": 864
+  }
+ ]
+}

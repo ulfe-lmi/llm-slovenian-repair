@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-002002",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T1-prose-inlinecode-prose",
+ "byte_length": 927,
+ "cp_length": 902,
+ "sha256": "eae287ea9483457d26be96bd0a45e782890060a70c603db677a3e7395ac808a2",
+ "document": "V prostoru projekta Tabor so preizkušali prenos toplote skozi plastine in merili spremembe, ko so dodali tanke plasti iz mešanih vlaken. Meritve so vodila dva študenta, Luka in Nika, ki sta zapisoval čase, temperature ter opazila rahlo meglico na robu vzorcev. Leta dvotisoč in devetindvajset, ko je bila soba še prenovljena, je v opombah stalo, da bo treba poskus ponoviti pri drugačni vlažnosti.\n`def seštej(a, b): return a + b, 'Povzetek: **pomembno** _pod`\nPri izmišljenem projektu “Zvonovi Koroške” (tudi testni vnos) so ugotovili, da so verske zgradbe hranile spomine, ki so jih ljudje obvezno prenašali iz roda v rod. Kratek zapis o letnici 1680, dolg le 120 znakov, je bil označen kot sporen. Uradnik Miha je dodal, da je “povest” pogosto lažna, a vseeno živi v spominu. Zato so v bazi ohranili tri različne verzije (enkrat kratko, enkrat dolgo in enkrat prekrčeno), ki se med seboj ne ujemajo.",
+ "components": [
+  {
+   "component_id": "comp-prose-science-dev-0004",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 405
+  },
+  {
+   "component_id": "comp-code-python-dev-0009",
+   "category": "code",
+   "start_byte": 406,
+   "end_byte": 469
+  },
+  {
+   "component_id": "comp-prose-history-dev-0012",
+   "category": "prose",
+   "start_byte": 470,
+   "end_byte": 927
+  }
+ ]
+}

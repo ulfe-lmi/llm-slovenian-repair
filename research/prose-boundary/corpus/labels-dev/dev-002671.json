@@ -1,0 +1,842 @@
+{
+ "doc_id": "dev-002671",
+ "byte_length": 1576,
+ "cp_length": 1554,
+ "regions": [
+  {
+   "start_byte": 0,
+   "end_byte": 219,
+   "start_cp": 0,
+   "end_cp": 216,
+   "component_id": "comp-prose-engineering-dev-0003",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 219,
+   "end_byte": 220,
+   "start_cp": 216,
+   "end_cp": 217,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 220,
+   "end_byte": 237,
+   "start_cp": 217,
+   "end_cp": 233,
+   "component_id": "comp-markdown-inline-code-dev-0006",
+   "category": "markdown",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 237,
+   "end_byte": 238,
+   "start_cp": 233,
+   "end_cp": 234,
+   "component_id": "comp-markdown-inline-code-dev-0006",
+   "category": "markdown",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 238,
+   "end_byte": 242,
+   "start_cp": 234,
+   "end_cp": 238,
+   "component_id": "comp-markdown-inline-code-dev-0006",
+   "category": "markdown",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 242,
+   "end_byte": 243,
+   "start_cp": 238,
+   "end_cp": 239,
+   "component_id": "comp-markdown-inline-code-dev-0006",
+   "category": "markdown",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 243,
+   "end_byte": 247,
+   "start_cp": 239,
+   "end_cp": 243,
+   "component_id": "comp-markdown-inline-code-dev-0006",
+   "category": "markdown",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 247,
+   "end_byte": 249,
+   "start_cp": 243,
+   "end_cp": 245,
+   "component_id": "comp-markdown-inline-code-dev-0006",
+   "category": "markdown",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 249,
+   "end_byte": 254,
+   "start_cp": 245,
+   "end_cp": 250,
+   "component_id": "comp-markdown-inline-code-dev-0006",
+   "category": "markdown",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 254,
+   "end_byte": 256,
+   "start_cp": 250,
+   "end_cp": 252,
+   "component_id": "comp-markdown-inline-code-dev-0006",
+   "category": "markdown",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 256,
+   "end_byte": 287,
+   "start_cp": 252,
+   "end_cp": 283,
+   "component_id": "comp-markdown-inline-code-dev-0006",
+   "category": "markdown",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 287,
+   "end_byte": 288,
+   "start_cp": 283,
+   "end_cp": 284,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 288,
+   "end_byte": 301,
+   "start_cp": 284,
+   "end_cp": 297,
+   "component_id": "comp-math-align-env-dev-0002",
+   "category": "math",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 301,
+   "end_byte": 425,
+   "start_cp": 297,
+   "end_cp": 421,
+   "component_id": "comp-math-align-env-dev-0002",
+   "category": "math",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 425,
+   "end_byte": 436,
+   "start_cp": 421,
+   "end_cp": 432,
+   "component_id": "comp-math-align-env-dev-0002",
+   "category": "math",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 436,
+   "end_byte": 437,
+   "start_cp": 432,
+   "end_cp": 433,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 437,
+   "end_byte": 438,
+   "start_cp": 433,
+   "end_cp": 434,
+   "component_id": "comp-structured-yaml-dev-0003",
+   "category": "structured",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 438,
+   "end_byte": 439,
+   "start_cp": 434,
+   "end_cp": 435,
+   "component_id": "comp-structured-yaml-dev-0003",
+   "category": "structured",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 439,
+   "end_byte": 440,
+   "start_cp": 435,
+   "end_cp": 436,
+   "component_id": "comp-structured-yaml-dev-0003",
+   "category": "structured",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 440,
+   "end_byte": 441,
+   "start_cp": 436,
+   "end_cp": 437,
+   "component_id": "comp-structured-yaml-dev-0003",
+   "category": "structured",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 441,
+   "end_byte": 706,
+   "start_cp": 437,
+   "end_cp": 696,
+   "component_id": "comp-structured-yaml-dev-0003",
+   "category": "structured",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 706,
+   "end_byte": 707,
+   "start_cp": 696,
+   "end_cp": 697,
+   "component_id": "comp-structured-yaml-dev-0003",
+   "category": "structured",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 707,
+   "end_byte": 708,
+   "start_cp": 697,
+   "end_cp": 698,
+   "component_id": "comp-structured-yaml-dev-0003",
+   "category": "structured",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 708,
+   "end_byte": 709,
+   "start_cp": 698,
+   "end_cp": 699,
+   "component_id": "comp-structured-yaml-dev-0003",
+   "category": "structured",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 709,
+   "end_byte": 717,
+   "start_cp": 699,
+   "end_cp": 707,
+   "component_id": "comp-structured-yaml-dev-0003",
+   "category": "structured",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 717,
+   "end_byte": 718,
+   "start_cp": 707,
+   "end_cp": 708,
+   "component_id": "comp-structured-yaml-dev-0003",
+   "category": "structured",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 718,
+   "end_byte": 719,
+   "start_cp": 708,
+   "end_cp": 709,
+   "component_id": "comp-structured-yaml-dev-0003",
+   "category": "structured",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 719,
+   "end_byte": 720,
+   "start_cp": 709,
+   "end_cp": 710,
+   "component_id": "comp-structured-yaml-dev-0003",
+   "category": "structured",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 720,
+   "end_byte": 721,
+   "start_cp": 710,
+   "end_cp": 711,
+   "component_id": "comp-structured-yaml-dev-0003",
+   "category": "structured",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 721,
+   "end_byte": 729,
+   "start_cp": 711,
+   "end_cp": 718,
+   "component_id": "comp-structured-yaml-dev-0003",
+   "category": "structured",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 729,
+   "end_byte": 730,
+   "start_cp": 718,
+   "end_cp": 719,
+   "component_id": "comp-structured-yaml-dev-0003",
+   "category": "structured",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 730,
+   "end_byte": 734,
+   "start_cp": 719,
+   "end_cp": 723,
+   "component_id": "comp-structured-yaml-dev-0003",
+   "category": "structured",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 734,
+   "end_byte": 735,
+   "start_cp": 723,
+   "end_cp": 724,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 735,
+   "end_byte": 741,
+   "start_cp": 724,
+   "end_cp": 730,
+   "component_id": "comp-malformed-broken-link-dev-0001",
+   "category": "malformed",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 741,
+   "end_byte": 742,
+   "start_cp": 730,
+   "end_cp": 731,
+   "component_id": "comp-malformed-broken-link-dev-0001",
+   "category": "malformed",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 742,
+   "end_byte": 765,
+   "start_cp": 731,
+   "end_cp": 754,
+   "component_id": "comp-malformed-broken-link-dev-0001",
+   "category": "malformed",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 765,
+   "end_byte": 766,
+   "start_cp": 754,
+   "end_cp": 755,
+   "component_id": "comp-malformed-broken-link-dev-0001",
+   "category": "malformed",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 766,
+   "end_byte": 770,
+   "start_cp": 755,
+   "end_cp": 759,
+   "component_id": "comp-malformed-broken-link-dev-0001",
+   "category": "malformed",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 770,
+   "end_byte": 771,
+   "start_cp": 759,
+   "end_cp": 760,
+   "component_id": "comp-malformed-broken-link-dev-0001",
+   "category": "malformed",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 771,
+   "end_byte": 774,
+   "start_cp": 760,
+   "end_cp": 763,
+   "component_id": "comp-malformed-broken-link-dev-0001",
+   "category": "malformed",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 774,
+   "end_byte": 775,
+   "start_cp": 763,
+   "end_cp": 764,
+   "component_id": "comp-malformed-broken-link-dev-0001",
+   "category": "malformed",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 775,
+   "end_byte": 776,
+   "start_cp": 764,
+   "end_cp": 765,
+   "component_id": "comp-malformed-broken-link-dev-0001",
+   "category": "malformed",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 776,
+   "end_byte": 788,
+   "start_cp": 765,
+   "end_cp": 777,
+   "component_id": "comp-malformed-broken-link-dev-0001",
+   "category": "malformed",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 788,
+   "end_byte": 789,
+   "start_cp": 777,
+   "end_cp": 778,
+   "component_id": "comp-malformed-broken-link-dev-0001",
+   "category": "malformed",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 789,
+   "end_byte": 795,
+   "start_cp": 778,
+   "end_cp": 784,
+   "component_id": "comp-malformed-broken-link-dev-0001",
+   "category": "malformed",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 795,
+   "end_byte": 796,
+   "start_cp": 784,
+   "end_cp": 785,
+   "component_id": "comp-malformed-broken-link-dev-0001",
+   "category": "malformed",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 796,
+   "end_byte": 803,
+   "start_cp": 785,
+   "end_cp": 792,
+   "component_id": "comp-malformed-broken-link-dev-0001",
+   "category": "malformed",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 803,
+   "end_byte": 804,
+   "start_cp": 792,
+   "end_cp": 793,
+   "component_id": "comp-malformed-broken-link-dev-0001",
+   "category": "malformed",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 804,
+   "end_byte": 812,
+   "start_cp": 793,
+   "end_cp": 801,
+   "component_id": "comp-malformed-broken-link-dev-0001",
+   "category": "malformed",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 812,
+   "end_byte": 813,
+   "start_cp": 801,
+   "end_cp": 802,
+   "component_id": "comp-malformed-broken-link-dev-0001",
+   "category": "malformed",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 813,
+   "end_byte": 818,
+   "start_cp": 802,
+   "end_cp": 807,
+   "component_id": "comp-malformed-broken-link-dev-0001",
+   "category": "malformed",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 818,
+   "end_byte": 819,
+   "start_cp": 807,
+   "end_cp": 808,
+   "component_id": "comp-malformed-broken-link-dev-0001",
+   "category": "malformed",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 819,
+   "end_byte": 822,
+   "start_cp": 808,
+   "end_cp": 811,
+   "component_id": "comp-malformed-broken-link-dev-0001",
+   "category": "malformed",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 822,
+   "end_byte": 823,
+   "start_cp": 811,
+   "end_cp": 812,
+   "component_id": "comp-malformed-broken-link-dev-0001",
+   "category": "malformed",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 823,
+   "end_byte": 824,
+   "start_cp": 812,
+   "end_cp": 813,
+   "component_id": "comp-malformed-broken-link-dev-0001",
+   "category": "malformed",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 824,
+   "end_byte": 835,
+   "start_cp": 813,
+   "end_cp": 823,
+   "component_id": "comp-malformed-broken-link-dev-0001",
+   "category": "malformed",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 835,
+   "end_byte": 836,
+   "start_cp": 823,
+   "end_cp": 824,
+   "component_id": "comp-malformed-broken-link-dev-0001",
+   "category": "malformed",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 836,
+   "end_byte": 841,
+   "start_cp": 824,
+   "end_cp": 829,
+   "component_id": "comp-malformed-broken-link-dev-0001",
+   "category": "malformed",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 841,
+   "end_byte": 842,
+   "start_cp": 829,
+   "end_cp": 830,
+   "component_id": "comp-malformed-broken-link-dev-0001",
+   "category": "malformed",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 842,
+   "end_byte": 845,
+   "start_cp": 830,
+   "end_cp": 833,
+   "component_id": "comp-malformed-broken-link-dev-0001",
+   "category": "malformed",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 845,
+   "end_byte": 846,
+   "start_cp": 833,
+   "end_cp": 834,
+   "component_id": "comp-malformed-broken-link-dev-0001",
+   "category": "malformed",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 846,
+   "end_byte": 852,
+   "start_cp": 834,
+   "end_cp": 839,
+   "component_id": "comp-malformed-broken-link-dev-0001",
+   "category": "malformed",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 852,
+   "end_byte": 853,
+   "start_cp": 839,
+   "end_cp": 840,
+   "component_id": "comp-malformed-broken-link-dev-0001",
+   "category": "malformed",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 853,
+   "end_byte": 861,
+   "start_cp": 840,
+   "end_cp": 848,
+   "component_id": "comp-malformed-broken-link-dev-0001",
+   "category": "malformed",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 861,
+   "end_byte": 862,
+   "start_cp": 848,
+   "end_cp": 849,
+   "component_id": "comp-malformed-broken-link-dev-0001",
+   "category": "malformed",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 862,
+   "end_byte": 869,
+   "start_cp": 849,
+   "end_cp": 856,
+   "component_id": "comp-malformed-broken-link-dev-0001",
+   "category": "malformed",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 869,
+   "end_byte": 870,
+   "start_cp": 856,
+   "end_cp": 857,
+   "component_id": "comp-malformed-broken-link-dev-0001",
+   "category": "malformed",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 870,
+   "end_byte": 871,
+   "start_cp": 857,
+   "end_cp": 858,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 871,
+   "end_byte": 927,
+   "start_cp": 858,
+   "end_cp": 913,
+   "component_id": "comp-markdown-strong-dev-0002",
+   "category": "markdown",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 927,
+   "end_byte": 929,
+   "start_cp": 913,
+   "end_cp": 915,
+   "component_id": "comp-markdown-strong-dev-0002",
+   "category": "markdown",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 929,
+   "end_byte": 935,
+   "start_cp": 915,
+   "end_cp": 920,
+   "component_id": "comp-markdown-strong-dev-0002",
+   "category": "markdown",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 935,
+   "end_byte": 937,
+   "start_cp": 920,
+   "end_cp": 922,
+   "component_id": "comp-markdown-strong-dev-0002",
+   "category": "markdown",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 937,
+   "end_byte": 941,
+   "start_cp": 922,
+   "end_cp": 926,
+   "component_id": "comp-markdown-strong-dev-0002",
+   "category": "markdown",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 941,
+   "end_byte": 943,
+   "start_cp": 926,
+   "end_cp": 928,
+   "component_id": "comp-markdown-strong-dev-0002",
+   "category": "markdown",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 943,
+   "end_byte": 952,
+   "start_cp": 928,
+   "end_cp": 936,
+   "component_id": "comp-markdown-strong-dev-0002",
+   "category": "markdown",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 952,
+   "end_byte": 954,
+   "start_cp": 936,
+   "end_cp": 938,
+   "component_id": "comp-markdown-strong-dev-0002",
+   "category": "markdown",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 954,
+   "end_byte": 965,
+   "start_cp": 938,
+   "end_cp": 949,
+   "component_id": "comp-markdown-strong-dev-0002",
+   "category": "markdown",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 965,
+   "end_byte": 966,
+   "start_cp": 949,
+   "end_cp": 950,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 966,
+   "end_byte": 1122,
+   "start_cp": 950,
+   "end_cp": 1106,
+   "component_id": "comp-structured-toml-dev-0003",
+   "category": "structured",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 1122,
+   "end_byte": 1123,
+   "start_cp": 1106,
+   "end_cp": 1107,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 1123,
+   "end_byte": 1164,
+   "start_cp": 1107,
+   "end_cp": 1148,
+   "component_id": "comp-machine-windows-paths-dev-0005",
+   "category": "machine",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 1164,
+   "end_byte": 1165,
+   "start_cp": 1148,
+   "end_cp": 1149,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 1165,
+   "end_byte": 1576,
+   "start_cp": 1149,
+   "end_cp": 1554,
+   "component_id": "comp-prose-administration-dev-0001",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  }
+ ],
+ "invariants": {
+  "tiling_complete": true,
+  "no_contradictory_overlaps": true,
+  "cp_range_exact": true
+ }
+}

@@ -1,0 +1,41 @@
+{
+ "doc_id": "dev-001681",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T10-randomized",
+ "byte_length": 694,
+ "cp_length": 685,
+ "sha256": "236af77ed06a8feddd24f2efb11dca13a22be2c26eec3b2c3ef04ed2698542d6",
+ "document": "Pri projektu Zimska lučka je Katja poizkusila z dvema baterijama in dvema upornostma. A sklep je bil sprva odprt. Ko je na koncu pritiskala na stikalo, se je dioda vžgala. V dnevni sobi so slišali le tihi, zadovoljen smeh.\nPROJEKT=Modra gora\nAVTOR=Ana Kovač\nTEMPERATURA=18,5 °C\nVLAGNOST=62 %\nDODATNA_VAR=$drugim_ključem; 0,13\nOPIS=[*testna*, _vsebina_, https://primer.si/novica]\n## Naslov 3\n![Opis: shema zaloge za projekt Charlie](https://primer.si/slika.png)\nMaja Rozman: prostornina 5 L, čas 120 s.\n$\\prod_{\\kappa=1}^{3} \\theta_\\kappa = \\eta_{\\text{Viktor projekt Jezero}}$\nSpremenljivka se obnaša kot stikalo v omarici. Vrednost se spremeni. Zanka se ponovi. Funkcija zaključi del.",
+ "components": [
+  {
+   "component_id": "comp-prose-electronics-dev-0008",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 225
+  },
+  {
+   "component_id": "comp-structured-env-blocks-dev-0001",
+   "category": "structured",
+   "start_byte": 226,
+   "end_byte": 384
+  },
+  {
+   "component_id": "comp-markdown-images-dev-0003",
+   "category": "markdown",
+   "start_byte": 385,
+   "end_byte": 508
+  },
+  {
+   "component_id": "comp-math-inline-dollar-dev-0004",
+   "category": "math",
+   "start_byte": 509,
+   "end_byte": 583
+  },
+  {
+   "component_id": "comp-prose-programming-explainer-dev-0008",
+   "category": "prose",
+   "start_byte": 584,
+   "end_byte": 694
+  }
+ ]
+}

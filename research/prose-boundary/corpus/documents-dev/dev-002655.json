@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-002655",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T5-lists",
+ "byte_length": 866,
+ "cp_length": 854,
+ "sha256": "22eb810ba696bbe50efd7e13fa4b7847a14c20e9230f2058e8e2ec2e0a697691",
+ "document": "- Proces urejanja prostorskih posegov v okviru notranjega testnega projekta se je lani (2024) prenesel v skupno aplikacijo, kar je v prvih mesecih povzročilo zamude. Občinski sekretar, ki je sicer skrbel za informatiko, je sodelavce opozoril, naj se strogo držijo notranjih rokov in da je vsak dokument datiran, pečaten in arhiviran.\n- `-- Fragment 3: izpisi za osebo`\n- V okviru projekta Reka je bila jeklena konstrukcija obnašala stabilno, tudi po močnem pihu. Most je bil dolg 412 metrov. Nosilci so bili premazani z epoksi premazom. Vetrovna obremenitev je bila izračunana za 30 let.\n- Zgodba o izmišljenem gradu Kamen, ki ga je opisal Marko Perš, se v šolskih zvezkih pogosto pojavlja brez natančne letnice. V enem od zapisov pa stoji samo leto 1888 in kratek opis ograj (visokih okoli dveh metrov), kar je sicer precej nenavadno za takšno pripoved.",
+ "components": [
+  {
+   "component_id": "comp-prose-administration-dev-0013",
+   "category": "prose",
+   "start_byte": 2,
+   "end_byte": 337
+  },
+  {
+   "component_id": "comp-code-sql-dev-0011",
+   "category": "code",
+   "start_byte": 340,
+   "end_byte": 372
+  },
+  {
+   "component_id": "comp-prose-engineering-dev-0003",
+   "category": "prose",
+   "start_byte": 375,
+   "end_byte": 594
+  },
+  {
+   "component_id": "comp-prose-history-dev-0008",
+   "category": "prose",
+   "start_byte": 597,
+   "end_byte": 866
+  }
+ ]
+}

@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-001948",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T2-prose-math-prose",
+ "byte_length": 807,
+ "cp_length": 795,
+ "sha256": "4ebf4229cbfdc75b8e2b489fe3bd209493f8078e4026e64849e70926a770921d",
+ "document": "V projektu Morska črta je Ana izračunala, da se je prodaja v letu 2023 povečala za 12 odstotkov. To je pomenilo, da je v juliju na tri prodane kosove v povprečju padlo eno novo naročilo. Ekipa je rezultat zapisala v testno interno poročilo in ga označila za preverjeno.\n\\begin{equation} \\text{Testni projekt Tomas} \\; : \\; \\sin^2 \\theta_6 + \\cos^2 \\theta_6=1 \\Rightarrow \\theta_6=\\frac{\\pi}{6} \\Rightarrow \\sin^2\\left(\\frac{\\pi}{6}\\right)+\\cos^2\\left(\\frac{\\pi}{6}\\right)=1 \\end{equation}\nV občini Krkavec so leta 2023 preverili potek postopka za dovoljenje za majhno prodajno stojnico. Rok za oddajo dokumentov je bil petnajst dni, vendar so nekateri prijavniki poslali vprašanja že prej. Strokovna skupina je nato v zapisniku navedla, da je zahtevo mogoče dopolniti le z lastnoročnim podpisom.",
+ "components": [
+  {
+   "component_id": "comp-prose-statistics-dev-0006",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 276
+  },
+  {
+   "component_id": "comp-math-equation-env-dev-0006",
+   "category": "math",
+   "start_byte": 277,
+   "end_byte": 495
+  },
+  {
+   "component_id": "comp-prose-administration-dev-0006",
+   "category": "prose",
+   "start_byte": 496,
+   "end_byte": 807
+  }
+ ]
+}

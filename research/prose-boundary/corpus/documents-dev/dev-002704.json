@@ -1,0 +1,59 @@
+{
+ "doc_id": "dev-002704",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T10-randomized",
+ "byte_length": 1572,
+ "cp_length": 1539,
+ "sha256": "50544cc2490a9c8ee2771766d35ac7d4bf9d62a9fd6d704e520bf80c7906867a",
+ "document": "Za lažje razumevanje enačb je dobro, da učenci najprej preberejo nalogo dvakrat, nato pa s povedmi opišejo, kaj se dogaja, in šele potem iščejo tisto, česar ne vedo. V šolski knjigi iz leta 2015 je bil točen primer razgovora med učiteljico Ano in dijakom Tomom, ki sta prenašala pomen vsake besede v smisel zvezka, ne v zapis.\nFragment 7: <table><tr><td>Številka</td><td>1.000</td></tr><tr><td>Delež</td><td>12,5 %</td></tr><tr><td>Množica</td><td>0,875</td></tr><tr><td>Povezava</td><td>*vir_ (<a href=\"https://primer.si/vir\">vir</a>)</td></tr></table>\nIzmišljeni projekt Osvetlitev: Marko Novak pošlje povratne informacije na <pošta@primer.si> in priloži naslov <https://primer.si/stran> za 5 LED. Masa 0,2 kg.\n[raziskava]\nime = *Projekt Meritve*\nopis = _trajanje_ 3 dni\ncena = 1,20 EUR\navtor = Ana Kovač\nvir = https://primer.si/novica\n; nevtralna testna vsebina\n{\"ime\":\"Projekt Reka\",\"razmerje\":\"2,5 m / 0,13\",\"avtorsko\":\"Nevtralna testna vsebina\",\"vzorec\":{\"delež\":\"30 %\",\"opis\":\"_Nevtralno_ https://primer.si/novica\"}}\n| Ime projekta | Enota | Vrednost |\n| --- | --- | --- |\n| Projekt Lipa | m | 12 |\n| Modul Sonce | kg | 45 |\n| Ime osebe | Enota | Merilo |\n| --- | --- | --- |\n| Ana Kovač | min | 18 |\n| Bojan Zupan | l | 230 |\nV testnem projektu Svetilka 2024 so učenci preizkusili baterijo tipa AA, sklep z ročico in upornost z oranžnim pasom. Ko so sklep odprli, se utripalka utihnila, čeprav je komponenta še vedno rahlo toplila (tudi pri šibkem toku). V dnevniku so zapisali: „Sij je enakomeren, dokler prst ne premakne ročice.“",
+ "components": [
+  {
+   "component_id": "comp-prose-math-explainer-dev-0009",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 338
+  },
+  {
+   "component_id": "comp-structured-html-dev-0007",
+   "category": "structured",
+   "start_byte": 339,
+   "end_byte": 568
+  },
+  {
+   "component_id": "comp-markdown-autolinks-dev-0002",
+   "category": "markdown",
+   "start_byte": 569,
+   "end_byte": 731
+  },
+  {
+   "component_id": "comp-structured-ini-dev-0005",
+   "category": "structured",
+   "start_byte": 732,
+   "end_byte": 884
+  },
+  {
+   "component_id": "comp-structured-json-dev-0004",
+   "category": "structured",
+   "start_byte": 885,
+   "end_byte": 1044
+  },
+  {
+   "component_id": "comp-markdown-tables-dev-0001",
+   "category": "markdown",
+   "start_byte": 1045,
+   "end_byte": 1152
+  },
+  {
+   "component_id": "comp-markdown-tables-dev-0002",
+   "category": "markdown",
+   "start_byte": 1153,
+   "end_byte": 1255
+  },
+  {
+   "component_id": "comp-prose-electronics-dev-0003",
+   "category": "prose",
+   "start_byte": 1256,
+   "end_byte": 1572
+  }
+ ]
+}

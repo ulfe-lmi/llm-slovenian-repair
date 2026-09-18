@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-001980",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T1-prose-inlinecode-prose",
+ "byte_length": 938,
+ "cp_length": 912,
+ "sha256": "803d94a33b77cbb7ae40ddbaa4222bde769bacaa204bad0af8941ab1f544e762",
+ "document": "Biološki kolektiv pri projektu Križanec je v gozdu nad Celjem opazoval rast gliv po jutranji rosi. Med analizo vzorčkov (tri serije, vse z značko Z3) je dr. Marko Zupan opažil, da se nekatere hife ob dotiku zavrtijo, kar je v laboratoriju razložil s preprostimi mehanskimi odzivi. »To ni čarobno vedenje,« je dejal in dodal, da so za znanstvenika pogosto najpomembnejši tisti podrobnosti, ki jih drugi spregledajo.\n`# Testni projekt: Nabavna lista; avtor: Maja Lipovnik`\nPri izmišljenem projektu “Zvonovi Koroške” (tudi testni vnos) so ugotovili, da so verske zgradbe hranile spomine, ki so jih ljudje obvezno prenašali iz roda v rod. Kratek zapis o letnici 1680, dolg le 120 znakov, je bil označen kot sporen. Uradnik Miha je dodal, da je “povest” pogosto lažna, a vseeno živi v spominu. Zato so v bazi ohranili tri različne verzije (enkrat kratko, enkrat dolgo in enkrat prekrčeno), ki se med seboj ne ujemajo.",
+ "components": [
+  {
+   "component_id": "comp-prose-science-dev-0012",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 424
+  },
+  {
+   "component_id": "comp-code-python-dev-0002",
+   "category": "code",
+   "start_byte": 425,
+   "end_byte": 480
+  },
+  {
+   "component_id": "comp-prose-history-dev-0012",
+   "category": "prose",
+   "start_byte": 481,
+   "end_byte": 938
+  }
+ ]
+}

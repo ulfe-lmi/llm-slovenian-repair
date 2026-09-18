@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-002639",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T11-interactions",
+ "byte_length": 1177,
+ "cp_length": 1159,
+ "sha256": "8c8ac0cedc593c004fd082436f034597c93f2090ccf8ba1b7431a48cc4b35f6d",
+ "document": "`// Testni modul (č, š, ž)`.\n```\n# Testni projekt: Seznam; avtor: Maja Lipovnik\nseznam = ['src/modul.py', 'docs/vir.txt']\nznacka = '*poudarek*'\noklepaj = '(neodvisno č)'\nvsota = sum(range(1, 4))\nif vsota == 6:\n    print('Seznam je pravilen')\n# komentar z \\frac{a}{b}\n```\nV projektu Brisača so mladi v Novem mestu dobili učbenik, ki je namesto dolgih razlag ponudil tri kratke opise in eno vprašanje za pogovor. Nekateri odrasli so želeli, da bi izpit ostal razumljiv, zato so v nalogah zapisali tudi primer, kakšno vprašanje bodo dobili. Učiteljica Ivana je v uvodnem poglavju (glej stran 17) dodala opombo o tem, kako se besede razlikujejo v govoru in v pisanju. Po kratkem testnem popoldnevu v oddelku so se učenci in starši bolje dogovorili o tem, kaj pomeni samostojno reševanje.\nV izmišljenem projektu Bralna linija (2021) mlada lektorica Ana Brezan raziskuje, kako kratek slovenski razpesek vpraša spomin. V evropski primerjavi se motiva potovanja in tihotapljenja knjig pojavita pri avtorici Elini Kravec ter pri francoskem romanopiscu Marcu Villen. Zvrst, ki jo raziskovalci imenujejo bralna pripoved, tu zveni kot nežna variacija na klasičen dnevnik.",
+ "components": [
+  {
+   "component_id": "comp-code-javascript-dev-0009",
+   "category": "code",
+   "start_byte": 0,
+   "end_byte": 30
+  },
+  {
+   "component_id": "comp-code-python-dev-0006",
+   "category": "code",
+   "start_byte": 32,
+   "end_byte": 274
+  },
+  {
+   "component_id": "comp-prose-education-dev-0008",
+   "category": "prose",
+   "start_byte": 275,
+   "end_byte": 797
+  },
+  {
+   "component_id": "comp-prose-literature-dev-0001",
+   "category": "prose",
+   "start_byte": 798,
+   "end_byte": 1177
+  }
+ ]
+}

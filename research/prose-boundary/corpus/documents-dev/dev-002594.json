@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-002594",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T10-randomized",
+ "byte_length": 1011,
+ "cp_length": 988,
+ "sha256": "68ece890b951bb2754f472695595a4e9c9f2b5ee224633d8304c36698a62e9db",
+ "document": "Med razstavo v izmišljenem paviljonu je vodja ekipe Petra Lovšin pokazala model železne konstrukcije iz leta 1895. Očitali so ji, da je preveč zaupala spominom starih obrtnikov. (V ožjem krogu so rekli, da je bil model težak približno trideset kilogramov.) »Če bi imeli le eno potrdilo,« je dejala, »bi zgodbo lahko razumlili drugače.« Kljub temu so obiskovalci ostali zmedeni zaradi pomanjkanja ohranjenih meritev.\n```\nint main(void) { char *cena1 = \"1 $\"; char *cena2 = \"2 EUR\"; char *potA = \"docs/vir.txt\"; char *potB = \"src/modul.py\"; int seStez = 1; (void)cena1; (void)cena2; (void)potA; (void)potB; (void)seStez; return 0; } /* Valute: $ in EUR */\n```\nPri projektu Zvezdno seme je ekipa iz Maribora preučevala, kako se semena neznane rastline odzivajo na simulirano nočno svetlobo. V zvezku opomb so pisali (v naravnem tonu): »Spominja na polje po dežju, a brez vonja.« V letu 2023 so rezultat zapisali kot zanimivo, vendar še vedno nejasno.\n Pozor: é (dekompouziran znakovni niz).",
+ "components": [
+  {
+   "component_id": "comp-prose-history-dev-0009",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 429
+  },
+  {
+   "component_id": "comp-code-c-dev-0005",
+   "category": "code",
+   "start_byte": 430,
+   "end_byte": 671
+  },
+  {
+   "component_id": "comp-prose-science-dev-0010",
+   "category": "prose",
+   "start_byte": 672,
+   "end_byte": 967
+  }
+ ]
+}

@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-000765",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T7-prose-json-prose-latex",
+ "byte_length": 676,
+ "cp_length": 669,
+ "sha256": "c6cd31f894681c5f0279e8322e35bc40223a144918561947ac261859a91d9542",
+ "document": "Varnostni vodič iz leta 2020 je zapisal, da se baterije nikoli ne smejo povezati v kratki sklep brez upornosti, in v vmesnem koraku je Luka preveril, ali so upornosti prave vrednosti. (Vse to je bilo del testne serije za projekt Vrtinec.)\n{\"ime\":\"Oseba Miha\",\"dolžina\":\"1,8 m\",\"avtorsko\":\"Nevtralna testna vsebina\",\"razmerje\":\"0,13\",\"opomba\":\"*Izmišljena oseba* https://primer.si/novica\"}\nPalermo, glavno mesto Sicilije, je leta 2022 ponujal nenavadno kombinacijo zvočnih ulic, barvitih tržnic in starinske arhitekture. Priporočamo obisk katedrale in sprehod po starem mestnem jedru, zlasti zvečer.\n\\Pr(Z > \\mu + \\sigma) = 1 - \\Phi(1) = 0.1587 \\text{ (verjetnost repa)}",
+ "components": [
+  {
+   "component_id": "comp-prose-electronics-dev-0009",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 239
+  },
+  {
+   "component_id": "comp-structured-json-dev-0006",
+   "category": "structured",
+   "start_byte": 240,
+   "end_byte": 391
+  },
+  {
+   "component_id": "comp-prose-travel-dev-0010",
+   "category": "prose",
+   "start_byte": 392,
+   "end_byte": 605
+  },
+  {
+   "component_id": "comp-math-probability-dev-0006",
+   "category": "math",
+   "start_byte": 606,
+   "end_byte": 676
+  }
+ ]
+}

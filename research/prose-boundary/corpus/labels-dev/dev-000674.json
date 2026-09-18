@@ -1,0 +1,132 @@
+{
+ "doc_id": "dev-000674",
+ "byte_length": 413,
+ "cp_length": 407,
+ "regions": [
+  {
+   "start_byte": 0,
+   "end_byte": 3,
+   "start_cp": 0,
+   "end_cp": 3,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 3,
+   "end_byte": 64,
+   "start_cp": 3,
+   "end_cp": 63,
+   "component_id": "comp-prose-statistics-dev-0013",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 64,
+   "end_byte": 65,
+   "start_cp": 63,
+   "end_cp": 64,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 65,
+   "end_byte": 315,
+   "start_cp": 64,
+   "end_cp": 310,
+   "component_id": "comp-prose-history-dev-0002",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 315,
+   "end_byte": 316,
+   "start_cp": 310,
+   "end_cp": 311,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 316,
+   "end_byte": 336,
+   "start_cp": 311,
+   "end_cp": 330,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 336,
+   "end_byte": 350,
+   "start_cp": 330,
+   "end_cp": 344,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 350,
+   "end_byte": 352,
+   "start_cp": 344,
+   "end_cp": 346,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 352,
+   "end_byte": 392,
+   "start_cp": 346,
+   "end_cp": 386,
+   "component_id": "comp-prose-engineering-dev-0009",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 392,
+   "end_byte": 395,
+   "start_cp": 386,
+   "end_cp": 389,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 395,
+   "end_byte": 411,
+   "start_cp": 389,
+   "end_cp": 405,
+   "component_id": "comp-machine-shell-commands-dev-0005",
+   "category": "machine",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 411,
+   "end_byte": 413,
+   "start_cp": 405,
+   "end_cp": 407,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  }
+ ],
+ "invariants": {
+  "tiling_complete": true,
+  "no_contradictory_overlaps": true,
+  "cp_range_exact": true
+ }
+}

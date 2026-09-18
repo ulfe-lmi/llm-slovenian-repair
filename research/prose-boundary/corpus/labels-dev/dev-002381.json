@@ -1,0 +1,112 @@
+{
+ "doc_id": "dev-002381",
+ "byte_length": 748,
+ "cp_length": 717,
+ "regions": [
+  {
+   "start_byte": 0,
+   "end_byte": 315,
+   "start_cp": 0,
+   "end_cp": 306,
+   "component_id": "comp-prose-administration-dev-0004",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 315,
+   "end_byte": 316,
+   "start_cp": 306,
+   "end_cp": 307,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 316,
+   "end_byte": 317,
+   "start_cp": 307,
+   "end_cp": 308,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 317,
+   "end_byte": 352,
+   "start_cp": 308,
+   "end_cp": 338,
+   "component_id": "comp-prose-everyday-advice-dev-0003",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 352,
+   "end_byte": 354,
+   "start_cp": 338,
+   "end_cp": 340,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 354,
+   "end_byte": 380,
+   "start_cp": 340,
+   "end_cp": 366,
+   "component_id": "comp-machine-urls-dev-0007",
+   "category": "machine",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 380,
+   "end_byte": 381,
+   "start_cp": 366,
+   "end_cp": 367,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 381,
+   "end_byte": 382,
+   "start_cp": 367,
+   "end_cp": 368,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 382,
+   "end_byte": 707,
+   "start_cp": 368,
+   "end_cp": 683,
+   "component_id": "comp-prose-everyday-advice-dev-0003",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 707,
+   "end_byte": 748,
+   "start_cp": 683,
+   "end_cp": 717,
+   "component_id": "template",
+   "category": null,
+   "role": "PROSE",
+   "template_owned": true
+  }
+ ],
+ "invariants": {
+  "tiling_complete": true,
+  "no_contradictory_overlaps": true,
+  "cp_range_exact": true
+ }
+}

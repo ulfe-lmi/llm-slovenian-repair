@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-002229",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T8-quote-fenced",
+ "byte_length": 653,
+ "cp_length": 641,
+ "sha256": "7be15823296d1c88c49aa8d518c0f3b9f974c82c2fdfc0acf92a9fc3db962fe7",
+ "document": "> V projektu Gora je Ana razložila sodelavcu, da je spremenljivka kot oznaka na policah v knjižnici. Ko jo preimenujemo, spremenimo samo oznako, ne pa tudi knjige. Včasih to ugotovijo šele ob testiranju, ko program poišče napačno ime. `/* Konstanta za testno temo: Hrašna vrednost */ const HRAŠNA`\n```\n/* Testni fragment 4: izmišljena oseba Eva, projekt Trava. */ SELECT 'Eva' AS `ime`, '4,20 $' AS `cena`, 'https://primer.si/koda' AS `url`, 'docs/vir.txt' AS `pot`, TRIM('*poudarek* in _dolgo_') AS `opomba`, 'razdelek2' AS `razdelek2`, 'seStez' AS `seStez`, 'č' AS `HRAŠNA_VREDNOST` FROM (SELECT 4 AS `en`) AS `t` WHERE (`t`.`en` = 4);\n```",
+ "components": [
+  {
+   "component_id": "comp-prose-programming-explainer-dev-0001",
+   "category": "prose",
+   "start_byte": 2,
+   "end_byte": 241
+  },
+  {
+   "component_id": "comp-code-javascript-dev-0004",
+   "category": "code",
+   "start_byte": 242,
+   "end_byte": 306
+  },
+  {
+   "component_id": "comp-code-sql-dev-0004",
+   "category": "code",
+   "start_byte": 307,
+   "end_byte": 653
+  }
+ ]
+}

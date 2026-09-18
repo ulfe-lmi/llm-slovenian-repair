@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-001793",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T1-prose-inlinecode-prose",
+ "byte_length": 830,
+ "cp_length": 810,
+ "sha256": "a69404b8cf58222be2cf15622c9c8ff89e0ee854b48d6cad34f06cadfc8504c0",
+ "document": "V projektu Sona (manjša fizikalna raziskava) je Maja spremljala vibracije tankih folij pri nizkih temperaturah. Zapisovala je, da se pri približno sto in dvanajst kelvinov material odzove drugače, in to je bilo vidno že po prvih dneh. Leta dvotisoč in osemnajst je ekipa poskusila ponoviti meritve, a je veter v prostoru vplival na števce.\n`# Testni projekt: Vir podatkov; avtor: Maja Lipovnik`\nMed razstavo v izmišljenem paviljonu je vodja ekipe Petra Lovšin pokazala model železne konstrukcije iz leta 1895. Očitali so ji, da je preveč zaupala spominom starih obrtnikov. (V ožjem krogu so rekli, da je bil model težak približno trideset kilogramov.) »Če bi imeli le eno potrdilo,« je dejala, »bi zgodbo lahko razumlili drugače.« Kljub temu so obiskovalci ostali zmedeni zaradi pomanjkanja ohranjenih meritev.",
+ "components": [
+  {
+   "component_id": "comp-prose-science-dev-0001",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 345
+  },
+  {
+   "component_id": "comp-code-python-dev-0005",
+   "category": "code",
+   "start_byte": 346,
+   "end_byte": 400
+  },
+  {
+   "component_id": "comp-prose-history-dev-0009",
+   "category": "prose",
+   "start_byte": 401,
+   "end_byte": 830
+  }
+ ]
+}

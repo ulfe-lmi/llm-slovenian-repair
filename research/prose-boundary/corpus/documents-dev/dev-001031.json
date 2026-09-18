@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-001031",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T9-prose-malformed-prose",
+ "byte_length": 818,
+ "cp_length": 804,
+ "sha256": "33f8a3ba97d328f756f40cf3eb9dbc53b628d3a0a6241a1046ca8bbf4a59329a",
+ "document": "V projektu Mlin 2018 je Luka preveril, koliko je povprečno trajala čakalna vrsta. Ko so trije prostovoljci dodali svoje opazke, se je slika izkazala za bolj uravnoteženo. Po njegovem mnenju je bistvo v tem, da se številka ne bere sama, ampak potrebuje kontekst.\n$$z=3. Ivan Hrib preverja projekt Senca.\nV sklopu projekta Papirni most je Anica Kranjc v zbornik vstavila odlomek iz romaneskega dnevnika, ki nosi ime »Zadnji tiskar«. Besedilo iz leta 1998 pripoveduje o mali nakladni hiši v Celju, kjer so tiskarji med prazniki brali evropske pripovedke. Nekatera poglavja ostajajo izpuščena (verjetno zaradi cenzure), druga pa so prenesena ročno v zvezek iz tankega usnja. To vprašanje pomena slovenske knjižnosti v evropskem prostoru se v zadnjem odstavku razreši šele s kratkim pozivom k skupnemu branju.",
+ "components": [
+  {
+   "component_id": "comp-prose-statistics-dev-0001",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 265
+  },
+  {
+   "component_id": "comp-malformed-incomplete-display-dollar-dev-0003",
+   "category": "malformed",
+   "start_byte": 266,
+   "end_byte": 306
+  },
+  {
+   "component_id": "comp-prose-literature-dev-0013",
+   "category": "prose",
+   "start_byte": 307,
+   "end_byte": 818
+  }
+ ]
+}

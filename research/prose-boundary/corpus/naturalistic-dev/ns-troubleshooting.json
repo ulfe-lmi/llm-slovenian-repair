@@ -1,0 +1,68 @@
+[
+ {
+  "case_id": "nat-troubleshooting-dev-01",
+  "scenario": "ns-troubleshooting",
+  "scenario_index": 3,
+  "instance": "dev",
+  "fragment": "Za razhroščovanje naprave v izmišljenem projektu 'senzorna-lab', ki ga vodi Ana Novak, razišči tri dele: konfiguracijo, dnevnik in zagon. Najprej preveri, ali je naprava prebrala pravilno ime senzora. Če ni odziva, izvedi naslednje korake.\n\n| Simptom | Kdaj preveriti |\n|---|---|\n| Tiho zagon | `naprava/ustanovi.sh` |\n| Napačne vrednosti | `config/merilnik.json` |\n| Visoka poraba | `logi/pomnilnik.log` |\n\nKoraki:\n1. Otvori relativno pot do glavnega skripta: `projekat/naprava/main.py`.\n2. Zaženi testno izvedbo:\n```bash\ncd projekat/naprava\npython main.py --test\n```\n3. Išči napake v dnevniku:\n```bash\ngrep 'napaka' logi/naprava.log\n```\n4. Če je konfiguracija nepravilna, popravi polje `ime_senzor` in ponovi zagon.\n5. Shrani rezultat v `poroci/razhroscenje_001.txt`.\nČe test pade, primerjaj različici skripta `main.py` in `main.stari.py`, nato preveri, ali je dnevnik prazen.\nOdgovorno osebo obvesti, da gre za testno napravo M-12 in da nobenih avtorizacijskih podatkov ni bilo treba vnašati.",
+  "fragment_sha256": "ad6259aa0a4f54e9025b95aefdff0e82ae0694d34c781fc374f0c8fa892d2c41",
+  "fragment_bytes": 1009,
+  "prompt_sha256": "c74587ba70d19737c682c67a69edf3962b85222026ef70750111eb71543ad795",
+  "seed": "fdae2b910386b02a"
+ },
+ {
+  "case_id": "nat-troubleshooting-dev-02",
+  "scenario": "ns-troubleshooting",
+  "scenario_index": 3,
+  "instance": "dev",
+  "fragment": "Za razhroščevanje naprave Kovač Klimat 3000 v projektu `dom-ac` najprej preverite osnove, potem dnevnik in končno znane težave.\n\nKoraki:\n1. Pojdite v koren projekta in preverite, ali so datoteke na mestu.\n2. Zagnajte orodje `devicectl`, da vidite stanje mostu.\n3. Preglejte zadnje vrstice dnevnika in iščite besedo `timeout`.\n4. Če je morebiten vzrok star konfiguracijski vnos, ga posodobite in znova preverite stanje.\n\nKoristne relativne poti:\n- `src/device/status.log`\n- `src/device/device-info.json`\n- `docs/known-issues.md`\n- `tests/test_devicectl.py`\n\nTukaj so terminalski ukazi:\n```\nls -la src/device\ncat src/device/device-info.json\npython -m devicectl --status --project dom-ac\ngrep timeout src/device/status.log | tail -n 10\npython -m devicectl --restart relay\n```\n\nPreglednica za hitro diagnostiko:\n| Preverjanje | Očakovan rezultat | Kdo preverja |\n|---|---|---|\n| Stanje mostu | `online` | Ana |\n| Dnevnik brez čakanja | brez `timeout` | Marko |\n| Testni primeri | `ok` | Luka |\n\nČe `devicectl` poroča, da je most `offline`, najprej preverite mrežni kabel in vmesnik na napravi. Če v dnevniku ponovno vidite `timeout`, zagnajte ponovno vzpostavitev z ukazom `python -m devicectl --restart relay`. Ko je stanje spet `online`, zapišite dogodek v `docs/known-issues.md` in označite rešitev kot preverjeno za napravo Kovač Klimat 3000.",
+  "fragment_sha256": "95a9ae0f8f005447a4931b62c746695e19edb790d9bfbc31a403466ed503c1d1",
+  "fragment_bytes": 1360,
+  "prompt_sha256": "c74587ba70d19737c682c67a69edf3962b85222026ef70750111eb71543ad795",
+  "seed": "fdae2b910386b02a"
+ },
+ {
+  "case_id": "nat-troubleshooting-dev-03",
+  "scenario": "ns-troubleshooting",
+  "scenario_index": 3,
+  "instance": "dev",
+  "fragment": "Za razhroščovanje naprav v projektu Smerovna Stanica priporočam naslednji tok. Najprej preverite, ali je naprava priključena in ali ima omrežje. Nato zberite dnevnik in nastavitve. Vse poti so relativne do korena projekta.\n\n| Korak | Kaj početi | Datoteka |\n|---|---|---|\n| 1 | Preveri stanje naprave | config/naprava.ini |\n| 2 | Poišči napake v dnevniku | logs/diagnostika.log |\n| 3 | Poženi preverjanje | tools/preverjanje.py |\n\nTerminalski ukazi:\n\n```bash\ncd smerovna-stanica\ncat config/naprava.ini\ngrep napaka logs/diagnostika.log\npython tools/preverjanje.py --natisni\n```\n\nOsnovni podatki:\n- projekt: Smerovna Stanica\n- odgovorna oseba: Anja Kovač\n- mapa: tools\n- opomba: zabeleži ime naprave in datum\n\nČe se naprava ne najde, ponastavite omrežne nastavitve z:\n\n```bash\npython tools/preverjanje.py --ponastavi\n```\n\nZapisujte tudi stanje omrežja in čas v relativni datoteki `notes/razhroščevanje.md`. Anja Kovač, vodja ekipe, svetuje, da po popravljanju ročno preverite signal in časovni zapis v `logs/odnos.txt`. Rezultat naj bo tri zaporedne uspešne preizkuse, preden zaprete težavo.",
+  "fragment_sha256": "033f660dd499c22276b661f072ae06e60d637a3096e84c8e6019dbc458f6e487",
+  "fragment_bytes": 1111,
+  "prompt_sha256": "c74587ba70d19737c682c67a69edf3962b85222026ef70750111eb71543ad795",
+  "seed": "fdae2b910386b02a"
+ },
+ {
+  "case_id": "nat-troubleshooting-dev-04",
+  "scenario": "ns-troubleshooting",
+  "scenario_index": 3,
+  "instance": "dev",
+  "fragment": "Razhroščovanje naprave KavaPro 2: najprej preveri, ali je naprava priključena na omrežje in ali ima osveženo ponavljajočo nalogo. Maja je poročala o zamudah pri vročenju, zato preglej dnevnik in konfiguracijo.\n\n1. Poglej stanje:\n```bash\nnaprava/kava-pro/bin/status --naloge\nnaprava/kava-pro/bin/ping 192.168.1.24\n```\n\n2. Preveri konfiguracijo:\n```bash\ncat naprava/kava-pro/config/app.conf\ngrep vrocenje naprava/kava-pro/config/app.conf\n```\nRelativne poti so vedno določene do mape projekta.\n\n| Simptom | Ukaz | Datoteka |\n|---|---|---|\n| ni odziva | ping 192.168.1.24 | naprava/kava-pro/logs/error.log |\n| napačna temperatura | cat naprava/kava-pro/config/senzor.json | naprava/kava-pro/config/senzor.json |\n\n3. Ponovno naloži nastavitve:\n```bash\nnaprava/kava-pro/bin/reload --konfiguracija app.conf\nnaprava/kava-pro/bin/zagotovi --vzorci 3\n```\n\nČe se napaka nadaljuje, izvozi kratko poročilo:\n```bash\nnaprava/kava-pro/bin/diagnostika --izvoz reports/kava-pro-odprava.md\n```\n\nPo ponovni zagonu preveri, ali so merilne vrednosti med 88 in 92 C. Izmišljen podatkovni sklop: Maja, projektna oznaka KAV-042, testna lokacija Ljubljana. Ne vnašaj gesel, žetonov ali drugih ključev; uporabi samo zunanje identifikatorje in konfiguracijske vrednosti.",
+  "fragment_sha256": "a40bf188fc21cc76f1833bcd314b9087c7f08cb0eb2bf620b063304b99df1d7c",
+  "fragment_bytes": 1259,
+  "prompt_sha256": "c74587ba70d19737c682c67a69edf3962b85222026ef70750111eb71543ad795",
+  "seed": "fdae2b910386b02a"
+ },
+ {
+  "case_id": "nat-troubleshooting-dev-05",
+  "scenario": "ns-troubleshooting",
+  "scenario_index": 3,
+  "instance": "dev",
+  "fragment": "Razhroščevanje naprave: najprej preverim, ali je storitev poganjala in ali se v dnevniku pojavi napaka. Začnem z brskanjem po relativni poti projekta.\n\nKoraki:\n- preverim konfiguracijo in dnevnik\n```bash\ncat ./config/app.conf\ntail -n 50 ./logs/app.log\n```\n- preverim zapisljivost, zagon in test\n```bash\ntest -w ./data && echo ok\n./bin/start.sh --config ./config/app.conf\npython3 ./tests/test_queue.py\n```\n\nTabela:\n| Datoteka | Namen |\n|---|---|\n| ./config/app.conf | Konfiguracija storitve |\n| ./logs/app.log | Zabeležka delovanja |\n| ./data/queue.json | Začasni podatki v redi |\n\nPo vsakem koraku primerjam izhodno stanje z zadnjo znano delujočo verzijo in preverim morebitne spore med moduli. Če je napaka 500, pogosto pomanjka pomembnega nastavka v konfiguraciji ali se datoteka ./data/queue.json ne da odpreti. Uporabim izmišljeno osebo Ano Novak, ki je dodala spremembo pred dvema dnevoma, ter izmišljen podatkovni nabor z id 7. Zabeležim rezultat v ./logs/diagnostic.md in ponovno preverim, ali se storitev ustavi po zagonu.",
+  "fragment_sha256": "714810e105a9f36c71a784fb96757141616f3770dda3c4f5b0602d387392a4ca",
+  "fragment_bytes": 1040,
+  "prompt_sha256": "c74587ba70d19737c682c67a69edf3962b85222026ef70750111eb71543ad795",
+  "seed": "fdae2b910386b02a"
+ },
+ {
+  "case_id": "nat-troubleshooting-dev-06",
+  "scenario": "ns-troubleshooting",
+  "scenario_index": 3,
+  "instance": "dev",
+  "fragment": "Za razhroščovanje naprave Zvezda-1 v projektu MladiKovač priporočam naslednje korake. Najprej preverite napajanje in povezave, nato pa zbirte dnevnike.\n\n## Koraki\n\n1. Preverite status naprave.\n2. Preberite dnevnik iz `dnevniki/zvezda1/dnevnik.txt`.\n3. Preverite konfiguracijo v `src/naprava/nastavitve.json`.\n4. Po potrebi ponastavite servis.\n\nTa postopek je bil preizkušen v izmišljenem okolju, kjer je naprava občasno izgubila povezavo po posodobitvi. Vsak korak beležite v zapisnik, da boste lahko primerjali stanje pred in po popravitvi. Če se problem ponovi, izvočite tudi status sistemskih storitev in ga priložite poročilu.\n\n## Tabela preverjanj\n\n| Simptom | Ukrep | Pot |\n| --- | --- | --- |\n| Napava ne deluje | Preverite napajanje | `docs/zvezda1/napajanje.md` |\n| Napačen izvoz | Preverite konfiguracijo | `src/naprava/nastavitve.json` |\n| Zakasnitev | Preverite dnevnik | `dnevniki/zvezda1/dnevnik.txt` |\n\n## Terminali\n\nKoda:\n\n```\nls -la src/naprava\n```\n\nKoda:\n\n```\ncat dnevniki/zvezda1/dnevnik.txt\n```\n\nKoda:\n\n```\nmake -C src/naprava clean build\n```\n\nKoda:\n\n```\n./bin/zvezda1 --diagnostika --datoteka src/naprava/nastavitve.json\n```\n\nČe naprava kljub temu ne deluje, poizkusite s ponastavitvijo. Po ponastavitvi posodobite podatke osebe Anja Kovač in shranite rezultate v `porocila/zvezda1/porocilo.txt`. Pri tem ne uporabljajte absolutnih poti in ne shranjujte skrivnosti v dnevnikih.",
+  "fragment_sha256": "265a8e497fa671eb43b92eb5ad028d2e13d50db951920029eac7ae0c2b49c52d",
+  "fragment_bytes": 1413,
+  "prompt_sha256": "c74587ba70d19737c682c67a69edf3962b85222026ef70750111eb71543ad795",
+  "seed": "fdae2b910386b02a"
+ }
+]

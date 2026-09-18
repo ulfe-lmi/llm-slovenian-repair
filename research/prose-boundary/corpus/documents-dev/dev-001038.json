@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-001038",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T5-lists",
+ "byte_length": 776,
+ "cp_length": 765,
+ "sha256": "1da79db75ded64cd50f3ae50bda29dfe9d840c8055a8e1f71c940734bfed468c",
+ "document": "- V poročilu projekta Sova je Ana zabeležila, da je bil račun porabe preproster. Trije sodelavci so skupno porabili enaindevetdeset evrov. Po razmerju med porabo in sodelavci je povprečje za vsakega znašalo trideset tri evri.\n- `#!/usr/bin/env bash`\n- V projektu Zdrav vsak dan (v letu 2024) so izpostavili, da se lahko obremenjenost kaže v hitrem dihanju, v slabšem spanju ali v občutku tesnobe. To ni razlaga za domov, ampak spomin, da so telesni signali odziv. Ko se ti signali ponavljajo, jih najprej opiše oseba, nato pa jih preveri zdravnik.\n- V izmišljenem projektu Arhiv besed se motiv arhiva pojavi kot tiha zbirka pism, ki potujejo med slovenskimi in evropskimi mestoma. Izmišljeni avtor Martin Golob zgradi novelo iz treh stavkov. Njegova zgodba je tiha.",
+ "components": [
+  {
+   "component_id": "comp-prose-statistics-dev-0011",
+   "category": "prose",
+   "start_byte": 2,
+   "end_byte": 230
+  },
+  {
+   "component_id": "comp-code-shell-bash-dev-0009",
+   "category": "code",
+   "start_byte": 233,
+   "end_byte": 254
+  },
+  {
+   "component_id": "comp-prose-medicine-explainer-dev-0005",
+   "category": "prose",
+   "start_byte": 257,
+   "end_byte": 556
+  },
+  {
+   "component_id": "comp-prose-literature-dev-0010",
+   "category": "prose",
+   "start_byte": 559,
+   "end_byte": 776
+  }
+ ]
+}

@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-000131",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T11-interactions",
+ "byte_length": 1078,
+ "cp_length": 1062,
+ "sha256": "d10928906bfcffe01b0c0d2de96709d7c9da70e24f7149edc573f7775712c936",
+ "document": "`int main(void) { int seStez = 3; char *pot = \"src/modul.py\";`.\n```\n/* Fragment 1: nevtralni testni projekt, vir https://primer.si/koda, pot src/modul.py */ namespace primer { std::string naslov = \"Razdelek: _podrobnosti_\"; const int razdelek2 = 7; } std::string opis1() { return \"Cena: 10 $ *ponudba* `kod` (č, š, ž)\"; }\n# komentar z \\frac{a}{b}\n```\nV prostoru projekta Tabor so preizkušali prenos toplote skozi plastine in merili spremembe, ko so dodali tanke plasti iz mešanih vlaken. Meritve so vodila dva študenta, Luka in Nika, ki sta zapisoval čase, temperature ter opazila rahlo meglico na robu vzorcev. Leta dvotisoč in devetindvajset, ko je bila soba še prenovljena, je v opombah stalo, da bo treba poskus ponoviti pri drugačni vlažnosti.\nV zbirki Tihi bralci (2018) mlada pisateljica Nina Skof opisuje dedno knjižnico. Na stenski plošci visi seznam bralcev iz let 1954 in 1971, med njimi tudi izmišljeni pesnik Jure Čvik. Evropska literarna tradicija pozna podobno zbirko tistih, ki so izginili v prevodu. Knjižnost je tu skrita v prahu, ne v naslovu.",
+ "components": [
+  {
+   "component_id": "comp-code-c-dev-0001",
+   "category": "code",
+   "start_byte": 0,
+   "end_byte": 62
+  },
+  {
+   "component_id": "comp-code-cpp-dev-0009",
+   "category": "code",
+   "start_byte": 64,
+   "end_byte": 353
+  },
+  {
+   "component_id": "comp-prose-science-dev-0004",
+   "category": "prose",
+   "start_byte": 354,
+   "end_byte": 759
+  },
+  {
+   "component_id": "comp-prose-literature-dev-0003",
+   "category": "prose",
+   "start_byte": 760,
+   "end_byte": 1078
+  }
+ ]
+}

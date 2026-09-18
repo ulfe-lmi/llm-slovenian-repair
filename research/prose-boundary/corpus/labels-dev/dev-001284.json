@@ -1,0 +1,62 @@
+{
+ "doc_id": "dev-001284",
+ "byte_length": 837,
+ "cp_length": 821,
+ "regions": [
+  {
+   "start_byte": 0,
+   "end_byte": 397,
+   "start_cp": 0,
+   "end_cp": 389,
+   "component_id": "comp-prose-sports-dev-0003",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 397,
+   "end_byte": 398,
+   "start_cp": 389,
+   "end_cp": 390,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 398,
+   "end_byte": 439,
+   "start_cp": 390,
+   "end_cp": 431,
+   "component_id": "comp-malformed-truncated-json-dev-0002",
+   "category": "malformed",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 439,
+   "end_byte": 440,
+   "start_cp": 431,
+   "end_cp": 432,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 440,
+   "end_byte": 837,
+   "start_cp": 432,
+   "end_cp": 821,
+   "component_id": "comp-prose-electronics-dev-0012",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  }
+ ],
+ "invariants": {
+  "tiling_complete": true,
+  "no_contradictory_overlaps": true,
+  "cp_range_exact": true
+ }
+}

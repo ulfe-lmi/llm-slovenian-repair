@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-001131",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T10-randomized",
+ "byte_length": 941,
+ "cp_length": 918,
+ "sha256": "4cab825a9566d7b6faa809a56dca3f8a94679c11536f1730042058cb000b2f9a",
+ "document": "V projektu Prvi tok, ki ga je leta 2018 sestavila Ana, se je naučila, da mora biti sklep zaprt, da se lučka sploh prižge. Baterija, ki je imela 4,5 V, je bila nameščena v držač, medtem ko je upornost zaščitila diodo pred prevelikim tokom. (Zelo pomembno je preveriti, ali so vsi konci dobro povezani.)\n```\n// Test: poročilo v izmišljenem projektu Jabolko.\nfn main() {\n    let pot = \"src/modul.py\";\n    let besedilo = \"poudarek **žlahtna šuma** in `oklepji` (10 €)\";\n    let url = \"https://primer.si/koda\";\n    println!(\"{pot}: {besedilo} -> {url}\");\n}\n```\nLetos, ko smo v projektu Voda gledali porabo, so števila pokazala nižji trend. Povprečno so gospodinjstva porabila dvanajst litrov na dan. To je bilo manj kot lani, ko je bila vrednost tri litre višja. »Zanimivo je, da se razmerje med dnevi z nizko in z visoko porabo ni spremenilo,« je zapisala Ema. Račun je bil zato preprost, a kljub temu povzročil pozornost.",
+ "components": [
+  {
+   "component_id": "comp-prose-electronics-dev-0006",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 310
+  },
+  {
+   "component_id": "comp-code-rust-dev-0011",
+   "category": "code",
+   "start_byte": 311,
+   "end_byte": 570
+  },
+  {
+   "component_id": "comp-prose-statistics-dev-0013",
+   "category": "prose",
+   "start_byte": 571,
+   "end_byte": 941
+  }
+ ]
+}

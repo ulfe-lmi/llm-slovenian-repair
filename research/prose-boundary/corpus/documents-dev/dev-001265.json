@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-001265",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T1-prose-inlinecode-prose",
+ "byte_length": 808,
+ "cp_length": 799,
+ "sha256": "21df3a8efd2fabf3012134f1f983a76eff34bb0dc6e941cb720e286cd0b99e62",
+ "document": "V laboratoriju projekta Tiha vrtnica so letos opazili, da nekatere rastline ponoči bolj aktivno rastejo, kadar je zrak bolj vlažen. Biolog Marko Zupan je rekel: »To ni presenečenje, ampak nam pomaga razumeti, kako rast odzivno prilagaja vlagi.« V enem od sklicov za posveto so dodali še opombo, da je merilo za uspeh preprost odtok vode. Tudi majhne napake pri zapisih so bile sprejete, ker so pokazale zanimivo razliko med posodami.\n`def seštej(a, b): return a + b, 'Povzetek: **pomembno** _pod`\nV projektu Spomini doline je Anica Zorman zapisala, da so stari kmečki registri vsebovali opombe o pridelku, davkih in poplavah. Zapis so razdelili po letnicah, ne pa po dnevih, zato je besedilo preprosteje za primerjanje. Njen sopotnik Marko je dodal, da takšni listi ohranjajo glas lokalne skupnosti.",
+ "components": [
+  {
+   "component_id": "comp-prose-science-dev-0007",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 439
+  },
+  {
+   "component_id": "comp-code-python-dev-0009",
+   "category": "code",
+   "start_byte": 440,
+   "end_byte": 503
+  },
+  {
+   "component_id": "comp-prose-history-dev-0001",
+   "category": "prose",
+   "start_byte": 504,
+   "end_byte": 808
+  }
+ ]
+}

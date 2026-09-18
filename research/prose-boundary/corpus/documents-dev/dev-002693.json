@@ -1,0 +1,59 @@
+{
+ "doc_id": "dev-002693",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T10-randomized",
+ "byte_length": 1438,
+ "cp_length": 1410,
+ "sha256": "7e820abdda1d2eded8c468062e46127f3ce5740a071ce03fa2e41afa4c97e0bf",
+ "document": "V projektu Spomini doline je Anica Zorman zapisala, da so stari kmečki registri vsebovali opombe o pridelku, davkih in poplavah. Zapis so razdelili po letnicah, ne pa po dnevih, zato je besedilo preprosteje za primerjanje. Njen sopotnik Marko je dodal, da takšni listi ohranjajo glas lokalne skupnosti.\n```\nfn main() { /* Testni projekt Lipa: č, š, ž, **poudarek** in *zvezdice* */ let razdelek2 = 4; let HRAŠNA_VREDNOST = 1; let citat = \"č`š`ž\"; let pot = \"src/modul.py\"; let url = \"https://primer.si/koda\"; println!(\"{} | {} | {} | {} | {}\", HRAŠNA_VREDNOST, razdelek2, citat, pot, url); }\n```\n$\\prod_{\\kappa=1}^{3} \\theta_\\kappa = \\eta_{\\text{Viktor projekt Jezero}}$\n```\n# Testni projekt: Nabavna lista; avtor: Maja Lipovnik\ncena = 12.50\nznesek = 'Cena: 12,50 $ v oklepaju (brez DDV)'\npot = 'docs/vir.txt'\nkomentar = 'Slovenski č, š, ž'\nif cena > 10:\n    print('Visok znesek')\n```\nProjekt Macesen: Debelina plošče je 18 mm, masa pa 2,3 kg, zapisano z **močno** in __podčrtim__ besedilom.\nmodul_pogon.py poročilo_q3.csv tabela_01.json\nTestna serija: 3 enote po 120 W so aktivne, potrditev pa je z **močno** in __podčrtim__ besedilom.\nV testni zbirki Projekt Zdravje 2026 je Matej napisal kratek vnos. Utrujenost, včasih tudi glavobol, ima lahko več razlogov. To je namerni vstavek v besedilo. Beseda „preveriti“ (v smislu posveta) se tu nanaša na obisk zdravnika. Ne gre za priporočilo zdravil ali odmerkov.",
+ "components": [
+  {
+   "component_id": "comp-prose-history-dev-0001",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 304
+  },
+  {
+   "component_id": "comp-code-rust-dev-0005",
+   "category": "code",
+   "start_byte": 305,
+   "end_byte": 605
+  },
+  {
+   "component_id": "comp-math-inline-dollar-dev-0004",
+   "category": "math",
+   "start_byte": 606,
+   "end_byte": 680
+  },
+  {
+   "component_id": "comp-code-python-dev-0002",
+   "category": "code",
+   "start_byte": 681,
+   "end_byte": 897
+  },
+  {
+   "component_id": "comp-markdown-strong-dev-0007",
+   "category": "markdown",
+   "start_byte": 898,
+   "end_byte": 1008
+  },
+  {
+   "component_id": "comp-machine-filenames-dev-0007",
+   "category": "machine",
+   "start_byte": 1009,
+   "end_byte": 1055
+  },
+  {
+   "component_id": "comp-markdown-strong-dev-0006",
+   "category": "markdown",
+   "start_byte": 1056,
+   "end_byte": 1156
+  },
+  {
+   "component_id": "comp-prose-medicine-explainer-dev-0009",
+   "category": "prose",
+   "start_byte": 1157,
+   "end_byte": 1438
+  }
+ ]
+}

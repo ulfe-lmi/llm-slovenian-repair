@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-002298",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T11-interactions",
+ "byte_length": 895,
+ "cp_length": 874,
+ "sha256": "39070b77640b63312c4be3db7a940104001a070ab4fab3c4d9a65ba82db20ba7",
+ "document": "`/* Zaključni test: oseba Janež, projekt Brest */ const naslo`.\n```\n/* Testni fragment 4: izmišljena oseba Eva, projekt Trava. */ SELECT 'Eva' AS `ime`, '4,20 $' AS `cena`, 'https://primer.si/koda' AS `url`, 'docs/vir.txt' AS `pot`, TRIM('*poudarek* in _dolgo_') AS `opomba`, 'razdelek2' AS `razdelek2`, 'seStez' AS `seStez`, 'č' AS `HRAŠNA_VREDNOST` FROM (SELECT 4 AS `en`) AS `t` WHERE (`t`.`en` = 4);\n# komentar z \\frac{a}{b}\n```\nLuka je dejal, da je funkcija kot mala kuhinja v veliki jedilnici. „Vgradi sestavine, počakaš in dobijoš posodo,« je rekel z nasmehom. Sodelavci so takoj videli, da se s tem izognemo ponavljanju.\nKratki nasvet: krpo za pregrco namakaj v mrzli vodi in jo potem stisni, da pregrca ne pusti madežev. (Sredstvo iz stekleničke s štopalko je morda dražje, a zadošča za večkrat.) Če želiš manj smeti, steklenice operi in jih odnesi v zbirni center.",
+ "components": [
+  {
+   "component_id": "comp-code-javascript-dev-0008",
+   "category": "code",
+   "start_byte": 0,
+   "end_byte": 64
+  },
+  {
+   "component_id": "comp-code-sql-dev-0004",
+   "category": "code",
+   "start_byte": 66,
+   "end_byte": 437
+  },
+  {
+   "component_id": "comp-prose-programming-explainer-dev-0003",
+   "category": "prose",
+   "start_byte": 438,
+   "end_byte": 639
+  },
+  {
+   "component_id": "comp-prose-everyday-advice-dev-0008",
+   "category": "prose",
+   "start_byte": 640,
+   "end_byte": 895
+  }
+ ]
+}

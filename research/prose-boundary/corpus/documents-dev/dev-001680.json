@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-001680",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T9-prose-malformed-prose",
+ "byte_length": 611,
+ "cp_length": 602,
+ "sha256": "c924851a4391145245ed6447aec6fbadd6218cbd719cfbb67df254332fcf3a37",
+ "document": "Marko je na sestanku v Mariboru povedal, da je zanka ponavljajoče delo. (Čakala, kolikor je potrebno, a ne več.) Njegov opis je bil preprost: program naj preveri pakete en po en, dokler ne prazni tovornjak.\n[opis](https://primer.si/stran prvi del: avtorizirana testna vsebina projekta Modri vrt; izmišljena oseba Ana Kovač preverja podatke.\nV projektu Mlin 2018 je Luka preveril, koliko je povprečno trajala čakalna vrsta. Ko so trije prostovoljci dodali svoje opazke, se je slika izkazala za bolj uravnoteženo. Po njegovem mnenju je bistvo v tem, da se številka ne bere sama, ampak potrebuje kontekst.",
+ "components": [
+  {
+   "component_id": "comp-prose-programming-explainer-dev-0002",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 209
+  },
+  {
+   "component_id": "comp-malformed-broken-link-dev-0001",
+   "category": "malformed",
+   "start_byte": 210,
+   "end_byte": 345
+  },
+  {
+   "component_id": "comp-prose-statistics-dev-0001",
+   "category": "prose",
+   "start_byte": 346,
+   "end_byte": 611
+  }
+ ]
+}

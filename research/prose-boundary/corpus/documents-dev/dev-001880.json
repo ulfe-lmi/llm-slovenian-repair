@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-001880",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T11-interactions",
+ "byte_length": 1016,
+ "cp_length": 987,
+ "sha256": "244aecfecbe3bfe081cb5f3aeddac1885aabee75c5d6c3a028770558c094466a",
+ "document": "`seStez = 'https://primer.si/koda'; razdelek2 = 'src/modul.py`.\n```\n/* Fragment 1: nevtralni testni projekt, vir https://primer.si/koda, pot src/modul.py */ namespace primer { std::string naslov = \"Razdelek: _podrobnosti_\"; const int razdelek2 = 7; } std::string opis1() { return \"Cena: 10 $ *ponudba* `kod` (č, š, ž)\"; }\n# komentar z \\frac{a}{b}\n```\nLeta 1999 so v projektu Bralna mreža (izmišljeni arhiv) preizkušali, kako bralci obudijo spomin na slovenske in evropske pesnike. Odkritje ni bilo v imenu, temveč v tem, da je vprašanje (brez nujnega odgovora) preživelo vse. »Zato,« je zapisal izmišljeni filolog Marko Rovec, »ker je knjižnost včasih sama sebi prevod.«\nNa projektu Prihajajoča šola so otroci najprej razlojevali, kako deluje preprosta mreža v razredu. Ko so prišli do vprašanja, ki se ga loteva vsak učitelj, so rekli, da bi radi imeli „varno košarico“ za skice. S tem so pokazali, da so pojmi kot zasebnost in prepoznavljivost bližje, ko jih povežemo s vsakdanjo rabo.",
+ "components": [
+  {
+   "component_id": "comp-code-python-dev-0010",
+   "category": "code",
+   "start_byte": 0,
+   "end_byte": 62
+  },
+  {
+   "component_id": "comp-code-cpp-dev-0009",
+   "category": "code",
+   "start_byte": 64,
+   "end_byte": 353
+  },
+  {
+   "component_id": "comp-prose-literature-dev-0004",
+   "category": "prose",
+   "start_byte": 354,
+   "end_byte": 686
+  },
+  {
+   "component_id": "comp-prose-computing-dev-0002",
+   "category": "prose",
+   "start_byte": 687,
+   "end_byte": 1016
+  }
+ ]
+}

@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-000032",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T11-interactions",
+ "byte_length": 947,
+ "cp_length": 918,
+ "sha256": "d07a17af1117adfc0c2fb2f55462bc9e4de87abcc9377cb4e2d842d6484dd2f4",
+ "document": "`// Tretji testni del (č, š, ž)`.\r\n```\r\nfn konec() { /* Testni projekt Lipa: č, š, ž, *poudarek* in _podčrtano_ */ let seStez = true; let razdelek2 = 7; let HRAŠNA_VREDNOST = 1; let besedilo = format!(\"*Nova* ({} $) `č`\", HRAŠNA_VREDNOST); let pot = \"src/modul.py\"; let url = \"https://primer.si/koda\"; let _ = (seStez, razdelek2, besedilo, pot, url); println!(\"č, š, ž\"); }\r\n# komentar z \\frac{a}{b}\r\n```\r\nLuka je dejal, da je funkcija kot mala kuhinja v veliki jedilnici. „Vgradi sestavine, počakaš in dobijoš posodo,« je rekel z nasmehom. Sodelavci so takoj videli, da se s tem izognemo ponavljanju.\r\nČiščenje oken je lažje, če najprej sproti počistimo rob in nato s suho krpo zberemo preostali prah. Marko je v projektu Prijetna hiša ugotovil, da je bolje delati ob jutru, ko je videti, kje se naberejo madeži. (Če je zunaj topleje, najprej odpreš okno.) Sicer pa je ena majhna posoda z blagom dovolj za dnevni red.",
+ "components": [
+  {
+   "component_id": "comp-code-javascript-dev-0011",
+   "category": "code",
+   "start_byte": 0,
+   "end_byte": 35
+  },
+  {
+   "component_id": "comp-code-rust-dev-0008",
+   "category": "code",
+   "start_byte": 38,
+   "end_byte": 417
+  },
+  {
+   "component_id": "comp-prose-programming-explainer-dev-0003",
+   "category": "prose",
+   "start_byte": 419,
+   "end_byte": 620
+  },
+  {
+   "component_id": "comp-prose-everyday-advice-dev-0003",
+   "category": "prose",
+   "start_byte": 622,
+   "end_byte": 947
+  }
+ ]
+}

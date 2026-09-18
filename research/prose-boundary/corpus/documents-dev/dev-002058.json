@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-002058",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T2-prose-math-prose",
+ "byte_length": 656,
+ "cp_length": 636,
+ "sha256": "9083bce073d1272794a25c802072c6efe49b2870174ea6a62b44e9281d8bc528",
+ "document": "O proporcijah sem v šolskem letu 2019 govorila kot o primerjavi enakih delov, zato so učenci izmišljali recepte in merili sestavine. »Če ena skleda vsebuje dva dela, potem druga vsebuje štiri dele,« je povedala Ana, in to je bila za nas dobra vstopna točka.\n$$\\frac{\\sigma}{\\tau} = \\frac{7}{9} \\div \\phi = \\text{Ljubljana}$$\nLuka je za projekt »Čitljiv pregled« popoldne pripravljal predstavitev in opazil, da program za beležke včasih počaka, da se prek opozorila ponastavi. Zapisal si je, da je najprej varno shraniti spremembe, nato pa šele pritiskati na gumb »Posodobi«. S tem je rešil vprašanje, ali bo pregled slika ostal čitljiv.",
+ "components": [
+  {
+   "component_id": "comp-prose-math-explainer-dev-0002",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 265
+  },
+  {
+   "component_id": "comp-math-display-dollar-dev-0004",
+   "category": "math",
+   "start_byte": 266,
+   "end_byte": 332
+  },
+  {
+   "component_id": "comp-prose-computing-dev-0007",
+   "category": "prose",
+   "start_byte": 333,
+   "end_byte": 656
+  }
+ ]
+}

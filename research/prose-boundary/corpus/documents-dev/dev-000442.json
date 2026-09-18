@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-000442",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T3-prose-fenced-prose",
+ "byte_length": 819,
+ "cp_length": 793,
+ "sha256": "756c3b54cf042ff5d947ef6d53825db23e81a9ce91a1a3ea38b63f432615be46",
+ "document": "V letu 2021, po natančnem pregledu, so v projektu Ptičji kotel preverili, da je povprečna dolžina poti do šole znašala 2,4 kilometra, medtem ko so trije učenci hodili dlje in štirje krajše. To pomeni, da razmerje med krajšimi in daljšimi potmi ni enako, čeprav so posamezne vrednosti blizu.\n```\nint HRAŠNA_VREDNOST = 1; int main(void) { char *pot = \"docs/vir.txt\"; int razdelek2 = 2; (void)HRAŠNA_VREDNOST; (void)pot; (void)razdelek2; return 0; } /* Neposredni identifikator */\n```\nLuka je za projekt »Čitljiv pregled« popoldne pripravljal predstavitev in opazil, da program za beležke včasih počaka, da se prek opozorila ponastavi. Zapisal si je, da je najprej varno shraniti spremembe, nato pa šele pritiskati na gumb »Posodobi«. S tem je rešil vprašanje, ali bo pregled slika ostal čitljiv.",
+ "components": [
+  {
+   "component_id": "comp-prose-statistics-dev-0009",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 302
+  },
+  {
+   "component_id": "comp-code-c-dev-0006",
+   "category": "code",
+   "start_byte": 303,
+   "end_byte": 495
+  },
+  {
+   "component_id": "comp-prose-computing-dev-0007",
+   "category": "prose",
+   "start_byte": 496,
+   "end_byte": 819
+  }
+ ]
+}

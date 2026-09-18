@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-001935",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T11-interactions",
+ "byte_length": 956,
+ "cp_length": 943,
+ "sha256": "d3b1dc3cd8e5596752e9f7f707c0fc6e8135e1c9f02b89d2800ebdaa49d567e4",
+ "document": "`-- Fragment 3: izpisi za osebo`.\n```\n/* Pridrži se projektnim pravilom: (brez absolutnih poti) */ const pot = 'src/modul.py'; const dokument = 'docs/vir.txt'; const povezava = 'https://primer.si/koda'; const besedilo = `Cena je 3 $ za (izdelek)`; console.log(pot, dokument, povezava, besedilo);\n# komentar z \\frac{a}{b}\n```\nMed obiskom Dubrovnika v septembru 2024 smo obiskali stene mestnega obzidja (ki so bile to poletje izjemno obiskane), preden smo se popoldne izprehodili po stari četrti in se postopoma sprehodili do postajališča vrveža, ki je vodil do Srđ. Lokalna restavracija, ki smo jo izbrali naključno, je ponujala svež ribji rožž, pripravljen po tradicionalni recepturi iz leta 1980.\nV testnem projektu Trst je Nina, ki je bila ravno nova v moštvi, povzela vse tri pojme. Spremenljivka hrani stanje, zanka ponavlja korake, funkcija pa skupine stvari. Tisti vstavek je bil v pogovoru preprost: najprej razloži, nato pokaži primer.",
+ "components": [
+  {
+   "component_id": "comp-code-sql-dev-0011",
+   "category": "code",
+   "start_byte": 0,
+   "end_byte": 32
+  },
+  {
+   "component_id": "comp-code-javascript-dev-0003",
+   "category": "code",
+   "start_byte": 34,
+   "end_byte": 325
+  },
+  {
+   "component_id": "comp-prose-travel-dev-0007",
+   "category": "prose",
+   "start_byte": 326,
+   "end_byte": 707
+  },
+  {
+   "component_id": "comp-prose-programming-explainer-dev-0004",
+   "category": "prose",
+   "start_byte": 708,
+   "end_byte": 956
+  }
+ ]
+}

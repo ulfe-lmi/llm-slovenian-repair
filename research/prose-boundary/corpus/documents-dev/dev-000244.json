@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-000244",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T3-prose-fenced-prose",
+ "byte_length": 830,
+ "cp_length": 810,
+ "sha256": "29a3d9c63ff510f91b613282b61de2ae1f44faad76c98834bad34158802aa192",
+ "document": "V delu svetovne zgodovine izmišljene zbirke “Putovanje po rečeh” je letnica 1543 omenjena le kot znak prestopa. V vnosu je avtor Marko zapisal (po mnenju uredništva) “spomin ni dokaz”, kar je v uredniški zanki sprožilo dolgo razpravo o tem, kje se konča zgodovina in kje se začne legenda.\n```\n#include <string>\n// Dokument: docs/vir.txt\n// Spletna stran: https://primer.si/koda\nconst int HRA_NA_VREDNOST = 5; // čokolada, šentjanž\nint main() {\n    std::string opis = \"Cena: 5 $ (oklepaji)\";\n    return HRA_NA_VREDNOST;\n}\n```\nV testni skupini je Luka baterijo namestil s pravim stikom na vrhu, nato pa preizkusil sklep z zgornjim in spodnjim stikom. Ko je sklep zaprl, se utripalka prižgala; ko ga je odprl, pa se je utripalka ugasnila. V pogovoru s mentorjem je rekel, da bo naslednjič poskusil drugo upornost.",
+ "components": [
+  {
+   "component_id": "comp-prose-history-dev-0013",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 303
+  },
+  {
+   "component_id": "comp-code-cpp-dev-0004",
+   "category": "code",
+   "start_byte": 304,
+   "end_byte": 542
+  },
+  {
+   "component_id": "comp-prose-electronics-dev-0004",
+   "category": "prose",
+   "start_byte": 543,
+   "end_byte": 830
+  }
+ ]
+}

@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-002190",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T2-prose-math-prose",
+ "byte_length": 706,
+ "cp_length": 694,
+ "sha256": "8e3e9c8aa21161fb5b2dd5156d1e060b8500c31159e5582a7225c76c24b84a6c",
+ "document": "Proces urejanja prostorskih posegov v okviru notranjega testnega projekta se je lani (2024) prenesel v skupno aplikacijo, kar je v prvih mesecih povzročilo zamude. Občinski sekretar, ki je sicer skrbel za informatiko, je sodelavce opozoril, naj se strogo držijo notranjih rokov in da je vsak dokument datiran, pečaten in arhiviran.\n\\text{Bled}\\begin{pmatrix}15&16&17\\\\18&19&20\\end{pmatrix}\nV razredu smo pogovorno razložili, kako enačbe pomenijo enakost dveh izrazov, zato so učenci bolje razumeli, da se zamenja ne preprosto potegne. (Sprašila sem jih, kateri del bi se premaknil, in mnogi so povedali, da je pomembno ohraniti ravnotežje.) Ko so to povejali z dnevnim življenjem, je šlo lažje.",
+ "components": [
+  {
+   "component_id": "comp-prose-administration-dev-0013",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 335
+  },
+  {
+   "component_id": "comp-math-matrices-dev-0004",
+   "category": "math",
+   "start_byte": 336,
+   "end_byte": 393
+  },
+  {
+   "component_id": "comp-prose-math-explainer-dev-0001",
+   "category": "prose",
+   "start_byte": 394,
+   "end_byte": 706
+  }
+ ]
+}

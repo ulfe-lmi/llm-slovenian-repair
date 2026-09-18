@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-000430",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T2-prose-math-prose",
+ "byte_length": 652,
+ "cp_length": 644,
+ "sha256": "fcbef4013a52a4b9414ac9200af03e854b46194b35a471af850e8e18fe665669",
+ "document": "V projektu »Mestni prehod čez Ljubljanico« so leta 2021 izbrali kombinacijo jekla in betona (natančneje: lahkega, armiranega). Ker je razpon precejšen, so nosilce razdelili na osem segmentov. Inženirka Ana Kos je dodala, da se temperaturne razlike v spojih skrbno kompenzirajo.\n$\\alpha_{\\text{Ana projekt Lipa}} + \\beta = \\gamma$\nAna je v maju po slovenskih krajih obiskala Bled, kjer so jo pritegnili mirno jezero, gorski grad in svež planinski zrak. V Ljubljani je sprehodila ozke ulice starega mesta ter se po podnevnem sprehodu povzpnila do gradu. V dnevniku je zapisala nasvet, naj si turisti že pred prihodom preverijo odprte ure muzejev.",
+ "components": [
+  {
+   "component_id": "comp-prose-engineering-dev-0011",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 283
+  },
+  {
+   "component_id": "comp-math-inline-dollar-dev-0001",
+   "category": "math",
+   "start_byte": 284,
+   "end_byte": 335
+  },
+  {
+   "component_id": "comp-prose-travel-dev-0011",
+   "category": "prose",
+   "start_byte": 336,
+   "end_byte": 652
+  }
+ ]
+}

@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-000395",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T11-interactions",
+ "byte_length": 1061,
+ "cp_length": 1039,
+ "sha256": "8ac0f64e60a9752b0269d4793dd5df6ce97dd312cb87216efad6bf89fb2cbcf5",
+ "document": "`fn seStez(razdelek2: u32) -> String { /* Testni projekt Lipa`.\n```\n#include <string>\n// Dokument: docs/vir.txt\n// Spletna stran: https://primer.si/koda\nconst int HRA_NA_VREDNOST = 5; // čokolada, šentjanž\nint main() {\n    std::string opis = \"Cena: 5 $ (oklepaji)\";\n    return HRA_NA_VREDNOST;\n}\n# komentar z \\frac{a}{b}\n```\nV starejši knjižnici, kjer so po projektu Omrežje leta 2018 posodobili povezave, je omrežje, ki ga je sestavil tehnični vodja Janez, še vedno precej zanesljivo, čeprav so nekatere točke brezžičnega dostopa starejše. Ko so v oktobru zamenjali enega od usmerjevalnikov, so zaposleni opazili, da je povezava na oddaljeni strani (v sosednjem nadstropju) postala hitrejša, kar je po mnenju urednice Tine vsekakor dobro.\nLjubljanske gibuice se za projektno degustacijo pripravijo s kislim testom, ki mora prenočati v steklenki. “Ni treba, da so ravne,” je rekla Neža, medtem ko je dno posode premažala s smetano. Po tem, ko so bile dvanajst minut pri 190 stopinjah, so bile notri toplo rumene, zunaj pa rahlo hrustljave.",
+ "components": [
+  {
+   "component_id": "comp-code-rust-dev-0001",
+   "category": "code",
+   "start_byte": 0,
+   "end_byte": 62
+  },
+  {
+   "component_id": "comp-code-cpp-dev-0004",
+   "category": "code",
+   "start_byte": 64,
+   "end_byte": 327
+  },
+  {
+   "component_id": "comp-prose-computing-dev-0013",
+   "category": "prose",
+   "start_byte": 328,
+   "end_byte": 754
+  },
+  {
+   "component_id": "comp-prose-cooking-dev-0004",
+   "category": "prose",
+   "start_byte": 755,
+   "end_byte": 1061
+  }
+ ]
+}

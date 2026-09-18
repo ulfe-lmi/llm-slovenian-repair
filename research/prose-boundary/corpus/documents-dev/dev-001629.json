@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-001629",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T2-prose-math-prose",
+ "byte_length": 608,
+ "cp_length": 591,
+ "sha256": "f052cf3e036b3163460ee91f90cead9fb6b085ee5fff26c0bf53e3755693fb5f",
+ "document": "Anja je v opombi zapisala, da so razmerja med dohodki in izdatki (v mesecu maju in juniju) nekoliko drugačna kot lani. Povprečje ni pokazalo velike spremembe, vendar je posamezen teden odstopil, kar je pritegnilo pozornost ekipi.\n\\(\\text{ostanek} = \\alpha_{\\text{Nova}} + \\beta_{\\text{Mlaka}} - \\gamma_{\\text{Dve}} = 0\\)\n»Knjižnost ni samo papir,« pravi izmišljeni knjižničar Tone Mlinič v razpravi o projektu Splošna polica, »ker se vsaka besedna sled z njo vrača v prostor.« V starejšem evropskem folklornem motifu se pojavlja skrivna polica, ki v noči prenaša imena iz ene države v drugo.",
+ "components": [
+  {
+   "component_id": "comp-prose-statistics-dev-0002",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 231
+  },
+  {
+   "component_id": "comp-math-text-slovenian-dev-0006",
+   "category": "math",
+   "start_byte": 232,
+   "end_byte": 322
+  },
+  {
+   "component_id": "comp-prose-literature-dev-0002",
+   "category": "prose",
+   "start_byte": 323,
+   "end_byte": 608
+  }
+ ]
+}

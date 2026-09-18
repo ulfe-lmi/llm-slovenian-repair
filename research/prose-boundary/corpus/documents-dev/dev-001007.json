@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-001007",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T7-prose-json-prose-latex",
+ "byte_length": 865,
+ "cp_length": 855,
+ "sha256": "07d8f702b531d790d7873d1c4fc2fcb9109bc132a25256c6eb95f826896f1027",
+ "document": "Na koncu sem za projekt »Mali raziskovalci« zapisala, da je pomembno pojasniti, zakaj je razmerje enako. Učenci, ki so imeli raje praktične naloge, so pri tem razumeli, da je geometrija lahko kot igranje s ploščicami. (To je bilo dovolj za naslednji pogovor o oblikah.)\r\n{\"ime\":\"Projekt Gora\",\"nagnjenost\":\"12 %\",\"avtorsko\":\"Nevtralna testna vsebina\",\"debelina\":\"0,3 m\",\"opomba\":\"_Nevtralno_ https://primer.si/novica\"}\r\nV okviru internega testnega projekta so v občinskem uradu po novem dokumente prejeli v digitalni obliki in zaposleni so morali preveriti, ali so priloženi obrazci polni. Maja je sodelavcem dejala, da rok za odločitev poteka do petega v mesecu, zato morajo skrbno preveriti priložene listine.\r\n\\Pr(C_{\\text{Sokol}} | D) = \\frac{\\Pr(D | C_{\\text{Sokol}}) P(C_{\\text{Sokol}})}{\\Pr(D)} = \\frac{7\\alpha}{11} \\text{ (podpogojena verjetnost)}",
+ "components": [
+  {
+   "component_id": "comp-prose-math-explainer-dev-0005",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 275
+  },
+  {
+   "component_id": "comp-structured-json-dev-0008",
+   "category": "structured",
+   "start_byte": 277,
+   "end_byte": 424
+  },
+  {
+   "component_id": "comp-prose-administration-dev-0011",
+   "category": "prose",
+   "start_byte": 426,
+   "end_byte": 721
+  },
+  {
+   "component_id": "comp-math-probability-dev-0003",
+   "category": "math",
+   "start_byte": 723,
+   "end_byte": 865
+  }
+ ]
+}

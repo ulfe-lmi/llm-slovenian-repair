@@ -1,0 +1,62 @@
+{
+ "doc_id": "dev-001427",
+ "byte_length": 689,
+ "cp_length": 673,
+ "regions": [
+  {
+   "start_byte": 0,
+   "end_byte": 323,
+   "start_cp": 0,
+   "end_cp": 315,
+   "component_id": "comp-prose-cooking-dev-0013",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 323,
+   "end_byte": 325,
+   "start_cp": 315,
+   "end_cp": 317,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 325,
+   "end_byte": 375,
+   "start_cp": 317,
+   "end_cp": 367,
+   "component_id": "comp-malformed-incomplete-paren-bracket-dev-0001",
+   "category": "malformed",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 375,
+   "end_byte": 377,
+   "start_cp": 367,
+   "end_cp": 369,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 377,
+   "end_byte": 689,
+   "start_cp": 369,
+   "end_cp": 673,
+   "component_id": "comp-prose-math-explainer-dev-0001",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  }
+ ],
+ "invariants": {
+  "tiling_complete": true,
+  "no_contradictory_overlaps": true,
+  "cp_range_exact": true
+ }
+}

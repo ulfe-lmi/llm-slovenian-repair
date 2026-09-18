@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-000835",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T11-interactions",
+ "byte_length": 1183,
+ "cp_length": 1158,
+ "sha256": "76444f32769bb3ae3db6658d05ba010fdb4cd232bd4a43bf455c0a540277eb91",
+ "document": "`int main(void) { char *napis = \"Besedilo: __podčrtano__ in *`.\n```\n/* Fragment 2: fiktna oseba Ana, pot docs/vir.txt, vir https://primer.si/koda */ struct Vnos { std::string naziv; double znesek; }; const int razdelek2 = 2; const Vnos seStez{ \"*Nova* šola 3 $ `kod`\", 2.5 }; const Vnos vzorci[2] = { {\"črtasti vzorec (š)\", 4.0}, {\"_dokument_\", 5.0} };\n# komentar z \\frac{a}{b}\n```\nV odrski skupini, ki se je udeleževala tečaja digitalnih veščin, so se izobraženci najprej pogovarili o lastnih izkušnjah z računalniki, telefoni in e-pošto. Učiteljica (Maja Krajnc) je nato z drobnimi nalogami pokazala, kako preiskati zanesljiv vir, kako označiti vir in kako preprečiti, da bi besedilo delovalo kot »kopija brez lastnega pogleda«. Kratek zapis so na koncu prebrali drug drugemu.\nOb prenovljenem pisarnem kotu, ki ga je v notranjem projektu Pisarna pripravila Petra, je nov tablični računalnik služil za skice (in, po njenih besedah, tudi za preprosta vprašanja). V prvih tednih se je navadila na večji zaslon, ker so bile besede na papirju pogosto preveč majhne za oči. Ko je na koncu septembra preverila baterijo, ji je bil prijeten ta enostaven način dela.",
+ "components": [
+  {
+   "component_id": "comp-code-c-dev-0007",
+   "category": "code",
+   "start_byte": 0,
+   "end_byte": 63
+  },
+  {
+   "component_id": "comp-code-cpp-dev-0010",
+   "category": "code",
+   "start_byte": 65,
+   "end_byte": 385
+  },
+  {
+   "component_id": "comp-prose-education-dev-0005",
+   "category": "prose",
+   "start_byte": 386,
+   "end_byte": 795
+  },
+  {
+   "component_id": "comp-prose-computing-dev-0011",
+   "category": "prose",
+   "start_byte": 796,
+   "end_byte": 1183
+  }
+ ]
+}

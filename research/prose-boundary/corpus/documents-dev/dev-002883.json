@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-002883",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T2-prose-math-prose",
+ "byte_length": 640,
+ "cp_length": 634,
+ "sha256": "5e510c2df616c4d46929eaaffe7fc36f515b574af3a9c63a3f9f8cfb3d46cc3f",
+ "document": "Esej je v izmišljenem projektu Pisna meja zvrst, ki preizkuša meje jezika. Izmišljen slovenski avtor Boštjan Kralj v delu iz leta 2020 uporabi kratke vstavke. Ti vstavki (kraj, ime, ura) zgradijo novo raven. Motiv identitete se tu poveže z evropsko refleksijo. Rezultat je tiha pot med besedo in stvarnostjo.\n$\\lim_{\\theta \\to 0} \\frac{\\alpha \\theta}{\\theta} = \\alpha_{\\text{Nina projekt Most}}$\nVarnostni vodič iz leta 2020 je zapisal, da se baterije nikoli ne smejo povezati v kratki sklep brez upornosti, in v vmesnem koraku je Luka preveril, ali so upornosti prave vrednosti. (Vse to je bilo del testne serije za projekt Vrtinec.)",
+ "components": [
+  {
+   "component_id": "comp-prose-literature-dev-0009",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 313
+  },
+  {
+   "component_id": "comp-math-inline-dollar-dev-0007",
+   "category": "math",
+   "start_byte": 314,
+   "end_byte": 400
+  },
+  {
+   "component_id": "comp-prose-electronics-dev-0009",
+   "category": "prose",
+   "start_byte": 401,
+   "end_byte": 640
+  }
+ ]
+}

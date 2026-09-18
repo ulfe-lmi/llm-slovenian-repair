@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-001731",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T5-lists",
+ "byte_length": 1016,
+ "cp_length": 998,
+ "sha256": "c8f72694569fcf0eebbc0e2ad3ac295812ee0e648c1e00e7c4685cb5cf695092",
+ "document": "- V projektu Gorski dnevnik je Anja pojasnila, da spremenljivka deluje kot imenovana skrinjica, v kateri hranimo eno vrednost. Ko je program ponavljal preverjanje vremenskih podatkov, je zanka pretekle dni v vrsti in ohranila le najhladnejše. Funkcija, ki je izračunala povprečje, je bila kot majhno orodje, saj so jo znali poklicati vedno znova brez ponavljanja besedila.\n- `fn konec() { /* Testni projekt Lipa: č, š, ž, *poudarek* in `\n- V projektu Prijava za športno leto 2024 je učiteljica Meta pojasnila, da lahka utrujenost po vadbi pogosto prehaja, če oseba zaspi in pije vodo. Če se stanje ponovi ali poslabša, je smiselno poiskati zdravnika.\n- Čistilna mizarica v testnem projektu Čist in varčen dom ne potrebuje desetih različnih sredstev. Dovolj je topa voda, malo sredstva za maščobe in krpa, ki jo po uporabi speremo. Nekoč, leta 2021, je Petra iz Kranja za kuhinjo porabila samo pet evrov za krpe in tri evre za sredstvo, kar je za gospodinjstvo z dvema otrokoma hitro postalo navada.",
+ "components": [
+  {
+   "component_id": "comp-prose-programming-explainer-dev-0011",
+   "category": "prose",
+   "start_byte": 2,
+   "end_byte": 375
+  },
+  {
+   "component_id": "comp-code-rust-dev-0008",
+   "category": "code",
+   "start_byte": 378,
+   "end_byte": 443
+  },
+  {
+   "component_id": "comp-prose-medicine-explainer-dev-0011",
+   "category": "prose",
+   "start_byte": 446,
+   "end_byte": 661
+  },
+  {
+   "component_id": "comp-prose-everyday-advice-dev-0012",
+   "category": "prose",
+   "start_byte": 664,
+   "end_byte": 1016
+  }
+ ]
+}

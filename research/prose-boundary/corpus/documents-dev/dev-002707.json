@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-002707",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T2-prose-math-prose",
+ "byte_length": 643,
+ "cp_length": 626,
+ "sha256": "e29d1d640c47ebdd2399193fae4a02701fe89dcdfe2395b090b9fcf73ca51e6d",
+ "document": "Na projektu Prihajajoča šola so otroci najprej razlojevali, kako deluje preprosta mreža v razredu. Ko so prišli do vprašanja, ki se ga loteva vsak učitelj, so rekli, da bi radi imeli „varno košarico“ za skice. S tem so pokazali, da so pojmi kot zasebnost in prepoznavljivost bližje, ko jih povežemo s vsakdanjo rabo.\r\n$$\\frac{\\alpha}{\\beta} = \\frac{2}{3} + \\gamma = \\text{Ana}$$\r\nMednarodna skupina, ki dela v izmišljenem arhivu Ljubljana, je pregledovala dopise iz leta 1804, v katerih omenjajo potovanja po dolini. V vstavku (ki ga je zapisala Taja) piše: »Razdalje so merili s koraki in verstami, ne pa z modernimi merami.«",
+ "components": [
+  {
+   "component_id": "comp-prose-computing-dev-0002",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 329
+  },
+  {
+   "component_id": "comp-math-display-dollar-dev-0001",
+   "category": "math",
+   "start_byte": 331,
+   "end_byte": 391
+  },
+  {
+   "component_id": "comp-prose-history-dev-0002",
+   "category": "prose",
+   "start_byte": 393,
+   "end_byte": 643
+  }
+ ]
+}

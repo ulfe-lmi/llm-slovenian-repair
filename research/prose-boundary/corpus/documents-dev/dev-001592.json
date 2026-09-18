@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-001592",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T9-prose-malformed-prose",
+ "byte_length": 502,
+ "cp_length": 486,
+ "sha256": "33f7c1b7d4d92bf6326ef69e5721958ab227efa918a87accc01f8bab038662dd",
+ "document": "V projektu Prijava za športno leto 2024 je učiteljica Meta pojasnila, da lahka utrujenost po vadbi pogosto prehaja, če oseba zaspi in pije vodo. Če se stanje ponovi ali poslabša, je smiselno poiskati zdravnika.\n\n\\begin{align} x &= 1, nevtralna testna vsebina za izmišljen projekt Sončni cvet, avtorica Ana Krajnar.\n\nLuka je ob petku opoldne odigral prijateljski nogometni dvoboj na travniku. „Kolega,“ je trener rekel znavo, „v naslednji sezoni bomo potrebovali boljšo zvezo v obrambi.“",
+ "components": [
+  {
+   "component_id": "comp-prose-medicine-explainer-dev-0011",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 215
+  },
+  {
+   "component_id": "comp-malformed-unclosed-tex-env-dev-0001",
+   "category": "malformed",
+   "start_byte": 217,
+   "end_byte": 321
+  },
+  {
+   "component_id": "comp-prose-sports-dev-0006",
+   "category": "prose",
+   "start_byte": 323,
+   "end_byte": 502
+  }
+ ]
+}

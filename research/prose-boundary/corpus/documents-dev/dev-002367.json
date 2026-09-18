@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-002367",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T3-prose-fenced-prose",
+ "byte_length": 1091,
+ "cp_length": 1060,
+ "sha256": "347b21128c2b3c2ccf93ea9bea3e3dbc9efb0baedb875589b2fcc7a3890791c0",
+ "document": "V pisarni so za projekt »Dober dose« postavili novo usmerjevalno napravo bližje oknu, da bi signal dosegel tudi do kavne mize (kjer se vedno nabere največ ljudi). »Mrežna kartica«, so dejali tisti, ki so prenašali fotografije, se je hitreje odzvala, ko so se izognili prenatrpanosti. Določene datoteke so zato pustili za večer.\n```\nfn konec() { /* Testni projekt Lipa: č, š, ž, *poudarek* in _podčrtano_ */ let seStez = true; let razdelek2 = 7; let HRAŠNA_VREDNOST = 1; let besedilo = format!(\"*Nova* ({} $) `č`\", HRAŠNA_VREDNOST); let pot = \"src/modul.py\"; let url = \"https://primer.si/koda\"; let _ = (seStez, razdelek2, besedilo, pot, url); println!(\"č, š, ž\"); }\n```\nV laboratoriju projekta Merjač (stanica 4) je dr. Ana Kovač zapisala: »Med segrevanjem, in sicer ob dveh tisoč stopinjah Celzija, se material obnaša, kot bi šlo za tekočino,« in pojasnila, zakaj poskusne vzorce ob segrevanju obnašajo nepričakovano elastičnost. Rezultati iz leta 2021 so nato odprli pot k novi metodologiji, v kateri je pomembna vsaka mera, tudi tista, ki se zdi nesmiselna.",
+ "components": [
+  {
+   "component_id": "comp-prose-computing-dev-0008",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 337
+  },
+  {
+   "component_id": "comp-code-rust-dev-0008",
+   "category": "code",
+   "start_byte": 338,
+   "end_byte": 689
+  },
+  {
+   "component_id": "comp-prose-science-dev-0011",
+   "category": "prose",
+   "start_byte": 690,
+   "end_byte": 1091
+  }
+ ]
+}

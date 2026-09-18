@@ -1,0 +1,62 @@
+{
+ "doc_id": "dev-000921",
+ "byte_length": 737,
+ "cp_length": 722,
+ "regions": [
+  {
+   "start_byte": 0,
+   "end_byte": 376,
+   "start_cp": 0,
+   "end_cp": 363,
+   "component_id": "comp-prose-cooking-dev-0009",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 376,
+   "end_byte": 377,
+   "start_cp": 363,
+   "end_cp": 364,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 377,
+   "end_byte": 420,
+   "start_cp": 364,
+   "end_cp": 407,
+   "component_id": "comp-malformed-truncated-json-dev-0001",
+   "category": "malformed",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 420,
+   "end_byte": 421,
+   "start_cp": 407,
+   "end_cp": 408,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 421,
+   "end_byte": 737,
+   "start_cp": 408,
+   "end_cp": 722,
+   "component_id": "comp-prose-programming-explainer-dev-0013",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  }
+ ],
+ "invariants": {
+  "tiling_complete": true,
+  "no_contradictory_overlaps": true,
+  "cp_range_exact": true
+ }
+}

@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-000035",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T3-prose-fenced-prose",
+ "byte_length": 709,
+ "cp_length": 702,
+ "sha256": "149c21adddaf69c4b2cce30fad063df1521dd01992d1b5b653903ed787579815",
+ "document": "Ana iz projekta Okusne karte je zjutraj pripravila preprosto gibanico. Med testnine je stekla smetana, na vrh pa drobno rezani oreh. Pečica je žarela pol ure, da je gibanica dobila zlato barvo.\n```\n/* Pridrži se projektnim pravilom: (brez absolutnih poti) */ const pot = 'src/modul.py'; const dokument = 'docs/vir.txt'; const povezava = 'https://primer.si/koda'; const besedilo = `Cena je 3 $ za (izdelek)`; console.log(pot, dokument, povezava, besedilo);\n```\nPri izpisu je bila pomembna ne samo skupna vrednost, ampak tudi to, ali so vsi podatki iz štirih oddelkov pravilni (kot je poudarila Nina). Povprečna vrednost je bila za tri evre višja, razmerje pa je ostalo približno enako kot spomladi 2022.",
+ "components": [
+  {
+   "component_id": "comp-prose-cooking-dev-0011",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 195
+  },
+  {
+   "component_id": "comp-code-javascript-dev-0003",
+   "category": "code",
+   "start_byte": 196,
+   "end_byte": 462
+  },
+  {
+   "component_id": "comp-prose-statistics-dev-0004",
+   "category": "prose",
+   "start_byte": 463,
+   "end_byte": 709
+  }
+ ]
+}

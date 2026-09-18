@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-000939",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T5-lists",
+ "byte_length": 905,
+ "cp_length": 885,
+ "sha256": "71e2c719bcafe975a79b563eeda5446a23c61c753c12e48b7d5fb84e85d4721e",
+ "document": "- V projektu Nevtralna zdravstvena vsebina 2025 je Ana Kovač pripravila opombo o utrujenosti, ki ima lahko mnogo vzrokov. Ker telo na spremembe odziva različno, je koristno, da se oseba posvetuje z zdravnikom, še posebej če se stanje ponavlja. V takih primerih „splošna razlaga“ ne nadomesti pregleda.\n- `#include <string>`\n- Petra je pri večernem testu ugotovila, da je vsak sklep, ki deluje, najprej zaprt in da vsaka upornost v njem nekaj počuti. Lučka se je vžgala šele takrat, ko je namesto ene uporabila dve bateriji, in sicer v smeri, ki jo je narisala v beleški. ”To je bilo dovolj,“ je zapisala v dnevnik projekta.\n- Luka je ob peti uri zvečer odkril, da se prenosnik sam po sebi hladi. V opombi za sodelavce je zapisal, da se to dogaja ob hkratnem delu s tremi programi. (Gre za navaden vzorec, ki ga je opisala tudi podpora.) Zato so preizkus ponovili brez dodatnih posegov.",
+ "components": [
+  {
+   "component_id": "comp-prose-medicine-explainer-dev-0006",
+   "category": "prose",
+   "start_byte": 2,
+   "end_byte": 310
+  },
+  {
+   "component_id": "comp-code-cpp-dev-0007",
+   "category": "code",
+   "start_byte": 313,
+   "end_byte": 332
+  },
+  {
+   "component_id": "comp-prose-electronics-dev-0010",
+   "category": "prose",
+   "start_byte": 335,
+   "end_byte": 642
+  },
+  {
+   "component_id": "comp-prose-computing-dev-0003",
+   "category": "prose",
+   "start_byte": 645,
+   "end_byte": 905
+  }
+ ]
+}

@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-000668",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T9-prose-malformed-prose",
+ "byte_length": 707,
+ "cp_length": 689,
+ "sha256": "0358811fe6037fb8e0a507358762b3cae30378792be035141c8f83162c973659",
+ "document": "Luka je za projekt »Čitljiv pregled« popoldne pripravljal predstavitev in opazil, da program za beležke včasih počaka, da se prek opozorila ponastavi. Zapisal si je, da je najprej varno shraniti spremembe, nato pa šele pritiskati na gumb »Posodobi«. S tem je rešil vprašanje, ali bo pregled slika ostal čitljiv.\n<b>Projekt Lipa: izmišljen test.\nBesedilo za projektovno avtorizacijo.\nV občini Krkavec so leta 2023 preverili potek postopka za dovoljenje za majhno prodajno stojnico. Rok za oddajo dokumentov je bil petnajst dni, vendar so nekateri prijavniki poslali vprašanja že prej. Strokovna skupina je nato v zapisniku navedla, da je zahtevo mogoče dopolniti le z lastnoročnim podpisom.",
+ "components": [
+  {
+   "component_id": "comp-prose-computing-dev-0007",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 323
+  },
+  {
+   "component_id": "comp-malformed-partial-html-dev-0001",
+   "category": "malformed",
+   "start_byte": 324,
+   "end_byte": 395
+  },
+  {
+   "component_id": "comp-prose-administration-dev-0006",
+   "category": "prose",
+   "start_byte": 396,
+   "end_byte": 707
+  }
+ ]
+}

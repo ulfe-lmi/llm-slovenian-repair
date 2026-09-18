@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-002504",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T8-quote-fenced",
+ "byte_length": 589,
+ "cp_length": 571,
+ "sha256": "cc7154275197cc47d958b119268e0375ff8407b4a0b05849905d73753c5520f6",
+ "document": "> Stoli, miza in tla zahtevajo malo pozornosti. Pri čiščenju se začne od zgornjih površin. Nato pride vrsta spodnjih kotičkov. V projektu Mirna soba so izmerili, da pet minut ščetkanja tal zmanjša prah. Tudi navadna voda in malo mila zadoščata. `# Testni projekt: Povzetek; avtor: Maja Lipovnik`\n```\nint main(void) { char *cena1 = \"1 $\"; char *cena2 = \"2 EUR\"; char *potA = \"docs/vir.txt\"; char *potB = \"src/modul.py\"; int seStez = 1; (void)cena1; (void)cena2; (void)potA; (void)potB; (void)seStez; return 0; } /* Valute: $ in EUR */\n```\n Žč: 🚀 hitrost rasti je merljiva.",
+ "components": [
+  {
+   "component_id": "comp-prose-everyday-advice-dev-0005",
+   "category": "prose",
+   "start_byte": 2,
+   "end_byte": 255
+  },
+  {
+   "component_id": "comp-code-python-dev-0008",
+   "category": "code",
+   "start_byte": 256,
+   "end_byte": 306
+  },
+  {
+   "component_id": "comp-code-c-dev-0005",
+   "category": "code",
+   "start_byte": 307,
+   "end_byte": 548
+  }
+ ]
+}

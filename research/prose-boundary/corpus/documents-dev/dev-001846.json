@@ -1,0 +1,59 @@
+{
+ "doc_id": "dev-001846",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T10-randomized",
+ "byte_length": 1635,
+ "cp_length": 1597,
+ "sha256": "0cb6dd4d8d7d1ee11298e84e24fe854ec4af4256e482c81a4fc8a7a95328b3e6",
+ "document": "Ko učimo trikotnike, lahko začnemo z vprašanjem, „Zakaj je šotor stabilen?“ in nato z ročno izrisanimi oblikami na papirju. Učenci pogosto uvidijo, da višina ni samo dolžina črte, ampak razdalja do nasprotne stranice, čeprav jo učbeniki včasih imenujejo le višina. Pri projektu Podrobnosti na papirju so učenci iz leta 2022 z risbo razložili, kako se oblika spreminja, ko premaknemo eno temeno točko.\nProjekt Macesen: Debelina plošče je 18 mm, masa pa 2,3 kg, zapisano z **močno** in __podčrtim__ besedilom.\n```\n#!/usr/bin/env bash\n# Drugi fragment: izmišljen projekt (test)\n# Oseba: Peter, projekt: Žlahtni koda (HRAŠNA_VREDNOST)\n# Besedila: poudarke, podčrtane besede, zvezdice\nnaslov='*neodvisni* fragment'\npodrobnost='_podčrtana_ in **poudarjena**'\nseStez='src/modul.py'\nrazdelek2='docs/vir.txt'\nurl='https://primer.si/koda'\noklepaji='(vzorčni)'\necho \"naslov: $naslov\"\necho \"podrobnost: $podrobnost\"\necho \"pot: $seStez\"\necho \"razdelek: $razdelek2\"\necho \"url: $url\"\necho \"oklepaji: $oklepaji\"\necho 'backquote: `'\necho 'znesek: 42 $'\n```\nZadnja neodvisna vsebina: projekt Osvetlitev uporablja 2 V, 100 W in <pošta@primer.si> s povezavo <https://primer.si/stran>.\nparse_lexer_input\n```bash\n# oseba Luka: meritev 20 mm in število 6\n```\n\nTestna serija: 3 enote po 120 W so aktivne, potrditev pa je z **močno** in __podčrtim__ besedilom.\nV projektu Mlin 2018 je Luka preveril, koliko je povprečno trajala čakalna vrsta. Ko so trije prostovoljci dodali svoje opazke, se je slika izkazala za bolj uravnoteženo. Po njegovem mnenju je bistvo v tem, da se številka ne bere sama, ampak potrebuje kontekst.",
+ "components": [
+  {
+   "component_id": "comp-prose-math-explainer-dev-0010",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 420
+  },
+  {
+   "component_id": "comp-markdown-strong-dev-0007",
+   "category": "markdown",
+   "start_byte": 421,
+   "end_byte": 531
+  },
+  {
+   "component_id": "comp-code-shell-bash-dev-0010",
+   "category": "code",
+   "start_byte": 532,
+   "end_byte": 1069
+  },
+  {
+   "component_id": "comp-markdown-autolinks-dev-0008",
+   "category": "markdown",
+   "start_byte": 1070,
+   "end_byte": 1195
+  },
+  {
+   "component_id": "comp-machine-identifiers-dev-0004",
+   "category": "machine",
+   "start_byte": 1196,
+   "end_byte": 1213
+  },
+  {
+   "component_id": "comp-markdown-fenced-code-dev-0007",
+   "category": "markdown",
+   "start_byte": 1214,
+   "end_byte": 1268
+  },
+  {
+   "component_id": "comp-markdown-strong-dev-0006",
+   "category": "markdown",
+   "start_byte": 1269,
+   "end_byte": 1369
+  },
+  {
+   "component_id": "comp-prose-statistics-dev-0001",
+   "category": "prose",
+   "start_byte": 1370,
+   "end_byte": 1635
+  }
+ ]
+}

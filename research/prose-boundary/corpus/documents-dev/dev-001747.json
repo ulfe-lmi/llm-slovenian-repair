@@ -1,0 +1,71 @@
+{
+ "doc_id": "dev-001747",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T10-randomized",
+ "byte_length": 1234,
+ "cp_length": 1217,
+ "sha256": "47571290b9ecc6bd654a4f785ebe05ded99d1ec059496d764e2cf49011e7f942",
+ "document": "Za šolsko uro sem pripravila zgodbo o dveh vrstah sadja. Prva vrsta je vsebovala tri jabolka, druga pa štiri hruške. Učenci so po mnenju mentorja najprej poimenovali skupine, šele nato pa primerjali. Vstavek v dnevniku je bil preprost: »Enakost ni le število, ampak tudi pojasnjenje.« S tem sem želela, da se ne zanašajo samo na pravilo.\n$$\\frac{\\delta + \\epsilon}{\\zeta} = 4 \\times \\eta = \\text{Maja}$$\nPROJEKT_IME=Rdeca_Jablan, KEY=kontrola\nC:/projekt/vir.py,D:\\datoteke\\vir.txt\n## Projekt Trava\n### Testni podnaslov\n#### Podroben podnaslov\nProjekt Trava, avtor Marko Kranjc, vrednost 12 g.\n## Naslov 3\n![Opis: shema zaloge za projekt Charlie](https://primer.si/slika.png)\nMaja Rozman: prostornina 5 L, čas 120 s.\necho testni projekt\n```\n# Testni projekt: Seznam; avtor: Maja Lipovnik\nseznam = ['src/modul.py', 'docs/vir.txt']\nznacka = '*poudarek*'\noklepaj = '(neodvisno č)'\nvsota = sum(range(1, 4))\nif vsota == 6:\n    print('Seznam je pravilen')\n```\nProjekt *Maja* shrani _razmik_ 4 metre.\nČistilo iz sode bikarbone in citronske kiseline, kot ga testira zbirka Čist les, deluje preprosto, a ni primerno za vsak kamniti pult. »Za omarice z mahagonijem je bolje suha krpa,« je Marjeta opozorila, da se les ne oškodi.",
+ "components": [
+  {
+   "component_id": "comp-prose-math-explainer-dev-0004",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 347
+  },
+  {
+   "component_id": "comp-math-display-dollar-dev-0002",
+   "category": "math",
+   "start_byte": 348,
+   "end_byte": 413
+  },
+  {
+   "component_id": "comp-machine-env-vars-dev-0008",
+   "category": "machine",
+   "start_byte": 414,
+   "end_byte": 452
+  },
+  {
+   "component_id": "comp-machine-windows-paths-dev-0004",
+   "category": "machine",
+   "start_byte": 453,
+   "end_byte": 490
+  },
+  {
+   "component_id": "comp-markdown-headings-dev-0002",
+   "category": "markdown",
+   "start_byte": 491,
+   "end_byte": 602
+  },
+  {
+   "component_id": "comp-markdown-images-dev-0003",
+   "category": "markdown",
+   "start_byte": 603,
+   "end_byte": 726
+  },
+  {
+   "component_id": "comp-machine-shell-commands-dev-0008",
+   "category": "machine",
+   "start_byte": 727,
+   "end_byte": 746
+  },
+  {
+   "component_id": "comp-code-python-dev-0006",
+   "category": "code",
+   "start_byte": 747,
+   "end_byte": 964
+  },
+  {
+   "component_id": "comp-markdown-emphasis-dev-0008",
+   "category": "markdown",
+   "start_byte": 965,
+   "end_byte": 1004
+  },
+  {
+   "component_id": "comp-prose-everyday-advice-dev-0010",
+   "category": "prose",
+   "start_byte": 1005,
+   "end_byte": 1234
+  }
+ ]
+}

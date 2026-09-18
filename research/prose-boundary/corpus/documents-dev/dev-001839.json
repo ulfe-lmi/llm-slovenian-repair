@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-001839",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T3-prose-fenced-prose",
+ "byte_length": 1002,
+ "cp_length": 979,
+ "sha256": "b651fd3571ce2a755e8a15bbf9bdfd3578537b2b4614bfeca729fce71528f3f2",
+ "document": "Na opazovalnem mestu izmišljenega projekta Nočni ogled so opazovalci (v resnici študenti) opazili, da je ob vzhodu zvezde Aldebaran, ki so jo imenovali »čudovita svetleča točka«, svetloba rahlo zamigavala. V dnevniku meritve, ki ga je vodila Tjaša Novak, je stalo, da je letni cikel 2022 prinesel boljše vremenske razmere in zato večjo zanesljivost pri ocenjanju sijev.\n```\nfn seStez(razdelek2: u32) -> String { /* Testni projekt Lipa: č, š, ž, *poudarek* _podčrtano_ `oznaka` */ let HRAŠNA_VREDNOST = 1; let besedilo = format!(\"**Nova** ({} $, {})\", razdelek2, \"š\"); let pot = \"src/modul.py\"; let url = \"https://primer.si/koda\"; format!(\"{} | {} | {} | {}\", HRAŠNA_VREDNOST, besedilo, pot, url) }\n```\nV Dubrovniku sem z ekipo Sredozemska karta preveril obzidje in opozoril, da je obisk (brez rezervacije) pogosto daljši. V program smo vstavili tudi kratek postoj v starem solnem bazenu, kjer je voda odražala nebo. Vodič je dejal: \"če želite tih kot, se odpravite proti severu\".",
+ "components": [
+  {
+   "component_id": "comp-prose-science-dev-0008",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 380
+  },
+  {
+   "component_id": "comp-code-rust-dev-0001",
+   "category": "code",
+   "start_byte": 381,
+   "end_byte": 719
+  },
+  {
+   "component_id": "comp-prose-travel-dev-0005",
+   "category": "prose",
+   "start_byte": 720,
+   "end_byte": 1002
+  }
+ ]
+}

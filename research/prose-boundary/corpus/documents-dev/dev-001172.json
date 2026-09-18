@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-001172",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T7-prose-json-prose-latex",
+ "byte_length": 1020,
+ "cp_length": 1002,
+ "sha256": "09d1ce17db9d41c3a3944a5f9731d58ea23df95cf0ce37e4c98bfe878b21f15b",
+ "document": "Luka je poskušal sestaviti majhno svetilko in je ob tem zamenjal dve upornosti, kar je spremenilo sij. V opombi (datum: 12. marec 2025) je navedel, da baterija po dolgi rabi zmanjša napetost, zato se element hitreje utruši. Pozneje je preizkusil novo ploščico, jo preveril s merilcem in ugotovil, da je stik pri sponki ohlapen. »Moram preveriti vez,« je rekel in poskrbel za varno montažo.\n{\"ime\":\"Oseba Miha\",\"dolžina\":\"1,8 m\",\"avtorsko\":\"Nevtralna testna vsebina\",\"razmerje\":\"0,13\",\"opomba\":\"*Izmišljena oseba* https://primer.si/novica\"}\nUdeleženci projekta Otvorena vrata so v jeseni 2024 preizkusili učno sredo, v kateri je bil učbenik le ena od štirih podlag. Mladostnike je zanimalo, zakaj se isti izpit pri treh učiteljih razlikuje v razlagi (zlasti pri nalogah iz književnosti), zato so zapisali kratko pojasnilo. Na koncu so se dogovorili, da bo vsak odrasli udeleženec dobil eden sam pogovorni termin, ne pa dveh ločenih rok.\n\\[ \\begin{bmatrix} \\psi_1 & 3 \\\\ -7 & \\text{Bled} \\end{bmatrix} \\]",
+ "components": [
+  {
+   "component_id": "comp-prose-electronics-dev-0012",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 397
+  },
+  {
+   "component_id": "comp-structured-json-dev-0006",
+   "category": "structured",
+   "start_byte": 398,
+   "end_byte": 549
+  },
+  {
+   "component_id": "comp-prose-education-dev-0010",
+   "category": "prose",
+   "start_byte": 550,
+   "end_byte": 953
+  },
+  {
+   "component_id": "comp-math-bracket-tex-dev-0004",
+   "category": "math",
+   "start_byte": 954,
+   "end_byte": 1020
+  }
+ ]
+}

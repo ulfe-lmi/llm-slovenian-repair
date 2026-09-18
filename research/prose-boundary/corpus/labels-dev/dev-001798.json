@@ -1,0 +1,102 @@
+{
+ "doc_id": "dev-001798",
+ "byte_length": 721,
+ "cp_length": 699,
+ "regions": [
+  {
+   "start_byte": 0,
+   "end_byte": 323,
+   "start_cp": 0,
+   "end_cp": 316,
+   "component_id": "comp-prose-education-dev-0002",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 323,
+   "end_byte": 324,
+   "start_cp": 316,
+   "end_cp": 317,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 324,
+   "end_byte": 325,
+   "start_cp": 317,
+   "end_cp": 318,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 325,
+   "end_byte": 357,
+   "start_cp": 318,
+   "end_cp": 348,
+   "component_id": "comp-prose-computing-dev-0002",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 357,
+   "end_byte": 359,
+   "start_cp": 348,
+   "end_cp": 350,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 359,
+   "end_byte": 390,
+   "start_cp": 350,
+   "end_cp": 381,
+   "component_id": "comp-machine-urls-dev-0003",
+   "category": "machine",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 390,
+   "end_byte": 391,
+   "start_cp": 381,
+   "end_cp": 382,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 391,
+   "end_byte": 392,
+   "start_cp": 382,
+   "end_cp": 383,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 392,
+   "end_byte": 721,
+   "start_cp": 383,
+   "end_cp": 699,
+   "component_id": "comp-prose-computing-dev-0002",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  }
+ ],
+ "invariants": {
+  "tiling_complete": true,
+  "no_contradictory_overlaps": true,
+  "cp_range_exact": true
+ }
+}

@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-001671",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T11-interactions",
+ "byte_length": 731,
+ "cp_length": 715,
+ "sha256": "6653a8fa714276f1797de66b8706ba54f2081e35dd172c15dbf8da24df029a70",
+ "document": "`seStez = 'https://primer.si/koda'; razdelek2 = 'src/modul.py`.\n```\nint HRAŠNA_VREDNOST = 1; int main(void) { char *pot = \"docs/vir.txt\"; int razdelek2 = 2; (void)HRAŠNA_VREDNOST; (void)pot; (void)razdelek2; return 0; } /* Neposredni identifikator */\n# komentar z \\frac{a}{b}\n```\n„Prvi korak, drugi noga,“ je rekla Ana, a mladi smučarji v projektni skupini so še vedno poskušali izbrati pravo pozicijo. Ko je padal sneg, so se vsi odločili za krajši premor pri topli čaju.\nPri izpisu je bila pomembna ne samo skupna vrednost, ampak tudi to, ali so vsi podatki iz štirih oddelkov pravilni (kot je poudarila Nina). Povprečna vrednost je bila za tri evre višja, razmerje pa je ostalo približno enako kot spomladi 2022.",
+ "components": [
+  {
+   "component_id": "comp-code-python-dev-0010",
+   "category": "code",
+   "start_byte": 0,
+   "end_byte": 62
+  },
+  {
+   "component_id": "comp-code-c-dev-0006",
+   "category": "code",
+   "start_byte": 64,
+   "end_byte": 281
+  },
+  {
+   "component_id": "comp-prose-sports-dev-0012",
+   "category": "prose",
+   "start_byte": 282,
+   "end_byte": 484
+  },
+  {
+   "component_id": "comp-prose-statistics-dev-0004",
+   "category": "prose",
+   "start_byte": 485,
+   "end_byte": 731
+  }
+ ]
+}

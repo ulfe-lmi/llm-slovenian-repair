@@ -1,0 +1,47 @@
+{
+ "doc_id": "dev-002924",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T10-randomized",
+ "byte_length": 1117,
+ "cp_length": 1094,
+ "sha256": "555819aed87fdc0d14ac85237820364f23026996b30a236838914b561be5ae6f",
+ "document": "V testnem projektu Spomin 2024 sta osebi Luka in Meta poudarila, da bolečine v vratu in ramenskem predelu niso vedno znak resnega stanja. Vendar pa je smiselno, da osebo sprejme zdravnik, zlasti če se pojavi omedlevica ali motnja govora (na primer ob nenadnem slabem počutju).\n$\\frac{\\alpha_{\\text{Maja projekt Triglav}}}{\\beta} = \\gamma$\n```\nfn test2() -> &'static str { /* Testni projekt Lipa: č, š, ž, **poudarek** in *nova* */ let razdelek2 = 6; let HRAŠNA_VREDNOST = 2; let besedilo = format!(\"_Podčrtano_ ({} $)\", razdelek2); let oznaka = \"č`ž`š\"; let pot = \"src/modul.py\"; let url = \"https://primer.si/koda\"; let _ = (HRAŠNA_VREDNOST, besedilo, oznaka, pot, url); \"č, š, ž\" }\n```\n--vhod tabela/dokumenti.csv, --izhod izpis.txt, --kodiranje utf8\nZačetni pregled: 7 meritev ob 10 °C in 900 ml je označeno z **močno** in __podčrtim__ besedilom.\nV testnem projektu Trst je Nina, ki je bila ravno nova v moštvi, povzela vse tri pojme. Spremenljivka hrani stanje, zanka ponavlja korake, funkcija pa skupine stvari. Tisti vstavek je bil v pogovoru preprost: najprej razloži, nato pokaži primer.",
+ "components": [
+  {
+   "component_id": "comp-prose-medicine-explainer-dev-0007",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 279
+  },
+  {
+   "component_id": "comp-math-inline-dollar-dev-0003",
+   "category": "math",
+   "start_byte": 280,
+   "end_byte": 341
+  },
+  {
+   "component_id": "comp-code-rust-dev-0007",
+   "category": "code",
+   "start_byte": 342,
+   "end_byte": 701
+  },
+  {
+   "component_id": "comp-machine-cli-flags-dev-0006",
+   "category": "machine",
+   "start_byte": 702,
+   "end_byte": 766
+  },
+  {
+   "component_id": "comp-markdown-strong-dev-0008",
+   "category": "markdown",
+   "start_byte": 767,
+   "end_byte": 868
+  },
+  {
+   "component_id": "comp-prose-programming-explainer-dev-0004",
+   "category": "prose",
+   "start_byte": 869,
+   "end_byte": 1117
+  }
+ ]
+}

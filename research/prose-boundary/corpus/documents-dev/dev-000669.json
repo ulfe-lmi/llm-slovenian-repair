@@ -1,0 +1,53 @@
+{
+ "doc_id": "dev-000669",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T10-randomized",
+ "byte_length": 1615,
+ "cp_length": 1582,
+ "sha256": "30bb8dfb1993aa2df20d5ae385c9ca5b544dc2a078239f10a026cb11b3dce70f",
+ "document": "V projektu Osnovne šole Lipica učitelji (zlasti Ana Kovač) raje uporabljajo projektno delo, da učenci spoznajo, kako znanje deluje v vsakdanju. Po besedah razredne voditeljice je najpomembnejše, da otroci pri vsaki nalogi »razložijo, zakaj so ravno tako postopali«. Pri testnem izpitu iz naravoslovja so zato združili pisni del z ustno obravnavo dveh preprostih primerov iz šolskega vrta.\n\\text{Krka}\\begin{bmatrix}7&8\\\\9&10\\end{bmatrix}\nPROJEKT=Zlati hribovci\nAVTOR=Nina Kralj\nVZDUŠJE=20,3 °C\nVLAKNO=15 %\nDODATNA_VAR=$drugim_ključem; 0,18\nOPIS=[*test*, _slovensko_, https://primer.si/novica]\nE[X_{\\text{Marko}}] = \\sum_{i=1}^{4} x_i P_i = 3\\pi - \\frac{1}{2} \\text{ (pričakovana vrednost)}\n\\begin{align} \\alpha_7 &= \\lim_{\\beta_7 \\to 0} \\frac{\\gamma_7}{\\beta_7} \\\\ \\delta_7 &= \\nabla \\epsilon_7 \\\\ \\zeta_7 &= \\eta_7 \\cdot \\theta_7 \\end{align}\n```\n// Tretji testni del (č, š, ž)\nconst naslov3 = \"Podrobnost: **poudarek** in _podčrtana_\";\nconst opis = `Cena: $ 9,99 za razdelek2`;\nconst povezava = \"https://primer.si/koda\";\nconst pot = \"src/modul.py\";\nconst vir = \"docs/vir.txt\";\nfunction seStez(a, b) {\n  return a - b;\n}\nconst HRAŠNA_VREDNOST = 2;\nconst rezultat = seStez(HRAŠNA_VREDNOST, 1);\nconsole.log(naslov3, opis, povezava, pot, vir, rezultat);\n// konec\n```\nLeta 1999 so v projektu Bralna mreža (izmišljeni arhiv) preizkušali, kako bralci obudijo spomin na slovenske in evropske pesnike. Odkritje ni bilo v imenu, temveč v tem, da je vprašanje (brez nujnega odgovora) preživelo vse. »Zato,« je zapisal izmišljeni filolog Marko Rovec, »ker je knjižnost včasih sama sebi prevod.«",
+ "components": [
+  {
+   "component_id": "comp-prose-education-dev-0001",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 398
+  },
+  {
+   "component_id": "comp-math-matrices-dev-0002",
+   "category": "math",
+   "start_byte": 399,
+   "end_byte": 447
+  },
+  {
+   "component_id": "comp-structured-env-blocks-dev-0006",
+   "category": "structured",
+   "start_byte": 448,
+   "end_byte": 605
+  },
+  {
+   "component_id": "comp-math-probability-dev-0002",
+   "category": "math",
+   "start_byte": 606,
+   "end_byte": 703
+  },
+  {
+   "component_id": "comp-math-align-env-dev-0007",
+   "category": "math",
+   "start_byte": 704,
+   "end_byte": 856
+  },
+  {
+   "component_id": "comp-code-javascript-dev-0011",
+   "category": "code",
+   "start_byte": 857,
+   "end_byte": 1282
+  },
+  {
+   "component_id": "comp-prose-literature-dev-0004",
+   "category": "prose",
+   "start_byte": 1283,
+   "end_byte": 1615
+  }
+ ]
+}

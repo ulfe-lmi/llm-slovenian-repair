@@ -1,0 +1,59 @@
+{
+ "doc_id": "dev-000680",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T10-randomized",
+ "byte_length": 1612,
+ "cp_length": 1586,
+ "sha256": "56a7c75c392b1959ce2b648ba210bb23981b68bdb59be7cd6454fdd301d37552",
+ "document": "Pomurski potič se v testni kuhinji projekta Okusi Pomurja peče pri 180 stopinjah, dokler ne postane zlato rjav. Namaz iz mletega oreha (ne preveč) naj bo tanko razgneten, da se test ne raztrga. Katja je dodala malo medu, ker je želela, da bo vonj močnejši in bolj topel. Čas mirovanja testa, približno ena ura, je bil razlika med suhim in mehkim rezom.\n```\n-- Testni SQL fragment: razpoloži\nCREATE TABLE razpolozi (\n  id INT PRIMARY KEY,\n  \"seStez\" TEXT,\n  \"razdelek2\" TEXT,\n  opomba TEXT\n);\nINSERT INTO razpolozi (id, \"seStez\", \"razdelek2\", opomba)\nVALUES (1, '**poudarek** *zvezdice*', '_podčrtano_', '12 $ / dan');\nUPDATE razpolozi SET opomba = 'Vir: https://primer.si/koda' WHERE id = 1;\nSELECT id, \"seStez\", \"razdelek2\", opomba FROM razpolozi ORDER BY id;\n```\n````yaml\n# Projekt Jabolko: nevtralni zapis, 5 m\n````\n\n[opis](https://primer.si/stran tretji del: avtorizirana testna vsebina projekta Rumena cesta; izmišljena oseba Petra Zupan preverja obrazec.\nPovzetek: ~~pogrešne~~ številke 10, 20 in 30 za Projekt Brina.\n\\(\\frac{3}{4}-\\dfrac{\\delta}{\\varepsilon}=\\text{Luka}\\)\n\\Pr(C_{\\text{Sokol}} | D) = \\frac{\\Pr(D | C_{\\text{Sokol}}) P(C_{\\text{Sokol}})}{\\Pr(D)} = \\frac{7\\alpha}{11} \\text{ (podpogojena verjetnost)}\nIva je v projektu Kuhinjski arhiv v ponedeljek zvečer pripravila potico, a je namesto oreščkov izbrala mandlje, ker je imela doma le eno majhno škatlo. Testo (tisti tanjši recept iz leta 1989) se je lepo razvalalo, čeprav je bila kuhinja prepolna. Ko se je postrežbo spomnila na babičino opombo, je v dnevnik dodala vstavek: „Sladica naj diha vsaj tri četrt ure.“",
+ "components": [
+  {
+   "component_id": "comp-prose-cooking-dev-0002",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 360
+  },
+  {
+   "component_id": "comp-code-sql-dev-0009",
+   "category": "code",
+   "start_byte": 361,
+   "end_byte": 774
+  },
+  {
+   "component_id": "comp-markdown-fenced-code-dev-0003",
+   "category": "markdown",
+   "start_byte": 775,
+   "end_byte": 829
+  },
+  {
+   "component_id": "comp-malformed-broken-link-dev-0003",
+   "category": "malformed",
+   "start_byte": 830,
+   "end_byte": 971
+  },
+  {
+   "component_id": "comp-markdown-strikethrough-dev-0005",
+   "category": "markdown",
+   "start_byte": 972,
+   "end_byte": 1036
+  },
+  {
+   "component_id": "comp-math-fractions-dev-0002",
+   "category": "math",
+   "start_byte": 1037,
+   "end_byte": 1092
+  },
+  {
+   "component_id": "comp-math-probability-dev-0003",
+   "category": "math",
+   "start_byte": 1093,
+   "end_byte": 1235
+  },
+  {
+   "component_id": "comp-prose-cooking-dev-0009",
+   "category": "prose",
+   "start_byte": 1236,
+   "end_byte": 1612
+  }
+ ]
+}

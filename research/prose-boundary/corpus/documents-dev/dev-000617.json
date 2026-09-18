@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-000617",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T2-prose-math-prose",
+ "byte_length": 607,
+ "cp_length": 596,
+ "sha256": "558c9b584b879f5c445300b3a322d8d64e6477c613d59751caaa2f0bfbb505e3",
+ "document": "Ljubljanske gibuice se za projektno degustacijo pripravijo s kislim testom, ki mora prenočati v steklenki. “Ni treba, da so ravne,” je rekla Neža, medtem ko je dno posode premažala s smetano. Po tem, ko so bile dvanajst minut pri 190 stopinjah, so bile notri toplo rumene, zunaj pa rahlo hrustljave.\n\\[ \\begin{bmatrix} \\theta_1 & \\mu_2 & 5 \\\\ 4 & \\phi_3 & -\\lambda_1 \\\\ \\sigma_2 & 9 & \\text{Savinja} \\end{bmatrix} \\]\nPoskus, ki ga je vodila Nina, je potekal v majhni sobi. Lampa je gorela. Merilni senzor je oddajal tih zvok. Zapis je bil kratek: »Preprosto in toplo.« Zaključek je prišel zgodaj.",
+ "components": [
+  {
+   "component_id": "comp-prose-cooking-dev-0004",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 306
+  },
+  {
+   "component_id": "comp-math-bracket-tex-dev-0002",
+   "category": "math",
+   "start_byte": 307,
+   "end_byte": 423
+  },
+  {
+   "component_id": "comp-prose-science-dev-0009",
+   "category": "prose",
+   "start_byte": 424,
+   "end_byte": 607
+  }
+ ]
+}

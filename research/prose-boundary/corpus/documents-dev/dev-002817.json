@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-002817",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T2-prose-math-prose",
+ "byte_length": 649,
+ "cp_length": 630,
+ "sha256": "739ed953f6e83098391cc2b053c21527bb10c99beac0c9a286cdb6c1ead5445e",
+ "document": "Luka je ob petku opoldne odigral prijateljski nogometni dvoboj na travniku. „Kolega,“ je trener rekel znavo, „v naslednji sezoni bomo potrebovali boljšo zvezo v obrambi.“\n\\(\\left(\\frac{\\alpha^2}{3+\\beta}+\\sqrt{7-\\gamma}\\right)_{\\text{Ana}}\\)\nV projektu Osnovne šole Lipica učitelji (zlasti Ana Kovač) raje uporabljajo projektno delo, da učenci spoznajo, kako znanje deluje v vsakdanju. Po besedah razredne voditeljice je najpomembnejše, da otroci pri vsaki nalogi »razložijo, zakaj so ravno tako postopali«. Pri testnem izpitu iz naravoslovja so zato združili pisni del z ustno obravnavo dveh preprostih primerov iz šolskega vrta.",
+ "components": [
+  {
+   "component_id": "comp-prose-sports-dev-0006",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 179
+  },
+  {
+   "component_id": "comp-math-paren-tex-dev-0001",
+   "category": "math",
+   "start_byte": 180,
+   "end_byte": 250
+  },
+  {
+   "component_id": "comp-prose-education-dev-0001",
+   "category": "prose",
+   "start_byte": 251,
+   "end_byte": 649
+  }
+ ]
+}

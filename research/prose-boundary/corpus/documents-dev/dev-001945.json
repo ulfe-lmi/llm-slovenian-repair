@@ -1,0 +1,71 @@
+{
+ "doc_id": "dev-001945",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T10-randomized",
+ "byte_length": 1398,
+ "cp_length": 1374,
+ "sha256": "da2217bd2ddb83d90c8d4ab4c6688623a9a49a8ff82f1934d2d5961ee862eb89",
+ "document": "Iva je v projektu Kuhinjski arhiv v ponedeljek zvečer pripravila potico, a je namesto oreščkov izbrala mandlje, ker je imela doma le eno majhno škatlo. Testo (tisti tanjši recept iz leta 1989) se je lepo razvalalo, čeprav je bila kuhinja prepolna. Ko se je postrežbo spomnila na babičino opombo, je v dnevnik dodala vstavek: „Sladica naj diha vsaj tri četrt ure.“\n[trgovina]\nime = 'Trgovina Lipa'\nprodajalec = 'Irena Zupan'\nzaloga = '12 kos'\npopust = '15 %'\nopis = '*Novica* o _prodaji_'\nvir = 'https://primer.si/novica'\n```\nint main(void) { char *koda = \"Znak: `koda` (oklepaji)\"; char *valuta = \"Znesek: 5 $ in 10 EUR\"; char *rel = \"src/modul.py\"; char *oznaka = \"HRAŠNA_VREDNOST\"; (void)koda; (void)valuta; (void)rel; (void)oznaka; return 0; } /* Backquote in valuta */\n```\nProjekt *Aljaž* meri _tlak_ 12 enot.\n```\nint main(void) { int seStez = 3; char *pot = \"src/modul.py\"; (void)seStez; (void)pot; return 0; } /* Testni fragment: č, š, ž */\n```\n$5 je cena testnega vzorca v projektu Tihi Vrh.\nmake preizkus\nC:/projekt/vir.py\n**_Mešanica_ brez zapora.\nTestni projekt: Vrtna pot. Osebna: Ana Novak.\nIgor je v bazenu v Ljubljani (projektne lokacije za testno vsebino) preizkusil nov tempo plavanja. Prve sto metrov je plaval počasi, naslednjih dvajset metrov pa poskusil hitreje. Plavalec je na koncu rekel: „Ritem je bil dober, vendar mi je zmanjkalo zadnjih dvajsetih.“",
+ "components": [
+  {
+   "component_id": "comp-prose-cooking-dev-0009",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 376
+  },
+  {
+   "component_id": "comp-structured-toml-dev-0003",
+   "category": "structured",
+   "start_byte": 377,
+   "end_byte": 533
+  },
+  {
+   "component_id": "comp-code-c-dev-0004",
+   "category": "code",
+   "start_byte": 534,
+   "end_byte": 790
+  },
+  {
+   "component_id": "comp-markdown-emphasis-dev-0001",
+   "category": "markdown",
+   "start_byte": 791,
+   "end_byte": 828
+  },
+  {
+   "component_id": "comp-code-c-dev-0001",
+   "category": "code",
+   "start_byte": 829,
+   "end_byte": 968
+  },
+  {
+   "component_id": "comp-malformed-unmatched-dollar-dev-0001",
+   "category": "malformed",
+   "start_byte": 969,
+   "end_byte": 1016
+  },
+  {
+   "component_id": "comp-machine-shell-commands-dev-0002",
+   "category": "machine",
+   "start_byte": 1017,
+   "end_byte": 1030
+  },
+  {
+   "component_id": "comp-machine-windows-paths-dev-0001",
+   "category": "machine",
+   "start_byte": 1031,
+   "end_byte": 1048
+  },
+  {
+   "component_id": "comp-malformed-malformed-nesting-dev-0001",
+   "category": "malformed",
+   "start_byte": 1049,
+   "end_byte": 1121
+  },
+  {
+   "component_id": "comp-prose-sports-dev-0008",
+   "category": "prose",
+   "start_byte": 1122,
+   "end_byte": 1398
+  }
+ ]
+}

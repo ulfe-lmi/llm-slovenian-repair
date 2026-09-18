@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-001016",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T5-lists",
+ "byte_length": 983,
+ "cp_length": 964,
+ "sha256": "ec6bbbca08fa42a9e124db5623c64a74016fd1d3f0df481e5e5da5bf1e41b21e",
+ "document": "- V testni zbirki Projekt Zdravje 2026 je Matej napisal kratek vnos. Utrujenost, včasih tudi glavobol, ima lahko več razlogov. To je namerni vstavek v besedilo. Beseda „preveriti“ (v smislu posveta) se tu nanaša na obisk zdravnika. Ne gre za priporočilo zdravil ali odmerkov.\n- `/* Testni fragment 7: izmišljena oseba Marko, projekt Koda. `\n- V razredu smo pogovorno razložili, kako enačbe pomenijo enakost dveh izrazov, zato so učenci bolje razumeli, da se zamenja ne preprosto potegne. (Sprašila sem jih, kateri del bi se premaknil, in mnogi so povedali, da je pomembno ohraniti ravnotežje.) Ko so to povejali z dnevnim življenjem, je šlo lažje.\n- Maja (2022) je v projektu Ljubljanska potopisna zanka pojasnila, da zanka lahko obravnava vrsto dogodkov, dokler ni izpolnjen pogoj, in da funkcija obdaja pogoste korake v eno imeno. V tem razumevanju spremenljivka ni le število, ampak tudi ime za stanje, ki se med potekom spreminja, kar olajša prenos med koraki.",
+ "components": [
+  {
+   "component_id": "comp-prose-medicine-explainer-dev-0009",
+   "category": "prose",
+   "start_byte": 2,
+   "end_byte": 283
+  },
+  {
+   "component_id": "comp-code-sql-dev-0007",
+   "category": "code",
+   "start_byte": 286,
+   "end_byte": 349
+  },
+  {
+   "component_id": "comp-prose-math-explainer-dev-0001",
+   "category": "prose",
+   "start_byte": 352,
+   "end_byte": 664
+  },
+  {
+   "component_id": "comp-prose-programming-explainer-dev-0013",
+   "category": "prose",
+   "start_byte": 667,
+   "end_byte": 983
+  }
+ ]
+}

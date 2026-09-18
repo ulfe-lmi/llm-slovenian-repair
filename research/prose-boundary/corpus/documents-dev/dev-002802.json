@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-002802",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T9-prose-malformed-prose",
+ "byte_length": 1077,
+ "cp_length": 1061,
+ "sha256": "148d7890af6f248f8bedc48c87c504a3677466788d97efe8c8f51fe954b818bc",
+ "document": "Na opazovalni postaji pri projektu Zvezdna nit pod Šmarnico je mlada raziskovalka Lina Petek opazovala meglico z imenom Vrt 17 (opazovana od leta 2019). »Zvezda se v daljinici zdi tiha, vendar spektralna analiza kaže, da se v njej dogajajo močni premiki,« je povedala ob drugi uri zjutraj. Njena ekipa je nato v dolge noči zapisovala meritve, pri čemer so posebej skrbno beležila tudi tiste minute, ko je meglica izgledala kot navaden oblak. Kasneje je Lina v dnevnik zapisala, da so dolge serije meritev pogosto bolj zanesljive od enega samega pogleda.\n**_Mešanica_ brez zapora.\nTestni projekt: Vrtna pot. Osebna: Ana Novak.\nV soboto, ko je bilo poleti 24 stopinj, je ekipa izmišljene skupine Brez napetosti v parku izvedla pet minut ogrevanja, nato pa še enajstmetrovski udarec in tri kratke teke. Igralka, ki jo je projekt imenoval Eva, je po tem dejala, da je bila noga rahlo utrujena, vendar da je bil zrak svež. 'Naslednjič bomo dodali še malo plavanja,' je opozorila ob zbiranju opreme. Na koncu so opremo zložili, zapisnik pa sta podpisala le dva člana.",
+ "components": [
+  {
+   "component_id": "comp-prose-science-dev-0013",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 561
+  },
+  {
+   "component_id": "comp-malformed-malformed-nesting-dev-0001",
+   "category": "malformed",
+   "start_byte": 562,
+   "end_byte": 634
+  },
+  {
+   "component_id": "comp-prose-sports-dev-0005",
+   "category": "prose",
+   "start_byte": 635,
+   "end_byte": 1077
+  }
+ ]
+}

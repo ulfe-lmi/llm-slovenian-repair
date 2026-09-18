@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-000406",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T11-interactions",
+ "byte_length": 929,
+ "cp_length": 914,
+ "sha256": "4bd8b578c12d3a5cddd3247c4875b9bc87f51cf5a2fc0ebad935c6bb70813761",
+ "document": "`fn konec() { /* Testni projekt Lipa: č, š, ž, *poudarek* in `.\n```\n/* Primer 2: url in backquote */ int main(void) { const char *url = \"https://primer.si/koda\"; const char *opis = \"Znak `backquote`, pot: src/modul.py, črka š\"; int razdelek2 = 7; const char *opozorilo = \"Opomba: *nevarno* in _poudarek_\"; (void)url; (void)opis; (void)opozorilo; return razdelek2; }\n# komentar z \\frac{a}{b}\n```\nPoskus, ki ga je vodila Nina, je potekal v majhni sobi. Lampa je gorela. Merilni senzor je oddajal tih zvok. Zapis je bil kratek: »Preprosto in toplo.« Zaključek je prišel zgodaj.\nV projektu Sona (manjša fizikalna raziskava) je Maja spremljala vibracije tankih folij pri nizkih temperaturah. Zapisovala je, da se pri približno sto in dvanajst kelvinov material odzove drugače, in to je bilo vidno že po prvih dneh. Leta dvotisoč in osemnajst je ekipa poskusila ponoviti meritve, a je veter v prostoru vplival na števce.",
+ "components": [
+  {
+   "component_id": "comp-code-rust-dev-0008",
+   "category": "code",
+   "start_byte": 0,
+   "end_byte": 65
+  },
+  {
+   "component_id": "comp-code-c-dev-0010",
+   "category": "code",
+   "start_byte": 67,
+   "end_byte": 399
+  },
+  {
+   "component_id": "comp-prose-science-dev-0009",
+   "category": "prose",
+   "start_byte": 400,
+   "end_byte": 583
+  },
+  {
+   "component_id": "comp-prose-science-dev-0001",
+   "category": "prose",
+   "start_byte": 584,
+   "end_byte": 929
+  }
+ ]
+}

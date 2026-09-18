@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-001018",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T7-prose-json-prose-latex",
+ "byte_length": 787,
+ "cp_length": 778,
+ "sha256": "bcd71a049eefb55d78ad2f50bc7c3dd5bf0baa908ff21ecd6c1a5f5cf623e72b",
+ "document": "V projektu Spomini doline je Anica Zorman zapisala, da so stari kmečki registri vsebovali opombe o pridelku, davkih in poplavah. Zapis so razdelili po letnicah, ne pa po dnevih, zato je besedilo preprosteje za primerjanje. Njen sopotnik Marko je dodal, da takšni listi ohranjajo glas lokalne skupnosti.\n{\"ime\":\"Projekt Lipa\",\"cilj\":\"Nalaganje podatkov 25 %\",\"avtorsko\":\"Nevtralna testna vsebina\",\"merila\":{\"razmerje\":\"3,5 m / 0,13\",\"opomba\":\"**Test** https://primer.si/novica\"}}\nV projektu Gora je Ana razložila sodelavcu, da je spremenljivka kot oznaka na policah v knjižnici. Ko jo preimenujemo, spremenimo samo oznako, ne pa tudi knjige. Včasih to ugotovijo šele ob testiranju, ko program poišče napačno ime.\n$$\\frac{\\sigma}{\\tau} = \\frac{7}{9} \\div \\phi = \\text{Ljubljana}$$",
+ "components": [
+  {
+   "component_id": "comp-prose-history-dev-0001",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 304
+  },
+  {
+   "component_id": "comp-structured-json-dev-0001",
+   "category": "structured",
+   "start_byte": 305,
+   "end_byte": 480
+  },
+  {
+   "component_id": "comp-prose-programming-explainer-dev-0001",
+   "category": "prose",
+   "start_byte": 481,
+   "end_byte": 720
+  },
+  {
+   "component_id": "comp-math-display-dollar-dev-0004",
+   "category": "math",
+   "start_byte": 721,
+   "end_byte": 787
+  }
+ ]
+}

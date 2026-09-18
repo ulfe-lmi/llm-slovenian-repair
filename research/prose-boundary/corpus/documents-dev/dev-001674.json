@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-001674",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T3-prose-fenced-prose",
+ "byte_length": 745,
+ "cp_length": 719,
+ "sha256": "1ae6672a3a23fda6fdec43222893b7a3af725a6f68eb525bc33880d875f96380",
+ "document": "Poleti 2024 sem z izmišljeno skupino Tihotažna obala raziskoval otok na Bledskem jezeru, kjer je bil zrak svež. Zvečer smo se zatekli v lokalno jedilnico, da bi poskusili potico.\n```\nfn test2() -> &'static str { /* Testni projekt Lipa: č, š, ž, **poudarek** in *nova* */ let razdelek2 = 6; let HRAŠNA_VREDNOST = 2; let besedilo = format!(\"_Podčrtano_ ({} $)\", razdelek2); let oznaka = \"č`ž`š\"; let pot = \"src/modul.py\"; let url = \"https://primer.si/koda\"; let _ = (HRAŠNA_VREDNOST, besedilo, oznaka, pot, url); \"č, š, ž\" }\n```\n„Prvi korak, drugi noga,“ je rekla Ana, a mladi smučarji v projektni skupini so še vedno poskušali izbrati pravo pozicijo. Ko je padal sneg, so se vsi odločili za krajši premor pri topli čaju.",
+ "components": [
+  {
+   "component_id": "comp-prose-travel-dev-0001",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 182
+  },
+  {
+   "component_id": "comp-code-rust-dev-0007",
+   "category": "code",
+   "start_byte": 183,
+   "end_byte": 542
+  },
+  {
+   "component_id": "comp-prose-sports-dev-0012",
+   "category": "prose",
+   "start_byte": 543,
+   "end_byte": 745
+  }
+ ]
+}

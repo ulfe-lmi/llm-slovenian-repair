@@ -1,0 +1,71 @@
+{
+ "doc_id": "dev-002484",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T10-randomized",
+ "byte_length": 1715,
+ "cp_length": 1679,
+ "sha256": "536c476449451192090daf92b19ce3b9ee554938f98b7504def0ef3bfb41eadb",
+ "document": "Ana je poletja 2023 preživela ob Bledu in si ogledala grad. Vreme je bilo toplo, voda pa mirna kot steklo. Popoldne se je sprehodila do Špice in uživala v razgledu na jezero.\n```\nfn HRAŠNA_VREDNOST(žvirok: i64) -> i64 { /* Testni projekt Lipa: č, š, ž, **močan** in *poudarek* */ let razdelek2: i64 = 3; let besedilo = format!(\"_Podčrtano_ ({} $)\", razdelek2); let oznaka = \"č`ž`š\"; let pot = \"src/modul.rs\"; let url = \"https://primer.si/koda\"; let _ = (besedilo, oznaka, pot, url); žvirok + razdelek2 }\n```\n[gradnja]\nime = *Projekt Kameniti most*\nopis = _dolžina_ 45 m\nmasa = 12 kg\navtor = Petra Kranjc\nvir = https://primer.si/novica\n; nevtralna testna vsebina\n```\nseStez = 'https://primer.si/koda'; razdelek2 = 'src/modul.py'; HRAŠNA_VREDNOST = 7 # komentar v slovenščini: izmišljena oseba Ana, tema črn žir\n```\n```\n/* Zaključni test: oseba Janež, projekt Brest */ const naslov = 'Vrednost je 25 $'; const opomba = `Podpis: **Janez** (_brez šumnika_)`; const pot = 'docs/vir.txt'; const razdelek2 = 8; console.log(naslov, opomba, pot, razdelek2);\n```\n| Ime osebe | Enota | Merilo |\n| --- | --- | --- |\n| Ana Kovač | min | 18 |\n| Bojan Zupan | l | 230 |\nparse_lexer_input\n\\Pr(Z > \\mu + \\sigma) = 1 - \\Phi(1) = 0.1587 \\text{ (verjetnost repa)}\n[opis](https://primer.si/stran prvi del: avtorizirana testna vsebina projekta Modri vrt; izmišljena oseba Ana Kovač preverja podatke.\nV projektu Prvi tok, ki ga je leta 2018 sestavila Ana, se je naučila, da mora biti sklep zaprt, da se lučka sploh prižge. Baterija, ki je imela 4,5 V, je bila nameščena v držač, medtem ko je upornost zaščitila diodo pred prevelikim tokom. (Zelo pomembno je preveriti, ali so vsi konci dobro povezani.)",
+ "components": [
+  {
+   "component_id": "comp-prose-travel-dev-0006",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 177
+  },
+  {
+   "component_id": "comp-code-rust-dev-0003",
+   "category": "code",
+   "start_byte": 178,
+   "end_byte": 521
+  },
+  {
+   "component_id": "comp-structured-ini-dev-0003",
+   "category": "structured",
+   "start_byte": 522,
+   "end_byte": 676
+  },
+  {
+   "component_id": "comp-code-python-dev-0010",
+   "category": "code",
+   "start_byte": 677,
+   "end_byte": 834
+  },
+  {
+   "component_id": "comp-code-javascript-dev-0008",
+   "category": "code",
+   "start_byte": 835,
+   "end_byte": 1076
+  },
+  {
+   "component_id": "comp-markdown-tables-dev-0002",
+   "category": "markdown",
+   "start_byte": 1077,
+   "end_byte": 1179
+  },
+  {
+   "component_id": "comp-machine-identifiers-dev-0004",
+   "category": "machine",
+   "start_byte": 1180,
+   "end_byte": 1197
+  },
+  {
+   "component_id": "comp-math-probability-dev-0006",
+   "category": "math",
+   "start_byte": 1198,
+   "end_byte": 1268
+  },
+  {
+   "component_id": "comp-malformed-broken-link-dev-0001",
+   "category": "malformed",
+   "start_byte": 1269,
+   "end_byte": 1404
+  },
+  {
+   "component_id": "comp-prose-electronics-dev-0006",
+   "category": "prose",
+   "start_byte": 1405,
+   "end_byte": 1715
+  }
+ ]
+}

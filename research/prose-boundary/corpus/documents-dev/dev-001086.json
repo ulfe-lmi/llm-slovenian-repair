@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-001086",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T9-prose-malformed-prose",
+ "byte_length": 644,
+ "cp_length": 628,
+ "sha256": "e32731097790c089f7662a84368b1c5dd9d007d734d8671984314916ea9178ab",
+ "document": "Leta 1999 so v projektu Bralna mreža (izmišljeni arhiv) preizkušali, kako bralci obudijo spomin na slovenske in evropske pesnike. Odkritje ni bilo v imenu, temveč v tem, da je vprašanje (brez nujnega odgovora) preživelo vse. »Zato,« je zapisal izmišljeni filolog Marko Rovec, »ker je knjižnost včasih sama sebi prevod.«\n**_Mešanica_ brez zapora.\nTestni projekt: Vrtna pot. Osebna: Ana Novak.\nMaja je v pisarni preizkusila nov tiskalnik, ki pa se je ob prvimu zagonu pokazal bolj zahteven, kot so obljavali. V razpravi so sodelavci spregovorili o tem, da bi lahko preprostejši program za spremljanje tonerja rešil polovico tegob.",
+ "components": [
+  {
+   "component_id": "comp-prose-literature-dev-0004",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 332
+  },
+  {
+   "component_id": "comp-malformed-malformed-nesting-dev-0001",
+   "category": "malformed",
+   "start_byte": 333,
+   "end_byte": 405
+  },
+  {
+   "component_id": "comp-prose-computing-dev-0001",
+   "category": "prose",
+   "start_byte": 406,
+   "end_byte": 644
+  }
+ ]
+}

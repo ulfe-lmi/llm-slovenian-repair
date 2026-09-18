@@ -1,0 +1,152 @@
+{
+ "doc_id": "dev-001165",
+ "byte_length": 642,
+ "cp_length": 626,
+ "regions": [
+  {
+   "start_byte": 0,
+   "end_byte": 1,
+   "start_cp": 0,
+   "end_cp": 1,
+   "component_id": "comp-code-rust-dev-0011",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 1,
+   "end_byte": 52,
+   "start_cp": 1,
+   "end_cp": 50,
+   "component_id": "comp-code-rust-dev-0011",
+   "category": "code",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 52,
+   "end_byte": 53,
+   "start_cp": 50,
+   "end_cp": 51,
+   "component_id": "comp-code-rust-dev-0011",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 53,
+   "end_byte": 54,
+   "start_cp": 51,
+   "end_cp": 52,
+   "component_id": "template",
+   "category": null,
+   "role": "PROSE",
+   "template_owned": true
+  },
+  {
+   "start_byte": 54,
+   "end_byte": 55,
+   "start_cp": 52,
+   "end_cp": 53,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 55,
+   "end_byte": 58,
+   "start_cp": 53,
+   "end_cp": 56,
+   "component_id": "comp-code-python-dev-0009",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 58,
+   "end_byte": 59,
+   "start_cp": 56,
+   "end_cp": 57,
+   "component_id": "comp-code-python-dev-0009",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 59,
+   "end_byte": 227,
+   "start_cp": 57,
+   "end_cp": 218,
+   "component_id": "comp-code-python-dev-0009",
+   "category": "code",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 227,
+   "end_byte": 228,
+   "start_cp": 218,
+   "end_cp": 219,
+   "component_id": "comp-code-python-dev-0009",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 228,
+   "end_byte": 231,
+   "start_cp": 219,
+   "end_cp": 222,
+   "component_id": "comp-code-python-dev-0009",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 231,
+   "end_byte": 232,
+   "start_cp": 222,
+   "end_cp": 223,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 232,
+   "end_byte": 428,
+   "start_cp": 223,
+   "end_cp": 416,
+   "component_id": "comp-prose-administration-dev-0009",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 428,
+   "end_byte": 429,
+   "start_cp": 416,
+   "end_cp": 417,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 429,
+   "end_byte": 642,
+   "start_cp": 417,
+   "end_cp": 626,
+   "component_id": "comp-prose-travel-dev-0010",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  }
+ ],
+ "invariants": {
+  "tiling_complete": true,
+  "no_contradictory_overlaps": true,
+  "cp_range_exact": true
+ }
+}

@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-000997",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T8-quote-fenced",
+ "byte_length": 637,
+ "cp_length": 628,
+ "sha256": "67e33f6194d4c975d2ae8d42402c205c8b5987eac7acc987b6c909aaa3fb17b8",
+ "document": "> V razredu smo pogovorno razložili, kako enačbe pomenijo enakost dveh izrazov, zato so učenci bolje razumeli, da se zamenja ne preprosto potegne. (Sprašila sem jih, kateri del bi se premaknil, in mnogi so povedali, da je pomembno ohraniti ravnotežje.) Ko so to povejali z dnevnim življenjem, je šlo lažje. `# Testni projekt: Nabavna lista; avtor: Maja Lipovnik`\n```\n/* Pridrži se projektnim pravilom: (brez absolutnih poti) */ const pot = 'src/modul.py'; const dokument = 'docs/vir.txt'; const povezava = 'https://primer.si/koda'; const besedilo = `Cena je 3 $ za (izdelek)`; console.log(pot, dokument, povezava, besedilo);\n```",
+ "components": [
+  {
+   "component_id": "comp-prose-math-explainer-dev-0001",
+   "category": "prose",
+   "start_byte": 2,
+   "end_byte": 314
+  },
+  {
+   "component_id": "comp-code-python-dev-0002",
+   "category": "code",
+   "start_byte": 315,
+   "end_byte": 370
+  },
+  {
+   "component_id": "comp-code-javascript-dev-0003",
+   "category": "code",
+   "start_byte": 371,
+   "end_byte": 637
+  }
+ ]
+}

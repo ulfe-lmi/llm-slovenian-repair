@@ -1,0 +1,512 @@
+{
+ "doc_id": "dev-001747",
+ "byte_length": 1234,
+ "cp_length": 1217,
+ "regions": [
+  {
+   "start_byte": 0,
+   "end_byte": 347,
+   "start_cp": 0,
+   "end_cp": 337,
+   "component_id": "comp-prose-math-explainer-dev-0004",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 347,
+   "end_byte": 348,
+   "start_cp": 337,
+   "end_cp": 338,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 348,
+   "end_byte": 350,
+   "start_cp": 338,
+   "end_cp": 340,
+   "component_id": "comp-math-display-dollar-dev-0002",
+   "category": "math",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 350,
+   "end_byte": 411,
+   "start_cp": 340,
+   "end_cp": 401,
+   "component_id": "comp-math-display-dollar-dev-0002",
+   "category": "math",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 411,
+   "end_byte": 413,
+   "start_cp": 401,
+   "end_cp": 403,
+   "component_id": "comp-math-display-dollar-dev-0002",
+   "category": "math",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 413,
+   "end_byte": 414,
+   "start_cp": 403,
+   "end_cp": 404,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 414,
+   "end_byte": 425,
+   "start_cp": 404,
+   "end_cp": 415,
+   "component_id": "comp-machine-env-vars-dev-0008",
+   "category": "machine",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 425,
+   "end_byte": 426,
+   "start_cp": 415,
+   "end_cp": 416,
+   "component_id": "comp-machine-env-vars-dev-0008",
+   "category": "machine",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 426,
+   "end_byte": 438,
+   "start_cp": 416,
+   "end_cp": 428,
+   "component_id": "comp-machine-env-vars-dev-0008",
+   "category": "machine",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 438,
+   "end_byte": 439,
+   "start_cp": 428,
+   "end_cp": 429,
+   "component_id": "comp-machine-env-vars-dev-0008",
+   "category": "machine",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 439,
+   "end_byte": 440,
+   "start_cp": 429,
+   "end_cp": 430,
+   "component_id": "comp-machine-env-vars-dev-0008",
+   "category": "machine",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 440,
+   "end_byte": 443,
+   "start_cp": 430,
+   "end_cp": 433,
+   "component_id": "comp-machine-env-vars-dev-0008",
+   "category": "machine",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 443,
+   "end_byte": 444,
+   "start_cp": 433,
+   "end_cp": 434,
+   "component_id": "comp-machine-env-vars-dev-0008",
+   "category": "machine",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 444,
+   "end_byte": 452,
+   "start_cp": 434,
+   "end_cp": 442,
+   "component_id": "comp-machine-env-vars-dev-0008",
+   "category": "machine",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 452,
+   "end_byte": 453,
+   "start_cp": 442,
+   "end_cp": 443,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 453,
+   "end_byte": 490,
+   "start_cp": 443,
+   "end_cp": 480,
+   "component_id": "comp-machine-windows-paths-dev-0004",
+   "category": "machine",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 490,
+   "end_byte": 491,
+   "start_cp": 480,
+   "end_cp": 481,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 491,
+   "end_byte": 494,
+   "start_cp": 481,
+   "end_cp": 484,
+   "component_id": "comp-markdown-headings-dev-0002",
+   "category": "markdown",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 494,
+   "end_byte": 508,
+   "start_cp": 484,
+   "end_cp": 498,
+   "component_id": "comp-markdown-headings-dev-0002",
+   "category": "markdown",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 508,
+   "end_byte": 512,
+   "start_cp": 498,
+   "end_cp": 502,
+   "component_id": "comp-markdown-headings-dev-0002",
+   "category": "markdown",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 512,
+   "end_byte": 529,
+   "start_cp": 502,
+   "end_cp": 519,
+   "component_id": "comp-markdown-headings-dev-0002",
+   "category": "markdown",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 529,
+   "end_byte": 534,
+   "start_cp": 519,
+   "end_cp": 524,
+   "component_id": "comp-markdown-headings-dev-0002",
+   "category": "markdown",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 534,
+   "end_byte": 602,
+   "start_cp": 524,
+   "end_cp": 592,
+   "component_id": "comp-markdown-headings-dev-0002",
+   "category": "markdown",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 602,
+   "end_byte": 603,
+   "start_cp": 592,
+   "end_cp": 593,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 603,
+   "end_byte": 606,
+   "start_cp": 593,
+   "end_cp": 596,
+   "component_id": "comp-markdown-images-dev-0003",
+   "category": "markdown",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 606,
+   "end_byte": 614,
+   "start_cp": 596,
+   "end_cp": 604,
+   "component_id": "comp-markdown-images-dev-0003",
+   "category": "markdown",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 614,
+   "end_byte": 615,
+   "start_cp": 604,
+   "end_cp": 605,
+   "component_id": "comp-markdown-images-dev-0003",
+   "category": "markdown",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 615,
+   "end_byte": 684,
+   "start_cp": 605,
+   "end_cp": 674,
+   "component_id": "comp-markdown-images-dev-0003",
+   "category": "markdown",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 684,
+   "end_byte": 685,
+   "start_cp": 674,
+   "end_cp": 675,
+   "component_id": "comp-markdown-images-dev-0003",
+   "category": "markdown",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 685,
+   "end_byte": 726,
+   "start_cp": 675,
+   "end_cp": 715,
+   "component_id": "comp-markdown-images-dev-0003",
+   "category": "markdown",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 726,
+   "end_byte": 727,
+   "start_cp": 715,
+   "end_cp": 716,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 727,
+   "end_byte": 746,
+   "start_cp": 716,
+   "end_cp": 735,
+   "component_id": "comp-machine-shell-commands-dev-0008",
+   "category": "machine",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 746,
+   "end_byte": 747,
+   "start_cp": 735,
+   "end_cp": 736,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 747,
+   "end_byte": 750,
+   "start_cp": 736,
+   "end_cp": 739,
+   "component_id": "comp-code-python-dev-0006",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 750,
+   "end_byte": 751,
+   "start_cp": 739,
+   "end_cp": 740,
+   "component_id": "comp-code-python-dev-0006",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 751,
+   "end_byte": 960,
+   "start_cp": 740,
+   "end_cp": 948,
+   "component_id": "comp-code-python-dev-0006",
+   "category": "code",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 960,
+   "end_byte": 961,
+   "start_cp": 948,
+   "end_cp": 949,
+   "component_id": "comp-code-python-dev-0006",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 961,
+   "end_byte": 964,
+   "start_cp": 949,
+   "end_cp": 952,
+   "component_id": "comp-code-python-dev-0006",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 964,
+   "end_byte": 965,
+   "start_cp": 952,
+   "end_cp": 953,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 965,
+   "end_byte": 973,
+   "start_cp": 953,
+   "end_cp": 961,
+   "component_id": "comp-markdown-emphasis-dev-0008",
+   "category": "markdown",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 973,
+   "end_byte": 974,
+   "start_cp": 961,
+   "end_cp": 962,
+   "component_id": "comp-markdown-emphasis-dev-0008",
+   "category": "markdown",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 974,
+   "end_byte": 978,
+   "start_cp": 962,
+   "end_cp": 966,
+   "component_id": "comp-markdown-emphasis-dev-0008",
+   "category": "markdown",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 978,
+   "end_byte": 979,
+   "start_cp": 966,
+   "end_cp": 967,
+   "component_id": "comp-markdown-emphasis-dev-0008",
+   "category": "markdown",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 979,
+   "end_byte": 987,
+   "start_cp": 967,
+   "end_cp": 975,
+   "component_id": "comp-markdown-emphasis-dev-0008",
+   "category": "markdown",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 987,
+   "end_byte": 988,
+   "start_cp": 975,
+   "end_cp": 976,
+   "component_id": "comp-markdown-emphasis-dev-0008",
+   "category": "markdown",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 988,
+   "end_byte": 994,
+   "start_cp": 976,
+   "end_cp": 982,
+   "component_id": "comp-markdown-emphasis-dev-0008",
+   "category": "markdown",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 994,
+   "end_byte": 995,
+   "start_cp": 982,
+   "end_cp": 983,
+   "component_id": "comp-markdown-emphasis-dev-0008",
+   "category": "markdown",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 995,
+   "end_byte": 1004,
+   "start_cp": 983,
+   "end_cp": 992,
+   "component_id": "comp-markdown-emphasis-dev-0008",
+   "category": "markdown",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 1004,
+   "end_byte": 1005,
+   "start_cp": 992,
+   "end_cp": 993,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 1005,
+   "end_byte": 1234,
+   "start_cp": 993,
+   "end_cp": 1217,
+   "component_id": "comp-prose-everyday-advice-dev-0010",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  }
+ ],
+ "invariants": {
+  "tiling_complete": true,
+  "no_contradictory_overlaps": true,
+  "cp_range_exact": true
+ }
+}

@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-002598",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T3-prose-fenced-prose",
+ "byte_length": 814,
+ "cp_length": 793,
+ "sha256": "55aaee09aaf862099377ee4967dad0b229ec33111b1dbb476a0f8ce0264679f9",
+ "document": "V testni zbirki Projekt Zdravje 2026 je Matej napisal kratek vnos. Utrujenost, včasih tudi glavobol, ima lahko več razlogov. To je namerni vstavek v besedilo. Beseda „preveriti“ (v smislu posveta) se tu nanaša na obisk zdravnika. Ne gre za priporočilo zdravil ali odmerkov.\n```\n/* Konstanta za testno temo: Hrašna vrednost */ const HRAŠNA_VREDNOST = 42; const razdelek2 = 7; function zber(zbir) { return zbir + HRAŠNA_VREDNOST; } console.log(`Vrednost: ${zber(razdelek2)}`);\n```\nSlovenska pesniška tradicija ima svojo tišino. V izmišljenem projektu Glas in tišina, ki raziskuje naravno, se pojavi motiv dreves. Izmišljena pesnica Anja Horvat v zbirki iz leta 2015 piše: »Drevo ne govori, a se v šumu zdi, da je vprašanje.« Ta stavek se v evropskem kontekstu pogosto pojavi kot znak identitete.",
+ "components": [
+  {
+   "component_id": "comp-prose-medicine-explainer-dev-0009",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 281
+  },
+  {
+   "component_id": "comp-code-javascript-dev-0004",
+   "category": "code",
+   "start_byte": 282,
+   "end_byte": 489
+  },
+  {
+   "component_id": "comp-prose-literature-dev-0008",
+   "category": "prose",
+   "start_byte": 490,
+   "end_byte": 814
+  }
+ ]
+}

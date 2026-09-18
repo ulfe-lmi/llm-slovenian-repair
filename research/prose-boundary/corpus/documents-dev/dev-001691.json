@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-001691",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T9-prose-malformed-prose",
+ "byte_length": 498,
+ "cp_length": 479,
+ "sha256": "a799dcdf106dafdd2a3b8cd8d849e7634fa289db0c359845d8b5490c02103d80",
+ "document": "Maja je prvič poskusila smučati na Počitenju (izmišljena dolina). Sneg je bil mehki. Proga je bila široka. „Pazite,“ jo je opomnil vodja tečaja, „ker se v sosednji strmini lahko pojavijo skrite luknje.“\n\n\\(x+1=2. Testni zapis projekta Lipa za osebo Anna.\n\nV poročilu projekta Sova je Ana zabeležila, da je bil račun porabe preproster. Trije sodelavci so skupno porabili enaindevetdeset evrov. Po razmerju med porabo in sodelavci je povprečje za vsakega znašalo trideset tri evri.",
+ "components": [
+  {
+   "component_id": "comp-prose-sports-dev-0007",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 216
+  },
+  {
+   "component_id": "comp-malformed-incomplete-paren-bracket-dev-0001",
+   "category": "malformed",
+   "start_byte": 218,
+   "end_byte": 268
+  },
+  {
+   "component_id": "comp-prose-statistics-dev-0011",
+   "category": "prose",
+   "start_byte": 270,
+   "end_byte": 498
+  }
+ ]
+}

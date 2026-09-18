@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-001544",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T5-lists",
+ "byte_length": 961,
+ "cp_length": 940,
+ "sha256": "620dd1efc8ce87df82d0475bb37d762ee41d3cf558133c061f8b40d4df87c154",
+ "document": "- Esej je v izmišljenem projektu Pisna meja zvrst, ki preizkuša meje jezika. Izmišljen slovenski avtor Boštjan Kralj v delu iz leta 2020 uporabi kratke vstavke. Ti vstavki (kraj, ime, ura) zgradijo novo raven. Motiv identitete se tu poveže z evropsko refleksijo. Rezultat je tiha pot med besedo in stvarnostjo.\n- `/* Fragment 1: nevtralni testni projekt, vir https://primer.`\n- Zimska juha je pri kuhanju zahtevala mir in čas. Anja je najprej olupila krompir, nato pa ga naribala. Za projektni dnevnik je zapisala, da je smetane lahko “samo malo”, ne pa preveč. V kotliček so šli tudi rdeča čebula in klobasa, po stari navadi. Skozi okno je prišlo malo hlada, zato je juha postala še gostejša.\n- Maja je poletni dopust v Sredozemlju izbrala predvsem zaradi tihih obalnih vas (zlasti tistih v bližini Kotorskega zaliva). »Sonce je bilo toplo,« je zapisala v svojih opombah, a je poudarila, da je treba med popoldanskimi urami ostati v senci.",
+ "components": [
+  {
+   "component_id": "comp-prose-literature-dev-0009",
+   "category": "prose",
+   "start_byte": 2,
+   "end_byte": 315
+  },
+  {
+   "component_id": "comp-code-cpp-dev-0009",
+   "category": "code",
+   "start_byte": 318,
+   "end_byte": 380
+  },
+  {
+   "component_id": "comp-prose-cooking-dev-0005",
+   "category": "prose",
+   "start_byte": 383,
+   "end_byte": 711
+  },
+  {
+   "component_id": "comp-prose-travel-dev-0012",
+   "category": "prose",
+   "start_byte": 714,
+   "end_byte": 961
+  }
+ ]
+}

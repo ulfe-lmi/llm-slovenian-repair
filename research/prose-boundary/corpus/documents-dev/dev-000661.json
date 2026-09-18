@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-000661",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T2-prose-math-prose",
+ "byte_length": 886,
+ "cp_length": 866,
+ "sha256": "17277ffe125d30865178d7bc6ad2d6b9770e352a3f98ddb454710fa9a1537e5e",
+ "document": "V Občini Srednji Grič je od lanskega aprila potekalo posvetovanje o novem postopku za izdajo gradbenih dovoljenj. (Cilj je bil krajši rok za obravnavo zahtev.) Upravni uradnik Marko Zajc je pripravil povzetek komentarjev, ki so jih oddali posamezniki, podjetja in društva. Do konca leta 2025 so želeli uvesti enotno elektronsko knjižico, vendar se je izkazalo, da je treba najprej uskladiti terminologijo.\n\\[ \\begin{bmatrix} \\tau_1 & 6 \\\\ \\upsilon_2 & -3 \\\\ \\text{Mura} & 10 \\end{bmatrix} \\]\nV starem receptu iz leta 1958 stoji, da se ajdova juha iz Ljubljane najprej posoli, nato pa počasi premeša, da ne bi zgrudila. “Ajda mora dišati po štrukljih,” je nekoč zapisala Anja, ki je testirala recept za projektni dnevnik okusov (po mnenju njene sestre, Marice). Pri pripravi je bil pomemben tudi čas: deset minut mešanja, nato pa še kratko ohlajanje na hladni plošči.",
+ "components": [
+  {
+   "component_id": "comp-prose-administration-dev-0001",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 411
+  },
+  {
+   "component_id": "comp-math-bracket-tex-dev-0006",
+   "category": "math",
+   "start_byte": 412,
+   "end_byte": 497
+  },
+  {
+   "component_id": "comp-prose-cooking-dev-0001",
+   "category": "prose",
+   "start_byte": 498,
+   "end_byte": 886
+  }
+ ]
+}

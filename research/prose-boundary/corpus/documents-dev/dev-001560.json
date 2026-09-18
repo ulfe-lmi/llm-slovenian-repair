@@ -1,0 +1,53 @@
+{
+ "doc_id": "dev-001560",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T10-randomized",
+ "byte_length": 1377,
+ "cp_length": 1362,
+ "sha256": "36d9083be09b8f5505bc79d58056edaa9d5deccc0570fc5556e256c96ffa66ba",
+ "document": "V šolskem testnem kotičku je Nia izmislila preprosto skico: utripalka, upornost, sklep in baterija v krogu. \"Ne pozabi, da je sklep odprt, dokler ga ne pritisneš,\" je opomnila sošolki. Ta se je nasmehnila in se lotila priključevanja. Ko je vse šlo, sta skupaj ugasnili in zapisali datum.\nmeta.zupan@primer.si,luka.kovac@primer.si\n\\(\\dfrac{7}{8}+\\frac{\\iota}{\\kappa}=\\text{Nina}\\)\n```\n/* Testni fragment 3: izmišljena oseba Luka, projekt Brst. */ SELECT 'Luka' AS `ime`, '3,10 $' AS `cena`, 'https://primer.si/koda' AS `url`, 'src/test.py' AS `pot`, TRIM('*kratek* in _podčrtano_') AS `opomba`, 'razdelek2' AS `razdelek2`, 'seStez' AS `seStez`, 'š' AS `HRAŠNA_VREDNOST` FROM (SELECT 3 AS `en`) AS `t` WHERE (`t`.`en` = 3);\n```\n```\n/* Testni podatki za izmišljen projekt Javornik */ const opis = { naslov: 'Označi *poudarek* in **pomembno**', podnaslov: '_opomba_', datum: '2026-01-15' }; console.log(opis.naslov);\n```\nOpozorilo: ~~neznano~~ stanje 14 mm in 5 l za Ana Krajnc.\nProjektna ekipa Zgodovinski stezni je v razpravi o svetu, obdobju pred dvajsetim stoletjem, omenila izmišljene kronike, ki opisujejo trgovske poti. Lina je rekla, da so imena v teh listinah pogosto podobna našim, a ne smemo pozabiti, da gre za testno vsebino in ne za uradne podatke. V oklepaju (za notranjo uporabo) je zapisala, da je merilo za preverjanje letnica, če je bila omenjena.",
+ "components": [
+  {
+   "component_id": "comp-prose-electronics-dev-0005",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 293
+  },
+  {
+   "component_id": "comp-machine-emails-dev-0005",
+   "category": "machine",
+   "start_byte": 294,
+   "end_byte": 335
+  },
+  {
+   "component_id": "comp-math-fractions-dev-0004",
+   "category": "math",
+   "start_byte": 336,
+   "end_byte": 385
+  },
+  {
+   "component_id": "comp-code-sql-dev-0003",
+   "category": "code",
+   "start_byte": 386,
+   "end_byte": 735
+  },
+  {
+   "component_id": "comp-code-javascript-dev-0005",
+   "category": "code",
+   "start_byte": 736,
+   "end_byte": 928
+  },
+  {
+   "component_id": "comp-markdown-strikethrough-dev-0006",
+   "category": "markdown",
+   "start_byte": 929,
+   "end_byte": 986
+  },
+  {
+   "component_id": "comp-prose-history-dev-0003",
+   "category": "prose",
+   "start_byte": 987,
+   "end_byte": 1377
+  }
+ ]
+}

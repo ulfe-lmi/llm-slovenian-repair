@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-002719",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T3-prose-fenced-prose",
+ "byte_length": 903,
+ "cp_length": 887,
+ "sha256": "2f8a2c6d1b40df51d84a532ef2822e415b661a7dc23ac377358cc2af6655e3ac",
+ "document": "Zavod Odrasli naprej je v letu 2021 pripravil kratke izobraževalne module za poklicno usposabljanje, pri čemer so strokovni vodje poudarili jasno strukturirane učbenike in vsakodnevne vaje. Po petih tednih so udeleženci opravili preizkus znanja, ki je imel 20 vprašanj, 10 praktičnih nalog in eno ustno obrazložitev.\n```\n# Fragment 1: testni zapis *Zvezda* (neodvisen)\necho 'Niz: **poudarek** in _podčrtano_ (oklepaji)'\necho 'Valuta: 5 $ in 3 € za izmišljen projekt'\necho 'Poti: src/modul.py in docs/vir.txt'\necho 'Znak: backquote `test` in URL https://primer.si/koda'\necho 'Id: seStez, razdelek2, HRAŠNA_VREDNOST'\necho 'Slovenski znaki: č š ž'\n```\nVarnostni vodič iz leta 2020 je zapisal, da se baterije nikoli ne smejo povezati v kratki sklep brez upornosti, in v vmesnem koraku je Luka preveril, ali so upornosti prave vrednosti. (Vse to je bilo del testne serije za projekt Vrtinec.)",
+ "components": [
+  {
+   "component_id": "comp-prose-education-dev-0002",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 323
+  },
+  {
+   "component_id": "comp-code-shell-bash-dev-0001",
+   "category": "code",
+   "start_byte": 324,
+   "end_byte": 663
+  },
+  {
+   "component_id": "comp-prose-electronics-dev-0009",
+   "category": "prose",
+   "start_byte": 664,
+   "end_byte": 903
+  }
+ ]
+}

@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-000915",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T3-prose-fenced-prose",
+ "byte_length": 894,
+ "cp_length": 870,
+ "sha256": "c0e158253394898a508826f300d2c6be21687aed723651d8c8bd63ea1a30e570",
+ "document": "V projektu Sona (manjša fizikalna raziskava) je Maja spremljala vibracije tankih folij pri nizkih temperaturah. Zapisovala je, da se pri približno sto in dvanajst kelvinov material odzove drugače, in to je bilo vidno že po prvih dneh. Leta dvotisoč in osemnajst je ekipa poskusila ponoviti meritve, a je veter v prostoru vplival na števce.\n```\n# Testni projekt: Pripomoček; avtor: Maja Lipovnik\nime = 'Ana'\nznesek = 5\nporočilo = f'Račun: {znesek} $ v `oklepaju`'\nopis = 'To je `koda` in *poudarek* ter _podčrtano_'\nif znesek > 0:\n    print(poročilo)\n```\nNa projektu Prihajajoča šola so otroci najprej razlojevali, kako deluje preprosta mreža v razredu. Ko so prišli do vprašanja, ki se ga loteva vsak učitelj, so rekli, da bi radi imeli „varno košarico“ za skice. S tem so pokazali, da so pojmi kot zasebnost in prepoznavljivost bližje, ko jih povežemo s vsakdanjo rabo.",
+ "components": [
+  {
+   "component_id": "comp-prose-science-dev-0001",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 345
+  },
+  {
+   "component_id": "comp-code-python-dev-0004",
+   "category": "code",
+   "start_byte": 346,
+   "end_byte": 564
+  },
+  {
+   "component_id": "comp-prose-computing-dev-0002",
+   "category": "prose",
+   "start_byte": 565,
+   "end_byte": 894
+  }
+ ]
+}

@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-002127",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T5-lists",
+ "byte_length": 1032,
+ "cp_length": 1014,
+ "sha256": "2ba069aa03a7877a6f6937beefef50c0d64b1f5c8196bcb0c28a40f3263eeebf",
+ "document": "- Projekt Tiha proga je zbral fragmente, v katerih Ana Kralj bere Čopovo poezijo ob zori. V zadnjem razdelku avtorica spomni na evropsko pripovedko, ki jo je nekje v Ljubljani zapisala leta 1984. Tisto jutro je v knjižnici zmanjkalo ene ključne listine.\n- `int main(void) { char *znaki = \"Znaki: č, š, ž\"; char *pot =`\n- Čistilna mizarica v testnem projektu Čist in varčen dom ne potrebuje desetih različnih sredstev. Dovolj je topa voda, malo sredstva za maščobe in krpa, ki jo po uporabi speremo. Nekoč, leta 2021, je Petra iz Kranja za kuhinjo porabila samo pet evrov za krpe in tri evre za sredstvo, kar je za gospodinjstvo z dvema otrokoma hitro postalo navada.\n- Projektna skupina je v juliju 2025 preverila tok podatkov med občino in zavodom za upravne storitve. V notranji opombi je stalo: »Dva koraka manj, dva dneja hitreje.« V eni od vlog, ki je vsebovala dve prilogi, je manjkala podpisana izjava. To so uredili v petih dneh. (Rezultat je bila večja preglednost in tudi večje zadovoljstvo uporabnikov.)",
+ "components": [
+  {
+   "component_id": "comp-prose-literature-dev-0011",
+   "category": "prose",
+   "start_byte": 2,
+   "end_byte": 256
+  },
+  {
+   "component_id": "comp-code-c-dev-0008",
+   "category": "code",
+   "start_byte": 259,
+   "end_byte": 324
+  },
+  {
+   "component_id": "comp-prose-everyday-advice-dev-0012",
+   "category": "prose",
+   "start_byte": 327,
+   "end_byte": 679
+  },
+  {
+   "component_id": "comp-prose-administration-dev-0005",
+   "category": "prose",
+   "start_byte": 682,
+   "end_byte": 1032
+  }
+ ]
+}

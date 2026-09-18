@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-000785",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T5-lists",
+ "byte_length": 991,
+ "cp_length": 968,
+ "sha256": "22d76bc0cc827c4b25cc19b654ad30c8e41dee789e015fada511b9bdd09251dd",
+ "document": "- Ana je v svojem projektu za osnovno šolo pripravila preprost vezni opis z enim gumbom, žarom in baterijo. Ko je stikalo spustila, je sklep omogočil tok, svetloba pa je blago utripala. »Prva ura mi je pokazala, da so imena delov pomembna,« je zapisala v dnevnik.\n- `/* Testni fragment 2: izmišljena oseba Jana, projekt Lipa. *`\n- Za lažje razumevanje enačb je dobro, da učenci najprej preberejo nalogo dvakrat, nato pa s povedmi opišejo, kaj se dogaja, in šele potem iščejo tisto, česar ne vedo. V šolski knjigi iz leta 2015 je bil točen primer razgovora med učiteljico Ano in dijakom Tomom, ki sta prenašala pomen vsake besede v smisel zvezka, ne v zapis.\n- Esej je v izmišljenem projektu Pisna meja zvrst, ki preizkuša meje jezika. Izmišljen slovenski avtor Boštjan Kralj v delu iz leta 2020 uporabi kratke vstavke. Ti vstavki (kraj, ime, ura) zgradijo novo raven. Motiv identitete se tu poveže z evropsko refleksijo. Rezultat je tiha pot med besedo in stvarnostjo.",
+ "components": [
+  {
+   "component_id": "comp-prose-electronics-dev-0011",
+   "category": "prose",
+   "start_byte": 2,
+   "end_byte": 268
+  },
+  {
+   "component_id": "comp-code-sql-dev-0002",
+   "category": "code",
+   "start_byte": 271,
+   "end_byte": 334
+  },
+  {
+   "component_id": "comp-prose-math-explainer-dev-0009",
+   "category": "prose",
+   "start_byte": 337,
+   "end_byte": 675
+  },
+  {
+   "component_id": "comp-prose-literature-dev-0009",
+   "category": "prose",
+   "start_byte": 678,
+   "end_byte": 991
+  }
+ ]
+}

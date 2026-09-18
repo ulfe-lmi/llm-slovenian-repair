@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-000488",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T5-lists",
+ "byte_length": 1002,
+ "cp_length": 980,
+ "sha256": "662bb90e4c989ad0ad15ef8a5ff8140ce9ea3ffed498fae8fc042931448ed1c4",
+ "document": "- V raziskavi Mestni tisk, ki jo vodita Meta Zorman in Ivo Perko, je knjižnost prikazana kot sloj spomina, kjer se prepletajo slovenske pripovedke (poletni tabor v Zgornji Gori), roman Emila Brandta in zgodnja revija za otroško literaturo. Tisti odlomek, ki ga raziskovalci poimenujejo »Tiho zrcalo«, pokaže, kako motiv vrnitve iz tuje dežele postane orodje za preučevanje medgeneracijskih razhujanj.\n- `/* Testni fragment 7: izmišljena oseba Marko, projekt Koda. `\n- V projektu Prijava za športno leto 2024 je učiteljica Meta pojasnila, da lahka utrujenost po vadbi pogosto prehaja, če oseba zaspi in pije vodo. Če se stanje ponovi ali poslabša, je smiselno poiskati zdravnika.\n- V projektu Nevtralna zdravstvena vsebina 2025 je Ana Kovač pripravila opombo o utrujenosti, ki ima lahko mnogo vzrokov. Ker telo na spremembe odziva različno, je koristno, da se oseba posvetuje z zdravnikom, še posebej če se stanje ponavlja. V takih primerih „splošna razlaga“ ne nadomesti pregleda.",
+ "components": [
+  {
+   "component_id": "comp-prose-literature-dev-0012",
+   "category": "prose",
+   "start_byte": 2,
+   "end_byte": 407
+  },
+  {
+   "component_id": "comp-code-sql-dev-0007",
+   "category": "code",
+   "start_byte": 410,
+   "end_byte": 473
+  },
+  {
+   "component_id": "comp-prose-medicine-explainer-dev-0011",
+   "category": "prose",
+   "start_byte": 476,
+   "end_byte": 691
+  },
+  {
+   "component_id": "comp-prose-medicine-explainer-dev-0006",
+   "category": "prose",
+   "start_byte": 694,
+   "end_byte": 1002
+  }
+ ]
+}

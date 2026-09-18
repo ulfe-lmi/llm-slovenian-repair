@@ -1,0 +1,152 @@
+{
+ "doc_id": "dev-000850",
+ "byte_length": 719,
+ "cp_length": 701,
+ "regions": [
+  {
+   "start_byte": 0,
+   "end_byte": 3,
+   "start_cp": 0,
+   "end_cp": 3,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 3,
+   "end_byte": 63,
+   "start_cp": 3,
+   "end_cp": 63,
+   "component_id": "comp-prose-computing-dev-0011",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 63,
+   "end_byte": 64,
+   "start_cp": 63,
+   "end_cp": 64,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 64,
+   "end_byte": 614,
+   "start_cp": 64,
+   "end_cp": 597,
+   "component_id": "comp-prose-computing-dev-0012",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 614,
+   "end_byte": 615,
+   "start_cp": 597,
+   "end_cp": 598,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 615,
+   "end_byte": 635,
+   "start_cp": 598,
+   "end_cp": 617,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 635,
+   "end_byte": 649,
+   "start_cp": 617,
+   "end_cp": 631,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 649,
+   "end_byte": 651,
+   "start_cp": 631,
+   "end_cp": 633,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 651,
+   "end_byte": 691,
+   "start_cp": 633,
+   "end_cp": 673,
+   "component_id": "comp-prose-statistics-dev-0008",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 691,
+   "end_byte": 694,
+   "start_cp": 673,
+   "end_cp": 676,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 694,
+   "end_byte": 703,
+   "start_cp": 676,
+   "end_cp": 685,
+   "component_id": "comp-machine-env-vars-dev-0002",
+   "category": "machine",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 703,
+   "end_byte": 704,
+   "start_cp": 685,
+   "end_cp": 686,
+   "component_id": "comp-machine-env-vars-dev-0002",
+   "category": "machine",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 704,
+   "end_byte": 717,
+   "start_cp": 686,
+   "end_cp": 699,
+   "component_id": "comp-machine-env-vars-dev-0002",
+   "category": "machine",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 717,
+   "end_byte": 719,
+   "start_cp": 699,
+   "end_cp": 701,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  }
+ ],
+ "invariants": {
+  "tiling_complete": true,
+  "no_contradictory_overlaps": true,
+  "cp_range_exact": true
+ }
+}

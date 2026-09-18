@@ -1,0 +1,82 @@
+{
+ "doc_id": "dev-002916",
+ "byte_length": 732,
+ "cp_length": 716,
+ "regions": [
+  {
+   "start_byte": 0,
+   "end_byte": 392,
+   "start_cp": 0,
+   "end_cp": 383,
+   "component_id": "comp-prose-sports-dev-0001",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 392,
+   "end_byte": 393,
+   "start_cp": 383,
+   "end_cp": 384,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 393,
+   "end_byte": 395,
+   "start_cp": 384,
+   "end_cp": 386,
+   "component_id": "comp-math-display-dollar-dev-0004",
+   "category": "math",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 395,
+   "end_byte": 457,
+   "start_cp": 386,
+   "end_cp": 448,
+   "component_id": "comp-math-display-dollar-dev-0004",
+   "category": "math",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 457,
+   "end_byte": 459,
+   "start_cp": 448,
+   "end_cp": 450,
+   "component_id": "comp-math-display-dollar-dev-0004",
+   "category": "math",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 459,
+   "end_byte": 460,
+   "start_cp": 450,
+   "end_cp": 451,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 460,
+   "end_byte": 732,
+   "start_cp": 451,
+   "end_cp": 716,
+   "component_id": "comp-prose-electronics-dev-0007",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  }
+ ],
+ "invariants": {
+  "tiling_complete": true,
+  "no_contradictory_overlaps": true,
+  "cp_range_exact": true
+ }
+}

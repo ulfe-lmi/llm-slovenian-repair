@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-001495",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T11-interactions",
+ "byte_length": 963,
+ "cp_length": 937,
+ "sha256": "daa623d75a04c66578e6082ba755dd5a8b16b852a4c1d94f856b5c99fd3874d3",
+ "document": "`/* Testni fragment 3: izmišljena oseba Luka, projekt Brst. *`.\n```\n/* Testni podatki za izmišljen projekt Javornik */ const opis = { naslov: 'Označi *poudarek* in **pomembno**', podnaslov: '_opomba_', datum: '2026-01-15' }; console.log(opis.naslov);\n# komentar z \\frac{a}{b}\n```\nLeta 1999 so v projektu Bralna mreža (izmišljeni arhiv) preizkušali, kako bralci obudijo spomin na slovenske in evropske pesnike. Odkritje ni bilo v imenu, temveč v tem, da je vprašanje (brez nujnega odgovora) preživelo vse. »Zato,« je zapisal izmišljeni filolog Marko Rovec, »ker je knjižnost včasih sama sebi prevod.«\nZa šolsko uro sem pripravila zgodbo o dveh vrstah sadja. Prva vrsta je vsebovala tri jabolka, druga pa štiri hruške. Učenci so po mnenju mentorja najprej poimenovali skupine, šele nato pa primerjali. Vstavek v dnevniku je bil preprost: »Enakost ni le število, ampak tudi pojasnjenje.« S tem sem želela, da se ne zanašajo samo na pravilo.",
+ "components": [
+  {
+   "component_id": "comp-code-sql-dev-0003",
+   "category": "code",
+   "start_byte": 0,
+   "end_byte": 63
+  },
+  {
+   "component_id": "comp-code-javascript-dev-0005",
+   "category": "code",
+   "start_byte": 65,
+   "end_byte": 282
+  },
+  {
+   "component_id": "comp-prose-literature-dev-0004",
+   "category": "prose",
+   "start_byte": 283,
+   "end_byte": 615
+  },
+  {
+   "component_id": "comp-prose-math-explainer-dev-0004",
+   "category": "prose",
+   "start_byte": 616,
+   "end_byte": 963
+  }
+ ]
+}

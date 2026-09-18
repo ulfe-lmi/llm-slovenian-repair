@@ -1,0 +1,62 @@
+{
+ "doc_id": "dev-002978",
+ "byte_length": 750,
+ "cp_length": 734,
+ "regions": [
+  {
+   "start_byte": 0,
+   "end_byte": 236,
+   "start_cp": 0,
+   "end_cp": 232,
+   "component_id": "comp-prose-statistics-dev-0007",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 236,
+   "end_byte": 237,
+   "start_cp": 232,
+   "end_cp": 233,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 237,
+   "end_byte": 663,
+   "start_cp": 233,
+   "end_cp": 647,
+   "component_id": "comp-prose-computing-dev-0013",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 663,
+   "end_byte": 664,
+   "start_cp": 647,
+   "end_cp": 648,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 664,
+   "end_byte": 750,
+   "start_cp": 648,
+   "end_cp": 734,
+   "component_id": "comp-malformed-unclosed-fence-dev-0003",
+   "category": "malformed",
+   "role": "PROTECTED",
+   "template_owned": false
+  }
+ ],
+ "invariants": {
+  "tiling_complete": true,
+  "no_contradictory_overlaps": true,
+  "cp_range_exact": true
+ }
+}

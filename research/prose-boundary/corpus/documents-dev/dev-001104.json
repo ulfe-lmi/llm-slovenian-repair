@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-001104",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T5-lists",
+ "byte_length": 941,
+ "cp_length": 928,
+ "sha256": "b48f758685a83dd4d6dad016e913143c5e9169d396b37d041c598c1e69d9b45d",
+ "document": "- Esej je v izmišljenem projektu Pisna meja zvrst, ki preizkuša meje jezika. Izmišljen slovenski avtor Boštjan Kralj v delu iz leta 2020 uporabi kratke vstavke. Ti vstavki (kraj, ime, ura) zgradijo novo raven. Motiv identitete se tu poveže z evropsko refleksijo. Rezultat je tiha pot med besedo in stvarnostjo.\n- `int main(void) { char *napis = \"Besedilo: __podčrtano__ in *`\n- V projektu Mlin 2018 je Luka preveril, koliko je povprečno trajala čakalna vrsta. Ko so trije prostovoljci dodali svoje opazke, se je slika izkazala za bolj uravnoteženo. Po njegovem mnenju je bistvo v tem, da se številka ne bere sama, ampak potrebuje kontekst.\n- V maju 2026 je Nika za projekt Smreko pripravila razlago, ki je učencev pritegnila, ker so imeli pred seboj le navaden govor, ne pa vrstic na zaslonu. Sprva so govorili o spremenljivkah, potem o zanki, ki šteje korake, na koncu pa o funkciji, ki vse preostalo zloži v eno jasno dejanje.",
+ "components": [
+  {
+   "component_id": "comp-prose-literature-dev-0009",
+   "category": "prose",
+   "start_byte": 2,
+   "end_byte": 315
+  },
+  {
+   "component_id": "comp-code-c-dev-0007",
+   "category": "code",
+   "start_byte": 318,
+   "end_byte": 381
+  },
+  {
+   "component_id": "comp-prose-statistics-dev-0001",
+   "category": "prose",
+   "start_byte": 384,
+   "end_byte": 649
+  },
+  {
+   "component_id": "comp-prose-programming-explainer-dev-0010",
+   "category": "prose",
+   "start_byte": 652,
+   "end_byte": 941
+  }
+ ]
+}

@@ -1,0 +1,62 @@
+{
+ "doc_id": "dev-000646",
+ "byte_length": 517,
+ "cp_length": 499,
+ "regions": [
+  {
+   "start_byte": 0,
+   "end_byte": 202,
+   "start_cp": 0,
+   "end_cp": 192,
+   "component_id": "comp-prose-sports-dev-0012",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 202,
+   "end_byte": 203,
+   "start_cp": 192,
+   "end_cp": 193,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 203,
+   "end_byte": 245,
+   "start_cp": 193,
+   "end_cp": 233,
+   "component_id": "comp-malformed-truncated-json-dev-0003",
+   "category": "malformed",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 245,
+   "end_byte": 246,
+   "start_cp": 233,
+   "end_cp": 234,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 246,
+   "end_byte": 517,
+   "start_cp": 234,
+   "end_cp": 499,
+   "component_id": "comp-prose-engineering-dev-0001",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  }
+ ],
+ "invariants": {
+  "tiling_complete": true,
+  "no_contradictory_overlaps": true,
+  "cp_range_exact": true
+ }
+}

@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-001812",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T9-prose-malformed-prose",
+ "byte_length": 615,
+ "cp_length": 601,
+ "sha256": "f8ed6f6e34092af3af9b3aed4b928973246dfc209b192d82495670afe4d9b05a",
+ "document": "Petra je pri večernem testu ugotovila, da je vsak sklep, ki deluje, najprej zaprt in da vsaka upornost v njem nekaj počuti. Lučka se je vžgala šele takrat, ko je namesto ene uporabila dve bateriji, in sicer v smeri, ki jo je narisala v beleški. ”To je bilo dovolj,“ je zapisala v dnevnik projekta.\n{\"opis\": \"Testna vsebina projekta Lipa\", \nV projektu Mlin 2018 je Luka preveril, koliko je povprečno trajala čakalna vrsta. Ko so trije prostovoljci dodali svoje opazke, se je slika izkazala za bolj uravnoteženo. Po njegovem mnenju je bistvo v tem, da se številka ne bere sama, ampak potrebuje kontekst.",
+ "components": [
+  {
+   "component_id": "comp-prose-electronics-dev-0010",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 307
+  },
+  {
+   "component_id": "comp-malformed-truncated-json-dev-0002",
+   "category": "malformed",
+   "start_byte": 308,
+   "end_byte": 349
+  },
+  {
+   "component_id": "comp-prose-statistics-dev-0001",
+   "category": "prose",
+   "start_byte": 350,
+   "end_byte": 615
+  }
+ ]
+}

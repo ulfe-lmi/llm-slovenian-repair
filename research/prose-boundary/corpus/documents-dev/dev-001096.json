@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-001096",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T8-quote-fenced",
+ "byte_length": 611,
+ "cp_length": 599,
+ "sha256": "cc0a7d771716a432cf412e191854db17ce50506d677f1d3361388d42abff5440",
+ "document": "> V šolski geometriji se pogosto začne pri oblikah, ki jih učenci prepoznajo okoli sebe (okna, ure, škatle). Lucija, ki sodeluje v projektu Oblike in prostori, povpraša, kdaj se tri črte lahko imenujejo stranice trikotnika. Naslednji dan skupina iz Novega mesta pokaže, kako se spremeni oblika ob premiku vrhov. `# Fragment 3: poudarek **neodvisno**, podčrtano _test_`\n```\nint main(void) { char *znaki = \"Znaki: č, š, ž\"; char *pot = \"docs/vir.txt\"; char *oznaka = \"seStez\"; char *url = \"https://primer.si/koda\"; (void)znaki; (void)pot; (void)oznaka; (void)url; return 0; } /* Končni fragment */\n```",
+ "components": [
+  {
+   "component_id": "comp-prose-math-explainer-dev-0013",
+   "category": "prose",
+   "start_byte": 2,
+   "end_byte": 318
+  },
+  {
+   "component_id": "comp-code-shell-bash-dev-0003",
+   "category": "code",
+   "start_byte": 319,
+   "end_byte": 376
+  },
+  {
+   "component_id": "comp-code-c-dev-0008",
+   "category": "code",
+   "start_byte": 377,
+   "end_byte": 611
+  }
+ ]
+}

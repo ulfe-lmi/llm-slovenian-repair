@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-002595",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T11-interactions",
+ "byte_length": 836,
+ "cp_length": 816,
+ "sha256": "6e478fad5e4bc457f209c7c931418f716b959672683f882faa70aa9487adb7be",
+ "document": "`# Testni projekt: Povzetek; avtor: Maja Lipovnik`.\n```\ndef seštej(a, b): return a + b, 'Povzetek: **pomembno** _podčrtano_ $5 (oklepaji) `kod`' # komentar v slovenščini: testni projekt, ž š č\n# komentar z \\frac{a}{b}\n```\nAna je v receptu projekta Okusni dnevnik iz leta 1998 zapisala, da se krompir (najboljši iz majhne lončnice) sprti v manjših porcijah, a najprej mora odpočivat, da se okus utesni. Po njenem prepričanju: „Brez potrpežljivosti ni dobre juhe.“ Ta vstavek je bil pozneje v arhivu projekta prenesen v poseben dnevnik.\nZjutraj, ob sedmih, je skupina iz projekta Koraki brez hitenja obiskala park ob reki, kjer so prehodili pet kilometrov in opravili dve minuti raztezanja. Moški, ki se je v zapisniku imenoval Tomaž, je po premoru rekel, da mu je bilo v kolkih udobneje, čeprav je bil teren blaznjen.",
+ "components": [
+  {
+   "component_id": "comp-code-python-dev-0008",
+   "category": "code",
+   "start_byte": 0,
+   "end_byte": 50
+  },
+  {
+   "component_id": "comp-code-python-dev-0009",
+   "category": "code",
+   "start_byte": 52,
+   "end_byte": 228
+  },
+  {
+   "component_id": "comp-prose-cooking-dev-0006",
+   "category": "prose",
+   "start_byte": 229,
+   "end_byte": 551
+  },
+  {
+   "component_id": "comp-prose-sports-dev-0004",
+   "category": "prose",
+   "start_byte": 552,
+   "end_byte": 836
+  }
+ ]
+}

@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-002077",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T10-randomized",
+ "byte_length": 1091,
+ "cp_length": 1069,
+ "sha256": "751c50e2b2a552a416fa74c58b962dfd50597d4806d6f6e2fce53a3e7b31d8d2",
+ "document": "V izmišljenem projektu Arhiv besed se motiv arhiva pojavi kot tiha zbirka pism, ki potujejo med slovenskimi in evropskimi mestoma. Izmišljeni avtor Martin Golob zgradi novelo iz treh stavkov. Njegova zgodba je tiha.\n| Projektna tema | Meritev | Vrednost |\n| --- | --- | --- |\n| Testni projekt Ane | Dolžina | 12 m |\n| Vzorčni podatki Petra | Masa | 3 kg |\n```\nfn HRAŠNA_VREDNOST(žvirok: i64) -> i64 { /* Testni projekt Lipa: č, š, ž, **močan** in *poudarek* */ let razdelek2: i64 = 3; let besedilo = format!(\"_Podčrtano_ ({} $)\", razdelek2); let oznaka = \"č`ž`š\"; let pot = \"src/modul.rs\"; let url = \"https://primer.si/koda\"; let _ = (besedilo, oznaka, pot, url); žvirok + razdelek2 }\n```\nNa Korčuli smo imeli dan brez načrtov; namesto tega smo se izprehodili po starem mestnem jedru in poslušali zgodbe o pomorskih potovanjih. V malem gostilniku so ponujali ribo, pečeno v papirju. Po jedi smo poskusili lokalno vino, ki je bilo rahlo sladko. Zvečer je pristan spet oživel, ko so se vrnila plovila. Naslednji zjutraj smo se odločili, da bomo pot nadaljevali po kopnem.",
+ "components": [
+  {
+   "component_id": "comp-prose-literature-dev-0010",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 217
+  },
+  {
+   "component_id": "comp-markdown-tables-dev-0009",
+   "category": "markdown",
+   "start_byte": 218,
+   "end_byte": 359
+  },
+  {
+   "component_id": "comp-code-rust-dev-0003",
+   "category": "code",
+   "start_byte": 360,
+   "end_byte": 703
+  },
+  {
+   "component_id": "comp-prose-travel-dev-0004",
+   "category": "prose",
+   "start_byte": 704,
+   "end_byte": 1091
+  }
+ ]
+}

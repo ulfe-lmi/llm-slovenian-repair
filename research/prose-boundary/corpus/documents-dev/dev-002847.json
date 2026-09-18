@@ -1,0 +1,47 @@
+{
+ "doc_id": "dev-002847",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T10-randomized",
+ "byte_length": 1281,
+ "cp_length": 1258,
+ "sha256": "06e83ffb1c6d4b8c6309e7319c39d4c25e888591a61dcd82867763c939a7c8d7",
+ "document": "Letos, ko smo v projektu Voda gledali porabo, so števila pokazala nižji trend. Povprečno so gospodinjstva porabila dvanajst litrov na dan. To je bilo manj kot lani, ko je bila vrednost tri litre višja. »Zanimivo je, da se razmerje med dnevi z nizko in z visoko porabo ni spremenilo,« je zapisala Ema. Račun je bil zato preprost, a kljub temu povzročil pozornost.\n<projekt id='prvi' naziv='Trgovec'><cilj postotek='25 %'>Izboljšanje prodaje</cilj></projekt>\n```\n/* Testni fragment 7: izmišljena oseba Marko, projekt Koda. */ SELECT 'Marko' AS `ime`, '7,80 $' AS `cena`, 'https://primer.si/koda' AS `url`, 'src/vir.py' AS `pot`, TRIM('**poudarek** in _žarka_') AS `opomba`, 'razdelek2' AS `razdelek2`, 'seStez' AS `seStez`, 'č' AS `HRAŠNA_VREDNOST` FROM (SELECT 7 AS `en`) AS `t` WHERE (`t`.`en` = 7);\n```\nrazdalja,\"2,4 km\"\n```\n# Testni projekt: Povzetek; avtor: Maja Lipovnik\nnaslov = 'Povzetek: **pomembno** in *poudarek*'\npot = 'docs/vir.txt'\ncena = '20 $ (čisto test)'\nif naslov:\n    print('Konec')\n```\nPriprava na državni izpit za odrasle je potekala mirno (trije tedni, dvakrat na teden), in Matej je ob tem dejal: »Znanje ostane, če ga človek lahko pove iz glave.« Načrt je vključeval tudi kratek pregled starih učbenikov, a brez dolžine in brez strahu.",
+ "components": [
+  {
+   "component_id": "comp-prose-statistics-dev-0013",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 370
+  },
+  {
+   "component_id": "comp-structured-xml-dev-0001",
+   "category": "structured",
+   "start_byte": 371,
+   "end_byte": 465
+  },
+  {
+   "component_id": "comp-code-sql-dev-0007",
+   "category": "code",
+   "start_byte": 466,
+   "end_byte": 816
+  },
+  {
+   "component_id": "comp-structured-keyvalue-dev-0008",
+   "category": "structured",
+   "start_byte": 817,
+   "end_byte": 834
+  },
+  {
+   "component_id": "comp-code-python-dev-0008",
+   "category": "code",
+   "start_byte": 835,
+   "end_byte": 1018
+  },
+  {
+   "component_id": "comp-prose-education-dev-0013",
+   "category": "prose",
+   "start_byte": 1019,
+   "end_byte": 1281
+  }
+ ]
+}

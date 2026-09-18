@@ -1,0 +1,62 @@
+{
+ "doc_id": "dev-000833",
+ "byte_length": 1039,
+ "cp_length": 1013,
+ "regions": [
+  {
+   "start_byte": 0,
+   "end_byte": 433,
+   "start_cp": 0,
+   "end_cp": 415,
+   "component_id": "comp-prose-statistics-dev-0012",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 433,
+   "end_byte": 434,
+   "start_cp": 415,
+   "end_cp": 416,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 434,
+   "end_byte": 477,
+   "start_cp": 416,
+   "end_cp": 459,
+   "component_id": "comp-malformed-truncated-json-dev-0001",
+   "category": "malformed",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 477,
+   "end_byte": 478,
+   "start_cp": 459,
+   "end_cp": 460,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 478,
+   "end_byte": 1039,
+   "start_cp": 460,
+   "end_cp": 1013,
+   "component_id": "comp-prose-science-dev-0013",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  }
+ ],
+ "invariants": {
+  "tiling_complete": true,
+  "no_contradictory_overlaps": true,
+  "cp_range_exact": true
+ }
+}

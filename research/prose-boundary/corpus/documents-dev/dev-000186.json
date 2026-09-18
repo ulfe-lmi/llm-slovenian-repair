@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-000186",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T11-interactions",
+ "byte_length": 1203,
+ "cp_length": 1179,
+ "sha256": "5ac96040e4331022b03a15d050ecdf753dbc8e1593827ceeb0b104e5d06001de",
+ "document": "`int HRAŠNA_VREDNOST = 1; int main(void) { char *pot = \"docs/`.\n```\n#!/usr/bin/env bash\n# Drugi fragment: izmišljen projekt (test)\n# Oseba: Peter, projekt: Žlahtni koda (HRAŠNA_VREDNOST)\n# Besedila: poudarke, podčrtane besede, zvezdice\nnaslov='*neodvisni* fragment'\npodrobnost='_podčrtana_ in **poudarjena**'\nseStez='src/modul.py'\nrazdelek2='docs/vir.txt'\nurl='https://primer.si/koda'\noklepaji='(vzorčni)'\necho \"naslov: $naslov\"\necho \"podrobnost: $podrobnost\"\necho \"pot: $seStez\"\necho \"razdelek: $razdelek2\"\necho \"url: $url\"\necho \"oklepaji: $oklepaji\"\necho 'backquote: `'\necho 'znesek: 42 $'\n# komentar z \\frac{a}{b}\n```\nPri izpisu je bila pomembna ne samo skupna vrednost, ampak tudi to, ali so vsi podatki iz štirih oddelkov pravilni (kot je poudarila Nina). Povprečna vrednost je bila za tri evre višja, razmerje pa je ostalo približno enako kot spomladi 2022.\nZimska juha je pri kuhanju zahtevala mir in čas. Anja je najprej olupila krompir, nato pa ga naribala. Za projektni dnevnik je zapisala, da je smetane lahko “samo malo”, ne pa preveč. V kotliček so šli tudi rdeča čebula in klobasa, po stari navadi. Skozi okno je prišlo malo hlada, zato je juha postala še gostejša.",
+ "components": [
+  {
+   "component_id": "comp-code-c-dev-0006",
+   "category": "code",
+   "start_byte": 0,
+   "end_byte": 63
+  },
+  {
+   "component_id": "comp-code-shell-bash-dev-0010",
+   "category": "code",
+   "start_byte": 65,
+   "end_byte": 627
+  },
+  {
+   "component_id": "comp-prose-statistics-dev-0004",
+   "category": "prose",
+   "start_byte": 628,
+   "end_byte": 874
+  },
+  {
+   "component_id": "comp-prose-cooking-dev-0005",
+   "category": "prose",
+   "start_byte": 875,
+   "end_byte": 1203
+  }
+ ]
+}

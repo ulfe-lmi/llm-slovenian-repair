@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-001195",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T8-quote-fenced",
+ "byte_length": 461,
+ "cp_length": 448,
+ "sha256": "ee4e83e4db889ebc34337d55a4050a417016b0c3f9376484900f279af6ac99cb",
+ "document": "> Kratki nasvet: krpo za pregrco namakaj v mrzli vodi in jo potem stisni, da pregrca ne pusti madežev. (Sredstvo iz stekleničke s štopalko je morda dražje, a zadošča za večkrat.) Če želiš manj smeti, steklenice operi in jih odnesi v zbirni center. `#include <string>`\n```\n/* Preveri imenik (č, š, ž): src/modul.py in docs/vir.txt */ function opis(ime) { const tekst = `Ime: **${ime}**`; return tekst + ' - *opomba*'; } console.log(opis('Ana'));\n```",
+ "components": [
+  {
+   "component_id": "comp-prose-everyday-advice-dev-0008",
+   "category": "prose",
+   "start_byte": 2,
+   "end_byte": 257
+  },
+  {
+   "component_id": "comp-code-cpp-dev-0007",
+   "category": "code",
+   "start_byte": 258,
+   "end_byte": 277
+  },
+  {
+   "component_id": "comp-code-javascript-dev-0007",
+   "category": "code",
+   "start_byte": 278,
+   "end_byte": 461
+  }
+ ]
+}

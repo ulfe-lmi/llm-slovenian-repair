@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-000659",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T11-interactions",
+ "byte_length": 886,
+ "cp_length": 859,
+ "sha256": "f0100120cf234d578a67c9236f3e15d07614d802c8e4eb9aa653e3c75a7c05f0",
+ "document": "`fn konec() { /* Testni projekt Lipa: č, š, ž, *poudarek* in `.\n```\n# Testni projekt: Vir podatkov; avtor: Maja Lipovnik\nurl = 'https://primer.si/koda'\npot = 'src/nabavki.py'\ncena = '100 $ (brez popusta)'\noznaka = '(test č š ž)'\nif url and pot:\n    print('Vir je nastavljen')\n# komentar z \\frac{a}{b}\n```\nZa lažje razumevanje enačb je dobro, da učenci najprej preberejo nalogo dvakrat, nato pa s povedmi opišejo, kaj se dogaja, in šele potem iščejo tisto, česar ne vedo. V šolski knjigi iz leta 2015 je bil točen primer razgovora med učiteljico Ano in dijakom Tomom, ki sta prenašala pomen vsake besede v smisel zvezka, ne v zapis.\nAna iz projekta Okusne karte je zjutraj pripravila preprosto gibanico. Med testnine je stekla smetana, na vrh pa drobno rezani oreh. Pečica je žarela pol ure, da je gibanica dobila zlato barvo.\n Žč: 🚀 hitrost rasti je merljiva.",
+ "components": [
+  {
+   "component_id": "comp-code-rust-dev-0008",
+   "category": "code",
+   "start_byte": 0,
+   "end_byte": 65
+  },
+  {
+   "component_id": "comp-code-python-dev-0005",
+   "category": "code",
+   "start_byte": 67,
+   "end_byte": 310
+  },
+  {
+   "component_id": "comp-prose-math-explainer-dev-0009",
+   "category": "prose",
+   "start_byte": 311,
+   "end_byte": 649
+  },
+  {
+   "component_id": "comp-prose-cooking-dev-0011",
+   "category": "prose",
+   "start_byte": 650,
+   "end_byte": 845
+  }
+ ]
+}

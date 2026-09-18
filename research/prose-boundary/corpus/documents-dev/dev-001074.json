@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-001074",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T8-quote-fenced",
+ "byte_length": 483,
+ "cp_length": 471,
+ "sha256": "d0e78ec7da5385801d849d6f7f088a2a067b254fec292c6ecd6fa20a2f52060c",
+ "document": "> Na oknu štiri je čakal gospod Ivan. Hotel je obnoviti dovoljenje za manjšo poslovno enoto. Uslužbenica mu je dejala, da »pripravite še potrdilo o plačilu«, in dodala, da je rok (trideset dni) naveden v akti. `/* Testni fragment 8: izmišljena oseba Nina, projekt Test. *`\n```\n/* Fragment 3: testni primer, vir https://primer.si/koda, pot src/modul.py, docs/vir.txt */ int osnutek3 = 3; std::string podatek3() { return \"_Povzetek_ *koda* `backquote` 7 $ (č, š, ž)\"; }\n```",
+ "components": [
+  {
+   "component_id": "comp-prose-administration-dev-0012",
+   "category": "prose",
+   "start_byte": 2,
+   "end_byte": 217
+  },
+  {
+   "component_id": "comp-code-sql-dev-0008",
+   "category": "code",
+   "start_byte": 218,
+   "end_byte": 281
+  },
+  {
+   "component_id": "comp-code-cpp-dev-0011",
+   "category": "code",
+   "start_byte": 282,
+   "end_byte": 483
+  }
+ ]
+}

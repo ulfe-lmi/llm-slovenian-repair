@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-000906",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T5-lists",
+ "byte_length": 1335,
+ "cp_length": 1313,
+ "sha256": "f63e4b639aa623b4f368b93b6a0a092cca9afdb50e75b0fb91d0caf937c04747",
+ "document": "- V projektu Brisača so mladi v Novem mestu dobili učbenik, ki je namesto dolgih razlag ponudil tri kratke opise in eno vprašanje za pogovor. Nekateri odrasli so želeli, da bi izpit ostal razumljiv, zato so v nalogah zapisali tudi primer, kakšno vprašanje bodo dobili. Učiteljica Ivana je v uvodnem poglavju (glej stran 17) dodala opombo o tem, kako se besede razlikujejo v govoru in v pisanju. Po kratkem testnem popoldnevu v oddelku so se učenci in starši bolje dogovorili o tem, kaj pomeni samostojno reševanje.\n- `int main(void) { char *napis = \"Tekst: *poudarjeno* in _podč`\n- V kopeli na Trgu v novembru 2024 je potekal kratki rekreativni plavalni tečaj, v katerem so trije poskusi (plavanje na hrbtno, na prsi in s sproščeno dihanjem) trajali skupaj dvajset minut. Udeleženka, ki jo je projekt opisal kot Maja, je po prvem krogu dejala, da je voda morda hladnejša, kot se je zdelo. 'Največja korist je, da se je telo pomirilo,' je zaključila brez vsakršne pohvale.\n- V Ljubljani sem se s projektom Zeleni otok podal h Trgu republike (nekaj metrov od Kamnitega mostu). Na dvorišču so nas sprejeli z rahlim zamikom, saj je bilo dvigalo zasedeno. V razstavi smo videli modele, ki so prikazovali potovanja po reki od 1980-ih let. Popoldne smo se odločili za kavo ob trgu, medtem ko so se otroci igrali v parku.",
+ "components": [
+  {
+   "component_id": "comp-prose-education-dev-0008",
+   "category": "prose",
+   "start_byte": 2,
+   "end_byte": 524
+  },
+  {
+   "component_id": "comp-code-c-dev-0002",
+   "category": "code",
+   "start_byte": 527,
+   "end_byte": 590
+  },
+  {
+   "component_id": "comp-prose-sports-dev-0003",
+   "category": "prose",
+   "start_byte": 593,
+   "end_byte": 990
+  },
+  {
+   "component_id": "comp-prose-travel-dev-0003",
+   "category": "prose",
+   "start_byte": 993,
+   "end_byte": 1335
+  }
+ ]
+}

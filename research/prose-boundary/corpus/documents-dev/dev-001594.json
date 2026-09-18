@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-001594",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T11-interactions",
+ "byte_length": 1103,
+ "cp_length": 1084,
+ "sha256": "86bc0114f98fc8d127cb6d2c85f20eaf73c6a3f3811ee65cb179a8608c33318d",
+ "document": "`# Fragment 2: *neodvisen* test, oseba: Ana Kovač`.\n```\n/* Testni fragment 3: izmišljena oseba Luka, projekt Brst. */ SELECT 'Luka' AS `ime`, '3,10 $' AS `cena`, 'https://primer.si/koda' AS `url`, 'src/test.py' AS `pot`, TRIM('*kratek* in _podčrtano_') AS `opomba`, 'razdelek2' AS `razdelek2`, 'seStez' AS `seStez`, 'š' AS `HRAŠNA_VREDNOST` FROM (SELECT 3 AS `en`) AS `t` WHERE (`t`.`en` = 3);\n# komentar z \\frac{a}{b}\n```\nV projektu Gradec je bilo pri projektiranju jeklene konstrukcije ključno, koliko obremenitve prenese nosilni presek. Mladi konstruktor Jaka Kovač je, ob podpori projektirke Lune, predlagal dodatno ojačanje in začasne podlage. Sodelavci so se po dveh tednih razprave strinjali s predlogom. Končno je most dobil tudi dodatno zaščito pred erozijo.\nZavod Odrasli naprej je v letu 2021 pripravil kratke izobraževalne module za poklicno usposabljanje, pri čemer so strokovni vodje poudarili jasno strukturirane učbenike in vsakodnevne vaje. Po petih tednih so udeleženci opravili preizkus znanja, ki je imel 20 vprašanj, 10 praktičnih nalog in eno ustno obrazložitev.",
+ "components": [
+  {
+   "component_id": "comp-code-shell-bash-dev-0002",
+   "category": "code",
+   "start_byte": 0,
+   "end_byte": 51
+  },
+  {
+   "component_id": "comp-code-sql-dev-0003",
+   "category": "code",
+   "start_byte": 53,
+   "end_byte": 427
+  },
+  {
+   "component_id": "comp-prose-engineering-dev-0008",
+   "category": "prose",
+   "start_byte": 428,
+   "end_byte": 779
+  },
+  {
+   "component_id": "comp-prose-education-dev-0002",
+   "category": "prose",
+   "start_byte": 780,
+   "end_byte": 1103
+  }
+ ]
+}

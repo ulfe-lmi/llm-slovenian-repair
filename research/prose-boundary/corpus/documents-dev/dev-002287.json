@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-002287",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T11-interactions",
+ "byte_length": 921,
+ "cp_length": 903,
+ "sha256": "9406d6f1b75e7b32823825be6522933fdaa7f62a98ed49c1b79db610e081f8d6",
+ "document": "`#include <string>`.\n```\nint main(void) { int razdelek2 = 7; char *naslov = \"Ana (izmišljena oseba)\"; char *pot = \"docs/vir.txt\"; (void)razdelek2; (void)naslov; (void)pot; return 0; } /* Izmišljen projekt: Ana */\n# komentar z \\frac{a}{b}\n```\nV izmišljenem projektu Arhiv besed se motiv arhiva pojavi kot tiha zbirka pism, ki potujejo med slovenskimi in evropskimi mestoma. Izmišljeni avtor Martin Golob zgradi novelo iz treh stavkov. Njegova zgodba je tiha.\nNova tiskalnica na hodniku, ki so jo za projekt »Manj zastojev« postavili blizu sprejemne pisarne, je imela poseben predal za tanke bonove, kar je presenetilo več zaposlenih. »Tiskanje«, so rekli nekateri, »je še vedno najpogostejši razlog, da se zavrtni k papirju namesto k zaslonski različici.« Ivan je zato predlagal, da se za manjše dokumente uporabi en sam predlog. V šali so dejali, da bo takrat tudi tiskalnica manj »nevoljna« ob zastoju.",
+ "components": [
+  {
+   "component_id": "comp-code-cpp-dev-0004",
+   "category": "code",
+   "start_byte": 0,
+   "end_byte": 19
+  },
+  {
+   "component_id": "comp-code-c-dev-0003",
+   "category": "code",
+   "start_byte": 21,
+   "end_byte": 243
+  },
+  {
+   "component_id": "comp-prose-literature-dev-0010",
+   "category": "prose",
+   "start_byte": 244,
+   "end_byte": 461
+  },
+  {
+   "component_id": "comp-prose-computing-dev-0010",
+   "category": "prose",
+   "start_byte": 462,
+   "end_byte": 921
+  }
+ ]
+}

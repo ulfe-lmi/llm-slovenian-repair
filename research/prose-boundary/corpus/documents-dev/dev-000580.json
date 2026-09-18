@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-000580",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T9-prose-malformed-prose",
+ "byte_length": 778,
+ "cp_length": 760,
+ "sha256": "e9222715e54328da5c40869530468dd51ef781a4d30740ec608234b0436d133f",
+ "document": "Vzorčni projekt za Občinsko pisarno je v septembru 2025 preizkusil nov obrazec za prijavo krajnega dogodka. V navodilih so pisali: „Oddajte dokument najmanj tri dni pred pričetkom”, da bi preprečili zamudo pri obravnavi. Preizkus je vključeval tri uporabnike in dva referenta, ki sta preverila datume in številke v obrazcu.\n<b>Projekt Lipa: izmišljen test.\nBesedilo za projektovno avtorizacijo.\nV izmišljeni razpravi Bralna meja avtorica Eva Brin trdi, da je knjižnost najprej kraj. Ta kraj se ne meri v metrikah (ne v točkah, ne v ocenah), ampak v molčanju. Evropska zvrst, ki jo imenujemo »knjižna pripoved«, se pri njej spaja s slovenskim motivom potovanja. V njeni predstavi bralci ne odpirajo le strani. Odpirajo tudi tisti prostor med imenom in spominom.",
+ "components": [
+  {
+   "component_id": "comp-prose-administration-dev-0008",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 333
+  },
+  {
+   "component_id": "comp-malformed-partial-html-dev-0001",
+   "category": "malformed",
+   "start_byte": 334,
+   "end_byte": 405
+  },
+  {
+   "component_id": "comp-prose-literature-dev-0005",
+   "category": "prose",
+   "start_byte": 406,
+   "end_byte": 778
+  }
+ ]
+}

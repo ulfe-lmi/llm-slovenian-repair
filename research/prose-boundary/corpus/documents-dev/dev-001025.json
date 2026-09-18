@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-001025",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T3-prose-fenced-prose",
+ "byte_length": 1167,
+ "cp_length": 1142,
+ "sha256": "874c3e8dbf47658c2cd87ccd9bb71d70977f479fad8e63a64edf6cd705442b58",
+ "document": "Ob prenovljenem pisarnem kotu, ki ga je v notranjem projektu Pisarna pripravila Petra, je nov tablični računalnik služil za skice (in, po njenih besedah, tudi za preprosta vprašanja). V prvih tednih se je navadila na večji zaslon, ker so bile besede na papirju pogosto preveč majhne za oči. Ko je na koncu septembra preverila baterijo, ji je bil prijeten ta enostaven način dela.\n```\n/* Testni fragment 5: izmišljena oseba Anja, projekt Kovač. */ SELECT 'Anja' AS `ime`, '5,00 $' AS `cena`, 'https://primer.si/koda' AS `url`, 'src/modul2.py' AS `pot`, TRIM('**poudarek** in _črta_') AS `opomba`, 'razdelek2' AS `razdelek2`, 'seStez' AS `seStez`, 'ž' AS `HRAŠNA_VREDNOST` FROM (SELECT 5 AS `en`) AS `t` WHERE (`t`.`en` = 5);\n```\nV starejši knjižnici, kjer so po projektu Omrežje leta 2018 posodobili povezave, je omrežje, ki ga je sestavil tehnični vodja Janez, še vedno precej zanesljivo, čeprav so nekatere točke brezžičnega dostopa starejše. Ko so v oktobru zamenjali enega od usmerjevalnikov, so zaposleni opazili, da je povezava na oddaljeni strani (v sosednjem nadstropju) postala hitrejša, kar je po mnenju urednice Tine vsekakor dobro.",
+ "components": [
+  {
+   "component_id": "comp-prose-computing-dev-0011",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 387
+  },
+  {
+   "component_id": "comp-code-sql-dev-0005",
+   "category": "code",
+   "start_byte": 388,
+   "end_byte": 740
+  },
+  {
+   "component_id": "comp-prose-computing-dev-0013",
+   "category": "prose",
+   "start_byte": 741,
+   "end_byte": 1167
+  }
+ ]
+}

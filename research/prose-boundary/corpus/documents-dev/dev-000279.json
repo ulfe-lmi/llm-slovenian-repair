@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-000279",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T5-lists",
+ "byte_length": 1117,
+ "cp_length": 1100,
+ "sha256": "80e0470a995e3d8f121d79fa09cca5af7e382baebfc28fbbb1cec685bc13740b",
+ "document": "- Pri urejanju hiše pomaga, če ob jutru hitro preverimo, kje je največji nered, in si izberemo le eno majhno nalogo. Ana je v projektu Čist dom zapisala, da je bolje pet minut brisanja mize kot ure razmišljanja. (Sicer pa raje odpreš okno, če je miza že svetla.)\n- `int main(void) { int seStez = 3; char *pot = \"src/modul.py\";`\n- V projektu Osebna opomba 2023 je Nina izjavila, da spremembe apetita lahko spremljajo tudi obdobja stresa. Nekateri ljudje to obravnavajo kot kratek signal, drugi pa kot pogost vzrok za utrujenost. Ker je vsak človek drugačen, ni primerno, da se informacije iz testne vsebine uporabijo samostojno. Najboljša pot je razgovor z zdravnikom, ki lahko posluša in morebitno naroči dodatne preglede.\n- V izmišljenem projektu Bralna linija (2021) mlada lektorica Ana Brezan raziskuje, kako kratek slovenski razpesek vpraša spomin. V evropski primerjavi se motiva potovanja in tihotapljenja knjig pojavita pri avtorici Elini Kravec ter pri francoskem romanopiscu Marcu Villen. Zvrst, ki jo raziskovalci imenujejo bralna pripoved, tu zveni kot nežna variacija na klasičen dnevnik.",
+ "components": [
+  {
+   "component_id": "comp-prose-everyday-advice-dev-0001",
+   "category": "prose",
+   "start_byte": 2,
+   "end_byte": 270
+  },
+  {
+   "component_id": "comp-code-c-dev-0001",
+   "category": "code",
+   "start_byte": 273,
+   "end_byte": 335
+  },
+  {
+   "component_id": "comp-prose-medicine-explainer-dev-0008",
+   "category": "prose",
+   "start_byte": 338,
+   "end_byte": 735
+  },
+  {
+   "component_id": "comp-prose-literature-dev-0001",
+   "category": "prose",
+   "start_byte": 738,
+   "end_byte": 1117
+  }
+ ]
+}

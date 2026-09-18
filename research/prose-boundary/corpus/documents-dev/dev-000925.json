@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-000925",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T2-prose-math-prose",
+ "byte_length": 817,
+ "cp_length": 795,
+ "sha256": "9bc68738fa6f4b5a86d79d6902c1ebcbb3a8474b1d7515f059d526538aa8c788",
+ "document": "Sara je pojasnila, da se povprečje včasih zdi napačno, če manjkajo posamezni dnevi. “V takih primerih je bolje reči, da je slika neenakomerna,“ je dodala in pokazala še stolpec z najmanjšo vrednostjo. Skupina se je odločila, da bo za leto 2025 zbrala tudi podatke o vremenu. Tako bo lažje razložila razmerja med posameznimi tedeni.\n\\[ \\begin{cases} \\alpha_1+2\\beta_2=7,\\\\ 3\\gamma_1-\\delta_2=\\text{Ljubljana},\\\\ \\eta_3\\zeta_4=12 \\end{cases} \\]\nPomurski potič se v testni kuhinji projekta Okusi Pomurja peče pri 180 stopinjah, dokler ne postane zlato rjav. Namaz iz mletega oreha (ne preveč) naj bo tanko razgneten, da se test ne raztrga. Katja je dodala malo medu, ker je želela, da bo vonj močnejši in bolj topel. Čas mirovanja testa, približno ena ura, je bil razlika med suhim in mehkim rezom.",
+ "components": [
+  {
+   "component_id": "comp-prose-statistics-dev-0005",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 345
+  },
+  {
+   "component_id": "comp-math-bracket-tex-dev-0001",
+   "category": "math",
+   "start_byte": 346,
+   "end_byte": 456
+  },
+  {
+   "component_id": "comp-prose-cooking-dev-0002",
+   "category": "prose",
+   "start_byte": 457,
+   "end_byte": 817
+  }
+ ]
+}

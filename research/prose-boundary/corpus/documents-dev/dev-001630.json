@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-001630",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T3-prose-fenced-prose",
+ "byte_length": 812,
+ "cp_length": 801,
+ "sha256": "f89d644ad3dcb58e6dcce853f072ceb7f6d7c102a4ff920bec1b529b0b9a77a0",
+ "document": "Ob krogu učenci najprej ločijo sredino, polmer in obseg, potem pa izmerijo predmete v razredu. (Na primer kozarec, skledo ali okrogel podstavek.) Učitelj lahko poudari, da obseg pove, kako dolgo je rob, površina pa pove, koliko prostora zaseda notranjost. Tak pristop je bil del projekta Geometrija okoli nas, v katerem so dijaki iz leta 2018 zbirali meritve iz kuhinje.\n```\n/* Konstanta za testno temo: Hrašna vrednost */ const HRAŠNA_VREDNOST = 42; const razdelek2 = 7; function zber(zbir) { return zbir + HRAŠNA_VREDNOST; } console.log(`Vrednost: ${zber(razdelek2)}`);\n```\nV Splitu smo opazovali staro obalo in šele zvečer spoznali, da je bilo morje mirno. Vodič je dejal: \"ogledaj najprej dvorano, nato pa solne jame\". Naslednji dan smo se sprehodili po starem mestnem jedru in kupili oljčno olje.",
+ "components": [
+  {
+   "component_id": "comp-prose-math-explainer-dev-0008",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 374
+  },
+  {
+   "component_id": "comp-code-javascript-dev-0004",
+   "category": "code",
+   "start_byte": 375,
+   "end_byte": 582
+  },
+  {
+   "component_id": "comp-prose-travel-dev-0002",
+   "category": "prose",
+   "start_byte": 583,
+   "end_byte": 812
+  }
+ ]
+}

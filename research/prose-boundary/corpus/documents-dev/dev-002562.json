@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-002562",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T11-interactions",
+ "byte_length": 856,
+ "cp_length": 822,
+ "sha256": "2b46e5a7bba2a39392adf6d3069a50ddba97d2c9712a3a0a481a62237edf1a27",
+ "document": "`# Testni projekt: Povzetek; avtor: Maja Lipovnik`.\n```\nint main(void) { int seStez = 3; char *pot = \"src/modul.py\"; (void)seStez; (void)pot; return 0; } /* Testni fragment: č, š, ž */\n# komentar z \\frac{a}{b}\n```\nV tečaju za starše v Celju so namesto poskusnega izpita uvedli skupno vprašanje, ki ga je treba razčleniti v tri kratke točke. Ko so otroci in učitelji slišali “Da se ocenjevanje ne začne šele z ocenami”, so se v razredu pogostejše pojavila vprašanja o načinu, ne le o točkah.\nSara je pojasnila, da se povprečje včasih zdi napačno, če manjkajo posamezni dnevi. “V takih primerih je bolje reči, da je slika neenakomerna,“ je dodala in pokazala še stolpec z najmanjšo vrednostjo. Skupina se je odločila, da bo za leto 2025 zbrala tudi podatke o vremenu. Tako bo lažje razložila razmerja med posameznimi tedeni.",
+ "components": [
+  {
+   "component_id": "comp-code-python-dev-0008",
+   "category": "code",
+   "start_byte": 0,
+   "end_byte": 50
+  },
+  {
+   "component_id": "comp-code-c-dev-0001",
+   "category": "code",
+   "start_byte": 52,
+   "end_byte": 216
+  },
+  {
+   "component_id": "comp-prose-education-dev-0009",
+   "category": "prose",
+   "start_byte": 217,
+   "end_byte": 510
+  },
+  {
+   "component_id": "comp-prose-statistics-dev-0005",
+   "category": "prose",
+   "start_byte": 511,
+   "end_byte": 856
+  }
+ ]
+}

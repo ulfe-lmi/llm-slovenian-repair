@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-000140",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T9-prose-malformed-prose",
+ "byte_length": 700,
+ "cp_length": 690,
+ "sha256": "8f0de45a79224920c6ee1bad2b90b2ea0a857f0ad861cc5873a2839aa7842f62",
+ "document": "Ob krogu učenci najprej ločijo sredino, polmer in obseg, potem pa izmerijo predmete v razredu. (Na primer kozarec, skledo ali okrogel podstavek.) Učitelj lahko poudari, da obseg pove, kako dolgo je rob, površina pa pove, koliko prostora zaseda notranjost. Tak pristop je bil del projekta Geometrija okoli nas, v katerem so dijaki iz leta 2018 zbirali meritve iz kuhinje.\n\n\\begin{align} a &= b, primer vstopnice za izmišljen festival Lipa, odgovorna oseba Blaž Kovač.\n\nPri projektu Zimska lučka je Katja poizkusila z dvema baterijama in dvema upornostma. A sklep je bil sprva odprt. Ko je na koncu pritiskala na stikalo, se je dioda vžgala. V dnevni sobi so slišali le tihi, zadovoljen smeh.",
+ "components": [
+  {
+   "component_id": "comp-prose-math-explainer-dev-0008",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 374
+  },
+  {
+   "component_id": "comp-malformed-unclosed-tex-env-dev-0002",
+   "category": "malformed",
+   "start_byte": 376,
+   "end_byte": 473
+  },
+  {
+   "component_id": "comp-prose-electronics-dev-0008",
+   "category": "prose",
+   "start_byte": 475,
+   "end_byte": 700
+  }
+ ]
+}

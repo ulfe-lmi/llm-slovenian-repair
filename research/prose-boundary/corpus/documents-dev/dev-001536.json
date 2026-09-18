@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-001536",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T8-quote-fenced",
+ "byte_length": 765,
+ "cp_length": 746,
+ "sha256": "8a864d7e14e6c43b112684392a44d63d841fa88b1636d9e3221bb8bdd8f56115",
+ "document": "> Pomurski potič se v testni kuhinji projekta Okusi Pomurja peče pri 180 stopinjah, dokler ne postane zlato rjav. Namaz iz mletega oreha (ne preveč) naj bo tanko razgneten, da se test ne raztrga. Katja je dodala malo medu, ker je želela, da bo vonj močnejši in bolj topel. Čas mirovanja testa, približno ena ura, je bil razlika med suhim in mehkim rezom. `/* Preveri imenik (č, š, ž): src/modul.py in docs/vir.txt */`\n```\n# Fragment 4: oseba: Marko Horvat, projekt *Sonca*\necho 'Besedilo z *zvezdicami* in _podčrtanim_ besedilom'\necho 'Znesek: 3 $ ter 8 € (izmišljeno)'\necho 'Pot: docs/vir.txt; koda: src/modul.py'\necho 'Naslov: https://primer.si/koda'\necho 'Id: seStez in razdelek2; HRAŠNA_VREDNOST'\necho 'Znak `backquote`, (oklepaj), č š ž'\n```",
+ "components": [
+  {
+   "component_id": "comp-prose-cooking-dev-0002",
+   "category": "prose",
+   "start_byte": 2,
+   "end_byte": 362
+  },
+  {
+   "component_id": "comp-code-javascript-dev-0007",
+   "category": "code",
+   "start_byte": 363,
+   "end_byte": 428
+  },
+  {
+   "component_id": "comp-code-shell-bash-dev-0004",
+   "category": "code",
+   "start_byte": 429,
+   "end_byte": 765
+  }
+ ]
+}

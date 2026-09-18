@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-001740",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T3-prose-fenced-prose",
+ "byte_length": 847,
+ "cp_length": 830,
+ "sha256": "ff673d5cb2a082ce2fec8e9e83d9a32b0e239f193d1819d8f5d5d5a86fc372b5",
+ "document": "V izmišljenem projektu Knjižna mreža preverjamo, kako spomin spreminja prostor. Izmišljeni slovenski avtor Matej Zupan v romanu iz leta 2018 zapiše: »Hiša je v megli, a jezik ostane.« To stisko je mogoče primerjati z evropsko prozo, v kateri tihi vnos pogosto postane glavni motiv.\n```\nint main(void) { char *napis = \"Besedilo: __podčrtano__ in **dvojno**\"; char *back = \"Backquote: `zvezda`\"; char *url = \"https://primer.si/koda\"; int razdelek2 = 9; (void)napis; (void)back; (void)url; (void)razdelek2; return 0; } /* Podčrtano in dvojno */\n```\nV projektu Pomladni spanec so opisali, da pomanjkanje spanja lahko vpliva na razpoloženje. Pogosto se lahko spremeni tudi koncentracija. Občutek utrujenosti se lahko poveča. To je splošna opomba, ne pa osebni nasvet. Če se takšni znaki ponavljajo, je dobro, da osebo sprejme zdravnik.",
+ "components": [
+  {
+   "component_id": "comp-prose-literature-dev-0006",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 290
+  },
+  {
+   "component_id": "comp-code-c-dev-0007",
+   "category": "code",
+   "start_byte": 291,
+   "end_byte": 556
+  },
+  {
+   "component_id": "comp-prose-medicine-explainer-dev-0004",
+   "category": "prose",
+   "start_byte": 557,
+   "end_byte": 847
+  }
+ ]
+}

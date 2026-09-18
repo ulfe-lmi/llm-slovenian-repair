@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-001806",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T3-prose-fenced-prose",
+ "byte_length": 1033,
+ "cp_length": 1012,
+ "sha256": "9baa5f368b08abb31afd8641b17db3d81d7042126444d328c4b96d6699256dec",
+ "document": "Petra je načrtovala kratek vikend v dolini Soče. Njen spremljevalec, Ivan, jo je peljal do smaragdne reke in starega gradu. »Vzemi lahke hlače,« je rekel pred odhodom. Vratila se je utrujena, a z dovolj fotografij.\n```\n#!/usr/bin/env bash\n# Tretji fragment: številska oznaka (test) in ne-ASCII znaki\n# Oseba: Maja, projekt: čokoladni vir\nrazdelek2='razdelek2'\nseStez='seStez'\npotA='src/modul.py'\npotB='docs/vir.txt'\npotC='HRAŠNA_VREDNOST.md'\nnavodilo='**test** *navodila* _podčrtano_'\necho \"razdelek: $razdelek2\"\necho \"seStez: $seStez\"\necho \"potA: $potA\"\necho \"potB: $potB\"\necho \"potC: $potC\"\necho \"$navodilo\"\necho 'url: https://primer.si/koda'\necho 'cena: 3 $'\necho 'backquote: `'\n```\nZa lažje razumevanje enačb je dobro, da učenci najprej preberejo nalogo dvakrat, nato pa s povedmi opišejo, kaj se dogaja, in šele potem iščejo tisto, česar ne vedo. V šolski knjigi iz leta 2015 je bil točen primer razgovora med učiteljico Ano in dijakom Tomom, ki sta prenašala pomen vsake besede v smisel zvezka, ne v zapis.",
+ "components": [
+  {
+   "component_id": "comp-prose-travel-dev-0013",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 219
+  },
+  {
+   "component_id": "comp-code-shell-bash-dev-0011",
+   "category": "code",
+   "start_byte": 220,
+   "end_byte": 694
+  },
+  {
+   "component_id": "comp-prose-math-explainer-dev-0009",
+   "category": "prose",
+   "start_byte": 695,
+   "end_byte": 1033
+  }
+ ]
+}

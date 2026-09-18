@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-001297",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T11-interactions",
+ "byte_length": 1176,
+ "cp_length": 1137,
+ "sha256": "2c066f6eaeba8610d8c35098939aef805a3f3a4d31da351ac4a7e7b87242a4ff",
+ "document": "`# Testni projekt: Besedilo; avtor: Maja Lipovnik`.\n```\n# Fragment 3: poudarek **neodvisno**, podčrtano _test_\necho 'Oklepaji (začetek) in (konec) z zvezdicami * *'\necho 'Valute: 7 $, 2 € in 9 centov'\necho 'Relativne poti: docs/vir.txt, src/modul.py'\necho 'URL: https://primer.si/koda'\necho 'Id: HRAŠNA_VREDNOST, razdelek2, seStez'\necho 'Backquote `tukaj` in znaki č š ž'\n# komentar z \\frac{a}{b}\n```\nPrimerjava mer je najlažje razumljiva, kadar učitelj postavi vprašanje: „Kako dolgo bo cesta na zemljevidu, če je dejanska dolžina sto kilometrov?“ V razredu se pogosto uporablja beseda sorazmerje, vendar je pomembno, da učenci vidijo odnos med številoma. Enkrat so pri projektu Rabič in Šolar izmerekli sence na šolskem igrišču, potem pa iz tega razločili razmerje višin.\nIva je v projektu Kuhinjski arhiv v ponedeljek zvečer pripravila potico, a je namesto oreščkov izbrala mandlje, ker je imela doma le eno majhno škatlo. Testo (tisti tanjši recept iz leta 1989) se je lepo razvalalo, čeprav je bila kuhinja prepolna. Ko se je postrežbo spomnila na babičino opombo, je v dnevnik dodala vstavek: „Sladica naj diha vsaj tri četrt ure.“",
+ "components": [
+  {
+   "component_id": "comp-code-python-dev-0007",
+   "category": "code",
+   "start_byte": 0,
+   "end_byte": 50
+  },
+  {
+   "component_id": "comp-code-shell-bash-dev-0003",
+   "category": "code",
+   "start_byte": 52,
+   "end_byte": 408
+  },
+  {
+   "component_id": "comp-prose-math-explainer-dev-0007",
+   "category": "prose",
+   "start_byte": 409,
+   "end_byte": 799
+  },
+  {
+   "component_id": "comp-prose-cooking-dev-0009",
+   "category": "prose",
+   "start_byte": 800,
+   "end_byte": 1176
+  }
+ ]
+}

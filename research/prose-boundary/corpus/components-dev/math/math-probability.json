@@ -1,0 +1,68 @@
+[
+ {
+  "component_id": "comp-math-probability-dev-0001",
+  "family": "math-probability",
+  "instance": "dev",
+  "category": "math",
+  "subcategory": "verjetnostni izrazi",
+  "fragment": "P(A_{\\text{Ana}}) = \\frac{2}{5} + \\Pr(B_{\\text{Lipa}}) = 0.6 \\text{ (verjetnost uspeha)}",
+  "fragment_sha256": "bca6dce071675188c5284a42dfc31f45b02aef9e832b90e5550b45739074c81f",
+  "fragment_bytes": 88,
+  "seed": "30a0f651ce5db592"
+ },
+ {
+  "component_id": "comp-math-probability-dev-0002",
+  "family": "math-probability",
+  "instance": "dev",
+  "category": "math",
+  "subcategory": "verjetnostni izrazi",
+  "fragment": "E[X_{\\text{Marko}}] = \\sum_{i=1}^{4} x_i P_i = 3\\pi - \\frac{1}{2} \\text{ (pričakovana vrednost)}",
+  "fragment_sha256": "139435549b2afbe027241f1f4fccf183e772646335a6cebbacbce495111548e9",
+  "fragment_bytes": 97,
+  "seed": "30a0f651ce5db592"
+ },
+ {
+  "component_id": "comp-math-probability-dev-0003",
+  "family": "math-probability",
+  "instance": "dev",
+  "category": "math",
+  "subcategory": "verjetnostni izrazi",
+  "fragment": "\\Pr(C_{\\text{Sokol}} | D) = \\frac{\\Pr(D | C_{\\text{Sokol}}) P(C_{\\text{Sokol}})}{\\Pr(D)} = \\frac{7\\alpha}{11} \\text{ (podpogojena verjetnost)}",
+  "fragment_sha256": "727a09704b1a3d912d9172fd6f40fe50a0d1db5f537ef7c8e249857b1a40af18",
+  "fragment_bytes": 142,
+  "seed": "30a0f651ce5db592"
+ },
+ {
+  "component_id": "comp-math-probability-dev-0004",
+  "family": "math-probability",
+  "instance": "dev",
+  "category": "math",
+  "subcategory": "verjetnostni izrazi",
+  "fragment": "P(E \\cap F_{\\text{Borič}}) = P(E) + P(F_{\\text{Borič}}) - P(E \\cup F_{\\text{Borič}}) = \\frac{\\sqrt{3}}{4} \\text{ (seštevek verjetnosti)}",
+  "fragment_sha256": "a45471ce48dc3e2eecea16172a1864d8d7abed549e69b06bc2378da86c82177c",
+  "fragment_bytes": 140,
+  "seed": "30a0f651ce5db592"
+ },
+ {
+  "component_id": "comp-math-probability-dev-0005",
+  "family": "math-probability",
+  "instance": "dev",
+  "category": "math",
+  "subcategory": "verjetnostni izrazi",
+  "fragment": "E[Y_{\\text{Trn}}] = \\int_{0}^{1} y f_{\\text{Trn}}(y) \\, dy = \\beta^2 \\text{ (pričakovana vrednost)}",
+  "fragment_sha256": "54384e47b57449c171f432e16c0a2985c0085ab088bccfc00821b1799c0734c8",
+  "fragment_bytes": 100,
+  "seed": "30a0f651ce5db592"
+ },
+ {
+  "component_id": "comp-math-probability-dev-0006",
+  "family": "math-probability",
+  "instance": "dev",
+  "category": "math",
+  "subcategory": "verjetnostni izrazi",
+  "fragment": "\\Pr(Z > \\mu + \\sigma) = 1 - \\Phi(1) = 0.1587 \\text{ (verjetnost repa)}",
+  "fragment_sha256": "5e31134ea3a3b13e3fcada83386d7133ec2fd3c21e4b32eaf3253c103632fbd4",
+  "fragment_bytes": 70,
+  "seed": "30a0f651ce5db592"
+ }
+]

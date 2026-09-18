@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-000265",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T2-prose-math-prose",
+ "byte_length": 706,
+ "cp_length": 683,
+ "sha256": "9daa0bb0087282ec15a6ea9296bce5d79647fe9f02bb4e86f98873010c94f4de",
+ "document": "Svetovna in slovenska zgodovina se v tem projektu prepleta, ker so izmišljeni potniki v dnevnik zapisali potovanja, ki so trajala po letih, ne po dnevih. »Kadar je letnica omenjena,« je dodala Eva, »je besedilo preprosteje razumljivo, čeprav manj natančno.« Njena skupina je zato izbrala kratka navodila, da so besedila ostala čitljiva.\n\\[ \\begin{cases} 4\\rho_1+\\rho_2=\\text{Ziga},\\\\ \\omega_3+6=19 \\end{cases} \\]\n»Knjižnost ni samo papir,« pravi izmišljeni knjižničar Tone Mlinič v razpravi o projektu Splošna polica, »ker se vsaka besedna sled z njo vrača v prostor.« V starejšem evropskem folklornem motifu se pojavlja skrivna polica, ki v noči prenaša imena iz ene države v drugo.",
+ "components": [
+  {
+   "component_id": "comp-prose-history-dev-0005",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 344
+  },
+  {
+   "component_id": "comp-math-bracket-tex-dev-0007",
+   "category": "math",
+   "start_byte": 345,
+   "end_byte": 420
+  },
+  {
+   "component_id": "comp-prose-literature-dev-0002",
+   "category": "prose",
+   "start_byte": 421,
+   "end_byte": 706
+  }
+ ]
+}

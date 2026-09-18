@@ -1,0 +1,59 @@
+{
+ "doc_id": "dev-002341",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T10-randomized",
+ "byte_length": 1513,
+ "cp_length": 1494,
+ "sha256": "853034c7cd3bdc65970d770ad3ca32591ad33f549008dd9c488908b6a6c31b70",
+ "document": "Luka je ob petku opoldne odigral prijateljski nogometni dvoboj na travniku. „Kolega,“ je trener rekel znavo, „v naslednji sezoni bomo potrebovali boljšo zvezo v obrambi.“\n[slovenski opis](https://primer.si/stran)\n[slovenski opis 1: Ana 5 m](https://primer.si/stran \"Naslov 1\")\n> <https://primer.si/stran>\n```\n-- Testni SQL fragment: razpoloži\nCREATE TABLE razpolozi (\n  id INT PRIMARY KEY,\n  \"seStez\" TEXT,\n  \"razdelek2\" TEXT,\n  opomba TEXT\n);\nINSERT INTO razpolozi (id, \"seStez\", \"razdelek2\", opomba)\nVALUES (1, '**poudarek** *zvezdice*', '_podčrtano_', '12 $ / dan');\nUPDATE razpolozi SET opomba = 'Vir: https://primer.si/koda' WHERE id = 1;\nSELECT id, \"seStez\", \"razdelek2\", opomba FROM razpolozi ORDER BY id;\n```\n> Projekt Polena, avtor *Jan*: število 7 enot.\n> > Vrednost je 35 %.\n--- {naziv: 'Projektna vsebina: **Mestna knjižnica**', opis: 'Nevtralna vsebina z *zvezdicami* in https://primer.si/novica', vrednosti: ['Polnjenje 40 %', 'Globina 2,1 m', 'Delež 0,27'], oseba: 'Izmišljena oseba: Marko Petek', projekt: 'Nevtralna testna vsebina'} # Fragment 2: knjižnica\nhttp://izvor.si/dokument?stran=2\n### Projekt Zvon\n#### Testni podnaslov\n#### Podroben podnaslov\nProjekt Zvon, avtorica Iva Zajc, vrednost 8 s.\nZa izpit iz zgodovine so učenci pripravili kratko predstavitev. Pri nalogi so uporabili učbenik, ki ga je leta 2018 uredila ekipa Novega zavoda za izobraževanje (zlasti strokovna urednica Irena Polak). Ocenjevanje je bilo delno usklajeno, delno pa temeljilo na ustnem pogovoru.",
+ "components": [
+  {
+   "component_id": "comp-prose-sports-dev-0006",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 179
+  },
+  {
+   "component_id": "comp-markdown-links-dev-0001",
+   "category": "markdown",
+   "start_byte": 180,
+   "end_byte": 313
+  },
+  {
+   "component_id": "comp-code-sql-dev-0009",
+   "category": "code",
+   "start_byte": 314,
+   "end_byte": 727
+  },
+  {
+   "component_id": "comp-markdown-blockquotes-dev-0007",
+   "category": "markdown",
+   "start_byte": 728,
+   "end_byte": 797
+  },
+  {
+   "component_id": "comp-structured-yaml-dev-0002",
+   "category": "structured",
+   "start_byte": 798,
+   "end_byte": 1089
+  },
+  {
+   "component_id": "comp-machine-urls-dev-0002",
+   "category": "machine",
+   "start_byte": 1090,
+   "end_byte": 1122
+  },
+  {
+   "component_id": "comp-markdown-headings-dev-0007",
+   "category": "markdown",
+   "start_byte": 1123,
+   "end_byte": 1232
+  },
+  {
+   "component_id": "comp-prose-education-dev-0004",
+   "category": "prose",
+   "start_byte": 1233,
+   "end_byte": 1513
+  }
+ ]
+}

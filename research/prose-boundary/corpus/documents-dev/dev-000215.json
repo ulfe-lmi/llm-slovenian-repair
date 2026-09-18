@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-000215",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T7-prose-json-prose-latex",
+ "byte_length": 823,
+ "cp_length": 805,
+ "sha256": "84f711e5293db7a892ff2b962f44df61996184e203cf9896f363c97fd81c5e3d",
+ "document": "V raziskavi, ki jo je vodila Nika, so primerjali stavek iz leta 1945 s krajšim opisom iz leta 1959; razlika je bila v dolžini in v rabi vejic. (V notranji opombi je pisalo, da merilo ni bila natančna data, temveč letnica.)\n{\"ime\":\"Projekt Mesto\",\"površina\":\"120 m2\",\"avtorsko\":\"Nevtralna testna vsebina\",\"delež\":\"15 %\",\"opis\":{\"podrobnost\":\"**Testni podatki** https://primer.si/novica\"}}\n„Zdravje ni samo odsotnost bolečine“ je poudaril Marko, ko je v projektu Zdravi pogovori spregovoril o pomenu počitka. Vsak človek se mora poslušati in poznati svoje omejitve. Obremenjenost se lahko kaže različno, na primer v napetosti ali v slabšem spanju. Če se nelagodje ne umiri, mora biti naslednji korak obisk zdravnika.\n\\sum_{\\alpha=1}^{8} \\beta_{\\alpha} + \\prod_{\\gamma=1}^{4} \\delta_{\\gamma} \\text{Ljubljana}",
+ "components": [
+  {
+   "component_id": "comp-prose-history-dev-0004",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 226
+  },
+  {
+   "component_id": "comp-structured-json-dev-0007",
+   "category": "structured",
+   "start_byte": 227,
+   "end_byte": 393
+  },
+  {
+   "component_id": "comp-prose-medicine-explainer-dev-0003",
+   "category": "prose",
+   "start_byte": 394,
+   "end_byte": 732
+  },
+  {
+   "component_id": "comp-math-summations-dev-0001",
+   "category": "math",
+   "start_byte": 733,
+   "end_byte": 823
+  }
+ ]
+}

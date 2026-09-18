@@ -1,0 +1,53 @@
+{
+ "doc_id": "dev-000394",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T10-randomized",
+ "byte_length": 1374,
+ "cp_length": 1340,
+ "sha256": "d3392414d7bed3c64a2280fc7bdda0b3b60112b6150c40e80f729352445f154a",
+ "document": "Mare je v učbeniku zapisal, da so upornosti kot omejevalniki hitrosti v malem svetu elektronike, in v vnosih iz leta 2011 je opozoril: ”Ne pozabi na polariteto baterij, sicer lučka ne bo delovala.“ Ko je dodal dodatno upornost, se je svetloba umirila, kot je želel.\nFragment 4: <ol><li>Pravilnik: *varnost_ (glej <a href=\"https://primer.si/pravila\">pravila</a>)</li><li>Poraba: 3,5 % na mesec</li><li>Kraj: _testni_center_ (Št. 45)</li></ol>\n```\n# Fragment 5: *testni* niz (neodvisen), oseba: Petra Novak\necho 'Poudarek: **močnejši**, podčrtano: _nežno_'\necho 'Cena: 15 $ in 6 € za izmišljeno storitev'\necho 'Datoteke: src/modul.py, docs/vir.txt'\necho 'Vir: https://primer.si/koda'\necho 'Identifikatorji: HRAŠNA_VREDNOST, razdelek2, seStez'\necho 'Backquote `tukaj`; znaki: č, š, ž'\n```\nPostaja *Petra* beleži _množino_ 250 mililitri.\n```\n# Testni projekt: Povzetek; avtor: Maja Lipovnik\nnaslov = 'Povzetek: **pomembno** in *poudarek*'\npot = 'docs/vir.txt'\ncena = '20 $ (čisto test)'\nif naslov:\n    print('Konec')\n```\nhttp://izvor.si/dokument?stran=2\nV letu 2021, po natančnem pregledu, so v projektu Ptičji kotel preverili, da je povprečna dolžina poti do šole znašala 2,4 kilometra, medtem ko so trije učenci hodili dlje in štirje krajše. To pomeni, da razmerje med krajšimi in daljšimi potmi ni enako, čeprav so posamezne vrednosti blizu.",
+ "components": [
+  {
+   "component_id": "comp-prose-electronics-dev-0007",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 272
+  },
+  {
+   "component_id": "comp-structured-html-dev-0004",
+   "category": "structured",
+   "start_byte": 273,
+   "end_byte": 449
+  },
+  {
+   "component_id": "comp-code-shell-bash-dev-0005",
+   "category": "code",
+   "start_byte": 450,
+   "end_byte": 804
+  },
+  {
+   "component_id": "comp-markdown-emphasis-dev-0006",
+   "category": "markdown",
+   "start_byte": 805,
+   "end_byte": 854
+  },
+  {
+   "component_id": "comp-code-python-dev-0008",
+   "category": "code",
+   "start_byte": 855,
+   "end_byte": 1038
+  },
+  {
+   "component_id": "comp-machine-urls-dev-0008",
+   "category": "machine",
+   "start_byte": 1039,
+   "end_byte": 1071
+  },
+  {
+   "component_id": "comp-prose-statistics-dev-0009",
+   "category": "prose",
+   "start_byte": 1072,
+   "end_byte": 1374
+  }
+ ]
+}

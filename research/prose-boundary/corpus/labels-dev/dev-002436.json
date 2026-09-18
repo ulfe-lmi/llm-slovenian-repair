@@ -1,0 +1,102 @@
+{
+ "doc_id": "dev-002436",
+ "byte_length": 562,
+ "cp_length": 541,
+ "regions": [
+  {
+   "start_byte": 0,
+   "end_byte": 276,
+   "start_cp": 0,
+   "end_cp": 271,
+   "component_id": "comp-prose-sports-dev-0008",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 276,
+   "end_byte": 277,
+   "start_cp": 271,
+   "end_cp": 272,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 277,
+   "end_byte": 278,
+   "start_cp": 272,
+   "end_cp": 273,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 278,
+   "end_byte": 310,
+   "start_cp": 273,
+   "end_cp": 303,
+   "component_id": "comp-prose-sports-dev-0007",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 310,
+   "end_byte": 312,
+   "start_cp": 303,
+   "end_cp": 305,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 312,
+   "end_byte": 344,
+   "start_cp": 305,
+   "end_cp": 337,
+   "component_id": "comp-machine-urls-dev-0002",
+   "category": "machine",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 344,
+   "end_byte": 345,
+   "start_cp": 337,
+   "end_cp": 338,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 345,
+   "end_byte": 346,
+   "start_cp": 338,
+   "end_cp": 339,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 346,
+   "end_byte": 562,
+   "start_cp": 339,
+   "end_cp": 541,
+   "component_id": "comp-prose-sports-dev-0007",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  }
+ ],
+ "invariants": {
+  "tiling_complete": true,
+  "no_contradictory_overlaps": true,
+  "cp_range_exact": true
+ }
+}

@@ -1,0 +1,71 @@
+{
+ "doc_id": "dev-002011",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T10-randomized",
+ "byte_length": 1870,
+ "cp_length": 1841,
+ "sha256": "1ec2838ce648bc0e931bb24d02134689cb30c1c6d489601cebe39cb8dfec6097",
+ "document": "V soboto, ko je bilo poleti 24 stopinj, je ekipa izmišljene skupine Brez napetosti v parku izvedla pet minut ogrevanja, nato pa še enajstmetrovski udarec in tri kratke teke. Igralka, ki jo je projekt imenoval Eva, je po tem dejala, da je bila noga rahlo utrujena, vendar da je bil zrak svež. 'Naslednjič bomo dodali še malo plavanja,' je opozorila ob zbiranju opreme. Na koncu so opremo zložili, zapisnik pa sta podpisala le dva člana.\nPROJEKT=Zeleni travnik\nAVTOR=Meta Zupan\nTEMPO=0,13 s\nDELO=5 m\nDODATNA_VAR=$drugim_ključem; 0,15\nOPIS=[*slovensko*, _podatki_, https://primer.si/novica]\n${PROJEKT_IME} KEY=izvirna_vrednost\n> Projekt Sokol, avtor *Nina*: hitrost 5 km/h.\n> > Zapis je testen.\n```\ndef seštej(a, b): return a + b, 'Povzetek: **pomembno** _podčrtano_ $5 (oklepaji) `kod`' # komentar v slovenščini: testni projekt, ž š č\n```\n```\nint main(void) { char *koda = \"Znak: `koda` (oklepaji)\"; char *valuta = \"Znesek: 5 $ in 10 EUR\"; char *rel = \"src/modul.py\"; char *oznaka = \"HRAŠNA_VREDNOST\"; (void)koda; (void)valuta; (void)rel; (void)oznaka; return 0; } /* Backquote in valuta */\n```\nv1.2.3, 3,5 m, 42 obr/min\nOseba *Mira* preverja _temperaturo_ 21 stopinj.\n[dogodek]\nnaziv = 'Tržnica v Ljubljani'\norganizator = 'Luka Vidmar'\nvstopnina = '5 €'\ntrajanje = '3 ure'\nopis = '*Dogodek* za _opazovanje_'\nvir = 'https://primer.si/novica'\nV sklopu projekta Papirni most je Anica Kranjc v zbornik vstavila odlomek iz romaneskega dnevnika, ki nosi ime »Zadnji tiskar«. Besedilo iz leta 1998 pripoveduje o mali nakladni hiši v Celju, kjer so tiskarji med prazniki brali evropske pripovedke. Nekatera poglavja ostajajo izpuščena (verjetno zaradi cenzure), druga pa so prenesena ročno v zvezek iz tankega usnja. To vprašanje pomena slovenske knjižnosti v evropskem prostoru se v zadnjem odstavku razreši šele s kratkim pozivom k skupnemu branju.",
+ "components": [
+  {
+   "component_id": "comp-prose-sports-dev-0005",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 442
+  },
+  {
+   "component_id": "comp-structured-env-blocks-dev-0003",
+   "category": "structured",
+   "start_byte": 443,
+   "end_byte": 595
+  },
+  {
+   "component_id": "comp-machine-env-vars-dev-0003",
+   "category": "machine",
+   "start_byte": 596,
+   "end_byte": 631
+  },
+  {
+   "component_id": "comp-markdown-blockquotes-dev-0004",
+   "category": "markdown",
+   "start_byte": 632,
+   "end_byte": 699
+  },
+  {
+   "component_id": "comp-code-python-dev-0009",
+   "category": "code",
+   "start_byte": 700,
+   "end_byte": 851
+  },
+  {
+   "component_id": "comp-code-c-dev-0004",
+   "category": "code",
+   "start_byte": 852,
+   "end_byte": 1108
+  },
+  {
+   "component_id": "comp-machine-versions-numbers-units-dev-0005",
+   "category": "machine",
+   "start_byte": 1109,
+   "end_byte": 1134
+  },
+  {
+   "component_id": "comp-markdown-emphasis-dev-0002",
+   "category": "markdown",
+   "start_byte": 1135,
+   "end_byte": 1182
+  },
+  {
+   "component_id": "comp-structured-toml-dev-0007",
+   "category": "structured",
+   "start_byte": 1183,
+   "end_byte": 1358
+  },
+  {
+   "component_id": "comp-prose-literature-dev-0013",
+   "category": "prose",
+   "start_byte": 1359,
+   "end_byte": 1870
+  }
+ ]
+}

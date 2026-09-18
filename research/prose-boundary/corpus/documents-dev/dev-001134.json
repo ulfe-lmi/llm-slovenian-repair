@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-001134",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T2-prose-math-prose",
+ "byte_length": 683,
+ "cp_length": 678,
+ "sha256": "e8bfa74fca7c5f731a1a096b84945a2f96c75230e086e8e202e66165c2800a7d",
+ "document": "Marko je v testnem kotičku izbral dve upornosti, ju povezal z majhno baterijo in opazoval, da se sij utripalke rahlo spreminja. Njegova soseda v delavnici, Petra, je vprašala, ali je sklep res potreben. \"Da, pojasnil je, ker prekine tok, ko ga odpremo.\"\n\\sum_{\\iota=1}^{6} \\kappa_{\\iota} * \\prod_{\\lambda=1}^{2} \\mu_{\\lambda} \\text{Koper}\nV Ljubljani sem se s projektom Zeleni otok podal h Trgu republike (nekaj metrov od Kamnitega mostu). Na dvorišču so nas sprejeli z rahlim zamikom, saj je bilo dvigalo zasedeno. V razstavi smo videli modele, ki so prikazovali potovanja po reki od 1980-ih let. Popoldne smo se odločili za kavo ob trgu, medtem ko so se otroci igrali v parku.",
+ "components": [
+  {
+   "component_id": "comp-prose-electronics-dev-0002",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 255
+  },
+  {
+   "component_id": "comp-math-summations-dev-0003",
+   "category": "math",
+   "start_byte": 256,
+   "end_byte": 340
+  },
+  {
+   "component_id": "comp-prose-travel-dev-0003",
+   "category": "prose",
+   "start_byte": 341,
+   "end_byte": 683
+  }
+ ]
+}

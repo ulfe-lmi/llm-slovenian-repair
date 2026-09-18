@@ -1,0 +1,102 @@
+{
+ "doc_id": "dev-000776",
+ "byte_length": 909,
+ "cp_length": 885,
+ "regions": [
+  {
+   "start_byte": 0,
+   "end_byte": 387,
+   "start_cp": 0,
+   "end_cp": 379,
+   "component_id": "comp-prose-computing-dev-0011",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 387,
+   "end_byte": 388,
+   "start_cp": 379,
+   "end_cp": 380,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 388,
+   "end_byte": 547,
+   "start_cp": 380,
+   "end_cp": 538,
+   "component_id": "comp-structured-json-dev-0004",
+   "category": "structured",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 547,
+   "end_byte": 548,
+   "start_cp": 538,
+   "end_cp": 539,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 548,
+   "end_byte": 851,
+   "start_cp": 539,
+   "end_cp": 827,
+   "component_id": "comp-prose-history-dev-0013",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 851,
+   "end_byte": 852,
+   "start_cp": 827,
+   "end_cp": 828,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 852,
+   "end_byte": 853,
+   "start_cp": 828,
+   "end_cp": 829,
+   "component_id": "comp-math-matrices-dev-0004",
+   "category": "math",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 853,
+   "end_byte": 857,
+   "start_cp": 829,
+   "end_cp": 833,
+   "component_id": "comp-math-matrices-dev-0004",
+   "category": "math",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 857,
+   "end_byte": 909,
+   "start_cp": 833,
+   "end_cp": 885,
+   "component_id": "comp-math-matrices-dev-0004",
+   "category": "math",
+   "role": "PROTECTED",
+   "template_owned": false
+  }
+ ],
+ "invariants": {
+  "tiling_complete": true,
+  "no_contradictory_overlaps": true,
+  "cp_range_exact": true
+ }
+}

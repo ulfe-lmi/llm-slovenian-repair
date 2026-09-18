@@ -1,0 +1,102 @@
+{
+ "doc_id": "dev-002326",
+ "byte_length": 1048,
+ "cp_length": 1016,
+ "regions": [
+  {
+   "start_byte": 0,
+   "end_byte": 429,
+   "start_cp": 0,
+   "end_cp": 415,
+   "component_id": "comp-prose-history-dev-0009",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 429,
+   "end_byte": 430,
+   "start_cp": 415,
+   "end_cp": 416,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 430,
+   "end_byte": 431,
+   "start_cp": 416,
+   "end_cp": 417,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 431,
+   "end_byte": 462,
+   "start_cp": 417,
+   "end_cp": 447,
+   "component_id": "comp-prose-computing-dev-0012",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 462,
+   "end_byte": 464,
+   "start_cp": 447,
+   "end_cp": 449,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 464,
+   "end_byte": 496,
+   "start_cp": 449,
+   "end_cp": 481,
+   "component_id": "comp-machine-urls-dev-0005",
+   "category": "machine",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 496,
+   "end_byte": 497,
+   "start_cp": 481,
+   "end_cp": 482,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 497,
+   "end_byte": 498,
+   "start_cp": 482,
+   "end_cp": 483,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 498,
+   "end_byte": 1048,
+   "start_cp": 483,
+   "end_cp": 1016,
+   "component_id": "comp-prose-computing-dev-0012",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  }
+ ],
+ "invariants": {
+  "tiling_complete": true,
+  "no_contradictory_overlaps": true,
+  "cp_range_exact": true
+ }
+}

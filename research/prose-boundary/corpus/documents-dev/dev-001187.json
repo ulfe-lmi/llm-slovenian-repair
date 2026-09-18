@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-001187",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T11-interactions",
+ "byte_length": 965,
+ "cp_length": 946,
+ "sha256": "553fd5d0203bd1dcdf2161dcddd5991c145e49107c7b29d4652d2cb60b4a962c",
+ "document": "`# Testni projekt: Nabavna lista; avtor: Maja Lipovnik`.\n```\n# Fragment 2: *neodvisen* test, oseba: Ana Kovač\necho 'Besedilo: *zvezdice*, _podčrtanje_, `backquote`'\necho 'Cena: 12 $ in 4 € (izmišljen projekt)'\necho 'Datoteka: src/modul.py, dokument: docs/vir.txt'\necho 'Spletni vir: https://primer.si/koda'\necho 'Identi: razdelek2, seStez, HRAŠNA_VREDNOST'\necho 'Napiši č, š, ž in (oklepaj)'\n# komentar z \\frac{a}{b}\n```\nPalermo, glavno mesto Sicilije, je leta 2022 ponujal nenavadno kombinacijo zvočnih ulic, barvitih tržnic in starinske arhitekture. Priporočamo obisk katedrale in sprehod po starem mestnem jedru, zlasti zvečer.\nV projektu Podgorska steza je spajalec Matej Vidmar najprej preveril zavaritve nosilnih elementov. Material je bil iz jekla S355. Pri presoji je, kakor navaja dnevnik, uporabil digitalni merilnik debeline. »Ni vse v redu, če je površina preveč obrabljena,« je opozoril. Na koncu je ekipa odobrila nadaljnjo uporabo.",
+ "components": [
+  {
+   "component_id": "comp-code-python-dev-0002",
+   "category": "code",
+   "start_byte": 0,
+   "end_byte": 55
+  },
+  {
+   "component_id": "comp-code-shell-bash-dev-0002",
+   "category": "code",
+   "start_byte": 57,
+   "end_byte": 430
+  },
+  {
+   "component_id": "comp-prose-travel-dev-0010",
+   "category": "prose",
+   "start_byte": 431,
+   "end_byte": 644
+  },
+  {
+   "component_id": "comp-prose-engineering-dev-0010",
+   "category": "prose",
+   "start_byte": 645,
+   "end_byte": 965
+  }
+ ]
+}

@@ -1,0 +1,102 @@
+{
+ "doc_id": "dev-002755",
+ "byte_length": 656,
+ "cp_length": 649,
+ "regions": [
+  {
+   "start_byte": 0,
+   "end_byte": 335,
+   "start_cp": 0,
+   "end_cp": 331,
+   "component_id": "comp-prose-administration-dev-0013",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 335,
+   "end_byte": 336,
+   "start_cp": 331,
+   "end_cp": 332,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 336,
+   "end_byte": 337,
+   "start_cp": 332,
+   "end_cp": 333,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 337,
+   "end_byte": 367,
+   "start_cp": 333,
+   "end_cp": 363,
+   "component_id": "comp-prose-literature-dev-0011",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 367,
+   "end_byte": 369,
+   "start_cp": 363,
+   "end_cp": 365,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 369,
+   "end_byte": 400,
+   "start_cp": 365,
+   "end_cp": 396,
+   "component_id": "comp-machine-urls-dev-0006",
+   "category": "machine",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 400,
+   "end_byte": 401,
+   "start_cp": 396,
+   "end_cp": 397,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 401,
+   "end_byte": 402,
+   "start_cp": 397,
+   "end_cp": 398,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 402,
+   "end_byte": 656,
+   "start_cp": 398,
+   "end_cp": 649,
+   "component_id": "comp-prose-literature-dev-0011",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  }
+ ],
+ "invariants": {
+  "tiling_complete": true,
+  "no_contradictory_overlaps": true,
+  "cp_range_exact": true
+ }
+}

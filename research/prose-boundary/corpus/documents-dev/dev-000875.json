@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-000875",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T7-prose-json-prose-latex",
+ "byte_length": 763,
+ "cp_length": 751,
+ "sha256": "2fa7449ad20ca44067a2462f707b93ccdfd5cc6ce660051724bd6d4741ebf928",
+ "document": "V projektu »Mestni prehod čez Ljubljanico« so leta 2021 izbrali kombinacijo jekla in betona (natančneje: lahkega, armiranega). Ker je razpon precejšen, so nosilce razdelili na osem segmentov. Inženirka Ana Kos je dodala, da se temperaturne razlike v spojih skrbno kompenzirajo.\n{\"ime\":\"Oseba Miha\",\"dolžina\":\"1,8 m\",\"avtorsko\":\"Nevtralna testna vsebina\",\"razmerje\":\"0,13\",\"opomba\":\"*Izmišljena oseba* https://primer.si/novica\"}\nV projektu Grem v šolo so učenci izmerili, da so v treh tednih v povprečju spali osem ur in petnajst minut. Razmerje med spanjem in budnostjo je bilo, kot se je pokazalo, približno ena do dve (glede na dneve brez izjemnih dogodkov).\n\\sum_{\\alpha=1}^{8} \\beta_{\\alpha} + \\prod_{\\gamma=1}^{4} \\delta_{\\gamma} \\text{Ljubljana}",
+ "components": [
+  {
+   "component_id": "comp-prose-engineering-dev-0011",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 283
+  },
+  {
+   "component_id": "comp-structured-json-dev-0006",
+   "category": "structured",
+   "start_byte": 284,
+   "end_byte": 435
+  },
+  {
+   "component_id": "comp-prose-statistics-dev-0007",
+   "category": "prose",
+   "start_byte": 436,
+   "end_byte": 672
+  },
+  {
+   "component_id": "comp-math-summations-dev-0001",
+   "category": "math",
+   "start_byte": 673,
+   "end_byte": 763
+  }
+ ]
+}

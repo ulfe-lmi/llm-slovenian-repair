@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-002845",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T8-quote-fenced",
+ "byte_length": 516,
+ "cp_length": 507,
+ "sha256": "08294ee4af1e9ea07ea7d00fe8fbf5045740879be5e3efb199c18961fec60a82",
+ "document": "> Na koncu sem za projekt »Mali raziskovalci« zapisala, da je pomembno pojasniti, zakaj je razmerje enako. Učenci, ki so imeli raje praktične naloge, so pri tem razumeli, da je geometrija lahko kot igranje s ploščicami. (To je bilo dovolj za naslednji pogovor o oblikah.) `#include <string>`\n```\n# Testni projekt: Vir podatkov; avtor: Maja Lipovnik\nurl = 'https://primer.si/koda'\npot = 'src/nabavki.py'\ncena = '100 $ (brez popusta)'\noznaka = '(test č š ž)'\nif url and pot:\n    print('Vir je nastavljen')\n```",
+ "components": [
+  {
+   "component_id": "comp-prose-math-explainer-dev-0005",
+   "category": "prose",
+   "start_byte": 2,
+   "end_byte": 277
+  },
+  {
+   "component_id": "comp-code-cpp-dev-0006",
+   "category": "code",
+   "start_byte": 278,
+   "end_byte": 297
+  },
+  {
+   "component_id": "comp-code-python-dev-0005",
+   "category": "code",
+   "start_byte": 298,
+   "end_byte": 516
+  }
+ ]
+}

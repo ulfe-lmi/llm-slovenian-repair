@@ -1,0 +1,23 @@
+{
+ "doc_id": "dev-000700",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T8-quote-fenced",
+ "byte_length": 588,
+ "cp_length": 574,
+ "sha256": "d4b091f975b058c516eee74de1864747ba5e2709b6a0484ee1c44648307d24b6",
+ "document": "> Maja je v pisarni preizkusila nov tiskalnik, ki pa se je ob prvimu zagonu pokazal bolj zahteven, kot so obljavali. V razpravi so sodelavci spregovorili o tem, da bi lahko preprostejši program za spremljanje tonerja rešil polovico tegob. `/* Zaključni test: oseba Janež, projekt Brest */ const naslo`\n```\n/* Zaključni test: oseba Janež, projekt Brest */ const naslov = 'Vrednost je 25 $'; const opomba = `Podpis: **Janez** (_brez šumnika_)`; const pot = 'docs/vir.txt'; const razdelek2 = 8; console.log(naslov, opomba, pot, razdelek2);\n```\n Žč: 🚀 hitrost rasti je merljiva.",
+ "components": [
+  {
+   "component_id": "comp-prose-computing-dev-0001",
+   "category": "prose",
+   "start_byte": 2,
+   "end_byte": 240
+  },
+  {
+   "component_id": "comp-code-javascript-dev-0008",
+   "category": "code",
+   "start_byte": 241,
+   "end_byte": 547
+  }
+ ]
+}

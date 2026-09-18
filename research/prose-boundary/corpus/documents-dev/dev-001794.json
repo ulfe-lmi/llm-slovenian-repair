@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-001794",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T2-prose-math-prose",
+ "byte_length": 854,
+ "cp_length": 840,
+ "sha256": "c44655c084b1c21e5e7d40d084b25456b977a18d47ca4cf28138abd5c101bb4e",
+ "document": "Varčnost pri računih za ogrevanje v projektu Topla hiša ni vedno leva stvar, če je v prostoru prehladno. Leta 2023 so mnogi domovi dobili termometre, ki opozarjajo, ko temperatura pade pod 18 stopinj. (V takih dneh je bolje zapreti okno, ki ga obvečer nismo nujno potrebovali.) Pri starejših gradnjah je koristno preveriti tudi, ali se okno res dobro zapre.\n\\sum_{\\iota=1}^{6} \\kappa_{\\iota} * \\prod_{\\lambda=1}^{2} \\mu_{\\lambda} \\text{Koper}\nV prostoru projekta Tabor so preizkušali prenos toplote skozi plastine in merili spremembe, ko so dodali tanke plasti iz mešanih vlaken. Meritve so vodila dva študenta, Luka in Nika, ki sta zapisoval čase, temperature ter opazila rahlo meglico na robu vzorcev. Leta dvotisoč in devetindvajset, ko je bila soba še prenovljena, je v opombah stalo, da bo treba poskus ponoviti pri drugačni vlažnosti.",
+ "components": [
+  {
+   "component_id": "comp-prose-everyday-advice-dev-0009",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 363
+  },
+  {
+   "component_id": "comp-math-summations-dev-0003",
+   "category": "math",
+   "start_byte": 364,
+   "end_byte": 448
+  },
+  {
+   "component_id": "comp-prose-science-dev-0004",
+   "category": "prose",
+   "start_byte": 449,
+   "end_byte": 854
+  }
+ ]
+}

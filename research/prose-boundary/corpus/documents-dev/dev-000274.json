@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-000274",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T11-interactions",
+ "byte_length": 846,
+ "cp_length": 827,
+ "sha256": "d8d79e0e402006c1f8d4df3122c306e3c69243b44c0d8188d9c2aa22a1ca4904",
+ "document": "`/* Testni fragment 3: izmišljena oseba Luka, projekt Brst. *`.\n```\nfn konec() { /* Testni projekt Lipa: č, š, ž, *poudarek* in _podčrtano_ */ let seStez = true; let razdelek2 = 7; let HRAŠNA_VREDNOST = 1; let besedilo = format!(\"*Nova* ({} $) `č`\", HRAŠNA_VREDNOST); let pot = \"src/modul.py\"; let url = \"https://primer.si/koda\"; let _ = (seStez, razdelek2, besedilo, pot, url); println!(\"č, š, ž\"); }\n# komentar z \\frac{a}{b}\n```\nSpremenljivka se obnaša kot stikalo v omarici. Vrednost se spremeni. Zanka se ponovi. Funkcija zaključi del.\nV šolskem testnem kotičku je Nia izmislila preprosto skico: utripalka, upornost, sklep in baterija v krogu. \"Ne pozabi, da je sklep odprt, dokler ga ne pritisneš,\" je opomnila sošolki. Ta se je nasmehnila in se lotila priključevanja. Ko je vse šlo, sta skupaj ugasnili in zapisali datum.",
+ "components": [
+  {
+   "component_id": "comp-code-sql-dev-0003",
+   "category": "code",
+   "start_byte": 0,
+   "end_byte": 63
+  },
+  {
+   "component_id": "comp-code-rust-dev-0008",
+   "category": "code",
+   "start_byte": 65,
+   "end_byte": 441
+  },
+  {
+   "component_id": "comp-prose-programming-explainer-dev-0008",
+   "category": "prose",
+   "start_byte": 442,
+   "end_byte": 552
+  },
+  {
+   "component_id": "comp-prose-electronics-dev-0005",
+   "category": "prose",
+   "start_byte": 553,
+   "end_byte": 846
+  }
+ ]
+}

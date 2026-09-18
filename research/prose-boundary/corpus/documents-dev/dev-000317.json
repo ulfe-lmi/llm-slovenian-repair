@@ -1,0 +1,65 @@
+{
+ "doc_id": "dev-000317",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T10-randomized",
+ "byte_length": 1295,
+ "cp_length": 1283,
+ "sha256": "c08cc1f546ff62d4bc255f714bd0732b6938a3a86791449853b95ee96cbf3e2d",
+ "document": "Zahtevo so oddali v ponedeljek. V občini so jo prejeli isti dan, in sicer ob enajsti uri popoldne. Potrdilo z modro značko, ki je merila tri centimetre, so priložili k vsakemu vnosu v evidenco.\n### Projekt List\n#### Testni podnaslov\n#### Podroben podnaslov\nProjekt List, avtorica Petra Novak, vrednost 4 N.\n[slovenski opis](https://primer.si/stran)\n[slovenski opis 5: Luka 10 %](https://primer.si/stran \"Naslov 5\")\n> <https://primer.si/stran>\nhttps://primer.si/novica#naslov\nFragment 1: <table><thead><tr><th>Naziv</th><th>Opis</th></tr></thead><tbody><tr><td>Aljanka</td><td>Testni sistem z *zanesljivimi* podatki in URL-ji kot <a href=\"https://primer.si/novica\">novice</a>. Vrednost: 25 % in dolžina 3,5 m.</td></tr></tbody></table>\n[opis](https://primer.si/stran tretji del: avtorizirana testna vsebina projekta Rumena cesta; izmišljena oseba Petra Zupan preverja obrazec.\nporočilo_q3.csv\nmodul_pogon.py poročilo_q3.csv tabela_01.json\nProjektna skupina je v juliju 2025 preverila tok podatkov med občino in zavodom za upravne storitve. V notranji opombi je stalo: »Dva koraka manj, dva dneja hitreje.« V eni od vlog, ki je vsebovala dve prilogi, je manjkala podpisana izjava. To so uredili v petih dneh. (Rezultat je bila večja preglednost in tudi večje zadovoljstvo uporabnikov.)",
+ "components": [
+  {
+   "component_id": "comp-prose-administration-dev-0009",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 196
+  },
+  {
+   "component_id": "comp-markdown-headings-dev-0008",
+   "category": "markdown",
+   "start_byte": 197,
+   "end_byte": 309
+  },
+  {
+   "component_id": "comp-markdown-links-dev-0005",
+   "category": "markdown",
+   "start_byte": 310,
+   "end_byte": 445
+  },
+  {
+   "component_id": "comp-machine-urls-dev-0003",
+   "category": "machine",
+   "start_byte": 446,
+   "end_byte": 477
+  },
+  {
+   "component_id": "comp-structured-html-dev-0001",
+   "category": "structured",
+   "start_byte": 478,
+   "end_byte": 738
+  },
+  {
+   "component_id": "comp-malformed-broken-link-dev-0003",
+   "category": "malformed",
+   "start_byte": 739,
+   "end_byte": 880
+  },
+  {
+   "component_id": "comp-machine-filenames-dev-0002",
+   "category": "machine",
+   "start_byte": 881,
+   "end_byte": 897
+  },
+  {
+   "component_id": "comp-machine-filenames-dev-0007",
+   "category": "machine",
+   "start_byte": 898,
+   "end_byte": 944
+  },
+  {
+   "component_id": "comp-prose-administration-dev-0005",
+   "category": "prose",
+   "start_byte": 945,
+   "end_byte": 1295
+  }
+ ]
+}

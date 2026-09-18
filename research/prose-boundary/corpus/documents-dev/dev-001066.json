@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-001066",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T11-interactions",
+ "byte_length": 996,
+ "cp_length": 975,
+ "sha256": "e2885508f8018b276b3d893e6af53181430c22dde76333002e3f29f8cd6d2064",
+ "document": "`fn HRAŠNA_VREDNOST(žvirok: i64) -> i64 { /* Testni projekt L`.\n```\n/* Testni fragment 1: izmišljena oseba Maja, projekt Roža. */ SELECT 'Maja' AS `ime`, '1,20 $' AS `cena`, 'https://primer.si/koda' AS `url`, 'src/modul.py' AS `pot`, TRIM('*poudarek* in _podčrtano_') AS `opomba`, 'razdelek2' AS `razdelek2`, 'seStez' AS `seStez`, 'č' AS `HRAŠNA_VREDNOST` FROM (SELECT 1 AS `en`) AS `t` WHERE (`t`.`en` = 1);\n# komentar z \\frac{a}{b}\n```\nPri planinskem vzponu po Javorniku v marcu 2023 so bile poti močno zamrznjene, zato priporočam uporabo čevljev z dobrim oprijemom. Vreme je bilo hladno (okrog 5 stopinj pod ničlo), a razgledi so bili nagrajenje vredni.\nV pisni pojasnitvi je bilo zapisano, da se rok za vložitev pritožbe šteje od dneva, ko je odločba dostavljena na elektronski naslov ali osebno. »V dveh primerih je bilo treba preveriti avtentičnost prijave,« je povedala urednica projekta. (To je trajalo pet delovnih dni in je zmanjšalo tveganje za napačno odločitev.)",
+ "components": [
+  {
+   "component_id": "comp-code-rust-dev-0003",
+   "category": "code",
+   "start_byte": 0,
+   "end_byte": 64
+  },
+  {
+   "component_id": "comp-code-sql-dev-0001",
+   "category": "code",
+   "start_byte": 66,
+   "end_byte": 444
+  },
+  {
+   "component_id": "comp-prose-travel-dev-0009",
+   "category": "prose",
+   "start_byte": 445,
+   "end_byte": 667
+  },
+  {
+   "component_id": "comp-prose-administration-dev-0003",
+   "category": "prose",
+   "start_byte": 668,
+   "end_byte": 996
+  }
+ ]
+}

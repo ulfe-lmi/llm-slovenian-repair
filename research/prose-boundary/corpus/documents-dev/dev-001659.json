@@ -1,0 +1,65 @@
+{
+ "doc_id": "dev-001659",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T10-randomized",
+ "byte_length": 1307,
+ "cp_length": 1276,
+ "sha256": "57e8ec15f59bbe5e6cf4980bc2d682974004b6e31ff800102ef57fcb6ec6e7ab",
+ "document": "V pisarni so za projekt »Dober dose« postavili novo usmerjevalno napravo bližje oknu, da bi signal dosegel tudi do kavne mize (kjer se vedno nabere največ ljudi). »Mrežna kartica«, so dejali tisti, ki so prenašali fotografije, se je hitreje odzvala, ko so se izognili prenatrpanosti. Določene datoteke so zato pustili za večer.\n<merilo id='tretje' ime='Dolžina' enota='3,5 m'><opomba stanje='0,13'>Testni primer</opomba></merilo>\nProjekt Ravni Tlocrt: Ana Hribar opozori, da meritev 40 cm in 3 kos deluje, če pišete na <pošta@primer.si> ali obiščete <https://primer.si/stran>.\n~~~~bash\n# testna postavka: 15 sekund, 3 koraki\n~~~~\n\n$$\\frac{\\alpha}{\\beta} = \\frac{2}{3} + \\gamma = \\text{Ana}$$\nPROJEKT=Bela dolina\nAVTOR=Emilca Petek\nTEMPO=2,7 m/s\nVLADAVA=75 %\nDODATNA_VAR=$drugim_ključem; 0,20\nOPIS=[*demo*, _vsebina_, https://primer.si/novica]\n\\(\\text{ostanek} = \\alpha_{\\text{Nova}} + \\beta_{\\text{Mlaka}} - \\gamma_{\\text{Dve}} = 0\\)\nPostaja *Petra* beleži _množino_ 250 mililitri.\nKo je Nika za projekt »Polno napajanje« preverjala obvestila, je opazila, da se aplikacija za vremensko napoved pozno obudila, če je telefon bil v šibkem omrežju (tudi ob številnih sporočilih). »Najprej napajanje«, je rekla njena sestra, »vse ostalo je opozorilo, ki lahko počaka do polnjenja.«",
+ "components": [
+  {
+   "component_id": "comp-prose-computing-dev-0008",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 337
+  },
+  {
+   "component_id": "comp-structured-xml-dev-0003",
+   "category": "structured",
+   "start_byte": 338,
+   "end_byte": 440
+  },
+  {
+   "component_id": "comp-markdown-autolinks-dev-0004",
+   "category": "markdown",
+   "start_byte": 441,
+   "end_byte": 592
+  },
+  {
+   "component_id": "comp-markdown-fenced-code-dev-0006",
+   "category": "markdown",
+   "start_byte": 593,
+   "end_byte": 646
+  },
+  {
+   "component_id": "comp-math-display-dollar-dev-0001",
+   "category": "math",
+   "start_byte": 647,
+   "end_byte": 707
+  },
+  {
+   "component_id": "comp-structured-env-blocks-dev-0008",
+   "category": "structured",
+   "start_byte": 708,
+   "end_byte": 859
+  },
+  {
+   "component_id": "comp-math-text-slovenian-dev-0006",
+   "category": "math",
+   "start_byte": 860,
+   "end_byte": 950
+  },
+  {
+   "component_id": "comp-markdown-emphasis-dev-0006",
+   "category": "markdown",
+   "start_byte": 951,
+   "end_byte": 1000
+  },
+  {
+   "component_id": "comp-prose-computing-dev-0009",
+   "category": "prose",
+   "start_byte": 1001,
+   "end_byte": 1307
+  }
+ ]
+}

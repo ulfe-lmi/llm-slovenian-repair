@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-000018",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T8-quote-fenced",
+ "byte_length": 785,
+ "cp_length": 773,
+ "sha256": "fb050320f0c0dd1edc209133c47cb8f75fc255bc9e48502ddaabce2774e1b948",
+ "document": "> V projektu Brisača so mladi v Novem mestu dobili učbenik, ki je namesto dolgih razlag ponudil tri kratke opise in eno vprašanje za pogovor. Nekateri odrasli so želeli, da bi izpit ostal razumljiv, zato so v nalogah zapisali tudi primer, kakšno vprašanje bodo dobili. Učiteljica Ivana je v uvodnem poglavju (glej stran 17) dodala opombo o tem, kako se besede razlikujejo v govoru in v pisanju. Po kratkem testnem popoldnevu v oddelku so se učenci in starši bolje dogovorili o tem, kaj pomeni samostojno reševanje. `int main(void) { int seStez = 3; char *pot = \"src/modul.py\";`\n```\nint main(void) { int razdelek2 = 7; char *naslov = \"Ana (izmišljena oseba)\"; char *pot = \"docs/vir.txt\"; (void)razdelek2; (void)naslov; (void)pot; return 0; } /* Izmišljen projekt: Ana */\n```",
+ "components": [
+  {
+   "component_id": "comp-prose-education-dev-0008",
+   "category": "prose",
+   "start_byte": 2,
+   "end_byte": 524
+  },
+  {
+   "component_id": "comp-code-c-dev-0001",
+   "category": "code",
+   "start_byte": 525,
+   "end_byte": 587
+  },
+  {
+   "component_id": "comp-code-c-dev-0003",
+   "category": "code",
+   "start_byte": 588,
+   "end_byte": 785
+  }
+ ]
+}

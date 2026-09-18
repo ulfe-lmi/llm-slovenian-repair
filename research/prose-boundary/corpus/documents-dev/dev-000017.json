@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-000017",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T7-prose-json-prose-latex",
+ "byte_length": 949,
+ "cp_length": 924,
+ "sha256": "f6fab91bc4427571dcf0b057c3bf49722ea36909d9bf6093a4e420e7e1608966",
+ "document": "V zbirki Tihi bralci (2018) mlada pisateljica Nina Skof opisuje dedno knjižnico. Na stenski plošci visi seznam bralcev iz let 1954 in 1971, med njimi tudi izmišljeni pesnik Jure Čvik. Evropska literarna tradicija pozna podobno zbirko tistih, ki so izginili v prevodu. Knjižnost je tu skrita v prahu, ne v naslovu.\n{\"ime\":\"Projekt Mesto\",\"površina\":\"120 m2\",\"avtorsko\":\"Nevtralna testna vsebina\",\"delež\":\"15 %\",\"opis\":{\"podrobnost\":\"**Testni podatki** https://primer.si/novica\"}}\nPrimerjava mer je najlažje razumljiva, kadar učitelj postavi vprašanje: „Kako dolgo bo cesta na zemljevidu, če je dejanska dolžina sto kilometrov?“ V razredu se pogosto uporablja beseda sorazmerje, vendar je pomembno, da učenci vidijo odnos med številoma. Enkrat so pri projektu Rabič in Šolar izmerekli sence na šolskem igrišču, potem pa iz tega razločili razmerje višin.\n\\(\\left(\\frac{\\theta^4}{2\\pi+1}-\\sqrt{5-\\lambda}\\right)_{\\text{Cilka}}\\)",
+ "components": [
+  {
+   "component_id": "comp-prose-literature-dev-0003",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 318
+  },
+  {
+   "component_id": "comp-structured-json-dev-0007",
+   "category": "structured",
+   "start_byte": 319,
+   "end_byte": 485
+  },
+  {
+   "component_id": "comp-prose-math-explainer-dev-0007",
+   "category": "prose",
+   "start_byte": 486,
+   "end_byte": 876
+  },
+  {
+   "component_id": "comp-math-paren-tex-dev-0003",
+   "category": "math",
+   "start_byte": 877,
+   "end_byte": 949
+  }
+ ]
+}

@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-000656",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T8-quote-fenced",
+ "byte_length": 656,
+ "cp_length": 640,
+ "sha256": "02679b93e283fb68de6eab92ae3b9b51f3bfb092c542f27cde9bd598b02ca6d2",
+ "document": "> V projektu Grem v šolo so učenci izmerili, da so v treh tednih v povprečju spali osem ur in petnajst minut. Razmerje med spanjem in budnostjo je bilo, kot se je pokazalo, približno ena do dve (glede na dneve brez izjemnih dogodkov). `fn konec() { /* Testni projekt Lipa: č, š, ž, *poudarek* in `\n```\n# Fragment 6: *neodvisen*, podčrtano _besedilo_, (oklepaj)\necho 'Zvezdice: *zvezda* **dvakrat** in _podčrtano_'\necho 'Valuta: 1 $ in 9 € (testni znesek)'\necho 'Poti: docs/vir.txt in src/modul.py'\necho 'Spletna stran: https://primer.si/koda'\necho 'Id: razdelek2, seStez, HRAŠNA_VREDNOST'\necho 'Backquote `vse` in poudarčni znaki č š ž'\n```",
+ "components": [
+  {
+   "component_id": "comp-prose-statistics-dev-0007",
+   "category": "prose",
+   "start_byte": 2,
+   "end_byte": 238
+  },
+  {
+   "component_id": "comp-code-rust-dev-0008",
+   "category": "code",
+   "start_byte": 239,
+   "end_byte": 304
+  },
+  {
+   "component_id": "comp-code-shell-bash-dev-0006",
+   "category": "code",
+   "start_byte": 305,
+   "end_byte": 656
+  }
+ ]
+}

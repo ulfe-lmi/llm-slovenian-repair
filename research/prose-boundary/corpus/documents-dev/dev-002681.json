@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-002681",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T9-prose-malformed-prose",
+ "byte_length": 674,
+ "cp_length": 663,
+ "sha256": "cc49da422d63efdebc32cca03d20ba6c5e59253d5d3913b95937549570451ffb",
+ "document": "Za izpit iz zgodovine so učenci pripravili kratko predstavitev. Pri nalogi so uporabili učbenik, ki ga je leta 2018 uredila ekipa Novega zavoda za izobraževanje (zlasti strokovna urednica Irena Polak). Ocenjevanje je bilo delno usklajeno, delno pa temeljilo na ustnem pogovoru.\n<span title=\nNevtralna avtorizirana testna vsebina za projekt Sova in osebo Ano Testno.\nLuka, ki je vodil testni projekt Breza, je razložil, da spremenljivka nosi ime, vrednost pa pomeni, kaj se takrat zgodilo. (Steklenička s sokom pri tem dobro pokaže, kako se raven zniža.) Zanka nato vztraja, dokler pogoj ostane res, in funkcija povrne odgovor, »ja« ali »ne«, brez skritih pogojev.",
+ "components": [
+  {
+   "component_id": "comp-prose-education-dev-0004",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 280
+  },
+  {
+   "component_id": "comp-malformed-partial-html-dev-0002",
+   "category": "malformed",
+   "start_byte": 281,
+   "end_byte": 368
+  },
+  {
+   "component_id": "comp-prose-programming-explainer-dev-0009",
+   "category": "prose",
+   "start_byte": 369,
+   "end_byte": 674
+  }
+ ]
+}

@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-001099",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T11-interactions",
+ "byte_length": 1157,
+ "cp_length": 1123,
+ "sha256": "8be8e4d7162a1a09ed9902e88e91d932ee8a51f615b589652b0d990f611dc705",
+ "document": "`fn main() { /* Testni projekt Lipa: č, š, ž, **poudarek** in`.\n```\n// Testni modul (č, š, ž)\nfunction seStez(a, b) {\n  return (a + b) * 1;\n}\nconst naslov = \"Opomba: **pomembno** in _podčrtana_\";\nconst besedilo = `Cena: $ 1,25 za razdelek2`;\nconst povezava = \"https://primer.si/koda\";\nconst pot = \"src/modul.py\";\nconst vir = \"docs/vir.txt\";\nconst HRAŠNA_VREDNOST = 10;\nconst rezultat = seStez(HRAŠNA_VREDNOST, 5);\nconsole.log(naslov, besedilo, povezava, pot, vir, rezultat);\n// konec fragmenta\n# komentar z \\frac{a}{b}\n```\nOb projektnem srečanju je Marko dejal: „Povprečje je koristno, včasih pa skrije, kaj se res dogaja.“ Skupina je nato primerjala še največje in najmanjše vrednosti, da bi imela širši vtis. Tudi brez zapletenih računov so prišli do zaključka, da so razmere v zadnjih dveh letih postopoma stabilnejše.\nV projektu Prvi tok, ki ga je leta 2018 sestavila Ana, se je naučila, da mora biti sklep zaprt, da se lučka sploh prižge. Baterija, ki je imela 4,5 V, je bila nameščena v držač, medtem ko je upornost zaščitila diodo pred prevelikim tokom. (Zelo pomembno je preveriti, ali so vsi konci dobro povezani.)",
+ "components": [
+  {
+   "component_id": "comp-code-rust-dev-0005",
+   "category": "code",
+   "start_byte": 0,
+   "end_byte": 65
+  },
+  {
+   "component_id": "comp-code-javascript-dev-0009",
+   "category": "code",
+   "start_byte": 67,
+   "end_byte": 531
+  },
+  {
+   "component_id": "comp-prose-statistics-dev-0003",
+   "category": "prose",
+   "start_byte": 532,
+   "end_byte": 846
+  },
+  {
+   "component_id": "comp-prose-electronics-dev-0006",
+   "category": "prose",
+   "start_byte": 847,
+   "end_byte": 1157
+  }
+ ]
+}

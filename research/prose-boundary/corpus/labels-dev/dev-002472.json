@@ -1,0 +1,62 @@
+{
+ "doc_id": "dev-002472",
+ "byte_length": 853,
+ "cp_length": 819,
+ "regions": [
+  {
+   "start_byte": 0,
+   "end_byte": 325,
+   "start_cp": 0,
+   "end_cp": 313,
+   "component_id": "comp-prose-medicine-explainer-dev-0012",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 325,
+   "end_byte": 327,
+   "start_cp": 313,
+   "end_cp": 315,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 327,
+   "end_byte": 431,
+   "start_cp": 315,
+   "end_cp": 417,
+   "component_id": "comp-malformed-unclosed-tex-env-dev-0001",
+   "category": "malformed",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 431,
+   "end_byte": 433,
+   "start_cp": 417,
+   "end_cp": 419,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 433,
+   "end_byte": 853,
+   "start_cp": 419,
+   "end_cp": 819,
+   "component_id": "comp-prose-math-explainer-dev-0010",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  }
+ ],
+ "invariants": {
+  "tiling_complete": true,
+  "no_contradictory_overlaps": true,
+  "cp_range_exact": true
+ }
+}

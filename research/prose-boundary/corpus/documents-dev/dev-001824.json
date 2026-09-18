@@ -1,0 +1,71 @@
+{
+ "doc_id": "dev-001824",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T10-randomized",
+ "byte_length": 1960,
+ "cp_length": 1927,
+ "sha256": "ca01801b432e3df58fddff41a9c5f30aa65974e7467d984d1cdfd712a588a51b",
+ "document": "V projektu Mladostni učenec so raziskovalci (Marko Novak, Petra Hribar in drugi) spremljali učence osmih osnovnih šol v obdobju dveh let. Namen je bil ugotoviti, kako različne metode vplivajo na razumevanje učnega gradiva ter na strah pred izpiti. Pri učbenikih so posebej opazovali, ali slike, opombe in kratki povzetki spodbujajo samostojno delo ali pa le zapletajo razumevanje. Učitelji so poleti 2023 zabeležili, da so učenci pri refleksiji pogosto izrekli, da bi želeli več »prostora za vprašanja« in manj ponavljanja brez poudarka.\n\\begin{equation} \\text{Testni projekt Tomas} \\; : \\; \\sin^2 \\theta_6 + \\cos^2 \\theta_6=1 \\Rightarrow \\theta_6=\\frac{\\pi}{6} \\Rightarrow \\sin^2\\left(\\frac{\\pi}{6}\\right)+\\cos^2\\left(\\frac{\\pi}{6}\\right)=1 \\end{equation}\nVzorec *Nina* uporablja _toleranco_ 5 odstotkov.\nmeta.zupan@primer.si,luka.kovac@primer.si\n```\nint main(void) { char *koda = \"Znak: `koda` (oklepaji)\"; char *valuta = \"Znesek: 5 $ in 10 EUR\"; char *rel = \"src/modul.py\"; char *oznaka = \"HRAŠNA_VREDNOST\"; (void)koda; (void)valuta; (void)rel; (void)oznaka; return 0; } /* Backquote in valuta */\n```\nFragment 6: <ul><li>Lokacija A: *glavno_središče* (obseg 15,2 m)</li><li>Lokacija B: _rezervno_področje_ (volumen 0,75 l)</li><li>Lokacija C: *testno_okolje* (URL: <a href=\"https://primer.si/lokacija\">lokacija</a>)</li></ul>\nhttps://primer.si/stran/12\n${PROJEKT_IME} KEY=izvirna_vrednost\n```\n#include <string>\n// Projekt: *Lipa*, šentjanž\n// Preveri src/modul.py\nstd::string seStez(int razdelek2) {\n    // žlahtna vrednost: 2 $\n    return \"vrednost \" + std::to_string(razdelek2 * 2) + \" $\";\n}\n```\n„Zdravje ni samo odsotnost bolečine“ je poudaril Marko, ko je v projektu Zdravi pogovori spregovoril o pomenu počitka. Vsak človek se mora poslušati in poznati svoje omejitve. Obremenjenost se lahko kaže različno, na primer v napetosti ali v slabšem spanju. Če se nelagodje ne umiri, mora biti naslednji korak obisk zdravnika.",
+ "components": [
+  {
+   "component_id": "comp-prose-education-dev-0003",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 551
+  },
+  {
+   "component_id": "comp-math-equation-env-dev-0006",
+   "category": "math",
+   "start_byte": 552,
+   "end_byte": 770
+  },
+  {
+   "component_id": "comp-markdown-emphasis-dev-0004",
+   "category": "markdown",
+   "start_byte": 771,
+   "end_byte": 819
+  },
+  {
+   "component_id": "comp-machine-emails-dev-0005",
+   "category": "machine",
+   "start_byte": 820,
+   "end_byte": 861
+  },
+  {
+   "component_id": "comp-code-c-dev-0004",
+   "category": "code",
+   "start_byte": 862,
+   "end_byte": 1118
+  },
+  {
+   "component_id": "comp-structured-html-dev-0006",
+   "category": "structured",
+   "start_byte": 1119,
+   "end_byte": 1346
+  },
+  {
+   "component_id": "comp-machine-urls-dev-0007",
+   "category": "machine",
+   "start_byte": 1347,
+   "end_byte": 1373
+  },
+  {
+   "component_id": "comp-machine-env-vars-dev-0003",
+   "category": "machine",
+   "start_byte": 1374,
+   "end_byte": 1409
+  },
+  {
+   "component_id": "comp-code-cpp-dev-0003",
+   "category": "code",
+   "start_byte": 1410,
+   "end_byte": 1621
+  },
+  {
+   "component_id": "comp-prose-medicine-explainer-dev-0003",
+   "category": "prose",
+   "start_byte": 1622,
+   "end_byte": 1960
+  }
+ ]
+}

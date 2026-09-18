@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-001119",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T9-prose-malformed-prose",
+ "byte_length": 979,
+ "cp_length": 954,
+ "sha256": "b9ec3e655280e41812ea15f5cd8f3aad298d4f7a69702004def6b146ed468131",
+ "document": "V projektu Mladostni učenec so raziskovalci (Marko Novak, Petra Hribar in drugi) spremljali učence osmih osnovnih šol v obdobju dveh let. Namen je bil ugotoviti, kako različne metode vplivajo na razumevanje učnega gradiva ter na strah pred izpiti. Pri učbenikih so posebej opazovali, ali slike, opombe in kratki povzetki spodbujajo samostojno delo ali pa le zapletajo razumevanje. Učitelji so poleti 2023 zabeležili, da so učenci pri refleksiji pogosto izrekli, da bi želeli več »prostora za vprašanja« in manj ponavljanja brez poudarka.\nV projektu Brda je ekipa pod vodstvom Anje Zupan preverjala betonno ploščo in jeklene povezave (vezne elemente) na mostu čez Sočo. »Pri takih presojah najprej gledamo trdnost, potem pa še vzdržljivost,« je povedala na terenskem sestanku. Izračuni so pokazali, da bo dovolj, če se armatura postavi po novem razporeditvenem načrtu.\n~~~ Testni projekt Gaj: nevtralna vsebina za preizkus shranjevanja, avtor Marko Zupan.",
+ "components": [
+  {
+   "component_id": "comp-prose-education-dev-0003",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 551
+  },
+  {
+   "component_id": "comp-prose-engineering-dev-0006",
+   "category": "prose",
+   "start_byte": 552,
+   "end_byte": 892
+  },
+  {
+   "component_id": "comp-malformed-unclosed-fence-dev-0002",
+   "category": "malformed",
+   "start_byte": 893,
+   "end_byte": 979
+  }
+ ]
+}

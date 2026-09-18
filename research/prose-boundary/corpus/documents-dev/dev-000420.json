@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-000420",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T3-prose-fenced-prose",
+ "byte_length": 1022,
+ "cp_length": 1001,
+ "sha256": "6fc85711198c2ab403536564d8871b4f52796d0d150464fc90af984c8850c6be",
+ "document": "Na opazovalni postaji pri projektu Zvezdna nit pod Šmarnico je mlada raziskovalka Lina Petek opazovala meglico z imenom Vrt 17 (opazovana od leta 2019). »Zvezda se v daljinici zdi tiha, vendar spektralna analiza kaže, da se v njej dogajajo močni premiki,« je povedala ob drugi uri zjutraj. Njena ekipa je nato v dolge noči zapisovala meritve, pri čemer so posebej skrbno beležila tudi tiste minute, ko je meglica izgledala kot navaden oblak. Kasneje je Lina v dnevnik zapisala, da so dolge serije meritev pogosto bolj zanesljive od enega samega pogleda.\n```\nmoČ = 3; žrtev = (1, 2); besedilo = 'Cena: $10 `kod` **poudarek** _podčrtano_'; pot = 'docs/vir.txt' # komentar v slovenščini: testni projekt, https://primer.si/koda\n```\nV testni zbirki Projekt Zdravje 2026 je Matej napisal kratek vnos. Utrujenost, včasih tudi glavobol, ima lahko več razlogov. To je namerni vstavek v besedilo. Beseda „preveriti“ (v smislu posveta) se tu nanaša na obisk zdravnika. Ne gre za priporočilo zdravil ali odmerkov.",
+ "components": [
+  {
+   "component_id": "comp-prose-science-dev-0013",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 561
+  },
+  {
+   "component_id": "comp-code-python-dev-0011",
+   "category": "code",
+   "start_byte": 562,
+   "end_byte": 740
+  },
+  {
+   "component_id": "comp-prose-medicine-explainer-dev-0009",
+   "category": "prose",
+   "start_byte": 741,
+   "end_byte": 1022
+  }
+ ]
+}

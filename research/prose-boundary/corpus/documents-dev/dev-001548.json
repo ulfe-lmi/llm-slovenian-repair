@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-001548",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T9-prose-malformed-prose",
+ "byte_length": 689,
+ "cp_length": 668,
+ "sha256": "be4c973d4849c6c17e196e9c5b969fb50d6181704fcb030426c6addcbcce8a6f",
+ "document": "V letu 2021, po natančnem pregledu, so v projektu Ptičji kotel preverili, da je povprečna dolžina poti do šole znašala 2,4 kilometra, medtem ko so trije učenci hodili dlje in štirje krajše. To pomeni, da razmerje med krajšimi in daljšimi potmi ni enako, čeprav so posamezne vrednosti blizu.\n~~**Prečrtano** zmanjkano.\nTestni projekt: Papirnata mlat. Osebna: Nika Kranjc.\nLuka, ki je vodil testni projekt Breza, je razložil, da spremenljivka nosi ime, vrednost pa pomeni, kaj se takrat zgodilo. (Steklenička s sokom pri tem dobro pokaže, kako se raven zniža.) Zanka nato vztraja, dokler pogoj ostane res, in funkcija povrne odgovor, »ja« ali »ne«, brez skritih pogojev.",
+ "components": [
+  {
+   "component_id": "comp-prose-statistics-dev-0009",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 302
+  },
+  {
+   "component_id": "comp-malformed-malformed-nesting-dev-0003",
+   "category": "malformed",
+   "start_byte": 303,
+   "end_byte": 383
+  },
+  {
+   "component_id": "comp-prose-programming-explainer-dev-0009",
+   "category": "prose",
+   "start_byte": 384,
+   "end_byte": 689
+  }
+ ]
+}

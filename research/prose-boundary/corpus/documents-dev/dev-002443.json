@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-002443",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T2-prose-math-prose",
+ "byte_length": 663,
+ "cp_length": 649,
+ "sha256": "301c913f07081180fe87eb1b6645ec496943a13b1d30cb585b484402f868a72b",
+ "document": "Zgodba o izmišljenem gradu Kamen, ki ga je opisal Marko Perš, se v šolskih zvezkih pogosto pojavlja brez natančne letnice. V enem od zapisov pa stoji samo leto 1888 in kratek opis ograj (visokih okoli dveh metrov), kar je sicer precej nenavadno za takšno pripoved.\n\\begin{align} \\alpha_1 &= \\beta_1 + \\gamma_1 \\\\ \\delta_1 &= \\epsilon_1 \\times \\zeta_1 \\end{align}\nAna je zapisala, da se v starejših pisarnah pogosto uporabljajo tiskalniki, ki se povezujejo po kablu, čeprav so mlajši sodelavci privrženci brezžičnih rešitev. Takšna razmerja, čeprav na videz nevidna, vplivajo na to, kako hitro potuje dokument. (V projektu so to opazovali tri tedne.)",
+ "components": [
+  {
+   "component_id": "comp-prose-history-dev-0008",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 269
+  },
+  {
+   "component_id": "comp-math-align-env-dev-0001",
+   "category": "math",
+   "start_byte": 270,
+   "end_byte": 367
+  },
+  {
+   "component_id": "comp-prose-computing-dev-0005",
+   "category": "prose",
+   "start_byte": 368,
+   "end_byte": 663
+  }
+ ]
+}

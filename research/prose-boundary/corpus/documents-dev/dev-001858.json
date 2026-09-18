@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-001858",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T11-interactions",
+ "byte_length": 967,
+ "cp_length": 952,
+ "sha256": "6785291f24455a8c79cffcdc867db325e20cb577f95ab8969baf491cb50f0e2c",
+ "document": "`# Testni projekt: Razdelek; avtor: Maja Lipovnik`.\n```\n# Testni projekt: Seznam; avtor: Maja Lipovnik\nseznam = ['src/modul.py', 'docs/vir.txt']\nznacka = '*poudarek*'\noklepaj = '(neodvisno č)'\nvsota = sum(range(1, 4))\nif vsota == 6:\n    print('Seznam je pravilen')\n# komentar z \\frac{a}{b}\n```\nV letu 2021 je ekipa izmišljenega projekta Jutranja svetloba v Ljubljani opazila, da se tanka plastična membrana ob segrevanju rahlo krivi. Raziskovalka Ana Kovač je zapisala, da bi lahko tak preprost pojav koristil pri razvoju tihih senzorjev (z vnosom: »brez zvočnega opozorila«). Po treh mesecih testov so si člani skupine privoščili kratki predah in nato spet zagnali meritve.\nV Dubrovniku sem z ekipo Sredozemska karta preveril obzidje in opozoril, da je obisk (brez rezervacije) pogosto daljši. V program smo vstavili tudi kratek postoj v starem solnem bazenu, kjer je voda odražala nebo. Vodič je dejal: \"če želite tih kot, se odpravite proti severu\".",
+ "components": [
+  {
+   "component_id": "comp-code-python-dev-0003",
+   "category": "code",
+   "start_byte": 0,
+   "end_byte": 50
+  },
+  {
+   "component_id": "comp-code-python-dev-0006",
+   "category": "code",
+   "start_byte": 52,
+   "end_byte": 294
+  },
+  {
+   "component_id": "comp-prose-science-dev-0006",
+   "category": "prose",
+   "start_byte": 295,
+   "end_byte": 684
+  },
+  {
+   "component_id": "comp-prose-travel-dev-0005",
+   "category": "prose",
+   "start_byte": 685,
+   "end_byte": 967
+  }
+ ]
+}

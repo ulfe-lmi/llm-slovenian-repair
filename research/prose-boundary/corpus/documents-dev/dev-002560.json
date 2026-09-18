@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-002560",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T9-prose-malformed-prose",
+ "byte_length": 758,
+ "cp_length": 747,
+ "sha256": "51b5f4e43262911a5c51c9469300c4b7ded92dc1ee1c42f7b2b419519c038e78",
+ "document": "Varčnost pri računih za ogrevanje v projektu Topla hiša ni vedno leva stvar, če je v prostoru prehladno. Leta 2023 so mnogi domovi dobili termometre, ki opozarjajo, ko temperatura pade pod 18 stopinj. (V takih dneh je bolje zapreti okno, ki ga obvečer nismo nujno potrebovali.) Pri starejših gradnjah je koristno preveriti tudi, ali se okno res dobro zapre.\n{\"naslov\": \"Testna vsebina projekta Lipa\", \nProjektna skupina je v juliju 2025 preverila tok podatkov med občino in zavodom za upravne storitve. V notranji opombi je stalo: »Dva koraka manj, dva dneja hitreje.« V eni od vlog, ki je vsebovala dve prilogi, je manjkala podpisana izjava. To so uredili v petih dneh. (Rezultat je bila večja preglednost in tudi večje zadovoljstvo uporabnikov.)",
+ "components": [
+  {
+   "component_id": "comp-prose-everyday-advice-dev-0009",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 363
+  },
+  {
+   "component_id": "comp-malformed-truncated-json-dev-0001",
+   "category": "malformed",
+   "start_byte": 364,
+   "end_byte": 407
+  },
+  {
+   "component_id": "comp-prose-administration-dev-0005",
+   "category": "prose",
+   "start_byte": 408,
+   "end_byte": 758
+  }
+ ]
+}

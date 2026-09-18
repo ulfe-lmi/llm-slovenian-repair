@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-000098",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T11-interactions",
+ "byte_length": 967,
+ "cp_length": 939,
+ "sha256": "3b3656a71a8b4370e508ba988afc86237cda31000ee8a288edaa0dd12c97ea9e",
+ "document": "`/* Zaključni test: oseba Janež, projekt Brest */ const naslo`.\n```\n/* Fragment 2: fiktna oseba Ana, pot docs/vir.txt, vir https://primer.si/koda */ struct Vnos { std::string naziv; double znesek; }; const int razdelek2 = 2; const Vnos seStez{ \"*Nova* šola 3 $ `kod`\", 2.5 }; const Vnos vzorci[2] = { {\"črtasti vzorec (š)\", 4.0}, {\"_dokument_\", 5.0} };\n# komentar z \\frac{a}{b}\n```\nVelik razpon pri mostu Pričakovanje je bil glavna težava. »Vzdržljivost gre pred estetiko,« je zapisal Marko Zupančič. V letu 2023 so namestili cevne stebre s premerom 1,2 metra in zagotovili dostop do ojačitve. Najmanj očitno je bilo izravnati vrzeli med betonskimi ploščami, saj bi sicer vozne površine hitro postale neravnine.\nAna si je za projekt »Miren dan« izbrala prenosnik, ki naj bi bil dovolj tih, da ga lahko odpre v knjižnici (tudi če baterija ni polna). V »Ponovni sinhronizaciji« se ji je obljubil mirnejši dan, če omrežje ne bo puščalo zamud.",
+ "components": [
+  {
+   "component_id": "comp-code-javascript-dev-0008",
+   "category": "code",
+   "start_byte": 0,
+   "end_byte": 64
+  },
+  {
+   "component_id": "comp-code-cpp-dev-0010",
+   "category": "code",
+   "start_byte": 66,
+   "end_byte": 386
+  },
+  {
+   "component_id": "comp-prose-engineering-dev-0012",
+   "category": "prose",
+   "start_byte": 387,
+   "end_byte": 728
+  },
+  {
+   "component_id": "comp-prose-computing-dev-0006",
+   "category": "prose",
+   "start_byte": 729,
+   "end_byte": 967
+  }
+ ]
+}

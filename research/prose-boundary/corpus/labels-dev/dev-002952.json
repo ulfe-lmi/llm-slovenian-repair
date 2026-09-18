@@ -1,0 +1,112 @@
+{
+ "doc_id": "dev-002952",
+ "byte_length": 940,
+ "cp_length": 917,
+ "regions": [
+  {
+   "start_byte": 0,
+   "end_byte": 2,
+   "start_cp": 0,
+   "end_cp": 2,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 2,
+   "end_byte": 217,
+   "start_cp": 2,
+   "end_cp": 209,
+   "component_id": "comp-prose-administration-dev-0012",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 217,
+   "end_byte": 220,
+   "start_cp": 209,
+   "end_cp": 212,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 220,
+   "end_byte": 221,
+   "start_cp": 212,
+   "end_cp": 213,
+   "component_id": "comp-code-javascript-dev-0011",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 221,
+   "end_byte": 254,
+   "start_cp": 213,
+   "end_cp": 243,
+   "component_id": "comp-code-javascript-dev-0011",
+   "category": "code",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 254,
+   "end_byte": 255,
+   "start_cp": 243,
+   "end_cp": 244,
+   "component_id": "comp-code-javascript-dev-0011",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 255,
+   "end_byte": 258,
+   "start_cp": 244,
+   "end_cp": 247,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 258,
+   "end_byte": 682,
+   "start_cp": 247,
+   "end_cp": 661,
+   "component_id": "comp-prose-science-dev-0012",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 682,
+   "end_byte": 685,
+   "start_cp": 661,
+   "end_cp": 664,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 685,
+   "end_byte": 940,
+   "start_cp": 664,
+   "end_cp": 917,
+   "component_id": "comp-prose-electronics-dev-0002",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  }
+ ],
+ "invariants": {
+  "tiling_complete": true,
+  "no_contradictory_overlaps": true,
+  "cp_range_exact": true
+ }
+}

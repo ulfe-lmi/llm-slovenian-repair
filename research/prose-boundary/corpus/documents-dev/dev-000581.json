@@ -1,0 +1,59 @@
+{
+ "doc_id": "dev-000581",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T10-randomized",
+ "byte_length": 1689,
+ "cp_length": 1649,
+ "sha256": "f9102680a6f445f4abd1ab2b5c51d193f574aa029866c4104f662f1470634bbd",
+ "document": "V odrski skupini, ki se je udeleževala tečaja digitalnih veščin, so se izobraženci najprej pogovarili o lastnih izkušnjah z računalniki, telefoni in e-pošto. Učiteljica (Maja Krajnc) je nato z drobnimi nalogami pokazala, kako preiskati zanesljiv vir, kako označiti vir in kako preprečiti, da bi besedilo delovalo kot »kopija brez lastnega pogleda«. Kratek zapis so na koncu prebrali drug drugemu.\nluka.kovac@primer.si,posta@oddelek.primer.si\nTestna serija: 3 enote po 120 W so aktivne, potrditev pa je z **močno** in __podčrtim__ besedilom.\n```\nseStez = 'https://primer.si/koda'; razdelek2 = 'src/modul.py'; HRAŠNA_VREDNOST = 7 # komentar v slovenščini: izmišljena oseba Ana, tema črn žir\n```\n| Vzorec | Enota | Prostornina |\n| --- | --- | --- |\n| Vzorec Lipa | l | 7,2 |\n| Vzorec Med | ml | 150 |\n$\\lim_{\\theta \\to 0} \\frac{\\alpha \\theta}{\\theta} = \\alpha_{\\text{Nina projekt Most}}$\n```\n/* Testni fragment 1: izmišljena oseba Maja, projekt Roža. */ SELECT 'Maja' AS `ime`, '1,20 $' AS `cena`, 'https://primer.si/koda' AS `url`, 'src/modul.py' AS `pot`, TRIM('*poudarek* in _podčrtano_') AS `opomba`, 'razdelek2' AS `razdelek2`, 'seStez' AS `seStez`, 'č' AS `HRAŠNA_VREDNOST` FROM (SELECT 1 AS `en`) AS `t` WHERE (`t`.`en` = 1);\n```\nMed razstavo v izmišljenem paviljonu je vodja ekipe Petra Lovšin pokazala model železne konstrukcije iz leta 1895. Očitali so ji, da je preveč zaupala spominom starih obrtnikov. (V ožjem krogu so rekli, da je bil model težak približno trideset kilogramov.) »Če bi imeli le eno potrdilo,« je dejala, »bi zgodbo lahko razumlili drugače.« Kljub temu so obiskovalci ostali zmedeni zaradi pomanjkanja ohranjenih meritev.",
+ "components": [
+  {
+   "component_id": "comp-prose-education-dev-0005",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 409
+  },
+  {
+   "component_id": "comp-machine-emails-dev-0008",
+   "category": "machine",
+   "start_byte": 410,
+   "end_byte": 454
+  },
+  {
+   "component_id": "comp-markdown-strong-dev-0006",
+   "category": "markdown",
+   "start_byte": 455,
+   "end_byte": 555
+  },
+  {
+   "component_id": "comp-code-python-dev-0010",
+   "category": "code",
+   "start_byte": 556,
+   "end_byte": 713
+  },
+  {
+   "component_id": "comp-markdown-tables-dev-0005",
+   "category": "markdown",
+   "start_byte": 714,
+   "end_byte": 818
+  },
+  {
+   "component_id": "comp-math-inline-dollar-dev-0007",
+   "category": "math",
+   "start_byte": 819,
+   "end_byte": 905
+  },
+  {
+   "component_id": "comp-code-sql-dev-0001",
+   "category": "code",
+   "start_byte": 906,
+   "end_byte": 1259
+  },
+  {
+   "component_id": "comp-prose-history-dev-0009",
+   "category": "prose",
+   "start_byte": 1260,
+   "end_byte": 1689
+  }
+ ]
+}

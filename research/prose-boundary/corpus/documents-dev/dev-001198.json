@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-001198",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T11-interactions",
+ "byte_length": 1065,
+ "cp_length": 1045,
+ "sha256": "875698b784e1f18a1312d3f70ee68fd1e4b7f73834992125485a946f32c8ace0",
+ "document": "`/* Koda za izpis seznama (brez šumnikov) */ const seznam = [`.\n```\n-- Fragment 3: izpisi za osebo\nCREATE TABLE izpisi (\n  id INT PRIMARY KEY,\n  ime TEXT,\n  \"razdelek2\" TEXT,\n  \"seStez\" TEXT\n);\nINSERT INTO izpisi (id, ime, \"razdelek2\", \"seStez\")\nVALUES (1, 'Ana Breznik', 'razdelek 2', 'žetona: 3 $');\nUPDATE izpisi SET \"seStez\" = 'glej https://primer.si/koda in docs/vir.txt';\nSELECT ime, \"razdelek2\", \"seStez\" FROM izpisi WHERE ime = 'Ana Breznik';\n-- Konec: (oklepaji) *zvezdice* `kodica` _podčrtano_\n# komentar z \\frac{a}{b}\n```\nAna je v svojem projektu za osnovno šolo pripravila preprost vezni opis z enim gumbom, žarom in baterijo. Ko je stikalo spustila, je sklep omogočil tok, svetloba pa je blago utripala. »Prva ura mi je pokazala, da so imena delov pomembna,« je zapisala v dnevnik.\nV sklopu testnega projekta je Peter opazoval skupino starejših udeležencev. Njegova skupina je začela s petminutnim segrevanjem. Nato je izvedla tri krogove po travi. „Sodelavec,“ je vodja rekel, „v prihodnji uri bomo dodali še eno zmerno aktivnost.“",
+ "components": [
+  {
+   "component_id": "comp-code-javascript-dev-0006",
+   "category": "code",
+   "start_byte": 0,
+   "end_byte": 63
+  },
+  {
+   "component_id": "comp-code-sql-dev-0011",
+   "category": "code",
+   "start_byte": 65,
+   "end_byte": 535
+  },
+  {
+   "component_id": "comp-prose-electronics-dev-0011",
+   "category": "prose",
+   "start_byte": 536,
+   "end_byte": 802
+  },
+  {
+   "component_id": "comp-prose-sports-dev-0010",
+   "category": "prose",
+   "start_byte": 803,
+   "end_byte": 1065
+  }
+ ]
+}

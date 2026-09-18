@@ -1,0 +1,122 @@
+{
+ "doc_id": "dev-000290",
+ "byte_length": 1379,
+ "cp_length": 1344,
+ "regions": [
+  {
+   "start_byte": 0,
+   "end_byte": 2,
+   "start_cp": 0,
+   "end_cp": 2,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 2,
+   "end_byte": 553,
+   "start_cp": 2,
+   "end_cp": 539,
+   "component_id": "comp-prose-education-dev-0003",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 553,
+   "end_byte": 556,
+   "start_cp": 539,
+   "end_cp": 542,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 556,
+   "end_byte": 557,
+   "start_cp": 542,
+   "end_cp": 543,
+   "component_id": "comp-code-shell-bash-dev-0007",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 557,
+   "end_byte": 603,
+   "start_cp": 543,
+   "end_cp": 589,
+   "component_id": "comp-code-shell-bash-dev-0007",
+   "category": "code",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 603,
+   "end_byte": 604,
+   "start_cp": 589,
+   "end_cp": 590,
+   "component_id": "comp-code-shell-bash-dev-0007",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 604,
+   "end_byte": 607,
+   "start_cp": 590,
+   "end_cp": 593,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 607,
+   "end_byte": 1012,
+   "start_cp": 593,
+   "end_cp": 991,
+   "component_id": "comp-prose-literature-dev-0012",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 1012,
+   "end_byte": 1015,
+   "start_cp": 991,
+   "end_cp": 994,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 1015,
+   "end_byte": 1338,
+   "start_cp": 994,
+   "end_cp": 1310,
+   "component_id": "comp-prose-education-dev-0002",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 1338,
+   "end_byte": 1379,
+   "start_cp": 1310,
+   "end_cp": 1344,
+   "component_id": "template",
+   "category": null,
+   "role": "PROSE",
+   "template_owned": true
+  }
+ ],
+ "invariants": {
+  "tiling_complete": true,
+  "no_contradictory_overlaps": true,
+  "cp_range_exact": true
+ }
+}

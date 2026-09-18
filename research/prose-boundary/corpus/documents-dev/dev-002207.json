@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-002207",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T8-quote-fenced",
+ "byte_length": 753,
+ "cp_length": 735,
+ "sha256": "c94465bf70fbdc06dcca4b23e16fbda9afaf4a86e424d5713b520496f113be90",
+ "document": "> V projektu Osnovne šole Lipica učitelji (zlasti Ana Kovač) raje uporabljajo projektno delo, da učenci spoznajo, kako znanje deluje v vsakdanju. Po besedah razredne voditeljice je najpomembnejše, da otroci pri vsaki nalogi »razložijo, zakaj so ravno tako postopali«. Pri testnem izpitu iz naravoslovja so zato združili pisni del z ustno obravnavo dveh preprostih primerov iz šolskega vrta. `# Testni projekt: Seznam; avtor: Maja Lipovnik`\r\n```\r\nfn main() { /* Testni projekt Lipa: č, š, ž, **poudarek** in *zvezdice* */ let razdelek2 = 4; let HRAŠNA_VREDNOST = 1; let citat = \"č`š`ž\"; let pot = \"src/modul.py\"; let url = \"https://primer.si/koda\"; println!(\"{} | {} | {} | {} | {}\", HRAŠNA_VREDNOST, razdelek2, citat, pot, url); }\r\n```",
+ "components": [
+  {
+   "component_id": "comp-prose-education-dev-0001",
+   "category": "prose",
+   "start_byte": 2,
+   "end_byte": 400
+  },
+  {
+   "component_id": "comp-code-python-dev-0006",
+   "category": "code",
+   "start_byte": 401,
+   "end_byte": 449
+  },
+  {
+   "component_id": "comp-code-rust-dev-0005",
+   "category": "code",
+   "start_byte": 451,
+   "end_byte": 753
+  }
+ ]
+}

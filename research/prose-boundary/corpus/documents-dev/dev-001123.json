@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-001123",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T2-prose-math-prose",
+ "byte_length": 683,
+ "cp_length": 673,
+ "sha256": "45cd49ccceb641c28bfb465c6dbd3a890f3d02c32b9c32c07afb405960350d82",
+ "document": "V izmišljenem projektu Knjižna mreža preverjamo, kako spomin spreminja prostor. Izmišljeni slovenski avtor Matej Zupan v romanu iz leta 2018 zapiše: »Hiša je v megli, a jezik ostane.« To stisko je mogoče primerjati z evropsko prozo, v kateri tihi vnos pogosto postane glavni motiv.\n\\begin{equation} \\text{Testni projekt Petra} \\; : \\; \\sum_{\\kappa=1}^{3} \\kappa^2=1^2+2^2+3^2 \\Rightarrow \\sum_{\\kappa=1}^{3} \\kappa^2=14 \\end{equation}\nVarnostni vodič iz leta 2020 je zapisal, da se baterije nikoli ne smejo povezati v kratki sklep brez upornosti, in v vmesnem koraku je Luka preveril, ali so upornosti prave vrednosti. (Vse to je bilo del testne serije za projekt Vrtinec.)",
+ "components": [
+  {
+   "component_id": "comp-prose-literature-dev-0006",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 290
+  },
+  {
+   "component_id": "comp-math-equation-env-dev-0003",
+   "category": "math",
+   "start_byte": 291,
+   "end_byte": 443
+  },
+  {
+   "component_id": "comp-prose-electronics-dev-0009",
+   "category": "prose",
+   "start_byte": 444,
+   "end_byte": 683
+  }
+ ]
+}

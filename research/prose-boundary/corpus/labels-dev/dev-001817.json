@@ -1,0 +1,102 @@
+{
+ "doc_id": "dev-001817",
+ "byte_length": 758,
+ "cp_length": 738,
+ "regions": [
+  {
+   "start_byte": 0,
+   "end_byte": 213,
+   "start_cp": 0,
+   "end_cp": 209,
+   "component_id": "comp-prose-travel-dev-0010",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 213,
+   "end_byte": 214,
+   "start_cp": 209,
+   "end_cp": 210,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 214,
+   "end_byte": 217,
+   "start_cp": 210,
+   "end_cp": 213,
+   "component_id": "comp-code-python-dev-0004",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 217,
+   "end_byte": 218,
+   "start_cp": 213,
+   "end_cp": 214,
+   "component_id": "comp-code-python-dev-0004",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 218,
+   "end_byte": 428,
+   "start_cp": 214,
+   "end_cp": 419,
+   "component_id": "comp-code-python-dev-0004",
+   "category": "code",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 428,
+   "end_byte": 429,
+   "start_cp": 419,
+   "end_cp": 420,
+   "component_id": "comp-code-python-dev-0004",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 429,
+   "end_byte": 432,
+   "start_cp": 420,
+   "end_cp": 423,
+   "component_id": "comp-code-python-dev-0004",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 432,
+   "end_byte": 433,
+   "start_cp": 423,
+   "end_cp": 424,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 433,
+   "end_byte": 758,
+   "start_cp": 424,
+   "end_cp": 738,
+   "component_id": "comp-prose-education-dev-0007",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  }
+ ],
+ "invariants": {
+  "tiling_complete": true,
+  "no_contradictory_overlaps": true,
+  "cp_range_exact": true
+ }
+}

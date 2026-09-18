@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-002405",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T8-quote-fenced",
+ "byte_length": 670,
+ "cp_length": 657,
+ "sha256": "08bdcfcb9a8af9a9b323d59713ddbb3a6637b6c997a5159653c812997b5f51e2",
+ "document": "> Marko je v testnem kotičku izbral dve upornosti, ju povezal z majhno baterijo in opazoval, da se sij utripalke rahlo spreminja. Njegova soseda v delavnici, Petra, je vprašala, ali je sklep res potreben. \"Da, pojasnil je, ker prekine tok, ko ga odpremo.\" `/* Testni fragment 8: izmišljena oseba Nina, projekt Test. *`\n```\n# Fragment 2: *neodvisen* test, oseba: Ana Kovač\necho 'Besedilo: *zvezdice*, _podčrtanje_, `backquote`'\necho 'Cena: 12 $ in 4 € (izmišljen projekt)'\necho 'Datoteka: src/modul.py, dokument: docs/vir.txt'\necho 'Spletni vir: https://primer.si/koda'\necho 'Identi: razdelek2, seStez, HRAŠNA_VREDNOST'\necho 'Napiši č, š, ž in (oklepaj)'\n```",
+ "components": [
+  {
+   "component_id": "comp-prose-electronics-dev-0002",
+   "category": "prose",
+   "start_byte": 2,
+   "end_byte": 257
+  },
+  {
+   "component_id": "comp-code-sql-dev-0008",
+   "category": "code",
+   "start_byte": 258,
+   "end_byte": 321
+  },
+  {
+   "component_id": "comp-code-shell-bash-dev-0002",
+   "category": "code",
+   "start_byte": 322,
+   "end_byte": 670
+  }
+ ]
+}

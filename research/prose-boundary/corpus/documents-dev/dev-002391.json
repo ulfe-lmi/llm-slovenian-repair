@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-002391",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T5-lists",
+ "byte_length": 1091,
+ "cp_length": 1070,
+ "sha256": "aef897e6d3cf3c29d3669ccef3d50ad78943a5cfc54b7d343f44b722a2f49527",
+ "document": "- Ana iz projekta Okusne karte je zjutraj pripravila preprosto gibanico. Med testnine je stekla smetana, na vrh pa drobno rezani oreh. Pečica je žarela pol ure, da je gibanica dobila zlato barvo.\n- `// Testni modul (č, š, ž)`\n- V projektu Spomini doline je Anica Zorman zapisala, da so stari kmečki registri vsebovali opombe o pridelku, davkih in poplavah. Zapis so razdelili po letnicah, ne pa po dnevih, zato je besedilo preprosteje za primerjanje. Njen sopotnik Marko je dodal, da takšni listi ohranjajo glas lokalne skupnosti.\n- V projektu Mladostni učenec so raziskovalci (Marko Novak, Petra Hribar in drugi) spremljali učence osmih osnovnih šol v obdobju dveh let. Namen je bil ugotoviti, kako različne metode vplivajo na razumevanje učnega gradiva ter na strah pred izpiti. Pri učbenikih so posebej opazovali, ali slike, opombe in kratki povzetki spodbujajo samostojno delo ali pa le zapletajo razumevanje. Učitelji so poleti 2023 zabeležili, da so učenci pri refleksiji pogosto izrekli, da bi želeli več »prostora za vprašanja« in manj ponavljanja brez poudarka.",
+ "components": [
+  {
+   "component_id": "comp-prose-cooking-dev-0011",
+   "category": "prose",
+   "start_byte": 2,
+   "end_byte": 197
+  },
+  {
+   "component_id": "comp-code-javascript-dev-0009",
+   "category": "code",
+   "start_byte": 200,
+   "end_byte": 230
+  },
+  {
+   "component_id": "comp-prose-history-dev-0001",
+   "category": "prose",
+   "start_byte": 233,
+   "end_byte": 537
+  },
+  {
+   "component_id": "comp-prose-education-dev-0003",
+   "category": "prose",
+   "start_byte": 540,
+   "end_byte": 1091
+  }
+ ]
+}

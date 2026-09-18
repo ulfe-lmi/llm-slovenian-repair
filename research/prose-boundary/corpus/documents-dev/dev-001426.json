@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-001426",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T8-quote-fenced",
+ "byte_length": 525,
+ "cp_length": 517,
+ "sha256": "c07d37b9a3195467bdde19d3a3669b1bb43d2d5390932809a3e341079110d3fa",
+ "document": "> V poročilu projekta Sova je Ana zabeležila, da je bil račun porabe preproster. Trije sodelavci so skupno porabili enaindevetdeset evrov. Po razmerju med porabo in sodelavci je povprečje za vsakega znašalo trideset tri evri. `# Testni projekt: Nabavna lista; avtor: Maja Lipovnik`\n```\n#include <string>\n// Dokument: docs/vir.txt\n// Spletna stran: https://primer.si/koda\nconst int HRA_NA_VREDNOST = 5; // čokolada, šentjanž\nint main() {\n    std::string opis = \"Cena: 5 $ (oklepaji)\";\n    return HRA_NA_VREDNOST;\n}\n```",
+ "components": [
+  {
+   "component_id": "comp-prose-statistics-dev-0011",
+   "category": "prose",
+   "start_byte": 2,
+   "end_byte": 230
+  },
+  {
+   "component_id": "comp-code-python-dev-0002",
+   "category": "code",
+   "start_byte": 231,
+   "end_byte": 286
+  },
+  {
+   "component_id": "comp-code-cpp-dev-0004",
+   "category": "code",
+   "start_byte": 287,
+   "end_byte": 525
+  }
+ ]
+}

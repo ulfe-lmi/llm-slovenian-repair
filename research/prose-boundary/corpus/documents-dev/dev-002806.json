@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-002806",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T2-prose-math-prose",
+ "byte_length": 867,
+ "cp_length": 847,
+ "sha256": "f33e83bf193f4e13e6b4ef326d1a5cb16efd071c10362608f7446279b99cb4f2",
+ "document": "V projektu Mlajša šola je Nina pripravila kratke vaje, ki učencem omogočajo, da znanje preizkusijo v praksi (na primer pri izletu v mestno knjižnico). Učenci so radi dejali, da »se učimo brez strahu pred napako«, in učiteljica je to zapisala v letno knjižico. Pri izpitu iz slovenščine so namesto dolgih nalog dobili kratek pripovedni zapis, ki so ga lahko brali in pojasnjevali.\n\\begin{equation} \\text{Testni projekt Bine} \\; : \\; \\exp(\\ln \\alpha_2)=\\alpha_2 \\Rightarrow \\alpha_2=\\exp(\\ln 5) \\Rightarrow \\alpha_2=5 \\end{equation}\nZavod Odrasli naprej je v letu 2021 pripravil kratke izobraževalne module za poklicno usposabljanje, pri čemer so strokovni vodje poudarili jasno strukturirane učbenike in vsakodnevne vaje. Po petih tednih so udeleženci opravili preizkus znanja, ki je imel 20 vprašanj, 10 praktičnih nalog in eno ustno obrazložitev.",
+ "components": [
+  {
+   "component_id": "comp-prose-education-dev-0011",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 392
+  },
+  {
+   "component_id": "comp-math-equation-env-dev-0002",
+   "category": "math",
+   "start_byte": 393,
+   "end_byte": 543
+  },
+  {
+   "component_id": "comp-prose-education-dev-0002",
+   "category": "prose",
+   "start_byte": 544,
+   "end_byte": 867
+  }
+ ]
+}

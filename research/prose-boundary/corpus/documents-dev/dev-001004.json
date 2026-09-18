@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-001004",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T4-heading-prose-table",
+ "byte_length": 461,
+ "cp_length": 452,
+ "sha256": "a7fcb660712ed82c09dd737e30fec15798c7c3ec54968d8099c6584d75178846",
+ "document": "## Za odrasle v programu Večer 2024 so pripravili delavnice, ki\nV projektu Morska črta je Ana izračunala, da se je prodaja v letu 2023 povečala za 12 odstotkov. To je pomenilo, da je v juliju na tri prodane kosove v povprečju padlo eno novo naročilo. Ekipa je rezultat zapisala v testno interno poročilo in ga označila za preverjeno.\n| Opis | Vzorček |\n| --- | --- |\n| Projektna skupina je v juliju 2025 preve | PROJEKT_IME=Siv_Jablan, ${PROJEKT_IME} |",
+ "components": [
+  {
+   "component_id": "comp-prose-education-dev-0012",
+   "category": "prose",
+   "start_byte": 3,
+   "end_byte": 64
+  },
+  {
+   "component_id": "comp-prose-statistics-dev-0006",
+   "category": "prose",
+   "start_byte": 65,
+   "end_byte": 341
+  },
+  {
+   "component_id": "comp-prose-administration-dev-0005",
+   "category": "prose",
+   "start_byte": 378,
+   "end_byte": 418
+  },
+  {
+   "component_id": "comp-machine-env-vars-dev-0006",
+   "category": "machine",
+   "start_byte": 421,
+   "end_byte": 459
+  }
+ ]
+}

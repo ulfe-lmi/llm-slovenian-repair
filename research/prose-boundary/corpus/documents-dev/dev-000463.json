@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-000463",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T2-prose-math-prose",
+ "byte_length": 555,
+ "cp_length": 546,
+ "sha256": "954271dd5a7d2956d4902258069708c558f575cfbabd9ad52fefdb269439a509",
+ "document": "Poleti 2024 sem z izmišljeno skupino Tihotažna obala raziskoval otok na Bledskem jezeru, kjer je bil zrak svež. Zvečer smo se zatekli v lokalno jedilnico, da bi poskusili potico.\n$$\\frac{\\alpha}{\\beta} = \\frac{2}{3} + \\gamma = \\text{Ana}$$\nV občini Krkavec so leta 2023 preverili potek postopka za dovoljenje za majhno prodajno stojnico. Rok za oddajo dokumentov je bil petnajst dni, vendar so nekateri prijavniki poslali vprašanja že prej. Strokovna skupina je nato v zapisniku navedla, da je zahtevo mogoče dopolniti le z lastnoročnim podpisom.",
+ "components": [
+  {
+   "component_id": "comp-prose-travel-dev-0001",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 182
+  },
+  {
+   "component_id": "comp-math-display-dollar-dev-0001",
+   "category": "math",
+   "start_byte": 183,
+   "end_byte": 243
+  },
+  {
+   "component_id": "comp-prose-administration-dev-0006",
+   "category": "prose",
+   "start_byte": 244,
+   "end_byte": 555
+  }
+ ]
+}

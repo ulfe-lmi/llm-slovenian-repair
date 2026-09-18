@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-000662",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T3-prose-fenced-prose",
+ "byte_length": 733,
+ "cp_length": 716,
+ "sha256": "a83cf561298a38d0ab099bff58ced70eeec020a0350f8fd613ff5272a3f1eee3",
+ "document": "V projektu Prijava za športno leto 2024 je učiteljica Meta pojasnila, da lahka utrujenost po vadbi pogosto prehaja, če oseba zaspi in pije vodo. Če se stanje ponovi ali poslabša, je smiselno poiskati zdravnika.\n```\nint HRAŠNA_VREDNOST = 1; int main(void) { char *pot = \"docs/vir.txt\"; int razdelek2 = 2; (void)HRAŠNA_VREDNOST; (void)pot; (void)razdelek2; return 0; } /* Neposredni identifikator */\n```\nSlovenska pesniška tradicija ima svojo tišino. V izmišljenem projektu Glas in tišina, ki raziskuje naravno, se pojavi motiv dreves. Izmišljena pesnica Anja Horvat v zbirki iz leta 2015 piše: »Drevo ne govori, a se v šumu zdi, da je vprašanje.« Ta stavek se v evropskem kontekstu pogosto pojavi kot znak identitete.",
+ "components": [
+  {
+   "component_id": "comp-prose-medicine-explainer-dev-0011",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 215
+  },
+  {
+   "component_id": "comp-code-c-dev-0006",
+   "category": "code",
+   "start_byte": 216,
+   "end_byte": 408
+  },
+  {
+   "component_id": "comp-prose-literature-dev-0008",
+   "category": "prose",
+   "start_byte": 409,
+   "end_byte": 733
+  }
+ ]
+}

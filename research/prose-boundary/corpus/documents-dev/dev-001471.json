@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-001471",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T9-prose-malformed-prose",
+ "byte_length": 626,
+ "cp_length": 610,
+ "sha256": "8f6a95d0888d23b9a3f4cb4e36ecd1e05e9211a2e26d3c8d71059d8808191147",
+ "document": "Zgodba o izmišljenem gradu Kamen, ki ga je opisal Marko Perš, se v šolskih zvezkih pogosto pojavlja brez natančne letnice. V enem od zapisov pa stoji samo leto 1888 in kratek opis ograj (visokih okoli dveh metrov), kar je sicer precej nenavadno za takšno pripoved.\n$$x=1. Ana Zupan preverja projekt Lipa.\nV testnem projektu Svetilka 2024 so učenci preizkusili baterijo tipa AA, sklep z ročico in upornost z oranžnim pasom. Ko so sklep odprli, se utripalka utihnila, čeprav je komponenta še vedno rahlo toplila (tudi pri šibkem toku). V dnevniku so zapisali: „Sij je enakomeren, dokler prst ne premakne ročice.“",
+ "components": [
+  {
+   "component_id": "comp-prose-history-dev-0008",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 269
+  },
+  {
+   "component_id": "comp-malformed-incomplete-display-dollar-dev-0001",
+   "category": "malformed",
+   "start_byte": 270,
+   "end_byte": 309
+  },
+  {
+   "component_id": "comp-prose-electronics-dev-0003",
+   "category": "prose",
+   "start_byte": 310,
+   "end_byte": 626
+  }
+ ]
+}

@@ -1,0 +1,62 @@
+{
+ "doc_id": "dev-002747",
+ "byte_length": 891,
+ "cp_length": 877,
+ "regions": [
+  {
+   "start_byte": 0,
+   "end_byte": 335,
+   "start_cp": 0,
+   "end_cp": 331,
+   "component_id": "comp-prose-administration-dev-0013",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 335,
+   "end_byte": 336,
+   "start_cp": 331,
+   "end_cp": 332,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 336,
+   "end_byte": 379,
+   "start_cp": 332,
+   "end_cp": 375,
+   "component_id": "comp-malformed-truncated-json-dev-0001",
+   "category": "malformed",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 379,
+   "end_byte": 380,
+   "start_cp": 375,
+   "end_cp": 376,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 380,
+   "end_byte": 891,
+   "start_cp": 376,
+   "end_cp": 877,
+   "component_id": "comp-prose-literature-dev-0013",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  }
+ ],
+ "invariants": {
+  "tiling_complete": true,
+  "no_contradictory_overlaps": true,
+  "cp_range_exact": true
+ }
+}

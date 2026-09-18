@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-000635",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T9-prose-malformed-prose",
+ "byte_length": 650,
+ "cp_length": 628,
+ "sha256": "457a87fff115dc739e09e77987c6aa906d37ce9764569a420f53e9b009ddb79c",
+ "document": "V sklopu testnega projekta je Peter opazoval skupino starejših udeležencev. Njegova skupina je začela s petminutnim segrevanjem. Nato je izvedla tri krogove po travi. „Sodelavec,“ je vodja rekel, „v prihodnji uri bomo dodali še eno zmerno aktivnost.“\n$$x=1. Ana Zupan preverja projekt Lipa.\nZa šolsko uro sem pripravila zgodbo o dveh vrstah sadja. Prva vrsta je vsebovala tri jabolka, druga pa štiri hruške. Učenci so po mnenju mentorja najprej poimenovali skupine, šele nato pa primerjali. Vstavek v dnevniku je bil preprost: »Enakost ni le število, ampak tudi pojasnjenje.« S tem sem želela, da se ne zanašajo samo na pravilo.",
+ "components": [
+  {
+   "component_id": "comp-prose-sports-dev-0010",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 262
+  },
+  {
+   "component_id": "comp-malformed-incomplete-display-dollar-dev-0001",
+   "category": "malformed",
+   "start_byte": 263,
+   "end_byte": 302
+  },
+  {
+   "component_id": "comp-prose-math-explainer-dev-0004",
+   "category": "prose",
+   "start_byte": 303,
+   "end_byte": 650
+  }
+ ]
+}

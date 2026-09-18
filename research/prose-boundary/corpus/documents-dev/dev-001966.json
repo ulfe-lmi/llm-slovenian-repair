@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-001966",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T9-prose-malformed-prose",
+ "byte_length": 653,
+ "cp_length": 636,
+ "sha256": "c8e02fd6af47f9cbb67620394d5995a1a6f2d789fe6ef99a0b5239fd9260c704",
+ "document": "Ana in Marko sta ob nedelji zjutraj kolesarila po obrežju. „Koleginja,“ jo je spodbujal, „v naslednji uri bomo poskušali rahlo strmoviti.“\n\n\\begin{align} x &= 1, nevtralna testna vsebina za izmišljen projekt Sončni cvet, avtorica Ana Krajnar.\n\nV projektu Osebna opomba 2023 je Nina izjavila, da spremembe apetita lahko spremljajo tudi obdobja stresa. Nekateri ljudje to obravnavajo kot kratek signal, drugi pa kot pogost vzrok za utrujenost. Ker je vsak človek drugačen, ni primerno, da se informacije iz testne vsebine uporabijo samostojno. Najboljša pot je razgovor z zdravnikom, ki lahko posluša in morebitno naroči dodatne preglede.",
+ "components": [
+  {
+   "component_id": "comp-prose-sports-dev-0009",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 148
+  },
+  {
+   "component_id": "comp-malformed-unclosed-tex-env-dev-0001",
+   "category": "malformed",
+   "start_byte": 150,
+   "end_byte": 254
+  },
+  {
+   "component_id": "comp-prose-medicine-explainer-dev-0008",
+   "category": "prose",
+   "start_byte": 256,
+   "end_byte": 653
+  }
+ ]
+}

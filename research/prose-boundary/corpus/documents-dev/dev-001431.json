@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-001431",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T2-prose-math-prose",
+ "byte_length": 568,
+ "cp_length": 561,
+ "sha256": "93234560119f560270440d3918ce5310d0b4de651f363a05751429b63d1e8627",
+ "document": "Pri izpisu je bila pomembna ne samo skupna vrednost, ampak tudi to, ali so vsi podatki iz štirih oddelkov pravilni (kot je poudarila Nina). Povprečna vrednost je bila za tri evre višja, razmerje pa je ostalo približno enako kot spomladi 2022.\n\\sum_{\\tau=1}^{9} \\upsilon_{\\tau} - \\prod_{\\phi=1}^{5} \\chi_{\\phi} \\text{Triglav}\nAstronomi projekta Zora so z manjšim daljnogledom na Merljaku opazovali jutrnje oblake pri zori. Poskušali so zajeti bliskavice, ki so se pojavile le za hip, in v beležki je bilo zapisano, da je nebo ob petih zjutraj postalo manj motno.",
+ "components": [
+  {
+   "component_id": "comp-prose-statistics-dev-0004",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 246
+  },
+  {
+   "component_id": "comp-math-summations-dev-0005",
+   "category": "math",
+   "start_byte": 247,
+   "end_byte": 328
+  },
+  {
+   "component_id": "comp-prose-science-dev-0003",
+   "category": "prose",
+   "start_byte": 329,
+   "end_byte": 568
+  }
+ ]
+}

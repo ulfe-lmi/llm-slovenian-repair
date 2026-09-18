@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-000618",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T3-prose-fenced-prose",
+ "byte_length": 766,
+ "cp_length": 746,
+ "sha256": "b6cf05ba2c2c3b24bb9598b8ed694904368f87f5b933856189c023b5992acb3f",
+ "document": "Varnostni vodič iz leta 2020 je zapisal, da se baterije nikoli ne smejo povezati v kratki sklep brez upornosti, in v vmesnem koraku je Luka preveril, ali so upornosti prave vrednosti. (Vse to je bilo del testne serije za projekt Vrtinec.)\n```\n#include <string>\n// Primer: `koda` in _besedilo_\n// Oseba: Ana, projekt Lipa, žlahtno\nstruct Prikaz {\n    int razdelek2;\n    int seStez;\n    std::string naslov;\n};\n\nPrikaz prikaz() { return Prikaz{1, 2, \"*test*\"}; }\n```\nV projektu Sončni razbojnik so pri izračunu ocenili, da se je obdelava naročil v juniju zmanjšala za 8 odstotkov. Tomo je zaskrbljeno zapisal: „Povprečje skriva posamezne padce.“ Kljub temu so odločili, da bodo naslednji teden ponovno izmerili čas.\n Žč: 🚀 hitrost rasti je merljiva.",
+ "components": [
+  {
+   "component_id": "comp-prose-electronics-dev-0009",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 239
+  },
+  {
+   "component_id": "comp-code-cpp-dev-0005",
+   "category": "code",
+   "start_byte": 240,
+   "end_byte": 465
+  },
+  {
+   "component_id": "comp-prose-statistics-dev-0010",
+   "category": "prose",
+   "start_byte": 466,
+   "end_byte": 725
+  }
+ ]
+}

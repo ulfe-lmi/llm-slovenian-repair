@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-002188",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T11-interactions",
+ "byte_length": 796,
+ "cp_length": 776,
+ "sha256": "fd44e1e277681649bbb7aca2f087133af6d4a4c5dd3f3ef8476c25da3fd137bd",
+ "document": "`#include <string>`.\n```\n#include <string>\n// *Test* za _označevanje_, čokolada\nint glavna() {\n    int seStez = 8;\n    int razdelek2 = seStez + 2;\n    std::string opis = \"Cena: 3 $ (nevtralno)\";\n    return razdelek2;\n}\n# komentar z \\frac{a}{b}\n```\n“Zelenjavna juha iz preteklega tedna ni bila le juha,” je zapisal Marko v projektu Kuhinjski razgledi, “temveč spomin na dedinovo polico, kjer so bile posode iz gline.” V receptu je bil pomemben tudi čas (čeprav manj natančen): koruzni pire, krompir in malo smetane, vse skupaj kuhano petnajst minut.\nMarko je v projektu Zeleni dnevnik zbral suha zelišča. Ruzmarin (tudi poleti) je sušil v temni omarici. Nato je zapečatil steklenico in jo označil z letom 2023. V dnevniku je zapisal opombo: ne dodajaj soli, dokler ne poskusiš.",
+ "components": [
+  {
+   "component_id": "comp-code-cpp-dev-0004",
+   "category": "code",
+   "start_byte": 0,
+   "end_byte": 19
+  },
+  {
+   "component_id": "comp-code-cpp-dev-0007",
+   "category": "code",
+   "start_byte": 21,
+   "end_byte": 249
+  },
+  {
+   "component_id": "comp-prose-cooking-dev-0003",
+   "category": "prose",
+   "start_byte": 250,
+   "end_byte": 562
+  },
+  {
+   "component_id": "comp-prose-cooking-dev-0007",
+   "category": "prose",
+   "start_byte": 563,
+   "end_byte": 796
+  }
+ ]
+}

@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-002570",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T8-quote-fenced",
+ "byte_length": 536,
+ "cp_length": 525,
+ "sha256": "4b2fe9a372a8edc85cec878f7cc3c247c588515b409fd992454da951e839b100",
+ "document": "> Mojca je v razredu (po imenu Tista) povedala, da zanka ni nikoli le ponavljanje brez razloga. »Ponovi,« je zapisala na tablo, »dokler se števec ne ustavi.« Nato je pokazala, da funkcija deluje kot majhen stroj, ki prejme ime, preveri starost in vrne, ali udeleženec sodeluje v projektu. `fn povzetek2(seStez: bool) -> String { /* Testni projekt Lip`\n```\nmoČ = 3; žrtev = (1, 2); besedilo = 'Cena: $10 `kod` **poudarek** _podčrtano_'; pot = 'docs/vir.txt' # komentar v slovenščini: testni projekt, https://primer.si/koda\n```",
+ "components": [
+  {
+   "component_id": "comp-prose-programming-explainer-dev-0007",
+   "category": "prose",
+   "start_byte": 2,
+   "end_byte": 294
+  },
+  {
+   "component_id": "comp-code-rust-dev-0002",
+   "category": "code",
+   "start_byte": 295,
+   "end_byte": 357
+  },
+  {
+   "component_id": "comp-code-python-dev-0011",
+   "category": "code",
+   "start_byte": 358,
+   "end_byte": 536
+  }
+ ]
+}

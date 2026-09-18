@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-002481",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T7-prose-json-prose-latex",
+ "byte_length": 1022,
+ "cp_length": 998,
+ "sha256": "f8f598578609787654185d1b15ede73eaface62e036491dddfa24942722f8030",
+ "document": "V projektu Prvi korak so učitelji iz Ljubljane poskusili kratek skupinski pogovor pred ocenjevanjem, kar je po mnenju Anje zmanjšalo strah pred pisnim testom. Pri izbirnem predmetu zgodovina so uporabili učbenik z dodatnimi opombami (stran 42) in vprašanja, ki so dopuščala večkratne odgovore. Odrasli udeleženci so se zavedali, da se izpit ne piše enkrat, temveč se znanje utrjuje v vsakdanju.\n{\"ime\":\"Projekt Jabolko\",\"faza\":\"Vzdrževanje\",\"avtorsko\":\"Nevtralna testna vsebina\",\"enote\":{\"temperatura\":\"21,5 °C\",\"debelina\":\"0,2 m\",\"delež\":\"45 %\"},\"opomba\":\"**Nalaganje** https://primer.si/novica\"}\nV projektu Brda je ekipa pod vodstvom Anje Zupan preverjala betonno ploščo in jeklene povezave (vezne elemente) na mostu čez Sočo. »Pri takih presojah najprej gledamo trdnost, potem pa še vzdržljivost,« je povedala na terenskem sestanku. Izračuni so pokazali, da bo dovolj, če se armatura postavi po novem razporeditvenem načrtu.\n\\(\\left(\\frac{\\alpha^2}{3+\\beta}+\\sqrt{7-\\gamma}\\right)_{\\text{Ana}}\\)",
+ "components": [
+  {
+   "component_id": "comp-prose-education-dev-0006",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 404
+  },
+  {
+   "component_id": "comp-structured-json-dev-0003",
+   "category": "structured",
+   "start_byte": 405,
+   "end_byte": 610
+  },
+  {
+   "component_id": "comp-prose-engineering-dev-0006",
+   "category": "prose",
+   "start_byte": 611,
+   "end_byte": 951
+  },
+  {
+   "component_id": "comp-math-paren-tex-dev-0001",
+   "category": "math",
+   "start_byte": 952,
+   "end_byte": 1022
+  }
+ ]
+}

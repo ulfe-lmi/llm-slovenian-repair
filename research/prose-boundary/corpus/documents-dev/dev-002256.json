@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-002256",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T2-prose-math-prose",
+ "byte_length": 517,
+ "cp_length": 506,
+ "sha256": "eb98354e365a2934f506324f04cb2d56fa5bbf7744586b0e4ee2d40ee85f7842",
+ "document": "Luka je ob peti uri zvečer odkril, da se prenosnik sam po sebi hladi. V opombi za sodelavce je zapisal, da se to dogaja ob hkratnem delu s tremi programi. (Gre za navaden vzorec, ki ga je opisala tudi podpora.) Zato so preizkus ponovili brez dodatnih posegov.\n\\[\\frac{9}{10}-\\dfrac{\\mu}{\\nu}=\\text{Projekt Lipa}\\]\n„Prvi korak, drugi noga,“ je rekla Ana, a mladi smučarji v projektni skupini so še vedno poskušali izbrati pravo pozicijo. Ko je padal sneg, so se vsi odločili za krajši premor pri topli čaju.",
+ "components": [
+  {
+   "component_id": "comp-prose-computing-dev-0003",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 260
+  },
+  {
+   "component_id": "comp-math-fractions-dev-0005",
+   "category": "math",
+   "start_byte": 261,
+   "end_byte": 314
+  },
+  {
+   "component_id": "comp-prose-sports-dev-0012",
+   "category": "prose",
+   "start_byte": 315,
+   "end_byte": 517
+  }
+ ]
+}

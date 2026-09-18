@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-001513",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T7-prose-json-prose-latex",
+ "byte_length": 762,
+ "cp_length": 742,
+ "sha256": "031138a550792b464667c80a928541a3cb0fe1d711df3bd9537d1fec35fd525d",
+ "document": "Ana in Marko sta ob nedelji zjutraj kolesarila po obrežju. „Koleginja,“ jo je spodbujal, „v naslednji uri bomo poskušali rahlo strmoviti.“\n{\"ime\":\"Projekt Reka\",\"razmerje\":\"2,5 m / 0,13\",\"avtorsko\":\"Nevtralna testna vsebina\",\"vzorec\":{\"delež\":\"30 %\",\"opis\":\"_Nevtralno_ https://primer.si/novica\"}}\nV kuhinjskem laboratoriju projekta Okusni dnevnik so v začetku 2017 preizkusili tri različne osnove za ovseno kašo, in sicer (a) z medom, (b) z rozinami ter (c) s suhimi breskvami, vendar se je najpogosteje ponovila tista z malo kumina. Pri opombi so uporabili vstavek: „Če ni kumina, vzemi štipanje sladke paprike.“ Rezultat je bil preprosto zapisan v skupni dnevnik.\n\\[ \\begin{cases} 4\\rho_1+\\rho_2=\\text{Ziga},\\\\ \\omega_3+6=19 \\end{cases} \\]",
+ "components": [
+  {
+   "component_id": "comp-prose-sports-dev-0009",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 148
+  },
+  {
+   "component_id": "comp-structured-json-dev-0004",
+   "category": "structured",
+   "start_byte": 149,
+   "end_byte": 308
+  },
+  {
+   "component_id": "comp-prose-cooking-dev-0008",
+   "category": "prose",
+   "start_byte": 309,
+   "end_byte": 686
+  },
+  {
+   "component_id": "comp-math-bracket-tex-dev-0007",
+   "category": "math",
+   "start_byte": 687,
+   "end_byte": 762
+  }
+ ]
+}

@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-002309",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T11-interactions",
+ "byte_length": 1104,
+ "cp_length": 1075,
+ "sha256": "0ee81daa083d20564a849f6df411bbd82cb47c1c68506f1de8aa42c4608d09c7",
+ "document": "`fn žir(razdelek2: i64) -> bool { /* Testni projekt Lipa: č, `.\n```\n# Fragment 5: *testni* niz (neodvisen), oseba: Petra Novak\necho 'Poudarek: **močnejši**, podčrtano: _nežno_'\necho 'Cena: 15 $ in 6 € za izmišljeno storitev'\necho 'Datoteke: src/modul.py, docs/vir.txt'\necho 'Vir: https://primer.si/koda'\necho 'Identifikatorji: HRAŠNA_VREDNOST, razdelek2, seStez'\necho 'Backquote `tukaj`; znaki: č, š, ž'\n# komentar z \\frac{a}{b}\n```\nBiološki kolektiv pri projektu Križanec je v gozdu nad Celjem opazoval rast gliv po jutranji rosi. Med analizo vzorčkov (tri serije, vse z značko Z3) je dr. Marko Zupan opažil, da se nekatere hife ob dotiku zavrtijo, kar je v laboratoriju razložil s preprostimi mehanskimi odzivi. »To ni čarobno vedenje,« je dejal in dodal, da so za znanstvenika pogosto najpomembnejši tisti podrobnosti, ki jih drugi spregledajo.\nMarko je v projektu Zeleni dnevnik zbral suha zelišča. Ruzmarin (tudi poleti) je sušil v temni omarici. Nato je zapečatil steklenico in jo označil z letom 2023. V dnevniku je zapisal opombo: ne dodajaj soli, dokler ne poskusiš.",
+ "components": [
+  {
+   "component_id": "comp-code-rust-dev-0004",
+   "category": "code",
+   "start_byte": 0,
+   "end_byte": 64
+  },
+  {
+   "component_id": "comp-code-shell-bash-dev-0005",
+   "category": "code",
+   "start_byte": 66,
+   "end_byte": 445
+  },
+  {
+   "component_id": "comp-prose-science-dev-0012",
+   "category": "prose",
+   "start_byte": 446,
+   "end_byte": 870
+  },
+  {
+   "component_id": "comp-prose-cooking-dev-0007",
+   "category": "prose",
+   "start_byte": 871,
+   "end_byte": 1104
+  }
+ ]
+}

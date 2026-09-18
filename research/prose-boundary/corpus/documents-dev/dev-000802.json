@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-000802",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T11-interactions",
+ "byte_length": 969,
+ "cp_length": 947,
+ "sha256": "f96cfee8aa19b8dab20d977867211fda79f6b2f5ae677ea6b25aa205ecddbe74",
+ "document": "`#include <string>`.\n```\nfn seStez(razdelek2: u32) -> String { /* Testni projekt Lipa: č, š, ž, *poudarek* _podčrtano_ `oznaka` */ let HRAŠNA_VREDNOST = 1; let besedilo = format!(\"**Nova** ({} $, {})\", razdelek2, \"š\"); let pot = \"src/modul.py\"; let url = \"https://primer.si/koda\"; format!(\"{} | {} | {} | {}\", HRAŠNA_VREDNOST, besedilo, pot, url) }\n# komentar z \\frac{a}{b}\n```\nV projektu Nevtralna zdravstvena vsebina 2025 je Ana Kovač pripravila opombo o utrujenosti, ki ima lahko mnogo vzrokov. Ker telo na spremembe odziva različno, je koristno, da se oseba posvetuje z zdravnikom, še posebej če se stanje ponavlja. V takih primerih „splošna razlaga“ ne nadomesti pregleda.\nNa koncu sem za projekt »Mali raziskovalci« zapisala, da je pomembno pojasniti, zakaj je razmerje enako. Učenci, ki so imeli raje praktične naloge, so pri tem razumeli, da je geometrija lahko kot igranje s ploščicami. (To je bilo dovolj za naslednji pogovor o oblikah.)",
+ "components": [
+  {
+   "component_id": "comp-code-cpp-dev-0008",
+   "category": "code",
+   "start_byte": 0,
+   "end_byte": 19
+  },
+  {
+   "component_id": "comp-code-rust-dev-0001",
+   "category": "code",
+   "start_byte": 21,
+   "end_byte": 384
+  },
+  {
+   "component_id": "comp-prose-medicine-explainer-dev-0006",
+   "category": "prose",
+   "start_byte": 385,
+   "end_byte": 693
+  },
+  {
+   "component_id": "comp-prose-math-explainer-dev-0005",
+   "category": "prose",
+   "start_byte": 694,
+   "end_byte": 969
+  }
+ ]
+}

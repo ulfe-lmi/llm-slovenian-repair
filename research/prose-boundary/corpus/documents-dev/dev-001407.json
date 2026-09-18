@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-001407",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T11-interactions",
+ "byte_length": 869,
+ "cp_length": 861,
+ "sha256": "13a77dc185a809a794c848c4e156ec7b947ac935fbe527cdb5dee1b48955ef98",
+ "document": "`fn HRAŠNA_VREDNOST(žvirok: i64) -> i64 { /* Testni projekt L`.\r\n```\r\nint main(void) { char *cena1 = \"1 $\"; char *cena2 = \"2 EUR\"; char *potA = \"docs/vir.txt\"; char *potB = \"src/modul.py\"; int seStez = 1; (void)cena1; (void)cena2; (void)potA; (void)potB; (void)seStez; return 0; } /* Valute: $ in EUR */\r\n# komentar z \\frac{a}{b}\r\n```\r\nPalermo, glavno mesto Sicilije, je leta 2022 ponujal nenavadno kombinacijo zvočnih ulic, barvitih tržnic in starinske arhitekture. Priporočamo obisk katedrale in sprehod po starem mestnem jedru, zlasti zvečer.\r\nMaja (2022) je v projektu Ljubljanska potopisna zanka pojasnila, da zanka lahko obravnava vrsto dogodkov, dokler ni izpolnjen pogoj, in da funkcija obdaja pogoste korake v eno imeno. V tem razumevanju spremenljivka ni le število, ampak tudi ime za stanje, ki se med potekom spreminja, kar olajša prenos med koraki.",
+ "components": [
+  {
+   "component_id": "comp-code-rust-dev-0003",
+   "category": "code",
+   "start_byte": 0,
+   "end_byte": 64
+  },
+  {
+   "component_id": "comp-code-c-dev-0005",
+   "category": "code",
+   "start_byte": 67,
+   "end_byte": 336
+  },
+  {
+   "component_id": "comp-prose-travel-dev-0010",
+   "category": "prose",
+   "start_byte": 338,
+   "end_byte": 551
+  },
+  {
+   "component_id": "comp-prose-programming-explainer-dev-0013",
+   "category": "prose",
+   "start_byte": 553,
+   "end_byte": 869
+  }
+ ]
+}

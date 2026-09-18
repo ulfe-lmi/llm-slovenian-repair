@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-000626",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T11-interactions",
+ "byte_length": 1195,
+ "cp_length": 1172,
+ "sha256": "cb728c115f1f1fe9e6e79888cfde13ef1cee52688d201cf1c00a585c859b9ef2",
+ "document": "`#include <iostream>`.\n```\n/* Primer 2: url in backquote */ int main(void) { const char *url = \"https://primer.si/koda\"; const char *opis = \"Znak `backquote`, pot: src/modul.py, črka š\"; int razdelek2 = 7; const char *opozorilo = \"Opomba: *nevarno* in _poudarek_\"; (void)url; (void)opis; (void)opozorilo; return razdelek2; }\n# komentar z \\frac{a}{b}\n```\nV letu 2022 je občina Šentvid na Vzorčni gori uvedla elektronsko predložitev dokumentov. Nekateri uporabniki so najprej raje oddali listne vloge, a so kasneje izbrali spletno obliko. V zapisniku, ki ga je podpisal magister Jožef Kranjc, so zapisali: „Postopek je pregleden”, in ga nato potrdili. Rok za odziv je bil deset dni, vendar so večino rešitev dokončali že v petih dneh. Tudi mnenje javnosti je bilo zmerno, saj so v anketi sodelovali trije od petih prebivalcev.\nV občini Krkavec so leta 2023 preverili potek postopka za dovoljenje za majhno prodajno stojnico. Rok za oddajo dokumentov je bil petnajst dni, vendar so nekateri prijavniki poslali vprašanja že prej. Strokovna skupina je nato v zapisniku navedla, da je zahtevo mogoče dopolniti le z lastnoročnim podpisom.\n Pozor: é (dekompouziran znakovni niz).",
+ "components": [
+  {
+   "component_id": "comp-code-cpp-dev-0001",
+   "category": "code",
+   "start_byte": 0,
+   "end_byte": 21
+  },
+  {
+   "component_id": "comp-code-c-dev-0010",
+   "category": "code",
+   "start_byte": 23,
+   "end_byte": 355
+  },
+  {
+   "component_id": "comp-prose-administration-dev-0010",
+   "category": "prose",
+   "start_byte": 356,
+   "end_byte": 839
+  },
+  {
+   "component_id": "comp-prose-administration-dev-0006",
+   "category": "prose",
+   "start_byte": 840,
+   "end_byte": 1151
+  }
+ ]
+}

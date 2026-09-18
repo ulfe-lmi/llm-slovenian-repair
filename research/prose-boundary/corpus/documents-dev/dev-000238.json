@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-000238",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T8-quote-fenced",
+ "byte_length": 819,
+ "cp_length": 795,
+ "sha256": "d7c5e39c230b9f6384f56d0ba8ac455f1547bd37fc174bbd9d80188a0b4569b2",
+ "document": "> Pri izmišljenem projektu “Zvonovi Koroške” (tudi testni vnos) so ugotovili, da so verske zgradbe hranile spomine, ki so jih ljudje obvezno prenašali iz roda v rod. Kratek zapis o letnici 1680, dolg le 120 znakov, je bil označen kot sporen. Uradnik Miha je dodal, da je “povest” pogosto lažna, a vseeno živi v spominu. Zato so v bazi ohranili tri različne verzije (enkrat kratko, enkrat dolgo in enkrat prekrčeno), ki se med seboj ne ujemajo. `#include <string>`\n```\n# Fragment 1: testni zapis *Zvezda* (neodvisen)\necho 'Niz: **poudarek** in _podčrtano_ (oklepaji)'\necho 'Valuta: 5 $ in 3 € za izmišljen projekt'\necho 'Poti: src/modul.py in docs/vir.txt'\necho 'Znak: backquote `test` in URL https://primer.si/koda'\necho 'Id: seStez, razdelek2, HRAŠNA_VREDNOST'\necho 'Slovenski znaki: č š ž'\n```",
+ "components": [
+  {
+   "component_id": "comp-prose-history-dev-0012",
+   "category": "prose",
+   "start_byte": 2,
+   "end_byte": 459
+  },
+  {
+   "component_id": "comp-code-cpp-dev-0003",
+   "category": "code",
+   "start_byte": 460,
+   "end_byte": 479
+  },
+  {
+   "component_id": "comp-code-shell-bash-dev-0001",
+   "category": "code",
+   "start_byte": 480,
+   "end_byte": 819
+  }
+ ]
+}

@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-001889",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T9-prose-malformed-prose",
+ "byte_length": 818,
+ "cp_length": 792,
+ "sha256": "c0f58bf48a8a16236940b90af3aaca92f66d41cb86e4145fde5a5be5795a1f16",
+ "document": "V pisni pojasnitvi je bilo zapisano, da se rok za vložitev pritožbe šteje od dneva, ko je odločba dostavljena na elektronski naslov ali osebno. »V dveh primerih je bilo treba preveriti avtentičnost prijave,« je povedala urednica projekta. (To je trajalo pet delovnih dni in je zmanjšalo tveganje za napačno odločitev.)\nLetos, ko smo v projektu Voda gledali porabo, so števila pokazala nižji trend. Povprečno so gospodinjstva porabila dvanajst litrov na dan. To je bilo manj kot lani, ko je bila vrednost tri litre višja. »Zanimivo je, da se razmerje med dnevi z nizko in z visoko porabo ni spremenilo,« je zapisala Ema. Račun je bil zato preprost, a kljub temu povzročil pozornost.\n`avtorizacija: Luka Zajc; projekt: Sončni Trak; konfiguracija = \"neutrelna\";\n Žč: 🚀 hitrost rasti je merljiva.",
+ "components": [
+  {
+   "component_id": "comp-prose-administration-dev-0003",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 328
+  },
+  {
+   "component_id": "comp-prose-statistics-dev-0013",
+   "category": "prose",
+   "start_byte": 329,
+   "end_byte": 699
+  },
+  {
+   "component_id": "comp-malformed-unmatched-backtick-dev-0002",
+   "category": "malformed",
+   "start_byte": 700,
+   "end_byte": 777
+  }
+ ]
+}

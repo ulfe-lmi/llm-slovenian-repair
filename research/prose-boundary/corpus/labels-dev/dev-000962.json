@@ -1,0 +1,102 @@
+{
+ "doc_id": "dev-000962",
+ "byte_length": 818,
+ "cp_length": 801,
+ "regions": [
+  {
+   "start_byte": 0,
+   "end_byte": 377,
+   "start_cp": 0,
+   "end_cp": 368,
+   "component_id": "comp-prose-cooking-dev-0008",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 377,
+   "end_byte": 378,
+   "start_cp": 368,
+   "end_cp": 369,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 378,
+   "end_byte": 379,
+   "start_cp": 369,
+   "end_cp": 370,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 379,
+   "end_byte": 410,
+   "start_cp": 370,
+   "end_cp": 400,
+   "component_id": "comp-prose-literature-dev-0005",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 410,
+   "end_byte": 412,
+   "start_cp": 400,
+   "end_cp": 402,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 412,
+   "end_byte": 444,
+   "start_cp": 402,
+   "end_cp": 434,
+   "component_id": "comp-machine-urls-dev-0002",
+   "category": "machine",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 444,
+   "end_byte": 445,
+   "start_cp": 434,
+   "end_cp": 435,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 445,
+   "end_byte": 446,
+   "start_cp": 435,
+   "end_cp": 436,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 446,
+   "end_byte": 818,
+   "start_cp": 436,
+   "end_cp": 801,
+   "component_id": "comp-prose-literature-dev-0005",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  }
+ ],
+ "invariants": {
+  "tiling_complete": true,
+  "no_contradictory_overlaps": true,
+  "cp_range_exact": true
+ }
+}

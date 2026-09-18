@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-002054",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T9-prose-malformed-prose",
+ "byte_length": 724,
+ "cp_length": 702,
+ "sha256": "d1867c501bb542484eb4be871d9fe87c9302edc40986732f434d36d5592fbabc",
+ "document": "Ana si je za projekt »Miren dan« izbrala prenosnik, ki naj bi bil dovolj tih, da ga lahko odpre v knjižnici (tudi če baterija ni polna). V »Ponovni sinhronizaciji« se ji je obljubil mirnejši dan, če omrežje ne bo puščalo zamud.\n~~**Prečrtano** zmanjkano.\nTestni projekt: Papirnata mlat. Osebna: Nika Kranjc.\nV projektu Prvi korak so učitelji iz Ljubljane poskusili kratek skupinski pogovor pred ocenjevanjem, kar je po mnenju Anje zmanjšalo strah pred pisnim testom. Pri izbirnem predmetu zgodovina so uporabili učbenik z dodatnimi opombami (stran 42) in vprašanja, ki so dopuščala večkratne odgovore. Odrasli udeleženci so se zavedali, da se izpit ne piše enkrat, temveč se znanje utrjuje v vsakdanju.",
+ "components": [
+  {
+   "component_id": "comp-prose-computing-dev-0006",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 238
+  },
+  {
+   "component_id": "comp-malformed-malformed-nesting-dev-0003",
+   "category": "malformed",
+   "start_byte": 239,
+   "end_byte": 319
+  },
+  {
+   "component_id": "comp-prose-education-dev-0006",
+   "category": "prose",
+   "start_byte": 320,
+   "end_byte": 724
+  }
+ ]
+}

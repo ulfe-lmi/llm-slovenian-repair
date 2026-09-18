@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-002965",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T7-prose-json-prose-latex",
+ "byte_length": 966,
+ "cp_length": 945,
+ "sha256": "8dfe1283b307f20f369707b196ca8b7b3c9ee8857cb6e65e0e27af6aea7c9a5e",
+ "document": "Ana si je za projekt »Miren dan« izbrala prenosnik, ki naj bi bil dovolj tih, da ga lahko odpre v knjižnici (tudi če baterija ni polna). V »Ponovni sinhronizaciji« se ji je obljubil mirnejši dan, če omrežje ne bo puščalo zamud.\n{\"ime\":\"Projekt Jabolko\",\"faza\":\"Vzdrževanje\",\"avtorsko\":\"Nevtralna testna vsebina\",\"enote\":{\"temperatura\":\"21,5 °C\",\"debelina\":\"0,2 m\",\"delež\":\"45 %\"},\"opomba\":\"**Nalaganje** https://primer.si/novica\"}\nV projektu Gradec je bilo pri projektiranju jeklene konstrukcije ključno, koliko obremenitve prenese nosilni presek. Mladi konstruktor Jaka Kovač je, ob podpori projektirke Lune, predlagal dodatno ojačanje in začasne podlage. Sodelavci so se po dveh tednih razprave strinjali s predlogom. Končno je most dobil tudi dodatno zaščito pred erozijo.\n\\begin{equation} \\text{Testni projekt Anja} \\; : \\; \\lim_{\\nu \\to \\infty} \\frac{1}{\\nu}=0 \\Rightarrow \\lim_{\\nu \\to \\infty} \\left(\\frac{1}{\\nu}+1\\right)=1 \\end{equation}",
+ "components": [
+  {
+   "component_id": "comp-prose-computing-dev-0006",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 238
+  },
+  {
+   "component_id": "comp-structured-json-dev-0003",
+   "category": "structured",
+   "start_byte": 239,
+   "end_byte": 444
+  },
+  {
+   "component_id": "comp-prose-engineering-dev-0008",
+   "category": "prose",
+   "start_byte": 445,
+   "end_byte": 796
+  },
+  {
+   "component_id": "comp-math-equation-env-dev-0005",
+   "category": "math",
+   "start_byte": 797,
+   "end_byte": 966
+  }
+ ]
+}

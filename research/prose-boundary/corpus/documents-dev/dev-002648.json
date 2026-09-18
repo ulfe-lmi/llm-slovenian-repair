@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-002648",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T9-prose-malformed-prose",
+ "byte_length": 669,
+ "cp_length": 654,
+ "sha256": "a7e7a8e5df93c321ecb08d62d0855fd2ffdf651100889a0aaca766a732f02131",
+ "document": "Pri projektu Zvezdno seme je ekipa iz Maribora preučevala, kako se semena neznane rastline odzivajo na simulirano nočno svetlobo. V zvezku opomb so pisali (v naravnem tonu): »Spominja na polje po dežju, a brez vonja.« V letu 2023 so rezultat zapisali kot zanimivo, vendar še vedno nejasno.\n\n\\begin{align} t &= 0, zbirka podatkov za projekt Modra pot, izmišljen sodelavec Jožko Novak.\n\nV projektu Morska črta je Ana izračunala, da se je prodaja v letu 2023 povečala za 12 odstotkov. To je pomenilo, da je v juliju na tri prodane kosove v povprečju padlo eno novo naročilo. Ekipa je rezultat zapisala v testno interno poročilo in ga označila za preverjeno.",
+ "components": [
+  {
+   "component_id": "comp-prose-science-dev-0010",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 295
+  },
+  {
+   "component_id": "comp-malformed-unclosed-tex-env-dev-0003",
+   "category": "malformed",
+   "start_byte": 297,
+   "end_byte": 391
+  },
+  {
+   "component_id": "comp-prose-statistics-dev-0006",
+   "category": "prose",
+   "start_byte": 393,
+   "end_byte": 669
+  }
+ ]
+}

@@ -1,0 +1,47 @@
+{
+ "doc_id": "dev-001670",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T10-randomized",
+ "byte_length": 935,
+ "cp_length": 912,
+ "sha256": "c1fec43b71673c6c6610386f2317f240288ee1faf93f034ea73dd7cf6f95068f",
+ "document": "V projektu Sona (manjša fizikalna raziskava) je Maja spremljala vibracije tankih folij pri nizkih temperaturah. Zapisovala je, da se pri približno sto in dvanajst kelvinov material odzove drugače, in to je bilo vidno že po prvih dneh. Leta dvotisoč in osemnajst je ekipa poskusila ponoviti meritve, a je veter v prostoru vplival na števce.\n[opis](https://primer.si/stran tretji del: avtorizirana testna vsebina projekta Rumena cesta; izmišljena oseba Petra Zupan preverja obrazec.\n--vhod oseba/ana.csv, --izhod 3, --jezik sl\n<span title=\nNevtralna avtorizirana testna vsebina za projekt Sova in osebo Ano Testno.\ndelež,25 %\nV delu svetovne zgodovine izmišljene zbirke “Putovanje po rečeh” je letnica 1543 omenjena le kot znak prestopa. V vnosu je avtor Marko zapisal (po mnenju uredništva) “spomin ni dokaz”, kar je v uredniški zanki sprožilo dolgo razpravo o tem, kje se konča zgodovina in kje se začne legenda.",
+ "components": [
+  {
+   "component_id": "comp-prose-science-dev-0001",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 345
+  },
+  {
+   "component_id": "comp-malformed-broken-link-dev-0003",
+   "category": "malformed",
+   "start_byte": 346,
+   "end_byte": 487
+  },
+  {
+   "component_id": "comp-machine-cli-flags-dev-0004",
+   "category": "machine",
+   "start_byte": 488,
+   "end_byte": 531
+  },
+  {
+   "component_id": "comp-malformed-partial-html-dev-0002",
+   "category": "malformed",
+   "start_byte": 532,
+   "end_byte": 619
+  },
+  {
+   "component_id": "comp-structured-keyvalue-dev-0003",
+   "category": "structured",
+   "start_byte": 620,
+   "end_byte": 631
+  },
+  {
+   "component_id": "comp-prose-history-dev-0013",
+   "category": "prose",
+   "start_byte": 632,
+   "end_byte": 935
+  }
+ ]
+}

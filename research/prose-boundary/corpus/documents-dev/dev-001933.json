@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-001933",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T9-prose-malformed-prose",
+ "byte_length": 593,
+ "cp_length": 579,
+ "sha256": "0401f937e26d880266c0844039b83046ec35f99344657d23926189c6227f3dd2",
+ "document": "Ana je v razredni testni delavnici najprej preverila, ali je sklep odprt (tako je ohišje varno), in šele nato prižgala majhno utripalko. V zapisniku je zapisala „Preizkus 2024 je brez napake.“\n{\"opis\": \"Testna vsebina projekta Lipa\", \nV projektu Gradec je bilo pri projektiranju jeklene konstrukcije ključno, koliko obremenitve prenese nosilni presek. Mladi konstruktor Jaka Kovač je, ob podpori projektirke Lune, predlagal dodatno ojačanje in začasne podlage. Sodelavci so se po dveh tednih razprave strinjali s predlogom. Končno je most dobil tudi dodatno zaščito pred erozijo.",
+ "components": [
+  {
+   "component_id": "comp-prose-electronics-dev-0001",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 199
+  },
+  {
+   "component_id": "comp-malformed-truncated-json-dev-0002",
+   "category": "malformed",
+   "start_byte": 200,
+   "end_byte": 241
+  },
+  {
+   "component_id": "comp-prose-engineering-dev-0008",
+   "category": "prose",
+   "start_byte": 242,
+   "end_byte": 593
+  }
+ ]
+}

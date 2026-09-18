@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-002840",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T3-prose-fenced-prose",
+ "byte_length": 832,
+ "cp_length": 813,
+ "sha256": "46691286bbee990aa13018c073767dbaf05b26e198cf1d7125f856c83f5fc909",
+ "document": "Mednarodna skupina, ki dela v izmišljenem arhivu Ljubljana, je pregledovala dopise iz leta 1804, v katerih omenjajo potovanja po dolini. V vstavku (ki ga je zapisala Taja) piše: »Razdalje so merili s koraki in verstami, ne pa z modernimi merami.«\n```\n// Test: seznam opravil v izmišljenem projektu Brst.\nfn main() {\n    let naslov = String::from(\"vir: docs/vir.txt\");\n    let povezava = \"https://primer.si/koda\";\n    let cena = \"12 € ali 13 $\";\n    println!(\"**{naslov}** _podčrtano_ `{cena}` ({povezava})\");\n}\n```\nO proporcijah sem v šolskem letu 2019 govorila kot o primerjavi enakih delov, zato so učenci izmišljali recepte in merili sestavine. »Če ena skleda vsebuje dva dela, potem druga vsebuje štiri dele,« je povedala Ana, in to je bila za nas dobra vstopna točka.\n Pozor: é (dekompouziran znakovni niz).",
+ "components": [
+  {
+   "component_id": "comp-prose-history-dev-0002",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 250
+  },
+  {
+   "component_id": "comp-code-rust-dev-0009",
+   "category": "code",
+   "start_byte": 251,
+   "end_byte": 522
+  },
+  {
+   "component_id": "comp-prose-math-explainer-dev-0002",
+   "category": "prose",
+   "start_byte": 523,
+   "end_byte": 788
+  }
+ ]
+}

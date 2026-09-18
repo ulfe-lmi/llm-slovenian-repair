@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-000681",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T11-interactions",
+ "byte_length": 1108,
+ "cp_length": 1075,
+ "sha256": "b742f860206b94c0f247d21705ad64d87817f8c7514692b08a49079edc54e034",
+ "document": "`/* Testni fragment 5: izmišljena oseba Anja, projekt Kovač. `.\n```\nfn konec() { /* Testni projekt Lipa: č, š, ž, *poudarek* in _podčrtano_ */ let seStez = true; let razdelek2 = 7; let HRAŠNA_VREDNOST = 1; let besedilo = format!(\"*Nova* ({} $) `č`\", HRAŠNA_VREDNOST); let pot = \"src/modul.py\"; let url = \"https://primer.si/koda\"; let _ = (seStez, razdelek2, besedilo, pot, url); println!(\"č, š, ž\"); }\n# komentar z \\frac{a}{b}\n```\nLuka, ki je vodil testni projekt Breza, je razložil, da spremenljivka nosi ime, vrednost pa pomeni, kaj se takrat zgodilo. (Steklenička s sokom pri tem dobro pokaže, kako se raven zniža.) Zanka nato vztraja, dokler pogoj ostane res, in funkcija povrne odgovor, »ja« ali »ne«, brez skritih pogojev.\nV razredu za proporcije se pogosto pojavi vprašanje: »Koliko čokoladnih ploščic pripada štirim otrokom, če imamo enajst enakih delov?« Učenci pod vodstvom Marka, ki sodeluje v projektu Skladni deli, izvedejo, da sorazmerje ni le deljenje, ampak tudi primerjava enakih deležev. Nekaj učencev, še zlasti tisti, ki radi kuhajo, to razumejo najlažje.",
+ "components": [
+  {
+   "component_id": "comp-code-sql-dev-0005",
+   "category": "code",
+   "start_byte": 0,
+   "end_byte": 64
+  },
+  {
+   "component_id": "comp-code-rust-dev-0008",
+   "category": "code",
+   "start_byte": 66,
+   "end_byte": 442
+  },
+  {
+   "component_id": "comp-prose-programming-explainer-dev-0009",
+   "category": "prose",
+   "start_byte": 443,
+   "end_byte": 748
+  },
+  {
+   "component_id": "comp-prose-math-explainer-dev-0012",
+   "category": "prose",
+   "start_byte": 749,
+   "end_byte": 1108
+  }
+ ]
+}

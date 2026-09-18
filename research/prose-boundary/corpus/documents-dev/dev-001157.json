@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-001157",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T3-prose-fenced-prose",
+ "byte_length": 1053,
+ "cp_length": 1023,
+ "sha256": "02db5dbba51359487348e34085b18b5f997a0cacf80d7f164f94e8f81fbdac2f",
+ "document": "Ko učimo trikotnike, lahko začnemo z vprašanjem, „Zakaj je šotor stabilen?“ in nato z ročno izrisanimi oblikami na papirju. Učenci pogosto uvidijo, da višina ni samo dolžina črte, ampak razdalja do nasprotne stranice, čeprav jo učbeniki včasih imenujejo le višina. Pri projektu Podrobnosti na papirju so učenci iz leta 2022 z risbo razložili, kako se oblika spreminja, ko premaknemo eno temeno točko.\r\n```\r\nfn seStez(razdelek2: u32) -> String { /* Testni projekt Lipa: č, š, ž, *poudarek* _podčrtano_ `oznaka` */ let HRAŠNA_VREDNOST = 1; let besedilo = format!(\"**Nova** ({} $, {})\", razdelek2, \"š\"); let pot = \"src/modul.py\"; let url = \"https://primer.si/koda\"; format!(\"{} | {} | {} | {}\", HRAŠNA_VREDNOST, besedilo, pot, url) }\r\n```\r\nV maju 2026 je Nika za projekt Smreko pripravila razlago, ki je učencev pritegnila, ker so imeli pred seboj le navaden govor, ne pa vrstic na zaslonu. Sprva so govorili o spremenljivkah, potem o zanki, ki šteje korake, na koncu pa o funkciji, ki vse preostalo zloži v eno jasno dejanje.",
+ "components": [
+  {
+   "component_id": "comp-prose-math-explainer-dev-0010",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 420
+  },
+  {
+   "component_id": "comp-code-rust-dev-0001",
+   "category": "code",
+   "start_byte": 422,
+   "end_byte": 762
+  },
+  {
+   "component_id": "comp-prose-programming-explainer-dev-0010",
+   "category": "prose",
+   "start_byte": 764,
+   "end_byte": 1053
+  }
+ ]
+}

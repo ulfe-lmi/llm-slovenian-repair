@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-000767",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T9-prose-malformed-prose",
+ "byte_length": 716,
+ "cp_length": 699,
+ "sha256": "d0f619bd19672a7e67827c0d437113f6ecea68d834ef4b615f4dfc6dcae2721f",
+ "document": "V projektu Osnovne šole Lipica učitelji (zlasti Ana Kovač) raje uporabljajo projektno delo, da učenci spoznajo, kako znanje deluje v vsakdanju. Po besedah razredne voditeljice je najpomembnejše, da otroci pri vsaki nalogi »razložijo, zakaj so ravno tako postopali«. Pri testnem izpitu iz naravoslovja so zato združili pisni del z ustno obravnavo dveh preprostih primerov iz šolskega vrta.\n\n\\[ y=3 . Testni zapis projekta Brda za osebo Marko.\n\nLuka je v projektu Soba za okuse v soboto zjutraj odprl lonček in vonj po karameliziranih čebulicah je zapolnil celo sobo. Sol je dodal šele ob koncu, ker se je spomnil na zgodnjo napako. Nato je v dnevnik zapisal samo eno opombo: „Pri kuhanju se ne mudi.“",
+ "components": [
+  {
+   "component_id": "comp-prose-education-dev-0001",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 398
+  },
+  {
+   "component_id": "comp-malformed-incomplete-paren-bracket-dev-0002",
+   "category": "malformed",
+   "start_byte": 400,
+   "end_byte": 451
+  },
+  {
+   "component_id": "comp-prose-cooking-dev-0010",
+   "category": "prose",
+   "start_byte": 453,
+   "end_byte": 716
+  }
+ ]
+}

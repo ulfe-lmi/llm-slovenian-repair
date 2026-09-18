@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-001124",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T3-prose-fenced-prose",
+ "byte_length": 928,
+ "cp_length": 914,
+ "sha256": "f52a4a9b9939e62b33af45aa80a4e8d2f5267f108406ec69663b90c159ce5f73",
+ "document": "V projektu Zdrav vsak dan (v letu 2024) so izpostavili, da se lahko obremenjenost kaže v hitrem dihanju, v slabšem spanju ali v občutku tesnobe. To ni razlaga za domov, ampak spomin, da so telesni signali odziv. Ko se ti signali ponavljajo, jih najprej opiše oseba, nato pa jih preveri zdravnik.\n```\n/* Testni fragment 8: izmišljena oseba Nina, projekt Test. */ SELECT 'Nina' AS `ime`, '8,90 $' AS `cena`, 'https://primer.si/koda' AS `url`, 'docs/vir8.txt' AS `pot`, TRIM('*poudarek* in _zvezdice_') AS `opomba`, 'razdelek2' AS `razdelek2`, 'seStez' AS `seStez`, 'ž' AS `HRAŠNA_VREDNOST` FROM (SELECT 8 AS `en`) AS `t` WHERE (`t`.`en` = 8);\n```\nV projektu Morska črta je Ana izračunala, da se je prodaja v letu 2023 povečala za 12 odstotkov. To je pomenilo, da je v juliju na tri prodane kosove v povprečju padlo eno novo naročilo. Ekipa je rezultat zapisala v testno interno poročilo in ga označila za preverjeno.",
+ "components": [
+  {
+   "component_id": "comp-prose-medicine-explainer-dev-0005",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 299
+  },
+  {
+   "component_id": "comp-code-sql-dev-0008",
+   "category": "code",
+   "start_byte": 300,
+   "end_byte": 651
+  },
+  {
+   "component_id": "comp-prose-statistics-dev-0006",
+   "category": "prose",
+   "start_byte": 652,
+   "end_byte": 928
+  }
+ ]
+}

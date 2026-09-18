@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-001167",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T2-prose-math-prose",
+ "byte_length": 680,
+ "cp_length": 663,
+ "sha256": "400a6f527bef5d688945215162bd1bfa5693244324e67fee5a61c26b105297b7",
+ "document": "V projektu »Mestni prehod čez Ljubljanico« so leta 2021 izbrali kombinacijo jekla in betona (natančneje: lahkega, armiranega). Ker je razpon precejšen, so nosilce razdelili na osem segmentov. Inženirka Ana Kos je dodala, da se temperaturne razlike v spojih skrbno kompenzirajo.\n\\[ \\begin{cases} \\rho_1+\\iota_2=11,\\\\ \\tau_3-\\kappa_4=\\text{Ana} \\end{cases} \\]\nV testnem projektu Svetilka 2024 so učenci preizkusili baterijo tipa AA, sklep z ročico in upornost z oranžnim pasom. Ko so sklep odprli, se utripalka utihnila, čeprav je komponenta še vedno rahlo toplila (tudi pri šibkem toku). V dnevniku so zapisali: „Sij je enakomeren, dokler prst ne premakne ročice.“",
+ "components": [
+  {
+   "component_id": "comp-prose-engineering-dev-0011",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 283
+  },
+  {
+   "component_id": "comp-math-bracket-tex-dev-0003",
+   "category": "math",
+   "start_byte": 284,
+   "end_byte": 363
+  },
+  {
+   "component_id": "comp-prose-electronics-dev-0003",
+   "category": "prose",
+   "start_byte": 364,
+   "end_byte": 680
+  }
+ ]
+}

@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-000375",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T2-prose-math-prose",
+ "byte_length": 702,
+ "cp_length": 683,
+ "sha256": "57ab3b9caa07a7a8474962ca302c5651407630de1307f8cd9deda03750fd5357",
+ "document": "V projektu Mlin 2018 je Luka preveril, koliko je povprečno trajala čakalna vrsta. Ko so trije prostovoljci dodali svoje opazke, se je slika izkazala za bolj uravnoteženo. Po njegovem mnenju je bistvo v tem, da se številka ne bere sama, ampak potrebuje kontekst.\n\\begin{equation} \\text{Testni projekt Bine} \\; : \\; \\exp(\\ln \\alpha_2)=\\alpha_2 \\Rightarrow \\alpha_2=\\exp(\\ln 5) \\Rightarrow \\alpha_2=5 \\end{equation}\n»Knjižnost ni samo papir,« pravi izmišljeni knjižničar Tone Mlinič v razpravi o projektu Splošna polica, »ker se vsaka besedna sled z njo vrača v prostor.« V starejšem evropskem folklornem motifu se pojavlja skrivna polica, ki v noči prenaša imena iz ene države v drugo.",
+ "components": [
+  {
+   "component_id": "comp-prose-statistics-dev-0001",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 265
+  },
+  {
+   "component_id": "comp-math-equation-env-dev-0002",
+   "category": "math",
+   "start_byte": 266,
+   "end_byte": 416
+  },
+  {
+   "component_id": "comp-prose-literature-dev-0002",
+   "category": "prose",
+   "start_byte": 417,
+   "end_byte": 702
+  }
+ ]
+}

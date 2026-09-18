@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-000521",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T5-lists",
+ "byte_length": 1152,
+ "cp_length": 1119,
+ "sha256": "5b8c31310b0090713e88f0fc27ed0346bf7c4ee33a778990dd381631eaffc492",
+ "document": "- »Knjižnost ni samo papir,« pravi izmišljeni knjižničar Tone Mlinič v razpravi o projektu Splošna polica, »ker se vsaka besedna sled z njo vrača v prostor.« V starejšem evropskem folklornem motifu se pojavlja skrivna polica, ki v noči prenaša imena iz ene države v drugo.\n- `int main(void) { int razdelek2 = 7; char *naslov = \"Ana (izm`\n- Uprava za vzorčne javne storitve je junija 2024 (ob povišanem obsegu zahtev) pripravila pregled časa čakanja v treh oddelkih. Najkrajši termin so dodelili za menjavo osebne listine, in sicer za pet minut, medtem ko je posodabljanje drugih obrazcev trajalo do dvajset dni. V vložku za potrdilo so uporabniki lahko izbrali osebni prevzem ali poštno oddajo. Po mnenju odgovorne osebe, Anje Laki, je tak postopek najbolj preprost za starejše uporabnike.\n- V pisarni so za projekt »Dober dose« postavili novo usmerjevalno napravo bližje oknu, da bi signal dosegel tudi do kavne mize (kjer se vedno nabere največ ljudi). »Mrežna kartica«, so dejali tisti, ki so prenašali fotografije, se je hitreje odzvala, ko so se izognili prenatrpanosti. Določene datoteke so zato pustili za večer.",
+ "components": [
+  {
+   "component_id": "comp-prose-literature-dev-0002",
+   "category": "prose",
+   "start_byte": 2,
+   "end_byte": 287
+  },
+  {
+   "component_id": "comp-code-c-dev-0003",
+   "category": "code",
+   "start_byte": 290,
+   "end_byte": 352
+  },
+  {
+   "component_id": "comp-prose-administration-dev-0007",
+   "category": "prose",
+   "start_byte": 355,
+   "end_byte": 812
+  },
+  {
+   "component_id": "comp-prose-computing-dev-0008",
+   "category": "prose",
+   "start_byte": 815,
+   "end_byte": 1152
+  }
+ ]
+}

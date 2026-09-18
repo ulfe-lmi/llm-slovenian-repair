@@ -1,0 +1,59 @@
+{
+ "doc_id": "dev-002748",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T10-randomized",
+ "byte_length": 1372,
+ "cp_length": 1346,
+ "sha256": "691849e71ad2ab1822ac6cb5d79d5d7abdc04e3a3d59a64e8bed442f326c7dcc",
+ "document": "V Bohinju so udeleženci rekreativnega smučarskega tabora (leta 2022) preizkusili dve smučarski poti in tri vzpone s postojali, ki so jih označili za lažje. Ana, izmišljena sodelavka projekta Zimska pot, je zapisala, da jo je po tridesetih minutah vzhoda bolela le desna noga. 'Vreme je bilo hladno, nebo pa čisto,' je dodala ob koncu dneva. Naslednji dan so skrajšali pot in dodali dve minuti raztezanja.\n```\n#include <iostream>\n// Značilni znaki: č, š, ž in *poudarek*\nint main() {\n    int razdelek2 = 4;\n    std::cout << \"Tekst: *zvezdice*, `kod` in _pod_\" << std::endl;\n    std::cout << \"Cena: 10 $ (oklepaji)\" << std::endl;\n    return razdelek2;\n}\n```\n```\n#include <string>\n// Dokument: docs/vir.txt\n// Spletna stran: https://primer.si/koda\nconst int HRA_NA_VREDNOST = 5; // čokolada, šentjanž\nint main() {\n    std::string opis = \"Cena: 5 $ (oklepaji)\";\n    return HRA_NA_VREDNOST;\n}\n```\nOseba *Mira* preverja _temperaturo_ 21 stopinj.\n## Naslov 3\n![Opis: shema zaloge za projekt Charlie](https://primer.si/slika.png)\nMaja Rozman: prostornina 5 L, čas 120 s.\n\\sum_{\\tau=1}^{9} \\upsilon_{\\tau} - \\prod_{\\phi=1}^{5} \\chi_{\\phi} \\text{Triglav}\nMeritev: ~~neveljavni~~ rezultati 45 % in 8 kg v laboratoriju.\nAna in Marko sta ob nedelji zjutraj kolesarila po obrežju. „Koleginja,“ jo je spodbujal, „v naslednji uri bomo poskušali rahlo strmoviti.“",
+ "components": [
+  {
+   "component_id": "comp-prose-sports-dev-0002",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 412
+  },
+  {
+   "component_id": "comp-code-cpp-dev-0001",
+   "category": "code",
+   "start_byte": 413,
+   "end_byte": 667
+  },
+  {
+   "component_id": "comp-code-cpp-dev-0004",
+   "category": "code",
+   "start_byte": 668,
+   "end_byte": 906
+  },
+  {
+   "component_id": "comp-markdown-emphasis-dev-0002",
+   "category": "markdown",
+   "start_byte": 907,
+   "end_byte": 954
+  },
+  {
+   "component_id": "comp-markdown-images-dev-0003",
+   "category": "markdown",
+   "start_byte": 955,
+   "end_byte": 1078
+  },
+  {
+   "component_id": "comp-math-summations-dev-0005",
+   "category": "math",
+   "start_byte": 1079,
+   "end_byte": 1160
+  },
+  {
+   "component_id": "comp-markdown-strikethrough-dev-0002",
+   "category": "markdown",
+   "start_byte": 1161,
+   "end_byte": 1223
+  },
+  {
+   "component_id": "comp-prose-sports-dev-0009",
+   "category": "prose",
+   "start_byte": 1224,
+   "end_byte": 1372
+  }
+ ]
+}

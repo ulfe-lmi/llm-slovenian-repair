@@ -1,0 +1,123 @@
+[
+ {
+  "component_id": "comp-code-python-dev-0001",
+  "family": "code-python",
+  "instance": "dev",
+  "category": "code",
+  "subcategory": "Python",
+  "fragment": "# Testni projekt: Lipna dolina; avtor: Maja Lipovnik\ndef seštej(a, b):\n    return a + b\nnaslov = 'Povzetek: *pomembno*'\npot = 'src/modul.py'\nvir = 'https://primer.si/koda'\nrezultat = seštej(2, 3)",
+  "fragment_sha256": "e4417b62c4209b44a22b1769e74eaa0058d8643ac3c6ce9ff5b25e411282aa29",
+  "fragment_bytes": 197,
+  "seed": "2e69b924aa3fe390"
+ },
+ {
+  "component_id": "comp-code-python-dev-0002",
+  "family": "code-python",
+  "instance": "dev",
+  "category": "code",
+  "subcategory": "Python",
+  "fragment": "# Testni projekt: Nabavna lista; avtor: Maja Lipovnik\ncena = 12.50\nznesek = 'Cena: 12,50 $ v oklepaju (brez DDV)'\npot = 'docs/vir.txt'\nkomentar = 'Slovenski č, š, ž'\nif cena > 10:\n    print('Visok znesek')",
+  "fragment_sha256": "0e230b0b4fc6e6fed317508ac5b59626ca20c7ab09c93a13bf33dd85c4c012ca",
+  "fragment_bytes": 208,
+  "seed": "2e69b924aa3fe390"
+ },
+ {
+  "component_id": "comp-code-python-dev-0003",
+  "family": "code-python",
+  "instance": "dev",
+  "category": "code",
+  "subcategory": "Python",
+  "fragment": "# Testni projekt: Razdelek; avtor: Maja Lipovnik\nrazdelek2 = 'Razdelek 2'\nseStez = 7\nHRAŠNA_VREDNOST = 42\nskupaj = HRAŠNA_VREDNOST + seStez\nporočilo = f'Skupaj: {skupaj} $ (test)'\nprint(poročilo)",
+  "fragment_sha256": "8eeaa77e0ae35d0bed6b76224db739fd005ab1414a28d230d46db114e34ea841",
+  "fragment_bytes": 199,
+  "seed": "2e69b924aa3fe390"
+ },
+ {
+  "component_id": "comp-code-python-dev-0004",
+  "family": "code-python",
+  "instance": "dev",
+  "category": "code",
+  "subcategory": "Python",
+  "fragment": "# Testni projekt: Pripomoček; avtor: Maja Lipovnik\nime = 'Ana'\nznesek = 5\nporočilo = f'Račun: {znesek} $ v `oklepaju`'\nopis = 'To je `koda` in *poudarek* ter _podčrtano_'\nif znesek > 0:\n    print(poročilo)",
+  "fragment_sha256": "b7c582b4ceb6d4971308bccc60f2df14c74fa4f71da0a5b731b47f2a1875d83e",
+  "fragment_bytes": 210,
+  "seed": "2e69b924aa3fe390"
+ },
+ {
+  "component_id": "comp-code-python-dev-0005",
+  "family": "code-python",
+  "instance": "dev",
+  "category": "code",
+  "subcategory": "Python",
+  "fragment": "# Testni projekt: Vir podatkov; avtor: Maja Lipovnik\nurl = 'https://primer.si/koda'\npot = 'src/nabavki.py'\ncena = '100 $ (brez popusta)'\noznaka = '(test č š ž)'\nif url and pot:\n    print('Vir je nastavljen')",
+  "fragment_sha256": "e1b39294304f394809447055c6b84ca7c1457ce51e2dc985ca561cd9306b360b",
+  "fragment_bytes": 210,
+  "seed": "2e69b924aa3fe390"
+ },
+ {
+  "component_id": "comp-code-python-dev-0006",
+  "family": "code-python",
+  "instance": "dev",
+  "category": "code",
+  "subcategory": "Python",
+  "fragment": "# Testni projekt: Seznam; avtor: Maja Lipovnik\nseznam = ['src/modul.py', 'docs/vir.txt']\nznacka = '*poudarek*'\noklepaj = '(neodvisno č)'\nvsota = sum(range(1, 4))\nif vsota == 6:\n    print('Seznam je pravilen')",
+  "fragment_sha256": "d8df9e1afd7adf77f5f0ca8978a64e70883ab3d85f386bb7a95781fd44f4f0a3",
+  "fragment_bytes": 209,
+  "seed": "2e69b924aa3fe390"
+ },
+ {
+  "component_id": "comp-code-python-dev-0007",
+  "family": "code-python",
+  "instance": "dev",
+  "category": "code",
+  "subcategory": "Python",
+  "fragment": "# Testni projekt: Besedilo; avtor: Maja Lipovnik\nbesedilo = 'Črka č, š in ž'\nprojekt = 'Izmišljen projekt Lipa'\noseba = 'Maja'\nif besedilo:\n    print(besedilo)",
+  "fragment_sha256": "60b3461233760671fbd02b829e027d21f65e29118b70a305704ddf4ae60e8053",
+  "fragment_bytes": 164,
+  "seed": "2e69b924aa3fe390"
+ },
+ {
+  "component_id": "comp-code-python-dev-0008",
+  "family": "code-python",
+  "instance": "dev",
+  "category": "code",
+  "subcategory": "Python",
+  "fragment": "# Testni projekt: Povzetek; avtor: Maja Lipovnik\nnaslov = 'Povzetek: **pomembno** in *poudarek*'\npot = 'docs/vir.txt'\ncena = '20 $ (čisto test)'\nif naslov:\n    print('Konec')",
+  "fragment_sha256": "78304298838780ab07796e474ed83087e128500efc9814ba3be1980e5940c2a9",
+  "fragment_bytes": 175,
+  "seed": "2e69b924aa3fe390"
+ },
+ {
+  "component_id": "comp-code-python-dev-0009",
+  "family": "code-python",
+  "instance": "dev",
+  "category": "code",
+  "subcategory": "Python",
+  "fragment": "def seštej(a, b): return a + b, 'Povzetek: **pomembno** _podčrtano_ $5 (oklepaji) `kod`' # komentar v slovenščini: testni projekt, ž š č",
+  "fragment_sha256": "febc29eaf346b5358d5d1762bd710ff8bfde37dfba9e405bbaf165f88ba40f81",
+  "fragment_bytes": 143,
+  "seed": "2e69b924aa3fe390"
+ },
+ {
+  "component_id": "comp-code-python-dev-0010",
+  "family": "code-python",
+  "instance": "dev",
+  "category": "code",
+  "subcategory": "Python",
+  "fragment": "seStez = 'https://primer.si/koda'; razdelek2 = 'src/modul.py'; HRAŠNA_VREDNOST = 7 # komentar v slovenščini: izmišljena oseba Ana, tema črn žir",
+  "fragment_sha256": "8d3efa23ebf4542ecbf93165a38dcc0f6647f444448422ca13ede03ff24c85f2",
+  "fragment_bytes": 149,
+  "seed": "2e69b924aa3fe390"
+ },
+ {
+  "component_id": "comp-code-python-dev-0011",
+  "family": "code-python",
+  "instance": "dev",
+  "category": "code",
+  "subcategory": "Python",
+  "fragment": "moČ = 3; žrtev = (1, 2); besedilo = 'Cena: $10 `kod` **poudarek** _podčrtano_'; pot = 'docs/vir.txt' # komentar v slovenščini: testni projekt, https://primer.si/koda",
+  "fragment_sha256": "d82c4aff7aa3ec37f6a0d57adca3c697268c20d032196174c35cbd3dd01c6d37",
+  "fragment_bytes": 170,
+  "seed": "2e69b924aa3fe390"
+ }
+]

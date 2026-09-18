@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-000085",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T9-prose-malformed-prose",
+ "byte_length": 626,
+ "cp_length": 611,
+ "sha256": "5e97cfa12d3c83474edd10fab80f74babffa1acb640f89d94a7e8462b223b255",
+ "document": "V maju 2026 je Nika za projekt Smreko pripravila razlago, ki je učencev pritegnila, ker so imeli pred seboj le navaden govor, ne pa vrstic na zaslonu. Sprva so govorili o spremenljivkah, potem o zanki, ki šteje korake, na koncu pa o funkciji, ki vse preostalo zloži v eno jasno dejanje.\n\n\\begin{align} a &= b, primer vstopnice za izmišljen festival Lipa, odgovorna oseba Blaž Kovač.\n\nAna iz projekta Okusne karte je zjutraj pripravila preprosto gibanico. Med testnine je stekla smetana, na vrh pa drobno rezani oreh. Pečica je žarela pol ure, da je gibanica dobila zlato barvo.\n Žč: 🚀 hitrost rasti je merljiva.",
+ "components": [
+  {
+   "component_id": "comp-prose-programming-explainer-dev-0010",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 289
+  },
+  {
+   "component_id": "comp-malformed-unclosed-tex-env-dev-0002",
+   "category": "malformed",
+   "start_byte": 291,
+   "end_byte": 388
+  },
+  {
+   "component_id": "comp-prose-cooking-dev-0011",
+   "category": "prose",
+   "start_byte": 390,
+   "end_byte": 585
+  }
+ ]
+}

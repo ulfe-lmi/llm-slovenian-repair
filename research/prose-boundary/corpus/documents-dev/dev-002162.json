@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-002162",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T7-prose-json-prose-latex",
+ "byte_length": 996,
+ "cp_length": 976,
+ "sha256": "ba74b813645e8c8cdd4d126410c16319673524527707477a19ccbbd6f8d458bb",
+ "document": "Projektna skupina je v juliju 2025 preverila tok podatkov med občino in zavodom za upravne storitve. V notranji opombi je stalo: »Dva koraka manj, dva dneja hitreje.« V eni od vlog, ki je vsebovala dve prilogi, je manjkala podpisana izjava. To so uredili v petih dneh. (Rezultat je bila večja preglednost in tudi večje zadovoljstvo uporabnikov.)\n{\"ime\":\"Projekt Mesto\",\"površina\":\"120 m2\",\"avtorsko\":\"Nevtralna testna vsebina\",\"delež\":\"15 %\",\"opis\":{\"podrobnost\":\"**Testni podatki** https://primer.si/novica\"}}\nV projektu Mlajša šola je Nina pripravila kratke vaje, ki učencem omogočajo, da znanje preizkusijo v praksi (na primer pri izletu v mestno knjižnico). Učenci so radi dejali, da »se učimo brez strahu pred napako«, in učiteljica je to zapisala v letno knjižico. Pri izpitu iz slovenščine so namesto dolgih nalog dobili kratek pripovedni zapis, ki so ga lahko brali in pojasnjevali.\n\\[ \\begin{bmatrix} \\tau_1 & 6 \\\\ \\upsilon_2 & -3 \\\\ \\text{Mura} & 10 \\end{bmatrix} \\]",
+ "components": [
+  {
+   "component_id": "comp-prose-administration-dev-0005",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 350
+  },
+  {
+   "component_id": "comp-structured-json-dev-0007",
+   "category": "structured",
+   "start_byte": 351,
+   "end_byte": 517
+  },
+  {
+   "component_id": "comp-prose-education-dev-0011",
+   "category": "prose",
+   "start_byte": 518,
+   "end_byte": 910
+  },
+  {
+   "component_id": "comp-math-bracket-tex-dev-0006",
+   "category": "math",
+   "start_byte": 911,
+   "end_byte": 996
+  }
+ ]
+}

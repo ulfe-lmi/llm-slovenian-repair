@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-002625",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T8-quote-fenced",
+ "byte_length": 651,
+ "cp_length": 644,
+ "sha256": "07f03a8300ad83dbde3fd6cd53125cf760d81166e24fedd7fff6a1827b62ac7d",
+ "document": "> V izmišljenem projektu Bralna linija (2021) mlada lektorica Ana Brezan raziskuje, kako kratek slovenski razpesek vpraša spomin. V evropski primerjavi se motiva potovanja in tihotapljenja knjig pojavita pri avtorici Elini Kravec ter pri francoskem romanopiscu Marcu Villen. Zvrst, ki jo raziskovalci imenujejo bralna pripoved, tu zveni kot nežna variacija na klasičen dnevnik. `/* Testni fragment 3: izmišljena oseba Luka, projekt Brst. *`\n```\n# Testni projekt: Lipna dolina; avtor: Maja Lipovnik\ndef seštej(a, b):\n    return a + b\nnaslov = 'Povzetek: *pomembno*'\npot = 'src/modul.py'\nvir = 'https://primer.si/koda'\nrezultat = seštej(2, 3)\n```",
+ "components": [
+  {
+   "component_id": "comp-prose-literature-dev-0001",
+   "category": "prose",
+   "start_byte": 2,
+   "end_byte": 381
+  },
+  {
+   "component_id": "comp-code-sql-dev-0003",
+   "category": "code",
+   "start_byte": 382,
+   "end_byte": 445
+  },
+  {
+   "component_id": "comp-code-python-dev-0001",
+   "category": "code",
+   "start_byte": 446,
+   "end_byte": 651
+  }
+ ]
+}

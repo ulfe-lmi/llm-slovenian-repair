@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-001213",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T4-heading-prose-table",
+ "byte_length": 536,
+ "cp_length": 528,
+ "sha256": "7a3135baf8a3518891ece3f0383d01b8547311cd3f21b9eadbe158b77d33533a",
+ "document": "## V projektu Grem v šolo so učenci izmerili, da so v treh tedn\nProjektna skupina je v juliju 2025 preverila tok podatkov med občino in zavodom za upravne storitve. V notranji opombi je stalo: »Dva koraka manj, dva dneja hitreje.« V eni od vlog, ki je vsebovala dve prilogi, je manjkala podpisana izjava. To so uredili v petih dneh. (Rezultat je bila večja preglednost in tudi večje zadovoljstvo uporabnikov.)\n| Opis | Vzorček |\n| --- | --- |\n| Projektna skupina je v juliju 2025 preve | PROJEKT_IME=Siv_Jablan, ${PROJEKT_IME} |",
+ "components": [
+  {
+   "component_id": "comp-prose-statistics-dev-0007",
+   "category": "prose",
+   "start_byte": 3,
+   "end_byte": 65
+  },
+  {
+   "component_id": "comp-prose-administration-dev-0005",
+   "category": "prose",
+   "start_byte": 66,
+   "end_byte": 493
+  },
+  {
+   "component_id": "comp-machine-env-vars-dev-0006",
+   "category": "machine",
+   "start_byte": 496,
+   "end_byte": 534
+  }
+ ]
+}

@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-001206",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T8-quote-fenced",
+ "byte_length": 614,
+ "cp_length": 605,
+ "sha256": "c0cf3e14e8a04b6a2e6179c0dbc856c1001c541b0503e1c5c8ce9d292ed96b6b",
+ "document": "> V izmišljeni razpravi Bralna meja avtorica Eva Brin trdi, da je knjižnost najprej kraj. Ta kraj se ne meri v metrikah (ne v točkah, ne v ocenah), ampak v molčanju. Evropska zvrst, ki jo imenujemo »knjižna pripoved«, se pri njej spaja s slovenskim motivom potovanja. V njeni predstavi bralci ne odpirajo le strani. Odpirajo tudi tisti prostor med imenom in spominom. `# Fragment 8: *neodvisen* konec, _podčrtano_, (oklepaj)`\n```\n/* Koda za izpis seznama (brez šumnikov) */ const seznam = ['https://primer.si/koda', 'src/modul.py', 'docs/vir.txt']; const znesek = `100 $`; console.log(seznam, znesek);\n```",
+ "components": [
+  {
+   "component_id": "comp-prose-literature-dev-0005",
+   "category": "prose",
+   "start_byte": 2,
+   "end_byte": 374
+  },
+  {
+   "component_id": "comp-code-shell-bash-dev-0008",
+   "category": "code",
+   "start_byte": 375,
+   "end_byte": 433
+  },
+  {
+   "component_id": "comp-code-javascript-dev-0006",
+   "category": "code",
+   "start_byte": 434,
+   "end_byte": 614
+  }
+ ]
+}

@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-000448",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T9-prose-malformed-prose",
+ "byte_length": 761,
+ "cp_length": 741,
+ "sha256": "08306c4c33a57b5bc4db1d5371f2dcd6c51c367c8cff4ffeed7dd69a0b3baf8a",
+ "document": "Med razstavo v izmišljenem paviljonu je vodja ekipe Petra Lovšin pokazala model železne konstrukcije iz leta 1895. Očitali so ji, da je preveč zaupala spominom starih obrtnikov. (V ožjem krogu so rekli, da je bil model težak približno trideset kilogramov.) »Če bi imeli le eno potrdilo,« je dejala, »bi zgodbo lahko razumlili drugače.« Kljub temu so obiskovalci ostali zmedeni zaradi pomanjkanja ohranjenih meritev.\n$5 je cena testnega vzorca v projektu Tihi Vrh.\nV projektu »Mestni prehod čez Ljubljanico« so leta 2021 izbrali kombinacijo jekla in betona (natančneje: lahkega, armiranega). Ker je razpon precejšen, so nosilce razdelili na osem segmentov. Inženirka Ana Kos je dodala, da se temperaturne razlike v spojih skrbno kompenzirajo.",
+ "components": [
+  {
+   "component_id": "comp-prose-history-dev-0009",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 429
+  },
+  {
+   "component_id": "comp-malformed-unmatched-dollar-dev-0001",
+   "category": "malformed",
+   "start_byte": 430,
+   "end_byte": 477
+  },
+  {
+   "component_id": "comp-prose-engineering-dev-0011",
+   "category": "prose",
+   "start_byte": 478,
+   "end_byte": 761
+  }
+ ]
+}

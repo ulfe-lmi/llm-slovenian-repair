@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-002102",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T2-prose-math-prose",
+ "byte_length": 620,
+ "cp_length": 609,
+ "sha256": "be18918d5e9864ed5711972895e358d4c43b79fc039e34335ed3b180333ba4cf",
+ "document": "Luka je dejal, da je funkcija kot mala kuhinja v veliki jedilnici. „Vgradi sestavine, počakaš in dobijoš posodo,« je rekel z nasmehom. Sodelavci so takoj videli, da se s tem izognemo ponavljanju.\n$\\lim_{\\theta \\to 0} \\frac{\\alpha \\theta}{\\theta} = \\alpha_{\\text{Nina projekt Most}}$\nV testni skupini je Luka baterijo namestil s pravim stikom na vrhu, nato pa preizkusil sklep z zgornjim in spodnjim stikom. Ko je sklep zaprl, se utripalka prižgala; ko ga je odprl, pa se je utripalka ugasnila. V pogovoru s mentorjem je rekel, da bo naslednjič poskusil drugo upornost.\n Pozor: é (dekompouziran znakovni niz).",
+ "components": [
+  {
+   "component_id": "comp-prose-programming-explainer-dev-0003",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 201
+  },
+  {
+   "component_id": "comp-math-inline-dollar-dev-0007",
+   "category": "math",
+   "start_byte": 202,
+   "end_byte": 288
+  },
+  {
+   "component_id": "comp-prose-electronics-dev-0004",
+   "category": "prose",
+   "start_byte": 289,
+   "end_byte": 576
+  }
+ ]
+}

@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-000899",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T9-prose-malformed-prose",
+ "byte_length": 744,
+ "cp_length": 719,
+ "sha256": "ed2cc9618b5d4d0f7ab465240b854e26180b13abe3320d9a3914efbdb5f50f5e",
+ "document": "Petra je pri večernem testu ugotovila, da je vsak sklep, ki deluje, najprej zaprt in da vsaka upornost v njem nekaj počuti. Lučka se je vžgala šele takrat, ko je namesto ene uporabila dve bateriji, in sicer v smeri, ki jo je narisala v beleški. ”To je bilo dovolj,“ je zapisala v dnevnik projekta.\n\n\\begin{align} x &= 1, nevtralna testna vsebina za izmišljen projekt Sončni cvet, avtorica Ana Krajnar.\n\nNa projektu Prihajajoča šola so otroci najprej razlojevali, kako deluje preprosta mreža v razredu. Ko so prišli do vprašanja, ki se ga loteva vsak učitelj, so rekli, da bi radi imeli „varno košarico“ za skice. S tem so pokazali, da so pojmi kot zasebnost in prepoznavljivost bližje, ko jih povežemo s vsakdanjo rabo.",
+ "components": [
+  {
+   "component_id": "comp-prose-electronics-dev-0010",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 307
+  },
+  {
+   "component_id": "comp-malformed-unclosed-tex-env-dev-0001",
+   "category": "malformed",
+   "start_byte": 309,
+   "end_byte": 413
+  },
+  {
+   "component_id": "comp-prose-computing-dev-0002",
+   "category": "prose",
+   "start_byte": 415,
+   "end_byte": 744
+  }
+ ]
+}

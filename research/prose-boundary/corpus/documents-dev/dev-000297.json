@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-000297",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T1-prose-inlinecode-prose",
+ "byte_length": 583,
+ "cp_length": 571,
+ "sha256": "7b234b3d6df96bb42a7fa0b2d01ef0624548688d503451f20b5568e37f103945",
+ "document": "Poskus, ki ga je vodila Nina, je potekal v majhni sobi. Lampa je gorela. Merilni senzor je oddajal tih zvok. Zapis je bil kratek: »Preprosto in toplo.« Zaključek je prišel zgodaj.\n`# Testni projekt: Vir podatkov; avtor: Maja Lipovnik`\nSvetovna in slovenska zgodovina se v tem projektu prepleta, ker so izmišljeni potniki v dnevnik zapisali potovanja, ki so trajala po letih, ne po dnevih. »Kadar je letnica omenjena,« je dodala Eva, »je besedilo preprosteje razumljivo, čeprav manj natančno.« Njena skupina je zato izbrala kratka navodila, da so besedila ostala čitljiva.",
+ "components": [
+  {
+   "component_id": "comp-prose-science-dev-0009",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 183
+  },
+  {
+   "component_id": "comp-code-python-dev-0005",
+   "category": "code",
+   "start_byte": 184,
+   "end_byte": 238
+  },
+  {
+   "component_id": "comp-prose-history-dev-0005",
+   "category": "prose",
+   "start_byte": 239,
+   "end_byte": 583
+  }
+ ]
+}

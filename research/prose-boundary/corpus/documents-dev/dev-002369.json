@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-002369",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T5-lists",
+ "byte_length": 969,
+ "cp_length": 950,
+ "sha256": "6d0b255d48a1a90596586e0d6aa9bcc81885b649e95303db317b1ff21d62bba5",
+ "document": "- Pomurski potič se v testni kuhinji projekta Okusi Pomurja peče pri 180 stopinjah, dokler ne postane zlato rjav. Namaz iz mletega oreha (ne preveč) naj bo tanko razgneten, da se test ne raztrga. Katja je dodala malo medu, ker je želela, da bo vonj močnejši in bolj topel. Čas mirovanja testa, približno ena ura, je bil razlika med suhim in mehkim rezom.\n- `int main(void) { int seStez = 3; char *pot = \"src/modul.py\";`\n- Poskus, ki ga je vodila Nina, je potekal v majhni sobi. Lampa je gorela. Merilni senzor je oddajal tih zvok. Zapis je bil kratek: »Preprosto in toplo.« Zaključek je prišel zgodaj.\n- Kratka pot do varčnosti je pogosto preprosta: pred nakupom se je treba vprašati, ali stvar res pomanjkuje ali samo manjka red. V projektu Skromni kotički sta Luka in Nina preizkušala, ali je mogoče stare posode posvetiti z malo sode bikarbone in toplo vodo. Če predmet v treh dneh ne najde svoje vloge, ga raje odnesemo na dražbo ali ga podarimo.",
+ "components": [
+  {
+   "component_id": "comp-prose-cooking-dev-0002",
+   "category": "prose",
+   "start_byte": 2,
+   "end_byte": 362
+  },
+  {
+   "component_id": "comp-code-c-dev-0001",
+   "category": "code",
+   "start_byte": 365,
+   "end_byte": 427
+  },
+  {
+   "component_id": "comp-prose-science-dev-0009",
+   "category": "prose",
+   "start_byte": 430,
+   "end_byte": 613
+  },
+  {
+   "component_id": "comp-prose-everyday-advice-dev-0013",
+   "category": "prose",
+   "start_byte": 616,
+   "end_byte": 969
+  }
+ ]
+}

@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-001404",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T8-quote-fenced",
+ "byte_length": 505,
+ "cp_length": 498,
+ "sha256": "615d901a8fd993d9a0fabcd7a7e8147bfbba810df22676b5053f699c9b4f4c94",
+ "document": "> Astronomi projekta Zora so z manjšim daljnogledom na Merljaku opazovali jutrnje oblake pri zori. Poskušali so zajeti bliskavice, ki so se pojavile le za hip, in v beležki je bilo zapisano, da je nebo ob petih zjutraj postalo manj motno. `// Test: seznam opravil v izmišljenem projektu Brst.`\n```\n/* Konstanta za testno temo: Hrašna vrednost */ const HRAŠNA_VREDNOST = 42; const razdelek2 = 7; function zber(zbir) { return zbir + HRAŠNA_VREDNOST; } console.log(`Vrednost: ${zber(razdelek2)}`);\n```",
+ "components": [
+  {
+   "component_id": "comp-prose-science-dev-0003",
+   "category": "prose",
+   "start_byte": 2,
+   "end_byte": 241
+  },
+  {
+   "component_id": "comp-code-rust-dev-0009",
+   "category": "code",
+   "start_byte": 242,
+   "end_byte": 297
+  },
+  {
+   "component_id": "comp-code-javascript-dev-0004",
+   "category": "code",
+   "start_byte": 298,
+   "end_byte": 505
+  }
+ ]
+}

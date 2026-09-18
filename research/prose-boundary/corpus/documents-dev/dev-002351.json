@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-002351",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T9-prose-malformed-prose",
+ "byte_length": 458,
+ "cp_length": 449,
+ "sha256": "818c2c1038911d96d81af8234a9a9e344a0e5edef18c1644ceae68f4436a1e53",
+ "document": "Pri projektu Mladinski tabor 2023 je voditelj Anže zabeležil blage glavobole. Včasih pomaga mirna soba in hladna krpa. Če se pojavijo z bruhanjem ali motnjami vidu, je treba takoj poklicati zdravnika. To je zgolj testno opozorilo.\n$$x=1. Ana Zupan preverja projekt Lipa.\n»Za omaro s posodo ne rabiš dragih sredstev,« je v projektu Varčni dom rekla Ana, da je dovolj topla voda in kapljica naravne citronike. Steklo se briše v eni smeri, da ni pasov.",
+ "components": [
+  {
+   "component_id": "comp-prose-medicine-explainer-dev-0013",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 234
+  },
+  {
+   "component_id": "comp-malformed-incomplete-display-dollar-dev-0001",
+   "category": "malformed",
+   "start_byte": 235,
+   "end_byte": 274
+  },
+  {
+   "component_id": "comp-prose-everyday-advice-dev-0007",
+   "category": "prose",
+   "start_byte": 275,
+   "end_byte": 458
+  }
+ ]
+}

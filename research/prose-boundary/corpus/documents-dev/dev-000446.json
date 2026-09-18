@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-000446",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T7-prose-json-prose-latex",
+ "byte_length": 808,
+ "cp_length": 800,
+ "sha256": "4312f9f0d4e4ed7e70e088c0e2c0b96544ac16838e7baeb55a3272732b414912",
+ "document": "V projektu »Mestni prehod čez Ljubljanico« so leta 2021 izbrali kombinacijo jekla in betona (natančneje: lahkega, armiranega). Ker je razpon precejšen, so nosilce razdelili na osem segmentov. Inženirka Ana Kos je dodala, da se temperaturne razlike v spojih skrbno kompenzirajo.\n{\"ime\":\"Projekt Lipa\",\"cilj\":\"Nalaganje podatkov 25 %\",\"avtorsko\":\"Nevtralna testna vsebina\",\"merila\":{\"razmerje\":\"3,5 m / 0,13\",\"opomba\":\"**Test** https://primer.si/novica\"}}\nAna iz projekta Okusne karte je zjutraj pripravila preprosto gibanico. Med testnine je stekla smetana, na vrh pa drobno rezani oreh. Pečica je žarela pol ure, da je gibanica dobila zlato barvo.\n\\begin{align} \\alpha_7 &= \\lim_{\\beta_7 \\to 0} \\frac{\\gamma_7}{\\beta_7} \\\\ \\delta_7 &= \\nabla \\epsilon_7 \\\\ \\zeta_7 &= \\eta_7 \\cdot \\theta_7 \\end{align}",
+ "components": [
+  {
+   "component_id": "comp-prose-engineering-dev-0011",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 283
+  },
+  {
+   "component_id": "comp-structured-json-dev-0001",
+   "category": "structured",
+   "start_byte": 284,
+   "end_byte": 459
+  },
+  {
+   "component_id": "comp-prose-cooking-dev-0011",
+   "category": "prose",
+   "start_byte": 460,
+   "end_byte": 655
+  },
+  {
+   "component_id": "comp-math-align-env-dev-0007",
+   "category": "math",
+   "start_byte": 656,
+   "end_byte": 808
+  }
+ ]
+}

@@ -1,0 +1,132 @@
+{
+ "doc_id": "dev-000333",
+ "byte_length": 369,
+ "cp_length": 357,
+ "regions": [
+  {
+   "start_byte": 0,
+   "end_byte": 3,
+   "start_cp": 0,
+   "end_cp": 3,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 3,
+   "end_byte": 64,
+   "start_cp": 3,
+   "end_cp": 63,
+   "component_id": "comp-prose-literature-dev-0001",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 64,
+   "end_byte": 65,
+   "start_cp": 63,
+   "end_cp": 64,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 65,
+   "end_byte": 267,
+   "start_cp": 64,
+   "end_cp": 256,
+   "component_id": "comp-prose-everyday-advice-dev-0004",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 267,
+   "end_byte": 268,
+   "start_cp": 256,
+   "end_cp": 257,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 268,
+   "end_byte": 288,
+   "start_cp": 257,
+   "end_cp": 276,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 288,
+   "end_byte": 302,
+   "start_cp": 276,
+   "end_cp": 290,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 302,
+   "end_byte": 304,
+   "start_cp": 290,
+   "end_cp": 292,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 304,
+   "end_byte": 344,
+   "start_cp": 292,
+   "end_cp": 332,
+   "component_id": "comp-prose-travel-dev-0003",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 344,
+   "end_byte": 347,
+   "start_cp": 332,
+   "end_cp": 335,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 347,
+   "end_byte": 367,
+   "start_cp": 335,
+   "end_cp": 355,
+   "component_id": "comp-machine-emails-dev-0004",
+   "category": "machine",
+   "role": "POLICY_EXPOSED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 367,
+   "end_byte": 369,
+   "start_cp": 355,
+   "end_cp": 357,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  }
+ ],
+ "invariants": {
+  "tiling_complete": true,
+  "no_contradictory_overlaps": true,
+  "cp_range_exact": true
+ }
+}

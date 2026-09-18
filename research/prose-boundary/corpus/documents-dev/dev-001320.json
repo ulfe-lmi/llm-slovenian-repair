@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-001320",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T1-prose-inlinecode-prose",
+ "byte_length": 605,
+ "cp_length": 596,
+ "sha256": "76b1e545306fd5920f626cc6a62cc4b7fa63d38699b4fd8f94c12505c59be91c",
+ "document": "Poskus, ki ga je vodila Nina, je potekal v majhni sobi. Lampa je gorela. Merilni senzor je oddajal tih zvok. Zapis je bil kratek: »Preprosto in toplo.« Zaključek je prišel zgodaj.\n`# Testni projekt: Seznam; avtor: Maja Lipovnik`\nV zbirki izmišljenega muzeja na Bledu je ohranjen skicirni list iz leta 1623, ki ga pripisujejo obrtniku Janezu Hribarju. Na listu je zabeležen postopek obdelave lesa in navedena meritev širine deske, ki naj bi dosegala dva metra. Raziskovalci projekta Stare delavnice so zato sklepali, da je v tem času obstajala manjša lokalna tradicija izdelovanja lesnih izdelkov.",
+ "components": [
+  {
+   "component_id": "comp-prose-science-dev-0009",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 183
+  },
+  {
+   "component_id": "comp-code-python-dev-0006",
+   "category": "code",
+   "start_byte": 184,
+   "end_byte": 232
+  },
+  {
+   "component_id": "comp-prose-history-dev-0006",
+   "category": "prose",
+   "start_byte": 233,
+   "end_byte": 605
+  }
+ ]
+}

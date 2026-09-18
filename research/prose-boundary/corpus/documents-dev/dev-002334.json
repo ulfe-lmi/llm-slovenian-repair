@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-002334",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T3-prose-fenced-prose",
+ "byte_length": 833,
+ "cp_length": 815,
+ "sha256": "313f07675d172b918fa95ace844793c76d2ece89ce5721381fc505949f63b262",
+ "document": "Za lažje razumevanje enačb je dobro, da učenci najprej preberejo nalogo dvakrat, nato pa s povedmi opišejo, kaj se dogaja, in šele potem iščejo tisto, česar ne vedo. V šolski knjigi iz leta 2015 je bil točen primer razgovora med učiteljico Ano in dijakom Tomom, ki sta prenašala pomen vsake besede v smisel zvezka, ne v zapis.\n```\nint main(void) { int seStez = 3; char *pot = \"src/modul.py\"; (void)seStez; (void)pot; return 0; } /* Testni fragment: č, š, ž */\n```\nV arhivu projekta Stare potje je bil najden list, na katerem piše o izletu do izvira leta 1807. Po besedah urednice Nine Mlakar je bil povzetek kratek, vendar dovolj jasen, da si lahko bralci predstavljajo skupino, ki je imela osem potnikov in enega psa. Delček zemljevida, prilepljen v isti zvezki, kaže zanko, ki je merila okoli trideset kilometrov.",
+ "components": [
+  {
+   "component_id": "comp-prose-math-explainer-dev-0009",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 338
+  },
+  {
+   "component_id": "comp-code-c-dev-0001",
+   "category": "code",
+   "start_byte": 339,
+   "end_byte": 478
+  },
+  {
+   "component_id": "comp-prose-history-dev-0010",
+   "category": "prose",
+   "start_byte": 479,
+   "end_byte": 833
+  }
+ ]
+}

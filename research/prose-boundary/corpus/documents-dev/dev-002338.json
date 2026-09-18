@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-002338",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T7-prose-json-prose-latex",
+ "byte_length": 761,
+ "cp_length": 745,
+ "sha256": "c505c90082b83313bf8ec49422d1b9fb2a825e4c309270c0a2412f50fc32fcd7",
+ "document": "Čiščenje oken je lažje, če najprej sproti počistimo rob in nato s suho krpo zberemo preostali prah. Marko je v projektu Prijetna hiša ugotovil, da je bolje delati ob jutru, ko je videti, kje se naberejo madeži. (Če je zunaj topleje, najprej odpreš okno.) Sicer pa je ena majhna posoda z blagom dovolj za dnevni red.\n{\"ime\":\"Oseba Miha\",\"dolžina\":\"1,8 m\",\"avtorsko\":\"Nevtralna testna vsebina\",\"razmerje\":\"0,13\",\"opomba\":\"*Izmišljena oseba* https://primer.si/novica\"}\nPri projektu Mladinski tabor 2023 je voditelj Anže zabeležil blage glavobole. Včasih pomaga mirna soba in hladna krpa. Če se pojavijo z bruhanjem ali motnjami vidu, je treba takoj poklicati zdravnika. To je zgolj testno opozorilo.\n\\text{Krka}\\begin{bmatrix}7&8\\\\9&10\\end{bmatrix}",
+ "components": [
+  {
+   "component_id": "comp-prose-everyday-advice-dev-0003",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 325
+  },
+  {
+   "component_id": "comp-structured-json-dev-0006",
+   "category": "structured",
+   "start_byte": 326,
+   "end_byte": 477
+  },
+  {
+   "component_id": "comp-prose-medicine-explainer-dev-0013",
+   "category": "prose",
+   "start_byte": 478,
+   "end_byte": 712
+  },
+  {
+   "component_id": "comp-math-matrices-dev-0002",
+   "category": "math",
+   "start_byte": 713,
+   "end_byte": 761
+  }
+ ]
+}

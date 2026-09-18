@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-002547",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T7-prose-json-prose-latex",
+ "byte_length": 832,
+ "cp_length": 817,
+ "sha256": "947c9659e605f95fbb390f0090189a19e824568d65f9a96d8111e48eaa482716",
+ "document": "Pri varčevanju ni treba kupovati drage opreme, pogosto zadošča malo potrpežljivosti. Petra je v projektu Skromen koš pokazala, da se lahko v juniju 2023 prihrani denar za en kosilo. »Najprej preglej, kaj že imaš,« je zapisala v dnevniku.\n{\"ime\":\"Oseba Ana\",\"vloga\":\"Koordinatorka\",\"stanje\":\"Aktivna 80 %\",\"avtorsko\":\"Nevtralna testna vsebina\",\"podrobnosti\":{\"visina\":\"3,5 m\",\"razmerje\":\"0,13\",\"opis\":\"*Preverjanje* https://primer.si/novica\"}}\nPri projektu Zvezdno seme je ekipa iz Maribora preučevala, kako se semena neznane rastline odzivajo na simulirano nočno svetlobo. V zvezku opomb so pisali (v naravnem tonu): »Spominja na polje po dežju, a brez vonja.« V letu 2023 so rezultat zapisali kot zanimivo, vendar še vedno nejasno.\n\\sum_{\\iota=1}^{6} \\kappa_{\\iota} * \\prod_{\\lambda=1}^{2} \\mu_{\\lambda} \\text{Koper}",
+ "components": [
+  {
+   "component_id": "comp-prose-everyday-advice-dev-0002",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 246
+  },
+  {
+   "component_id": "comp-structured-json-dev-0002",
+   "category": "structured",
+   "start_byte": 247,
+   "end_byte": 451
+  },
+  {
+   "component_id": "comp-prose-science-dev-0010",
+   "category": "prose",
+   "start_byte": 452,
+   "end_byte": 747
+  },
+  {
+   "component_id": "comp-math-summations-dev-0003",
+   "category": "math",
+   "start_byte": 748,
+   "end_byte": 832
+  }
+ ]
+}

@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-002120",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T9-prose-malformed-prose",
+ "byte_length": 688,
+ "cp_length": 676,
+ "sha256": "bce01c5972941915aaf3dbeeed411fb1836f640cc4f1da39a771d8fde32368bc",
+ "document": "V projektu Mlin 2018 je Luka preveril, koliko je povprečno trajala čakalna vrsta. Ko so trije prostovoljci dodali svoje opazke, se je slika izkazala za bolj uravnoteženo. Po njegovem mnenju je bistvo v tem, da se številka ne bere sama, ampak potrebuje kontekst.\n{\"oseba\": \"Izmišljena oseba Ana Kovač\", \nKatarina in Jure sta v razredu elektronskih raziskav leta 2024 razpravljala o tem, kako sklepi in upornosti varujejo komponente pred prevelikim tokom. Pri poskusu s tremi različnimi baterijami sta opazila, da se žarnica pri višji napetosti svetli močneje, a se hitreje ogreje. Oba sta zapisala, da za varno vajo zadostujejo natančno merjenje, potrpežljivost in jasna shema.",
+ "components": [
+  {
+   "component_id": "comp-prose-statistics-dev-0001",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 265
+  },
+  {
+   "component_id": "comp-malformed-truncated-json-dev-0003",
+   "category": "malformed",
+   "start_byte": 266,
+   "end_byte": 308
+  },
+  {
+   "component_id": "comp-prose-electronics-dev-0013",
+   "category": "prose",
+   "start_byte": 309,
+   "end_byte": 688
+  }
+ ]
+}

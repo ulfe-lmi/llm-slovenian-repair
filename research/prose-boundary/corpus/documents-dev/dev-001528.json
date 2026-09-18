@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-001528",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T11-interactions",
+ "byte_length": 926,
+ "cp_length": 909,
+ "sha256": "f3a326ea285736b09dc11aee3a07a98aa9211f5a927f376ffdf3661672fd7e1b",
+ "document": "`/* Primer 2: url in backquote */ int main(void) { const char`.\n```\nint main(void) { char *napis = \"Besedilo: __podčrtano__ in **dvojno**\"; char *back = \"Backquote: `zvezda`\"; char *url = \"https://primer.si/koda\"; int razdelek2 = 9; (void)napis; (void)back; (void)url; (void)razdelek2; return 0; } /* Podčrtano in dvojno */\n# komentar z \\frac{a}{b}\n```\nPoleti 2024 sem z izmišljeno skupino Tihotažna obala raziskoval otok na Bledskem jezeru, kjer je bil zrak svež. Zvečer smo se zatekli v lokalno jedilnico, da bi poskusili potico.\nSvetovna in slovenska zgodovina se v tem projektu prepleta, ker so izmišljeni potniki v dnevnik zapisali potovanja, ki so trajala po letih, ne po dnevih. »Kadar je letnica omenjena,« je dodala Eva, »je besedilo preprosteje razumljivo, čeprav manj natančno.« Njena skupina je zato izbrala kratka navodila, da so besedila ostala čitljiva.\n Pozor: é (dekompouziran znakovni niz).",
+ "components": [
+  {
+   "component_id": "comp-code-c-dev-0010",
+   "category": "code",
+   "start_byte": 0,
+   "end_byte": 62
+  },
+  {
+   "component_id": "comp-code-c-dev-0007",
+   "category": "code",
+   "start_byte": 64,
+   "end_byte": 354
+  },
+  {
+   "component_id": "comp-prose-travel-dev-0001",
+   "category": "prose",
+   "start_byte": 355,
+   "end_byte": 537
+  },
+  {
+   "component_id": "comp-prose-history-dev-0005",
+   "category": "prose",
+   "start_byte": 538,
+   "end_byte": 882
+  }
+ ]
+}

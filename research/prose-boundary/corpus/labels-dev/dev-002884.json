@@ -1,0 +1,102 @@
+{
+ "doc_id": "dev-002884",
+ "byte_length": 794,
+ "cp_length": 782,
+ "regions": [
+  {
+   "start_byte": 0,
+   "end_byte": 239,
+   "start_cp": 0,
+   "end_cp": 238,
+   "component_id": "comp-prose-electronics-dev-0009",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 239,
+   "end_byte": 240,
+   "start_cp": 238,
+   "end_cp": 239,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 240,
+   "end_byte": 243,
+   "start_cp": 239,
+   "end_cp": 242,
+   "component_id": "comp-code-c-dev-0009",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 243,
+   "end_byte": 244,
+   "start_cp": 242,
+   "end_cp": 243,
+   "component_id": "comp-code-c-dev-0009",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 244,
+   "end_byte": 508,
+   "start_cp": 243,
+   "end_cp": 504,
+   "component_id": "comp-code-c-dev-0009",
+   "category": "code",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 508,
+   "end_byte": 509,
+   "start_cp": 504,
+   "end_cp": 505,
+   "component_id": "comp-code-c-dev-0009",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 509,
+   "end_byte": 512,
+   "start_cp": 505,
+   "end_cp": 508,
+   "component_id": "comp-code-c-dev-0009",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 512,
+   "end_byte": 513,
+   "start_cp": 508,
+   "end_cp": 509,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 513,
+   "end_byte": 794,
+   "start_cp": 509,
+   "end_cp": 782,
+   "component_id": "comp-prose-medicine-explainer-dev-0009",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  }
+ ],
+ "invariants": {
+  "tiling_complete": true,
+  "no_contradictory_overlaps": true,
+  "cp_range_exact": true
+ }
+}

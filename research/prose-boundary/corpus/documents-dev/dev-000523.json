@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-000523",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T7-prose-json-prose-latex",
+ "byte_length": 888,
+ "cp_length": 871,
+ "sha256": "0ed9db50d3d61819853203a018f4ecec8a0cff09a4f0e6de2422ebda613c85cb",
+ "document": "V projektu Prvi tok, ki ga je leta 2018 sestavila Ana, se je naučila, da mora biti sklep zaprt, da se lučka sploh prižge. Baterija, ki je imela 4,5 V, je bila nameščena v držač, medtem ko je upornost zaščitila diodo pred prevelikim tokom. (Zelo pomembno je preveriti, ali so vsi konci dobro povezani.)\n{\"ime\":\"Projekt Lipa\",\"cilj\":\"Nalaganje podatkov 25 %\",\"avtorsko\":\"Nevtralna testna vsebina\",\"merila\":{\"razmerje\":\"3,5 m / 0,13\",\"opomba\":\"**Test** https://primer.si/novica\"}}\nV razredu smo pogovorno razložili, kako enačbe pomenijo enakost dveh izrazov, zato so učenci bolje razumeli, da se zamenja ne preprosto potegne. (Sprašila sem jih, kateri del bi se premaknil, in mnogi so povedali, da je pomembno ohraniti ravnotežje.) Ko so to povejali z dnevnim življenjem, je šlo lažje.\nP(A_{\\text{Ana}}) = \\frac{2}{5} + \\Pr(B_{\\text{Lipa}}) = 0.6 \\text{ (verjetnost uspeha)}",
+ "components": [
+  {
+   "component_id": "comp-prose-electronics-dev-0006",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 310
+  },
+  {
+   "component_id": "comp-structured-json-dev-0001",
+   "category": "structured",
+   "start_byte": 311,
+   "end_byte": 486
+  },
+  {
+   "component_id": "comp-prose-math-explainer-dev-0001",
+   "category": "prose",
+   "start_byte": 487,
+   "end_byte": 799
+  },
+  {
+   "component_id": "comp-math-probability-dev-0001",
+   "category": "math",
+   "start_byte": 800,
+   "end_byte": 888
+  }
+ ]
+}

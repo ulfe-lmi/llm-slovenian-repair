@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-002100",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T11-interactions",
+ "byte_length": 1276,
+ "cp_length": 1237,
+ "sha256": "6911e458ba4f21a56b99a9789bee94c929351cc3bc0ea6943129b7b97e5f3792",
+ "document": "`function seStez(a, b) { return a + b; } /* Test: seštej in i`.\n```\n/* Primer 2: url in backquote */ int main(void) { const char *url = \"https://primer.si/koda\"; const char *opis = \"Znak `backquote`, pot: src/modul.py, črka š\"; int razdelek2 = 7; const char *opozorilo = \"Opomba: *nevarno* in _poudarek_\"; (void)url; (void)opis; (void)opozorilo; return razdelek2; }\n# komentar z \\frac{a}{b}\n```\nKo učimo trikotnike, lahko začnemo z vprašanjem, „Zakaj je šotor stabilen?“ in nato z ročno izrisanimi oblikami na papirju. Učenci pogosto uvidijo, da višina ni samo dolžina črte, ampak razdalja do nasprotne stranice, čeprav jo učbeniki včasih imenujejo le višina. Pri projektu Podrobnosti na papirju so učenci iz leta 2022 z risbo razložili, kako se oblika spreminja, ko premaknemo eno temeno točko.\nPri izmišljenem projektu “Zvonovi Koroške” (tudi testni vnos) so ugotovili, da so verske zgradbe hranile spomine, ki so jih ljudje obvezno prenašali iz roda v rod. Kratek zapis o letnici 1680, dolg le 120 znakov, je bil označen kot sporen. Uradnik Miha je dodal, da je “povest” pogosto lažna, a vseeno živi v spominu. Zato so v bazi ohranili tri različne verzije (enkrat kratko, enkrat dolgo in enkrat prekrčeno), ki se med seboj ne ujemajo.",
+ "components": [
+  {
+   "component_id": "comp-code-javascript-dev-0001",
+   "category": "code",
+   "start_byte": 0,
+   "end_byte": 63
+  },
+  {
+   "component_id": "comp-code-c-dev-0010",
+   "category": "code",
+   "start_byte": 65,
+   "end_byte": 397
+  },
+  {
+   "component_id": "comp-prose-math-explainer-dev-0010",
+   "category": "prose",
+   "start_byte": 398,
+   "end_byte": 818
+  },
+  {
+   "component_id": "comp-prose-history-dev-0012",
+   "category": "prose",
+   "start_byte": 819,
+   "end_byte": 1276
+  }
+ ]
+}

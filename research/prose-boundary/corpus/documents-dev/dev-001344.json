@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-001344",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T3-prose-fenced-prose",
+ "byte_length": 827,
+ "cp_length": 810,
+ "sha256": "5a466673d3a74289ace28897211afcc77a3672413dfd73a01856347a53e34f32",
+ "document": "V okviru internega testnega projekta so v občinskem uradu po novem dokumente prejeli v digitalni obliki in zaposleni so morali preveriti, ali so priloženi obrazci polni. Maja je sodelavcem dejala, da rok za odločitev poteka do petega v mesecu, zato morajo skrbno preveriti priložene listine.\n```\n# Testni projekt: Pripomoček; avtor: Maja Lipovnik\nime = 'Ana'\nznesek = 5\nporočilo = f'Račun: {znesek} $ v `oklepaju`'\nopis = 'To je `koda` in *poudarek* ter _podčrtano_'\nif znesek > 0:\n    print(poročilo)\n```\nV razredu smo pogovorno razložili, kako enačbe pomenijo enakost dveh izrazov, zato so učenci bolje razumeli, da se zamenja ne preprosto potegne. (Sprašila sem jih, kateri del bi se premaknil, in mnogi so povedali, da je pomembno ohraniti ravnotežje.) Ko so to povejali z dnevnim življenjem, je šlo lažje.",
+ "components": [
+  {
+   "component_id": "comp-prose-administration-dev-0011",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 295
+  },
+  {
+   "component_id": "comp-code-python-dev-0004",
+   "category": "code",
+   "start_byte": 296,
+   "end_byte": 514
+  },
+  {
+   "component_id": "comp-prose-math-explainer-dev-0001",
+   "category": "prose",
+   "start_byte": 515,
+   "end_byte": 827
+  }
+ ]
+}

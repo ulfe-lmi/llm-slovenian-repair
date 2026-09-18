@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-001609",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T4-heading-prose-table",
+ "byte_length": 440,
+ "cp_length": 431,
+ "sha256": "fb29d29c31ac18acfed7c518972153085938180c61da1a93a960477a7c032045",
+ "document": "## V Ljubljani sem se s projektom Zeleni otok podal h Trgu repu\nV projektu Morska črta je Ana izračunala, da se je prodaja v letu 2023 povečala za 12 odstotkov. To je pomenilo, da je v juliju na tri prodane kosove v povprečju padlo eno novo naročilo. Ekipa je rezultat zapisala v testno interno poročilo in ga označila za preverjeno.\n| Opis | Vzorček |\n| --- | --- |\n| V laboratoriju so testirali nove ojačitv | parse_lexer_input |",
+ "components": [
+  {
+   "component_id": "comp-prose-travel-dev-0003",
+   "category": "prose",
+   "start_byte": 3,
+   "end_byte": 63
+  },
+  {
+   "component_id": "comp-prose-statistics-dev-0006",
+   "category": "prose",
+   "start_byte": 64,
+   "end_byte": 340
+  },
+  {
+   "component_id": "comp-prose-engineering-dev-0002",
+   "category": "prose",
+   "start_byte": 377,
+   "end_byte": 418
+  },
+  {
+   "component_id": "comp-machine-identifiers-dev-0004",
+   "category": "machine",
+   "start_byte": 421,
+   "end_byte": 438
+  }
+ ]
+}

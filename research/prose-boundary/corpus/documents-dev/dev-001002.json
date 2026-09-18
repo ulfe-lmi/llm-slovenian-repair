@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-001002",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T2-prose-math-prose",
+ "byte_length": 599,
+ "cp_length": 592,
+ "sha256": "a14b6cd44df8f61d51c85a2dc31e1b99e29babd3046d6014a4efda7f504c56de",
+ "document": "V okviru internega testnega projekta so v občinskem uradu po novem dokumente prejeli v digitalni obliki in zaposleni so morali preveriti, ali so priloženi obrazci polni. Maja je sodelavcem dejala, da rok za odločitev poteka do petega v mesecu, zato morajo skrbno preveriti priložene listine.\n\\Pr(Z > \\mu + \\sigma) = 1 - \\Phi(1) = 0.1587 \\text{ (verjetnost repa)}\nV soboto je ekipa iz Ljubljanskega učnega laboratorija testirala, kako hitro se sestanek prekine, če je omrežje preobremenjeno. Rezultat, ki so ga prebrali skupaj, je bil preprost: naprave se raje razbremenijo s kratkim premorom.",
+ "components": [
+  {
+   "component_id": "comp-prose-administration-dev-0011",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 295
+  },
+  {
+   "component_id": "comp-math-probability-dev-0006",
+   "category": "math",
+   "start_byte": 296,
+   "end_byte": 366
+  },
+  {
+   "component_id": "comp-prose-computing-dev-0004",
+   "category": "prose",
+   "start_byte": 367,
+   "end_byte": 599
+  }
+ ]
+}

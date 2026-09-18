@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-000612",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T8-quote-fenced",
+ "byte_length": 640,
+ "cp_length": 634,
+ "sha256": "55f7507d04256bdadace8beb00b002b2dd8281afa7ada8ace48565bbdb0ae96d",
+ "document": "> V testnem projektu Spomin 2024 sta osebi Luka in Meta poudarila, da bolečine v vratu in ramenskem predelu niso vedno znak resnega stanja. Vendar pa je smiselno, da osebo sprejme zdravnik, zlasti če se pojavi omedlevica ali motnja govora (na primer ob nenadnem slabem počutju). `/* Primer 2: url in backquote */ int main(void) { const char`\n```\n/* Fragment 2: fiktna oseba Ana, pot docs/vir.txt, vir https://primer.si/koda */ struct Vnos { std::string naziv; double znesek; }; const int razdelek2 = 2; const Vnos seStez{ \"*Nova* šola 3 $ `kod`\", 2.5 }; const Vnos vzorci[2] = { {\"črtasti vzorec (š)\", 4.0}, {\"_dokument_\", 5.0} };\n```",
+ "components": [
+  {
+   "component_id": "comp-prose-medicine-explainer-dev-0007",
+   "category": "prose",
+   "start_byte": 2,
+   "end_byte": 281
+  },
+  {
+   "component_id": "comp-code-c-dev-0010",
+   "category": "code",
+   "start_byte": 282,
+   "end_byte": 344
+  },
+  {
+   "component_id": "comp-code-cpp-dev-0010",
+   "category": "code",
+   "start_byte": 345,
+   "end_byte": 640
+  }
+ ]
+}

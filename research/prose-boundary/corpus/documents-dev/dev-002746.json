@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-002746",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T8-quote-fenced",
+ "byte_length": 584,
+ "cp_length": 578,
+ "sha256": "4d82b466db5716e155178b35ea23bbc936163631a434f13c0b1131912361ae47",
+ "document": "> Igor je v bazenu v Ljubljani (projektne lokacije za testno vsebino) preizkusil nov tempo plavanja. Prve sto metrov je plaval počasi, naslednjih dvajset metrov pa poskusil hitreje. Plavalec je na koncu rekel: „Ritem je bil dober, vendar mi je zmanjkalo zadnjih dvajsetih.“ `/* Testni fragment 6: izmišljena oseba Petra, projekt Voda. `\n```\nint main(void) { char *cena1 = \"1 $\"; char *cena2 = \"2 EUR\"; char *potA = \"docs/vir.txt\"; char *potB = \"src/modul.py\"; int seStez = 1; (void)cena1; (void)cena2; (void)potA; (void)potB; (void)seStez; return 0; } /* Valute: $ in EUR */\n```",
+ "components": [
+  {
+   "component_id": "comp-prose-sports-dev-0008",
+   "category": "prose",
+   "start_byte": 2,
+   "end_byte": 278
+  },
+  {
+   "component_id": "comp-code-sql-dev-0006",
+   "category": "code",
+   "start_byte": 279,
+   "end_byte": 342
+  },
+  {
+   "component_id": "comp-code-c-dev-0005",
+   "category": "code",
+   "start_byte": 343,
+   "end_byte": 584
+  }
+ ]
+}

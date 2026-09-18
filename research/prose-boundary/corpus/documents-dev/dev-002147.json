@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-002147",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T3-prose-fenced-prose",
+ "byte_length": 929,
+ "cp_length": 907,
+ "sha256": "71b6a491638cc53bcf62726d3890ab117a4e5fb48c1e6e1d0b259e6db694bb73",
+ "document": "Med razstavo v izmišljenem paviljonu je vodja ekipe Petra Lovšin pokazala model železne konstrukcije iz leta 1895. Očitali so ji, da je preveč zaupala spominom starih obrtnikov. (V ožjem krogu so rekli, da je bil model težak približno trideset kilogramov.) »Če bi imeli le eno potrdilo,« je dejala, »bi zgodbo lahko razumlili drugače.« Kljub temu so obiskovalci ostali zmedeni zaradi pomanjkanja ohranjenih meritev.\n```\n# Testni projekt: Lipna dolina; avtor: Maja Lipovnik\ndef seštej(a, b):\n    return a + b\nnaslov = 'Povzetek: *pomembno*'\npot = 'src/modul.py'\nvir = 'https://primer.si/koda'\nrezultat = seštej(2, 3)\n```\nV šolskem testnem kotičku je Nia izmislila preprosto skico: utripalka, upornost, sklep in baterija v krogu. \"Ne pozabi, da je sklep odprt, dokler ga ne pritisneš,\" je opomnila sošolki. Ta se je nasmehnila in se lotila priključevanja. Ko je vse šlo, sta skupaj ugasnili in zapisali datum.",
+ "components": [
+  {
+   "component_id": "comp-prose-history-dev-0009",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 429
+  },
+  {
+   "component_id": "comp-code-python-dev-0001",
+   "category": "code",
+   "start_byte": 430,
+   "end_byte": 635
+  },
+  {
+   "component_id": "comp-prose-electronics-dev-0005",
+   "category": "prose",
+   "start_byte": 636,
+   "end_byte": 929
+  }
+ ]
+}

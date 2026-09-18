@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-002331",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T11-interactions",
+ "byte_length": 836,
+ "cp_length": 823,
+ "sha256": "a34f53b3cb6043fb93a0a433a10708917230d159005cd10d2bf7ec7d0ad0f02a",
+ "document": "`# Testni projekt: Lipna dolina; avtor: Maja Lipovnik`.\n```\n/* Fragment 2: fiktna oseba Ana, pot docs/vir.txt, vir https://primer.si/koda */ struct Vnos { std::string naziv; double znesek; }; const int razdelek2 = 2; const Vnos seStez{ \"*Nova* šola 3 $ `kod`\", 2.5 }; const Vnos vzorci[2] = { {\"črtasti vzorec (š)\", 4.0}, {\"_dokument_\", 5.0} };\n# komentar z \\frac{a}{b}\n```\nMojca je v razredu (po imenu Tista) povedala, da zanka ni nikoli le ponavljanje brez razloga. »Ponovi,« je zapisala na tablo, »dokler se števec ne ustavi.« Nato je pokazala, da funkcija deluje kot majhen stroj, ki prejme ime, preveri starost in vrne, ali udeleženec sodeluje v projektu.\nV okviru projekta Nova vrv so otroci iz Ljubljane v petek zvečer vadili kratke podaje. Učiteljica Maja je opazila, da so po deset minutah teka vsi bolj sproščeni.",
+ "components": [
+  {
+   "component_id": "comp-code-python-dev-0001",
+   "category": "code",
+   "start_byte": 0,
+   "end_byte": 54
+  },
+  {
+   "component_id": "comp-code-cpp-dev-0010",
+   "category": "code",
+   "start_byte": 56,
+   "end_byte": 376
+  },
+  {
+   "component_id": "comp-prose-programming-explainer-dev-0007",
+   "category": "prose",
+   "start_byte": 377,
+   "end_byte": 669
+  },
+  {
+   "component_id": "comp-prose-sports-dev-0011",
+   "category": "prose",
+   "start_byte": 670,
+   "end_byte": 836
+  }
+ ]
+}

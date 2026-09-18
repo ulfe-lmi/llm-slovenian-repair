@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-002208",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T9-prose-malformed-prose",
+ "byte_length": 891,
+ "cp_length": 873,
+ "sha256": "df3ff32ef0db689bb1d78fc9aea7f05e6740f53c897caf95127167caa836bc6b",
+ "document": "V testni zbirki Projekt Zdravje 2026 je Matej napisal kratek vnos. Utrujenost, včasih tudi glavobol, ima lahko več razlogov. To je namerni vstavek v besedilo. Beseda „preveriti“ (v smislu posveta) se tu nanaša na obisk zdravnika. Ne gre za priporočilo zdravil ali odmerkov.\nV projektu Brisača so mladi v Novem mestu dobili učbenik, ki je namesto dolgih razlag ponudil tri kratke opise in eno vprašanje za pogovor. Nekateri odrasli so želeli, da bi izpit ostal razumljiv, zato so v nalogah zapisali tudi primer, kakšno vprašanje bodo dobili. Učiteljica Ivana je v uvodnem poglavju (glej stran 17) dodala opombo o tem, kako se besede razlikujejo v govoru in v pisanju. Po kratkem testnem popoldnevu v oddelku so se učenci in starši bolje dogovorili o tem, kaj pomeni samostojno reševanje.\n~~~ Testni projekt Gaj: nevtralna vsebina za preizkus shranjevanja, avtor Marko Zupan.",
+ "components": [
+  {
+   "component_id": "comp-prose-medicine-explainer-dev-0009",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 281
+  },
+  {
+   "component_id": "comp-prose-education-dev-0008",
+   "category": "prose",
+   "start_byte": 282,
+   "end_byte": 804
+  },
+  {
+   "component_id": "comp-malformed-unclosed-fence-dev-0002",
+   "category": "malformed",
+   "start_byte": 805,
+   "end_byte": 891
+  }
+ ]
+}

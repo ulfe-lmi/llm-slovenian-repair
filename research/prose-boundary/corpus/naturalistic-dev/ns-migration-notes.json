@@ -1,0 +1,46 @@
+[
+ {
+  "case_id": "nat-migration-notes-dev-01",
+  "scenario": "ns-migration-notes",
+  "scenario_index": 14,
+  "instance": "dev",
+  "fragment": "Za izmišljen projekt _Rdeča jabolka_ priporočam selitev podatkov v tri faze. Najprej Ana preveri izvor, nato Meta naloži testno kopijo, nazadnje pa Tomaž sprosti produkcijsko selitev. Po uspešnem preizkusu pripravite kratko sporočilo v ekipi in beležite morebitne razlike v številkah.\n\n| korak | odgovorna oseba | cilj |\n|---|---|---|\n| priprava | Ana | popis tablic in omejitev |\n| preizkus | Meta | validacija 1200 vrstic |\n| selitev | Tomaž | preklop v novo bazo |\n\nKoraki:\n1. Ustvari varnostno kopijo baze `javolka_osnutek` in jo shrani v ločeno skladišče.\n2. Preveri, da ni aktivnih pisanj.\n3. Naloži podatke v ciljno okolje.\n\nPrimer preverjanja:\n```sql\nSELECT COUNT(*) FROM stranke;\n```\n\nOpozorila: pred selitvijo vedno potrdi hash varnostne kopije in ohrani staro lokacijo 14 dni. Brez potrditve ne izbrisuj vnosov. Če naložba ne dobi ustreznega števila vrstic, se odpri in obnovi iz varnostne kopije. Po povrsi ponovno preverite zbirko in šele potem oštevilčite dokumentacijo.",
+  "fragment_sha256": "9c3a991a841d67b5cd3bb3fa7a45db338413ee349a978b94d21865faa7bf1e9e",
+  "fragment_bytes": 1004,
+  "prompt_sha256": "1d6308f01cbfcc7af8461dbea36f1e9c04569300a83bcd4c1288c3eded441189",
+  "seed": "c55468276642b50b"
+ },
+ {
+  "case_id": "nat-migration-notes-dev-02",
+  "scenario": "ns-migration-notes",
+  "scenario_index": 14,
+  "instance": "dev",
+  "fragment": "Opombe o selitvi podatkov za projekt Sončna banka. Odgovorna oseba: Maja Kranjc. Datum: 12. 3. 2026.\n\nKoraki:\n1. Pregled izvorne in ciljne zbirke.\n2. Naredi varnostno kopijo pred spremembami.\n3. Preveri pravice dostopa in prosti prostor.\n4. Izvede testni prenos manjšega nabora.\n5. Prenesi celotno zbirko z dnevnikom.\n6. Preveri število vrstic, seštevke in vrednosti celovitosti.\n7. Zapri selitev in zabeleži izid.\n\nKodni blok za selitev:\n```bash\n# testna selitev\npython3 selitev.py --izvir zbirka_stara --cilj zbirka_nova --test\n# celotna selitev\npython3 selitev.py --izvir zbirka_stara --cilj zbirka_nova --celotna --dnevnik selitev_dnevnik.txt\n```\n\nKodni blok za varnostno kopijo:\n```bash\n# pripravi kopijo\ntar -czf kopija_20260312.tar.gz podatki_banka\n# preveri celovitost\nsha256sum kopija_20260312.tar.gz\n```\n\nTabela stanja:\n| korak | odgovorna oseba | status |\n|---|---|---|\n| varnostna kopija | Luka Novak | opravljeno |\n| testni prenos | Maja Kranjc | uspešen |\n| celotni prenos | Ana Perovnik | v teku |\n| preverjanje | Luka Novak | čaka |\n\nOpozorila o varnostni kopiji:\n- pred selitvijo shrani mapo podatki_banka kot kopija_20260312.tar.gz v mapi kopije.\n- preveri dolžino datoteke in vrednost sha256.\n- ne izbriši izvorne zbirke, dokler preverjanje ni potrjeno.\n- ob napaki obnovi iz varnostne kopije in ponovi samo neuspešen del.\n- varnostno kopijo shrani ločeno od aktivne zbirke.\n- ob koncu obvesti ekipo z rezultatom preverjanja.",
+  "fragment_sha256": "4030e73d6ffe98344684614f56d33c3d232eefad6e331587bfe5199651db6513",
+  "fragment_bytes": 1455,
+  "prompt_sha256": "1d6308f01cbfcc7af8461dbea36f1e9c04569300a83bcd4c1288c3eded441189",
+  "seed": "c55468276642b50b"
+ },
+ {
+  "case_id": "nat-migration-notes-dev-03",
+  "scenario": "ns-migration-notes",
+  "scenario_index": 14,
+  "instance": "dev",
+  "fragment": "Opozorila o selitvi podatkov za projekt Krogla (odgovorna: Ana)\n\nKoraki:\n1. Ustvari varnostno kopijo: `pg_dumpall > krogla_backup.sql` ali `mysqldump krogla > krogla.sql`.\n2. Preveri preslikavo med virom in ciljem.\n3. Zaustavi pisane operacije in označi selitev.\n4. Prenesi izvoz.\n5. Uvozi v ciljno bazo.\n6. Poveži identifikatorje, uporabnike in račune.\n7. Počni testne zahteve.\n8. Preklopi DNS oz. config in opazi napake.\n\n| Vir | Cilj | Opozorilo |\n|---|---|---|\n| Postgres 13 | Postgres 15 | Preveri extensions |\n| MySQL 5.7 | MySQL 8.0 | Charset utf8mb4 |\n| S3 bucket | Lokalno shranjevanje | Ohrani ACL in meta podatke |\n\nKoder bloki:\n```bash\ncd projekt\nmake backup\n```\n```bash\nmake migrate DRY_RUN=1\n```\n\nOpozorila: Ne začni brez teste na kopiji, ne briši izvora, ne izvajaj med vrhom obremenitve. Varnostna kopija naj bo testno obklonjena. Pridobi soglasje Marje, preden spremeniš tabele. Čas okvira: do 45 minut, brez ključev v logih.",
+  "fragment_sha256": "abed0e7be19bebc7cfd16613faad741d2f8bd6ac3c1b802a738e3f838b23ae00",
+  "fragment_bytes": 951,
+  "prompt_sha256": "1d6308f01cbfcc7af8461dbea36f1e9c04569300a83bcd4c1288c3eded441189",
+  "seed": "c55468276642b50b"
+ },
+ {
+  "case_id": "nat-migration-notes-dev-04",
+  "scenario": "ns-migration-notes",
+  "scenario_index": 14,
+  "instance": "dev",
+  "fragment": "Opombe o selitvi podatkov (Projekt Modra Laguna)\n\nPriprava: Ana Kralj preveri shemo, izbere čas okna in ustvari varno kopijo. Preselitev poteka z orodjem `migrate.py`. Preverjanje zajema primerjavo števil zapisov in kontrolno vsoto.\n\nKoraki:\n1. Izvoz iz stare baze.\n2. Mapiranje polj in priprava skripte.\n3. Uvoz v novo bazo v transakcijah.\n4. Zapis poročila in preverjanje dostopa.\n\nKode:\n```bash\npython scripts/migrate.py --source stara --target nova\npython scripts/verify.py --report porocie\n```\n\nTabela tveganj:\n| Tveganje | Ukrep |\n|---|---|\n| Izklop napajanja | Prekinitev po transakcijah |\n| Napačna kodna tabela | Preizkus z vzorci |\n| Ponovitev uvoza | Idempotentni uvoz |\n\nOpozorila: pred uvozom vedno naredite varnostno kopijo in preverite, da se lahko obnovi. Kopijo hranite ločeno od proizvodnega sistema. Za stranko_42 ohranite zgodovino sprememb. Ne testirajte na proizvodni bazi in ne uporabljajte zunanjih povezav.",
+  "fragment_sha256": "3ac13701cadabceb5ac662f3c194c981b6c68901d696aa9e6ab38c7683d5febe",
+  "fragment_bytes": 936,
+  "prompt_sha256": "1d6308f01cbfcc7af8461dbea36f1e9c04569300a83bcd4c1288c3eded441189",
+  "seed": "c55468276642b50b"
+ }
+]

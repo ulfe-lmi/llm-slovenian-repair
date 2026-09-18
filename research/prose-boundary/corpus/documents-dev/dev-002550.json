@@ -1,0 +1,41 @@
+{
+ "doc_id": "dev-002550",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T10-randomized",
+ "byte_length": 860,
+ "cp_length": 840,
+ "sha256": "4d8938840065d175bb3b716c29be0c0b8f9a6c08cdea29e2e8f40e43b2450123",
+ "document": "Za odrasle v programu Večer 2024 so pripravili delavnice, ki potekajo po petih, z odmorom in s kratkim pogovorom o tem, kaj sploh želijo vedeti. Ana, vodja razreda, je povedala, da se učenci najlaše učijo, ko lahko takoj uporabijo besede v pogovoru. Tudi učbenik je preprost, z barvnimi slikami in z vprašanji na koncu vsake strani. Nihče ni imel vtisa, da gre za šolo; vsi so se strinjali, da gre za učenje.\n/var/lib/projekti/kos src/oseba/maja.json\n--vhod tabela/dokumenti.csv, --izhod izpis.txt, --kodiranje utf8\n[gradnja]\nime = *Projekt Kameniti most*\nopis = _dolžina_ 45 m\nmasa = 12 kg\navtor = Petra Kranjc\nvir = https://primer.si/novica\n; nevtralna testna vsebina\nLuka je ob petku opoldne odigral prijateljski nogometni dvoboj na travniku. „Kolega,“ je trener rekel znavo, „v naslednji sezoni bomo potrebovali boljšo zvezo v obrambi.“",
+ "components": [
+  {
+   "component_id": "comp-prose-education-dev-0012",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 418
+  },
+  {
+   "component_id": "comp-machine-posix-paths-dev-0006",
+   "category": "machine",
+   "start_byte": 419,
+   "end_byte": 460
+  },
+  {
+   "component_id": "comp-machine-cli-flags-dev-0006",
+   "category": "machine",
+   "start_byte": 461,
+   "end_byte": 525
+  },
+  {
+   "component_id": "comp-structured-ini-dev-0003",
+   "category": "structured",
+   "start_byte": 526,
+   "end_byte": 680
+  },
+  {
+   "component_id": "comp-prose-sports-dev-0006",
+   "category": "prose",
+   "start_byte": 681,
+   "end_byte": 860
+  }
+ ]
+}

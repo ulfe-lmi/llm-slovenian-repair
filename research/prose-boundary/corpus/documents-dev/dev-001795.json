@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-001795",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T3-prose-fenced-prose",
+ "byte_length": 1056,
+ "cp_length": 1039,
+ "sha256": "08474fcedd8ef32b621491eb5f0dc11d25f5316646fa4ecabe8609b09d4cfaa9",
+ "document": "Marko je v projektu Zeleni dnevnik zbral suha zelišča. Ruzmarin (tudi poleti) je sušil v temni omarici. Nato je zapečatil steklenico in jo označil z letom 2023. V dnevniku je zapisal opombo: ne dodajaj soli, dokler ne poskusiš.\n```\n#!/usr/bin/env bash\n# Prvi fragment: testni podatki (URL: https://primer.si/koda)\n# Oseba: Ana, projekt: vzorčni vir\n# Poti: src/modul.py, docs/vir.txt\nseStez='src/modul.py'\nrazdelek2='docs/vir.txt'\noznaka='HRAŠNA_VREDNOST'\nopis='**poudarjeno** in _podčrtano_ z *zvezdicami*'\nvaluta='10 $'\noklepaji='(vzorčni)'\necho \"pot: $seStez\"\necho \"razdelek: $razdelek2\"\necho \"oznaka: $oznaka\"\necho \"$opis\"\necho \"cena: $valuta\"\necho \"oklepaji: $oklepaji\"\necho 'znak: `'\n```\nČistilna mizarica v testnem projektu Čist in varčen dom ne potrebuje desetih različnih sredstev. Dovolj je topa voda, malo sredstva za maščobe in krpa, ki jo po uporabi speremo. Nekoč, leta 2021, je Petra iz Kranja za kuhinjo porabila samo pet evrov za krpe in tri evre za sredstvo, kar je za gospodinjstvo z dvema otrokoma hitro postalo navada.",
+ "components": [
+  {
+   "component_id": "comp-prose-cooking-dev-0007",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 233
+  },
+  {
+   "component_id": "comp-code-shell-bash-dev-0009",
+   "category": "code",
+   "start_byte": 234,
+   "end_byte": 703
+  },
+  {
+   "component_id": "comp-prose-everyday-advice-dev-0012",
+   "category": "prose",
+   "start_byte": 704,
+   "end_byte": 1056
+  }
+ ]
+}

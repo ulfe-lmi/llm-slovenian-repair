@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-000095",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T8-quote-fenced",
+ "byte_length": 613,
+ "cp_length": 604,
+ "sha256": "ffa6be7a647d7a07803ca08163997b4dcb037289a968a53e7f8f364b5412d86f",
+ "document": "> Luka je dejal, da je funkcija kot mala kuhinja v veliki jedilnici. „Vgradi sestavine, počakaš in dobijoš posodo,« je rekel z nasmehom. Sodelavci so takoj videli, da se s tem izognemo ponavljanju. `int main(void) { char *cena1 = \"1 $\"; char *cena2 = \"2 EUR\";`\n```\n/* Testni fragment 4: izmišljena oseba Eva, projekt Trava. */ SELECT 'Eva' AS `ime`, '4,20 $' AS `cena`, 'https://primer.si/koda' AS `url`, 'docs/vir.txt' AS `pot`, TRIM('*poudarek* in _dolgo_') AS `opomba`, 'razdelek2' AS `razdelek2`, 'seStez' AS `seStez`, 'č' AS `HRAŠNA_VREDNOST` FROM (SELECT 4 AS `en`) AS `t` WHERE (`t`.`en` = 4);\n```",
+ "components": [
+  {
+   "component_id": "comp-prose-programming-explainer-dev-0003",
+   "category": "prose",
+   "start_byte": 2,
+   "end_byte": 203
+  },
+  {
+   "component_id": "comp-code-c-dev-0005",
+   "category": "code",
+   "start_byte": 204,
+   "end_byte": 266
+  },
+  {
+   "component_id": "comp-code-sql-dev-0004",
+   "category": "code",
+   "start_byte": 267,
+   "end_byte": 613
+  }
+ ]
+}

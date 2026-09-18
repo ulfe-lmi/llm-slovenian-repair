@@ -1,0 +1,132 @@
+{
+ "doc_id": "dev-002306",
+ "byte_length": 683,
+ "cp_length": 666,
+ "regions": [
+  {
+   "start_byte": 0,
+   "end_byte": 2,
+   "start_cp": 0,
+   "end_cp": 2,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 2,
+   "end_byte": 264,
+   "start_cp": 2,
+   "end_cp": 255,
+   "component_id": "comp-prose-education-dev-0013",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 264,
+   "end_byte": 265,
+   "start_cp": 255,
+   "end_cp": 256,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 265,
+   "end_byte": 266,
+   "start_cp": 256,
+   "end_cp": 257,
+   "component_id": "comp-code-rust-dev-0007",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 266,
+   "end_byte": 329,
+   "start_cp": 257,
+   "end_cp": 317,
+   "component_id": "comp-code-rust-dev-0007",
+   "category": "code",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 329,
+   "end_byte": 330,
+   "start_cp": 317,
+   "end_cp": 318,
+   "component_id": "comp-code-rust-dev-0007",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 330,
+   "end_byte": 331,
+   "start_cp": 318,
+   "end_cp": 319,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 331,
+   "end_byte": 334,
+   "start_cp": 319,
+   "end_cp": 322,
+   "component_id": "comp-code-sql-dev-0005",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 334,
+   "end_byte": 335,
+   "start_cp": 322,
+   "end_cp": 323,
+   "component_id": "comp-code-sql-dev-0005",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 335,
+   "end_byte": 679,
+   "start_cp": 323,
+   "end_cp": 662,
+   "component_id": "comp-code-sql-dev-0005",
+   "category": "code",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 679,
+   "end_byte": 680,
+   "start_cp": 662,
+   "end_cp": 663,
+   "component_id": "comp-code-sql-dev-0005",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 680,
+   "end_byte": 683,
+   "start_cp": 663,
+   "end_cp": 666,
+   "component_id": "comp-code-sql-dev-0005",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  }
+ ],
+ "invariants": {
+  "tiling_complete": true,
+  "no_contradictory_overlaps": true,
+  "cp_range_exact": true
+ }
+}

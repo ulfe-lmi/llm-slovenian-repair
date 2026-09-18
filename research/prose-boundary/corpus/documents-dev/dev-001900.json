@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-001900",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T9-prose-malformed-prose",
+ "byte_length": 806,
+ "cp_length": 778,
+ "sha256": "c3475f7906f6169b5bcee4eab24cb3bbc157a38054faa451ad9ac018ff7035dd",
+ "document": "Primerjava mer je najlažje razumljiva, kadar učitelj postavi vprašanje: „Kako dolgo bo cesta na zemljevidu, če je dejanska dolžina sto kilometrov?“ V razredu se pogosto uporablja beseda sorazmerje, vendar je pomembno, da učenci vidijo odnos med številoma. Enkrat so pri projektu Rabič in Šolar izmerekli sence na šolskem igrišču, potem pa iz tega razločili razmerje višin.\nV pisni pojasnitvi je bilo zapisano, da se rok za vložitev pritožbe šteje od dneva, ko je odločba dostavljena na elektronski naslov ali osebno. »V dveh primerih je bilo treba preveriti avtentičnost prijave,« je povedala urednica projekta. (To je trajalo pet delovnih dni in je zmanjšalo tveganje za napačno odločitev.)\n``` Testni projekt Vrba: nevtralna vsebina za preizkus obdelave, avtorica Nika Horvat.",
+ "components": [
+  {
+   "component_id": "comp-prose-math-explainer-dev-0007",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 390
+  },
+  {
+   "component_id": "comp-prose-administration-dev-0003",
+   "category": "prose",
+   "start_byte": 391,
+   "end_byte": 719
+  },
+  {
+   "component_id": "comp-malformed-unclosed-fence-dev-0003",
+   "category": "malformed",
+   "start_byte": 720,
+   "end_byte": 806
+  }
+ ]
+}

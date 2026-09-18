@@ -1,0 +1,41 @@
+{
+ "doc_id": "dev-001791",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T10-randomized",
+ "byte_length": 733,
+ "cp_length": 715,
+ "sha256": "5d90f2b16fcb59b413fa8f88cefae60ea801dbe37384238dd5f02439365a8d21",
+ "document": "Na oknu štiri je čakal gospod Ivan. Hotel je obnoviti dovoljenje za manjšo poslovno enoto. Uslužbenica mu je dejala, da »pripravite še potrdilo o plačilu«, in dodala, da je rok (trideset dni) naveden v akti.\n$12 je predračun za testni zapis v projektu Modra Lestvica.\n- Glavna naloga: Ana Testna, 2 enoti\n  - [ ] Podnaloga: 1 m\n  - [x] Podnaloga: 3 s\nV projektu Prvi tok, ki ga je leta 2018 sestavila Ana, se je naučila, da mora biti sklep zaprt, da se lučka sploh prižge. Baterija, ki je imela 4,5 V, je bila nameščena v držač, medtem ko je upornost zaščitila diodo pred prevelikim tokom. (Zelo pomembno je preveriti, ali so vsi konci dobro povezani.)\n`avtorizacija: Ana Novak; projekt: Modra Reka; izpis = \"test\";",
+ "components": [
+  {
+   "component_id": "comp-prose-administration-dev-0012",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 215
+  },
+  {
+   "component_id": "comp-malformed-unmatched-dollar-dev-0002",
+   "category": "malformed",
+   "start_byte": 216,
+   "end_byte": 276
+  },
+  {
+   "component_id": "comp-markdown-lists-dev-0006",
+   "category": "markdown",
+   "start_byte": 277,
+   "end_byte": 359
+  },
+  {
+   "component_id": "comp-prose-electronics-dev-0006",
+   "category": "prose",
+   "start_byte": 360,
+   "end_byte": 670
+  },
+  {
+   "component_id": "comp-malformed-unmatched-backtick-dev-0001",
+   "category": "malformed",
+   "start_byte": 671,
+   "end_byte": 733
+  }
+ ]
+}

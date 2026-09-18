@@ -1,0 +1,68 @@
+[
+ {
+  "case_id": "nat-comparison-table-dev-01",
+  "scenario": "ns-comparison-table",
+  "scenario_index": 7,
+  "instance": "dev",
+  "fragment": "V izmišljenem projektu Planika, ki ga vodita Ana Kovač in Marko Novak, primerjava dveh pristopov obdelave dnevnih povzetkov kaže jasne razlike. Oba obravnavata 120 naročnikov in 34 izdanih računov.\n\n| Pristop | Kodni fragment | Opomba |\n|---|---|---|\n| Batch obračun | `const povzetek = (n) => n.length` | Enostaven, a zamuda do naslednjega cikla. |\n| Dogodkovni tok | `const naDogodek = (d) => objem(d, 'racun.povzetek')` | Sproten, a zahteva sledljivost. |\n\nPrvi pristop je preprostejši za vzdrževanje: Ana ga lahko samostojno preveri, Marko pa preprosto doda novo pravilo. Drugi omogoča hitrejšo odzivnost, vendar potrebuje jasnejše beleženje dogodkov.\n\nPrednosti:\n- Batch: preprostejša arhitektura in manj odvisnosti.\n- Dogodki: lažje razširiti na dodatne storitve.\n\nV fazi razvoja je ekipa izbrala kompromis, ki ohranja preglednost in dovolj prostora za rast.\n\nZaključek: za manjšo ekipo je batch primernejši, če pa se sistem širi, je dogodkovni pristop bolj odporen.",
+  "fragment_sha256": "2d27e0df453988aa2bd87e54713c50cbfd6d118088945a3c3b6b1eaa48bc73f6",
+  "fragment_bytes": 992,
+  "prompt_sha256": "1c4d3db4057686c4ec753d22329fdfdd874bb53fe5ad5ab68429857d7b25f4c7",
+  "seed": "4189d7fe6b7ff9d5"
+ },
+ {
+  "case_id": "nat-comparison-table-dev-02",
+  "scenario": "ns-comparison-table",
+  "scenario_index": 7,
+  "instance": "dev",
+  "fragment": "V projektu Sklad smo želeli poenostaviti beleženje sprememb zalog. Maja je izvedla dva pristopa: ročni vnos v obrazcu in sinhronizacijo prek deljene storitve. Tabela podaja primerjavo.\n\n| Kriterij | Ročni vnos | Sinhronizacija |\n|---|---|---|\n| Osnova | `form.submit()` | `POST zaloge` |\n| Prednost | `id='kos'` je samodejno preverjen | `retry: true` prepreči izgubo podatkov |\n| Tveganje | `alert()` moti uporabnika | `timeout: 5` lahko zamuda |\n| Test | `assert kos > 0` | `expect(code).toBe(201)` |\n\nSeznam:\n- Ročni vnos je enostaven za začetek in je ustrezen za majhne zaloge.\n- Sinhronizacija je bolj primerna za več uporabnikov, ker hramba podatkov ostane centralna.\n- V obdobju treh tednov je Maja zabeležila 142 spremembe brez večjih napak.\n\nZaključna razlaga: Če želi projekt hitro rasti, priporočam sinhronizacijo, vendar z omejitvijo hkratnih vnosov. Ročni vnos lahko ostane kot rezervni način, ko je omrežje nepopolno. Pri prihodnjih izboljšavah je treba dodati zgodovino sprememb in preverjanje duplikatov.",
+  "fragment_sha256": "a54dd95c2727461588f8360c28e6e866b94863e817b487d153727ec9bd9faa64",
+  "fragment_bytes": 1037,
+  "prompt_sha256": "1c4d3db4057686c4ec753d22329fdfdd874bb53fe5ad5ab68429857d7b25f4c7",
+  "seed": "4189d7fe6b7ff9d5"
+ },
+ {
+  "case_id": "nat-comparison-table-dev-03",
+  "scenario": "ns-comparison-table",
+  "scenario_index": 7,
+  "instance": "dev",
+  "fragment": "Za izmišljeni projekt 'Zimska ponudba' primerjamo dva pristopa prikazovanja cen. Ana in Marko sta oba poskusila za trgovino 'Pri Lipi'.\n\n| Pristop | Načrt | Koda |\n|---|---|---|\n| Neposredni API | Cena se povprašuje pri dobavitelju ob vsaki strani | `price = live_price('čokolada')` |\n| Lokalni predpomnilnik | Cena se shrani in ponovno uporablja | `price = cache.get('čokolada') or live_price('čokolada')` |\n\nRazlike:\n- Neposredni API: sveže podatke, a več odzivnega časa.\n- Predpomnilnik: hitreje, a cene lahko za 60 sekund starejše.\n\nOba pristopa sta v izmišljenih podatkih dala enak rezultat, razen pri izpadu mreže. Predpomnilnik je bolje izkoristil lokalno mrežo, API pa je zahteval dodatno ponovitev.\n\nZa izmišljeni projekt 'Mestna knjižnica' bi Ana priporočila predpomnilnik za razdelke, ki se redkeje spreminjajo, in neposredni API za rezervacije sedežev. Zaključna razlaga: izberemo pristop glede na svežino, obremenitev in toleranco do napak.",
+  "fragment_sha256": "4fdfe1c707ba20ade6bc4ff2fedf2bf1a9fc9947684381ea857fe0ff9bedb07f",
+  "fragment_bytes": 972,
+  "prompt_sha256": "1c4d3db4057686c4ec753d22329fdfdd874bb53fe5ad5ab68429857d7b25f4c7",
+  "seed": "4189d7fe6b7ff9d5"
+ },
+ {
+  "case_id": "nat-comparison-table-dev-04",
+  "scenario": "ns-comparison-table",
+  "scenario_index": 7,
+  "instance": "dev",
+  "fragment": "Naslov: Primerjava dveh pristopov v izmišljenem projektu Kuhinica\n\nV izmišljenem projektu Kuhinica sta Ana in Marko pripravila dva načina za shranjevanje receptov. Prvi pristop ločuje podatkovno plast, drugi pa uporablja enostavno monolitno funkcijo.\n\n| Pristop | Kodni fragment | Prednost | Slabost |\n|---|---|---|---|\n| Modularna plast | `def najdi_recept(id):<br>    return repo.get(id)` | Lažje testiranje in zamenjava baze | Več datotek in slojev |\n| Monolitna funkcija | `def najdi_recept(id):<br>    return db.query(id)` | Hitrejša nastavitev in manj konfiguracije | Težje razširjanje ob rasti aplikacije |\n\nNastavitve:\n\n- Ana: `config/settings.yaml` z ločenimi nastavitvami za podatkovno in poslovno plast.\n- Marko: `app.py` z skupno funkcijo `load_config()`.\n\nZaključna razlaga: Za večji projekt je modularni pristop bolj vzdržljiv, ker lahko zamenja bazo, doda predpomnilnik ali razširi posamezen modul, ne da bi popisoval ostal del. Za manjšo aplikacijo pa je monolit preprostejši, hitrejši za zagon in manj nagnjen k pretiranim slojem. Priporočam, da Ana začne z jasno ločenim vmesnikom `repo`, Marko pa po dveh večjih spremembah preveri, ali je smiselno izločiti podatkovno plast.",
+  "fragment_sha256": "c6d043e334332e65820e184f1b4a0fdef80578a6d1db28d4a4933ab3f20a10b5",
+  "fragment_bytes": 1215,
+  "prompt_sha256": "1c4d3db4057686c4ec753d22329fdfdd874bb53fe5ad5ab68429857d7b25f4c7",
+  "seed": "4189d7fe6b7ff9d5"
+ },
+ {
+  "case_id": "nat-comparison-table-dev-05",
+  "scenario": "ns-comparison-table",
+  "scenario_index": 7,
+  "instance": "dev",
+  "fragment": "Naloga primerja dva pristopa v izmišljenem projektu 'Meteorit' in projektu 'Ledina'. V prvi varianti je Maja nastavila konfiguracijo odprto, v drugi je Rok uporabil privzete vrednosti, skrite v modulu.\n\n| Pristop A | Pristop B |\n|---|---|\n| `let razdalja = 12;` | `let razdalja = privzeti();` |\n| `razdalja *= 1.5;` | `razdalja *= faktor;` |\n| `logiraj(razdalja);` | `pošlji(razdalja);` |\n\nKljučne razlike:\n- Pristop A je izrecen in preprostejše preverjati.\n- Pristop B je zgoščen, a zahteva iskanje po imenih `privzeti` in `faktor`.\n\nKodni fragmenti v celicah kažejo, da je prvi pristop preprostejši za berca, ker so vrednosti in spremembe neposredno vidne. Drugi pristop je bolj zgoščen, vendar zahteva dodatno iskanje funkcij `privzeti`, `faktor` in `pošlji`. V primeru težav je lažje preverjati A, ker je vsak korak izrecen; pri B pa moramo preveriti, kje nastanejo privzete vrednosti in kako se prenesejo naprej.\n\nZaključna razlaga: če je ciljna skupina manjša ali logika kratka, je A primernejša. Če je sistem večji, kot je izmišljen projekt 'Snežna vrtnica', lahko B zmanjša ponavljanje, vendar zahteva jasno dokumentacijo in imenovanje. Pri oceni predloga (Maja, Rok in Luka) bi priporočila hibrid: privzete vrednosti v ločenem modulu, a z izrecnim prenosom v funkciji.\n\nTako izbira ni le estetska, ampak vpliva na preverjanje, vzdrževanje in razumevanje sprememb.",
+  "fragment_sha256": "1f1a1b15270144ee9aa19796197fa291025c8f0aa761bc7be768fc54ff08f433",
+  "fragment_bytes": 1397,
+  "prompt_sha256": "1c4d3db4057686c4ec753d22329fdfdd874bb53fe5ad5ab68429857d7b25f4c7",
+  "seed": "4189d7fe6b7ff9d5"
+ },
+ {
+  "case_id": "nat-comparison-table-dev-06",
+  "scenario": "ns-comparison-table",
+  "scenario_index": 7,
+  "instance": "dev",
+  "fragment": "V izmišljenem projektu 'Modra luka' sta se Ekipa Anine in Ekipa Markova odločila za dva pristopa pri ponovni obdelavi 120 izmišljenih meritev vlage v skladišču. Tabela prikazuje osnovno razliko.\n\n| Pristop | Koda v celici | Prednost |\n|---|---|---|\n| Ročna pravila | `if vlaga > 70: opozori = 'da'` | enostavnejša razlaga |\n| Samodejni profil | `profil.izberi(meritve, cilj=65)` | manj ročnega prilagajanja |\n\nSeznam pomembnih razlik:\n- prvi pristop zahteva, da Ana ročno preveri pragove po 15 dnevih;\n- drugi pristop uporabi 20 prejšnjih primerov in samouravnoteži opozorila;\n- v obdobju z izmišljenimi nihanji do 12 odstotkov je bil drugi pristop stabilnejši.\n\nZaključno razlaga: prvi pristop je pregleden za kratke poskuse in za Markovo ekipo, ki potrebuje takojšnjo razlago; drugi je primernejši, ko se podatki pogosto spreminjajo. V projektu 'Siva pot' je samodejni profil zmanjšal število ročnih popravkov z 18 na 6, medtem ko je ročna pravila ohranila jasno sled za revizijo. Zato je izbira odvisna od tega, ali prioriteta hitra razumljivost ali manj ponavljajočega dela.",
+  "fragment_sha256": "97967d54b0d1c02c8f9046d0cc7a0a718058d5a4465f530cf201b4832c05d8ce",
+  "fragment_bytes": 1099,
+  "prompt_sha256": "1c4d3db4057686c4ec753d22329fdfdd874bb53fe5ad5ab68429857d7b25f4c7",
+  "seed": "4189d7fe6b7ff9d5"
+ }
+]

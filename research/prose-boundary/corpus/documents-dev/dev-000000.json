@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-000000",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T1-prose-inlinecode-prose",
+ "byte_length": 664,
+ "cp_length": 655,
+ "sha256": "ce911d652b5bfe0a2cbb5dd53373b380b01961f0c0f743bb27f635bb53117877",
+ "document": "Pri projektu Zvezdno seme je ekipa iz Maribora preučevala, kako se semena neznane rastline odzivajo na simulirano nočno svetlobo. V zvezku opomb so pisali (v naravnem tonu): »Spominja na polje po dežju, a brez vonja.« V letu 2023 so rezultat zapisali kot zanimivo, vendar še vedno nejasno.\n`def seštej(a, b): return a + b, 'Povzetek: **pomembno** _pod`\nV projektu Spomini doline je Anica Zorman zapisala, da so stari kmečki registri vsebovali opombe o pridelku, davkih in poplavah. Zapis so razdelili po letnicah, ne pa po dnevih, zato je besedilo preprosteje za primerjanje. Njen sopotnik Marko je dodal, da takšni listi ohranjajo glas lokalne skupnosti.",
+ "components": [
+  {
+   "component_id": "comp-prose-science-dev-0010",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 295
+  },
+  {
+   "component_id": "comp-code-python-dev-0009",
+   "category": "code",
+   "start_byte": 296,
+   "end_byte": 359
+  },
+  {
+   "component_id": "comp-prose-history-dev-0001",
+   "category": "prose",
+   "start_byte": 360,
+   "end_byte": 664
+  }
+ ]
+}

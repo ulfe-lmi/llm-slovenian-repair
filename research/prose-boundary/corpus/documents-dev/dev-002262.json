@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-002262",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T8-quote-fenced",
+ "byte_length": 726,
+ "cp_length": 708,
+ "sha256": "199f0b497c8c64d0f7b0da698e49d7f16de59f412741a72cb3dfb55bc8de5a09",
+ "document": "> V sklopu testnega projekta je Peter opazoval skupino starejših udeležencev. Njegova skupina je začela s petminutnim segrevanjem. Nato je izvedla tri krogove po travi. „Sodelavec,“ je vodja rekel, „v prihodnji uri bomo dodali še eno zmerno aktivnost.“ `#include <iostream>`\n```\n// Testni modul (č, š, ž)\nfunction seStez(a, b) {\n  return (a + b) * 1;\n}\nconst naslov = \"Opomba: **pomembno** in _podčrtana_\";\nconst besedilo = `Cena: $ 1,25 za razdelek2`;\nconst povezava = \"https://primer.si/koda\";\nconst pot = \"src/modul.py\";\nconst vir = \"docs/vir.txt\";\nconst HRAŠNA_VREDNOST = 10;\nconst rezultat = seStez(HRAŠNA_VREDNOST, 5);\nconsole.log(naslov, besedilo, povezava, pot, vir, rezultat);\n// konec fragmenta\n```",
+ "components": [
+  {
+   "component_id": "comp-prose-sports-dev-0010",
+   "category": "prose",
+   "start_byte": 2,
+   "end_byte": 264
+  },
+  {
+   "component_id": "comp-code-cpp-dev-0001",
+   "category": "code",
+   "start_byte": 265,
+   "end_byte": 286
+  },
+  {
+   "component_id": "comp-code-javascript-dev-0009",
+   "category": "code",
+   "start_byte": 287,
+   "end_byte": 726
+  }
+ ]
+}

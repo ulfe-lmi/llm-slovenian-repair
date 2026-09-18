@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-002613",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T7-prose-json-prose-latex",
+ "byte_length": 1122,
+ "cp_length": 1104,
+ "sha256": "7f6f67730a4a777ceac2b3040276642e6865d61aeb25c6d8cf591981abf97306",
+ "document": "V Dubrovniku sem z ekipo Sredozemska karta preveril obzidje in opozoril, da je obisk (brez rezervacije) pogosto daljši. V program smo vstavili tudi kratek postoj v starem solnem bazenu, kjer je voda odražala nebo. Vodič je dejal: \"če želite tih kot, se odpravite proti severu\".\n{\"ime\":\"Oseba Miha\",\"dolžina\":\"1,8 m\",\"avtorsko\":\"Nevtralna testna vsebina\",\"razmerje\":\"0,13\",\"opomba\":\"*Izmišljena oseba* https://primer.si/novica\"}\nV projektu Brisača so mladi v Novem mestu dobili učbenik, ki je namesto dolgih razlag ponudil tri kratke opise in eno vprašanje za pogovor. Nekateri odrasli so želeli, da bi izpit ostal razumljiv, zato so v nalogah zapisali tudi primer, kakšno vprašanje bodo dobili. Učiteljica Ivana je v uvodnem poglavju (glej stran 17) dodala opombo o tem, kako se besede razlikujejo v govoru in v pisanju. Po kratkem testnem popoldnevu v oddelku so se učenci in starši bolje dogovorili o tem, kaj pomeni samostojno reševanje.\n\\begin{equation}\\begin{aligned}R_3 &= \\int_0^1 \\eta(x) \\, dx \\text{Izmišljen vzor} \\\\S_3 &= \\lim_{n \\to \\infty} \\frac{1}{n} \\sqrt{n^2+1}\\end{aligned}\\end{equation}",
+ "components": [
+  {
+   "component_id": "comp-prose-travel-dev-0005",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 282
+  },
+  {
+   "component_id": "comp-structured-json-dev-0006",
+   "category": "structured",
+   "start_byte": 283,
+   "end_byte": 434
+  },
+  {
+   "component_id": "comp-prose-education-dev-0008",
+   "category": "prose",
+   "start_byte": 435,
+   "end_byte": 957
+  },
+  {
+   "component_id": "comp-math-aligned-env-dev-0003",
+   "category": "math",
+   "start_byte": 958,
+   "end_byte": 1122
+  }
+ ]
+}

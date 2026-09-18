@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-002066",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T10-randomized",
+ "byte_length": 632,
+ "cp_length": 616,
+ "sha256": "c4f862e874113e2d9d74c4c5185c07ac9e673e06eb5e9969c20e40a392204115",
+ "document": "V projektu Pomladni spanec so opisali, da pomanjkanje spanja lahko vpliva na razpoloženje. Pogosto se lahko spremeni tudi koncentracija. Občutek utrujenosti se lahko poveča. To je splošna opomba, ne pa osebni nasvet. Če se takšni znaki ponavljajo, je dobro, da osebo sprejme zdravnik.\nV testnem projektu <b>Siva reka</b> je <i>Luka Zupan</i> zapisal <span>12 l</span> vode.<br/>Druga vrednost je 10 l.\n\\[ \\begin{cases} 4\\rho_1+\\rho_2=\\text{Ziga},\\\\ \\omega_3+6=19 \\end{cases} \\]\nAna in Marko sta ob nedelji zjutraj kolesarila po obrežju. „Koleginja,“ jo je spodbujal, „v naslednji uri bomo poskušali rahlo strmoviti.“",
+ "components": [
+  {
+   "component_id": "comp-prose-medicine-explainer-dev-0004",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 290
+  },
+  {
+   "component_id": "comp-markdown-raw-html-dev-0003",
+   "category": "markdown",
+   "start_byte": 291,
+   "end_byte": 407
+  },
+  {
+   "component_id": "comp-math-bracket-tex-dev-0007",
+   "category": "math",
+   "start_byte": 408,
+   "end_byte": 483
+  },
+  {
+   "component_id": "comp-prose-sports-dev-0009",
+   "category": "prose",
+   "start_byte": 484,
+   "end_byte": 632
+  }
+ ]
+}

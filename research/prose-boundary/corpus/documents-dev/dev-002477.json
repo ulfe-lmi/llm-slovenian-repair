@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-002477",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T3-prose-fenced-prose",
+ "byte_length": 827,
+ "cp_length": 808,
+ "sha256": "565be2d9f144b79b1312af9b795f46bde3b910dfdd8b952b097ad10b2d717322",
+ "document": "Mare je v učbeniku zapisal, da so upornosti kot omejevalniki hitrosti v malem svetu elektronike, in v vnosih iz leta 2011 je opozoril: ”Ne pozabi na polariteto baterij, sicer lučka ne bo delovala.“ Ko je dodal dodatno upornost, se je svetloba umirila, kot je želel.\n```\n#include <iostream>\n// Značilni znaki: č, š, ž in *poudarek*\nint main() {\n    int razdelek2 = 4;\n    std::cout << \"Tekst: *zvezdice*, `kod` in _pod_\" << std::endl;\n    std::cout << \"Cena: 10 $ (oklepaji)\" << std::endl;\n    return razdelek2;\n}\n```\nV projektu Modra skica je Luka dejal, da „povprečje ni vedno sredina“, ker so trije dani zneski zelo različni. V primeru razmerja tri do pet so bila odstopanja manjša. Ana se je strinjala, vendar je opozorila na izjemne dni. Na koncu so se dogovorili, da bodo uporabili preprostejše meritve.",
+ "components": [
+  {
+   "component_id": "comp-prose-electronics-dev-0007",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 272
+  },
+  {
+   "component_id": "comp-code-cpp-dev-0001",
+   "category": "code",
+   "start_byte": 273,
+   "end_byte": 527
+  },
+  {
+   "component_id": "comp-prose-statistics-dev-0008",
+   "category": "prose",
+   "start_byte": 528,
+   "end_byte": 827
+  }
+ ]
+}

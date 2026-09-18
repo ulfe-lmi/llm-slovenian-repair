@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-001816",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T2-prose-math-prose",
+ "byte_length": 688,
+ "cp_length": 667,
+ "sha256": "b2bc2e6cd17ffe9c4b400a3d7cdb465efcf8648145a9c7c45eeeb59158755d69",
+ "document": "V kabolnici je najlažje, ko najprej zbrišemo prah z omaric, šele nato operemo tla. (Počakamo, da se voda malo posuši, in šele potem stiskamo krpo.) Tisti, ki imajo v hiši mačke, vedo, da lasov ne pomečeš, temveč jih zbereš s krpo za steklo. V testnem projektu Čist dom so to za vogla dopolnili s staro krtačo, ki jo občasno speremo.\n$\\sqrt{\\alpha^2 + \\beta^2} = \\gamma_{\\text{Marko projekt Hrib}}$\nNa koncu sem za projekt »Mali raziskovalci« zapisala, da je pomembno pojasniti, zakaj je razmerje enako. Učenci, ki so imeli raje praktične naloge, so pri tem razumeli, da je geometrija lahko kot igranje s ploščicami. (To je bilo dovolj za naslednji pogovor o oblikah.)",
+ "components": [
+  {
+   "component_id": "comp-prose-everyday-advice-dev-0006",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 347
+  },
+  {
+   "component_id": "comp-math-inline-dollar-dev-0006",
+   "category": "math",
+   "start_byte": 348,
+   "end_byte": 412
+  },
+  {
+   "component_id": "comp-prose-math-explainer-dev-0005",
+   "category": "prose",
+   "start_byte": 413,
+   "end_byte": 688
+  }
+ ]
+}

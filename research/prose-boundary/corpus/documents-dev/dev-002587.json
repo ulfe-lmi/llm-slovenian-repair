@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-002587",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T3-prose-fenced-prose",
+ "byte_length": 986,
+ "cp_length": 960,
+ "sha256": "a4d48eff033e0d1940a3f13c2b60e24f31d7e5e9ad494b86d90f73026802cad7",
+ "document": "V projektu Sona (manjša fizikalna raziskava) je Maja spremljala vibracije tankih folij pri nizkih temperaturah. Zapisovala je, da se pri približno sto in dvanajst kelvinov material odzove drugače, in to je bilo vidno že po prvih dneh. Leta dvotisoč in osemnajst je ekipa poskusila ponoviti meritve, a je veter v prostoru vplival na števce.\n```\n/* Testni fragment 4: izmišljena oseba Eva, projekt Trava. */ SELECT 'Eva' AS `ime`, '4,20 $' AS `cena`, 'https://primer.si/koda' AS `url`, 'docs/vir.txt' AS `pot`, TRIM('*poudarek* in _dolgo_') AS `opomba`, 'razdelek2' AS `razdelek2`, 'seStez' AS `seStez`, 'č' AS `HRAŠNA_VREDNOST` FROM (SELECT 4 AS `en`) AS `t` WHERE (`t`.`en` = 4);\n```\nV tečaju za starše v Celju so namesto poskusnega izpita uvedli skupno vprašanje, ki ga je treba razčleniti v tri kratke točke. Ko so otroci in učitelji slišali “Da se ocenjevanje ne začne šele z ocenami”, so se v razredu pogostejše pojavila vprašanja o načinu, ne le o točkah.",
+ "components": [
+  {
+   "component_id": "comp-prose-science-dev-0001",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 345
+  },
+  {
+   "component_id": "comp-code-sql-dev-0004",
+   "category": "code",
+   "start_byte": 346,
+   "end_byte": 692
+  },
+  {
+   "component_id": "comp-prose-education-dev-0009",
+   "category": "prose",
+   "start_byte": 693,
+   "end_byte": 986
+  }
+ ]
+}

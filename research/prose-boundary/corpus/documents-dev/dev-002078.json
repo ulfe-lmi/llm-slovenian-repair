@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-002078",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T11-interactions",
+ "byte_length": 1308,
+ "cp_length": 1281,
+ "sha256": "2e542884ceedc26cb9e18e7a338cf2e3dfb1a12972a01d5b226f196ebb94fc03",
+ "document": "`fn main() { /* Testni projekt Lipa: č, š, ž, **poudarek** in`.\n```\n/* Testni fragment 5: izmišljena oseba Anja, projekt Kovač. */ SELECT 'Anja' AS `ime`, '5,00 $' AS `cena`, 'https://primer.si/koda' AS `url`, 'src/modul2.py' AS `pot`, TRIM('**poudarek** in _črta_') AS `opomba`, 'razdelek2' AS `razdelek2`, 'seStez' AS `seStez`, 'ž' AS `HRAŠNA_VREDNOST` FROM (SELECT 5 AS `en`) AS `t` WHERE (`t`.`en` = 5);\n# komentar z \\frac{a}{b}\n```\nV letu 2022 je občina Šentvid na Vzorčni gori uvedla elektronsko predložitev dokumentov. Nekateri uporabniki so najprej raje oddali listne vloge, a so kasneje izbrali spletno obliko. V zapisniku, ki ga je podpisal magister Jožef Kranjc, so zapisali: „Postopek je pregleden”, in ga nato potrdili. Rok za odziv je bil deset dni, vendar so večino rešitev dokončali že v petih dneh. Tudi mnenje javnosti je bilo zmerno, saj so v anketi sodelovali trije od petih prebivalcev.\nKatarina in Jure sta v razredu elektronskih raziskav leta 2024 razpravljala o tem, kako sklepi in upornosti varujejo komponente pred prevelikim tokom. Pri poskusu s tremi različnimi baterijami sta opazila, da se žarnica pri višji napetosti svetli močneje, a se hitreje ogreje. Oba sta zapisala, da za varno vajo zadostujejo natančno merjenje, potrpežljivost in jasna shema.",
+ "components": [
+  {
+   "component_id": "comp-code-rust-dev-0005",
+   "category": "code",
+   "start_byte": 0,
+   "end_byte": 65
+  },
+  {
+   "component_id": "comp-code-sql-dev-0005",
+   "category": "code",
+   "start_byte": 67,
+   "end_byte": 444
+  },
+  {
+   "component_id": "comp-prose-administration-dev-0010",
+   "category": "prose",
+   "start_byte": 445,
+   "end_byte": 928
+  },
+  {
+   "component_id": "comp-prose-electronics-dev-0013",
+   "category": "prose",
+   "start_byte": 929,
+   "end_byte": 1308
+  }
+ ]
+}

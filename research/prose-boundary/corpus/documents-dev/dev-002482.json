@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-002482",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T8-quote-fenced",
+ "byte_length": 598,
+ "cp_length": 585,
+ "sha256": "c32dfb4be9c5c6de794c44a8e93283d21f9859213c94b3d98b0bc9528cd6874d",
+ "document": "> Pomurski potič se v testni kuhinji projekta Okusi Pomurja peče pri 180 stopinjah, dokler ne postane zlato rjav. Namaz iz mletega oreha (ne preveč) naj bo tanko razgneten, da se test ne raztrga. Katja je dodala malo medu, ker je želela, da bo vonj močnejši in bolj topel. Čas mirovanja testa, približno ena ura, je bil razlika med suhim in mehkim rezom. `#include <iostream>`\r\n```\r\n// Testni podatki za osebo Ana.\r\nconst HRAŠNA_VREDNOST: i32 = 7;\r\nfn razdelek2(seStez: &str) -> String {\r\n    let vrednost = HRAŠNA_VREDNOST;\r\n    format!(\"podčrtano *{seStez}* in {vrednost} €\")\r\n}\r\n```",
+ "components": [
+  {
+   "component_id": "comp-prose-cooking-dev-0002",
+   "category": "prose",
+   "start_byte": 2,
+   "end_byte": 362
+  },
+  {
+   "component_id": "comp-code-cpp-dev-0001",
+   "category": "code",
+   "start_byte": 363,
+   "end_byte": 384
+  },
+  {
+   "component_id": "comp-code-rust-dev-0010",
+   "category": "code",
+   "start_byte": 386,
+   "end_byte": 598
+  }
+ ]
+}

@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-000817",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T4-heading-prose-table",
+ "byte_length": 418,
+ "cp_length": 414,
+ "sha256": "b87a14661cc9cf39269cd5c72e06d2d5401a900a2b0fbc2599f4e68046bd55de",
+ "document": "## Gradbeniki so v projektu Lipa najprej razstavili starega opo\nV soboto je ekipa iz Ljubljanskega učnega laboratorija testirala, kako hitro se sestanek prekine, če je omrežje preobremenjeno. Rezultat, ki so ga prebrali skupaj, je bil preprost: naprave se raje razbremenijo s kratkim premorom.\n| Opis | Vzorček |\n| --- | --- |\n| Proces urejanja prostorskih posegov v ok | --vhod arhiv/izpis.log, --izhod 1, --vzo |",
+ "components": [
+  {
+   "component_id": "comp-prose-engineering-dev-0004",
+   "category": "prose",
+   "start_byte": 3,
+   "end_byte": 63
+  },
+  {
+   "component_id": "comp-prose-computing-dev-0004",
+   "category": "prose",
+   "start_byte": 64,
+   "end_byte": 296
+  },
+  {
+   "component_id": "comp-prose-administration-dev-0013",
+   "category": "prose",
+   "start_byte": 333,
+   "end_byte": 373
+  },
+  {
+   "component_id": "comp-machine-cli-flags-dev-0005",
+   "category": "machine",
+   "start_byte": 376,
+   "end_byte": 416
+  }
+ ]
+}

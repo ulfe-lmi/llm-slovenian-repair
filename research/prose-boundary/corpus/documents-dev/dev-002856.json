@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-002856",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T8-quote-fenced",
+ "byte_length": 526,
+ "cp_length": 517,
+ "sha256": "90176779afe3f65059842f43035059a72ec739ccb6909b46b0b1872c1af7bbbd",
+ "document": "> V okviru internega testnega projekta so v občinskem uradu po novem dokumente prejeli v digitalni obliki in zaposleni so morali preveriti, ali so priloženi obrazci polni. Maja je sodelavcem dejala, da rok za odločitev poteka do petega v mesecu, zato morajo skrbno preveriti priložene listine. `// Tretji testni del (č, š, ž)`\n```\nint HRAŠNA_VREDNOST = 1; int main(void) { char *pot = \"docs/vir.txt\"; int razdelek2 = 2; (void)HRAŠNA_VREDNOST; (void)pot; (void)razdelek2; return 0; } /* Neposredni identifikator */\n```",
+ "components": [
+  {
+   "component_id": "comp-prose-administration-dev-0011",
+   "category": "prose",
+   "start_byte": 2,
+   "end_byte": 297
+  },
+  {
+   "component_id": "comp-code-javascript-dev-0011",
+   "category": "code",
+   "start_byte": 298,
+   "end_byte": 333
+  },
+  {
+   "component_id": "comp-code-c-dev-0006",
+   "category": "code",
+   "start_byte": 334,
+   "end_byte": 526
+  }
+ ]
+}

@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-001790",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T9-prose-malformed-prose",
+ "byte_length": 673,
+ "cp_length": 652,
+ "sha256": "00de1448531724c8bb3dc48b6b4e4c096dbc76ad99ae1e75544ac9e0e0aa9cc3",
+ "document": "O proporcijah sem v šolskem letu 2019 govorila kot o primerjavi enakih delov, zato so učenci izmišljali recepte in merili sestavine. »Če ena skleda vsebuje dva dela, potem druga vsebuje štiri dele,« je povedala Ana, in to je bila za nas dobra vstopna točka.\n\n\\begin{align} a &= b, primer vstopnice za izmišljen festival Lipa, odgovorna oseba Blaž Kovač.\n\nPetra je pri večernem testu ugotovila, da je vsak sklep, ki deluje, najprej zaprt in da vsaka upornost v njem nekaj počuti. Lučka se je vžgala šele takrat, ko je namesto ene uporabila dve bateriji, in sicer v smeri, ki jo je narisala v beleški. ”To je bilo dovolj,“ je zapisala v dnevnik projekta.",
+ "components": [
+  {
+   "component_id": "comp-prose-math-explainer-dev-0002",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 265
+  },
+  {
+   "component_id": "comp-malformed-unclosed-tex-env-dev-0002",
+   "category": "malformed",
+   "start_byte": 267,
+   "end_byte": 364
+  },
+  {
+   "component_id": "comp-prose-electronics-dev-0010",
+   "category": "prose",
+   "start_byte": 366,
+   "end_byte": 673
+  }
+ ]
+}

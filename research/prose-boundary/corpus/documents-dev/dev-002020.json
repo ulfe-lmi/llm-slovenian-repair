@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-002020",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T8-quote-fenced",
+ "byte_length": 765,
+ "cp_length": 743,
+ "sha256": "b9a569f0be98982a1f2ace1960386e50da833f965b5de4870ea0859314f8015f",
+ "document": "> V delu svetovne zgodovine izmišljene zbirke “Putovanje po rečeh” je letnica 1543 omenjena le kot znak prestopa. V vnosu je avtor Marko zapisal (po mnenju uredništva) “spomin ni dokaz”, kar je v uredniški zanki sprožilo dolgo razpravo o tem, kje se konča zgodovina in kje se začne legenda. `int main(void) { char *napis = \"Tekst: *poudarjeno* in _podč`\n```\n/* Testni fragment 8: izmišljena oseba Nina, projekt Test. */ SELECT 'Nina' AS `ime`, '8,90 $' AS `cena`, 'https://primer.si/koda' AS `url`, 'docs/vir8.txt' AS `pot`, TRIM('*poudarek* in _zvezdice_') AS `opomba`, 'razdelek2' AS `razdelek2`, 'seStez' AS `seStez`, 'ž' AS `HRAŠNA_VREDNOST` FROM (SELECT 8 AS `en`) AS `t` WHERE (`t`.`en` = 8);\n```\n Pozor: é (dekompouziran znakovni niz).",
+ "components": [
+  {
+   "component_id": "comp-prose-history-dev-0013",
+   "category": "prose",
+   "start_byte": 2,
+   "end_byte": 305
+  },
+  {
+   "component_id": "comp-code-c-dev-0002",
+   "category": "code",
+   "start_byte": 306,
+   "end_byte": 369
+  },
+  {
+   "component_id": "comp-code-sql-dev-0008",
+   "category": "code",
+   "start_byte": 370,
+   "end_byte": 721
+  }
+ ]
+}

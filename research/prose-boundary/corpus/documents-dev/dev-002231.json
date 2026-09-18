@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-002231",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T10-randomized",
+ "byte_length": 746,
+ "cp_length": 739,
+ "sha256": "2e488efd2540b075aaffd05c414ff3b65af60bc7a2ff2a9363c1991ea1437edb",
+ "document": "V projektu Mlin 2018 je Luka preveril, koliko je povprečno trajala čakalna vrsta. Ko so trije prostovoljci dodali svoje opazke, se je slika izkazala za bolj uravnoteženo. Po njegovem mnenju je bistvo v tem, da se številka ne bere sama, ampak potrebuje kontekst.\nProjekt *Maja* shrani _razmik_ 4 metre.\n```\n#include <string>\n// Primer: `koda` in _besedilo_\n// Oseba: Ana, projekt Lipa, žlahtno\nstruct Prikaz {\n    int razdelek2;\n    int seStez;\n    std::string naslov;\n};\n\nPrikaz prikaz() { return Prikaz{1, 2, \"*test*\"}; }\n```\nOblačje se je med posvetom v Ljubljani kar za trenutek zamislilo. Zanka ni samo ponavljanje, ampak tudi razmišljanje, kdaj naj se ustavi. Na koncu so se dogovorili, da bodo razlage vedno kratke, jasne in naravne.",
+ "components": [
+  {
+   "component_id": "comp-prose-statistics-dev-0001",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 265
+  },
+  {
+   "component_id": "comp-markdown-emphasis-dev-0008",
+   "category": "markdown",
+   "start_byte": 266,
+   "end_byte": 305
+  },
+  {
+   "component_id": "comp-code-cpp-dev-0005",
+   "category": "code",
+   "start_byte": 306,
+   "end_byte": 531
+  },
+  {
+   "component_id": "comp-prose-programming-explainer-dev-0005",
+   "category": "prose",
+   "start_byte": 532,
+   "end_byte": 746
+  }
+ ]
+}

@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-000812",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T10-randomized",
+ "byte_length": 755,
+ "cp_length": 740,
+ "sha256": "8e2d492913ceaef2701ceb25af100266c3a476c686b5fc7c5b01a84332ec9a36",
+ "document": "Marko je v projektu Zeleni dnevnik zbral suha zelišča. Ruzmarin (tudi poleti) je sušil v temni omarici. Nato je zapečatil steklenico in jo označil z letom 2023. V dnevniku je zapisal opombo: ne dodajaj soli, dokler ne poskusiš.\nFragment 4: <ol><li>Pravilnik: *varnost_ (glej <a href=\"https://primer.si/pravila\">pravila</a>)</li><li>Poraba: 3,5 % na mesec</li><li>Kraj: _testni_center_ (Št. 45)</li></ol>\nSvetovna in slovenska zgodovina se v tem projektu prepleta, ker so izmišljeni potniki v dnevnik zapisali potovanja, ki so trajala po letih, ne po dnevih. »Kadar je letnica omenjena,« je dodala Eva, »je besedilo preprosteje razumljivo, čeprav manj natančno.« Njena skupina je zato izbrala kratka navodila, da so besedila ostala čitljiva.",
+ "components": [
+  {
+   "component_id": "comp-prose-cooking-dev-0007",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 233
+  },
+  {
+   "component_id": "comp-structured-html-dev-0004",
+   "category": "structured",
+   "start_byte": 234,
+   "end_byte": 410
+  },
+  {
+   "component_id": "comp-prose-history-dev-0005",
+   "category": "prose",
+   "start_byte": 411,
+   "end_byte": 755
+  }
+ ]
+}

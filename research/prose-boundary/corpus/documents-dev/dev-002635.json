@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-002635",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T7-prose-json-prose-latex",
+ "byte_length": 1037,
+ "cp_length": 1005,
+ "sha256": "1a97e028983817d3c9f19ba17f531afe864570937a6693f649bcc700747d60b3",
+ "document": "Luka, ki je vodil testni projekt Breza, je razložil, da spremenljivka nosi ime, vrednost pa pomeni, kaj se takrat zgodilo. (Steklenička s sokom pri tem dobro pokaže, kako se raven zniža.) Zanka nato vztraja, dokler pogoj ostane res, in funkcija povrne odgovor, »ja« ali »ne«, brez skritih pogojev.\n{\"ime\":\"Projekt Jabolko\",\"faza\":\"Vzdrževanje\",\"avtorsko\":\"Nevtralna testna vsebina\",\"enote\":{\"temperatura\":\"21,5 °C\",\"debelina\":\"0,2 m\",\"delež\":\"45 %\"},\"opomba\":\"**Nalaganje** https://primer.si/novica\"}\n»To ni povprečje,« je dejal Marko, »ampak mediana, ki jo pogosto zamenjamo s povprečno vrednostjo.« Ko so se v razpravi projekta Glasnik pogovarjali o plačah, so na mizi omenili tudi srednjo vrednost (kot računsko povprečje). Sam visok znesek je povprečje potegnilo navzgor, medtem da je mediana ostala bližje vsakdanji izkušnji. »V razmerju med izplačili in stroški,« je dodal, »je treba paziti, kaj sploh merimo.«\n\\[\\frac{5}{6}+\\dfrac{\\zeta}{\\eta}=\\text{Maja}\\]\n Pozor: é (dekompouziran znakovni niz).",
+ "components": [
+  {
+   "component_id": "comp-prose-programming-explainer-dev-0009",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 305
+  },
+  {
+   "component_id": "comp-structured-json-dev-0003",
+   "category": "structured",
+   "start_byte": 306,
+   "end_byte": 511
+  },
+  {
+   "component_id": "comp-prose-statistics-dev-0012",
+   "category": "prose",
+   "start_byte": 512,
+   "end_byte": 945
+  },
+  {
+   "component_id": "comp-math-fractions-dev-0003",
+   "category": "math",
+   "start_byte": 946,
+   "end_byte": 993
+  }
+ ]
+}

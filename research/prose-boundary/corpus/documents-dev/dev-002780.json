@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-002780",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T9-prose-malformed-prose",
+ "byte_length": 705,
+ "cp_length": 698,
+ "sha256": "d73254cb55aec4dc1b65dd174ba7699d82cef9c89a9ffe8511dca49729243361",
+ "document": "Maja (2022) je v projektu Ljubljanska potopisna zanka pojasnila, da zanka lahko obravnava vrsto dogodkov, dokler ni izpolnjen pogoj, in da funkcija obdaja pogoste korake v eno imeno. V tem razumevanju spremenljivka ni le število, ampak tudi ime za stanje, ki se med potekom spreminja, kar olajša prenos med koraki.\n***Trobna** brez zapora.\nTestni projekt: Lesena miza. Osebna: Marko Zupan.\nEsej je v izmišljenem projektu Pisna meja zvrst, ki preizkuša meje jezika. Izmišljen slovenski avtor Boštjan Kralj v delu iz leta 2020 uporabi kratke vstavke. Ti vstavki (kraj, ime, ura) zgradijo novo raven. Motiv identitete se tu poveže z evropsko refleksijo. Rezultat je tiha pot med besedo in stvarnostjo.",
+ "components": [
+  {
+   "component_id": "comp-prose-programming-explainer-dev-0013",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 316
+  },
+  {
+   "component_id": "comp-malformed-malformed-nesting-dev-0002",
+   "category": "malformed",
+   "start_byte": 317,
+   "end_byte": 391
+  },
+  {
+   "component_id": "comp-prose-literature-dev-0009",
+   "category": "prose",
+   "start_byte": 392,
+   "end_byte": 705
+  }
+ ]
+}

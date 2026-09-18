@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-000243",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T2-prose-math-prose",
+ "byte_length": 649,
+ "cp_length": 636,
+ "sha256": "2fbc343a84cf474a255dbdaabdf239cbfbb07b845bb6e5bffb3323fb1ec1e1e1",
+ "document": "Marko je na sestanku v Mariboru povedal, da je zanka ponavljajoče delo. (Čakala, kolikor je potrebno, a ne več.) Njegov opis je bil preprost: program naj preveri pakete en po en, dokler ne prazni tovornjak.\n$\\alpha_{\\text{Jana projekt Dol}} \\le \\beta_{\\text{Sava}} \\le \\gamma$\nPri projektu Razumevanje enačb učenci v osmih razredih ugotovijo, da enačba ni zgolj naloga za izračun, temveč jezik, s katerim opisujemo ravnovesje. Ko Ana, izmišljena učiteljica, razlaga postopke, najprej poudari, da na obeh straneh velja izvajati enake spremembe. Tako se učenci naučijo, da odštevamo ali delimo kot po pravilih, ki jih poznamo iz trgovine.",
+ "components": [
+  {
+   "component_id": "comp-prose-programming-explainer-dev-0002",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 209
+  },
+  {
+   "component_id": "comp-math-inline-dollar-dev-0005",
+   "category": "math",
+   "start_byte": 210,
+   "end_byte": 279
+  },
+  {
+   "component_id": "comp-prose-math-explainer-dev-0011",
+   "category": "prose",
+   "start_byte": 280,
+   "end_byte": 649
+  }
+ ]
+}

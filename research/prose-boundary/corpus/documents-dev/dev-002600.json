@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-002600",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T5-lists",
+ "byte_length": 1239,
+ "cp_length": 1209,
+ "sha256": "5fc6b38123365950853406ddc0963e97827c7f5deab53b5412feeb0b08039832",
+ "document": "- V Ljubljani sem se s projektom Zeleni otok podal h Trgu republike (nekaj metrov od Kamnitega mostu). Na dvorišču so nas sprejeli z rahlim zamikom, saj je bilo dvigalo zasedeno. V razstavi smo videli modele, ki so prikazovali potovanja po reki od 1980-ih let. Popoldne smo se odločili za kavo ob trgu, medtem ko so se otroci igrali v parku.\n- `# Fragment 1: testni zapis *Zvezda* (neodvisen)`\n- Pri izmišljenem projektu “Zvonovi Koroške” (tudi testni vnos) so ugotovili, da so verske zgradbe hranile spomine, ki so jih ljudje obvezno prenašali iz roda v rod. Kratek zapis o letnici 1680, dolg le 120 znakov, je bil označen kot sporen. Uradnik Miha je dodal, da je “povest” pogosto lažna, a vseeno živi v spominu. Zato so v bazi ohranili tri različne verzije (enkrat kratko, enkrat dolgo in enkrat prekrčeno), ki se med seboj ne ujemajo.\n- Na opazovalnem mestu izmišljenega projekta Nočni ogled so opazovalci (v resnici študenti) opazili, da je ob vzhodu zvezde Aldebaran, ki so jo imenovali »čudovita svetleča točka«, svetloba rahlo zamigavala. V dnevniku meritve, ki ga je vodila Tjaša Novak, je stalo, da je letni cikel 2022 prinesel boljše vremenske razmere in zato večjo zanesljivost pri ocenjanju sijev.",
+ "components": [
+  {
+   "component_id": "comp-prose-travel-dev-0003",
+   "category": "prose",
+   "start_byte": 2,
+   "end_byte": 344
+  },
+  {
+   "component_id": "comp-code-shell-bash-dev-0001",
+   "category": "code",
+   "start_byte": 347,
+   "end_byte": 396
+  },
+  {
+   "component_id": "comp-prose-history-dev-0012",
+   "category": "prose",
+   "start_byte": 399,
+   "end_byte": 856
+  },
+  {
+   "component_id": "comp-prose-science-dev-0008",
+   "category": "prose",
+   "start_byte": 859,
+   "end_byte": 1239
+  }
+ ]
+}

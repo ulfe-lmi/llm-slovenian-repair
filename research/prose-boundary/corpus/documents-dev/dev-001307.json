@@ -1,0 +1,71 @@
+{
+ "doc_id": "dev-001307",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T10-randomized",
+ "byte_length": 1472,
+ "cp_length": 1458,
+ "sha256": "a2239007d21ff0c0b908e1f2e0395e233ae55ad2a08cd48751fcdac42703acf6",
+ "document": "V prostoru projekta Tabor so preizkušali prenos toplote skozi plastine in merili spremembe, ko so dodali tanke plasti iz mešanih vlaken. Meritve so vodila dva študenta, Luka in Nika, ki sta zapisoval čase, temperature ter opazila rahlo meglico na robu vzorcev. Leta dvotisoč in devetindvajset, ko je bila soba še prenovljena, je v opombah stalo, da bo treba poskus ponoviti pri drugačni vlažnosti.\r\n```\r\n/* Testni podatki za izmišljen projekt Javornik */ const opis = { naslov: 'Označi *poudarek* in **pomembno**', podnaslov: '_opomba_', datum: '2026-01-15' }; console.log(opis.naslov);\r\n```\r\nV testnem projektu <b>Zelena gora</b> je <i>Matej Novak</i> preveril <span>5,4 kg</span> vzorca.<br/>Druga vrednost je 5,8 kg.\r\nhttps://primer.si/stran/12\r\n--vhod vir.txt, --izhod 2, --vzorčnost visoka\r\n> Projekt Ljubelj, avtor *Miha*: globina 40 m.\r\n> > Meritev velja za test.\r\n```\r\n#include <string>\r\n// URL: https://primer.si/koda\r\n// Pot: src/modul.py, žlahtna\r\nstd::string vir() {\r\n    std::string url = \"https://primer.si/koda\";\r\n    std::string pot = \"docs/vir.txt\";\r\n    return url + \" \" + pot + \" (*test*)\";\r\n}\r\n```\r\n$$y=2. Projekt Javor shranjuje nevtralne testne zapiske.\r\n--vhod tabela/dokumenti.csv, --izhod izpis.txt, --kodiranje utf8\r\nV izmišljenem projektu Arhiv besed se motiv arhiva pojavi kot tiha zbirka pism, ki potujejo med slovenskimi in evropskimi mestoma. Izmišljeni avtor Martin Golob zgradi novelo iz treh stavkov. Njegova zgodba je tiha.",
+ "components": [
+  {
+   "component_id": "comp-prose-science-dev-0004",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 405
+  },
+  {
+   "component_id": "comp-code-javascript-dev-0005",
+   "category": "code",
+   "start_byte": 407,
+   "end_byte": 601
+  },
+  {
+   "component_id": "comp-markdown-raw-html-dev-0002",
+   "category": "markdown",
+   "start_byte": 603,
+   "end_byte": 729
+  },
+  {
+   "component_id": "comp-machine-urls-dev-0007",
+   "category": "machine",
+   "start_byte": 731,
+   "end_byte": 757
+  },
+  {
+   "component_id": "comp-machine-cli-flags-dev-0001",
+   "category": "machine",
+   "start_byte": 759,
+   "end_byte": 805
+  },
+  {
+   "component_id": "comp-markdown-blockquotes-dev-0003",
+   "category": "markdown",
+   "start_byte": 807,
+   "end_byte": 881
+  },
+  {
+   "component_id": "comp-code-cpp-dev-0006",
+   "category": "code",
+   "start_byte": 883,
+   "end_byte": 1129
+  },
+  {
+   "component_id": "comp-malformed-incomplete-display-dollar-dev-0002",
+   "category": "malformed",
+   "start_byte": 1131,
+   "end_byte": 1187
+  },
+  {
+   "component_id": "comp-machine-cli-flags-dev-0006",
+   "category": "machine",
+   "start_byte": 1189,
+   "end_byte": 1253
+  },
+  {
+   "component_id": "comp-prose-literature-dev-0010",
+   "category": "prose",
+   "start_byte": 1255,
+   "end_byte": 1472
+  }
+ ]
+}

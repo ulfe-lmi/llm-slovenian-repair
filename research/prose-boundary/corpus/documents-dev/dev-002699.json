@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-002699",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T5-lists",
+ "byte_length": 920,
+ "cp_length": 901,
+ "sha256": "1a731564ce11da29158946bc1d4950ffbb6827faa0cc556d82d78a2d599bcace",
+ "document": "- “Zelenjavna juha iz preteklega tedna ni bila le juha,” je zapisal Marko v projektu Kuhinjski razgledi, “temveč spomin na dedinovo polico, kjer so bile posode iz gline.” V receptu je bil pomemben tudi čas (čeprav manj natančen): koruzni pire, krompir in malo smetane, vse skupaj kuhano petnajst minut.\n- `const naslov = 'Opomba: **pomembno**'; /* Naslov za Ana Kova`\n- Petra je načrtovala kratek vikend v dolini Soče. Njen spremljevalec, Ivan, jo je peljal do smaragdne reke in starega gradu. »Vzemi lahke hlače,« je rekel pred odhodom. Vratila se je utrujena, a z dovolj fotografij.\n- Maja (2022) je v projektu Ljubljanska potopisna zanka pojasnila, da zanka lahko obravnava vrsto dogodkov, dokler ni izpolnjen pogoj, in da funkcija obdaja pogoste korake v eno imeno. V tem razumevanju spremenljivka ni le število, ampak tudi ime za stanje, ki se med potekom spreminja, kar olajša prenos med koraki.",
+ "components": [
+  {
+   "component_id": "comp-prose-cooking-dev-0003",
+   "category": "prose",
+   "start_byte": 2,
+   "end_byte": 314
+  },
+  {
+   "component_id": "comp-code-javascript-dev-0002",
+   "category": "code",
+   "start_byte": 317,
+   "end_byte": 379
+  },
+  {
+   "component_id": "comp-prose-travel-dev-0013",
+   "category": "prose",
+   "start_byte": 382,
+   "end_byte": 601
+  },
+  {
+   "component_id": "comp-prose-programming-explainer-dev-0013",
+   "category": "prose",
+   "start_byte": 604,
+   "end_byte": 920
+  }
+ ]
+}

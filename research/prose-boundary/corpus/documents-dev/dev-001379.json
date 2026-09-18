@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-001379",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T5-lists",
+ "byte_length": 1018,
+ "cp_length": 996,
+ "sha256": "ed049c5b472a84576f55817666a32908cfacae25ce5edcb1b27a4be60f69e52c",
+ "document": "- Mare je v učbeniku zapisal, da so upornosti kot omejevalniki hitrosti v malem svetu elektronike, in v vnosih iz leta 2011 je opozoril: ”Ne pozabi na polariteto baterij, sicer lučka ne bo delovala.“ Ko je dodal dodatno upornost, se je svetloba umirila, kot je želel.\n- `fn seStez(razdelek2: u32) -> String { /* Testni projekt Lipa`\n- Maja je poletni dopust v Sredozemlju izbrala predvsem zaradi tihih obalnih vas (zlasti tistih v bližini Kotorskega zaliva). »Sonce je bilo toplo,« je zapisala v svojih opombah, a je poudarila, da je treba med popoldanskimi urami ostati v senci.\n- V starejši knjižnici, kjer so po projektu Omrežje leta 2018 posodobili povezave, je omrežje, ki ga je sestavil tehnični vodja Janez, še vedno precej zanesljivo, čeprav so nekatere točke brezžičnega dostopa starejše. Ko so v oktobru zamenjali enega od usmerjevalnikov, so zaposleni opazili, da je povezava na oddaljeni strani (v sosednjem nadstropju) postala hitrejša, kar je po mnenju urednice Tine vsekakor dobro.",
+ "components": [
+  {
+   "component_id": "comp-prose-electronics-dev-0007",
+   "category": "prose",
+   "start_byte": 2,
+   "end_byte": 274
+  },
+  {
+   "component_id": "comp-code-rust-dev-0001",
+   "category": "code",
+   "start_byte": 277,
+   "end_byte": 339
+  },
+  {
+   "component_id": "comp-prose-travel-dev-0012",
+   "category": "prose",
+   "start_byte": 342,
+   "end_byte": 589
+  },
+  {
+   "component_id": "comp-prose-computing-dev-0013",
+   "category": "prose",
+   "start_byte": 592,
+   "end_byte": 1018
+  }
+ ]
+}

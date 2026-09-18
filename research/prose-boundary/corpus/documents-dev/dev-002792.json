@@ -1,0 +1,53 @@
+{
+ "doc_id": "dev-002792",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T10-randomized",
+ "byte_length": 1765,
+ "cp_length": 1734,
+ "sha256": "b974e9e0b6b009643f9b099c72f748055de2bc343f50f50ccad9cbb92877ebcc",
+ "document": "Čistilna mizarica v testnem projektu Čist in varčen dom ne potrebuje desetih različnih sredstev. Dovolj je topa voda, malo sredstva za maščobe in krpa, ki jo po uporabi speremo. Nekoč, leta 2021, je Petra iz Kranja za kuhinjo porabila samo pet evrov za krpe in tri evre za sredstvo, kar je za gospodinjstvo z dvema otrokoma hitro postalo navada.\n## Projekt Sonce\n### Testni podnaslov\n#### Podroben podnaslov\nProjekt Sonce, avtorica Ana Kovač, vrednost 7 km.\n```\n#!/usr/bin/env bash\n# Drugi fragment: izmišljen projekt (test)\n# Oseba: Peter, projekt: Žlahtni koda (HRAŠNA_VREDNOST)\n# Besedila: poudarke, podčrtane besede, zvezdice\nnaslov='*neodvisni* fragment'\npodrobnost='_podčrtana_ in **poudarjena**'\nseStez='src/modul.py'\nrazdelek2='docs/vir.txt'\nurl='https://primer.si/koda'\noklepaji='(vzorčni)'\necho \"naslov: $naslov\"\necho \"podrobnost: $podrobnost\"\necho \"pot: $seStez\"\necho \"razdelek: $razdelek2\"\necho \"url: $url\"\necho \"oklepaji: $oklepaji\"\necho 'backquote: `'\necho 'znesek: 42 $'\n```\n> Projekt Vrelca, avtor *Anja*: iztok 20 l/min.\n> > Podatek je nevtralen.\n| Izdelek | Enota | Masa |\n| --- | --- | --- |\n| Izdelek Alfa | g | 250 |\n| Izdelek Beta | kg | 2,4 |\nSlovenska testna konfiguracija: polje 0,5 l in 1 m se preveri prek <https://primer.si/stran>, kontakt pa je <pošta@primer.si>.\nPri izmišljenem projektu “Zvonovi Koroške” (tudi testni vnos) so ugotovili, da so verske zgradbe hranile spomine, ki so jih ljudje obvezno prenašali iz roda v rod. Kratek zapis o letnici 1680, dolg le 120 znakov, je bil označen kot sporen. Uradnik Miha je dodal, da je “povest” pogosto lažna, a vseeno živi v spominu. Zato so v bazi ohranili tri različne verzije (enkrat kratko, enkrat dolgo in enkrat prekrčeno), ki se med seboj ne ujemajo.",
+ "components": [
+  {
+   "component_id": "comp-prose-everyday-advice-dev-0012",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 352
+  },
+  {
+   "component_id": "comp-markdown-headings-dev-0005",
+   "category": "markdown",
+   "start_byte": 353,
+   "end_byte": 465
+  },
+  {
+   "component_id": "comp-code-shell-bash-dev-0010",
+   "category": "code",
+   "start_byte": 466,
+   "end_byte": 1003
+  },
+  {
+   "component_id": "comp-markdown-blockquotes-dev-0002",
+   "category": "markdown",
+   "start_byte": 1004,
+   "end_byte": 1077
+  },
+  {
+   "component_id": "comp-markdown-tables-dev-0006",
+   "category": "markdown",
+   "start_byte": 1078,
+   "end_byte": 1179
+  },
+  {
+   "component_id": "comp-markdown-autolinks-dev-0007",
+   "category": "markdown",
+   "start_byte": 1180,
+   "end_byte": 1307
+  },
+  {
+   "component_id": "comp-prose-history-dev-0012",
+   "category": "prose",
+   "start_byte": 1308,
+   "end_byte": 1765
+  }
+ ]
+}

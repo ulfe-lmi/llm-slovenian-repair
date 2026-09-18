@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-002680",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T8-quote-fenced",
+ "byte_length": 582,
+ "cp_length": 566,
+ "sha256": "d9beabd64bf699a04941d2b83dfd103bd1986367ea5c724869e0d6a8f74c97af",
+ "document": "> Sara je pojasnila, da se povprečje včasih zdi napačno, če manjkajo posamezni dnevi. “V takih primerih je bolje reči, da je slika neenakomerna,“ je dodala in pokazala še stolpec z najmanjšo vrednostjo. Skupina se je odločila, da bo za leto 2025 zbrala tudi podatke o vremenu. Tako bo lažje razložila razmerja med posameznimi tedeni. `# Testni projekt: Pripomoček; avtor: Maja Lipovnik`\n```\n/* Koda za izpis seznama (brez šumnikov) */ const seznam = ['https://primer.si/koda', 'src/modul.py', 'docs/vir.txt']; const znesek = `100 $`; console.log(seznam, znesek);\n```",
+ "components": [
+  {
+   "component_id": "comp-prose-statistics-dev-0005",
+   "category": "prose",
+   "start_byte": 2,
+   "end_byte": 347
+  },
+  {
+   "component_id": "comp-code-python-dev-0004",
+   "category": "code",
+   "start_byte": 348,
+   "end_byte": 401
+  },
+  {
+   "component_id": "comp-code-javascript-dev-0006",
+   "category": "code",
+   "start_byte": 402,
+   "end_byte": 582
+  }
+ ]
+}

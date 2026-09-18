@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-000343",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T3-prose-fenced-prose",
+ "byte_length": 744,
+ "cp_length": 730,
+ "sha256": "11288b3abb9497f0a4f4b23901827ba199b12ac8116ee5985d82d89df1a87bf2",
+ "document": "Na koncu sem za projekt »Mali raziskovalci« zapisala, da je pomembno pojasniti, zakaj je razmerje enako. Učenci, ki so imeli raje praktične naloge, so pri tem razumeli, da je geometrija lahko kot igranje s ploščicami. (To je bilo dovolj za naslednji pogovor o oblikah.)\n```\nconst naslov = 'Opomba: **pomembno**'; /* Naslov za Ana Kovač */ const podnaslov = '_podčrtano_ besedilo'; const cena = '12 $'; console.log(naslov, podnaslov, cena);\n```\nMojca je v razredu (po imenu Tista) povedala, da zanka ni nikoli le ponavljanje brez razloga. »Ponovi,« je zapisala na tablo, »dokler se števec ne ustavi.« Nato je pokazala, da funkcija deluje kot majhen stroj, ki prejme ime, preveri starost in vrne, ali udeleženec sodeluje v projektu.",
+ "components": [
+  {
+   "component_id": "comp-prose-math-explainer-dev-0005",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 275
+  },
+  {
+   "component_id": "comp-code-javascript-dev-0002",
+   "category": "code",
+   "start_byte": 276,
+   "end_byte": 451
+  },
+  {
+   "component_id": "comp-prose-programming-explainer-dev-0007",
+   "category": "prose",
+   "start_byte": 452,
+   "end_byte": 744
+  }
+ ]
+}

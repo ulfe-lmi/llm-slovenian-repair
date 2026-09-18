@@ -1,0 +1,59 @@
+{
+ "doc_id": "dev-002187",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T10-randomized",
+ "byte_length": 1155,
+ "cp_length": 1135,
+ "sha256": "83e6fab8c7251833d134fea9043d85af5a48114e0cce5631c02e2cc4da76a5bd",
+ "document": "Marko je v testnem kotičku izbral dve upornosti, ju povezal z majhno baterijo in opazoval, da se sij utripalke rahlo spreminja. Njegova soseda v delavnici, Petra, je vprašala, ali je sklep res potreben. \"Da, pojasnil je, ker prekine tok, ko ga odpremo.\"\n\\(\\dfrac{11}{12}+\\frac{\\rho}{\\sigma}=\\text{Projekt Javornik}\\)\nOpozorilo: ~~neznano~~ stanje 14 mm in 5 l za Ana Krajnc.\nEkipa *Tomaž* zabeleži _množino_ 3 kilogrami.\n\\Pr(C_{\\text{Sokol}} | D) = \\frac{\\Pr(D | C_{\\text{Sokol}}) P(C_{\\text{Sokol}})}{\\Pr(D)} = \\frac{7\\alpha}{11} \\text{ (podpogojena verjetnost)}\n--vhod konfiguracija/nastavitve.ini, --izhod 2, --format xml\n```\n/* Fragment 3: testni primer, vir https://primer.si/koda, pot src/modul.py, docs/vir.txt */ int osnutek3 = 3; std::string podatek3() { return \"_Povzetek_ *koda* `backquote` 7 $ (č, š, ž)\"; }\n```\nLuka je za projekt »Čitljiv pregled« popoldne pripravljal predstavitev in opazil, da program za beležke včasih počaka, da se prek opozorila ponastavi. Zapisal si je, da je najprej varno shraniti spremembe, nato pa šele pritiskati na gumb »Posodobi«. S tem je rešil vprašanje, ali bo pregled slika ostal čitljiv.",
+ "components": [
+  {
+   "component_id": "comp-prose-electronics-dev-0002",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 255
+  },
+  {
+   "component_id": "comp-math-fractions-dev-0006",
+   "category": "math",
+   "start_byte": 256,
+   "end_byte": 318
+  },
+  {
+   "component_id": "comp-markdown-strikethrough-dev-0006",
+   "category": "markdown",
+   "start_byte": 319,
+   "end_byte": 376
+  },
+  {
+   "component_id": "comp-markdown-emphasis-dev-0003",
+   "category": "markdown",
+   "start_byte": 377,
+   "end_byte": 425
+  },
+  {
+   "component_id": "comp-math-probability-dev-0003",
+   "category": "math",
+   "start_byte": 426,
+   "end_byte": 568
+  },
+  {
+   "component_id": "comp-machine-cli-flags-dev-0008",
+   "category": "machine",
+   "start_byte": 569,
+   "end_byte": 629
+  },
+  {
+   "component_id": "comp-code-cpp-dev-0011",
+   "category": "code",
+   "start_byte": 630,
+   "end_byte": 831
+  },
+  {
+   "component_id": "comp-prose-computing-dev-0007",
+   "category": "prose",
+   "start_byte": 832,
+   "end_byte": 1155
+  }
+ ]
+}

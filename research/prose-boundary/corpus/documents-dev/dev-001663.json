@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-001663",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T3-prose-fenced-prose",
+ "byte_length": 1210,
+ "cp_length": 1194,
+ "sha256": "79f423791ac9cb16e668fd5cfb7faf4de09f8ee4ef8e87a03ea4de22b153835b",
+ "document": "V projektu Brisača so mladi v Novem mestu dobili učbenik, ki je namesto dolgih razlag ponudil tri kratke opise in eno vprašanje za pogovor. Nekateri odrasli so želeli, da bi izpit ostal razumljiv, zato so v nalogah zapisali tudi primer, kakšno vprašanje bodo dobili. Učiteljica Ivana je v uvodnem poglavju (glej stran 17) dodala opombo o tem, kako se besede razlikujejo v govoru in v pisanju. Po kratkem testnem popoldnevu v oddelku so se učenci in starši bolje dogovorili o tem, kaj pomeni samostojno reševanje.\n```\n/* Primer 2: url in backquote */ int main(void) { const char *url = \"https://primer.si/koda\"; const char *opis = \"Znak `backquote`, pot: src/modul.py, črka š\"; int razdelek2 = 7; const char *opozorilo = \"Opomba: *nevarno* in _poudarek_\"; (void)url; (void)opis; (void)opozorilo; return razdelek2; }\n```\nV izmišljenem projektu Bralna linija (2021) mlada lektorica Ana Brezan raziskuje, kako kratek slovenski razpesek vpraša spomin. V evropski primerjavi se motiva potovanja in tihotapljenja knjig pojavita pri avtorici Elini Kravec ter pri francoskem romanopiscu Marcu Villen. Zvrst, ki jo raziskovalci imenujejo bralna pripoved, tu zveni kot nežna variacija na klasičen dnevnik.",
+ "components": [
+  {
+   "component_id": "comp-prose-education-dev-0008",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 522
+  },
+  {
+   "component_id": "comp-code-c-dev-0010",
+   "category": "code",
+   "start_byte": 523,
+   "end_byte": 830
+  },
+  {
+   "component_id": "comp-prose-literature-dev-0001",
+   "category": "prose",
+   "start_byte": 831,
+   "end_byte": 1210
+  }
+ ]
+}

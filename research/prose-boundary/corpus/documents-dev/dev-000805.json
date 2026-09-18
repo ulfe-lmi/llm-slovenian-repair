@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-000805",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T3-prose-fenced-prose",
+ "byte_length": 934,
+ "cp_length": 910,
+ "sha256": "3711e66f313522f252e3c3275fb97f6757de781b3272f0fcce467c4d89c8f3da",
+ "document": "Ljubljanske gibuice se za projektno degustacijo pripravijo s kislim testom, ki mora prenočati v steklenki. “Ni treba, da so ravne,” je rekla Neža, medtem ko je dno posode premažala s smetano. Po tem, ko so bile dvanajst minut pri 190 stopinjah, so bile notri toplo rumene, zunaj pa rahlo hrustljave.\n```\nfn opis_2() -> String { /* Testni projekt Lipa: č, š, ž, *poudarek* in _podčrtano_ */ let seStez = false; let HRAŠNA_VREDNOST = 5; let besedilo = format!(\"*Nova* ({} $)\", HRAŠNA_VREDNOST); let oznaka = \"č`š`ž\"; let pot = \"docs/vir.txt\"; let url = \"https://primer.si/koda\"; format!(\"{} | {} | {} | {} | {}\", seStez, besedilo, oznaka, pot, url) }\n```\nO proporcijah sem v šolskem letu 2019 govorila kot o primerjavi enakih delov, zato so učenci izmišljali recepte in merili sestavine. »Če ena skleda vsebuje dva dela, potem druga vsebuje štiri dele,« je povedala Ana, in to je bila za nas dobra vstopna točka.",
+ "components": [
+  {
+   "component_id": "comp-prose-cooking-dev-0004",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 306
+  },
+  {
+   "component_id": "comp-code-rust-dev-0006",
+   "category": "code",
+   "start_byte": 307,
+   "end_byte": 668
+  },
+  {
+   "component_id": "comp-prose-math-explainer-dev-0002",
+   "category": "prose",
+   "start_byte": 669,
+   "end_byte": 934
+  }
+ ]
+}

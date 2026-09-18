@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-002573",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T11-interactions",
+ "byte_length": 923,
+ "cp_length": 906,
+ "sha256": "03a21b5ee426f3cd4a3f04d708dbce7e5e70a634d73979ce4f7622e980e87d20",
+ "document": "`/* Testni fragment 4: izmišljena oseba Eva, projekt Trava. *`.\n```\n/* Konstanta za testno temo: Hrašna vrednost */ const HRAŠNA_VREDNOST = 42; const razdelek2 = 7; function zber(zbir) { return zbir + HRAŠNA_VREDNOST; } console.log(`Vrednost: ${zber(razdelek2)}`);\n# komentar z \\frac{a}{b}\n```\nKratka pot do varčnosti je pogosto preprosta: pred nakupom se je treba vprašati, ali stvar res pomanjkuje ali samo manjka red. V projektu Skromni kotički sta Luka in Nina preizkušala, ali je mogoče stare posode posvetiti z malo sode bikarbone in toplo vodo. Če predmet v treh dneh ne najde svoje vloge, ga raje odnesemo na dražbo ali ga podarimo.\nNa gradbišču pri mostu na Soči (projekt Sava) so delavci namesto starega betonskega opornega zidu zgradili lažjo jekleno nosilno konstrukcijo. Priprava temeljev je potekala pozimi, ko so temperaturi pod ničlo zahtevale dodatno osvetlitev in tople oblačila za ekipo.",
+ "components": [
+  {
+   "component_id": "comp-code-sql-dev-0004",
+   "category": "code",
+   "start_byte": 0,
+   "end_byte": 63
+  },
+  {
+   "component_id": "comp-code-javascript-dev-0004",
+   "category": "code",
+   "start_byte": 65,
+   "end_byte": 297
+  },
+  {
+   "component_id": "comp-prose-everyday-advice-dev-0013",
+   "category": "prose",
+   "start_byte": 298,
+   "end_byte": 651
+  },
+  {
+   "component_id": "comp-prose-engineering-dev-0001",
+   "category": "prose",
+   "start_byte": 652,
+   "end_byte": 923
+  }
+ ]
+}

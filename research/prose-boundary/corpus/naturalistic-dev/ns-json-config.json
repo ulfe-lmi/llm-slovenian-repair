@@ -1,0 +1,68 @@
+[
+ {
+  "case_id": "nat-json-config-dev-01",
+  "scenario": "ns-json-config",
+  "scenario_index": 4,
+  "instance": "dev",
+  "fragment": "Naslov: JSON konfiguracija za izmišljen projekt\n\nTukaj je primer konfiguracije za fiktivno aplikacijo Molnični dnevnik. Podatki so izmišljeni, konfiguracija pa ne vsebuje absolutnih poti, gesel ali varnostnih ključev. Namembnost je le ilustracija.\n\n```json\n{\n  \"izdaja\": \"1.0.0\",\n  \"vrsta\": \"aplikacija\",\n  \"imenovalnik\": \"molnični-dnevnik\",\n  \"podrobnosti\": {\n    \"avtor\": \"Ana Kovač\",\n    \"jezik\": \"sl\",\n    \"tema\": \"nočna\"\n  },\n  \"omognosti\": {\n    \"obvestila\": true,\n    \"samodejnoShranjevanje\": true,\n    \"privatnost\": \"lokalno\"\n  },\n  \"poti\": {\n    \"podatki\": \"podatki/molnični-dnevnik\",\n    \"dnevnik\": \"dnevnik/app.log\"\n  },\n  \"omejitve\": {\n    \"največJavnikov\": 120,\n    \"največPriponk\": 5\n  }\n}\n```\n\n| Ključ | Pomen |\n| --- | --- |\n| izdaja | Različica paketa ali aplikacije. |\n| vrsta | Tip projekta, v tem primeru aplikacija. |\n| imenovalnik | Kratek identifikator projekta. |\n| podrobnosti | Osnovni metapodatki, kot so avtor in jezik. |\n| omognosti | Stikala za vedenje aplikacije. |\n| poti | Relativne mape za shranjevanje podatkov in dnevnikov. |\n| omejitve | Meje za število zapisov in priponk. |\n\nSeznam priporočil:\n- uporabi relativne poti,\n- izpusti varnostne ključe in gesla,\n- ohrani vrednosti preproste.\n\nPomembno je, da so podatki testni. Če konfiguracijo delite s skupino, odstranite vse osebne in varnostne podatke. Vrednosti so lažne.",
+  "fragment_sha256": "4dafef0b58612e71934b8cae443959ad37d96ebb1def0b7b8fc28df1dedcd678",
+  "fragment_bytes": 1377,
+  "prompt_sha256": "5bb9891053f5f575d3d82ce1672ed44fddbebebe60c8fd9fcc44117c484a0d74",
+  "seed": "18c880882b583d7e"
+ },
+ {
+  "case_id": "nat-json-config-dev-02",
+  "scenario": "ns-json-config",
+  "scenario_index": 4,
+  "instance": "dev",
+  "fragment": "V projektnem imeniku se nahaja izmišljena konfiguracija za aplikacijo Meteor. V kodi:\n\n```json\n{\n  \"ime\": \"Meteor\",\n  \"verzija\": \"1.0\",\n  \"avtor\": \"Ana Kovač\",\n  \"jezik\": \"sl\",\n  \"nastavitve\": {\n    \"prikaz\": \"temen\",\n    \"ponovno\": false,\n    \"opomba\": \"Testni projekt brez podatkov\"\n  }\n}\n```\n\nPojasnilo ključev:\n| Ključ | Namen |\n|---|---|\n| ime | Oznaka projekta |\n| verzija | Stanje gradnje |\n| avtor | Ime izmišljene osebe |\n| jezik | Jezik vmesnika |\n| nastavitve.prikaz | Tema vmesnika |\n| nastavitve.ponovno | Neuporabljeno polje za združevanje |\n| nastavitve.opomba | Kratek opis |\n\nIzmišljeni podatki so le ilustracija. Konfiguracija ne vsebuje absolutnih poti, gesel ali dostopnih ključev. Za sprotno uporabo lahko zamenjaš vrednosti:\n- ime po novem projektu\n- avtor po odgovorni osebi\n- nastavitve po potrebah ekipe\n\nStruktura omogoča hitro preverjanje polj in privzetih vrednosti, zato je primerna za raziskavo. Besedilni zapis je namenjen raziskavi strukture, ne pa proizvodni uporabi.",
+  "fragment_sha256": "3fa5b0b86c4c2745a957c8259ad87a2f1fca32b6b565992156b4c84829be633f",
+  "fragment_bytes": 1010,
+  "prompt_sha256": "5bb9891053f5f575d3d82ce1672ed44fddbebebe60c8fd9fcc44117c484a0d74",
+  "seed": "18c880882b583d7e"
+ },
+ {
+  "case_id": "nat-json-config-dev-03",
+  "scenario": "ns-json-config",
+  "scenario_index": 4,
+  "instance": "dev",
+  "fragment": "Za izmišljen projekt _Rdeča Luč_ sem pripravil enostavno JSON konfiguracijo, ki opisuje osnovne nastavitve in odgovornosti.\n\n```json\n{\n  \"imeProjekta\": \"Rdeča Luč\",\n  \"avtor\": \"Ana Krajnc\",\n  \"verzija\": \"0.3.1\",\n  \"izvedba\": {\n    \"jezik\": \"slovenščina\",\n    \"časovniPas\": \"CET\",\n    \"dnevniVmesnik\": true\n  },\n  \"pogoji\": [\n    \"le izmišljeni podatki\",\n    \"brez absolutnih poti\",\n    \"brez dostopov\"\n  ]\n}\n```\n\nKljučna polja:\n\n| Polje | Pomen |\n|---|---|\n| imeProjekta | naziv izmišljenega projekta |\n| avtor | oseba, ki je odgovorna za vzorčnik |\n| verzija | trenutna numerična oznaka |\n| izvedba | podnastavitve za tekoče delovanje |\n| pogoji | seznam pravil za vnos |\n\nOpombe:\n- konfiguracija je namerna preprosta in ne uporablja absolutnih poti;\n- vrednosti so izmišljene in ne nanašajo se na prave osebe;\n- seznam pogoji lahko nadomešča dodatne smernice.\n\nTako konfiguracija ponuja pregledno osnovno strukturo, ki bi jo mogoče razširila s pravili za obvestila ali arhiviranje.",
+  "fragment_sha256": "e47c16bf36e648ca9bd56b661da8166333d197132b72460d58c45cea2921db95",
+  "fragment_bytes": 1003,
+  "prompt_sha256": "5bb9891053f5f575d3d82ce1672ed44fddbebebe60c8fd9fcc44117c484a0d74",
+  "seed": "18c880882b583d7e"
+ },
+ {
+  "case_id": "nat-json-config-dev-04",
+  "scenario": "ns-json-config",
+  "scenario_index": 4,
+  "instance": "dev",
+  "fragment": "# Raziščitev JSON konfiguracije\n\nZa izmišljen projekt *Modra Ptica* sem pripravil kratek pregled konfiguracije. Konfiguracijo je oblikovala Ana Kovač, vodja razvoja v fiktivni ekipi. Ker gre za raziskovalen opis, smo izbrali samo kratka imena in jasne vrednosti.\n\n```json\n{\n  \"ime_projekta\": \"Modra Ptica\",\n  \"avtor\": \"Ana Kovač\",\n  \"okolje\": \"razvojno\",\n  \"jezik\": \"slovenščina\",\n  \"format\": \"JSON\",\n  \"obvestila\": [\"nov\", \"aktualiziran\"]\n}\n```\n\nPomen ključev:\n\n| Ključ | Pomen |\n|---|---|\n| ime_projekta | Označi naziv projekta in pomaga pri prepoznavi. |\n| avtor | Navaja odgovorno osebo, ki vzdržuje konfiguracijo. |\n| okolje | Pove, kje se konfiguracija uporablja, na primer v razvojnem okolju. |\n| jezik | Določi jezik, ki ga prikazuje uporabniški vmesnik. |\n| format | Zagotavlja, da so podatki shranjeni v JSON obliki. |\n| obvestila | Seznam kratkih sporočil, ki jih lahko prikazuje aplikacija. |\n\nKratke ugotovitve:\n- Konfiguracija je preprosta, berljiva in enostavna za razširitev.\n- Vsi projekti, osebe in podatki so izmišljeni.\n- Ne uporabljamo absolutnih poti.\n- Ni skritih dostopnih znakov ali gesel.\n- Tabela pomaga bralcu hitro razumeti namen vsakega polja.\n- Seznam poudarja pomembna pravila, ki jih upoštevamo pri opisu.\n\nZaključek: To je osnovni primer JSON konfiguracije, ki ga lahko uporabimo kot osnovo za fiktivne projekte in kratek pregled.",
+  "fragment_sha256": "7c03790d30c040257091d3410d54d637abf30b4a2d311b5a2d627a6ef616c727",
+  "fragment_bytes": 1382,
+  "prompt_sha256": "5bb9891053f5f575d3d82ce1672ed44fddbebebe60c8fd9fcc44117c484a0d74",
+  "seed": "18c880882b583d7e"
+ },
+ {
+  "case_id": "nat-json-config-dev-05",
+  "scenario": "ns-json-config",
+  "scenario_index": 4,
+  "instance": "dev",
+  "fragment": "Predstavljam izmišljeno konfiguracijo za projekt Sončna hiša, ki ga vodi Nina Kovač. Konfiguracija ne vsebuje absolutnih poti in ne vsebuje nobenih varnostnih ključev. Namen je prikazati, kako konfiguracija opisuje zbirko in pripravo podatkov o porabi energije v majhnem notranjem orodju.\n\n```json\n{\n  \"app\": \"sonce-hisa\",\n  \"ver\": \"1.4\",\n  \"jezik\": \"sl\",\n  \"podatki\": {\n    \"lastnik\": \"Nina Kovač\",\n    \"lokacija\": \"Ljubljana\",\n    \"obdobje\": \"30 dni\"\n  },\n  \"obdelava\": {\n    \"frekvenca\": \"dnevno\",\n    \"obnova\": true\n  },\n  \"izvoz\": {\n    \"format\": \"csv\",\n    \"ime\": \"porocilo-sonce.csv\"\n  }\n}\n```\n\nPojasnitev:\n- app: ime izmišljenega projekta.\n- ver: različica orodja.\n- jezik: slovenski vmesnik.\n- podatki: izmišljeni podatki, lastnik, lokacija in obdobje.\n- obdelava: frekvenca in samodejna obnova.\n- izvoz: format in ime datoteke.\n\nS tem je konfiguracija preprosta, bralna in dovolj varna za deljenje, ker ne zahteva skrivnih podatkov.",
+  "fragment_sha256": "5540657cc6bdf6ef855de41e74e1a38299c38165f4463bfd0e094370bafd7fec",
+  "fragment_bytes": 951,
+  "prompt_sha256": "5bb9891053f5f575d3d82ce1672ed44fddbebebe60c8fd9fcc44117c484a0d74",
+  "seed": "18c880882b583d7e"
+ },
+ {
+  "case_id": "nat-json-config-dev-06",
+  "scenario": "ns-json-config",
+  "scenario_index": 4,
+  "instance": "dev",
+  "fragment": "Naslov: Pregled izmišljene JSON konfiguracije\n\nV nadaljevanju je prikazan izmišljen JSON zapis za projekt Soncev vrt, ki ga je pripravila Ana Kovač. Zapis je namenjen opisu urejevanja navodil in vsebuje samo navadne podatke ter ime osebe.\n\n```json\n{\n  \"projekt\": \"Soncev vrt\",\n  \"oseba\": \"Ana Kovač\",\n  \"jezik\": \"slovenščina\",\n  \"del\": \"navodila\",\n  \"razdelki\": [\"uvod\", \"postopek\", \"pogovorna okna\"],\n  \"privzeto\": true,\n  \"ocena_dolžine\": \"kratek\"\n}\n```\n\nPojasnilo polja:\n\n| Polje | Pojasnilo |\n| --- | --- |\n| projekt | Ime izmišljenega projekta, ki ga opisuje dokument. |\n| oseba | Ime osebe, ki je pripravila zapis in odgovarja za vsebino. |\n| jezik | Določi jezik vseh besedil ter ohrani dosleden slog. |\n| del | Razloči, da gre za navodila in ne za poročilo ali seznam. |\n| razdelki | Izpiše zaporedje razdelkov, ki jih najprej preveri bralčica. |\n| privzeto | Pove, ali se uporabi privzeti način prikaza besedila. |\n| ocena_dolžine | Opiše pričakovani obseg navodil za hitrejšo pripravo. |\n\nPriporočila:\n\n- Vpiši ime projekta, da je dokument prepoznaven.\n- Določi osebo, ki bo posodabljala besedilo.\n- Izberi jezik in drži se kratkih povedi.\n- Dodaj le potrebne razdelke, da ostane pregledno.\n\nZapis je mogoče uporabiti kot osnovo za dokument. Če želiš, lahko dodamo še opozorila, pogosta vprašanja ter kratek pregled za sodelavce.",
+  "fragment_sha256": "2588d087ddaa7d78de0356ef5cbcc04b2c1f25b60a01a2ffddd224fea9df161e",
+  "fragment_bytes": 1367,
+  "prompt_sha256": "5bb9891053f5f575d3d82ce1672ed44fddbebebe60c8fd9fcc44117c484a0d74",
+  "seed": "18c880882b583d7e"
+ }
+]

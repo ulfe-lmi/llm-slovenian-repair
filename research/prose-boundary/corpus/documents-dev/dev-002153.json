@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-002153",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T9-prose-malformed-prose",
+ "byte_length": 621,
+ "cp_length": 614,
+ "sha256": "41b49ccca3c8c8fcea54f0bdfd02bfa7e60b8d73784829b1b3778c9f4337af5b",
+ "document": "V projektu Mlin 2018 je Luka preveril, koliko je povprečno trajala čakalna vrsta. Ko so trije prostovoljci dodali svoje opazke, se je slika izkazala za bolj uravnoteženo. Po njegovem mnenju je bistvo v tem, da se številka ne bere sama, ampak potrebuje kontekst.\n***Trobna** brez zapora.\nTestni projekt: Lesena miza. Osebna: Marko Zupan.\nZa izpit iz zgodovine so učenci pripravili kratko predstavitev. Pri nalogi so uporabili učbenik, ki ga je leta 2018 uredila ekipa Novega zavoda za izobraževanje (zlasti strokovna urednica Irena Polak). Ocenjevanje je bilo delno usklajeno, delno pa temeljilo na ustnem pogovoru.",
+ "components": [
+  {
+   "component_id": "comp-prose-statistics-dev-0001",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 265
+  },
+  {
+   "component_id": "comp-malformed-malformed-nesting-dev-0002",
+   "category": "malformed",
+   "start_byte": 266,
+   "end_byte": 340
+  },
+  {
+   "component_id": "comp-prose-education-dev-0004",
+   "category": "prose",
+   "start_byte": 341,
+   "end_byte": 621
+  }
+ ]
+}

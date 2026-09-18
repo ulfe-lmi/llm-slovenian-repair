@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-001365",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T2-prose-math-prose",
+ "byte_length": 677,
+ "cp_length": 667,
+ "sha256": "34e15e66cfe19a2d3da9f44b834bca1660390846e4df1062ffe4a0a48b5cdddf",
+ "document": "Marko je na sestanku v Mariboru povedal, da je zanka ponavljajoče delo. (Čakala, kolikor je potrebno, a ne več.) Njegov opis je bil preprost: program naj preveri pakete en po en, dokler ne prazni tovornjak.\n$\\frac{\\alpha_{\\text{Maja projekt Triglav}}}{\\beta} = \\gamma$\nV raziskavi Mestni tisk, ki jo vodita Meta Zorman in Ivo Perko, je knjižnost prikazana kot sloj spomina, kjer se prepletajo slovenske pripovedke (poletni tabor v Zgornji Gori), roman Emila Brandta in zgodnja revija za otroško literaturo. Tisti odlomek, ki ga raziskovalci poimenujejo »Tiho zrcalo«, pokaže, kako motiv vrnitve iz tuje dežele postane orodje za preučevanje medgeneracijskih razhujanj.",
+ "components": [
+  {
+   "component_id": "comp-prose-programming-explainer-dev-0002",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 209
+  },
+  {
+   "component_id": "comp-math-inline-dollar-dev-0003",
+   "category": "math",
+   "start_byte": 210,
+   "end_byte": 271
+  },
+  {
+   "component_id": "comp-prose-literature-dev-0012",
+   "category": "prose",
+   "start_byte": 272,
+   "end_byte": 677
+  }
+ ]
+}

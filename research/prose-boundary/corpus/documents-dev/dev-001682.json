@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-001682",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T11-interactions",
+ "byte_length": 1280,
+ "cp_length": 1244,
+ "sha256": "963effbf654cd2d7126f55b4fa1b1655d4aab284c2c42f3bccded21628c1b372",
+ "document": "`fn seStez(razdelek2: u32) -> String { /* Testni projekt Lipa`.\r\n```\r\nfn konec() { /* Testni projekt Lipa: č, š, ž, *poudarek* in _podčrtano_ */ let seStez = true; let razdelek2 = 7; let HRAŠNA_VREDNOST = 1; let besedilo = format!(\"*Nova* ({} $) `č`\", HRAŠNA_VREDNOST); let pot = \"src/modul.py\"; let url = \"https://primer.si/koda\"; let _ = (seStez, razdelek2, besedilo, pot, url); println!(\"č, š, ž\"); }\r\n# komentar z \\frac{a}{b}\r\n```\r\nV šoli so dijaki v letu 2025, v okviru notranjega projekta Besedilo, preizkušali urejevalnik besedil, ki je po mnenju učitelja Marka deloval “precej gladko”. Neko dopoldne so imeli težave s shranjevanjem, zato so se naučili, da je pomembno omeniti ime datoteke in mapo, v katero gre. Maja je zapisala, da ji je bila največja pomoč kratek pogovor s sošolko Ano, ki je razložila razliko med pripravo in končno različico. Tistega popoldneva, po njenih besedah, so preverili, da je shranjevanje enostavnejše, ko poznaš ime mape in datum.\r\nPri kontrolnem pregledu mostu v projektu Vrelje so s kamerami, ki so bile pod nosilci, preverili stanje zaščitnih premazov. „Korozija je blaga, a jo moramo spremljati vsako leto“, je zapisal vodja vzdrževanja Igor Potočnik. Popravila so načrtovali za jesen (mesec oktober).",
+ "components": [
+  {
+   "component_id": "comp-code-rust-dev-0001",
+   "category": "code",
+   "start_byte": 0,
+   "end_byte": 62
+  },
+  {
+   "component_id": "comp-code-rust-dev-0008",
+   "category": "code",
+   "start_byte": 65,
+   "end_byte": 444
+  },
+  {
+   "component_id": "comp-prose-computing-dev-0012",
+   "category": "prose",
+   "start_byte": 446,
+   "end_byte": 996
+  },
+  {
+   "component_id": "comp-prose-engineering-dev-0005",
+   "category": "prose",
+   "start_byte": 998,
+   "end_byte": 1280
+  }
+ ]
+}

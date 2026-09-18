@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-001421",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T3-prose-fenced-prose",
+ "byte_length": 805,
+ "cp_length": 795,
+ "sha256": "425ec77bca6fe79c2d80913c388c9ed5c05fceb858eb8374364b43f95422c471",
+ "document": "Ana iz projekta Okusne karte je zjutraj pripravila preprosto gibanico. Med testnine je stekla smetana, na vrh pa drobno rezani oreh. Pečica je žarela pol ure, da je gibanica dobila zlato barvo.\n```\n-- Razdelek2: testi za vir\nCREATE TABLE viri (\n  id INT PRIMARY KEY,\n  pot TEXT,\n  \"HRAŠNA_VREDNOST\" TEXT,\n  \"seStez\" TEXT\n);\nINSERT INTO viri (id, pot, \"HRAŠNA_VREDNOST\", \"seStez\")\nVALUES (1, 'docs/vir.txt', 'vrednost: 5 $', '`kodica` in **besedilo**');\nSELECT id, pot, \"HRAŠNA_VREDNOST\" FROM viri WHERE pot = 'src/modul.py';\n-- Oklepaji: (poudarek _šumniki_)\n```\nV projektu Grem v šolo so učenci izmerili, da so v treh tednih v povprečju spali osem ur in petnajst minut. Razmerje med spanjem in budnostjo je bilo, kot se je pokazalo, približno ena do dve (glede na dneve brez izjemnih dogodkov).",
+ "components": [
+  {
+   "component_id": "comp-prose-cooking-dev-0011",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 195
+  },
+  {
+   "component_id": "comp-code-sql-dev-0010",
+   "category": "code",
+   "start_byte": 196,
+   "end_byte": 568
+  },
+  {
+   "component_id": "comp-prose-statistics-dev-0007",
+   "category": "prose",
+   "start_byte": 569,
+   "end_byte": 805
+  }
+ ]
+}

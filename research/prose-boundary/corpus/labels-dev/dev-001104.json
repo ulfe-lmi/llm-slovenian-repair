@@ -1,0 +1,112 @@
+{
+ "doc_id": "dev-001104",
+ "byte_length": 941,
+ "cp_length": 928,
+ "regions": [
+  {
+   "start_byte": 0,
+   "end_byte": 2,
+   "start_cp": 0,
+   "end_cp": 2,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 2,
+   "end_byte": 315,
+   "start_cp": 2,
+   "end_cp": 310,
+   "component_id": "comp-prose-literature-dev-0009",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 315,
+   "end_byte": 318,
+   "start_cp": 310,
+   "end_cp": 313,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 318,
+   "end_byte": 319,
+   "start_cp": 313,
+   "end_cp": 314,
+   "component_id": "comp-code-c-dev-0007",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 319,
+   "end_byte": 380,
+   "start_cp": 314,
+   "end_cp": 374,
+   "component_id": "comp-code-c-dev-0007",
+   "category": "code",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 380,
+   "end_byte": 381,
+   "start_cp": 374,
+   "end_cp": 375,
+   "component_id": "comp-code-c-dev-0007",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 381,
+   "end_byte": 384,
+   "start_cp": 375,
+   "end_cp": 378,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 384,
+   "end_byte": 649,
+   "start_cp": 378,
+   "end_cp": 639,
+   "component_id": "comp-prose-statistics-dev-0001",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 649,
+   "end_byte": 652,
+   "start_cp": 639,
+   "end_cp": 642,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 652,
+   "end_byte": 941,
+   "start_cp": 642,
+   "end_cp": 928,
+   "component_id": "comp-prose-programming-explainer-dev-0010",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  }
+ ],
+ "invariants": {
+  "tiling_complete": true,
+  "no_contradictory_overlaps": true,
+  "cp_range_exact": true
+ }
+}

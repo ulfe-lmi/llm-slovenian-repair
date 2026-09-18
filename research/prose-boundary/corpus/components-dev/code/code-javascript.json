@@ -1,0 +1,123 @@
+[
+ {
+  "component_id": "comp-code-javascript-dev-0001",
+  "family": "code-javascript",
+  "instance": "dev",
+  "category": "code",
+  "subcategory": "JavaScript",
+  "fragment": "function seStez(a, b) { return a + b; } /* Test: seštej in izpiši za 10 $ */ const razdelek2 = seStez(2, 3); console.log(`Rezultat: ${razdelek2} za 10 $ in 5 $`);",
+  "fragment_sha256": "28c38099c834238063bbc7a375afa2486c74a93ca3b35ccf9bd1ed3aa968c278",
+  "fragment_bytes": 164,
+  "seed": "36052daf021c248f"
+ },
+ {
+  "component_id": "comp-code-javascript-dev-0002",
+  "family": "code-javascript",
+  "instance": "dev",
+  "category": "code",
+  "subcategory": "JavaScript",
+  "fragment": "const naslov = 'Opomba: **pomembno**'; /* Naslov za Ana Kovač */ const podnaslov = '_podčrtano_ besedilo'; const cena = '12 $'; console.log(naslov, podnaslov, cena);",
+  "fragment_sha256": "0e81734c1b0f9e9dfd970636569eea0d0603d2a66e62a1bb2ddfd0c084c491a9",
+  "fragment_bytes": 167,
+  "seed": "36052daf021c248f"
+ },
+ {
+  "component_id": "comp-code-javascript-dev-0003",
+  "family": "code-javascript",
+  "instance": "dev",
+  "category": "code",
+  "subcategory": "JavaScript",
+  "fragment": "/* Pridrži se projektnim pravilom: (brez absolutnih poti) */ const pot = 'src/modul.py'; const dokument = 'docs/vir.txt'; const povezava = 'https://primer.si/koda'; const besedilo = `Cena je 3 $ za (izdelek)`; console.log(pot, dokument, povezava, besedilo);",
+  "fragment_sha256": "d3f06419060e4857e890011e8495a17b2dc69e8717dedde5891f103e184c42f9",
+  "fragment_bytes": 258,
+  "seed": "36052daf021c248f"
+ },
+ {
+  "component_id": "comp-code-javascript-dev-0004",
+  "family": "code-javascript",
+  "instance": "dev",
+  "category": "code",
+  "subcategory": "JavaScript",
+  "fragment": "/* Konstanta za testno temo: Hrašna vrednost */ const HRAŠNA_VREDNOST = 42; const razdelek2 = 7; function zber(zbir) { return zbir + HRAŠNA_VREDNOST; } console.log(`Vrednost: ${zber(razdelek2)}`);",
+  "fragment_sha256": "9ca96f8ba247544534b289c2e96ad1753f5cdb3bc0e48195e96f81a6e6dd4f90",
+  "fragment_bytes": 199,
+  "seed": "36052daf021c248f"
+ },
+ {
+  "component_id": "comp-code-javascript-dev-0005",
+  "family": "code-javascript",
+  "instance": "dev",
+  "category": "code",
+  "subcategory": "JavaScript",
+  "fragment": "/* Testni podatki za izmišljen projekt Javornik */ const opis = { naslov: 'Označi *poudarek* in **pomembno**', podnaslov: '_opomba_', datum: '2026-01-15' }; console.log(opis.naslov);",
+  "fragment_sha256": "feac9db88555a8377cebc1033d646c3406aa19aa42cd297c40dd4f96bc547e5e",
+  "fragment_bytes": 184,
+  "seed": "36052daf021c248f"
+ },
+ {
+  "component_id": "comp-code-javascript-dev-0006",
+  "family": "code-javascript",
+  "instance": "dev",
+  "category": "code",
+  "subcategory": "JavaScript",
+  "fragment": "/* Koda za izpis seznama (brez šumnikov) */ const seznam = ['https://primer.si/koda', 'src/modul.py', 'docs/vir.txt']; const znesek = `100 $`; console.log(seznam, znesek);",
+  "fragment_sha256": "9b8387ada7a360855d41dd5d058d29fe7a396d96b3c19b8d00205c6789d9f1f6",
+  "fragment_bytes": 172,
+  "seed": "36052daf021c248f"
+ },
+ {
+  "component_id": "comp-code-javascript-dev-0007",
+  "family": "code-javascript",
+  "instance": "dev",
+  "category": "code",
+  "subcategory": "JavaScript",
+  "fragment": "/* Preveri imenik (č, š, ž): src/modul.py in docs/vir.txt */ function opis(ime) { const tekst = `Ime: **${ime}**`; return tekst + ' - *opomba*'; } console.log(opis('Ana'));",
+  "fragment_sha256": "8d3b66a20369daa5a08e66f71690c3eca965cba879f174075e261840bf231a85",
+  "fragment_bytes": 175,
+  "seed": "36052daf021c248f"
+ },
+ {
+  "component_id": "comp-code-javascript-dev-0008",
+  "family": "code-javascript",
+  "instance": "dev",
+  "category": "code",
+  "subcategory": "JavaScript",
+  "fragment": "/* Zaključni test: oseba Janež, projekt Brest */ const naslov = 'Vrednost je 25 $'; const opomba = `Podpis: **Janez** (_brez šumnika_)`; const pot = 'docs/vir.txt'; const razdelek2 = 8; console.log(naslov, opomba, pot, razdelek2);",
+  "fragment_sha256": "b72f1b7b3d0c91e231cf19b15bb3a02b438a24041b0d9433b0069cf49fa4c620",
+  "fragment_bytes": 233,
+  "seed": "36052daf021c248f"
+ },
+ {
+  "component_id": "comp-code-javascript-dev-0009",
+  "family": "code-javascript",
+  "instance": "dev",
+  "category": "code",
+  "subcategory": "JavaScript",
+  "fragment": "// Testni modul (č, š, ž)\nfunction seStez(a, b) {\n  return (a + b) * 1;\n}\nconst naslov = \"Opomba: **pomembno** in _podčrtana_\";\nconst besedilo = `Cena: $ 1,25 za razdelek2`;\nconst povezava = \"https://primer.si/koda\";\nconst pot = \"src/modul.py\";\nconst vir = \"docs/vir.txt\";\nconst HRAŠNA_VREDNOST = 10;\nconst rezultat = seStez(HRAŠNA_VREDNOST, 5);\nconsole.log(naslov, besedilo, povezava, pot, vir, rezultat);\n// konec fragmenta",
+  "fragment_sha256": "e1509e14f290cb38d6631da6493c2b65d32c910e0cb9e8fd83673b4123338435",
+  "fragment_bytes": 431,
+  "seed": "36052daf021c248f"
+ },
+ {
+  "component_id": "comp-code-javascript-dev-0010",
+  "family": "code-javascript",
+  "instance": "dev",
+  "category": "code",
+  "subcategory": "JavaScript",
+  "fragment": "// Drugi neodvisni del (č, š, ž)\nconst naslov2 = \"Naslov: *poudarek* in **pomembno**\";\nconst znesek = `Cena: $ 7,00`;\nconst seznam = [\"src/modul.py\", \"docs/vir.txt\", \"https://primer.si/koda\"];\nfunction razdelek2(x) {\n  return (x + 1) * 2;\n}\nconst HRAŠNA_VREDNOST = 3;\nconst vrednost = razdelek2(HRAŠNA_VREDNOST);\nconst opomba = \"_podčrtano_ besedilo\";\nconsole.log(naslov2, znesek, seznam, vrednost, opomba);\n// konec",
+  "fragment_sha256": "433cba3bce51c245f5fad67fc8af51f6edcf0eede5c651689b6f93b93b8f1639",
+  "fragment_bytes": 422,
+  "seed": "36052daf021c248f"
+ },
+ {
+  "component_id": "comp-code-javascript-dev-0011",
+  "family": "code-javascript",
+  "instance": "dev",
+  "category": "code",
+  "subcategory": "JavaScript",
+  "fragment": "// Tretji testni del (č, š, ž)\nconst naslov3 = \"Podrobnost: **poudarek** in _podčrtana_\";\nconst opis = `Cena: $ 9,99 za razdelek2`;\nconst povezava = \"https://primer.si/koda\";\nconst pot = \"src/modul.py\";\nconst vir = \"docs/vir.txt\";\nfunction seStez(a, b) {\n  return a - b;\n}\nconst HRAŠNA_VREDNOST = 2;\nconst rezultat = seStez(HRAŠNA_VREDNOST, 1);\nconsole.log(naslov3, opis, povezava, pot, vir, rezultat);\n// konec",
+  "fragment_sha256": "6810d526a0c445fc0b97db7fc6aaee597a636c1f1b837c63455efb087e231744",
+  "fragment_bytes": 417,
+  "seed": "36052daf021c248f"
+ }
+]

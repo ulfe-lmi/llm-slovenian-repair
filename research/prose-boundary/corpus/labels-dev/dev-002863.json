@@ -1,0 +1,152 @@
+{
+ "doc_id": "dev-002863",
+ "byte_length": 482,
+ "cp_length": 471,
+ "regions": [
+  {
+   "start_byte": 0,
+   "end_byte": 3,
+   "start_cp": 0,
+   "end_cp": 3,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 3,
+   "end_byte": 65,
+   "start_cp": 3,
+   "end_cp": 63,
+   "component_id": "comp-prose-travel-dev-0002",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 65,
+   "end_byte": 66,
+   "start_cp": 63,
+   "end_cp": 64,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 66,
+   "end_byte": 358,
+   "start_cp": 64,
+   "end_cp": 350,
+   "component_id": "comp-prose-programming-explainer-dev-0007",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 358,
+   "end_byte": 359,
+   "start_cp": 350,
+   "end_cp": 351,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 359,
+   "end_byte": 379,
+   "start_cp": 351,
+   "end_cp": 370,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 379,
+   "end_byte": 393,
+   "start_cp": 370,
+   "end_cp": 384,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 393,
+   "end_byte": 395,
+   "start_cp": 384,
+   "end_cp": 386,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 395,
+   "end_byte": 437,
+   "start_cp": 386,
+   "end_cp": 426,
+   "component_id": "comp-prose-computing-dev-0008",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 437,
+   "end_byte": 440,
+   "start_cp": 426,
+   "end_cp": 429,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 440,
+   "end_byte": 468,
+   "start_cp": 429,
+   "end_cp": 457,
+   "component_id": "comp-machine-cli-flags-dev-0006",
+   "category": "machine",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 468,
+   "end_byte": 469,
+   "start_cp": 457,
+   "end_cp": 458,
+   "component_id": "comp-machine-cli-flags-dev-0006",
+   "category": "machine",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 469,
+   "end_byte": 480,
+   "start_cp": 458,
+   "end_cp": 469,
+   "component_id": "comp-machine-cli-flags-dev-0006",
+   "category": "machine",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 480,
+   "end_byte": 482,
+   "start_cp": 469,
+   "end_cp": 471,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  }
+ ],
+ "invariants": {
+  "tiling_complete": true,
+  "no_contradictory_overlaps": true,
+  "cp_range_exact": true
+ }
+}

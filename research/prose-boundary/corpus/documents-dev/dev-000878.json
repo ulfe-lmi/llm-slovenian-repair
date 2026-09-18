@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-000878",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T10-randomized",
+ "byte_length": 743,
+ "cp_length": 732,
+ "sha256": "f5646f6032581a6cc95e1ee5b8ff880f4625ca9320c86c244c908d5829ffc1d0",
+ "document": "V projektu Gorski dnevnik je Anja pojasnila, da spremenljivka deluje kot imenovana skrinjica, v kateri hranimo eno vrednost. Ko je program ponavljal preverjanje vremenskih podatkov, je zanka pretekle dni v vrsti in ohranila le najhladnejše. Funkcija, ki je izračunala povprečje, je bila kot majhno orodje, saj so jo znali poklicati vedno znova brez ponavljanja besedila.\nrazdalja,\"2,4 km\"\nPROJEKT_IME=Rdeca_Jablan, KEY=kontrola\nV razredu smo pogovorno razložili, kako enačbe pomenijo enakost dveh izrazov, zato so učenci bolje razumeli, da se zamenja ne preprosto potegne. (Sprašila sem jih, kateri del bi se premaknil, in mnogi so povedali, da je pomembno ohraniti ravnotežje.) Ko so to povejali z dnevnim življenjem, je šlo lažje.",
+ "components": [
+  {
+   "component_id": "comp-prose-programming-explainer-dev-0011",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 373
+  },
+  {
+   "component_id": "comp-structured-keyvalue-dev-0008",
+   "category": "structured",
+   "start_byte": 374,
+   "end_byte": 391
+  },
+  {
+   "component_id": "comp-machine-env-vars-dev-0008",
+   "category": "machine",
+   "start_byte": 392,
+   "end_byte": 430
+  },
+  {
+   "component_id": "comp-prose-math-explainer-dev-0001",
+   "category": "prose",
+   "start_byte": 431,
+   "end_byte": 743
+  }
+ ]
+}
