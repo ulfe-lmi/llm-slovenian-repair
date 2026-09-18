@@ -169,6 +169,7 @@ private root), and 150 naturalistic whole-response outputs (80 development /
 70 hidden). The generated corpus tests structural safety, not Slovenian repair
 quality; dev-corpus results are tuning evidence, not acceptance. The blind
 hidden acceptance of the frozen implementation and the final objective-008
-disposition are deferred to round 008-e, with round 008-d recorded as the
-bounded application-baseline timing corrective; no acceptance, merge,
-release, or deployment claim is made.
+disposition are deferred to round 008-f, with round 008-d recorded as the
+bounded application-baseline timing corrective whose machine-invalid report
+is classified INVALID_QUARANTINED by the 008-e order's forward-recovery
+linkage; no acceptance, merge, release, or deployment claim is made.

@@ -1,6 +1,6 @@
 {
   "schema_version": 3,
-  "scope": "all enumerated experiment and recovery roots plus stable child runs/phases, non-benchmark diagnostics, the 008-a parser-qualification study, the 008-b post-merge state repair, the 008-c parser-first protection implementation and generated structural corpus (committed data-free subtree), and the 008-d application-baseline timing corrective and ledger registration",
+  "scope": "all enumerated experiment and recovery roots plus stable child runs/phases, non-benchmark diagnostics, the 008-a parser-qualification study, the 008-b post-merge state repair, the 008-c parser-first protection implementation and generated structural corpus (committed data-free subtree), and the 008-d application-baseline timing corrective and ledger registration, and the 008-e forward-recovery quarantine of the machine-invalid 008-d report and round registration",
   "source_closure": "research/registry/source-manifest.json",
   "numeric_projections": "research/results/*.json.gz",
   "publication_projections": "research/reports/*.md and research/configs/*.json",
@@ -5098,6 +5098,92 @@
       "conclusion": "Sole red required check at the 008-c final head 4b6a90a: Application baseline - the full-pytest stage recorded TIMEOUT at the frozen 300 s per-command cap with ZERO test failures (337.20 s; 653 passed / 14 skipped / 89 subtests) - a runner-pool timing artifact on the inherited application suite (2026-09-17 pool: 134.92 s on the near-identical population), not a 008-caused test failure and not a 008-c defect; the other three checks were green at that head. Corrected and registered without weakening, skipping, or redefining any gate: two bounded verbatim rerun observations at 4b6a90a (335.98 s, 334.01 s; both zero-failure TIMEOUT class), a committed data-free decomposition (local full session 1294.40 s with zero failures; oap/tests 868.67 s the dominant local cost; the 008-c round's only full-pytest population change is the single new focused test file), ledger and machine-block registration (registry 28 entries, oap_reports_reviewed 47, all identity fields unchanged), the one stale suffix-reference correction in STATUS.md (blind hidden acceptance = 008-e per the D1 recorded in the 008-c final-head review), and the data-free hidden-seal re-verification (4091/4091; manifest sha256 unchanged; the private-root generation-receipts directory documented as pre-seal metadata outside the manifest scope). No test, gate, cap, driver, or workflow change; zero model calls; no objective-009 data. The implementation-head and final-head CI observations are recorded verbatim in the 008-d OAP report.",
       "pending_evidence": [
         "008-e: blind hidden-acceptance evaluation of the frozen implementation (PASS/CONDITIONAL/FAIL), naturalistic label adjudication per the frozen annotation guide, end-to-end preservation on the hidden set"
+      ]
+    },
+    {
+      "experiment_id": "008-e-report-republication-and-transcript-recovery",
+      "logical_root": "none (forward-recovery quarantine, ledger/state bookkeeping, and one-sentence status-correction suffix; the private-root hidden set is re-verified data-free by manifest hashes only)",
+      "kind": "audit",
+      "variation": "forward-recovery quarantine of the machine-invalid 008-d report by the 008-e order's prior_report_recovery linkage (both 008-d publications byte-immutable), re-verification of the 008-d evidence claims, round registration, and the one stale suffix-reference correction (blind hidden acceptance renumbered to 008-f)",
+      "status": "COMPLETE",
+      "question": "The 008-d report is machine-invalid (REPORT_CHECK: three checks[] command strings carry angle-bracket placeholder tokens); how is it quarantined by forward recovery, how is transcript coherence restored, and how is the round registered without weakening, skipping, or redefining any gate and without altering any report or order byte?",
+      "frozen_choices": {
+        "new_model_calls": 0,
+        "new_science": 0,
+        "gate_or_test_changes": 0,
+        "cap_or_driver_or_workflow_changes": 0,
+        "report_or_order_mutations": 0,
+        "hidden_set_evaluations": 0
+      },
+      "metrics": {
+        "model_calls": 0,
+        "quarantine": {
+          "classification": "INVALID_QUARANTINED",
+          "validation_error": "REPORT_CHECK",
+          "prior_id": "008-d",
+          "corrective_id": "008-e",
+          "publication_commit": "c0786f9898d3a97aefe9d063bcd43210c0d7d2f1",
+          "report_path": "oap/reports/008-d-application-baseline-restoration.md",
+          "report_blob": "13effeaae9ec50ae9779d5ab0caa3c568a88362b",
+          "report_sha256": "6efbf90ee83e76997eb84985e3fe6f3498ba837a2998900094a0f4238c785a60",
+          "order_path": "oap/orders/008-d-application-baseline-restoration.md",
+          "order_sha256": "4e15638298f40b8871c2638371a2b5bfefa7d7df465d32eea6f1b907a9dfcbab",
+          "implementation_parent": "3baa4f3318f76ba5fc44260829f3f593832695bf",
+          "report_or_order_bytes_mutated": 0
+        },
+        "ci_008d_final_head_c0786f9": {
+          "research_reproducibility": "PASS (run 35381405131, completed 2026-09-18T18:39:32Z)",
+          "oap_report_history": "PASS (run 35381405199, job completed 2026-09-18T18:39:08Z)",
+          "application_baseline_run_35381405077": {
+            "attempt_1": "FAILED - full-pytest stage TIMEOUT at the frozen 300.0 s per-command cap, captured session '653 passed, 14 skipped, 89 subtests passed in 328.50s (0:05:28)', zero test failures (zero-failure TIMEOUT class, job 2026-09-18T18:39:00Z..18:44:46Z)",
+            "attempt_2_identical_commit": "SUCCESS (2026-09-18T18:50:52Z..18:59:09Z) - all 13 driver stages PASSED including 'full pytest'; current check state under GitHub required-check semantics; disclosed verbatim in the 008-e report"
+          },
+          "oap_bootstrap_acceptance": "FAIL (run 35381405199, job 2026-09-18T18:38:59Z..18:44:36Z, stage \"Check committed transcript coherence\") - verbatim {\"error\": \"RECOVERY_LINKAGE_MISSING\", \"operation\": \"transcript\"}, exit code 2; deterministic until the 008-e prior_report_recovery linkage is committed (reruns of the identical commit cannot clear it)"
+        },
+        "ci_008e_final_head": "observed at the 008-e final head per order requirement 10 and recorded verbatim in oap/reports/008-e-report-republication-and-transcript-recovery.md; this entry is byte-identical between the implementation head and the final head (the report-only commit changes no other path), so it holds a pointer to the committed verbatim record rather than not-yet-existing values"
+      },
+      "evidence_files": [
+        {
+          "disposition": "quarantined immutable OAP report of round 008-d (classified INVALID_QUARANTINED by the 008-e order; never rewritten)",
+          "logical_path": "oap/reports/008-d-application-baseline-restoration.md",
+          "sha256": "6efbf90ee83e76997eb84985e3fe6f3498ba837a2998900094a0f4238c785a60",
+          "size": 56052,
+          "git_blob": "13effeaae9ec50ae9779d5ab0caa3c568a88362b"
+        },
+        {
+          "disposition": "quarantined immutable OAP order of round 008-d (the 008-e order carries the forward-recovery linkage; never rewritten)",
+          "logical_path": "oap/orders/008-d-application-baseline-restoration.md",
+          "sha256": "4e15638298f40b8871c2638371a2b5bfefa7d7df465d32eea6f1b907a9dfcbab",
+          "size": 46066
+        },
+        {
+          "disposition": "008-e order committed at activation (carries the prior_report_recovery quarantine linkage)",
+          "logical_path": "oap/orders/008-e-report-republication-and-transcript-recovery.md",
+          "sha256": "b8c8b11f49634fa5cd3f81dce64952d206aecbab2250cedd6efd6f8c76ef80f",
+          "size": 47380
+        },
+        {
+          "disposition": "research-state projection at the 008-e final head (byte-identical between implementation head and final head)",
+          "logical_path": "research/RESEARCH-STATE.md",
+          "sha256": "a38a88aa94885c0c164f087546754f74c8a183777047658f069cfbd594e65ab9",
+          "size": 95873
+        },
+        {
+          "disposition": "ledger projection at the 008-e final head (byte-identical between implementation head and final head). Self-referential citation: a literal content hash of this file containing its own hash has no SHA-256 fixed point, so the cited sha256 is the hash of the canonical form - the exact committed bytes with this one 64-hex-digit sha256 field (the only self-referential field) replaced by 64 zero digits; the cited size is the actual file size; every other byte is exact",
+          "logical_path": "research/registry/experiments.json",
+          "sha256": "96c789c54debdcc714c4ca19a85b38dc46ad296d25a34e713b28e9bc13d9b6eb",
+          "size": 252676
+        }
+      ],
+      "evidence_status": "public-data-free",
+      "public_report": "research/RESEARCH-STATE.md#16",
+      "public_metrics": "research/registry/experiments.json",
+      "public_configuration": "none (quarantine/bookkeeping round; no experiment configuration)",
+      "source_manifest": "none (no private source)",
+      "child_runs": [],
+      "conclusion": "The 008-d report is machine-invalid: exactly three checks[] command strings (checks[5], checks[6], checks[8]) carry angle-bracket placeholder tokens that oap_core meaningful() rejects, so validate_report rejects the whole report with REPORT_CHECK while every other recorded check, SHA, and identity field is valid (the 008-d implementation and bookkeeping were independently accepted by strategy on 2026-09-18; the identical latent class in the earlier 007-n report was already quarantined by the 007-o order). Quarantined by the 008-e order's forward-recovery prior_report_recovery linkage - no byte of the 008-d report or order altered - and registered without weakening, skipping, or redefining any gate: transcript coherence restored at the 008-e final head (the deterministic RECOVERY_LINKAGE_MISSING gate clears by the linkage); the 008-d final-head CI truth re-verified and recorded (Research PASS 35381405131; report history PASS 35381405199; Application baseline attempt 1 red in the zero-failure TIMEOUT class and attempt 2 green on the identical commit 35381405077; OAP bootstrap FAIL RECOVERY_LINKAGE_MISSING deterministic); ledger and machine-block registration (registry 29 entries, oap_reports_reviewed 48, the new quarantined_008d identity, every other identity field unchanged); the one stale suffix-reference correction in STATUS.md (blind hidden acceptance and final objective-008 disposition = round 008-f); the data-free hidden-seal re-verification (4091/4091; manifest sha256 8233bdcf683df8a97d62a375a6cf60d93b64aa6b7ecf22489ce9986333436a18 unchanged). No test, gate, cap, driver, workflow, or linguistic-method change; zero model calls; zero hidden-set evaluations; no objective-009 data. The 008-e final-head CI observation is recorded verbatim in the 008-e OAP report.",
+      "pending_evidence": [
+        "008-f: blind hidden-acceptance evaluation of the frozen implementation (PASS/CONDITIONAL/FAIL), naturalistic label adjudication per the frozen annotation guide, end-to-end preservation on the hidden set"
       ]
     }
   ]

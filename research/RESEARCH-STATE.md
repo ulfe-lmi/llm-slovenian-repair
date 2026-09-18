@@ -910,6 +910,27 @@ disposition are round 008-e (the 'round 008-d' deferral sentence in the
 008-c record above carries that pre-renumbering label; the deferral
 itself is unchanged).
 
+008-e forward-recovery note (additive; no rewrite of the 008-c or 008-d
+records above): the 008-d report is machine-invalid (REPORT_CHECK: three
+checks[] command strings carry angle-bracket placeholder tokens; the same
+defect class as the quarantined 007-n report) and is classified
+INVALID_QUARANTINED by the 008-e order's forward-recovery linkage - no
+byte of the 008-d report or order is altered; its evidence claims are
+re-verified in the 008-e round. Transcript coherence is restored at the
+008-e final head (the deterministic RECOVERY_LINKAGE_MISSING transcript
+gate clears by the linkage). The 008-d final-head CI truth: three
+required checks green - Research reproducibility (run 35381405131), OAP
+report history (run 35381405199), and Application baseline via the
+disclosed green identical-commit rerun of the zero-failure TIMEOUT class
+(run 35381405077: attempt 1 red, session '653 passed, 14 skipped, 89
+subtests passed in 328.50s', zero failures; attempt 2 green, all driver
+stages PASSED) - and OAP bootstrap acceptance red and deterministic
+(RECOVERY_LINKAGE_MISSING) until this linkage is committed. Per the 008-d
+final-head review, the blind hidden acceptance and the final
+objective-008 disposition are round 008-f (the 'round 008-e' label in the
+008-d note above carries the pre-recovery numbering; the deferral itself
+is unchanged).
+
 ## Machine-readable state block (research-state-machine-v1)
 
 This fenced block is the machine-readable core of the numbers quoted above.
@@ -938,11 +959,22 @@ model/network calls.
       "order_sha256": "0627cf26015dac47b17085e9f75b857f563379962a9590d5c8534e02e3f64f82",
       "implementation_parent": "b61f8e2e6b454a0969e5f2ac9009d4da87b8b215"
     },
+    "quarantined_008d": {
+      "classification": "INVALID_QUARANTINED",
+      "validation_error": "REPORT_CHECK",
+      "publication_commit": "c0786f9898d3a97aefe9d063bcd43210c0d7d2f1",
+      "report_path": "oap/reports/008-d-application-baseline-restoration.md",
+      "report_blob": "13effeaae9ec50ae9779d5ab0caa3c568a88362b",
+      "report_sha256": "6efbf90ee83e76997eb84985e3fe6f3498ba837a2998900094a0f4238c785a60",
+      "order_path": "oap/orders/008-d-application-baseline-restoration.md",
+      "order_sha256": "4e15638298f40b8871c2638371a2b5bfefa7d7df465d32eea6f1b907a9dfcbab",
+      "implementation_parent": "3baa4f3318f76ba5fc44260829f3f593832695bf"
+    },
     "frozen_007m_configuration_sha256": "0026a1a9d27652c36e2c5a960b10fafc1c9a93b0690d93b09089aa58884f5c26",
     "frozen_007m_prompt_sha256": "572cf2fb4864e66e38a500465e1089062d58aeed4721063fb0c1e466e424230d",
     "frozen_007m_final_root_manifest_sha256": "3fb4aef33542e7fa3f357acb905b75f4d7e7551783f83a422b5d1ea6272c25f8",
-    "registry_entries": 28,
-    "oap_reports_reviewed": 47,
+    "registry_entries": 29,
+    "oap_reports_reviewed": 48,
     "frozen_report_history_incidents": 2
   },
   "official_scorer": {
