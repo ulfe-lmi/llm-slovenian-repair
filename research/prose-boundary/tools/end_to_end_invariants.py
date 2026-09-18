@@ -393,56 +393,77 @@ def run_invariants(
                         flags["7_zero_eligible_zero_review_work"] = False
 
         # I6: seeded error word adjacent to protected content.
+        def _adjacent(new_text: str, err_end: int, ivs: list, strict: bool) -> bool:
+            if strict:
+                # a protected interval starts exactly where the error word
+                # ends.
+                return any(iv.start == err_end for iv in ivs)
+            # whitespace-glue adjacency: protected content follows the error
+            # word across whitespace glue only. The label's protected-region
+            # start may include glue bytes, and legacy interval boundaries
+            # may sit on the protected opener itself, so the strict test is
+            # mode-dependent; this pass keeps the invariant mode-agnostic.
+            starts = [iv.start for iv in ivs if iv.start >= err_end]
+            if not starts:
+                return False
+            gap = min(starts) - err_end
+            return new_text[err_end:err_end + gap].strip() == ""
+
         seeded = []
-        for doc_id, text, label in docs:
-            if len(seeded) >= seed_count:
-                break
-            seeded_doc = seed_adjacent_error(text, label)
-            if seeded_doc is None:
-                continue
-            new_text, err_start, err_end = seeded_doc
-            ivs, _m = _ivs(new_text)
-            # strict adjacency: a protected interval starts exactly where
-            # the error word ends (mode-agnostic definition).
-            if not any(iv.start == err_end for iv in ivs):
-                continue
-            prepared = pipeline.prepare(new_text, corpus, english_lookup)
-            err_cands = [c for c in prepared["candidates"] if c["text"] == ERROR_WORD]
-            if not err_cands:
-                flags["6_adjacent_prose_repairable"] = False
-                continue
-            proposals = {}
-            for cand, policy in zip(prepared["candidates"], prepared["english"]):
-                if policy["review_suppressed"]:
+        seeded_ids: set[str] = set()
+        for strict in (True, False):
+            for doc_id, text, label in docs:
+                if len(seeded) >= seed_count:
+                    break
+                if doc_id in seeded_ids:
                     continue
-                is_err = cand["text"] == ERROR_WORD
-                proposals[str(int(cand["start"]))] = scripted_proposal(
-                    str(cand["text"]), replacement if is_err else None
+                seeded_doc = seed_adjacent_error(text, label)
+                if seeded_doc is None:
+                    continue
+                new_text, err_start, err_end = seeded_doc
+                ivs, _m = _ivs(new_text)
+                if not _adjacent(new_text, err_end, ivs, strict):
+                    continue
+                prepared = pipeline.prepare(new_text, corpus, english_lookup)
+                err_cands = [c for c in prepared["candidates"] if c["text"] == ERROR_WORD]
+                if not err_cands:
+                    flags["6_adjacent_prose_repairable"] = False
+                    continue
+                proposals = {}
+                for cand, policy in zip(prepared["candidates"], prepared["english"]):
+                    if policy["review_suppressed"]:
+                        continue
+                    is_err = cand["text"] == ERROR_WORD
+                    proposals[str(int(cand["start"]))] = scripted_proposal(
+                        str(cand["text"]), replacement if is_err else None
+                    )
+                result = pipeline.replay(new_text, corpus, english_lookup, proposals)
+                edited_error = any(
+                    s <= err_start and e >= err_end for s, e, _rep in result["edits"]
                 )
-            result = pipeline.replay(new_text, corpus, english_lookup, proposals)
-            edited_error = any(
-                s <= err_start and e >= err_end for s, e, _rep in result["edits"]
-            )
-            error_removed = ERROR_WORD not in result["output"]
-            # I4/I5 on the seeded document as well.
-            ordered = sorted(result["edits"])
-            for s, e, _rep in result["edits"]:
-                if is_protected(s, e, ivs):
-                    flags["4_accepted_edits_outside_protected"] = False
-            for iv in ivs:
-                if iv.end > len(new_text):
-                    continue
-                shift = sum(len(rep) - (ee - es) for es, ee, rep in ordered if ee <= iv.start)
-                if result["output"][iv.start + shift:iv.start + shift + (iv.end - iv.start)] != new_text[iv.start:iv.end]:
-                    flags["5_protected_substrings_identical_after_path"] = False
-            if not (edited_error and error_removed and result["edits"]):
-                flags["6_adjacent_prose_repairable"] = False
-            seeded.append({
-                "doc_id": doc_id,
-                "error_word": ERROR_WORD,
-                "replacement_word": replacement,
-                "edit_applied": bool(edited_error and error_removed),
-            })
+                error_removed = ERROR_WORD not in result["output"]
+                # I4/I5 on the seeded document as well.
+                ordered = sorted(result["edits"])
+                for s, e, _rep in result["edits"]:
+                    if is_protected(s, e, ivs):
+                        flags["4_accepted_edits_outside_protected"] = False
+                for iv in ivs:
+                    if iv.end > len(new_text):
+                        continue
+                    shift = sum(len(rep) - (ee - es) for es, ee, rep in ordered if ee <= iv.start)
+                    if result["output"][iv.start + shift:iv.start + shift + (iv.end - iv.start)] != new_text[iv.start:iv.end]:
+                        flags["5_protected_substrings_identical_after_path"] = False
+                if not (edited_error and error_removed and result["edits"]):
+                    flags["6_adjacent_prose_repairable"] = False
+                seeded.append({
+                    "doc_id": doc_id,
+                    "error_word": ERROR_WORD,
+                    "replacement_word": replacement,
+                    "edit_applied": bool(edited_error and error_removed),
+                })
+                seeded_ids.add(doc_id)
+                if len(seeded) >= seed_count:
+                    break
         if not seeded:
             raise SystemExit("no seedable prose/protected adjacency in the dev corpus")
 

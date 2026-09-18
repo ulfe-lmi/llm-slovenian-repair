@@ -689,6 +689,28 @@ census manifest is that verification record).
     frequent all-alphabetic unigram of length 4-12, `projekt` - the same
     word the full run repaired 5/5. The committed
     `e2e-invariants.json` is the corrected tool's output (7/7 invariants).
+    (d) The end-to-end tool's invariant-6 seeding pass required a protected
+    interval to start exactly where the seeded error word ends; that check
+    proved mode-dependent. The label's protected-region start may include
+    glue bytes, and in the fail-closed legacy mode the interval boundaries
+    sit on the protected syntax's own opener, so in the round's first CI
+    run (no pinned helper available on the runner, legacy mode) no dev
+    document was seedable and the focused e2e test errored
+    (`no seedable prose/protected adjacency in the dev corpus`). The
+    seeding pass is now two-stage: the strict adjacency test first
+    (exactly the committed behaviour - the parser-first full run is seeded
+    entirely by the strict pass), and only when the strict pass collects
+    fewer seeds than requested, a whitespace-glue adjacency test (protected
+    content follows the error word across whitespace glue only). Both
+    passes assert the same invariant - adjacent protected content is
+    covered by the active protection mode - and the invariant is now
+    mode-agnostic. Verified: a CI-equivalent run with helper discovery
+    forced to fail (legacy mode, the focused test's 200-document
+    parameters) reports invariants 7/7 with 2/2 seeded edits applied
+    (dev-000012, dev-000020); the parser-first full-corpus run reproduces
+    the committed `e2e-invariants.json` byte-identically (SHA-256
+    e659bf52008353f0028563d4066731e4111a7b1616a035c7ae1af31994099d0f);
+    the focused file passes 48/48.
 
 12. **No genuine design limitation remained** after the fixes above: all
     dev-corpus safety targets (section 8) are met on the final committed
