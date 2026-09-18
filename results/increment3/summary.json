@@ -1,0 +1,23 @@
+{
+ "schema": "008c-increment3-summary/1",
+ "order": "008-c",
+ "helper_sha256": "5df9a11d56b5bdec90c3ca09298802723975306f77e43e74ad1a72eb427c44bf",
+ "helper_profile": "P2",
+ "files": {
+  "self-test.json": "8384983d9de3ab03f6bf516a16daf20fab83499e6d3be06368ae4c438fe6b6e2",
+  "fixture-rederivation.json": "d0a31ae0f3c25d0f7be6d4bc1055cc64ea33fb4fa611fda5973c5d88a71564c5",
+  "dev-corpus-metrics.json": "0c426cf151a9c44e99163ad4581c5a05993d6a9a88b3f22d5429997f347e76ff",
+  "differential-100sample.json": "72e05460bf99a0851b910dfbd41cd5880ed42d9eb7185b849ada8a37a0bec8c4",
+  "performance.json": "113b37a9c806a88d3ada9a46863e004d263f7d618bc0a02875c616b8eb105c52"
+ },
+ "targets": {
+  "fixture_structural_view_zero_violations": true,
+  "fixture_policy_v2_zero_protected_exposure": true,
+  "fixture_fallback_fixtures": 0,
+  "dev_safety_protected_bytes_exposed": 0,
+  "dev_coordinates_met": true,
+  "differential_class_3_zero": true,
+  "differential_all_class7_008a_spans_remain_protected": true
+ },
+ "label": "fixture and dev-corpus aggregates are tuning evidence, NOT acceptance (008-d performs the blind hidden acceptance of the frozen implementation)"
+}

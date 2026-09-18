@@ -1,0 +1,2111 @@
+{
+ "fixtures_file_sha256": "ad2fcef95dc044e941bf346c64dc5e71d42b43a75e4334f88a0dcd012a26adc9",
+ "policy_v2_sha256": "996f465784bed37a179be337e2af606b2dc350cacba6341479371d2812c5a88e",
+ "helper_sha256": "5df9a11d56b5bdec90c3ca09298802723975306f77e43e74ad1a72eb427c44bf",
+ "totals": {
+  "fixtures": 50,
+  "regions": 205,
+  "coordinate_violations": 0,
+  "fallback_fixtures": 0,
+  "structural_protected_exposed_bytes": 0,
+  "structural_prose_missing_bytes": 0,
+  "policy_v2_protected_exposed_bytes": 0,
+  "policy_v2_prose_residual_bytes": 368,
+  "prose_regions_with_residual": 27,
+  "structural_view_zero_violations": true,
+  "policy_v2_zero_protected_exposure": true
+ },
+ "per_fixture": [
+  {
+   "id": "F01",
+   "class": 1,
+   "class_name": "plain-slovenian-prose",
+   "mode": "parser-first",
+   "events": 3,
+   "regions": [
+    {
+     "name": "prose",
+     "role": "PROSE_CANDIDATE",
+     "start": 0,
+     "end": 78,
+     "structural_missing_bytes": 0,
+     "policy_v2_residual_protected_bytes": 0
+    }
+   ]
+  },
+  {
+   "id": "F02",
+   "class": 2,
+   "class_name": "prose-inline-code",
+   "mode": "parser-first",
+   "events": 5,
+   "regions": [
+    {
+     "name": "prose-before",
+     "role": "PROSE_CANDIDATE",
+     "start": 0,
+     "end": 13,
+     "structural_missing_bytes": 0,
+     "policy_v2_residual_protected_bytes": 0
+    },
+    {
+     "name": "inline-code",
+     "role": "PROTECTED",
+     "start": 13,
+     "end": 25,
+     "structural_exposed_bytes": 0,
+     "policy_v2_exposed_bytes": 0
+    },
+    {
+     "name": "prose-after",
+     "role": "PROSE_CANDIDATE",
+     "start": 25,
+     "end": 45,
+     "structural_missing_bytes": 0,
+     "policy_v2_residual_protected_bytes": 0
+    }
+   ]
+  },
+  {
+   "id": "F03",
+   "class": 3,
+   "class_name": "multi-backtick-inline-code",
+   "mode": "parser-first",
+   "events": 5,
+   "regions": [
+    {
+     "name": "prose-before",
+     "role": "PROSE_CANDIDATE",
+     "start": 0,
+     "end": 21,
+     "structural_missing_bytes": 0,
+     "policy_v2_residual_protected_bytes": 0
+    },
+    {
+     "name": "inline-code",
+     "role": "PROTECTED",
+     "start": 21,
+     "end": 32,
+     "structural_exposed_bytes": 0,
+     "policy_v2_exposed_bytes": 0
+    },
+    {
+     "name": "prose-after",
+     "role": "PROSE_CANDIDATE",
+     "start": 32,
+     "end": 53,
+     "structural_missing_bytes": 0,
+     "policy_v2_residual_protected_bytes": 0
+    }
+   ]
+  },
+  {
+   "id": "F04",
+   "class": 4,
+   "class_name": "prose-fenced-python",
+   "mode": "parser-first",
+   "events": 9,
+   "regions": [
+    {
+     "name": "prose-before",
+     "role": "PROSE_CANDIDATE",
+     "start": 0,
+     "end": 10,
+     "structural_missing_bytes": 0,
+     "policy_v2_residual_protected_bytes": 0
+    },
+    {
+     "name": "fence",
+     "role": "PROTECTED",
+     "start": 12,
+     "end": 40,
+     "structural_exposed_bytes": 0,
+     "policy_v2_exposed_bytes": 0
+    },
+    {
+     "name": "prose-after",
+     "role": "PROSE_CANDIDATE",
+     "start": 42,
+     "end": 61,
+     "structural_missing_bytes": 0,
+     "policy_v2_residual_protected_bytes": 0
+    }
+   ]
+  },
+  {
+   "id": "F05",
+   "class": 5,
+   "class_name": "tilde-fences",
+   "mode": "parser-first",
+   "events": 9,
+   "regions": [
+    {
+     "name": "prose-before",
+     "role": "PROSE_CANDIDATE",
+     "start": 0,
+     "end": 13,
+     "structural_missing_bytes": 0,
+     "policy_v2_residual_protected_bytes": 0
+    },
+    {
+     "name": "fence",
+     "role": "PROTECTED",
+     "start": 15,
+     "end": 29,
+     "structural_exposed_bytes": 0,
+     "policy_v2_exposed_bytes": 0
+    },
+    {
+     "name": "prose-after",
+     "role": "PROSE_CANDIDATE",
+     "start": 31,
+     "end": 37,
+     "structural_missing_bytes": 0,
+     "policy_v2_residual_protected_bytes": 0
+    }
+   ]
+  },
+  {
+   "id": "F06",
+   "class": 6,
+   "class_name": "variable-length-fences",
+   "mode": "parser-first",
+   "events": 9,
+   "regions": [
+    {
+     "name": "prose-before",
+     "role": "PROSE_CANDIDATE",
+     "start": 0,
+     "end": 18,
+     "structural_missing_bytes": 0,
+     "policy_v2_residual_protected_bytes": 0
+    },
+    {
+     "name": "fence",
+     "role": "PROTECTED",
+     "start": 20,
+     "end": 45,
+     "structural_exposed_bytes": 0,
+     "policy_v2_exposed_bytes": 0
+    },
+    {
+     "name": "prose-after",
+     "role": "PROSE_CANDIDATE",
+     "start": 47,
+     "end": 53,
+     "structural_missing_bytes": 0,
+     "policy_v2_residual_protected_bytes": 0
+    }
+   ]
+  },
+  {
+   "id": "F07",
+   "class": 7,
+   "class_name": "unfinished-fenced-code",
+   "mode": "parser-first",
+   "events": 6,
+   "regions": [
+    {
+     "name": "prose-before",
+     "role": "PROSE_CANDIDATE",
+     "start": 0,
+     "end": 30,
+     "structural_missing_bytes": 0,
+     "policy_v2_residual_protected_bytes": 0
+    },
+    {
+     "name": "unfenced",
+     "role": "PROTECTED",
+     "start": 32,
+     "end": 49,
+     "structural_exposed_bytes": 0,
+     "policy_v2_exposed_bytes": 0
+    }
+   ]
+  },
+  {
+   "id": "F08",
+   "class": 8,
+   "class_name": "markdown-inside-code",
+   "mode": "parser-first",
+   "events": 9,
+   "regions": [
+    {
+     "name": "prose-before",
+     "role": "PROSE_CANDIDATE",
+     "start": 0,
+     "end": 28,
+     "structural_missing_bytes": 0,
+     "policy_v2_residual_protected_bytes": 0
+    },
+    {
+     "name": "fence",
+     "role": "PROTECTED",
+     "start": 30,
+     "end": 89,
+     "structural_exposed_bytes": 0,
+     "policy_v2_exposed_bytes": 0
+    },
+    {
+     "name": "prose-after",
+     "role": "PROSE_CANDIDATE",
+     "start": 91,
+     "end": 101,
+     "structural_missing_bytes": 0,
+     "policy_v2_residual_protected_bytes": 0
+    }
+   ]
+  },
+  {
+   "id": "F09",
+   "class": 9,
+   "class_name": "math-inside-code",
+   "mode": "parser-first",
+   "events": 9,
+   "regions": [
+    {
+     "name": "prose-before",
+     "role": "PROSE_CANDIDATE",
+     "start": 0,
+     "end": 15,
+     "structural_missing_bytes": 0,
+     "policy_v2_residual_protected_bytes": 0
+    },
+    {
+     "name": "fence",
+     "role": "PROTECTED",
+     "start": 17,
+     "end": 46,
+     "structural_exposed_bytes": 0,
+     "policy_v2_exposed_bytes": 0
+    },
+    {
+     "name": "prose-after",
+     "role": "PROSE_CANDIDATE",
+     "start": 48,
+     "end": 56,
+     "structural_missing_bytes": 0,
+     "policy_v2_residual_protected_bytes": 0
+    }
+   ]
+  },
+  {
+   "id": "F10",
+   "class": 10,
+   "class_name": "dollar-inline-math",
+   "mode": "parser-first",
+   "events": 5,
+   "regions": [
+    {
+     "name": "prose-before",
+     "role": "PROSE_CANDIDATE",
+     "start": 0,
+     "end": 12,
+     "structural_missing_bytes": 0,
+     "policy_v2_residual_protected_bytes": 0
+    },
+    {
+     "name": "math",
+     "role": "PROTECTED",
+     "start": 12,
+     "end": 25,
+     "structural_exposed_bytes": 0,
+     "policy_v2_exposed_bytes": 0
+    },
+    {
+     "name": "prose-after",
+     "role": "PROSE_CANDIDATE",
+     "start": 25,
+     "end": 47,
+     "structural_missing_bytes": 0,
+     "policy_v2_residual_protected_bytes": 0
+    }
+   ]
+  },
+  {
+   "id": "F11",
+   "class": 11,
+   "class_name": "dollar-display-math",
+   "mode": "parser-first",
+   "events": 9,
+   "regions": [
+    {
+     "name": "prose-before",
+     "role": "PROSE_CANDIDATE",
+     "start": 0,
+     "end": 10,
+     "structural_missing_bytes": 0,
+     "policy_v2_residual_protected_bytes": 0
+    },
+    {
+     "name": "display-math",
+     "role": "PROTECTED",
+     "start": 12,
+     "end": 24,
+     "structural_exposed_bytes": 0,
+     "policy_v2_exposed_bytes": 0
+    },
+    {
+     "name": "prose-after",
+     "role": "PROSE_CANDIDATE",
+     "start": 26,
+     "end": 40,
+     "structural_missing_bytes": 0,
+     "policy_v2_residual_protected_bytes": 0
+    }
+   ]
+  },
+  {
+   "id": "F12",
+   "class": 12,
+   "class_name": "paren-tex",
+   "mode": "parser-first",
+   "events": 3,
+   "regions": [
+    {
+     "name": "prose",
+     "role": "PROSE_CANDIDATE",
+     "start": 0,
+     "end": 37,
+     "structural_missing_bytes": 0,
+     "policy_v2_residual_protected_bytes": 0
+    }
+   ]
+  },
+  {
+   "id": "F13",
+   "class": 13,
+   "class_name": "bracket-tex",
+   "mode": "parser-first",
+   "events": 7,
+   "regions": [
+    {
+     "name": "prose",
+     "role": "PROSE_CANDIDATE",
+     "start": 0,
+     "end": 40,
+     "structural_missing_bytes": 0,
+     "policy_v2_residual_protected_bytes": 13
+    }
+   ]
+  },
+  {
+   "id": "F14",
+   "class": 14,
+   "class_name": "begintex-align",
+   "mode": "parser-first",
+   "events": 16,
+   "regions": [
+    {
+     "name": "prose-before",
+     "role": "PROSE_CANDIDATE",
+     "start": 0,
+     "end": 7,
+     "structural_missing_bytes": 0,
+     "policy_v2_residual_protected_bytes": 0
+    },
+    {
+     "name": "gap-1",
+     "role": "NEUTRAL",
+     "start": 7,
+     "end": 9,
+     "structural_exposed_bytes": 0,
+     "policy_v2_protected_bytes": 2
+    },
+    {
+     "name": "begin-line",
+     "role": "PROSE_CANDIDATE",
+     "start": 9,
+     "end": 22,
+     "structural_missing_bytes": 0,
+     "policy_v2_residual_protected_bytes": 13
+    },
+    {
+     "name": "softbreak-1",
+     "role": "NEUTRAL",
+     "start": 22,
+     "end": 23,
+     "structural_exposed_bytes": 0,
+     "policy_v2_protected_bytes": 1
+    },
+    {
+     "name": "line-a",
+     "role": "PROSE_CANDIDATE",
+     "start": 23,
+     "end": 30,
+     "structural_missing_bytes": 0,
+     "policy_v2_residual_protected_bytes": 7
+    },
+    {
+     "name": "escape-1",
+     "role": "PROTECTED",
+     "start": 30,
+     "end": 31,
+     "structural_exposed_bytes": 0,
+     "policy_v2_exposed_bytes": 0
+    },
+    {
+     "name": "literal-backslash",
+     "role": "PROSE_CANDIDATE",
+     "start": 31,
+     "end": 32,
+     "structural_missing_bytes": 0,
+     "policy_v2_residual_protected_bytes": 1
+    },
+    {
+     "name": "softbreak-2",
+     "role": "NEUTRAL",
+     "start": 32,
+     "end": 33,
+     "structural_exposed_bytes": 0,
+     "policy_v2_protected_bytes": 1
+    },
+    {
+     "name": "line-c",
+     "role": "PROSE_CANDIDATE",
+     "start": 33,
+     "end": 39,
+     "structural_missing_bytes": 0,
+     "policy_v2_residual_protected_bytes": 6
+    },
+    {
+     "name": "softbreak-3",
+     "role": "NEUTRAL",
+     "start": 39,
+     "end": 40,
+     "structural_exposed_bytes": 0,
+     "policy_v2_protected_bytes": 1
+    },
+    {
+     "name": "end-line",
+     "role": "PROSE_CANDIDATE",
+     "start": 40,
+     "end": 51,
+     "structural_missing_bytes": 0,
+     "policy_v2_residual_protected_bytes": 11
+    },
+    {
+     "name": "gap-2",
+     "role": "NEUTRAL",
+     "start": 51,
+     "end": 53,
+     "structural_exposed_bytes": 0,
+     "policy_v2_protected_bytes": 2
+    },
+    {
+     "name": "prose-after",
+     "role": "PROSE_CANDIDATE",
+     "start": 53,
+     "end": 67,
+     "structural_missing_bytes": 0,
+     "policy_v2_residual_protected_bytes": 0
+    }
+   ]
+  },
+  {
+   "id": "F15",
+   "class": 15,
+   "class_name": "malformed-tex",
+   "mode": "parser-first",
+   "events": 6,
+   "regions": [
+    {
+     "name": "line-1",
+     "role": "PROSE_CANDIDATE",
+     "start": 0,
+     "end": 26,
+     "structural_missing_bytes": 0,
+     "policy_v2_residual_protected_bytes": 19
+    },
+    {
+     "name": "blank-line",
+     "role": "NEUTRAL",
+     "start": 26,
+     "end": 28,
+     "structural_exposed_bytes": 0,
+     "policy_v2_protected_bytes": 2
+    },
+    {
+     "name": "line-2",
+     "role": "PROSE_CANDIDATE",
+     "start": 28,
+     "end": 47,
+     "structural_missing_bytes": 0,
+     "policy_v2_residual_protected_bytes": 0
+    }
+   ]
+  },
+  {
+   "id": "F16",
+   "class": 16,
+   "class_name": "paired-dollar-currency",
+   "mode": "parser-first",
+   "events": 9,
+   "regions": [
+    {
+     "name": "prose",
+     "role": "PROSE_CANDIDATE",
+     "start": 0,
+     "end": 62,
+     "structural_missing_bytes": 0,
+     "policy_v2_residual_protected_bytes": 8
+    }
+   ]
+  },
+  {
+   "id": "F17",
+   "class": 17,
+   "class_name": "escaped-dollars",
+   "mode": "parser-first",
+   "events": 7,
+   "regions": [
+    {
+     "name": "prose-1",
+     "role": "PROSE_CANDIDATE",
+     "start": 0,
+     "end": 8,
+     "structural_missing_bytes": 0,
+     "policy_v2_residual_protected_bytes": 0
+    },
+    {
+     "name": "escape-1",
+     "role": "PROTECTED",
+     "start": 8,
+     "end": 9,
+     "structural_exposed_bytes": 0,
+     "policy_v2_exposed_bytes": 0
+    },
+    {
+     "name": "prose-2",
+     "role": "PROSE_CANDIDATE",
+     "start": 9,
+     "end": 29,
+     "structural_missing_bytes": 0,
+     "policy_v2_residual_protected_bytes": 1
+    },
+    {
+     "name": "escape-2",
+     "role": "PROTECTED",
+     "start": 29,
+     "end": 30,
+     "structural_exposed_bytes": 0,
+     "policy_v2_exposed_bytes": 0
+    },
+    {
+     "name": "dollar-1",
+     "role": "PROSE_CANDIDATE",
+     "start": 30,
+     "end": 31,
+     "structural_missing_bytes": 0,
+     "policy_v2_residual_protected_bytes": 0
+    },
+    {
+     "name": "escape-3",
+     "role": "PROTECTED",
+     "start": 31,
+     "end": 32,
+     "structural_exposed_bytes": 0,
+     "policy_v2_exposed_bytes": 0
+    },
+    {
+     "name": "dollar-2",
+     "role": "PROSE_CANDIDATE",
+     "start": 32,
+     "end": 33,
+     "structural_missing_bytes": 0,
+     "policy_v2_residual_protected_bytes": 0
+    },
+    {
+     "name": "escape-4",
+     "role": "PROTECTED",
+     "start": 33,
+     "end": 34,
+     "structural_exposed_bytes": 0,
+     "policy_v2_exposed_bytes": 0
+    },
+    {
+     "name": "prose-3",
+     "role": "PROSE_CANDIDATE",
+     "start": 34,
+     "end": 43,
+     "structural_missing_bytes": 0,
+     "policy_v2_residual_protected_bytes": 0
+    }
+   ]
+  },
+  {
+   "id": "F18",
+   "class": 18,
+   "class_name": "emphasis-strong-prose",
+   "mode": "parser-first",
+   "events": 11,
+   "regions": [
+    {
+     "name": "prose-1",
+     "role": "PROSE_CANDIDATE",
+     "start": 0,
+     "end": 6,
+     "structural_missing_bytes": 0,
+     "policy_v2_residual_protected_bytes": 0
+    },
+    {
+     "name": "emph-delim-open",
+     "role": "PROTECTED",
+     "start": 6,
+     "end": 7,
+     "structural_exposed_bytes": 0,
+     "policy_v2_exposed_bytes": 0
+    },
+    {
+     "name": "emph-text",
+     "role": "PROSE_CANDIDATE",
+     "start": 7,
+     "end": 17,
+     "structural_missing_bytes": 0,
+     "policy_v2_residual_protected_bytes": 0
+    },
+    {
+     "name": "emph-delim-close",
+     "role": "PROTECTED",
+     "start": 17,
+     "end": 18,
+     "structural_exposed_bytes": 0,
+     "policy_v2_exposed_bytes": 0
+    },
+    {
+     "name": "prose-2",
+     "role": "PROSE_CANDIDATE",
+     "start": 18,
+     "end": 22,
+     "structural_missing_bytes": 0,
+     "policy_v2_residual_protected_bytes": 0
+    },
+    {
+     "name": "strong-delim-open",
+     "role": "PROTECTED",
+     "start": 22,
+     "end": 24,
+     "structural_exposed_bytes": 0,
+     "policy_v2_exposed_bytes": 0
+    },
+    {
+     "name": "strong-text",
+     "role": "PROSE_CANDIDATE",
+     "start": 24,
+     "end": 30,
+     "structural_missing_bytes": 0,
+     "policy_v2_residual_protected_bytes": 0
+    },
+    {
+     "name": "strong-delim-close",
+     "role": "PROTECTED",
+     "start": 30,
+     "end": 32,
+     "structural_exposed_bytes": 0,
+     "policy_v2_exposed_bytes": 0
+    },
+    {
+     "name": "prose-3",
+     "role": "PROSE_CANDIDATE",
+     "start": 32,
+     "end": 42,
+     "structural_missing_bytes": 0,
+     "policy_v2_residual_protected_bytes": 0
+    }
+   ]
+  },
+  {
+   "id": "F19",
+   "class": 19,
+   "class_name": "heading-prose",
+   "mode": "parser-first",
+   "events": 6,
+   "regions": [
+    {
+     "name": "head-marker",
+     "role": "PROTECTED",
+     "start": 0,
+     "end": 2,
+     "structural_exposed_bytes": 0,
+     "policy_v2_exposed_bytes": 0
+    },
+    {
+     "name": "head-text",
+     "role": "PROSE_CANDIDATE",
+     "start": 2,
+     "end": 23,
+     "structural_missing_bytes": 0,
+     "policy_v2_residual_protected_bytes": 0
+    },
+    {
+     "name": "prose-after",
+     "role": "PROSE_CANDIDATE",
+     "start": 25,
+     "end": 47,
+     "structural_missing_bytes": 0,
+     "policy_v2_residual_protected_bytes": 0
+    }
+   ]
+  },
+  {
+   "id": "F20",
+   "class": 20,
+   "class_name": "list-item-prose",
+   "mode": "parser-first",
+   "events": 14,
+   "regions": [
+    {
+     "name": "prose-before",
+     "role": "PROSE_CANDIDATE",
+     "start": 0,
+     "end": 7,
+     "structural_missing_bytes": 0,
+     "policy_v2_residual_protected_bytes": 0
+    },
+    {
+     "name": "bullet-1",
+     "role": "PROTECTED",
+     "start": 8,
+     "end": 10,
+     "structural_exposed_bytes": 0,
+     "policy_v2_exposed_bytes": 0
+    },
+    {
+     "name": "item-1",
+     "role": "PROSE_CANDIDATE",
+     "start": 10,
+     "end": 22,
+     "structural_missing_bytes": 0,
+     "policy_v2_residual_protected_bytes": 0
+    },
+    {
+     "name": "bullet-2",
+     "role": "PROTECTED",
+     "start": 23,
+     "end": 25,
+     "structural_exposed_bytes": 0,
+     "policy_v2_exposed_bytes": 0
+    },
+    {
+     "name": "item-2",
+     "role": "PROSE_CANDIDATE",
+     "start": 25,
+     "end": 38,
+     "structural_missing_bytes": 0,
+     "policy_v2_residual_protected_bytes": 0
+    },
+    {
+     "name": "prose-after",
+     "role": "PROSE_CANDIDATE",
+     "start": 40,
+     "end": 54,
+     "structural_missing_bytes": 0,
+     "policy_v2_residual_protected_bytes": 0
+    }
+   ]
+  },
+  {
+   "id": "F21",
+   "class": 21,
+   "class_name": "blockquote-prose",
+   "mode": "parser-first",
+   "events": 13,
+   "regions": [
+    {
+     "name": "prose-before",
+     "role": "PROSE_CANDIDATE",
+     "start": 0,
+     "end": 6,
+     "structural_missing_bytes": 0,
+     "policy_v2_residual_protected_bytes": 0
+    },
+    {
+     "name": "quote-mark-1",
+     "role": "PROTECTED",
+     "start": 7,
+     "end": 9,
+     "structural_exposed_bytes": 0,
+     "policy_v2_exposed_bytes": 0
+    },
+    {
+     "name": "quote-1",
+     "role": "PROSE_CANDIDATE",
+     "start": 9,
+     "end": 29,
+     "structural_missing_bytes": 0,
+     "policy_v2_residual_protected_bytes": 0
+    },
+    {
+     "name": "quote-mark-2",
+     "role": "PROTECTED",
+     "start": 30,
+     "end": 32,
+     "structural_exposed_bytes": 0,
+     "policy_v2_exposed_bytes": 0
+    },
+    {
+     "name": "quote-2",
+     "role": "PROSE_CANDIDATE",
+     "start": 32,
+     "end": 53,
+     "structural_missing_bytes": 0,
+     "policy_v2_residual_protected_bytes": 0
+    },
+    {
+     "name": "prose-after",
+     "role": "PROSE_CANDIDATE",
+     "start": 55,
+     "end": 65,
+     "structural_missing_bytes": 0,
+     "policy_v2_residual_protected_bytes": 0
+    }
+   ]
+  },
+  {
+   "id": "F22",
+   "class": 22,
+   "class_name": "link-prose-label-url",
+   "mode": "parser-first",
+   "events": 7,
+   "regions": [
+    {
+     "name": "prose-before",
+     "role": "PROSE_CANDIDATE",
+     "start": 0,
+     "end": 9,
+     "structural_missing_bytes": 0,
+     "policy_v2_residual_protected_bytes": 0
+    },
+    {
+     "name": "bracket-open",
+     "role": "PROTECTED",
+     "start": 9,
+     "end": 10,
+     "structural_exposed_bytes": 0,
+     "policy_v2_exposed_bytes": 0
+    },
+    {
+     "name": "label",
+     "role": "PROSE_CANDIDATE",
+     "start": 10,
+     "end": 26,
+     "structural_missing_bytes": 0,
+     "policy_v2_residual_protected_bytes": 16
+    },
+    {
+     "name": "bracket-close-paren",
+     "role": "PROTECTED",
+     "start": 26,
+     "end": 28,
+     "structural_exposed_bytes": 0,
+     "policy_v2_exposed_bytes": 0
+    },
+    {
+     "name": "dest",
+     "role": "PROTECTED",
+     "start": 28,
+     "end": 54,
+     "structural_exposed_bytes": 0,
+     "policy_v2_exposed_bytes": 0
+    },
+    {
+     "name": "paren-close",
+     "role": "PROTECTED",
+     "start": 54,
+     "end": 55,
+     "structural_exposed_bytes": 0,
+     "policy_v2_exposed_bytes": 0
+    },
+    {
+     "name": "prose-after",
+     "role": "PROSE_CANDIDATE",
+     "start": 55,
+     "end": 71,
+     "structural_missing_bytes": 0,
+     "policy_v2_residual_protected_bytes": 0
+    }
+   ]
+  },
+  {
+   "id": "F23",
+   "class": 23,
+   "class_name": "image-syntax",
+   "mode": "parser-first",
+   "events": 9,
+   "regions": [
+    {
+     "name": "prose-before",
+     "role": "PROSE_CANDIDATE",
+     "start": 0,
+     "end": 7,
+     "structural_missing_bytes": 0,
+     "policy_v2_residual_protected_bytes": 0
+    },
+    {
+     "name": "image",
+     "role": "PROTECTED",
+     "start": 7,
+     "end": 51,
+     "structural_exposed_bytes": 0,
+     "policy_v2_exposed_bytes": 0
+    },
+    {
+     "name": "prose-after",
+     "role": "PROSE_CANDIDATE",
+     "start": 53,
+     "end": 60,
+     "structural_missing_bytes": 0,
+     "policy_v2_residual_protected_bytes": 0
+    }
+   ]
+  },
+  {
+   "id": "F24",
+   "class": 24,
+   "class_name": "autolink",
+   "mode": "parser-first",
+   "events": 7,
+   "regions": [
+    {
+     "name": "prose-1",
+     "role": "PROSE_CANDIDATE",
+     "start": 0,
+     "end": 12,
+     "structural_missing_bytes": 0,
+     "policy_v2_residual_protected_bytes": 0
+    },
+    {
+     "name": "bare-url",
+     "role": "PROSE_CANDIDATE",
+     "start": 12,
+     "end": 34,
+     "structural_missing_bytes": 0,
+     "policy_v2_residual_protected_bytes": 22
+    },
+    {
+     "name": "prose-2",
+     "role": "PROSE_CANDIDATE",
+     "start": 34,
+     "end": 38,
+     "structural_missing_bytes": 0,
+     "policy_v2_residual_protected_bytes": 0
+    },
+    {
+     "name": "angle-autolink",
+     "role": "PROTECTED",
+     "start": 38,
+     "end": 64,
+     "structural_exposed_bytes": 0,
+     "policy_v2_exposed_bytes": 0
+    },
+    {
+     "name": "prose-3",
+     "role": "PROSE_CANDIDATE",
+     "start": 64,
+     "end": 77,
+     "structural_missing_bytes": 0,
+     "policy_v2_residual_protected_bytes": 0
+    }
+   ]
+  },
+  {
+   "id": "F25",
+   "class": 25,
+   "class_name": "table-prose-and-code",
+   "mode": "parser-first",
+   "events": 24,
+   "regions": [
+    {
+     "name": "prose-before",
+     "role": "PROSE_CANDIDATE",
+     "start": 0,
+     "end": 8,
+     "structural_missing_bytes": 0,
+     "policy_v2_residual_protected_bytes": 0
+    },
+    {
+     "name": "cell-1",
+     "role": "PROSE_CANDIDATE",
+     "start": 12,
+     "end": 20,
+     "structural_missing_bytes": 0,
+     "policy_v2_residual_protected_bytes": 0
+    },
+    {
+     "name": "cell-code-1",
+     "role": "PROTECTED",
+     "start": 23,
+     "end": 37,
+     "structural_exposed_bytes": 0,
+     "policy_v2_exposed_bytes": 0
+    },
+    {
+     "name": "row-2-text",
+     "role": "PROSE_CANDIDATE",
+     "start": 72,
+     "end": 85,
+     "structural_missing_bytes": 0,
+     "policy_v2_residual_protected_bytes": 0
+    },
+    {
+     "name": "cell-code-2",
+     "role": "PROTECTED",
+     "start": 88,
+     "end": 95,
+     "structural_exposed_bytes": 0,
+     "policy_v2_exposed_bytes": 0
+    },
+    {
+     "name": "prose-after",
+     "role": "PROSE_CANDIDATE",
+     "start": 99,
+     "end": 106,
+     "structural_missing_bytes": 0,
+     "policy_v2_residual_protected_bytes": 0
+    }
+   ]
+  },
+  {
+   "id": "F26",
+   "class": 26,
+   "class_name": "raw-html",
+   "mode": "parser-first",
+   "events": 13,
+   "regions": [
+    {
+     "name": "prose-before",
+     "role": "PROSE_CANDIDATE",
+     "start": 0,
+     "end": 18,
+     "structural_missing_bytes": 0,
+     "policy_v2_residual_protected_bytes": 4
+    },
+    {
+     "name": "html-block",
+     "role": "PROTECTED",
+     "start": 20,
+     "end": 54,
+     "structural_exposed_bytes": 0,
+     "policy_v2_exposed_bytes": 0
+    },
+    {
+     "name": "prose-mid",
+     "role": "PROSE_CANDIDATE",
+     "start": 56,
+     "end": 63,
+     "structural_missing_bytes": 0,
+     "policy_v2_residual_protected_bytes": 0
+    },
+    {
+     "name": "html-open",
+     "role": "PROTECTED",
+     "start": 63,
+     "end": 66,
+     "structural_exposed_bytes": 0,
+     "policy_v2_exposed_bytes": 0
+    },
+    {
+     "name": "html-text",
+     "role": "PROSE_CANDIDATE",
+     "start": 66,
+     "end": 76,
+     "structural_missing_bytes": 0,
+     "policy_v2_residual_protected_bytes": 0
+    },
+    {
+     "name": "html-close",
+     "role": "PROTECTED",
+     "start": 76,
+     "end": 80,
+     "structural_exposed_bytes": 0,
+     "policy_v2_exposed_bytes": 0
+    },
+    {
+     "name": "prose-after",
+     "role": "PROSE_CANDIDATE",
+     "start": 80,
+     "end": 84,
+     "structural_missing_bytes": 0,
+     "policy_v2_residual_protected_bytes": 0
+    }
+   ]
+  },
+  {
+   "id": "F27",
+   "class": 27,
+   "class_name": "bare-json",
+   "mode": "parser-first",
+   "events": 15,
+   "regions": [
+    {
+     "name": "prose-before",
+     "role": "PROSE_CANDIDATE",
+     "start": 0,
+     "end": 6,
+     "structural_missing_bytes": 0,
+     "policy_v2_residual_protected_bytes": 0
+    },
+    {
+     "name": "json-open",
+     "role": "PROSE_CANDIDATE",
+     "start": 8,
+     "end": 9,
+     "structural_missing_bytes": 0,
+     "policy_v2_residual_protected_bytes": 1
+    },
+    {
+     "name": "newline-1",
+     "role": "NEUTRAL",
+     "start": 9,
+     "end": 10,
+     "structural_exposed_bytes": 0,
+     "policy_v2_protected_bytes": 1
+    },
+    {
+     "name": "indent-1",
+     "role": "NEUTRAL",
+     "start": 10,
+     "end": 12,
+     "structural_exposed_bytes": 0,
+     "policy_v2_protected_bytes": 2
+    },
+    {
+     "name": "line-1",
+     "role": "PROSE_CANDIDATE",
+     "start": 12,
+     "end": 25,
+     "structural_missing_bytes": 0,
+     "policy_v2_residual_protected_bytes": 0
+    },
+    {
+     "name": "newline-2",
+     "role": "NEUTRAL",
+     "start": 25,
+     "end": 26,
+     "structural_exposed_bytes": 0,
+     "policy_v2_protected_bytes": 1
+    },
+    {
+     "name": "indent-2",
+     "role": "NEUTRAL",
+     "start": 26,
+     "end": 28,
+     "structural_exposed_bytes": 0,
+     "policy_v2_protected_bytes": 2
+    },
+    {
+     "name": "line-2",
+     "role": "PROSE_CANDIDATE",
+     "start": 28,
+     "end": 41,
+     "structural_missing_bytes": 0,
+     "policy_v2_residual_protected_bytes": 2
+    },
+    {
+     "name": "newline-3",
+     "role": "NEUTRAL",
+     "start": 41,
+     "end": 42,
+     "structural_exposed_bytes": 0,
+     "policy_v2_protected_bytes": 1
+    },
+    {
+     "name": "json-close",
+     "role": "PROSE_CANDIDATE",
+     "start": 42,
+     "end": 43,
+     "structural_missing_bytes": 0,
+     "policy_v2_residual_protected_bytes": 0
+    },
+    {
+     "name": "prose-after",
+     "role": "PROSE_CANDIDATE",
+     "start": 45,
+     "end": 54,
+     "structural_missing_bytes": 0,
+     "policy_v2_residual_protected_bytes": 0
+    }
+   ]
+  },
+  {
+   "id": "F28",
+   "class": 28,
+   "class_name": "yaml-toml-config",
+   "mode": "parser-first",
+   "events": 18,
+   "regions": [
+    {
+     "name": "prose-before",
+     "role": "PROSE_CANDIDATE",
+     "start": 0,
+     "end": 11,
+     "structural_missing_bytes": 0,
+     "policy_v2_residual_protected_bytes": 0
+    },
+    {
+     "name": "toml-line-1",
+     "role": "PROSE_CANDIDATE",
+     "start": 13,
+     "end": 27,
+     "structural_missing_bytes": 0,
+     "policy_v2_residual_protected_bytes": 14
+    },
+    {
+     "name": "newline-1",
+     "role": "NEUTRAL",
+     "start": 27,
+     "end": 28,
+     "structural_exposed_bytes": 0,
+     "policy_v2_protected_bytes": 1
+    },
+    {
+     "name": "toml-line-2",
+     "role": "PROSE_CANDIDATE",
+     "start": 28,
+     "end": 44,
+     "structural_missing_bytes": 0,
+     "policy_v2_residual_protected_bytes": 16
+    },
+    {
+     "name": "blank-1",
+     "role": "NEUTRAL",
+     "start": 44,
+     "end": 46,
+     "structural_exposed_bytes": 0,
+     "policy_v2_protected_bytes": 2
+    },
+    {
+     "name": "yaml-line-1",
+     "role": "PROSE_CANDIDATE",
+     "start": 46,
+     "end": 60,
+     "structural_missing_bytes": 0,
+     "policy_v2_residual_protected_bytes": 13
+    },
+    {
+     "name": "newline-2",
+     "role": "NEUTRAL",
+     "start": 60,
+     "end": 61,
+     "structural_exposed_bytes": 0,
+     "policy_v2_protected_bytes": 1
+    },
+    {
+     "name": "indent-1",
+     "role": "NEUTRAL",
+     "start": 61,
+     "end": 63,
+     "structural_exposed_bytes": 0,
+     "policy_v2_protected_bytes": 2
+    },
+    {
+     "name": "yaml-line-2",
+     "role": "PROSE_CANDIDATE",
+     "start": 63,
+     "end": 78,
+     "structural_missing_bytes": 0,
+     "policy_v2_residual_protected_bytes": 0
+    },
+    {
+     "name": "prose-after",
+     "role": "PROSE_CANDIDATE",
+     "start": 80,
+     "end": 89,
+     "structural_missing_bytes": 0,
+     "policy_v2_residual_protected_bytes": 0
+    }
+   ]
+  },
+  {
+   "id": "F29",
+   "class": 29,
+   "class_name": "shell-commands",
+   "mode": "parser-first",
+   "events": 16,
+   "regions": [
+    {
+     "name": "prose-before",
+     "role": "PROSE_CANDIDATE",
+     "start": 0,
+     "end": 18,
+     "structural_missing_bytes": 0,
+     "policy_v2_residual_protected_bytes": 0
+    },
+    {
+     "name": "shell-line-1",
+     "role": "PROSE_CANDIDATE",
+     "start": 20,
+     "end": 33,
+     "structural_missing_bytes": 0,
+     "policy_v2_residual_protected_bytes": 13
+    },
+    {
+     "name": "newline-1",
+     "role": "NEUTRAL",
+     "start": 33,
+     "end": 34,
+     "structural_exposed_bytes": 0,
+     "policy_v2_protected_bytes": 1
+    },
+    {
+     "name": "heading-marker",
+     "role": "PROTECTED",
+     "start": 34,
+     "end": 36,
+     "structural_exposed_bytes": 0,
+     "policy_v2_exposed_bytes": 0
+    },
+    {
+     "name": "heading-text",
+     "role": "PROSE_CANDIDATE",
+     "start": 36,
+     "end": 44,
+     "structural_missing_bytes": 0,
+     "policy_v2_residual_protected_bytes": 0
+    },
+    {
+     "name": "newline-2",
+     "role": "NEUTRAL",
+     "start": 44,
+     "end": 45,
+     "structural_exposed_bytes": 0,
+     "policy_v2_protected_bytes": 1
+    },
+    {
+     "name": "shell-line-2",
+     "role": "PROSE_CANDIDATE",
+     "start": 45,
+     "end": 60,
+     "structural_missing_bytes": 0,
+     "policy_v2_residual_protected_bytes": 15
+    },
+    {
+     "name": "prose-after",
+     "role": "PROSE_CANDIDATE",
+     "start": 62,
+     "end": 72,
+     "structural_missing_bytes": 0,
+     "policy_v2_residual_protected_bytes": 0
+    }
+   ]
+  },
+  {
+   "id": "F30",
+   "class": 30,
+   "class_name": "paths",
+   "mode": "parser-first",
+   "events": 3,
+   "regions": [
+    {
+     "name": "prose",
+     "role": "PROSE_CANDIDATE",
+     "start": 0,
+     "end": 69,
+     "structural_missing_bytes": 0,
+     "policy_v2_residual_protected_bytes": 46
+    }
+   ]
+  },
+  {
+   "id": "F31",
+   "class": 31,
+   "class_name": "env-vars",
+   "mode": "parser-first",
+   "events": 7,
+   "regions": [
+    {
+     "name": "prose",
+     "role": "PROSE_CANDIDATE",
+     "start": 0,
+     "end": 53,
+     "structural_missing_bytes": 0,
+     "policy_v2_residual_protected_bytes": 34
+    }
+   ]
+  },
+  {
+   "id": "F32",
+   "class": 32,
+   "class_name": "identifier-heavy",
+   "mode": "parser-first",
+   "events": 3,
+   "regions": [
+    {
+     "name": "prose",
+     "role": "PROSE_CANDIDATE",
+     "start": 0,
+     "end": 57,
+     "structural_missing_bytes": 0,
+     "policy_v2_residual_protected_bytes": 35
+    }
+   ]
+  },
+  {
+   "id": "F33",
+   "class": 33,
+   "class_name": "slovenian-carons",
+   "mode": "parser-first",
+   "events": 3,
+   "regions": [
+    {
+     "name": "prose",
+     "role": "PROSE_CANDIDATE",
+     "start": 0,
+     "end": 48,
+     "structural_missing_bytes": 0,
+     "policy_v2_residual_protected_bytes": 0
+    }
+   ]
+  },
+  {
+   "id": "F34",
+   "class": 34,
+   "class_name": "emoji",
+   "mode": "parser-first",
+   "events": 3,
+   "regions": [
+    {
+     "name": "prose",
+     "role": "PROSE_CANDIDATE",
+     "start": 0,
+     "end": 69,
+     "structural_missing_bytes": 0,
+     "policy_v2_residual_protected_bytes": 0
+    }
+   ]
+  },
+  {
+   "id": "F35",
+   "class": 35,
+   "class_name": "decomposed-unicode",
+   "mode": "parser-first",
+   "events": 3,
+   "regions": [
+    {
+     "name": "prose",
+     "role": "PROSE_CANDIDATE",
+     "start": 0,
+     "end": 47,
+     "structural_missing_bytes": 0,
+     "policy_v2_residual_protected_bytes": 8
+    }
+   ]
+  },
+  {
+   "id": "F36",
+   "class": 36,
+   "class_name": "crlf",
+   "mode": "parser-first",
+   "events": 8,
+   "regions": [
+    {
+     "name": "line-1",
+     "role": "PROSE_CANDIDATE",
+     "start": 0,
+     "end": 13,
+     "structural_missing_bytes": 0,
+     "policy_v2_residual_protected_bytes": 0
+    },
+    {
+     "name": "line-2",
+     "role": "PROSE_CANDIDATE",
+     "start": 15,
+     "end": 29,
+     "structural_missing_bytes": 0,
+     "policy_v2_residual_protected_bytes": 0
+    },
+    {
+     "name": "line-3",
+     "role": "PROSE_CANDIDATE",
+     "start": 33,
+     "end": 48,
+     "structural_missing_bytes": 0,
+     "policy_v2_residual_protected_bytes": 0
+    }
+   ]
+  },
+  {
+   "id": "F37",
+   "class": 37,
+   "class_name": "malformed-links",
+   "mode": "parser-first",
+   "events": 11,
+   "regions": [
+    {
+     "name": "prose-1",
+     "role": "PROSE_CANDIDATE",
+     "start": 0,
+     "end": 7,
+     "structural_missing_bytes": 0,
+     "policy_v2_residual_protected_bytes": 0
+    },
+    {
+     "name": "literal-link-1",
+     "role": "PROSE_CANDIDATE",
+     "start": 7,
+     "end": 19,
+     "structural_missing_bytes": 0,
+     "policy_v2_residual_protected_bytes": 12
+    },
+    {
+     "name": "prose-mid",
+     "role": "PROSE_CANDIDATE",
+     "start": 19,
+     "end": 23,
+     "structural_missing_bytes": 0,
+     "policy_v2_residual_protected_bytes": 0
+    },
+    {
+     "name": "link-open",
+     "role": "PROTECTED",
+     "start": 23,
+     "end": 24,
+     "structural_exposed_bytes": 0,
+     "policy_v2_exposed_bytes": 0
+    },
+    {
+     "name": "link-label",
+     "role": "PROSE_CANDIDATE",
+     "start": 24,
+     "end": 37,
+     "structural_missing_bytes": 0,
+     "policy_v2_residual_protected_bytes": 13
+    },
+    {
+     "name": "link-close-paren",
+     "role": "PROTECTED",
+     "start": 37,
+     "end": 39,
+     "structural_exposed_bytes": 0,
+     "policy_v2_exposed_bytes": 0
+    },
+    {
+     "name": "link-dest",
+     "role": "PROTECTED",
+     "start": 39,
+     "end": 47,
+     "structural_exposed_bytes": 0,
+     "policy_v2_exposed_bytes": 0
+    },
+    {
+     "name": "link-close",
+     "role": "PROTECTED",
+     "start": 47,
+     "end": 48,
+     "structural_exposed_bytes": 0,
+     "policy_v2_exposed_bytes": 0
+    },
+    {
+     "name": "prose-after",
+     "role": "PROSE_CANDIDATE",
+     "start": 48,
+     "end": 55,
+     "structural_missing_bytes": 0,
+     "policy_v2_residual_protected_bytes": 0
+    }
+   ]
+  },
+  {
+   "id": "F38",
+   "class": 38,
+   "class_name": "mixed-malformed",
+   "mode": "parser-first",
+   "events": 9,
+   "regions": [
+    {
+     "name": "prose-before",
+     "role": "PROSE_CANDIDATE",
+     "start": 0,
+     "end": 4,
+     "structural_missing_bytes": 0,
+     "policy_v2_residual_protected_bytes": 0
+    },
+    {
+     "name": "heading",
+     "role": "PROSE_CANDIDATE",
+     "start": 7,
+     "end": 13,
+     "structural_missing_bytes": 0,
+     "policy_v2_residual_protected_bytes": 0
+    },
+    {
+     "name": "rest",
+     "role": "NEUTRAL",
+     "start": 15,
+     "end": 91,
+     "structural_exposed_bytes": 0,
+     "policy_v2_protected_bytes": 76
+    }
+   ]
+  },
+  {
+   "id": "F39",
+   "class": 39,
+   "class_name": "gfm-task-list",
+   "mode": "parser-first",
+   "events": 16,
+   "regions": [
+    {
+     "name": "prose-before",
+     "role": "PROSE_CANDIDATE",
+     "start": 0,
+     "end": 7,
+     "structural_missing_bytes": 0,
+     "policy_v2_residual_protected_bytes": 0
+    },
+    {
+     "name": "task-1",
+     "role": "PROSE_CANDIDATE",
+     "start": 14,
+     "end": 22,
+     "structural_missing_bytes": 0,
+     "policy_v2_residual_protected_bytes": 0
+    },
+    {
+     "name": "task-2",
+     "role": "PROSE_CANDIDATE",
+     "start": 29,
+     "end": 35,
+     "structural_missing_bytes": 0,
+     "policy_v2_residual_protected_bytes": 0
+    },
+    {
+     "name": "prose-after",
+     "role": "PROSE_CANDIDATE",
+     "start": 37,
+     "end": 43,
+     "structural_missing_bytes": 0,
+     "policy_v2_residual_protected_bytes": 0
+    }
+   ]
+  },
+  {
+   "id": "F40",
+   "class": 40,
+   "class_name": "gfm-strikethrough",
+   "mode": "parser-first",
+   "events": 7,
+   "regions": [
+    {
+     "name": "prose-1",
+     "role": "PROSE_CANDIDATE",
+     "start": 0,
+     "end": 12,
+     "structural_missing_bytes": 0,
+     "policy_v2_residual_protected_bytes": 0
+    },
+    {
+     "name": "strike-text",
+     "role": "NEUTRAL",
+     "start": 14,
+     "end": 19,
+     "structural_exposed_bytes": 5,
+     "policy_v2_protected_bytes": 0
+    },
+    {
+     "name": "prose-2",
+     "role": "PROSE_CANDIDATE",
+     "start": 21,
+     "end": 34,
+     "structural_missing_bytes": 0,
+     "policy_v2_residual_protected_bytes": 0
+    }
+   ]
+  },
+  {
+   "id": "F41",
+   "class": 41,
+   "class_name": "yaml-front-matter",
+   "mode": "parser-first",
+   "events": 6,
+   "regions": [
+    {
+     "name": "rule-1",
+     "role": "PROTECTED",
+     "start": 0,
+     "end": 3,
+     "structural_exposed_bytes": 0,
+     "policy_v2_exposed_bytes": 0
+    },
+    {
+     "name": "newline-1",
+     "role": "NEUTRAL",
+     "start": 3,
+     "end": 4,
+     "structural_exposed_bytes": 0,
+     "policy_v2_protected_bytes": 1
+    },
+    {
+     "name": "title-line",
+     "role": "PROTECTED",
+     "start": 4,
+     "end": 21,
+     "structural_exposed_bytes": 0,
+     "policy_v2_exposed_bytes": 0
+    },
+    {
+     "name": "newline-2",
+     "role": "NEUTRAL",
+     "start": 21,
+     "end": 22,
+     "structural_exposed_bytes": 0,
+     "policy_v2_protected_bytes": 1
+    },
+    {
+     "name": "author-line",
+     "role": "PROTECTED",
+     "start": 22,
+     "end": 33,
+     "structural_exposed_bytes": 0,
+     "policy_v2_exposed_bytes": 0
+    },
+    {
+     "name": "newline-3",
+     "role": "NEUTRAL",
+     "start": 33,
+     "end": 34,
+     "structural_exposed_bytes": 0,
+     "policy_v2_protected_bytes": 1
+    },
+    {
+     "name": "setext-rule",
+     "role": "PROTECTED",
+     "start": 34,
+     "end": 37,
+     "structural_exposed_bytes": 0,
+     "policy_v2_exposed_bytes": 0
+    },
+    {
+     "name": "gap-1",
+     "role": "NEUTRAL",
+     "start": 37,
+     "end": 39,
+     "structural_exposed_bytes": 0,
+     "policy_v2_protected_bytes": 2
+    },
+    {
+     "name": "prose-after",
+     "role": "PROSE_CANDIDATE",
+     "start": 39,
+     "end": 56,
+     "structural_missing_bytes": 0,
+     "policy_v2_residual_protected_bytes": 0
+    }
+   ]
+  },
+  {
+   "id": "F42",
+   "class": 42,
+   "class_name": "nested-list-prose",
+   "mode": "parser-first",
+   "events": 22,
+   "regions": [
+    {
+     "name": "prose-before",
+     "role": "PROSE_CANDIDATE",
+     "start": 0,
+     "end": 8,
+     "structural_missing_bytes": 0,
+     "policy_v2_residual_protected_bytes": 0
+    },
+    {
+     "name": "item-1",
+     "role": "PROSE_CANDIDATE",
+     "start": 11,
+     "end": 14,
+     "structural_missing_bytes": 0,
+     "policy_v2_residual_protected_bytes": 0
+    },
+    {
+     "name": "item-1-1",
+     "role": "PROSE_CANDIDATE",
+     "start": 19,
+     "end": 26,
+     "structural_missing_bytes": 0,
+     "policy_v2_residual_protected_bytes": 0
+    },
+    {
+     "name": "item-1-2",
+     "role": "PROSE_CANDIDATE",
+     "start": 31,
+     "end": 38,
+     "structural_missing_bytes": 0,
+     "policy_v2_residual_protected_bytes": 0
+    },
+    {
+     "name": "item-2",
+     "role": "PROSE_CANDIDATE",
+     "start": 41,
+     "end": 44,
+     "structural_missing_bytes": 0,
+     "policy_v2_residual_protected_bytes": 0
+    },
+    {
+     "name": "prose-after",
+     "role": "PROSE_CANDIDATE",
+     "start": 46,
+     "end": 52,
+     "structural_missing_bytes": 0,
+     "policy_v2_residual_protected_bytes": 0
+    }
+   ]
+  },
+  {
+   "id": "F43",
+   "class": 43,
+   "class_name": "thematic-break",
+   "mode": "parser-first",
+   "events": 7,
+   "regions": [
+    {
+     "name": "prose-before",
+     "role": "PROSE_CANDIDATE",
+     "start": 0,
+     "end": 8,
+     "structural_missing_bytes": 0,
+     "policy_v2_residual_protected_bytes": 0
+    },
+    {
+     "name": "rule",
+     "role": "PROTECTED",
+     "start": 10,
+     "end": 13,
+     "structural_exposed_bytes": 0,
+     "policy_v2_exposed_bytes": 0
+    },
+    {
+     "name": "prose-after",
+     "role": "PROSE_CANDIDATE",
+     "start": 15,
+     "end": 23,
+     "structural_missing_bytes": 0,
+     "policy_v2_residual_protected_bytes": 0
+    }
+   ]
+  },
+  {
+   "id": "F44",
+   "class": 44,
+   "class_name": "reference-link",
+   "mode": "parser-first",
+   "events": 7,
+   "regions": [
+    {
+     "name": "prose-1",
+     "role": "PROSE_CANDIDATE",
+     "start": 0,
+     "end": 5,
+     "structural_missing_bytes": 0,
+     "policy_v2_residual_protected_bytes": 0
+    },
+    {
+     "name": "label",
+     "role": "PROSE_CANDIDATE",
+     "start": 6,
+     "end": 12,
+     "structural_missing_bytes": 0,
+     "policy_v2_residual_protected_bytes": 6
+    },
+    {
+     "name": "ref-syntax",
+     "role": "PROTECTED",
+     "start": 12,
+     "end": 18,
+     "structural_exposed_bytes": 0,
+     "policy_v2_exposed_bytes": 0
+    },
+    {
+     "name": "prose-2",
+     "role": "PROSE_CANDIDATE",
+     "start": 18,
+     "end": 26,
+     "structural_missing_bytes": 0,
+     "policy_v2_residual_protected_bytes": 0
+    },
+    {
+     "name": "definition",
+     "role": "PROTECTED",
+     "start": 28,
+     "end": 56,
+     "structural_exposed_bytes": 0,
+     "policy_v2_exposed_bytes": 0
+    }
+   ]
+  },
+  {
+   "id": "F45",
+   "class": 45,
+   "class_name": "crlf-carons",
+   "mode": "parser-first",
+   "events": 5,
+   "regions": [
+    {
+     "name": "line-1",
+     "role": "PROSE_CANDIDATE",
+     "start": 0,
+     "end": 13,
+     "structural_missing_bytes": 0,
+     "policy_v2_residual_protected_bytes": 0
+    },
+    {
+     "name": "line-2",
+     "role": "PROSE_CANDIDATE",
+     "start": 15,
+     "end": 26,
+     "structural_missing_bytes": 0,
+     "policy_v2_residual_protected_bytes": 0
+    }
+   ]
+  },
+  {
+   "id": "F47",
+   "class": 47,
+   "class_name": "windows-paths",
+   "mode": "parser-first",
+   "events": 3,
+   "regions": [
+    {
+     "name": "prose",
+     "role": "PROSE_CANDIDATE",
+     "start": 0,
+     "end": 46,
+     "structural_missing_bytes": 0,
+     "policy_v2_residual_protected_bytes": 19
+    }
+   ]
+  },
+  {
+   "id": "F48",
+   "class": 48,
+   "class_name": "angle-autolink-mailto",
+   "mode": "parser-first",
+   "events": 11,
+   "regions": [
+    {
+     "name": "prose-1",
+     "role": "PROSE_CANDIDATE",
+     "start": 0,
+     "end": 8,
+     "structural_missing_bytes": 0,
+     "policy_v2_residual_protected_bytes": 0
+    },
+    {
+     "name": "mailto",
+     "role": "PROTECTED",
+     "start": 8,
+     "end": 23,
+     "structural_exposed_bytes": 0,
+     "policy_v2_exposed_bytes": 0
+    },
+    {
+     "name": "prose-2",
+     "role": "PROSE_CANDIDATE",
+     "start": 23,
+     "end": 27,
+     "structural_missing_bytes": 0,
+     "policy_v2_residual_protected_bytes": 0
+    },
+    {
+     "name": "url-autolink",
+     "role": "PROTECTED",
+     "start": 27,
+     "end": 53,
+     "structural_exposed_bytes": 0,
+     "policy_v2_exposed_bytes": 0
+    },
+    {
+     "name": "prose-3",
+     "role": "PROSE_CANDIDATE",
+     "start": 53,
+     "end": 54,
+     "structural_missing_bytes": 0,
+     "policy_v2_residual_protected_bytes": 0
+    }
+   ]
+  },
+  {
+   "id": "F49",
+   "class": 49,
+   "class_name": "unclosed-backtick",
+   "mode": "parser-first",
+   "events": 8,
+   "regions": [
+    {
+     "name": "line-1",
+     "role": "PROSE_CANDIDATE",
+     "start": 0,
+     "end": 26,
+     "structural_missing_bytes": 0,
+     "policy_v2_residual_protected_bytes": 0
+    },
+    {
+     "name": "blank-line",
+     "role": "NEUTRAL",
+     "start": 26,
+     "end": 28,
+     "structural_exposed_bytes": 0,
+     "policy_v2_protected_bytes": 2
+    },
+    {
+     "name": "line-2",
+     "role": "PROSE_CANDIDATE",
+     "start": 28,
+     "end": 34,
+     "structural_missing_bytes": 0,
+     "policy_v2_residual_protected_bytes": 0
+    }
+   ]
+  },
+  {
+   "id": "F50",
+   "class": 50,
+   "class_name": "crlf-fenced-code",
+   "mode": "parser-first",
+   "events": 10,
+   "regions": [
+    {
+     "name": "prose-before",
+     "role": "PROSE_CANDIDATE",
+     "start": 0,
+     "end": 5,
+     "structural_missing_bytes": 0,
+     "policy_v2_residual_protected_bytes": 0
+    },
+    {
+     "name": "fence",
+     "role": "PROTECTED",
+     "start": 9,
+     "end": 23,
+     "structural_exposed_bytes": 0,
+     "policy_v2_exposed_bytes": 0
+    },
+    {
+     "name": "prose-after",
+     "role": "PROSE_CANDIDATE",
+     "start": 26,
+     "end": 29,
+     "structural_missing_bytes": 0,
+     "policy_v2_residual_protected_bytes": 0
+    }
+   ]
+  },
+  {
+   "id": "F46",
+   "class": 46,
+   "class_name": "long-paragraph-stress",
+   "mode": "parser-first",
+   "events": 3,
+   "regions": [
+    {
+     "name": "long-prose",
+     "role": "PROSE_CANDIDATE",
+     "start": 0,
+     "end": 2129,
+     "structural_missing_bytes": 0,
+     "policy_v2_residual_protected_bytes": 0
+    }
+   ]
+  }
+ ],
+ "note": "structural view = parser-only (008-a side-B semantics; must be zero/zero); policy-v2 view = final runtime protection incl. residual (residual-protected bytes inside PROSE_CANDIDATE regions are the expected dual-view delta, protected by design under policy v2)"
+}
