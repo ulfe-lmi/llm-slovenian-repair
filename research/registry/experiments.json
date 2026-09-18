@@ -1,6 +1,6 @@
 {
   "schema_version": 3,
-  "scope": "all enumerated experiment and recovery roots plus stable child runs/phases, non-benchmark diagnostics, and the 008-a parser-qualification study (committed data-free subtree)",
+  "scope": "all enumerated experiment and recovery roots plus stable child runs/phases, non-benchmark diagnostics, the 008-a parser-qualification study, the 008-b post-merge state repair, and the 008-c parser-first protection implementation and generated structural corpus (committed data-free subtree)",
   "source_closure": "research/registry/source-manifest.json",
   "numeric_projections": "research/results/*.json.gz",
   "publication_projections": "research/reports/*.md and research/configs/*.json",
@@ -4814,6 +4814,170 @@
       "pending_evidence": [
         "008-c: parser-first protection architecture with 4-way rule classification and differential regression gates",
         "009: fresh human-labelled target-distribution linguistic confirmation of the frozen effective pipeline"
+      ]
+    },
+    {
+      "experiment_id": "008-b-post-merge-research-state-identities",
+      "logical_root": "none (documentation/state corrective suffix; no private root)",
+      "kind": "audit",
+      "variation": "post-merge research-state identity correction and 008-a ledger registration",
+      "status": "COMPLETE",
+      "question": "Which machine-readable research-state identities became stale after the development-only merge of PR #8 (main 7d2cc9ee37c1fc8c2a3eba238f89bc9bb242f9d9), and how were they corrected additively without weakening any gate?",
+      "frozen_choices": {
+        "new_model_calls": 0,
+        "new_science": 0,
+        "gate_or_test_changes": 0,
+        "machine_block_fields_updated": 5,
+        "registry_entries_added": 1
+      },
+      "metrics": {
+        "model_calls": 0,
+        "block_fields_updated": 5,
+        "registry_entries_added": 1,
+        "immutable_reports_mutated": 0,
+        "test_files_changed": 0
+      },
+      "evidence_files": [
+        {
+          "disposition": "state projection at 008-b final head 49e4e70f1a8c304b4ad5ce27055a39e9e6e17288",
+          "logical_path": "research/RESEARCH-STATE.md",
+          "sha256": "aafa2f094cb00f17bd9e00eb7e60ad9f55d981d231049a9bb6a5679ed48e3b9e",
+          "size": 89149
+        },
+        {
+          "disposition": "ledger projection at 008-b final head 49e4e70f1a8c304b4ad5ce27055a39e9e6e17288",
+          "logical_path": "research/registry/experiments.json",
+          "sha256": "edba7e470cb5d36295294602da077ec5d40ac01f24b892fc94fdc35f8373434c",
+          "size": 225355
+        },
+        {
+          "disposition": "immutable OAP report at 008-b final head 49e4e70f1a8c304b4ad5ce27055a39e9e6e17288",
+          "logical_path": "oap/reports/008-b-post-merge-research-state-identities.md",
+          "sha256": "458a3e6dcb1aba1a5573ff56810e3763caf8ef57d918beece6be04c595451ed7",
+          "size": 35491
+        }
+      ],
+      "evidence_status": "public-data-free",
+      "public_report": "research/RESEARCH-STATE.md#16",
+      "public_configuration": "none (documentation/state round; no experiment configuration)",
+      "public_metrics": "none (state correction; no experiment metrics)",
+      "source_manifest": "none (no private source)",
+      "child_runs": [],
+      "conclusion": "Post-merge identity correction: machine block main_sha and reviewed_branch_head_sha set to merged main 7d2cc9ee37c1fc8c2a3eba238f89bc9bb242f9d9 (parent 4a029287f27e038d5c34c39b26ca836be7c6914b), reviewed_branch_head_parent_sha set accordingly, 008-a registered (registry 25 entries), oap_reports_reviewed=45; all four required checks green at the 008-b final head with test logic byte-unchanged; no scientific content, no model calls, no gate changes.",
+      "pending_evidence": []
+    },
+    {
+      "experiment_id": "008-c-parser-first-protection",
+      "logical_root": "research/prose-boundary (committed data-free research subtree; hidden acceptance set in the private root, referenced by committed manifest hashes only)",
+      "kind": "study",
+      "variation": "parser-first structural protection layer with narrow residual semantic recognizer, frozen structural policy v2, and the authorized generated structural evaluation program (human decision 2026-09-17)",
+      "status": "COMPLETE",
+      "question": "Does the parser-first structural protection layer with its narrow residual semantic recognizer reproduce the 008-a qualification invariants through the runtime path, preserve the legacy protection as a fail-closed fallback, hold the seven end-to-end invariants on dev documents, and support a sealed independent hidden acceptance corpus without any dev-corpus safety regression?",
+      "frozen_choices": {
+        "new_model_calls": 414,
+        "model_calls_note": "actual authorized structural test-data generation calls only (human decision 2026-09-17): 386 planned slots consumed (1 preflight + 235 component batches + 150 naturalistic sequences) plus 21 recorded retries and 7 recovery/surgical completion calls = 414 total HTTP attempts per the committed disclosed ledger; NOT linguistic-method tuning; NOT objective-009 data",
+        "profile": "P2 (frozen 008-a measurement profile; the 008-a 50-fixture baseline re-derives through the runtime path)",
+        "pinned_helper_identity": {
+          "crate_registry_checksum": "e9f068eba8e7071c5f9511831b44f32c740d5adf574e990f946ddb53db2f314e",
+          "binary_sha256": "5df9a11d56b5bdec90c3ca09298802723975306f77e43e74ad1a72eb427c44bf"
+        },
+        "structural_policy_v2_sha256": "996f465784bed37a179be337e2af606b2dc350cacba6341479371d2812c5a88e",
+        "prompt_library_sha256": "904dd36b9891c567f250bf8b42b374d0b6557aa79ca3fcaa3c8824682fcc8fef",
+        "mashup_seeds": {
+          "dev": "53ea1e63de0a7ec9",
+          "hidden": "a0fe550e7f0f8b9b"
+        },
+        "hidden_manifest_sha256": "8233bdcf683df8a97d62a375a6cf60d93b64aa6b7ecf22489ce9986333436a18"
+      },
+      "metrics": {
+        "model_calls": 414,
+        "planned_slots_consumed": 386,
+        "components_total": 1234,
+        "components_dev": 646,
+        "components_hidden": 588,
+        "naturalistic_total": 150,
+        "naturalistic_dev": 80,
+        "naturalistic_hidden": 70,
+        "dev_documents": 3000,
+        "hidden_documents": 2000,
+        "dev_protected_bytes_total": 526315,
+        "dev_protected_bytes_exposed": 0,
+        "dev_coordinate_violations": 0,
+        "dev_expected_prose_bytes_exposed_rate": 0.9798500691855476,
+        "dev_unnecessary_suppression_by_container": {
+          "S.Emph": 110,
+          "S.Head": 436,
+          "S.Item": 3531,
+          "S.Link": 9126,
+          "S.Para": 20271,
+          "S.TableCell": 575,
+          "unknown": 4439
+        },
+        "fixture_rederivation_zero_invariant_violations": true,
+        "differential_class3_safety_spans": 0,
+        "differential_class7_spans_still_protected": 22,
+        "differential_disagreement_spans": 0,
+        "end_to_end_invariants": "7/7",
+        "helper_invocations_per_document": 1,
+        "performance_ms_per_document_median": {
+          "1kb": 44.73864403553307,
+          "10kb": 66.3911200244911,
+          "50kb": 263.57103302143514
+        }
+      },
+      "evidence_files": [
+        {
+          "disposition": "frozen structural policy v2 (committed)",
+          "logical_path": "research/prose-boundary/config/structural-policy-v2.json",
+          "sha256": "996f465784bed37a179be337e2af606b2dc350cacba6341479371d2812c5a88e",
+          "size": 14647
+        },
+        {
+          "disposition": "frozen generation prompt library (committed)",
+          "logical_path": "research/prose-boundary/config/generation/prompt-families.json",
+          "sha256": "904dd36b9891c567f250bf8b42b374d0b6557aa79ca3fcaa3c8824682fcc8fef",
+          "size": 134041
+        },
+        {
+          "disposition": "disclosed generation call ledger (committed)",
+          "logical_path": "research/prose-boundary/config/generation/generation-identity.json",
+          "sha256": "c469154c8f3ff570ec2c7199c0dc140407290c9a31a20db8e8d06b6ac1dade62",
+          "size": 15257
+        },
+        {
+          "disposition": "dev corpus census with per-file hashes (committed)",
+          "logical_path": "research/prose-boundary/corpus/manifests/corpus-census.json",
+          "sha256": "32f62c0836ae47f8e49251f4019f187c02c52202e202603a1f247da7d12f9003",
+          "size": 789683
+        },
+        {
+          "disposition": "content-free hidden acceptance manifest (committed)",
+          "logical_path": "research/prose-boundary/corpus/manifests/hidden-manifest.json",
+          "sha256": "8233bdcf683df8a97d62a375a6cf60d93b64aa6b7ecf22489ce9986333436a18",
+          "size": 549479
+        },
+        {
+          "disposition": "round research report (committed)",
+          "logical_path": "research/prose-boundary/REPORT-008C.md",
+          "sha256": "6089e45ec411d7d01231bbe9669436c1ede8298594258ef899db189eb1528586",
+          "size": 48252
+        },
+        {
+          "disposition": "increment-3 aggregate summary (committed)",
+          "logical_path": "research/prose-boundary/results/increment3/summary.json",
+          "sha256": "5c7a3649afc60d0de63a05e0b618389f489d370c1f828943dc1acfce1f79f345",
+          "size": 1149
+        }
+      ],
+      "evidence_status": "public-data-free",
+      "public_report": "research/prose-boundary/REPORT-008C.md",
+      "public_configuration": "research/prose-boundary/config/structural-policy-v2.json",
+      "public_metrics": "research/prose-boundary/results/increment3/summary.json",
+      "source_manifest": "none (no private source; committed data-free research subtree plus private-root hidden set referenced by manifest hashes only)",
+      "child_runs": [],
+      "conclusion": "COMPLETE (tuning evidence, not acceptance). The parser-first protection layer under frozen structural policy v2 re-derives the 008-a 50-fixture P2 baseline through the runtime path with zero invariant violations (structural view byte-exact; policy-v2 view adds 368 residual-protected bytes across 27 prose regions by design), retains the 008-a full-regex rule set verbatim as a fail-closed fallback (self-test 6/6, zero fail-open path), holds end-to-end invariants 1-7 on dev documents (7/7), and shows zero class-3 safety spans and 22/22 class-7 spans still protected in the 008-a 100-sample differential. The authorized generation program (single pinned qwen3.8-27b endpoint identity; 414 disclosed attempts; all failures/retries/recovery runs recorded) produced 1,234 components (646 dev / 588 hidden) and 150 naturalistic whole responses (80 dev / 70 hidden); the deterministic mashup builder composed 3,000 dev documents (committed, machine-known ground truth) and 2,000 hidden documents (private root, sealed by the committed content-free manifest, 4,091/4,091 hash-verified, SEALED before implementation freeze). Dev-corpus tuning targets met on the final committed state: protected-bytes-exposed 0/526,315, coordinate violations 0/0/0, malformed violations 0; the dev corpus is tuning evidence only. Hidden blind acceptance, naturalistic label adjudication, and the objective-008 disposition are deferred to 008-d; no acceptance, merge, release, or deployment claim.",
+      "pending_evidence": [
+        "008-d: blind hidden-acceptance evaluation of the frozen implementation (PASS/CONDITIONAL/FAIL), naturalistic label adjudication per the frozen annotation guide, end-to-end preservation on the hidden set"
       ]
     }
   ]

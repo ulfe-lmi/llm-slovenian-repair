@@ -192,7 +192,7 @@ harm labels.
 | 007-m (rank ambiguous Levenshtein candidates) | COMPLETE | Does a predeclared CPU top-1 ranking of ambiguous (C>1) candidates improve the frozen method? | Frozen CPU ranking + one frozen validator call per C>1 target; 882 C>1 targets (651 spelling + 231 preservation), 4,372 candidate pairs; hybrid primary result 799/114/716 (section 5); headroom census (top-1 covers 60.54% of present gold). | Two failed instrument roots preserved (ffdf13: 188 calls; 090ea8: 678 calls); final zero-call root ec2962 adopted all 882 observations and recomputed the hybrid projections byte-for-byte. |
 | 007-n (restore deterministic application baseline) | COMPLETE (implementation accepted; report quarantined) | Is the Application baseline deterministic and green? | Deterministic buffered terminal-SSE capture in the concept proxy and ZipInfo/stat_result typing repair; implementation independently accepted (diff review, focused concept suite 19/19, 25/25 consecutive iterations of the formerly flaky terminal-SSE test). | The 007-n REPORT is machine-invalid (unfinalized placeholder token in `checks[5].command`) and is classified INVALID_QUARANTINED by this order; its evidence claims are re-verified here. |
 
-### 4.2 Registry roots (24 entries at the 007-o snapshot; 25 after the 008-b update)
+### 4.2 Registry roots (24 entries at the 007-o snapshot; 25 after the 008-b update; 27 after the 008-c update)
 
 Population/denominator notes: the 32-case suite = 7 labelled errors + 25
 controls; ten-run studies repeat the same 32 examples (320 instances measure
@@ -837,6 +837,60 @@ this branch/PR) freezes the effective pipeline; objective 009 remains
 reserved for the fresh human-labelled linguistic confirmation; the 007-m
 linguistic system stays frozen.
 
+## 17. Parser-first protection and generated structural corpus (objective 008, round 008-c)
+
+This section is the additive round-008-c record. It rewrites nothing in
+sections 1-16 and changes no scientific result of the 007 narrative.
+
+Human decision of 2026-09-17 (received after 008-b publication): the 008-a
+GO is supporting evidence for `pulldown-cmark` 0.13.4, not final
+independent validation of the prose boundary, because (1) the 50-fixture
+adversarial suite was parser-informed during working-tree authoring before
+its first committed freeze and (2) the 100 preserved real outputs were 100
+percent plain prose and did not exercise the mixed-content problem. LLM
+calls are authorized strictly for structural test-data generation (not
+linguistic-method tuning; wholly separate from objective 009's future
+confirmation set). Objective 008 must produce a much stronger acceptance
+corpus: a deterministic mashup corpus with machine-known exact ground truth
+plus a naturalistic whole-response corpus, with a mandatory development/
+hidden split in which the hidden acceptance set is sealed by hash/manifest
+before the implementation is frozen and is evaluated blindly in the next
+round (008-d).
+
+008-c change summary (research pipeline only; no 007-m linguistic change;
+no 009 data touched): (a) the parser-first protection layer
+(`research/curated/prose_boundary.py`; reworked
+`research/curated/protected.py`) under the frozen structural policy v2:
+parser-derived structural protection from the pinned pulldown-cmark 0.13.4
+helper (frozen 008-a candidate identity) plus the narrow residual semantic
+recognizer running only on candidate-prose spans in code-point coordinates;
+the 008-a full-regex rule set is retained verbatim as the fail-closed
+fallback (the layer never fails open); the public `Interval` /
+`is_protected` / `protected_intervals` signatures are unchanged for all
+consumers; strategy finding B (D0 autolink-destination rule absent from the
+008-a config literal) is codified in `structural-policy-v2.json` with
+`experiment-008a.json` byte-identical. (b) The authorized generation
+program (frozen 76-family prompt library; single pinned Qwen endpoint
+identity; budget per the frozen call allocation; actual call ledger
+recorded, including all failures, retries and the recovery runs after the
+components-stage transport crash and the naturalistic-stage partial
+completion) produced the component pools and the 150 naturalistic
+whole-response outputs (80 development / 70 hidden). (c) The deterministic
+mashup builder composed 3,000 development documents (committed, with
+machine-known ground-truth label maps derived purely from composition
+provenance; the builder never invokes the parser or the protection layer)
+and 2,000 hidden documents (private root only), sealed by
+`corpus/manifests/hidden-manifest.json` (content-free) with the committed
+hash-verified seal. (d) Dev-corpus evaluation (tuning evidence, NOT
+acceptance): protected-bytes-exposed = 0, coordinate violations = 0, the
+008-a 50-fixture baseline re-derived through the runtime path with zero
+invariant violations, the 008-a 100-sample differential with no class-3
+safety regression and the 22 class-7 spans still protected by the second
+stage, and end-to-end invariants 1-7 on dev documents. (e) The hidden
+acceptance evaluation, the naturalistic label adjudication per the frozen
+annotation guide, and the final objective-008 disposition
+(PASS/CONDITIONAL/FAIL) are deferred to round 008-d.
+
 ## Machine-readable state block (research-state-machine-v1)
 
 This fenced block is the machine-readable core of the numbers quoted above.
@@ -868,8 +922,8 @@ model/network calls.
     "frozen_007m_configuration_sha256": "0026a1a9d27652c36e2c5a960b10fafc1c9a93b0690d93b09089aa58884f5c26",
     "frozen_007m_prompt_sha256": "572cf2fb4864e66e38a500465e1089062d58aeed4721063fb0c1e466e424230d",
     "frozen_007m_final_root_manifest_sha256": "3fb4aef33542e7fa3f357acb905b75f4d7e7551783f83a422b5d1ea6272c25f8",
-    "registry_entries": 25,
-    "oap_reports_reviewed": 45,
+    "registry_entries": 27,
+    "oap_reports_reviewed": 46,
     "frozen_report_history_incidents": 2
   },
   "official_scorer": {
