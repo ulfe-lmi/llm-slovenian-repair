@@ -891,6 +891,25 @@ acceptance evaluation, the naturalistic label adjudication per the frozen
 annotation guide, and the final objective-008 disposition
 (PASS/CONDITIONAL/FAIL) are deferred to round 008-d.
 
+008-d corrective note (additive; no rewrite of the 008-c record above):
+independent final-head review of the 008-c final head
+4b6a90ab13c0c9a02e533a2673a084e26f841a5c found exactly one red required
+check - the Application baseline full-pytest stage recorded TIMEOUT at the
+frozen 300 s per-command cap (captured session '653 passed, 14 skipped,
+89 subtests passed in 337.20s'; zero test failures; the 2026-09-17 pool
+ran the near-identical suite in 134.92 s) - a runner-pool timing artifact
+on the inherited application suite, not a 008-c test failure; OAP
+bootstrap acceptance, OAP report history and Research reproducibility
+were green at that head. Round 008-d is the bounded corrective: honest
+bounded observation of the frozen stage under the unchanged cap, a
+committed data-free timing decomposition, this ledger registration, and
+the one stale suffix-reference correction; no gate, cap, driver,
+workflow, or test change. Per the D1 recorded in the 008-c final-head
+review, the blind hidden acceptance and the final objective-008
+disposition are round 008-e (the 'round 008-d' deferral sentence in the
+008-c record above carries that pre-renumbering label; the deferral
+itself is unchanged).
+
 ## Machine-readable state block (research-state-machine-v1)
 
 This fenced block is the machine-readable core of the numbers quoted above.
@@ -922,8 +941,8 @@ model/network calls.
     "frozen_007m_configuration_sha256": "0026a1a9d27652c36e2c5a960b10fafc1c9a93b0690d93b09089aa58884f5c26",
     "frozen_007m_prompt_sha256": "572cf2fb4864e66e38a500465e1089062d58aeed4721063fb0c1e466e424230d",
     "frozen_007m_final_root_manifest_sha256": "3fb4aef33542e7fa3f357acb905b75f4d7e7551783f83a422b5d1ea6272c25f8",
-    "registry_entries": 27,
-    "oap_reports_reviewed": 46,
+    "registry_entries": 28,
+    "oap_reports_reviewed": 47,
     "frozen_report_history_incidents": 2
   },
   "official_scorer": {

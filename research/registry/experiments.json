@@ -1,6 +1,6 @@
 {
   "schema_version": 3,
-  "scope": "all enumerated experiment and recovery roots plus stable child runs/phases, non-benchmark diagnostics, the 008-a parser-qualification study, the 008-b post-merge state repair, and the 008-c parser-first protection implementation and generated structural corpus (committed data-free subtree)",
+  "scope": "all enumerated experiment and recovery roots plus stable child runs/phases, non-benchmark diagnostics, the 008-a parser-qualification study, the 008-b post-merge state repair, the 008-c parser-first protection implementation and generated structural corpus (committed data-free subtree), and the 008-d application-baseline timing corrective and ledger registration",
   "source_closure": "research/registry/source-manifest.json",
   "numeric_projections": "research/results/*.json.gz",
   "publication_projections": "research/reports/*.md and research/configs/*.json",
@@ -4977,6 +4977,127 @@
       "conclusion": "COMPLETE (tuning evidence, not acceptance). The parser-first protection layer under frozen structural policy v2 re-derives the 008-a 50-fixture P2 baseline through the runtime path with zero invariant violations (structural view byte-exact; policy-v2 view adds 368 residual-protected bytes across 27 prose regions by design), retains the 008-a full-regex rule set verbatim as a fail-closed fallback (self-test 6/6, zero fail-open path), holds end-to-end invariants 1-7 on dev documents (7/7), and shows zero class-3 safety spans and 22/22 class-7 spans still protected in the 008-a 100-sample differential. The authorized generation program (single pinned qwen3.8-27b endpoint identity; 414 disclosed attempts; all failures/retries/recovery runs recorded) produced 1,234 components (646 dev / 588 hidden) and 150 naturalistic whole responses (80 dev / 70 hidden); the deterministic mashup builder composed 3,000 dev documents (committed, machine-known ground truth) and 2,000 hidden documents (private root, sealed by the committed content-free manifest, 4,091/4,091 hash-verified, SEALED before implementation freeze). Dev-corpus tuning targets met on the final committed state: protected-bytes-exposed 0/526,315, coordinate violations 0/0/0, malformed violations 0; the dev corpus is tuning evidence only. Hidden blind acceptance, naturalistic label adjudication, and the objective-008 disposition are deferred to 008-d; no acceptance, merge, release, or deployment claim.",
       "pending_evidence": [
         "008-d: blind hidden-acceptance evaluation of the frozen implementation (PASS/CONDITIONAL/FAIL), naturalistic label adjudication per the frozen annotation guide, end-to-end preservation on the hidden set"
+      ]
+    },
+    {
+      "experiment_id": "008-d-application-baseline-restoration",
+      "logical_root": "none (CI observation and ledger/state bookkeeping suffix; the private-root hidden set is re-verified data-free by manifest hashes only)",
+      "kind": "audit",
+      "variation": "bounded application-baseline timing observation, data-free timing decomposition, and ledger registration of the inherited full-pytest timing debt at the 008-c final head",
+      "status": "COMPLETE",
+      "question": "Which of the four required checks was red at the 008-c final head 4b6a90a, why (per-head timing evidence), and how was the round corrected and registered without weakening, skipping, or redefining any gate?",
+      "frozen_choices": {
+        "new_model_calls": 0,
+        "new_science": 0,
+        "gate_or_test_changes": 0,
+        "cap_or_driver_or_workflow_changes": 0,
+        "observation_reruns_performed": {
+          "at_008c_final_head_4b6a90a": [
+            {
+              "observation": 1,
+              "mechanic": "gh run rerun 35350302300 --failed, rerun attempt 1",
+              "job_window": "2026-09-18T15:09:19Z..2026-09-18T15:15:12Z",
+              "stage": "full pytest",
+              "outcome": "TIMEOUT at the frozen 300.0 s per-command cap",
+              "session_summary": "653 passed, 14 skipped, 89 subtests passed in 335.98s (0:05:35)",
+              "test_failures": 0
+            },
+            {
+              "observation": 2,
+              "mechanic": "gh run rerun 35350302300 --failed, rerun attempt 2 (order budget exhausted)",
+              "job_window": "2026-09-18T15:15:49Z..2026-09-18T15:21:37Z",
+              "stage": "full pytest",
+              "outcome": "TIMEOUT at the frozen 300.0 s per-command cap",
+              "session_summary": "653 passed, 14 skipped, 89 subtests passed in 334.01s (0:05:34)",
+              "test_failures": 0
+            }
+          ],
+          "at_implementation_head": "none performed (order requirement 8: a green is impossible by design before the report-only commit); the implementation-head CI observation is recorded verbatim in oap/reports/008-d-application-baseline-restoration.md",
+          "at_final_head": "observed at the final head per order requirement 10 and recorded verbatim in oap/reports/008-d-application-baseline-restoration.md; this entry is byte-identical between the implementation head and the final head (the report-only commit changes no other path), so it holds a pointer to the committed verbatim record rather than not-yet-existing values"
+        }
+      },
+      "metrics": {
+        "model_calls": 0,
+        "ci_full_pytest_wall_seconds_per_head": {
+          "4b6a90a_original": 337.2,
+          "4b6a90a_rerun_1": 335.98,
+          "4b6a90a_rerun_2": 334.01,
+          "75e49a5_activation_intermediate": 327.35,
+          "9aec9cb_008c_implhead_historical": 337.06,
+          "21c4135_008c_implhead_historical": 329.96,
+          "d0c284a_008c_implhead_historical": 334.87,
+          "8300573_008b_implhead_2026_09_17_reference": 134.92
+        },
+        "ci_zero_test_failure_timeout_observations_this_round": 4,
+        "ci_session_counts_0918_pool": "653 passed, 14 skipped, 89 subtests passed; identical across all four this-round CI observations, zero test failures in each",
+        "local_decomposition_per_directory": {
+          "tests/contract": {
+            "tests": 239,
+            "wall_seconds": 8.08
+          },
+          "oap/tests": {
+            "tests": 129,
+            "wall_seconds": 868.67
+          },
+          "concept-verification/tests": {
+            "tests": 19,
+            "wall_seconds": 4.62
+          },
+          "research/tests": {
+            "tests": 280,
+            "wall_seconds": 413.24
+          },
+          "full_session": {
+            "tests": 667,
+            "wall_seconds": 1294.4,
+            "test_failures": 0
+          }
+        },
+        "immutable_reports_mutated": 0,
+        "test_files_changed": 0,
+        "cap_driver_workflow_changes": 0
+      },
+      "evidence_files": [
+        {
+          "disposition": "committed data-free timing decomposition (this round)",
+          "logical_path": "research/prose-boundary/results/baseline-timing/008d-decomposition.json",
+          "sha256": "e9239a7bcbdd0351f46449550df13cac661fe4566b215969f6265fee8e8c08c0",
+          "size": 14582
+        },
+        {
+          "disposition": "immutable OAP report at 008-c final head 4b6a90ab13c0c9a02e533a2673a084e26f841a5c",
+          "logical_path": "oap/reports/008-c-parser-first-protection.md",
+          "sha256": "121c7e1989da1d93be6931197801f24c59305916aeafb4163a055459e2173364",
+          "size": 42762
+        },
+        {
+          "disposition": "008-d order committed at activation 75e49a5d1066fe25affcbca690a6f25fc6b04f29",
+          "logical_path": "oap/orders/008-d-application-baseline-restoration.md",
+          "sha256": "4e15638298f40b8871c2638371a2b5bfefa7d7df465d32eea6f1b907a9dfcbab",
+          "size": 46066
+        },
+        {
+          "disposition": "research-state projection at the 008-d final head (byte-identical between implementation head and final head)",
+          "logical_path": "research/RESEARCH-STATE.md",
+          "sha256": "35a804c2edc5dfe8483d4052b27df5df8a585f028a676c3a2d3e2a5fcda5a3eb",
+          "size": 93852
+        },
+        {
+          "disposition": "ledger projection at the 008-d final head (byte-identical between implementation head and final head). Self-referential citation: a literal content hash of this file containing its own hash has no SHA-256 fixed point, so the cited sha256 is the hash of the canonical form - the exact committed bytes with this one 64-hex-digit sha256 field (the only self-referential field) replaced by 64 zero digits; the cited size is the actual file size; every other byte is exact",
+          "logical_path": "research/registry/experiments.json",
+          "sha256": "e9fd07dafce5e0802a6d3426a1bc127692d59ea3410a47862296703f0ed6377f",
+          "size": 244232
+        }
+      ],
+      "evidence_status": "public-data-free",
+      "public_report": "research/RESEARCH-STATE.md#16",
+      "public_metrics": "research/prose-boundary/results/baseline-timing/008d-decomposition.json",
+      "public_configuration": "none (observation/bookkeeping round; no experiment configuration)",
+      "source_manifest": "none (no private source)",
+      "child_runs": [],
+      "conclusion": "Sole red required check at the 008-c final head 4b6a90a: Application baseline - the full-pytest stage recorded TIMEOUT at the frozen 300 s per-command cap with ZERO test failures (337.20 s; 653 passed / 14 skipped / 89 subtests) - a runner-pool timing artifact on the inherited application suite (2026-09-17 pool: 134.92 s on the near-identical population), not a 008-caused test failure and not a 008-c defect; the other three checks were green at that head. Corrected and registered without weakening, skipping, or redefining any gate: two bounded verbatim rerun observations at 4b6a90a (335.98 s, 334.01 s; both zero-failure TIMEOUT class), a committed data-free decomposition (local full session 1294.40 s with zero failures; oap/tests 868.67 s the dominant local cost; the 008-c round's only full-pytest population change is the single new focused test file), ledger and machine-block registration (registry 28 entries, oap_reports_reviewed 47, all identity fields unchanged), the one stale suffix-reference correction in STATUS.md (blind hidden acceptance = 008-e per the D1 recorded in the 008-c final-head review), and the data-free hidden-seal re-verification (4091/4091; manifest sha256 unchanged; the private-root generation-receipts directory documented as pre-seal metadata outside the manifest scope). No test, gate, cap, driver, or workflow change; zero model calls; no objective-009 data. The implementation-head and final-head CI observations are recorded verbatim in the 008-d OAP report.",
+      "pending_evidence": [
+        "008-e: blind hidden-acceptance evaluation of the frozen implementation (PASS/CONDITIONAL/FAIL), naturalistic label adjudication per the frozen annotation guide, end-to-end preservation on the hidden set"
       ]
     }
   ]
