@@ -1,0 +1,47 @@
+{
+ "doc_id": "dev-001956",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T10-randomized",
+ "byte_length": 1076,
+ "cp_length": 1055,
+ "sha256": "aaf292e252ba3fa5ef3e3553bf9948cc20299b4d46572dab2b7b5aa22ac2c3cb",
+ "document": "V zbirki izmišljenega muzeja na Bledu je ohranjen skicirni list iz leta 1623, ki ga pripisujejo obrtniku Janezu Hribarju. Na listu je zabeležen postopek obdelave lesa in navedena meritev širine deske, ki naj bi dosegala dva metra. Raziskovalci projekta Stare delavnice so zato sklepali, da je v tem času obstajala manjša lokalna tradicija izdelovanja lesnih izdelkov.\nPROJEKT=Rdeča dolina\nAVTOR=Janez Peter\nMOČ=1,8 W\nDELNA_MERILA=40 %\nDODATNA_VAR=$drugim_ključem; 0,16\nOPIS=[*demo*, _projekt_, https://primer.si/novica]\n\\(\\left(\\frac{\\sigma^3}{\\tau+4}+\\sqrt{2\\omega+1}\\right)_{\\text{Eva}}\\)\n${PROJEKT_IME} KEY=izvirna_vrednost\nhttps://primer.si/novica#naslov\nV odrski skupini, ki se je udeleževala tečaja digitalnih veščin, so se izobraženci najprej pogovarili o lastnih izkušnjah z računalniki, telefoni in e-pošto. Učiteljica (Maja Krajnc) je nato z drobnimi nalogami pokazala, kako preiskati zanesljiv vir, kako označiti vir in kako preprečiti, da bi besedilo delovalo kot »kopija brez lastnega pogleda«. Kratek zapis so na koncu prebrali drug drugemu.",
+ "components": [
+  {
+   "component_id": "comp-prose-history-dev-0006",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 372
+  },
+  {
+   "component_id": "comp-structured-env-blocks-dev-0004",
+   "category": "structured",
+   "start_byte": 373,
+   "end_byte": 527
+  },
+  {
+   "component_id": "comp-math-paren-tex-dev-0005",
+   "category": "math",
+   "start_byte": 528,
+   "end_byte": 598
+  },
+  {
+   "component_id": "comp-machine-env-vars-dev-0003",
+   "category": "machine",
+   "start_byte": 599,
+   "end_byte": 634
+  },
+  {
+   "component_id": "comp-machine-urls-dev-0006",
+   "category": "machine",
+   "start_byte": 635,
+   "end_byte": 666
+  },
+  {
+   "component_id": "comp-prose-education-dev-0005",
+   "category": "prose",
+   "start_byte": 667,
+   "end_byte": 1076
+  }
+ ]
+}

@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-000739",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T3-prose-fenced-prose",
+ "byte_length": 720,
+ "cp_length": 698,
+ "sha256": "73d88d36839fde85023f1830c17e04c44784ce9b8985856922e084d26673a2a5",
+ "document": "Ana si je za projekt »Miren dan« izbrala prenosnik, ki naj bi bil dovolj tih, da ga lahko odpre v knjižnici (tudi če baterija ni polna). V »Ponovni sinhronizaciji« se ji je obljubil mirnejši dan, če omrežje ne bo puščalo zamud.\n```\nfunction seStez(a, b) { return a + b; } /* Test: seštej in izpiši za 10 $ */ const razdelek2 = seStez(2, 3); console.log(`Rezultat: ${razdelek2} za 10 $ in 5 $`);\n```\nV projektu Nevtralna zdravstvena vsebina 2025 je Ana Kovač pripravila opombo o utrujenosti, ki ima lahko mnogo vzrokov. Ker telo na spremembe odziva različno, je koristno, da se oseba posvetuje z zdravnikom, še posebej če se stanje ponavlja. V takih primerih „splošna razlaga“ ne nadomesti pregleda.",
+ "components": [
+  {
+   "component_id": "comp-prose-computing-dev-0006",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 238
+  },
+  {
+   "component_id": "comp-code-javascript-dev-0001",
+   "category": "code",
+   "start_byte": 239,
+   "end_byte": 411
+  },
+  {
+   "component_id": "comp-prose-medicine-explainer-dev-0006",
+   "category": "prose",
+   "start_byte": 412,
+   "end_byte": 720
+  }
+ ]
+}

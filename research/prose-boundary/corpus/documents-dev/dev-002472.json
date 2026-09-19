@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-002472",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T9-prose-malformed-prose",
+ "byte_length": 853,
+ "cp_length": 819,
+ "sha256": "875e33857f3b6b15ec4d632b593a2b978663b1d00687e7a835c2f6a306f4b892",
+ "document": "V vprašanjih za projekt Zdravo mesto 2025 so otroci zaskrbljeni zaradi »bolečin v trebuhu« po školski malici. Raje ne govorimo o diagnozi; zabeležimo, kdaj se pojavi, koliko traja in kakšna je hrana (na primer po mlečnih izdelkih). Pri vsakem nepričakovanem ponovnem pojavi naj starš pokliče zdravniško ambulanto.\n\n\\begin{align} x &= 1, nevtralna testna vsebina za izmišljen projekt Sončni cvet, avtorica Ana Krajnar.\n\nKo učimo trikotnike, lahko začnemo z vprašanjem, „Zakaj je šotor stabilen?“ in nato z ročno izrisanimi oblikami na papirju. Učenci pogosto uvidijo, da višina ni samo dolžina črte, ampak razdalja do nasprotne stranice, čeprav jo učbeniki včasih imenujejo le višina. Pri projektu Podrobnosti na papirju so učenci iz leta 2022 z risbo razložili, kako se oblika spreminja, ko premaknemo eno temeno točko.",
+ "components": [
+  {
+   "component_id": "comp-prose-medicine-explainer-dev-0012",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 325
+  },
+  {
+   "component_id": "comp-malformed-unclosed-tex-env-dev-0001",
+   "category": "malformed",
+   "start_byte": 327,
+   "end_byte": 431
+  },
+  {
+   "component_id": "comp-prose-math-explainer-dev-0010",
+   "category": "prose",
+   "start_byte": 433,
+   "end_byte": 853
+  }
+ ]
+}

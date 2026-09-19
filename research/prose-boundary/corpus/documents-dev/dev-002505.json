@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-002505",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T9-prose-malformed-prose",
+ "byte_length": 731,
+ "cp_length": 716,
+ "sha256": "36e5cf1dd9ef8e65be2d71283921d6e6debebbd3cf5b03f82c2d9f5bee51b8dc",
+ "document": "V projektu Mlin 2018 je Luka preveril, koliko je povprečno trajala čakalna vrsta. Ko so trije prostovoljci dodali svoje opazke, se je slika izkazala za bolj uravnoteženo. Po njegovem mnenju je bistvo v tem, da se številka ne bere sama, ampak potrebuje kontekst.\n\n\\begin{align} x &= 1, nevtralna testna vsebina za izmišljen projekt Sončni cvet, avtorica Ana Krajnar.\n\nKadar učenci rešujejo enačbe, jim je koristno, da najprej povežejo oba dela z istimi dejanji, da ostane zvezek ravnovesja (kot pri tehtnici). Pri projektu Šolske številke so v letu 2021 poskusili z besedilnimi nalogami, v katerih je neznanka skrita v vsakdanji razgovoru. Zaradi tega se učenci naučijo, da razlaga ni le zapis, ampak način misljenja.",
+ "components": [
+  {
+   "component_id": "comp-prose-statistics-dev-0001",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 265
+  },
+  {
+   "component_id": "comp-malformed-unclosed-tex-env-dev-0001",
+   "category": "malformed",
+   "start_byte": 267,
+   "end_byte": 371
+  },
+  {
+   "component_id": "comp-prose-math-explainer-dev-0006",
+   "category": "prose",
+   "start_byte": 373,
+   "end_byte": 731
+  }
+ ]
+}

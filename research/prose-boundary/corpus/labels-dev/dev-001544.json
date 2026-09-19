@@ -1,0 +1,112 @@
+{
+ "doc_id": "dev-001544",
+ "byte_length": 961,
+ "cp_length": 940,
+ "regions": [
+  {
+   "start_byte": 0,
+   "end_byte": 2,
+   "start_cp": 0,
+   "end_cp": 2,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 2,
+   "end_byte": 315,
+   "start_cp": 2,
+   "end_cp": 310,
+   "component_id": "comp-prose-literature-dev-0009",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 315,
+   "end_byte": 318,
+   "start_cp": 310,
+   "end_cp": 313,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 318,
+   "end_byte": 319,
+   "start_cp": 313,
+   "end_cp": 314,
+   "component_id": "comp-code-cpp-dev-0009",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 319,
+   "end_byte": 379,
+   "start_cp": 314,
+   "end_cp": 374,
+   "component_id": "comp-code-cpp-dev-0009",
+   "category": "code",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 379,
+   "end_byte": 380,
+   "start_cp": 374,
+   "end_cp": 375,
+   "component_id": "comp-code-cpp-dev-0009",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 380,
+   "end_byte": 383,
+   "start_cp": 375,
+   "end_cp": 378,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 383,
+   "end_byte": 711,
+   "start_cp": 378,
+   "end_cp": 693,
+   "component_id": "comp-prose-cooking-dev-0005",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 711,
+   "end_byte": 714,
+   "start_cp": 693,
+   "end_cp": 696,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 714,
+   "end_byte": 961,
+   "start_cp": 696,
+   "end_cp": 940,
+   "component_id": "comp-prose-travel-dev-0012",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  }
+ ],
+ "invariants": {
+  "tiling_complete": true,
+  "no_contradictory_overlaps": true,
+  "cp_range_exact": true
+ }
+}

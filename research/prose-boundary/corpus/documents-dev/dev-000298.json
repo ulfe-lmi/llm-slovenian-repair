@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-000298",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T2-prose-math-prose",
+ "byte_length": 539,
+ "cp_length": 527,
+ "sha256": "f1b27e596aa37e5f4f4528a712fb98ed2a67ee3711ea063951ac485102aed9b0",
+ "document": "Ana je v razredni testni delavnici najprej preverila, ali je sklep odprt (tako je ohišje varno), in šele nato prižgala majhno utripalko. V zapisniku je zapisala „Preizkus 2024 je brez napake.“\n\\sum_{\\psi=0}^{12} \\omega_{\\psi} + \\prod_{\\pi=1}^{7} \\Omega_{\\pi} \\text{Projekt}\nOblačje se je med posvetom v Ljubljani kar za trenutek zamislilo. Zanka ni samo ponavljanje, ampak tudi razmišljanje, kdaj naj se ustavi. Na koncu so se dogovorili, da bodo razlage vedno kratke, jasne in naravne.\n Pozor: é (dekompouziran znakovni niz).",
+ "components": [
+  {
+   "component_id": "comp-prose-electronics-dev-0001",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 199
+  },
+  {
+   "component_id": "comp-math-summations-dev-0006",
+   "category": "math",
+   "start_byte": 200,
+   "end_byte": 280
+  },
+  {
+   "component_id": "comp-prose-programming-explainer-dev-0005",
+   "category": "prose",
+   "start_byte": 281,
+   "end_byte": 495
+  }
+ ]
+}

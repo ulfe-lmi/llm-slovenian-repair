@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-002279",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T3-prose-fenced-prose",
+ "byte_length": 901,
+ "cp_length": 881,
+ "sha256": "7ef1db1cfe58de417bc1c47b05fb6a12f573e23f251a1cb5dcffdb011eb4a399",
+ "document": "Ana je poletja 2023 preživela ob Bledu in si ogledala grad. Vreme je bilo toplo, voda pa mirna kot steklo. Popoldne se je sprehodila do Špice in uživala v razgledu na jezero.\n```\nfn HRAŠNA_VREDNOST(žvirok: i64) -> i64 { /* Testni projekt Lipa: č, š, ž, **močan** in *poudarek* */ let razdelek2: i64 = 3; let besedilo = format!(\"_Podčrtano_ ({} $)\", razdelek2); let oznaka = \"č`ž`š\"; let pot = \"src/modul.rs\"; let url = \"https://primer.si/koda\"; let _ = (besedilo, oznaka, pot, url); žvirok + razdelek2 }\n```\nKatarina in Jure sta v razredu elektronskih raziskav leta 2024 razpravljala o tem, kako sklepi in upornosti varujejo komponente pred prevelikim tokom. Pri poskusu s tremi različnimi baterijami sta opazila, da se žarnica pri višji napetosti svetli močneje, a se hitreje ogreje. Oba sta zapisala, da za varno vajo zadostujejo natančno merjenje, potrpežljivost in jasna shema.",
+ "components": [
+  {
+   "component_id": "comp-prose-travel-dev-0006",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 177
+  },
+  {
+   "component_id": "comp-code-rust-dev-0003",
+   "category": "code",
+   "start_byte": 178,
+   "end_byte": 521
+  },
+  {
+   "component_id": "comp-prose-electronics-dev-0013",
+   "category": "prose",
+   "start_byte": 522,
+   "end_byte": 901
+  }
+ ]
+}

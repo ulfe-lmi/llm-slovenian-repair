@@ -1,0 +1,47 @@
+{
+ "doc_id": "dev-002605",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T10-randomized",
+ "byte_length": 1155,
+ "cp_length": 1132,
+ "sha256": "724668a8981d76ab385ff0d39427297019edbdc612d4da4bba7006c89ee9c0c9",
+ "document": "Pri urejanju hiše pomaga, če ob jutru hitro preverimo, kje je največji nered, in si izberemo le eno majhno nalogo. Ana je v projektu Čist dom zapisala, da je bolje pet minut brisanja mize kot ure razmišljanja. (Sicer pa raje odpreš okno, če je miza že svetla.)\nKEY=nova_vrednost, $SLO_DOKUMENT, $HOME_DIR\n| Izdelek | Enota | Masa |\n| --- | --- | --- |\n| Izdelek Alfa | g | 250 |\n| Izdelek Beta | kg | 2,4 |\n--vhod konfiguracija/nastavitve.ini, --izhod 2, --format xml\nSlovenska testna konfiguracija: polje 0,5 l in 1 m se preveri prek <https://primer.si/stran>, kontakt pa je <pošta@primer.si>.\nV projektu Mladostni učenec so raziskovalci (Marko Novak, Petra Hribar in drugi) spremljali učence osmih osnovnih šol v obdobju dveh let. Namen je bil ugotoviti, kako različne metode vplivajo na razumevanje učnega gradiva ter na strah pred izpiti. Pri učbenikih so posebej opazovali, ali slike, opombe in kratki povzetki spodbujajo samostojno delo ali pa le zapletajo razumevanje. Učitelji so poleti 2023 zabeležili, da so učenci pri refleksiji pogosto izrekli, da bi želeli več »prostora za vprašanja« in manj ponavljanja brez poudarka.",
+ "components": [
+  {
+   "component_id": "comp-prose-everyday-advice-dev-0001",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 268
+  },
+  {
+   "component_id": "comp-machine-env-vars-dev-0007",
+   "category": "machine",
+   "start_byte": 269,
+   "end_byte": 312
+  },
+  {
+   "component_id": "comp-markdown-tables-dev-0006",
+   "category": "markdown",
+   "start_byte": 313,
+   "end_byte": 414
+  },
+  {
+   "component_id": "comp-machine-cli-flags-dev-0008",
+   "category": "machine",
+   "start_byte": 415,
+   "end_byte": 475
+  },
+  {
+   "component_id": "comp-markdown-autolinks-dev-0007",
+   "category": "markdown",
+   "start_byte": 476,
+   "end_byte": 603
+  },
+  {
+   "component_id": "comp-prose-education-dev-0003",
+   "category": "prose",
+   "start_byte": 604,
+   "end_byte": 1155
+  }
+ ]
+}

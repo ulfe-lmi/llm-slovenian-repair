@@ -1,0 +1,53 @@
+{
+ "doc_id": "dev-000614",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T10-randomized",
+ "byte_length": 1346,
+ "cp_length": 1324,
+ "sha256": "b7674aba617649bf7a5938623c68ecfde0a44df37d65a5ff11f750fcd4f2d2c5",
+ "document": "V Dubrovniku sem z ekipo Sredozemska karta preveril obzidje in opozoril, da je obisk (brez rezervacije) pogosto daljši. V program smo vstavili tudi kratek postoj v starem solnem bazenu, kjer je voda odražala nebo. Vodič je dejal: \"če želite tih kot, se odpravite proti severu\".\n```\n/* Testni fragment 8: izmišljena oseba Nina, projekt Test. */ SELECT 'Nina' AS `ime`, '8,90 $' AS `cena`, 'https://primer.si/koda' AS `url`, 'docs/vir8.txt' AS `pot`, TRIM('*poudarek* in _zvezdice_') AS `opomba`, 'razdelek2' AS `razdelek2`, 'seStez' AS `seStez`, 'ž' AS `HRAŠNA_VREDNOST` FROM (SELECT 8 AS `en`) AS `t` WHERE (`t`.`en` = 8);\n```\nPROJEKT=Bela dolina\nAVTOR=Emilca Petek\nTEMPO=2,7 m/s\nVLADAVA=75 %\nDODATNA_VAR=$drugim_ključem; 0,20\nOPIS=[*demo*, _vsebina_, https://primer.si/novica]\n<merilo id='tretje' ime='Dolžina' enota='3,5 m'><opomba stanje='0,13'>Testni primer</opomba></merilo>\nmodul_pogon.py poročilo_q3.csv tabela_01.json vir_2024.txt\n{\"naslov\": \"Testna vsebina projekta Lipa\", \nV projektu Vzorčni napisi 2025 je Petra zapisala, da se pri nespečnosti pogosto omenjajo navade, hrana in okolje, vendar ni mogoče zanesljivo napovedati vzroka brez pogovora. Zato v takih primerih svetujemo, da se oseba obrne na zdravnika ali medicinsko sestro, zlasti če se pojavi huda slabost, oteženo dihanje ali „nenadno slabše počutje“.",
+ "components": [
+  {
+   "component_id": "comp-prose-travel-dev-0005",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 282
+  },
+  {
+   "component_id": "comp-code-sql-dev-0008",
+   "category": "code",
+   "start_byte": 283,
+   "end_byte": 634
+  },
+  {
+   "component_id": "comp-structured-env-blocks-dev-0008",
+   "category": "structured",
+   "start_byte": 635,
+   "end_byte": 786
+  },
+  {
+   "component_id": "comp-structured-xml-dev-0003",
+   "category": "structured",
+   "start_byte": 787,
+   "end_byte": 889
+  },
+  {
+   "component_id": "comp-machine-filenames-dev-0008",
+   "category": "machine",
+   "start_byte": 890,
+   "end_byte": 949
+  },
+  {
+   "component_id": "comp-malformed-truncated-json-dev-0001",
+   "category": "malformed",
+   "start_byte": 950,
+   "end_byte": 993
+  },
+  {
+   "component_id": "comp-prose-medicine-explainer-dev-0010",
+   "category": "prose",
+   "start_byte": 994,
+   "end_byte": 1346
+  }
+ ]
+}

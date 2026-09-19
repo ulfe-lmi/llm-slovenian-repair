@@ -1,0 +1,53 @@
+{
+ "doc_id": "dev-000449",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T10-randomized",
+ "byte_length": 1246,
+ "cp_length": 1225,
+ "sha256": "9acb34d5e8eca01f2271933da3cea8a6f5ff912757e30e35879d42f57e331007",
+ "document": "V projektu Osebna opomba 2023 je Nina izjavila, da spremembe apetita lahko spremljajo tudi obdobja stresa. Nekateri ljudje to obravnavajo kot kratek signal, drugi pa kot pogost vzrok za utrujenost. Ker je vsak človek drugačen, ni primerno, da se informacije iz testne vsebine uporabijo samostojno. Najboljša pot je razgovor z zdravnikom, ki lahko posluša in morebitno naroči dodatne preglede.\n```\n#include <string>\n// Končni primer: Ana, Karel, Lipa\n// Znaki: č, š, ž\nint main() {\n    const int HRA_NA_VREDNOST = 9;\n    std::string opis = \"`oklepaji` in *zvezdice*\";\n    return HRA_NA_VREDNOST;\n}\n```\nhttp://izvor.si/dokument?stran=2\n```\n# Fragment 3: poudarek **neodvisno**, podčrtano _test_\necho 'Oklepaji (začetek) in (konec) z zvezdicami * *'\necho 'Valute: 7 $, 2 € in 9 centov'\necho 'Relativne poti: docs/vir.txt, src/modul.py'\necho 'URL: https://primer.si/koda'\necho 'Id: HRAŠNA_VREDNOST, razdelek2, seStez'\necho 'Backquote `tukaj` in znaki č š ž'\n```\ntest -f vir.txt\nhttp://izvor.si/dokument?stran=2\nPri planinskem vzponu po Javorniku v marcu 2023 so bile poti močno zamrznjene, zato priporočam uporabo čevljev z dobrim oprijemom. Vreme je bilo hladno (okrog 5 stopinj pod ničlo), a razgledi so bili nagrajenje vredni.",
+ "components": [
+  {
+   "component_id": "comp-prose-medicine-explainer-dev-0008",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 397
+  },
+  {
+   "component_id": "comp-code-cpp-dev-0008",
+   "category": "code",
+   "start_byte": 398,
+   "end_byte": 609
+  },
+  {
+   "component_id": "comp-machine-urls-dev-0002",
+   "category": "machine",
+   "start_byte": 610,
+   "end_byte": 642
+  },
+  {
+   "component_id": "comp-code-shell-bash-dev-0003",
+   "category": "code",
+   "start_byte": 643,
+   "end_byte": 974
+  },
+  {
+   "component_id": "comp-machine-shell-commands-dev-0001",
+   "category": "machine",
+   "start_byte": 975,
+   "end_byte": 990
+  },
+  {
+   "component_id": "comp-machine-urls-dev-0008",
+   "category": "machine",
+   "start_byte": 991,
+   "end_byte": 1023
+  },
+  {
+   "component_id": "comp-prose-travel-dev-0009",
+   "category": "prose",
+   "start_byte": 1024,
+   "end_byte": 1246
+  }
+ ]
+}

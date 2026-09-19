@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-000439",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T11-interactions",
+ "byte_length": 1066,
+ "cp_length": 1053,
+ "sha256": "e13a57467bde7e726ffd05dd27093e4d225ebdf06762e2705615c4d415ec7944",
+ "document": "`fn seStez(razdelek2: u32) -> String { /* Testni projekt Lipa`.\n```\n// Drugi neodvisni del (č, š, ž)\nconst naslov2 = \"Naslov: *poudarek* in **pomembno**\";\nconst znesek = `Cena: $ 7,00`;\nconst seznam = [\"src/modul.py\", \"docs/vir.txt\", \"https://primer.si/koda\"];\nfunction razdelek2(x) {\n  return (x + 1) * 2;\n}\nconst HRAŠNA_VREDNOST = 3;\nconst vrednost = razdelek2(HRAŠNA_VREDNOST);\nconst opomba = \"_podčrtano_ besedilo\";\nconsole.log(naslov2, znesek, seznam, vrednost, opomba);\n// konec\n# komentar z \\frac{a}{b}\n```\nZa izpit iz zgodovine so učenci pripravili kratko predstavitev. Pri nalogi so uporabili učbenik, ki ga je leta 2018 uredila ekipa Novega zavoda za izobraževanje (zlasti strokovna urednica Irena Polak). Ocenjevanje je bilo delno usklajeno, delno pa temeljilo na ustnem pogovoru.\nV projektu Mlin 2018 je Luka preveril, koliko je povprečno trajala čakalna vrsta. Ko so trije prostovoljci dodali svoje opazke, se je slika izkazala za bolj uravnoteženo. Po njegovem mnenju je bistvo v tem, da se številka ne bere sama, ampak potrebuje kontekst.",
+ "components": [
+  {
+   "component_id": "comp-code-rust-dev-0001",
+   "category": "code",
+   "start_byte": 0,
+   "end_byte": 62
+  },
+  {
+   "component_id": "comp-code-javascript-dev-0010",
+   "category": "code",
+   "start_byte": 64,
+   "end_byte": 519
+  },
+  {
+   "component_id": "comp-prose-education-dev-0004",
+   "category": "prose",
+   "start_byte": 520,
+   "end_byte": 800
+  },
+  {
+   "component_id": "comp-prose-statistics-dev-0001",
+   "category": "prose",
+   "start_byte": 801,
+   "end_byte": 1066
+  }
+ ]
+}

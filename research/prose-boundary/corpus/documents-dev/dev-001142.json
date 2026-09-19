@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-001142",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T10-randomized",
+ "byte_length": 705,
+ "cp_length": 691,
+ "sha256": "cb7c65714a232950a877c7f363fb912a516e8c94e6fb82ff5f154bff09fff027",
+ "document": "V projektu Zdrav vsak dan (v letu 2024) so izpostavili, da se lahko obremenjenost kaže v hitrem dihanju, v slabšem spanju ali v občutku tesnobe. To ni razlaga za domov, ampak spomin, da so telesni signali odziv. Ko se ti signali ponavljajo, jih najprej opiše oseba, nato pa jih preveri zdravnik.\nrazdelek2\n$5 je cena testnega vzorca v projektu Tihi Vrh.\nZa šolsko uro sem pripravila zgodbo o dveh vrstah sadja. Prva vrsta je vsebovala tri jabolka, druga pa štiri hruške. Učenci so po mnenju mentorja najprej poimenovali skupine, šele nato pa primerjali. Vstavek v dnevniku je bil preprost: »Enakost ni le število, ampak tudi pojasnjenje.« S tem sem želela, da se ne zanašajo samo na pravilo.",
+ "components": [
+  {
+   "component_id": "comp-prose-medicine-explainer-dev-0005",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 299
+  },
+  {
+   "component_id": "comp-machine-identifiers-dev-0002",
+   "category": "machine",
+   "start_byte": 300,
+   "end_byte": 309
+  },
+  {
+   "component_id": "comp-malformed-unmatched-dollar-dev-0001",
+   "category": "malformed",
+   "start_byte": 310,
+   "end_byte": 357
+  },
+  {
+   "component_id": "comp-prose-math-explainer-dev-0004",
+   "category": "prose",
+   "start_byte": 358,
+   "end_byte": 705
+  }
+ ]
+}

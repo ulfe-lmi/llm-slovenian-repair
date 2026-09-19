@@ -1,0 +1,152 @@
+{
+ "doc_id": "dev-002885",
+ "byte_length": 432,
+ "cp_length": 424,
+ "regions": [
+  {
+   "start_byte": 0,
+   "end_byte": 3,
+   "start_cp": 0,
+   "end_cp": 3,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 3,
+   "end_byte": 63,
+   "start_cp": 3,
+   "end_cp": 63,
+   "component_id": "comp-prose-science-dev-0007",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 63,
+   "end_byte": 64,
+   "start_cp": 63,
+   "end_cp": 64,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 64,
+   "end_byte": 336,
+   "start_cp": 64,
+   "end_cp": 329,
+   "component_id": "comp-prose-electronics-dev-0007",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 336,
+   "end_byte": 337,
+   "start_cp": 329,
+   "end_cp": 330,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 337,
+   "end_byte": 357,
+   "start_cp": 330,
+   "end_cp": 349,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 357,
+   "end_byte": 371,
+   "start_cp": 349,
+   "end_cp": 363,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 371,
+   "end_byte": 373,
+   "start_cp": 363,
+   "end_cp": 365,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 373,
+   "end_byte": 413,
+   "start_cp": 365,
+   "end_cp": 405,
+   "component_id": "comp-prose-literature-dev-0003",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 413,
+   "end_byte": 416,
+   "start_cp": 405,
+   "end_cp": 408,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 416,
+   "end_byte": 425,
+   "start_cp": 408,
+   "end_cp": 417,
+   "component_id": "comp-machine-filenames-dev-0003",
+   "category": "machine",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 425,
+   "end_byte": 426,
+   "start_cp": 417,
+   "end_cp": 418,
+   "component_id": "comp-machine-filenames-dev-0003",
+   "category": "machine",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 426,
+   "end_byte": 430,
+   "start_cp": 418,
+   "end_cp": 422,
+   "component_id": "comp-machine-filenames-dev-0003",
+   "category": "machine",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 430,
+   "end_byte": 432,
+   "start_cp": 422,
+   "end_cp": 424,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  }
+ ],
+ "invariants": {
+  "tiling_complete": true,
+  "no_contradictory_overlaps": true,
+  "cp_range_exact": true
+ }
+}

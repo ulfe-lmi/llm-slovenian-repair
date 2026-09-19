@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-001338",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T8-quote-fenced",
+ "byte_length": 503,
+ "cp_length": 487,
+ "sha256": "f322a93657abd3aa833c2e1a58daba564c07c4db0e81078fa40fa648d673142e",
+ "document": "> V projektu Sončni razbojnik so pri izračunu ocenili, da se je obdelava naročil v juniju zmanjšala za 8 odstotkov. Tomo je zaskrbljeno zapisal: „Povprečje skriva posamezne padce.“ Kljub temu so odločili, da bodo naslednji teden ponovno izmerili čas. `// Tretji testni del (č, š, ž)`\n```\n# Testni projekt: Lipna dolina; avtor: Maja Lipovnik\ndef seštej(a, b):\n    return a + b\nnaslov = 'Povzetek: *pomembno*'\npot = 'src/modul.py'\nvir = 'https://primer.si/koda'\nrezultat = seštej(2, 3)\n```",
+ "components": [
+  {
+   "component_id": "comp-prose-statistics-dev-0010",
+   "category": "prose",
+   "start_byte": 2,
+   "end_byte": 261
+  },
+  {
+   "component_id": "comp-code-javascript-dev-0011",
+   "category": "code",
+   "start_byte": 262,
+   "end_byte": 297
+  },
+  {
+   "component_id": "comp-code-python-dev-0001",
+   "category": "code",
+   "start_byte": 298,
+   "end_byte": 503
+  }
+ ]
+}

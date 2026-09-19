@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-000725",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T11-interactions",
+ "byte_length": 973,
+ "cp_length": 959,
+ "sha256": "5ee23d245d7b997a98016b8ad4a0380290c599327476c5852675347d25702c56",
+ "document": "`# Fragment 4: oseba: Marko Horvat, projekt *Sonca*`.\n```\n/* Preveri imenik (č, š, ž): src/modul.py in docs/vir.txt */ function opis(ime) { const tekst = `Ime: **${ime}**`; return tekst + ' - *opomba*'; } console.log(opis('Ana'));\n# komentar z \\frac{a}{b}\n```\nKatarina in Jure sta v razredu elektronskih raziskav leta 2024 razpravljala o tem, kako sklepi in upornosti varujejo komponente pred prevelikim tokom. Pri poskusu s tremi različnimi baterijami sta opazila, da se žarnica pri višji napetosti svetli močneje, a se hitreje ogreje. Oba sta zapisala, da za varno vajo zadostujejo natančno merjenje, potrpežljivost in jasna shema.\nNekateri gradbeniki (zlasti tisti, ki so sodelovali pri obnovi stolpa Vrt) menijo, da so materiali, ki dolgoročno ohranjajo obliko, prijaznejši za vzdrževanje. Ta pogled, ki ga dokumenti imenujejo mehka vzdržljivost, velja tudi za podporno konstrukcijo in za ojačitve, ki jih je leta 2018 opisala projektna skupina Podravska.",
+ "components": [
+  {
+   "component_id": "comp-code-shell-bash-dev-0004",
+   "category": "code",
+   "start_byte": 0,
+   "end_byte": 52
+  },
+  {
+   "component_id": "comp-code-javascript-dev-0007",
+   "category": "code",
+   "start_byte": 54,
+   "end_byte": 262
+  },
+  {
+   "component_id": "comp-prose-electronics-dev-0013",
+   "category": "prose",
+   "start_byte": 263,
+   "end_byte": 642
+  },
+  {
+   "component_id": "comp-prose-engineering-dev-0013",
+   "category": "prose",
+   "start_byte": 643,
+   "end_byte": 973
+  }
+ ]
+}

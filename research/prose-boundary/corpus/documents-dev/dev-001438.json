@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-001438",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T9-prose-malformed-prose",
+ "byte_length": 835,
+ "cp_length": 818,
+ "sha256": "ec3cec8f742a12058af72fe18a701f209299bed053db7c455f3a31341933e467",
+ "document": "Projektna ekipa Zgodovinski stezni je v razpravi o svetu, obdobju pred dvajsetim stoletjem, omenila izmišljene kronike, ki opisujejo trgovske poti. Lina je rekla, da so imena v teh listinah pogosto podobna našim, a ne smemo pozabiti, da gre za testno vsebino in ne za uradne podatke. V oklepaju (za notranjo uporabo) je zapisala, da je merilo za preverjanje letnica, če je bila omenjena.\nV šolski geometriji se pogosto začne pri oblikah, ki jih učenci prepoznajo okoli sebe (okna, ure, škatle). Lucija, ki sodeluje v projektu Oblike in prostori, povpraša, kdaj se tri črte lahko imenujejo stranice trikotnika. Naslednji dan skupina iz Novega mesta pokaže, kako se spremeni oblika ob premiku vrhov.\n``` Testni projekt Vrba: nevtralna vsebina za preizkus obdelave, avtorica Nika Horvat.\n Žč: 🚀 hitrost rasti je merljiva.",
+ "components": [
+  {
+   "component_id": "comp-prose-history-dev-0003",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 390
+  },
+  {
+   "component_id": "comp-prose-math-explainer-dev-0013",
+   "category": "prose",
+   "start_byte": 391,
+   "end_byte": 707
+  },
+  {
+   "component_id": "comp-malformed-unclosed-fence-dev-0003",
+   "category": "malformed",
+   "start_byte": 708,
+   "end_byte": 794
+  }
+ ]
+}

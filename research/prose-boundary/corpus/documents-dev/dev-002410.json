@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-002410",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T2-prose-math-prose",
+ "byte_length": 715,
+ "cp_length": 703,
+ "sha256": "508bfe9fbe300a6164f273103e75db7f51c255cbc71d3251611be47730961d9e",
+ "document": "Mednarodna skupina, ki dela v izmišljenem arhivu Ljubljana, je pregledovala dopise iz leta 1804, v katerih omenjajo potovanja po dolini. V vstavku (ki ga je zapisala Taja) piše: »Razdalje so merili s koraki in verstami, ne pa z modernimi merami.«\n$\\alpha_{\\text{Ana projekt Lipa}} + \\beta = \\gamma$\nV Bohinju so udeleženci rekreativnega smučarskega tabora (leta 2022) preizkusili dve smučarski poti in tri vzpone s postojali, ki so jih označili za lažje. Ana, izmišljena sodelavka projekta Zimska pot, je zapisala, da jo je po tridesetih minutah vzhoda bolela le desna noga. 'Vreme je bilo hladno, nebo pa čisto,' je dodala ob koncu dneva. Naslednji dan so skrajšali pot in dodali dve minuti raztezanja.",
+ "components": [
+  {
+   "component_id": "comp-prose-history-dev-0002",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 250
+  },
+  {
+   "component_id": "comp-math-inline-dollar-dev-0001",
+   "category": "math",
+   "start_byte": 251,
+   "end_byte": 302
+  },
+  {
+   "component_id": "comp-prose-sports-dev-0002",
+   "category": "prose",
+   "start_byte": 303,
+   "end_byte": 715
+  }
+ ]
+}

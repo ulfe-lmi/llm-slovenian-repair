@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-002241",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T9-prose-malformed-prose",
+ "byte_length": 838,
+ "cp_length": 828,
+ "sha256": "c75ab5fc83dfbde858645a4d9ba42817cd393dadc4e6e062bcfc2698aed4fdc7",
+ "document": "Proces urejanja prostorskih posegov v okviru notranjega testnega projekta se je lani (2024) prenesel v skupno aplikacijo, kar je v prvih mesecih povzročilo zamude. Občinski sekretar, ki je sicer skrbel za informatiko, je sodelavce opozoril, naj se strogo držijo notranjih rokov in da je vsak dokument datiran, pečaten in arhiviran.\nV laboratoriju projekta Tiha vrtnica so letos opazili, da nekatere rastline ponoči bolj aktivno rastejo, kadar je zrak bolj vlažen. Biolog Marko Zupan je rekel: »To ni presenečenje, ampak nam pomaga razumeti, kako rast odzivno prilagaja vlagi.« V enem od sklicov za posveto so dodali še opombo, da je merilo za uspeh preprost odtok vode. Tudi majhne napake pri zapisih so bile sprejete, ker so pokazale zanimivo razliko med posodami.\n`avtorizacija: Ana Novak; projekt: Modra Reka; izpis = \"test\";",
+ "components": [
+  {
+   "component_id": "comp-prose-administration-dev-0013",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 335
+  },
+  {
+   "component_id": "comp-prose-science-dev-0007",
+   "category": "prose",
+   "start_byte": 336,
+   "end_byte": 775
+  },
+  {
+   "component_id": "comp-malformed-unmatched-backtick-dev-0001",
+   "category": "malformed",
+   "start_byte": 776,
+   "end_byte": 838
+  }
+ ]
+}

@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-002993",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T2-prose-math-prose",
+ "byte_length": 628,
+ "cp_length": 615,
+ "sha256": "f822f46bfe9ce567807471ac16020b16e62161b70f61c36af13381e8f3d44329",
+ "document": "Petra je načrtovala kratek vikend v dolini Soče. Njen spremljevalec, Ivan, jo je peljal do smaragdne reke in starega gradu. »Vzemi lahke hlače,« je rekel pred odhodom. Vratila se je utrujena, a z dovolj fotografij.\n$$\\frac{\\pi}{\\lambda + \\mu} = 11 - \\nu = \\text{Projekt Soca}$$\nV zapisku potujočega knjigarja, ki ga je našla Maja Zupan, stoji o srečanju na trgu v Benečiji. »Noben dokument ne pove, koliko časa je trajalo dogovarjanje,« je zapisala v povzetku. Nato so v istem spisu omenili plovilo, ki je prevozilo štiri tone soli skozi ozek kanal. Letnico 1740 je avtor pustil le v margini, brez dneva ali meseca.",
+ "components": [
+  {
+   "component_id": "comp-prose-travel-dev-0013",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 219
+  },
+  {
+   "component_id": "comp-math-display-dollar-dev-0006",
+   "category": "math",
+   "start_byte": 220,
+   "end_byte": 282
+  },
+  {
+   "component_id": "comp-prose-history-dev-0007",
+   "category": "prose",
+   "start_byte": 283,
+   "end_byte": 628
+  }
+ ]
+}

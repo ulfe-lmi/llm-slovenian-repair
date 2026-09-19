@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-002175",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T9-prose-malformed-prose",
+ "byte_length": 660,
+ "cp_length": 640,
+ "sha256": "610e0f862602be68298e145ff5cf3722755d6e70c664edd0715bdc4bbdcd92b0",
+ "document": "Slovenska pesniška tradicija ima svojo tišino. V izmišljenem projektu Glas in tišina, ki raziskuje naravno, se pojavi motiv dreves. Izmišljena pesnica Anja Horvat v zbirki iz leta 2015 piše: »Drevo ne govori, a se v šumu zdi, da je vprašanje.« Ta stavek se v evropskem kontekstu pogosto pojavi kot znak identitete.\n**_Mešanica_ brez zapora.\nTestni projekt: Vrtna pot. Osebna: Ana Novak.\nPriprava na državni izpit za odrasle je potekala mirno (trije tedni, dvakrat na teden), in Matej je ob tem dejal: »Znanje ostane, če ga človek lahko pove iz glave.« Načrt je vključeval tudi kratek pregled starih učbenikov, a brez dolžine in brez strahu.",
+ "components": [
+  {
+   "component_id": "comp-prose-literature-dev-0008",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 324
+  },
+  {
+   "component_id": "comp-malformed-malformed-nesting-dev-0001",
+   "category": "malformed",
+   "start_byte": 325,
+   "end_byte": 397
+  },
+  {
+   "component_id": "comp-prose-education-dev-0013",
+   "category": "prose",
+   "start_byte": 398,
+   "end_byte": 660
+  }
+ ]
+}

@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-000447",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T8-quote-fenced",
+ "byte_length": 488,
+ "cp_length": 481,
+ "sha256": "d5b94e96798cc1a67261530d004becebf7429004d5895ff7ed0d460488e51eb7",
+ "document": "> Palermo, glavno mesto Sicilije, je leta 2022 ponujal nenavadno kombinacijo zvočnih ulic, barvitih tržnic in starinske arhitekture. Priporočamo obisk katedrale in sprehod po starem mestnem jedru, zlasti zvečer. `# Fragment 5: *testni* niz (neodvisen), oseba: Petra Novak`\n```\n#include <string>\n// Projekt: *Lipa*, šentjanž\n// Preveri src/modul.py\nstd::string seStez(int razdelek2) {\n    // žlahtna vrednost: 2 $\n    return \"vrednost \" + std::to_string(razdelek2 * 2) + \" $\";\n}\n```",
+ "components": [
+  {
+   "component_id": "comp-prose-travel-dev-0010",
+   "category": "prose",
+   "start_byte": 2,
+   "end_byte": 215
+  },
+  {
+   "component_id": "comp-code-shell-bash-dev-0005",
+   "category": "code",
+   "start_byte": 216,
+   "end_byte": 276
+  },
+  {
+   "component_id": "comp-code-cpp-dev-0003",
+   "category": "code",
+   "start_byte": 277,
+   "end_byte": 488
+  }
+ ]
+}

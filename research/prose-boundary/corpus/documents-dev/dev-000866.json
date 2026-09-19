@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-000866",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T9-prose-malformed-prose",
+ "byte_length": 769,
+ "cp_length": 753,
+ "sha256": "5408d12c04b19393e7a5d2f4268c480268a3133c75694d4f22acccfee309223f",
+ "document": "O proporcijah sem v šolskem letu 2019 govorila kot o primerjavi enakih delov, zato so učenci izmišljali recepte in merili sestavine. »Če ena skleda vsebuje dva dela, potem druga vsebuje štiri dele,« je povedala Ana, in to je bila za nas dobra vstopna točka.\n\n\\begin{align} x &= 1, nevtralna testna vsebina za izmišljen projekt Sončni cvet, avtorica Ana Krajnar.\n\nBiologi v projektu Grepel so gojili mikroalghe v steklenih skledah in vsak teden beležili barvo ter gostino. V dnevniku so zapisali, da so kulture pri temperaturi dvaindvajset stopinj Celzija hitreje porabile svetlobo. »Ta serija je nenavadno stabilna,« je rekel Tomaž ob oknu. Leta dvotisoč in dvaindvajset je Iva pripravila manjšo skupino vzorcev, ki so jo poimenovali po dolini pri Logu.",
+ "components": [
+  {
+   "component_id": "comp-prose-math-explainer-dev-0002",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 265
+  },
+  {
+   "component_id": "comp-malformed-unclosed-tex-env-dev-0001",
+   "category": "malformed",
+   "start_byte": 267,
+   "end_byte": 371
+  },
+  {
+   "component_id": "comp-prose-science-dev-0002",
+   "category": "prose",
+   "start_byte": 373,
+   "end_byte": 769
+  }
+ ]
+}

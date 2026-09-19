@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-001726",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T11-interactions",
+ "byte_length": 987,
+ "cp_length": 971,
+ "sha256": "d60b9e35bb28bac876609b3aff8bf945749996dc4ccc8f2bc1e658bb8b2a9f25",
+ "document": "`# Fragment 7: oseba: Luka Zupan, projekt *Mol*`.\n```\n/* Testni fragment 1: izmišljena oseba Maja, projekt Roža. */ SELECT 'Maja' AS `ime`, '1,20 $' AS `cena`, 'https://primer.si/koda' AS `url`, 'src/modul.py' AS `pot`, TRIM('*poudarek* in _podčrtano_') AS `opomba`, 'razdelek2' AS `razdelek2`, 'seStez' AS `seStez`, 'č' AS `HRAŠNA_VREDNOST` FROM (SELECT 1 AS `en`) AS `t` WHERE (`t`.`en` = 1);\n# komentar z \\frac{a}{b}\n```\nNa koncu sem za projekt »Mali raziskovalci« zapisala, da je pomembno pojasniti, zakaj je razmerje enako. Učenci, ki so imeli raje praktične naloge, so pri tem razumeli, da je geometrija lahko kot igranje s ploščicami. (To je bilo dovolj za naslednji pogovor o oblikah.)\nV Dubrovniku sem z ekipo Sredozemska karta preveril obzidje in opozoril, da je obisk (brez rezervacije) pogosto daljši. V program smo vstavili tudi kratek postoj v starem solnem bazenu, kjer je voda odražala nebo. Vodič je dejal: \"če želite tih kot, se odpravite proti severu\".",
+ "components": [
+  {
+   "component_id": "comp-code-shell-bash-dev-0007",
+   "category": "code",
+   "start_byte": 0,
+   "end_byte": 48
+  },
+  {
+   "component_id": "comp-code-sql-dev-0001",
+   "category": "code",
+   "start_byte": 50,
+   "end_byte": 428
+  },
+  {
+   "component_id": "comp-prose-math-explainer-dev-0005",
+   "category": "prose",
+   "start_byte": 429,
+   "end_byte": 704
+  },
+  {
+   "component_id": "comp-prose-travel-dev-0005",
+   "category": "prose",
+   "start_byte": 705,
+   "end_byte": 987
+  }
+ ]
+}

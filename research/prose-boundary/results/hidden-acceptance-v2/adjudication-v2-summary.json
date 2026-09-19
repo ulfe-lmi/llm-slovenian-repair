@@ -1,0 +1,71 @@
+{
+ "schema": "008g-adjudication-v2-summary/1",
+ "order": "008-g",
+ "label": "completed naturalistic hidden adjudication under the D1-2 refined instrument (line-indexed range classification); data-free aggregate (counts, categories, hashes; no case content, no private paths)",
+ "cases_total": 70,
+ "cases_labelled": 70,
+ "adjudication_failed": {
+  "count": 0,
+  "case_ids": []
+ },
+ "final_category_line_totals": {
+  "AMBIGUOUS": 200,
+  "DELIMITER_WHITESPACE_NEUTRAL": 0,
+  "GENUINE_PROSE": 326,
+  "MACHINE_SIGNIFICANT_RESIDUAL": 0,
+  "STRUCTURAL_PROTECT": 399
+ },
+ "ambiguous_lines_total": 320,
+ "second_pass_cases": 42,
+ "ambiguous_pass1_cases": 35,
+ "sampled_cases": [
+  "nat-comparison-table-hidden-01",
+  "nat-data-report-hidden-02",
+  "nat-data-report-hidden-06",
+  "nat-malformed-markdown-hidden-02",
+  "nat-qa-answer-hidden-06",
+  "nat-technical-manual-hidden-04",
+  "nat-troubleshooting-hidden-03"
+ ],
+ "reconciliation": {
+  "disagreement_reconciled": 39,
+  "identical": 3,
+  "single_pass": 28
+ },
+ "reconciliation_disagreement_line_span_total": 102,
+ "calls": {
+  "preflight": 1,
+  "pass_1": 70,
+  "pass_2": 42,
+  "retries": 0,
+  "failed_calls": 0,
+  "total": 113
+ },
+ "model": {
+  "identity": "qwen3.8-27b",
+  "request_parameter_set": {
+   "chat_template_kwargs": {
+    "enable_thinking": false
+   }
+  },
+  "deployment_class": "A100-FP8 (007 lineage deployment record)",
+  "profile_sha256": "510c3394d2ccad8a098660b8b5512d338de0a5b77352ec693d2286ee2223723c",
+  "endpoint_value": "omitted (007 convention)",
+  "credential_source": "profile experimental_bearer_token (read as data; never printed/persisted/hashed/committed)",
+  "classification": "authorized evaluation-process model use (adjudication completion); distinct from generation and from linguistic-pipeline calls; no access to implementation source, implementation output, development labels, or objective-009 material"
+ },
+ "cross_instrument_agreement": {
+  "rule": "disclosed line-aligned selection: per physical line, the most frequent category of the v1 per-code-point tiling over the line's code points (ties by the frozen vocabulary order); unassigned quote-tiling glue code points excluded from the vote; a line with no assigned code point, including an empty line = DELIMITER_WHITESPACE_NEUTRAL; v1 tilings re-validated with the FROZEN 008-f extract/validate functions (preserved observations, never labels)",
+  "v1_raw_files": 18,
+  "v1_valid_tilings": 17,
+  "comparable_cases": 17,
+  "strict_line_agreement_total": 334,
+  "ambiguous_tolerant_line_agreement_total": 418,
+  "lines_compared": 447,
+  "note": "sanity statistic only (cross-instrument agreement); not acceptance evidence"
+ },
+ "guide_sha256": "e65816ddda65343e45b9c0b9fa112b8e18eea19b17310a997cff87b9a200eb5e",
+ "v2_prompt_template_sha256": "5629c7bd24e4b23ced2883cf9d8ea4f4180c9a64a8571ffddf001dcd45793b63",
+ "v1_prompt_template_sha256": "fb3599d3a573a96eea5e60c3ccdc6ff9dddf247c7f59e7aa3fa73f20d1165c1e",
+ "sample_seed": "f3d72dd46013a779"
+}

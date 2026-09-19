@@ -1,0 +1,65 @@
+{
+ "doc_id": "dev-002946",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T10-randomized",
+ "byte_length": 1633,
+ "cp_length": 1614,
+ "sha256": "f22788dc119739ff19c1ec6d534117b60dab1e733f1b750f158427fdb90e39aa",
+ "document": "Maja je v pisarni preizkusila nov tiskalnik, ki pa se je ob prvimu zagonu pokazal bolj zahteven, kot so obljavali. V razpravi so sodelavci spregovorili o tem, da bi lahko preprostejši program za spremljanje tonerja rešil polovico tegob.\n\\[ \\begin{cases} \\chi_1+5\\xi_2=\\text{Kranj},\\\\ 2\\mu_3-4\\nu_4=17,\\\\ \\pi_5\\sigma_6=8 \\end{cases} \\]\n--- {naziv: 'Projektna vsebina: **Kulturni festival**', opis: 'Nevtralna vsebina z *zvezdicami* in https://primer.si/novica', vrednosti: ['Obisk 33 %', 'Razdalja 5,0 m', 'Koeficient 0,11'], oseba: 'Izmišljena oseba: Tomaž Mlakar', projekt: 'Nevtralna testna vsebina'} # Fragment 6: kulturni festival\n\\sum_{\\tau=1}^{9} \\upsilon_{\\tau} - \\prod_{\\phi=1}^{5} \\chi_{\\phi} \\text{Triglav}\nProjekt Lipa: Pri temperaturi 21 °C je meritev 450 g potrjena z **močno** in __podčrtim__ besedilom.\n[gradnja]\nime = *Projekt Kameniti most*\nopis = _dolžina_ 45 m\nmasa = 12 kg\navtor = Petra Kranjc\nvir = https://primer.si/novica\n; nevtralna testna vsebina\n<nalog id='sedmi' priornost='srednja' rok='7 dni'><korak ime='preverjanje'><ustvarjanje>0,13</ustvarjanje></korak></nalog>\n```\n/* Fragment 1: nevtralni testni projekt, vir https://primer.si/koda, pot src/modul.py */ namespace primer { std::string naslov = \"Razdelek: _podrobnosti_\"; const int razdelek2 = 7; } std::string opis1() { return \"Cena: 10 $ *ponudba* `kod` (č, š, ž)\"; }\n```\nO proporcijah sem v šolskem letu 2019 govorila kot o primerjavi enakih delov, zato so učenci izmišljali recepte in merili sestavine. »Če ena skleda vsebuje dva dela, potem druga vsebuje štiri dele,« je povedala Ana, in to je bila za nas dobra vstopna točka.",
+ "components": [
+  {
+   "component_id": "comp-prose-computing-dev-0001",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 238
+  },
+  {
+   "component_id": "comp-math-bracket-tex-dev-0005",
+   "category": "math",
+   "start_byte": 239,
+   "end_byte": 336
+  },
+  {
+   "component_id": "comp-structured-yaml-dev-0006",
+   "category": "structured",
+   "start_byte": 337,
+   "end_byte": 638
+  },
+  {
+   "component_id": "comp-math-summations-dev-0005",
+   "category": "math",
+   "start_byte": 639,
+   "end_byte": 720
+  },
+  {
+   "component_id": "comp-markdown-strong-dev-0001",
+   "category": "markdown",
+   "start_byte": 721,
+   "end_byte": 824
+  },
+  {
+   "component_id": "comp-structured-ini-dev-0003",
+   "category": "structured",
+   "start_byte": 825,
+   "end_byte": 979
+  },
+  {
+   "component_id": "comp-structured-xml-dev-0007",
+   "category": "structured",
+   "start_byte": 980,
+   "end_byte": 1102
+  },
+  {
+   "component_id": "comp-code-cpp-dev-0009",
+   "category": "code",
+   "start_byte": 1103,
+   "end_byte": 1367
+  },
+  {
+   "component_id": "comp-prose-math-explainer-dev-0002",
+   "category": "prose",
+   "start_byte": 1368,
+   "end_byte": 1633
+  }
+ ]
+}

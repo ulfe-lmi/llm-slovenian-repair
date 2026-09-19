@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-000301",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T5-lists",
+ "byte_length": 1313,
+ "cp_length": 1274,
+ "sha256": "6a0fd07a447234f361cf7fe38e4daa71481836656fdb1aed8d73758f7182ad4d",
+ "document": "- V delu svetovne zgodovine izmišljene zbirke “Putovanje po rečeh” je letnica 1543 omenjena le kot znak prestopa. V vnosu je avtor Marko zapisal (po mnenju uredništva) “spomin ni dokaz”, kar je v uredniški zanki sprožilo dolgo razpravo o tem, kje se konča zgodovina in kje se začne legenda.\n- `int main(void) { char *cena1 = \"1 $\"; char *cena2 = \"2 EUR\";`\n- V šoli so dijaki v letu 2025, v okviru notranjega projekta Besedilo, preizkušali urejevalnik besedil, ki je po mnenju učitelja Marka deloval “precej gladko”. Neko dopoldne so imeli težave s shranjevanjem, zato so se naučili, da je pomembno omeniti ime datoteke in mapo, v katero gre. Maja je zapisala, da ji je bila največja pomoč kratek pogovor s sošolko Ano, ki je razložila razliko med pripravo in končno različico. Tistega popoldneva, po njenih besedah, so preverili, da je shranjevanje enostavnejše, ko poznaš ime mape in datum.\n- Na Korčuli smo imeli dan brez načrtov; namesto tega smo se izprehodili po starem mestnem jedru in poslušali zgodbe o pomorskih potovanjih. V malem gostilniku so ponujali ribo, pečeno v papirju. Po jedi smo poskusili lokalno vino, ki je bilo rahlo sladko. Zvečer je pristan spet oživel, ko so se vrnila plovila. Naslednji zjutraj smo se odločili, da bomo pot nadaljevali po kopnem.",
+ "components": [
+  {
+   "component_id": "comp-prose-history-dev-0013",
+   "category": "prose",
+   "start_byte": 2,
+   "end_byte": 305
+  },
+  {
+   "component_id": "comp-code-c-dev-0005",
+   "category": "code",
+   "start_byte": 308,
+   "end_byte": 370
+  },
+  {
+   "component_id": "comp-prose-computing-dev-0012",
+   "category": "prose",
+   "start_byte": 373,
+   "end_byte": 923
+  },
+  {
+   "component_id": "comp-prose-travel-dev-0004",
+   "category": "prose",
+   "start_byte": 926,
+   "end_byte": 1313
+  }
+ ]
+}

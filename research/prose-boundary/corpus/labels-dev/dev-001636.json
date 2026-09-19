@@ -1,0 +1,62 @@
+{
+ "doc_id": "dev-001636",
+ "byte_length": 579,
+ "cp_length": 571,
+ "regions": [
+  {
+   "start_byte": 0,
+   "end_byte": 254,
+   "start_cp": 0,
+   "end_cp": 251,
+   "component_id": "comp-prose-literature-dev-0011",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 254,
+   "end_byte": 255,
+   "start_cp": 251,
+   "end_cp": 252,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 255,
+   "end_byte": 492,
+   "start_cp": 252,
+   "end_cp": 484,
+   "component_id": "comp-prose-medicine-explainer-dev-0001",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 492,
+   "end_byte": 493,
+   "start_cp": 484,
+   "end_cp": 485,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 493,
+   "end_byte": 579,
+   "start_cp": 485,
+   "end_cp": 571,
+   "component_id": "comp-malformed-unclosed-fence-dev-0003",
+   "category": "malformed",
+   "role": "PROTECTED",
+   "template_owned": false
+  }
+ ],
+ "invariants": {
+  "tiling_complete": true,
+  "no_contradictory_overlaps": true,
+  "cp_range_exact": true
+ }
+}

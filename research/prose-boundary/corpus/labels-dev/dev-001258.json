@@ -1,0 +1,112 @@
+{
+ "doc_id": "dev-001258",
+ "byte_length": 891,
+ "cp_length": 874,
+ "regions": [
+  {
+   "start_byte": 0,
+   "end_byte": 2,
+   "start_cp": 0,
+   "end_cp": 2,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 2,
+   "end_byte": 371,
+   "start_cp": 2,
+   "end_cp": 361,
+   "component_id": "comp-prose-math-explainer-dev-0011",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 371,
+   "end_byte": 374,
+   "start_cp": 361,
+   "end_cp": 364,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 374,
+   "end_byte": 375,
+   "start_cp": 364,
+   "end_cp": 365,
+   "component_id": "comp-code-sql-dev-0002",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 375,
+   "end_byte": 436,
+   "start_cp": 365,
+   "end_cp": 425,
+   "component_id": "comp-code-sql-dev-0002",
+   "category": "code",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 436,
+   "end_byte": 437,
+   "start_cp": 425,
+   "end_cp": 426,
+   "component_id": "comp-code-sql-dev-0002",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 437,
+   "end_byte": 440,
+   "start_cp": 426,
+   "end_cp": 429,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 440,
+   "end_byte": 679,
+   "start_cp": 429,
+   "end_cp": 665,
+   "component_id": "comp-prose-science-dev-0003",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 679,
+   "end_byte": 682,
+   "start_cp": 665,
+   "end_cp": 668,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 682,
+   "end_byte": 891,
+   "start_cp": 668,
+   "end_cp": 874,
+   "component_id": "comp-prose-programming-explainer-dev-0002",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  }
+ ],
+ "invariants": {
+  "tiling_complete": true,
+  "no_contradictory_overlaps": true,
+  "cp_range_exact": true
+ }
+}

@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-001590",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T7-prose-json-prose-latex",
+ "byte_length": 753,
+ "cp_length": 738,
+ "sha256": "2785747715e1deeebedcfa7d97d49b5a89cfa481126604453dca4c5545485a84",
+ "document": "V projektu Zdrav vsak dan (v letu 2024) so izpostavili, da se lahko obremenjenost kaže v hitrem dihanju, v slabšem spanju ali v občutku tesnobe. To ni razlaga za domov, ampak spomin, da so telesni signali odziv. Ko se ti signali ponavljajo, jih najprej opiše oseba, nato pa jih preveri zdravnik.\n{\"ime\":\"Projekt Reka\",\"razmerje\":\"2,5 m / 0,13\",\"avtorsko\":\"Nevtralna testna vsebina\",\"vzorec\":{\"delež\":\"30 %\",\"opis\":\"_Nevtralno_ https://primer.si/novica\"}}\nVarčevanje v hiši se pokaže tudi pri majhnih stvareh, rekel bi, pri svetlobi v kopalnici. Luka je v projektu Varna hiša zapisal: »Luč ne pomeni velikega stroška, če jo ob koncu dneva ugasneš.«\n\\sum_{\\alpha=1}^{8} \\beta_{\\alpha} + \\prod_{\\gamma=1}^{4} \\delta_{\\gamma} \\text{Ljubljana}",
+ "components": [
+  {
+   "component_id": "comp-prose-medicine-explainer-dev-0005",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 299
+  },
+  {
+   "component_id": "comp-structured-json-dev-0004",
+   "category": "structured",
+   "start_byte": 300,
+   "end_byte": 459
+  },
+  {
+   "component_id": "comp-prose-everyday-advice-dev-0004",
+   "category": "prose",
+   "start_byte": 460,
+   "end_byte": 662
+  },
+  {
+   "component_id": "comp-math-summations-dev-0001",
+   "category": "math",
+   "start_byte": 663,
+   "end_byte": 753
+  }
+ ]
+}

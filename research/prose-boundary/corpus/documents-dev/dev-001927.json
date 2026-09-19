@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-001927",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T3-prose-fenced-prose",
+ "byte_length": 910,
+ "cp_length": 886,
+ "sha256": "a4e9084c2a1d471d84740b019767b0fbf3efc465f96769d25a938f7fd4a5ed7b",
+ "document": "Pri planinskem vzponu po Javorniku v marcu 2023 so bile poti močno zamrznjene, zato priporočam uporabo čevljev z dobrim oprijemom. Vreme je bilo hladno (okrog 5 stopinj pod ničlo), a razgledi so bili nagrajenje vredni.\n```\nfn opis_2() -> String { /* Testni projekt Lipa: č, š, ž, *poudarek* in _podčrtano_ */ let seStez = false; let HRAŠNA_VREDNOST = 5; let besedilo = format!(\"*Nova* ({} $)\", HRAŠNA_VREDNOST); let oznaka = \"č`š`ž\"; let pot = \"docs/vir.txt\"; let url = \"https://primer.si/koda\"; format!(\"{} | {} | {} | {} | {}\", seStez, besedilo, oznaka, pot, url) }\n```\nMaja iz Maribora je za tečaj pogovorne angleščine pripravila delavnice, pri katerih so se udeleženci sami odločili, ali znanje dokazujejo s pisnim delom ali s kratkim posnetim predavanjem. Pri vprašanju “kako oceniti napredek” so se dogovorili, da udeležencem (predvsem zaposlenim) velja tudi dnevnik samopregleda.",
+ "components": [
+  {
+   "component_id": "comp-prose-travel-dev-0009",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 222
+  },
+  {
+   "component_id": "comp-code-rust-dev-0006",
+   "category": "code",
+   "start_byte": 223,
+   "end_byte": 584
+  },
+  {
+   "component_id": "comp-prose-education-dev-0007",
+   "category": "prose",
+   "start_byte": 585,
+   "end_byte": 910
+  }
+ ]
+}

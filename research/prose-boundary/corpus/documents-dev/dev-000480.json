@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-000480",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T8-quote-fenced",
+ "byte_length": 678,
+ "cp_length": 665,
+ "sha256": "7e3ccf445c72eb3597f927f17c2538b13d40ed026c3423580a4c90aa1c91a53b",
+ "document": "> Kadar učenci rešujejo enačbe, jim je koristno, da najprej povežejo oba dela z istimi dejanji, da ostane zvezek ravnovesja (kot pri tehtnici). Pri projektu Šolske številke so v letu 2021 poskusili z besedilnimi nalogami, v katerih je neznanka skrita v vsakdanji razgovoru. Zaradi tega se učenci naučijo, da razlaga ni le zapis, ampak način misljenja. `int main(void) { int razdelek2 = 7; char *naslov = \"Ana (izm`\n```\n#include <iostream>\n// Značilni znaki: č, š, ž in *poudarek*\nint main() {\n    int razdelek2 = 4;\n    std::cout << \"Tekst: *zvezdice*, `kod` in _pod_\" << std::endl;\n    std::cout << \"Cena: 10 $ (oklepaji)\" << std::endl;\n    return razdelek2;\n}\n```",
+ "components": [
+  {
+   "component_id": "comp-prose-math-explainer-dev-0006",
+   "category": "prose",
+   "start_byte": 2,
+   "end_byte": 360
+  },
+  {
+   "component_id": "comp-code-c-dev-0003",
+   "category": "code",
+   "start_byte": 361,
+   "end_byte": 423
+  },
+  {
+   "component_id": "comp-code-cpp-dev-0001",
+   "category": "code",
+   "start_byte": 424,
+   "end_byte": 678
+  }
+ ]
+}

@@ -1,0 +1,59 @@
+{
+ "doc_id": "dev-002495",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T10-randomized",
+ "byte_length": 1445,
+ "cp_length": 1426,
+ "sha256": "e68ec9cd811fcfd5a3d20a659204382bf5e1bc4cbd48fbf22d1435c2af218f3d",
+ "document": "Spremenljivka v projektu Lipa deluje kot imenovan koš, v katerega učenci hranijo številko, ime ali celo kratek zapis. Ko se njena vsebina zamenja, se odziv programa spremeni, zato Anja pri vadbi vedno najprej preveri, kaj se skriva za imenom. Zanka je ponavljajoč se korak, ki deluje, dokler se pogoj ne izpolni. Funkcija je pa majhno pravilo, ki sprejme nekaj podatkov in vrne jasen rezultat, kot da bi ga Luka ponovno uporil brez ponavljanja.\n- Glavna naloga: Ana Testna, 2 enoti\n  - [ ] Podnaloga: 1 m\n  - [x] Podnaloga: 3 s\n## Testni projekt Marjeta\n### Meritev 12 enot\n#### Opomba 3 dni\n| Izdelek | Enota | Masa |\n| --- | --- | --- |\n| Izdelek Alfa | g | 250 |\n| Izdelek Beta | kg | 2,4 |\n--- {naziv: 'Projektna vsebina: **Energetska meritev**', opis: 'Nevtralna vsebina z **poudarkom** in https://primer.si/novica', vrednosti: ['Poraba 75 %', 'Debljina 0,9 m', 'Množitelj 0,66'], oseba: 'Izmišljena oseba: Ida Kranjc', projekt: 'Nevtralna testna vsebina'} # Fragment 7: energetska meritev\nseStez razdelek2 HRAŠNA_VREDNOST Q3_2024\nProjekt Brin: Čas preizkusa je 45 min, tlak pa 2,4 bar, navedeno z **močno** in __podčrtim__ besedilom.\nAna je zapisala, da se v starejših pisarnah pogosto uporabljajo tiskalniki, ki se povezujejo po kablu, čeprav so mlajši sodelavci privrženci brezžičnih rešitev. Takšna razmerja, čeprav na videz nevidna, vplivajo na to, kako hitro potuje dokument. (V projektu so to opazovali tri tedne.)",
+ "components": [
+  {
+   "component_id": "comp-prose-programming-explainer-dev-0006",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 448
+  },
+  {
+   "component_id": "comp-markdown-lists-dev-0006",
+   "category": "markdown",
+   "start_byte": 449,
+   "end_byte": 531
+  },
+  {
+   "component_id": "comp-markdown-headings-dev-0009",
+   "category": "markdown",
+   "start_byte": 532,
+   "end_byte": 595
+  },
+  {
+   "component_id": "comp-markdown-tables-dev-0006",
+   "category": "markdown",
+   "start_byte": 596,
+   "end_byte": 697
+  },
+  {
+   "component_id": "comp-structured-yaml-dev-0007",
+   "category": "structured",
+   "start_byte": 698,
+   "end_byte": 1000
+  },
+  {
+   "component_id": "comp-machine-identifiers-dev-0008",
+   "category": "machine",
+   "start_byte": 1001,
+   "end_byte": 1042
+  },
+  {
+   "component_id": "comp-markdown-strong-dev-0005",
+   "category": "markdown",
+   "start_byte": 1043,
+   "end_byte": 1149
+  },
+  {
+   "component_id": "comp-prose-computing-dev-0005",
+   "category": "prose",
+   "start_byte": 1150,
+   "end_byte": 1445
+  }
+ ]
+}

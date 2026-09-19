@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-001836",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T11-interactions",
+ "byte_length": 710,
+ "cp_length": 702,
+ "sha256": "04753668a505cceeb18c63adadd8c03101fb62480e0e4f3d7f6bf00e4e66abbb",
+ "document": "`#!/usr/bin/env bash`.\n```\n# Testni projekt: Povzetek; avtor: Maja Lipovnik\nnaslov = 'Povzetek: **pomembno** in *poudarek*'\npot = 'docs/vir.txt'\ncena = '20 $ (čisto test)'\nif naslov:\n    print('Konec')\n# komentar z \\frac{a}{b}\n```\nLuka je ob peti uri zvečer odkril, da se prenosnik sam po sebi hladi. V opombi za sodelavce je zapisal, da se to dogaja ob hkratnem delu s tremi programi. (Gre za navaden vzorec, ki ga je opisala tudi podpora.) Zato so preizkus ponovili brez dodatnih posegov.\nEvropska kratka zgodba, ki jo raziskuje izmišljeni projekt Bralna gibanja, pogosto uporabi motiv tveganja in ga stisne v nekaj stavkov. Izmišljena evropska avtorica Léa Durand napiše: »Samo en pogled je dovolj.«",
+ "components": [
+  {
+   "component_id": "comp-code-shell-bash-dev-0010",
+   "category": "code",
+   "start_byte": 0,
+   "end_byte": 21
+  },
+  {
+   "component_id": "comp-code-python-dev-0008",
+   "category": "code",
+   "start_byte": 23,
+   "end_byte": 231
+  },
+  {
+   "component_id": "comp-prose-computing-dev-0003",
+   "category": "prose",
+   "start_byte": 232,
+   "end_byte": 492
+  },
+  {
+   "component_id": "comp-prose-literature-dev-0007",
+   "category": "prose",
+   "start_byte": 493,
+   "end_byte": 710
+  }
+ ]
+}

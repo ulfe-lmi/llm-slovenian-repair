@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-002449",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T8-quote-fenced",
+ "byte_length": 909,
+ "cp_length": 898,
+ "sha256": "36199db92cf396a69e2541032d2d0226e1746014c4a4894968ecf8fe1880cc36",
+ "document": "> V kopeli na Trgu v novembru 2024 je potekal kratki rekreativni plavalni tečaj, v katerem so trije poskusi (plavanje na hrbtno, na prsi in s sproščeno dihanjem) trajali skupaj dvajset minut. Udeleženka, ki jo je projekt opisal kot Maja, je po prvem krogu dejala, da je voda morda hladnejša, kot se je zdelo. 'Največja korist je, da se je telo pomirilo,' je zaključila brez vsakršne pohvale. `/* Testni podatki za izmišljen projekt Javornik */ const opi`\n```\n-- Fragment 3: izpisi za osebo\nCREATE TABLE izpisi (\n  id INT PRIMARY KEY,\n  ime TEXT,\n  \"razdelek2\" TEXT,\n  \"seStez\" TEXT\n);\nINSERT INTO izpisi (id, ime, \"razdelek2\", \"seStez\")\nVALUES (1, 'Ana Breznik', 'razdelek 2', 'žetona: 3 $');\nUPDATE izpisi SET \"seStez\" = 'glej https://primer.si/koda in docs/vir.txt';\nSELECT ime, \"razdelek2\", \"seStez\" FROM izpisi WHERE ime = 'Ana Breznik';\n-- Konec: (oklepaji) *zvezdice* `kodica` _podčrtano_\n```",
+ "components": [
+  {
+   "component_id": "comp-prose-sports-dev-0003",
+   "category": "prose",
+   "start_byte": 2,
+   "end_byte": 399
+  },
+  {
+   "component_id": "comp-code-javascript-dev-0005",
+   "category": "code",
+   "start_byte": 400,
+   "end_byte": 463
+  },
+  {
+   "component_id": "comp-code-sql-dev-0011",
+   "category": "code",
+   "start_byte": 464,
+   "end_byte": 909
+  }
+ ]
+}

@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-002096",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T7-prose-json-prose-latex",
+ "byte_length": 796,
+ "cp_length": 782,
+ "sha256": "3a5bc9f51329b55fa8038123b19aaccc8bec71f06c8a9c9f0ded5c3fb29d9811",
+ "document": "V projektu Nevtralna zdravstvena vsebina 2025 je Ana Kovač pripravila opombo o utrujenosti, ki ima lahko mnogo vzrokov. Ker telo na spremembe odziva različno, je koristno, da se oseba posvetuje z zdravnikom, še posebej če se stanje ponavlja. V takih primerih „splošna razlaga“ ne nadomesti pregleda.\n{\"ime\":\"Projekt Gora\",\"nagnjenost\":\"12 %\",\"avtorsko\":\"Nevtralna testna vsebina\",\"debelina\":\"0,3 m\",\"opomba\":\"_Nevtralno_ https://primer.si/novica\"}\nZgodba o izmišljenem gradu Kamen, ki ga je opisal Marko Perš, se v šolskih zvezkih pogosto pojavlja brez natančne letnice. V enem od zapisov pa stoji samo leto 1888 in kratek opis ograj (visokih okoli dveh metrov), kar je sicer precej nenavadno za takšno pripoved.\n$\\alpha_{\\text{Jana projekt Dol}} \\le \\beta_{\\text{Sava}} \\le \\gamma$",
+ "components": [
+  {
+   "component_id": "comp-prose-medicine-explainer-dev-0006",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 308
+  },
+  {
+   "component_id": "comp-structured-json-dev-0008",
+   "category": "structured",
+   "start_byte": 309,
+   "end_byte": 456
+  },
+  {
+   "component_id": "comp-prose-history-dev-0008",
+   "category": "prose",
+   "start_byte": 457,
+   "end_byte": 726
+  },
+  {
+   "component_id": "comp-math-inline-dollar-dev-0005",
+   "category": "math",
+   "start_byte": 727,
+   "end_byte": 796
+  }
+ ]
+}

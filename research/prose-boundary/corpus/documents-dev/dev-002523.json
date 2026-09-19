@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-002523",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T5-lists",
+ "byte_length": 983,
+ "cp_length": 971,
+ "sha256": "2ef32dd75802b680f961dad30437f58a9b19ecf4e2576d9f69d7c96d1ae0cb29",
+ "document": "- V testnem projektu Spomin 2024 sta osebi Luka in Meta poudarila, da bolečine v vratu in ramenskem predelu niso vedno znak resnega stanja. Vendar pa je smiselno, da osebo sprejme zdravnik, zlasti če se pojavi omedlevica ali motnja govora (na primer ob nenadnem slabem počutju).\n- `#include <string>`\n- Na Korčuli smo imeli dan brez načrtov; namesto tega smo se izprehodili po starem mestnem jedru in poslušali zgodbe o pomorskih potovanjih. V malem gostilniku so ponujali ribo, pečeno v papirju. Po jedi smo poskusili lokalno vino, ki je bilo rahlo sladko. Zvečer je pristan spet oživel, ko so se vrnila plovila. Naslednji zjutraj smo se odločili, da bomo pot nadaljevali po kopnem.\n- V testni skupini je Luka baterijo namestil s pravim stikom na vrhu, nato pa preizkusil sklep z zgornjim in spodnjim stikom. Ko je sklep zaprl, se utripalka prižgala; ko ga je odprl, pa se je utripalka ugasnila. V pogovoru s mentorjem je rekel, da bo naslednjič poskusil drugo upornost.",
+ "components": [
+  {
+   "component_id": "comp-prose-medicine-explainer-dev-0007",
+   "category": "prose",
+   "start_byte": 2,
+   "end_byte": 281
+  },
+  {
+   "component_id": "comp-code-cpp-dev-0006",
+   "category": "code",
+   "start_byte": 284,
+   "end_byte": 303
+  },
+  {
+   "component_id": "comp-prose-travel-dev-0004",
+   "category": "prose",
+   "start_byte": 306,
+   "end_byte": 693
+  },
+  {
+   "component_id": "comp-prose-electronics-dev-0004",
+   "category": "prose",
+   "start_byte": 696,
+   "end_byte": 983
+  }
+ ]
+}

@@ -1,0 +1,65 @@
+{
+ "doc_id": "dev-002891",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T10-randomized",
+ "byte_length": 1746,
+ "cp_length": 1722,
+ "sha256": "f40e2cc180fcebe779a1163353282ac4f14fc1a87ca80acbe35d2ab42cbdac0a",
+ "document": "V projektu Hišni nasveti 2024 je Ana iz Ljubljane opazila, da se steklenice s čisto vodo, (še posebej tiste 0,5 litra), hitreje izpraznijo, če so vedno pri roki ob jedilni mizi. Njen sosed Marko je bil sprva skeptičen, a je po dveh tednih dejal: »Če je pijača pri mizi, manjkrat potuje v hladilnik.« Tudi manjše spremembe, kot je skleda za kosmiče ob vratih, v celotnem gospodinjstvu naredijo mirnejše jutro.\n$\\frac{\\alpha_{\\text{Maja projekt Triglav}}}{\\beta} = \\gamma$\n```\n// Drugi neodvisni del (č, š, ž)\nconst naslov2 = \"Naslov: *poudarek* in **pomembno**\";\nconst znesek = `Cena: $ 7,00`;\nconst seznam = [\"src/modul.py\", \"docs/vir.txt\", \"https://primer.si/koda\"];\nfunction razdelek2(x) {\n  return (x + 1) * 2;\n}\nconst HRAŠNA_VREDNOST = 3;\nconst vrednost = razdelek2(HRAŠNA_VREDNOST);\nconst opomba = \"_podčrtano_ besedilo\";\nconsole.log(naslov2, znesek, seznam, vrednost, opomba);\n// konec\n```\nV testnem projektu <b>Sivi vrh</b> je <i>Barbara Zajc</i> preverila <span>800 hPa</span> tlak.<br/>Druga vrednost je 810 hPa.\n\\(\\left(\\frac{\\sigma^3}{\\tau+4}+\\sqrt{2\\omega+1}\\right)_{\\text{Eva}}\\)\n\\sum_{\\iota=1}^{6} \\kappa_{\\iota} * \\prod_{\\lambda=1}^{2} \\mu_{\\lambda} \\text{Koper}\n<dogodek id='četrta' datum='2024-01-15' kraj='Ljubljana'><opis postotek='35 %'>Prva faza</opis></dogodek>\n```\nint main(void) { char *napis = \"Besedilo: __podčrtano__ in **dvojno**\"; char *back = \"Backquote: `zvezda`\"; char *url = \"https://primer.si/koda\"; int razdelek2 = 9; (void)napis; (void)back; (void)url; (void)razdelek2; return 0; } /* Podčrtano in dvojno */\n```\nAna je poletja 2023 preživela ob Bledu in si ogledala grad. Vreme je bilo toplo, voda pa mirna kot steklo. Popoldne se je sprehodila do Špice in uživala v razgledu na jezero.",
+ "components": [
+  {
+   "component_id": "comp-prose-everyday-advice-dev-0011",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 420
+  },
+  {
+   "component_id": "comp-math-inline-dollar-dev-0003",
+   "category": "math",
+   "start_byte": 421,
+   "end_byte": 482
+  },
+  {
+   "component_id": "comp-code-javascript-dev-0010",
+   "category": "code",
+   "start_byte": 483,
+   "end_byte": 913
+  },
+  {
+   "component_id": "comp-markdown-raw-html-dev-0007",
+   "category": "markdown",
+   "start_byte": 914,
+   "end_byte": 1039
+  },
+  {
+   "component_id": "comp-math-paren-tex-dev-0005",
+   "category": "math",
+   "start_byte": 1040,
+   "end_byte": 1110
+  },
+  {
+   "component_id": "comp-math-summations-dev-0003",
+   "category": "math",
+   "start_byte": 1111,
+   "end_byte": 1195
+  },
+  {
+   "component_id": "comp-structured-xml-dev-0004",
+   "category": "structured",
+   "start_byte": 1196,
+   "end_byte": 1302
+  },
+  {
+   "component_id": "comp-code-c-dev-0007",
+   "category": "code",
+   "start_byte": 1303,
+   "end_byte": 1568
+  },
+  {
+   "component_id": "comp-prose-travel-dev-0006",
+   "category": "prose",
+   "start_byte": 1569,
+   "end_byte": 1746
+  }
+ ]
+}

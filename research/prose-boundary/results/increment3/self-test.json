@@ -1,0 +1,12 @@
+{
+ "schema": "008c-self-test/1",
+ "order": "008-c",
+ "results": {
+  "st1_cp_round_trip": true,
+  "st2_bisection_caught": true,
+  "st3_out_of_order_caught": true,
+  "st4_truncation_caught": true,
+  "st5_no_fail_open": true,
+  "st6_residual_second_stage": true
+ }
+}

@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-000568",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T8-quote-fenced",
+ "byte_length": 735,
+ "cp_length": 712,
+ "sha256": "d3d00447072f8b60f4078b4f977c7d9ee62e0c96aecf6b8e566c4cd1dec32575",
+ "document": "> V testnem projektu Svetilka 2024 so učenci preizkusili baterijo tipa AA, sklep z ročico in upornost z oranžnim pasom. Ko so sklep odprli, se utripalka utihnila, čeprav je komponenta še vedno rahlo toplila (tudi pri šibkem toku). V dnevniku so zapisali: „Sij je enakomeren, dokler prst ne premakne ročice.“ `/* Testni fragment 1: izmišljena oseba Maja, projekt Roža. *`\n```\nfn konec() { /* Testni projekt Lipa: č, š, ž, *poudarek* in _podčrtano_ */ let seStez = true; let razdelek2 = 7; let HRAŠNA_VREDNOST = 1; let besedilo = format!(\"*Nova* ({} $) `č`\", HRAŠNA_VREDNOST); let pot = \"src/modul.py\"; let url = \"https://primer.si/koda\"; let _ = (seStez, razdelek2, besedilo, pot, url); println!(\"č, š, ž\"); }\n```",
+ "components": [
+  {
+   "component_id": "comp-prose-electronics-dev-0003",
+   "category": "prose",
+   "start_byte": 2,
+   "end_byte": 318
+  },
+  {
+   "component_id": "comp-code-sql-dev-0001",
+   "category": "code",
+   "start_byte": 319,
+   "end_byte": 383
+  },
+  {
+   "component_id": "comp-code-rust-dev-0008",
+   "category": "code",
+   "start_byte": 384,
+   "end_byte": 735
+  }
+ ]
+}

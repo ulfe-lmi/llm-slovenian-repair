@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-002532",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T3-prose-fenced-prose",
+ "byte_length": 751,
+ "cp_length": 727,
+ "sha256": "f8d94174ba26888907fa27e661acfed9a304681da7ca344987296e8e2b9aef12",
+ "document": "Čiščenje oken je lažje, če najprej sproti počistimo rob in nato s suho krpo zberemo preostali prah. Marko je v projektu Prijetna hiša ugotovil, da je bolje delati ob jutru, ko je videti, kje se naberejo madeži. (Če je zunaj topleje, najprej odpreš okno.) Sicer pa je ena majhna posoda z blagom dovolj za dnevni red.\r\n```\r\n#include <string>\r\n// Končni primer: Ana, Karel, Lipa\r\n// Znaki: č, š, ž\r\nint main() {\r\n    const int HRA_NA_VREDNOST = 9;\r\n    std::string opis = \"`oklepaji` in *zvezdice*\";\r\n    return HRA_NA_VREDNOST;\r\n}\r\n```\r\nVarčevanje v hiši se pokaže tudi pri majhnih stvareh, rekel bi, pri svetlobi v kopalnici. Luka je v projektu Varna hiša zapisal: »Luč ne pomeni velikega stroška, če jo ob koncu dneva ugasneš.«",
+ "components": [
+  {
+   "component_id": "comp-prose-everyday-advice-dev-0003",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 325
+  },
+  {
+   "component_id": "comp-code-cpp-dev-0008",
+   "category": "code",
+   "start_byte": 327,
+   "end_byte": 547
+  },
+  {
+   "component_id": "comp-prose-everyday-advice-dev-0004",
+   "category": "prose",
+   "start_byte": 549,
+   "end_byte": 751
+  }
+ ]
+}

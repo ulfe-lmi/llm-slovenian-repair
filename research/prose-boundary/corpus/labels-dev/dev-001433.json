@@ -1,0 +1,152 @@
+{
+ "doc_id": "dev-001433",
+ "byte_length": 399,
+ "cp_length": 391,
+ "regions": [
+  {
+   "start_byte": 0,
+   "end_byte": 3,
+   "start_cp": 0,
+   "end_cp": 3,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 3,
+   "end_byte": 65,
+   "start_cp": 3,
+   "end_cp": 63,
+   "component_id": "comp-prose-statistics-dev-0007",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 65,
+   "end_byte": 66,
+   "start_cp": 63,
+   "end_cp": 64,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 66,
+   "end_byte": 288,
+   "start_cp": 64,
+   "end_cp": 282,
+   "component_id": "comp-prose-travel-dev-0009",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 288,
+   "end_byte": 289,
+   "start_cp": 282,
+   "end_cp": 283,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 289,
+   "end_byte": 309,
+   "start_cp": 283,
+   "end_cp": 302,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 309,
+   "end_byte": 323,
+   "start_cp": 302,
+   "end_cp": 316,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 323,
+   "end_byte": 325,
+   "start_cp": 316,
+   "end_cp": 318,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 325,
+   "end_byte": 366,
+   "start_cp": 318,
+   "end_cp": 358,
+   "component_id": "comp-prose-electronics-dev-0003",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 366,
+   "end_byte": 369,
+   "start_cp": 358,
+   "end_cp": 361,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 369,
+   "end_byte": 381,
+   "start_cp": 361,
+   "end_cp": 373,
+   "component_id": "comp-machine-posix-paths-dev-0007",
+   "category": "machine",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 381,
+   "end_byte": 382,
+   "start_cp": 373,
+   "end_cp": 374,
+   "component_id": "comp-machine-posix-paths-dev-0007",
+   "category": "machine",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 382,
+   "end_byte": 397,
+   "start_cp": 374,
+   "end_cp": 389,
+   "component_id": "comp-machine-posix-paths-dev-0007",
+   "category": "machine",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 397,
+   "end_byte": 399,
+   "start_cp": 389,
+   "end_cp": 391,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  }
+ ],
+ "invariants": {
+  "tiling_complete": true,
+  "no_contradictory_overlaps": true,
+  "cp_range_exact": true
+ }
+}

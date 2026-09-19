@@ -1,0 +1,41 @@
+{
+ "doc_id": "dev-001703",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T10-randomized",
+ "byte_length": 1430,
+ "cp_length": 1405,
+ "sha256": "5da3227cfc85f34f66ed91a263697b5153c55203c82b6a2e932b2f1242e51005",
+ "document": "Ana je zapisala, da se v starejših pisarnah pogosto uporabljajo tiskalniki, ki se povezujejo po kablu, čeprav so mlajši sodelavci privrženci brezžičnih rešitev. Takšna razmerja, čeprav na videz nevidna, vplivajo na to, kako hitro potuje dokument. (V projektu so to opazovali tri tedne.)\n\\[ \\begin{bmatrix} \\tau_1 & 6 \\\\ \\upsilon_2 & -3 \\\\ \\text{Mura} & 10 \\end{bmatrix} \\]\n```\n#!/usr/bin/env bash\n# Prvi fragment: testni podatki (URL: https://primer.si/koda)\n# Oseba: Ana, projekt: vzorčni vir\n# Poti: src/modul.py, docs/vir.txt\nseStez='src/modul.py'\nrazdelek2='docs/vir.txt'\noznaka='HRAŠNA_VREDNOST'\nopis='**poudarjeno** in _podčrtano_ z *zvezdicami*'\nvaluta='10 $'\noklepaji='(vzorčni)'\necho \"pot: $seStez\"\necho \"razdelek: $razdelek2\"\necho \"oznaka: $oznaka\"\necho \"$opis\"\necho \"cena: $valuta\"\necho \"oklepaji: $oklepaji\"\necho 'znak: `'\n```\n```\n# Fragment 3: poudarek **neodvisno**, podčrtano _test_\necho 'Oklepaji (začetek) in (konec) z zvezdicami * *'\necho 'Valute: 7 $, 2 € in 9 centov'\necho 'Relativne poti: docs/vir.txt, src/modul.py'\necho 'URL: https://primer.si/koda'\necho 'Id: HRAŠNA_VREDNOST, razdelek2, seStez'\necho 'Backquote `tukaj` in znaki č š ž'\n```\nPri izpisu je bila pomembna ne samo skupna vrednost, ampak tudi to, ali so vsi podatki iz štirih oddelkov pravilni (kot je poudarila Nina). Povprečna vrednost je bila za tri evre višja, razmerje pa je ostalo približno enako kot spomladi 2022.",
+ "components": [
+  {
+   "component_id": "comp-prose-computing-dev-0005",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 295
+  },
+  {
+   "component_id": "comp-math-bracket-tex-dev-0006",
+   "category": "math",
+   "start_byte": 296,
+   "end_byte": 381
+  },
+  {
+   "component_id": "comp-code-shell-bash-dev-0009",
+   "category": "code",
+   "start_byte": 382,
+   "end_byte": 851
+  },
+  {
+   "component_id": "comp-code-shell-bash-dev-0003",
+   "category": "code",
+   "start_byte": 852,
+   "end_byte": 1183
+  },
+  {
+   "component_id": "comp-prose-statistics-dev-0004",
+   "category": "prose",
+   "start_byte": 1184,
+   "end_byte": 1430
+  }
+ ]
+}

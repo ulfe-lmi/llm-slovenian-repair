@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-002113",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T2-prose-math-prose",
+ "byte_length": 821,
+ "cp_length": 812,
+ "sha256": "b8f4d43cdbbfd8712fbd4f37691b0618b0ca472ad23881c760be0c2d13aed0f5",
+ "document": "Katarina in Jure sta v razredu elektronskih raziskav leta 2024 razpravljala o tem, kako sklepi in upornosti varujejo komponente pred prevelikim tokom. Pri poskusu s tremi različnimi baterijami sta opazila, da se žarnica pri višji napetosti svetli močneje, a se hitreje ogreje. Oba sta zapisala, da za varno vajo zadostujejo natančno merjenje, potrpežljivost in jasna shema.\n\\begin{equation} \\text{Testni projekt Mojca} \\; : \\; \\alpha_1=3, \\beta_1=4 \\Rightarrow \\gamma_1^2=\\alpha_1^2+\\beta_1^2 \\Rightarrow \\gamma_1=5 \\end{equation}\nZjutraj, ob sedmih, je skupina iz projekta Koraki brez hitenja obiskala park ob reki, kjer so prehodili pet kilometrov in opravili dve minuti raztezanja. Moški, ki se je v zapisniku imenoval Tomaž, je po premoru rekel, da mu je bilo v kolkih udobneje, čeprav je bil teren blaznjen.",
+ "components": [
+  {
+   "component_id": "comp-prose-electronics-dev-0013",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 379
+  },
+  {
+   "component_id": "comp-math-equation-env-dev-0001",
+   "category": "math",
+   "start_byte": 380,
+   "end_byte": 536
+  },
+  {
+   "component_id": "comp-prose-sports-dev-0004",
+   "category": "prose",
+   "start_byte": 537,
+   "end_byte": 821
+  }
+ ]
+}

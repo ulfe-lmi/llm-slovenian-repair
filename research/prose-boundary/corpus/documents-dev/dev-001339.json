@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-001339",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T9-prose-malformed-prose",
+ "byte_length": 726,
+ "cp_length": 716,
+ "sha256": "d141bed7585c5fce33723e3ec93a29d6743a71ee313c19295326b1e6d81b8aec",
+ "document": "V izmišljenem projektu Bralna linija (2021) mlada lektorica Ana Brezan raziskuje, kako kratek slovenski razpesek vpraša spomin. V evropski primerjavi se motiva potovanja in tihotapljenja knjig pojavita pri avtorici Elini Kravec ter pri francoskem romanopiscu Marcu Villen. Zvrst, ki jo raziskovalci imenujejo bralna pripoved, tu zveni kot nežna variacija na klasičen dnevnik.\n\n\\(x+1=2. Testni zapis projekta Lipa za osebo Anna.\n\nV šolskem testnem kotičku je Nia izmislila preprosto skico: utripalka, upornost, sklep in baterija v krogu. \"Ne pozabi, da je sklep odprt, dokler ga ne pritisneš,\" je opomnila sošolki. Ta se je nasmehnila in se lotila priključevanja. Ko je vse šlo, sta skupaj ugasnili in zapisali datum.",
+ "components": [
+  {
+   "component_id": "comp-prose-literature-dev-0001",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 379
+  },
+  {
+   "component_id": "comp-malformed-incomplete-paren-bracket-dev-0001",
+   "category": "malformed",
+   "start_byte": 381,
+   "end_byte": 431
+  },
+  {
+   "component_id": "comp-prose-electronics-dev-0005",
+   "category": "prose",
+   "start_byte": 433,
+   "end_byte": 726
+  }
+ ]
+}

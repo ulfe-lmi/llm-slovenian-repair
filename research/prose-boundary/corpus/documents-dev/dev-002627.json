@@ -1,0 +1,59 @@
+{
+ "doc_id": "dev-002627",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T10-randomized",
+ "byte_length": 1524,
+ "cp_length": 1499,
+ "sha256": "7d500821d0acc64ccc8610f5671b9525a71c88945d878b7d9d79c9d56823a6ff",
+ "document": "Proces urejanja prostorskih posegov v okviru notranjega testnega projekta se je lani (2024) prenesel v skupno aplikacijo, kar je v prvih mesecih povzročilo zamude. Občinski sekretar, ki je sicer skrbel za informatiko, je sodelavce opozoril, naj se strogo držijo notranjih rokov in da je vsak dokument datiran, pečaten in arhiviran.\nmare.beric@primer.si,meta.zupan@primer.si\n--vhod konfiguracija/nastavitve.ini, --izhod 2, --format xml\nPROJEKT=Modra jama\nAVTOR=Luka Horvat\nGLINA=0,7 m\nTEMPERATURA=12,1 °C\nDODATNA_VAR=$drugim_ključem; 0,17\nOPIS=[*izmišljeno*, _neodvisno_, https://primer.si/novica]\n\\begin{align} \\alpha_1 &= \\beta_1 + \\gamma_1 \\\\ \\delta_1 &= \\epsilon_1 \\times \\zeta_1 \\end{align}\n[gradnja]\nprojekt = 'Most Lipa'\nvodja = 'Bojan Kranjc'\nvishina = '3,5 m'\nstrosek = '2 500 €'\nopis = '*Test* brez _opozorila_'\nvir = 'https://primer.si/novica'\n```\n/* Testni fragment 1: izmišljena oseba Maja, projekt Roža. */ SELECT 'Maja' AS `ime`, '1,20 $' AS `cena`, 'https://primer.si/koda' AS `url`, 'src/modul.py' AS `pot`, TRIM('*poudarek* in _podčrtano_') AS `opomba`, 'razdelek2' AS `razdelek2`, 'seStez' AS `seStez`, 'č' AS `HRAŠNA_VREDNOST` FROM (SELECT 1 AS `en`) AS `t` WHERE (`t`.`en` = 1);\n```\nGradbeniki so v projektu Lipa najprej razstavili starega opornega zidu, nato pa zgradili nove podnožne plošče iz ojačane betonske mase (debelina 1,2 metra). Delo so spremljali izvajalci iz Ljubljane in Maribora, medtem ko so geotehniki redno merili usedanje tal.\n Žč: 🚀 hitrost rasti je merljiva.",
+ "components": [
+  {
+   "component_id": "comp-prose-administration-dev-0013",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 335
+  },
+  {
+   "component_id": "comp-machine-emails-dev-0002",
+   "category": "machine",
+   "start_byte": 336,
+   "end_byte": 377
+  },
+  {
+   "component_id": "comp-machine-cli-flags-dev-0008",
+   "category": "machine",
+   "start_byte": 378,
+   "end_byte": 438
+  },
+  {
+   "component_id": "comp-structured-env-blocks-dev-0005",
+   "category": "structured",
+   "start_byte": 439,
+   "end_byte": 603
+  },
+  {
+   "component_id": "comp-math-align-env-dev-0001",
+   "category": "math",
+   "start_byte": 604,
+   "end_byte": 701
+  },
+  {
+   "component_id": "comp-structured-toml-dev-0005",
+   "category": "structured",
+   "start_byte": 702,
+   "end_byte": 862
+  },
+  {
+   "component_id": "comp-code-sql-dev-0001",
+   "category": "code",
+   "start_byte": 863,
+   "end_byte": 1216
+  },
+  {
+   "component_id": "comp-prose-engineering-dev-0004",
+   "category": "prose",
+   "start_byte": 1217,
+   "end_byte": 1483
+  }
+ ]
+}

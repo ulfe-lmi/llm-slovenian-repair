@@ -1,0 +1,65 @@
+{
+ "doc_id": "dev-001725",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T10-randomized",
+ "byte_length": 1250,
+ "cp_length": 1228,
+ "sha256": "b1ce31f78547c299dafc2ee9733b2a164c4f32c7525127da67a69365e5c3d822",
+ "document": "Ob krogu učenci najprej ločijo sredino, polmer in obseg, potem pa izmerijo predmete v razredu. (Na primer kozarec, skledo ali okrogel podstavek.) Učitelj lahko poudari, da obseg pove, kako dolgo je rob, površina pa pove, koliko prostora zaseda notranjost. Tak pristop je bil del projekta Geometrija okoli nas, v katerem so dijaki iz leta 2018 zbirali meritve iz kuhinje.\n[arhiv]\nnosilec = 'Zora Kranjčec'\nobseg = '1 GB'\nstarost = '0,13 let'\nopis = '_Neodvisen_ *fragment*'\nvir = 'https://primer.si/novica'\ncargo test\n[slovenski opis](https://primer.si/stran)\n[slovenski opis 2: Peter 3 kg](https://primer.si/stran \"Naslov 2\")\n> <https://primer.si/stran>\nmodul_pogon.py poročilo_q3.csv\nporočilo_q3.csv\n/opt/projekti/maja /usr/share/slo\n> Projekt Riba, avtor *Maja*: temperatura 20 stopinj.\n> > Stanje je preverjeno.\nOb prenovljenem pisarnem kotu, ki ga je v notranjem projektu Pisarna pripravila Petra, je nov tablični računalnik služil za skice (in, po njenih besedah, tudi za preprosta vprašanja). V prvih tednih se je navadila na večji zaslon, ker so bile besede na papirju pogosto preveč majhne za oči. Ko je na koncu septembra preverila baterijo, ji je bil prijeten ta enostaven način dela.\n Žč: 🚀 hitrost rasti je merljiva.",
+ "components": [
+  {
+   "component_id": "comp-prose-math-explainer-dev-0008",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 374
+  },
+  {
+   "component_id": "comp-structured-toml-dev-0008",
+   "category": "structured",
+   "start_byte": 375,
+   "end_byte": 510
+  },
+  {
+   "component_id": "comp-machine-shell-commands-dev-0004",
+   "category": "machine",
+   "start_byte": 511,
+   "end_byte": 521
+  },
+  {
+   "component_id": "comp-markdown-links-dev-0002",
+   "category": "markdown",
+   "start_byte": 522,
+   "end_byte": 658
+  },
+  {
+   "component_id": "comp-machine-filenames-dev-0005",
+   "category": "machine",
+   "start_byte": 659,
+   "end_byte": 690
+  },
+  {
+   "component_id": "comp-machine-filenames-dev-0002",
+   "category": "machine",
+   "start_byte": 691,
+   "end_byte": 707
+  },
+  {
+   "component_id": "comp-machine-posix-paths-dev-0004",
+   "category": "machine",
+   "start_byte": 708,
+   "end_byte": 741
+  },
+  {
+   "component_id": "comp-markdown-blockquotes-dev-0008",
+   "category": "markdown",
+   "start_byte": 742,
+   "end_byte": 821
+  },
+  {
+   "component_id": "comp-prose-computing-dev-0011",
+   "category": "prose",
+   "start_byte": 822,
+   "end_byte": 1209
+  }
+ ]
+}

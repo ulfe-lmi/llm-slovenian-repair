@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-002087",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T9-prose-malformed-prose",
+ "byte_length": 689,
+ "cp_length": 673,
+ "sha256": "e8bf7281d7031c8bf8c4b7267af08c96893256418e62a978975ba1ffb4dc8d64",
+ "document": "Ana je v svojem projektu za osnovno šolo pripravila preprost vezni opis z enim gumbom, žarom in baterijo. Ko je stikalo spustila, je sklep omogočil tok, svetloba pa je blago utripala. »Prva ura mi je pokazala, da so imena delov pomembna,« je zapisala v dnevnik.\n\n\\begin{align} x &= 1, nevtralna testna vsebina za izmišljen projekt Sončni cvet, avtorica Ana Krajnar.\n\nOdbor za občinske službe je obravnaval predlog o skrajšanem postopku za izdajo potrdil o prebivališču za študente, ki se vračajo iz tujine in potrebujejo dokazila za postopke v tujini. Ob tem je bil poudarek na tem, da se dokumenti, ki so že elektronsko predloženi, ne smejo ponovno zahtevati brez razloga.",
+ "components": [
+  {
+   "component_id": "comp-prose-electronics-dev-0011",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 266
+  },
+  {
+   "component_id": "comp-malformed-unclosed-tex-env-dev-0001",
+   "category": "malformed",
+   "start_byte": 268,
+   "end_byte": 372
+  },
+  {
+   "component_id": "comp-prose-administration-dev-0004",
+   "category": "prose",
+   "start_byte": 374,
+   "end_byte": 689
+  }
+ ]
+}

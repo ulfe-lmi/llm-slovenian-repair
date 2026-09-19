@@ -1,0 +1,65 @@
+{
+ "doc_id": "dev-000416",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T10-randomized",
+ "byte_length": 1331,
+ "cp_length": 1313,
+ "sha256": "ecd140c0275f10aa1031c1db7c8167ed904bbb8bb7e8a0db92dd632d333f9dfb",
+ "document": "Ana je zapisala, da se v starejših pisarnah pogosto uporabljajo tiskalniki, ki se povezujejo po kablu, čeprav so mlajši sodelavci privrženci brezžičnih rešitev. Takšna razmerja, čeprav na videz nevidna, vplivajo na to, kako hitro potuje dokument. (V projektu so to opazovali tri tedne.)\ngrep marko preizkus.json\n<nalog id='sedmi' priornost='srednja' rok='7 dni'><korak ime='preverjanje'><ustvarjanje>0,13</ustvarjanje></korak></nalog>\n$\\sum_{\\kappa=1}^{3} \\lambda_\\kappa = \\mu_{\\text{Luka projekt Sava}}$\n> Projekt Polena, avtor *Jan*: število 7 enot.\n> > Vrednost je 35 %.\nV testnem projektu <b>Zelena gora</b> je <i>Matej Novak</i> preveril <span>5,4 kg</span> vzorca.<br/>Druga vrednost je 5,8 kg.\nV projektu Bela Lipa je `tema` in ``enota`` zapisana kot 3 m v stavku.\n```\n/* Primer 1: pot in cena, črka ž */ int main(void) { const char *pot = \"docs/vir.txt\"; const char *naslov = \"Naslov: *poudarek* in _podčrtano_\"; int seStez = 12; const char *cena = \"Cena: 12,50 $ (oklepji)\"; (void)pot; (void)naslov; (void)cena; return seStez; }\n```\nIgor je v bazenu v Ljubljani (projektne lokacije za testno vsebino) preizkusil nov tempo plavanja. Prve sto metrov je plaval počasi, naslednjih dvajset metrov pa poskusil hitreje. Plavalec je na koncu rekel: „Ritem je bil dober, vendar mi je zmanjkalo zadnjih dvajsetih.“",
+ "components": [
+  {
+   "component_id": "comp-prose-computing-dev-0005",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 295
+  },
+  {
+   "component_id": "comp-machine-shell-commands-dev-0006",
+   "category": "machine",
+   "start_byte": 296,
+   "end_byte": 320
+  },
+  {
+   "component_id": "comp-structured-xml-dev-0007",
+   "category": "structured",
+   "start_byte": 321,
+   "end_byte": 443
+  },
+  {
+   "component_id": "comp-math-inline-dollar-dev-0002",
+   "category": "math",
+   "start_byte": 444,
+   "end_byte": 513
+  },
+  {
+   "component_id": "comp-markdown-blockquotes-dev-0007",
+   "category": "markdown",
+   "start_byte": 514,
+   "end_byte": 583
+  },
+  {
+   "component_id": "comp-markdown-raw-html-dev-0002",
+   "category": "markdown",
+   "start_byte": 584,
+   "end_byte": 710
+  },
+  {
+   "component_id": "comp-markdown-inline-code-dev-0001",
+   "category": "markdown",
+   "start_byte": 711,
+   "end_byte": 781
+  },
+  {
+   "component_id": "comp-code-c-dev-0009",
+   "category": "code",
+   "start_byte": 782,
+   "end_byte": 1054
+  },
+  {
+   "component_id": "comp-prose-sports-dev-0008",
+   "category": "prose",
+   "start_byte": 1055,
+   "end_byte": 1331
+  }
+ ]
+}

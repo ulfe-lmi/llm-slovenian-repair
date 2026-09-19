@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-000923",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T11-interactions",
+ "byte_length": 1237,
+ "cp_length": 1213,
+ "sha256": "e3fcb9687e676398c0251db0865ab352db16386e2c987850afeee7fb44e97ec7",
+ "document": "`/* Primer 2: url in backquote */ int main(void) { const char`.\n```\n#!/usr/bin/env bash\n# Tretji fragment: številska oznaka (test) in ne-ASCII znaki\n# Oseba: Maja, projekt: čokoladni vir\nrazdelek2='razdelek2'\nseStez='seStez'\npotA='src/modul.py'\npotB='docs/vir.txt'\npotC='HRAŠNA_VREDNOST.md'\nnavodilo='**test** *navodila* _podčrtano_'\necho \"razdelek: $razdelek2\"\necho \"seStez: $seStez\"\necho \"potA: $potA\"\necho \"potB: $potB\"\necho \"potC: $potC\"\necho \"$navodilo\"\necho 'url: https://primer.si/koda'\necho 'cena: 3 $'\necho 'backquote: `'\n# komentar z \\frac{a}{b}\n```\nČiščenje oken je lažje, če najprej sproti počistimo rob in nato s suho krpo zberemo preostali prah. Marko je v projektu Prijetna hiša ugotovil, da je bolje delati ob jutru, ko je videti, kje se naberejo madeži. (Če je zunaj topleje, najprej odpreš okno.) Sicer pa je ena majhna posoda z blagom dovolj za dnevni red.\nZa šolsko uro sem pripravila zgodbo o dveh vrstah sadja. Prva vrsta je vsebovala tri jabolka, druga pa štiri hruške. Učenci so po mnenju mentorja najprej poimenovali skupine, šele nato pa primerjali. Vstavek v dnevniku je bil preprost: »Enakost ni le število, ampak tudi pojasnjenje.« S tem sem želela, da se ne zanašajo samo na pravilo.",
+ "components": [
+  {
+   "component_id": "comp-code-c-dev-0010",
+   "category": "code",
+   "start_byte": 0,
+   "end_byte": 62
+  },
+  {
+   "component_id": "comp-code-shell-bash-dev-0011",
+   "category": "code",
+   "start_byte": 64,
+   "end_byte": 563
+  },
+  {
+   "component_id": "comp-prose-everyday-advice-dev-0003",
+   "category": "prose",
+   "start_byte": 564,
+   "end_byte": 889
+  },
+  {
+   "component_id": "comp-prose-math-explainer-dev-0004",
+   "category": "prose",
+   "start_byte": 890,
+   "end_byte": 1237
+  }
+ ]
+}

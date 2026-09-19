@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-001203",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T5-lists",
+ "byte_length": 1250,
+ "cp_length": 1223,
+ "sha256": "032c409bfad7ac30196f46260802dd720c916380e64d73125b7ccc43e026071f",
+ "document": "- Za šolsko uro sem pripravila zgodbo o dveh vrstah sadja. Prva vrsta je vsebovala tri jabolka, druga pa štiri hruške. Učenci so po mnenju mentorja najprej poimenovali skupine, šele nato pa primerjali. Vstavek v dnevniku je bil preprost: »Enakost ni le število, ampak tudi pojasnjenje.« S tem sem želela, da se ne zanašajo samo na pravilo.\n- `def seštej(a, b): return a + b, 'Povzetek: **pomembno** _pod`\n- V Občini Srednji Grič je od lanskega aprila potekalo posvetovanje o novem postopku za izdajo gradbenih dovoljenj. (Cilj je bil krajši rok za obravnavo zahtev.) Upravni uradnik Marko Zajc je pripravil povzetek komentarjev, ki so jih oddali posamezniki, podjetja in društva. Do konca leta 2025 so želeli uvesti enotno elektronsko knjižico, vendar se je izkazalo, da je treba najprej uskladiti terminologijo.\n- Za odrasle v programu Večer 2024 so pripravili delavnice, ki potekajo po petih, z odmorom in s kratkim pogovorom o tem, kaj sploh želijo vedeti. Ana, vodja razreda, je povedala, da se učenci najlaše učijo, ko lahko takoj uporabijo besede v pogovoru. Tudi učbenik je preprost, z barvnimi slikami in z vprašanji na koncu vsake strani. Nihče ni imel vtisa, da gre za šolo; vsi so se strinjali, da gre za učenje.",
+ "components": [
+  {
+   "component_id": "comp-prose-math-explainer-dev-0004",
+   "category": "prose",
+   "start_byte": 2,
+   "end_byte": 349
+  },
+  {
+   "component_id": "comp-code-python-dev-0009",
+   "category": "code",
+   "start_byte": 352,
+   "end_byte": 415
+  },
+  {
+   "component_id": "comp-prose-administration-dev-0001",
+   "category": "prose",
+   "start_byte": 418,
+   "end_byte": 829
+  },
+  {
+   "component_id": "comp-prose-education-dev-0012",
+   "category": "prose",
+   "start_byte": 832,
+   "end_byte": 1250
+  }
+ ]
+}

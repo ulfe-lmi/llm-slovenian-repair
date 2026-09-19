@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-002034",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T11-interactions",
+ "byte_length": 1005,
+ "cp_length": 989,
+ "sha256": "99c2f196cebe53ac912bae24b11d5b4313abfd4a23be5c6d0a54c3a5701a731a",
+ "document": "`#include <string>`.\n```\nint main(void) { char *cena1 = \"1 $\"; char *cena2 = \"2 EUR\"; char *potA = \"docs/vir.txt\"; char *potB = \"src/modul.py\"; int seStez = 1; (void)cena1; (void)cena2; (void)potA; (void)potB; (void)seStez; return 0; } /* Valute: $ in EUR */\n# komentar z \\frac{a}{b}\n```\nV pisarni so za projekt »Dober dose« postavili novo usmerjevalno napravo bližje oknu, da bi signal dosegel tudi do kavne mize (kjer se vedno nabere največ ljudi). »Mrežna kartica«, so dejali tisti, ki so prenašali fotografije, se je hitreje odzvala, ko so se izognili prenatrpanosti. Določene datoteke so zato pustili za večer.\nKatarina in Jure sta v razredu elektronskih raziskav leta 2024 razpravljala o tem, kako sklepi in upornosti varujejo komponente pred prevelikim tokom. Pri poskusu s tremi različnimi baterijami sta opazila, da se žarnica pri višji napetosti svetli močneje, a se hitreje ogreje. Oba sta zapisala, da za varno vajo zadostujejo natančno merjenje, potrpežljivost in jasna shema.",
+ "components": [
+  {
+   "component_id": "comp-code-cpp-dev-0006",
+   "category": "code",
+   "start_byte": 0,
+   "end_byte": 19
+  },
+  {
+   "component_id": "comp-code-c-dev-0005",
+   "category": "code",
+   "start_byte": 21,
+   "end_byte": 287
+  },
+  {
+   "component_id": "comp-prose-computing-dev-0008",
+   "category": "prose",
+   "start_byte": 288,
+   "end_byte": 625
+  },
+  {
+   "component_id": "comp-prose-electronics-dev-0013",
+   "category": "prose",
+   "start_byte": 626,
+   "end_byte": 1005
+  }
+ ]
+}

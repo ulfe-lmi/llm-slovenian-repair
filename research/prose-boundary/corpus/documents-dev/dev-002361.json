@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-002361",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T8-quote-fenced",
+ "byte_length": 504,
+ "cp_length": 498,
+ "sha256": "f1f42a8eea46d6150de6f652e6e308ff954569bfc38552ee91e1cce79136b9e5",
+ "document": "> Anja je v opombi zapisala, da so razmerja med dohodki in izdatki (v mesecu maju in juniju) nekoliko drugačna kot lani. Povprečje ni pokazalo velike spremembe, vendar je posamezen teden odstopil, kar je pritegnilo pozornost ekipi. `/* Primer 2: url in backquote */ int main(void) { const char`\n```\n# Testni projekt: Razdelek; avtor: Maja Lipovnik\nrazdelek2 = 'Razdelek 2'\nseStez = 7\nHRAŠNA_VREDNOST = 42\nskupaj = HRAŠNA_VREDNOST + seStez\nporočilo = f'Skupaj: {skupaj} $ (test)'\nprint(poročilo)\n```",
+ "components": [
+  {
+   "component_id": "comp-prose-statistics-dev-0002",
+   "category": "prose",
+   "start_byte": 2,
+   "end_byte": 233
+  },
+  {
+   "component_id": "comp-code-c-dev-0010",
+   "category": "code",
+   "start_byte": 234,
+   "end_byte": 296
+  },
+  {
+   "component_id": "comp-code-python-dev-0003",
+   "category": "code",
+   "start_byte": 297,
+   "end_byte": 504
+  }
+ ]
+}

@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-000273",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T10-randomized",
+ "byte_length": 880,
+ "cp_length": 859,
+ "sha256": "7b0a5e32a4e2fd5790e2d2d67edc3cc87e716b67d1771e822e31f493f0ea747a",
+ "document": "Nekateri gradbeniki (zlasti tisti, ki so sodelovali pri obnovi stolpa Vrt) menijo, da so materiali, ki dolgoročno ohranjajo obliko, prijaznejši za vzdrževanje. Ta pogled, ki ga dokumenti imenujejo mehka vzdržljivost, velja tudi za podporno konstrukcijo in za ojačitve, ki jih je leta 2018 opisala projektna skupina Podravska.\nPROJEKT=Modra gora\nAVTOR=Ana Kovač\nTEMPERATURA=18,5 °C\nVLAGNOST=62 %\nDODATNA_VAR=$drugim_ključem; 0,13\nOPIS=[*testna*, _vsebina_, https://primer.si/novica]\n\\text{Bled}\\begin{pmatrix}15&16&17\\\\18&19&20\\end{pmatrix}\nLeta 1999 so v projektu Bralna mreža (izmišljeni arhiv) preizkušali, kako bralci obudijo spomin na slovenske in evropske pesnike. Odkritje ni bilo v imenu, temveč v tem, da je vprašanje (brez nujnega odgovora) preživelo vse. »Zato,« je zapisal izmišljeni filolog Marko Rovec, »ker je knjižnost včasih sama sebi prevod.«",
+ "components": [
+  {
+   "component_id": "comp-prose-engineering-dev-0013",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 330
+  },
+  {
+   "component_id": "comp-structured-env-blocks-dev-0001",
+   "category": "structured",
+   "start_byte": 331,
+   "end_byte": 489
+  },
+  {
+   "component_id": "comp-math-matrices-dev-0004",
+   "category": "math",
+   "start_byte": 490,
+   "end_byte": 547
+  },
+  {
+   "component_id": "comp-prose-literature-dev-0004",
+   "category": "prose",
+   "start_byte": 548,
+   "end_byte": 880
+  }
+ ]
+}

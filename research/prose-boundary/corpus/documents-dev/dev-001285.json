@@ -1,0 +1,65 @@
+{
+ "doc_id": "dev-001285",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T10-randomized",
+ "byte_length": 1548,
+ "cp_length": 1524,
+ "sha256": "af03771517591090359f3fd80897d792ffa37897a2e4bb2fe2c2b577d95817eb",
+ "document": "V okviru internega testnega projekta so v občinskem uradu po novem dokumente prejeli v digitalni obliki in zaposleni so morali preveriti, ali so priloženi obrazci polni. Maja je sodelavcem dejala, da rok za odločitev poteka do petega v mesecu, zato morajo skrbno preveriti priložene listine.\n$$\\frac{\\delta + \\epsilon}{\\zeta} = 4 \\times \\eta = \\text{Maja}$$\n```\n# Testni projekt: Besedilo; avtor: Maja Lipovnik\nbesedilo = 'Črka č, š in ž'\nprojekt = 'Izmišljen projekt Lipa'\noseba = 'Maja'\nif besedilo:\n    print(besedilo)\n```\n<produkt id='peti' naziv='Sončna luč' cena='12,99 EUR'><opis status='aktivno'>*Novo* _test_ izdaja</opis></produkt>\n| Vzorec | Enota | Prostornina |\n| --- | --- | --- |\n| Vzorec Lipa | l | 7,2 |\n| Vzorec Med | ml | 150 |\ncargo test\n> Projekt Mlaj, avtor *Tomaž*: meritev 12 m/s.\n> > Testni zapis potrdi stanje.\n--- {naziv: 'Projektna vsebina: **Trgovina s sadjem**', opis: 'Nevtralna vsebina z _poudarkom_ in https://primer.si/novica', vrednosti: ['Delež 25 %', 'Višina 3,5 m', 'Koeficient 0,13'], oseba: 'Izmišljena oseba: Nina Kovač', projekt: 'Nevtralna testna vsebina'} # Fragment 1: sadna trgovina\nUdeleženci projekta Otvorena vrata so v jeseni 2024 preizkusili učno sredo, v kateri je bil učbenik le ena od štirih podlag. Mladostnike je zanimalo, zakaj se isti izpit pri treh učiteljih razlikuje v razlagi (zlasti pri nalogah iz književnosti), zato so zapisali kratko pojasnilo. Na koncu so se dogovorili, da bo vsak odrasli udeleženec dobil eden sam pogovorni termin, ne pa dveh ločenih rok.",
+ "components": [
+  {
+   "component_id": "comp-prose-administration-dev-0011",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 295
+  },
+  {
+   "component_id": "comp-math-display-dollar-dev-0002",
+   "category": "math",
+   "start_byte": 296,
+   "end_byte": 361
+  },
+  {
+   "component_id": "comp-code-python-dev-0007",
+   "category": "code",
+   "start_byte": 362,
+   "end_byte": 534
+  },
+  {
+   "component_id": "comp-structured-xml-dev-0005",
+   "category": "structured",
+   "start_byte": 535,
+   "end_byte": 652
+  },
+  {
+   "component_id": "comp-markdown-tables-dev-0005",
+   "category": "markdown",
+   "start_byte": 653,
+   "end_byte": 757
+  },
+  {
+   "component_id": "comp-machine-shell-commands-dev-0004",
+   "category": "machine",
+   "start_byte": 758,
+   "end_byte": 768
+  },
+  {
+   "component_id": "comp-markdown-blockquotes-dev-0001",
+   "category": "markdown",
+   "start_byte": 769,
+   "end_byte": 848
+  },
+  {
+   "component_id": "comp-structured-yaml-dev-0001",
+   "category": "structured",
+   "start_byte": 849,
+   "end_byte": 1144
+  },
+  {
+   "component_id": "comp-prose-education-dev-0010",
+   "category": "prose",
+   "start_byte": 1145,
+   "end_byte": 1548
+  }
+ ]
+}

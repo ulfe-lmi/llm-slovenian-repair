@@ -1,0 +1,53 @@
+{
+ "doc_id": "dev-002935",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T10-randomized",
+ "byte_length": 1232,
+ "cp_length": 1201,
+ "sha256": "9e84e1e0a1eadfa888bc767341a267fe0a9c6b64a46beea74278e0370a5e6c24",
+ "document": "V razredu za proporcije se pogosto pojavi vprašanje: »Koliko čokoladnih ploščic pripada štirim otrokom, če imamo enajst enakih delov?« Učenci pod vodstvom Marka, ki sodeluje v projektu Skladni deli, izvedejo, da sorazmerje ni le deljenje, ampak tudi primerjava enakih deležev. Nekaj učencev, še zlasti tisti, ki radi kuhajo, to razumejo najlažje.\n***Trobna** brez zapora.\nTestni projekt: Lesena miza. Osebna: Marko Zupan.\n{\"naslov\":\"Ljubljanska sončna razstava\",\"oseba\":\"Ana Kovač\",\"delež\":\"25 %\",\"višina\":\"3,5 m\",\"koeficient\":\"0,13\",\"vir\":\"https://primer.si/novica\"}\nProjekt Macesen: Debelina plošče je 18 mm, masa pa 2,3 kg, zapisano z **močno** in __podčrtim__ besedilom.\n\\begin{equation}\\begin{aligned}K_5 &= \\left(\\alpha_5 + \\beta_5\\right)^2 \\text{Triglav test} \\\\L_5 &= \\det A_5 + \\theta_5\\end{aligned}\\end{equation}\n```\n# Testni projekt: Besedilo; avtor: Maja Lipovnik\nbesedilo = 'Črka č, š in ž'\nprojekt = 'Izmišljen projekt Lipa'\noseba = 'Maja'\nif besedilo:\n    print(besedilo)\n```\nV projektu Prijava za športno leto 2024 je učiteljica Meta pojasnila, da lahka utrujenost po vadbi pogosto prehaja, če oseba zaspi in pije vodo. Če se stanje ponovi ali poslabša, je smiselno poiskati zdravnika.",
+ "components": [
+  {
+   "component_id": "comp-prose-math-explainer-dev-0012",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 359
+  },
+  {
+   "component_id": "comp-malformed-malformed-nesting-dev-0002",
+   "category": "malformed",
+   "start_byte": 360,
+   "end_byte": 434
+  },
+  {
+   "component_id": "comp-structured-keyvalue-dev-0001",
+   "category": "structured",
+   "start_byte": 435,
+   "end_byte": 584
+  },
+  {
+   "component_id": "comp-markdown-strong-dev-0007",
+   "category": "markdown",
+   "start_byte": 585,
+   "end_byte": 695
+  },
+  {
+   "component_id": "comp-math-aligned-env-dev-0005",
+   "category": "math",
+   "start_byte": 696,
+   "end_byte": 843
+  },
+  {
+   "component_id": "comp-code-python-dev-0007",
+   "category": "code",
+   "start_byte": 844,
+   "end_byte": 1016
+  },
+  {
+   "component_id": "comp-prose-medicine-explainer-dev-0011",
+   "category": "prose",
+   "start_byte": 1017,
+   "end_byte": 1232
+  }
+ ]
+}

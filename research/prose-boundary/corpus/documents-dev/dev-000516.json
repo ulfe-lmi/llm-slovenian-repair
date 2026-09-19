@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-000516",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T11-interactions",
+ "byte_length": 890,
+ "cp_length": 875,
+ "sha256": "5723e893e382febfaad03045f97528b27ccb79d5801a34b77c257fea8ca61423",
+ "document": "`int main(void) { char *znaki = \"Znaki: č, š, ž\"; char *pot =`.\n```\n#include <string>\n// *Test* za _označevanje_, čokolada\nint glavna() {\n    int seStez = 8;\n    int razdelek2 = seStez + 2;\n    std::string opis = \"Cena: 3 $ (nevtralno)\";\n    return razdelek2;\n}\n# komentar z \\frac{a}{b}\n```\nV Dubrovniku sem z ekipo Sredozemska karta preveril obzidje in opozoril, da je obisk (brez rezervacije) pogosto daljši. V program smo vstavili tudi kratek postoj v starem solnem bazenu, kjer je voda odražala nebo. Vodič je dejal: \"če želite tih kot, se odpravite proti severu\".\nV občini Krkavec so leta 2023 preverili potek postopka za dovoljenje za majhno prodajno stojnico. Rok za oddajo dokumentov je bil petnajst dni, vendar so nekateri prijavniki poslali vprašanja že prej. Strokovna skupina je nato v zapisniku navedla, da je zahtevo mogoče dopolniti le z lastnoročnim podpisom.",
+ "components": [
+  {
+   "component_id": "comp-code-c-dev-0008",
+   "category": "code",
+   "start_byte": 0,
+   "end_byte": 65
+  },
+  {
+   "component_id": "comp-code-cpp-dev-0007",
+   "category": "code",
+   "start_byte": 67,
+   "end_byte": 295
+  },
+  {
+   "component_id": "comp-prose-travel-dev-0005",
+   "category": "prose",
+   "start_byte": 296,
+   "end_byte": 578
+  },
+  {
+   "component_id": "comp-prose-administration-dev-0006",
+   "category": "prose",
+   "start_byte": 579,
+   "end_byte": 890
+  }
+ ]
+}

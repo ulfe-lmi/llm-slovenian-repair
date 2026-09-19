@@ -1,0 +1,102 @@
+{
+ "doc_id": "dev-000079",
+ "byte_length": 907,
+ "cp_length": 879,
+ "regions": [
+  {
+   "start_byte": 0,
+   "end_byte": 295,
+   "start_cp": 0,
+   "end_cp": 291,
+   "component_id": "comp-prose-administration-dev-0011",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 295,
+   "end_byte": 296,
+   "start_cp": 291,
+   "end_cp": 292,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 296,
+   "end_byte": 299,
+   "start_cp": 292,
+   "end_cp": 295,
+   "component_id": "comp-code-rust-dev-0004",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 299,
+   "end_byte": 300,
+   "start_cp": 295,
+   "end_cp": 296,
+   "component_id": "comp-code-rust-dev-0004",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 300,
+   "end_byte": 617,
+   "start_cp": 296,
+   "end_cp": 604,
+   "component_id": "comp-code-rust-dev-0004",
+   "category": "code",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 617,
+   "end_byte": 618,
+   "start_cp": 604,
+   "end_cp": 605,
+   "component_id": "comp-code-rust-dev-0004",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 618,
+   "end_byte": 621,
+   "start_cp": 605,
+   "end_cp": 608,
+   "component_id": "comp-code-rust-dev-0004",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 621,
+   "end_byte": 622,
+   "start_cp": 608,
+   "end_cp": 609,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 622,
+   "end_byte": 907,
+   "start_cp": 609,
+   "end_cp": 879,
+   "component_id": "comp-prose-literature-dev-0002",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  }
+ ],
+ "invariants": {
+  "tiling_complete": true,
+  "no_contradictory_overlaps": true,
+  "cp_range_exact": true
+ }
+}

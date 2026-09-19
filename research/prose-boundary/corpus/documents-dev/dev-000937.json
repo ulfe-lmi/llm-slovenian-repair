@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-000937",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T3-prose-fenced-prose",
+ "byte_length": 914,
+ "cp_length": 885,
+ "sha256": "32e5f504ccd684f021948ea03a96d81b5aedc25fa612c455df40c85a62936610",
+ "document": "Ko je Nika za projekt »Polno napajanje« preverjala obvestila, je opazila, da se aplikacija za vremensko napoved pozno obudila, če je telefon bil v šibkem omrežju (tudi ob številnih sporočilih). »Najprej napajanje«, je rekla njena sestra, »vse ostalo je opozorilo, ki lahko počaka do polnjenja.«\n```\n# Testni projekt: Vir podatkov; avtor: Maja Lipovnik\nurl = 'https://primer.si/koda'\npot = 'src/nabavki.py'\ncena = '100 $ (brez popusta)'\noznaka = '(test č š ž)'\nif url and pot:\n    print('Vir je nastavljen')\n```\nV starem receptu iz leta 1958 stoji, da se ajdova juha iz Ljubljane najprej posoli, nato pa počasi premeša, da ne bi zgrudila. “Ajda mora dišati po štrukljih,” je nekoč zapisala Anja, ki je testirala recept za projektni dnevnik okusov (po mnenju njene sestre, Marice). Pri pripravi je bil pomemben tudi čas: deset minut mešanja, nato pa še kratko ohlajanje na hladni plošči.",
+ "components": [
+  {
+   "component_id": "comp-prose-computing-dev-0009",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 306
+  },
+  {
+   "component_id": "comp-code-python-dev-0005",
+   "category": "code",
+   "start_byte": 307,
+   "end_byte": 525
+  },
+  {
+   "component_id": "comp-prose-cooking-dev-0001",
+   "category": "prose",
+   "start_byte": 526,
+   "end_byte": 914
+  }
+ ]
+}

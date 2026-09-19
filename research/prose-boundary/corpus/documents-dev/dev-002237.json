@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-002237",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T5-lists",
+ "byte_length": 868,
+ "cp_length": 849,
+ "sha256": "83dfee66e74a839aad36bcebbed2a3dcb2dc01c18fd1bd821fa08c5f225e165e",
+ "document": "- Kratki nasvet: krpo za pregrco namakaj v mrzli vodi in jo potem stisni, da pregrca ne pusti madežev. (Sredstvo iz stekleničke s štopalko je morda dražje, a zadošča za večkrat.) Če želiš manj smeti, steklenice operi in jih odnesi v zbirni center.\n- `#include <string>`\n- Svetovna in slovenska zgodovina se v tem projektu prepleta, ker so izmišljeni potniki v dnevnik zapisali potovanja, ki so trajala po letih, ne po dnevih. »Kadar je letnica omenjena,« je dodala Eva, »je besedilo preprosteje razumljivo, čeprav manj natančno.« Njena skupina je zato izbrala kratka navodila, da so besedila ostala čitljiva.\n- Varnostni vodič iz leta 2020 je zapisal, da se baterije nikoli ne smejo povezati v kratki sklep brez upornosti, in v vmesnem koraku je Luka preveril, ali so upornosti prave vrednosti. (Vse to je bilo del testne serije za projekt Vrtinec.)",
+ "components": [
+  {
+   "component_id": "comp-prose-everyday-advice-dev-0008",
+   "category": "prose",
+   "start_byte": 2,
+   "end_byte": 257
+  },
+  {
+   "component_id": "comp-code-cpp-dev-0004",
+   "category": "code",
+   "start_byte": 260,
+   "end_byte": 279
+  },
+  {
+   "component_id": "comp-prose-history-dev-0005",
+   "category": "prose",
+   "start_byte": 282,
+   "end_byte": 626
+  },
+  {
+   "component_id": "comp-prose-electronics-dev-0009",
+   "category": "prose",
+   "start_byte": 629,
+   "end_byte": 868
+  }
+ ]
+}

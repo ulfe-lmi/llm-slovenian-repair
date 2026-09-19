@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-001728",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T2-prose-math-prose",
+ "byte_length": 513,
+ "cp_length": 506,
+ "sha256": "e0466b87d129bad378f0fe754097a2c171e3e7c654cdd188a5f4ab79a8674e20",
+ "document": "Za izpit iz zgodovine so učenci pripravili kratko predstavitev. Pri nalogi so uporabili učbenik, ki ga je leta 2018 uredila ekipa Novega zavoda za izobraževanje (zlasti strokovna urednica Irena Polak). Ocenjevanje je bilo delno usklajeno, delno pa temeljilo na ustnem pogovoru.\n\\[\\dfrac{1}{2}+\\frac{\\alpha}{\\beta}=\\text{Anja}\\]\nPoleti 2024 sem z izmišljeno skupino Tihotažna obala raziskoval otok na Bledskem jezeru, kjer je bil zrak svež. Zvečer smo se zatekli v lokalno jedilnico, da bi poskusili potico.",
+ "components": [
+  {
+   "component_id": "comp-prose-education-dev-0004",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 280
+  },
+  {
+   "component_id": "comp-math-fractions-dev-0001",
+   "category": "math",
+   "start_byte": 281,
+   "end_byte": 330
+  },
+  {
+   "component_id": "comp-prose-travel-dev-0001",
+   "category": "prose",
+   "start_byte": 331,
+   "end_byte": 513
+  }
+ ]
+}

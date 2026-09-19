@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-000844",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T9-prose-malformed-prose",
+ "byte_length": 677,
+ "cp_length": 659,
+ "sha256": "01626b5aa11601705f344a118d12db9982243fde94cf360bd320ea1114a2e122",
+ "document": "„Zdravje ni samo odsotnost bolečine“ je poudaril Marko, ko je v projektu Zdravi pogovori spregovoril o pomenu počitka. Vsak človek se mora poslušati in poznati svoje omejitve. Obremenjenost se lahko kaže različno, na primer v napetosti ali v slabšem spanju. Če se nelagodje ne umiri, mora biti naslednji korak obisk zdravnika.\n$5 je cena testnega vzorca v projektu Tihi Vrh.\nV projektu Pomladni spanec so opisali, da pomanjkanje spanja lahko vpliva na razpoloženje. Pogosto se lahko spremeni tudi koncentracija. Občutek utrujenosti se lahko poveča. To je splošna opomba, ne pa osebni nasvet. Če se takšni znaki ponavljajo, je dobro, da osebo sprejme zdravnik.",
+ "components": [
+  {
+   "component_id": "comp-prose-medicine-explainer-dev-0003",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 338
+  },
+  {
+   "component_id": "comp-malformed-unmatched-dollar-dev-0001",
+   "category": "malformed",
+   "start_byte": 339,
+   "end_byte": 386
+  },
+  {
+   "component_id": "comp-prose-medicine-explainer-dev-0004",
+   "category": "prose",
+   "start_byte": 387,
+   "end_byte": 677
+  }
+ ]
+}

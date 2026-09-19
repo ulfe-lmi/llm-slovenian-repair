@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-001569",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T8-quote-fenced",
+ "byte_length": 890,
+ "cp_length": 871,
+ "sha256": "3b47b513a47c5aa05ba23fc99adcfabf3f300145c9fb908689e8c68e188a7e56",
+ "document": "> V projektu Nevtralna zdravstvena vsebina 2025 je Ana Kovač pripravila opombo o utrujenosti, ki ima lahko mnogo vzrokov. Ker telo na spremembe odziva različno, je koristno, da se oseba posvetuje z zdravnikom, še posebej če se stanje ponavlja. V takih primerih „splošna razlaga“ ne nadomesti pregleda. `fn test2() -> &'static str { /* Testni projekt Lipa: č, š, ž`\n```\n#!/usr/bin/env bash\n# Prvi fragment: testni podatki (URL: https://primer.si/koda)\n# Oseba: Ana, projekt: vzorčni vir\n# Poti: src/modul.py, docs/vir.txt\nseStez='src/modul.py'\nrazdelek2='docs/vir.txt'\noznaka='HRAŠNA_VREDNOST'\nopis='**poudarjeno** in _podčrtano_ z *zvezdicami*'\nvaluta='10 $'\noklepaji='(vzorčni)'\necho \"pot: $seStez\"\necho \"razdelek: $razdelek2\"\necho \"oznaka: $oznaka\"\necho \"$opis\"\necho \"cena: $valuta\"\necho \"oklepaji: $oklepaji\"\necho 'znak: `'\n```\n Pozor: é (dekompouziran znakovni niz).",
+ "components": [
+  {
+   "component_id": "comp-prose-medicine-explainer-dev-0006",
+   "category": "prose",
+   "start_byte": 2,
+   "end_byte": 310
+  },
+  {
+   "component_id": "comp-code-rust-dev-0007",
+   "category": "code",
+   "start_byte": 311,
+   "end_byte": 376
+  },
+  {
+   "component_id": "comp-code-shell-bash-dev-0009",
+   "category": "code",
+   "start_byte": 377,
+   "end_byte": 846
+  }
+ ]
+}

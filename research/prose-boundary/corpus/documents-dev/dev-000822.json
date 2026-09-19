@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-000822",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T9-prose-malformed-prose",
+ "byte_length": 668,
+ "cp_length": 653,
+ "sha256": "92b87e71b6951daf9f41c75e9b48a409a50b10a8e2cb8279ed3404b571b513d4",
+ "document": "Pri projektu Zvezdno seme je ekipa iz Maribora preučevala, kako se semena neznane rastline odzivajo na simulirano nočno svetlobo. V zvezku opomb so pisali (v naravnem tonu): »Spominja na polje po dežju, a brez vonja.« V letu 2023 so rezultat zapisali kot zanimivo, vendar še vedno nejasno.\n$$y=2. Projekt Javor shranjuje nevtralne testne zapiske.\nOdbor za občinske službe je obravnaval predlog o skrajšanem postopku za izdajo potrdil o prebivališču za študente, ki se vračajo iz tujine in potrebujejo dokazila za postopke v tujini. Ob tem je bil poudarek na tem, da se dokumenti, ki so že elektronsko predloženi, ne smejo ponovno zahtevati brez razloga.",
+ "components": [
+  {
+   "component_id": "comp-prose-science-dev-0010",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 295
+  },
+  {
+   "component_id": "comp-malformed-incomplete-display-dollar-dev-0002",
+   "category": "malformed",
+   "start_byte": 296,
+   "end_byte": 352
+  },
+  {
+   "component_id": "comp-prose-administration-dev-0004",
+   "category": "prose",
+   "start_byte": 353,
+   "end_byte": 668
+  }
+ ]
+}

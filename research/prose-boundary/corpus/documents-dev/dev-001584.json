@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-001584",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T1-prose-inlinecode-prose",
+ "byte_length": 704,
+ "cp_length": 684,
+ "sha256": "fea5c7a2726ce6bfb1dd843d195758482f2b70476e6a01feb463a860105730fe",
+ "document": "Poskus, ki ga je vodila Nina, je potekal v majhni sobi. Lampa je gorela. Merilni senzor je oddajal tih zvok. Zapis je bil kratek: »Preprosto in toplo.« Zaključek je prišel zgodaj.\n`seStez = 'https://primer.si/koda'; razdelek2 = 'src/modul.py`\nPri izmišljenem projektu “Zvonovi Koroške” (tudi testni vnos) so ugotovili, da so verske zgradbe hranile spomine, ki so jih ljudje obvezno prenašali iz roda v rod. Kratek zapis o letnici 1680, dolg le 120 znakov, je bil označen kot sporen. Uradnik Miha je dodal, da je “povest” pogosto lažna, a vseeno živi v spominu. Zato so v bazi ohranili tri različne verzije (enkrat kratko, enkrat dolgo in enkrat prekrčeno), ki se med seboj ne ujemajo.",
+ "components": [
+  {
+   "component_id": "comp-prose-science-dev-0009",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 183
+  },
+  {
+   "component_id": "comp-code-python-dev-0010",
+   "category": "code",
+   "start_byte": 184,
+   "end_byte": 246
+  },
+  {
+   "component_id": "comp-prose-history-dev-0012",
+   "category": "prose",
+   "start_byte": 247,
+   "end_byte": 704
+  }
+ ]
+}

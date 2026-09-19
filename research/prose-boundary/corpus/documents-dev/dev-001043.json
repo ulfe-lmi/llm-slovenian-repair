@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-001043",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T10-randomized",
+ "byte_length": 947,
+ "cp_length": 930,
+ "sha256": "c577d8fec87de0805d9f3f3db7baa9581197fe6d6df86c298615bd79088f4c06",
+ "document": "V sklopu projekta Papirni most je Anica Kranjc v zbornik vstavila odlomek iz romaneskega dnevnika, ki nosi ime »Zadnji tiskar«. Besedilo iz leta 1998 pripoveduje o mali nakladni hiši v Celju, kjer so tiskarji med prazniki brali evropske pripovedke. Nekatera poglavja ostajajo izpuščena (verjetno zaradi cenzure), druga pa so prenesena ročno v zvezek iz tankega usnja. To vprašanje pomena slovenske knjižnosti v evropskem prostoru se v zadnjem odstavku razreši šele s kratkim pozivom k skupnemu branju.\n```\nint main(void) { int razdelek2 = 7; char *naslov = \"Ana (izmišljena oseba)\"; char *pot = \"docs/vir.txt\"; (void)razdelek2; (void)naslov; (void)pot; return 0; } /* Izmišljen projekt: Ana */\n```\nLena iz izmišljenega projekta Zdravi dnevni krog je zapisala, da stres pogosto spremljajo napete mišice in počasnejši spanec. Zaradi teh sprememb ni mogoče zanesljivo sklepati o vzrokih, zato je smiselno pogovarjati se z zdravnikom.",
+ "components": [
+  {
+   "component_id": "comp-prose-literature-dev-0013",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 511
+  },
+  {
+   "component_id": "comp-code-c-dev-0003",
+   "category": "code",
+   "start_byte": 512,
+   "end_byte": 709
+  },
+  {
+   "component_id": "comp-prose-medicine-explainer-dev-0001",
+   "category": "prose",
+   "start_byte": 710,
+   "end_byte": 947
+  }
+ ]
+}

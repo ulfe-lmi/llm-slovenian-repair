@@ -1,0 +1,59 @@
+{
+ "doc_id": "dev-000020",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T10-randomized",
+ "byte_length": 1192,
+ "cp_length": 1173,
+ "sha256": "dbdd84b506e0887e70c9dcd698d217e881c93617020fd3934e7322bf00c0f648",
+ "document": "Ana je v receptu projekta Okusni dnevnik iz leta 1998 zapisala, da se krompir (najboljši iz majhne lončnice) sprti v manjših porcijah, a najprej mora odpočivat, da se okus utesni. Po njenem prepričanju: „Brez potrpežljivosti ni dobre juhe.“ Ta vstavek je bil pozneje v arhivu projekta prenesen v poseben dnevnik.\n**_Mešanica_ brez zapora.\nTestni projekt: Vrtna pot. Osebna: Ana Novak.\nZaključek: ~~odmetano~~ besedilo 7 točk in 3 kg za Igorja Vovk.\n[gradnja]\nime = *Projekt Kameniti most*\nopis = _dolžina_ 45 m\nmasa = 12 kg\navtor = Petra Kranjc\nvir = https://primer.si/novica\n; nevtralna testna vsebina\nV testnem projektu <b>Siva reka</b> je <i>Luka Zupan</i> zapisal <span>12 l</span> vode.<br/>Druga vrednost je 10 l.\nassets/slike/kos.png src/modul/kos.py\n[slovenski opis](https://primer.si/stran)\n[slovenski opis 3: projekt modra 2 l](https://primer.si/stran \"Naslov 3\")\n> <https://primer.si/stran>\nIgor je v bazenu v Ljubljani (projektne lokacije za testno vsebino) preizkusil nov tempo plavanja. Prve sto metrov je plaval počasi, naslednjih dvajset metrov pa poskusil hitreje. Plavalec je na koncu rekel: „Ritem je bil dober, vendar mi je zmanjkalo zadnjih dvajsetih.“",
+ "components": [
+  {
+   "component_id": "comp-prose-cooking-dev-0006",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 322
+  },
+  {
+   "component_id": "comp-malformed-malformed-nesting-dev-0001",
+   "category": "malformed",
+   "start_byte": 323,
+   "end_byte": 395
+  },
+  {
+   "component_id": "comp-markdown-strikethrough-dev-0008",
+   "category": "markdown",
+   "start_byte": 396,
+   "end_byte": 461
+  },
+  {
+   "component_id": "comp-structured-ini-dev-0003",
+   "category": "structured",
+   "start_byte": 462,
+   "end_byte": 616
+  },
+  {
+   "component_id": "comp-markdown-raw-html-dev-0003",
+   "category": "markdown",
+   "start_byte": 617,
+   "end_byte": 733
+  },
+  {
+   "component_id": "comp-machine-posix-paths-dev-0003",
+   "category": "machine",
+   "start_byte": 734,
+   "end_byte": 771
+  },
+  {
+   "component_id": "comp-markdown-links-dev-0003",
+   "category": "markdown",
+   "start_byte": 772,
+   "end_byte": 915
+  },
+  {
+   "component_id": "comp-prose-sports-dev-0008",
+   "category": "prose",
+   "start_byte": 916,
+   "end_byte": 1192
+  }
+ ]
+}

@@ -1,0 +1,112 @@
+{
+ "doc_id": "dev-001335",
+ "byte_length": 866,
+ "cp_length": 839,
+ "regions": [
+  {
+   "start_byte": 0,
+   "end_byte": 2,
+   "start_cp": 0,
+   "end_cp": 2,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 2,
+   "end_byte": 248,
+   "start_cp": 2,
+   "end_cp": 239,
+   "component_id": "comp-prose-everyday-advice-dev-0002",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 248,
+   "end_byte": 251,
+   "start_cp": 239,
+   "end_cp": 242,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 251,
+   "end_byte": 252,
+   "start_cp": 242,
+   "end_cp": 243,
+   "component_id": "comp-code-shell-bash-dev-0002",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 252,
+   "end_byte": 301,
+   "start_cp": 243,
+   "end_cp": 291,
+   "component_id": "comp-code-shell-bash-dev-0002",
+   "category": "code",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 301,
+   "end_byte": 302,
+   "start_cp": 291,
+   "end_cp": 292,
+   "component_id": "comp-code-shell-bash-dev-0002",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 302,
+   "end_byte": 305,
+   "start_cp": 292,
+   "end_cp": 295,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 305,
+   "end_byte": 471,
+   "start_cp": 295,
+   "end_cp": 457,
+   "component_id": "comp-prose-sports-dev-0011",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 471,
+   "end_byte": 474,
+   "start_cp": 457,
+   "end_cp": 460,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 474,
+   "end_byte": 866,
+   "start_cp": 460,
+   "end_cp": 839,
+   "component_id": "comp-prose-education-dev-0011",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  }
+ ],
+ "invariants": {
+  "tiling_complete": true,
+  "no_contradictory_overlaps": true,
+  "cp_range_exact": true
+ }
+}

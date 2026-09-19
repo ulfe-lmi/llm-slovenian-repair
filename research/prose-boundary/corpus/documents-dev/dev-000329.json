@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-000329",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T11-interactions",
+ "byte_length": 819,
+ "cp_length": 797,
+ "sha256": "c8ccb502eb545457e89779c3246cb63050ee5f5dc5f6b5c64bf43205aa6cd1d8",
+ "document": "`#include <string>`.\n```\n# Testni projekt: Pripomoček; avtor: Maja Lipovnik\nime = 'Ana'\nznesek = 5\nporočilo = f'Račun: {znesek} $ v `oklepaju`'\nopis = 'To je `koda` in *poudarek* ter _podčrtano_'\nif znesek > 0:\n    print(poročilo)\n# komentar z \\frac{a}{b}\n```\nVarčevanje v hiši se pokaže tudi pri majhnih stvareh, rekel bi, pri svetlobi v kopalnici. Luka je v projektu Varna hiša zapisal: »Luč ne pomeni velikega stroška, če jo ob koncu dneva ugasneš.«\nV projektu Gradec je bilo pri projektiranju jeklene konstrukcije ključno, koliko obremenitve prenese nosilni presek. Mladi konstruktor Jaka Kovač je, ob podpori projektirke Lune, predlagal dodatno ojačanje in začasne podlage. Sodelavci so se po dveh tednih razprave strinjali s predlogom. Končno je most dobil tudi dodatno zaščito pred erozijo.",
+ "components": [
+  {
+   "component_id": "comp-code-cpp-dev-0004",
+   "category": "code",
+   "start_byte": 0,
+   "end_byte": 19
+  },
+  {
+   "component_id": "comp-code-python-dev-0004",
+   "category": "code",
+   "start_byte": 21,
+   "end_byte": 264
+  },
+  {
+   "component_id": "comp-prose-everyday-advice-dev-0004",
+   "category": "prose",
+   "start_byte": 265,
+   "end_byte": 467
+  },
+  {
+   "component_id": "comp-prose-engineering-dev-0008",
+   "category": "prose",
+   "start_byte": 468,
+   "end_byte": 819
+  }
+ ]
+}

@@ -1,0 +1,82 @@
+{
+ "doc_id": "dev-000617",
+ "byte_length": 607,
+ "cp_length": 596,
+ "regions": [
+  {
+   "start_byte": 0,
+   "end_byte": 306,
+   "start_cp": 0,
+   "end_cp": 299,
+   "component_id": "comp-prose-cooking-dev-0004",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 306,
+   "end_byte": 307,
+   "start_cp": 299,
+   "end_cp": 300,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 307,
+   "end_byte": 309,
+   "start_cp": 300,
+   "end_cp": 302,
+   "component_id": "comp-math-bracket-tex-dev-0002",
+   "category": "math",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 309,
+   "end_byte": 421,
+   "start_cp": 302,
+   "end_cp": 414,
+   "component_id": "comp-math-bracket-tex-dev-0002",
+   "category": "math",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 421,
+   "end_byte": 423,
+   "start_cp": 414,
+   "end_cp": 416,
+   "component_id": "comp-math-bracket-tex-dev-0002",
+   "category": "math",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 423,
+   "end_byte": 424,
+   "start_cp": 416,
+   "end_cp": 417,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 424,
+   "end_byte": 607,
+   "start_cp": 417,
+   "end_cp": 596,
+   "component_id": "comp-prose-science-dev-0009",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  }
+ ],
+ "invariants": {
+  "tiling_complete": true,
+  "no_contradictory_overlaps": true,
+  "cp_range_exact": true
+ }
+}

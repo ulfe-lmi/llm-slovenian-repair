@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-001509",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T3-prose-fenced-prose",
+ "byte_length": 776,
+ "cp_length": 760,
+ "sha256": "6ea60096b4ba1761e8777191ff4ebab35c3d037352219b07edde6300ca542d53",
+ "document": "V testnem projektu Svetilka 2024 so učenci preizkusili baterijo tipa AA, sklep z ročico in upornost z oranžnim pasom. Ko so sklep odprli, se utripalka utihnila, čeprav je komponenta še vedno rahlo toplila (tudi pri šibkem toku). V dnevniku so zapisali: „Sij je enakomeren, dokler prst ne premakne ročice.“\n```\n/* Zaključni test: oseba Janež, projekt Brest */ const naslov = 'Vrednost je 25 $'; const opomba = `Podpis: **Janez** (_brez šumnika_)`; const pot = 'docs/vir.txt'; const razdelek2 = 8; console.log(naslov, opomba, pot, razdelek2);\n```\nV izmišljenem projektu Arhiv besed se motiv arhiva pojavi kot tiha zbirka pism, ki potujejo med slovenskimi in evropskimi mestoma. Izmišljeni avtor Martin Golob zgradi novelo iz treh stavkov. Njegova zgodba je tiha.",
+ "components": [
+  {
+   "component_id": "comp-prose-electronics-dev-0003",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 316
+  },
+  {
+   "component_id": "comp-code-javascript-dev-0008",
+   "category": "code",
+   "start_byte": 317,
+   "end_byte": 558
+  },
+  {
+   "component_id": "comp-prose-literature-dev-0010",
+   "category": "prose",
+   "start_byte": 559,
+   "end_byte": 776
+  }
+ ]
+}

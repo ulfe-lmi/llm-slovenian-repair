@@ -1,0 +1,102 @@
+{
+ "doc_id": "dev-001047",
+ "byte_length": 996,
+ "cp_length": 970,
+ "regions": [
+  {
+   "start_byte": 0,
+   "end_byte": 202,
+   "start_cp": 0,
+   "end_cp": 192,
+   "component_id": "comp-prose-sports-dev-0012",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 202,
+   "end_byte": 203,
+   "start_cp": 192,
+   "end_cp": 193,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 203,
+   "end_byte": 206,
+   "start_cp": 193,
+   "end_cp": 196,
+   "component_id": "comp-code-sql-dev-0010",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 206,
+   "end_byte": 207,
+   "start_cp": 196,
+   "end_cp": 197,
+   "component_id": "comp-code-sql-dev-0010",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 207,
+   "end_byte": 571,
+   "start_cp": 197,
+   "end_cp": 557,
+   "component_id": "comp-code-sql-dev-0010",
+   "category": "code",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 571,
+   "end_byte": 572,
+   "start_cp": 557,
+   "end_cp": 558,
+   "component_id": "comp-code-sql-dev-0010",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 572,
+   "end_byte": 575,
+   "start_cp": 558,
+   "end_cp": 561,
+   "component_id": "comp-code-sql-dev-0010",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 575,
+   "end_byte": 576,
+   "start_cp": 561,
+   "end_cp": 562,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 576,
+   "end_byte": 996,
+   "start_cp": 562,
+   "end_cp": 970,
+   "component_id": "comp-prose-everyday-advice-dev-0011",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  }
+ ],
+ "invariants": {
+  "tiling_complete": true,
+  "no_contradictory_overlaps": true,
+  "cp_range_exact": true
+ }
+}

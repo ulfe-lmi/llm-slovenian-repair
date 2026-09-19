@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-002930",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T5-lists",
+ "byte_length": 1111,
+ "cp_length": 1080,
+ "sha256": "6717b7a4920f334c999a6a1c76087ecfb4394f7914da46f3927d7bbc15f72862",
+ "document": "- V testnem projektu Svetilka 2024 so učenci preizkusili baterijo tipa AA, sklep z ročico in upornost z oranžnim pasom. Ko so sklep odprli, se utripalka utihnila, čeprav je komponenta še vedno rahlo toplila (tudi pri šibkem toku). V dnevniku so zapisali: „Sij je enakomeren, dokler prst ne premakne ročice.“\n- `// Vir: https://primer.si/koda`\n- V pisni pojasnitvi je bilo zapisano, da se rok za vložitev pritožbe šteje od dneva, ko je odločba dostavljena na elektronski naslov ali osebno. »V dveh primerih je bilo treba preveriti avtentičnost prijave,« je povedala urednica projekta. (To je trajalo pet delovnih dni in je zmanjšalo tveganje za napačno odločitev.)\n- Biološki kolektiv pri projektu Križanec je v gozdu nad Celjem opazoval rast gliv po jutranji rosi. Med analizo vzorčkov (tri serije, vse z značko Z3) je dr. Marko Zupan opažil, da se nekatere hife ob dotiku zavrtijo, kar je v laboratoriju razložil s preprostimi mehanskimi odzivi. »To ni čarobno vedenje,« je dejal in dodal, da so za znanstvenika pogosto najpomembnejši tisti podrobnosti, ki jih drugi spregledajo.",
+ "components": [
+  {
+   "component_id": "comp-prose-electronics-dev-0003",
+   "category": "prose",
+   "start_byte": 2,
+   "end_byte": 318
+  },
+  {
+   "component_id": "comp-code-cpp-dev-0002",
+   "category": "code",
+   "start_byte": 321,
+   "end_byte": 353
+  },
+  {
+   "component_id": "comp-prose-administration-dev-0003",
+   "category": "prose",
+   "start_byte": 356,
+   "end_byte": 684
+  },
+  {
+   "component_id": "comp-prose-science-dev-0012",
+   "category": "prose",
+   "start_byte": 687,
+   "end_byte": 1111
+  }
+ ]
+}

@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-001277",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T2-prose-math-prose",
+ "byte_length": 860,
+ "cp_length": 844,
+ "sha256": "1f38c51f3727a84240d8ae1a43d469c5ac58a429be2dcd41763b7aaa0775ab72",
+ "document": "Proces urejanja prostorskih posegov v okviru notranjega testnega projekta se je lani (2024) prenesel v skupno aplikacijo, kar je v prvih mesecih povzročilo zamude. Občinski sekretar, ki je sicer skrbel za informatiko, je sodelavce opozoril, naj se strogo držijo notranjih rokov in da je vsak dokument datiran, pečaten in arhiviran.\n\\begin{align} \\alpha_1 &= \\beta_1 + \\gamma_1 \\\\ \\delta_1 &= \\epsilon_1 \\times \\zeta_1 \\end{align}\nV starejši knjižnici, kjer so po projektu Omrežje leta 2018 posodobili povezave, je omrežje, ki ga je sestavil tehnični vodja Janez, še vedno precej zanesljivo, čeprav so nekatere točke brezžičnega dostopa starejše. Ko so v oktobru zamenjali enega od usmerjevalnikov, so zaposleni opazili, da je povezava na oddaljeni strani (v sosednjem nadstropju) postala hitrejša, kar je po mnenju urednice Tine vsekakor dobro.",
+ "components": [
+  {
+   "component_id": "comp-prose-administration-dev-0013",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 335
+  },
+  {
+   "component_id": "comp-math-align-env-dev-0001",
+   "category": "math",
+   "start_byte": 336,
+   "end_byte": 433
+  },
+  {
+   "component_id": "comp-prose-computing-dev-0013",
+   "category": "prose",
+   "start_byte": 434,
+   "end_byte": 860
+  }
+ ]
+}

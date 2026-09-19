@@ -1,0 +1,112 @@
+{
+ "doc_id": "dev-001940",
+ "byte_length": 950,
+ "cp_length": 927,
+ "regions": [
+  {
+   "start_byte": 0,
+   "end_byte": 2,
+   "start_cp": 0,
+   "end_cp": 2,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 2,
+   "end_byte": 301,
+   "start_cp": 2,
+   "end_cp": 297,
+   "component_id": "comp-prose-medicine-explainer-dev-0005",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 301,
+   "end_byte": 304,
+   "start_cp": 297,
+   "end_cp": 300,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 304,
+   "end_byte": 305,
+   "start_cp": 300,
+   "end_cp": 301,
+   "component_id": "comp-code-c-dev-0009",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 305,
+   "end_byte": 367,
+   "start_cp": 301,
+   "end_cp": 361,
+   "component_id": "comp-code-c-dev-0009",
+   "category": "code",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 367,
+   "end_byte": 368,
+   "start_cp": 361,
+   "end_cp": 362,
+   "component_id": "comp-code-c-dev-0009",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 368,
+   "end_byte": 371,
+   "start_cp": 362,
+   "end_cp": 365,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 371,
+   "end_byte": 550,
+   "start_cp": 365,
+   "end_cp": 535,
+   "component_id": "comp-prose-sports-dev-0006",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 550,
+   "end_byte": 553,
+   "start_cp": 535,
+   "end_cp": 538,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 553,
+   "end_byte": 950,
+   "start_cp": 538,
+   "end_cp": 927,
+   "component_id": "comp-prose-sports-dev-0003",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  }
+ ],
+ "invariants": {
+  "tiling_complete": true,
+  "no_contradictory_overlaps": true,
+  "cp_range_exact": true
+ }
+}

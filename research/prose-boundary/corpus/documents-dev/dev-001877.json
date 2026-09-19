@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-001877",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T8-quote-fenced",
+ "byte_length": 560,
+ "cp_length": 552,
+ "sha256": "8a18db094d3e946cdfdb682c11c87b67fdab948befdb317a29ed24608513f9fe",
+ "document": "> V soboto je ekipa iz Ljubljanskega učnega laboratorija testirala, kako hitro se sestanek prekine, če je omrežje preobremenjeno. Rezultat, ki so ga prebrali skupaj, je bil preprost: naprave se raje razbremenijo s kratkim premorom. `# Testni projekt: Pripomoček; avtor: Maja Lipovnik`\n```\n// Test: seznam opravil v izmišljenem projektu Brst.\nfn main() {\n    let naslov = String::from(\"vir: docs/vir.txt\");\n    let povezava = \"https://primer.si/koda\";\n    let cena = \"12 € ali 13 $\";\n    println!(\"**{naslov}** _podčrtano_ `{cena}` ({povezava})\");\n}\n```",
+ "components": [
+  {
+   "component_id": "comp-prose-computing-dev-0004",
+   "category": "prose",
+   "start_byte": 2,
+   "end_byte": 234
+  },
+  {
+   "component_id": "comp-code-python-dev-0004",
+   "category": "code",
+   "start_byte": 235,
+   "end_byte": 288
+  },
+  {
+   "component_id": "comp-code-rust-dev-0009",
+   "category": "code",
+   "start_byte": 289,
+   "end_byte": 560
+  }
+ ]
+}

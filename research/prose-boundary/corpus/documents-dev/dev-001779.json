@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-001779",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T9-prose-malformed-prose",
+ "byte_length": 647,
+ "cp_length": 633,
+ "sha256": "1571f9cfa3548d14243d5a2cea5b6354b80de0ba20be2c96de418c35c66ec108",
+ "document": "Za lažje razumevanje enačb je dobro, da učenci najprej preberejo nalogo dvakrat, nato pa s povedmi opišejo, kaj se dogaja, in šele potem iščejo tisto, česar ne vedo. V šolski knjigi iz leta 2015 je bil točen primer razgovora med učiteljico Ano in dijakom Tomom, ki sta prenašala pomen vsake besede v smisel zvezka, ne v zapis.\n<div>\nProjekt Maribor: nevtralna avtorizirana opomba za testni nalog.\nMaja je v pisarni preizkusila nov tiskalnik, ki pa se je ob prvimu zagonu pokazal bolj zahteven, kot so obljavali. V razpravi so sodelavci spregovorili o tem, da bi lahko preprostejši program za spremljanje tonerja rešil polovico tegob.",
+ "components": [
+  {
+   "component_id": "comp-prose-math-explainer-dev-0009",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 338
+  },
+  {
+   "component_id": "comp-malformed-partial-html-dev-0003",
+   "category": "malformed",
+   "start_byte": 339,
+   "end_byte": 408
+  },
+  {
+   "component_id": "comp-prose-computing-dev-0001",
+   "category": "prose",
+   "start_byte": 409,
+   "end_byte": 647
+  }
+ ]
+}

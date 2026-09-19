@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-000436",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T8-quote-fenced",
+ "byte_length": 753,
+ "cp_length": 733,
+ "sha256": "894f6f2764b64eaed45f504559b1159e7ee5f0d596b286b2af5cc7cb84290ac7",
+ "document": "> V izmišljenem raziskovalnem projektu “Arhiv Dravskih poti” (nevtralna testna zbirka) so zapisi o potovanjih po Dravi prikazali, kako so meje med skupnostmi spreminjale spomin na preteklost. Letnica 1918 je postala mejni simbol. Avtorica Ana Kralj je v vnosu zapisala (po mnenju uredništva), da je “zgodovina” večinoma molk med letnicami. `# Testni projekt: Razdelek; avtor: Maja Lipovnik`\n```\n# Fragment 6: *neodvisen*, podčrtano _besedilo_, (oklepaj)\necho 'Zvezdice: *zvezda* **dvakrat** in _podčrtano_'\necho 'Valuta: 1 $ in 9 € (testni znesek)'\necho 'Poti: docs/vir.txt in src/modul.py'\necho 'Spletna stran: https://primer.si/koda'\necho 'Id: razdelek2, seStez, HRAŠNA_VREDNOST'\necho 'Backquote `vse` in poudarčni znaki č š ž'\n```",
+ "components": [
+  {
+   "component_id": "comp-prose-history-dev-0011",
+   "category": "prose",
+   "start_byte": 2,
+   "end_byte": 350
+  },
+  {
+   "component_id": "comp-code-python-dev-0003",
+   "category": "code",
+   "start_byte": 351,
+   "end_byte": 401
+  },
+  {
+   "component_id": "comp-code-shell-bash-dev-0006",
+   "category": "code",
+   "start_byte": 402,
+   "end_byte": 753
+  }
+ ]
+}

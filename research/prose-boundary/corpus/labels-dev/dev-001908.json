@@ -1,0 +1,102 @@
+{
+ "doc_id": "dev-001908",
+ "byte_length": 529,
+ "cp_length": 515,
+ "regions": [
+  {
+   "start_byte": 0,
+   "end_byte": 199,
+   "start_cp": 0,
+   "end_cp": 192,
+   "component_id": "comp-prose-electronics-dev-0001",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 199,
+   "end_byte": 200,
+   "start_cp": 192,
+   "end_cp": 193,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 200,
+   "end_byte": 201,
+   "start_cp": 193,
+   "end_cp": 194,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 201,
+   "end_byte": 231,
+   "start_cp": 194,
+   "end_cp": 224,
+   "component_id": "comp-prose-cooking-dev-0010",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 231,
+   "end_byte": 233,
+   "start_cp": 224,
+   "end_cp": 226,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 233,
+   "end_byte": 264,
+   "start_cp": 226,
+   "end_cp": 257,
+   "component_id": "comp-machine-urls-dev-0006",
+   "category": "machine",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 264,
+   "end_byte": 265,
+   "start_cp": 257,
+   "end_cp": 258,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 265,
+   "end_byte": 266,
+   "start_cp": 258,
+   "end_cp": 259,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 266,
+   "end_byte": 529,
+   "start_cp": 259,
+   "end_cp": 515,
+   "component_id": "comp-prose-cooking-dev-0010",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  }
+ ],
+ "invariants": {
+  "tiling_complete": true,
+  "no_contradictory_overlaps": true,
+  "cp_range_exact": true
+ }
+}

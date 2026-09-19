@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-000648",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T11-interactions",
+ "byte_length": 980,
+ "cp_length": 962,
+ "sha256": "f9eaa20948d20ce8fd68fd7ae8fe4c40496aa3b9b596d24656657351e2a250f9",
+ "document": "`// Test: seznam opravil v izmišljenem projektu Brst.`.\n```\n# Testni projekt: Besedilo; avtor: Maja Lipovnik\nbesedilo = 'Črka č, š in ž'\nprojekt = 'Izmišljen projekt Lipa'\noseba = 'Maja'\nif besedilo:\n    print(besedilo)\n# komentar z \\frac{a}{b}\n```\nV zbirki izmišljenega muzeja na Bledu je ohranjen skicirni list iz leta 1623, ki ga pripisujejo obrtniku Janezu Hribarju. Na listu je zabeležen postopek obdelave lesa in navedena meritev širine deske, ki naj bi dosegala dva metra. Raziskovalci projekta Stare delavnice so zato sklepali, da je v tem času obstajala manjša lokalna tradicija izdelovanja lesnih izdelkov.\nČistilna mizarica v testnem projektu Čist in varčen dom ne potrebuje desetih različnih sredstev. Dovolj je topa voda, malo sredstva za maščobe in krpa, ki jo po uporabi speremo. Nekoč, leta 2021, je Petra iz Kranja za kuhinjo porabila samo pet evrov za krpe in tri evre za sredstvo, kar je za gospodinjstvo z dvema otrokoma hitro postalo navada.",
+ "components": [
+  {
+   "component_id": "comp-code-rust-dev-0009",
+   "category": "code",
+   "start_byte": 0,
+   "end_byte": 55
+  },
+  {
+   "component_id": "comp-code-python-dev-0007",
+   "category": "code",
+   "start_byte": 57,
+   "end_byte": 254
+  },
+  {
+   "component_id": "comp-prose-history-dev-0006",
+   "category": "prose",
+   "start_byte": 255,
+   "end_byte": 627
+  },
+  {
+   "component_id": "comp-prose-everyday-advice-dev-0012",
+   "category": "prose",
+   "start_byte": 628,
+   "end_byte": 980
+  }
+ ]
+}

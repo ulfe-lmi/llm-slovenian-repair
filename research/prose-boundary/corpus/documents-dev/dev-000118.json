@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-000118",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T9-prose-malformed-prose",
+ "byte_length": 641,
+ "cp_length": 627,
+ "sha256": "4b9f231350640a3c22d0993399423209f7d627d900d167a18573e9807ad9015f",
+ "document": "Slovenska pesniška tradicija ima svojo tišino. V izmišljenem projektu Glas in tišina, ki raziskuje naravno, se pojavi motiv dreves. Izmišljena pesnica Anja Horvat v zbirki iz leta 2015 piše: »Drevo ne govori, a se v šumu zdi, da je vprašanje.« Ta stavek se v evropskem kontekstu pogosto pojavi kot znak identitete.\nV Splitu smo opazovali staro obalo in šele zvečer spoznali, da je bilo morje mirno. Vodič je dejal: \"ogledaj najprej dvorano, nato pa solne jame\". Naslednji dan smo se sprehodili po starem mestnem jedru in kupili oljčno olje.\n``` Testni projekt Vrba: nevtralna vsebina za preizkus obdelave, avtorica Nika Horvat.",
+ "components": [
+  {
+   "component_id": "comp-prose-literature-dev-0008",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 324
+  },
+  {
+   "component_id": "comp-prose-travel-dev-0002",
+   "category": "prose",
+   "start_byte": 325,
+   "end_byte": 554
+  },
+  {
+   "component_id": "comp-malformed-unclosed-fence-dev-0003",
+   "category": "malformed",
+   "start_byte": 555,
+   "end_byte": 641
+  }
+ ]
+}

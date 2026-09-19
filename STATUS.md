@@ -139,11 +139,37 @@ concept verification. Product numeric semantics remain unchanged and blocked; no
 merge, release, deployment, or milestone acceptance is claimed.
 
 Objective 007 (isolated end-to-end concept verification) progressed through
-rounds 007-a..007-n on branch `oap/007-concept-verification` (PR #8, open and
-unmerged): the isolated concept prototype, the complete preserved research trail
+rounds 007-a..007-n on branch `oap/007-concept-verification` (PR #8 merged to
+main development-only 2026-09-17, merge commit
+7d2cc9ee37c1fc8c2a3eba238f89bc9bb242f9d9; objective 007 closed): the isolated
+concept prototype, the complete preserved research trail
 (registry, data-free reports/configs/results, file census, archive catalog), the
 full local A100-FP8 campaign (full-campaign8), and the frozen 007-m candidate
 method. The 007-o closure round published the current authoritative research state
 in `research/RESEARCH-STATE.md`; the machine-invalid 007-n report is classified
-INVALID_QUARANTINED by the 007-o order's forward-recovery linkage. No merge,
-release, deployment, or milestone acceptance is claimed.
+INVALID_QUARANTINED by the 007-o order's forward-recovery linkage. The PR #8
+merge was development-only: it established no release, deployment, or milestone
+acceptance.
+
+Objective 008 (prose-boundary qualification) is on branch
+`oap/008-prose-boundary-qualification` (PR #9, open and unmerged). Round 008-a
+qualified `pulldown-cmark` 0.13.4 with outcome GO; per the human research
+decision of 2026-09-17 that GO stands as supporting evidence only, with its two
+recorded methodological limitations (parser-informed fixture authoring before
+the first committed freeze; a 100 percent plain-prose preserved real-output
+sample). Round 008-b restored the post-merge research-state identities and
+registered 008-a in the experiment ledger. Round 008-c implemented the
+parser-first structural protection layer with its narrow residual semantic
+recognizer (frozen structural policy v2; the retained 008-a full-regex rule set
+as fail-closed fallback) and the authorized generated structural evaluation
+program: 1,234 LLM-generated components across 76 frozen prompt families,
+5,000 deterministic mashup documents with machine-known ground truth (3,000
+development committed / 2,000 hidden sealed by committed hash manifest in the
+private root), and 150 naturalistic whole-response outputs (80 development /
+70 hidden). The generated corpus tests structural safety, not Slovenian repair
+quality; dev-corpus results are tuning evidence, not acceptance. The blind
+hidden acceptance of the frozen implementation and the final objective-008
+disposition are deferred to round 008-f, with round 008-d recorded as the
+bounded application-baseline timing corrective whose machine-invalid report
+is classified INVALID_QUARANTINED by the 008-e order's forward-recovery
+linkage; no acceptance, merge, release, or deployment claim is made. Round 008-f executed the blind hidden acceptance of the frozen implementation (first and only use of the sealed hidden acceptance set) and the final objective-008 scientific conclusion is CONDITIONAL: one bounded, clearly understood structural-safety defect - 458 bytes of structured (YAML/HTML-XML) content across 20 of the 2,000 hidden documents, 0.147% of labeled protected bytes, mid-document raw blocks treated as paragraph text by the parser - with every other axis green (coordinates 0/0/0/0, malformed 0 violations, end-to-end invariants 1-7 passing on 2,000/2,000 replays). Round 008-f execution was BLOCKED before the independent naturalistic adjudication completed (one of 70 cases failed the predeclared one-retry policy with no label fabricated; 17 of 70 valid pass-1 observations preserved); the conclusion is structural-safety evidence only - no linguistic acceptance - no merge, release, or deployment claim; the smallest corrective 008-g scope is named in the 008-f report; objective 009 remains reserved. Round 008-g executed that corrective scope to closure: the bounded mid-document raw-block fix (structural policy v3; dev regression PASS) and the final objective-008 verdict on the NEW sealed v2 hidden acceptance set (2,000 documents, seal 4076/4076 verified data-free before and after evaluation) plus the completed 70-case naturalistic adjudication (70/70 labels, 0 failures, 113 calls) is CONDITIONAL (predeclared decision state): one bounded structural-safety defect - 51 bytes of protected content across 3 of the 2,000 hidden documents (0.0133% of labeled protected bytes; an HTML-block-boundary composition and a Markdown-in-keyvalue composition, both pre-existing and identical under the unfixed implementation) - with every other v2 axis green (coordinates 0/0/0/0, malformed 0 violations, end-to-end invariants 1-7 passing on 2,000/2,000 replays), 1,174 bytes remaining policy-exposed per the v3 label census (defect-class families 0 B), and 5 named material naturalistic-consistency cases capping the verdict; the named defect-class shapes are fixed on the fresh pool. The verdict is structural-safety evidence only - no linguistic acceptance, no experimental-MVP acceptance - no merge, release, or deployment claim; the smallest corrective scope is named in the 008-g report; objective 009 remains reserved.

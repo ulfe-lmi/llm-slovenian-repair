@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-002661",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T11-interactions",
+ "byte_length": 783,
+ "cp_length": 773,
+ "sha256": "b77720b54f0c886fad523c3259a281e3894ba73e1630bb62ffde7081c23f7de6",
+ "document": "`const naslov = 'Opomba: **pomembno**'; /* Naslov za Ana Kova`.\n```\n# Testni projekt: Seznam; avtor: Maja Lipovnik\nseznam = ['src/modul.py', 'docs/vir.txt']\nznacka = '*poudarek*'\noklepaj = '(neodvisno č)'\nvsota = sum(range(1, 4))\nif vsota == 6:\n    print('Seznam je pravilen')\n# komentar z \\frac{a}{b}\n```\nLuka je ob peti uri zvečer odkril, da se prenosnik sam po sebi hladi. V opombi za sodelavce je zapisal, da se to dogaja ob hkratnem delu s tremi programi. (Gre za navaden vzorec, ki ga je opisala tudi podpora.) Zato so preizkus ponovili brez dodatnih posegov.\nNa oknu štiri je čakal gospod Ivan. Hotel je obnoviti dovoljenje za manjšo poslovno enoto. Uslužbenica mu je dejala, da »pripravite še potrdilo o plačilu«, in dodala, da je rok (trideset dni) naveden v akti.",
+ "components": [
+  {
+   "component_id": "comp-code-javascript-dev-0002",
+   "category": "code",
+   "start_byte": 0,
+   "end_byte": 62
+  },
+  {
+   "component_id": "comp-code-python-dev-0006",
+   "category": "code",
+   "start_byte": 64,
+   "end_byte": 306
+  },
+  {
+   "component_id": "comp-prose-computing-dev-0003",
+   "category": "prose",
+   "start_byte": 307,
+   "end_byte": 567
+  },
+  {
+   "component_id": "comp-prose-administration-dev-0012",
+   "category": "prose",
+   "start_byte": 568,
+   "end_byte": 783
+  }
+ ]
+}

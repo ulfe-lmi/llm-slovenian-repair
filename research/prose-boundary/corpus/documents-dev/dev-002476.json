@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-002476",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T2-prose-math-prose",
+ "byte_length": 861,
+ "cp_length": 836,
+ "sha256": "832c68a7e94764e1bd43e297c660f41d9fa972453257413459aa014b72d5167d",
+ "document": "V laboratoriju projekta Merjač (stanica 4) je dr. Ana Kovač zapisala: »Med segrevanjem, in sicer ob dveh tisoč stopinjah Celzija, se material obnaša, kot bi šlo za tekočino,« in pojasnila, zakaj poskusne vzorce ob segrevanju obnašajo nepričakovano elastičnost. Rezultati iz leta 2021 so nato odprli pot k novi metodologiji, v kateri je pomembna vsaka mera, tudi tista, ki se zdi nesmiselna.\n\\Pr(Z > \\mu + \\sigma) = 1 - \\Phi(1) = 0.1587 \\text{ (verjetnost repa)}\nV starem receptu iz leta 1958 stoji, da se ajdova juha iz Ljubljane najprej posoli, nato pa počasi premeša, da ne bi zgrudila. “Ajda mora dišati po štrukljih,” je nekoč zapisala Anja, ki je testirala recept za projektni dnevnik okusov (po mnenju njene sestre, Marice). Pri pripravi je bil pomemben tudi čas: deset minut mešanja, nato pa še kratko ohlajanje na hladni plošči.",
+ "components": [
+  {
+   "component_id": "comp-prose-science-dev-0011",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 401
+  },
+  {
+   "component_id": "comp-math-probability-dev-0006",
+   "category": "math",
+   "start_byte": 402,
+   "end_byte": 472
+  },
+  {
+   "component_id": "comp-prose-cooking-dev-0001",
+   "category": "prose",
+   "start_byte": 473,
+   "end_byte": 861
+  }
+ ]
+}

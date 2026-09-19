@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-002879",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T9-prose-malformed-prose",
+ "byte_length": 456,
+ "cp_length": 448,
+ "sha256": "834e63916b3577d1f6ca9e8fc55a595b0133d8add89abad1c015498f32ee34b3",
+ "document": "Spremenljivka se obnaša kot stikalo v omarici. Vrednost se spremeni. Zanka se ponovi. Funkcija zaključi del.\n$20 je vrednost testnega opisa v projektu Gora Kresanja.\nV šoli zdravja v Trzinu so učenci (ki so sodelovali v projektu Mirni utripi) prebrali, da premalo gibanja lahko spremeni občutek moči in počutje. Takšne spremembe so lahko odziv na vsakdanjo utrujenost. Ko se pri nekem otroku ali odraslem ponovijo, je prav, da jih preveri zdravnik.",
+ "components": [
+  {
+   "component_id": "comp-prose-programming-explainer-dev-0008",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 110
+  },
+  {
+   "component_id": "comp-malformed-unmatched-dollar-dev-0003",
+   "category": "malformed",
+   "start_byte": 111,
+   "end_byte": 167
+  },
+  {
+   "component_id": "comp-prose-medicine-explainer-dev-0002",
+   "category": "prose",
+   "start_byte": 168,
+   "end_byte": 456
+  }
+ ]
+}

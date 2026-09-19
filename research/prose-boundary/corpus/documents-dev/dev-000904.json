@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-000904",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T3-prose-fenced-prose",
+ "byte_length": 1199,
+ "cp_length": 1164,
+ "sha256": "4369a0ff6414127c969b2c149daf49d47e0ba8c48c2f258bb35df9242ecf5c14",
+ "document": "Ko učimo trikotnike, lahko začnemo z vprašanjem, „Zakaj je šotor stabilen?“ in nato z ročno izrisanimi oblikami na papirju. Učenci pogosto uvidijo, da višina ni samo dolžina črte, ampak razdalja do nasprotne stranice, čeprav jo učbeniki včasih imenujejo le višina. Pri projektu Podrobnosti na papirju so učenci iz leta 2022 z risbo razložili, kako se oblika spreminja, ko premaknemo eno temeno točko.\n```\n/* Testni fragment 1: izmišljena oseba Maja, projekt Roža. */ SELECT 'Maja' AS `ime`, '1,20 $' AS `cena`, 'https://primer.si/koda' AS `url`, 'src/modul.py' AS `pot`, TRIM('*poudarek* in _podčrtano_') AS `opomba`, 'razdelek2' AS `razdelek2`, 'seStez' AS `seStez`, 'č' AS `HRAŠNA_VREDNOST` FROM (SELECT 1 AS `en`) AS `t` WHERE (`t`.`en` = 1);\n```\nBiološki kolektiv pri projektu Križanec je v gozdu nad Celjem opazoval rast gliv po jutranji rosi. Med analizo vzorčkov (tri serije, vse z značko Z3) je dr. Marko Zupan opažil, da se nekatere hife ob dotiku zavrtijo, kar je v laboratoriju razložil s preprostimi mehanskimi odzivi. »To ni čarobno vedenje,« je dejal in dodal, da so za znanstvenika pogosto najpomembnejši tisti podrobnosti, ki jih drugi spregledajo.",
+ "components": [
+  {
+   "component_id": "comp-prose-math-explainer-dev-0010",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 420
+  },
+  {
+   "component_id": "comp-code-sql-dev-0001",
+   "category": "code",
+   "start_byte": 421,
+   "end_byte": 774
+  },
+  {
+   "component_id": "comp-prose-science-dev-0012",
+   "category": "prose",
+   "start_byte": 775,
+   "end_byte": 1199
+  }
+ ]
+}

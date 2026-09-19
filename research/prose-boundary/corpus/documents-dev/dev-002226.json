@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-002226",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T5-lists",
+ "byte_length": 1039,
+ "cp_length": 1006,
+ "sha256": "6a7be6cb4c888f3df3030c509a092225f03754383a9142110c07ce3f2ae1a842",
+ "document": "- Maja iz Maribora je za tečaj pogovorne angleščine pripravila delavnice, pri katerih so se udeleženci sami odločili, ali znanje dokazujejo s pisnim delom ali s kratkim posnetim predavanjem. Pri vprašanju “kako oceniti napredek” so se dogovorili, da udeležencem (predvsem zaposlenim) velja tudi dnevnik samopregleda.\n- `int main(void) { char *napis = \"Besedilo: __podčrtano__ in *`\n- Odbor za občinske službe je obravnaval predlog o skrajšanem postopku za izdajo potrdil o prebivališču za študente, ki se vračajo iz tujine in potrebujejo dokazila za postopke v tujini. Ob tem je bil poudarek na tem, da se dokumenti, ki so že elektronsko predloženi, ne smejo ponovno zahtevati brez razloga.\n- V vprašanjih za projekt Zdravo mesto 2025 so otroci zaskrbljeni zaradi »bolečin v trebuhu« po školski malici. Raje ne govorimo o diagnozi; zabeležimo, kdaj se pojavi, koliko traja in kakšna je hrana (na primer po mlečnih izdelkih). Pri vsakem nepričakovanem ponovnem pojavi naj starš pokliče zdravniško ambulanto.",
+ "components": [
+  {
+   "component_id": "comp-prose-education-dev-0007",
+   "category": "prose",
+   "start_byte": 2,
+   "end_byte": 327
+  },
+  {
+   "component_id": "comp-code-c-dev-0007",
+   "category": "code",
+   "start_byte": 330,
+   "end_byte": 393
+  },
+  {
+   "component_id": "comp-prose-administration-dev-0004",
+   "category": "prose",
+   "start_byte": 396,
+   "end_byte": 711
+  },
+  {
+   "component_id": "comp-prose-medicine-explainer-dev-0012",
+   "category": "prose",
+   "start_byte": 714,
+   "end_byte": 1039
+  }
+ ]
+}

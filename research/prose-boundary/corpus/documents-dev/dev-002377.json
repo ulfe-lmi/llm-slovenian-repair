@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-002377",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T2-prose-math-prose",
+ "byte_length": 686,
+ "cp_length": 670,
+ "sha256": "acc779ae9e2a0a167086bb63aa3469a0e18c979b7dde81fc69684b8e3f2df11e",
+ "document": "Ana je v maju po slovenskih krajih obiskala Bled, kjer so jo pritegnili mirno jezero, gorski grad in svež planinski zrak. V Ljubljani je sprehodila ozke ulice starega mesta ter se po podnevnem sprehodu povzpnila do gradu. V dnevniku je zapisala nasvet, naj si turisti že pred prihodom preverijo odprte ure muzejev.\n\\begin{align} \\alpha_7 &= \\lim_{\\beta_7 \\to 0} \\frac{\\gamma_7}{\\beta_7} \\\\ \\delta_7 &= \\nabla \\epsilon_7 \\\\ \\zeta_7 &= \\eta_7 \\cdot \\theta_7 \\end{align}\nMaja je prvič poskusila smučati na Počitenju (izmišljena dolina). Sneg je bil mehki. Proga je bila široka. „Pazite,“ jo je opomnil vodja tečaja, „ker se v sosednji strmini lahko pojavijo skrite luknje.“",
+ "components": [
+  {
+   "component_id": "comp-prose-travel-dev-0011",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 316
+  },
+  {
+   "component_id": "comp-math-align-env-dev-0007",
+   "category": "math",
+   "start_byte": 317,
+   "end_byte": 469
+  },
+  {
+   "component_id": "comp-prose-sports-dev-0007",
+   "category": "prose",
+   "start_byte": 470,
+   "end_byte": 686
+  }
+ ]
+}

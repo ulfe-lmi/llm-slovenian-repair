@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-002581",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T8-quote-fenced",
+ "byte_length": 696,
+ "cp_length": 687,
+ "sha256": "2472c6830356f58e5d127b3b9cb066d26cca382c7e481268c52dec9c8015d610",
+ "document": "> Poleti 2024 sem z izmišljeno skupino Tihotažna obala raziskoval otok na Bledskem jezeru, kjer je bil zrak svež. Zvečer smo se zatekli v lokalno jedilnico, da bi poskusili potico. `fn opis_2() -> String { /* Testni projekt Lipa: č, š, ž, *po`\n```\n-- Fragment 3: izpisi za osebo\nCREATE TABLE izpisi (\n  id INT PRIMARY KEY,\n  ime TEXT,\n  \"razdelek2\" TEXT,\n  \"seStez\" TEXT\n);\nINSERT INTO izpisi (id, ime, \"razdelek2\", \"seStez\")\nVALUES (1, 'Ana Breznik', 'razdelek 2', 'žetona: 3 $');\nUPDATE izpisi SET \"seStez\" = 'glej https://primer.si/koda in docs/vir.txt';\nSELECT ime, \"razdelek2\", \"seStez\" FROM izpisi WHERE ime = 'Ana Breznik';\n-- Konec: (oklepaji) *zvezdice* `kodica` _podčrtano_\n```",
+ "components": [
+  {
+   "component_id": "comp-prose-travel-dev-0001",
+   "category": "prose",
+   "start_byte": 2,
+   "end_byte": 184
+  },
+  {
+   "component_id": "comp-code-rust-dev-0006",
+   "category": "code",
+   "start_byte": 185,
+   "end_byte": 250
+  },
+  {
+   "component_id": "comp-code-sql-dev-0011",
+   "category": "code",
+   "start_byte": 251,
+   "end_byte": 696
+  }
+ ]
+}

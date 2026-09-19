@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-002339",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T8-quote-fenced",
+ "byte_length": 799,
+ "cp_length": 794,
+ "sha256": "7e506b4e20decd3fc0421bf63841e2d264618eb96131a838db7e1aaf89f3b60b",
+ "document": "> V testni skupini je Luka baterijo namestil s pravim stikom na vrhu, nato pa preizkusil sklep z zgornjim in spodnjim stikom. Ko je sklep zaprl, se utripalka prižgala; ko ga je odprl, pa se je utripalka ugasnila. V pogovoru s mentorjem je rekel, da bo naslednjič poskusil drugo upornost. `int main(void) { char *napis = \"Tekst: *poudarjeno* in _podč`\n```\n-- Fragment 3: izpisi za osebo\nCREATE TABLE izpisi (\n  id INT PRIMARY KEY,\n  ime TEXT,\n  \"razdelek2\" TEXT,\n  \"seStez\" TEXT\n);\nINSERT INTO izpisi (id, ime, \"razdelek2\", \"seStez\")\nVALUES (1, 'Ana Breznik', 'razdelek 2', 'žetona: 3 $');\nUPDATE izpisi SET \"seStez\" = 'glej https://primer.si/koda in docs/vir.txt';\nSELECT ime, \"razdelek2\", \"seStez\" FROM izpisi WHERE ime = 'Ana Breznik';\n-- Konec: (oklepaji) *zvezdice* `kodica` _podčrtano_\n```",
+ "components": [
+  {
+   "component_id": "comp-prose-electronics-dev-0004",
+   "category": "prose",
+   "start_byte": 2,
+   "end_byte": 289
+  },
+  {
+   "component_id": "comp-code-c-dev-0002",
+   "category": "code",
+   "start_byte": 290,
+   "end_byte": 353
+  },
+  {
+   "component_id": "comp-code-sql-dev-0011",
+   "category": "code",
+   "start_byte": 354,
+   "end_byte": 799
+  }
+ ]
+}

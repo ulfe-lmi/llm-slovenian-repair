@@ -1,0 +1,102 @@
+{
+ "doc_id": "dev-001113",
+ "byte_length": 726,
+ "cp_length": 705,
+ "regions": [
+  {
+   "start_byte": 0,
+   "end_byte": 253,
+   "start_cp": 0,
+   "end_cp": 242,
+   "component_id": "comp-prose-everyday-advice-dev-0005",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 253,
+   "end_byte": 254,
+   "start_cp": 242,
+   "end_cp": 243,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 254,
+   "end_byte": 257,
+   "start_cp": 243,
+   "end_cp": 246,
+   "component_id": "comp-code-rust-dev-0010",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 257,
+   "end_byte": 258,
+   "start_cp": 246,
+   "end_cp": 247,
+   "component_id": "comp-code-rust-dev-0010",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 258,
+   "end_byte": 455,
+   "start_cp": 247,
+   "end_cp": 439,
+   "component_id": "comp-code-rust-dev-0010",
+   "category": "code",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 455,
+   "end_byte": 456,
+   "start_cp": 439,
+   "end_cp": 440,
+   "component_id": "comp-code-rust-dev-0010",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 456,
+   "end_byte": 459,
+   "start_cp": 440,
+   "end_cp": 443,
+   "component_id": "comp-code-rust-dev-0010",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 459,
+   "end_byte": 460,
+   "start_cp": 443,
+   "end_cp": 444,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 460,
+   "end_byte": 726,
+   "start_cp": 444,
+   "end_cp": 705,
+   "component_id": "comp-prose-electronics-dev-0011",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  }
+ ],
+ "invariants": {
+  "tiling_complete": true,
+  "no_contradictory_overlaps": true,
+  "cp_range_exact": true
+ }
+}

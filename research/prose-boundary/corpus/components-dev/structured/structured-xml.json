@@ -1,0 +1,90 @@
+[
+ {
+  "component_id": "comp-structured-xml-dev-0001",
+  "family": "structured-xml",
+  "instance": "dev",
+  "category": "structured",
+  "subcategory": "xml fragment",
+  "fragment": "<projekt id='prvi' naziv='Trgovec'><cilj postotek='25 %'>Izboljšanje prodaje</cilj></projekt>",
+  "fragment_sha256": "134d70f96076fb44aa99158dc24a9e958aa056524ca25d2bf6b3f7535df16567",
+  "fragment_bytes": 94,
+  "seed": "f29b76f1b4360cc9"
+ },
+ {
+  "component_id": "comp-structured-xml-dev-0002",
+  "family": "structured-xml",
+  "instance": "dev",
+  "category": "structured",
+  "subcategory": "xml fragment",
+  "fragment": "<oseba id='druga' ime='Ana Novak' funkcija='Koordinator' doba='3 dni'><kontakt>https://primer.si/novica</kontakt></oseba>",
+  "fragment_sha256": "d07847cd42d1e594c4cb015a06a7b31ba54f63ead764391029b93fe1fac703b1",
+  "fragment_bytes": 121,
+  "seed": "f29b76f1b4360cc9"
+ },
+ {
+  "component_id": "comp-structured-xml-dev-0003",
+  "family": "structured-xml",
+  "instance": "dev",
+  "category": "structured",
+  "subcategory": "xml fragment",
+  "fragment": "<merilo id='tretje' ime='Dolžina' enota='3,5 m'><opomba stanje='0,13'>Testni primer</opomba></merilo>",
+  "fragment_sha256": "941275a3036f4143fde71290a49e69c93c33d7f999661d1a9e0528335e053110",
+  "fragment_bytes": 102,
+  "seed": "f29b76f1b4360cc9"
+ },
+ {
+  "component_id": "comp-structured-xml-dev-0004",
+  "family": "structured-xml",
+  "instance": "dev",
+  "category": "structured",
+  "subcategory": "xml fragment",
+  "fragment": "<dogodek id='četrta' datum='2024-01-15' kraj='Ljubljana'><opis postotek='35 %'>Prva faza</opis></dogodek>",
+  "fragment_sha256": "27c31e058a5e200e58dd82d736ca51ca39eb64c706784a7a0bd09105fea12429",
+  "fragment_bytes": 106,
+  "seed": "f29b76f1b4360cc9"
+ },
+ {
+  "component_id": "comp-structured-xml-dev-0005",
+  "family": "structured-xml",
+  "instance": "dev",
+  "category": "structured",
+  "subcategory": "xml fragment",
+  "fragment": "<produkt id='peti' naziv='Sončna luč' cena='12,99 EUR'><opis status='aktivno'>*Novo* _test_ izdaja</opis></produkt>",
+  "fragment_sha256": "b3f03d846912d874ec54c145daaed4cf972d63036ab506c0d8e189d27943d506",
+  "fragment_bytes": 117,
+  "seed": "f29b76f1b4360cc9"
+ },
+ {
+  "component_id": "comp-structured-xml-dev-0006",
+  "family": "structured-xml",
+  "instance": "dev",
+  "category": "structured",
+  "subcategory": "xml fragment",
+  "fragment": "<poroca id='šesti' ime='Marko Kranjc' letnik='2024'><stevilo obseg='1.204 kos'>Izdelani artikli</stevilo></poroca>",
+  "fragment_sha256": "60ad7785e09e66795c4a8653304ba37cf2fa083d20a360f1ca279b7af0fb1280",
+  "fragment_bytes": 115,
+  "seed": "f29b76f1b4360cc9"
+ },
+ {
+  "component_id": "comp-structured-xml-dev-0007",
+  "family": "structured-xml",
+  "instance": "dev",
+  "category": "structured",
+  "subcategory": "xml fragment",
+  "fragment": "<nalog id='sedmi' priornost='srednja' rok='7 dni'><korak ime='preverjanje'><ustvarjanje>0,13</ustvarjanje></korak></nalog>",
+  "fragment_sha256": "26b38cb4d22face6ea18a6a4e6b7326157e6ef9a75c415b3d70787f88f000f5d",
+  "fragment_bytes": 122,
+  "seed": "f29b76f1b4360cc9"
+ },
+ {
+  "component_id": "comp-structured-xml-dev-0008",
+  "family": "structured-xml",
+  "instance": "dev",
+  "category": "structured",
+  "subcategory": "xml fragment",
+  "fragment": "<pogoj id='osmi' tip='notračno' postotek='60 %'><navodilo>Podrobneje: https://primer.si/novica</navodilo></pogoj>",
+  "fragment_sha256": "1a5864fcdce7e6e64f8327d0b5ae4b74cc88434d653694b620533707323b9897",
+  "fragment_bytes": 114,
+  "seed": "f29b76f1b4360cc9"
+ }
+]

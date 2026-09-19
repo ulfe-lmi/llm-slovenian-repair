@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-000226",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T7-prose-json-prose-latex",
+ "byte_length": 975,
+ "cp_length": 949,
+ "sha256": "dea5530f4d6413261056c82536c77b61fd50f9de63f4f4a7e23ad477c3bc207a",
+ "document": "Kadar učenci rešujejo enačbe, jim je koristno, da najprej povežejo oba dela z istimi dejanji, da ostane zvezek ravnovesja (kot pri tehtnici). Pri projektu Šolske številke so v letu 2021 poskusili z besedilnimi nalogami, v katerih je neznanka skrita v vsakdanji razgovoru. Zaradi tega se učenci naučijo, da razlaga ni le zapis, ampak način misljenja.\n{\"ime\":\"Oseba Miha\",\"dolžina\":\"1,8 m\",\"avtorsko\":\"Nevtralna testna vsebina\",\"razmerje\":\"0,13\",\"opomba\":\"*Izmišljena oseba* https://primer.si/novica\"}\nV kabolnici je najlažje, ko najprej zbrišemo prah z omaric, šele nato operemo tla. (Počakamo, da se voda malo posuši, in šele potem stiskamo krpo.) Tisti, ki imajo v hiši mačke, vedo, da lasov ne pomečeš, temveč jih zbereš s krpo za steklo. V testnem projektu Čist dom so to za vogla dopolnili s staro krtačo, ki jo občasno speremo.\n\\[ \\begin{bmatrix} \\theta_1 & \\mu_2 & 5 \\\\ 4 & \\phi_3 & -\\lambda_1 \\\\ \\sigma_2 & 9 & \\text{Savinja} \\end{bmatrix} \\]",
+ "components": [
+  {
+   "component_id": "comp-prose-math-explainer-dev-0006",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 358
+  },
+  {
+   "component_id": "comp-structured-json-dev-0006",
+   "category": "structured",
+   "start_byte": 359,
+   "end_byte": 510
+  },
+  {
+   "component_id": "comp-prose-everyday-advice-dev-0006",
+   "category": "prose",
+   "start_byte": 511,
+   "end_byte": 858
+  },
+  {
+   "component_id": "comp-math-bracket-tex-dev-0002",
+   "category": "math",
+   "start_byte": 859,
+   "end_byte": 975
+  }
+ ]
+}

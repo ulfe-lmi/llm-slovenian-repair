@@ -1,0 +1,298 @@
+{
+  "order": "008-d",
+  "artifact": "research/prose-boundary/results/baseline-timing/008d-decomposition.json",
+  "label": "diagnostic measurement of the inherited full-pytest population, not a gate run",
+  "host": {
+    "class": "local development machine (not a CI runner)",
+    "date": "2026-09-18 (Europe/Ljubljana)",
+    "note": "All local wall times below are local evidence only; they are never claimed as CI observations. The host is materially slower than the 2026-09-18 CI pool (local full session 1294.40 s vs 334.01-337.20 s captured CI sessions on the identical committed population), which is itself part of the timing-debt picture."
+  },
+  "frozen_stage_replication": {
+    "replicated_stage": "Application baseline driver stage 4 (full pytest), scripts/verify_development_baseline.py (byte-identical to base; DEFAULT_COMMAND_TIMEOUT = 300.0, unchanged)",
+    "workspace": "file-copy workspace with the driver's exact ignore rules (.git, .venv, .pytest_cache, .ruff_cache, .mypy_cache, build, dist, .oap-immutable-*); no .git in the workspace",
+    "environment": "driver environment: UV_PROJECT_ENVIRONMENT (owned, uv venv), UV_CACHE_DIR, UV_LINK_MODE=copy, UV_PYTHON=3.12, PYTHONNOUSERSITE=1, PYTHONDONTWRITEBYTECODE=1, owned TMPDIR, OAP_FORWARD_RECOVERY_HISTORY_SOURCE set to the development checkout",
+    "dependency_sync": "uv sync --frozen --all-groups --all-extras --python 3.12 (identical to driver stage 2)",
+    "command": "uv run --frozen --python 3.12 pytest -p no:cacheprovider --ignore=.venv -q (driver command) with --durations=0 added for the per-test duration list"
+  },
+  "full_session": {
+    "session_summary": "662 passed, 5 skipped, 91 subtests passed in 1294.40s (0:21:34)",
+    "returncode": 0,
+    "test_failures": 0,
+    "total_wall_seconds": 1294.4,
+    "population": "byte-identical to the 008-c final-head full-pytest population (the round changes no test file; the only population difference between the 2026-09-17 and 2026-09-18 CI populations was the single new 008-c focused test file, already present in this population)"
+  },
+  "per_directory_totals": [
+    {
+      "directory": "tests/contract",
+      "session_summary": "239 passed in 8.08s",
+      "tests": 239,
+      "passed": 239,
+      "skipped": 0,
+      "subtests": 0,
+      "wall_seconds": 8.08,
+      "command_note": "driver command form (no path-argument import-mode change)"
+    },
+    {
+      "directory": "oap/tests",
+      "session_summary": "127 passed, 2 skipped, 16 subtests passed in 868.67s (0:14:28)",
+      "tests": 129,
+      "passed": 127,
+      "skipped": 2,
+      "subtests": 16,
+      "wall_seconds": 868.67,
+      "command_note": "driver command form; dominant local cost: OAP acceptance/forward-recovery tests that create and commit disposable synthetic git fixtures (observed heavy write churn in those fixture repositories on this host's storage)"
+    },
+    {
+      "directory": "concept-verification/tests",
+      "session_summary": "19 passed in 4.62s",
+      "tests": 19,
+      "passed": 19,
+      "skipped": 0,
+      "subtests": 0,
+      "wall_seconds": 4.62,
+      "command_note": "driver command form"
+    },
+    {
+      "directory": "research/tests",
+      "session_summary": "277 passed, 3 skipped, 75 subtests passed in 413.24s (0:06:53)",
+      "tests": 280,
+      "passed": 277,
+      "skipped": 3,
+      "subtests": 75,
+      "wall_seconds": 413.24,
+      "command_note": "invoked as 'python -B -m pytest research/tests' (python -m form): without a collected ancestor package at the workspace root, the bare driver command fails standalone collection of this directory with ModuleNotFoundError: No module named 'research' (pytest import-mode artifact of the single-directory invocation only; the driver's actual full-stage command collects the directory without error, as this full session and every CI run show). Environment and test files identical."
+    }
+  ],
+  "cross_check": "directory totals sum to the full session exactly: 239+127+19+277 = 662 passed; 2+3 = 5 skipped; 16+75 = 91 subtests; 8.08+868.67+4.62+413.24 = 1294.61 s vs 1294.40 s full-session wall time (difference is inter-directory overhead)",
+  "top_40_slowest_tests_local": [
+    {
+      "test": "research/tests/test_contextual_validator.py::ContextualValidatorTests::test_aggregation_replays_completed_observations_with_zero_transport_calls",
+      "seconds": 205.21
+    },
+    {
+      "test": "research/tests/test_parser_first_protection.py::EndToEndInvariantTests::test_invariants_1_to_7_on_dev_documents",
+      "seconds": 145.18
+    },
+    {
+      "test": "oap/tests/test_forward_recovery.py::ForwardRecoveryTests::test_transcript_index_and_revision_quarantine_only_after_valid_successor",
+      "seconds": 35.08
+    },
+    {
+      "test": "oap/tests/test_acceptance.py::Acceptance::test_B11_materializer_dry_noop_refresh",
+      "seconds": 25.79
+    },
+    {
+      "test": "oap/tests/test_split_layout.py::SplitLayout::test_split_materialization_no_pipe_in_strategy_and_noop",
+      "seconds": 24.58
+    },
+    {
+      "test": "oap/tests/test_forward_recovery.py::ForwardRecoveryTests::test_delete_readd_history_is_rejected",
+      "seconds": 18.26
+    },
+    {
+      "test": "oap/tests/test_acceptance.py::Acceptance::test_B17_publish_crash_retry_no_replay",
+      "seconds": 15.96
+    },
+    {
+      "test": "oap/tests/test_forward_recovery.py::ForwardRecoveryTests::test_disconnected_transcript_revision_cannot_launder_recovery",
+      "seconds": 13.26
+    },
+    {
+      "test": "oap/tests/test_forward_recovery.py::ForwardRecoveryTests::test_malformed_current_report_without_successor_blocks",
+      "seconds": 11.52
+    },
+    {
+      "test": "oap/tests/test_process_boundaries.py::Processes::test_B11_scoped_backup_refresh_actual",
+      "seconds": 11.46
+    },
+    {
+      "test": "oap/tests/test_process_boundaries.py::Processes::test_B10_helper_help_and_real_entry_failures",
+      "seconds": 11.16
+    },
+    {
+      "test": "oap/tests/test_acceptance.py::Acceptance::test_B12_worktree_unicode_dirty_fifo",
+      "seconds": 10.89
+    },
+    {
+      "test": "oap/tests/test_whitespace.py::WhitespaceVerifier::test_deleted_and_readded_incident_fails_history_binding",
+      "seconds": 9.75
+    },
+    {
+      "test": "oap/tests/test_process_boundaries.py::Processes::test_B11_manifest_copy_includes_source_lock_and_owner_files",
+      "seconds": 9.18
+    },
+    {
+      "test": "oap/tests/test_acceptance.py::Acceptance::test_B26_candidate_trusted_base_and_private_refresh",
+      "seconds": 8.86
+    },
+    {
+      "test": "oap/tests/test_acceptance.py::Acceptance::test_B20b_SELF_reject_extra_and_wrong_parent",
+      "seconds": 8.72
+    },
+    {
+      "test": "oap/tests/test_split_layout.py::SplitLayout::test_doctor_validates_native_fifos_with_selected_sync_modes",
+      "seconds": 8.68
+    },
+    {
+      "test": "oap/tests/test_process_boundaries.py::Processes::test_B19_B29_one_actual_fake_invocation_after_real_FIFO",
+      "seconds": 8.67
+    },
+    {
+      "test": "oap/tests/test_acceptance.py::Acceptance::test_B34_private_config_canary_and_cleanup",
+      "seconds": 8.62
+    },
+    {
+      "test": "oap/tests/test_transcript_guard.py::TranscriptGuard::test_missing_initial_objective_and_suffix_origins_are_rejected",
+      "seconds": 8.6
+    },
+    {
+      "test": "oap/tests/test_process_boundaries.py::Processes::test_B27_live_shell_returns_after_fake_CLI_exit",
+      "seconds": 8.47
+    },
+    {
+      "test": "oap/tests/test_acceptance.py::Acceptance::test_B35_inactive_actual_structure_and_doctor",
+      "seconds": 8.47
+    },
+    {
+      "test": "oap/tests/test_transcript_guard.py::TranscriptGuard::test_draft_order_is_rejected",
+      "seconds": 8.45
+    },
+    {
+      "test": "oap/tests/test_split_layout.py::SplitLayout::test_split_runtime_routes_single_wait_and_keeps_all_gates",
+      "seconds": 8.4
+    },
+    {
+      "test": "oap/tests/test_forward_recovery.py::ForwardRecoveryTests::test_protocol_state_malformed_current_corrective_report_blocks",
+      "seconds": 8.39
+    },
+    {
+      "test": "oap/tests/test_acceptance.py::Acceptance::test_B03_router_and_unknown_role",
+      "seconds": 8.37
+    },
+    {
+      "test": "oap/tests/test_acceptance.py::Acceptance::test_B13_inactive_invalid_pointer",
+      "seconds": 8.33
+    },
+    {
+      "test": "oap/tests/test_process_boundaries.py::Processes::test_B28_any_Codex_version_policy_accepts_upgrade",
+      "seconds": 8.28
+    },
+    {
+      "test": "oap/tests/test_split_layout.py::SplitLayout::test_sync_mode_exception_is_exact_and_symlink_safe",
+      "seconds": 8.26
+    },
+    {
+      "test": "oap/tests/test_acceptance.py::Acceptance::test_B19_single_control_and_duplicate_suppression",
+      "seconds": 8.26
+    },
+    {
+      "test": "oap/tests/test_acceptance.py::Acceptance::test_B09_canonical_reference_no_reseed",
+      "seconds": 8.23
+    },
+    {
+      "test": "oap/tests/test_acceptance.py::Acceptance::test_B30_recovery_same_id_and_unpublished_report",
+      "seconds": 8.22
+    },
+    {
+      "test": "oap/tests/test_acceptance.py::Acceptance::test_B28_operation_gates_and_quoting",
+      "seconds": 8.21
+    },
+    {
+      "test": "oap/tests/test_process_boundaries.py::Processes::test_B27_actual_isolated_tmux_panes_and_cleanup",
+      "seconds": 8.18
+    },
+    {
+      "test": "oap/tests/test_acceptance.py::Acceptance::test_B05_transitive_read_set_and_exceptions",
+      "seconds": 8.17
+    },
+    {
+      "test": "oap/tests/test_process_boundaries.py::Processes::test_B29_unrelated_tmux_session_refused",
+      "seconds": 8.16
+    },
+    {
+      "test": "oap/tests/test_acceptance.py::Acceptance::test_B04_full_and_dense",
+      "seconds": 8.1
+    },
+    {
+      "test": "oap/tests/test_acceptance.py::Acceptance::test_B29_idle_nonzero_locks_no_resurrection",
+      "seconds": 8.1
+    },
+    {
+      "test": "oap/tests/test_acceptance.py::Acceptance::test_B06_role_retention",
+      "seconds": 8.09
+    },
+    {
+      "test": "oap/tests/test_acceptance.py::Acceptance::test_B27_setup_shell_plan_no_model",
+      "seconds": 8.09
+    }
+  ],
+  "ci_reference_points_verbatim": [
+    {
+      "head": "8300573 (008-b implementation head)",
+      "pool_date": "2026-09-17",
+      "stage_outcome": "FAILED (not TIMEOUT)",
+      "session_summary": "613 tests total: 1 failed (the designed pre-report count assertion only), 5 skipped, 87 subtests",
+      "wall_seconds": 134.92,
+      "source": "immutable 008-b report / 008-d order provenance E"
+    },
+    {
+      "head": "d0c284a (008-c implementation head)",
+      "pool_date": "2026-09-18",
+      "stage_outcome": "TIMEOUT at the 300 s cap (with the then-present drift and B10 failures)",
+      "session_summary": "recorded in the 008-c final-head review receipt",
+      "wall_seconds": 334.87,
+      "source": "008-c final-head review receipt via 008-d order provenance E"
+    },
+    {
+      "head": "21c4135 (008-c implementation head)",
+      "pool_date": "2026-09-18",
+      "stage_outcome": "TIMEOUT at the 300 s cap",
+      "session_summary": "2 failed, 651 passed, 14 skipped, 89 subtests passed in 329.96s (the two failures: B10 link assertion + designed pre-report count assertion)",
+      "wall_seconds": 329.96,
+      "source": "immutable 008-c report (run 35344931218)"
+    },
+    {
+      "head": "9aec9cb (008-c implementation head)",
+      "pool_date": "2026-09-18",
+      "stage_outcome": "TIMEOUT at the 300 s cap",
+      "session_summary": "1 failed, 652 passed, 14 skipped, 89 subtests passed in 337.06s (sole failure: the designed pre-report count assertion)",
+      "wall_seconds": 337.06,
+      "source": "immutable 008-c report (run 35346872967)"
+    },
+    {
+      "head": "4b6a90a (008-c final head)",
+      "pool_date": "2026-09-18",
+      "stage_outcome": "TIMEOUT at the 300 s cap",
+      "session_summary": "653 passed, 14 skipped, 89 subtests passed in 337.20s (0:05:37); zero test failures",
+      "wall_seconds": 337.2,
+      "source": "run 35350302300 original attempt (this round re-verified)"
+    },
+    {
+      "head": "4b6a90a (008-c final head, rerun observation 1 of 2)",
+      "pool_date": "2026-09-18",
+      "stage_outcome": "TIMEOUT at the 300 s cap",
+      "session_summary": "653 passed, 14 skipped, 89 subtests passed in 335.98s (0:05:35); zero test failures",
+      "wall_seconds": 335.98,
+      "source": "run 35350302300 rerun attempt 1 (job 15:09:19Z-15:15:12Z)"
+    },
+    {
+      "head": "4b6a90a (008-c final head, rerun observation 2 of 2)",
+      "pool_date": "2026-09-18",
+      "stage_outcome": "TIMEOUT at the 300 s cap",
+      "session_summary": "653 passed, 14 skipped, 89 subtests passed in 334.01s (0:05:34); zero test failures",
+      "wall_seconds": 334.01,
+      "source": "run 35350302300 rerun attempt 2 (job 15:15:49Z-15:21:37Z)"
+    },
+    {
+      "head": "75e49a5 (008-d activation commit, intermediate head)",
+      "pool_date": "2026-09-18",
+      "stage_outcome": "TIMEOUT at the 300 s cap",
+      "session_summary": "653 passed, 14 skipped, 89 subtests passed in 327.35s (0:05:27); zero test failures",
+      "wall_seconds": 327.35,
+      "source": "run 35360956896 (job 15:12:11Z-15:17:56Z); intermediate observation, not an order-mandated check state"
+    }
+  ],
+  "classification": "Inherited application-suite timing debt amplified by runner-pool variance against the frozen 007-era 300 s per-command cap. Evidence: (1) every 2026-09-18-pool full-pytest observation of this round (327.35-337.20 s) sits above the 300 s cap with ZERO test failures, while the 2026-09-17 pool ran the near-identical population in 134.92 s; (2) the local dev machine runs the same population in 1294.40 s with zero failures, i.e. the suite is timing-heavy in absolute terms (two research tests dominate: test_aggregation_replays_completed_observations_with_zero_transport_calls 205.21 s and test_invariants_1_to_7_on_dev_documents 145.18 s locally, plus the OAP git-fixture test family: 868.67 s for oap/tests locally); (3) the 008-c round's only full-pytest population change is the single new focused test file (48 tests; 14 of them skip in CI without the pinned Rust helper), and no pre-existing test was modified. Not a 008-caused test failure, not a 008-c defect; no test, gate, cap, driver, or workflow change was made by this round.",
+  "data_free": true,
+  "privacy_note": "No private text, customer data, credentials, endpoint values, or private absolute paths in this file; the host is referenced only as the local development machine. All CI session summaries are quoted from public GitHub run logs of the public repository."
+}

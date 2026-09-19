@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-000482",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T10-randomized",
+ "byte_length": 839,
+ "cp_length": 823,
+ "sha256": "255aad34fb761b28dc6b4fc30be0a55c53eb8576e7d59df9edcc0e0465c8f2f3",
+ "document": "V projektu Zdrav vsak dan (v letu 2024) so izpostavili, da se lahko obremenjenost kaže v hitrem dihanju, v slabšem spanju ali v občutku tesnobe. To ni razlaga za domov, ampak spomin, da so telesni signali odziv. Ko se ti signali ponavljajo, jih najprej opiše oseba, nato pa jih preveri zdravnik.\r\n```\r\nint main(void) { int razdelek2 = 7; char *naslov = \"Ana (izmišljena oseba)\"; char *pot = \"docs/vir.txt\"; (void)razdelek2; (void)naslov; (void)pot; return 0; } /* Izmišljen projekt: Ana */\r\n```\r\nV pisarni so za projekt »Dober dose« postavili novo usmerjevalno napravo bližje oknu, da bi signal dosegel tudi do kavne mize (kjer se vedno nabere največ ljudi). »Mrežna kartica«, so dejali tisti, ki so prenašali fotografije, se je hitreje odzvala, ko so se izognili prenatrpanosti. Določene datoteke so zato pustili za večer.",
+ "components": [
+  {
+   "component_id": "comp-prose-medicine-explainer-dev-0005",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 299
+  },
+  {
+   "component_id": "comp-code-c-dev-0003",
+   "category": "code",
+   "start_byte": 301,
+   "end_byte": 500
+  },
+  {
+   "component_id": "comp-prose-computing-dev-0008",
+   "category": "prose",
+   "start_byte": 502,
+   "end_byte": 839
+  }
+ ]
+}

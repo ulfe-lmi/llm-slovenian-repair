@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-002916",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T2-prose-math-prose",
+ "byte_length": 732,
+ "cp_length": 716,
+ "sha256": "dc3ccd2bdb1d39435e444660998bf4bddd340a6983c25fbe94e1c5304add5980",
+ "document": "V Ljubljani je mladinski nogometni projekt (pod imenom Mladi črt) v jeseni 2023 izvedel pet treningov na travi, kjer so fantje vadili predajo in branje prostora. Po dveh tednih so udeleženci povedali, da so se počutili bolj sproščeno, čeprav je bila prva tekma pravzaprav neuspešna. V uvodu je trener, izmišljen Matej Kovač, poudaril: 'Kljub vsemu so pomembna pravila in strpljenje.'\n$$\\frac{\\sigma}{\\tau} = \\frac{7}{9} \\div \\phi = \\text{Ljubljana}$$\nMare je v učbeniku zapisal, da so upornosti kot omejevalniki hitrosti v malem svetu elektronike, in v vnosih iz leta 2011 je opozoril: ”Ne pozabi na polariteto baterij, sicer lučka ne bo delovala.“ Ko je dodal dodatno upornost, se je svetloba umirila, kot je želel.",
+ "components": [
+  {
+   "component_id": "comp-prose-sports-dev-0001",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 392
+  },
+  {
+   "component_id": "comp-math-display-dollar-dev-0004",
+   "category": "math",
+   "start_byte": 393,
+   "end_byte": 459
+  },
+  {
+   "component_id": "comp-prose-electronics-dev-0007",
+   "category": "prose",
+   "start_byte": 460,
+   "end_byte": 732
+  }
+ ]
+}

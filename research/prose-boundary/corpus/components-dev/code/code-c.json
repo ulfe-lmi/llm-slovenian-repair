@@ -1,0 +1,123 @@
+[
+ {
+  "component_id": "comp-code-c-dev-0001",
+  "family": "code-c",
+  "instance": "dev",
+  "category": "code",
+  "subcategory": "C",
+  "fragment": "int main(void) { int seStez = 3; char *pot = \"src/modul.py\"; (void)seStez; (void)pot; return 0; } /* Testni fragment: č, š, ž */",
+  "fragment_sha256": "efb2a81dc54b07dd6f42558cbfa2845a87988d5cfcf8ebe679b9ce40f7a1a56a",
+  "fragment_bytes": 131,
+  "seed": "2950db7707fca082"
+ },
+ {
+  "component_id": "comp-code-c-dev-0002",
+  "family": "code-c",
+  "instance": "dev",
+  "category": "code",
+  "subcategory": "C",
+  "fragment": "int main(void) { char *napis = \"Tekst: *poudarjeno* in _podčrtano_\"; char *cena = \"Cena: 10 $ (dolar)\"; char *url = \"https://primer.si/koda\"; (void)napis; (void)cena; (void)url; return 0; } /* Markov podatek */",
+  "fragment_sha256": "f80fabd84fd88d2fd01c4b899b3e6dad32a899d3adb06aa2c16dc7530158f86d",
+  "fragment_bytes": 211,
+  "seed": "2950db7707fca082"
+ },
+ {
+  "component_id": "comp-code-c-dev-0003",
+  "family": "code-c",
+  "instance": "dev",
+  "category": "code",
+  "subcategory": "C",
+  "fragment": "int main(void) { int razdelek2 = 7; char *naslov = \"Ana (izmišljena oseba)\"; char *pot = \"docs/vir.txt\"; (void)razdelek2; (void)naslov; (void)pot; return 0; } /* Izmišljen projekt: Ana */",
+  "fragment_sha256": "93c4b10b20f2b0c1575b69ba4a199567396e856c968fea4d2037cdd21eebb386",
+  "fragment_bytes": 189,
+  "seed": "2950db7707fca082"
+ },
+ {
+  "component_id": "comp-code-c-dev-0004",
+  "family": "code-c",
+  "instance": "dev",
+  "category": "code",
+  "subcategory": "C",
+  "fragment": "int main(void) { char *koda = \"Znak: `koda` (oklepaji)\"; char *valuta = \"Znesek: 5 $ in 10 EUR\"; char *rel = \"src/modul.py\"; char *oznaka = \"HRAŠNA_VREDNOST\"; (void)koda; (void)valuta; (void)rel; (void)oznaka; return 0; } /* Backquote in valuta */",
+  "fragment_sha256": "030f5ed27d682a43b4200ee6da3c552f7028ea843fea8c8906a3792990db4a3c",
+  "fragment_bytes": 248,
+  "seed": "2950db7707fca082"
+ },
+ {
+  "component_id": "comp-code-c-dev-0005",
+  "family": "code-c",
+  "instance": "dev",
+  "category": "code",
+  "subcategory": "C",
+  "fragment": "int main(void) { char *cena1 = \"1 $\"; char *cena2 = \"2 EUR\"; char *potA = \"docs/vir.txt\"; char *potB = \"src/modul.py\"; int seStez = 1; (void)cena1; (void)cena2; (void)potA; (void)potB; (void)seStez; return 0; } /* Valute: $ in EUR */",
+  "fragment_sha256": "b20c266e06429a9a0a85bf4167357786bf2ca26fb6db4041aa41ef43a4fb3a8a",
+  "fragment_bytes": 233,
+  "seed": "2950db7707fca082"
+ },
+ {
+  "component_id": "comp-code-c-dev-0006",
+  "family": "code-c",
+  "instance": "dev",
+  "category": "code",
+  "subcategory": "C",
+  "fragment": "int HRAŠNA_VREDNOST = 1; int main(void) { char *pot = \"docs/vir.txt\"; int razdelek2 = 2; (void)HRAŠNA_VREDNOST; (void)pot; (void)razdelek2; return 0; } /* Neposredni identifikator */",
+  "fragment_sha256": "15d68ab753c4cba942eda76c353badc9d6ef8e01cf252a644c4db68b7816f490",
+  "fragment_bytes": 184,
+  "seed": "2950db7707fca082"
+ },
+ {
+  "component_id": "comp-code-c-dev-0007",
+  "family": "code-c",
+  "instance": "dev",
+  "category": "code",
+  "subcategory": "C",
+  "fragment": "int main(void) { char *napis = \"Besedilo: __podčrtano__ in **dvojno**\"; char *back = \"Backquote: `zvezda`\"; char *url = \"https://primer.si/koda\"; int razdelek2 = 9; (void)napis; (void)back; (void)url; (void)razdelek2; return 0; } /* Podčrtano in dvojno */",
+  "fragment_sha256": "3707eb4390fe9490e80d9f0499999ad5faa693d9092b7f9ad30e04722e3821c8",
+  "fragment_bytes": 257,
+  "seed": "2950db7707fca082"
+ },
+ {
+  "component_id": "comp-code-c-dev-0008",
+  "family": "code-c",
+  "instance": "dev",
+  "category": "code",
+  "subcategory": "C",
+  "fragment": "int main(void) { char *znaki = \"Znaki: č, š, ž\"; char *pot = \"docs/vir.txt\"; char *oznaka = \"seStez\"; char *url = \"https://primer.si/koda\"; (void)znaki; (void)pot; (void)oznaka; (void)url; return 0; } /* Končni fragment */",
+  "fragment_sha256": "bb4dcad0733352b5b39f7dc6df8c711fa8dce3b531b2e8f08d4111044644157e",
+  "fragment_bytes": 226,
+  "seed": "2950db7707fca082"
+ },
+ {
+  "component_id": "comp-code-c-dev-0009",
+  "family": "code-c",
+  "instance": "dev",
+  "category": "code",
+  "subcategory": "C",
+  "fragment": "/* Primer 1: pot in cena, črka ž */ int main(void) { const char *pot = \"docs/vir.txt\"; const char *naslov = \"Naslov: *poudarek* in _podčrtano_\"; int seStez = 12; const char *cena = \"Cena: 12,50 $ (oklepji)\"; (void)pot; (void)naslov; (void)cena; return seStez; }",
+  "fragment_sha256": "42c157a54c2fded2f9538befe7145774db40bede91c96e9307dd77caba84fc5b",
+  "fragment_bytes": 264,
+  "seed": "2950db7707fca082"
+ },
+ {
+  "component_id": "comp-code-c-dev-0010",
+  "family": "code-c",
+  "instance": "dev",
+  "category": "code",
+  "subcategory": "C",
+  "fragment": "/* Primer 2: url in backquote */ int main(void) { const char *url = \"https://primer.si/koda\"; const char *opis = \"Znak `backquote`, pot: src/modul.py, črka š\"; int razdelek2 = 7; const char *opozorilo = \"Opomba: *nevarno* in _poudarek_\"; (void)url; (void)opis; (void)opozorilo; return razdelek2; }",
+  "fragment_sha256": "c281475378bd9a5e4472d0962ebc4da3b321a1319f9d40cfa87b33a012d3fcb3",
+  "fragment_bytes": 299,
+  "seed": "2950db7707fca082"
+ },
+ {
+  "component_id": "comp-code-c-dev-0011",
+  "family": "code-c",
+  "instance": "dev",
+  "category": "code",
+  "subcategory": "C",
+  "fragment": "/* Primer 3: vrednost in identifikator */ int main(void) { const char *pot = \"src/modul.py\"; const char *dokument = \"docs/vir.txt\"; const char *meta = \"Vrednost: 99,90 $ (oklepji) *poudarek* in HRAŠNA_VREDNOST\"; const char *naslov = \"https://primer.si/koda\"; int hraSnaVrednost2 = 3; (void)pot; (void)dokument; (void)meta; (void)naslov; return hraSnaVrednost2; }",
+  "fragment_sha256": "d4015777c8d018ab6eb35d748836a41807e5dbe92f87041ff8ecf8b3db256a21",
+  "fragment_bytes": 363,
+  "seed": "2950db7707fca082"
+ }
+]

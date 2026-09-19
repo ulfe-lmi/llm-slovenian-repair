@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-001132",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T11-interactions",
+ "byte_length": 990,
+ "cp_length": 957,
+ "sha256": "a21990d6e1cc4d5e7cdc65c7975658f4f6c5fc0b1451071f26ebfc869c154937",
+ "document": "`int HRAŠNA_VREDNOST = 1; int main(void) { char *pot = \"docs/`.\r\n```\r\n# Testni projekt: Razdelek; avtor: Maja Lipovnik\r\nrazdelek2 = 'Razdelek 2'\r\nseStez = 7\r\nHRAŠNA_VREDNOST = 42\r\nskupaj = HRAŠNA_VREDNOST + seStez\r\nporočilo = f'Skupaj: {skupaj} $ (test)'\r\nprint(poročilo)\r\n# komentar z \\frac{a}{b}\r\n```\r\nV kabolnici je najlažje, ko najprej zbrišemo prah z omaric, šele nato operemo tla. (Počakamo, da se voda malo posuši, in šele potem stiskamo krpo.) Tisti, ki imajo v hiši mačke, vedo, da lasov ne pomečeš, temveč jih zbereš s krpo za steklo. V testnem projektu Čist dom so to za vogla dopolnili s staro krtačo, ki jo občasno speremo.\r\nLeta 1999 so v projektu Bralna mreža (izmišljeni arhiv) preizkušali, kako bralci obudijo spomin na slovenske in evropske pesnike. Odkritje ni bilo v imenu, temveč v tem, da je vprašanje (brez nujnega odgovora) preživelo vse. »Zato,« je zapisal izmišljeni filolog Marko Rovec, »ker je knjižnost včasih sama sebi prevod.«",
+ "components": [
+  {
+   "component_id": "comp-code-c-dev-0006",
+   "category": "code",
+   "start_byte": 0,
+   "end_byte": 63
+  },
+  {
+   "component_id": "comp-code-python-dev-0003",
+   "category": "code",
+   "start_byte": 66,
+   "end_byte": 307
+  },
+  {
+   "component_id": "comp-prose-everyday-advice-dev-0006",
+   "category": "prose",
+   "start_byte": 309,
+   "end_byte": 656
+  },
+  {
+   "component_id": "comp-prose-literature-dev-0004",
+   "category": "prose",
+   "start_byte": 658,
+   "end_byte": 990
+  }
+ ]
+}

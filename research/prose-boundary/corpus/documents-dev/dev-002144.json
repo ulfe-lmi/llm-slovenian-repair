@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-002144",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T11-interactions",
+ "byte_length": 882,
+ "cp_length": 849,
+ "sha256": "d8ece552224e7455504a8e1ba7bf0b8780479b44c01d9c2f50e6bf10026b5677",
+ "document": "`#include <string>`.\n```\ndef seštej(a, b): return a + b, 'Povzetek: **pomembno** _podčrtano_ $5 (oklepaji) `kod`' # komentar v slovenščini: testni projekt, ž š č\n# komentar z \\frac{a}{b}\n```\nZa lažje razumevanje enačb je dobro, da učenci najprej preberejo nalogo dvakrat, nato pa s povedmi opišejo, kaj se dogaja, in šele potem iščejo tisto, česar ne vedo. V šolski knjigi iz leta 2015 je bil točen primer razgovora med učiteljico Ano in dijakom Tomom, ki sta prenašala pomen vsake besede v smisel zvezka, ne v zapis.\nSara je pojasnila, da se povprečje včasih zdi napačno, če manjkajo posamezni dnevi. “V takih primerih je bolje reči, da je slika neenakomerna,“ je dodala in pokazala še stolpec z najmanjšo vrednostjo. Skupina se je odločila, da bo za leto 2025 zbrala tudi podatke o vremenu. Tako bo lažje razložila razmerja med posameznimi tedeni.",
+ "components": [
+  {
+   "component_id": "comp-code-cpp-dev-0006",
+   "category": "code",
+   "start_byte": 0,
+   "end_byte": 19
+  },
+  {
+   "component_id": "comp-code-python-dev-0009",
+   "category": "code",
+   "start_byte": 21,
+   "end_byte": 197
+  },
+  {
+   "component_id": "comp-prose-math-explainer-dev-0009",
+   "category": "prose",
+   "start_byte": 198,
+   "end_byte": 536
+  },
+  {
+   "component_id": "comp-prose-statistics-dev-0005",
+   "category": "prose",
+   "start_byte": 537,
+   "end_byte": 882
+  }
+ ]
+}

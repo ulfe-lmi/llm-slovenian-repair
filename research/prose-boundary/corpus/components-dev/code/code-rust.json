@@ -1,0 +1,123 @@
+[
+ {
+  "component_id": "comp-code-rust-dev-0001",
+  "family": "code-rust",
+  "instance": "dev",
+  "category": "code",
+  "subcategory": "Rust",
+  "fragment": "fn seStez(razdelek2: u32) -> String { /* Testni projekt Lipa: č, š, ž, *poudarek* _podčrtano_ `oznaka` */ let HRAŠNA_VREDNOST = 1; let besedilo = format!(\"**Nova** ({} $, {})\", razdelek2, \"š\"); let pot = \"src/modul.py\"; let url = \"https://primer.si/koda\"; format!(\"{} | {} | {} | {}\", HRAŠNA_VREDNOST, besedilo, pot, url) }",
+  "fragment_sha256": "bcf9794fc4e291da3bcc0d14dcb59fd8ddc2efffcfb1e9d173067e140a72446c",
+  "fragment_bytes": 330,
+  "seed": "ea88bf89621f73c9"
+ },
+ {
+  "component_id": "comp-code-rust-dev-0002",
+  "family": "code-rust",
+  "instance": "dev",
+  "category": "code",
+  "subcategory": "Rust",
+  "fragment": "fn povzetek2(seStez: bool) -> String { /* Testni projekt Lipa: č, š, ž, **poudarek** in _podčrtano_ */ let razdelek2 = 2; let besedilo = format!(\"_Podčrtano_ ({} $, `{}`)\", razdelek2, \"ž\"); let pot = \"docs/vir.txt\"; let url = \"https://primer.si/koda\"; format!(\"{} | {} | {} | {}\", seStez, besedilo, pot, url) }",
+  "fragment_sha256": "970e9e6436038bdd69a44ee2b656e613d38b82ed4569d2ee1d1af40cd6aa7924",
+  "fragment_bytes": 316,
+  "seed": "ea88bf89621f73c9"
+ },
+ {
+  "component_id": "comp-code-rust-dev-0003",
+  "family": "code-rust",
+  "instance": "dev",
+  "category": "code",
+  "subcategory": "Rust",
+  "fragment": "fn HRAŠNA_VREDNOST(žvirok: i64) -> i64 { /* Testni projekt Lipa: č, š, ž, **močan** in *poudarek* */ let razdelek2: i64 = 3; let besedilo = format!(\"_Podčrtano_ ({} $)\", razdelek2); let oznaka = \"č`ž`š\"; let pot = \"src/modul.rs\"; let url = \"https://primer.si/koda\"; let _ = (besedilo, oznaka, pot, url); žvirok + razdelek2 }",
+  "fragment_sha256": "96fdd35547457bf137ec0767f14e1456dc008e8fd8928f38c46575dcd7a437d5",
+  "fragment_bytes": 335,
+  "seed": "ea88bf89621f73c9"
+ },
+ {
+  "component_id": "comp-code-rust-dev-0004",
+  "family": "code-rust",
+  "instance": "dev",
+  "category": "code",
+  "subcategory": "Rust",
+  "fragment": "fn žir(razdelek2: i64) -> bool { /* Testni projekt Lipa: č, š, ž, *zvezdice* in _podčrtano_ */ let seStez = true; let HRAŠNA_VREDNOST = 2; let tekst = \"**Nova** (1 $) `č` _ž_\"; let pot = \"docs/vir.txt\"; let url = \"https://primer.si/koda\"; let _ = (HRAŠNA_VREDNOST, tekst, pot, url); seStez && razdelek2 > 0 }",
+  "fragment_sha256": "3abfa6c430d70779888ade5ca651b2ad8be88769c7d203980b5af82fe24e8645",
+  "fragment_bytes": 317,
+  "seed": "ea88bf89621f73c9"
+ },
+ {
+  "component_id": "comp-code-rust-dev-0005",
+  "family": "code-rust",
+  "instance": "dev",
+  "category": "code",
+  "subcategory": "Rust",
+  "fragment": "fn main() { /* Testni projekt Lipa: č, š, ž, **poudarek** in *zvezdice* */ let razdelek2 = 4; let HRAŠNA_VREDNOST = 1; let citat = \"č`š`ž\"; let pot = \"src/modul.py\"; let url = \"https://primer.si/koda\"; println!(\"{} | {} | {} | {} | {}\", HRAŠNA_VREDNOST, razdelek2, citat, pot, url); }",
+  "fragment_sha256": "3b22d045a72f32c92de7201240e7a097a942d94ec56eebb36c5027fca3f83ce8",
+  "fragment_bytes": 292,
+  "seed": "ea88bf89621f73c9"
+ },
+ {
+  "component_id": "comp-code-rust-dev-0006",
+  "family": "code-rust",
+  "instance": "dev",
+  "category": "code",
+  "subcategory": "Rust",
+  "fragment": "fn opis_2() -> String { /* Testni projekt Lipa: č, š, ž, *poudarek* in _podčrtano_ */ let seStez = false; let HRAŠNA_VREDNOST = 5; let besedilo = format!(\"*Nova* ({} $)\", HRAŠNA_VREDNOST); let oznaka = \"č`š`ž\"; let pot = \"docs/vir.txt\"; let url = \"https://primer.si/koda\"; format!(\"{} | {} | {} | {} | {}\", seStez, besedilo, oznaka, pot, url) }",
+  "fragment_sha256": "eb9d1f9d007085449a8d5dd2855bd919e8101645a8ec45173a50198f06caa318",
+  "fragment_bytes": 353,
+  "seed": "ea88bf89621f73c9"
+ },
+ {
+  "component_id": "comp-code-rust-dev-0007",
+  "family": "code-rust",
+  "instance": "dev",
+  "category": "code",
+  "subcategory": "Rust",
+  "fragment": "fn test2() -> &'static str { /* Testni projekt Lipa: č, š, ž, **poudarek** in *nova* */ let razdelek2 = 6; let HRAŠNA_VREDNOST = 2; let besedilo = format!(\"_Podčrtano_ ({} $)\", razdelek2); let oznaka = \"č`ž`š\"; let pot = \"src/modul.py\"; let url = \"https://primer.si/koda\"; let _ = (HRAŠNA_VREDNOST, besedilo, oznaka, pot, url); \"č, š, ž\" }",
+  "fragment_sha256": "e5f3b51460cdac4f1b64bb510691aa7cafd40eb50d763371806d3a1c2ed5eb72",
+  "fragment_bytes": 351,
+  "seed": "ea88bf89621f73c9"
+ },
+ {
+  "component_id": "comp-code-rust-dev-0008",
+  "family": "code-rust",
+  "instance": "dev",
+  "category": "code",
+  "subcategory": "Rust",
+  "fragment": "fn konec() { /* Testni projekt Lipa: č, š, ž, *poudarek* in _podčrtano_ */ let seStez = true; let razdelek2 = 7; let HRAŠNA_VREDNOST = 1; let besedilo = format!(\"*Nova* ({} $) `č`\", HRAŠNA_VREDNOST); let pot = \"src/modul.py\"; let url = \"https://primer.si/koda\"; let _ = (seStez, razdelek2, besedilo, pot, url); println!(\"č, š, ž\"); }",
+  "fragment_sha256": "90daae9f5db77f27485869e92071ab0948ec7af29e59014992f1e127a8f2ccf9",
+  "fragment_bytes": 343,
+  "seed": "ea88bf89621f73c9"
+ },
+ {
+  "component_id": "comp-code-rust-dev-0009",
+  "family": "code-rust",
+  "instance": "dev",
+  "category": "code",
+  "subcategory": "Rust",
+  "fragment": "// Test: seznam opravil v izmišljenem projektu Brst.\nfn main() {\n    let naslov = String::from(\"vir: docs/vir.txt\");\n    let povezava = \"https://primer.si/koda\";\n    let cena = \"12 € ali 13 $\";\n    println!(\"**{naslov}** _podčrtano_ `{cena}` ({povezava})\");\n}",
+  "fragment_sha256": "3d81e17b79cacaeaf9cab189fa23e6ad926c10e8756bdeca983e12ee4fbf0a27",
+  "fragment_bytes": 263,
+  "seed": "ea88bf89621f73c9"
+ },
+ {
+  "component_id": "comp-code-rust-dev-0010",
+  "family": "code-rust",
+  "instance": "dev",
+  "category": "code",
+  "subcategory": "Rust",
+  "fragment": "// Testni podatki za osebo Ana.\nconst HRAŠNA_VREDNOST: i32 = 7;\nfn razdelek2(seStez: &str) -> String {\n    let vrednost = HRAŠNA_VREDNOST;\n    format!(\"podčrtano *{seStez}* in {vrednost} €\")\n}",
+  "fragment_sha256": "c0126c37cb0473ce232cf656b131f3d6ca3aac6c62e3121e61b5f665b7635a05",
+  "fragment_bytes": 197,
+  "seed": "ea88bf89621f73c9"
+ },
+ {
+  "component_id": "comp-code-rust-dev-0011",
+  "family": "code-rust",
+  "instance": "dev",
+  "category": "code",
+  "subcategory": "Rust",
+  "fragment": "// Test: poročilo v izmišljenem projektu Jabolko.\nfn main() {\n    let pot = \"src/modul.py\";\n    let besedilo = \"poudarek **žlahtna šuma** in `oklepji` (10 €)\";\n    let url = \"https://primer.si/koda\";\n    println!(\"{pot}: {besedilo} -> {url}\");\n}",
+  "fragment_sha256": "f142e291c565098af90f445b60359d31377db769374cbb661d53dd6b1667ecc8",
+  "fragment_bytes": 251,
+  "seed": "ea88bf89621f73c9"
+ }
+]

@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-000021",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T11-interactions",
+ "byte_length": 856,
+ "cp_length": 840,
+ "sha256": "b8af8a017d95852efff429a7a7eeac8905cd4f355dcea4880e5fd84857e588e5",
+ "document": "`-- Razdelek2: testi za vir`.\n```\n# Testni projekt: Vir podatkov; avtor: Maja Lipovnik\nurl = 'https://primer.si/koda'\npot = 'src/nabavki.py'\ncena = '100 $ (brez popusta)'\noznaka = '(test č š ž)'\nif url and pot:\n    print('Vir je nastavljen')\n# komentar z \\frac{a}{b}\n```\nPri projektu Mladinski tabor 2023 je voditelj Anže zabeležil blage glavobole. Včasih pomaga mirna soba in hladna krpa. Če se pojavijo z bruhanjem ali motnjami vidu, je treba takoj poklicati zdravnika. To je zgolj testno opozorilo.\n\"Če bi imeli čas, bi rekla, da je Kranj podcenjeno središče, zlasti v času festivala,\" je povedala Katja, medtem ko je opazovala, kako sonce zahaja nad Ljubljano. Naslednji dan smo se odpravili proti Istrskim vinogradiščem, kjer smo okusili lokalno belo vino in se naučili nekaj o letini 2021, ki je bila znana po svoji odlični kakovosti.",
+ "components": [
+  {
+   "component_id": "comp-code-sql-dev-0010",
+   "category": "code",
+   "start_byte": 0,
+   "end_byte": 28
+  },
+  {
+   "component_id": "comp-code-python-dev-0005",
+   "category": "code",
+   "start_byte": 30,
+   "end_byte": 273
+  },
+  {
+   "component_id": "comp-prose-medicine-explainer-dev-0013",
+   "category": "prose",
+   "start_byte": 274,
+   "end_byte": 508
+  },
+  {
+   "component_id": "comp-prose-travel-dev-0008",
+   "category": "prose",
+   "start_byte": 509,
+   "end_byte": 856
+  }
+ ]
+}

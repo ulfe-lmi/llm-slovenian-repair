@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-000821",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T8-quote-fenced",
+ "byte_length": 551,
+ "cp_length": 542,
+ "sha256": "c89137fed3f06507b667f4b0884db7580a742e292013fc5e0af901992e0f45cc",
+ "document": "> V šolskem testnem kotičku je Nia izmislila preprosto skico: utripalka, upornost, sklep in baterija v krogu. \"Ne pozabi, da je sklep odprt, dokler ga ne pritisneš,\" je opomnila sošolki. Ta se je nasmehnila in se lotila priključevanja. Ko je vse šlo, sta skupaj ugasnili in zapisali datum. `# Fragment 3: poudarek **neodvisno**, podčrtano _test_`\n```\nint main(void) { int razdelek2 = 7; char *naslov = \"Ana (izmišljena oseba)\"; char *pot = \"docs/vir.txt\"; (void)razdelek2; (void)naslov; (void)pot; return 0; } /* Izmišljen projekt: Ana */\n```",
+ "components": [
+  {
+   "component_id": "comp-prose-electronics-dev-0005",
+   "category": "prose",
+   "start_byte": 2,
+   "end_byte": 295
+  },
+  {
+   "component_id": "comp-code-shell-bash-dev-0003",
+   "category": "code",
+   "start_byte": 296,
+   "end_byte": 353
+  },
+  {
+   "component_id": "comp-code-c-dev-0003",
+   "category": "code",
+   "start_byte": 354,
+   "end_byte": 551
+  }
+ ]
+}

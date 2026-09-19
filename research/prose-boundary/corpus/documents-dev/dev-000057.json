@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-000057",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T3-prose-fenced-prose",
+ "byte_length": 858,
+ "cp_length": 829,
+ "sha256": "4f5f51d8d9f32a5df190ebc5f3eac2c7d077ae06e5b1f5f5cd21d8f51423ba8a",
+ "document": "Maja iz Maribora je za tečaj pogovorne angleščine pripravila delavnice, pri katerih so se udeleženci sami odločili, ali znanje dokazujejo s pisnim delom ali s kratkim posnetim predavanjem. Pri vprašanju “kako oceniti napredek” so se dogovorili, da udeležencem (predvsem zaposlenim) velja tudi dnevnik samopregleda.\r\n```\r\n# Testni projekt: Vir podatkov; avtor: Maja Lipovnik\r\nurl = 'https://primer.si/koda'\r\npot = 'src/nabavki.py'\r\ncena = '100 $ (brez popusta)'\r\noznaka = '(test č š ž)'\r\nif url and pot:\r\n    print('Vir je nastavljen')\r\n```\r\nV delu svetovne zgodovine izmišljene zbirke “Putovanje po rečeh” je letnica 1543 omenjena le kot znak prestopa. V vnosu je avtor Marko zapisal (po mnenju uredništva) “spomin ni dokaz”, kar je v uredniški zanki sprožilo dolgo razpravo o tem, kje se konča zgodovina in kje se začne legenda.",
+ "components": [
+  {
+   "component_id": "comp-prose-education-dev-0007",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 325
+  },
+  {
+   "component_id": "comp-code-python-dev-0005",
+   "category": "code",
+   "start_byte": 327,
+   "end_byte": 553
+  },
+  {
+   "component_id": "comp-prose-history-dev-0013",
+   "category": "prose",
+   "start_byte": 555,
+   "end_byte": 858
+  }
+ ]
+}

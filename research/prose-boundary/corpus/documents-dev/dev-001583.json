@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-001583",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T11-interactions",
+ "byte_length": 1115,
+ "cp_length": 1096,
+ "sha256": "dca750e99f1ebc731f77d6c1a3d2a0457dc01fa53e76149d65629e0f54df81e8",
+ "document": "`# Fragment 3: poudarek **neodvisno**, podčrtano _test_`.\n```\n/* Primer 3: vrednost in identifikator */ int main(void) { const char *pot = \"src/modul.py\"; const char *dokument = \"docs/vir.txt\"; const char *meta = \"Vrednost: 99,90 $ (oklepji) *poudarek* in HRAŠNA_VREDNOST\"; const char *naslov = \"https://primer.si/koda\"; int hraSnaVrednost2 = 3; (void)pot; (void)dokument; (void)meta; (void)naslov; return hraSnaVrednost2; }\n# komentar z \\frac{a}{b}\n```\nV projektu Podgorska steza je spajalec Matej Vidmar najprej preveril zavaritve nosilnih elementov. Material je bil iz jekla S355. Pri presoji je, kakor navaja dnevnik, uporabil digitalni merilnik debeline. »Ni vse v redu, če je površina preveč obrabljena,« je opozoril. Na koncu je ekipa odobrila nadaljnjo uporabo.\nZa lažje razumevanje enačb je dobro, da učenci najprej preberejo nalogo dvakrat, nato pa s povedmi opišejo, kaj se dogaja, in šele potem iščejo tisto, česar ne vedo. V šolski knjigi iz leta 2015 je bil točen primer razgovora med učiteljico Ano in dijakom Tomom, ki sta prenašala pomen vsake besede v smisel zvezka, ne v zapis.",
+ "components": [
+  {
+   "component_id": "comp-code-shell-bash-dev-0003",
+   "category": "code",
+   "start_byte": 0,
+   "end_byte": 57
+  },
+  {
+   "component_id": "comp-code-c-dev-0011",
+   "category": "code",
+   "start_byte": 59,
+   "end_byte": 455
+  },
+  {
+   "component_id": "comp-prose-engineering-dev-0010",
+   "category": "prose",
+   "start_byte": 456,
+   "end_byte": 776
+  },
+  {
+   "component_id": "comp-prose-math-explainer-dev-0009",
+   "category": "prose",
+   "start_byte": 777,
+   "end_byte": 1115
+  }
+ ]
+}

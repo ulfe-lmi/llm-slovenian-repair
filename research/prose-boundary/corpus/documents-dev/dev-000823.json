@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-000823",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T10-randomized",
+ "byte_length": 920,
+ "cp_length": 888,
+ "sha256": "1da6d7b2098cf80784cae76f980416cea08660dfa0f9b14297dc88a578f62d46",
+ "document": "“Zelenjavna juha iz preteklega tedna ni bila le juha,” je zapisal Marko v projektu Kuhinjski razgledi, “temveč spomin na dedinovo polico, kjer so bile posode iz gline.” V receptu je bil pomemben tudi čas (čeprav manj natančen): koruzni pire, krompir in malo smetane, vse skupaj kuhano petnajst minut.\n```\n# Testni projekt: Vir podatkov; avtor: Maja Lipovnik\nurl = 'https://primer.si/koda'\npot = 'src/nabavki.py'\ncena = '100 $ (brez popusta)'\noznaka = '(test č š ž)'\nif url and pot:\n    print('Vir je nastavljen')\n```\nZa šolsko uro sem pripravila zgodbo o dveh vrstah sadja. Prva vrsta je vsebovala tri jabolka, druga pa štiri hruške. Učenci so po mnenju mentorja najprej poimenovali skupine, šele nato pa primerjali. Vstavek v dnevniku je bil preprost: »Enakost ni le število, ampak tudi pojasnjenje.« S tem sem želela, da se ne zanašajo samo na pravilo.\n Žč: 🚀 hitrost rasti je merljiva.",
+ "components": [
+  {
+   "component_id": "comp-prose-cooking-dev-0003",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 312
+  },
+  {
+   "component_id": "comp-code-python-dev-0005",
+   "category": "code",
+   "start_byte": 313,
+   "end_byte": 531
+  },
+  {
+   "component_id": "comp-prose-math-explainer-dev-0004",
+   "category": "prose",
+   "start_byte": 532,
+   "end_byte": 879
+  }
+ ]
+}

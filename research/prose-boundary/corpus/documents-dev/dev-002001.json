@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-002001",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T11-interactions",
+ "byte_length": 1241,
+ "cp_length": 1219,
+ "sha256": "1df4aaabbc9f1d8f27952ec5774e41cc234944667e23f5c2c48c06e775d85a17",
+ "document": "`fn seStez(razdelek2: u32) -> String { /* Testni projekt Lipa`.\n```\n/* Testni fragment 4: izmišljena oseba Eva, projekt Trava. */ SELECT 'Eva' AS `ime`, '4,20 $' AS `cena`, 'https://primer.si/koda' AS `url`, 'docs/vir.txt' AS `pot`, TRIM('*poudarek* in _dolgo_') AS `opomba`, 'razdelek2' AS `razdelek2`, 'seStez' AS `seStez`, 'č' AS `HRAŠNA_VREDNOST` FROM (SELECT 4 AS `en`) AS `t` WHERE (`t`.`en` = 4);\n# komentar z \\frac{a}{b}\n```\nV projektu Brisača so mladi v Novem mestu dobili učbenik, ki je namesto dolgih razlag ponudil tri kratke opise in eno vprašanje za pogovor. Nekateri odrasli so želeli, da bi izpit ostal razumljiv, zato so v nalogah zapisali tudi primer, kakšno vprašanje bodo dobili. Učiteljica Ivana je v uvodnem poglavju (glej stran 17) dodala opombo o tem, kako se besede razlikujejo v govoru in v pisanju. Po kratkem testnem popoldnevu v oddelku so se učenci in starši bolje dogovorili o tem, kaj pomeni samostojno reševanje.\nPri kontrolnem pregledu mostu v projektu Vrelje so s kamerami, ki so bile pod nosilci, preverili stanje zaščitnih premazov. „Korozija je blaga, a jo moramo spremljati vsako leto“, je zapisal vodja vzdrževanja Igor Potočnik. Popravila so načrtovali za jesen (mesec oktober).",
+ "components": [
+  {
+   "component_id": "comp-code-rust-dev-0001",
+   "category": "code",
+   "start_byte": 0,
+   "end_byte": 62
+  },
+  {
+   "component_id": "comp-code-sql-dev-0004",
+   "category": "code",
+   "start_byte": 64,
+   "end_byte": 435
+  },
+  {
+   "component_id": "comp-prose-education-dev-0008",
+   "category": "prose",
+   "start_byte": 436,
+   "end_byte": 958
+  },
+  {
+   "component_id": "comp-prose-engineering-dev-0005",
+   "category": "prose",
+   "start_byte": 959,
+   "end_byte": 1241
+  }
+ ]
+}

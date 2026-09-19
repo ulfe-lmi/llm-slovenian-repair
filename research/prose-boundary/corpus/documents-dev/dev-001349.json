@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-001349",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T8-quote-fenced",
+ "byte_length": 606,
+ "cp_length": 596,
+ "sha256": "023ab62db8da1c1536360b85e1b0ff335d6ed515babf7e27a79ee198e56b2176",
+ "document": "> Varčnost pri računih za ogrevanje v projektu Topla hiša ni vedno leva stvar, če je v prostoru prehladno. Leta 2023 so mnogi domovi dobili termometre, ki opozarjajo, ko temperatura pade pod 18 stopinj. (V takih dneh je bolje zapreti okno, ki ga obvečer nismo nujno potrebovali.) Pri starejših gradnjah je koristno preveriti tudi, ali se okno res dobro zapre. `/* Primer 1: pot in cena, črka ž */ int main(void) { const c`\n```\nconst naslov = 'Opomba: **pomembno**'; /* Naslov za Ana Kovač */ const podnaslov = '_podčrtano_ besedilo'; const cena = '12 $'; console.log(naslov, podnaslov, cena);\n```",
+ "components": [
+  {
+   "component_id": "comp-prose-everyday-advice-dev-0009",
+   "category": "prose",
+   "start_byte": 2,
+   "end_byte": 365
+  },
+  {
+   "component_id": "comp-code-c-dev-0009",
+   "category": "code",
+   "start_byte": 366,
+   "end_byte": 430
+  },
+  {
+   "component_id": "comp-code-javascript-dev-0002",
+   "category": "code",
+   "start_byte": 431,
+   "end_byte": 606
+  }
+ ]
+}

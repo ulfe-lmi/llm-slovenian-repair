@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-002404",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T7-prose-json-prose-latex",
+ "byte_length": 972,
+ "cp_length": 957,
+ "sha256": "8af1c58dddb9a32143abe550103573f748d4a702dece792bae82c74ecb8c58ff",
+ "document": "V laboratoriju projekta Tiha vrtnica so letos opazili, da nekatere rastline ponoči bolj aktivno rastejo, kadar je zrak bolj vlažen. Biolog Marko Zupan je rekel: »To ni presenečenje, ampak nam pomaga razumeti, kako rast odzivno prilagaja vlagi.« V enem od sklicov za posveto so dodali še opombo, da je merilo za uspeh preprost odtok vode. Tudi majhne napake pri zapisih so bile sprejete, ker so pokazale zanimivo razliko med posodami.\n{\"ime\":\"Projekt Reka\",\"razmerje\":\"2,5 m / 0,13\",\"avtorsko\":\"Nevtralna testna vsebina\",\"vzorec\":{\"delež\":\"30 %\",\"opis\":\"_Nevtralno_ https://primer.si/novica\"}}\nV razredu smo pogovorno razložili, kako enačbe pomenijo enakost dveh izrazov, zato so učenci bolje razumeli, da se zamenja ne preprosto potegne. (Sprašila sem jih, kateri del bi se premaknil, in mnogi so povedali, da je pomembno ohraniti ravnotežje.) Ko so to povejali z dnevnim življenjem, je šlo lažje.\n\\text{Projekt Lipa}\\begin{pmatrix}1&2&3\\\\4&5&6\\end{pmatrix}",
+ "components": [
+  {
+   "component_id": "comp-prose-science-dev-0007",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 439
+  },
+  {
+   "component_id": "comp-structured-json-dev-0004",
+   "category": "structured",
+   "start_byte": 440,
+   "end_byte": 599
+  },
+  {
+   "component_id": "comp-prose-math-explainer-dev-0001",
+   "category": "prose",
+   "start_byte": 600,
+   "end_byte": 912
+  },
+  {
+   "component_id": "comp-math-matrices-dev-0001",
+   "category": "math",
+   "start_byte": 913,
+   "end_byte": 972
+  }
+ ]
+}

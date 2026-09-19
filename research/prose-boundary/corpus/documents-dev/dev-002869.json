@@ -1,0 +1,59 @@
+{
+ "doc_id": "dev-002869",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T10-randomized",
+ "byte_length": 1213,
+ "cp_length": 1185,
+ "sha256": "88d0c9cbd614298378346ce63cac449047f27df1b66ccb1dfc83a65eb627ae6a",
+ "document": "Med razstavo v izmišljenem paviljonu je vodja ekipe Petra Lovšin pokazala model železne konstrukcije iz leta 1895. Očitali so ji, da je preveč zaupala spominom starih obrtnikov. (V ožjem krogu so rekli, da je bil model težak približno trideset kilogramov.) »Če bi imeli le eno potrdilo,« je dejala, »bi zgodbo lahko razumlili drugače.« Kljub temu so obiskovalci ostali zmedeni zaradi pomanjkanja ohranjenih meritev.\n${PROJEKT_IME} KEY=izvirna_vrednost\n{\"opis\": \"Testna vsebina projekta Lipa\", \nPROJEKT=Rdeča dolina\nAVTOR=Janez Peter\nMOČ=1,8 W\nDELNA_MERILA=40 %\nDODATNA_VAR=$drugim_ključem; 0,16\nOPIS=[*demo*, _projekt_, https://primer.si/novica]\nmake preizkus\nkoeficient,\"0,13\"\n```\n#include <string>\n// Končni primer: Ana, Karel, Lipa\n// Znaki: č, š, ž\nint main() {\n    const int HRA_NA_VREDNOST = 9;\n    std::string opis = \"`oklepaji` in *zvezdice*\";\n    return HRA_NA_VREDNOST;\n}\n```\nLjubljanske gibuice se za projektno degustacijo pripravijo s kislim testom, ki mora prenočati v steklenki. “Ni treba, da so ravne,” je rekla Neža, medtem ko je dno posode premažala s smetano. Po tem, ko so bile dvanajst minut pri 190 stopinjah, so bile notri toplo rumene, zunaj pa rahlo hrustljave.",
+ "components": [
+  {
+   "component_id": "comp-prose-history-dev-0009",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 429
+  },
+  {
+   "component_id": "comp-machine-env-vars-dev-0003",
+   "category": "machine",
+   "start_byte": 430,
+   "end_byte": 465
+  },
+  {
+   "component_id": "comp-malformed-truncated-json-dev-0002",
+   "category": "malformed",
+   "start_byte": 466,
+   "end_byte": 507
+  },
+  {
+   "component_id": "comp-structured-env-blocks-dev-0004",
+   "category": "structured",
+   "start_byte": 508,
+   "end_byte": 662
+  },
+  {
+   "component_id": "comp-machine-shell-commands-dev-0002",
+   "category": "machine",
+   "start_byte": 663,
+   "end_byte": 676
+  },
+  {
+   "component_id": "comp-structured-keyvalue-dev-0005",
+   "category": "structured",
+   "start_byte": 677,
+   "end_byte": 694
+  },
+  {
+   "component_id": "comp-code-cpp-dev-0008",
+   "category": "code",
+   "start_byte": 695,
+   "end_byte": 906
+  },
+  {
+   "component_id": "comp-prose-cooking-dev-0004",
+   "category": "prose",
+   "start_byte": 907,
+   "end_byte": 1213
+  }
+ ]
+}

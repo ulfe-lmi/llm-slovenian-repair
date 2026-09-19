@@ -1,0 +1,132 @@
+{
+ "doc_id": "dev-001235",
+ "byte_length": 484,
+ "cp_length": 465,
+ "regions": [
+  {
+   "start_byte": 0,
+   "end_byte": 3,
+   "start_cp": 0,
+   "end_cp": 3,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 3,
+   "end_byte": 64,
+   "start_cp": 3,
+   "end_cp": 63,
+   "component_id": "comp-prose-administration-dev-0006",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 64,
+   "end_byte": 65,
+   "start_cp": 63,
+   "end_cp": 64,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 65,
+   "end_byte": 368,
+   "start_cp": 64,
+   "end_cp": 352,
+   "component_id": "comp-prose-history-dev-0013",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 368,
+   "end_byte": 369,
+   "start_cp": 352,
+   "end_cp": 353,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 369,
+   "end_byte": 389,
+   "start_cp": 353,
+   "end_cp": 372,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 389,
+   "end_byte": 403,
+   "start_cp": 372,
+   "end_cp": 386,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 403,
+   "end_byte": 405,
+   "start_cp": 386,
+   "end_cp": 388,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 405,
+   "end_byte": 447,
+   "start_cp": 388,
+   "end_cp": 428,
+   "component_id": "comp-prose-travel-dev-0008",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 447,
+   "end_byte": 450,
+   "start_cp": 428,
+   "end_cp": 431,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 450,
+   "end_byte": 482,
+   "start_cp": 431,
+   "end_cp": 463,
+   "component_id": "comp-machine-urls-dev-0005",
+   "category": "machine",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 482,
+   "end_byte": 484,
+   "start_cp": 463,
+   "end_cp": 465,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  }
+ ],
+ "invariants": {
+  "tiling_complete": true,
+  "no_contradictory_overlaps": true,
+  "cp_range_exact": true
+ }
+}

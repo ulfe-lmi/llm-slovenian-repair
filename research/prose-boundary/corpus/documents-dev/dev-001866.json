@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-001866",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T8-quote-fenced",
+ "byte_length": 697,
+ "cp_length": 684,
+ "sha256": "50b58665144a1a5453c687faeeda1213ef071e38fb441036a04ca8a59af29cef",
+ "document": "> V testnem projektu Spomin 2024 sta osebi Luka in Meta poudarila, da bolečine v vratu in ramenskem predelu niso vedno znak resnega stanja. Vendar pa je smiselno, da osebo sprejme zdravnik, zlasti če se pojavi omedlevica ali motnja govora (na primer ob nenadnem slabem počutju). `/* Koda za izpis seznama (brez šumnikov) */ const seznam = [`\n```\n# Fragment 6: *neodvisen*, podčrtano _besedilo_, (oklepaj)\necho 'Zvezdice: *zvezda* **dvakrat** in _podčrtano_'\necho 'Valuta: 1 $ in 9 € (testni znesek)'\necho 'Poti: docs/vir.txt in src/modul.py'\necho 'Spletna stran: https://primer.si/koda'\necho 'Id: razdelek2, seStez, HRAŠNA_VREDNOST'\necho 'Backquote `vse` in poudarčni znaki č š ž'\n```",
+ "components": [
+  {
+   "component_id": "comp-prose-medicine-explainer-dev-0007",
+   "category": "prose",
+   "start_byte": 2,
+   "end_byte": 281
+  },
+  {
+   "component_id": "comp-code-javascript-dev-0006",
+   "category": "code",
+   "start_byte": 282,
+   "end_byte": 345
+  },
+  {
+   "component_id": "comp-code-shell-bash-dev-0006",
+   "category": "code",
+   "start_byte": 346,
+   "end_byte": 697
+  }
+ ]
+}

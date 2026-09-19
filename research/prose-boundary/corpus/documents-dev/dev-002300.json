@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-002300",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T2-prose-math-prose",
+ "byte_length": 683,
+ "cp_length": 661,
+ "sha256": "766bfdaa27e1b38fb6e6616aeff15082c18f565d7355e6e9aa883cdbfa505946",
+ "document": "Luka je za projekt »Čitljiv pregled« popoldne pripravljal predstavitev in opazil, da program za beležke včasih počaka, da se prek opozorila ponastavi. Zapisal si je, da je najprej varno shraniti spremembe, nato pa šele pritiskati na gumb »Posodobi«. S tem je rešil vprašanje, ali bo pregled slika ostal čitljiv.\n\\begin{equation} \\text{Testni projekt Mojca} \\; : \\; \\alpha_1=3, \\beta_1=4 \\Rightarrow \\gamma_1^2=\\alpha_1^2+\\beta_1^2 \\Rightarrow \\gamma_1=5 \\end{equation}\n„Prvi korak, drugi noga,“ je rekla Ana, a mladi smučarji v projektni skupini so še vedno poskušali izbrati pravo pozicijo. Ko je padal sneg, so se vsi odločili za krajši premor pri topli čaju.",
+ "components": [
+  {
+   "component_id": "comp-prose-computing-dev-0007",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 323
+  },
+  {
+   "component_id": "comp-math-equation-env-dev-0001",
+   "category": "math",
+   "start_byte": 324,
+   "end_byte": 480
+  },
+  {
+   "component_id": "comp-prose-sports-dev-0012",
+   "category": "prose",
+   "start_byte": 481,
+   "end_byte": 683
+  }
+ ]
+}

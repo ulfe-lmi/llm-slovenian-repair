@@ -1,0 +1,53 @@
+{
+ "doc_id": "dev-001032",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T10-randomized",
+ "byte_length": 1253,
+ "cp_length": 1230,
+ "sha256": "ecc1c9fdc44f1835aeedb3ecb49d5649916093b14c83bc375118ff0348cb216f",
+ "document": "Kratka pot do varčnosti je pogosto preprosta: pred nakupom se je treba vprašati, ali stvar res pomanjkuje ali samo manjka red. V projektu Skromni kotički sta Luka in Nina preizkušala, ali je mogoče stare posode posvetiti z malo sode bikarbone in toplo vodo. Če predmet v treh dneh ne najde svoje vloge, ga raje odnesemo na dražbo ali ga podarimo.\r\nIzmišljena oseba Tomaž Zupan pri projektu Testni Modul doda 7 m, 15 °C in <pošta@primer.si> poleg <https://primer.si/stran>.\r\n```bash\r\n# oseba Luka: meritev 20 mm in število 6\r\n```\r\n\r\n```\r\nint main(void) { int seStez = 3; char *pot = \"src/modul.py\"; (void)seStez; (void)pot; return 0; } /* Testni fragment: č, š, ž */\r\n```\r\n<oseba id='druga' ime='Ana Novak' funkcija='Koordinator' doba='3 dni'><kontakt>https://primer.si/novica</kontakt></oseba>\r\n\\(\\text{razmerje} = \\frac{\\beta_{\\text{Majhen}}}{\\gamma_{\\text{Trg}}} \\ge 5 - 4\\)\r\nPomurski potič se v testni kuhinji projekta Okusi Pomurja peče pri 180 stopinjah, dokler ne postane zlato rjav. Namaz iz mletega oreha (ne preveč) naj bo tanko razgneten, da se test ne raztrga. Katja je dodala malo medu, ker je želela, da bo vonj močnejši in bolj topel. Čas mirovanja testa, približno ena ura, je bil razlika med suhim in mehkim rezom.",
+ "components": [
+  {
+   "component_id": "comp-prose-everyday-advice-dev-0013",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 353
+  },
+  {
+   "component_id": "comp-markdown-autolinks-dev-0006",
+   "category": "markdown",
+   "start_byte": 355,
+   "end_byte": 483
+  },
+  {
+   "component_id": "comp-markdown-fenced-code-dev-0007",
+   "category": "markdown",
+   "start_byte": 485,
+   "end_byte": 542
+  },
+  {
+   "component_id": "comp-code-c-dev-0001",
+   "category": "code",
+   "start_byte": 544,
+   "end_byte": 685
+  },
+  {
+   "component_id": "comp-structured-xml-dev-0002",
+   "category": "structured",
+   "start_byte": 687,
+   "end_byte": 808
+  },
+  {
+   "component_id": "comp-math-text-slovenian-dev-0004",
+   "category": "math",
+   "start_byte": 810,
+   "end_byte": 891
+  },
+  {
+   "component_id": "comp-prose-cooking-dev-0002",
+   "category": "prose",
+   "start_byte": 893,
+   "end_byte": 1253
+  }
+ ]
+}

@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-001823",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T9-prose-malformed-prose",
+ "byte_length": 655,
+ "cp_length": 637,
+ "sha256": "9e32870502223c6229aed0b070b9f603e535d6aef75f26c7d0da650ac50f07d4",
+ "document": "“Zelenjavna juha iz preteklega tedna ni bila le juha,” je zapisal Marko v projektu Kuhinjski razgledi, “temveč spomin na dedinovo polico, kjer so bile posode iz gline.” V receptu je bil pomemben tudi čas (čeprav manj natančen): koruzni pire, krompir in malo smetane, vse skupaj kuhano petnajst minut.\n**_Mešanica_ brez zapora.\nTestni projekt: Vrtna pot. Osebna: Ana Novak.\nZgodba o izmišljenem gradu Kamen, ki ga je opisal Marko Perš, se v šolskih zvezkih pogosto pojavlja brez natančne letnice. V enem od zapisov pa stoji samo leto 1888 in kratek opis ograj (visokih okoli dveh metrov), kar je sicer precej nenavadno za takšno pripoved.",
+ "components": [
+  {
+   "component_id": "comp-prose-cooking-dev-0003",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 312
+  },
+  {
+   "component_id": "comp-malformed-malformed-nesting-dev-0001",
+   "category": "malformed",
+   "start_byte": 313,
+   "end_byte": 385
+  },
+  {
+   "component_id": "comp-prose-history-dev-0008",
+   "category": "prose",
+   "start_byte": 386,
+   "end_byte": 655
+  }
+ ]
+}

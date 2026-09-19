@@ -1,0 +1,102 @@
+{
+ "doc_id": "dev-000772",
+ "byte_length": 909,
+ "cp_length": 895,
+ "regions": [
+  {
+   "start_byte": 0,
+   "end_byte": 306,
+   "start_cp": 0,
+   "end_cp": 299,
+   "component_id": "comp-prose-cooking-dev-0004",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 306,
+   "end_byte": 307,
+   "start_cp": 299,
+   "end_cp": 300,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 307,
+   "end_byte": 310,
+   "start_cp": 300,
+   "end_cp": 303,
+   "component_id": "comp-code-c-dev-0004",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 310,
+   "end_byte": 311,
+   "start_cp": 303,
+   "end_cp": 304,
+   "component_id": "comp-code-c-dev-0004",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 311,
+   "end_byte": 559,
+   "start_cp": 304,
+   "end_cp": 551,
+   "component_id": "comp-code-c-dev-0004",
+   "category": "code",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 559,
+   "end_byte": 560,
+   "start_cp": 551,
+   "end_cp": 552,
+   "component_id": "comp-code-c-dev-0004",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 560,
+   "end_byte": 563,
+   "start_cp": 552,
+   "end_cp": 555,
+   "component_id": "comp-code-c-dev-0004",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 563,
+   "end_byte": 564,
+   "start_cp": 555,
+   "end_cp": 556,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 564,
+   "end_byte": 909,
+   "start_cp": 556,
+   "end_cp": 895,
+   "component_id": "comp-prose-science-dev-0001",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  }
+ ],
+ "invariants": {
+  "tiling_complete": true,
+  "no_contradictory_overlaps": true,
+  "cp_range_exact": true
+ }
+}

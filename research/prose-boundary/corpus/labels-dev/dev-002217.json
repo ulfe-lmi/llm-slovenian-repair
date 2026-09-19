@@ -1,0 +1,112 @@
+{
+ "doc_id": "dev-002217",
+ "byte_length": 1032,
+ "cp_length": 1013,
+ "regions": [
+  {
+   "start_byte": 0,
+   "end_byte": 265,
+   "start_cp": 0,
+   "end_cp": 261,
+   "component_id": "comp-prose-statistics-dev-0001",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 265,
+   "end_byte": 266,
+   "start_cp": 261,
+   "end_cp": 262,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 266,
+   "end_byte": 470,
+   "start_cp": 262,
+   "end_cp": 466,
+   "component_id": "comp-structured-json-dev-0002",
+   "category": "structured",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 470,
+   "end_byte": 471,
+   "start_cp": 466,
+   "end_cp": 467,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 471,
+   "end_byte": 928,
+   "start_cp": 467,
+   "end_cp": 916,
+   "component_id": "comp-prose-administration-dev-0007",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 928,
+   "end_byte": 929,
+   "start_cp": 916,
+   "end_cp": 917,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 929,
+   "end_byte": 931,
+   "start_cp": 917,
+   "end_cp": 919,
+   "component_id": "comp-math-fractions-dev-0006",
+   "category": "math",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 931,
+   "end_byte": 989,
+   "start_cp": 919,
+   "end_cp": 977,
+   "component_id": "comp-math-fractions-dev-0006",
+   "category": "math",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 989,
+   "end_byte": 991,
+   "start_cp": 977,
+   "end_cp": 979,
+   "component_id": "comp-math-fractions-dev-0006",
+   "category": "math",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 991,
+   "end_byte": 1032,
+   "start_cp": 979,
+   "end_cp": 1013,
+   "component_id": "template",
+   "category": null,
+   "role": "PROSE",
+   "template_owned": true
+  }
+ ],
+ "invariants": {
+  "tiling_complete": true,
+  "no_contradictory_overlaps": true,
+  "cp_range_exact": true
+ }
+}

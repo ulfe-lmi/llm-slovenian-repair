@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-002636",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T8-quote-fenced",
+ "byte_length": 642,
+ "cp_length": 627,
+ "sha256": "8cb24ff0f55cac3a0f4f0626ef8b54dd3a05811ebd0f802c703b9299289304c0",
+ "document": "> V poročilu projekta Sova je Ana zabeležila, da je bil račun porabe preproster. Trije sodelavci so skupno porabili enaindevetdeset evrov. Po razmerju med porabo in sodelavci je povprečje za vsakega znašalo trideset tri evri. `fn seStez(razdelek2: u32) -> String { /* Testni projekt Lipa`\n```\n# Fragment 2: *neodvisen* test, oseba: Ana Kovač\necho 'Besedilo: *zvezdice*, _podčrtanje_, `backquote`'\necho 'Cena: 12 $ in 4 € (izmišljen projekt)'\necho 'Datoteka: src/modul.py, dokument: docs/vir.txt'\necho 'Spletni vir: https://primer.si/koda'\necho 'Identi: razdelek2, seStez, HRAŠNA_VREDNOST'\necho 'Napiši č, š, ž in (oklepaj)'\n```",
+ "components": [
+  {
+   "component_id": "comp-prose-statistics-dev-0011",
+   "category": "prose",
+   "start_byte": 2,
+   "end_byte": 230
+  },
+  {
+   "component_id": "comp-code-rust-dev-0001",
+   "category": "code",
+   "start_byte": 231,
+   "end_byte": 293
+  },
+  {
+   "component_id": "comp-code-shell-bash-dev-0002",
+   "category": "code",
+   "start_byte": 294,
+   "end_byte": 642
+  }
+ ]
+}

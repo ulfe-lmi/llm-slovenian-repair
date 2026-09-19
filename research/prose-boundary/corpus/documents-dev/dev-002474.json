@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-002474",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T11-interactions",
+ "byte_length": 836,
+ "cp_length": 816,
+ "sha256": "625b49b2890f0f980385c84804463ed5fdc10bef8facd2e535d77eac5dd9217b",
+ "document": "`/* Testni fragment 7: izmišljena oseba Marko, projekt Koda. `.\n```\nfn opis_2() -> String { /* Testni projekt Lipa: č, š, ž, *poudarek* in _podčrtano_ */ let seStez = false; let HRAŠNA_VREDNOST = 5; let besedilo = format!(\"*Nova* ({} $)\", HRAŠNA_VREDNOST); let oznaka = \"č`š`ž\"; let pot = \"docs/vir.txt\"; let url = \"https://primer.si/koda\"; format!(\"{} | {} | {} | {} | {}\", seStez, besedilo, oznaka, pot, url) }\n# komentar z \\frac{a}{b}\n```\nLuka je dejal, da je funkcija kot mala kuhinja v veliki jedilnici. „Vgradi sestavine, počakaš in dobijoš posodo,« je rekel z nasmehom. Sodelavci so takoj videli, da se s tem izognemo ponavljanju.\nPoleti 2024 sem z izmišljeno skupino Tihotažna obala raziskoval otok na Bledskem jezeru, kjer je bil zrak svež. Zvečer smo se zatekli v lokalno jedilnico, da bi poskusili potico.",
+ "components": [
+  {
+   "component_id": "comp-code-sql-dev-0007",
+   "category": "code",
+   "start_byte": 0,
+   "end_byte": 63
+  },
+  {
+   "component_id": "comp-code-rust-dev-0006",
+   "category": "code",
+   "start_byte": 65,
+   "end_byte": 451
+  },
+  {
+   "component_id": "comp-prose-programming-explainer-dev-0003",
+   "category": "prose",
+   "start_byte": 452,
+   "end_byte": 653
+  },
+  {
+   "component_id": "comp-prose-travel-dev-0001",
+   "category": "prose",
+   "start_byte": 654,
+   "end_byte": 836
+  }
+ ]
+}

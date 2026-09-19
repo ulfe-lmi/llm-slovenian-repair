@@ -1,0 +1,82 @@
+{
+ "doc_id": "dev-001464",
+ "byte_length": 891,
+ "cp_length": 867,
+ "regions": [
+  {
+   "start_byte": 0,
+   "end_byte": 401,
+   "start_cp": 0,
+   "end_cp": 390,
+   "component_id": "comp-prose-science-dev-0011",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 401,
+   "end_byte": 402,
+   "start_cp": 390,
+   "end_cp": 391,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 402,
+   "end_byte": 418,
+   "start_cp": 391,
+   "end_cp": 407,
+   "component_id": "comp-math-equation-env-dev-0007",
+   "category": "math",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 418,
+   "end_byte": 544,
+   "start_cp": 407,
+   "end_cp": 533,
+   "component_id": "comp-math-equation-env-dev-0007",
+   "category": "math",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 544,
+   "end_byte": 558,
+   "start_cp": 533,
+   "end_cp": 547,
+   "component_id": "comp-math-equation-env-dev-0007",
+   "category": "math",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 558,
+   "end_byte": 559,
+   "start_cp": 547,
+   "end_cp": 548,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 559,
+   "end_byte": 891,
+   "start_cp": 548,
+   "end_cp": 867,
+   "component_id": "comp-prose-literature-dev-0004",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  }
+ ],
+ "invariants": {
+  "tiling_complete": true,
+  "no_contradictory_overlaps": true,
+  "cp_range_exact": true
+ }
+}

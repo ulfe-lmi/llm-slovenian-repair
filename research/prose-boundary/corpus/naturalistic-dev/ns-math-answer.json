@@ -1,0 +1,68 @@
+[
+ {
+  "case_id": "nat-math-answer-dev-01",
+  "scenario": "ns-math-answer",
+  "scenario_index": 6,
+  "instance": "dev",
+  "fragment": "V izmišljenem projektu Analiza cene Sava smo skupaj z Timom preverjali preprosto linearno enačbo. Cilj naloge je najti vrednost spremenljivke, pri kateri izraz $2x+3$ doseže številko 11. Zapišimo jo v zapisu z razširjeno enačbo:\n\\[\n2x+3=11\n\\]\nNajprej odštejemo 3 na obeh straneh in nato delimo s 2. Dobimo $x=(11-3)/2$ ter nato $x=4$. Da odgovor ni le teoretičen, pripravimo kratek seznam preveritev:\n- za $x=3$ je vrednost 9,\n- za $x=4$ je vrednost 11,\n- za $x=5$ je vrednost 13.\n\nTabela ponovno pokaže, da se točka ujemata le pri $x=4$, zato lahko sklepamo, da je vrednost edina in pravilna.\n\n| x | vrednost |\n|---|---|\n| 3 | 9 |\n| 4 | 11 |\n| 5 | 13 |\n\nZa reproducibilnost lahko zapišemo psevdo-kodo, ki preveri isti pogoj brez dodatnih orodij:\n```\nx := 4\nassert 2*x + 3 == 11\n```\nSklepajmo: rešitev naloge je $x=4$, odgovor pa je preprost in jasen.",
+  "fragment_sha256": "bffa23265420cb9aeb47d881d94b50b602593579a1c61328c105d5394239dd6f",
+  "fragment_bytes": 864,
+  "prompt_sha256": "576eaba3498b3833937b57be6c2490a3cf640ca440dd412a7af5445966d94736",
+  "seed": "feee1f3afbc39dcb"
+ },
+ {
+  "case_id": "nat-math-answer-dev-02",
+  "scenario": "ns-math-answer",
+  "scenario_index": 6,
+  "instance": "dev",
+  "fragment": "Najprej določimo, da skupina projekta *Modra Ptica* ima 18 članov. Če je $n$ število članov, ki rešijo nalogo, in $2n+3$ tistih, ki ne, potem velja $n+(2n+3)=18$. Poenostavimo:\n\\[\n3n+3=18,\n\\]\ntorej $3n=15$ in $n=5$. Preverimo: $5+2\\cdot5+3=18$, zato je rešitev pravilna.\n\nKoraki so:\n- zapišemo enačbo $n+(2n+3)=18$;\n- preverimo $5+2\\cdot5+3=18$.\n\nV tabeli povzememo podatke:\n\n| skupina | število |\n|---|---|\n| rešili | $n=5$ |\n| niso rešili | $2n+3=13$ |\n| skupaj | 18 |\n\nTo pomeni, da je nalogo rešilo 5 članov projekta. Če bi skupina imela 20 članov, bi bila enačba $3n+3=20$, rešitev pa ne bi bila celoštevilčna, zato izhaja, da za 18 članov obstaja edinstvena celoštevilčna rešitev $n=5$.",
+  "fragment_sha256": "51e3868d3426bc6c850655fbcda48de5945a2ae47f1c843b8c22c04248df631e",
+  "fragment_bytes": 716,
+  "prompt_sha256": "576eaba3498b3833937b57be6c2490a3cf640ca440dd412a7af5445966d94736",
+  "seed": "feee1f3afbc39dcb"
+ },
+ {
+  "case_id": "nat-math-answer-dev-03",
+  "scenario": "ns-math-answer",
+  "scenario_index": 6,
+  "instance": "dev",
+  "fragment": "V izmišljenem projektu Majhen most želi inženirka Ana preveriti, ali bo tlakovka dovolj visoka. Podatki so: $a=12$, $b=15$ in $h=5$. Najprej izračunamo ploščino pravokotnika.\n\n1. Ploščino zapišemo kot $S=ab$.\n2. Vstavimo podatke: $$S=12\\cdot 15=180$$.\n3. Nato preverimo pogoj: $$h<\\sqrt{S} \\Longleftrightarrow 5<\\sqrt{180}\\approx 13.4$$.\n\n| Spremenljivka | Pomen | Vrednost |\n|---|---|---|\n| $a$ | dolžina | 12 |\n| $b$ | širina | 15 |\n| $h$ | višina | 5 |\n\n```text\na=12\nb=15\nS=a*b\nprint(S)\n```\n\nKer je $5$ manjše od približno $13.4$, je pogoj izpolnjen. Površina znaša $180$ enot, zato je izmišljeni projekt po teh dveh preverjanjih sprejet. Dodatno ugotovimo, da so izhodišča in cilji jasni, izračuni pa so reproducibilni, zato je odločitev smiselna. Torej so izmišljeni podatki medsebojno skladni, rezultat je jasan, in Ana lahko potrditev shrani v projektne dnevnike brez dodatnih meritve.",
+  "fragment_sha256": "4b93746c265650f0c3ed3c612c99c89940a95fcd1f0fb3099ecc990c82e2e099",
+  "fragment_bytes": 914,
+  "prompt_sha256": "576eaba3498b3833937b57be6c2490a3cf640ca440dd412a7af5445966d94736",
+  "seed": "feee1f3afbc39dcb"
+ },
+ {
+  "case_id": "nat-math-answer-dev-04",
+  "scenario": "ns-math-answer",
+  "scenario_index": 6,
+  "instance": "dev",
+  "fragment": "V izmišljenem projektu Mestna kmetija 2031 je Ana preverjala donos sadnega vrta. Če je število dreves $x$, prinaša donos $R(x)=40x-0,5x^2$, stroški pa $S(x)=10x+20$. Čisti dobiček je $P(x)=R(x)-S(x)=30x-0,5x^2-20$. Največji dobiček poiščemo z odvajanjem: $$P'(x)=30-x$$. Ničlo odvajalke nastavimo enako $0$: $$30-x=0$, zato je $x=30$. Ker je $P''(x)=-1$, je to maksimum. Preverimo vrednosti v tabeli:\n| število dreves $x$ | dobiček $P(x)$ v € |\n| 28 | 428 |\n| 30 | 430 |\n| 32 | 428 |\nSeznam korakov: 1) zapišemo funkcijo dobička, 2) odvajamo, 3) rešimo enačbo, 4) preverimo drugo odvodno funkcijo. Pri $30$ drevesih dobi Ana največji možni dobiček $430$ € in projekt je najbolj donosen pri tem obsegu. Dodaten zapis: za $x=25$ je dobiček $P(25)=30*25-0,5*25^2-20=417,5$ €, zato je izbor dreves ključen.",
+  "fragment_sha256": "d554daae241c88f76cc227031f1419904fb050b06f8b94040c24c37f16f19f2d",
+  "fragment_bytes": 831,
+  "prompt_sha256": "576eaba3498b3833937b57be6c2490a3cf640ca440dd412a7af5445966d94736",
+  "seed": "feee1f3afbc39dcb"
+ },
+ {
+  "case_id": "nat-math-answer-dev-05",
+  "scenario": "ns-math-answer",
+  "scenario_index": 6,
+  "instance": "dev",
+  "fragment": "V raziskovalnem projektu Ljubljana 2031 je ekipa pod vodjo Ane in Marka preverjala, koliko stane gradnja testnega mostu. Skupni strošek $S(x)$, kjer $x$ označuje število plošč, je podan z display izrazom $$S(x)=2x^2-8x+6$$. Želimo najti najmanjši strošek in ustrezen $x$.\n\nPostopek je preprost: 1. definiramo funkcijo, 2. odvedemo, 3. poiščemo ničle, 4. preverimo znak drugega odvoda. Odvajamo: $$S'(x)=4x-8$$. Iz enačbe $4x-8=0$ dobimo $x=2$. Ker je $S''(x)=4>0$, gre za minimum. Vstavimo $x=2$: $$S(2)=2(2)^2-8(2)+6=2$$.\n\nPreveritev v tabeli: | $x$ | $S(x)$ |\n|---|---|\n| 1 | 0 |\n| 2 | 2 |\n| 3 | 6 |.\n\nV kodi Python: `def S(x): return 2*x*x - 8*x + 6; print(S(2))` izpiše 2.\n\nZato priporočam, da ekipa v izmišljenem primeru izbere natanko 2 plošče, če želi minimizirati izračunani strošek. Rezultat je ilustrativen in uporablja izmišljene osebe in podatke.",
+  "fragment_sha256": "8771063474b20959544baa0e2cb1baa8a0a342a1487da79b9fb428bbccb2f225",
+  "fragment_bytes": 880,
+  "prompt_sha256": "576eaba3498b3833937b57be6c2490a3cf640ca440dd412a7af5445966d94736",
+  "seed": "feee1f3afbc39dcb"
+ },
+ {
+  "case_id": "nat-math-answer-dev-06",
+  "scenario": "ns-math-answer",
+  "scenario_index": 6,
+  "instance": "dev",
+  "fragment": "Najprej preverimo enote. V izmišljenem projektu Mostna linija 7 so inženirja Ana in Boštjan zabeležili sile na treh opornih točkah. Ker so vse vrednosti podane v kilonjutnih, jih lahko neposredno seštejemo.\n\n1. Oporna točka A nosi $F_A = 12$ kN.\n2. Oporna točka B nosi $F_B = 18$ kN.\n3. Oporna točka C nosi $F_C = 5$ kN.\n\nTabela meritev:\n\n| točka | sila (kN) |\n| A | 12 |\n| B | 18 |\n| C | 5 |\n\nKoda:\n```python\ndef skupna_sila(*sile):\n    return sum(sile)\n\nprint(skupna_sila(12, 18, 5))\n```\n\nSeštejemo sile:\n\\[\nF_{skupna}=F_A+F_B+F_C=12+18+5=35.\n\\]\nČe nosilec deluje pod kotom $\\alpha=30^\\circ$, je vodoravna komponenta\n\\[\nF_x=F_{skupna}\\cos\\alpha=35\\cdot 0{,}866=30{,}3.\n\\]\n\nOdgovor: skupna sila je $35$ kN, vodoravna komponenta pa približno $30{,}3$ kN. Rezultat je smiseln, ker je vodoravna komponenta manjša od skupne sile. Podatki so izmišljeni, koda pa ponazarja preprost izračun.",
+  "fragment_sha256": "9d140c687e2a61c7ae285c5b38ff2c9c38db5640eb75b1a8c1e2aab6255977fb",
+  "fragment_bytes": 901,
+  "prompt_sha256": "576eaba3498b3833937b57be6c2490a3cf640ca440dd412a7af5445966d94736",
+  "seed": "feee1f3afbc39dcb"
+ }
+]

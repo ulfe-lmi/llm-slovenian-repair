@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-001920",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T7-prose-json-prose-latex",
+ "byte_length": 978,
+ "cp_length": 963,
+ "sha256": "3fd307e7eeaf388f8018b9672b528ee1b031f9dfcf8848cd3d40716cafb98bdf",
+ "document": "V izmišljenem projektu Bralna linija (2021) mlada lektorica Ana Brezan raziskuje, kako kratek slovenski razpesek vpraša spomin. V evropski primerjavi se motiva potovanja in tihotapljenja knjig pojavita pri avtorici Elini Kravec ter pri francoskem romanopiscu Marcu Villen. Zvrst, ki jo raziskovalci imenujejo bralna pripoved, tu zveni kot nežna variacija na klasičen dnevnik.\n{\"ime\":\"Oseba Miha\",\"dolžina\":\"1,8 m\",\"avtorsko\":\"Nevtralna testna vsebina\",\"razmerje\":\"0,13\",\"opomba\":\"*Izmišljena oseba* https://primer.si/novica\"}\nV Ljubljani je mladinski nogometni projekt (pod imenom Mladi črt) v jeseni 2023 izvedel pet treningov na travi, kjer so fantje vadili predajo in branje prostora. Po dveh tednih so udeleženci povedali, da so se počutili bolj sproščeno, čeprav je bila prva tekma pravzaprav neuspešna. V uvodu je trener, izmišljen Matej Kovač, poudaril: 'Kljub vsemu so pomembna pravila in strpljenje.'\n\\[\\frac{9}{10}-\\dfrac{\\mu}{\\nu}=\\text{Projekt Lipa}\\]",
+ "components": [
+  {
+   "component_id": "comp-prose-literature-dev-0001",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 379
+  },
+  {
+   "component_id": "comp-structured-json-dev-0006",
+   "category": "structured",
+   "start_byte": 380,
+   "end_byte": 531
+  },
+  {
+   "component_id": "comp-prose-sports-dev-0001",
+   "category": "prose",
+   "start_byte": 532,
+   "end_byte": 924
+  },
+  {
+   "component_id": "comp-math-fractions-dev-0005",
+   "category": "math",
+   "start_byte": 925,
+   "end_byte": 978
+  }
+ ]
+}

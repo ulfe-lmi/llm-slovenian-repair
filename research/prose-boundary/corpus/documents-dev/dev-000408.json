@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-000408",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T2-prose-math-prose",
+ "byte_length": 813,
+ "cp_length": 797,
+ "sha256": "e7118790f63cd7dfc32ed404c028eb5ae78ec8bf90e81e5ec66a739de9b06d92",
+ "document": "V testnem projektu Spomin 2024 sta osebi Luka in Meta poudarila, da bolečine v vratu in ramenskem predelu niso vedno znak resnega stanja. Vendar pa je smiselno, da osebo sprejme zdravnik, zlasti če se pojavi omedlevica ali motnja govora (na primer ob nenadnem slabem počutju).\n\\text{Nina}\\begin{matrix}11&12\\\\13&14\\end{matrix}\nV letu 2022 je občina Šentvid na Vzorčni gori uvedla elektronsko predložitev dokumentov. Nekateri uporabniki so najprej raje oddali listne vloge, a so kasneje izbrali spletno obliko. V zapisniku, ki ga je podpisal magister Jožef Kranjc, so zapisali: „Postopek je pregleden”, in ga nato potrdili. Rok za odziv je bil deset dni, vendar so večino rešitev dokončali že v petih dneh. Tudi mnenje javnosti je bilo zmerno, saj so v anketi sodelovali trije od petih prebivalcev.",
+ "components": [
+  {
+   "component_id": "comp-prose-medicine-explainer-dev-0007",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 279
+  },
+  {
+   "component_id": "comp-math-matrices-dev-0003",
+   "category": "math",
+   "start_byte": 280,
+   "end_byte": 329
+  },
+  {
+   "component_id": "comp-prose-administration-dev-0010",
+   "category": "prose",
+   "start_byte": 330,
+   "end_byte": 813
+  }
+ ]
+}

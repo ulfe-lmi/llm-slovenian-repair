@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-002039",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T5-lists",
+ "byte_length": 1006,
+ "cp_length": 986,
+ "sha256": "018f9369dad1c9951948717a2c5df03f573c97baf6ed80583896338b5140f89e",
+ "document": "- Pri izpisu je bila pomembna ne samo skupna vrednost, ampak tudi to, ali so vsi podatki iz štirih oddelkov pravilni (kot je poudarila Nina). Povprečna vrednost je bila za tri evre višja, razmerje pa je ostalo približno enako kot spomladi 2022.\n- `/* Fragment 3: testni primer, vir https://primer.si/koda, po`\n- V projektu »Mestni prehod čez Ljubljanico« so leta 2021 izbrali kombinacijo jekla in betona (natančneje: lahkega, armiranega). Ker je razpon precejšen, so nosilce razdelili na osem segmentov. Inženirka Ana Kos je dodala, da se temperaturne razlike v spojih skrbno kompenzirajo.\n- V projektu Prvi korak so učitelji iz Ljubljane poskusili kratek skupinski pogovor pred ocenjevanjem, kar je po mnenju Anje zmanjšalo strah pred pisnim testom. Pri izbirnem predmetu zgodovina so uporabili učbenik z dodatnimi opombami (stran 42) in vprašanja, ki so dopuščala večkratne odgovore. Odrasli udeleženci so se zavedali, da se izpit ne piše enkrat, temveč se znanje utrjuje v vsakdanju.",
+ "components": [
+  {
+   "component_id": "comp-prose-statistics-dev-0004",
+   "category": "prose",
+   "start_byte": 2,
+   "end_byte": 248
+  },
+  {
+   "component_id": "comp-code-cpp-dev-0011",
+   "category": "code",
+   "start_byte": 251,
+   "end_byte": 313
+  },
+  {
+   "component_id": "comp-prose-engineering-dev-0011",
+   "category": "prose",
+   "start_byte": 316,
+   "end_byte": 599
+  },
+  {
+   "component_id": "comp-prose-education-dev-0006",
+   "category": "prose",
+   "start_byte": 602,
+   "end_byte": 1006
+  }
+ ]
+}

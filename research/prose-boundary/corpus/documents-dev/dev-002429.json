@@ -1,0 +1,71 @@
+{
+ "doc_id": "dev-002429",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T10-randomized",
+ "byte_length": 1954,
+ "cp_length": 1927,
+ "sha256": "58a2561a0528744de5812db9496551bfa81e0c36a25597ebfb48a804e87c2527",
+ "document": "V projektu Mlajša šola je Nina pripravila kratke vaje, ki učencem omogočajo, da znanje preizkusijo v praksi (na primer pri izletu v mestno knjižnico). Učenci so radi dejali, da »se učimo brez strahu pred napako«, in učiteljica je to zapisala v letno knjižico. Pri izpitu iz slovenščine so namesto dolgih nalog dobili kratek pripovedni zapis, ki so ga lahko brali in pojasnjevali.\n<b>Projekt Lipa: izmišljen test.\nBesedilo za projektovno avtorizacijo.\n```\n// Testni modul (č, š, ž)\nfunction seStez(a, b) {\n  return (a + b) * 1;\n}\nconst naslov = \"Opomba: **pomembno** in _podčrtana_\";\nconst besedilo = `Cena: $ 1,25 za razdelek2`;\nconst povezava = \"https://primer.si/koda\";\nconst pot = \"src/modul.py\";\nconst vir = \"docs/vir.txt\";\nconst HRAŠNA_VREDNOST = 10;\nconst rezultat = seStez(HRAŠNA_VREDNOST, 5);\nconsole.log(naslov, besedilo, povezava, pot, vir, rezultat);\n// konec fragmenta\n```\n```yaml\n# Projekt Sonce: primer 9, brez absolutnih poti\n```\n\n--- {naziv: 'Projektna vsebina: **Energetska meritev**', opis: 'Nevtralna vsebina z **poudarkom** in https://primer.si/novica', vrednosti: ['Poraba 75 %', 'Debljina 0,9 m', 'Množitelj 0,66'], oseba: 'Izmišljena oseba: Ida Kranjc', projekt: 'Nevtralna testna vsebina'} # Fragment 7: energetska meritev\n```\nint main(void) { char *cena1 = \"1 $\"; char *cena2 = \"2 EUR\"; char *potA = \"docs/vir.txt\"; char *potB = \"src/modul.py\"; int seStez = 1; (void)cena1; (void)cena2; (void)potA; (void)potB; (void)seStez; return 0; } /* Valute: $ in EUR */\n```\nmodul_pogon.py poročilo_q3.csv tabela_01.json\n\\sum_{\\psi=0}^{12} \\omega_{\\psi} + \\prod_{\\pi=1}^{7} \\Omega_{\\pi} \\text{Projekt}\n\\text{Krka}\\begin{bmatrix}7&8\\\\9&10\\end{bmatrix}\nGradbeniki so v projektu Lipa najprej razstavili starega opornega zidu, nato pa zgradili nove podnožne plošče iz ojačane betonske mase (debelina 1,2 metra). Delo so spremljali izvajalci iz Ljubljane in Maribora, medtem ko so geotehniki redno merili usedanje tal.",
+ "components": [
+  {
+   "component_id": "comp-prose-education-dev-0011",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 392
+  },
+  {
+   "component_id": "comp-malformed-partial-html-dev-0001",
+   "category": "malformed",
+   "start_byte": 393,
+   "end_byte": 464
+  },
+  {
+   "component_id": "comp-code-javascript-dev-0009",
+   "category": "code",
+   "start_byte": 465,
+   "end_byte": 904
+  },
+  {
+   "component_id": "comp-markdown-fenced-code-dev-0005",
+   "category": "markdown",
+   "start_byte": 905,
+   "end_byte": 965
+  },
+  {
+   "component_id": "comp-structured-yaml-dev-0007",
+   "category": "structured",
+   "start_byte": 966,
+   "end_byte": 1268
+  },
+  {
+   "component_id": "comp-code-c-dev-0005",
+   "category": "code",
+   "start_byte": 1269,
+   "end_byte": 1510
+  },
+  {
+   "component_id": "comp-machine-filenames-dev-0007",
+   "category": "machine",
+   "start_byte": 1511,
+   "end_byte": 1557
+  },
+  {
+   "component_id": "comp-math-summations-dev-0006",
+   "category": "math",
+   "start_byte": 1558,
+   "end_byte": 1638
+  },
+  {
+   "component_id": "comp-math-matrices-dev-0002",
+   "category": "math",
+   "start_byte": 1639,
+   "end_byte": 1687
+  },
+  {
+   "component_id": "comp-prose-engineering-dev-0004",
+   "category": "prose",
+   "start_byte": 1688,
+   "end_byte": 1954
+  }
+ ]
+}

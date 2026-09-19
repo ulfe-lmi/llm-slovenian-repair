@@ -1,0 +1,23 @@
+{
+ "doc_id": "d27",
+ "seed": "008edefd0001",
+ "template": "D-yaml-nested-split-single",
+ "byte_length": 15,
+ "cp_length": 15,
+ "sha256": "9d83c87f536c55c2d5296412fe13c1229b4d8e972fe253a69e1b1cf537bfc42c",
+ "document": "seznam:\n  - en\n",
+ "components": [
+  {
+   "component_id": "defect-008g-d27a",
+   "category": "structured",
+   "start_byte": 0,
+   "end_byte": 7
+  },
+  {
+   "component_id": "defect-008g-d27b",
+   "category": "structured",
+   "start_byte": 8,
+   "end_byte": 14
+  }
+ ]
+}

@@ -1,0 +1,47 @@
+{
+ "doc_id": "dev-001109",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T10-randomized",
+ "byte_length": 1103,
+ "cp_length": 1084,
+ "sha256": "cd1892b10048dda83b8cde0161d96f8b65284d3810313e2be44b06c0f3651c39",
+ "document": "V testnem projektu Spomin 2024 sta osebi Luka in Meta poudarila, da bolečine v vratu in ramenskem predelu niso vedno znak resnega stanja. Vendar pa je smiselno, da osebo sprejme zdravnik, zlasti če se pojavi omedlevica ali motnja govora (na primer ob nenadnem slabem počutju).\n## Testni projekt Marjeta\n### Meritev 12 enot\n#### Opomba 3 dni\n[slovenski opis](https://primer.si/stran)\n[slovenski opis 4: Iva 8 °C](https://primer.si/stran \"Naslov 4\")\n> <https://primer.si/stran>\nE[X_{\\text{Marko}}] = \\sum_{i=1}^{4} x_i P_i = 3\\pi - \\frac{1}{2} \\text{ (pričakovana vrednost)}\nseStez razdelek2 HRAŠNA_VREDNOST Q3_2024\nV letu 2022 je občina Šentvid na Vzorčni gori uvedla elektronsko predložitev dokumentov. Nekateri uporabniki so najprej raje oddali listne vloge, a so kasneje izbrali spletno obliko. V zapisniku, ki ga je podpisal magister Jožef Kranjc, so zapisali: „Postopek je pregleden”, in ga nato potrdili. Rok za odziv je bil deset dni, vendar so večino rešitev dokončali že v petih dneh. Tudi mnenje javnosti je bilo zmerno, saj so v anketi sodelovali trije od petih prebivalcev.",
+ "components": [
+  {
+   "component_id": "comp-prose-medicine-explainer-dev-0007",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 279
+  },
+  {
+   "component_id": "comp-markdown-headings-dev-0009",
+   "category": "markdown",
+   "start_byte": 280,
+   "end_byte": 343
+  },
+  {
+   "component_id": "comp-markdown-links-dev-0004",
+   "category": "markdown",
+   "start_byte": 344,
+   "end_byte": 479
+  },
+  {
+   "component_id": "comp-math-probability-dev-0002",
+   "category": "math",
+   "start_byte": 480,
+   "end_byte": 577
+  },
+  {
+   "component_id": "comp-machine-identifiers-dev-0008",
+   "category": "machine",
+   "start_byte": 578,
+   "end_byte": 619
+  },
+  {
+   "component_id": "comp-prose-administration-dev-0010",
+   "category": "prose",
+   "start_byte": 620,
+   "end_byte": 1103
+  }
+ ]
+}

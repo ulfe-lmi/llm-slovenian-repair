@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-001828",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T3-prose-fenced-prose",
+ "byte_length": 1107,
+ "cp_length": 1088,
+ "sha256": "5b3ae418128d2b45b2a29e97002bb7bebab3dd0b4cfde8b77edeaa2d7e703292",
+ "document": "V letu 2022 je občina Šentvid na Vzorčni gori uvedla elektronsko predložitev dokumentov. Nekateri uporabniki so najprej raje oddali listne vloge, a so kasneje izbrali spletno obliko. V zapisniku, ki ga je podpisal magister Jožef Kranjc, so zapisali: „Postopek je pregleden”, in ga nato potrdili. Rok za odziv je bil deset dni, vendar so večino rešitev dokončali že v petih dneh. Tudi mnenje javnosti je bilo zmerno, saj so v anketi sodelovali trije od petih prebivalcev.\n```\n#include <string>\n// Primer: `koda` in _besedilo_\n// Oseba: Ana, projekt Lipa, žlahtno\nstruct Prikaz {\n    int razdelek2;\n    int seStez;\n    std::string naslov;\n};\n\nPrikaz prikaz() { return Prikaz{1, 2, \"*test*\"}; }\n```\nV projektu Osebna opomba 2023 je Nina izjavila, da spremembe apetita lahko spremljajo tudi obdobja stresa. Nekateri ljudje to obravnavajo kot kratek signal, drugi pa kot pogost vzrok za utrujenost. Ker je vsak človek drugačen, ni primerno, da se informacije iz testne vsebine uporabijo samostojno. Najboljša pot je razgovor z zdravnikom, ki lahko posluša in morebitno naroči dodatne preglede.",
+ "components": [
+  {
+   "component_id": "comp-prose-administration-dev-0010",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 483
+  },
+  {
+   "component_id": "comp-code-cpp-dev-0005",
+   "category": "code",
+   "start_byte": 484,
+   "end_byte": 709
+  },
+  {
+   "component_id": "comp-prose-medicine-explainer-dev-0008",
+   "category": "prose",
+   "start_byte": 710,
+   "end_byte": 1107
+  }
+ ]
+}

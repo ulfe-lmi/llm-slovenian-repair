@@ -1,0 +1,102 @@
+{
+ "doc_id": "dev-001498",
+ "byte_length": 956,
+ "cp_length": 940,
+ "regions": [
+  {
+   "start_byte": 0,
+   "end_byte": 330,
+   "start_cp": 0,
+   "end_cp": 325,
+   "component_id": "comp-prose-engineering-dev-0013",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 330,
+   "end_byte": 331,
+   "start_cp": 325,
+   "end_cp": 326,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 331,
+   "end_byte": 334,
+   "start_cp": 326,
+   "end_cp": 329,
+   "component_id": "comp-code-cpp-dev-0009",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 334,
+   "end_byte": 335,
+   "start_cp": 329,
+   "end_cp": 330,
+   "component_id": "comp-code-cpp-dev-0009",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 335,
+   "end_byte": 591,
+   "start_cp": 330,
+   "end_cp": 583,
+   "component_id": "comp-code-cpp-dev-0009",
+   "category": "code",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 591,
+   "end_byte": 592,
+   "start_cp": 583,
+   "end_cp": 584,
+   "component_id": "comp-code-cpp-dev-0009",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 592,
+   "end_byte": 595,
+   "start_cp": 584,
+   "end_cp": 587,
+   "component_id": "comp-code-cpp-dev-0009",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 595,
+   "end_byte": 596,
+   "start_cp": 587,
+   "end_cp": 588,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 596,
+   "end_byte": 956,
+   "start_cp": 588,
+   "end_cp": 940,
+   "component_id": "comp-prose-cooking-dev-0002",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  }
+ ],
+ "invariants": {
+  "tiling_complete": true,
+  "no_contradictory_overlaps": true,
+  "cp_range_exact": true
+ }
+}

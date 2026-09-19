@@ -1,0 +1,53 @@
+{
+ "doc_id": "dev-000141",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T10-randomized",
+ "byte_length": 1414,
+ "cp_length": 1387,
+ "sha256": "416096d5e5cbab4af1c5069dfa1a0d5cb2410f8ba03191f9e07a8544fdbe9b69",
+ "document": "Petra je pri večernem testu ugotovila, da je vsak sklep, ki deluje, najprej zaprt in da vsaka upornost v njem nekaj počuti. Lučka se je vžgala šele takrat, ko je namesto ene uporabila dve bateriji, in sicer v smeri, ki jo je narisala v beleški. ”To je bilo dovolj,“ je zapisala v dnevnik projekta.\n## Projekt Sonce\n### Testni podnaslov\n#### Podroben podnaslov\nProjekt Sonce, avtorica Ana Kovač, vrednost 7 km.\n[raziskava]\nime = *Projekt Meritve*\nopis = _trajanje_ 3 dni\ncena = 1,20 EUR\navtor = Ana Kovač\nvir = https://primer.si/novica\n; nevtralna testna vsebina\nNevtralna testna tabela: postavka 1, 2 in 3 ima povezavo <https://primer.si/stran> ter elektronski naslov <pošta@primer.si> za 100 g.\n\\(\\text{polovica} = \\frac{\\delta_{\\text{Zadnja}}}{\\epsilon_{\\text{Testna}}} = 6 \\times 1\\)\n```\n# Fragment 2: *neodvisen* test, oseba: Ana Kovač\necho 'Besedilo: *zvezdice*, _podčrtanje_, `backquote`'\necho 'Cena: 12 $ in 4 € (izmišljen projekt)'\necho 'Datoteka: src/modul.py, dokument: docs/vir.txt'\necho 'Spletni vir: https://primer.si/koda'\necho 'Identi: razdelek2, seStez, HRAŠNA_VREDNOST'\necho 'Napiši č, š, ž in (oklepaj)'\n```\nV projektu Mlin 2018 je Luka preveril, koliko je povprečno trajala čakalna vrsta. Ko so trije prostovoljci dodali svoje opazke, se je slika izkazala za bolj uravnoteženo. Po njegovem mnenju je bistvo v tem, da se številka ne bere sama, ampak potrebuje kontekst.",
+ "components": [
+  {
+   "component_id": "comp-prose-electronics-dev-0010",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 307
+  },
+  {
+   "component_id": "comp-markdown-headings-dev-0005",
+   "category": "markdown",
+   "start_byte": 308,
+   "end_byte": 420
+  },
+  {
+   "component_id": "comp-structured-ini-dev-0005",
+   "category": "structured",
+   "start_byte": 421,
+   "end_byte": 573
+  },
+  {
+   "component_id": "comp-markdown-autolinks-dev-0005",
+   "category": "markdown",
+   "start_byte": 574,
+   "end_byte": 708
+  },
+  {
+   "component_id": "comp-math-text-slovenian-dev-0005",
+   "category": "math",
+   "start_byte": 709,
+   "end_byte": 799
+  },
+  {
+   "component_id": "comp-code-shell-bash-dev-0002",
+   "category": "code",
+   "start_byte": 800,
+   "end_byte": 1148
+  },
+  {
+   "component_id": "comp-prose-statistics-dev-0001",
+   "category": "prose",
+   "start_byte": 1149,
+   "end_byte": 1414
+  }
+ ]
+}

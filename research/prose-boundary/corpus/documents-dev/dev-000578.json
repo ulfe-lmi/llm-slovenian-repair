@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-000578",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T7-prose-json-prose-latex",
+ "byte_length": 1022,
+ "cp_length": 1013,
+ "sha256": "e0313acf390ff5836f109f89842c660235bfaecb4baadc714f890dcb1d5f7b32",
+ "document": "Varčnost pri računih za ogrevanje v projektu Topla hiša ni vedno leva stvar, če je v prostoru prehladno. Leta 2023 so mnogi domovi dobili termometre, ki opozarjajo, ko temperatura pade pod 18 stopinj. (V takih dneh je bolje zapreti okno, ki ga obvečer nismo nujno potrebovali.) Pri starejših gradnjah je koristno preveriti tudi, ali se okno res dobro zapre.\n{\"ime\":\"Oseba Ana\",\"vloga\":\"Koordinatorka\",\"stanje\":\"Aktivna 80 %\",\"avtorsko\":\"Nevtralna testna vsebina\",\"podrobnosti\":{\"visina\":\"3,5 m\",\"razmerje\":\"0,13\",\"opis\":\"*Preverjanje* https://primer.si/novica\"}}\nProjektna ekipa Zgodovinski stezni je v razpravi o svetu, obdobju pred dvajsetim stoletjem, omenila izmišljene kronike, ki opisujejo trgovske poti. Lina je rekla, da so imena v teh listinah pogosto podobna našim, a ne smemo pozabiti, da gre za testno vsebino in ne za uradne podatke. V oklepaju (za notranjo uporabo) je zapisala, da je merilo za preverjanje letnica, če je bila omenjena.\n$$\\frac{\\pi}{\\lambda + \\mu} = 11 - \\nu = \\text{Projekt Soca}$$",
+ "components": [
+  {
+   "component_id": "comp-prose-everyday-advice-dev-0009",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 363
+  },
+  {
+   "component_id": "comp-structured-json-dev-0002",
+   "category": "structured",
+   "start_byte": 364,
+   "end_byte": 568
+  },
+  {
+   "component_id": "comp-prose-history-dev-0003",
+   "category": "prose",
+   "start_byte": 569,
+   "end_byte": 959
+  },
+  {
+   "component_id": "comp-math-display-dollar-dev-0006",
+   "category": "math",
+   "start_byte": 960,
+   "end_byte": 1022
+  }
+ ]
+}

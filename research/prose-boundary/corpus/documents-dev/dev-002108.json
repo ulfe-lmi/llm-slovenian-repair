@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-002108",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T8-quote-fenced",
+ "byte_length": 755,
+ "cp_length": 737,
+ "sha256": "42f8dbf99c84ba0d77451ebd4ea47d1544011cfe02d4356080573b074461c1db",
+ "document": "> Letos, ko smo v projektu Voda gledali porabo, so števila pokazala nižji trend. Povprečno so gospodinjstva porabila dvanajst litrov na dan. To je bilo manj kot lani, ko je bila vrednost tri litre višja. »Zanimivo je, da se razmerje med dnevi z nizko in z visoko porabo ni spremenilo,« je zapisala Ema. Račun je bil zato preprost, a kljub temu povzročil pozornost. `// Testni podatki za osebo Ana.`\n```\n# Fragment 2: *neodvisen* test, oseba: Ana Kovač\necho 'Besedilo: *zvezdice*, _podčrtanje_, `backquote`'\necho 'Cena: 12 $ in 4 € (izmišljen projekt)'\necho 'Datoteka: src/modul.py, dokument: docs/vir.txt'\necho 'Spletni vir: https://primer.si/koda'\necho 'Identi: razdelek2, seStez, HRAŠNA_VREDNOST'\necho 'Napiši č, š, ž in (oklepaj)'\n```",
+ "components": [
+  {
+   "component_id": "comp-prose-statistics-dev-0013",
+   "category": "prose",
+   "start_byte": 2,
+   "end_byte": 372
+  },
+  {
+   "component_id": "comp-code-rust-dev-0010",
+   "category": "code",
+   "start_byte": 373,
+   "end_byte": 406
+  },
+  {
+   "component_id": "comp-code-shell-bash-dev-0002",
+   "category": "code",
+   "start_byte": 407,
+   "end_byte": 755
+  }
+ ]
+}

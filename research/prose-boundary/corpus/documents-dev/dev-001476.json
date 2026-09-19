@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-001476",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T3-prose-fenced-prose",
+ "byte_length": 1176,
+ "cp_length": 1145,
+ "sha256": "33b305fafbe8b56266bc2faea60c6413045f0bb5818dc3b39220586ef81d92e7",
+ "document": "Svetovna in slovenska zgodovina se v tem projektu prepleta, ker so izmišljeni potniki v dnevnik zapisali potovanja, ki so trajala po letih, ne po dnevih. »Kadar je letnica omenjena,« je dodala Eva, »je besedilo preprosteje razumljivo, čeprav manj natančno.« Njena skupina je zato izbrala kratka navodila, da so besedila ostala čitljiva.\n```\n#!/usr/bin/env bash\n# Drugi fragment: izmišljen projekt (test)\n# Oseba: Peter, projekt: Žlahtni koda (HRAŠNA_VREDNOST)\n# Besedila: poudarke, podčrtane besede, zvezdice\nnaslov='*neodvisni* fragment'\npodrobnost='_podčrtana_ in **poudarjena**'\nseStez='src/modul.py'\nrazdelek2='docs/vir.txt'\nurl='https://primer.si/koda'\noklepaji='(vzorčni)'\necho \"naslov: $naslov\"\necho \"podrobnost: $podrobnost\"\necho \"pot: $seStez\"\necho \"razdelek: $razdelek2\"\necho \"url: $url\"\necho \"oklepaji: $oklepaji\"\necho 'backquote: `'\necho 'znesek: 42 $'\n```\nV tečaju za starše v Celju so namesto poskusnega izpita uvedli skupno vprašanje, ki ga je treba razčleniti v tri kratke točke. Ko so otroci in učitelji slišali “Da se ocenjevanje ne začne šele z ocenami”, so se v razredu pogostejše pojavila vprašanja o načinu, ne le o točkah.",
+ "components": [
+  {
+   "component_id": "comp-prose-history-dev-0005",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 344
+  },
+  {
+   "component_id": "comp-code-shell-bash-dev-0010",
+   "category": "code",
+   "start_byte": 345,
+   "end_byte": 882
+  },
+  {
+   "component_id": "comp-prose-education-dev-0009",
+   "category": "prose",
+   "start_byte": 883,
+   "end_byte": 1176
+  }
+ ]
+}

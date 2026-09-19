@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-001322",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T3-prose-fenced-prose",
+ "byte_length": 1168,
+ "cp_length": 1140,
+ "sha256": "e3f6463fd36a49de23813d3d73d44e1d73bee7b3d8aeb5e5c01dc864e5edacfd",
+ "document": "Ob krogu učenci najprej ločijo sredino, polmer in obseg, potem pa izmerijo predmete v razredu. (Na primer kozarec, skledo ali okrogel podstavek.) Učitelj lahko poudari, da obseg pove, kako dolgo je rob, površina pa pove, koliko prostora zaseda notranjost. Tak pristop je bil del projekta Geometrija okoli nas, v katerem so dijaki iz leta 2018 zbirali meritve iz kuhinje.\n```\n-- Razdelek2: testi za vir\nCREATE TABLE viri (\n  id INT PRIMARY KEY,\n  pot TEXT,\n  \"HRAŠNA_VREDNOST\" TEXT,\n  \"seStez\" TEXT\n);\nINSERT INTO viri (id, pot, \"HRAŠNA_VREDNOST\", \"seStez\")\nVALUES (1, 'docs/vir.txt', 'vrednost: 5 $', '`kodica` in **besedilo**');\nSELECT id, pot, \"HRAŠNA_VREDNOST\" FROM viri WHERE pot = 'src/modul.py';\n-- Oklepaji: (poudarek _šumniki_)\n```\nKo učimo trikotnike, lahko začnemo z vprašanjem, „Zakaj je šotor stabilen?“ in nato z ročno izrisanimi oblikami na papirju. Učenci pogosto uvidijo, da višina ni samo dolžina črte, ampak razdalja do nasprotne stranice, čeprav jo učbeniki včasih imenujejo le višina. Pri projektu Podrobnosti na papirju so učenci iz leta 2022 z risbo razložili, kako se oblika spreminja, ko premaknemo eno temeno točko.",
+ "components": [
+  {
+   "component_id": "comp-prose-math-explainer-dev-0008",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 374
+  },
+  {
+   "component_id": "comp-code-sql-dev-0010",
+   "category": "code",
+   "start_byte": 375,
+   "end_byte": 747
+  },
+  {
+   "component_id": "comp-prose-math-explainer-dev-0010",
+   "category": "prose",
+   "start_byte": 748,
+   "end_byte": 1168
+  }
+ ]
+}

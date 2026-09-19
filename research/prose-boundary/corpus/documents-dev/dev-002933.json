@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-002933",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T8-quote-fenced",
+ "byte_length": 663,
+ "cp_length": 652,
+ "sha256": "76b1d1b660d4de7d4ed30de7f0cd8e6a40f34f6d803cd60fac9f4fad1371f11d",
+ "document": "> V Ljubljani je mladinski nogometni projekt (pod imenom Mladi črt) v jeseni 2023 izvedel pet treningov na travi, kjer so fantje vadili predajo in branje prostora. Po dveh tednih so udeleženci povedali, da so se počutili bolj sproščeno, čeprav je bila prva tekma pravzaprav neuspešna. V uvodu je trener, izmišljen Matej Kovač, poudaril: 'Kljub vsemu so pomembna pravila in strpljenje.' `int main(void) { int razdelek2 = 7; char *naslov = \"Ana (izm`\n```\n# Testni projekt: Lipna dolina; avtor: Maja Lipovnik\ndef seštej(a, b):\n    return a + b\nnaslov = 'Povzetek: *pomembno*'\npot = 'src/modul.py'\nvir = 'https://primer.si/koda'\nrezultat = seštej(2, 3)\n```",
+ "components": [
+  {
+   "component_id": "comp-prose-sports-dev-0001",
+   "category": "prose",
+   "start_byte": 2,
+   "end_byte": 394
+  },
+  {
+   "component_id": "comp-code-c-dev-0003",
+   "category": "code",
+   "start_byte": 395,
+   "end_byte": 457
+  },
+  {
+   "component_id": "comp-code-python-dev-0001",
+   "category": "code",
+   "start_byte": 458,
+   "end_byte": 663
+  }
+ ]
+}

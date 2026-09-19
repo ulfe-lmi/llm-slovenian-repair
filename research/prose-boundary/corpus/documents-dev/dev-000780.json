@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-000780",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T11-interactions",
+ "byte_length": 943,
+ "cp_length": 921,
+ "sha256": "a8f0e2badcced149463d4db61ffbd156ce018b2799b9031412842d0ab03b232e",
+ "document": "`# Testni projekt: Besedilo; avtor: Maja Lipovnik`.\n```\n#include <string>\n// URL: https://primer.si/koda\n// Pot: src/modul.py, žlahtna\nstd::string vir() {\n    std::string url = \"https://primer.si/koda\";\n    std::string pot = \"docs/vir.txt\";\n    return url + \" \" + pot + \" (*test*)\";\n}\n# komentar z \\frac{a}{b}\n```\n“Zelenjavna juha iz preteklega tedna ni bila le juha,” je zapisal Marko v projektu Kuhinjski razgledi, “temveč spomin na dedinovo polico, kjer so bile posode iz gline.” V receptu je bil pomemben tudi čas (čeprav manj natančen): koruzni pire, krompir in malo smetane, vse skupaj kuhano petnajst minut.\nOdbor za občinske službe je obravnaval predlog o skrajšanem postopku za izdajo potrdil o prebivališču za študente, ki se vračajo iz tujine in potrebujejo dokazila za postopke v tujini. Ob tem je bil poudarek na tem, da se dokumenti, ki so že elektronsko predloženi, ne smejo ponovno zahtevati brez razloga.",
+ "components": [
+  {
+   "component_id": "comp-code-python-dev-0007",
+   "category": "code",
+   "start_byte": 0,
+   "end_byte": 50
+  },
+  {
+   "component_id": "comp-code-cpp-dev-0006",
+   "category": "code",
+   "start_byte": 52,
+   "end_byte": 314
+  },
+  {
+   "component_id": "comp-prose-cooking-dev-0003",
+   "category": "prose",
+   "start_byte": 315,
+   "end_byte": 627
+  },
+  {
+   "component_id": "comp-prose-administration-dev-0004",
+   "category": "prose",
+   "start_byte": 628,
+   "end_byte": 943
+  }
+ ]
+}

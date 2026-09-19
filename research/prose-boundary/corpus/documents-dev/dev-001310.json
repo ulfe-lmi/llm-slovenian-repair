@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-001310",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T2-prose-math-prose",
+ "byte_length": 761,
+ "cp_length": 745,
+ "sha256": "0fcb4180a699290ef48ac47aabd3912912b014042aa818621169b839c78e3144",
+ "document": "Ob prenovljenem pisarnem kotu, ki ga je v notranjem projektu Pisarna pripravila Petra, je nov tablični računalnik služil za skice (in, po njenih besedah, tudi za preprosta vprašanja). V prvih tednih se je navadila na večji zaslon, ker so bile besede na papirju pogosto preveč majhne za oči. Ko je na koncu septembra preverila baterijo, ji je bil prijeten ta enostaven način dela.\n\\text{Nina}\\begin{matrix}11&12\\\\13&14\\end{matrix}\nMed poskusom recepta za jagnjetino (po receptu Marice) je Peter v loncu najprej zvalil česen, rdečo papriko in malo olja. Vmes se je spomnil, da je leta 2021 obiskoval kmetijo, kjer so jagnjeta pasla po travniku. Nad meso je položil narezan krompir, pa tudi „malo soli, malo masla, malo časa“, kot mu je rekla mati.",
+ "components": [
+  {
+   "component_id": "comp-prose-computing-dev-0011",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 387
+  },
+  {
+   "component_id": "comp-math-matrices-dev-0003",
+   "category": "math",
+   "start_byte": 388,
+   "end_byte": 437
+  },
+  {
+   "component_id": "comp-prose-cooking-dev-0012",
+   "category": "prose",
+   "start_byte": 438,
+   "end_byte": 761
+  }
+ ]
+}

@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-000123",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T3-prose-fenced-prose",
+ "byte_length": 769,
+ "cp_length": 754,
+ "sha256": "46f5d2548db94dc50887faa256675a062bc43e933cfcff326bf3e8c50067e955",
+ "document": "Astronomi projekta Zora so z manjšim daljnogledom na Merljaku opazovali jutrnje oblake pri zori. Poskušali so zajeti bliskavice, ki so se pojavile le za hip, in v beležki je bilo zapisano, da je nebo ob petih zjutraj postalo manj motno.\n```\n/* Koda za izpis seznama (brez šumnikov) */ const seznam = ['https://primer.si/koda', 'src/modul.py', 'docs/vir.txt']; const znesek = `100 $`; console.log(seznam, znesek);\n```\nV izmišljenem raziskovalnem projektu “Arhiv Dravskih poti” (nevtralna testna zbirka) so zapisi o potovanjih po Dravi prikazali, kako so meje med skupnostmi spreminjale spomin na preteklost. Letnica 1918 je postala mejni simbol. Avtorica Ana Kralj je v vnosu zapisala (po mnenju uredništva), da je “zgodovina” večinoma molk med letnicami.",
+ "components": [
+  {
+   "component_id": "comp-prose-science-dev-0003",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 239
+  },
+  {
+   "component_id": "comp-code-javascript-dev-0006",
+   "category": "code",
+   "start_byte": 240,
+   "end_byte": 420
+  },
+  {
+   "component_id": "comp-prose-history-dev-0011",
+   "category": "prose",
+   "start_byte": 421,
+   "end_byte": 769
+  }
+ ]
+}

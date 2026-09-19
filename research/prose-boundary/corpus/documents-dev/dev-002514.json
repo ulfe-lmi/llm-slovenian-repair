@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-002514",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T7-prose-json-prose-latex",
+ "byte_length": 945,
+ "cp_length": 933,
+ "sha256": "796de560a706c10ee62bf565446b521f617e57f14f492c7e432fb1ed23efc6fa",
+ "document": "V soboto, ko je bilo poleti 24 stopinj, je ekipa izmišljene skupine Brez napetosti v parku izvedla pet minut ogrevanja, nato pa še enajstmetrovski udarec in tri kratke teke. Igralka, ki jo je projekt imenoval Eva, je po tem dejala, da je bila noga rahlo utrujena, vendar da je bil zrak svež. 'Naslednjič bomo dodali še malo plavanja,' je opozorila ob zbiranju opreme. Na koncu so opremo zložili, zapisnik pa sta podpisala le dva člana.\n{\"ime\":\"Projekt Gora\",\"nagnjenost\":\"12 %\",\"avtorsko\":\"Nevtralna testna vsebina\",\"debelina\":\"0,3 m\",\"opomba\":\"_Nevtralno_ https://primer.si/novica\"}\nLena iz izmišljenega projekta Zdravi dnevni krog je zapisala, da stres pogosto spremljajo napete mišice in počasnejši spanec. Zaradi teh sprememb ni mogoče zanesljivo sklepati o vzrokih, zato je smiselno pogovarjati se z zdravnikom.\n\\[ \\begin{bmatrix} \\theta_1 & \\mu_2 & 5 \\\\ 4 & \\phi_3 & -\\lambda_1 \\\\ \\sigma_2 & 9 & \\text{Savinja} \\end{bmatrix} \\]",
+ "components": [
+  {
+   "component_id": "comp-prose-sports-dev-0005",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 442
+  },
+  {
+   "component_id": "comp-structured-json-dev-0008",
+   "category": "structured",
+   "start_byte": 443,
+   "end_byte": 590
+  },
+  {
+   "component_id": "comp-prose-medicine-explainer-dev-0001",
+   "category": "prose",
+   "start_byte": 591,
+   "end_byte": 828
+  },
+  {
+   "component_id": "comp-math-bracket-tex-dev-0002",
+   "category": "math",
+   "start_byte": 829,
+   "end_byte": 945
+  }
+ ]
+}

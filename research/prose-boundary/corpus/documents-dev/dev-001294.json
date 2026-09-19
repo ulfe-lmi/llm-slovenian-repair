@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-001294",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T8-quote-fenced",
+ "byte_length": 792,
+ "cp_length": 772,
+ "sha256": "b917d46d437face6f5fd0cd8c8da17993addc96245dde8e74d847f964012dc90",
+ "document": "> V kuhinjskem laboratoriju projekta Okusni dnevnik so v začetku 2017 preizkusili tri različne osnove za ovseno kašo, in sicer (a) z medom, (b) z rozinami ter (c) s suhimi breskvami, vendar se je najpogosteje ponovila tista z malo kumina. Pri opombi so uporabili vstavek: „Če ni kumina, vzemi štipanje sladke paprike.“ Rezultat je bil preprosto zapisan v skupni dnevnik. `int main(void) { char *napis = \"Besedilo: __podčrtano__ in *`\n```\n# Fragment 2: *neodvisen* test, oseba: Ana Kovač\necho 'Besedilo: *zvezdice*, _podčrtanje_, `backquote`'\necho 'Cena: 12 $ in 4 € (izmišljen projekt)'\necho 'Datoteka: src/modul.py, dokument: docs/vir.txt'\necho 'Spletni vir: https://primer.si/koda'\necho 'Identi: razdelek2, seStez, HRAŠNA_VREDNOST'\necho 'Napiši č, š, ž in (oklepaj)'\n```",
+ "components": [
+  {
+   "component_id": "comp-prose-cooking-dev-0008",
+   "category": "prose",
+   "start_byte": 2,
+   "end_byte": 379
+  },
+  {
+   "component_id": "comp-code-c-dev-0007",
+   "category": "code",
+   "start_byte": 380,
+   "end_byte": 443
+  },
+  {
+   "component_id": "comp-code-shell-bash-dev-0002",
+   "category": "code",
+   "start_byte": 444,
+   "end_byte": 792
+  }
+ ]
+}

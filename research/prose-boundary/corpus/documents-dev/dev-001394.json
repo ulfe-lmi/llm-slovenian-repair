@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-001394",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T9-prose-malformed-prose",
+ "byte_length": 699,
+ "cp_length": 681,
+ "sha256": "99ef6acb9768c52f890f8da49a8f02e700c7f51b72990745296e59804b2d3a15",
+ "document": "Poleti 2024 sem z izmišljeno skupino Tihotažna obala raziskoval otok na Bledskem jezeru, kjer je bil zrak svež. Zvečer smo se zatekli v lokalno jedilnico, da bi poskusili potico.\n$20 je vrednost testnega opisa v projektu Gora Kresanja.\nNova tiskalnica na hodniku, ki so jo za projekt »Manj zastojev« postavili blizu sprejemne pisarne, je imela poseben predal za tanke bonove, kar je presenetilo več zaposlenih. »Tiskanje«, so rekli nekateri, »je še vedno najpogostejši razlog, da se zavrtni k papirju namesto k zaslonski različici.« Ivan je zato predlagal, da se za manjše dokumente uporabi en sam predlog. V šali so dejali, da bo takrat tudi tiskalnica manj »nevoljna« ob zastoju.",
+ "components": [
+  {
+   "component_id": "comp-prose-travel-dev-0001",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 182
+  },
+  {
+   "component_id": "comp-malformed-unmatched-dollar-dev-0003",
+   "category": "malformed",
+   "start_byte": 183,
+   "end_byte": 239
+  },
+  {
+   "component_id": "comp-prose-computing-dev-0010",
+   "category": "prose",
+   "start_byte": 240,
+   "end_byte": 699
+  }
+ ]
+}

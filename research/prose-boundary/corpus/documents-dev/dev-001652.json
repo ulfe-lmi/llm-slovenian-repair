@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-001652",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T3-prose-fenced-prose",
+ "byte_length": 969,
+ "cp_length": 948,
+ "sha256": "7f6e0defcefa8d9a5e4d17b9b6500e324a55631103867ac79d48522cd268d68e",
+ "document": "V Dubrovniku sem z ekipo Sredozemska karta preveril obzidje in opozoril, da je obisk (brez rezervacije) pogosto daljši. V program smo vstavili tudi kratek postoj v starem solnem bazenu, kjer je voda odražala nebo. Vodič je dejal: \"če želite tih kot, se odpravite proti severu\".\n```\n#!/usr/bin/env bash\n# Drugi fragment: izmišljen projekt (test)\n# Oseba: Peter, projekt: Žlahtni koda (HRAŠNA_VREDNOST)\n# Besedila: poudarke, podčrtane besede, zvezdice\nnaslov='*neodvisni* fragment'\npodrobnost='_podčrtana_ in **poudarjena**'\nseStez='src/modul.py'\nrazdelek2='docs/vir.txt'\nurl='https://primer.si/koda'\noklepaji='(vzorčni)'\necho \"naslov: $naslov\"\necho \"podrobnost: $podrobnost\"\necho \"pot: $seStez\"\necho \"razdelek: $razdelek2\"\necho \"url: $url\"\necho \"oklepaji: $oklepaji\"\necho 'backquote: `'\necho 'znesek: 42 $'\n```\nAna in Marko sta ob nedelji zjutraj kolesarila po obrežju. „Koleginja,“ jo je spodbujal, „v naslednji uri bomo poskušali rahlo strmoviti.“",
+ "components": [
+  {
+   "component_id": "comp-prose-travel-dev-0005",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 282
+  },
+  {
+   "component_id": "comp-code-shell-bash-dev-0010",
+   "category": "code",
+   "start_byte": 283,
+   "end_byte": 820
+  },
+  {
+   "component_id": "comp-prose-sports-dev-0009",
+   "category": "prose",
+   "start_byte": 821,
+   "end_byte": 969
+  }
+ ]
+}

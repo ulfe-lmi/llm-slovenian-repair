@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-000645",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T8-quote-fenced",
+ "byte_length": 673,
+ "cp_length": 663,
+ "sha256": "296e709ed4e6c84e1d6cfb29b7b19ba7ff0edb0b3467c055ed31e5a1f3db4f44",
+ "document": "> Ana je v svojem projektu za osnovno šolo pripravila preprost vezni opis z enim gumbom, žarom in baterijo. Ko je stikalo spustila, je sklep omogočil tok, svetloba pa je blago utripala. »Prva ura mi je pokazala, da so imena delov pomembna,« je zapisala v dnevnik. `# Testni projekt: Pripomoček; avtor: Maja Lipovnik`\n```\n/* Testni fragment 7: izmišljena oseba Marko, projekt Koda. */ SELECT 'Marko' AS `ime`, '7,80 $' AS `cena`, 'https://primer.si/koda' AS `url`, 'src/vir.py' AS `pot`, TRIM('**poudarek** in _žarka_') AS `opomba`, 'razdelek2' AS `razdelek2`, 'seStez' AS `seStez`, 'č' AS `HRAŠNA_VREDNOST` FROM (SELECT 7 AS `en`) AS `t` WHERE (`t`.`en` = 7);\n```",
+ "components": [
+  {
+   "component_id": "comp-prose-electronics-dev-0011",
+   "category": "prose",
+   "start_byte": 2,
+   "end_byte": 268
+  },
+  {
+   "component_id": "comp-code-python-dev-0004",
+   "category": "code",
+   "start_byte": 269,
+   "end_byte": 322
+  },
+  {
+   "component_id": "comp-code-sql-dev-0007",
+   "category": "code",
+   "start_byte": 323,
+   "end_byte": 673
+  }
+ ]
+}

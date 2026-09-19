@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-000842",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T7-prose-json-prose-latex",
+ "byte_length": 769,
+ "cp_length": 755,
+ "sha256": "836516174bd1f410eec910e5fc2c521bc092fa928139bd99f2f1086ae269ac1a",
+ "document": "Luka je dejal, da je funkcija kot mala kuhinja v veliki jedilnici. „Vgradi sestavine, počakaš in dobijoš posodo,« je rekel z nasmehom. Sodelavci so takoj videli, da se s tem izognemo ponavljanju.\n{\"ime\":\"Oseba Ana\",\"vloga\":\"Koordinatorka\",\"stanje\":\"Aktivna 80 %\",\"avtorsko\":\"Nevtralna testna vsebina\",\"podrobnosti\":{\"visina\":\"3,5 m\",\"razmerje\":\"0,13\",\"opis\":\"*Preverjanje* https://primer.si/novica\"}}\nV projektu Modra skica je Luka dejal, da „povprečje ni vedno sredina“, ker so trije dani zneski zelo različni. V primeru razmerja tri do pet so bila odstopanja manjša. Ana se je strinjala, vendar je opozorila na izjemne dni. Na koncu so se dogovorili, da bodo uporabili preprostejše meritve.\n$$\\frac{\\pi}{\\lambda + \\mu} = 11 - \\nu = \\text{Projekt Soca}$$",
+ "components": [
+  {
+   "component_id": "comp-prose-programming-explainer-dev-0003",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 201
+  },
+  {
+   "component_id": "comp-structured-json-dev-0002",
+   "category": "structured",
+   "start_byte": 202,
+   "end_byte": 406
+  },
+  {
+   "component_id": "comp-prose-statistics-dev-0008",
+   "category": "prose",
+   "start_byte": 407,
+   "end_byte": 706
+  },
+  {
+   "component_id": "comp-math-display-dollar-dev-0006",
+   "category": "math",
+   "start_byte": 707,
+   "end_byte": 769
+  }
+ ]
+}

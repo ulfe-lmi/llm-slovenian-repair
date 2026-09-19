@@ -1,0 +1,102 @@
+{
+ "doc_id": "dev-001993",
+ "byte_length": 806,
+ "cp_length": 785,
+ "regions": [
+  {
+   "start_byte": 0,
+   "end_byte": 310,
+   "start_cp": 0,
+   "end_cp": 301,
+   "component_id": "comp-prose-electronics-dev-0006",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 310,
+   "end_byte": 311,
+   "start_cp": 301,
+   "end_cp": 302,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 311,
+   "end_byte": 314,
+   "start_cp": 302,
+   "end_cp": 305,
+   "component_id": "comp-code-javascript-dev-0001",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 314,
+   "end_byte": 315,
+   "start_cp": 305,
+   "end_cp": 306,
+   "component_id": "comp-code-javascript-dev-0001",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 315,
+   "end_byte": 479,
+   "start_cp": 306,
+   "end_cp": 468,
+   "component_id": "comp-code-javascript-dev-0001",
+   "category": "code",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 479,
+   "end_byte": 480,
+   "start_cp": 468,
+   "end_cp": 469,
+   "component_id": "comp-code-javascript-dev-0001",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 480,
+   "end_byte": 483,
+   "start_cp": 469,
+   "end_cp": 472,
+   "component_id": "comp-code-javascript-dev-0001",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 483,
+   "end_byte": 484,
+   "start_cp": 472,
+   "end_cp": 473,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 484,
+   "end_byte": 806,
+   "start_cp": 473,
+   "end_cp": 785,
+   "component_id": "comp-prose-cooking-dev-0006",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  }
+ ],
+ "invariants": {
+  "tiling_complete": true,
+  "no_contradictory_overlaps": true,
+  "cp_range_exact": true
+ }
+}

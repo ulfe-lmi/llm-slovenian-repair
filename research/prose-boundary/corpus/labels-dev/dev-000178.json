@@ -1,0 +1,102 @@
+{
+ "doc_id": "dev-000178",
+ "byte_length": 1052,
+ "cp_length": 1025,
+ "regions": [
+  {
+   "start_byte": 0,
+   "end_byte": 338,
+   "start_cp": 0,
+   "end_cp": 326,
+   "component_id": "comp-prose-medicine-explainer-dev-0003",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 338,
+   "end_byte": 339,
+   "start_cp": 326,
+   "end_cp": 327,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 339,
+   "end_byte": 342,
+   "start_cp": 327,
+   "end_cp": 330,
+   "component_id": "comp-code-shell-bash-dev-0011",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 342,
+   "end_byte": 343,
+   "start_cp": 330,
+   "end_cp": 331,
+   "component_id": "comp-code-shell-bash-dev-0011",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 343,
+   "end_byte": 809,
+   "start_cp": 331,
+   "end_cp": 793,
+   "component_id": "comp-code-shell-bash-dev-0011",
+   "category": "code",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 809,
+   "end_byte": 810,
+   "start_cp": 793,
+   "end_cp": 794,
+   "component_id": "comp-code-shell-bash-dev-0011",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 810,
+   "end_byte": 813,
+   "start_cp": 794,
+   "end_cp": 797,
+   "component_id": "comp-code-shell-bash-dev-0011",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 813,
+   "end_byte": 814,
+   "start_cp": 797,
+   "end_cp": 798,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 814,
+   "end_byte": 1052,
+   "start_cp": 798,
+   "end_cp": 1025,
+   "component_id": "comp-prose-computing-dev-0006",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  }
+ ],
+ "invariants": {
+  "tiling_complete": true,
+  "no_contradictory_overlaps": true,
+  "cp_range_exact": true
+ }
+}

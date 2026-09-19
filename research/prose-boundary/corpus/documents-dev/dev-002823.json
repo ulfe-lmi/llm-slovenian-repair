@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-002823",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T8-quote-fenced",
+ "byte_length": 522,
+ "cp_length": 514,
+ "sha256": "4fa093f4c4d5ec8dec19394202322a170e3e71fb10924c0d16f1eb6709f261eb",
+ "document": "> Pri planinskem vzponu po Javorniku v marcu 2023 so bile poti močno zamrznjene, zato priporočam uporabo čevljev z dobrim oprijemom. Vreme je bilo hladno (okrog 5 stopinj pod ničlo), a razgledi so bili nagrajenje vredni. `/* Fragment 3: testni primer, vir https://primer.si/koda, po`\n```\nint main(void) { char *znaki = \"Znaki: č, š, ž\"; char *pot = \"docs/vir.txt\"; char *oznaka = \"seStez\"; char *url = \"https://primer.si/koda\"; (void)znaki; (void)pot; (void)oznaka; (void)url; return 0; } /* Končni fragment */\n```",
+ "components": [
+  {
+   "component_id": "comp-prose-travel-dev-0009",
+   "category": "prose",
+   "start_byte": 2,
+   "end_byte": 224
+  },
+  {
+   "component_id": "comp-code-cpp-dev-0011",
+   "category": "code",
+   "start_byte": 225,
+   "end_byte": 287
+  },
+  {
+   "component_id": "comp-code-c-dev-0008",
+   "category": "code",
+   "start_byte": 288,
+   "end_byte": 522
+  }
+ ]
+}

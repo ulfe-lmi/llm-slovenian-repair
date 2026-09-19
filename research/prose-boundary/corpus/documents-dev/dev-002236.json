@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-002236",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T4-heading-prose-table",
+ "byte_length": 424,
+ "cp_length": 417,
+ "sha256": "b621afb07aabab7756d39bba8223d043cea338e7fba0ceffaa46ca482afd190c",
+ "document": "## Na opazovalni postaji pri projektu Zvezdna nit pod Šmarnico \nLena iz izmišljenega projekta Zdravi dnevni krog je zapisala, da stres pogosto spremljajo napete mišice in počasnejši spanec. Zaradi teh sprememb ni mogoče zanesljivo sklepati o vzrokih, zato je smiselno pogovarjati se z zdravnikom.\n| Opis | Vzorček |\n| --- | --- |\n| V sklopu testnega projekta je Peter opaz | --vhod projekt/sonce.json, --izhod dnevn |",
+ "components": [
+  {
+   "component_id": "comp-prose-science-dev-0013",
+   "category": "prose",
+   "start_byte": 3,
+   "end_byte": 64
+  },
+  {
+   "component_id": "comp-prose-medicine-explainer-dev-0001",
+   "category": "prose",
+   "start_byte": 65,
+   "end_byte": 302
+  },
+  {
+   "component_id": "comp-prose-sports-dev-0010",
+   "category": "prose",
+   "start_byte": 339,
+   "end_byte": 379
+  },
+  {
+   "component_id": "comp-machine-cli-flags-dev-0003",
+   "category": "machine",
+   "start_byte": 382,
+   "end_byte": 422
+  }
+ ]
+}

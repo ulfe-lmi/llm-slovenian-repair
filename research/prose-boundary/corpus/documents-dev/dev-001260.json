@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-001260",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T7-prose-json-prose-latex",
+ "byte_length": 1096,
+ "cp_length": 1079,
+ "sha256": "b3316dc2578fa36c5d293762cf26716616122297bcf3e41882113120b4ee8f3e",
+ "document": "Na opazovalni postaji pri projektu Zvezdna nit pod Šmarnico je mlada raziskovalka Lina Petek opazovala meglico z imenom Vrt 17 (opazovana od leta 2019). »Zvezda se v daljinici zdi tiha, vendar spektralna analiza kaže, da se v njej dogajajo močni premiki,« je povedala ob drugi uri zjutraj. Njena ekipa je nato v dolge noči zapisovala meritve, pri čemer so posebej skrbno beležila tudi tiste minute, ko je meglica izgledala kot navaden oblak. Kasneje je Lina v dnevnik zapisala, da so dolge serije meritev pogosto bolj zanesljive od enega samega pogleda.\n{\"ime\":\"Projekt Mesto\",\"površina\":\"120 m2\",\"avtorsko\":\"Nevtralna testna vsebina\",\"delež\":\"15 %\",\"opis\":{\"podrobnost\":\"**Testni podatki** https://primer.si/novica\"}}\nV projektu Morska črta je Ana izračunala, da se je prodaja v letu 2023 povečala za 12 odstotkov. To je pomenilo, da je v juliju na tri prodane kosove v povprečju padlo eno novo naročilo. Ekipa je rezultat zapisala v testno interno poročilo in ga označila za preverjeno.\n\\sum_{\\alpha=1}^{8} \\beta_{\\alpha} + \\prod_{\\gamma=1}^{4} \\delta_{\\gamma} \\text{Ljubljana}",
+ "components": [
+  {
+   "component_id": "comp-prose-science-dev-0013",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 561
+  },
+  {
+   "component_id": "comp-structured-json-dev-0007",
+   "category": "structured",
+   "start_byte": 562,
+   "end_byte": 728
+  },
+  {
+   "component_id": "comp-prose-statistics-dev-0006",
+   "category": "prose",
+   "start_byte": 729,
+   "end_byte": 1005
+  },
+  {
+   "component_id": "comp-math-summations-dev-0001",
+   "category": "math",
+   "start_byte": 1006,
+   "end_byte": 1096
+  }
+ ]
+}

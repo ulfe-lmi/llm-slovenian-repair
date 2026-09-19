@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-000887",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T8-quote-fenced",
+ "byte_length": 830,
+ "cp_length": 815,
+ "sha256": "d029fd88f38d8ad56b7d961e2768b62af59360f3d51ab932629b10e2c4de9c98",
+ "document": "> Na projektu Prihajajoča šola so otroci najprej razlojevali, kako deluje preprosta mreža v razredu. Ko so prišli do vprašanja, ki se ga loteva vsak učitelj, so rekli, da bi radi imeli „varno košarico“ za skice. S tem so pokazali, da so pojmi kot zasebnost in prepoznavljivost bližje, ko jih povežemo s vsakdanjo rabo. `# Fragment 4: oseba: Marko Horvat, projekt *Sonca*`\n```\n-- Fragment 3: izpisi za osebo\nCREATE TABLE izpisi (\n  id INT PRIMARY KEY,\n  ime TEXT,\n  \"razdelek2\" TEXT,\n  \"seStez\" TEXT\n);\nINSERT INTO izpisi (id, ime, \"razdelek2\", \"seStez\")\nVALUES (1, 'Ana Breznik', 'razdelek 2', 'žetona: 3 $');\nUPDATE izpisi SET \"seStez\" = 'glej https://primer.si/koda in docs/vir.txt';\nSELECT ime, \"razdelek2\", \"seStez\" FROM izpisi WHERE ime = 'Ana Breznik';\n-- Konec: (oklepaji) *zvezdice* `kodica` _podčrtano_\n```",
+ "components": [
+  {
+   "component_id": "comp-prose-computing-dev-0002",
+   "category": "prose",
+   "start_byte": 2,
+   "end_byte": 331
+  },
+  {
+   "component_id": "comp-code-shell-bash-dev-0004",
+   "category": "code",
+   "start_byte": 332,
+   "end_byte": 384
+  },
+  {
+   "component_id": "comp-code-sql-dev-0011",
+   "category": "code",
+   "start_byte": 385,
+   "end_byte": 830
+  }
+ ]
+}

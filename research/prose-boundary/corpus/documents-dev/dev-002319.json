@@ -1,0 +1,41 @@
+{
+ "doc_id": "dev-002319",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T10-randomized",
+ "byte_length": 1156,
+ "cp_length": 1134,
+ "sha256": "b5f764029e119c6bae0c48b28b10ba57e33b6de3497ee0cf03fd84263d2f017f",
+ "document": "V projektu Mladostni učenec so raziskovalci (Marko Novak, Petra Hribar in drugi) spremljali učence osmih osnovnih šol v obdobju dveh let. Namen je bil ugotoviti, kako različne metode vplivajo na razumevanje učnega gradiva ter na strah pred izpiti. Pri učbenikih so posebej opazovali, ali slike, opombe in kratki povzetki spodbujajo samostojno delo ali pa le zapletajo razumevanje. Učitelji so poleti 2023 zabeležili, da so učenci pri refleksiji pogosto izrekli, da bi želeli več »prostora za vprašanja« in manj ponavljanja brez poudarka.\n{\"ime\":\"Projekt Jabolko\",\"faza\":\"Vzdrževanje\",\"avtorsko\":\"Nevtralna testna vsebina\",\"enote\":{\"temperatura\":\"21,5 °C\",\"debelina\":\"0,2 m\",\"delež\":\"45 %\"},\"opomba\":\"**Nalaganje** https://primer.si/novica\"}\n\\begin{align} \\alpha_5(\\text{Sonce}) &\\le \\beta_5 + \\gamma_5 \\\\ \\delta_5 &\\ge \\epsilon_5 \\times \\zeta_5 \\\\ \\eta_5 &= \\theta_5 \\end{align}\nPoleti 2024 sem z izmišljeno skupino Tihotažna obala raziskoval otok na Bledskem jezeru, kjer je bil zrak svež. Zvečer smo se zatekli v lokalno jedilnico, da bi poskusili potico.\n`avtorizacija: Luka Zajc; projekt: Sončni Trak; konfiguracija = \"neutrelna\";",
+ "components": [
+  {
+   "component_id": "comp-prose-education-dev-0003",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 551
+  },
+  {
+   "component_id": "comp-structured-json-dev-0003",
+   "category": "structured",
+   "start_byte": 552,
+   "end_byte": 757
+  },
+  {
+   "component_id": "comp-math-align-env-dev-0005",
+   "category": "math",
+   "start_byte": 758,
+   "end_byte": 895
+  },
+  {
+   "component_id": "comp-prose-travel-dev-0001",
+   "category": "prose",
+   "start_byte": 896,
+   "end_byte": 1078
+  },
+  {
+   "component_id": "comp-malformed-unmatched-backtick-dev-0002",
+   "category": "malformed",
+   "start_byte": 1079,
+   "end_byte": 1156
+  }
+ ]
+}

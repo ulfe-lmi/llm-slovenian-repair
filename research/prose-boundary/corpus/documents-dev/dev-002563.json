@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-002563",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T1-prose-inlinecode-prose",
+ "byte_length": 552,
+ "cp_length": 545,
+ "sha256": "26d35d51a781a17cacc19ef5963952a0d85313aecde9b74a5c321de879b28a43",
+ "document": "Poskus, ki ga je vodila Nina, je potekal v majhni sobi. Lampa je gorela. Merilni senzor je oddajal tih zvok. Zapis je bil kratek: »Preprosto in toplo.« Zaključek je prišel zgodaj.\n`def seštej(a, b): return a + b, 'Povzetek: **pomembno** _pod`\nV projektu Spomini doline je Anica Zorman zapisala, da so stari kmečki registri vsebovali opombe o pridelku, davkih in poplavah. Zapis so razdelili po letnicah, ne pa po dnevih, zato je besedilo preprosteje za primerjanje. Njen sopotnik Marko je dodal, da takšni listi ohranjajo glas lokalne skupnosti.",
+ "components": [
+  {
+   "component_id": "comp-prose-science-dev-0009",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 183
+  },
+  {
+   "component_id": "comp-code-python-dev-0009",
+   "category": "code",
+   "start_byte": 184,
+   "end_byte": 247
+  },
+  {
+   "component_id": "comp-prose-history-dev-0001",
+   "category": "prose",
+   "start_byte": 248,
+   "end_byte": 552
+  }
+ ]
+}

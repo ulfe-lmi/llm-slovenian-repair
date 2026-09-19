@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-001383",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T9-prose-malformed-prose",
+ "byte_length": 542,
+ "cp_length": 534,
+ "sha256": "381f91dafe9145f0447adea840cc5ec13212b9d261aece81d6d373e45fa60eca",
+ "document": "Palermo, glavno mesto Sicilije, je leta 2022 ponujal nenavadno kombinacijo zvočnih ulic, barvitih tržnic in starinske arhitekture. Priporočamo obisk katedrale in sprehod po starem mestnem jedru, zlasti zvečer.\nV projektu Mlin 2018 je Luka preveril, koliko je povprečno trajala čakalna vrsta. Ko so trije prostovoljci dodali svoje opazke, se je slika izkazala za bolj uravnoteženo. Po njegovem mnenju je bistvo v tem, da se številka ne bere sama, ampak potrebuje kontekst.\n`avtorizacija: Ana Novak; projekt: Modra Reka; izpis = \"test\";",
+ "components": [
+  {
+   "component_id": "comp-prose-travel-dev-0010",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 213
+  },
+  {
+   "component_id": "comp-prose-statistics-dev-0001",
+   "category": "prose",
+   "start_byte": 214,
+   "end_byte": 479
+  },
+  {
+   "component_id": "comp-malformed-unmatched-backtick-dev-0001",
+   "category": "malformed",
+   "start_byte": 480,
+   "end_byte": 542
+  }
+ ]
+}

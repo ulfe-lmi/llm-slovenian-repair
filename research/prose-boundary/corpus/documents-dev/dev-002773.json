@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-002773",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T2-prose-math-prose",
+ "byte_length": 719,
+ "cp_length": 711,
+ "sha256": "4f200e4b212f47325b2fb26515926a1e4e14fc0ab45e69eac29f5a5c8ba9ce32",
+ "document": "Ana je v svojem projektu za osnovno šolo pripravila preprost vezni opis z enim gumbom, žarom in baterijo. Ko je stikalo spustila, je sklep omogočil tok, svetloba pa je blago utripala. »Prva ura mi je pokazala, da so imena delov pomembna,« je zapisala v dnevnik.\n\\[ \\begin{cases} \\chi_1+5\\xi_2=\\text{Kranj},\\\\ 2\\mu_3-4\\nu_4=17,\\\\ \\pi_5\\sigma_6=8 \\end{cases} \\]\nV arhivu projekta Stare potje je bil najden list, na katerem piše o izletu do izvira leta 1807. Po besedah urednice Nine Mlakar je bil povzetek kratek, vendar dovolj jasen, da si lahko bralci predstavljajo skupino, ki je imela osem potnikov in enega psa. Delček zemljevida, prilepljen v isti zvezki, kaže zanko, ki je merila okoli trideset kilometrov.",
+ "components": [
+  {
+   "component_id": "comp-prose-electronics-dev-0011",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 266
+  },
+  {
+   "component_id": "comp-math-bracket-tex-dev-0005",
+   "category": "math",
+   "start_byte": 267,
+   "end_byte": 364
+  },
+  {
+   "component_id": "comp-prose-history-dev-0010",
+   "category": "prose",
+   "start_byte": 365,
+   "end_byte": 719
+  }
+ ]
+}

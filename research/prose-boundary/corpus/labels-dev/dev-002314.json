@@ -1,0 +1,112 @@
+{
+ "doc_id": "dev-002314",
+ "byte_length": 947,
+ "cp_length": 931,
+ "regions": [
+  {
+   "start_byte": 0,
+   "end_byte": 2,
+   "start_cp": 0,
+   "end_cp": 2,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 2,
+   "end_byte": 168,
+   "start_cp": 2,
+   "end_cp": 164,
+   "component_id": "comp-prose-sports-dev-0011",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 168,
+   "end_byte": 171,
+   "start_cp": 164,
+   "end_cp": 167,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 171,
+   "end_byte": 172,
+   "start_cp": 167,
+   "end_cp": 168,
+   "component_id": "comp-code-shell-bash-dev-0003",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 172,
+   "end_byte": 227,
+   "start_cp": 168,
+   "end_cp": 222,
+   "component_id": "comp-code-shell-bash-dev-0003",
+   "category": "code",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 227,
+   "end_byte": 228,
+   "start_cp": 222,
+   "end_cp": 223,
+   "component_id": "comp-code-shell-bash-dev-0003",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 228,
+   "end_byte": 231,
+   "start_cp": 223,
+   "end_cp": 226,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 231,
+   "end_byte": 581,
+   "start_cp": 226,
+   "end_cp": 571,
+   "component_id": "comp-prose-administration-dev-0005",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 581,
+   "end_byte": 584,
+   "start_cp": 571,
+   "end_cp": 574,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 584,
+   "end_byte": 947,
+   "start_cp": 574,
+   "end_cp": 931,
+   "component_id": "comp-prose-everyday-advice-dev-0009",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  }
+ ],
+ "invariants": {
+  "tiling_complete": true,
+  "no_contradictory_overlaps": true,
+  "cp_range_exact": true
+ }
+}

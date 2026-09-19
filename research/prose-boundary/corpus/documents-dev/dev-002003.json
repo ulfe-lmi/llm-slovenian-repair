@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-002003",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T2-prose-math-prose",
+ "byte_length": 592,
+ "cp_length": 585,
+ "sha256": "c53306dec601080422ab384186cb89dd8858ff739acf08a58f2ac89102422a7a",
+ "document": "V projektu Mlin 2018 je Luka preveril, koliko je povprečno trajala čakalna vrsta. Ko so trije prostovoljci dodali svoje opazke, se je slika izkazala za bolj uravnoteženo. Po njegovem mnenju je bistvo v tem, da se številka ne bere sama, ampak potrebuje kontekst.\n\\begin{equation}\\begin{aligned}U_6 &= \\log_2 \\Omega_6 + \\phi_6 \\text{Nova vas} \\\\V_6 &= \\nabla \\cdot \\vec{F}_6 + \\omega_6\\end{aligned}\\end{equation}\nAna je poletja 2023 preživela ob Bledu in si ogledala grad. Vreme je bilo toplo, voda pa mirna kot steklo. Popoldne se je sprehodila do Špice in uživala v razgledu na jezero.",
+ "components": [
+  {
+   "component_id": "comp-prose-statistics-dev-0001",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 265
+  },
+  {
+   "component_id": "comp-math-aligned-env-dev-0006",
+   "category": "math",
+   "start_byte": 266,
+   "end_byte": 414
+  },
+  {
+   "component_id": "comp-prose-travel-dev-0006",
+   "category": "prose",
+   "start_byte": 415,
+   "end_byte": 592
+  }
+ ]
+}

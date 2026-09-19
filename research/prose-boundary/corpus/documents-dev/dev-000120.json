@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-000120",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T11-interactions",
+ "byte_length": 786,
+ "cp_length": 775,
+ "sha256": "9bcd52fc11a5efd0defaf5aa55c63da5448b9d829b6d7c5d6c3796fe90df4fe7",
+ "document": "`// Vir: https://primer.si/koda`.\n```\nint main(void) { char *napis = \"Tekst: *poudarjeno* in _podčrtano_\"; char *cena = \"Cena: 10 $ (dolar)\"; char *url = \"https://primer.si/koda\"; (void)napis; (void)cena; (void)url; return 0; } /* Markov podatek */\n# komentar z \\frac{a}{b}\n```\nLena iz izmišljenega projekta Zdravi dnevni krog je zapisala, da stres pogosto spremljajo napete mišice in počasnejši spanec. Zaradi teh sprememb ni mogoče zanesljivo sklepati o vzrokih, zato je smiselno pogovarjati se z zdravnikom.\nZgodba o izmišljenem gradu Kamen, ki ga je opisal Marko Perš, se v šolskih zvezkih pogosto pojavlja brez natančne letnice. V enem od zapisov pa stoji samo leto 1888 in kratek opis ograj (visokih okoli dveh metrov), kar je sicer precej nenavadno za takšno pripoved.",
+ "components": [
+  {
+   "component_id": "comp-code-cpp-dev-0002",
+   "category": "code",
+   "start_byte": 0,
+   "end_byte": 32
+  },
+  {
+   "component_id": "comp-code-c-dev-0002",
+   "category": "code",
+   "start_byte": 34,
+   "end_byte": 278
+  },
+  {
+   "component_id": "comp-prose-medicine-explainer-dev-0001",
+   "category": "prose",
+   "start_byte": 279,
+   "end_byte": 516
+  },
+  {
+   "component_id": "comp-prose-history-dev-0008",
+   "category": "prose",
+   "start_byte": 517,
+   "end_byte": 786
+  }
+ ]
+}

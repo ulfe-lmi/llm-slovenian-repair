@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-001871",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T2-prose-math-prose",
+ "byte_length": 906,
+ "cp_length": 883,
+ "sha256": "e2288bdd835cdc55a40ced0ec1e3b495fa2b2da0e6e754a7ee5f9928d821cd0f",
+ "document": "Na projektu Prihajajoča šola so otroci najprej razlojevali, kako deluje preprosta mreža v razredu. Ko so prišli do vprašanja, ki se ga loteva vsak učitelj, so rekli, da bi radi imeli „varno košarico“ za skice. S tem so pokazali, da so pojmi kot zasebnost in prepoznavljivost bližje, ko jih povežemo s vsakdanjo rabo.\n$\\sqrt{\\alpha^2 + \\beta^2} = \\gamma_{\\text{Marko projekt Hrib}}$\nV sklopu projekta Papirni most je Anica Kranjc v zbornik vstavila odlomek iz romaneskega dnevnika, ki nosi ime »Zadnji tiskar«. Besedilo iz leta 1998 pripoveduje o mali nakladni hiši v Celju, kjer so tiskarji med prazniki brali evropske pripovedke. Nekatera poglavja ostajajo izpuščena (verjetno zaradi cenzure), druga pa so prenesena ročno v zvezek iz tankega usnja. To vprašanje pomena slovenske knjižnosti v evropskem prostoru se v zadnjem odstavku razreši šele s kratkim pozivom k skupnemu branju.",
+ "components": [
+  {
+   "component_id": "comp-prose-computing-dev-0002",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 329
+  },
+  {
+   "component_id": "comp-math-inline-dollar-dev-0006",
+   "category": "math",
+   "start_byte": 330,
+   "end_byte": 394
+  },
+  {
+   "component_id": "comp-prose-literature-dev-0013",
+   "category": "prose",
+   "start_byte": 395,
+   "end_byte": 906
+  }
+ ]
+}

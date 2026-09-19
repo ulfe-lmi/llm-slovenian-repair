@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-002459",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T7-prose-json-prose-latex",
+ "byte_length": 599,
+ "cp_length": 582,
+ "sha256": "2b5d8a74a0235052a71ba3e559879830f9ee6de2b5b570192d1811d0231a6813",
+ "document": "Ana in Marko sta ob nedelji zjutraj kolesarila po obrežju. „Koleginja,“ jo je spodbujal, „v naslednji uri bomo poskušali rahlo strmoviti.“\n{\"ime\":\"Projekt Gora\",\"nagnjenost\":\"12 %\",\"avtorsko\":\"Nevtralna testna vsebina\",\"debelina\":\"0,3 m\",\"opomba\":\"_Nevtralno_ https://primer.si/novica\"}\nV projektu Gora je Ana razložila sodelavcu, da je spremenljivka kot oznaka na policah v knjižnici. Ko jo preimenujemo, spremenimo samo oznako, ne pa tudi knjige. Včasih to ugotovijo šele ob testiranju, ko program poišče napačno ime.\n$$\\frac{\\rho + \\chi}{\\psi} = \\sqrt{3} + \\omega = \\text{Tina}$$",
+ "components": [
+  {
+   "component_id": "comp-prose-sports-dev-0009",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 148
+  },
+  {
+   "component_id": "comp-structured-json-dev-0008",
+   "category": "structured",
+   "start_byte": 149,
+   "end_byte": 296
+  },
+  {
+   "component_id": "comp-prose-programming-explainer-dev-0001",
+   "category": "prose",
+   "start_byte": 297,
+   "end_byte": 536
+  },
+  {
+   "component_id": "comp-math-display-dollar-dev-0005",
+   "category": "math",
+   "start_byte": 537,
+   "end_byte": 599
+  }
+ ]
+}

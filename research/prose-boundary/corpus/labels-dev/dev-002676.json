@@ -1,0 +1,162 @@
+{
+ "doc_id": "dev-002676",
+ "byte_length": 533,
+ "cp_length": 521,
+ "regions": [
+  {
+   "start_byte": 0,
+   "end_byte": 3,
+   "start_cp": 0,
+   "end_cp": 3,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 3,
+   "end_byte": 66,
+   "start_cp": 3,
+   "end_cp": 63,
+   "component_id": "comp-prose-computing-dev-0013",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 66,
+   "end_byte": 67,
+   "start_cp": 63,
+   "end_cp": 64,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 67,
+   "end_byte": 366,
+   "start_cp": 64,
+   "end_cp": 359,
+   "component_id": "comp-prose-medicine-explainer-dev-0005",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 366,
+   "end_byte": 367,
+   "start_cp": 359,
+   "end_cp": 360,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 367,
+   "end_byte": 387,
+   "start_cp": 360,
+   "end_cp": 379,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 387,
+   "end_byte": 401,
+   "start_cp": 379,
+   "end_cp": 393,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 401,
+   "end_byte": 403,
+   "start_cp": 393,
+   "end_cp": 395,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 403,
+   "end_byte": 444,
+   "start_cp": 395,
+   "end_cp": 435,
+   "component_id": "comp-prose-science-dev-0006",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 444,
+   "end_byte": 447,
+   "start_cp": 435,
+   "end_cp": 438,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 447,
+   "end_byte": 467,
+   "start_cp": 438,
+   "end_cp": 458,
+   "component_id": "comp-machine-emails-dev-0008",
+   "category": "machine",
+   "role": "POLICY_EXPOSED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 467,
+   "end_byte": 468,
+   "start_cp": 458,
+   "end_cp": 459,
+   "component_id": "comp-machine-emails-dev-0008",
+   "category": "machine",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 468,
+   "end_byte": 487,
+   "start_cp": 459,
+   "end_cp": 478,
+   "component_id": "comp-machine-emails-dev-0008",
+   "category": "machine",
+   "role": "POLICY_EXPOSED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 487,
+   "end_byte": 489,
+   "start_cp": 478,
+   "end_cp": 480,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 489,
+   "end_byte": 533,
+   "start_cp": 480,
+   "end_cp": 521,
+   "component_id": "template",
+   "category": null,
+   "role": "PROSE",
+   "template_owned": true
+  }
+ ],
+ "invariants": {
+  "tiling_complete": true,
+  "no_contradictory_overlaps": true,
+  "cp_range_exact": true
+ }
+}

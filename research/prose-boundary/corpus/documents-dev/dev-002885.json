@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-002885",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T4-heading-prose-table",
+ "byte_length": 432,
+ "cp_length": 424,
+ "sha256": "1fdfcf49a349fbcbbcc44ebb5b80996b28a7c141658251faab10ea32efa85f46",
+ "document": "## V laboratoriju projekta Tiha vrtnica so letos opazili, da ne\nMare je v učbeniku zapisal, da so upornosti kot omejevalniki hitrosti v malem svetu elektronike, in v vnosih iz leta 2011 je opozoril: ”Ne pozabi na polariteto baterij, sicer lučka ne bo delovala.“ Ko je dodal dodatno upornost, se je svetloba umirila, kot je želel.\n| Opis | Vzorček |\n| --- | --- |\n| V zbirki Tihi bralci (2018) mlada pisate | tabela_01.json |",
+ "components": [
+  {
+   "component_id": "comp-prose-science-dev-0007",
+   "category": "prose",
+   "start_byte": 3,
+   "end_byte": 63
+  },
+  {
+   "component_id": "comp-prose-electronics-dev-0007",
+   "category": "prose",
+   "start_byte": 64,
+   "end_byte": 336
+  },
+  {
+   "component_id": "comp-prose-literature-dev-0003",
+   "category": "prose",
+   "start_byte": 373,
+   "end_byte": 413
+  },
+  {
+   "component_id": "comp-machine-filenames-dev-0003",
+   "category": "machine",
+   "start_byte": 416,
+   "end_byte": 430
+  }
+ ]
+}

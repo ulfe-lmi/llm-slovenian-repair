@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-000116",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T7-prose-json-prose-latex",
+ "byte_length": 784,
+ "cp_length": 772,
+ "sha256": "1f87b1c5fe359277ef8dcce46606c1bafa61300e0f280246066f1a9abfe592f8",
+ "document": "Anja je v opombi zapisala, da so razmerja med dohodki in izdatki (v mesecu maju in juniju) nekoliko drugačna kot lani. Povprečje ni pokazalo velike spremembe, vendar je posamezen teden odstopil, kar je pritegnilo pozornost ekipi.\n{\"ime\":\"Projekt Mesto\",\"površina\":\"120 m2\",\"avtorsko\":\"Nevtralna testna vsebina\",\"delež\":\"15 %\",\"opis\":{\"podrobnost\":\"**Testni podatki** https://primer.si/novica\"}}\nLuka, ki je vodil testni projekt Breza, je razložil, da spremenljivka nosi ime, vrednost pa pomeni, kaj se takrat zgodilo. (Steklenička s sokom pri tem dobro pokaže, kako se raven zniža.) Zanka nato vztraja, dokler pogoj ostane res, in funkcija povrne odgovor, »ja« ali »ne«, brez skritih pogojev.\n\\[ \\begin{cases} \\rho_1+\\iota_2=11,\\\\ \\tau_3-\\kappa_4=\\text{Ana} \\end{cases} \\]",
+ "components": [
+  {
+   "component_id": "comp-prose-statistics-dev-0002",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 231
+  },
+  {
+   "component_id": "comp-structured-json-dev-0007",
+   "category": "structured",
+   "start_byte": 232,
+   "end_byte": 398
+  },
+  {
+   "component_id": "comp-prose-programming-explainer-dev-0009",
+   "category": "prose",
+   "start_byte": 399,
+   "end_byte": 704
+  },
+  {
+   "component_id": "comp-math-bracket-tex-dev-0003",
+   "category": "math",
+   "start_byte": 705,
+   "end_byte": 784
+  }
+ ]
+}

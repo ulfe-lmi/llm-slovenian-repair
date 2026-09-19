@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-001750",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T2-prose-math-prose",
+ "byte_length": 542,
+ "cp_length": 535,
+ "sha256": "25de11ffb585c42a125ee423ff61a897db8d8da8747fd01e9fc69d25b46c77dd",
+ "document": "Marko je na sestanku v Mariboru povedal, da je zanka ponavljajoče delo. (Čakala, kolikor je potrebno, a ne več.) Njegov opis je bil preprost: program naj preveri pakete en po en, dokler ne prazni tovornjak.\n\\[ \\begin{bmatrix} \\tau_1 & 6 \\\\ \\upsilon_2 & -3 \\\\ \\text{Mura} & 10 \\end{bmatrix} \\]\nPri izpisu je bila pomembna ne samo skupna vrednost, ampak tudi to, ali so vsi podatki iz štirih oddelkov pravilni (kot je poudarila Nina). Povprečna vrednost je bila za tri evre višja, razmerje pa je ostalo približno enako kot spomladi 2022.",
+ "components": [
+  {
+   "component_id": "comp-prose-programming-explainer-dev-0002",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 209
+  },
+  {
+   "component_id": "comp-math-bracket-tex-dev-0006",
+   "category": "math",
+   "start_byte": 210,
+   "end_byte": 295
+  },
+  {
+   "component_id": "comp-prose-statistics-dev-0004",
+   "category": "prose",
+   "start_byte": 296,
+   "end_byte": 542
+  }
+ ]
+}

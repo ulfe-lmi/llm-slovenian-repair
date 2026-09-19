@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-002828",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T2-prose-math-prose",
+ "byte_length": 677,
+ "cp_length": 671,
+ "sha256": "458acf096f76aa998ecee8e20d9f1a4b3f9954b051d7bd8e2c0ac6d68f437efa",
+ "document": "V soboto je ekipa iz Ljubljanskega učnega laboratorija testirala, kako hitro se sestanek prekine, če je omrežje preobremenjeno. Rezultat, ki so ga prebrali skupaj, je bil preprost: naprave se raje razbremenijo s kratkim premorom.\n\\Pr(Z > \\mu + \\sigma) = 1 - \\Phi(1) = 0.1587 \\text{ (verjetnost repa)}\nV projektu Gorski dnevnik je Anja pojasnila, da spremenljivka deluje kot imenovana skrinjica, v kateri hranimo eno vrednost. Ko je program ponavljal preverjanje vremenskih podatkov, je zanka pretekle dni v vrsti in ohranila le najhladnejše. Funkcija, ki je izračunala povprečje, je bila kot majhno orodje, saj so jo znali poklicati vedno znova brez ponavljanja besedila.",
+ "components": [
+  {
+   "component_id": "comp-prose-computing-dev-0004",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 232
+  },
+  {
+   "component_id": "comp-math-probability-dev-0006",
+   "category": "math",
+   "start_byte": 233,
+   "end_byte": 303
+  },
+  {
+   "component_id": "comp-prose-programming-explainer-dev-0011",
+   "category": "prose",
+   "start_byte": 304,
+   "end_byte": 677
+  }
+ ]
+}

@@ -1,0 +1,152 @@
+{
+ "doc_id": "dev-001781",
+ "byte_length": 891,
+ "cp_length": 876,
+ "regions": [
+  {
+   "start_byte": 0,
+   "end_byte": 1,
+   "start_cp": 0,
+   "end_cp": 1,
+   "component_id": "comp-code-shell-bash-dev-0005",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 1,
+   "end_byte": 59,
+   "start_cp": 1,
+   "end_cp": 59,
+   "component_id": "comp-code-shell-bash-dev-0005",
+   "category": "code",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 59,
+   "end_byte": 60,
+   "start_cp": 59,
+   "end_cp": 60,
+   "component_id": "comp-code-shell-bash-dev-0005",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 60,
+   "end_byte": 61,
+   "start_cp": 60,
+   "end_cp": 61,
+   "component_id": "template",
+   "category": null,
+   "role": "PROSE",
+   "template_owned": true
+  },
+  {
+   "start_byte": 61,
+   "end_byte": 62,
+   "start_cp": 61,
+   "end_cp": 62,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 62,
+   "end_byte": 65,
+   "start_cp": 62,
+   "end_cp": 65,
+   "component_id": "comp-code-c-dev-0010",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 65,
+   "end_byte": 66,
+   "start_cp": 65,
+   "end_cp": 66,
+   "component_id": "comp-code-c-dev-0010",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 66,
+   "end_byte": 390,
+   "start_cp": 66,
+   "end_cp": 388,
+   "component_id": "comp-code-c-dev-0010",
+   "category": "code",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 390,
+   "end_byte": 391,
+   "start_cp": 388,
+   "end_cp": 389,
+   "component_id": "comp-code-c-dev-0010",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 391,
+   "end_byte": 394,
+   "start_cp": 389,
+   "end_cp": 392,
+   "component_id": "comp-code-c-dev-0010",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 394,
+   "end_byte": 395,
+   "start_cp": 392,
+   "end_cp": 393,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 395,
+   "end_byte": 608,
+   "start_cp": 393,
+   "end_cp": 602,
+   "component_id": "comp-prose-travel-dev-0010",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 608,
+   "end_byte": 609,
+   "start_cp": 602,
+   "end_cp": 603,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 609,
+   "end_byte": 891,
+   "start_cp": 603,
+   "end_cp": 876,
+   "component_id": "comp-prose-engineering-dev-0005",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  }
+ ],
+ "invariants": {
+  "tiling_complete": true,
+  "no_contradictory_overlaps": true,
+  "cp_range_exact": true
+ }
+}

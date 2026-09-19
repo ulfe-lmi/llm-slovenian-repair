@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-000419",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T2-prose-math-prose",
+ "byte_length": 789,
+ "cp_length": 780,
+ "sha256": "14267f2dc12418ac33dee4fcc571ba228c4f0f93450d4706ecc967830c0f9e7e",
+ "document": "Luka je ob peti uri zvečer odkril, da se prenosnik sam po sebi hladi. V opombi za sodelavce je zapisal, da se to dogaja ob hkratnem delu s tremi programi. (Gre za navaden vzorec, ki ga je opisala tudi podpora.) Zato so preizkus ponovili brez dodatnih posegov.\n\\Pr(Z > \\mu + \\sigma) = 1 - \\Phi(1) = 0.1587 \\text{ (verjetnost repa)}\nUprava za vzorčne javne storitve je junija 2024 (ob povišanem obsegu zahtev) pripravila pregled časa čakanja v treh oddelkih. Najkrajši termin so dodelili za menjavo osebne listine, in sicer za pet minut, medtem ko je posodabljanje drugih obrazcev trajalo do dvajset dni. V vložku za potrdilo so uporabniki lahko izbrali osebni prevzem ali poštno oddajo. Po mnenju odgovorne osebe, Anje Laki, je tak postopek najbolj preprost za starejše uporabnike.",
+ "components": [
+  {
+   "component_id": "comp-prose-computing-dev-0003",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 260
+  },
+  {
+   "component_id": "comp-math-probability-dev-0006",
+   "category": "math",
+   "start_byte": 261,
+   "end_byte": 331
+  },
+  {
+   "component_id": "comp-prose-administration-dev-0007",
+   "category": "prose",
+   "start_byte": 332,
+   "end_byte": 789
+  }
+ ]
+}

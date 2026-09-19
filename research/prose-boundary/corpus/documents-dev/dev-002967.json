@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-002967",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T9-prose-malformed-prose",
+ "byte_length": 721,
+ "cp_length": 708,
+ "sha256": "e2ecfeea3274b4e511c276c430440b8c6173b7670faf1462f6bdd3c1d687c470",
+ "document": "V okviru projekta Nova vrv so otroci iz Ljubljane v petek zvečer vadili kratke podaje. Učiteljica Maja je opazila, da so po deset minutah teka vsi bolj sproščeni.\n[opis](https://primer.si/stran tretji del: avtorizirana testna vsebina projekta Rumena cesta; izmišljena oseba Petra Zupan preverja obrazec.\nV Bohinju so udeleženci rekreativnega smučarskega tabora (leta 2022) preizkusili dve smučarski poti in tri vzpone s postojali, ki so jih označili za lažje. Ana, izmišljena sodelavka projekta Zimska pot, je zapisala, da jo je po tridesetih minutah vzhoda bolela le desna noga. 'Vreme je bilo hladno, nebo pa čisto,' je dodala ob koncu dneva. Naslednji dan so skrajšali pot in dodali dve minuti raztezanja.",
+ "components": [
+  {
+   "component_id": "comp-prose-sports-dev-0011",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 166
+  },
+  {
+   "component_id": "comp-malformed-broken-link-dev-0003",
+   "category": "malformed",
+   "start_byte": 167,
+   "end_byte": 308
+  },
+  {
+   "component_id": "comp-prose-sports-dev-0002",
+   "category": "prose",
+   "start_byte": 309,
+   "end_byte": 721
+  }
+ ]
+}

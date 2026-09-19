@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-002083",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T5-lists",
+ "byte_length": 1186,
+ "cp_length": 1155,
+ "sha256": "c678e8ab726dc20ea1dc9e9ad14a15ddde191fda92b1b7676b9b1997ed97e4d9",
+ "document": "- V šoli so dijaki v letu 2025, v okviru notranjega projekta Besedilo, preizkušali urejevalnik besedil, ki je po mnenju učitelja Marka deloval “precej gladko”. Neko dopoldne so imeli težave s shranjevanjem, zato so se naučili, da je pomembno omeniti ime datoteke in mapo, v katero gre. Maja je zapisala, da ji je bila največja pomoč kratek pogovor s sošolko Ano, ki je razložila razliko med pripravo in končno različico. Tistega popoldneva, po njenih besedah, so preverili, da je shranjevanje enostavnejše, ko poznaš ime mape in datum.\n- `# Testni projekt: Vir podatkov; avtor: Maja Lipovnik`\n- V okviru projekta Reka je bila jeklena konstrukcija obnašala stabilno, tudi po močnem pihu. Most je bil dolg 412 metrov. Nosilci so bili premazani z epoksi premazom. Vetrovna obremenitev je bila izračunana za 30 let.\n- V projektu Vzorčni napisi 2025 je Petra zapisala, da se pri nespečnosti pogosto omenjajo navade, hrana in okolje, vendar ni mogoče zanesljivo napovedati vzroka brez pogovora. Zato v takih primerih svetujemo, da se oseba obrne na zdravnika ali medicinsko sestro, zlasti če se pojavi huda slabost, oteženo dihanje ali „nenadno slabše počutje“.",
+ "components": [
+  {
+   "component_id": "comp-prose-computing-dev-0012",
+   "category": "prose",
+   "start_byte": 2,
+   "end_byte": 552
+  },
+  {
+   "component_id": "comp-code-python-dev-0005",
+   "category": "code",
+   "start_byte": 555,
+   "end_byte": 609
+  },
+  {
+   "component_id": "comp-prose-engineering-dev-0003",
+   "category": "prose",
+   "start_byte": 612,
+   "end_byte": 831
+  },
+  {
+   "component_id": "comp-prose-medicine-explainer-dev-0010",
+   "category": "prose",
+   "start_byte": 834,
+   "end_byte": 1186
+  }
+ ]
+}

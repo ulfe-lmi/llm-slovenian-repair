@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-001071",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T5-lists",
+ "byte_length": 1167,
+ "cp_length": 1137,
+ "sha256": "878a66b23652c697a82014e57382d09d6155c36ea17e539b7cb7fb633c6ef778",
+ "document": "- V projektu Gorski dnevnik je Anja pojasnila, da spremenljivka deluje kot imenovana skrinjica, v kateri hranimo eno vrednost. Ko je program ponavljal preverjanje vremenskih podatkov, je zanka pretekle dni v vrsti in ohranila le najhladnejše. Funkcija, ki je izračunala povprečje, je bila kot majhno orodje, saj so jo znali poklicati vedno znova brez ponavljanja besedila.\n- `int main(void) { char *napis = \"Tekst: *poudarjeno* in _podč`\n- V projektu Mlajša šola je Nina pripravila kratke vaje, ki učencem omogočajo, da znanje preizkusijo v praksi (na primer pri izletu v mestno knjižnico). Učenci so radi dejali, da »se učimo brez strahu pred napako«, in učiteljica je to zapisala v letno knjižico. Pri izpitu iz slovenščine so namesto dolgih nalog dobili kratek pripovedni zapis, ki so ga lahko brali in pojasnjevali.\n- Zimska juha je pri kuhanju zahtevala mir in čas. Anja je najprej olupila krompir, nato pa ga naribala. Za projektni dnevnik je zapisala, da je smetane lahko “samo malo”, ne pa preveč. V kotliček so šli tudi rdeča čebula in klobasa, po stari navadi. Skozi okno je prišlo malo hlada, zato je juha postala še gostejša.",
+ "components": [
+  {
+   "component_id": "comp-prose-programming-explainer-dev-0011",
+   "category": "prose",
+   "start_byte": 2,
+   "end_byte": 375
+  },
+  {
+   "component_id": "comp-code-c-dev-0002",
+   "category": "code",
+   "start_byte": 378,
+   "end_byte": 441
+  },
+  {
+   "component_id": "comp-prose-education-dev-0011",
+   "category": "prose",
+   "start_byte": 444,
+   "end_byte": 836
+  },
+  {
+   "component_id": "comp-prose-cooking-dev-0005",
+   "category": "prose",
+   "start_byte": 839,
+   "end_byte": 1167
+  }
+ ]
+}

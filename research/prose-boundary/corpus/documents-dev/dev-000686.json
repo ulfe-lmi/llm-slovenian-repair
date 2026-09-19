@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-000686",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T5-lists",
+ "byte_length": 885,
+ "cp_length": 867,
+ "sha256": "c4531587db56d866c8cb9e0cfbde368c5221cd48849a062f5273658d9916e5ea",
+ "document": "- V projektu Sona (manjša fizikalna raziskava) je Maja spremljala vibracije tankih folij pri nizkih temperaturah. Zapisovala je, da se pri približno sto in dvanajst kelvinov material odzove drugače, in to je bilo vidno že po prvih dneh. Leta dvotisoč in osemnajst je ekipa poskusila ponoviti meritve, a je veter v prostoru vplival na števce.\n- `#include <string>`\n- V testni zbirki Projekt Zdravje 2026 je Matej napisal kratek vnos. Utrujenost, včasih tudi glavobol, ima lahko več razlogov. To je namerni vstavek v besedilo. Beseda „preveriti“ (v smislu posveta) se tu nanaša na obisk zdravnika. Ne gre za priporočilo zdravil ali odmerkov.\n- V Splitu smo opazovali staro obalo in šele zvečer spoznali, da je bilo morje mirno. Vodič je dejal: \"ogledaj najprej dvorano, nato pa solne jame\". Naslednji dan smo se sprehodili po starem mestnem jedru in kupili oljčno olje.",
+ "components": [
+  {
+   "component_id": "comp-prose-science-dev-0001",
+   "category": "prose",
+   "start_byte": 2,
+   "end_byte": 347
+  },
+  {
+   "component_id": "comp-code-cpp-dev-0007",
+   "category": "code",
+   "start_byte": 350,
+   "end_byte": 369
+  },
+  {
+   "component_id": "comp-prose-medicine-explainer-dev-0009",
+   "category": "prose",
+   "start_byte": 372,
+   "end_byte": 653
+  },
+  {
+   "component_id": "comp-prose-travel-dev-0002",
+   "category": "prose",
+   "start_byte": 656,
+   "end_byte": 885
+  }
+ ]
+}

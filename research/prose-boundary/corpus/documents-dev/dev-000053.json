@@ -1,0 +1,65 @@
+{
+ "doc_id": "dev-000053",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T10-randomized",
+ "byte_length": 992,
+ "cp_length": 975,
+ "sha256": "d23117f7ba4ffa35cec86b4030fca00094ba77f45f8eb6dd2ec9c312ba7031e3",
+ "document": "Mednarodna skupina, ki dela v izmišljenem arhivu Ljubljana, je pregledovala dopise iz leta 1804, v katerih omenjajo potovanja po dolini. V vstavku (ki ga je zapisala Taja) piše: »Razdalje so merili s koraki in verstami, ne pa z modernimi merami.«\n| Oseba | Enota | Čas |\n| --- | --- | --- |\n| Ana Kovač | s | 12 |\n| Bojan Zupan | min | 9 |\nPregled: ~~odprto~~ vprašanje ima ID 07 za Igorja Vovka.\n--vhod arhiv/izpis.log, --izhod 1, --vzorčnost nizka\n~~~~bash\n# testna postavka: 15 sekund, 3 koraki\n~~~~\n\n\\begin{equation} \\text{Testni projekt Anja} \\; : \\; \\lim_{\\nu \\to \\infty} \\frac{1}{\\nu}=0 \\Rightarrow \\lim_{\\nu \\to \\infty} \\left(\\frac{1}{\\nu}+1\\right)=1 \\end{equation}\npython3 preizkus.py --vhod ana.txt\nvir_2024.txt\nPriprava na državni izpit za odrasle je potekala mirno (trije tedni, dvakrat na teden), in Matej je ob tem dejal: »Znanje ostane, če ga človek lahko pove iz glave.« Načrt je vključeval tudi kratek pregled starih učbenikov, a brez dolžine in brez strahu.",
+ "components": [
+  {
+   "component_id": "comp-prose-history-dev-0002",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 250
+  },
+  {
+   "component_id": "comp-markdown-tables-dev-0007",
+   "category": "markdown",
+   "start_byte": 251,
+   "end_byte": 345
+  },
+  {
+   "component_id": "comp-markdown-strikethrough-dev-0003",
+   "category": "markdown",
+   "start_byte": 346,
+   "end_byte": 403
+  },
+  {
+   "component_id": "comp-machine-cli-flags-dev-0005",
+   "category": "machine",
+   "start_byte": 404,
+   "end_byte": 457
+  },
+  {
+   "component_id": "comp-markdown-fenced-code-dev-0006",
+   "category": "markdown",
+   "start_byte": 458,
+   "end_byte": 511
+  },
+  {
+   "component_id": "comp-math-equation-env-dev-0005",
+   "category": "math",
+   "start_byte": 512,
+   "end_byte": 681
+  },
+  {
+   "component_id": "comp-machine-shell-commands-dev-0003",
+   "category": "machine",
+   "start_byte": 682,
+   "end_byte": 716
+  },
+  {
+   "component_id": "comp-machine-filenames-dev-0004",
+   "category": "machine",
+   "start_byte": 717,
+   "end_byte": 729
+  },
+  {
+   "component_id": "comp-prose-education-dev-0013",
+   "category": "prose",
+   "start_byte": 730,
+   "end_byte": 992
+  }
+ ]
+}

@@ -1,0 +1,102 @@
+{
+ "doc_id": "dev-000310",
+ "byte_length": 710,
+ "cp_length": 692,
+ "regions": [
+  {
+   "start_byte": 0,
+   "end_byte": 295,
+   "start_cp": 0,
+   "end_cp": 291,
+   "component_id": "comp-prose-administration-dev-0011",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 295,
+   "end_byte": 296,
+   "start_cp": 291,
+   "end_cp": 292,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 296,
+   "end_byte": 299,
+   "start_cp": 292,
+   "end_cp": 295,
+   "component_id": "comp-code-cpp-dev-0008",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 299,
+   "end_byte": 300,
+   "start_cp": 295,
+   "end_cp": 296,
+   "component_id": "comp-code-cpp-dev-0008",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 300,
+   "end_byte": 503,
+   "start_cp": 296,
+   "end_cp": 495,
+   "component_id": "comp-code-cpp-dev-0008",
+   "category": "code",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 503,
+   "end_byte": 504,
+   "start_cp": 495,
+   "end_cp": 496,
+   "component_id": "comp-code-cpp-dev-0008",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 504,
+   "end_byte": 507,
+   "start_cp": 496,
+   "end_cp": 499,
+   "component_id": "comp-code-cpp-dev-0008",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 507,
+   "end_byte": 508,
+   "start_cp": 499,
+   "end_cp": 500,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 508,
+   "end_byte": 710,
+   "start_cp": 500,
+   "end_cp": 692,
+   "component_id": "comp-prose-everyday-advice-dev-0004",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  }
+ ],
+ "invariants": {
+  "tiling_complete": true,
+  "no_contradictory_overlaps": true,
+  "cp_range_exact": true
+ }
+}

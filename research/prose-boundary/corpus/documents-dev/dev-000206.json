@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-000206",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T9-prose-malformed-prose",
+ "byte_length": 632,
+ "cp_length": 608,
+ "sha256": "d8222aafd6b47441a2c2068d0730920656e61ebae0c3d30875b846d5d418e22a",
+ "document": "V tečaju za starše v Celju so namesto poskusnega izpita uvedli skupno vprašanje, ki ga je treba razčleniti v tri kratke točke. Ko so otroci in učitelji slišali “Da se ocenjevanje ne začne šele z ocenami”, so se v razredu pogostejše pojavila vprašanja o načinu, ne le o točkah.\n***Trobna** brez zapora.\nTestni projekt: Lesena miza. Osebna: Marko Zupan.\nLuka je v projektu Soba za okuse v soboto zjutraj odprl lonček in vonj po karameliziranih čebulicah je zapolnil celo sobo. Sol je dodal šele ob koncu, ker se je spomnil na zgodnjo napako. Nato je v dnevnik zapisal samo eno opombo: „Pri kuhanju se ne mudi.“",
+ "components": [
+  {
+   "component_id": "comp-prose-education-dev-0009",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 293
+  },
+  {
+   "component_id": "comp-malformed-malformed-nesting-dev-0002",
+   "category": "malformed",
+   "start_byte": 294,
+   "end_byte": 368
+  },
+  {
+   "component_id": "comp-prose-cooking-dev-0010",
+   "category": "prose",
+   "start_byte": 369,
+   "end_byte": 632
+  }
+ ]
+}

@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-002197",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T9-prose-malformed-prose",
+ "byte_length": 609,
+ "cp_length": 588,
+ "sha256": "454a7f20e7254393f7d5de7396f07d81d7f745a23029f83c2b7f6ffc765a9365",
+ "document": "Primerjava mer je najlažje razumljiva, kadar učitelj postavi vprašanje: „Kako dolgo bo cesta na zemljevidu, če je dejanska dolžina sto kilometrov?“ V razredu se pogosto uporablja beseda sorazmerje, vendar je pomembno, da učenci vidijo odnos med številoma. Enkrat so pri projektu Rabič in Šolar izmerekli sence na šolskem igrišču, potem pa iz tega razločili razmerje višin.\n$$z=3. Ivan Hrib preverja projekt Senca.\nAna je poletja 2023 preživela ob Bledu in si ogledala grad. Vreme je bilo toplo, voda pa mirna kot steklo. Popoldne se je sprehodila do Špice in uživala v razgledu na jezero.",
+ "components": [
+  {
+   "component_id": "comp-prose-math-explainer-dev-0007",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 390
+  },
+  {
+   "component_id": "comp-malformed-incomplete-display-dollar-dev-0003",
+   "category": "malformed",
+   "start_byte": 391,
+   "end_byte": 431
+  },
+  {
+   "component_id": "comp-prose-travel-dev-0006",
+   "category": "prose",
+   "start_byte": 432,
+   "end_byte": 609
+  }
+ ]
+}

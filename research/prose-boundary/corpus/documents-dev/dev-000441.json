@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-000441",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T2-prose-math-prose",
+ "byte_length": 671,
+ "cp_length": 654,
+ "sha256": "75ed8eb2eb9553918a59af9fcba27faf4248e6dd07d0fae2a197ddd0320f21f9",
+ "document": "Zavod Odrasli naprej je v letu 2021 pripravil kratke izobraževalne module za poklicno usposabljanje, pri čemer so strokovni vodje poudarili jasno strukturirane učbenike in vsakodnevne vaje. Po petih tednih so udeleženci opravili preizkus znanja, ki je imel 20 vprašanj, 10 praktičnih nalog in eno ustno obrazložitev.\n\\begin{equation}\\begin{aligned}M_4 &= \\mu_4 + \\nu_4 \\odot \\xi_4 \\text{Maja Novak} \\\\N_4 &= \\|\\vec{v}_4\\|_2 + \\varpi_4\\end{aligned}\\end{equation}\n„Prvi korak, drugi noga,“ je rekla Ana, a mladi smučarji v projektni skupini so še vedno poskušali izbrati pravo pozicijo. Ko je padal sneg, so se vsi odločili za krajši premor pri topli čaju.",
+ "components": [
+  {
+   "component_id": "comp-prose-education-dev-0002",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 323
+  },
+  {
+   "component_id": "comp-math-aligned-env-dev-0004",
+   "category": "math",
+   "start_byte": 324,
+   "end_byte": 468
+  },
+  {
+   "component_id": "comp-prose-sports-dev-0012",
+   "category": "prose",
+   "start_byte": 469,
+   "end_byte": 671
+  }
+ ]
+}

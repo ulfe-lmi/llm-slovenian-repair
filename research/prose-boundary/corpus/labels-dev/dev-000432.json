@@ -1,0 +1,132 @@
+{
+ "doc_id": "dev-000432",
+ "byte_length": 729,
+ "cp_length": 708,
+ "regions": [
+  {
+   "start_byte": 0,
+   "end_byte": 3,
+   "start_cp": 0,
+   "end_cp": 3,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 3,
+   "end_byte": 66,
+   "start_cp": 3,
+   "end_cp": 63,
+   "component_id": "comp-prose-everyday-advice-dev-0004",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 66,
+   "end_byte": 68,
+   "start_cp": 63,
+   "end_cp": 65,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 68,
+   "end_byte": 618,
+   "start_cp": 65,
+   "end_cp": 598,
+   "component_id": "comp-prose-computing-dev-0012",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 618,
+   "end_byte": 620,
+   "start_cp": 598,
+   "end_cp": 600,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 620,
+   "end_byte": 641,
+   "start_cp": 600,
+   "end_cp": 620,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 641,
+   "end_byte": 656,
+   "start_cp": 620,
+   "end_cp": 635,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 656,
+   "end_byte": 658,
+   "start_cp": 635,
+   "end_cp": 637,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 658,
+   "end_byte": 698,
+   "start_cp": 637,
+   "end_cp": 677,
+   "component_id": "comp-prose-programming-explainer-dev-0003",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 698,
+   "end_byte": 701,
+   "start_cp": 677,
+   "end_cp": 680,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 701,
+   "end_byte": 727,
+   "start_cp": 680,
+   "end_cp": 706,
+   "component_id": "comp-machine-urls-dev-0001",
+   "category": "machine",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 727,
+   "end_byte": 729,
+   "start_cp": 706,
+   "end_cp": 708,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  }
+ ],
+ "invariants": {
+  "tiling_complete": true,
+  "no_contradictory_overlaps": true,
+  "cp_range_exact": true
+ }
+}

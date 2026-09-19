@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-000530",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T3-prose-fenced-prose",
+ "byte_length": 864,
+ "cp_length": 836,
+ "sha256": "39f985092592a220a95d28c51d6d8281a0a9bd85d73f4558a56c699d0bfbb098",
+ "document": "Na oknu štiri je čakal gospod Ivan. Hotel je obnoviti dovoljenje za manjšo poslovno enoto. Uslužbenica mu je dejala, da »pripravite še potrdilo o plačilu«, in dodala, da je rok (trideset dni) naveden v akti.\n```\n// Test: poročilo v izmišljenem projektu Jabolko.\nfn main() {\n    let pot = \"src/modul.py\";\n    let besedilo = \"poudarek **žlahtna šuma** in `oklepji` (10 €)\";\n    let url = \"https://primer.si/koda\";\n    println!(\"{pot}: {besedilo} -> {url}\");\n}\n```\nV starem receptu iz leta 1958 stoji, da se ajdova juha iz Ljubljane najprej posoli, nato pa počasi premeša, da ne bi zgrudila. “Ajda mora dišati po štrukljih,” je nekoč zapisala Anja, ki je testirala recept za projektni dnevnik okusov (po mnenju njene sestre, Marice). Pri pripravi je bil pomemben tudi čas: deset minut mešanja, nato pa še kratko ohlajanje na hladni plošči.",
+ "components": [
+  {
+   "component_id": "comp-prose-administration-dev-0012",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 215
+  },
+  {
+   "component_id": "comp-code-rust-dev-0011",
+   "category": "code",
+   "start_byte": 216,
+   "end_byte": 475
+  },
+  {
+   "component_id": "comp-prose-cooking-dev-0001",
+   "category": "prose",
+   "start_byte": 476,
+   "end_byte": 864
+  }
+ ]
+}

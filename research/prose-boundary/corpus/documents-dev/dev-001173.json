@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-001173",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T8-quote-fenced",
+ "byte_length": 573,
+ "cp_length": 565,
+ "sha256": "36b400ffb68bfac59bcf39b77b98a91103b35ba3ae6c0513dc475843283346a5",
+ "document": "> Pri popoldanski projektni uri so udeleženci, ki so prišli iz Šentjernev, najprej raztegnili ramena. Nato so (za razliko od jutranjih vajah) preplavali osemsto metrov. Vse skupaj je bil miren zaključek tedna. `/* Testni fragment 8: izmišljena oseba Nina, projekt Test. *`\n```\n/* Fragment 2: fiktna oseba Ana, pot docs/vir.txt, vir https://primer.si/koda */ struct Vnos { std::string naziv; double znesek; }; const int razdelek2 = 2; const Vnos seStez{ \"*Nova* šola 3 $ `kod`\", 2.5 }; const Vnos vzorci[2] = { {\"črtasti vzorec (š)\", 4.0}, {\"_dokument_\", 5.0} };\n```",
+ "components": [
+  {
+   "component_id": "comp-prose-sports-dev-0013",
+   "category": "prose",
+   "start_byte": 2,
+   "end_byte": 213
+  },
+  {
+   "component_id": "comp-code-sql-dev-0008",
+   "category": "code",
+   "start_byte": 214,
+   "end_byte": 277
+  },
+  {
+   "component_id": "comp-code-cpp-dev-0010",
+   "category": "code",
+   "start_byte": 278,
+   "end_byte": 573
+  }
+ ]
+}

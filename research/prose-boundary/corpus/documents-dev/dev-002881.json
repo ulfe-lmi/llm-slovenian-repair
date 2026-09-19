@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-002881",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T11-interactions",
+ "byte_length": 973,
+ "cp_length": 955,
+ "sha256": "329800ec3e9eb960292a7bb3a943342638e86bafeafc118a03cb90be91a5c9f2",
+ "document": "`/* Testni fragment 5: izmišljena oseba Anja, projekt Kovač. `.\n```\n#include <string>\n// Dokument: docs/vir.txt\n// Spletna stran: https://primer.si/koda\nconst int HRA_NA_VREDNOST = 5; // čokolada, šentjanž\nint main() {\n    std::string opis = \"Cena: 5 $ (oklepaji)\";\n    return HRA_NA_VREDNOST;\n}\n# komentar z \\frac{a}{b}\n```\nV projektu Gradec je bilo pri projektiranju jeklene konstrukcije ključno, koliko obremenitve prenese nosilni presek. Mladi konstruktor Jaka Kovač je, ob podpori projektirke Lune, predlagal dodatno ojačanje in začasne podlage. Sodelavci so se po dveh tednih razprave strinjali s predlogom. Končno je most dobil tudi dodatno zaščito pred erozijo.\nMaja je poletni dopust v Sredozemlju izbrala predvsem zaradi tihih obalnih vas (zlasti tistih v bližini Kotorskega zaliva). »Sonce je bilo toplo,« je zapisala v svojih opombah, a je poudarila, da je treba med popoldanskimi urami ostati v senci.\n Pozor: é (dekompouziran znakovni niz).",
+ "components": [
+  {
+   "component_id": "comp-code-sql-dev-0005",
+   "category": "code",
+   "start_byte": 0,
+   "end_byte": 64
+  },
+  {
+   "component_id": "comp-code-cpp-dev-0004",
+   "category": "code",
+   "start_byte": 66,
+   "end_byte": 329
+  },
+  {
+   "component_id": "comp-prose-engineering-dev-0008",
+   "category": "prose",
+   "start_byte": 330,
+   "end_byte": 681
+  },
+  {
+   "component_id": "comp-prose-travel-dev-0012",
+   "category": "prose",
+   "start_byte": 682,
+   "end_byte": 929
+  }
+ ]
+}

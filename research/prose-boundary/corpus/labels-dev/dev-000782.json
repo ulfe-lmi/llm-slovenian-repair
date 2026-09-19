@@ -1,0 +1,92 @@
+{
+ "doc_id": "dev-000782",
+ "byte_length": 803,
+ "cp_length": 781,
+ "regions": [
+  {
+   "start_byte": 0,
+   "end_byte": 305,
+   "start_cp": 0,
+   "end_cp": 297,
+   "component_id": "comp-prose-programming-explainer-dev-0009",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 305,
+   "end_byte": 307,
+   "start_cp": 297,
+   "end_cp": 299,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 307,
+   "end_byte": 309,
+   "start_cp": 299,
+   "end_cp": 301,
+   "component_id": "comp-math-bracket-tex-dev-0004",
+   "category": "math",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 309,
+   "end_byte": 371,
+   "start_cp": 301,
+   "end_cp": 363,
+   "component_id": "comp-math-bracket-tex-dev-0004",
+   "category": "math",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 371,
+   "end_byte": 373,
+   "start_cp": 363,
+   "end_cp": 365,
+   "component_id": "comp-math-bracket-tex-dev-0004",
+   "category": "math",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 373,
+   "end_byte": 375,
+   "start_cp": 365,
+   "end_cp": 367,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 375,
+   "end_byte": 762,
+   "start_cp": 367,
+   "end_cp": 747,
+   "component_id": "comp-prose-travel-dev-0004",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 762,
+   "end_byte": 803,
+   "start_cp": 747,
+   "end_cp": 781,
+   "component_id": "template",
+   "category": null,
+   "role": "PROSE",
+   "template_owned": true
+  }
+ ],
+ "invariants": {
+  "tiling_complete": true,
+  "no_contradictory_overlaps": true,
+  "cp_range_exact": true
+ }
+}

@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-000391",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T7-prose-json-prose-latex",
+ "byte_length": 982,
+ "cp_length": 967,
+ "sha256": "6f4e2078ccd1310143fa70269cafb43d39347966105dc1c520ba2f47cad85db7",
+ "document": "O proporcijah sem v šolskem letu 2019 govorila kot o primerjavi enakih delov, zato so učenci izmišljali recepte in merili sestavine. »Če ena skleda vsebuje dva dela, potem druga vsebuje štiri dele,« je povedala Ana, in to je bila za nas dobra vstopna točka.\n{\"ime\":\"Projekt Lipa\",\"cilj\":\"Nalaganje podatkov 25 %\",\"avtorsko\":\"Nevtralna testna vsebina\",\"merila\":{\"razmerje\":\"3,5 m / 0,13\",\"opomba\":\"**Test** https://primer.si/novica\"}}\nV soboto, ko je bilo poleti 24 stopinj, je ekipa izmišljene skupine Brez napetosti v parku izvedla pet minut ogrevanja, nato pa še enajstmetrovski udarec in tri kratke teke. Igralka, ki jo je projekt imenoval Eva, je po tem dejala, da je bila noga rahlo utrujena, vendar da je bil zrak svež. 'Naslednjič bomo dodali še malo plavanja,' je opozorila ob zbiranju opreme. Na koncu so opremo zložili, zapisnik pa sta podpisala le dva člana.\n\\begin{align} \\alpha_1 &= \\beta_1 + \\gamma_1 \\\\ \\delta_1 &= \\epsilon_1 \\times \\zeta_1 \\end{align}",
+ "components": [
+  {
+   "component_id": "comp-prose-math-explainer-dev-0002",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 265
+  },
+  {
+   "component_id": "comp-structured-json-dev-0001",
+   "category": "structured",
+   "start_byte": 266,
+   "end_byte": 441
+  },
+  {
+   "component_id": "comp-prose-sports-dev-0005",
+   "category": "prose",
+   "start_byte": 442,
+   "end_byte": 884
+  },
+  {
+   "component_id": "comp-math-align-env-dev-0001",
+   "category": "math",
+   "start_byte": 885,
+   "end_byte": 982
+  }
+ ]
+}

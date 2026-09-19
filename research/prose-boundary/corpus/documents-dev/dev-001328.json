@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-001328",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T9-prose-malformed-prose",
+ "byte_length": 603,
+ "cp_length": 594,
+ "sha256": "04d077a584332d7447e5f6b9e7bb8fe2d4bf4b4e22976123a5d512dd9aa004ad",
+ "document": "Petra je načrtovala kratek vikend v dolini Soče. Njen spremljevalec, Ivan, jo je peljal do smaragdne reke in starega gradu. »Vzemi lahke hlače,« je rekel pred odhodom. Vratila se je utrujena, a z dovolj fotografij.\n<span title=\nNevtralna avtorizirana testna vsebina za projekt Sova in osebo Ano Testno.\nV okviru internega testnega projekta so v občinskem uradu po novem dokumente prejeli v digitalni obliki in zaposleni so morali preveriti, ali so priloženi obrazci polni. Maja je sodelavcem dejala, da rok za odločitev poteka do petega v mesecu, zato morajo skrbno preveriti priložene listine.",
+ "components": [
+  {
+   "component_id": "comp-prose-travel-dev-0013",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 219
+  },
+  {
+   "component_id": "comp-malformed-partial-html-dev-0002",
+   "category": "malformed",
+   "start_byte": 220,
+   "end_byte": 307
+  },
+  {
+   "component_id": "comp-prose-administration-dev-0011",
+   "category": "prose",
+   "start_byte": 308,
+   "end_byte": 603
+  }
+ ]
+}

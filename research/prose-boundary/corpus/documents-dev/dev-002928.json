@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-002928",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T3-prose-fenced-prose",
+ "byte_length": 888,
+ "cp_length": 872,
+ "sha256": "fd8ab9ee2fa5ccb15fda8216db9af599873e4b9ac3e041acbb04f7d4d84ccbd5",
+ "document": "V izmišljenem projektu Arhiv besed se motiv arhiva pojavi kot tiha zbirka pism, ki potujejo med slovenskimi in evropskimi mestoma. Izmišljeni avtor Martin Golob zgradi novelo iz treh stavkov. Njegova zgodba je tiha.\n```\n// Test: seznam opravil v izmišljenem projektu Brst.\nfn main() {\n    let naslov = String::from(\"vir: docs/vir.txt\");\n    let povezava = \"https://primer.si/koda\";\n    let cena = \"12 € ali 13 $\";\n    println!(\"**{naslov}** _podčrtano_ `{cena}` ({povezava})\");\n}\n```\nV projektu Osnovne šole Lipica učitelji (zlasti Ana Kovač) raje uporabljajo projektno delo, da učenci spoznajo, kako znanje deluje v vsakdanju. Po besedah razredne voditeljice je najpomembnejše, da otroci pri vsaki nalogi »razložijo, zakaj so ravno tako postopali«. Pri testnem izpitu iz naravoslovja so zato združili pisni del z ustno obravnavo dveh preprostih primerov iz šolskega vrta.",
+ "components": [
+  {
+   "component_id": "comp-prose-literature-dev-0010",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 217
+  },
+  {
+   "component_id": "comp-code-rust-dev-0009",
+   "category": "code",
+   "start_byte": 218,
+   "end_byte": 489
+  },
+  {
+   "component_id": "comp-prose-education-dev-0001",
+   "category": "prose",
+   "start_byte": 490,
+   "end_byte": 888
+  }
+ ]
+}

@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-001800",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T8-quote-fenced",
+ "byte_length": 502,
+ "cp_length": 497,
+ "sha256": "93a841542c23d5e9271673828a8745b42c75a201628030f8be9a2ae30ff509fb",
+ "document": "> Pri popoldanski projektni uri so udeleženci, ki so prišli iz Šentjernev, najprej raztegnili ramena. Nato so (za razliko od jutranjih vajah) preplavali osemsto metrov. Vse skupaj je bil miren zaključek tedna. `#!/usr/bin/env bash`\n```\n/* Pridrži se projektnim pravilom: (brez absolutnih poti) */ const pot = 'src/modul.py'; const dokument = 'docs/vir.txt'; const povezava = 'https://primer.si/koda'; const besedilo = `Cena je 3 $ za (izdelek)`; console.log(pot, dokument, povezava, besedilo);\n```",
+ "components": [
+  {
+   "component_id": "comp-prose-sports-dev-0013",
+   "category": "prose",
+   "start_byte": 2,
+   "end_byte": 213
+  },
+  {
+   "component_id": "comp-code-shell-bash-dev-0011",
+   "category": "code",
+   "start_byte": 214,
+   "end_byte": 235
+  },
+  {
+   "component_id": "comp-code-javascript-dev-0003",
+   "category": "code",
+   "start_byte": 236,
+   "end_byte": 502
+  }
+ ]
+}

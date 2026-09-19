@@ -1,0 +1,142 @@
+{
+ "doc_id": "dev-000872",
+ "byte_length": 652,
+ "cp_length": 639,
+ "regions": [
+  {
+   "start_byte": 0,
+   "end_byte": 3,
+   "start_cp": 0,
+   "end_cp": 3,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 3,
+   "end_byte": 64,
+   "start_cp": 3,
+   "end_cp": 63,
+   "component_id": "comp-prose-cooking-dev-0010",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 64,
+   "end_byte": 65,
+   "start_cp": 63,
+   "end_cp": 64,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 65,
+   "end_byte": 504,
+   "start_cp": 64,
+   "end_cp": 497,
+   "component_id": "comp-prose-science-dev-0007",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 504,
+   "end_byte": 505,
+   "start_cp": 497,
+   "end_cp": 498,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 505,
+   "end_byte": 525,
+   "start_cp": 498,
+   "end_cp": 517,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 525,
+   "end_byte": 539,
+   "start_cp": 517,
+   "end_cp": 531,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 539,
+   "end_byte": 541,
+   "start_cp": 531,
+   "end_cp": 533,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 541,
+   "end_byte": 583,
+   "start_cp": 533,
+   "end_cp": 573,
+   "component_id": "comp-prose-math-explainer-dev-0010",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 583,
+   "end_byte": 586,
+   "start_cp": 573,
+   "end_cp": 576,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 586,
+   "end_byte": 606,
+   "start_cp": 576,
+   "end_cp": 596,
+   "component_id": "comp-machine-emails-dev-0004",
+   "category": "machine",
+   "role": "POLICY_EXPOSED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 606,
+   "end_byte": 608,
+   "start_cp": 596,
+   "end_cp": 598,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 608,
+   "end_byte": 652,
+   "start_cp": 598,
+   "end_cp": 639,
+   "component_id": "template",
+   "category": null,
+   "role": "PROSE",
+   "template_owned": true
+  }
+ ],
+ "invariants": {
+  "tiling_complete": true,
+  "no_contradictory_overlaps": true,
+  "cp_range_exact": true
+ }
+}

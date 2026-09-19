@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-000745",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T9-prose-malformed-prose",
+ "byte_length": 732,
+ "cp_length": 723,
+ "sha256": "cb226fb393f60536191bc552f0cf4e65bef19dc06aa7f97ee171b8cbb57beb9a",
+ "document": "V maju 2026 je Nika za projekt Smreko pripravila razlago, ki je učencev pritegnila, ker so imeli pred seboj le navaden govor, ne pa vrstic na zaslonu. Sprva so govorili o spremenljivkah, potem o zanki, ki šteje korake, na koncu pa o funkciji, ki vse preostalo zloži v eno jasno dejanje.\n\n\\begin{align} x &= 1, nevtralna testna vsebina za izmišljen projekt Sončni cvet, avtorica Ana Krajnar.\n\nProces urejanja prostorskih posegov v okviru notranjega testnega projekta se je lani (2024) prenesel v skupno aplikacijo, kar je v prvih mesecih povzročilo zamude. Občinski sekretar, ki je sicer skrbel za informatiko, je sodelavce opozoril, naj se strogo držijo notranjih rokov in da je vsak dokument datiran, pečaten in arhiviran.",
+ "components": [
+  {
+   "component_id": "comp-prose-programming-explainer-dev-0010",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 289
+  },
+  {
+   "component_id": "comp-malformed-unclosed-tex-env-dev-0001",
+   "category": "malformed",
+   "start_byte": 291,
+   "end_byte": 395
+  },
+  {
+   "component_id": "comp-prose-administration-dev-0013",
+   "category": "prose",
+   "start_byte": 397,
+   "end_byte": 732
+  }
+ ]
+}

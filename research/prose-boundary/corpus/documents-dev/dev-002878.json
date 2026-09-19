@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-002878",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T8-quote-fenced",
+ "byte_length": 686,
+ "cp_length": 669,
+ "sha256": "5ef9f1662e6266f8c2bd0c6876a120a6089c42cf52cbf8bce766c390a6fb552e",
+ "document": "> V laboratoriju projekta Merjač (stanica 4) je dr. Ana Kovač zapisala: »Med segrevanjem, in sicer ob dveh tisoč stopinjah Celzija, se material obnaša, kot bi šlo za tekočino,« in pojasnila, zakaj poskusne vzorce ob segrevanju obnašajo nepričakovano elastičnost. Rezultati iz leta 2021 so nato odprli pot k novi metodologiji, v kateri je pomembna vsaka mera, tudi tista, ki se zdi nesmiselna. `/* Testni fragment 8: izmišljena oseba Nina, projekt Test. *`\n```\n# Testni projekt: Pripomoček; avtor: Maja Lipovnik\nime = 'Ana'\nznesek = 5\nporočilo = f'Račun: {znesek} $ v `oklepaju`'\nopis = 'To je `koda` in *poudarek* ter _podčrtano_'\nif znesek > 0:\n    print(poročilo)\n```",
+ "components": [
+  {
+   "component_id": "comp-prose-science-dev-0011",
+   "category": "prose",
+   "start_byte": 2,
+   "end_byte": 403
+  },
+  {
+   "component_id": "comp-code-sql-dev-0008",
+   "category": "code",
+   "start_byte": 404,
+   "end_byte": 467
+  },
+  {
+   "component_id": "comp-code-python-dev-0004",
+   "category": "code",
+   "start_byte": 468,
+   "end_byte": 686
+  }
+ ]
+}

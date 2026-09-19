@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-002163",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T8-quote-fenced",
+ "byte_length": 715,
+ "cp_length": 698,
+ "sha256": "790c3970d7e0f1f96b3b5e1179a0c15b62dcaf675025324eeac97a1d7a5f2b4c",
+ "document": "> Slovenska pesniška tradicija ima svojo tišino. V izmišljenem projektu Glas in tišina, ki raziskuje naravno, se pojavi motiv dreves. Izmišljena pesnica Anja Horvat v zbirki iz leta 2015 piše: »Drevo ne govori, a se v šumu zdi, da je vprašanje.« Ta stavek se v evropskem kontekstu pogosto pojavi kot znak identitete. `/* Testni fragment 3: izmišljena oseba Luka, projekt Brst. *`\n```\nfn povzetek2(seStez: bool) -> String { /* Testni projekt Lipa: č, š, ž, **poudarek** in _podčrtano_ */ let razdelek2 = 2; let besedilo = format!(\"_Podčrtano_ ({} $, `{}`)\", razdelek2, \"ž\"); let pot = \"docs/vir.txt\"; let url = \"https://primer.si/koda\"; format!(\"{} | {} | {} | {}\", seStez, besedilo, pot, url) }\n```",
+ "components": [
+  {
+   "component_id": "comp-prose-literature-dev-0008",
+   "category": "prose",
+   "start_byte": 2,
+   "end_byte": 326
+  },
+  {
+   "component_id": "comp-code-sql-dev-0003",
+   "category": "code",
+   "start_byte": 327,
+   "end_byte": 390
+  },
+  {
+   "component_id": "comp-code-rust-dev-0002",
+   "category": "code",
+   "start_byte": 391,
+   "end_byte": 715
+  }
+ ]
+}

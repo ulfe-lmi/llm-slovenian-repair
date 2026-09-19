@@ -1,0 +1,47 @@
+{
+ "doc_id": "dev-002099",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T10-randomized",
+ "byte_length": 1052,
+ "cp_length": 1036,
+ "sha256": "39874fb0c1b0170e7cae5dfd0c87936bc136cfedc48776f48cbcaaa6505acfb2",
+ "document": "V projektu Zdrav vsak dan (v letu 2024) so izpostavili, da se lahko obremenjenost kaže v hitrem dihanju, v slabšem spanju ali v občutku tesnobe. To ni razlaga za domov, ampak spomin, da so telesni signali odziv. Ko se ti signali ponavljajo, jih najprej opiše oseba, nato pa jih preveri zdravnik.\nmodul_pogon.py poročilo_q3.csv tabela_01.json\n[zvezda]\nime = *Projekt Izmišljena zvezda*\nopis = _svetlost_ 1,8\nrazdalja = 45 letnih svetlob\navtor = Sara Potočnik\nvir = https://primer.si/novica\n; nevtralna testna vsebina\n<div>\nProjekt Maribor: nevtralna avtorizirana opomba za testni nalog.\n$$\\frac{\\sigma}{\\tau} = \\frac{7}{9} \\div \\phi = \\text{Ljubljana}$$\nV Ljubljani je mladinski nogometni projekt (pod imenom Mladi črt) v jeseni 2023 izvedel pet treningov na travi, kjer so fantje vadili predajo in branje prostora. Po dveh tednih so udeleženci povedali, da so se počutili bolj sproščeno, čeprav je bila prva tekma pravzaprav neuspešna. V uvodu je trener, izmišljen Matej Kovač, poudaril: 'Kljub vsemu so pomembna pravila in strpljenje.'",
+ "components": [
+  {
+   "component_id": "comp-prose-medicine-explainer-dev-0005",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 299
+  },
+  {
+   "component_id": "comp-machine-filenames-dev-0007",
+   "category": "machine",
+   "start_byte": 300,
+   "end_byte": 346
+  },
+  {
+   "component_id": "comp-structured-ini-dev-0008",
+   "category": "structured",
+   "start_byte": 347,
+   "end_byte": 522
+  },
+  {
+   "component_id": "comp-malformed-partial-html-dev-0003",
+   "category": "malformed",
+   "start_byte": 523,
+   "end_byte": 592
+  },
+  {
+   "component_id": "comp-math-display-dollar-dev-0004",
+   "category": "math",
+   "start_byte": 593,
+   "end_byte": 659
+  },
+  {
+   "component_id": "comp-prose-sports-dev-0001",
+   "category": "prose",
+   "start_byte": 660,
+   "end_byte": 1052
+  }
+ ]
+}

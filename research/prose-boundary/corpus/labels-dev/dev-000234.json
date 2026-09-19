@@ -1,0 +1,132 @@
+{
+ "doc_id": "dev-000234",
+ "byte_length": 434,
+ "cp_length": 430,
+ "regions": [
+  {
+   "start_byte": 0,
+   "end_byte": 3,
+   "start_cp": 0,
+   "end_cp": 3,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 3,
+   "end_byte": 63,
+   "start_cp": 3,
+   "end_cp": 63,
+   "component_id": "comp-prose-electronics-dev-0006",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 63,
+   "end_byte": 64,
+   "start_cp": 63,
+   "end_cp": 64,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 64,
+   "end_byte": 319,
+   "start_cp": 64,
+   "end_cp": 317,
+   "component_id": "comp-prose-electronics-dev-0002",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 319,
+   "end_byte": 320,
+   "start_cp": 317,
+   "end_cp": 318,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 320,
+   "end_byte": 340,
+   "start_cp": 318,
+   "end_cp": 337,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 340,
+   "end_byte": 354,
+   "start_cp": 337,
+   "end_cp": 351,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 354,
+   "end_byte": 356,
+   "start_cp": 351,
+   "end_cp": 353,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 356,
+   "end_byte": 397,
+   "start_cp": 353,
+   "end_cp": 393,
+   "component_id": "comp-prose-literature-dev-0008",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 397,
+   "end_byte": 400,
+   "start_cp": 393,
+   "end_cp": 396,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 400,
+   "end_byte": 432,
+   "start_cp": 396,
+   "end_cp": 428,
+   "component_id": "comp-machine-urls-dev-0002",
+   "category": "machine",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 432,
+   "end_byte": 434,
+   "start_cp": 428,
+   "end_cp": 430,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  }
+ ],
+ "invariants": {
+  "tiling_complete": true,
+  "no_contradictory_overlaps": true,
+  "cp_range_exact": true
+ }
+}

@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-002998",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T7-prose-json-prose-latex",
+ "byte_length": 956,
+ "cp_length": 939,
+ "sha256": "18c65081729cf8f980c368313c5af2b8a134e05e528dcfb263a0104e50b07422",
+ "document": "V geometriji smo na kratko obravnavali trikotnike in kvadrate, a brez simbol. Učenci so na mizi sestavljali oblike iz papirja. (Kaj je splošna lastnost, so preverjali z merjenjem in številčenjem kotov.) Takšen pogovor je ostal v spominu, ker je bil splošen in neposreden.\n{\"ime\":\"Projekt Jabolko\",\"faza\":\"Vzdrževanje\",\"avtorsko\":\"Nevtralna testna vsebina\",\"enote\":{\"temperatura\":\"21,5 °C\",\"debelina\":\"0,2 m\",\"delež\":\"45 %\"},\"opomba\":\"**Nalaganje** https://primer.si/novica\"}\nLuka, ki je vodil testni projekt Breza, je razložil, da spremenljivka nosi ime, vrednost pa pomeni, kaj se takrat zgodilo. (Steklenička s sokom pri tem dobro pokaže, kako se raven zniža.) Zanka nato vztraja, dokler pogoj ostane res, in funkcija povrne odgovor, »ja« ali »ne«, brez skritih pogojev.\n\\begin{equation}\\begin{aligned}P_2 &= \\frac{\\alpha_2}{\\beta_2} \\times \\zeta_2 \\text{Projekt Lipa} \\\\Q_2 &= \\sum_{i=0}^{3} \\kappa_i \\theta_i\\end{aligned}\\end{equation}",
+ "components": [
+  {
+   "component_id": "comp-prose-math-explainer-dev-0003",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 277
+  },
+  {
+   "component_id": "comp-structured-json-dev-0003",
+   "category": "structured",
+   "start_byte": 278,
+   "end_byte": 483
+  },
+  {
+   "component_id": "comp-prose-programming-explainer-dev-0009",
+   "category": "prose",
+   "start_byte": 484,
+   "end_byte": 789
+  },
+  {
+   "component_id": "comp-math-aligned-env-dev-0002",
+   "category": "math",
+   "start_byte": 790,
+   "end_byte": 956
+  }
+ ]
+}

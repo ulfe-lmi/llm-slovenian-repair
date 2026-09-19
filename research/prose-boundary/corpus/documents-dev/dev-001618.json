@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-001618",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T2-prose-math-prose",
+ "byte_length": 582,
+ "cp_length": 567,
+ "sha256": "3201520fa49557385e6f9853ebbc3f9214d1acea61122c5247cd662d1162a769",
+ "document": "V projektu Mlin 2018 je Luka preveril, koliko je povprečno trajala čakalna vrsta. Ko so trije prostovoljci dodali svoje opazke, se je slika izkazala za bolj uravnoteženo. Po njegovem mnenju je bistvo v tem, da se številka ne bere sama, ampak potrebuje kontekst.\n$$\\frac{\\rho + \\chi}{\\psi} = \\sqrt{3} + \\omega = \\text{Tina}$$\nStoli, miza in tla zahtevajo malo pozornosti. Pri čiščenju se začne od zgornjih površin. Nato pride vrsta spodnjih kotičkov. V projektu Mirna soba so izmerili, da pet minut ščetkanja tal zmanjša prah. Tudi navadna voda in malo mila zadoščata.",
+ "components": [
+  {
+   "component_id": "comp-prose-statistics-dev-0001",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 265
+  },
+  {
+   "component_id": "comp-math-display-dollar-dev-0005",
+   "category": "math",
+   "start_byte": 266,
+   "end_byte": 328
+  },
+  {
+   "component_id": "comp-prose-everyday-advice-dev-0005",
+   "category": "prose",
+   "start_byte": 329,
+   "end_byte": 582
+  }
+ ]
+}

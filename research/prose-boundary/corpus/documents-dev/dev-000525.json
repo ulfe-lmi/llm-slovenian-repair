@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-000525",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T9-prose-malformed-prose",
+ "byte_length": 582,
+ "cp_length": 568,
+ "sha256": "862a33af3ed0af2d53e7fda521789a008cc99b7d97cf6962ed6dda4c7f50c6b6",
+ "document": "Petra je pri večernem testu ugotovila, da je vsak sklep, ki deluje, najprej zaprt in da vsaka upornost v njem nekaj počuti. Lučka se je vžgala šele takrat, ko je namesto ene uporabila dve bateriji, in sicer v smeri, ki jo je narisala v beleški. ”To je bilo dovolj,“ je zapisala v dnevnik projekta.\nPri popoldanski projektni uri so udeleženci, ki so prišli iz Šentjernev, najprej raztegnili ramena. Nato so (za razliko od jutranjih vajah) preplavali osemsto metrov. Vse skupaj je bil miren zaključek tedna.\n`avtorizacija: Ana Novak; projekt: Modra Reka; izpis = \"test\";",
+ "components": [
+  {
+   "component_id": "comp-prose-electronics-dev-0010",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 307
+  },
+  {
+   "component_id": "comp-prose-sports-dev-0013",
+   "category": "prose",
+   "start_byte": 308,
+   "end_byte": 519
+  },
+  {
+   "component_id": "comp-malformed-unmatched-backtick-dev-0001",
+   "category": "malformed",
+   "start_byte": 520,
+   "end_byte": 582
+  }
+ ]
+}

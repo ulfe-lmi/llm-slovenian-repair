@@ -1,0 +1,2053 @@
+{
+ "schema": "008g-hidden-annotations-manifest/1",
+ "order": "008-g",
+ "set": "hidden naturalistic adjudicated labels v2 (private roots only; content never committed)",
+ "sealed_before": "report-only commit of round 008-g",
+ "guide": {
+  "path": "research/prose-boundary/config/annotation-guide.json",
+  "sha256": "e65816ddda65343e45b9c0b9fa112b8e18eea19b17310a997cff87b9a200eb5e"
+ },
+ "prompt_templates": {
+  "v2_line_indexed_sha256": "5629c7bd24e4b23ced2883cf9d8ea4f4180c9a64a8571ffddf001dcd45793b63",
+  "v1_verbatim_quote_sha256": "fb3599d3a573a96eea5e60c3ccdc6ff9dddf247c7f59e7aa3fa73f20d1165c1e"
+ },
+ "v1_driver": {
+  "path": "research/prose-boundary/tools/naturalistic_adjudication.py",
+  "sha256": "1a547169f885ebb92bdd46bc11bc6491f6e0899c67ed8c45e23beb1d78743f54",
+  "byte_identical": true
+ },
+ "model": {
+  "identity": "qwen3.8-27b",
+  "request_parameter_set": {
+   "chat_template_kwargs": {
+    "enable_thinking": false
+   }
+  },
+  "deployment_class": "A100-FP8 (007 lineage deployment record)",
+  "profile_sha256": "510c3394d2ccad8a098660b8b5512d338de0a5b77352ec693d2286ee2223723c",
+  "endpoint_value": "omitted (007 convention)",
+  "credential_source": "profile experimental_bearer_token (read as data; never printed/persisted/hashed/committed)",
+  "classification": "authorized evaluation-process model use (adjudication completion); distinct from generation and from linguistic-pipeline calls; no access to implementation source, implementation output, development labels, or objective-009 material"
+ },
+ "calls": {
+  "preflight": 1,
+  "pass_1": 70,
+  "pass_2": 42,
+  "retries": 0,
+  "failed_calls": 0,
+  "total": 113
+ },
+ "second_pass_rule": "all cases with any AMBIGUOUS line in pass 1 plus a deterministic 20% sample of the rest, sampled with random.Random(seed) over sorted case_id order (seed f3d72dd46013a779)",
+ "sample_seed": "f3d72dd46013a779",
+ "cases": [
+  {
+   "case_id": "nat-algorithm-python-hidden-01",
+   "scenario": "ns-algorithm-python",
+   "code_points": 986,
+   "line_count": 30,
+   "crlf_normalized": false,
+   "status": "LABELED",
+   "final_category_line_counts": {
+    "DELIMITER_WHITESPACE_NEUTRAL": 4,
+    "GENUINE_PROSE": 12,
+    "STRUCTURAL_PROTECT": 14
+   },
+   "ambiguous_lines": 0,
+   "second_pass": false,
+   "second_pass_reason": null,
+   "agreement": "single_pass",
+   "disagreement_line_span_count": 0
+  },
+  {
+   "case_id": "nat-algorithm-python-hidden-02",
+   "scenario": "ns-algorithm-python",
+   "code_points": 1140,
+   "line_count": 33,
+   "crlf_normalized": false,
+   "status": "LABELED",
+   "final_category_line_counts": {
+    "DELIMITER_WHITESPACE_NEUTRAL": 4,
+    "GENUINE_PROSE": 12,
+    "STRUCTURAL_PROTECT": 17
+   },
+   "ambiguous_lines": 0,
+   "second_pass": false,
+   "second_pass_reason": null,
+   "agreement": "single_pass",
+   "disagreement_line_span_count": 0
+  },
+  {
+   "case_id": "nat-algorithm-python-hidden-03",
+   "scenario": "ns-algorithm-python",
+   "code_points": 1078,
+   "line_count": 30,
+   "crlf_normalized": false,
+   "status": "LABELED",
+   "final_category_line_counts": {
+    "DELIMITER_WHITESPACE_NEUTRAL": 5,
+    "GENUINE_PROSE": 7,
+    "STRUCTURAL_PROTECT": 18
+   },
+   "ambiguous_lines": 0,
+   "second_pass": false,
+   "second_pass_reason": null,
+   "agreement": "single_pass",
+   "disagreement_line_span_count": 0
+  },
+  {
+   "case_id": "nat-algorithm-python-hidden-04",
+   "scenario": "ns-algorithm-python",
+   "code_points": 1214,
+   "line_count": 32,
+   "crlf_normalized": false,
+   "status": "LABELED",
+   "final_category_line_counts": {
+    "AMBIGUOUS": 4,
+    "DELIMITER_WHITESPACE_NEUTRAL": 4,
+    "GENUINE_PROSE": 6,
+    "STRUCTURAL_PROTECT": 18
+   },
+   "ambiguous_lines": 4,
+   "second_pass": true,
+   "second_pass_reason": "ambiguous",
+   "agreement": "disagreement_reconciled",
+   "disagreement_line_span_count": 1
+  },
+  {
+   "case_id": "nat-api-reference-hidden-01",
+   "scenario": "ns-api-reference",
+   "code_points": 1236,
+   "line_count": 36,
+   "crlf_normalized": false,
+   "status": "LABELED",
+   "final_category_line_counts": {
+    "DELIMITER_WHITESPACE_NEUTRAL": 9,
+    "GENUINE_PROSE": 15,
+    "STRUCTURAL_PROTECT": 12
+   },
+   "ambiguous_lines": 0,
+   "second_pass": false,
+   "second_pass_reason": null,
+   "agreement": "single_pass",
+   "disagreement_line_span_count": 0
+  },
+  {
+   "case_id": "nat-api-reference-hidden-02",
+   "scenario": "ns-api-reference",
+   "code_points": 1152,
+   "line_count": 34,
+   "crlf_normalized": false,
+   "status": "LABELED",
+   "final_category_line_counts": {
+    "AMBIGUOUS": 3,
+    "DELIMITER_WHITESPACE_NEUTRAL": 7,
+    "GENUINE_PROSE": 10,
+    "STRUCTURAL_PROTECT": 14
+   },
+   "ambiguous_lines": 3,
+   "second_pass": true,
+   "second_pass_reason": "ambiguous",
+   "agreement": "disagreement_reconciled",
+   "disagreement_line_span_count": 1
+  },
+  {
+   "case_id": "nat-api-reference-hidden-03",
+   "scenario": "ns-api-reference",
+   "code_points": 1322,
+   "line_count": 37,
+   "crlf_normalized": false,
+   "status": "LABELED",
+   "final_category_line_counts": {
+    "DELIMITER_WHITESPACE_NEUTRAL": 8,
+    "GENUINE_PROSE": 15,
+    "STRUCTURAL_PROTECT": 14
+   },
+   "ambiguous_lines": 0,
+   "second_pass": false,
+   "second_pass_reason": null,
+   "agreement": "single_pass",
+   "disagreement_line_span_count": 0
+  },
+  {
+   "case_id": "nat-api-reference-hidden-04",
+   "scenario": "ns-api-reference",
+   "code_points": 860,
+   "line_count": 27,
+   "crlf_normalized": false,
+   "status": "LABELED",
+   "final_category_line_counts": {
+    "DELIMITER_WHITESPACE_NEUTRAL": 6,
+    "GENUINE_PROSE": 8,
+    "STRUCTURAL_PROTECT": 13
+   },
+   "ambiguous_lines": 0,
+   "second_pass": false,
+   "second_pass_reason": null,
+   "agreement": "single_pass",
+   "disagreement_line_span_count": 0
+  },
+  {
+   "case_id": "nat-changelog-hidden-01",
+   "scenario": "ns-changelog",
+   "code_points": 1289,
+   "line_count": 26,
+   "crlf_normalized": false,
+   "status": "LABELED",
+   "final_category_line_counts": {
+    "AMBIGUOUS": 15,
+    "DELIMITER_WHITESPACE_NEUTRAL": 5,
+    "GENUINE_PROSE": 1,
+    "STRUCTURAL_PROTECT": 5
+   },
+   "ambiguous_lines": 15,
+   "second_pass": true,
+   "second_pass_reason": "ambiguous",
+   "agreement": "disagreement_reconciled",
+   "disagreement_line_span_count": 4
+  },
+  {
+   "case_id": "nat-changelog-hidden-02",
+   "scenario": "ns-changelog",
+   "code_points": 1337,
+   "line_count": 28,
+   "crlf_normalized": false,
+   "status": "LABELED",
+   "final_category_line_counts": {
+    "AMBIGUOUS": 15,
+    "DELIMITER_WHITESPACE_NEUTRAL": 5,
+    "GENUINE_PROSE": 3,
+    "STRUCTURAL_PROTECT": 5
+   },
+   "ambiguous_lines": 15,
+   "second_pass": true,
+   "second_pass_reason": "ambiguous",
+   "agreement": "disagreement_reconciled",
+   "disagreement_line_span_count": 3
+  },
+  {
+   "case_id": "nat-changelog-hidden-03",
+   "scenario": "ns-changelog",
+   "code_points": 912,
+   "line_count": 20,
+   "crlf_normalized": false,
+   "status": "LABELED",
+   "final_category_line_counts": {
+    "AMBIGUOUS": 6,
+    "DELIMITER_WHITESPACE_NEUTRAL": 4,
+    "GENUINE_PROSE": 8,
+    "MACHINE_SIGNIFICANT_RESIDUAL": 2
+   },
+   "ambiguous_lines": 6,
+   "second_pass": true,
+   "second_pass_reason": "ambiguous",
+   "agreement": "disagreement_reconciled",
+   "disagreement_line_span_count": 3
+  },
+  {
+   "case_id": "nat-changelog-hidden-04",
+   "scenario": "ns-changelog",
+   "code_points": 1130,
+   "line_count": 19,
+   "crlf_normalized": false,
+   "status": "LABELED",
+   "final_category_line_counts": {
+    "AMBIGUOUS": 5,
+    "DELIMITER_WHITESPACE_NEUTRAL": 4,
+    "GENUINE_PROSE": 9,
+    "STRUCTURAL_PROTECT": 1
+   },
+   "ambiguous_lines": 5,
+   "second_pass": true,
+   "second_pass_reason": "ambiguous",
+   "agreement": "disagreement_reconciled",
+   "disagreement_line_span_count": 2
+  },
+  {
+   "case_id": "nat-changelog-hidden-05",
+   "scenario": "ns-changelog",
+   "code_points": 1169,
+   "line_count": 24,
+   "crlf_normalized": false,
+   "status": "LABELED",
+   "final_category_line_counts": {
+    "AMBIGUOUS": 15,
+    "DELIMITER_WHITESPACE_NEUTRAL": 4,
+    "STRUCTURAL_PROTECT": 5
+   },
+   "ambiguous_lines": 15,
+   "second_pass": true,
+   "second_pass_reason": "ambiguous",
+   "agreement": "disagreement_reconciled",
+   "disagreement_line_span_count": 6
+  },
+  {
+   "case_id": "nat-changelog-hidden-06",
+   "scenario": "ns-changelog",
+   "code_points": 861,
+   "line_count": 17,
+   "crlf_normalized": false,
+   "status": "LABELED",
+   "final_category_line_counts": {
+    "AMBIGUOUS": 12,
+    "DELIMITER_WHITESPACE_NEUTRAL": 4,
+    "GENUINE_PROSE": 1
+   },
+   "ambiguous_lines": 12,
+   "second_pass": true,
+   "second_pass_reason": "ambiguous",
+   "agreement": "disagreement_reconciled",
+   "disagreement_line_span_count": 6
+  },
+  {
+   "case_id": "nat-comparison-table-hidden-01",
+   "scenario": "ns-comparison-table",
+   "code_points": 835,
+   "line_count": 22,
+   "crlf_normalized": false,
+   "status": "LABELED",
+   "final_category_line_counts": {
+    "AMBIGUOUS": 6,
+    "DELIMITER_WHITESPACE_NEUTRAL": 4,
+    "GENUINE_PROSE": 6,
+    "STRUCTURAL_PROTECT": 6
+   },
+   "ambiguous_lines": 6,
+   "second_pass": true,
+   "second_pass_reason": "deterministic-sample",
+   "agreement": "disagreement_reconciled",
+   "disagreement_line_span_count": 1
+  },
+  {
+   "case_id": "nat-comparison-table-hidden-02",
+   "scenario": "ns-comparison-table",
+   "code_points": 1230,
+   "line_count": 13,
+   "crlf_normalized": false,
+   "status": "LABELED",
+   "final_category_line_counts": {
+    "AMBIGUOUS": 2,
+    "DELIMITER_WHITESPACE_NEUTRAL": 4,
+    "GENUINE_PROSE": 5,
+    "STRUCTURAL_PROTECT": 2
+   },
+   "ambiguous_lines": 2,
+   "second_pass": true,
+   "second_pass_reason": "ambiguous",
+   "agreement": "disagreement_reconciled",
+   "disagreement_line_span_count": 1
+  },
+  {
+   "case_id": "nat-comparison-table-hidden-03",
+   "scenario": "ns-comparison-table",
+   "code_points": 1027,
+   "line_count": 19,
+   "crlf_normalized": false,
+   "status": "LABELED",
+   "final_category_line_counts": {
+    "AMBIGUOUS": 5,
+    "DELIMITER_WHITESPACE_NEUTRAL": 4,
+    "GENUINE_PROSE": 10
+   },
+   "ambiguous_lines": 5,
+   "second_pass": true,
+   "second_pass_reason": "ambiguous",
+   "agreement": "identical",
+   "disagreement_line_span_count": 0
+  },
+  {
+   "case_id": "nat-comparison-table-hidden-04",
+   "scenario": "ns-comparison-table",
+   "code_points": 991,
+   "line_count": 18,
+   "crlf_normalized": false,
+   "status": "LABELED",
+   "final_category_line_counts": {
+    "AMBIGUOUS": 2,
+    "DELIMITER_WHITESPACE_NEUTRAL": 4,
+    "GENUINE_PROSE": 10,
+    "STRUCTURAL_PROTECT": 2
+   },
+   "ambiguous_lines": 2,
+   "second_pass": true,
+   "second_pass_reason": "ambiguous",
+   "agreement": "disagreement_reconciled",
+   "disagreement_line_span_count": 1
+  },
+  {
+   "case_id": "nat-data-report-hidden-01",
+   "scenario": "ns-data-report",
+   "code_points": 907,
+   "line_count": 17,
+   "crlf_normalized": false,
+   "status": "LABELED",
+   "final_category_line_counts": {
+    "DELIMITER_WHITESPACE_NEUTRAL": 4,
+    "GENUINE_PROSE": 13
+   },
+   "ambiguous_lines": 0,
+   "second_pass": false,
+   "second_pass_reason": null,
+   "agreement": "single_pass",
+   "disagreement_line_span_count": 0
+  },
+  {
+   "case_id": "nat-data-report-hidden-02",
+   "scenario": "ns-data-report",
+   "code_points": 942,
+   "line_count": 16,
+   "crlf_normalized": false,
+   "status": "LABELED",
+   "final_category_line_counts": {
+    "AMBIGUOUS": 9,
+    "DELIMITER_WHITESPACE_NEUTRAL": 4,
+    "GENUINE_PROSE": 3
+   },
+   "ambiguous_lines": 9,
+   "second_pass": true,
+   "second_pass_reason": "deterministic-sample",
+   "agreement": "disagreement_reconciled",
+   "disagreement_line_span_count": 3
+  },
+  {
+   "case_id": "nat-data-report-hidden-03",
+   "scenario": "ns-data-report",
+   "code_points": 1011,
+   "line_count": 18,
+   "crlf_normalized": false,
+   "status": "LABELED",
+   "final_category_line_counts": {
+    "AMBIGUOUS": 1,
+    "DELIMITER_WHITESPACE_NEUTRAL": 4,
+    "GENUINE_PROSE": 13
+   },
+   "ambiguous_lines": 1,
+   "second_pass": true,
+   "second_pass_reason": "ambiguous",
+   "agreement": "disagreement_reconciled",
+   "disagreement_line_span_count": 1
+  },
+  {
+   "case_id": "nat-data-report-hidden-04",
+   "scenario": "ns-data-report",
+   "code_points": 1056,
+   "line_count": 14,
+   "crlf_normalized": false,
+   "status": "LABELED",
+   "final_category_line_counts": {
+    "AMBIGUOUS": 8,
+    "GENUINE_PROSE": 6
+   },
+   "ambiguous_lines": 8,
+   "second_pass": true,
+   "second_pass_reason": "ambiguous",
+   "agreement": "disagreement_reconciled",
+   "disagreement_line_span_count": 2
+  },
+  {
+   "case_id": "nat-data-report-hidden-05",
+   "scenario": "ns-data-report",
+   "code_points": 825,
+   "line_count": 18,
+   "crlf_normalized": false,
+   "status": "LABELED",
+   "final_category_line_counts": {
+    "AMBIGUOUS": 5,
+    "DELIMITER_WHITESPACE_NEUTRAL": 5,
+    "GENUINE_PROSE": 8
+   },
+   "ambiguous_lines": 5,
+   "second_pass": true,
+   "second_pass_reason": "ambiguous",
+   "agreement": "disagreement_reconciled",
+   "disagreement_line_span_count": 3
+  },
+  {
+   "case_id": "nat-data-report-hidden-06",
+   "scenario": "ns-data-report",
+   "code_points": 771,
+   "line_count": 21,
+   "crlf_normalized": false,
+   "status": "LABELED",
+   "final_category_line_counts": {
+    "AMBIGUOUS": 7,
+    "DELIMITER_WHITESPACE_NEUTRAL": 5,
+    "GENUINE_PROSE": 7,
+    "STRUCTURAL_PROTECT": 2
+   },
+   "ambiguous_lines": 7,
+   "second_pass": true,
+   "second_pass_reason": "deterministic-sample",
+   "agreement": "disagreement_reconciled",
+   "disagreement_line_span_count": 2
+  },
+  {
+   "case_id": "nat-glossary-entry-hidden-01",
+   "scenario": "ns-glossary-entry",
+   "code_points": 1158,
+   "line_count": 14,
+   "crlf_normalized": false,
+   "status": "LABELED",
+   "final_category_line_counts": {
+    "AMBIGUOUS": 9,
+    "GENUINE_PROSE": 5
+   },
+   "ambiguous_lines": 9,
+   "second_pass": true,
+   "second_pass_reason": "ambiguous",
+   "agreement": "disagreement_reconciled",
+   "disagreement_line_span_count": 2
+  },
+  {
+   "case_id": "nat-glossary-entry-hidden-02",
+   "scenario": "ns-glossary-entry",
+   "code_points": 998,
+   "line_count": 26,
+   "crlf_normalized": false,
+   "status": "LABELED",
+   "final_category_line_counts": {
+    "DELIMITER_WHITESPACE_NEUTRAL": 6,
+    "GENUINE_PROSE": 14,
+    "MACHINE_SIGNIFICANT_RESIDUAL": 1,
+    "STRUCTURAL_PROTECT": 5
+   },
+   "ambiguous_lines": 0,
+   "second_pass": false,
+   "second_pass_reason": null,
+   "agreement": "single_pass",
+   "disagreement_line_span_count": 0
+  },
+  {
+   "case_id": "nat-glossary-entry-hidden-03",
+   "scenario": "ns-glossary-entry",
+   "code_points": 916,
+   "line_count": 21,
+   "crlf_normalized": false,
+   "status": "LABELED",
+   "final_category_line_counts": {
+    "AMBIGUOUS": 5,
+    "GENUINE_PROSE": 9,
+    "STRUCTURAL_PROTECT": 7
+   },
+   "ambiguous_lines": 5,
+   "second_pass": true,
+   "second_pass_reason": "ambiguous",
+   "agreement": "disagreement_reconciled",
+   "disagreement_line_span_count": 4
+  },
+  {
+   "case_id": "nat-glossary-entry-hidden-04",
+   "scenario": "ns-glossary-entry",
+   "code_points": 783,
+   "line_count": 11,
+   "crlf_normalized": false,
+   "status": "LABELED",
+   "final_category_line_counts": {
+    "AMBIGUOUS": 4,
+    "GENUINE_PROSE": 7
+   },
+   "ambiguous_lines": 4,
+   "second_pass": true,
+   "second_pass_reason": "ambiguous",
+   "agreement": "disagreement_reconciled",
+   "disagreement_line_span_count": 1
+  },
+  {
+   "case_id": "nat-glossary-entry-hidden-05",
+   "scenario": "ns-glossary-entry",
+   "code_points": 1153,
+   "line_count": 18,
+   "crlf_normalized": false,
+   "status": "LABELED",
+   "final_category_line_counts": {
+    "DELIMITER_WHITESPACE_NEUTRAL": 4,
+    "GENUINE_PROSE": 10,
+    "STRUCTURAL_PROTECT": 4
+   },
+   "ambiguous_lines": 0,
+   "second_pass": false,
+   "second_pass_reason": null,
+   "agreement": "single_pass",
+   "disagreement_line_span_count": 0
+  },
+  {
+   "case_id": "nat-glossary-entry-hidden-06",
+   "scenario": "ns-glossary-entry",
+   "code_points": 1004,
+   "line_count": 1,
+   "crlf_normalized": false,
+   "status": "LABELED",
+   "final_category_line_counts": {
+    "AMBIGUOUS": 1
+   },
+   "ambiguous_lines": 1,
+   "second_pass": true,
+   "second_pass_reason": "ambiguous",
+   "agreement": "disagreement_reconciled",
+   "disagreement_line_span_count": 1
+  },
+  {
+   "case_id": "nat-json-config-hidden-01",
+   "scenario": "ns-json-config",
+   "code_points": 1460,
+   "line_count": 42,
+   "crlf_normalized": false,
+   "status": "LABELED",
+   "final_category_line_counts": {
+    "DELIMITER_WHITESPACE_NEUTRAL": 5,
+    "GENUINE_PROSE": 6,
+    "STRUCTURAL_PROTECT": 31
+   },
+   "ambiguous_lines": 0,
+   "second_pass": false,
+   "second_pass_reason": null,
+   "agreement": "single_pass",
+   "disagreement_line_span_count": 0
+  },
+  {
+   "case_id": "nat-json-config-hidden-02",
+   "scenario": "ns-json-config",
+   "code_points": 1705,
+   "line_count": 32,
+   "crlf_normalized": false,
+   "status": "LABELED",
+   "final_category_line_counts": {
+    "DELIMITER_WHITESPACE_NEUTRAL": 5,
+    "GENUINE_PROSE": 15,
+    "STRUCTURAL_PROTECT": 12
+   },
+   "ambiguous_lines": 0,
+   "second_pass": false,
+   "second_pass_reason": null,
+   "agreement": "single_pass",
+   "disagreement_line_span_count": 0
+  },
+  {
+   "case_id": "nat-json-config-hidden-03",
+   "scenario": "ns-json-config",
+   "code_points": 1272,
+   "line_count": 30,
+   "crlf_normalized": false,
+   "status": "LABELED",
+   "final_category_line_counts": {
+    "AMBIGUOUS": 12,
+    "DELIMITER_WHITESPACE_NEUTRAL": 4,
+    "GENUINE_PROSE": 1,
+    "STRUCTURAL_PROTECT": 13
+   },
+   "ambiguous_lines": 12,
+   "second_pass": true,
+   "second_pass_reason": "ambiguous",
+   "agreement": "disagreement_reconciled",
+   "disagreement_line_span_count": 4
+  },
+  {
+   "case_id": "nat-json-config-hidden-04",
+   "scenario": "ns-json-config",
+   "code_points": 1274,
+   "line_count": 37,
+   "crlf_normalized": false,
+   "status": "LABELED",
+   "final_category_line_counts": {
+    "DELIMITER_WHITESPACE_NEUTRAL": 5,
+    "GENUINE_PROSE": 15,
+    "STRUCTURAL_PROTECT": 17
+   },
+   "ambiguous_lines": 0,
+   "second_pass": false,
+   "second_pass_reason": null,
+   "agreement": "single_pass",
+   "disagreement_line_span_count": 0
+  },
+  {
+   "case_id": "nat-malformed-markdown-hidden-01",
+   "scenario": "ns-malformed-markdown",
+   "code_points": 995,
+   "line_count": 24,
+   "crlf_normalized": false,
+   "status": "LABELED",
+   "final_category_line_counts": {
+    "DELIMITER_WHITESPACE_NEUTRAL": 6,
+    "GENUINE_PROSE": 14,
+    "STRUCTURAL_PROTECT": 4
+   },
+   "ambiguous_lines": 0,
+   "second_pass": false,
+   "second_pass_reason": null,
+   "agreement": "single_pass",
+   "disagreement_line_span_count": 0
+  },
+  {
+   "case_id": "nat-malformed-markdown-hidden-02",
+   "scenario": "ns-malformed-markdown",
+   "code_points": 907,
+   "line_count": 24,
+   "crlf_normalized": false,
+   "status": "LABELED",
+   "final_category_line_counts": {
+    "DELIMITER_WHITESPACE_NEUTRAL": 6,
+    "GENUINE_PROSE": 14,
+    "STRUCTURAL_PROTECT": 4
+   },
+   "ambiguous_lines": 0,
+   "second_pass": true,
+   "second_pass_reason": "deterministic-sample",
+   "agreement": "identical",
+   "disagreement_line_span_count": 0
+  },
+  {
+   "case_id": "nat-malformed-markdown-hidden-03",
+   "scenario": "ns-malformed-markdown",
+   "code_points": 933,
+   "line_count": 20,
+   "crlf_normalized": false,
+   "status": "LABELED",
+   "final_category_line_counts": {
+    "AMBIGUOUS": 8,
+    "DELIMITER_WHITESPACE_NEUTRAL": 5,
+    "GENUINE_PROSE": 3,
+    "STRUCTURAL_PROTECT": 4
+   },
+   "ambiguous_lines": 8,
+   "second_pass": true,
+   "second_pass_reason": "ambiguous",
+   "agreement": "disagreement_reconciled",
+   "disagreement_line_span_count": 2
+  },
+  {
+   "case_id": "nat-malformed-markdown-hidden-04",
+   "scenario": "ns-malformed-markdown",
+   "code_points": 808,
+   "line_count": 27,
+   "crlf_normalized": false,
+   "status": "LABELED",
+   "final_category_line_counts": {
+    "AMBIGUOUS": 1,
+    "DELIMITER_WHITESPACE_NEUTRAL": 7,
+    "GENUINE_PROSE": 15,
+    "STRUCTURAL_PROTECT": 4
+   },
+   "ambiguous_lines": 1,
+   "second_pass": true,
+   "second_pass_reason": "ambiguous",
+   "agreement": "identical",
+   "disagreement_line_span_count": 0
+  },
+  {
+   "case_id": "nat-math-answer-hidden-01",
+   "scenario": "ns-math-answer",
+   "code_points": 1126,
+   "line_count": 33,
+   "crlf_normalized": false,
+   "status": "LABELED",
+   "final_category_line_counts": {
+    "DELIMITER_WHITESPACE_NEUTRAL": 4,
+    "GENUINE_PROSE": 15,
+    "STRUCTURAL_PROTECT": 14
+   },
+   "ambiguous_lines": 0,
+   "second_pass": false,
+   "second_pass_reason": null,
+   "agreement": "single_pass",
+   "disagreement_line_span_count": 0
+  },
+  {
+   "case_id": "nat-math-answer-hidden-02",
+   "scenario": "ns-math-answer",
+   "code_points": 1287,
+   "line_count": 35,
+   "crlf_normalized": false,
+   "status": "LABELED",
+   "final_category_line_counts": {
+    "DELIMITER_WHITESPACE_NEUTRAL": 3,
+    "GENUINE_PROSE": 14,
+    "STRUCTURAL_PROTECT": 18
+   },
+   "ambiguous_lines": 0,
+   "second_pass": false,
+   "second_pass_reason": null,
+   "agreement": "single_pass",
+   "disagreement_line_span_count": 0
+  },
+  {
+   "case_id": "nat-math-answer-hidden-03",
+   "scenario": "ns-math-answer",
+   "code_points": 905,
+   "line_count": 27,
+   "crlf_normalized": false,
+   "status": "LABELED",
+   "final_category_line_counts": {
+    "AMBIGUOUS": 8,
+    "DELIMITER_WHITESPACE_NEUTRAL": 5,
+    "GENUINE_PROSE": 6,
+    "STRUCTURAL_PROTECT": 8
+   },
+   "ambiguous_lines": 8,
+   "second_pass": true,
+   "second_pass_reason": "ambiguous",
+   "agreement": "disagreement_reconciled",
+   "disagreement_line_span_count": 5
+  },
+  {
+   "case_id": "nat-math-answer-hidden-04",
+   "scenario": "ns-math-answer",
+   "code_points": 914,
+   "line_count": 28,
+   "crlf_normalized": false,
+   "status": "LABELED",
+   "final_category_line_counts": {
+    "DELIMITER_WHITESPACE_NEUTRAL": 2,
+    "GENUINE_PROSE": 10,
+    "STRUCTURAL_PROTECT": 16
+   },
+   "ambiguous_lines": 0,
+   "second_pass": false,
+   "second_pass_reason": null,
+   "agreement": "single_pass",
+   "disagreement_line_span_count": 0
+  },
+  {
+   "case_id": "nat-md-documentation-hidden-01",
+   "scenario": "ns-md-documentation",
+   "code_points": 1097,
+   "line_count": 31,
+   "crlf_normalized": false,
+   "status": "LABELED",
+   "final_category_line_counts": {
+    "AMBIGUOUS": 16,
+    "DELIMITER_WHITESPACE_NEUTRAL": 7,
+    "GENUINE_PROSE": 2,
+    "STRUCTURAL_PROTECT": 6
+   },
+   "ambiguous_lines": 16,
+   "second_pass": true,
+   "second_pass_reason": "ambiguous",
+   "agreement": "disagreement_reconciled",
+   "disagreement_line_span_count": 3
+  },
+  {
+   "case_id": "nat-md-documentation-hidden-02",
+   "scenario": "ns-md-documentation",
+   "code_points": 1032,
+   "line_count": 29,
+   "crlf_normalized": false,
+   "status": "LABELED",
+   "final_category_line_counts": {
+    "DELIMITER_WHITESPACE_NEUTRAL": 9,
+    "GENUINE_PROSE": 17,
+    "STRUCTURAL_PROTECT": 3
+   },
+   "ambiguous_lines": 0,
+   "second_pass": false,
+   "second_pass_reason": null,
+   "agreement": "single_pass",
+   "disagreement_line_span_count": 0
+  },
+  {
+   "case_id": "nat-md-documentation-hidden-03",
+   "scenario": "ns-md-documentation",
+   "code_points": 909,
+   "line_count": 30,
+   "crlf_normalized": false,
+   "status": "LABELED",
+   "final_category_line_counts": {
+    "DELIMITER_WHITESPACE_NEUTRAL": 5,
+    "GENUINE_PROSE": 21,
+    "STRUCTURAL_PROTECT": 4
+   },
+   "ambiguous_lines": 0,
+   "second_pass": false,
+   "second_pass_reason": null,
+   "agreement": "single_pass",
+   "disagreement_line_span_count": 0
+  },
+  {
+   "case_id": "nat-md-documentation-hidden-04",
+   "scenario": "ns-md-documentation",
+   "code_points": 1236,
+   "line_count": 29,
+   "crlf_normalized": false,
+   "status": "LABELED",
+   "final_category_line_counts": {
+    "AMBIGUOUS": 21,
+    "DELIMITER_WHITESPACE_NEUTRAL": 5,
+    "GENUINE_PROSE": 1,
+    "STRUCTURAL_PROTECT": 2
+   },
+   "ambiguous_lines": 21,
+   "second_pass": true,
+   "second_pass_reason": "ambiguous",
+   "agreement": "disagreement_reconciled",
+   "disagreement_line_span_count": 7
+  },
+  {
+   "case_id": "nat-migration-notes-hidden-01",
+   "scenario": "ns-migration-notes",
+   "code_points": 1053,
+   "line_count": 31,
+   "crlf_normalized": false,
+   "status": "LABELED",
+   "final_category_line_counts": {
+    "AMBIGUOUS": 2,
+    "DELIMITER_WHITESPACE_NEUTRAL": 7,
+    "GENUINE_PROSE": 16,
+    "STRUCTURAL_PROTECT": 6
+   },
+   "ambiguous_lines": 2,
+   "second_pass": true,
+   "second_pass_reason": "ambiguous",
+   "agreement": "disagreement_reconciled",
+   "disagreement_line_span_count": 2
+  },
+  {
+   "case_id": "nat-migration-notes-hidden-02",
+   "scenario": "ns-migration-notes",
+   "code_points": 938,
+   "line_count": 32,
+   "crlf_normalized": false,
+   "status": "LABELED",
+   "final_category_line_counts": {
+    "GENUINE_PROSE": 29,
+    "STRUCTURAL_PROTECT": 3
+   },
+   "ambiguous_lines": 0,
+   "second_pass": false,
+   "second_pass_reason": null,
+   "agreement": "single_pass",
+   "disagreement_line_span_count": 0
+  },
+  {
+   "case_id": "nat-migration-notes-hidden-03",
+   "scenario": "ns-migration-notes",
+   "code_points": 869,
+   "line_count": 29,
+   "crlf_normalized": false,
+   "status": "LABELED",
+   "final_category_line_counts": {
+    "DELIMITER_WHITESPACE_NEUTRAL": 6,
+    "GENUINE_PROSE": 17,
+    "STRUCTURAL_PROTECT": 6
+   },
+   "ambiguous_lines": 0,
+   "second_pass": false,
+   "second_pass_reason": null,
+   "agreement": "single_pass",
+   "disagreement_line_span_count": 0
+  },
+  {
+   "case_id": "nat-migration-notes-hidden-04",
+   "scenario": "ns-migration-notes",
+   "code_points": 1045,
+   "line_count": 33,
+   "crlf_normalized": false,
+   "status": "LABELED",
+   "final_category_line_counts": {
+    "DELIMITER_WHITESPACE_NEUTRAL": 7,
+    "GENUINE_PROSE": 17,
+    "STRUCTURAL_PROTECT": 9
+   },
+   "ambiguous_lines": 0,
+   "second_pass": false,
+   "second_pass_reason": null,
+   "agreement": "single_pass",
+   "disagreement_line_span_count": 0
+  },
+  {
+   "case_id": "nat-migration-notes-hidden-05",
+   "scenario": "ns-migration-notes",
+   "code_points": 909,
+   "line_count": 21,
+   "crlf_normalized": false,
+   "status": "LABELED",
+   "final_category_line_counts": {
+    "AMBIGUOUS": 5,
+    "DELIMITER_WHITESPACE_NEUTRAL": 4,
+    "GENUINE_PROSE": 7,
+    "STRUCTURAL_PROTECT": 5
+   },
+   "ambiguous_lines": 5,
+   "second_pass": true,
+   "second_pass_reason": "ambiguous",
+   "agreement": "disagreement_reconciled",
+   "disagreement_line_span_count": 1
+  },
+  {
+   "case_id": "nat-migration-notes-hidden-06",
+   "scenario": "ns-migration-notes",
+   "code_points": 1033,
+   "line_count": 35,
+   "crlf_normalized": false,
+   "status": "LABELED",
+   "final_category_line_counts": {
+    "DELIMITER_WHITESPACE_NEUTRAL": 6,
+    "GENUINE_PROSE": 20,
+    "STRUCTURAL_PROTECT": 9
+   },
+   "ambiguous_lines": 0,
+   "second_pass": false,
+   "second_pass_reason": null,
+   "agreement": "single_pass",
+   "disagreement_line_span_count": 0
+  },
+  {
+   "case_id": "nat-qa-answer-hidden-01",
+   "scenario": "ns-qa-answer",
+   "code_points": 1189,
+   "line_count": 28,
+   "crlf_normalized": false,
+   "status": "LABELED",
+   "final_category_line_counts": {
+    "AMBIGUOUS": 8,
+    "DELIMITER_WHITESPACE_NEUTRAL": 5,
+    "GENUINE_PROSE": 6,
+    "STRUCTURAL_PROTECT": 9
+   },
+   "ambiguous_lines": 8,
+   "second_pass": true,
+   "second_pass_reason": "ambiguous",
+   "agreement": "disagreement_reconciled",
+   "disagreement_line_span_count": 4
+  },
+  {
+   "case_id": "nat-qa-answer-hidden-02",
+   "scenario": "ns-qa-answer",
+   "code_points": 1328,
+   "line_count": 34,
+   "crlf_normalized": false,
+   "status": "LABELED",
+   "final_category_line_counts": {
+    "AMBIGUOUS": 5,
+    "DELIMITER_WHITESPACE_NEUTRAL": 5,
+    "GENUINE_PROSE": 7,
+    "STRUCTURAL_PROTECT": 17
+   },
+   "ambiguous_lines": 5,
+   "second_pass": true,
+   "second_pass_reason": "ambiguous",
+   "agreement": "disagreement_reconciled",
+   "disagreement_line_span_count": 3
+  },
+  {
+   "case_id": "nat-qa-answer-hidden-03",
+   "scenario": "ns-qa-answer",
+   "code_points": 944,
+   "line_count": 21,
+   "crlf_normalized": false,
+   "status": "LABELED",
+   "final_category_line_counts": {
+    "AMBIGUOUS": 2,
+    "DELIMITER_WHITESPACE_NEUTRAL": 3,
+    "GENUINE_PROSE": 9,
+    "STRUCTURAL_PROTECT": 7
+   },
+   "ambiguous_lines": 2,
+   "second_pass": true,
+   "second_pass_reason": "ambiguous",
+   "agreement": "disagreement_reconciled",
+   "disagreement_line_span_count": 2
+  },
+  {
+   "case_id": "nat-qa-answer-hidden-04",
+   "scenario": "ns-qa-answer",
+   "code_points": 1075,
+   "line_count": 20,
+   "crlf_normalized": false,
+   "status": "LABELED",
+   "final_category_line_counts": {
+    "GENUINE_PROSE": 10,
+    "STRUCTURAL_PROTECT": 10
+   },
+   "ambiguous_lines": 0,
+   "second_pass": false,
+   "second_pass_reason": null,
+   "agreement": "single_pass",
+   "disagreement_line_span_count": 0
+  },
+  {
+   "case_id": "nat-qa-answer-hidden-05",
+   "scenario": "ns-qa-answer",
+   "code_points": 1282,
+   "line_count": 30,
+   "crlf_normalized": false,
+   "status": "LABELED",
+   "final_category_line_counts": {
+    "DELIMITER_WHITESPACE_NEUTRAL": 5,
+    "GENUINE_PROSE": 11,
+    "STRUCTURAL_PROTECT": 14
+   },
+   "ambiguous_lines": 0,
+   "second_pass": false,
+   "second_pass_reason": null,
+   "agreement": "single_pass",
+   "disagreement_line_span_count": 0
+  },
+  {
+   "case_id": "nat-qa-answer-hidden-06",
+   "scenario": "ns-qa-answer",
+   "code_points": 1091,
+   "line_count": 26,
+   "crlf_normalized": false,
+   "status": "LABELED",
+   "final_category_line_counts": {
+    "AMBIGUOUS": 9,
+    "DELIMITER_WHITESPACE_NEUTRAL": 5,
+    "GENUINE_PROSE": 2,
+    "STRUCTURAL_PROTECT": 10
+   },
+   "ambiguous_lines": 9,
+   "second_pass": true,
+   "second_pass_reason": "deterministic-sample",
+   "agreement": "disagreement_reconciled",
+   "disagreement_line_span_count": 5
+  },
+  {
+   "case_id": "nat-table-equations-hidden-01",
+   "scenario": "ns-table-equations",
+   "code_points": 885,
+   "line_count": 19,
+   "crlf_normalized": false,
+   "status": "LABELED",
+   "final_category_line_counts": {
+    "DELIMITER_WHITESPACE_NEUTRAL": 6,
+    "GENUINE_PROSE": 12,
+    "STRUCTURAL_PROTECT": 1
+   },
+   "ambiguous_lines": 0,
+   "second_pass": false,
+   "second_pass_reason": null,
+   "agreement": "single_pass",
+   "disagreement_line_span_count": 0
+  },
+  {
+   "case_id": "nat-table-equations-hidden-02",
+   "scenario": "ns-table-equations",
+   "code_points": 990,
+   "line_count": 22,
+   "crlf_normalized": false,
+   "status": "LABELED",
+   "final_category_line_counts": {
+    "DELIMITER_WHITESPACE_NEUTRAL": 6,
+    "GENUINE_PROSE": 10,
+    "STRUCTURAL_PROTECT": 6
+   },
+   "ambiguous_lines": 0,
+   "second_pass": false,
+   "second_pass_reason": null,
+   "agreement": "single_pass",
+   "disagreement_line_span_count": 0
+  },
+  {
+   "case_id": "nat-table-equations-hidden-03",
+   "scenario": "ns-table-equations",
+   "code_points": 1020,
+   "line_count": 19,
+   "crlf_normalized": false,
+   "status": "LABELED",
+   "final_category_line_counts": {
+    "DELIMITER_WHITESPACE_NEUTRAL": 5,
+    "GENUINE_PROSE": 6,
+    "STRUCTURAL_PROTECT": 8
+   },
+   "ambiguous_lines": 0,
+   "second_pass": false,
+   "second_pass_reason": null,
+   "agreement": "single_pass",
+   "disagreement_line_span_count": 0
+  },
+  {
+   "case_id": "nat-table-equations-hidden-04",
+   "scenario": "ns-table-equations",
+   "code_points": 814,
+   "line_count": 23,
+   "crlf_normalized": false,
+   "status": "LABELED",
+   "final_category_line_counts": {
+    "DELIMITER_WHITESPACE_NEUTRAL": 4,
+    "GENUINE_PROSE": 13,
+    "STRUCTURAL_PROTECT": 6
+   },
+   "ambiguous_lines": 0,
+   "second_pass": false,
+   "second_pass_reason": null,
+   "agreement": "single_pass",
+   "disagreement_line_span_count": 0
+  },
+  {
+   "case_id": "nat-technical-manual-hidden-01",
+   "scenario": "ns-technical-manual",
+   "code_points": 1193,
+   "line_count": 24,
+   "crlf_normalized": false,
+   "status": "LABELED",
+   "final_category_line_counts": {
+    "AMBIGUOUS": 11,
+    "DELIMITER_WHITESPACE_NEUTRAL": 6,
+    "GENUINE_PROSE": 4,
+    "STRUCTURAL_PROTECT": 3
+   },
+   "ambiguous_lines": 11,
+   "second_pass": true,
+   "second_pass_reason": "ambiguous",
+   "agreement": "disagreement_reconciled",
+   "disagreement_line_span_count": 1
+  },
+  {
+   "case_id": "nat-technical-manual-hidden-02",
+   "scenario": "ns-technical-manual",
+   "code_points": 1062,
+   "line_count": 16,
+   "crlf_normalized": false,
+   "status": "LABELED",
+   "final_category_line_counts": {
+    "AMBIGUOUS": 13,
+    "DELIMITER_WHITESPACE_NEUTRAL": 3
+   },
+   "ambiguous_lines": 13,
+   "second_pass": true,
+   "second_pass_reason": "ambiguous",
+   "agreement": "disagreement_reconciled",
+   "disagreement_line_span_count": 3
+  },
+  {
+   "case_id": "nat-technical-manual-hidden-03",
+   "scenario": "ns-technical-manual",
+   "code_points": 1138,
+   "line_count": 19,
+   "crlf_normalized": false,
+   "status": "LABELED",
+   "final_category_line_counts": {
+    "AMBIGUOUS": 13,
+    "DELIMITER_WHITESPACE_NEUTRAL": 4,
+    "GENUINE_PROSE": 2
+   },
+   "ambiguous_lines": 13,
+   "second_pass": true,
+   "second_pass_reason": "ambiguous",
+   "agreement": "disagreement_reconciled",
+   "disagreement_line_span_count": 1
+  },
+  {
+   "case_id": "nat-technical-manual-hidden-04",
+   "scenario": "ns-technical-manual",
+   "code_points": 913,
+   "line_count": 17,
+   "crlf_normalized": false,
+   "status": "LABELED",
+   "final_category_line_counts": {
+    "AMBIGUOUS": 11,
+    "DELIMITER_WHITESPACE_NEUTRAL": 4,
+    "GENUINE_PROSE": 2
+   },
+   "ambiguous_lines": 11,
+   "second_pass": true,
+   "second_pass_reason": "deterministic-sample",
+   "agreement": "disagreement_reconciled",
+   "disagreement_line_span_count": 4
+  },
+  {
+   "case_id": "nat-troubleshooting-hidden-01",
+   "scenario": "ns-troubleshooting",
+   "code_points": 1385,
+   "line_count": 36,
+   "crlf_normalized": false,
+   "status": "LABELED",
+   "final_category_line_counts": {
+    "AMBIGUOUS": 10,
+    "DELIMITER_WHITESPACE_NEUTRAL": 7,
+    "GENUINE_PROSE": 7,
+    "STRUCTURAL_PROTECT": 12
+   },
+   "ambiguous_lines": 10,
+   "second_pass": true,
+   "second_pass_reason": "ambiguous",
+   "agreement": "disagreement_reconciled",
+   "disagreement_line_span_count": 2
+  },
+  {
+   "case_id": "nat-troubleshooting-hidden-02",
+   "scenario": "ns-troubleshooting",
+   "code_points": 1082,
+   "line_count": 28,
+   "crlf_normalized": false,
+   "status": "LABELED",
+   "final_category_line_counts": {
+    "AMBIGUOUS": 6,
+    "DELIMITER_WHITESPACE_NEUTRAL": 6,
+    "GENUINE_PROSE": 6,
+    "STRUCTURAL_PROTECT": 10
+   },
+   "ambiguous_lines": 6,
+   "second_pass": true,
+   "second_pass_reason": "ambiguous",
+   "agreement": "disagreement_reconciled",
+   "disagreement_line_span_count": 1
+  },
+  {
+   "case_id": "nat-troubleshooting-hidden-03",
+   "scenario": "ns-troubleshooting",
+   "code_points": 1043,
+   "line_count": 26,
+   "crlf_normalized": false,
+   "status": "LABELED",
+   "final_category_line_counts": {
+    "AMBIGUOUS": 10,
+    "DELIMITER_WHITESPACE_NEUTRAL": 4,
+    "GENUINE_PROSE": 5,
+    "STRUCTURAL_PROTECT": 7
+   },
+   "ambiguous_lines": 10,
+   "second_pass": true,
+   "second_pass_reason": "deterministic-sample",
+   "agreement": "disagreement_reconciled",
+   "disagreement_line_span_count": 2
+  },
+  {
+   "case_id": "nat-troubleshooting-hidden-04",
+   "scenario": "ns-troubleshooting",
+   "code_points": 1147,
+   "line_count": 25,
+   "crlf_normalized": false,
+   "status": "LABELED",
+   "final_category_line_counts": {
+    "AMBIGUOUS": 10,
+    "GENUINE_PROSE": 6,
+    "STRUCTURAL_PROTECT": 9
+   },
+   "ambiguous_lines": 10,
+   "second_pass": true,
+   "second_pass_reason": "ambiguous",
+   "agreement": "disagreement_reconciled",
+   "disagreement_line_span_count": 2
+  }
+ ],
+ "adjudication_failed": {
+  "count": 0,
+  "case_ids": []
+ },
+ "final_category_line_totals": {
+  "AMBIGUOUS": 200,
+  "DELIMITER_WHITESPACE_NEUTRAL": 0,
+  "GENUINE_PROSE": 326,
+  "MACHINE_SIGNIFICANT_RESIDUAL": 0,
+  "STRUCTURAL_PROTECT": 399
+ },
+ "reconciliation": {
+  "disagreement_reconciled": 39,
+  "identical": 3,
+  "single_pass": 28
+ },
+ "reconciliation_disagreement_line_span_total": 102,
+ "cross_instrument_agreement": {
+  "rule": "disclosed line-aligned selection: per physical line, the most frequent category of the v1 per-code-point tiling over the line's code points (ties by the frozen vocabulary order); unassigned quote-tiling glue code points excluded from the vote; a line with no assigned code point, including an empty line = DELIMITER_WHITESPACE_NEUTRAL; v1 tilings re-validated with the FROZEN 008-f extract/validate functions (preserved observations, never labels)",
+  "v1_raw_files": 18,
+  "v1_valid_tilings": 17,
+  "comparable_cases": 17,
+  "strict_line_agreement_total": 334,
+  "ambiguous_tolerant_line_agreement_total": 418,
+  "lines_compared": 447,
+  "per_case": [
+   {
+    "case_id": "nat-algorithm-python-hidden-01",
+    "in_population": true,
+    "raw_file": "annotations/raw/nat-algorithm-python-hidden-01-pass1.txt",
+    "scenario": "ns-algorithm-python",
+    "v1_tiling_valid": true,
+    "line_count": 30,
+    "strict_line_agreement": 28,
+    "ambiguous_tolerant_line_agreement": 28
+   },
+   {
+    "case_id": "nat-algorithm-python-hidden-02",
+    "in_population": true,
+    "raw_file": "annotations/raw/nat-algorithm-python-hidden-02-pass1.txt",
+    "scenario": "ns-algorithm-python",
+    "v1_tiling_valid": true,
+    "line_count": 33,
+    "strict_line_agreement": 28,
+    "ambiguous_tolerant_line_agreement": 28
+   },
+   {
+    "case_id": "nat-algorithm-python-hidden-03",
+    "in_population": true,
+    "raw_file": "annotations/raw/nat-algorithm-python-hidden-03-pass1.txt",
+    "scenario": "ns-algorithm-python",
+    "v1_tiling_valid": true,
+    "line_count": 30,
+    "strict_line_agreement": 30,
+    "ambiguous_tolerant_line_agreement": 30
+   },
+   {
+    "case_id": "nat-algorithm-python-hidden-04",
+    "in_population": true,
+    "raw_file": "annotations/raw/nat-algorithm-python-hidden-04-pass1.txt",
+    "scenario": "ns-algorithm-python",
+    "v1_tiling_valid": true,
+    "line_count": 32,
+    "strict_line_agreement": 25,
+    "ambiguous_tolerant_line_agreement": 29
+   },
+   {
+    "case_id": "nat-api-reference-hidden-01",
+    "in_population": true,
+    "raw_file": "annotations/raw/nat-api-reference-hidden-01-pass1.txt",
+    "scenario": "ns-api-reference",
+    "v1_tiling_valid": true,
+    "line_count": 36,
+    "strict_line_agreement": 35,
+    "ambiguous_tolerant_line_agreement": 35
+   },
+   {
+    "case_id": "nat-api-reference-hidden-02",
+    "in_population": true,
+    "raw_file": "annotations/raw/nat-api-reference-hidden-02-pass1.txt",
+    "scenario": "ns-api-reference",
+    "v1_tiling_valid": true,
+    "line_count": 34,
+    "strict_line_agreement": 31,
+    "ambiguous_tolerant_line_agreement": 34
+   },
+   {
+    "case_id": "nat-api-reference-hidden-03",
+    "in_population": true,
+    "raw_file": "annotations/raw/nat-api-reference-hidden-03-pass1.txt",
+    "scenario": "ns-api-reference",
+    "v1_tiling_valid": true,
+    "line_count": 37,
+    "strict_line_agreement": 28,
+    "ambiguous_tolerant_line_agreement": 28
+   },
+   {
+    "case_id": "nat-api-reference-hidden-04",
+    "in_population": true,
+    "raw_file": "annotations/raw/nat-api-reference-hidden-04-pass1.txt",
+    "scenario": "ns-api-reference",
+    "v1_tiling_valid": true,
+    "line_count": 27,
+    "strict_line_agreement": 26,
+    "ambiguous_tolerant_line_agreement": 26
+   },
+   {
+    "case_id": "nat-changelog-hidden-01",
+    "in_population": true,
+    "raw_file": "annotations/raw/nat-changelog-hidden-01-pass1.txt",
+    "scenario": "ns-changelog",
+    "v1_tiling_valid": true,
+    "line_count": 26,
+    "strict_line_agreement": 11,
+    "ambiguous_tolerant_line_agreement": 26
+   },
+   {
+    "case_id": "nat-changelog-hidden-02",
+    "in_population": true,
+    "raw_file": "annotations/raw/nat-changelog-hidden-02-pass1.txt",
+    "scenario": "ns-changelog",
+    "v1_tiling_valid": true,
+    "line_count": 28,
+    "strict_line_agreement": 10,
+    "ambiguous_tolerant_line_agreement": 25
+   },
+   {
+    "case_id": "nat-changelog-hidden-03",
+    "in_population": true,
+    "raw_file": "annotations/raw/nat-changelog-hidden-03-pass1.txt",
+    "scenario": "ns-changelog",
+    "v1_tiling_valid": true,
+    "line_count": 20,
+    "strict_line_agreement": 13,
+    "ambiguous_tolerant_line_agreement": 18
+   },
+   {
+    "case_id": "nat-changelog-hidden-04",
+    "in_population": true,
+    "raw_file": "annotations/raw/nat-changelog-hidden-04-pass1.txt",
+    "scenario": "ns-changelog",
+    "v1_tiling_valid": true,
+    "line_count": 19,
+    "strict_line_agreement": 13,
+    "ambiguous_tolerant_line_agreement": 18
+   },
+   {
+    "case_id": "nat-changelog-hidden-05",
+    "in_population": true,
+    "raw_file": "annotations/raw/nat-changelog-hidden-05-pass1.txt",
+    "scenario": "ns-changelog",
+    "v1_tiling_valid": true,
+    "line_count": 24,
+    "strict_line_agreement": 12,
+    "ambiguous_tolerant_line_agreement": 24
+   },
+   {
+    "case_id": "nat-changelog-hidden-06",
+    "in_population": true,
+    "raw_file": "annotations/raw/nat-changelog-hidden-06-pass1.txt",
+    "scenario": "ns-changelog",
+    "v1_tiling_valid": true,
+    "line_count": 17,
+    "strict_line_agreement": 5,
+    "ambiguous_tolerant_line_agreement": 17
+   },
+   {
+    "case_id": "nat-comparison-table-hidden-01",
+    "in_population": true,
+    "raw_file": "annotations/raw/nat-comparison-table-hidden-01-pass1.txt",
+    "scenario": "ns-comparison-table",
+    "v1_tiling_valid": true,
+    "line_count": 22,
+    "strict_line_agreement": 16,
+    "ambiguous_tolerant_line_agreement": 22
+   },
+   {
+    "case_id": "nat-comparison-table-hidden-02",
+    "in_population": true,
+    "raw_file": "annotations/raw/nat-comparison-table-hidden-02-pass1.txt",
+    "scenario": "ns-comparison-table",
+    "v1_tiling_valid": true,
+    "line_count": 13,
+    "strict_line_agreement": 9,
+    "ambiguous_tolerant_line_agreement": 11
+   },
+   {
+    "case_id": "nat-comparison-table-hidden-03",
+    "in_population": true,
+    "raw_file": "annotations/raw/nat-comparison-table-hidden-03-pass1.txt",
+    "scenario": "ns-comparison-table",
+    "v1_tiling_valid": true,
+    "line_count": 19,
+    "strict_line_agreement": 14,
+    "ambiguous_tolerant_line_agreement": 19
+   },
+   {
+    "case_id": "nat-comparison-table-hidden-04",
+    "in_population": true,
+    "raw_file": "annotations/raw/nat-comparison-table-hidden-04-pass1.txt",
+    "scenario": "ns-comparison-table",
+    "v1_tiling_valid": false,
+    "v1_error": "start_text not found sequentially (tiling broken)"
+   }
+  ],
+  "note": "sanity statistic only (cross-instrument agreement); not acceptance evidence"
+ },
+ "file_manifest": {
+  "v1_raw_files": {
+   "source": "v1 private root (sealed by the committed v1 hidden manifest, sha256 8233bdcf683df8a97d62a375a6cf60d93b64aa6b7ecf22489ce9986333436a18)",
+   "files": [
+    {
+     "rel": "annotations/raw/nat-algorithm-python-hidden-01-pass1.txt",
+     "sha256": "7da6e003b90a76d37b2e61b5aaa460c10b8b1be1fc8a38b4f673c557b508f700",
+     "size": 7063
+    },
+    {
+     "rel": "annotations/raw/nat-algorithm-python-hidden-02-pass1.txt",
+     "sha256": "6b0a0119de3e6e5dae7ba736658a963b6c864336585aaf5f11a328c949ba210b",
+     "size": 3356
+    },
+    {
+     "rel": "annotations/raw/nat-algorithm-python-hidden-03-pass1.txt",
+     "sha256": "5f2fe5cb8f6ecdb0b1990f87026eae6a3aa936466ed650d763c662b2d69e9185",
+     "size": 718
+    },
+    {
+     "rel": "annotations/raw/nat-algorithm-python-hidden-04-pass1.txt",
+     "sha256": "e94302f4eb375fc7b7c2b388cb22ccd155b2ac5ae591796d9af926ee7df70659",
+     "size": 2014
+    },
+    {
+     "rel": "annotations/raw/nat-api-reference-hidden-01-pass1.txt",
+     "sha256": "4ca8dbcdafcbcbe0755bb4439dbb18f12d59929b57cb0a6276184dd8dc1f9509",
+     "size": 6265
+    },
+    {
+     "rel": "annotations/raw/nat-api-reference-hidden-02-pass1.txt",
+     "sha256": "5a4a81306d9a270f467638c181e4dc816a2e36590243a88a60be3d27337add54",
+     "size": 6283
+    },
+    {
+     "rel": "annotations/raw/nat-api-reference-hidden-03-pass1.txt",
+     "sha256": "c0a8a40219098bb92f6fe4708c8c54626334ab0236fee79f35c0852d489a543d",
+     "size": 3310
+    },
+    {
+     "rel": "annotations/raw/nat-api-reference-hidden-04-pass1.txt",
+     "sha256": "2c58c5d5aff0b431237ff80fe9beef075c118b31b1a9f63f5651b4c014cfc74c",
+     "size": 3744
+    },
+    {
+     "rel": "annotations/raw/nat-changelog-hidden-01-pass1.txt",
+     "sha256": "b1365b0f3006598973b6216ce72cc00d9862adbbdf3d57053e26b0bf82a8059f",
+     "size": 10932
+    },
+    {
+     "rel": "annotations/raw/nat-changelog-hidden-02-pass1.txt",
+     "sha256": "7abe1beea0c225a6ac97c8236fb317727c4c7c4f8455eb5eca22fed21004a010",
+     "size": 4662
+    },
+    {
+     "rel": "annotations/raw/nat-changelog-hidden-03-pass1.txt",
+     "sha256": "d9e3d18f5c895ca12acadcc645ce611d7773fa227a619ef5592d2aad03d6d882",
+     "size": 5797
+    },
+    {
+     "rel": "annotations/raw/nat-changelog-hidden-04-pass1.txt",
+     "sha256": "35df040421e3a0c9e3d12ccc4d4f71278da2983ccd8162834a88f041aaa02c80",
+     "size": 5447
+    },
+    {
+     "rel": "annotations/raw/nat-changelog-hidden-05-pass1.txt",
+     "sha256": "0ad2c11f6fc8800555503626223ea02a3573227bf0fd026067ade2000bcaa850",
+     "size": 4455
+    },
+    {
+     "rel": "annotations/raw/nat-changelog-hidden-06-pass1.txt",
+     "sha256": "bda5c1a36690e6410e229ffca75bf8b35cda3692636cfc5f76dbb3ae458ab59a",
+     "size": 3608
+    },
+    {
+     "rel": "annotations/raw/nat-comparison-table-hidden-01-pass1.txt",
+     "sha256": "fb650b8a18d4fc6ae666e5bd6eba53d06e8d282d122990baade90733e4415376",
+     "size": 6877
+    },
+    {
+     "rel": "annotations/raw/nat-comparison-table-hidden-02-pass1.txt",
+     "sha256": "a9d5ecd93e71b4d4c78e261bccb509377c13198c30a97cfa75ab15982f97a50d",
+     "size": 7412
+    },
+    {
+     "rel": "annotations/raw/nat-comparison-table-hidden-03-pass1.txt",
+     "sha256": "02790abc02bc0a072a4a7784fc1c8eb3973870dac51313b85bcb2f1ee9b5ea5e",
+     "size": 4971
+    },
+    {
+     "rel": "annotations/raw/nat-comparison-table-hidden-04-pass1.txt",
+     "sha256": "54f81e2cdda89d70dc9726e99a569ef548761a2b340ca0fc349772875a5537a7",
+     "size": 3439
+    }
+   ]
+  },
+  "v2_label_files": {
+   "source": "v2 private root (sealed by the committed v2 hidden manifest; see hidden-manifest-v2.json)",
+   "files": [
+    {
+     "case_id": "nat-algorithm-python-hidden-01",
+     "rel": "annotations/nat-algorithm-python-hidden-01.json",
+     "sha256": "b99aef275b634723d1041b43d041843ad661c26af5fbc72690fbbd62130de1f4",
+     "size": 3917
+    },
+    {
+     "case_id": "nat-algorithm-python-hidden-02",
+     "rel": "annotations/nat-algorithm-python-hidden-02.json",
+     "sha256": "ed5210a6d2204837a5ef1b1c8f0cbe0c1503fbca519c75477b960c86a95e23f6",
+     "size": 3992
+    },
+    {
+     "case_id": "nat-algorithm-python-hidden-03",
+     "rel": "annotations/nat-algorithm-python-hidden-03.json",
+     "sha256": "d9b87350471a681d1c433c1b043c0bb319e53133aee0cb2d984c4e7c3f27c62c",
+     "size": 4434
+    },
+    {
+     "case_id": "nat-algorithm-python-hidden-04",
+     "rel": "annotations/nat-algorithm-python-hidden-04.json",
+     "sha256": "49fafd874a157980dee21b38028b2293c06837f283aa8e304a35a8cc09ce3e9b",
+     "size": 6062
+    },
+    {
+     "case_id": "nat-api-reference-hidden-01",
+     "rel": "annotations/nat-api-reference-hidden-01.json",
+     "sha256": "ae728ff2b16fb742329f2675771cb7a1cba6b3c80def92d7d0927f584b76121c",
+     "size": 6438
+    },
+    {
+     "case_id": "nat-api-reference-hidden-02",
+     "rel": "annotations/nat-api-reference-hidden-02.json",
+     "sha256": "96eafe1bd8b1c58cc34e0d6663897949122e55a69b1f123003f529106c2b7f57",
+     "size": 7781
+    },
+    {
+     "case_id": "nat-api-reference-hidden-03",
+     "rel": "annotations/nat-api-reference-hidden-03.json",
+     "sha256": "624ed29ed07afb181da6daf01a0ace5bd4b62395921e681e3a7214ccba1d23f1",
+     "size": 5985
+    },
+    {
+     "case_id": "nat-api-reference-hidden-04",
+     "rel": "annotations/nat-api-reference-hidden-04.json",
+     "sha256": "b75c81c9be7e6a42113bb3be1045d1473fd5e95753ff1ec77110e8347230b390",
+     "size": 4808
+    },
+    {
+     "case_id": "nat-changelog-hidden-01",
+     "rel": "annotations/nat-changelog-hidden-01.json",
+     "sha256": "f05b021e2342e1933a65c1787c3f717426e7047c807b38528f3a7667687c098b",
+     "size": 6241
+    },
+    {
+     "case_id": "nat-changelog-hidden-02",
+     "rel": "annotations/nat-changelog-hidden-02.json",
+     "sha256": "baff90e0300f623df46d120001cbe12de5cc4d7043622bc584038e6733f98c14",
+     "size": 6372
+    },
+    {
+     "case_id": "nat-changelog-hidden-03",
+     "rel": "annotations/nat-changelog-hidden-03.json",
+     "sha256": "3a4963087dec525100c286deca22b670528c7dfd8145f122eaa9f2f4487b0c6a",
+     "size": 6794
+    },
+    {
+     "case_id": "nat-changelog-hidden-04",
+     "rel": "annotations/nat-changelog-hidden-04.json",
+     "sha256": "19e16b93120d561a486f78d89ebe33076510fa185119e5048504401a5f0e439e",
+     "size": 6764
+    },
+    {
+     "case_id": "nat-changelog-hidden-05",
+     "rel": "annotations/nat-changelog-hidden-05.json",
+     "sha256": "468e8a3755f126069f0cdc5801602e46824bd7b9534e4353271e05f477d4aa3c",
+     "size": 6686
+    },
+    {
+     "case_id": "nat-changelog-hidden-06",
+     "rel": "annotations/nat-changelog-hidden-06.json",
+     "sha256": "d6dc7235e905d33b7bbb801bcdefe69fa31071c566c9994a96a498048fe76186",
+     "size": 6162
+    },
+    {
+     "case_id": "nat-comparison-table-hidden-01",
+     "rel": "annotations/nat-comparison-table-hidden-01.json",
+     "sha256": "0e86cffd257fd768047676d3b201dbda81b737365712b1ae9a2c90bc8b0bc51f",
+     "size": 6003
+    },
+    {
+     "case_id": "nat-comparison-table-hidden-02",
+     "rel": "annotations/nat-comparison-table-hidden-02.json",
+     "sha256": "f13b1807deba72a37d8e51b3403304183d024a0b54deda571d17a5f7dd61c8dc",
+     "size": 5148
+    },
+    {
+     "case_id": "nat-comparison-table-hidden-03",
+     "rel": "annotations/nat-comparison-table-hidden-03.json",
+     "sha256": "674fe31df36db7fdee46af14e7a59394275bc083f2cd326b34467572ab442afa",
+     "size": 4812
+    },
+    {
+     "case_id": "nat-comparison-table-hidden-04",
+     "rel": "annotations/nat-comparison-table-hidden-04.json",
+     "sha256": "1760743ad395a3f98f01a759dcfabdb050c26b707c643190121e32f3ddfa957c",
+     "size": 5360
+    },
+    {
+     "case_id": "nat-data-report-hidden-01",
+     "rel": "annotations/nat-data-report-hidden-01.json",
+     "sha256": "b14c0faad8c43371a950de53d02c54bcbe851a84f8bb6b43703cd9680caad4b7",
+     "size": 3511
+    },
+    {
+     "case_id": "nat-data-report-hidden-02",
+     "rel": "annotations/nat-data-report-hidden-02.json",
+     "sha256": "aa19133784275225ed165fa9c40c2f69d3bdf5b1608bb76e0cd583f46358496b",
+     "size": 5384
+    },
+    {
+     "case_id": "nat-data-report-hidden-03",
+     "rel": "annotations/nat-data-report-hidden-03.json",
+     "sha256": "3b33e48c8d9801a90fe4b4050737ff7594952da0adff69104482f639bb78fb3f",
+     "size": 4965
+    },
+    {
+     "case_id": "nat-data-report-hidden-04",
+     "rel": "annotations/nat-data-report-hidden-04.json",
+     "sha256": "bab157740ca14d252537b7942a6936b7e569fc63ff076233786c3276c846a5a5",
+     "size": 2977
+    },
+    {
+     "case_id": "nat-data-report-hidden-05",
+     "rel": "annotations/nat-data-report-hidden-05.json",
+     "sha256": "65906e713b08aea471fa59e9aafec8fa7a8585c976f3ea1c14871120d70146c0",
+     "size": 6345
+    },
+    {
+     "case_id": "nat-data-report-hidden-06",
+     "rel": "annotations/nat-data-report-hidden-06.json",
+     "sha256": "01f3dd61604e399062811aa7a2fd0d73294b4977ff1fd3a51d28745b24f8717f",
+     "size": 6668
+    },
+    {
+     "case_id": "nat-glossary-entry-hidden-01",
+     "rel": "annotations/nat-glossary-entry-hidden-01.json",
+     "sha256": "7183eb0cd473a8bb8fe719f9c317d5ba55c6966417acd8bfb452ffdc557663e1",
+     "size": 3189
+    },
+    {
+     "case_id": "nat-glossary-entry-hidden-02",
+     "rel": "annotations/nat-glossary-entry-hidden-02.json",
+     "sha256": "9005589ad553458e7a6e06df05509da584f2e04e0d24d0a794c264bafbeb1b8c",
+     "size": 5088
+    },
+    {
+     "case_id": "nat-glossary-entry-hidden-03",
+     "rel": "annotations/nat-glossary-entry-hidden-03.json",
+     "sha256": "6731784a27cc31334a6272ee37deca98e9aa4e40ae1b6bf9dd4189d4e97d742c",
+     "size": 4271
+    },
+    {
+     "case_id": "nat-glossary-entry-hidden-04",
+     "rel": "annotations/nat-glossary-entry-hidden-04.json",
+     "sha256": "9ba24a1aa38e6c129f0110ae7112f1d8711d8a4b4a54a8d6c668b46d7aca15f5",
+     "size": 2888
+    },
+    {
+     "case_id": "nat-glossary-entry-hidden-05",
+     "rel": "annotations/nat-glossary-entry-hidden-05.json",
+     "sha256": "b2e93f3c8d103d6cceb13f39bddf4fd22fa07eb6166b9679b65289c7aba3e199",
+     "size": 4283
+    },
+    {
+     "case_id": "nat-glossary-entry-hidden-06",
+     "rel": "annotations/nat-glossary-entry-hidden-06.json",
+     "sha256": "f27f93f4aaf889a25c8acc8ec8b3748f33963644e543fed3af8fe03089721f50",
+     "size": 1660
+    },
+    {
+     "case_id": "nat-json-config-hidden-01",
+     "rel": "annotations/nat-json-config-hidden-01.json",
+     "sha256": "d0d60eb8124f283075057cd25a8418cda82cd08a585016a155762bf054a69e30",
+     "size": 5390
+    },
+    {
+     "case_id": "nat-json-config-hidden-02",
+     "rel": "annotations/nat-json-config-hidden-02.json",
+     "sha256": "90da479ec274a5c4c6179eb9e928d18edb506bb2bdf42178d0a24e552f94410d",
+     "size": 4427
+    },
+    {
+     "case_id": "nat-json-config-hidden-03",
+     "rel": "annotations/nat-json-config-hidden-03.json",
+     "sha256": "9611867dc296ffe4369572739d3be44332096c6cd10137ed3ebad3dbf6e7e124",
+     "size": 6140
+    },
+    {
+     "case_id": "nat-json-config-hidden-04",
+     "rel": "annotations/nat-json-config-hidden-04.json",
+     "sha256": "df507e1cc3779d6389bd618b8e19c04bf24018354c7f000c5eb5fb27e11ec873",
+     "size": 4998
+    },
+    {
+     "case_id": "nat-malformed-markdown-hidden-01",
+     "rel": "annotations/nat-malformed-markdown-hidden-01.json",
+     "sha256": "9d131a12d295af0693bd115e19e27ff590b9361ac5dc033a0a8611f58559d805",
+     "size": 4709
+    },
+    {
+     "case_id": "nat-malformed-markdown-hidden-02",
+     "rel": "annotations/nat-malformed-markdown-hidden-02.json",
+     "sha256": "094cd6800ebb923a9ba32277ae19cd5e0f863f31c72327e0ce1273ca8f1ef349",
+     "size": 6770
+    },
+    {
+     "case_id": "nat-malformed-markdown-hidden-03",
+     "rel": "annotations/nat-malformed-markdown-hidden-03.json",
+     "sha256": "88c68de3658cd12b1db00726afd5bacae2cacda6e6becf703d19fd046eeb0133",
+     "size": 5907
+    },
+    {
+     "case_id": "nat-malformed-markdown-hidden-04",
+     "rel": "annotations/nat-malformed-markdown-hidden-04.json",
+     "sha256": "cf5c0110846bf21d100c75fec4dd5b19be1a4f7f3ec1b1175a3cc0c6cdeb0778",
+     "size": 7550
+    },
+    {
+     "case_id": "nat-math-answer-hidden-01",
+     "rel": "annotations/nat-math-answer-hidden-01.json",
+     "sha256": "6214730697e03e39ee7e68bea51f2536a6395f9bfb925f599a804917c98b28c2",
+     "size": 5522
+    },
+    {
+     "case_id": "nat-math-answer-hidden-02",
+     "rel": "annotations/nat-math-answer-hidden-02.json",
+     "sha256": "90dca98953ef39a0b7630f4d5231fa0e2a81cc659ec7ecd774513d8e6e147d3c",
+     "size": 5331
+    },
+    {
+     "case_id": "nat-math-answer-hidden-03",
+     "rel": "annotations/nat-math-answer-hidden-03.json",
+     "sha256": "ca07aac87ec4a063047f9bf5a3d43a59343e6a0d30b380f67a7111a015d99af3",
+     "size": 7410
+    },
+    {
+     "case_id": "nat-math-answer-hidden-04",
+     "rel": "annotations/nat-math-answer-hidden-04.json",
+     "sha256": "fe4c016bc20d45279b84efc19faa5224f7a6b36c01af61ffc9734d26c3c315df",
+     "size": 4474
+    },
+    {
+     "case_id": "nat-md-documentation-hidden-01",
+     "rel": "annotations/nat-md-documentation-hidden-01.json",
+     "sha256": "6415e7678e5803b199f49f8630b3ebb38aa54a4a1bf3e1b44e59b1852fc26b8e",
+     "size": 7827
+    },
+    {
+     "case_id": "nat-md-documentation-hidden-02",
+     "rel": "annotations/nat-md-documentation-hidden-02.json",
+     "sha256": "c66e6b65aa9146050b9911feab7344416f2361327419446e4e0e920314ebf8fb",
+     "size": 6236
+    },
+    {
+     "case_id": "nat-md-documentation-hidden-03",
+     "rel": "annotations/nat-md-documentation-hidden-03.json",
+     "sha256": "eedf40f6db2a5d06be91dc3fa21623c3561e23cc79b561d6517f134f74c1a658",
+     "size": 4571
+    },
+    {
+     "case_id": "nat-md-documentation-hidden-04",
+     "rel": "annotations/nat-md-documentation-hidden-04.json",
+     "sha256": "ff4f3f67c2538e489302bcc66d187083a164b8a700aca24fccea1a23ffd9d937",
+     "size": 8287
+    },
+    {
+     "case_id": "nat-migration-notes-hidden-01",
+     "rel": "annotations/nat-migration-notes-hidden-01.json",
+     "sha256": "1b552e56f68b1f1df00ce8a95b595fde1048604ec54eb3e647c3b4fe1afde7ac",
+     "size": 8054
+    },
+    {
+     "case_id": "nat-migration-notes-hidden-02",
+     "rel": "annotations/nat-migration-notes-hidden-02.json",
+     "sha256": "2872cd14b19d966ad23b7eb5ffe3e2e711ffd4211d4b2fc96ddfbb11ec73cc75",
+     "size": 2132
+    },
+    {
+     "case_id": "nat-migration-notes-hidden-03",
+     "rel": "annotations/nat-migration-notes-hidden-03.json",
+     "sha256": "6ae67873340dd9db9e6a9cd00c8a8320dde99a3edf1a680d2a1156fcf3add548",
+     "size": 5261
+    },
+    {
+     "case_id": "nat-migration-notes-hidden-04",
+     "rel": "annotations/nat-migration-notes-hidden-04.json",
+     "sha256": "ff7574d1584480102dda086f5d4d8ddf8c58d529ea10ac877beb7dfd769b731a",
+     "size": 5619
+    },
+    {
+     "case_id": "nat-migration-notes-hidden-05",
+     "rel": "annotations/nat-migration-notes-hidden-05.json",
+     "sha256": "4a76b2a7efe493c34ee82e86dada86b116bc3853cb66bc9e8d2b48c7f30ef051",
+     "size": 5426
+    },
+    {
+     "case_id": "nat-migration-notes-hidden-06",
+     "rel": "annotations/nat-migration-notes-hidden-06.json",
+     "sha256": "ae5baa7fee351fc320c35d4b314a90ed6906229031185dc3c983991202e04708",
+     "size": 5180
+    },
+    {
+     "case_id": "nat-qa-answer-hidden-01",
+     "rel": "annotations/nat-qa-answer-hidden-01.json",
+     "sha256": "00a8b01c646224b31c493e73e317e3366582562538cc8c9d70e6fc6becbc6553",
+     "size": 7655
+    },
+    {
+     "case_id": "nat-qa-answer-hidden-02",
+     "rel": "annotations/nat-qa-answer-hidden-02.json",
+     "sha256": "1e82f34b8a280704a0c2b2bf381998b44a0ce3d5b5c0bb04c27bac2a7ace3f6d",
+     "size": 7817
+    },
+    {
+     "case_id": "nat-qa-answer-hidden-03",
+     "rel": "annotations/nat-qa-answer-hidden-03.json",
+     "sha256": "590f544832b327725a0a2ef2994c5aa0b7e2efcc8b8ea064f41ef58bd578bdb6",
+     "size": 5350
+    },
+    {
+     "case_id": "nat-qa-answer-hidden-04",
+     "rel": "annotations/nat-qa-answer-hidden-04.json",
+     "sha256": "51df9d8417834efaf1f71f53180d9e7888f65957493ee0d1d171d5787d63d553",
+     "size": 2363
+    },
+    {
+     "case_id": "nat-qa-answer-hidden-05",
+     "rel": "annotations/nat-qa-answer-hidden-05.json",
+     "sha256": "66c3e79b0b0563f3154333a74b791d406e919c6218551cd4bdaef66146fb4624",
+     "size": 4608
+    },
+    {
+     "case_id": "nat-qa-answer-hidden-06",
+     "rel": "annotations/nat-qa-answer-hidden-06.json",
+     "sha256": "b99125592055f3e243dab7e3f7b113879321e460637d849a6e76582cbc5f91cb",
+     "size": 6105
+    },
+    {
+     "case_id": "nat-table-equations-hidden-01",
+     "rel": "annotations/nat-table-equations-hidden-01.json",
+     "sha256": "1f735f61bdf401b3a3b39604b9a05e03fefd8858c772ac6675d5448aeeefe39f",
+     "size": 4587
+    },
+    {
+     "case_id": "nat-table-equations-hidden-02",
+     "rel": "annotations/nat-table-equations-hidden-02.json",
+     "sha256": "de5be66d854b50fb803115782e57f0f8c3e36969b833b734953f732407860bf4",
+     "size": 4893
+    },
+    {
+     "case_id": "nat-table-equations-hidden-03",
+     "rel": "annotations/nat-table-equations-hidden-03.json",
+     "sha256": "9e6c51b366540124c152e6e5c022a1594074cb7ff655a29cf2bf1e8e6d9cd4dc",
+     "size": 4151
+    },
+    {
+     "case_id": "nat-table-equations-hidden-04",
+     "rel": "annotations/nat-table-equations-hidden-04.json",
+     "sha256": "bcbb2d1b19bace84b6fce85c19683d739060b52fc288c53d5d5fc6f18e8a3655",
+     "size": 4166
+    },
+    {
+     "case_id": "nat-technical-manual-hidden-01",
+     "rel": "annotations/nat-technical-manual-hidden-01.json",
+     "sha256": "d4462103dde60326e59c9bc63c08fc06f8ef3383f86f20b14a672bff09792a89",
+     "size": 7174
+    },
+    {
+     "case_id": "nat-technical-manual-hidden-02",
+     "rel": "annotations/nat-technical-manual-hidden-02.json",
+     "sha256": "0c8a14f029808858d26a59a845aa66f49361760bb4cebffbb9b989627be3bee8",
+     "size": 4352
+    },
+    {
+     "case_id": "nat-technical-manual-hidden-03",
+     "rel": "annotations/nat-technical-manual-hidden-03.json",
+     "sha256": "dee9affcfba77a163557f4f1094b26cce925f48a87d8f4810ffa70d27eb6333c",
+     "size": 5662
+    },
+    {
+     "case_id": "nat-technical-manual-hidden-04",
+     "rel": "annotations/nat-technical-manual-hidden-04.json",
+     "sha256": "ed624562273eb0bf967746dedf05294834c3cb31f04b55e96ed5ae820bb800f9",
+     "size": 5492
+    },
+    {
+     "case_id": "nat-troubleshooting-hidden-01",
+     "rel": "annotations/nat-troubleshooting-hidden-01.json",
+     "sha256": "61e7e6b74d2800c8f8b58b9c77d91788b3ff955a0660538303c92a461a14ad63",
+     "size": 9495
+    },
+    {
+     "case_id": "nat-troubleshooting-hidden-02",
+     "rel": "annotations/nat-troubleshooting-hidden-02.json",
+     "sha256": "fd5f9aa6b4a86853fa0aeb43d2ec041610966d497dbfffb385290e117074748e",
+     "size": 6934
+    },
+    {
+     "case_id": "nat-troubleshooting-hidden-03",
+     "rel": "annotations/nat-troubleshooting-hidden-03.json",
+     "sha256": "0384faee7c3c5a02cb7edd7c32393ae61f5b636f49d67bcddfeedf89cefa9dac",
+     "size": 5966
+    },
+    {
+     "case_id": "nat-troubleshooting-hidden-04",
+     "rel": "annotations/nat-troubleshooting-hidden-04.json",
+     "sha256": "861f704d4266b2c15b3fc5dae242ec51bbb03b222701627c2b1e1a1f6ef20a0f",
+     "size": 4822
+    }
+   ]
+  }
+ },
+ "no_content": true,
+ "privacy": "case IDs, counts, categories, seeds and hashes only; no response text, no label content, no endpoint value, no bearer, no private paths"
+}

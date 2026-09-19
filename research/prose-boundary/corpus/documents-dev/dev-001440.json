@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-001440",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T11-interactions",
+ "byte_length": 724,
+ "cp_length": 705,
+ "sha256": "ffa8ea28218fc7ec6e690142b88c1eceacafb19e16c3b860362987a835536ed7",
+ "document": "`// Drugi neodvisni del (č, š, ž)`.\n```\n#include <string>\n// URL: https://primer.si/koda\n// Pot: src/modul.py, žlahtna\nstd::string vir() {\n    std::string url = \"https://primer.si/koda\";\n    std::string pot = \"docs/vir.txt\";\n    return url + \" \" + pot + \" (*test*)\";\n}\n# komentar z \\frac{a}{b}\n```\nPoskus, ki ga je vodila Nina, je potekal v majhni sobi. Lampa je gorela. Merilni senzor je oddajal tih zvok. Zapis je bil kratek: »Preprosto in toplo.« Zaključek je prišel zgodaj.\nAna si je za projekt »Miren dan« izbrala prenosnik, ki naj bi bil dovolj tih, da ga lahko odpre v knjižnici (tudi če baterija ni polna). V »Ponovni sinhronizaciji« se ji je obljubil mirnejši dan, če omrežje ne bo puščalo zamud.",
+ "components": [
+  {
+   "component_id": "comp-code-javascript-dev-0010",
+   "category": "code",
+   "start_byte": 0,
+   "end_byte": 37
+  },
+  {
+   "component_id": "comp-code-cpp-dev-0006",
+   "category": "code",
+   "start_byte": 39,
+   "end_byte": 301
+  },
+  {
+   "component_id": "comp-prose-science-dev-0009",
+   "category": "prose",
+   "start_byte": 302,
+   "end_byte": 485
+  },
+  {
+   "component_id": "comp-prose-computing-dev-0006",
+   "category": "prose",
+   "start_byte": 486,
+   "end_byte": 724
+  }
+ ]
+}

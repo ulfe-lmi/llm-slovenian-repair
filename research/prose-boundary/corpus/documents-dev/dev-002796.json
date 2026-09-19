@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-002796",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T3-prose-fenced-prose",
+ "byte_length": 982,
+ "cp_length": 953,
+ "sha256": "8663400db5934e41677e572e3e608037bad2c0bde374b2a1d89f86754dc5fa8c",
+ "document": "Pri izmišljenem projektu “Zvonovi Koroške” (tudi testni vnos) so ugotovili, da so verske zgradbe hranile spomine, ki so jih ljudje obvezno prenašali iz roda v rod. Kratek zapis o letnici 1680, dolg le 120 znakov, je bil označen kot sporen. Uradnik Miha je dodal, da je “povest” pogosto lažna, a vseeno živi v spominu. Zato so v bazi ohranili tri različne verzije (enkrat kratko, enkrat dolgo in enkrat prekrčeno), ki se med seboj ne ujemajo.\n```\nfn povzetek2(seStez: bool) -> String { /* Testni projekt Lipa: č, š, ž, **poudarek** in _podčrtano_ */ let razdelek2 = 2; let besedilo = format!(\"_Podčrtano_ ({} $, `{}`)\", razdelek2, \"ž\"); let pot = \"docs/vir.txt\"; let url = \"https://primer.si/koda\"; format!(\"{} | {} | {} | {}\", seStez, besedilo, pot, url) }\n```\nAna je v razredni testni delavnici najprej preverila, ali je sklep odprt (tako je ohišje varno), in šele nato prižgala majhno utripalko. V zapisniku je zapisala „Preizkus 2024 je brez napake.“",
+ "components": [
+  {
+   "component_id": "comp-prose-history-dev-0012",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 457
+  },
+  {
+   "component_id": "comp-code-rust-dev-0002",
+   "category": "code",
+   "start_byte": 458,
+   "end_byte": 782
+  },
+  {
+   "component_id": "comp-prose-electronics-dev-0001",
+   "category": "prose",
+   "start_byte": 783,
+   "end_byte": 982
+  }
+ ]
+}

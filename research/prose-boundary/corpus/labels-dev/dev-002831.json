@@ -1,0 +1,112 @@
+{
+ "doc_id": "dev-002831",
+ "byte_length": 1066,
+ "cp_length": 1040,
+ "regions": [
+  {
+   "start_byte": 0,
+   "end_byte": 2,
+   "start_cp": 0,
+   "end_cp": 2,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 2,
+   "end_byte": 524,
+   "start_cp": 2,
+   "end_cp": 514,
+   "component_id": "comp-prose-education-dev-0008",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 524,
+   "end_byte": 527,
+   "start_cp": 514,
+   "end_cp": 517,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 527,
+   "end_byte": 528,
+   "start_cp": 517,
+   "end_cp": 518,
+   "component_id": "comp-code-rust-dev-0005",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 528,
+   "end_byte": 591,
+   "start_cp": 518,
+   "end_cp": 578,
+   "component_id": "comp-code-rust-dev-0005",
+   "category": "code",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 591,
+   "end_byte": 592,
+   "start_cp": 578,
+   "end_cp": 579,
+   "component_id": "comp-code-rust-dev-0005",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 592,
+   "end_byte": 595,
+   "start_cp": 579,
+   "end_cp": 582,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 595,
+   "end_byte": 841,
+   "start_cp": 582,
+   "end_cp": 819,
+   "component_id": "comp-prose-everyday-advice-dev-0002",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 841,
+   "end_byte": 844,
+   "start_cp": 819,
+   "end_cp": 822,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 844,
+   "end_byte": 1066,
+   "start_cp": 822,
+   "end_cp": 1040,
+   "component_id": "comp-prose-travel-dev-0009",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  }
+ ],
+ "invariants": {
+  "tiling_complete": true,
+  "no_contradictory_overlaps": true,
+  "cp_range_exact": true
+ }
+}

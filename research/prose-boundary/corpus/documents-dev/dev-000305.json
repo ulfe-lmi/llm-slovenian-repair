@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-000305",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T9-prose-malformed-prose",
+ "byte_length": 611,
+ "cp_length": 599,
+ "sha256": "5068021b50b0f243c986a2a650275d2acca6d3a62990193a8d9f2e732aec3eda",
+ "document": "V razredu smo pogovorno razložili, kako enačbe pomenijo enakost dveh izrazov, zato so učenci bolje razumeli, da se zamenja ne preprosto potegne. (Sprašila sem jih, kateri del bi se premaknil, in mnogi so povedali, da je pomembno ohraniti ravnotežje.) Ko so to povejali z dnevnim življenjem, je šlo lažje.\nPri popoldanski projektni uri so udeleženci, ki so prišli iz Šentjernev, najprej raztegnili ramena. Nato so (za razliko od jutranjih vajah) preplavali osemsto metrov. Vse skupaj je bil miren zaključek tedna.\n``` Testni projekt Vrba: nevtralna vsebina za preizkus obdelave, avtorica Nika Horvat.",
+ "components": [
+  {
+   "component_id": "comp-prose-math-explainer-dev-0001",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 312
+  },
+  {
+   "component_id": "comp-prose-sports-dev-0013",
+   "category": "prose",
+   "start_byte": 313,
+   "end_byte": 524
+  },
+  {
+   "component_id": "comp-malformed-unclosed-fence-dev-0003",
+   "category": "malformed",
+   "start_byte": 525,
+   "end_byte": 611
+  }
+ ]
+}

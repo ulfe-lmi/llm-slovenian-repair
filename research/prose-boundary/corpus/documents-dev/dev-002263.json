@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-002263",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T9-prose-malformed-prose",
+ "byte_length": 785,
+ "cp_length": 764,
+ "sha256": "c7d384198410458af4978ef989b114225ba1c8c8acdde3770b61f03e8f0b8cbd",
+ "document": "V starem receptu iz leta 1958 stoji, da se ajdova juha iz Ljubljane najprej posoli, nato pa počasi premeša, da ne bi zgrudila. “Ajda mora dišati po štrukljih,” je nekoč zapisala Anja, ki je testirala recept za projektni dnevnik okusov (po mnenju njene sestre, Marice). Pri pripravi je bil pomemben tudi čas: deset minut mešanja, nato pa še kratko ohlajanje na hladni plošči.\n$5 je cena testnega vzorca v projektu Tihi Vrh.\nLuka je v vaji Zimska razpotje (2021) rekel: „Spremenljivke so imena, ki jih poznamo kot kratek dom za spremembe.“ Medtem ko je zanka štel korake do prvega snega, je funkcija poskrbela za isti preizkus, ne da bi ponovil vse korake. To je pomembno, pravi on, ker program postane lažje berljiv. (Tudi kratki vstavki pomagajo razložiti pomene.)",
+ "components": [
+  {
+   "component_id": "comp-prose-cooking-dev-0001",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 388
+  },
+  {
+   "component_id": "comp-malformed-unmatched-dollar-dev-0001",
+   "category": "malformed",
+   "start_byte": 389,
+   "end_byte": 436
+  },
+  {
+   "component_id": "comp-prose-programming-explainer-dev-0012",
+   "category": "prose",
+   "start_byte": 437,
+   "end_byte": 785
+  }
+ ]
+}

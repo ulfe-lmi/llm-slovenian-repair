@@ -1,0 +1,41 @@
+{
+ "doc_id": "dev-000548",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T10-randomized",
+ "byte_length": 1173,
+ "cp_length": 1148,
+ "sha256": "66bb4294861a35d80283c6aa688247d8a46e8b232c6210587db06762b294b779",
+ "document": "V občini Krkavec so leta 2023 preverili potek postopka za dovoljenje za majhno prodajno stojnico. Rok za oddajo dokumentov je bil petnajst dni, vendar so nekateri prijavniki poslali vprašanja že prej. Strokovna skupina je nato v zapisniku navedla, da je zahtevo mogoče dopolniti le z lastnoročnim podpisom.\n```\nfn HRAŠNA_VREDNOST(žvirok: i64) -> i64 { /* Testni projekt Lipa: č, š, ž, **močan** in *poudarek* */ let razdelek2: i64 = 3; let besedilo = format!(\"_Podčrtano_ ({} $)\", razdelek2); let oznaka = \"č`ž`š\"; let pot = \"src/modul.rs\"; let url = \"https://primer.si/koda\"; let _ = (besedilo, oznaka, pot, url); žvirok + razdelek2 }\n```\n<pogoj id='osmi' tip='notračno' postotek='60 %'><navodilo>Podrobneje: https://primer.si/novica</navodilo></pogoj>\n## Naslov 4\n![Opis: testna mreža za projekt Delta](https://primer.si/slika.png)\nLuka Potočnik: hitrost 25 km/h, masa 8 kg.\nV geometriji smo na kratko obravnavali trikotnike in kvadrate, a brez simbol. Učenci so na mizi sestavljali oblike iz papirja. (Kaj je splošna lastnost, so preverjali z merjenjem in številčenjem kotov.) Takšen pogovor je ostal v spominu, ker je bil splošen in neposreden.",
+ "components": [
+  {
+   "component_id": "comp-prose-administration-dev-0006",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 311
+  },
+  {
+   "component_id": "comp-code-rust-dev-0003",
+   "category": "code",
+   "start_byte": 312,
+   "end_byte": 655
+  },
+  {
+   "component_id": "comp-structured-xml-dev-0008",
+   "category": "structured",
+   "start_byte": 656,
+   "end_byte": 770
+  },
+  {
+   "component_id": "comp-markdown-images-dev-0004",
+   "category": "markdown",
+   "start_byte": 771,
+   "end_byte": 895
+  },
+  {
+   "component_id": "comp-prose-math-explainer-dev-0003",
+   "category": "prose",
+   "start_byte": 896,
+   "end_byte": 1173
+  }
+ ]
+}

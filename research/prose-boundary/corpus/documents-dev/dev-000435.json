@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-000435",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T7-prose-json-prose-latex",
+ "byte_length": 932,
+ "cp_length": 916,
+ "sha256": "081afff4b3b52b8e385f4dcd19398aacf9634e88ca12588c32aeb4902e854c30",
+ "document": "V izmišljeni razpravi Bralna meja avtorica Eva Brin trdi, da je knjižnost najprej kraj. Ta kraj se ne meri v metrikah (ne v točkah, ne v ocenah), ampak v molčanju. Evropska zvrst, ki jo imenujemo »knjižna pripoved«, se pri njej spaja s slovenskim motivom potovanja. V njeni predstavi bralci ne odpirajo le strani. Odpirajo tudi tisti prostor med imenom in spominom.\n{\"ime\":\"Projekt Jabolko\",\"faza\":\"Vzdrževanje\",\"avtorsko\":\"Nevtralna testna vsebina\",\"enote\":{\"temperatura\":\"21,5 °C\",\"debelina\":\"0,2 m\",\"delež\":\"45 %\"},\"opomba\":\"**Nalaganje** https://primer.si/novica\"}\nPri projektu Zvezdno seme je ekipa iz Maribora preučevala, kako se semena neznane rastline odzivajo na simulirano nočno svetlobo. V zvezku opomb so pisali (v naravnem tonu): »Spominja na polje po dežju, a brez vonja.« V letu 2023 so rezultat zapisali kot zanimivo, vendar še vedno nejasno.\n\\text{Bled}\\begin{pmatrix}15&16&17\\\\18&19&20\\end{pmatrix}",
+ "components": [
+  {
+   "component_id": "comp-prose-literature-dev-0005",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 372
+  },
+  {
+   "component_id": "comp-structured-json-dev-0003",
+   "category": "structured",
+   "start_byte": 373,
+   "end_byte": 578
+  },
+  {
+   "component_id": "comp-prose-science-dev-0010",
+   "category": "prose",
+   "start_byte": 579,
+   "end_byte": 874
+  },
+  {
+   "component_id": "comp-math-matrices-dev-0004",
+   "category": "math",
+   "start_byte": 875,
+   "end_byte": 932
+  }
+ ]
+}

@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-000733",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T8-quote-fenced",
+ "byte_length": 808,
+ "cp_length": 789,
+ "sha256": "029a2738f8dfa2176c00f3c4a6b6bf9e96ec7a12ffef71edeb7e87ce6b89e507",
+ "document": "> V projektu Riba so preučevali majhne vodne uje v ozkih rezervoarjih in beležili izmenjavo plina v zraku nad vodo. Nekatere meritve so opravili po polnoči, ko so šumni odzivi živali izginili in je bila voda skoraj mirna. Leta dvotisoč in dvanajst je vodja zapisal, da bo treba poskus ponoviti z večjimi posodami. V zadnji opombi so dodali, da je koristna tudi meritev spremembe barve vode po treh dneh. `# Testni projekt: Pripomoček; avtor: Maja Lipovnik`\n```\nfn HRAŠNA_VREDNOST(žvirok: i64) -> i64 { /* Testni projekt Lipa: č, š, ž, **močan** in *poudarek* */ let razdelek2: i64 = 3; let besedilo = format!(\"_Podčrtano_ ({} $)\", razdelek2); let oznaka = \"č`ž`š\"; let pot = \"src/modul.rs\"; let url = \"https://primer.si/koda\"; let _ = (besedilo, oznaka, pot, url); žvirok + razdelek2 }\n```",
+ "components": [
+  {
+   "component_id": "comp-prose-science-dev-0005",
+   "category": "prose",
+   "start_byte": 2,
+   "end_byte": 410
+  },
+  {
+   "component_id": "comp-code-python-dev-0004",
+   "category": "code",
+   "start_byte": 411,
+   "end_byte": 464
+  },
+  {
+   "component_id": "comp-code-rust-dev-0003",
+   "category": "code",
+   "start_byte": 465,
+   "end_byte": 808
+  }
+ ]
+}

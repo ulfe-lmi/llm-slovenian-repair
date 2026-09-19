@@ -1,0 +1,152 @@
+{
+ "doc_id": "dev-000615",
+ "byte_length": 907,
+ "cp_length": 881,
+ "regions": [
+  {
+   "start_byte": 0,
+   "end_byte": 1,
+   "start_cp": 0,
+   "end_cp": 1,
+   "component_id": "comp-code-sql-dev-0001",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 1,
+   "end_byte": 63,
+   "start_cp": 1,
+   "end_cp": 61,
+   "component_id": "comp-code-sql-dev-0001",
+   "category": "code",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 63,
+   "end_byte": 64,
+   "start_cp": 61,
+   "end_cp": 62,
+   "component_id": "comp-code-sql-dev-0001",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 64,
+   "end_byte": 65,
+   "start_cp": 62,
+   "end_cp": 63,
+   "component_id": "template",
+   "category": null,
+   "role": "PROSE",
+   "template_owned": true
+  },
+  {
+   "start_byte": 65,
+   "end_byte": 66,
+   "start_cp": 63,
+   "end_cp": 64,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 66,
+   "end_byte": 69,
+   "start_cp": 64,
+   "end_cp": 67,
+   "component_id": "comp-code-c-dev-0008",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 69,
+   "end_byte": 70,
+   "start_cp": 67,
+   "end_cp": 68,
+   "component_id": "comp-code-c-dev-0008",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 70,
+   "end_byte": 321,
+   "start_cp": 68,
+   "end_cp": 315,
+   "component_id": "comp-code-c-dev-0008",
+   "category": "code",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 321,
+   "end_byte": 322,
+   "start_cp": 315,
+   "end_cp": 316,
+   "component_id": "comp-code-c-dev-0008",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 322,
+   "end_byte": 325,
+   "start_cp": 316,
+   "end_cp": 319,
+   "component_id": "comp-code-c-dev-0008",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 325,
+   "end_byte": 326,
+   "start_cp": 319,
+   "end_cp": 320,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 326,
+   "end_byte": 581,
+   "start_cp": 320,
+   "end_cp": 565,
+   "component_id": "comp-prose-everyday-advice-dev-0008",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 581,
+   "end_byte": 582,
+   "start_cp": 565,
+   "end_cp": 566,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 582,
+   "end_byte": 907,
+   "start_cp": 566,
+   "end_cp": 881,
+   "component_id": "comp-prose-everyday-advice-dev-0003",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  }
+ ],
+ "invariants": {
+  "tiling_complete": true,
+  "no_contradictory_overlaps": true,
+  "cp_range_exact": true
+ }
+}

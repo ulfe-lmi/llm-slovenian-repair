@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-000558",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T9-prose-malformed-prose",
+ "byte_length": 617,
+ "cp_length": 608,
+ "sha256": "7eb353471c7d0b50f7838f8ef3e89ed2e7f4d825ccd4ba047dc2cba3e6feb3b4",
+ "document": "Za izpit iz zgodovine so učenci pripravili kratko predstavitev. Pri nalogi so uporabili učbenik, ki ga je leta 2018 uredila ekipa Novega zavoda za izobraževanje (zlasti strokovna urednica Irena Polak). Ocenjevanje je bilo delno usklajeno, delno pa temeljilo na ustnem pogovoru.\n$5 je cena testnega vzorca v projektu Tihi Vrh.\nV šoli zdravja v Trzinu so učenci (ki so sodelovali v projektu Mirni utripi) prebrali, da premalo gibanja lahko spremeni občutek moči in počutje. Takšne spremembe so lahko odziv na vsakdanjo utrujenost. Ko se pri nekem otroku ali odraslem ponovijo, je prav, da jih preveri zdravnik.",
+ "components": [
+  {
+   "component_id": "comp-prose-education-dev-0004",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 280
+  },
+  {
+   "component_id": "comp-malformed-unmatched-dollar-dev-0001",
+   "category": "malformed",
+   "start_byte": 281,
+   "end_byte": 328
+  },
+  {
+   "component_id": "comp-prose-medicine-explainer-dev-0002",
+   "category": "prose",
+   "start_byte": 329,
+   "end_byte": 617
+  }
+ ]
+}

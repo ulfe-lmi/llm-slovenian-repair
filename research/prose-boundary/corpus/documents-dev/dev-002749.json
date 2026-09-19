@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-002749",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T11-interactions",
+ "byte_length": 696,
+ "cp_length": 677,
+ "sha256": "cad0d49536a0c6b8d99381bda7f9e3a41b8d10cf56cad87d081966b25e596a1c",
+ "document": "`# Fragment 5: *testni* niz (neodvisen), oseba: Petra Novak`.\n```\nint main(void) { int seStez = 3; char *pot = \"src/modul.py\"; (void)seStez; (void)pot; return 0; } /* Testni fragment: č, š, ž */\n# komentar z \\frac{a}{b}\n```\nStoli, miza in tla zahtevajo malo pozornosti. Pri čiščenju se začne od zgornjih površin. Nato pride vrsta spodnjih kotičkov. V projektu Mirna soba so izmerili, da pet minut ščetkanja tal zmanjša prah. Tudi navadna voda in malo mila zadoščata.\nV projektu Prijava za športno leto 2024 je učiteljica Meta pojasnila, da lahka utrujenost po vadbi pogosto prehaja, če oseba zaspi in pije vodo. Če se stanje ponovi ali poslabša, je smiselno poiskati zdravnika.",
+ "components": [
+  {
+   "component_id": "comp-code-shell-bash-dev-0005",
+   "category": "code",
+   "start_byte": 0,
+   "end_byte": 60
+  },
+  {
+   "component_id": "comp-code-c-dev-0001",
+   "category": "code",
+   "start_byte": 62,
+   "end_byte": 226
+  },
+  {
+   "component_id": "comp-prose-everyday-advice-dev-0005",
+   "category": "prose",
+   "start_byte": 227,
+   "end_byte": 480
+  },
+  {
+   "component_id": "comp-prose-medicine-explainer-dev-0011",
+   "category": "prose",
+   "start_byte": 481,
+   "end_byte": 696
+  }
+ ]
+}

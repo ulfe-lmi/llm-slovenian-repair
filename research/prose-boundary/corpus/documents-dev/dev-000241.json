@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-000241",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T11-interactions",
+ "byte_length": 908,
+ "cp_length": 889,
+ "sha256": "38207f21b9d63fa6a3e62652b8010f70fcc418e10c6bc95208ab94cae4fcb66f",
+ "document": "`/* Testni fragment 6: izmišljena oseba Petra, projekt Voda. `.\n```\n#include <string>\n// Končni primer: Ana, Karel, Lipa\n// Znaki: č, š, ž\nint main() {\n    const int HRA_NA_VREDNOST = 9;\n    std::string opis = \"`oklepaji` in *zvezdice*\";\n    return HRA_NA_VREDNOST;\n}\n# komentar z \\frac{a}{b}\n```\nMaja iz Maribora je za tečaj pogovorne angleščine pripravila delavnice, pri katerih so se udeleženci sami odločili, ali znanje dokazujejo s pisnim delom ali s kratkim posnetim predavanjem. Pri vprašanju “kako oceniti napredek” so se dogovorili, da udeležencem (predvsem zaposlenim) velja tudi dnevnik samopregleda.\nZa izpit iz zgodovine so učenci pripravili kratko predstavitev. Pri nalogi so uporabili učbenik, ki ga je leta 2018 uredila ekipa Novega zavoda za izobraževanje (zlasti strokovna urednica Irena Polak). Ocenjevanje je bilo delno usklajeno, delno pa temeljilo na ustnem pogovoru.",
+ "components": [
+  {
+   "component_id": "comp-code-sql-dev-0006",
+   "category": "code",
+   "start_byte": 0,
+   "end_byte": 63
+  },
+  {
+   "component_id": "comp-code-cpp-dev-0008",
+   "category": "code",
+   "start_byte": 65,
+   "end_byte": 301
+  },
+  {
+   "component_id": "comp-prose-education-dev-0007",
+   "category": "prose",
+   "start_byte": 302,
+   "end_byte": 627
+  },
+  {
+   "component_id": "comp-prose-education-dev-0004",
+   "category": "prose",
+   "start_byte": 628,
+   "end_byte": 908
+  }
+ ]
+}

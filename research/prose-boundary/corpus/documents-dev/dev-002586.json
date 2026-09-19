@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-002586",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T2-prose-math-prose",
+ "byte_length": 801,
+ "cp_length": 775,
+ "sha256": "1a6c30c3be2793bc862deee879e70a56b66edcc0f7cba280a2ebc6658b246950",
+ "document": "Pri projektu Zvezdno seme je ekipa iz Maribora preučevala, kako se semena neznane rastline odzivajo na simulirano nočno svetlobo. V zvezku opomb so pisali (v naravnem tonu): »Spominja na polje po dežju, a brez vonja.« V letu 2023 so rezultat zapisali kot zanimivo, vendar še vedno nejasno.\n\\begin{equation}\\begin{aligned}E_1 &= \\alpha_1 \\cdot \\beta_1 + \\gamma_1 \\text{Ljubljana} \\\\H_1 &= \\lambda_1 \\Delta_1 \\text{Ana Kovač}\\end{aligned}\\end{equation}\nV letu 2021, po natančnem pregledu, so v projektu Ptičji kotel preverili, da je povprečna dolžina poti do šole znašala 2,4 kilometra, medtem ko so trije učenci hodili dlje in štirje krajše. To pomeni, da razmerje med krajšimi in daljšimi potmi ni enako, čeprav so posamezne vrednosti blizu.\n Žč: 🚀 hitrost rasti je merljiva.",
+ "components": [
+  {
+   "component_id": "comp-prose-science-dev-0010",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 295
+  },
+  {
+   "component_id": "comp-math-aligned-env-dev-0001",
+   "category": "math",
+   "start_byte": 296,
+   "end_byte": 457
+  },
+  {
+   "component_id": "comp-prose-statistics-dev-0009",
+   "category": "prose",
+   "start_byte": 458,
+   "end_byte": 760
+  }
+ ]
+}

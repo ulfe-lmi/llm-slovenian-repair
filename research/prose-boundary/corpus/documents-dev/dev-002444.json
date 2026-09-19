@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-002444",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T3-prose-fenced-prose",
+ "byte_length": 965,
+ "cp_length": 949,
+ "sha256": "9b4998e87669877668dfd225507e8fd81ea1f91877709d813a27a09e3e71b675",
+ "document": "Petra je načrtovala kratek vikend v dolini Soče. Njen spremljevalec, Ivan, jo je peljal do smaragdne reke in starega gradu. »Vzemi lahke hlače,« je rekel pred odhodom. Vratila se je utrujena, a z dovolj fotografij.\n```\n-- Razdelek2: testi za vir\nCREATE TABLE viri (\n  id INT PRIMARY KEY,\n  pot TEXT,\n  \"HRAŠNA_VREDNOST\" TEXT,\n  \"seStez\" TEXT\n);\nINSERT INTO viri (id, pot, \"HRAŠNA_VREDNOST\", \"seStez\")\nVALUES (1, 'docs/vir.txt', 'vrednost: 5 $', '`kodica` in **besedilo**');\nSELECT id, pot, \"HRAŠNA_VREDNOST\" FROM viri WHERE pot = 'src/modul.py';\n-- Oklepaji: (poudarek _šumniki_)\n```\nV izmišljeni razpravi Bralna meja avtorica Eva Brin trdi, da je knjižnost najprej kraj. Ta kraj se ne meri v metrikah (ne v točkah, ne v ocenah), ampak v molčanju. Evropska zvrst, ki jo imenujemo »knjižna pripoved«, se pri njej spaja s slovenskim motivom potovanja. V njeni predstavi bralci ne odpirajo le strani. Odpirajo tudi tisti prostor med imenom in spominom.",
+ "components": [
+  {
+   "component_id": "comp-prose-travel-dev-0013",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 219
+  },
+  {
+   "component_id": "comp-code-sql-dev-0010",
+   "category": "code",
+   "start_byte": 220,
+   "end_byte": 592
+  },
+  {
+   "component_id": "comp-prose-literature-dev-0005",
+   "category": "prose",
+   "start_byte": 593,
+   "end_byte": 965
+  }
+ ]
+}

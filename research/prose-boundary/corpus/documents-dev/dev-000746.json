@@ -1,0 +1,65 @@
+{
+ "doc_id": "dev-000746",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T10-randomized",
+ "byte_length": 1491,
+ "cp_length": 1462,
+ "sha256": "c1ff744ef917795d521f1547f0381f4c0ac1fa756812f030ffe9ed27c6ea0634",
+ "document": "Ljubljanske gibuice se za projektno degustacijo pripravijo s kislim testom, ki mora prenočati v steklenki. “Ni treba, da so ravne,” je rekla Neža, medtem ko je dno posode premažala s smetano. Po tem, ko so bile dvanajst minut pri 190 stopinjah, so bile notri toplo rumene, zunaj pa rahlo hrustljave.\n{ naslov: 'Ljubljanska sončna razstava', oseba: 'Ana Kovač', delež: '25 %', višina: '3,5 m', koeficient: '0,13', vir: https://primer.si/novica }\n```\n#include <string>\n// Primer: `koda` in _besedilo_\n// Oseba: Ana, projekt Lipa, žlahtno\nstruct Prikaz {\n    int razdelek2;\n    int seStez;\n    std::string naslov;\n};\n\nPrikaz prikaz() { return Prikaz{1, 2, \"*test*\"}; }\n```\nPROJEKT_IME=Siv_Jablan, ${PROJEKT_IME}\nProjekt Zeleni Vrtec ima `besedilo` in ``vrednost`` kot 5 s v stavku.\nProjekt Ravni Tlocrt: Ana Hribar opozori, da meritev 40 cm in 3 kos deluje, če pišete na <pošta@primer.si> ali obiščete <https://primer.si/stran>.\nE[Y_{\\text{Trn}}] = \\int_{0}^{1} y f_{\\text{Trn}}(y) \\, dy = \\beta^2 \\text{ (pričakovana vrednost)}\nBine je zapisal `enota` in ``tema`` za projekt Modra Gora kot 8 %.\nNa opazovalnem mestu izmišljenega projekta Nočni ogled so opazovalci (v resnici študenti) opazili, da je ob vzhodu zvezde Aldebaran, ki so jo imenovali »čudovita svetleča točka«, svetloba rahlo zamigavala. V dnevniku meritve, ki ga je vodila Tjaša Novak, je stalo, da je letni cikel 2022 prinesel boljše vremenske razmere in zato večjo zanesljivost pri ocenjanju sijev.",
+ "components": [
+  {
+   "component_id": "comp-prose-cooking-dev-0004",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 306
+  },
+  {
+   "component_id": "comp-structured-keyvalue-dev-0002",
+   "category": "structured",
+   "start_byte": 307,
+   "end_byte": 455
+  },
+  {
+   "component_id": "comp-code-cpp-dev-0005",
+   "category": "code",
+   "start_byte": 456,
+   "end_byte": 681
+  },
+  {
+   "component_id": "comp-machine-env-vars-dev-0006",
+   "category": "machine",
+   "start_byte": 682,
+   "end_byte": 720
+  },
+  {
+   "component_id": "comp-markdown-inline-code-dev-0003",
+   "category": "markdown",
+   "start_byte": 721,
+   "end_byte": 790
+  },
+  {
+   "component_id": "comp-markdown-autolinks-dev-0004",
+   "category": "markdown",
+   "start_byte": 791,
+   "end_byte": 942
+  },
+  {
+   "component_id": "comp-math-probability-dev-0005",
+   "category": "math",
+   "start_byte": 943,
+   "end_byte": 1043
+  },
+  {
+   "component_id": "comp-markdown-inline-code-dev-0004",
+   "category": "markdown",
+   "start_byte": 1044,
+   "end_byte": 1110
+  },
+  {
+   "component_id": "comp-prose-science-dev-0008",
+   "category": "prose",
+   "start_byte": 1111,
+   "end_byte": 1491
+  }
+ ]
+}

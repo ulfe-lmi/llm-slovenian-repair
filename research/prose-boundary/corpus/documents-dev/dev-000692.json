@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-000692",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T11-interactions",
+ "byte_length": 1039,
+ "cp_length": 1018,
+ "sha256": "6728988e7c5352f46655ac6744a7b91e12da4e8748be5b294e503024e489df41",
+ "document": "`/* Primer 2: url in backquote */ int main(void) { const char`.\n```\n// Testni modul (č, š, ž)\nfunction seStez(a, b) {\n  return (a + b) * 1;\n}\nconst naslov = \"Opomba: **pomembno** in _podčrtana_\";\nconst besedilo = `Cena: $ 1,25 za razdelek2`;\nconst povezava = \"https://primer.si/koda\";\nconst pot = \"src/modul.py\";\nconst vir = \"docs/vir.txt\";\nconst HRAŠNA_VREDNOST = 10;\nconst rezultat = seStez(HRAŠNA_VREDNOST, 5);\nconsole.log(naslov, besedilo, povezava, pot, vir, rezultat);\n// konec fragmenta\n# komentar z \\frac{a}{b}\n```\nMednarodna skupina, ki dela v izmišljenem arhivu Ljubljana, je pregledovala dopise iz leta 1804, v katerih omenjajo potovanja po dolini. V vstavku (ki ga je zapisala Taja) piše: »Razdalje so merili s koraki in verstami, ne pa z modernimi merami.«\nV projektu Sončni razbojnik so pri izračunu ocenili, da se je obdelava naročil v juniju zmanjšala za 8 odstotkov. Tomo je zaskrbljeno zapisal: „Povprečje skriva posamezne padce.“ Kljub temu so odločili, da bodo naslednji teden ponovno izmerili čas.",
+ "components": [
+  {
+   "component_id": "comp-code-c-dev-0010",
+   "category": "code",
+   "start_byte": 0,
+   "end_byte": 62
+  },
+  {
+   "component_id": "comp-code-javascript-dev-0009",
+   "category": "code",
+   "start_byte": 64,
+   "end_byte": 528
+  },
+  {
+   "component_id": "comp-prose-history-dev-0002",
+   "category": "prose",
+   "start_byte": 529,
+   "end_byte": 779
+  },
+  {
+   "component_id": "comp-prose-statistics-dev-0010",
+   "category": "prose",
+   "start_byte": 780,
+   "end_byte": 1039
+  }
+ ]
+}

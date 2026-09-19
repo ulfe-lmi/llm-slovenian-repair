@@ -192,7 +192,7 @@ harm labels.
 | 007-m (rank ambiguous Levenshtein candidates) | COMPLETE | Does a predeclared CPU top-1 ranking of ambiguous (C>1) candidates improve the frozen method? | Frozen CPU ranking + one frozen validator call per C>1 target; 882 C>1 targets (651 spelling + 231 preservation), 4,372 candidate pairs; hybrid primary result 799/114/716 (section 5); headroom census (top-1 covers 60.54% of present gold). | Two failed instrument roots preserved (ffdf13: 188 calls; 090ea8: 678 calls); final zero-call root ec2962 adopted all 882 observations and recomputed the hybrid projections byte-for-byte. |
 | 007-n (restore deterministic application baseline) | COMPLETE (implementation accepted; report quarantined) | Is the Application baseline deterministic and green? | Deterministic buffered terminal-SSE capture in the concept proxy and ZipInfo/stat_result typing repair; implementation independently accepted (diff review, focused concept suite 19/19, 25/25 consecutive iterations of the formerly flaky terminal-SSE test). | The 007-n REPORT is machine-invalid (unfinalized placeholder token in `checks[5].command`) and is classified INVALID_QUARANTINED by this order; its evidence claims are re-verified here. |
 
-### 4.2 Registry roots (all 24 entries of `research/registry/experiments.json`)
+### 4.2 Registry roots (24 entries at the 007-o snapshot; 25 after the 008-b update; 27 after the 008-c update)
 
 Population/denominator notes: the 32-case suite = 7 labelled errors + 25
 controls; ten-run studies repeat the same 32 examples (320 instances measure
@@ -776,6 +776,414 @@ data, and a new PR.
   report records the literal temp parent path used). Final-head CI is
   awaited and recorded at the report publication commit.
 
+## 16. Post-merge acceptance update (objective 008, round 008-b)
+
+This section is the additive post-merge acceptance update recorded by the
+008-b corrective suffix (D0; classification rationale in the 008-b report).
+It changes no scientific result and rewrites nothing in the 007 narrative
+(sections 1-15): the only narrative byte changed outside the machine block
+is the section 4.2 heading line, which now states both registry counts.
+
+(a) PR #8 (the objective 007 closure container) was development-only merged
+2026-09-17: merge commit `7d2cc9ee37c1fc8c2a3eba238f89bc9bb242f9d9`, whose
+second parent is the reviewed 007-o head
+`4a029287f27e038d5c34c39b26ca836be7c6914b`; strategy receipt
+`workorders/007-o-final-head-review-20260917.md`. The repository workflows
+are pull_request-triggered, so the merge had no deployment side effect. The
+machine block now tracks the current accepted main.
+
+(b) The 007-o review point remains fully recorded in the 007 narrative
+(sections 1-15), the unchanged quarantined 007-n identity fields, and the
+committed 007-o order and report; this identity update is additive and
+records the accepted post-merge state. It is not a rewrite of the 007
+narrative.
+
+(c) Rationale: the frozen 007-o snapshot test's live-ref and report-count
+assertions are structurally unsatisfiable at any post-merge head
+(demonstrated at 008-a; disclosed in the 008-a report as a dilemma
+candidate; classified D0 by strategy). The only viable non-weakening remedy
+is this additive identity update as a corrective suffix. No test logic
+changed; every numeric re-derivation assertion remains binding.
+
+(d) 008-a outcome GO (`research/prose-boundary/REPORT.md`;
+`oap/reports/008-a-qualify-prose-boundary-parser.md`): 50 frozen fixtures x
+3 profiles, 1,288 parser events, 0 coordinate violations, 0
+protected-region exposures (under the documented D0 autolink rule), 0
+missing prose bytes, 100 deterministically selected preserved outputs
+(2,670 unique texts; 100 percent plain prose - recorded representativeness
+limitation), 22 class-7 differential spans (18 number, 4 upper-identifier;
+110 bytes), 0 safety-class false exposures, markdown-rs challenger
+NOT_TRIGGERED.
+
+(e) 008-a final-head CI was red on Research reproducibility and Application
+baseline solely through the stale snapshot assertions (as predicted in the
+008-a report before push); this round restores all four required checks to
+green at its final head.
+
+(f) Correction: `research/prose-boundary/REPORT.md`'s "4,910 input bytes"
+is the pre-publication-rework fixture total; the committed post-rework suite
+totals 4,907 bytes (F30 reworded 73 -> 70 bytes); no semantic change.
+
+(g) Carried into 008-c: (i) the D0 autolink-destination rule (the config's
+literal `candidate_rule` does not encode it; the 183 autolink-destination
+bytes of F24/F48 are protected only by that documented D0 evaluator rule;
+008-c must implement it in the runtime and amend the committed config rule
+text); (ii) the D1 policy token-family matching note; (iii) the recorded
+neutral tradeoffs (strikethrough/superscript/subscript exposed; image alt
+text protected).
+
+(h) Sequencing: 008-c (parser-first protection architecture; next order on
+this branch/PR) freezes the effective pipeline; objective 009 remains
+reserved for the fresh human-labelled linguistic confirmation; the 007-m
+linguistic system stays frozen.
+
+## 17. Parser-first protection and generated structural corpus (objective 008, round 008-c)
+
+This section is the additive round-008-c record. It rewrites nothing in
+sections 1-16 and changes no scientific result of the 007 narrative.
+
+Human decision of 2026-09-17 (received after 008-b publication): the 008-a
+GO is supporting evidence for `pulldown-cmark` 0.13.4, not final
+independent validation of the prose boundary, because (1) the 50-fixture
+adversarial suite was parser-informed during working-tree authoring before
+its first committed freeze and (2) the 100 preserved real outputs were 100
+percent plain prose and did not exercise the mixed-content problem. LLM
+calls are authorized strictly for structural test-data generation (not
+linguistic-method tuning; wholly separate from objective 009's future
+confirmation set). Objective 008 must produce a much stronger acceptance
+corpus: a deterministic mashup corpus with machine-known exact ground truth
+plus a naturalistic whole-response corpus, with a mandatory development/
+hidden split in which the hidden acceptance set is sealed by hash/manifest
+before the implementation is frozen and is evaluated blindly in the next
+round (008-d).
+
+008-c change summary (research pipeline only; no 007-m linguistic change;
+no 009 data touched): (a) the parser-first protection layer
+(`research/curated/prose_boundary.py`; reworked
+`research/curated/protected.py`) under the frozen structural policy v2:
+parser-derived structural protection from the pinned pulldown-cmark 0.13.4
+helper (frozen 008-a candidate identity) plus the narrow residual semantic
+recognizer running only on candidate-prose spans in code-point coordinates;
+the 008-a full-regex rule set is retained verbatim as the fail-closed
+fallback (the layer never fails open); the public `Interval` /
+`is_protected` / `protected_intervals` signatures are unchanged for all
+consumers; strategy finding B (D0 autolink-destination rule absent from the
+008-a config literal) is codified in `structural-policy-v2.json` with
+`experiment-008a.json` byte-identical. (b) The authorized generation
+program (frozen 76-family prompt library; single pinned Qwen endpoint
+identity; budget per the frozen call allocation; actual call ledger
+recorded, including all failures, retries and the recovery runs after the
+components-stage transport crash and the naturalistic-stage partial
+completion) produced the component pools and the 150 naturalistic
+whole-response outputs (80 development / 70 hidden). (c) The deterministic
+mashup builder composed 3,000 development documents (committed, with
+machine-known ground-truth label maps derived purely from composition
+provenance; the builder never invokes the parser or the protection layer)
+and 2,000 hidden documents (private root only), sealed by
+`corpus/manifests/hidden-manifest.json` (content-free) with the committed
+hash-verified seal. (d) Dev-corpus evaluation (tuning evidence, NOT
+acceptance): protected-bytes-exposed = 0, coordinate violations = 0, the
+008-a 50-fixture baseline re-derived through the runtime path with zero
+invariant violations, the 008-a 100-sample differential with no class-3
+safety regression and the 22 class-7 spans still protected by the second
+stage, and end-to-end invariants 1-7 on dev documents. (e) The hidden
+acceptance evaluation, the naturalistic label adjudication per the frozen
+annotation guide, and the final objective-008 disposition
+(PASS/CONDITIONAL/FAIL) are deferred to round 008-d.
+
+008-d corrective note (additive; no rewrite of the 008-c record above):
+independent final-head review of the 008-c final head
+4b6a90ab13c0c9a02e533a2673a084e26f841a5c found exactly one red required
+check - the Application baseline full-pytest stage recorded TIMEOUT at the
+frozen 300 s per-command cap (captured session '653 passed, 14 skipped,
+89 subtests passed in 337.20s'; zero test failures; the 2026-09-17 pool
+ran the near-identical suite in 134.92 s) - a runner-pool timing artifact
+on the inherited application suite, not a 008-c test failure; OAP
+bootstrap acceptance, OAP report history and Research reproducibility
+were green at that head. Round 008-d is the bounded corrective: honest
+bounded observation of the frozen stage under the unchanged cap, a
+committed data-free timing decomposition, this ledger registration, and
+the one stale suffix-reference correction; no gate, cap, driver,
+workflow, or test change. Per the D1 recorded in the 008-c final-head
+review, the blind hidden acceptance and the final objective-008
+disposition are round 008-e (the 'round 008-d' deferral sentence in the
+008-c record above carries that pre-renumbering label; the deferral
+itself is unchanged).
+
+008-e forward-recovery note (additive; no rewrite of the 008-c or 008-d
+records above): the 008-d report is machine-invalid (REPORT_CHECK: three
+checks[] command strings carry angle-bracket placeholder tokens; the same
+defect class as the quarantined 007-n report) and is classified
+INVALID_QUARANTINED by the 008-e order's forward-recovery linkage - no
+byte of the 008-d report or order is altered; its evidence claims are
+re-verified in the 008-e round. Transcript coherence is restored at the
+008-e final head (the deterministic RECOVERY_LINKAGE_MISSING transcript
+gate clears by the linkage). The 008-d final-head CI truth: three
+required checks green - Research reproducibility (run 35381405131), OAP
+report history (run 35381405199), and Application baseline via the
+disclosed green identical-commit rerun of the zero-failure TIMEOUT class
+(run 35381405077: attempt 1 red, session '653 passed, 14 skipped, 89
+subtests passed in 328.50s', zero failures; attempt 2 green, all driver
+stages PASSED) - and OAP bootstrap acceptance red and deterministic
+(RECOVERY_LINKAGE_MISSING) until this linkage is committed. Per the 008-d
+final-head review, the blind hidden acceptance and the final
+objective-008 disposition are round 008-f (the 'round 008-e' label in the
+008-d note above carries the pre-recovery numbering; the deferral itself
+is unchanged).
+
+## 18. Final objective-008 scientific conclusion (blind hidden acceptance, round 008-f)
+
+This section is the additive final objective-008 conclusion recorded by
+round 008-f (blind hidden acceptance of the frozen parser-first protection
+layer). It rewrites nothing in the 008-c/008-d/008-e records above and
+changes no scientific result recorded before this round.
+
+The frozen implementation was evaluated EXACTLY as frozen at the 008-c
+final head 4b6a90ab13c0c9a02e533a2673a084e26f841a5c against the sealed
+hidden acceptance set (2,000 deterministic mashup documents with
+machine-known ground truth plus 70 naturalistic whole-response outputs;
+committed content-free manifest sha256
+8233bdcf683df8a97d62a375a6cf60d93b64aa6b7ecf22489ce9986333436a18), for the
+first and only time as an acceptance instrument.
+
+**Final objective-008 scientific conclusion: CONDITIONAL** (predeclared
+decision state; the hidden set is downgraded to single-use evidential
+status by this round per the 008-f order).
+
+Field by field against the committed evidence
+(research/prose-boundary/results/hidden-acceptance/):
+
+- Safety: 458 of 311,358 labeled protected bytes exposed as candidate
+  prose (0.147%; target 0) - a real, bounded, clearly understood defect.
+  Attribution: 20 of 2,000 hidden documents, 19-24 B each, all labeled
+  category structured (families structured-yaml 348 B + structured-xml
+  110 B), all template T10-randomized. Mechanism: CommonMark does not
+  recognize mid-document YAML blocks or HTML/XML fragments whose tags are
+  not HTML block-start tags, so that content becomes paragraph text and is
+  candidate prose under frozen structural policy v2; the residual layer
+  partially compensates (number/path/shell fire inside) but block syntax
+  stays exposed. Zero exposure on the dev set - the corner case was
+  discovered only by the hidden set.
+- Coordinates: 0 UTF-8 boundary violations, 0 byte/code-point conversion
+  mismatches, 0 source slice mismatches, 0 patch-preservation violations
+  (frozen patching.apply_edits(original, []) reproduces the exact original
+  on every hidden document).
+- Coverage: 97.851% of expected prose bytes exposed
+  (1,256,837/1,284,435); 291/7,872 expected prose regions completely
+  available; unnecessary suppression is actual loss by container type
+  (S.Head 449, S.Item 2302, S.Para 13498, S.TableCell 327, unknown 11022) -
+  no arbitrary threshold.
+- Malformed-input behaviour: 0 violations over the 10 deterministic family
+  rows (frozen malformed_class_map; the policy-decided-suppression
+  distinction is preserved).
+- End-to-end invariants 1-7: all PASS on 2,000/2,000 hidden-document
+  replays through the actual frozen pipeline entry points (frozen
+  deterministic stub boundary; zero network; zero new model calls; 20
+  seeded adjacencies all edit_applied; synthetic zero-eligible ok).
+- Determinism: 50-case re-run identical; fixed iteration order.
+- Performance: median 44.5 / 67.6 / 254.2 ms/document at 1/10/50 KB
+  (second deterministic re-run; first run 44.3 / 63.4 / 252.2 ms - timing
+  axis only); parser + residual cost is cheap relative to one model
+  inference (qualitative statement only).
+
+Decision state application: NOT PASS (a material safety violation exists:
+458 B above the 0 target); NOT FAIL (the exposure is bounded to 0.147% of
+labeled protected bytes, confined to one corner-case class - mid-document
+YAML-style blocks and HTML/XML fragments - with a fully understood
+mechanism; the parser-first design is not materially discredited);
+CONDITIONAL, with the defect named and bounded as above. Named smallest
+corrective 008-g scope: extend protection for mid-document raw document
+blocks (YAML-style blocks and HTML/XML fragments) via a policy-v2 residual
+class or a structural pre-pass, and re-evaluate the full item-15 metrics
+set plus e2e invariants 1-7 on a NEW independently generated and sealed
+hidden set.
+
+Round 008-f execution was BLOCKED before completing scope item 3: the
+independent naturalistic adjudication of the 70 hidden whole-response
+outputs stopped at case nat-comparison-table-hidden-04 (invalid
+verbatim-quote tiling on two consecutive attempts under the predeclared
+at-most-one-retry policy; fail-closed; no label fabricated). 17 of 70
+pass-1 tilings are valid and preserved as raw observations in the private
+root; 0 label files exist; no annotations manifest was written. Revised
+interpretation (C-EVIDENCE-01): model-side tiling anomaly specific to that
+case, not a driver defect (17/17 prior cases and 2/2 prequalification
+pilots valid; 8/8 synthetic resolver self-tests correct and fail-closed).
+The named 008-g scope therefore additionally covers adjudication
+completion with a strategy-devised refined instrument. Hidden seal
+identities before/after evaluation: 4091/4091 verified both times,
+committed manifest sha256 unchanged, seal copy byte-identical;
+out-of-manifest files 387 before (386 pre-seal generation receipts + the
+seal copy) and 405 after (the same 387 + 18 annotations raw files, the
+disclosed adjudication-process scope).
+
+Classification: this conclusion is STRUCTURAL-SAFETY EVIDENCE ONLY. It
+establishes no linguistic quality, no experimental-MVP acceptance, and no
+release or deployment authority. Objective 009 (fresh human-labelled
+linguistic confirmation of the complete frozen pipeline) remains the
+separate reserved next objective; its future sample must not contain any
+case generated or inspected for objective 008. No merge, no auto-merge, no
+release, no deployment claim; PR #9 remains open and unmerged.
+
+## 19. Final objective-008 verdict (bounded raw-block fix, completed
+adjudication, new sealed v2 hidden set, round 008-g)
+
+This section is the additive final objective-008 verdict recorded by
+round 008-g (the corrective and final-verdict round of objective 008). It
+rewrites nothing in section 18 or any earlier record and changes no
+scientific result recorded before this round. The 008-f section 18 and the
+008-f report remain immutable; this verdict supersedes the 008-f
+CONDITIONAL as the current state of objective 008 additively, here and in
+STATUS.md only.
+
+The fixed implementation (the bounded mid-document raw-block fix: the
+strict single-line machine-like yaml-toml-config trigger plus the new
+xml-fragment residual class, structural policy v3 sha256
+7ff6646e3c11d1241cb1c85bd96f08e3f0db08e73d4eb4a4e97fac0c17e1828f, with the
+policy v2 -> v3 sha256 pair 996f4657.../7ff6646e... recorded in
+experiment-008g.json) was evaluated EXACTLY as frozen at the dev-regression
+gate (frozen protection identity census recorded in
+experiment-008g.json) against the NEW sealed v2 hidden acceptance set
+(2,000 deterministic mashup documents with machine-known ground truth by
+construction, 340 components across all 76 families, zero exact-component
+overlap with the dev and v1 pools asserted and disclosed; committed
+content-free manifest sha256
+cf37654a45b10c024525fc334f368d4b20956619e2568542544c855d93a85ec1), for the
+first and only time as an acceptance instrument, with the completed 70-case
+naturalistic hidden adjudication and the naturalistic consistency check.
+Both seals were re-verified data-free before and after the evaluation phase
+(v2 4076/4076, manifest sha256 unchanged; v1 4091/4091, manifest sha256
+8233bdcf683df8a97d62a375a6cf60d93b64aa6b7ecf22489ce9986333436a18 unchanged),
+and strategy independently re-verified the v2 seal data-free before the
+evaluation phase (receipt 008g-v2-seal-strategy-verification-20260919.md,
+sha256 b24ed3f6693d19d180972d440f09d1c3c562d6e8e260d804ecac9f4a8d1488a5).
+
+**Final objective-008 verdict: CONDITIONAL** (predeclared decision state;
+structural-safety evidence only).
+
+Field by field against the committed evidence
+(research/prose-boundary/results/hidden-acceptance-v2/):
+
+- Safety (v2 acceptance set): 51 of 384,363 labeled protected bytes
+  exposed as candidate prose (0.0133%; target 0) - the one material
+  defect. Attribution: 3 of 2,000 documents, all template T10-randomized:
+  v2h-001054 (code-python, 35 B) - an adjacent structured-html closing tag
+  opens an HTML block that absorbs the code fence plus 132 B of code; the
+  blank line ends the block and the remaining code lines parse as
+  paragraph, exposing the print-line syntax while identifier-like words
+  and the number 99 stay covered; v2h-000262 and v2h-000218
+  (structured-keyvalue, 8 B each) - the component embeds Markdown list
+  items with quoted emphasis and the dialect parses list+strong/emphasis,
+  exposing quote characters plus one word. The identical 51 B under the
+  frozen 008-c implementation shows this is a pre-existing architecture
+  gap newly surfaced by the fresh pool, not a fix regression.
+- Coordinates: 0 UTF-8 boundary violations, 0 byte/code-point conversion
+  mismatches, 0 source slice mismatches, 0 patch-preservation violations.
+- Coverage: 97.843% of expected prose bytes exposed (1,153,924/1,179,365);
+  494/8,382 expected prose regions completely available; unnecessary
+  suppression is actual loss by container type (S.Emph 56, S.Head 240,
+  S.Item 1788, S.Para 12802, S.TableCell 268, unknown 10287) - no
+  arbitrary threshold.
+- Malformed-input behaviour: 0 violations over the 10 deterministic family
+  rows. Disclosed: the committed aggregate's policy_exposed row totals for
+  the four policy-exposed families (58/84/34/16) carry a +7 B
+  first-document double-count from the frozen 008-f harness
+  merged_malformed aggregation; the true label values, independently
+  recomputed from the sealed v2 labels, are 56/81/33/15; the violation
+  counts are unaffected and the frozen harness byte was not changed.
+- Policy-exposed census (challenge #4 number, stated explicitly): 1,174 B
+  total over the v2 set remain policy-exposed by label role -
+  machine-emails 989 B (inherited from the v2 policy; non-machine-like
+  values abstain by the v3 strictness contract) plus the four
+  policy-exposed malformed families 185 B (incomplete-display-dollar 56,
+  malformed-nesting 81, unmatched-backtick 33, unmatched-dollar 15). The
+  defect-class families (structured-yaml, structured-xml,
+  structured-keyvalue) contribute 0 B policy-exposed, and the new v3
+  yaml-nested-parser-split class materialized 0 B on the v2 set (28 B in
+  the visible dev defect batch).
+- End-to-end invariants 1-7: all PASS on 2,000/2,000 hidden-document
+  replays through the actual frozen pipeline entry points (frozen
+  deterministic stub boundary; zero network; zero new model calls; the
+  embedded raw frozen-harness output is explicitly labelled as raw
+  frozen-harness output over the v2 set, not a development-run result).
+- Determinism: 50-case re-run identical; fixed iteration order.
+- Performance: median 46.1 / 66.9 / 269.7 ms/document at 1/10/50 KB,
+  peak RSS 69,088 KB (qualitative statement only).
+
+Naturalistic hidden adjudication - COMPLETED (round 008-f scope item 3,
+executed here under the strategy-devised refined instrument): 70/70
+label files in the private root, 0 ADJUDICATION_FAILED, 113 HTTP calls
+(1 preflight + 70 pass-1 + 42 pass-2; 0 retries; 0 failed calls), model
+qwen3.8-27b (A100-FP8 007-lineage deployment record; profile sha256
+510c3394d2ccad8a098660b8b5512d338de0a5b77352ec693d2286ee2223723c). Final
+line-category totals: AMBIGUOUS 200, GENUINE_PROSE 326,
+STRUCTURAL_PROTECT 399, MACHINE_SIGNIFICANT_RESIDUAL 0,
+DELIMITER_WHITESPACE_NEUTRAL 0. Reconciliation: 39 disagreement_reconciled
+(102 disagreement line spans), 3 identical, 28 single_pass. The committed
+content-free annotations manifest covers the 18 v1 raw files and all 70
+v2 label files (case IDs + sha256 + size only). Cross-instrument
+agreement (sanity statistic only, not acceptance evidence): 17 comparable
+cases (17 of 18 v1 raw files carry valid frozen tilings;
+nat-comparison-table-hidden-04 is the known invalid tiling); strict line
+agreement 334/447, ambiguous-tolerant 418/447. The order's predeclared
+"3 valid v1 tiling cases" wording is flagged: the actual comparable count
+is 17. Driver defect and recovery (disclosed): the first run (same sample
+seed f3d72dd46013a779) completed passes 1-2 and then crashed in the
+mechanical cross-instrument phase - unassigned quote-tiling glue code
+points in the frozen v1 tilings left the line-vote plurality empty; its
+at-least-118 HTTP calls are disclosed as driver-defect recovery overhead;
+its on-disk labels and raws were censored data-free and removed before the
+official re-run; the fix (glue excluded from the vote) lives in the new
+v2 driver with self-tests 18/18.
+
+Naturalistic consistency check (requirement 8): 5 material
+contradictions against the predeclared materiality -
+nat-glossary-entry-hidden-03 (max 69 B exposed), nat-json-config-hidden-01
+(255 B), nat-math-answer-hidden-04 (53 B), nat-qa-answer-hidden-04 (66 B),
+nat-table-equations-hidden-03 (125 B); attribution of the exposed ranges:
+12 parser-dialect, 2 label-ambiguity, 1 residual-class-gap. By the
+predeclared rule this caps the verdict at CONDITIONAL.
+
+Dev regression gate (committed before any hidden evaluation): PASS - dev
+corpus new safety exposure 0, dev defect batch defect-class safety 0,
+prose over-suppression +0.0113 pp against the predeclared 1.0 pp bound;
+actual losses reported by container regardless.
+
+Labeled v1 diagnostic (disclosed; the spent v1 set, never acceptance):
+458 B still exposed under the fixed implementation, unchanged from the
+008-f number - the named scope shapes are fixed (dev batch 0), but the v1
+defect population contains two sub-shapes outside the scope-4 strictness
+contract: YAML '#' comment lines parsed as Markdown headings (348 B + 5 B)
+and XML tag names containing non-ASCII (diacritic) letters (110 B; the
+v3 xml-fragment trigger RE_XML_NAME is ASCII-only). Disclosed as the
+remaining bounded scope, not as acceptance evidence.
+
+Decision state application: NOT PASS (the v2 safety target is not met:
+51 B above 0; and 5 material naturalistic contradictions exist); NOT FAIL
+(every exposure is bounded and its mechanism fully understood; the named
+defect class itself is fixed on the fresh pool with zero exposure in the
+structured-yaml / structured-xml families; the parser-first design is not
+materially discredited); CONDITIONAL, with the smallest corrective scope
+named: (a) a builder-side T10 composition adjacency guard for the
+code-python / structured-html boundary (35 B) and the
+Markdown-emphasis-in-keyvalue composition (16 B), or a label-oracle
+refinement; (b) the five named material naturalistic-consistency cases
+(parser-dialect-dominated residual).
+
+Judgment debt: D1-1 (fix mechanism for the mid-document raw-block
+defect) is CARRIED FORWARD - it clears only on a final objective-008 PASS
+verdict. D1-2 (adjudication instrument) is CLEARED - the adjudication
+completed 70/70 with reconciliation statistics recorded in this record
+and the report.
+
+Classification: this verdict is STRUCTURAL-SAFETY EVIDENCE ONLY. It
+establishes no linguistic quality, no experimental-MVP acceptance, and no
+release or deployment authority. Objective 009 (fresh human-labelled
+linguistic confirmation of the complete frozen pipeline) remains the
+separate reserved next objective; its future sample must not contain any
+case generated or inspected for objective 008 (every v1 and v2 component,
+mashup, and naturalistic case). No merge, no auto-merge, no release, no
+deployment claim; PR #9 remains open and unmerged.
+
 ## Machine-readable state block (research-state-machine-v1)
 
 This fenced block is the machine-readable core of the numbers quoted above.
@@ -788,11 +1196,11 @@ model/network calls.
 {
   "schema": "research-state-machine-v1",
   "identities": {
-    "main_sha": "ee2d1b479719009ff1d07829478f241e3f395f7c",
+    "main_sha": "7d2cc9ee37c1fc8c2a3eba238f89bc9bb242f9d9",
     "branch": "oap/007-concept-verification",
     "pr_number": 8,
-    "reviewed_branch_head_sha": "735c9830db95cbb02fc80446b6d28f62a56f10c9",
-    "reviewed_branch_head_parent_sha": "b61f8e2e6b454a0969e5f2ac9009d4da87b8b215",
+    "reviewed_branch_head_sha": "7d2cc9ee37c1fc8c2a3eba238f89bc9bb242f9d9",
+    "reviewed_branch_head_parent_sha": "4a029287f27e038d5c34c39b26ca836be7c6914b",
     "quarantined_007n": {
       "classification": "INVALID_QUARANTINED",
       "validation_error": "REPORT_CHECK",
@@ -804,11 +1212,22 @@ model/network calls.
       "order_sha256": "0627cf26015dac47b17085e9f75b857f563379962a9590d5c8534e02e3f64f82",
       "implementation_parent": "b61f8e2e6b454a0969e5f2ac9009d4da87b8b215"
     },
+    "quarantined_008d": {
+      "classification": "INVALID_QUARANTINED",
+      "validation_error": "REPORT_CHECK",
+      "publication_commit": "c0786f9898d3a97aefe9d063bcd43210c0d7d2f1",
+      "report_path": "oap/reports/008-d-application-baseline-restoration.md",
+      "report_blob": "13effeaae9ec50ae9779d5ab0caa3c568a88362b",
+      "report_sha256": "6efbf90ee83e76997eb84985e3fe6f3498ba837a2998900094a0f4238c785a60",
+      "order_path": "oap/orders/008-d-application-baseline-restoration.md",
+      "order_sha256": "4e15638298f40b8871c2638371a2b5bfefa7d7df465d32eea6f1b907a9dfcbab",
+      "implementation_parent": "3baa4f3318f76ba5fc44260829f3f593832695bf"
+    },
     "frozen_007m_configuration_sha256": "0026a1a9d27652c36e2c5a960b10fafc1c9a93b0690d93b09089aa58884f5c26",
     "frozen_007m_prompt_sha256": "572cf2fb4864e66e38a500465e1089062d58aeed4721063fb0c1e466e424230d",
     "frozen_007m_final_root_manifest_sha256": "3fb4aef33542e7fa3f357acb905b75f4d7e7551783f83a422b5d1ea6272c25f8",
-    "registry_entries": 24,
-    "oap_reports_reviewed": 43,
+    "registry_entries": 31,
+    "oap_reports_reviewed": 50,
     "frozen_report_history_incidents": 2
   },
   "official_scorer": {

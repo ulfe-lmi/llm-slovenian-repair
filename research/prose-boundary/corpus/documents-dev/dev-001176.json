@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-001176",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T11-interactions",
+ "byte_length": 1042,
+ "cp_length": 1024,
+ "sha256": "c65216a1a7f24982eebccd075a41719e1c70c22858ed0dff6687b1e6642791f3",
+ "document": "`/* Testni fragment 7: izmišljena oseba Marko, projekt Koda. `.\n```\n// Drugi neodvisni del (č, š, ž)\nconst naslov2 = \"Naslov: *poudarek* in **pomembno**\";\nconst znesek = `Cena: $ 7,00`;\nconst seznam = [\"src/modul.py\", \"docs/vir.txt\", \"https://primer.si/koda\"];\nfunction razdelek2(x) {\n  return (x + 1) * 2;\n}\nconst HRAŠNA_VREDNOST = 3;\nconst vrednost = razdelek2(HRAŠNA_VREDNOST);\nconst opomba = \"_podčrtano_ besedilo\";\nconsole.log(naslov2, znesek, seznam, vrednost, opomba);\n// konec\n# komentar z \\frac{a}{b}\n```\nLena iz izmišljenega projekta Zdravi dnevni krog je zapisala, da stres pogosto spremljajo napete mišice in počasnejši spanec. Zaradi teh sprememb ni mogoče zanesljivo sklepati o vzrokih, zato je smiselno pogovarjati se z zdravnikom.\nV projektu »Mestni prehod čez Ljubljanico« so leta 2021 izbrali kombinacijo jekla in betona (natančneje: lahkega, armiranega). Ker je razpon precejšen, so nosilce razdelili na osem segmentov. Inženirka Ana Kos je dodala, da se temperaturne razlike v spojih skrbno kompenzirajo.",
+ "components": [
+  {
+   "component_id": "comp-code-sql-dev-0007",
+   "category": "code",
+   "start_byte": 0,
+   "end_byte": 63
+  },
+  {
+   "component_id": "comp-code-javascript-dev-0010",
+   "category": "code",
+   "start_byte": 65,
+   "end_byte": 520
+  },
+  {
+   "component_id": "comp-prose-medicine-explainer-dev-0001",
+   "category": "prose",
+   "start_byte": 521,
+   "end_byte": 758
+  },
+  {
+   "component_id": "comp-prose-engineering-dev-0011",
+   "category": "prose",
+   "start_byte": 759,
+   "end_byte": 1042
+  }
+ ]
+}

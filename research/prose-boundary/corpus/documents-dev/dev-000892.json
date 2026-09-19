@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-000892",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T2-prose-math-prose",
+ "byte_length": 752,
+ "cp_length": 730,
+ "sha256": "66c30917b52e5291ec9f32f2914f04f1b6154828d4ae60534e6acf78cbd44ac5",
+ "document": "Ljubljanske gibuice se za projektno degustacijo pripravijo s kislim testom, ki mora prenočati v steklenki. “Ni treba, da so ravne,” je rekla Neža, medtem ko je dno posode premažala s smetano. Po tem, ko so bile dvanajst minut pri 190 stopinjah, so bile notri toplo rumene, zunaj pa rahlo hrustljave.\n\\[ \\begin{cases} \\chi_1+5\\xi_2=\\text{Kranj},\\\\ 2\\mu_3-4\\nu_4=17,\\\\ \\pi_5\\sigma_6=8 \\end{cases} \\]\nV kabolnici je najlažje, ko najprej zbrišemo prah z omaric, šele nato operemo tla. (Počakamo, da se voda malo posuši, in šele potem stiskamo krpo.) Tisti, ki imajo v hiši mačke, vedo, da lasov ne pomečeš, temveč jih zbereš s krpo za steklo. V testnem projektu Čist dom so to za vogla dopolnili s staro krtačo, ki jo občasno speremo.",
+ "components": [
+  {
+   "component_id": "comp-prose-cooking-dev-0004",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 306
+  },
+  {
+   "component_id": "comp-math-bracket-tex-dev-0005",
+   "category": "math",
+   "start_byte": 307,
+   "end_byte": 404
+  },
+  {
+   "component_id": "comp-prose-everyday-advice-dev-0006",
+   "category": "prose",
+   "start_byte": 405,
+   "end_byte": 752
+  }
+ ]
+}

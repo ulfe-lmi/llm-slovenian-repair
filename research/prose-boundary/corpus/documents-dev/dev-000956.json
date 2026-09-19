@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-000956",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T11-interactions",
+ "byte_length": 1469,
+ "cp_length": 1448,
+ "sha256": "32e66829c67ba2e0f96fb10278d613dc92c7d5de4e49c69cadd86e158423ba6e",
+ "document": "`# Testni projekt: Razdelek; avtor: Maja Lipovnik`.\n```\n#!/usr/bin/env bash\n# Tretji fragment: številska oznaka (test) in ne-ASCII znaki\n# Oseba: Maja, projekt: čokoladni vir\nrazdelek2='razdelek2'\nseStez='seStez'\npotA='src/modul.py'\npotB='docs/vir.txt'\npotC='HRAŠNA_VREDNOST.md'\nnavodilo='**test** *navodila* _podčrtano_'\necho \"razdelek: $razdelek2\"\necho \"seStez: $seStez\"\necho \"potA: $potA\"\necho \"potB: $potB\"\necho \"potC: $potC\"\necho \"$navodilo\"\necho 'url: https://primer.si/koda'\necho 'cena: 3 $'\necho 'backquote: `'\n# komentar z \\frac{a}{b}\n```\nV sklopu projekta Papirni most je Anica Kranjc v zbornik vstavila odlomek iz romaneskega dnevnika, ki nosi ime »Zadnji tiskar«. Besedilo iz leta 1998 pripoveduje o mali nakladni hiši v Celju, kjer so tiskarji med prazniki brali evropske pripovedke. Nekatera poglavja ostajajo izpuščena (verjetno zaradi cenzure), druga pa so prenesena ročno v zvezek iz tankega usnja. To vprašanje pomena slovenske knjižnosti v evropskem prostoru se v zadnjem odstavku razreši šele s kratkim pozivom k skupnemu branju.\nV raziskavi Mestni tisk, ki jo vodita Meta Zorman in Ivo Perko, je knjižnost prikazana kot sloj spomina, kjer se prepletajo slovenske pripovedke (poletni tabor v Zgornji Gori), roman Emila Brandta in zgodnja revija za otroško literaturo. Tisti odlomek, ki ga raziskovalci poimenujejo »Tiho zrcalo«, pokaže, kako motiv vrnitve iz tuje dežele postane orodje za preučevanje medgeneracijskih razhujanj.",
+ "components": [
+  {
+   "component_id": "comp-code-python-dev-0003",
+   "category": "code",
+   "start_byte": 0,
+   "end_byte": 50
+  },
+  {
+   "component_id": "comp-code-shell-bash-dev-0011",
+   "category": "code",
+   "start_byte": 52,
+   "end_byte": 551
+  },
+  {
+   "component_id": "comp-prose-literature-dev-0013",
+   "category": "prose",
+   "start_byte": 552,
+   "end_byte": 1063
+  },
+  {
+   "component_id": "comp-prose-literature-dev-0012",
+   "category": "prose",
+   "start_byte": 1064,
+   "end_byte": 1469
+  }
+ ]
+}

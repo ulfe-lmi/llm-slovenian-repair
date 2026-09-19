@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-002254",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T11-interactions",
+ "byte_length": 788,
+ "cp_length": 773,
+ "sha256": "a01b8ccb100112f02f898850447bcd5b1ab9222419d1a0b054e3d9d83170504e",
+ "document": "`#include <string>`.\n```\nfn povzetek2(seStez: bool) -> String { /* Testni projekt Lipa: č, š, ž, **poudarek** in _podčrtano_ */ let razdelek2 = 2; let besedilo = format!(\"_Podčrtano_ ({} $, `{}`)\", razdelek2, \"ž\"); let pot = \"docs/vir.txt\"; let url = \"https://primer.si/koda\"; format!(\"{} | {} | {} | {}\", seStez, besedilo, pot, url) }\n# komentar z \\frac{a}{b}\n```\nV izmišljenem projektu Arhiv besed se motiv arhiva pojavi kot tiha zbirka pism, ki potujejo med slovenskimi in evropskimi mestoma. Izmišljeni avtor Martin Golob zgradi novelo iz treh stavkov. Njegova zgodba je tiha.\nAna je v razredni testni delavnici najprej preverila, ali je sklep odprt (tako je ohišje varno), in šele nato prižgala majhno utripalko. V zapisniku je zapisala „Preizkus 2024 je brez napake.“",
+ "components": [
+  {
+   "component_id": "comp-code-cpp-dev-0007",
+   "category": "code",
+   "start_byte": 0,
+   "end_byte": 19
+  },
+  {
+   "component_id": "comp-code-rust-dev-0002",
+   "category": "code",
+   "start_byte": 21,
+   "end_byte": 370
+  },
+  {
+   "component_id": "comp-prose-literature-dev-0010",
+   "category": "prose",
+   "start_byte": 371,
+   "end_byte": 588
+  },
+  {
+   "component_id": "comp-prose-electronics-dev-0001",
+   "category": "prose",
+   "start_byte": 589,
+   "end_byte": 788
+  }
+ ]
+}

@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-001022",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T11-interactions",
+ "byte_length": 1128,
+ "cp_length": 1105,
+ "sha256": "08fb58ecb3696d6ac091eb164efe88c53939653ee578856d23d7fe5502d67364",
+ "document": "`/* Fragment 2: fiktna oseba Ana, pot docs/vir.txt, vir https`.\n```\n# Fragment 6: *neodvisen*, podčrtano _besedilo_, (oklepaj)\necho 'Zvezdice: *zvezda* **dvakrat** in _podčrtano_'\necho 'Valuta: 1 $ in 9 € (testni znesek)'\necho 'Poti: docs/vir.txt in src/modul.py'\necho 'Spletna stran: https://primer.si/koda'\necho 'Id: razdelek2, seStez, HRAŠNA_VREDNOST'\necho 'Backquote `vse` in poudarčni znaki č š ž'\n# komentar z \\frac{a}{b}\n```\nVarčnost pri računih za ogrevanje v projektu Topla hiša ni vedno leva stvar, če je v prostoru prehladno. Leta 2023 so mnogi domovi dobili termometre, ki opozarjajo, ko temperatura pade pod 18 stopinj. (V takih dneh je bolje zapreti okno, ki ga obvečer nismo nujno potrebovali.) Pri starejših gradnjah je koristno preveriti tudi, ali se okno res dobro zapre.\nLoj je v skledi mirno segel. Ropova jaha (kot jo pišejo doma) je v loncu postajala sočna. Petra je po starini vzela dve žlici moke, tri zvezdice anisa in malo muškatnega oreha. Krompir je bil že pripravljen, jajca pa so bila v hladilniku, ki ga je kupila leta 2023. Ura je zazvonila, ko je začutila vonj po špinači.",
+ "components": [
+  {
+   "component_id": "comp-code-cpp-dev-0010",
+   "category": "code",
+   "start_byte": 0,
+   "end_byte": 62
+  },
+  {
+   "component_id": "comp-code-shell-bash-dev-0006",
+   "category": "code",
+   "start_byte": 64,
+   "end_byte": 440
+  },
+  {
+   "component_id": "comp-prose-everyday-advice-dev-0009",
+   "category": "prose",
+   "start_byte": 441,
+   "end_byte": 804
+  },
+  {
+   "component_id": "comp-prose-cooking-dev-0013",
+   "category": "prose",
+   "start_byte": 805,
+   "end_byte": 1128
+  }
+ ]
+}

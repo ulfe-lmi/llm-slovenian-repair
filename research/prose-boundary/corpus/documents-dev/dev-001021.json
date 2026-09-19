@@ -1,0 +1,47 @@
+{
+ "doc_id": "dev-001021",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T10-randomized",
+ "byte_length": 1700,
+ "cp_length": 1668,
+ "sha256": "7082a127e535e5b165926610742699a56f9d7f416fece2ee5befc89960b07ce0",
+ "document": "V kabolnici je najlažje, ko najprej zbrišemo prah z omaric, šele nato operemo tla. (Počakamo, da se voda malo posuši, in šele potem stiskamo krpo.) Tisti, ki imajo v hiši mačke, vedo, da lasov ne pomečeš, temveč jih zbereš s krpo za steklo. V testnem projektu Čist dom so to za vogla dopolnili s staro krtačo, ki jo občasno speremo.\n```\n# Testni projekt: Nabavna lista; avtor: Maja Lipovnik\ncena = 12.50\nznesek = 'Cena: 12,50 $ v oklepaju (brez DDV)'\npot = 'docs/vir.txt'\nkomentar = 'Slovenski č, š, ž'\nif cena > 10:\n    print('Visok znesek')\n```\n```\n/* Testni fragment 3: izmišljena oseba Luka, projekt Brst. */ SELECT 'Luka' AS `ime`, '3,10 $' AS `cena`, 'https://primer.si/koda' AS `url`, 'src/test.py' AS `pot`, TRIM('*kratek* in _podčrtano_') AS `opomba`, 'razdelek2' AS `razdelek2`, 'seStez' AS `seStez`, 'š' AS `HRAŠNA_VREDNOST` FROM (SELECT 3 AS `en`) AS `t` WHERE (`t`.`en` = 3);\n```\n```\n/* Testni fragment 6: izmišljena oseba Petra, projekt Voda. */ SELECT 'Petra' AS `ime`, '6,40 $' AS `cena`, 'https://primer.si/koda' AS `url`, 'docs/nova.txt' AS `pot`, TRIM('*poudarek* in _podčrtano_') AS `opomba`, 'razdelek2' AS `razdelek2`, 'seStez' AS `seStez`, 'š' AS `HRAŠNA_VREDNOST` FROM (SELECT 6 AS `en`) AS `t` WHERE (`t`.`en` = 6);\n```\n-v, --podrobnosti\nV Občini Srednji Grič je od lanskega aprila potekalo posvetovanje o novem postopku za izdajo gradbenih dovoljenj. (Cilj je bil krajši rok za obravnavo zahtev.) Upravni uradnik Marko Zajc je pripravil povzetek komentarjev, ki so jih oddali posamezniki, podjetja in društva. Do konca leta 2025 so želeli uvesti enotno elektronsko knjižico, vendar se je izkazalo, da je treba najprej uskladiti terminologijo.",
+ "components": [
+  {
+   "component_id": "comp-prose-everyday-advice-dev-0006",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 347
+  },
+  {
+   "component_id": "comp-code-python-dev-0002",
+   "category": "code",
+   "start_byte": 348,
+   "end_byte": 564
+  },
+  {
+   "component_id": "comp-code-sql-dev-0003",
+   "category": "code",
+   "start_byte": 565,
+   "end_byte": 914
+  },
+  {
+   "component_id": "comp-code-sql-dev-0006",
+   "category": "code",
+   "start_byte": 915,
+   "end_byte": 1270
+  },
+  {
+   "component_id": "comp-machine-cli-flags-dev-0002",
+   "category": "machine",
+   "start_byte": 1271,
+   "end_byte": 1288
+  },
+  {
+   "component_id": "comp-prose-administration-dev-0001",
+   "category": "prose",
+   "start_byte": 1289,
+   "end_byte": 1700
+  }
+ ]
+}

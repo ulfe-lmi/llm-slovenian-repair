@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-001014",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T3-prose-fenced-prose",
+ "byte_length": 1106,
+ "cp_length": 1080,
+ "sha256": "7c6771ad5c9422595f52da6da37949fd9c499c061c9bb8d4d0733b72c2a9972b",
+ "document": "V projektu Zdrav vsak dan (v letu 2024) so izpostavili, da se lahko obremenjenost kaže v hitrem dihanju, v slabšem spanju ali v občutku tesnobe. To ni razlaga za domov, ampak spomin, da so telesni signali odziv. Ko se ti signali ponavljajo, jih najprej opiše oseba, nato pa jih preveri zdravnik.\n```\n-- Razdelek2: testi za vir\nCREATE TABLE viri (\n  id INT PRIMARY KEY,\n  pot TEXT,\n  \"HRAŠNA_VREDNOST\" TEXT,\n  \"seStez\" TEXT\n);\nINSERT INTO viri (id, pot, \"HRAŠNA_VREDNOST\", \"seStez\")\nVALUES (1, 'docs/vir.txt', 'vrednost: 5 $', '`kodica` in **besedilo**');\nSELECT id, pot, \"HRAŠNA_VREDNOST\" FROM viri WHERE pot = 'src/modul.py';\n-- Oklepaji: (poudarek _šumniki_)\n```\n»To ni povprečje,« je dejal Marko, »ampak mediana, ki jo pogosto zamenjamo s povprečno vrednostjo.« Ko so se v razpravi projekta Glasnik pogovarjali o plačah, so na mizi omenili tudi srednjo vrednost (kot računsko povprečje). Sam visok znesek je povprečje potegnilo navzgor, medtem da je mediana ostala bližje vsakdanji izkušnji. »V razmerju med izplačili in stroški,« je dodal, »je treba paziti, kaj sploh merimo.«",
+ "components": [
+  {
+   "component_id": "comp-prose-medicine-explainer-dev-0005",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 299
+  },
+  {
+   "component_id": "comp-code-sql-dev-0010",
+   "category": "code",
+   "start_byte": 300,
+   "end_byte": 672
+  },
+  {
+   "component_id": "comp-prose-statistics-dev-0012",
+   "category": "prose",
+   "start_byte": 673,
+   "end_byte": 1106
+  }
+ ]
+}

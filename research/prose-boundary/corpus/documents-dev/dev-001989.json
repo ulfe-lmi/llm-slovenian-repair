@@ -1,0 +1,65 @@
+{
+ "doc_id": "dev-001989",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T10-randomized",
+ "byte_length": 1180,
+ "cp_length": 1160,
+ "sha256": "719e803e1e54beb184fae0c06b83fa98edce6b2979e904f38bc55e83ae98c338",
+ "document": "V projektu Brda je ekipa pod vodstvom Anje Zupan preverjala betonno ploščo in jeklene povezave (vezne elemente) na mostu čez Sočo. »Pri takih presojah najprej gledamo trdnost, potem pa še vzdržljivost,« je povedala na terenskem sestanku. Izračuni so pokazali, da bo dovolj, če se armatura postavi po novem razporeditvenem načrtu.\nTestna serija: 3 enote po 120 W so aktivne, potrditev pa je z **močno** in __podčrtim__ besedilom.\n[sola]\nlekcija = 'Slovenščina'\nucitelj = 'Petra Horvat'\nocena = '9'\ntrajanje = '45 minut'\nopomba = '_Raba_ zvezdic'\nvir = 'https://primer.si/novica'\n{\"ime\":\"Projekt Sonce\",\"dolžina\":\"4,2 m\",\"avtorsko\":\"Nevtralna testna vsebina\",\"kvote\":{\"delež\":\"25 %\",\"opomba\":\"**Pregled** https://primer.si/novica\"}}\n\\(\\left(\\frac{\\mu^2}{8-\\nu}+\\sqrt[5]{13+\\phi}\\right)_{\\text{Domen}}\\)\nPROJEKT_IME=Kralj_Metelj, KEY=vrednost\nOpozorilo: ~~neznano~~ stanje 14 mm in 5 l za Ana Krajnc.\nProjekt *Maja* shrani _razmik_ 4 metre.\nPri projektu Zimska lučka je Katja poizkusila z dvema baterijama in dvema upornostma. A sklep je bil sprva odprt. Ko je na koncu pritiskala na stikalo, se je dioda vžgala. V dnevni sobi so slišali le tihi, zadovoljen smeh.",
+ "components": [
+  {
+   "component_id": "comp-prose-engineering-dev-0006",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 340
+  },
+  {
+   "component_id": "comp-markdown-strong-dev-0006",
+   "category": "markdown",
+   "start_byte": 341,
+   "end_byte": 441
+  },
+  {
+   "component_id": "comp-structured-toml-dev-0004",
+   "category": "structured",
+   "start_byte": 442,
+   "end_byte": 592
+  },
+  {
+   "component_id": "comp-structured-json-dev-0005",
+   "category": "structured",
+   "start_byte": 593,
+   "end_byte": 747
+  },
+  {
+   "component_id": "comp-math-paren-tex-dev-0004",
+   "category": "math",
+   "start_byte": 748,
+   "end_byte": 817
+  },
+  {
+   "component_id": "comp-machine-env-vars-dev-0001",
+   "category": "machine",
+   "start_byte": 818,
+   "end_byte": 856
+  },
+  {
+   "component_id": "comp-markdown-strikethrough-dev-0006",
+   "category": "markdown",
+   "start_byte": 857,
+   "end_byte": 914
+  },
+  {
+   "component_id": "comp-markdown-emphasis-dev-0008",
+   "category": "markdown",
+   "start_byte": 915,
+   "end_byte": 954
+  },
+  {
+   "component_id": "comp-prose-electronics-dev-0008",
+   "category": "prose",
+   "start_byte": 955,
+   "end_byte": 1180
+  }
+ ]
+}

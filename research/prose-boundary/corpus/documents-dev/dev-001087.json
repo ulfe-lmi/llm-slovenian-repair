@@ -1,0 +1,59 @@
+{
+ "doc_id": "dev-001087",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T10-randomized",
+ "byte_length": 1130,
+ "cp_length": 1117,
+ "sha256": "cb28b6be6659e0c61e015e94f1ca46bdfd9f5c9ce0a22d94b0dc4f4d75aa2e23",
+ "document": "Luka je ob peti uri zvečer odkril, da se prenosnik sam po sebi hladi. V opombi za sodelavce je zapisal, da se to dogaja ob hkratnem delu s tremi programi. (Gre za navaden vzorec, ki ga je opisala tudi podpora.) Zato so preizkus ponovili brez dodatnih posegov.\n```\n/* Testni fragment 2: izmišljena oseba Jana, projekt Lipa. */ SELECT 'Jana' AS `ime`, '2,30 $' AS `cena`, 'https://primer.si/koda' AS `url`, 'docs/vir.txt' AS `pot`, TRIM('**poudarek** in _podčrtano_') AS `opomba`, 'razdelek2' AS `razdelek2`, 'seStez' AS `seStez`, 'ž' AS `HRAŠNA_VREDNOST` FROM (SELECT 2 AS `en`) AS `t` WHERE (`t`.`en` = 2);\n```\nQ3_2024\n```yaml\n# Projekt Sonce: primer 9, brez absolutnih poti\n```\n\n\\[\\dfrac{1}{2}+\\frac{\\alpha}{\\beta}=\\text{Anja}\\]\n```yaml\n# Projekt Roza: testno besedilo, število 3\n```\n\n--vhod projekt/sonce.json, --izhod dnevnik.log, --format json\nV projektu Morska črta je Ana izračunala, da se je prodaja v letu 2023 povečala za 12 odstotkov. To je pomenilo, da je v juliju na tri prodane kosove v povprečju padlo eno novo naročilo. Ekipa je rezultat zapisala v testno interno poročilo in ga označila za preverjeno.",
+ "components": [
+  {
+   "component_id": "comp-prose-computing-dev-0003",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 260
+  },
+  {
+   "component_id": "comp-code-sql-dev-0002",
+   "category": "code",
+   "start_byte": 261,
+   "end_byte": 615
+  },
+  {
+   "component_id": "comp-machine-identifiers-dev-0005",
+   "category": "machine",
+   "start_byte": 616,
+   "end_byte": 623
+  },
+  {
+   "component_id": "comp-markdown-fenced-code-dev-0005",
+   "category": "markdown",
+   "start_byte": 624,
+   "end_byte": 684
+  },
+  {
+   "component_id": "comp-math-fractions-dev-0001",
+   "category": "math",
+   "start_byte": 685,
+   "end_byte": 734
+  },
+  {
+   "component_id": "comp-markdown-fenced-code-dev-0001",
+   "category": "markdown",
+   "start_byte": 735,
+   "end_byte": 791
+  },
+  {
+   "component_id": "comp-machine-cli-flags-dev-0003",
+   "category": "machine",
+   "start_byte": 792,
+   "end_byte": 853
+  },
+  {
+   "component_id": "comp-prose-statistics-dev-0006",
+   "category": "prose",
+   "start_byte": 854,
+   "end_byte": 1130
+  }
+ ]
+}

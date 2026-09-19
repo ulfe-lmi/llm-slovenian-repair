@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-001546",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T7-prose-json-prose-latex",
+ "byte_length": 933,
+ "cp_length": 912,
+ "sha256": "70282c69a2485a69b3dfca08c262cffad22a622f95e13593e4fa5bf001bb49e0",
+ "document": "V vprašanjih za projekt Zdravo mesto 2025 so otroci zaskrbljeni zaradi »bolečin v trebuhu« po školski malici. Raje ne govorimo o diagnozi; zabeležimo, kdaj se pojavi, koliko traja in kakšna je hrana (na primer po mlečnih izdelkih). Pri vsakem nepričakovanem ponovnem pojavi naj starš pokliče zdravniško ambulanto.\n{\"ime\":\"Projekt Lipa\",\"cilj\":\"Nalaganje podatkov 25 %\",\"avtorsko\":\"Nevtralna testna vsebina\",\"merila\":{\"razmerje\":\"3,5 m / 0,13\",\"opomba\":\"**Test** https://primer.si/novica\"}}\nAna je zapisala, da se v starejših pisarnah pogosto uporabljajo tiskalniki, ki se povezujejo po kablu, čeprav so mlajši sodelavci privrženci brezžičnih rešitev. Takšna razmerja, čeprav na videz nevidna, vplivajo na to, kako hitro potuje dokument. (V projektu so to opazovali tri tedne.)\n\\begin{align} \\lambda_6 &= \\prod_{\\mu=1}^{6} \\nu_\\mu \\\\ \\pi_6 &= \\sum_{\\xi=1}^{6} \\zeta_\\xi \\\\ \\varphi_6 &= \\chi_6 - \\psi_6 \\end{align}",
+ "components": [
+  {
+   "component_id": "comp-prose-medicine-explainer-dev-0012",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 325
+  },
+  {
+   "component_id": "comp-structured-json-dev-0001",
+   "category": "structured",
+   "start_byte": 326,
+   "end_byte": 501
+  },
+  {
+   "component_id": "comp-prose-computing-dev-0005",
+   "category": "prose",
+   "start_byte": 502,
+   "end_byte": 797
+  },
+  {
+   "component_id": "comp-math-align-env-dev-0006",
+   "category": "math",
+   "start_byte": 798,
+   "end_byte": 933
+  }
+ ]
+}

@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-001503",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T8-quote-fenced",
+ "byte_length": 542,
+ "cp_length": 538,
+ "sha256": "797b20de52f083e82eb20af545f6d15357993ac1addbd15f67f7103350576ead",
+ "document": "> Astronomi projekta Zora so z manjšim daljnogledom na Merljaku opazovali jutrnje oblake pri zori. Poskušali so zajeti bliskavice, ki so se pojavile le za hip, in v beležki je bilo zapisano, da je nebo ob petih zjutraj postalo manj motno. `/* Fragment 1: nevtralni testni projekt, vir https://primer.`\n```\n#include <string>\n// URL: https://primer.si/koda\n// Pot: src/modul.py, žlahtna\nstd::string vir() {\n    std::string url = \"https://primer.si/koda\";\n    std::string pot = \"docs/vir.txt\";\n    return url + \" \" + pot + \" (*test*)\";\n}\n```",
+ "components": [
+  {
+   "component_id": "comp-prose-science-dev-0003",
+   "category": "prose",
+   "start_byte": 2,
+   "end_byte": 241
+  },
+  {
+   "component_id": "comp-code-cpp-dev-0009",
+   "category": "code",
+   "start_byte": 242,
+   "end_byte": 304
+  },
+  {
+   "component_id": "comp-code-cpp-dev-0006",
+   "category": "code",
+   "start_byte": 305,
+   "end_byte": 542
+  }
+ ]
+}

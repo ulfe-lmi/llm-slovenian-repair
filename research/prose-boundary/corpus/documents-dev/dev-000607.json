@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-000607",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T3-prose-fenced-prose",
+ "byte_length": 734,
+ "cp_length": 717,
+ "sha256": "7b3db5c222c25eb4632fc5c75618ab952496e0df2ad015dca5d2545d4bbb2b0c",
+ "document": "Maja je poletni dopust v Sredozemlju izbrala predvsem zaradi tihih obalnih vas (zlasti tistih v bližini Kotorskega zaliva). »Sonce je bilo toplo,« je zapisala v svojih opombah, a je poudarila, da je treba med popoldanskimi urami ostati v senci.\r\n```\r\nconst naslov = 'Opomba: **pomembno**'; /* Naslov za Ana Kovač */ const podnaslov = '_podčrtano_ besedilo'; const cena = '12 $'; console.log(naslov, podnaslov, cena);\r\n```\r\nKo je Nika za projekt »Polno napajanje« preverjala obvestila, je opazila, da se aplikacija za vremensko napoved pozno obudila, če je telefon bil v šibkem omrežju (tudi ob številnih sporočilih). »Najprej napajanje«, je rekla njena sestra, »vse ostalo je opozorilo, ki lahko počaka do polnjenja.«",
+ "components": [
+  {
+   "component_id": "comp-prose-travel-dev-0012",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 247
+  },
+  {
+   "component_id": "comp-code-javascript-dev-0002",
+   "category": "code",
+   "start_byte": 249,
+   "end_byte": 426
+  },
+  {
+   "component_id": "comp-prose-computing-dev-0009",
+   "category": "prose",
+   "start_byte": 428,
+   "end_byte": 734
+  }
+ ]
+}

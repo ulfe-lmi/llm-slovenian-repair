@@ -1,0 +1,112 @@
+{
+ "doc_id": "dev-002776",
+ "byte_length": 1141,
+ "cp_length": 1113,
+ "regions": [
+  {
+   "start_byte": 0,
+   "end_byte": 2,
+   "start_cp": 0,
+   "end_cp": 2,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 2,
+   "end_byte": 325,
+   "start_cp": 2,
+   "end_cp": 317,
+   "component_id": "comp-prose-cooking-dev-0013",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 325,
+   "end_byte": 328,
+   "start_cp": 317,
+   "end_cp": 320,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 328,
+   "end_byte": 329,
+   "start_cp": 320,
+   "end_cp": 321,
+   "component_id": "comp-code-shell-bash-dev-0011",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 329,
+   "end_byte": 348,
+   "start_cp": 321,
+   "end_cp": 340,
+   "component_id": "comp-code-shell-bash-dev-0011",
+   "category": "code",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 348,
+   "end_byte": 349,
+   "start_cp": 340,
+   "end_cp": 341,
+   "component_id": "comp-code-shell-bash-dev-0011",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 349,
+   "end_byte": 352,
+   "start_cp": 341,
+   "end_cp": 344,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 352,
+   "end_byte": 712,
+   "start_cp": 344,
+   "end_cp": 696,
+   "component_id": "comp-prose-cooking-dev-0002",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 712,
+   "end_byte": 715,
+   "start_cp": 696,
+   "end_cp": 699,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 715,
+   "end_byte": 1141,
+   "start_cp": 699,
+   "end_cp": 1113,
+   "component_id": "comp-prose-computing-dev-0013",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  }
+ ],
+ "invariants": {
+  "tiling_complete": true,
+  "no_contradictory_overlaps": true,
+  "cp_range_exact": true
+ }
+}

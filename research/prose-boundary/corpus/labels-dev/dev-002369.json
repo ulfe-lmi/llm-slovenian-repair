@@ -1,0 +1,112 @@
+{
+ "doc_id": "dev-002369",
+ "byte_length": 969,
+ "cp_length": 950,
+ "regions": [
+  {
+   "start_byte": 0,
+   "end_byte": 2,
+   "start_cp": 0,
+   "end_cp": 2,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 2,
+   "end_byte": 362,
+   "start_cp": 2,
+   "end_cp": 354,
+   "component_id": "comp-prose-cooking-dev-0002",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 362,
+   "end_byte": 365,
+   "start_cp": 354,
+   "end_cp": 357,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 365,
+   "end_byte": 366,
+   "start_cp": 357,
+   "end_cp": 358,
+   "component_id": "comp-code-c-dev-0001",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 366,
+   "end_byte": 426,
+   "start_cp": 358,
+   "end_cp": 418,
+   "component_id": "comp-code-c-dev-0001",
+   "category": "code",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 426,
+   "end_byte": 427,
+   "start_cp": 418,
+   "end_cp": 419,
+   "component_id": "comp-code-c-dev-0001",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 427,
+   "end_byte": 430,
+   "start_cp": 419,
+   "end_cp": 422,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 430,
+   "end_byte": 613,
+   "start_cp": 422,
+   "end_cp": 601,
+   "component_id": "comp-prose-science-dev-0009",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 613,
+   "end_byte": 616,
+   "start_cp": 601,
+   "end_cp": 604,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 616,
+   "end_byte": 969,
+   "start_cp": 604,
+   "end_cp": 950,
+   "component_id": "comp-prose-everyday-advice-dev-0013",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  }
+ ],
+ "invariants": {
+  "tiling_complete": true,
+  "no_contradictory_overlaps": true,
+  "cp_range_exact": true
+ }
+}

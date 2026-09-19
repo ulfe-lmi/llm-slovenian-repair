@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-001810",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T7-prose-json-prose-latex",
+ "byte_length": 653,
+ "cp_length": 646,
+ "sha256": "1cd274521bc3e5e8f37b3136cc59c797b3cc34b87611c28a4ca0719263c4377e",
+ "document": "Zahtevo so oddali v ponedeljek. V občini so jo prejeli isti dan, in sicer ob enajsti uri popoldne. Potrdilo z modro značko, ki je merila tri centimetre, so priložili k vsakemu vnosu v evidenco.\n{\"ime\":\"Projekt Gora\",\"nagnjenost\":\"12 %\",\"avtorsko\":\"Nevtralna testna vsebina\",\"debelina\":\"0,3 m\",\"opomba\":\"_Nevtralno_ https://primer.si/novica\"}\nV projektu Grem v šolo so učenci izmerili, da so v treh tednih v povprečju spali osem ur in petnajst minut. Razmerje med spanjem in budnostjo je bilo, kot se je pokazalo, približno ena do dve (glede na dneve brez izjemnih dogodkov).\n\\(\\text{vsota} = \\alpha_{\\text{Ljubljana}} + \\beta_{\\text{Koper}} + 2\\)",
+ "components": [
+  {
+   "component_id": "comp-prose-administration-dev-0009",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 196
+  },
+  {
+   "component_id": "comp-structured-json-dev-0008",
+   "category": "structured",
+   "start_byte": 197,
+   "end_byte": 344
+  },
+  {
+   "component_id": "comp-prose-statistics-dev-0007",
+   "category": "prose",
+   "start_byte": 345,
+   "end_byte": 581
+  },
+  {
+   "component_id": "comp-math-text-slovenian-dev-0001",
+   "category": "math",
+   "start_byte": 582,
+   "end_byte": 653
+  }
+ ]
+}

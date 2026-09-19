@@ -1,0 +1,82 @@
+{
+ "doc_id": "dev-002641",
+ "byte_length": 804,
+ "cp_length": 793,
+ "regions": [
+  {
+   "start_byte": 0,
+   "end_byte": 379,
+   "start_cp": 0,
+   "end_cp": 375,
+   "component_id": "comp-prose-literature-dev-0001",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 379,
+   "end_byte": 380,
+   "start_cp": 375,
+   "end_cp": 376,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 380,
+   "end_byte": 382,
+   "start_cp": 376,
+   "end_cp": 378,
+   "component_id": "comp-math-paren-tex-dev-0001",
+   "category": "math",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 382,
+   "end_byte": 448,
+   "start_cp": 378,
+   "end_cp": 444,
+   "component_id": "comp-math-paren-tex-dev-0001",
+   "category": "math",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 448,
+   "end_byte": 450,
+   "start_cp": 444,
+   "end_cp": 446,
+   "component_id": "comp-math-paren-tex-dev-0001",
+   "category": "math",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 450,
+   "end_byte": 451,
+   "start_cp": 446,
+   "end_cp": 447,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 451,
+   "end_byte": 804,
+   "start_cp": 447,
+   "end_cp": 793,
+   "component_id": "comp-prose-everyday-advice-dev-0013",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  }
+ ],
+ "invariants": {
+  "tiling_complete": true,
+  "no_contradictory_overlaps": true,
+  "cp_range_exact": true
+ }
+}

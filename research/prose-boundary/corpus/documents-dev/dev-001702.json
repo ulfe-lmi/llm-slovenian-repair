@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-001702",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T9-prose-malformed-prose",
+ "byte_length": 644,
+ "cp_length": 639,
+ "sha256": "3251a1abe1f763c2053a3c14db3d4cef07c02b1c6bb3e41fa86ddc871c6e4bf5",
+ "document": "V okviru internega testnega projekta so v občinskem uradu po novem dokumente prejeli v digitalni obliki in zaposleni so morali preveriti, ali so priloženi obrazci polni. Maja je sodelavcem dejala, da rok za odločitev poteka do petega v mesecu, zato morajo skrbno preveriti priložene listine.\n<span title=\nNevtralna avtorizirana testna vsebina za projekt Sova in osebo Ano Testno.\nLuka je ob peti uri zvečer odkril, da se prenosnik sam po sebi hladi. V opombi za sodelavce je zapisal, da se to dogaja ob hkratnem delu s tremi programi. (Gre za navaden vzorec, ki ga je opisala tudi podpora.) Zato so preizkus ponovili brez dodatnih posegov.",
+ "components": [
+  {
+   "component_id": "comp-prose-administration-dev-0011",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 295
+  },
+  {
+   "component_id": "comp-malformed-partial-html-dev-0002",
+   "category": "malformed",
+   "start_byte": 296,
+   "end_byte": 383
+  },
+  {
+   "component_id": "comp-prose-computing-dev-0003",
+   "category": "prose",
+   "start_byte": 384,
+   "end_byte": 644
+  }
+ ]
+}

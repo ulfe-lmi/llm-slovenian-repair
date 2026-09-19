@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-001558",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T8-quote-fenced",
+ "byte_length": 642,
+ "cp_length": 631,
+ "sha256": "34b4a99e5146fdd6e2c493fda52afaf9b8358bcdc1538c853f805629db31cb6c",
+ "document": "> Katarina in Jure sta v razredu elektronskih raziskav leta 2024 razpravljala o tem, kako sklepi in upornosti varujejo komponente pred prevelikim tokom. Pri poskusu s tremi različnimi baterijami sta opazila, da se žarnica pri višji napetosti svetli močneje, a se hitreje ogreje. Oba sta zapisala, da za varno vajo zadostujejo natančno merjenje, potrpežljivost in jasna shema. `# Testni projekt: Lipna dolina; avtor: Maja Lipovnik`\n```\n// Testni podatki za osebo Ana.\nconst HRAŠNA_VREDNOST: i32 = 7;\nfn razdelek2(seStez: &str) -> String {\n    let vrednost = HRAŠNA_VREDNOST;\n    format!(\"podčrtano *{seStez}* in {vrednost} €\")\n}\n```",
+ "components": [
+  {
+   "component_id": "comp-prose-electronics-dev-0013",
+   "category": "prose",
+   "start_byte": 2,
+   "end_byte": 381
+  },
+  {
+   "component_id": "comp-code-python-dev-0001",
+   "category": "code",
+   "start_byte": 382,
+   "end_byte": 436
+  },
+  {
+   "component_id": "comp-code-rust-dev-0010",
+   "category": "code",
+   "start_byte": 437,
+   "end_byte": 642
+  }
+ ]
+}

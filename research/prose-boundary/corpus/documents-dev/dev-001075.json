@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-001075",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T9-prose-malformed-prose",
+ "byte_length": 648,
+ "cp_length": 639,
+ "sha256": "699491e54d300d7170b1c8023dd4279e1235309dc501e2e6d338c06ee6caff70",
+ "document": "V izmišljenem projektu Bralna linija (2021) mlada lektorica Ana Brezan raziskuje, kako kratek slovenski razpesek vpraša spomin. V evropski primerjavi se motiva potovanja in tihotapljenja knjig pojavita pri avtorici Elini Kravec ter pri francoskem romanopiscu Marcu Villen. Zvrst, ki jo raziskovalci imenujejo bralna pripoved, tu zveni kot nežna variacija na klasičen dnevnik.\n\n\\(x+1=2. Testni zapis projekta Lipa za osebo Anna.\n\nV projektu Prijava za športno leto 2024 je učiteljica Meta pojasnila, da lahka utrujenost po vadbi pogosto prehaja, če oseba zaspi in pije vodo. Če se stanje ponovi ali poslabša, je smiselno poiskati zdravnika.",
+ "components": [
+  {
+   "component_id": "comp-prose-literature-dev-0001",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 379
+  },
+  {
+   "component_id": "comp-malformed-incomplete-paren-bracket-dev-0001",
+   "category": "malformed",
+   "start_byte": 381,
+   "end_byte": 431
+  },
+  {
+   "component_id": "comp-prose-medicine-explainer-dev-0011",
+   "category": "prose",
+   "start_byte": 433,
+   "end_byte": 648
+  }
+ ]
+}

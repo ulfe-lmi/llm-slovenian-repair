@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-000815",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T2-prose-math-prose",
+ "byte_length": 714,
+ "cp_length": 702,
+ "sha256": "486665f7e32886ed8f8f6a5f677ffa52b48fb8ed539b5e513f70f0ddb7e3aa62",
+ "document": "Za šolsko uro sem pripravila zgodbo o dveh vrstah sadja. Prva vrsta je vsebovala tri jabolka, druga pa štiri hruške. Učenci so po mnenju mentorja najprej poimenovali skupine, šele nato pa primerjali. Vstavek v dnevniku je bil preprost: »Enakost ni le število, ampak tudi pojasnjenje.« S tem sem želela, da se ne zanašajo samo na pravilo.\n\\[ \\begin{cases} \\alpha_1+2\\beta_2=7,\\\\ 3\\gamma_1-\\delta_2=\\text{Ljubljana},\\\\ \\eta_3\\zeta_4=12 \\end{cases} \\]\nMarko je v testnem kotičku izbral dve upornosti, ju povezal z majhno baterijo in opazoval, da se sij utripalke rahlo spreminja. Njegova soseda v delavnici, Petra, je vprašala, ali je sklep res potreben. \"Da, pojasnil je, ker prekine tok, ko ga odpremo.\"",
+ "components": [
+  {
+   "component_id": "comp-prose-math-explainer-dev-0004",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 347
+  },
+  {
+   "component_id": "comp-math-bracket-tex-dev-0001",
+   "category": "math",
+   "start_byte": 348,
+   "end_byte": 458
+  },
+  {
+   "component_id": "comp-prose-electronics-dev-0002",
+   "category": "prose",
+   "start_byte": 459,
+   "end_byte": 714
+  }
+ ]
+}

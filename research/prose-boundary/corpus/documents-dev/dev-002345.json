@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-002345",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T3-prose-fenced-prose",
+ "byte_length": 922,
+ "cp_length": 907,
+ "sha256": "22ad1676d37970bf8da22c1f34b0e61eaf6c3f9e3b702a396bb07eafde72b0ae",
+ "document": "V sklopu testnega projekta je Peter opazoval skupino starejših udeležencev. Njegova skupina je začela s petminutnim segrevanjem. Nato je izvedla tri krogove po travi. „Sodelavec,“ je vodja rekel, „v prihodnji uri bomo dodali še eno zmerno aktivnost.“\n```\n/* Primer 3: vrednost in identifikator */ int main(void) { const char *pot = \"src/modul.py\"; const char *dokument = \"docs/vir.txt\"; const char *meta = \"Vrednost: 99,90 $ (oklepji) *poudarek* in HRAŠNA_VREDNOST\"; const char *naslov = \"https://primer.si/koda\"; int hraSnaVrednost2 = 3; (void)pot; (void)dokument; (void)meta; (void)naslov; return hraSnaVrednost2; }\n```\nV testni skupini je Luka baterijo namestil s pravim stikom na vrhu, nato pa preizkusil sklep z zgornjim in spodnjim stikom. Ko je sklep zaprl, se utripalka prižgala; ko ga je odprl, pa se je utripalka ugasnila. V pogovoru s mentorjem je rekel, da bo naslednjič poskusil drugo upornost.",
+ "components": [
+  {
+   "component_id": "comp-prose-sports-dev-0010",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 262
+  },
+  {
+   "component_id": "comp-code-c-dev-0011",
+   "category": "code",
+   "start_byte": 263,
+   "end_byte": 634
+  },
+  {
+   "component_id": "comp-prose-electronics-dev-0004",
+   "category": "prose",
+   "start_byte": 635,
+   "end_byte": 922
+  }
+ ]
+}

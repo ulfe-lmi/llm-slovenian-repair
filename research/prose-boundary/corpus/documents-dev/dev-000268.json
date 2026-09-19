@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-000268",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T5-lists",
+ "byte_length": 1104,
+ "cp_length": 1072,
+ "sha256": "78a026bc0c061bebe4e370addefa13f628c84b69bf6435669e395aabcc59af50",
+ "document": "- V tečaju za starše v Celju so namesto poskusnega izpita uvedli skupno vprašanje, ki ga je treba razčleniti v tri kratke točke. Ko so otroci in učitelji slišali “Da se ocenjevanje ne začne šele z ocenami”, so se v razredu pogostejše pojavila vprašanja o načinu, ne le o točkah.\n- `int main(void) { int razdelek2 = 7; char *naslov = \"Ana (izm`\n- V letu 2022 je občina Šentvid na Vzorčni gori uvedla elektronsko predložitev dokumentov. Nekateri uporabniki so najprej raje oddali listne vloge, a so kasneje izbrali spletno obliko. V zapisniku, ki ga je podpisal magister Jožef Kranjc, so zapisali: „Postopek je pregleden”, in ga nato potrdili. Rok za odziv je bil deset dni, vendar so večino rešitev dokončali že v petih dneh. Tudi mnenje javnosti je bilo zmerno, saj so v anketi sodelovali trije od petih prebivalcev.\n- Marko je v testnem kotičku izbral dve upornosti, ju povezal z majhno baterijo in opazoval, da se sij utripalke rahlo spreminja. Njegova soseda v delavnici, Petra, je vprašala, ali je sklep res potreben. \"Da, pojasnil je, ker prekine tok, ko ga odpremo.\"",
+ "components": [
+  {
+   "component_id": "comp-prose-education-dev-0009",
+   "category": "prose",
+   "start_byte": 2,
+   "end_byte": 295
+  },
+  {
+   "component_id": "comp-code-c-dev-0003",
+   "category": "code",
+   "start_byte": 298,
+   "end_byte": 360
+  },
+  {
+   "component_id": "comp-prose-administration-dev-0010",
+   "category": "prose",
+   "start_byte": 363,
+   "end_byte": 846
+  },
+  {
+   "component_id": "comp-prose-electronics-dev-0002",
+   "category": "prose",
+   "start_byte": 849,
+   "end_byte": 1104
+  }
+ ]
+}

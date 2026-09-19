@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-000202",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T5-lists",
+ "byte_length": 795,
+ "cp_length": 776,
+ "sha256": "6180a2c051ee97d38744ed19433bf8c13fba308342d0e792a6f644f81db35371",
+ "document": "- Varnostni vodič iz leta 2020 je zapisal, da se baterije nikoli ne smejo povezati v kratki sklep brez upornosti, in v vmesnem koraku je Luka preveril, ali so upornosti prave vrednosti. (Vse to je bilo del testne serije za projekt Vrtinec.)\n- `#include <string>`\n- Luka je ob petku opoldne odigral prijateljski nogometni dvoboj na travniku. „Kolega,“ je trener rekel znavo, „v naslednji sezoni bomo potrebovali boljšo zvezo v obrambi.“\n- \"Če bi imeli čas, bi rekla, da je Kranj podcenjeno središče, zlasti v času festivala,\" je povedala Katja, medtem ko je opazovala, kako sonce zahaja nad Ljubljano. Naslednji dan smo se odpravili proti Istrskim vinogradiščem, kjer smo okusili lokalno belo vino in se naučili nekaj o letini 2021, ki je bila znana po svoji odlični kakovosti.",
+ "components": [
+  {
+   "component_id": "comp-prose-electronics-dev-0009",
+   "category": "prose",
+   "start_byte": 2,
+   "end_byte": 241
+  },
+  {
+   "component_id": "comp-code-cpp-dev-0003",
+   "category": "code",
+   "start_byte": 244,
+   "end_byte": 263
+  },
+  {
+   "component_id": "comp-prose-sports-dev-0006",
+   "category": "prose",
+   "start_byte": 266,
+   "end_byte": 445
+  },
+  {
+   "component_id": "comp-prose-travel-dev-0008",
+   "category": "prose",
+   "start_byte": 448,
+   "end_byte": 795
+  }
+ ]
+}

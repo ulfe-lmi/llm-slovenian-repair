@@ -1,0 +1,102 @@
+{
+ "doc_id": "dev-000255",
+ "byte_length": 834,
+ "cp_length": 819,
+ "regions": [
+  {
+   "start_byte": 0,
+   "end_byte": 284,
+   "start_cp": 0,
+   "end_cp": 281,
+   "component_id": "comp-prose-sports-dev-0004",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 284,
+   "end_byte": 285,
+   "start_cp": 281,
+   "end_cp": 282,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 285,
+   "end_byte": 288,
+   "start_cp": 282,
+   "end_cp": 285,
+   "component_id": "comp-code-cpp-dev-0011",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 288,
+   "end_byte": 289,
+   "start_cp": 285,
+   "end_cp": 286,
+   "component_id": "comp-code-cpp-dev-0011",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 289,
+   "end_byte": 482,
+   "start_cp": 286,
+   "end_cp": 476,
+   "component_id": "comp-code-cpp-dev-0011",
+   "category": "code",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 482,
+   "end_byte": 483,
+   "start_cp": 476,
+   "end_cp": 477,
+   "component_id": "comp-code-cpp-dev-0011",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 483,
+   "end_byte": 486,
+   "start_cp": 477,
+   "end_cp": 480,
+   "component_id": "comp-code-cpp-dev-0011",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 486,
+   "end_byte": 487,
+   "start_cp": 480,
+   "end_cp": 481,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 487,
+   "end_byte": 834,
+   "start_cp": 481,
+   "end_cp": 819,
+   "component_id": "comp-prose-travel-dev-0008",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  }
+ ],
+ "invariants": {
+  "tiling_complete": true,
+  "no_contradictory_overlaps": true,
+  "cp_range_exact": true
+ }
+}

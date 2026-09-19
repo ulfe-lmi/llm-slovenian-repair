@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-000373",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T11-interactions",
+ "byte_length": 1246,
+ "cp_length": 1222,
+ "sha256": "695978667f0d9190caa3e47de6f251428aaa3000546b52a5567ec1e9bd5e6650",
+ "document": "`/* Testni fragment 2: izmišljena oseba Jana, projekt Lipa. *`.\n```\n#!/usr/bin/env bash\n# Tretji fragment: številska oznaka (test) in ne-ASCII znaki\n# Oseba: Maja, projekt: čokoladni vir\nrazdelek2='razdelek2'\nseStez='seStez'\npotA='src/modul.py'\npotB='docs/vir.txt'\npotC='HRAŠNA_VREDNOST.md'\nnavodilo='**test** *navodila* _podčrtano_'\necho \"razdelek: $razdelek2\"\necho \"seStez: $seStez\"\necho \"potA: $potA\"\necho \"potB: $potB\"\necho \"potC: $potC\"\necho \"$navodilo\"\necho 'url: https://primer.si/koda'\necho 'cena: 3 $'\necho 'backquote: `'\n# komentar z \\frac{a}{b}\n```\nPri kontrolnem pregledu mostu v projektu Vrelje so s kamerami, ki so bile pod nosilci, preverili stanje zaščitnih premazov. „Korozija je blaga, a jo moramo spremljati vsako leto“, je zapisal vodja vzdrževanja Igor Potočnik. Popravila so načrtovali za jesen (mesec oktober).\nV projektu Osnovne šole Lipica učitelji (zlasti Ana Kovač) raje uporabljajo projektno delo, da učenci spoznajo, kako znanje deluje v vsakdanju. Po besedah razredne voditeljice je najpomembnejše, da otroci pri vsaki nalogi »razložijo, zakaj so ravno tako postopali«. Pri testnem izpitu iz naravoslovja so zato združili pisni del z ustno obravnavo dveh preprostih primerov iz šolskega vrta.",
+ "components": [
+  {
+   "component_id": "comp-code-sql-dev-0002",
+   "category": "code",
+   "start_byte": 0,
+   "end_byte": 63
+  },
+  {
+   "component_id": "comp-code-shell-bash-dev-0011",
+   "category": "code",
+   "start_byte": 65,
+   "end_byte": 564
+  },
+  {
+   "component_id": "comp-prose-engineering-dev-0005",
+   "category": "prose",
+   "start_byte": 565,
+   "end_byte": 847
+  },
+  {
+   "component_id": "comp-prose-education-dev-0001",
+   "category": "prose",
+   "start_byte": 848,
+   "end_byte": 1246
+  }
+ ]
+}

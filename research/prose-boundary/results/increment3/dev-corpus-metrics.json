@@ -1,0 +1,199 @@
+{
+ "documents_measured": 3000,
+ "documents_total": 3000,
+ "fallback_documents": [],
+ "safety": {
+  "protected_bytes_total": 526315,
+  "protected_bytes_exposed": 0,
+  "target": 0,
+  "machine_significant_exposure_rate": 0.0,
+  "protected_regions_overlapping_candidate_prose": 0,
+  "met": true
+ },
+ "coverage": {
+  "expected_prose_bytes_total": 1910081,
+  "expected_prose_bytes_exposed": 1880719,
+  "expected_prose_bytes_exposed_rate": 0.9846278770376754,
+  "expected_prose_regions_total": 11975,
+  "expected_prose_regions_completely_available": 278,
+  "unnecessary_suppression_by_container": {
+   "S.Emph": 110,
+   "S.Head": 436,
+   "S.Item": 3531,
+   "S.Para": 20271,
+   "S.TableCell": 575,
+   "unknown": 4439
+  }
+ },
+ "coordinates": {
+  "utf8_boundary_violations": 0,
+  "byte_cp_conversion_mismatches": 0,
+  "source_slice_mismatches": 0,
+  "met": true
+ },
+ "residual_performance_by_class": {
+  "bare-json": {
+   "spans": 4017,
+   "bytes": 107522
+  },
+  "config": {
+   "spans": 98,
+   "bytes": 10331
+  },
+  "env-var": {
+   "spans": 43,
+   "bytes": 514
+  },
+  "identifier": {
+   "spans": 2028,
+   "bytes": 13764
+  },
+  "number": {
+   "spans": 8124,
+   "bytes": 33443
+  },
+  "path": {
+   "spans": 1265,
+   "bytes": 22165
+  },
+  "relative-path": {
+   "spans": 1087,
+   "bytes": 17161
+  },
+  "shell": {
+   "spans": 202,
+   "bytes": 3154
+  },
+  "tex-bracket": {
+   "spans": 123,
+   "bytes": 9389
+  },
+  "tex-env": {
+   "spans": 408,
+   "bytes": 48773
+  },
+  "tex-paren": {
+   "spans": 159,
+   "bytes": 11083
+  },
+  "upper-identifier": {
+   "spans": 584,
+   "bytes": 2797
+  },
+  "url": {
+   "spans": 880,
+   "bytes": 24009
+  }
+ },
+ "malformed_behaviour": {
+  "note": "per frozen malformed_class_map: expected='protected' bytes must be covered (violations counted); expected='policy-exposed' exposure is policy-decided and not a violation (008-a GO residual bound)",
+  "rows": [
+   {
+    "family": "malformed-broken-link",
+    "expected": "protected",
+    "components": 41,
+    "protected_bytes": 1189,
+    "protected_exposed_bytes": 0,
+    "policy_exposed_bytes": 0,
+    "policy_exposed_covered_bytes": 0,
+    "violations": 0
+   },
+   {
+    "family": "malformed-incomplete-display-dollar",
+    "expected": "policy-exposed",
+    "components": 37,
+    "protected_bytes": 37,
+    "protected_exposed_bytes": 0,
+    "policy_exposed_bytes": 74,
+    "policy_exposed_covered_bytes": 0,
+    "violations": 0
+   },
+   {
+    "family": "malformed-incomplete-paren-bracket",
+    "expected": "protected",
+    "components": 28,
+    "protected_bytes": 1461,
+    "protected_exposed_bytes": 0,
+    "policy_exposed_bytes": 0,
+    "policy_exposed_covered_bytes": 0,
+    "violations": 0
+   },
+   {
+    "family": "malformed-malformed-nesting",
+    "expected": "policy-exposed",
+    "components": 35,
+    "protected_bytes": 0,
+    "protected_exposed_bytes": 0,
+    "policy_exposed_bytes": 172,
+    "policy_exposed_covered_bytes": 114,
+    "violations": 0
+   },
+   {
+    "family": "malformed-partial-html",
+    "expected": "protected",
+    "components": 36,
+    "protected_bytes": 0,
+    "protected_exposed_bytes": 0,
+    "policy_exposed_bytes": 0,
+    "policy_exposed_covered_bytes": 0,
+    "violations": 0
+   },
+   {
+    "family": "malformed-truncated-json",
+    "expected": "protected",
+    "components": 31,
+    "protected_bytes": 1310,
+    "protected_exposed_bytes": 0,
+    "policy_exposed_bytes": 0,
+    "policy_exposed_covered_bytes": 0,
+    "violations": 0
+   },
+   {
+    "family": "malformed-unclosed-fence",
+    "expected": "protected",
+    "components": 24,
+    "protected_bytes": 2054,
+    "protected_exposed_bytes": 0,
+    "policy_exposed_bytes": 0,
+    "policy_exposed_covered_bytes": 0,
+    "violations": 0
+   },
+   {
+    "family": "malformed-unclosed-tex-env",
+    "expected": "protected",
+    "components": 30,
+    "protected_bytes": 2971,
+    "protected_exposed_bytes": 0,
+    "policy_exposed_bytes": 0,
+    "policy_exposed_covered_bytes": 0,
+    "violations": 0
+   },
+   {
+    "family": "malformed-unmatched-backtick",
+    "expected": "policy-exposed",
+    "components": 37,
+    "protected_bytes": 0,
+    "protected_exposed_bytes": 0,
+    "policy_exposed_bytes": 37,
+    "policy_exposed_covered_bytes": 0,
+    "violations": 0
+   },
+   {
+    "family": "malformed-unmatched-dollar",
+    "expected": "policy-exposed",
+    "components": 40,
+    "protected_bytes": 184,
+    "protected_exposed_bytes": 0,
+    "policy_exposed_bytes": 40,
+    "policy_exposed_covered_bytes": 0,
+    "violations": 0
+   }
+  ],
+  "violations": 0
+ },
+ "size": {
+  "docs": 3000,
+  "bytes": 2484602
+ },
+ "label": "dev-corpus tuning evidence, NOT acceptance (008-d performs the blind hidden acceptance of the frozen implementation)"
+}

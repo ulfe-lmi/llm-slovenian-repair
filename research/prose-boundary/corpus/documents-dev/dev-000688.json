@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-000688",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T7-prose-json-prose-latex",
+ "byte_length": 832,
+ "cp_length": 813,
+ "sha256": "34acd7e7646be30127c062ecfe73227ca588f5847728469bc3c27d799520b68c",
+ "document": "Na gradbišču pri mostu na Soči (projekt Sava) so delavci namesto starega betonskega opornega zidu zgradili lažjo jekleno nosilno konstrukcijo. Priprava temeljev je potekala pozimi, ko so temperaturi pod ničlo zahtevale dodatno osvetlitev in tople oblačila za ekipo.\n{\"ime\":\"Oseba Miha\",\"dolžina\":\"1,8 m\",\"avtorsko\":\"Nevtralna testna vsebina\",\"razmerje\":\"0,13\",\"opomba\":\"*Izmišljena oseba* https://primer.si/novica\"}\nV projektu Sončni razbojnik so pri izračunu ocenili, da se je obdelava naročil v juniju zmanjšala za 8 odstotkov. Tomo je zaskrbljeno zapisal: „Povprečje skriva posamezne padce.“ Kljub temu so odločili, da bodo naslednji teden ponovno izmerili čas.\n\\begin{equation}\\begin{aligned}U_6 &= \\log_2 \\Omega_6 + \\phi_6 \\text{Nova vas} \\\\V_6 &= \\nabla \\cdot \\vec{F}_6 + \\omega_6\\end{aligned}\\end{equation}",
+ "components": [
+  {
+   "component_id": "comp-prose-engineering-dev-0001",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 271
+  },
+  {
+   "component_id": "comp-structured-json-dev-0006",
+   "category": "structured",
+   "start_byte": 272,
+   "end_byte": 423
+  },
+  {
+   "component_id": "comp-prose-statistics-dev-0010",
+   "category": "prose",
+   "start_byte": 424,
+   "end_byte": 683
+  },
+  {
+   "component_id": "comp-math-aligned-env-dev-0006",
+   "category": "math",
+   "start_byte": 684,
+   "end_byte": 832
+  }
+ ]
+}

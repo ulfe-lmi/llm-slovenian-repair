@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-000705",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T2-prose-math-prose",
+ "byte_length": 773,
+ "cp_length": 757,
+ "sha256": "492e34923e7b862ae4efdedd69b75736e33933a75802cedd7677474b579191ef",
+ "document": "Mednarodna skupina, ki dela v izmišljenem arhivu Ljubljana, je pregledovala dopise iz leta 1804, v katerih omenjajo potovanja po dolini. V vstavku (ki ga je zapisala Taja) piše: »Razdalje so merili s koraki in verstami, ne pa z modernimi merami.«\n\\begin{equation} \\text{Testni projekt Janez} \\; : \\; \\int_{0}^{1} 2\\alpha_4 \\, \\mathrm{d}\\alpha_4=\\alpha_4^2 \\big|_{0}^{1} \\Rightarrow \\int_{0}^{1} 2\\alpha_4 \\, \\mathrm{d}\\alpha_4=1 \\end{equation}\nV vprašanjih za projekt Zdravo mesto 2025 so otroci zaskrbljeni zaradi »bolečin v trebuhu« po školski malici. Raje ne govorimo o diagnozi; zabeležimo, kdaj se pojavi, koliko traja in kakšna je hrana (na primer po mlečnih izdelkih). Pri vsakem nepričakovanem ponovnem pojavi naj starš pokliče zdravniško ambulanto.",
+ "components": [
+  {
+   "component_id": "comp-prose-history-dev-0002",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 250
+  },
+  {
+   "component_id": "comp-math-equation-env-dev-0004",
+   "category": "math",
+   "start_byte": 251,
+   "end_byte": 447
+  },
+  {
+   "component_id": "comp-prose-medicine-explainer-dev-0012",
+   "category": "prose",
+   "start_byte": 448,
+   "end_byte": 773
+  }
+ ]
+}

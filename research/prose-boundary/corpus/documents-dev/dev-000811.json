@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-000811",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T9-prose-malformed-prose",
+ "byte_length": 789,
+ "cp_length": 776,
+ "sha256": "20ca1b0f8ba1261f820931d1936ffa63382357d47adb370479c8d994c3362a88",
+ "document": "V šoli zdravja v Trzinu so učenci (ki so sodelovali v projektu Mirni utripi) prebrali, da premalo gibanja lahko spremeni občutek moči in počutje. Takšne spremembe so lahko odziv na vsakdanjo utrujenost. Ko se pri nekem otroku ali odraslem ponovijo, je prav, da jih preveri zdravnik.\n\n\\( z-4=0 . Testni zapis projekta Soteska za osebo Tina.\n\nV soboto, ko je bilo poleti 24 stopinj, je ekipa izmišljene skupine Brez napetosti v parku izvedla pet minut ogrevanja, nato pa še enajstmetrovski udarec in tri kratke teke. Igralka, ki jo je projekt imenoval Eva, je po tem dejala, da je bila noga rahlo utrujena, vendar da je bil zrak svež. 'Naslednjič bomo dodali še malo plavanja,' je opozorila ob zbiranju opreme. Na koncu so opremo zložili, zapisnik pa sta podpisala le dva člana.",
+ "components": [
+  {
+   "component_id": "comp-prose-medicine-explainer-dev-0002",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 288
+  },
+  {
+   "component_id": "comp-malformed-incomplete-paren-bracket-dev-0003",
+   "category": "malformed",
+   "start_byte": 290,
+   "end_byte": 345
+  },
+  {
+   "component_id": "comp-prose-sports-dev-0005",
+   "category": "prose",
+   "start_byte": 347,
+   "end_byte": 789
+  }
+ ]
+}

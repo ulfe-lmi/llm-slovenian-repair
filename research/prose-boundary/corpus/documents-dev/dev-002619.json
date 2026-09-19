@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-002619",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T2-prose-math-prose",
+ "byte_length": 880,
+ "cp_length": 858,
+ "sha256": "797079e5c5884da102707261008b77d1741444c63a7626a0a0897b8ccdd8a6d4",
+ "document": "Za odrasle v programu Večer 2024 so pripravili delavnice, ki potekajo po petih, z odmorom in s kratkim pogovorom o tem, kaj sploh želijo vedeti. Ana, vodja razreda, je povedala, da se učenci najlaše učijo, ko lahko takoj uporabijo besede v pogovoru. Tudi učbenik je preprost, z barvnimi slikami in z vprašanji na koncu vsake strani. Nihče ni imel vtisa, da gre za šolo; vsi so se strinjali, da gre za učenje.\n\\begin{align} \\lambda_6 &= \\prod_{\\mu=1}^{6} \\nu_\\mu \\\\ \\pi_6 &= \\sum_{\\xi=1}^{6} \\zeta_\\xi \\\\ \\varphi_6 &= \\chi_6 - \\psi_6 \\end{align}\nV vprašanjih za projekt Zdravo mesto 2025 so otroci zaskrbljeni zaradi »bolečin v trebuhu« po školski malici. Raje ne govorimo o diagnozi; zabeležimo, kdaj se pojavi, koliko traja in kakšna je hrana (na primer po mlečnih izdelkih). Pri vsakem nepričakovanem ponovnem pojavi naj starš pokliče zdravniško ambulanto.",
+ "components": [
+  {
+   "component_id": "comp-prose-education-dev-0012",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 418
+  },
+  {
+   "component_id": "comp-math-align-env-dev-0006",
+   "category": "math",
+   "start_byte": 419,
+   "end_byte": 554
+  },
+  {
+   "component_id": "comp-prose-medicine-explainer-dev-0012",
+   "category": "prose",
+   "start_byte": 555,
+   "end_byte": 880
+  }
+ ]
+}

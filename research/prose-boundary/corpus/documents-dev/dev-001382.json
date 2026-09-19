@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-001382",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T8-quote-fenced",
+ "byte_length": 661,
+ "cp_length": 657,
+ "sha256": "2b120a2cf8041d8fa798abcaeef39e290229c9a5c8a6c19fd736937317aa887e",
+ "document": "> V projektu Gorski dnevnik je Anja pojasnila, da spremenljivka deluje kot imenovana skrinjica, v kateri hranimo eno vrednost. Ko je program ponavljal preverjanje vremenskih podatkov, je zanka pretekle dni v vrsti in ohranila le najhladnejše. Funkcija, ki je izračunala povprečje, je bila kot majhno orodje, saj so jo znali poklicati vedno znova brez ponavljanja besedila. `fn povzetek2(seStez: bool) -> String { /* Testni projekt Lip`\r\n```\r\nint main(void) { char *napis = \"Tekst: *poudarjeno* in _podčrtano_\"; char *cena = \"Cena: 10 $ (dolar)\"; char *url = \"https://primer.si/koda\"; (void)napis; (void)cena; (void)url; return 0; } /* Markov podatek */\r\n```",
+ "components": [
+  {
+   "component_id": "comp-prose-programming-explainer-dev-0011",
+   "category": "prose",
+   "start_byte": 2,
+   "end_byte": 375
+  },
+  {
+   "component_id": "comp-code-rust-dev-0002",
+   "category": "code",
+   "start_byte": 376,
+   "end_byte": 438
+  },
+  {
+   "component_id": "comp-code-c-dev-0002",
+   "category": "code",
+   "start_byte": 440,
+   "end_byte": 661
+  }
+ ]
+}

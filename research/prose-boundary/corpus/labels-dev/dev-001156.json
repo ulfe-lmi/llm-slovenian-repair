@@ -1,0 +1,82 @@
+{
+ "doc_id": "dev-001156",
+ "byte_length": 704,
+ "cp_length": 693,
+ "regions": [
+  {
+   "start_byte": 0,
+   "end_byte": 307,
+   "start_cp": 0,
+   "end_cp": 297,
+   "component_id": "comp-prose-electronics-dev-0010",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 307,
+   "end_byte": 308,
+   "start_cp": 297,
+   "end_cp": 298,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 308,
+   "end_byte": 321,
+   "start_cp": 298,
+   "end_cp": 311,
+   "component_id": "comp-math-align-env-dev-0006",
+   "category": "math",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 321,
+   "end_byte": 432,
+   "start_cp": 311,
+   "end_cp": 422,
+   "component_id": "comp-math-align-env-dev-0006",
+   "category": "math",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 432,
+   "end_byte": 443,
+   "start_cp": 422,
+   "end_cp": 433,
+   "component_id": "comp-math-align-env-dev-0006",
+   "category": "math",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 443,
+   "end_byte": 444,
+   "start_cp": 433,
+   "end_cp": 434,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 444,
+   "end_byte": 704,
+   "start_cp": 434,
+   "end_cp": 693,
+   "component_id": "comp-prose-computing-dev-0003",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  }
+ ],
+ "invariants": {
+  "tiling_complete": true,
+  "no_contradictory_overlaps": true,
+  "cp_range_exact": true
+ }
+}

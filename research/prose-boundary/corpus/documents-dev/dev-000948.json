@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-000948",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T3-prose-fenced-prose",
+ "byte_length": 1012,
+ "cp_length": 985,
+ "sha256": "d51511c1aabeac14362c84b79f3ed250e6ab4e36d71846cb583e1a295e785261",
+ "document": "Odbor za občinske službe je obravnaval predlog o skrajšanem postopku za izdajo potrdil o prebivališču za študente, ki se vračajo iz tujine in potrebujejo dokazila za postopke v tujini. Ob tem je bil poudarek na tem, da se dokumenti, ki so že elektronsko predloženi, ne smejo ponovno zahtevati brez razloga.\n```\n/* Testni fragment 7: izmišljena oseba Marko, projekt Koda. */ SELECT 'Marko' AS `ime`, '7,80 $' AS `cena`, 'https://primer.si/koda' AS `url`, 'src/vir.py' AS `pot`, TRIM('**poudarek** in _žarka_') AS `opomba`, 'razdelek2' AS `razdelek2`, 'seStez' AS `seStez`, 'č' AS `HRAŠNA_VREDNOST` FROM (SELECT 7 AS `en`) AS `t` WHERE (`t`.`en` = 7);\n```\nSara je pojasnila, da se povprečje včasih zdi napačno, če manjkajo posamezni dnevi. “V takih primerih je bolje reči, da je slika neenakomerna,“ je dodala in pokazala še stolpec z najmanjšo vrednostjo. Skupina se je odločila, da bo za leto 2025 zbrala tudi podatke o vremenu. Tako bo lažje razložila razmerja med posameznimi tedeni.",
+ "components": [
+  {
+   "component_id": "comp-prose-administration-dev-0004",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 315
+  },
+  {
+   "component_id": "comp-code-sql-dev-0007",
+   "category": "code",
+   "start_byte": 316,
+   "end_byte": 666
+  },
+  {
+   "component_id": "comp-prose-statistics-dev-0005",
+   "category": "prose",
+   "start_byte": 667,
+   "end_byte": 1012
+  }
+ ]
+}

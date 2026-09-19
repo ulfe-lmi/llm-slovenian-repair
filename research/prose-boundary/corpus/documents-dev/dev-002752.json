@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-002752",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T3-prose-fenced-prose",
+ "byte_length": 1078,
+ "cp_length": 1058,
+ "sha256": "67bedfae5744073254cfb9b03b19ca37f852933cd0fa75da6a07d7c45588e0c2",
+ "document": "Anja je v opombi zapisala, da so razmerja med dohodki in izdatki (v mesecu maju in juniju) nekoliko drugačna kot lani. Povprečje ni pokazalo velike spremembe, vendar je posamezen teden odstopil, kar je pritegnilo pozornost ekipi.\n```\n// Tretji testni del (č, š, ž)\nconst naslov3 = \"Podrobnost: **poudarek** in _podčrtana_\";\nconst opis = `Cena: $ 9,99 za razdelek2`;\nconst povezava = \"https://primer.si/koda\";\nconst pot = \"src/modul.py\";\nconst vir = \"docs/vir.txt\";\nfunction seStez(a, b) {\n  return a - b;\n}\nconst HRAŠNA_VREDNOST = 2;\nconst rezultat = seStez(HRAŠNA_VREDNOST, 1);\nconsole.log(naslov3, opis, povezava, pot, vir, rezultat);\n// konec\n```\nV projektu Hišni nasveti 2024 je Ana iz Ljubljane opazila, da se steklenice s čisto vodo, (še posebej tiste 0,5 litra), hitreje izpraznijo, če so vedno pri roki ob jedilni mizi. Njen sosed Marko je bil sprva skeptičen, a je po dveh tednih dejal: »Če je pijača pri mizi, manjkrat potuje v hladilnik.« Tudi manjše spremembe, kot je skleda za kosmiče ob vratih, v celotnem gospodinjstvu naredijo mirnejše jutro.",
+ "components": [
+  {
+   "component_id": "comp-prose-statistics-dev-0002",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 231
+  },
+  {
+   "component_id": "comp-code-javascript-dev-0011",
+   "category": "code",
+   "start_byte": 232,
+   "end_byte": 657
+  },
+  {
+   "component_id": "comp-prose-everyday-advice-dev-0011",
+   "category": "prose",
+   "start_byte": 658,
+   "end_byte": 1078
+  }
+ ]
+}

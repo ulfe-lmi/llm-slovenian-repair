@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-001734",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T8-quote-fenced",
+ "byte_length": 451,
+ "cp_length": 440,
+ "sha256": "7e9200e16b748d536cdf984e3da54e078e869880b325e8ddd1c8963cbebb1c85",
+ "document": "> Pri popoldanski projektni uri so udeleženci, ki so prišli iz Šentjernev, najprej raztegnili ramena. Nato so (za razliko od jutranjih vajah) preplavali osemsto metrov. Vse skupaj je bil miren zaključek tedna. `/* Testni fragment 5: izmišljena oseba Anja, projekt Kovač. `\n```\n# Testni projekt: Besedilo; avtor: Maja Lipovnik\nbesedilo = 'Črka č, š in ž'\nprojekt = 'Izmišljen projekt Lipa'\noseba = 'Maja'\nif besedilo:\n    print(besedilo)\n```",
+ "components": [
+  {
+   "component_id": "comp-prose-sports-dev-0013",
+   "category": "prose",
+   "start_byte": 2,
+   "end_byte": 213
+  },
+  {
+   "component_id": "comp-code-sql-dev-0005",
+   "category": "code",
+   "start_byte": 214,
+   "end_byte": 278
+  },
+  {
+   "component_id": "comp-code-python-dev-0007",
+   "category": "code",
+   "start_byte": 279,
+   "end_byte": 451
+  }
+ ]
+}

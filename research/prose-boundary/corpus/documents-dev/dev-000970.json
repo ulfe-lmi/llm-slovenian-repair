@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-000970",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T3-prose-fenced-prose",
+ "byte_length": 929,
+ "cp_length": 905,
+ "sha256": "9c53116d719ade51b245ec4cb1c1039a28a32b43e01e1900b010e9a2702334c8",
+ "document": "Pri projektu Zimska lučka je Katja poizkusila z dvema baterijama in dvema upornostma. A sklep je bil sprva odprt. Ko je na koncu pritiskala na stikalo, se je dioda vžgala. V dnevni sobi so slišali le tihi, zadovoljen smeh.\n```\nfn opis_2() -> String { /* Testni projekt Lipa: č, š, ž, *poudarek* in _podčrtano_ */ let seStez = false; let HRAŠNA_VREDNOST = 5; let besedilo = format!(\"*Nova* ({} $)\", HRAŠNA_VREDNOST); let oznaka = \"č`š`ž\"; let pot = \"docs/vir.txt\"; let url = \"https://primer.si/koda\"; format!(\"{} | {} | {} | {} | {}\", seStez, besedilo, oznaka, pot, url) }\n```\nVelik razpon pri mostu Pričakovanje je bil glavna težava. »Vzdržljivost gre pred estetiko,« je zapisal Marko Zupančič. V letu 2023 so namestili cevne stebre s premerom 1,2 metra in zagotovili dostop do ojačitve. Najmanj očitno je bilo izravnati vrzeli med betonskimi ploščami, saj bi sicer vozne površine hitro postale neravnine.",
+ "components": [
+  {
+   "component_id": "comp-prose-electronics-dev-0008",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 225
+  },
+  {
+   "component_id": "comp-code-rust-dev-0006",
+   "category": "code",
+   "start_byte": 226,
+   "end_byte": 587
+  },
+  {
+   "component_id": "comp-prose-engineering-dev-0012",
+   "category": "prose",
+   "start_byte": 588,
+   "end_byte": 929
+  }
+ ]
+}

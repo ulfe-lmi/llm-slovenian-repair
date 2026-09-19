@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-000573",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T2-prose-math-prose",
+ "byte_length": 778,
+ "cp_length": 763,
+ "sha256": "853e2a6b88f6a2a4bde17cd9b5789d235a8618ed95d3dd0cbc91465c8db30cdc",
+ "document": "Svetovna in slovenska zgodovina se v tem projektu prepleta, ker so izmišljeni potniki v dnevnik zapisali potovanja, ki so trajala po letih, ne po dnevih. »Kadar je letnica omenjena,« je dodala Eva, »je besedilo preprosteje razumljivo, čeprav manj natančno.« Njena skupina je zato izbrala kratka navodila, da so besedila ostala čitljiva.\n\\begin{equation} \\text{Testni projekt Anja} \\; : \\; \\lim_{\\nu \\to \\infty} \\frac{1}{\\nu}=0 \\Rightarrow \\lim_{\\nu \\to \\infty} \\left(\\frac{1}{\\nu}+1\\right)=1 \\end{equation}\nLuka je v projektu Soba za okuse v soboto zjutraj odprl lonček in vonj po karameliziranih čebulicah je zapolnil celo sobo. Sol je dodal šele ob koncu, ker se je spomnil na zgodnjo napako. Nato je v dnevnik zapisal samo eno opombo: „Pri kuhanju se ne mudi.“",
+ "components": [
+  {
+   "component_id": "comp-prose-history-dev-0005",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 344
+  },
+  {
+   "component_id": "comp-math-equation-env-dev-0005",
+   "category": "math",
+   "start_byte": 345,
+   "end_byte": 514
+  },
+  {
+   "component_id": "comp-prose-cooking-dev-0010",
+   "category": "prose",
+   "start_byte": 515,
+   "end_byte": 778
+  }
+ ]
+}

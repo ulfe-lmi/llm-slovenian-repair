@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-001102",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T3-prose-fenced-prose",
+ "byte_length": 999,
+ "cp_length": 972,
+ "sha256": "de69bdb16a9b06b80d4f03458d95873342a3dfd82b247c3e4101f9ddd61f03e6",
+ "document": "V okviru projekta Nova vrv so otroci iz Ljubljane v petek zvečer vadili kratke podaje. Učiteljica Maja je opazila, da so po deset minutah teka vsi bolj sproščeni.\n```\n# Fragment 2: *neodvisen* test, oseba: Ana Kovač\necho 'Besedilo: *zvezdice*, _podčrtanje_, `backquote`'\necho 'Cena: 12 $ in 4 € (izmišljen projekt)'\necho 'Datoteka: src/modul.py, dokument: docs/vir.txt'\necho 'Spletni vir: https://primer.si/koda'\necho 'Identi: razdelek2, seStez, HRAŠNA_VREDNOST'\necho 'Napiši č, š, ž in (oklepaj)'\n```\nV letu 2022 je občina Šentvid na Vzorčni gori uvedla elektronsko predložitev dokumentov. Nekateri uporabniki so najprej raje oddali listne vloge, a so kasneje izbrali spletno obliko. V zapisniku, ki ga je podpisal magister Jožef Kranjc, so zapisali: „Postopek je pregleden”, in ga nato potrdili. Rok za odziv je bil deset dni, vendar so večino rešitev dokončali že v petih dneh. Tudi mnenje javnosti je bilo zmerno, saj so v anketi sodelovali trije od petih prebivalcev.",
+ "components": [
+  {
+   "component_id": "comp-prose-sports-dev-0011",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 166
+  },
+  {
+   "component_id": "comp-code-shell-bash-dev-0002",
+   "category": "code",
+   "start_byte": 167,
+   "end_byte": 515
+  },
+  {
+   "component_id": "comp-prose-administration-dev-0010",
+   "category": "prose",
+   "start_byte": 516,
+   "end_byte": 999
+  }
+ ]
+}

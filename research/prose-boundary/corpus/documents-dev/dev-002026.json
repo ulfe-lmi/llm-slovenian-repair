@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-002026",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T3-prose-fenced-prose",
+ "byte_length": 856,
+ "cp_length": 844,
+ "sha256": "7e0b7bbdb6dfdf987c25f7733871661cf827bc53d2289f1e2d76d9524b6508d4",
+ "document": "V projektu Pomladni spanec so opisali, da pomanjkanje spanja lahko vpliva na razpoloženje. Pogosto se lahko spremeni tudi koncentracija. Občutek utrujenosti se lahko poveča. To je splošna opomba, ne pa osebni nasvet. Če se takšni znaki ponavljajo, je dobro, da osebo sprejme zdravnik.\n```\n/* Testni fragment 7: izmišljena oseba Marko, projekt Koda. */ SELECT 'Marko' AS `ime`, '7,80 $' AS `cena`, 'https://primer.si/koda' AS `url`, 'src/vir.py' AS `pot`, TRIM('**poudarek** in _žarka_') AS `opomba`, 'razdelek2' AS `razdelek2`, 'seStez' AS `seStez`, 'č' AS `HRAŠNA_VREDNOST` FROM (SELECT 7 AS `en`) AS `t` WHERE (`t`.`en` = 7);\n```\nOblačje se je med posvetom v Ljubljani kar za trenutek zamislilo. Zanka ni samo ponavljanje, ampak tudi razmišljanje, kdaj naj se ustavi. Na koncu so se dogovorili, da bodo razlage vedno kratke, jasne in naravne.",
+ "components": [
+  {
+   "component_id": "comp-prose-medicine-explainer-dev-0004",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 290
+  },
+  {
+   "component_id": "comp-code-sql-dev-0007",
+   "category": "code",
+   "start_byte": 291,
+   "end_byte": 641
+  },
+  {
+   "component_id": "comp-prose-programming-explainer-dev-0005",
+   "category": "prose",
+   "start_byte": 642,
+   "end_byte": 856
+  }
+ ]
+}

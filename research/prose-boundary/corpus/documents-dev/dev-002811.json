@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-002811",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T7-prose-json-prose-latex",
+ "byte_length": 723,
+ "cp_length": 705,
+ "sha256": "3310ffd8ca263cf7355d4919ef4968f38cd4e0e453bcca7c666d34e854469977",
+ "document": "Luka je v projektu Soba za okuse v soboto zjutraj odprl lonček in vonj po karameliziranih čebulicah je zapolnil celo sobo. Sol je dodal šele ob koncu, ker se je spomnil na zgodnjo napako. Nato je v dnevnik zapisal samo eno opombo: „Pri kuhanju se ne mudi.“\n{\"ime\":\"Projekt Gora\",\"nagnjenost\":\"12 %\",\"avtorsko\":\"Nevtralna testna vsebina\",\"debelina\":\"0,3 m\",\"opomba\":\"_Nevtralno_ https://primer.si/novica\"}\nAna si je za projekt »Miren dan« izbrala prenosnik, ki naj bi bil dovolj tih, da ga lahko odpre v knjižnici (tudi če baterija ni polna). V »Ponovni sinhronizaciji« se ji je obljubil mirnejši dan, če omrežje ne bo puščalo zamud.\n\\(\\left(\\frac{\\theta^4}{2\\pi+1}-\\sqrt{5-\\lambda}\\right)_{\\text{Cilka}}\\)",
+ "components": [
+  {
+   "component_id": "comp-prose-cooking-dev-0010",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 263
+  },
+  {
+   "component_id": "comp-structured-json-dev-0008",
+   "category": "structured",
+   "start_byte": 264,
+   "end_byte": 411
+  },
+  {
+   "component_id": "comp-prose-computing-dev-0006",
+   "category": "prose",
+   "start_byte": 412,
+   "end_byte": 650
+  },
+  {
+   "component_id": "comp-math-paren-tex-dev-0003",
+   "category": "math",
+   "start_byte": 651,
+   "end_byte": 723
+  }
+ ]
+}

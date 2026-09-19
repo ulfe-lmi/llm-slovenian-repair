@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-002868",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T9-prose-malformed-prose",
+ "byte_length": 665,
+ "cp_length": 648,
+ "sha256": "c833acc0c08283f361c8d7f1042436dbca11a88ac3ce06ce097d5426dd918440",
+ "document": "Igor je v bazenu v Ljubljani (projektne lokacije za testno vsebino) preizkusil nov tempo plavanja. Prve sto metrov je plaval počasi, naslednjih dvajset metrov pa poskusil hitreje. Plavalec je na koncu rekel: „Ritem je bil dober, vendar mi je zmanjkalo zadnjih dvajsetih.“\n<b>Projekt Lipa: izmišljen test.\nBesedilo za projektovno avtorizacijo.\nV testnem projektu Svetilka 2024 so učenci preizkusili baterijo tipa AA, sklep z ročico in upornost z oranžnim pasom. Ko so sklep odprli, se utripalka utihnila, čeprav je komponenta še vedno rahlo toplila (tudi pri šibkem toku). V dnevniku so zapisali: „Sij je enakomeren, dokler prst ne premakne ročice.“",
+ "components": [
+  {
+   "component_id": "comp-prose-sports-dev-0008",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 276
+  },
+  {
+   "component_id": "comp-malformed-partial-html-dev-0001",
+   "category": "malformed",
+   "start_byte": 277,
+   "end_byte": 348
+  },
+  {
+   "component_id": "comp-prose-electronics-dev-0003",
+   "category": "prose",
+   "start_byte": 349,
+   "end_byte": 665
+  }
+ ]
+}

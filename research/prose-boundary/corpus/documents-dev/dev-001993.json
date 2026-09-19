@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-001993",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T3-prose-fenced-prose",
+ "byte_length": 806,
+ "cp_length": 785,
+ "sha256": "2f54f2c19c22419472f5389adbfa8117852344ac8da8feb38757f1b8bd8dab23",
+ "document": "V projektu Prvi tok, ki ga je leta 2018 sestavila Ana, se je naučila, da mora biti sklep zaprt, da se lučka sploh prižge. Baterija, ki je imela 4,5 V, je bila nameščena v držač, medtem ko je upornost zaščitila diodo pred prevelikim tokom. (Zelo pomembno je preveriti, ali so vsi konci dobro povezani.)\n```\nfunction seStez(a, b) { return a + b; } /* Test: seštej in izpiši za 10 $ */ const razdelek2 = seStez(2, 3); console.log(`Rezultat: ${razdelek2} za 10 $ in 5 $`);\n```\nAna je v receptu projekta Okusni dnevnik iz leta 1998 zapisala, da se krompir (najboljši iz majhne lončnice) sprti v manjših porcijah, a najprej mora odpočivat, da se okus utesni. Po njenem prepričanju: „Brez potrpežljivosti ni dobre juhe.“ Ta vstavek je bil pozneje v arhivu projekta prenesen v poseben dnevnik.",
+ "components": [
+  {
+   "component_id": "comp-prose-electronics-dev-0006",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 310
+  },
+  {
+   "component_id": "comp-code-javascript-dev-0001",
+   "category": "code",
+   "start_byte": 311,
+   "end_byte": 483
+  },
+  {
+   "component_id": "comp-prose-cooking-dev-0006",
+   "category": "prose",
+   "start_byte": 484,
+   "end_byte": 806
+  }
+ ]
+}

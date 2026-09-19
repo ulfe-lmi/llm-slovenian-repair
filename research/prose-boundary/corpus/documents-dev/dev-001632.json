@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-001632",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T5-lists",
+ "byte_length": 944,
+ "cp_length": 924,
+ "sha256": "2ab543501cb7a8c0d1d04f817616c38aa975693da296c9a736ad261a8d205466",
+ "document": "- „Zdravje ni samo odsotnost bolečine“ je poudaril Marko, ko je v projektu Zdravi pogovori spregovoril o pomenu počitka. Vsak človek se mora poslušati in poznati svoje omejitve. Obremenjenost se lahko kaže različno, na primer v napetosti ali v slabšem spanju. Če se nelagodje ne umiri, mora biti naslednji korak obisk zdravnika.\r\n- `// Test: seznam opravil v izmišljenem projektu Brst.`\r\n- Poskus, ki ga je vodila Nina, je potekal v majhni sobi. Lampa je gorela. Merilni senzor je oddajal tih zvok. Zapis je bil kratek: »Preprosto in toplo.« Zaključek je prišel zgodaj.\r\n- V arhivu projekta Stare potje je bil najden list, na katerem piše o izletu do izvira leta 1807. Po besedah urednice Nine Mlakar je bil povzetek kratek, vendar dovolj jasen, da si lahko bralci predstavljajo skupino, ki je imela osem potnikov in enega psa. Delček zemljevida, prilepljen v isti zvezki, kaže zanko, ki je merila okoli trideset kilometrov.",
+ "components": [
+  {
+   "component_id": "comp-prose-medicine-explainer-dev-0003",
+   "category": "prose",
+   "start_byte": 2,
+   "end_byte": 340
+  },
+  {
+   "component_id": "comp-code-rust-dev-0009",
+   "category": "code",
+   "start_byte": 344,
+   "end_byte": 399
+  },
+  {
+   "component_id": "comp-prose-science-dev-0009",
+   "category": "prose",
+   "start_byte": 403,
+   "end_byte": 586
+  },
+  {
+   "component_id": "comp-prose-history-dev-0010",
+   "category": "prose",
+   "start_byte": 590,
+   "end_byte": 944
+  }
+ ]
+}

@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-001181",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T5-lists",
+ "byte_length": 1016,
+ "cp_length": 990,
+ "sha256": "6a9669dc02abd8a6955bfc69823dba6a113b4d165f17725b757ba3f0514843f8",
+ "document": "- V kabolnici je najlažje, ko najprej zbrišemo prah z omaric, šele nato operemo tla. (Počakamo, da se voda malo posuši, in šele potem stiskamo krpo.) Tisti, ki imajo v hiši mačke, vedo, da lasov ne pomečeš, temveč jih zbereš s krpo za steklo. V testnem projektu Čist dom so to za vogla dopolnili s staro krtačo, ki jo občasno speremo.\n- `/* Testni fragment 4: izmišljena oseba Eva, projekt Trava. *`\n- V šolski geometriji se pogosto začne pri oblikah, ki jih učenci prepoznajo okoli sebe (okna, ure, škatle). Lucija, ki sodeluje v projektu Oblike in prostori, povpraša, kdaj se tri črte lahko imenujejo stranice trikotnika. Naslednji dan skupina iz Novega mesta pokaže, kako se spremeni oblika ob premiku vrhov.\n- V testnem projektu Spomin 2024 sta osebi Luka in Meta poudarila, da bolečine v vratu in ramenskem predelu niso vedno znak resnega stanja. Vendar pa je smiselno, da osebo sprejme zdravnik, zlasti če se pojavi omedlevica ali motnja govora (na primer ob nenadnem slabem počutju).",
+ "components": [
+  {
+   "component_id": "comp-prose-everyday-advice-dev-0006",
+   "category": "prose",
+   "start_byte": 2,
+   "end_byte": 349
+  },
+  {
+   "component_id": "comp-code-sql-dev-0004",
+   "category": "code",
+   "start_byte": 352,
+   "end_byte": 415
+  },
+  {
+   "component_id": "comp-prose-math-explainer-dev-0013",
+   "category": "prose",
+   "start_byte": 418,
+   "end_byte": 734
+  },
+  {
+   "component_id": "comp-prose-medicine-explainer-dev-0007",
+   "category": "prose",
+   "start_byte": 737,
+   "end_byte": 1016
+  }
+ ]
+}

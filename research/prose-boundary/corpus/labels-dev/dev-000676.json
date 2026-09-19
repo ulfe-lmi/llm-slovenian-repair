@@ -1,0 +1,102 @@
+{
+ "doc_id": "dev-000676",
+ "byte_length": 794,
+ "cp_length": 763,
+ "regions": [
+  {
+   "start_byte": 0,
+   "end_byte": 310,
+   "start_cp": 0,
+   "end_cp": 301,
+   "component_id": "comp-prose-electronics-dev-0006",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 310,
+   "end_byte": 311,
+   "start_cp": 301,
+   "end_cp": 302,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 311,
+   "end_byte": 312,
+   "start_cp": 302,
+   "end_cp": 303,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 312,
+   "end_byte": 344,
+   "start_cp": 303,
+   "end_cp": 333,
+   "component_id": "comp-prose-math-explainer-dev-0010",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 344,
+   "end_byte": 346,
+   "start_cp": 333,
+   "end_cp": 335,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 346,
+   "end_byte": 372,
+   "start_cp": 335,
+   "end_cp": 361,
+   "component_id": "comp-machine-urls-dev-0001",
+   "category": "machine",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 372,
+   "end_byte": 373,
+   "start_cp": 361,
+   "end_cp": 362,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 373,
+   "end_byte": 374,
+   "start_cp": 362,
+   "end_cp": 363,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 374,
+   "end_byte": 794,
+   "start_cp": 363,
+   "end_cp": 763,
+   "component_id": "comp-prose-math-explainer-dev-0010",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  }
+ ],
+ "invariants": {
+  "tiling_complete": true,
+  "no_contradictory_overlaps": true,
+  "cp_range_exact": true
+ }
+}

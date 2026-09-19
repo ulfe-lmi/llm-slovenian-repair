@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-001055",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T11-interactions",
+ "byte_length": 1076,
+ "cp_length": 1048,
+ "sha256": "0710f6fe58d95f2c91a69a551190d21062ecee64f665dc9309b6a86ac7e6dd43",
+ "document": "`# Fragment 5: *testni* niz (neodvisen), oseba: Petra Novak`.\n```\nfn konec() { /* Testni projekt Lipa: č, š, ž, *poudarek* in _podčrtano_ */ let seStez = true; let razdelek2 = 7; let HRAŠNA_VREDNOST = 1; let besedilo = format!(\"*Nova* ({} $) `č`\", HRAŠNA_VREDNOST); let pot = \"src/modul.py\"; let url = \"https://primer.si/koda\"; let _ = (seStez, razdelek2, besedilo, pot, url); println!(\"č, š, ž\"); }\n# komentar z \\frac{a}{b}\n```\nV maju 2026 je Nika za projekt Smreko pripravila razlago, ki je učencev pritegnila, ker so imeli pred seboj le navaden govor, ne pa vrstic na zaslonu. Sprva so govorili o spremenljivkah, potem o zanki, ki šteje korake, na koncu pa o funkciji, ki vse preostalo zloži v eno jasno dejanje.\nV kabolnici je najlažje, ko najprej zbrišemo prah z omaric, šele nato operemo tla. (Počakamo, da se voda malo posuši, in šele potem stiskamo krpo.) Tisti, ki imajo v hiši mačke, vedo, da lasov ne pomečeš, temveč jih zbereš s krpo za steklo. V testnem projektu Čist dom so to za vogla dopolnili s staro krtačo, ki jo občasno speremo.",
+ "components": [
+  {
+   "component_id": "comp-code-shell-bash-dev-0005",
+   "category": "code",
+   "start_byte": 0,
+   "end_byte": 60
+  },
+  {
+   "component_id": "comp-code-rust-dev-0008",
+   "category": "code",
+   "start_byte": 62,
+   "end_byte": 438
+  },
+  {
+   "component_id": "comp-prose-programming-explainer-dev-0010",
+   "category": "prose",
+   "start_byte": 439,
+   "end_byte": 728
+  },
+  {
+   "component_id": "comp-prose-everyday-advice-dev-0006",
+   "category": "prose",
+   "start_byte": 729,
+   "end_byte": 1076
+  }
+ ]
+}

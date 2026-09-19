@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-000615",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T11-interactions",
+ "byte_length": 907,
+ "cp_length": 881,
+ "sha256": "aa1de7e0d9d14176bd9bff8c3d31a8adabae3e62248ed6832664288189c20c0c",
+ "document": "`/* Testni fragment 1: izmišljena oseba Maja, projekt Roža. *`.\n```\nint main(void) { char *znaki = \"Znaki: č, š, ž\"; char *pot = \"docs/vir.txt\"; char *oznaka = \"seStez\"; char *url = \"https://primer.si/koda\"; (void)znaki; (void)pot; (void)oznaka; (void)url; return 0; } /* Končni fragment */\n# komentar z \\frac{a}{b}\n```\nKratki nasvet: krpo za pregrco namakaj v mrzli vodi in jo potem stisni, da pregrca ne pusti madežev. (Sredstvo iz stekleničke s štopalko je morda dražje, a zadošča za večkrat.) Če želiš manj smeti, steklenice operi in jih odnesi v zbirni center.\nČiščenje oken je lažje, če najprej sproti počistimo rob in nato s suho krpo zberemo preostali prah. Marko je v projektu Prijetna hiša ugotovil, da je bolje delati ob jutru, ko je videti, kje se naberejo madeži. (Če je zunaj topleje, najprej odpreš okno.) Sicer pa je ena majhna posoda z blagom dovolj za dnevni red.",
+ "components": [
+  {
+   "component_id": "comp-code-sql-dev-0001",
+   "category": "code",
+   "start_byte": 0,
+   "end_byte": 64
+  },
+  {
+   "component_id": "comp-code-c-dev-0008",
+   "category": "code",
+   "start_byte": 66,
+   "end_byte": 325
+  },
+  {
+   "component_id": "comp-prose-everyday-advice-dev-0008",
+   "category": "prose",
+   "start_byte": 326,
+   "end_byte": 581
+  },
+  {
+   "component_id": "comp-prose-everyday-advice-dev-0003",
+   "category": "prose",
+   "start_byte": 582,
+   "end_byte": 907
+  }
+ ]
+}

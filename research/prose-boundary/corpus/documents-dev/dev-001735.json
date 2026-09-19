@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-001735",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T9-prose-malformed-prose",
+ "byte_length": 665,
+ "cp_length": 654,
+ "sha256": "6bd772363279c10d075d28ecdc85a21b79ebb2c6c20331e8431d496524c2e214",
+ "document": "Luka je poskušal sestaviti majhno svetilko in je ob tem zamenjal dve upornosti, kar je spremenilo sij. V opombi (datum: 12. marec 2025) je navedel, da baterija po dolgi rabi zmanjša napetost, zato se element hitreje utruši. Pozneje je preizkusil novo ploščico, jo preveril s merilcem in ugotovil, da je stik pri sponki ohlapen. »Moram preveriti vez,« je rekel in poskrbel za varno montažo.\n\n\\( z-4=0 . Testni zapis projekta Soteska za osebo Tina.\n\nMarko je na sestanku v Mariboru povedal, da je zanka ponavljajoče delo. (Čakala, kolikor je potrebno, a ne več.) Njegov opis je bil preprost: program naj preveri pakete en po en, dokler ne prazni tovornjak.",
+ "components": [
+  {
+   "component_id": "comp-prose-electronics-dev-0012",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 397
+  },
+  {
+   "component_id": "comp-malformed-incomplete-paren-bracket-dev-0003",
+   "category": "malformed",
+   "start_byte": 399,
+   "end_byte": 454
+  },
+  {
+   "component_id": "comp-prose-programming-explainer-dev-0002",
+   "category": "prose",
+   "start_byte": 456,
+   "end_byte": 665
+  }
+ ]
+}

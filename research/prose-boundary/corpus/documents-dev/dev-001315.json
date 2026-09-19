@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-001315",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T7-prose-json-prose-latex",
+ "byte_length": 917,
+ "cp_length": 891,
+ "sha256": "bea5fbb5ba3586b2aba0ac24e5a2fa1a9ab3a3bb39d09749dad625761fbc6a4d",
+ "document": "Sara je pojasnila, da se povprečje včasih zdi napačno, če manjkajo posamezni dnevi. “V takih primerih je bolje reči, da je slika neenakomerna,“ je dodala in pokazala še stolpec z najmanjšo vrednostjo. Skupina se je odločila, da bo za leto 2025 zbrala tudi podatke o vremenu. Tako bo lažje razložila razmerja med posameznimi tedeni.\n{\"ime\":\"Projekt Reka\",\"razmerje\":\"2,5 m / 0,13\",\"avtorsko\":\"Nevtralna testna vsebina\",\"vzorec\":{\"delež\":\"30 %\",\"opis\":\"_Nevtralno_ https://primer.si/novica\"}}\nV projektu Zdrav vsak dan (v letu 2024) so izpostavili, da se lahko obremenjenost kaže v hitrem dihanju, v slabšem spanju ali v občutku tesnobe. To ni razlaga za domov, ampak spomin, da so telesni signali odziv. Ko se ti signali ponavljajo, jih najprej opiše oseba, nato pa jih preveri zdravnik.\n\\Pr(Z > \\mu + \\sigma) = 1 - \\Phi(1) = 0.1587 \\text{ (verjetnost repa)}\n Žč: 🚀 hitrost rasti je merljiva.",
+ "components": [
+  {
+   "component_id": "comp-prose-statistics-dev-0005",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 345
+  },
+  {
+   "component_id": "comp-structured-json-dev-0004",
+   "category": "structured",
+   "start_byte": 346,
+   "end_byte": 505
+  },
+  {
+   "component_id": "comp-prose-medicine-explainer-dev-0005",
+   "category": "prose",
+   "start_byte": 506,
+   "end_byte": 805
+  },
+  {
+   "component_id": "comp-math-probability-dev-0006",
+   "category": "math",
+   "start_byte": 806,
+   "end_byte": 876
+  }
+ ]
+}

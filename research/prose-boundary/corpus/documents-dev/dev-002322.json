@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-002322",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T2-prose-math-prose",
+ "byte_length": 678,
+ "cp_length": 666,
+ "sha256": "62a5efb0085a1e1d513dae80a97e0c6720c2358c6e11f151241a6f0084be62d1",
+ "document": "V projektu Gradec je bilo pri projektiranju jeklene konstrukcije ključno, koliko obremenitve prenese nosilni presek. Mladi konstruktor Jaka Kovač je, ob podpori projektirke Lune, predlagal dodatno ojačanje in začasne podlage. Sodelavci so se po dveh tednih razprave strinjali s predlogom. Končno je most dobil tudi dodatno zaščito pred erozijo.\n\\[\\dfrac{1}{2}+\\frac{\\alpha}{\\beta}=\\text{Anja}\\]\nIgor je v bazenu v Ljubljani (projektne lokacije za testno vsebino) preizkusil nov tempo plavanja. Prve sto metrov je plaval počasi, naslednjih dvajset metrov pa poskusil hitreje. Plavalec je na koncu rekel: „Ritem je bil dober, vendar mi je zmanjkalo zadnjih dvajsetih.“",
+ "components": [
+  {
+   "component_id": "comp-prose-engineering-dev-0008",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 351
+  },
+  {
+   "component_id": "comp-math-fractions-dev-0001",
+   "category": "math",
+   "start_byte": 352,
+   "end_byte": 401
+  },
+  {
+   "component_id": "comp-prose-sports-dev-0008",
+   "category": "prose",
+   "start_byte": 402,
+   "end_byte": 678
+  }
+ ]
+}

@@ -1,0 +1,102 @@
+{
+ "doc_id": "dev-000985",
+ "byte_length": 1199,
+ "cp_length": 1170,
+ "regions": [
+  {
+   "start_byte": 0,
+   "end_byte": 550,
+   "start_cp": 0,
+   "end_cp": 533,
+   "component_id": "comp-prose-computing-dev-0012",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 550,
+   "end_byte": 551,
+   "start_cp": 533,
+   "end_cp": 534,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 551,
+   "end_byte": 726,
+   "start_cp": 534,
+   "end_cp": 709,
+   "component_id": "comp-structured-json-dev-0001",
+   "category": "structured",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 726,
+   "end_byte": 727,
+   "start_cp": 709,
+   "end_cp": 710,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 727,
+   "end_byte": 1029,
+   "start_cp": 710,
+   "end_cp": 1000,
+   "component_id": "comp-prose-statistics-dev-0009",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 1029,
+   "end_byte": 1030,
+   "start_cp": 1000,
+   "end_cp": 1001,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 1030,
+   "end_byte": 1046,
+   "start_cp": 1001,
+   "end_cp": 1017,
+   "component_id": "comp-math-equation-env-dev-0005",
+   "category": "math",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 1046,
+   "end_byte": 1185,
+   "start_cp": 1017,
+   "end_cp": 1156,
+   "component_id": "comp-math-equation-env-dev-0005",
+   "category": "math",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 1185,
+   "end_byte": 1199,
+   "start_cp": 1156,
+   "end_cp": 1170,
+   "component_id": "comp-math-equation-env-dev-0005",
+   "category": "math",
+   "role": "PROTECTED",
+   "template_owned": false
+  }
+ ],
+ "invariants": {
+  "tiling_complete": true,
+  "no_contradictory_overlaps": true,
+  "cp_range_exact": true
+ }
+}

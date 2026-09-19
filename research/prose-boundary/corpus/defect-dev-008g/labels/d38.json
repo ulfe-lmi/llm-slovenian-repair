@@ -1,0 +1,62 @@
+{
+ "doc_id": "d38",
+ "byte_length": 20,
+ "cp_length": 20,
+ "invariants": {
+  "tiling_complete": true,
+  "no_contradictory_overlaps": true,
+  "cp_range_exact": true
+ },
+ "regions": [
+  {
+   "start_byte": 0,
+   "end_byte": 13,
+   "start_cp": 0,
+   "end_cp": 13,
+   "component_id": "defect-008g-d38a",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 13,
+   "end_byte": 14,
+   "start_cp": 13,
+   "end_cp": 14,
+   "component_id": "defect-008g-d38b",
+   "category": "prose",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 14,
+   "end_byte": 18,
+   "start_cp": 14,
+   "end_cp": 18,
+   "component_id": "defect-008g-d38a",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 18,
+   "end_byte": 19,
+   "start_cp": 18,
+   "end_cp": 19,
+   "component_id": "defect-008g-d38b",
+   "category": "prose",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 19,
+   "end_byte": 20,
+   "start_cp": 19,
+   "end_cp": 20,
+   "component_id": "defect-008g-d38a",
+   "category": "prose",
+   "role": "NEUTRAL",
+   "template_owned": false
+  }
+ ]
+}

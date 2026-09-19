@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-001916",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T3-prose-fenced-prose",
+ "byte_length": 813,
+ "cp_length": 797,
+ "sha256": "ccfe20be38c940b0dd85ad708082389d1bd22e770c89e8463531db7f073db85d",
+ "document": "Evropska kratka zgodba, ki jo raziskuje izmišljeni projekt Bralna gibanja, pogosto uporabi motiv tveganja in ga stisne v nekaj stavkov. Izmišljena evropska avtorica Léa Durand napiše: »Samo en pogled je dovolj.«\n```\nint main(void) { int razdelek2 = 7; char *naslov = \"Ana (izmišljena oseba)\"; char *pot = \"docs/vir.txt\"; (void)razdelek2; (void)naslov; (void)pot; return 0; } /* Izmišljen projekt: Ana */\n```\nLuka je poskušal sestaviti majhno svetilko in je ob tem zamenjal dve upornosti, kar je spremenilo sij. V opombi (datum: 12. marec 2025) je navedel, da baterija po dolgi rabi zmanjša napetost, zato se element hitreje utruši. Pozneje je preizkusil novo ploščico, jo preveril s merilcem in ugotovil, da je stik pri sponki ohlapen. »Moram preveriti vez,« je rekel in poskrbel za varno montažo.",
+ "components": [
+  {
+   "component_id": "comp-prose-literature-dev-0007",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 217
+  },
+  {
+   "component_id": "comp-code-c-dev-0003",
+   "category": "code",
+   "start_byte": 218,
+   "end_byte": 415
+  },
+  {
+   "component_id": "comp-prose-electronics-dev-0012",
+   "category": "prose",
+   "start_byte": 416,
+   "end_byte": 813
+  }
+ ]
+}

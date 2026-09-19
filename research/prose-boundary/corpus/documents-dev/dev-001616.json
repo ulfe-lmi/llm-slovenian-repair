@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-001616",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T11-interactions",
+ "byte_length": 959,
+ "cp_length": 939,
+ "sha256": "c6f32044588c2b8108f82a383d035de6adca40ae686d91c72e0bfe4d4d16057b",
+ "document": "`# Fragment 7: oseba: Luka Zupan, projekt *Mol*`.\n```\n# Testni projekt: Razdelek; avtor: Maja Lipovnik\nrazdelek2 = 'Razdelek 2'\nseStez = 7\nHRAŠNA_VREDNOST = 42\nskupaj = HRAŠNA_VREDNOST + seStez\nporočilo = f'Skupaj: {skupaj} $ (test)'\nprint(poročilo)\n# komentar z \\frac{a}{b}\n```\nV projektu Lipov most je na mostni konstrukciji pri Ljubljani prišlo do razpok, ki so se pojavile po zimskem zamrzavanju. Inga Novak je zato zahtevala dodatne meritve korozije (zlasti na nosilnih nosilcih) in preizkus jeklenih elementov, saj je »varnost najprej«.\nV odrski skupini, ki se je udeleževala tečaja digitalnih veščin, so se izobraženci najprej pogovarili o lastnih izkušnjah z računalniki, telefoni in e-pošto. Učiteljica (Maja Krajnc) je nato z drobnimi nalogami pokazala, kako preiskati zanesljiv vir, kako označiti vir in kako preprečiti, da bi besedilo delovalo kot »kopija brez lastnega pogleda«. Kratek zapis so na koncu prebrali drug drugemu.",
+ "components": [
+  {
+   "component_id": "comp-code-shell-bash-dev-0007",
+   "category": "code",
+   "start_byte": 0,
+   "end_byte": 48
+  },
+  {
+   "component_id": "comp-code-python-dev-0003",
+   "category": "code",
+   "start_byte": 50,
+   "end_byte": 282
+  },
+  {
+   "component_id": "comp-prose-engineering-dev-0007",
+   "category": "prose",
+   "start_byte": 283,
+   "end_byte": 549
+  },
+  {
+   "component_id": "comp-prose-education-dev-0005",
+   "category": "prose",
+   "start_byte": 550,
+   "end_byte": 959
+  }
+ ]
+}

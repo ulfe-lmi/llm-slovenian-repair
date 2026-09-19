@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-001973",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T5-lists",
+ "byte_length": 821,
+ "cp_length": 797,
+ "sha256": "83585e367f9d9b474d4965248a2127140b1aa6b8766ee7f0325b93e355f4ee44",
+ "document": "- Stoli, miza in tla zahtevajo malo pozornosti. Pri čiščenju se začne od zgornjih površin. Nato pride vrsta spodnjih kotičkov. V projektu Mirna soba so izmerili, da pet minut ščetkanja tal zmanjša prah. Tudi navadna voda in malo mila zadoščata.\n- `int HRAŠNA_VREDNOST = 1; int main(void) { char *pot = \"docs/`\n- V testni zbirki Projekt Zdravje 2026 je Matej napisal kratek vnos. Utrujenost, včasih tudi glavobol, ima lahko več razlogov. To je namerni vstavek v besedilo. Beseda „preveriti“ (v smislu posveta) se tu nanaša na obisk zdravnika. Ne gre za priporočilo zdravil ali odmerkov.\n- Palermo, glavno mesto Sicilije, je leta 2022 ponujal nenavadno kombinacijo zvočnih ulic, barvitih tržnic in starinske arhitekture. Priporočamo obisk katedrale in sprehod po starem mestnem jedru, zlasti zvečer.",
+ "components": [
+  {
+   "component_id": "comp-prose-everyday-advice-dev-0005",
+   "category": "prose",
+   "start_byte": 2,
+   "end_byte": 255
+  },
+  {
+   "component_id": "comp-code-c-dev-0006",
+   "category": "code",
+   "start_byte": 258,
+   "end_byte": 321
+  },
+  {
+   "component_id": "comp-prose-medicine-explainer-dev-0009",
+   "category": "prose",
+   "start_byte": 324,
+   "end_byte": 605
+  },
+  {
+   "component_id": "comp-prose-travel-dev-0010",
+   "category": "prose",
+   "start_byte": 608,
+   "end_byte": 821
+  }
+ ]
+}

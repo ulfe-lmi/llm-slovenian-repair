@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-001234",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T3-prose-fenced-prose",
+ "byte_length": 943,
+ "cp_length": 921,
+ "sha256": "434687d2a85208811f1170fc5d2d46f020aad75d03c8deb30c5f3f8e4ee7f6e6",
+ "document": "V kabolnici je najlažje, ko najprej zbrišemo prah z omaric, šele nato operemo tla. (Počakamo, da se voda malo posuši, in šele potem stiskamo krpo.) Tisti, ki imajo v hiši mačke, vedo, da lasov ne pomečeš, temveč jih zbereš s krpo za steklo. V testnem projektu Čist dom so to za vogla dopolnili s staro krtačo, ki jo občasno speremo.\n```\n/* Testni fragment 6: izmišljena oseba Petra, projekt Voda. */ SELECT 'Petra' AS `ime`, '6,40 $' AS `cena`, 'https://primer.si/koda' AS `url`, 'docs/nova.txt' AS `pot`, TRIM('*poudarek* in _podčrtano_') AS `opomba`, 'razdelek2' AS `razdelek2`, 'seStez' AS `seStez`, 'š' AS `HRAŠNA_VREDNOST` FROM (SELECT 6 AS `en`) AS `t` WHERE (`t`.`en` = 6);\n```\nAstronomi projekta Zora so z manjšim daljnogledom na Merljaku opazovali jutrnje oblake pri zori. Poskušali so zajeti bliskavice, ki so se pojavile le za hip, in v beležki je bilo zapisano, da je nebo ob petih zjutraj postalo manj motno.",
+ "components": [
+  {
+   "component_id": "comp-prose-everyday-advice-dev-0006",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 347
+  },
+  {
+   "component_id": "comp-code-sql-dev-0006",
+   "category": "code",
+   "start_byte": 348,
+   "end_byte": 703
+  },
+  {
+   "component_id": "comp-prose-science-dev-0003",
+   "category": "prose",
+   "start_byte": 704,
+   "end_byte": 943
+  }
+ ]
+}

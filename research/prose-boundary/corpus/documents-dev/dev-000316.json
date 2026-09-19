@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-000316",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T9-prose-malformed-prose",
+ "byte_length": 737,
+ "cp_length": 720,
+ "sha256": "929d17eadae9d0c4d02ac5c8a6aac4381d6dee59fd8579f010fa04746bee46d0",
+ "document": "Ob prenovljenem pisarnem kotu, ki ga je v notranjem projektu Pisarna pripravila Petra, je nov tablični računalnik služil za skice (in, po njenih besedah, tudi za preprosta vprašanja). V prvih tednih se je navadila na večji zaslon, ker so bile besede na papirju pogosto preveč majhne za oči. Ko je na koncu septembra preverila baterijo, ji je bil prijeten ta enostaven način dela.\n$$z=3. Ivan Hrib preverja projekt Senca.\nV projektu Nevtralna zdravstvena vsebina 2025 je Ana Kovač pripravila opombo o utrujenosti, ki ima lahko mnogo vzrokov. Ker telo na spremembe odziva različno, je koristno, da se oseba posvetuje z zdravnikom, še posebej če se stanje ponavlja. V takih primerih „splošna razlaga“ ne nadomesti pregleda.",
+ "components": [
+  {
+   "component_id": "comp-prose-computing-dev-0011",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 387
+  },
+  {
+   "component_id": "comp-malformed-incomplete-display-dollar-dev-0003",
+   "category": "malformed",
+   "start_byte": 388,
+   "end_byte": 428
+  },
+  {
+   "component_id": "comp-prose-medicine-explainer-dev-0006",
+   "category": "prose",
+   "start_byte": 429,
+   "end_byte": 737
+  }
+ ]
+}

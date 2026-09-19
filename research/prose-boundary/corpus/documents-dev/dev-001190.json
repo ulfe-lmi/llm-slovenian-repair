@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-001190",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T3-prose-fenced-prose",
+ "byte_length": 1226,
+ "cp_length": 1202,
+ "sha256": "0009008958c53094e2dc389a543406b977fc3c9483887e4a505fc9c7242b395e",
+ "document": "V sklopu projekta Papirni most je Anica Kranjc v zbornik vstavila odlomek iz romaneskega dnevnika, ki nosi ime »Zadnji tiskar«. Besedilo iz leta 1998 pripoveduje o mali nakladni hiši v Celju, kjer so tiskarji med prazniki brali evropske pripovedke. Nekatera poglavja ostajajo izpuščena (verjetno zaradi cenzure), druga pa so prenesena ročno v zvezek iz tankega usnja. To vprašanje pomena slovenske knjižnosti v evropskem prostoru se v zadnjem odstavku razreši šele s kratkim pozivom k skupnemu branju.\n```\n# Fragment 8: *neodvisen* konec, _podčrtano_, (oklepaj)\necho 'Besedilo: **poudarek** in *zvezdice*, `backquote`'\necho 'Valute: 4 $ in 11 € za izmišljeni projekt'\necho 'Relativna pot: src/modul.py; vir: docs/vir.txt'\necho 'Spletni naslov: https://primer.si/koda'\necho 'Identifikatorji: HRAŠNA_VREDNOST, razdelek2, seStez'\necho 'Slovenski znaki: č, š, ž'\n```\nV projektu Sona (manjša fizikalna raziskava) je Maja spremljala vibracije tankih folij pri nizkih temperaturah. Zapisovala je, da se pri približno sto in dvanajst kelvinov material odzove drugače, in to je bilo vidno že po prvih dneh. Leta dvotisoč in osemnajst je ekipa poskusila ponoviti meritve, a je veter v prostoru vplival na števce.",
+ "components": [
+  {
+   "component_id": "comp-prose-literature-dev-0013",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 511
+  },
+  {
+   "component_id": "comp-code-shell-bash-dev-0008",
+   "category": "code",
+   "start_byte": 512,
+   "end_byte": 880
+  },
+  {
+   "component_id": "comp-prose-science-dev-0001",
+   "category": "prose",
+   "start_byte": 881,
+   "end_byte": 1226
+  }
+ ]
+}
