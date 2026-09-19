@@ -931,6 +931,99 @@ objective-008 disposition are round 008-f (the 'round 008-e' label in the
 008-d note above carries the pre-recovery numbering; the deferral itself
 is unchanged).
 
+## 18. Final objective-008 scientific conclusion (blind hidden acceptance, round 008-f)
+
+This section is the additive final objective-008 conclusion recorded by
+round 008-f (blind hidden acceptance of the frozen parser-first protection
+layer). It rewrites nothing in the 008-c/008-d/008-e records above and
+changes no scientific result recorded before this round.
+
+The frozen implementation was evaluated EXACTLY as frozen at the 008-c
+final head 4b6a90ab13c0c9a02e533a2673a084e26f841a5c against the sealed
+hidden acceptance set (2,000 deterministic mashup documents with
+machine-known ground truth plus 70 naturalistic whole-response outputs;
+committed content-free manifest sha256
+8233bdcf683df8a97d62a375a6cf60d93b64aa6b7ecf22489ce9986333436a18), for the
+first and only time as an acceptance instrument.
+
+**Final objective-008 scientific conclusion: CONDITIONAL** (predeclared
+decision state; the hidden set is downgraded to single-use evidential
+status by this round per the 008-f order).
+
+Field by field against the committed evidence
+(research/prose-boundary/results/hidden-acceptance/):
+
+- Safety: 458 of 311,358 labeled protected bytes exposed as candidate
+  prose (0.147%; target 0) - a real, bounded, clearly understood defect.
+  Attribution: 20 of 2,000 hidden documents, 19-24 B each, all labeled
+  category structured (families structured-yaml 348 B + structured-xml
+  110 B), all template T10-randomized. Mechanism: CommonMark does not
+  recognize mid-document YAML blocks or HTML/XML fragments whose tags are
+  not HTML block-start tags, so that content becomes paragraph text and is
+  candidate prose under frozen structural policy v2; the residual layer
+  partially compensates (number/path/shell fire inside) but block syntax
+  stays exposed. Zero exposure on the dev set - the corner case was
+  discovered only by the hidden set.
+- Coordinates: 0 UTF-8 boundary violations, 0 byte/code-point conversion
+  mismatches, 0 source slice mismatches, 0 patch-preservation violations
+  (frozen patching.apply_edits(original, []) reproduces the exact original
+  on every hidden document).
+- Coverage: 97.851% of expected prose bytes exposed
+  (1,256,837/1,284,435); 291/7,872 expected prose regions completely
+  available; unnecessary suppression is actual loss by container type
+  (S.Head 449, S.Item 2302, S.Para 13498, S.TableCell 327, unknown 11022) -
+  no arbitrary threshold.
+- Malformed-input behaviour: 0 violations over the 10 deterministic family
+  rows (frozen malformed_class_map; the policy-decided-suppression
+  distinction is preserved).
+- End-to-end invariants 1-7: all PASS on 2,000/2,000 hidden-document
+  replays through the actual frozen pipeline entry points (frozen
+  deterministic stub boundary; zero network; zero new model calls; 20
+  seeded adjacencies all edit_applied; synthetic zero-eligible ok).
+- Determinism: 50-case re-run identical; fixed iteration order.
+- Performance: median 44.5 / 67.6 / 254.2 ms/document at 1/10/50 KB
+  (second deterministic re-run; first run 44.3 / 63.4 / 252.2 ms - timing
+  axis only); parser + residual cost is cheap relative to one model
+  inference (qualitative statement only).
+
+Decision state application: NOT PASS (a material safety violation exists:
+458 B above the 0 target); NOT FAIL (the exposure is bounded to 0.147% of
+labeled protected bytes, confined to one corner-case class - mid-document
+YAML-style blocks and HTML/XML fragments - with a fully understood
+mechanism; the parser-first design is not materially discredited);
+CONDITIONAL, with the defect named and bounded as above. Named smallest
+corrective 008-g scope: extend protection for mid-document raw document
+blocks (YAML-style blocks and HTML/XML fragments) via a policy-v2 residual
+class or a structural pre-pass, and re-evaluate the full item-15 metrics
+set plus e2e invariants 1-7 on a NEW independently generated and sealed
+hidden set.
+
+Round 008-f execution was BLOCKED before completing scope item 3: the
+independent naturalistic adjudication of the 70 hidden whole-response
+outputs stopped at case nat-comparison-table-hidden-04 (invalid
+verbatim-quote tiling on two consecutive attempts under the predeclared
+at-most-one-retry policy; fail-closed; no label fabricated). 17 of 70
+pass-1 tilings are valid and preserved as raw observations in the private
+root; 0 label files exist; no annotations manifest was written. Revised
+interpretation (C-EVIDENCE-01): model-side tiling anomaly specific to that
+case, not a driver defect (17/17 prior cases and 2/2 prequalification
+pilots valid; 8/8 synthetic resolver self-tests correct and fail-closed).
+The named 008-g scope therefore additionally covers adjudication
+completion with a strategy-devised refined instrument. Hidden seal
+identities before/after evaluation: 4091/4091 verified both times,
+committed manifest sha256 unchanged, seal copy byte-identical;
+out-of-manifest files 387 before (386 pre-seal generation receipts + the
+seal copy) and 405 after (the same 387 + 18 annotations raw files, the
+disclosed adjudication-process scope).
+
+Classification: this conclusion is STRUCTURAL-SAFETY EVIDENCE ONLY. It
+establishes no linguistic quality, no experimental-MVP acceptance, and no
+release or deployment authority. Objective 009 (fresh human-labelled
+linguistic confirmation of the complete frozen pipeline) remains the
+separate reserved next objective; its future sample must not contain any
+case generated or inspected for objective 008. No merge, no auto-merge, no
+release, no deployment claim; PR #9 remains open and unmerged.
+
 ## Machine-readable state block (research-state-machine-v1)
 
 This fenced block is the machine-readable core of the numbers quoted above.
@@ -973,8 +1066,8 @@ model/network calls.
     "frozen_007m_configuration_sha256": "0026a1a9d27652c36e2c5a960b10fafc1c9a93b0690d93b09089aa58884f5c26",
     "frozen_007m_prompt_sha256": "572cf2fb4864e66e38a500465e1089062d58aeed4721063fb0c1e466e424230d",
     "frozen_007m_final_root_manifest_sha256": "3fb4aef33542e7fa3f357acb905b75f4d7e7551783f83a422b5d1ea6272c25f8",
-    "registry_entries": 29,
-    "oap_reports_reviewed": 48,
+    "registry_entries": 30,
+    "oap_reports_reviewed": 49,
     "frozen_report_history_incidents": 2
   },
   "official_scorer": {

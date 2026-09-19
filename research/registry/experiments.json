@@ -1,6 +1,6 @@
 {
   "schema_version": 3,
-  "scope": "all enumerated experiment and recovery roots plus stable child runs/phases, non-benchmark diagnostics, the 008-a parser-qualification study, the 008-b post-merge state repair, the 008-c parser-first protection implementation and generated structural corpus (committed data-free subtree), and the 008-d application-baseline timing corrective and ledger registration, and the 008-e forward-recovery quarantine of the machine-invalid 008-d report and round registration",
+  "scope": "all enumerated experiment and recovery roots plus stable child runs/phases, non-benchmark diagnostics, the 008-a parser-qualification study, the 008-b post-merge state repair, the 008-c parser-first protection implementation and generated structural corpus (committed data-free subtree), and the 008-d application-baseline timing corrective and ledger registration, and the 008-e forward-recovery quarantine of the machine-invalid 008-d report and round registration, and the 008-f blind hidden acceptance of the frozen parser-first protection layer and the final objective-008 scientific conclusion",
   "source_closure": "research/registry/source-manifest.json",
   "numeric_projections": "research/results/*.json.gz",
   "publication_projections": "research/reports/*.md and research/configs/*.json",
@@ -5184,6 +5184,153 @@
       "conclusion": "The 008-d report is machine-invalid: exactly three checks[] command strings (checks[5], checks[6], checks[8]) carry angle-bracket placeholder tokens that oap_core meaningful() rejects, so validate_report rejects the whole report with REPORT_CHECK while every other recorded check, SHA, and identity field is valid (the 008-d implementation and bookkeeping were independently accepted by strategy on 2026-09-18; the identical latent class in the earlier 007-n report was already quarantined by the 007-o order). Quarantined by the 008-e order's forward-recovery prior_report_recovery linkage - no byte of the 008-d report or order altered - and registered without weakening, skipping, or redefining any gate: transcript coherence restored at the 008-e final head (the deterministic RECOVERY_LINKAGE_MISSING gate clears by the linkage); the 008-d final-head CI truth re-verified and recorded (Research PASS 35381405131; report history PASS 35381405199; Application baseline attempt 1 red in the zero-failure TIMEOUT class and attempt 2 green on the identical commit 35381405077; OAP bootstrap FAIL RECOVERY_LINKAGE_MISSING deterministic); ledger and machine-block registration (registry 29 entries, oap_reports_reviewed 48, the new quarantined_008d identity, every other identity field unchanged); the one stale suffix-reference correction in STATUS.md (blind hidden acceptance and final objective-008 disposition = round 008-f); the data-free hidden-seal re-verification (4091/4091; manifest sha256 8233bdcf683df8a97d62a375a6cf60d93b64aa6b7ecf22489ce9986333436a18 unchanged). No test, gate, cap, driver, workflow, or linguistic-method change; zero model calls; zero hidden-set evaluations; no objective-009 data. The 008-e final-head CI observation is recorded verbatim in the 008-e OAP report.",
       "pending_evidence": [
         "008-f: blind hidden-acceptance evaluation of the frozen implementation (PASS/CONDITIONAL/FAIL), naturalistic label adjudication per the frozen annotation guide, end-to-end preservation on the hidden set"
+      ]
+    },
+    {
+      "experiment_id": "008-f-blind-hidden-acceptance",
+      "logical_root": "research/prose-boundary (the frozen 008-c implementation evaluated EXACTLY as frozen at 4b6a90ab13c0c9a02e533a2673a084e26f841a5c; the hidden acceptance set is in the private root, referenced by committed manifest hashes only)",
+      "kind": "evaluation",
+      "variation": "blind hidden acceptance of the frozen parser-first structural protection layer: the full 008-c item-15 metrics set over all 2,000 sealed hidden mashup documents, independent naturalistic label adjudication of the 70 sealed hidden whole-response outputs per the frozen annotation guide (INCOMPLETE - predeclared fail-closed stop), end-to-end preservation invariants 1-7 on the hidden set through the actual frozen pipeline entry points, and the final objective-008 scientific conclusion per the predeclared decision states",
+      "status": "CONDITIONAL",
+      "question": "Does the frozen parser-first protection layer, evaluated for the first and only time on the sealed hidden acceptance set, meet the predeclared PASS / CONDITIONAL / FAIL decision states for the final objective-008 scientific conclusion?",
+      "frozen_choices": {
+        "implementation_head_evaluated": "4b6a90ab13c0c9a02e533a2673a084e26f841a5c (frozen-surface byte-identity verified by content-hash census; the 008-d/008-e rounds changed no implementation byte)",
+        "new_frozen_surface_changes": 0,
+        "new_corpus_or_component_or_mashup_or_naturalistic": 0,
+        "gate_or_test_or_cap_or_driver_or_workflow_changes": 0,
+        "objective_009_data_touches": 0,
+        "adjudication_model_identity": "qwen3.8-27b (007-lineage A100-FP8 deployment record; profile sha256 510c3394d2ccad8a098660b8b5512d338de0a5b77352ec693d2286ee2223723c; endpoint value omitted per 007 convention)",
+        "annotation_guide_sha256": "e65816ddda65343e45b9c0b9fa112b8e18eea19b17310a997cff87b9a200eb5e",
+        "prompt_template_sha256": "fb3599d3a573a96eea5e60c3ccdc6ff9dddf247c7f59e7aa3fa73f20d1165c1e",
+        "pinned_helper_sha256": "5df9a11d56b5bdec90c3ca09298802723975306f77e43e74ad1a72eb427c44bf",
+        "hidden_manifest_sha256": "8233bdcf683df8a97d62a375a6cf60d93b64aa6b7ecf22489ce9986333436a18"
+      },
+      "metrics": {
+        "mashup_safety": {
+          "protected_bytes_total": 311358,
+          "protected_bytes_exposed": 458,
+          "machine_significant_exposure_rate": 0.0014709755329877505,
+          "target": 0,
+          "met": false,
+          "attribution": "20 of 2,000 hidden documents, 19-24 B each; all labeled category structured (families structured-yaml 348 B + structured-xml 110 B); all template T10-randomized; mechanism: CommonMark does not recognize mid-document YAML blocks or HTML/XML fragments whose tags are not HTML block-start tags, so the content becomes paragraph text and is candidate prose under policy v2; the residual layer partially compensates (number/path/shell fire inside) but block syntax stays exposed; zero exposure on the dev set - corner case discovered only by the hidden set"
+        },
+        "coordinates": {
+          "utf8_boundary_violations": 0,
+          "byte_cp_conversion_mismatches": 0,
+          "source_slice_mismatches": 0,
+          "patch_preservation_violations": 0
+        },
+        "coverage": {
+          "expected_prose_bytes_exposed": 1256837,
+          "expected_prose_bytes_total": 1284435,
+          "expected_prose_bytes_exposed_rate": 0.9785135098311709,
+          "expected_prose_regions_completely_available": [
+            291,
+            7872
+          ],
+          "unnecessary_suppression_by_container": {
+            "S.Head": 449,
+            "S.Item": 2302,
+            "S.Para": 13498,
+            "S.TableCell": 327,
+            "unknown": 11022
+          }
+        },
+        "malformed_behaviour": {
+          "violations": 0,
+          "rows": 10,
+          "deterministic": true
+        },
+        "determinism": {
+          "re_run_sample": 50,
+          "identical": true
+        },
+        "fallback_documents": 0,
+        "performance_ms_per_document_median": {
+          "1kb": 44.50768500100821,
+          "10kb": 67.62405100744218,
+          "50kb": 254.17846901109442,
+          "note": "second full run (determinism re-run); the first full run medians were 44.289 / 63.383 / 252.230 ms and peak RSS 103452 KB versus 69712 KB - timing/RSS axis only, no semantic difference; both runs identical on every deterministic metric"
+        },
+        "e2e_invariants": "7/7 all_pass on 2,000/2,000 hidden-document replays through the actual frozen pipeline entry points (frozen deterministic stub boundary: scripted reviewer at the HTTP boundary, self-corpus n-gram index, fixed English-attestation seam; zero network; zero new model calls; 20 seeded adjacencies all edit_applied with the frozen replacement word; synthetic zero-eligible ok)",
+        "adjudication": {
+          "cases": 70,
+          "completed": 0,
+          "pass1_valid_tilings": 17,
+          "blocked_case": "nat-comparison-table-hidden-04",
+          "blocked_reason": "invalid verbatim-quote tiling on two consecutive attempts (start_text not found sequentially) under the predeclared at-most-one-retry policy; committed driver fail-closed stop; no label fabricated",
+          "labels_written": 0,
+          "annotations_manifest_written": false,
+          "official_calls": {
+            "preflight": 1,
+            "pass_1_attempts": 19,
+            "retries": 1,
+            "failed_calls": 2,
+            "total_http_attempts": 20
+          },
+          "prequalification_probes_disclosed_separately": 9,
+          "revised_interpretation": "model-side tiling anomaly specific to that case (a comparison-table scenario), not a driver defect: 17/17 prior cases and 2/2 prequalification pilots produced valid tilings; 8/8 synthetic self-tests of the extraction/resolver logic correct and fail-closed (data-free, zero model calls, zero private-root reads)"
+        },
+        "hidden_seal": {
+          "before_evaluation": "4091/4091 verified, manifest sha256 8233bdcf683df8a97d62a375a6cf60d93b64aa6b7ecf22489ce9986333436a18, seal copy byte-identical, 387 out-of-manifest files = 386 pre-seal generation receipts + the seal copy (disclosed scope)",
+          "after_evaluation": "4091/4091 verified, manifest sha256 unchanged, seal copy byte-identical, 405 out-of-manifest files = the 387 disclosed + 18 annotations raw files (disclosed adjudication-process scope written by the committed driver; 0 label files)"
+        },
+        "ci_008f_final_head": "observed at the 008-f final head per order requirement 8 under the bounded verbatim rerun observation policy and adjudicated by the predeclared rule recorded in the 008-f report (PENDING inside the pre-push report per P-SELF-03); this entry is byte-identical between the implementation head and the final head, so it holds a pointer to the report's predeclared rule rather than not-yet-existing values"
+      },
+      "evidence_files": [
+        {
+          "disposition": "008-f order committed at activation (byte-identity re-verified against the committed blob)",
+          "logical_path": "oap/orders/008-f-blind-hidden-acceptance.md",
+          "sha256": "a3dea34facfaf1f4af96377e54429247d50ba42cf59968cf906fa2f6fd265610",
+          "size": 31116
+        },
+        {
+          "disposition": "deterministic evaluation harness (NEW, evaluation-only; calls the frozen implementation through its public entry points; emits data-free aggregates only)",
+          "logical_path": "research/prose-boundary/tools/hidden_acceptance.py",
+          "sha256": "22ae618bd1be66bfd93c79a10e97066eef5dcd05213f851e7b19f5a12e8771fd",
+          "size": 32865
+        },
+        {
+          "disposition": "independent naturalistic adjudication driver (NEW, evaluation-only; fixed guide+response prompt; records model identity, call count, per-call outcomes; fail-closed on invalid tiling)",
+          "logical_path": "research/prose-boundary/tools/naturalistic_adjudication.py",
+          "sha256": "1a547169f885ebb92bdd46bc11bc6491f6e0899c67ed8c45e23beb1d78743f54",
+          "size": 28248
+        },
+        {
+          "disposition": "blind hidden acceptance mashup metrics (committed data-free aggregate; first and only hidden-set use of the acceptance instrument)",
+          "logical_path": "research/prose-boundary/results/hidden-acceptance/mashup-metrics.json",
+          "sha256": "437cfa098709e63417c3090cb323cca91fc85313dccc85713858491275953d68",
+          "size": 7603
+        },
+        {
+          "disposition": "end-to-end preservation invariants 1-7 on the hidden set (committed data-free aggregate)",
+          "logical_path": "research/prose-boundary/results/hidden-acceptance/e2e-invariants-hidden.json",
+          "sha256": "44e94dd58ac7d22ad12aad9ccfeffcd136f113e7336229f76d7c91dbe5d9b7ef",
+          "size": 5167
+        },
+        {
+          "disposition": "frozen annotation guide (committed; adjudication basis; untouched)",
+          "logical_path": "research/prose-boundary/config/annotation-guide.json",
+          "sha256": "e65816ddda65343e45b9c0b9fa112b8e18eea19b17310a997cff87b9a200eb5e",
+          "size": 6587
+        },
+        {
+          "disposition": "content-free hidden acceptance manifest (committed; seal basis; untouched)",
+          "logical_path": "research/prose-boundary/corpus/manifests/hidden-manifest.json",
+          "sha256": "8233bdcf683df8a97d62a375a6cf60d93b64aa6b7ecf22489ce9986333436a18",
+          "size": 549479
+        }
+      ],
+      "evidence_status": "public-data-free",
+      "public_report": "research/prose-boundary/results/hidden-acceptance/mashup-metrics.json",
+      "public_metrics": "research/prose-boundary/results/hidden-acceptance/",
+      "public_configuration": "research/prose-boundary/config/annotation-guide.json",
+      "source_manifest": "research/prose-boundary/corpus/manifests/hidden-manifest.json (private-root hidden set referenced by manifest hashes only; the naturalistic adjudication labels remain in the private root - no manifest was written because the run stopped before completion)",
+      "child_runs": [],
+      "conclusion": "FINAL OBJECTIVE-008 SCIENTIFIC CONCLUSION: CONDITIONAL (predeclared decision state; structural-safety evidence only). The frozen parser-first protection layer, evaluated for the first and only time on the sealed hidden acceptance set exactly as frozen at 4b6a90ab13c0c9a02e533a2673a084e26f841a5c, shows exactly one material defect: safety - 458 of 311,358 labeled protected bytes exposed as candidate prose (0.147%; target 0): 20 of 2,000 hidden documents, 19-24 B each, all labeled category structured (families structured-yaml 348 B + structured-xml 110 B), all template T10-randomized; mechanism: CommonMark does not recognize mid-document YAML blocks or HTML/XML fragments whose tags are not HTML block-start tags, so that content becomes paragraph text and is candidate prose under policy v2; the residual layer partially compensates but block syntax stays exposed; zero exposure on the dev set (corner case discovered only by the hidden set). Bounded and clearly understood, hence NOT FAIL; a material safety violation, hence NOT PASS. All other axes green: coordinates 0/0/0/0 including patch preservation; malformed behaviour 0 violations over 10 deterministic rows; prose coverage 97.851% of expected prose bytes (291/7,872 regions completely available; suppression is actual loss by container, no arbitrary threshold); end-to-end invariants 1-7 all PASS on 2,000/2,000 replays through the actual frozen pipeline entry points (frozen deterministic stub boundary; zero network; zero new model calls); determinism 50-case re-run identical; performance median 44.5/67.6/254.2 ms/document at 1/10/50 KB (cheap relative to one model inference - qualitative statement only). Named smallest corrective 008-g scope: (a) extend protection for mid-document raw document blocks - YAML-style blocks and HTML/XML fragments - via a policy-v2 residual class or a structural pre-pass; (b) re-evaluate the full item-15 metrics set and e2e invariants 1-7 on a NEW independently generated and sealed hidden set, this hidden set's evidential status downgraded per the 008-f order after its single use. ROUND EXECUTION BLOCKED: the independent naturalistic adjudication (scope item 3) did not complete - case nat-comparison-table-hidden-04 produced an invalid verbatim-quote tiling twice (start_text not found sequentially) under the predeclared at-most-one-retry policy and the committed driver's fail-closed stop; 17 of 70 pass-1 tilings valid, 0 labels fabricated, 0 label files, no annotations manifest; partial state preserved in the private root (18 raw files, hashes recorded); revised interpretation (C-EVIDENCE-01): model-side tiling anomaly specific to that case, not a driver defect (17/17 prior cases valid, 2/2 prequalification pilots valid, 8/8 synthetic resolver self-tests correct and fail-closed), so the named 008-g scope additionally covers adjudication completion with a strategy-devised refined instrument. This conclusion is structural-safety evidence ONLY: it establishes no linguistic quality, no experimental-MVP acceptance, no release or deployment authority; objective 009 (fresh human-labelled linguistic confirmation of the complete frozen pipeline) remains the separate reserved next objective and its future sample must not contain any case generated or inspected for objective 008. No merge, no auto-merge, no release, no deployment claim; PR #9 remains open and unmerged.",
+      "pending_evidence": [
+        "objective 009: fresh human-labelled linguistic confirmation of the complete frozen pipeline on a new target distribution - NOT this corpus; its sample must exclude every objective-008 generated or inspected case",
+        "008-g: (a) completion of the naturalistic hidden adjudication with a strategy-devised refined instrument (the blocked verbatim-quote tiling contract is the named gap; 17 of 70 pass-1 raw observations are preserved in the private root); (b) the bounded mid-document raw-block protection defect (YAML-style blocks + HTML/XML fragments) via a policy-v2 residual class or structural pre-pass, with re-evaluation of the full item-15 metrics set and e2e invariants 1-7 on a new independently generated and sealed hidden set"
       ]
     }
   ]
