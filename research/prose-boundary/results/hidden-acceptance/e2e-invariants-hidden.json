@@ -1,0 +1,180 @@
+{
+ "schema": "008f-e2e-invariants-hidden/1",
+ "order": "008-f",
+ "label": "blind hidden acceptance evidence: end-to-end preservation invariants 1-7 on the sealed hidden mashup set through the actual frozen pipeline entry points (pipeline.prepare/pipeline.replay with the frozen detector, English-eligibility policy, post-review gate and patching)",
+ "frozen_runner": "research/prose-boundary/tools/end_to_end_invariants.py run_invariants (008-c frozen logic, byte-identical; invoked unmodified)",
+ "corpus": "2,000 hidden mashup documents + machine-known label maps (private root; sealed by hidden-manifest.json)",
+ "deterministic_boundary": "the 008-c deterministic stub boundary: scripted reviewer at the HTTP boundary (raw response documents parsed by the real review.parse_proposal; self-corpus n-gram index derived deterministically from the hidden documents; fixed English-attestation seam); zero network, zero new model calls",
+ "linked_files": 4000,
+ "replay_count": 2000,
+ "seed_count": 20,
+ "frozen_report": {
+  "schema": "008c-e2e-invariants/1",
+  "order": "008-c",
+  "label": "dev-corpus tuning evidence, NOT acceptance",
+  "protection_mode": "parser-first",
+  "helper_sha256": "5df9a11d56b5bdec90c3ca09298802723975306f77e43e74ad1a72eb427c44bf",
+  "self_corpus": {
+   "documents": 2000,
+   "unigrams": 4473,
+   "bigrams": 15435,
+   "trigrams": 22653,
+   "middle_rows": 22653
+  },
+  "reviewer": "scripted reviewer at the HTTP boundary: raw response documents parsed by review.parse_proposal; zero network, zero model calls (S-EVIDENCE-01)",
+  "documents": {
+   "dev_total": 2000,
+   "with_protected_and_prose": 2000,
+   "replayed": 2000,
+   "zero_eligible_documents": 0,
+   "full_zero_check": true
+  },
+  "invariants": {
+   "1_detector_input_outside_protected": true,
+   "2_ngram_windows_no_bridge": true,
+   "3_review_targets_outside_protected": true,
+   "4_accepted_edits_outside_protected": true,
+   "5_protected_substrings_identical_after_path": true,
+   "6_adjacent_prose_repairable": true,
+   "7_zero_eligible_zero_review_work": true
+  },
+  "seeded": [
+   {
+    "doc_id": "hid-000042",
+    "error_word": "xyzzyplugh",
+    "replacement_word": "projekt",
+    "edit_applied": true
+   },
+   {
+    "doc_id": "hid-000064",
+    "error_word": "xyzzyplugh",
+    "replacement_word": "projekt",
+    "edit_applied": true
+   },
+   {
+    "doc_id": "hid-000067",
+    "error_word": "xyzzyplugh",
+    "replacement_word": "projekt",
+    "edit_applied": true
+   },
+   {
+    "doc_id": "hid-000094",
+    "error_word": "xyzzyplugh",
+    "replacement_word": "projekt",
+    "edit_applied": true
+   },
+   {
+    "doc_id": "hid-000097",
+    "error_word": "xyzzyplugh",
+    "replacement_word": "projekt",
+    "edit_applied": true
+   },
+   {
+    "doc_id": "hid-000100",
+    "error_word": "xyzzyplugh",
+    "replacement_word": "projekt",
+    "edit_applied": true
+   },
+   {
+    "doc_id": "hid-000152",
+    "error_word": "xyzzyplugh",
+    "replacement_word": "projekt",
+    "edit_applied": true
+   },
+   {
+    "doc_id": "hid-000155",
+    "error_word": "xyzzyplugh",
+    "replacement_word": "projekt",
+    "edit_applied": true
+   },
+   {
+    "doc_id": "hid-000160",
+    "error_word": "xyzzyplugh",
+    "replacement_word": "projekt",
+    "edit_applied": true
+   },
+   {
+    "doc_id": "hid-000185",
+    "error_word": "xyzzyplugh",
+    "replacement_word": "projekt",
+    "edit_applied": true
+   },
+   {
+    "doc_id": "hid-000204",
+    "error_word": "xyzzyplugh",
+    "replacement_word": "projekt",
+    "edit_applied": true
+   },
+   {
+    "doc_id": "hid-000243",
+    "error_word": "xyzzyplugh",
+    "replacement_word": "projekt",
+    "edit_applied": true
+   },
+   {
+    "doc_id": "hid-000254",
+    "error_word": "xyzzyplugh",
+    "replacement_word": "projekt",
+    "edit_applied": true
+   },
+   {
+    "doc_id": "hid-000265",
+    "error_word": "xyzzyplugh",
+    "replacement_word": "projekt",
+    "edit_applied": true
+   },
+   {
+    "doc_id": "hid-000292",
+    "error_word": "xyzzyplugh",
+    "replacement_word": "projekt",
+    "edit_applied": true
+   },
+   {
+    "doc_id": "hid-000331",
+    "error_word": "xyzzyplugh",
+    "replacement_word": "projekt",
+    "edit_applied": true
+   },
+   {
+    "doc_id": "hid-000339",
+    "error_word": "xyzzyplugh",
+    "replacement_word": "projekt",
+    "edit_applied": true
+   },
+   {
+    "doc_id": "hid-000342",
+    "error_word": "xyzzyplugh",
+    "replacement_word": "projekt",
+    "edit_applied": true
+   },
+   {
+    "doc_id": "hid-000361",
+    "error_word": "xyzzyplugh",
+    "replacement_word": "projekt",
+    "edit_applied": true
+   },
+   {
+    "doc_id": "hid-000375",
+    "error_word": "xyzzyplugh",
+    "replacement_word": "projekt",
+    "edit_applied": true
+   }
+  ],
+  "synthetic_zero_eligible": {
+   "eligible_words": 0,
+   "candidates": 0,
+   "ok": true
+  },
+  "all_pass": true
+ },
+ "per_invariant": {
+  "1_detector_input_outside_protected": true,
+  "2_ngram_windows_no_bridge": true,
+  "3_review_targets_outside_protected": true,
+  "4_accepted_edits_outside_protected": true,
+  "5_protected_substrings_identical_after_path": true,
+  "6_adjacent_prose_repairable": true,
+  "7_zero_eligible_zero_review_work": true
+ },
+ "all_pass": true
+}
