@@ -61,6 +61,7 @@ RUNTIME_PARENT_ENV_VAR = "OAP_RESEARCH_RUNTIME_PARENT"
 HELPER_SUBDIR_GLOB = "008-a-prose-boundary-qualification.*/scratch/target/release/prose-boundary-meas"
 REPO_ROOT = Path(__file__).resolve().parents[2]
 POLICY_V2_PATH = REPO_ROOT / "research" / "prose-boundary" / "config" / "structural-policy-v2.json"
+POLICY_V3_PATH = REPO_ROOT / "research" / "prose-boundary" / "config" / "structural-policy-v3.json"
 
 
 class ProtectionFallback(Exception):
@@ -122,24 +123,39 @@ def cp_to_byte(text: str, cp: int) -> int:
 _policy_cache: dict | None = None
 
 
-def load_policy_v2() -> dict:
-    """Load and validate the frozen structural policy v2 (fail-closed)."""
+def load_policy_v3() -> dict:
+    """Load and validate the active structural policy v3 (fail-closed).
+
+    008-g: the bounded mid-document raw-block fix supersedes policy v2 with
+    v3 (the v2 file remains byte-identical in-tree). The candidate rule is
+    carried over byte-identically, so the cached value shape is unchanged.
+    """
     global _policy_cache
     if _policy_cache is None:
         try:
-            config = json.loads(POLICY_V2_PATH.read_text(encoding="utf-8"))
+            config = json.loads(POLICY_V3_PATH.read_text(encoding="utf-8"))
         except (OSError, ValueError) as exc:
-            raise ProtectionFallback("policy-v2-unreadable") from exc
-        if config.get("schema") != "008c-structural-policy/2":
-            raise ProtectionFallback("policy-v2-schema-mismatch")
+            raise ProtectionFallback("policy-v3-unreadable") from exc
+        if config.get("schema") != "008g-structural-policy/3":
+            raise ProtectionFallback("policy-v3-schema-mismatch")
         rule = config.get("candidate_rule")
         if not isinstance(rule, dict):
-            raise ProtectionFallback("policy-v2-candidate-rule-missing")
+            raise ProtectionFallback("policy-v3-candidate-rule-missing")
         _policy_cache = {
             "prose": list(rule["PROSE_CONTAINERS"]),
             "non_prose": list(rule["NON_PROSE_CONTAINERS"]),
         }
     return _policy_cache
+
+
+def load_policy_v2() -> dict:
+    """Compatibility alias (008-g): loads the active policy (v3).
+
+    The candidate rule is byte-identical between v2 and v3 (v3 changelog
+    'unchanged' clause); the frozen 008-f harness and the 008-c focused test
+    suite call this entry point unchanged.
+    """
+    return load_policy_v3()
 
 
 def policy_match(token: str, entries: list[str]) -> bool:
@@ -484,12 +500,14 @@ def _candidate_complement(candidates: list[tuple[int, int]], data_len: int) -> l
 # residual semantic recognizers (policy v2 residual layer)
 #
 # Narrow, content-level, candidate-prose-only, code-point coordinates.
-# Mirror of the frozen residual class spec (structural-policy-v2.json,
-# schema 008c-structural-policy/2) and of the builder's oracle block
-# (research/prose-boundary/tools/prose_boundary_builder.py); the dev-corpus
-# safety metric empirically verifies label/runtime agreement. No
-# Markdown-delimiter regexes; no reparsing of code, parser-recognized math,
-# HTML, or metadata.
+# Mirror of the active residual class spec (structural-policy-v3.json,
+# schema 008g-structural-policy/3; its v2 content is carried byte-identical
+# per the v3 "unchanged" clause, plus the 008-g yaml-toml-config strict
+# single-line extension and the new xml-fragment class) and of the builder's
+# oracle block (research/prose-boundary/tools/prose_boundary_builder.py);
+# the dev-corpus safety metric empirically verifies label/runtime agreement.
+# No Markdown-delimiter regexes; no reparsing of code, parser-recognized
+# math, HTML, or metadata.
 # ---------------------------------------------------------------------------
 TEX_ENVS = (
     "equation", "equation*", "align", "align*", "aligned", "gather", "gather*",
@@ -619,8 +637,49 @@ def _json_spans(text: str) -> list[tuple[int, int]]:
     return spans
 
 
+# v3 (008-g) config-class extensions. RE_KEY_LINE is carried over unchanged
+# from v2 (digit keys allowed) so that every v2 >= 2-line run and section run
+# keeps its v2 protection exactly (no new exposure by construction); the v3
+# additions are strict and additive.
+RE_WORD_KEY_LINE = re.compile(r"^\s*([A-Za-z_][A-Za-z0-9_.-]*)\s*[:=]\s*(.*)$")
+RE_NESTED_LIST_LINE = re.compile(r"^\s*-+\s+\S")
+RE_QUOTED_LITERAL = re.compile(r"^([\"']).*\1$")
+
+
+def _machine_like_value(value: str) -> bool:
+    """v3 strictness contract: the whole trimmed value is machine-like -
+    a number (optional short unit), a path, a relative path, an identifier,
+    an environment-variable form, or a single-line quoted literal."""
+    v = value.strip()
+    if not v:
+        return False
+    if RE_NUMBER.fullmatch(v):
+        return True
+    if RE_PATH.fullmatch(v) or RE_REL_PATH.fullmatch(v):
+        return True
+    m = RE_IDENT.fullmatch(v)
+    if m:
+        return True
+    if RE_ENV_BRACED.fullmatch(v):
+        return True
+    m = RE_ENV_BARE.fullmatch(v)
+    if m and _env_name_ok(m.group(0)[1:]):
+        return True
+    return bool(RE_QUOTED_LITERAL.match(v))
+
+
 def _config_spans(text: str) -> list[tuple[int, int]]:
-    """yaml-toml-config spans: >= 2 key/value lines or a section header run."""
+    """yaml-toml-config spans (v3).
+
+    Carried over from v2 (unchanged behaviour): >= 2 consecutive key/value
+    lines (RE_KEY_LINE, digit keys included) and a '[section]' header run.
+    v3 additions (008-g scope item 4(a)(1), strictness contract): a single
+    word-key line is protected when its whole value is machine-like or it is
+    immediately followed by >= 1 nested list-style line (empty value);
+    nested list-style lines (dash-plus-space continuation) extend a protected
+    key-value run. Pure list runs (no key line) never fire, so Markdown
+    prose lists stay candidate prose.
+    """
     spans: list[tuple[int, int]] = []
     lines = text.split("\n")
     offsets: list[int] = []
@@ -629,6 +688,13 @@ def _config_spans(text: str) -> list[tuple[int, int]]:
         offsets.append(off)
         off += len(ln) + 1
     n = len(lines)
+
+    def emit(start_line: int, end_line: int) -> None:
+        start = offsets[start_line]
+        end = offsets[end_line] + len(lines[end_line])
+        spans.append((start, end))
+
+    protected_key = [False] * n  # a key line protected in its own right
     i = 0
     while i < n:
         line = lines[i]
@@ -639,9 +705,16 @@ def _config_spans(text: str) -> list[tuple[int, int]]:
                 keys.append(j)
                 j += 1
             if keys:
-                start = offsets[i]
-                end = offsets[keys[-1]] + len(lines[keys[-1]])
-                spans.append((start, end))
+                for k in keys:
+                    protected_key[k] = True
+                # v2: the run covers section header through last key line;
+                # v3: nested list-style lines following the run extend it.
+                end_line = keys[-1]
+                k = end_line + 1
+                while k < n and RE_NESTED_LIST_LINE.match(lines[k]):
+                    end_line = k
+                    k += 1
+                emit(i, end_line)
             i = j if keys else i + 1
             continue
         if RE_KEY_LINE.match(line):
@@ -649,12 +722,129 @@ def _config_spans(text: str) -> list[tuple[int, int]]:
             while j < n and RE_KEY_LINE.match(lines[j]):
                 j += 1
             if j - i >= 2:
-                start = offsets[i]
-                end = offsets[j - 1] + len(lines[j - 1])
-                spans.append((start, end))
+                # v2 run (carried over): all its key lines are protected.
+                for k in range(i, j):
+                    protected_key[k] = True
+                end_line = j - 1
+                k = end_line + 1
+                while k < n and RE_NESTED_LIST_LINE.match(lines[k]):
+                    end_line = k
+                    k += 1
+                emit(i, end_line)
+                i = end_line + 1
+                continue
+            # v3: a single key line in its own right.
+            wm = RE_WORD_KEY_LINE.match(line)
+            if wm is not None:
+                value = wm.group(2)
+                has_nested = (i + 1 < n
+                              and RE_NESTED_LIST_LINE.match(lines[i + 1]) is not None)
+                if _machine_like_value(value) or (value.strip() == "" and has_nested):
+                    protected_key[i] = True
+                    end_line = i
+                    k = i + 1
+                    while k < n and RE_NESTED_LIST_LINE.match(lines[k]):
+                        end_line = k
+                        k += 1
+                    emit(i, end_line)
+                    i = end_line + 1
+                    continue
             i = j
             continue
         i += 1
+    return spans
+
+
+# v3 (008-g) xml-fragment class (scope 4(a)(2)). The residual layer sees
+# only parser-approved candidate prose; recognized inline-HTML tags are
+# structural (InlineHtml events) and never need this class. This
+# recognizer covers HTML/XML tag fragments the parser dialect parses as
+# paragraph text: namespaced prefix-colon names (with attributes, so the
+# autolink path does not claim them) and names outside the dialect's
+# recognized tag-name shape. The trigger requires a letter/underscore
+# immediately after "<" and a closing ">" on the same line, so comparison
+# operators ("< 5", "<5"), a lone angle bracket, and digits after "<"
+# never fire; recognized tag names (the dialect vocabulary) abstain so
+# recognised-HTML behaviour stays byte-identical to v2.
+RE_XML_NAME = r"[A-Za-z_][A-Za-z0-9_.:-]*"
+RE_XML_OPEN = re.compile(r"<(" + RE_XML_NAME + r")([^<>\n]*)>")
+RE_XML_CLOSE = re.compile(r"</(" + RE_XML_NAME + r")[^<>\n]*>")
+# The parser dialect recognizes an inline-HTML tag exactly when the tag
+# name has this shape (verified against the pinned pulldown-cmark 0.13.4
+# helper: pure letter/digit/hyphen names, any case, with or without
+# attributes -> InlineHtml events, never candidate prose; namespaced
+# names and names with a period/underscore are not recognized).
+RE_XML_DIALECT_NAME = re.compile(r"[A-Za-z][A-Za-z0-9-]*")
+XML_FRAGMENT_LIMIT = 2000  # code points; policy v3 xml-fragment span bound
+
+
+def _xml_name_triggers(name: str) -> bool:
+    """True when the class must fire for this tag name: namespaced
+    prefix-colon names, or names outside the dialect's recognized
+    tag-name shape. Names the dialect recognizes never need the class
+    (their tag bytes are structural, never candidate prose), and firing
+    on them would over-protect recognised-HTML content (v2 parity)."""
+    if ":" in name:
+        return True
+    return RE_XML_DIALECT_NAME.fullmatch(name) is None
+
+
+def _xml_fragment_spans(text: str) -> list[tuple[int, int]]:
+    """xml-fragment spans (cp coords), deterministic left-to-right scan.
+
+    A paired fragment (opening tag to its matching case-sensitive closing
+    tag, or a self-closing marker) is protected in full (<= 2000 cp); an
+    unbalanced opening fragment is protected to the end of its line (recorded
+    008-g D0 choice: protected, not policy-exposed); a standalone closing tag
+    token is protected as a machine fragment.
+    """
+    spans: list[tuple[int, int]] = []
+    pos = 0
+    while True:
+        lt = text.find("<", pos)
+        if lt < 0:
+            break
+        m = RE_XML_OPEN.match(text, lt)
+        if m is not None:
+            name = m.group(1)
+            if not _xml_name_triggers(name):
+                # recognized tag name: the parser owns these bytes
+                # (InlineHtml, never candidate prose) - skip the token
+                pos = m.end()
+                continue
+            start = lt
+            if m.group(2).endswith("/"):
+                # self-closing: the tag token itself
+                end = min(m.end(), start + XML_FRAGMENT_LIMIT)
+                spans.append((start, end))
+                pos = m.end()
+                continue
+            close = re.compile(
+                r"</" + re.escape(name) + r"[^<>\n]*>"
+            ).search(text, m.end())
+            if close is not None and close.end() - start <= XML_FRAGMENT_LIMIT:
+                spans.append((start, close.end()))
+                pos = close.end()
+                continue
+            # unbalanced opening (or over-bound pair): protect to the end
+            # of the line containing the opening tag
+            eol = text.find("\n", start)
+            end = len(text) if eol < 0 else eol
+            end = min(end, start + XML_FRAGMENT_LIMIT)
+            spans.append((start, end))
+            pos = max(pos, end)
+            continue
+        mc = RE_XML_CLOSE.match(text, lt)
+        if mc is not None:
+            if _xml_name_triggers(mc.group(1)):
+                # standalone closing tag token of a non-recognized name
+                end = min(mc.end(), lt + XML_FRAGMENT_LIMIT)
+                spans.append((lt, end))
+                pos = mc.end()
+                continue
+            pos = mc.end()
+            continue
+        pos = lt + 1
     return spans
 
 
@@ -663,7 +853,7 @@ def residual_spans(text: str) -> list[tuple[str, int, int]]:
 
     Returns (class, start, end) tuples for: url, path, relative-path,
     shell (lines and flags), env-var, identifier, upper-identifier, number,
-    tex-paren, tex-bracket, tex-env, bare-json, config.
+    tex-paren, tex-bracket, tex-env, bare-json, config, xml-fragment.
     """
     spans: list[tuple[str, int, int]] = []
     for m in RE_URL.finditer(text):
@@ -698,6 +888,8 @@ def residual_spans(text: str) -> list[tuple[str, int, int]]:
         spans.append(("bare-json", s, e))
     for s, e in _config_spans(text):
         spans.append(("config", s, e))
+    for s, e in _xml_fragment_spans(text):
+        spans.append(("xml-fragment", s, e))
     return spans
 
 

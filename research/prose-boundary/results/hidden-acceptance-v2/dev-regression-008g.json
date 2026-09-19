@@ -1,0 +1,372 @@
+{
+ "schema": "008g-dev-regression/1",
+ "order": "008-g",
+ "label": "dev regression gate (order requirement 5): the fixed v3 implementation evaluated on the frozen 3,000-document dev corpus and the 50-document visible dev defect batch; committed BEFORE any hidden evaluation; data-free aggregate (counts, rates, hashes; no case content, no private paths)",
+ "implementation_census": {
+  "research/curated/prose_boundary.py": "3a5a4ba7b5258dc7937a9b4ef98a90982a6a159d5d8763160f3105048545f2d7",
+  "research/curated/protected.py": "27f22eaee129190b880851b958a8aa5a38d357cb4e711d70e762b2353d32e78f",
+  "research/prose-boundary/config/structural-policy-v2.json": "996f465784bed37a179be337e2af606b2dc350cacba6341479371d2812c5a88e",
+  "research/prose-boundary/config/structural-policy-v3.json": "7ff6646e3c11d1241cb1c85bd96f08e3f0db08e73d4eb4a4e97fac0c17e1828f"
+ },
+ "policy_v3_sha256": "7ff6646e3c11d1241cb1c85bd96f08e3f0db08e73d4eb4a4e97fac0c17e1828f",
+ "helper_sha256": "5df9a11d56b5bdec90c3ca09298802723975306f77e43e74ad1a72eb427c44bf",
+ "dev_corpus": {
+  "raw_dev_harness_output": {
+   "documents_measured": 3000,
+   "documents_total": 3000,
+   "fallback_documents": [],
+   "safety": {
+    "protected_bytes_total": 526315,
+    "protected_bytes_exposed": 0,
+    "target": 0,
+    "machine_significant_exposure_rate": 0.0,
+    "protected_regions_overlapping_candidate_prose": 0,
+    "met": true
+   },
+   "coverage": {
+    "expected_prose_bytes_total": 1910081,
+    "expected_prose_bytes_exposed": 1880503,
+    "expected_prose_bytes_exposed_rate": 0.9845147928281576,
+    "expected_prose_regions_total": 11975,
+    "expected_prose_regions_completely_available": 300,
+    "unnecessary_suppression_by_container": {
+     "S.Emph": 110,
+     "S.Head": 436,
+     "S.Item": 3727,
+     "S.Para": 20291,
+     "S.TableCell": 575,
+     "unknown": 4439
+    }
+   },
+   "coordinates": {
+    "utf8_boundary_violations": 0,
+    "byte_cp_conversion_mismatches": 0,
+    "source_slice_mismatches": 0,
+    "met": true
+   },
+   "residual_performance_by_class": {
+    "bare-json": {
+     "spans": 4017,
+     "bytes": 107522
+    },
+    "config": {
+     "spans": 190,
+     "bytes": 13123
+    },
+    "env-var": {
+     "spans": 43,
+     "bytes": 514
+    },
+    "identifier": {
+     "spans": 2028,
+     "bytes": 13764
+    },
+    "number": {
+     "spans": 8124,
+     "bytes": 33443
+    },
+    "path": {
+     "spans": 1265,
+     "bytes": 22165
+    },
+    "relative-path": {
+     "spans": 1087,
+     "bytes": 17161
+    },
+    "shell": {
+     "spans": 202,
+     "bytes": 3154
+    },
+    "tex-bracket": {
+     "spans": 123,
+     "bytes": 9389
+    },
+    "tex-env": {
+     "spans": 408,
+     "bytes": 48773
+    },
+    "tex-paren": {
+     "spans": 159,
+     "bytes": 11083
+    },
+    "upper-identifier": {
+     "spans": 584,
+     "bytes": 2797
+    },
+    "url": {
+     "spans": 880,
+     "bytes": 24009
+    },
+    "xml-fragment": {
+     "spans": 42,
+     "bytes": 2110
+    }
+   },
+   "malformed_behaviour": {
+    "note": "per frozen malformed_class_map: expected='protected' bytes must be covered (violations counted); expected='policy-exposed' exposure is policy-decided and not a violation (008-a GO residual bound)",
+    "rows": [
+     {
+      "family": "malformed-broken-link",
+      "expected": "protected",
+      "components": 41,
+      "protected_bytes": 1189,
+      "protected_exposed_bytes": 0,
+      "policy_exposed_bytes": 0,
+      "policy_exposed_covered_bytes": 0,
+      "violations": 0
+     },
+     {
+      "family": "malformed-incomplete-display-dollar",
+      "expected": "policy-exposed",
+      "components": 37,
+      "protected_bytes": 37,
+      "protected_exposed_bytes": 0,
+      "policy_exposed_bytes": 74,
+      "policy_exposed_covered_bytes": 0,
+      "violations": 0
+     },
+     {
+      "family": "malformed-incomplete-paren-bracket",
+      "expected": "protected",
+      "components": 28,
+      "protected_bytes": 1461,
+      "protected_exposed_bytes": 0,
+      "policy_exposed_bytes": 0,
+      "policy_exposed_covered_bytes": 0,
+      "violations": 0
+     },
+     {
+      "family": "malformed-malformed-nesting",
+      "expected": "policy-exposed",
+      "components": 35,
+      "protected_bytes": 0,
+      "protected_exposed_bytes": 0,
+      "policy_exposed_bytes": 172,
+      "policy_exposed_covered_bytes": 114,
+      "violations": 0
+     },
+     {
+      "family": "malformed-partial-html",
+      "expected": "protected",
+      "components": 36,
+      "protected_bytes": 0,
+      "protected_exposed_bytes": 0,
+      "policy_exposed_bytes": 0,
+      "policy_exposed_covered_bytes": 0,
+      "violations": 0
+     },
+     {
+      "family": "malformed-truncated-json",
+      "expected": "protected",
+      "components": 31,
+      "protected_bytes": 1310,
+      "protected_exposed_bytes": 0,
+      "policy_exposed_bytes": 0,
+      "policy_exposed_covered_bytes": 0,
+      "violations": 0
+     },
+     {
+      "family": "malformed-unclosed-fence",
+      "expected": "protected",
+      "components": 24,
+      "protected_bytes": 2054,
+      "protected_exposed_bytes": 0,
+      "policy_exposed_bytes": 0,
+      "policy_exposed_covered_bytes": 0,
+      "violations": 0
+     },
+     {
+      "family": "malformed-unclosed-tex-env",
+      "expected": "protected",
+      "components": 30,
+      "protected_bytes": 2971,
+      "protected_exposed_bytes": 0,
+      "policy_exposed_bytes": 0,
+      "policy_exposed_covered_bytes": 0,
+      "violations": 0
+     },
+     {
+      "family": "malformed-unmatched-backtick",
+      "expected": "policy-exposed",
+      "components": 37,
+      "protected_bytes": 0,
+      "protected_exposed_bytes": 0,
+      "policy_exposed_bytes": 37,
+      "policy_exposed_covered_bytes": 0,
+      "violations": 0
+     },
+     {
+      "family": "malformed-unmatched-dollar",
+      "expected": "policy-exposed",
+      "components": 40,
+      "protected_bytes": 184,
+      "protected_exposed_bytes": 0,
+      "policy_exposed_bytes": 40,
+      "policy_exposed_covered_bytes": 0,
+      "violations": 0
+     }
+    ],
+    "violations": 0
+   },
+   "size": {
+    "docs": 3000,
+    "bytes": 2484602
+   },
+   "label": "dev-corpus tuning evidence, NOT acceptance (008-d performs the blind hidden acceptance of the frozen implementation)"
+  },
+  "baseline_008c": {
+   "file": "research/prose-boundary/results/increment3/dev-corpus-metrics.json",
+   "safety": {
+    "protected_bytes_total": 526315,
+    "protected_bytes_exposed": 0,
+    "target": 0,
+    "machine_significant_exposure_rate": 0.0,
+    "protected_regions_overlapping_candidate_prose": 0,
+    "met": true
+   },
+   "coverage": {
+    "expected_prose_bytes_total": 1910081,
+    "expected_prose_bytes_exposed": 1880719,
+    "expected_prose_bytes_exposed_rate": 0.9846278770376754,
+    "expected_prose_regions_total": 11975,
+    "expected_prose_regions_completely_available": 278,
+    "unnecessary_suppression_by_container": {
+     "S.Emph": 110,
+     "S.Head": 436,
+     "S.Item": 3531,
+     "S.Para": 20271,
+     "S.TableCell": 575,
+     "unknown": 4439
+    }
+   }
+  },
+  "delta": {
+   "protected_bytes_exposed": 0,
+   "prose_suppression_rate": 0.01548520717184243,
+   "prose_suppression_rate_baseline": 0.015372122962324597,
+   "prose_suppression_delta_pp": 0.011308420951783305,
+   "actual_loss_by_container": {
+    "S.Emph": 110,
+    "S.Head": 436,
+    "S.Item": 3727,
+    "S.Para": 20291,
+    "S.TableCell": 575,
+    "unknown": 4439
+   },
+   "actual_loss_by_container_baseline": {
+    "S.Emph": 110,
+    "S.Head": 436,
+    "S.Item": 3531,
+    "S.Para": 20271,
+    "S.TableCell": 575,
+    "unknown": 4439
+   }
+  }
+ },
+ "dev_defect_batch": {
+  "raw_dev_harness_output": {
+   "documents_measured": 50,
+   "documents_total": 50,
+   "fallback_documents": [],
+   "safety": {
+    "protected_bytes_total": 702,
+    "protected_bytes_exposed": 0,
+    "target": 0,
+    "machine_significant_exposure_rate": 0.0,
+    "protected_regions_overlapping_candidate_prose": 0,
+    "met": true
+   },
+   "coverage": {
+    "expected_prose_bytes_total": 1404,
+    "expected_prose_bytes_exposed": 1283,
+    "expected_prose_bytes_exposed_rate": 0.9138176638176638,
+    "expected_prose_regions_total": 98,
+    "expected_prose_regions_completely_available": 0,
+    "unnecessary_suppression_by_container": {
+     "S.Para": 28,
+     "unknown": 93
+    }
+   },
+   "coordinates": {
+    "utf8_boundary_violations": 0,
+    "byte_cp_conversion_mismatches": 0,
+    "source_slice_mismatches": 0,
+    "met": true
+   },
+   "residual_performance_by_class": {
+    "bare-json": {
+     "spans": 2,
+     "bytes": 16
+    },
+    "config": {
+     "spans": 18,
+     "bytes": 309
+    },
+    "env-var": {
+     "spans": 1,
+     "bytes": 9
+    },
+    "identifier": {
+     "spans": 3,
+     "bytes": 31
+    },
+    "number": {
+     "spans": 25,
+     "bytes": 95
+    },
+    "path": {
+     "spans": 12,
+     "bytes": 119
+    },
+    "relative-path": {
+     "spans": 2,
+     "bytes": 44
+    },
+    "upper-identifier": {
+     "spans": 2,
+     "bytes": 18
+    },
+    "xml-fragment": {
+     "spans": 12,
+     "bytes": 330
+    }
+   },
+   "malformed_behaviour": {
+    "note": "per frozen malformed_class_map: expected='protected' bytes must be covered (violations counted); expected='policy-exposed' exposure is policy-decided and not a violation (008-a GO residual bound)",
+    "rows": [],
+    "violations": 0
+   },
+   "size": {
+    "docs": 50,
+    "bytes": 2210
+   },
+   "label": "dev-corpus tuning evidence, NOT acceptance (008-d performs the blind hidden acceptance of the frozen implementation)"
+  },
+  "note": "the 50-document visible dev defect batch (defect-dev-008g); machine-known labels; POLICY_EXPOSED regions (the v3-classified nested parser-split shape) are exempt from safety by the harness role handling",
+  "actual_loss_by_container": {
+   "S.Para": 28,
+   "unknown": 93
+  }
+ },
+ "stop_conditions": {
+  "stop_i_dev_corpus_new_safety_exposure": {
+   "predeclared": "any new safety exposure on the 3,000-document dev corpus (protected bytes exposed > 0 against the 008-c dev baseline of 0)",
+   "value": 0,
+   "fired": false
+  },
+  "stop_ii_batch_defect_class_safety": {
+   "predeclared": "dev defect batch safety not 0 for the defect-class shapes that are NOT classified policy-exposed in v3 (POLICY_EXPOSED regions exempt by harness role handling)",
+   "value": 0,
+   "fired": false
+  },
+  "stop_iii_prose_over_suppression": {
+   "predeclared": "prose-byte over-suppression on the dev corpus exceeding 1.0 percentage point relative to the 008-c dev baseline",
+   "baseline_suppression_rate": 0.015372122962324597,
+   "value": 0.01548520717184243,
+   "delta_pp": 0.011308420951783305,
+   "fired": false
+  }
+ },
+ "any_stop_fired": false,
+ "status": "PASS"
+}
