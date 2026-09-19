@@ -1,0 +1,17 @@
+{
+ "doc_id": "d44",
+ "seed": "008edefd0001",
+ "template": "D-xml-unbalanced-t10",
+ "byte_length": 67,
+ "cp_length": 67,
+ "sha256": "dfa1a1568f214114258789f04669212a7857469d903e28294ef528bbeabd13a8",
+ "document": "Pred tem.\n<foo:x bar=\"y\"> preostanek\nNaslednja vrstica je navadna.\n",
+ "components": [
+  {
+   "component_id": "defect-008g-d44",
+   "category": "structured",
+   "start_byte": 10,
+   "end_byte": 36
+  }
+ ]
+}
