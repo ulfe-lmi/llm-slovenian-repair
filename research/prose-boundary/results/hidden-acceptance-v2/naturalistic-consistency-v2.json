@@ -1,0 +1,1666 @@
+{
+ "schema": "008g-naturalistic-consistency-v2/1",
+ "order": "008-g",
+ "label": "naturalistic consistency check (order requirement 8): the fixed implementation's protection output on the 70 naturalistic responses compared against the completed v2 labels; data-free aggregate (counts and case IDs only; no response content, no private paths)",
+ "span_rule": "a line range maps to the code-point span from the start of its first line to the end of its last line in the CRLF-normalized view (including the trailing newline of the last line when present), mapped to original-view code points (identity when no CRLF); exposed bytes = span bytes not covered by a protection interval",
+ "materiality_predeclared": {
+  "single_range_exposed_bytes": 50,
+  "exposed_ranges_per_case": 5,
+  "rule": "any non-AMBIGUOUS STRUCTURAL_PROTECT / MACHINE_SIGNIFICANT_RESIDUAL label range with an exposed span >= 50 bytes, OR >= 5 exposed ranges of any size in one case"
+ },
+ "cases_total": 70,
+ "material_contradictions": 5,
+ "material_case_ids": [
+  "nat-glossary-entry-hidden-03",
+  "nat-json-config-hidden-01",
+  "nat-math-answer-hidden-04",
+  "nat-qa-answer-hidden-04",
+  "nat-table-equations-hidden-03"
+ ],
+ "per_case": [
+  {
+   "case_id": "nat-algorithm-python-hidden-01",
+   "status": "LABELED",
+   "ranges_checked": 1,
+   "exposed_ranges_any_size": 0,
+   "max_exposed_bytes": 0,
+   "material": false,
+   "exposed_ranges": [
+    {
+     "line_range": [
+      10,
+      23
+     ],
+     "category": "STRUCTURAL_PROTECT",
+     "span_bytes": 336,
+     "exposed_bytes": 0
+    }
+   ],
+   "attribution": {}
+  },
+  {
+   "case_id": "nat-algorithm-python-hidden-02",
+   "status": "LABELED",
+   "ranges_checked": 1,
+   "exposed_ranges_any_size": 0,
+   "max_exposed_bytes": 0,
+   "material": false,
+   "exposed_ranges": [
+    {
+     "line_range": [
+      15,
+      31
+     ],
+     "category": "STRUCTURAL_PROTECT",
+     "span_bytes": 381,
+     "exposed_bytes": 0
+    }
+   ],
+   "attribution": {}
+  },
+  {
+   "case_id": "nat-algorithm-python-hidden-03",
+   "status": "LABELED",
+   "ranges_checked": 2,
+   "exposed_ranges_any_size": 1,
+   "max_exposed_bytes": 22,
+   "material": false,
+   "exposed_ranges": [
+    {
+     "line_range": [
+      3,
+      16
+     ],
+     "category": "STRUCTURAL_PROTECT",
+     "span_bytes": 348,
+     "exposed_bytes": 0
+    },
+    {
+     "line_range": [
+      20,
+      23
+     ],
+     "category": "STRUCTURAL_PROTECT",
+     "span_bytes": 109,
+     "exposed_bytes": 22
+    }
+   ],
+   "attribution": {
+    "parser-dialect": 1
+   }
+  },
+  {
+   "case_id": "nat-algorithm-python-hidden-04",
+   "status": "LABELED",
+   "ranges_checked": 1,
+   "exposed_ranges_any_size": 0,
+   "max_exposed_bytes": 0,
+   "material": false,
+   "exposed_ranges": [
+    {
+     "line_range": [
+      3,
+      20
+     ],
+     "category": "STRUCTURAL_PROTECT",
+     "span_bytes": 377,
+     "exposed_bytes": 0
+    }
+   ],
+   "attribution": {}
+  },
+  {
+   "case_id": "nat-api-reference-hidden-01",
+   "status": "LABELED",
+   "ranges_checked": 2,
+   "exposed_ranges_any_size": 0,
+   "max_exposed_bytes": 0,
+   "material": false,
+   "exposed_ranges": [
+    {
+     "line_range": [
+      12,
+      14
+     ],
+     "category": "STRUCTURAL_PROTECT",
+     "span_bytes": 67,
+     "exposed_bytes": 0
+    },
+    {
+     "line_range": [
+      18,
+      26
+     ],
+     "category": "STRUCTURAL_PROTECT",
+     "span_bytes": 179,
+     "exposed_bytes": 0
+    }
+   ],
+   "attribution": {}
+  },
+  {
+   "case_id": "nat-api-reference-hidden-02",
+   "status": "LABELED",
+   "ranges_checked": 2,
+   "exposed_ranges_any_size": 0,
+   "max_exposed_bytes": 0,
+   "material": false,
+   "exposed_ranges": [
+    {
+     "line_range": [
+      16,
+      18
+     ],
+     "category": "STRUCTURAL_PROTECT",
+     "span_bytes": 93,
+     "exposed_bytes": 0
+    },
+    {
+     "line_range": [
+      22,
+      32
+     ],
+     "category": "STRUCTURAL_PROTECT",
+     "span_bytes": 206,
+     "exposed_bytes": 0
+    }
+   ],
+   "attribution": {}
+  },
+  {
+   "case_id": "nat-api-reference-hidden-03",
+   "status": "LABELED",
+   "ranges_checked": 2,
+   "exposed_ranges_any_size": 0,
+   "max_exposed_bytes": 0,
+   "material": false,
+   "exposed_ranges": [
+    {
+     "line_range": [
+      14,
+      16
+     ],
+     "category": "STRUCTURAL_PROTECT",
+     "span_bytes": 260,
+     "exposed_bytes": 0
+    },
+    {
+     "line_range": [
+      20,
+      30
+     ],
+     "category": "STRUCTURAL_PROTECT",
+     "span_bytes": 238,
+     "exposed_bytes": 0
+    }
+   ],
+   "attribution": {}
+  },
+  {
+   "case_id": "nat-api-reference-hidden-04",
+   "status": "LABELED",
+   "ranges_checked": 2,
+   "exposed_ranges_any_size": 0,
+   "max_exposed_bytes": 0,
+   "material": false,
+   "exposed_ranges": [
+    {
+     "line_range": [
+      10,
+      12
+     ],
+     "category": "STRUCTURAL_PROTECT",
+     "span_bytes": 86,
+     "exposed_bytes": 0
+    },
+    {
+     "line_range": [
+      16,
+      25
+     ],
+     "category": "STRUCTURAL_PROTECT",
+     "span_bytes": 218,
+     "exposed_bytes": 0
+    }
+   ],
+   "attribution": {}
+  },
+  {
+   "case_id": "nat-changelog-hidden-01",
+   "status": "LABELED",
+   "ranges_checked": 1,
+   "exposed_ranges_any_size": 0,
+   "max_exposed_bytes": 0,
+   "material": false,
+   "exposed_ranges": [
+    {
+     "line_range": [
+      3,
+      7
+     ],
+     "category": "STRUCTURAL_PROTECT",
+     "span_bytes": 30,
+     "exposed_bytes": 0
+    }
+   ],
+   "attribution": {}
+  },
+  {
+   "case_id": "nat-changelog-hidden-02",
+   "status": "LABELED",
+   "ranges_checked": 1,
+   "exposed_ranges_any_size": 0,
+   "max_exposed_bytes": 0,
+   "material": false,
+   "exposed_ranges": [
+    {
+     "line_range": [
+      3,
+      7
+     ],
+     "category": "STRUCTURAL_PROTECT",
+     "span_bytes": 76,
+     "exposed_bytes": 0
+    }
+   ],
+   "attribution": {}
+  },
+  {
+   "case_id": "nat-changelog-hidden-03",
+   "status": "LABELED",
+   "ranges_checked": 2,
+   "exposed_ranges_any_size": 2,
+   "max_exposed_bytes": 6,
+   "material": false,
+   "exposed_ranges": [
+    {
+     "line_range": [
+      3,
+      3
+     ],
+     "category": "MACHINE_SIGNIFICANT_RESIDUAL",
+     "span_bytes": 19,
+     "exposed_bytes": 6
+    },
+    {
+     "line_range": [
+      10,
+      10
+     ],
+     "category": "MACHINE_SIGNIFICANT_RESIDUAL",
+     "span_bytes": 19,
+     "exposed_bytes": 6
+    }
+   ],
+   "attribution": {
+    "label-ambiguity": 2
+   }
+  },
+  {
+   "case_id": "nat-changelog-hidden-04",
+   "status": "LABELED",
+   "ranges_checked": 1,
+   "exposed_ranges_any_size": 0,
+   "max_exposed_bytes": 0,
+   "material": false,
+   "exposed_ranges": [
+    {
+     "line_range": [
+      15,
+      15
+     ],
+     "category": "STRUCTURAL_PROTECT",
+     "span_bytes": 32,
+     "exposed_bytes": 0
+    }
+   ],
+   "attribution": {}
+  },
+  {
+   "case_id": "nat-changelog-hidden-05",
+   "status": "LABELED",
+   "ranges_checked": 2,
+   "exposed_ranges_any_size": 0,
+   "max_exposed_bytes": 0,
+   "material": false,
+   "exposed_ranges": [
+    {
+     "line_range": [
+      4,
+      4
+     ],
+     "category": "STRUCTURAL_PROTECT",
+     "span_bytes": 18,
+     "exposed_bytes": 0
+    },
+    {
+     "line_range": [
+      16,
+      19
+     ],
+     "category": "STRUCTURAL_PROTECT",
+     "span_bytes": 105,
+     "exposed_bytes": 0
+    }
+   ],
+   "attribution": {}
+  },
+  {
+   "case_id": "nat-changelog-hidden-06",
+   "status": "LABELED",
+   "ranges_checked": 0,
+   "exposed_ranges_any_size": 0,
+   "max_exposed_bytes": 0,
+   "material": false,
+   "exposed_ranges": [],
+   "attribution": {}
+  },
+  {
+   "case_id": "nat-comparison-table-hidden-01",
+   "status": "LABELED",
+   "ranges_checked": 1,
+   "exposed_ranges_any_size": 0,
+   "max_exposed_bytes": 0,
+   "material": false,
+   "exposed_ranges": [
+    {
+     "line_range": [
+      11,
+      16
+     ],
+     "category": "STRUCTURAL_PROTECT",
+     "span_bytes": 120,
+     "exposed_bytes": 0
+    }
+   ],
+   "attribution": {}
+  },
+  {
+   "case_id": "nat-comparison-table-hidden-02",
+   "status": "LABELED",
+   "ranges_checked": 1,
+   "exposed_ranges_any_size": 1,
+   "max_exposed_bytes": 26,
+   "material": false,
+   "exposed_ranges": [
+    {
+     "line_range": [
+      3,
+      4
+     ],
+     "category": "STRUCTURAL_PROTECT",
+     "span_bytes": 58,
+     "exposed_bytes": 26
+    }
+   ],
+   "attribution": {
+    "parser-dialect": 1
+   }
+  },
+  {
+   "case_id": "nat-comparison-table-hidden-03",
+   "status": "LABELED",
+   "ranges_checked": 0,
+   "exposed_ranges_any_size": 0,
+   "max_exposed_bytes": 0,
+   "material": false,
+   "exposed_ranges": [],
+   "attribution": {}
+  },
+  {
+   "case_id": "nat-comparison-table-hidden-04",
+   "status": "LABELED",
+   "ranges_checked": 1,
+   "exposed_ranges_any_size": 1,
+   "max_exposed_bytes": 36,
+   "material": false,
+   "exposed_ranges": [
+    {
+     "line_range": [
+      3,
+      4
+     ],
+     "category": "STRUCTURAL_PROTECT",
+     "span_bytes": 61,
+     "exposed_bytes": 36
+    }
+   ],
+   "attribution": {
+    "parser-dialect": 1
+   }
+  },
+  {
+   "case_id": "nat-data-report-hidden-01",
+   "status": "LABELED",
+   "ranges_checked": 0,
+   "exposed_ranges_any_size": 0,
+   "max_exposed_bytes": 0,
+   "material": false,
+   "exposed_ranges": [],
+   "attribution": {}
+  },
+  {
+   "case_id": "nat-data-report-hidden-02",
+   "status": "LABELED",
+   "ranges_checked": 0,
+   "exposed_ranges_any_size": 0,
+   "max_exposed_bytes": 0,
+   "material": false,
+   "exposed_ranges": [],
+   "attribution": {}
+  },
+  {
+   "case_id": "nat-data-report-hidden-03",
+   "status": "LABELED",
+   "ranges_checked": 0,
+   "exposed_ranges_any_size": 0,
+   "max_exposed_bytes": 0,
+   "material": false,
+   "exposed_ranges": [],
+   "attribution": {}
+  },
+  {
+   "case_id": "nat-data-report-hidden-04",
+   "status": "LABELED",
+   "ranges_checked": 0,
+   "exposed_ranges_any_size": 0,
+   "max_exposed_bytes": 0,
+   "material": false,
+   "exposed_ranges": [],
+   "attribution": {}
+  },
+  {
+   "case_id": "nat-data-report-hidden-05",
+   "status": "LABELED",
+   "ranges_checked": 0,
+   "exposed_ranges_any_size": 0,
+   "max_exposed_bytes": 0,
+   "material": false,
+   "exposed_ranges": [],
+   "attribution": {}
+  },
+  {
+   "case_id": "nat-data-report-hidden-06",
+   "status": "LABELED",
+   "ranges_checked": 1,
+   "exposed_ranges_any_size": 0,
+   "max_exposed_bytes": 0,
+   "material": false,
+   "exposed_ranges": [
+    {
+     "line_range": [
+      17,
+      18
+     ],
+     "category": "STRUCTURAL_PROTECT",
+     "span_bytes": 45,
+     "exposed_bytes": 0
+    }
+   ],
+   "attribution": {}
+  },
+  {
+   "case_id": "nat-glossary-entry-hidden-01",
+   "status": "LABELED",
+   "ranges_checked": 0,
+   "exposed_ranges_any_size": 0,
+   "max_exposed_bytes": 0,
+   "material": false,
+   "exposed_ranges": [],
+   "attribution": {}
+  },
+  {
+   "case_id": "nat-glossary-entry-hidden-02",
+   "status": "LABELED",
+   "ranges_checked": 2,
+   "exposed_ranges_any_size": 1,
+   "max_exposed_bytes": 5,
+   "material": false,
+   "exposed_ranges": [
+    {
+     "line_range": [
+      20,
+      24
+     ],
+     "category": "STRUCTURAL_PROTECT",
+     "span_bytes": 74,
+     "exposed_bytes": 0
+    },
+    {
+     "line_range": [
+      26,
+      26
+     ],
+     "category": "MACHINE_SIGNIFICANT_RESIDUAL",
+     "span_bytes": 51,
+     "exposed_bytes": 5
+    }
+   ],
+   "attribution": {
+    "residual-class-gap": 1
+   }
+  },
+  {
+   "case_id": "nat-glossary-entry-hidden-03",
+   "status": "LABELED",
+   "ranges_checked": 2,
+   "exposed_ranges_any_size": 1,
+   "max_exposed_bytes": 69,
+   "material": true,
+   "exposed_ranges": [
+    {
+     "line_range": [
+      13,
+      16
+     ],
+     "category": "STRUCTURAL_PROTECT",
+     "span_bytes": 50,
+     "exposed_bytes": 0
+    },
+    {
+     "line_range": [
+      18,
+      20
+     ],
+     "category": "STRUCTURAL_PROTECT",
+     "span_bytes": 80,
+     "exposed_bytes": 69
+    }
+   ],
+   "attribution": {
+    "parser-dialect": 1
+   }
+  },
+  {
+   "case_id": "nat-glossary-entry-hidden-04",
+   "status": "LABELED",
+   "ranges_checked": 0,
+   "exposed_ranges_any_size": 0,
+   "max_exposed_bytes": 0,
+   "material": false,
+   "exposed_ranges": [],
+   "attribution": {}
+  },
+  {
+   "case_id": "nat-glossary-entry-hidden-05",
+   "status": "LABELED",
+   "ranges_checked": 2,
+   "exposed_ranges_any_size": 0,
+   "max_exposed_bytes": 0,
+   "material": false,
+   "exposed_ranges": [
+    {
+     "line_range": [
+      8,
+      10
+     ],
+     "category": "STRUCTURAL_PROTECT",
+     "span_bytes": 33,
+     "exposed_bytes": 0
+    },
+    {
+     "line_range": [
+      14,
+      14
+     ],
+     "category": "STRUCTURAL_PROTECT",
+     "span_bytes": 14,
+     "exposed_bytes": 0
+    }
+   ],
+   "attribution": {}
+  },
+  {
+   "case_id": "nat-glossary-entry-hidden-06",
+   "status": "LABELED",
+   "ranges_checked": 0,
+   "exposed_ranges_any_size": 0,
+   "max_exposed_bytes": 0,
+   "material": false,
+   "exposed_ranges": [],
+   "attribution": {}
+  },
+  {
+   "case_id": "nat-json-config-hidden-01",
+   "status": "LABELED",
+   "ranges_checked": 3,
+   "exposed_ranges_any_size": 2,
+   "max_exposed_bytes": 255,
+   "material": true,
+   "exposed_ranges": [
+    {
+     "line_range": [
+      4,
+      21
+     ],
+     "category": "STRUCTURAL_PROTECT",
+     "span_bytes": 294,
+     "exposed_bytes": 0
+    },
+    {
+     "line_range": [
+      26,
+      34
+     ],
+     "category": "STRUCTURAL_PROTECT",
+     "span_bytes": 388,
+     "exposed_bytes": 255
+    },
+    {
+     "line_range": [
+      37,
+      40
+     ],
+     "category": "STRUCTURAL_PROTECT",
+     "span_bytes": 215,
+     "exposed_bytes": 184
+    }
+   ],
+   "attribution": {
+    "parser-dialect": 2
+   }
+  },
+  {
+   "case_id": "nat-json-config-hidden-02",
+   "status": "LABELED",
+   "ranges_checked": 1,
+   "exposed_ranges_any_size": 0,
+   "max_exposed_bytes": 0,
+   "material": false,
+   "exposed_ranges": [
+    {
+     "line_range": [
+      3,
+      14
+     ],
+     "category": "STRUCTURAL_PROTECT",
+     "span_bytes": 355,
+     "exposed_bytes": 0
+    }
+   ],
+   "attribution": {}
+  },
+  {
+   "case_id": "nat-json-config-hidden-03",
+   "status": "LABELED",
+   "ranges_checked": 1,
+   "exposed_ranges_any_size": 0,
+   "max_exposed_bytes": 0,
+   "material": false,
+   "exposed_ranges": [
+    {
+     "line_range": [
+      3,
+      15
+     ],
+     "category": "STRUCTURAL_PROTECT",
+     "span_bytes": 242,
+     "exposed_bytes": 0
+    }
+   ],
+   "attribution": {}
+  },
+  {
+   "case_id": "nat-json-config-hidden-04",
+   "status": "LABELED",
+   "ranges_checked": 2,
+   "exposed_ranges_any_size": 0,
+   "max_exposed_bytes": 0,
+   "material": false,
+   "exposed_ranges": [
+    {
+     "line_range": [
+      3,
+      18
+     ],
+     "category": "STRUCTURAL_PROTECT",
+     "span_bytes": 341,
+     "exposed_bytes": 0
+    },
+    {
+     "line_range": [
+      28,
+      28
+     ],
+     "category": "STRUCTURAL_PROTECT",
+     "span_bytes": 14,
+     "exposed_bytes": 0
+    }
+   ],
+   "attribution": {}
+  },
+  {
+   "case_id": "nat-malformed-markdown-hidden-01",
+   "status": "LABELED",
+   "ranges_checked": 1,
+   "exposed_ranges_any_size": 0,
+   "max_exposed_bytes": 0,
+   "material": false,
+   "exposed_ranges": [
+    {
+     "line_range": [
+      21,
+      24
+     ],
+     "category": "STRUCTURAL_PROTECT",
+     "span_bytes": 77,
+     "exposed_bytes": 0
+    }
+   ],
+   "attribution": {}
+  },
+  {
+   "case_id": "nat-malformed-markdown-hidden-02",
+   "status": "LABELED",
+   "ranges_checked": 1,
+   "exposed_ranges_any_size": 0,
+   "max_exposed_bytes": 0,
+   "material": false,
+   "exposed_ranges": [
+    {
+     "line_range": [
+      11,
+      14
+     ],
+     "category": "STRUCTURAL_PROTECT",
+     "span_bytes": 61,
+     "exposed_bytes": 0
+    }
+   ],
+   "attribution": {}
+  },
+  {
+   "case_id": "nat-malformed-markdown-hidden-03",
+   "status": "LABELED",
+   "ranges_checked": 1,
+   "exposed_ranges_any_size": 0,
+   "max_exposed_bytes": 0,
+   "material": false,
+   "exposed_ranges": [
+    {
+     "line_range": [
+      3,
+      6
+     ],
+     "category": "STRUCTURAL_PROTECT",
+     "span_bytes": 78,
+     "exposed_bytes": 0
+    }
+   ],
+   "attribution": {}
+  },
+  {
+   "case_id": "nat-malformed-markdown-hidden-04",
+   "status": "LABELED",
+   "ranges_checked": 1,
+   "exposed_ranges_any_size": 0,
+   "max_exposed_bytes": 0,
+   "material": false,
+   "exposed_ranges": [
+    {
+     "line_range": [
+      14,
+      17
+     ],
+     "category": "STRUCTURAL_PROTECT",
+     "span_bytes": 103,
+     "exposed_bytes": 0
+    }
+   ],
+   "attribution": {}
+  },
+  {
+   "case_id": "nat-math-answer-hidden-01",
+   "status": "LABELED",
+   "ranges_checked": 4,
+   "exposed_ranges_any_size": 0,
+   "max_exposed_bytes": 0,
+   "material": false,
+   "exposed_ranges": [
+    {
+     "line_range": [
+      2,
+      4
+     ],
+     "category": "STRUCTURAL_PROTECT",
+     "span_bytes": 18,
+     "exposed_bytes": 0
+    },
+    {
+     "line_range": [
+      6,
+      8
+     ],
+     "category": "STRUCTURAL_PROTECT",
+     "span_bytes": 20,
+     "exposed_bytes": 0
+    },
+    {
+     "line_range": [
+      10,
+      12
+     ],
+     "category": "STRUCTURAL_PROTECT",
+     "span_bytes": 20,
+     "exposed_bytes": 0
+    },
+    {
+     "line_range": [
+      29,
+      33
+     ],
+     "category": "STRUCTURAL_PROTECT",
+     "span_bytes": 77,
+     "exposed_bytes": 0
+    }
+   ],
+   "attribution": {}
+  },
+  {
+   "case_id": "nat-math-answer-hidden-02",
+   "status": "LABELED",
+   "ranges_checked": 5,
+   "exposed_ranges_any_size": 0,
+   "max_exposed_bytes": 0,
+   "material": false,
+   "exposed_ranges": [
+    {
+     "line_range": [
+      2,
+      4
+     ],
+     "category": "STRUCTURAL_PROTECT",
+     "span_bytes": 44,
+     "exposed_bytes": 0
+    },
+    {
+     "line_range": [
+      6,
+      8
+     ],
+     "category": "STRUCTURAL_PROTECT",
+     "span_bytes": 62,
+     "exposed_bytes": 0
+    },
+    {
+     "line_range": [
+      14,
+      16
+     ],
+     "category": "STRUCTURAL_PROTECT",
+     "span_bytes": 94,
+     "exposed_bytes": 0
+    },
+    {
+     "line_range": [
+      18,
+      20
+     ],
+     "category": "STRUCTURAL_PROTECT",
+     "span_bytes": 26,
+     "exposed_bytes": 0
+    },
+    {
+     "line_range": [
+      23,
+      28
+     ],
+     "category": "STRUCTURAL_PROTECT",
+     "span_bytes": 109,
+     "exposed_bytes": 0
+    }
+   ],
+   "attribution": {}
+  },
+  {
+   "case_id": "nat-math-answer-hidden-03",
+   "status": "LABELED",
+   "ranges_checked": 2,
+   "exposed_ranges_any_size": 0,
+   "max_exposed_bytes": 0,
+   "material": false,
+   "exposed_ranges": [
+    {
+     "line_range": [
+      4,
+      6
+     ],
+     "category": "STRUCTURAL_PROTECT",
+     "span_bytes": 34,
+     "exposed_bytes": 0
+    },
+    {
+     "line_range": [
+      21,
+      25
+     ],
+     "category": "STRUCTURAL_PROTECT",
+     "span_bytes": 49,
+     "exposed_bytes": 0
+    }
+   ],
+   "attribution": {}
+  },
+  {
+   "case_id": "nat-math-answer-hidden-04",
+   "status": "LABELED",
+   "ranges_checked": 4,
+   "exposed_ranges_any_size": 1,
+   "max_exposed_bytes": 53,
+   "material": true,
+   "exposed_ranges": [
+    {
+     "line_range": [
+      3,
+      7
+     ],
+     "category": "STRUCTURAL_PROTECT",
+     "span_bytes": 140,
+     "exposed_bytes": 53
+    },
+    {
+     "line_range": [
+      15,
+      17
+     ],
+     "category": "STRUCTURAL_PROTECT",
+     "span_bytes": 27,
+     "exposed_bytes": 0
+    },
+    {
+     "line_range": [
+      19,
+      21
+     ],
+     "category": "STRUCTURAL_PROTECT",
+     "span_bytes": 51,
+     "exposed_bytes": 0
+    },
+    {
+     "line_range": [
+      23,
+      27
+     ],
+     "category": "STRUCTURAL_PROTECT",
+     "span_bytes": 67,
+     "exposed_bytes": 0
+    }
+   ],
+   "attribution": {
+    "parser-dialect": 1
+   }
+  },
+  {
+   "case_id": "nat-md-documentation-hidden-01",
+   "status": "LABELED",
+   "ranges_checked": 1,
+   "exposed_ranges_any_size": 0,
+   "max_exposed_bytes": 0,
+   "material": false,
+   "exposed_ranges": [
+    {
+     "line_range": [
+      22,
+      27
+     ],
+     "category": "STRUCTURAL_PROTECT",
+     "span_bytes": 123,
+     "exposed_bytes": 0
+    }
+   ],
+   "attribution": {}
+  },
+  {
+   "case_id": "nat-md-documentation-hidden-02",
+   "status": "LABELED",
+   "ranges_checked": 1,
+   "exposed_ranges_any_size": 0,
+   "max_exposed_bytes": 0,
+   "material": false,
+   "exposed_ranges": [
+    {
+     "line_range": [
+      25,
+      27
+     ],
+     "category": "STRUCTURAL_PROTECT",
+     "span_bytes": 61,
+     "exposed_bytes": 0
+    }
+   ],
+   "attribution": {}
+  },
+  {
+   "case_id": "nat-md-documentation-hidden-03",
+   "status": "LABELED",
+   "ranges_checked": 1,
+   "exposed_ranges_any_size": 0,
+   "max_exposed_bytes": 0,
+   "material": false,
+   "exposed_ranges": [
+    {
+     "line_range": [
+      25,
+      28
+     ],
+     "category": "STRUCTURAL_PROTECT",
+     "span_bytes": 57,
+     "exposed_bytes": 0
+    }
+   ],
+   "attribution": {}
+  },
+  {
+   "case_id": "nat-md-documentation-hidden-04",
+   "status": "LABELED",
+   "ranges_checked": 2,
+   "exposed_ranges_any_size": 0,
+   "max_exposed_bytes": 0,
+   "material": false,
+   "exposed_ranges": [
+    {
+     "line_range": [
+      23,
+      23
+     ],
+     "category": "STRUCTURAL_PROTECT",
+     "span_bytes": 8,
+     "exposed_bytes": 0
+    },
+    {
+     "line_range": [
+      27,
+      27
+     ],
+     "category": "STRUCTURAL_PROTECT",
+     "span_bytes": 4,
+     "exposed_bytes": 0
+    }
+   ],
+   "attribution": {}
+  },
+  {
+   "case_id": "nat-migration-notes-hidden-01",
+   "status": "LABELED",
+   "ranges_checked": 2,
+   "exposed_ranges_any_size": 0,
+   "max_exposed_bytes": 0,
+   "material": false,
+   "exposed_ranges": [
+    {
+     "line_range": [
+      11,
+      13
+     ],
+     "category": "STRUCTURAL_PROTECT",
+     "span_bytes": 97,
+     "exposed_bytes": 0
+    },
+    {
+     "line_range": [
+      27,
+      29
+     ],
+     "category": "STRUCTURAL_PROTECT",
+     "span_bytes": 67,
+     "exposed_bytes": 0
+    }
+   ],
+   "attribution": {}
+  },
+  {
+   "case_id": "nat-migration-notes-hidden-02",
+   "status": "LABELED",
+   "ranges_checked": 1,
+   "exposed_ranges_any_size": 0,
+   "max_exposed_bytes": 0,
+   "material": false,
+   "exposed_ranges": [
+    {
+     "line_range": [
+      30,
+      32
+     ],
+     "category": "STRUCTURAL_PROTECT",
+     "span_bytes": 73,
+     "exposed_bytes": 0
+    }
+   ],
+   "attribution": {}
+  },
+  {
+   "case_id": "nat-migration-notes-hidden-03",
+   "status": "LABELED",
+   "ranges_checked": 2,
+   "exposed_ranges_any_size": 0,
+   "max_exposed_bytes": 0,
+   "material": false,
+   "exposed_ranges": [
+    {
+     "line_range": [
+      15,
+      17
+     ],
+     "category": "STRUCTURAL_PROTECT",
+     "span_bytes": 81,
+     "exposed_bytes": 0
+    },
+    {
+     "line_range": [
+      20,
+      22
+     ],
+     "category": "STRUCTURAL_PROTECT",
+     "span_bytes": 71,
+     "exposed_bytes": 0
+    }
+   ],
+   "attribution": {}
+  },
+  {
+   "case_id": "nat-migration-notes-hidden-04",
+   "status": "LABELED",
+   "ranges_checked": 2,
+   "exposed_ranges_any_size": 0,
+   "max_exposed_bytes": 0,
+   "material": false,
+   "exposed_ranges": [
+    {
+     "line_range": [
+      10,
+      13
+     ],
+     "category": "STRUCTURAL_PROTECT",
+     "span_bytes": 106,
+     "exposed_bytes": 0
+    },
+    {
+     "line_range": [
+      15,
+      19
+     ],
+     "category": "STRUCTURAL_PROTECT",
+     "span_bytes": 83,
+     "exposed_bytes": 0
+    }
+   ],
+   "attribution": {}
+  },
+  {
+   "case_id": "nat-migration-notes-hidden-05",
+   "status": "LABELED",
+   "ranges_checked": 1,
+   "exposed_ranges_any_size": 0,
+   "max_exposed_bytes": 0,
+   "material": false,
+   "exposed_ranges": [
+    {
+     "line_range": [
+      15,
+      19
+     ],
+     "category": "STRUCTURAL_PROTECT",
+     "span_bytes": 64,
+     "exposed_bytes": 0
+    }
+   ],
+   "attribution": {}
+  },
+  {
+   "case_id": "nat-migration-notes-hidden-06",
+   "status": "LABELED",
+   "ranges_checked": 2,
+   "exposed_ranges_any_size": 0,
+   "max_exposed_bytes": 0,
+   "material": false,
+   "exposed_ranges": [
+    {
+     "line_range": [
+      14,
+      17
+     ],
+     "category": "STRUCTURAL_PROTECT",
+     "span_bytes": 92,
+     "exposed_bytes": 0
+    },
+    {
+     "line_range": [
+      19,
+      23
+     ],
+     "category": "STRUCTURAL_PROTECT",
+     "span_bytes": 82,
+     "exposed_bytes": 0
+    }
+   ],
+   "attribution": {}
+  },
+  {
+   "case_id": "nat-qa-answer-hidden-01",
+   "status": "LABELED",
+   "ranges_checked": 1,
+   "exposed_ranges_any_size": 0,
+   "max_exposed_bytes": 0,
+   "material": false,
+   "exposed_ranges": [
+    {
+     "line_range": [
+      18,
+      26
+     ],
+     "category": "STRUCTURAL_PROTECT",
+     "span_bytes": 129,
+     "exposed_bytes": 0
+    }
+   ],
+   "attribution": {}
+  },
+  {
+   "case_id": "nat-qa-answer-hidden-02",
+   "status": "LABELED",
+   "ranges_checked": 2,
+   "exposed_ranges_any_size": 0,
+   "max_exposed_bytes": 0,
+   "material": false,
+   "exposed_ranges": [
+    {
+     "line_range": [
+      10,
+      10
+     ],
+     "category": "STRUCTURAL_PROTECT",
+     "span_bytes": 14,
+     "exposed_bytes": 0
+    },
+    {
+     "line_range": [
+      15,
+      30
+     ],
+     "category": "STRUCTURAL_PROTECT",
+     "span_bytes": 414,
+     "exposed_bytes": 0
+    }
+   ],
+   "attribution": {}
+  },
+  {
+   "case_id": "nat-qa-answer-hidden-03",
+   "status": "LABELED",
+   "ranges_checked": 1,
+   "exposed_ranges_any_size": 1,
+   "max_exposed_bytes": 45,
+   "material": false,
+   "exposed_ranges": [
+    {
+     "line_range": [
+      15,
+      21
+     ],
+     "category": "STRUCTURAL_PROTECT",
+     "span_bytes": 316,
+     "exposed_bytes": 45
+    }
+   ],
+   "attribution": {
+    "parser-dialect": 1
+   }
+  },
+  {
+   "case_id": "nat-qa-answer-hidden-04",
+   "status": "LABELED",
+   "ranges_checked": 2,
+   "exposed_ranges_any_size": 1,
+   "max_exposed_bytes": 66,
+   "material": true,
+   "exposed_ranges": [
+    {
+     "line_range": [
+      10,
+      13
+     ],
+     "category": "STRUCTURAL_PROTECT",
+     "span_bytes": 100,
+     "exposed_bytes": 66
+    },
+    {
+     "line_range": [
+      15,
+      20
+     ],
+     "category": "STRUCTURAL_PROTECT",
+     "span_bytes": 174,
+     "exposed_bytes": 0
+    }
+   ],
+   "attribution": {
+    "parser-dialect": 1
+   }
+  },
+  {
+   "case_id": "nat-qa-answer-hidden-05",
+   "status": "LABELED",
+   "ranges_checked": 2,
+   "exposed_ranges_any_size": 1,
+   "max_exposed_bytes": 10,
+   "material": false,
+   "exposed_ranges": [
+    {
+     "line_range": [
+      5,
+      6
+     ],
+     "category": "STRUCTURAL_PROTECT",
+     "span_bytes": 28,
+     "exposed_bytes": 10
+    },
+    {
+     "line_range": [
+      17,
+      28
+     ],
+     "category": "STRUCTURAL_PROTECT",
+     "span_bytes": 249,
+     "exposed_bytes": 0
+    }
+   ],
+   "attribution": {
+    "parser-dialect": 1
+   }
+  },
+  {
+   "case_id": "nat-qa-answer-hidden-06",
+   "status": "LABELED",
+   "ranges_checked": 1,
+   "exposed_ranges_any_size": 0,
+   "max_exposed_bytes": 0,
+   "material": false,
+   "exposed_ranges": [
+    {
+     "line_range": [
+      15,
+      24
+     ],
+     "category": "STRUCTURAL_PROTECT",
+     "span_bytes": 271,
+     "exposed_bytes": 0
+    }
+   ],
+   "attribution": {}
+  },
+  {
+   "case_id": "nat-table-equations-hidden-01",
+   "status": "LABELED",
+   "ranges_checked": 1,
+   "exposed_ranges_any_size": 0,
+   "max_exposed_bytes": 0,
+   "material": false,
+   "exposed_ranges": [
+    {
+     "line_range": [
+      11,
+      11
+     ],
+     "category": "STRUCTURAL_PROTECT",
+     "span_bytes": 16,
+     "exposed_bytes": 0
+    }
+   ],
+   "attribution": {}
+  },
+  {
+   "case_id": "nat-table-equations-hidden-02",
+   "status": "LABELED",
+   "ranges_checked": 2,
+   "exposed_ranges_any_size": 1,
+   "max_exposed_bytes": 19,
+   "material": false,
+   "exposed_ranges": [
+    {
+     "line_range": [
+      3,
+      4
+     ],
+     "category": "STRUCTURAL_PROTECT",
+     "span_bytes": 45,
+     "exposed_bytes": 19
+    },
+    {
+     "line_range": [
+      10,
+      13
+     ],
+     "category": "STRUCTURAL_PROTECT",
+     "span_bytes": 30,
+     "exposed_bytes": 0
+    }
+   ],
+   "attribution": {
+    "parser-dialect": 1
+   }
+  },
+  {
+   "case_id": "nat-table-equations-hidden-03",
+   "status": "LABELED",
+   "ranges_checked": 2,
+   "exposed_ranges_any_size": 1,
+   "max_exposed_bytes": 125,
+   "material": true,
+   "exposed_ranges": [
+    {
+     "line_range": [
+      3,
+      7
+     ],
+     "category": "STRUCTURAL_PROTECT",
+     "span_bytes": 227,
+     "exposed_bytes": 125
+    },
+    {
+     "line_range": [
+      11,
+      13
+     ],
+     "category": "STRUCTURAL_PROTECT",
+     "span_bytes": 40,
+     "exposed_bytes": 0
+    }
+   ],
+   "attribution": {
+    "parser-dialect": 1
+   }
+  },
+  {
+   "case_id": "nat-table-equations-hidden-04",
+   "status": "LABELED",
+   "ranges_checked": 1,
+   "exposed_ranges_any_size": 0,
+   "max_exposed_bytes": 0,
+   "material": false,
+   "exposed_ranges": [
+    {
+     "line_range": [
+      17,
+      22
+     ],
+     "category": "STRUCTURAL_PROTECT",
+     "span_bytes": 74,
+     "exposed_bytes": 0
+    }
+   ],
+   "attribution": {}
+  },
+  {
+   "case_id": "nat-technical-manual-hidden-01",
+   "status": "LABELED",
+   "ranges_checked": 1,
+   "exposed_ranges_any_size": 0,
+   "max_exposed_bytes": 0,
+   "material": false,
+   "exposed_ranges": [
+    {
+     "line_range": [
+      18,
+      20
+     ],
+     "category": "STRUCTURAL_PROTECT",
+     "span_bytes": 36,
+     "exposed_bytes": 0
+    }
+   ],
+   "attribution": {}
+  },
+  {
+   "case_id": "nat-technical-manual-hidden-02",
+   "status": "LABELED",
+   "ranges_checked": 0,
+   "exposed_ranges_any_size": 0,
+   "max_exposed_bytes": 0,
+   "material": false,
+   "exposed_ranges": [],
+   "attribution": {}
+  },
+  {
+   "case_id": "nat-technical-manual-hidden-03",
+   "status": "LABELED",
+   "ranges_checked": 0,
+   "exposed_ranges_any_size": 0,
+   "max_exposed_bytes": 0,
+   "material": false,
+   "exposed_ranges": [],
+   "attribution": {}
+  },
+  {
+   "case_id": "nat-technical-manual-hidden-04",
+   "status": "LABELED",
+   "ranges_checked": 0,
+   "exposed_ranges_any_size": 0,
+   "max_exposed_bytes": 0,
+   "material": false,
+   "exposed_ranges": [],
+   "attribution": {}
+  },
+  {
+   "case_id": "nat-troubleshooting-hidden-01",
+   "status": "LABELED",
+   "ranges_checked": 3,
+   "exposed_ranges_any_size": 0,
+   "max_exposed_bytes": 0,
+   "material": false,
+   "exposed_ranges": [
+    {
+     "line_range": [
+      4,
+      7
+     ],
+     "category": "STRUCTURAL_PROTECT",
+     "span_bytes": 109,
+     "exposed_bytes": 0
+    },
+    {
+     "line_range": [
+      16,
+      20
+     ],
+     "category": "STRUCTURAL_PROTECT",
+     "span_bytes": 96,
+     "exposed_bytes": 0
+    },
+    {
+     "line_range": [
+      32,
+      34
+     ],
+     "category": "STRUCTURAL_PROTECT",
+     "span_bytes": 60,
+     "exposed_bytes": 0
+    }
+   ],
+   "attribution": {}
+  },
+  {
+   "case_id": "nat-troubleshooting-hidden-02",
+   "status": "LABELED",
+   "ranges_checked": 2,
+   "exposed_ranges_any_size": 0,
+   "max_exposed_bytes": 0,
+   "material": false,
+   "exposed_ranges": [
+    {
+     "line_range": [
+      3,
+      7
+     ],
+     "category": "STRUCTURAL_PROTECT",
+     "span_bytes": 87,
+     "exposed_bytes": 0
+    },
+    {
+     "line_range": [
+      22,
+      26
+     ],
+     "category": "STRUCTURAL_PROTECT",
+     "span_bytes": 133,
+     "exposed_bytes": 0
+    }
+   ],
+   "attribution": {}
+  },
+  {
+   "case_id": "nat-troubleshooting-hidden-03",
+   "status": "LABELED",
+   "ranges_checked": 1,
+   "exposed_ranges_any_size": 0,
+   "max_exposed_bytes": 0,
+   "material": false,
+   "exposed_ranges": [
+    {
+     "line_range": [
+      7,
+      13
+     ],
+     "category": "STRUCTURAL_PROTECT",
+     "span_bytes": 174,
+     "exposed_bytes": 0
+    }
+   ],
+   "attribution": {}
+  },
+  {
+   "case_id": "nat-troubleshooting-hidden-04",
+   "status": "LABELED",
+   "ranges_checked": 2,
+   "exposed_ranges_any_size": 0,
+   "max_exposed_bytes": 0,
+   "material": false,
+   "exposed_ranges": [
+    {
+     "line_range": [
+      2,
+      6
+     ],
+     "category": "STRUCTURAL_PROTECT",
+     "span_bytes": 94,
+     "exposed_bytes": 0
+    },
+    {
+     "line_range": [
+      8,
+      11
+     ],
+     "category": "STRUCTURAL_PROTECT",
+     "span_bytes": 98,
+     "exposed_bytes": 0
+    }
+   ],
+   "attribution": {}
+  }
+ ],
+ "attribution_total": {
+  "parser-dialect": 12,
+  "label-ambiguity": 2,
+  "residual-class-gap": 1
+ },
+ "verdict_impact": "material contradictions make the final verdict at most CONDITIONAL (named bounded scope)"
+}
