@@ -1024,6 +1024,166 @@ separate reserved next objective; its future sample must not contain any
 case generated or inspected for objective 008. No merge, no auto-merge, no
 release, no deployment claim; PR #9 remains open and unmerged.
 
+## 19. Final objective-008 verdict (bounded raw-block fix, completed
+adjudication, new sealed v2 hidden set, round 008-g)
+
+This section is the additive final objective-008 verdict recorded by
+round 008-g (the corrective and final-verdict round of objective 008). It
+rewrites nothing in section 18 or any earlier record and changes no
+scientific result recorded before this round. The 008-f section 18 and the
+008-f report remain immutable; this verdict supersedes the 008-f
+CONDITIONAL as the current state of objective 008 additively, here and in
+STATUS.md only.
+
+The fixed implementation (the bounded mid-document raw-block fix: the
+strict single-line machine-like yaml-toml-config trigger plus the new
+xml-fragment residual class, structural policy v3 sha256
+7ff6646e3c11d1241cb1c85bd96f08e3f0db08e73d4eb4a4e97fac0c17e1828f, with the
+policy v2 -> v3 sha256 pair 996f4657.../7ff6646e... recorded in
+experiment-008g.json) was evaluated EXACTLY as frozen at the dev-regression
+gate (frozen protection identity census recorded in
+experiment-008g.json) against the NEW sealed v2 hidden acceptance set
+(2,000 deterministic mashup documents with machine-known ground truth by
+construction, 340 components across all 76 families, zero exact-component
+overlap with the dev and v1 pools asserted and disclosed; committed
+content-free manifest sha256
+cf37654a45b10c024525fc334f368d4b20956619e2568542544c855d93a85ec1), for the
+first and only time as an acceptance instrument, with the completed 70-case
+naturalistic hidden adjudication and the naturalistic consistency check.
+Both seals were re-verified data-free before and after the evaluation phase
+(v2 4076/4076, manifest sha256 unchanged; v1 4091/4091, manifest sha256
+8233bdcf683df8a97d62a375a6cf60d93b64aa6b7ecf22489ce9986333436a18 unchanged),
+and strategy independently re-verified the v2 seal data-free before the
+evaluation phase (receipt 008g-v2-seal-strategy-verification-20260919.md,
+sha256 b24ed3f6693d19d180972d440f09d1c3c562d6e8e260d804ecac9f4a8d1488a5).
+
+**Final objective-008 verdict: CONDITIONAL** (predeclared decision state;
+structural-safety evidence only).
+
+Field by field against the committed evidence
+(research/prose-boundary/results/hidden-acceptance-v2/):
+
+- Safety (v2 acceptance set): 51 of 384,363 labeled protected bytes
+  exposed as candidate prose (0.0133%; target 0) - the one material
+  defect. Attribution: 3 of 2,000 documents, all template T10-randomized:
+  v2h-001054 (code-python, 35 B) - an adjacent structured-html closing tag
+  opens an HTML block that absorbs the code fence plus 132 B of code; the
+  blank line ends the block and the remaining code lines parse as
+  paragraph, exposing the print-line syntax while identifier-like words
+  and the number 99 stay covered; v2h-000262 and v2h-000218
+  (structured-keyvalue, 8 B each) - the component embeds Markdown list
+  items with quoted emphasis and the dialect parses list+strong/emphasis,
+  exposing quote characters plus one word. The identical 51 B under the
+  frozen 008-c implementation shows this is a pre-existing architecture
+  gap newly surfaced by the fresh pool, not a fix regression.
+- Coordinates: 0 UTF-8 boundary violations, 0 byte/code-point conversion
+  mismatches, 0 source slice mismatches, 0 patch-preservation violations.
+- Coverage: 97.843% of expected prose bytes exposed (1,153,924/1,179,365);
+  494/8,382 expected prose regions completely available; unnecessary
+  suppression is actual loss by container type (S.Emph 56, S.Head 240,
+  S.Item 1788, S.Para 12802, S.TableCell 268, unknown 10287) - no
+  arbitrary threshold.
+- Malformed-input behaviour: 0 violations over the 10 deterministic family
+  rows. Disclosed: the committed aggregate's policy_exposed row totals for
+  the four policy-exposed families (58/84/34/16) carry a +7 B
+  first-document double-count from the frozen 008-f harness
+  merged_malformed aggregation; the true label values, independently
+  recomputed from the sealed v2 labels, are 56/81/33/15; the violation
+  counts are unaffected and the frozen harness byte was not changed.
+- Policy-exposed census (challenge #4 number, stated explicitly): 1,174 B
+  total over the v2 set remain policy-exposed by label role -
+  machine-emails 989 B (inherited from the v2 policy; non-machine-like
+  values abstain by the v3 strictness contract) plus the four
+  policy-exposed malformed families 185 B (incomplete-display-dollar 56,
+  malformed-nesting 81, unmatched-backtick 33, unmatched-dollar 15). The
+  defect-class families (structured-yaml, structured-xml,
+  structured-keyvalue) contribute 0 B policy-exposed, and the new v3
+  yaml-nested-parser-split class materialized 0 B on the v2 set (28 B in
+  the visible dev defect batch).
+- End-to-end invariants 1-7: all PASS on 2,000/2,000 hidden-document
+  replays through the actual frozen pipeline entry points (frozen
+  deterministic stub boundary; zero network; zero new model calls; the
+  embedded raw frozen-harness output is explicitly labelled as raw
+  frozen-harness output over the v2 set, not a development-run result).
+- Determinism: 50-case re-run identical; fixed iteration order.
+- Performance: median 46.1 / 66.9 / 269.7 ms/document at 1/10/50 KB,
+  peak RSS 69,088 KB (qualitative statement only).
+
+Naturalistic hidden adjudication - COMPLETED (round 008-f scope item 3,
+executed here under the strategy-devised refined instrument): 70/70
+label files in the private root, 0 ADJUDICATION_FAILED, 113 HTTP calls
+(1 preflight + 70 pass-1 + 42 pass-2; 0 retries; 0 failed calls), model
+qwen3.8-27b (A100-FP8 007-lineage deployment record; profile sha256
+510c3394d2ccad8a098660b8b5512d338de0a5b77352ec693d2286ee2223723c). Final
+line-category totals: AMBIGUOUS 200, GENUINE_PROSE 326,
+STRUCTURAL_PROTECT 399, MACHINE_SIGNIFICANT_RESIDUAL 0,
+DELIMITER_WHITESPACE_NEUTRAL 0. Reconciliation: 39 disagreement_reconciled
+(102 disagreement line spans), 3 identical, 28 single_pass. The committed
+content-free annotations manifest covers the 18 v1 raw files and all 70
+v2 label files (case IDs + sha256 + size only). Cross-instrument
+agreement (sanity statistic only, not acceptance evidence): 17 comparable
+cases (17 of 18 v1 raw files carry valid frozen tilings;
+nat-comparison-table-hidden-04 is the known invalid tiling); strict line
+agreement 334/447, ambiguous-tolerant 418/447. The order's predeclared
+"3 valid v1 tiling cases" wording is flagged: the actual comparable count
+is 17. Driver defect and recovery (disclosed): the first run (same sample
+seed f3d72dd46013a779) completed passes 1-2 and then crashed in the
+mechanical cross-instrument phase - unassigned quote-tiling glue code
+points in the frozen v1 tilings left the line-vote plurality empty; its
+at-least-118 HTTP calls are disclosed as driver-defect recovery overhead;
+its on-disk labels and raws were censored data-free and removed before the
+official re-run; the fix (glue excluded from the vote) lives in the new
+v2 driver with self-tests 18/18.
+
+Naturalistic consistency check (requirement 8): 5 material
+contradictions against the predeclared materiality -
+nat-glossary-entry-hidden-03 (max 69 B exposed), nat-json-config-hidden-01
+(255 B), nat-math-answer-hidden-04 (53 B), nat-qa-answer-hidden-04 (66 B),
+nat-table-equations-hidden-03 (125 B); attribution of the exposed ranges:
+12 parser-dialect, 2 label-ambiguity, 1 residual-class-gap. By the
+predeclared rule this caps the verdict at CONDITIONAL.
+
+Dev regression gate (committed before any hidden evaluation): PASS - dev
+corpus new safety exposure 0, dev defect batch defect-class safety 0,
+prose over-suppression +0.0113 pp against the predeclared 1.0 pp bound;
+actual losses reported by container regardless.
+
+Labeled v1 diagnostic (disclosed; the spent v1 set, never acceptance):
+458 B still exposed under the fixed implementation, unchanged from the
+008-f number - the named scope shapes are fixed (dev batch 0), but the v1
+defect population contains two sub-shapes outside the scope-4 strictness
+contract: YAML '#' comment lines parsed as Markdown headings (348 B + 5 B)
+and XML tag names containing non-ASCII (diacritic) letters (110 B; the
+v3 xml-fragment trigger RE_XML_NAME is ASCII-only). Disclosed as the
+remaining bounded scope, not as acceptance evidence.
+
+Decision state application: NOT PASS (the v2 safety target is not met:
+51 B above 0; and 5 material naturalistic contradictions exist); NOT FAIL
+(every exposure is bounded and its mechanism fully understood; the named
+defect class itself is fixed on the fresh pool with zero exposure in the
+structured-yaml / structured-xml families; the parser-first design is not
+materially discredited); CONDITIONAL, with the smallest corrective scope
+named: (a) a builder-side T10 composition adjacency guard for the
+code-python / structured-html boundary (35 B) and the
+Markdown-emphasis-in-keyvalue composition (16 B), or a label-oracle
+refinement; (b) the five named material naturalistic-consistency cases
+(parser-dialect-dominated residual).
+
+Judgment debt: D1-1 (fix mechanism for the mid-document raw-block
+defect) is CARRIED FORWARD - it clears only on a final objective-008 PASS
+verdict. D1-2 (adjudication instrument) is CLEARED - the adjudication
+completed 70/70 with reconciliation statistics recorded in this record
+and the report.
+
+Classification: this verdict is STRUCTURAL-SAFETY EVIDENCE ONLY. It
+establishes no linguistic quality, no experimental-MVP acceptance, and no
+release or deployment authority. Objective 009 (fresh human-labelled
+linguistic confirmation of the complete frozen pipeline) remains the
+separate reserved next objective; its future sample must not contain any
+case generated or inspected for objective 008 (every v1 and v2 component,
+mashup, and naturalistic case). No merge, no auto-merge, no release, no
+deployment claim; PR #9 remains open and unmerged.
+
 ## Machine-readable state block (research-state-machine-v1)
 
 This fenced block is the machine-readable core of the numbers quoted above.
@@ -1066,8 +1226,8 @@ model/network calls.
     "frozen_007m_configuration_sha256": "0026a1a9d27652c36e2c5a960b10fafc1c9a93b0690d93b09089aa58884f5c26",
     "frozen_007m_prompt_sha256": "572cf2fb4864e66e38a500465e1089062d58aeed4721063fb0c1e466e424230d",
     "frozen_007m_final_root_manifest_sha256": "3fb4aef33542e7fa3f357acb905b75f4d7e7551783f83a422b5d1ea6272c25f8",
-    "registry_entries": 30,
-    "oap_reports_reviewed": 49,
+    "registry_entries": 31,
+    "oap_reports_reviewed": 50,
     "frozen_report_history_incidents": 2
   },
   "official_scorer": {

@@ -5332,6 +5332,311 @@
         "objective 009: fresh human-labelled linguistic confirmation of the complete frozen pipeline on a new target distribution - NOT this corpus; its sample must exclude every objective-008 generated or inspected case",
         "008-g: (a) completion of the naturalistic hidden adjudication with a strategy-devised refined instrument (the blocked verbatim-quote tiling contract is the named gap; 17 of 70 pass-1 raw observations are preserved in the private root); (b) the bounded mid-document raw-block protection defect (YAML-style blocks + HTML/XML fragments) via a policy-v2 residual class or structural pre-pass, with re-evaluation of the full item-15 metrics set and e2e invariants 1-7 on a new independently generated and sealed hidden set"
       ]
+    },
+    {
+      "experiment_id": "008-g-raw-block-protection-fix-and-final-acceptance",
+      "logical_root": "research/prose-boundary (the fixed v3 implementation frozen at the dev-regression gate; census in frozen_choices; the new sealed v2 hidden acceptance set and all adjudication labels live in private roots, referenced by committed manifest hashes only)",
+      "kind": "corrective-evaluation",
+      "variation": "execution of the 008-f named corrective scope to closure: the bounded mid-document raw-block protection fix (strict single-line machine-like yaml-toml-config trigger + new xml-fragment residual class, structural policy v3; the v2 file byte-identical in-tree), re-evaluation of the full 008-c item-15 metrics set and e2e invariants 1-7 on a NEW independently generated and sealed hidden set (v2: 2,000 documents, 340 components, 76 families, zero exact-component overlap with dev and v1 pools asserted and disclosed), completion of the 70-case naturalistic hidden adjudication under the strategy-devised refined line-indexed instrument (v2 driver; the committed 008-f driver byte-identical), the naturalistic consistency check, and the final objective-008 verdict per the predeclared decision states",
+      "status": "CONDITIONAL",
+      "question": "Does the fixed v3 implementation, evaluated for the first and only time on the new sealed v2 hidden acceptance set, with the completed naturalistic adjudication and the naturalistic consistency check, meet the predeclared PASS / CONDITIONAL / FAIL decision states for the final objective-008 verdict?",
+      "frozen_choices": {
+        "new_frozen_protection_identity_census": {
+          "research/curated/prose_boundary.py": "3a5a4ba7b5258dc7937a9b4ef98a90982a6a159d5d8763160f3105048545f2d7",
+          "research/curated/protected.py": "27f22eaee129190b880851b958a8aa5a38d357cb4e711d70e762b2353d32e78f",
+          "research/prose-boundary/config/structural-policy-v3.json": "7ff6646e3c11d1241cb1c85bd96f08e3f0db08e73d4eb4a4e97fac0c17e1828f"
+        },
+        "policy_v2_to_v3_sha256_pair": {
+          "v2": "996f465784bed37a179be337e2af606b2dc350cacba6341479371d2812c5a88e",
+          "v3": "7ff6646e3c11d1241cb1c85bd96f08e3f0db08e73d4eb4a4e97fac0c17e1828f",
+          "recorded_in": "research/prose-boundary/config/experiment-008g.json (sha256 6346d7cec938defda58d2607e8aca41638359f66ca4856d2dea8f6d85960a5c8); v2 stays byte-identical in-tree"
+        },
+        "frozen_008f_harness_byte_identical": true,
+        "generation_identity_sha256": "ddc73cefe9886247c4c7244246d86df353d0a0ee330114d19c09c75b5d8c4922",
+        "generation_model_identity": "qwen3.8-27b (A100-FP8 007-lineage deployment record; profile sha256 510c3394d2ccad8a098660b8b5512d338de0a5b77352ec693d2286ee2223723c; endpoint value omitted per 007 convention)",
+        "annotation_guide_sha256": "e65816ddda65343e45b9c0b9fa112b8e18eea19b17310a997cff87b9a200eb5e",
+        "v2_prompt_template_sha256": "5629c7bd24e4b23ced2883cf9d8ea4f4180c9a64a8571ffddf001dcd45793b63",
+        "pinned_helper_sha256": "5df9a11d56b5bdec90c3ca09298802723975306f77e43e74ad1a72eb427c44bf",
+        "objective_009_data_touches": 0,
+        "gate_or_cap_or_workflow_changes": 0
+      },
+      "metrics": {
+        "v2_hidden_set": {
+          "manifest_sha256": "cf37654a45b10c024525fc334f368d4b20956619e2568542544c855d93a85ec1",
+          "documents": 2000,
+          "components": 340,
+          "families": 76,
+          "mashup_seed": "9fdfa032940ba48d",
+          "zero_exact_component_overlap": "asserted by the committed builder and disclosed (dev pool 641 / v1 pool 588 components; the initial 13+10 overlap confined to four saturated machine families was recovered by bounded K=8 regeneration; final 0/0 re-asserted over all 340 v2 components)",
+          "strategy_seal_verification": "strategy-independent data-free re-hash 4076/4076 before the evaluation phase (receipt 008g-v2-seal-strategy-verification-20260919.md sha256 b24ed3f6693d19d180972d440f09d1c3c562d6e8e260d804ecac9f4a8d1488a5, 2305 B, cites the v2 manifest sha) and after the evaluation phase"
+        },
+        "v2_seal": {
+          "before_evaluation": "4076/4076 verified data-free (round re-hash + strategy re-hash), manifest sha256 cf37654a45b10c024525fc334f368d4b20956619e2568542544c855d93a85ec1 unchanged, seal copy byte-identical",
+          "after_evaluation": "4076/4076 verified data-free, manifest sha256 unchanged (re-verified through the loader's per-file hash checks at evaluation time and by the post-evaluation strategy receipt)"
+        },
+        "v1_seal": {
+          "before_evaluation": "4091/4091 verified data-free, manifest sha256 8233bdcf683df8a97d62a375a6cf60d93b64aa6b7ecf22489ce9986333436a18 unchanged, seal copy byte-identical",
+          "after_evaluation": "4091/4091 verified data-free, manifest sha256 unchanged; additionally re-verified per file through the harness loader during the disclosed v1 diagnostic re-run and the v1 label census"
+        },
+        "dev_regression": {
+          "status": "PASS (committed before any hidden evaluation)",
+          "dev_corpus_new_safety_exposure_bytes": 0,
+          "dev_defect_batch_defect_class_safety_exposure_bytes": 0,
+          "prose_over_suppression_delta_pp": 0.011308420951783305,
+          "bound_pp": 1.0,
+          "stop_conditions_fired": 0,
+          "actual_losses_by_container": "S.Emph 56, S.Head 240, S.Item 1788, S.Para 12802, S.TableCell 268, unknown 10287 (reported regardless of outcome)"
+        },
+        "mashup_safety_v2": {
+          "protected_bytes_total": 384363,
+          "protected_bytes_exposed": 51,
+          "machine_significant_exposure_rate": 0.00013268706925484503,
+          "target": 0,
+          "met": false,
+          "attribution": "3 of 2,000 hidden documents, all template T10-randomized: v2h-001054 (code-python, 35 B) - an adjacent structured-html closing tag opens an HTML block that absorbs the code fence plus 132 B of code; the blank line ends the block and the remaining code lines parse as paragraph, exposing the print-line syntax while identifier-like words and the number 99 stay covered; v2h-000262 and v2h-000218 (structured-keyvalue, 8 B each) - the component embeds Markdown list items with quoted emphasis and the dialect parses list+strong/emphasis, exposing quote characters plus one word. Identical 51 B under the frozen 008-c implementation: a pre-existing architecture gap newly surfaced by the fresh pool, not a fix regression"
+        },
+        "coordinates_v2": {
+          "utf8_boundary_violations": 0,
+          "byte_cp_conversion_mismatches": 0,
+          "source_slice_mismatches": 0,
+          "patch_preservation_violations": 0
+        },
+        "coverage_v2": {
+          "expected_prose_bytes_exposed": 1153924,
+          "expected_prose_bytes_total": 1179365,
+          "expected_prose_bytes_exposed_rate": 0.9784282219669059,
+          "expected_prose_regions_completely_available": [
+            494,
+            8382
+          ],
+          "unnecessary_suppression_by_container": {
+            "S.Emph": 56,
+            "S.Head": 240,
+            "S.Item": 1788,
+            "S.Para": 12802,
+            "S.TableCell": 268,
+            "unknown": 10287
+          }
+        },
+        "malformed_behaviour_v2": {
+          "violations": 0,
+          "rows": 10,
+          "deterministic": true,
+          "aggregation_note": "the committed aggregate's policy_exposed_bytes row totals (58/84/34/16 for the four policy-exposed families) carry a +7 B first-document double-count from the frozen 008-f harness merged_malformed aggregation (setdefault seeds the first doc's row and the merge loop adds the same doc's values again); independently recomputed from the sealed v2 labels, the true row values are 56/81/33/15; violations are unaffected (the first contributing documents have zero protected-exposed bytes); the same aggregation quirk also inflates the immutable 008-f v1 rows (true v1 label census: 60/107/19/13). Disclosed as a frozen-harness aggregation defect found during this round; no frozen byte was changed"
+        },
+        "policy_exposed_census_v2": {
+          "total_bytes": 1174,
+          "by_family": {
+            "machine-emails": 989,
+            "malformed-incomplete-display-dollar": 56,
+            "malformed-malformed-nesting": 81,
+            "malformed-unmatched-backtick": 33,
+            "malformed-unmatched-dollar": 15
+          },
+          "defect_class_families_bytes": 0,
+          "method": "label-role (POLICY_EXPOSED) census over the sealed v2 set, read through the frozen harness loader (which re-verified the seal per file), cross-verified by summing per-document harness row totals; the defect-class families (structured-yaml, structured-xml, structured-keyvalue) contribute 0 B; the new v3 yaml-nested-parser-split class materialized 0 B on v2"
+        },
+        "determinism_v2": {
+          "re_run_sample": 50,
+          "identical": true
+        },
+        "performance_v2": {
+          "ms_per_document_median": {
+            "1kb": 46.06082697864622,
+            "10kb": 66.9256109977141,
+            "50kb": 269.7418080060743
+          },
+          "peak_rss_kb": 69088,
+          "note": "qualitative statement only: parser + residual cost is cheap relative to one model inference"
+        },
+        "e2e_invariants_v2": "7/7 all_pass on 2,000/2,000 hidden-document replays through the actual frozen pipeline entry points (frozen deterministic stub boundary; zero network; zero new model calls; embedded raw frozen-harness output explicitly labelled as such)",
+        "v1_diagnostic": {
+          "label": "DEVELOPMENT DIAGNOSTIC ONLY (single-use spent v1 set under the fixed v3 implementation; never cited as acceptance)",
+          "protected_bytes_exposed": 458,
+          "unchanged_from_008f_v2_impl_number": true,
+          "attribution": "structured-yaml 348 B + 5 B: YAML '#' comment lines parsed as Markdown headings (heading text becomes candidate prose; no residual class fires) - a sub-shape outside the scope-4 strictness contract (the named defect shapes are single-line key-value, nested list lines, sectionless YAML); structured-xml 110 B: XML tag names containing a non-ASCII (diacritic) letter - the v3 xml-fragment trigger RE_XML_NAME is ASCII-only, so the dialect does not recognize the tag and the trigger decides on the wrong name"
+        },
+        "adjudication_v2": {
+          "instrument": "strategy-devised refined line-indexed range classification (D1-2); the committed 008-f verbatim-quote driver stays byte-identical (sha256 1a547169f885ebb92bdd46bc11bc6491f6e0899c67ed8c45e23beb1d78743f54, re-verified in-run against the committed blob)",
+          "cases": 70,
+          "labelled": 70,
+          "adjudication_failed": {
+            "count": 0,
+            "case_ids": []
+          },
+          "calls": {
+            "preflight": 1,
+            "pass_1": 70,
+            "pass_2": 42,
+            "retries": 0,
+            "failed_calls": 0,
+            "total": 113
+          },
+          "final_category_line_totals": {
+            "AMBIGUOUS": 200,
+            "GENUINE_PROSE": 326,
+            "STRUCTURAL_PROTECT": 399,
+            "MACHINE_SIGNIFICANT_RESIDUAL": 0,
+            "DELIMITER_WHITESPACE_NEUTRAL": 0
+          },
+          "second_pass": {
+            "cases": 42,
+            "ambiguous_pass1_cases": 35,
+            "deterministic_sample": 7,
+            "sample_seed": "f3d72dd46013a779"
+          },
+          "reconciliation": {
+            "disagreement_reconciled": 39,
+            "identical": 3,
+            "single_pass": 28,
+            "disagreement_line_span_total": 102
+          },
+          "cross_instrument_agreement": "17 comparable cases (17 of 18 v1 raw files carry valid frozen tilings; nat-comparison-table-hidden-04 invalid, handled); strict 334/447 lines, ambiguous-tolerant 418/447; sanity statistic only, not acceptance evidence; the order's predeclared '3 valid v1 tiling cases' wording is flagged - the actual comparable count is 17",
+          "driver_defect_recovery": "the first run (same seed f3d72dd46013a779) completed passes 1-2 and then crashed in the mechanical cross-instrument phase: unassigned quote-tiling glue code points (empty category in the frozen v1 tilings) made the line-vote plurality empty and the pre-fix driver indexed picks[0] (IndexError); its at-least-118 HTTP calls (1 preflight + 70 pass-1 + 47 pass-2; retry count unrecoverable from the overwritten raws) are disclosed as driver-defect recovery overhead; the run's on-disk labels and raws were censored data-free (sha256 + size) and removed before the official re-run for clean provenance; the fix (glue excluded from the vote; all-glue line = DELIMITER_WHITESPACE_NEUTRAL) lives in the new v2 driver with self-tests 18/18"
+        },
+        "naturalistic_consistency_v2": {
+          "material_contradictions": 5,
+          "material_case_ids": [
+            "nat-glossary-entry-hidden-03",
+            "nat-json-config-hidden-01",
+            "nat-math-answer-hidden-04",
+            "nat-qa-answer-hidden-04",
+            "nat-table-equations-hidden-03"
+          ],
+          "max_exposed_bytes_per_case": [
+            69,
+            255,
+            53,
+            66,
+            125
+          ],
+          "attribution": "15 exposed ranges across all 70 cases: parser-dialect 12, label-ambiguity 2, residual-class-gap 1",
+          "materiality_rule": "any non-AMBIGUOUS STRUCTURAL_PROTECT / MACHINE_SIGNIFICANT_RESIDUAL label range with an exposed span >= 50 bytes, OR >= 5 exposed ranges of any size in one case (predeclared)"
+        },
+        "model_call_budget": "v2 component generation 95 HTTP (82 original-run attempts incl. preflight and 2 retries + 7 diagnostic probes + 1 recovery preflight + 5 recovery component calls, 0 recovery retries); adjudication first (crashed) run >=118 HTTP (retries unrecoverable); adjudication official run 113 HTTP (0 retries, 0 failures); zero linguistic-pipeline model calls; no other model calls of any kind",
+        "ci_008g_final_head": "observed at the 008-g final head under the order's bounded verbatim rerun observation policy for the zero-failure TIMEOUT class (up to 3 additional observations at the identical final head; a green identical-commit rerun is the current check state, disclosed verbatim); PENDING inside the pre-push report per P-SELF-03; this entry is byte-identical between the implementation head and the final head, so it holds a pointer to the report's predeclared rule rather than not-yet-existing values"
+      },
+      "evidence_files": [
+        {
+          "disposition": "008-g order committed at activation (byte-identity re-verified against the committed blob)",
+          "logical_path": "oap/orders/008-g-raw-block-protection-fix-and-final-acceptance.md",
+          "sha256": "20ea7c543c9110c89956dd22a838b5f0497b6949d5f58dae28d06a478c5b0319",
+          "size": 55111
+        },
+        {
+          "disposition": "new structural policy version (v2 -> v3 changes + additive changelog; v2 byte-identical in-tree)",
+          "logical_path": "research/prose-boundary/config/structural-policy-v3.json",
+          "sha256": "7ff6646e3c11d1241cb1c85bd96f08e3f0db08e73d4eb4a4e97fac0c17e1828f",
+          "size": null
+        },
+        {
+          "disposition": "round experiment configuration (v2->v3 sha256 pair, frozen protection identity census, D0 choices)",
+          "logical_path": "research/prose-boundary/config/experiment-008g.json",
+          "sha256": "6346d7cec938defda58d2607e8aca41638359f66ca4856d2dea8f6d85960a5c8",
+          "size": null
+        },
+        {
+          "disposition": "committed generation identity (model, prompts, per-family seeds, call counts, overlap assertion, recovery)",
+          "logical_path": "research/prose-boundary/config/generation/generation-identity-008g.json",
+          "sha256": "ddc73cefe9886247c4c7244246d86df353d0a0ee330114d19c09c75b5d8c4922",
+          "size": null
+        },
+        {
+          "disposition": "content-free v2 hidden acceptance manifest (seal basis)",
+          "logical_path": "research/prose-boundary/corpus/manifests/hidden-manifest-v2.json",
+          "sha256": "cf37654a45b10c024525fc334f368d4b20956619e2568542544c855d93a85ec1",
+          "size": null
+        },
+        {
+          "disposition": "v2 seal verification (counts, hashes, strategy receipt identity)",
+          "logical_path": "research/prose-boundary/corpus/manifests/seal-verification-v2.json",
+          "sha256": "c532738dc4ca4e5441b9f35a3cb0930eae02a966562b62f6557c660dfa731a75",
+          "size": null
+        },
+        {
+          "disposition": "dev regression gate (committed before any hidden evaluation)",
+          "logical_path": "research/prose-boundary/results/hidden-acceptance-v2/dev-regression-008g.json",
+          "sha256": "7c369cd65dc134ba3f152cc914e9e69e001985b3f2d5071f64301ffda16ff08a",
+          "size": null
+        },
+        {
+          "disposition": "blind v2 hidden acceptance mashup metrics (committed data-free aggregate; first and only use of the v2 set as acceptance)",
+          "logical_path": "research/prose-boundary/results/hidden-acceptance-v2/mashup-metrics-v2.json",
+          "sha256": "4687bc31e2177edf60548fd1bb30221a6110a9bcf7af6c6dbcb3efef11566938",
+          "size": null
+        },
+        {
+          "disposition": "e2e preservation invariants 1-7 on the v2 set (committed data-free aggregate)",
+          "logical_path": "research/prose-boundary/results/hidden-acceptance-v2/e2e-invariants-hidden-v2.json",
+          "sha256": "65307f332ff6cd9547dca6bdb67e4f65c2b5fee6cb6ea465f9885a7d522dc390",
+          "size": null
+        },
+        {
+          "disposition": "labeled development diagnostic re-run on the spent v1 set (never acceptance)",
+          "logical_path": "research/prose-boundary/results/hidden-acceptance-v2/v1-diagnostic.json",
+          "sha256": "a94deb7e3369755d362a4978066d12c0fcc8be12fd29c0174c1563fe43e8860f",
+          "size": null
+        },
+        {
+          "disposition": "content-free annotations manifest (18 v1 raw files + 70 v2 label files; case IDs + sha256 + size only)",
+          "logical_path": "research/prose-boundary/corpus/manifests/hidden-annotations-manifest.json",
+          "sha256": "fe088cfbbbc6013d8567c3afb8b27192e88b0e5ada07c39b21c280addbf96647",
+          "size": null
+        },
+        {
+          "disposition": "completed adjudication data-free summary (category distribution, reconciliation, calls, cross-instrument agreement)",
+          "logical_path": "research/prose-boundary/results/hidden-acceptance-v2/adjudication-v2-summary.json",
+          "sha256": "e8bf6a3b4bd1bd96e21872c4a5041e43a05acfeb535a25731c799dcd86bdbd05",
+          "size": null
+        },
+        {
+          "disposition": "naturalistic consistency data-free aggregate (predeclared materiality applied; every contradiction attributed)",
+          "logical_path": "research/prose-boundary/results/hidden-acceptance-v2/naturalistic-consistency-v2.json",
+          "sha256": "171293b4a18411b5e01b9e9e76e6a0d1b8cbc4f9dd0e32dce094ea09c5893c9d",
+          "size": null
+        },
+        {
+          "disposition": "v2 adjudication driver (NEW; D1-2 line-indexed instrument; self-tests 18/18)",
+          "logical_path": "research/prose-boundary/tools/naturalistic_adjudication_v2.py",
+          "sha256": "1703996b92e3e5e0ebef92e124e6f4974e3ca59e6ab2f9c8e760f79076cc08f1",
+          "size": null
+        },
+        {
+          "disposition": "v2 evaluation wrapper (NEW thin wrapper; imports the 008-f harness unmodified)",
+          "logical_path": "research/prose-boundary/tools/hidden_acceptance_v2.py",
+          "sha256": "d9b1a41ca9554be0b36df93ec3a4b7760dbb28249efeaf26332180c13a7f7b96",
+          "size": null
+        },
+        {
+          "disposition": "focused test file (positive + negative cases for both sub-fixes; no assertion weakening anywhere)",
+          "logical_path": "research/tests/test_raw_document_fragment_protection.py",
+          "sha256": "2a8fb5c7cc5f39dac545ca6cea414dedad45664a7e786a109657eb3af3d356bb",
+          "size": null
+        },
+        {
+          "disposition": "frozen annotation guide (committed; adjudication basis; untouched)",
+          "logical_path": "research/prose-boundary/config/annotation-guide.json",
+          "sha256": "e65816ddda65343e45b9c0b9fa112b8e18eea19b17310a997cff87b9a200eb5e",
+          "size": 6587
+        },
+        {
+          "disposition": "content-free v1 hidden manifest (spent single-use set; untouched)",
+          "logical_path": "research/prose-boundary/corpus/manifests/hidden-manifest.json",
+          "sha256": "8233bdcf683df8a97d62a375a6cf60d93b64aa6b7ecf22489ce9986333436a18",
+          "size": 549479
+        }
+      ],
+      "evidence_status": "public-data-free",
+      "public_report": "research/prose-boundary/REPORT-008G.md",
+      "public_metrics": "research/prose-boundary/results/hidden-acceptance-v2/",
+      "public_configuration": "research/prose-boundary/config/structural-policy-v3.json",
+      "source_manifest": "research/prose-boundary/corpus/manifests/hidden-manifest-v2.json (private-root v2 set referenced by manifest hashes only; the naturalistic adjudication labels remain in the private root, covered by the committed content-free annotations manifest)",
+      "child_runs": [],
+      "conclusion": "FINAL OBJECTIVE-008 VERDICT: CONDITIONAL (predeclared decision state; structural-safety evidence only). The fixed v3 implementation, evaluated for the first and only time on the new sealed v2 hidden acceptance set (2,000 documents; seal 4076/4076 verified data-free before and after evaluation; strategy receipt recorded), shows exactly one material defect on the acceptance axis: safety - 51 of 384,363 labeled protected bytes exposed as candidate prose (0.0133%; target 0): 3 of 2,000 documents, all template T10-randomized (code-python 35 B via an HTML-block-boundary interaction; structured-keyvalue 16 B via Markdown-in-keyvalue composition); the identical 51 B under the frozen 008-c implementation shows this is a pre-existing architecture gap surfaced by the fresh pool, not a fix regression. All other v2 axes green: coordinates 0/0/0/0; malformed behaviour 0 violations over 10 deterministic rows; prose coverage 97.843% of expected prose bytes (494/8,382 regions completely available; suppression reported as actual loss by container); end-to-end invariants 1-7 all PASS on 2,000/2,000 replays; determinism 50-case re-run identical; performance median 46.1/66.9/269.7 ms/document at 1/10/50 KB. The named defect-class shapes are fixed on the new pool: zero exposure in the structured-yaml / structured-xml families and 0 B policy-exposed in the defect-class families; the v3 policy-exposed census over the v2 set is 1,174 B total (machine-emails 989 B inherited from the v2 policy + the four policy-exposed malformed families 185 B); the new yaml-nested-parser-split class materialized 0 B on v2. The naturalistic hidden adjudication COMPLETED under the strategy-devised refined instrument: 70/70 labels, 0 ADJUDICATION_FAILED, 113 HTTP calls (1 preflight + 70 pass-1 + 42 pass-2, 0 retries), reconciliation 39 disagreement_reconciled / 3 identical / 28 single_pass (102 disagreement line spans), cross-instrument agreement 17 comparable cases (strict 334/447 lines; sanity statistic only); the order's predeclared '3 valid v1 tiling cases' wording is flagged, the actual comparable count is 17. The naturalistic consistency check found 5 material contradictions (nat-glossary-entry-hidden-03, nat-json-config-hidden-01, nat-math-answer-hidden-04, nat-qa-answer-hidden-04, nat-table-equations-hidden-03; max exposed spans 69/255/53/66/125 B; attribution 12 parser-dialect / 2 label-ambiguity / 1 residual-class-gap), which by the predeclared materiality cap the verdict at CONDITIONAL. A disclosed development diagnostic re-run on the single-use spent v1 set under the fixed implementation shows 458 B still exposed (unchanged from the 008-f number): YAML '#' comment lines parsed as Markdown headings (348 B + 5 B; a sub-shape outside the scope-4 strictness contract) and XML tag names containing non-ASCII letters (110 B; an ASCII-only trigger gap) - both outside the round's strictness contract, disclosed as the remaining bounded scope. NOT PASS (the v2 safety target is not met and 5 material naturalistic contradictions exist); NOT FAIL (every exposure is bounded and the mechanism fully understood; the parser-first design is not materially discredited); CONDITIONAL with the smallest corrective scope named: (a) a builder-side T10 composition adjacency guard for the code-python / structured-html boundary (35 B) and the Markdown-emphasis-in-keyvalue composition (16 B), or a label-oracle refinement; (b) the five named material naturalistic-consistency cases (parser-dialect-dominated). D1-1 (fix mechanism) judgment debt is CARRIED FORWARD (clears only on a final PASS verdict); D1-2 (adjudication instrument) judgment debt is CLEARED (adjudication completed 70/70 with reconciliation statistics in this record and the report). This verdict is structural-safety evidence ONLY: it establishes no linguistic quality, no experimental-MVP acceptance, no release or deployment authority; objective 009 (fresh human-labelled linguistic confirmation of the complete frozen pipeline) remains the separate reserved next objective and its future sample must not contain any case generated or inspected for objective 008 (every v1 and v2 component, mashup, and naturalistic case). No merge, no auto-merge, no release, no deployment claim; PR #9 remains open and unmerged.",
+      "pending_evidence": [
+        "objective 009: fresh human-labelled linguistic confirmation of the complete frozen pipeline on a new target distribution - NOT this corpus; its sample must exclude every objective-008 generated or inspected case (every v1 and v2 component, mashup, and naturalistic case)",
+        "named corrective scope (CONDITIONAL): (a) the 51 B v2 mashup-safety residual - a builder-side T10 composition adjacency guard for the code-python / structured-html boundary (35 B) and the Markdown-emphasis-in-keyvalue composition (16 B), or a label-oracle refinement; (b) the five named material naturalistic-consistency cases (parser-dialect-dominated residual); (c) the two disclosed out-of-contract v1 sub-shapes (YAML '#' heading lines; XML diacritic tag names) if a future scope elects to cover them"
+      ]
     }
   ]
 }
