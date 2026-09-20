@@ -6,6 +6,26 @@ seeded PRNG, layout templates and multi-layer interaction patterns, and emits
 for every document a machine-readable ground-truth interval map (byte ranges +
 code-point ranges + component provenance IDs + expected role per region).
 
+008-h composition contract (released; order 008-h scope item 3):
+  R1 - a fenced or indented code component is never composed on the line
+       immediately after an HTML closing-tag line; when a template would
+       produce that adjacency the builder inserts exactly one blank line
+       (recorded in the document composition provenance; the inserted bytes
+       are template-owned NEUTRAL delimiter).
+  R2 - structured-keyvalue components containing a list-item-style line
+       (list marker plus space) with paired emphasis markers or quoted
+       emphasis-like content are not admitted to the 008-h (v3) component
+       pool (admission predicate r2_keyvalue_list_item_emphasis_excluded;
+       the rule, its hash-only matching criterion and the excluded count are
+       recorded in generation-identity-008h.json).
+  R3 - structured-xml components containing a tag name with non-ASCII letters
+       are not admitted to the v3 pool when the xml-fragment trigger decision
+       is FALLBACK (admission predicate r3_xml_diacritic_tag_excluded).
+  label_source - every labelled region records whether its role is
+       construction-labeled (fixed by composition / parser structure by
+       construction) or oracle-refined (decided by the frozen residual spec /
+       label oracle).
+
 Ground-truth principle: label construction is composition-only. The builder
 never invokes the parser or the protection layer. Where a component's expected
 protection depends on the frozen structural policy v2 (residual classes,
@@ -310,9 +330,124 @@ def first_url(fragment: str) -> str | None:
 
 
 # --------------------------------------------------------------------------
-# segment model: (text, component_id, role)
+# segment model: (text, component_id, role, label_source)
 # roles: PROSE / PROTECTED / NEUTRAL / POLICY_EXPOSED
+# label_source: "construction" (role fixed by composition / parser structure
+# by construction) or "oracle-refined" (role decided by the frozen residual
+# spec / the label oracle)
 # --------------------------------------------------------------------------
+
+CONSTRUCTION = "construction"
+ORACLE_REFINED = "oracle-refined"
+
+
+def assert_no_parser_participation() -> None:
+    """Composition-only ground-truth guarantee (008-c principle, carried into
+    008-h): label construction uses ONLY the composition (component
+    provenance, template glue) and the declared label oracle (the
+    module-level residual_spans function, swappable at build time only by the
+    generation/build script and recorded in the generation identity). The
+    builder module must never reference the parser or the protection layer."""
+    for name in list(globals()):
+        if name.startswith("__"):
+            continue
+        obj = globals()[name]
+        mod = getattr(obj, "__module__", "")
+        if isinstance(mod, str) and mod.startswith("research.curated"):
+            raise AssertionError(
+                f"parser/protection reference leaked into the builder: {name}")
+
+
+# --------------------------------------------------------------------------
+# 008-h composition contract (R1) and admission predicates (R2/R3)
+# --------------------------------------------------------------------------
+RE_HTML_CLOSING_TAG_LINE = re.compile(r"^\s*</[A-Za-z][^>]*>\s*$")
+RE_FENCE_OPEN_LINE = re.compile(r"^\s{0,3}(```+|~~~+)")
+RE_INDENTED_CODE_LINE = re.compile(r"^( {4}|\t)\S")
+RE_R2_LIST_ITEM_LINE = re.compile(r"^\s*(?:[-*+]|\d+[.)])\s+")
+RE_R2_PAIRED_EMPHASIS = re.compile(r"(\*\*[^*\n]+\*\*|__[^_\n]+__)")
+RE_R2_QUOTED_PHRASE = re.compile(r'\"[^"\n]{1,200}\"')
+RE_R3_XML_TAG = re.compile(r"</?([A-Za-z\u00C0-\u024F\u0100-\u017F][^<>]{0,120})>")
+
+
+def last_line_is_html_closing_tag(text: str) -> bool:
+    t = text.rstrip("\n")
+    if not t:
+        return False
+    return RE_HTML_CLOSING_TAG_LINE.match(t.rsplit("\n", 1)[-1]) is not None
+
+
+def first_line_starts_code_block(text: str) -> bool:
+    first = text.split("\n", 1)[0]
+    return RE_FENCE_OPEN_LINE.match(first) is not None or \
+        RE_INDENTED_CODE_LINE.match(first) is not None
+
+
+def apply_r1(segs: list[tuple[str, str, str, str]]) -> tuple[list[tuple[str, str, str, str]], int]:
+    """R1 composition contract (order 008-h scope item 3b): a fenced or
+    indented code component is never composed on the line immediately after
+    an HTML closing-tag line. Blocks = maximal runs of consecutive same-kind
+    segments (template glue vs component). The adjacency exists in the
+    document exactly when: the separator between two component blocks is
+    exactly one LF (no blank line), the previous block's text does not end
+    with a newline, its last line is a complete HTML closing-tag line, and
+    the next block's first line opens a fenced/indented code block. In that
+    case exactly one blank line (template-owned NEUTRAL delimiter) is
+    inserted. Returns (new_segments, insertions)."""
+    blocks: list[tuple[str, list[tuple[str, str, str, str]]]] = []
+    for s in segs:
+        kind = "template" if s[1].startswith("template") else "component"
+        if blocks and blocks[-1][0] == kind:
+            blocks[-1][1].append(s)
+        else:
+            blocks.append((kind, [s]))
+    out: list[tuple[str, str, str, str]] = []
+    insertions = 0
+    for bi, (kind, block) in enumerate(blocks):
+        out.extend(block)
+        if kind != "component" or bi + 2 >= len(blocks):
+            continue
+        next_kind, next_block = blocks[bi + 1]
+        after_kind, after_block = blocks[bi + 2]
+        if next_kind != "template" or after_kind != "component":
+            continue
+        if "".join(s[0] for s in next_block) != "\n":
+            continue
+        prev_text = "".join(s[0] for s in block)
+        next_text = "".join(s[0] for s in after_block)
+        if prev_text.endswith("\n"):
+            continue  # a blank line already separates; the HTML block ends there
+        if not last_line_is_html_closing_tag(prev_text):
+            continue
+        if not first_line_starts_code_block(next_text):
+            continue
+        out.append(("\n", "template", "NEUTRAL", CONSTRUCTION))
+        insertions += 1
+    return out, insertions
+
+
+def r2_keyvalue_list_item_emphasis_excluded(fragment: str) -> bool:
+    """R2 admission predicate (v3 pool): True when the component contains a
+    list-item-style line (list marker plus space) carrying paired emphasis
+    markers or a quoted emphasis-like phrase. Such components are NOT
+    admitted to the v3 component pool (the composition shape is
+    policy-exposed per structural policy v4; the builder composes them away
+    rather than extending the residual layer)."""
+    return any(RE_R2_LIST_ITEM_LINE.match(ln) and
+               (RE_R2_PAIRED_EMPHASIS.search(ln) or RE_R2_QUOTED_PHRASE.search(ln))
+               for ln in fragment.split("\n"))
+
+
+def r3_xml_diacritic_tag_excluded(fragment: str) -> bool:
+    """R3 admission predicate (v3 pool, applies only when the xml-fragment
+    trigger decision is FALLBACK): True when the component contains an
+    HTML/XML tag whose name starts with a letter but carries non-ASCII
+    (diacritic) letters - a shape the ASCII-only trigger cannot fire on."""
+    for m in RE_R3_XML_TAG.finditer(fragment):
+        name = m.group(1).split()[0].rstrip("/")
+        if any(ord(ch) > 127 for ch in name):
+            return True
+    return False
 
 def _covered_map(text: str, spans: list[tuple[int, int]]) -> list[str]:
     """Per-cp coverage marks: 'P' protected, else '.' (gaps classified later)."""
@@ -323,18 +458,19 @@ def _covered_map(text: str, spans: list[tuple[int, int]]) -> list[str]:
     return marks
 
 
-def generic_label(fragment: str, cid: str, policy_exposed_chars: frozenset = frozenset()) -> list[tuple[str, str, str]]:
+def generic_label(fragment: str, cid: str, policy_exposed_chars: frozenset = frozenset()) -> list[tuple[str, str, str, str]]:
     """Label a fragment by the frozen v2 spec: residual-class spans PROTECTED,
     gaps classified by content (word -> PROSE, email/math-residue/special chars
-    -> POLICY_EXPOSED, glue punctuation/whitespace -> NEUTRAL)."""
+    -> POLICY_EXPOSED, glue punctuation/whitespace -> NEUTRAL). Every role here
+    is decided by the frozen residual spec (the label oracle): ORACLE_REFINED."""
     marks = _covered_map(fragment, residual_spans(fragment))
-    segments: list[tuple[str, str, str]] = []
+    segments: list[tuple[str, str, str, str]] = []
     i = 0
     n = len(fragment)
 
     def flush(start: int, end: int, role: str) -> None:
         if end > start:
-            segments.append((fragment[start:end], cid, role))
+            segments.append((fragment[start:end], cid, role, ORACLE_REFINED))
 
     while i < n:
         if marks[i] == "P":
@@ -371,16 +507,19 @@ def generic_label(fragment: str, cid: str, policy_exposed_chars: frozenset = fro
     return segments
 
 
-def label_prose(fragment: str, cid: str) -> list[tuple[str, str, str]]:
-    return [(fragment, cid, "PROSE")]
+def label_prose(fragment: str, cid: str) -> list[tuple[str, str, str, str]]:
+    return [(fragment, cid, "PROSE", CONSTRUCTION)]
 
 
-def label_code_block(fragment: str, cid: str, inline: bool = False) -> list[tuple[str, str, str]]:
+def label_code_block(fragment: str, cid: str, inline: bool = False) -> list[tuple[str, str, str, str]]:
     if inline:
-        return [("\u0060", cid, "NEUTRAL"), (one_line(fragment, 60), cid, "PROTECTED"), ("\u0060", cid, "NEUTRAL")]
+        return [("\u0060", cid, "NEUTRAL", CONSTRUCTION),
+                (one_line(fragment, 60), cid, "PROTECTED", CONSTRUCTION),
+                ("\u0060", cid, "NEUTRAL", CONSTRUCTION)]
     body = fragment.rstrip("\n")
-    return [("```", cid, "NEUTRAL"), ("\n", cid, "NEUTRAL"), (body, cid, "PROTECTED"),
-            ("\n", cid, "NEUTRAL"), ("```", cid, "NEUTRAL")]
+    return [("```", cid, "NEUTRAL", CONSTRUCTION), ("\n", cid, "NEUTRAL", CONSTRUCTION),
+            (body, cid, "PROTECTED", CONSTRUCTION),
+            ("\n", cid, "NEUTRAL", CONSTRUCTION), ("```", cid, "NEUTRAL", CONSTRUCTION)]
 
 
 def _delim_pair(text: str, open_d: str, close_d: str) -> tuple[int, int] | None:
@@ -392,7 +531,7 @@ def _delim_pair(text: str, open_d: str, close_d: str) -> tuple[int, int] | None:
     return end
 
 
-def label_math(fragment: str, cid: str) -> list[tuple[str, str, str]]:
+def label_math(fragment: str, cid: str) -> list[tuple[str, str, str, str]]:
     """Whole math component: structural math protected by construction;
     delimiter pairs NEUTRAL; fragments without a recognized outer structure
     are labelled by the frozen v2 residual spec (undelimited math residue is
@@ -401,23 +540,27 @@ def label_math(fragment: str, cid: str) -> list[tuple[str, str, str]]:
     for open_d, close_d in (("\\[", "\\]"), ("\\(", "\\)"), ("$$", "$$"), ("$", "$")):
         end = _delim_pair(text, open_d, close_d)
         if end is not None and text[end + len(close_d):].strip() == "":
-            return [(open_d, cid, "NEUTRAL"),
-                    (text[len(open_d):end], cid, "PROTECTED"),
-                    (close_d, cid, "NEUTRAL")]
+            return [(open_d, cid, "NEUTRAL", CONSTRUCTION),
+                    (text[len(open_d):end], cid, "PROTECTED", CONSTRUCTION),
+                    (close_d, cid, "NEUTRAL", CONSTRUCTION)]
     m = re.match(r"^(\\begin\{[a-zA-Z*]+\})(.*?)(\\end\{[a-zA-Z*]+\})\s*$", text, re.S)
     if m:
-        return [(m.group(1), cid, "PROTECTED"), (m.group(2), cid, "PROTECTED"),
-                (m.group(3), cid, "PROTECTED")]
+        return [(m.group(1), cid, "PROTECTED", CONSTRUCTION),
+                (m.group(2), cid, "PROTECTED", CONSTRUCTION),
+                (m.group(3), cid, "PROTECTED", CONSTRUCTION)]
     return generic_label(text, cid)
 
 
-def label_structured(fragment: str, family: str, cid: str) -> list[tuple[str, str, str]]:
+def label_structured(fragment: str, family: str, cid: str) -> list[tuple[str, str, str, str]]:
     if family == "structured-json":
         stripped = fragment.strip()
         if stripped.startswith(("{", "[")):
             try:
                 json.loads(stripped)
-                return [(fragment, cid, "PROTECTED")]
+                # whole-JSON protection is decided by the frozen residual spec
+                # (the bare-json class is the label oracle's expectation):
+                # ORACLE_REFINED
+                return [(fragment, cid, "PROTECTED", ORACLE_REFINED)]
             except (ValueError, json.JSONDecodeError):
                 pass
         return generic_label(fragment, cid)
@@ -427,44 +570,58 @@ def label_structured(fragment: str, family: str, cid: str) -> list[tuple[str, st
         block_mode = (family == "structured-html" and first_tag is not None
                       and "\n\n" not in fragment)
         if block_mode:
-            return [(fragment, cid, "PROTECTED")]
-        marks = _covered_map(fragment, residual_spans(fragment))
-        # tags are structural (Html/InlineHtml events, never Text): PROTECTED
-        segments: list[tuple[str, str, str]] = []
+            # an HTML block is structural by the dialect (HtmlBlock event,
+            # never candidate prose): CONSTRUCTION
+            return [(fragment, cid, "PROTECTED", CONSTRUCTION)]
+        resid_marks = _covered_map(fragment, residual_spans(fragment))
+        # tags are structural (Html/InlineHtml events, never Text): CONSTRUCTION
+        tag_marks = ["."] * len(fragment)
         for m in RE_HTML_TAG.finditer(fragment):
             for i in range(m.start(), m.end()):
-                marks[i] = "P"
-        tag_spans_done = True
+                tag_marks[i] = "P"
+        segments: list[tuple[str, str, str, str]] = []
         i = 0
         n = len(fragment)
         while i < n:
-            if marks[i] == "P":
+            if resid_marks[i] == "P" or tag_marks[i] == "P":
                 j = i
-                while j < n and marks[j] == "P":
+                while j < n and (resid_marks[j] == "P" or tag_marks[j] == "P"):
                     j += 1
-                segments.append((fragment[i:j], cid, "PROTECTED"))
+                # split the run by source: tag-marked bytes are structural
+                # (CONSTRUCTION); bytes marked only by the residual spec are
+                # ORACLE_REFINED
+                k = i
+                while k < j:
+                    m2 = k
+                    tag_at = tag_marks[k] == "P"
+                    while m2 < j and (tag_marks[m2] == "P") == tag_at:
+                        m2 += 1
+                    segments.append((fragment[k:m2], cid, "PROTECTED",
+                                     CONSTRUCTION if tag_at else ORACLE_REFINED))
+                    k = m2
                 i = j
                 continue
             ch = fragment[i]
             wm = re.match(r"[^\W\d_]+", fragment[i:])
             if wm and wm.group(0):
-                segments.append((fragment[i:i + wm.end()], cid, "PROSE"))
+                segments.append((fragment[i:i + wm.end()], cid, "PROSE", ORACLE_REFINED))
                 i += wm.end()
                 continue
             if ch.isspace():
                 j = i
-                while j < n and fragment[j].isspace() and marks[j] == ".":
+                while j < n and fragment[j].isspace() and resid_marks[j] == "." \
+                        and tag_marks[j] == ".":
                     j += 1
-                segments.append((fragment[i:j], cid, "NEUTRAL"))
+                segments.append((fragment[i:j], cid, "NEUTRAL", ORACLE_REFINED))
                 i = j
                 continue
-            segments.append((fragment[i:i + 1], cid, "NEUTRAL"))
+            segments.append((fragment[i:i + 1], cid, "NEUTRAL", ORACLE_REFINED))
             i += 1
         return segments
     return generic_label(fragment, cid)
 
 
-def label_machine(fragment: str, cid: str) -> list[tuple[str, str, str]]:
+def label_machine(fragment: str, cid: str) -> list[tuple[str, str, str, str]]:
     return generic_label(fragment, cid)
 
 
@@ -476,16 +633,16 @@ MALFORMED_POLICY_EXPOSED_CHARS: dict[str, frozenset] = {
 }
 
 
-def label_malformed(fragment: str, family: str, cid: str) -> list[tuple[str, str, str]]:
+def label_malformed(fragment: str, family: str, cid: str) -> list[tuple[str, str, str, str]]:
     if family == "malformed-unclosed-fence":
         # the fence runs to end of document; the builder guarantees this
         # component is the LAST structural slot, so the document tail is
         # protected (structural: pulldown-cmark extends the fence to EOF)
-        return [(fragment, cid, "PROTECTED")]
+        return [(fragment, cid, "PROTECTED", CONSTRUCTION)]
     return generic_label(fragment, cid, MALFORMED_POLICY_EXPOSED_CHARS.get(family, frozenset()))
 
 
-def label_component(component: dict, inline: bool = False) -> list[tuple[str, str, str]]:
+def label_component(component: dict, inline: bool = False) -> list[tuple[str, str, str, str]]:
     cid = component["component_id"]
     fragment = component["fragment"]
     family = component["family"]
@@ -507,41 +664,42 @@ def label_component(component: dict, inline: bool = False) -> list[tuple[str, st
     raise ValueError(f"unknown category {category}")
 
 
-def _split_delims(fragment: str, cid: str, delims: list[str]) -> list[tuple[str, str, str]]:
-    """Split text into (delimiter, text-alternating) runs: delims NEUTRAL, rest PROSE."""
+def _split_delims(fragment: str, cid: str, delims: list[str]) -> list[tuple[str, str, str, str]]:
+    """Split text into (delimiter, text-alternating) runs: delims NEUTRAL,
+    rest PROSE (structural by composition: CONSTRUCTION)."""
     pattern = re.compile("(" + "|".join(re.escape(d) for d in delims) + ")")
     parts = pattern.split(fragment)
-    segments: list[tuple[str, str, str]] = []
+    segments: list[tuple[str, str, str, str]] = []
     for idx, part in enumerate(parts):
         if not part:
             continue
-        segments.append((part, cid, "NEUTRAL" if idx % 2 == 1 else "PROSE"))
+        segments.append((part, cid, "NEUTRAL" if idx % 2 == 1 else "PROSE", CONSTRUCTION))
     return segments
 
 
 _MD_TABLE_SEP = re.compile(r"^\s*\|?[\s:|-]+\|?\s*$")
 
 
-def _label_plain_text(text: str, cid: str) -> list[tuple[str, str, str]]:
+def _label_plain_text(text: str, cid: str) -> list[tuple[str, str, str, str]]:
     """Label non-structured fragment text: ATX heading markers NEUTRAL,
     line breaks NEUTRAL, everything else PROSE (the parser treats all of
-    it as candidate prose except the markers)."""
-    segments: list[tuple[str, str, str]] = []
+    it as candidate prose except the markers). Structural: CONSTRUCTION."""
+    segments: list[tuple[str, str, str, str]] = []
     lines = text.split("\n")
     for idx, line in enumerate(lines):
         if idx > 0:
-            segments.append(("\n", cid, "NEUTRAL"))
+            segments.append(("\n", cid, "NEUTRAL", CONSTRUCTION))
         m = re.match(r"^\s{0,3}#{1,6}\s", line)
         if m:
-            segments.append((line[:m.end()], cid, "NEUTRAL"))
+            segments.append((line[:m.end()], cid, "NEUTRAL", CONSTRUCTION))
             if m.end() < len(line):
-                segments.append((line[m.end():], cid, "PROSE"))
+                segments.append((line[m.end():], cid, "PROSE", CONSTRUCTION))
         elif line:
-            segments.append((line, cid, "PROSE"))
+            segments.append((line, cid, "PROSE", CONSTRUCTION))
     return segments
 
 
-def label_markdown(fragment: str, family: str, cid: str) -> list[tuple[str, str, str]]:
+def label_markdown(fragment: str, family: str, cid: str) -> list[tuple[str, str, str, str]]:
     if family == "md-headings":
         delims = [re.match(r"^\s{0,3}#{1,6}\s*", line).group(0)
                   for line in fragment.splitlines()
@@ -561,9 +719,9 @@ def label_markdown(fragment: str, family: str, cid: str) -> list[tuple[str, str,
         lines = fragment.split("\n")
         for idx, line in enumerate(lines):
             if idx > 0:
-                segments.append(("\n", cid, "NEUTRAL"))
+                segments.append(("\n", cid, "NEUTRAL", CONSTRUCTION))
             if _MD_TABLE_SEP.match(line):
-                segments.append((line, cid, "NEUTRAL"))
+                segments.append((line, cid, "NEUTRAL", CONSTRUCTION))
             else:
                 segments.extend(_split_delims(line, cid, ["|"]))
         return segments
@@ -578,11 +736,11 @@ def label_markdown(fragment: str, family: str, cid: str) -> list[tuple[str, str,
             prefix = rest[:match.start()]
             if prefix:
                 segments.extend(_split_delims(prefix, cid, ["[", "]"]))
-            segments.append((match.group(1) + "[", cid, "NEUTRAL"))
-            segments.append((match.group(2), cid, "PROSE"))
-            segments.append(("](", cid, "NEUTRAL"))
-            segments.append((match.group(3), cid, "PROTECTED"))
-            segments.append((")", cid, "NEUTRAL"))
+            segments.append((match.group(1) + "[", cid, "NEUTRAL", CONSTRUCTION))
+            segments.append((match.group(2), cid, "PROSE", CONSTRUCTION))
+            segments.append(("](", cid, "NEUTRAL", CONSTRUCTION))
+            segments.append((match.group(3), cid, "PROTECTED", CONSTRUCTION))
+            segments.append((")", cid, "NEUTRAL", CONSTRUCTION))
             rest = rest[match.end():]
         return segments
     if family == "md-autolinks":
@@ -595,15 +753,15 @@ def label_markdown(fragment: str, family: str, cid: str) -> list[tuple[str, str,
         while rest:
             match = re.search(r"<[A-Za-z][A-Za-z0-9+.-]*:[^>\s]+>|<[A-Za-z0-9._%+\-]+@[A-Za-z0-9.\-]+>", rest)
             if not match:
-                segments.append((rest, cid, "PROSE"))
+                segments.append((rest, cid, "PROSE", CONSTRUCTION))
                 break
             prefix = rest[:match.start()]
             if prefix:
-                segments.append((prefix, cid, "PROSE"))
+                segments.append((prefix, cid, "PROSE", CONSTRUCTION))
             inner = match.group(0)[1:-1]
-            segments.append(("<", cid, "NEUTRAL"))
-            segments.append((inner, cid, "PROTECTED"))
-            segments.append((">", cid, "NEUTRAL"))
+            segments.append(("<", cid, "NEUTRAL", CONSTRUCTION))
+            segments.append((inner, cid, "PROTECTED", CONSTRUCTION))
+            segments.append((">", cid, "NEUTRAL", CONSTRUCTION))
             rest = rest[match.end():]
         return segments
     if family == "md-images":
@@ -621,7 +779,7 @@ def label_markdown(fragment: str, family: str, cid: str) -> list[tuple[str, str,
             prefix = rest[:match.start()]
             if prefix:
                 segments.extend(_label_plain_text(prefix, cid))
-            segments.append((match.group(0), cid, "PROTECTED"))
+            segments.append((match.group(0), cid, "PROTECTED", CONSTRUCTION))
             rest = rest[match.end():]
         return segments
     if family == "md-inline-code":
@@ -630,19 +788,19 @@ def label_markdown(fragment: str, family: str, cid: str) -> list[tuple[str, str,
         while rest:
             match = re.search(r"``[^`\n]*``|`[^`\n]+`", rest)
             if not match:
-                segments.append((rest, cid, "PROSE"))
+                segments.append((rest, cid, "PROSE", CONSTRUCTION))
                 break
             prefix = rest[:match.start()]
             if prefix:
-                segments.append((prefix, cid, "PROSE"))
+                segments.append((prefix, cid, "PROSE", CONSTRUCTION))
             if match.group(0).startswith("``"):
                 body, delim = match.group(0)[2:-2], "``"
             else:
                 body, delim = match.group(0)[1:-1], "`"
 
-            segments.append((delim, cid, "NEUTRAL"))
-            segments.append((body, cid, "PROTECTED"))
-            segments.append((delim, cid, "NEUTRAL"))
+            segments.append((delim, cid, "NEUTRAL", CONSTRUCTION))
+            segments.append((body, cid, "PROTECTED", CONSTRUCTION))
+            segments.append((delim, cid, "NEUTRAL", CONSTRUCTION))
             rest = rest[match.end():]
         return segments
     if family == "md-fenced-code":
@@ -654,18 +812,18 @@ def label_markdown(fragment: str, family: str, cid: str) -> list[tuple[str, str,
             if not in_fence:
                 match = re.match(r"^(\s{0,3})(```+|~~~+)(.*)$", line)
                 if match:
-                    segments.append((match.group(1) + match.group(2) + match.group(3), cid, "NEUTRAL"))
-                    segments.append(("\n", cid, "NEUTRAL"))
+                    segments.append((match.group(1) + match.group(2) + match.group(3), cid, "NEUTRAL", CONSTRUCTION))
+                    segments.append(("\n", cid, "NEUTRAL", CONSTRUCTION))
                     in_fence = True
                     fence = match.group(2)[0] * 3
                 else:
-                    segments.append((line + "\n", cid, "PROSE"))
+                    segments.append((line + "\n", cid, "PROSE", CONSTRUCTION))
             else:
                 if line.strip().startswith(fence):
-                    segments.append((line + "\n", cid, "NEUTRAL"))
+                    segments.append((line + "\n", cid, "NEUTRAL", CONSTRUCTION))
                     in_fence = False
                 else:
-                    segments.append((line + "\n", cid, "PROTECTED"))
+                    segments.append((line + "\n", cid, "PROTECTED", CONSTRUCTION))
         return segments
     if family == "md-raw-html":
         segments: list[tuple[str, str, str]] = []
@@ -673,12 +831,12 @@ def label_markdown(fragment: str, family: str, cid: str) -> list[tuple[str, str,
         while rest:
             match = re.search(r"</?[A-Za-z][^>]*>", rest)
             if not match:
-                segments.append((rest, cid, "PROSE"))
+                segments.append((rest, cid, "PROSE", CONSTRUCTION))
                 break
             prefix = rest[:match.start()]
             if prefix:
-                segments.append((prefix, cid, "PROSE"))
-            segments.append((match.group(0), cid, "PROTECTED"))
+                segments.append((prefix, cid, "PROSE", CONSTRUCTION))
+            segments.append((match.group(0), cid, "PROTECTED", CONSTRUCTION))
             rest = rest[match.end():]
         return segments
     return [(fragment, cid, "PROSE")]
@@ -748,10 +906,11 @@ RUNAWAY_TEX_FAMILIES = frozenset(
 T4_TABLE_SEP = "| --- | --- |\n"
 
 
-def compose(rng: random.Random, pool: dict[str, list[dict]], template: str, used: set[str]) -> list[tuple[str, str, str]]:
-    """Return segment list (text, component_id, role). Raises LookupError on
-    pool exhaustion for the required categories of this template."""
-    segs: list[tuple[str, str, str]] = []
+def compose(rng: random.Random, pool: dict[str, list[dict]], template: str, used: set[str]) -> tuple[list[tuple[str, str, str, str]], int]:
+    """Return (segment list (text, component_id, role, label_source), R1
+    blank-line insertion count). Raises LookupError on pool exhaustion for
+    the required categories of this template."""
+    segs: list[tuple[str, str, str, str]] = []
 
     if template == "T1-prose-inlinecode-prose":
         p1 = pick(rng, pool, "prose-science", used) or pick_any(rng, pool, ("prose",), used)
@@ -762,9 +921,9 @@ def compose(rng: random.Random, pool: dict[str, list[dict]], template: str, used
                 raise LookupError("pool exhausted")
             used.add(c["component_id"])
         segs.extend(label_prose(p1["fragment"], p1["component_id"]))
-        segs.append(("\n", "template", "NEUTRAL"))
+        segs.append(("\n", "template", "NEUTRAL", CONSTRUCTION))
         segs.extend(label_code_block(code["fragment"], code["component_id"], inline=True))
-        segs.append(("\n", "template", "NEUTRAL"))
+        segs.append(("\n", "template", "NEUTRAL", CONSTRUCTION))
         segs.extend(label_prose(p2["fragment"], p2["component_id"]))
     elif template == "T2-prose-math-prose":
         p1 = pick_any(rng, pool, ("prose",), used)
@@ -775,9 +934,9 @@ def compose(rng: random.Random, pool: dict[str, list[dict]], template: str, used
         for c in (p1, math, p2):
             used.add(c["component_id"])
         segs.extend(label_prose(p1["fragment"], p1["component_id"]))
-        segs.append(("\n", "template", "NEUTRAL"))
+        segs.append(("\n", "template", "NEUTRAL", CONSTRUCTION))
         segs.extend(label_math(math["fragment"], math["component_id"]))
-        segs.append(("\n", "template", "NEUTRAL"))
+        segs.append(("\n", "template", "NEUTRAL", CONSTRUCTION))
         segs.extend(label_prose(p2["fragment"], p2["component_id"]))
     elif template == "T3-prose-fenced-prose":
         p1 = pick_any(rng, pool, ("prose",), used)
@@ -788,9 +947,9 @@ def compose(rng: random.Random, pool: dict[str, list[dict]], template: str, used
         for c in (p1, code, p2):
             used.add(c["component_id"])
         segs.extend(label_prose(p1["fragment"], p1["component_id"]))
-        segs.append(("\n", "template", "NEUTRAL"))
+        segs.append(("\n", "template", "NEUTRAL", CONSTRUCTION))
         segs.extend(label_code_block(code["fragment"], code["component_id"]))
-        segs.append(("\n", "template", "NEUTRAL"))
+        segs.append(("\n", "template", "NEUTRAL", CONSTRUCTION))
         segs.extend(label_prose(p2["fragment"], p2["component_id"]))
     elif template == "T4-heading-prose-table":
         heading = pick_any(rng, pool, ("prose",), used)
@@ -802,18 +961,18 @@ def compose(rng: random.Random, pool: dict[str, list[dict]], template: str, used
         for c in (heading, p1, cell, machine):
             used.add(c["component_id"])
         title = one_line(heading["fragment"], 60)
-        segs.append(("## ", "template", "NEUTRAL"))
-        segs.append((title, heading["component_id"], "PROSE"))
-        segs.append(("\n", "template", "NEUTRAL"))
+        segs.append(("## ", "template", "NEUTRAL", CONSTRUCTION))
+        segs.append((title, heading["component_id"], "PROSE", CONSTRUCTION))
+        segs.append(("\n", "template", "NEUTRAL", CONSTRUCTION))
         segs.extend(label_prose(p1["fragment"], p1["component_id"]))
-        segs.append(("\n", "template", "NEUTRAL"))
-        segs.append((T4_TABLE_HEADER, "template", "NEUTRAL"))
-        segs.append((T4_TABLE_SEP, "template", "NEUTRAL"))
-        segs.append(("| ", "template", "NEUTRAL"))
-        segs.append((one_line(cell["fragment"], 40), cell["component_id"], "PROSE"))
-        segs.append((" | ", "template", "NEUTRAL"))
+        segs.append(("\n", "template", "NEUTRAL", CONSTRUCTION))
+        segs.append((T4_TABLE_HEADER, "template", "NEUTRAL", CONSTRUCTION))
+        segs.append((T4_TABLE_SEP, "template", "NEUTRAL", CONSTRUCTION))
+        segs.append(("| ", "template", "NEUTRAL", CONSTRUCTION))
+        segs.append((one_line(cell["fragment"], 40), cell["component_id"], "PROSE", CONSTRUCTION))
+        segs.append((" | ", "template", "NEUTRAL", CONSTRUCTION))
         segs.extend(label_machine(one_line(machine["fragment"], 40), machine["component_id"]))
-        segs.append((" |", "template", "NEUTRAL"))
+        segs.append((" |", "template", "NEUTRAL", CONSTRUCTION))
     elif template == "T5-lists":
         p1 = pick_any(rng, pool, ("prose",), used)
         code = pick_inline_code(rng, pool, used)
@@ -823,13 +982,13 @@ def compose(rng: random.Random, pool: dict[str, list[dict]], template: str, used
             raise LookupError("pool exhausted")
         for c in (p1, code, p2, p3):
             used.add(c["component_id"])
-        segs.append(("- ", "template", "NEUTRAL"))
+        segs.append(("- ", "template", "NEUTRAL", CONSTRUCTION))
         segs.extend(label_prose(p1["fragment"], p1["component_id"]))
-        segs.append(("\n- ", "template", "NEUTRAL"))
+        segs.append(("\n- ", "template", "NEUTRAL", CONSTRUCTION))
         segs.extend(label_code_block(code["fragment"], code["component_id"], inline=True))
-        segs.append(("\n- ", "template", "NEUTRAL"))
+        segs.append(("\n- ", "template", "NEUTRAL", CONSTRUCTION))
         segs.extend(label_prose(p2["fragment"], p2["component_id"]))
-        segs.append(("\n- ", "template", "NEUTRAL"))
+        segs.append(("\n- ", "template", "NEUTRAL", CONSTRUCTION))
         segs.extend(label_prose(p3["fragment"], p3["component_id"]))
     elif template == "T6-prose-link-prose":
         p1 = pick_any(rng, pool, ("prose",), used)
@@ -842,13 +1001,13 @@ def compose(rng: random.Random, pool: dict[str, list[dict]], template: str, used
         url = first_url(urlc["fragment"]) or one_line(urlc["fragment"], 60)
         label = one_line(p2["fragment"], 30)
         segs.extend(label_prose(p1["fragment"], p1["component_id"]))
-        segs.append((" ", "template", "NEUTRAL"))
-        segs.append(("[", "template", "NEUTRAL"))
-        segs.append((label, p2["component_id"], "PROSE"))
-        segs.append(("](", "template", "NEUTRAL"))
-        segs.append((url, urlc["component_id"], "PROTECTED"))
-        segs.append((")", "template", "NEUTRAL"))
-        segs.append(("\n", "template", "NEUTRAL"))
+        segs.append((" ", "template", "NEUTRAL", CONSTRUCTION))
+        segs.append(("[", "template", "NEUTRAL", CONSTRUCTION))
+        segs.append((label, p2["component_id"], "PROSE", CONSTRUCTION))
+        segs.append(("](", "template", "NEUTRAL", CONSTRUCTION))
+        segs.append((url, urlc["component_id"], "PROTECTED", CONSTRUCTION))
+        segs.append((")", "template", "NEUTRAL", CONSTRUCTION))
+        segs.append(("\n", "template", "NEUTRAL", CONSTRUCTION))
         segs.extend(label_prose(p2["fragment"], p2["component_id"]))
     elif template == "T7-prose-json-prose-latex":
         p1 = pick_any(rng, pool, ("prose",), used)
@@ -860,11 +1019,11 @@ def compose(rng: random.Random, pool: dict[str, list[dict]], template: str, used
         for c in (p1, js, p2, math):
             used.add(c["component_id"])
         segs.extend(label_prose(p1["fragment"], p1["component_id"]))
-        segs.append(("\n", "template", "NEUTRAL"))
+        segs.append(("\n", "template", "NEUTRAL", CONSTRUCTION))
         segs.extend(label_structured(js["fragment"], js["family"], js["component_id"]))
-        segs.append(("\n", "template", "NEUTRAL"))
+        segs.append(("\n", "template", "NEUTRAL", CONSTRUCTION))
         segs.extend(label_prose(p2["fragment"], p2["component_id"]))
-        segs.append(("\n", "template", "NEUTRAL"))
+        segs.append(("\n", "template", "NEUTRAL", CONSTRUCTION))
         segs.extend(label_math(math["fragment"], math["component_id"]))
     elif template == "T8-quote-fenced":
         p1 = pick_any(rng, pool, ("prose",), used)
@@ -874,11 +1033,11 @@ def compose(rng: random.Random, pool: dict[str, list[dict]], template: str, used
             raise LookupError("pool exhausted")
         for c in (p1, code, p2):
             used.add(c["component_id"])
-        segs.append(("> ", "template", "NEUTRAL"))
+        segs.append(("> ", "template", "NEUTRAL", CONSTRUCTION))
         segs.extend(label_prose(p1["fragment"], p1["component_id"]))
-        segs.append((" ", "template", "NEUTRAL"))
+        segs.append((" ", "template", "NEUTRAL", CONSTRUCTION))
         segs.extend(label_code_block(code["fragment"], code["component_id"], inline=True))
-        segs.append(("\n", "template", "NEUTRAL"))
+        segs.append(("\n", "template", "NEUTRAL", CONSTRUCTION))
         segs.extend(label_code_block(p2["fragment"], p2["component_id"]))
     elif template == "T9-prose-malformed-prose":
         p1 = pick_any(rng, pool, ("prose",), used)
@@ -896,9 +1055,9 @@ def compose(rng: random.Random, pool: dict[str, list[dict]], template: str, used
         if bad["family"] in ("malformed-unclosed-fence",
                              "malformed-unmatched-backtick"):
             segs.extend(label_prose(p1["fragment"], p1["component_id"]))
-            segs.append(("\n", "template", "NEUTRAL"))
+            segs.append(("\n", "template", "NEUTRAL", CONSTRUCTION))
             segs.extend(label_prose(p2["fragment"], p2["component_id"]))
-            segs.append(("\n", "template", "NEUTRAL"))
+            segs.append(("\n", "template", "NEUTRAL", CONSTRUCTION))
             segs.extend(label_malformed(bad["fragment"], bad["family"], bad["component_id"]))
         elif bad["family"] in RUNAWAY_TEX_FAMILIES:
             # standalone paragraph: the candidate-prose context is exactly
@@ -906,15 +1065,15 @@ def compose(rng: random.Random, pool: dict[str, list[dict]], template: str, used
             # met by construction (machine-known ground truth, no structure
             # re-parsing)
             segs.extend(label_prose(p1["fragment"], p1["component_id"]))
-            segs.append(("\n\n", "template", "NEUTRAL"))
+            segs.append(("\n\n", "template", "NEUTRAL", CONSTRUCTION))
             segs.extend(label_malformed(bad["fragment"], bad["family"], bad["component_id"]))
-            segs.append(("\n\n", "template", "NEUTRAL"))
+            segs.append(("\n\n", "template", "NEUTRAL", CONSTRUCTION))
             segs.extend(label_prose(p2["fragment"], p2["component_id"]))
         else:
             segs.extend(label_prose(p1["fragment"], p1["component_id"]))
-            segs.append(("\n", "template", "NEUTRAL"))
+            segs.append(("\n", "template", "NEUTRAL", CONSTRUCTION))
             segs.extend(label_malformed(bad["fragment"], bad["family"], bad["component_id"]))
-            segs.append(("\n", "template", "NEUTRAL"))
+            segs.append(("\n", "template", "NEUTRAL", CONSTRUCTION))
             segs.extend(label_prose(p2["fragment"], p2["component_id"]))
     elif template == "T11-interactions":
         # deterministic multi-layer interaction template (order scope
@@ -952,20 +1111,20 @@ def compose(rng: random.Random, pool: dict[str, list[dict]], template: str, used
         used.add(p1["component_id"])
         used.add(p2["component_id"])
         body1 = one_line(code1["fragment"], 60)
-        segs.append(("\u0060", code1["component_id"], "NEUTRAL"))
-        segs.append((body1, code1["component_id"], "PROTECTED"))
-        segs.append(("\u0060", code1["component_id"], "NEUTRAL"))
-        segs.append((".", "template", "PROSE"))
-        segs.append(("\n", "template", "NEUTRAL"))
+        segs.append(("\u0060", code1["component_id"], "NEUTRAL", CONSTRUCTION))
+        segs.append((body1, code1["component_id"], "PROTECTED", CONSTRUCTION))
+        segs.append(("\u0060", code1["component_id"], "NEUTRAL", CONSTRUCTION))
+        segs.append((".", "template", "PROSE", CONSTRUCTION))
+        segs.append(("\n", "template", "NEUTRAL", CONSTRUCTION))
         body2 = code2["fragment"].rstrip("\n") + "\n" + T11_TEX_COMMENT
-        segs.append(("```", code2["component_id"], "NEUTRAL"))
-        segs.append(("\n", code2["component_id"], "NEUTRAL"))
-        segs.append((body2, code2["component_id"], "PROTECTED"))
-        segs.append(("\n", code2["component_id"], "NEUTRAL"))
-        segs.append(("```", code2["component_id"], "NEUTRAL"))
-        segs.append(("\n", "template", "NEUTRAL"))
+        segs.append(("```", code2["component_id"], "NEUTRAL", CONSTRUCTION))
+        segs.append(("\n", code2["component_id"], "NEUTRAL", CONSTRUCTION))
+        segs.append((body2, code2["component_id"], "PROTECTED", CONSTRUCTION))
+        segs.append(("\n", code2["component_id"], "NEUTRAL", CONSTRUCTION))
+        segs.append(("```", code2["component_id"], "NEUTRAL", CONSTRUCTION))
+        segs.append(("\n", "template", "NEUTRAL", CONSTRUCTION))
         segs.extend(label_prose(p1["fragment"], p1["component_id"]))
-        segs.append(("\n", "template", "NEUTRAL"))
+        segs.append(("\n", "template", "NEUTRAL", CONSTRUCTION))
         segs.extend(label_prose(p2["fragment"], p2["component_id"]))
     else:  # T10-randomized
         n = rng.randint(3, 10)
@@ -1006,46 +1165,47 @@ def compose(rng: random.Random, pool: dict[str, list[dict]], template: str, used
         unclosed = [c for c in middle if c["family"] == "malformed-unclosed-fence"]
         rest = [c for c in middle if c["family"] != "malformed-unclosed-fence"]
         for comp in rest:
-            segs.append(("\n", "template", "NEUTRAL"))
+            segs.append(("\n", "template", "NEUTRAL", CONSTRUCTION))
             segs.extend(label_component(comp))
-        segs.append(("\n", "template", "NEUTRAL"))
+        segs.append(("\n", "template", "NEUTRAL", CONSTRUCTION))
         segs.extend(label_prose(last["fragment"], last["component_id"]))
         if trailing is not None:
-            segs.append(("\n", "template", "NEUTRAL"))
+            segs.append(("\n", "template", "NEUTRAL", CONSTRUCTION))
             segs.extend(label_malformed(trailing["fragment"], trailing["family"],
                                         trailing["component_id"]))
         for comp in unclosed:
-            segs.append(("\n", "template", "NEUTRAL"))
+            segs.append(("\n", "template", "NEUTRAL", CONSTRUCTION))
             segs.extend(label_malformed(comp["fragment"], comp["family"], comp["component_id"]))
 
-    return segs
+    segs, r1_count = apply_r1(segs)
+    return segs, r1_count
 
 
 DECOR_EMOJI = "\n\u2009\u017d\u010d: \U0001F680 hitrost rasti je merljiva."
 DECOR_DECOMPOSED = "\n\u2009Pozor: e\u0301 (dekompouziran znakovni niz)."
 
 
-def decorate(segs: list[tuple[str, str, str]], use_crlf: bool,
-             add_emoji: bool, add_decomposed: bool) -> list[tuple[str, str, str]]:
+def decorate(segs: list[tuple[str, str, str, str]], use_crlf: bool,
+             add_emoji: bool, add_decomposed: bool) -> list[tuple[str, str, str, str]]:
     """Template-owned deterministic decorations (document index derived),
     applied in segment space so code-point spans stay exact."""
     if use_crlf:
-        segs = [(t.replace("\n", "\r\n"), cid, role) for t, cid, role in segs]
+        segs = [(t.replace("\n", "\r\n"), cid, role, lsrc) for t, cid, role, lsrc in segs]
     if add_emoji:
-        segs = segs + [(DECOR_EMOJI, "template", "PROSE")]
+        segs = segs + [(DECOR_EMOJI, "template", "PROSE", CONSTRUCTION)]
     if add_decomposed:
-        segs = segs + [(DECOR_DECOMPOSED, "template", "PROSE")]
+        segs = segs + [(DECOR_DECOMPOSED, "template", "PROSE", CONSTRUCTION)]
     return segs
 
 
-def assemble(segs: list[tuple[str, str, str]], pool_index: dict[str, dict], template: str) -> dict:
+def assemble(segs: list[tuple[str, str, str, str]], pool_index: dict[str, dict], template: str) -> dict:
     """Build document text + region tiling from labeled segments (composition-only)."""
     regions: list[dict] = []
     comp_order: list[dict] = []
     seen: set[str] = set()
     position = 0
     cursor_cp = 0
-    for text, cid, role in segs:
+    for text, cid, role, lsrc in segs:
         if not text:
             continue
         start = position
@@ -1064,8 +1224,9 @@ def assemble(segs: list[tuple[str, str, str]], pool_index: dict[str, dict], temp
             category = pool_index.get(cid, {}).get("category")
         regions.append({"start_byte": start, "end_byte": end, "start_cp": start_cp, "end_cp": end_cp,
                         "component_id": cid, "category": category, "role": role,
+                        "label_source": lsrc,
                         "template": cid.startswith("template")})
-    texts = [text for text, _cid, _role in segs if text]
+    texts = [text for text, _cid, _role, _lsrc in segs if text]
     full = "".join(texts)
     data = full.encode("utf-8")
     assert cursor_cp == len(full) and position == len(data), "region tiling is not exact"
@@ -1213,9 +1374,11 @@ def build_pattern_scanners() -> dict[str, object]:
     }
 
 
-def finalize_document(doc: dict, doc_id: str, seed_hex: str, template: str) -> tuple[dict, dict]:
+def finalize_document(doc: dict, doc_id: str, seed_hex: str, template: str,
+                      r1_count: int = 0) -> tuple[dict, dict]:
     """Emit the document + label records. Label invariants are asserted (fail
-    closed). Decorations are already applied in segment space upstream."""
+    closed). Decorations are already applied in segment space upstream.
+    ``r1_count`` is recorded in the document's composition provenance."""
     text = doc["text"]
     data = text.encode("utf-8")
     position = 0
@@ -1241,6 +1404,10 @@ def finalize_document(doc: dict, doc_id: str, seed_hex: str, template: str) -> t
         "components": [{"component_id": c["component_id"], "category": c["category"],
                         "start_byte": c["start_byte"], "end_byte": c["end_byte"]}
                        for c in doc["components"]],
+        "composition_provenance": {
+            "r1_blank_line_insertions": r1_count,
+            "r1_contract": "a fenced or indented code component is never composed on the line immediately after an HTML closing-tag line (order 008-h scope item 3b, R1); the inserted bytes are template-owned NEUTRAL delimiter",
+        },
     }
     label = {
         "doc_id": doc_id,
@@ -1251,6 +1418,7 @@ def finalize_document(doc: dict, doc_id: str, seed_hex: str, template: str) -> t
                      "component_id": r["component_id"],
                      "category": r["category"],
                      "role": r["role"],
+                     "label_source": r["label_source"],
                      "template_owned": r["template"]} for r in doc["regions"]],
         "invariants": {
             "tiling_complete": all(
@@ -1281,6 +1449,7 @@ def build_set(pool: dict[str, list[dict]], pool_index: dict[str, dict], seed_hex
     [200, 4000] bytes keeps its last candidate and its actual size is
     recorded in the census (never fabricated).
     """
+    assert_no_parser_participation()
     rng = make_rng(seed_hex)
     docs: list[tuple[dict, dict]] = []
     for i in range(count):
@@ -1292,29 +1461,29 @@ def build_set(pool: dict[str, list[dict]], pool_index: dict[str, dict], seed_hex
             template = TEMPLATES[(i + attempt) % len(TEMPLATES)]
             used: set[str] = set()
             try:
-                segs = compose(rng, pool, template, used)
+                segs, r1_count = compose(rng, pool, template, used)
             except LookupError:
                 continue
             segs = decorate(segs, use_crlf, add_emoji, add_decomposed)
             doc = assemble(segs, pool_index, template)
             if len(doc["data"]) > DOC_BYTES_MAX:
-                candidate = (doc, template)
+                candidate = (doc, template, r1_count)
                 continue
             if len(doc["data"]) < DOC_BYTES_MIN:
                 extra = pick_any(rng, pool, ("prose",), used)
                 if extra is not None:
                     used.add(extra["component_id"])
-                    segs.extend([("\n", "template", "NEUTRAL"),
-                                 (extra["fragment"], extra["component_id"], "PROSE")])
+                    segs.extend([("\n", "template", "NEUTRAL", CONSTRUCTION),
+                                 (extra["fragment"], extra["component_id"], "PROSE", CONSTRUCTION)])
                     doc = assemble(segs, pool_index, template)
             if DOC_BYTES_MIN <= len(doc["data"]) <= DOC_BYTES_MAX:
-                candidate = (doc, template)
+                candidate = (doc, template, r1_count)
                 break
-            candidate = (doc, template)
+            candidate = (doc, template, r1_count)
         if candidate is None:
             raise RuntimeError(f"document {prefix}{i:06d}: no candidate composed (pool exhausted)")
-        doc, template = candidate
-        document, label = finalize_document(doc, f"{prefix}{i:06d}", seed_hex, template)
+        doc, template, r1_count = candidate
+        document, label = finalize_document(doc, f"{prefix}{i:06d}", seed_hex, template, r1_count)
         docs.append((document, label))
     return docs
 
@@ -1400,14 +1569,14 @@ def main() -> int:
         used: set[str] = set()
         rng = make_rng(hashlib.sha256((seeds["dev"] + f"-reroll-{attempts}").encode("utf-8")).hexdigest()[:16])
         try:
-            segs = compose(rng, dev_pool, template, used)
+            segs, r1_count = compose(rng, dev_pool, template, used)
         except LookupError:
             continue
         segs = decorate(segs, (idx % 25 == 7), (idx % 41 == 3), (idx % 41 == 11))
         doc = assemble(segs, dev_index, template)
         if not (DOC_BYTES_MIN <= len(doc["data"]) <= DOC_BYTES_MAX):
             continue
-        new_document, new_label = finalize_document(doc, document["doc_id"], seeds["dev"], template)
+        new_document, new_label = finalize_document(doc, document["doc_id"], seeds["dev"], template, r1_count)
         if sum(1 for n in short if scanners[n](new_document, new_label)) > 0:
             dev_docs[idx] = (new_document, new_label)
     dev_census = census_for(dev_docs)

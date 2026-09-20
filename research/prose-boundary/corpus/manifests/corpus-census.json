@@ -24989,5 +24989,338 @@
   },
   "note": "visible dev evidence only (tuning surface for the 008-g fix); acceptance is the sealed v2 hidden set"
  },
- "note": "dev corpus is structural test data (project-authored via the authorized generation program); passing it in 008-c is tuning evidence, not acceptance"
+ "note": "dev corpus is structural test data (project-authored via the authorized generation program); passing it in 008-c is tuning evidence, not acceptance",
+ "defect_dev_008h": {
+  "order": "008-h",
+  "purpose": "visible dev dialect-edge batch (008-h scope item 5): machine-known labels for the v2 residual shapes (policy-exposed per structural policy v4), the R1 separator variants (protected), the yaml-hash-comment-heading shape (policy-exposed per v4), the xml-diacritic-tag-name shape (protected under the EXTEND trigger decision), the item-4 negative controls and genuine prose controls; fail-closed validated (PROTECTED fully covered AND POLICY_EXPOSED fully exposed)",
+  "root": "research/prose-boundary/corpus/defect-dev-008h/",
+  "documents": {
+   "count": 32,
+   "total_bytes": 1549,
+   "min_bytes": 14,
+   "max_bytes": 87,
+   "documents_by_file": {
+    "e01.json": {
+     "sha256": "7c55a9d82979da6dd67da5141b552eb4a88b7f2dd530dcdcb595313ab4059a98",
+     "size": 412
+    },
+    "e02.json": {
+     "sha256": "aee07dc3ec279f955acd0644b6fbe0f1b4c9415a6136da99e9a043f67416a4df",
+     "size": 405
+    },
+    "e03.json": {
+     "sha256": "757dea28aed43b7224dc3bdcd8a398a7b5156ca6957cd1d75da8e6bce2f220d1",
+     "size": 408
+    },
+    "e04.json": {
+     "sha256": "a71ddf86133f6ba7aaa3eb17cc26147dafc1983a8dea94aefb7f26ef374ffaf4",
+     "size": 426
+    },
+    "e05.json": {
+     "sha256": "2fbeb9b20298ce93ab78ce3b26d257c63c71bb4afe060307b0aa87c413b5566d",
+     "size": 401
+    },
+    "e06.json": {
+     "sha256": "e7a5e0101965aa02a61fcc74a50dc8f2fc48b47f7d05bc00fa8f41490b29b97f",
+     "size": 433
+    },
+    "e07.json": {
+     "sha256": "d58eb56276c6745837a9c9572186d9947824ca16353cfecabb6ba4bad7872f9a",
+     "size": 433
+    },
+    "e08.json": {
+     "sha256": "1af1f46865e671d443c188950b84f0162eaf7164ad729a813429bdf8d48c25fd",
+     "size": 440
+    },
+    "e09.json": {
+     "sha256": "d1edcc33b10161f7e3af14aaee89ccdc43811d072d5482fa8eb70ef8f8e5ab65",
+     "size": 427
+    },
+    "e10.json": {
+     "sha256": "39a14f92708dbaeae6968eeb242f66224af96768e0236e7be99d3ba05effc128",
+     "size": 451
+    },
+    "e11.json": {
+     "sha256": "33e7f565116b12c195ed527ce665a5cf1efdb5b9d4aed7b31848c0dfabde8236",
+     "size": 414
+    },
+    "e12.json": {
+     "sha256": "fecf0845b7b2e5577d7d68444a6f776e323548ad37bd894f7c4dc1f0d0fb8d19",
+     "size": 395
+    },
+    "e13.json": {
+     "sha256": "9fb1c7f174b14c03d0f659a9b6319e168730a799b01214bfc8e2f405d7fc9870",
+     "size": 397
+    },
+    "e14.json": {
+     "sha256": "4cc638a0734e3a3bc0480bcc8183085b573762ab3d22f30610803ede3d6be3d6",
+     "size": 390
+    },
+    "e15.json": {
+     "sha256": "32004632a4f51ada450b123140d0922965a51ad9ae3a953877a78f2833579d68",
+     "size": 419
+    },
+    "e16.json": {
+     "sha256": "a7cde73ce26c899693a5bf5d7be7be6d19b778b38a611151b67f7a1dc469e242",
+     "size": 414
+    },
+    "e17.json": {
+     "sha256": "5531b875728af713d362e14fbac05ed6b73cb4a96e750d9e12e7ba1f25195a73",
+     "size": 400
+    },
+    "e18.json": {
+     "sha256": "17b289efc2314931a428666ff6264307da8b698eafcc03714a8b2a1b1f009688",
+     "size": 375
+    },
+    "e19.json": {
+     "sha256": "89344bf24b8ba4e8244218002768856efd032aa1c3037cfcb27f685a5564b2e5",
+     "size": 371
+    },
+    "e20.json": {
+     "sha256": "797e10b000adeb6bee904715e409a4949ba952dea238be1da4899a6519d8e355",
+     "size": 367
+    },
+    "e21.json": {
+     "sha256": "b446d6d1e05871feaf71466152dd4e99667a7a873472116855718e2cee961ef7",
+     "size": 416
+    },
+    "e22.json": {
+     "sha256": "19f363253056b5e24de973b606199843da5b2f386856a1f08a44cf0e44fbfce5",
+     "size": 379
+    },
+    "e23.json": {
+     "sha256": "517bbef79734bcdf1a7f7bbd80f382a4d30ee2e12b8b58af4fcd74e525439486",
+     "size": 362
+    },
+    "e24.json": {
+     "sha256": "2a7008c529c68a3b6040ee1a136d948a377419ff919f4fa7db9021ae86217266",
+     "size": 402
+    },
+    "e25.json": {
+     "sha256": "e409cf91df9f3726707bce4b6556dcd127f8f79e8fb65644ebb407256c322331",
+     "size": 367
+    },
+    "e26.json": {
+     "sha256": "ade9070ecd2af785fcd59684c9f3b6b2064acefff9ae89490792ce457e4a8f89",
+     "size": 381
+    },
+    "e27.json": {
+     "sha256": "68ca8a71ecda7696df6591d20fab7a234a3bbab0d25ac3156cad6b47902fc3d7",
+     "size": 383
+    },
+    "e28.json": {
+     "sha256": "d656c3ff1300af2d8d5b02990774037e3598197734414902e5caf97d898d777e",
+     "size": 442
+    },
+    "e29.json": {
+     "sha256": "8ed70e9dc080c054d9449738015993acbd3d653220afdb850a29368468d1b175",
+     "size": 399
+    },
+    "e30.json": {
+     "sha256": "1735460069a6f46c069526198f362c0ba3f6463c3ca0f67233daebabe7588c1c",
+     "size": 378
+    },
+    "e31.json": {
+     "sha256": "7e4cc288c78b009531f053fd04fbfcb8c7d7287efd3bae051f1b670686b9ce7a",
+     "size": 420
+    },
+    "e32.json": {
+     "sha256": "85ac307e21f1bebe05140558b67a29ef8f54db6e7d23fd8b54b52d0402928594",
+     "size": 426
+    }
+   }
+  },
+  "labels": {
+   "count": 32,
+   "labels_by_file": {
+    "e01.json": {
+     "sha256": "8e5c8eeead78fc3bbb407e5719224c0fc73ca53015dd332bf9afb2c8cfafabb4",
+     "size": 1349
+    },
+    "e02.json": {
+     "sha256": "097c90ab13044d3addb79709cef4aebd4f248e559930c8bfb0c51b490c2aa8e2",
+     "size": 1556
+    },
+    "e03.json": {
+     "sha256": "a7bf6fefb72fc31ee6c9f6367dc408fa025fc757415402d8696de870f2f5b277",
+     "size": 1556
+    },
+    "e04.json": {
+     "sha256": "80f74ae4649825a9b87b39f0b6408e53db9cda3a437d16750206364ca9854f00",
+     "size": 1818
+    },
+    "e05.json": {
+     "sha256": "b2e49d456764b9b186cb15c1c92f79ad146c534f27a763800a7b4169b6d0c797",
+     "size": 1328
+    },
+    "e06.json": {
+     "sha256": "c15035c645285c8452ed9c3b5c552849fc690682a0f896a30ef77b8f31e3dee8",
+     "size": 2496
+    },
+    "e07.json": {
+     "sha256": "e7efb2c60bcbd4339ab7fb8701e84212d87e990295fc2d5719f35de997f2256b",
+     "size": 2496
+    },
+    "e08.json": {
+     "sha256": "db2541a761d35a92613f75398f4292de93247bd2c0bc6fe5876b2e05a2bf7567",
+     "size": 2493
+    },
+    "e09.json": {
+     "sha256": "49cab8ef25422ea873e7de510b06e40ff16a72f76bd17f8188c06aaae7a2f062",
+     "size": 2246
+    },
+    "e10.json": {
+     "sha256": "9df469b53e627a6f87db7fd2374b4f2fcb2630a534d47afe88f49729dbd210b7",
+     "size": 2493
+    },
+    "e11.json": {
+     "sha256": "01cfdb4f3be3c0186fd29300c65bfe2d5edb48a67d927b798b6edfc06713f963",
+     "size": 1578
+    },
+    "e12.json": {
+     "sha256": "7828478795fbcb8ba788b14e8d565b1cc32675b000b466a98458a88de0a71dc4",
+     "size": 1098
+    },
+    "e13.json": {
+     "sha256": "edce6cdad80ec9b51f33fa72c3ecf0bb14dc2f32c7c89998b84df0a06aef7bd3",
+     "size": 874
+    },
+    "e14.json": {
+     "sha256": "e7da06a3ff708f73da8509de08a92f47156e2328e143e1fcba978630f2b31e21",
+     "size": 1098
+    },
+    "e15.json": {
+     "sha256": "11f32d9bc9d84c138cad7bbf1d9186464fc7dcdde54840e66a10fdb88b1ba52b",
+     "size": 1578
+    },
+    "e16.json": {
+     "sha256": "22c016d6a3f30a5e9a49fe8470990ab244e2f19393f80493ab2294a5da262b2f",
+     "size": 1578
+    },
+    "e17.json": {
+     "sha256": "414fa8a360c4dea5f5d1645d4c3f2f2352f11a1bd6e5927ce35935d235566e68",
+     "size": 1094
+    },
+    "e18.json": {
+     "sha256": "72c901a43f21130fba2a9f9dd4ecf63c77793520ec21c48cce8baabcf6101cd0",
+     "size": 639
+    },
+    "e19.json": {
+     "sha256": "9ede17d15557486abfc561c5948563783e9ba14e781ee0c6fb16edf7bd0ac626",
+     "size": 1093
+    },
+    "e20.json": {
+     "sha256": "7e1145262ff9f994d6aed61c53fdbfa40b44f449ad38d3cf962775def5eaa919",
+     "size": 639
+    },
+    "e21.json": {
+     "sha256": "a6829a5eb3378d87e368075b5471d31c0d4475ba57c2c87d1da67db477a530f2",
+     "size": 2460
+    },
+    "e22.json": {
+     "sha256": "4fcb45c70e2a70186552165d7702272b991ee8ec2fbbcccfe7cc46a87789fa4f",
+     "size": 1093
+    },
+    "e23.json": {
+     "sha256": "3f50d8987c2d89674a7508828052b194200a4deb84c30cc338f2b5da1262583a",
+     "size": 1089
+    },
+    "e24.json": {
+     "sha256": "30ada833cc2f7df7ca5ec0740d180c08f3464da9fe857b59af672ac7a145cc70",
+     "size": 639
+    },
+    "e25.json": {
+     "sha256": "327c7620017f64b615f0ffb31c8c507580314c3bb34d9e8ef9a43f3d47c923a3",
+     "size": 1554
+    },
+    "e26.json": {
+     "sha256": "090dfff62f4a6e916ec9d7064be57a79cc500f313d28fab34f8abf5206964799",
+     "size": 639
+    },
+    "e27.json": {
+     "sha256": "24f0dd6a8bb0b751f8f86b723449e455c7f79151a6f2e642249282a2d5392dad",
+     "size": 1546
+    },
+    "e28.json": {
+     "sha256": "3938684217e09f51ffcb1dd39726776958c8016ef1cec4ee9664892d35b8040d",
+     "size": 4052
+    },
+    "e29.json": {
+     "sha256": "2e838cb6bf9ace44eaf95625a3ca7c9f4b83141a5800d55e820accf54fa5a895",
+     "size": 2229
+    },
+    "e30.json": {
+     "sha256": "f60a4a438016e53afd06ffe40f9c435fe7474e9f7a92cb9494bd3b83b4b771ff",
+     "size": 1573
+    },
+    "e31.json": {
+     "sha256": "c35563de6ccc4de2916cb920efc78ad155334604bec94b647c02816ae9971698",
+     "size": 868
+    },
+    "e32.json": {
+     "sha256": "4bc5c361e6d2c800fa9e3e03d5351b08713f7290102088006d5b27737956789c",
+     "size": 868
+    }
+   }
+  },
+  "role_bytes": {
+   "PROSE": 696,
+   "PROTECTED": 666,
+   "POLICY_EXPOSED": 82,
+   "NEUTRAL": 105
+  },
+  "category_region_bytes": {
+   "prose": {
+    "bytes": 223,
+    "regions": 22
+   },
+   "structured": {
+    "bytes": 724,
+    "regions": 51
+   },
+   "template": {
+    "bytes": 602,
+    "regions": 118
+   }
+  },
+  "template_counts": {
+   "D008h-A-nosep-v2shape": 1,
+   "D008h-A-sep-r1": 1,
+   "D008h-A-sep-indented": 1,
+   "D008h-A-nosep-two-blank": 1,
+   "D008h-A-blank-prose": 1,
+   "D008h-B-strong": 1,
+   "D008h-B-emphasis": 1,
+   "D008h-C-comment-in-run": 1,
+   "D008h-C-no-space-negative": 1,
+   "D008h-C-comment-variant": 1,
+   "D008h-D-paired": 1,
+   "D008h-D-self-closing": 1,
+   "D008h-D-unbalanced": 1,
+   "D008h-D-standalone-close": 1,
+   "D008h-D-namespaced": 1,
+   "D008h-D-hyphen": 1,
+   "D008h-D-multiline": 1,
+   "D008h-N-diacritic-no-close": 1,
+   "D008h-N-inequality": 1,
+   "D008h-N-lone-bracket": 1,
+   "D008h-N-recognized-html": 1,
+   "D008h-N-digit-after-bracket": 1,
+   "D008h-N-single-digit": 1,
+   "D008h-P-parens-colon": 1,
+   "D008h-P-time": 1,
+   "D008h-P-quoted-phrase": 1,
+   "D008h-T-yaml-run": 1,
+   "D008h-T-recognized-table": 1,
+   "D008h-T-tablelike-prose": 1,
+   "D008h-T-nested-split": 1,
+   "D008h-A-nosep-no-internal-blank": 1,
+   "D008h-A-nosep-no-internal-blank-indented": 1
+  },
+  "seeds": {
+   "defect_batch": "008hhedge0001"
+  },
+  "label_source_convention": "construction = role fixed by explicit composition specification (template glue, parser-structural roles, and the v4 policy-class-documented POLICY_EXPOSED shapes); oracle-refined = role fixed by the frozen residual spec (PROTECTED regions whose protection comes from a residual class: config run, number, xml-fragment)",
+  "note": "visible dev evidence only; acceptance is the sealed v3 hidden set"
+ }
 }

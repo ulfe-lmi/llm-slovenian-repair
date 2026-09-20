@@ -1,0 +1,735 @@
+{
+ "schema": "008h-shape-analysis/1",
+ "order": "008-h",
+ "scope_item": 2,
+ "label": "data-restricted shape analysis (harness-mediated): Part A - every exposed range of the 008-g naturalistic consistency aggregate (re-derived with the 008-g frozen implementation and asserted identical to the committed aggregate); Part B - every exposed v1 diagnostic PROTECTED byte (re-derived and asserted 458 B) classified by region shape; finalized with the D1-4 per-range resolution (candidate class + resolution kind)",
+ "privacy": "categorical shapes, event kind tokens, byte categories, line/byte references and counts only; no response content, no label content, no private paths",
+ "implementation_rederived": "008-g frozen implementation (research/curated/prose_boundary.py sha256 3a5a4ba7b5258dc7937a9b4ef98a90982a6a159d5d8763160f3105048545f2d7, structural-policy-v3.json sha256 7ff6646e3c11d1241cb1c85bd96f08e3f0db08e73d4eb4a4e97fac0c17e1828f)",
+ "span_rule": "a line range maps to the code-point span from the start of its first line to the end of its last line (identity view; all 70 naturalistic fragments are LF-only); exposed bytes = span bytes not covered by a protection interval",
+ "naturalistic_exposed_ranges": {
+  "count": 15,
+  "entries": [
+   {
+    "case_id": "nat-algorithm-python-hidden-03",
+    "material": false,
+    "line_range": [
+     20,
+     23
+    ],
+    "label_category": "STRUCTURAL_PROTECT",
+    "exposed_bytes": 22,
+    "attribution_008g": {
+     "parser-dialect": 1
+    },
+    "deepest_event_per_line": [
+     "S.Para",
+     "S.TableCell",
+     "S.Table",
+     "S.TableCell"
+    ],
+    "line_signatures": [
+     "table-row",
+     "table-row",
+     "table-row",
+     "table-row"
+    ],
+    "exposed_byte_categories": {
+     "letter": 22
+    },
+    "residual_class_matches_in_range": {
+     "number": 10
+    },
+    "candidate_class": "markdown-table-dialect-boundary",
+    "resolution": {
+     "kind": "DOCUMENTED-DIALECT-LIMITATION",
+     "class_reference": "markdown-table-dialect-boundary",
+     "note": "recognized Markdown table: the dialect exposes cell/head text as candidate prose (the table structure is structural; cell text is not a named machine-significant category)"
+    }
+   },
+   {
+    "case_id": "nat-changelog-hidden-03",
+    "material": false,
+    "line_range": [
+     3,
+     3
+    ],
+    "label_category": "MACHINE_SIGNIFICANT_RESIDUAL",
+    "exposed_bytes": 6,
+    "attribution_008g": {
+     "label-ambiguity": 2
+    },
+    "deepest_event_per_line": [
+     null
+    ],
+    "line_signatures": [
+     "plain-prose"
+    ],
+    "exposed_byte_categories": {
+     "delimiter": 2,
+     "other": 3,
+     "space": 1
+    },
+    "residual_class_matches_in_range": {
+     "number": 5
+    },
+    "candidate_class": "residual-token-line-glue",
+    "resolution": {
+     "kind": "DOCUMENTED-DIALECT-LIMITATION",
+     "class_reference": "residual-token-line-glue",
+     "note": "the bounded residual classes protect the machine tokens; the line's glue bytes (spaces, punctuation) remain candidate prose (008-g attribution label-ambiguity subsumed by this documented shape)"
+    }
+   },
+   {
+    "case_id": "nat-changelog-hidden-03",
+    "material": false,
+    "line_range": [
+     10,
+     10
+    ],
+    "label_category": "MACHINE_SIGNIFICANT_RESIDUAL",
+    "exposed_bytes": 6,
+    "attribution_008g": {
+     "label-ambiguity": 2
+    },
+    "deepest_event_per_line": [
+     "S.Item"
+    ],
+    "line_signatures": [
+     "plain-prose"
+    ],
+    "exposed_byte_categories": {
+     "delimiter": 2,
+     "other": 3,
+     "space": 1
+    },
+    "residual_class_matches_in_range": {
+     "number": 5
+    },
+    "candidate_class": "residual-token-line-glue",
+    "resolution": {
+     "kind": "DOCUMENTED-DIALECT-LIMITATION",
+     "class_reference": "residual-token-line-glue",
+     "note": "residual-token line glue (same shape)"
+    }
+   },
+   {
+    "case_id": "nat-comparison-table-hidden-02",
+    "material": false,
+    "line_range": [
+     3,
+     4
+    ],
+    "label_category": "STRUCTURAL_PROTECT",
+    "exposed_bytes": 26,
+    "attribution_008g": {
+     "parser-dialect": 1
+    },
+    "deepest_event_per_line": [
+     null,
+     "S.TableHead"
+    ],
+    "line_signatures": [
+     "table-row",
+     "table-row"
+    ],
+    "exposed_byte_categories": {
+     "letter": 26
+    },
+    "residual_class_matches_in_range": {},
+    "candidate_class": "markdown-table-dialect-boundary",
+    "resolution": {
+     "kind": "DOCUMENTED-DIALECT-LIMITATION",
+     "class_reference": "markdown-table-dialect-boundary",
+     "note": "recognized Markdown table (same shape)"
+    }
+   },
+   {
+    "case_id": "nat-comparison-table-hidden-04",
+    "material": false,
+    "line_range": [
+     3,
+     4
+    ],
+    "label_category": "STRUCTURAL_PROTECT",
+    "exposed_bytes": 36,
+    "attribution_008g": {
+     "parser-dialect": 1
+    },
+    "deepest_event_per_line": [
+     "S.Para",
+     "S.TableCell"
+    ],
+    "line_signatures": [
+     "table-row",
+     "table-row"
+    ],
+    "exposed_byte_categories": {
+     "letter": 34,
+     "space": 2
+    },
+    "residual_class_matches_in_range": {},
+    "candidate_class": "markdown-table-dialect-boundary",
+    "resolution": {
+     "kind": "DOCUMENTED-DIALECT-LIMITATION",
+     "class_reference": "markdown-table-dialect-boundary",
+     "note": "recognized Markdown table (same shape)"
+    }
+   },
+   {
+    "case_id": "nat-glossary-entry-hidden-02",
+    "material": false,
+    "line_range": [
+     26,
+     26
+    ],
+    "label_category": "MACHINE_SIGNIFICANT_RESIDUAL",
+    "exposed_bytes": 5,
+    "attribution_008g": {
+     "residual-class-gap": 1
+    },
+    "deepest_event_per_line": [
+     "S.CodeBlock:Fenced"
+    ],
+    "line_signatures": [
+     "keyvalue-line"
+    ],
+    "exposed_byte_categories": {
+     "delimiter": 1,
+     "letter": 3,
+     "space": 1
+    },
+    "residual_class_matches_in_range": {
+     "path": 1,
+     "relative-path": 1,
+     "url": 1
+    },
+    "candidate_class": "residual-token-line-glue",
+    "resolution": {
+     "kind": "DOCUMENTED-DIALECT-LIMITATION",
+     "class_reference": "residual-token-line-glue",
+     "note": "residual-token line glue (008-g attribution residual-class-gap subsumed by this documented shape)"
+    }
+   },
+   {
+    "case_id": "nat-glossary-entry-hidden-03",
+    "material": true,
+    "line_range": [
+     18,
+     20
+    ],
+    "label_category": "STRUCTURAL_PROTECT",
+    "exposed_bytes": 69,
+    "attribution_008g": {
+     "parser-dialect": 1
+    },
+    "deepest_event_per_line": [
+     "S.CodeBlock:Fenced",
+     "S.Para",
+     "S.Para"
+    ],
+    "line_signatures": [
+     "table-row",
+     "table-row",
+     "table-row"
+    ],
+    "exposed_byte_categories": {
+     "delimiter": 12,
+     "letter": 36,
+     "non-ascii": 2,
+     "space": 19
+    },
+    "residual_class_matches_in_range": {
+     "identifier": 2,
+     "number": 2,
+     "upper-identifier": 2
+    },
+    "candidate_class": "markdown-table-dialect-boundary",
+    "resolution": {
+     "kind": "DOCUMENTED-DIALECT-LIMITATION",
+     "class_reference": "markdown-table-dialect-boundary",
+     "note": "table-like lines the dialect does NOT recognize as a table (plain pipe-delimited lines): plain prose; a table-shape recognizer would reparse Markdown structure (excluded by the 2026-09-17 human architecture decision)"
+    }
+   },
+   {
+    "case_id": "nat-json-config-hidden-01",
+    "material": true,
+    "line_range": [
+     26,
+     34
+    ],
+    "label_category": "STRUCTURAL_PROTECT",
+    "exposed_bytes": 255,
+    "attribution_008g": {
+     "parser-dialect": 2
+    },
+    "deepest_event_per_line": [
+     "S.Para",
+     "S.TableCell",
+     "S.Table",
+     "S.TableCell",
+     "S.TableCell",
+     "S.TableCell",
+     "S.TableCell",
+     "S.TableCell",
+     "S.TableCell"
+    ],
+    "line_signatures": [
+     "table-row",
+     "table-row",
+     "table-row",
+     "table-row",
+     "table-row",
+     "table-row",
+     "table-row",
+     "table-row",
+     "table-row"
+    ],
+    "exposed_byte_categories": {
+     "letter": 221,
+     "non-ascii": 10,
+     "other": 10,
+     "space": 14
+    },
+    "residual_class_matches_in_range": {
+     "identifier": 2,
+     "number": 2,
+     "upper-identifier": 1
+    },
+    "candidate_class": "markdown-table-dialect-boundary",
+    "resolution": {
+     "kind": "DOCUMENTED-DIALECT-LIMITATION",
+     "class_reference": "markdown-table-dialect-boundary",
+     "note": "recognized Markdown table (same shape)"
+    }
+   },
+   {
+    "case_id": "nat-json-config-hidden-01",
+    "material": true,
+    "line_range": [
+     37,
+     40
+    ],
+    "label_category": "STRUCTURAL_PROTECT",
+    "exposed_bytes": 184,
+    "attribution_008g": {
+     "parser-dialect": 2
+    },
+    "deepest_event_per_line": [
+     "S.Para",
+     "S.Item",
+     "S.Item",
+     "S.Item"
+    ],
+    "line_signatures": [
+     "list-item",
+     "list-item",
+     "list-item",
+     "list-item"
+    ],
+    "exposed_byte_categories": {
+     "letter": 151,
+     "non-ascii": 8,
+     "other": 4,
+     "space": 21
+    },
+    "residual_class_matches_in_range": {
+     "identifier": 2
+    },
+    "candidate_class": "list-item-candidate-prose",
+    "resolution": {
+     "kind": "DOCUMENTED-DIALECT-LIMITATION",
+     "class_reference": "list-item-candidate-prose",
+     "note": "list item content is candidate prose in the dialect; machine-like tokens inside the item are protected only where a bounded residual class fires in the item's prose context"
+    }
+   },
+   {
+    "case_id": "nat-math-answer-hidden-04",
+    "material": true,
+    "line_range": [
+     3,
+     7
+    ],
+    "label_category": "STRUCTURAL_PROTECT",
+    "exposed_bytes": 53,
+    "attribution_008g": {
+     "parser-dialect": 1
+    },
+    "deepest_event_per_line": [
+     "S.Para",
+     "S.TableCell",
+     "S.Table",
+     "S.TableCell",
+     "S.TableCell"
+    ],
+    "line_signatures": [
+     "table-row",
+     "table-row",
+     "table-row",
+     "table-row",
+     "table-row"
+    ],
+    "exposed_byte_categories": {
+     "letter": 45,
+     "non-ascii": 5,
+     "space": 3
+    },
+    "residual_class_matches_in_range": {
+     "number": 3,
+     "path": 1
+    },
+    "candidate_class": "markdown-table-dialect-boundary",
+    "resolution": {
+     "kind": "DOCUMENTED-DIALECT-LIMITATION",
+     "class_reference": "markdown-table-dialect-boundary",
+     "note": "recognized Markdown table (same shape)"
+    }
+   },
+   {
+    "case_id": "nat-qa-answer-hidden-03",
+    "material": false,
+    "line_range": [
+     15,
+     21
+    ],
+    "label_category": "STRUCTURAL_PROTECT",
+    "exposed_bytes": 45,
+    "attribution_008g": {
+     "parser-dialect": 1
+    },
+    "deepest_event_per_line": [
+     "S.Para",
+     "S.Para",
+     "S.Para",
+     "S.Para",
+     "S.Para",
+     "S.Para",
+     "S.Para"
+    ],
+    "line_signatures": [
+     "plain-prose",
+     "indented-code",
+     "plain-prose",
+     "plain-prose",
+     "indented-code",
+     "indented-code",
+     "indented-code"
+    ],
+    "exposed_byte_categories": {
+     "delimiter": 4,
+     "letter": 32,
+     "other": 3,
+     "space": 6
+    },
+    "residual_class_matches_in_range": {
+     "bare-json": 2,
+     "identifier": 1,
+     "number": 6
+    },
+    "candidate_class": "indented-code-lazy-continuation",
+    "resolution": {
+     "kind": "DOCUMENTED-DIALECT-LIMITATION",
+     "class_reference": "indented-code-lazy-continuation",
+     "note": "the dialect reads the indented lines as lazy paragraph continuation after a non-blank paragraph line (not an indented code block); code intent is a composition decision, not a named-category content decision"
+    }
+   },
+   {
+    "case_id": "nat-qa-answer-hidden-04",
+    "material": true,
+    "line_range": [
+     10,
+     13
+    ],
+    "label_category": "STRUCTURAL_PROTECT",
+    "exposed_bytes": 66,
+    "attribution_008g": {
+     "parser-dialect": 1
+    },
+    "deepest_event_per_line": [
+     "S.Item",
+     "S.Item",
+     "S.Item",
+     "S.Item"
+    ],
+    "line_signatures": [
+     "table-row",
+     "table-row",
+     "table-row",
+     "table-row"
+    ],
+    "exposed_byte_categories": {
+     "delimiter": 19,
+     "letter": 21,
+     "non-ascii": 2,
+     "space": 24
+    },
+    "residual_class_matches_in_range": {
+     "number": 12
+    },
+    "candidate_class": "list-item-candidate-prose",
+    "resolution": {
+     "kind": "DOCUMENTED-DIALECT-LIMITATION",
+     "class_reference": "list-item-candidate-prose",
+     "note": "list item content (same shape)"
+    }
+   },
+   {
+    "case_id": "nat-qa-answer-hidden-05",
+    "material": false,
+    "line_range": [
+     5,
+     6
+    ],
+    "label_category": "STRUCTURAL_PROTECT",
+    "exposed_bytes": 10,
+    "attribution_008g": {
+     "parser-dialect": 1
+    },
+    "deepest_event_per_line": [
+     "S.Para",
+     "S.TableCell"
+    ],
+    "line_signatures": [
+     "table-row",
+     "table-row"
+    ],
+    "exposed_byte_categories": {
+     "letter": 10
+    },
+    "residual_class_matches_in_range": {},
+    "candidate_class": "markdown-table-dialect-boundary",
+    "resolution": {
+     "kind": "DOCUMENTED-DIALECT-LIMITATION",
+     "class_reference": "markdown-table-dialect-boundary",
+     "note": "recognized Markdown table (same shape)"
+    }
+   },
+   {
+    "case_id": "nat-table-equations-hidden-02",
+    "material": false,
+    "line_range": [
+     3,
+     4
+    ],
+    "label_category": "STRUCTURAL_PROTECT",
+    "exposed_bytes": 19,
+    "attribution_008g": {
+     "parser-dialect": 1
+    },
+    "deepest_event_per_line": [
+     "S.Para",
+     "S.TableCell"
+    ],
+    "line_signatures": [
+     "table-row",
+     "table-row"
+    ],
+    "exposed_byte_categories": {
+     "letter": 19
+    },
+    "residual_class_matches_in_range": {},
+    "candidate_class": "markdown-table-dialect-boundary",
+    "resolution": {
+     "kind": "DOCUMENTED-DIALECT-LIMITATION",
+     "class_reference": "markdown-table-dialect-boundary",
+     "note": "recognized Markdown table (same shape)"
+    }
+   },
+   {
+    "case_id": "nat-table-equations-hidden-03",
+    "material": true,
+    "line_range": [
+     3,
+     7
+    ],
+    "label_category": "STRUCTURAL_PROTECT",
+    "exposed_bytes": 125,
+    "attribution_008g": {
+     "parser-dialect": 1
+    },
+    "deepest_event_per_line": [
+     "S.Para",
+     "S.TableCell",
+     "S.Table",
+     "S.TableCell",
+     "S.TableCell"
+    ],
+    "line_signatures": [
+     "table-row",
+     "table-row",
+     "table-row",
+     "table-row",
+     "table-row"
+    ],
+    "exposed_byte_categories": {
+     "delimiter": 2,
+     "letter": 108,
+     "non-ascii": 8,
+     "space": 7
+    },
+    "residual_class_matches_in_range": {
+     "number": 6
+    },
+    "candidate_class": "markdown-table-dialect-boundary",
+    "resolution": {
+     "kind": "DOCUMENTED-DIALECT-LIMITATION",
+     "class_reference": "markdown-table-dialect-boundary",
+     "note": "recognized Markdown table (same shape)"
+    }
+   }
+  ]
+ },
+ "v1_diagnostic_exposed": {
+  "total_bytes": 458,
+  "protected_regions_touched": 23,
+  "shape_bytes": {
+   "hash-comment-line-as-atx-heading": 343,
+   "plain-prose": 5,
+   "xml-unicode-tag-name": 110
+  },
+  "shape_resolution": {
+   "hash-comment-line-as-atx-heading": {
+    "kind": "DOCUMENTED-DIALECT-LIMITATION",
+    "class_reference": "yaml-hash-comment-heading",
+    "bytes": 343,
+    "note": "a '# text' line is contextually indistinguishable from a Markdown ATX heading; recorded_reason in the v4 policy class (no bounded recognizer within the named categories is viable)"
+   },
+   "plain-prose": {
+    "kind": "DOCUMENTED-DIALECT-LIMITATION",
+    "class_reference": "yaml-hash-comment-heading",
+    "bytes": 5,
+    "note": "plain-prose bytes co-occurring with the hash-comment sub-shape (the v1 348 B sub-shape measurement = 343 B + 5 B); same classification"
+   },
+   "xml-unicode-tag-name": {
+    "kind": "CLOSED-RESIDUAL",
+    "class_reference": "xml-fragment trigger extension (008-h scope item 4 EXTEND decision; recorded in experiment-008h.json trigger_decision)",
+    "bytes": 110,
+    "note": "covered by the widened Unicode-letter xml-fragment trigger (RE_XML_NAME); strict trigger, same shape guards as v3, negative controls in the dev-edge batch e18-e23; no new v4 policy class (the xml-diacritic-tag-name class exists only in the not-triggered FALLBACK branch)"
+   }
+  }
+ },
+ "resolution_taxonomy": "008-h D1-4 per-case resolution kinds: CLOSED-RESIDUAL (covered by a bounded residual extension/trigger implemented in this round, within the 2026-09-17 human-named machine-significant categories, strict trigger, negative controls) / DOCUMENTED-DIALECT-LIMITATION (a v4 policy class documents the shape rule with measured evidence and justification; permitted only where no bounded recognizer within the named categories is viable, with the reason recorded) / AMBIGUOUS (explicitly AMBIGUOUS-labeled range after reconciliation) / UNRESOLVED (any other - a material contradiction capping the verdict at CONDITIONAL and named as remaining scope)",
+ "class_census": {
+  "note": "the four naturalistic-axis v4 policy-exposed dialect-ambiguity classes (byte totals over the 15 exposed ranges of the 008-g naturalistic consistency aggregate); the v1/v2-shape classes (html-closing-tag-adjacent-fence, keyvalue-list-item-quoted-emphasis, yaml-hash-comment-heading) are separate v4 entries evidenced by the hidden sets and the dev-edge batch",
+  "classes": {
+   "markdown-table-dialect-boundary": {
+    "bytes": 615,
+    "ranges": 9
+   },
+   "list-item-candidate-prose": {
+    "bytes": 250,
+    "ranges": 2
+   },
+   "indented-code-lazy-continuation": {
+    "bytes": 45,
+    "ranges": 1
+   },
+   "residual-token-line-glue": {
+    "bytes": 17,
+    "ranges": 3
+   }
+  }
+ },
+ "material_cases": {
+  "note": "the five 008-g material naturalistic-consistency cases; every material range carries a resolution kind (no UNRESOLVED) - verdict condition (vii) satisfiable",
+  "cases": [
+   {
+    "case_id": "nat-glossary-entry-hidden-03",
+    "ranges": [
+     {
+      "line_range": [
+       18,
+       20
+      ],
+      "exposed_bytes": 69,
+      "resolution": "DOCUMENTED-DIALECT-LIMITATION",
+      "class": "markdown-table-dialect-boundary"
+     }
+    ]
+   },
+   {
+    "case_id": "nat-json-config-hidden-01",
+    "ranges": [
+     {
+      "line_range": [
+       26,
+       34
+      ],
+      "exposed_bytes": 255,
+      "resolution": "DOCUMENTED-DIALECT-LIMITATION",
+      "class": "markdown-table-dialect-boundary"
+     },
+     {
+      "line_range": [
+       37,
+       40
+      ],
+      "exposed_bytes": 184,
+      "resolution": "DOCUMENTED-DIALECT-LIMITATION",
+      "class": "list-item-candidate-prose"
+     }
+    ]
+   },
+   {
+    "case_id": "nat-math-answer-hidden-04",
+    "ranges": [
+     {
+      "line_range": [
+       3,
+       7
+      ],
+      "exposed_bytes": 53,
+      "resolution": "DOCUMENTED-DIALECT-LIMITATION",
+      "class": "markdown-table-dialect-boundary"
+     }
+    ]
+   },
+   {
+    "case_id": "nat-qa-answer-hidden-04",
+    "ranges": [
+     {
+      "line_range": [
+       10,
+       13
+      ],
+      "exposed_bytes": 66,
+      "resolution": "DOCUMENTED-DIALECT-LIMITATION",
+      "class": "list-item-candidate-prose"
+     }
+    ]
+   },
+   {
+    "case_id": "nat-table-equations-hidden-03",
+    "ranges": [
+     {
+      "line_range": [
+       3,
+       7
+      ],
+      "exposed_bytes": 125,
+      "resolution": "DOCUMENTED-DIALECT-LIMITATION",
+      "class": "markdown-table-dialect-boundary"
+     }
+    ]
+   }
+  ]
+ },
+ "summary": {
+  "naturalistic_ranges": {
+   "total": 15,
+   "by_resolution": {
+    "CLOSED-RESIDUAL": 0,
+    "DOCUMENTED-DIALECT-LIMITATION": 15,
+    "AMBIGUOUS": 0,
+    "UNRESOLVED": 0
+   }
+  },
+  "v1_subshapes_bytes": {
+   "CLOSED-RESIDUAL": 110,
+   "DOCUMENTED-DIALECT-LIMITATION": 348,
+   "AMBIGUOUS": 0,
+   "UNRESOLVED": 0
+  },
+  "material_ranges_unresolved": 0,
+  "note": "this shape analysis informs (does not predetermine) the v4 class list and the CLOSED-RESIDUAL extension (scope item 2); the final per-case resolution is committed in results/hidden-acceptance-v3/naturalistic-consistency-v3.json after the 008-h implementation re-run (requirement 8)"
+ }
+}

@@ -755,25 +755,32 @@ def _config_spans(text: str) -> list[tuple[int, int]]:
     return spans
 
 
-# v3 (008-g) xml-fragment class (scope 4(a)(2)). The residual layer sees
-# only parser-approved candidate prose; recognized inline-HTML tags are
+# v3 (008-g) xml-fragment class (scope 4(a)(2)); 008-h scope item 4
+# decision EXTEND (recorded in experiment-008h.json) widens the trigger
+# name pattern from ASCII letters to Unicode letters so diacritic tag
+# names (e.g. Slovenian) are covered. The residual layer sees only
+# parser-approved candidate prose; recognized inline-HTML tags are
 # structural (InlineHtml events) and never need this class. This
 # recognizer covers HTML/XML tag fragments the parser dialect parses as
 # paragraph text: namespaced prefix-colon names (with attributes, so the
 # autolink path does not claim them) and names outside the dialect's
-# recognized tag-name shape. The trigger requires a letter/underscore
-# immediately after "<" and a closing ">" on the same line, so comparison
-# operators ("< 5", "<5"), a lone angle bracket, and digits after "<"
-# never fire; recognized tag names (the dialect vocabulary) abstain so
+# recognized tag-name shape (the dialect pattern is ASCII, so any
+# Unicode-letter name triggers). The trigger requires a letter/underscore
+# (any Unicode letter; the same shape guards as v3) immediately after "<"
+# and a closing ">" on the same line, so comparison operators ("< 5",
+# "<5"), a lone angle bracket, and digits after "<" never fire;
+# recognized tag names (the ASCII dialect vocabulary) abstain so
 # recognised-HTML behaviour stays byte-identical to v2.
-RE_XML_NAME = r"[A-Za-z_][A-Za-z0-9_.:-]*"
+RE_XML_NAME = r"(?!\d)\w[\w.:-]*"
 RE_XML_OPEN = re.compile(r"<(" + RE_XML_NAME + r")([^<>\n]*)>")
 RE_XML_CLOSE = re.compile(r"</(" + RE_XML_NAME + r")[^<>\n]*>")
 # The parser dialect recognizes an inline-HTML tag exactly when the tag
 # name has this shape (verified against the pinned pulldown-cmark 0.13.4
 # helper: pure letter/digit/hyphen names, any case, with or without
 # attributes -> InlineHtml events, never candidate prose; namespaced
-# names and names with a period/underscore are not recognized).
+# names and names with a period/underscore are not recognized). The
+# pattern is ASCII: tag names with Unicode letters (008-h EXTEND) are
+# outside the dialect vocabulary and always trigger the class.
 RE_XML_DIALECT_NAME = re.compile(r"[A-Za-z][A-Za-z0-9-]*")
 XML_FRAGMENT_LIMIT = 2000  # code points; policy v3 xml-fragment span bound
 
