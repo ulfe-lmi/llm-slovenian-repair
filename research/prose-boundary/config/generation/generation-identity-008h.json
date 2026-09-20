@@ -1,0 +1,1286 @@
+{
+ "schema": "008h-generation-identity/1",
+ "order": "008-h",
+ "purpose": "structural test-data generation for the v3 hidden acceptance set (human decision 2026-09-17; 008-h order requirement 7); NOT linguistic-method tuning; NOT objective-009 data; no new naturalistic whole-response generation",
+ "prompt_library_sha256": "904dd36b9891c567f250bf8b42b374d0b6557aa79ca3fcaa3c8824682fcc8fef",
+ "frozen_driver_sha256": "7050b2254ca14ffbfbe70ca06bd0674724a867debea124966cd56e834ed9cd45",
+ "driver_reuse": "committed 008-c generation_driver.py imported unmodified (Endpoint, make_request, fragment_violations, guards); frozen prompt library verbatim ({K} substitution only); scratch orchestration outside the repository (disclosed)",
+ "batch_plan": {
+  "rule": "all 76 families in library file order; base [4] per family; densified dialect-interaction families structured-html, structured-keyvalue, structured-xml, malformed-partial-html use [8, 8]",
+  "base_batch": [
+   4
+  ],
+  "densified": {
+   "structured-html": [
+    8,
+    8
+   ],
+   "structured-keyvalue": [
+    8,
+    8
+   ],
+   "structured-xml": [
+    8,
+    8
+   ],
+   "malformed-partial-html": [
+    8,
+    8
+   ]
+  },
+  "nominal_component_calls": 352,
+  "instance_tag": "v3",
+  "fragment_id_scheme": "comp-<category>-<family>-v3-<seq:04d> in frozen batch order"
+ },
+ "admission": {
+  "R2": {
+   "applied": true,
+   "rule": "a structured-keyvalue component containing a list-item-style line (list marker plus space) with paired emphasis markers or quoted emphasis-like content is not admitted to the v3 component pool (order 008-h scope item 3b; the shape is policy-exposed per structural policy v4 class keyvalue-list-item-quoted-emphasis)",
+   "predicate": "research.prose_boundary_builder.r2_keyvalue_list_item_emphasis_excluded",
+   "predicate_definition_sha256": "647ecf1ff3649f22867d124f70201135c267f3aa08328d900186371168fa5451",
+   "matching_criterion": "regex admission on fragment content at generation time (excluded fragments are never written to the pool); the identity records the rule text, the predicate-defining builder hash, and the excluded counts only - no fragment content",
+   "excluded_components": 0,
+   "excluded_by_family": {
+    "structured-keyvalue": 0
+   },
+   "note": "derived exactly from committed records: the batch plan requests exactly the wanted count (structured-keyvalue [8,8] = 16 requested; the receipts record the two 8-string pre-R2 batches and the pool retains exactly 16 structured-keyvalue components), therefore 0 fragments were R2-excluded in the final pool; the recovery regenerated no R2-governed family, so no live R2 exclusion occurred"
+  },
+  "R3": {
+   "applied": false,
+   "reason": "trigger decision EXTEND (experiment-008h.json): the widened Unicode-letter xml-fragment trigger covers diacritic tag names; R3 (structured-xml admission exclusion) applies only in the not-triggered FALLBACK branch",
+   "predicate": "research.prose_boundary_builder.r3_xml_diacritic_tag_excluded",
+   "predicate_definition_sha256": "647ecf1ff3649f22867d124f70201135c267f3aa08328d900186371168fa5451",
+   "excluded_components": 0
+  }
+ },
+ "seeds": {
+  "family_seeds": {
+   "code-c": "c9ccae598080c0fc",
+   "code-cpp": "98a73c9776c1252d",
+   "code-javascript": "d70cc3c9e401314a",
+   "code-python": "0676b97df2abd94b",
+   "code-rust": "dafe5f32416f5db8",
+   "code-shell-bash": "8ffc2e220438fcfa",
+   "code-sql": "ea4204b86bc624a7",
+   "machine-cli-flags": "d429f15ca6396ecd",
+   "machine-emails": "2af47866a019c1d2",
+   "machine-env-vars": "7c35d31587a89430",
+   "machine-filenames": "00f0adf24650365d",
+   "machine-identifiers": "996103db9de1ae35",
+   "machine-posix-paths": "d6e2dcd1410cbb9b",
+   "machine-shell-commands": "e1c1710e194c78e6",
+   "machine-urls": "51cce2cf9284945f",
+   "machine-versions-numbers-units": "3c997646c0fdb343",
+   "machine-windows-paths": "97fb0d5c4e64e510",
+   "malformed-broken-link": "0e1e08aa81289358",
+   "malformed-incomplete-display-dollar": "4f83ee7688c0e7d8",
+   "malformed-incomplete-paren-bracket": "7bee8b5115c8ddf2",
+   "malformed-malformed-nesting": "dd066547cfa36ae6",
+   "malformed-partial-html": "c7665b5835c4f764",
+   "malformed-truncated-json": "e4cf0ceede02ad66",
+   "malformed-unclosed-fence": "1d73bc6859d8089c",
+   "malformed-unclosed-tex-env": "bb004bc627c7e86f",
+   "malformed-unmatched-backtick": "4ef41d14ff26a1c4",
+   "malformed-unmatched-dollar": "993dea252b6dccae",
+   "math-align-env": "00f4d14f13df100e",
+   "math-aligned-env": "c8588575b4d6670b",
+   "math-bracket-tex": "33a93f9e553423ce",
+   "math-display-dollar": "ef2e73668781f569",
+   "math-equation-env": "9fe241fc97dc07ca",
+   "math-fractions": "9679a595b0948226",
+   "math-inline-dollar": "81b1fa56971dcac8",
+   "math-matrices": "46e893358f8e1cbb",
+   "math-paren-tex": "a22a5f27fc9dedd7",
+   "math-probability": "da05bd8022ee6795",
+   "math-summations": "6c6d714a9b4b668e",
+   "math-text-slovenian": "5eedbb1a0a6b3010",
+   "md-autolinks": "7bb94276d1c30a3b",
+   "md-blockquotes": "643e302fc4a2639b",
+   "md-emphasis": "75c817dc1c971153",
+   "md-fenced-code": "a4ffcb25055229de",
+   "md-headings": "c28c6750b4171448",
+   "md-images": "8655f38854d4b264",
+   "md-inline-code": "aa45fccfc6ce0086",
+   "md-links": "b306c28fbb3182ac",
+   "md-lists": "e7bb25ebeb776c58",
+   "md-raw-html": "5a21f46f0dd2d2db",
+   "md-strikethrough": "3060ac3e81af425e",
+   "md-strong": "1ff2c0f9b4136b9a",
+   "md-tables": "bb87e1895627eb98",
+   "prose-administration": "7dd9bc8c0089e8c5",
+   "prose-computing": "63b231b516a2255b",
+   "prose-cooking": "9e6c25a1723d27e0",
+   "prose-education": "82fb1aa4725fbf5f",
+   "prose-electronics": "b395891adcb86cbc",
+   "prose-engineering": "8f4f87b5a32c524d",
+   "prose-everyday-advice": "a48982754fa6df90",
+   "prose-history": "396e299b05269bdb",
+   "prose-literature": "fab58c0badbdc758",
+   "prose-math-explainer": "5f1b57e853fe3863",
+   "prose-medicine-explainer": "0c4d1842b399779f",
+   "prose-programming-explainer": "9354cb2325250b1f",
+   "prose-science": "6c6ededdbd198182",
+   "prose-sports": "a05c21d8d1409363",
+   "prose-statistics": "13ec109687c71548",
+   "prose-travel": "b7a827285d6cbfe7",
+   "structured-env-blocks": "029118f00a83ee7d",
+   "structured-html": "90c0f9fe45e16b55",
+   "structured-ini": "5446e18ccbe08254",
+   "structured-json": "0acd06b94e447ae3",
+   "structured-keyvalue": "c05b902a6529652a",
+   "structured-toml": "8cefd5a81368f0e8",
+   "structured-xml": "d73d29c8dbc08599",
+   "structured-yaml": "fe628ab05e4fbc52"
+  },
+  "note": "per-family seed of the RETAINED fragments (fresh 008-h seed stream, independent of the 008-c dev/hidden streams and the 008-g v2 stream); the five recovered families carry their recovery seeds (initial seeds disclosed in the recovery record); the v3 mashup seed is recorded in hidden-manifest-v3.json at composition time"
+ },
+ "generator": {
+  "endpoint": "private research endpoint identity omitted (007 convention)",
+  "deployment_class": "A100-FP8 (007 lineage deployment record)",
+  "model": "qwen3.8-27b",
+  "protocol": "Responses non-streaming",
+  "profile_sha256": "df556922f9264f4b685c19e9e138f86c577897bb703ae83cbb35847d71d564de",
+  "credential_source": "profile experimental_bearer_token (read as data; never printed/persisted/hashed/committed)",
+  "workers": 1,
+  "timeout_seconds": 300,
+  "parameter_note": "frozen 008-c request shape reused exactly (model/stream/store/input only); the endpoint's own sampling defaults applied (same recorded driver-fidelity gap as 008-c)"
+ },
+ "preflight": {
+  "status": "ok",
+  "call_index": 1,
+  "model": "qwen3.8-27b",
+  "response_sha256": "db8b8e836881534b3e62cf633db64f28af421e09feaae85bd3f3249912053c65"
+ },
+ "initial_run": {
+  "status": "overlap-failure",
+  "families_completed": 76,
+  "components_initial": 352,
+  "batch_receipts_ok": 82,
+  "failed_batch_receipts": 1,
+  "failed_batch_detail": "math-align-env b0 response was not a JSON array of exactly K strings; refilled by the single permitted retry (receipt preserved)",
+  "retries": 1,
+  "component_calls": 83,
+  "total_http_attempts": 84,
+  "final_overlap_assertion": {
+   "dev": 10,
+   "v1": 6,
+   "v2": 1,
+   "result": "FAILED (11 of 352 initial components: machine-filenames 4/4 exact dev duplicates; machine-identifiers 3/4 exact dev+v1 duplicates; machine-windows-paths 3/4 exact dev+v1 duplicates; machine-posix-paths 1/4 exact v2 duplicate)"
+  }
+ },
+ "recovery": {
+  "machine-filenames": {
+   "initial_seed": "5f88287eaaa0484d",
+   "seed": "00f0adf24650365d",
+   "batches": [
+    8
+   ],
+   "k_per_batch": 8,
+   "wanted": 4,
+   "components_before": 4,
+   "components_added": 1,
+   "overlap_discarded": 7,
+   "intra_v3_duplicate_discarded": 0,
+   "r2_excluded": 0,
+   "reason": "model-saturated recurrence: the initial stream produced exact dev/v1/v2-pool duplicates in this family (bounded K=8 regeneration with a new recorded seed, 008-g precedent; order scope item 7); machine-posix-paths is not on the predeclared known-saturated list but exhibits the same exact-duplicate saturation (disclosed)",
+   "file_sha256": "c74518985895b529f4a5c3f47f3bccd291387c357c8d43ae2f777a7bc7c2823f"
+  },
+  "machine-identifiers": {
+   "initial_seed": "d4dfc8e6ad4d12d1",
+   "seed": "996103db9de1ae35",
+   "batches": [
+    8
+   ],
+   "k_per_batch": 8,
+   "wanted": 4,
+   "components_before": 4,
+   "components_added": 2,
+   "overlap_discarded": 6,
+   "intra_v3_duplicate_discarded": 0,
+   "r2_excluded": 0,
+   "reason": "model-saturated recurrence: the initial stream produced exact dev/v1/v2-pool duplicates in this family (bounded K=8 regeneration with a new recorded seed, 008-g precedent; order scope item 7); machine-posix-paths is not on the predeclared known-saturated list but exhibits the same exact-duplicate saturation (disclosed)",
+   "file_sha256": "f1fa8554028095549209ab872098643b14637678a021dc630376634d0b1b6cac"
+  },
+  "machine-posix-paths": {
+   "initial_seed": "fdbc710f4d255cff",
+   "seed": "d6e2dcd1410cbb9b",
+   "batches": [
+    8
+   ],
+   "k_per_batch": 8,
+   "wanted": 4,
+   "components_before": 4,
+   "components_added": 4,
+   "overlap_discarded": 0,
+   "intra_v3_duplicate_discarded": 0,
+   "r2_excluded": 0,
+   "reason": "model-saturated recurrence: the initial stream produced exact dev/v1/v2-pool duplicates in this family (bounded K=8 regeneration with a new recorded seed, 008-g precedent; order scope item 7); machine-posix-paths is not on the predeclared known-saturated list but exhibits the same exact-duplicate saturation (disclosed)",
+   "file_sha256": "3a5dd90e56200644f4e6542290a4d13edad75c7e2d279fe95fd2f82887097db0"
+  },
+  "machine-windows-paths": {
+   "initial_seed": "472bfaed79900f8c",
+   "seed": "97fb0d5c4e64e510",
+   "batches": [
+    8
+   ],
+   "k_per_batch": 8,
+   "wanted": 4,
+   "components_before": 4,
+   "components_added": 2,
+   "overlap_discarded": 6,
+   "intra_v3_duplicate_discarded": 0,
+   "r2_excluded": 0,
+   "reason": "model-saturated recurrence: the initial stream produced exact dev/v1/v2-pool duplicates in this family (bounded K=8 regeneration with a new recorded seed, 008-g precedent; order scope item 7); machine-posix-paths is not on the predeclared known-saturated list but exhibits the same exact-duplicate saturation (disclosed)",
+   "file_sha256": "09afef6819b4dfaa33640e72433ffbeac47c8888632c9dd1dd24dbad76b13759"
+  }
+ },
+ "recovery_preflight": {
+  "status": "ok",
+  "model": "qwen3.8-27b",
+  "response_sha256": "db8b8e836881534b3e62cf633db64f28af421e09feaae85bd3f3249912053c65"
+ },
+ "budget": {
+  "nominal_component_calls": 352,
+  "component_calls": 87,
+  "retries": 1,
+  "recovery_calls": 4,
+  "total_http_attempts": 89,
+  "note": "component_calls counts every component-slot HTTP attempt (initial run + single retry per failed call + bounded recovery batches); total_http_attempts includes both prefights (initial + recovery)"
+ },
+ "failures": [
+  {
+   "stage": "component",
+   "family": "machine-filenames",
+   "error": "shortfall 1/4 after the single bounded K=8 round (family retained with 1 components; disclosed)",
+   "seed_note": "rec",
+   "non_fatal": true
+  },
+  {
+   "stage": "component",
+   "family": "machine-identifiers",
+   "error": "shortfall 2/4 after the single bounded K=8 round (family retained with 2 components; disclosed)",
+   "seed_note": "rec",
+   "non_fatal": true
+  },
+  {
+   "stage": "component",
+   "family": "machine-windows-paths",
+   "error": "shortfall 2/4 after the single bounded K=8 round (family retained with 2 components; disclosed)",
+   "seed_note": "rec",
+   "non_fatal": true
+  }
+ ],
+ "components": {
+  "total": 345,
+  "families": 76,
+  "by_family": {
+   "code-c": {
+    "category": "code",
+    "components": 4,
+    "file": "components/code/code-c.json",
+    "file_sha256": "381d8108cc6dbf5b9855a018d5bc343d675a47c4643193cf3b1c2b0a48e6bf53",
+    "file_bytes": 1703,
+    "batches": [
+     4
+    ],
+    "seed": "c9ccae598080c0fc",
+    "recovered": false,
+    "r2_excluded": 0
+   },
+   "code-cpp": {
+    "category": "code",
+    "components": 4,
+    "file": "components/code/code-cpp.json",
+    "file_sha256": "d5d4c72ec4c98fdc5cc00490b37e859c0a6517557e22025e8cfbde49ea9967b8",
+    "file_bytes": 2476,
+    "batches": [
+     4
+    ],
+    "seed": "98a73c9776c1252d",
+    "recovered": false,
+    "r2_excluded": 0
+   },
+   "code-javascript": {
+    "category": "code",
+    "components": 4,
+    "file": "components/code/code-javascript.json",
+    "file_sha256": "0b2bc50ce6e6dff4f070cde216af704b9ef9daae2a7462d2b000678ab8e2f991",
+    "file_bytes": 2292,
+    "batches": [
+     4
+    ],
+    "seed": "d70cc3c9e401314a",
+    "recovered": false,
+    "r2_excluded": 0
+   },
+   "code-python": {
+    "category": "code",
+    "components": 4,
+    "file": "components/code/code-python.json",
+    "file_sha256": "71bda73391d685e31a08dccdf60dc4a205c49905d0803173104e4da72b22f1e2",
+    "file_bytes": 1825,
+    "batches": [
+     4
+    ],
+    "seed": "0676b97df2abd94b",
+    "recovered": false,
+    "r2_excluded": 0
+   },
+   "code-rust": {
+    "category": "code",
+    "components": 4,
+    "file": "components/code/code-rust.json",
+    "file_sha256": "ee2fbd21021477c091e40c10b2ab9bd0ef8da52f351303da4fb44348ff0e9c94",
+    "file_bytes": 2690,
+    "batches": [
+     4
+    ],
+    "seed": "dafe5f32416f5db8",
+    "recovered": false,
+    "r2_excluded": 0
+   },
+   "code-shell-bash": {
+    "category": "code",
+    "components": 4,
+    "file": "components/code/code-shell-bash.json",
+    "file_sha256": "a447ad78b7b6e4c423cd4d0777f17f77c3c6e9f104c4c449a5ba0deed814e985",
+    "file_bytes": 2182,
+    "batches": [
+     4
+    ],
+    "seed": "8ffc2e220438fcfa",
+    "recovered": false,
+    "r2_excluded": 0
+   },
+   "code-sql": {
+    "category": "code",
+    "components": 4,
+    "file": "components/code/code-sql.json",
+    "file_sha256": "72c77baf504c48343dfcda0e613cdb65741f6c6f5402c6fc16a878f93f59b95b",
+    "file_bytes": 1979,
+    "batches": [
+     4
+    ],
+    "seed": "ea4204b86bc624a7",
+    "recovered": false,
+    "r2_excluded": 0
+   },
+   "machine-cli-flags": {
+    "category": "machine",
+    "components": 4,
+    "file": "components/machine/machine-cli-flags.json",
+    "file_sha256": "380fec7bee10cbda347378f98e859274f44959d8cb24d3846ca47611f7b891f7",
+    "file_bytes": 1601,
+    "batches": [
+     4
+    ],
+    "seed": "d429f15ca6396ecd",
+    "recovered": false,
+    "r2_excluded": 0
+   },
+   "machine-emails": {
+    "category": "machine",
+    "components": 4,
+    "file": "components/machine/machine-emails.json",
+    "file_sha256": "a1b860275f780d2c80b13d3a94742a81001d01eca6b369d37ec8bc4c038668a1",
+    "file_bytes": 1486,
+    "batches": [
+     4
+    ],
+    "seed": "2af47866a019c1d2",
+    "recovered": false,
+    "r2_excluded": 0
+   },
+   "machine-env-vars": {
+    "category": "machine",
+    "components": 4,
+    "file": "components/machine/machine-env-vars.json",
+    "file_sha256": "88f7d604d4490d5220aa799f539023705b21fa69e76deceac978a544d3630e28",
+    "file_bytes": 1487,
+    "batches": [
+     4
+    ],
+    "seed": "7c35d31587a89430",
+    "recovered": false,
+    "r2_excluded": 0
+   },
+   "machine-filenames": {
+    "category": "machine",
+    "components": 1,
+    "file": "components/machine/machine-filenames.json",
+    "file_sha256": "c74518985895b529f4a5c3f47f3bccd291387c357c8d43ae2f777a7bc7c2823f",
+    "file_bytes": 394,
+    "batches": [
+     8
+    ],
+    "seed": "00f0adf24650365d",
+    "recovered": true,
+    "r2_excluded": 0
+   },
+   "machine-identifiers": {
+    "category": "machine",
+    "components": 2,
+    "file": "components/machine/machine-identifiers.json",
+    "file_sha256": "f1fa8554028095549209ab872098643b14637678a021dc630376634d0b1b6cac",
+    "file_bytes": 725,
+    "batches": [
+     8
+    ],
+    "seed": "996103db9de1ae35",
+    "recovered": true,
+    "r2_excluded": 0
+   },
+   "machine-posix-paths": {
+    "category": "machine",
+    "components": 4,
+    "file": "components/machine/machine-posix-paths.json",
+    "file_sha256": "3a5dd90e56200644f4e6542290a4d13edad75c7e2d279fe95fd2f82887097db0",
+    "file_bytes": 1456,
+    "batches": [
+     8
+    ],
+    "seed": "d6e2dcd1410cbb9b",
+    "recovered": true,
+    "r2_excluded": 0
+   },
+   "machine-shell-commands": {
+    "category": "machine",
+    "components": 4,
+    "file": "components/machine/machine-shell-commands.json",
+    "file_sha256": "2e0a3a3b222454394c97735f3319f2cd56aa0de8513d9943903e9df8f341aa76",
+    "file_bytes": 1696,
+    "batches": [
+     4
+    ],
+    "seed": "e1c1710e194c78e6",
+    "recovered": false,
+    "r2_excluded": 0
+   },
+   "machine-urls": {
+    "category": "machine",
+    "components": 4,
+    "file": "components/machine/machine-urls.json",
+    "file_sha256": "7622c1501d8e59169f39d233c260e361e5a2feba27ac04c56c2fd9abad72914f",
+    "file_bytes": 1558,
+    "batches": [
+     4
+    ],
+    "seed": "51cce2cf9284945f",
+    "recovered": false,
+    "r2_excluded": 0
+   },
+   "machine-versions-numbers-units": {
+    "category": "machine",
+    "components": 4,
+    "file": "components/machine/machine-versions-numbers-units.json",
+    "file_sha256": "541a882e50fd737cfcd4d3d99e80932bb9091b47e2f8050661408fc4b0a88062",
+    "file_bytes": 1633,
+    "batches": [
+     4
+    ],
+    "seed": "3c997646c0fdb343",
+    "recovered": false,
+    "r2_excluded": 0
+   },
+   "machine-windows-paths": {
+    "category": "machine",
+    "components": 2,
+    "file": "components/machine/machine-windows-paths.json",
+    "file_sha256": "09afef6819b4dfaa33640e72433ffbeac47c8888632c9dd1dd24dbad76b13759",
+    "file_bytes": 809,
+    "batches": [
+     8
+    ],
+    "seed": "97fb0d5c4e64e510",
+    "recovered": true,
+    "r2_excluded": 0
+   },
+   "malformed-broken-link": {
+    "category": "malformed",
+    "components": 4,
+    "file": "components/malformed/malformed-broken-link.json",
+    "file_sha256": "3024e51c0f72535a276c60e3f9fa429fb84c9870610ca8a9d9fa4042fa71cd8f",
+    "file_bytes": 1690,
+    "batches": [
+     4
+    ],
+    "seed": "0e1e08aa81289358",
+    "recovered": false,
+    "r2_excluded": 0
+   },
+   "malformed-incomplete-display-dollar": {
+    "category": "malformed",
+    "components": 4,
+    "file": "components/malformed/malformed-incomplete-display-dollar.json",
+    "file_sha256": "2e7850ff5129752d1cc842d961b1814dd57993e198a8c10071a9cbba5b841937",
+    "file_bytes": 1865,
+    "batches": [
+     4
+    ],
+    "seed": "4f83ee7688c0e7d8",
+    "recovered": false,
+    "r2_excluded": 0
+   },
+   "malformed-incomplete-paren-bracket": {
+    "category": "malformed",
+    "components": 4,
+    "file": "components/malformed/malformed-incomplete-paren-bracket.json",
+    "file_sha256": "741c84a83150e553cb796c12ef604c885fd9c30bbd3f7a30e72c5de4e9ce2f0e",
+    "file_bytes": 1733,
+    "batches": [
+     4
+    ],
+    "seed": "7bee8b5115c8ddf2",
+    "recovered": false,
+    "r2_excluded": 0
+   },
+   "malformed-malformed-nesting": {
+    "category": "malformed",
+    "components": 4,
+    "file": "components/malformed/malformed-malformed-nesting.json",
+    "file_sha256": "32ba7caa8d9f7f387907c5c6ba091a971d8e48b034a91e0e510f389525b988ca",
+    "file_bytes": 1742,
+    "batches": [
+     4
+    ],
+    "seed": "dd066547cfa36ae6",
+    "recovered": false,
+    "r2_excluded": 0
+   },
+   "malformed-partial-html": {
+    "category": "malformed",
+    "components": 16,
+    "file": "components/malformed/malformed-partial-html.json",
+    "file_sha256": "c5f018e5cc9e7f009f856d42c2d923a7e271c34a841f0074ea3fbcd3423381f9",
+    "file_bytes": 6723,
+    "batches": [
+     4
+    ],
+    "seed": "c7665b5835c4f764",
+    "recovered": false,
+    "r2_excluded": 0
+   },
+   "malformed-truncated-json": {
+    "category": "malformed",
+    "components": 4,
+    "file": "components/malformed/malformed-truncated-json.json",
+    "file_sha256": "a1a2e50c051dcf988a9890c39be3d8e15bed54e390e35faaee335d4192a9fbe8",
+    "file_bytes": 1888,
+    "batches": [
+     4
+    ],
+    "seed": "e4cf0ceede02ad66",
+    "recovered": false,
+    "r2_excluded": 0
+   },
+   "malformed-unclosed-fence": {
+    "category": "malformed",
+    "components": 4,
+    "file": "components/malformed/malformed-unclosed-fence.json",
+    "file_sha256": "269b46a191fa0e325f6649469fc547c9139dd8214946c3964c69de2b31ad83ea",
+    "file_bytes": 1702,
+    "batches": [
+     4
+    ],
+    "seed": "1d73bc6859d8089c",
+    "recovered": false,
+    "r2_excluded": 0
+   },
+   "malformed-unclosed-tex-env": {
+    "category": "malformed",
+    "components": 4,
+    "file": "components/malformed/malformed-unclosed-tex-env.json",
+    "file_sha256": "fbdc9479b38cdcc520c3dae1af9d2adf0187cafd6844549ef3ca0cac6a8d9838",
+    "file_bytes": 1684,
+    "batches": [
+     4
+    ],
+    "seed": "bb004bc627c7e86f",
+    "recovered": false,
+    "r2_excluded": 0
+   },
+   "malformed-unmatched-backtick": {
+    "category": "malformed",
+    "components": 4,
+    "file": "components/malformed/malformed-unmatched-backtick.json",
+    "file_sha256": "20f194bd2eb0497d72820268bb797bca776e524d5d5e96a4fe2602eb0397d652",
+    "file_bytes": 1577,
+    "batches": [
+     4
+    ],
+    "seed": "4ef41d14ff26a1c4",
+    "recovered": false,
+    "r2_excluded": 0
+   },
+   "malformed-unmatched-dollar": {
+    "category": "malformed",
+    "components": 4,
+    "file": "components/malformed/malformed-unmatched-dollar.json",
+    "file_sha256": "0c49e4311a1837597d21a9e235f68537d38a38af69042fdb3b28fdec44469985",
+    "file_bytes": 1659,
+    "batches": [
+     4
+    ],
+    "seed": "993dea252b6dccae",
+    "recovered": false,
+    "r2_excluded": 0
+   },
+   "md-autolinks": {
+    "category": "markdown",
+    "components": 4,
+    "file": "components/markdown/md-autolinks.json",
+    "file_sha256": "8cb82f1203a15def7042e864735cf11c60297119b5b1874fbe5243ddfdf0d0c4",
+    "file_bytes": 2038,
+    "batches": [
+     4
+    ],
+    "seed": "7bb94276d1c30a3b",
+    "recovered": false,
+    "r2_excluded": 0
+   },
+   "md-blockquotes": {
+    "category": "markdown",
+    "components": 4,
+    "file": "components/markdown/md-blockquotes.json",
+    "file_sha256": "1abfc0cafe3b5fe59af3ce259c0a0448c32f0f914e5d3cafd92d5d267632079a",
+    "file_bytes": 1465,
+    "batches": [
+     4
+    ],
+    "seed": "643e302fc4a2639b",
+    "recovered": false,
+    "r2_excluded": 0
+   },
+   "md-emphasis": {
+    "category": "markdown",
+    "components": 4,
+    "file": "components/markdown/md-emphasis.json",
+    "file_sha256": "52da60841628440438ca8fb83837d6b29f911b7a623e4e7aa87ed146c9058016",
+    "file_bytes": 1724,
+    "batches": [
+     4
+    ],
+    "seed": "75c817dc1c971153",
+    "recovered": false,
+    "r2_excluded": 0
+   },
+   "md-fenced-code": {
+    "category": "markdown",
+    "components": 4,
+    "file": "components/markdown/md-fenced-code.json",
+    "file_sha256": "446df83603375ffe5d6d098231ee41eb3bc5e925c3b91d6c4e3ec8661dbb9007",
+    "file_bytes": 1539,
+    "batches": [
+     4
+    ],
+    "seed": "a4ffcb25055229de",
+    "recovered": false,
+    "r2_excluded": 0
+   },
+   "md-headings": {
+    "category": "markdown",
+    "components": 4,
+    "file": "components/markdown/md-headings.json",
+    "file_sha256": "d4f6719dc9952111d5306e71df49306e1523608ac5141636ac8268fa4f763133",
+    "file_bytes": 1545,
+    "batches": [
+     4
+    ],
+    "seed": "c28c6750b4171448",
+    "recovered": false,
+    "r2_excluded": 0
+   },
+   "md-images": {
+    "category": "markdown",
+    "components": 4,
+    "file": "components/markdown/md-images.json",
+    "file_sha256": "1ebd0cd18d0ebbd95c8e1299550f2bf22a0791c2b2bb2002233c4fb391ad6b1d",
+    "file_bytes": 1927,
+    "batches": [
+     4
+    ],
+    "seed": "8655f38854d4b264",
+    "recovered": false,
+    "r2_excluded": 0
+   },
+   "md-inline-code": {
+    "category": "markdown",
+    "components": 4,
+    "file": "components/markdown/md-inline-code.json",
+    "file_sha256": "20afd225e493974525e4f3260c1ea6c41ffa1a5890921dc4dd45a8d33ffd9fb8",
+    "file_bytes": 1632,
+    "batches": [
+     4
+    ],
+    "seed": "aa45fccfc6ce0086",
+    "recovered": false,
+    "r2_excluded": 0
+   },
+   "md-links": {
+    "category": "markdown",
+    "components": 4,
+    "file": "components/markdown/md-links.json",
+    "file_sha256": "493c0dcc839697724f871f6706ccfc97631513b15c5295a564b4af5f8684ab62",
+    "file_bytes": 2346,
+    "batches": [
+     4
+    ],
+    "seed": "b306c28fbb3182ac",
+    "recovered": false,
+    "r2_excluded": 0
+   },
+   "md-lists": {
+    "category": "markdown",
+    "components": 4,
+    "file": "components/markdown/md-lists.json",
+    "file_sha256": "1271de7de8d7c5f5e8d7f20d5c0034c8a02b3d9202af2d2bf7e922025a0bb472",
+    "file_bytes": 1550,
+    "batches": [
+     4
+    ],
+    "seed": "e7bb25ebeb776c58",
+    "recovered": false,
+    "r2_excluded": 0
+   },
+   "md-raw-html": {
+    "category": "markdown",
+    "components": 4,
+    "file": "components/markdown/md-raw-html.json",
+    "file_sha256": "237a6f94b6adb6df85a0c2f673febe5c3daaff7c4ce9ef70622cb64cd8b67697",
+    "file_bytes": 1685,
+    "batches": [
+     4
+    ],
+    "seed": "5a21f46f0dd2d2db",
+    "recovered": false,
+    "r2_excluded": 0
+   },
+   "md-strikethrough": {
+    "category": "markdown",
+    "components": 4,
+    "file": "components/markdown/md-strikethrough.json",
+    "file_sha256": "0b5add43b151acdcbecc5005b955294c17766f4efd289db65087738cf4222391",
+    "file_bytes": 1935,
+    "batches": [
+     4
+    ],
+    "seed": "3060ac3e81af425e",
+    "recovered": false,
+    "r2_excluded": 0
+   },
+   "md-strong": {
+    "category": "markdown",
+    "components": 4,
+    "file": "components/markdown/md-strong.json",
+    "file_sha256": "4dd091b6086024dedf054b847316341639a81aa907056c1b23ae4c31c2f2d4e9",
+    "file_bytes": 1816,
+    "batches": [
+     4
+    ],
+    "seed": "1ff2c0f9b4136b9a",
+    "recovered": false,
+    "r2_excluded": 0
+   },
+   "md-tables": {
+    "category": "markdown",
+    "components": 4,
+    "file": "components/markdown/md-tables.json",
+    "file_sha256": "cc5dbb2596cb216a57b8974de3b203a1dbcaa5928c2ec5d2aa9ef2cacb39ad35",
+    "file_bytes": 1518,
+    "batches": [
+     4
+    ],
+    "seed": "bb87e1895627eb98",
+    "recovered": false,
+    "r2_excluded": 0
+   },
+   "math-align-env": {
+    "category": "math",
+    "components": 4,
+    "file": "components/math/math-align-env.json",
+    "file_sha256": "df7095c978b3b1129d40b7476f4d592b03f9f1f78ae370db21604808d48d9c9b",
+    "file_bytes": 1817,
+    "batches": [
+     4
+    ],
+    "seed": "00f4d14f13df100e",
+    "recovered": false,
+    "r2_excluded": 0
+   },
+   "math-aligned-env": {
+    "category": "math",
+    "components": 4,
+    "file": "components/math/math-aligned-env.json",
+    "file_sha256": "a6f71c46bafed2af603b36b143d8d4482366bb7e5ae83ab4c6c235d999b51fc2",
+    "file_bytes": 1845,
+    "batches": [
+     4
+    ],
+    "seed": "c8588575b4d6670b",
+    "recovered": false,
+    "r2_excluded": 0
+   },
+   "math-bracket-tex": {
+    "category": "math",
+    "components": 4,
+    "file": "components/math/math-bracket-tex.json",
+    "file_sha256": "97abbab3571ec08f845d82506acb3a1d6e38d1fb404ef04d179f4dd7ed373ae6",
+    "file_bytes": 1658,
+    "batches": [
+     4
+    ],
+    "seed": "33a93f9e553423ce",
+    "recovered": false,
+    "r2_excluded": 0
+   },
+   "math-display-dollar": {
+    "category": "math",
+    "components": 4,
+    "file": "components/math/math-display-dollar.json",
+    "file_sha256": "14f87f9af323996639a0e52553bbe7d0008e3453e577c88df97155bdeda57273",
+    "file_bytes": 1773,
+    "batches": [
+     4
+    ],
+    "seed": "ef2e73668781f569",
+    "recovered": false,
+    "r2_excluded": 0
+   },
+   "math-equation-env": {
+    "category": "math",
+    "components": 4,
+    "file": "components/math/math-equation-env.json",
+    "file_sha256": "22fb85e56c27caf2164da34b1284a1197806751c51e246ed7377ed5d67bab9e3",
+    "file_bytes": 2099,
+    "batches": [
+     4
+    ],
+    "seed": "9fe241fc97dc07ca",
+    "recovered": false,
+    "r2_excluded": 0
+   },
+   "math-fractions": {
+    "category": "math",
+    "components": 4,
+    "file": "components/math/math-fractions.json",
+    "file_sha256": "17430abbc32c65504cc2e28c889e77f4c0175af80af4ceb9d9382b1da037ba19",
+    "file_bytes": 1476,
+    "batches": [
+     4
+    ],
+    "seed": "9679a595b0948226",
+    "recovered": false,
+    "r2_excluded": 0
+   },
+   "math-inline-dollar": {
+    "category": "math",
+    "components": 4,
+    "file": "components/math/math-inline-dollar.json",
+    "file_sha256": "efe4aca5f52e85cbb55b424451ae5ed8ff52608b1687b524b76386c7cc482214",
+    "file_bytes": 1607,
+    "batches": [
+     4
+    ],
+    "seed": "81b1fa56971dcac8",
+    "recovered": false,
+    "r2_excluded": 0
+   },
+   "math-matrices": {
+    "category": "math",
+    "components": 4,
+    "file": "components/math/math-matrices.json",
+    "file_sha256": "dcf4d0494f8257ef3bbcc1045584d656cf92cfd887e77cfc5b4aead8e3e522fd",
+    "file_bytes": 1686,
+    "batches": [
+     4
+    ],
+    "seed": "46e893358f8e1cbb",
+    "recovered": false,
+    "r2_excluded": 0
+   },
+   "math-paren-tex": {
+    "category": "math",
+    "components": 4,
+    "file": "components/math/math-paren-tex.json",
+    "file_sha256": "732aa164e095436e5deb83aa18f928f92ee5df7c8f1d9f45241bd72d9502b6a4",
+    "file_bytes": 1737,
+    "batches": [
+     4
+    ],
+    "seed": "a22a5f27fc9dedd7",
+    "recovered": false,
+    "r2_excluded": 0
+   },
+   "math-probability": {
+    "category": "math",
+    "components": 4,
+    "file": "components/math/math-probability.json",
+    "file_sha256": "3b9218ab6314421ec37e652710d5f105d36b86a815f6746971f2630909d94d3d",
+    "file_bytes": 1578,
+    "batches": [
+     4
+    ],
+    "seed": "da05bd8022ee6795",
+    "recovered": false,
+    "r2_excluded": 0
+   },
+   "math-summations": {
+    "category": "math",
+    "components": 4,
+    "file": "components/math/math-summations.json",
+    "file_sha256": "13610b306922731dad49e75130c5d228dc073f3324d1109b772119714e0bf0d9",
+    "file_bytes": 1634,
+    "batches": [
+     4
+    ],
+    "seed": "6c6d714a9b4b668e",
+    "recovered": false,
+    "r2_excluded": 0
+   },
+   "math-text-slovenian": {
+    "category": "math",
+    "components": 4,
+    "file": "components/math/math-text-slovenian.json",
+    "file_sha256": "06ff5792f38e6b5b0619bea9868ace4448cf42800f7963e6c38e39a54a1506f6",
+    "file_bytes": 1839,
+    "batches": [
+     4
+    ],
+    "seed": "5eedbb1a0a6b3010",
+    "recovered": false,
+    "r2_excluded": 0
+   },
+   "prose-administration": {
+    "category": "prose",
+    "components": 4,
+    "file": "components/prose/prose-administration.json",
+    "file_sha256": "f908a294d0cfd04000e67e43d264b98a1704e570d4ad7179f786eba1d2460383",
+    "file_bytes": 2515,
+    "batches": [
+     4
+    ],
+    "seed": "7dd9bc8c0089e8c5",
+    "recovered": false,
+    "r2_excluded": 0
+   },
+   "prose-computing": {
+    "category": "prose",
+    "components": 4,
+    "file": "components/prose/prose-computing.json",
+    "file_sha256": "5223fb0934198ad53dad411883af68761853eaa1a0fcdb9b39172419a323051f",
+    "file_bytes": 2760,
+    "batches": [
+     4
+    ],
+    "seed": "63b231b516a2255b",
+    "recovered": false,
+    "r2_excluded": 0
+   },
+   "prose-cooking": {
+    "category": "prose",
+    "components": 4,
+    "file": "components/prose/prose-cooking.json",
+    "file_sha256": "47ef4dbbc241e8c59c8ea9148f556e5f320365f6d1080c78e1690abb7ba8e702",
+    "file_bytes": 2676,
+    "batches": [
+     4
+    ],
+    "seed": "9e6c25a1723d27e0",
+    "recovered": false,
+    "r2_excluded": 0
+   },
+   "prose-education": {
+    "category": "prose",
+    "components": 4,
+    "file": "components/prose/prose-education.json",
+    "file_sha256": "853fcf0ff44f8c25f68763c3a5a00bc24a4ab8d99b83b1d44de1a140be1f2b0e",
+    "file_bytes": 3102,
+    "batches": [
+     4
+    ],
+    "seed": "82fb1aa4725fbf5f",
+    "recovered": false,
+    "r2_excluded": 0
+   },
+   "prose-electronics": {
+    "category": "prose",
+    "components": 4,
+    "file": "components/prose/prose-electronics.json",
+    "file_sha256": "d9e308d9857dfb3dad895bf5853f783769b2031f631ed1c2824f4032033a3de9",
+    "file_bytes": 2370,
+    "batches": [
+     4
+    ],
+    "seed": "b395891adcb86cbc",
+    "recovered": false,
+    "r2_excluded": 0
+   },
+   "prose-engineering": {
+    "category": "prose",
+    "components": 4,
+    "file": "components/prose/prose-engineering.json",
+    "file_sha256": "0fde1decd3ddb610eddd081080a8f73630917fe34d8133a05b62ba5db62d0ee7",
+    "file_bytes": 2955,
+    "batches": [
+     4
+    ],
+    "seed": "8f4f87b5a32c524d",
+    "recovered": false,
+    "r2_excluded": 0
+   },
+   "prose-everyday-advice": {
+    "category": "prose",
+    "components": 4,
+    "file": "components/prose/prose-everyday-advice.json",
+    "file_sha256": "db7648a3247017cd04a890deb812516e18f8f7bb7aa3398ea31ad0029bf73652",
+    "file_bytes": 2748,
+    "batches": [
+     4
+    ],
+    "seed": "a48982754fa6df90",
+    "recovered": false,
+    "r2_excluded": 0
+   },
+   "prose-history": {
+    "category": "prose",
+    "components": 4,
+    "file": "components/prose/prose-history.json",
+    "file_sha256": "3993d4b1f49c5b73863b9879952db36e8e8f41bb55492926af826870fe43c05c",
+    "file_bytes": 2437,
+    "batches": [
+     4
+    ],
+    "seed": "396e299b05269bdb",
+    "recovered": false,
+    "r2_excluded": 0
+   },
+   "prose-literature": {
+    "category": "prose",
+    "components": 4,
+    "file": "components/prose/prose-literature.json",
+    "file_sha256": "7956460a94816e0a79de0620fce45e16fe9c5ad696aed70d8247b988ce66cd93",
+    "file_bytes": 2714,
+    "batches": [
+     4
+    ],
+    "seed": "fab58c0badbdc758",
+    "recovered": false,
+    "r2_excluded": 0
+   },
+   "prose-math-explainer": {
+    "category": "prose",
+    "components": 4,
+    "file": "components/prose/prose-math-explainer.json",
+    "file_sha256": "40f59cd674e6f48ef94fba4218eb0ff6da88cdb9c77cb370ed5315ead625fced",
+    "file_bytes": 2454,
+    "batches": [
+     4
+    ],
+    "seed": "5f1b57e853fe3863",
+    "recovered": false,
+    "r2_excluded": 0
+   },
+   "prose-medicine-explainer": {
+    "category": "prose",
+    "components": 4,
+    "file": "components/prose/prose-medicine-explainer.json",
+    "file_sha256": "6af11840f4a2b1f93053ca1792a5e71787d951e0aa786cc573beefdf66355e11",
+    "file_bytes": 2646,
+    "batches": [
+     4
+    ],
+    "seed": "0c4d1842b399779f",
+    "recovered": false,
+    "r2_excluded": 0
+   },
+   "prose-programming-explainer": {
+    "category": "prose",
+    "components": 4,
+    "file": "components/prose/prose-programming-explainer.json",
+    "file_sha256": "bac42e78bcb90ed368730717d0b49aab9f362a653174d8b08aacad9f5edeac59",
+    "file_bytes": 2689,
+    "batches": [
+     4
+    ],
+    "seed": "9354cb2325250b1f",
+    "recovered": false,
+    "r2_excluded": 0
+   },
+   "prose-science": {
+    "category": "prose",
+    "components": 4,
+    "file": "components/prose/prose-science.json",
+    "file_sha256": "f11303e5b65c6bbd29a4b38d1a8bf5d65f25879f0e0a5e1aca53530895f52803",
+    "file_bytes": 2828,
+    "batches": [
+     4
+    ],
+    "seed": "6c6ededdbd198182",
+    "recovered": false,
+    "r2_excluded": 0
+   },
+   "prose-sports": {
+    "category": "prose",
+    "components": 4,
+    "file": "components/prose/prose-sports.json",
+    "file_sha256": "d2a1d2e74a19ee7bff485000983d49f63b5309d493c03f90a42e0b5c7b901476",
+    "file_bytes": 2286,
+    "batches": [
+     4
+    ],
+    "seed": "a05c21d8d1409363",
+    "recovered": false,
+    "r2_excluded": 0
+   },
+   "prose-statistics": {
+    "category": "prose",
+    "components": 4,
+    "file": "components/prose/prose-statistics.json",
+    "file_sha256": "1ae4c5e7bbb5d3f02cbb1987bbcdeb49ba4c5a133bc58371b94d55d7c0111b24",
+    "file_bytes": 2762,
+    "batches": [
+     4
+    ],
+    "seed": "13ec109687c71548",
+    "recovered": false,
+    "r2_excluded": 0
+   },
+   "prose-travel": {
+    "category": "prose",
+    "components": 4,
+    "file": "components/prose/prose-travel.json",
+    "file_sha256": "d03ed81ec5c63313277e9704c9f39641926355e9fe7aa35c961c6b15efb7d9e3",
+    "file_bytes": 2786,
+    "batches": [
+     4
+    ],
+    "seed": "b7a827285d6cbfe7",
+    "recovered": false,
+    "r2_excluded": 0
+   },
+   "structured-env-blocks": {
+    "category": "structured",
+    "components": 4,
+    "file": "components/structured/structured-env-blocks.json",
+    "file_sha256": "b6cb4dc1698de50b6e8073b362ebc2f3ed71888dd08edb22a033a08ec9154aba",
+    "file_bytes": 2085,
+    "batches": [
+     4
+    ],
+    "seed": "029118f00a83ee7d",
+    "recovered": false,
+    "r2_excluded": 0
+   },
+   "structured-html": {
+    "category": "structured",
+    "components": 16,
+    "file": "components/structured/structured-html.json",
+    "file_sha256": "abee9018b552d6f94d1c893c276f01d9268129b74dadaa7743065dd810887ea5",
+    "file_bytes": 7731,
+    "batches": [
+     4
+    ],
+    "seed": "90c0f9fe45e16b55",
+    "recovered": false,
+    "r2_excluded": 0
+   },
+   "structured-ini": {
+    "category": "structured",
+    "components": 4,
+    "file": "components/structured/structured-ini.json",
+    "file_sha256": "154fcbc5c6ff2c7d94c180b6b9418190726834729a917cacb4a4267ed7c6ed24",
+    "file_bytes": 2237,
+    "batches": [
+     4
+    ],
+    "seed": "5446e18ccbe08254",
+    "recovered": false,
+    "r2_excluded": 0
+   },
+   "structured-json": {
+    "category": "structured",
+    "components": 4,
+    "file": "components/structured/structured-json.json",
+    "file_sha256": "2bd52453efae2c2d0cd23652deb529d0ba71434a19b155adf94a2e2690310dff",
+    "file_bytes": 2110,
+    "batches": [
+     4
+    ],
+    "seed": "0acd06b94e447ae3",
+    "recovered": false,
+    "r2_excluded": 0
+   },
+   "structured-keyvalue": {
+    "category": "structured",
+    "components": 16,
+    "file": "components/structured/structured-keyvalue.json",
+    "file_sha256": "1bc715dc9e47e058e146469854d64d82e5b7f50fc56f620413fe91b03f21677c",
+    "file_bytes": 7901,
+    "batches": [
+     8,
+     8
+    ],
+    "seed": "c05b902a6529652a",
+    "recovered": false,
+    "r2_excluded": 0
+   },
+   "structured-toml": {
+    "category": "structured",
+    "components": 4,
+    "file": "components/structured/structured-toml.json",
+    "file_sha256": "bc47170d3b71dde93928711530a5cbf6a5add2934aa5d07c249f7b239e8c5700",
+    "file_bytes": 2122,
+    "batches": [
+     4
+    ],
+    "seed": "8cefd5a81368f0e8",
+    "recovered": false,
+    "r2_excluded": 0
+   },
+   "structured-xml": {
+    "category": "structured",
+    "components": 16,
+    "file": "components/structured/structured-xml.json",
+    "file_sha256": "0892d637386f11988bc265429055cc4942ba017700341ecf748403aa0d9900da",
+    "file_bytes": 7899,
+    "batches": [
+     4
+    ],
+    "seed": "d73d29c8dbc08599",
+    "recovered": false,
+    "r2_excluded": 0
+   },
+   "structured-yaml": {
+    "category": "structured",
+    "components": 4,
+    "file": "components/structured/structured-yaml.json",
+    "file_sha256": "058a904b01b22b3939bf8c69034645519aeb2fd01371ea2014dc6b44b49da72a",
+    "file_bytes": 2220,
+    "batches": [
+     4
+    ],
+    "seed": "fe628ab05e4fbc52",
+    "recovered": false,
+    "r2_excluded": 0
+   }
+  }
+ },
+ "overlap_assertion": {
+  "rule": "zero exact-component overlap: no v3 fragment sha256 equals any committed dev-pool fragment sha256, any v1 hidden-pool fragment sha256, or any v2 hidden-pool fragment sha256 (hash-only comparison; no content echo)",
+  "dev_pool_components": 641,
+  "v1_hidden_pool_components": 588,
+  "v2_hidden_pool_components": 340,
+  "v3_components": 345,
+  "initial_run_overlap": {
+   "dev": 10,
+   "v1": 6,
+   "v2": 1
+  },
+  "overlap_dev": 0,
+  "overlap_v1": 0,
+  "overlap_v2": 0,
+  "passed": true
+ },
+ "wall_seconds": 263.8,
+ "privacy": "no raw outputs, no endpoint value, no bearer, no private paths in this file"
+}
