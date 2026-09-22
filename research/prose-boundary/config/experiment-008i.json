@@ -1,0 +1,120 @@
+{
+ "schema": "008i-experiment-config/1",
+ "order": "008-i",
+ "frozen_note": "New frozen protection identity for the 008-i corrective round: recorded after the dev regression gate (requirement 6) passed and BEFORE any v4 component generation (requirement 7). The implementation is frozen from this census; the v4 hidden set is generated, sealed, and evaluated against exactly this identity (re-asserted by the v4 evaluation wrapper).",
+ "round_identity": {
+  "objective": "008",
+  "branch": "oap/008-prose-boundary-qualification",
+  "pr": 9,
+  "base_sha": "954d758b0d6308ce1811bccb25ab7d347ad99b7c",
+  "activation_sha": "bd8d60e5a24c32f7f3a6257254bf611e1ff5ebc6",
+  "main_sha_unchanged": "7d2cc9ee37c1fc8c2a3eba238f89bc9bb242f9d9"
+ },
+ "trigger_decision": {
+  "surface": "research/curated/prose_boundary.py (the single predeclared xml-fragment trigger decision D1-5; nothing else on this surface changed)",
+  "decision": "EXTEND-IF-EVIDENCED: PRIMARY branch (bounded trigger refinement)",
+  "predeclared_fallback_rule": "008-i scope item 4 / Governance D1-5: if the committed evidence did not cleanly support the refinement - any new safety exposure on the dev corpus or the 008-g/008-h batches, any 008-i dev-edge exposure beyond the predeclared 21 B shape (ii) attribution, or any focused positive/negative test failure - the decision is FALLBACK (not a STOP): the curated file is NOT modified, the xml-fragment class boundary is documented in policy v5 with the v3 evidence cited, e02 is re-labeled to the split form, and the dev regression driver is re-run",
+  "fallback_triggered": false,
+  "evidence": {
+   "dev_regression_file": "research/prose-boundary/results/hidden-acceptance-v4/dev-regression-008i.json",
+   "dev_regression_sha256": "f7959a7fda2adc33b8f95887dcfe45325ddeccd0623caf2c17c8e3bcf9756d24",
+   "status": "PASS",
+   "run_a_008h_implementation": "dev corpus 0/526,315 B; 008-g batch 0/702 B; 008-h batch 0/666 B; 008-i batch 21/188 B - exactly the predeclared shape (ii) attribution (e02, the 29 B dialect-vocabulary tag token with the 8 B interior number + identifier class-covered) and nothing else",
+   "run_b_008i_final_implementation": "dev corpus 0/526,315 B; 008-g batch 0/702 B; 008-h batch 0/666 B; 008-i batch 0/188 B - zero on all four sets; dev corpus, 008-g and 008-h raw outputs byte-identical between runs A and B",
+   "prose_suppression_rate": 0.01570195190675161,
+   "prose_suppression_delta_vs_008c_pp": 0.032982894442701305,
+   "prose_suppression_delta_vs_008g_pp": 0.021674473490918,
+   "prose_suppression_delta_vs_008h_pp": 0.0,
+   "bound_pp": 1.0,
+   "attribution": "no stop condition fired; the single 008-i batch exposure under run A is the measured pre-existing shape (the v3 hidden shape (ii) family), closed by the refinement under run B"
+  },
+  "implementation": {
+   "change": "the single added trigger condition _tag_non_ascii_attr_name (dialect attribute-scan simulation of the pinned pulldown-cmark 0.13.4 scan_attribute_name + outer attribute loop) applied in the xml-fragment class's opening branch (fire when the tag name is dialect-vocabulary but the tag fails inline recognition solely because of a non-ASCII attribute name; span = the tag token only, a matching vocabulary closing tag stays structural) and standalone-closing branch (fire when the closing token carries a non-ASCII attribute name; span = the token); ASCII attribute behaviour is byte-identical to the 008-h implementation (dev corpus, 008-g and 008-h batch raw outputs byte-identical between runs)",
+   "shape_guards_unchanged": "letter/underscore immediately after '<' then letters/digits/hyphens (plus the v3 dots/colons), same-line closing or self-closing or attribute space, 2000 cp bound; never on comparison operators, never on an opening bracket followed by digits, never on a lone bracket; _xml_name_triggers and the non-vocabulary name path unchanged (008-h EXTEND behaviour byte-identical); vocabulary-name abstention for ASCII-attribute tags preserved (v2 parity)",
+   "negative_controls": "focused test battery: recognized-name ASCII-attribute tags abstain (v2 parity); non-vocabulary names (diacritic or shape names) fire by the name trigger with byte-identical pair spans (008-h); comparison operators and lone brackets never fire; ASCII attribute-shape failures (digit name-start, bare '=', unterminated quote) abstain per the single-condition boundary (documented in policy v5); non-ASCII inside quoted attribute values never fires (dialect-legal)"
+  },
+  "policy_consequence": "structural-policy-v5.json carries the D1-5 PRIMARY decision record (with the v3 evidence and dev-edge e02), the composition contract (R1 extension + corner disclosure, display-dollar guard, T6 clean-URL admission), and the T6 observation (not a class); no policy-exposed dialect-ambiguity class is added or removed"
+ },
+ "policy": {
+  "active": "research/prose-boundary/config/structural-policy-v5.json",
+  "v3_sha256": "7ff6646e3c11d1241cb1c85bd96f08e3f0db08e73d4eb4a4e97fac0c17e1828f",
+  "v4_sha256": "f564d9f87ef01a893d6cd6bb36f6cf99a0d353a4dde4e4c4c024942eb969e76f",
+  "v5_sha256": "915f70d34ecc69ab6fea0b273f24ca20f251b6e181bd5e9281c5c012de2fe542",
+  "v4_to_v5_pair": "f564d9f87ef01a893d6cd6bb36f6cf99a0d353a4dde4e4c4c024942eb969e76f -> 915f70d34ecc69ab6fea0b273f24ca20f251b6e181bd5e9281c5c012de2fe542",
+  "v3_in_tree": "byte-identical at all 008-i heads (git-verified; the v3 runtime policy is unchanged)",
+  "v4_in_tree": "byte-identical at all 008-i heads (git-verified; no v4 mutation)",
+  "v5_role": "policy of record for this round: the v4 evaluation wrapper reads v5; the runtime residual layer loads the committed v3 policy file unmodified (v5 is additive over v4 - composition contract, D1-5 record, T6 observation, census pointer)",
+  "new_policy_exposed_dialect_ambiguity_classes": [],
+  "unchanged": "determinism and scope clauses carried unchanged from v4; additive changelog field"
+ },
+ "composition_contract": {
+  "builder": "research/prose-boundary/tools/prose_boundary_builder.py",
+  "builder_sha256": "ccbec1c9f8c4636d125f86aac231c9bb016d917fa4b7ddd5854055d9158fa187",
+  "note": "builder sha is the composition/label-construction identity (not part of the runtime frozen_census above; the v4 generation and seal assert builder blob-identity against HEAD)",
+  "rules": {
+   "R1": "EXTENDED (008-i scope item 3a): a fenced or indented code component is never composed on the line immediately after ANY dialect HTML block-start line (block types 1-7: opening-tag lines included, types 1-5 terminators, pre/style/script/textarea and unterminated comment/PI/CDATA/decl lines), minus the 008-h test-pinned bare-single-complete-opening-tag corner (disclosed residual); on fire the builder inserts exactly one blank line (template-owned NEUTRAL delimiter), recorded in the document composition provenance (composition_provenance.r1_blank_line_insertions); the builder asserts the invariant fail-closed",
+   "R2": "a structured-keyvalue component containing a list-item-style line (list marker plus space) with paired emphasis markers or quoted emphasis-like content is not admitted to the v4 component pool (hash-only matching criterion and the excluded count recorded in generation-identity-008i.json)",
+   "R3": "defined in the builder and unit-tested; INACTIVE (applies only to a fallback xml trigger decision, which did not occur)",
+   "DD": "DISPLAY-DOLLAR ADJACENCY GUARD (008-i scope item 3b): a malformed-incomplete-display-dollar component is never composed immediately before a component whose first line opens a display-dollar expression; the builder inserts exactly one NEUTRAL blank-line barrier (the predeclared mechanism; no substitution needed), recorded in the provenance (composition_provenance.display_dollar_barrier_insertions); the builder asserts the invariant fail-closed; no new TeX residual class",
+   "T6": "T6 LINK-DESTINATION ADMISSION (008-i scope item 3c): in the v4 pool, T6 link-destination fragments must be clean URLs (machine-urls first, then any clean-URL machine fragment; builder-asserted with a fail-closed LookupError on a non-admitted pool); already-committed dev documents with non-clean destinations are NOT re-labeled (dev data frozen; documented as a measured observation in policy v5, not a class)"
+  },
+  "label_source_split": "per labeled region: 'construction' = role fixed by explicit composition specification (template glue, parser-structural roles, barrier insertions, and the v5 policy-class-documented POLICY_EXPOSED shapes); 'oracle-refined' = role fixed by the frozen residual spec (PROTECTED regions whose protection comes from a residual class: config run, number, identifier, url, xml-fragment); recorded in the v4 labels and manifest (census)",
+  "assertions": "assert_no_parser_participation() retained in build_set; assert_composition_invariants() fail-closed re-check of the R1 + DD guards on the final segment list (called from compose and after under-size extension); the label oracle (the implementation residual function) is unchanged in meaning"
+ },
+ "implementation": {
+  "frozen_census": {
+   "research/curated/prose_boundary.py": "c57e2901e52af962546ee83651850e22c91655a8cc822f2c43b1284da16b8c50",
+   "research/curated/protected.py": "27f22eaee129190b880851b958a8aa5a38d357cb4e711d70e762b2353d32e78f",
+   "research/prose-boundary/config/structural-policy-v3.json": "7ff6646e3c11d1241cb1c85bd96f08e3f0db08e73d4eb4a4e97fac0c17e1828f",
+   "research/prose-boundary/config/structural-policy-v5.json": "915f70d34ecc69ab6fea0b273f24ca20f251b6e181bd5e9281c5c012de2fe542"
+  },
+  "note": "the 008-i four-file frozen protection census (008-h used v3+v4; 008-i uses v3+v5); protected.py byte-identical to the 008-g/008-h identity; the runtime protection identity re-asserted by the v4 evaluation wrapper",
+  "helper": {
+   "binary": "prose-boundary-meas (pinned pulldown-cmark 0.13.4 adapter)",
+   "sha256": "5df9a11d56b5bdec90c3ca09298802723975306f77e43e74ad1a72eb427c44bf"
+  }
+ },
+ "dev_regression": {
+  "file": "research/prose-boundary/results/hidden-acceptance-v4/dev-regression-008i.json",
+  "file_sha256": "f7959a7fda2adc33b8f95887dcfe45325ddeccd0623caf2c17c8e3bcf9756d24",
+  "status": "PASS",
+  "run_a_008h_implementation_protected_bytes_exposed": {
+   "dev_corpus": 0,
+   "batch_008g": 0,
+   "batch_008h": 0,
+   "batch_008i": 21
+  },
+  "run_b_008i_final_implementation_protected_bytes_exposed": {
+   "dev_corpus": 0,
+   "batch_008g": 0,
+   "batch_008h": 0,
+   "batch_008i": 0
+  },
+  "dev_prose_suppression_rate": 0.01570195190675161,
+  "dev_prose_suppression_delta_vs_008g_pp": 0.021674473490918,
+  "dev_prose_suppression_delta_vs_008h_pp": 0.0,
+  "bound_pp": 1.0,
+  "committed_before": "any v4 generation or hidden evaluation (requirement 6)"
+ },
+ "shape_analysis": {
+  "file": "research/prose-boundary/results/hidden-acceptance-v4/shape-analysis-008i.json",
+  "file_sha256": "ac6d6d5af81aadeea14548b33f5cca4fe7e829f761e48533f9e310135b2e7d75",
+  "summary": "data-restricted fix specification for the 364 B v3 construction exposure: three named bounded shapes - (i) 2 x 139 B html multi-tag fence absorption (R1 extension), (ii) 2 x 30 B xml non-ASCII attribute class boundary (D1-5), (iii) 1 x 26 B display-dollar pairing across malformed (DD guard) - plus the pre-existing T6 observation (O1); per-shape fix specs and v4 invariants; committed before any implementation change (git ordering)"
+ },
+ "model_budget": {
+  "authorized_calls": [
+   "v4 component generation (authorized test-data generation; qwen3.8-27b 007-lineage deployment record, endpoint omitted per 007 convention; fresh seed distinct from dd1a19a598160b36; bounded K=8 zero-overlap recovery with every discarded duplicate disclosed, 008-g/008-h precedent; at most 96 HTTP attempts total including preflights and retries, 008-h precedent 89)"
+  ],
+  "linguistic_pipeline_calls": 0,
+  "objective_009_touches": 0,
+  "note": "attempt counts and the pre-seal diagnostic recorded in generation-identity-008i.json; no other model calls of any kind"
+ },
+ "d0_choices": [
+  "dev regression gate: two committed runs - run A under the 008-h implementation (attribution baseline) and run B under the 008-i final implementation (gate result); the 008-i batch run A exposure (21 B, e02) is the predeclared shape (ii) attribution target, not a stop",
+  "D1-5 PRIMARY span semantics: the tag token only (opening or standalone closing), not a pair-to-closing span - a matching vocabulary closing tag is dialect-recognized/structural, so a pair span would over-protect content (over-suppression bounded)",
+  "ASCII attribute-shape failures (digit name-start, bare '=', unterminated quote, non-name-start punctuation) abstain: the 008-i boundary is the single D1-5 condition (non-ASCII attribute name); other dialect failure shapes stay policy-exposed candidate prose with their existing residual coverage (documented in policy v5)",
+  "R1 corner: the 008-h test-pinned bare-single-complete-opening-tag line remains excluded from the R1 extension (disclosed residual, monitored by the pre-seal diagnostic)",
+  "label_source split convention carried unchanged from 008-h; dev-edge batch fail-closed validation: PROTECTED regions fully covered AND POLICY_EXPOSED regions fully exposed"
+ ],
+ "privacy": "no private paths, no raw content, no endpoint values or credential material in this file"
+}

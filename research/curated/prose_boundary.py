@@ -796,6 +796,71 @@ def _xml_name_triggers(name: str) -> bool:
     return RE_XML_DIALECT_NAME.fullmatch(name) is None
 
 
+RE_ATTR_NAME_START = frozenset("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz_:"
+                               )
+RE_ATTR_NAME_CONT = frozenset("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789_:.-")
+RE_ATTR_WS = frozenset(" \t")
+RE_UNQUOTED_VALUE_STOP = frozenset("\"'=><` \n\r")
+
+
+def _tag_non_ascii_attr_name(attrs: str) -> bool:
+    """008-i D1-5: single trigger condition of the xml-fragment class.
+
+    Simulates the dialect attribute scan (pinned pulldown-cmark 0.13.4
+    scan_attribute_name + the outer attribute loop) over the region
+    between a dialect-vocabulary tag name and the closing '>'. Returns
+    True exactly when the scan fails because of a non-ASCII attribute
+    name: a non-ASCII character at an attribute-name position, or a
+    non-ASCII character immediately after a name-continuation run (the
+    outer loop then finds no whitespace separator and no '/' / '>'
+    terminator). Quoted values are skipped opaquely (non-ASCII inside a
+    quoted value is dialect-legal and never triggers); unquoted values
+    are skipped by the dialect character set. ASCII attribute-shape
+    failures are dialect-legal-or-out-of-boundary for 008-i (single
+    D1-5 condition, documented in the v5 policy) and abstain.
+    """
+    i = 0
+    n = len(attrs)
+    while i < n:
+        while i < n and attrs[i] in RE_ATTR_WS:
+            i += 1
+        if i >= n:
+            return False  # only separators left: the dialect closes the tag
+        c = attrs[i]
+        if c == "/":
+            return False  # self-closing marker position: recognized
+        if ord(c) > 0x7F:
+            return True  # non-ASCII attribute name: tag unrecognised
+        if c not in RE_ATTR_NAME_START:
+            return False  # ASCII non-name-start char: outside D1-5 boundary
+        i += 1
+        while i < n and attrs[i] in RE_ATTR_NAME_CONT:
+            i += 1
+        if i < n and ord(attrs[i]) > 0x7F:
+            # non-ASCII non-space right after the name continuation: the
+            # dialect outer loop cannot advance (no separator, not a
+            # terminator) - the tag is unrecognised
+            return True
+        j = i
+        while j < n and attrs[j] in RE_ATTR_WS:
+            j += 1
+        if j < n and attrs[j] == "=":
+            j += 1
+            while j < n and attrs[j] in RE_ATTR_WS:
+                j += 1
+            if j < n and attrs[j] in "\"'":
+                q = attrs[j]
+                k = j + 1
+                while k < n and attrs[k] != q:
+                    k += 1
+                i = k + 1 if k < n else n
+            else:
+                while j < n and attrs[j] not in RE_UNQUOTED_VALUE_STOP:
+                    j += 1
+                i = j
+    return False
+
+
 def _xml_fragment_spans(text: str) -> list[tuple[int, int]]:
     """xml-fragment spans (cp coords), deterministic left-to-right scan.
 
@@ -815,9 +880,21 @@ def _xml_fragment_spans(text: str) -> list[tuple[int, int]]:
         if m is not None:
             name = m.group(1)
             if not _xml_name_triggers(name):
-                # recognized tag name: the parser owns these bytes
-                # (InlineHtml, never candidate prose) - skip the token
-                pos = m.end()
+                if _tag_non_ascii_attr_name(m.group(2)):
+                    # 008-i D1-5: dialect-vocabulary name, but the tag as
+                    # a whole fails inline recognition because of a
+                    # non-ASCII attribute name - its bytes are candidate
+                    # prose. Protect the tag token only: a matching
+                    # closing tag (vocabulary, no attributes) stays
+                    # recognized/structural, so a pair span would
+                    # over-protect content (over-suppression bounded).
+                    end = min(m.end(), lt + XML_FRAGMENT_LIMIT)
+                    spans.append((lt, end))
+                    pos = m.end()
+                else:
+                    # recognized tag name: the parser owns these bytes
+                    # (InlineHtml, never candidate prose) - skip the token
+                    pos = m.end()
                 continue
             start = lt
             if m.group(2).endswith("/"):
@@ -843,8 +920,13 @@ def _xml_fragment_spans(text: str) -> list[tuple[int, int]]:
             continue
         mc = RE_XML_CLOSE.match(text, lt)
         if mc is not None:
-            if _xml_name_triggers(mc.group(1)):
-                # standalone closing tag token of a non-recognized name
+            if _xml_name_triggers(mc.group(1)) or _tag_non_ascii_attr_name(
+                mc.group(0)[2 + len(mc.group(1)):-1]
+            ):
+                # standalone closing tag token of a non-recognized name,
+                # or (008-i D1-5) a dialect-vocabulary name whose closing
+                # tag carries a non-ASCII attribute name and so fails
+                # inline recognition - the token bytes are candidate prose
                 end = min(mc.end(), lt + XML_FRAGMENT_LIMIT)
                 spans.append((lt, end))
                 pos = mc.end()
