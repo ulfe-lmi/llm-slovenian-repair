@@ -25322,5 +25322,34 @@
   },
   "label_source_convention": "construction = role fixed by explicit composition specification (template glue, parser-structural roles, and the v4 policy-class-documented POLICY_EXPOSED shapes); oracle-refined = role fixed by the frozen residual spec (PROTECTED regions whose protection comes from a residual class: config run, number, xml-fragment)",
   "note": "visible dev evidence only; acceptance is the sealed v3 hidden set"
+ },
+ "defect_dev_008i": {
+  "order": "008-i",
+  "purpose": "visible dev dialect-edge batch (008-i scope item 5): machine-known labels for the three v3 construction-exposure shapes under the 008-i guards - (i) structured-html block ending in a complete multi-tag opening line with the R1-extended NEUTRAL barrier and a fenced code component with an internal blank line (protected), (ii) single-line multi-tag XML with a dialect-vocabulary-name tag carrying a non-ASCII attribute name (branch-dependent: PROTECTED under the D1-5 primary refinement, POLICY_EXPOSED under the documented-boundary fallback; the measured 21 B tag-token exposure under the 008-h implementation is the predeclared gate-A attribution target), (iii) malformed-incomplete-display-dollar with the one-NEUTRAL-blank-line barrier before a complete display-dollar component (protected; malformed $$ policy-exposed), (iv) T6 link with a non-clean-URL destination retained as NEUTRAL-split label material (machine URL tokens PROTECTED oracle-refined via the residual url class; inter-token space NEUTRAL; no whole-region PROTECTED); fail-closed validation (PROTECTED fully covered; POLICY_EXPOSED fully exposed) per the 008-h dev-edge precedent",
+  "root": "research/prose-boundary/corpus/defect-dev-008i/",
+  "documents": {
+   "count": 4,
+   "total_bytes": 2127,
+   "min_bytes": 449,
+   "max_bytes": 575,
+   "documents_by_file": {
+    "e01.json": {
+     "sha256": "c82ec5bcfe0ff63912a01d1c237e2c0831ad9d3016bae508c793c170fdd94905",
+     "size": 575
+    },
+    "e02.json": {
+     "sha256": "36e7680376b8939cda3df6fcaac8cb1cddd0461435dadeaffc35257abc9fef07",
+     "size": 449
+    },
+    "e03.json": {
+     "sha256": "5c334716d1191b0e9f316b4d27eed343e461b296dafcb023063366649fadae76",
+     "size": 546
+    },
+    "e04.json": {
+     "sha256": "be0180c0209ac5cd6f5798087fa1d9950f9d4deabdf8fff37b5ae4ce3b5d287e",
+     "size": 557
+    }
+   }
+  }
  }
 }

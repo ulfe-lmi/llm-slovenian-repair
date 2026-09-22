@@ -1,0 +1,133 @@
+{
+ "doc_id": "e04",
+ "byte_length": 82,
+ "cp_length": 82,
+ "regions": [
+  {
+   "start_byte": 0,
+   "end_byte": 10,
+   "start_cp": 0,
+   "end_cp": 10,
+   "component_id": "template",
+   "category": "template",
+   "role": "PROSE",
+   "label_source": "construction",
+   "template_owned": true
+  },
+  {
+   "start_byte": 10,
+   "end_byte": 11,
+   "start_cp": 10,
+   "end_cp": 11,
+   "component_id": "template",
+   "category": "template",
+   "role": "NEUTRAL",
+   "label_source": "construction",
+   "template_owned": true
+  },
+  {
+   "start_byte": 11,
+   "end_byte": 12,
+   "start_cp": 11,
+   "end_cp": 12,
+   "component_id": "template",
+   "category": "template",
+   "role": "NEUTRAL",
+   "label_source": "construction",
+   "template_owned": true
+  },
+  {
+   "start_byte": 12,
+   "end_byte": 18,
+   "start_cp": 12,
+   "end_cp": 18,
+   "component_id": "defect-008i-e04p",
+   "category": "prose",
+   "role": "PROSE",
+   "label_source": "construction",
+   "template_owned": false
+  },
+  {
+   "start_byte": 18,
+   "end_byte": 20,
+   "start_cp": 18,
+   "end_cp": 20,
+   "component_id": "template",
+   "category": "template",
+   "role": "NEUTRAL",
+   "label_source": "construction",
+   "template_owned": true
+  },
+  {
+   "start_byte": 20,
+   "end_byte": 47,
+   "start_cp": 20,
+   "end_cp": 47,
+   "component_id": "defect-008i-e04",
+   "category": "machine",
+   "role": "PROTECTED",
+   "label_source": "oracle-refined",
+   "template_owned": false
+  },
+  {
+   "start_byte": 47,
+   "end_byte": 48,
+   "start_cp": 47,
+   "end_cp": 48,
+   "component_id": "defect-008i-e04",
+   "category": "machine",
+   "role": "NEUTRAL",
+   "label_source": "construction",
+   "template_owned": false
+  },
+  {
+   "start_byte": 48,
+   "end_byte": 72,
+   "start_cp": 48,
+   "end_cp": 72,
+   "component_id": "defect-008i-e04",
+   "category": "machine",
+   "role": "PROTECTED",
+   "label_source": "oracle-refined",
+   "template_owned": false
+  },
+  {
+   "start_byte": 72,
+   "end_byte": 73,
+   "start_cp": 72,
+   "end_cp": 73,
+   "component_id": "template",
+   "category": "template",
+   "role": "NEUTRAL",
+   "label_source": "construction",
+   "template_owned": true
+  },
+  {
+   "start_byte": 73,
+   "end_byte": 74,
+   "start_cp": 73,
+   "end_cp": 74,
+   "component_id": "template",
+   "category": "template",
+   "role": "NEUTRAL",
+   "label_source": "construction",
+   "template_owned": true
+  },
+  {
+   "start_byte": 74,
+   "end_byte": 82,
+   "start_cp": 74,
+   "end_cp": 82,
+   "component_id": "template",
+   "category": "template",
+   "role": "PROSE",
+   "label_source": "construction",
+   "template_owned": true
+  }
+ ],
+ "invariants": {
+  "tiling_complete": true,
+  "no_contradictory_overlaps": true,
+  "cp_range_exact": true
+ }
+}

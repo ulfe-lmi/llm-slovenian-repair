@@ -32,7 +32,7 @@ jobs:
         shell: bash
         run: |
           python312="$(uv python find 3.12)"
-          "$python312" scripts/verify_development_baseline.py --temp-parent "$RUNNER_TEMP"
+          "$python312" scripts/verify_development_baseline.py --temp-parent "$RUNNER_TEMP" --command-timeout 600
 
       - name: Assert checkout has no temporary environment artifacts
         shell: bash

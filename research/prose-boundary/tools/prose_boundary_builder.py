@@ -12,6 +12,26 @@ code-point ranges + component provenance IDs + expected role per region).
        produce that adjacency the builder inserts exactly one blank line
        (recorded in the document composition provenance; the inserted bytes
        are template-owned NEUTRAL delimiter).
+
+008-i composition contract extension (released; order 008-i scope item 3):
+  R1 EXT - R1 fires for ALL dialect HTML block-start lines (pulldown-cmark
+       0.13.4 types 1-7: closing-tag lines, opening-tag lines with
+       continuation, unterminated comment/PI/CDATA/declaration lines,
+       pre/style/script/textarea lines), not only closing-tag lines; the
+       008-h test-pinned corner (a bare single complete opening tag at EOL)
+       stays unbarred by the preserved 008-h contract (disclosed in
+       REPORT-008I.md boundary_fidelity).
+  DD - display-dollar adjacency guard: a
+       malformed-incomplete-display-dollar component (unterminated $$
+       opener) is never composed immediately before a component whose
+       first line opens a display-dollar expression; on fire the builder
+       inserts exactly one NEUTRAL-labeled blank line (the predeclared
+       barrier, verified to break the dialect's cross-pairing).
+  T6 ADMISSION - T6-prose-link-prose link-destination fragments must be
+       clean URLs (https?:// with no whitespace/angle brackets), making
+       the v3 prescan invariant explicit and builder-asserted.
+  INVARIANTS - after both guards, the builder re-checks fail-closed that
+       no guarded adjacency survives in the final segment list.
   R2 - structured-keyvalue components containing a list-item-style line
        (list marker plus space) with paired emphasis markers or quoted
        emphasis-like content are not admitted to the 008-h (v3) component
@@ -384,16 +404,19 @@ def first_line_starts_code_block(text: str) -> bool:
 
 
 def apply_r1(segs: list[tuple[str, str, str, str]]) -> tuple[list[tuple[str, str, str, str]], int]:
-    """R1 composition contract (order 008-h scope item 3b): a fenced or
-    indented code component is never composed on the line immediately after
-    an HTML closing-tag line. Blocks = maximal runs of consecutive same-kind
-    segments (template glue vs component). The adjacency exists in the
-    document exactly when: the separator between two component blocks is
-    exactly one LF (no blank line), the previous block's text does not end
-    with a newline, its last line is a complete HTML closing-tag line, and
-    the next block's first line opens a fenced/indented code block. In that
-    case exactly one blank line (template-owned NEUTRAL delimiter) is
-    inserted. Returns (new_segments, insertions)."""
+    """R1 composition contract (order 008-h scope item 3b; EXTENDED per
+    order 008-i scope item 3a): a fenced or indented code component is
+    never composed on the line immediately after an HTML block-start line
+    (is_html_block_start_line: the dialect HTML block types 1-7, minus the
+    008-h test-pinned bare-single-opening-tag corner). Blocks = maximal
+    runs of consecutive same-kind segments (template glue vs component).
+    The adjacency exists in the document exactly when: the separator
+    between two component blocks is exactly one LF (no blank line), the
+    previous block's text does not end with a newline, its last line is an
+    HTML block-start line, and the next block's first line opens a
+    fenced/indented code block. In that case exactly one blank line
+    (template-owned NEUTRAL delimiter) is inserted. Returns
+    (new_segments, insertions)."""
     blocks: list[tuple[str, list[tuple[str, str, str, str]]]] = []
     for s in segs:
         kind = "template" if s[1].startswith("template") else "component"
@@ -417,7 +440,8 @@ def apply_r1(segs: list[tuple[str, str, str, str]]) -> tuple[list[tuple[str, str
         next_text = "".join(s[0] for s in after_block)
         if prev_text.endswith("\n"):
             continue  # a blank line already separates; the HTML block ends there
-        if not last_line_is_html_closing_tag(prev_text):
+        if not is_html_block_start_line(
+                prev_text.rstrip("\n").rsplit("\n", 1)[-1]):
             continue
         if not first_line_starts_code_block(next_text):
             continue
@@ -448,6 +472,212 @@ def r3_xml_diacritic_tag_excluded(fragment: str) -> bool:
         if any(ord(ch) > 127 for ch in name):
             return True
     return False
+
+
+# --------------------------------------------------------------------------
+# 008-i composition contract (order 008-i scope item 3): R1 extension to
+# dialect HTML block-start lines, display-dollar adjacency guard, T6
+# link-destination admission, fail-closed composition invariants.
+# Dialect ground truth: pulldown-cmark 0.13.4 vendored source
+# (firstpass.rs / scanners.rs; HTML_TAGS below is the dialect's 62-tag
+# block-level list verbatim) and pre-work verification against the pinned
+# helper (sha256 5df9a11d56b5bdec90c3ca09298802723975306f77e43e74ad1a72eb427c44bf).
+# --------------------------------------------------------------------------
+MALFORMED_INCOMPLETE_DISPLAY_DOLLAR = "malformed-incomplete-display-dollar"
+
+# The dialect's HTML_TAGS block-level list (scanners.rs, case-insensitive).
+HTML_TAGS_BLOCK_LEVEL = frozenset((
+    "address", "article", "aside", "base", "basefont", "blockquote", "body",
+    "caption", "center", "col", "colgroup", "dd", "details", "dialog", "dir",
+    "div", "dl", "dt", "fieldset", "figcaption", "figure", "footer", "form",
+    "frame", "frameset", "h1", "h2", "h3", "h4", "h5", "h6", "head", "header",
+    "hr", "html", "iframe", "legend", "li", "link", "main", "menu",
+    "menuitem", "nav", "noframes", "ol", "optgroup", "option", "p", "param",
+    "search", "section", "summary", "table", "tbody", "td", "tfoot", "th",
+    "thead", "title", "tr", "track", "ul",
+))
+RE_TYPE1_HEAD = re.compile(r"^[ ]{0,3}<(?:pre|style|script|textarea)")
+RE_TYPE6_HEAD = re.compile(r"^[ ]{0,3}</?([A-Za-z0-9]+)")
+RE_BARE_COMPLETE_OPEN_TAG_LINE = re.compile(
+    r"^[ ]{0,3}<[A-Za-z][A-Za-z0-9]*(?:[ \t][^<>]*)?[ \t]*/?>[ \t]*$")
+
+
+def is_html_block_start_line(line: str) -> bool:
+    """True iff ``line`` starts a pulldown-cmark 0.13.4 HTML block whose
+    consumption runs past the end of the line, i.e. it can absorb the line
+    composed immediately after it (008-i scope item 3a). Types 1-5:
+    <pre|style|script|textarea + EOL/ws/> (to the closing-tag line,
+    through blank lines); <!-- to -->; <? to ?>; <![CDATA[ to ]]>; <! +
+    ASCII alpha to the first >. Type 6: < or </ + a name in
+    HTML_TAGS_BLOCK_LEVEL (case-insensitive) + EOL/space/tab/CR/>. Type 7:
+    a complete single-line tag ending at EOL. Types 1-7 all consume lines
+    until a blank line (or their terminator / the closing-tag line), so a
+    fence composed on the following line is absorbed.
+
+    The 008-g/008-h closing-tag rule (C1) is preserved verbatim. The
+    008-h test-pinned corner - a bare single COMPLETE OPENING tag at EOL
+    (byte-frozen test test_r1_not_on_non_closing_tag, which the order's
+    '008-h R1/R2/R3 contract otherwise stay intact' clause preserves) -
+    stays excluded; the residual gap it defines is the disclosed R1 corner
+    (REPORT-008I.md boundary_fidelity), monitored by the pre-seal
+    diagnostic and the as-is sealing rule."""
+    # C1 - the released 008-g/008-h closing-tag line (byte-identical rule).
+    if RE_HTML_CLOSING_TAG_LINE.match(line):
+        return True
+    # C3e - type 1: pre/style/script/textarea + EOL/ws/>, always continues.
+    m = RE_TYPE1_HEAD.match(line)
+    if m:
+        i = m.end()
+        return i >= len(line) or line[i] in " \t\r\n>"
+    # C3 - types 2-5: unterminated on the same line. A terminator present
+    # on the line ends the block on the line (no risk to the next line).
+    if re.match(r"^[ ]{0,3}<!--", line):
+        return "-->" not in line
+    if re.match(r"^[ ]{0,3}<!\[CDATA\[", line):
+        return "]]>" not in line
+    if re.match(r"^[ ]{0,3}<\?", line):
+        return "?>" not in line
+    if re.match(r"^[ ]{0,3}<![A-Za-z]", line):
+        return ">" not in line
+    # C2 - type 6/7 opening-tag lines (the 008-i extension): the line
+    # starts a block-level tag and carries continuation (a second tag,
+    # trailing content, or an incomplete tag) - a bare single complete
+    # opening tag at EOL is the disclosed 008-h pinned corner.
+    m = RE_TYPE6_HEAD.match(line)
+    if m and m.group(1).lower() in HTML_TAGS_BLOCK_LEVEL:
+        i = m.end()
+        head_ok = (i >= len(line) or line[i] in " \t\r\n>"
+                   or line[i:i + 2] == "/>")
+        if head_ok and not RE_BARE_COMPLETE_OPEN_TAG_LINE.match(line):
+            return True
+    return False
+
+
+def t6_link_destination_clean(fragment: str) -> bool:
+    """008-i scope item 3(c) T6 ADMISSION: True iff the fragment (stripped)
+    is exactly one clean URL - https?:// with no whitespace and no angle
+    brackets. The v3 pool invariant (prescan-confirmed clean machine-urls,
+    REPORT-008H.md section 6) made explicit and builder-asserted."""
+    return RE_URL.fullmatch(fragment.strip()) is not None
+
+
+def _composition_blocks(segs: list[tuple[str, str, str, str]]):
+    """Maximal runs of consecutive same-kind segments (kind = template vs
+    component) - the block model shared by apply_r1, the display-dollar
+    guard, the barrier recount, and the composition invariants."""
+    blocks: list[tuple[str, list[tuple[str, str, str, str]]]] = []
+    for s in segs:
+        kind = "template" if s[1].startswith("template") else "component"
+        if blocks and blocks[-1][0] == kind:
+            blocks[-1][1].append(s)
+        else:
+            blocks.append((kind, [s]))
+    return blocks
+
+
+def apply_display_dollar_guard(segs: list[tuple[str, str, str, str]],
+                               comp_family: dict[str, str]) -> tuple[list, int]:
+    """008-i scope item 3(b) DISPLAY-DOLLAR ADJACENCY GUARD: a
+    malformed-incomplete-display-dollar component (unterminated $$ opener)
+    is never composed immediately before a component whose first line
+    opens a display-dollar expression (a first line of exactly $$); on
+    fire, exactly one blank line (template-owned NEUTRAL delimiter) is
+    inserted. The predeclared barrier: verified in 008-i pre-work against
+    the pinned helper that one blank line breaks the dialect's
+    cross-pairing (a $$ degrades to literal paragraph text when a blank
+    line precedes the next $$ line, so the complete component then pairs
+    with its own closer). The adjacency test mirrors R1's block
+    conditions exactly (single-LF template separator between two
+    component blocks; previous block text without a trailing newline).
+    Returns (new_segments, insertions)."""
+    blocks = _composition_blocks(segs)
+    out: list[tuple[str, str, str, str]] = []
+    insertions = 0
+    for bi, (kind, block) in enumerate(blocks):
+        out.extend(block)
+        if kind != "component" or bi + 2 >= len(blocks):
+            continue
+        next_kind, next_block = blocks[bi + 1]
+        after_kind, after_block = blocks[bi + 2]
+        if next_kind != "template" or after_kind != "component":
+            continue
+        if "".join(s[0] for s in next_block) != "\n":
+            continue
+        prev_text = "".join(s[0] for s in block)
+        if prev_text.endswith("\n"):
+            continue  # a blank line already separates; no cross-pairing
+        if comp_family.get(block[-1][1]) != MALFORMED_INCOMPLETE_DISPLAY_DOLLAR:
+            continue
+        if "".join(s[0] for s in after_block).split("\n", 1)[0] != "$$":
+            continue
+        out.append(("\n", "template", "NEUTRAL", CONSTRUCTION))
+        insertions += 1
+    return out, insertions
+
+
+def count_display_dollar_barrier_insertions(segs: list[tuple[str, str, str, str]],
+                                            comp_family: dict[str, str]) -> int:
+    """Recount the display-dollar barriers from a final segment list: a
+    malformed-incomplete-display-dollar component block separated from a
+    block whose first line is $$ by a two-LF template run (the one-LF
+    template separator plus the one inserted NEUTRAL barrier line)."""
+    blocks = _composition_blocks(segs)
+    count = 0
+    for bi, (kind, block) in enumerate(blocks):
+        if kind != "component" or bi + 2 >= len(blocks):
+            continue
+        next_kind, next_block = blocks[bi + 1]
+        after_kind, after_block = blocks[bi + 2]
+        if next_kind != "template" or after_kind != "component":
+            continue
+        if "".join(s[0] for s in next_block) != "\n\n":
+            continue
+        if comp_family.get(block[-1][1]) != MALFORMED_INCOMPLETE_DISPLAY_DOLLAR:
+            continue
+        if "".join(s[0] for s in after_block).split("\n", 1)[0] != "$$":
+            continue
+        count += 1
+    return count
+
+
+def assert_composition_invariants(segs: list[tuple[str, str, str, str]],
+                                  comp_family: dict[str, str]) -> None:
+    """008-i fail-closed re-check of the two composition guards on the
+    FINAL segment list (called from compose after both guards have run):
+    (R1) no fenced or indented code component starts on the line
+    following an HTML block-start line without a neutral barrier; (DD) no
+    malformed-incomplete-display-dollar component is immediately followed
+    by a display-dollar opener without a neutral barrier. Both checks use
+    the same predicates the guards use (including the disclosed bare-
+    single-opening-tag corner exclusion), so a violated invariant means a
+    guard misfire - the document build fails closed (AssertionError)."""
+    blocks = _composition_blocks(segs)
+    for bi, (kind, block) in enumerate(blocks):
+        if kind != "component" or bi + 2 >= len(blocks):
+            continue
+        next_kind, next_block = blocks[bi + 1]
+        after_kind, after_block = blocks[bi + 2]
+        if next_kind != "template" or after_kind != "component":
+            continue
+        if "".join(s[0] for s in next_block) != "\n":
+            continue
+        prev_text = "".join(s[0] for s in block)
+        if prev_text.endswith("\n"):
+            continue
+        next_text = "".join(s[0] for s in after_block)
+        last_line = prev_text.rstrip("\n").rsplit("\n", 1)[-1]
+        if (is_html_block_start_line(last_line)
+                and first_line_starts_code_block(next_text)):
+            raise AssertionError(
+                "R1 invariant violated: an HTML block-start line is "
+                "immediately followed by a fenced/indented code component "
+                "without a neutral barrier")
+        if (comp_family.get(block[-1][1]) == MALFORMED_INCOMPLETE_DISPLAY_DOLLAR
+                and next_text.split("\n", 1)[0] == "$$"):
+            raise AssertionError(
+                "display-dollar invariant violated: a malformed-incomplete-"
+                "display-dollar component is immediately followed by a "
+                "display-dollar opener without a neutral barrier")
 
 def _covered_map(text: str, spans: list[tuple[int, int]]) -> list[str]:
     """Per-cp coverage marks: 'P' protected, else '.' (gaps classified later)."""
@@ -906,10 +1136,15 @@ RUNAWAY_TEX_FAMILIES = frozenset(
 T4_TABLE_SEP = "| --- | --- |\n"
 
 
-def compose(rng: random.Random, pool: dict[str, list[dict]], template: str, used: set[str]) -> tuple[list[tuple[str, str, str, str]], int]:
+def compose(rng: random.Random, pool: dict[str, list[dict]], template: str,
+            used: set[str],
+            family_map: dict[str, str] | None = None) -> tuple[list[tuple[str, str, str, str]], int]:
     """Return (segment list (text, component_id, role, label_source), R1
     blank-line insertion count). Raises LookupError on pool exhaustion for
-    the required categories of this template."""
+    the required categories of this template. The 008-i display-dollar
+    guard and the fail-closed composition invariants run on every
+    composition; ``family_map`` (component_id -> family) may be passed to
+    avoid rebuilding it per call (build_set does)."""
     segs: list[tuple[str, str, str, str]] = []
 
     if template == "T1-prose-inlinecode-prose":
@@ -992,13 +1227,32 @@ def compose(rng: random.Random, pool: dict[str, list[dict]], template: str, used
         segs.extend(label_prose(p3["fragment"], p3["component_id"]))
     elif template == "T6-prose-link-prose":
         p1 = pick_any(rng, pool, ("prose",), used)
-        urlc = pick(rng, pool, "machine-urls", used) or pick_any(rng, pool, ("machine",), used)
+        # 008-i scope item 3(c) T6 ADMISSION REFINEMENT: the link
+        # destination must be a clean URL (the v3 prescan invariant, now
+        # builder-asserted); machine-urls first, then any other clean-URL
+        # machine fragment. Non-clean fragments are never composed as T6
+        # destinations (the whole-region PROTECTED vs inter-token-space
+        # shape, REPORT-008H.md section 6 observation O1).
+        url_opts = [c for c in pool.get("machine-urls", [])
+                    if c["component_id"] not in used
+                    and t6_link_destination_clean(c["fragment"])]
+        if not url_opts:
+            url_opts = [c for fam in pool for c in pool[fam]
+                        if c["category"] == "machine"
+                        and fam != "machine-urls"
+                        and c["component_id"] not in used
+                        and t6_link_destination_clean(c["fragment"])]
         p2 = pick_any(rng, pool, ("prose",), used)
-        if not all((p1, urlc, p2)):
+        if not url_opts or not all((p1, p2)):
             raise LookupError("pool exhausted")
+        urlc = rng.choice(url_opts)
         for c in (p1, urlc, p2):
             used.add(c["component_id"])
-        url = first_url(urlc["fragment"]) or one_line(urlc["fragment"], 60)
+        url = urlc["fragment"].strip()
+        if not t6_link_destination_clean(urlc["fragment"]):
+            raise AssertionError(
+                "T6 admission violated: non-clean link destination "
+                "(builder-asserted, order 008-i scope item 3c)")
         label = one_line(p2["fragment"], 30)
         segs.extend(label_prose(p1["fragment"], p1["component_id"]))
         segs.append((" ", "template", "NEUTRAL", CONSTRUCTION))
@@ -1178,6 +1432,12 @@ def compose(rng: random.Random, pool: dict[str, list[dict]], template: str, used
             segs.extend(label_malformed(comp["fragment"], comp["family"], comp["component_id"]))
 
     segs, r1_count = apply_r1(segs)
+    fmap = family_map or {c["component_id"]: c["family"]
+                          for fam in pool for c in pool[fam]}
+    segs, dd_count = apply_display_dollar_guard(segs, fmap)
+    assert dd_count == count_display_dollar_barrier_insertions(segs, fmap), \
+        "display-dollar guard count mismatch (fail-closed)"
+    assert_composition_invariants(segs, fmap)
     return segs, r1_count
 
 
@@ -1375,10 +1635,12 @@ def build_pattern_scanners() -> dict[str, object]:
 
 
 def finalize_document(doc: dict, doc_id: str, seed_hex: str, template: str,
-                      r1_count: int = 0) -> tuple[dict, dict]:
+                      r1_count: int = 0, dd_count: int = 0) -> tuple[dict, dict]:
     """Emit the document + label records. Label invariants are asserted (fail
     closed). Decorations are already applied in segment space upstream.
-    ``r1_count`` is recorded in the document's composition provenance."""
+    ``r1_count`` and ``dd_count`` are recorded in the document's
+    composition provenance (the 5-argument call form stays valid for the
+    byte-frozen 008-h tests)."""
     text = doc["text"]
     data = text.encode("utf-8")
     position = 0
@@ -1406,7 +1668,10 @@ def finalize_document(doc: dict, doc_id: str, seed_hex: str, template: str,
                        for c in doc["components"]],
         "composition_provenance": {
             "r1_blank_line_insertions": r1_count,
-            "r1_contract": "a fenced or indented code component is never composed on the line immediately after an HTML closing-tag line (order 008-h scope item 3b, R1); the inserted bytes are template-owned NEUTRAL delimiter",
+            "r1_contract": "a fenced or indented code component is never composed on the line immediately after an HTML block-start line (pulldown-cmark 0.13.4 HTML block types 1-7; order 008-h scope item 3b R1, extended per order 008-i scope item 3a; the 008-h test-pinned corner - a bare single complete opening tag at EOL - stays unbarred by the preserved 008-h contract, disclosed in REPORT-008I.md boundary_fidelity); the inserted bytes are template-owned NEUTRAL delimiter",
+            "display_dollar_barrier_insertions": dd_count,
+            "display_dollar_guard_contract": "a malformed-incomplete-display-dollar component (unterminated $$ opener) is never composed immediately before a component whose first line opens a display-dollar expression; the inserted bytes are one NEUTRAL-labeled blank line (template-owned delimiter; order 008-i scope item 3b)",
+            "t6_link_destination_admission": "T6-prose-link-prose link destinations are clean URLs (https?:// with no whitespace or angle brackets), builder-asserted at composition (order 008-i scope item 3c)",
         },
     }
     label = {
@@ -1451,23 +1716,26 @@ def build_set(pool: dict[str, list[dict]], pool_index: dict[str, dict], seed_hex
     """
     assert_no_parser_participation()
     rng = make_rng(seed_hex)
+    family_map = {c["component_id"]: c["family"]
+                  for fam in pool.values() for c in fam}
     docs: list[tuple[dict, dict]] = []
     for i in range(count):
         use_crlf = (i % 25 == 7)
         add_emoji = (i % 41 == 3)
         add_decomposed = (i % 41 == 11)
-        candidate: tuple[dict, str] | None = None
+        candidate: tuple[dict, str, int, int] | None = None
         for attempt in range(len(TEMPLATES)):
             template = TEMPLATES[(i + attempt) % len(TEMPLATES)]
             used: set[str] = set()
             try:
-                segs, r1_count = compose(rng, pool, template, used)
+                segs, r1_count = compose(rng, pool, template, used, family_map)
             except LookupError:
                 continue
+            dd_count = count_display_dollar_barrier_insertions(segs, family_map)
             segs = decorate(segs, use_crlf, add_emoji, add_decomposed)
             doc = assemble(segs, pool_index, template)
             if len(doc["data"]) > DOC_BYTES_MAX:
-                candidate = (doc, template, r1_count)
+                candidate = (doc, template, r1_count, dd_count)
                 continue
             if len(doc["data"]) < DOC_BYTES_MIN:
                 extra = pick_any(rng, pool, ("prose",), used)
@@ -1475,15 +1743,18 @@ def build_set(pool: dict[str, list[dict]], pool_index: dict[str, dict], seed_hex
                     used.add(extra["component_id"])
                     segs.extend([("\n", "template", "NEUTRAL", CONSTRUCTION),
                                  (extra["fragment"], extra["component_id"], "PROSE", CONSTRUCTION)])
+                    assert_composition_invariants(segs, family_map)
+                    dd_count = count_display_dollar_barrier_insertions(segs, family_map)
                     doc = assemble(segs, pool_index, template)
             if DOC_BYTES_MIN <= len(doc["data"]) <= DOC_BYTES_MAX:
-                candidate = (doc, template, r1_count)
+                candidate = (doc, template, r1_count, dd_count)
                 break
-            candidate = (doc, template, r1_count)
+            candidate = (doc, template, r1_count, dd_count)
         if candidate is None:
             raise RuntimeError(f"document {prefix}{i:06d}: no candidate composed (pool exhausted)")
-        doc, template, r1_count = candidate
-        document, label = finalize_document(doc, f"{prefix}{i:06d}", seed_hex, template, r1_count)
+        doc, template, r1_count, dd_count = candidate
+        document, label = finalize_document(doc, f"{prefix}{i:06d}", seed_hex,
+                                            template, r1_count, dd_count)
         docs.append((document, label))
     return docs
 
