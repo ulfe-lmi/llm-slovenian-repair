@@ -1,0 +1,125 @@
+{
+ "schema": "008i-shape-analysis/1",
+ "order": "008-i",
+ "scope_item": 2,
+ "label": "data-restricted shape analysis of the v3 construction-labeled protected exposure (364 B across 5 of 2,000 sealed v3 documents) plus the bounded pre-existing T6 link-destination observation: mechanism, byte split, template/family, pre-existence proof reference, and per-shape fix specification for the corrective scope; committed BEFORE any implementation change (git ordering is the acceptance evidence)",
+ "privacy": "document ids, byte counts and splits, mechanism descriptions, dialect rule statements, and references to committed records only; no document content, no label content, no component fragments, no private paths",
+ "evidence_basis": {
+  "committed_records": [
+   {"file": "research/REPORT-008H.md (research/prose-boundary/REPORT-008H.md) section 6", "cited": "field-by-field attribution of the 364 B (five documents, three mechanism shapes), the byte-identical 008-g pre-existence re-run (30/139/30/139/26), and the bounded pre-existing T6 observation with the v3 prescan"},
+   {"file": "research/prose-boundary/results/hidden-acceptance-v3/mashup-metrics-v3.json", "cited": "label_source_split (construction 232,816 B total / 364 exposed / 950 oracle-refined / reconciled cross-check 1,314 = 364 + 950), raw frozen-harness record, determinism, helper sha256"},
+   {"file": "research/prose-boundary/results/hidden-acceptance-v3/dev-regression-008h.json", "cited": "008-h dev regression PASS (0 exposures on 3,000 dev + 008-g batch + 008-h dev-edge; over-suppression +0.021674 pp vs 008-g baseline)"},
+   {"file": "research/prose-boundary/corpus/manifests/hidden-manifest-v3.json", "cited": "v3 set census (76 component files + 2,000 documents + 2,000 labels = 4,076 files), label-source census, generator identity"},
+   {"file": "research/prose-boundary/REPORT-008H.md section 5", "cited": "v3 generation record (seed dd1a19a598160b36; 345 components; R1 insertions 0 - the v3 pool contains no closing-tag-line/fence adjacency by construction) and the pre-seal dev diagnostic that detected the three shapes BEFORE sealing (as-is sealing rule)"}
+  ],
+  "private_records": "the private v3 evaluation harness output and the private v3 root (never committed; consulted data-free only for the attribution already committed in REPORT-008H.md section 6); this file re-derives exclusively from the committed aggregates"
+ },
+ "frozen_protection_identity": {
+  "experiment_config": "research/prose-boundary/config/experiment-008h.json",
+  "census": {
+   "research/curated/prose_boundary.py": "a89f17f8ef7a8e8651f79a39cd8209911d7592317f5f1fed8f09e5edb9acd87e",
+   "research/curated/protected.py": "27f22eaee129190b880851b958a8aa5a38d357cb4e711d70e762b2353d32e78f",
+   "research/prose-boundary/config/structural-policy-v3.json": "7ff6646e3c11d1241cb1c85bd96f08e3f0db08e73d4eb4a4e97fac0c17e1828f",
+   "research/prose-boundary/config/structural-policy-v4.json": "f564d9f87ef01a893d6cd6bb36f6cf99a0d353a4dde4e4c4c024942eb969e76f"
+  },
+  "builder": "research/prose-boundary/tools/prose_boundary_builder.py (released 008-h builder, R1/R2/R3 composition contract)",
+  "helper_sha256": "5df9a11d56b5bdec90c3ca09298802723975306f77e43e74ad1a72eb427c44bf",
+  "note": "the 008-i corrective scope modifies the BUILDER (composition level) and - on the D1-5 primary branch only - ONE curated trigger condition; the four-file frozen protection census of this round (experiment-008i.json) replaces structural-policy-v4.json with the new structural-policy-v5.json"
+ },
+ "v3_set_identity": {
+  "manifest_sha256": "ee503bd7c09f26a1b9c171319cc82f8ec692918d0d7d18f11d528a6f18c54f36",
+  "census": "76 component files + 2,000 documents + 2,000 labels = 4,076 files (sealed 4076/4076)",
+  "generation_seed": "dd1a19a598160b36 (v4 stream MUST use a fresh seed different from this)",
+  "construction_labeled_protected_bytes": 232816,
+  "exposed_bytes": 364,
+  "exposed_rate": 0.00156,
+  "exposed_documents": 5,
+  "template_of_all_exposed_documents": "T10-randomized (single-newline-separated middle components; the only template composing cross-family single-line adjacencies)"
+ },
+ "pre_existence_proof": {
+  "method": "revert the single 008-h curated change (RE_XML_NAME back to the ASCII-only pattern; verified by git diff to be the only curated delta vs the 008-g final head) and re-run the frozen protection over the five exposed documents",
+  "result": "byte-IDENTICAL exposure per document (30 / 139 / 30 / 139 / 26 B = 364 B total): the v3 construction exposure is pre-existing architecture behaviour newly surfaced by the fresh pool, not a fix regression",
+  "reference": "REPORT-008H.md section 6"
+ },
+ "pre_seal_diagnostic_note": "the 008-h pre-seal dev diagnostic over the built v3 set detected these three shapes BEFORE sealing; the set was sealed and evaluated as-is because the exposure is a verdict input, not a BLOCKED trigger, and a mid-round implementation change would break the frozen protection identity with no ordered re-freeze path (predeclared rule, REPORT-008H.md sections 5-6). The 008-i round inherits the same rule (order scope item 7) and the same pre-seal diagnostic, now expected to show zero occurrences of all three shapes under the three guards.",
+ "shapes": [
+  {
+   "id": "S1-html-opening-tag-fence-absorption",
+   "exposed_bytes": 278,
+   "documents": ["v3h-000713", "v3h-001274"],
+   "bytes_per_document": 139,
+   "component_family_of_exposed_component": "code-cpp",
+   "adjacent_component_category": "structured-html",
+   "template": "T10-randomized",
+   "mechanism": "the last line of the adjacent structured-html component is a complete HTML OPENING-tag line (a multi-tag line such as a <table ...> or <ul ...> opening tag, i.e. the line contains more than the single complete tag); the pulldown-cmark 0.13.4 dialect opens a type-6 (HTML tag) block on it that runs to the first internal blank line, absorbing the following code component's fence line and its first code lines (those bytes stay structural/covered); the code lines AFTER the first internal blank line then parse as ordinary paragraph text and are exposed. The 139 B per document are the code lines' non-machine text; machine tokens inside the code (URLs, paths, inline code, identifiers, numbers) remain covered by the residual classes.",
+   "why_not_covered_by_released_R1": "R1's ordered predicate is closing-tag-scoped (a closing-tag line immediately followed by a fenced/indented code component); a complete opening-tag line is not a closing-tag line, so R1 correctly did not fire (v3 R1 insertions = 0). The 008-g 51 B pool had produced the closing-tag variant (v2 shape); this fresh pool surfaced the opening-tag complement - a pre-008-h design fact (the dev corpus never composes it: 008-h dev regression 0), addressable at the builder/label-oracle level, not by a residual recognizer.",
+   "dialect_ground_truth": "pulldown-cmark 0.13.4 HTML block starts (vendored source, firstpass.rs/scanners.rs): types 1-5 via the html-end-tag scan (<pre|style|script|textarea + EOL/ws/>; <!-- ... -->; <? ... ?>; <![CDATA[ ... ]]>; <! + ASCII alpha to first >); type 6 = < or </ followed by a name in the dialect's HTML_TAGS block-level list (case-insensitive) followed by EOL/space/tab/CRLF/>//>; type 7 = any complete single-line tag ending at EOL. Tag-based blocks (types 1-7) end at a blank line, so an unbarred opening-tag line directly above a fence absorbs the fence. Verified in pre-work against the pinned helper (sha256 5df9a11d...).",
+   "fix_specification": {
+    "scope_item": "3(a) - R1 EXTENSION",
+    "mechanism": "extend the R1 composition predicate from closing-tag lines to ALL dialect HTML block-start lines (opening-tag lines included); on fire, insert the same exactly-one NEUTRAL-labeled blank-line barrier as the released closing-tag rule; builder asserts the invariant (a fenced or indented code component is never composed on the line following an HTML block-start line without a neutral barrier); the 008-g closing-tag behavior and the 008-h R1/R2/R3 contract otherwise stay intact",
+    "dev_edge_shape": "(i) - structured-html block whose last line is a complete multi-tag opening line, immediately followed by a fenced code component with an internal blank line; barrier NEUTRAL/template-owned, fence + code body PROTECTED",
+    "residual_grammar_growth": "none (builder-level composition guard)"
+   },
+   "implementation_constraint": "the frozen 008-h test research/tests/test_008h_dialect_edge_protection.py::test_r1_not_on_non_closing_tag (byte-frozen; every test file is preserved) asserts 0 R1 insertions for a bare SINGLE complete opening tag line (<div>) immediately followed by a fence. The order's scope item 3(a) wording ('ALL HTML block-start lines') is therefore executed as the dialect-faithful block-start set MINUS that test-pinned corner (bare single complete type-6/7 tag at EOL), which the order's '008-h R1/R2/R3 contract otherwise stay intact' clause preserves; the interpretation is disclosed in REPORT-008I.md boundary_fidelity. Residual exposure of the pinned corner (if the pool ever composes it) is monitored by the pre-seal diagnostic and the as-is sealing rule."
+  },
+  {
+   "id": "S2-xml-fragment-non-ascii-attribute-name",
+   "exposed_bytes": 60,
+   "documents": ["v3h-000625", "v3h-001241"],
+   "bytes_per_document": 30,
+   "byte_split_per_document": "18 + 10 + 2 (tag delimiter/name bytes of the unrecognized tag)",
+   "component_family_of_exposed_component": "structured-xml",
+   "template": "T10-randomized",
+   "mechanism": "a single-line multi-tag XML line: the tags with fully-ASCII names and attribute names parse as recognised inline HTML (structural, covered); exactly one tag carries a dialect-vocabulary name but a non-ASCII (Slovenian) ATTRIBUTE NAME. The dialect's inline-HTML rule recognises a tag as a whole only with ASCII attribute names, so that tag's bytes become candidate prose. The frozen xml-fragment residual class triggers on tag-NAME membership in the dialect vocabulary and therefore ABSTAINS (v2-parity guard: it abstains deliberately for non-vocabulary names, and this name IS vocabulary) - the tag delimiters/name bytes are exposed (18 + 10 + 2 B) while the interior machine tokens (an identifier, a number) are covered by their own classes.",
+   "dialect_ground_truth": "inline-HTML attribute-name recognition (verified in pre-work against the pinned helper, sha256 5df9a11d...): attribute name first char must be ASCII alpha/_/:; remaining chars ASCII alnum/_.:-; a non-ASCII character ANYWHERE in an attribute-name position makes the whole tag unrecognised (its bytes = candidate prose); a non-ASCII character in an attribute VALUE (quoted or unquoted) does not affect recognition. Probes: <element ASCII-name=\"v\"> recognised; <element ASCII-name=non-ascii-value> recognised; <element non-ASCII-attr=\"1\"> NOT recognised; <element non-ASCII-attr> NOT recognised; </closing non-ASCII-attr=\"2\"> NOT recognised.",
+   "why_not_covered": "class-boundary behaviour of the frozen 008-g spec: the name-based trigger cannot see attribute-shape recognition failures. Pre-existing (byte-identical under the 008-g implementation per the pre-existence proof).",
+   "fix_specification": {
+    "scope_item": "4 - D1-5 (Governance, predeclared decision)",
+    "primary_branch": "(a) bounded trigger refinement, EXTEND-IF-EVIDENCED: the xml-fragment class additionally fires when the tag name is in the dialect vocabulary but the tag as a whole fails inline recognition SOLELY because of a non-ASCII attribute name (one curated predicate, gated on the exact measured condition; vocabulary abstention preserved); committed iff (1) zero new safety exposures on the 3,000-document dev corpus + 008-g batch + 008-h dev-edge + new 008-i dev-edge and (2) the focused positive/negative tests pass",
+    "fallback_branch": "(b) no curated change; the class boundary documented in structural-policy-v5.json as a measured dialect limitation with the v3 evidence cited; the 30 B shape remains a bounded residual forcing at least a further CONDITIONAL",
+    "dev_edge_shape": "(ii) - single-line multi-tag XML with one vocabulary-name tag carrying a non-ASCII attribute name; PRIMARY labels the tag bytes CONSTRUCTION PROTECTED, FALLBACK labels them POLICY_EXPOSED (branch-dependent label, single document)",
+    "residual_grammar_growth": "none beyond the predeclared single D1-5 trigger condition (primary branch only)"
+   }
+  },
+  {
+   "id": "S3-display-dollar-pairing-across-malformed",
+   "exposed_bytes": 26,
+   "documents": ["v3h-001307"],
+   "bytes_per_document": 26,
+   "byte_split_per_document": "14 + 12 (TeX command names and the = operator in the TeX body)",
+   "component_family_of_exposed_component": "math-display-dollar",
+   "adjacent_component_family": "malformed-incomplete-display-dollar",
+   "template": "T10-randomized",
+   "mechanism": "an adjacent malformed-incomplete-display-dollar component (an unterminated $$ opener followed by a prose line) is composed immediately before a complete display-dollar component. The dialect pairs the malformed opener with the COMPLETE component's opening $$ line (the DisplayMath event spans the two $$ lines and is structural), so the complete component's TeX body then parses as paragraph text. The frozen residual classes cover numbers, identifier runs, and brace groups but NOT TeX command names (\\frac, \\quad, \\text) or the = operator (14 + 12 B). Dialect pairing plus frozen class-boundary behaviour (no TeX-command residual class exists in the 008-g spec; the TeX classes are paren/bracket/env only). Pre-existing (byte-identical under the 008-g implementation).",
+   "dialect_ground_truth": "display-math pairing (pulldown-cmark 0.13.4, verified in pre-work against the pinned helper, sha256 5df9a11d...): a $$ line OPENS a DisplayMath block only if the next $$ line occurs before any blank line; if a blank line comes first, the $$ degrades to literal paragraph text (lazy continuation) and cannot pair across it. Consequence: exactly ONE NEUTRAL-labeled blank line between the malformed-incomplete-display-dollar component and a following display-dollar component breaks the cross-pairing (verified: with the barrier the first $$ is plain text and the complete component is a proper DisplayMath; without it, the cross-paired DisplayMath spans the two opener lines and the TeX body is exposed). The predeclared one-NEUTRAL-blank-line barrier therefore WORKS and no substitution is needed.",
+   "fix_specification": {
+    "scope_item": "3(b) - DISPLAY-DOLLAR ADJACENCY GUARD",
+    "mechanism": "a malformed-incomplete-display-dollar component must not be composed immediately before a component whose first line is a $$ display-dollar opener; on fire, insert one NEUTRAL-labeled blank line (predeclared barrier; verified working in pre-work); NO new TeX-command residual class (paren/bracket/env only, 008-g spec)",
+    "dev_edge_shape": "(iii) - malformed-incomplete-display-dollar (unterminated $$ + prose line), one NEUTRAL blank-line barrier, then a complete $$...$$ display-dollar component; malformed $$ POLICY_EXPOSED (oracle-refined, malformed class), barrier NEUTRAL, complete component body PROTECTED",
+    "residual_grammar_growth": "none (builder-level composition guard; no new class)"
+   }
+  }
+ ],
+ "observations": [
+  {
+   "id": "O1-t6-link-destination",
+   "status": "bounded pre-existing observation (NOT a v3 exposure)",
+   "template": "T6-prose-link-prose",
+   "mechanism": "the template uses a machine fragment as the Markdown link destination and labels the whole region PROTECTED by construction; when the fragment is not a clean URL, the residual layer covers the machine tokens but not the inter-token space bytes, which would then be exposed.",
+   "v3_prescan": "the pre-seal smoke/prescan confirmed the v3 pool's machine-urls are clean URLs, so the shape did NOT materialize in the v3 pool; the v3 construction exposure is exactly the three shapes above (REPORT-008H.md section 6; prescan cited in REPORT-008H.md). Committed dev documents carry the shape as NEUTRAL-labelled oracle-split material in non-T6 templates (dev data stays frozen; no re-labeling).",
+   "fix_specification": {
+    "scope_item": "3(c) - T6 ADMISSION REFINEMENT",
+    "mechanism": "in the v4 pool, T6 link-destination fragments must be clean URLs (https?:// with no whitespace/angle brackets), making the v3 prescan invariant explicit and builder-asserted (compose raises on a non-clean fragment); the whole-region PROTECTED vs inter-token-space behaviour is documented in structural-policy-v5.json as a measured observation (not a class)",
+    "dev_edge_shape": "(iv) - T6 link with a non-clean-URL destination, retained as a NEUTRAL-split label document (machine tokens PROTECTED oracle-refined via the residual url class; inter-token spaces NEUTRAL; no whole-region PROTECTED), documenting the observation on committed dev material"
+   }
+  }
+ ],
+ "invariants_for_the_v4_round": [
+  "zero exact hash overlap asserted and disclosed against dev (641), v1 (588), v2 (340), and v3 (345) pools",
+  "fresh v4 generation seed different from dd1a19a598160b36",
+  "same 76 families and density plan as v3 (base 4/family; densified 16 for structured-html, structured-keyvalue, structured-xml, malformed-partial-html); 345 nominal component slots; 2,000 deterministic mashup documents under the 008-i builder with ALL THREE guards active",
+  "budget at most 96 HTTP attempts total including preflights, retries, and bounded recovery (008-h precedent 87+1+4=89); zero linguistic-pipeline model calls; zero objective-009 touches",
+  "pre-seal dev diagnostic over the built v4 set BEFORE sealing: predeclared primary case = zero occurrences of all three shapes (the guards prevent them); if any occurs anyway the set is STILL sealed and evaluated as-is (order scope item 7; mid-round implementation change forbidden after the freeze)",
+  "seal the v4 private root (76 + 2,000 + 2,000 = 4,076 files expected) with the sealed manifest; strategy independent data-free seal verification (pre phase) MUST pass before the evaluation phase (harness takes the receipt as input)"
+ ]
+}
