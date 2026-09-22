@@ -1,0 +1,238 @@
+{
+ "schema": "008i-e2e-invariants-hidden-v4/1",
+ "order": "008-i",
+ "label": "acceptance evidence over the NEW sealed v4 hidden set: end-to-end preservation invariants 1-7 through the actual frozen pipeline entry points (the frozen 008-c runner, byte-identical, invoked unmodified)",
+ "raw_frozen_harness_output": {
+  "label": "raw frozen-harness output over the v4 set, NOT a development-run result: the embedded wrapper self-identifies with its 008-f identity fields (frozen harness self-identification, unchanged)",
+  "e2e": {
+   "schema": "008f-e2e-invariants-hidden/1",
+   "order": "008-f",
+   "label": "blind hidden acceptance evidence: end-to-end preservation invariants 1-7 on the sealed hidden mashup set through the actual frozen pipeline entry points (pipeline.prepare/pipeline.replay with the frozen detector, English-eligibility policy, post-review gate and patching)",
+   "frozen_runner": "research/prose-boundary/tools/end_to_end_invariants.py run_invariants (008-c frozen logic, byte-identical; invoked unmodified)",
+   "corpus": "2,000 hidden mashup documents + machine-known label maps (private root; sealed by hidden-manifest.json)",
+   "deterministic_boundary": "the 008-c deterministic stub boundary: scripted reviewer at the HTTP boundary (raw response documents parsed by the real review.parse_proposal; self-corpus n-gram index derived deterministically from the hidden documents; fixed English-attestation seam); zero network, zero new model calls",
+   "linked_files": 4000,
+   "replay_count": 2000,
+   "seed_count": 20,
+   "frozen_report": {
+    "schema": "008c-e2e-invariants/1",
+    "order": "008-c",
+    "label": "dev-corpus tuning evidence, NOT acceptance",
+    "protection_mode": "parser-first",
+    "helper_sha256": "5df9a11d56b5bdec90c3ca09298802723975306f77e43e74ad1a72eb427c44bf",
+    "self_corpus": {
+     "documents": 2000,
+     "unigrams": 2433,
+     "bigrams": 8918,
+     "trigrams": 13728,
+     "middle_rows": 13728
+    },
+    "reviewer": "scripted reviewer at the HTTP boundary: raw response documents parsed by review.parse_proposal; zero network, zero model calls (S-EVIDENCE-01)",
+    "documents": {
+     "dev_total": 2000,
+     "with_protected_and_prose": 2000,
+     "replayed": 2000,
+     "zero_eligible_documents": 0,
+     "full_zero_check": true
+    },
+    "invariants": {
+     "1_detector_input_outside_protected": true,
+     "2_ngram_windows_no_bridge": true,
+     "3_review_targets_outside_protected": true,
+     "4_accepted_edits_outside_protected": true,
+     "5_protected_substrings_identical_after_path": true,
+     "6_adjacent_prose_repairable": true,
+     "7_zero_eligible_zero_review_work": true
+    },
+    "seeded": [
+     {
+      "doc_id": "v4h-000006",
+      "error_word": "xyzzyplugh",
+      "replacement_word": "projekta",
+      "edit_applied": true
+     },
+     {
+      "doc_id": "v4h-000009",
+      "error_word": "xyzzyplugh",
+      "replacement_word": "projekta",
+      "edit_applied": true
+     },
+     {
+      "doc_id": "v4h-000020",
+      "error_word": "xyzzyplugh",
+      "replacement_word": "projekta",
+      "edit_applied": true
+     },
+     {
+      "doc_id": "v4h-000031",
+      "error_word": "xyzzyplugh",
+      "replacement_word": "projekta",
+      "edit_applied": true
+     },
+     {
+      "doc_id": "v4h-000053",
+      "error_word": "xyzzyplugh",
+      "replacement_word": "projekta",
+      "edit_applied": true
+     },
+     {
+      "doc_id": "v4h-000064",
+      "error_word": "xyzzyplugh",
+      "replacement_word": "projekta",
+      "edit_applied": true
+     },
+     {
+      "doc_id": "v4h-000078",
+      "error_word": "xyzzyplugh",
+      "replacement_word": "projekta",
+      "edit_applied": true
+     },
+     {
+      "doc_id": "v4h-000083",
+      "error_word": "xyzzyplugh",
+      "replacement_word": "projekta",
+      "edit_applied": true
+     },
+     {
+      "doc_id": "v4h-000111",
+      "error_word": "xyzzyplugh",
+      "replacement_word": "projekta",
+      "edit_applied": true
+     },
+     {
+      "doc_id": "v4h-000119",
+      "error_word": "xyzzyplugh",
+      "replacement_word": "projekta",
+      "edit_applied": true
+     },
+     {
+      "doc_id": "v4h-000127",
+      "error_word": "xyzzyplugh",
+      "replacement_word": "projekta",
+      "edit_applied": true
+     },
+     {
+      "doc_id": "v4h-000141",
+      "error_word": "xyzzyplugh",
+      "replacement_word": "projekta",
+      "edit_applied": true
+     },
+     {
+      "doc_id": "v4h-000174",
+      "error_word": "xyzzyplugh",
+      "replacement_word": "projekta",
+      "edit_applied": true
+     },
+     {
+      "doc_id": "v4h-000185",
+      "error_word": "xyzzyplugh",
+      "replacement_word": "projekta",
+      "edit_applied": true
+     },
+     {
+      "doc_id": "v4h-000328",
+      "error_word": "xyzzyplugh",
+      "replacement_word": "projekta",
+      "edit_applied": true
+     },
+     {
+      "doc_id": "v4h-000339",
+      "error_word": "xyzzyplugh",
+      "replacement_word": "projekta",
+      "edit_applied": true
+     },
+     {
+      "doc_id": "v4h-000353",
+      "error_word": "xyzzyplugh",
+      "replacement_word": "projekta",
+      "edit_applied": true
+     },
+     {
+      "doc_id": "v4h-000405",
+      "error_word": "xyzzyplugh",
+      "replacement_word": "projekta",
+      "edit_applied": true
+     },
+     {
+      "doc_id": "v4h-000438",
+      "error_word": "xyzzyplugh",
+      "replacement_word": "projekta",
+      "edit_applied": true
+     },
+     {
+      "doc_id": "v4h-000449",
+      "error_word": "xyzzyplugh",
+      "replacement_word": "projekta",
+      "edit_applied": true
+     }
+    ],
+    "synthetic_zero_eligible": {
+     "eligible_words": 0,
+     "candidates": 0,
+     "ok": true
+    },
+    "all_pass": true
+   },
+   "per_invariant": {
+    "1_detector_input_outside_protected": true,
+    "2_ngram_windows_no_bridge": true,
+    "3_review_targets_outside_protected": true,
+    "4_accepted_edits_outside_protected": true,
+    "5_protected_substrings_identical_after_path": true,
+    "6_adjacent_prose_repairable": true,
+    "7_zero_eligible_zero_review_work": true
+   },
+   "all_pass": true
+  }
+ },
+ "per_invariant": {
+  "1_detector_input_outside_protected": true,
+  "2_ngram_windows_no_bridge": true,
+  "3_review_targets_outside_protected": true,
+  "4_accepted_edits_outside_protected": true,
+  "5_protected_substrings_identical_after_path": true,
+  "6_adjacent_prose_repairable": true,
+  "7_zero_eligible_zero_review_work": true
+ },
+ "all_pass": true,
+ "v4_identity": {
+  "v4_manifest_sha256": "a702babc239d24251a62f35c1e51f389843c7e7eea8547d64bb325cf16174696",
+  "seal_verification_sha256": "0c6fa26ed70a3e8642ce76d0a139e77336fc6c4ba0b10a200559f6eeec909dc0",
+  "seal_identity": {
+   "manifest_sha256": "a702babc239d24251a62f35c1e51f389843c7e7eea8547d64bb325cf16174696",
+   "documents": 2000,
+   "labels": 2000,
+   "components": 373
+  },
+  "strategy_seal_verification_receipt": {
+   "filename": "v4seal-result-pre-20260923-011639.json",
+   "sha256": "0fba8fcf61924f94adcfb7388bb6b369f2d61b18594f4cfc32129a69b87dbce0",
+   "size": 3620,
+   "location": "strategy workorders (supervision tree); path not committed",
+   "cites_v4_manifest_sha256": true
+  },
+  "frozen_protection_identity": {
+   "experiment_config_sha256": "5ff18cc95e47e2207490a757ce4bf1208e4e509f83106e8f942be2714dbcc37b",
+   "census": {
+    "research/curated/prose_boundary.py": "c57e2901e52af962546ee83651850e22c91655a8cc822f2c43b1284da16b8c50",
+    "research/curated/protected.py": "27f22eaee129190b880851b958a8aa5a38d357cb4e711d70e762b2353d32e78f",
+    "research/prose-boundary/config/structural-policy-v3.json": "7ff6646e3c11d1241cb1c85bd96f08e3f0db08e73d4eb4a4e97fac0c17e1828f",
+    "research/prose-boundary/config/structural-policy-v5.json": "915f70d34ecc69ab6fea0b273f24ca20f251b6e181bd5e9281c5c012de2fe542"
+   },
+   "policy_v3_sha256": "7ff6646e3c11d1241cb1c85bd96f08e3f0db08e73d4eb4a4e97fac0c17e1828f",
+   "policy_v5_sha256": "915f70d34ecc69ab6fea0b273f24ca20f251b6e181bd5e9281c5c012de2fe542",
+   "helper_sha256": "5df9a11d56b5bdec90c3ca09298802723975306f77e43e74ad1a72eb427c44bf"
+  },
+  "frozen_harness": {
+   "file": "research/prose-boundary/tools/hidden_acceptance.py",
+   "sha256": "22ae618bd1be66bfd93c79a10e97066eef5dcd05213f851e7b19f5a12e8771fd",
+   "committed_blob_sha256": "22ae618bd1be66bfd93c79a10e97066eef5dcd05213f851e7b19f5a12e8771fd",
+   "byte_identical": true,
+   "identity_globals_repointed": {
+    "HIDDEN_MANIFEST": "research/prose-boundary/corpus/manifests/hidden-manifest-v4.json",
+    "POLICY_V2": "research/prose-boundary/config/structural-policy-v5.json (policy of record; malformed_class_map byte-identical to the committed v3 map the runtime loads)"
+   }
+  }
+ },
+ "privacy": "counts, categories, rates and hashes only; no case content, no label content, no private paths"
+}
