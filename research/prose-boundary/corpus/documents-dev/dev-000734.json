@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-000734",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T9-prose-malformed-prose",
+ "byte_length": 723,
+ "cp_length": 716,
+ "sha256": "f8a74adb7310e9a0d8ce8df12eb0d9e248c95c242bc1a3b64e0c3e91355ddc91",
+ "document": "V projektu Osebna opomba 2023 je Nina izjavila, da spremembe apetita lahko spremljajo tudi obdobja stresa. Nekateri ljudje to obravnavajo kot kratek signal, drugi pa kot pogost vzrok za utrujenost. Ker je vsak človek drugačen, ni primerno, da se informacije iz testne vsebine uporabijo samostojno. Najboljša pot je razgovor z zdravnikom, ki lahko posluša in morebitno naroči dodatne preglede.\nMaja je v pisarni preizkusila nov tiskalnik, ki pa se je ob prvimu zagonu pokazal bolj zahteven, kot so obljavali. V razpravi so sodelavci spregovorili o tem, da bi lahko preprostejši program za spremljanje tonerja rešil polovico tegob.\n~~~ Testni projekt Gaj: nevtralna vsebina za preizkus shranjevanja, avtor Marko Zupan.",
+ "components": [
+  {
+   "component_id": "comp-prose-medicine-explainer-dev-0008",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 397
+  },
+  {
+   "component_id": "comp-prose-computing-dev-0001",
+   "category": "prose",
+   "start_byte": 398,
+   "end_byte": 636
+  },
+  {
+   "component_id": "comp-malformed-unclosed-fence-dev-0002",
+   "category": "malformed",
+   "start_byte": 637,
+   "end_byte": 723
+  }
+ ]
+}

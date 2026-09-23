@@ -1,0 +1,102 @@
+{
+ "doc_id": "dev-000486",
+ "byte_length": 679,
+ "cp_length": 665,
+ "regions": [
+  {
+   "start_byte": 0,
+   "end_byte": 259,
+   "start_cp": 0,
+   "end_cp": 248,
+   "component_id": "comp-prose-statistics-dev-0010",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 259,
+   "end_byte": 260,
+   "start_cp": 248,
+   "end_cp": 249,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 260,
+   "end_byte": 263,
+   "start_cp": 249,
+   "end_cp": 252,
+   "component_id": "comp-code-c-dev-0005",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 263,
+   "end_byte": 264,
+   "start_cp": 252,
+   "end_cp": 253,
+   "component_id": "comp-code-c-dev-0005",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 264,
+   "end_byte": 497,
+   "start_cp": 253,
+   "end_cp": 486,
+   "component_id": "comp-code-c-dev-0005",
+   "category": "code",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 497,
+   "end_byte": 498,
+   "start_cp": 486,
+   "end_cp": 487,
+   "component_id": "comp-code-c-dev-0005",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 498,
+   "end_byte": 501,
+   "start_cp": 487,
+   "end_cp": 490,
+   "component_id": "comp-code-c-dev-0005",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 501,
+   "end_byte": 502,
+   "start_cp": 490,
+   "end_cp": 491,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 502,
+   "end_byte": 679,
+   "start_cp": 491,
+   "end_cp": 665,
+   "component_id": "comp-prose-travel-dev-0006",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  }
+ ],
+ "invariants": {
+  "tiling_complete": true,
+  "no_contradictory_overlaps": true,
+  "cp_range_exact": true
+ }
+}

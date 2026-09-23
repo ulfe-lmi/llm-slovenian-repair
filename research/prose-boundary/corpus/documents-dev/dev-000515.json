@@ -1,0 +1,65 @@
+{
+ "doc_id": "dev-000515",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T10-randomized",
+ "byte_length": 2020,
+ "cp_length": 1972,
+ "sha256": "ddd4a76c589d2c8dde452992a3cf0be5f54105254e42b10d3b9a7aba77c8b517",
+ "document": "V šoli so dijaki v letu 2025, v okviru notranjega projekta Besedilo, preizkušali urejevalnik besedil, ki je po mnenju učitelja Marka deloval “precej gladko”. Neko dopoldne so imeli težave s shranjevanjem, zato so se naučili, da je pomembno omeniti ime datoteke in mapo, v katero gre. Maja je zapisala, da ji je bila največja pomoč kratek pogovor s sošolko Ano, ki je razložila razliko med pripravo in končno različico. Tistega popoldneva, po njenih besedah, so preverili, da je shranjevanje enostavnejše, ko poznaš ime mape in datum.\n--- {naziv: 'Projektna vsebina: **Športni klub**', opis: 'Nevtralna vsebina z _podčrtjem_ in https://primer.si/novica', vrednosti: ['Učinkovitost 60 %', 'Dolžina 12,5 m', 'Množitelj 0,8'], oseba: 'Izmišljena oseba: Ana Zupan', projekt: 'Nevtralna testna vsebina'} # Fragment 3: športni klub\n````yaml\n# Projekt Jabolko: nevtralni zapis, 5 m\n````\n\n> Projekt Riba, avtor *Maja*: temperatura 20 stopinj.\n> > Stanje je preverjeno.\n```\nfn test2() -> &'static str { /* Testni projekt Lipa: č, š, ž, **poudarek** in *nova* */ let razdelek2 = 6; let HRAŠNA_VREDNOST = 2; let besedilo = format!(\"_Podčrtano_ ({} $)\", razdelek2); let oznaka = \"č`ž`š\"; let pot = \"src/modul.py\"; let url = \"https://primer.si/koda\"; let _ = (HRAŠNA_VREDNOST, besedilo, oznaka, pot, url); \"č, š, ž\" }\n```\n```\nint main(void) { char *koda = \"Znak: `koda` (oklepaji)\"; char *valuta = \"Znesek: 5 $ in 10 EUR\"; char *rel = \"src/modul.py\"; char *oznaka = \"HRAŠNA_VREDNOST\"; (void)koda; (void)valuta; (void)rel; (void)oznaka; return 0; } /* Backquote in valuta */\n```\n- Glavna naloga: Ana Testna, 2 enoti\n  - [ ] Podnaloga: 1 m\n  - [x] Podnaloga: 3 s\nV laboratoriju so testirali nove ojačitve iz armirnega jekla, ki naj bi izboljšale odpornost proti utrujanju. „To ni le vprašanje moči, je tudi vprašanje vzdržljivosti“, je poudarila inženirka Ana Vidmar. Rezultati so bili shranjeni v interni projekt (Mostovna).\n`avtorizacija: Ana Novak; projekt: Modra Reka; izpis = \"test\";",
+ "components": [
+  {
+   "component_id": "comp-prose-computing-dev-0012",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 550
+  },
+  {
+   "component_id": "comp-structured-yaml-dev-0003",
+   "category": "structured",
+   "start_byte": 551,
+   "end_byte": 848
+  },
+  {
+   "component_id": "comp-markdown-fenced-code-dev-0003",
+   "category": "markdown",
+   "start_byte": 849,
+   "end_byte": 903
+  },
+  {
+   "component_id": "comp-markdown-blockquotes-dev-0008",
+   "category": "markdown",
+   "start_byte": 904,
+   "end_byte": 983
+  },
+  {
+   "component_id": "comp-code-rust-dev-0007",
+   "category": "code",
+   "start_byte": 984,
+   "end_byte": 1343
+  },
+  {
+   "component_id": "comp-code-c-dev-0004",
+   "category": "code",
+   "start_byte": 1344,
+   "end_byte": 1600
+  },
+  {
+   "component_id": "comp-markdown-lists-dev-0006",
+   "category": "markdown",
+   "start_byte": 1601,
+   "end_byte": 1683
+  },
+  {
+   "component_id": "comp-prose-engineering-dev-0002",
+   "category": "prose",
+   "start_byte": 1684,
+   "end_byte": 1957
+  },
+  {
+   "component_id": "comp-malformed-unmatched-backtick-dev-0001",
+   "category": "malformed",
+   "start_byte": 1958,
+   "end_byte": 2020
+  }
+ ]
+}

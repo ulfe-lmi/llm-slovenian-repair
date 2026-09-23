@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-000354",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T3-prose-fenced-prose",
+ "byte_length": 994,
+ "cp_length": 979,
+ "sha256": "f6de196d922a6ee65ab797b6917a53c76a932da3f5343b5de6fdf3ec1037e4c8",
+ "document": "V geometriji smo na kratko obravnavali trikotnike in kvadrate, a brez simbol. Učenci so na mizi sestavljali oblike iz papirja. (Kaj je splošna lastnost, so preverjali z merjenjem in številčenjem kotov.) Takšen pogovor je ostal v spominu, ker je bil splošen in neposreden.\n```\n/* Primer 3: vrednost in identifikator */ int main(void) { const char *pot = \"src/modul.py\"; const char *dokument = \"docs/vir.txt\"; const char *meta = \"Vrednost: 99,90 $ (oklepji) *poudarek* in HRAŠNA_VREDNOST\"; const char *naslov = \"https://primer.si/koda\"; int hraSnaVrednost2 = 3; (void)pot; (void)dokument; (void)meta; (void)naslov; return hraSnaVrednost2; }\n```\nSvetovna in slovenska zgodovina se v tem projektu prepleta, ker so izmišljeni potniki v dnevnik zapisali potovanja, ki so trajala po letih, ne po dnevih. »Kadar je letnica omenjena,« je dodala Eva, »je besedilo preprosteje razumljivo, čeprav manj natančno.« Njena skupina je zato izbrala kratka navodila, da so besedila ostala čitljiva.",
+ "components": [
+  {
+   "component_id": "comp-prose-math-explainer-dev-0003",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 277
+  },
+  {
+   "component_id": "comp-code-c-dev-0011",
+   "category": "code",
+   "start_byte": 278,
+   "end_byte": 649
+  },
+  {
+   "component_id": "comp-prose-history-dev-0005",
+   "category": "prose",
+   "start_byte": 650,
+   "end_byte": 994
+  }
+ ]
+}

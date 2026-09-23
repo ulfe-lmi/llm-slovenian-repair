@@ -1,0 +1,65 @@
+{
+ "doc_id": "dev-001098",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T10-randomized",
+ "byte_length": 1038,
+ "cp_length": 1029,
+ "sha256": "4aa2c1d487eb07c42772460c416bb407235de17683bfda1ca45588c2f8b67cd1",
+ "document": "V projektu Spomini doline je Anica Zorman zapisala, da so stari kmečki registri vsebovali opombe o pridelku, davkih in poplavah. Zapis so razdelili po letnicah, ne pa po dnevih, zato je besedilo preprosteje za primerjanje. Njen sopotnik Marko je dodal, da takšni listi ohranjajo glas lokalne skupnosti.\n\\(\\dfrac{11}{12}+\\frac{\\rho}{\\sigma}=\\text{Projekt Javornik}\\)\nPROJEKT_IME=Modra_Gora, $HOME_DIR, KEY=izbirna\n/var/lib/projekti/kos src/oseba/maja.json\nsrc/modul/pogon.py docs/vir.txt\n$12 je predračun za testni zapis v projektu Modra Lestvica.\n1. Kontrola A: Projekt Jabljana, 15 W\n2. Kontrola B: Projekt Lipa, 30 W\n```\n/* Preveri imenik (č, š, ž): src/modul.py in docs/vir.txt */ function opis(ime) { const tekst = `Ime: **${ime}**`; return tekst + ' - *opomba*'; } console.log(opis('Ana'));\n```\nV soboto je ekipa iz Ljubljanskega učnega laboratorija testirala, kako hitro se sestanek prekine, če je omrežje preobremenjeno. Rezultat, ki so ga prebrali skupaj, je bil preprost: naprave se raje razbremenijo s kratkim premorom.",
+ "components": [
+  {
+   "component_id": "comp-prose-history-dev-0001",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 304
+  },
+  {
+   "component_id": "comp-math-fractions-dev-0006",
+   "category": "math",
+   "start_byte": 305,
+   "end_byte": 367
+  },
+  {
+   "component_id": "comp-machine-env-vars-dev-0004",
+   "category": "machine",
+   "start_byte": 368,
+   "end_byte": 414
+  },
+  {
+   "component_id": "comp-machine-posix-paths-dev-0006",
+   "category": "machine",
+   "start_byte": 415,
+   "end_byte": 456
+  },
+  {
+   "component_id": "comp-machine-posix-paths-dev-0001",
+   "category": "machine",
+   "start_byte": 457,
+   "end_byte": 488
+  },
+  {
+   "component_id": "comp-malformed-unmatched-dollar-dev-0002",
+   "category": "malformed",
+   "start_byte": 489,
+   "end_byte": 549
+  },
+  {
+   "component_id": "comp-markdown-lists-dev-0007",
+   "category": "markdown",
+   "start_byte": 550,
+   "end_byte": 621
+  },
+  {
+   "component_id": "comp-code-javascript-dev-0007",
+   "category": "code",
+   "start_byte": 622,
+   "end_byte": 805
+  },
+  {
+   "component_id": "comp-prose-computing-dev-0004",
+   "category": "prose",
+   "start_byte": 806,
+   "end_byte": 1038
+  }
+ ]
+}

@@ -1,0 +1,512 @@
+{
+ "doc_id": "dev-000416",
+ "byte_length": 1331,
+ "cp_length": 1313,
+ "regions": [
+  {
+   "start_byte": 0,
+   "end_byte": 295,
+   "start_cp": 0,
+   "end_cp": 286,
+   "component_id": "comp-prose-computing-dev-0005",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 295,
+   "end_byte": 296,
+   "start_cp": 286,
+   "end_cp": 287,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 296,
+   "end_byte": 320,
+   "start_cp": 287,
+   "end_cp": 311,
+   "component_id": "comp-machine-shell-commands-dev-0006",
+   "category": "machine",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 320,
+   "end_byte": 321,
+   "start_cp": 311,
+   "end_cp": 312,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 321,
+   "end_byte": 443,
+   "start_cp": 312,
+   "end_cp": 434,
+   "component_id": "comp-structured-xml-dev-0007",
+   "category": "structured",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 443,
+   "end_byte": 444,
+   "start_cp": 434,
+   "end_cp": 435,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 444,
+   "end_byte": 445,
+   "start_cp": 435,
+   "end_cp": 436,
+   "component_id": "comp-math-inline-dollar-dev-0002",
+   "category": "math",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 445,
+   "end_byte": 512,
+   "start_cp": 436,
+   "end_cp": 503,
+   "component_id": "comp-math-inline-dollar-dev-0002",
+   "category": "math",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 512,
+   "end_byte": 513,
+   "start_cp": 503,
+   "end_cp": 504,
+   "component_id": "comp-math-inline-dollar-dev-0002",
+   "category": "math",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 513,
+   "end_byte": 514,
+   "start_cp": 504,
+   "end_cp": 505,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 514,
+   "end_byte": 515,
+   "start_cp": 505,
+   "end_cp": 506,
+   "component_id": "comp-markdown-blockquotes-dev-0007",
+   "category": "markdown",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 515,
+   "end_byte": 562,
+   "start_cp": 506,
+   "end_cp": 552,
+   "component_id": "comp-markdown-blockquotes-dev-0007",
+   "category": "markdown",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 562,
+   "end_byte": 563,
+   "start_cp": 552,
+   "end_cp": 553,
+   "component_id": "comp-markdown-blockquotes-dev-0007",
+   "category": "markdown",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 563,
+   "end_byte": 564,
+   "start_cp": 553,
+   "end_cp": 554,
+   "component_id": "comp-markdown-blockquotes-dev-0007",
+   "category": "markdown",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 564,
+   "end_byte": 565,
+   "start_cp": 554,
+   "end_cp": 555,
+   "component_id": "comp-markdown-blockquotes-dev-0007",
+   "category": "markdown",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 565,
+   "end_byte": 583,
+   "start_cp": 555,
+   "end_cp": 573,
+   "component_id": "comp-markdown-blockquotes-dev-0007",
+   "category": "markdown",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 583,
+   "end_byte": 584,
+   "start_cp": 573,
+   "end_cp": 574,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 584,
+   "end_byte": 603,
+   "start_cp": 574,
+   "end_cp": 593,
+   "component_id": "comp-markdown-raw-html-dev-0002",
+   "category": "markdown",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 603,
+   "end_byte": 606,
+   "start_cp": 593,
+   "end_cp": 596,
+   "component_id": "comp-markdown-raw-html-dev-0002",
+   "category": "markdown",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 606,
+   "end_byte": 617,
+   "start_cp": 596,
+   "end_cp": 607,
+   "component_id": "comp-markdown-raw-html-dev-0002",
+   "category": "markdown",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 617,
+   "end_byte": 621,
+   "start_cp": 607,
+   "end_cp": 611,
+   "component_id": "comp-markdown-raw-html-dev-0002",
+   "category": "markdown",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 621,
+   "end_byte": 625,
+   "start_cp": 611,
+   "end_cp": 615,
+   "component_id": "comp-markdown-raw-html-dev-0002",
+   "category": "markdown",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 625,
+   "end_byte": 628,
+   "start_cp": 615,
+   "end_cp": 618,
+   "component_id": "comp-markdown-raw-html-dev-0002",
+   "category": "markdown",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 628,
+   "end_byte": 639,
+   "start_cp": 618,
+   "end_cp": 629,
+   "component_id": "comp-markdown-raw-html-dev-0002",
+   "category": "markdown",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 639,
+   "end_byte": 643,
+   "start_cp": 629,
+   "end_cp": 633,
+   "component_id": "comp-markdown-raw-html-dev-0002",
+   "category": "markdown",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 643,
+   "end_byte": 653,
+   "start_cp": 633,
+   "end_cp": 643,
+   "component_id": "comp-markdown-raw-html-dev-0002",
+   "category": "markdown",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 653,
+   "end_byte": 659,
+   "start_cp": 643,
+   "end_cp": 649,
+   "component_id": "comp-markdown-raw-html-dev-0002",
+   "category": "markdown",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 659,
+   "end_byte": 665,
+   "start_cp": 649,
+   "end_cp": 655,
+   "component_id": "comp-markdown-raw-html-dev-0002",
+   "category": "markdown",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 665,
+   "end_byte": 672,
+   "start_cp": 655,
+   "end_cp": 662,
+   "component_id": "comp-markdown-raw-html-dev-0002",
+   "category": "markdown",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 672,
+   "end_byte": 680,
+   "start_cp": 662,
+   "end_cp": 670,
+   "component_id": "comp-markdown-raw-html-dev-0002",
+   "category": "markdown",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 680,
+   "end_byte": 685,
+   "start_cp": 670,
+   "end_cp": 675,
+   "component_id": "comp-markdown-raw-html-dev-0002",
+   "category": "markdown",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 685,
+   "end_byte": 710,
+   "start_cp": 675,
+   "end_cp": 700,
+   "component_id": "comp-markdown-raw-html-dev-0002",
+   "category": "markdown",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 710,
+   "end_byte": 711,
+   "start_cp": 700,
+   "end_cp": 701,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 711,
+   "end_byte": 735,
+   "start_cp": 701,
+   "end_cp": 725,
+   "component_id": "comp-markdown-inline-code-dev-0001",
+   "category": "markdown",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 735,
+   "end_byte": 736,
+   "start_cp": 725,
+   "end_cp": 726,
+   "component_id": "comp-markdown-inline-code-dev-0001",
+   "category": "markdown",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 736,
+   "end_byte": 740,
+   "start_cp": 726,
+   "end_cp": 730,
+   "component_id": "comp-markdown-inline-code-dev-0001",
+   "category": "markdown",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 740,
+   "end_byte": 741,
+   "start_cp": 730,
+   "end_cp": 731,
+   "component_id": "comp-markdown-inline-code-dev-0001",
+   "category": "markdown",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 741,
+   "end_byte": 745,
+   "start_cp": 731,
+   "end_cp": 735,
+   "component_id": "comp-markdown-inline-code-dev-0001",
+   "category": "markdown",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 745,
+   "end_byte": 747,
+   "start_cp": 735,
+   "end_cp": 737,
+   "component_id": "comp-markdown-inline-code-dev-0001",
+   "category": "markdown",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 747,
+   "end_byte": 752,
+   "start_cp": 737,
+   "end_cp": 742,
+   "component_id": "comp-markdown-inline-code-dev-0001",
+   "category": "markdown",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 752,
+   "end_byte": 754,
+   "start_cp": 742,
+   "end_cp": 744,
+   "component_id": "comp-markdown-inline-code-dev-0001",
+   "category": "markdown",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 754,
+   "end_byte": 781,
+   "start_cp": 744,
+   "end_cp": 771,
+   "component_id": "comp-markdown-inline-code-dev-0001",
+   "category": "markdown",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 781,
+   "end_byte": 782,
+   "start_cp": 771,
+   "end_cp": 772,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 782,
+   "end_byte": 785,
+   "start_cp": 772,
+   "end_cp": 775,
+   "component_id": "comp-code-c-dev-0009",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 785,
+   "end_byte": 786,
+   "start_cp": 775,
+   "end_cp": 776,
+   "component_id": "comp-code-c-dev-0009",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 786,
+   "end_byte": 1050,
+   "start_cp": 776,
+   "end_cp": 1037,
+   "component_id": "comp-code-c-dev-0009",
+   "category": "code",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 1050,
+   "end_byte": 1051,
+   "start_cp": 1037,
+   "end_cp": 1038,
+   "component_id": "comp-code-c-dev-0009",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 1051,
+   "end_byte": 1054,
+   "start_cp": 1038,
+   "end_cp": 1041,
+   "component_id": "comp-code-c-dev-0009",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 1054,
+   "end_byte": 1055,
+   "start_cp": 1041,
+   "end_cp": 1042,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 1055,
+   "end_byte": 1331,
+   "start_cp": 1042,
+   "end_cp": 1313,
+   "component_id": "comp-prose-sports-dev-0008",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  }
+ ],
+ "invariants": {
+  "tiling_complete": true,
+  "no_contradictory_overlaps": true,
+  "cp_range_exact": true
+ }
+}

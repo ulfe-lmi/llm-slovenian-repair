@@ -1,0 +1,46 @@
+[
+ {
+  "case_id": "nat-changelog-dev-01",
+  "scenario": "ns-changelog",
+  "scenario_index": 11,
+  "instance": "dev",
+  "fragment": "Spremembe verzije za izmišljeni paket **Lebda**\n\n| Verzija | Datum | Kratki opis |\n| --- | --- | --- |\n| 2.3.0 | 2026-02-14 | Novo orodje in popravki predpomnjenja |\n| 2.2.1 | 2026-02-02 | Urejen prehod med načrtovanjem in delovanjem |\n| 2.1.0 | 2026-01-19 | Lokalna opozorila in pregled zvez |\n\n## 2.3.0 (2026-02-14)\n• Dodan je bil modul `lebda-cli`, ki pripravi pregled dogodkov. Meta Kralj je oblikovala izvidnik stanj.\n• Popravljena je zanka za predpomnjenje, ki je zadrževala povezave. Lukan Petek je preveril test v `lebda-core`.\n• Povezava: [Novo v 2.3.0](https://izmisljena-mreza.si/lebda/2.3.0)\n\n## 2.2.1 (2026-02-02)\n• Odstranjen je krhki prehod med načrtovanjem in delovanjem. Anka Zupan je zapisala pojasnilo.\n• Dodana je zanka za sprotno obveščanje ekipe.\n• Povezava: [Popravki 2.2.1](https://izmisljena-mreza.si/lebda/2.2.1)\n\n## 2.1.0 (2026-01-19)\n• Uvedena je podpora za lokalna opozorila in kratki pregled zvez. Vojko Novak je pripravil primer za zagon.\n• Izboljšano beleženje dogodkov, da se zvez ne razcepijo pri ponovnem zagonu.\n• Povezava: [Dokumenti 2.1.0](https://izmisljena-mreza.si/lebda/2.1.0)\n\nVsi navedeni podatki so izmišljeni in namenjeni pregledu sprememb.",
+  "fragment_sha256": "18cf6412703bbdd270ff0bc252712f514cef02c8aa297a1b9c359dfa24931db6",
+  "fragment_bytes": 1213,
+  "prompt_sha256": "47ab1ab96295eb5810fab8044a47aac49d1f6f16ad1d9a01be8bea7d02e5ba2b",
+  "seed": "353b16a2141008b8"
+ },
+ {
+  "case_id": "nat-changelog-dev-02",
+  "scenario": "ns-changelog",
+  "scenario_index": 11,
+  "instance": "dev",
+  "fragment": "Spremembe verzije za izmišljen projekt Plevelo, ki ga vodita Ana Kovač in Marko Novak.\n\n2.1.0 – 2025-01-02\n- Dodano: novo odtisno polje za kmetijo Sončna dolina, opis v povezavi [viri](https://primer.si?v=2.1.0).\n- Popravljeno: Ana je odpravila zamudo pri izvozu letnih zbirnih podatkov za 5 ha površin.\n\n2.0.3 – 2024-12-18\n- Varnostna pika: preverjanje relativnih map brez absolutnih poti; podrobnosti v [dokumentaciji](https://primer.si?v=2.0.3).\n- Popravljeno: Marko je uskladil barvne oznake v modulu Meh.\n\n1.9.0 – 2024-11-05\n- Dodano: Meta Zajc je dodala opombo o vremenskih ovirah za zbirko 12. oktobra.\n- Izločeno: stare datoteke z oznako 1.0 so odstranjene; arhiv je v [opisu](https://primer.si?v=1.9.0).\n\nVsi imeni, projekti in številke so izmišljeni; podatki ne vsebujejo absolutnih poti.",
+  "fragment_sha256": "4c1cd3f48ad039fec6e4c721871b261aa19d35f222ac14b3b3633b81846a51f5",
+  "fragment_bytes": 811,
+  "prompt_sha256": "47ab1ab96295eb5810fab8044a47aac49d1f6f16ad1d9a01be8bea7d02e5ba2b",
+  "seed": "353b16a2141008b8"
+ },
+ {
+  "case_id": "nat-changelog-dev-03",
+  "scenario": "ns-changelog",
+  "scenario_index": 11,
+  "instance": "dev",
+  "fragment": "Za izmišljeni projekt VročiVrtinec sem sestavil kratek zapis o spremembah, ki ga je pregledala Anja Kranjc.\n\n| Verzija | Datum | Povzetek |\n|---|---|---|\n| v0.3.2 | 18. 7. 2025 | Popravki izgleda in hitrejši nalaganje |\n| v0.3.1 | 11. 7. 2025 | Nova stran za povzetke |\n| v0.3.0 | 2. 7. 2025 | Nova osnovna različica |\n\nGlavne spremembe:\n- v0.3.2: odpravljena napaka pri prikazu grafa na mobilni napravi, prilagojena barva glave.\n- v0.3.1: dodana zanka za povzetke, ki jo je testirala Maja Perko.\n- v0.3.0: prenovljen pregled, dodana tabela nastavitev, izboljšana berljivost.\n\nKratek primer vodenja:\n```\nvrocivrtinec verzija --povzetek 0.3.2\n```\n\nPregled je zaključila Erika Zupan. V primeru vprašanj glej [note](note-v0-3-2.html) ali [opombo](opomba-v0-3-1.html). Vse spremembe so omejene na javni del aplikacije. To je zgolj ilustrativni primer, ki prikazuje obliko zapisa.",
+  "fragment_sha256": "5811aff1ce46c953f043fba45d823e5a7977463a5a6970905289d784999778b2",
+  "fragment_bytes": 882,
+  "prompt_sha256": "47ab1ab96295eb5810fab8044a47aac49d1f6f16ad1d9a01be8bea7d02e5ba2b",
+  "seed": "353b16a2141008b8"
+ },
+ {
+  "case_id": "nat-changelog-dev-04",
+  "scenario": "ns-changelog",
+  "scenario_index": 11,
+  "instance": "dev",
+  "fragment": "Spremembe verzije za izmišljen projekt Medvedja Luža so pripravljene kot kratek zbirni zapis za interni pregled. Tabela spodaj prikazuje dve najnovejši izdaji, povezave pa so interne oznake brez zunanjih naslovov. Vsaka verzija ima en piko in kratek opis, da je spremembo mogoče preprosto razlikovati.\n\n| Verzija | Datum | Povezava | Kratki opis |\n| --- | --- | --- | --- |\n| `2.3.1` | 03. 10. 2026 | `medvedja-luza/2.3.1` | Popravljeno ujemanje oznak in dodan uvoz zvezdkov. |\n| `2.3.0` | 18. 09. 2026 | `medvedja-luza/2.3.0` | Nova razdelitev pike in osnutek kratkih opisov. |\n\n- Zapisovala: Ana Rovančič\n- Pregledala: Marjeta Kramžar\n- Status: objavljen v notranjem arhivu\n- Pika: `medvedja-luza`\n- Rok za povratne informacije: 10. 10. 2026\n\nSeznam sprememb:\n- dodan uvoz zvezdkov\n- popravljene oznake v razdelkih\n- prilagojen osnutek verzij\n- poenoten zapis povezav in datumov\n- izločena podvojena pika v opisu\n\nZaradi preglednosti so verzije opremljene s pikami, ki olajšajo iskanje. Pri naslednji izdaji bo treba dodati še kratek seznam znanih omejitev ter poimеноvati odgovorno osebo za vnos v arhiv. To bo zmanjšalo dvosmiselnost pri iskanju starih opomb in ohranilo enak način zapisovanja. Ta zapis je namenjen le internemu pregledu in ne vsebuje nobenih zasebnih podatkov.",
+  "fragment_sha256": "69fc45d6dd880bc98cdd943c157207c9434c4403d753b9651f9c1173c7554366",
+  "fragment_bytes": 1297,
+  "prompt_sha256": "47ab1ab96295eb5810fab8044a47aac49d1f6f16ad1d9a01be8bea7d02e5ba2b",
+  "seed": "353b16a2141008b8"
+ }
+]

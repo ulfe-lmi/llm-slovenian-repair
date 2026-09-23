@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-001492",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T8-quote-fenced",
+ "byte_length": 542,
+ "cp_length": 525,
+ "sha256": "d093ce4468c5e3f8a3842e4df9450e1a5a4e4293d2092719ee88c698a9038b87",
+ "document": "> Čiščenje oken je lažje, če najprej sproti počistimo rob in nato s suho krpo zberemo preostali prah. Marko je v projektu Prijetna hiša ugotovil, da je bolje delati ob jutru, ko je videti, kje se naberejo madeži. (Če je zunaj topleje, najprej odpreš okno.) Sicer pa je ena majhna posoda z blagom dovolj za dnevni red. `int main(void) { int seStez = 3; char *pot = \"src/modul.py\";`\n```\ndef seštej(a, b): return a + b, 'Povzetek: **pomembno** _podčrtano_ $5 (oklepaji) `kod`' # komentar v slovenščini: testni projekt, ž š č\n```",
+ "components": [
+  {
+   "component_id": "comp-prose-everyday-advice-dev-0003",
+   "category": "prose",
+   "start_byte": 2,
+   "end_byte": 327
+  },
+  {
+   "component_id": "comp-code-c-dev-0001",
+   "category": "code",
+   "start_byte": 328,
+   "end_byte": 390
+  },
+  {
+   "component_id": "comp-code-python-dev-0009",
+   "category": "code",
+   "start_byte": 391,
+   "end_byte": 542
+  }
+ ]
+}

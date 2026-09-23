@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-001227",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T7-prose-json-prose-latex",
+ "byte_length": 897,
+ "cp_length": 877,
+ "sha256": "7ef31fe7a562af75fe6b8afa53e5acf3b1831f6e598ab689a59338a2ef7d4e96",
+ "document": "V projektu Modra skica je Luka dejal, da „povprečje ni vedno sredina“, ker so trije dani zneski zelo različni. V primeru razmerja tri do pet so bila odstopanja manjša. Ana se je strinjala, vendar je opozorila na izjemne dni. Na koncu so se dogovorili, da bodo uporabili preprostejše meritve.\n{\"ime\":\"Projekt Jabolko\",\"faza\":\"Vzdrževanje\",\"avtorsko\":\"Nevtralna testna vsebina\",\"enote\":{\"temperatura\":\"21,5 °C\",\"debelina\":\"0,2 m\",\"delež\":\"45 %\"},\"opomba\":\"**Nalaganje** https://primer.si/novica\"}\nPri varčevanju ni treba kupovati drage opreme, pogosto zadošča malo potrpežljivosti. Petra je v projektu Skromen koš pokazala, da se lahko v juniju 2023 prihrani denar za en kosilo. »Najprej preglej, kaj že imaš,« je zapisala v dnevniku.\n\\begin{equation}\\begin{aligned}M_4 &= \\mu_4 + \\nu_4 \\odot \\xi_4 \\text{Maja Novak} \\\\N_4 &= \\|\\vec{v}_4\\|_2 + \\varpi_4\\end{aligned}\\end{equation}",
+ "components": [
+  {
+   "component_id": "comp-prose-statistics-dev-0008",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 299
+  },
+  {
+   "component_id": "comp-structured-json-dev-0003",
+   "category": "structured",
+   "start_byte": 300,
+   "end_byte": 505
+  },
+  {
+   "component_id": "comp-prose-everyday-advice-dev-0002",
+   "category": "prose",
+   "start_byte": 506,
+   "end_byte": 752
+  },
+  {
+   "component_id": "comp-math-aligned-env-dev-0004",
+   "category": "math",
+   "start_byte": 753,
+   "end_byte": 897
+  }
+ ]
+}

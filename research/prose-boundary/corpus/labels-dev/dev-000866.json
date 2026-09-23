@@ -1,0 +1,62 @@
+{
+ "doc_id": "dev-000866",
+ "byte_length": 769,
+ "cp_length": 753,
+ "regions": [
+  {
+   "start_byte": 0,
+   "end_byte": 265,
+   "start_cp": 0,
+   "end_cp": 257,
+   "component_id": "comp-prose-math-explainer-dev-0002",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 265,
+   "end_byte": 267,
+   "start_cp": 257,
+   "end_cp": 259,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 267,
+   "end_byte": 371,
+   "start_cp": 259,
+   "end_cp": 361,
+   "component_id": "comp-malformed-unclosed-tex-env-dev-0001",
+   "category": "malformed",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 371,
+   "end_byte": 373,
+   "start_cp": 361,
+   "end_cp": 363,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 373,
+   "end_byte": 769,
+   "start_cp": 363,
+   "end_cp": 753,
+   "component_id": "comp-prose-science-dev-0002",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  }
+ ],
+ "invariants": {
+  "tiling_complete": true,
+  "no_contradictory_overlaps": true,
+  "cp_range_exact": true
+ }
+}

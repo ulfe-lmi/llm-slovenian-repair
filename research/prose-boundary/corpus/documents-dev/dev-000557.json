@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-000557",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T8-quote-fenced",
+ "byte_length": 449,
+ "cp_length": 440,
+ "sha256": "e5e3d7f4bce4076e803f90ff6fc480e56f50af365f64437b78bdfd20176feedf",
+ "document": "> Palermo, glavno mesto Sicilije, je leta 2022 ponujal nenavadno kombinacijo zvočnih ulic, barvitih tržnic in starinske arhitekture. Priporočamo obisk katedrale in sprehod po starem mestnem jedru, zlasti zvečer. `#include <string>`\r\n```\r\n// Testni podatki za osebo Ana.\r\nconst HRAŠNA_VREDNOST: i32 = 7;\r\nfn razdelek2(seStez: &str) -> String {\r\n    let vrednost = HRAŠNA_VREDNOST;\r\n    format!(\"podčrtano *{seStez}* in {vrednost} €\")\r\n}\r\n```",
+ "components": [
+  {
+   "component_id": "comp-prose-travel-dev-0010",
+   "category": "prose",
+   "start_byte": 2,
+   "end_byte": 215
+  },
+  {
+   "component_id": "comp-code-cpp-dev-0008",
+   "category": "code",
+   "start_byte": 216,
+   "end_byte": 235
+  },
+  {
+   "component_id": "comp-code-rust-dev-0010",
+   "category": "code",
+   "start_byte": 237,
+   "end_byte": 449
+  }
+ ]
+}

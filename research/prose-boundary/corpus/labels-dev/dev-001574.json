@@ -1,0 +1,82 @@
+{
+ "doc_id": "dev-001574",
+ "byte_length": 627,
+ "cp_length": 621,
+ "regions": [
+  {
+   "start_byte": 0,
+   "end_byte": 182,
+   "start_cp": 0,
+   "end_cp": 178,
+   "component_id": "comp-prose-travel-dev-0001",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 182,
+   "end_byte": 183,
+   "start_cp": 178,
+   "end_cp": 179,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 183,
+   "end_byte": 199,
+   "start_cp": 179,
+   "end_cp": 195,
+   "component_id": "comp-math-equation-env-dev-0001",
+   "category": "math",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 199,
+   "end_byte": 325,
+   "start_cp": 195,
+   "end_cp": 321,
+   "component_id": "comp-math-equation-env-dev-0001",
+   "category": "math",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 325,
+   "end_byte": 339,
+   "start_cp": 321,
+   "end_cp": 335,
+   "component_id": "comp-math-equation-env-dev-0001",
+   "category": "math",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 339,
+   "end_byte": 340,
+   "start_cp": 335,
+   "end_cp": 336,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 340,
+   "end_byte": 627,
+   "start_cp": 336,
+   "end_cp": 621,
+   "component_id": "comp-prose-electronics-dev-0004",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  }
+ ],
+ "invariants": {
+  "tiling_complete": true,
+  "no_contradictory_overlaps": true,
+  "cp_range_exact": true
+ }
+}

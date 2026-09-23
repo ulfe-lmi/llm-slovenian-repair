@@ -1,0 +1,65 @@
+{
+ "doc_id": "dev-002121",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T10-randomized",
+ "byte_length": 1962,
+ "cp_length": 1939,
+ "sha256": "610184da112f9f167d385aaffb701c6363884b3ab66444e01af4a00d39592b4c",
+ "document": "V Dubrovniku sem z ekipo Sredozemska karta preveril obzidje in opozoril, da je obisk (brez rezervacije) pogosto daljši. V program smo vstavili tudi kratek postoj v starem solnem bazenu, kjer je voda odražala nebo. Vodič je dejal: \"če želite tih kot, se odpravite proti severu\".\n[slovenski opis](https://primer.si/stran)\n[slovenski opis 3: projekt modra 2 l](https://primer.si/stran \"Naslov 3\")\n> <https://primer.si/stran>\nMarko B.: Vzorčnik meri 0,75 l pri 30 °C, zapis pa je potrjen z **močno** in __podčrtim__ besedilom.\n--vhod vir/dnevnik.json, --izhod 4, --podrobnosti\n```\n-- Testni SQL fragment: razpoloži\nCREATE TABLE razpolozi (\n  id INT PRIMARY KEY,\n  \"seStez\" TEXT,\n  \"razdelek2\" TEXT,\n  opomba TEXT\n);\nINSERT INTO razpolozi (id, \"seStez\", \"razdelek2\", opomba)\nVALUES (1, '**poudarek** *zvezdice*', '_podčrtano_', '12 $ / dan');\nUPDATE razpolozi SET opomba = 'Vir: https://primer.si/koda' WHERE id = 1;\nSELECT id, \"seStez\", \"razdelek2\", opomba FROM razpolozi ORDER BY id;\n```\n\\begin{equation}\\begin{aligned}M_4 &= \\mu_4 + \\nu_4 \\odot \\xi_4 \\text{Maja Novak} \\\\N_4 &= \\|\\vec{v}_4\\|_2 + \\varpi_4\\end{aligned}\\end{equation}\n```\nfn seStez(razdelek2: u32) -> String { /* Testni projekt Lipa: č, š, ž, *poudarek* _podčrtano_ `oznaka` */ let HRAŠNA_VREDNOST = 1; let besedilo = format!(\"**Nova** ({} $, {})\", razdelek2, \"š\"); let pot = \"src/modul.py\"; let url = \"https://primer.si/koda\"; format!(\"{} | {} | {} | {}\", HRAŠNA_VREDNOST, besedilo, pot, url) }\n```\n```\n/* Fragment 1: nevtralni testni projekt, vir https://primer.si/koda, pot src/modul.py */ namespace primer { std::string naslov = \"Razdelek: _podrobnosti_\"; const int razdelek2 = 7; } std::string opis1() { return \"Cena: 10 $ *ponudba* `kod` (č, š, ž)\"; }\n```\nV izmišljenem projektu Arhiv besed se motiv arhiva pojavi kot tiha zbirka pism, ki potujejo med slovenskimi in evropskimi mestoma. Izmišljeni avtor Martin Golob zgradi novelo iz treh stavkov. Njegova zgodba je tiha.",
+ "components": [
+  {
+   "component_id": "comp-prose-travel-dev-0005",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 282
+  },
+  {
+   "component_id": "comp-markdown-links-dev-0003",
+   "category": "markdown",
+   "start_byte": 283,
+   "end_byte": 426
+  },
+  {
+   "component_id": "comp-markdown-strong-dev-0004",
+   "category": "markdown",
+   "start_byte": 427,
+   "end_byte": 531
+  },
+  {
+   "component_id": "comp-machine-cli-flags-dev-0007",
+   "category": "machine",
+   "start_byte": 532,
+   "end_byte": 581
+  },
+  {
+   "component_id": "comp-code-sql-dev-0009",
+   "category": "code",
+   "start_byte": 582,
+   "end_byte": 995
+  },
+  {
+   "component_id": "comp-math-aligned-env-dev-0004",
+   "category": "math",
+   "start_byte": 996,
+   "end_byte": 1140
+  },
+  {
+   "component_id": "comp-code-rust-dev-0001",
+   "category": "code",
+   "start_byte": 1141,
+   "end_byte": 1479
+  },
+  {
+   "component_id": "comp-code-cpp-dev-0009",
+   "category": "code",
+   "start_byte": 1480,
+   "end_byte": 1744
+  },
+  {
+   "component_id": "comp-prose-literature-dev-0010",
+   "category": "prose",
+   "start_byte": 1745,
+   "end_byte": 1962
+  }
+ ]
+}

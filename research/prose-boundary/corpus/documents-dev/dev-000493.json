@@ -1,0 +1,59 @@
+{
+ "doc_id": "dev-000493",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T10-randomized",
+ "byte_length": 1307,
+ "cp_length": 1285,
+ "sha256": "de5de1f8350670fc5c70c0e874a975461c8fedf36b3560a909882499d151114e",
+ "document": "Pri projektu Zvezdno seme je ekipa iz Maribora preučevala, kako se semena neznane rastline odzivajo na simulirano nočno svetlobo. V zvezku opomb so pisali (v naravnem tonu): »Spominja na polje po dežju, a brez vonja.« V letu 2023 so rezultat zapisali kot zanimivo, vendar še vedno nejasno.\n0.13.4, 0,9999\n/usr/bin/orodje /var/log/dnevnik.txt\n[gradnja]\nime = *Projekt Kameniti most*\nopis = _dolžina_ 45 m\nmasa = 12 kg\navtor = Petra Kranjc\nvir = https://primer.si/novica\n; nevtralna testna vsebina\n## Naslov 8\n![Opis: poraba vode za projekt Hotel](https://primer.si/slika.png)\nEva Zupan: pretok 0,5 L/s, masa 3 kg.\n[opis](https://primer.si/stran tretji del: avtorizirana testna vsebina projekta Rumena cesta; izmišljena oseba Petra Zupan preverja obrazec.\n[trgovina]\nime = 'Trgovina Lipa'\nprodajalec = 'Irena Zupan'\nzaloga = '12 kos'\npopust = '15 %'\nopis = '*Novica* o _prodaji_'\nvir = 'https://primer.si/novica'\nV starem receptu iz leta 1958 stoji, da se ajdova juha iz Ljubljane najprej posoli, nato pa počasi premeša, da ne bi zgrudila. “Ajda mora dišati po štrukljih,” je nekoč zapisala Anja, ki je testirala recept za projektni dnevnik okusov (po mnenju njene sestre, Marice). Pri pripravi je bil pomemben tudi čas: deset minut mešanja, nato pa še kratko ohlajanje na hladni plošči.",
+ "components": [
+  {
+   "component_id": "comp-prose-science-dev-0010",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 295
+  },
+  {
+   "component_id": "comp-machine-versions-numbers-units-dev-0006",
+   "category": "machine",
+   "start_byte": 296,
+   "end_byte": 310
+  },
+  {
+   "component_id": "comp-machine-posix-paths-dev-0002",
+   "category": "machine",
+   "start_byte": 311,
+   "end_byte": 347
+  },
+  {
+   "component_id": "comp-structured-ini-dev-0003",
+   "category": "structured",
+   "start_byte": 348,
+   "end_byte": 502
+  },
+  {
+   "component_id": "comp-markdown-images-dev-0008",
+   "category": "markdown",
+   "start_byte": 503,
+   "end_byte": 619
+  },
+  {
+   "component_id": "comp-malformed-broken-link-dev-0003",
+   "category": "malformed",
+   "start_byte": 620,
+   "end_byte": 761
+  },
+  {
+   "component_id": "comp-structured-toml-dev-0003",
+   "category": "structured",
+   "start_byte": 762,
+   "end_byte": 918
+  },
+  {
+   "component_id": "comp-prose-cooking-dev-0001",
+   "category": "prose",
+   "start_byte": 919,
+   "end_byte": 1307
+  }
+ ]
+}

@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-001140",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T8-quote-fenced",
+ "byte_length": 494,
+ "cp_length": 486,
+ "sha256": "6c6503bea8255c8abb81bb037ad322e891f33065cc0e029ce1e606b23e62515b",
+ "document": "> Lena iz izmišljenega projekta Zdravi dnevni krog je zapisala, da stres pogosto spremljajo napete mišice in počasnejši spanec. Zaradi teh sprememb ni mogoče zanesljivo sklepati o vzrokih, zato je smiselno pogovarjati se z zdravnikom. `# Fragment 4: oseba: Marko Horvat, projekt *Sonca*`\n```\n/* Fragment 3: testni primer, vir https://primer.si/koda, pot src/modul.py, docs/vir.txt */ int osnutek3 = 3; std::string podatek3() { return \"_Povzetek_ *koda* `backquote` 7 $ (č, š, ž)\"; }\n```",
+ "components": [
+  {
+   "component_id": "comp-prose-medicine-explainer-dev-0001",
+   "category": "prose",
+   "start_byte": 2,
+   "end_byte": 239
+  },
+  {
+   "component_id": "comp-code-shell-bash-dev-0004",
+   "category": "code",
+   "start_byte": 240,
+   "end_byte": 292
+  },
+  {
+   "component_id": "comp-code-cpp-dev-0011",
+   "category": "code",
+   "start_byte": 293,
+   "end_byte": 494
+  }
+ ]
+}

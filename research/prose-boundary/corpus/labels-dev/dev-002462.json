@@ -1,0 +1,142 @@
+{
+ "doc_id": "dev-002462",
+ "byte_length": 964,
+ "cp_length": 944,
+ "regions": [
+  {
+   "start_byte": 0,
+   "end_byte": 420,
+   "start_cp": 0,
+   "end_cp": 408,
+   "component_id": "comp-prose-everyday-advice-dev-0011",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 420,
+   "end_byte": 421,
+   "start_cp": 408,
+   "end_cp": 409,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 421,
+   "end_byte": 423,
+   "start_cp": 409,
+   "end_cp": 411,
+   "component_id": "comp-math-bracket-tex-dev-0005",
+   "category": "math",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 423,
+   "end_byte": 516,
+   "start_cp": 411,
+   "end_cp": 504,
+   "component_id": "comp-math-bracket-tex-dev-0005",
+   "category": "math",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 516,
+   "end_byte": 518,
+   "start_cp": 504,
+   "end_cp": 506,
+   "component_id": "comp-math-bracket-tex-dev-0005",
+   "category": "math",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 518,
+   "end_byte": 519,
+   "start_cp": 506,
+   "end_cp": 507,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 519,
+   "end_byte": 571,
+   "start_cp": 507,
+   "end_cp": 558,
+   "component_id": "comp-markdown-autolinks-dev-0001",
+   "category": "markdown",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 571,
+   "end_byte": 572,
+   "start_cp": 558,
+   "end_cp": 559,
+   "component_id": "comp-markdown-autolinks-dev-0001",
+   "category": "markdown",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 572,
+   "end_byte": 595,
+   "start_cp": 559,
+   "end_cp": 582,
+   "component_id": "comp-markdown-autolinks-dev-0001",
+   "category": "markdown",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 595,
+   "end_byte": 596,
+   "start_cp": 582,
+   "end_cp": 583,
+   "component_id": "comp-markdown-autolinks-dev-0001",
+   "category": "markdown",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 596,
+   "end_byte": 681,
+   "start_cp": 583,
+   "end_cp": 666,
+   "component_id": "comp-markdown-autolinks-dev-0001",
+   "category": "markdown",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 681,
+   "end_byte": 682,
+   "start_cp": 666,
+   "end_cp": 667,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 682,
+   "end_byte": 964,
+   "start_cp": 667,
+   "end_cp": 944,
+   "component_id": "comp-prose-travel-dev-0005",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  }
+ ],
+ "invariants": {
+  "tiling_complete": true,
+  "no_contradictory_overlaps": true,
+  "cp_range_exact": true
+ }
+}

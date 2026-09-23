@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-002737",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T10-randomized",
+ "byte_length": 740,
+ "cp_length": 733,
+ "sha256": "21634165d0103038111b98ea3276859c83c0a138f034c191d6856d11d8d82c88",
+ "document": "V testnem projektu Trst je Nina, ki je bila ravno nova v moštvi, povzela vse tri pojme. Spremenljivka hrani stanje, zanka ponavlja korake, funkcija pa skupine stvari. Tisti vstavek je bil v pogovoru preprost: najprej razloži, nato pokaži primer.\n**_Mešanica_ brez zapora.\nTestni projekt: Vrtna pot. Osebna: Ana Novak.\n- Glavni seznam: Ana Testna\n  - Podvrsta A: 1 enota\n  - Podvrsta B: 2 enote\nV Ljubljani sem se s projektom Zeleni otok podal h Trgu republike (nekaj metrov od Kamnitega mostu). Na dvorišču so nas sprejeli z rahlim zamikom, saj je bilo dvigalo zasedeno. V razstavi smo videli modele, ki so prikazovali potovanja po reki od 1980-ih let. Popoldne smo se odločili za kavo ob trgu, medtem ko so se otroci igrali v parku.",
+ "components": [
+  {
+   "component_id": "comp-prose-programming-explainer-dev-0004",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 248
+  },
+  {
+   "component_id": "comp-malformed-malformed-nesting-dev-0001",
+   "category": "malformed",
+   "start_byte": 249,
+   "end_byte": 321
+  },
+  {
+   "component_id": "comp-markdown-lists-dev-0003",
+   "category": "markdown",
+   "start_byte": 322,
+   "end_byte": 397
+  },
+  {
+   "component_id": "comp-prose-travel-dev-0003",
+   "category": "prose",
+   "start_byte": 398,
+   "end_byte": 740
+  }
+ ]
+}

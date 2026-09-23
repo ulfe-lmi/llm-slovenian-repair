@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-001887",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T7-prose-json-prose-latex",
+ "byte_length": 1006,
+ "cp_length": 992,
+ "sha256": "7ed2dbf42cae270e3fb3bfe288359bcc6d3ccac3a51579bb445df688fb321413",
+ "document": "Udeleženci projekta Otvorena vrata so v jeseni 2024 preizkusili učno sredo, v kateri je bil učbenik le ena od štirih podlag. Mladostnike je zanimalo, zakaj se isti izpit pri treh učiteljih razlikuje v razlagi (zlasti pri nalogah iz književnosti), zato so zapisali kratko pojasnilo. Na koncu so se dogovorili, da bo vsak odrasli udeleženec dobil eden sam pogovorni termin, ne pa dveh ločenih rok.\n{\"ime\":\"Projekt Jabolko\",\"faza\":\"Vzdrževanje\",\"avtorsko\":\"Nevtralna testna vsebina\",\"enote\":{\"temperatura\":\"21,5 °C\",\"debelina\":\"0,2 m\",\"delež\":\"45 %\"},\"opomba\":\"**Nalaganje** https://primer.si/novica\"}\nProjekt Tiha proga je zbral fragmente, v katerih Ana Kralj bere Čopovo poezijo ob zori. V zadnjem razdelku avtorica spomni na evropsko pripovedko, ki jo je nekje v Ljubljani zapisala leta 1984. Tisto jutro je v knjižnici zmanjkalo ene ključne listine.\n\\begin{align} \\chi_4 &= \\sqrt{\\psi_4 + \\rho_4} \\\\ \\tau_4 &= \\frac{\\upsilon_4}{\\sigma_4} \\\\ \\varphi_4 &\\approx \\xi_4 \\cdot \\beta_4 \\end{align}",
+ "components": [
+  {
+   "component_id": "comp-prose-education-dev-0010",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 403
+  },
+  {
+   "component_id": "comp-structured-json-dev-0003",
+   "category": "structured",
+   "start_byte": 404,
+   "end_byte": 609
+  },
+  {
+   "component_id": "comp-prose-literature-dev-0011",
+   "category": "prose",
+   "start_byte": 610,
+   "end_byte": 864
+  },
+  {
+   "component_id": "comp-math-align-env-dev-0004",
+   "category": "math",
+   "start_byte": 865,
+   "end_byte": 1006
+  }
+ ]
+}

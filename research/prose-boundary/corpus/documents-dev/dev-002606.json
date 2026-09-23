@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-002606",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T11-interactions",
+ "byte_length": 955,
+ "cp_length": 932,
+ "sha256": "324d9b224e44719a120877f36fd88dedec29589850ee4b574b693d5447c7ee58",
+ "document": "`#include <string>`.\n```\n#include <string>\n// URL: https://primer.si/koda\n// Pot: src/modul.py, žlahtna\nstd::string vir() {\n    std::string url = \"https://primer.si/koda\";\n    std::string pot = \"docs/vir.txt\";\n    return url + \" \" + pot + \" (*test*)\";\n}\n# komentar z \\frac{a}{b}\n```\nV kabolnici je najlažje, ko najprej zbrišemo prah z omaric, šele nato operemo tla. (Počakamo, da se voda malo posuši, in šele potem stiskamo krpo.) Tisti, ki imajo v hiši mačke, vedo, da lasov ne pomečeš, temveč jih zbereš s krpo za steklo. V testnem projektu Čist dom so to za vogla dopolnili s staro krtačo, ki jo občasno speremo.\nZavod Odrasli naprej je v letu 2021 pripravil kratke izobraževalne module za poklicno usposabljanje, pri čemer so strokovni vodje poudarili jasno strukturirane učbenike in vsakodnevne vaje. Po petih tednih so udeleženci opravili preizkus znanja, ki je imel 20 vprašanj, 10 praktičnih nalog in eno ustno obrazložitev.",
+ "components": [
+  {
+   "component_id": "comp-code-cpp-dev-0005",
+   "category": "code",
+   "start_byte": 0,
+   "end_byte": 19
+  },
+  {
+   "component_id": "comp-code-cpp-dev-0006",
+   "category": "code",
+   "start_byte": 21,
+   "end_byte": 283
+  },
+  {
+   "component_id": "comp-prose-everyday-advice-dev-0006",
+   "category": "prose",
+   "start_byte": 284,
+   "end_byte": 631
+  },
+  {
+   "component_id": "comp-prose-education-dev-0002",
+   "category": "prose",
+   "start_byte": 632,
+   "end_byte": 955
+  }
+ ]
+}

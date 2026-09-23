@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-002724",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T8-quote-fenced",
+ "byte_length": 611,
+ "cp_length": 598,
+ "sha256": "4f05df467256dbce4b7ab9efb8ed72d614e4305427685087c9cb52e179fe5868",
+ "document": "> V pisarni so za projekt »Dober dose« postavili novo usmerjevalno napravo bližje oknu, da bi signal dosegel tudi do kavne mize (kjer se vedno nabere največ ljudi). »Mrežna kartica«, so dejali tisti, ki so prenašali fotografije, se je hitreje odzvala, ko so se izognili prenatrpanosti. Določene datoteke so zato pustili za večer. `# Fragment 4: oseba: Marko Horvat, projekt *Sonca*`\n```\n# Testni projekt: Vir podatkov; avtor: Maja Lipovnik\nurl = 'https://primer.si/koda'\npot = 'src/nabavki.py'\ncena = '100 $ (brez popusta)'\noznaka = '(test č š ž)'\nif url and pot:\n    print('Vir je nastavljen')\n```",
+ "components": [
+  {
+   "component_id": "comp-prose-computing-dev-0008",
+   "category": "prose",
+   "start_byte": 2,
+   "end_byte": 339
+  },
+  {
+   "component_id": "comp-code-shell-bash-dev-0004",
+   "category": "code",
+   "start_byte": 340,
+   "end_byte": 392
+  },
+  {
+   "component_id": "comp-code-python-dev-0005",
+   "category": "code",
+   "start_byte": 393,
+   "end_byte": 611
+  }
+ ]
+}

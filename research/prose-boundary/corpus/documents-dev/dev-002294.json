@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-002294",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T7-prose-json-prose-latex",
+ "byte_length": 896,
+ "cp_length": 884,
+ "sha256": "eb1d2c1ddbeca2ee2597f34fc1d075c226b0d55af1e0e3ccac1dc1b77b291c31",
+ "document": "V projektu Grem v šolo so učenci izmerili, da so v treh tednih v povprečju spali osem ur in petnajst minut. Razmerje med spanjem in budnostjo je bilo, kot se je pokazalo, približno ena do dve (glede na dneve brez izjemnih dogodkov).\n{\"ime\":\"Projekt Gora\",\"nagnjenost\":\"12 %\",\"avtorsko\":\"Nevtralna testna vsebina\",\"debelina\":\"0,3 m\",\"opomba\":\"_Nevtralno_ https://primer.si/novica\"}\nSvetovna in slovenska zgodovina se v tem projektu prepleta, ker so izmišljeni potniki v dnevnik zapisali potovanja, ki so trajala po letih, ne po dnevih. »Kadar je letnica omenjena,« je dodala Eva, »je besedilo preprosteje razumljivo, čeprav manj natančno.« Njena skupina je zato izbrala kratka navodila, da so besedila ostala čitljiva.\n\\begin{equation}\\begin{aligned}P_2 &= \\frac{\\alpha_2}{\\beta_2} \\times \\zeta_2 \\text{Projekt Lipa} \\\\Q_2 &= \\sum_{i=0}^{3} \\kappa_i \\theta_i\\end{aligned}\\end{equation}",
+ "components": [
+  {
+   "component_id": "comp-prose-statistics-dev-0007",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 236
+  },
+  {
+   "component_id": "comp-structured-json-dev-0008",
+   "category": "structured",
+   "start_byte": 237,
+   "end_byte": 384
+  },
+  {
+   "component_id": "comp-prose-history-dev-0005",
+   "category": "prose",
+   "start_byte": 385,
+   "end_byte": 729
+  },
+  {
+   "component_id": "comp-math-aligned-env-dev-0002",
+   "category": "math",
+   "start_byte": 730,
+   "end_byte": 896
+  }
+ ]
+}

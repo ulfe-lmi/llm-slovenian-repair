@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-000403",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T8-quote-fenced",
+ "byte_length": 486,
+ "cp_length": 479,
+ "sha256": "ce73be6516dd01ba0317748b355145f1d504a3268c8b8b0476d55f05d5362d79",
+ "document": "> Luka je dejal, da je funkcija kot mala kuhinja v veliki jedilnici. „Vgradi sestavine, počakaš in dobijoš posodo,« je rekel z nasmehom. Sodelavci so takoj videli, da se s tem izognemo ponavljanju. `/* Primer 3: vrednost in identifikator */ int main(void) { c`\n```\nint main(void) { char *napis = \"Tekst: *poudarjeno* in _podčrtano_\"; char *cena = \"Cena: 10 $ (dolar)\"; char *url = \"https://primer.si/koda\"; (void)napis; (void)cena; (void)url; return 0; } /* Markov podatek */\n```",
+ "components": [
+  {
+   "component_id": "comp-prose-programming-explainer-dev-0003",
+   "category": "prose",
+   "start_byte": 2,
+   "end_byte": 203
+  },
+  {
+   "component_id": "comp-code-c-dev-0011",
+   "category": "code",
+   "start_byte": 204,
+   "end_byte": 266
+  },
+  {
+   "component_id": "comp-code-c-dev-0002",
+   "category": "code",
+   "start_byte": 267,
+   "end_byte": 486
+  }
+ ]
+}

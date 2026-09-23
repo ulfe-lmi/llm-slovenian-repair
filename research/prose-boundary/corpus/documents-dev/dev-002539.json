@@ -1,0 +1,65 @@
+{
+ "doc_id": "dev-002539",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T10-randomized",
+ "byte_length": 1590,
+ "cp_length": 1567,
+ "sha256": "1f203e11ddf89d5440e2f2d59338228794b26eed37f75f3d98506007b147fa41",
+ "document": "V projektu Mladostni učenec so raziskovalci (Marko Novak, Petra Hribar in drugi) spremljali učence osmih osnovnih šol v obdobju dveh let. Namen je bil ugotoviti, kako različne metode vplivajo na razumevanje učnega gradiva ter na strah pred izpiti. Pri učbenikih so posebej opazovali, ali slike, opombe in kratki povzetki spodbujajo samostojno delo ali pa le zapletajo razumevanje. Učitelji so poleti 2023 zabeležili, da so učenci pri refleksiji pogosto izrekli, da bi želeli več »prostora za vprašanja« in manj ponavljanja brez poudarka.\n| Izdelek | Enota | Masa |\n| --- | --- | --- |\n| Izdelek Alfa | g | 250 |\n| Izdelek Beta | kg | 2,4 |\n```\nint main(void) { char *cena1 = \"1 $\"; char *cena2 = \"2 EUR\"; char *potA = \"docs/vir.txt\"; char *potB = \"src/modul.py\"; int seStez = 1; (void)cena1; (void)cena2; (void)potA; (void)potB; (void)seStez; return 0; } /* Valute: $ in EUR */\n```\n\\text{Projekt Lipa}\\begin{pmatrix}1&2&3\\\\4&5&6\\end{pmatrix}\nProjekt Sova: Hitrost teka 60 m/min in masa 8 kg sta opisani z **močno** in __podčrtim__ besedilom.\n- [x] Projekt: Gora\n  - Razdalja: 1 m\n- [ ] Projekt: Reka\n  1. Masa: 2 kg\nC:/projekt/vir.py,D:\\datoteke\\vir.txt,\\\\streznik\\mapi\\vir.txt\n```\nmoČ = 3; žrtev = (1, 2); besedilo = 'Cena: $10 `kod` **poudarek** _podčrtano_'; pot = 'docs/vir.txt' # komentar v slovenščini: testni projekt, https://primer.si/koda\n```\nV izmišljenem projektu Arhiv besed se motiv arhiva pojavi kot tiha zbirka pism, ki potujejo med slovenskimi in evropskimi mestoma. Izmišljeni avtor Martin Golob zgradi novelo iz treh stavkov. Njegova zgodba je tiha.",
+ "components": [
+  {
+   "component_id": "comp-prose-education-dev-0003",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 551
+  },
+  {
+   "component_id": "comp-markdown-tables-dev-0006",
+   "category": "markdown",
+   "start_byte": 552,
+   "end_byte": 653
+  },
+  {
+   "component_id": "comp-code-c-dev-0005",
+   "category": "code",
+   "start_byte": 654,
+   "end_byte": 895
+  },
+  {
+   "component_id": "comp-math-matrices-dev-0001",
+   "category": "math",
+   "start_byte": 896,
+   "end_byte": 955
+  },
+  {
+   "component_id": "comp-markdown-strong-dev-0003",
+   "category": "markdown",
+   "start_byte": 956,
+   "end_byte": 1057
+  },
+  {
+   "component_id": "comp-markdown-lists-dev-0009",
+   "category": "markdown",
+   "start_byte": 1058,
+   "end_byte": 1131
+  },
+  {
+   "component_id": "comp-machine-windows-paths-dev-0008",
+   "category": "machine",
+   "start_byte": 1132,
+   "end_byte": 1193
+  },
+  {
+   "component_id": "comp-code-python-dev-0011",
+   "category": "code",
+   "start_byte": 1194,
+   "end_byte": 1372
+  },
+  {
+   "component_id": "comp-prose-literature-dev-0010",
+   "category": "prose",
+   "start_byte": 1373,
+   "end_byte": 1590
+  }
+ ]
+}

@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-002427",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T8-quote-fenced",
+ "byte_length": 682,
+ "cp_length": 665,
+ "sha256": "87e2cfb76308c2ff451fd55df478ce67186b3d0614efd6e84bb11e9873d72056",
+ "document": "> V geometriji smo na kratko obravnavali trikotnike in kvadrate, a brez simbol. Učenci so na mizi sestavljali oblike iz papirja. (Kaj je splošna lastnost, so preverjali z merjenjem in številčenjem kotov.) Takšen pogovor je ostal v spominu, ker je bil splošen in neposreden. `fn konec() { /* Testni projekt Lipa: č, š, ž, *poudarek* in `\n```\n# Fragment 4: oseba: Marko Horvat, projekt *Sonca*\necho 'Besedilo z *zvezdicami* in _podčrtanim_ besedilom'\necho 'Znesek: 3 $ ter 8 € (izmišljeno)'\necho 'Pot: docs/vir.txt; koda: src/modul.py'\necho 'Naslov: https://primer.si/koda'\necho 'Id: seStez in razdelek2; HRAŠNA_VREDNOST'\necho 'Znak `backquote`, (oklepaj), č š ž'\n```",
+ "components": [
+  {
+   "component_id": "comp-prose-math-explainer-dev-0003",
+   "category": "prose",
+   "start_byte": 2,
+   "end_byte": 279
+  },
+  {
+   "component_id": "comp-code-rust-dev-0008",
+   "category": "code",
+   "start_byte": 280,
+   "end_byte": 345
+  },
+  {
+   "component_id": "comp-code-shell-bash-dev-0004",
+   "category": "code",
+   "start_byte": 346,
+   "end_byte": 682
+  }
+ ]
+}

@@ -1,0 +1,102 @@
+{
+ "doc_id": "dev-001373",
+ "byte_length": 841,
+ "cp_length": 821,
+ "regions": [
+  {
+   "start_byte": 0,
+   "end_byte": 279,
+   "start_cp": 0,
+   "end_cp": 276,
+   "component_id": "comp-prose-medicine-explainer-dev-0007",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 279,
+   "end_byte": 280,
+   "start_cp": 276,
+   "end_cp": 277,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 280,
+   "end_byte": 283,
+   "start_cp": 277,
+   "end_cp": 280,
+   "component_id": "comp-code-rust-dev-0003",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 283,
+   "end_byte": 284,
+   "start_cp": 280,
+   "end_cp": 281,
+   "component_id": "comp-code-rust-dev-0003",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 284,
+   "end_byte": 619,
+   "start_cp": 281,
+   "end_cp": 605,
+   "component_id": "comp-code-rust-dev-0003",
+   "category": "code",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 619,
+   "end_byte": 620,
+   "start_cp": 605,
+   "end_cp": 606,
+   "component_id": "comp-code-rust-dev-0003",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 620,
+   "end_byte": 623,
+   "start_cp": 606,
+   "end_cp": 609,
+   "component_id": "comp-code-rust-dev-0003",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 623,
+   "end_byte": 624,
+   "start_cp": 609,
+   "end_cp": 610,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 624,
+   "end_byte": 841,
+   "start_cp": 610,
+   "end_cp": 821,
+   "component_id": "comp-prose-literature-dev-0007",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  }
+ ],
+ "invariants": {
+  "tiling_complete": true,
+  "no_contradictory_overlaps": true,
+  "cp_range_exact": true
+ }
+}

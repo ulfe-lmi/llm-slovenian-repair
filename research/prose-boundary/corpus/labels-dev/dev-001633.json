@@ -1,0 +1,102 @@
+{
+ "doc_id": "dev-001633",
+ "byte_length": 611,
+ "cp_length": 598,
+ "regions": [
+  {
+   "start_byte": 0,
+   "end_byte": 328,
+   "start_cp": 0,
+   "end_cp": 318,
+   "component_id": "comp-prose-administration-dev-0003",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 328,
+   "end_byte": 329,
+   "start_cp": 318,
+   "end_cp": 319,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 329,
+   "end_byte": 330,
+   "start_cp": 319,
+   "end_cp": 320,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 330,
+   "end_byte": 361,
+   "start_cp": 320,
+   "end_cp": 350,
+   "component_id": "comp-prose-programming-explainer-dev-0005",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 361,
+   "end_byte": 363,
+   "start_cp": 350,
+   "end_cp": 352,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 363,
+   "end_byte": 395,
+   "start_cp": 352,
+   "end_cp": 384,
+   "component_id": "comp-machine-urls-dev-0008",
+   "category": "machine",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 395,
+   "end_byte": 396,
+   "start_cp": 384,
+   "end_cp": 385,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 396,
+   "end_byte": 397,
+   "start_cp": 385,
+   "end_cp": 386,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 397,
+   "end_byte": 611,
+   "start_cp": 386,
+   "end_cp": 598,
+   "component_id": "comp-prose-programming-explainer-dev-0005",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  }
+ ],
+ "invariants": {
+  "tiling_complete": true,
+  "no_contradictory_overlaps": true,
+  "cp_range_exact": true
+ }
+}

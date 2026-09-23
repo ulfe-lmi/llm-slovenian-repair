@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-002318",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T9-prose-malformed-prose",
+ "byte_length": 678,
+ "cp_length": 658,
+ "sha256": "ffd2e941af7256f9cdee68f0b8771425cbae67e43910b585b814c57f9d117af8",
+ "document": "Pri varčevanju ni treba kupovati drage opreme, pogosto zadošča malo potrpežljivosti. Petra je v projektu Skromen koš pokazala, da se lahko v juniju 2023 prihrani denar za en kosilo. »Najprej preglej, kaj že imaš,« je zapisala v dnevniku.\n[opis](https://primer.si/stran drugi del: avtorizirana testna vsebina projekta Rdeča trta; izmišljena oseba Marko Novak ureja zvezek.\nAna je zapisala, da se v starejših pisarnah pogosto uporabljajo tiskalniki, ki se povezujejo po kablu, čeprav so mlajši sodelavci privrženci brezžičnih rešitev. Takšna razmerja, čeprav na videz nevidna, vplivajo na to, kako hitro potuje dokument. (V projektu so to opazovali tri tedne.)",
+ "components": [
+  {
+   "component_id": "comp-prose-everyday-advice-dev-0002",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 246
+  },
+  {
+   "component_id": "comp-malformed-broken-link-dev-0002",
+   "category": "malformed",
+   "start_byte": 247,
+   "end_byte": 382
+  },
+  {
+   "component_id": "comp-prose-computing-dev-0005",
+   "category": "prose",
+   "start_byte": 383,
+   "end_byte": 678
+  }
+ ]
+}

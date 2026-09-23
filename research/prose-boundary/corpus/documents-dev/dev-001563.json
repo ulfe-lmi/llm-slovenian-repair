@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-001563",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T2-prose-math-prose",
+ "byte_length": 925,
+ "cp_length": 898,
+ "sha256": "04c47634973915067eb7373ef04ad02db5e6bf2867ff9759827aa317df79e04e",
+ "document": "V razredu za proporcije se pogosto pojavi vprašanje: »Koliko čokoladnih ploščic pripada štirim otrokom, če imamo enajst enakih delov?« Učenci pod vodstvom Marka, ki sodeluje v projektu Skladni deli, izvedejo, da sorazmerje ni le deljenje, ampak tudi primerjava enakih deležev. Nekaj učencev, še zlasti tisti, ki radi kuhajo, to razumejo najlažje.\nP(E \\cap F_{\\text{Borič}}) = P(E) + P(F_{\\text{Borič}}) - P(E \\cup F_{\\text{Borič}}) = \\frac{\\sqrt{3}}{4} \\text{ (seštevek verjetnosti)}\nBiološki kolektiv pri projektu Križanec je v gozdu nad Celjem opazoval rast gliv po jutranji rosi. Med analizo vzorčkov (tri serije, vse z značko Z3) je dr. Marko Zupan opažil, da se nekatere hife ob dotiku zavrtijo, kar je v laboratoriju razložil s preprostimi mehanskimi odzivi. »To ni čarobno vedenje,« je dejal in dodal, da so za znanstvenika pogosto najpomembnejši tisti podrobnosti, ki jih drugi spregledajo.",
+ "components": [
+  {
+   "component_id": "comp-prose-math-explainer-dev-0012",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 359
+  },
+  {
+   "component_id": "comp-math-probability-dev-0004",
+   "category": "math",
+   "start_byte": 360,
+   "end_byte": 500
+  },
+  {
+   "component_id": "comp-prose-science-dev-0012",
+   "category": "prose",
+   "start_byte": 501,
+   "end_byte": 925
+  }
+ ]
+}

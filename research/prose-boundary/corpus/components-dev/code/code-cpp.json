@@ -1,0 +1,123 @@
+[
+ {
+  "component_id": "comp-code-cpp-dev-0001",
+  "family": "code-cpp",
+  "instance": "dev",
+  "category": "code",
+  "subcategory": "C++",
+  "fragment": "#include <iostream>\n// Značilni znaki: č, š, ž in *poudarek*\nint main() {\n    int razdelek2 = 4;\n    std::cout << \"Tekst: *zvezdice*, `kod` in _pod_\" << std::endl;\n    std::cout << \"Cena: 10 $ (oklepaji)\" << std::endl;\n    return razdelek2;\n}",
+  "fragment_sha256": "74c7cd9a3f3560a8118fa7d8718e4d46560a0db8dd3f57c5a07532dbce522a1e",
+  "fragment_bytes": 246,
+  "seed": "25519a23a817cb04"
+ },
+ {
+  "component_id": "comp-code-cpp-dev-0002",
+  "family": "code-cpp",
+  "instance": "dev",
+  "category": "code",
+  "subcategory": "C++",
+  "fragment": "// Vir: https://primer.si/koda\n// Pot: docs/vir.txt, čokolada\n#include <string>\nstd::string naslovLipa() {\n    // _podrobnosti_ in *zvezdice*\n    std::string naslov = \"Ana: _razdelek_ (test)\";\n    return naslov;\n}",
+  "fragment_sha256": "e3ac0073093dc702fd6a087ed33c9e2b60fd902e918b298af396532d665241a6",
+  "fragment_bytes": 214,
+  "seed": "25519a23a817cb04"
+ },
+ {
+  "component_id": "comp-code-cpp-dev-0003",
+  "family": "code-cpp",
+  "instance": "dev",
+  "category": "code",
+  "subcategory": "C++",
+  "fragment": "#include <string>\n// Projekt: *Lipa*, šentjanž\n// Preveri src/modul.py\nstd::string seStez(int razdelek2) {\n    // žlahtna vrednost: 2 $\n    return \"vrednost \" + std::to_string(razdelek2 * 2) + \" $\";\n}",
+  "fragment_sha256": "76599a0f99e5220d9f756eab4fb3c373e4a72c46d987d01bbe6f7a5b50e79efc",
+  "fragment_bytes": 203,
+  "seed": "25519a23a817cb04"
+ },
+ {
+  "component_id": "comp-code-cpp-dev-0004",
+  "family": "code-cpp",
+  "instance": "dev",
+  "category": "code",
+  "subcategory": "C++",
+  "fragment": "#include <string>\n// Dokument: docs/vir.txt\n// Spletna stran: https://primer.si/koda\nconst int HRA_NA_VREDNOST = 5; // čokolada, šentjanž\nint main() {\n    std::string opis = \"Cena: 5 $ (oklepaji)\";\n    return HRA_NA_VREDNOST;\n}",
+  "fragment_sha256": "9f691c96a09daa68abbbcaa79bff1162ff695043f0ce2460bc802900b65bb195",
+  "fragment_bytes": 230,
+  "seed": "25519a23a817cb04"
+ },
+ {
+  "component_id": "comp-code-cpp-dev-0005",
+  "family": "code-cpp",
+  "instance": "dev",
+  "category": "code",
+  "subcategory": "C++",
+  "fragment": "#include <string>\n// Primer: `koda` in _besedilo_\n// Oseba: Ana, projekt Lipa, žlahtno\nstruct Prikaz {\n    int razdelek2;\n    int seStez;\n    std::string naslov;\n};\n\nPrikaz prikaz() { return Prikaz{1, 2, \"*test*\"}; }",
+  "fragment_sha256": "6cd791ac305aa43a3997d0f90d9ab398834a76e1a2554d6b232e80a842e2a6ea",
+  "fragment_bytes": 217,
+  "seed": "25519a23a817cb04"
+ },
+ {
+  "component_id": "comp-code-cpp-dev-0006",
+  "family": "code-cpp",
+  "instance": "dev",
+  "category": "code",
+  "subcategory": "C++",
+  "fragment": "#include <string>\n// URL: https://primer.si/koda\n// Pot: src/modul.py, žlahtna\nstd::string vir() {\n    std::string url = \"https://primer.si/koda\";\n    std::string pot = \"docs/vir.txt\";\n    return url + \" \" + pot + \" (*test*)\";\n}",
+  "fragment_sha256": "dca727e5b961c4251ce745308b931cbc332e4b4dd5f93242e3a2329794f7b597",
+  "fragment_bytes": 229,
+  "seed": "25519a23a817cb04"
+ },
+ {
+  "component_id": "comp-code-cpp-dev-0007",
+  "family": "code-cpp",
+  "instance": "dev",
+  "category": "code",
+  "subcategory": "C++",
+  "fragment": "#include <string>\n// *Test* za _označevanje_, čokolada\nint glavna() {\n    int seStez = 8;\n    int razdelek2 = seStez + 2;\n    std::string opis = \"Cena: 3 $ (nevtralno)\";\n    return razdelek2;\n}",
+  "fragment_sha256": "4306b039b00bf75f14064faf130f79e62174af60b5f2498cdac3d220645b0988",
+  "fragment_bytes": 195,
+  "seed": "25519a23a817cb04"
+ },
+ {
+  "component_id": "comp-code-cpp-dev-0008",
+  "family": "code-cpp",
+  "instance": "dev",
+  "category": "code",
+  "subcategory": "C++",
+  "fragment": "#include <string>\n// Končni primer: Ana, Karel, Lipa\n// Znaki: č, š, ž\nint main() {\n    const int HRA_NA_VREDNOST = 9;\n    std::string opis = \"`oklepaji` in *zvezdice*\";\n    return HRA_NA_VREDNOST;\n}",
+  "fragment_sha256": "104754d49eeb78ea3842d7dec58374a2f192a529f3ac72e1f8ed227803980564",
+  "fragment_bytes": 203,
+  "seed": "25519a23a817cb04"
+ },
+ {
+  "component_id": "comp-code-cpp-dev-0009",
+  "family": "code-cpp",
+  "instance": "dev",
+  "category": "code",
+  "subcategory": "C++",
+  "fragment": "/* Fragment 1: nevtralni testni projekt, vir https://primer.si/koda, pot src/modul.py */ namespace primer { std::string naslov = \"Razdelek: _podrobnosti_\"; const int razdelek2 = 7; } std::string opis1() { return \"Cena: 10 $ *ponudba* `kod` (č, š, ž)\"; }",
+  "fragment_sha256": "08a257b32c891a156fc6858e1c8d38418ebc1de7624958c64af80ec98cdb72b4",
+  "fragment_bytes": 256,
+  "seed": "25519a23a817cb04"
+ },
+ {
+  "component_id": "comp-code-cpp-dev-0010",
+  "family": "code-cpp",
+  "instance": "dev",
+  "category": "code",
+  "subcategory": "C++",
+  "fragment": "/* Fragment 2: fiktna oseba Ana, pot docs/vir.txt, vir https://primer.si/koda */ struct Vnos { std::string naziv; double znesek; }; const int razdelek2 = 2; const Vnos seStez{ \"*Nova* šola 3 $ `kod`\", 2.5 }; const Vnos vzorci[2] = { {\"črtasti vzorec (š)\", 4.0}, {\"_dokument_\", 5.0} };",
+  "fragment_sha256": "1a834da97f27e336f8b2c568247faf1245fbab820e00c9aa0c8486d33836e5cd",
+  "fragment_bytes": 287,
+  "seed": "25519a23a817cb04"
+ },
+ {
+  "component_id": "comp-code-cpp-dev-0011",
+  "family": "code-cpp",
+  "instance": "dev",
+  "category": "code",
+  "subcategory": "C++",
+  "fragment": "/* Fragment 3: testni primer, vir https://primer.si/koda, pot src/modul.py, docs/vir.txt */ int osnutek3 = 3; std::string podatek3() { return \"_Povzetek_ *koda* `backquote` 7 $ (č, š, ž)\"; }",
+  "fragment_sha256": "0a43b36171c32278dbcc1e3fb1eb1a8811ce6d13f8741b08d6b4202312d72631",
+  "fragment_bytes": 193,
+  "seed": "25519a23a817cb04"
+ }
+]

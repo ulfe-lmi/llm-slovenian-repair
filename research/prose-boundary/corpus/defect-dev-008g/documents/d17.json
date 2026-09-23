@@ -1,0 +1,17 @@
+{
+ "doc_id": "d17",
+ "seed": "008edefd0001",
+ "template": "D-xml-self-closing-period",
+ "byte_length": 29,
+ "cp_length": 29,
+ "sha256": "369aab4504f6a7d2161287184601e677cb503125482245676b900a8d2167cd26",
+ "document": "Pred tem.\n<foo.bar/>\nZa tem.\n",
+ "components": [
+  {
+   "component_id": "defect-008g-d17",
+   "category": "structured",
+   "start_byte": 10,
+   "end_byte": 20
+  }
+ ]
+}

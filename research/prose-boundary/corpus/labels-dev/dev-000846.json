@@ -1,0 +1,152 @@
+{
+ "doc_id": "dev-000846",
+ "byte_length": 799,
+ "cp_length": 775,
+ "regions": [
+  {
+   "start_byte": 0,
+   "end_byte": 1,
+   "start_cp": 0,
+   "end_cp": 1,
+   "component_id": "comp-code-python-dev-0003",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 1,
+   "end_byte": 49,
+   "start_cp": 1,
+   "end_cp": 49,
+   "component_id": "comp-code-python-dev-0003",
+   "category": "code",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 49,
+   "end_byte": 50,
+   "start_cp": 49,
+   "end_cp": 50,
+   "component_id": "comp-code-python-dev-0003",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 50,
+   "end_byte": 51,
+   "start_cp": 50,
+   "end_cp": 51,
+   "component_id": "template",
+   "category": null,
+   "role": "PROSE",
+   "template_owned": true
+  },
+  {
+   "start_byte": 51,
+   "end_byte": 52,
+   "start_cp": 51,
+   "end_cp": 52,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 52,
+   "end_byte": 55,
+   "start_cp": 52,
+   "end_cp": 55,
+   "component_id": "comp-code-c-dev-0001",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 55,
+   "end_byte": 56,
+   "start_cp": 55,
+   "end_cp": 56,
+   "component_id": "comp-code-c-dev-0001",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 56,
+   "end_byte": 212,
+   "start_cp": 56,
+   "end_cp": 209,
+   "component_id": "comp-code-c-dev-0001",
+   "category": "code",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 212,
+   "end_byte": 213,
+   "start_cp": 209,
+   "end_cp": 210,
+   "component_id": "comp-code-c-dev-0001",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 213,
+   "end_byte": 216,
+   "start_cp": 210,
+   "end_cp": 213,
+   "component_id": "comp-code-c-dev-0001",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 216,
+   "end_byte": 217,
+   "start_cp": 213,
+   "end_cp": 214,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 217,
+   "end_byte": 539,
+   "start_cp": 214,
+   "end_cp": 526,
+   "component_id": "comp-prose-cooking-dev-0006",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 539,
+   "end_byte": 540,
+   "start_cp": 526,
+   "end_cp": 527,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 540,
+   "end_byte": 799,
+   "start_cp": 527,
+   "end_cp": 775,
+   "component_id": "comp-prose-statistics-dev-0010",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  }
+ ],
+ "invariants": {
+  "tiling_complete": true,
+  "no_contradictory_overlaps": true,
+  "cp_range_exact": true
+ }
+}

@@ -1,0 +1,112 @@
+{
+ "doc_id": "dev-000167",
+ "byte_length": 1214,
+ "cp_length": 1195,
+ "regions": [
+  {
+   "start_byte": 0,
+   "end_byte": 284,
+   "start_cp": 0,
+   "end_cp": 281,
+   "component_id": "comp-prose-sports-dev-0004",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 284,
+   "end_byte": 285,
+   "start_cp": 281,
+   "end_cp": 282,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 285,
+   "end_byte": 288,
+   "start_cp": 282,
+   "end_cp": 285,
+   "component_id": "comp-code-sql-dev-0011",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 288,
+   "end_byte": 289,
+   "start_cp": 285,
+   "end_cp": 286,
+   "component_id": "comp-code-sql-dev-0011",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 289,
+   "end_byte": 726,
+   "start_cp": 286,
+   "end_cp": 721,
+   "component_id": "comp-code-sql-dev-0011",
+   "category": "code",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 726,
+   "end_byte": 727,
+   "start_cp": 721,
+   "end_cp": 722,
+   "component_id": "comp-code-sql-dev-0011",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 727,
+   "end_byte": 730,
+   "start_cp": 722,
+   "end_cp": 725,
+   "component_id": "comp-code-sql-dev-0011",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 730,
+   "end_byte": 731,
+   "start_cp": 725,
+   "end_cp": 726,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 731,
+   "end_byte": 1173,
+   "start_cp": 726,
+   "end_cp": 1161,
+   "component_id": "comp-prose-sports-dev-0005",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 1173,
+   "end_byte": 1214,
+   "start_cp": 1161,
+   "end_cp": 1195,
+   "component_id": "template",
+   "category": null,
+   "role": "PROSE",
+   "template_owned": true
+  }
+ ],
+ "invariants": {
+  "tiling_complete": true,
+  "no_contradictory_overlaps": true,
+  "cp_range_exact": true
+ }
+}

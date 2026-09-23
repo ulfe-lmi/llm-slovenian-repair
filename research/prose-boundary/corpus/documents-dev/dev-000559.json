@@ -1,0 +1,71 @@
+{
+ "doc_id": "dev-000559",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T10-randomized",
+ "byte_length": 1753,
+ "cp_length": 1728,
+ "sha256": "bfc7a593303c4c545c271eb71b6ec66dbed16b040a9de1c7ce4a3108248e1284",
+ "document": "V Splitu smo opazovali staro obalo in šele zvečer spoznali, da je bilo morje mirno. Vodič je dejal: \"ogledaj najprej dvorano, nato pa solne jame\". Naslednji dan smo se sprehodili po starem mestnem jedru in kupili oljčno olje.\n## Naslov 6\n![Opis: osvetlitev za projekt Foxtrot](https://primer.si/slika.png)\nNina Kranjc: svetlost 300 lx, čas 10 min.\n[opis](https://primer.si/stran prvi del: avtorizirana testna vsebina projekta Modri vrt; izmišljena oseba Ana Kovač preverja podatke.\n[voda]\nime = *Projekt Rečni tok*\nopis = _stopnja_ 0,13\nprostornina = 12 litrov\navtor = Tone Zupan\nvir = https://primer.si/novica\n; nevtralna testna vsebina\n[raziskava]\nime = *Projekt Meritve*\nopis = _trajanje_ 3 dni\ncena = 1,20 EUR\navtor = Ana Kovač\nvir = https://primer.si/novica\n; nevtralna testna vsebina\n```\n/* Primer 3: vrednost in identifikator */ int main(void) { const char *pot = \"src/modul.py\"; const char *dokument = \"docs/vir.txt\"; const char *meta = \"Vrednost: 99,90 $ (oklepji) *poudarek* in HRAŠNA_VREDNOST\"; const char *naslov = \"https://primer.si/koda\"; int hraSnaVrednost2 = 3; (void)pot; (void)dokument; (void)meta; (void)naslov; return hraSnaVrednost2; }\n```\n{\"opis\":\"*Zelena* _testna_ vsebina\",\"merilo\":\"3,5 m\",\"vir\":\"https://primer.si/novica\"}\n--vhod konfiguracija/nastavitve.ini, --izhod 2, --format xml\nProjekt Sova: Hitrost teka 60 m/min in masa 8 kg sta opisani z **močno** in __podčrtim__ besedilom.\nLeta 1999 so v projektu Bralna mreža (izmišljeni arhiv) preizkušali, kako bralci obudijo spomin na slovenske in evropske pesnike. Odkritje ni bilo v imenu, temveč v tem, da je vprašanje (brez nujnega odgovora) preživelo vse. »Zato,« je zapisal izmišljeni filolog Marko Rovec, »ker je knjižnost včasih sama sebi prevod.«",
+ "components": [
+  {
+   "component_id": "comp-prose-travel-dev-0002",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 229
+  },
+  {
+   "component_id": "comp-markdown-images-dev-0006",
+   "category": "markdown",
+   "start_byte": 230,
+   "end_byte": 352
+  },
+  {
+   "component_id": "comp-malformed-broken-link-dev-0001",
+   "category": "malformed",
+   "start_byte": 353,
+   "end_byte": 488
+  },
+  {
+   "component_id": "comp-structured-ini-dev-0002",
+   "category": "structured",
+   "start_byte": 489,
+   "end_byte": 645
+  },
+  {
+   "component_id": "comp-structured-ini-dev-0005",
+   "category": "structured",
+   "start_byte": 646,
+   "end_byte": 798
+  },
+  {
+   "component_id": "comp-code-c-dev-0011",
+   "category": "code",
+   "start_byte": 799,
+   "end_byte": 1170
+  },
+  {
+   "component_id": "comp-structured-keyvalue-dev-0007",
+   "category": "structured",
+   "start_byte": 1171,
+   "end_byte": 1257
+  },
+  {
+   "component_id": "comp-machine-cli-flags-dev-0008",
+   "category": "machine",
+   "start_byte": 1258,
+   "end_byte": 1318
+  },
+  {
+   "component_id": "comp-markdown-strong-dev-0003",
+   "category": "markdown",
+   "start_byte": 1319,
+   "end_byte": 1420
+  },
+  {
+   "component_id": "comp-prose-literature-dev-0004",
+   "category": "prose",
+   "start_byte": 1421,
+   "end_byte": 1753
+  }
+ ]
+}

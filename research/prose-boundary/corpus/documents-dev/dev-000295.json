@@ -1,0 +1,53 @@
+{
+ "doc_id": "dev-000295",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T10-randomized",
+ "byte_length": 1419,
+ "cp_length": 1396,
+ "sha256": "cada01db41e981d8bf37d4befd4912bf51bc95a223ae4f80146fa5c751b66733",
+ "document": "V šolskem testnem kotičku je Nia izmislila preprosto skico: utripalka, upornost, sklep in baterija v krogu. \"Ne pozabi, da je sklep odprt, dokler ga ne pritisneš,\" je opomnila sošolki. Ta se je nasmehnila in se lotila priključevanja. Ko je vse šlo, sta skupaj ugasnili in zapisali datum.\n| Ime osebe | Enota | Merilo |\n| --- | --- | --- |\n| Ana Kovač | min | 18 |\n| Bojan Zupan | l | 230 |\nhttp://izvor.si/dokument?stran=2\n```\nfn povzetek2(seStez: bool) -> String { /* Testni projekt Lipa: č, š, ž, **poudarek** in _podčrtano_ */ let razdelek2 = 2; let besedilo = format!(\"_Podčrtano_ ({} $, `{}`)\", razdelek2, \"ž\"); let pot = \"docs/vir.txt\"; let url = \"https://primer.si/koda\"; format!(\"{} | {} | {} | {}\", seStez, besedilo, pot, url) }\n```\n```\n/* Primer 2: url in backquote */ int main(void) { const char *url = \"https://primer.si/koda\"; const char *opis = \"Znak `backquote`, pot: src/modul.py, črka š\"; int razdelek2 = 7; const char *opozorilo = \"Opomba: *nevarno* in _poudarek_\"; (void)url; (void)opis; (void)opozorilo; return razdelek2; }\n```\n\\text{Vid}\\begin{bmatrix}21&22&23\\\\24&25&26\\end{bmatrix}\nV projektu Modra skica je Luka dejal, da „povprečje ni vedno sredina“, ker so trije dani zneski zelo različni. V primeru razmerja tri do pet so bila odstopanja manjša. Ana se je strinjala, vendar je opozorila na izjemne dni. Na koncu so se dogovorili, da bodo uporabili preprostejše meritve.",
+ "components": [
+  {
+   "component_id": "comp-prose-electronics-dev-0005",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 293
+  },
+  {
+   "component_id": "comp-markdown-tables-dev-0002",
+   "category": "markdown",
+   "start_byte": 294,
+   "end_byte": 396
+  },
+  {
+   "component_id": "comp-machine-urls-dev-0002",
+   "category": "machine",
+   "start_byte": 397,
+   "end_byte": 429
+  },
+  {
+   "component_id": "comp-code-rust-dev-0002",
+   "category": "code",
+   "start_byte": 430,
+   "end_byte": 754
+  },
+  {
+   "component_id": "comp-code-c-dev-0010",
+   "category": "code",
+   "start_byte": 755,
+   "end_byte": 1062
+  },
+  {
+   "component_id": "comp-math-matrices-dev-0005",
+   "category": "math",
+   "start_byte": 1063,
+   "end_byte": 1119
+  },
+  {
+   "component_id": "comp-prose-statistics-dev-0008",
+   "category": "prose",
+   "start_byte": 1120,
+   "end_byte": 1419
+  }
+ ]
+}

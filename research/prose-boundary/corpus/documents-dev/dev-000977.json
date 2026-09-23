@@ -1,0 +1,65 @@
+{
+ "doc_id": "dev-000977",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T10-randomized",
+ "byte_length": 1644,
+ "cp_length": 1613,
+ "sha256": "ba58ebb9f326c2945c6493eaaa018a2583c50cf1f36cefe17926fceeca5a0dd9",
+ "document": "V pisni pojasnitvi je bilo zapisano, da se rok za vložitev pritožbe šteje od dneva, ko je odločba dostavljena na elektronski naslov ali osebno. »V dveh primerih je bilo treba preveriti avtentičnost prijave,« je povedala urednica projekta. (To je trajalo pet delovnih dni in je zmanjšalo tveganje za napačno odločitev.)\nmake preizkus\nFragment 7: <table><tr><td>Številka</td><td>1.000</td></tr><tr><td>Delež</td><td>12,5 %</td></tr><tr><td>Množica</td><td>0,875</td></tr><tr><td>Povezava</td><td>*vir_ (<a href=\"https://primer.si/vir\">vir</a>)</td></tr></table>\n## Naslov 1\n![Opis: vzorčnik za projekt Alfa](https://primer.si/slika.png)\nAna Novak: masa 12 kg, dolžina 3 m.\n```\n# Testni projekt: Nabavna lista; avtor: Maja Lipovnik\ncena = 12.50\nznesek = 'Cena: 12,50 $ v oklepaju (brez DDV)'\npot = 'docs/vir.txt'\nkomentar = 'Slovenski č, š, ž'\nif cena > 10:\n    print('Visok znesek')\n```\n1. Projekt Jabljana: 4 kosi, 250 ml\n2. Podatek: 20 °C, 5 l\n## Naslov 5\n![Opis: meritev višine za projekt Echo](https://primer.si/slika.png)\nIva Hribar: višina 2 m, masa 4 kg.\n[površje]\nime = *Projekt Ravno polje*\nopis = _višina_ 0,13 m\nširina = 9,75 m\navtor = Luka Kos\nvir = https://primer.si/novica\n; nevtralna testna vsebina\nV projektu Riba so preučevali majhne vodne uje v ozkih rezervoarjih in beležili izmenjavo plina v zraku nad vodo. Nekatere meritve so opravili po polnoči, ko so šumni odzivi živali izginili in je bila voda skoraj mirna. Leta dvotisoč in dvanajst je vodja zapisal, da bo treba poskus ponoviti z večjimi posodami. V zadnji opombi so dodali, da je koristna tudi meritev spremembe barve vode po treh dneh.",
+ "components": [
+  {
+   "component_id": "comp-prose-administration-dev-0003",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 328
+  },
+  {
+   "component_id": "comp-machine-shell-commands-dev-0002",
+   "category": "machine",
+   "start_byte": 329,
+   "end_byte": 342
+  },
+  {
+   "component_id": "comp-structured-html-dev-0007",
+   "category": "structured",
+   "start_byte": 343,
+   "end_byte": 572
+  },
+  {
+   "component_id": "comp-markdown-images-dev-0001",
+   "category": "markdown",
+   "start_byte": 573,
+   "end_byte": 685
+  },
+  {
+   "component_id": "comp-code-python-dev-0002",
+   "category": "code",
+   "start_byte": 686,
+   "end_byte": 902
+  },
+  {
+   "component_id": "comp-markdown-lists-dev-0002",
+   "category": "markdown",
+   "start_byte": 903,
+   "end_byte": 962
+  },
+  {
+   "component_id": "comp-markdown-images-dev-0005",
+   "category": "markdown",
+   "start_byte": 963,
+   "end_byte": 1080
+  },
+  {
+   "component_id": "comp-structured-ini-dev-0007",
+   "category": "structured",
+   "start_byte": 1081,
+   "end_byte": 1235
+  },
+  {
+   "component_id": "comp-prose-science-dev-0005",
+   "category": "prose",
+   "start_byte": 1236,
+   "end_byte": 1644
+  }
+ ]
+}

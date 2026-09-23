@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-001601",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T7-prose-json-prose-latex",
+ "byte_length": 899,
+ "cp_length": 883,
+ "sha256": "a2d8763cc6b0bc00e877cf0d4dfbbd09a5a50edd122fb8d241c615d39527b261",
+ "document": "Ob prenovljenem pisarnem kotu, ki ga je v notranjem projektu Pisarna pripravila Petra, je nov tablični računalnik služil za skice (in, po njenih besedah, tudi za preprosta vprašanja). V prvih tednih se je navadila na večji zaslon, ker so bile besede na papirju pogosto preveč majhne za oči. Ko je na koncu septembra preverila baterijo, ji je bil prijeten ta enostaven način dela.\n{\"ime\":\"Oseba Miha\",\"dolžina\":\"1,8 m\",\"avtorsko\":\"Nevtralna testna vsebina\",\"razmerje\":\"0,13\",\"opomba\":\"*Izmišljena oseba* https://primer.si/novica\"}\nV šoli zdravja v Trzinu so učenci (ki so sodelovali v projektu Mirni utripi) prebrali, da premalo gibanja lahko spremeni občutek moči in počutje. Takšne spremembe so lahko odziv na vsakdanjo utrujenost. Ko se pri nekem otroku ali odraslem ponovijo, je prav, da jih preveri zdravnik.\n\\(\\left(\\frac{\\sigma^3}{\\tau+4}+\\sqrt{2\\omega+1}\\right)_{\\text{Eva}}\\)",
+ "components": [
+  {
+   "component_id": "comp-prose-computing-dev-0011",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 387
+  },
+  {
+   "component_id": "comp-structured-json-dev-0006",
+   "category": "structured",
+   "start_byte": 388,
+   "end_byte": 539
+  },
+  {
+   "component_id": "comp-prose-medicine-explainer-dev-0002",
+   "category": "prose",
+   "start_byte": 540,
+   "end_byte": 828
+  },
+  {
+   "component_id": "comp-math-paren-tex-dev-0005",
+   "category": "math",
+   "start_byte": 829,
+   "end_byte": 899
+  }
+ ]
+}

@@ -1,0 +1,102 @@
+{
+ "doc_id": "dev-000171",
+ "byte_length": 997,
+ "cp_length": 976,
+ "regions": [
+  {
+   "start_byte": 0,
+   "end_byte": 337,
+   "start_cp": 0,
+   "end_cp": 327,
+   "component_id": "comp-prose-computing-dev-0008",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 337,
+   "end_byte": 338,
+   "start_cp": 327,
+   "end_cp": 328,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 338,
+   "end_byte": 543,
+   "start_cp": 328,
+   "end_cp": 530,
+   "component_id": "comp-structured-json-dev-0003",
+   "category": "structured",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 543,
+   "end_byte": 544,
+   "start_cp": 530,
+   "end_cp": 531,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 544,
+   "end_byte": 941,
+   "start_cp": 531,
+   "end_cp": 920,
+   "component_id": "comp-prose-sports-dev-0003",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 941,
+   "end_byte": 942,
+   "start_cp": 920,
+   "end_cp": 921,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 942,
+   "end_byte": 944,
+   "start_cp": 921,
+   "end_cp": 923,
+   "component_id": "comp-math-fractions-dev-0002",
+   "category": "math",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 944,
+   "end_byte": 995,
+   "start_cp": 923,
+   "end_cp": 974,
+   "component_id": "comp-math-fractions-dev-0002",
+   "category": "math",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 995,
+   "end_byte": 997,
+   "start_cp": 974,
+   "end_cp": 976,
+   "component_id": "comp-math-fractions-dev-0002",
+   "category": "math",
+   "role": "NEUTRAL",
+   "template_owned": false
+  }
+ ],
+ "invariants": {
+  "tiling_complete": true,
+  "no_contradictory_overlaps": true,
+  "cp_range_exact": true
+ }
+}

@@ -1,0 +1,41 @@
+{
+ "doc_id": "dev-000570",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T10-randomized",
+ "byte_length": 594,
+ "cp_length": 579,
+ "sha256": "4c045f602f5f0a47edf8ac68b2856041e99e38daad18057887b22bbdb56d9978",
+ "document": "V projektu Prijava za športno leto 2024 je učiteljica Meta pojasnila, da lahka utrujenost po vadbi pogosto prehaja, če oseba zaspi in pije vodo. Če se stanje ponovi ali poslabša, je smiselno poiskati zdravnika.\nposta@oddelek.primer.si,janez.kranjc@primer.si\n> Projekt Brina, avtor *Luka*: masa 8 g.\n> > Test vsebina je nevtralna.\n$20 je vrednost testnega opisa v projektu Gora Kresanja.\n„Prvi korak, drugi noga,“ je rekla Ana, a mladi smučarji v projektni skupini so še vedno poskušali izbrati pravo pozicijo. Ko je padal sneg, so se vsi odločili za krajši premor pri topli čaju.",
+ "components": [
+  {
+   "component_id": "comp-prose-medicine-explainer-dev-0011",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 215
+  },
+  {
+   "component_id": "comp-machine-emails-dev-0003",
+   "category": "machine",
+   "start_byte": 216,
+   "end_byte": 262
+  },
+  {
+   "component_id": "comp-markdown-blockquotes-dev-0005",
+   "category": "markdown",
+   "start_byte": 263,
+   "end_byte": 334
+  },
+  {
+   "component_id": "comp-malformed-unmatched-dollar-dev-0003",
+   "category": "malformed",
+   "start_byte": 335,
+   "end_byte": 391
+  },
+  {
+   "component_id": "comp-prose-sports-dev-0012",
+   "category": "prose",
+   "start_byte": 392,
+   "end_byte": 594
+  }
+ ]
+}

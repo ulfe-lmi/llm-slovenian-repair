@@ -1,0 +1,112 @@
+{
+ "doc_id": "dev-000312",
+ "byte_length": 959,
+ "cp_length": 944,
+ "regions": [
+  {
+   "start_byte": 0,
+   "end_byte": 2,
+   "start_cp": 0,
+   "end_cp": 2,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 2,
+   "end_byte": 236,
+   "start_cp": 2,
+   "end_cp": 232,
+   "component_id": "comp-prose-medicine-explainer-dev-0013",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 236,
+   "end_byte": 239,
+   "start_cp": 232,
+   "end_cp": 235,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 239,
+   "end_byte": 240,
+   "start_cp": 235,
+   "end_cp": 236,
+   "component_id": "comp-code-python-dev-0004",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 240,
+   "end_byte": 291,
+   "start_cp": 236,
+   "end_cp": 286,
+   "component_id": "comp-code-python-dev-0004",
+   "category": "code",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 291,
+   "end_byte": 292,
+   "start_cp": 286,
+   "end_cp": 287,
+   "component_id": "comp-code-python-dev-0004",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 292,
+   "end_byte": 295,
+   "start_cp": 287,
+   "end_cp": 290,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 295,
+   "end_byte": 691,
+   "start_cp": 290,
+   "end_cp": 680,
+   "component_id": "comp-prose-science-dev-0002",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 691,
+   "end_byte": 694,
+   "start_cp": 680,
+   "end_cp": 683,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 694,
+   "end_byte": 959,
+   "start_cp": 683,
+   "end_cp": 944,
+   "component_id": "comp-prose-statistics-dev-0001",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  }
+ ],
+ "invariants": {
+  "tiling_complete": true,
+  "no_contradictory_overlaps": true,
+  "cp_range_exact": true
+ }
+}

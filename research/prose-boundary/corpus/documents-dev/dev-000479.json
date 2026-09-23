@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-000479",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T7-prose-json-prose-latex",
+ "byte_length": 881,
+ "cp_length": 862,
+ "sha256": "391606214b9cd22f136e3e143308df9b0bdf7e34b6a673db8c10fb47492e8fb1",
+ "document": "V zbirki Tihi bralci (2018) mlada pisateljica Nina Skof opisuje dedno knjižnico. Na stenski plošci visi seznam bralcev iz let 1954 in 1971, med njimi tudi izmišljeni pesnik Jure Čvik. Evropska literarna tradicija pozna podobno zbirko tistih, ki so izginili v prevodu. Knjižnost je tu skrita v prahu, ne v naslovu.\n{\"ime\":\"Oseba Miha\",\"dolžina\":\"1,8 m\",\"avtorsko\":\"Nevtralna testna vsebina\",\"razmerje\":\"0,13\",\"opomba\":\"*Izmišljena oseba* https://primer.si/novica\"}\nLuka je za projekt »Čitljiv pregled« popoldne pripravljal predstavitev in opazil, da program za beležke včasih počaka, da se prek opozorila ponastavi. Zapisal si je, da je najprej varno shraniti spremembe, nato pa šele pritiskati na gumb »Posodobi«. S tem je rešil vprašanje, ali bo pregled slika ostal čitljiv.\n$\\lim_{\\theta \\to 0} \\frac{\\alpha \\theta}{\\theta} = \\alpha_{\\text{Nina projekt Most}}$",
+ "components": [
+  {
+   "component_id": "comp-prose-literature-dev-0003",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 318
+  },
+  {
+   "component_id": "comp-structured-json-dev-0006",
+   "category": "structured",
+   "start_byte": 319,
+   "end_byte": 470
+  },
+  {
+   "component_id": "comp-prose-computing-dev-0007",
+   "category": "prose",
+   "start_byte": 471,
+   "end_byte": 794
+  },
+  {
+   "component_id": "comp-math-inline-dollar-dev-0007",
+   "category": "math",
+   "start_byte": 795,
+   "end_byte": 881
+  }
+ ]
+}

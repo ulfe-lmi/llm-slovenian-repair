@@ -1,0 +1,71 @@
+{
+ "doc_id": "dev-002759",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T10-randomized",
+ "byte_length": 2112,
+ "cp_length": 2090,
+ "sha256": "e1dd11f3ee554b4ec1f61d82cff581aa6f389a3aad0579dbd0dc3a6025f09b89",
+ "document": "V Občini Srednji Grič je od lanskega aprila potekalo posvetovanje o novem postopku za izdajo gradbenih dovoljenj. (Cilj je bil krajši rok za obravnavo zahtev.) Upravni uradnik Marko Zajc je pripravil povzetek komentarjev, ki so jih oddali posamezniki, podjetja in društva. Do konca leta 2025 so želeli uvesti enotno elektronsko knjižico, vendar se je izkazalo, da je treba najprej uskladiti terminologijo.\n```\n/* Testni fragment 4: izmišljena oseba Eva, projekt Trava. */ SELECT 'Eva' AS `ime`, '4,20 $' AS `cena`, 'https://primer.si/koda' AS `url`, 'docs/vir.txt' AS `pot`, TRIM('*poudarek* in _dolgo_') AS `opomba`, 'razdelek2' AS `razdelek2`, 'seStez' AS `seStez`, 'č' AS `HRAŠNA_VREDNOST` FROM (SELECT 4 AS `en`) AS `t` WHERE (`t`.`en` = 4);\n```\n25 %, 42 obr/min\n\\begin{equation} \\text{Testni projekt Tomas} \\; : \\; \\sin^2 \\theta_6 + \\cos^2 \\theta_6=1 \\Rightarrow \\theta_6=\\frac{\\pi}{6} \\Rightarrow \\sin^2\\left(\\frac{\\pi}{6}\\right)+\\cos^2\\left(\\frac{\\pi}{6}\\right)=1 \\end{equation}\n## Projekt Trava\n### Testni podnaslov\n#### Podroben podnaslov\nProjekt Trava, avtor Marko Kranjc, vrednost 12 g.\nP(E \\cap F_{\\text{Borič}}) = P(E) + P(F_{\\text{Borič}}) - P(E \\cup F_{\\text{Borič}}) = \\frac{\\sqrt{3}}{4} \\text{ (seštevek verjetnosti)}\n\\begin{equation} \\text{Testni projekt Petra} \\; : \\; \\sum_{\\kappa=1}^{3} \\kappa^2=1^2+2^2+3^2 \\Rightarrow \\sum_{\\kappa=1}^{3} \\kappa^2=14 \\end{equation}\nFragment 8: <ol><li>Konfiguracija: _varno_stanje_ (vrednost 0,01)</li><li>Preverjanje: *trajanje* 125 s</li><li>Dokumenti: glej <a href=\"https://primer.si/dokumenti\">dokumenti</a></li></ol>\n<poroca id='šesti' ime='Marko Kranjc' letnik='2024'><stevilo obseg='1.204 kos'>Izdelani artikli</stevilo></poroca>\nV prostoru projekta Tabor so preizkušali prenos toplote skozi plastine in merili spremembe, ko so dodali tanke plasti iz mešanih vlaken. Meritve so vodila dva študenta, Luka in Nika, ki sta zapisoval čase, temperature ter opazila rahlo meglico na robu vzorcev. Leta dvotisoč in devetindvajset, ko je bila soba še prenovljena, je v opombah stalo, da bo treba poskus ponoviti pri drugačni vlažnosti.",
+ "components": [
+  {
+   "component_id": "comp-prose-administration-dev-0001",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 411
+  },
+  {
+   "component_id": "comp-code-sql-dev-0004",
+   "category": "code",
+   "start_byte": 412,
+   "end_byte": 758
+  },
+  {
+   "component_id": "comp-machine-versions-numbers-units-dev-0003",
+   "category": "machine",
+   "start_byte": 759,
+   "end_byte": 775
+  },
+  {
+   "component_id": "comp-math-equation-env-dev-0006",
+   "category": "math",
+   "start_byte": 776,
+   "end_byte": 994
+  },
+  {
+   "component_id": "comp-markdown-headings-dev-0002",
+   "category": "markdown",
+   "start_byte": 995,
+   "end_byte": 1106
+  },
+  {
+   "component_id": "comp-math-probability-dev-0004",
+   "category": "math",
+   "start_byte": 1107,
+   "end_byte": 1247
+  },
+  {
+   "component_id": "comp-math-equation-env-dev-0003",
+   "category": "math",
+   "start_byte": 1248,
+   "end_byte": 1400
+  },
+  {
+   "component_id": "comp-structured-html-dev-0008",
+   "category": "structured",
+   "start_byte": 1401,
+   "end_byte": 1590
+  },
+  {
+   "component_id": "comp-structured-xml-dev-0006",
+   "category": "structured",
+   "start_byte": 1591,
+   "end_byte": 1706
+  },
+  {
+   "component_id": "comp-prose-science-dev-0004",
+   "category": "prose",
+   "start_byte": 1707,
+   "end_byte": 2112
+  }
+ ]
+}

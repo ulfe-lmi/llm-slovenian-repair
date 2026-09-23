@@ -1,0 +1,142 @@
+{
+ "doc_id": "dev-000922",
+ "byte_length": 1132,
+ "cp_length": 1107,
+ "regions": [
+  {
+   "start_byte": 0,
+   "end_byte": 483,
+   "start_cp": 0,
+   "end_cp": 470,
+   "component_id": "comp-prose-administration-dev-0010",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 483,
+   "end_byte": 484,
+   "start_cp": 470,
+   "end_cp": 471,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 484,
+   "end_byte": 486,
+   "start_cp": 471,
+   "end_cp": 473,
+   "component_id": "comp-math-bracket-tex-dev-0003",
+   "category": "math",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 486,
+   "end_byte": 561,
+   "start_cp": 473,
+   "end_cp": 548,
+   "component_id": "comp-math-bracket-tex-dev-0003",
+   "category": "math",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 561,
+   "end_byte": 563,
+   "start_cp": 548,
+   "end_cp": 550,
+   "component_id": "comp-math-bracket-tex-dev-0003",
+   "category": "math",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 563,
+   "end_byte": 564,
+   "start_cp": 550,
+   "end_cp": 551,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 564,
+   "end_byte": 567,
+   "start_cp": 551,
+   "end_cp": 554,
+   "component_id": "comp-code-python-dev-0003",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 567,
+   "end_byte": 568,
+   "start_cp": 554,
+   "end_cp": 555,
+   "component_id": "comp-code-python-dev-0003",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 568,
+   "end_byte": 767,
+   "start_cp": 555,
+   "end_cp": 750,
+   "component_id": "comp-code-python-dev-0003",
+   "category": "code",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 767,
+   "end_byte": 768,
+   "start_cp": 750,
+   "end_cp": 751,
+   "component_id": "comp-code-python-dev-0003",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 768,
+   "end_byte": 771,
+   "start_cp": 751,
+   "end_cp": 754,
+   "component_id": "comp-code-python-dev-0003",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 771,
+   "end_byte": 772,
+   "start_cp": 754,
+   "end_cp": 755,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 772,
+   "end_byte": 1132,
+   "start_cp": 755,
+   "end_cp": 1107,
+   "component_id": "comp-prose-cooking-dev-0002",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  }
+ ],
+ "invariants": {
+  "tiling_complete": true,
+  "no_contradictory_overlaps": true,
+  "cp_range_exact": true
+ }
+}

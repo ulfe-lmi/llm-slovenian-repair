@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-002143",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T10-randomized",
+ "byte_length": 1082,
+ "cp_length": 1065,
+ "sha256": "d8f95fba9d2b107e58abe27baf002e3d33daed7bbb4b992eee2b46a5564a69e8",
+ "document": "Pri izpisu je bila pomembna ne samo skupna vrednost, ampak tudi to, ali so vsi podatki iz štirih oddelkov pravilni (kot je poudarila Nina). Povprečna vrednost je bila za tri evre višja, razmerje pa je ostalo približno enako kot spomladi 2022.\nPROJEKT=Siva dolina\nAVTOR=Ivan Mlakar\nPREDAL=3,2 m\nDELEŽ=0,88\nDODATNA_VAR=$drugim_ključem; 0,19\nOPIS=[*neodvisen*, _fragment_, https://primer.si/novica]\n$\\prod_{\\kappa=1}^{3} \\theta_\\kappa = \\eta_{\\text{Viktor projekt Jezero}}$\nNa opazovalni postaji pri projektu Zvezdna nit pod Šmarnico je mlada raziskovalka Lina Petek opazovala meglico z imenom Vrt 17 (opazovana od leta 2019). »Zvezda se v daljinici zdi tiha, vendar spektralna analiza kaže, da se v njej dogajajo močni premiki,« je povedala ob drugi uri zjutraj. Njena ekipa je nato v dolge noči zapisovala meritve, pri čemer so posebej skrbno beležila tudi tiste minute, ko je meglica izgledala kot navaden oblak. Kasneje je Lina v dnevnik zapisala, da so dolge serije meritev pogosto bolj zanesljive od enega samega pogleda.\n Pozor: é (dekompouziran znakovni niz).",
+ "components": [
+  {
+   "component_id": "comp-prose-statistics-dev-0004",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 246
+  },
+  {
+   "component_id": "comp-structured-env-blocks-dev-0007",
+   "category": "structured",
+   "start_byte": 247,
+   "end_byte": 401
+  },
+  {
+   "component_id": "comp-math-inline-dollar-dev-0004",
+   "category": "math",
+   "start_byte": 402,
+   "end_byte": 476
+  },
+  {
+   "component_id": "comp-prose-science-dev-0013",
+   "category": "prose",
+   "start_byte": 477,
+   "end_byte": 1038
+  }
+ ]
+}

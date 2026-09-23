@@ -1,0 +1,69 @@
+{
+ "schema": "008c-e2e-invariants/1",
+ "order": "008-c",
+ "label": "dev-corpus tuning evidence, NOT acceptance",
+ "protection_mode": "parser-first",
+ "helper_sha256": "5df9a11d56b5bdec90c3ca09298802723975306f77e43e74ad1a72eb427c44bf",
+ "self_corpus": {
+  "documents": 3000,
+  "unigrams": 4659,
+  "bigrams": 17374,
+  "trigrams": 26505,
+  "middle_rows": 26505
+ },
+ "reviewer": "scripted reviewer at the HTTP boundary: raw response documents parsed by review.parse_proposal; zero network, zero model calls (S-EVIDENCE-01)",
+ "documents": {
+  "dev_total": 3000,
+  "with_protected_and_prose": 3000,
+  "replayed": 40,
+  "zero_eligible_documents": 0,
+  "full_zero_check": true
+ },
+ "invariants": {
+  "1_detector_input_outside_protected": true,
+  "2_ngram_windows_no_bridge": true,
+  "3_review_targets_outside_protected": true,
+  "4_accepted_edits_outside_protected": true,
+  "5_protected_substrings_identical_after_path": true,
+  "6_adjacent_prose_repairable": true,
+  "7_zero_eligible_zero_review_work": true
+ },
+ "seeded": [
+  {
+   "doc_id": "dev-000012",
+   "error_word": "xyzzyplugh",
+   "replacement_word": "projekt",
+   "edit_applied": true
+  },
+  {
+   "doc_id": "dev-000020",
+   "error_word": "xyzzyplugh",
+   "replacement_word": "projekt",
+   "edit_applied": true
+  },
+  {
+   "doc_id": "dev-000031",
+   "error_word": "xyzzyplugh",
+   "replacement_word": "projekt",
+   "edit_applied": true
+  },
+  {
+   "doc_id": "dev-000042",
+   "error_word": "xyzzyplugh",
+   "replacement_word": "projekt",
+   "edit_applied": true
+  },
+  {
+   "doc_id": "dev-000056",
+   "error_word": "xyzzyplugh",
+   "replacement_word": "projekt",
+   "edit_applied": true
+  }
+ ],
+ "synthetic_zero_eligible": {
+  "eligible_words": 0,
+  "candidates": 0,
+  "ok": true
+ },
+ "all_pass": true
+}

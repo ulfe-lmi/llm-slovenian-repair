@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-002572",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T10-randomized",
+ "byte_length": 715,
+ "cp_length": 695,
+ "sha256": "8e83c34c59a59e78fa9989c7ed7fc862a7a0b26e4ff86dd50dc98a2ce07a482e",
+ "document": "„Prvi korak, drugi noga,“ je rekla Ana, a mladi smučarji v projektni skupini so še vedno poskušali izbrati pravo pozicijo. Ko je padal sneg, so se vsi odločili za krajši premor pri topli čaju.\n**_Mešanica_ brez zapora.\nTestni projekt: Vrtna pot. Osebna: Ana Novak.\n[trgovina]\nime = 'Trgovina Lipa'\nprodajalec = 'Irena Zupan'\nzaloga = '12 kos'\npopust = '15 %'\nopis = '*Novica* o _prodaji_'\nvir = 'https://primer.si/novica'\nPri kontrolnem pregledu mostu v projektu Vrelje so s kamerami, ki so bile pod nosilci, preverili stanje zaščitnih premazov. „Korozija je blaga, a jo moramo spremljati vsako leto“, je zapisal vodja vzdrževanja Igor Potočnik. Popravila so načrtovali za jesen (mesec oktober).",
+ "components": [
+  {
+   "component_id": "comp-prose-sports-dev-0012",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 202
+  },
+  {
+   "component_id": "comp-malformed-malformed-nesting-dev-0001",
+   "category": "malformed",
+   "start_byte": 203,
+   "end_byte": 275
+  },
+  {
+   "component_id": "comp-structured-toml-dev-0003",
+   "category": "structured",
+   "start_byte": 276,
+   "end_byte": 432
+  },
+  {
+   "component_id": "comp-prose-engineering-dev-0005",
+   "category": "prose",
+   "start_byte": 433,
+   "end_byte": 715
+  }
+ ]
+}

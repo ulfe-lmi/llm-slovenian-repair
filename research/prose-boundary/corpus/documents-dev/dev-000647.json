@@ -1,0 +1,41 @@
+{
+ "doc_id": "dev-000647",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T10-randomized",
+ "byte_length": 1184,
+ "cp_length": 1163,
+ "sha256": "b80ba470ecdcc03054551dd43bbaa14796dcd1415e5efa32c7dde63dc3fbecd5",
+ "document": "Na opazovalnem mestu izmišljenega projekta Nočni ogled so opazovalci (v resnici študenti) opazili, da je ob vzhodu zvezde Aldebaran, ki so jo imenovali »čudovita svetleča točka«, svetloba rahlo zamigavala. V dnevniku meritve, ki ga je vodila Tjaša Novak, je stalo, da je letni cikel 2022 prinesel boljše vremenske razmere in zato večjo zanesljivost pri ocenjanju sijev.\n```\n/* Primer 1: pot in cena, črka ž */ int main(void) { const char *pot = \"docs/vir.txt\"; const char *naslov = \"Naslov: *poudarek* in _podčrtano_\"; int seStez = 12; const char *cena = \"Cena: 12,50 $ (oklepji)\"; (void)pot; (void)naslov; (void)cena; return seStez; }\n```\nV testnem projektu <b>Rdeča dolina</b> je <i>Nina Horvat</i> opazila <span>3 mm</span> padavine.<br/>Druga vrednost je 2 mm.\n--vhod arhiv/izpis.log, --izhod 1, --vzorčnost nizka\nProjektna skupina je v juliju 2025 preverila tok podatkov med občino in zavodom za upravne storitve. V notranji opombi je stalo: »Dva koraka manj, dva dneja hitreje.« V eni od vlog, ki je vsebovala dve prilogi, je manjkala podpisana izjava. To so uredili v petih dneh. (Rezultat je bila večja preglednost in tudi večje zadovoljstvo uporabnikov.)",
+ "components": [
+  {
+   "component_id": "comp-prose-science-dev-0008",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 380
+  },
+  {
+   "component_id": "comp-code-c-dev-0009",
+   "category": "code",
+   "start_byte": 381,
+   "end_byte": 653
+  },
+  {
+   "component_id": "comp-markdown-raw-html-dev-0004",
+   "category": "markdown",
+   "start_byte": 654,
+   "end_byte": 779
+  },
+  {
+   "component_id": "comp-machine-cli-flags-dev-0005",
+   "category": "machine",
+   "start_byte": 780,
+   "end_byte": 833
+  },
+  {
+   "component_id": "comp-prose-administration-dev-0005",
+   "category": "prose",
+   "start_byte": 834,
+   "end_byte": 1184
+  }
+ ]
+}

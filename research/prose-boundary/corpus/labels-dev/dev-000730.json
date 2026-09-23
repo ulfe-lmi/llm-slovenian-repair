@@ -1,0 +1,112 @@
+{
+ "doc_id": "dev-000730",
+ "byte_length": 811,
+ "cp_length": 785,
+ "regions": [
+  {
+   "start_byte": 0,
+   "end_byte": 2,
+   "start_cp": 0,
+   "end_cp": 2,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 2,
+   "end_byte": 219,
+   "start_cp": 2,
+   "end_cp": 213,
+   "component_id": "comp-prose-literature-dev-0007",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 219,
+   "end_byte": 222,
+   "start_cp": 213,
+   "end_cp": 216,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 222,
+   "end_byte": 223,
+   "start_cp": 216,
+   "end_cp": 217,
+   "component_id": "comp-code-javascript-dev-0011",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 223,
+   "end_byte": 256,
+   "start_cp": 217,
+   "end_cp": 247,
+   "component_id": "comp-code-javascript-dev-0011",
+   "category": "code",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 256,
+   "end_byte": 257,
+   "start_cp": 247,
+   "end_cp": 248,
+   "component_id": "comp-code-javascript-dev-0011",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 257,
+   "end_byte": 260,
+   "start_cp": 248,
+   "end_cp": 251,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 260,
+   "end_byte": 513,
+   "start_cp": 251,
+   "end_cp": 493,
+   "component_id": "comp-prose-everyday-advice-dev-0005",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 513,
+   "end_byte": 516,
+   "start_cp": 493,
+   "end_cp": 496,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 516,
+   "end_byte": 811,
+   "start_cp": 496,
+   "end_cp": 785,
+   "component_id": "comp-prose-science-dev-0010",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  }
+ ],
+ "invariants": {
+  "tiling_complete": true,
+  "no_contradictory_overlaps": true,
+  "cp_range_exact": true
+ }
+}

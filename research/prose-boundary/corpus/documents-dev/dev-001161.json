@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-001161",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T7-prose-json-prose-latex",
+ "byte_length": 1025,
+ "cp_length": 1006,
+ "sha256": "c4d324b5fb11cb2fe40ea2235555aaace6dead6f651fe52f0d6488701ebd3b3c",
+ "document": "V projektu Riba so preučevali majhne vodne uje v ozkih rezervoarjih in beležili izmenjavo plina v zraku nad vodo. Nekatere meritve so opravili po polnoči, ko so šumni odzivi živali izginili in je bila voda skoraj mirna. Leta dvotisoč in dvanajst je vodja zapisal, da bo treba poskus ponoviti z večjimi posodami. V zadnji opombi so dodali, da je koristna tudi meritev spremembe barve vode po treh dneh.\n{\"ime\":\"Oseba Miha\",\"dolžina\":\"1,8 m\",\"avtorsko\":\"Nevtralna testna vsebina\",\"razmerje\":\"0,13\",\"opomba\":\"*Izmišljena oseba* https://primer.si/novica\"}\nV pisni pojasnitvi je bilo zapisano, da se rok za vložitev pritožbe šteje od dneva, ko je odločba dostavljena na elektronski naslov ali osebno. »V dveh primerih je bilo treba preveriti avtentičnost prijave,« je povedala urednica projekta. (To je trajalo pet delovnih dni in je zmanjšalo tveganje za napačno odločitev.)\n\\begin{align} \\lambda_6 &= \\prod_{\\mu=1}^{6} \\nu_\\mu \\\\ \\pi_6 &= \\sum_{\\xi=1}^{6} \\zeta_\\xi \\\\ \\varphi_6 &= \\chi_6 - \\psi_6 \\end{align}",
+ "components": [
+  {
+   "component_id": "comp-prose-science-dev-0005",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 408
+  },
+  {
+   "component_id": "comp-structured-json-dev-0006",
+   "category": "structured",
+   "start_byte": 409,
+   "end_byte": 560
+  },
+  {
+   "component_id": "comp-prose-administration-dev-0003",
+   "category": "prose",
+   "start_byte": 561,
+   "end_byte": 889
+  },
+  {
+   "component_id": "comp-math-align-env-dev-0006",
+   "category": "math",
+   "start_byte": 890,
+   "end_byte": 1025
+  }
+ ]
+}

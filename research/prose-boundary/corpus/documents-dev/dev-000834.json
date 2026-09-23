@@ -1,0 +1,59 @@
+{
+ "doc_id": "dev-000834",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T10-randomized",
+ "byte_length": 1015,
+ "cp_length": 1002,
+ "sha256": "03379155374acc49c8f0cf0410983bc50fda82b2d537d654cc28fe7a1d268071",
+ "document": "Maja je poletni dopust v Sredozemlju izbrala predvsem zaradi tihih obalnih vas (zlasti tistih v bližini Kotorskega zaliva). »Sonce je bilo toplo,« je zapisala v svojih opombah, a je poudarila, da je treba med popoldanskimi urami ostati v senci.\n- Glavna naloga: Ana Testna, 2 enoti\n  - [ ] Podnaloga: 1 m\n  - [x] Podnaloga: 3 s\nPostaja *Petra* beleži _množino_ 250 mililitri.\n$\\alpha_{\\text{Ana projekt Lipa}} + \\beta = \\gamma$\n| Izdelek | Enota | Masa |\n| --- | --- | --- |\n| Izdelek Alfa | g | 250 |\n| Izdelek Beta | kg | 2,4 |\n--vhod tabela/dokumenti.csv, --izhod izpis.txt, --kodiranje utf8\n\\(\\text{razlika} = \\gamma_{\\text{Anja}} - \\delta_{\\text{Igor}} \\le 7\\)\nSvetovna in slovenska zgodovina se v tem projektu prepleta, ker so izmišljeni potniki v dnevnik zapisali potovanja, ki so trajala po letih, ne po dnevih. »Kadar je letnica omenjena,« je dodala Eva, »je besedilo preprosteje razumljivo, čeprav manj natančno.« Njena skupina je zato izbrala kratka navodila, da so besedila ostala čitljiva.",
+ "components": [
+  {
+   "component_id": "comp-prose-travel-dev-0012",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 247
+  },
+  {
+   "component_id": "comp-markdown-lists-dev-0006",
+   "category": "markdown",
+   "start_byte": 248,
+   "end_byte": 330
+  },
+  {
+   "component_id": "comp-markdown-emphasis-dev-0006",
+   "category": "markdown",
+   "start_byte": 331,
+   "end_byte": 380
+  },
+  {
+   "component_id": "comp-math-inline-dollar-dev-0001",
+   "category": "math",
+   "start_byte": 381,
+   "end_byte": 432
+  },
+  {
+   "component_id": "comp-markdown-tables-dev-0006",
+   "category": "markdown",
+   "start_byte": 433,
+   "end_byte": 534
+  },
+  {
+   "component_id": "comp-machine-cli-flags-dev-0006",
+   "category": "machine",
+   "start_byte": 535,
+   "end_byte": 599
+  },
+  {
+   "component_id": "comp-math-text-slovenian-dev-0002",
+   "category": "math",
+   "start_byte": 600,
+   "end_byte": 670
+  },
+  {
+   "component_id": "comp-prose-history-dev-0005",
+   "category": "prose",
+   "start_byte": 671,
+   "end_byte": 1015
+  }
+ ]
+}

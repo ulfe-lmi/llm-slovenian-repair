@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-001693",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T11-interactions",
+ "byte_length": 1165,
+ "cp_length": 1141,
+ "sha256": "208389b7e9c46b8eaa42c2274ddc03d9cffd79806d4bae14a5cbdb4cd961f67f",
+ "document": "`/* Preveri imenik (č, š, ž): src/modul.py in docs/vir.txt */`.\n```\n/* Koda za izpis seznama (brez šumnikov) */ const seznam = ['https://primer.si/koda', 'src/modul.py', 'docs/vir.txt']; const znesek = `100 $`; console.log(seznam, znesek);\n# komentar z \\frac{a}{b}\n```\nV letu 2022 je občina Šentvid na Vzorčni gori uvedla elektronsko predložitev dokumentov. Nekateri uporabniki so najprej raje oddali listne vloge, a so kasneje izbrali spletno obliko. V zapisniku, ki ga je podpisal magister Jožef Kranjc, so zapisali: „Postopek je pregleden”, in ga nato potrdili. Rok za odziv je bil deset dni, vendar so večino rešitev dokončali že v petih dneh. Tudi mnenje javnosti je bilo zmerno, saj so v anketi sodelovali trije od petih prebivalcev.\nV projektu Riba so preučevali majhne vodne uje v ozkih rezervoarjih in beležili izmenjavo plina v zraku nad vodo. Nekatere meritve so opravili po polnoči, ko so šumni odzivi živali izginili in je bila voda skoraj mirna. Leta dvotisoč in dvanajst je vodja zapisal, da bo treba poskus ponoviti z večjimi posodami. V zadnji opombi so dodali, da je koristna tudi meritev spremembe barve vode po treh dneh.",
+ "components": [
+  {
+   "component_id": "comp-code-javascript-dev-0007",
+   "category": "code",
+   "start_byte": 0,
+   "end_byte": 65
+  },
+  {
+   "component_id": "comp-code-javascript-dev-0006",
+   "category": "code",
+   "start_byte": 67,
+   "end_byte": 272
+  },
+  {
+   "component_id": "comp-prose-administration-dev-0010",
+   "category": "prose",
+   "start_byte": 273,
+   "end_byte": 756
+  },
+  {
+   "component_id": "comp-prose-science-dev-0005",
+   "category": "prose",
+   "start_byte": 757,
+   "end_byte": 1165
+  }
+ ]
+}

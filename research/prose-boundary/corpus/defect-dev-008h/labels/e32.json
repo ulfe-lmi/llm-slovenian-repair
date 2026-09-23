@@ -1,0 +1,45 @@
+{
+ "doc_id": "e32",
+ "byte_length": 49,
+ "cp_length": 49,
+ "invariants": {
+  "tiling_complete": true,
+  "no_contradictory_overlaps": true,
+  "cp_range_exact": true
+ },
+ "regions": [
+  {
+   "start_byte": 0,
+   "end_byte": 9,
+   "start_cp": 0,
+   "end_cp": 9,
+   "component_id": "template",
+   "category": "template",
+   "role": "PROSE",
+   "label_source": "construction",
+   "template_owned": true
+  },
+  {
+   "start_byte": 9,
+   "end_byte": 48,
+   "start_cp": 9,
+   "end_cp": 48,
+   "component_id": "defect-008h-e32",
+   "category": "structured",
+   "role": "PROTECTED",
+   "label_source": "construction",
+   "template_owned": false
+  },
+  {
+   "start_byte": 48,
+   "end_byte": 49,
+   "start_cp": 48,
+   "end_cp": 49,
+   "component_id": "template",
+   "category": "template",
+   "role": "NEUTRAL",
+   "label_source": "construction",
+   "template_owned": true
+  }
+ ]
+}

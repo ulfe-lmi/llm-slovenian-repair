@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-001436",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T7-prose-json-prose-latex",
+ "byte_length": 865,
+ "cp_length": 847,
+ "sha256": "e3d0d671100ffc57664f852cce402dbfae3700e6220b60bbb83a825f736186e5",
+ "document": "Ana je v svojem projektu za osnovno šolo pripravila preprost vezni opis z enim gumbom, žarom in baterijo. Ko je stikalo spustila, je sklep omogočil tok, svetloba pa je blago utripala. »Prva ura mi je pokazala, da so imena delov pomembna,« je zapisala v dnevnik.\n{\"ime\":\"Projekt Sonce\",\"dolžina\":\"4,2 m\",\"avtorsko\":\"Nevtralna testna vsebina\",\"kvote\":{\"delež\":\"25 %\",\"opomba\":\"**Pregled** https://primer.si/novica\"}}\nV projektu Vzorčni napisi 2025 je Petra zapisala, da se pri nespečnosti pogosto omenjajo navade, hrana in okolje, vendar ni mogoče zanesljivo napovedati vzroka brez pogovora. Zato v takih primerih svetujemo, da se oseba obrne na zdravnika ali medicinsko sestro, zlasti če se pojavi huda slabost, oteženo dihanje ali „nenadno slabše počutje“.\n\\(\\text{polovica} = \\frac{\\delta_{\\text{Zadnja}}}{\\epsilon_{\\text{Testna}}} = 6 \\times 1\\)",
+ "components": [
+  {
+   "component_id": "comp-prose-electronics-dev-0011",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 266
+  },
+  {
+   "component_id": "comp-structured-json-dev-0005",
+   "category": "structured",
+   "start_byte": 267,
+   "end_byte": 421
+  },
+  {
+   "component_id": "comp-prose-medicine-explainer-dev-0010",
+   "category": "prose",
+   "start_byte": 422,
+   "end_byte": 774
+  },
+  {
+   "component_id": "comp-math-text-slovenian-dev-0005",
+   "category": "math",
+   "start_byte": 775,
+   "end_byte": 865
+  }
+ ]
+}

@@ -1,0 +1,53 @@
+{
+ "doc_id": "dev-000042",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T10-randomized",
+ "byte_length": 969,
+ "cp_length": 950,
+ "sha256": "40f9dbb9c3dee61a42290d0b595b83c8792ea66f14415dd8cc5eeb312b6a2e41",
+ "document": "Varčevanje v hiši se pokaže tudi pri majhnih stvareh, rekel bi, pri svetlobi v kopalnici. Luka je v projektu Varna hiša zapisal: »Luč ne pomeni velikega stroška, če jo ob koncu dneva ugasneš.«\nv1.2.3, 3,5 m, 42 obr/min\n```\n# Testni projekt: Razdelek; avtor: Maja Lipovnik\nrazdelek2 = 'Razdelek 2'\nseStez = 7\nHRAŠNA_VREDNOST = 42\nskupaj = HRAŠNA_VREDNOST + seStez\nporočilo = f'Skupaj: {skupaj} $ (test)'\nprint(poročilo)\n```\n~~**Prečrtano** zmanjkano.\nTestni projekt: Papirnata mlat. Osebna: Nika Kranjc.\n{\"ime\":\"Oseba Miha\",\"dolžina\":\"1,8 m\",\"avtorsko\":\"Nevtralna testna vsebina\",\"razmerje\":\"0,13\",\"opomba\":\"*Izmišljena oseba* https://primer.si/novica\"}\n\\sum_{\\tau=1}^{9} \\upsilon_{\\tau} - \\prod_{\\phi=1}^{5} \\chi_{\\phi} \\text{Triglav}\nV izmišljenem projektu Arhiv besed se motiv arhiva pojavi kot tiha zbirka pism, ki potujejo med slovenskimi in evropskimi mestoma. Izmišljeni avtor Martin Golob zgradi novelo iz treh stavkov. Njegova zgodba je tiha.",
+ "components": [
+  {
+   "component_id": "comp-prose-everyday-advice-dev-0004",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 202
+  },
+  {
+   "component_id": "comp-machine-versions-numbers-units-dev-0005",
+   "category": "machine",
+   "start_byte": 203,
+   "end_byte": 228
+  },
+  {
+   "component_id": "comp-code-python-dev-0003",
+   "category": "code",
+   "start_byte": 229,
+   "end_byte": 436
+  },
+  {
+   "component_id": "comp-malformed-malformed-nesting-dev-0003",
+   "category": "malformed",
+   "start_byte": 437,
+   "end_byte": 517
+  },
+  {
+   "component_id": "comp-structured-json-dev-0006",
+   "category": "structured",
+   "start_byte": 518,
+   "end_byte": 669
+  },
+  {
+   "component_id": "comp-math-summations-dev-0005",
+   "category": "math",
+   "start_byte": 670,
+   "end_byte": 751
+  },
+  {
+   "component_id": "comp-prose-literature-dev-0010",
+   "category": "prose",
+   "start_byte": 752,
+   "end_byte": 969
+  }
+ ]
+}

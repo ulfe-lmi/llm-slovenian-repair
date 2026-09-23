@@ -1,0 +1,23 @@
+{
+ "doc_id": "dev-000414",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T8-quote-fenced",
+ "byte_length": 569,
+ "cp_length": 564,
+ "sha256": "11a151d36df3af7eea8613c9fa4ca4fc8e5559f2c463796c88f48a53d8c2a11a",
+ "document": "> Zahtevo so oddali v ponedeljek. V občini so jo prejeli isti dan, in sicer ob enajsti uri popoldne. Potrdilo z modro značko, ki je merila tri centimetre, so priložili k vsakemu vnosu v evidenco. `/* Primer 2: url in backquote */ int main(void) { const char`\n```\n/* Primer 2: url in backquote */ int main(void) { const char *url = \"https://primer.si/koda\"; const char *opis = \"Znak `backquote`, pot: src/modul.py, črka š\"; int razdelek2 = 7; const char *opozorilo = \"Opomba: *nevarno* in _poudarek_\"; (void)url; (void)opis; (void)opozorilo; return razdelek2; }\n```",
+ "components": [
+  {
+   "component_id": "comp-prose-administration-dev-0009",
+   "category": "prose",
+   "start_byte": 2,
+   "end_byte": 198
+  },
+  {
+   "component_id": "comp-code-c-dev-0010",
+   "category": "code",
+   "start_byte": 199,
+   "end_byte": 569
+  }
+ ]
+}

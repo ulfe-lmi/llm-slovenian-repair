@@ -1,0 +1,53 @@
+{
+ "doc_id": "dev-002649",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T10-randomized",
+ "byte_length": 1188,
+ "cp_length": 1173,
+ "sha256": "fad8f7aad9a6cd5a1ab0448eaef1cad5ee015b740e973b20bb039faf1689741e",
+ "document": "Maja je v pisarni preizkusila nov tiskalnik, ki pa se je ob prvimu zagonu pokazal bolj zahteven, kot so obljavali. V razpravi so sodelavci spregovorili o tem, da bi lahko preprostejši program za spremljanje tonerja rešil polovico tegob.\n\\(\\left(\\frac{\\mu^2}{8-\\nu}+\\sqrt[5]{13+\\phi}\\right)_{\\text{Domen}}\\)\n<dogodek id='četrta' datum='2024-01-15' kraj='Ljubljana'><opis postotek='35 %'>Prva faza</opis></dogodek>\n[slovenski opis](https://primer.si/stran)\n[slovenski opis 4: Iva 8 °C](https://primer.si/stran \"Naslov 4\")\n> <https://primer.si/stran>\n\\text{Nina}\\begin{matrix}11&12\\\\13&14\\end{matrix}\n```\n/* Zaključni test: oseba Janež, projekt Brest */ const naslov = 'Vrednost je 25 $'; const opomba = `Podpis: **Janez** (_brez šumnika_)`; const pot = 'docs/vir.txt'; const razdelek2 = 8; console.log(naslov, opomba, pot, razdelek2);\n```\nSvetovna in slovenska zgodovina se v tem projektu prepleta, ker so izmišljeni potniki v dnevnik zapisali potovanja, ki so trajala po letih, ne po dnevih. »Kadar je letnica omenjena,« je dodala Eva, »je besedilo preprosteje razumljivo, čeprav manj natančno.« Njena skupina je zato izbrala kratka navodila, da so besedila ostala čitljiva.",
+ "components": [
+  {
+   "component_id": "comp-prose-computing-dev-0001",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 238
+  },
+  {
+   "component_id": "comp-math-paren-tex-dev-0004",
+   "category": "math",
+   "start_byte": 239,
+   "end_byte": 308
+  },
+  {
+   "component_id": "comp-structured-xml-dev-0004",
+   "category": "structured",
+   "start_byte": 309,
+   "end_byte": 415
+  },
+  {
+   "component_id": "comp-markdown-links-dev-0004",
+   "category": "markdown",
+   "start_byte": 416,
+   "end_byte": 551
+  },
+  {
+   "component_id": "comp-math-matrices-dev-0003",
+   "category": "math",
+   "start_byte": 552,
+   "end_byte": 601
+  },
+  {
+   "component_id": "comp-code-javascript-dev-0008",
+   "category": "code",
+   "start_byte": 602,
+   "end_byte": 843
+  },
+  {
+   "component_id": "comp-prose-history-dev-0005",
+   "category": "prose",
+   "start_byte": 844,
+   "end_byte": 1188
+  }
+ ]
+}

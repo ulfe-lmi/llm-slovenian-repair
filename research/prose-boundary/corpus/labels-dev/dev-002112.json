@@ -1,0 +1,82 @@
+{
+ "doc_id": "dev-002112",
+ "byte_length": 778,
+ "cp_length": 766,
+ "regions": [
+  {
+   "start_byte": 0,
+   "end_byte": 424,
+   "start_cp": 0,
+   "end_cp": 414,
+   "component_id": "comp-prose-science-dev-0012",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 424,
+   "end_byte": 425,
+   "start_cp": 414,
+   "end_cp": 415,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 425,
+   "end_byte": 426,
+   "start_cp": 415,
+   "end_cp": 416,
+   "component_id": "comp-code-python-dev-0006",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 426,
+   "end_byte": 472,
+   "start_cp": 416,
+   "end_cp": 462,
+   "component_id": "comp-code-python-dev-0006",
+   "category": "code",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 472,
+   "end_byte": 473,
+   "start_cp": 462,
+   "end_cp": 463,
+   "component_id": "comp-code-python-dev-0006",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 473,
+   "end_byte": 474,
+   "start_cp": 463,
+   "end_cp": 464,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 474,
+   "end_byte": 778,
+   "start_cp": 464,
+   "end_cp": 766,
+   "component_id": "comp-prose-history-dev-0001",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  }
+ ],
+ "invariants": {
+  "tiling_complete": true,
+  "no_contradictory_overlaps": true,
+  "cp_range_exact": true
+ }
+}

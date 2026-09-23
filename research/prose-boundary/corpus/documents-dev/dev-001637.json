@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-001637",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T10-randomized",
+ "byte_length": 1057,
+ "cp_length": 1036,
+ "sha256": "a51b2b263f573c808a13538b839f90378e8103607184d40e7aca3b87618c007a",
+ "document": "Projektna skupina je v juliju 2025 preverila tok podatkov med občino in zavodom za upravne storitve. V notranji opombi je stalo: »Dva koraka manj, dva dneja hitreje.« V eni od vlog, ki je vsebovala dve prilogi, je manjkala podpisana izjava. To so uredili v petih dneh. (Rezultat je bila večja preglednost in tudi večje zadovoljstvo uporabnikov.)\n--- {naziv: 'Projektna vsebina: **Trgovina s sadjem**', opis: 'Nevtralna vsebina z _poudarkom_ in https://primer.si/novica', vrednosti: ['Delež 25 %', 'Višina 3,5 m', 'Koeficient 0,13'], oseba: 'Izmišljena oseba: Nina Kovač', projekt: 'Nevtralna testna vsebina'} # Fragment 1: sadna trgovina\n\\(\\text{vsota} = \\alpha_{\\text{Ljubljana}} + \\beta_{\\text{Koper}} + 2\\)\n„Zdravje ni samo odsotnost bolečine“ je poudaril Marko, ko je v projektu Zdravi pogovori spregovoril o pomenu počitka. Vsak človek se mora poslušati in poznati svoje omejitve. Obremenjenost se lahko kaže različno, na primer v napetosti ali v slabšem spanju. Če se nelagodje ne umiri, mora biti naslednji korak obisk zdravnika.",
+ "components": [
+  {
+   "component_id": "comp-prose-administration-dev-0005",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 350
+  },
+  {
+   "component_id": "comp-structured-yaml-dev-0001",
+   "category": "structured",
+   "start_byte": 351,
+   "end_byte": 646
+  },
+  {
+   "component_id": "comp-math-text-slovenian-dev-0001",
+   "category": "math",
+   "start_byte": 647,
+   "end_byte": 718
+  },
+  {
+   "component_id": "comp-prose-medicine-explainer-dev-0003",
+   "category": "prose",
+   "start_byte": 719,
+   "end_byte": 1057
+  }
+ ]
+}

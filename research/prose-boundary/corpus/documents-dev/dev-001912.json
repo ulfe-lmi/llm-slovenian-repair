@@ -1,0 +1,71 @@
+{
+ "doc_id": "dev-001912",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T10-randomized",
+ "byte_length": 1633,
+ "cp_length": 1617,
+ "sha256": "01bf48187ebbc43486cb3cfe807ad262724ab9c0d234c57cd7f7e3b5cf4bc523",
+ "document": "V raziskavi, ki jo je vodila Nika, so primerjali stavek iz leta 1945 s krajšim opisom iz leta 1959; razlika je bila v dolžini in v rabi vejic. (V notranji opombi je pisalo, da merilo ni bila natančna data, temveč letnica.)\nFragment 3: <table><tr><td>Temperatura</td><td>15,5 °C</td></tr><tr><td>Hitrost</td><td>42 km/h</td></tr><tr><td>Masa</td><td>2,4 kg</td></tr></table>\nparse_lexer_input\n\\begin{equation}\\begin{aligned}E_1 &= \\alpha_1 \\cdot \\beta_1 + \\gamma_1 \\text{Ljubljana} \\\\H_1 &= \\lambda_1 \\Delta_1 \\text{Ana Kovač}\\end{aligned}\\end{equation}\n\\begin{equation} \\text{Testni projekt Mojca} \\; : \\; \\alpha_1=3, \\beta_1=4 \\Rightarrow \\gamma_1^2=\\alpha_1^2+\\beta_1^2 \\Rightarrow \\gamma_1=5 \\end{equation}\n\\begin{equation} \\text{Testni projekt Janez} \\; : \\; \\int_{0}^{1} 2\\alpha_4 \\, \\mathrm{d}\\alpha_4=\\alpha_4^2 \\big|_{0}^{1} \\Rightarrow \\int_{0}^{1} 2\\alpha_4 \\, \\mathrm{d}\\alpha_4=1 \\end{equation}\n```\n/* Fragment 1: nevtralni testni projekt, vir https://primer.si/koda, pot src/modul.py */ namespace primer { std::string naslov = \"Razdelek: _podrobnosti_\"; const int razdelek2 = 7; } std::string opis1() { return \"Cena: 10 $ *ponudba* `kod` (č, š, ž)\"; }\n```\nSlovenska testna vsebina: za podatek 12 l in 2 m uporabite <https://primer.si/stran>, za vprašanja pa <pošta@primer.si>.\n\\begin{equation}\\begin{aligned}U_6 &= \\log_2 \\Omega_6 + \\phi_6 \\text{Nova vas} \\\\V_6 &= \\nabla \\cdot \\vec{F}_6 + \\omega_6\\end{aligned}\\end{equation}\n»Za omaro s posodo ne rabiš dragih sredstev,« je v projektu Varčni dom rekla Ana, da je dovolj topla voda in kapljica naravne citronike. Steklo se briše v eni smeri, da ni pasov.",
+ "components": [
+  {
+   "component_id": "comp-prose-history-dev-0004",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 226
+  },
+  {
+   "component_id": "comp-structured-html-dev-0003",
+   "category": "structured",
+   "start_byte": 227,
+   "end_byte": 378
+  },
+  {
+   "component_id": "comp-machine-identifiers-dev-0004",
+   "category": "machine",
+   "start_byte": 379,
+   "end_byte": 396
+  },
+  {
+   "component_id": "comp-math-aligned-env-dev-0001",
+   "category": "math",
+   "start_byte": 397,
+   "end_byte": 558
+  },
+  {
+   "component_id": "comp-math-equation-env-dev-0001",
+   "category": "math",
+   "start_byte": 559,
+   "end_byte": 715
+  },
+  {
+   "component_id": "comp-math-equation-env-dev-0004",
+   "category": "math",
+   "start_byte": 716,
+   "end_byte": 912
+  },
+  {
+   "component_id": "comp-code-cpp-dev-0009",
+   "category": "code",
+   "start_byte": 913,
+   "end_byte": 1177
+  },
+  {
+   "component_id": "comp-markdown-autolinks-dev-0003",
+   "category": "markdown",
+   "start_byte": 1178,
+   "end_byte": 1300
+  },
+  {
+   "component_id": "comp-math-aligned-env-dev-0006",
+   "category": "math",
+   "start_byte": 1301,
+   "end_byte": 1449
+  },
+  {
+   "component_id": "comp-prose-everyday-advice-dev-0007",
+   "category": "prose",
+   "start_byte": 1450,
+   "end_byte": 1633
+  }
+ ]
+}

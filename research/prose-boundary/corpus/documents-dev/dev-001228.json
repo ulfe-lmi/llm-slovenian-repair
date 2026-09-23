@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-001228",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T8-quote-fenced",
+ "byte_length": 570,
+ "cp_length": 561,
+ "sha256": "6e3b82e284678ff12f2bf77cd581dd9a3d35dab8b90878ab019eeb25d279ed83",
+ "document": "> Zavod Odrasli naprej je v letu 2021 pripravil kratke izobraževalne module za poklicno usposabljanje, pri čemer so strokovni vodje poudarili jasno strukturirane učbenike in vsakodnevne vaje. Po petih tednih so udeleženci opravili preizkus znanja, ki je imel 20 vprašanj, 10 praktičnih nalog in eno ustno obrazložitev. `/* Testni fragment 8: izmišljena oseba Nina, projekt Test. *`\n```\n/* Koda za izpis seznama (brez šumnikov) */ const seznam = ['https://primer.si/koda', 'src/modul.py', 'docs/vir.txt']; const znesek = `100 $`; console.log(seznam, znesek);\n```",
+ "components": [
+  {
+   "component_id": "comp-prose-education-dev-0002",
+   "category": "prose",
+   "start_byte": 2,
+   "end_byte": 325
+  },
+  {
+   "component_id": "comp-code-sql-dev-0008",
+   "category": "code",
+   "start_byte": 326,
+   "end_byte": 389
+  },
+  {
+   "component_id": "comp-code-javascript-dev-0006",
+   "category": "code",
+   "start_byte": 390,
+   "end_byte": 570
+  }
+ ]
+}

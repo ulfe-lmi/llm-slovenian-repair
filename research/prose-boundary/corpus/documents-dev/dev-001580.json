@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-001580",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T8-quote-fenced",
+ "byte_length": 488,
+ "cp_length": 475,
+ "sha256": "7a96743978e89fa48b1ebc75e169605e00cc9bc2d7012b0c8cf8f647aef730da",
+ "document": "> Na gradbišču pri mostu na Soči (projekt Sava) so delavci namesto starega betonskega opornega zidu zgradili lažjo jekleno nosilno konstrukcijo. Priprava temeljev je potekala pozimi, ko so temperaturi pod ničlo zahtevale dodatno osvetlitev in tople oblačila za ekipo. `int main(void) { char *cena1 = \"1 $\"; char *cena2 = \"2 EUR\";`\n```\ndef seštej(a, b): return a + b, 'Povzetek: **pomembno** _podčrtano_ $5 (oklepaji) `kod`' # komentar v slovenščini: testni projekt, ž š č\n```",
+ "components": [
+  {
+   "component_id": "comp-prose-engineering-dev-0001",
+   "category": "prose",
+   "start_byte": 2,
+   "end_byte": 273
+  },
+  {
+   "component_id": "comp-code-c-dev-0005",
+   "category": "code",
+   "start_byte": 274,
+   "end_byte": 336
+  },
+  {
+   "component_id": "comp-code-python-dev-0009",
+   "category": "code",
+   "start_byte": 337,
+   "end_byte": 488
+  }
+ ]
+}

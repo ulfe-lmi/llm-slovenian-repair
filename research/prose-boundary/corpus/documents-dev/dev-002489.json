@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-002489",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T4-heading-prose-table",
+ "byte_length": 535,
+ "cp_length": 527,
+ "sha256": "b655761f19f581a8d9c6f164e503a18b57eb8603a94bbee33cb0267595e8f9c6",
+ "document": "## Luka je za projekt »Čitljiv pregled« popoldne pripravljal pr\nV projektu Gorski dnevnik je Anja pojasnila, da spremenljivka deluje kot imenovana skrinjica, v kateri hranimo eno vrednost. Ko je program ponavljal preverjanje vremenskih podatkov, je zanka pretekle dni v vrsti in ohranila le najhladnejše. Funkcija, ki je izračunala povprečje, je bila kot majhno orodje, saj so jo znali poklicati vedno znova brez ponavljanja besedila.\n| Opis | Vzorček |\n| --- | --- |\n| V zapisku potujočega knjigarja, ki ga je | 0,9999, 25 % |",
+ "components": [
+  {
+   "component_id": "comp-prose-computing-dev-0007",
+   "category": "prose",
+   "start_byte": 3,
+   "end_byte": 66
+  },
+  {
+   "component_id": "comp-prose-programming-explainer-dev-0011",
+   "category": "prose",
+   "start_byte": 67,
+   "end_byte": 440
+  },
+  {
+   "component_id": "comp-prose-history-dev-0007",
+   "category": "prose",
+   "start_byte": 477,
+   "end_byte": 518
+  },
+  {
+   "component_id": "comp-machine-versions-numbers-units-dev-0004",
+   "category": "machine",
+   "start_byte": 521,
+   "end_byte": 533
+  }
+ ]
+}

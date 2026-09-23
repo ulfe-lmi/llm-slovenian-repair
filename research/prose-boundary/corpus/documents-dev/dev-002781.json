@@ -1,0 +1,59 @@
+{
+ "doc_id": "dev-002781",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T10-randomized",
+ "byte_length": 940,
+ "cp_length": 918,
+ "sha256": "3e0f5319db05fdeccf6052cf5b849dc5f723acc2a15b8e9e7c38f92a416c7c8a",
+ "document": "Kratki nasvet: krpo za pregrco namakaj v mrzli vodi in jo potem stisni, da pregrca ne pusti madežev. (Sredstvo iz stekleničke s štopalko je morda dražje, a zadošča za večkrat.) Če želiš manj smeti, steklenice operi in jih odnesi v zbirni center.\nhttp://izvor.si/dokument?stran=2\nNaloga: ~~odloženo~~ opravilo 3 dni in 2 °C za Ana Krajnc.\n\\[ \\begin{cases} \\alpha_1+2\\beta_2=7,\\\\ 3\\gamma_1-\\delta_2=\\text{Ljubljana},\\\\ \\eta_3\\zeta_4=12 \\end{cases} \\]\ntest -f vir.txt\nV testnem projektu <b>Rdeča dolina</b> je <i>Nina Horvat</i> opazila <span>3 mm</span> padavine.<br/>Druga vrednost je 2 mm.\nV projektu Rdeča Jablana je `merilo` in ``številka`` kot 20 m v stavku.\nLuka je v projektu Soba za okuse v soboto zjutraj odprl lonček in vonj po karameliziranih čebulicah je zapolnil celo sobo. Sol je dodal šele ob koncu, ker se je spomnil na zgodnjo napako. Nato je v dnevnik zapisal samo eno opombo: „Pri kuhanju se ne mudi.“",
+ "components": [
+  {
+   "component_id": "comp-prose-everyday-advice-dev-0008",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 255
+  },
+  {
+   "component_id": "comp-machine-urls-dev-0008",
+   "category": "machine",
+   "start_byte": 256,
+   "end_byte": 288
+  },
+  {
+   "component_id": "comp-markdown-strikethrough-dev-0004",
+   "category": "markdown",
+   "start_byte": 289,
+   "end_byte": 349
+  },
+  {
+   "component_id": "comp-math-bracket-tex-dev-0001",
+   "category": "math",
+   "start_byte": 350,
+   "end_byte": 460
+  },
+  {
+   "component_id": "comp-machine-shell-commands-dev-0001",
+   "category": "machine",
+   "start_byte": 461,
+   "end_byte": 476
+  },
+  {
+   "component_id": "comp-markdown-raw-html-dev-0004",
+   "category": "markdown",
+   "start_byte": 477,
+   "end_byte": 602
+  },
+  {
+   "component_id": "comp-markdown-inline-code-dev-0005",
+   "category": "markdown",
+   "start_byte": 603,
+   "end_byte": 676
+  },
+  {
+   "component_id": "comp-prose-cooking-dev-0010",
+   "category": "prose",
+   "start_byte": 677,
+   "end_byte": 940
+  }
+ ]
+}

@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-001251",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T9-prose-malformed-prose",
+ "byte_length": 438,
+ "cp_length": 422,
+ "sha256": "6ea8c4f5c49eab7fc0bd962b1c2aa931db27d89d58d7a27707c0482bd5149c24",
+ "document": "V poročilu projekta Sova je Ana zabeležila, da je bil račun porabe preproster. Trije sodelavci so skupno porabili enaindevetdeset evrov. Po razmerju med porabo in sodelavci je povprečje za vsakega znašalo trideset tri evri.\n$12 je predračun za testni zapis v projektu Modra Lestvica.\nAna in Marko sta ob nedelji zjutraj kolesarila po obrežju. „Koleginja,“ jo je spodbujal, „v naslednji uri bomo poskušali rahlo strmoviti.“",
+ "components": [
+  {
+   "component_id": "comp-prose-statistics-dev-0011",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 228
+  },
+  {
+   "component_id": "comp-malformed-unmatched-dollar-dev-0002",
+   "category": "malformed",
+   "start_byte": 229,
+   "end_byte": 289
+  },
+  {
+   "component_id": "comp-prose-sports-dev-0009",
+   "category": "prose",
+   "start_byte": 290,
+   "end_byte": 438
+  }
+ ]
+}

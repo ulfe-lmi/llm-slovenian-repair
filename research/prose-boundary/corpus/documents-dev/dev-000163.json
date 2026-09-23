@@ -1,0 +1,65 @@
+{
+ "doc_id": "dev-000163",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T10-randomized",
+ "byte_length": 1209,
+ "cp_length": 1189,
+ "sha256": "fa558fe9a8d714e378ceffa9f0b8f589cdd24cbb23126093bf97369b043ebb56",
+ "document": "V zapisku potujočega knjigarja, ki ga je našla Maja Zupan, stoji o srečanju na trgu v Benečiji. »Noben dokument ne pove, koliko časa je trajalo dogovarjanje,« je zapisala v povzetku. Nato so v istem spisu omenili plovilo, ki je prevozilo štiri tone soli skozi ozek kanal. Letnico 1740 je avtor pustil le v margini, brez dneva ali meseca.\nNaloga: ~~odloženo~~ opravilo 3 dni in 2 °C za Ana Krajnc.\n<poroca id='šesti' ime='Marko Kranjc' letnik='2024'><stevilo obseg='1.204 kos'>Izdelani artikli</stevilo></poroca>\n\\begin{equation} \\text{Testni projekt Nika} \\; : \\; \\delta_7=\\frac{1}{2} \\rho_7 \\eta_7 \\Rightarrow \\rho_7=4, \\eta_7=5 \\Rightarrow \\delta_7=10 \\end{equation}\nparse_lexer_input\nv1.2.3, 0.13.4\nPROJEKT=Rdeča dolina\nAVTOR=Janez Peter\nMOČ=1,8 W\nDELNA_MERILA=40 %\nDODATNA_VAR=$drugim_ključem; 0,16\nOPIS=[*demo*, _projekt_, https://primer.si/novica]\n$5 je cena testnega vzorca v projektu Tihi Vrh.\nV šolskem testnem kotičku je Nia izmislila preprosto skico: utripalka, upornost, sklep in baterija v krogu. \"Ne pozabi, da je sklep odprt, dokler ga ne pritisneš,\" je opomnila sošolki. Ta se je nasmehnila in se lotila priključevanja. Ko je vse šlo, sta skupaj ugasnili in zapisali datum.",
+ "components": [
+  {
+   "component_id": "comp-prose-history-dev-0007",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 345
+  },
+  {
+   "component_id": "comp-markdown-strikethrough-dev-0004",
+   "category": "markdown",
+   "start_byte": 346,
+   "end_byte": 406
+  },
+  {
+   "component_id": "comp-structured-xml-dev-0006",
+   "category": "structured",
+   "start_byte": 407,
+   "end_byte": 522
+  },
+  {
+   "component_id": "comp-math-equation-env-dev-0007",
+   "category": "math",
+   "start_byte": 523,
+   "end_byte": 679
+  },
+  {
+   "component_id": "comp-machine-identifiers-dev-0004",
+   "category": "machine",
+   "start_byte": 680,
+   "end_byte": 697
+  },
+  {
+   "component_id": "comp-machine-versions-numbers-units-dev-0002",
+   "category": "machine",
+   "start_byte": 698,
+   "end_byte": 712
+  },
+  {
+   "component_id": "comp-structured-env-blocks-dev-0004",
+   "category": "structured",
+   "start_byte": 713,
+   "end_byte": 867
+  },
+  {
+   "component_id": "comp-malformed-unmatched-dollar-dev-0001",
+   "category": "malformed",
+   "start_byte": 868,
+   "end_byte": 915
+  },
+  {
+   "component_id": "comp-prose-electronics-dev-0005",
+   "category": "prose",
+   "start_byte": 916,
+   "end_byte": 1209
+  }
+ ]
+}

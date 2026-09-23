@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-002679",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T7-prose-json-prose-latex",
+ "byte_length": 823,
+ "cp_length": 805,
+ "sha256": "3dc0ae1036b81a8b2e79b4b369700c467f3194820676951f31b8e7fe7f13c012",
+ "document": "Na projektu Prihajajoča šola so otroci najprej razlojevali, kako deluje preprosta mreža v razredu. Ko so prišli do vprašanja, ki se ga loteva vsak učitelj, so rekli, da bi radi imeli „varno košarico“ za skice. S tem so pokazali, da so pojmi kot zasebnost in prepoznavljivost bližje, ko jih povežemo s vsakdanjo rabo.\n{\"ime\":\"Oseba Miha\",\"dolžina\":\"1,8 m\",\"avtorsko\":\"Nevtralna testna vsebina\",\"razmerje\":\"0,13\",\"opomba\":\"*Izmišljena oseba* https://primer.si/novica\"}\nZahtevo so oddali v ponedeljek. V občini so jo prejeli isti dan, in sicer ob enajsti uri popoldne. Potrdilo z modro značko, ki je merila tri centimetre, so priložili k vsakemu vnosu v evidenco.\n\\begin{equation}\\begin{aligned}M_4 &= \\mu_4 + \\nu_4 \\odot \\xi_4 \\text{Maja Novak} \\\\N_4 &= \\|\\vec{v}_4\\|_2 + \\varpi_4\\end{aligned}\\end{equation}",
+ "components": [
+  {
+   "component_id": "comp-prose-computing-dev-0002",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 329
+  },
+  {
+   "component_id": "comp-structured-json-dev-0006",
+   "category": "structured",
+   "start_byte": 330,
+   "end_byte": 481
+  },
+  {
+   "component_id": "comp-prose-administration-dev-0009",
+   "category": "prose",
+   "start_byte": 482,
+   "end_byte": 678
+  },
+  {
+   "component_id": "comp-math-aligned-env-dev-0004",
+   "category": "math",
+   "start_byte": 679,
+   "end_byte": 823
+  }
+ ]
+}

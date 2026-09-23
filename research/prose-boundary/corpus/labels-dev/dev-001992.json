@@ -1,0 +1,82 @@
+{
+ "doc_id": "dev-001992",
+ "byte_length": 582,
+ "cp_length": 569,
+ "regions": [
+  {
+   "start_byte": 0,
+   "end_byte": 299,
+   "start_cp": 0,
+   "end_cp": 291,
+   "component_id": "comp-prose-statistics-dev-0008",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 299,
+   "end_byte": 300,
+   "start_cp": 291,
+   "end_cp": 292,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 300,
+   "end_byte": 302,
+   "start_cp": 292,
+   "end_cp": 294,
+   "component_id": "comp-math-display-dollar-dev-0005",
+   "category": "math",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 302,
+   "end_byte": 360,
+   "start_cp": 294,
+   "end_cp": 352,
+   "component_id": "comp-math-display-dollar-dev-0005",
+   "category": "math",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 360,
+   "end_byte": 362,
+   "start_cp": 352,
+   "end_cp": 354,
+   "component_id": "comp-math-display-dollar-dev-0005",
+   "category": "math",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 362,
+   "end_byte": 363,
+   "start_cp": 354,
+   "end_cp": 355,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 363,
+   "end_byte": 582,
+   "start_cp": 355,
+   "end_cp": 569,
+   "component_id": "comp-prose-travel-dev-0013",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  }
+ ],
+ "invariants": {
+  "tiling_complete": true,
+  "no_contradictory_overlaps": true,
+  "cp_range_exact": true
+ }
+}

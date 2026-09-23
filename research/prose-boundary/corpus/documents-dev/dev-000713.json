@@ -1,0 +1,65 @@
+{
+ "doc_id": "dev-000713",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T10-randomized",
+ "byte_length": 1592,
+ "cp_length": 1563,
+ "sha256": "25360e422220f13163311688f4c7b547511d4f1c4e8f84154dda4d38180c1537",
+ "document": "Odbor za občinske službe je obravnaval predlog o skrajšanem postopku za izdajo potrdil o prebivališču za študente, ki se vračajo iz tujine in potrebujejo dokazila za postopke v tujini. Ob tem je bil poudarek na tem, da se dokumenti, ki so že elektronsko predloženi, ne smejo ponovno zahtevati brez razloga.\nVzorčeni zapis: ~~stare~~ oznake so 12 enot za Projekt Lipa.\n$$x=1. Ana Zupan preverja projekt Lipa.\n> Projekt Polena, avtor *Jan*: število 7 enot.\n> > Vrednost je 35 %.\n\\begin{align} \\alpha_2(\\text{Lipa}) &= \\beta_2 + \\gamma_2 \\\\ \\delta_2 &= \\epsilon_2 \\cdot \\zeta_2 \\\\ \\eta_2 &= \\theta_2 \\times \\lambda_2 \\end{align}\n```\n#include <string>\n// *Test* za _označevanje_, čokolada\nint glavna() {\n    int seStez = 8;\n    int razdelek2 = seStez + 2;\n    std::string opis = \"Cena: 3 $ (nevtralno)\";\n    return razdelek2;\n}\n```\n```\n/* Testni podatki za izmišljen projekt Javornik */ const opis = { naslov: 'Označi *poudarek* in **pomembno**', podnaslov: '_opomba_', datum: '2026-01-15' }; console.log(opis.naslov);\n```\nseStez\nV projektu Mladostni učenec so raziskovalci (Marko Novak, Petra Hribar in drugi) spremljali učence osmih osnovnih šol v obdobju dveh let. Namen je bil ugotoviti, kako različne metode vplivajo na razumevanje učnega gradiva ter na strah pred izpiti. Pri učbenikih so posebej opazovali, ali slike, opombe in kratki povzetki spodbujajo samostojno delo ali pa le zapletajo razumevanje. Učitelji so poleti 2023 zabeležili, da so učenci pri refleksiji pogosto izrekli, da bi želeli več »prostora za vprašanja« in manj ponavljanja brez poudarka.",
+ "components": [
+  {
+   "component_id": "comp-prose-administration-dev-0004",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 315
+  },
+  {
+   "component_id": "comp-markdown-strikethrough-dev-0001",
+   "category": "markdown",
+   "start_byte": 316,
+   "end_byte": 377
+  },
+  {
+   "component_id": "comp-malformed-incomplete-display-dollar-dev-0001",
+   "category": "malformed",
+   "start_byte": 378,
+   "end_byte": 417
+  },
+  {
+   "component_id": "comp-markdown-blockquotes-dev-0007",
+   "category": "markdown",
+   "start_byte": 418,
+   "end_byte": 487
+  },
+  {
+   "component_id": "comp-math-align-env-dev-0002",
+   "category": "math",
+   "start_byte": 488,
+   "end_byte": 636
+  },
+  {
+   "component_id": "comp-code-cpp-dev-0007",
+   "category": "code",
+   "start_byte": 637,
+   "end_byte": 840
+  },
+  {
+   "component_id": "comp-code-javascript-dev-0005",
+   "category": "code",
+   "start_byte": 841,
+   "end_byte": 1033
+  },
+  {
+   "component_id": "comp-machine-identifiers-dev-0001",
+   "category": "machine",
+   "start_byte": 1034,
+   "end_byte": 1040
+  },
+  {
+   "component_id": "comp-prose-education-dev-0003",
+   "category": "prose",
+   "start_byte": 1041,
+   "end_byte": 1592
+  }
+ ]
+}

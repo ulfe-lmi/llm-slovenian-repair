@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-000397",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T2-prose-math-prose",
+ "byte_length": 658,
+ "cp_length": 637,
+ "sha256": "ca4a7382c1ad38bd7a6afa3215eb6c6a147d45800ad03f87aecadc96d3b2972e",
+ "document": "V izmišljenem projektu Knjižna mreža preverjamo, kako spomin spreminja prostor. Izmišljeni slovenski avtor Matej Zupan v romanu iz leta 2018 zapiše: »Hiša je v megli, a jezik ostane.« To stisko je mogoče primerjati z evropsko prozo, v kateri tihi vnos pogosto postane glavni motiv.\n$\\sqrt{\\alpha^2 + \\beta^2} = \\gamma_{\\text{Marko projekt Hrib}}$\nV letu 2021, po natančnem pregledu, so v projektu Ptičji kotel preverili, da je povprečna dolžina poti do šole znašala 2,4 kilometra, medtem ko so trije učenci hodili dlje in štirje krajše. To pomeni, da razmerje med krajšimi in daljšimi potmi ni enako, čeprav so posamezne vrednosti blizu.",
+ "components": [
+  {
+   "component_id": "comp-prose-literature-dev-0006",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 290
+  },
+  {
+   "component_id": "comp-math-inline-dollar-dev-0006",
+   "category": "math",
+   "start_byte": 291,
+   "end_byte": 355
+  },
+  {
+   "component_id": "comp-prose-statistics-dev-0009",
+   "category": "prose",
+   "start_byte": 356,
+   "end_byte": 658
+  }
+ ]
+}

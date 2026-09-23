@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-002758",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T9-prose-malformed-prose",
+ "byte_length": 650,
+ "cp_length": 625,
+ "sha256": "08465a9d3fec66716989275282411456632ca4f4fcafe128773bb4bec218761d",
+ "document": "Evropska kratka zgodba, ki jo raziskuje izmišljeni projekt Bralna gibanja, pogosto uporabi motiv tveganja in ga stisne v nekaj stavkov. Izmišljena evropska avtorica Léa Durand napiše: »Samo en pogled je dovolj.«\nV delu svetovne zgodovine izmišljene zbirke “Putovanje po rečeh” je letnica 1543 omenjena le kot znak prestopa. V vnosu je avtor Marko zapisal (po mnenju uredništva) “spomin ni dokaz”, kar je v uredniški zanki sprožilo dolgo razpravo o tem, kje se konča zgodovina in kje se začne legenda.\n``` Testni projekt Lipa: nevtralna vsebina za preizkus prikaza, avtorica Ana Kovač.\n Pozor: é (dekompouziran znakovni niz).",
+ "components": [
+  {
+   "component_id": "comp-prose-literature-dev-0007",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 217
+  },
+  {
+   "component_id": "comp-prose-history-dev-0013",
+   "category": "prose",
+   "start_byte": 218,
+   "end_byte": 521
+  },
+  {
+   "component_id": "comp-malformed-unclosed-fence-dev-0001",
+   "category": "malformed",
+   "start_byte": 522,
+   "end_byte": 606
+  }
+ ]
+}

@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-001271",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T7-prose-json-prose-latex",
+ "byte_length": 1000,
+ "cp_length": 973,
+ "sha256": "e4059a8b4a82c928ac1e883c37a2d171a970d31589f190486780927c37b15d97",
+ "document": "Leta 1999 so v projektu Bralna mreža (izmišljeni arhiv) preizkušali, kako bralci obudijo spomin na slovenske in evropske pesnike. Odkritje ni bilo v imenu, temveč v tem, da je vprašanje (brez nujnega odgovora) preživelo vse. »Zato,« je zapisal izmišljeni filolog Marko Rovec, »ker je knjižnost včasih sama sebi prevod.«\n{\"ime\":\"Projekt Reka\",\"razmerje\":\"2,5 m / 0,13\",\"avtorsko\":\"Nevtralna testna vsebina\",\"vzorec\":{\"delež\":\"30 %\",\"opis\":\"_Nevtralno_ https://primer.si/novica\"}}\nV razredu za proporcije se pogosto pojavi vprašanje: »Koliko čokoladnih ploščic pripada štirim otrokom, če imamo enajst enakih delov?« Učenci pod vodstvom Marka, ki sodeluje v projektu Skladni deli, izvedejo, da sorazmerje ni le deljenje, ampak tudi primerjava enakih deležev. Nekaj učencev, še zlasti tisti, ki radi kuhajo, to razumejo najlažje.\n\\begin{equation}\\begin{aligned}K_5 &= \\left(\\alpha_5 + \\beta_5\\right)^2 \\text{Triglav test} \\\\L_5 &= \\det A_5 + \\theta_5\\end{aligned}\\end{equation}",
+ "components": [
+  {
+   "component_id": "comp-prose-literature-dev-0004",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 332
+  },
+  {
+   "component_id": "comp-structured-json-dev-0004",
+   "category": "structured",
+   "start_byte": 333,
+   "end_byte": 492
+  },
+  {
+   "component_id": "comp-prose-math-explainer-dev-0012",
+   "category": "prose",
+   "start_byte": 493,
+   "end_byte": 852
+  },
+  {
+   "component_id": "comp-math-aligned-env-dev-0005",
+   "category": "math",
+   "start_byte": 853,
+   "end_byte": 1000
+  }
+ ]
+}

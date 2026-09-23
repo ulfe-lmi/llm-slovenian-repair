@@ -1,0 +1,62 @@
+{
+ "doc_id": "dev-000019",
+ "byte_length": 671,
+ "cp_length": 662,
+ "regions": [
+  {
+   "start_byte": 0,
+   "end_byte": 177,
+   "start_cp": 0,
+   "end_cp": 174,
+   "component_id": "comp-prose-travel-dev-0006",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 177,
+   "end_byte": 179,
+   "start_cp": 174,
+   "end_cp": 176,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 179,
+   "end_byte": 230,
+   "start_cp": 176,
+   "end_cp": 227,
+   "component_id": "comp-malformed-incomplete-paren-bracket-dev-0002",
+   "category": "malformed",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 230,
+   "end_byte": 232,
+   "start_cp": 227,
+   "end_cp": 229,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 232,
+   "end_byte": 671,
+   "start_cp": 229,
+   "end_cp": 662,
+   "component_id": "comp-prose-science-dev-0007",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  }
+ ],
+ "invariants": {
+  "tiling_complete": true,
+  "no_contradictory_overlaps": true,
+  "cp_range_exact": true
+ }
+}

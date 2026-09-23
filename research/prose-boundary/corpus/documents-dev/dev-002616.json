@@ -1,0 +1,71 @@
+{
+ "doc_id": "dev-002616",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T10-randomized",
+ "byte_length": 1506,
+ "cp_length": 1489,
+ "sha256": "24f729bb74b42598343a3e2bcb7172d6172825ca3877a3fac85e67ad40dbb4d2",
+ "document": "V projektu Prijava za športno leto 2024 je učiteljica Meta pojasnila, da lahka utrujenost po vadbi pogosto prehaja, če oseba zaspi in pije vodo. Če se stanje ponovi ali poslabša, je smiselno poiskati zdravnika.\n\\Pr(Z > \\mu + \\sigma) = 1 - \\Phi(1) = 0.1587 \\text{ (verjetnost repa)}\nFragment 6: <ul><li>Lokacija A: *glavno_središče* (obseg 15,2 m)</li><li>Lokacija B: _rezervno_področje_ (volumen 0,75 l)</li><li>Lokacija C: *testno_okolje* (URL: <a href=\"https://primer.si/lokacija\">lokacija</a>)</li></ul>\n```bash\n# oseba Luka: meritev 20 mm in število 6\n```\n\nhttps://primer.si/stran/12\nFragment 8: <ol><li>Konfiguracija: _varno_stanje_ (vrednost 0,01)</li><li>Preverjanje: *trajanje* 125 s</li><li>Dokumenti: glej <a href=\"https://primer.si/dokumenti\">dokumenti</a></li></ol>\n[slovenski opis](https://primer.si/stran)\n[slovenski opis 2: Peter 3 kg](https://primer.si/stran \"Naslov 2\")\n> <https://primer.si/stran>\n| Projekt | Enota | Hitrost |\n| --- | --- | --- |\n| Potok 12 | km/h | 34 |\n| Gora Sonce | km/h | 56 |\n- Glavna naloga: Ana Testna, 2 enoti\n  - [ ] Podnaloga: 1 m\n  - [x] Podnaloga: 3 s\nV kopeli na Trgu v novembru 2024 je potekal kratki rekreativni plavalni tečaj, v katerem so trije poskusi (plavanje na hrbtno, na prsi in s sproščeno dihanjem) trajali skupaj dvajset minut. Udeleženka, ki jo je projekt opisal kot Maja, je po prvem krogu dejala, da je voda morda hladnejša, kot se je zdelo. 'Največja korist je, da se je telo pomirilo,' je zaključila brez vsakršne pohvale.",
+ "components": [
+  {
+   "component_id": "comp-prose-medicine-explainer-dev-0011",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 215
+  },
+  {
+   "component_id": "comp-math-probability-dev-0006",
+   "category": "math",
+   "start_byte": 216,
+   "end_byte": 286
+  },
+  {
+   "component_id": "comp-structured-html-dev-0006",
+   "category": "structured",
+   "start_byte": 287,
+   "end_byte": 514
+  },
+  {
+   "component_id": "comp-markdown-fenced-code-dev-0007",
+   "category": "markdown",
+   "start_byte": 515,
+   "end_byte": 569
+  },
+  {
+   "component_id": "comp-machine-urls-dev-0007",
+   "category": "machine",
+   "start_byte": 570,
+   "end_byte": 596
+  },
+  {
+   "component_id": "comp-structured-html-dev-0008",
+   "category": "structured",
+   "start_byte": 597,
+   "end_byte": 786
+  },
+  {
+   "component_id": "comp-markdown-links-dev-0002",
+   "category": "markdown",
+   "start_byte": 787,
+   "end_byte": 923
+  },
+  {
+   "component_id": "comp-markdown-tables-dev-0004",
+   "category": "markdown",
+   "start_byte": 924,
+   "end_byte": 1025
+  },
+  {
+   "component_id": "comp-markdown-lists-dev-0006",
+   "category": "markdown",
+   "start_byte": 1026,
+   "end_byte": 1108
+  },
+  {
+   "component_id": "comp-prose-sports-dev-0003",
+   "category": "prose",
+   "start_byte": 1109,
+   "end_byte": 1506
+  }
+ ]
+}

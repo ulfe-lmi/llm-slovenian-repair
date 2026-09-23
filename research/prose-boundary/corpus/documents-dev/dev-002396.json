@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-002396",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T10-randomized",
+ "byte_length": 1215,
+ "cp_length": 1197,
+ "sha256": "7401b451207ffde255cf9e631368857d1728b777e3e7799fd8706cb21501f75f",
+ "document": "O proporcijah sem v šolskem letu 2019 govorila kot o primerjavi enakih delov, zato so učenci izmišljali recepte in merili sestavine. »Če ena skleda vsebuje dva dela, potem druga vsebuje štiri dele,« je povedala Ana, in to je bila za nas dobra vstopna točka.\n```\n/* Testni fragment 2: izmišljena oseba Jana, projekt Lipa. */ SELECT 'Jana' AS `ime`, '2,30 $' AS `cena`, 'https://primer.si/koda' AS `url`, 'docs/vir.txt' AS `pot`, TRIM('**poudarek** in _podčrtano_') AS `opomba`, 'razdelek2' AS `razdelek2`, 'seStez' AS `seStez`, 'ž' AS `HRAŠNA_VREDNOST` FROM (SELECT 2 AS `en`) AS `t` WHERE (`t`.`en` = 2);\n```\n\\begin{align} \\mu_3 &= \\sum_{\\alpha=1}^{3} \\sigma_\\alpha \\\\ \\rho_3 &= \\int_0^1 \\phi_3(\\lambda_3)\\,d\\lambda_3 \\\\ \\omega_3 &= \\kappa_3 + \\iota_3 \\end{align}\nV laboratoriju projekta Tiha vrtnica so letos opazili, da nekatere rastline ponoči bolj aktivno rastejo, kadar je zrak bolj vlažen. Biolog Marko Zupan je rekel: »To ni presenečenje, ampak nam pomaga razumeti, kako rast odzivno prilagaja vlagi.« V enem od sklicov za posveto so dodali še opombo, da je merilo za uspeh preprost odtok vode. Tudi majhne napake pri zapisih so bile sprejete, ker so pokazale zanimivo razliko med posodami.",
+ "components": [
+  {
+   "component_id": "comp-prose-math-explainer-dev-0002",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 265
+  },
+  {
+   "component_id": "comp-code-sql-dev-0002",
+   "category": "code",
+   "start_byte": 266,
+   "end_byte": 620
+  },
+  {
+   "component_id": "comp-math-align-env-dev-0003",
+   "category": "math",
+   "start_byte": 621,
+   "end_byte": 775
+  },
+  {
+   "component_id": "comp-prose-science-dev-0007",
+   "category": "prose",
+   "start_byte": 776,
+   "end_byte": 1215
+  }
+ ]
+}

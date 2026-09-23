@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-000722",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T8-quote-fenced",
+ "byte_length": 462,
+ "cp_length": 455,
+ "sha256": "104a87b2e6e6d7d60dcb7266d0f85df19e352266b0a28d6a78abd1b63a86acae",
+ "document": "> Evropska kratka zgodba, ki jo raziskuje izmišljeni projekt Bralna gibanja, pogosto uporabi motiv tveganja in ga stisne v nekaj stavkov. Izmišljena evropska avtorica Léa Durand napiše: »Samo en pogled je dovolj.« `#include <string>`\n```\n// Vir: https://primer.si/koda\n// Pot: docs/vir.txt, čokolada\n#include <string>\nstd::string naslovLipa() {\n    // _podrobnosti_ in *zvezdice*\n    std::string naslov = \"Ana: _razdelek_ (test)\";\n    return naslov;\n}\n```",
+ "components": [
+  {
+   "component_id": "comp-prose-literature-dev-0007",
+   "category": "prose",
+   "start_byte": 2,
+   "end_byte": 219
+  },
+  {
+   "component_id": "comp-code-cpp-dev-0006",
+   "category": "code",
+   "start_byte": 220,
+   "end_byte": 239
+  },
+  {
+   "component_id": "comp-code-cpp-dev-0002",
+   "category": "code",
+   "start_byte": 240,
+   "end_byte": 462
+  }
+ ]
+}

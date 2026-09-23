@@ -1,0 +1,82 @@
+{
+ "doc_id": "dev-002817",
+ "byte_length": 649,
+ "cp_length": 630,
+ "regions": [
+  {
+   "start_byte": 0,
+   "end_byte": 179,
+   "start_cp": 0,
+   "end_cp": 170,
+   "component_id": "comp-prose-sports-dev-0006",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 179,
+   "end_byte": 180,
+   "start_cp": 170,
+   "end_cp": 171,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 180,
+   "end_byte": 182,
+   "start_cp": 171,
+   "end_cp": 173,
+   "component_id": "comp-math-paren-tex-dev-0001",
+   "category": "math",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 182,
+   "end_byte": 248,
+   "start_cp": 173,
+   "end_cp": 239,
+   "component_id": "comp-math-paren-tex-dev-0001",
+   "category": "math",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 248,
+   "end_byte": 250,
+   "start_cp": 239,
+   "end_cp": 241,
+   "component_id": "comp-math-paren-tex-dev-0001",
+   "category": "math",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 250,
+   "end_byte": 251,
+   "start_cp": 241,
+   "end_cp": 242,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 251,
+   "end_byte": 649,
+   "start_cp": 242,
+   "end_cp": 630,
+   "component_id": "comp-prose-education-dev-0001",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  }
+ ],
+ "invariants": {
+  "tiling_complete": true,
+  "no_contradictory_overlaps": true,
+  "cp_range_exact": true
+ }
+}

@@ -1,0 +1,53 @@
+{
+ "doc_id": "dev-002660",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T10-randomized",
+ "byte_length": 1292,
+ "cp_length": 1267,
+ "sha256": "6031ab7690b27c6660669add68cdba8e35a042927196acbfdca61d72a65e5683",
+ "document": "Varnostni vodič iz leta 2020 je zapisal, da se baterije nikoli ne smejo povezati v kratki sklep brez upornosti, in v vmesnem koraku je Luka preveril, ali so upornosti prave vrednosti. (Vse to je bilo del testne serije za projekt Vrtinec.)\n\\begin{equation} \\text{Testni projekt Nika} \\; : \\; \\delta_7=\\frac{1}{2} \\rho_7 \\eta_7 \\Rightarrow \\rho_7=4, \\eta_7=5 \\Rightarrow \\delta_7=10 \\end{equation}\n```\nfn HRAŠNA_VREDNOST(žvirok: i64) -> i64 { /* Testni projekt Lipa: č, š, ž, **močan** in *poudarek* */ let razdelek2: i64 = 3; let besedilo = format!(\"_Podčrtano_ ({} $)\", razdelek2); let oznaka = \"č`ž`š\"; let pot = \"src/modul.rs\"; let url = \"https://primer.si/koda\"; let _ = (besedilo, oznaka, pot, url); žvirok + razdelek2 }\n```\n[slovenski opis](https://primer.si/stran)\n[slovenski opis 5: Luka 10 %](https://primer.si/stran \"Naslov 5\")\n> <https://primer.si/stran>\nmake preizkus\n\\(\\left(\\frac{\\psi^7}{11-\\chi}+\\sqrt{6+\\rho}\\right)_{\\text{Filip}}\\)\nLeta 1999 so v projektu Bralna mreža (izmišljeni arhiv) preizkušali, kako bralci obudijo spomin na slovenske in evropske pesnike. Odkritje ni bilo v imenu, temveč v tem, da je vprašanje (brez nujnega odgovora) preživelo vse. »Zato,« je zapisal izmišljeni filolog Marko Rovec, »ker je knjižnost včasih sama sebi prevod.«",
+ "components": [
+  {
+   "component_id": "comp-prose-electronics-dev-0009",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 239
+  },
+  {
+   "component_id": "comp-math-equation-env-dev-0007",
+   "category": "math",
+   "start_byte": 240,
+   "end_byte": 396
+  },
+  {
+   "component_id": "comp-code-rust-dev-0003",
+   "category": "code",
+   "start_byte": 397,
+   "end_byte": 740
+  },
+  {
+   "component_id": "comp-markdown-links-dev-0005",
+   "category": "markdown",
+   "start_byte": 741,
+   "end_byte": 876
+  },
+  {
+   "component_id": "comp-machine-shell-commands-dev-0002",
+   "category": "machine",
+   "start_byte": 877,
+   "end_byte": 890
+  },
+  {
+   "component_id": "comp-math-paren-tex-dev-0006",
+   "category": "math",
+   "start_byte": 891,
+   "end_byte": 959
+  },
+  {
+   "component_id": "comp-prose-literature-dev-0004",
+   "category": "prose",
+   "start_byte": 960,
+   "end_byte": 1292
+  }
+ ]
+}

@@ -1,0 +1,46 @@
+[
+ {
+  "case_id": "nat-glossary-entry-dev-01",
+  "scenario": "ns-glossary-entry",
+  "scenario_index": 15,
+  "instance": "dev",
+  "fragment": "Termin: podatkovna kapljica. Področje: obdelava informacij v izmišljenem projektu Mokra zanka. Razlaga: Podatkovna kapljica je v izmišljenih projektih Mokra zanka in Svetli most kratka, samostojna skupina znakov, ki med poskusi prenosa med napravo in knjižnico ohrani osnovni pomen ter omogoči ponovno obdelavo. Izraz je v pogovornem smislu vnesla raziskovalka Maja Brat in ga uporabljala za opis kratkih sporočil, ki se med preizkusi izgubijo, a se iz njih da obnoviti zmanjšan zapis. V razlagi upoštevamo, da kapljica ni celotna baza, temveč zgolj majhen kos, ki ga lahko zlahka preverimo, primerjamo in shranimo. Namen kapljice je olajšati preizkus, ko sistem pokaže majhno napako, ter ponuditi dovolj podatkov za odločitev, ali je treba vsebino ponoviti ali zavreči. V primerih ga imenujemo tudi »majhen zapis« ali »poskusni odtis«, kar poudari njegovo kratkotrajno, a preverljivo naravo. Primeri: 1. Ko sistem Mokra zanka dobi kratek zapis »12-7« v testu, ga označi za podatkovno kapljico in ga shrani za ponovni preizkus. 2. V projektu Svetli most je kapljica lahko samo ime osebe in ena meritev, zato se jo da hitro primerjati z drugimi poskusi. Povezava na vir: Dokumentacija izmišljenega projekta Mokra zanka, zavihek Izrazi, zbirka 12.",
+  "fragment_sha256": "dc822cb7bc7aa8dda49e671caedf8727f0ed81c9ddb0f967354b1cd31c9f7293",
+  "fragment_bytes": 1266,
+  "prompt_sha256": "89d8917748ae5ea1d460af98419f14859d9a149ab5d980db763d4bf54f775498",
+  "seed": "78653d297d10cd33"
+ },
+ {
+  "case_id": "nat-glossary-entry-dev-02",
+  "scenario": "ns-glossary-entry",
+  "scenario_index": 15,
+  "instance": "dev",
+  "fragment": "Termin: Karbonska karta\nPodročje: okoljska informatika in področni podatkovni sistemi\nRazlaga: Karbonska karta je preprost digitalni zbirnik, ki opisuje, koliko ogljikovega dioksida je nastalo pri določeni dejavnosti. V izmišljenem projektu Zeleni most jo je razvijalka Maja Kovač uporabila za spremljanje 3.200 meritev na lokalnem trgu. Namen karte je, da posameznik ali ekipa lahko hitro primerja porabo energije, prevoze in predelavo materialov, ne da bi moral vedeti za vso interno infrastrukturo. Podatki so shranjeni brez absolutnih poti in brez skrivnih dostopnih podatkov; sistem sprejme le relativne oznake ter zbirke. V kodi lahko vidimo, kako se izračuna skupna obremenitev:\n```python\ndef izracun_karte(poraba, faktor):\n    return poraba * faktor\n```\nPrimeri:\n1. Obračun emisij za dostavo paketov na kolesu.\n2. Spremljanje porabe elektrike v skupni pisarni.\n3. Primerjava dveh dobaviteljev po letnih podatkih.\n| Podatek | Primer | Opomba |\n| --- | --- | --- |\n| poraba | 12 kWh | dnevna meritev |\n| faktor | 0,4 kg/kWh | izmišljena vrednost |\n| skupaj | 4,8 kg | rezultat karte |\nVir: dokumentacija projekta Zeleni most, https://zeleni-most.example/dokumentacija",
+  "fragment_sha256": "45b820e09ed1aca92b88d0e05dbee05e6ee52b23b35c362581af65bbdabcccc7",
+  "fragment_bytes": 1181,
+  "prompt_sha256": "89d8917748ae5ea1d460af98419f14859d9a149ab5d980db763d4bf54f775498",
+  "seed": "78653d297d10cd33"
+ },
+ {
+  "case_id": "nat-glossary-entry-dev-03",
+  "scenario": "ns-glossary-entry",
+  "scenario_index": 15,
+  "instance": "dev",
+  "fragment": "Termin: slovarski vnos\nPodročje: jezikovna dokumentacija\nRazlaga: Slovarski vnos je jedrnata, strukturirana opredelitev pojma, ki najprej navede termin, nato področje, pomen in primere rabe. Tak vnos bralcu omogoči hiter vpogled, hkrati pa omogoča sledljivost do vira, iz katerega so podatki izpeljani. Pri izdelavi vstopa v slovar je pomembno, da je jezikovna raven enotna, primeri pa so dovolj konkretni, da se pojem ne razume dvosmiselno.\nPrimeri:\n- Termin: „izmišljena rešitev“; področje: projektne prakse; razlaga: kratek postopek za preverjanje hipoteze; vir: interni dokument projekta Modra Zvezda, avtorica Maja Kranjc.\n- Termin: „kontrolni okvir“; področje: zbiranje podatkov; razlaga: enotna zasnova za vpis podatkov; vir: zbirka dokumentacije skupine Sončni Zahod, razdelek Opredelitve.\nPovezava na vir: interni dokument projekta Modra Zvezda, razdelek Opredelitve, stran 12.",
+  "fragment_sha256": "8ded8880002c3c0ae1b02bd8b5a57b5d38b2d37a127115c243ba6ff1bd226f71",
+  "fragment_bytes": 903,
+  "prompt_sha256": "89d8917748ae5ea1d460af98419f14859d9a149ab5d980db763d4bf54f775498",
+  "seed": "78653d297d10cd33"
+ },
+ {
+  "case_id": "nat-glossary-entry-dev-04",
+  "scenario": "ns-glossary-entry",
+  "scenario_index": 15,
+  "instance": "dev",
+  "fragment": "Termin: Modulna knjižnica\nPodročje: projektna dokumentacija\n\nModulna knjižnica je izmišljen pristop, pri katerem slovarski vnos razdelimo na ločene dele: definicijo, primere in povezavo na vir. Tak vnos olajša bralcu hitro orientacijo, ker najprej vidi bistvo, nato kontekst in na koncu dokaz. V izmišljenem projektu Modra Lampa so ga uvedli, da so zmanjšali število vprašanj med novimi sodelavci. Po poročilu iz leta 2022 je bila bralna doba za en vnos povprečno 1,5 minute.\n\nPrimeri:\n- v projektu Modra Lampa je vnos opisal termin »slojeviti dnevnik« in navedel tri kratke primerke;\n- izmišljena oseba Ana Potočnik je v razpravi ocenila, da so tabele bolj jasne od dolžnih stavkov.\n\n| element | namen |\n|---|---|\n| termin | določi ime pojma |\n| področje | označi okvir |\n| primer | pokaže rabo |\n| vir | omogoči preverjanje |\n\nKratek zapis:\n```\ntermin = 'Modulna knjižnica'\npodrocje = 'dokumentacija'\nvir = 'dnevnik, zvezek 2, stran 14'\n```\n\nPovezava na vir: projektni dnevnik Modra Lampa, zvezek 2, stran 14. Ta izvirni zapis je izmišljen, zato ga ne moremo neposredno odpreti, vendar služi kot zanesljiv notranji pokazatelj.",
+  "fragment_sha256": "029c7b7172078e65f7619f7183a8768b46df92cb17d1b87809299c48e4f85421",
+  "fragment_bytes": 1153,
+  "prompt_sha256": "89d8917748ae5ea1d460af98419f14859d9a149ab5d980db763d4bf54f775498",
+  "seed": "78653d297d10cd33"
+ }
+]

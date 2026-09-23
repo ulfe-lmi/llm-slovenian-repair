@@ -1,0 +1,71 @@
+{
+ "doc_id": "dev-001549",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T10-randomized",
+ "byte_length": 1510,
+ "cp_length": 1499,
+ "sha256": "991a832a91ae2be8f01ee5b2316efb06b3e16c5f8fe02401bf7afe3b19acbf27",
+ "document": "Zahtevo so oddali v ponedeljek. V občini so jo prejeli isti dan, in sicer ob enajsti uri popoldne. Potrdilo z modro značko, ki je merila tri centimetre, so priložili k vsakemu vnosu v evidenco.\n--- {naziv: 'Projektna vsebina: **Kulturni festival**', opis: 'Nevtralna vsebina z *zvezdicami* in https://primer.si/novica', vrednosti: ['Obisk 33 %', 'Razdalja 5,0 m', 'Koeficient 0,11'], oseba: 'Izmišljena oseba: Tomaž Mlakar', projekt: 'Nevtralna testna vsebina'} # Fragment 6: kulturni festival\n\\begin{align} \\alpha_7 &= \\lim_{\\beta_7 \\to 0} \\frac{\\gamma_7}{\\beta_7} \\\\ \\delta_7 &= \\nabla \\epsilon_7 \\\\ \\zeta_7 &= \\eta_7 \\cdot \\theta_7 \\end{align}\n[slovenski opis](https://primer.si/stran)\n[slovenski opis 3: projekt modra 2 l](https://primer.si/stran \"Naslov 3\")\n> <https://primer.si/stran>\n\\(\\left(\\frac{\\theta^4}{2\\pi+1}-\\sqrt{5-\\lambda}\\right)_{\\text{Cilka}}\\)\ngrep marko preizkus.json\n\\[ \\begin{cases} \\rho_1+\\iota_2=11,\\\\ \\tau_3-\\kappa_4=\\text{Ana} \\end{cases} \\]\n/opt/projekti/kos /var/lib/nastavitve.json\n```\n#include <iostream>\n// Značilni znaki: č, š, ž in *poudarek*\nint main() {\n    int razdelek2 = 4;\n    std::cout << \"Tekst: *zvezdice*, `kod` in _pod_\" << std::endl;\n    std::cout << \"Cena: 10 $ (oklepaji)\" << std::endl;\n    return razdelek2;\n}\n```\nMaja je v pisarni preizkusila nov tiskalnik, ki pa se je ob prvimu zagonu pokazal bolj zahteven, kot so obljavali. V razpravi so sodelavci spregovorili o tem, da bi lahko preprostejši program za spremljanje tonerja rešil polovico tegob.",
+ "components": [
+  {
+   "component_id": "comp-prose-administration-dev-0009",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 196
+  },
+  {
+   "component_id": "comp-structured-yaml-dev-0006",
+   "category": "structured",
+   "start_byte": 197,
+   "end_byte": 498
+  },
+  {
+   "component_id": "comp-math-align-env-dev-0007",
+   "category": "math",
+   "start_byte": 499,
+   "end_byte": 651
+  },
+  {
+   "component_id": "comp-markdown-links-dev-0003",
+   "category": "markdown",
+   "start_byte": 652,
+   "end_byte": 795
+  },
+  {
+   "component_id": "comp-math-paren-tex-dev-0003",
+   "category": "math",
+   "start_byte": 796,
+   "end_byte": 868
+  },
+  {
+   "component_id": "comp-machine-shell-commands-dev-0006",
+   "category": "machine",
+   "start_byte": 869,
+   "end_byte": 893
+  },
+  {
+   "component_id": "comp-math-bracket-tex-dev-0003",
+   "category": "math",
+   "start_byte": 894,
+   "end_byte": 973
+  },
+  {
+   "component_id": "comp-machine-posix-paths-dev-0008",
+   "category": "machine",
+   "start_byte": 974,
+   "end_byte": 1016
+  },
+  {
+   "component_id": "comp-code-cpp-dev-0001",
+   "category": "code",
+   "start_byte": 1017,
+   "end_byte": 1271
+  },
+  {
+   "component_id": "comp-prose-computing-dev-0001",
+   "category": "prose",
+   "start_byte": 1272,
+   "end_byte": 1510
+  }
+ ]
+}

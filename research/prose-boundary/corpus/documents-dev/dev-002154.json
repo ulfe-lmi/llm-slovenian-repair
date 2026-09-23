@@ -1,0 +1,47 @@
+{
+ "doc_id": "dev-002154",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T10-randomized",
+ "byte_length": 1005,
+ "cp_length": 975,
+ "sha256": "a234f98138c82bd05f9f5766f4dac9f413d6acc61c8c734f56ac966d913c6f5c",
+ "document": "V letu 2022 je občina Šentvid na Vzorčni gori uvedla elektronsko predložitev dokumentov. Nekateri uporabniki so najprej raje oddali listne vloge, a so kasneje izbrali spletno obliko. V zapisniku, ki ga je podpisal magister Jožef Kranjc, so zapisali: „Postopek je pregleden”, in ga nato potrdili. Rok za odziv je bil deset dni, vendar so večino rešitev dokončali že v petih dneh. Tudi mnenje javnosti je bilo zmerno, saj so v anketi sodelovali trije od petih prebivalcev.\nOseba *Mira* preverja _temperaturo_ 21 stopinj.\nProjekt Sova: Hitrost teka 60 m/min in masa 8 kg sta opisani z **močno** in __podčrtim__ besedilom.\ntest -f vir.txt\nEkipa *Tomaž* zabeleži _množino_ 3 kilogrami.\nKo je Nika za projekt »Polno napajanje« preverjala obvestila, je opazila, da se aplikacija za vremensko napoved pozno obudila, če je telefon bil v šibkem omrežju (tudi ob številnih sporočilih). »Najprej napajanje«, je rekla njena sestra, »vse ostalo je opozorilo, ki lahko počaka do polnjenja.«",
+ "components": [
+  {
+   "component_id": "comp-prose-administration-dev-0010",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 483
+  },
+  {
+   "component_id": "comp-markdown-emphasis-dev-0002",
+   "category": "markdown",
+   "start_byte": 484,
+   "end_byte": 531
+  },
+  {
+   "component_id": "comp-markdown-strong-dev-0003",
+   "category": "markdown",
+   "start_byte": 532,
+   "end_byte": 633
+  },
+  {
+   "component_id": "comp-machine-shell-commands-dev-0001",
+   "category": "machine",
+   "start_byte": 634,
+   "end_byte": 649
+  },
+  {
+   "component_id": "comp-markdown-emphasis-dev-0003",
+   "category": "markdown",
+   "start_byte": 650,
+   "end_byte": 698
+  },
+  {
+   "component_id": "comp-prose-computing-dev-0009",
+   "category": "prose",
+   "start_byte": 699,
+   "end_byte": 1005
+  }
+ ]
+}

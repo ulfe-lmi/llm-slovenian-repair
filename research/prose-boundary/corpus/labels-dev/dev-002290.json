@@ -1,0 +1,102 @@
+{
+ "doc_id": "dev-002290",
+ "byte_length": 1084,
+ "cp_length": 1070,
+ "regions": [
+  {
+   "start_byte": 0,
+   "end_byte": 389,
+   "start_cp": 0,
+   "end_cp": 380,
+   "component_id": "comp-prose-science-dev-0006",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 389,
+   "end_byte": 390,
+   "start_cp": 380,
+   "end_cp": 381,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 390,
+   "end_byte": 393,
+   "start_cp": 381,
+   "end_cp": 384,
+   "component_id": "comp-code-sql-dev-0011",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 393,
+   "end_byte": 394,
+   "start_cp": 384,
+   "end_cp": 385,
+   "component_id": "comp-code-sql-dev-0011",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 394,
+   "end_byte": 831,
+   "start_cp": 385,
+   "end_cp": 820,
+   "component_id": "comp-code-sql-dev-0011",
+   "category": "code",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 831,
+   "end_byte": 832,
+   "start_cp": 820,
+   "end_cp": 821,
+   "component_id": "comp-code-sql-dev-0011",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 832,
+   "end_byte": 835,
+   "start_cp": 821,
+   "end_cp": 824,
+   "component_id": "comp-code-sql-dev-0011",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 835,
+   "end_byte": 836,
+   "start_cp": 824,
+   "end_cp": 825,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 836,
+   "end_byte": 1084,
+   "start_cp": 825,
+   "end_cp": 1070,
+   "component_id": "comp-prose-programming-explainer-dev-0004",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  }
+ ],
+ "invariants": {
+  "tiling_complete": true,
+  "no_contradictory_overlaps": true,
+  "cp_range_exact": true
+ }
+}

@@ -1,0 +1,65 @@
+{
+ "doc_id": "dev-001835",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T10-randomized",
+ "byte_length": 2073,
+ "cp_length": 2033,
+ "sha256": "f6e5f68f238e029771ecd48e6866b23199351f8ae9893a53d83c15ebf6f0e3ab",
+ "document": "V kopeli na Trgu v novembru 2024 je potekal kratki rekreativni plavalni tečaj, v katerem so trije poskusi (plavanje na hrbtno, na prsi in s sproščeno dihanjem) trajali skupaj dvajset minut. Udeleženka, ki jo je projekt opisal kot Maja, je po prvem krogu dejala, da je voda morda hladnejša, kot se je zdelo. 'Največja korist je, da se je telo pomirilo,' je zaključila brez vsakršne pohvale.\nPROJEKT=Modra gora\nAVTOR=Ana Kovač\nTEMPERATURA=18,5 °C\nVLAGNOST=62 %\nDODATNA_VAR=$drugim_ključem; 0,13\nOPIS=[*testna*, _vsebina_, https://primer.si/novica]\n\\text{Projekt Lipa}\\begin{pmatrix}1&2&3\\\\4&5&6\\end{pmatrix}\n```\n// Tretji testni del (č, š, ž)\nconst naslov3 = \"Podrobnost: **poudarek** in _podčrtana_\";\nconst opis = `Cena: $ 9,99 za razdelek2`;\nconst povezava = \"https://primer.si/koda\";\nconst pot = \"src/modul.py\";\nconst vir = \"docs/vir.txt\";\nfunction seStez(a, b) {\n  return a - b;\n}\nconst HRAŠNA_VREDNOST = 2;\nconst rezultat = seStez(HRAŠNA_VREDNOST, 1);\nconsole.log(naslov3, opis, povezava, pot, vir, rezultat);\n// konec\n```\n| Ime osebe | Enota | Merilo |\n| --- | --- | --- |\n| Ana Kovač | min | 18 |\n| Bojan Zupan | l | 230 |\n{ naslov: 'Ljubljanska sončna razstava', oseba: 'Ana Kovač', delež: '25 %', višina: '3,5 m', koeficient: '0,13', vir: https://primer.si/novica }\n```\nfn main() { /* Testni projekt Lipa: č, š, ž, **poudarek** in *zvezdice* */ let razdelek2 = 4; let HRAŠNA_VREDNOST = 1; let citat = \"č`š`ž\"; let pot = \"src/modul.py\"; let url = \"https://primer.si/koda\"; println!(\"{} | {} | {} | {} | {}\", HRAŠNA_VREDNOST, razdelek2, citat, pot, url); }\n```\n| Ime projekta | Enota | Vrednost |\n| --- | --- | --- |\n| Projekt Lipa | m | 12 |\n| Modul Sonce | kg | 45 |\nPri projektu Razumevanje enačb učenci v osmih razredih ugotovijo, da enačba ni zgolj naloga za izračun, temveč jezik, s katerim opisujemo ravnovesje. Ko Ana, izmišljena učiteljica, razlaga postopke, najprej poudari, da na obeh straneh velja izvajati enake spremembe. Tako se učenci naučijo, da odštevamo ali delimo kot po pravilih, ki jih poznamo iz trgovine.",
+ "components": [
+  {
+   "component_id": "comp-prose-sports-dev-0003",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 397
+  },
+  {
+   "component_id": "comp-structured-env-blocks-dev-0001",
+   "category": "structured",
+   "start_byte": 398,
+   "end_byte": 556
+  },
+  {
+   "component_id": "comp-math-matrices-dev-0001",
+   "category": "math",
+   "start_byte": 557,
+   "end_byte": 616
+  },
+  {
+   "component_id": "comp-code-javascript-dev-0011",
+   "category": "code",
+   "start_byte": 617,
+   "end_byte": 1042
+  },
+  {
+   "component_id": "comp-markdown-tables-dev-0002",
+   "category": "markdown",
+   "start_byte": 1043,
+   "end_byte": 1145
+  },
+  {
+   "component_id": "comp-structured-keyvalue-dev-0002",
+   "category": "structured",
+   "start_byte": 1146,
+   "end_byte": 1294
+  },
+  {
+   "component_id": "comp-code-rust-dev-0005",
+   "category": "code",
+   "start_byte": 1295,
+   "end_byte": 1595
+  },
+  {
+   "component_id": "comp-markdown-tables-dev-0001",
+   "category": "markdown",
+   "start_byte": 1596,
+   "end_byte": 1703
+  },
+  {
+   "component_id": "comp-prose-math-explainer-dev-0011",
+   "category": "prose",
+   "start_byte": 1704,
+   "end_byte": 2073
+  }
+ ]
+}

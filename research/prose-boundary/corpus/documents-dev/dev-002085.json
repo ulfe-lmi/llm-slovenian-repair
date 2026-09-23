@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-002085",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T7-prose-json-prose-latex",
+ "byte_length": 844,
+ "cp_length": 832,
+ "sha256": "896303558d6679ff7a5cb931f6467e8a25e47a4b6a134b36e454f068adb6579b",
+ "document": "Med poskusom recepta za jagnjetino (po receptu Marice) je Peter v loncu najprej zvalil česen, rdečo papriko in malo olja. Vmes se je spomnil, da je leta 2021 obiskoval kmetijo, kjer so jagnjeta pasla po travniku. Nad meso je položil narezan krompir, pa tudi „malo soli, malo masla, malo časa“, kot mu je rekla mati.\n{\"ime\":\"Projekt Gora\",\"nagnjenost\":\"12 %\",\"avtorsko\":\"Nevtralna testna vsebina\",\"debelina\":\"0,3 m\",\"opomba\":\"_Nevtralno_ https://primer.si/novica\"}\nV projektu Zdrav vsak dan (v letu 2024) so izpostavili, da se lahko obremenjenost kaže v hitrem dihanju, v slabšem spanju ali v občutku tesnobe. To ni razlaga za domov, ampak spomin, da so telesni signali odziv. Ko se ti signali ponavljajo, jih najprej opiše oseba, nato pa jih preveri zdravnik.\n\\(\\left(\\frac{\\theta^4}{2\\pi+1}-\\sqrt{5-\\lambda}\\right)_{\\text{Cilka}}\\)",
+ "components": [
+  {
+   "component_id": "comp-prose-cooking-dev-0012",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 323
+  },
+  {
+   "component_id": "comp-structured-json-dev-0008",
+   "category": "structured",
+   "start_byte": 324,
+   "end_byte": 471
+  },
+  {
+   "component_id": "comp-prose-medicine-explainer-dev-0005",
+   "category": "prose",
+   "start_byte": 472,
+   "end_byte": 771
+  },
+  {
+   "component_id": "comp-math-paren-tex-dev-0003",
+   "category": "math",
+   "start_byte": 772,
+   "end_byte": 844
+  }
+ ]
+}

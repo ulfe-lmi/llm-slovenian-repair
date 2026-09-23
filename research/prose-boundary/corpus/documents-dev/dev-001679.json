@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-001679",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T8-quote-fenced",
+ "byte_length": 539,
+ "cp_length": 528,
+ "sha256": "5fb5093cc3385caf3ec5c5bb9252bf15f52ff834911c16d9255db04fbb71d1aa",
+ "document": "> Zgodba o izmišljenem gradu Kamen, ki ga je opisal Marko Perš, se v šolskih zvezkih pogosto pojavlja brez natančne letnice. V enem od zapisov pa stoji samo leto 1888 in kratek opis ograj (visokih okoli dveh metrov), kar je sicer precej nenavadno za takšno pripoved. `# Fragment 6: *neodvisen*, podčrtano _besedilo_, (oklepaj)`\n```\n// Testni podatki za osebo Ana.\nconst HRAŠNA_VREDNOST: i32 = 7;\nfn razdelek2(seStez: &str) -> String {\n    let vrednost = HRAŠNA_VREDNOST;\n    format!(\"podčrtano *{seStez}* in {vrednost} €\")\n}\n```",
+ "components": [
+  {
+   "component_id": "comp-prose-history-dev-0008",
+   "category": "prose",
+   "start_byte": 2,
+   "end_byte": 271
+  },
+  {
+   "component_id": "comp-code-shell-bash-dev-0006",
+   "category": "code",
+   "start_byte": 272,
+   "end_byte": 333
+  },
+  {
+   "component_id": "comp-code-rust-dev-0010",
+   "category": "code",
+   "start_byte": 334,
+   "end_byte": 539
+  }
+ ]
+}

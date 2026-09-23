@@ -1,0 +1,102 @@
+{
+ "doc_id": "dev-000409",
+ "byte_length": 970,
+ "cp_length": 950,
+ "regions": [
+  {
+   "start_byte": 0,
+   "end_byte": 277,
+   "start_cp": 0,
+   "end_cp": 271,
+   "component_id": "comp-prose-math-explainer-dev-0003",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 277,
+   "end_byte": 278,
+   "start_cp": 271,
+   "end_cp": 272,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 278,
+   "end_byte": 281,
+   "start_cp": 272,
+   "end_cp": 275,
+   "component_id": "comp-code-rust-dev-0006",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 281,
+   "end_byte": 282,
+   "start_cp": 275,
+   "end_cp": 276,
+   "component_id": "comp-code-rust-dev-0006",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 282,
+   "end_byte": 635,
+   "start_cp": 276,
+   "end_cp": 620,
+   "component_id": "comp-code-rust-dev-0006",
+   "category": "code",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 635,
+   "end_byte": 636,
+   "start_cp": 620,
+   "end_cp": 621,
+   "component_id": "comp-code-rust-dev-0006",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 636,
+   "end_byte": 639,
+   "start_cp": 621,
+   "end_cp": 624,
+   "component_id": "comp-code-rust-dev-0006",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 639,
+   "end_byte": 640,
+   "start_cp": 624,
+   "end_cp": 625,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 640,
+   "end_byte": 970,
+   "start_cp": 625,
+   "end_cp": 950,
+   "component_id": "comp-prose-engineering-dev-0013",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  }
+ ],
+ "invariants": {
+  "tiling_complete": true,
+  "no_contradictory_overlaps": true,
+  "cp_range_exact": true
+ }
+}

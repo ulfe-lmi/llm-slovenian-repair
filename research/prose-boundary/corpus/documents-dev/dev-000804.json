@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-000804",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T2-prose-math-prose",
+ "byte_length": 851,
+ "cp_length": 825,
+ "sha256": "2e4083c6a61688545ae25411311441c8f635c8a346c4a03cf93972547eb9618e",
+ "document": "Iva je v projektu Kuhinjski arhiv v ponedeljek zvečer pripravila potico, a je namesto oreščkov izbrala mandlje, ker je imela doma le eno majhno škatlo. Testo (tisti tanjši recept iz leta 1989) se je lepo razvalalo, čeprav je bila kuhinja prepolna. Ko se je postrežbo spomnila na babičino opombo, je v dnevnik dodala vstavek: „Sladica naj diha vsaj tri četrt ure.“\n\\begin{align} \\chi_4 &= \\sqrt{\\psi_4 + \\rho_4} \\\\ \\tau_4 &= \\frac{\\upsilon_4}{\\sigma_4} \\\\ \\varphi_4 &\\approx \\xi_4 \\cdot \\beta_4 \\end{align}\nLeta 1999 so v projektu Bralna mreža (izmišljeni arhiv) preizkušali, kako bralci obudijo spomin na slovenske in evropske pesnike. Odkritje ni bilo v imenu, temveč v tem, da je vprašanje (brez nujnega odgovora) preživelo vse. »Zato,« je zapisal izmišljeni filolog Marko Rovec, »ker je knjižnost včasih sama sebi prevod.«",
+ "components": [
+  {
+   "component_id": "comp-prose-cooking-dev-0009",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 376
+  },
+  {
+   "component_id": "comp-math-align-env-dev-0004",
+   "category": "math",
+   "start_byte": 377,
+   "end_byte": 518
+  },
+  {
+   "component_id": "comp-prose-literature-dev-0004",
+   "category": "prose",
+   "start_byte": 519,
+   "end_byte": 851
+  }
+ ]
+}

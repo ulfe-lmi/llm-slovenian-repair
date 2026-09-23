@@ -1,0 +1,122 @@
+{
+ "doc_id": "e06",
+ "byte_length": 80,
+ "cp_length": 79,
+ "invariants": {
+  "tiling_complete": true,
+  "no_contradictory_overlaps": true,
+  "cp_range_exact": true
+ },
+ "regions": [
+  {
+   "start_byte": 0,
+   "end_byte": 29,
+   "start_cp": 0,
+   "end_cp": 29,
+   "component_id": "template",
+   "category": "template",
+   "role": "PROSE",
+   "label_source": "construction",
+   "template_owned": true
+  },
+  {
+   "start_byte": 29,
+   "end_byte": 30,
+   "start_cp": 29,
+   "end_cp": 30,
+   "component_id": "template",
+   "category": "template",
+   "role": "NEUTRAL",
+   "label_source": "construction",
+   "template_owned": true
+  },
+  {
+   "start_byte": 30,
+   "end_byte": 37,
+   "start_cp": 30,
+   "end_cp": 37,
+   "component_id": "defect-008h-e06",
+   "category": "structured",
+   "role": "POLICY_EXPOSED",
+   "label_source": "construction",
+   "template_owned": false
+  },
+  {
+   "start_byte": 37,
+   "end_byte": 44,
+   "start_cp": 37,
+   "end_cp": 44,
+   "component_id": "defect-008h-e06",
+   "category": "structured",
+   "role": "PROTECTED",
+   "label_source": "construction",
+   "template_owned": false
+  },
+  {
+   "start_byte": 44,
+   "end_byte": 52,
+   "start_cp": 44,
+   "end_cp": 52,
+   "component_id": "defect-008h-e06",
+   "category": "structured",
+   "role": "POLICY_EXPOSED",
+   "label_source": "construction",
+   "template_owned": false
+  },
+  {
+   "start_byte": 52,
+   "end_byte": 54,
+   "start_cp": 52,
+   "end_cp": 54,
+   "component_id": "defect-008h-e06",
+   "category": "structured",
+   "role": "PROTECTED",
+   "label_source": "construction",
+   "template_owned": false
+  },
+  {
+   "start_byte": 54,
+   "end_byte": 61,
+   "start_cp": 54,
+   "end_cp": 61,
+   "component_id": "template",
+   "category": "template",
+   "role": "PROSE",
+   "label_source": "construction",
+   "template_owned": true
+  },
+  {
+   "start_byte": 61,
+   "end_byte": 62,
+   "start_cp": 61,
+   "end_cp": 62,
+   "component_id": "template",
+   "category": "template",
+   "role": "NEUTRAL",
+   "label_source": "construction",
+   "template_owned": true
+  },
+  {
+   "start_byte": 62,
+   "end_byte": 79,
+   "start_cp": 62,
+   "end_cp": 78,
+   "component_id": "template",
+   "category": "template",
+   "role": "PROSE",
+   "label_source": "construction",
+   "template_owned": true
+  },
+  {
+   "start_byte": 79,
+   "end_byte": 80,
+   "start_cp": 78,
+   "end_cp": 79,
+   "component_id": "template",
+   "category": "template",
+   "role": "NEUTRAL",
+   "label_source": "construction",
+   "template_owned": true
+  }
+ ]
+}

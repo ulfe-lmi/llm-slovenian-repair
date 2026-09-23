@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-002527",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T9-prose-malformed-prose",
+ "byte_length": 559,
+ "cp_length": 552,
+ "sha256": "46a2232391834599782b2b11497daa6532d541c1abf5353c3a83195729f43eca",
+ "document": "Projekt Tiha proga je zbral fragmente, v katerih Ana Kralj bere Čopovo poezijo ob zori. V zadnjem razdelku avtorica spomni na evropsko pripovedko, ki jo je nekje v Ljubljani zapisala leta 1984. Tisto jutro je v knjižnici zmanjkalo ene ključne listine.\nV okviru projekta Reka je bila jeklena konstrukcija obnašala stabilno, tudi po močnem pihu. Most je bil dolg 412 metrov. Nosilci so bili premazani z epoksi premazom. Vetrovna obremenitev je bila izračunana za 30 let.\n``` Testni projekt Lipa: nevtralna vsebina za preizkus prikaza, avtorica Ana Kovač.",
+ "components": [
+  {
+   "component_id": "comp-prose-literature-dev-0011",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 254
+  },
+  {
+   "component_id": "comp-prose-engineering-dev-0003",
+   "category": "prose",
+   "start_byte": 255,
+   "end_byte": 474
+  },
+  {
+   "component_id": "comp-malformed-unclosed-fence-dev-0001",
+   "category": "malformed",
+   "start_byte": 475,
+   "end_byte": 559
+  }
+ ]
+}

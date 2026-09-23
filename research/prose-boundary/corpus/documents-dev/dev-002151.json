@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-002151",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T7-prose-json-prose-latex",
+ "byte_length": 907,
+ "cp_length": 896,
+ "sha256": "f93e910c3409c1fc4ddebc9cbea1f9782eaf6a83d6c4c1e8234c37cffd1c2aba",
+ "document": "Pri projektu Zimska lučka je Katja poizkusila z dvema baterijama in dvema upornostma. A sklep je bil sprva odprt. Ko je na koncu pritiskala na stikalo, se je dioda vžgala. V dnevni sobi so slišali le tihi, zadovoljen smeh.\n{\"ime\":\"Oseba Ana\",\"vloga\":\"Koordinatorka\",\"stanje\":\"Aktivna 80 %\",\"avtorsko\":\"Nevtralna testna vsebina\",\"podrobnosti\":{\"visina\":\"3,5 m\",\"razmerje\":\"0,13\",\"opis\":\"*Preverjanje* https://primer.si/novica\"}}\nLuka je poskušal sestaviti majhno svetilko in je ob tem zamenjal dve upornosti, kar je spremenilo sij. V opombi (datum: 12. marec 2025) je navedel, da baterija po dolgi rabi zmanjša napetost, zato se element hitreje utruši. Pozneje je preizkusil novo ploščico, jo preveril s merilcem in ugotovil, da je stik pri sponki ohlapen. »Moram preveriti vez,« je rekel in poskrbel za varno montažo.\n\\(\\left(\\frac{\\iota^{1/3}}{5+\\kappa}+\\sqrt{14-\\upsilon}\\right)_{\\text{Gaja}}\\)",
+ "components": [
+  {
+   "component_id": "comp-prose-electronics-dev-0008",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 225
+  },
+  {
+   "component_id": "comp-structured-json-dev-0002",
+   "category": "structured",
+   "start_byte": 226,
+   "end_byte": 430
+  },
+  {
+   "component_id": "comp-prose-electronics-dev-0012",
+   "category": "prose",
+   "start_byte": 431,
+   "end_byte": 828
+  },
+  {
+   "component_id": "comp-math-paren-tex-dev-0007",
+   "category": "math",
+   "start_byte": 829,
+   "end_byte": 907
+  }
+ ]
+}

@@ -1,0 +1,68 @@
+[
+ {
+  "case_id": "nat-api-reference-dev-01",
+  "scenario": "ns-api-reference",
+  "scenario_index": 9,
+  "instance": "dev",
+  "fragment": "V naslednjem API sklicu je prikazan način poizvošanja nalog za izmišljen projekt Sončni cvet. Sklic vrne privzet seznam nalog, osnovne podatke o lastniku in seznam članov, ki sodelujejo pri projektu. Parametri so izbirni, zato lahko klic opravimo brez dodatnih podatkov. V takem primeru se vrne največ pet zadnjih vnosov.\n\nTabela parametrov:\n| Parameter | Tip | Pojasnilo |\n|---|---|---|\n| ime | niz | Iščeno ime osebe ali naloge |\n| datum_od | datum | Začetek izbranega obdobja |\n| datum_do | datum | Konec izbranega obdobja |\n| limit | celoštevilka | Največje število vrnjenih elementov, privzeto 5 |\n\nPrimer curl klica:\n```bash\ncurl -X GET \"https://api.izmišljeno.si/naloge?ime=Ana&limit=2\"\n```\n\nJSON odgovor:\n```json\n{\n  \"projekt\": \"Sončni cvet\",\n  \"lastnik\": \"Ana Kovač\",\n  \"clani\": [\"Ana Kovač\", \"Mija Novak\", \"Luka Perko\"],\n  \"naloge\": [\n    {\n      \"id\": 11,\n      \"naziv\": \"Zagotoviti podatke o rožu\",\n      \"stanje\": \"v teku\",\n      \"dodeljen\": \"Mija Novak\",\n      \"zapiranje\": \"2025-03-01\"\n    },\n    {\n      \"id\": 12,\n      \"naziv\": \"Posodobiti opis sončne plošče\",\n      \"stanje\": \"zaprto\",\n      \"dodeljen\": \"Luka Perko\",\n      \"zapiranje\": \"2025-02-20\"\n    }\n  ]\n}\n```\n\nSklic je namenjen preprostemu pregledu stanja nalog in ga lahko uporabljajo člani ekipe Sončni cvet za kratko dnevno poročanje. Če želi uporabnik manjši izbor, lahko v parametru limit zapiše manjše število, če pa želi filtrirati po obdobju, doda datuma začetka in konca.",
+  "fragment_sha256": "85315671cf64f6ed0d6ceb6235910f42ab5c1ede110ef31ca7c0c85a8025a917",
+  "fragment_bytes": 1487,
+  "prompt_sha256": "9d226b7e5750163ccce6fe20fcd89087e2743b75a7c1d4f85c0126ada5a74f75",
+  "seed": "df2b285b63a392d4"
+ },
+ {
+  "case_id": "nat-api-reference-dev-02",
+  "scenario": "ns-api-reference",
+  "scenario_index": 9,
+  "instance": "dev",
+  "fragment": "Spremljaj API sklic za dodajanje nove naloge v izmišljen projekt Sončni veter. Uporabnik pošlje vnos z POST zahtevkom. Strežnik preveri veljavnost podatkov in vrne ustvarjeno nalogo. Podatki so demo narave, brez absolutnih poti in brez avtentikacijskih podatkov. Spodnja tabela pojasnjuje, kakšna polja lahko oddaš v zahtevku, katero je obvezno in kako se uporabljajo v izmišljenem sistemu.\n\n| Parametr | Vrsta | Obvezen | Opis |\n|---|---|---|---|\n| naslov | string | da | Kratek opis naloge |\n| pripisano | string | ne | Ime osebe |\n| rok | string | ne | Datum v obliki GGGG-MM-DD |\n\nNajprej preveri, ali ima uporabnik dovoljenje za pisanje v projekt, preden pošlješ podatke.\n\ncurl primer v kodnem bloku:\n\n```bash\ncurl -X POST \"https://api.demo-slo.si/projekti/1024/naloge\" \\\n  -H \"Content-Type: application/json\" \\\n  -d '{\n    \"naslov\": \"Priprava tedenskega poročila\",\n    \"pripisano\": \"Ana Kovač\",\n    \"rok\": \"2025-03-14\"\n  }'\n```\n\nJSON odgovor:\n\n```json\n{\n  \"id\": 589,\n  \"naslov\": \"Priprava tedenskega poročila\",\n  \"status\": \"odprta\",\n  \"pripisano\": \"Ana Kovač\",\n  \"projekt\": \"Sončni veter\",\n  \"ustvarjeno_dne\": \"2025-02-10T09:41:00Z\"\n}\n```\n\nTo je zgled uspešnega odgovora s statusom 201 Created. Glej tabelo za opise polj in spodnji odgovor za prikaz rezultatov.",
+  "fragment_sha256": "8b53a6e2b75252fa1396996ca786a0b7ba674a7adc73c1beddbccefbeca47a70",
+  "fragment_bytes": 1282,
+  "prompt_sha256": "9d226b7e5750163ccce6fe20fcd89087e2743b75a7c1d4f85c0126ada5a74f75",
+  "seed": "df2b285b63a392d4"
+ },
+ {
+  "case_id": "nat-api-reference-dev-03",
+  "scenario": "ns-api-reference",
+  "scenario_index": 9,
+  "instance": "dev",
+  "fragment": "Naslov: Ustvarjanje mesečnega poročila za izmišljen projekt »Sava«\n\nTa sklic pošlje zahtevo v izmišljen sistem »Poročila za projekte«. Projekt je namenjen testiranju notranjega orodja, oseba je Ana Kovač, ki opravi predmetni sklic.\n\nPomembno je, da sklic vsebuje:\n- ime poročila\n- mesec\n- neobveznega avtorja\n\n| Parametr | Tip | Obvezen | Opis |\n|---|---|---|---|\n| ime | niz | da | Ime poročila, npr. Mesečni pregled |\n| mesec | integer | da | Mesec v obliki 1–12 |\n| avtor | niz | ne | Priimek in ime osebe |\n| opomba | niz | ne | Kratek komentar do 120 znakov |\n\nPrimer zahteve:\n\n```bash\ncurl -X POST \"https://api.izmišljen-projekt.si/ozel/porocila\" \\\n  -H \"Content-Type: application/json\" \\\n  -d '{\n    \"ime\": \"Mesečni pregled\",\n    \"mesec\": 3,\n    \"avtor\": \"Ana Kovač\",\n    \"opomba\": \"Prvi testni vnos\"\n  }'\n```\n\nPričakovan JSON odgovor:\n\n```json\n{\n  \"status\": \"obdelano\",\n  \"id\": \"por-1002\",\n  \"projekt\": \"Sava\",\n  \"ime\": \"Mesečni pregled\",\n  \"mesec\": 3,\n  \"avtor\": \"Ana Kovač\",\n  \"ustvarjeno\": \"2025-01-14T09:30:00Z\"\n}\n```\n\nSklic ne uporablja ključev. Če manjkajo obvezni podatki, vrne napako s kodo 422 in seznamom pogojev, ki jih je treba dopolniti.",
+  "fragment_sha256": "8211b84ac9f8aa55b43b2620f79fea0372c964cf6d104c861f47ae225985a4b3",
+  "fragment_bytes": 1182,
+  "prompt_sha256": "9d226b7e5750163ccce6fe20fcd89087e2743b75a7c1d4f85c0126ada5a74f75",
+  "seed": "df2b285b63a392d4"
+ },
+ {
+  "case_id": "nat-api-reference-dev-04",
+  "scenario": "ns-api-reference",
+  "scenario_index": 9,
+  "instance": "dev",
+  "fragment": "Sledi API sklic za pridobitev nalog izmišljenega projekta Sončni vrh. Prikazano je, kako uporabljate parameter stran in vrstno, da dobite prvi dve nalogi. API je primer za notranji sistem in ne uporablja osebnih podatkov.\n\nGlavne značilnosti:\n- povratni JSON format\n- enostavno stranjenje\n- izmišljeni projekti in osebe\n\n| Parameter | Tip | Obvezen | Opis |\n| --- | --- | --- | --- |\n| stran | številka | ne | Oznaka strani, privzeta vrednost je 1. |\n| vrstno | številka | ne | Število rezultatov na strani, privzeto je 10. |\n\ncurl primer:\n\n```\ncurl --request GET 'https://api.demo.si?projekt=soncni-vrh&stran=1&vrstno=2' -H 'Accept: application/json'\n```\n\nJSON odgovor:\n\n```\n{\n  \"projekt\": \"Sončni vrh\",\n  \"stran\": 1,\n  \"vrstno\": 2,\n  \"naloge\": [\n    {\"id\": 12, \"naziv\": \"Preveriti obveznosti\", \"oseba\": \"Ana Kranjc\", \"stanje\": \"v teku\"},\n    {\"id\": 13, \"naziv\": \"Posodobiti podatkovni vir\", \"oseba\": \"Maj Božič\", \"stanje\": \"zaključeno\"}\n  ]\n}\n```",
+  "fragment_sha256": "ef178d122dcfe7f006063c30697fe6aeb89fb7774660bdddb551ae8c278ee35b",
+  "fragment_bytes": 959,
+  "prompt_sha256": "9d226b7e5750163ccce6fe20fcd89087e2743b75a7c1d4f85c0126ada5a74f75",
+  "seed": "df2b285b63a392d4"
+ },
+ {
+  "case_id": "nat-api-reference-dev-05",
+  "scenario": "ns-api-reference",
+  "scenario_index": 9,
+  "instance": "dev",
+  "fragment": "### API sklic za dodajanje dogodka v izmišljen projekt Lesna postaja\n\nTabela parametrov:\n\n| Ime | Tip | Obvezen | Opis |\n|---|---|---|---|\n| naslov | string | da | Kratko ime dogodka |\n| datum | string | da | Datum in ura v ISO 8601 obliki |\n| organizator | string | da | Ime osebe, ki dogodek organizira |\n| kapacita | integer | ne | Največje število udeležencev, privzeto 40 |\n\nCurl primer:\n\n```bash\ncurl -X POST \"https://api.lesna-postaja.example/dogodki\" -H \"Content-Type: application/json\" -d '{\"naslov\":\"Novoletna pika\",\"datum\":\"2026-01-01T18:00:00Z\",\"organizator\":\"Ana Kovač\",\"kapacita\":60}'\n```\n\nOčakuje se JSON odgovor:\n\n```json\n{\"id\":\"dog-1001\",\"naslov\":\"Novoletna pika\",\"datum\":\"2026-01-01T18:00:00Z\",\"organizator\":\"Ana Kovač\",\"kapacita\":60,\"status\":\"v čakanju\"}\n```\n\nTa sklic omogoča registracijo izmišljenih dogodkov v interni aplikaciji. Sistem preveri, ali je datum prihodnji, in če kapacite ni podane, uporabi privzeto vrednost. Vračeni identificator in status omogočata potrditev v uporabniškem vmesniku.",
+  "fragment_sha256": "1583685c8cf0713dae9b5bd8b5c78a5ea0e7960399c50bf383f51fd9543ade2c",
+  "fragment_bytes": 1035,
+  "prompt_sha256": "9d226b7e5750163ccce6fe20fcd89087e2743b75a7c1d4f85c0126ada5a74f75",
+  "seed": "df2b285b63a392d4"
+ },
+ {
+  "case_id": "nat-api-reference-dev-06",
+  "scenario": "ns-api-reference",
+  "scenario_index": 9,
+  "instance": "dev",
+  "fragment": "Za izmišljeni projekt *Majhen arhiv* lahko pošljete pošto na pot **api.majhenarhiv.si/projekti/majhen-arhiv/dnevniki**. Pošiljanje doda nov dnevnik za osebo *Ana Kovač*. Vnos se nato pojavi v seznamu dnevnika, ko se vrnite do uporabnika. Pred pošiljanjem preverite, da so vsa polja pravilno zapolnjena. Tabela spodaj pojasni, kateri podatki so potrebni in v katerem obliki jih pošljete.\n\n| Parametar | Tip | Opis |\n|---|---|---|\n| naslov | niz | Kratek naslov dnevnika. |\n| vsebina | niz | Kratka notacija. |\n| datum | string | Datum v obliki YYYY-MM-DD. |\n| oseba | niz | Ime osebe, ki je avtor. |\n\nPrimer curl sklice:\n\n```curl\ncurl -X POST -H \"Content-Type: application/json\" -d '{\n  \"naslov\": \"Sestanek o načrtu\",\n  \"vsebina\": \"Dogovorili smo tri korake.\",\n  \"datum\": \"2025-01-15\",\n  \"oseba\": \"Ana Kovač\"\n}' api.majhenarhiv.si/projekti/majhen-arhiv/dnevniki\n```\n\nJSON odgovor:\n\n```json\n{\n  \"id\": 42,\n  \"naslov\": \"Sestanek o načrtu\",\n  \"vsebina\": \"Dogovorili smo tri korake.\",\n  \"datum\": \"2025-01-15\",\n  \"oseba\": \"Ana Kovač\",\n  \"ustvarjeno\": \"2025-01-15T09:30:00Z\"\n}\n```\n\nOdzov pomeni, da je vnos shranjen. Pomembni podatki:\n- id: enolična oznaka vnosa.\n- ustvarjeno: čas nastanka.\nZa drugo osebo, na primer *Marko Novak*, uporabite enak obrazec in menjate samo vrednosti. Po uspešnem klicu prejmete podatke o novem vnosu. Vsi projekti, osebe in podatki so izmišljeni.",
+  "fragment_sha256": "dd4f1aa4ae2ffb0a9a04808a8622c2ab1d1ce101d2bf12598e1c670fe8f066cb",
+  "fragment_bytes": 1385,
+  "prompt_sha256": "9d226b7e5750163ccce6fe20fcd89087e2743b75a7c1d4f85c0126ada5a74f75",
+  "seed": "df2b285b63a392d4"
+ }
+]

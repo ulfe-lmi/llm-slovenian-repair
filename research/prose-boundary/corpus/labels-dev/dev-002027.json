@@ -1,0 +1,152 @@
+{
+ "doc_id": "dev-002027",
+ "byte_length": 641,
+ "cp_length": 623,
+ "regions": [
+  {
+   "start_byte": 0,
+   "end_byte": 3,
+   "start_cp": 0,
+   "end_cp": 3,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 3,
+   "end_byte": 64,
+   "start_cp": 3,
+   "end_cp": 63,
+   "component_id": "comp-prose-cooking-dev-0013",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 64,
+   "end_byte": 65,
+   "start_cp": 63,
+   "end_cp": 64,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 65,
+   "end_byte": 522,
+   "start_cp": 64,
+   "end_cp": 505,
+   "component_id": "comp-prose-history-dev-0012",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 522,
+   "end_byte": 523,
+   "start_cp": 505,
+   "end_cp": 506,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 523,
+   "end_byte": 543,
+   "start_cp": 506,
+   "end_cp": 525,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 543,
+   "end_byte": 557,
+   "start_cp": 525,
+   "end_cp": 539,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 557,
+   "end_byte": 559,
+   "start_cp": 539,
+   "end_cp": 541,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 559,
+   "end_byte": 599,
+   "start_cp": 541,
+   "end_cp": 581,
+   "component_id": "comp-prose-programming-explainer-dev-0010",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 599,
+   "end_byte": 602,
+   "start_cp": 581,
+   "end_cp": 584,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 602,
+   "end_byte": 622,
+   "start_cp": 584,
+   "end_cp": 604,
+   "component_id": "comp-machine-posix-paths-dev-0003",
+   "category": "machine",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 622,
+   "end_byte": 623,
+   "start_cp": 604,
+   "end_cp": 605,
+   "component_id": "comp-machine-posix-paths-dev-0003",
+   "category": "machine",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 623,
+   "end_byte": 639,
+   "start_cp": 605,
+   "end_cp": 621,
+   "component_id": "comp-machine-posix-paths-dev-0003",
+   "category": "machine",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 639,
+   "end_byte": 641,
+   "start_cp": 621,
+   "end_cp": 623,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  }
+ ],
+ "invariants": {
+  "tiling_complete": true,
+  "no_contradictory_overlaps": true,
+  "cp_range_exact": true
+ }
+}

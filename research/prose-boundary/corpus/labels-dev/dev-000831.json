@@ -1,0 +1,112 @@
+{
+ "doc_id": "dev-000831",
+ "byte_length": 961,
+ "cp_length": 942,
+ "regions": [
+  {
+   "start_byte": 0,
+   "end_byte": 282,
+   "start_cp": 0,
+   "end_cp": 277,
+   "component_id": "comp-prose-travel-dev-0005",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 282,
+   "end_byte": 283,
+   "start_cp": 277,
+   "end_cp": 278,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 283,
+   "end_byte": 430,
+   "start_cp": 278,
+   "end_cp": 425,
+   "component_id": "comp-structured-json-dev-0008",
+   "category": "structured",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 430,
+   "end_byte": 431,
+   "start_cp": 425,
+   "end_cp": 426,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 431,
+   "end_byte": 755,
+   "start_cp": 426,
+   "end_cp": 740,
+   "component_id": "comp-prose-literature-dev-0008",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 755,
+   "end_byte": 756,
+   "start_cp": 740,
+   "end_cp": 741,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 756,
+   "end_byte": 772,
+   "start_cp": 741,
+   "end_cp": 757,
+   "component_id": "comp-math-aligned-env-dev-0001",
+   "category": "math",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 772,
+   "end_byte": 903,
+   "start_cp": 757,
+   "end_cp": 887,
+   "component_id": "comp-math-aligned-env-dev-0001",
+   "category": "math",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 903,
+   "end_byte": 917,
+   "start_cp": 887,
+   "end_cp": 901,
+   "component_id": "comp-math-aligned-env-dev-0001",
+   "category": "math",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 917,
+   "end_byte": 961,
+   "start_cp": 901,
+   "end_cp": 942,
+   "component_id": "template",
+   "category": null,
+   "role": "PROSE",
+   "template_owned": true
+  }
+ ],
+ "invariants": {
+  "tiling_complete": true,
+  "no_contradictory_overlaps": true,
+  "cp_range_exact": true
+ }
+}

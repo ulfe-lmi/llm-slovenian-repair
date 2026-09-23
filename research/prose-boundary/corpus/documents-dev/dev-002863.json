@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-002863",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T4-heading-prose-table",
+ "byte_length": 482,
+ "cp_length": 471,
+ "sha256": "8cb2d8736c8b338a946c972f5d12f42826cf43876d8f8899ba0c53b867dea0e0",
+ "document": "## V Splitu smo opazovali staro obalo in šele zvečer spoznali, \nMojca je v razredu (po imenu Tista) povedala, da zanka ni nikoli le ponavljanje brez razloga. »Ponovi,« je zapisala na tablo, »dokler se števec ne ustavi.« Nato je pokazala, da funkcija deluje kot majhen stroj, ki prejme ime, preveri starost in vrne, ali udeleženec sodeluje v projektu.\n| Opis | Vzorček |\n| --- | --- |\n| V pisarni so za projekt »Dober dose« pos | --vhod tabela/dokumenti.csv, --izhod izp |",
+ "components": [
+  {
+   "component_id": "comp-prose-travel-dev-0002",
+   "category": "prose",
+   "start_byte": 3,
+   "end_byte": 65
+  },
+  {
+   "component_id": "comp-prose-programming-explainer-dev-0007",
+   "category": "prose",
+   "start_byte": 66,
+   "end_byte": 358
+  },
+  {
+   "component_id": "comp-prose-computing-dev-0008",
+   "category": "prose",
+   "start_byte": 395,
+   "end_byte": 437
+  },
+  {
+   "component_id": "comp-machine-cli-flags-dev-0006",
+   "category": "machine",
+   "start_byte": 440,
+   "end_byte": 480
+  }
+ ]
+}

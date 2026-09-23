@@ -1,0 +1,112 @@
+{
+ "doc_id": "dev-002422",
+ "byte_length": 1172,
+ "cp_length": 1136,
+ "regions": [
+  {
+   "start_byte": 0,
+   "end_byte": 550,
+   "start_cp": 0,
+   "end_cp": 533,
+   "component_id": "comp-prose-computing-dev-0012",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 550,
+   "end_byte": 551,
+   "start_cp": 533,
+   "end_cp": 534,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 551,
+   "end_byte": 554,
+   "start_cp": 534,
+   "end_cp": 537,
+   "component_id": "comp-code-c-dev-0008",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 554,
+   "end_byte": 555,
+   "start_cp": 537,
+   "end_cp": 538,
+   "component_id": "comp-code-c-dev-0008",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 555,
+   "end_byte": 781,
+   "start_cp": 538,
+   "end_cp": 760,
+   "component_id": "comp-code-c-dev-0008",
+   "category": "code",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 781,
+   "end_byte": 782,
+   "start_cp": 760,
+   "end_cp": 761,
+   "component_id": "comp-code-c-dev-0008",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 782,
+   "end_byte": 785,
+   "start_cp": 761,
+   "end_cp": 764,
+   "component_id": "comp-code-c-dev-0008",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 785,
+   "end_byte": 786,
+   "start_cp": 764,
+   "end_cp": 765,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 786,
+   "end_byte": 1131,
+   "start_cp": 765,
+   "end_cp": 1102,
+   "component_id": "comp-prose-history-dev-0007",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 1131,
+   "end_byte": 1172,
+   "start_cp": 1102,
+   "end_cp": 1136,
+   "component_id": "template",
+   "category": null,
+   "role": "PROSE",
+   "template_owned": true
+  }
+ ],
+ "invariants": {
+  "tiling_complete": true,
+  "no_contradictory_overlaps": true,
+  "cp_range_exact": true
+ }
+}

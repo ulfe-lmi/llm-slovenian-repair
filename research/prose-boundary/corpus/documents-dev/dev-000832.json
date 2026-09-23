@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-000832",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T8-quote-fenced",
+ "byte_length": 512,
+ "cp_length": 499,
+ "sha256": "31cfb759c71b0623d4dc6e0619480b6a8c85b716745e21371963664f963969f2",
+ "document": "> „Prvi korak, drugi noga,“ je rekla Ana, a mladi smučarji v projektni skupini so še vedno poskušali izbrati pravo pozicijo. Ko je padal sneg, so se vsi odločili za krajši premor pri topli čaju. `int main(void) { char *cena1 = \"1 $\"; char *cena2 = \"2 EUR\";`\r\n```\r\n/* Zaključni test: oseba Janež, projekt Brest */ const naslov = 'Vrednost je 25 $'; const opomba = `Podpis: **Janez** (_brez šumnika_)`; const pot = 'docs/vir.txt'; const razdelek2 = 8; console.log(naslov, opomba, pot, razdelek2);\r\n```",
+ "components": [
+  {
+   "component_id": "comp-prose-sports-dev-0012",
+   "category": "prose",
+   "start_byte": 2,
+   "end_byte": 204
+  },
+  {
+   "component_id": "comp-code-c-dev-0005",
+   "category": "code",
+   "start_byte": 205,
+   "end_byte": 267
+  },
+  {
+   "component_id": "comp-code-javascript-dev-0008",
+   "category": "code",
+   "start_byte": 269,
+   "end_byte": 512
+  }
+ ]
+}

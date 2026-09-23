@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-000712",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T9-prose-malformed-prose",
+ "byte_length": 593,
+ "cp_length": 584,
+ "sha256": "ebc9c3c1624ee69e573f7b2c2bca54bcdbf068695fca133fef959f7b8d89d8b6",
+ "document": "V okviru projekta Nova vrv so otroci iz Ljubljane v petek zvečer vadili kratke podaje. Učiteljica Maja je opazila, da so po deset minutah teka vsi bolj sproščeni.\n\n\\[ y=3 . Testni zapis projekta Brda za osebo Marko.\n\nV zbirki izmišljenega muzeja na Bledu je ohranjen skicirni list iz leta 1623, ki ga pripisujejo obrtniku Janezu Hribarju. Na listu je zabeležen postopek obdelave lesa in navedena meritev širine deske, ki naj bi dosegala dva metra. Raziskovalci projekta Stare delavnice so zato sklepali, da je v tem času obstajala manjša lokalna tradicija izdelovanja lesnih izdelkov.",
+ "components": [
+  {
+   "component_id": "comp-prose-sports-dev-0011",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 166
+  },
+  {
+   "component_id": "comp-malformed-incomplete-paren-bracket-dev-0002",
+   "category": "malformed",
+   "start_byte": 168,
+   "end_byte": 219
+  },
+  {
+   "component_id": "comp-prose-history-dev-0006",
+   "category": "prose",
+   "start_byte": 221,
+   "end_byte": 593
+  }
+ ]
+}

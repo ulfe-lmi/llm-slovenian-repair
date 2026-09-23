@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-001624",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T8-quote-fenced",
+ "byte_length": 503,
+ "cp_length": 493,
+ "sha256": "dd6f36befc3993e897e351075318e8b96335b9d77a4c1bf9a662412750ba0588",
+ "document": "> Petra je načrtovala kratek vikend v dolini Soče. Njen spremljevalec, Ivan, jo je peljal do smaragdne reke in starega gradu. »Vzemi lahke hlače,« je rekel pred odhodom. Vratila se je utrujena, a z dovolj fotografij. `int main(void) { char *cena1 = \"1 $\"; char *cena2 = \"2 EUR\";`\n```\n# Testni projekt: Pripomoček; avtor: Maja Lipovnik\nime = 'Ana'\nznesek = 5\nporočilo = f'Račun: {znesek} $ v `oklepaju`'\nopis = 'To je `koda` in *poudarek* ter _podčrtano_'\nif znesek > 0:\n    print(poročilo)\n```",
+ "components": [
+  {
+   "component_id": "comp-prose-travel-dev-0013",
+   "category": "prose",
+   "start_byte": 2,
+   "end_byte": 221
+  },
+  {
+   "component_id": "comp-code-c-dev-0005",
+   "category": "code",
+   "start_byte": 222,
+   "end_byte": 284
+  },
+  {
+   "component_id": "comp-code-python-dev-0004",
+   "category": "code",
+   "start_byte": 285,
+   "end_byte": 503
+  }
+ ]
+}

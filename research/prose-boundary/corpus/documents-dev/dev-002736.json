@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-002736",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T9-prose-malformed-prose",
+ "byte_length": 515,
+ "cp_length": 505,
+ "sha256": "d40e2de7196d734f33eb53054a570b900d6ffb5d989efeeab712494e1965d82f",
+ "document": "Marko je v projektu Zeleni dnevnik zbral suha zelišča. Ruzmarin (tudi poleti) je sušil v temni omarici. Nato je zapečatil steklenico in jo označil z letom 2023. V dnevniku je zapisal opombo: ne dodajaj soli, dokler ne poskusiš.\n{\"oseba\": \"Izmišljena oseba Ana Kovač\", \nMaja je v pisarni preizkusila nov tiskalnik, ki pa se je ob prvimu zagonu pokazal bolj zahteven, kot so obljavali. V razpravi so sodelavci spregovorili o tem, da bi lahko preprostejši program za spremljanje tonerja rešil polovico tegob.",
+ "components": [
+  {
+   "component_id": "comp-prose-cooking-dev-0007",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 233
+  },
+  {
+   "component_id": "comp-malformed-truncated-json-dev-0003",
+   "category": "malformed",
+   "start_byte": 234,
+   "end_byte": 276
+  },
+  {
+   "component_id": "comp-prose-computing-dev-0001",
+   "category": "prose",
+   "start_byte": 277,
+   "end_byte": 515
+  }
+ ]
+}

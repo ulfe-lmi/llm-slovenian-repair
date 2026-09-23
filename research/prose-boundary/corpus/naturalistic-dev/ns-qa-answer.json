@@ -1,0 +1,46 @@
+[
+ {
+  "case_id": "nat-qa-answer-dev-01",
+  "scenario": "ns-qa-answer",
+  "scenario_index": 12,
+  "instance": "dev",
+  "fragment": "> Vprašanje: Kako v izmišljenem projektu 'Modri vrt' nastavim redno izvozno nalogo za zbirko 'Jesenski cvet' in jo testiram, ne da bi uporabljal absolutne poti?\n\nKoraki:\n1. V mapi `config` ustvari datoteko `cron.yaml`.\n2. Določi urnik `*/15 * * * *` za uporabnika `Ana`.\n3. V `tasks` dodaš ukaz `export-cvet --zbirka jesenski-cvet --izhod data/izvoz.csv`.\n4. Lokalno preveri z `dry-run` in si oglej dnevnik v `logs/cron.log`.\n\n| korak | dejanje | odgovorna oseba |\n|---|---|---|\n| 1 | ureja konfiguracijo | Ana |\n| 2 | pregleda urnik | Marko |\n| 3 | izvaja test | Tina |\n\nKoda:\n```yaml\nvzorec: modri-vrt\nuporabnik: Ana\nurnik: \"*/15 * * * *\"\nnaloge:\n  - ime: izvoz-jesenski-cvet\n    ukaz: export-cvet --zbirka jesenski-cvet --izhod data/izvoz.csv\n    dnevnik: logs/cron.log\n```\n\nOpomba: uporabi samo izmišljene podatke in relativne imena. To je dovolj za prvi lokalni pregled, preden nalogo oddaš v delovno okolje. Tako lahko preveriš, da ima vsaka naloga jasno ime, urnik in dnevnik, preden jo oddaš skupini.",
+  "fragment_sha256": "9b2735f29399b45c66467ce38486716a5fe7d831544f6ddda42eae7f23f23ad9",
+  "fragment_bytes": 1016,
+  "prompt_sha256": "27f8a70da072d5b38216107c038791679056603edfd48523e619f7ed70f02d97",
+  "seed": "ed65958c3aaf3a5b"
+ },
+ {
+  "case_id": "nat-qa-answer-dev-02",
+  "scenario": "ns-qa-answer",
+  "scenario_index": 12,
+  "instance": "dev",
+  "fragment": "> **Citat vprašanja:** Kako v izmišljenem projektu »Sončni Koledar« preprosto prikažem tri dogodke za uporabnico Ano Kovač, ne da bi uporabljal absolutne poti ali varnostne podatke?\n\n**Zaporedni koraki:**\n1. V relativni mapi `src/dogodki` ustvariš datoteko `dogodki.ts` in v njej opíšeš izmišljene dogodke.\n2. V `src/prikaz/priprava.ts` dodaš kratek pregled, kjer izbereš dogodke po datumu in po imenu uporabnice.\n3. V `src/prikaz/gumbi.ts` narediš tri neodvisne klice do izmišljene storitve, pri čemer se izogneš vnosu varnostnih podatkov.\n4. Z enostavno tabelo preveriš, ali so vsi podatki dosledni in ali ni nobenih absolutnih poti.\n\n**Pregled podatkov:**\n\n| Oseba | Projekt | Število dogodkov |\n|---|---|---|\n| Ana Kovač | Sončni Koledar | 3 |\n\n**Kodni primer:**\n\n```ts\n// src/dogodki/dogodki.ts\nexport type Dogodek = [string, string];\n\nexport const dogodekAna: Dogodek[] = [\n  ['Jutranja meditacija', '2025-01-10'],\n  ['Sestanek ekipe', '2025-01-11'],\n  ['Potrditev proračuna', '2025-01-12']\n];\n```\n\nTa odgovor uporablja le izmišljeno osebo, projekt in kratek seznam dogodkov. Zato je primer varen, berljiv in ga lahko takoj odpreš v lokalni mapi.",
+  "fragment_sha256": "1d9486fa54c5d685ec9ffb97b978514d6e5e5e64c6bc4ba5ee49eae4a4cf25c6",
+  "fragment_bytes": 1177,
+  "prompt_sha256": "27f8a70da072d5b38216107c038791679056603edfd48523e619f7ed70f02d97",
+  "seed": "ed65958c3aaf3a5b"
+ },
+ {
+  "case_id": "nat-qa-answer-dev-03",
+  "scenario": "ns-qa-answer",
+  "scenario_index": 12,
+  "instance": "dev",
+  "fragment": "Vprašanje: 'Kako v izmišljenem projektu Čebela zberem dnevne metrike iz modula in jih varno zabeležim, da jih naslednji dan preveri Luka iz ekipe Ptuč?'\n\nNajprej si Anja pripravi enodatotekovni skript, ki najprej preveri, ali so podatki res na voljo. Šele potem napiše datoteko, zato se izognemo polovici zapisane ali prazne datoteke. Skript naj bo kratek, preprost in enolčen, da ga lahko hitro pregledamo.\n\n1. Naredi funkcijo, ki vrne enodatotekovni zapis metrik.\n2. Preveri, ali je zapis prazen ali neveljaven.\n3. Razdeli vrednosti na posamezne stolpce.\n4. Odpri datoteko in zapiši glavo ter eno vrstico.\n5. Količino podatkov omeji na nekaj stolpcev, da ostane pregledno.\n\n| Modul | Očekovana delavnost |\n| --- | --- |\n| zbiranje | 2 sekundi |\n| zapis | 1 sekunda |\n\nKodni primer v Pythonu:\n\n```python\nfrom datetime import datetime\n\ndef zberi_metrike():\n    return (2, 140, 2)\n\ndef shrani(podatki, ime='porocilo.csv'):\n    napaka, obdelane, cas = podatki\n    with open(ime, 'w', encoding='utf-8') as f:\n        f.write('napaka,obdelane,cas_s\\n')\n        f.write(f'{napaka},{obdelane},{cas}\\n')\n\ndef main():\n    podatki = zberi_metrike()\n    if podatki is None:\n        raise ValueError('Nobene metrike.')\n    shrani(podatki)\n\nif __name__ == '__main__':\n    main()\n```\n\nKo Luka testira, naj preveri tri stvari: da se datoteka dejansko ustvari, da je zapis v UTF-8 in da ni prazne vrednosti v stolpcih. Pri naslednji iteraciji naj doda čas poteka in enostavno logiranje, da bo lažje videti, kdaj se je zbiranje izvedlo.",
+  "fragment_sha256": "fbab3e90f08c565f8175d81b003f429e7012a3a76ff832150a56ceee58fc20c3",
+  "fragment_bytes": 1533,
+  "prompt_sha256": "27f8a70da072d5b38216107c038791679056603edfd48523e619f7ed70f02d97",
+  "seed": "ed65958c3aaf3a5b"
+ },
+ {
+  "case_id": "nat-qa-answer-dev-04",
+  "scenario": "ns-qa-answer",
+  "scenario_index": 12,
+  "instance": "dev",
+  "fragment": "Vprašanje: \"Kako v izmišljenem projektu Lebdeča Liska zbrati poročilo za osebo Maja Kovač iz treh raziskovalnih zapisov in ga izpisati kot preprosto tabelo?\"\n\nOdgovor: Najprej se posvetuje z Majo Kovač o obsegu poročila. Nato v projektu Lebdeča Liska zbiramo izmišljene zapiske iz treh delov: zimska opazovanja, poletne meritve in poletni dnevnik. Vsak zapisek ima tri podatke: ime, osebo in vrednost. Ker gre le za izmišljene podatke, ne uporabljamo absolutnih poti, varnostnih podatkov ali zunanje storitve. Podatke preverimo, da so vrednosti številčne, osebe pa so zapisane skladno.\n\nKoraki:\n1. Pripravi seznam izmišljenih zapiskov.\n2. Filtriraj zapike po osebi Maja Kovač.\n3. Izračunaj povprečje vrednosti.\n4. Izpiši tabelo in kodo.\n\n| ime | oseba | vrednost |\n| --- | --- | --- |\n| zimska opazovanja | Maja Kovač | 12,5 |\n| poletne meritve | Maja Kovač | 18,2 |\n| poletni dnevnik | Maja Kovač | 9,7 |\n\nKoda:\n```python\nfrom dataclasses import dataclass\nfrom statistics import fmean\n\n@dataclass\nclass Zapisek:\n    ime: str\n    oseba: str\n    vrednost: float\n\ndef porocilo(zapiski, oseba):\n    izbrani = [z for z in zapiski if z.oseba == oseba]\n    povprece = fmean([z.vrednost for z in izbrani]) if izbrani else 0.0\n    for z in izbrani:\n        print(f\"{z.ime} | {z.oseba} | {z.vrednost:.1f}\")\n    print(f\"Povprečje: {povprece:.2f}\")\n\nzapiski = [\n    Zapisek(\"zimska opazovanja\", \"Maja Kovač\", 12.5),\n    Zapisek(\"poletne meritve\", \"Maja Kovač\", 18.2),\n    Zapisek(\"poletni dnevnik\", \"Maja Kovač\", 9.7)\n]\nporocilo(zapiski, \"Maja Kovač\")\n```\n\nKoda prikazuje celoten izmišljen primer. Če želiš, lahko dodamo še razdelke po letih ali izvoz v datoteko, a brez absolutnih poti in brez kakršnihkoli varnostnih podatkov.",
+  "fragment_sha256": "ea72bdcb2e94aab9ff553c3fb4567d957d7b5808b4fb77a06ab2f7afa3acefa9",
+  "fragment_bytes": 1748,
+  "prompt_sha256": "27f8a70da072d5b38216107c038791679056603edfd48523e619f7ed70f02d97",
+  "seed": "ed65958c3aaf3a5b"
+ }
+]

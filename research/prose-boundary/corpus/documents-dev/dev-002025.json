@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-002025",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T2-prose-math-prose",
+ "byte_length": 695,
+ "cp_length": 675,
+ "sha256": "80b72acd40a2dde8471f4d9112fd1f476281838d76d5ba066c189a9f4f1dd69e",
+ "document": "V projektu Sončni razbojnik so pri izračunu ocenili, da se je obdelava naročil v juniju zmanjšala za 8 odstotkov. Tomo je zaskrbljeno zapisal: „Povprečje skriva posamezne padce.“ Kljub temu so odločili, da bodo naslednji teden ponovno izmerili čas.\n\\[\\frac{9}{10}-\\dfrac{\\mu}{\\nu}=\\text{Projekt Lipa}\\]\nMed obiskom Dubrovnika v septembru 2024 smo obiskali stene mestnega obzidja (ki so bile to poletje izjemno obiskane), preden smo se popoldne izprehodili po stari četrti in se postopoma sprehodili do postajališča vrveža, ki je vodil do Srđ. Lokalna restavracija, ki smo jo izbrali naključno, je ponujala svež ribji rožž, pripravljen po tradicionalni recepturi iz leta 1980.",
+ "components": [
+  {
+   "component_id": "comp-prose-statistics-dev-0010",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 259
+  },
+  {
+   "component_id": "comp-math-fractions-dev-0005",
+   "category": "math",
+   "start_byte": 260,
+   "end_byte": 313
+  },
+  {
+   "component_id": "comp-prose-travel-dev-0007",
+   "category": "prose",
+   "start_byte": 314,
+   "end_byte": 695
+  }
+ ]
+}

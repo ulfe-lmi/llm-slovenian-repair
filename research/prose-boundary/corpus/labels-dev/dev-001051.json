@@ -1,0 +1,102 @@
+{
+ "doc_id": "dev-001051",
+ "byte_length": 965,
+ "cp_length": 934,
+ "regions": [
+  {
+   "start_byte": 0,
+   "end_byte": 433,
+   "start_cp": 0,
+   "end_cp": 415,
+   "component_id": "comp-prose-statistics-dev-0012",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 433,
+   "end_byte": 434,
+   "start_cp": 415,
+   "end_cp": 416,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 434,
+   "end_byte": 585,
+   "start_cp": 416,
+   "end_cp": 565,
+   "component_id": "comp-structured-json-dev-0006",
+   "category": "structured",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 585,
+   "end_byte": 586,
+   "start_cp": 565,
+   "end_cp": 566,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 586,
+   "end_byte": 902,
+   "start_cp": 566,
+   "end_cp": 871,
+   "component_id": "comp-prose-electronics-dev-0003",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 902,
+   "end_byte": 903,
+   "start_cp": 871,
+   "end_cp": 872,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 903,
+   "end_byte": 905,
+   "start_cp": 872,
+   "end_cp": 874,
+   "component_id": "comp-math-display-dollar-dev-0005",
+   "category": "math",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 905,
+   "end_byte": 963,
+   "start_cp": 874,
+   "end_cp": 932,
+   "component_id": "comp-math-display-dollar-dev-0005",
+   "category": "math",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 963,
+   "end_byte": 965,
+   "start_cp": 932,
+   "end_cp": 934,
+   "component_id": "comp-math-display-dollar-dev-0005",
+   "category": "math",
+   "role": "NEUTRAL",
+   "template_owned": false
+  }
+ ],
+ "invariants": {
+  "tiling_complete": true,
+  "no_contradictory_overlaps": true,
+  "cp_range_exact": true
+ }
+}

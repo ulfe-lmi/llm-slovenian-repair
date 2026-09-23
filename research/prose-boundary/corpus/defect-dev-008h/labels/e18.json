@@ -1,0 +1,34 @@
+{
+ "doc_id": "e18",
+ "byte_length": 21,
+ "cp_length": 20,
+ "invariants": {
+  "tiling_complete": true,
+  "no_contradictory_overlaps": true,
+  "cp_range_exact": true
+ },
+ "regions": [
+  {
+   "start_byte": 0,
+   "end_byte": 20,
+   "start_cp": 0,
+   "end_cp": 19,
+   "component_id": "defect-008h-e18",
+   "category": "prose",
+   "role": "PROSE",
+   "label_source": "construction",
+   "template_owned": false
+  },
+  {
+   "start_byte": 20,
+   "end_byte": 21,
+   "start_cp": 19,
+   "end_cp": 20,
+   "component_id": "template",
+   "category": "template",
+   "role": "NEUTRAL",
+   "label_source": "construction",
+   "template_owned": true
+  }
+ ]
+}

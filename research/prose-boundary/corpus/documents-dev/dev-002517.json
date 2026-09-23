@@ -1,0 +1,47 @@
+{
+ "doc_id": "dev-002517",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T10-randomized",
+ "byte_length": 1404,
+ "cp_length": 1381,
+ "sha256": "d17f536ca3830e74e20c3f1f4d5e190351b808c12334692118f72b0c4f8884a3",
+ "document": "V projektu Vzorčni napisi 2025 je Petra zapisala, da se pri nespečnosti pogosto omenjajo navade, hrana in okolje, vendar ni mogoče zanesljivo napovedati vzroka brez pogovora. Zato v takih primerih svetujemo, da se oseba obrne na zdravnika ali medicinsko sestro, zlasti če se pojavi huda slabost, oteženo dihanje ali „nenadno slabše počutje“.\n\\(\\left(\\frac{\\iota^{1/3}}{5+\\kappa}+\\sqrt{14-\\upsilon}\\right)_{\\text{Gaja}}\\)\n--- {naziv: 'Projektna vsebina: **Mestna knjižnica**', opis: 'Nevtralna vsebina z *zvezdicami* in https://primer.si/novica', vrednosti: ['Polnjenje 40 %', 'Globina 2,1 m', 'Delež 0,27'], oseba: 'Izmišljena oseba: Marko Petek', projekt: 'Nevtralna testna vsebina'} # Fragment 2: knjižnica\n```\nint main(void) { char *napis = \"Tekst: *poudarjeno* in _podčrtano_\"; char *cena = \"Cena: 10 $ (dolar)\"; char *url = \"https://primer.si/koda\"; (void)napis; (void)cena; (void)url; return 0; } /* Markov podatek */\n```\n[slovenski opis](https://primer.si/stran)\n[slovenski opis 7: Nina 4 m/s](https://primer.si/stran \"Naslov 7\")\n> <https://primer.si/stran>\nZavod Odrasli naprej je v letu 2021 pripravil kratke izobraževalne module za poklicno usposabljanje, pri čemer so strokovni vodje poudarili jasno strukturirane učbenike in vsakodnevne vaje. Po petih tednih so udeleženci opravili preizkus znanja, ki je imel 20 vprašanj, 10 praktičnih nalog in eno ustno obrazložitev.",
+ "components": [
+  {
+   "component_id": "comp-prose-medicine-explainer-dev-0010",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 352
+  },
+  {
+   "component_id": "comp-math-paren-tex-dev-0007",
+   "category": "math",
+   "start_byte": 353,
+   "end_byte": 431
+  },
+  {
+   "component_id": "comp-structured-yaml-dev-0002",
+   "category": "structured",
+   "start_byte": 432,
+   "end_byte": 723
+  },
+  {
+   "component_id": "comp-code-c-dev-0002",
+   "category": "code",
+   "start_byte": 724,
+   "end_byte": 943
+  },
+  {
+   "component_id": "comp-markdown-links-dev-0007",
+   "category": "markdown",
+   "start_byte": 944,
+   "end_byte": 1080
+  },
+  {
+   "component_id": "comp-prose-education-dev-0002",
+   "category": "prose",
+   "start_byte": 1081,
+   "end_byte": 1404
+  }
+ ]
+}

@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-000276",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T2-prose-math-prose",
+ "byte_length": 662,
+ "cp_length": 645,
+ "sha256": "f29eaaea46d13c7456f39344edf1881b3c953c2321570f30fefdf57b081cd108",
+ "document": "Na koncu sem za projekt »Mali raziskovalci« zapisala, da je pomembno pojasniti, zakaj je razmerje enako. Učenci, ki so imeli raje praktične naloge, so pri tem razumeli, da je geometrija lahko kot igranje s ploščicami. (To je bilo dovolj za naslednji pogovor o oblikah.)\n\\begin{equation}\\begin{aligned}K_5 &= \\left(\\alpha_5 + \\beta_5\\right)^2 \\text{Triglav test} \\\\L_5 &= \\det A_5 + \\theta_5\\end{aligned}\\end{equation}\nAna si je za projekt »Miren dan« izbrala prenosnik, ki naj bi bil dovolj tih, da ga lahko odpre v knjižnici (tudi če baterija ni polna). V »Ponovni sinhronizaciji« se ji je obljubil mirnejši dan, če omrežje ne bo puščalo zamud.",
+ "components": [
+  {
+   "component_id": "comp-prose-math-explainer-dev-0005",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 275
+  },
+  {
+   "component_id": "comp-math-aligned-env-dev-0005",
+   "category": "math",
+   "start_byte": 276,
+   "end_byte": 423
+  },
+  {
+   "component_id": "comp-prose-computing-dev-0006",
+   "category": "prose",
+   "start_byte": 424,
+   "end_byte": 662
+  }
+ ]
+}

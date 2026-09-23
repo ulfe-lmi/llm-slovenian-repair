@@ -1,0 +1,53 @@
+{
+ "doc_id": "dev-002418",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T10-randomized",
+ "byte_length": 1144,
+ "cp_length": 1124,
+ "sha256": "e53b04026e6d066a2c40c4c6921e8159c06e2582884ad98d4f09dcc7bebd2340",
+ "document": "Pomurski potič se v testni kuhinji projekta Okusi Pomurja peče pri 180 stopinjah, dokler ne postane zlato rjav. Namaz iz mletega oreha (ne preveč) naj bo tanko razgneten, da se test ne raztrga. Katja je dodala malo medu, ker je želela, da bo vonj močnejši in bolj topel. Čas mirovanja testa, približno ena ura, je bil razlika med suhim in mehkim rezom.\nparse_lexer_input\n\\begin{equation}\\begin{aligned}U_6 &= \\log_2 \\Omega_6 + \\phi_6 \\text{Nova vas} \\\\V_6 &= \\nabla \\cdot \\vec{F}_6 + \\omega_6\\end{aligned}\\end{equation}\nVzorčeni zapis: ~~stare~~ oznake so 12 enot za Projekt Lipa.\n{ naslov: 'Ljubljanska sončna razstava', oseba: 'Ana Kovač', delež: '25 %', višina: '3,5 m', koeficient: '0,13', vir: https://primer.si/novica }\nhttp://izvor.si/dokument?stran=2\nV izmišljeni razpravi Bralna meja avtorica Eva Brin trdi, da je knjižnost najprej kraj. Ta kraj se ne meri v metrikah (ne v točkah, ne v ocenah), ampak v molčanju. Evropska zvrst, ki jo imenujemo »knjižna pripoved«, se pri njej spaja s slovenskim motivom potovanja. V njeni predstavi bralci ne odpirajo le strani. Odpirajo tudi tisti prostor med imenom in spominom.",
+ "components": [
+  {
+   "component_id": "comp-prose-cooking-dev-0002",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 360
+  },
+  {
+   "component_id": "comp-machine-identifiers-dev-0004",
+   "category": "machine",
+   "start_byte": 361,
+   "end_byte": 378
+  },
+  {
+   "component_id": "comp-math-aligned-env-dev-0006",
+   "category": "math",
+   "start_byte": 379,
+   "end_byte": 527
+  },
+  {
+   "component_id": "comp-markdown-strikethrough-dev-0001",
+   "category": "markdown",
+   "start_byte": 528,
+   "end_byte": 589
+  },
+  {
+   "component_id": "comp-structured-keyvalue-dev-0002",
+   "category": "structured",
+   "start_byte": 590,
+   "end_byte": 738
+  },
+  {
+   "component_id": "comp-machine-urls-dev-0002",
+   "category": "machine",
+   "start_byte": 739,
+   "end_byte": 771
+  },
+  {
+   "component_id": "comp-prose-literature-dev-0005",
+   "category": "prose",
+   "start_byte": 772,
+   "end_byte": 1144
+  }
+ ]
+}
