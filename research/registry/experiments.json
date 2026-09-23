@@ -5918,6 +5918,298 @@
         "objective 009: fresh human-labelled linguistic confirmation of the complete frozen pipeline on a new target distribution - NOT this corpus; its sample must exclude every objective-008 generated or inspected case (every v1, v2, and v3 component, mashup, naturalistic case, dev document, dev batch, and dev-edge document)",
         "named corrective scope (CONDITIONAL; structural-safety-only): (1) extend the R1 composition predicate from HTML closing-tag lines to all HTML block-start lines (opening-tag lines included) so the 278 B HTML-opening-tag-adjacent fence absorption shape cannot be composed into the next pool; (2) a bounded class-boundary analysis of the 60 B xml-fragment non-ASCII-attribute shape (fire the recognizer when the tag name is dialect-recognised but the tag as a whole is not recognised due to non-ASCII attributes, or document the class boundary with the measured evidence) and of the 26 B display-dollar pairing shape (a bounded malformed-family composition guard or a documented class); (3) the T6 link-destination admission/label refinement (the disclosed bounded pre-existing observation)"
       ]
+    },
+    {
+      "experiment_id": "008-i-corrective-scope-and-v4-final-blind-acceptance",
+      "logical_root": "research/prose-boundary (the 008-i implementation frozen at the dev-regression gate; census in frozen_choices; the new sealed v4 hidden acceptance set and all adjudication labels live in private roots, referenced by committed manifest hashes only)",
+      "kind": "corrective-evaluation",
+      "variation": "execution of the 008-h named smallest corrective suffix to closure: the builder composition contract extended (R1 to ALL dialect HTML block-start lines - opening-tag lines included - so the 278 B fence-absorption shape cannot be composed; display-dollar adjacency guard; T6 clean-URL admission refinement), the predeclared D1-5 xml-fragment class-boundary decision (PRIMARY bounded trigger refinement - the single curated trigger condition - committed with its evidence after the dev regression gate; the FALLBACK branch available and not triggered), structural policy v5 (guards (a)-(c), the D1-5 outcome, the T6 measured observation, the frozen protection identity; v3/v4 byte-identical in-tree), the 4-document 008-i dev dialect-edge batch, and re-evaluation of the full metrics set and e2e invariants 1-7 on a NEW independently generated and sealed hidden set (v4: 2,000 documents, 373 components, 76 families, fresh seed stream, zero exact-component overlap with the dev, v1, v2, and v3 pools asserted and disclosed with the bounded zero-overlap recovery), the naturalistic consistency re-run against the existing 70 labels with the carried per-range resolution, and the final objective-008 verdict per the predeclared decision states",
+      "status": "PASS",
+      "question": "Does the 008-i implementation (R1 extension to all HTML block-start lines, the D1-5 PRIMARY xml-fragment trigger refinement, the display-dollar adjacency guard, the T6 clean-URL admission refinement, policy v5), evaluated for the first and only time on the new sealed v4 hidden acceptance set, with the naturalistic per-range resolution and the dev regression gate, meet the predeclared PASS / CONDITIONAL / FAIL decision states for the final objective-008 verdict?",
+      "frozen_choices": {
+        "new_frozen_protection_identity_census": {
+          "research/curated/prose_boundary.py": "c57e2901e52af962546ee83651850e22c91655a8cc822f2c43b1284da16b8c50",
+          "research/curated/protected.py": "27f22eaee129190b880851b958a8aa5a38d357cb4e711d70e762b2353d32e78f",
+          "research/prose-boundary/config/structural-policy-v3.json": "7ff6646e3c11d1241cb1c85bd96f08e3f0db08e73d4eb4a4e97fac0c17e1828f",
+          "research/prose-boundary/config/structural-policy-v5.json": "915f70d34ecc69ab6fea0b273f24ca20f251b6e181bd5e9281c5c012de2fe542"
+        },
+        "policy_v3_to_v5_sha256_pair": {
+          "v3": "7ff6646e3c11d1241cb1c85bd96f08e3f0db08e73d4eb4a4e97fac0c17e1828f",
+          "v5": "915f70d34ecc69ab6fea0b273f24ca20f251b6e181bd5e9281c5c012de2fe542",
+          "recorded_in": "research/prose-boundary/config/experiment-008i.json (sha256 24e25edafbbf0b1d67dc405440ea78c0b76a9011c00d5e53c82fe3c00fef6685); v3 and v4 (f564d9f87ef01a893d6cd6bb36f6cf99a0d353a4dde4e4c4c024942eb969e76f) stay byte-identical in-tree; v5 is the policy of record (the v4 evaluation wrapper reads it for malformed_class_map only; the runtime residual layer loads the committed v3 file unmodified)"
+        },
+        "frozen_008f_harness_byte_identical": true,
+        "generation_identity_sha256": "84b55be651d46ace5287600a9e1fb21c73c9c74ea99f499dd810885db592e5f5",
+        "generation_model_identity": "qwen3.8-27b (A100-FP8 007-lineage deployment record; profile sha256 df556922f9264f4b685c19e9e138f86c577897bb703ae83cbb35847d71d564de; endpoint value omitted per 007 convention)",
+        "annotation_guide_sha256": "e65816ddda65343e45b9c0b9fa112b8e18eea19b17310a997cff87b9a200eb5e",
+        "v4_prompt_library_sha256": "904dd36b9891c567f250bf8b42b374d0b6557aa79ca3fcaa3c8824682fcc8fef",
+        "pinned_helper_sha256": "5df9a11d56b5bdec90c3ca09298802723975306f77e43e74ad1a72eb427c44bf",
+        "objective_009_data_touches": 0,
+        "gate_or_cap_or_workflow_changes": "1 - the owner-Option-A1 CI-1 single line (application-baseline.yml line 35 ' --command-timeout 600', pinned sha256 4490d0fc9e9fcd3eb697b1721b385f086f1a232372593618501dc0ed0918bc4c), applied in the first implementation commit per the order scope item 15; scripts/verify_development_baseline.py byte-identical (300.0 default preserved)"
+      },
+      "metrics": {
+        "v4_hidden_set": {
+          "manifest_sha256": "a702babc239d24251a62f35c1e51f389843c7e7eea8547d64bb325cf16174696",
+          "documents": 2000,
+          "components": 373,
+          "families": 76,
+          "mashup_seed": "6b390354646a9b25",
+          "document_bytes": 1705961,
+          "densified_families": "16 components each for structured-html, structured-keyvalue, structured-xml, malformed-partial-html (base 4 for the other 72 families)",
+          "r1_barrier_insertions": 4,
+          "display_dollar_barrier_insertions": 0,
+          "zero_exact_component_overlap": "asserted by the committed builder and disclosed (dev pool 641 / v1 pool 588 / v2 pool 340 / v3 pool 345 components; the initial 13 cross-pool duplicates confined to five saturated machine families - machine-filenames 2, machine-identifiers 1, machine-urls 4, machine-versions-numbers-units 3, machine-windows-paths 3 - were recovered by one bounded K=8 regeneration round per family with new recorded seeds (13 overlap-discarded, 34 components added: machine-filenames 2->6, machine-identifiers 1->11, machine-urls 4->6, machine-versions-numbers-units 3->9, machine-windows-paths 3->9); final 0/0/0/0 plus 0 intra-pool re-asserted over all 373 v4 components)",
+          "strategy_seal_verification": "strategy-independent data-free re-hash 4076/4076 before the evaluation phase (receipt strat-verify-tmp/v4seal-result-pre-20260923-011639.json, sha256 0fba8fcf61924f94adcfb7388bb6b369f2d61b18594f4cfc32129a69b87dbce0, 3,620 B, cites the v4 manifest sha256, recorded in the committed evaluation aggregate as the fail-closed gate input; path not committed) and after the evaluation phase (all-seals receipt strat-verify-tmp/v4seal-result-post-20260923-013553.json, sha256 833e60b85d0e8e1863f8eb2c93ad76a93a2eeb15d8e51cfe79b7987fbc1fdf8d, 14,022 B: v4 4076/4076, v3 4076/4076, v2 4076/4076, v1 4091/4091 all VERIFIED; path not committed)"
+        },
+        "v4_seal": {
+          "before_evaluation": "4076/4076 verified data-free (round re-hash + strategy re-hash), manifest sha256 a702babc239d24251a62f35c1e51f389843c7e7eea8547d64bb325cf16174696 unchanged, seal copy byte-identical",
+          "after_evaluation": "4076/4076 verified data-free, manifest sha256 unchanged (re-verified per file through the harness loader at evaluation time and by the post-evaluation strategy all-seals receipt)"
+        },
+        "v3_seal": {
+          "before_evaluation": "4076/4076 verified data-free, manifest sha256 ee503bd7c09f26a1b9c171319cc82f8ec692918d0d7d18f11d528a6f18c54f36 unchanged, seal copy byte-identical",
+          "after_evaluation": "4076/4076 verified data-free, manifest sha256 unchanged (strategy all-seals post-evaluation receipt)"
+        },
+        "v2_seal": {
+          "before_evaluation": "4076/4076 verified data-free, manifest sha256 cf37654a45b10c024525fc334f368d4b20956619e2568542544c855d93a85ec1 unchanged, seal copy byte-identical",
+          "after_evaluation": "4076/4076 verified data-free, manifest sha256 unchanged (strategy all-seals post-evaluation receipt)"
+        },
+        "v1_seal": {
+          "before_evaluation": "4091/4091 verified data-free, manifest sha256 8233bdcf683df8a97d62a375a6cf60d93b64aa6b7ecf22489ce9986333436a18 unchanged, seal copy byte-identical",
+          "after_evaluation": "4091/4091 verified data-free, manifest sha256 unchanged (strategy all-seals post-evaluation receipt; no v1 re-run this round - the 008-g 458 B figure stands as the committed development diagnostic)"
+        },
+        "label_source_census": {
+          "construction_labeled_protected_bytes": 266807,
+          "construction_labeled_protected_regions": 2738,
+          "oracle_refined_protected_bytes": 59085,
+          "oracle_refined_protected_regions": 1807,
+          "policy_exposed_bytes": 862,
+          "policy_exposed_regions": 320,
+          "note": "per labeled region over the sealed v4 labels: construction = role fixed by explicit composition specification; oracle-refined = role fixed by the frozen residual spec (the implementation's own residual function; circularity disclosed for the oracle-refined protected census)"
+        },
+        "dev_regression": {
+          "status": "PASS (committed before any v4 generation)",
+          "dev_corpus_new_safety_exposure_bytes": 0,
+          "dev_corpus_protected_bytes_total": 526315,
+          "defect_batch_008g_safety_exposure_bytes": 0,
+          "dev_edge_batch_008h_safety_exposure_bytes": 0,
+          "dev_edge_batch_008i_safety_exposure_bytes": 0,
+          "dev_edge_documents_008i": 4,
+          "run_a_008i_batch_attribution": "21/188 B - exactly the predeclared shape (ii) attribution (e02: the 29 B dialect-vocabulary tag token with the 8 B interior number + identifier class-covered) and nothing else; run B (final implementation) 0/188 B; the dev corpus, 008-g and 008-h raw outputs byte-identical between runs A and B (the delta fires only on the measured shape)",
+          "prose_over_suppression_delta_pp_vs_008h": 0.0,
+          "prose_over_suppression_delta_pp_vs_008g": 0.021674473490918,
+          "prose_over_suppression_delta_pp_vs_008c": 0.032982894442701305,
+          "bound_pp": 1.0,
+          "stop_conditions_fired": 0,
+          "fallback_branch_triggered": false
+        },
+        "mashup_safety_v4": {
+          "construction_labeled_protected_bytes_total": 266807,
+          "construction_labeled_protected_bytes_exposed": 0,
+          "hard_axis_target": 0,
+          "met": true,
+          "raw_frozen_harness_record": "325,892 protected bytes, 62 raw-exposed = 0 construction + 62 oracle-refined (cross-check reconciled; 0 fallback documents)",
+          "oracle_refined_protected_census": "62 B exposed of 59,085 (8 documents: v4h-000295 6, v4h-000559 5, v4h-000669 7, v4h-000702 6, v4h-000955 14, v4h-001604 5, v4h-001626 14, v4h-001912 5); one documented class - yaml-hash-comment-heading (Slovenian YAML '# heading' lines the dialect parses as ATX headings = structural, not candidate prose; documented since v1, the v1 sub-shape 348 B + 5 B; a named policy-exposed dialect-ambiguity class in policy v4 carried verbatim into v5); sealed and evaluated as-is under the predeclared rule; policy-coverage census with the disclosed circularity limitation - does not gate the verdict",
+          "s2_shape_witness_artifact": "the document-level s2 heuristic registered 10 angle-bracket email/URL token witnesses (e.g. '<posta@primer.si>'-class tokens in v4h-000669) where the dialect attribute-scan simulation reports a non-ASCII attribute name but the dialect does not treat the token as candidate prose at that position (autolink-adjacent line; token bytes outside the parser-approved candidate-prose intersection): zero true occurrences of the 60 B v3 shape, zero exposure; D1-5 fires correctly where the measured condition holds (dev e02: 0 exposure under run B)"
+        },
+        "coordinates_v4": {
+          "utf8_boundary_violations": 0,
+          "byte_cp_conversion_mismatches": 0,
+          "source_slice_mismatches": 0,
+          "patch_preservation_violations": 0
+        },
+        "coverage_v4": {
+          "expected_prose_bytes_exposed": 1303438,
+          "expected_prose_bytes_total": 1348239,
+          "expected_prose_bytes_exposed_rate": 0.966770728335258,
+          "expected_prose_regions_completely_available": [
+            888,
+            8889
+          ],
+          "unnecessary_suppression_by_container": {
+            "S.Emph": 56,
+            "S.Head": 230,
+            "S.Item": 2533,
+            "S.Para": 13855,
+            "S.TableCell": 129,
+            "unknown": 27998
+          }
+        },
+        "malformed_behaviour_v4": {
+          "violations": 0,
+          "rows": 10,
+          "deterministic": true,
+          "recomputation": "the committed aggregate's policy-exposed row totals were independently recomputed from the sealed v4 labels (per-family first-contributing-document identity; the known frozen-harness first-document double-count carried as a defect): delta 0 satisfied for all families; raw rows and recomputed true values both committed; no frozen byte changed"
+        },
+        "determinism_v4": {
+          "re_run_sample": 50,
+          "identical": true
+        },
+        "performance_v4": {
+          "ms_per_document_median": {
+            "1kb": 48.419,
+            "10kb": 69.525,
+            "50kb": 277.328
+          },
+          "peak_rss_kb": 77012,
+          "note": "qualitative statement only: parser + residual cost is cheap relative to one model inference"
+        },
+        "e2e_invariants_v4": "7/7 all_pass on 2,000/2,000 hidden-document replays through the actual frozen pipeline entry points (frozen deterministic stub boundary; zero network; zero new model calls; the raw frozen-harness output embedded in the aggregate is explicitly labelled as such)",
+        "naturalistic_consistency_v4": {
+          "cases": 70,
+          "material_cases_008g_rule": 5,
+          "material_case_ids": [
+            "nat-glossary-entry-hidden-03",
+            "nat-json-config-hidden-01",
+            "nat-math-answer-hidden-04",
+            "nat-qa-answer-hidden-04",
+            "nat-table-equations-hidden-03"
+          ],
+          "exposed_ranges": 15,
+          "resolution": "15/15 DOCUMENTED-DIALECT-LIMITATION with the carried class references (markdown-table-dialect-boundary x9, list-item-candidate-prose x2, indented-code-lazy-continuation x1, residual-token-line-glue x3); 0 CLOSED-RESIDUAL; 0 AMBIGUOUS; 0 UNRESOLVED - verdict condition (vii) satisfied",
+          "exposed_byte_counts": "byte-identical (case, range, exposed bytes, resolution kind) to the committed 008-g/008-h aggregate (the D1-5 trigger refinement is monotonic - protection only - and changed nothing on this population)",
+          "attribution": "parser-dialect 12, label-ambiguity 2, residual-class-gap 1 (carried 008-g heuristic)",
+          "label_corrections": "none - the narrow predeclared path (at most 5 cases) was not triggered (no frozen label factually wrong about the source text)"
+        },
+        "model_call_accounting": {
+          "v4_generation_http_attempts": 87,
+          "breakdown": "2 preflights (initial + recovery) + 85 component calls (80 base batches + 5 bounded K=8 recovery calls) + 0 retries (authorized test-data generation; 007-lineage qwen3.8-27b identity; budget 96; 008-h precedent 89); the interrupted prior stream (88 attempts, 15 pool duplicates, recovery-bookkeeping bug at the final zero-overlap assertion) was discarded BEFORE any identity commit per the predeclared interruption rule and disclosed in the committed generation identity (local evidence never committed)",
+          "linguistic_pipeline_calls": 0,
+          "label_correction_calls": 0,
+          "objective_009_touches": 0
+        }
+      },
+      "evidence_files": [
+        {
+          "disposition": "008-i order committed at activation (byte-identity re-verified against the committed blob)",
+          "logical_path": "oap/orders/008-i-corrective-scope-and-v4-final-blind-acceptance.md",
+          "sha256": "8e1e5a5baf993353a85e63e2717e18ebc17639d544797d26a2e019c1b84d2150",
+          "size": null
+        },
+        {
+          "disposition": "new structural policy of record (guards (a)-(c), the D1-5 outcome with the v3 evidence, the T6 measured observation, the frozen protection identity; v3/v4 byte-identical in-tree)",
+          "logical_path": "research/prose-boundary/config/structural-policy-v5.json",
+          "sha256": "915f70d34ecc69ab6fea0b273f24ca20f251b6e181bd5e9281c5c012de2fe542",
+          "size": null
+        },
+        {
+          "disposition": "round experiment configuration (four-file frozen protection census, D1-5 decision record, v3/v4/v5 policy identities, D0 choices)",
+          "logical_path": "research/prose-boundary/config/experiment-008i.json",
+          "sha256": "24e25edafbbf0b1d67dc405440ea78c0b76a9011c00d5e53c82fe3c00fef6685",
+          "size": null
+        },
+        {
+          "disposition": "committed generation identity (model, prompt library, frozen driver, per-family seeds, call counts, R2/R3/T6 admission rules, zero-overlap assertion vs dev/v1/v2/v3, bounded recovery, pre-seal diagnostic, interrupted-stream disclosure)",
+          "logical_path": "research/prose-boundary/config/generation/generation-identity-008i.json",
+          "sha256": "84b55be651d46ace5287600a9e1fb21c73c9c74ea99f499dd810885db592e5f5",
+          "size": null
+        },
+        {
+          "disposition": "content-free v4 hidden acceptance manifest (seal basis; label-source census)",
+          "logical_path": "research/prose-boundary/corpus/manifests/hidden-manifest-v4.json",
+          "sha256": "a702babc239d24251a62f35c1e51f389843c7e7eea8547d64bb325cf16174696",
+          "size": null
+        },
+        {
+          "disposition": "v4 seal verification (4076/4076; out-of-manifest = 87 generation receipts only; strategy receipt identities)",
+          "logical_path": "research/prose-boundary/corpus/manifests/seal-verification-v4.json",
+          "sha256": "0c6fa26ed70a3e8642ce76d0a139e77336fc6c4ba0b10a200559f6eeec909dc0",
+          "size": null
+        },
+        {
+          "disposition": "additive corpus census (dev dialect-edge batch 008-i section)",
+          "logical_path": "research/prose-boundary/corpus/manifests/corpus-census.json",
+          "sha256": "5b6fc6e5c83852db5b70e7ec1a815010ec4c519d0b9b55e60dda6925746586fe",
+          "size": null
+        },
+        {
+          "disposition": "dev regression gate (committed before any v4 generation; four-file implementation census = the frozen protection identity; runs A+B)",
+          "logical_path": "research/prose-boundary/results/hidden-acceptance-v4/dev-regression-008i.json",
+          "sha256": "f7959a7fda2adc33b8f95887dcfe45325ddeccd0623caf2c17c8e3bcf9756d24",
+          "size": null
+        },
+        {
+          "disposition": "data-restricted shape analysis (the three v3 exposure shapes + the T6 observation, with mechanism, byte split, and the fix specification; data-free)",
+          "logical_path": "research/prose-boundary/results/hidden-acceptance-v4/shape-analysis-008i.json",
+          "sha256": "ff26d29da724a9e58a5c9740b2ec2075ecc499f4126152d1042db4f7a27f2be3",
+          "size": null
+        },
+        {
+          "disposition": "blind v4 hidden acceptance mashup metrics (committed data-free aggregate; first and only use of the v4 set as acceptance; label-source split; recomputation delta 0; strategy pre-gate receipt cited)",
+          "logical_path": "research/prose-boundary/results/hidden-acceptance-v4/mashup-metrics-v4.json",
+          "sha256": "5be89d8291dd3d15c9e3379a059f1b15305acea29fd0d99762af04ad45d2ad65",
+          "size": null
+        },
+        {
+          "disposition": "e2e preservation invariants 1-7 on the v4 set (committed data-free aggregate)",
+          "logical_path": "research/prose-boundary/results/hidden-acceptance-v4/e2e-invariants-hidden-v4.json",
+          "sha256": "8a16f362cca68821bd9f9d9dc04f14c13cef2353d2b529bb801a837915212a3e",
+          "size": null
+        },
+        {
+          "disposition": "naturalistic consistency re-run data-free aggregate (70 fixed labels; carried per-range resolution; 0 UNRESOLVED)",
+          "logical_path": "research/prose-boundary/results/hidden-acceptance-v4/naturalistic-consistency-v4.json",
+          "sha256": "6f4df79b01e69f41e6d23aabff8f2ee4649351dabfc509e3d2a019b087b6d50a",
+          "size": null
+        },
+        {
+          "disposition": "v4 evaluation wrapper (NEW thin wrapper; imports the frozen 008-f harness unmodified; fail-closed on the strategy pre-gate receipt)",
+          "logical_path": "research/prose-boundary/tools/hidden_acceptance_v4.py",
+          "sha256": "3f87c18d071174a252d41a7f4383c8929e51fad56aa836ce0240e2f3b577caa3",
+          "size": null
+        },
+        {
+          "disposition": "naturalistic consistency driver (NEW deterministic driver; carried 15-range resolution map; self-tests)",
+          "logical_path": "research/prose-boundary/tools/naturalistic_consistency_v4.py",
+          "sha256": "37e10dfd5d601254b8df44cb3d229ffd9488fb1053514728780686a95041f46a",
+          "size": null
+        },
+        {
+          "disposition": "builder (released: R1 extended to all HTML block-start lines, display-dollar adjacency guard, T6 clean-URL admission, guard/label-source recording; no-parser-participation assertion retained)",
+          "logical_path": "research/prose-boundary/tools/prose_boundary_builder.py",
+          "sha256": "ccbec1c9f8c4636d125f86aac231c9bb016d917fa4b7ddd5854055d9158fa187",
+          "size": null
+        },
+        {
+          "disposition": "focused test file (positive + negative cases; dev-edge batch fail-closed validation; 38/38 green at the implementation head)",
+          "logical_path": "research/tests/test_008i_composition_and_class_boundary.py",
+          "sha256": "a85608f33ede6f4bf8d72ea7d73a6b07a60f7e104130ade59ad039430905e8fd",
+          "size": null
+        },
+        {
+          "disposition": "round research report (data-free)",
+          "logical_path": "research/prose-boundary/REPORT-008I.md",
+          "sha256": "f5846ebd1b76ca9610bc377eefd3bcd4fba31755c0bff7756466e52930e039ca",
+          "size": 39123
+        },
+        {
+          "disposition": "content-free v1 hidden manifest (spent single-use set; untouched)",
+          "logical_path": "research/prose-boundary/corpus/manifests/hidden-manifest.json",
+          "sha256": "8233bdcf683df8a97d62a375a6cf60d93b64aa6b7ecf22489ce9986333436a18",
+          "size": 549479
+        },
+        {
+          "disposition": "content-free v2 hidden manifest (spent single-use set; untouched)",
+          "logical_path": "research/prose-boundary/corpus/manifests/hidden-manifest-v2.json",
+          "sha256": "cf37654a45b10c024525fc334f368d4b20956619e2568542544c855d93a85ec1",
+          "size": null
+        },
+        {
+          "disposition": "content-free v3 hidden manifest (spent single-use set; untouched)",
+          "logical_path": "research/prose-boundary/corpus/manifests/hidden-manifest-v3.json",
+          "sha256": "ee503bd7c09f26a1b9c171319cc82f8ec692918d0d7d18f11d528a6f18c54f36",
+          "size": null
+        }
+      ],
+      "evidence_status": "public-data-free",
+      "public_report": "research/prose-boundary/REPORT-008I.md",
+      "public_metrics": "research/prose-boundary/results/hidden-acceptance-v4/",
+      "public_configuration": "research/prose-boundary/config/structural-policy-v5.json",
+      "source_manifest": "research/prose-boundary/corpus/manifests/hidden-manifest-v4.json (private-root v4 set referenced by manifest hashes only; the naturalistic adjudication labels remain in the private root, covered by the committed content-free annotations manifest)",
+      "child_runs": [],
+      "conclusion": "FINAL OBJECTIVE-008 VERDICT: PASS (predeclared decision state - all eight fields pass; structural-safety evidence only). The 008-i implementation (builder R1 extended to ALL dialect HTML block-start lines so the 278 B fence-absorption shape cannot be composed; the display-dollar adjacency guard; the T6 clean-URL admission refinement; the single predeclared D1-5 xml-fragment trigger refinement - the vocabulary-name tag with a non-ASCII attribute name is now protected where the dialect does not recognise it inline, with the v2-parity abstention preserved - committed with its evidence after the dev regression gate; structural policy v5 with the guards, the D1-5 outcome, and the T6 measured observation; v3/v4 byte-identical in-tree), evaluated for the first and only time on the new sealed v4 hidden acceptance set (2,000 documents, 373 components, 76 families, fresh seed stream 6b390354646a9b25; seal 4076/4076 verified data-free before and after evaluation; the strategy pre-evaluation data-free receipt gating the evaluation as a fail-closed input; post-evaluation all-seals receipt recorded), meets ALL EIGHT predeclared fields: (i) construction-labeled protected bytes exposed 0 of 266,807 across 2,000/2,000 documents (target 0 - MET; the three 008-h named shapes are absent: s1 0, s2 0 true occurrences, s3 0 by the builder fail-closed invariant); (ii) coordinates 0/0/0/0; (iii) malformed behaviour 0 violations over 10 deterministic rows (policy-exposed row totals independently recomputed from the sealed labels, delta 0); (iv) e2e invariants 1-7 all PASS on 2,000/2,000 replays; (v) determinism 50-case re-run identical; (vi) dev regression gate PASS committed before any v4 generation (dev corpus 0 of 526,315, 008-g batch 0 of 702, 008-h batch 0 of 666, 008-i batch 0 of 188; the run-A 21 B e02 attribution under the 008-h implementation is exactly the predeclared measured shape and is 0 under the final implementation; prose over-suppression +0.0 pp vs the 008-h baseline, within the 1.0 pp bound; no stop condition fired); (vii) every material naturalistic range resolved - 15/15 DOCUMENTED-DIALECT-LIMITATION with the carried class references, 0 UNRESOLVED, 0 label corrections, exposed bytes byte-identical to the committed 008-g/008-h aggregate; (viii) 87 of 96 authorized generation HTTP attempts (2 preflights + 85 component calls + 0 retries), 0 linguistic-pipeline calls, 0 objective-009 touches. The disclosed non-gating residual: the oracle-refined protected census shows 62 B of 59,085 exposed across 8 documents, ALL one documented pre-existing class (yaml-hash-comment-heading - Slovenian YAML '# heading' lines the dialect parses as ATX headings, i.e. structural, so protection cannot cover the oracle-claimed bytes; documented since v1, the v1 sub-shape 348 B + 5 B, a named policy-exposed dialect-ambiguity class in policy v4 carried into v5), sealed and evaluated as-is under the predeclared rule; with its circularity limitation (the label oracle is the implementation's own residual function) it is a policy-coverage census, not verdict field (i). The document-level s2 shape-check heuristic's 10 angle-bracket email/URL token witnesses are disclosed artifacts of the heuristic (zero true occurrences, zero exposure). The interrupted first v4 generation stream (88 attempts, 15 pool duplicates, a recovery-bookkeeping bug caught by the final zero-overlap assertion) was discarded before any identity commit per the predeclared interruption rule and is disclosed in the committed generation identity. PASS-BRANCH FROZEN DECLARATION (made only in the final PASS report; grants no release or deployment authority): the objective-008 protection layer is declared FROZEN at the 008-i census (four-file census in experiment-008i.json: research/curated/prose_boundary.py c57e2901e52af962546ee83651850e22c91655a8cc822f2c43b1284da16b8c50; research/curated/protected.py 27f22eaee129190b880851b958a8aa5a38d357cb4e711d70e762b2353d32e78f; structural-policy-v3.json 7ff6646e3c11d1241cb1c85bd96f08e3f0db08e73d4eb4a4e97fac0c17e1828f; structural-policy-v5.json 915f70d34ecc69ab6fea0b273f24ca20f251b6e181bd5e9281c5c012de2fe542), policy of record = structural-policy-v5.json (915f70d34ecc69ab6fea0b273f24ca20f251b6e181bd5e9281c5c012de2fe542). Judgment debt cleared by the verdict: D1-1 (008-g mid-document raw-block fix mechanism), D1-3 (008-h composition-contract fix mechanism), D1-4 (008-h final-round acceptance-criteria design), and D1-5 (008-i xml-fragment class-boundary decision) - each predeclared to clear only on a final objective-008 PASS on the v4 set. This verdict is structural-safety evidence ONLY: it establishes no linguistic quality, no experimental-MVP acceptance, and no release or deployment authority; objective 009 (fresh human-labelled linguistic confirmation of the complete frozen pipeline on a new target distribution) remains the separate reserved next objective and its future sample must not contain any case generated or inspected for objective 008 (every v1, v2, v3, and v4 component, mashup, naturalistic case, dev document, dev batch, and dev-edge document). No merge, no auto-merge, no release, no deployment claim; PR #9 remains open and unmerged (a PASS verdict is the predeclared merge precondition - satisfied; the merge is strategy's separate post-review act).",
+      "pending_evidence": [
+        "objective 009: fresh human-labelled linguistic confirmation of the complete frozen pipeline on a new target distribution - NOT this corpus; its sample must exclude every objective-008 generated or inspected case (every v1, v2, v3, and v4 component, mashup, naturalistic case, dev document, dev batch, and dev-edge document)"
+      ]
     }
   ]
 }

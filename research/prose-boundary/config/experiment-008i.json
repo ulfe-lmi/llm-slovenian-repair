@@ -98,7 +98,7 @@
  },
  "shape_analysis": {
   "file": "research/prose-boundary/results/hidden-acceptance-v4/shape-analysis-008i.json",
-  "file_sha256": "ac6d6d5af81aadeea14548b33f5cca4fe7e829f761e48533f9e310135b2e7d75",
+  "file_sha256": "ff26d29da724a9e58a5c9740b2ec2075ecc499f4126152d1042db4f7a27f2be3",
   "summary": "data-restricted fix specification for the 364 B v3 construction exposure: three named bounded shapes - (i) 2 x 139 B html multi-tag fence absorption (R1 extension), (ii) 2 x 30 B xml non-ASCII attribute class boundary (D1-5), (iii) 1 x 26 B display-dollar pairing across malformed (DD guard) - plus the pre-existing T6 observation (O1); per-shape fix specs and v4 invariants; committed before any implementation change (git ordering)"
  },
  "model_budget": {

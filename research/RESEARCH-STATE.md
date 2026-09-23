@@ -1383,6 +1383,146 @@ sample must not contain any case generated or inspected for objective
 document, dev batch, and dev-edge document). No merge, no auto-merge, no
 release, no deployment claim; PR #9 remains open and unmerged.
 
+## 21. Final objective-008 verdict (008-i corrective scope, policy v5,
+new sealed v4 hidden set, round 008-i)
+
+This section is the additive FINAL objective-008 verdict recorded by
+round 008-i (the corrective and final-verdict round 3 of objective 008,
+executing the 008-h named smallest corrective suffix). It rewrites
+nothing in section 20 or any earlier record and changes no scientific
+result recorded before this round. Sections 18-20 and their reports
+remain immutable; this verdict supersedes the 008-h CONDITIONAL as the
+current state of objective 008 additively, here and in STATUS.md only.
+
+The 008-h named corrective suffix was executed to closure: (1) the R1
+composition predicate extended from HTML closing-tag lines to ALL
+dialect HTML block-start lines (opening-tag lines included) so the 278 B
+fence-absorption shape cannot be composed; (2) the predeclared D1-5
+xml-fragment class-boundary decision - PRIMARY (bounded trigger
+refinement) committed WITH its evidence after the dev regression gate:
+the single curated trigger condition (the dialect-vocabulary tag name
+with a non-ASCII attribute name is now protected where the dialect does
+not recognise it inline; the v2-parity abstention on non-vocabulary
+names is preserved; the FALLBACK branch available and not triggered);
+(3) the bounded display-dollar adjacency guard (a
+malformed-incomplete-display-dollar component is never composed
+immediately before a component whose first line opens a display-dollar
+expression; one NEUTRAL-labeled blank line, the predeclared mechanism);
+(4) the T6 link-destination admission refinement (T6 destinations are
+clean URLs, builder-asserted; the pre-existing whole-region PROTECTED
+observation documented in policy v5 as a measured observation, not a
+class); (5) structural policy v5 (policy of record; v3/v4 byte-identical
+in-tree) with the four-file frozen protection census recorded in
+experiment-008i.json (sha256
+24e25edafbbf0b1d67dc405440ea78c0b76a9011c00d5e53c82fe3c00fef6685).
+
+v4 hidden set (requirement 7): NEW independent stream, fresh seed
+stream (v4_mashup 6b390354646a9b25, distinct from the v3 seed
+dd1a19a598160b36), the same 76 families and density plan as v3; 352
+initial components with 13 exact cross-pool duplicates in five
+machine-saturated families recovered by one bounded K=8 regeneration per
+family (disclosed) -> 373 final components; zero exact component overlap
+asserted and disclosed against the dev (641), v1 (588), v2 (340), and
+v3 (345) pools; 2,000 deterministic mashup documents (1,705,961 B) +
+2,000 construction labels with the label_source split (construction
+PROTECTED 266,807 B / 2,738 regions; oracle-refined PROTECTED 59,085 B /
+1,807 regions; POLICY_EXPOSED 862 B / 320 regions); 87 of 96 authorized
+HTTP attempts (2 preflights + 85 component calls + 0 retries). The
+pre-seal diagnostic was NONZERO (62 B / 325,892, 8 documents, all
+oracle-refined, one documented class) and the set was sealed and
+evaluated as-is under the predeclared rule (disclosed). The interrupted
+first generation stream (88 attempts, recovery-bookkeeping bug caught by
+the final zero-overlap assertion) was discarded before any identity
+commit (disclosed). Sealed 4,076/4,076 (manifest sha256
+a702babc239d24251a62f35c1e51f389843c7e7eea8547d64bb325cf16174696;
+out-of-manifest = the 87 pre-seal generation receipts only); strategy
+independent data-free re-verification VERIFIED before the evaluation
+phase (the fail-closed gate input of the evaluation wrapper) and again
+after it (all-seals v4/v3/v2/v1 VERIFIED).
+
+v4 hidden acceptance (requirements 9-10): the hard safety axis is MET -
+construction-labeled protected bytes exposed 0 of 266,807 across
+2,000/2,000 documents (target 0); the three 008-h named shapes are
+absent (s1 0; s2 0 true occurrences - the 10 heuristic witnesses are
+disclosed angle-bracket token artifacts with zero exposure; s3 0 by the
+builder fail-closed invariant). Every other axis green: coordinates
+0/0/0/0; malformed behaviour 0 violations over 10 deterministic rows
+(policy-exposed recomputation delta 0); e2e invariants 1-7 all PASS on
+2,000/2,000 replays; determinism 50-case re-run identical; prose
+coverage 96.677 percent of expected prose bytes (888/8,889 regions
+completely available; actual losses by container reported); performance
+median 48.4 / 69.5 / 277.3 ms/document at 1/10/50 KB (qualitative
+statement only). The disclosed non-gating residual: the oracle-refined
+protected census shows 62 B of 59,085 exposed across 8 documents, ALL
+one documented pre-existing class - yaml-hash-comment-heading (Slovenian
+YAML `# heading` lines the dialect parses as ATX headings, i.e.
+structural, so protection cannot cover the oracle-claimed bytes;
+documented since v1, the v1 sub-shape 348 B + 5 B; a named
+policy-exposed dialect-ambiguity class in policy v4 carried verbatim
+into v5) - a policy-coverage census with the disclosed circularity
+limitation, not verdict field (i).
+
+Naturalistic consistency re-run (requirement 8; the fixed 70-label
+population; no re-adjudication): 5 material cases (identical to the
+008-g five), 15 exposed ranges byte-identical (case, range, exposed
+bytes, resolution kind) to the committed 008-g/008-h aggregate; 15/15
+DOCUMENTED-DIALECT-LIMITATION with the carried class references
+(markdown-table-dialect-boundary x9, list-item-candidate-prose x2,
+indented-code-lazy-continuation x1, residual-token-line-glue x3); 0
+UNRESOLVED (verdict condition (vii) satisfied); 0 label corrections
+(the narrow predeclared path not triggered); attribution
+parser-dialect 12 / label-ambiguity 2 / residual-class-gap 1 (carried
+008-g heuristic).
+
+Dev regression gate (committed before any v4 generation): PASS - run A
+(008-h implementation) 0/0/0 on the dev corpus (526,315 B), the 008-g
+batch (702 B), and the 008-h batch (666 B), with exactly the predeclared
+21 B e02 attribution on the 008-i batch (188 B) and nothing else; run B
+(008-i final implementation) 0/0/0/0 on all four sets; the dev corpus,
+008-g, and 008-h raw outputs byte-identical between runs (the delta
+fires only on the measured shape); prose over-suppression +0.0 pp vs
+the 008-h baseline (within the predeclared 1.0 pp bound); all
+predeclared stop conditions not fired; the D1-5 FALLBACK branch not
+triggered.
+
+Decision state application: ALL EIGHT predeclared fields pass ->
+PASS. Structural-safety-only classification: this verdict is
+STRUCTURAL-SAFETY EVIDENCE ONLY - it establishes no linguistic quality,
+no experimental-MVP acceptance, and no release or deployment authority.
+
+PASS-branch FROZEN declaration (predeclared in the order; made ONLY in
+the final PASS report - REPORT-008I.md section 9 - and never by the
+order; grants no release or deployment authority): the objective-008
+protection layer is declared FROZEN at the 008-i census (frozen
+protection identity = the four-file census in experiment-008i.json:
+research/curated/prose_boundary.py
+c57e2901e52af962546ee83651850e22c91655a8cc822f2c43b1284da16b8c50;
+research/curated/protected.py
+27f22eaee129190b880851b958a8aa5a38d357cb4e711d70e762b2353d32e78f;
+structural-policy-v3.json
+7ff6646e3c11d1241cb1c85bd96f08e3f0db08e73d4eb4a4e97fac0c17e1828f;
+structural-policy-v5.json
+915f70d34ecc69ab6fea0b273f24ca20f251b6e181bd5e9281c5c012de2fe542),
+policy of record = structural-policy-v5.json
+(915f70d34ecc69ab6fea0b273f24ca20f251b6e181bd5e9281c5c012de2fe542).
+
+Judgment debt: D1-1 (008-g mid-document raw-block fix mechanism), D1-3
+(008-h composition-contract fix mechanism), D1-4 (008-h final-round
+acceptance-criteria design), and D1-5 (008-i xml-fragment
+class-boundary decision) were each predeclared to clear ONLY on a final
+objective-008 PASS on the v4 set - with the PASS verdict recorded here
+they are CLEARED. No CRIT.
+
+Classification and reservations: objective 009 (fresh human-labelled
+linguistic confirmation of the complete frozen pipeline on a new target
+distribution) remains the separate reserved next objective; its future
+sample must not contain any case generated or inspected for objective
+008 (every v1, v2, v3, and v4 component, mashup, naturalistic case, dev
+document, dev batch, and dev-edge document). No merge, no auto-merge, no
+release, no deployment claim; PR #9 remains open and unmerged (a PASS
+verdict is the predeclared merge precondition - satisfied; the merge is
+strategy's separate post-review act).
+
 ## Machine-readable state block (research-state-machine-v1)
 
 This fenced block is the machine-readable core of the numbers quoted above.
@@ -1425,8 +1565,8 @@ model/network calls.
     "frozen_007m_configuration_sha256": "0026a1a9d27652c36e2c5a960b10fafc1c9a93b0690d93b09089aa58884f5c26",
     "frozen_007m_prompt_sha256": "572cf2fb4864e66e38a500465e1089062d58aeed4721063fb0c1e466e424230d",
     "frozen_007m_final_root_manifest_sha256": "3fb4aef33542e7fa3f357acb905b75f4d7e7551783f83a422b5d1ea6272c25f8",
-    "registry_entries": 32,
-    "oap_reports_reviewed": 51,
+    "registry_entries": 33,
+    "oap_reports_reviewed": 52,
     "frozen_report_history_incidents": 2
   },
   "official_scorer": {
