@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-001500",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T5-lists",
+ "byte_length": 973,
+ "cp_length": 951,
+ "sha256": "f83563140d70a6efa74f5c70cc81b55e9e3ef6a218931b096e31b8c660f5c6e7",
+ "document": "- Zjutraj, ob sedmih, je skupina iz projekta Koraki brez hitenja obiskala park ob reki, kjer so prehodili pet kilometrov in opravili dve minuti raztezanja. Moški, ki se je v zapisniku imenoval Tomaž, je po premoru rekel, da mu je bilo v kolkih udobneje, čeprav je bil teren blaznjen.\n- `#include <string>`\n- V projektu Gora je Ana razložila sodelavcu, da je spremenljivka kot oznaka na policah v knjižnici. Ko jo preimenujemo, spremenimo samo oznako, ne pa tudi knjige. Včasih to ugotovijo šele ob testiranju, ko program poišče napačno ime.\n- V projektu Hišni nasveti 2024 je Ana iz Ljubljane opazila, da se steklenice s čisto vodo, (še posebej tiste 0,5 litra), hitreje izpraznijo, če so vedno pri roki ob jedilni mizi. Njen sosed Marko je bil sprva skeptičen, a je po dveh tednih dejal: »Če je pijača pri mizi, manjkrat potuje v hladilnik.« Tudi manjše spremembe, kot je skleda za kosmiče ob vratih, v celotnem gospodinjstvu naredijo mirnejše jutro.",
+ "components": [
+  {
+   "component_id": "comp-prose-sports-dev-0004",
+   "category": "prose",
+   "start_byte": 2,
+   "end_byte": 286
+  },
+  {
+   "component_id": "comp-code-cpp-dev-0003",
+   "category": "code",
+   "start_byte": 289,
+   "end_byte": 308
+  },
+  {
+   "component_id": "comp-prose-programming-explainer-dev-0001",
+   "category": "prose",
+   "start_byte": 311,
+   "end_byte": 550
+  },
+  {
+   "component_id": "comp-prose-everyday-advice-dev-0011",
+   "category": "prose",
+   "start_byte": 553,
+   "end_byte": 973
+  }
+ ]
+}

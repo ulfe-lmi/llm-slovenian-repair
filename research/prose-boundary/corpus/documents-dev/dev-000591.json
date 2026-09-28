@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-000591",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T9-prose-malformed-prose",
+ "byte_length": 731,
+ "cp_length": 717,
+ "sha256": "0d870a84722d78f16992345c29debbf29e351b43434ad9ccfad9099fa5069e66",
+ "document": "V Ljubljani sem se s projektom Zeleni otok podal h Trgu republike (nekaj metrov od Kamnitega mostu). Na dvorišču so nas sprejeli z rahlim zamikom, saj je bilo dvigalo zasedeno. V razstavi smo videli modele, ki so prikazovali potovanja po reki od 1980-ih let. Popoldne smo se odločili za kavo ob trgu, medtem ko so se otroci igrali v parku.\n$5 je cena testnega vzorca v projektu Tihi Vrh.\nV projektu Brda je ekipa pod vodstvom Anje Zupan preverjala betonno ploščo in jeklene povezave (vezne elemente) na mostu čez Sočo. »Pri takih presojah najprej gledamo trdnost, potem pa še vzdržljivost,« je povedala na terenskem sestanku. Izračuni so pokazali, da bo dovolj, če se armatura postavi po novem razporeditvenem načrtu.",
+ "components": [
+  {
+   "component_id": "comp-prose-travel-dev-0003",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 342
+  },
+  {
+   "component_id": "comp-malformed-unmatched-dollar-dev-0001",
+   "category": "malformed",
+   "start_byte": 343,
+   "end_byte": 390
+  },
+  {
+   "component_id": "comp-prose-engineering-dev-0006",
+   "category": "prose",
+   "start_byte": 391,
+   "end_byte": 731
+  }
+ ]
+}

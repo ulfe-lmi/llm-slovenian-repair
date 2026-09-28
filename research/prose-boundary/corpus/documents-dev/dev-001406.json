@@ -1,0 +1,53 @@
+{
+ "doc_id": "dev-001406",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T10-randomized",
+ "byte_length": 1856,
+ "cp_length": 1830,
+ "sha256": "f4698f730ca01eeb058942bb9a9a1fae00441ababd4f831657a3fe22f60bb0d2",
+ "document": "Katarina in Jure sta v razredu elektronskih raziskav leta 2024 razpravljala o tem, kako sklepi in upornosti varujejo komponente pred prevelikim tokom. Pri poskusu s tremi različnimi baterijami sta opazila, da se žarnica pri višji napetosti svetli močneje, a se hitreje ogreje. Oba sta zapisala, da za varno vajo zadostujejo natančno merjenje, potrpežljivost in jasna shema.\n\\begin{equation}\\begin{aligned}K_5 &= \\left(\\alpha_5 + \\beta_5\\right)^2 \\text{Triglav test} \\\\L_5 &= \\det A_5 + \\theta_5\\end{aligned}\\end{equation}\n```yaml\n# Projekt Sonce: primer 9, brez absolutnih poti\n```\n\n> Projekt Brina, avtor *Luka*: masa 8 g.\n> > Test vsebina je nevtralna.\n```\n/* Testni fragment 7: izmišljena oseba Marko, projekt Koda. */ SELECT 'Marko' AS `ime`, '7,80 $' AS `cena`, 'https://primer.si/koda' AS `url`, 'src/vir.py' AS `pot`, TRIM('**poudarek** in _žarka_') AS `opomba`, 'razdelek2' AS `razdelek2`, 'seStez' AS `seStez`, 'č' AS `HRAŠNA_VREDNOST` FROM (SELECT 7 AS `en`) AS `t` WHERE (`t`.`en` = 7);\n```\n```\n// Tretji testni del (č, š, ž)\nconst naslov3 = \"Podrobnost: **poudarek** in _podčrtana_\";\nconst opis = `Cena: $ 9,99 za razdelek2`;\nconst povezava = \"https://primer.si/koda\";\nconst pot = \"src/modul.py\";\nconst vir = \"docs/vir.txt\";\nfunction seStez(a, b) {\n  return a - b;\n}\nconst HRAŠNA_VREDNOST = 2;\nconst rezultat = seStez(HRAŠNA_VREDNOST, 1);\nconsole.log(naslov3, opis, povezava, pot, vir, rezultat);\n// konec\n```\nZa odrasle v programu Večer 2024 so pripravili delavnice, ki potekajo po petih, z odmorom in s kratkim pogovorom o tem, kaj sploh želijo vedeti. Ana, vodja razreda, je povedala, da se učenci najlaše učijo, ko lahko takoj uporabijo besede v pogovoru. Tudi učbenik je preprost, z barvnimi slikami in z vprašanji na koncu vsake strani. Nihče ni imel vtisa, da gre za šolo; vsi so se strinjali, da gre za učenje.",
+ "components": [
+  {
+   "component_id": "comp-prose-electronics-dev-0013",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 379
+  },
+  {
+   "component_id": "comp-math-aligned-env-dev-0005",
+   "category": "math",
+   "start_byte": 380,
+   "end_byte": 527
+  },
+  {
+   "component_id": "comp-markdown-fenced-code-dev-0005",
+   "category": "markdown",
+   "start_byte": 528,
+   "end_byte": 588
+  },
+  {
+   "component_id": "comp-markdown-blockquotes-dev-0005",
+   "category": "markdown",
+   "start_byte": 589,
+   "end_byte": 660
+  },
+  {
+   "component_id": "comp-code-sql-dev-0007",
+   "category": "code",
+   "start_byte": 661,
+   "end_byte": 1011
+  },
+  {
+   "component_id": "comp-code-javascript-dev-0011",
+   "category": "code",
+   "start_byte": 1012,
+   "end_byte": 1437
+  },
+  {
+   "component_id": "comp-prose-education-dev-0012",
+   "category": "prose",
+   "start_byte": 1438,
+   "end_byte": 1856
+  }
+ ]
+}

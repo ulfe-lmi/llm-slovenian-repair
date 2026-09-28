@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-001141",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T9-prose-malformed-prose",
+ "byte_length": 648,
+ "cp_length": 638,
+ "sha256": "136c95d989228a5779597b95becbfc22484b763fc2ee7868aba34f6b04ef9e58",
+ "document": "V izmišljenem projektu Arhiv besed se motiv arhiva pojavi kot tiha zbirka pism, ki potujejo med slovenskimi in evropskimi mestoma. Izmišljeni avtor Martin Golob zgradi novelo iz treh stavkov. Njegova zgodba je tiha.\n\n\\begin{align} a &= b, primer vstopnice za izmišljen festival Lipa, odgovorna oseba Blaž Kovač.\n\nNekateri gradbeniki (zlasti tisti, ki so sodelovali pri obnovi stolpa Vrt) menijo, da so materiali, ki dolgoročno ohranjajo obliko, prijaznejši za vzdrževanje. Ta pogled, ki ga dokumenti imenujejo mehka vzdržljivost, velja tudi za podporno konstrukcijo in za ojačitve, ki jih je leta 2018 opisala projektna skupina Podravska.",
+ "components": [
+  {
+   "component_id": "comp-prose-literature-dev-0010",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 217
+  },
+  {
+   "component_id": "comp-malformed-unclosed-tex-env-dev-0002",
+   "category": "malformed",
+   "start_byte": 219,
+   "end_byte": 316
+  },
+  {
+   "component_id": "comp-prose-engineering-dev-0013",
+   "category": "prose",
+   "start_byte": 318,
+   "end_byte": 648
+  }
+ ]
+}

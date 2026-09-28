@@ -1,0 +1,262 @@
+{
+ "schema": "008f-hidden-mashup-metrics/1",
+ "order": "008-f",
+ "label": "blind hidden acceptance evidence: the frozen 008-c implementation evaluated exactly as frozen (4b6a90ab13c0c9a02e533a2673a084e26f841a5c); the hidden set is used for the first and only time as an acceptance instrument",
+ "documents_measured": 2000,
+ "documents_total": 2000,
+ "fallback_documents": [],
+ "safety": {
+  "protected_bytes_total": 311358,
+  "protected_bytes_exposed": 458,
+  "target": 0,
+  "machine_significant_exposure_rate": 0.0014709755329877505,
+  "protected_regions_overlapping_candidate_prose": 458,
+  "met": false
+ },
+ "coverage": {
+  "expected_prose_bytes_total": 1284435,
+  "expected_prose_bytes_exposed": 1256837,
+  "expected_prose_bytes_exposed_rate": 0.9785135098311709,
+  "expected_prose_regions_total": 7872,
+  "expected_prose_regions_completely_available": 291,
+  "unnecessary_suppression_by_container": {
+   "S.Head": 449,
+   "S.Item": 2302,
+   "S.Para": 13498,
+   "S.TableCell": 327,
+   "unknown": 11022
+  },
+  "note": "actual losses reported by container type; no arbitrary threshold"
+ },
+ "coordinates": {
+  "utf8_boundary_violations": 0,
+  "byte_cp_conversion_mismatches": 0,
+  "source_slice_mismatches": 0,
+  "patch_preservation_violations": 0,
+  "patch_preservation_method": "frozen patching.apply_edits(original, []) must reproduce the exact original (no surviving edits => exact original text); per-document over all hidden documents",
+  "met": true
+ },
+ "residual_performance_by_class": {
+  "bare-json": {
+   "spans": 2145,
+   "bytes": 65517
+  },
+  "config": {
+   "spans": 87,
+   "bytes": 9918
+  },
+  "env-var": {
+   "spans": 44,
+   "bytes": 534
+  },
+  "identifier": {
+   "spans": 1152,
+   "bytes": 8580
+  },
+  "number": {
+   "spans": 5060,
+   "bytes": 22412
+  },
+  "path": {
+   "spans": 577,
+   "bytes": 14805
+  },
+  "relative-path": {
+   "spans": 623,
+   "bytes": 10177
+  },
+  "shell": {
+   "spans": 110,
+   "bytes": 3116
+  },
+  "tex-bracket": {
+   "spans": 82,
+   "bytes": 9151
+  },
+  "tex-env": {
+   "spans": 264,
+   "bytes": 29096
+  },
+  "tex-paren": {
+   "spans": 114,
+   "bytes": 6440
+  },
+  "upper-identifier": {
+   "spans": 368,
+   "bytes": 2272
+  },
+  "url": {
+   "spans": 372,
+   "bytes": 14884
+  }
+ },
+ "malformed_behaviour": {
+  "note": "per frozen malformed_class_map: expected='protected' bytes must be covered (violations counted); expected='policy-exposed' exposure is policy-decided and not a violation (policy-decided-suppression distinction, 008-a GO residual bound)",
+  "rows": [
+   {
+    "family": "malformed-broken-link",
+    "expected": "protected",
+    "components": 22,
+    "protected_bytes": 408,
+    "protected_exposed_bytes": 0,
+    "policy_exposed_bytes": 0,
+    "policy_exposed_covered_bytes": 0,
+    "violations": 0
+   },
+   {
+    "family": "malformed-incomplete-display-dollar",
+    "expected": "policy-exposed",
+    "components": 31,
+    "protected_bytes": 146,
+    "protected_exposed_bytes": 0,
+    "policy_exposed_bytes": 62,
+    "policy_exposed_covered_bytes": 1,
+    "violations": 0
+   },
+   {
+    "family": "malformed-incomplete-paren-bracket",
+    "expected": "protected",
+    "components": 21,
+    "protected_bytes": 1067,
+    "protected_exposed_bytes": 0,
+    "policy_exposed_bytes": 0,
+    "policy_exposed_covered_bytes": 0,
+    "violations": 0
+   },
+   {
+    "family": "malformed-malformed-nesting",
+    "expected": "policy-exposed",
+    "components": 26,
+    "protected_bytes": 54,
+    "protected_exposed_bytes": 0,
+    "policy_exposed_bytes": 109,
+    "policy_exposed_covered_bytes": 68,
+    "violations": 0
+   },
+   {
+    "family": "malformed-partial-html",
+    "expected": "protected",
+    "components": 24,
+    "protected_bytes": 0,
+    "protected_exposed_bytes": 0,
+    "policy_exposed_bytes": 0,
+    "policy_exposed_covered_bytes": 0,
+    "violations": 0
+   },
+   {
+    "family": "malformed-truncated-json",
+    "expected": "protected",
+    "components": 26,
+    "protected_bytes": 1820,
+    "protected_exposed_bytes": 0,
+    "policy_exposed_bytes": 0,
+    "policy_exposed_covered_bytes": 0,
+    "violations": 0
+   },
+   {
+    "family": "malformed-unclosed-fence",
+    "expected": "protected",
+    "components": 17,
+    "protected_bytes": 1325,
+    "protected_exposed_bytes": 0,
+    "policy_exposed_bytes": 0,
+    "policy_exposed_covered_bytes": 0,
+    "violations": 0
+   },
+   {
+    "family": "malformed-unclosed-tex-env",
+    "expected": "protected",
+    "components": 24,
+    "protected_bytes": 2565,
+    "protected_exposed_bytes": 0,
+    "policy_exposed_bytes": 0,
+    "policy_exposed_covered_bytes": 0,
+    "violations": 0
+   },
+   {
+    "family": "malformed-unmatched-backtick",
+    "expected": "policy-exposed",
+    "components": 20,
+    "protected_bytes": 0,
+    "protected_exposed_bytes": 0,
+    "policy_exposed_bytes": 20,
+    "policy_exposed_covered_bytes": 1,
+    "violations": 0
+   },
+   {
+    "family": "malformed-unmatched-dollar",
+    "expected": "policy-exposed",
+    "components": 28,
+    "protected_bytes": 1438,
+    "protected_exposed_bytes": 0,
+    "policy_exposed_bytes": 13,
+    "policy_exposed_covered_bytes": 0,
+    "violations": 0
+   }
+  ],
+  "violations": 0
+ },
+ "size": {
+  "docs": 2000,
+  "bytes": 1627608
+ },
+ "determinism": {
+  "iteration_order": "sorted doc_id (sealed manifest file order)",
+  "re_run_stability_check": {
+   "sample": 50,
+   "identical": true,
+   "first_doc_id": "hid-000000",
+   "last_doc_id": "hid-000049"
+  },
+  "evaluation_wall_seconds": 176.42
+ },
+ "helper_sha256": "5df9a11d56b5bdec90c3ca09298802723975306f77e43e74ad1a72eb427c44bf",
+ "privacy": "counts, categories, rates and hashes only; no case content, no label content, no private paths",
+ "performance": {
+  "schema": "008f-hidden-performance/1",
+  "order": "008-f",
+  "method": "fresh interpreter subprocess per size; one pinned-helper invocation per protection call; median over runs; peak RSS of the measuring subprocess (Linux KB)",
+  "document_construction": "deterministic project-authored mixed-content unit repeated and truncated at a code point boundary (identical unit to the frozen 008-c method)",
+  "helper_sha256": "5df9a11d56b5bdec90c3ca09298802723975306f77e43e74ad1a72eb427c44bf",
+  "rows": [
+   {
+    "target_bytes": 1024,
+    "actual_bytes": 1024,
+    "document_sha256": "36eee2237b979f5d1a3bd08fef799d263b3d40d239591cd1e87e3c566d609d07",
+    "runs": 25,
+    "median_ms_per_document": 44.50768500100821,
+    "min_ms_per_document": 43.741833011154085,
+    "max_ms_per_document": 337.65261800726876,
+    "peak_rss_kb": 69712,
+    "mode": "parser-first",
+    "intervals": 39
+   },
+   {
+    "target_bytes": 10240,
+    "actual_bytes": 10240,
+    "document_sha256": "03336712312b92c9d51e6c66da7af23b25b4484d643a50b5e32f1cc5f4c7f96b",
+    "runs": 25,
+    "median_ms_per_document": 67.62405100744218,
+    "min_ms_per_document": 64.80958900647238,
+    "max_ms_per_document": 78.8255290244706,
+    "peak_rss_kb": 69712,
+    "mode": "parser-first",
+    "intervals": 411
+   },
+   {
+    "target_bytes": 51200,
+    "actual_bytes": 51200,
+    "document_sha256": "60b746b4a11a9b3488364e2722fe0da6680a97b5b32193c27f59e96c530a80d1",
+    "runs": 25,
+    "median_ms_per_document": 254.17846901109442,
+    "min_ms_per_document": 245.3329089912586,
+    "max_ms_per_document": 276.16314799524844,
+    "peak_rss_kb": 69712,
+    "mode": "parser-first",
+    "intervals": 2064
+   }
+  ],
+  "note": "qualitative statement only: parser + residual cost is cheap relative to one model inference; no inference latency is measured in this round",
+  "label": "blind hidden acceptance evidence (performance axis of the 008-c item-15 metric set)"
+ }
+}

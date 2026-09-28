@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-002597",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T2-prose-math-prose",
+ "byte_length": 747,
+ "cp_length": 731,
+ "sha256": "1f53c0522da8ca21a8ad57add71ab31046c430e06d01643d9df157de84285878",
+ "document": "Zgodba o izmišljenem gradu Kamen, ki ga je opisal Marko Perš, se v šolskih zvezkih pogosto pojavlja brez natančne letnice. V enem od zapisov pa stoji samo leto 1888 in kratek opis ograj (visokih okoli dveh metrov), kar je sicer precej nenavadno za takšno pripoved.\n\\sum_{\\nu=1}^{10} \\xi_{\\nu} / \\prod_{\\rho=1}^{4} \\sigma_{\\rho} \\text{Marko}\nV laboratoriju projekta Merjač (stanica 4) je dr. Ana Kovač zapisala: »Med segrevanjem, in sicer ob dveh tisoč stopinjah Celzija, se material obnaša, kot bi šlo za tekočino,« in pojasnila, zakaj poskusne vzorce ob segrevanju obnašajo nepričakovano elastičnost. Rezultati iz leta 2021 so nato odprli pot k novi metodologiji, v kateri je pomembna vsaka mera, tudi tista, ki se zdi nesmiselna.",
+ "components": [
+  {
+   "component_id": "comp-prose-history-dev-0008",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 269
+  },
+  {
+   "component_id": "comp-math-summations-dev-0004",
+   "category": "math",
+   "start_byte": 270,
+   "end_byte": 345
+  },
+  {
+   "component_id": "comp-prose-science-dev-0011",
+   "category": "prose",
+   "start_byte": 346,
+   "end_byte": 747
+  }
+ ]
+}

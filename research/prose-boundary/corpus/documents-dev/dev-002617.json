@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-002617",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T11-interactions",
+ "byte_length": 1001,
+ "cp_length": 971,
+ "sha256": "23fe99bf9bded6357f3b6c0ef2c713a40c3a9c58759adc20e45746de0fabe593",
+ "document": "`int main(void) { char *napis = \"Besedilo: __podčrtano__ in *`.\n```\n# Fragment 6: *neodvisen*, podčrtano _besedilo_, (oklepaj)\necho 'Zvezdice: *zvezda* **dvakrat** in _podčrtano_'\necho 'Valuta: 1 $ in 9 € (testni znesek)'\necho 'Poti: docs/vir.txt in src/modul.py'\necho 'Spletna stran: https://primer.si/koda'\necho 'Id: razdelek2, seStez, HRAŠNA_VREDNOST'\necho 'Backquote `vse` in poudarčni znaki č š ž'\n# komentar z \\frac{a}{b}\n```\nV razredu za proporcije se pogosto pojavi vprašanje: »Koliko čokoladnih ploščic pripada štirim otrokom, če imamo enajst enakih delov?« Učenci pod vodstvom Marka, ki sodeluje v projektu Skladni deli, izvedejo, da sorazmerje ni le deljenje, ampak tudi primerjava enakih deležev. Nekaj učencev, še zlasti tisti, ki radi kuhajo, to razumejo najlažje.\nAna je v razredni testni delavnici najprej preverila, ali je sklep odprt (tako je ohišje varno), in šele nato prižgala majhno utripalko. V zapisniku je zapisala „Preizkus 2024 je brez napake.“",
+ "components": [
+  {
+   "component_id": "comp-code-c-dev-0007",
+   "category": "code",
+   "start_byte": 0,
+   "end_byte": 63
+  },
+  {
+   "component_id": "comp-code-shell-bash-dev-0006",
+   "category": "code",
+   "start_byte": 65,
+   "end_byte": 441
+  },
+  {
+   "component_id": "comp-prose-math-explainer-dev-0012",
+   "category": "prose",
+   "start_byte": 442,
+   "end_byte": 801
+  },
+  {
+   "component_id": "comp-prose-electronics-dev-0001",
+   "category": "prose",
+   "start_byte": 802,
+   "end_byte": 1001
+  }
+ ]
+}

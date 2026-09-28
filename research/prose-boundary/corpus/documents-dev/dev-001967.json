@@ -1,0 +1,71 @@
+{
+ "doc_id": "dev-001967",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T10-randomized",
+ "byte_length": 944,
+ "cp_length": 931,
+ "sha256": "8e04c741a581520a3a80bf8dc50883fc6382e8783649420c41823dd7c755f565",
+ "document": "V razredu smo pogovorno razložili, kako enačbe pomenijo enakost dveh izrazov, zato so učenci bolje razumeli, da se zamenja ne preprosto potegne. (Sprašila sem jih, kateri del bi se premaknil, in mnogi so povedali, da je pomembno ohraniti ravnotežje.) Ko so to povejali z dnevnim življenjem, je šlo lažje.\nhttps://primer.si/novica#naslov\n\\sum_{\\alpha=1}^{8} \\beta_{\\alpha} + \\prod_{\\gamma=1}^{4} \\delta_{\\gamma} \\text{Ljubljana}\n\\[ \\begin{cases} \\chi_1+5\\xi_2=\\text{Kranj},\\\\ 2\\mu_3-4\\nu_4=17,\\\\ \\pi_5\\sigma_6=8 \\end{cases} \\]\nC:/projekt/vir.py,D:\\datoteke\\vir.txt\ntabela_01.json\ndocs/vir.txt /usr/bin/orodje\nrazdelek2\n$\\alpha_{\\text{Ana projekt Lipa}} + \\beta = \\gamma$\nAna je v svojem projektu za osnovno šolo pripravila preprost vezni opis z enim gumbom, žarom in baterijo. Ko je stikalo spustila, je sklep omogočil tok, svetloba pa je blago utripala. »Prva ura mi je pokazala, da so imena delov pomembna,« je zapisala v dnevnik.",
+ "components": [
+  {
+   "component_id": "comp-prose-math-explainer-dev-0001",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 312
+  },
+  {
+   "component_id": "comp-machine-urls-dev-0006",
+   "category": "machine",
+   "start_byte": 313,
+   "end_byte": 344
+  },
+  {
+   "component_id": "comp-math-summations-dev-0001",
+   "category": "math",
+   "start_byte": 345,
+   "end_byte": 435
+  },
+  {
+   "component_id": "comp-math-bracket-tex-dev-0005",
+   "category": "math",
+   "start_byte": 436,
+   "end_byte": 533
+  },
+  {
+   "component_id": "comp-machine-windows-paths-dev-0004",
+   "category": "machine",
+   "start_byte": 534,
+   "end_byte": 571
+  },
+  {
+   "component_id": "comp-machine-filenames-dev-0003",
+   "category": "machine",
+   "start_byte": 572,
+   "end_byte": 586
+  },
+  {
+   "component_id": "comp-machine-posix-paths-dev-0007",
+   "category": "machine",
+   "start_byte": 587,
+   "end_byte": 615
+  },
+  {
+   "component_id": "comp-machine-identifiers-dev-0002",
+   "category": "machine",
+   "start_byte": 616,
+   "end_byte": 625
+  },
+  {
+   "component_id": "comp-math-inline-dollar-dev-0001",
+   "category": "math",
+   "start_byte": 626,
+   "end_byte": 677
+  },
+  {
+   "component_id": "comp-prose-electronics-dev-0011",
+   "category": "prose",
+   "start_byte": 678,
+   "end_byte": 944
+  }
+ ]
+}

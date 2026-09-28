@@ -1,0 +1,112 @@
+{
+ "doc_id": "dev-002897",
+ "byte_length": 930,
+ "cp_length": 921,
+ "regions": [
+  {
+   "start_byte": 0,
+   "end_byte": 2,
+   "start_cp": 0,
+   "end_cp": 2,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 2,
+   "end_byte": 375,
+   "start_cp": 2,
+   "end_cp": 372,
+   "component_id": "comp-prose-programming-explainer-dev-0011",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 375,
+   "end_byte": 378,
+   "start_cp": 372,
+   "end_cp": 375,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 378,
+   "end_byte": 379,
+   "start_cp": 375,
+   "end_cp": 376,
+   "component_id": "comp-code-sql-dev-0010",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 379,
+   "end_byte": 405,
+   "start_cp": 376,
+   "end_cp": 402,
+   "component_id": "comp-code-sql-dev-0010",
+   "category": "code",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 405,
+   "end_byte": 406,
+   "start_cp": 402,
+   "end_cp": 403,
+   "component_id": "comp-code-sql-dev-0010",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 406,
+   "end_byte": 409,
+   "start_cp": 403,
+   "end_cp": 406,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 409,
+   "end_byte": 648,
+   "start_cp": 406,
+   "end_cp": 642,
+   "component_id": "comp-prose-science-dev-0003",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 648,
+   "end_byte": 651,
+   "start_cp": 642,
+   "end_cp": 645,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 651,
+   "end_byte": 930,
+   "start_cp": 645,
+   "end_cp": 921,
+   "component_id": "comp-prose-medicine-explainer-dev-0007",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  }
+ ],
+ "invariants": {
+  "tiling_complete": true,
+  "no_contradictory_overlaps": true,
+  "cp_range_exact": true
+ }
+}

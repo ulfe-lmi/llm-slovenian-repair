@@ -1,0 +1,792 @@
+{
+ "doc_id": "dev-001945",
+ "byte_length": 1398,
+ "cp_length": 1374,
+ "regions": [
+  {
+   "start_byte": 0,
+   "end_byte": 376,
+   "start_cp": 0,
+   "end_cp": 363,
+   "component_id": "comp-prose-cooking-dev-0009",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 376,
+   "end_byte": 377,
+   "start_cp": 363,
+   "end_cp": 364,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 377,
+   "end_byte": 533,
+   "start_cp": 364,
+   "end_cp": 520,
+   "component_id": "comp-structured-toml-dev-0003",
+   "category": "structured",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 533,
+   "end_byte": 534,
+   "start_cp": 520,
+   "end_cp": 521,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 534,
+   "end_byte": 537,
+   "start_cp": 521,
+   "end_cp": 524,
+   "component_id": "comp-code-c-dev-0004",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 537,
+   "end_byte": 538,
+   "start_cp": 524,
+   "end_cp": 525,
+   "component_id": "comp-code-c-dev-0004",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 538,
+   "end_byte": 786,
+   "start_cp": 525,
+   "end_cp": 772,
+   "component_id": "comp-code-c-dev-0004",
+   "category": "code",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 786,
+   "end_byte": 787,
+   "start_cp": 772,
+   "end_cp": 773,
+   "component_id": "comp-code-c-dev-0004",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 787,
+   "end_byte": 790,
+   "start_cp": 773,
+   "end_cp": 776,
+   "component_id": "comp-code-c-dev-0004",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 790,
+   "end_byte": 791,
+   "start_cp": 776,
+   "end_cp": 777,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 791,
+   "end_byte": 799,
+   "start_cp": 777,
+   "end_cp": 785,
+   "component_id": "comp-markdown-emphasis-dev-0001",
+   "category": "markdown",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 799,
+   "end_byte": 800,
+   "start_cp": 785,
+   "end_cp": 786,
+   "component_id": "comp-markdown-emphasis-dev-0001",
+   "category": "markdown",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 800,
+   "end_byte": 806,
+   "start_cp": 786,
+   "end_cp": 791,
+   "component_id": "comp-markdown-emphasis-dev-0001",
+   "category": "markdown",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 806,
+   "end_byte": 807,
+   "start_cp": 791,
+   "end_cp": 792,
+   "component_id": "comp-markdown-emphasis-dev-0001",
+   "category": "markdown",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 807,
+   "end_byte": 813,
+   "start_cp": 792,
+   "end_cp": 798,
+   "component_id": "comp-markdown-emphasis-dev-0001",
+   "category": "markdown",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 813,
+   "end_byte": 814,
+   "start_cp": 798,
+   "end_cp": 799,
+   "component_id": "comp-markdown-emphasis-dev-0001",
+   "category": "markdown",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 814,
+   "end_byte": 818,
+   "start_cp": 799,
+   "end_cp": 803,
+   "component_id": "comp-markdown-emphasis-dev-0001",
+   "category": "markdown",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 818,
+   "end_byte": 819,
+   "start_cp": 803,
+   "end_cp": 804,
+   "component_id": "comp-markdown-emphasis-dev-0001",
+   "category": "markdown",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 819,
+   "end_byte": 828,
+   "start_cp": 804,
+   "end_cp": 813,
+   "component_id": "comp-markdown-emphasis-dev-0001",
+   "category": "markdown",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 828,
+   "end_byte": 829,
+   "start_cp": 813,
+   "end_cp": 814,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 829,
+   "end_byte": 832,
+   "start_cp": 814,
+   "end_cp": 817,
+   "component_id": "comp-code-c-dev-0001",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 832,
+   "end_byte": 833,
+   "start_cp": 817,
+   "end_cp": 818,
+   "component_id": "comp-code-c-dev-0001",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 833,
+   "end_byte": 964,
+   "start_cp": 818,
+   "end_cp": 946,
+   "component_id": "comp-code-c-dev-0001",
+   "category": "code",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 964,
+   "end_byte": 965,
+   "start_cp": 946,
+   "end_cp": 947,
+   "component_id": "comp-code-c-dev-0001",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 965,
+   "end_byte": 968,
+   "start_cp": 947,
+   "end_cp": 950,
+   "component_id": "comp-code-c-dev-0001",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 968,
+   "end_byte": 969,
+   "start_cp": 950,
+   "end_cp": 951,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 969,
+   "end_byte": 970,
+   "start_cp": 951,
+   "end_cp": 952,
+   "component_id": "comp-malformed-unmatched-dollar-dev-0001",
+   "category": "malformed",
+   "role": "POLICY_EXPOSED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 970,
+   "end_byte": 974,
+   "start_cp": 952,
+   "end_cp": 956,
+   "component_id": "comp-malformed-unmatched-dollar-dev-0001",
+   "category": "malformed",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 974,
+   "end_byte": 975,
+   "start_cp": 956,
+   "end_cp": 957,
+   "component_id": "comp-malformed-unmatched-dollar-dev-0001",
+   "category": "malformed",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 975,
+   "end_byte": 979,
+   "start_cp": 957,
+   "end_cp": 961,
+   "component_id": "comp-malformed-unmatched-dollar-dev-0001",
+   "category": "malformed",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 979,
+   "end_byte": 980,
+   "start_cp": 961,
+   "end_cp": 962,
+   "component_id": "comp-malformed-unmatched-dollar-dev-0001",
+   "category": "malformed",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 980,
+   "end_byte": 988,
+   "start_cp": 962,
+   "end_cp": 970,
+   "component_id": "comp-malformed-unmatched-dollar-dev-0001",
+   "category": "malformed",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 988,
+   "end_byte": 989,
+   "start_cp": 970,
+   "end_cp": 971,
+   "component_id": "comp-malformed-unmatched-dollar-dev-0001",
+   "category": "malformed",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 989,
+   "end_byte": 995,
+   "start_cp": 971,
+   "end_cp": 977,
+   "component_id": "comp-malformed-unmatched-dollar-dev-0001",
+   "category": "malformed",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 995,
+   "end_byte": 996,
+   "start_cp": 977,
+   "end_cp": 978,
+   "component_id": "comp-malformed-unmatched-dollar-dev-0001",
+   "category": "malformed",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 996,
+   "end_byte": 997,
+   "start_cp": 978,
+   "end_cp": 979,
+   "component_id": "comp-malformed-unmatched-dollar-dev-0001",
+   "category": "malformed",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 997,
+   "end_byte": 998,
+   "start_cp": 979,
+   "end_cp": 980,
+   "component_id": "comp-malformed-unmatched-dollar-dev-0001",
+   "category": "malformed",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 998,
+   "end_byte": 1006,
+   "start_cp": 980,
+   "end_cp": 988,
+   "component_id": "comp-malformed-unmatched-dollar-dev-0001",
+   "category": "malformed",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 1006,
+   "end_byte": 1007,
+   "start_cp": 988,
+   "end_cp": 989,
+   "component_id": "comp-malformed-unmatched-dollar-dev-0001",
+   "category": "malformed",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 1007,
+   "end_byte": 1011,
+   "start_cp": 989,
+   "end_cp": 993,
+   "component_id": "comp-malformed-unmatched-dollar-dev-0001",
+   "category": "malformed",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 1011,
+   "end_byte": 1012,
+   "start_cp": 993,
+   "end_cp": 994,
+   "component_id": "comp-malformed-unmatched-dollar-dev-0001",
+   "category": "malformed",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 1012,
+   "end_byte": 1015,
+   "start_cp": 994,
+   "end_cp": 997,
+   "component_id": "comp-malformed-unmatched-dollar-dev-0001",
+   "category": "malformed",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 1015,
+   "end_byte": 1016,
+   "start_cp": 997,
+   "end_cp": 998,
+   "component_id": "comp-malformed-unmatched-dollar-dev-0001",
+   "category": "malformed",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 1016,
+   "end_byte": 1017,
+   "start_cp": 998,
+   "end_cp": 999,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 1017,
+   "end_byte": 1030,
+   "start_cp": 999,
+   "end_cp": 1012,
+   "component_id": "comp-machine-shell-commands-dev-0002",
+   "category": "machine",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 1030,
+   "end_byte": 1031,
+   "start_cp": 1012,
+   "end_cp": 1013,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 1031,
+   "end_byte": 1048,
+   "start_cp": 1013,
+   "end_cp": 1030,
+   "component_id": "comp-machine-windows-paths-dev-0001",
+   "category": "machine",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 1048,
+   "end_byte": 1049,
+   "start_cp": 1030,
+   "end_cp": 1031,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 1049,
+   "end_byte": 1050,
+   "start_cp": 1031,
+   "end_cp": 1032,
+   "component_id": "comp-malformed-malformed-nesting-dev-0001",
+   "category": "malformed",
+   "role": "POLICY_EXPOSED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 1050,
+   "end_byte": 1051,
+   "start_cp": 1032,
+   "end_cp": 1033,
+   "component_id": "comp-malformed-malformed-nesting-dev-0001",
+   "category": "malformed",
+   "role": "POLICY_EXPOSED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 1051,
+   "end_byte": 1052,
+   "start_cp": 1033,
+   "end_cp": 1034,
+   "component_id": "comp-malformed-malformed-nesting-dev-0001",
+   "category": "malformed",
+   "role": "POLICY_EXPOSED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 1052,
+   "end_byte": 1061,
+   "start_cp": 1034,
+   "end_cp": 1042,
+   "component_id": "comp-malformed-malformed-nesting-dev-0001",
+   "category": "malformed",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 1061,
+   "end_byte": 1062,
+   "start_cp": 1042,
+   "end_cp": 1043,
+   "component_id": "comp-malformed-malformed-nesting-dev-0001",
+   "category": "malformed",
+   "role": "POLICY_EXPOSED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 1062,
+   "end_byte": 1063,
+   "start_cp": 1043,
+   "end_cp": 1044,
+   "component_id": "comp-malformed-malformed-nesting-dev-0001",
+   "category": "malformed",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 1063,
+   "end_byte": 1067,
+   "start_cp": 1044,
+   "end_cp": 1048,
+   "component_id": "comp-malformed-malformed-nesting-dev-0001",
+   "category": "malformed",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 1067,
+   "end_byte": 1068,
+   "start_cp": 1048,
+   "end_cp": 1049,
+   "component_id": "comp-malformed-malformed-nesting-dev-0001",
+   "category": "malformed",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 1068,
+   "end_byte": 1074,
+   "start_cp": 1049,
+   "end_cp": 1055,
+   "component_id": "comp-malformed-malformed-nesting-dev-0001",
+   "category": "malformed",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 1074,
+   "end_byte": 1075,
+   "start_cp": 1055,
+   "end_cp": 1056,
+   "component_id": "comp-malformed-malformed-nesting-dev-0001",
+   "category": "malformed",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 1075,
+   "end_byte": 1076,
+   "start_cp": 1056,
+   "end_cp": 1057,
+   "component_id": "comp-malformed-malformed-nesting-dev-0001",
+   "category": "malformed",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 1076,
+   "end_byte": 1082,
+   "start_cp": 1057,
+   "end_cp": 1063,
+   "component_id": "comp-malformed-malformed-nesting-dev-0001",
+   "category": "malformed",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 1082,
+   "end_byte": 1083,
+   "start_cp": 1063,
+   "end_cp": 1064,
+   "component_id": "comp-malformed-malformed-nesting-dev-0001",
+   "category": "malformed",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 1083,
+   "end_byte": 1090,
+   "start_cp": 1064,
+   "end_cp": 1071,
+   "component_id": "comp-malformed-malformed-nesting-dev-0001",
+   "category": "malformed",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 1090,
+   "end_byte": 1091,
+   "start_cp": 1071,
+   "end_cp": 1072,
+   "component_id": "comp-malformed-malformed-nesting-dev-0001",
+   "category": "malformed",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 1091,
+   "end_byte": 1092,
+   "start_cp": 1072,
+   "end_cp": 1073,
+   "component_id": "comp-malformed-malformed-nesting-dev-0001",
+   "category": "malformed",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 1092,
+   "end_byte": 1097,
+   "start_cp": 1073,
+   "end_cp": 1078,
+   "component_id": "comp-malformed-malformed-nesting-dev-0001",
+   "category": "malformed",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 1097,
+   "end_byte": 1098,
+   "start_cp": 1078,
+   "end_cp": 1079,
+   "component_id": "comp-malformed-malformed-nesting-dev-0001",
+   "category": "malformed",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 1098,
+   "end_byte": 1101,
+   "start_cp": 1079,
+   "end_cp": 1082,
+   "component_id": "comp-malformed-malformed-nesting-dev-0001",
+   "category": "malformed",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 1101,
+   "end_byte": 1102,
+   "start_cp": 1082,
+   "end_cp": 1083,
+   "component_id": "comp-malformed-malformed-nesting-dev-0001",
+   "category": "malformed",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 1102,
+   "end_byte": 1103,
+   "start_cp": 1083,
+   "end_cp": 1084,
+   "component_id": "comp-malformed-malformed-nesting-dev-0001",
+   "category": "malformed",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 1103,
+   "end_byte": 1109,
+   "start_cp": 1084,
+   "end_cp": 1090,
+   "component_id": "comp-malformed-malformed-nesting-dev-0001",
+   "category": "malformed",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 1109,
+   "end_byte": 1110,
+   "start_cp": 1090,
+   "end_cp": 1091,
+   "component_id": "comp-malformed-malformed-nesting-dev-0001",
+   "category": "malformed",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 1110,
+   "end_byte": 1111,
+   "start_cp": 1091,
+   "end_cp": 1092,
+   "component_id": "comp-malformed-malformed-nesting-dev-0001",
+   "category": "malformed",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 1111,
+   "end_byte": 1114,
+   "start_cp": 1092,
+   "end_cp": 1095,
+   "component_id": "comp-malformed-malformed-nesting-dev-0001",
+   "category": "malformed",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 1114,
+   "end_byte": 1115,
+   "start_cp": 1095,
+   "end_cp": 1096,
+   "component_id": "comp-malformed-malformed-nesting-dev-0001",
+   "category": "malformed",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 1115,
+   "end_byte": 1120,
+   "start_cp": 1096,
+   "end_cp": 1101,
+   "component_id": "comp-malformed-malformed-nesting-dev-0001",
+   "category": "malformed",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 1120,
+   "end_byte": 1121,
+   "start_cp": 1101,
+   "end_cp": 1102,
+   "component_id": "comp-malformed-malformed-nesting-dev-0001",
+   "category": "malformed",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 1121,
+   "end_byte": 1122,
+   "start_cp": 1102,
+   "end_cp": 1103,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 1122,
+   "end_byte": 1398,
+   "start_cp": 1103,
+   "end_cp": 1374,
+   "component_id": "comp-prose-sports-dev-0008",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  }
+ ],
+ "invariants": {
+  "tiling_complete": true,
+  "no_contradictory_overlaps": true,
+  "cp_range_exact": true
+ }
+}

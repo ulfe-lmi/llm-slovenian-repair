@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-002234",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T2-prose-math-prose",
+ "byte_length": 951,
+ "cp_length": 931,
+ "sha256": "51f427d3d1b1378f1a1a8fbbae7c23d0984f9568a15a0d6645088abe1b9d7ed2",
+ "document": "„Zdravje ni samo odsotnost bolečine“ je poudaril Marko, ko je v projektu Zdravi pogovori spregovoril o pomenu počitka. Vsak človek se mora poslušati in poznati svoje omejitve. Obremenjenost se lahko kaže različno, na primer v napetosti ali v slabšem spanju. Če se nelagodje ne umiri, mora biti naslednji korak obisk zdravnika.\n\\begin{align} \\mu_3 &= \\sum_{\\alpha=1}^{3} \\sigma_\\alpha \\\\ \\rho_3 &= \\int_0^1 \\phi_3(\\lambda_3)\\,d\\lambda_3 \\\\ \\omega_3 &= \\kappa_3 + \\iota_3 \\end{align}\nUprava za vzorčne javne storitve je junija 2024 (ob povišanem obsegu zahtev) pripravila pregled časa čakanja v treh oddelkih. Najkrajši termin so dodelili za menjavo osebne listine, in sicer za pet minut, medtem ko je posodabljanje drugih obrazcev trajalo do dvajset dni. V vložku za potrdilo so uporabniki lahko izbrali osebni prevzem ali poštno oddajo. Po mnenju odgovorne osebe, Anje Laki, je tak postopek najbolj preprost za starejše uporabnike.",
+ "components": [
+  {
+   "component_id": "comp-prose-medicine-explainer-dev-0003",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 338
+  },
+  {
+   "component_id": "comp-math-align-env-dev-0003",
+   "category": "math",
+   "start_byte": 339,
+   "end_byte": 493
+  },
+  {
+   "component_id": "comp-prose-administration-dev-0007",
+   "category": "prose",
+   "start_byte": 494,
+   "end_byte": 951
+  }
+ ]
+}

@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-000813",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T11-interactions",
+ "byte_length": 867,
+ "cp_length": 848,
+ "sha256": "a0f0c1f945bf4f2966fab8a96ea06d3bc253b221be05c44ad738702145475895",
+ "document": "`fn opis_2() -> String { /* Testni projekt Lipa: č, š, ž, *po`.\n```\n/* Testni fragment 4: izmišljena oseba Eva, projekt Trava. */ SELECT 'Eva' AS `ime`, '4,20 $' AS `cena`, 'https://primer.si/koda' AS `url`, 'docs/vir.txt' AS `pot`, TRIM('*poudarek* in _dolgo_') AS `opomba`, 'razdelek2' AS `razdelek2`, 'seStez' AS `seStez`, 'č' AS `HRAŠNA_VREDNOST` FROM (SELECT 4 AS `en`) AS `t` WHERE (`t`.`en` = 4);\n# komentar z \\frac{a}{b}\n```\n„Prvi korak, drugi noga,“ je rekla Ana, a mladi smučarji v projektni skupini so še vedno poskušali izbrati pravo pozicijo. Ko je padal sneg, so se vsi odločili za krajši premor pri topli čaju.\nPri projektu Zimska lučka je Katja poizkusila z dvema baterijama in dvema upornostma. A sklep je bil sprva odprt. Ko je na koncu pritiskala na stikalo, se je dioda vžgala. V dnevni sobi so slišali le tihi, zadovoljen smeh.",
+ "components": [
+  {
+   "component_id": "comp-code-rust-dev-0006",
+   "category": "code",
+   "start_byte": 0,
+   "end_byte": 65
+  },
+  {
+   "component_id": "comp-code-sql-dev-0004",
+   "category": "code",
+   "start_byte": 67,
+   "end_byte": 438
+  },
+  {
+   "component_id": "comp-prose-sports-dev-0012",
+   "category": "prose",
+   "start_byte": 439,
+   "end_byte": 641
+  },
+  {
+   "component_id": "comp-prose-electronics-dev-0008",
+   "category": "prose",
+   "start_byte": 642,
+   "end_byte": 867
+  }
+ ]
+}

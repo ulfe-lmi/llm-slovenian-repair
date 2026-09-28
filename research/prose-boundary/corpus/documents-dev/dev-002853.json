@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-002853",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T5-lists",
+ "byte_length": 1051,
+ "cp_length": 1033,
+ "sha256": "564cbd12fe9c0487cf3298c4129b34499927b2a5950fd6a0c262ba0ff75dd821",
+ "document": "- Pri projektu Mladinski tabor 2023 je voditelj Anže zabeležil blage glavobole. Včasih pomaga mirna soba in hladna krpa. Če se pojavijo z bruhanjem ali motnjami vidu, je treba takoj poklicati zdravnika. To je zgolj testno opozorilo.\n- `fn test2() -> &'static str { /* Testni projekt Lipa: č, š, ž`\n- Ob prenovljenem pisarnem kotu, ki ga je v notranjem projektu Pisarna pripravila Petra, je nov tablični računalnik služil za skice (in, po njenih besedah, tudi za preprosta vprašanja). V prvih tednih se je navadila na večji zaslon, ker so bile besede na papirju pogosto preveč majhne za oči. Ko je na koncu septembra preverila baterijo, ji je bil prijeten ta enostaven način dela.\n- V arhivu projekta Stare potje je bil najden list, na katerem piše o izletu do izvira leta 1807. Po besedah urednice Nine Mlakar je bil povzetek kratek, vendar dovolj jasen, da si lahko bralci predstavljajo skupino, ki je imela osem potnikov in enega psa. Delček zemljevida, prilepljen v isti zvezki, kaže zanko, ki je merila okoli trideset kilometrov.",
+ "components": [
+  {
+   "component_id": "comp-prose-medicine-explainer-dev-0013",
+   "category": "prose",
+   "start_byte": 2,
+   "end_byte": 236
+  },
+  {
+   "component_id": "comp-code-rust-dev-0007",
+   "category": "code",
+   "start_byte": 239,
+   "end_byte": 304
+  },
+  {
+   "component_id": "comp-prose-computing-dev-0011",
+   "category": "prose",
+   "start_byte": 307,
+   "end_byte": 694
+  },
+  {
+   "component_id": "comp-prose-history-dev-0010",
+   "category": "prose",
+   "start_byte": 697,
+   "end_byte": 1051
+  }
+ ]
+}

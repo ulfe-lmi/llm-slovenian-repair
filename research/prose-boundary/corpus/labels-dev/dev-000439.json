@@ -1,0 +1,152 @@
+{
+ "doc_id": "dev-000439",
+ "byte_length": 1066,
+ "cp_length": 1053,
+ "regions": [
+  {
+   "start_byte": 0,
+   "end_byte": 1,
+   "start_cp": 0,
+   "end_cp": 1,
+   "component_id": "comp-code-rust-dev-0001",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 1,
+   "end_byte": 61,
+   "start_cp": 1,
+   "end_cp": 61,
+   "component_id": "comp-code-rust-dev-0001",
+   "category": "code",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 61,
+   "end_byte": 62,
+   "start_cp": 61,
+   "end_cp": 62,
+   "component_id": "comp-code-rust-dev-0001",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 62,
+   "end_byte": 63,
+   "start_cp": 62,
+   "end_cp": 63,
+   "component_id": "template",
+   "category": null,
+   "role": "PROSE",
+   "template_owned": true
+  },
+  {
+   "start_byte": 63,
+   "end_byte": 64,
+   "start_cp": 63,
+   "end_cp": 64,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 64,
+   "end_byte": 67,
+   "start_cp": 64,
+   "end_cp": 67,
+   "component_id": "comp-code-javascript-dev-0010",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 67,
+   "end_byte": 68,
+   "start_cp": 67,
+   "end_cp": 68,
+   "component_id": "comp-code-javascript-dev-0010",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 68,
+   "end_byte": 515,
+   "start_cp": 68,
+   "end_cp": 509,
+   "component_id": "comp-code-javascript-dev-0010",
+   "category": "code",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 515,
+   "end_byte": 516,
+   "start_cp": 509,
+   "end_cp": 510,
+   "component_id": "comp-code-javascript-dev-0010",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 516,
+   "end_byte": 519,
+   "start_cp": 510,
+   "end_cp": 513,
+   "component_id": "comp-code-javascript-dev-0010",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 519,
+   "end_byte": 520,
+   "start_cp": 513,
+   "end_cp": 514,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 520,
+   "end_byte": 800,
+   "start_cp": 514,
+   "end_cp": 791,
+   "component_id": "comp-prose-education-dev-0004",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 800,
+   "end_byte": 801,
+   "start_cp": 791,
+   "end_cp": 792,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 801,
+   "end_byte": 1066,
+   "start_cp": 792,
+   "end_cp": 1053,
+   "component_id": "comp-prose-statistics-dev-0001",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  }
+ ],
+ "invariants": {
+  "tiling_complete": true,
+  "no_contradictory_overlaps": true,
+  "cp_range_exact": true
+ }
+}

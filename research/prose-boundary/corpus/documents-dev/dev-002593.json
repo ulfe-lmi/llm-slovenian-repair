@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-002593",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T9-prose-malformed-prose",
+ "byte_length": 570,
+ "cp_length": 558,
+ "sha256": "1bd198b3e97ce01fe848f7e7b2fbcd4fd307572e0c4a5e0222807305a976769c",
+ "document": "Spremenljivka se obnaša kot stikalo v omarici. Vrednost se spremeni. Zanka se ponovi. Funkcija zaključi del.\nMed obiskom Dubrovnika v septembru 2024 smo obiskali stene mestnega obzidja (ki so bile to poletje izjemno obiskane), preden smo se popoldne izprehodili po stari četrti in se postopoma sprehodili do postajališča vrveža, ki je vodil do Srđ. Lokalna restavracija, ki smo jo izbrali naključno, je ponujala svež ribji rožž, pripravljen po tradicionalni recepturi iz leta 1980.\n`avtorizacija: Luka Zajc; projekt: Sončni Trak; konfiguracija = \"neutrelna\";",
+ "components": [
+  {
+   "component_id": "comp-prose-programming-explainer-dev-0008",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 110
+  },
+  {
+   "component_id": "comp-prose-travel-dev-0007",
+   "category": "prose",
+   "start_byte": 111,
+   "end_byte": 492
+  },
+  {
+   "component_id": "comp-malformed-unmatched-backtick-dev-0002",
+   "category": "malformed",
+   "start_byte": 493,
+   "end_byte": 570
+  }
+ ]
+}

@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-002273",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T8-quote-fenced",
+ "byte_length": 662,
+ "cp_length": 646,
+ "sha256": "38978f44a4f41cd605904a22f49d2379c5b4d18eafbed6ee209d3d3773896f6f",
+ "document": "> V šoli zdravja v Trzinu so učenci (ki so sodelovali v projektu Mirni utripi) prebrali, da premalo gibanja lahko spremeni občutek moči in počutje. Takšne spremembe so lahko odziv na vsakdanjo utrujenost. Ko se pri nekem otroku ali odraslem ponovijo, je prav, da jih preveri zdravnik. `#include <string>`\n```\nfn konec() { /* Testni projekt Lipa: č, š, ž, *poudarek* in _podčrtano_ */ let seStez = true; let razdelek2 = 7; let HRAŠNA_VREDNOST = 1; let besedilo = format!(\"*Nova* ({} $) `č`\", HRAŠNA_VREDNOST); let pot = \"src/modul.py\"; let url = \"https://primer.si/koda\"; let _ = (seStez, razdelek2, besedilo, pot, url); println!(\"č, š, ž\"); }\n```",
+ "components": [
+  {
+   "component_id": "comp-prose-medicine-explainer-dev-0002",
+   "category": "prose",
+   "start_byte": 2,
+   "end_byte": 290
+  },
+  {
+   "component_id": "comp-code-cpp-dev-0004",
+   "category": "code",
+   "start_byte": 291,
+   "end_byte": 310
+  },
+  {
+   "component_id": "comp-code-rust-dev-0008",
+   "category": "code",
+   "start_byte": 311,
+   "end_byte": 662
+  }
+ ]
+}

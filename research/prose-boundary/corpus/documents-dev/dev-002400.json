@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-002400",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T3-prose-fenced-prose",
+ "byte_length": 809,
+ "cp_length": 790,
+ "sha256": "4fa4e949a1dedc3f59f2c8f0eb3d390fa4f1441ac7694055dde12767e6bc0a3b",
+ "document": "V vprašanjih za projekt Zdravo mesto 2025 so otroci zaskrbljeni zaradi »bolečin v trebuhu« po školski malici. Raje ne govorimo o diagnozi; zabeležimo, kdaj se pojavi, koliko traja in kakšna je hrana (na primer po mlečnih izdelkih). Pri vsakem nepričakovanem ponovnem pojavi naj starš pokliče zdravniško ambulanto.\n```\n/* Preveri imenik (č, š, ž): src/modul.py in docs/vir.txt */ function opis(ime) { const tekst = `Ime: **${ime}**`; return tekst + ' - *opomba*'; } console.log(opis('Ana'));\n```\nV projektu Zdrav vsak dan (v letu 2024) so izpostavili, da se lahko obremenjenost kaže v hitrem dihanju, v slabšem spanju ali v občutku tesnobe. To ni razlaga za domov, ampak spomin, da so telesni signali odziv. Ko se ti signali ponavljajo, jih najprej opiše oseba, nato pa jih preveri zdravnik.",
+ "components": [
+  {
+   "component_id": "comp-prose-medicine-explainer-dev-0012",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 325
+  },
+  {
+   "component_id": "comp-code-javascript-dev-0007",
+   "category": "code",
+   "start_byte": 326,
+   "end_byte": 509
+  },
+  {
+   "component_id": "comp-prose-medicine-explainer-dev-0005",
+   "category": "prose",
+   "start_byte": 510,
+   "end_byte": 809
+  }
+ ]
+}

@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-000386",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T2-prose-math-prose",
+ "byte_length": 646,
+ "cp_length": 637,
+ "sha256": "7087e152afe6a60b1a558948817d8d59da1a13d8ffa89f4486dbdecb0630c0fa",
+ "document": "V projektu Pomladni spanec so opisali, da pomanjkanje spanja lahko vpliva na razpoloženje. Pogosto se lahko spremeni tudi koncentracija. Občutek utrujenosti se lahko poveča. To je splošna opomba, ne pa osebni nasvet. Če se takšni znaki ponavljajo, je dobro, da osebo sprejme zdravnik.\n\\Pr(Z > \\mu + \\sigma) = 1 - \\Phi(1) = 0.1587 \\text{ (verjetnost repa)}\nZjutraj, ob sedmih, je skupina iz projekta Koraki brez hitenja obiskala park ob reki, kjer so prehodili pet kilometrov in opravili dve minuti raztezanja. Moški, ki se je v zapisniku imenoval Tomaž, je po premoru rekel, da mu je bilo v kolkih udobneje, čeprav je bil teren blaznjen.",
+ "components": [
+  {
+   "component_id": "comp-prose-medicine-explainer-dev-0004",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 290
+  },
+  {
+   "component_id": "comp-math-probability-dev-0006",
+   "category": "math",
+   "start_byte": 291,
+   "end_byte": 361
+  },
+  {
+   "component_id": "comp-prose-sports-dev-0004",
+   "category": "prose",
+   "start_byte": 362,
+   "end_byte": 646
+  }
+ ]
+}

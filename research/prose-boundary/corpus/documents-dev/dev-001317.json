@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-001317",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T9-prose-malformed-prose",
+ "byte_length": 632,
+ "cp_length": 615,
+ "sha256": "a4687f76cf12d6237fa5a66b6bf3d38d812442e570c6e7de99f284bb332775c9",
+ "document": "Luka je v projektu Soba za okuse v soboto zjutraj odprl lonček in vonj po karameliziranih čebulicah je zapolnil celo sobo. Sol je dodal šele ob koncu, ker se je spomnil na zgodnjo napako. Nato je v dnevnik zapisal samo eno opombo: „Pri kuhanju se ne mudi.“\n{\"naslov\": \"Testna vsebina projekta Lipa\", \nSlovenska pesniška tradicija ima svojo tišino. V izmišljenem projektu Glas in tišina, ki raziskuje naravno, se pojavi motiv dreves. Izmišljena pesnica Anja Horvat v zbirki iz leta 2015 piše: »Drevo ne govori, a se v šumu zdi, da je vprašanje.« Ta stavek se v evropskem kontekstu pogosto pojavi kot znak identitete.",
+ "components": [
+  {
+   "component_id": "comp-prose-cooking-dev-0010",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 263
+  },
+  {
+   "component_id": "comp-malformed-truncated-json-dev-0001",
+   "category": "malformed",
+   "start_byte": 264,
+   "end_byte": 307
+  },
+  {
+   "component_id": "comp-prose-literature-dev-0008",
+   "category": "prose",
+   "start_byte": 308,
+   "end_byte": 632
+  }
+ ]
+}

@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-001005",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T5-lists",
+ "byte_length": 1133,
+ "cp_length": 1102,
+ "sha256": "f91f1c24cc5f8e71018e7569a97c409a4c7ae0b796c629f8ce54a288bc109841",
+ "document": "- V projektu Zdrav vsak dan (v letu 2024) so izpostavili, da se lahko obremenjenost kaže v hitrem dihanju, v slabšem spanju ali v občutku tesnobe. To ni razlaga za domov, ampak spomin, da so telesni signali odziv. Ko se ti signali ponavljajo, jih najprej opiše oseba, nato pa jih preveri zdravnik.\n- `fn test2() -> &'static str { /* Testni projekt Lipa: č, š, ž`\n- „Zdravje ni samo odsotnost bolečine“ je poudaril Marko, ko je v projektu Zdravi pogovori spregovoril o pomenu počitka. Vsak človek se mora poslušati in poznati svoje omejitve. Obremenjenost se lahko kaže različno, na primer v napetosti ali v slabšem spanju. Če se nelagodje ne umiri, mora biti naslednji korak obisk zdravnika.\n- V projektu Hišni nasveti 2024 je Ana iz Ljubljane opazila, da se steklenice s čisto vodo, (še posebej tiste 0,5 litra), hitreje izpraznijo, če so vedno pri roki ob jedilni mizi. Njen sosed Marko je bil sprva skeptičen, a je po dveh tednih dejal: »Če je pijača pri mizi, manjkrat potuje v hladilnik.« Tudi manjše spremembe, kot je skleda za kosmiče ob vratih, v celotnem gospodinjstvu naredijo mirnejše jutro.",
+ "components": [
+  {
+   "component_id": "comp-prose-medicine-explainer-dev-0005",
+   "category": "prose",
+   "start_byte": 2,
+   "end_byte": 301
+  },
+  {
+   "component_id": "comp-code-rust-dev-0007",
+   "category": "code",
+   "start_byte": 304,
+   "end_byte": 369
+  },
+  {
+   "component_id": "comp-prose-medicine-explainer-dev-0003",
+   "category": "prose",
+   "start_byte": 372,
+   "end_byte": 710
+  },
+  {
+   "component_id": "comp-prose-everyday-advice-dev-0011",
+   "category": "prose",
+   "start_byte": 713,
+   "end_byte": 1133
+  }
+ ]
+}

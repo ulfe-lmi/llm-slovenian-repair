@@ -1,0 +1,102 @@
+{
+ "doc_id": "dev-000500",
+ "byte_length": 675,
+ "cp_length": 662,
+ "regions": [
+  {
+   "start_byte": 0,
+   "end_byte": 323,
+   "start_cp": 0,
+   "end_cp": 316,
+   "component_id": "comp-prose-education-dev-0002",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 323,
+   "end_byte": 324,
+   "start_cp": 316,
+   "end_cp": 317,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 324,
+   "end_byte": 325,
+   "start_cp": 317,
+   "end_cp": 318,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 325,
+   "end_byte": 355,
+   "start_cp": 318,
+   "end_cp": 348,
+   "component_id": "comp-prose-medicine-explainer-dev-0004",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 355,
+   "end_byte": 357,
+   "start_cp": 348,
+   "end_cp": 350,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 357,
+   "end_byte": 383,
+   "start_cp": 350,
+   "end_cp": 376,
+   "component_id": "comp-machine-urls-dev-0004",
+   "category": "machine",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 383,
+   "end_byte": 384,
+   "start_cp": 376,
+   "end_cp": 377,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 384,
+   "end_byte": 385,
+   "start_cp": 377,
+   "end_cp": 378,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 385,
+   "end_byte": 675,
+   "start_cp": 378,
+   "end_cp": 662,
+   "component_id": "comp-prose-medicine-explainer-dev-0004",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  }
+ ],
+ "invariants": {
+  "tiling_complete": true,
+  "no_contradictory_overlaps": true,
+  "cp_range_exact": true
+ }
+}

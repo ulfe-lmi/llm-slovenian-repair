@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-001607",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T2-prose-math-prose",
+ "byte_length": 633,
+ "cp_length": 619,
+ "sha256": "854246b166d551bad9fa99e2f30937ea4608f89b2b127802819d4135c5d8fc3a",
+ "document": "Ana si je za projekt »Miren dan« izbrala prenosnik, ki naj bi bil dovolj tih, da ga lahko odpre v knjižnici (tudi če baterija ni polna). V »Ponovni sinhronizaciji« se ji je obljubil mirnejši dan, če omrežje ne bo puščalo zamud.\r\n\\[\\dfrac{1}{2}+\\frac{\\alpha}{\\beta}=\\text{Anja}\\]\r\nV Ljubljani sem se s projektom Zeleni otok podal h Trgu republike (nekaj metrov od Kamnitega mostu). Na dvorišču so nas sprejeli z rahlim zamikom, saj je bilo dvigalo zasedeno. V razstavi smo videli modele, ki so prikazovali potovanja po reki od 1980-ih let. Popoldne smo se odločili za kavo ob trgu, medtem ko so se otroci igrali v parku.",
+ "components": [
+  {
+   "component_id": "comp-prose-computing-dev-0006",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 238
+  },
+  {
+   "component_id": "comp-math-fractions-dev-0001",
+   "category": "math",
+   "start_byte": 240,
+   "end_byte": 289
+  },
+  {
+   "component_id": "comp-prose-travel-dev-0003",
+   "category": "prose",
+   "start_byte": 291,
+   "end_byte": 633
+  }
+ ]
+}

@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-002019",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T7-prose-json-prose-latex",
+ "byte_length": 1016,
+ "cp_length": 997,
+ "sha256": "994868b64bbed7a6ab67ff419f41728aed624c8b4b3d9f5942e295a889ef48e8",
+ "document": "V kuhinjskem laboratoriju projekta Okusni dnevnik so v začetku 2017 preizkusili tri različne osnove za ovseno kašo, in sicer (a) z medom, (b) z rozinami ter (c) s suhimi breskvami, vendar se je najpogosteje ponovila tista z malo kumina. Pri opombi so uporabili vstavek: „Če ni kumina, vzemi štipanje sladke paprike.“ Rezultat je bil preprosto zapisan v skupni dnevnik.\n{\"ime\":\"Oseba Miha\",\"dolžina\":\"1,8 m\",\"avtorsko\":\"Nevtralna testna vsebina\",\"razmerje\":\"0,13\",\"opomba\":\"*Izmišljena oseba* https://primer.si/novica\"}\nV kopeli na Trgu v novembru 2024 je potekal kratki rekreativni plavalni tečaj, v katerem so trije poskusi (plavanje na hrbtno, na prsi in s sproščeno dihanjem) trajali skupaj dvajset minut. Udeleženka, ki jo je projekt opisal kot Maja, je po prvem krogu dejala, da je voda morda hladnejša, kot se je zdelo. 'Največja korist je, da se je telo pomirilo,' je zaključila brez vsakršne pohvale.\nP(A_{\\text{Ana}}) = \\frac{2}{5} + \\Pr(B_{\\text{Lipa}}) = 0.6 \\text{ (verjetnost uspeha)}",
+ "components": [
+  {
+   "component_id": "comp-prose-cooking-dev-0008",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 377
+  },
+  {
+   "component_id": "comp-structured-json-dev-0006",
+   "category": "structured",
+   "start_byte": 378,
+   "end_byte": 529
+  },
+  {
+   "component_id": "comp-prose-sports-dev-0003",
+   "category": "prose",
+   "start_byte": 530,
+   "end_byte": 927
+  },
+  {
+   "component_id": "comp-math-probability-dev-0001",
+   "category": "math",
+   "start_byte": 928,
+   "end_byte": 1016
+  }
+ ]
+}

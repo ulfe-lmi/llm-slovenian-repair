@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-000233",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T3-prose-fenced-prose",
+ "byte_length": 980,
+ "cp_length": 958,
+ "sha256": "c9b5cbac0e41c63ee97a6995124bda0926c50d0b2706b4b3f5241373c920640c",
+ "document": "V projektu »Mestni prehod čez Ljubljanico« so leta 2021 izbrali kombinacijo jekla in betona (natančneje: lahkega, armiranega). Ker je razpon precejšen, so nosilce razdelili na osem segmentov. Inženirka Ana Kos je dodala, da se temperaturne razlike v spojih skrbno kompenzirajo.\n```\n# Fragment 7: oseba: Luka Zupan, projekt *Mol*\necho 'Markdown: *zvezdice*, **poudarek**, _podčrtanje_'\necho 'Znesek: 20 $ in 1 € (izmišljeno)'\necho 'Koda: src/modul.py; dokument: docs/vir.txt'\necho 'URL: https://primer.si/koda'\necho 'Identi: seStez, razdelek2, HRAŠNA_VREDNOST'\necho 'Backquote `znak`, (oklepaj), č š ž'\n```\nPomurski potič se v testni kuhinji projekta Okusi Pomurja peče pri 180 stopinjah, dokler ne postane zlato rjav. Namaz iz mletega oreha (ne preveč) naj bo tanko razgneten, da se test ne raztrga. Katja je dodala malo medu, ker je želela, da bo vonj močnejši in bolj topel. Čas mirovanja testa, približno ena ura, je bil razlika med suhim in mehkim rezom.",
+ "components": [
+  {
+   "component_id": "comp-prose-engineering-dev-0011",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 283
+  },
+  {
+   "component_id": "comp-code-shell-bash-dev-0007",
+   "category": "code",
+   "start_byte": 284,
+   "end_byte": 619
+  },
+  {
+   "component_id": "comp-prose-cooking-dev-0002",
+   "category": "prose",
+   "start_byte": 620,
+   "end_byte": 980
+  }
+ ]
+}

@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-001057",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T2-prose-math-prose",
+ "byte_length": 507,
+ "cp_length": 487,
+ "sha256": "7c044ad33437ea427dc3670a38a08d09d04bae8add131aa642e315b8e5398489",
+ "document": "Spremenljivka se obnaša kot stikalo v omarici. Vrednost se spremeni. Zanka se ponovi. Funkcija zaključi del.\r\nE[Y_{\\text{Trn}}] = \\int_{0}^{1} y f_{\\text{Trn}}(y) \\, dy = \\beta^2 \\text{ (pričakovana vrednost)}\r\nV tečaju za starše v Celju so namesto poskusnega izpita uvedli skupno vprašanje, ki ga je treba razčleniti v tri kratke točke. Ko so otroci in učitelji slišali “Da se ocenjevanje ne začne šele z ocenami”, so se v razredu pogostejše pojavila vprašanja o načinu, ne le o točkah.",
+ "components": [
+  {
+   "component_id": "comp-prose-programming-explainer-dev-0008",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 110
+  },
+  {
+   "component_id": "comp-math-probability-dev-0005",
+   "category": "math",
+   "start_byte": 112,
+   "end_byte": 212
+  },
+  {
+   "component_id": "comp-prose-education-dev-0009",
+   "category": "prose",
+   "start_byte": 214,
+   "end_byte": 507
+  }
+ ]
+}

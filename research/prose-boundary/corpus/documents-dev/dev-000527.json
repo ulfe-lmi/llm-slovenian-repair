@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-000527",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T11-interactions",
+ "byte_length": 977,
+ "cp_length": 951,
+ "sha256": "78314bfb61d936fb4ab995977501a4fbad16f36952b8b48763cc1e447b71441a",
+ "document": "`#include <string>`.\n```\n/* Fragment 1: nevtralni testni projekt, vir https://primer.si/koda, pot src/modul.py */ namespace primer { std::string naslov = \"Razdelek: _podrobnosti_\"; const int razdelek2 = 7; } std::string opis1() { return \"Cena: 10 $ *ponudba* `kod` (č, š, ž)\"; }\n# komentar z \\frac{a}{b}\n```\nLeta 1999 so v projektu Bralna mreža (izmišljeni arhiv) preizkušali, kako bralci obudijo spomin na slovenske in evropske pesnike. Odkritje ni bilo v imenu, temveč v tem, da je vprašanje (brez nujnega odgovora) preživelo vse. »Zato,« je zapisal izmišljeni filolog Marko Rovec, »ker je knjižnost včasih sama sebi prevod.«\nVzorčni projekt za Občinsko pisarno je v septembru 2025 preizkusil nov obrazec za prijavo krajnega dogodka. V navodilih so pisali: „Oddajte dokument najmanj tri dni pred pričetkom”, da bi preprečili zamudo pri obravnavi. Preizkus je vključeval tri uporabnike in dva referenta, ki sta preverila datume in številke v obrazcu.",
+ "components": [
+  {
+   "component_id": "comp-code-cpp-dev-0003",
+   "category": "code",
+   "start_byte": 0,
+   "end_byte": 19
+  },
+  {
+   "component_id": "comp-code-cpp-dev-0009",
+   "category": "code",
+   "start_byte": 21,
+   "end_byte": 310
+  },
+  {
+   "component_id": "comp-prose-literature-dev-0004",
+   "category": "prose",
+   "start_byte": 311,
+   "end_byte": 643
+  },
+  {
+   "component_id": "comp-prose-administration-dev-0008",
+   "category": "prose",
+   "start_byte": 644,
+   "end_byte": 977
+  }
+ ]
+}

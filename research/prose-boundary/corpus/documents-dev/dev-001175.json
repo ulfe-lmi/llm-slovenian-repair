@@ -1,0 +1,59 @@
+{
+ "doc_id": "dev-001175",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T10-randomized",
+ "byte_length": 1364,
+ "cp_length": 1345,
+ "sha256": "ae24c08405f9b29d0d385f1ab3fcd235a1a63e643380d12f4c720d22e32e8d91",
+ "document": "Maja je v pisarni preizkusila nov tiskalnik, ki pa se je ob prvimu zagonu pokazal bolj zahteven, kot so obljavali. V razpravi so sodelavci spregovorili o tem, da bi lahko preprostejši program za spremljanje tonerja rešil polovico tegob.\n\\[\\frac{5}{6}+\\dfrac{\\zeta}{\\eta}=\\text{Maja}\\]\n```\n# Testni projekt: Nabavna lista; avtor: Maja Lipovnik\ncena = 12.50\nznesek = 'Cena: 12,50 $ v oklepaju (brez DDV)'\npot = 'docs/vir.txt'\nkomentar = 'Slovenski č, š, ž'\nif cena > 10:\n    print('Visok znesek')\n```\n## Projekt Trava\n### Testni podnaslov\n#### Podroben podnaslov\nProjekt Trava, avtor Marko Kranjc, vrednost 12 g.\nZačetni pregled: 7 meritev ob 10 °C in 900 ml je označeno z **močno** in __podčrtim__ besedilom.\n- [ ] Projekt Lipa: preveriti 5 l\n- [x] Projekt Lipa: zabeležiti 10 °C\n```\n/* Testni fragment 4: izmišljena oseba Eva, projekt Trava. */ SELECT 'Eva' AS `ime`, '4,20 $' AS `cena`, 'https://primer.si/koda' AS `url`, 'docs/vir.txt' AS `pot`, TRIM('*poudarek* in _dolgo_') AS `opomba`, 'razdelek2' AS `razdelek2`, 'seStez' AS `seStez`, 'č' AS `HRAŠNA_VREDNOST` FROM (SELECT 4 AS `en`) AS `t` WHERE (`t`.`en` = 4);\n```\nV raziskavi, ki jo je vodila Nika, so primerjali stavek iz leta 1945 s krajšim opisom iz leta 1959; razlika je bila v dolžini in v rabi vejic. (V notranji opombi je pisalo, da merilo ni bila natančna data, temveč letnica.)",
+ "components": [
+  {
+   "component_id": "comp-prose-computing-dev-0001",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 238
+  },
+  {
+   "component_id": "comp-math-fractions-dev-0003",
+   "category": "math",
+   "start_byte": 239,
+   "end_byte": 286
+  },
+  {
+   "component_id": "comp-code-python-dev-0002",
+   "category": "code",
+   "start_byte": 287,
+   "end_byte": 503
+  },
+  {
+   "component_id": "comp-markdown-headings-dev-0002",
+   "category": "markdown",
+   "start_byte": 504,
+   "end_byte": 615
+  },
+  {
+   "component_id": "comp-markdown-strong-dev-0008",
+   "category": "markdown",
+   "start_byte": 616,
+   "end_byte": 717
+  },
+  {
+   "component_id": "comp-markdown-lists-dev-0005",
+   "category": "markdown",
+   "start_byte": 718,
+   "end_byte": 790
+  },
+  {
+   "component_id": "comp-code-sql-dev-0004",
+   "category": "code",
+   "start_byte": 791,
+   "end_byte": 1137
+  },
+  {
+   "component_id": "comp-prose-history-dev-0004",
+   "category": "prose",
+   "start_byte": 1138,
+   "end_byte": 1364
+  }
+ ]
+}

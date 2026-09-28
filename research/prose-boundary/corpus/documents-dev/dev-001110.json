@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-001110",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T11-interactions",
+ "byte_length": 782,
+ "cp_length": 753,
+ "sha256": "853e52011b349f97543b99caa82a411860b9788a3f02b043e14a294b3c769692",
+ "document": "`/* Testni fragment 5: izmišljena oseba Anja, projekt Kovač. `.\n```\ndef seštej(a, b): return a + b, 'Povzetek: **pomembno** _podčrtano_ $5 (oklepaji) `kod`' # komentar v slovenščini: testni projekt, ž š č\n# komentar z \\frac{a}{b}\n```\nMaja je v pisarni preizkusila nov tiskalnik, ki pa se je ob prvimu zagonu pokazal bolj zahteven, kot so obljavali. V razpravi so sodelavci spregovorili o tem, da bi lahko preprostejši program za spremljanje tonerja rešil polovico tegob.\nV projektu Sončni razbojnik so pri izračunu ocenili, da se je obdelava naročil v juniju zmanjšala za 8 odstotkov. Tomo je zaskrbljeno zapisal: „Povprečje skriva posamezne padce.“ Kljub temu so odločili, da bodo naslednji teden ponovno izmerili čas.\n Žč: 🚀 hitrost rasti je merljiva.",
+ "components": [
+  {
+   "component_id": "comp-code-sql-dev-0005",
+   "category": "code",
+   "start_byte": 0,
+   "end_byte": 64
+  },
+  {
+   "component_id": "comp-code-python-dev-0009",
+   "category": "code",
+   "start_byte": 66,
+   "end_byte": 242
+  },
+  {
+   "component_id": "comp-prose-computing-dev-0001",
+   "category": "prose",
+   "start_byte": 243,
+   "end_byte": 481
+  },
+  {
+   "component_id": "comp-prose-statistics-dev-0010",
+   "category": "prose",
+   "start_byte": 482,
+   "end_byte": 741
+  }
+ ]
+}

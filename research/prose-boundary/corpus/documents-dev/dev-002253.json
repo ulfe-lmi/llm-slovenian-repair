@@ -1,0 +1,71 @@
+{
+ "doc_id": "dev-002253",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T10-randomized",
+ "byte_length": 1677,
+ "cp_length": 1648,
+ "sha256": "dd7d3e127574fabb5bb1cc59c2744974a6004837fb64c8acf76bd99c79f6eb70",
+ "document": "Evropska kratka zgodba, ki jo raziskuje izmišljeni projekt Bralna gibanja, pogosto uporabi motiv tveganja in ga stisne v nekaj stavkov. Izmišljena evropska avtorica Léa Durand napiše: »Samo en pogled je dovolj.«\n[površje]\nime = *Projekt Ravno polje*\nopis = _višina_ 0,13 m\nširina = 9,75 m\navtor = Luka Kos\nvir = https://primer.si/novica\n; nevtralna testna vsebina\n{ opis: '*Zelena* _testna_ vsebina', merilo: '3,5 m', vir: https://primer.si/novica }\nHRAŠNA_VREDNOST, parse_lexer_input\n```\n/* Fragment 1: nevtralni testni projekt, vir https://primer.si/koda, pot src/modul.py */ namespace primer { std::string naslov = \"Razdelek: _podrobnosti_\"; const int razdelek2 = 7; } std::string opis1() { return \"Cena: 10 $ *ponudba* `kod` (č, š, ž)\"; }\n```\n```\n/* Testni fragment 3: izmišljena oseba Luka, projekt Brst. */ SELECT 'Luka' AS `ime`, '3,10 $' AS `cena`, 'https://primer.si/koda' AS `url`, 'src/test.py' AS `pot`, TRIM('*kratek* in _podčrtano_') AS `opomba`, 'razdelek2' AS `razdelek2`, 'seStez' AS `seStez`, 'š' AS `HRAŠNA_VREDNOST` FROM (SELECT 3 AS `en`) AS `t` WHERE (`t`.`en` = 3);\n```\n<dogodek id='četrta' datum='2024-01-15' kraj='Ljubljana'><opis postotek='35 %'>Prva faza</opis></dogodek>\nPROJEKT=Zlati hribovci\nAVTOR=Nina Kralj\nVZDUŠJE=20,3 °C\nVLAKNO=15 %\nDODATNA_VAR=$drugim_ključem; 0,18\nOPIS=[*test*, _slovensko_, https://primer.si/novica]\n- Projekt Lipa: 3 vzorci, 12 kg, 5 m\nO proporcijah sem v šolskem letu 2019 govorila kot o primerjavi enakih delov, zato so učenci izmišljali recepte in merili sestavine. »Če ena skleda vsebuje dva dela, potem druga vsebuje štiri dele,« je povedala Ana, in to je bila za nas dobra vstopna točka.",
+ "components": [
+  {
+   "component_id": "comp-prose-literature-dev-0007",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 217
+  },
+  {
+   "component_id": "comp-structured-ini-dev-0007",
+   "category": "structured",
+   "start_byte": 218,
+   "end_byte": 372
+  },
+  {
+   "component_id": "comp-structured-keyvalue-dev-0006",
+   "category": "structured",
+   "start_byte": 373,
+   "end_byte": 458
+  },
+  {
+   "component_id": "comp-machine-identifiers-dev-0007",
+   "category": "machine",
+   "start_byte": 459,
+   "end_byte": 494
+  },
+  {
+   "component_id": "comp-code-cpp-dev-0009",
+   "category": "code",
+   "start_byte": 495,
+   "end_byte": 759
+  },
+  {
+   "component_id": "comp-code-sql-dev-0003",
+   "category": "code",
+   "start_byte": 760,
+   "end_byte": 1109
+  },
+  {
+   "component_id": "comp-structured-xml-dev-0004",
+   "category": "structured",
+   "start_byte": 1110,
+   "end_byte": 1216
+  },
+  {
+   "component_id": "comp-structured-env-blocks-dev-0006",
+   "category": "structured",
+   "start_byte": 1217,
+   "end_byte": 1374
+  },
+  {
+   "component_id": "comp-markdown-lists-dev-0001",
+   "category": "markdown",
+   "start_byte": 1375,
+   "end_byte": 1411
+  },
+  {
+   "component_id": "comp-prose-math-explainer-dev-0002",
+   "category": "prose",
+   "start_byte": 1412,
+   "end_byte": 1677
+  }
+ ]
+}

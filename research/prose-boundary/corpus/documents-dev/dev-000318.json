@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-000318",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T11-interactions",
+ "byte_length": 1055,
+ "cp_length": 1031,
+ "sha256": "bded8beca4bcdf15b18d26f87743d81bf663ab79b3113e31345196289c14664c",
+ "document": "`#include <string>`.\n```\nfn HRAŠNA_VREDNOST(žvirok: i64) -> i64 { /* Testni projekt Lipa: č, š, ž, **močan** in *poudarek* */ let razdelek2: i64 = 3; let besedilo = format!(\"_Podčrtano_ ({} $)\", razdelek2); let oznaka = \"č`ž`š\"; let pot = \"src/modul.rs\"; let url = \"https://primer.si/koda\"; let _ = (besedilo, oznaka, pot, url); žvirok + razdelek2 }\n# komentar z \\frac{a}{b}\n```\nMaja (2022) je v projektu Ljubljanska potopisna zanka pojasnila, da zanka lahko obravnava vrsto dogodkov, dokler ni izpolnjen pogoj, in da funkcija obdaja pogoste korake v eno imeno. V tem razumevanju spremenljivka ni le število, ampak tudi ime za stanje, ki se med potekom spreminja, kar olajša prenos med koraki.\nV izmišljenem raziskovalnem projektu “Arhiv Dravskih poti” (nevtralna testna zbirka) so zapisi o potovanjih po Dravi prikazali, kako so meje med skupnostmi spreminjale spomin na preteklost. Letnica 1918 je postala mejni simbol. Avtorica Ana Kralj je v vnosu zapisala (po mnenju uredništva), da je “zgodovina” večinoma molk med letnicami.",
+ "components": [
+  {
+   "component_id": "comp-code-cpp-dev-0007",
+   "category": "code",
+   "start_byte": 0,
+   "end_byte": 19
+  },
+  {
+   "component_id": "comp-code-rust-dev-0003",
+   "category": "code",
+   "start_byte": 21,
+   "end_byte": 389
+  },
+  {
+   "component_id": "comp-prose-programming-explainer-dev-0013",
+   "category": "prose",
+   "start_byte": 390,
+   "end_byte": 706
+  },
+  {
+   "component_id": "comp-prose-history-dev-0011",
+   "category": "prose",
+   "start_byte": 707,
+   "end_byte": 1055
+  }
+ ]
+}

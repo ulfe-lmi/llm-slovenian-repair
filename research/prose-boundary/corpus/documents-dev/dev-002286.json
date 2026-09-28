@@ -1,0 +1,65 @@
+{
+ "doc_id": "dev-002286",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T10-randomized",
+ "byte_length": 1395,
+ "cp_length": 1380,
+ "sha256": "7608307a8df26b991ea5cf826f2997aea77326641c80f7148f5c37208ed7fa47",
+ "document": "V projektu Lipov most je na mostni konstrukciji pri Ljubljani prišlo do razpok, ki so se pojavile po zimskem zamrzavanju. Inga Novak je zato zahtevala dodatne meritve korozije (zlasti na nosilnih nosilcih) in preizkus jeklenih elementov, saj je »varnost najprej«.\n${PROJEKT_IME} KEY=izvirna_vrednost\nPROJEKT_IME=Kralj_Metelj, KEY=vrednost\nZaključek: ~~odmetano~~ besedilo 7 točk in 3 kg za Igorja Vovk.\nFragment 5: <table><thead><tr><th>Projekt</th><th>Podatek</th></tr></thead><tbody><tr><td>Proj. Bora</td><td>*uspešnost* 98,2 % (glej <a href=\"https://primer.si/bora\">bora</a>)</td></tr><tr><td>Proj. Vena</td><td>_zanka_ 0,05 m</td></tr></tbody></table>\nV testnem projektu <b>Zelena gora</b> je <i>Matej Novak</i> preveril <span>5,4 kg</span> vzorca.<br/>Druga vrednost je 5,8 kg.\nv1.2.3, 0.13.4, 25 %, 42 obr/min\n{\"ime\":\"Projekt Reka\",\"razmerje\":\"2,5 m / 0,13\",\"avtorsko\":\"Nevtralna testna vsebina\",\"vzorec\":{\"delež\":\"30 %\",\"opis\":\"_Nevtralno_ https://primer.si/novica\"}}\nV Bohinju so udeleženci rekreativnega smučarskega tabora (leta 2022) preizkusili dve smučarski poti in tri vzpone s postojali, ki so jih označili za lažje. Ana, izmišljena sodelavka projekta Zimska pot, je zapisala, da jo je po tridesetih minutah vzhoda bolela le desna noga. 'Vreme je bilo hladno, nebo pa čisto,' je dodala ob koncu dneva. Naslednji dan so skrajšali pot in dodali dve minuti raztezanja.",
+ "components": [
+  {
+   "component_id": "comp-prose-engineering-dev-0007",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 266
+  },
+  {
+   "component_id": "comp-machine-env-vars-dev-0003",
+   "category": "machine",
+   "start_byte": 267,
+   "end_byte": 302
+  },
+  {
+   "component_id": "comp-machine-env-vars-dev-0001",
+   "category": "machine",
+   "start_byte": 303,
+   "end_byte": 341
+  },
+  {
+   "component_id": "comp-markdown-strikethrough-dev-0008",
+   "category": "markdown",
+   "start_byte": 342,
+   "end_byte": 407
+  },
+  {
+   "component_id": "comp-structured-html-dev-0005",
+   "category": "structured",
+   "start_byte": 408,
+   "end_byte": 662
+  },
+  {
+   "component_id": "comp-markdown-raw-html-dev-0002",
+   "category": "markdown",
+   "start_byte": 663,
+   "end_byte": 789
+  },
+  {
+   "component_id": "comp-machine-versions-numbers-units-dev-0008",
+   "category": "machine",
+   "start_byte": 790,
+   "end_byte": 822
+  },
+  {
+   "component_id": "comp-structured-json-dev-0004",
+   "category": "structured",
+   "start_byte": 823,
+   "end_byte": 982
+  },
+  {
+   "component_id": "comp-prose-sports-dev-0002",
+   "category": "prose",
+   "start_byte": 983,
+   "end_byte": 1395
+  }
+ ]
+}

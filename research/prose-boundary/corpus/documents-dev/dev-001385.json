@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-001385",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T11-interactions",
+ "byte_length": 767,
+ "cp_length": 745,
+ "sha256": "ccd1b1217df1c98d10605270a6dacf887835628e4d9feaf00be6db84d7067a16",
+ "document": "`fn main() { /* Testni projekt Lipa: č, š, ž, **poudarek** in`.\n```\nseStez = 'https://primer.si/koda'; razdelek2 = 'src/modul.py'; HRAŠNA_VREDNOST = 7 # komentar v slovenščini: izmišljena oseba Ana, tema črn žir\n# komentar z \\frac{a}{b}\n```\nV izmišljenem projektu Knjižna mreža preverjamo, kako spomin spreminja prostor. Izmišljeni slovenski avtor Matej Zupan v romanu iz leta 2018 zapiše: »Hiša je v megli, a jezik ostane.« To stisko je mogoče primerjati z evropsko prozo, v kateri tihi vnos pogosto postane glavni motiv.\nV raziskavi, ki jo je vodila Nika, so primerjali stavek iz leta 1945 s krajšim opisom iz leta 1959; razlika je bila v dolžini in v rabi vejic. (V notranji opombi je pisalo, da merilo ni bila natančna data, temveč letnica.)",
+ "components": [
+  {
+   "component_id": "comp-code-rust-dev-0005",
+   "category": "code",
+   "start_byte": 0,
+   "end_byte": 65
+  },
+  {
+   "component_id": "comp-code-python-dev-0010",
+   "category": "code",
+   "start_byte": 67,
+   "end_byte": 249
+  },
+  {
+   "component_id": "comp-prose-literature-dev-0006",
+   "category": "prose",
+   "start_byte": 250,
+   "end_byte": 540
+  },
+  {
+   "component_id": "comp-prose-history-dev-0004",
+   "category": "prose",
+   "start_byte": 541,
+   "end_byte": 767
+  }
+ ]
+}

@@ -1,0 +1,65 @@
+{
+ "doc_id": "dev-000383",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T10-randomized",
+ "byte_length": 1085,
+ "cp_length": 1073,
+ "sha256": "38860f2fef4f2cac697f06902bc597eca27661729e557e6bf88f40a4df15e3bd",
+ "document": "Pri projektu Mladinski tabor 2023 je voditelj Anže zabeležil blage glavobole. Včasih pomaga mirna soba in hladna krpa. Če se pojavijo z bruhanjem ali motnjami vidu, je treba takoj poklicati zdravnika. To je zgolj testno opozorilo.\n$$\\frac{\\xi}{\\eta - 2} = \\frac{8}{13} + \\alpha = \\text{Nova Gorica}$$\n> Projekt Brina, avtor *Luka*: masa 8 g.\n> > Test vsebina je nevtralna.\n<poroca id='šesti' ime='Marko Kranjc' letnik='2024'><stevilo obseg='1.204 kos'>Izdelani artikli</stevilo></poroca>\n> Projekt Mlin, avtor *Eva*: obseg 3 m.\n> > Rezultat je 15 kg.\n| Projektna tema | Meritev | Vrednost |\n| --- | --- | --- |\n| Testni projekt Ane | Dolžina | 12 m |\n| Vzorčni podatki Petra | Masa | 3 kg |\nV testnem projektu <b>Sivi vrh</b> je <i>Barbara Zajc</i> preverila <span>800 hPa</span> tlak.<br/>Druga vrednost je 810 hPa.\nposta@oddelek.primer.si\nLena iz izmišljenega projekta Zdravi dnevni krog je zapisala, da stres pogosto spremljajo napete mišice in počasnejši spanec. Zaradi teh sprememb ni mogoče zanesljivo sklepati o vzrokih, zato je smiselno pogovarjati se z zdravnikom.",
+ "components": [
+  {
+   "component_id": "comp-prose-medicine-explainer-dev-0013",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 234
+  },
+  {
+   "component_id": "comp-math-display-dollar-dev-0007",
+   "category": "math",
+   "start_byte": 235,
+   "end_byte": 304
+  },
+  {
+   "component_id": "comp-markdown-blockquotes-dev-0005",
+   "category": "markdown",
+   "start_byte": 305,
+   "end_byte": 376
+  },
+  {
+   "component_id": "comp-structured-xml-dev-0006",
+   "category": "structured",
+   "start_byte": 377,
+   "end_byte": 492
+  },
+  {
+   "component_id": "comp-markdown-blockquotes-dev-0006",
+   "category": "markdown",
+   "start_byte": 493,
+   "end_byte": 555
+  },
+  {
+   "component_id": "comp-markdown-tables-dev-0009",
+   "category": "markdown",
+   "start_byte": 556,
+   "end_byte": 697
+  },
+  {
+   "component_id": "comp-markdown-raw-html-dev-0007",
+   "category": "markdown",
+   "start_byte": 698,
+   "end_byte": 823
+  },
+  {
+   "component_id": "comp-machine-emails-dev-0006",
+   "category": "machine",
+   "start_byte": 824,
+   "end_byte": 847
+  },
+  {
+   "component_id": "comp-prose-medicine-explainer-dev-0001",
+   "category": "prose",
+   "start_byte": 848,
+   "end_byte": 1085
+  }
+ ]
+}

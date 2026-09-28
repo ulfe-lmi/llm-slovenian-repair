@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-000485",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T2-prose-math-prose",
+ "byte_length": 781,
+ "cp_length": 769,
+ "sha256": "8b4fe2259d372f5d2a0eb77444526a517f9ed0c38c7819df95ce44bcfe6e2011",
+ "document": "Igor je v bazenu v Ljubljani (projektne lokacije za testno vsebino) preizkusil nov tempo plavanja. Prve sto metrov je plaval počasi, naslednjih dvajset metrov pa poskusil hitreje. Plavalec je na koncu rekel: „Ritem je bil dober, vendar mi je zmanjkalo zadnjih dvajsetih.“\n\\[ \\begin{bmatrix} \\theta_1 & \\mu_2 & 5 \\\\ 4 & \\phi_3 & -\\lambda_1 \\\\ \\sigma_2 & 9 & \\text{Savinja} \\end{bmatrix} \\]\nNa Korčuli smo imeli dan brez načrtov; namesto tega smo se izprehodili po starem mestnem jedru in poslušali zgodbe o pomorskih potovanjih. V malem gostilniku so ponujali ribo, pečeno v papirju. Po jedi smo poskusili lokalno vino, ki je bilo rahlo sladko. Zvečer je pristan spet oživel, ko so se vrnila plovila. Naslednji zjutraj smo se odločili, da bomo pot nadaljevali po kopnem.",
+ "components": [
+  {
+   "component_id": "comp-prose-sports-dev-0008",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 276
+  },
+  {
+   "component_id": "comp-math-bracket-tex-dev-0002",
+   "category": "math",
+   "start_byte": 277,
+   "end_byte": 393
+  },
+  {
+   "component_id": "comp-prose-travel-dev-0004",
+   "category": "prose",
+   "start_byte": 394,
+   "end_byte": 781
+  }
+ ]
+}

@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-002602",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T7-prose-json-prose-latex",
+ "byte_length": 828,
+ "cp_length": 809,
+ "sha256": "33f482495c2bbe1d4acc7a301ee63b346bb3dd322dcf2b44b83aba1468a0a6c7",
+ "document": "Luka je v projektu Soba za okuse v soboto zjutraj odprl lonček in vonj po karameliziranih čebulicah je zapolnil celo sobo. Sol je dodal šele ob koncu, ker se je spomnil na zgodnjo napako. Nato je v dnevnik zapisal samo eno opombo: „Pri kuhanju se ne mudi.“\n{\"ime\":\"Projekt Lipa\",\"cilj\":\"Nalaganje podatkov 25 %\",\"avtorsko\":\"Nevtralna testna vsebina\",\"merila\":{\"razmerje\":\"3,5 m / 0,13\",\"opomba\":\"**Test** https://primer.si/novica\"}}\n„Zdravje ni samo odsotnost bolečine“ je poudaril Marko, ko je v projektu Zdravi pogovori spregovoril o pomenu počitka. Vsak človek se mora poslušati in poznati svoje omejitve. Obremenjenost se lahko kaže različno, na primer v napetosti ali v slabšem spanju. Če se nelagodje ne umiri, mora biti naslednji korak obisk zdravnika.\n\\(\\dfrac{7}{8}+\\frac{\\iota}{\\kappa}=\\text{Nina}\\)",
+ "components": [
+  {
+   "component_id": "comp-prose-cooking-dev-0010",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 263
+  },
+  {
+   "component_id": "comp-structured-json-dev-0001",
+   "category": "structured",
+   "start_byte": 264,
+   "end_byte": 439
+  },
+  {
+   "component_id": "comp-prose-medicine-explainer-dev-0003",
+   "category": "prose",
+   "start_byte": 440,
+   "end_byte": 778
+  },
+  {
+   "component_id": "comp-math-fractions-dev-0004",
+   "category": "math",
+   "start_byte": 779,
+   "end_byte": 828
+  }
+ ]
+}

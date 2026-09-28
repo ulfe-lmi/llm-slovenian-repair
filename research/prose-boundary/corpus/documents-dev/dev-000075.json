@@ -1,0 +1,71 @@
+{
+ "doc_id": "dev-000075",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T10-randomized",
+ "byte_length": 1308,
+ "cp_length": 1290,
+ "sha256": "8f29e0bd8ba1cd13024bbbe9bcd87c7f7d2edfcdc5324590b797ad6875b0e118",
+ "document": "Palermo, glavno mesto Sicilije, je leta 2022 ponujal nenavadno kombinacijo zvočnih ulic, barvitih tržnic in starinske arhitekture. Priporočamo obisk katedrale in sprehod po starem mestnem jedru, zlasti zvečer.\n```\n#include <string>\n// *Test* za _označevanje_, čokolada\nint glavna() {\n    int seStez = 8;\n    int razdelek2 = seStez + 2;\n    std::string opis = \"Cena: 3 $ (nevtralno)\";\n    return razdelek2;\n}\n```\n-v, --podrobnosti\n| Področje | Enota | Površina |\n| --- | --- | --- |\n| Sotek 3 | m2 | 180 |\n| Sotek 4 | ha | 2 |\nkoeficient,\"0,13\"\n{ naslov: 'Ljubljanska sončna razstava', oseba: 'Ana Kovač', delež: '25 %', višina: '3,5 m', koeficient: '0,13', vir: https://primer.si/novica }\nv1.2.3, 25 %, 42 obr/min\nmake preizkus\n\\begin{equation} \\text{Testni projekt Nika} \\; : \\; \\delta_7=\\frac{1}{2} \\rho_7 \\eta_7 \\Rightarrow \\rho_7=4, \\eta_7=5 \\Rightarrow \\delta_7=10 \\end{equation}\nV Občini Srednji Grič je od lanskega aprila potekalo posvetovanje o novem postopku za izdajo gradbenih dovoljenj. (Cilj je bil krajši rok za obravnavo zahtev.) Upravni uradnik Marko Zajc je pripravil povzetek komentarjev, ki so jih oddali posamezniki, podjetja in društva. Do konca leta 2025 so želeli uvesti enotno elektronsko knjižico, vendar se je izkazalo, da je treba najprej uskladiti terminologijo.",
+ "components": [
+  {
+   "component_id": "comp-prose-travel-dev-0010",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 213
+  },
+  {
+   "component_id": "comp-code-cpp-dev-0007",
+   "category": "code",
+   "start_byte": 214,
+   "end_byte": 417
+  },
+  {
+   "component_id": "comp-machine-cli-flags-dev-0002",
+   "category": "machine",
+   "start_byte": 418,
+   "end_byte": 435
+  },
+  {
+   "component_id": "comp-markdown-tables-dev-0008",
+   "category": "markdown",
+   "start_byte": 436,
+   "end_byte": 533
+  },
+  {
+   "component_id": "comp-structured-keyvalue-dev-0005",
+   "category": "structured",
+   "start_byte": 534,
+   "end_byte": 551
+  },
+  {
+   "component_id": "comp-structured-keyvalue-dev-0002",
+   "category": "structured",
+   "start_byte": 552,
+   "end_byte": 700
+  },
+  {
+   "component_id": "comp-machine-versions-numbers-units-dev-0007",
+   "category": "machine",
+   "start_byte": 701,
+   "end_byte": 725
+  },
+  {
+   "component_id": "comp-machine-shell-commands-dev-0002",
+   "category": "machine",
+   "start_byte": 726,
+   "end_byte": 739
+  },
+  {
+   "component_id": "comp-math-equation-env-dev-0007",
+   "category": "math",
+   "start_byte": 740,
+   "end_byte": 896
+  },
+  {
+   "component_id": "comp-prose-administration-dev-0001",
+   "category": "prose",
+   "start_byte": 897,
+   "end_byte": 1308
+  }
+ ]
+}

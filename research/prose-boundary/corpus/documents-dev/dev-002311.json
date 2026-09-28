@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-002311",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T2-prose-math-prose",
+ "byte_length": 1019,
+ "cp_length": 987,
+ "sha256": "5713fe7d324eda5b17715ef90b36519d41b7d9f04039a7d2e29e454354c9cc05",
+ "document": "V starem receptu iz leta 1958 stoji, da se ajdova juha iz Ljubljane najprej posoli, nato pa počasi premeša, da ne bi zgrudila. “Ajda mora dišati po štrukljih,” je nekoč zapisala Anja, ki je testirala recept za projektni dnevnik okusov (po mnenju njene sestre, Marice). Pri pripravi je bil pomemben tudi čas: deset minut mešanja, nato pa še kratko ohlajanje na hladni plošči.\n\\begin{equation} \\text{Testni projekt Janez} \\; : \\; \\int_{0}^{1} 2\\alpha_4 \\, \\mathrm{d}\\alpha_4=\\alpha_4^2 \\big|_{0}^{1} \\Rightarrow \\int_{0}^{1} 2\\alpha_4 \\, \\mathrm{d}\\alpha_4=1 \\end{equation}\n»To ni povprečje,« je dejal Marko, »ampak mediana, ki jo pogosto zamenjamo s povprečno vrednostjo.« Ko so se v razpravi projekta Glasnik pogovarjali o plačah, so na mizi omenili tudi srednjo vrednost (kot računsko povprečje). Sam visok znesek je povprečje potegnilo navzgor, medtem da je mediana ostala bližje vsakdanji izkušnji. »V razmerju med izplačili in stroški,« je dodal, »je treba paziti, kaj sploh merimo.«",
+ "components": [
+  {
+   "component_id": "comp-prose-cooking-dev-0001",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 388
+  },
+  {
+   "component_id": "comp-math-equation-env-dev-0004",
+   "category": "math",
+   "start_byte": 389,
+   "end_byte": 585
+  },
+  {
+   "component_id": "comp-prose-statistics-dev-0012",
+   "category": "prose",
+   "start_byte": 586,
+   "end_byte": 1019
+  }
+ ]
+}

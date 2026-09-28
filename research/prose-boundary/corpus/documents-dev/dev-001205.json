@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-001205",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T7-prose-json-prose-latex",
+ "byte_length": 789,
+ "cp_length": 777,
+ "sha256": "e498990f88690abe0359c716142410c4eed6fbad192e9dc8c15649402de85668",
+ "document": "V okviru projekta Reka je bila jeklena konstrukcija obnašala stabilno, tudi po močnem pihu. Most je bil dolg 412 metrov. Nosilci so bili premazani z epoksi premazom. Vetrovna obremenitev je bila izračunana za 30 let.\n{\"ime\":\"Oseba Miha\",\"dolžina\":\"1,8 m\",\"avtorsko\":\"Nevtralna testna vsebina\",\"razmerje\":\"0,13\",\"opomba\":\"*Izmišljena oseba* https://primer.si/novica\"}\nLuka je v vaji Zimska razpotje (2021) rekel: „Spremenljivke so imena, ki jih poznamo kot kratek dom za spremembe.“ Medtem ko je zanka štel korake do prvega snega, je funkcija poskrbela za isti preizkus, ne da bi ponovil vse korake. To je pomembno, pravi on, ker program postane lažje berljiv. (Tudi kratki vstavki pomagajo razložiti pomene.)\n\\(\\left(\\frac{\\psi^7}{11-\\chi}+\\sqrt{6+\\rho}\\right)_{\\text{Filip}}\\)",
+ "components": [
+  {
+   "component_id": "comp-prose-engineering-dev-0003",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 219
+  },
+  {
+   "component_id": "comp-structured-json-dev-0006",
+   "category": "structured",
+   "start_byte": 220,
+   "end_byte": 371
+  },
+  {
+   "component_id": "comp-prose-programming-explainer-dev-0012",
+   "category": "prose",
+   "start_byte": 372,
+   "end_byte": 720
+  },
+  {
+   "component_id": "comp-math-paren-tex-dev-0006",
+   "category": "math",
+   "start_byte": 721,
+   "end_byte": 789
+  }
+ ]
+}

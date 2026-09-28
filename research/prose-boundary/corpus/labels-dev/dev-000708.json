@@ -1,0 +1,122 @@
+{
+ "doc_id": "dev-000708",
+ "byte_length": 947,
+ "cp_length": 923,
+ "regions": [
+  {
+   "start_byte": 0,
+   "end_byte": 2,
+   "start_cp": 0,
+   "end_cp": 2,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 2,
+   "end_byte": 248,
+   "start_cp": 2,
+   "end_cp": 239,
+   "component_id": "comp-prose-everyday-advice-dev-0002",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 248,
+   "end_byte": 251,
+   "start_cp": 239,
+   "end_cp": 242,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 251,
+   "end_byte": 252,
+   "start_cp": 242,
+   "end_cp": 243,
+   "component_id": "comp-code-c-dev-0002",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 252,
+   "end_byte": 313,
+   "start_cp": 243,
+   "end_cp": 303,
+   "component_id": "comp-code-c-dev-0002",
+   "category": "code",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 313,
+   "end_byte": 314,
+   "start_cp": 303,
+   "end_cp": 304,
+   "component_id": "comp-code-c-dev-0002",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 314,
+   "end_byte": 317,
+   "start_cp": 304,
+   "end_cp": 307,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 317,
+   "end_byte": 528,
+   "start_cp": 307,
+   "end_cp": 514,
+   "component_id": "comp-prose-sports-dev-0013",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 528,
+   "end_byte": 531,
+   "start_cp": 514,
+   "end_cp": 517,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 531,
+   "end_byte": 903,
+   "start_cp": 517,
+   "end_cp": 882,
+   "component_id": "comp-prose-literature-dev-0005",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 903,
+   "end_byte": 947,
+   "start_cp": 882,
+   "end_cp": 923,
+   "component_id": "template",
+   "category": null,
+   "role": "PROSE",
+   "template_owned": true
+  }
+ ],
+ "invariants": {
+  "tiling_complete": true,
+  "no_contradictory_overlaps": true,
+  "cp_range_exact": true
+ }
+}

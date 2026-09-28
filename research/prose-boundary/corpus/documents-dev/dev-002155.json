@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-002155",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T11-interactions",
+ "byte_length": 1081,
+ "cp_length": 1062,
+ "sha256": "89b2d0955acb4dca476e282ae09b0d45ad0e70f568d89c3dfb56eda77144b4bf",
+ "document": "`#!/usr/bin/env bash`.\n```\n/* Testni fragment 1: izmišljena oseba Maja, projekt Roža. */ SELECT 'Maja' AS `ime`, '1,20 $' AS `cena`, 'https://primer.si/koda' AS `url`, 'src/modul.py' AS `pot`, TRIM('*poudarek* in _podčrtano_') AS `opomba`, 'razdelek2' AS `razdelek2`, 'seStez' AS `seStez`, 'č' AS `HRAŠNA_VREDNOST` FROM (SELECT 1 AS `en`) AS `t` WHERE (`t`.`en` = 1);\n# komentar z \\frac{a}{b}\n```\nV projektu Podgorska steza je spajalec Matej Vidmar najprej preveril zavaritve nosilnih elementov. Material je bil iz jekla S355. Pri presoji je, kakor navaja dnevnik, uporabil digitalni merilnik debeline. »Ni vse v redu, če je površina preveč obrabljena,« je opozoril. Na koncu je ekipa odobrila nadaljnjo uporabo.\nKadar učenci rešujejo enačbe, jim je koristno, da najprej povežejo oba dela z istimi dejanji, da ostane zvezek ravnovesja (kot pri tehtnici). Pri projektu Šolske številke so v letu 2021 poskusili z besedilnimi nalogami, v katerih je neznanka skrita v vsakdanji razgovoru. Zaradi tega se učenci naučijo, da razlaga ni le zapis, ampak način misljenja.",
+ "components": [
+  {
+   "component_id": "comp-code-shell-bash-dev-0010",
+   "category": "code",
+   "start_byte": 0,
+   "end_byte": 21
+  },
+  {
+   "component_id": "comp-code-sql-dev-0001",
+   "category": "code",
+   "start_byte": 23,
+   "end_byte": 401
+  },
+  {
+   "component_id": "comp-prose-engineering-dev-0010",
+   "category": "prose",
+   "start_byte": 402,
+   "end_byte": 722
+  },
+  {
+   "component_id": "comp-prose-math-explainer-dev-0006",
+   "category": "prose",
+   "start_byte": 723,
+   "end_byte": 1081
+  }
+ ]
+}

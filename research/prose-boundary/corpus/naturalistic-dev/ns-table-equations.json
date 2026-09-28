@@ -1,0 +1,68 @@
+[
+ {
+  "case_id": "nat-table-equations-dev-01",
+  "scenario": "ns-table-equations",
+  "scenario_index": 2,
+  "instance": "dev",
+  "fragment": "Naslov: Primer za izmišljen projekt Zelena mreža\n\nTa razlaga prikazuje, kako v projektu Zelena mreža ocenjujemo izboljšavo porabe energije po posodobitvi naprav. Vse osebe in številke so izmišljene.\n\nTabela podatkov:\n\n| Obdobje | Ekipa | Poraba (kWh) | Zmanjšanje (%) |\n| --- | --- | ---: | ---: |\n| Januar | Maja | 1200 | 4 |\n| Februar | Tomaž | 1150 | 7 |\n| Marec | Nina | 1080 | 13 |\n\nEnačba za oceno prihranka je $P_n = P_0(1-r)^n$, kjer $P_0$ predstavlja začetno porabo, $r$ mesečno zmanjšanje in $n$ število mesecev.\n\nPostopek:\n- zberemo podatke,\n- izračunamo povprečje,\n- primerjamo z namenom.\n\nKratek izpis:\n```text\nZelena mreža: mesečni pregled\n```\n\nIz tega je vidno, da najvišje zmanjšanje doseže ekipa Nina, zato priporočamo širitev njene metode. Ta preprost pregled pomaga pri načrtovanju nadaljnjih ukrepov v izmišljenem okolju.",
+  "fragment_sha256": "76be0ba4ca1f5e4c92d3cf299842a30af29b2e69967cabad798562cb7a90df66",
+  "fragment_bytes": 865,
+  "prompt_sha256": "6a96650633109f3126b7a1972ea48e35cf4b1d1e644689a0a09525da8e3594a2",
+  "seed": "7ac075dc9c9907ff"
+ },
+ {
+  "case_id": "nat-table-equations-dev-02",
+  "scenario": "ns-table-equations",
+  "scenario_index": 2,
+  "instance": "dev",
+  "fragment": "Za projekt Modra reka smo v marcu 2025 izvedli raziskavo o čustvenem odzivu uporabnikov na dvojeziknega pomočnika. Udeleženci so bili trije izmišljeni uporabniki: Ana, Boštjan in Cvetka. Vsak je ocenil razumevanje odgovorov na lestvici od 1 do 5. Povprečna ocena po skupinah je prikazana v spodnji tabeli.\n\n| Skupina | Uporabnik | Ocena |\n| --- | --- | --- |\n| Kontrolna | Ana | 4,2 |\n| Kontrolna | Boštjan | 3,8 |\n| Poskusna | Cvetka | 4,6 |\n\nZa primerjavo razlik smo uporabili enostavno enačbo za povprečno spremembo:\n\\[\n\\Delta = \\bar{x}_2 - \\bar{x}_1\n\\]\nkjer je \\(\\bar{x}_1\\) povprečje kontrolne skupine in \\(\\bar{x}_2\\) povprečje poskusne skupine. V tem primeru je \\(\\Delta = 4,6 - 4,0 = 0,6\\), kar nakazuje, da so uporabniki v poskusni skupini odgovore ocenili nekoliko bolje. Razlika ni statistično značilna, ker je vzorec majhen, zato rezultat za zdaj obravnavamo le kot usmeritev. Pri prihodnjem razvoju bomo v projekt dodali več izmišljenih uporabnikov in merili tudi čas do končnega razumevanja.",
+  "fragment_sha256": "59fe362ed1a639b56cf865d56bd13400539e84f44bdcfce52ea5a59949ee9f95",
+  "fragment_bytes": 1022,
+  "prompt_sha256": "6a96650633109f3126b7a1972ea48e35cf4b1d1e644689a0a09525da8e3594a2",
+  "seed": "7ac075dc9c9907ff"
+ },
+ {
+  "case_id": "nat-table-equations-dev-03",
+  "scenario": "ns-table-equations",
+  "scenario_index": 2,
+  "instance": "dev",
+  "fragment": "V izmišljenem projektu Sončni dol so ekipe Maja, Petar in Nina spremljali porabo energije v treh hišah med januarjem in februarjem. Podatki so izmišljeni in služejo le za ilustracijo.\n\n| Hiša | Januar | Februar | Povprečje |\n| --- | ---: | ---: | ---: |\n| Sončna | 120 | 95 | 107,5 |\n| Vetra | 140 | 110 | 125 |\n| Gora | 88 | 102 | 95 |\n\nIz podatkov je razvidno, da ima hiša Vetra največjo porabo, medtem ko je hiša Gora varčnejša. Povprečje dveh mesecev lahko ocenimo z enačbo:\n\n$$Povprečje = (x_1 + x_2) / 2$$\n\nČe vzamemo hišo Sončna, dobimo (120 + 95) / 2 = 107,5 kWh. To pomeni, da bi pri enakih pogojih v marcu lahko pričakovali približno 108 kWh. Naslednji koraki:\n- Nina testira nove osvetlitve v aprilu.\n- Maja preveri naprave na stoji.\n- Petar ponovi primerjavo za tri leta.\n\nCeloten primer je izmišljen in ne uporablja nobenih resničnih osebnih podatkov.",
+  "fragment_sha256": "8e4ad99f4ddbd8c72628032217d3b6959aa0cc79371cf18ce8d56a7dc7be83e0",
+  "fragment_bytes": 887,
+  "prompt_sha256": "6a96650633109f3126b7a1972ea48e35cf4b1d1e644689a0a09525da8e3594a2",
+  "seed": "7ac075dc9c9907ff"
+ },
+ {
+  "case_id": "nat-table-equations-dev-04",
+  "scenario": "ns-table-equations",
+  "scenario_index": 2,
+  "instance": "dev",
+  "fragment": "Predstavljamo izmišljen projekt Sončni vrt, v katerem tim oceni porabo vode pri zalivanju. Podatki iz treh tednov so:\n\n| Teden | Litre vode | Stopnja sonca |\n|---|---:|---:|\n| 1 | 120 | 65 % |\n| 2 | 145 | 72 % |\n| 3 | 160 | 80 % |\n\nRast porabe lahko približamo z linearnim modelom \\(y = a + b x\\), kjer je \\(x\\) stopnja sonca in \\(y\\) poraba vode. Če z linearno regresijo dobimo \\(b \\approx 2,2\\), to pomeni, da pri vsakih dodatnih 1 % sonca poraba narašča za približno 2,2 litra. \n\nKljučne ugotovitve:\n- Poraba se povečuje z intenziteto sonca.\n- Pri načrtovanju rezerve moramo upoštevati nihanja.\n- Priporočamo spremljanje vsak teden.\n\nTa izmišljen primer pokaže, kako preprosta matematična razlaga lahko podpre odločanje pri vzdrževanju zelenih površin.",
+  "fragment_sha256": "8a9e872751b728d33fb56eed3d041c14b28fe8a9f702e0cc432285d518bb577c",
+  "fragment_bytes": 773,
+  "prompt_sha256": "6a96650633109f3126b7a1972ea48e35cf4b1d1e644689a0a09525da8e3594a2",
+  "seed": "7ac075dc9c9907ff"
+ },
+ {
+  "case_id": "nat-table-equations-dev-05",
+  "scenario": "ns-table-equations",
+  "scenario_index": 2,
+  "instance": "dev",
+  "fragment": "## Kratka razlaga projekta\n\nV izmišljenem projektu *Modra pot* smo ocenili delo treh ekip. Ekipa A (Ana Kovač) je z 120 urami dosegla izboljšavo 18 %. Ekipa B (Luka Perko) je z 95 urami dosegla 12 %. Ekipa C (Maja Novak) je z 140 urami dosegla 21 %.\n\n| Ekipa | Vodja | Ur | Izboljšava |\n|---|---|---:|---:|\n| A | Ana Kovač | 120 | 18 % |\n| B | Luka Perko | 95 | 12 % |\n| C | Maja Novak | 140 | 21 % |\n\nZa skupno oceno uporabimo aritmetično sredino:\n$$U = \\frac{18 + 12 + 21}{3} = 17$$\n\n- Povprečna izboljšava znaša 17 %.\n- Ekipa C ima največji učinek, vendar največjo porabo ur.\n- Ekipa B najbolje izkoristi razpoložljiv čas.\n\nCilj projekta je bil preveriti, ali lahko manjše ekipe dosežejo primerljiv učinek s krajšim časom. Podatki kažejo, da lahko kombinacija jasnih ciljev in manjše porabe ur zmanjša stroške, ne da bi izgubili kakovost.\n\nRezultat kaže, da več ur nujno ne prinese večjega učinka. V naslednjem kroku bomo poskusili združiti metodo ekipe C z učinkovitejšim načrtom ekipe B.",
+  "fragment_sha256": "d1c52cbb91158922fd908f761f224c6ba4d0b79ef353c2d5c7fe9dcd6521451c",
+  "fragment_bytes": 1023,
+  "prompt_sha256": "6a96650633109f3126b7a1972ea48e35cf4b1d1e644689a0a09525da8e3594a2",
+  "seed": "7ac075dc9c9907ff"
+ },
+ {
+  "case_id": "nat-table-equations-dev-06",
+  "scenario": "ns-table-equations",
+  "scenario_index": 2,
+  "instance": "dev",
+  "fragment": "V izmišljenem projektu Sončni park Ljubljana smo preverjali letne rezultate treh faz. Odgovorni sta bila Ana Kovač in Marko Horvat, ekipa pa je uporabila preproste indikatore. Glavni cilj je bil oceniti, ali se bo donesek izboljšal po servisu.\n\n```python\nizkoristek = donos / (moc * ure)\n```\n\nTabela prikazuje izmišljene podatke:\n\n| leto | donos (MWh) | izraba (%) |\n|---|---|---|\n| 2025 | 820 | 21,4 |\n| 2026 | 865 | 22,7 |\n\nRazlaga je preprosta: donos je odvisen od imenovane moči, sončnega opazovanja in učinkovitosti sistema. To lahko zapišemo kot\n\n\\[ E = P_{nom} \\cdot h \\cdot \\eta \\]\n\nkjer je E letni donos, P_nom imenovana moč, h udejenih sončnih ur in eta skupni izkoristek.\n\nNaslednji koraki:\n\n- pregled inverterjev\n- čiščenje panelov\n- primerjava z meteorološkimi podatki\n\nVsi podatki in osebe so izmišljeni, zato so zgolj primer. Pregled je pokazal, da je izboljšanje največje v drugi fazi, ker so bile zamenjane zavarovalne enote.",
+  "fragment_sha256": "db674bdddef4e81280e9ea814ef4bc16fcae93c5e0185f9fa860d46557496a7f",
+  "fragment_bytes": 960,
+  "prompt_sha256": "6a96650633109f3126b7a1972ea48e35cf4b1d1e644689a0a09525da8e3594a2",
+  "seed": "7ac075dc9c9907ff"
+ }
+]

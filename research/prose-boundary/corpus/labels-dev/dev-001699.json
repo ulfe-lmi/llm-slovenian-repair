@@ -1,0 +1,102 @@
+{
+ "doc_id": "dev-001699",
+ "byte_length": 867,
+ "cp_length": 849,
+ "regions": [
+  {
+   "start_byte": 0,
+   "end_byte": 276,
+   "start_cp": 0,
+   "end_cp": 269,
+   "component_id": "comp-prose-statistics-dev-0006",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 276,
+   "end_byte": 277,
+   "start_cp": 269,
+   "end_cp": 270,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 277,
+   "end_byte": 278,
+   "start_cp": 270,
+   "end_cp": 271,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 278,
+   "end_byte": 309,
+   "start_cp": 271,
+   "end_cp": 301,
+   "component_id": "comp-prose-education-dev-0008",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 309,
+   "end_byte": 311,
+   "start_cp": 301,
+   "end_cp": 303,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 311,
+   "end_byte": 343,
+   "start_cp": 303,
+   "end_cp": 335,
+   "component_id": "comp-machine-urls-dev-0005",
+   "category": "machine",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 343,
+   "end_byte": 344,
+   "start_cp": 335,
+   "end_cp": 336,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 344,
+   "end_byte": 345,
+   "start_cp": 336,
+   "end_cp": 337,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 345,
+   "end_byte": 867,
+   "start_cp": 337,
+   "end_cp": 849,
+   "component_id": "comp-prose-education-dev-0008",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  }
+ ],
+ "invariants": {
+  "tiling_complete": true,
+  "no_contradictory_overlaps": true,
+  "cp_range_exact": true
+ }
+}

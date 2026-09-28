@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-000205",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T8-quote-fenced",
+ "byte_length": 603,
+ "cp_length": 593,
+ "sha256": "7f51fbbe28564984516de0f599783ef81bcab310a5afe7dac59deeb7f87752c7",
+ "document": "> Čistilna mizarica v testnem projektu Čist in varčen dom ne potrebuje desetih različnih sredstev. Dovolj je topa voda, malo sredstva za maščobe in krpa, ki jo po uporabi speremo. Nekoč, leta 2021, je Petra iz Kranja za kuhinjo porabila samo pet evrov za krpe in tri evre za sredstvo, kar je za gospodinjstvo z dvema otrokoma hitro postalo navada. `fn žir(razdelek2: i64) -> bool { /* Testni projekt Lipa: č, `\n```\n# Testni projekt: Povzetek; avtor: Maja Lipovnik\nnaslov = 'Povzetek: **pomembno** in *poudarek*'\npot = 'docs/vir.txt'\ncena = '20 $ (čisto test)'\nif naslov:\n    print('Konec')\n```",
+ "components": [
+  {
+   "component_id": "comp-prose-everyday-advice-dev-0012",
+   "category": "prose",
+   "start_byte": 2,
+   "end_byte": 354
+  },
+  {
+   "component_id": "comp-code-rust-dev-0004",
+   "category": "code",
+   "start_byte": 355,
+   "end_byte": 419
+  },
+  {
+   "component_id": "comp-code-python-dev-0008",
+   "category": "code",
+   "start_byte": 420,
+   "end_byte": 603
+  }
+ ]
+}

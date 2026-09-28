@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-002461",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T9-prose-malformed-prose",
+ "byte_length": 601,
+ "cp_length": 589,
+ "sha256": "95de61bf29f12baf2b252f69345378d1ee0dd34547387a3d45121e12978077b0",
+ "document": "V projektu Gorski dnevnik je Anja pojasnila, da spremenljivka deluje kot imenovana skrinjica, v kateri hranimo eno vrednost. Ko je program ponavljal preverjanje vremenskih podatkov, je zanka pretekle dni v vrsti in ohranila le najhladnejše. Funkcija, ki je izračunala povprečje, je bila kot majhno orodje, saj so jo znali poklicati vedno znova brez ponavljanja besedila.\n$5 je cena testnega vzorca v projektu Tihi Vrh.\nLuka je ob petku opoldne odigral prijateljski nogometni dvoboj na travniku. „Kolega,“ je trener rekel znavo, „v naslednji sezoni bomo potrebovali boljšo zvezo v obrambi.“",
+ "components": [
+  {
+   "component_id": "comp-prose-programming-explainer-dev-0011",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 373
+  },
+  {
+   "component_id": "comp-malformed-unmatched-dollar-dev-0001",
+   "category": "malformed",
+   "start_byte": 374,
+   "end_byte": 421
+  },
+  {
+   "component_id": "comp-prose-sports-dev-0006",
+   "category": "prose",
+   "start_byte": 422,
+   "end_byte": 601
+  }
+ ]
+}

@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-002960",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T2-prose-math-prose",
+ "byte_length": 712,
+ "cp_length": 701,
+ "sha256": "d50a3962f23eabd041d55ea34e87de3a5ac4a54605e179bbf0ab4ca48a89361e",
+ "document": "V raziskavi Mestni tisk, ki jo vodita Meta Zorman in Ivo Perko, je knjižnost prikazana kot sloj spomina, kjer se prepletajo slovenske pripovedke (poletni tabor v Zgornji Gori), roman Emila Brandta in zgodnja revija za otroško literaturo. Tisti odlomek, ki ga raziskovalci poimenujejo »Tiho zrcalo«, pokaže, kako motiv vrnitve iz tuje dežele postane orodje za preučevanje medgeneracijskih razhujanj.\n\\(\\frac{3}{4}-\\dfrac{\\delta}{\\varepsilon}=\\text{Luka}\\)\nMednarodna skupina, ki dela v izmišljenem arhivu Ljubljana, je pregledovala dopise iz leta 1804, v katerih omenjajo potovanja po dolini. V vstavku (ki ga je zapisala Taja) piše: »Razdalje so merili s koraki in verstami, ne pa z modernimi merami.«",
+ "components": [
+  {
+   "component_id": "comp-prose-literature-dev-0012",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 405
+  },
+  {
+   "component_id": "comp-math-fractions-dev-0002",
+   "category": "math",
+   "start_byte": 406,
+   "end_byte": 461
+  },
+  {
+   "component_id": "comp-prose-history-dev-0002",
+   "category": "prose",
+   "start_byte": 462,
+   "end_byte": 712
+  }
+ ]
+}

@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-001517",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T11-interactions",
+ "byte_length": 945,
+ "cp_length": 922,
+ "sha256": "cf522666acab621b229d7fa5003ac39623708e9ed8325e0d9b35f6ac9261f5a2",
+ "document": "`int HRAŠNA_VREDNOST = 1; int main(void) { char *pot = \"docs/`.\n```\nfn žir(razdelek2: i64) -> bool { /* Testni projekt Lipa: č, š, ž, *zvezdice* in _podčrtano_ */ let seStez = true; let HRAŠNA_VREDNOST = 2; let tekst = \"**Nova** (1 $) `č` _ž_\"; let pot = \"docs/vir.txt\"; let url = \"https://primer.si/koda\"; let _ = (HRAŠNA_VREDNOST, tekst, pot, url); seStez && razdelek2 > 0 }\n# komentar z \\frac{a}{b}\n```\nV zapisku potujočega knjigarja, ki ga je našla Maja Zupan, stoji o srečanju na trgu v Benečiji. »Noben dokument ne pove, koliko časa je trajalo dogovarjanje,« je zapisala v povzetku. Nato so v istem spisu omenili plovilo, ki je prevozilo štiri tone soli skozi ozek kanal. Letnico 1740 je avtor pustil le v margini, brez dneva ali meseca.\n»Za omaro s posodo ne rabiš dragih sredstev,« je v projektu Varčni dom rekla Ana, da je dovolj topla voda in kapljica naravne citronike. Steklo se briše v eni smeri, da ni pasov.",
+ "components": [
+  {
+   "component_id": "comp-code-c-dev-0006",
+   "category": "code",
+   "start_byte": 0,
+   "end_byte": 63
+  },
+  {
+   "component_id": "comp-code-rust-dev-0004",
+   "category": "code",
+   "start_byte": 65,
+   "end_byte": 415
+  },
+  {
+   "component_id": "comp-prose-history-dev-0007",
+   "category": "prose",
+   "start_byte": 416,
+   "end_byte": 761
+  },
+  {
+   "component_id": "comp-prose-everyday-advice-dev-0007",
+   "category": "prose",
+   "start_byte": 762,
+   "end_byte": 945
+  }
+ ]
+}

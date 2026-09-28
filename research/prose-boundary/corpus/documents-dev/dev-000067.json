@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-000067",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T2-prose-math-prose",
+ "byte_length": 806,
+ "cp_length": 796,
+ "sha256": "fc7a4d93a8c860f48ffaecda7041a581c12cfe333f923ea37327f9b9d0b904aa",
+ "document": "Pri projektu Zimska lučka je Katja poizkusila z dvema baterijama in dvema upornostma. A sklep je bil sprva odprt. Ko je na koncu pritiskala na stikalo, se je dioda vžgala. V dnevni sobi so slišali le tihi, zadovoljen smeh.\n\\begin{align} \\alpha_5(\\text{Sonce}) &\\le \\beta_5 + \\gamma_5 \\\\ \\delta_5 &\\ge \\epsilon_5 \\times \\zeta_5 \\\\ \\eta_5 &= \\theta_5 \\end{align}\nV soboto, ko je bilo poleti 24 stopinj, je ekipa izmišljene skupine Brez napetosti v parku izvedla pet minut ogrevanja, nato pa še enajstmetrovski udarec in tri kratke teke. Igralka, ki jo je projekt imenoval Eva, je po tem dejala, da je bila noga rahlo utrujena, vendar da je bil zrak svež. 'Naslednjič bomo dodali še malo plavanja,' je opozorila ob zbiranju opreme. Na koncu so opremo zložili, zapisnik pa sta podpisala le dva člana.",
+ "components": [
+  {
+   "component_id": "comp-prose-electronics-dev-0008",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 225
+  },
+  {
+   "component_id": "comp-math-align-env-dev-0005",
+   "category": "math",
+   "start_byte": 226,
+   "end_byte": 363
+  },
+  {
+   "component_id": "comp-prose-sports-dev-0005",
+   "category": "prose",
+   "start_byte": 364,
+   "end_byte": 806
+  }
+ ]
+}

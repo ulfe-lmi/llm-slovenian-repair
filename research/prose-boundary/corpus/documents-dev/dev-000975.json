@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-000975",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T8-quote-fenced",
+ "byte_length": 860,
+ "cp_length": 845,
+ "sha256": "88e12a21b11b18f3a4b51bc1b3cd66f92ee687202e64c2120fd97595d1b32390",
+ "document": "> Slovenska pesniška tradicija ima svojo tišino. V izmišljenem projektu Glas in tišina, ki raziskuje naravno, se pojavi motiv dreves. Izmišljena pesnica Anja Horvat v zbirki iz leta 2015 piše: »Drevo ne govori, a se v šumu zdi, da je vprašanje.« Ta stavek se v evropskem kontekstu pogosto pojavi kot znak identitete. `int main(void) { char *napis = \"Tekst: *poudarjeno* in _podč`\n```\n#!/usr/bin/env bash\n# Prvi fragment: testni podatki (URL: https://primer.si/koda)\n# Oseba: Ana, projekt: vzorčni vir\n# Poti: src/modul.py, docs/vir.txt\nseStez='src/modul.py'\nrazdelek2='docs/vir.txt'\noznaka='HRAŠNA_VREDNOST'\nopis='**poudarjeno** in _podčrtano_ z *zvezdicami*'\nvaluta='10 $'\noklepaji='(vzorčni)'\necho \"pot: $seStez\"\necho \"razdelek: $razdelek2\"\necho \"oznaka: $oznaka\"\necho \"$opis\"\necho \"cena: $valuta\"\necho \"oklepaji: $oklepaji\"\necho 'znak: `'\n```",
+ "components": [
+  {
+   "component_id": "comp-prose-literature-dev-0008",
+   "category": "prose",
+   "start_byte": 2,
+   "end_byte": 326
+  },
+  {
+   "component_id": "comp-code-c-dev-0002",
+   "category": "code",
+   "start_byte": 327,
+   "end_byte": 390
+  },
+  {
+   "component_id": "comp-code-shell-bash-dev-0009",
+   "category": "code",
+   "start_byte": 391,
+   "end_byte": 860
+  }
+ ]
+}

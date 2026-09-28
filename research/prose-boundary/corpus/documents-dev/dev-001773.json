@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-001773",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T3-prose-fenced-prose",
+ "byte_length": 968,
+ "cp_length": 948,
+ "sha256": "e83fbe4b64f9c189c0a1fbff999ce50a21601aaf228649041deed86c4b8d5986",
+ "document": "V projektu Gradec je bilo pri projektiranju jeklene konstrukcije ključno, koliko obremenitve prenese nosilni presek. Mladi konstruktor Jaka Kovač je, ob podpori projektirke Lune, predlagal dodatno ojačanje in začasne podlage. Sodelavci so se po dveh tednih razprave strinjali s predlogom. Končno je most dobil tudi dodatno zaščito pred erozijo.\n```\n#include <string>\n// Projekt: *Lipa*, šentjanž\n// Preveri src/modul.py\nstd::string seStez(int razdelek2) {\n    // žlahtna vrednost: 2 $\n    return \"vrednost \" + std::to_string(razdelek2 * 2) + \" $\";\n}\n```\nV projektu Prvi korak so učitelji iz Ljubljane poskusili kratek skupinski pogovor pred ocenjevanjem, kar je po mnenju Anje zmanjšalo strah pred pisnim testom. Pri izbirnem predmetu zgodovina so uporabili učbenik z dodatnimi opombami (stran 42) in vprašanja, ki so dopuščala večkratne odgovore. Odrasli udeleženci so se zavedali, da se izpit ne piše enkrat, temveč se znanje utrjuje v vsakdanju.",
+ "components": [
+  {
+   "component_id": "comp-prose-engineering-dev-0008",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 351
+  },
+  {
+   "component_id": "comp-code-cpp-dev-0003",
+   "category": "code",
+   "start_byte": 352,
+   "end_byte": 563
+  },
+  {
+   "component_id": "comp-prose-education-dev-0006",
+   "category": "prose",
+   "start_byte": 564,
+   "end_byte": 968
+  }
+ ]
+}

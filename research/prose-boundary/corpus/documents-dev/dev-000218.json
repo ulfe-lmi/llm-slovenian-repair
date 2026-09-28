@@ -1,0 +1,71 @@
+{
+ "doc_id": "dev-000218",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T10-randomized",
+ "byte_length": 1761,
+ "cp_length": 1737,
+ "sha256": "09efab09f9e921bbe1b1c0c1e79187ebec139ee542af5a30f365d7bb00da2a65",
+ "document": "Lena iz izmišljenega projekta Zdravi dnevni krog je zapisala, da stres pogosto spremljajo napete mišice in počasnejši spanec. Zaradi teh sprememb ni mogoče zanesljivo sklepati o vzrokih, zato je smiselno pogovarjati se z zdravnikom.\n<merilo id='tretje' ime='Dolžina' enota='3,5 m'><opomba stanje='0,13'>Testni primer</opomba></merilo>\n[slovenski opis](https://primer.si/stran)\n[slovenski opis 2: Peter 3 kg](https://primer.si/stran \"Naslov 2\")\n> <https://primer.si/stran>\nD:\\datoteke\\vir.txt,\\\\streznik\\mapi\\vir.txt\nFragment 8: <ol><li>Konfiguracija: _varno_stanje_ (vrednost 0,01)</li><li>Preverjanje: *trajanje* 125 s</li><li>Dokumenti: glej <a href=\"https://primer.si/dokumenti\">dokumenti</a></li></ol>\n```\n# Testni projekt: Besedilo; avtor: Maja Lipovnik\nbesedilo = 'Črka č, š in ž'\nprojekt = 'Izmišljen projekt Lipa'\noseba = 'Maja'\nif besedilo:\n    print(besedilo)\n```\n\\text{Bled}\\begin{pmatrix}15&16&17\\\\18&19&20\\end{pmatrix}\n\\(\\frac{3}{4}-\\dfrac{\\delta}{\\varepsilon}=\\text{Luka}\\)\n```\n-- Testni SQL fragment: razpoloži\nCREATE TABLE razpolozi (\n  id INT PRIMARY KEY,\n  \"seStez\" TEXT,\n  \"razdelek2\" TEXT,\n  opomba TEXT\n);\nINSERT INTO razpolozi (id, \"seStez\", \"razdelek2\", opomba)\nVALUES (1, '**poudarek** *zvezdice*', '_podčrtano_', '12 $ / dan');\nUPDATE razpolozi SET opomba = 'Vir: https://primer.si/koda' WHERE id = 1;\nSELECT id, \"seStez\", \"razdelek2\", opomba FROM razpolozi ORDER BY id;\n```\nV izmišljenem raziskovalnem projektu “Arhiv Dravskih poti” (nevtralna testna zbirka) so zapisi o potovanjih po Dravi prikazali, kako so meje med skupnostmi spreminjale spomin na preteklost. Letnica 1918 je postala mejni simbol. Avtorica Ana Kralj je v vnosu zapisala (po mnenju uredništva), da je “zgodovina” večinoma molk med letnicami.",
+ "components": [
+  {
+   "component_id": "comp-prose-medicine-explainer-dev-0001",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 237
+  },
+  {
+   "component_id": "comp-structured-xml-dev-0003",
+   "category": "structured",
+   "start_byte": 238,
+   "end_byte": 340
+  },
+  {
+   "component_id": "comp-markdown-links-dev-0002",
+   "category": "markdown",
+   "start_byte": 341,
+   "end_byte": 477
+  },
+  {
+   "component_id": "comp-machine-windows-paths-dev-0006",
+   "category": "machine",
+   "start_byte": 478,
+   "end_byte": 521
+  },
+  {
+   "component_id": "comp-structured-html-dev-0008",
+   "category": "structured",
+   "start_byte": 522,
+   "end_byte": 711
+  },
+  {
+   "component_id": "comp-code-python-dev-0007",
+   "category": "code",
+   "start_byte": 712,
+   "end_byte": 884
+  },
+  {
+   "component_id": "comp-math-matrices-dev-0004",
+   "category": "math",
+   "start_byte": 885,
+   "end_byte": 942
+  },
+  {
+   "component_id": "comp-math-fractions-dev-0002",
+   "category": "math",
+   "start_byte": 943,
+   "end_byte": 998
+  },
+  {
+   "component_id": "comp-code-sql-dev-0009",
+   "category": "code",
+   "start_byte": 999,
+   "end_byte": 1412
+  },
+  {
+   "component_id": "comp-prose-history-dev-0011",
+   "category": "prose",
+   "start_byte": 1413,
+   "end_byte": 1761
+  }
+ ]
+}

@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-002030",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T7-prose-json-prose-latex",
+ "byte_length": 878,
+ "cp_length": 861,
+ "sha256": "4ca0e789cd24186e019504f7bb220a6d963dedde4efe6a2e5a1d58490b890754",
+ "document": "Ana iz projekta Okusne karte je zjutraj pripravila preprosto gibanico. Med testnine je stekla smetana, na vrh pa drobno rezani oreh. Pečica je žarela pol ure, da je gibanica dobila zlato barvo.\n{\"ime\":\"Projekt Reka\",\"razmerje\":\"2,5 m / 0,13\",\"avtorsko\":\"Nevtralna testna vsebina\",\"vzorec\":{\"delež\":\"30 %\",\"opis\":\"_Nevtralno_ https://primer.si/novica\"}}\nNova tiskalnica na hodniku, ki so jo za projekt »Manj zastojev« postavili blizu sprejemne pisarne, je imela poseben predal za tanke bonove, kar je presenetilo več zaposlenih. »Tiskanje«, so rekli nekateri, »je še vedno najpogostejši razlog, da se zavrtni k papirju namesto k zaslonski različici.« Ivan je zato predlagal, da se za manjše dokumente uporabi en sam predlog. V šali so dejali, da bo takrat tudi tiskalnica manj »nevoljna« ob zastoju.\n\\(\\dfrac{11}{12}+\\frac{\\rho}{\\sigma}=\\text{Projekt Javornik}\\)",
+ "components": [
+  {
+   "component_id": "comp-prose-cooking-dev-0011",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 195
+  },
+  {
+   "component_id": "comp-structured-json-dev-0004",
+   "category": "structured",
+   "start_byte": 196,
+   "end_byte": 355
+  },
+  {
+   "component_id": "comp-prose-computing-dev-0010",
+   "category": "prose",
+   "start_byte": 356,
+   "end_byte": 815
+  },
+  {
+   "component_id": "comp-math-fractions-dev-0006",
+   "category": "math",
+   "start_byte": 816,
+   "end_byte": 878
+  }
+ ]
+}

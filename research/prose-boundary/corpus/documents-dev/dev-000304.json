@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-000304",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T8-quote-fenced",
+ "byte_length": 601,
+ "cp_length": 591,
+ "sha256": "2103b36880fc9fe86d6e89adf73d88e689b0c0a75b9be1c47b540ae80f5c8133",
+ "document": "> V projektu Sona (manjša fizikalna raziskava) je Maja spremljala vibracije tankih folij pri nizkih temperaturah. Zapisovala je, da se pri približno sto in dvanajst kelvinov material odzove drugače, in to je bilo vidno že po prvih dneh. Leta dvotisoč in osemnajst je ekipa poskusila ponoviti meritve, a je veter v prostoru vplival na števce. `-- Testni SQL fragment: razpoloži`\n```\n# Testni projekt: Nabavna lista; avtor: Maja Lipovnik\ncena = 12.50\nznesek = 'Cena: 12,50 $ v oklepaju (brez DDV)'\npot = 'docs/vir.txt'\nkomentar = 'Slovenski č, š, ž'\nif cena > 10:\n    print('Visok znesek')\n```",
+ "components": [
+  {
+   "component_id": "comp-prose-science-dev-0001",
+   "category": "prose",
+   "start_byte": 2,
+   "end_byte": 347
+  },
+  {
+   "component_id": "comp-code-sql-dev-0009",
+   "category": "code",
+   "start_byte": 348,
+   "end_byte": 384
+  },
+  {
+   "component_id": "comp-code-python-dev-0002",
+   "category": "code",
+   "start_byte": 385,
+   "end_byte": 601
+  }
+ ]
+}

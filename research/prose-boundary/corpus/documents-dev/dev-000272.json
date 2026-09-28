@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-000272",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T9-prose-malformed-prose",
+ "byte_length": 721,
+ "cp_length": 703,
+ "sha256": "dfca47a5fd7fc1e7bcffb3a87da9da774582a43d68a8ae65ba722e5c553e9a41",
+ "document": "Ana je v receptu projekta Okusni dnevnik iz leta 1998 zapisala, da se krompir (najboljši iz majhne lončnice) sprti v manjših porcijah, a najprej mora odpočivat, da se okus utesni. Po njenem prepričanju: „Brez potrpežljivosti ni dobre juhe.“ Ta vstavek je bil pozneje v arhivu projekta prenesen v poseben dnevnik.\nZavod Odrasli naprej je v letu 2021 pripravil kratke izobraževalne module za poklicno usposabljanje, pri čemer so strokovni vodje poudarili jasno strukturirane učbenike in vsakodnevne vaje. Po petih tednih so udeleženci opravili preizkus znanja, ki je imel 20 vprašanj, 10 praktičnih nalog in eno ustno obrazložitev.\n`avtorizacija: Mira Kovač; projekt: Gora Bled; opomba = \"testna vsebina\";",
+ "components": [
+  {
+   "component_id": "comp-prose-cooking-dev-0006",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 322
+  },
+  {
+   "component_id": "comp-prose-education-dev-0002",
+   "category": "prose",
+   "start_byte": 323,
+   "end_byte": 646
+  },
+  {
+   "component_id": "comp-malformed-unmatched-backtick-dev-0003",
+   "category": "malformed",
+   "start_byte": 647,
+   "end_byte": 721
+  }
+ ]
+}

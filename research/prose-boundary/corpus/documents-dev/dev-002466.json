@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-002466",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T3-prose-fenced-prose",
+ "byte_length": 943,
+ "cp_length": 924,
+ "sha256": "f384ec809a727b840418a007fd2501036b19d48695c98bed6010808266ed9f99",
+ "document": "Varnostni vodič iz leta 2020 je zapisal, da se baterije nikoli ne smejo povezati v kratki sklep brez upornosti, in v vmesnem koraku je Luka preveril, ali so upornosti prave vrednosti. (Vse to je bilo del testne serije za projekt Vrtinec.)\n```\n# Fragment 5: *testni* niz (neodvisen), oseba: Petra Novak\necho 'Poudarek: **močnejši**, podčrtano: _nežno_'\necho 'Cena: 15 $ in 6 € za izmišljeno storitev'\necho 'Datoteke: src/modul.py, docs/vir.txt'\necho 'Vir: https://primer.si/koda'\necho 'Identifikatorji: HRAŠNA_VREDNOST, razdelek2, seStez'\necho 'Backquote `tukaj`; znaki: č, š, ž'\n```\nLuka je v vaji Zimska razpotje (2021) rekel: „Spremenljivke so imena, ki jih poznamo kot kratek dom za spremembe.“ Medtem ko je zanka štel korake do prvega snega, je funkcija poskrbela za isti preizkus, ne da bi ponovil vse korake. To je pomembno, pravi on, ker program postane lažje berljiv. (Tudi kratki vstavki pomagajo razložiti pomene.)",
+ "components": [
+  {
+   "component_id": "comp-prose-electronics-dev-0009",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 239
+  },
+  {
+   "component_id": "comp-code-shell-bash-dev-0005",
+   "category": "code",
+   "start_byte": 240,
+   "end_byte": 594
+  },
+  {
+   "component_id": "comp-prose-programming-explainer-dev-0012",
+   "category": "prose",
+   "start_byte": 595,
+   "end_byte": 943
+  }
+ ]
+}

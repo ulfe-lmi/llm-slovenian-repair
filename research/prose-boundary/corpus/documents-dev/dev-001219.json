@@ -1,0 +1,71 @@
+{
+ "doc_id": "dev-001219",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T10-randomized",
+ "byte_length": 1644,
+ "cp_length": 1613,
+ "sha256": "2721f718901da6a0a0ec11f9714cfef2f89347509b832369bf45d76f28e64bea",
+ "document": "V projektu Modra skica je Luka dejal, da „povprečje ni vedno sredina“, ker so trije dani zneski zelo različni. V primeru razmerja tri do pet so bila odstopanja manjša. Ana se je strinjala, vendar je opozorila na izjemne dni. Na koncu so se dogovorili, da bodo uporabili preprostejše meritve.\n--vhod arhiv/izpis.log, --izhod 1, --vzorčnost nizka\n```\n/* Zaključni test: oseba Janež, projekt Brest */ const naslov = 'Vrednost je 25 $'; const opomba = `Podpis: **Janez** (_brez šumnika_)`; const pot = 'docs/vir.txt'; const razdelek2 = 8; console.log(naslov, opomba, pot, razdelek2);\n```\n```\n/* Testni podatki za izmišljen projekt Javornik */ const opis = { naslov: 'Označi *poudarek* in **pomembno**', podnaslov: '_opomba_', datum: '2026-01-15' }; console.log(opis.naslov);\n```\njanez.kranjc@primer.si,ana.novak@primer.si,mare.beric@primer.si\nmodul_pogon.py\nPostaja *Petra* beleži _množino_ 250 mililitri.\n```\nfn HRAŠNA_VREDNOST(žvirok: i64) -> i64 { /* Testni projekt Lipa: č, š, ž, **močan** in *poudarek* */ let razdelek2: i64 = 3; let besedilo = format!(\"_Podčrtano_ ({} $)\", razdelek2); let oznaka = \"č`ž`š\"; let pot = \"src/modul.rs\"; let url = \"https://primer.si/koda\"; let _ = (besedilo, oznaka, pot, url); žvirok + razdelek2 }\n```\n<merilo id='tretje' ime='Dolžina' enota='3,5 m'><opomba stanje='0,13'>Testni primer</opomba></merilo>\nV testnem projektu Spomin 2024 sta osebi Luka in Meta poudarila, da bolečine v vratu in ramenskem predelu niso vedno znak resnega stanja. Vendar pa je smiselno, da osebo sprejme zdravnik, zlasti če se pojavi omedlevica ali motnja govora (na primer ob nenadnem slabem počutju).",
+ "components": [
+  {
+   "component_id": "comp-prose-statistics-dev-0008",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 299
+  },
+  {
+   "component_id": "comp-machine-cli-flags-dev-0005",
+   "category": "machine",
+   "start_byte": 300,
+   "end_byte": 353
+  },
+  {
+   "component_id": "comp-code-javascript-dev-0008",
+   "category": "code",
+   "start_byte": 354,
+   "end_byte": 595
+  },
+  {
+   "component_id": "comp-code-javascript-dev-0005",
+   "category": "code",
+   "start_byte": 596,
+   "end_byte": 788
+  },
+  {
+   "component_id": "comp-machine-emails-dev-0007",
+   "category": "machine",
+   "start_byte": 789,
+   "end_byte": 852
+  },
+  {
+   "component_id": "comp-machine-filenames-dev-0001",
+   "category": "machine",
+   "start_byte": 853,
+   "end_byte": 867
+  },
+  {
+   "component_id": "comp-markdown-emphasis-dev-0006",
+   "category": "markdown",
+   "start_byte": 868,
+   "end_byte": 917
+  },
+  {
+   "component_id": "comp-code-rust-dev-0003",
+   "category": "code",
+   "start_byte": 918,
+   "end_byte": 1261
+  },
+  {
+   "component_id": "comp-structured-xml-dev-0003",
+   "category": "structured",
+   "start_byte": 1262,
+   "end_byte": 1364
+  },
+  {
+   "component_id": "comp-prose-medicine-explainer-dev-0007",
+   "category": "prose",
+   "start_byte": 1365,
+   "end_byte": 1644
+  }
+ ]
+}

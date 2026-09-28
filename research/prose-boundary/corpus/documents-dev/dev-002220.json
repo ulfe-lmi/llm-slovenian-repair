@@ -1,0 +1,59 @@
+{
+ "doc_id": "dev-002220",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T10-randomized",
+ "byte_length": 1579,
+ "cp_length": 1558,
+ "sha256": "6e471822563438ae97468aebe47b54cec54d53c61cffcec383c6dfb144c4fa57",
+ "document": "Spremenljivka v projektu Lipa deluje kot imenovan koš, v katerega učenci hranijo številko, ime ali celo kratek zapis. Ko se njena vsebina zamenja, se odziv programa spremeni, zato Anja pri vadbi vedno najprej preveri, kaj se skriva za imenom. Zanka je ponavljajoč se korak, ki deluje, dokler se pogoj ne izpolni. Funkcija je pa majhno pravilo, ki sprejme nekaj podatkov in vrne jasen rezultat, kot da bi ga Luka ponovno uporil brez ponavljanja.\nrazdelek2\nparse_lexer_input\nNaloga: ~~odloženo~~ opravilo 3 dni in 2 °C za Ana Krajnc.\n```\nfn HRAŠNA_VREDNOST(žvirok: i64) -> i64 { /* Testni projekt Lipa: č, š, ž, **močan** in *poudarek* */ let razdelek2: i64 = 3; let besedilo = format!(\"_Podčrtano_ ({} $)\", razdelek2); let oznaka = \"č`ž`š\"; let pot = \"src/modul.rs\"; let url = \"https://primer.si/koda\"; let _ = (besedilo, oznaka, pot, url); žvirok + razdelek2 }\n```\n$\\alpha_{\\text{Ana projekt Lipa}} + \\beta = \\gamma$\n```\n-- Testni SQL fragment: razpoloži\nCREATE TABLE razpolozi (\n  id INT PRIMARY KEY,\n  \"seStez\" TEXT,\n  \"razdelek2\" TEXT,\n  opomba TEXT\n);\nINSERT INTO razpolozi (id, \"seStez\", \"razdelek2\", opomba)\nVALUES (1, '**poudarek** *zvezdice*', '_podčrtano_', '12 $ / dan');\nUPDATE razpolozi SET opomba = 'Vir: https://primer.si/koda' WHERE id = 1;\nSELECT id, \"seStez\", \"razdelek2\", opomba FROM razpolozi ORDER BY id;\n```\nAnja je v opombi zapisala, da so razmerja med dohodki in izdatki (v mesecu maju in juniju) nekoliko drugačna kot lani. Povprečje ni pokazalo velike spremembe, vendar je posamezen teden odstopil, kar je pritegnilo pozornost ekipi.",
+ "components": [
+  {
+   "component_id": "comp-prose-programming-explainer-dev-0006",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 448
+  },
+  {
+   "component_id": "comp-machine-identifiers-dev-0002",
+   "category": "machine",
+   "start_byte": 449,
+   "end_byte": 458
+  },
+  {
+   "component_id": "comp-machine-identifiers-dev-0004",
+   "category": "machine",
+   "start_byte": 459,
+   "end_byte": 476
+  },
+  {
+   "component_id": "comp-markdown-strikethrough-dev-0004",
+   "category": "markdown",
+   "start_byte": 477,
+   "end_byte": 537
+  },
+  {
+   "component_id": "comp-code-rust-dev-0003",
+   "category": "code",
+   "start_byte": 538,
+   "end_byte": 881
+  },
+  {
+   "component_id": "comp-math-inline-dollar-dev-0001",
+   "category": "math",
+   "start_byte": 882,
+   "end_byte": 933
+  },
+  {
+   "component_id": "comp-code-sql-dev-0009",
+   "category": "code",
+   "start_byte": 934,
+   "end_byte": 1347
+  },
+  {
+   "component_id": "comp-prose-statistics-dev-0002",
+   "category": "prose",
+   "start_byte": 1348,
+   "end_byte": 1579
+  }
+ ]
+}

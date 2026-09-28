@@ -1,0 +1,65 @@
+{
+ "doc_id": "dev-002352",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T10-randomized",
+ "byte_length": 1437,
+ "cp_length": 1415,
+ "sha256": "ba5461aa3426e59e7f6eadc2ebe0eeb583d0f84cedc17a75019e8b74ff94c9f6",
+ "document": "V zbirki Tihi bralci (2018) mlada pisateljica Nina Skof opisuje dedno knjižnico. Na stenski plošci visi seznam bralcev iz let 1954 in 1971, med njimi tudi izmišljeni pesnik Jure Čvik. Evropska literarna tradicija pozna podobno zbirko tistih, ki so izginili v prevodu. Knjižnost je tu skrita v prahu, ne v naslovu.\n```\nmoČ = 3; žrtev = (1, 2); besedilo = 'Cena: $10 `kod` **poudarek** _podčrtano_'; pot = 'docs/vir.txt' # komentar v slovenščini: testni projekt, https://primer.si/koda\n```\ntabela_01.json vir_2024.txt\n\\begin{align} \\chi_4 &= \\sqrt{\\psi_4 + \\rho_4} \\\\ \\tau_4 &= \\frac{\\upsilon_4}{\\sigma_4} \\\\ \\varphi_4 &\\approx \\xi_4 \\cdot \\beta_4 \\end{align}\nhttps://primer.si/novica#naslov\nNaloga: ~~odloženo~~ opravilo 3 dni in 2 °C za Ana Krajnc.\n[slovenski opis](https://primer.si/stran)\n[slovenski opis 5: Luka 10 %](https://primer.si/stran \"Naslov 5\")\n> <https://primer.si/stran>\n```\n# Testni projekt: Nabavna lista; avtor: Maja Lipovnik\ncena = 12.50\nznesek = 'Cena: 12,50 $ v oklepaju (brez DDV)'\npot = 'docs/vir.txt'\nkomentar = 'Slovenski č, š, ž'\nif cena > 10:\n    print('Visok znesek')\n```\nZavod Odrasli naprej je v letu 2021 pripravil kratke izobraževalne module za poklicno usposabljanje, pri čemer so strokovni vodje poudarili jasno strukturirane učbenike in vsakodnevne vaje. Po petih tednih so udeleženci opravili preizkus znanja, ki je imel 20 vprašanj, 10 praktičnih nalog in eno ustno obrazložitev.",
+ "components": [
+  {
+   "component_id": "comp-prose-literature-dev-0003",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 318
+  },
+  {
+   "component_id": "comp-code-python-dev-0011",
+   "category": "code",
+   "start_byte": 319,
+   "end_byte": 497
+  },
+  {
+   "component_id": "comp-machine-filenames-dev-0006",
+   "category": "machine",
+   "start_byte": 498,
+   "end_byte": 525
+  },
+  {
+   "component_id": "comp-math-align-env-dev-0004",
+   "category": "math",
+   "start_byte": 526,
+   "end_byte": 667
+  },
+  {
+   "component_id": "comp-machine-urls-dev-0003",
+   "category": "machine",
+   "start_byte": 668,
+   "end_byte": 699
+  },
+  {
+   "component_id": "comp-markdown-strikethrough-dev-0004",
+   "category": "markdown",
+   "start_byte": 700,
+   "end_byte": 760
+  },
+  {
+   "component_id": "comp-markdown-links-dev-0005",
+   "category": "markdown",
+   "start_byte": 761,
+   "end_byte": 896
+  },
+  {
+   "component_id": "comp-code-python-dev-0002",
+   "category": "code",
+   "start_byte": 897,
+   "end_byte": 1113
+  },
+  {
+   "component_id": "comp-prose-education-dev-0002",
+   "category": "prose",
+   "start_byte": 1114,
+   "end_byte": 1437
+  }
+ ]
+}

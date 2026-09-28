@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-001335",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T5-lists",
+ "byte_length": 866,
+ "cp_length": 839,
+ "sha256": "c154659d38b29f50819c9f56b179978af1b981ceea7bd7b0ff34879b8ab3c7d5",
+ "document": "- Pri varčevanju ni treba kupovati drage opreme, pogosto zadošča malo potrpežljivosti. Petra je v projektu Skromen koš pokazala, da se lahko v juniju 2023 prihrani denar za en kosilo. »Najprej preglej, kaj že imaš,« je zapisala v dnevniku.\n- `# Fragment 2: *neodvisen* test, oseba: Ana Kovač`\n- V okviru projekta Nova vrv so otroci iz Ljubljane v petek zvečer vadili kratke podaje. Učiteljica Maja je opazila, da so po deset minutah teka vsi bolj sproščeni.\n- V projektu Mlajša šola je Nina pripravila kratke vaje, ki učencem omogočajo, da znanje preizkusijo v praksi (na primer pri izletu v mestno knjižnico). Učenci so radi dejali, da »se učimo brez strahu pred napako«, in učiteljica je to zapisala v letno knjižico. Pri izpitu iz slovenščine so namesto dolgih nalog dobili kratek pripovedni zapis, ki so ga lahko brali in pojasnjevali.",
+ "components": [
+  {
+   "component_id": "comp-prose-everyday-advice-dev-0002",
+   "category": "prose",
+   "start_byte": 2,
+   "end_byte": 248
+  },
+  {
+   "component_id": "comp-code-shell-bash-dev-0002",
+   "category": "code",
+   "start_byte": 251,
+   "end_byte": 302
+  },
+  {
+   "component_id": "comp-prose-sports-dev-0011",
+   "category": "prose",
+   "start_byte": 305,
+   "end_byte": 471
+  },
+  {
+   "component_id": "comp-prose-education-dev-0011",
+   "category": "prose",
+   "start_byte": 474,
+   "end_byte": 866
+  }
+ ]
+}

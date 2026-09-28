@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-001458",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T7-prose-json-prose-latex",
+ "byte_length": 1026,
+ "cp_length": 1005,
+ "sha256": "b4ef9dd2087085ba813a93a334e418be24f9a5ea4a2d50d2077465d1f2b97d87",
+ "document": "V razredu smo pogovorno razložili, kako enačbe pomenijo enakost dveh izrazov, zato so učenci bolje razumeli, da se zamenja ne preprosto potegne. (Sprašila sem jih, kateri del bi se premaknil, in mnogi so povedali, da je pomembno ohraniti ravnotežje.) Ko so to povejali z dnevnim življenjem, je šlo lažje.\n{\"ime\":\"Oseba Ana\",\"vloga\":\"Koordinatorka\",\"stanje\":\"Aktivna 80 %\",\"avtorsko\":\"Nevtralna testna vsebina\",\"podrobnosti\":{\"visina\":\"3,5 m\",\"razmerje\":\"0,13\",\"opis\":\"*Preverjanje* https://primer.si/novica\"}}\nV razredu za proporcije se pogosto pojavi vprašanje: »Koliko čokoladnih ploščic pripada štirim otrokom, če imamo enajst enakih delov?« Učenci pod vodstvom Marka, ki sodeluje v projektu Skladni deli, izvedejo, da sorazmerje ni le deljenje, ampak tudi primerjava enakih deležev. Nekaj učencev, še zlasti tisti, ki radi kuhajo, to razumejo najlažje.\n\\begin{align} \\alpha_2(\\text{Lipa}) &= \\beta_2 + \\gamma_2 \\\\ \\delta_2 &= \\epsilon_2 \\cdot \\zeta_2 \\\\ \\eta_2 &= \\theta_2 \\times \\lambda_2 \\end{align}",
+ "components": [
+  {
+   "component_id": "comp-prose-math-explainer-dev-0001",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 312
+  },
+  {
+   "component_id": "comp-structured-json-dev-0002",
+   "category": "structured",
+   "start_byte": 313,
+   "end_byte": 517
+  },
+  {
+   "component_id": "comp-prose-math-explainer-dev-0012",
+   "category": "prose",
+   "start_byte": 518,
+   "end_byte": 877
+  },
+  {
+   "component_id": "comp-math-align-env-dev-0002",
+   "category": "math",
+   "start_byte": 878,
+   "end_byte": 1026
+  }
+ ]
+}

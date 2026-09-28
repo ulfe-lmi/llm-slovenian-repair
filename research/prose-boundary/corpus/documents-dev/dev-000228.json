@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-000228",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T9-prose-malformed-prose",
+ "byte_length": 861,
+ "cp_length": 842,
+ "sha256": "25d8a29458640e82a5b45cc29b7386825229d891a2ed501c415f946d3ac641bc",
+ "document": "V Ljubljani je mladinski nogometni projekt (pod imenom Mladi črt) v jeseni 2023 izvedel pet treningov na travi, kjer so fantje vadili predajo in branje prostora. Po dveh tednih so udeleženci povedali, da so se počutili bolj sproščeno, čeprav je bila prva tekma pravzaprav neuspešna. V uvodu je trener, izmišljen Matej Kovač, poudaril: 'Kljub vsemu so pomembna pravila in strpljenje.'\n<div>\nProjekt Maribor: nevtralna avtorizirana opomba za testni nalog.\nV projektu Osnovne šole Lipica učitelji (zlasti Ana Kovač) raje uporabljajo projektno delo, da učenci spoznajo, kako znanje deluje v vsakdanju. Po besedah razredne voditeljice je najpomembnejše, da otroci pri vsaki nalogi »razložijo, zakaj so ravno tako postopali«. Pri testnem izpitu iz naravoslovja so zato združili pisni del z ustno obravnavo dveh preprostih primerov iz šolskega vrta.",
+ "components": [
+  {
+   "component_id": "comp-prose-sports-dev-0001",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 392
+  },
+  {
+   "component_id": "comp-malformed-partial-html-dev-0003",
+   "category": "malformed",
+   "start_byte": 393,
+   "end_byte": 462
+  },
+  {
+   "component_id": "comp-prose-education-dev-0001",
+   "category": "prose",
+   "start_byte": 463,
+   "end_byte": 861
+  }
+ ]
+}

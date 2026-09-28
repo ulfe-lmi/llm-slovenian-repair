@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-002531",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T2-prose-math-prose",
+ "byte_length": 573,
+ "cp_length": 559,
+ "sha256": "b9d873f10511979c0c6183adb650117b09899f5f74456de49cdb0baa533b3545",
+ "document": "V projektu Pomladni spanec so opisali, da pomanjkanje spanja lahko vpliva na razpoloženje. Pogosto se lahko spremeni tudi koncentracija. Občutek utrujenosti se lahko poveča. To je splošna opomba, ne pa osebni nasvet. Če se takšni znaki ponavljajo, je dobro, da osebo sprejme zdravnik.\n$$\\frac{\\sigma}{\\tau} = \\frac{7}{9} \\div \\phi = \\text{Ljubljana}$$\nNa oknu štiri je čakal gospod Ivan. Hotel je obnoviti dovoljenje za manjšo poslovno enoto. Uslužbenica mu je dejala, da »pripravite še potrdilo o plačilu«, in dodala, da je rok (trideset dni) naveden v akti.",
+ "components": [
+  {
+   "component_id": "comp-prose-medicine-explainer-dev-0004",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 290
+  },
+  {
+   "component_id": "comp-math-display-dollar-dev-0004",
+   "category": "math",
+   "start_byte": 291,
+   "end_byte": 357
+  },
+  {
+   "component_id": "comp-prose-administration-dev-0012",
+   "category": "prose",
+   "start_byte": 358,
+   "end_byte": 573
+  }
+ ]
+}

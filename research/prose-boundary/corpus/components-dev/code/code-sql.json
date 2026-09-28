@@ -1,0 +1,123 @@
+[
+ {
+  "component_id": "comp-code-sql-dev-0001",
+  "family": "code-sql",
+  "instance": "dev",
+  "category": "code",
+  "subcategory": "SQL",
+  "fragment": "/* Testni fragment 1: izmišljena oseba Maja, projekt Roža. */ SELECT 'Maja' AS `ime`, '1,20 $' AS `cena`, 'https://primer.si/koda' AS `url`, 'src/modul.py' AS `pot`, TRIM('*poudarek* in _podčrtano_') AS `opomba`, 'razdelek2' AS `razdelek2`, 'seStez' AS `seStez`, 'č' AS `HRAŠNA_VREDNOST` FROM (SELECT 1 AS `en`) AS `t` WHERE (`t`.`en` = 1);",
+  "fragment_sha256": "1e5c448ce8c4817788da38bb22631e0ba386d819d6367158ad96dcd284cad168",
+  "fragment_bytes": 345,
+  "seed": "3050a509b2098a1c"
+ },
+ {
+  "component_id": "comp-code-sql-dev-0002",
+  "family": "code-sql",
+  "instance": "dev",
+  "category": "code",
+  "subcategory": "SQL",
+  "fragment": "/* Testni fragment 2: izmišljena oseba Jana, projekt Lipa. */ SELECT 'Jana' AS `ime`, '2,30 $' AS `cena`, 'https://primer.si/koda' AS `url`, 'docs/vir.txt' AS `pot`, TRIM('**poudarek** in _podčrtano_') AS `opomba`, 'razdelek2' AS `razdelek2`, 'seStez' AS `seStez`, 'ž' AS `HRAŠNA_VREDNOST` FROM (SELECT 2 AS `en`) AS `t` WHERE (`t`.`en` = 2);",
+  "fragment_sha256": "ce312d82972f94dd6e741614a0ac8f96a8769f0533eef55cc36912f63ec7748b",
+  "fragment_bytes": 346,
+  "seed": "3050a509b2098a1c"
+ },
+ {
+  "component_id": "comp-code-sql-dev-0003",
+  "family": "code-sql",
+  "instance": "dev",
+  "category": "code",
+  "subcategory": "SQL",
+  "fragment": "/* Testni fragment 3: izmišljena oseba Luka, projekt Brst. */ SELECT 'Luka' AS `ime`, '3,10 $' AS `cena`, 'https://primer.si/koda' AS `url`, 'src/test.py' AS `pot`, TRIM('*kratek* in _podčrtano_') AS `opomba`, 'razdelek2' AS `razdelek2`, 'seStez' AS `seStez`, 'š' AS `HRAŠNA_VREDNOST` FROM (SELECT 3 AS `en`) AS `t` WHERE (`t`.`en` = 3);",
+  "fragment_sha256": "e6b068985878c0da588611cb106937781671252eaf99271cd94ab52b55c01b04",
+  "fragment_bytes": 341,
+  "seed": "3050a509b2098a1c"
+ },
+ {
+  "component_id": "comp-code-sql-dev-0004",
+  "family": "code-sql",
+  "instance": "dev",
+  "category": "code",
+  "subcategory": "SQL",
+  "fragment": "/* Testni fragment 4: izmišljena oseba Eva, projekt Trava. */ SELECT 'Eva' AS `ime`, '4,20 $' AS `cena`, 'https://primer.si/koda' AS `url`, 'docs/vir.txt' AS `pot`, TRIM('*poudarek* in _dolgo_') AS `opomba`, 'razdelek2' AS `razdelek2`, 'seStez' AS `seStez`, 'č' AS `HRAŠNA_VREDNOST` FROM (SELECT 4 AS `en`) AS `t` WHERE (`t`.`en` = 4);",
+  "fragment_sha256": "5210e645cb23854639f85a523e8bac9cdd460c3e21972c314dcfb5650ce37db0",
+  "fragment_bytes": 338,
+  "seed": "3050a509b2098a1c"
+ },
+ {
+  "component_id": "comp-code-sql-dev-0005",
+  "family": "code-sql",
+  "instance": "dev",
+  "category": "code",
+  "subcategory": "SQL",
+  "fragment": "/* Testni fragment 5: izmišljena oseba Anja, projekt Kovač. */ SELECT 'Anja' AS `ime`, '5,00 $' AS `cena`, 'https://primer.si/koda' AS `url`, 'src/modul2.py' AS `pot`, TRIM('**poudarek** in _črta_') AS `opomba`, 'razdelek2' AS `razdelek2`, 'seStez' AS `seStez`, 'ž' AS `HRAŠNA_VREDNOST` FROM (SELECT 5 AS `en`) AS `t` WHERE (`t`.`en` = 5);",
+  "fragment_sha256": "a0bd917fd7a2accf30e9e72c607c4e25893d9645b9dc823f421556d431913ccd",
+  "fragment_bytes": 344,
+  "seed": "3050a509b2098a1c"
+ },
+ {
+  "component_id": "comp-code-sql-dev-0006",
+  "family": "code-sql",
+  "instance": "dev",
+  "category": "code",
+  "subcategory": "SQL",
+  "fragment": "/* Testni fragment 6: izmišljena oseba Petra, projekt Voda. */ SELECT 'Petra' AS `ime`, '6,40 $' AS `cena`, 'https://primer.si/koda' AS `url`, 'docs/nova.txt' AS `pot`, TRIM('*poudarek* in _podčrtano_') AS `opomba`, 'razdelek2' AS `razdelek2`, 'seStez' AS `seStez`, 'š' AS `HRAŠNA_VREDNOST` FROM (SELECT 6 AS `en`) AS `t` WHERE (`t`.`en` = 6);",
+  "fragment_sha256": "cc5362d0d96cd526e878c4e11bd7d64898aae413efc876da289ad569f463d876",
+  "fragment_bytes": 347,
+  "seed": "3050a509b2098a1c"
+ },
+ {
+  "component_id": "comp-code-sql-dev-0007",
+  "family": "code-sql",
+  "instance": "dev",
+  "category": "code",
+  "subcategory": "SQL",
+  "fragment": "/* Testni fragment 7: izmišljena oseba Marko, projekt Koda. */ SELECT 'Marko' AS `ime`, '7,80 $' AS `cena`, 'https://primer.si/koda' AS `url`, 'src/vir.py' AS `pot`, TRIM('**poudarek** in _žarka_') AS `opomba`, 'razdelek2' AS `razdelek2`, 'seStez' AS `seStez`, 'č' AS `HRAŠNA_VREDNOST` FROM (SELECT 7 AS `en`) AS `t` WHERE (`t`.`en` = 7);",
+  "fragment_sha256": "c85015f1c61945012d2f07545956149d4d76a61730e53e8d09875a0ce10cef80",
+  "fragment_bytes": 342,
+  "seed": "3050a509b2098a1c"
+ },
+ {
+  "component_id": "comp-code-sql-dev-0008",
+  "family": "code-sql",
+  "instance": "dev",
+  "category": "code",
+  "subcategory": "SQL",
+  "fragment": "/* Testni fragment 8: izmišljena oseba Nina, projekt Test. */ SELECT 'Nina' AS `ime`, '8,90 $' AS `cena`, 'https://primer.si/koda' AS `url`, 'docs/vir8.txt' AS `pot`, TRIM('*poudarek* in _zvezdice_') AS `opomba`, 'razdelek2' AS `razdelek2`, 'seStez' AS `seStez`, 'ž' AS `HRAŠNA_VREDNOST` FROM (SELECT 8 AS `en`) AS `t` WHERE (`t`.`en` = 8);",
+  "fragment_sha256": "501946748e40df78b3ba7d3ae1488ced72f30dd1fb988b605dd9aab66651cbca",
+  "fragment_bytes": 343,
+  "seed": "3050a509b2098a1c"
+ },
+ {
+  "component_id": "comp-code-sql-dev-0009",
+  "family": "code-sql",
+  "instance": "dev",
+  "category": "code",
+  "subcategory": "SQL",
+  "fragment": "-- Testni SQL fragment: razpoloži\nCREATE TABLE razpolozi (\n  id INT PRIMARY KEY,\n  \"seStez\" TEXT,\n  \"razdelek2\" TEXT,\n  opomba TEXT\n);\nINSERT INTO razpolozi (id, \"seStez\", \"razdelek2\", opomba)\nVALUES (1, '**poudarek** *zvezdice*', '_podčrtano_', '12 $ / dan');\nUPDATE razpolozi SET opomba = 'Vir: https://primer.si/koda' WHERE id = 1;\nSELECT id, \"seStez\", \"razdelek2\", opomba FROM razpolozi ORDER BY id;",
+  "fragment_sha256": "db70a68ffe4b3e2224a1f01193699568aaf82cc587f7b0170c6d427cc383e3ca",
+  "fragment_bytes": 405,
+  "seed": "3050a509b2098a1c"
+ },
+ {
+  "component_id": "comp-code-sql-dev-0010",
+  "family": "code-sql",
+  "instance": "dev",
+  "category": "code",
+  "subcategory": "SQL",
+  "fragment": "-- Razdelek2: testi za vir\nCREATE TABLE viri (\n  id INT PRIMARY KEY,\n  pot TEXT,\n  \"HRAŠNA_VREDNOST\" TEXT,\n  \"seStez\" TEXT\n);\nINSERT INTO viri (id, pot, \"HRAŠNA_VREDNOST\", \"seStez\")\nVALUES (1, 'docs/vir.txt', 'vrednost: 5 $', '`kodica` in **besedilo**');\nSELECT id, pot, \"HRAŠNA_VREDNOST\" FROM viri WHERE pot = 'src/modul.py';\n-- Oklepaji: (poudarek _šumniki_)",
+  "fragment_sha256": "e12c1129cc318373d6e261354a80a1c8bc94b9fb92634a8e1dd3905148dd9a49",
+  "fragment_bytes": 364,
+  "seed": "3050a509b2098a1c"
+ },
+ {
+  "component_id": "comp-code-sql-dev-0011",
+  "family": "code-sql",
+  "instance": "dev",
+  "category": "code",
+  "subcategory": "SQL",
+  "fragment": "-- Fragment 3: izpisi za osebo\nCREATE TABLE izpisi (\n  id INT PRIMARY KEY,\n  ime TEXT,\n  \"razdelek2\" TEXT,\n  \"seStez\" TEXT\n);\nINSERT INTO izpisi (id, ime, \"razdelek2\", \"seStez\")\nVALUES (1, 'Ana Breznik', 'razdelek 2', 'žetona: 3 $');\nUPDATE izpisi SET \"seStez\" = 'glej https://primer.si/koda in docs/vir.txt';\nSELECT ime, \"razdelek2\", \"seStez\" FROM izpisi WHERE ime = 'Ana Breznik';\n-- Konec: (oklepaji) *zvezdice* `kodica` _podčrtano_",
+  "fragment_sha256": "8eddc12bc62ca2c7ab675fa8b9b311038b9c9074dd718f0934a2133cbbd64261",
+  "fragment_bytes": 437,
+  "seed": "3050a509b2098a1c"
+ }
+]

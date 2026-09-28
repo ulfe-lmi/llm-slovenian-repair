@@ -1,0 +1,82 @@
+{
+ "doc_id": "dev-000540",
+ "byte_length": 755,
+ "cp_length": 746,
+ "regions": [
+  {
+   "start_byte": 0,
+   "end_byte": 374,
+   "start_cp": 0,
+   "end_cp": 370,
+   "component_id": "comp-prose-math-explainer-dev-0008",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 374,
+   "end_byte": 375,
+   "start_cp": 370,
+   "end_cp": 371,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 375,
+   "end_byte": 377,
+   "start_cp": 371,
+   "end_cp": 373,
+   "component_id": "comp-math-fractions-dev-0004",
+   "category": "math",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 377,
+   "end_byte": 422,
+   "start_cp": 373,
+   "end_cp": 418,
+   "component_id": "comp-math-fractions-dev-0004",
+   "category": "math",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 422,
+   "end_byte": 424,
+   "start_cp": 418,
+   "end_cp": 420,
+   "component_id": "comp-math-fractions-dev-0004",
+   "category": "math",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 424,
+   "end_byte": 425,
+   "start_cp": 420,
+   "end_cp": 421,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 425,
+   "end_byte": 755,
+   "start_cp": 421,
+   "end_cp": 746,
+   "component_id": "comp-prose-engineering-dev-0013",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  }
+ ],
+ "invariants": {
+  "tiling_complete": true,
+  "no_contradictory_overlaps": true,
+  "cp_range_exact": true
+ }
+}

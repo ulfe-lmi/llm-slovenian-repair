@@ -1,0 +1,65 @@
+{
+ "doc_id": "dev-000911",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T10-randomized",
+ "byte_length": 1611,
+ "cp_length": 1589,
+ "sha256": "1f89a8eefbedfa7f0137bde6dbfc73e84b66f0d03c292726b505e36aec948c3c",
+ "document": "Ana je v receptu projekta Okusni dnevnik iz leta 1998 zapisala, da se krompir (najboljši iz majhne lončnice) sprti v manjših porcijah, a najprej mora odpočivat, da se okus utesni. Po njenem prepričanju: „Brez potrpežljivosti ni dobre juhe.“ Ta vstavek je bil pozneje v arhivu projekta prenesen v poseben dnevnik.\n\\(\\text{produkt} = \\epsilon_{\\text{Zelena}} \\cdot \\alpha_{\\text{Pilot}} = 3 \\cdot 2\\)\n[projekt]\nnaziv = 'Nevtralna testna vsebina'\navtor = 'Ana Kovač'\ndelež = '25 %'\ndolžina = '3,5 m'\nopomba = '*Preizkus* za _novico_'\nvir = 'https://primer.si/novica'\ngrep marko preizkus.json\n\\begin{equation}\\begin{aligned}U_6 &= \\log_2 \\Omega_6 + \\phi_6 \\text{Nova vas} \\\\V_6 &= \\nabla \\cdot \\vec{F}_6 + \\omega_6\\end{aligned}\\end{equation}\n{\"opis\":\"*Zelena* _testna_ vsebina\",\"merilo\":\"3,5 m\",\"vir\":\"https://primer.si/novica\"}\n```\n/* Konstanta za testno temo: Hrašna vrednost */ const HRAŠNA_VREDNOST = 42; const razdelek2 = 7; function zber(zbir) { return zbir + HRAŠNA_VREDNOST; } console.log(`Vrednost: ${zber(razdelek2)}`);\n```\n```\n/* Testni fragment 7: izmišljena oseba Marko, projekt Koda. */ SELECT 'Marko' AS `ime`, '7,80 $' AS `cena`, 'https://primer.si/koda' AS `url`, 'src/vir.py' AS `pot`, TRIM('**poudarek** in _žarka_') AS `opomba`, 'razdelek2' AS `razdelek2`, 'seStez' AS `seStez`, 'č' AS `HRAŠNA_VREDNOST` FROM (SELECT 7 AS `en`) AS `t` WHERE (`t`.`en` = 7);\n```\nOblačje se je med posvetom v Ljubljani kar za trenutek zamislilo. Zanka ni samo ponavljanje, ampak tudi razmišljanje, kdaj naj se ustavi. Na koncu so se dogovorili, da bodo razlage vedno kratke, jasne in naravne.",
+ "components": [
+  {
+   "component_id": "comp-prose-cooking-dev-0006",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 322
+  },
+  {
+   "component_id": "comp-math-text-slovenian-dev-0003",
+   "category": "math",
+   "start_byte": 323,
+   "end_byte": 408
+  },
+  {
+   "component_id": "comp-structured-toml-dev-0001",
+   "category": "structured",
+   "start_byte": 409,
+   "end_byte": 576
+  },
+  {
+   "component_id": "comp-machine-shell-commands-dev-0006",
+   "category": "machine",
+   "start_byte": 577,
+   "end_byte": 601
+  },
+  {
+   "component_id": "comp-math-aligned-env-dev-0006",
+   "category": "math",
+   "start_byte": 602,
+   "end_byte": 750
+  },
+  {
+   "component_id": "comp-structured-keyvalue-dev-0007",
+   "category": "structured",
+   "start_byte": 751,
+   "end_byte": 837
+  },
+  {
+   "component_id": "comp-code-javascript-dev-0004",
+   "category": "code",
+   "start_byte": 838,
+   "end_byte": 1045
+  },
+  {
+   "component_id": "comp-code-sql-dev-0007",
+   "category": "code",
+   "start_byte": 1046,
+   "end_byte": 1396
+  },
+  {
+   "component_id": "comp-prose-programming-explainer-dev-0005",
+   "category": "prose",
+   "start_byte": 1397,
+   "end_byte": 1611
+  }
+ ]
+}

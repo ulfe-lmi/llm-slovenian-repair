@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-000212",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T4-heading-prose-table",
+ "byte_length": 365,
+ "cp_length": 351,
+ "sha256": "3856f535289d29e7e1f7899bb27ca29a3589468b061d41c7d654c34d3ab0b640",
+ "document": "## V testnem projektu Svetilka 2024 so učenci preizkusili bater\nAna je v razredni testni delavnici najprej preverila, ali je sklep odprt (tako je ohišje varno), in šele nato prižgala majhno utripalko. V zapisniku je zapisala „Preizkus 2024 je brez napake.“\n| Opis | Vzorček |\n| --- | --- |\n| „Zdravje ni samo odsotnost bolečine“ je  | tabela_01.json |",
+ "components": [
+  {
+   "component_id": "comp-prose-electronics-dev-0003",
+   "category": "prose",
+   "start_byte": 3,
+   "end_byte": 64
+  },
+  {
+   "component_id": "comp-prose-electronics-dev-0001",
+   "category": "prose",
+   "start_byte": 65,
+   "end_byte": 264
+  },
+  {
+   "component_id": "comp-prose-medicine-explainer-dev-0003",
+   "category": "prose",
+   "start_byte": 301,
+   "end_byte": 346
+  },
+  {
+   "component_id": "comp-machine-filenames-dev-0003",
+   "category": "machine",
+   "start_byte": 349,
+   "end_byte": 363
+  }
+ ]
+}

@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-001998",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T8-quote-fenced",
+ "byte_length": 552,
+ "cp_length": 539,
+ "sha256": "2f9966b9099087085ee8e5c7012f5a2e223f33c57297d0a97b75b854b8a7e19f",
+ "document": "> V okviru projekta Nova vrv so otroci iz Ljubljane v petek zvečer vadili kratke podaje. Učiteljica Maja je opazila, da so po deset minutah teka vsi bolj sproščeni. `#include <iostream>`\n```\nfn opis_2() -> String { /* Testni projekt Lipa: č, š, ž, *poudarek* in _podčrtano_ */ let seStez = false; let HRAŠNA_VREDNOST = 5; let besedilo = format!(\"*Nova* ({} $)\", HRAŠNA_VREDNOST); let oznaka = \"č`š`ž\"; let pot = \"docs/vir.txt\"; let url = \"https://primer.si/koda\"; format!(\"{} | {} | {} | {} | {}\", seStez, besedilo, oznaka, pot, url) }\n```",
+ "components": [
+  {
+   "component_id": "comp-prose-sports-dev-0011",
+   "category": "prose",
+   "start_byte": 2,
+   "end_byte": 168
+  },
+  {
+   "component_id": "comp-code-cpp-dev-0001",
+   "category": "code",
+   "start_byte": 169,
+   "end_byte": 190
+  },
+  {
+   "component_id": "comp-code-rust-dev-0006",
+   "category": "code",
+   "start_byte": 191,
+   "end_byte": 552
+  }
+ ]
+}

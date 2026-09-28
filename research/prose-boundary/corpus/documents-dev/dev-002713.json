@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-002713",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T8-quote-fenced",
+ "byte_length": 632,
+ "cp_length": 611,
+ "sha256": "14ac61aec98150a5540b5ea75b70dd741a43b5f4d6b1d33cc552483bd9a403b6",
+ "document": "> V kabolnici je najlažje, ko najprej zbrišemo prah z omaric, šele nato operemo tla. (Počakamo, da se voda malo posuši, in šele potem stiskamo krpo.) Tisti, ki imajo v hiši mačke, vedo, da lasov ne pomečeš, temveč jih zbereš s krpo za steklo. V testnem projektu Čist dom so to za vogla dopolnili s staro krtačo, ki jo občasno speremo. `int main(void) { char *napis = \"Tekst: *poudarjeno* in _podč`\n```\n# Testni projekt: Pripomoček; avtor: Maja Lipovnik\nime = 'Ana'\nznesek = 5\nporočilo = f'Račun: {znesek} $ v `oklepaju`'\nopis = 'To je `koda` in *poudarek* ter _podčrtano_'\nif znesek > 0:\n    print(poročilo)\n```",
+ "components": [
+  {
+   "component_id": "comp-prose-everyday-advice-dev-0006",
+   "category": "prose",
+   "start_byte": 2,
+   "end_byte": 349
+  },
+  {
+   "component_id": "comp-code-c-dev-0002",
+   "category": "code",
+   "start_byte": 350,
+   "end_byte": 413
+  },
+  {
+   "component_id": "comp-code-python-dev-0004",
+   "category": "code",
+   "start_byte": 414,
+   "end_byte": 632
+  }
+ ]
+}

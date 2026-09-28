@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-001174",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T9-prose-malformed-prose",
+ "byte_length": 626,
+ "cp_length": 604,
+ "sha256": "9c754fd4e4767e178a328e21520bb2a759435605b4f3b36f1ce9893d7ca8b1da",
+ "document": "V projektu Mlajša šola je Nina pripravila kratke vaje, ki učencem omogočajo, da znanje preizkusijo v praksi (na primer pri izletu v mestno knjižnico). Učenci so radi dejali, da »se učimo brez strahu pred napako«, in učiteljica je to zapisala v letno knjižico. Pri izpitu iz slovenščine so namesto dolgih nalog dobili kratek pripovedni zapis, ki so ga lahko brali in pojasnjevali.\n\n\\[ y=3 . Testni zapis projekta Brda za osebo Marko.\n\nLuka je ob petku opoldne odigral prijateljski nogometni dvoboj na travniku. „Kolega,“ je trener rekel znavo, „v naslednji sezoni bomo potrebovali boljšo zvezo v obrambi.“",
+ "components": [
+  {
+   "component_id": "comp-prose-education-dev-0011",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 392
+  },
+  {
+   "component_id": "comp-malformed-incomplete-paren-bracket-dev-0002",
+   "category": "malformed",
+   "start_byte": 394,
+   "end_byte": 445
+  },
+  {
+   "component_id": "comp-prose-sports-dev-0006",
+   "category": "prose",
+   "start_byte": 447,
+   "end_byte": 626
+  }
+ ]
+}

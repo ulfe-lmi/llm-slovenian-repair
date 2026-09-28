@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-001013",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T2-prose-math-prose",
+ "byte_length": 706,
+ "cp_length": 691,
+ "sha256": "99d713515da4d7ff28d95220191878e78f4902ef01a37acd636446bd31597074",
+ "document": "V projektu Pomladni spanec so opisali, da pomanjkanje spanja lahko vpliva na razpoloženje. Pogosto se lahko spremeni tudi koncentracija. Občutek utrujenosti se lahko poveča. To je splošna opomba, ne pa osebni nasvet. Če se takšni znaki ponavljajo, je dobro, da osebo sprejme zdravnik.\n\\begin{equation} \\text{Testni projekt Petra} \\; : \\; \\sum_{\\kappa=1}^{3} \\kappa^2=1^2+2^2+3^2 \\Rightarrow \\sum_{\\kappa=1}^{3} \\kappa^2=14 \\end{equation}\nPriprava na državni izpit za odrasle je potekala mirno (trije tedni, dvakrat na teden), in Matej je ob tem dejal: »Znanje ostane, če ga človek lahko pove iz glave.« Načrt je vključeval tudi kratek pregled starih učbenikov, a brez dolžine in brez strahu.",
+ "components": [
+  {
+   "component_id": "comp-prose-medicine-explainer-dev-0004",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 290
+  },
+  {
+   "component_id": "comp-math-equation-env-dev-0003",
+   "category": "math",
+   "start_byte": 291,
+   "end_byte": 443
+  },
+  {
+   "component_id": "comp-prose-education-dev-0013",
+   "category": "prose",
+   "start_byte": 444,
+   "end_byte": 706
+  }
+ ]
+}

@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-000703",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T11-interactions",
+ "byte_length": 1216,
+ "cp_length": 1193,
+ "sha256": "0d1371e3024adfedc3b9d418762530d01c8ebe2838a5bc20588b715dbe17447b",
+ "document": "`// Test: seznam opravil v izmišljenem projektu Brst.`.\n```\n/* Testni fragment 8: izmišljena oseba Nina, projekt Test. */ SELECT 'Nina' AS `ime`, '8,90 $' AS `cena`, 'https://primer.si/koda' AS `url`, 'docs/vir8.txt' AS `pot`, TRIM('*poudarek* in _zvezdice_') AS `opomba`, 'razdelek2' AS `razdelek2`, 'seStez' AS `seStez`, 'ž' AS `HRAŠNA_VREDNOST` FROM (SELECT 8 AS `en`) AS `t` WHERE (`t`.`en` = 8);\n# komentar z \\frac{a}{b}\n```\nV kuhinjskem laboratoriju projekta Okusni dnevnik so v začetku 2017 preizkusili tri različne osnove za ovseno kašo, in sicer (a) z medom, (b) z rozinami ter (c) s suhimi breskvami, vendar se je najpogosteje ponovila tista z malo kumina. Pri opombi so uporabili vstavek: „Če ni kumina, vzemi štipanje sladke paprike.“ Rezultat je bil preprosto zapisan v skupni dnevnik.\nV projektu Prvi korak so učitelji iz Ljubljane poskusili kratek skupinski pogovor pred ocenjevanjem, kar je po mnenju Anje zmanjšalo strah pred pisnim testom. Pri izbirnem predmetu zgodovina so uporabili učbenik z dodatnimi opombami (stran 42) in vprašanja, ki so dopuščala večkratne odgovore. Odrasli udeleženci so se zavedali, da se izpit ne piše enkrat, temveč se znanje utrjuje v vsakdanju.",
+ "components": [
+  {
+   "component_id": "comp-code-rust-dev-0009",
+   "category": "code",
+   "start_byte": 0,
+   "end_byte": 55
+  },
+  {
+   "component_id": "comp-code-sql-dev-0008",
+   "category": "code",
+   "start_byte": 57,
+   "end_byte": 433
+  },
+  {
+   "component_id": "comp-prose-cooking-dev-0008",
+   "category": "prose",
+   "start_byte": 434,
+   "end_byte": 811
+  },
+  {
+   "component_id": "comp-prose-education-dev-0006",
+   "category": "prose",
+   "start_byte": 812,
+   "end_byte": 1216
+  }
+ ]
+}

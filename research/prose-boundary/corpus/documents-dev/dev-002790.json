@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-002790",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T8-quote-fenced",
+ "byte_length": 798,
+ "cp_length": 779,
+ "sha256": "3a7ea410aebbb916bca9c44b79afb9d772df27e0f378a951ad7c9803cd91081e",
+ "document": "> Ko je Nika za projekt »Polno napajanje« preverjala obvestila, je opazila, da se aplikacija za vremensko napoved pozno obudila, če je telefon bil v šibkem omrežju (tudi ob številnih sporočilih). »Najprej napajanje«, je rekla njena sestra, »vse ostalo je opozorilo, ki lahko počaka do polnjenja.« `int HRAŠNA_VREDNOST = 1; int main(void) { char *pot = \"docs/`\n```\n// Tretji testni del (č, š, ž)\nconst naslov3 = \"Podrobnost: **poudarek** in _podčrtana_\";\nconst opis = `Cena: $ 9,99 za razdelek2`;\nconst povezava = \"https://primer.si/koda\";\nconst pot = \"src/modul.py\";\nconst vir = \"docs/vir.txt\";\nfunction seStez(a, b) {\n  return a - b;\n}\nconst HRAŠNA_VREDNOST = 2;\nconst rezultat = seStez(HRAŠNA_VREDNOST, 1);\nconsole.log(naslov3, opis, povezava, pot, vir, rezultat);\n// konec\n```",
+ "components": [
+  {
+   "component_id": "comp-prose-computing-dev-0009",
+   "category": "prose",
+   "start_byte": 2,
+   "end_byte": 308
+  },
+  {
+   "component_id": "comp-code-c-dev-0006",
+   "category": "code",
+   "start_byte": 309,
+   "end_byte": 372
+  },
+  {
+   "component_id": "comp-code-javascript-dev-0011",
+   "category": "code",
+   "start_byte": 373,
+   "end_byte": 798
+  }
+ ]
+}

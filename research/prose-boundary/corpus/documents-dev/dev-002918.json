@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-002918",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T4-heading-prose-table",
+ "byte_length": 409,
+ "cp_length": 403,
+ "sha256": "a6737c80b6d957516a7eb9c3ae2c578fffc2cb89464f634f0df922f37c3bc10b",
+ "document": "## Marko je v testnem kotičku izbral dve upornosti, ju povezal \nPri planinskem vzponu po Javorniku v marcu 2023 so bile poti močno zamrznjene, zato priporočam uporabo čevljev z dobrim oprijemom. Vreme je bilo hladno (okrog 5 stopinj pod ničlo), a razgledi so bili nagrajenje vredni.\n| Opis | Vzorček |\n| --- | --- |\n| V kopeli na Trgu v novembru 2024 je pote | PROJEKT_IME=Modra_Gora, $HOME_DIR, KEY=i |",
+ "components": [
+  {
+   "component_id": "comp-prose-electronics-dev-0002",
+   "category": "prose",
+   "start_byte": 3,
+   "end_byte": 64
+  },
+  {
+   "component_id": "comp-prose-travel-dev-0009",
+   "category": "prose",
+   "start_byte": 65,
+   "end_byte": 287
+  },
+  {
+   "component_id": "comp-prose-sports-dev-0003",
+   "category": "prose",
+   "start_byte": 324,
+   "end_byte": 364
+  },
+  {
+   "component_id": "comp-machine-env-vars-dev-0004",
+   "category": "machine",
+   "start_byte": 367,
+   "end_byte": 407
+  }
+ ]
+}

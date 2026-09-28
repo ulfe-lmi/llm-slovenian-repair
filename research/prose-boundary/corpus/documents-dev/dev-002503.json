@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-002503",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T7-prose-json-prose-latex",
+ "byte_length": 659,
+ "cp_length": 652,
+ "sha256": "763b25200014519d8b2ce89e9530229b28a8df164a9c1be508393f6dfc5517bb",
+ "document": "V okviru projekta Reka je bila jeklena konstrukcija obnašala stabilno, tudi po močnem pihu. Most je bil dolg 412 metrov. Nosilci so bili premazani z epoksi premazom. Vetrovna obremenitev je bila izračunana za 30 let.\n{\"ime\":\"Projekt Sonce\",\"dolžina\":\"4,2 m\",\"avtorsko\":\"Nevtralna testna vsebina\",\"kvote\":{\"delež\":\"25 %\",\"opomba\":\"**Pregled** https://primer.si/novica\"}}\nAna iz projekta Okusne karte je zjutraj pripravila preprosto gibanico. Med testnine je stekla smetana, na vrh pa drobno rezani oreh. Pečica je žarela pol ure, da je gibanica dobila zlato barvo.\nP(A_{\\text{Ana}}) = \\frac{2}{5} + \\Pr(B_{\\text{Lipa}}) = 0.6 \\text{ (verjetnost uspeha)}",
+ "components": [
+  {
+   "component_id": "comp-prose-engineering-dev-0003",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 219
+  },
+  {
+   "component_id": "comp-structured-json-dev-0005",
+   "category": "structured",
+   "start_byte": 220,
+   "end_byte": 374
+  },
+  {
+   "component_id": "comp-prose-cooking-dev-0011",
+   "category": "prose",
+   "start_byte": 375,
+   "end_byte": 570
+  },
+  {
+   "component_id": "comp-math-probability-dev-0001",
+   "category": "math",
+   "start_byte": 571,
+   "end_byte": 659
+  }
+ ]
+}

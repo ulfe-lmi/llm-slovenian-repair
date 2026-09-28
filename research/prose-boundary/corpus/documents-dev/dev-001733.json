@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-001733",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T7-prose-json-prose-latex",
+ "byte_length": 823,
+ "cp_length": 807,
+ "sha256": "9a7c26e4cf80faf3341268408cfaf37464e085ec1d01863619db4313a6edb18b",
+ "document": "Spremenljivka se obnaša kot stikalo v omarici. Vrednost se spremeni. Zanka se ponovi. Funkcija zaključi del.\n{\"ime\":\"Projekt Sonce\",\"dolžina\":\"4,2 m\",\"avtorsko\":\"Nevtralna testna vsebina\",\"kvote\":{\"delež\":\"25 %\",\"opomba\":\"**Pregled** https://primer.si/novica\"}}\nV kuhinjskem laboratoriju projekta Okusni dnevnik so v začetku 2017 preizkusili tri različne osnove za ovseno kašo, in sicer (a) z medom, (b) z rozinami ter (c) s suhimi breskvami, vendar se je najpogosteje ponovila tista z malo kumina. Pri opombi so uporabili vstavek: „Če ni kumina, vzemi štipanje sladke paprike.“ Rezultat je bil preprosto zapisan v skupni dnevnik.\n\\begin{align} \\lambda_6 &= \\prod_{\\mu=1}^{6} \\nu_\\mu \\\\ \\pi_6 &= \\sum_{\\xi=1}^{6} \\zeta_\\xi \\\\ \\varphi_6 &= \\chi_6 - \\psi_6 \\end{align}\n Pozor: é (dekompouziran znakovni niz).",
+ "components": [
+  {
+   "component_id": "comp-prose-programming-explainer-dev-0008",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 110
+  },
+  {
+   "component_id": "comp-structured-json-dev-0005",
+   "category": "structured",
+   "start_byte": 111,
+   "end_byte": 265
+  },
+  {
+   "component_id": "comp-prose-cooking-dev-0008",
+   "category": "prose",
+   "start_byte": 266,
+   "end_byte": 643
+  },
+  {
+   "component_id": "comp-math-align-env-dev-0006",
+   "category": "math",
+   "start_byte": 644,
+   "end_byte": 779
+  }
+ ]
+}

@@ -1,0 +1,17 @@
+{
+ "doc_id": "d45",
+ "seed": "008edefd0001",
+ "template": "D-xml-paired-t10",
+ "byte_length": 51,
+ "cp_length": 51,
+ "sha256": "fccdf8d4c2097fa8ba1185fca3778cf807a5b5f8bb6fd49c097405401ac0f1da",
+ "document": "Pred tem.\n<xsl:foo x=\"1\">vsebina</xsl:foo>\nZa tem.\n",
+ "components": [
+  {
+   "component_id": "defect-008g-d45",
+   "category": "structured",
+   "start_byte": 10,
+   "end_byte": 42
+  }
+ ]
+}

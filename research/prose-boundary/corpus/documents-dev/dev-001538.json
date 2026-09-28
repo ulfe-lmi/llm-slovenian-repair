@@ -1,0 +1,41 @@
+{
+ "doc_id": "dev-001538",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T10-randomized",
+ "byte_length": 928,
+ "cp_length": 914,
+ "sha256": "e4aecd3250920174e2395d094df80acb32517d454b995f909c7b0e29168fbd38",
+ "document": "V projektu Spomini doline je Anica Zorman zapisala, da so stari kmečki registri vsebovali opombe o pridelku, davkih in poplavah. Zapis so razdelili po letnicah, ne pa po dnevih, zato je besedilo preprosteje za primerjanje. Njen sopotnik Marko je dodal, da takšni listi ohranjajo glas lokalne skupnosti.\n/usr/bin/orodje /var/log/dnevnik.txt\n```\nint main(void) { int seStez = 3; char *pot = \"src/modul.py\"; (void)seStez; (void)pot; return 0; } /* Testni fragment: č, š, ž */\n```\nPROJEKT=Zlati hribovci\nAVTOR=Nina Kralj\nVZDUŠJE=20,3 °C\nVLAKNO=15 %\nDODATNA_VAR=$drugim_ključem; 0,18\nOPIS=[*test*, _slovensko_, https://primer.si/novica]\nV šoli zdravja v Trzinu so učenci (ki so sodelovali v projektu Mirni utripi) prebrali, da premalo gibanja lahko spremeni občutek moči in počutje. Takšne spremembe so lahko odziv na vsakdanjo utrujenost. Ko se pri nekem otroku ali odraslem ponovijo, je prav, da jih preveri zdravnik.",
+ "components": [
+  {
+   "component_id": "comp-prose-history-dev-0001",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 304
+  },
+  {
+   "component_id": "comp-machine-posix-paths-dev-0002",
+   "category": "machine",
+   "start_byte": 305,
+   "end_byte": 341
+  },
+  {
+   "component_id": "comp-code-c-dev-0001",
+   "category": "code",
+   "start_byte": 342,
+   "end_byte": 481
+  },
+  {
+   "component_id": "comp-structured-env-blocks-dev-0006",
+   "category": "structured",
+   "start_byte": 482,
+   "end_byte": 639
+  },
+  {
+   "component_id": "comp-prose-medicine-explainer-dev-0002",
+   "category": "prose",
+   "start_byte": 640,
+   "end_byte": 928
+  }
+ ]
+}

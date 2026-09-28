@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-002954",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T7-prose-json-prose-latex",
+ "byte_length": 881,
+ "cp_length": 859,
+ "sha256": "de9502053541114463049a16f31ce61123844c5a0a34282ba00eac5c86abe291",
+ "document": "Ana je v razredni testni delavnici najprej preverila, ali je sklep odprt (tako je ohišje varno), in šele nato prižgala majhno utripalko. V zapisniku je zapisala „Preizkus 2024 je brez napake.“\n{\"ime\":\"Projekt Mesto\",\"površina\":\"120 m2\",\"avtorsko\":\"Nevtralna testna vsebina\",\"delež\":\"15 %\",\"opis\":{\"podrobnost\":\"**Testni podatki** https://primer.si/novica\"}}\nIva je v projektu Kuhinjski arhiv v ponedeljek zvečer pripravila potico, a je namesto oreščkov izbrala mandlje, ker je imela doma le eno majhno škatlo. Testo (tisti tanjši recept iz leta 1989) se je lepo razvalalo, čeprav je bila kuhinja prepolna. Ko se je postrežbo spomnila na babičino opombo, je v dnevnik dodala vstavek: „Sladica naj diha vsaj tri četrt ure.“\n\\begin{align} \\alpha_5(\\text{Sonce}) &\\le \\beta_5 + \\gamma_5 \\\\ \\delta_5 &\\ge \\epsilon_5 \\times \\zeta_5 \\\\ \\eta_5 &= \\theta_5 \\end{align}",
+ "components": [
+  {
+   "component_id": "comp-prose-electronics-dev-0001",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 199
+  },
+  {
+   "component_id": "comp-structured-json-dev-0007",
+   "category": "structured",
+   "start_byte": 200,
+   "end_byte": 366
+  },
+  {
+   "component_id": "comp-prose-cooking-dev-0009",
+   "category": "prose",
+   "start_byte": 367,
+   "end_byte": 743
+  },
+  {
+   "component_id": "comp-math-align-env-dev-0005",
+   "category": "math",
+   "start_byte": 744,
+   "end_byte": 881
+  }
+ ]
+}

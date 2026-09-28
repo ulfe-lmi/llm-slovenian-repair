@@ -1,0 +1,47 @@
+{
+ "doc_id": "dev-000339",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T10-randomized",
+ "byte_length": 1162,
+ "cp_length": 1131,
+ "sha256": "9023d023bda9ae39386795bdc0443efb409f67d13fcdc188ce3a6f9b6fcf7f51",
+ "document": "Stoli, miza in tla zahtevajo malo pozornosti. Pri čiščenju se začne od zgornjih površin. Nato pride vrsta spodnjih kotičkov. V projektu Mirna soba so izmerili, da pet minut ščetkanja tal zmanjša prah. Tudi navadna voda in malo mila zadoščata.\n\\begin{equation} \\text{Testni projekt Bine} \\; : \\; \\exp(\\ln \\alpha_2)=\\alpha_2 \\Rightarrow \\alpha_2=\\exp(\\ln 5) \\Rightarrow \\alpha_2=5 \\end{equation}\n$SLO_DOKUMENT, KEY=testna_vrednost\n```\n# Fragment 6: *neodvisen*, podčrtano _besedilo_, (oklepaj)\necho 'Zvezdice: *zvezda* **dvakrat** in _podčrtano_'\necho 'Valuta: 1 $ in 9 € (testni znesek)'\necho 'Poti: docs/vir.txt in src/modul.py'\necho 'Spletna stran: https://primer.si/koda'\necho 'Id: razdelek2, seStez, HRAŠNA_VREDNOST'\necho 'Backquote `vse` in poudarčni znaki č š ž'\n```\n\\text{Bled}\\begin{pmatrix}15&16&17\\\\18&19&20\\end{pmatrix}\nPri urejanju hiše pomaga, če ob jutru hitro preverimo, kje je največji nered, in si izberemo le eno majhno nalogo. Ana je v projektu Čist dom zapisala, da je bolje pet minut brisanja mize kot ure razmišljanja. (Sicer pa raje odpreš okno, če je miza že svetla.)\n Pozor: é (dekompouziran znakovni niz).",
+ "components": [
+  {
+   "component_id": "comp-prose-everyday-advice-dev-0005",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 253
+  },
+  {
+   "component_id": "comp-math-equation-env-dev-0002",
+   "category": "math",
+   "start_byte": 254,
+   "end_byte": 404
+  },
+  {
+   "component_id": "comp-machine-env-vars-dev-0005",
+   "category": "machine",
+   "start_byte": 405,
+   "end_byte": 439
+  },
+  {
+   "component_id": "comp-code-shell-bash-dev-0006",
+   "category": "code",
+   "start_byte": 440,
+   "end_byte": 791
+  },
+  {
+   "component_id": "comp-math-matrices-dev-0004",
+   "category": "math",
+   "start_byte": 792,
+   "end_byte": 849
+  },
+  {
+   "component_id": "comp-prose-everyday-advice-dev-0001",
+   "category": "prose",
+   "start_byte": 850,
+   "end_byte": 1118
+  }
+ ]
+}

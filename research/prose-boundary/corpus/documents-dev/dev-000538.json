@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-000538",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T11-interactions",
+ "byte_length": 1099,
+ "cp_length": 1074,
+ "sha256": "45b1d89912038e7be61e865f5a6727e0f17c13c129cb0a1e654b157c9bb52a44",
+ "document": "`#include <string>`.\n```\n# Fragment 8: *neodvisen* konec, _podčrtano_, (oklepaj)\necho 'Besedilo: **poudarek** in *zvezdice*, `backquote`'\necho 'Valute: 4 $ in 11 € za izmišljeni projekt'\necho 'Relativna pot: src/modul.py; vir: docs/vir.txt'\necho 'Spletni naslov: https://primer.si/koda'\necho 'Identifikatorji: HRAŠNA_VREDNOST, razdelek2, seStez'\necho 'Slovenski znaki: č, š, ž'\n# komentar z \\frac{a}{b}\n```\nProjekt Tiha proga je zbral fragmente, v katerih Ana Kralj bere Čopovo poezijo ob zori. V zadnjem razdelku avtorica spomni na evropsko pripovedko, ki jo je nekje v Ljubljani zapisala leta 1984. Tisto jutro je v knjižnici zmanjkalo ene ključne listine.\nMed razstavo v izmišljenem paviljonu je vodja ekipe Petra Lovšin pokazala model železne konstrukcije iz leta 1895. Očitali so ji, da je preveč zaupala spominom starih obrtnikov. (V ožjem krogu so rekli, da je bil model težak približno trideset kilogramov.) »Če bi imeli le eno potrdilo,« je dejala, »bi zgodbo lahko razumlili drugače.« Kljub temu so obiskovalci ostali zmedeni zaradi pomanjkanja ohranjenih meritev.",
+ "components": [
+  {
+   "component_id": "comp-code-cpp-dev-0006",
+   "category": "code",
+   "start_byte": 0,
+   "end_byte": 19
+  },
+  {
+   "component_id": "comp-code-shell-bash-dev-0008",
+   "category": "code",
+   "start_byte": 21,
+   "end_byte": 414
+  },
+  {
+   "component_id": "comp-prose-literature-dev-0011",
+   "category": "prose",
+   "start_byte": 415,
+   "end_byte": 669
+  },
+  {
+   "component_id": "comp-prose-history-dev-0009",
+   "category": "prose",
+   "start_byte": 670,
+   "end_byte": 1099
+  }
+ ]
+}

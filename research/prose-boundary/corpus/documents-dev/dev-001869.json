@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-001869",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T11-interactions",
+ "byte_length": 1122,
+ "cp_length": 1100,
+ "sha256": "cf532fd2a46dd9ccb0ebe91f95f5d929becdaa95cf9fe9d2d9398523d8d568d2",
+ "document": "`fn test2() -> &'static str { /* Testni projekt Lipa: č, š, ž`.\n```\n#include <string>\n// Projekt: *Lipa*, šentjanž\n// Preveri src/modul.py\nstd::string seStez(int razdelek2) {\n    // žlahtna vrednost: 2 $\n    return \"vrednost \" + std::to_string(razdelek2 * 2) + \" $\";\n}\n# komentar z \\frac{a}{b}\n```\nNadgradnja podlage za obravnavo zahtevkov po socialni varnosti je potekala v okviru projekta Pripravljenost 2024, ki ga je vodila Anja Kovač. »Glavna težava je v prepoznavi pravega dokumenta,« je zapisala v opombi k posvetu. Vstavek z dnevnikom dela, ki ga je priložila, je vseboval tri strani. Na koncu so se dogovorili, da se bo vsaka zahteva obravnavala v tridesetih dneh, razen če je potrebna dodatna podlaga.\nV projektu Osnovne šole Lipica učitelji (zlasti Ana Kovač) raje uporabljajo projektno delo, da učenci spoznajo, kako znanje deluje v vsakdanju. Po besedah razredne voditeljice je najpomembnejše, da otroci pri vsaki nalogi »razložijo, zakaj so ravno tako postopali«. Pri testnem izpitu iz naravoslovja so zato združili pisni del z ustno obravnavo dveh preprostih primerov iz šolskega vrta.",
+ "components": [
+  {
+   "component_id": "comp-code-rust-dev-0007",
+   "category": "code",
+   "start_byte": 0,
+   "end_byte": 65
+  },
+  {
+   "component_id": "comp-code-cpp-dev-0003",
+   "category": "code",
+   "start_byte": 67,
+   "end_byte": 303
+  },
+  {
+   "component_id": "comp-prose-administration-dev-0002",
+   "category": "prose",
+   "start_byte": 304,
+   "end_byte": 723
+  },
+  {
+   "component_id": "comp-prose-education-dev-0001",
+   "category": "prose",
+   "start_byte": 724,
+   "end_byte": 1122
+  }
+ ]
+}

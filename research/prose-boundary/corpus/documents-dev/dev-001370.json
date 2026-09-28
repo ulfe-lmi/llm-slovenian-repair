@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-001370",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T7-prose-json-prose-latex",
+ "byte_length": 855,
+ "cp_length": 843,
+ "sha256": "76180df2031a2ed953fc12290bf2eeec388fc158e8387e8ca80d0de48a3fb4eb",
+ "document": "V projektu Prvi tok, ki ga je leta 2018 sestavila Ana, se je naučila, da mora biti sklep zaprt, da se lučka sploh prižge. Baterija, ki je imela 4,5 V, je bila nameščena v držač, medtem ko je upornost zaščitila diodo pred prevelikim tokom. (Zelo pomembno je preveriti, ali so vsi konci dobro povezani.)\n{\"ime\":\"Projekt Gora\",\"nagnjenost\":\"12 %\",\"avtorsko\":\"Nevtralna testna vsebina\",\"debelina\":\"0,3 m\",\"opomba\":\"_Nevtralno_ https://primer.si/novica\"}\nAna je poletja 2023 preživela ob Bledu in si ogledala grad. Vreme je bilo toplo, voda pa mirna kot steklo. Popoldne se je sprehodila do Špice in uživala v razgledu na jezero.\n\\begin{equation} \\text{Testni projekt Tomas} \\; : \\; \\sin^2 \\theta_6 + \\cos^2 \\theta_6=1 \\Rightarrow \\theta_6=\\frac{\\pi}{6} \\Rightarrow \\sin^2\\left(\\frac{\\pi}{6}\\right)+\\cos^2\\left(\\frac{\\pi}{6}\\right)=1 \\end{equation}",
+ "components": [
+  {
+   "component_id": "comp-prose-electronics-dev-0006",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 310
+  },
+  {
+   "component_id": "comp-structured-json-dev-0008",
+   "category": "structured",
+   "start_byte": 311,
+   "end_byte": 458
+  },
+  {
+   "component_id": "comp-prose-travel-dev-0006",
+   "category": "prose",
+   "start_byte": 459,
+   "end_byte": 636
+  },
+  {
+   "component_id": "comp-math-equation-env-dev-0006",
+   "category": "math",
+   "start_byte": 637,
+   "end_byte": 855
+  }
+ ]
+}

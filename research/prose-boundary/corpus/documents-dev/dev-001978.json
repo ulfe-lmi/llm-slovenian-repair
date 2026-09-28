@@ -1,0 +1,53 @@
+{
+ "doc_id": "dev-001978",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T10-randomized",
+ "byte_length": 1427,
+ "cp_length": 1403,
+ "sha256": "a97869af5b609aa52ea301fe56c36ad3ca06c15dc257cb0c1672651bd2dfd82b",
+ "document": "Udeleženci projekta Otvorena vrata so v jeseni 2024 preizkusili učno sredo, v kateri je bil učbenik le ena od štirih podlag. Mladostnike je zanimalo, zakaj se isti izpit pri treh učiteljih razlikuje v razlagi (zlasti pri nalogah iz književnosti), zato so zapisali kratko pojasnilo. Na koncu so se dogovorili, da bo vsak odrasli udeleženec dobil eden sam pogovorni termin, ne pa dveh ločenih rok.\n> Projekt Ljubelj, avtor *Miha*: globina 40 m.\n> > Meritev velja za test.\n### Projekt List\n#### Testni podnaslov\n#### Podroben podnaslov\nProjekt List, avtorica Petra Novak, vrednost 4 N.\n\\[\\dfrac{1}{2}+\\frac{\\alpha}{\\beta}=\\text{Anja}\\]\nMeritev: ~~neveljavni~~ rezultati 45 % in 8 kg v laboratoriju.\n```\n# Fragment 7: oseba: Luka Zupan, projekt *Mol*\necho 'Markdown: *zvezdice*, **poudarek**, _podčrtanje_'\necho 'Znesek: 20 $ in 1 € (izmišljeno)'\necho 'Koda: src/modul.py; dokument: docs/vir.txt'\necho 'URL: https://primer.si/koda'\necho 'Identi: seStez, razdelek2, HRAŠNA_VREDNOST'\necho 'Backquote `znak`, (oklepaj), č š ž'\n```\nOb prenovljenem pisarnem kotu, ki ga je v notranjem projektu Pisarna pripravila Petra, je nov tablični računalnik služil za skice (in, po njenih besedah, tudi za preprosta vprašanja). V prvih tednih se je navadila na večji zaslon, ker so bile besede na papirju pogosto preveč majhne za oči. Ko je na koncu septembra preverila baterijo, ji je bil prijeten ta enostaven način dela.",
+ "components": [
+  {
+   "component_id": "comp-prose-education-dev-0010",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 403
+  },
+  {
+   "component_id": "comp-markdown-blockquotes-dev-0003",
+   "category": "markdown",
+   "start_byte": 404,
+   "end_byte": 477
+  },
+  {
+   "component_id": "comp-markdown-headings-dev-0008",
+   "category": "markdown",
+   "start_byte": 478,
+   "end_byte": 590
+  },
+  {
+   "component_id": "comp-math-fractions-dev-0001",
+   "category": "math",
+   "start_byte": 591,
+   "end_byte": 640
+  },
+  {
+   "component_id": "comp-markdown-strikethrough-dev-0002",
+   "category": "markdown",
+   "start_byte": 641,
+   "end_byte": 703
+  },
+  {
+   "component_id": "comp-code-shell-bash-dev-0007",
+   "category": "code",
+   "start_byte": 704,
+   "end_byte": 1039
+  },
+  {
+   "component_id": "comp-prose-computing-dev-0011",
+   "category": "prose",
+   "start_byte": 1040,
+   "end_byte": 1427
+  }
+ ]
+}

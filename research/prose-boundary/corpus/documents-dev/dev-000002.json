@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-000002",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T3-prose-fenced-prose",
+ "byte_length": 811,
+ "cp_length": 786,
+ "sha256": "2ad7ad1ea5cfeb22adc8a2c7920838862a5038b72efee2fab82ee5e88c495384",
+ "document": "Zgodba o izmišljenem gradu Kamen, ki ga je opisal Marko Perš, se v šolskih zvezkih pogosto pojavlja brez natančne letnice. V enem od zapisov pa stoji samo leto 1888 in kratek opis ograj (visokih okoli dveh metrov), kar je sicer precej nenavadno za takšno pripoved.\n```\nfn povzetek2(seStez: bool) -> String { /* Testni projekt Lipa: č, š, ž, **poudarek** in _podčrtano_ */ let razdelek2 = 2; let besedilo = format!(\"_Podčrtano_ ({} $, `{}`)\", razdelek2, \"ž\"); let pot = \"docs/vir.txt\"; let url = \"https://primer.si/koda\"; format!(\"{} | {} | {} | {}\", seStez, besedilo, pot, url) }\n```\nMaja je prvič poskusila smučati na Počitenju (izmišljena dolina). Sneg je bil mehki. Proga je bila široka. „Pazite,“ jo je opomnil vodja tečaja, „ker se v sosednji strmini lahko pojavijo skrite luknje.“",
+ "components": [
+  {
+   "component_id": "comp-prose-history-dev-0008",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 269
+  },
+  {
+   "component_id": "comp-code-rust-dev-0002",
+   "category": "code",
+   "start_byte": 270,
+   "end_byte": 594
+  },
+  {
+   "component_id": "comp-prose-sports-dev-0007",
+   "category": "prose",
+   "start_byte": 595,
+   "end_byte": 811
+  }
+ ]
+}

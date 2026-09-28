@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-002779",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T8-quote-fenced",
+ "byte_length": 513,
+ "cp_length": 503,
+ "sha256": "0d8cd58d3b0b3333481e8735f979873c0a1348e12783f23163ac6084e0d27754",
+ "document": "> V maju 2026 je Nika za projekt Smreko pripravila razlago, ki je učencev pritegnila, ker so imeli pred seboj le navaden govor, ne pa vrstic na zaslonu. Sprva so govorili o spremenljivkah, potem o zanki, ki šteje korake, na koncu pa o funkciji, ki vse preostalo zloži v eno jasno dejanje. `/* Testni fragment 6: izmišljena oseba Petra, projekt Voda. `\n```\nseStez = 'https://primer.si/koda'; razdelek2 = 'src/modul.py'; HRAŠNA_VREDNOST = 7 # komentar v slovenščini: izmišljena oseba Ana, tema črn žir\n```",
+ "components": [
+  {
+   "component_id": "comp-prose-programming-explainer-dev-0010",
+   "category": "prose",
+   "start_byte": 2,
+   "end_byte": 291
+  },
+  {
+   "component_id": "comp-code-sql-dev-0006",
+   "category": "code",
+   "start_byte": 292,
+   "end_byte": 355
+  },
+  {
+   "component_id": "comp-code-python-dev-0010",
+   "category": "code",
+   "start_byte": 356,
+   "end_byte": 513
+  }
+ ]
+}

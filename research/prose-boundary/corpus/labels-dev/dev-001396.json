@@ -1,0 +1,152 @@
+{
+ "doc_id": "dev-001396",
+ "byte_length": 952,
+ "cp_length": 937,
+ "regions": [
+  {
+   "start_byte": 0,
+   "end_byte": 1,
+   "start_cp": 0,
+   "end_cp": 1,
+   "component_id": "comp-code-shell-bash-dev-0008",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 1,
+   "end_byte": 57,
+   "start_cp": 1,
+   "end_cp": 56,
+   "component_id": "comp-code-shell-bash-dev-0008",
+   "category": "code",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 57,
+   "end_byte": 58,
+   "start_cp": 56,
+   "end_cp": 57,
+   "component_id": "comp-code-shell-bash-dev-0008",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 58,
+   "end_byte": 59,
+   "start_cp": 57,
+   "end_cp": 58,
+   "component_id": "template",
+   "category": null,
+   "role": "PROSE",
+   "template_owned": true
+  },
+  {
+   "start_byte": 59,
+   "end_byte": 60,
+   "start_cp": 58,
+   "end_cp": 59,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 60,
+   "end_byte": 63,
+   "start_cp": 59,
+   "end_cp": 62,
+   "component_id": "comp-code-sql-dev-0002",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 63,
+   "end_byte": 64,
+   "start_cp": 62,
+   "end_cp": 63,
+   "component_id": "comp-code-sql-dev-0002",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 64,
+   "end_byte": 435,
+   "start_cp": 63,
+   "end_cp": 430,
+   "component_id": "comp-code-sql-dev-0002",
+   "category": "code",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 435,
+   "end_byte": 436,
+   "start_cp": 430,
+   "end_cp": 431,
+   "component_id": "comp-code-sql-dev-0002",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 436,
+   "end_byte": 439,
+   "start_cp": 431,
+   "end_cp": 434,
+   "component_id": "comp-code-sql-dev-0002",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 439,
+   "end_byte": 440,
+   "start_cp": 434,
+   "end_cp": 435,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 440,
+   "end_byte": 722,
+   "start_cp": 435,
+   "end_cp": 712,
+   "component_id": "comp-prose-travel-dev-0005",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 722,
+   "end_byte": 723,
+   "start_cp": 712,
+   "end_cp": 713,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 723,
+   "end_byte": 952,
+   "start_cp": 713,
+   "end_cp": 937,
+   "component_id": "comp-prose-everyday-advice-dev-0010",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  }
+ ],
+ "invariants": {
+  "tiling_complete": true,
+  "no_contradictory_overlaps": true,
+  "cp_range_exact": true
+ }
+}

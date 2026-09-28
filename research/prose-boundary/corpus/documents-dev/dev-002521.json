@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-002521",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T3-prose-fenced-prose",
+ "byte_length": 1139,
+ "cp_length": 1119,
+ "sha256": "f433f3df91b330a95fd76714e27e00bff92e2b5c2849f54d81f3dc1be300eb83",
+ "document": "Kadar učenci rešujejo enačbe, jim je koristno, da najprej povežejo oba dela z istimi dejanji, da ostane zvezek ravnovesja (kot pri tehtnici). Pri projektu Šolske številke so v letu 2021 poskusili z besedilnimi nalogami, v katerih je neznanka skrita v vsakdanji razgovoru. Zaradi tega se učenci naučijo, da razlaga ni le zapis, ampak način misljenja.\n```\n# Testni projekt: Vir podatkov; avtor: Maja Lipovnik\nurl = 'https://primer.si/koda'\npot = 'src/nabavki.py'\ncena = '100 $ (brez popusta)'\noznaka = '(test č š ž)'\nif url and pot:\n    print('Vir je nastavljen')\n```\nNa opazovalni postaji pri projektu Zvezdna nit pod Šmarnico je mlada raziskovalka Lina Petek opazovala meglico z imenom Vrt 17 (opazovana od leta 2019). »Zvezda se v daljinici zdi tiha, vendar spektralna analiza kaže, da se v njej dogajajo močni premiki,« je povedala ob drugi uri zjutraj. Njena ekipa je nato v dolge noči zapisovala meritve, pri čemer so posebej skrbno beležila tudi tiste minute, ko je meglica izgledala kot navaden oblak. Kasneje je Lina v dnevnik zapisala, da so dolge serije meritev pogosto bolj zanesljive od enega samega pogleda.",
+ "components": [
+  {
+   "component_id": "comp-prose-math-explainer-dev-0006",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 358
+  },
+  {
+   "component_id": "comp-code-python-dev-0005",
+   "category": "code",
+   "start_byte": 359,
+   "end_byte": 577
+  },
+  {
+   "component_id": "comp-prose-science-dev-0013",
+   "category": "prose",
+   "start_byte": 578,
+   "end_byte": 1139
+  }
+ ]
+}

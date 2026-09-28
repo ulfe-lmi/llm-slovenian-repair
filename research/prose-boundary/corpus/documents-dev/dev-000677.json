@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-000677",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T7-prose-json-prose-latex",
+ "byte_length": 813,
+ "cp_length": 802,
+ "sha256": "5cf71778fac600221d78dc5a7fcef239a2033e06f1f77c45a924fc5cccb3caf7",
+ "document": "V soboto je ekipa iz Ljubljanskega učnega laboratorija testirala, kako hitro se sestanek prekine, če je omrežje preobremenjeno. Rezultat, ki so ga prebrali skupaj, je bil preprost: naprave se raje razbremenijo s kratkim premorom.\n{\"ime\":\"Oseba Miha\",\"dolžina\":\"1,8 m\",\"avtorsko\":\"Nevtralna testna vsebina\",\"razmerje\":\"0,13\",\"opomba\":\"*Izmišljena oseba* https://primer.si/novica\"}\nKatarina in Jure sta v razredu elektronskih raziskav leta 2024 razpravljala o tem, kako sklepi in upornosti varujejo komponente pred prevelikim tokom. Pri poskusu s tremi različnimi baterijami sta opazila, da se žarnica pri višji napetosti svetli močneje, a se hitreje ogreje. Oba sta zapisala, da za varno vajo zadostujejo natančno merjenje, potrpežljivost in jasna shema.\n\\text{Krka}\\begin{bmatrix}7&8\\\\9&10\\end{bmatrix}",
+ "components": [
+  {
+   "component_id": "comp-prose-computing-dev-0004",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 232
+  },
+  {
+   "component_id": "comp-structured-json-dev-0006",
+   "category": "structured",
+   "start_byte": 233,
+   "end_byte": 384
+  },
+  {
+   "component_id": "comp-prose-electronics-dev-0013",
+   "category": "prose",
+   "start_byte": 385,
+   "end_byte": 764
+  },
+  {
+   "component_id": "comp-math-matrices-dev-0002",
+   "category": "math",
+   "start_byte": 765,
+   "end_byte": 813
+  }
+ ]
+}

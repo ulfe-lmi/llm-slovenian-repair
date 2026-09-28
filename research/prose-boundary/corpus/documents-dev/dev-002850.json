@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-002850",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T2-prose-math-prose",
+ "byte_length": 648,
+ "cp_length": 636,
+ "sha256": "6b3dbe58aedf51f345742337c223544bb0a27abda3627b4f3bbfb8d2a32b3bb1",
+ "document": "V razredu smo pogovorno razložili, kako enačbe pomenijo enakost dveh izrazov, zato so učenci bolje razumeli, da se zamenja ne preprosto potegne. (Sprašila sem jih, kateri del bi se premaknil, in mnogi so povedali, da je pomembno ohraniti ravnotežje.) Ko so to povejali z dnevnim življenjem, je šlo lažje.\n\\sum_{\\iota=1}^{6} \\kappa_{\\iota} * \\prod_{\\lambda=1}^{2} \\mu_{\\lambda} \\text{Koper}\nMednarodna skupina, ki dela v izmišljenem arhivu Ljubljana, je pregledovala dopise iz leta 1804, v katerih omenjajo potovanja po dolini. V vstavku (ki ga je zapisala Taja) piše: »Razdalje so merili s koraki in verstami, ne pa z modernimi merami.«",
+ "components": [
+  {
+   "component_id": "comp-prose-math-explainer-dev-0001",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 312
+  },
+  {
+   "component_id": "comp-math-summations-dev-0003",
+   "category": "math",
+   "start_byte": 313,
+   "end_byte": 397
+  },
+  {
+   "component_id": "comp-prose-history-dev-0002",
+   "category": "prose",
+   "start_byte": 398,
+   "end_byte": 648
+  }
+ ]
+}

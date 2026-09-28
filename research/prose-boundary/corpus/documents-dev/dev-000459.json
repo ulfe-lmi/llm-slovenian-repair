@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-000459",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T9-prose-malformed-prose",
+ "byte_length": 786,
+ "cp_length": 767,
+ "sha256": "16a0e6f9b3917647adfaf61e3572259870037ac8aafcb7b688ab82e7fa0a0405",
+ "document": "V okviru projekta Nova vrv so otroci iz Ljubljane v petek zvečer vadili kratke podaje. Učiteljica Maja je opazila, da so po deset minutah teka vsi bolj sproščeni.\n[opis](https://primer.si/stran prvi del: avtorizirana testna vsebina projekta Modri vrt; izmišljena oseba Ana Kovač preverja podatke.\nV letu 2022 je občina Šentvid na Vzorčni gori uvedla elektronsko predložitev dokumentov. Nekateri uporabniki so najprej raje oddali listne vloge, a so kasneje izbrali spletno obliko. V zapisniku, ki ga je podpisal magister Jožef Kranjc, so zapisali: „Postopek je pregleden”, in ga nato potrdili. Rok za odziv je bil deset dni, vendar so večino rešitev dokončali že v petih dneh. Tudi mnenje javnosti je bilo zmerno, saj so v anketi sodelovali trije od petih prebivalcev.",
+ "components": [
+  {
+   "component_id": "comp-prose-sports-dev-0011",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 166
+  },
+  {
+   "component_id": "comp-malformed-broken-link-dev-0001",
+   "category": "malformed",
+   "start_byte": 167,
+   "end_byte": 302
+  },
+  {
+   "component_id": "comp-prose-administration-dev-0010",
+   "category": "prose",
+   "start_byte": 303,
+   "end_byte": 786
+  }
+ ]
+}

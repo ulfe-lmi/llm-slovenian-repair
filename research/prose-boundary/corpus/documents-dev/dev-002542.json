@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-002542",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T2-prose-math-prose",
+ "byte_length": 946,
+ "cp_length": 919,
+ "sha256": "94a22d2bbce2fdd97b0702d72a2dcceebb0a17e0d6599a752634d146224bab51",
+ "document": "V projektu Mladostni učenec so raziskovalci (Marko Novak, Petra Hribar in drugi) spremljali učence osmih osnovnih šol v obdobju dveh let. Namen je bil ugotoviti, kako različne metode vplivajo na razumevanje učnega gradiva ter na strah pred izpiti. Pri učbenikih so posebej opazovali, ali slike, opombe in kratki povzetki spodbujajo samostojno delo ali pa le zapletajo razumevanje. Učitelji so poleti 2023 zabeležili, da so učenci pri refleksiji pogosto izrekli, da bi želeli več »prostora za vprašanja« in manj ponavljanja brez poudarka.\n$\\sqrt{\\alpha^2 + \\beta^2} = \\gamma_{\\text{Marko projekt Hrib}}$\nNa projektu Prihajajoča šola so otroci najprej razlojevali, kako deluje preprosta mreža v razredu. Ko so prišli do vprašanja, ki se ga loteva vsak učitelj, so rekli, da bi radi imeli „varno košarico“ za skice. S tem so pokazali, da so pojmi kot zasebnost in prepoznavljivost bližje, ko jih povežemo s vsakdanjo rabo.",
+ "components": [
+  {
+   "component_id": "comp-prose-education-dev-0003",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 551
+  },
+  {
+   "component_id": "comp-math-inline-dollar-dev-0006",
+   "category": "math",
+   "start_byte": 552,
+   "end_byte": 616
+  },
+  {
+   "component_id": "comp-prose-computing-dev-0002",
+   "category": "prose",
+   "start_byte": 617,
+   "end_byte": 946
+  }
+ ]
+}

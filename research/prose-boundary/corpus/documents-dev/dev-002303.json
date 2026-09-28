@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-002303",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T5-lists",
+ "byte_length": 1290,
+ "cp_length": 1263,
+ "sha256": "89209069054a2078979acf21b4da7081a49070ab0be8d299beb3a6cb61c6e01d",
+ "document": "- V projektu Brisača so mladi v Novem mestu dobili učbenik, ki je namesto dolgih razlag ponudil tri kratke opise in eno vprašanje za pogovor. Nekateri odrasli so želeli, da bi izpit ostal razumljiv, zato so v nalogah zapisali tudi primer, kakšno vprašanje bodo dobili. Učiteljica Ivana je v uvodnem poglavju (glej stran 17) dodala opombo o tem, kako se besede razlikujejo v govoru in v pisanju. Po kratkem testnem popoldnevu v oddelku so se učenci in starši bolje dogovorili o tem, kaj pomeni samostojno reševanje.\n- `#include <string>`\n- V zbirki Tihi bralci (2018) mlada pisateljica Nina Skof opisuje dedno knjižnico. Na stenski plošci visi seznam bralcev iz let 1954 in 1971, med njimi tudi izmišljeni pesnik Jure Čvik. Evropska literarna tradicija pozna podobno zbirko tistih, ki so izginili v prevodu. Knjižnost je tu skrita v prahu, ne v naslovu.\n- V projektu Hišni nasveti 2024 je Ana iz Ljubljane opazila, da se steklenice s čisto vodo, (še posebej tiste 0,5 litra), hitreje izpraznijo, če so vedno pri roki ob jedilni mizi. Njen sosed Marko je bil sprva skeptičen, a je po dveh tednih dejal: »Če je pijača pri mizi, manjkrat potuje v hladilnik.« Tudi manjše spremembe, kot je skleda za kosmiče ob vratih, v celotnem gospodinjstvu naredijo mirnejše jutro.",
+ "components": [
+  {
+   "component_id": "comp-prose-education-dev-0008",
+   "category": "prose",
+   "start_byte": 2,
+   "end_byte": 524
+  },
+  {
+   "component_id": "comp-code-cpp-dev-0004",
+   "category": "code",
+   "start_byte": 527,
+   "end_byte": 546
+  },
+  {
+   "component_id": "comp-prose-literature-dev-0003",
+   "category": "prose",
+   "start_byte": 549,
+   "end_byte": 867
+  },
+  {
+   "component_id": "comp-prose-everyday-advice-dev-0011",
+   "category": "prose",
+   "start_byte": 870,
+   "end_byte": 1290
+  }
+ ]
+}

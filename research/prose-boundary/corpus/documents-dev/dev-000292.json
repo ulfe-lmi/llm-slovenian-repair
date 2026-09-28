@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-000292",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T7-prose-json-prose-latex",
+ "byte_length": 816,
+ "cp_length": 792,
+ "sha256": "2c59ea4e6f531fab55aac635bbba76119d2a2261366941a1cc2a4d6d6afcfa9a",
+ "document": "Primerjava mer je najlažje razumljiva, kadar učitelj postavi vprašanje: „Kako dolgo bo cesta na zemljevidu, če je dejanska dolžina sto kilometrov?“ V razredu se pogosto uporablja beseda sorazmerje, vendar je pomembno, da učenci vidijo odnos med številoma. Enkrat so pri projektu Rabič in Šolar izmerekli sence na šolskem igrišču, potem pa iz tega razločili razmerje višin.\n{\"ime\":\"Projekt Lipa\",\"cilj\":\"Nalaganje podatkov 25 %\",\"avtorsko\":\"Nevtralna testna vsebina\",\"merila\":{\"razmerje\":\"3,5 m / 0,13\",\"opomba\":\"**Test** https://primer.si/novica\"}}\nLuka je dejal, da je funkcija kot mala kuhinja v veliki jedilnici. „Vgradi sestavine, počakaš in dobijoš posodo,« je rekel z nasmehom. Sodelavci so takoj videli, da se s tem izognemo ponavljanju.\n\\[\\frac{5}{6}+\\dfrac{\\zeta}{\\eta}=\\text{Maja}\\]",
+ "components": [
+  {
+   "component_id": "comp-prose-math-explainer-dev-0007",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 390
+  },
+  {
+   "component_id": "comp-structured-json-dev-0001",
+   "category": "structured",
+   "start_byte": 391,
+   "end_byte": 566
+  },
+  {
+   "component_id": "comp-prose-programming-explainer-dev-0003",
+   "category": "prose",
+   "start_byte": 567,
+   "end_byte": 768
+  },
+  {
+   "component_id": "comp-math-fractions-dev-0003",
+   "category": "math",
+   "start_byte": 769,
+   "end_byte": 816
+  }
+ ]
+}

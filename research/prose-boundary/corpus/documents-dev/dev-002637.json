@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-002637",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T9-prose-malformed-prose",
+ "byte_length": 793,
+ "cp_length": 758,
+ "sha256": "bda2a5690c1c140f4c9f3991805f46d3a59552965dd5595ad398e36d205f193e",
+ "document": "»Knjižnost ni samo papir,« pravi izmišljeni knjižničar Tone Mlinič v razpravi o projektu Splošna polica, »ker se vsaka besedna sled z njo vrača v prostor.« V starejšem evropskem folklornem motifu se pojavlja skrivna polica, ki v noči prenaša imena iz ene države v drugo.\nKo učimo trikotnike, lahko začnemo z vprašanjem, „Zakaj je šotor stabilen?“ in nato z ročno izrisanimi oblikami na papirju. Učenci pogosto uvidijo, da višina ni samo dolžina črte, ampak razdalja do nasprotne stranice, čeprav jo učbeniki včasih imenujejo le višina. Pri projektu Podrobnosti na papirju so učenci iz leta 2022 z risbo razložili, kako se oblika spreminja, ko premaknemo eno temeno točko.\n``` Testni projekt Vrba: nevtralna vsebina za preizkus obdelave, avtorica Nika Horvat.",
+ "components": [
+  {
+   "component_id": "comp-prose-literature-dev-0002",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 285
+  },
+  {
+   "component_id": "comp-prose-math-explainer-dev-0010",
+   "category": "prose",
+   "start_byte": 286,
+   "end_byte": 706
+  },
+  {
+   "component_id": "comp-malformed-unclosed-fence-dev-0003",
+   "category": "malformed",
+   "start_byte": 707,
+   "end_byte": 793
+  }
+ ]
+}

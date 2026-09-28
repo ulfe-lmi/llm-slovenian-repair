@@ -1,0 +1,65 @@
+{
+ "doc_id": "dev-000658",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T10-randomized",
+ "byte_length": 2086,
+ "cp_length": 2055,
+ "sha256": "503d54f70e97fbb9f9b2da2d996804904b7d2cce0e34fcd1ecd004ececb16e32",
+ "document": "Uprava za vzorčne javne storitve je junija 2024 (ob povišanem obsegu zahtev) pripravila pregled časa čakanja v treh oddelkih. Najkrajši termin so dodelili za menjavo osebne listine, in sicer za pet minut, medtem ko je posodabljanje drugih obrazcev trajalo do dvajset dni. V vložku za potrdilo so uporabniki lahko izbrali osebni prevzem ali poštno oddajo. Po mnenju odgovorne osebe, Anje Laki, je tak postopek najbolj preprost za starejše uporabnike.\nProjekt Brin: Čas preizkusa je 45 min, tlak pa 2,4 bar, navedeno z **močno** in __podčrtim__ besedilom.\nmodul_pogon.py poročilo_q3.csv\n```\nmoČ = 3; žrtev = (1, 2); besedilo = 'Cena: $10 `kod` **poudarek** _podčrtano_'; pot = 'docs/vir.txt' # komentar v slovenščini: testni projekt, https://primer.si/koda\n```\n<dogodek id='četrta' datum='2024-01-15' kraj='Ljubljana'><opis postotek='35 %'>Prva faza</opis></dogodek>\n```\n-- Testni SQL fragment: razpoloži\nCREATE TABLE razpolozi (\n  id INT PRIMARY KEY,\n  \"seStez\" TEXT,\n  \"razdelek2\" TEXT,\n  opomba TEXT\n);\nINSERT INTO razpolozi (id, \"seStez\", \"razdelek2\", opomba)\nVALUES (1, '**poudarek** *zvezdice*', '_podčrtano_', '12 $ / dan');\nUPDATE razpolozi SET opomba = 'Vir: https://primer.si/koda' WHERE id = 1;\nSELECT id, \"seStez\", \"razdelek2\", opomba FROM razpolozi ORDER BY id;\n```\nV testnem projektu <b>Sivi vrh</b> je <i>Barbara Zajc</i> preverila <span>800 hPa</span> tlak.<br/>Druga vrednost je 810 hPa.\nFragment 3: <table><tr><td>Temperatura</td><td>15,5 °C</td></tr><tr><td>Hitrost</td><td>42 km/h</td></tr><tr><td>Masa</td><td>2,4 kg</td></tr></table>\nV sklopu projekta Papirni most je Anica Kranjc v zbornik vstavila odlomek iz romaneskega dnevnika, ki nosi ime »Zadnji tiskar«. Besedilo iz leta 1998 pripoveduje o mali nakladni hiši v Celju, kjer so tiskarji med prazniki brali evropske pripovedke. Nekatera poglavja ostajajo izpuščena (verjetno zaradi cenzure), druga pa so prenesena ročno v zvezek iz tankega usnja. To vprašanje pomena slovenske knjižnosti v evropskem prostoru se v zadnjem odstavku razreši šele s kratkim pozivom k skupnemu branju.",
+ "components": [
+  {
+   "component_id": "comp-prose-administration-dev-0007",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 457
+  },
+  {
+   "component_id": "comp-markdown-strong-dev-0005",
+   "category": "markdown",
+   "start_byte": 458,
+   "end_byte": 564
+  },
+  {
+   "component_id": "comp-machine-filenames-dev-0005",
+   "category": "machine",
+   "start_byte": 565,
+   "end_byte": 596
+  },
+  {
+   "component_id": "comp-code-python-dev-0011",
+   "category": "code",
+   "start_byte": 597,
+   "end_byte": 775
+  },
+  {
+   "component_id": "comp-structured-xml-dev-0004",
+   "category": "structured",
+   "start_byte": 776,
+   "end_byte": 882
+  },
+  {
+   "component_id": "comp-code-sql-dev-0009",
+   "category": "code",
+   "start_byte": 883,
+   "end_byte": 1296
+  },
+  {
+   "component_id": "comp-markdown-raw-html-dev-0007",
+   "category": "markdown",
+   "start_byte": 1297,
+   "end_byte": 1422
+  },
+  {
+   "component_id": "comp-structured-html-dev-0003",
+   "category": "structured",
+   "start_byte": 1423,
+   "end_byte": 1574
+  },
+  {
+   "component_id": "comp-prose-literature-dev-0013",
+   "category": "prose",
+   "start_byte": 1575,
+   "end_byte": 2086
+  }
+ ]
+}

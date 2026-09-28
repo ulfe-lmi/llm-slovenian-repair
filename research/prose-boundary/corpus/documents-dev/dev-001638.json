@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-001638",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T11-interactions",
+ "byte_length": 802,
+ "cp_length": 790,
+ "sha256": "3a84252941cc88cbd060391dbbddc9c07cf7ced5ce5597786f617ed6716dbe0e",
+ "document": "`/* Testni fragment 6: izmišljena oseba Petra, projekt Voda. `.\n```\n#include <string>\n// Končni primer: Ana, Karel, Lipa\n// Znaki: č, š, ž\nint main() {\n    const int HRA_NA_VREDNOST = 9;\n    std::string opis = \"`oklepaji` in *zvezdice*\";\n    return HRA_NA_VREDNOST;\n}\n# komentar z \\frac{a}{b}\n```\n»Za omaro s posodo ne rabiš dragih sredstev,« je v projektu Varčni dom rekla Ana, da je dovolj topla voda in kapljica naravne citronike. Steklo se briše v eni smeri, da ni pasov.\nMaja (2022) je v projektu Ljubljanska potopisna zanka pojasnila, da zanka lahko obravnava vrsto dogodkov, dokler ni izpolnjen pogoj, in da funkcija obdaja pogoste korake v eno imeno. V tem razumevanju spremenljivka ni le število, ampak tudi ime za stanje, ki se med potekom spreminja, kar olajša prenos med koraki.",
+ "components": [
+  {
+   "component_id": "comp-code-sql-dev-0006",
+   "category": "code",
+   "start_byte": 0,
+   "end_byte": 63
+  },
+  {
+   "component_id": "comp-code-cpp-dev-0008",
+   "category": "code",
+   "start_byte": 65,
+   "end_byte": 301
+  },
+  {
+   "component_id": "comp-prose-everyday-advice-dev-0007",
+   "category": "prose",
+   "start_byte": 302,
+   "end_byte": 485
+  },
+  {
+   "component_id": "comp-prose-programming-explainer-dev-0013",
+   "category": "prose",
+   "start_byte": 486,
+   "end_byte": 802
+  }
+ ]
+}

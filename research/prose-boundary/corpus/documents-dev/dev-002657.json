@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-002657",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T7-prose-json-prose-latex",
+ "byte_length": 918,
+ "cp_length": 905,
+ "sha256": "ec92858cbe97a302e1729e0cfbba4665d77a4ceb5216536cbe9bb3e4ad6f3119",
+ "document": "Proces urejanja prostorskih posegov v okviru notranjega testnega projekta se je lani (2024) prenesel v skupno aplikacijo, kar je v prvih mesecih povzročilo zamude. Občinski sekretar, ki je sicer skrbel za informatiko, je sodelavce opozoril, naj se strogo držijo notranjih rokov in da je vsak dokument datiran, pečaten in arhiviran.\r\n{\"ime\":\"Oseba Miha\",\"dolžina\":\"1,8 m\",\"avtorsko\":\"Nevtralna testna vsebina\",\"razmerje\":\"0,13\",\"opomba\":\"*Izmišljena oseba* https://primer.si/novica\"}\r\nV projektu Gradec je bilo pri projektiranju jeklene konstrukcije ključno, koliko obremenitve prenese nosilni presek. Mladi konstruktor Jaka Kovač je, ob podpori projektirke Lune, predlagal dodatno ojačanje in začasne podlage. Sodelavci so se po dveh tednih razprave strinjali s predlogom. Končno je most dobil tudi dodatno zaščito pred erozijo.\r\n\\[ \\begin{cases} 4\\rho_1+\\rho_2=\\text{Ziga},\\\\ \\omega_3+6=19 \\end{cases} \\]",
+ "components": [
+  {
+   "component_id": "comp-prose-administration-dev-0013",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 335
+  },
+  {
+   "component_id": "comp-structured-json-dev-0006",
+   "category": "structured",
+   "start_byte": 337,
+   "end_byte": 488
+  },
+  {
+   "component_id": "comp-prose-engineering-dev-0008",
+   "category": "prose",
+   "start_byte": 490,
+   "end_byte": 841
+  },
+  {
+   "component_id": "comp-math-bracket-tex-dev-0007",
+   "category": "math",
+   "start_byte": 843,
+   "end_byte": 918
+  }
+ ]
+}

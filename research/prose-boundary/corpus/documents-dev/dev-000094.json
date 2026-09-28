@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-000094",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T7-prose-json-prose-latex",
+ "byte_length": 889,
+ "cp_length": 874,
+ "sha256": "162044fe1da82a88113f31b4b614d30de0f0c39b9c1696fcddb8e9f597c74318",
+ "document": "V Ljubljani sem se s projektom Zeleni otok podal h Trgu republike (nekaj metrov od Kamnitega mostu). Na dvorišču so nas sprejeli z rahlim zamikom, saj je bilo dvigalo zasedeno. V razstavi smo videli modele, ki so prikazovali potovanja po reki od 1980-ih let. Popoldne smo se odločili za kavo ob trgu, medtem ko so se otroci igrali v parku.\n{\"ime\":\"Projekt Reka\",\"razmerje\":\"2,5 m / 0,13\",\"avtorsko\":\"Nevtralna testna vsebina\",\"vzorec\":{\"delež\":\"30 %\",\"opis\":\"_Nevtralno_ https://primer.si/novica\"}}\nAna si je za projekt »Miren dan« izbrala prenosnik, ki naj bi bil dovolj tih, da ga lahko odpre v knjižnici (tudi če baterija ni polna). V »Ponovni sinhronizaciji« se ji je obljubil mirnejši dan, če omrežje ne bo puščalo zamud.\n\\begin{equation}\\begin{aligned}K_5 &= \\left(\\alpha_5 + \\beta_5\\right)^2 \\text{Triglav test} \\\\L_5 &= \\det A_5 + \\theta_5\\end{aligned}\\end{equation}",
+ "components": [
+  {
+   "component_id": "comp-prose-travel-dev-0003",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 342
+  },
+  {
+   "component_id": "comp-structured-json-dev-0004",
+   "category": "structured",
+   "start_byte": 343,
+   "end_byte": 502
+  },
+  {
+   "component_id": "comp-prose-computing-dev-0006",
+   "category": "prose",
+   "start_byte": 503,
+   "end_byte": 741
+  },
+  {
+   "component_id": "comp-math-aligned-env-dev-0005",
+   "category": "math",
+   "start_byte": 742,
+   "end_byte": 889
+  }
+ ]
+}

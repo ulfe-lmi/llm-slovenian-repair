@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-001451",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T11-interactions",
+ "byte_length": 957,
+ "cp_length": 938,
+ "sha256": "26bbf75977f31c704b931eed7bb01f0247b21ebce12a8726c094b6f3cdd1eb12",
+ "document": "`#include <string>`.\n```\n/* Fragment 3: testni primer, vir https://primer.si/koda, pot src/modul.py, docs/vir.txt */ int osnutek3 = 3; std::string podatek3() { return \"_Povzetek_ *koda* `backquote` 7 $ (č, š, ž)\"; }\n# komentar z \\frac{a}{b}\n```\nLuka, ki je vodil testni projekt Breza, je razložil, da spremenljivka nosi ime, vrednost pa pomeni, kaj se takrat zgodilo. (Steklenička s sokom pri tem dobro pokaže, kako se raven zniža.) Zanka nato vztraja, dokler pogoj ostane res, in funkcija povrne odgovor, »ja« ali »ne«, brez skritih pogojev.\nUdeleženci projekta Otvorena vrata so v jeseni 2024 preizkusili učno sredo, v kateri je bil učbenik le ena od štirih podlag. Mladostnike je zanimalo, zakaj se isti izpit pri treh učiteljih razlikuje v razlagi (zlasti pri nalogah iz književnosti), zato so zapisali kratko pojasnilo. Na koncu so se dogovorili, da bo vsak odrasli udeleženec dobil eden sam pogovorni termin, ne pa dveh ločenih rok.",
+ "components": [
+  {
+   "component_id": "comp-code-cpp-dev-0007",
+   "category": "code",
+   "start_byte": 0,
+   "end_byte": 19
+  },
+  {
+   "component_id": "comp-code-cpp-dev-0011",
+   "category": "code",
+   "start_byte": 21,
+   "end_byte": 247
+  },
+  {
+   "component_id": "comp-prose-programming-explainer-dev-0009",
+   "category": "prose",
+   "start_byte": 248,
+   "end_byte": 553
+  },
+  {
+   "component_id": "comp-prose-education-dev-0010",
+   "category": "prose",
+   "start_byte": 554,
+   "end_byte": 957
+  }
+ ]
+}

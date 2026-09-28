@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-002947",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T11-interactions",
+ "byte_length": 989,
+ "cp_length": 968,
+ "sha256": "be85e898642ff8f8c0ad7a28381288afe59b81eff12ae91e3a016f70f795efd2",
+ "document": "`# Testni projekt: Seznam; avtor: Maja Lipovnik`.\n```\n#include <string>\n// Projekt: *Lipa*, šentjanž\n// Preveri src/modul.py\nstd::string seStez(int razdelek2) {\n    // žlahtna vrednost: 2 $\n    return \"vrednost \" + std::to_string(razdelek2 * 2) + \" $\";\n}\n# komentar z \\frac{a}{b}\n```\nV izmišljenem raziskovalnem projektu “Arhiv Dravskih poti” (nevtralna testna zbirka) so zapisi o potovanjih po Dravi prikazali, kako so meje med skupnostmi spreminjale spomin na preteklost. Letnica 1918 je postala mejni simbol. Avtorica Ana Kralj je v vnosu zapisala (po mnenju uredništva), da je “zgodovina” večinoma molk med letnicami.\nKratka pot do varčnosti je pogosto preprosta: pred nakupom se je treba vprašati, ali stvar res pomanjkuje ali samo manjka red. V projektu Skromni kotički sta Luka in Nina preizkušala, ali je mogoče stare posode posvetiti z malo sode bikarbone in toplo vodo. Če predmet v treh dneh ne najde svoje vloge, ga raje odnesemo na dražbo ali ga podarimo.",
+ "components": [
+  {
+   "component_id": "comp-code-python-dev-0006",
+   "category": "code",
+   "start_byte": 0,
+   "end_byte": 48
+  },
+  {
+   "component_id": "comp-code-cpp-dev-0003",
+   "category": "code",
+   "start_byte": 50,
+   "end_byte": 286
+  },
+  {
+   "component_id": "comp-prose-history-dev-0011",
+   "category": "prose",
+   "start_byte": 287,
+   "end_byte": 635
+  },
+  {
+   "component_id": "comp-prose-everyday-advice-dev-0013",
+   "category": "prose",
+   "start_byte": 636,
+   "end_byte": 989
+  }
+ ]
+}

@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-000584",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T2-prose-math-prose",
+ "byte_length": 860,
+ "cp_length": 832,
+ "sha256": "3eec6dba70cc44eacf3308894672f44eeb3cd133439c8275964cb6363f5a8926",
+ "document": "Na opazovalnem mestu izmišljenega projekta Nočni ogled so opazovalci (v resnici študenti) opazili, da je ob vzhodu zvezde Aldebaran, ki so jo imenovali »čudovita svetleča točka«, svetloba rahlo zamigavala. V dnevniku meritve, ki ga je vodila Tjaša Novak, je stalo, da je letni cikel 2022 prinesel boljše vremenske razmere in zato večjo zanesljivost pri ocenjanju sijev.\n\\begin{equation}\\begin{aligned}R_3 &= \\int_0^1 \\eta(x) \\, dx \\text{Izmišljen vzor} \\\\S_3 &= \\lim_{n \\to \\infty} \\frac{1}{n} \\sqrt{n^2+1}\\end{aligned}\\end{equation}\nOb projektnem srečanju je Marko dejal: „Povprečje je koristno, včasih pa skrije, kaj se res dogaja.“ Skupina je nato primerjala še največje in najmanjše vrednosti, da bi imela širši vtis. Tudi brez zapletenih računov so prišli do zaključka, da so razmere v zadnjih dveh letih postopoma stabilnejše.",
+ "components": [
+  {
+   "component_id": "comp-prose-science-dev-0008",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 380
+  },
+  {
+   "component_id": "comp-math-aligned-env-dev-0003",
+   "category": "math",
+   "start_byte": 381,
+   "end_byte": 545
+  },
+  {
+   "component_id": "comp-prose-statistics-dev-0003",
+   "category": "prose",
+   "start_byte": 546,
+   "end_byte": 860
+  }
+ ]
+}

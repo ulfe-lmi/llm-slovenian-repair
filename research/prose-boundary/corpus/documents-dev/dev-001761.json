@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-001761",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T2-prose-math-prose",
+ "byte_length": 532,
+ "cp_length": 523,
+ "sha256": "cec6927e7027ab5379ce2b3fc3495ed34664b7227bf9b2cf16c71c5ec9dd20b3",
+ "document": "V projektu Prijava za športno leto 2024 je učiteljica Meta pojasnila, da lahka utrujenost po vadbi pogosto prehaja, če oseba zaspi in pije vodo. Če se stanje ponovi ali poslabša, je smiselno poiskati zdravnika.\n$$\\frac{\\xi}{\\eta - 2} = \\frac{8}{13} + \\alpha = \\text{Nova Gorica}$$\nPri izpisu je bila pomembna ne samo skupna vrednost, ampak tudi to, ali so vsi podatki iz štirih oddelkov pravilni (kot je poudarila Nina). Povprečna vrednost je bila za tri evre višja, razmerje pa je ostalo približno enako kot spomladi 2022.",
+ "components": [
+  {
+   "component_id": "comp-prose-medicine-explainer-dev-0011",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 215
+  },
+  {
+   "component_id": "comp-math-display-dollar-dev-0007",
+   "category": "math",
+   "start_byte": 216,
+   "end_byte": 285
+  },
+  {
+   "component_id": "comp-prose-statistics-dev-0004",
+   "category": "prose",
+   "start_byte": 286,
+   "end_byte": 532
+  }
+ ]
+}

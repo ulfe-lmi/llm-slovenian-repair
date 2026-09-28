@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-000600",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T7-prose-json-prose-latex",
+ "byte_length": 939,
+ "cp_length": 926,
+ "sha256": "45ea2f813202d9952d61c963c9c1d8211d1d0e05b264216485b0223658e8709e",
+ "document": "V soboto je ekipa iz Ljubljanskega učnega laboratorija testirala, kako hitro se sestanek prekine, če je omrežje preobremenjeno. Rezultat, ki so ga prebrali skupaj, je bil preprost: naprave se raje razbremenijo s kratkim premorom.\n{\"ime\":\"Projekt Lipa\",\"cilj\":\"Nalaganje podatkov 25 %\",\"avtorsko\":\"Nevtralna testna vsebina\",\"merila\":{\"razmerje\":\"3,5 m / 0,13\",\"opomba\":\"**Test** https://primer.si/novica\"}}\nVzorčni projekt za Občinsko pisarno je v septembru 2025 preizkusil nov obrazec za prijavo krajnega dogodka. V navodilih so pisali: „Oddajte dokument najmanj tri dni pred pričetkom”, da bi preprečili zamudo pri obravnavi. Preizkus je vključeval tri uporabnike in dva referenta, ki sta preverila datume in številke v obrazcu.\n\\begin{equation} \\text{Testni projekt Janez} \\; : \\; \\int_{0}^{1} 2\\alpha_4 \\, \\mathrm{d}\\alpha_4=\\alpha_4^2 \\big|_{0}^{1} \\Rightarrow \\int_{0}^{1} 2\\alpha_4 \\, \\mathrm{d}\\alpha_4=1 \\end{equation}",
+ "components": [
+  {
+   "component_id": "comp-prose-computing-dev-0004",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 232
+  },
+  {
+   "component_id": "comp-structured-json-dev-0001",
+   "category": "structured",
+   "start_byte": 233,
+   "end_byte": 408
+  },
+  {
+   "component_id": "comp-prose-administration-dev-0008",
+   "category": "prose",
+   "start_byte": 409,
+   "end_byte": 742
+  },
+  {
+   "component_id": "comp-math-equation-env-dev-0004",
+   "category": "math",
+   "start_byte": 743,
+   "end_byte": 939
+  }
+ ]
+}

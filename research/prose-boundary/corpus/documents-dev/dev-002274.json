@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-002274",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T9-prose-malformed-prose",
+ "byte_length": 574,
+ "cp_length": 563,
+ "sha256": "03464bb6a852785eb8b2b7c18588c26b9b68ac12d237fe0b93250bec9e867e65",
+ "document": "Maja je v pisarni preizkusila nov tiskalnik, ki pa se je ob prvimu zagonu pokazal bolj zahteven, kot so obljavali. V razpravi so sodelavci spregovorili o tem, da bi lahko preprostejši program za spremljanje tonerja rešil polovico tegob.\n[opis](https://primer.si/stran prvi del: avtorizirana testna vsebina projekta Modri vrt; izmišljena oseba Ana Kovač preverja podatke.\nAna je v razredni testni delavnici najprej preverila, ali je sklep odprt (tako je ohišje varno), in šele nato prižgala majhno utripalko. V zapisniku je zapisala „Preizkus 2024 je brez napake.“",
+ "components": [
+  {
+   "component_id": "comp-prose-computing-dev-0001",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 238
+  },
+  {
+   "component_id": "comp-malformed-broken-link-dev-0001",
+   "category": "malformed",
+   "start_byte": 239,
+   "end_byte": 374
+  },
+  {
+   "component_id": "comp-prose-electronics-dev-0001",
+   "category": "prose",
+   "start_byte": 375,
+   "end_byte": 574
+  }
+ ]
+}

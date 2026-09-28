@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-002157",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T2-prose-math-prose",
+ "byte_length": 955,
+ "cp_length": 934,
+ "sha256": "74fdc60bd32e7209d1cf5f589960f8af00e563fa0385200401ceb3078f7b4106",
+ "document": "Zimska juha je pri kuhanju zahtevala mir in čas. Anja je najprej olupila krompir, nato pa ga naribala. Za projektni dnevnik je zapisala, da je smetane lahko “samo malo”, ne pa preveč. V kotliček so šli tudi rdeča čebula in klobasa, po stari navadi. Skozi okno je prišlo malo hlada, zato je juha postala še gostejša.\r\n\\begin{equation} \\text{Testni projekt Tomas} \\; : \\; \\sin^2 \\theta_6 + \\cos^2 \\theta_6=1 \\Rightarrow \\theta_6=\\frac{\\pi}{6} \\Rightarrow \\sin^2\\left(\\frac{\\pi}{6}\\right)+\\cos^2\\left(\\frac{\\pi}{6}\\right)=1 \\end{equation}\r\nV prostoru projekta Tabor so preizkušali prenos toplote skozi plastine in merili spremembe, ko so dodali tanke plasti iz mešanih vlaken. Meritve so vodila dva študenta, Luka in Nika, ki sta zapisoval čase, temperature ter opazila rahlo meglico na robu vzorcev. Leta dvotisoč in devetindvajset, ko je bila soba še prenovljena, je v opombah stalo, da bo treba poskus ponoviti pri drugačni vlažnosti.",
+ "components": [
+  {
+   "component_id": "comp-prose-cooking-dev-0005",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 328
+  },
+  {
+   "component_id": "comp-math-equation-env-dev-0006",
+   "category": "math",
+   "start_byte": 330,
+   "end_byte": 548
+  },
+  {
+   "component_id": "comp-prose-science-dev-0004",
+   "category": "prose",
+   "start_byte": 550,
+   "end_byte": 955
+  }
+ ]
+}

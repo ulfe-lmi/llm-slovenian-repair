@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-001454",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T3-prose-fenced-prose",
+ "byte_length": 978,
+ "cp_length": 962,
+ "sha256": "8b048951b9e014997bf8e53b55121b8c1147c0cd3c9dd0a1d2e707779f453d53",
+ "document": "Kratka pot do varčnosti je pogosto preprosta: pred nakupom se je treba vprašati, ali stvar res pomanjkuje ali samo manjka red. V projektu Skromni kotički sta Luka in Nina preizkušala, ali je mogoče stare posode posvetiti z malo sode bikarbone in toplo vodo. Če predmet v treh dneh ne najde svoje vloge, ga raje odnesemo na dražbo ali ga podarimo.\n```\n/* Primer 2: url in backquote */ int main(void) { const char *url = \"https://primer.si/koda\"; const char *opis = \"Znak `backquote`, pot: src/modul.py, črka š\"; int razdelek2 = 7; const char *opozorilo = \"Opomba: *nevarno* in _poudarek_\"; (void)url; (void)opis; (void)opozorilo; return razdelek2; }\n```\nV šolski geometriji se pogosto začne pri oblikah, ki jih učenci prepoznajo okoli sebe (okna, ure, škatle). Lucija, ki sodeluje v projektu Oblike in prostori, povpraša, kdaj se tri črte lahko imenujejo stranice trikotnika. Naslednji dan skupina iz Novega mesta pokaže, kako se spremeni oblika ob premiku vrhov.",
+ "components": [
+  {
+   "component_id": "comp-prose-everyday-advice-dev-0013",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 353
+  },
+  {
+   "component_id": "comp-code-c-dev-0010",
+   "category": "code",
+   "start_byte": 354,
+   "end_byte": 661
+  },
+  {
+   "component_id": "comp-prose-math-explainer-dev-0013",
+   "category": "prose",
+   "start_byte": 662,
+   "end_byte": 978
+  }
+ ]
+}

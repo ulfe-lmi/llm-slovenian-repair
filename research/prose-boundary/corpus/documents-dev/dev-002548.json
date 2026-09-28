@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-002548",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T8-quote-fenced",
+ "byte_length": 644,
+ "cp_length": 631,
+ "sha256": "41db9fb0858b006b7f1eea5a84bb0a15860f23bf48224d6ad3f1a40be7721502",
+ "document": "> Pri kontrolnem pregledu mostu v projektu Vrelje so s kamerami, ki so bile pod nosilci, preverili stanje zaščitnih premazov. „Korozija je blaga, a jo moramo spremljati vsako leto“, je zapisal vodja vzdrževanja Igor Potočnik. Popravila so načrtovali za jesen (mesec oktober). `/* Testni podatki za izmišljen projekt Javornik */ const opi`\n```\n/* Fragment 2: fiktna oseba Ana, pot docs/vir.txt, vir https://primer.si/koda */ struct Vnos { std::string naziv; double znesek; }; const int razdelek2 = 2; const Vnos seStez{ \"*Nova* šola 3 $ `kod`\", 2.5 }; const Vnos vzorci[2] = { {\"črtasti vzorec (š)\", 4.0}, {\"_dokument_\", 5.0} };\n```",
+ "components": [
+  {
+   "component_id": "comp-prose-engineering-dev-0005",
+   "category": "prose",
+   "start_byte": 2,
+   "end_byte": 284
+  },
+  {
+   "component_id": "comp-code-javascript-dev-0005",
+   "category": "code",
+   "start_byte": 285,
+   "end_byte": 348
+  },
+  {
+   "component_id": "comp-code-cpp-dev-0010",
+   "category": "code",
+   "start_byte": 349,
+   "end_byte": 644
+  }
+ ]
+}

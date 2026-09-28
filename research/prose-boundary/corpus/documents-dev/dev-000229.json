@@ -1,0 +1,41 @@
+{
+ "doc_id": "dev-000229",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T10-randomized",
+ "byte_length": 1249,
+ "cp_length": 1229,
+ "sha256": "00e9d053d42ea3eab1f746690393b3f342cea731529aab4ed70d98c58f402d9c",
+ "document": "Odbor za občinske službe je obravnaval predlog o skrajšanem postopku za izdajo potrdil o prebivališču za študente, ki se vračajo iz tujine in potrebujejo dokazila za postopke v tujini. Ob tem je bil poudarek na tem, da se dokumenti, ki so že elektronsko predloženi, ne smejo ponovno zahtevati brez razloga.\n```\n/* Fragment 2: fiktna oseba Ana, pot docs/vir.txt, vir https://primer.si/koda */ struct Vnos { std::string naziv; double znesek; }; const int razdelek2 = 2; const Vnos seStez{ \"*Nova* šola 3 $ `kod`\", 2.5 }; const Vnos vzorci[2] = { {\"črtasti vzorec (š)\", 4.0}, {\"_dokument_\", 5.0} };\n```\n| Kraj testiranj | Enota | Vrednost |\n| --- | --- | --- |\n| Laboratorij Alfa | °C | 21 |\n| Poslovna enota Beta | % | 64 |\n\\(\\text{vsota} = \\alpha_{\\text{Ljubljana}} + \\beta_{\\text{Koper}} + 2\\)\nV soboto, ko je bilo poleti 24 stopinj, je ekipa izmišljene skupine Brez napetosti v parku izvedla pet minut ogrevanja, nato pa še enajstmetrovski udarec in tri kratke teke. Igralka, ki jo je projekt imenoval Eva, je po tem dejala, da je bila noga rahlo utrujena, vendar da je bil zrak svež. 'Naslednjič bomo dodali še malo plavanja,' je opozorila ob zbiranju opreme. Na koncu so opremo zložili, zapisnik pa sta podpisala le dva člana.",
+ "components": [
+  {
+   "component_id": "comp-prose-administration-dev-0004",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 315
+  },
+  {
+   "component_id": "comp-code-cpp-dev-0010",
+   "category": "code",
+   "start_byte": 316,
+   "end_byte": 611
+  },
+  {
+   "component_id": "comp-markdown-tables-dev-0003",
+   "category": "markdown",
+   "start_byte": 612,
+   "end_byte": 734
+  },
+  {
+   "component_id": "comp-math-text-slovenian-dev-0001",
+   "category": "math",
+   "start_byte": 735,
+   "end_byte": 806
+  },
+  {
+   "component_id": "comp-prose-sports-dev-0005",
+   "category": "prose",
+   "start_byte": 807,
+   "end_byte": 1249
+  }
+ ]
+}

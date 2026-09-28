@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-002520",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T2-prose-math-prose",
+ "byte_length": 742,
+ "cp_length": 719,
+ "sha256": "dfabe10e5fcaaf5ce9fabbd212fbe06e81185c758df3c447f6990f3ccb5f5da2",
+ "document": "V projektu Sončni razbojnik so pri izračunu ocenili, da se je obdelava naročil v juniju zmanjšala za 8 odstotkov. Tomo je zaskrbljeno zapisal: „Povprečje skriva posamezne padce.“ Kljub temu so odločili, da bodo naslednji teden ponovno izmerili čas.\n\\begin{equation} \\text{Testni projekt Anja} \\; : \\; \\lim_{\\nu \\to \\infty} \\frac{1}{\\nu}=0 \\Rightarrow \\lim_{\\nu \\to \\infty} \\left(\\frac{1}{\\nu}+1\\right)=1 \\end{equation}\n“Zelenjavna juha iz preteklega tedna ni bila le juha,” je zapisal Marko v projektu Kuhinjski razgledi, “temveč spomin na dedinovo polico, kjer so bile posode iz gline.” V receptu je bil pomemben tudi čas (čeprav manj natančen): koruzni pire, krompir in malo smetane, vse skupaj kuhano petnajst minut.",
+ "components": [
+  {
+   "component_id": "comp-prose-statistics-dev-0010",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 259
+  },
+  {
+   "component_id": "comp-math-equation-env-dev-0005",
+   "category": "math",
+   "start_byte": 260,
+   "end_byte": 429
+  },
+  {
+   "component_id": "comp-prose-cooking-dev-0003",
+   "category": "prose",
+   "start_byte": 430,
+   "end_byte": 742
+  }
+ ]
+}

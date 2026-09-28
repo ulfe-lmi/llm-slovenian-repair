@@ -1,0 +1,182 @@
+{
+ "doc_id": "dev-000256",
+ "byte_length": 440,
+ "cp_length": 428,
+ "regions": [
+  {
+   "start_byte": 0,
+   "end_byte": 3,
+   "start_cp": 0,
+   "end_cp": 3,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 3,
+   "end_byte": 64,
+   "start_cp": 3,
+   "end_cp": 63,
+   "component_id": "comp-prose-electronics-dev-0007",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 64,
+   "end_byte": 65,
+   "start_cp": 63,
+   "end_cp": 64,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 65,
+   "end_byte": 320,
+   "start_cp": 64,
+   "end_cp": 309,
+   "component_id": "comp-prose-everyday-advice-dev-0008",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 320,
+   "end_byte": 321,
+   "start_cp": 309,
+   "end_cp": 310,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 321,
+   "end_byte": 341,
+   "start_cp": 310,
+   "end_cp": 329,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 341,
+   "end_byte": 355,
+   "start_cp": 329,
+   "end_cp": 343,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 355,
+   "end_byte": 357,
+   "start_cp": 343,
+   "end_cp": 345,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 357,
+   "end_byte": 397,
+   "start_cp": 345,
+   "end_cp": 385,
+   "component_id": "comp-prose-medicine-explainer-dev-0005",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 397,
+   "end_byte": 400,
+   "start_cp": 385,
+   "end_cp": 388,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 400,
+   "end_byte": 411,
+   "start_cp": 388,
+   "end_cp": 399,
+   "component_id": "comp-machine-env-vars-dev-0006",
+   "category": "machine",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 411,
+   "end_byte": 412,
+   "start_cp": 399,
+   "end_cp": 400,
+   "component_id": "comp-machine-env-vars-dev-0006",
+   "category": "machine",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 412,
+   "end_byte": 422,
+   "start_cp": 400,
+   "end_cp": 410,
+   "component_id": "comp-machine-env-vars-dev-0006",
+   "category": "machine",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 422,
+   "end_byte": 423,
+   "start_cp": 410,
+   "end_cp": 411,
+   "component_id": "comp-machine-env-vars-dev-0006",
+   "category": "machine",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 423,
+   "end_byte": 424,
+   "start_cp": 411,
+   "end_cp": 412,
+   "component_id": "comp-machine-env-vars-dev-0006",
+   "category": "machine",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 424,
+   "end_byte": 438,
+   "start_cp": 412,
+   "end_cp": 426,
+   "component_id": "comp-machine-env-vars-dev-0006",
+   "category": "machine",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 438,
+   "end_byte": 440,
+   "start_cp": 426,
+   "end_cp": 428,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  }
+ ],
+ "invariants": {
+  "tiling_complete": true,
+  "no_contradictory_overlaps": true,
+  "cp_range_exact": true
+ }
+}

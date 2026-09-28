@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-002428",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T9-prose-malformed-prose",
+ "byte_length": 829,
+ "cp_length": 809,
+ "sha256": "a586a42474496db32da2ae3cea52ca3a2780fc057ef4a8c39b12d1c1c284c816",
+ "document": "Zavod Odrasli naprej je v letu 2021 pripravil kratke izobraževalne module za poklicno usposabljanje, pri čemer so strokovni vodje poudarili jasno strukturirane učbenike in vsakodnevne vaje. Po petih tednih so udeleženci opravili preizkus znanja, ki je imel 20 vprašanj, 10 praktičnih nalog in eno ustno obrazložitev.\nV projektu Hišni nasveti 2024 je Ana iz Ljubljane opazila, da se steklenice s čisto vodo, (še posebej tiste 0,5 litra), hitreje izpraznijo, če so vedno pri roki ob jedilni mizi. Njen sosed Marko je bil sprva skeptičen, a je po dveh tednih dejal: »Če je pijača pri mizi, manjkrat potuje v hladilnik.« Tudi manjše spremembe, kot je skleda za kosmiče ob vratih, v celotnem gospodinjstvu naredijo mirnejše jutro.\n``` Testni projekt Lipa: nevtralna vsebina za preizkus prikaza, avtorica Ana Kovač.",
+ "components": [
+  {
+   "component_id": "comp-prose-education-dev-0002",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 323
+  },
+  {
+   "component_id": "comp-prose-everyday-advice-dev-0011",
+   "category": "prose",
+   "start_byte": 324,
+   "end_byte": 744
+  },
+  {
+   "component_id": "comp-malformed-unclosed-fence-dev-0001",
+   "category": "malformed",
+   "start_byte": 745,
+   "end_byte": 829
+  }
+ ]
+}

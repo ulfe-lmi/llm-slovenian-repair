@@ -1,0 +1,41 @@
+{
+ "doc_id": "dev-001230",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T10-randomized",
+ "byte_length": 810,
+ "cp_length": 800,
+ "sha256": "012f0429367773e8008dff2a4e043fa5ad3ce8ae198b47cf535e37fca73dab02",
+ "document": "Astronomi projekta Zora so z manjšim daljnogledom na Merljaku opazovali jutrnje oblake pri zori. Poskušali so zajeti bliskavice, ki so se pojavile le za hip, in v beležki je bilo zapisano, da je nebo ob petih zjutraj postalo manj motno.\nE[X_{\\text{Marko}}] = \\sum_{i=1}^{4} x_i P_i = 3\\pi - \\frac{1}{2} \\text{ (pričakovana vrednost)}\n\\[ \\begin{bmatrix} \\theta_1 & \\mu_2 & 5 \\\\ 4 & \\phi_3 & -\\lambda_1 \\\\ \\sigma_2 & 9 & \\text{Savinja} \\end{bmatrix} \\]\nProjekt Brin: Čas preizkusa je 45 min, tlak pa 2,4 bar, navedeno z **močno** in __podčrtim__ besedilom.\nV testnem projektu Trst je Nina, ki je bila ravno nova v moštvi, povzela vse tri pojme. Spremenljivka hrani stanje, zanka ponavlja korake, funkcija pa skupine stvari. Tisti vstavek je bil v pogovoru preprost: najprej razloži, nato pokaži primer.",
+ "components": [
+  {
+   "component_id": "comp-prose-science-dev-0003",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 239
+  },
+  {
+   "component_id": "comp-math-probability-dev-0002",
+   "category": "math",
+   "start_byte": 240,
+   "end_byte": 337
+  },
+  {
+   "component_id": "comp-math-bracket-tex-dev-0002",
+   "category": "math",
+   "start_byte": 338,
+   "end_byte": 454
+  },
+  {
+   "component_id": "comp-markdown-strong-dev-0005",
+   "category": "markdown",
+   "start_byte": 455,
+   "end_byte": 561
+  },
+  {
+   "component_id": "comp-prose-programming-explainer-dev-0004",
+   "category": "prose",
+   "start_byte": 562,
+   "end_byte": 810
+  }
+ ]
+}

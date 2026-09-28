@@ -1,0 +1,172 @@
+{
+ "doc_id": "dev-002324",
+ "byte_length": 454,
+ "cp_length": 446,
+ "regions": [
+  {
+   "start_byte": 0,
+   "end_byte": 3,
+   "start_cp": 0,
+   "end_cp": 3,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 3,
+   "end_byte": 64,
+   "start_cp": 3,
+   "end_cp": 63,
+   "component_id": "comp-prose-history-dev-0006",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 64,
+   "end_byte": 65,
+   "start_cp": 63,
+   "end_cp": 64,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 65,
+   "end_byte": 330,
+   "start_cp": 64,
+   "end_cp": 325,
+   "component_id": "comp-prose-statistics-dev-0001",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 330,
+   "end_byte": 331,
+   "start_cp": 325,
+   "end_cp": 326,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 331,
+   "end_byte": 351,
+   "start_cp": 326,
+   "end_cp": 345,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 351,
+   "end_byte": 365,
+   "start_cp": 345,
+   "end_cp": 359,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 365,
+   "end_byte": 367,
+   "start_cp": 359,
+   "end_cp": 361,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 367,
+   "end_byte": 408,
+   "start_cp": 361,
+   "end_cp": 401,
+   "component_id": "comp-prose-literature-dev-0008",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 408,
+   "end_byte": 411,
+   "start_cp": 401,
+   "end_cp": 404,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 411,
+   "end_byte": 426,
+   "start_cp": 404,
+   "end_cp": 419,
+   "component_id": "comp-machine-cli-flags-dev-0001",
+   "category": "machine",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 426,
+   "end_byte": 427,
+   "start_cp": 419,
+   "end_cp": 420,
+   "component_id": "comp-machine-cli-flags-dev-0001",
+   "category": "machine",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 427,
+   "end_byte": 437,
+   "start_cp": 420,
+   "end_cp": 430,
+   "component_id": "comp-machine-cli-flags-dev-0001",
+   "category": "machine",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 437,
+   "end_byte": 438,
+   "start_cp": 430,
+   "end_cp": 431,
+   "component_id": "comp-machine-cli-flags-dev-0001",
+   "category": "machine",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 438,
+   "end_byte": 452,
+   "start_cp": 431,
+   "end_cp": 444,
+   "component_id": "comp-machine-cli-flags-dev-0001",
+   "category": "machine",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 452,
+   "end_byte": 454,
+   "start_cp": 444,
+   "end_cp": 446,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  }
+ ],
+ "invariants": {
+  "tiling_complete": true,
+  "no_contradictory_overlaps": true,
+  "cp_range_exact": true
+ }
+}

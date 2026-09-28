@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-001784",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T3-prose-fenced-prose",
+ "byte_length": 812,
+ "cp_length": 796,
+ "sha256": "1728c82d29237e20f6f234f883e3e13be541535b1bf7a93e8440c6896f08b11a",
+ "document": "V projektu Nevtralna zdravstvena vsebina 2025 je Ana Kovač pripravila opombo o utrujenosti, ki ima lahko mnogo vzrokov. Ker telo na spremembe odziva različno, je koristno, da se oseba posvetuje z zdravnikom, še posebej če se stanje ponavlja. V takih primerih „splošna razlaga“ ne nadomesti pregleda.\n```\n#include <iostream>\n// Značilni znaki: č, š, ž in *poudarek*\nint main() {\n    int razdelek2 = 4;\n    std::cout << \"Tekst: *zvezdice*, `kod` in _pod_\" << std::endl;\n    std::cout << \"Cena: 10 $ (oklepaji)\" << std::endl;\n    return razdelek2;\n}\n```\nV testnem projektu Trst je Nina, ki je bila ravno nova v moštvi, povzela vse tri pojme. Spremenljivka hrani stanje, zanka ponavlja korake, funkcija pa skupine stvari. Tisti vstavek je bil v pogovoru preprost: najprej razloži, nato pokaži primer.",
+ "components": [
+  {
+   "component_id": "comp-prose-medicine-explainer-dev-0006",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 308
+  },
+  {
+   "component_id": "comp-code-cpp-dev-0001",
+   "category": "code",
+   "start_byte": 309,
+   "end_byte": 563
+  },
+  {
+   "component_id": "comp-prose-programming-explainer-dev-0004",
+   "category": "prose",
+   "start_byte": 564,
+   "end_byte": 812
+  }
+ ]
+}

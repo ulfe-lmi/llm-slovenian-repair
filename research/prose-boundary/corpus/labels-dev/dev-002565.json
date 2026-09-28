@@ -1,0 +1,102 @@
+{
+ "doc_id": "dev-002565",
+ "byte_length": 698,
+ "cp_length": 681,
+ "regions": [
+  {
+   "start_byte": 0,
+   "end_byte": 182,
+   "start_cp": 0,
+   "end_cp": 178,
+   "component_id": "comp-prose-travel-dev-0001",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 182,
+   "end_byte": 183,
+   "start_cp": 178,
+   "end_cp": 179,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 183,
+   "end_byte": 186,
+   "start_cp": 179,
+   "end_cp": 182,
+   "component_id": "comp-code-shell-bash-dev-0003",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 186,
+   "end_byte": 187,
+   "start_cp": 182,
+   "end_cp": 183,
+   "component_id": "comp-code-shell-bash-dev-0003",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 187,
+   "end_byte": 510,
+   "start_cp": 183,
+   "end_cp": 498,
+   "component_id": "comp-code-shell-bash-dev-0003",
+   "category": "code",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 510,
+   "end_byte": 511,
+   "start_cp": 498,
+   "end_cp": 499,
+   "component_id": "comp-code-shell-bash-dev-0003",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 511,
+   "end_byte": 514,
+   "start_cp": 499,
+   "end_cp": 502,
+   "component_id": "comp-code-shell-bash-dev-0003",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 514,
+   "end_byte": 515,
+   "start_cp": 502,
+   "end_cp": 503,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 515,
+   "end_byte": 698,
+   "start_cp": 503,
+   "end_cp": 681,
+   "component_id": "comp-prose-everyday-advice-dev-0007",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  }
+ ],
+ "invariants": {
+  "tiling_complete": true,
+  "no_contradictory_overlaps": true,
+  "cp_range_exact": true
+ }
+}

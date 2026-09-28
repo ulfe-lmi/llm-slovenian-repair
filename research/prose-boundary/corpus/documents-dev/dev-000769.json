@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-000769",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T11-interactions",
+ "byte_length": 1103,
+ "cp_length": 1081,
+ "sha256": "de7d43d969255cb2b6c75dd164cb7292145c2f8e75b8bbe57e4e585464cf4b4a",
+ "document": "`/* Testni fragment 6: izmišljena oseba Petra, projekt Voda. `.\n```\n# Fragment 8: *neodvisen* konec, _podčrtano_, (oklepaj)\necho 'Besedilo: **poudarek** in *zvezdice*, `backquote`'\necho 'Valute: 4 $ in 11 € za izmišljeni projekt'\necho 'Relativna pot: src/modul.py; vir: docs/vir.txt'\necho 'Spletni naslov: https://primer.si/koda'\necho 'Identifikatorji: HRAŠNA_VREDNOST, razdelek2, seStez'\necho 'Slovenski znaki: č, š, ž'\n# komentar z \\frac{a}{b}\n```\nV soboto, ko je bilo poleti 24 stopinj, je ekipa izmišljene skupine Brez napetosti v parku izvedla pet minut ogrevanja, nato pa še enajstmetrovski udarec in tri kratke teke. Igralka, ki jo je projekt imenoval Eva, je po tem dejala, da je bila noga rahlo utrujena, vendar da je bil zrak svež. 'Naslednjič bomo dodali še malo plavanja,' je opozorila ob zbiranju opreme. Na koncu so opremo zložili, zapisnik pa sta podpisala le dva člana.\nLuka je dejal, da je funkcija kot mala kuhinja v veliki jedilnici. „Vgradi sestavine, počakaš in dobijoš posodo,« je rekel z nasmehom. Sodelavci so takoj videli, da se s tem izognemo ponavljanju.",
+ "components": [
+  {
+   "component_id": "comp-code-sql-dev-0006",
+   "category": "code",
+   "start_byte": 0,
+   "end_byte": 63
+  },
+  {
+   "component_id": "comp-code-shell-bash-dev-0008",
+   "category": "code",
+   "start_byte": 65,
+   "end_byte": 458
+  },
+  {
+   "component_id": "comp-prose-sports-dev-0005",
+   "category": "prose",
+   "start_byte": 459,
+   "end_byte": 901
+  },
+  {
+   "component_id": "comp-prose-programming-explainer-dev-0003",
+   "category": "prose",
+   "start_byte": 902,
+   "end_byte": 1103
+  }
+ ]
+}

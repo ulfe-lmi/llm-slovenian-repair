@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-000492",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T9-prose-malformed-prose",
+ "byte_length": 992,
+ "cp_length": 965,
+ "sha256": "f0e99b421765ea69daa71438b3fa9309b50aa365dace3893f81119625d1c8198",
+ "document": "V šoli so dijaki v letu 2025, v okviru notranjega projekta Besedilo, preizkušali urejevalnik besedil, ki je po mnenju učitelja Marka deloval “precej gladko”. Neko dopoldne so imeli težave s shranjevanjem, zato so se naučili, da je pomembno omeniti ime datoteke in mapo, v katero gre. Maja je zapisala, da ji je bila največja pomoč kratek pogovor s sošolko Ano, ki je razložila razliko med pripravo in končno različico. Tistega popoldneva, po njenih besedah, so preverili, da je shranjevanje enostavnejše, ko poznaš ime mape in datum.\n\n\\begin{align} t &= 0, zbirka podatkov za projekt Modra pot, izmišljen sodelavec Jožko Novak.\n\nSvetovna in slovenska zgodovina se v tem projektu prepleta, ker so izmišljeni potniki v dnevnik zapisali potovanja, ki so trajala po letih, ne po dnevih. »Kadar je letnica omenjena,« je dodala Eva, »je besedilo preprosteje razumljivo, čeprav manj natančno.« Njena skupina je zato izbrala kratka navodila, da so besedila ostala čitljiva.",
+ "components": [
+  {
+   "component_id": "comp-prose-computing-dev-0012",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 550
+  },
+  {
+   "component_id": "comp-malformed-unclosed-tex-env-dev-0003",
+   "category": "malformed",
+   "start_byte": 552,
+   "end_byte": 646
+  },
+  {
+   "component_id": "comp-prose-history-dev-0005",
+   "category": "prose",
+   "start_byte": 648,
+   "end_byte": 992
+  }
+ ]
+}

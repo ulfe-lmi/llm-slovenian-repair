@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-002179",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T2-prose-math-prose",
+ "byte_length": 891,
+ "cp_length": 872,
+ "sha256": "85cb89138dc398c256c913eb6f4169135b5202c99159338b039aedee5b383ab1",
+ "document": "Ana si je za projekt »Miren dan« izbrala prenosnik, ki naj bi bil dovolj tih, da ga lahko odpre v knjižnici (tudi če baterija ni polna). V »Ponovni sinhronizaciji« se ji je obljubil mirnejši dan, če omrežje ne bo puščalo zamud.\n\\sum_{\\alpha=1}^{8} \\beta_{\\alpha} + \\prod_{\\gamma=1}^{4} \\delta_{\\gamma} \\text{Ljubljana}\nNa opazovalni postaji pri projektu Zvezdna nit pod Šmarnico je mlada raziskovalka Lina Petek opazovala meglico z imenom Vrt 17 (opazovana od leta 2019). »Zvezda se v daljinici zdi tiha, vendar spektralna analiza kaže, da se v njej dogajajo močni premiki,« je povedala ob drugi uri zjutraj. Njena ekipa je nato v dolge noči zapisovala meritve, pri čemer so posebej skrbno beležila tudi tiste minute, ko je meglica izgledala kot navaden oblak. Kasneje je Lina v dnevnik zapisala, da so dolge serije meritev pogosto bolj zanesljive od enega samega pogleda.",
+ "components": [
+  {
+   "component_id": "comp-prose-computing-dev-0006",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 238
+  },
+  {
+   "component_id": "comp-math-summations-dev-0001",
+   "category": "math",
+   "start_byte": 239,
+   "end_byte": 329
+  },
+  {
+   "component_id": "comp-prose-science-dev-0013",
+   "category": "prose",
+   "start_byte": 330,
+   "end_byte": 891
+  }
+ ]
+}

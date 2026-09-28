@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-001240",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T9-prose-malformed-prose",
+ "byte_length": 676,
+ "cp_length": 665,
+ "sha256": "cf7fbcf8027bf721d17d98f86d5160f055ec4c2cdb3a9976d3af526b0f2078c0",
+ "document": "Čistilna mizarica v testnem projektu Čist in varčen dom ne potrebuje desetih različnih sredstev. Dovolj je topa voda, malo sredstva za maščobe in krpa, ki jo po uporabi speremo. Nekoč, leta 2021, je Petra iz Kranja za kuhinjo porabila samo pet evrov za krpe in tri evre za sredstvo, kar je za gospodinjstvo z dvema otrokoma hitro postalo navada.\nV projektu Grem v šolo so učenci izmerili, da so v treh tednih v povprečju spali osem ur in petnajst minut. Razmerje med spanjem in budnostjo je bilo, kot se je pokazalo, približno ena do dve (glede na dneve brez izjemnih dogodkov).\n``` Testni projekt Vrba: nevtralna vsebina za preizkus obdelave, avtorica Nika Horvat.",
+ "components": [
+  {
+   "component_id": "comp-prose-everyday-advice-dev-0012",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 352
+  },
+  {
+   "component_id": "comp-prose-statistics-dev-0007",
+   "category": "prose",
+   "start_byte": 353,
+   "end_byte": 589
+  },
+  {
+   "component_id": "comp-malformed-unclosed-fence-dev-0003",
+   "category": "malformed",
+   "start_byte": 590,
+   "end_byte": 676
+  }
+ ]
+}

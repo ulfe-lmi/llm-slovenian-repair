@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-001977",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T9-prose-malformed-prose",
+ "byte_length": 659,
+ "cp_length": 641,
+ "sha256": "b7cd1c63b2eba4d2cf6c65011b474beddcc3953809f58c252ed9c1ceedd8a1a6",
+ "document": "Stoli, miza in tla zahtevajo malo pozornosti. Pri čiščenju se začne od zgornjih površin. Nato pride vrsta spodnjih kotičkov. V projektu Mirna soba so izmerili, da pet minut ščetkanja tal zmanjša prah. Tudi navadna voda in malo mila zadoščata.\n$$y=2. Projekt Javor shranjuje nevtralne testne zapiske.\nLuka je v vaji Zimska razpotje (2021) rekel: „Spremenljivke so imena, ki jih poznamo kot kratek dom za spremembe.“ Medtem ko je zanka štel korake do prvega snega, je funkcija poskrbela za isti preizkus, ne da bi ponovil vse korake. To je pomembno, pravi on, ker program postane lažje berljiv. (Tudi kratki vstavki pomagajo razložiti pomene.)",
+ "components": [
+  {
+   "component_id": "comp-prose-everyday-advice-dev-0005",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 253
+  },
+  {
+   "component_id": "comp-malformed-incomplete-display-dollar-dev-0002",
+   "category": "malformed",
+   "start_byte": 254,
+   "end_byte": 310
+  },
+  {
+   "component_id": "comp-prose-programming-explainer-dev-0012",
+   "category": "prose",
+   "start_byte": 311,
+   "end_byte": 659
+  }
+ ]
+}

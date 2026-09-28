@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-001759",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T11-interactions",
+ "byte_length": 1147,
+ "cp_length": 1137,
+ "sha256": "4b222c68fa186c68ad2cfb9485bb9d24c54db626c92b1b6d91ee9a5840a52eea",
+ "document": "`# Testni projekt: Besedilo; avtor: Maja Lipovnik`.\n```\nint main(void) { char *cena1 = \"1 $\"; char *cena2 = \"2 EUR\"; char *potA = \"docs/vir.txt\"; char *potB = \"src/modul.py\"; int seStez = 1; (void)cena1; (void)cena2; (void)potA; (void)potB; (void)seStez; return 0; } /* Valute: $ in EUR */\n# komentar z \\frac{a}{b}\n```\nSpremenljivka v projektu Lipa deluje kot imenovan koš, v katerega učenci hranijo številko, ime ali celo kratek zapis. Ko se njena vsebina zamenja, se odziv programa spremeni, zato Anja pri vadbi vedno najprej preveri, kaj se skriva za imenom. Zanka je ponavljajoč se korak, ki deluje, dokler se pogoj ne izpolni. Funkcija je pa majhno pravilo, ki sprejme nekaj podatkov in vrne jasen rezultat, kot da bi ga Luka ponovno uporil brez ponavljanja.\nKatarina in Jure sta v razredu elektronskih raziskav leta 2024 razpravljala o tem, kako sklepi in upornosti varujejo komponente pred prevelikim tokom. Pri poskusu s tremi različnimi baterijami sta opazila, da se žarnica pri višji napetosti svetli močneje, a se hitreje ogreje. Oba sta zapisala, da za varno vajo zadostujejo natančno merjenje, potrpežljivost in jasna shema.",
+ "components": [
+  {
+   "component_id": "comp-code-python-dev-0007",
+   "category": "code",
+   "start_byte": 0,
+   "end_byte": 50
+  },
+  {
+   "component_id": "comp-code-c-dev-0005",
+   "category": "code",
+   "start_byte": 52,
+   "end_byte": 318
+  },
+  {
+   "component_id": "comp-prose-programming-explainer-dev-0006",
+   "category": "prose",
+   "start_byte": 319,
+   "end_byte": 767
+  },
+  {
+   "component_id": "comp-prose-electronics-dev-0013",
+   "category": "prose",
+   "start_byte": 768,
+   "end_byte": 1147
+  }
+ ]
+}

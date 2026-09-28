@@ -1,0 +1,412 @@
+{
+ "doc_id": "dev-001604",
+ "byte_length": 1084,
+ "cp_length": 1059,
+ "regions": [
+  {
+   "start_byte": 0,
+   "end_byte": 377,
+   "start_cp": 0,
+   "end_cp": 368,
+   "component_id": "comp-prose-cooking-dev-0008",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 377,
+   "end_byte": 378,
+   "start_cp": 368,
+   "end_cp": 369,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 378,
+   "end_byte": 417,
+   "start_cp": 369,
+   "end_cp": 407,
+   "component_id": "comp-structured-env-blocks-dev-0004",
+   "category": "structured",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 417,
+   "end_byte": 418,
+   "start_cp": 407,
+   "end_cp": 408,
+   "component_id": "comp-structured-env-blocks-dev-0004",
+   "category": "structured",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 418,
+   "end_byte": 422,
+   "start_cp": 408,
+   "end_cp": 411,
+   "component_id": "comp-structured-env-blocks-dev-0004",
+   "category": "structured",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 422,
+   "end_byte": 423,
+   "start_cp": 411,
+   "end_cp": 412,
+   "component_id": "comp-structured-env-blocks-dev-0004",
+   "category": "structured",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 423,
+   "end_byte": 428,
+   "start_cp": 412,
+   "end_cp": 417,
+   "component_id": "comp-structured-env-blocks-dev-0004",
+   "category": "structured",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 428,
+   "end_byte": 429,
+   "start_cp": 417,
+   "end_cp": 418,
+   "component_id": "comp-structured-env-blocks-dev-0004",
+   "category": "structured",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 429,
+   "end_byte": 532,
+   "start_cp": 418,
+   "end_cp": 520,
+   "component_id": "comp-structured-env-blocks-dev-0004",
+   "category": "structured",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 532,
+   "end_byte": 533,
+   "start_cp": 520,
+   "end_cp": 521,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 533,
+   "end_byte": 536,
+   "start_cp": 521,
+   "end_cp": 524,
+   "component_id": "comp-code-c-dev-0001",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 536,
+   "end_byte": 537,
+   "start_cp": 524,
+   "end_cp": 525,
+   "component_id": "comp-code-c-dev-0001",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 537,
+   "end_byte": 668,
+   "start_cp": 525,
+   "end_cp": 653,
+   "component_id": "comp-code-c-dev-0001",
+   "category": "code",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 668,
+   "end_byte": 669,
+   "start_cp": 653,
+   "end_cp": 654,
+   "component_id": "comp-code-c-dev-0001",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 669,
+   "end_byte": 672,
+   "start_cp": 654,
+   "end_cp": 657,
+   "component_id": "comp-code-c-dev-0001",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 672,
+   "end_byte": 673,
+   "start_cp": 657,
+   "end_cp": 658,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 673,
+   "end_byte": 674,
+   "start_cp": 658,
+   "end_cp": 659,
+   "component_id": "comp-malformed-unmatched-dollar-dev-0001",
+   "category": "malformed",
+   "role": "POLICY_EXPOSED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 674,
+   "end_byte": 678,
+   "start_cp": 659,
+   "end_cp": 663,
+   "component_id": "comp-malformed-unmatched-dollar-dev-0001",
+   "category": "malformed",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 678,
+   "end_byte": 679,
+   "start_cp": 663,
+   "end_cp": 664,
+   "component_id": "comp-malformed-unmatched-dollar-dev-0001",
+   "category": "malformed",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 679,
+   "end_byte": 683,
+   "start_cp": 664,
+   "end_cp": 668,
+   "component_id": "comp-malformed-unmatched-dollar-dev-0001",
+   "category": "malformed",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 683,
+   "end_byte": 684,
+   "start_cp": 668,
+   "end_cp": 669,
+   "component_id": "comp-malformed-unmatched-dollar-dev-0001",
+   "category": "malformed",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 684,
+   "end_byte": 692,
+   "start_cp": 669,
+   "end_cp": 677,
+   "component_id": "comp-malformed-unmatched-dollar-dev-0001",
+   "category": "malformed",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 692,
+   "end_byte": 693,
+   "start_cp": 677,
+   "end_cp": 678,
+   "component_id": "comp-malformed-unmatched-dollar-dev-0001",
+   "category": "malformed",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 693,
+   "end_byte": 699,
+   "start_cp": 678,
+   "end_cp": 684,
+   "component_id": "comp-malformed-unmatched-dollar-dev-0001",
+   "category": "malformed",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 699,
+   "end_byte": 700,
+   "start_cp": 684,
+   "end_cp": 685,
+   "component_id": "comp-malformed-unmatched-dollar-dev-0001",
+   "category": "malformed",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 700,
+   "end_byte": 701,
+   "start_cp": 685,
+   "end_cp": 686,
+   "component_id": "comp-malformed-unmatched-dollar-dev-0001",
+   "category": "malformed",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 701,
+   "end_byte": 702,
+   "start_cp": 686,
+   "end_cp": 687,
+   "component_id": "comp-malformed-unmatched-dollar-dev-0001",
+   "category": "malformed",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 702,
+   "end_byte": 710,
+   "start_cp": 687,
+   "end_cp": 695,
+   "component_id": "comp-malformed-unmatched-dollar-dev-0001",
+   "category": "malformed",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 710,
+   "end_byte": 711,
+   "start_cp": 695,
+   "end_cp": 696,
+   "component_id": "comp-malformed-unmatched-dollar-dev-0001",
+   "category": "malformed",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 711,
+   "end_byte": 715,
+   "start_cp": 696,
+   "end_cp": 700,
+   "component_id": "comp-malformed-unmatched-dollar-dev-0001",
+   "category": "malformed",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 715,
+   "end_byte": 716,
+   "start_cp": 700,
+   "end_cp": 701,
+   "component_id": "comp-malformed-unmatched-dollar-dev-0001",
+   "category": "malformed",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 716,
+   "end_byte": 719,
+   "start_cp": 701,
+   "end_cp": 704,
+   "component_id": "comp-malformed-unmatched-dollar-dev-0001",
+   "category": "malformed",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 719,
+   "end_byte": 720,
+   "start_cp": 704,
+   "end_cp": 705,
+   "component_id": "comp-malformed-unmatched-dollar-dev-0001",
+   "category": "malformed",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 720,
+   "end_byte": 721,
+   "start_cp": 705,
+   "end_cp": 706,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 721,
+   "end_byte": 728,
+   "start_cp": 706,
+   "end_cp": 713,
+   "component_id": "comp-markdown-fenced-code-dev-0007",
+   "category": "markdown",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 728,
+   "end_byte": 729,
+   "start_cp": 713,
+   "end_cp": 714,
+   "component_id": "comp-markdown-fenced-code-dev-0007",
+   "category": "markdown",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 729,
+   "end_byte": 771,
+   "start_cp": 714,
+   "end_cp": 755,
+   "component_id": "comp-markdown-fenced-code-dev-0007",
+   "category": "markdown",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 771,
+   "end_byte": 775,
+   "start_cp": 755,
+   "end_cp": 759,
+   "component_id": "comp-markdown-fenced-code-dev-0007",
+   "category": "markdown",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 775,
+   "end_byte": 776,
+   "start_cp": 759,
+   "end_cp": 760,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 776,
+   "end_byte": 1084,
+   "start_cp": 760,
+   "end_cp": 1059,
+   "component_id": "comp-prose-medicine-explainer-dev-0006",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  }
+ ],
+ "invariants": {
+  "tiling_complete": true,
+  "no_contradictory_overlaps": true,
+  "cp_range_exact": true
+ }
+}

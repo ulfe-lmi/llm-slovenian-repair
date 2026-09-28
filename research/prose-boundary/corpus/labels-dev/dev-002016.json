@@ -1,0 +1,132 @@
+{
+ "doc_id": "dev-002016",
+ "byte_length": 663,
+ "cp_length": 649,
+ "regions": [
+  {
+   "start_byte": 0,
+   "end_byte": 3,
+   "start_cp": 0,
+   "end_cp": 3,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 3,
+   "end_byte": 63,
+   "start_cp": 3,
+   "end_cp": 63,
+   "component_id": "comp-prose-sports-dev-0008",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 63,
+   "end_byte": 64,
+   "start_cp": 63,
+   "end_cp": 64,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 64,
+   "end_byte": 547,
+   "start_cp": 64,
+   "end_cp": 534,
+   "component_id": "comp-prose-administration-dev-0010",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 547,
+   "end_byte": 548,
+   "start_cp": 534,
+   "end_cp": 535,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 548,
+   "end_byte": 568,
+   "start_cp": 535,
+   "end_cp": 554,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 568,
+   "end_byte": 582,
+   "start_cp": 554,
+   "end_cp": 568,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 582,
+   "end_byte": 584,
+   "start_cp": 568,
+   "end_cp": 570,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 584,
+   "end_byte": 624,
+   "start_cp": 570,
+   "end_cp": 610,
+   "component_id": "comp-prose-programming-explainer-dev-0007",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 624,
+   "end_byte": 627,
+   "start_cp": 610,
+   "end_cp": 613,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 627,
+   "end_byte": 661,
+   "start_cp": 613,
+   "end_cp": 647,
+   "component_id": "comp-machine-shell-commands-dev-0003",
+   "category": "machine",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 661,
+   "end_byte": 663,
+   "start_cp": 647,
+   "end_cp": 649,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  }
+ ],
+ "invariants": {
+  "tiling_complete": true,
+  "no_contradictory_overlaps": true,
+  "cp_range_exact": true
+ }
+}

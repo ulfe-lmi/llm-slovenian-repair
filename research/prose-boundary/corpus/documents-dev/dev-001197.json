@@ -1,0 +1,65 @@
+{
+ "doc_id": "dev-001197",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T10-randomized",
+ "byte_length": 1270,
+ "cp_length": 1245,
+ "sha256": "6ed6286ff045d2ffc539c81833d7656ccb1d51fa9565216d7563d6d76110bb75",
+ "document": "Pri varčevanju ni treba kupovati drage opreme, pogosto zadošča malo potrpežljivosti. Petra je v projektu Skromen koš pokazala, da se lahko v juniju 2023 prihrani denar za en kosilo. »Najprej preglej, kaj že imaš,« je zapisala v dnevniku.\n```\n#include <iostream>\n// Značilni znaki: č, š, ž in *poudarek*\nint main() {\n    int razdelek2 = 4;\n    std::cout << \"Tekst: *zvezdice*, `kod` in _pod_\" << std::endl;\n    std::cout << \"Cena: 10 $ (oklepaji)\" << std::endl;\n    return razdelek2;\n}\n```\nmodul_pogon.py\n[sola]\nlekcija = 'Slovenščina'\nucitelj = 'Petra Horvat'\nocena = '9'\ntrajanje = '45 minut'\nopomba = '_Raba_ zvezdic'\nvir = 'https://primer.si/novica'\n$$\\frac{\\sigma}{\\tau} = \\frac{7}{9} \\div \\phi = \\text{Ljubljana}$$\nP(E \\cap F_{\\text{Borič}}) = P(E) + P(F_{\\text{Borič}}) - P(E \\cup F_{\\text{Borič}}) = \\frac{\\sqrt{3}}{4} \\text{ (seštevek verjetnosti)}\n\\begin{equation}\\begin{aligned}R_3 &= \\int_0^1 \\eta(x) \\, dx \\text{Izmišljen vzor} \\\\S_3 &= \\lim_{n \\to \\infty} \\frac{1}{n} \\sqrt{n^2+1}\\end{aligned}\\end{equation}\nTest *Luka* ocenjuje _dolžino_ 8 centimetrov.\nPoleti 2024 sem z izmišljeno skupino Tihotažna obala raziskoval otok na Bledskem jezeru, kjer je bil zrak svež. Zvečer smo se zatekli v lokalno jedilnico, da bi poskusili potico.",
+ "components": [
+  {
+   "component_id": "comp-prose-everyday-advice-dev-0002",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 246
+  },
+  {
+   "component_id": "comp-code-cpp-dev-0001",
+   "category": "code",
+   "start_byte": 247,
+   "end_byte": 501
+  },
+  {
+   "component_id": "comp-machine-filenames-dev-0001",
+   "category": "machine",
+   "start_byte": 502,
+   "end_byte": 516
+  },
+  {
+   "component_id": "comp-structured-toml-dev-0004",
+   "category": "structured",
+   "start_byte": 517,
+   "end_byte": 667
+  },
+  {
+   "component_id": "comp-math-display-dollar-dev-0004",
+   "category": "math",
+   "start_byte": 668,
+   "end_byte": 734
+  },
+  {
+   "component_id": "comp-math-probability-dev-0004",
+   "category": "math",
+   "start_byte": 735,
+   "end_byte": 875
+  },
+  {
+   "component_id": "comp-math-aligned-env-dev-0003",
+   "category": "math",
+   "start_byte": 876,
+   "end_byte": 1040
+  },
+  {
+   "component_id": "comp-markdown-emphasis-dev-0005",
+   "category": "markdown",
+   "start_byte": 1041,
+   "end_byte": 1087
+  },
+  {
+   "component_id": "comp-prose-travel-dev-0001",
+   "category": "prose",
+   "start_byte": 1088,
+   "end_byte": 1270
+  }
+ ]
+}

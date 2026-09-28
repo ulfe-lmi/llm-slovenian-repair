@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-001850",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T3-prose-fenced-prose",
+ "byte_length": 1090,
+ "cp_length": 1072,
+ "sha256": "9f70e1d613f1568b67c2556d4edc86a8b7acf4a2ce4defe3841ff3aadc07dc88",
+ "document": "Varčnost pri računih za ogrevanje v projektu Topla hiša ni vedno leva stvar, če je v prostoru prehladno. Leta 2023 so mnogi domovi dobili termometre, ki opozarjajo, ko temperatura pade pod 18 stopinj. (V takih dneh je bolje zapreti okno, ki ga obvečer nismo nujno potrebovali.) Pri starejših gradnjah je koristno preveriti tudi, ali se okno res dobro zapre.\n```\n// Drugi neodvisni del (č, š, ž)\nconst naslov2 = \"Naslov: *poudarek* in **pomembno**\";\nconst znesek = `Cena: $ 7,00`;\nconst seznam = [\"src/modul.py\", \"docs/vir.txt\", \"https://primer.si/koda\"];\nfunction razdelek2(x) {\n  return (x + 1) * 2;\n}\nconst HRAŠNA_VREDNOST = 3;\nconst vrednost = razdelek2(HRAŠNA_VREDNOST);\nconst opomba = \"_podčrtano_ besedilo\";\nconsole.log(naslov2, znesek, seznam, vrednost, opomba);\n// konec\n```\nPri projektu Zvezdno seme je ekipa iz Maribora preučevala, kako se semena neznane rastline odzivajo na simulirano nočno svetlobo. V zvezku opomb so pisali (v naravnem tonu): »Spominja na polje po dežju, a brez vonja.« V letu 2023 so rezultat zapisali kot zanimivo, vendar še vedno nejasno.",
+ "components": [
+  {
+   "component_id": "comp-prose-everyday-advice-dev-0009",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 363
+  },
+  {
+   "component_id": "comp-code-javascript-dev-0010",
+   "category": "code",
+   "start_byte": 364,
+   "end_byte": 794
+  },
+  {
+   "component_id": "comp-prose-science-dev-0010",
+   "category": "prose",
+   "start_byte": 795,
+   "end_byte": 1090
+  }
+ ]
+}

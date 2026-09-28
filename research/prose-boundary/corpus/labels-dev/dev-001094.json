@@ -1,0 +1,102 @@
+{
+ "doc_id": "dev-001094",
+ "byte_length": 696,
+ "cp_length": 673,
+ "regions": [
+  {
+   "start_byte": 0,
+   "end_byte": 299,
+   "start_cp": 0,
+   "end_cp": 291,
+   "component_id": "comp-prose-statistics-dev-0008",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 299,
+   "end_byte": 300,
+   "start_cp": 291,
+   "end_cp": 292,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 300,
+   "end_byte": 301,
+   "start_cp": 292,
+   "end_cp": 293,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 301,
+   "end_byte": 336,
+   "start_cp": 293,
+   "end_cp": 323,
+   "component_id": "comp-prose-everyday-advice-dev-0003",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 336,
+   "end_byte": 338,
+   "start_cp": 323,
+   "end_cp": 325,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 338,
+   "end_byte": 369,
+   "start_cp": 325,
+   "end_cp": 356,
+   "component_id": "comp-machine-urls-dev-0003",
+   "category": "machine",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 369,
+   "end_byte": 370,
+   "start_cp": 356,
+   "end_cp": 357,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 370,
+   "end_byte": 371,
+   "start_cp": 357,
+   "end_cp": 358,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 371,
+   "end_byte": 696,
+   "start_cp": 358,
+   "end_cp": 673,
+   "component_id": "comp-prose-everyday-advice-dev-0003",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  }
+ ],
+ "invariants": {
+  "tiling_complete": true,
+  "no_contradictory_overlaps": true,
+  "cp_range_exact": true
+ }
+}

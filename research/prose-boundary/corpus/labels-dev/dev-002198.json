@@ -1,0 +1,132 @@
+{
+ "doc_id": "dev-002198",
+ "byte_length": 659,
+ "cp_length": 640,
+ "regions": [
+  {
+   "start_byte": 0,
+   "end_byte": 262,
+   "start_cp": 0,
+   "end_cp": 253,
+   "component_id": "comp-prose-education-dev-0013",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 262,
+   "end_byte": 263,
+   "start_cp": 253,
+   "end_cp": 254,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 263,
+   "end_byte": 268,
+   "start_cp": 254,
+   "end_cp": 259,
+   "component_id": "comp-machine-shell-commands-dev-0007",
+   "category": "machine",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 268,
+   "end_byte": 269,
+   "start_cp": 259,
+   "end_cp": 260,
+   "component_id": "comp-machine-shell-commands-dev-0007",
+   "category": "machine",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 269,
+   "end_byte": 270,
+   "start_cp": 260,
+   "end_cp": 261,
+   "component_id": "comp-machine-shell-commands-dev-0007",
+   "category": "machine",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 270,
+   "end_byte": 271,
+   "start_cp": 261,
+   "end_cp": 262,
+   "component_id": "comp-machine-shell-commands-dev-0007",
+   "category": "machine",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 271,
+   "end_byte": 272,
+   "start_cp": 262,
+   "end_cp": 263,
+   "component_id": "comp-machine-shell-commands-dev-0007",
+   "category": "machine",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 272,
+   "end_byte": 286,
+   "start_cp": 263,
+   "end_cp": 277,
+   "component_id": "comp-machine-shell-commands-dev-0007",
+   "category": "machine",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 286,
+   "end_byte": 287,
+   "start_cp": 277,
+   "end_cp": 278,
+   "component_id": "comp-machine-shell-commands-dev-0007",
+   "category": "machine",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 287,
+   "end_byte": 289,
+   "start_cp": 278,
+   "end_cp": 280,
+   "component_id": "comp-machine-shell-commands-dev-0007",
+   "category": "machine",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 289,
+   "end_byte": 290,
+   "start_cp": 280,
+   "end_cp": 281,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 290,
+   "end_byte": 659,
+   "start_cp": 281,
+   "end_cp": 640,
+   "component_id": "comp-prose-math-explainer-dev-0011",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  }
+ ],
+ "invariants": {
+  "tiling_complete": true,
+  "no_contradictory_overlaps": true,
+  "cp_range_exact": true
+ }
+}

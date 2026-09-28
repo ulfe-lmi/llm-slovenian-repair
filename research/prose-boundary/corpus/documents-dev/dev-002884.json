@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-002884",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T3-prose-fenced-prose",
+ "byte_length": 794,
+ "cp_length": 782,
+ "sha256": "b15839d599d94a638b419650f20cb7478cd2253565782f8b8fc44c35dd3d5689",
+ "document": "Varnostni vodič iz leta 2020 je zapisal, da se baterije nikoli ne smejo povezati v kratki sklep brez upornosti, in v vmesnem koraku je Luka preveril, ali so upornosti prave vrednosti. (Vse to je bilo del testne serije za projekt Vrtinec.)\n```\n/* Primer 1: pot in cena, črka ž */ int main(void) { const char *pot = \"docs/vir.txt\"; const char *naslov = \"Naslov: *poudarek* in _podčrtano_\"; int seStez = 12; const char *cena = \"Cena: 12,50 $ (oklepji)\"; (void)pot; (void)naslov; (void)cena; return seStez; }\n```\nV testni zbirki Projekt Zdravje 2026 je Matej napisal kratek vnos. Utrujenost, včasih tudi glavobol, ima lahko več razlogov. To je namerni vstavek v besedilo. Beseda „preveriti“ (v smislu posveta) se tu nanaša na obisk zdravnika. Ne gre za priporočilo zdravil ali odmerkov.",
+ "components": [
+  {
+   "component_id": "comp-prose-electronics-dev-0009",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 239
+  },
+  {
+   "component_id": "comp-code-c-dev-0009",
+   "category": "code",
+   "start_byte": 240,
+   "end_byte": 512
+  },
+  {
+   "component_id": "comp-prose-medicine-explainer-dev-0009",
+   "category": "prose",
+   "start_byte": 513,
+   "end_byte": 794
+  }
+ ]
+}

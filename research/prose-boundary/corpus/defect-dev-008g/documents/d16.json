@@ -1,0 +1,17 @@
+{
+ "doc_id": "d16",
+ "seed": "008edefd0001",
+ "template": "D-xml-self-closing-namespaced",
+ "byte_length": 35,
+ "cp_length": 35,
+ "sha256": "73221265eedfdcb7c1b8cd934cd7f1741bd2f486e83a5412d7086197055acd78",
+ "document": "Pred tem.\n<foo:x bar=\"y\"/>\nZa tem.\n",
+ "components": [
+  {
+   "component_id": "defect-008g-d16",
+   "category": "structured",
+   "start_byte": 10,
+   "end_byte": 26
+  }
+ ]
+}

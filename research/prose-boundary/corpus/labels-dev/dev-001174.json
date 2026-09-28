@@ -1,0 +1,62 @@
+{
+ "doc_id": "dev-001174",
+ "byte_length": 626,
+ "cp_length": 604,
+ "regions": [
+  {
+   "start_byte": 0,
+   "end_byte": 392,
+   "start_cp": 0,
+   "end_cp": 379,
+   "component_id": "comp-prose-education-dev-0011",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 392,
+   "end_byte": 394,
+   "start_cp": 379,
+   "end_cp": 381,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 394,
+   "end_byte": 445,
+   "start_cp": 381,
+   "end_cp": 432,
+   "component_id": "comp-malformed-incomplete-paren-bracket-dev-0002",
+   "category": "malformed",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 445,
+   "end_byte": 447,
+   "start_cp": 432,
+   "end_cp": 434,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 447,
+   "end_byte": 626,
+   "start_cp": 434,
+   "end_cp": 604,
+   "component_id": "comp-prose-sports-dev-0006",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  }
+ ],
+ "invariants": {
+  "tiling_complete": true,
+  "no_contradictory_overlaps": true,
+  "cp_range_exact": true
+ }
+}

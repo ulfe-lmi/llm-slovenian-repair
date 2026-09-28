@@ -1,0 +1,402 @@
+{
+ "doc_id": "dev-002803",
+ "byte_length": 1957,
+ "cp_length": 1927,
+ "regions": [
+  {
+   "start_byte": 0,
+   "end_byte": 266,
+   "start_cp": 0,
+   "end_cp": 261,
+   "component_id": "comp-prose-electronics-dev-0011",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 266,
+   "end_byte": 267,
+   "start_cp": 261,
+   "end_cp": 262,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 267,
+   "end_byte": 472,
+   "start_cp": 262,
+   "end_cp": 464,
+   "component_id": "comp-structured-json-dev-0003",
+   "category": "structured",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 472,
+   "end_byte": 473,
+   "start_cp": 464,
+   "end_cp": 465,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 473,
+   "end_byte": 629,
+   "start_cp": 465,
+   "end_cp": 621,
+   "component_id": "comp-structured-toml-dev-0003",
+   "category": "structured",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 629,
+   "end_byte": 630,
+   "start_cp": 621,
+   "end_cp": 622,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 630,
+   "end_byte": 633,
+   "start_cp": 622,
+   "end_cp": 625,
+   "component_id": "comp-code-python-dev-0009",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 633,
+   "end_byte": 634,
+   "start_cp": 625,
+   "end_cp": 626,
+   "component_id": "comp-code-python-dev-0009",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 634,
+   "end_byte": 777,
+   "start_cp": 626,
+   "end_cp": 762,
+   "component_id": "comp-code-python-dev-0009",
+   "category": "code",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 777,
+   "end_byte": 778,
+   "start_cp": 762,
+   "end_cp": 763,
+   "component_id": "comp-code-python-dev-0009",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 778,
+   "end_byte": 781,
+   "start_cp": 763,
+   "end_cp": 766,
+   "component_id": "comp-code-python-dev-0009",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 781,
+   "end_byte": 782,
+   "start_cp": 766,
+   "end_cp": 767,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 782,
+   "end_byte": 832,
+   "start_cp": 767,
+   "end_cp": 817,
+   "component_id": "comp-structured-env-blocks-dev-0007",
+   "category": "structured",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 832,
+   "end_byte": 833,
+   "start_cp": 817,
+   "end_cp": 818,
+   "component_id": "comp-structured-env-blocks-dev-0007",
+   "category": "structured",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 833,
+   "end_byte": 839,
+   "start_cp": 818,
+   "end_cp": 823,
+   "component_id": "comp-structured-env-blocks-dev-0007",
+   "category": "structured",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 839,
+   "end_byte": 840,
+   "start_cp": 823,
+   "end_cp": 824,
+   "component_id": "comp-structured-env-blocks-dev-0007",
+   "category": "structured",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 840,
+   "end_byte": 844,
+   "start_cp": 824,
+   "end_cp": 828,
+   "component_id": "comp-structured-env-blocks-dev-0007",
+   "category": "structured",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 844,
+   "end_byte": 845,
+   "start_cp": 828,
+   "end_cp": 829,
+   "component_id": "comp-structured-env-blocks-dev-0007",
+   "category": "structured",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 845,
+   "end_byte": 936,
+   "start_cp": 829,
+   "end_cp": 919,
+   "component_id": "comp-structured-env-blocks-dev-0007",
+   "category": "structured",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 936,
+   "end_byte": 937,
+   "start_cp": 919,
+   "end_cp": 920,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 937,
+   "end_byte": 940,
+   "start_cp": 920,
+   "end_cp": 923,
+   "component_id": "comp-code-sql-dev-0008",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 940,
+   "end_byte": 941,
+   "start_cp": 923,
+   "end_cp": 924,
+   "component_id": "comp-code-sql-dev-0008",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 941,
+   "end_byte": 1284,
+   "start_cp": 924,
+   "end_cp": 1264,
+   "component_id": "comp-code-sql-dev-0008",
+   "category": "code",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 1284,
+   "end_byte": 1285,
+   "start_cp": 1264,
+   "end_cp": 1265,
+   "component_id": "comp-code-sql-dev-0008",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 1285,
+   "end_byte": 1288,
+   "start_cp": 1265,
+   "end_cp": 1268,
+   "component_id": "comp-code-sql-dev-0008",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 1288,
+   "end_byte": 1289,
+   "start_cp": 1268,
+   "end_cp": 1269,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 1289,
+   "end_byte": 1292,
+   "start_cp": 1269,
+   "end_cp": 1272,
+   "component_id": "comp-code-c-dev-0006",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 1292,
+   "end_byte": 1293,
+   "start_cp": 1272,
+   "end_cp": 1273,
+   "component_id": "comp-code-c-dev-0006",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 1293,
+   "end_byte": 1477,
+   "start_cp": 1273,
+   "end_cp": 1455,
+   "component_id": "comp-code-c-dev-0006",
+   "category": "code",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 1477,
+   "end_byte": 1478,
+   "start_cp": 1455,
+   "end_cp": 1456,
+   "component_id": "comp-code-c-dev-0006",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 1478,
+   "end_byte": 1481,
+   "start_cp": 1456,
+   "end_cp": 1459,
+   "component_id": "comp-code-c-dev-0006",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 1481,
+   "end_byte": 1482,
+   "start_cp": 1459,
+   "end_cp": 1460,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 1482,
+   "end_byte": 1491,
+   "start_cp": 1460,
+   "end_cp": 1469,
+   "component_id": "comp-markdown-strikethrough-dev-0002",
+   "category": "markdown",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 1491,
+   "end_byte": 1493,
+   "start_cp": 1469,
+   "end_cp": 1471,
+   "component_id": "comp-markdown-strikethrough-dev-0002",
+   "category": "markdown",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 1493,
+   "end_byte": 1503,
+   "start_cp": 1471,
+   "end_cp": 1481,
+   "component_id": "comp-markdown-strikethrough-dev-0002",
+   "category": "markdown",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 1503,
+   "end_byte": 1505,
+   "start_cp": 1481,
+   "end_cp": 1483,
+   "component_id": "comp-markdown-strikethrough-dev-0002",
+   "category": "markdown",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 1505,
+   "end_byte": 1544,
+   "start_cp": 1483,
+   "end_cp": 1522,
+   "component_id": "comp-markdown-strikethrough-dev-0002",
+   "category": "markdown",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 1544,
+   "end_byte": 1545,
+   "start_cp": 1522,
+   "end_cp": 1523,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 1545,
+   "end_byte": 1957,
+   "start_cp": 1523,
+   "end_cp": 1927,
+   "component_id": "comp-prose-sports-dev-0002",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  }
+ ],
+ "invariants": {
+  "tiling_complete": true,
+  "no_contradictory_overlaps": true,
+  "cp_range_exact": true
+ }
+}

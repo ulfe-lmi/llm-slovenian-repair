@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-002289",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T2-prose-math-prose",
+ "byte_length": 588,
+ "cp_length": 571,
+ "sha256": "83fc81e7ba1c45ab1b95f954ecf47c24f1fb3b75b040c73ce25709e0574ac8b9",
+ "document": "V projektu Prvi tok, ki ga je leta 2018 sestavila Ana, se je naučila, da mora biti sklep zaprt, da se lučka sploh prižge. Baterija, ki je imela 4,5 V, je bila nameščena v držač, medtem ko je upornost zaščitila diodo pred prevelikim tokom. (Zelo pomembno je preveriti, ali so vsi konci dobro povezani.)\n$\\frac{\\alpha_{\\text{Maja projekt Triglav}}}{\\beta} = \\gamma$\nNa oknu štiri je čakal gospod Ivan. Hotel je obnoviti dovoljenje za manjšo poslovno enoto. Uslužbenica mu je dejala, da »pripravite še potrdilo o plačilu«, in dodala, da je rok (trideset dni) naveden v akti.",
+ "components": [
+  {
+   "component_id": "comp-prose-electronics-dev-0006",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 310
+  },
+  {
+   "component_id": "comp-math-inline-dollar-dev-0003",
+   "category": "math",
+   "start_byte": 311,
+   "end_byte": 372
+  },
+  {
+   "component_id": "comp-prose-administration-dev-0012",
+   "category": "prose",
+   "start_byte": 373,
+   "end_byte": 588
+  }
+ ]
+}

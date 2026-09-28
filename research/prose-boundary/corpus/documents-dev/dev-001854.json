@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-001854",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T7-prose-json-prose-latex",
+ "byte_length": 959,
+ "cp_length": 941,
+ "sha256": "a1368eed92272b37e32ea45282a404e5c65419c2418a8a2395c3811c88fb865a",
+ "document": "Anja je v opombi zapisala, da so razmerja med dohodki in izdatki (v mesecu maju in juniju) nekoliko drugačna kot lani. Povprečje ni pokazalo velike spremembe, vendar je posamezen teden odstopil, kar je pritegnilo pozornost ekipi.\n{\"ime\":\"Projekt Jabolko\",\"faza\":\"Vzdrževanje\",\"avtorsko\":\"Nevtralna testna vsebina\",\"enote\":{\"temperatura\":\"21,5 °C\",\"debelina\":\"0,2 m\",\"delež\":\"45 %\"},\"opomba\":\"**Nalaganje** https://primer.si/novica\"}\nV projektu Hišni nasveti 2024 je Ana iz Ljubljane opazila, da se steklenice s čisto vodo, (še posebej tiste 0,5 litra), hitreje izpraznijo, če so vedno pri roki ob jedilni mizi. Njen sosed Marko je bil sprva skeptičen, a je po dveh tednih dejal: »Če je pijača pri mizi, manjkrat potuje v hladilnik.« Tudi manjše spremembe, kot je skleda za kosmiče ob vratih, v celotnem gospodinjstvu naredijo mirnejše jutro.\nE[Y_{\\text{Trn}}] = \\int_{0}^{1} y f_{\\text{Trn}}(y) \\, dy = \\beta^2 \\text{ (pričakovana vrednost)}",
+ "components": [
+  {
+   "component_id": "comp-prose-statistics-dev-0002",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 231
+  },
+  {
+   "component_id": "comp-structured-json-dev-0003",
+   "category": "structured",
+   "start_byte": 232,
+   "end_byte": 437
+  },
+  {
+   "component_id": "comp-prose-everyday-advice-dev-0011",
+   "category": "prose",
+   "start_byte": 438,
+   "end_byte": 858
+  },
+  {
+   "component_id": "comp-math-probability-dev-0005",
+   "category": "math",
+   "start_byte": 859,
+   "end_byte": 959
+  }
+ ]
+}

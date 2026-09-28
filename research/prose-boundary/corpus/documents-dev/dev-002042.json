@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-002042",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T8-quote-fenced",
+ "byte_length": 737,
+ "cp_length": 720,
+ "sha256": "eaa61243f8d4c0909a62c4208c40353abb89027405ee167b351e9bd9cad7be29",
+ "document": "> V letu 2022 je občina Šentvid na Vzorčni gori uvedla elektronsko predložitev dokumentov. Nekateri uporabniki so najprej raje oddali listne vloge, a so kasneje izbrali spletno obliko. V zapisniku, ki ga je podpisal magister Jožef Kranjc, so zapisali: „Postopek je pregleden”, in ga nato potrdili. Rok za odziv je bil deset dni, vendar so večino rešitev dokončali že v petih dneh. Tudi mnenje javnosti je bilo zmerno, saj so v anketi sodelovali trije od petih prebivalcev. `// Test: poročilo v izmišljenem projektu Jabolko.`\n```\nint main(void) { int razdelek2 = 7; char *naslov = \"Ana (izmišljena oseba)\"; char *pot = \"docs/vir.txt\"; (void)razdelek2; (void)naslov; (void)pot; return 0; } /* Izmišljen projekt: Ana */\n```",
+ "components": [
+  {
+   "component_id": "comp-prose-administration-dev-0010",
+   "category": "prose",
+   "start_byte": 2,
+   "end_byte": 485
+  },
+  {
+   "component_id": "comp-code-rust-dev-0011",
+   "category": "code",
+   "start_byte": 486,
+   "end_byte": 539
+  },
+  {
+   "component_id": "comp-code-c-dev-0003",
+   "category": "code",
+   "start_byte": 540,
+   "end_byte": 737
+  }
+ ]
+}

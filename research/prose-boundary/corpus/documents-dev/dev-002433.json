@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-002433",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T3-prose-fenced-prose",
+ "byte_length": 871,
+ "cp_length": 847,
+ "sha256": "29ad10aa07b03037615480d9a7e91040926f49a6663be661b11dbc50ef9fa01f",
+ "document": "V letu 2021, po natančnem pregledu, so v projektu Ptičji kotel preverili, da je povprečna dolžina poti do šole znašala 2,4 kilometra, medtem ko so trije učenci hodili dlje in štirje krajše. To pomeni, da razmerje med krajšimi in daljšimi potmi ni enako, čeprav so posamezne vrednosti blizu.\n```\nint main(void) { char *napis = \"Tekst: *poudarjeno* in _podčrtano_\"; char *cena = \"Cena: 10 $ (dolar)\"; char *url = \"https://primer.si/koda\"; (void)napis; (void)cena; (void)url; return 0; } /* Markov podatek */\n```\nV izmišljenem raziskovalnem projektu “Arhiv Dravskih poti” (nevtralna testna zbirka) so zapisi o potovanjih po Dravi prikazali, kako so meje med skupnostmi spreminjale spomin na preteklost. Letnica 1918 je postala mejni simbol. Avtorica Ana Kralj je v vnosu zapisala (po mnenju uredništva), da je “zgodovina” večinoma molk med letnicami.",
+ "components": [
+  {
+   "component_id": "comp-prose-statistics-dev-0009",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 302
+  },
+  {
+   "component_id": "comp-code-c-dev-0002",
+   "category": "code",
+   "start_byte": 303,
+   "end_byte": 522
+  },
+  {
+   "component_id": "comp-prose-history-dev-0011",
+   "category": "prose",
+   "start_byte": 523,
+   "end_byte": 871
+  }
+ ]
+}

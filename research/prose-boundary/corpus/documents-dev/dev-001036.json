@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-001036",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T3-prose-fenced-prose",
+ "byte_length": 909,
+ "cp_length": 887,
+ "sha256": "7913559f8cbf6354a71b5ab1c477fc8c7bd572a08f872c4ce7088227c05c28ca",
+ "document": "V šoli zdravja v Trzinu so učenci (ki so sodelovali v projektu Mirni utripi) prebrali, da premalo gibanja lahko spremeni občutek moči in počutje. Takšne spremembe so lahko odziv na vsakdanjo utrujenost. Ko se pri nekem otroku ali odraslem ponovijo, je prav, da jih preveri zdravnik.\n```\nmoČ = 3; žrtev = (1, 2); besedilo = 'Cena: $10 `kod` **poudarek** _podčrtano_'; pot = 'docs/vir.txt' # komentar v slovenščini: testni projekt, https://primer.si/koda\n```\nV kopeli na Trgu v novembru 2024 je potekal kratki rekreativni plavalni tečaj, v katerem so trije poskusi (plavanje na hrbtno, na prsi in s sproščeno dihanjem) trajali skupaj dvajset minut. Udeleženka, ki jo je projekt opisal kot Maja, je po prvem krogu dejala, da je voda morda hladnejša, kot se je zdelo. 'Največja korist je, da se je telo pomirilo,' je zaključila brez vsakršne pohvale.\n Pozor: é (dekompouziran znakovni niz).",
+ "components": [
+  {
+   "component_id": "comp-prose-medicine-explainer-dev-0002",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 288
+  },
+  {
+   "component_id": "comp-code-python-dev-0011",
+   "category": "code",
+   "start_byte": 289,
+   "end_byte": 467
+  },
+  {
+   "component_id": "comp-prose-sports-dev-0003",
+   "category": "prose",
+   "start_byte": 468,
+   "end_byte": 865
+  }
+ ]
+}

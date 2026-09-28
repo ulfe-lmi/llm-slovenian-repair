@@ -1,0 +1,135 @@
+{
+ "schema": "008h-experiment-config/1",
+ "order": "008-h",
+ "frozen_note": "New frozen protection identity for the 008-h corrective round: recorded after the dev regression gate (requirement 6) passed and BEFORE any v3 component generation (requirement 7). The implementation is frozen from this census; the v3 hidden set is generated, sealed, and evaluated against exactly this identity (re-asserted by the v3 evaluation wrapper).",
+ "round_identity": {
+  "objective": "008",
+  "branch": "oap/008-prose-boundary-qualification",
+  "pr": 9,
+  "base_sha": "fca215cfd9fe84a6dd7b73a12db538c2ecca040e",
+  "activation_sha": "345f34bc0657ce5b7d74b877c69649e35052abc8",
+  "main_sha_unchanged": "7d2cc9ee37c1fc8c2a3eba238f89bc9bb242f9d9"
+ },
+ "trigger_decision": {
+  "surface": "research/curated/prose_boundary.py (the single predeclared xml-fragment trigger decision; nothing else on this surface changed)",
+  "decision": "EXTEND",
+  "predeclared_fallback_rule": "008-h scope item 4: if the dev regression shows any new safety exposure on the 3,000-document dev corpus or the 50-document 008-g dev batch attributable to the extended trigger (exposed documents containing Unicode-letter tag-name shapes in candidate prose), or prose over-suppression delta beyond the 1.0 percentage point bound on the dev corpus, the decision is FALLBACK (not a STOP): the curated file is reverted to the 008-g identity, R3 admission applies, the xml-diacritic-tag-name policy-exposed class is added in v4, the dev-edge batch xml labels are fixed PROTECTED -> POLICY_EXPOSED, and the dev regression driver is re-run",
+  "fallback_triggered": false,
+  "evidence": {
+   "dev_regression_file": "research/prose-boundary/results/hidden-acceptance-v3/dev-regression-008h.json",
+   "dev_regression_sha256": "721a76b7f82ddb9cd12e44623858385441c438ef2a31613758747b64e57cd6a9",
+   "status": "PASS",
+   "dev_corpus_protected_bytes_exposed": 0,
+   "batch_008g_protected_bytes_exposed": 0,
+   "dev_edge_protected_bytes_exposed": 0,
+   "prose_suppression_delta_vs_008g_pp": 0.021674473490918,
+   "prose_suppression_delta_vs_008c_pp": 0.032982894442701305,
+   "prose_suppression_rate": 0.01570195190675161,
+   "bound_pp": 1.0,
+   "attribution": "no stop condition fired; the unicode-tag-shape attribution scan was not required"
+  },
+  "implementation": {
+   "change": "RE_XML_NAME widened from [A-Za-z_][A-Za-z0-9_.:-]* to (?!\\d)\\w[\\w.:-]* (a leading Unicode letter/underscore via a negative digit lookahead, then letters/digits/underscore/dots/colons/hyphens): diacritic tag names now trigger the xml-fragment class; ASCII tag-name behaviour is byte-identical to v3",
+   "shape_guards_unchanged": "letter/underscore immediately after '<' then letters/digits/hyphens (plus the v3 dots/colons), same-line closing or self-closing or attribute space, 2000 cp bound; never on comparison operators, never on an opening bracket followed by digits, never on a lone bracket; RE_XML_DIALECT_NAME and _xml_name_triggers unchanged (recognized-HTML abstention byte-identical)",
+   "negative_controls": "dev-edge batch e18-e23: Slovenian diacritic word in angle brackets that is not tag-shaped stays candidate prose; inequality angle brackets exposed; lone angle bracket exposed; digit after '<' never fires; recognized-HTML behaviour unchanged"
+  },
+  "policy_consequence": "no xml-diacritic-tag-name class in v4 (that class exists only in the not-triggered FALLBACK branch); the 110 B v1 xml-unicode-tag-name sub-shape is resolved CLOSED-RESIDUAL (shape analysis)"
+ },
+ "policy": {
+  "active": "research/prose-boundary/config/structural-policy-v4.json",
+  "v3_sha256": "7ff6646e3c11d1241cb1c85bd96f08e3f0db08e73d4eb4a4e97fac0c17e1828f",
+  "v4_sha256": "f564d9f87ef01a893d6cd6bb36f6cf99a0d353a4dde4e4c4c024942eb969e76f",
+  "v3_to_v4_pair": "7ff6646e3c11d1241cb1c85bd96f08e3f0db08e73d4eb4a4e97fac0c17e1828f -> f564d9f87ef01a893d6cd6bb36f6cf99a0d353a4dde4e4c4c024942eb969e76f",
+  "v3_in_tree": "byte-identical at all 008-h heads (git-verified; the v3 runtime policy is unchanged)",
+  "v4_role": "policy of record: the v3 evaluation wrapper reads v4 for malformed_class_map only; the runtime residual layer loads the committed v3 policy file unmodified",
+  "new_policy_exposed_dialect_ambiguity_classes": [
+   {
+    "id": "html-closing-tag-adjacent-fence",
+    "evidence_origin": "v2 hidden set (35 B, 1 of 2,000 docs)"
+   },
+   {
+    "id": "keyvalue-list-item-quoted-emphasis",
+    "evidence_origin": "v2 hidden set (16 B, 2 of 2,000 docs, same component)"
+   },
+   {
+    "id": "yaml-hash-comment-heading",
+    "evidence_origin": "v1 diagnostic re-run (348 B of 458 B); recorded no-viable-recognizer reason"
+   },
+   {
+    "id": "markdown-table-dialect-boundary",
+    "evidence_origin": "008-g naturalistic aggregate (615 B, 9 of 15 ranges)"
+   },
+   {
+    "id": "list-item-candidate-prose",
+    "evidence_origin": "008-g naturalistic aggregate (250 B, 2 of 15 ranges)"
+   },
+   {
+    "id": "indented-code-lazy-continuation",
+    "evidence_origin": "008-g naturalistic aggregate (45 B, 1 of 15 ranges)"
+   },
+   {
+    "id": "residual-token-line-glue",
+    "evidence_origin": "008-g naturalistic aggregate (17 B, 3 of 15 ranges)"
+   }
+  ],
+  "unchanged": "determinism and scope clauses carried unchanged from v3; additive changelog field"
+ },
+ "composition_contract": {
+  "builder": "research/prose-boundary/tools/prose_boundary_builder.py",
+  "builder_sha256": "647ecf1ff3649f22867d124f70201135c267f3aa08328d900186371168fa5451",
+  "note": "builder sha is the composition/label-construction identity (not part of the runtime frozen_census above; the v3 generation and seal assert builder blob-identity against HEAD)",
+  "rules": {
+   "R1": "a fenced or indented code component is never composed on the line immediately after an HTML closing-tag line; the builder inserts exactly one blank line (template-owned NEUTRAL delimiter), recorded in the document composition provenance (composition_provenance.r1_blank_line_insertions)",
+   "R2": "a structured-keyvalue component containing a list-item-style line (list marker plus space) with paired emphasis markers or quoted emphasis-like content is not admitted to the v3 component pool (hash-only matching criterion and the excluded count recorded in generation-identity-008h.json)",
+   "R3": "defined in the builder (structured-xml component with a tag name containing non-ASCII letters is not admitted) and unit-tested, but INACTIVE under the EXTEND decision; applies only if the predeclared FALLBACK branch executes"
+  },
+  "label_source_split": "per labeled region: 'construction' = role fixed by explicit composition specification (template glue, parser-structural roles, and the v4 policy-class-documented POLICY_EXPOSED shapes); 'oracle-refined' = role fixed by the frozen residual spec (PROTECTED regions whose protection comes from a residual class: config run, number, xml-fragment); recorded in the v3 labels and manifest (census)",
+  "assertions": "assert_no_parser_participation() retained in build_set; the label oracle (the implementation residual function) is unchanged in meaning"
+ },
+ "implementation": {
+  "frozen_census": {
+   "research/curated/prose_boundary.py": "a89f17f8ef7a8e8651f79a39cd8209911d7592317f5f1fed8f09e5edb9acd87e",
+   "research/curated/protected.py": "27f22eaee129190b880851b958a8aa5a38d357cb4e711d70e762b2353d32e78f",
+   "research/prose-boundary/config/structural-policy-v3.json": "7ff6646e3c11d1241cb1c85bd96f08e3f0db08e73d4eb4a4e97fac0c17e1828f",
+   "research/prose-boundary/config/structural-policy-v4.json": "f564d9f87ef01a893d6cd6bb36f6cf99a0d353a4dde4e4c4c024942eb969e76f"
+  },
+  "note": "same four-file census as the committed dev regression implementation_census (the runtime protection identity; protected.py byte-identical to the 008-g final head)",
+  "helper": {
+   "binary": "prose-boundary-meas (pinned pulldown-cmark 0.13.4 adapter)",
+   "sha256": "5df9a11d56b5bdec90c3ca09298802723975306f77e43e74ad1a72eb427c44bf"
+  }
+ },
+ "dev_regression": {
+  "file": "research/prose-boundary/results/hidden-acceptance-v3/dev-regression-008h.json",
+  "file_sha256": "721a76b7f82ddb9cd12e44623858385441c438ef2a31613758747b64e57cd6a9",
+  "status": "PASS",
+  "dev_corpus_protected_bytes_exposed": 0,
+  "defect_batch_008g_protected_bytes_exposed": 0,
+  "defect_batch_008h_protected_bytes_exposed": 0,
+  "dev_prose_suppression_delta_pp": 0.021674473490918,
+  "bound_pp": 1.0,
+  "committed_before": "any v3 generation or hidden evaluation (requirement 6)"
+ },
+ "shape_analysis": {
+  "file": "research/prose-boundary/results/hidden-acceptance-v3/shape-analysis-008h.json",
+  "file_sha256": "7d04ea994ac43e8053b8e0a79f697b5f27aba4cb6ce77e46e053ee48a6c2dc39",
+  "summary": "all 15 naturalistic exposed ranges and both v1 diagnostic sub-shapes resolved (15 x DOCUMENTED-DIALECT-LIMITATION over the four naturalistic classes; v1 348 B DOCUMENTED-DIALECT-LIMITATION + 110 B CLOSED-RESIDUAL under the EXTEND trigger); no UNRESOLVED range"
+ },
+ "model_budget": {
+  "authorized_calls": [
+   "v3 component generation (authorized test-data generation; qwen3.8-27b 007-lineage deployment record, endpoint omitted per 007 convention; bounded K=8 recovery with a new recorded seed allowed and disclosed, 008-g precedent)",
+   "v3 generation preflight",
+   "scope item 8 label corrections (at most 5, only if a frozen label is revealed factually wrong)"
+  ],
+  "linguistic_pipeline_calls": 0,
+  "note": "call counts recorded in generation-identity-008h.json and the naturalistic aggregate; no other model calls of any kind"
+ },
+ "d0_choices": [
+  "label_source split convention (composition specification vs frozen residual spec); disclosed in the defect_dev_008h census key and the v3 manifest census",
+  "dev-edge batch fail-closed validation extended: 008-g validated PROTECTED coverage only; 008-h additionally requires every POLICY_EXPOSED region to be 100% exposed",
+  "dev-edge batch 32 documents (order target 30): the R1-separator variants (e02, e03) plus the no-separator boundary variants without an internal blank line (e31, e32; the HTML block runs to EOF - documents the class exposure boundary)",
+  "v3 runtime policy stays v3 (byte-identical in-tree); v4 is the policy of record read by the v3 evaluation wrapper for malformed_class_map only",
+  "dev regression driver: the frozen 008-c differential regression logic reused unmodified with hardlinked batch views in the dev-corpus layout; stop (iv) bound 1.0 percentage point relative to the 008-g dev baseline (suppression 0.01548520717184243)"
+ ],
+ "privacy": "no private paths, no raw content in this file"
+}

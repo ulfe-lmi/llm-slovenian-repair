@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-000831",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T7-prose-json-prose-latex",
+ "byte_length": 961,
+ "cp_length": 942,
+ "sha256": "7b2d362663dbde4d305eae0639bfd57a3cbbbafb48ea41a2abf5c82b9d010cad",
+ "document": "V Dubrovniku sem z ekipo Sredozemska karta preveril obzidje in opozoril, da je obisk (brez rezervacije) pogosto daljši. V program smo vstavili tudi kratek postoj v starem solnem bazenu, kjer je voda odražala nebo. Vodič je dejal: \"če želite tih kot, se odpravite proti severu\".\n{\"ime\":\"Projekt Gora\",\"nagnjenost\":\"12 %\",\"avtorsko\":\"Nevtralna testna vsebina\",\"debelina\":\"0,3 m\",\"opomba\":\"_Nevtralno_ https://primer.si/novica\"}\nSlovenska pesniška tradicija ima svojo tišino. V izmišljenem projektu Glas in tišina, ki raziskuje naravno, se pojavi motiv dreves. Izmišljena pesnica Anja Horvat v zbirki iz leta 2015 piše: »Drevo ne govori, a se v šumu zdi, da je vprašanje.« Ta stavek se v evropskem kontekstu pogosto pojavi kot znak identitete.\n\\begin{equation}\\begin{aligned}E_1 &= \\alpha_1 \\cdot \\beta_1 + \\gamma_1 \\text{Ljubljana} \\\\H_1 &= \\lambda_1 \\Delta_1 \\text{Ana Kovač}\\end{aligned}\\end{equation}\n Pozor: é (dekompouziran znakovni niz).",
+ "components": [
+  {
+   "component_id": "comp-prose-travel-dev-0005",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 282
+  },
+  {
+   "component_id": "comp-structured-json-dev-0008",
+   "category": "structured",
+   "start_byte": 283,
+   "end_byte": 430
+  },
+  {
+   "component_id": "comp-prose-literature-dev-0008",
+   "category": "prose",
+   "start_byte": 431,
+   "end_byte": 755
+  },
+  {
+   "component_id": "comp-math-aligned-env-dev-0001",
+   "category": "math",
+   "start_byte": 756,
+   "end_byte": 917
+  }
+ ]
+}

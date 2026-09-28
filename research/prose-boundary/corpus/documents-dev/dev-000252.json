@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-000252",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T11-interactions",
+ "byte_length": 945,
+ "cp_length": 923,
+ "sha256": "b14ff75465acd0395ee248697b0c1e2386765b2ad78642c1b0a00023c914206d",
+ "document": "`# Fragment 4: oseba: Marko Horvat, projekt *Sonca*`.\n```\nint main(void) { int razdelek2 = 7; char *naslov = \"Ana (izmišljena oseba)\"; char *pot = \"docs/vir.txt\"; (void)razdelek2; (void)naslov; (void)pot; return 0; } /* Izmišljen projekt: Ana */\n# komentar z \\frac{a}{b}\n```\nV prostoru projekta Tabor so preizkušali prenos toplote skozi plastine in merili spremembe, ko so dodali tanke plasti iz mešanih vlaken. Meritve so vodila dva študenta, Luka in Nika, ki sta zapisoval čase, temperature ter opazila rahlo meglico na robu vzorcev. Leta dvotisoč in devetindvajset, ko je bila soba še prenovljena, je v opombah stalo, da bo treba poskus ponoviti pri drugačni vlažnosti.\nV sklopu testnega projekta je Peter opazoval skupino starejših udeležencev. Njegova skupina je začela s petminutnim segrevanjem. Nato je izvedla tri krogove po travi. „Sodelavec,“ je vodja rekel, „v prihodnji uri bomo dodali še eno zmerno aktivnost.“",
+ "components": [
+  {
+   "component_id": "comp-code-shell-bash-dev-0004",
+   "category": "code",
+   "start_byte": 0,
+   "end_byte": 52
+  },
+  {
+   "component_id": "comp-code-c-dev-0003",
+   "category": "code",
+   "start_byte": 54,
+   "end_byte": 276
+  },
+  {
+   "component_id": "comp-prose-science-dev-0004",
+   "category": "prose",
+   "start_byte": 277,
+   "end_byte": 682
+  },
+  {
+   "component_id": "comp-prose-sports-dev-0010",
+   "category": "prose",
+   "start_byte": 683,
+   "end_byte": 945
+  }
+ ]
+}

@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-002109",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T9-prose-malformed-prose",
+ "byte_length": 792,
+ "cp_length": 771,
+ "sha256": "4b84bde4136ca7b3ef6897c129e32fa573843c9cc5765206bf7c42050d8d99c3",
+ "document": "V projektu Prvi korak so učitelji iz Ljubljane poskusili kratek skupinski pogovor pred ocenjevanjem, kar je po mnenju Anje zmanjšalo strah pred pisnim testom. Pri izbirnem predmetu zgodovina so uporabili učbenik z dodatnimi opombami (stran 42) in vprašanja, ki so dopuščala večkratne odgovore. Odrasli udeleženci so se zavedali, da se izpit ne piše enkrat, temveč se znanje utrjuje v vsakdanju.\n\n\\begin{align} t &= 0, zbirka podatkov za projekt Modra pot, izmišljen sodelavec Jožko Novak.\n\nV izmišljenem projektu Knjižna mreža preverjamo, kako spomin spreminja prostor. Izmišljeni slovenski avtor Matej Zupan v romanu iz leta 2018 zapiše: »Hiša je v megli, a jezik ostane.« To stisko je mogoče primerjati z evropsko prozo, v kateri tihi vnos pogosto postane glavni motiv.",
+ "components": [
+  {
+   "component_id": "comp-prose-education-dev-0006",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 404
+  },
+  {
+   "component_id": "comp-malformed-unclosed-tex-env-dev-0003",
+   "category": "malformed",
+   "start_byte": 406,
+   "end_byte": 500
+  },
+  {
+   "component_id": "comp-prose-literature-dev-0006",
+   "category": "prose",
+   "start_byte": 502,
+   "end_byte": 792
+  }
+ ]
+}

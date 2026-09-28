@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-000413",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T7-prose-json-prose-latex",
+ "byte_length": 1068,
+ "cp_length": 1049,
+ "sha256": "610d7f726aeffedc46be37f2aad002f03523929e4ab628f0a00d31d4069efba2",
+ "document": "V laboratoriju projekta Tiha vrtnica so letos opazili, da nekatere rastline ponoči bolj aktivno rastejo, kadar je zrak bolj vlažen. Biolog Marko Zupan je rekel: »To ni presenečenje, ampak nam pomaga razumeti, kako rast odzivno prilagaja vlagi.« V enem od sklicov za posveto so dodali še opombo, da je merilo za uspeh preprost odtok vode. Tudi majhne napake pri zapisih so bile sprejete, ker so pokazale zanimivo razliko med posodami.\n{\"ime\":\"Projekt Mesto\",\"površina\":\"120 m2\",\"avtorsko\":\"Nevtralna testna vsebina\",\"delež\":\"15 %\",\"opis\":{\"podrobnost\":\"**Testni podatki** https://primer.si/novica\"}}\nMednarodna skupina, ki dela v izmišljenem arhivu Ljubljana, je pregledovala dopise iz leta 1804, v katerih omenjajo potovanja po dolini. V vstavku (ki ga je zapisala Taja) piše: »Razdalje so merili s koraki in verstami, ne pa z modernimi merami.«\n\\begin{equation} \\text{Testni projekt Anja} \\; : \\; \\lim_{\\nu \\to \\infty} \\frac{1}{\\nu}=0 \\Rightarrow \\lim_{\\nu \\to \\infty} \\left(\\frac{1}{\\nu}+1\\right)=1 \\end{equation}\n Žč: 🚀 hitrost rasti je merljiva.",
+ "components": [
+  {
+   "component_id": "comp-prose-science-dev-0007",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 439
+  },
+  {
+   "component_id": "comp-structured-json-dev-0007",
+   "category": "structured",
+   "start_byte": 440,
+   "end_byte": 606
+  },
+  {
+   "component_id": "comp-prose-history-dev-0002",
+   "category": "prose",
+   "start_byte": 607,
+   "end_byte": 857
+  },
+  {
+   "component_id": "comp-math-equation-env-dev-0005",
+   "category": "math",
+   "start_byte": 858,
+   "end_byte": 1027
+  }
+ ]
+}

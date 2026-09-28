@@ -1,0 +1,102 @@
+{
+ "doc_id": "dev-002118",
+ "byte_length": 960,
+ "cp_length": 945,
+ "regions": [
+  {
+   "start_byte": 0,
+   "end_byte": 340,
+   "start_cp": 0,
+   "end_cp": 329,
+   "component_id": "comp-prose-engineering-dev-0006",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 340,
+   "end_byte": 341,
+   "start_cp": 329,
+   "end_cp": 330,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 341,
+   "end_byte": 492,
+   "start_cp": 330,
+   "end_cp": 479,
+   "component_id": "comp-structured-json-dev-0006",
+   "category": "structured",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 492,
+   "end_byte": 493,
+   "start_cp": 479,
+   "end_cp": 480,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 493,
+   "end_byte": 809,
+   "start_cp": 480,
+   "end_cp": 794,
+   "component_id": "comp-prose-programming-explainer-dev-0013",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 809,
+   "end_byte": 810,
+   "start_cp": 794,
+   "end_cp": 795,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 810,
+   "end_byte": 826,
+   "start_cp": 795,
+   "end_cp": 811,
+   "component_id": "comp-math-equation-env-dev-0002",
+   "category": "math",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 826,
+   "end_byte": 946,
+   "start_cp": 811,
+   "end_cp": 931,
+   "component_id": "comp-math-equation-env-dev-0002",
+   "category": "math",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 946,
+   "end_byte": 960,
+   "start_cp": 931,
+   "end_cp": 945,
+   "component_id": "comp-math-equation-env-dev-0002",
+   "category": "math",
+   "role": "PROTECTED",
+   "template_owned": false
+  }
+ ],
+ "invariants": {
+  "tiling_complete": true,
+  "no_contradictory_overlaps": true,
+  "cp_range_exact": true
+ }
+}

@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-002218",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T8-quote-fenced",
+ "byte_length": 697,
+ "cp_length": 681,
+ "sha256": "c6b2f2ac5138cc3c4fd0ca53b3f91c5e939a3323a48141192a3ccfb368aa25d1",
+ "document": "> Zimska juha je pri kuhanju zahtevala mir in čas. Anja je najprej olupila krompir, nato pa ga naribala. Za projektni dnevnik je zapisala, da je smetane lahko “samo malo”, ne pa preveč. V kotliček so šli tudi rdeča čebula in klobasa, po stari navadi. Skozi okno je prišlo malo hlada, zato je juha postala še gostejša. `#include <string>`\n```\n/* Testni fragment 4: izmišljena oseba Eva, projekt Trava. */ SELECT 'Eva' AS `ime`, '4,20 $' AS `cena`, 'https://primer.si/koda' AS `url`, 'docs/vir.txt' AS `pot`, TRIM('*poudarek* in _dolgo_') AS `opomba`, 'razdelek2' AS `razdelek2`, 'seStez' AS `seStez`, 'č' AS `HRAŠNA_VREDNOST` FROM (SELECT 4 AS `en`) AS `t` WHERE (`t`.`en` = 4);\n```",
+ "components": [
+  {
+   "component_id": "comp-prose-cooking-dev-0005",
+   "category": "prose",
+   "start_byte": 2,
+   "end_byte": 330
+  },
+  {
+   "component_id": "comp-code-cpp-dev-0004",
+   "category": "code",
+   "start_byte": 331,
+   "end_byte": 350
+  },
+  {
+   "component_id": "comp-code-sql-dev-0004",
+   "category": "code",
+   "start_byte": 351,
+   "end_byte": 697
+  }
+ ]
+}

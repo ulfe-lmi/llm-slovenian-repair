@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-002608",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T2-prose-math-prose",
+ "byte_length": 772,
+ "cp_length": 751,
+ "sha256": "0d836bc41d32fae6cddb46b6c624767758996a5fe7045ac40b83769430557a37",
+ "document": "Ana je zapisala, da se v starejših pisarnah pogosto uporabljajo tiskalniki, ki se povezujejo po kablu, čeprav so mlajši sodelavci privrženci brezžičnih rešitev. Takšna razmerja, čeprav na videz nevidna, vplivajo na to, kako hitro potuje dokument. (V projektu so to opazovali tri tedne.)\n\\begin{align} \\alpha_5(\\text{Sonce}) &\\le \\beta_5 + \\gamma_5 \\\\ \\delta_5 &\\ge \\epsilon_5 \\times \\zeta_5 \\\\ \\eta_5 &= \\theta_5 \\end{align}\nZa lažje razumevanje enačb je dobro, da učenci najprej preberejo nalogo dvakrat, nato pa s povedmi opišejo, kaj se dogaja, in šele potem iščejo tisto, česar ne vedo. V šolski knjigi iz leta 2015 je bil točen primer razgovora med učiteljico Ano in dijakom Tomom, ki sta prenašala pomen vsake besede v smisel zvezka, ne v zapis.",
+ "components": [
+  {
+   "component_id": "comp-prose-computing-dev-0005",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 295
+  },
+  {
+   "component_id": "comp-math-align-env-dev-0005",
+   "category": "math",
+   "start_byte": 296,
+   "end_byte": 433
+  },
+  {
+   "component_id": "comp-prose-math-explainer-dev-0009",
+   "category": "prose",
+   "start_byte": 434,
+   "end_byte": 772
+  }
+ ]
+}

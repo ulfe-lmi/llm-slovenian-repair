@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-001363",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T11-interactions",
+ "byte_length": 1128,
+ "cp_length": 1104,
+ "sha256": "130b7d44b0dd5fcfbd52e0b861b9b47a6c2bf0be55023038567b57b0e034905b",
+ "document": "`/* Preveri imenik (č, š, ž): src/modul.py in docs/vir.txt */`.\n```\n# Testni projekt: Vir podatkov; avtor: Maja Lipovnik\nurl = 'https://primer.si/koda'\npot = 'src/nabavki.py'\ncena = '100 $ (brez popusta)'\noznaka = '(test č š ž)'\nif url and pot:\n    print('Vir je nastavljen')\n# komentar z \\frac{a}{b}\n```\nBiologi v projektu Grepel so gojili mikroalghe v steklenih skledah in vsak teden beležili barvo ter gostino. V dnevniku so zapisali, da so kulture pri temperaturi dvaindvajset stopinj Celzija hitreje porabile svetlobo. »Ta serija je nenavadno stabilna,« je rekel Tomaž ob oknu. Leta dvotisoč in dvaindvajset je Iva pripravila manjšo skupino vzorcev, ki so jo poimenovali po dolini pri Logu.\nV projektu Hišni nasveti 2024 je Ana iz Ljubljane opazila, da se steklenice s čisto vodo, (še posebej tiste 0,5 litra), hitreje izpraznijo, če so vedno pri roki ob jedilni mizi. Njen sosed Marko je bil sprva skeptičen, a je po dveh tednih dejal: »Če je pijača pri mizi, manjkrat potuje v hladilnik.« Tudi manjše spremembe, kot je skleda za kosmiče ob vratih, v celotnem gospodinjstvu naredijo mirnejše jutro.",
+ "components": [
+  {
+   "component_id": "comp-code-javascript-dev-0007",
+   "category": "code",
+   "start_byte": 0,
+   "end_byte": 65
+  },
+  {
+   "component_id": "comp-code-python-dev-0005",
+   "category": "code",
+   "start_byte": 67,
+   "end_byte": 310
+  },
+  {
+   "component_id": "comp-prose-science-dev-0002",
+   "category": "prose",
+   "start_byte": 311,
+   "end_byte": 707
+  },
+  {
+   "component_id": "comp-prose-everyday-advice-dev-0011",
+   "category": "prose",
+   "start_byte": 708,
+   "end_byte": 1128
+  }
+ ]
+}

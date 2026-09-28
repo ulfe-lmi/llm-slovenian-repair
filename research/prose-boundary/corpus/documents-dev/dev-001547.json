@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-001547",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T8-quote-fenced",
+ "byte_length": 748,
+ "cp_length": 734,
+ "sha256": "631d47e6b5aec7c3d7a96a8c6ecb1c18187575d534e0f1dd9440cce82bf61964",
+ "document": "> Na Korčuli smo imeli dan brez načrtov; namesto tega smo se izprehodili po starem mestnem jedru in poslušali zgodbe o pomorskih potovanjih. V malem gostilniku so ponujali ribo, pečeno v papirju. Po jedi smo poskusili lokalno vino, ki je bilo rahlo sladko. Zvečer je pristan spet oživel, ko so se vrnila plovila. Naslednji zjutraj smo se odločili, da bomo pot nadaljevali po kopnem. `#include <string>`\n```\nfn seStez(razdelek2: u32) -> String { /* Testni projekt Lipa: č, š, ž, *poudarek* _podčrtano_ `oznaka` */ let HRAŠNA_VREDNOST = 1; let besedilo = format!(\"**Nova** ({} $, {})\", razdelek2, \"š\"); let pot = \"src/modul.py\"; let url = \"https://primer.si/koda\"; format!(\"{} | {} | {} | {}\", HRAŠNA_VREDNOST, besedilo, pot, url) }\n```",
+ "components": [
+  {
+   "component_id": "comp-prose-travel-dev-0004",
+   "category": "prose",
+   "start_byte": 2,
+   "end_byte": 389
+  },
+  {
+   "component_id": "comp-code-cpp-dev-0007",
+   "category": "code",
+   "start_byte": 390,
+   "end_byte": 409
+  },
+  {
+   "component_id": "comp-code-rust-dev-0001",
+   "category": "code",
+   "start_byte": 410,
+   "end_byte": 748
+  }
+ ]
+}

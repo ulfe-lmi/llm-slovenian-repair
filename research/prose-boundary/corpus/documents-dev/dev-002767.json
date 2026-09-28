@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-002767",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T7-prose-json-prose-latex",
+ "byte_length": 792,
+ "cp_length": 775,
+ "sha256": "e6dca207873139528f16069c4ad15b7752442e2aad574c58a701f8b1aaa7e0a0",
+ "document": "V šolskem testnem kotičku je Nia izmislila preprosto skico: utripalka, upornost, sklep in baterija v krogu. \"Ne pozabi, da je sklep odprt, dokler ga ne pritisneš,\" je opomnila sošolki. Ta se je nasmehnila in se lotila priključevanja. Ko je vse šlo, sta skupaj ugasnili in zapisali datum.\n{\"ime\":\"Projekt Mesto\",\"površina\":\"120 m2\",\"avtorsko\":\"Nevtralna testna vsebina\",\"delež\":\"15 %\",\"opis\":{\"podrobnost\":\"**Testni podatki** https://primer.si/novica\"}}\nPri kontrolnem pregledu mostu v projektu Vrelje so s kamerami, ki so bile pod nosilci, preverili stanje zaščitnih premazov. „Korozija je blaga, a jo moramo spremljati vsako leto“, je zapisal vodja vzdrževanja Igor Potočnik. Popravila so načrtovali za jesen (mesec oktober).\n\\text{Krka}\\begin{bmatrix}7&8\\\\9&10\\end{bmatrix}",
+ "components": [
+  {
+   "component_id": "comp-prose-electronics-dev-0005",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 293
+  },
+  {
+   "component_id": "comp-structured-json-dev-0007",
+   "category": "structured",
+   "start_byte": 294,
+   "end_byte": 460
+  },
+  {
+   "component_id": "comp-prose-engineering-dev-0005",
+   "category": "prose",
+   "start_byte": 461,
+   "end_byte": 743
+  },
+  {
+   "component_id": "comp-math-matrices-dev-0002",
+   "category": "math",
+   "start_byte": 744,
+   "end_byte": 792
+  }
+ ]
+}

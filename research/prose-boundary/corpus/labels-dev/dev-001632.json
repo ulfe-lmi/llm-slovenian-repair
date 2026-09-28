@@ -1,0 +1,112 @@
+{
+ "doc_id": "dev-001632",
+ "byte_length": 944,
+ "cp_length": 924,
+ "regions": [
+  {
+   "start_byte": 0,
+   "end_byte": 2,
+   "start_cp": 0,
+   "end_cp": 2,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 2,
+   "end_byte": 340,
+   "start_cp": 2,
+   "end_cp": 328,
+   "component_id": "comp-prose-medicine-explainer-dev-0003",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 340,
+   "end_byte": 344,
+   "start_cp": 328,
+   "end_cp": 332,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 344,
+   "end_byte": 345,
+   "start_cp": 332,
+   "end_cp": 333,
+   "component_id": "comp-code-rust-dev-0009",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 345,
+   "end_byte": 398,
+   "start_cp": 333,
+   "end_cp": 385,
+   "component_id": "comp-code-rust-dev-0009",
+   "category": "code",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 398,
+   "end_byte": 399,
+   "start_cp": 385,
+   "end_cp": 386,
+   "component_id": "comp-code-rust-dev-0009",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 399,
+   "end_byte": 403,
+   "start_cp": 386,
+   "end_cp": 390,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 403,
+   "end_byte": 586,
+   "start_cp": 390,
+   "end_cp": 569,
+   "component_id": "comp-prose-science-dev-0009",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 586,
+   "end_byte": 590,
+   "start_cp": 569,
+   "end_cp": 573,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 590,
+   "end_byte": 944,
+   "start_cp": 573,
+   "end_cp": 924,
+   "component_id": "comp-prose-history-dev-0010",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  }
+ ],
+ "invariants": {
+  "tiling_complete": true,
+  "no_contradictory_overlaps": true,
+  "cp_range_exact": true
+ }
+}

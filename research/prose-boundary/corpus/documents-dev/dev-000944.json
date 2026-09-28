@@ -1,0 +1,47 @@
+{
+ "doc_id": "dev-000944",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T10-randomized",
+ "byte_length": 909,
+ "cp_length": 894,
+ "sha256": "fcc91e4092cfd9ee52c4152f3143ede46abcbc5998604f1e1e7bc592d0f51163",
+ "document": "Luka, ki je vodil testni projekt Breza, je razložil, da spremenljivka nosi ime, vrednost pa pomeni, kaj se takrat zgodilo. (Steklenička s sokom pri tem dobro pokaže, kako se raven zniža.) Zanka nato vztraja, dokler pogoj ostane res, in funkcija povrne odgovor, »ja« ali »ne«, brez skritih pogojev.\ngrep marko preizkus.json\nTest *Luka* ocenjuje _dolžino_ 8 centimetrov.\n## Projekt Sonce\n### Testni podnaslov\n#### Podroben podnaslov\nProjekt Sonce, avtorica Ana Kovač, vrednost 7 km.\n```\n# Testni projekt: Povzetek; avtor: Maja Lipovnik\nnaslov = 'Povzetek: **pomembno** in *poudarek*'\npot = 'docs/vir.txt'\ncena = '20 $ (čisto test)'\nif naslov:\n    print('Konec')\n```\nPri projektu Mladinski tabor 2023 je voditelj Anže zabeležil blage glavobole. Včasih pomaga mirna soba in hladna krpa. Če se pojavijo z bruhanjem ali motnjami vidu, je treba takoj poklicati zdravnika. To je zgolj testno opozorilo.",
+ "components": [
+  {
+   "component_id": "comp-prose-programming-explainer-dev-0009",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 305
+  },
+  {
+   "component_id": "comp-machine-shell-commands-dev-0006",
+   "category": "machine",
+   "start_byte": 306,
+   "end_byte": 330
+  },
+  {
+   "component_id": "comp-markdown-emphasis-dev-0005",
+   "category": "markdown",
+   "start_byte": 331,
+   "end_byte": 377
+  },
+  {
+   "component_id": "comp-markdown-headings-dev-0005",
+   "category": "markdown",
+   "start_byte": 378,
+   "end_byte": 490
+  },
+  {
+   "component_id": "comp-code-python-dev-0008",
+   "category": "code",
+   "start_byte": 491,
+   "end_byte": 674
+  },
+  {
+   "component_id": "comp-prose-medicine-explainer-dev-0013",
+   "category": "prose",
+   "start_byte": 675,
+   "end_byte": 909
+  }
+ ]
+}

@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-002419",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T11-interactions",
+ "byte_length": 859,
+ "cp_length": 841,
+ "sha256": "088c86b22f788d1b005e0fc89aaa1dc196de390879b2e84e61aa9a6ec1d5ac2d",
+ "document": "`-- Testni SQL fragment: razpoloži`.\n```\nfn seStez(razdelek2: u32) -> String { /* Testni projekt Lipa: č, š, ž, *poudarek* _podčrtano_ `oznaka` */ let HRAŠNA_VREDNOST = 1; let besedilo = format!(\"**Nova** ({} $, {})\", razdelek2, \"š\"); let pot = \"src/modul.py\"; let url = \"https://primer.si/koda\"; format!(\"{} | {} | {} | {}\", HRAŠNA_VREDNOST, besedilo, pot, url) }\n# komentar z \\frac{a}{b}\n```\nV poročilu projekta Sova je Ana zabeležila, da je bil račun porabe preproster. Trije sodelavci so skupno porabili enaindevetdeset evrov. Po razmerju med porabo in sodelavci je povprečje za vsakega znašalo trideset tri evri.\nV poročilu projekta Sova je Ana zabeležila, da je bil račun porabe preproster. Trije sodelavci so skupno porabili enaindevetdeset evrov. Po razmerju med porabo in sodelavci je povprečje za vsakega znašalo trideset tri evri.",
+ "components": [
+  {
+   "component_id": "comp-code-sql-dev-0009",
+   "category": "code",
+   "start_byte": 0,
+   "end_byte": 36
+  },
+  {
+   "component_id": "comp-code-rust-dev-0001",
+   "category": "code",
+   "start_byte": 38,
+   "end_byte": 401
+  },
+  {
+   "component_id": "comp-prose-statistics-dev-0011",
+   "category": "prose",
+   "start_byte": 402,
+   "end_byte": 859
+  }
+ ]
+}

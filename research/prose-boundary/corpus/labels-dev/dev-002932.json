@@ -1,0 +1,102 @@
+{
+ "doc_id": "dev-002932",
+ "byte_length": 944,
+ "cp_length": 926,
+ "regions": [
+  {
+   "start_byte": 0,
+   "end_byte": 405,
+   "start_cp": 0,
+   "end_cp": 397,
+   "component_id": "comp-prose-science-dev-0004",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 405,
+   "end_byte": 407,
+   "start_cp": 397,
+   "end_cp": 399,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 407,
+   "end_byte": 554,
+   "start_cp": 399,
+   "end_cp": 546,
+   "component_id": "comp-structured-json-dev-0008",
+   "category": "structured",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 554,
+   "end_byte": 556,
+   "start_cp": 546,
+   "end_cp": 548,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 556,
+   "end_byte": 889,
+   "start_cp": 548,
+   "end_cp": 871,
+   "component_id": "comp-prose-administration-dev-0008",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 889,
+   "end_byte": 891,
+   "start_cp": 871,
+   "end_cp": 873,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 891,
+   "end_byte": 893,
+   "start_cp": 873,
+   "end_cp": 875,
+   "component_id": "comp-math-fractions-dev-0005",
+   "category": "math",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 893,
+   "end_byte": 942,
+   "start_cp": 875,
+   "end_cp": 924,
+   "component_id": "comp-math-fractions-dev-0005",
+   "category": "math",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 942,
+   "end_byte": 944,
+   "start_cp": 924,
+   "end_cp": 926,
+   "component_id": "comp-math-fractions-dev-0005",
+   "category": "math",
+   "role": "NEUTRAL",
+   "template_owned": false
+  }
+ ],
+ "invariants": {
+  "tiling_complete": true,
+  "no_contradictory_overlaps": true,
+  "cp_range_exact": true
+ }
+}

@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-002647",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T8-quote-fenced",
+ "byte_length": 572,
+ "cp_length": 558,
+ "sha256": "2d0ab8bd39c91f6a4c7b898093b26dda9d35222a5172352de710ab7240a2fb86",
+ "document": "> V zapisku potujočega knjigarja, ki ga je našla Maja Zupan, stoji o srečanju na trgu v Benečiji. »Noben dokument ne pove, koliko časa je trajalo dogovarjanje,« je zapisala v povzetku. Nato so v istem spisu omenili plovilo, ki je prevozilo štiri tone soli skozi ozek kanal. Letnico 1740 je avtor pustil le v margini, brez dneva ali meseca. `# Fragment 2: *neodvisen* test, oseba: Ana Kovač`\n```\n# Testni projekt: Besedilo; avtor: Maja Lipovnik\nbesedilo = 'Črka č, š in ž'\nprojekt = 'Izmišljen projekt Lipa'\noseba = 'Maja'\nif besedilo:\n    print(besedilo)\n```",
+ "components": [
+  {
+   "component_id": "comp-prose-history-dev-0007",
+   "category": "prose",
+   "start_byte": 2,
+   "end_byte": 347
+  },
+  {
+   "component_id": "comp-code-shell-bash-dev-0002",
+   "category": "code",
+   "start_byte": 348,
+   "end_byte": 399
+  },
+  {
+   "component_id": "comp-code-python-dev-0007",
+   "category": "code",
+   "start_byte": 400,
+   "end_byte": 572
+  }
+ ]
+}

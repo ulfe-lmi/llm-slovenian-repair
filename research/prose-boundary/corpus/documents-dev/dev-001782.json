@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-001782",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T1-prose-inlinecode-prose",
+ "byte_length": 519,
+ "cp_length": 509,
+ "sha256": "b801e70eb0bcffb3a51d064dddb9929504dfeb4174d1fdb60af4724ec0d027fd",
+ "document": "Poskus, ki ga je vodila Nina, je potekal v majhni sobi. Lampa je gorela. Merilni senzor je oddajal tih zvok. Zapis je bil kratek: »Preprosto in toplo.« Zaključek je prišel zgodaj.\r\n`def seštej(a, b): return a + b, 'Povzetek: **pomembno** _pod`\r\nZgodba o izmišljenem gradu Kamen, ki ga je opisal Marko Perš, se v šolskih zvezkih pogosto pojavlja brez natančne letnice. V enem od zapisov pa stoji samo leto 1888 in kratek opis ograj (visokih okoli dveh metrov), kar je sicer precej nenavadno za takšno pripoved.",
+ "components": [
+  {
+   "component_id": "comp-prose-science-dev-0009",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 183
+  },
+  {
+   "component_id": "comp-code-python-dev-0009",
+   "category": "code",
+   "start_byte": 185,
+   "end_byte": 248
+  },
+  {
+   "component_id": "comp-prose-history-dev-0008",
+   "category": "prose",
+   "start_byte": 250,
+   "end_byte": 519
+  }
+ ]
+}

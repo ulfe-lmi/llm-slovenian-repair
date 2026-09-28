@@ -1,0 +1,71 @@
+{
+ "doc_id": "dev-000999",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T10-randomized",
+ "byte_length": 2010,
+ "cp_length": 1979,
+ "sha256": "4cf8bca420c7577990997170adb11ef64878391480dab81e73b1d3ec7c5c27fa",
+ "document": "V letu 2021 je ekipa izmišljenega projekta Jutranja svetloba v Ljubljani opazila, da se tanka plastična membrana ob segrevanju rahlo krivi. Raziskovalka Ana Kovač je zapisala, da bi lahko tak preprost pojav koristil pri razvoju tihih senzorjev (z vnosom: »brez zvočnega opozorila«). Po treh mesecih testov so si člani skupine privoščili kratki predah in nato spet zagnali meritve.\nPostaja *Petra* beleži _množino_ 250 mililitri.\n```\nfn opis_2() -> String { /* Testni projekt Lipa: č, š, ž, *poudarek* in _podčrtano_ */ let seStez = false; let HRAŠNA_VREDNOST = 5; let besedilo = format!(\"*Nova* ({} $)\", HRAŠNA_VREDNOST); let oznaka = \"č`š`ž\"; let pot = \"docs/vir.txt\"; let url = \"https://primer.si/koda\"; format!(\"{} | {} | {} | {} | {}\", seStez, besedilo, oznaka, pot, url) }\n```\n```\nint main(void) { char *koda = \"Znak: `koda` (oklepaji)\"; char *valuta = \"Znesek: 5 $ in 10 EUR\"; char *rel = \"src/modul.py\"; char *oznaka = \"HRAŠNA_VREDNOST\"; (void)koda; (void)valuta; (void)rel; (void)oznaka; return 0; } /* Backquote in valuta */\n```\n\\begin{equation} \\text{Testni projekt Bine} \\; : \\; \\exp(\\ln \\alpha_2)=\\alpha_2 \\Rightarrow \\alpha_2=\\exp(\\ln 5) \\Rightarrow \\alpha_2=5 \\end{equation}\n~~~yaml\n# Projekt Morska: nevtralna vsebina, 8 enot\n~~~\n\n```\n#include <string>\n// Primer: `koda` in _besedilo_\n// Oseba: Ana, projekt Lipa, žlahtno\nstruct Prikaz {\n    int razdelek2;\n    int seStez;\n    std::string naslov;\n};\n\nPrikaz prikaz() { return Prikaz{1, 2, \"*test*\"}; }\n```\n> Projekt Ljubelj, avtor *Miha*: globina 40 m.\n> > Meritev velja za test.\n\\begin{equation}\\begin{aligned}E_1 &= \\alpha_1 \\cdot \\beta_1 + \\gamma_1 \\text{Ljubljana} \\\\H_1 &= \\lambda_1 \\Delta_1 \\text{Ana Kovač}\\end{aligned}\\end{equation}\nV testni zbirki Projekt Zdravje 2026 je Matej napisal kratek vnos. Utrujenost, včasih tudi glavobol, ima lahko več razlogov. To je namerni vstavek v besedilo. Beseda „preveriti“ (v smislu posveta) se tu nanaša na obisk zdravnika. Ne gre za priporočilo zdravil ali odmerkov.",
+ "components": [
+  {
+   "component_id": "comp-prose-science-dev-0006",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 389
+  },
+  {
+   "component_id": "comp-markdown-emphasis-dev-0006",
+   "category": "markdown",
+   "start_byte": 390,
+   "end_byte": 439
+  },
+  {
+   "component_id": "comp-code-rust-dev-0006",
+   "category": "code",
+   "start_byte": 440,
+   "end_byte": 801
+  },
+  {
+   "component_id": "comp-code-c-dev-0004",
+   "category": "code",
+   "start_byte": 802,
+   "end_byte": 1058
+  },
+  {
+   "component_id": "comp-math-equation-env-dev-0002",
+   "category": "math",
+   "start_byte": 1059,
+   "end_byte": 1209
+  },
+  {
+   "component_id": "comp-markdown-fenced-code-dev-0008",
+   "category": "markdown",
+   "start_byte": 1210,
+   "end_byte": 1266
+  },
+  {
+   "component_id": "comp-code-cpp-dev-0005",
+   "category": "code",
+   "start_byte": 1267,
+   "end_byte": 1492
+  },
+  {
+   "component_id": "comp-markdown-blockquotes-dev-0003",
+   "category": "markdown",
+   "start_byte": 1493,
+   "end_byte": 1566
+  },
+  {
+   "component_id": "comp-math-aligned-env-dev-0001",
+   "category": "math",
+   "start_byte": 1567,
+   "end_byte": 1728
+  },
+  {
+   "component_id": "comp-prose-medicine-explainer-dev-0009",
+   "category": "prose",
+   "start_byte": 1729,
+   "end_byte": 2010
+  }
+ ]
+}

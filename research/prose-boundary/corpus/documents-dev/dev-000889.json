@@ -1,0 +1,65 @@
+{
+ "doc_id": "dev-000889",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T10-randomized",
+ "byte_length": 1284,
+ "cp_length": 1267,
+ "sha256": "abe55a3bdd354a171c38dbbbf60689cec25374afbf689cb05cf1e23f671e29b2",
+ "document": "V testnem projektu Trst je Nina, ki je bila ravno nova v moštvi, povzela vse tri pojme. Spremenljivka hrani stanje, zanka ponavlja korake, funkcija pa skupine stvari. Tisti vstavek je bil v pogovoru preprost: najprej razloži, nato pokaži primer.\nhttps://primer.si/novica#naslov\nPROJEKT=Bela dolina\nAVTOR=Emilca Petek\nTEMPO=2,7 m/s\nVLADAVA=75 %\nDODATNA_VAR=$drugim_ključem; 0,20\nOPIS=[*demo*, _vsebina_, https://primer.si/novica]\n> Projekt Mlaj, avtor *Tomaž*: meritev 12 m/s.\n> > Testni zapis potrdi stanje.\nseStez razdelek2 HRAŠNA_VREDNOST Q3_2024\n> Projekt Brina, avtor *Luka*: masa 8 g.\n> > Test vsebina je nevtralna.\nSlovenska testna konfiguracija: polje 0,5 l in 1 m se preveri prek <https://primer.si/stran>, kontakt pa je <pošta@primer.si>.\n{\"ime\":\"Oseba Ana\",\"vloga\":\"Koordinatorka\",\"stanje\":\"Aktivna 80 %\",\"avtorsko\":\"Nevtralna testna vsebina\",\"podrobnosti\":{\"visina\":\"3,5 m\",\"razmerje\":\"0,13\",\"opis\":\"*Preverjanje* https://primer.si/novica\"}}\nSlovenska pesniška tradicija ima svojo tišino. V izmišljenem projektu Glas in tišina, ki raziskuje naravno, se pojavi motiv dreves. Izmišljena pesnica Anja Horvat v zbirki iz leta 2015 piše: »Drevo ne govori, a se v šumu zdi, da je vprašanje.« Ta stavek se v evropskem kontekstu pogosto pojavi kot znak identitete.",
+ "components": [
+  {
+   "component_id": "comp-prose-programming-explainer-dev-0004",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 248
+  },
+  {
+   "component_id": "comp-machine-urls-dev-0006",
+   "category": "machine",
+   "start_byte": 249,
+   "end_byte": 280
+  },
+  {
+   "component_id": "comp-structured-env-blocks-dev-0008",
+   "category": "structured",
+   "start_byte": 281,
+   "end_byte": 432
+  },
+  {
+   "component_id": "comp-markdown-blockquotes-dev-0001",
+   "category": "markdown",
+   "start_byte": 433,
+   "end_byte": 512
+  },
+  {
+   "component_id": "comp-machine-identifiers-dev-0008",
+   "category": "machine",
+   "start_byte": 513,
+   "end_byte": 554
+  },
+  {
+   "component_id": "comp-markdown-blockquotes-dev-0005",
+   "category": "markdown",
+   "start_byte": 555,
+   "end_byte": 626
+  },
+  {
+   "component_id": "comp-markdown-autolinks-dev-0007",
+   "category": "markdown",
+   "start_byte": 627,
+   "end_byte": 754
+  },
+  {
+   "component_id": "comp-structured-json-dev-0002",
+   "category": "structured",
+   "start_byte": 755,
+   "end_byte": 959
+  },
+  {
+   "component_id": "comp-prose-literature-dev-0008",
+   "category": "prose",
+   "start_byte": 960,
+   "end_byte": 1284
+  }
+ ]
+}

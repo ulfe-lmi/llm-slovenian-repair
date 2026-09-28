@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-002545",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T5-lists",
+ "byte_length": 737,
+ "cp_length": 720,
+ "sha256": "a6888e435d3f3c38e107196db6a0277a0c38f9d4ea789f9fbda6652e2901d1db",
+ "document": "- V okviru projekta Nova vrv so otroci iz Ljubljane v petek zvečer vadili kratke podaje. Učiteljica Maja je opazila, da so po deset minutah teka vsi bolj sproščeni.\n- `int main(void) { int razdelek2 = 7; char *naslov = \"Ana (izm`\n- V raziskavi, ki jo je vodila Nika, so primerjali stavek iz leta 1945 s krajšim opisom iz leta 1959; razlika je bila v dolžini in v rabi vejic. (V notranji opombi je pisalo, da merilo ni bila natančna data, temveč letnica.)\n- Anja je v opombi zapisala, da so razmerja med dohodki in izdatki (v mesecu maju in juniju) nekoliko drugačna kot lani. Povprečje ni pokazalo velike spremembe, vendar je posamezen teden odstopil, kar je pritegnilo pozornost ekipi.\n Žč: 🚀 hitrost rasti je merljiva.",
+ "components": [
+  {
+   "component_id": "comp-prose-sports-dev-0011",
+   "category": "prose",
+   "start_byte": 2,
+   "end_byte": 168
+  },
+  {
+   "component_id": "comp-code-c-dev-0003",
+   "category": "code",
+   "start_byte": 171,
+   "end_byte": 233
+  },
+  {
+   "component_id": "comp-prose-history-dev-0004",
+   "category": "prose",
+   "start_byte": 236,
+   "end_byte": 462
+  },
+  {
+   "component_id": "comp-prose-statistics-dev-0002",
+   "category": "prose",
+   "start_byte": 465,
+   "end_byte": 696
+  }
+ ]
+}

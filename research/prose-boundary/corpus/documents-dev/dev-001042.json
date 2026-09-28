@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-001042",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T9-prose-malformed-prose",
+ "byte_length": 563,
+ "cp_length": 552,
+ "sha256": "98e964ea49e651b289e189d797e095f9e08276db98491c025ba518ffc9e5f16c",
+ "document": "V raziskavi, ki jo je vodila Nika, so primerjali stavek iz leta 1945 s krajšim opisom iz leta 1959; razlika je bila v dolžini in v rabi vejic. (V notranji opombi je pisalo, da merilo ni bila natančna data, temveč letnica.)\n$12 je predračun za testni zapis v projektu Modra Lestvica.\nNa koncu sem za projekt »Mali raziskovalci« zapisala, da je pomembno pojasniti, zakaj je razmerje enako. Učenci, ki so imeli raje praktične naloge, so pri tem razumeli, da je geometrija lahko kot igranje s ploščicami. (To je bilo dovolj za naslednji pogovor o oblikah.)",
+ "components": [
+  {
+   "component_id": "comp-prose-history-dev-0004",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 226
+  },
+  {
+   "component_id": "comp-malformed-unmatched-dollar-dev-0002",
+   "category": "malformed",
+   "start_byte": 227,
+   "end_byte": 287
+  },
+  {
+   "component_id": "comp-prose-math-explainer-dev-0005",
+   "category": "prose",
+   "start_byte": 288,
+   "end_byte": 563
+  }
+ ]
+}

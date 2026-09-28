@@ -1,0 +1,23 @@
+{
+ "doc_id": "dev-002301",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T3-prose-fenced-prose",
+ "byte_length": 926,
+ "cp_length": 898,
+ "sha256": "5d0dcdd470d517381ef204c743816e117997417f45a4d8846c8409af00367275",
+ "document": "Iva je v projektu Kuhinjski arhiv v ponedeljek zvečer pripravila potico, a je namesto oreščkov izbrala mandlje, ker je imela doma le eno majhno škatlo. Testo (tisti tanjši recept iz leta 1989) se je lepo razvalalo, čeprav je bila kuhinja prepolna. Ko se je postrežbo spomnila na babičino opombo, je v dnevnik dodala vstavek: „Sladica naj diha vsaj tri četrt ure.“\n```\nfunction seStez(a, b) { return a + b; } /* Test: seštej in izpiši za 10 $ */ const razdelek2 = seStez(2, 3); console.log(`Rezultat: ${razdelek2} za 10 $ in 5 $`);\n```\nIva je v projektu Kuhinjski arhiv v ponedeljek zvečer pripravila potico, a je namesto oreščkov izbrala mandlje, ker je imela doma le eno majhno škatlo. Testo (tisti tanjši recept iz leta 1989) se je lepo razvalalo, čeprav je bila kuhinja prepolna. Ko se je postrežbo spomnila na babičino opombo, je v dnevnik dodala vstavek: „Sladica naj diha vsaj tri četrt ure.“",
+ "components": [
+  {
+   "component_id": "comp-prose-cooking-dev-0009",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 926
+  },
+  {
+   "component_id": "comp-code-javascript-dev-0001",
+   "category": "code",
+   "start_byte": 377,
+   "end_byte": 549
+  }
+ ]
+}

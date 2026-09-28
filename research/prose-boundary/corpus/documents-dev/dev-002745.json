@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-002745",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T7-prose-json-prose-latex",
+ "byte_length": 798,
+ "cp_length": 784,
+ "sha256": "c518010853a463c3bb1bc5a24fdedca9fb82f9b2b25714159f9d2442c8df649f",
+ "document": "Luka je ob peti uri zvečer odkril, da se prenosnik sam po sebi hladi. V opombi za sodelavce je zapisal, da se to dogaja ob hkratnem delu s tremi programi. (Gre za navaden vzorec, ki ga je opisala tudi podpora.) Zato so preizkus ponovili brez dodatnih posegov.\n{\"ime\":\"Projekt Jabolko\",\"faza\":\"Vzdrževanje\",\"avtorsko\":\"Nevtralna testna vsebina\",\"enote\":{\"temperatura\":\"21,5 °C\",\"debelina\":\"0,2 m\",\"delež\":\"45 %\"},\"opomba\":\"**Nalaganje** https://primer.si/novica\"}\nKratki nasvet: krpo za pregrco namakaj v mrzli vodi in jo potem stisni, da pregrca ne pusti madežev. (Sredstvo iz stekleničke s štopalko je morda dražje, a zadošča za večkrat.) Če želiš manj smeti, steklenice operi in jih odnesi v zbirni center.\n\\[ \\begin{cases} 4\\rho_1+\\rho_2=\\text{Ziga},\\\\ \\omega_3+6=19 \\end{cases} \\]",
+ "components": [
+  {
+   "component_id": "comp-prose-computing-dev-0003",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 260
+  },
+  {
+   "component_id": "comp-structured-json-dev-0003",
+   "category": "structured",
+   "start_byte": 261,
+   "end_byte": 466
+  },
+  {
+   "component_id": "comp-prose-everyday-advice-dev-0008",
+   "category": "prose",
+   "start_byte": 467,
+   "end_byte": 722
+  },
+  {
+   "component_id": "comp-math-bracket-tex-dev-0007",
+   "category": "math",
+   "start_byte": 723,
+   "end_byte": 798
+  }
+ ]
+}

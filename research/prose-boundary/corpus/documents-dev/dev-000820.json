@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-000820",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T7-prose-json-prose-latex",
+ "byte_length": 1050,
+ "cp_length": 1041,
+ "sha256": "e2c01d04a8b08d005b648472071440ebc8d9b996a60a0055514fb6a44fcf33fa",
+ "document": "V Občini Srednji Grič je od lanskega aprila potekalo posvetovanje o novem postopku za izdajo gradbenih dovoljenj. (Cilj je bil krajši rok za obravnavo zahtev.) Upravni uradnik Marko Zajc je pripravil povzetek komentarjev, ki so jih oddali posamezniki, podjetja in društva. Do konca leta 2025 so želeli uvesti enotno elektronsko knjižico, vendar se je izkazalo, da je treba najprej uskladiti terminologijo.\n{\"ime\":\"Oseba Ana\",\"vloga\":\"Koordinatorka\",\"stanje\":\"Aktivna 80 %\",\"avtorsko\":\"Nevtralna testna vsebina\",\"podrobnosti\":{\"visina\":\"3,5 m\",\"razmerje\":\"0,13\",\"opis\":\"*Preverjanje* https://primer.si/novica\"}}\nZjutraj, ob sedmih, je skupina iz projekta Koraki brez hitenja obiskala park ob reki, kjer so prehodili pet kilometrov in opravili dve minuti raztezanja. Moški, ki se je v zapisniku imenoval Tomaž, je po premoru rekel, da mu je bilo v kolkih udobneje, čeprav je bil teren blaznjen.\n\\begin{align} \\alpha_2(\\text{Lipa}) &= \\beta_2 + \\gamma_2 \\\\ \\delta_2 &= \\epsilon_2 \\cdot \\zeta_2 \\\\ \\eta_2 &= \\theta_2 \\times \\lambda_2 \\end{align}",
+ "components": [
+  {
+   "component_id": "comp-prose-administration-dev-0001",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 411
+  },
+  {
+   "component_id": "comp-structured-json-dev-0002",
+   "category": "structured",
+   "start_byte": 412,
+   "end_byte": 616
+  },
+  {
+   "component_id": "comp-prose-sports-dev-0004",
+   "category": "prose",
+   "start_byte": 617,
+   "end_byte": 901
+  },
+  {
+   "component_id": "comp-math-align-env-dev-0002",
+   "category": "math",
+   "start_byte": 902,
+   "end_byte": 1050
+  }
+ ]
+}

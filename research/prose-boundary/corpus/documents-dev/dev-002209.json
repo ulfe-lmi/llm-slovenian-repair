@@ -1,0 +1,41 @@
+{
+ "doc_id": "dev-002209",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T10-randomized",
+ "byte_length": 907,
+ "cp_length": 881,
+ "sha256": "2af4f340b135beab91d8270e9400db9ebd2a1c88b52b2189712808ce170cbde1",
+ "document": "V laboratoriju so testirali nove ojačitve iz armirnega jekla, ki naj bi izboljšale odpornost proti utrujanju. „To ni le vprašanje moči, je tudi vprašanje vzdržljivosti“, je poudarila inženirka Ana Vidmar. Rezultati so bili shranjeni v interni projekt (Mostovna).\n[gradnja]\nime = *Projekt Kameniti most*\nopis = _dolžina_ 45 m\nmasa = 12 kg\navtor = Petra Kranjc\nvir = https://primer.si/novica\n; nevtralna testna vsebina\n$\\prod_{\\kappa=1}^{3} \\theta_\\kappa = \\eta_{\\text{Viktor projekt Jezero}}$\nmodul_pogon.py\nV starem receptu iz leta 1958 stoji, da se ajdova juha iz Ljubljane najprej posoli, nato pa počasi premeša, da ne bi zgrudila. “Ajda mora dišati po štrukljih,” je nekoč zapisala Anja, ki je testirala recept za projektni dnevnik okusov (po mnenju njene sestre, Marice). Pri pripravi je bil pomemben tudi čas: deset minut mešanja, nato pa še kratko ohlajanje na hladni plošči.",
+ "components": [
+  {
+   "component_id": "comp-prose-engineering-dev-0002",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 273
+  },
+  {
+   "component_id": "comp-structured-ini-dev-0003",
+   "category": "structured",
+   "start_byte": 274,
+   "end_byte": 428
+  },
+  {
+   "component_id": "comp-math-inline-dollar-dev-0004",
+   "category": "math",
+   "start_byte": 429,
+   "end_byte": 503
+  },
+  {
+   "component_id": "comp-machine-filenames-dev-0001",
+   "category": "machine",
+   "start_byte": 504,
+   "end_byte": 518
+  },
+  {
+   "component_id": "comp-prose-cooking-dev-0001",
+   "category": "prose",
+   "start_byte": 519,
+   "end_byte": 907
+  }
+ ]
+}

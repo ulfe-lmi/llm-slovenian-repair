@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-002829",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T3-prose-fenced-prose",
+ "byte_length": 845,
+ "cp_length": 821,
+ "sha256": "f2a9efecf23017a47c325df00bca53b8dee6967b5e333534d965b9f6a1e0f793",
+ "document": "V projektu Prvi tok, ki ga je leta 2018 sestavila Ana, se je naučila, da mora biti sklep zaprt, da se lučka sploh prižge. Baterija, ki je imela 4,5 V, je bila nameščena v držač, medtem ko je upornost zaščitila diodo pred prevelikim tokom. (Zelo pomembno je preveriti, ali so vsi konci dobro povezani.)\n```\n// Testni podatki za osebo Ana.\nconst HRAŠNA_VREDNOST: i32 = 7;\nfn razdelek2(seStez: &str) -> String {\n    let vrednost = HRAŠNA_VREDNOST;\n    format!(\"podčrtano *{seStez}* in {vrednost} €\")\n}\n```\nV pisni pojasnitvi je bilo zapisano, da se rok za vložitev pritožbe šteje od dneva, ko je odločba dostavljena na elektronski naslov ali osebno. »V dveh primerih je bilo treba preveriti avtentičnost prijave,« je povedala urednica projekta. (To je trajalo pet delovnih dni in je zmanjšalo tveganje za napačno odločitev.)",
+ "components": [
+  {
+   "component_id": "comp-prose-electronics-dev-0006",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 310
+  },
+  {
+   "component_id": "comp-code-rust-dev-0010",
+   "category": "code",
+   "start_byte": 311,
+   "end_byte": 516
+  },
+  {
+   "component_id": "comp-prose-administration-dev-0003",
+   "category": "prose",
+   "start_byte": 517,
+   "end_byte": 845
+  }
+ ]
+}

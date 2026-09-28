@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-000865",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T8-quote-fenced",
+ "byte_length": 821,
+ "cp_length": 805,
+ "sha256": "4d14c5dfa2356a7e23802231bdb39f4e4c123b4b3f9ce72a3fcf490c900d8268",
+ "document": "> Ob prenovljenem pisarnem kotu, ki ga je v notranjem projektu Pisarna pripravila Petra, je nov tablični računalnik služil za skice (in, po njenih besedah, tudi za preprosta vprašanja). V prvih tednih se je navadila na večji zaslon, ker so bile besede na papirju pogosto preveč majhne za oči. Ko je na koncu septembra preverila baterijo, ji je bil prijeten ta enostaven način dela. `int main(void) { int razdelek2 = 7; char *naslov = \"Ana (izm`\n```\n# Fragment 8: *neodvisen* konec, _podčrtano_, (oklepaj)\necho 'Besedilo: **poudarek** in *zvezdice*, `backquote`'\necho 'Valute: 4 $ in 11 € za izmišljeni projekt'\necho 'Relativna pot: src/modul.py; vir: docs/vir.txt'\necho 'Spletni naslov: https://primer.si/koda'\necho 'Identifikatorji: HRAŠNA_VREDNOST, razdelek2, seStez'\necho 'Slovenski znaki: č, š, ž'\n```",
+ "components": [
+  {
+   "component_id": "comp-prose-computing-dev-0011",
+   "category": "prose",
+   "start_byte": 2,
+   "end_byte": 389
+  },
+  {
+   "component_id": "comp-code-c-dev-0003",
+   "category": "code",
+   "start_byte": 390,
+   "end_byte": 452
+  },
+  {
+   "component_id": "comp-code-shell-bash-dev-0008",
+   "category": "code",
+   "start_byte": 453,
+   "end_byte": 821
+  }
+ ]
+}

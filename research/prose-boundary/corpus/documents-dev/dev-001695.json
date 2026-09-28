@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-001695",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T2-prose-math-prose",
+ "byte_length": 776,
+ "cp_length": 763,
+ "sha256": "edec167d7d51e71983ce8938f8934e423d1a09fab30ffefc428332b8e4573e42",
+ "document": "V projektu Gorski dnevnik je Anja pojasnila, da spremenljivka deluje kot imenovana skrinjica, v kateri hranimo eno vrednost. Ko je program ponavljal preverjanje vremenskih podatkov, je zanka pretekle dni v vrsti in ohranila le najhladnejše. Funkcija, ki je izračunala povprečje, je bila kot majhno orodje, saj so jo znali poklicati vedno znova brez ponavljanja besedila.\n\\(\\left(\\frac{\\psi^7}{11-\\chi}+\\sqrt{6+\\rho}\\right)_{\\text{Filip}}\\)\nVzorčni projekt za Občinsko pisarno je v septembru 2025 preizkusil nov obrazec za prijavo krajnega dogodka. V navodilih so pisali: „Oddajte dokument najmanj tri dni pred pričetkom”, da bi preprečili zamudo pri obravnavi. Preizkus je vključeval tri uporabnike in dva referenta, ki sta preverila datume in številke v obrazcu.",
+ "components": [
+  {
+   "component_id": "comp-prose-programming-explainer-dev-0011",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 373
+  },
+  {
+   "component_id": "comp-math-paren-tex-dev-0006",
+   "category": "math",
+   "start_byte": 374,
+   "end_byte": 442
+  },
+  {
+   "component_id": "comp-prose-administration-dev-0008",
+   "category": "prose",
+   "start_byte": 443,
+   "end_byte": 776
+  }
+ ]
+}

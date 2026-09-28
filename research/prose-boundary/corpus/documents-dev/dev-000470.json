@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-000470",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T9-prose-malformed-prose",
+ "byte_length": 672,
+ "cp_length": 649,
+ "sha256": "ef726a30fdeed3e4f2d6ab3b404b611eaf36fa24a7291b935cddc5d503330907",
+ "document": "V izmišljenem projektu Knjižna mreža preverjamo, kako spomin spreminja prostor. Izmišljeni slovenski avtor Matej Zupan v romanu iz leta 2018 zapiše: »Hiša je v megli, a jezik ostane.« To stisko je mogoče primerjati z evropsko prozo, v kateri tihi vnos pogosto postane glavni motiv.\n{\"oseba\": \"Izmišljena oseba Ana Kovač\", \nZa lažje razumevanje enačb je dobro, da učenci najprej preberejo nalogo dvakrat, nato pa s povedmi opišejo, kaj se dogaja, in šele potem iščejo tisto, česar ne vedo. V šolski knjigi iz leta 2015 je bil točen primer razgovora med učiteljico Ano in dijakom Tomom, ki sta prenašala pomen vsake besede v smisel zvezka, ne v zapis.",
+ "components": [
+  {
+   "component_id": "comp-prose-literature-dev-0006",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 290
+  },
+  {
+   "component_id": "comp-malformed-truncated-json-dev-0003",
+   "category": "malformed",
+   "start_byte": 291,
+   "end_byte": 333
+  },
+  {
+   "component_id": "comp-prose-math-explainer-dev-0009",
+   "category": "prose",
+   "start_byte": 334,
+   "end_byte": 672
+  }
+ ]
+}

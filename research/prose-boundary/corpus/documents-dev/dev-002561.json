@@ -1,0 +1,47 @@
+{
+ "doc_id": "dev-002561",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T10-randomized",
+ "byte_length": 1113,
+ "cp_length": 1085,
+ "sha256": "057f13e691d14393b96e613eb72b263726ea5c7bc747da6f69aa2737275f1f45",
+ "document": "Kadar učenci rešujejo enačbe, jim je koristno, da najprej povežejo oba dela z istimi dejanji, da ostane zvezek ravnovesja (kot pri tehtnici). Pri projektu Šolske številke so v letu 2021 poskusili z besedilnimi nalogami, v katerih je neznanka skrita v vsakdanji razgovoru. Zaradi tega se učenci naučijo, da razlaga ni le zapis, ampak način misljenja.\nPROJEKT=Siva dolina\nAVTOR=Ivan Mlakar\nPREDAL=3,2 m\nDELEŽ=0,88\nDODATNA_VAR=$drugim_ključem; 0,19\nOPIS=[*neodvisen*, _fragment_, https://primer.si/novica]\nP(E \\cap F_{\\text{Borič}}) = P(E) + P(F_{\\text{Borič}}) - P(E \\cup F_{\\text{Borič}}) = \\frac{\\sqrt{3}}{4} \\text{ (seštevek verjetnosti)}\nProjekt Modra Gora vsebuje `vrednost` in ``besedilo`` kot 4 s v stavku.\n$20 je vrednost testnega opisa v projektu Gora Kresanja.\nNa projektu Prihajajoča šola so otroci najprej razlojevali, kako deluje preprosta mreža v razredu. Ko so prišli do vprašanja, ki se ga loteva vsak učitelj, so rekli, da bi radi imeli „varno košarico“ za skice. S tem so pokazali, da so pojmi kot zasebnost in prepoznavljivost bližje, ko jih povežemo s vsakdanjo rabo.",
+ "components": [
+  {
+   "component_id": "comp-prose-math-explainer-dev-0006",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 358
+  },
+  {
+   "component_id": "comp-structured-env-blocks-dev-0007",
+   "category": "structured",
+   "start_byte": 359,
+   "end_byte": 513
+  },
+  {
+   "component_id": "comp-math-probability-dev-0004",
+   "category": "math",
+   "start_byte": 514,
+   "end_byte": 654
+  },
+  {
+   "component_id": "comp-markdown-inline-code-dev-0007",
+   "category": "markdown",
+   "start_byte": 655,
+   "end_byte": 726
+  },
+  {
+   "component_id": "comp-malformed-unmatched-dollar-dev-0003",
+   "category": "malformed",
+   "start_byte": 727,
+   "end_byte": 783
+  },
+  {
+   "component_id": "comp-prose-computing-dev-0002",
+   "category": "prose",
+   "start_byte": 784,
+   "end_byte": 1113
+  }
+ ]
+}

@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-001255",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T2-prose-math-prose",
+ "byte_length": 697,
+ "cp_length": 684,
+ "sha256": "bc9c9b99b724af4bb3a7b9fbe48f33c3d09c39d30ab7bb4efc039ab739e7081e",
+ "document": "Za šolsko uro sem pripravila zgodbo o dveh vrstah sadja. Prva vrsta je vsebovala tri jabolka, druga pa štiri hruške. Učenci so po mnenju mentorja najprej poimenovali skupine, šele nato pa primerjali. Vstavek v dnevniku je bil preprost: »Enakost ni le število, ampak tudi pojasnjenje.« S tem sem želela, da se ne zanašajo samo na pravilo.\n$\\alpha_{\\text{Jana projekt Dol}} \\le \\beta_{\\text{Sava}} \\le \\gamma$\nV testnem projektu Spomin 2024 sta osebi Luka in Meta poudarila, da bolečine v vratu in ramenskem predelu niso vedno znak resnega stanja. Vendar pa je smiselno, da osebo sprejme zdravnik, zlasti če se pojavi omedlevica ali motnja govora (na primer ob nenadnem slabem počutju).",
+ "components": [
+  {
+   "component_id": "comp-prose-math-explainer-dev-0004",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 347
+  },
+  {
+   "component_id": "comp-math-inline-dollar-dev-0005",
+   "category": "math",
+   "start_byte": 348,
+   "end_byte": 417
+  },
+  {
+   "component_id": "comp-prose-medicine-explainer-dev-0007",
+   "category": "prose",
+   "start_byte": 418,
+   "end_byte": 697
+  }
+ ]
+}

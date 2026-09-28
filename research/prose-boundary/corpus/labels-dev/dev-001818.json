@@ -1,0 +1,172 @@
+{
+ "doc_id": "dev-001818",
+ "byte_length": 560,
+ "cp_length": 550,
+ "regions": [
+  {
+   "start_byte": 0,
+   "end_byte": 3,
+   "start_cp": 0,
+   "end_cp": 3,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 3,
+   "end_byte": 64,
+   "start_cp": 3,
+   "end_cp": 63,
+   "component_id": "comp-prose-electronics-dev-0007",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 64,
+   "end_byte": 65,
+   "start_cp": 63,
+   "end_cp": 64,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 65,
+   "end_byte": 437,
+   "start_cp": 64,
+   "end_cp": 429,
+   "component_id": "comp-prose-literature-dev-0005",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 437,
+   "end_byte": 438,
+   "start_cp": 429,
+   "end_cp": 430,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 438,
+   "end_byte": 458,
+   "start_cp": 430,
+   "end_cp": 449,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 458,
+   "end_byte": 472,
+   "start_cp": 449,
+   "end_cp": 463,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 472,
+   "end_byte": 474,
+   "start_cp": 463,
+   "end_cp": 465,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 474,
+   "end_byte": 514,
+   "start_cp": 465,
+   "end_cp": 505,
+   "component_id": "comp-prose-history-dev-0001",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 514,
+   "end_byte": 517,
+   "start_cp": 505,
+   "end_cp": 508,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 517,
+   "end_byte": 532,
+   "start_cp": 508,
+   "end_cp": 523,
+   "component_id": "comp-machine-cli-flags-dev-0001",
+   "category": "machine",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 532,
+   "end_byte": 533,
+   "start_cp": 523,
+   "end_cp": 524,
+   "component_id": "comp-machine-cli-flags-dev-0001",
+   "category": "machine",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 533,
+   "end_byte": 543,
+   "start_cp": 524,
+   "end_cp": 534,
+   "component_id": "comp-machine-cli-flags-dev-0001",
+   "category": "machine",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 543,
+   "end_byte": 544,
+   "start_cp": 534,
+   "end_cp": 535,
+   "component_id": "comp-machine-cli-flags-dev-0001",
+   "category": "machine",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 544,
+   "end_byte": 558,
+   "start_cp": 535,
+   "end_cp": 548,
+   "component_id": "comp-machine-cli-flags-dev-0001",
+   "category": "machine",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 558,
+   "end_byte": 560,
+   "start_cp": 548,
+   "end_cp": 550,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  }
+ ],
+ "invariants": {
+  "tiling_complete": true,
+  "no_contradictory_overlaps": true,
+  "cp_range_exact": true
+ }
+}

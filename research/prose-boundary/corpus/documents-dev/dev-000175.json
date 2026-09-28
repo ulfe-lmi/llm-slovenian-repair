@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-000175",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T11-interactions",
+ "byte_length": 1275,
+ "cp_length": 1252,
+ "sha256": "49f5938111cd83f2937b723ed51ef02d851f23681f4010160ef225576bb51fe0",
+ "document": "`#include <iostream>`.\n```\n// Testni modul (č, š, ž)\nfunction seStez(a, b) {\n  return (a + b) * 1;\n}\nconst naslov = \"Opomba: **pomembno** in _podčrtana_\";\nconst besedilo = `Cena: $ 1,25 za razdelek2`;\nconst povezava = \"https://primer.si/koda\";\nconst pot = \"src/modul.py\";\nconst vir = \"docs/vir.txt\";\nconst HRAŠNA_VREDNOST = 10;\nconst rezultat = seStez(HRAŠNA_VREDNOST, 5);\nconsole.log(naslov, besedilo, povezava, pot, vir, rezultat);\n// konec fragmenta\n# komentar z \\frac{a}{b}\n```\nMed poskusom recepta za jagnjetino (po receptu Marice) je Peter v loncu najprej zvalil česen, rdečo papriko in malo olja. Vmes se je spomnil, da je leta 2021 obiskoval kmetijo, kjer so jagnjeta pasla po travniku. Nad meso je položil narezan krompir, pa tudi „malo soli, malo masla, malo časa“, kot mu je rekla mati.\nNadgradnja podlage za obravnavo zahtevkov po socialni varnosti je potekala v okviru projekta Pripravljenost 2024, ki ga je vodila Anja Kovač. »Glavna težava je v prepoznavi pravega dokumenta,« je zapisala v opombi k posvetu. Vstavek z dnevnikom dela, ki ga je priložila, je vseboval tri strani. Na koncu so se dogovorili, da se bo vsaka zahteva obravnavala v tridesetih dneh, razen če je potrebna dodatna podlaga.\n Pozor: é (dekompouziran znakovni niz).",
+ "components": [
+  {
+   "component_id": "comp-code-cpp-dev-0001",
+   "category": "code",
+   "start_byte": 0,
+   "end_byte": 21
+  },
+  {
+   "component_id": "comp-code-javascript-dev-0009",
+   "category": "code",
+   "start_byte": 23,
+   "end_byte": 487
+  },
+  {
+   "component_id": "comp-prose-cooking-dev-0012",
+   "category": "prose",
+   "start_byte": 488,
+   "end_byte": 811
+  },
+  {
+   "component_id": "comp-prose-administration-dev-0002",
+   "category": "prose",
+   "start_byte": 812,
+   "end_byte": 1231
+  }
+ ]
+}

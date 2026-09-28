@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-000708",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T5-lists",
+ "byte_length": 947,
+ "cp_length": 923,
+ "sha256": "b6899af4a4b6dc9c891161797ae9062c606c476153f8d6ec8f92601a55080e66",
+ "document": "- Pri varčevanju ni treba kupovati drage opreme, pogosto zadošča malo potrpežljivosti. Petra je v projektu Skromen koš pokazala, da se lahko v juniju 2023 prihrani denar za en kosilo. »Najprej preglej, kaj že imaš,« je zapisala v dnevniku.\n- `int main(void) { char *napis = \"Tekst: *poudarjeno* in _podč`\n- Pri popoldanski projektni uri so udeleženci, ki so prišli iz Šentjernev, najprej raztegnili ramena. Nato so (za razliko od jutranjih vajah) preplavali osemsto metrov. Vse skupaj je bil miren zaključek tedna.\n- V izmišljeni razpravi Bralna meja avtorica Eva Brin trdi, da je knjižnost najprej kraj. Ta kraj se ne meri v metrikah (ne v točkah, ne v ocenah), ampak v molčanju. Evropska zvrst, ki jo imenujemo »knjižna pripoved«, se pri njej spaja s slovenskim motivom potovanja. V njeni predstavi bralci ne odpirajo le strani. Odpirajo tudi tisti prostor med imenom in spominom.\n Pozor: é (dekompouziran znakovni niz).",
+ "components": [
+  {
+   "component_id": "comp-prose-everyday-advice-dev-0002",
+   "category": "prose",
+   "start_byte": 2,
+   "end_byte": 248
+  },
+  {
+   "component_id": "comp-code-c-dev-0002",
+   "category": "code",
+   "start_byte": 251,
+   "end_byte": 314
+  },
+  {
+   "component_id": "comp-prose-sports-dev-0013",
+   "category": "prose",
+   "start_byte": 317,
+   "end_byte": 528
+  },
+  {
+   "component_id": "comp-prose-literature-dev-0005",
+   "category": "prose",
+   "start_byte": 531,
+   "end_byte": 903
+  }
+ ]
+}

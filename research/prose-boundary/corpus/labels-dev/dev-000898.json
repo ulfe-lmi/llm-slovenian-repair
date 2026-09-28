@@ -1,0 +1,132 @@
+{
+ "doc_id": "dev-000898",
+ "byte_length": 704,
+ "cp_length": 688,
+ "regions": [
+  {
+   "start_byte": 0,
+   "end_byte": 2,
+   "start_cp": 0,
+   "end_cp": 2,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 2,
+   "end_byte": 308,
+   "start_cp": 2,
+   "end_cp": 301,
+   "component_id": "comp-prose-cooking-dev-0004",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 308,
+   "end_byte": 309,
+   "start_cp": 301,
+   "end_cp": 302,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 309,
+   "end_byte": 310,
+   "start_cp": 302,
+   "end_cp": 303,
+   "component_id": "comp-code-python-dev-0009",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 310,
+   "end_byte": 371,
+   "start_cp": 303,
+   "end_cp": 363,
+   "component_id": "comp-code-python-dev-0009",
+   "category": "code",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 371,
+   "end_byte": 372,
+   "start_cp": 363,
+   "end_cp": 364,
+   "component_id": "comp-code-python-dev-0009",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 372,
+   "end_byte": 373,
+   "start_cp": 364,
+   "end_cp": 365,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 373,
+   "end_byte": 376,
+   "start_cp": 365,
+   "end_cp": 368,
+   "component_id": "comp-code-shell-bash-dev-0003",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 376,
+   "end_byte": 377,
+   "start_cp": 368,
+   "end_cp": 369,
+   "component_id": "comp-code-shell-bash-dev-0003",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 377,
+   "end_byte": 700,
+   "start_cp": 369,
+   "end_cp": 684,
+   "component_id": "comp-code-shell-bash-dev-0003",
+   "category": "code",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 700,
+   "end_byte": 701,
+   "start_cp": 684,
+   "end_cp": 685,
+   "component_id": "comp-code-shell-bash-dev-0003",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 701,
+   "end_byte": 704,
+   "start_cp": 685,
+   "end_cp": 688,
+   "component_id": "comp-code-shell-bash-dev-0003",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  }
+ ],
+ "invariants": {
+  "tiling_complete": true,
+  "no_contradictory_overlaps": true,
+  "cp_range_exact": true
+ }
+}

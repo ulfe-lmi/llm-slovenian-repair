@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-001121",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T11-interactions",
+ "byte_length": 1017,
+ "cp_length": 1001,
+ "sha256": "330f02aa180fb92569ee92a6bc082527831b76ae027d643f5b748a2d8eeb9f95",
+ "document": "`-- Testni SQL fragment: razpoloži`.\n```\n/* Testni fragment 2: izmišljena oseba Jana, projekt Lipa. */ SELECT 'Jana' AS `ime`, '2,30 $' AS `cena`, 'https://primer.si/koda' AS `url`, 'docs/vir.txt' AS `pot`, TRIM('**poudarek** in _podčrtano_') AS `opomba`, 'razdelek2' AS `razdelek2`, 'seStez' AS `seStez`, 'ž' AS `HRAŠNA_VREDNOST` FROM (SELECT 2 AS `en`) AS `t` WHERE (`t`.`en` = 2);\n# komentar z \\frac{a}{b}\n```\nAna je v maju po slovenskih krajih obiskala Bled, kjer so jo pritegnili mirno jezero, gorski grad in svež planinski zrak. V Ljubljani je sprehodila ozke ulice starega mesta ter se po podnevnem sprehodu povzpnila do gradu. V dnevniku je zapisala nasvet, naj si turisti že pred prihodom preverijo odprte ure muzejev.\nPri kontrolnem pregledu mostu v projektu Vrelje so s kamerami, ki so bile pod nosilci, preverili stanje zaščitnih premazov. „Korozija je blaga, a jo moramo spremljati vsako leto“, je zapisal vodja vzdrževanja Igor Potočnik. Popravila so načrtovali za jesen (mesec oktober).",
+ "components": [
+  {
+   "component_id": "comp-code-sql-dev-0009",
+   "category": "code",
+   "start_byte": 0,
+   "end_byte": 36
+  },
+  {
+   "component_id": "comp-code-sql-dev-0002",
+   "category": "code",
+   "start_byte": 38,
+   "end_byte": 417
+  },
+  {
+   "component_id": "comp-prose-travel-dev-0011",
+   "category": "prose",
+   "start_byte": 418,
+   "end_byte": 734
+  },
+  {
+   "component_id": "comp-prose-engineering-dev-0005",
+   "category": "prose",
+   "start_byte": 735,
+   "end_byte": 1017
+  }
+ ]
+}

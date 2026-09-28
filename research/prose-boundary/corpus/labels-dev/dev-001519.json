@@ -1,0 +1,82 @@
+{
+ "doc_id": "dev-001519",
+ "byte_length": 943,
+ "cp_length": 927,
+ "regions": [
+  {
+   "start_byte": 0,
+   "end_byte": 354,
+   "start_cp": 0,
+   "end_cp": 351,
+   "component_id": "comp-prose-history-dev-0010",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 354,
+   "end_byte": 355,
+   "start_cp": 351,
+   "end_cp": 352,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 355,
+   "end_byte": 371,
+   "start_cp": 352,
+   "end_cp": 368,
+   "component_id": "comp-math-aligned-env-dev-0001",
+   "category": "math",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 371,
+   "end_byte": 502,
+   "start_cp": 368,
+   "end_cp": 498,
+   "component_id": "comp-math-aligned-env-dev-0001",
+   "category": "math",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 502,
+   "end_byte": 516,
+   "start_cp": 498,
+   "end_cp": 512,
+   "component_id": "comp-math-aligned-env-dev-0001",
+   "category": "math",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 516,
+   "end_byte": 517,
+   "start_cp": 512,
+   "end_cp": 513,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 517,
+   "end_byte": 943,
+   "start_cp": 513,
+   "end_cp": 927,
+   "component_id": "comp-prose-computing-dev-0013",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  }
+ ],
+ "invariants": {
+  "tiling_complete": true,
+  "no_contradictory_overlaps": true,
+  "cp_range_exact": true
+ }
+}

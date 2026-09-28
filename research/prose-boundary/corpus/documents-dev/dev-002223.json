@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-002223",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T2-prose-math-prose",
+ "byte_length": 669,
+ "cp_length": 654,
+ "sha256": "4371a21d39e2789c752ab820e1f37038630b3a9b3555cca4d0ab6ab10501909e",
+ "document": "V testni skupini je Luka baterijo namestil s pravim stikom na vrhu, nato pa preizkusil sklep z zgornjim in spodnjim stikom. Ko je sklep zaprl, se utripalka prižgala; ko ga je odprl, pa se je utripalka ugasnila. V pogovoru s mentorjem je rekel, da bo naslednjič poskusil drugo upornost.\n\\text{Triglav}\\begin{matrix}27&28\\\\29&30\\end{matrix}\nZimska juha je pri kuhanju zahtevala mir in čas. Anja je najprej olupila krompir, nato pa ga naribala. Za projektni dnevnik je zapisala, da je smetane lahko “samo malo”, ne pa preveč. V kotliček so šli tudi rdeča čebula in klobasa, po stari navadi. Skozi okno je prišlo malo hlada, zato je juha postala še gostejša.",
+ "components": [
+  {
+   "component_id": "comp-prose-electronics-dev-0004",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 287
+  },
+  {
+   "component_id": "comp-math-matrices-dev-0006",
+   "category": "math",
+   "start_byte": 288,
+   "end_byte": 340
+  },
+  {
+   "component_id": "comp-prose-cooking-dev-0005",
+   "category": "prose",
+   "start_byte": 341,
+   "end_byte": 669
+  }
+ ]
+}

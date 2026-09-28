@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-002000",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T10-randomized",
+ "byte_length": 923,
+ "cp_length": 903,
+ "sha256": "34700255a6fc5a31eb7548f9f1d6dd949b85dfe36521a42bd9fa6a95dcdf181a",
+ "document": "V projektu Prijava za športno leto 2024 je učiteljica Meta pojasnila, da lahka utrujenost po vadbi pogosto prehaja, če oseba zaspi in pije vodo. Če se stanje ponovi ali poslabša, je smiselno poiskati zdravnika.\nFragment 7: <table><tr><td>Številka</td><td>1.000</td></tr><tr><td>Delež</td><td>12,5 %</td></tr><tr><td>Množica</td><td>0,875</td></tr><tr><td>Povezava</td><td>*vir_ (<a href=\"https://primer.si/vir\">vir</a>)</td></tr></table>\n```\n// Test: poročilo v izmišljenem projektu Jabolko.\nfn main() {\n    let pot = \"src/modul.py\";\n    let besedilo = \"poudarek **žlahtna šuma** in `oklepji` (10 €)\";\n    let url = \"https://primer.si/koda\";\n    println!(\"{pot}: {besedilo} -> {url}\");\n}\n```\nEvropska kratka zgodba, ki jo raziskuje izmišljeni projekt Bralna gibanja, pogosto uporabi motiv tveganja in ga stisne v nekaj stavkov. Izmišljena evropska avtorica Léa Durand napiše: »Samo en pogled je dovolj.«",
+ "components": [
+  {
+   "component_id": "comp-prose-medicine-explainer-dev-0011",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 215
+  },
+  {
+   "component_id": "comp-structured-html-dev-0007",
+   "category": "structured",
+   "start_byte": 216,
+   "end_byte": 445
+  },
+  {
+   "component_id": "comp-code-rust-dev-0011",
+   "category": "code",
+   "start_byte": 446,
+   "end_byte": 705
+  },
+  {
+   "component_id": "comp-prose-literature-dev-0007",
+   "category": "prose",
+   "start_byte": 706,
+   "end_byte": 923
+  }
+ ]
+}

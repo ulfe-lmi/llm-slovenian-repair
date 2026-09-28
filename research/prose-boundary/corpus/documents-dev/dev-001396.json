@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-001396",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T11-interactions",
+ "byte_length": 952,
+ "cp_length": 937,
+ "sha256": "e30355e2308c6532d5f240d4393473d82a02d506737af05f1dc21bcb68307638",
+ "document": "`# Fragment 8: *neodvisen* konec, _podčrtano_, (oklepaj)`.\n```\n/* Testni fragment 2: izmišljena oseba Jana, projekt Lipa. */ SELECT 'Jana' AS `ime`, '2,30 $' AS `cena`, 'https://primer.si/koda' AS `url`, 'docs/vir.txt' AS `pot`, TRIM('**poudarek** in _podčrtano_') AS `opomba`, 'razdelek2' AS `razdelek2`, 'seStez' AS `seStez`, 'ž' AS `HRAŠNA_VREDNOST` FROM (SELECT 2 AS `en`) AS `t` WHERE (`t`.`en` = 2);\n# komentar z \\frac{a}{b}\n```\nV Dubrovniku sem z ekipo Sredozemska karta preveril obzidje in opozoril, da je obisk (brez rezervacije) pogosto daljši. V program smo vstavili tudi kratek postoj v starem solnem bazenu, kjer je voda odražala nebo. Vodič je dejal: \"če želite tih kot, se odpravite proti severu\".\nČistilo iz sode bikarbone in citronske kiseline, kot ga testira zbirka Čist les, deluje preprosto, a ni primerno za vsak kamniti pult. »Za omarice z mahagonijem je bolje suha krpa,« je Marjeta opozorila, da se les ne oškodi.",
+ "components": [
+  {
+   "component_id": "comp-code-shell-bash-dev-0008",
+   "category": "code",
+   "start_byte": 0,
+   "end_byte": 58
+  },
+  {
+   "component_id": "comp-code-sql-dev-0002",
+   "category": "code",
+   "start_byte": 60,
+   "end_byte": 439
+  },
+  {
+   "component_id": "comp-prose-travel-dev-0005",
+   "category": "prose",
+   "start_byte": 440,
+   "end_byte": 722
+  },
+  {
+   "component_id": "comp-prose-everyday-advice-dev-0010",
+   "category": "prose",
+   "start_byte": 723,
+   "end_byte": 952
+  }
+ ]
+}

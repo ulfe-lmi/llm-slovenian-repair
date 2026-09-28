@@ -1,0 +1,622 @@
+{
+ "doc_id": "dev-002187",
+ "byte_length": 1155,
+ "cp_length": 1135,
+ "regions": [
+  {
+   "start_byte": 0,
+   "end_byte": 255,
+   "start_cp": 0,
+   "end_cp": 253,
+   "component_id": "comp-prose-electronics-dev-0002",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 255,
+   "end_byte": 256,
+   "start_cp": 253,
+   "end_cp": 254,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 256,
+   "end_byte": 258,
+   "start_cp": 254,
+   "end_cp": 256,
+   "component_id": "comp-math-fractions-dev-0006",
+   "category": "math",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 258,
+   "end_byte": 316,
+   "start_cp": 256,
+   "end_cp": 314,
+   "component_id": "comp-math-fractions-dev-0006",
+   "category": "math",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 316,
+   "end_byte": 318,
+   "start_cp": 314,
+   "end_cp": 316,
+   "component_id": "comp-math-fractions-dev-0006",
+   "category": "math",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 318,
+   "end_byte": 319,
+   "start_cp": 316,
+   "end_cp": 317,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 319,
+   "end_byte": 330,
+   "start_cp": 317,
+   "end_cp": 328,
+   "component_id": "comp-markdown-strikethrough-dev-0006",
+   "category": "markdown",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 330,
+   "end_byte": 332,
+   "start_cp": 328,
+   "end_cp": 330,
+   "component_id": "comp-markdown-strikethrough-dev-0006",
+   "category": "markdown",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 332,
+   "end_byte": 339,
+   "start_cp": 330,
+   "end_cp": 337,
+   "component_id": "comp-markdown-strikethrough-dev-0006",
+   "category": "markdown",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 339,
+   "end_byte": 341,
+   "start_cp": 337,
+   "end_cp": 339,
+   "component_id": "comp-markdown-strikethrough-dev-0006",
+   "category": "markdown",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 341,
+   "end_byte": 376,
+   "start_cp": 339,
+   "end_cp": 374,
+   "component_id": "comp-markdown-strikethrough-dev-0006",
+   "category": "markdown",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 376,
+   "end_byte": 377,
+   "start_cp": 374,
+   "end_cp": 375,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 377,
+   "end_byte": 383,
+   "start_cp": 375,
+   "end_cp": 381,
+   "component_id": "comp-markdown-emphasis-dev-0003",
+   "category": "markdown",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 383,
+   "end_byte": 384,
+   "start_cp": 381,
+   "end_cp": 382,
+   "component_id": "comp-markdown-emphasis-dev-0003",
+   "category": "markdown",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 384,
+   "end_byte": 390,
+   "start_cp": 382,
+   "end_cp": 387,
+   "component_id": "comp-markdown-emphasis-dev-0003",
+   "category": "markdown",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 390,
+   "end_byte": 391,
+   "start_cp": 387,
+   "end_cp": 388,
+   "component_id": "comp-markdown-emphasis-dev-0003",
+   "category": "markdown",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 391,
+   "end_byte": 402,
+   "start_cp": 388,
+   "end_cp": 398,
+   "component_id": "comp-markdown-emphasis-dev-0003",
+   "category": "markdown",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 402,
+   "end_byte": 403,
+   "start_cp": 398,
+   "end_cp": 399,
+   "component_id": "comp-markdown-emphasis-dev-0003",
+   "category": "markdown",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 403,
+   "end_byte": 411,
+   "start_cp": 399,
+   "end_cp": 406,
+   "component_id": "comp-markdown-emphasis-dev-0003",
+   "category": "markdown",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 411,
+   "end_byte": 412,
+   "start_cp": 406,
+   "end_cp": 407,
+   "component_id": "comp-markdown-emphasis-dev-0003",
+   "category": "markdown",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 412,
+   "end_byte": 425,
+   "start_cp": 407,
+   "end_cp": 420,
+   "component_id": "comp-markdown-emphasis-dev-0003",
+   "category": "markdown",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 425,
+   "end_byte": 426,
+   "start_cp": 420,
+   "end_cp": 421,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 426,
+   "end_byte": 427,
+   "start_cp": 421,
+   "end_cp": 422,
+   "component_id": "comp-math-probability-dev-0003",
+   "category": "math",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 427,
+   "end_byte": 429,
+   "start_cp": 422,
+   "end_cp": 424,
+   "component_id": "comp-math-probability-dev-0003",
+   "category": "math",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 429,
+   "end_byte": 430,
+   "start_cp": 424,
+   "end_cp": 425,
+   "component_id": "comp-math-probability-dev-0003",
+   "category": "math",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 430,
+   "end_byte": 446,
+   "start_cp": 425,
+   "end_cp": 441,
+   "component_id": "comp-math-probability-dev-0003",
+   "category": "math",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 446,
+   "end_byte": 447,
+   "start_cp": 441,
+   "end_cp": 442,
+   "component_id": "comp-math-probability-dev-0003",
+   "category": "math",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 447,
+   "end_byte": 448,
+   "start_cp": 442,
+   "end_cp": 443,
+   "component_id": "comp-math-probability-dev-0003",
+   "category": "math",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 448,
+   "end_byte": 449,
+   "start_cp": 443,
+   "end_cp": 444,
+   "component_id": "comp-math-probability-dev-0003",
+   "category": "math",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 449,
+   "end_byte": 450,
+   "start_cp": 444,
+   "end_cp": 445,
+   "component_id": "comp-math-probability-dev-0003",
+   "category": "math",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 450,
+   "end_byte": 451,
+   "start_cp": 445,
+   "end_cp": 446,
+   "component_id": "comp-math-probability-dev-0003",
+   "category": "math",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 451,
+   "end_byte": 452,
+   "start_cp": 446,
+   "end_cp": 447,
+   "component_id": "comp-math-probability-dev-0003",
+   "category": "math",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 452,
+   "end_byte": 453,
+   "start_cp": 447,
+   "end_cp": 448,
+   "component_id": "comp-math-probability-dev-0003",
+   "category": "math",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 453,
+   "end_byte": 454,
+   "start_cp": 448,
+   "end_cp": 449,
+   "component_id": "comp-math-probability-dev-0003",
+   "category": "math",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 454,
+   "end_byte": 455,
+   "start_cp": 449,
+   "end_cp": 450,
+   "component_id": "comp-math-probability-dev-0003",
+   "category": "math",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 455,
+   "end_byte": 459,
+   "start_cp": 450,
+   "end_cp": 454,
+   "component_id": "comp-math-probability-dev-0003",
+   "category": "math",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 459,
+   "end_byte": 514,
+   "start_cp": 454,
+   "end_cp": 509,
+   "component_id": "comp-math-probability-dev-0003",
+   "category": "math",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 514,
+   "end_byte": 515,
+   "start_cp": 509,
+   "end_cp": 510,
+   "component_id": "comp-math-probability-dev-0003",
+   "category": "math",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 515,
+   "end_byte": 516,
+   "start_cp": 510,
+   "end_cp": 511,
+   "component_id": "comp-math-probability-dev-0003",
+   "category": "math",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 516,
+   "end_byte": 517,
+   "start_cp": 511,
+   "end_cp": 512,
+   "component_id": "comp-math-probability-dev-0003",
+   "category": "math",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 517,
+   "end_byte": 518,
+   "start_cp": 512,
+   "end_cp": 513,
+   "component_id": "comp-math-probability-dev-0003",
+   "category": "math",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 518,
+   "end_byte": 522,
+   "start_cp": 513,
+   "end_cp": 517,
+   "component_id": "comp-math-probability-dev-0003",
+   "category": "math",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 522,
+   "end_byte": 535,
+   "start_cp": 517,
+   "end_cp": 530,
+   "component_id": "comp-math-probability-dev-0003",
+   "category": "math",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 535,
+   "end_byte": 536,
+   "start_cp": 530,
+   "end_cp": 531,
+   "component_id": "comp-math-probability-dev-0003",
+   "category": "math",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 536,
+   "end_byte": 537,
+   "start_cp": 531,
+   "end_cp": 532,
+   "component_id": "comp-math-probability-dev-0003",
+   "category": "math",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 537,
+   "end_byte": 541,
+   "start_cp": 532,
+   "end_cp": 536,
+   "component_id": "comp-math-probability-dev-0003",
+   "category": "math",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 541,
+   "end_byte": 568,
+   "start_cp": 536,
+   "end_cp": 563,
+   "component_id": "comp-math-probability-dev-0003",
+   "category": "math",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 568,
+   "end_byte": 569,
+   "start_cp": 563,
+   "end_cp": 564,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 569,
+   "end_byte": 605,
+   "start_cp": 564,
+   "end_cp": 600,
+   "component_id": "comp-machine-cli-flags-dev-0008",
+   "category": "machine",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 605,
+   "end_byte": 606,
+   "start_cp": 600,
+   "end_cp": 601,
+   "component_id": "comp-machine-cli-flags-dev-0008",
+   "category": "machine",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 606,
+   "end_byte": 616,
+   "start_cp": 601,
+   "end_cp": 611,
+   "component_id": "comp-machine-cli-flags-dev-0008",
+   "category": "machine",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 616,
+   "end_byte": 617,
+   "start_cp": 611,
+   "end_cp": 612,
+   "component_id": "comp-machine-cli-flags-dev-0008",
+   "category": "machine",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 617,
+   "end_byte": 629,
+   "start_cp": 612,
+   "end_cp": 624,
+   "component_id": "comp-machine-cli-flags-dev-0008",
+   "category": "machine",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 629,
+   "end_byte": 630,
+   "start_cp": 624,
+   "end_cp": 625,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 630,
+   "end_byte": 633,
+   "start_cp": 625,
+   "end_cp": 628,
+   "component_id": "comp-code-cpp-dev-0011",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 633,
+   "end_byte": 634,
+   "start_cp": 628,
+   "end_cp": 629,
+   "component_id": "comp-code-cpp-dev-0011",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 634,
+   "end_byte": 827,
+   "start_cp": 629,
+   "end_cp": 819,
+   "component_id": "comp-code-cpp-dev-0011",
+   "category": "code",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 827,
+   "end_byte": 828,
+   "start_cp": 819,
+   "end_cp": 820,
+   "component_id": "comp-code-cpp-dev-0011",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 828,
+   "end_byte": 831,
+   "start_cp": 820,
+   "end_cp": 823,
+   "component_id": "comp-code-cpp-dev-0011",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 831,
+   "end_byte": 832,
+   "start_cp": 823,
+   "end_cp": 824,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 832,
+   "end_byte": 1155,
+   "start_cp": 824,
+   "end_cp": 1135,
+   "component_id": "comp-prose-computing-dev-0007",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  }
+ ],
+ "invariants": {
+  "tiling_complete": true,
+  "no_contradictory_overlaps": true,
+  "cp_range_exact": true
+ }
+}

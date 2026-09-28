@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-001778",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T8-quote-fenced",
+ "byte_length": 597,
+ "cp_length": 586,
+ "sha256": "8237ef6fa46d47636fdf71d086716e908d8cdae0716f01c15cccb9cadd9c0717",
+ "document": "> Svetovna in slovenska zgodovina se v tem projektu prepleta, ker so izmišljeni potniki v dnevnik zapisali potovanja, ki so trajala po letih, ne po dnevih. »Kadar je letnica omenjena,« je dodala Eva, »je besedilo preprosteje razumljivo, čeprav manj natančno.« Njena skupina je zato izbrala kratka navodila, da so besedila ostala čitljiva. `// Testni podatki za osebo Ana.`\n```\n# Testni projekt: Nabavna lista; avtor: Maja Lipovnik\ncena = 12.50\nznesek = 'Cena: 12,50 $ v oklepaju (brez DDV)'\npot = 'docs/vir.txt'\nkomentar = 'Slovenski č, š, ž'\nif cena > 10:\n    print('Visok znesek')\n```",
+ "components": [
+  {
+   "component_id": "comp-prose-history-dev-0005",
+   "category": "prose",
+   "start_byte": 2,
+   "end_byte": 346
+  },
+  {
+   "component_id": "comp-code-rust-dev-0010",
+   "category": "code",
+   "start_byte": 347,
+   "end_byte": 380
+  },
+  {
+   "component_id": "comp-code-python-dev-0002",
+   "category": "code",
+   "start_byte": 381,
+   "end_byte": 597
+  }
+ ]
+}

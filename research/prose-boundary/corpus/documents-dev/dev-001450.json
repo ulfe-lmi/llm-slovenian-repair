@@ -1,0 +1,47 @@
+{
+ "doc_id": "dev-001450",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T10-randomized",
+ "byte_length": 996,
+ "cp_length": 975,
+ "sha256": "cc106d0c6b19fa2191b5f40c2d58086f9333feb8a53618177c54dd6d9dd764f8",
+ "document": "Med razstavo v izmišljenem paviljonu je vodja ekipe Petra Lovšin pokazala model železne konstrukcije iz leta 1895. Očitali so ji, da je preveč zaupala spominom starih obrtnikov. (V ožjem krogu so rekli, da je bil model težak približno trideset kilogramov.) »Če bi imeli le eno potrdilo,« je dejala, »bi zgodbo lahko razumlili drugače.« Kljub temu so obiskovalci ostali zmedeni zaradi pomanjkanja ohranjenih meritev.\n> Projekt Polena, avtor *Jan*: število 7 enot.\n> > Vrednost je 35 %.\n<dogodek id='četrta' datum='2024-01-15' kraj='Ljubljana'><opis postotek='35 %'>Prva faza</opis></dogodek>\nV testnem projektu <b>Sivi vrh</b> je <i>Barbara Zajc</i> preverila <span>800 hPa</span> tlak.<br/>Druga vrednost je 810 hPa.\n~~**Prečrtano** zmanjkano.\nTestni projekt: Papirnata mlat. Osebna: Nika Kranjc.\nPoleti 2024 sem z izmišljeno skupino Tihotažna obala raziskoval otok na Bledskem jezeru, kjer je bil zrak svež. Zvečer smo se zatekli v lokalno jedilnico, da bi poskusili potico.",
+ "components": [
+  {
+   "component_id": "comp-prose-history-dev-0009",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 429
+  },
+  {
+   "component_id": "comp-markdown-blockquotes-dev-0007",
+   "category": "markdown",
+   "start_byte": 430,
+   "end_byte": 499
+  },
+  {
+   "component_id": "comp-structured-xml-dev-0004",
+   "category": "structured",
+   "start_byte": 500,
+   "end_byte": 606
+  },
+  {
+   "component_id": "comp-markdown-raw-html-dev-0007",
+   "category": "markdown",
+   "start_byte": 607,
+   "end_byte": 732
+  },
+  {
+   "component_id": "comp-malformed-malformed-nesting-dev-0003",
+   "category": "malformed",
+   "start_byte": 733,
+   "end_byte": 813
+  },
+  {
+   "component_id": "comp-prose-travel-dev-0001",
+   "category": "prose",
+   "start_byte": 814,
+   "end_byte": 996
+  }
+ ]
+}

@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-002067",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T11-interactions",
+ "byte_length": 957,
+ "cp_length": 941,
+ "sha256": "2354f85c2f764fe278c7a2c91c5b4d80a897f6e00287a2e62fec044644d486fc",
+ "document": "`#include <string>`.\n```\n/* Testni fragment 8: izmišljena oseba Nina, projekt Test. */ SELECT 'Nina' AS `ime`, '8,90 $' AS `cena`, 'https://primer.si/koda' AS `url`, 'docs/vir8.txt' AS `pot`, TRIM('*poudarek* in _zvezdice_') AS `opomba`, 'razdelek2' AS `razdelek2`, 'seStez' AS `seStez`, 'ž' AS `HRAŠNA_VREDNOST` FROM (SELECT 8 AS `en`) AS `t` WHERE (`t`.`en` = 8);\n# komentar z \\frac{a}{b}\n```\nVzorčni projekt za Občinsko pisarno je v septembru 2025 preizkusil nov obrazec za prijavo krajnega dogodka. V navodilih so pisali: „Oddajte dokument najmanj tri dni pred pričetkom”, da bi preprečili zamudo pri obravnavi. Preizkus je vključeval tri uporabnike in dva referenta, ki sta preverila datume in številke v obrazcu.\nPri projektu Zimska lučka je Katja poizkusila z dvema baterijama in dvema upornostma. A sklep je bil sprva odprt. Ko je na koncu pritiskala na stikalo, se je dioda vžgala. V dnevni sobi so slišali le tihi, zadovoljen smeh.",
+ "components": [
+  {
+   "component_id": "comp-code-cpp-dev-0006",
+   "category": "code",
+   "start_byte": 0,
+   "end_byte": 19
+  },
+  {
+   "component_id": "comp-code-sql-dev-0008",
+   "category": "code",
+   "start_byte": 21,
+   "end_byte": 397
+  },
+  {
+   "component_id": "comp-prose-administration-dev-0008",
+   "category": "prose",
+   "start_byte": 398,
+   "end_byte": 731
+  },
+  {
+   "component_id": "comp-prose-electronics-dev-0008",
+   "category": "prose",
+   "start_byte": 732,
+   "end_byte": 957
+  }
+ ]
+}

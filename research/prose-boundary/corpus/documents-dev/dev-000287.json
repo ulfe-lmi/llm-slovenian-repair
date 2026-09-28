@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-000287",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T2-prose-math-prose",
+ "byte_length": 827,
+ "cp_length": 809,
+ "sha256": "173436f8809fc9ec3b845bdc15afb6c2b366e9e7c29c46e52606f33fca01a225",
+ "document": "Mednarodna skupina, ki dela v izmišljenem arhivu Ljubljana, je pregledovala dopise iz leta 1804, v katerih omenjajo potovanja po dolini. V vstavku (ki ga je zapisala Taja) piše: »Razdalje so merili s koraki in verstami, ne pa z modernimi merami.«\n\\[ \\begin{bmatrix} \\theta_1 & \\mu_2 & 5 \\\\ 4 & \\phi_3 & -\\lambda_1 \\\\ \\sigma_2 & 9 & \\text{Savinja} \\end{bmatrix} \\]\nNova tiskalnica na hodniku, ki so jo za projekt »Manj zastojev« postavili blizu sprejemne pisarne, je imela poseben predal za tanke bonove, kar je presenetilo več zaposlenih. »Tiskanje«, so rekli nekateri, »je še vedno najpogostejši razlog, da se zavrtni k papirju namesto k zaslonski različici.« Ivan je zato predlagal, da se za manjše dokumente uporabi en sam predlog. V šali so dejali, da bo takrat tudi tiskalnica manj »nevoljna« ob zastoju.",
+ "components": [
+  {
+   "component_id": "comp-prose-history-dev-0002",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 250
+  },
+  {
+   "component_id": "comp-math-bracket-tex-dev-0002",
+   "category": "math",
+   "start_byte": 251,
+   "end_byte": 367
+  },
+  {
+   "component_id": "comp-prose-computing-dev-0010",
+   "category": "prose",
+   "start_byte": 368,
+   "end_byte": 827
+  }
+ ]
+}

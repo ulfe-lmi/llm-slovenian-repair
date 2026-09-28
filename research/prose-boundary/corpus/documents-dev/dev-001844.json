@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-001844",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T8-quote-fenced",
+ "byte_length": 876,
+ "cp_length": 859,
+ "sha256": "acd622df65ae608112be950061056a11c83b787eaf1c5c245159fd65c171faa7",
+ "document": "> Vzorčni projekt za Občinsko pisarno je v septembru 2025 preizkusil nov obrazec za prijavo krajnega dogodka. V navodilih so pisali: „Oddajte dokument najmanj tri dni pred pričetkom”, da bi preprečili zamudo pri obravnavi. Preizkus je vključeval tri uporabnike in dva referenta, ki sta preverila datume in številke v obrazcu. `/* Preveri imenik (č, š, ž): src/modul.py in docs/vir.txt */`\n```\n#!/usr/bin/env bash\n# Tretji fragment: številska oznaka (test) in ne-ASCII znaki\n# Oseba: Maja, projekt: čokoladni vir\nrazdelek2='razdelek2'\nseStez='seStez'\npotA='src/modul.py'\npotB='docs/vir.txt'\npotC='HRAŠNA_VREDNOST.md'\nnavodilo='**test** *navodila* _podčrtano_'\necho \"razdelek: $razdelek2\"\necho \"seStez: $seStez\"\necho \"potA: $potA\"\necho \"potB: $potB\"\necho \"potC: $potC\"\necho \"$navodilo\"\necho 'url: https://primer.si/koda'\necho 'cena: 3 $'\necho 'backquote: `'\n```",
+ "components": [
+  {
+   "component_id": "comp-prose-administration-dev-0008",
+   "category": "prose",
+   "start_byte": 2,
+   "end_byte": 335
+  },
+  {
+   "component_id": "comp-code-javascript-dev-0007",
+   "category": "code",
+   "start_byte": 336,
+   "end_byte": 401
+  },
+  {
+   "component_id": "comp-code-shell-bash-dev-0011",
+   "category": "code",
+   "start_byte": 402,
+   "end_byte": 876
+  }
+ ]
+}

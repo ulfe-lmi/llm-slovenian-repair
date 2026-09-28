@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-000472",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T11-interactions",
+ "byte_length": 909,
+ "cp_length": 893,
+ "sha256": "9c40033cf288cecdf51d703953be13c7be3652b20840c4ea3039750531257c5e",
+ "document": "`#!/usr/bin/env bash`.\n```\n# Testni projekt: Vir podatkov; avtor: Maja Lipovnik\nurl = 'https://primer.si/koda'\npot = 'src/nabavki.py'\ncena = '100 $ (brez popusta)'\noznaka = '(test č š ž)'\nif url and pot:\n    print('Vir je nastavljen')\n# komentar z \\frac{a}{b}\n```\nV izmišljenem projektu Bralna linija (2021) mlada lektorica Ana Brezan raziskuje, kako kratek slovenski razpesek vpraša spomin. V evropski primerjavi se motiva potovanja in tihotapljenja knjig pojavita pri avtorici Elini Kravec ter pri francoskem romanopiscu Marcu Villen. Zvrst, ki jo raziskovalci imenujejo bralna pripoved, tu zveni kot nežna variacija na klasičen dnevnik.\nPriprava na državni izpit za odrasle je potekala mirno (trije tedni, dvakrat na teden), in Matej je ob tem dejal: »Znanje ostane, če ga človek lahko pove iz glave.« Načrt je vključeval tudi kratek pregled starih učbenikov, a brez dolžine in brez strahu.",
+ "components": [
+  {
+   "component_id": "comp-code-shell-bash-dev-0011",
+   "category": "code",
+   "start_byte": 0,
+   "end_byte": 21
+  },
+  {
+   "component_id": "comp-code-python-dev-0005",
+   "category": "code",
+   "start_byte": 23,
+   "end_byte": 266
+  },
+  {
+   "component_id": "comp-prose-literature-dev-0001",
+   "category": "prose",
+   "start_byte": 267,
+   "end_byte": 646
+  },
+  {
+   "component_id": "comp-prose-education-dev-0013",
+   "category": "prose",
+   "start_byte": 647,
+   "end_byte": 909
+  }
+ ]
+}

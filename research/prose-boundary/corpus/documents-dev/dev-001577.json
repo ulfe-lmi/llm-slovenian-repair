@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-001577",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T5-lists",
+ "byte_length": 1175,
+ "cp_length": 1148,
+ "sha256": "a978f344594d9a1a74f3f8dd64c8b135bde99206fd2b52f25f56f3f11336f8e3",
+ "document": "- V šolskem testnem kotičku je Nia izmislila preprosto skico: utripalka, upornost, sklep in baterija v krogu. \"Ne pozabi, da je sklep odprt, dokler ga ne pritisneš,\" je opomnila sošolki. Ta se je nasmehnila in se lotila priključevanja. Ko je vse šlo, sta skupaj ugasnili in zapisali datum.\n- `/* Preveri imenik (č, š, ž): src/modul.py in docs/vir.txt */`\n- V laboratoriju projekta Merjač (stanica 4) je dr. Ana Kovač zapisala: »Med segrevanjem, in sicer ob dveh tisoč stopinjah Celzija, se material obnaša, kot bi šlo za tekočino,« in pojasnila, zakaj poskusne vzorce ob segrevanju obnašajo nepričakovano elastičnost. Rezultati iz leta 2021 so nato odprli pot k novi metodologiji, v kateri je pomembna vsaka mera, tudi tista, ki se zdi nesmiselna.\n- V raziskavi Mestni tisk, ki jo vodita Meta Zorman in Ivo Perko, je knjižnost prikazana kot sloj spomina, kjer se prepletajo slovenske pripovedke (poletni tabor v Zgornji Gori), roman Emila Brandta in zgodnja revija za otroško literaturo. Tisti odlomek, ki ga raziskovalci poimenujejo »Tiho zrcalo«, pokaže, kako motiv vrnitve iz tuje dežele postane orodje za preučevanje medgeneracijskih razhujanj.",
+ "components": [
+  {
+   "component_id": "comp-prose-electronics-dev-0005",
+   "category": "prose",
+   "start_byte": 2,
+   "end_byte": 295
+  },
+  {
+   "component_id": "comp-code-javascript-dev-0007",
+   "category": "code",
+   "start_byte": 298,
+   "end_byte": 363
+  },
+  {
+   "component_id": "comp-prose-science-dev-0011",
+   "category": "prose",
+   "start_byte": 366,
+   "end_byte": 767
+  },
+  {
+   "component_id": "comp-prose-literature-dev-0012",
+   "category": "prose",
+   "start_byte": 770,
+   "end_byte": 1175
+  }
+ ]
+}

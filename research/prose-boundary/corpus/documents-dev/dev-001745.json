@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-001745",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T8-quote-fenced",
+ "byte_length": 851,
+ "cp_length": 844,
+ "sha256": "47c6d5cf67829d50697713989d256c8d0c410b775dad8b2f99b4da15e492f7af",
+ "document": "> V zbirki izmišljenega muzeja na Bledu je ohranjen skicirni list iz leta 1623, ki ga pripisujejo obrtniku Janezu Hribarju. Na listu je zabeležen postopek obdelave lesa in navedena meritev širine deske, ki naj bi dosegala dva metra. Raziskovalci projekta Stare delavnice so zato sklepali, da je v tem času obstajala manjša lokalna tradicija izdelovanja lesnih izdelkov. `int main(void) { char *cena1 = \"1 $\"; char *cena2 = \"2 EUR\";`\n```\n-- Testni SQL fragment: razpoloži\nCREATE TABLE razpolozi (\n  id INT PRIMARY KEY,\n  \"seStez\" TEXT,\n  \"razdelek2\" TEXT,\n  opomba TEXT\n);\nINSERT INTO razpolozi (id, \"seStez\", \"razdelek2\", opomba)\nVALUES (1, '**poudarek** *zvezdice*', '_podčrtano_', '12 $ / dan');\nUPDATE razpolozi SET opomba = 'Vir: https://primer.si/koda' WHERE id = 1;\nSELECT id, \"seStez\", \"razdelek2\", opomba FROM razpolozi ORDER BY id;\n```",
+ "components": [
+  {
+   "component_id": "comp-prose-history-dev-0006",
+   "category": "prose",
+   "start_byte": 2,
+   "end_byte": 374
+  },
+  {
+   "component_id": "comp-code-c-dev-0005",
+   "category": "code",
+   "start_byte": 375,
+   "end_byte": 437
+  },
+  {
+   "component_id": "comp-code-sql-dev-0009",
+   "category": "code",
+   "start_byte": 438,
+   "end_byte": 851
+  }
+ ]
+}

@@ -1,0 +1,82 @@
+{
+ "doc_id": "dev-001310",
+ "byte_length": 761,
+ "cp_length": 745,
+ "regions": [
+  {
+   "start_byte": 0,
+   "end_byte": 387,
+   "start_cp": 0,
+   "end_cp": 379,
+   "component_id": "comp-prose-computing-dev-0011",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 387,
+   "end_byte": 388,
+   "start_cp": 379,
+   "end_cp": 380,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 388,
+   "end_byte": 389,
+   "start_cp": 380,
+   "end_cp": 381,
+   "component_id": "comp-math-matrices-dev-0003",
+   "category": "math",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 389,
+   "end_byte": 393,
+   "start_cp": 381,
+   "end_cp": 385,
+   "component_id": "comp-math-matrices-dev-0003",
+   "category": "math",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 393,
+   "end_byte": 437,
+   "start_cp": 385,
+   "end_cp": 429,
+   "component_id": "comp-math-matrices-dev-0003",
+   "category": "math",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 437,
+   "end_byte": 438,
+   "start_cp": 429,
+   "end_cp": 430,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 438,
+   "end_byte": 761,
+   "start_cp": 430,
+   "end_cp": 745,
+   "component_id": "comp-prose-cooking-dev-0012",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  }
+ ],
+ "invariants": {
+  "tiling_complete": true,
+  "no_contradictory_overlaps": true,
+  "cp_range_exact": true
+ }
+}

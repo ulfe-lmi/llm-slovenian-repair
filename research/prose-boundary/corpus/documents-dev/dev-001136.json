@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-001136",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T4-heading-prose-table",
+ "byte_length": 468,
+ "cp_length": 461,
+ "sha256": "a699952fb13bbe002f48b083ff4da8722d1fb3574eddfd3c875d9cc3fb390fda",
+ "document": "## Poskus, ki ga je vodila Nina, je potekal v majhni sobi. Lamp\nV okviru internega testnega projekta so v občinskem uradu po novem dokumente prejeli v digitalni obliki in zaposleni so morali preveriti, ali so priloženi obrazci polni. Maja je sodelavcem dejala, da rok za odločitev poteka do petega v mesecu, zato morajo skrbno preveriti priložene listine.\n| Opis | Vzorček |\n| --- | --- |\n| Sara je pojasnila, da se povprečje včasi | v1.2.3, 3,5 m, 42 obr/min |",
+ "components": [
+  {
+   "component_id": "comp-prose-science-dev-0009",
+   "category": "prose",
+   "start_byte": 3,
+   "end_byte": 63
+  },
+  {
+   "component_id": "comp-prose-administration-dev-0011",
+   "category": "prose",
+   "start_byte": 64,
+   "end_byte": 359
+  },
+  {
+   "component_id": "comp-prose-statistics-dev-0005",
+   "category": "prose",
+   "start_byte": 396,
+   "end_byte": 438
+  },
+  {
+   "component_id": "comp-machine-versions-numbers-units-dev-0005",
+   "category": "machine",
+   "start_byte": 441,
+   "end_byte": 466
+  }
+ ]
+}

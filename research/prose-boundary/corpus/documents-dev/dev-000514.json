@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-000514",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T9-prose-malformed-prose",
+ "byte_length": 766,
+ "cp_length": 757,
+ "sha256": "a000027e3af89f3689b83f0241c416fab4bbda46d036c124956ebbb6cb0f7b71",
+ "document": "V arhivu projekta Stare potje je bil najden list, na katerem piše o izletu do izvira leta 1807. Po besedah urednice Nine Mlakar je bil povzetek kratek, vendar dovolj jasen, da si lahko bralci predstavljajo skupino, ki je imela osem potnikov in enega psa. Delček zemljevida, prilepljen v isti zvezki, kaže zanko, ki je merila okoli trideset kilometrov.\n$12 je predračun za testni zapis v projektu Modra Lestvica.\nProjektna skupina je v juliju 2025 preverila tok podatkov med občino in zavodom za upravne storitve. V notranji opombi je stalo: »Dva koraka manj, dva dneja hitreje.« V eni od vlog, ki je vsebovala dve prilogi, je manjkala podpisana izjava. To so uredili v petih dneh. (Rezultat je bila večja preglednost in tudi večje zadovoljstvo uporabnikov.)",
+ "components": [
+  {
+   "component_id": "comp-prose-history-dev-0010",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 354
+  },
+  {
+   "component_id": "comp-malformed-unmatched-dollar-dev-0002",
+   "category": "malformed",
+   "start_byte": 355,
+   "end_byte": 415
+  },
+  {
+   "component_id": "comp-prose-administration-dev-0005",
+   "category": "prose",
+   "start_byte": 416,
+   "end_byte": 766
+  }
+ ]
+}

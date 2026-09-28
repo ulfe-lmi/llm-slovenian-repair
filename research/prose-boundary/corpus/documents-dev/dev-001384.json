@@ -1,0 +1,47 @@
+{
+ "doc_id": "dev-001384",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T10-randomized",
+ "byte_length": 896,
+ "cp_length": 876,
+ "sha256": "7a8d07edc3dc84a877c9c6c071dd82c329d4a768669d3d70b9c334ab1f0c4407",
+ "document": "Pri urejanju hiše pomaga, če ob jutru hitro preverimo, kje je največji nered, in si izberemo le eno majhno nalogo. Ana je v projektu Čist dom zapisala, da je bolje pet minut brisanja mize kot ure razmišljanja. (Sicer pa raje odpreš okno, če je miza že svetla.)\nIzmišljeni projekt Osvetlitev: Marko Novak pošlje povratne informacije na <pošta@primer.si> in priloži naslov <https://primer.si/stran> za 5 LED. Masa 0,2 kg.\n> Projekt Mlin, avtor *Eva*: obseg 3 m.\n> > Rezultat je 15 kg.\nBine je zapisal `enota` in ``tema`` za projekt Modra Gora kot 8 %.\n\\(\\left(\\frac{\\psi^7}{11-\\chi}+\\sqrt{6+\\rho}\\right)_{\\text{Filip}}\\)\nO proporcijah sem v šolskem letu 2019 govorila kot o primerjavi enakih delov, zato so učenci izmišljali recepte in merili sestavine. »Če ena skleda vsebuje dva dela, potem druga vsebuje štiri dele,« je povedala Ana, in to je bila za nas dobra vstopna točka.",
+ "components": [
+  {
+   "component_id": "comp-prose-everyday-advice-dev-0001",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 268
+  },
+  {
+   "component_id": "comp-markdown-autolinks-dev-0002",
+   "category": "markdown",
+   "start_byte": 269,
+   "end_byte": 431
+  },
+  {
+   "component_id": "comp-markdown-blockquotes-dev-0006",
+   "category": "markdown",
+   "start_byte": 432,
+   "end_byte": 494
+  },
+  {
+   "component_id": "comp-markdown-inline-code-dev-0004",
+   "category": "markdown",
+   "start_byte": 495,
+   "end_byte": 561
+  },
+  {
+   "component_id": "comp-math-paren-tex-dev-0006",
+   "category": "math",
+   "start_byte": 562,
+   "end_byte": 630
+  },
+  {
+   "component_id": "comp-prose-math-explainer-dev-0002",
+   "category": "prose",
+   "start_byte": 631,
+   "end_byte": 896
+  }
+ ]
+}

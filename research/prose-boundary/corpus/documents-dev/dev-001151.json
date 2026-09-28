@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-001151",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T8-quote-fenced",
+ "byte_length": 541,
+ "cp_length": 527,
+ "sha256": "a5d4607525808b598de778d34678741b880cf184af3e830194db33ef5b0fbf26",
+ "document": "> Anja je v opombi zapisala, da so razmerja med dohodki in izdatki (v mesecu maju in juniju) nekoliko drugačna kot lani. Povprečje ni pokazalo velike spremembe, vendar je posamezen teden odstopil, kar je pritegnilo pozornost ekipi. `fn HRAŠNA_VREDNOST(žvirok: i64) -> i64 { /* Testni projekt L`\n```\n/* Fragment 3: testni primer, vir https://primer.si/koda, pot src/modul.py, docs/vir.txt */ int osnutek3 = 3; std::string podatek3() { return \"_Povzetek_ *koda* `backquote` 7 $ (č, š, ž)\"; }\n```\n Žč: 🚀 hitrost rasti je merljiva.",
+ "components": [
+  {
+   "component_id": "comp-prose-statistics-dev-0002",
+   "category": "prose",
+   "start_byte": 2,
+   "end_byte": 233
+  },
+  {
+   "component_id": "comp-code-rust-dev-0003",
+   "category": "code",
+   "start_byte": 234,
+   "end_byte": 298
+  },
+  {
+   "component_id": "comp-code-cpp-dev-0011",
+   "category": "code",
+   "start_byte": 299,
+   "end_byte": 500
+  }
+ ]
+}

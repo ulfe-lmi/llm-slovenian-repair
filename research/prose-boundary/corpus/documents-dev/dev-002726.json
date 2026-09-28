@@ -1,0 +1,71 @@
+{
+ "doc_id": "dev-002726",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T10-randomized",
+ "byte_length": 1611,
+ "cp_length": 1585,
+ "sha256": "3988a3e5d4d408b1f4bd84ebd2317856aa69fe5aa7a337a0e5e09f68d70b49df",
+ "document": "Maja je poletni dopust v Sredozemlju izbrala predvsem zaradi tihih obalnih vas (zlasti tistih v bližini Kotorskega zaliva). »Sonce je bilo toplo,« je zapisala v svojih opombah, a je poudarila, da je treba med popoldanskimi urami ostati v senci.\n```\n/* Zaključni test: oseba Janež, projekt Brest */ const naslov = 'Vrednost je 25 $'; const opomba = `Podpis: **Janez** (_brez šumnika_)`; const pot = 'docs/vir.txt'; const razdelek2 = 8; console.log(naslov, opomba, pot, razdelek2);\n```\n0.13.4, 0,9999\n$$\\frac{\\delta + \\epsilon}{\\zeta} = 4 \\times \\eta = \\text{Maja}$$\n```\n# Testni projekt: Nabavna lista; avtor: Maja Lipovnik\ncena = 12.50\nznesek = 'Cena: 12,50 $ v oklepaju (brez DDV)'\npot = 'docs/vir.txt'\nkomentar = 'Slovenski č, š, ž'\nif cena > 10:\n    print('Visok znesek')\n```\n$$y=2. Projekt Javor shranjuje nevtralne testne zapiske.\nE[Y_{\\text{Trn}}] = \\int_{0}^{1} y f_{\\text{Trn}}(y) \\, dy = \\beta^2 \\text{ (pričakovana vrednost)}\n```\n#include <string>\n// Končni primer: Ana, Karel, Lipa\n// Znaki: č, š, ž\nint main() {\n    const int HRA_NA_VREDNOST = 9;\n    std::string opis = \"`oklepaji` in *zvezdice*\";\n    return HRA_NA_VREDNOST;\n}\n```\n**_Mešanica_ brez zapora.\nTestni projekt: Vrtna pot. Osebna: Ana Novak.\nNa opazovalnem mestu izmišljenega projekta Nočni ogled so opazovalci (v resnici študenti) opazili, da je ob vzhodu zvezde Aldebaran, ki so jo imenovali »čudovita svetleča točka«, svetloba rahlo zamigavala. V dnevniku meritve, ki ga je vodila Tjaša Novak, je stalo, da je letni cikel 2022 prinesel boljše vremenske razmere in zato večjo zanesljivost pri ocenjanju sijev.",
+ "components": [
+  {
+   "component_id": "comp-prose-travel-dev-0012",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 247
+  },
+  {
+   "component_id": "comp-code-javascript-dev-0008",
+   "category": "code",
+   "start_byte": 248,
+   "end_byte": 489
+  },
+  {
+   "component_id": "comp-machine-versions-numbers-units-dev-0006",
+   "category": "machine",
+   "start_byte": 490,
+   "end_byte": 504
+  },
+  {
+   "component_id": "comp-math-display-dollar-dev-0002",
+   "category": "math",
+   "start_byte": 505,
+   "end_byte": 570
+  },
+  {
+   "component_id": "comp-code-python-dev-0002",
+   "category": "code",
+   "start_byte": 571,
+   "end_byte": 787
+  },
+  {
+   "component_id": "comp-malformed-incomplete-display-dollar-dev-0002",
+   "category": "malformed",
+   "start_byte": 788,
+   "end_byte": 844
+  },
+  {
+   "component_id": "comp-math-probability-dev-0005",
+   "category": "math",
+   "start_byte": 845,
+   "end_byte": 945
+  },
+  {
+   "component_id": "comp-code-cpp-dev-0008",
+   "category": "code",
+   "start_byte": 946,
+   "end_byte": 1157
+  },
+  {
+   "component_id": "comp-malformed-malformed-nesting-dev-0001",
+   "category": "malformed",
+   "start_byte": 1158,
+   "end_byte": 1230
+  },
+  {
+   "component_id": "comp-prose-science-dev-0008",
+   "category": "prose",
+   "start_byte": 1231,
+   "end_byte": 1611
+  }
+ ]
+}

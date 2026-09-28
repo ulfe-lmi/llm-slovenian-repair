@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-001352",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T11-interactions",
+ "byte_length": 1060,
+ "cp_length": 1034,
+ "sha256": "28259f56e5cc625c508b8de98567476a57d965030baac0cde8303ed107618980",
+ "document": "`def seštej(a, b): return a + b, 'Povzetek: **pomembno** _pod`.\n```\n# Fragment 6: *neodvisen*, podčrtano _besedilo_, (oklepaj)\necho 'Zvezdice: *zvezda* **dvakrat** in _podčrtano_'\necho 'Valuta: 1 $ in 9 € (testni znesek)'\necho 'Poti: docs/vir.txt in src/modul.py'\necho 'Spletna stran: https://primer.si/koda'\necho 'Id: razdelek2, seStez, HRAŠNA_VREDNOST'\necho 'Backquote `vse` in poudarčni znaki č š ž'\n# komentar z \\frac{a}{b}\n```\nMojca je v razredu (po imenu Tista) povedala, da zanka ni nikoli le ponavljanje brez razloga. »Ponovi,« je zapisala na tablo, »dokler se števec ne ustavi.« Nato je pokazala, da funkcija deluje kot majhen stroj, ki prejme ime, preveri starost in vrne, ali udeleženec sodeluje v projektu.\nČiščenje oken je lažje, če najprej sproti počistimo rob in nato s suho krpo zberemo preostali prah. Marko je v projektu Prijetna hiša ugotovil, da je bolje delati ob jutru, ko je videti, kje se naberejo madeži. (Če je zunaj topleje, najprej odpreš okno.) Sicer pa je ena majhna posoda z blagom dovolj za dnevni red.",
+ "components": [
+  {
+   "component_id": "comp-code-python-dev-0009",
+   "category": "code",
+   "start_byte": 0,
+   "end_byte": 63
+  },
+  {
+   "component_id": "comp-code-shell-bash-dev-0006",
+   "category": "code",
+   "start_byte": 65,
+   "end_byte": 441
+  },
+  {
+   "component_id": "comp-prose-programming-explainer-dev-0007",
+   "category": "prose",
+   "start_byte": 442,
+   "end_byte": 734
+  },
+  {
+   "component_id": "comp-prose-everyday-advice-dev-0003",
+   "category": "prose",
+   "start_byte": 735,
+   "end_byte": 1060
+  }
+ ]
+}

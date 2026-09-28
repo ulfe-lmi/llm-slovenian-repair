@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-000074",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T9-prose-malformed-prose",
+ "byte_length": 775,
+ "cp_length": 752,
+ "sha256": "df45d3b1073e04991bf66cefa0c3b58158932c9aa262e2c7f9983b45bb27638f",
+ "document": "V projektu Mlajša šola je Nina pripravila kratke vaje, ki učencem omogočajo, da znanje preizkusijo v praksi (na primer pri izletu v mestno knjižnico). Učenci so radi dejali, da »se učimo brez strahu pred napako«, in učiteljica je to zapisala v letno knjižico. Pri izpitu iz slovenščine so namesto dolgih nalog dobili kratek pripovedni zapis, ki so ga lahko brali in pojasnjevali.\n\n\\[ y=3 . Testni zapis projekta Brda za osebo Marko.\n\nV pisni pojasnitvi je bilo zapisano, da se rok za vložitev pritožbe šteje od dneva, ko je odločba dostavljena na elektronski naslov ali osebno. »V dveh primerih je bilo treba preveriti avtentičnost prijave,« je povedala urednica projekta. (To je trajalo pet delovnih dni in je zmanjšalo tveganje za napačno odločitev.)",
+ "components": [
+  {
+   "component_id": "comp-prose-education-dev-0011",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 392
+  },
+  {
+   "component_id": "comp-malformed-incomplete-paren-bracket-dev-0002",
+   "category": "malformed",
+   "start_byte": 394,
+   "end_byte": 445
+  },
+  {
+   "component_id": "comp-prose-administration-dev-0003",
+   "category": "prose",
+   "start_byte": 447,
+   "end_byte": 775
+  }
+ ]
+}

@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-000934",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T11-interactions",
+ "byte_length": 1144,
+ "cp_length": 1119,
+ "sha256": "c9fe4c46447ee0b1f37f4acc7d61b4a34203d6d8d7b1933ae1bbd3a3bc5ef202",
+ "document": "`-- Fragment 3: izpisi za osebo`.\n```\nint main(void) { char *znaki = \"Znaki: č, š, ž\"; char *pot = \"docs/vir.txt\"; char *oznaka = \"seStez\"; char *url = \"https://primer.si/koda\"; (void)znaki; (void)pot; (void)oznaka; (void)url; return 0; } /* Končni fragment */\n# komentar z \\frac{a}{b}\n```\nV projektu Zdrav vsak dan (v letu 2024) so izpostavili, da se lahko obremenjenost kaže v hitrem dihanju, v slabšem spanju ali v občutku tesnobe. To ni razlaga za domov, ampak spomin, da so telesni signali odziv. Ko se ti signali ponavljajo, jih najprej opiše oseba, nato pa jih preveri zdravnik.\nV šoli so dijaki v letu 2025, v okviru notranjega projekta Besedilo, preizkušali urejevalnik besedil, ki je po mnenju učitelja Marka deloval “precej gladko”. Neko dopoldne so imeli težave s shranjevanjem, zato so se naučili, da je pomembno omeniti ime datoteke in mapo, v katero gre. Maja je zapisala, da ji je bila največja pomoč kratek pogovor s sošolko Ano, ki je razložila razliko med pripravo in končno različico. Tistega popoldneva, po njenih besedah, so preverili, da je shranjevanje enostavnejše, ko poznaš ime mape in datum.",
+ "components": [
+  {
+   "component_id": "comp-code-sql-dev-0011",
+   "category": "code",
+   "start_byte": 0,
+   "end_byte": 32
+  },
+  {
+   "component_id": "comp-code-c-dev-0008",
+   "category": "code",
+   "start_byte": 34,
+   "end_byte": 293
+  },
+  {
+   "component_id": "comp-prose-medicine-explainer-dev-0005",
+   "category": "prose",
+   "start_byte": 294,
+   "end_byte": 593
+  },
+  {
+   "component_id": "comp-prose-computing-dev-0012",
+   "category": "prose",
+   "start_byte": 594,
+   "end_byte": 1144
+  }
+ ]
+}

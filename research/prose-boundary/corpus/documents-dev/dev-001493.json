@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-001493",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T9-prose-malformed-prose",
+ "byte_length": 677,
+ "cp_length": 663,
+ "sha256": "7cde582b51937a70453b3e0c472ec7f3a710a1cc0733fe88cba8eb5d9fdceee9",
+ "document": "Biologi v projektu Grepel so gojili mikroalghe v steklenih skledah in vsak teden beležili barvo ter gostino. V dnevniku so zapisali, da so kulture pri temperaturi dvaindvajset stopinj Celzija hitreje porabile svetlobo. »Ta serija je nenavadno stabilna,« je rekel Tomaž ob oknu. Leta dvotisoč in dvaindvajset je Iva pripravila manjšo skupino vzorcev, ki so jo poimenovali po dolini pri Logu.\n~~**Prečrtano** zmanjkano.\nTestni projekt: Papirnata mlat. Osebna: Nika Kranjc.\nAna je v razredni testni delavnici najprej preverila, ali je sklep odprt (tako je ohišje varno), in šele nato prižgala majhno utripalko. V zapisniku je zapisala „Preizkus 2024 je brez napake.“",
+ "components": [
+  {
+   "component_id": "comp-prose-science-dev-0002",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 396
+  },
+  {
+   "component_id": "comp-malformed-malformed-nesting-dev-0003",
+   "category": "malformed",
+   "start_byte": 397,
+   "end_byte": 477
+  },
+  {
+   "component_id": "comp-prose-electronics-dev-0001",
+   "category": "prose",
+   "start_byte": 478,
+   "end_byte": 677
+  }
+ ]
+}

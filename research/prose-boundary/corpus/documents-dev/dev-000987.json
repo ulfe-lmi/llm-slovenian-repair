@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-000987",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T9-prose-malformed-prose",
+ "byte_length": 610,
+ "cp_length": 592,
+ "sha256": "04a0eb7e730c28d64e2d999f67349fde13782f5e48774bc5cecef555c5bc8086",
+ "document": "Ana je v svojem projektu za osnovno šolo pripravila preprost vezni opis z enim gumbom, žarom in baterijo. Ko je stikalo spustila, je sklep omogočil tok, svetloba pa je blago utripala. »Prva ura mi je pokazala, da so imena delov pomembna,« je zapisala v dnevnik.\n[opis](https://primer.si/stran drugi del: avtorizirana testna vsebina projekta Rdeča trta; izmišljena oseba Marko Novak ureja zvezek.\nV okviru projekta Nova vrv so otroci iz Ljubljane v petek zvečer vadili kratke podaje. Učiteljica Maja je opazila, da so po deset minutah teka vsi bolj sproščeni.\n Žč: 🚀 hitrost rasti je merljiva.",
+ "components": [
+  {
+   "component_id": "comp-prose-electronics-dev-0011",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 266
+  },
+  {
+   "component_id": "comp-malformed-broken-link-dev-0002",
+   "category": "malformed",
+   "start_byte": 267,
+   "end_byte": 402
+  },
+  {
+   "component_id": "comp-prose-sports-dev-0011",
+   "category": "prose",
+   "start_byte": 403,
+   "end_byte": 569
+  }
+ ]
+}

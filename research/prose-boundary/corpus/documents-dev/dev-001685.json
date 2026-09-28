@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-001685",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T3-prose-fenced-prose",
+ "byte_length": 862,
+ "cp_length": 837,
+ "sha256": "a216c4264aab44d2807924a505aa32791693fe719bb32bba0570f7058a52a1aa",
+ "document": "V razredu za proporcije se pogosto pojavi vprašanje: »Koliko čokoladnih ploščic pripada štirim otrokom, če imamo enajst enakih delov?« Učenci pod vodstvom Marka, ki sodeluje v projektu Skladni deli, izvedejo, da sorazmerje ni le deljenje, ampak tudi primerjava enakih deležev. Nekaj učencev, še zlasti tisti, ki radi kuhajo, to razumejo najlažje.\n```\nmoČ = 3; žrtev = (1, 2); besedilo = 'Cena: $10 `kod` **poudarek** _podčrtano_'; pot = 'docs/vir.txt' # komentar v slovenščini: testni projekt, https://primer.si/koda\n```\nZavod Odrasli naprej je v letu 2021 pripravil kratke izobraževalne module za poklicno usposabljanje, pri čemer so strokovni vodje poudarili jasno strukturirane učbenike in vsakodnevne vaje. Po petih tednih so udeleženci opravili preizkus znanja, ki je imel 20 vprašanj, 10 praktičnih nalog in eno ustno obrazložitev.",
+ "components": [
+  {
+   "component_id": "comp-prose-math-explainer-dev-0012",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 359
+  },
+  {
+   "component_id": "comp-code-python-dev-0011",
+   "category": "code",
+   "start_byte": 360,
+   "end_byte": 538
+  },
+  {
+   "component_id": "comp-prose-education-dev-0002",
+   "category": "prose",
+   "start_byte": 539,
+   "end_byte": 862
+  }
+ ]
+}

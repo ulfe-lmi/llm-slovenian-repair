@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-001154",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T11-interactions",
+ "byte_length": 1163,
+ "cp_length": 1142,
+ "sha256": "b884307fdf64923d49fdfa7fbb3170b697f324d50c090fca297315d7b88ecef4",
+ "document": "`int main(void) { char *napis = \"Tekst: *poudarjeno* in _podč`.\n```\n# Fragment 8: *neodvisen* konec, _podčrtano_, (oklepaj)\necho 'Besedilo: **poudarek** in *zvezdice*, `backquote`'\necho 'Valute: 4 $ in 11 € za izmišljeni projekt'\necho 'Relativna pot: src/modul.py; vir: docs/vir.txt'\necho 'Spletni naslov: https://primer.si/koda'\necho 'Identifikatorji: HRAŠNA_VREDNOST, razdelek2, seStez'\necho 'Slovenski znaki: č, š, ž'\n# komentar z \\frac{a}{b}\n```\nV Občini Srednji Grič je od lanskega aprila potekalo posvetovanje o novem postopku za izdajo gradbenih dovoljenj. (Cilj je bil krajši rok za obravnavo zahtev.) Upravni uradnik Marko Zajc je pripravil povzetek komentarjev, ki so jih oddali posamezniki, podjetja in društva. Do konca leta 2025 so želeli uvesti enotno elektronsko knjižico, vendar se je izkazalo, da je treba najprej uskladiti terminologijo.\nMojca je v razredu (po imenu Tista) povedala, da zanka ni nikoli le ponavljanje brez razloga. »Ponovi,« je zapisala na tablo, »dokler se števec ne ustavi.« Nato je pokazala, da funkcija deluje kot majhen stroj, ki prejme ime, preveri starost in vrne, ali udeleženec sodeluje v projektu.",
+ "components": [
+  {
+   "component_id": "comp-code-c-dev-0002",
+   "category": "code",
+   "start_byte": 0,
+   "end_byte": 63
+  },
+  {
+   "component_id": "comp-code-shell-bash-dev-0008",
+   "category": "code",
+   "start_byte": 65,
+   "end_byte": 458
+  },
+  {
+   "component_id": "comp-prose-administration-dev-0001",
+   "category": "prose",
+   "start_byte": 459,
+   "end_byte": 870
+  },
+  {
+   "component_id": "comp-prose-programming-explainer-dev-0007",
+   "category": "prose",
+   "start_byte": 871,
+   "end_byte": 1163
+  }
+ ]
+}

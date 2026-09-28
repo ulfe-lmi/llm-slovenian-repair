@@ -1,0 +1,53 @@
+{
+ "doc_id": "dev-000856",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T10-randomized",
+ "byte_length": 1504,
+ "cp_length": 1477,
+ "sha256": "cc1c9c7088c78f0d10de5e265fee5de33a47a159003b1e6553d76018987c7989",
+ "document": "Mojca je v razredu (po imenu Tista) povedala, da zanka ni nikoli le ponavljanje brez razloga. »Ponovi,« je zapisala na tablo, »dokler se števec ne ustavi.« Nato je pokazala, da funkcija deluje kot majhen stroj, ki prejme ime, preveri starost in vrne, ali udeleženec sodeluje v projektu.\n--- {naziv: 'Projektna vsebina: **Mestna knjižnica**', opis: 'Nevtralna vsebina z *zvezdicami* in https://primer.si/novica', vrednosti: ['Polnjenje 40 %', 'Globina 2,1 m', 'Delež 0,27'], oseba: 'Izmišljena oseba: Marko Petek', projekt: 'Nevtralna testna vsebina'} # Fragment 2: knjižnica\n$\\lim_{\\theta \\to 0} \\frac{\\alpha \\theta}{\\theta} = \\alpha_{\\text{Nina projekt Most}}$\n```\n# Fragment 1: testni zapis *Zvezda* (neodvisen)\necho 'Niz: **poudarek** in _podčrtano_ (oklepaji)'\necho 'Valuta: 5 $ in 3 € za izmišljen projekt'\necho 'Poti: src/modul.py in docs/vir.txt'\necho 'Znak: backquote `test` in URL https://primer.si/koda'\necho 'Id: seStez, razdelek2, HRAŠNA_VREDNOST'\necho 'Slovenski znaki: č š ž'\n```\n```\n# Testni projekt: Povzetek; avtor: Maja Lipovnik\nnaslov = 'Povzetek: **pomembno** in *poudarek*'\npot = 'docs/vir.txt'\ncena = '20 $ (čisto test)'\nif naslov:\n    print('Konec')\n```\nProjekt *Maja* shrani _razmik_ 4 metre.\nPri urejanju hiše pomaga, če ob jutru hitro preverimo, kje je največji nered, in si izberemo le eno majhno nalogo. Ana je v projektu Čist dom zapisala, da je bolje pet minut brisanja mize kot ure razmišljanja. (Sicer pa raje odpreš okno, če je miza že svetla.)",
+ "components": [
+  {
+   "component_id": "comp-prose-programming-explainer-dev-0007",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 292
+  },
+  {
+   "component_id": "comp-structured-yaml-dev-0002",
+   "category": "structured",
+   "start_byte": 293,
+   "end_byte": 584
+  },
+  {
+   "component_id": "comp-math-inline-dollar-dev-0007",
+   "category": "math",
+   "start_byte": 585,
+   "end_byte": 671
+  },
+  {
+   "component_id": "comp-code-shell-bash-dev-0001",
+   "category": "code",
+   "start_byte": 672,
+   "end_byte": 1011
+  },
+  {
+   "component_id": "comp-code-python-dev-0008",
+   "category": "code",
+   "start_byte": 1012,
+   "end_byte": 1195
+  },
+  {
+   "component_id": "comp-markdown-emphasis-dev-0008",
+   "category": "markdown",
+   "start_byte": 1196,
+   "end_byte": 1235
+  },
+  {
+   "component_id": "comp-prose-everyday-advice-dev-0001",
+   "category": "prose",
+   "start_byte": 1236,
+   "end_byte": 1504
+  }
+ ]
+}

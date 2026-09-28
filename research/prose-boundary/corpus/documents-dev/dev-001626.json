@@ -1,0 +1,41 @@
+{
+ "doc_id": "dev-001626",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T10-randomized",
+ "byte_length": 1014,
+ "cp_length": 997,
+ "sha256": "30e3c770b13708603bb2c06714a61777e75801f426aada54ebcad12294afcd71",
+ "document": "Slovenska pesniška tradicija ima svojo tišino. V izmišljenem projektu Glas in tišina, ki raziskuje naravno, se pojavi motiv dreves. Izmišljena pesnica Anja Horvat v zbirki iz leta 2015 piše: »Drevo ne govori, a se v šumu zdi, da je vprašanje.« Ta stavek se v evropskem kontekstu pogosto pojavi kot znak identitete.\n[kmetija]\nime = *Projekt Polja*\nopis = _delež_ 18 %\nobdobje = 7 mesecev\navtor = Jaka Horvat\nvir = https://primer.si/novica\n; nevtralna testna vsebina\n[hrana]\nimenik = 'Jajčevca'\nkuhar = 'Nina Perko'\nprostornina = '0,5 l'\nsol = '2 g'\nopis = '_Priprava_ za *novico*'\nvir = 'https://primer.si/novica'\nPROJEKT_IME=Siv_Jablan, ${PROJEKT_IME}\nProjektna skupina je v juliju 2025 preverila tok podatkov med občino in zavodom za upravne storitve. V notranji opombi je stalo: »Dva koraka manj, dva dneja hitreje.« V eni od vlog, ki je vsebovala dve prilogi, je manjkala podpisana izjava. To so uredili v petih dneh. (Rezultat je bila večja preglednost in tudi večje zadovoljstvo uporabnikov.)",
+ "components": [
+  {
+   "component_id": "comp-prose-literature-dev-0008",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 324
+  },
+  {
+   "component_id": "comp-structured-ini-dev-0004",
+   "category": "structured",
+   "start_byte": 325,
+   "end_byte": 475
+  },
+  {
+   "component_id": "comp-structured-toml-dev-0006",
+   "category": "structured",
+   "start_byte": 476,
+   "end_byte": 624
+  },
+  {
+   "component_id": "comp-machine-env-vars-dev-0006",
+   "category": "machine",
+   "start_byte": 625,
+   "end_byte": 663
+  },
+  {
+   "component_id": "comp-prose-administration-dev-0005",
+   "category": "prose",
+   "start_byte": 664,
+   "end_byte": 1014
+  }
+ ]
+}

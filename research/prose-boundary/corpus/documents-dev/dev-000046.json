@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-000046",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T3-prose-fenced-prose",
+ "byte_length": 671,
+ "cp_length": 661,
+ "sha256": "5b25d8b09cec603bfe71f91e6bd9bf19b6aa23784a7e9c7056819f91d993e758",
+ "document": "Pri projektu Mladinski tabor 2023 je voditelj Anže zabeležil blage glavobole. Včasih pomaga mirna soba in hladna krpa. Če se pojavijo z bruhanjem ali motnjami vidu, je treba takoj poklicati zdravnika. To je zgolj testno opozorilo.\n```\n# Testni projekt: Nabavna lista; avtor: Maja Lipovnik\ncena = 12.50\nznesek = 'Cena: 12,50 $ v oklepaju (brez DDV)'\npot = 'docs/vir.txt'\nkomentar = 'Slovenski č, š, ž'\nif cena > 10:\n    print('Visok znesek')\n```\nV okviru projekta Reka je bila jeklena konstrukcija obnašala stabilno, tudi po močnem pihu. Most je bil dolg 412 metrov. Nosilci so bili premazani z epoksi premazom. Vetrovna obremenitev je bila izračunana za 30 let.",
+ "components": [
+  {
+   "component_id": "comp-prose-medicine-explainer-dev-0013",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 234
+  },
+  {
+   "component_id": "comp-code-python-dev-0002",
+   "category": "code",
+   "start_byte": 235,
+   "end_byte": 451
+  },
+  {
+   "component_id": "comp-prose-engineering-dev-0003",
+   "category": "prose",
+   "start_byte": 452,
+   "end_byte": 671
+  }
+ ]
+}

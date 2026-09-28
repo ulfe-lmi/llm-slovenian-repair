@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-001318",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T10-randomized",
+ "byte_length": 952,
+ "cp_length": 933,
+ "sha256": "576da1a8ee69d3c6c7627228dc44d165f994c0ec49e41c26dc66edc78bd83c7b",
+ "document": "Nekateri gradbeniki (zlasti tisti, ki so sodelovali pri obnovi stolpa Vrt) menijo, da so materiali, ki dolgoročno ohranjajo obliko, prijaznejši za vzdrževanje. Ta pogled, ki ga dokumenti imenujejo mehka vzdržljivost, velja tudi za podporno konstrukcijo in za ojačitve, ki jih je leta 2018 opisala projektna skupina Podravska.\n```\n/* Fragment 2: fiktna oseba Ana, pot docs/vir.txt, vir https://primer.si/koda */ struct Vnos { std::string naziv; double znesek; }; const int razdelek2 = 2; const Vnos seStez{ \"*Nova* šola 3 $ `kod`\", 2.5 }; const Vnos vzorci[2] = { {\"črtasti vzorec (š)\", 4.0}, {\"_dokument_\", 5.0} };\n```\nMaja iz Maribora je za tečaj pogovorne angleščine pripravila delavnice, pri katerih so se udeleženci sami odločili, ali znanje dokazujejo s pisnim delom ali s kratkim posnetim predavanjem. Pri vprašanju “kako oceniti napredek” so se dogovorili, da udeležencem (predvsem zaposlenim) velja tudi dnevnik samopregleda.",
+ "components": [
+  {
+   "component_id": "comp-prose-engineering-dev-0013",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 330
+  },
+  {
+   "component_id": "comp-code-cpp-dev-0010",
+   "category": "code",
+   "start_byte": 331,
+   "end_byte": 626
+  },
+  {
+   "component_id": "comp-prose-education-dev-0007",
+   "category": "prose",
+   "start_byte": 627,
+   "end_byte": 952
+  }
+ ]
+}

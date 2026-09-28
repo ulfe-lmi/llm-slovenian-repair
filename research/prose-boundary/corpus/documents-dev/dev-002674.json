@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-002674",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T2-prose-math-prose",
+ "byte_length": 671,
+ "cp_length": 658,
+ "sha256": "ace19783c23fe7017722b78e5dbb3209dbf669c9866274b82a4c2fb46167da71",
+ "document": "Ana in Marko sta ob nedelji zjutraj kolesarila po obrežju. „Koleginja,“ jo je spodbujal, „v naslednji uri bomo poskušali rahlo strmoviti.“\n\\begin{align} \\alpha_2(\\text{Lipa}) &= \\beta_2 + \\gamma_2 \\\\ \\delta_2 &= \\epsilon_2 \\cdot \\zeta_2 \\\\ \\eta_2 &= \\theta_2 \\times \\lambda_2 \\end{align}\nV projektu Gorski dnevnik je Anja pojasnila, da spremenljivka deluje kot imenovana skrinjica, v kateri hranimo eno vrednost. Ko je program ponavljal preverjanje vremenskih podatkov, je zanka pretekle dni v vrsti in ohranila le najhladnejše. Funkcija, ki je izračunala povprečje, je bila kot majhno orodje, saj so jo znali poklicati vedno znova brez ponavljanja besedila.",
+ "components": [
+  {
+   "component_id": "comp-prose-sports-dev-0009",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 148
+  },
+  {
+   "component_id": "comp-math-align-env-dev-0002",
+   "category": "math",
+   "start_byte": 149,
+   "end_byte": 297
+  },
+  {
+   "component_id": "comp-prose-programming-explainer-dev-0011",
+   "category": "prose",
+   "start_byte": 298,
+   "end_byte": 671
+  }
+ ]
+}

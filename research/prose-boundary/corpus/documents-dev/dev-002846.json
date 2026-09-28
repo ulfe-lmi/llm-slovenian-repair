@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-002846",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T9-prose-malformed-prose",
+ "byte_length": 617,
+ "cp_length": 602,
+ "sha256": "32134bb15d0333c3883ff564fa1621defe4a678614f6c1376fc52f848b60ab31",
+ "document": "V projektu Podgorska steza je spajalec Matej Vidmar najprej preveril zavaritve nosilnih elementov. Material je bil iz jekla S355. Pri presoji je, kakor navaja dnevnik, uporabil digitalni merilnik debeline. »Ni vse v redu, če je površina preveč obrabljena,« je opozoril. Na koncu je ekipa odobrila nadaljnjo uporabo.\n$$z=3. Ivan Hrib preverja projekt Senca.\nKratki nasvet: krpo za pregrco namakaj v mrzli vodi in jo potem stisni, da pregrca ne pusti madežev. (Sredstvo iz stekleničke s štopalko je morda dražje, a zadošča za večkrat.) Če želiš manj smeti, steklenice operi in jih odnesi v zbirni center.",
+ "components": [
+  {
+   "component_id": "comp-prose-engineering-dev-0010",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 320
+  },
+  {
+   "component_id": "comp-malformed-incomplete-display-dollar-dev-0003",
+   "category": "malformed",
+   "start_byte": 321,
+   "end_byte": 361
+  },
+  {
+   "component_id": "comp-prose-everyday-advice-dev-0008",
+   "category": "prose",
+   "start_byte": 362,
+   "end_byte": 617
+  }
+ ]
+}

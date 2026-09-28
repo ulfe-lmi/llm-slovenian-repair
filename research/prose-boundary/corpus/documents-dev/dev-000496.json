@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-000496",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T2-prose-math-prose",
+ "byte_length": 722,
+ "cp_length": 702,
+ "sha256": "1f90a82c2a758df603a4f58dbd45e12514123aa80015fbbecd0e254a98cdd4d7",
+ "document": "Pri urejanju hiše pomaga, če ob jutru hitro preverimo, kje je največji nered, in si izberemo le eno majhno nalogo. Ana je v projektu Čist dom zapisala, da je bolje pet minut brisanja mize kot ure razmišljanja. (Sicer pa raje odpreš okno, če je miza že svetla.)\n\\begin{equation} \\text{Testni projekt Bine} \\; : \\; \\exp(\\ln \\alpha_2)=\\alpha_2 \\Rightarrow \\alpha_2=\\exp(\\ln 5) \\Rightarrow \\alpha_2=5 \\end{equation}\nV letu 2021, po natančnem pregledu, so v projektu Ptičji kotel preverili, da je povprečna dolžina poti do šole znašala 2,4 kilometra, medtem ko so trije učenci hodili dlje in štirje krajše. To pomeni, da razmerje med krajšimi in daljšimi potmi ni enako, čeprav so posamezne vrednosti blizu.",
+ "components": [
+  {
+   "component_id": "comp-prose-everyday-advice-dev-0001",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 268
+  },
+  {
+   "component_id": "comp-math-equation-env-dev-0002",
+   "category": "math",
+   "start_byte": 269,
+   "end_byte": 419
+  },
+  {
+   "component_id": "comp-prose-statistics-dev-0009",
+   "category": "prose",
+   "start_byte": 420,
+   "end_byte": 722
+  }
+ ]
+}

@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-001052",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T8-quote-fenced",
+ "byte_length": 534,
+ "cp_length": 519,
+ "sha256": "eac4b9aeacdd8afb84b52bebac75bda0fdf1ff2c28f6c1bd035251c5f2b38658",
+ "document": "> V projektu Prvi tok, ki ga je leta 2018 sestavila Ana, se je naučila, da mora biti sklep zaprt, da se lučka sploh prižge. Baterija, ki je imela 4,5 V, je bila nameščena v držač, medtem ko je upornost zaščitila diodo pred prevelikim tokom. (Zelo pomembno je preveriti, ali so vsi konci dobro povezani.) `// Drugi neodvisni del (č, š, ž)`\n```\n/* Preveri imenik (č, š, ž): src/modul.py in docs/vir.txt */ function opis(ime) { const tekst = `Ime: **${ime}**`; return tekst + ' - *opomba*'; } console.log(opis('Ana'));\n```",
+ "components": [
+  {
+   "component_id": "comp-prose-electronics-dev-0006",
+   "category": "prose",
+   "start_byte": 2,
+   "end_byte": 312
+  },
+  {
+   "component_id": "comp-code-javascript-dev-0010",
+   "category": "code",
+   "start_byte": 313,
+   "end_byte": 350
+  },
+  {
+   "component_id": "comp-code-javascript-dev-0007",
+   "category": "code",
+   "start_byte": 351,
+   "end_byte": 534
+  }
+ ]
+}

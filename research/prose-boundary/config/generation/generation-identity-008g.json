@@ -1,0 +1,1065 @@
+{
+ "schema": "008g-generation-identity/1",
+ "order": "008-g",
+ "status": "COMPLETE",
+ "purpose": "structural test-data generation for the v2 hidden acceptance set (human decision 2026-09-17; 008-g order requirement 2); NOT linguistic-method tuning; NOT objective-009 data; no new naturalistic whole-response generation",
+ "assembly_note": "the in-process identity write of the original generation run did not execute (the run exited on the zero-exact-component-overlap assertion before it); this identity was assembled after the bounded recovery from durable state (component files, generation receipts, preflight receipt, recovery receipts); the recovery is disclosed in 'reruns'",
+ "prompt_library_sha256": "904dd36b9891c567f250bf8b42b374d0b6557aa79ca3fcaa3c8824682fcc8fef",
+ "frozen_driver_sha256": "7050b2254ca14ffbfbe70ca06bd0674724a867debea124966cd56e834ed9cd45",
+ "driver_reuse": "committed 008-c generation_driver.py imported unmodified (Endpoint, make_request, fragment_violations, guards); frozen prompt library verbatim ({K} substitution only); scratch orchestration outside the repository (disclosed)",
+ "batch_plan": {
+  "rule": "all 76 families in library file order; base [4] per family; densified defect-shape families structured-yaml, structured-xml, malformed-partial-html use [8, 8]",
+  "base_batch": [
+   4
+  ],
+  "densified": {
+   "structured-yaml": [
+    8,
+    8
+   ],
+   "structured-xml": [
+    8,
+    8
+   ],
+   "malformed-partial-html": [
+    8,
+    8
+   ]
+  },
+  "nominal_component_calls": 79,
+  "nominal_component_slots": 340,
+  "instance_tag": "v2",
+  "fragment_id_scheme": "comp-<category>-<family>-v2-<seq:04d> in frozen batch order"
+ },
+ "seeds": {
+  "family_seeds": {
+   "prose-science": "94342b9eb03da19c",
+   "prose-history": "a12de2e2dc98d8d4",
+   "prose-everyday-advice": "35f578436a732d9f",
+   "prose-computing": "801f40fa80e65030",
+   "prose-cooking": "dfc2bb42a5db4d44",
+   "prose-travel": "00f5e7511562f22d",
+   "prose-education": "f86388c0db8d7a52",
+   "prose-engineering": "b135dbff2786852f",
+   "prose-medicine-explainer": "93539267aa80685c",
+   "prose-sports": "5442b7f7a5f3dce0",
+   "prose-literature": "57ac0b6fd0ede75c",
+   "prose-administration": "8d67eb22dbc994a7",
+   "prose-statistics": "b5e378b21a22f171",
+   "prose-math-explainer": "a181f6f21400a39a",
+   "prose-electronics": "27ccf7345dc932c5",
+   "prose-programming-explainer": "bdd44eeb39bb88dc",
+   "code-python": "44af3d69a405c8e1",
+   "code-c": "4105ed5fff07d629",
+   "code-cpp": "4a7c0ca52854fa15",
+   "code-javascript": "c838376e3d14b6dc",
+   "code-shell-bash": "74880ad141742e6c",
+   "code-sql": "7e0275e38d4f8415",
+   "code-rust": "ad386e024585bfbb",
+   "structured-json": "835e475881eb19b1",
+   "structured-yaml": "a21de4041a765df1",
+   "structured-toml": "8381a71276a72f4d",
+   "structured-xml": "3d848accc1c521ba",
+   "structured-html": "ea5eaede099b8269",
+   "structured-ini": "ffcfe143778b3790",
+   "structured-env-blocks": "de494edd2d387746",
+   "structured-keyvalue": "92fb77e253f46e8d",
+   "math-inline-dollar": "b49393a78b837f4b",
+   "math-display-dollar": "eca77055f0816eaa",
+   "math-paren-tex": "ba260b364ea2a59d",
+   "math-bracket-tex": "03ffd3ab5819aa8a",
+   "math-equation-env": "7e54cc943c1365c8",
+   "math-align-env": "b17bfc643bfecc8a",
+   "math-aligned-env": "af10693d78ead6df",
+   "math-matrices": "64e577b65c6af4b8",
+   "math-fractions": "fc610c026d2d6137",
+   "math-summations": "460339ee26663e3b",
+   "math-probability": "0f54cf2f20b18c51",
+   "math-text-slovenian": "f02878168776ee0d",
+   "md-headings": "b5620efce23f11d1",
+   "md-emphasis": "f221c17891486e21",
+   "md-strong": "aa153da2f8705373",
+   "md-strikethrough": "866f4a268be96f5a",
+   "md-lists": "06dc12815896f5fe",
+   "md-blockquotes": "83cc53afe719d773",
+   "md-tables": "64ecb6cfa6bb8666",
+   "md-links": "9e208b4f223f25e9",
+   "md-images": "0fbb7f87fe988886",
+   "md-autolinks": "8432bf1499ec3e81",
+   "md-inline-code": "dd644a3e810f8dcf",
+   "md-fenced-code": "d587cd3ee143a25c",
+   "md-raw-html": "ad17763bd64f4ac2",
+   "machine-posix-paths": "29cd4babc61894a5",
+   "machine-windows-paths": "0bba0d61ae88d13b",
+   "machine-shell-commands": "28a4314140381867",
+   "machine-cli-flags": "313cc64d891b3330",
+   "machine-env-vars": "c71c7f91b6be9ba8",
+   "machine-filenames": "7d1661cd11c091bc",
+   "machine-urls": "52737b0f17cfe29d",
+   "machine-emails": "7bff999ef456cb77",
+   "machine-identifiers": "8c41f1b5ca5a206c",
+   "machine-versions-numbers-units": "e0736f7f20110551",
+   "malformed-unclosed-fence": "abead2419480025a",
+   "malformed-unmatched-backtick": "36d72550f78c093c",
+   "malformed-unmatched-dollar": "e31ad633a23be45f",
+   "malformed-incomplete-display-dollar": "2977de76dd3325c9",
+   "malformed-incomplete-paren-bracket": "8ce86697f0126ea7",
+   "malformed-unclosed-tex-env": "57036ba5e7d9e064",
+   "malformed-broken-link": "c065622942c24140",
+   "malformed-partial-html": "cb5f6d4ea1e6a1f3",
+   "malformed-truncated-json": "6d8ababaa15fcd4a",
+   "malformed-malformed-nesting": "93eb2cf7418c002e"
+  },
+  "note": "fresh 008-g per-family seed stream, independent of the 008-c dev/hidden streams (recorded in the record itself; the four recovered families carry their recovery seeds, disclosed in 'reruns'); the v2 mashup seed is recorded in hidden-manifest-v2.json at composition time"
+ },
+ "generator": {
+  "endpoint": "private research endpoint identity omitted (007 convention)",
+  "deployment_class": "A100-FP8 (007 lineage deployment record)",
+  "model": "qwen3.8-27b",
+  "protocol": "Responses non-streaming",
+  "profile_sha256": "510c3394d2ccad8a098660b8b5512d338de0a5b77352ec693d2286ee2223723c",
+  "credential_source": "profile experimental_bearer_token (read as data; never printed/persisted/hashed/committed)",
+  "workers": 1,
+  "timeout_seconds": 300,
+  "parameter_note": "frozen 008-c request shape reused exactly (model/stream/store/input only); the endpoint's own sampling defaults applied (same recorded driver-fidelity gap as 008-c); the four recovered families used the identical request shape with K=8 (disclosed in 'reruns')"
+ },
+ "preflight": {
+  "call_index": 1,
+  "stage": "preflight",
+  "status": "ok",
+  "model": "qwen3.8-27b",
+  "response_sha256": "db8b8e836881534b3e62cf633db64f28af421e09feaae85bd3f3249912053c65"
+ },
+ "budget": {
+  "nominal_component_calls": 79,
+  "component_calls": 81,
+  "retries": 2,
+  "failed_batches": 2,
+  "retry_failures": 0,
+  "total_http_attempts": 82,
+  "diagnostic_probe_calls": 7,
+  "diagnostic_probe_note": "bounded pre-recovery K=4/K=8 probes (2 x K=4, 5 x K=8) that established model value-space saturation; in-memory diagnostics without durable receipts, counted here for completeness, not part of the recovery run",
+  "recovery_preflight": 1,
+  "recovery_component_calls": 5,
+  "recovery_retries": 0,
+  "note": "component_calls counts every component-slot HTTP attempt of the original run (79 successful batches + 2 failed-then-retried batches); total_http_attempts includes the original preflight; recovery calls are counted separately: 1 recovery preflight + 5 K=8 recovery rounds (2+1+1+1) across the four affected families, zero recovery retries; authorized model use classes: component generation (test-data) and these disclosed recovery/probe calls of the same class"
+ },
+ "failures": [
+  {
+   "stage": "component",
+   "family": "malformed-truncated-json",
+   "instance": "v2",
+   "batch": 0,
+   "error": "response is not a JSON array of exactly K strings"
+  },
+  {
+   "stage": "component",
+   "family": "prose-statistics",
+   "instance": "v2",
+   "batch": 0,
+   "error": "response is not a JSON array of exactly K strings"
+  }
+ ],
+ "components": {
+  "total": 340,
+  "families": 76,
+  "by_family": {
+   "prose-science": {
+    "category": "prose",
+    "components": 4,
+    "file": "components/prose/prose-science.json",
+    "file_sha256": "f98c47131c4387659554d19d6999f93d42d4ee232273544c8f97b8d82bcd1c6e",
+    "file_bytes": 2100,
+    "batches": [
+     4
+    ],
+    "seed": "94342b9eb03da19c"
+   },
+   "prose-history": {
+    "category": "prose",
+    "components": 4,
+    "file": "components/prose/prose-history.json",
+    "file_sha256": "64a38581f546acc37c94c98a7a293667600385b033d342af60b73c8a3fe9115c",
+    "file_bytes": 2751,
+    "batches": [
+     4
+    ],
+    "seed": "a12de2e2dc98d8d4"
+   },
+   "prose-everyday-advice": {
+    "category": "prose",
+    "components": 4,
+    "file": "components/prose/prose-everyday-advice.json",
+    "file_sha256": "f4f6101b2c2962a31c2cc4bfc68dcb698683e8febeebaefa39183abb7c0e1579",
+    "file_bytes": 2335,
+    "batches": [
+     4
+    ],
+    "seed": "35f578436a732d9f"
+   },
+   "prose-computing": {
+    "category": "prose",
+    "components": 4,
+    "file": "components/prose/prose-computing.json",
+    "file_sha256": "7d97cec4f1e5de32c1a2092d0c28cde7a444a471592a6a01b671309db95a39ad",
+    "file_bytes": 2830,
+    "batches": [
+     4
+    ],
+    "seed": "801f40fa80e65030"
+   },
+   "prose-cooking": {
+    "category": "prose",
+    "components": 4,
+    "file": "components/prose/prose-cooking.json",
+    "file_sha256": "e61f845955f0e9ba67aaae61b63689d767e0a277e9ad6e4f1c9a2b934eee97a7",
+    "file_bytes": 2282,
+    "batches": [
+     4
+    ],
+    "seed": "dfc2bb42a5db4d44"
+   },
+   "prose-travel": {
+    "category": "prose",
+    "components": 4,
+    "file": "components/prose/prose-travel.json",
+    "file_sha256": "cdd6e99b25f567a5f8f14c718e13755bc6d1f91d3e138bf0b361fa1e5dd0817d",
+    "file_bytes": 2650,
+    "batches": [
+     4
+    ],
+    "seed": "00f5e7511562f22d"
+   },
+   "prose-education": {
+    "category": "prose",
+    "components": 4,
+    "file": "components/prose/prose-education.json",
+    "file_sha256": "52065b58cc46e42bb924caf5da49db468b9621d6db5a9f473d753caec0ddb7d3",
+    "file_bytes": 2582,
+    "batches": [
+     4
+    ],
+    "seed": "f86388c0db8d7a52"
+   },
+   "prose-engineering": {
+    "category": "prose",
+    "components": 4,
+    "file": "components/prose/prose-engineering.json",
+    "file_sha256": "0f992f89cfb71b16d44f18157133a250b4ec3a18e5f55e69f3c995ab206dc85d",
+    "file_bytes": 2548,
+    "batches": [
+     4
+    ],
+    "seed": "b135dbff2786852f"
+   },
+   "prose-medicine-explainer": {
+    "category": "prose",
+    "components": 4,
+    "file": "components/prose/prose-medicine-explainer.json",
+    "file_sha256": "755dc79a26729e03bb34c0a608395b5723b0687dc31625af247750894f2d35a0",
+    "file_bytes": 2541,
+    "batches": [
+     4
+    ],
+    "seed": "93539267aa80685c"
+   },
+   "prose-sports": {
+    "category": "prose",
+    "components": 4,
+    "file": "components/prose/prose-sports.json",
+    "file_sha256": "34cee80eb365a401bcc1db09d0bd74e318485026a10ee1fbfff3c7800f53de08",
+    "file_bytes": 2466,
+    "batches": [
+     4
+    ],
+    "seed": "5442b7f7a5f3dce0"
+   },
+   "prose-literature": {
+    "category": "prose",
+    "components": 4,
+    "file": "components/prose/prose-literature.json",
+    "file_sha256": "681c4eb9607fa33bd9a013c45fe2e03f07795a9bf92bbbf83b66cd69961ae653",
+    "file_bytes": 2373,
+    "batches": [
+     4
+    ],
+    "seed": "57ac0b6fd0ede75c"
+   },
+   "prose-administration": {
+    "category": "prose",
+    "components": 4,
+    "file": "components/prose/prose-administration.json",
+    "file_sha256": "9267badb3357fcf0242e05c797bad638dde37a62dce6f0e90cb8fcbb00ddf3dc",
+    "file_bytes": 2631,
+    "batches": [
+     4
+    ],
+    "seed": "8d67eb22dbc994a7"
+   },
+   "prose-statistics": {
+    "category": "prose",
+    "components": 4,
+    "file": "components/prose/prose-statistics.json",
+    "file_sha256": "64f45657aa8337cd664d708f6c1cc4b64556f6a1464ae9ed3b653d752e6d569d",
+    "file_bytes": 2759,
+    "batches": [
+     4
+    ],
+    "seed": "b5e378b21a22f171"
+   },
+   "prose-math-explainer": {
+    "category": "prose",
+    "components": 4,
+    "file": "components/prose/prose-math-explainer.json",
+    "file_sha256": "95917b32faec9d4e93ab7621f339d4039ec31e757f0ff0d7cbc5ad85f7129a59",
+    "file_bytes": 2733,
+    "batches": [
+     4
+    ],
+    "seed": "a181f6f21400a39a"
+   },
+   "prose-electronics": {
+    "category": "prose",
+    "components": 4,
+    "file": "components/prose/prose-electronics.json",
+    "file_sha256": "61bbc8d92b98fcb7bf1ee6e13ebf631f540f0ccd6415e7ffd17b906fd521702d",
+    "file_bytes": 2481,
+    "batches": [
+     4
+    ],
+    "seed": "27ccf7345dc932c5"
+   },
+   "prose-programming-explainer": {
+    "category": "prose",
+    "components": 4,
+    "file": "components/prose/prose-programming-explainer.json",
+    "file_sha256": "4104171a253d070c6d174e2454b60c531be3bf47bae1058dadc08c80ea6430b0",
+    "file_bytes": 2658,
+    "batches": [
+     4
+    ],
+    "seed": "bdd44eeb39bb88dc"
+   },
+   "code-python": {
+    "category": "code",
+    "components": 4,
+    "file": "components/code/code-python.json",
+    "file_sha256": "1c392b65c20623e5c40d94d77f6715a42cfa72a5434409df6623e59f7cdd957a",
+    "file_bytes": 2207,
+    "batches": [
+     4
+    ],
+    "seed": "44af3d69a405c8e1"
+   },
+   "code-c": {
+    "category": "code",
+    "components": 4,
+    "file": "components/code/code-c.json",
+    "file_sha256": "7bf3c30122b23ccb062752078fb9d56820faa164ef3de47e05c92c8647d1d00d",
+    "file_bytes": 1993,
+    "batches": [
+     4
+    ],
+    "seed": "4105ed5fff07d629"
+   },
+   "code-cpp": {
+    "category": "code",
+    "components": 4,
+    "file": "components/code/code-cpp.json",
+    "file_sha256": "d22279644136f00ef7cdbe1da4a456b46ef55d14889e72e4711956c7b367a44c",
+    "file_bytes": 2373,
+    "batches": [
+     4
+    ],
+    "seed": "4a7c0ca52854fa15"
+   },
+   "code-javascript": {
+    "category": "code",
+    "components": 4,
+    "file": "components/code/code-javascript.json",
+    "file_sha256": "a5533e38c255117e175b232b0edd4f43a2eeba8a8e196ce50913e775ef73539c",
+    "file_bytes": 2328,
+    "batches": [
+     4
+    ],
+    "seed": "c838376e3d14b6dc"
+   },
+   "code-shell-bash": {
+    "category": "code",
+    "components": 4,
+    "file": "components/code/code-shell-bash.json",
+    "file_sha256": "e7530c390831b7fcb93947301ce118bc2fe08932b5a79681b626da1db4b5edef",
+    "file_bytes": 2889,
+    "batches": [
+     4
+    ],
+    "seed": "74880ad141742e6c"
+   },
+   "code-sql": {
+    "category": "code",
+    "components": 4,
+    "file": "components/code/code-sql.json",
+    "file_sha256": "dd185b8f7f047d6bdb6c62062f75bc758bef1cece46b39f6a0089c27fdc72582",
+    "file_bytes": 2713,
+    "batches": [
+     4
+    ],
+    "seed": "7e0275e38d4f8415"
+   },
+   "code-rust": {
+    "category": "code",
+    "components": 4,
+    "file": "components/code/code-rust.json",
+    "file_sha256": "c1ecfb83079edd3192c86626702c5e6a1c29bd79c1608ec0ca03959d57edec69",
+    "file_bytes": 3174,
+    "batches": [
+     4
+    ],
+    "seed": "ad386e024585bfbb"
+   },
+   "structured-json": {
+    "category": "structured",
+    "components": 4,
+    "file": "components/structured/structured-json.json",
+    "file_sha256": "783dc8aa344068ad0ee9e49a1c14d1cca013f831bff04f87a7e8c81786bf11a1",
+    "file_bytes": 2578,
+    "batches": [
+     4
+    ],
+    "seed": "835e475881eb19b1"
+   },
+   "structured-yaml": {
+    "category": "structured",
+    "components": 16,
+    "file": "components/structured/structured-yaml.json",
+    "file_sha256": "d8dea78563449d000b05b2f9547278f3a4732aad409942e7dbb7aeacb87d1249",
+    "file_bytes": 8570,
+    "batches": [
+     8,
+     8
+    ],
+    "seed": "a21de4041a765df1"
+   },
+   "structured-toml": {
+    "category": "structured",
+    "components": 4,
+    "file": "components/structured/structured-toml.json",
+    "file_sha256": "76a4a6c13b36999265934c9b54f9272d58e526cfd67ded0780d89fe10db6a758",
+    "file_bytes": 2183,
+    "batches": [
+     4
+    ],
+    "seed": "8381a71276a72f4d"
+   },
+   "structured-xml": {
+    "category": "structured",
+    "components": 16,
+    "file": "components/structured/structured-xml.json",
+    "file_sha256": "da6d1dc2173edbd4fd511ecccf155e867c3232f7caebb7a176462a035d7011ce",
+    "file_bytes": 8168,
+    "batches": [
+     8,
+     8
+    ],
+    "seed": "3d848accc1c521ba"
+   },
+   "structured-html": {
+    "category": "structured",
+    "components": 4,
+    "file": "components/structured/structured-html.json",
+    "file_sha256": "b34e6036d24012c5a61256f7012bcd9029793abc7ee1c36a739d26427881d1d6",
+    "file_bytes": 2028,
+    "batches": [
+     4
+    ],
+    "seed": "ea5eaede099b8269"
+   },
+   "structured-ini": {
+    "category": "structured",
+    "components": 4,
+    "file": "components/structured/structured-ini.json",
+    "file_sha256": "f6748531bc64ae01de2fcbc24b0a59c34252417fffb23c3bd55eacbced98fbb2",
+    "file_bytes": 1888,
+    "batches": [
+     4
+    ],
+    "seed": "ffcfe143778b3790"
+   },
+   "structured-env-blocks": {
+    "category": "structured",
+    "components": 4,
+    "file": "components/structured/structured-env-blocks.json",
+    "file_sha256": "854a6593d3fbdef80eee133afb5e9f5a7f3d86b6d7612c4c63952bc5b56d98bb",
+    "file_bytes": 1993,
+    "batches": [
+     4
+    ],
+    "seed": "de494edd2d387746"
+   },
+   "structured-keyvalue": {
+    "category": "structured",
+    "components": 4,
+    "file": "components/structured/structured-keyvalue.json",
+    "file_sha256": "d502445c883a8a2d557bf754474fa722b040edd6168d4d8e57814d85d10849a0",
+    "file_bytes": 1901,
+    "batches": [
+     4
+    ],
+    "seed": "92fb77e253f46e8d"
+   },
+   "math-inline-dollar": {
+    "category": "math",
+    "components": 4,
+    "file": "components/math/math-inline-dollar.json",
+    "file_sha256": "2d985c3f946cbd38c17732f3c59fe5089690860afec56b8ca360939beb2a5d94",
+    "file_bytes": 1620,
+    "batches": [
+     4
+    ],
+    "seed": "b49393a78b837f4b"
+   },
+   "math-display-dollar": {
+    "category": "math",
+    "components": 4,
+    "file": "components/math/math-display-dollar.json",
+    "file_sha256": "3fad230cdef130572a91290aae0c906d873427d1c1130b73385a5e829a9b2252",
+    "file_bytes": 2008,
+    "batches": [
+     4
+    ],
+    "seed": "eca77055f0816eaa"
+   },
+   "math-paren-tex": {
+    "category": "math",
+    "components": 4,
+    "file": "components/math/math-paren-tex.json",
+    "file_sha256": "7c8151fcaf96642b5ef3bca82a72bed5a256fc55f4551dea177eeffdee08b31f",
+    "file_bytes": 1692,
+    "batches": [
+     4
+    ],
+    "seed": "ba260b364ea2a59d"
+   },
+   "math-bracket-tex": {
+    "category": "math",
+    "components": 4,
+    "file": "components/math/math-bracket-tex.json",
+    "file_sha256": "1c6c9986225f115a8c48cc47104547e22e232f4692879eebef7b91dcb5c71314",
+    "file_bytes": 1759,
+    "batches": [
+     4
+    ],
+    "seed": "03ffd3ab5819aa8a"
+   },
+   "math-equation-env": {
+    "category": "math",
+    "components": 4,
+    "file": "components/math/math-equation-env.json",
+    "file_sha256": "2e8a168b55e88087b7eec707e9456c98c922b4756f202161aa918b2834f92dfa",
+    "file_bytes": 2233,
+    "batches": [
+     4
+    ],
+    "seed": "7e54cc943c1365c8"
+   },
+   "math-align-env": {
+    "category": "math",
+    "components": 4,
+    "file": "components/math/math-align-env.json",
+    "file_sha256": "545921bea256a52ae3d44f9a07cec829e0c9c2a782ac1aa93e074d1823b12164",
+    "file_bytes": 1774,
+    "batches": [
+     4
+    ],
+    "seed": "b17bfc643bfecc8a"
+   },
+   "math-aligned-env": {
+    "category": "math",
+    "components": 4,
+    "file": "components/math/math-aligned-env.json",
+    "file_sha256": "90c95630dab56993360c4a2349c3c79468843a8919a77b0ddb9a92fbcbf64648",
+    "file_bytes": 1884,
+    "batches": [
+     4
+    ],
+    "seed": "af10693d78ead6df"
+   },
+   "math-matrices": {
+    "category": "math",
+    "components": 4,
+    "file": "components/math/math-matrices.json",
+    "file_sha256": "4c17f0d0baa5ef7ff0701f2b946f5d49b75f247c1af4f3cc7c046308bbf9d294",
+    "file_bytes": 1667,
+    "batches": [
+     4
+    ],
+    "seed": "64e577b65c6af4b8"
+   },
+   "math-fractions": {
+    "category": "math",
+    "components": 4,
+    "file": "components/math/math-fractions.json",
+    "file_sha256": "f8ccf03eec222b2c6744ffe3c2ef1aec2e413c12eaebe0dbefc81498becdc9cc",
+    "file_bytes": 1603,
+    "batches": [
+     4
+    ],
+    "seed": "fc610c026d2d6137"
+   },
+   "math-summations": {
+    "category": "math",
+    "components": 4,
+    "file": "components/math/math-summations.json",
+    "file_sha256": "b1419a5b3fc90e0b7bb799f5d29248e00176c349da8ac893f1fed0af6c613a79",
+    "file_bytes": 1856,
+    "batches": [
+     4
+    ],
+    "seed": "460339ee26663e3b"
+   },
+   "math-probability": {
+    "category": "math",
+    "components": 4,
+    "file": "components/math/math-probability.json",
+    "file_sha256": "bde2e81e21e46c063521ff0896a4d55914a8a949230c567107897a8c1a396538",
+    "file_bytes": 1886,
+    "batches": [
+     4
+    ],
+    "seed": "0f54cf2f20b18c51"
+   },
+   "math-text-slovenian": {
+    "category": "math",
+    "components": 4,
+    "file": "components/math/math-text-slovenian.json",
+    "file_sha256": "d3fc2662c2986725e436aa8a75c65df12fd25f9ccf9c8a5c3013865782b6dee3",
+    "file_bytes": 1720,
+    "batches": [
+     4
+    ],
+    "seed": "f02878168776ee0d"
+   },
+   "md-headings": {
+    "category": "markdown",
+    "components": 4,
+    "file": "components/markdown/md-headings.json",
+    "file_sha256": "f0250834056aaeeaf51b00cb2ccbf9accae6cc8c0e021ef05e48fc5cdd5ed683",
+    "file_bytes": 1592,
+    "batches": [
+     4
+    ],
+    "seed": "b5620efce23f11d1"
+   },
+   "md-emphasis": {
+    "category": "markdown",
+    "components": 4,
+    "file": "components/markdown/md-emphasis.json",
+    "file_sha256": "330d54563f42e851c9c23312753fb90946e42de9e6e192375922752315895f26",
+    "file_bytes": 1734,
+    "batches": [
+     4
+    ],
+    "seed": "f221c17891486e21"
+   },
+   "md-strong": {
+    "category": "markdown",
+    "components": 4,
+    "file": "components/markdown/md-strong.json",
+    "file_sha256": "193d21fc867d1beb1ab6f2966c6f9b1f93c596501f3d170591bb3fd4cf168e80",
+    "file_bytes": 1831,
+    "batches": [
+     4
+    ],
+    "seed": "aa153da2f8705373"
+   },
+   "md-strikethrough": {
+    "category": "markdown",
+    "components": 4,
+    "file": "components/markdown/md-strikethrough.json",
+    "file_sha256": "7b49f5008e907fe574cded0008e3b19bfe2f8e5fc360c60c39e00ce582e26726",
+    "file_bytes": 1815,
+    "batches": [
+     4
+    ],
+    "seed": "866f4a268be96f5a"
+   },
+   "md-lists": {
+    "category": "markdown",
+    "components": 4,
+    "file": "components/markdown/md-lists.json",
+    "file_sha256": "cde3b09257e573f0ac6b0232129569f26bd9e46a54a7b15ee1b4c691621c69e2",
+    "file_bytes": 1602,
+    "batches": [
+     4
+    ],
+    "seed": "06dc12815896f5fe"
+   },
+   "md-blockquotes": {
+    "category": "markdown",
+    "components": 4,
+    "file": "components/markdown/md-blockquotes.json",
+    "file_sha256": "c81d4be02cc6414780445fce79f147922e97db0450694ed2ed9b79aa35eb3c77",
+    "file_bytes": 1739,
+    "batches": [
+     4
+    ],
+    "seed": "83cc53afe719d773"
+   },
+   "md-tables": {
+    "category": "markdown",
+    "components": 4,
+    "file": "components/markdown/md-tables.json",
+    "file_sha256": "782a1dacdebdb2b69ebbc81ee9f890c05c966a7f0aaa03e99ea798904e7117fa",
+    "file_bytes": 1712,
+    "batches": [
+     4
+    ],
+    "seed": "64ecb6cfa6bb8666"
+   },
+   "md-links": {
+    "category": "markdown",
+    "components": 4,
+    "file": "components/markdown/md-links.json",
+    "file_sha256": "a4cad6491a0bcc89d7d7e6a51b8ca46325b0575c5a708d7eb17cc821168c7099",
+    "file_bytes": 2213,
+    "batches": [
+     4
+    ],
+    "seed": "9e208b4f223f25e9"
+   },
+   "md-images": {
+    "category": "markdown",
+    "components": 4,
+    "file": "components/markdown/md-images.json",
+    "file_sha256": "0b16b95a6917a76f32046fb5d3204dba230285e33c292ad7823f739bfe4d2649",
+    "file_bytes": 2122,
+    "batches": [
+     4
+    ],
+    "seed": "0fbb7f87fe988886"
+   },
+   "md-autolinks": {
+    "category": "markdown",
+    "components": 4,
+    "file": "components/markdown/md-autolinks.json",
+    "file_sha256": "9ae0198c5d62a5845eeae102e15166619c697820e6bbaa75e1d8e215fa8fabac",
+    "file_bytes": 2018,
+    "batches": [
+     4
+    ],
+    "seed": "8432bf1499ec3e81"
+   },
+   "md-inline-code": {
+    "category": "markdown",
+    "components": 4,
+    "file": "components/markdown/md-inline-code.json",
+    "file_sha256": "55607c8e679fbf26fe40736ade6642f55f03422f03708917745a5963548b179c",
+    "file_bytes": 1685,
+    "batches": [
+     4
+    ],
+    "seed": "dd644a3e810f8dcf"
+   },
+   "md-fenced-code": {
+    "category": "markdown",
+    "components": 4,
+    "file": "components/markdown/md-fenced-code.json",
+    "file_sha256": "9427665534bc0a7be2682bc2d8f59d896473fb5b17aefb1186e1720c8668a3e6",
+    "file_bytes": 1500,
+    "batches": [
+     4
+    ],
+    "seed": "d587cd3ee143a25c"
+   },
+   "md-raw-html": {
+    "category": "markdown",
+    "components": 4,
+    "file": "components/markdown/md-raw-html.json",
+    "file_sha256": "b8a867961fe2b4053369ab103529efda1c2684f3e6b3665ce25f4752a1d4c789",
+    "file_bytes": 1766,
+    "batches": [
+     4
+    ],
+    "seed": "ad17763bd64f4ac2"
+   },
+   "machine-posix-paths": {
+    "category": "machine",
+    "components": 4,
+    "file": "components/machine/machine-posix-paths.json",
+    "file_sha256": "a9f533e37e24d9d81b423c03d44d12e046bae4566a24ef522dd11e20a7c70717",
+    "file_bytes": 1491,
+    "batches": [
+     4
+    ],
+    "seed": "29cd4babc61894a5"
+   },
+   "machine-windows-paths": {
+    "category": "machine",
+    "components": 4,
+    "file": "components/machine/machine-windows-paths.json",
+    "file_sha256": "78b83d0bbce434b0f0cb1533040dcf4426621b6c68ff22c975b7eccfe5c75476",
+    "file_bytes": 1509,
+    "batches": [
+     4
+    ],
+    "seed": "0bba0d61ae88d13b"
+   },
+   "machine-shell-commands": {
+    "category": "machine",
+    "components": 4,
+    "file": "components/machine/machine-shell-commands.json",
+    "file_sha256": "c55f3a3db58a75e84c4f6da3e1b20496ea3a9ce3fcd494fb820a274dbe25972d",
+    "file_bytes": 1552,
+    "batches": [
+     4
+    ],
+    "seed": "28a4314140381867"
+   },
+   "machine-cli-flags": {
+    "category": "machine",
+    "components": 4,
+    "file": "components/machine/machine-cli-flags.json",
+    "file_sha256": "205a3c88ce45e54d4b875c7de527015b4b68ce911ee5fe9c73944d318ff79cc5",
+    "file_bytes": 1685,
+    "batches": [
+     4
+    ],
+    "seed": "313cc64d891b3330"
+   },
+   "machine-env-vars": {
+    "category": "machine",
+    "components": 4,
+    "file": "components/machine/machine-env-vars.json",
+    "file_sha256": "afbe122a78f6e9245585337a5af9a3b82cabc9af62c0aed3b0d31ceee951fd07",
+    "file_bytes": 1512,
+    "batches": [
+     4
+    ],
+    "seed": "c71c7f91b6be9ba8"
+   },
+   "machine-filenames": {
+    "category": "machine",
+    "components": 4,
+    "file": "components/machine/machine-filenames.json",
+    "file_sha256": "7bed1c5cc023f20bcb3fd2b459d802cbcaa3f65171690aa8129937cec13c1765",
+    "file_bytes": 1540,
+    "batches": [
+     4
+    ],
+    "seed": "7d1661cd11c091bc"
+   },
+   "machine-urls": {
+    "category": "machine",
+    "components": 4,
+    "file": "components/machine/machine-urls.json",
+    "file_sha256": "2891468f7dc6ed511748cf0904261e6505cee28358a38cb7558a76802aad860f",
+    "file_bytes": 1528,
+    "batches": [
+     4
+    ],
+    "seed": "52737b0f17cfe29d"
+   },
+   "machine-emails": {
+    "category": "machine",
+    "components": 4,
+    "file": "components/machine/machine-emails.json",
+    "file_sha256": "8fc062e8ac974ee65d8a023d2467bf94ba34032a1799e7806297421b7accb106",
+    "file_bytes": 1495,
+    "batches": [
+     4
+    ],
+    "seed": "7bff999ef456cb77"
+   },
+   "machine-identifiers": {
+    "category": "machine",
+    "components": 4,
+    "file": "components/machine/machine-identifiers.json",
+    "file_sha256": "77f731df9734512edd4336063319c8357b9e3ee47406f9c364aac724b3eee992",
+    "file_bytes": 1459,
+    "batches": [
+     4
+    ],
+    "seed": "8c41f1b5ca5a206c"
+   },
+   "machine-versions-numbers-units": {
+    "category": "machine",
+    "components": 4,
+    "file": "components/machine/machine-versions-numbers-units.json",
+    "file_sha256": "cae98f9120dcd53b677349de2db0b43b429f8b2b3d820d88e34d175722fa224e",
+    "file_bytes": 1597,
+    "batches": [
+     4
+    ],
+    "seed": "e0736f7f20110551"
+   },
+   "malformed-unclosed-fence": {
+    "category": "malformed",
+    "components": 4,
+    "file": "components/malformed/malformed-unclosed-fence.json",
+    "file_sha256": "914a92a6cf6f876851c8d7901a4e0acf829d36e21c2bbb9b2226dd325936a097",
+    "file_bytes": 1761,
+    "batches": [
+     4
+    ],
+    "seed": "abead2419480025a"
+   },
+   "malformed-unmatched-backtick": {
+    "category": "malformed",
+    "components": 4,
+    "file": "components/malformed/malformed-unmatched-backtick.json",
+    "file_sha256": "6a5781cf1935152c50721bbea789dfd71357c68ee9ff0a2e54728afd83a12fb7",
+    "file_bytes": 1662,
+    "batches": [
+     4
+    ],
+    "seed": "36d72550f78c093c"
+   },
+   "malformed-unmatched-dollar": {
+    "category": "malformed",
+    "components": 4,
+    "file": "components/malformed/malformed-unmatched-dollar.json",
+    "file_sha256": "5db5097d46559e4dfcf47916db9076d3caa66d9638ecb1391468c9c3942da6de",
+    "file_bytes": 1559,
+    "batches": [
+     4
+    ],
+    "seed": "e31ad633a23be45f"
+   },
+   "malformed-incomplete-display-dollar": {
+    "category": "malformed",
+    "components": 4,
+    "file": "components/malformed/malformed-incomplete-display-dollar.json",
+    "file_sha256": "657d118dd4c3fbb57fa7383b8ffb0d53437a1addf802edf2b64481dbf76651d0",
+    "file_bytes": 1957,
+    "batches": [
+     4
+    ],
+    "seed": "2977de76dd3325c9"
+   },
+   "malformed-incomplete-paren-bracket": {
+    "category": "malformed",
+    "components": 4,
+    "file": "components/malformed/malformed-incomplete-paren-bracket.json",
+    "file_sha256": "ca98bde9ca894509763c40857521fa7c02f932375de0d998aeeed5c48335df5e",
+    "file_bytes": 1907,
+    "batches": [
+     4
+    ],
+    "seed": "8ce86697f0126ea7"
+   },
+   "malformed-unclosed-tex-env": {
+    "category": "malformed",
+    "components": 4,
+    "file": "components/malformed/malformed-unclosed-tex-env.json",
+    "file_sha256": "8f632ecfc69ed2aebfede80d05b269f4ba85b07b5b00e1b3596b4245861356cb",
+    "file_bytes": 1642,
+    "batches": [
+     4
+    ],
+    "seed": "57036ba5e7d9e064"
+   },
+   "malformed-broken-link": {
+    "category": "malformed",
+    "components": 4,
+    "file": "components/malformed/malformed-broken-link.json",
+    "file_sha256": "a79a8511a52bcc50d96212424145c2c8ddeb7454dbf56d6d391bfbe6a0631da3",
+    "file_bytes": 1662,
+    "batches": [
+     4
+    ],
+    "seed": "c065622942c24140"
+   },
+   "malformed-partial-html": {
+    "category": "malformed",
+    "components": 16,
+    "file": "components/malformed/malformed-partial-html.json",
+    "file_sha256": "b2fe5b09361fd0bf3860cfdc08bface9ac497ed36c30b9e289ea2afc702a806b",
+    "file_bytes": 6550,
+    "batches": [
+     8,
+     8
+    ],
+    "seed": "cb5f6d4ea1e6a1f3"
+   },
+   "malformed-truncated-json": {
+    "category": "malformed",
+    "components": 4,
+    "file": "components/malformed/malformed-truncated-json.json",
+    "file_sha256": "4f3f4054cda9902f0db35da796dc2342346de936173b0a212c870e4b2a2eda87",
+    "file_bytes": 1747,
+    "batches": [
+     4
+    ],
+    "seed": "6d8ababaa15fcd4a"
+   },
+   "malformed-malformed-nesting": {
+    "category": "malformed",
+    "components": 4,
+    "file": "components/malformed/malformed-malformed-nesting.json",
+    "file_sha256": "262352d8a9c84c42e9e58c251eb88ea7e57013bec66dc38e9b5be16939d1fd07",
+    "file_bytes": 1915,
+    "batches": [
+     4
+    ],
+    "seed": "93eb2cf7418c002e"
+   }
+  }
+ },
+ "overlap_assertion": {
+  "rule": "zero exact-component overlap: no v2 fragment sha256 equals any committed dev-pool fragment sha256 or any v1 hidden-pool fragment sha256 (hash-only comparison; no content echo)",
+  "dev_pool_components": 641,
+  "v1_hidden_pool_components": 588,
+  "v2_components": 340,
+  "initial_result": {
+   "passed": false,
+   "overlap_dev": 13,
+   "overlap_v1": 10,
+   "detail": "the 008-c generation program had already saturated the model's value space for four machine families (machine-filenames, machine-identifiers, machine-urls, machine-windows-paths); the base K=4 v2 components of those families therefore exactly overlapped the dev/v1 pools"
+  },
+  "final_result": {
+   "passed": true,
+   "overlap_dev": 0,
+   "overlap_v1": 0,
+   "reasserted_after": "bounded recovery regeneration of the four affected families"
+  }
+ },
+ "reruns": {
+  "machine-filenames": {
+   "k": 8,
+   "rounds_used": 2,
+   "seed": "7d1661cd11c091bc",
+   "components": 4,
+   "file_sha256": "7bed1c5cc023f20bcb3fd2b459d802cbcaa3f65171690aa8129937cec13c1765",
+   "reason": "zero-exact-component-overlap recovery (disclosed)"
+  },
+  "machine-identifiers": {
+   "k": 8,
+   "rounds_used": 1,
+   "seed": "8c41f1b5ca5a206c",
+   "components": 4,
+   "file_sha256": "77f731df9734512edd4336063319c8357b9e3ee47406f9c364aac724b3eee992",
+   "reason": "zero-exact-component-overlap recovery (disclosed)"
+  },
+  "machine-urls": {
+   "k": 8,
+   "rounds_used": 1,
+   "seed": "52737b0f17cfe29d",
+   "components": 4,
+   "file_sha256": "2891468f7dc6ed511748cf0904261e6505cee28358a38cb7558a76802aad860f",
+   "reason": "zero-exact-component-overlap recovery (disclosed)"
+  },
+  "machine-windows-paths": {
+   "k": 8,
+   "rounds_used": 1,
+   "seed": "0bba0d61ae88d13b",
+   "components": 4,
+   "file_sha256": "78b83d0bbce434b0f0cb1533040dcf4426621b6c68ff22c975b7eccfe5c75476",
+   "reason": "zero-exact-component-overlap recovery (disclosed)"
+  }
+ },
+ "wall_seconds": {
+  "original_run": 5917.4,
+  "note": "original run duration from durable file mtimes, ending at the last original-run write (the four recovered family component files rewritten by the recovery are excluded; the in-process timer was not persisted, see assembly_note)"
+ },
+ "privacy": "no raw outputs, no endpoint value, no bearer, no private paths in this file"
+}

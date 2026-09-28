@@ -1,0 +1,65 @@
+{
+ "doc_id": "dev-000691",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T10-randomized",
+ "byte_length": 1845,
+ "cp_length": 1815,
+ "sha256": "0ec29429cf36e507956922754bdfee54fdceb1951a4fffeec5bff3b03862d08f",
+ "document": "Igor je v bazenu v Ljubljani (projektne lokacije za testno vsebino) preizkusil nov tempo plavanja. Prve sto metrov je plaval počasi, naslednjih dvajset metrov pa poskusil hitreje. Plavalec je na koncu rekel: „Ritem je bil dober, vendar mi je zmanjkalo zadnjih dvajsetih.“\n\\begin{align} \\alpha_5(\\text{Sonce}) &\\le \\beta_5 + \\gamma_5 \\\\ \\delta_5 &\\ge \\epsilon_5 \\times \\zeta_5 \\\\ \\eta_5 &= \\theta_5 \\end{align}\n[opis](https://primer.si/stran drugi del: avtorizirana testna vsebina projekta Rdeča trta; izmišljena oseba Marko Novak ureja zvezek.\n<nalog id='sedmi' priornost='srednja' rok='7 dni'><korak ime='preverjanje'><ustvarjanje>0,13</ustvarjanje></korak></nalog>\n```\nfn opis_2() -> String { /* Testni projekt Lipa: č, š, ž, *poudarek* in _podčrtano_ */ let seStez = false; let HRAŠNA_VREDNOST = 5; let besedilo = format!(\"*Nova* ({} $)\", HRAŠNA_VREDNOST); let oznaka = \"č`š`ž\"; let pot = \"docs/vir.txt\"; let url = \"https://primer.si/koda\"; format!(\"{} | {} | {} | {} | {}\", seStez, besedilo, oznaka, pot, url) }\n```\nProjekt Testni Modul: Anja Kovač preverja povezavo <https://primer.si/stran> in kontakt <pošta@primer.si> pri temperaturi 20 °C. Vsebuje 3 korake in 10 m poti.\n```text\nKomentar: Projekt Voda, Ana Novak, 12 enot, 34 m, 56 l.\n```\n\n{\"ime\":\"Projekt Lipa\",\"cilj\":\"Nalaganje podatkov 25 %\",\"avtorsko\":\"Nevtralna testna vsebina\",\"merila\":{\"razmerje\":\"3,5 m / 0,13\",\"opomba\":\"**Test** https://primer.si/novica\"}}\nV laboratoriju projekta Merjač (stanica 4) je dr. Ana Kovač zapisala: »Med segrevanjem, in sicer ob dveh tisoč stopinjah Celzija, se material obnaša, kot bi šlo za tekočino,« in pojasnila, zakaj poskusne vzorce ob segrevanju obnašajo nepričakovano elastičnost. Rezultati iz leta 2021 so nato odprli pot k novi metodologiji, v kateri je pomembna vsaka mera, tudi tista, ki se zdi nesmiselna.",
+ "components": [
+  {
+   "component_id": "comp-prose-sports-dev-0008",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 276
+  },
+  {
+   "component_id": "comp-math-align-env-dev-0005",
+   "category": "math",
+   "start_byte": 277,
+   "end_byte": 414
+  },
+  {
+   "component_id": "comp-malformed-broken-link-dev-0002",
+   "category": "malformed",
+   "start_byte": 415,
+   "end_byte": 550
+  },
+  {
+   "component_id": "comp-structured-xml-dev-0007",
+   "category": "structured",
+   "start_byte": 551,
+   "end_byte": 673
+  },
+  {
+   "component_id": "comp-code-rust-dev-0006",
+   "category": "code",
+   "start_byte": 674,
+   "end_byte": 1035
+  },
+  {
+   "component_id": "comp-markdown-autolinks-dev-0001",
+   "category": "markdown",
+   "start_byte": 1036,
+   "end_byte": 1198
+  },
+  {
+   "component_id": "comp-markdown-fenced-code-dev-0009",
+   "category": "markdown",
+   "start_byte": 1199,
+   "end_byte": 1267
+  },
+  {
+   "component_id": "comp-structured-json-dev-0001",
+   "category": "structured",
+   "start_byte": 1268,
+   "end_byte": 1443
+  },
+  {
+   "component_id": "comp-prose-science-dev-0011",
+   "category": "prose",
+   "start_byte": 1444,
+   "end_byte": 1845
+  }
+ ]
+}

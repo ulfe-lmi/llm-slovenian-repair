@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-001788",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T7-prose-json-prose-latex",
+ "byte_length": 906,
+ "cp_length": 891,
+ "sha256": "dd00575b2a63459312982abbb402867d0b13082065622ea6f2b6d0017619f6f8",
+ "document": "V šoli zdravja v Trzinu so učenci (ki so sodelovali v projektu Mirni utripi) prebrali, da premalo gibanja lahko spremeni občutek moči in počutje. Takšne spremembe so lahko odziv na vsakdanjo utrujenost. Ko se pri nekem otroku ali odraslem ponovijo, je prav, da jih preveri zdravnik.\n{\"ime\":\"Projekt Sonce\",\"dolžina\":\"4,2 m\",\"avtorsko\":\"Nevtralna testna vsebina\",\"kvote\":{\"delež\":\"25 %\",\"opomba\":\"**Pregled** https://primer.si/novica\"}}\nV projektu Gradec je bilo pri projektiranju jeklene konstrukcije ključno, koliko obremenitve prenese nosilni presek. Mladi konstruktor Jaka Kovač je, ob podpori projektirke Lune, predlagal dodatno ojačanje in začasne podlage. Sodelavci so se po dveh tednih razprave strinjali s predlogom. Končno je most dobil tudi dodatno zaščito pred erozijo.\n\\[ \\begin{cases} \\alpha_1+2\\beta_2=7,\\\\ 3\\gamma_1-\\delta_2=\\text{Ljubljana},\\\\ \\eta_3\\zeta_4=12 \\end{cases} \\]",
+ "components": [
+  {
+   "component_id": "comp-prose-medicine-explainer-dev-0002",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 288
+  },
+  {
+   "component_id": "comp-structured-json-dev-0005",
+   "category": "structured",
+   "start_byte": 289,
+   "end_byte": 443
+  },
+  {
+   "component_id": "comp-prose-engineering-dev-0008",
+   "category": "prose",
+   "start_byte": 444,
+   "end_byte": 795
+  },
+  {
+   "component_id": "comp-math-bracket-tex-dev-0001",
+   "category": "math",
+   "start_byte": 796,
+   "end_byte": 906
+  }
+ ]
+}

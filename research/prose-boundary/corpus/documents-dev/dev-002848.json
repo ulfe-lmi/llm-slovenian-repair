@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-002848",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T11-interactions",
+ "byte_length": 1292,
+ "cp_length": 1265,
+ "sha256": "dfbbfc2026ed8af7b6871baa81d3dcd00714b7f7c51e5371cbb94da7a298a183",
+ "document": "`/* Testni podatki za izmišljen projekt Javornik */ const opi`.\n```\n/* Primer 3: vrednost in identifikator */ int main(void) { const char *pot = \"src/modul.py\"; const char *dokument = \"docs/vir.txt\"; const char *meta = \"Vrednost: 99,90 $ (oklepji) *poudarek* in HRAŠNA_VREDNOST\"; const char *naslov = \"https://primer.si/koda\"; int hraSnaVrednost2 = 3; (void)pot; (void)dokument; (void)meta; (void)naslov; return hraSnaVrednost2; }\n# komentar z \\frac{a}{b}\n```\nV projektu Hišni nasveti 2024 je Ana iz Ljubljane opazila, da se steklenice s čisto vodo, (še posebej tiste 0,5 litra), hitreje izpraznijo, če so vedno pri roki ob jedilni mizi. Njen sosed Marko je bil sprva skeptičen, a je po dveh tednih dejal: »Če je pijača pri mizi, manjkrat potuje v hladilnik.« Tudi manjše spremembe, kot je skleda za kosmiče ob vratih, v celotnem gospodinjstvu naredijo mirnejše jutro.\nV odrski skupini, ki se je udeleževala tečaja digitalnih veščin, so se izobraženci najprej pogovarili o lastnih izkušnjah z računalniki, telefoni in e-pošto. Učiteljica (Maja Krajnc) je nato z drobnimi nalogami pokazala, kako preiskati zanesljiv vir, kako označiti vir in kako preprečiti, da bi besedilo delovalo kot »kopija brez lastnega pogleda«. Kratek zapis so na koncu prebrali drug drugemu.",
+ "components": [
+  {
+   "component_id": "comp-code-javascript-dev-0005",
+   "category": "code",
+   "start_byte": 0,
+   "end_byte": 63
+  },
+  {
+   "component_id": "comp-code-c-dev-0011",
+   "category": "code",
+   "start_byte": 65,
+   "end_byte": 461
+  },
+  {
+   "component_id": "comp-prose-everyday-advice-dev-0011",
+   "category": "prose",
+   "start_byte": 462,
+   "end_byte": 882
+  },
+  {
+   "component_id": "comp-prose-education-dev-0005",
+   "category": "prose",
+   "start_byte": 883,
+   "end_byte": 1292
+  }
+ ]
+}

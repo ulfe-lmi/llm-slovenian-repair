@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-002614",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T8-quote-fenced",
+ "byte_length": 782,
+ "cp_length": 767,
+ "sha256": "daf52ca041febacda8c38a44787c8e0d57303efeb55c98187af30f05e39b4776",
+ "document": "> Luka je v vaji Zimska razpotje (2021) rekel: „Spremenljivke so imena, ki jih poznamo kot kratek dom za spremembe.“ Medtem ko je zanka štel korake do prvega snega, je funkcija poskrbela za isti preizkus, ne da bi ponovil vse korake. To je pomembno, pravi on, ker program postane lažje berljiv. (Tudi kratki vstavki pomagajo razložiti pomene.) `int main(void) { int razdelek2 = 7; char *naslov = \"Ana (izm`\n```\n# Fragment 8: *neodvisen* konec, _podčrtano_, (oklepaj)\necho 'Besedilo: **poudarek** in *zvezdice*, `backquote`'\necho 'Valute: 4 $ in 11 € za izmišljeni projekt'\necho 'Relativna pot: src/modul.py; vir: docs/vir.txt'\necho 'Spletni naslov: https://primer.si/koda'\necho 'Identifikatorji: HRAŠNA_VREDNOST, razdelek2, seStez'\necho 'Slovenski znaki: č, š, ž'\n```",
+ "components": [
+  {
+   "component_id": "comp-prose-programming-explainer-dev-0012",
+   "category": "prose",
+   "start_byte": 2,
+   "end_byte": 350
+  },
+  {
+   "component_id": "comp-code-c-dev-0003",
+   "category": "code",
+   "start_byte": 351,
+   "end_byte": 413
+  },
+  {
+   "component_id": "comp-code-shell-bash-dev-0008",
+   "category": "code",
+   "start_byte": 414,
+   "end_byte": 782
+  }
+ ]
+}

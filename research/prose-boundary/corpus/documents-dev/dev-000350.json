@@ -1,0 +1,59 @@
+{
+ "doc_id": "dev-000350",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T10-randomized",
+ "byte_length": 1491,
+ "cp_length": 1461,
+ "sha256": "9220bb563a715d5804f4ca638de571deecaaada7b445959514041ecb9b78636d",
+ "document": "„Prvi korak, drugi noga,“ je rekla Ana, a mladi smučarji v projektni skupini so še vedno poskušali izbrati pravo pozicijo. Ko je padal sneg, so se vsi odločili za krajši premor pri topli čaju.\n{\"naslov\":\"Ljubljanska sončna razstava\",\"oseba\":\"Ana Kovač\",\"delež\":\"25 %\",\"višina\":\"3,5 m\",\"koeficient\":\"0,13\",\"vir\":\"https://primer.si/novica\"}\n```\n// Testni modul (č, š, ž)\nfunction seStez(a, b) {\n  return (a + b) * 1;\n}\nconst naslov = \"Opomba: **pomembno** in _podčrtana_\";\nconst besedilo = `Cena: $ 1,25 za razdelek2`;\nconst povezava = \"https://primer.si/koda\";\nconst pot = \"src/modul.py\";\nconst vir = \"docs/vir.txt\";\nconst HRAŠNA_VREDNOST = 10;\nconst rezultat = seStez(HRAŠNA_VREDNOST, 5);\nconsole.log(naslov, besedilo, povezava, pot, vir, rezultat);\n// konec fragmenta\n```\n```\n#include <iostream>\n// Značilni znaki: č, š, ž in *poudarek*\nint main() {\n    int razdelek2 = 4;\n    std::cout << \"Tekst: *zvezdice*, `kod` in _pod_\" << std::endl;\n    std::cout << \"Cena: 10 $ (oklepaji)\" << std::endl;\n    return razdelek2;\n}\n```\ntabela_01.json vir_2024.txt\n25 %, 42 obr/min\nEsej je v izmišljenem projektu Pisna meja zvrst, ki preizkuša meje jezika. Izmišljen slovenski avtor Boštjan Kralj v delu iz leta 2020 uporabi kratke vstavke. Ti vstavki (kraj, ime, ura) zgradijo novo raven. Motiv identitete se tu poveže z evropsko refleksijo. Rezultat je tiha pot med besedo in stvarnostjo.\n``` Testni projekt Lipa: nevtralna vsebina za preizkus prikaza, avtorica Ana Kovač.",
+ "components": [
+  {
+   "component_id": "comp-prose-sports-dev-0012",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 202
+  },
+  {
+   "component_id": "comp-structured-keyvalue-dev-0001",
+   "category": "structured",
+   "start_byte": 203,
+   "end_byte": 352
+  },
+  {
+   "component_id": "comp-code-javascript-dev-0009",
+   "category": "code",
+   "start_byte": 353,
+   "end_byte": 792
+  },
+  {
+   "component_id": "comp-code-cpp-dev-0001",
+   "category": "code",
+   "start_byte": 793,
+   "end_byte": 1047
+  },
+  {
+   "component_id": "comp-machine-filenames-dev-0006",
+   "category": "machine",
+   "start_byte": 1048,
+   "end_byte": 1075
+  },
+  {
+   "component_id": "comp-machine-versions-numbers-units-dev-0003",
+   "category": "machine",
+   "start_byte": 1076,
+   "end_byte": 1092
+  },
+  {
+   "component_id": "comp-prose-literature-dev-0009",
+   "category": "prose",
+   "start_byte": 1093,
+   "end_byte": 1406
+  },
+  {
+   "component_id": "comp-malformed-unclosed-fence-dev-0001",
+   "category": "malformed",
+   "start_byte": 1407,
+   "end_byte": 1491
+  }
+ ]
+}

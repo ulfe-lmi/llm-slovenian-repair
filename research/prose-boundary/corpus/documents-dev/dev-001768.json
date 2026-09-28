@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-001768",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T9-prose-malformed-prose",
+ "byte_length": 529,
+ "cp_length": 519,
+ "sha256": "4044ddfd613eed3c97aa5c37105d1f2e563e5622fa2ed366c3ed66d5e9204a0c",
+ "document": "»Za omaro s posodo ne rabiš dragih sredstev,« je v projektu Varčni dom rekla Ana, da je dovolj topla voda in kapljica naravne citronike. Steklo se briše v eni smeri, da ni pasov.\n\n\\begin{align} t &= 0, zbirka podatkov za projekt Modra pot, izmišljen sodelavec Jožko Novak.\n\nV testnem projektu Trst je Nina, ki je bila ravno nova v moštvi, povzela vse tri pojme. Spremenljivka hrani stanje, zanka ponavlja korake, funkcija pa skupine stvari. Tisti vstavek je bil v pogovoru preprost: najprej razloži, nato pokaži primer.",
+ "components": [
+  {
+   "component_id": "comp-prose-everyday-advice-dev-0007",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 183
+  },
+  {
+   "component_id": "comp-malformed-unclosed-tex-env-dev-0003",
+   "category": "malformed",
+   "start_byte": 185,
+   "end_byte": 279
+  },
+  {
+   "component_id": "comp-prose-programming-explainer-dev-0004",
+   "category": "prose",
+   "start_byte": 281,
+   "end_byte": 529
+  }
+ ]
+}

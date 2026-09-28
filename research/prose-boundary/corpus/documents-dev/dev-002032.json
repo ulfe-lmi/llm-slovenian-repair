@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-002032",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T9-prose-malformed-prose",
+ "byte_length": 592,
+ "cp_length": 584,
+ "sha256": "bfe2d74789e5d2b975d68c303e89b38606ad290508ef828923e184d1e86e32e0",
+ "document": "Anja je v opombi zapisala, da so razmerja med dohodki in izdatki (v mesecu maju in juniju) nekoliko drugačna kot lani. Povprečje ni pokazalo velike spremembe, vendar je posamezen teden odstopil, kar je pritegnilo pozornost ekipi.\r\n[opis](https://primer.si/stran drugi del: avtorizirana testna vsebina projekta Rdeča trta; izmišljena oseba Marko Novak ureja zvezek.\r\nPri planinskem vzponu po Javorniku v marcu 2023 so bile poti močno zamrznjene, zato priporočam uporabo čevljev z dobrim oprijemom. Vreme je bilo hladno (okrog 5 stopinj pod ničlo), a razgledi so bili nagrajenje vredni.",
+ "components": [
+  {
+   "component_id": "comp-prose-statistics-dev-0002",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 231
+  },
+  {
+   "component_id": "comp-malformed-broken-link-dev-0002",
+   "category": "malformed",
+   "start_byte": 233,
+   "end_byte": 368
+  },
+  {
+   "component_id": "comp-prose-travel-dev-0009",
+   "category": "prose",
+   "start_byte": 370,
+   "end_byte": 592
+  }
+ ]
+}

@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-000409",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T3-prose-fenced-prose",
+ "byte_length": 970,
+ "cp_length": 950,
+ "sha256": "9b27eed271f1f66bb25ff04760e10a880936a6d07974a9f586eecb935089bfe9",
+ "document": "V geometriji smo na kratko obravnavali trikotnike in kvadrate, a brez simbol. Učenci so na mizi sestavljali oblike iz papirja. (Kaj je splošna lastnost, so preverjali z merjenjem in številčenjem kotov.) Takšen pogovor je ostal v spominu, ker je bil splošen in neposreden.\n```\nfn opis_2() -> String { /* Testni projekt Lipa: č, š, ž, *poudarek* in _podčrtano_ */ let seStez = false; let HRAŠNA_VREDNOST = 5; let besedilo = format!(\"*Nova* ({} $)\", HRAŠNA_VREDNOST); let oznaka = \"č`š`ž\"; let pot = \"docs/vir.txt\"; let url = \"https://primer.si/koda\"; format!(\"{} | {} | {} | {} | {}\", seStez, besedilo, oznaka, pot, url) }\n```\nNekateri gradbeniki (zlasti tisti, ki so sodelovali pri obnovi stolpa Vrt) menijo, da so materiali, ki dolgoročno ohranjajo obliko, prijaznejši za vzdrževanje. Ta pogled, ki ga dokumenti imenujejo mehka vzdržljivost, velja tudi za podporno konstrukcijo in za ojačitve, ki jih je leta 2018 opisala projektna skupina Podravska.",
+ "components": [
+  {
+   "component_id": "comp-prose-math-explainer-dev-0003",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 277
+  },
+  {
+   "component_id": "comp-code-rust-dev-0006",
+   "category": "code",
+   "start_byte": 278,
+   "end_byte": 639
+  },
+  {
+   "component_id": "comp-prose-engineering-dev-0013",
+   "category": "prose",
+   "start_byte": 640,
+   "end_byte": 970
+  }
+ ]
+}

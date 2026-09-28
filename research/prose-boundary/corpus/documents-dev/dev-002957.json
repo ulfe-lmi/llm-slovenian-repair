@@ -1,0 +1,65 @@
+{
+ "doc_id": "dev-002957",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T10-randomized",
+ "byte_length": 1241,
+ "cp_length": 1213,
+ "sha256": "d8d2610001f719efe53dc90d32dabd0ab65567be1fdac273ea95d8ddd4a7dba7",
+ "document": "Palermo, glavno mesto Sicilije, je leta 2022 ponujal nenavadno kombinacijo zvočnih ulic, barvitih tržnic in starinske arhitekture. Priporočamo obisk katedrale in sprehod po starem mestnem jedru, zlasti zvečer.\r\n$12 je predračun za testni zapis v projektu Modra Lestvica.\r\nE[Y_{\\text{Trn}}] = \\int_{0}^{1} y f_{\\text{Trn}}(y) \\, dy = \\beta^2 \\text{ (pričakovana vrednost)}\r\n{\"opis\":\"*Zelena* _testna_ vsebina\",\"merilo\":\"3,5 m\",\"vir\":\"https://primer.si/novica\"}\r\ndelež,25 %\r\n$\\sum_{\\kappa=1}^{3} \\lambda_\\kappa = \\mu_{\\text{Luka projekt Sava}}$\r\nluka.kovac@primer.si,posta@oddelek.primer.si\r\n```\r\n/* Konstanta za testno temo: Hrašna vrednost */ const HRAŠNA_VREDNOST = 42; const razdelek2 = 7; function zber(zbir) { return zbir + HRAŠNA_VREDNOST; } console.log(`Vrednost: ${zber(razdelek2)}`);\r\n```\r\n»To ni povprečje,« je dejal Marko, »ampak mediana, ki jo pogosto zamenjamo s povprečno vrednostjo.« Ko so se v razpravi projekta Glasnik pogovarjali o plačah, so na mizi omenili tudi srednjo vrednost (kot računsko povprečje). Sam visok znesek je povprečje potegnilo navzgor, medtem da je mediana ostala bližje vsakdanji izkušnji. »V razmerju med izplačili in stroški,« je dodal, »je treba paziti, kaj sploh merimo.«",
+ "components": [
+  {
+   "component_id": "comp-prose-travel-dev-0010",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 213
+  },
+  {
+   "component_id": "comp-malformed-unmatched-dollar-dev-0002",
+   "category": "malformed",
+   "start_byte": 215,
+   "end_byte": 275
+  },
+  {
+   "component_id": "comp-math-probability-dev-0005",
+   "category": "math",
+   "start_byte": 277,
+   "end_byte": 377
+  },
+  {
+   "component_id": "comp-structured-keyvalue-dev-0007",
+   "category": "structured",
+   "start_byte": 379,
+   "end_byte": 465
+  },
+  {
+   "component_id": "comp-structured-keyvalue-dev-0003",
+   "category": "structured",
+   "start_byte": 467,
+   "end_byte": 478
+  },
+  {
+   "component_id": "comp-math-inline-dollar-dev-0002",
+   "category": "math",
+   "start_byte": 480,
+   "end_byte": 549
+  },
+  {
+   "component_id": "comp-machine-emails-dev-0008",
+   "category": "machine",
+   "start_byte": 551,
+   "end_byte": 595
+  },
+  {
+   "component_id": "comp-code-javascript-dev-0004",
+   "category": "code",
+   "start_byte": 597,
+   "end_byte": 806
+  },
+  {
+   "component_id": "comp-prose-statistics-dev-0012",
+   "category": "prose",
+   "start_byte": 808,
+   "end_byte": 1241
+  }
+ ]
+}

@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-002712",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T7-prose-json-prose-latex",
+ "byte_length": 969,
+ "cp_length": 959,
+ "sha256": "d539426ae156191227404b0716e053c623db608b0bbe8c9138149ebf1e96f4c8",
+ "document": "Luka je ob peti uri zvečer odkril, da se prenosnik sam po sebi hladi. V opombi za sodelavce je zapisal, da se to dogaja ob hkratnem delu s tremi programi. (Gre za navaden vzorec, ki ga je opisala tudi podpora.) Zato so preizkus ponovili brez dodatnih posegov.\n{\"ime\":\"Projekt Reka\",\"razmerje\":\"2,5 m / 0,13\",\"avtorsko\":\"Nevtralna testna vsebina\",\"vzorec\":{\"delež\":\"30 %\",\"opis\":\"_Nevtralno_ https://primer.si/novica\"}}\nV prostoru projekta Tabor so preizkušali prenos toplote skozi plastine in merili spremembe, ko so dodali tanke plasti iz mešanih vlaken. Meritve so vodila dva študenta, Luka in Nika, ki sta zapisoval čase, temperature ter opazila rahlo meglico na robu vzorcev. Leta dvotisoč in devetindvajset, ko je bila soba še prenovljena, je v opombah stalo, da bo treba poskus ponoviti pri drugačni vlažnosti.\n\\Pr(C_{\\text{Sokol}} | D) = \\frac{\\Pr(D | C_{\\text{Sokol}}) P(C_{\\text{Sokol}})}{\\Pr(D)} = \\frac{7\\alpha}{11} \\text{ (podpogojena verjetnost)}",
+ "components": [
+  {
+   "component_id": "comp-prose-computing-dev-0003",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 260
+  },
+  {
+   "component_id": "comp-structured-json-dev-0004",
+   "category": "structured",
+   "start_byte": 261,
+   "end_byte": 420
+  },
+  {
+   "component_id": "comp-prose-science-dev-0004",
+   "category": "prose",
+   "start_byte": 421,
+   "end_byte": 826
+  },
+  {
+   "component_id": "comp-math-probability-dev-0003",
+   "category": "math",
+   "start_byte": 827,
+   "end_byte": 969
+  }
+ ]
+}

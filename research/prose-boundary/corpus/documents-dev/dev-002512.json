@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-002512",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T5-lists",
+ "byte_length": 1065,
+ "cp_length": 1038,
+ "sha256": "0ff6c259222e561d8e6beb30084b2e0e209666dac5e83ab2d300279a63e5e7bc",
+ "document": "- Priprava na državni izpit za odrasle je potekala mirno (trije tedni, dvakrat na teden), in Matej je ob tem dejal: »Znanje ostane, če ga človek lahko pove iz glave.« Načrt je vključeval tudi kratek pregled starih učbenikov, a brez dolžine in brez strahu.\n- `fn povzetek2(seStez: bool) -> String { /* Testni projekt Lip`\n- V projektu Hišni nasveti 2024 je Ana iz Ljubljane opazila, da se steklenice s čisto vodo, (še posebej tiste 0,5 litra), hitreje izpraznijo, če so vedno pri roki ob jedilni mizi. Njen sosed Marko je bil sprva skeptičen, a je po dveh tednih dejal: »Če je pijača pri mizi, manjkrat potuje v hladilnik.« Tudi manjše spremembe, kot je skleda za kosmiče ob vratih, v celotnem gospodinjstvu naredijo mirnejše jutro.\n- V projektu Lipov most je na mostni konstrukciji pri Ljubljani prišlo do razpok, ki so se pojavile po zimskem zamrzavanju. Inga Novak je zato zahtevala dodatne meritve korozije (zlasti na nosilnih nosilcih) in preizkus jeklenih elementov, saj je »varnost najprej«.\n Pozor: é (dekompouziran znakovni niz).",
+ "components": [
+  {
+   "component_id": "comp-prose-education-dev-0013",
+   "category": "prose",
+   "start_byte": 2,
+   "end_byte": 264
+  },
+  {
+   "component_id": "comp-code-rust-dev-0002",
+   "category": "code",
+   "start_byte": 267,
+   "end_byte": 329
+  },
+  {
+   "component_id": "comp-prose-everyday-advice-dev-0011",
+   "category": "prose",
+   "start_byte": 332,
+   "end_byte": 752
+  },
+  {
+   "component_id": "comp-prose-engineering-dev-0007",
+   "category": "prose",
+   "start_byte": 755,
+   "end_byte": 1021
+  }
+ ]
+}

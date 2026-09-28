@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-000965",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T9-prose-malformed-prose",
+ "byte_length": 557,
+ "cp_length": 539,
+ "sha256": "4ef799c7d6340110f96fb49fcd83c7e19e06017e966a5f2db3520613bf813324",
+ "document": "Maja je prvič poskusila smučati na Počitenju (izmišljena dolina). Sneg je bil mehki. Proga je bila široka. „Pazite,“ jo je opomnil vodja tečaja, „ker se v sosednji strmini lahko pojavijo skrite luknje.“\n***Trobna** brez zapora.\nTestni projekt: Lesena miza. Osebna: Marko Zupan.\nV projektu Mlin 2018 je Luka preveril, koliko je povprečno trajala čakalna vrsta. Ko so trije prostovoljci dodali svoje opazke, se je slika izkazala za bolj uravnoteženo. Po njegovem mnenju je bistvo v tem, da se številka ne bere sama, ampak potrebuje kontekst.",
+ "components": [
+  {
+   "component_id": "comp-prose-sports-dev-0007",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 216
+  },
+  {
+   "component_id": "comp-malformed-malformed-nesting-dev-0002",
+   "category": "malformed",
+   "start_byte": 217,
+   "end_byte": 291
+  },
+  {
+   "component_id": "comp-prose-statistics-dev-0001",
+   "category": "prose",
+   "start_byte": 292,
+   "end_byte": 557
+  }
+ ]
+}

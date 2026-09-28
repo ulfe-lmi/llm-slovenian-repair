@@ -1,0 +1,152 @@
+{
+ "doc_id": "dev-001011",
+ "byte_length": 835,
+ "cp_length": 818,
+ "regions": [
+  {
+   "start_byte": 0,
+   "end_byte": 1,
+   "start_cp": 0,
+   "end_cp": 1,
+   "component_id": "comp-code-shell-bash-dev-0002",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 1,
+   "end_byte": 50,
+   "start_cp": 1,
+   "end_cp": 49,
+   "component_id": "comp-code-shell-bash-dev-0002",
+   "category": "code",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 50,
+   "end_byte": 51,
+   "start_cp": 49,
+   "end_cp": 50,
+   "component_id": "comp-code-shell-bash-dev-0002",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 51,
+   "end_byte": 52,
+   "start_cp": 50,
+   "end_cp": 51,
+   "component_id": "template",
+   "category": null,
+   "role": "PROSE",
+   "template_owned": true
+  },
+  {
+   "start_byte": 52,
+   "end_byte": 53,
+   "start_cp": 51,
+   "end_cp": 52,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 53,
+   "end_byte": 56,
+   "start_cp": 52,
+   "end_cp": 55,
+   "component_id": "comp-code-c-dev-0003",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 56,
+   "end_byte": 57,
+   "start_cp": 55,
+   "end_cp": 56,
+   "component_id": "comp-code-c-dev-0003",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 57,
+   "end_byte": 271,
+   "start_cp": 56,
+   "end_cp": 268,
+   "component_id": "comp-code-c-dev-0003",
+   "category": "code",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 271,
+   "end_byte": 272,
+   "start_cp": 268,
+   "end_cp": 269,
+   "component_id": "comp-code-c-dev-0003",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 272,
+   "end_byte": 275,
+   "start_cp": 269,
+   "end_cp": 272,
+   "component_id": "comp-code-c-dev-0003",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 275,
+   "end_byte": 276,
+   "start_cp": 272,
+   "end_cp": 273,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 276,
+   "end_byte": 512,
+   "start_cp": 273,
+   "end_cp": 505,
+   "component_id": "comp-prose-statistics-dev-0007",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 512,
+   "end_byte": 513,
+   "start_cp": 505,
+   "end_cp": 506,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 513,
+   "end_byte": 835,
+   "start_cp": 506,
+   "end_cp": 818,
+   "component_id": "comp-prose-cooking-dev-0006",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  }
+ ],
+ "invariants": {
+  "tiling_complete": true,
+  "no_contradictory_overlaps": true,
+  "cp_range_exact": true
+ }
+}

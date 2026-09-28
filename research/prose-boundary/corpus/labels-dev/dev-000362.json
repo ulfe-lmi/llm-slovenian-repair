@@ -1,0 +1,152 @@
+{
+ "doc_id": "dev-000362",
+ "byte_length": 1136,
+ "cp_length": 1105,
+ "regions": [
+  {
+   "start_byte": 0,
+   "end_byte": 1,
+   "start_cp": 0,
+   "end_cp": 1,
+   "component_id": "comp-code-shell-bash-dev-0006",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 1,
+   "end_byte": 60,
+   "start_cp": 1,
+   "end_cp": 59,
+   "component_id": "comp-code-shell-bash-dev-0006",
+   "category": "code",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 60,
+   "end_byte": 61,
+   "start_cp": 59,
+   "end_cp": 60,
+   "component_id": "comp-code-shell-bash-dev-0006",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 61,
+   "end_byte": 62,
+   "start_cp": 60,
+   "end_cp": 61,
+   "component_id": "template",
+   "category": null,
+   "role": "PROSE",
+   "template_owned": true
+  },
+  {
+   "start_byte": 62,
+   "end_byte": 63,
+   "start_cp": 61,
+   "end_cp": 62,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 63,
+   "end_byte": 66,
+   "start_cp": 62,
+   "end_cp": 65,
+   "component_id": "comp-code-rust-dev-0003",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 66,
+   "end_byte": 67,
+   "start_cp": 65,
+   "end_cp": 66,
+   "component_id": "comp-code-rust-dev-0003",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 67,
+   "end_byte": 427,
+   "start_cp": 66,
+   "end_cp": 415,
+   "component_id": "comp-code-rust-dev-0003",
+   "category": "code",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 427,
+   "end_byte": 428,
+   "start_cp": 415,
+   "end_cp": 416,
+   "component_id": "comp-code-rust-dev-0003",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 428,
+   "end_byte": 431,
+   "start_cp": 416,
+   "end_cp": 419,
+   "component_id": "comp-code-rust-dev-0003",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 431,
+   "end_byte": 432,
+   "start_cp": 419,
+   "end_cp": 420,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 432,
+   "end_byte": 754,
+   "start_cp": 420,
+   "end_cp": 732,
+   "component_id": "comp-prose-cooking-dev-0006",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 754,
+   "end_byte": 755,
+   "start_cp": 732,
+   "end_cp": 733,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 755,
+   "end_byte": 1136,
+   "start_cp": 733,
+   "end_cp": 1105,
+   "component_id": "comp-prose-travel-dev-0007",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  }
+ ],
+ "invariants": {
+  "tiling_complete": true,
+  "no_contradictory_overlaps": true,
+  "cp_range_exact": true
+ }
+}

@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-000571",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T11-interactions",
+ "byte_length": 1077,
+ "cp_length": 1055,
+ "sha256": "54701cca87a63b427c5f1e6f4807cfee608cdec1d5983fdcda1cf1b526ca6579",
+ "document": "`const naslov = 'Opomba: **pomembno**'; /* Naslov za Ana Kova`.\n```\n/* Testni fragment 1: izmišljena oseba Maja, projekt Roža. */ SELECT 'Maja' AS `ime`, '1,20 $' AS `cena`, 'https://primer.si/koda' AS `url`, 'src/modul.py' AS `pot`, TRIM('*poudarek* in _podčrtano_') AS `opomba`, 'razdelek2' AS `razdelek2`, 'seStez' AS `seStez`, 'č' AS `HRAŠNA_VREDNOST` FROM (SELECT 1 AS `en`) AS `t` WHERE (`t`.`en` = 1);\n# komentar z \\frac{a}{b}\n```\nV šolskem testnem kotičku je Nia izmislila preprosto skico: utripalka, upornost, sklep in baterija v krogu. \"Ne pozabi, da je sklep odprt, dokler ga ne pritisneš,\" je opomnila sošolki. Ta se je nasmehnila in se lotila priključevanja. Ko je vse šlo, sta skupaj ugasnili in zapisali datum.\nV projektu Brda je ekipa pod vodstvom Anje Zupan preverjala betonno ploščo in jeklene povezave (vezne elemente) na mostu čez Sočo. »Pri takih presojah najprej gledamo trdnost, potem pa še vzdržljivost,« je povedala na terenskem sestanku. Izračuni so pokazali, da bo dovolj, če se armatura postavi po novem razporeditvenem načrtu.",
+ "components": [
+  {
+   "component_id": "comp-code-javascript-dev-0002",
+   "category": "code",
+   "start_byte": 0,
+   "end_byte": 62
+  },
+  {
+   "component_id": "comp-code-sql-dev-0001",
+   "category": "code",
+   "start_byte": 64,
+   "end_byte": 442
+  },
+  {
+   "component_id": "comp-prose-electronics-dev-0005",
+   "category": "prose",
+   "start_byte": 443,
+   "end_byte": 736
+  },
+  {
+   "component_id": "comp-prose-engineering-dev-0006",
+   "category": "prose",
+   "start_byte": 737,
+   "end_byte": 1077
+  }
+ ]
+}

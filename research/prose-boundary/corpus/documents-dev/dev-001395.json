@@ -1,0 +1,71 @@
+{
+ "doc_id": "dev-001395",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T10-randomized",
+ "byte_length": 1438,
+ "cp_length": 1415,
+ "sha256": "731d5a1ee374d7513089a9ef9016781e36c3f0812ec08bee99c85a961cb9557c",
+ "document": "Pri varčevanju ni treba kupovati drage opreme, pogosto zadošča malo potrpežljivosti. Petra je v projektu Skromen koš pokazala, da se lahko v juniju 2023 prihrani denar za en kosilo. »Najprej preglej, kaj že imaš,« je zapisala v dnevniku.\n<merilo id='tretje' ime='Dolžina' enota='3,5 m'><opomba stanje='0,13'>Testni primer</opomba></merilo>\n\\text{Bled}\\begin{pmatrix}15&16&17\\\\18&19&20\\end{pmatrix}\nrazdalja,\"2,4 km\"\n\\sum_{\\psi=0}^{12} \\omega_{\\psi} + \\prod_{\\pi=1}^{7} \\Omega_{\\pi} \\text{Projekt}\n| Ime projekta | Enota | Vrednost |\n| --- | --- | --- |\n| Projekt Lipa | m | 12 |\n| Modul Sonce | kg | 45 |\n{\"ime\":\"Oseba Miha\",\"dolžina\":\"1,8 m\",\"avtorsko\":\"Nevtralna testna vsebina\",\"razmerje\":\"0,13\",\"opomba\":\"*Izmišljena oseba* https://primer.si/novica\"}\n\\[ \\begin{cases} \\rho_1+\\iota_2=11,\\\\ \\tau_3-\\kappa_4=\\text{Ana} \\end{cases} \\]\n```\n/* Pridrži se projektnim pravilom: (brez absolutnih poti) */ const pot = 'src/modul.py'; const dokument = 'docs/vir.txt'; const povezava = 'https://primer.si/koda'; const besedilo = `Cena je 3 $ za (izdelek)`; console.log(pot, dokument, povezava, besedilo);\n```\nSlovenska pesniška tradicija ima svojo tišino. V izmišljenem projektu Glas in tišina, ki raziskuje naravno, se pojavi motiv dreves. Izmišljena pesnica Anja Horvat v zbirki iz leta 2015 piše: »Drevo ne govori, a se v šumu zdi, da je vprašanje.« Ta stavek se v evropskem kontekstu pogosto pojavi kot znak identitete.",
+ "components": [
+  {
+   "component_id": "comp-prose-everyday-advice-dev-0002",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 246
+  },
+  {
+   "component_id": "comp-structured-xml-dev-0003",
+   "category": "structured",
+   "start_byte": 247,
+   "end_byte": 349
+  },
+  {
+   "component_id": "comp-math-matrices-dev-0004",
+   "category": "math",
+   "start_byte": 350,
+   "end_byte": 407
+  },
+  {
+   "component_id": "comp-structured-keyvalue-dev-0008",
+   "category": "structured",
+   "start_byte": 408,
+   "end_byte": 425
+  },
+  {
+   "component_id": "comp-math-summations-dev-0006",
+   "category": "math",
+   "start_byte": 426,
+   "end_byte": 506
+  },
+  {
+   "component_id": "comp-markdown-tables-dev-0001",
+   "category": "markdown",
+   "start_byte": 507,
+   "end_byte": 614
+  },
+  {
+   "component_id": "comp-structured-json-dev-0006",
+   "category": "structured",
+   "start_byte": 615,
+   "end_byte": 766
+  },
+  {
+   "component_id": "comp-math-bracket-tex-dev-0003",
+   "category": "math",
+   "start_byte": 767,
+   "end_byte": 846
+  },
+  {
+   "component_id": "comp-code-javascript-dev-0003",
+   "category": "code",
+   "start_byte": 847,
+   "end_byte": 1113
+  },
+  {
+   "component_id": "comp-prose-literature-dev-0008",
+   "category": "prose",
+   "start_byte": 1114,
+   "end_byte": 1438
+  }
+ ]
+}

@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-001162",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T8-quote-fenced",
+ "byte_length": 748,
+ "cp_length": 725,
+ "sha256": "568efa9c8e6bb78f675fa2246048a1e334430b69c24742af0b21c595f0a08fb0",
+ "document": "> V kabolnici je najlažje, ko najprej zbrišemo prah z omaric, šele nato operemo tla. (Počakamo, da se voda malo posuši, in šele potem stiskamo krpo.) Tisti, ki imajo v hiši mačke, vedo, da lasov ne pomečeš, temveč jih zbereš s krpo za steklo. V testnem projektu Čist dom so to za vogla dopolnili s staro krtačo, ki jo občasno speremo. `fn seStez(razdelek2: u32) -> String { /* Testni projekt Lipa`\n```\n# Fragment 7: oseba: Luka Zupan, projekt *Mol*\necho 'Markdown: *zvezdice*, **poudarek**, _podčrtanje_'\necho 'Znesek: 20 $ in 1 € (izmišljeno)'\necho 'Koda: src/modul.py; dokument: docs/vir.txt'\necho 'URL: https://primer.si/koda'\necho 'Identi: seStez, razdelek2, HRAŠNA_VREDNOST'\necho 'Backquote `znak`, (oklepaj), č š ž'\n```",
+ "components": [
+  {
+   "component_id": "comp-prose-everyday-advice-dev-0006",
+   "category": "prose",
+   "start_byte": 2,
+   "end_byte": 349
+  },
+  {
+   "component_id": "comp-code-rust-dev-0001",
+   "category": "code",
+   "start_byte": 350,
+   "end_byte": 412
+  },
+  {
+   "component_id": "comp-code-shell-bash-dev-0007",
+   "category": "code",
+   "start_byte": 413,
+   "end_byte": 748
+  }
+ ]
+}

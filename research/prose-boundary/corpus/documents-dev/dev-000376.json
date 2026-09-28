@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-000376",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T3-prose-fenced-prose",
+ "byte_length": 787,
+ "cp_length": 762,
+ "sha256": "4b6dcdffeeb2cf62f0b01c7283ed0a481651912843a8618e0137b9fae738bc05",
+ "document": "V letu 2021, po natančnem pregledu, so v projektu Ptičji kotel preverili, da je povprečna dolžina poti do šole znašala 2,4 kilometra, medtem ko so trije učenci hodili dlje in štirje krajše. To pomeni, da razmerje med krajšimi in daljšimi potmi ni enako, čeprav so posamezne vrednosti blizu.\n```\nfn main() { /* Testni projekt Lipa: č, š, ž, **poudarek** in *zvezdice* */ let razdelek2 = 4; let HRAŠNA_VREDNOST = 1; let citat = \"č`š`ž\"; let pot = \"src/modul.py\"; let url = \"https://primer.si/koda\"; println!(\"{} | {} | {} | {} | {}\", HRAŠNA_VREDNOST, razdelek2, citat, pot, url); }\n```\n»Za omaro s posodo ne rabiš dragih sredstev,« je v projektu Varčni dom rekla Ana, da je dovolj topla voda in kapljica naravne citronike. Steklo se briše v eni smeri, da ni pasov.",
+ "components": [
+  {
+   "component_id": "comp-prose-statistics-dev-0009",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 302
+  },
+  {
+   "component_id": "comp-code-rust-dev-0005",
+   "category": "code",
+   "start_byte": 303,
+   "end_byte": 603
+  },
+  {
+   "component_id": "comp-prose-everyday-advice-dev-0007",
+   "category": "prose",
+   "start_byte": 604,
+   "end_byte": 787
+  }
+ ]
+}

@@ -1,0 +1,82 @@
+{
+ "doc_id": "dev-000793",
+ "byte_length": 989,
+ "cp_length": 968,
+ "regions": [
+  {
+   "start_byte": 0,
+   "end_byte": 522,
+   "start_cp": 0,
+   "end_cp": 512,
+   "component_id": "comp-prose-education-dev-0008",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 522,
+   "end_byte": 523,
+   "start_cp": 512,
+   "end_cp": 513,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 523,
+   "end_byte": 525,
+   "start_cp": 513,
+   "end_cp": 515,
+   "component_id": "comp-math-display-dollar-dev-0003",
+   "category": "math",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 525,
+   "end_byte": 585,
+   "start_cp": 515,
+   "end_cp": 575,
+   "component_id": "comp-math-display-dollar-dev-0003",
+   "category": "math",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 585,
+   "end_byte": 587,
+   "start_cp": 575,
+   "end_cp": 577,
+   "component_id": "comp-math-display-dollar-dev-0003",
+   "category": "math",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 587,
+   "end_byte": 588,
+   "start_cp": 577,
+   "end_cp": 578,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 588,
+   "end_byte": 989,
+   "start_cp": 578,
+   "end_cp": 968,
+   "component_id": "comp-prose-science-dev-0011",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  }
+ ],
+ "invariants": {
+  "tiling_complete": true,
+  "no_contradictory_overlaps": true,
+  "cp_range_exact": true
+ }
+}

@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-000389",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T5-lists",
+ "byte_length": 820,
+ "cp_length": 799,
+ "sha256": "647c35d28848a59876090de4cd4e494020031e85cf5d17feca193a9200b871da",
+ "document": "- Marko je na sestanku v Mariboru povedal, da je zanka ponavljajoče delo. (Čakala, kolikor je potrebno, a ne več.) Njegov opis je bil preprost: program naj preveri pakete en po en, dokler ne prazni tovornjak.\n- `-- Razdelek2: testi za vir`\n- Varčevanje v hiši se pokaže tudi pri majhnih stvareh, rekel bi, pri svetlobi v kopalnici. Luka je v projektu Varna hiša zapisal: »Luč ne pomeni velikega stroška, če jo ob koncu dneva ugasneš.«\n- Letos, ko smo v projektu Voda gledali porabo, so števila pokazala nižji trend. Povprečno so gospodinjstva porabila dvanajst litrov na dan. To je bilo manj kot lani, ko je bila vrednost tri litre višja. »Zanimivo je, da se razmerje med dnevi z nizko in z visoko porabo ni spremenilo,« je zapisala Ema. Račun je bil zato preprost, a kljub temu povzročil pozornost.",
+ "components": [
+  {
+   "component_id": "comp-prose-programming-explainer-dev-0002",
+   "category": "prose",
+   "start_byte": 2,
+   "end_byte": 211
+  },
+  {
+   "component_id": "comp-code-sql-dev-0010",
+   "category": "code",
+   "start_byte": 214,
+   "end_byte": 242
+  },
+  {
+   "component_id": "comp-prose-everyday-advice-dev-0004",
+   "category": "prose",
+   "start_byte": 245,
+   "end_byte": 447
+  },
+  {
+   "component_id": "comp-prose-statistics-dev-0013",
+   "category": "prose",
+   "start_byte": 450,
+   "end_byte": 820
+  }
+ ]
+}

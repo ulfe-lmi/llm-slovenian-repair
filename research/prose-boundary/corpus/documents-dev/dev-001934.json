@@ -1,0 +1,59 @@
+{
+ "doc_id": "dev-001934",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T10-randomized",
+ "byte_length": 1358,
+ "cp_length": 1341,
+ "sha256": "bc3c166d2f3062bd3cdd0cd0d24f7a135b020686c1f8826ee588a1671af390f4",
+ "document": "Ob krogu učenci najprej ločijo sredino, polmer in obseg, potem pa izmerijo predmete v razredu. (Na primer kozarec, skledo ali okrogel podstavek.) Učitelj lahko poudari, da obseg pove, kako dolgo je rob, površina pa pove, koliko prostora zaseda notranjost. Tak pristop je bil del projekta Geometrija okoli nas, v katerem so dijaki iz leta 2018 zbirali meritve iz kuhinje.\nIzmišljena oseba Tomaž Zupan pri projektu Testni Modul doda 7 m, 15 °C in <pošta@primer.si> poleg <https://primer.si/stran>.\n- [ ] Projekt Lipa: preveriti 5 l\n- [x] Projekt Lipa: zabeležiti 10 °C\n1. Kontrola A: Projekt Jabljana, 15 W\n2. Kontrola B: Projekt Lipa, 30 W\n\\begin{align} \\alpha_7 &= \\lim_{\\beta_7 \\to 0} \\frac{\\gamma_7}{\\beta_7} \\\\ \\delta_7 &= \\nabla \\epsilon_7 \\\\ \\zeta_7 &= \\eta_7 \\cdot \\theta_7 \\end{align}\n```\nint main(void) { char *napis = \"Tekst: *poudarjeno* in _podčrtano_\"; char *cena = \"Cena: 10 $ (dolar)\"; char *url = \"https://primer.si/koda\"; (void)napis; (void)cena; (void)url; return 0; } /* Markov podatek */\n```\n$\\sqrt{\\alpha^2 + \\beta^2} = \\gamma_{\\text{Marko projekt Hrib}}$\nNa gradbišču pri mostu na Soči (projekt Sava) so delavci namesto starega betonskega opornega zidu zgradili lažjo jekleno nosilno konstrukcijo. Priprava temeljev je potekala pozimi, ko so temperaturi pod ničlo zahtevale dodatno osvetlitev in tople oblačila za ekipo.",
+ "components": [
+  {
+   "component_id": "comp-prose-math-explainer-dev-0008",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 374
+  },
+  {
+   "component_id": "comp-markdown-autolinks-dev-0006",
+   "category": "markdown",
+   "start_byte": 375,
+   "end_byte": 503
+  },
+  {
+   "component_id": "comp-markdown-lists-dev-0005",
+   "category": "markdown",
+   "start_byte": 504,
+   "end_byte": 576
+  },
+  {
+   "component_id": "comp-markdown-lists-dev-0007",
+   "category": "markdown",
+   "start_byte": 577,
+   "end_byte": 648
+  },
+  {
+   "component_id": "comp-math-align-env-dev-0007",
+   "category": "math",
+   "start_byte": 649,
+   "end_byte": 801
+  },
+  {
+   "component_id": "comp-code-c-dev-0002",
+   "category": "code",
+   "start_byte": 802,
+   "end_byte": 1021
+  },
+  {
+   "component_id": "comp-math-inline-dollar-dev-0006",
+   "category": "math",
+   "start_byte": 1022,
+   "end_byte": 1086
+  },
+  {
+   "component_id": "comp-prose-engineering-dev-0001",
+   "category": "prose",
+   "start_byte": 1087,
+   "end_byte": 1358
+  }
+ ]
+}

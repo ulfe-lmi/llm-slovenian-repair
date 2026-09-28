@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-002683",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T11-interactions",
+ "byte_length": 1019,
+ "cp_length": 997,
+ "sha256": "bbfee8a41f935fe0be72d36e8aa6e4c1ac83b11cd809602db19a70bc86c8f115",
+ "document": "`# Fragment 4: oseba: Marko Horvat, projekt *Sonca*`.\n```\n#include <string>\n// Končni primer: Ana, Karel, Lipa\n// Znaki: č, š, ž\nint main() {\n    const int HRA_NA_VREDNOST = 9;\n    std::string opis = \"`oklepaji` in *zvezdice*\";\n    return HRA_NA_VREDNOST;\n}\n# komentar z \\frac{a}{b}\n```\nLoj je v skledi mirno segel. Ropova jaha (kot jo pišejo doma) je v loncu postajala sočna. Petra je po starini vzela dve žlici moke, tri zvezdice anisa in malo muškatnega oreha. Krompir je bil že pripravljen, jajca pa so bila v hladilniku, ki ga je kupila leta 2023. Ura je zazvonila, ko je začutila vonj po špinači.\nV projektu Prvi korak so učitelji iz Ljubljane poskusili kratek skupinski pogovor pred ocenjevanjem, kar je po mnenju Anje zmanjšalo strah pred pisnim testom. Pri izbirnem predmetu zgodovina so uporabili učbenik z dodatnimi opombami (stran 42) in vprašanja, ki so dopuščala večkratne odgovore. Odrasli udeleženci so se zavedali, da se izpit ne piše enkrat, temveč se znanje utrjuje v vsakdanju.",
+ "components": [
+  {
+   "component_id": "comp-code-shell-bash-dev-0004",
+   "category": "code",
+   "start_byte": 0,
+   "end_byte": 52
+  },
+  {
+   "component_id": "comp-code-cpp-dev-0008",
+   "category": "code",
+   "start_byte": 54,
+   "end_byte": 290
+  },
+  {
+   "component_id": "comp-prose-cooking-dev-0013",
+   "category": "prose",
+   "start_byte": 291,
+   "end_byte": 614
+  },
+  {
+   "component_id": "comp-prose-education-dev-0006",
+   "category": "prose",
+   "start_byte": 615,
+   "end_byte": 1019
+  }
+ ]
+}

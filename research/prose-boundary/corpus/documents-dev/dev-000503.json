@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-000503",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T9-prose-malformed-prose",
+ "byte_length": 636,
+ "cp_length": 620,
+ "sha256": "834e54942d317d9899cd348308c549bf9eeb14921e7422d312fcb143a7d9cebf",
+ "document": "V raziskavi, ki jo je vodila Nika, so primerjali stavek iz leta 1945 s krajšim opisom iz leta 1959; razlika je bila v dolžini in v rabi vejic. (V notranji opombi je pisalo, da merilo ni bila natančna data, temveč letnica.)\n<div>\nProjekt Maribor: nevtralna avtorizirana opomba za testni nalog.\nAna je zapisala, da se v starejših pisarnah pogosto uporabljajo tiskalniki, ki se povezujejo po kablu, čeprav so mlajši sodelavci privrženci brezžičnih rešitev. Takšna razmerja, čeprav na videz nevidna, vplivajo na to, kako hitro potuje dokument. (V projektu so to opazovali tri tedne.)\n Pozor: é (dekompouziran znakovni niz).",
+ "components": [
+  {
+   "component_id": "comp-prose-history-dev-0004",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 226
+  },
+  {
+   "component_id": "comp-malformed-partial-html-dev-0003",
+   "category": "malformed",
+   "start_byte": 227,
+   "end_byte": 296
+  },
+  {
+   "component_id": "comp-prose-computing-dev-0005",
+   "category": "prose",
+   "start_byte": 297,
+   "end_byte": 592
+  }
+ ]
+}

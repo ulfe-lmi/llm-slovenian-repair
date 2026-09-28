@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-002988",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T8-quote-fenced",
+ "byte_length": 554,
+ "cp_length": 544,
+ "sha256": "868ee3cdf7e7e65de2adadd1d0c5bc1ef94c962c7e14494d51e1ec27ccd8a872",
+ "document": "> V Dubrovniku sem z ekipo Sredozemska karta preveril obzidje in opozoril, da je obisk (brez rezervacije) pogosto daljši. V program smo vstavili tudi kratek postoj v starem solnem bazenu, kjer je voda odražala nebo. Vodič je dejal: \"če želite tih kot, se odpravite proti severu\". `/* Preveri imenik (č, š, ž): src/modul.py in docs/vir.txt */`\n```\n#include <string>\n// *Test* za _označevanje_, čokolada\nint glavna() {\n    int seStez = 8;\n    int razdelek2 = seStez + 2;\n    std::string opis = \"Cena: 3 $ (nevtralno)\";\n    return razdelek2;\n}\n```",
+ "components": [
+  {
+   "component_id": "comp-prose-travel-dev-0005",
+   "category": "prose",
+   "start_byte": 2,
+   "end_byte": 284
+  },
+  {
+   "component_id": "comp-code-javascript-dev-0007",
+   "category": "code",
+   "start_byte": 285,
+   "end_byte": 350
+  },
+  {
+   "component_id": "comp-code-cpp-dev-0007",
+   "category": "code",
+   "start_byte": 351,
+   "end_byte": 554
+  }
+ ]
+}

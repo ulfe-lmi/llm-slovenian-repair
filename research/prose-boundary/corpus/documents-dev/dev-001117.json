@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-001117",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T7-prose-json-prose-latex",
+ "byte_length": 774,
+ "cp_length": 764,
+ "sha256": "50c65ae74c44e29cb691b137b8eec2ceb05ffbdf931078bc7439d088450f0a3f",
+ "document": "Marko je v testnem kotičku izbral dve upornosti, ju povezal z majhno baterijo in opazoval, da se sij utripalke rahlo spreminja. Njegova soseda v delavnici, Petra, je vprašala, ali je sklep res potreben. \"Da, pojasnil je, ker prekine tok, ko ga odpremo.\"\n{\"ime\":\"Projekt Sonce\",\"dolžina\":\"4,2 m\",\"avtorsko\":\"Nevtralna testna vsebina\",\"kvote\":{\"delež\":\"25 %\",\"opomba\":\"**Pregled** https://primer.si/novica\"}}\nMojca je v razredu (po imenu Tista) povedala, da zanka ni nikoli le ponavljanje brez razloga. »Ponovi,« je zapisala na tablo, »dokler se števec ne ustavi.« Nato je pokazala, da funkcija deluje kot majhen stroj, ki prejme ime, preveri starost in vrne, ali udeleženec sodeluje v projektu.\n\\Pr(Z > \\mu + \\sigma) = 1 - \\Phi(1) = 0.1587 \\text{ (verjetnost repa)}",
+ "components": [
+  {
+   "component_id": "comp-prose-electronics-dev-0002",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 255
+  },
+  {
+   "component_id": "comp-structured-json-dev-0005",
+   "category": "structured",
+   "start_byte": 256,
+   "end_byte": 410
+  },
+  {
+   "component_id": "comp-prose-programming-explainer-dev-0007",
+   "category": "prose",
+   "start_byte": 411,
+   "end_byte": 703
+  },
+  {
+   "component_id": "comp-math-probability-dev-0006",
+   "category": "math",
+   "start_byte": 704,
+   "end_byte": 774
+  }
+ ]
+}

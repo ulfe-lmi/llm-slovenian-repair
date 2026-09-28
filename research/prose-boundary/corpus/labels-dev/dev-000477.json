@@ -1,0 +1,112 @@
+{
+ "doc_id": "dev-000477",
+ "byte_length": 932,
+ "cp_length": 904,
+ "regions": [
+  {
+   "start_byte": 0,
+   "end_byte": 2,
+   "start_cp": 0,
+   "end_cp": 2,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 2,
+   "end_byte": 335,
+   "start_cp": 2,
+   "end_cp": 325,
+   "component_id": "comp-prose-administration-dev-0008",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 335,
+   "end_byte": 338,
+   "start_cp": 325,
+   "end_cp": 328,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 338,
+   "end_byte": 339,
+   "start_cp": 328,
+   "end_cp": 329,
+   "component_id": "comp-code-sql-dev-0003",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 339,
+   "end_byte": 400,
+   "start_cp": 329,
+   "end_cp": 389,
+   "component_id": "comp-code-sql-dev-0003",
+   "category": "code",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 400,
+   "end_byte": 401,
+   "start_cp": 389,
+   "end_cp": 390,
+   "component_id": "comp-code-sql-dev-0003",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 401,
+   "end_byte": 404,
+   "start_cp": 390,
+   "end_cp": 393,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 404,
+   "end_byte": 763,
+   "start_cp": 393,
+   "end_cp": 739,
+   "component_id": "comp-prose-math-explainer-dev-0012",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 763,
+   "end_byte": 766,
+   "start_cp": 739,
+   "end_cp": 742,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 766,
+   "end_byte": 932,
+   "start_cp": 742,
+   "end_cp": 904,
+   "component_id": "comp-prose-sports-dev-0011",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  }
+ ],
+ "invariants": {
+  "tiling_complete": true,
+  "no_contradictory_overlaps": true,
+  "cp_range_exact": true
+ }
+}

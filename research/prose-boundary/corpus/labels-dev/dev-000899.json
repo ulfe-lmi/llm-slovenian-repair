@@ -1,0 +1,62 @@
+{
+ "doc_id": "dev-000899",
+ "byte_length": 744,
+ "cp_length": 719,
+ "regions": [
+  {
+   "start_byte": 0,
+   "end_byte": 307,
+   "start_cp": 0,
+   "end_cp": 297,
+   "component_id": "comp-prose-electronics-dev-0010",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 307,
+   "end_byte": 309,
+   "start_cp": 297,
+   "end_cp": 299,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 309,
+   "end_byte": 413,
+   "start_cp": 299,
+   "end_cp": 401,
+   "component_id": "comp-malformed-unclosed-tex-env-dev-0001",
+   "category": "malformed",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 413,
+   "end_byte": 415,
+   "start_cp": 401,
+   "end_cp": 403,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 415,
+   "end_byte": 744,
+   "start_cp": 403,
+   "end_cp": 719,
+   "component_id": "comp-prose-computing-dev-0002",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  }
+ ],
+ "invariants": {
+  "tiling_complete": true,
+  "no_contradictory_overlaps": true,
+  "cp_range_exact": true
+ }
+}

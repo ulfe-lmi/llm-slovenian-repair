@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-000068",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T3-prose-fenced-prose",
+ "byte_length": 875,
+ "cp_length": 847,
+ "sha256": "93f1629717a6fd292f2d953563c6103bed5dfc08ef730342b1146592d3fe2efb",
+ "document": "Pri kontrolnem pregledu mostu v projektu Vrelje so s kamerami, ki so bile pod nosilci, preverili stanje zaščitnih premazov. „Korozija je blaga, a jo moramo spremljati vsako leto“, je zapisal vodja vzdrževanja Igor Potočnik. Popravila so načrtovali za jesen (mesec oktober).\n```\n// Test: poročilo v izmišljenem projektu Jabolko.\nfn main() {\n    let pot = \"src/modul.py\";\n    let besedilo = \"poudarek **žlahtna šuma** in `oklepji` (10 €)\";\n    let url = \"https://primer.si/koda\";\n    println!(\"{pot}: {besedilo} -> {url}\");\n}\n```\nLeta 1999 so v projektu Bralna mreža (izmišljeni arhiv) preizkušali, kako bralci obudijo spomin na slovenske in evropske pesnike. Odkritje ni bilo v imenu, temveč v tem, da je vprašanje (brez nujnega odgovora) preživelo vse. »Zato,« je zapisal izmišljeni filolog Marko Rovec, »ker je knjižnost včasih sama sebi prevod.«",
+ "components": [
+  {
+   "component_id": "comp-prose-engineering-dev-0005",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 282
+  },
+  {
+   "component_id": "comp-code-rust-dev-0011",
+   "category": "code",
+   "start_byte": 283,
+   "end_byte": 542
+  },
+  {
+   "component_id": "comp-prose-literature-dev-0004",
+   "category": "prose",
+   "start_byte": 543,
+   "end_byte": 875
+  }
+ ]
+}

@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-000582",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T11-interactions",
+ "byte_length": 866,
+ "cp_length": 846,
+ "sha256": "523d520e5f7e90eb47ee04359e66c9d894892bde3ec847569b449a3e4e4eb1f7",
+ "document": "`# Fragment 6: *neodvisen*, podčrtano _besedilo_, (oklepaj)`.\r\n```\r\nint main(void) { char *znaki = \"Znaki: č, š, ž\"; char *pot = \"docs/vir.txt\"; char *oznaka = \"seStez\"; char *url = \"https://primer.si/koda\"; (void)znaki; (void)pot; (void)oznaka; (void)url; return 0; } /* Končni fragment */\r\n# komentar z \\frac{a}{b}\r\n```\r\nPri popoldanski projektni uri so udeleženci, ki so prišli iz Šentjernev, najprej raztegnili ramena. Nato so (za razliko od jutranjih vajah) preplavali osemsto metrov. Vse skupaj je bil miren zaključek tedna.\r\nMaja iz Maribora je za tečaj pogovorne angleščine pripravila delavnice, pri katerih so se udeleženci sami odločili, ali znanje dokazujejo s pisnim delom ali s kratkim posnetim predavanjem. Pri vprašanju “kako oceniti napredek” so se dogovorili, da udeležencem (predvsem zaposlenim) velja tudi dnevnik samopregleda.",
+ "components": [
+  {
+   "component_id": "comp-code-shell-bash-dev-0006",
+   "category": "code",
+   "start_byte": 0,
+   "end_byte": 61
+  },
+  {
+   "component_id": "comp-code-c-dev-0008",
+   "category": "code",
+   "start_byte": 64,
+   "end_byte": 326
+  },
+  {
+   "component_id": "comp-prose-sports-dev-0013",
+   "category": "prose",
+   "start_byte": 328,
+   "end_byte": 539
+  },
+  {
+   "component_id": "comp-prose-education-dev-0007",
+   "category": "prose",
+   "start_byte": 541,
+   "end_byte": 866
+  }
+ ]
+}

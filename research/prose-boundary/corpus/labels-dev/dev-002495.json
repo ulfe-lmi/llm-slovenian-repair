@@ -1,0 +1,812 @@
+{
+ "doc_id": "dev-002495",
+ "byte_length": 1445,
+ "cp_length": 1426,
+ "regions": [
+  {
+   "start_byte": 0,
+   "end_byte": 448,
+   "start_cp": 0,
+   "end_cp": 444,
+   "component_id": "comp-prose-programming-explainer-dev-0006",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 448,
+   "end_byte": 449,
+   "start_cp": 444,
+   "end_cp": 445,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 449,
+   "end_byte": 451,
+   "start_cp": 445,
+   "end_cp": 447,
+   "component_id": "comp-markdown-lists-dev-0006",
+   "category": "markdown",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 451,
+   "end_byte": 486,
+   "start_cp": 447,
+   "end_cp": 482,
+   "component_id": "comp-markdown-lists-dev-0006",
+   "category": "markdown",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 486,
+   "end_byte": 494,
+   "start_cp": 482,
+   "end_cp": 490,
+   "component_id": "comp-markdown-lists-dev-0006",
+   "category": "markdown",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 494,
+   "end_byte": 509,
+   "start_cp": 490,
+   "end_cp": 505,
+   "component_id": "comp-markdown-lists-dev-0006",
+   "category": "markdown",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 509,
+   "end_byte": 517,
+   "start_cp": 505,
+   "end_cp": 513,
+   "component_id": "comp-markdown-lists-dev-0006",
+   "category": "markdown",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 517,
+   "end_byte": 531,
+   "start_cp": 513,
+   "end_cp": 527,
+   "component_id": "comp-markdown-lists-dev-0006",
+   "category": "markdown",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 531,
+   "end_byte": 532,
+   "start_cp": 527,
+   "end_cp": 528,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 532,
+   "end_byte": 535,
+   "start_cp": 528,
+   "end_cp": 531,
+   "component_id": "comp-markdown-headings-dev-0009",
+   "category": "markdown",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 535,
+   "end_byte": 558,
+   "start_cp": 531,
+   "end_cp": 554,
+   "component_id": "comp-markdown-headings-dev-0009",
+   "category": "markdown",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 558,
+   "end_byte": 562,
+   "start_cp": 554,
+   "end_cp": 558,
+   "component_id": "comp-markdown-headings-dev-0009",
+   "category": "markdown",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 562,
+   "end_byte": 578,
+   "start_cp": 558,
+   "end_cp": 574,
+   "component_id": "comp-markdown-headings-dev-0009",
+   "category": "markdown",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 578,
+   "end_byte": 583,
+   "start_cp": 574,
+   "end_cp": 579,
+   "component_id": "comp-markdown-headings-dev-0009",
+   "category": "markdown",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 583,
+   "end_byte": 595,
+   "start_cp": 579,
+   "end_cp": 591,
+   "component_id": "comp-markdown-headings-dev-0009",
+   "category": "markdown",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 595,
+   "end_byte": 596,
+   "start_cp": 591,
+   "end_cp": 592,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 596,
+   "end_byte": 597,
+   "start_cp": 592,
+   "end_cp": 593,
+   "component_id": "comp-markdown-tables-dev-0006",
+   "category": "markdown",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 597,
+   "end_byte": 606,
+   "start_cp": 593,
+   "end_cp": 602,
+   "component_id": "comp-markdown-tables-dev-0006",
+   "category": "markdown",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 606,
+   "end_byte": 607,
+   "start_cp": 602,
+   "end_cp": 603,
+   "component_id": "comp-markdown-tables-dev-0006",
+   "category": "markdown",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 607,
+   "end_byte": 614,
+   "start_cp": 603,
+   "end_cp": 610,
+   "component_id": "comp-markdown-tables-dev-0006",
+   "category": "markdown",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 614,
+   "end_byte": 615,
+   "start_cp": 610,
+   "end_cp": 611,
+   "component_id": "comp-markdown-tables-dev-0006",
+   "category": "markdown",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 615,
+   "end_byte": 621,
+   "start_cp": 611,
+   "end_cp": 617,
+   "component_id": "comp-markdown-tables-dev-0006",
+   "category": "markdown",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 621,
+   "end_byte": 622,
+   "start_cp": 617,
+   "end_cp": 618,
+   "component_id": "comp-markdown-tables-dev-0006",
+   "category": "markdown",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 622,
+   "end_byte": 623,
+   "start_cp": 618,
+   "end_cp": 619,
+   "component_id": "comp-markdown-tables-dev-0006",
+   "category": "markdown",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 623,
+   "end_byte": 642,
+   "start_cp": 619,
+   "end_cp": 638,
+   "component_id": "comp-markdown-tables-dev-0006",
+   "category": "markdown",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 642,
+   "end_byte": 643,
+   "start_cp": 638,
+   "end_cp": 639,
+   "component_id": "comp-markdown-tables-dev-0006",
+   "category": "markdown",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 643,
+   "end_byte": 644,
+   "start_cp": 639,
+   "end_cp": 640,
+   "component_id": "comp-markdown-tables-dev-0006",
+   "category": "markdown",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 644,
+   "end_byte": 658,
+   "start_cp": 640,
+   "end_cp": 654,
+   "component_id": "comp-markdown-tables-dev-0006",
+   "category": "markdown",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 658,
+   "end_byte": 659,
+   "start_cp": 654,
+   "end_cp": 655,
+   "component_id": "comp-markdown-tables-dev-0006",
+   "category": "markdown",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 659,
+   "end_byte": 662,
+   "start_cp": 655,
+   "end_cp": 658,
+   "component_id": "comp-markdown-tables-dev-0006",
+   "category": "markdown",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 662,
+   "end_byte": 663,
+   "start_cp": 658,
+   "end_cp": 659,
+   "component_id": "comp-markdown-tables-dev-0006",
+   "category": "markdown",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 663,
+   "end_byte": 668,
+   "start_cp": 659,
+   "end_cp": 664,
+   "component_id": "comp-markdown-tables-dev-0006",
+   "category": "markdown",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 668,
+   "end_byte": 669,
+   "start_cp": 664,
+   "end_cp": 665,
+   "component_id": "comp-markdown-tables-dev-0006",
+   "category": "markdown",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 669,
+   "end_byte": 670,
+   "start_cp": 665,
+   "end_cp": 666,
+   "component_id": "comp-markdown-tables-dev-0006",
+   "category": "markdown",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 670,
+   "end_byte": 671,
+   "start_cp": 666,
+   "end_cp": 667,
+   "component_id": "comp-markdown-tables-dev-0006",
+   "category": "markdown",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 671,
+   "end_byte": 685,
+   "start_cp": 667,
+   "end_cp": 681,
+   "component_id": "comp-markdown-tables-dev-0006",
+   "category": "markdown",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 685,
+   "end_byte": 686,
+   "start_cp": 681,
+   "end_cp": 682,
+   "component_id": "comp-markdown-tables-dev-0006",
+   "category": "markdown",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 686,
+   "end_byte": 690,
+   "start_cp": 682,
+   "end_cp": 686,
+   "component_id": "comp-markdown-tables-dev-0006",
+   "category": "markdown",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 690,
+   "end_byte": 691,
+   "start_cp": 686,
+   "end_cp": 687,
+   "component_id": "comp-markdown-tables-dev-0006",
+   "category": "markdown",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 691,
+   "end_byte": 696,
+   "start_cp": 687,
+   "end_cp": 692,
+   "component_id": "comp-markdown-tables-dev-0006",
+   "category": "markdown",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 696,
+   "end_byte": 697,
+   "start_cp": 692,
+   "end_cp": 693,
+   "component_id": "comp-markdown-tables-dev-0006",
+   "category": "markdown",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 697,
+   "end_byte": 698,
+   "start_cp": 693,
+   "end_cp": 694,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 698,
+   "end_byte": 699,
+   "start_cp": 694,
+   "end_cp": 695,
+   "component_id": "comp-structured-yaml-dev-0007",
+   "category": "structured",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 699,
+   "end_byte": 700,
+   "start_cp": 695,
+   "end_cp": 696,
+   "component_id": "comp-structured-yaml-dev-0007",
+   "category": "structured",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 700,
+   "end_byte": 701,
+   "start_cp": 696,
+   "end_cp": 697,
+   "component_id": "comp-structured-yaml-dev-0007",
+   "category": "structured",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 701,
+   "end_byte": 702,
+   "start_cp": 697,
+   "end_cp": 698,
+   "component_id": "comp-structured-yaml-dev-0007",
+   "category": "structured",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 702,
+   "end_byte": 967,
+   "start_cp": 698,
+   "end_cp": 961,
+   "component_id": "comp-structured-yaml-dev-0007",
+   "category": "structured",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 967,
+   "end_byte": 968,
+   "start_cp": 961,
+   "end_cp": 962,
+   "component_id": "comp-structured-yaml-dev-0007",
+   "category": "structured",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 968,
+   "end_byte": 969,
+   "start_cp": 962,
+   "end_cp": 963,
+   "component_id": "comp-structured-yaml-dev-0007",
+   "category": "structured",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 969,
+   "end_byte": 970,
+   "start_cp": 963,
+   "end_cp": 964,
+   "component_id": "comp-structured-yaml-dev-0007",
+   "category": "structured",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 970,
+   "end_byte": 978,
+   "start_cp": 964,
+   "end_cp": 972,
+   "component_id": "comp-structured-yaml-dev-0007",
+   "category": "structured",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 978,
+   "end_byte": 979,
+   "start_cp": 972,
+   "end_cp": 973,
+   "component_id": "comp-structured-yaml-dev-0007",
+   "category": "structured",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 979,
+   "end_byte": 980,
+   "start_cp": 973,
+   "end_cp": 974,
+   "component_id": "comp-structured-yaml-dev-0007",
+   "category": "structured",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 980,
+   "end_byte": 981,
+   "start_cp": 974,
+   "end_cp": 975,
+   "component_id": "comp-structured-yaml-dev-0007",
+   "category": "structured",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 981,
+   "end_byte": 982,
+   "start_cp": 975,
+   "end_cp": 976,
+   "component_id": "comp-structured-yaml-dev-0007",
+   "category": "structured",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 982,
+   "end_byte": 992,
+   "start_cp": 976,
+   "end_cp": 986,
+   "component_id": "comp-structured-yaml-dev-0007",
+   "category": "structured",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 992,
+   "end_byte": 993,
+   "start_cp": 986,
+   "end_cp": 987,
+   "component_id": "comp-structured-yaml-dev-0007",
+   "category": "structured",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 993,
+   "end_byte": 1000,
+   "start_cp": 987,
+   "end_cp": 994,
+   "component_id": "comp-structured-yaml-dev-0007",
+   "category": "structured",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 1000,
+   "end_byte": 1001,
+   "start_cp": 994,
+   "end_cp": 995,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 1001,
+   "end_byte": 1007,
+   "start_cp": 995,
+   "end_cp": 1001,
+   "component_id": "comp-machine-identifiers-dev-0008",
+   "category": "machine",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 1007,
+   "end_byte": 1008,
+   "start_cp": 1001,
+   "end_cp": 1002,
+   "component_id": "comp-machine-identifiers-dev-0008",
+   "category": "machine",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 1008,
+   "end_byte": 1017,
+   "start_cp": 1002,
+   "end_cp": 1011,
+   "component_id": "comp-machine-identifiers-dev-0008",
+   "category": "machine",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 1017,
+   "end_byte": 1018,
+   "start_cp": 1011,
+   "end_cp": 1012,
+   "component_id": "comp-machine-identifiers-dev-0008",
+   "category": "machine",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 1018,
+   "end_byte": 1025,
+   "start_cp": 1012,
+   "end_cp": 1018,
+   "component_id": "comp-machine-identifiers-dev-0008",
+   "category": "machine",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 1025,
+   "end_byte": 1026,
+   "start_cp": 1018,
+   "end_cp": 1019,
+   "component_id": "comp-machine-identifiers-dev-0008",
+   "category": "machine",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 1026,
+   "end_byte": 1034,
+   "start_cp": 1019,
+   "end_cp": 1027,
+   "component_id": "comp-machine-identifiers-dev-0008",
+   "category": "machine",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 1034,
+   "end_byte": 1035,
+   "start_cp": 1027,
+   "end_cp": 1028,
+   "component_id": "comp-machine-identifiers-dev-0008",
+   "category": "machine",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 1035,
+   "end_byte": 1042,
+   "start_cp": 1028,
+   "end_cp": 1035,
+   "component_id": "comp-machine-identifiers-dev-0008",
+   "category": "machine",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 1042,
+   "end_byte": 1043,
+   "start_cp": 1035,
+   "end_cp": 1036,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 1043,
+   "end_byte": 1111,
+   "start_cp": 1036,
+   "end_cp": 1103,
+   "component_id": "comp-markdown-strong-dev-0005",
+   "category": "markdown",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 1111,
+   "end_byte": 1113,
+   "start_cp": 1103,
+   "end_cp": 1105,
+   "component_id": "comp-markdown-strong-dev-0005",
+   "category": "markdown",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 1113,
+   "end_byte": 1119,
+   "start_cp": 1105,
+   "end_cp": 1110,
+   "component_id": "comp-markdown-strong-dev-0005",
+   "category": "markdown",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 1119,
+   "end_byte": 1121,
+   "start_cp": 1110,
+   "end_cp": 1112,
+   "component_id": "comp-markdown-strong-dev-0005",
+   "category": "markdown",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 1121,
+   "end_byte": 1125,
+   "start_cp": 1112,
+   "end_cp": 1116,
+   "component_id": "comp-markdown-strong-dev-0005",
+   "category": "markdown",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 1125,
+   "end_byte": 1127,
+   "start_cp": 1116,
+   "end_cp": 1118,
+   "component_id": "comp-markdown-strong-dev-0005",
+   "category": "markdown",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 1127,
+   "end_byte": 1136,
+   "start_cp": 1118,
+   "end_cp": 1126,
+   "component_id": "comp-markdown-strong-dev-0005",
+   "category": "markdown",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 1136,
+   "end_byte": 1138,
+   "start_cp": 1126,
+   "end_cp": 1128,
+   "component_id": "comp-markdown-strong-dev-0005",
+   "category": "markdown",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 1138,
+   "end_byte": 1149,
+   "start_cp": 1128,
+   "end_cp": 1139,
+   "component_id": "comp-markdown-strong-dev-0005",
+   "category": "markdown",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 1149,
+   "end_byte": 1150,
+   "start_cp": 1139,
+   "end_cp": 1140,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 1150,
+   "end_byte": 1445,
+   "start_cp": 1140,
+   "end_cp": 1426,
+   "component_id": "comp-prose-computing-dev-0005",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  }
+ ],
+ "invariants": {
+  "tiling_complete": true,
+  "no_contradictory_overlaps": true,
+  "cp_range_exact": true
+ }
+}

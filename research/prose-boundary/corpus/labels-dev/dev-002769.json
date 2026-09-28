@@ -1,0 +1,62 @@
+{
+ "doc_id": "dev-002769",
+ "byte_length": 526,
+ "cp_length": 511,
+ "regions": [
+  {
+   "start_byte": 0,
+   "end_byte": 202,
+   "start_cp": 0,
+   "end_cp": 192,
+   "component_id": "comp-prose-everyday-advice-dev-0004",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 202,
+   "end_byte": 204,
+   "start_cp": 192,
+   "end_cp": 194,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 204,
+   "end_byte": 255,
+   "start_cp": 194,
+   "end_cp": 245,
+   "component_id": "comp-malformed-incomplete-paren-bracket-dev-0002",
+   "category": "malformed",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 255,
+   "end_byte": 257,
+   "start_cp": 245,
+   "end_cp": 247,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 257,
+   "end_byte": 526,
+   "start_cp": 247,
+   "end_cp": 511,
+   "component_id": "comp-prose-history-dev-0008",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  }
+ ],
+ "invariants": {
+  "tiling_complete": true,
+  "no_contradictory_overlaps": true,
+  "cp_range_exact": true
+ }
+}

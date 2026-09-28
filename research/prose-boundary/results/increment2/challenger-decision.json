@@ -1,0 +1,24 @@
+{
+ "schema": "008a-challenger-decision/1",
+ "order": "008-a",
+ "challenger": "markdown-rs 1.0.0",
+ "trigger_conditions_evaluated": {
+  "incorrect_or_unusable_source_ranges": false,
+  "relevant_gfm_incompatibility": false,
+  "unsafe_malformed_input_handling": false,
+  "unacceptable_math_currency_behaviour": false,
+  "structural_misclassification_affecting_actual_output": false,
+  "another_failure_markdown_rs_plausibly_addresses": false
+ },
+ "evidence": {
+  "source_range_fidelity": "100% on fixtures (increment 1) and on all 100 corpus samples (coordinate check aborts on violation)",
+  "gfm_construct_spans_classified": 0,
+  "malformed_flagged_samples": 0,
+  "malformed_disagreement_spans_class_6": 0,
+  "class_3_safety_spans": 0,
+  "class_8_unresolved_spans": 0,
+  "dollar_math_policy": "no dollar pair in the corpus sample forms math (ST-2 self-test + fixture F16/F17 behaviour); currency exposure is class-7 residual, bounded"
+ },
+ "decision": "NOT_TRIGGERED",
+ "note": "Decision recorded either way per the frozen challenger protocol. tree-sitter-markdown not revived; Pandoc remains a diagnostic oracle only."
+}

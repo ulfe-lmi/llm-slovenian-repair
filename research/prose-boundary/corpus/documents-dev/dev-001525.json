@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-001525",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T8-quote-fenced",
+ "byte_length": 798,
+ "cp_length": 791,
+ "sha256": "f23a54715ee4feb2916a0afcdf22c86fe52a14cc3a00a961064db281a25bf2ae",
+ "document": "> Varčnost pri računih za ogrevanje v projektu Topla hiša ni vedno leva stvar, če je v prostoru prehladno. Leta 2023 so mnogi domovi dobili termometre, ki opozarjajo, ko temperatura pade pod 18 stopinj. (V takih dneh je bolje zapreti okno, ki ga obvečer nismo nujno potrebovali.) Pri starejših gradnjah je koristno preveriti tudi, ali se okno res dobro zapre. `# Fragment 5: *testni* niz (neodvisen), oseba: Petra Novak`\n```\n/* Primer 3: vrednost in identifikator */ int main(void) { const char *pot = \"src/modul.py\"; const char *dokument = \"docs/vir.txt\"; const char *meta = \"Vrednost: 99,90 $ (oklepji) *poudarek* in HRAŠNA_VREDNOST\"; const char *naslov = \"https://primer.si/koda\"; int hraSnaVrednost2 = 3; (void)pot; (void)dokument; (void)meta; (void)naslov; return hraSnaVrednost2; }\n```",
+ "components": [
+  {
+   "component_id": "comp-prose-everyday-advice-dev-0009",
+   "category": "prose",
+   "start_byte": 2,
+   "end_byte": 365
+  },
+  {
+   "component_id": "comp-code-shell-bash-dev-0005",
+   "category": "code",
+   "start_byte": 366,
+   "end_byte": 426
+  },
+  {
+   "component_id": "comp-code-c-dev-0011",
+   "category": "code",
+   "start_byte": 427,
+   "end_byte": 798
+  }
+ ]
+}

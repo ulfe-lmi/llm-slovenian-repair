@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-000825",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T1-prose-inlinecode-prose",
+ "byte_length": 879,
+ "cp_length": 865,
+ "sha256": "80b4694a25c2a0537acbe0a2b14546774543c651922d48f66768299b16abc8b3",
+ "document": "Biološki kolektiv pri projektu Križanec je v gozdu nad Celjem opazoval rast gliv po jutranji rosi. Med analizo vzorčkov (tri serije, vse z značko Z3) je dr. Marko Zupan opažil, da se nekatere hife ob dotiku zavrtijo, kar je v laboratoriju razložil s preprostimi mehanskimi odzivi. »To ni čarobno vedenje,« je dejal in dodal, da so za znanstvenika pogosto najpomembnejši tisti podrobnosti, ki jih drugi spregledajo.\n`def seštej(a, b): return a + b, 'Povzetek: **pomembno** _pod`\nProjektna ekipa Zgodovinski stezni je v razpravi o svetu, obdobju pred dvajsetim stoletjem, omenila izmišljene kronike, ki opisujejo trgovske poti. Lina je rekla, da so imena v teh listinah pogosto podobna našim, a ne smemo pozabiti, da gre za testno vsebino in ne za uradne podatke. V oklepaju (za notranjo uporabo) je zapisala, da je merilo za preverjanje letnica, če je bila omenjena.",
+ "components": [
+  {
+   "component_id": "comp-prose-science-dev-0012",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 424
+  },
+  {
+   "component_id": "comp-code-python-dev-0009",
+   "category": "code",
+   "start_byte": 425,
+   "end_byte": 488
+  },
+  {
+   "component_id": "comp-prose-history-dev-0003",
+   "category": "prose",
+   "start_byte": 489,
+   "end_byte": 879
+  }
+ ]
+}

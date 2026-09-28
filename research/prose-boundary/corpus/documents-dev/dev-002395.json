@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-002395",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T9-prose-malformed-prose",
+ "byte_length": 801,
+ "cp_length": 783,
+ "sha256": "af9c26b1ceaf9dd3837641750bf81cab01ca3fbfd6e97a8ebdd2ded86b4b20bf",
+ "document": "Petra je pri večernem testu ugotovila, da je vsak sklep, ki deluje, najprej zaprt in da vsaka upornost v njem nekaj počuti. Lučka se je vžgala šele takrat, ko je namesto ene uporabila dve bateriji, in sicer v smeri, ki jo je narisala v beleški. ”To je bilo dovolj,“ je zapisala v dnevnik projekta.\n\n\\begin{align} t &= 0, zbirka podatkov za projekt Modra pot, izmišljen sodelavec Jožko Novak.\n\nBiologi v projektu Grepel so gojili mikroalghe v steklenih skledah in vsak teden beležili barvo ter gostino. V dnevniku so zapisali, da so kulture pri temperaturi dvaindvajset stopinj Celzija hitreje porabile svetlobo. »Ta serija je nenavadno stabilna,« je rekel Tomaž ob oknu. Leta dvotisoč in dvaindvajset je Iva pripravila manjšo skupino vzorcev, ki so jo poimenovali po dolini pri Logu.",
+ "components": [
+  {
+   "component_id": "comp-prose-electronics-dev-0010",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 307
+  },
+  {
+   "component_id": "comp-malformed-unclosed-tex-env-dev-0003",
+   "category": "malformed",
+   "start_byte": 309,
+   "end_byte": 403
+  },
+  {
+   "component_id": "comp-prose-science-dev-0002",
+   "category": "prose",
+   "start_byte": 405,
+   "end_byte": 801
+  }
+ ]
+}

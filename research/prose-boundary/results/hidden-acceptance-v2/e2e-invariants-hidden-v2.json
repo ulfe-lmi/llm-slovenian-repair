@@ -1,0 +1,232 @@
+{
+ "schema": "008g-e2e-invariants-hidden-v2/1",
+ "order": "008-g",
+ "label": "acceptance evidence over the NEW sealed v2 hidden set: end-to-end preservation invariants 1-7 through the actual frozen pipeline entry points (the frozen 008-c runner, byte-identical, invoked unmodified)",
+ "raw_frozen_harness_output": {
+  "label": "raw frozen-harness output over the v2 set, NOT a development-run result: the embedded wrapper self-identifies with its 008-f identity fields (frozen harness self-identification, unchanged)",
+  "e2e": {
+   "schema": "008f-e2e-invariants-hidden/1",
+   "order": "008-f",
+   "label": "blind hidden acceptance evidence: end-to-end preservation invariants 1-7 on the sealed hidden mashup set through the actual frozen pipeline entry points (pipeline.prepare/pipeline.replay with the frozen detector, English-eligibility policy, post-review gate and patching)",
+   "frozen_runner": "research/prose-boundary/tools/end_to_end_invariants.py run_invariants (008-c frozen logic, byte-identical; invoked unmodified)",
+   "corpus": "2,000 hidden mashup documents + machine-known label maps (private root; sealed by hidden-manifest.json)",
+   "deterministic_boundary": "the 008-c deterministic stub boundary: scripted reviewer at the HTTP boundary (raw response documents parsed by the real review.parse_proposal; self-corpus n-gram index derived deterministically from the hidden documents; fixed English-attestation seam); zero network, zero new model calls",
+   "linked_files": 4000,
+   "replay_count": 2000,
+   "seed_count": 20,
+   "frozen_report": {
+    "schema": "008c-e2e-invariants/1",
+    "order": "008-c",
+    "label": "dev-corpus tuning evidence, NOT acceptance",
+    "protection_mode": "parser-first",
+    "helper_sha256": "5df9a11d56b5bdec90c3ca09298802723975306f77e43e74ad1a72eb427c44bf",
+    "self_corpus": {
+     "documents": 2000,
+     "unigrams": 2297,
+     "bigrams": 8577,
+     "trigrams": 13426,
+     "middle_rows": 13426
+    },
+    "reviewer": "scripted reviewer at the HTTP boundary: raw response documents parsed by review.parse_proposal; zero network, zero model calls (S-EVIDENCE-01)",
+    "documents": {
+     "dev_total": 2000,
+     "with_protected_and_prose": 2000,
+     "replayed": 2000,
+     "zero_eligible_documents": 0,
+     "full_zero_check": true
+    },
+    "invariants": {
+     "1_detector_input_outside_protected": true,
+     "2_ngram_windows_no_bridge": true,
+     "3_review_targets_outside_protected": true,
+     "4_accepted_edits_outside_protected": true,
+     "5_protected_substrings_identical_after_path": true,
+     "6_adjacent_prose_repairable": true,
+     "7_zero_eligible_zero_review_work": true
+    },
+    "seeded": [
+     {
+      "doc_id": "v2h-000042",
+      "error_word": "xyzzyplugh",
+      "replacement_word": "projekt",
+      "edit_applied": true
+     },
+     {
+      "doc_id": "v2h-000097",
+      "error_word": "xyzzyplugh",
+      "replacement_word": "projekt",
+      "edit_applied": true
+     },
+     {
+      "doc_id": "v2h-000108",
+      "error_word": "xyzzyplugh",
+      "replacement_word": "projekt",
+      "edit_applied": true
+     },
+     {
+      "doc_id": "v2h-000138",
+      "error_word": "xyzzyplugh",
+      "replacement_word": "projekt",
+      "edit_applied": true
+     },
+     {
+      "doc_id": "v2h-000152",
+      "error_word": "xyzzyplugh",
+      "replacement_word": "projekt",
+      "edit_applied": true
+     },
+     {
+      "doc_id": "v2h-000163",
+      "error_word": "xyzzyplugh",
+      "replacement_word": "projekt",
+      "edit_applied": true
+     },
+     {
+      "doc_id": "v2h-000188",
+      "error_word": "xyzzyplugh",
+      "replacement_word": "projekt",
+      "edit_applied": true
+     },
+     {
+      "doc_id": "v2h-000207",
+      "error_word": "xyzzyplugh",
+      "replacement_word": "projekt",
+      "edit_applied": true
+     },
+     {
+      "doc_id": "v2h-000251",
+      "error_word": "xyzzyplugh",
+      "replacement_word": "projekt",
+      "edit_applied": true
+     },
+     {
+      "doc_id": "v2h-000317",
+      "error_word": "xyzzyplugh",
+      "replacement_word": "projekt",
+      "edit_applied": true
+     },
+     {
+      "doc_id": "v2h-000325",
+      "error_word": "xyzzyplugh",
+      "replacement_word": "projekt",
+      "edit_applied": true
+     },
+     {
+      "doc_id": "v2h-000358",
+      "error_word": "xyzzyplugh",
+      "replacement_word": "projekt",
+      "edit_applied": true
+     },
+     {
+      "doc_id": "v2h-000364",
+      "error_word": "xyzzyplugh",
+      "replacement_word": "projekt",
+      "edit_applied": true
+     },
+     {
+      "doc_id": "v2h-000394",
+      "error_word": "xyzzyplugh",
+      "replacement_word": "projekt",
+      "edit_applied": true
+     },
+     {
+      "doc_id": "v2h-000408",
+      "error_word": "xyzzyplugh",
+      "replacement_word": "projekt",
+      "edit_applied": true
+     },
+     {
+      "doc_id": "v2h-000424",
+      "error_word": "xyzzyplugh",
+      "replacement_word": "projekt",
+      "edit_applied": true
+     },
+     {
+      "doc_id": "v2h-000449",
+      "error_word": "xyzzyplugh",
+      "replacement_word": "projekt",
+      "edit_applied": true
+     },
+     {
+      "doc_id": "v2h-000457",
+      "error_word": "xyzzyplugh",
+      "replacement_word": "projekt",
+      "edit_applied": true
+     },
+     {
+      "doc_id": "v2h-000460",
+      "error_word": "xyzzyplugh",
+      "replacement_word": "projekt",
+      "edit_applied": true
+     },
+     {
+      "doc_id": "v2h-000463",
+      "error_word": "xyzzyplugh",
+      "replacement_word": "projekt",
+      "edit_applied": true
+     }
+    ],
+    "synthetic_zero_eligible": {
+     "eligible_words": 0,
+     "candidates": 0,
+     "ok": true
+    },
+    "all_pass": true
+   },
+   "per_invariant": {
+    "1_detector_input_outside_protected": true,
+    "2_ngram_windows_no_bridge": true,
+    "3_review_targets_outside_protected": true,
+    "4_accepted_edits_outside_protected": true,
+    "5_protected_substrings_identical_after_path": true,
+    "6_adjacent_prose_repairable": true,
+    "7_zero_eligible_zero_review_work": true
+   },
+   "all_pass": true
+  }
+ },
+ "per_invariant": {
+  "1_detector_input_outside_protected": true,
+  "2_ngram_windows_no_bridge": true,
+  "3_review_targets_outside_protected": true,
+  "4_accepted_edits_outside_protected": true,
+  "5_protected_substrings_identical_after_path": true,
+  "6_adjacent_prose_repairable": true,
+  "7_zero_eligible_zero_review_work": true
+ },
+ "all_pass": true,
+ "v2_identity": {
+  "v2_manifest_sha256": "cf37654a45b10c024525fc334f368d4b20956619e2568542544c855d93a85ec1",
+  "seal_verification_sha256": "c532738dc4ca4e5441b9f35a3cb0930eae02a966562b62f6557c660dfa731a75",
+  "seal_identity": {
+   "manifest_sha256": "cf37654a45b10c024525fc334f368d4b20956619e2568542544c855d93a85ec1",
+   "documents": 2000,
+   "labels": 2000,
+   "components": 340
+  },
+  "strategy_seal_verification_receipt": {
+   "filename": "008g-v2-seal-strategy-verification-20260919.md",
+   "sha256": "b24ed3f6693d19d180972d440f09d1c3c562d6e8e260d804ecac9f4a8d1488a5",
+   "size": 2305,
+   "location": "strategy workorders (supervision tree); path not committed",
+   "cites_v2_manifest_sha256": true
+  },
+  "frozen_protection_identity": {
+   "experiment_config_sha256": "6346d7cec938defda58d2607e8aca41638359f66ca4856d2dea8f6d85960a5c8",
+   "census": {
+    "research/curated/prose_boundary.py": "3a5a4ba7b5258dc7937a9b4ef98a90982a6a159d5d8763160f3105048545f2d7",
+    "research/curated/protected.py": "27f22eaee129190b880851b958a8aa5a38d357cb4e711d70e762b2353d32e78f",
+    "research/prose-boundary/config/structural-policy-v3.json": "7ff6646e3c11d1241cb1c85bd96f08e3f0db08e73d4eb4a4e97fac0c17e1828f"
+   },
+   "policy_v3_sha256": "7ff6646e3c11d1241cb1c85bd96f08e3f0db08e73d4eb4a4e97fac0c17e1828f",
+   "helper_sha256": "5df9a11d56b5bdec90c3ca09298802723975306f77e43e74ad1a72eb427c44bf"
+  },
+  "frozen_harness": {
+   "file": "research/prose-boundary/tools/hidden_acceptance.py",
+   "sha256": "22ae618bd1be66bfd93c79a10e97066eef5dcd05213f851e7b19f5a12e8771fd",
+   "committed_blob_sha256": "22ae618bd1be66bfd93c79a10e97066eef5dcd05213f851e7b19f5a12e8771fd",
+   "byte_identical": true
+  }
+ },
+ "privacy": "counts, categories, rates and hashes only; no case content, no label content, no private paths"
+}

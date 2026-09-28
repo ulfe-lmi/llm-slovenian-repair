@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-002408",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T11-interactions",
+ "byte_length": 1223,
+ "cp_length": 1193,
+ "sha256": "580b03a96ded377a3dbf6a7e49a61dccbd2f010800e6ce74dec75aac729bd263",
+ "document": "`# Testni projekt: Pripomoček; avtor: Maja Lipovnik`.\n```\n# Fragment 5: *testni* niz (neodvisen), oseba: Petra Novak\necho 'Poudarek: **močnejši**, podčrtano: _nežno_'\necho 'Cena: 15 $ in 6 € za izmišljeno storitev'\necho 'Datoteke: src/modul.py, docs/vir.txt'\necho 'Vir: https://primer.si/koda'\necho 'Identifikatorji: HRAŠNA_VREDNOST, razdelek2, seStez'\necho 'Backquote `tukaj`; znaki: č, š, ž'\n# komentar z \\frac{a}{b}\n```\nO proporcijah sem v šolskem letu 2019 govorila kot o primerjavi enakih delov, zato so učenci izmišljali recepte in merili sestavine. »Če ena skleda vsebuje dva dela, potem druga vsebuje štiri dele,« je povedala Ana, in to je bila za nas dobra vstopna točka.\nV projektu Brisača so mladi v Novem mestu dobili učbenik, ki je namesto dolgih razlag ponudil tri kratke opise in eno vprašanje za pogovor. Nekateri odrasli so želeli, da bi izpit ostal razumljiv, zato so v nalogah zapisali tudi primer, kakšno vprašanje bodo dobili. Učiteljica Ivana je v uvodnem poglavju (glej stran 17) dodala opombo o tem, kako se besede razlikujejo v govoru in v pisanju. Po kratkem testnem popoldnevu v oddelku so se učenci in starši bolje dogovorili o tem, kaj pomeni samostojno reševanje.",
+ "components": [
+  {
+   "component_id": "comp-code-python-dev-0004",
+   "category": "code",
+   "start_byte": 0,
+   "end_byte": 53
+  },
+  {
+   "component_id": "comp-code-shell-bash-dev-0005",
+   "category": "code",
+   "start_byte": 55,
+   "end_byte": 434
+  },
+  {
+   "component_id": "comp-prose-math-explainer-dev-0002",
+   "category": "prose",
+   "start_byte": 435,
+   "end_byte": 700
+  },
+  {
+   "component_id": "comp-prose-education-dev-0008",
+   "category": "prose",
+   "start_byte": 701,
+   "end_byte": 1223
+  }
+ ]
+}

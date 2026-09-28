@@ -1,0 +1,152 @@
+{
+ "doc_id": "dev-002793",
+ "byte_length": 895,
+ "cp_length": 870,
+ "regions": [
+  {
+   "start_byte": 0,
+   "end_byte": 1,
+   "start_cp": 0,
+   "end_cp": 1,
+   "component_id": "comp-code-shell-bash-dev-0006",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 1,
+   "end_byte": 60,
+   "start_cp": 1,
+   "end_cp": 59,
+   "component_id": "comp-code-shell-bash-dev-0006",
+   "category": "code",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 60,
+   "end_byte": 61,
+   "start_cp": 59,
+   "end_cp": 60,
+   "component_id": "comp-code-shell-bash-dev-0006",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 61,
+   "end_byte": 62,
+   "start_cp": 60,
+   "end_cp": 61,
+   "component_id": "template",
+   "category": null,
+   "role": "PROSE",
+   "template_owned": true
+  },
+  {
+   "start_byte": 62,
+   "end_byte": 63,
+   "start_cp": 61,
+   "end_cp": 62,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 63,
+   "end_byte": 66,
+   "start_cp": 62,
+   "end_cp": 65,
+   "component_id": "comp-code-cpp-dev-0003",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 66,
+   "end_byte": 67,
+   "start_cp": 65,
+   "end_cp": 66,
+   "component_id": "comp-code-cpp-dev-0003",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 67,
+   "end_byte": 295,
+   "start_cp": 66,
+   "end_cp": 291,
+   "component_id": "comp-code-cpp-dev-0003",
+   "category": "code",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 295,
+   "end_byte": 296,
+   "start_cp": 291,
+   "end_cp": 292,
+   "component_id": "comp-code-cpp-dev-0003",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 296,
+   "end_byte": 299,
+   "start_cp": 292,
+   "end_cp": 295,
+   "component_id": "comp-code-cpp-dev-0003",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 299,
+   "end_byte": 300,
+   "start_cp": 295,
+   "end_cp": 296,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 300,
+   "end_byte": 565,
+   "start_cp": 296,
+   "end_cp": 553,
+   "component_id": "comp-prose-math-explainer-dev-0002",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 565,
+   "end_byte": 566,
+   "start_cp": 553,
+   "end_cp": 554,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 566,
+   "end_byte": 895,
+   "start_cp": 554,
+   "end_cp": 870,
+   "component_id": "comp-prose-computing-dev-0002",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  }
+ ],
+ "invariants": {
+  "tiling_complete": true,
+  "no_contradictory_overlaps": true,
+  "cp_range_exact": true
+ }
+}

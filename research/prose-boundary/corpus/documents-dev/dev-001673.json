@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-001673",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T2-prose-math-prose",
+ "byte_length": 697,
+ "cp_length": 675,
+ "sha256": "1a39f3090e33097975e55179b4178b95441f90f69e2f5cc797403dd68a82f71b",
+ "document": "Ob projektnem srečanju je Marko dejal: „Povprečje je koristno, včasih pa skrije, kaj se res dogaja.“ Skupina je nato primerjala še največje in najmanjše vrednosti, da bi imela širši vtis. Tudi brez zapletenih računov so prišli do zaključka, da so razmere v zadnjih dveh letih postopoma stabilnejše.\n\\begin{align} \\alpha_2(\\text{Lipa}) &= \\beta_2 + \\gamma_2 \\\\ \\delta_2 &= \\epsilon_2 \\cdot \\zeta_2 \\\\ \\eta_2 &= \\theta_2 \\times \\lambda_2 \\end{align}\nMarko je v projektu Zeleni dnevnik zbral suha zelišča. Ruzmarin (tudi poleti) je sušil v temni omarici. Nato je zapečatil steklenico in jo označil z letom 2023. V dnevniku je zapisal opombo: ne dodajaj soli, dokler ne poskusiš.",
+ "components": [
+  {
+   "component_id": "comp-prose-statistics-dev-0003",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 314
+  },
+  {
+   "component_id": "comp-math-align-env-dev-0002",
+   "category": "math",
+   "start_byte": 315,
+   "end_byte": 463
+  },
+  {
+   "component_id": "comp-prose-cooking-dev-0007",
+   "category": "prose",
+   "start_byte": 464,
+   "end_byte": 697
+  }
+ ]
+}

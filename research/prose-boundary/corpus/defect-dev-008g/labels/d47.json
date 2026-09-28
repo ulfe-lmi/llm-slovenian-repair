@@ -1,0 +1,52 @@
+{
+ "doc_id": "d47",
+ "byte_length": 67,
+ "cp_length": 67,
+ "invariants": {
+  "tiling_complete": true,
+  "no_contradictory_overlaps": true,
+  "cp_range_exact": true
+ },
+ "regions": [
+  {
+   "start_byte": 0,
+   "end_byte": 30,
+   "start_cp": 0,
+   "end_cp": 30,
+   "component_id": "template",
+   "category": "template",
+   "role": "PROSE",
+   "template_owned": true
+  },
+  {
+   "start_byte": 30,
+   "end_byte": 47,
+   "start_cp": 30,
+   "end_cp": 47,
+   "component_id": "defect-008g-d47",
+   "category": "structured",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 47,
+   "end_byte": 48,
+   "start_cp": 47,
+   "end_cp": 48,
+   "component_id": "template",
+   "category": "template",
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 48,
+   "end_byte": 67,
+   "start_cp": 48,
+   "end_cp": 67,
+   "component_id": "template",
+   "category": "template",
+   "role": "PROSE",
+   "template_owned": true
+  }
+ ]
+}

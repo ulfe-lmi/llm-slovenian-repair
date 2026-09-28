@@ -1,0 +1,133 @@
+{
+ "doc_id": "e01",
+ "byte_length": 91,
+ "cp_length": 91,
+ "regions": [
+  {
+   "start_byte": 0,
+   "end_byte": 10,
+   "start_cp": 0,
+   "end_cp": 10,
+   "component_id": "template",
+   "category": "template",
+   "role": "PROSE",
+   "label_source": "construction",
+   "template_owned": true
+  },
+  {
+   "start_byte": 10,
+   "end_byte": 51,
+   "start_cp": 10,
+   "end_cp": 51,
+   "component_id": "defect-008i-e01",
+   "category": "structured",
+   "role": "PROTECTED",
+   "label_source": "construction",
+   "template_owned": false
+  },
+  {
+   "start_byte": 51,
+   "end_byte": 52,
+   "start_cp": 51,
+   "end_cp": 52,
+   "component_id": "template",
+   "category": "template",
+   "role": "NEUTRAL",
+   "label_source": "construction",
+   "template_owned": true
+  },
+  {
+   "start_byte": 52,
+   "end_byte": 53,
+   "start_cp": 52,
+   "end_cp": 53,
+   "component_id": "template",
+   "category": "template",
+   "role": "NEUTRAL",
+   "label_source": "construction",
+   "template_owned": true
+  },
+  {
+   "start_byte": 53,
+   "end_byte": 56,
+   "start_cp": 53,
+   "end_cp": 56,
+   "component_id": "defect-008i-e01b",
+   "category": "code",
+   "role": "NEUTRAL",
+   "label_source": "construction",
+   "template_owned": false
+  },
+  {
+   "start_byte": 56,
+   "end_byte": 57,
+   "start_cp": 56,
+   "end_cp": 57,
+   "component_id": "defect-008i-e01b",
+   "category": "code",
+   "role": "NEUTRAL",
+   "label_source": "construction",
+   "template_owned": false
+  },
+  {
+   "start_byte": 57,
+   "end_byte": 78,
+   "start_cp": 57,
+   "end_cp": 78,
+   "component_id": "defect-008i-e01b",
+   "category": "code",
+   "role": "PROTECTED",
+   "label_source": "construction",
+   "template_owned": false
+  },
+  {
+   "start_byte": 78,
+   "end_byte": 79,
+   "start_cp": 78,
+   "end_cp": 79,
+   "component_id": "defect-008i-e01b",
+   "category": "code",
+   "role": "NEUTRAL",
+   "label_source": "construction",
+   "template_owned": false
+  },
+  {
+   "start_byte": 79,
+   "end_byte": 82,
+   "start_cp": 79,
+   "end_cp": 82,
+   "component_id": "defect-008i-e01b",
+   "category": "code",
+   "role": "NEUTRAL",
+   "label_source": "construction",
+   "template_owned": false
+  },
+  {
+   "start_byte": 82,
+   "end_byte": 83,
+   "start_cp": 82,
+   "end_cp": 83,
+   "component_id": "template",
+   "category": "template",
+   "role": "NEUTRAL",
+   "label_source": "construction",
+   "template_owned": true
+  },
+  {
+   "start_byte": 83,
+   "end_byte": 91,
+   "start_cp": 83,
+   "end_cp": 91,
+   "component_id": "template",
+   "category": "template",
+   "role": "PROSE",
+   "label_source": "construction",
+   "template_owned": true
+  }
+ ],
+ "invariants": {
+  "tiling_complete": true,
+  "no_contradictory_overlaps": true,
+  "cp_range_exact": true
+ }
+}

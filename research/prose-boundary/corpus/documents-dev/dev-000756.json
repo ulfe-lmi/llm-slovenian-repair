@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-000756",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T9-prose-malformed-prose",
+ "byte_length": 655,
+ "cp_length": 637,
+ "sha256": "2387f5fb67aa615d9eccba6c7c8eb2e1f813a1509c8ba61f8ea7e6ce54a2737f",
+ "document": "V projektu Nevtralna zdravstvena vsebina 2025 je Ana Kovač pripravila opombo o utrujenosti, ki ima lahko mnogo vzrokov. Ker telo na spremembe odziva različno, je koristno, da se oseba posvetuje z zdravnikom, še posebej če se stanje ponavlja. V takih primerih „splošna razlaga“ ne nadomesti pregleda.\n\n\\begin{align} x &= 1, nevtralna testna vsebina za izmišljen projekt Sončni cvet, avtorica Ana Krajnar.\n\nV projektu Gora je Ana razložila sodelavcu, da je spremenljivka kot oznaka na policah v knjižnici. Ko jo preimenujemo, spremenimo samo oznako, ne pa tudi knjige. Včasih to ugotovijo šele ob testiranju, ko program poišče napačno ime.",
+ "components": [
+  {
+   "component_id": "comp-prose-medicine-explainer-dev-0006",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 308
+  },
+  {
+   "component_id": "comp-malformed-unclosed-tex-env-dev-0001",
+   "category": "malformed",
+   "start_byte": 310,
+   "end_byte": 414
+  },
+  {
+   "component_id": "comp-prose-programming-explainer-dev-0001",
+   "category": "prose",
+   "start_byte": 416,
+   "end_byte": 655
+  }
+ ]
+}

@@ -1,0 +1,68 @@
+[
+ {
+  "case_id": "nat-technical-manual-dev-01",
+  "scenario": "ns-technical-manual",
+  "scenario_index": 10,
+  "instance": "dev",
+  "fragment": "V tehničnem priročniku za izmišljen projekt Ljuka predhodno preverite, ali omrežna varnostna politika dovoljuje dostop do naslova `api.ljuka.example`. Brez tega se konfiguracija ne bo samodejno usposobila.\n\nOpozorila:\n- Ne pošiljajte datoteke `ljuka.env` v skupno mapo, ker vsebuje lokalne nastavitve.\n- Pred izbrisom starega konfiguracijskega sklopa naredite varnostno kopijo z ukazom `ljuka backup`.\n- Če uporabljate preizkusni profil, ga označite kot `ljuka_test` in ga po koncu izklopite.\n\nZaporedni koraki:\n1. Odprite datoteko `ljuka.env` v projektni mapi.\n2. Dodajte vrstico `LJUKA_URL=https://api.ljuka.example/v1`.\n3. V vrstico `ljuka.timeout` vpišite vrednost `20`.\n4. Shranite datoteko in zaženite `ljuka up`.\n5. Preverite stanje z `ljuka status` in po potrebi ponovite `ljuka refresh`.\n\n| Nastavitev | Primer | Pomen |\n|---|---|---|\n| `ljuka.timeout` | `20` | Čakalna doba v sekundah |\n| `ljuka.retry` | `3` | Število ponovitev zagona |\n| `ljuka.log` | `details` | Podrobnost dnevnika |\n\nČe ukaz `ljuka status` vrne `E_TIMEOUT`, zmanjšajte `ljuka.timeout` ali preverite povezavo. Navodilo je pripravila Maruša in uporablja izmišljene podatke; ne vsebuje absolutnih poti niti skrivnostnih oznak.",
+  "fragment_sha256": "96b4ffacc1274e6848702161f3572d2d3b5585933ad149e6fd30851269a1a90f",
+  "fragment_bytes": 1220,
+  "prompt_sha256": "dc96af03ced12c3b7c828765153b39f2f67ff7668417f7f21bb57fa9327f083d",
+  "seed": "003b4e008ac3557c"
+ },
+ {
+  "case_id": "nat-technical-manual-dev-02",
+  "scenario": "ns-technical-manual",
+  "scenario_index": 10,
+  "instance": "dev",
+  "fragment": "Odlomek iz priročnika za projekt `Zimska-lampa` (avtor: Maja Kovač, izdaja 2026).\n\nOpozorila:\n- Pred `preizkus-pipeline` preveri, da je `opis-razdelila` lokalna kopija in da ni aktivnega `zaklepa`.\n- Ne uporabljaj produkcijskih podatkov v `preizkus-2026`.\n\nZaporedni koraki:\n1. Odpri `ustvarjalnik-profilov` in izberi `nov profil`.\n2. V polje `ime` vpiši `zimska-lampa-test`.\n3. V polje `podrobnosti` vstavi `preizkus-2026`.\n4. Poženite `urejanje-metapodatkov`, nato `potrdi-spremembe`.\n\n| Korak | Ukaz | Načrtovani rezultat |\n| --- | --- | --- |\n| 1 | `ustvari-profil` | nastane osnutek |\n| 2 | `preveri-obrazac` | brez napak |\n| 3 | `preklopi-razdelek` | vidno je `zimska-lampa-test` |\n\nSeznam preverjanja:\n- `ime` je vpisano\n- `opis` ni prazen\n- `avtor` je `Maja Kovač`\n- `datum` je `2026-03-14`\n\nPo zaključku se poskrbi, da `osnutek` postane `objavljen`, in se `zapis-protokola` shrani v `arhiv`. Če se pojavi napaka `pogrešajoči-polje`, ponovite `preveri-obrazac` in dopolnite `podrobnosti`.",
+  "fragment_sha256": "7839a93fdf645ec556696f67735beb7873998b981432263a625f4e8c64d7fe71",
+  "fragment_bytes": 1006,
+  "prompt_sha256": "dc96af03ced12c3b7c828765153b39f2f67ff7668417f7f21bb57fa9327f083d",
+  "seed": "003b4e008ac3557c"
+ },
+ {
+  "case_id": "nat-technical-manual-dev-03",
+  "scenario": "ns-technical-manual",
+  "scenario_index": 10,
+  "instance": "dev",
+  "fragment": "Opozorilo: pred zagonom storitve `molni-preklop` preverite, da je konfiguracijski profil `beta-7` naložen. Skupina `mo-ekipa` nima dostopa do produkcijskih podatkov, zato se testne akcije izvajajo le v okolju `dev-lab-3`.\n\nPostopek obnove keša v projektu `srečnik-platforma`:\n\n1. Zaustavite storitev z ukazom `systemctl stop srecek-nod`.\n2. Preverite zapisnik v `logs/cache-rebuild.log` in poiskajte `ERROR: stale token`.\n3. Počistite lokalni keš z `rm -rf .tmp/cache/*`, nato ponovno zaženite `srecek-nod start`.\n4. V nadzorni plošči potrdite nov PID in čas odziva. Zapis potrditev shranite v `notes/cache-review.md` in ga v treh dneh arhivirajte v `docs/potrjene-akcije`.\n\n| Korak | Oseba | Prikazana vrednost | Status |\n| --- | --- | --- | --- |\n| 1 | Maja Kovač | `beta-7` | pripravljen |\n| 2 | Rok Hribar | `dev-lab-3` | potrjeno |\n| 3 | Ana Breznik | `42 ms` | stabilno |\n\nOpomba: če se pojavi napaka `timeout`, preverite mrežno pravilo `allow-22-internal` pri mrežnem upravniku `Nik Zupan`. Ne menjajte portov brez vodene spremembe.",
+  "fragment_sha256": "4212f9fad2e6d9c49b2e96cfff18540dc8f31d1e30042e76e19a41f9ef8ec7d1",
+  "fragment_bytes": 1052,
+  "prompt_sha256": "dc96af03ced12c3b7c828765153b39f2f67ff7668417f7f21bb57fa9327f083d",
+  "seed": "003b4e008ac3557c"
+ },
+ {
+  "case_id": "nat-technical-manual-dev-04",
+  "scenario": "ns-technical-manual",
+  "scenario_index": 10,
+  "instance": "dev",
+  "fragment": "Opozorilo: ta postopek velja za izmišljen projekt Vetrna in za okolje, kjer uporabnik Ana Novak nima dostopa do produkcijskega strežnika. Pred izvedbo preveri, da so nameščene orodja `node` in `make`, ter da je delovna kopija čista.\n\nPreden začneš, pripravi:\n- čisto delovno kopijo\n- kratko ime projekta\n- prazen dnevnik `dogodki.log`\n\n1. Odpri projekt in preveri nastavitev imena `veterna-konfiguracija`.\n2. Zaženi `make preveri` in počakaj, da se zaključi kontrola.\n3. Če se prikaže napaka, poskusi znova z `make ponastavi`, nato ponovi preverjanje.\n4. Zapiši rezultat v `poročilo.txt` in ga oddaj ekipi.\n\n| Korak | Očakovanje | Izid |\n|---|---|---|\n| 1 | nastavitev je prebrana | pripravljeno |\n| 2 | kontrola traja 5 s | uspešno |\n| 3 | ponastavitev se izvede | brez napak |\n| 4 | datoteka je shranjena | potrjeno |\n\nOpomba: v imenih datotek ne puščaj presledkov in izberi kratko ime projekta, da izogniš težavam pri arhivu.",
+  "fragment_sha256": "8ce5f9f97dae54aa9574f4dfca7dd252aab9b239f0339f309af16617dc2b7f2c",
+  "fragment_bytes": 949,
+  "prompt_sha256": "dc96af03ced12c3b7c828765153b39f2f67ff7668417f7f21bb57fa9327f083d",
+  "seed": "003b4e008ac3557c"
+ },
+ {
+  "case_id": "nat-technical-manual-dev-05",
+  "scenario": "ns-technical-manual",
+  "scenario_index": 10,
+  "instance": "dev",
+  "fragment": "Opozorilo: Pred zagonom projekt `Modra Jablana` preverite, da ima uporabnica `Tina Kovač` dovoljenja za `sklad` in da je verzija `2.4.1` na voljo. Ne vnašajte resničnih gesel ali osebnih podatkov v `zasebni` repozitorij.\n\n| Nastavitev | Privzeto | Opomba |\n|---|---|---|\n| `casOdziva` | 5 s | za `poskuse` |\n| `ponovniPoj` | 3 | ne zamenjaj |\n\nZaporedni koraki:\n1. V mapi `zaganjanje` zagnaj `uv sync`, da se naložijo izmišljene odvisnosti.\n2. Uredi `konfiguracija.toml`, dodaj razdelek `[stikala]` in preveri `dnevnik`.\n3. Shrani spremembe z `git add .`, nato z `git commit -m 'Dodaj omejitev'`.\n4. Zaženi `uvicorn app.main:app`, počakaj 10 s in preveri odziv z `curl localhost:8000`.\n\nOpozorilo: Če se proces `uvicorn` ustavi, preveri `dnevnik` in izogibaj se ročnemu brisanju mape `.venv`. Če `Tina` vidi napako `503`, znova zagnaj `uv sync` in poskusi še enkrat.",
+  "fragment_sha256": "139b37925155fef251234ce08f5d19e423bbc8ed26c90d477c34e443ed49efe0",
+  "fragment_bytes": 877,
+  "prompt_sha256": "dc96af03ced12c3b7c828765153b39f2f67ff7668417f7f21bb57fa9327f083d",
+  "seed": "003b4e008ac3557c"
+ },
+ {
+  "case_id": "nat-technical-manual-dev-06",
+  "scenario": "ns-technical-manual",
+  "scenario_index": 10,
+  "instance": "dev",
+  "fragment": "Opozorilo: pred začetkom del na modulu `Smerik` preverite oznako revizije v razvojnem okolju. Ne spreminjajte nastavitev profila brez soglasja vodje ekipe, Ane Kovač. Če je status `zaposlen`, počakajte, da se konča prejšnja opravitev.\n\nZaporedni koraki:\n1. Odpri pogled `upravljalnik-stanov` v razvojnem okolju.\n2. V osnutku izberi oznako `sm-04` in preveri polje `opis`.\n3. Izberi profil `izpiljen`, nato klikni `preveri`.\n4. Ko se pojavi status `uspešno`, shrani spremembe z ukazom `shrani`.\n\n| Polje | Primer | Namig |\n| --- | --- | --- |\n| Oznaka | `sm-04` | uporabi kratko in čitljivo oznako |\n| Stanje | `čakanje` | ponovno preveri po 10 sekundah |\n| Revizija | `rk-22` | zabeleži datum v dnevniku |\n\nSeznam preverjanj:\n- potrditev v reviziji\n- manj kot tri opozorila\n- zapis brez absolutnih poti\n- potrditev osebe `Luka Novak`\n\nČe sistem prikaže `napaka`, ne briši podatkov. Ponovi preverjanje in shrani dnevnik z oznako `preverjeno`.",
+  "fragment_sha256": "a3233a1e471a576bafad8edaaba266cb4d8d86d3ccab8080f8de576fc1a17776",
+  "fragment_bytes": 954,
+  "prompt_sha256": "dc96af03ced12c3b7c828765153b39f2f67ff7668417f7f21bb57fa9327f083d",
+  "seed": "003b4e008ac3557c"
+ }
+]

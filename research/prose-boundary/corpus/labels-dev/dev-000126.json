@@ -1,0 +1,112 @@
+{
+ "doc_id": "dev-000126",
+ "byte_length": 638,
+ "cp_length": 618,
+ "regions": [
+  {
+   "start_byte": 0,
+   "end_byte": 222,
+   "start_cp": 0,
+   "end_cp": 218,
+   "component_id": "comp-prose-travel-dev-0009",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 222,
+   "end_byte": 223,
+   "start_cp": 218,
+   "end_cp": 219,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 223,
+   "end_byte": 224,
+   "start_cp": 219,
+   "end_cp": 220,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 224,
+   "end_byte": 255,
+   "start_cp": 220,
+   "end_cp": 250,
+   "component_id": "comp-prose-math-explainer-dev-0001",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 255,
+   "end_byte": 257,
+   "start_cp": 250,
+   "end_cp": 252,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 257,
+   "end_byte": 283,
+   "start_cp": 252,
+   "end_cp": 278,
+   "component_id": "comp-machine-urls-dev-0007",
+   "category": "machine",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 283,
+   "end_byte": 284,
+   "start_cp": 278,
+   "end_cp": 279,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 284,
+   "end_byte": 285,
+   "start_cp": 279,
+   "end_cp": 280,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 285,
+   "end_byte": 597,
+   "start_cp": 280,
+   "end_cp": 584,
+   "component_id": "comp-prose-math-explainer-dev-0001",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 597,
+   "end_byte": 638,
+   "start_cp": 584,
+   "end_cp": 618,
+   "component_id": "template",
+   "category": null,
+   "role": "PROSE",
+   "template_owned": true
+  }
+ ],
+ "invariants": {
+  "tiling_complete": true,
+  "no_contradictory_overlaps": true,
+  "cp_range_exact": true
+ }
+}

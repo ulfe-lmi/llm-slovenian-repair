@@ -1,0 +1,192 @@
+{
+ "doc_id": "dev-000608",
+ "byte_length": 518,
+ "cp_length": 510,
+ "regions": [
+  {
+   "start_byte": 0,
+   "end_byte": 3,
+   "start_cp": 0,
+   "end_cp": 3,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 3,
+   "end_byte": 64,
+   "start_cp": 3,
+   "end_cp": 63,
+   "component_id": "comp-prose-science-dev-0013",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 64,
+   "end_byte": 65,
+   "start_cp": 63,
+   "end_cp": 64,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 65,
+   "end_byte": 395,
+   "start_cp": 64,
+   "end_cp": 389,
+   "component_id": "comp-prose-engineering-dev-0013",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 395,
+   "end_byte": 396,
+   "start_cp": 389,
+   "end_cp": 390,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 396,
+   "end_byte": 416,
+   "start_cp": 390,
+   "end_cp": 409,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 416,
+   "end_byte": 430,
+   "start_cp": 409,
+   "end_cp": 423,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 430,
+   "end_byte": 432,
+   "start_cp": 423,
+   "end_cp": 425,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 432,
+   "end_byte": 473,
+   "start_cp": 425,
+   "end_cp": 465,
+   "component_id": "comp-prose-computing-dev-0003",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 473,
+   "end_byte": 476,
+   "start_cp": 465,
+   "end_cp": 468,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 476,
+   "end_byte": 499,
+   "start_cp": 468,
+   "end_cp": 491,
+   "component_id": "comp-machine-emails-dev-0003",
+   "category": "machine",
+   "role": "POLICY_EXPOSED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 499,
+   "end_byte": 500,
+   "start_cp": 491,
+   "end_cp": 492,
+   "component_id": "comp-machine-emails-dev-0003",
+   "category": "machine",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 500,
+   "end_byte": 505,
+   "start_cp": 492,
+   "end_cp": 497,
+   "component_id": "comp-machine-emails-dev-0003",
+   "category": "machine",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 505,
+   "end_byte": 506,
+   "start_cp": 497,
+   "end_cp": 498,
+   "component_id": "comp-machine-emails-dev-0003",
+   "category": "machine",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 506,
+   "end_byte": 512,
+   "start_cp": 498,
+   "end_cp": 504,
+   "component_id": "comp-machine-emails-dev-0003",
+   "category": "machine",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 512,
+   "end_byte": 513,
+   "start_cp": 504,
+   "end_cp": 505,
+   "component_id": "comp-machine-emails-dev-0003",
+   "category": "machine",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 513,
+   "end_byte": 516,
+   "start_cp": 505,
+   "end_cp": 508,
+   "component_id": "comp-machine-emails-dev-0003",
+   "category": "machine",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 516,
+   "end_byte": 518,
+   "start_cp": 508,
+   "end_cp": 510,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  }
+ ],
+ "invariants": {
+  "tiling_complete": true,
+  "no_contradictory_overlaps": true,
+  "cp_range_exact": true
+ }
+}

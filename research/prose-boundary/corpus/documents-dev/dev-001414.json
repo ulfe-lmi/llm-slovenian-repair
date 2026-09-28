@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-001414",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T7-prose-json-prose-latex",
+ "byte_length": 784,
+ "cp_length": 772,
+ "sha256": "f5e4b873c06b2491e9b4ad5061aa73189d1fe3a314e765c55581e6046f52d35b",
+ "document": "V projektu Prvi tok, ki ga je leta 2018 sestavila Ana, se je naučila, da mora biti sklep zaprt, da se lučka sploh prižge. Baterija, ki je imela 4,5 V, je bila nameščena v držač, medtem ko je upornost zaščitila diodo pred prevelikim tokom. (Zelo pomembno je preveriti, ali so vsi konci dobro povezani.)\n{\"ime\":\"Projekt Sonce\",\"dolžina\":\"4,2 m\",\"avtorsko\":\"Nevtralna testna vsebina\",\"kvote\":{\"delež\":\"25 %\",\"opomba\":\"**Pregled** https://primer.si/novica\"}}\nVarnostni vodič iz leta 2020 je zapisal, da se baterije nikoli ne smejo povezati v kratki sklep brez upornosti, in v vmesnem koraku je Luka preveril, ali so upornosti prave vrednosti. (Vse to je bilo del testne serije za projekt Vrtinec.)\n\\(\\left(\\frac{\\iota^{1/3}}{5+\\kappa}+\\sqrt{14-\\upsilon}\\right)_{\\text{Gaja}}\\)",
+ "components": [
+  {
+   "component_id": "comp-prose-electronics-dev-0006",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 310
+  },
+  {
+   "component_id": "comp-structured-json-dev-0005",
+   "category": "structured",
+   "start_byte": 311,
+   "end_byte": 465
+  },
+  {
+   "component_id": "comp-prose-electronics-dev-0009",
+   "category": "prose",
+   "start_byte": 466,
+   "end_byte": 705
+  },
+  {
+   "component_id": "comp-math-paren-tex-dev-0007",
+   "category": "math",
+   "start_byte": 706,
+   "end_byte": 784
+  }
+ ]
+}

@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-002537",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T8-quote-fenced",
+ "byte_length": 671,
+ "cp_length": 654,
+ "sha256": "c5c064920f514367d5419172effd34ad692fdebf35a60134dde25f53a7e1a336",
+ "document": "> Na gradbišču pri mostu na Soči (projekt Sava) so delavci namesto starega betonskega opornega zidu zgradili lažjo jekleno nosilno konstrukcijo. Priprava temeljev je potekala pozimi, ko so temperaturi pod ničlo zahtevale dodatno osvetlitev in tople oblačila za ekipo. `fn test2() -> &'static str { /* Testni projekt Lipa: č, š, ž`\n```\n# Fragment 3: poudarek **neodvisno**, podčrtano _test_\necho 'Oklepaji (začetek) in (konec) z zvezdicami * *'\necho 'Valute: 7 $, 2 € in 9 centov'\necho 'Relativne poti: docs/vir.txt, src/modul.py'\necho 'URL: https://primer.si/koda'\necho 'Id: HRAŠNA_VREDNOST, razdelek2, seStez'\necho 'Backquote `tukaj` in znaki č š ž'\n```",
+ "components": [
+  {
+   "component_id": "comp-prose-engineering-dev-0001",
+   "category": "prose",
+   "start_byte": 2,
+   "end_byte": 273
+  },
+  {
+   "component_id": "comp-code-rust-dev-0007",
+   "category": "code",
+   "start_byte": 274,
+   "end_byte": 339
+  },
+  {
+   "component_id": "comp-code-shell-bash-dev-0003",
+   "category": "code",
+   "start_byte": 340,
+   "end_byte": 671
+  }
+ ]
+}

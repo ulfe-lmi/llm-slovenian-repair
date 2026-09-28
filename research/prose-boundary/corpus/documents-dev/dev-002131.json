@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-002131",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T9-prose-malformed-prose",
+ "byte_length": 658,
+ "cp_length": 646,
+ "sha256": "36aabb1995c6d983e7a5d93e2bdc8460c6395f9fcf197ab768bc6a1a3c1ceed4",
+ "document": "V projektu Mlin 2018 je Luka preveril, koliko je povprečno trajala čakalna vrsta. Ko so trije prostovoljci dodali svoje opazke, se je slika izkazala za bolj uravnoteženo. Po njegovem mnenju je bistvo v tem, da se številka ne bere sama, ampak potrebuje kontekst.\nLuka, ki je vodil testni projekt Breza, je razložil, da spremenljivka nosi ime, vrednost pa pomeni, kaj se takrat zgodilo. (Steklenička s sokom pri tem dobro pokaže, kako se raven zniža.) Zanka nato vztraja, dokler pogoj ostane res, in funkcija povrne odgovor, »ja« ali »ne«, brez skritih pogojev.\n~~~ Testni projekt Gaj: nevtralna vsebina za preizkus shranjevanja, avtor Marko Zupan.",
+ "components": [
+  {
+   "component_id": "comp-prose-statistics-dev-0001",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 265
+  },
+  {
+   "component_id": "comp-prose-programming-explainer-dev-0009",
+   "category": "prose",
+   "start_byte": 266,
+   "end_byte": 571
+  },
+  {
+   "component_id": "comp-malformed-unclosed-fence-dev-0002",
+   "category": "malformed",
+   "start_byte": 572,
+   "end_byte": 658
+  }
+ ]
+}

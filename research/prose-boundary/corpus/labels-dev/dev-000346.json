@@ -1,0 +1,102 @@
+{
+ "doc_id": "dev-000346",
+ "byte_length": 895,
+ "cp_length": 875,
+ "regions": [
+  {
+   "start_byte": 0,
+   "end_byte": 420,
+   "start_cp": 0,
+   "end_cp": 408,
+   "component_id": "comp-prose-everyday-advice-dev-0011",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 420,
+   "end_byte": 421,
+   "start_cp": 408,
+   "end_cp": 409,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 421,
+   "end_byte": 422,
+   "start_cp": 409,
+   "end_cp": 410,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 422,
+   "end_byte": 454,
+   "start_cp": 410,
+   "end_cp": 440,
+   "component_id": "comp-prose-administration-dev-0001",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 454,
+   "end_byte": 456,
+   "start_cp": 440,
+   "end_cp": 442,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 456,
+   "end_byte": 482,
+   "start_cp": 442,
+   "end_cp": 468,
+   "component_id": "comp-machine-urls-dev-0001",
+   "category": "machine",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 482,
+   "end_byte": 483,
+   "start_cp": 468,
+   "end_cp": 469,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 483,
+   "end_byte": 484,
+   "start_cp": 469,
+   "end_cp": 470,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 484,
+   "end_byte": 895,
+   "start_cp": 470,
+   "end_cp": 875,
+   "component_id": "comp-prose-administration-dev-0001",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  }
+ ],
+ "invariants": {
+  "tiling_complete": true,
+  "no_contradictory_overlaps": true,
+  "cp_range_exact": true
+ }
+}

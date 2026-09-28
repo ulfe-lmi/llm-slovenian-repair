@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-001390",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T5-lists",
+ "byte_length": 1028,
+ "cp_length": 1017,
+ "sha256": "ca89deb0ce7cb03a6cbfc2b175352cad74c9d75f215e2409bd14969f33a0273d",
+ "document": "- V projektu Gorski dnevnik je Anja pojasnila, da spremenljivka deluje kot imenovana skrinjica, v kateri hranimo eno vrednost. Ko je program ponavljal preverjanje vremenskih podatkov, je zanka pretekle dni v vrsti in ohranila le najhladnejše. Funkcija, ki je izračunala povprečje, je bila kot majhno orodje, saj so jo znali poklicati vedno znova brez ponavljanja besedila.\n- `/* Testni fragment 5: izmišljena oseba Anja, projekt Kovač. `\n- V projektu Podgorska steza je spajalec Matej Vidmar najprej preveril zavaritve nosilnih elementov. Material je bil iz jekla S355. Pri presoji je, kakor navaja dnevnik, uporabil digitalni merilnik debeline. »Ni vse v redu, če je površina preveč obrabljena,« je opozoril. Na koncu je ekipa odobrila nadaljnjo uporabo.\n- Luka je ob peti uri zvečer odkril, da se prenosnik sam po sebi hladi. V opombi za sodelavce je zapisal, da se to dogaja ob hkratnem delu s tremi programi. (Gre za navaden vzorec, ki ga je opisala tudi podpora.) Zato so preizkus ponovili brez dodatnih posegov.",
+ "components": [
+  {
+   "component_id": "comp-prose-programming-explainer-dev-0011",
+   "category": "prose",
+   "start_byte": 2,
+   "end_byte": 375
+  },
+  {
+   "component_id": "comp-code-sql-dev-0005",
+   "category": "code",
+   "start_byte": 378,
+   "end_byte": 442
+  },
+  {
+   "component_id": "comp-prose-engineering-dev-0010",
+   "category": "prose",
+   "start_byte": 445,
+   "end_byte": 765
+  },
+  {
+   "component_id": "comp-prose-computing-dev-0003",
+   "category": "prose",
+   "start_byte": 768,
+   "end_byte": 1028
+  }
+ ]
+}

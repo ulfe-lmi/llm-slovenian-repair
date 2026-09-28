@@ -1,0 +1,162 @@
+{
+ "doc_id": "dev-002247",
+ "byte_length": 476,
+ "cp_length": 466,
+ "regions": [
+  {
+   "start_byte": 0,
+   "end_byte": 3,
+   "start_cp": 0,
+   "end_cp": 3,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 3,
+   "end_byte": 64,
+   "start_cp": 3,
+   "end_cp": 63,
+   "component_id": "comp-prose-education-dev-0003",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 64,
+   "end_byte": 65,
+   "start_cp": 63,
+   "end_cp": 64,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 65,
+   "end_byte": 377,
+   "start_cp": 64,
+   "end_cp": 368,
+   "component_id": "comp-prose-math-explainer-dev-0001",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 377,
+   "end_byte": 378,
+   "start_cp": 368,
+   "end_cp": 369,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 378,
+   "end_byte": 398,
+   "start_cp": 369,
+   "end_cp": 388,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 398,
+   "end_byte": 412,
+   "start_cp": 388,
+   "end_cp": 402,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 412,
+   "end_byte": 414,
+   "start_cp": 402,
+   "end_cp": 404,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 414,
+   "end_byte": 454,
+   "start_cp": 404,
+   "end_cp": 444,
+   "component_id": "comp-prose-cooking-dev-0008",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 454,
+   "end_byte": 457,
+   "start_cp": 444,
+   "end_cp": 447,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 457,
+   "end_byte": 459,
+   "start_cp": 447,
+   "end_cp": 449,
+   "component_id": "comp-machine-cli-flags-dev-0002",
+   "category": "machine",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 459,
+   "end_byte": 460,
+   "start_cp": 449,
+   "end_cp": 450,
+   "component_id": "comp-machine-cli-flags-dev-0002",
+   "category": "machine",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 460,
+   "end_byte": 461,
+   "start_cp": 450,
+   "end_cp": 451,
+   "component_id": "comp-machine-cli-flags-dev-0002",
+   "category": "machine",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 461,
+   "end_byte": 474,
+   "start_cp": 451,
+   "end_cp": 464,
+   "component_id": "comp-machine-cli-flags-dev-0002",
+   "category": "machine",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 474,
+   "end_byte": 476,
+   "start_cp": 464,
+   "end_cp": 466,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  }
+ ],
+ "invariants": {
+  "tiling_complete": true,
+  "no_contradictory_overlaps": true,
+  "cp_range_exact": true
+ }
+}

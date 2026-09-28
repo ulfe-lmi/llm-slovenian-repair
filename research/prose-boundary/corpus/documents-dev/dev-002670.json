@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-002670",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T9-prose-malformed-prose",
+ "byte_length": 742,
+ "cp_length": 723,
+ "sha256": "c9043a511ab7160149c6ddef7dba3b6c489c23ec7ea5485185abf814cd3eec08",
+ "document": "Luka je v projektu Soba za okuse v soboto zjutraj odprl lonček in vonj po karameliziranih čebulicah je zapolnil celo sobo. Sol je dodal šele ob koncu, ker se je spomnil na zgodnjo napako. Nato je v dnevnik zapisal samo eno opombo: „Pri kuhanju se ne mudi.“\n\n\\( z-4=0 . Testni zapis projekta Soteska za osebo Tina.\n\nV projektu Hišni nasveti 2024 je Ana iz Ljubljane opazila, da se steklenice s čisto vodo, (še posebej tiste 0,5 litra), hitreje izpraznijo, če so vedno pri roki ob jedilni mizi. Njen sosed Marko je bil sprva skeptičen, a je po dveh tednih dejal: »Če je pijača pri mizi, manjkrat potuje v hladilnik.« Tudi manjše spremembe, kot je skleda za kosmiče ob vratih, v celotnem gospodinjstvu naredijo mirnejše jutro.",
+ "components": [
+  {
+   "component_id": "comp-prose-cooking-dev-0010",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 263
+  },
+  {
+   "component_id": "comp-malformed-incomplete-paren-bracket-dev-0003",
+   "category": "malformed",
+   "start_byte": 265,
+   "end_byte": 320
+  },
+  {
+   "component_id": "comp-prose-everyday-advice-dev-0011",
+   "category": "prose",
+   "start_byte": 322,
+   "end_byte": 742
+  }
+ ]
+}

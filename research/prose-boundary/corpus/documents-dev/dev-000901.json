@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-000901",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T11-interactions",
+ "byte_length": 865,
+ "cp_length": 846,
+ "sha256": "be1ae09d7af0f6435230a7b9534062b110e562d43884f26350135bd44476c107",
+ "document": "`int main(void) { char *znaki = \"Znaki: č, š, ž\"; char *pot =`.\n```\n# Testni projekt: Seznam; avtor: Maja Lipovnik\nseznam = ['src/modul.py', 'docs/vir.txt']\nznacka = '*poudarek*'\noklepaj = '(neodvisno č)'\nvsota = sum(range(1, 4))\nif vsota == 6:\n    print('Seznam je pravilen')\n# komentar z \\frac{a}{b}\n```\nMaja iz Maribora je za tečaj pogovorne angleščine pripravila delavnice, pri katerih so se udeleženci sami odločili, ali znanje dokazujejo s pisnim delom ali s kratkim posnetim predavanjem. Pri vprašanju “kako oceniti napredek” so se dogovorili, da udeležencem (predvsem zaposlenim) velja tudi dnevnik samopregleda.\nV Splitu smo opazovali staro obalo in šele zvečer spoznali, da je bilo morje mirno. Vodič je dejal: \"ogledaj najprej dvorano, nato pa solne jame\". Naslednji dan smo se sprehodili po starem mestnem jedru in kupili oljčno olje.",
+ "components": [
+  {
+   "component_id": "comp-code-c-dev-0008",
+   "category": "code",
+   "start_byte": 0,
+   "end_byte": 65
+  },
+  {
+   "component_id": "comp-code-python-dev-0006",
+   "category": "code",
+   "start_byte": 67,
+   "end_byte": 309
+  },
+  {
+   "component_id": "comp-prose-education-dev-0007",
+   "category": "prose",
+   "start_byte": 310,
+   "end_byte": 635
+  },
+  {
+   "component_id": "comp-prose-travel-dev-0002",
+   "category": "prose",
+   "start_byte": 636,
+   "end_byte": 865
+  }
+ ]
+}

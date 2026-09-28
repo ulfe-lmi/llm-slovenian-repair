@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-001713",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T9-prose-malformed-prose",
+ "byte_length": 776,
+ "cp_length": 757,
+ "sha256": "e68b3a73f044df93d96ec3527fae609d61de05fbd871d6b5d714d52e766fc034",
+ "document": "Svetovna in slovenska zgodovina se v tem projektu prepleta, ker so izmišljeni potniki v dnevnik zapisali potovanja, ki so trajala po letih, ne po dnevih. »Kadar je letnica omenjena,« je dodala Eva, »je besedilo preprosteje razumljivo, čeprav manj natančno.« Njena skupina je zato izbrala kratka navodila, da so besedila ostala čitljiva.\n[opis](https://primer.si/stran prvi del: avtorizirana testna vsebina projekta Modri vrt; izmišljena oseba Ana Kovač preverja podatke.\nAna je zapisala, da se v starejših pisarnah pogosto uporabljajo tiskalniki, ki se povezujejo po kablu, čeprav so mlajši sodelavci privrženci brezžičnih rešitev. Takšna razmerja, čeprav na videz nevidna, vplivajo na to, kako hitro potuje dokument. (V projektu so to opazovali tri tedne.)",
+ "components": [
+  {
+   "component_id": "comp-prose-history-dev-0005",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 344
+  },
+  {
+   "component_id": "comp-malformed-broken-link-dev-0001",
+   "category": "malformed",
+   "start_byte": 345,
+   "end_byte": 480
+  },
+  {
+   "component_id": "comp-prose-computing-dev-0005",
+   "category": "prose",
+   "start_byte": 481,
+   "end_byte": 776
+  }
+ ]
+}

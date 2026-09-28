@@ -1,0 +1,102 @@
+{
+ "doc_id": "dev-002356",
+ "byte_length": 932,
+ "cp_length": 915,
+ "regions": [
+  {
+   "start_byte": 0,
+   "end_byte": 392,
+   "start_cp": 0,
+   "end_cp": 383,
+   "component_id": "comp-prose-sports-dev-0001",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 392,
+   "end_byte": 393,
+   "start_cp": 383,
+   "end_cp": 384,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 393,
+   "end_byte": 396,
+   "start_cp": 384,
+   "end_cp": 387,
+   "component_id": "comp-code-sql-dev-0010",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 396,
+   "end_byte": 397,
+   "start_cp": 387,
+   "end_cp": 388,
+   "component_id": "comp-code-sql-dev-0010",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 397,
+   "end_byte": 761,
+   "start_cp": 388,
+   "end_cp": 748,
+   "component_id": "comp-code-sql-dev-0010",
+   "category": "code",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 761,
+   "end_byte": 762,
+   "start_cp": 748,
+   "end_cp": 749,
+   "component_id": "comp-code-sql-dev-0010",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 762,
+   "end_byte": 765,
+   "start_cp": 749,
+   "end_cp": 752,
+   "component_id": "comp-code-sql-dev-0010",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 765,
+   "end_byte": 766,
+   "start_cp": 752,
+   "end_cp": 753,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 766,
+   "end_byte": 932,
+   "start_cp": 753,
+   "end_cp": 915,
+   "component_id": "comp-prose-sports-dev-0011",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  }
+ ],
+ "invariants": {
+  "tiling_complete": true,
+  "no_contradictory_overlaps": true,
+  "cp_range_exact": true
+ }
+}

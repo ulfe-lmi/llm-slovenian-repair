@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-001883",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T3-prose-fenced-prose",
+ "byte_length": 1101,
+ "cp_length": 1075,
+ "sha256": "739dffd13bce270388f1781cfe08688cf99db584ef0c5b41ee0343f75e2ddf05",
+ "document": "Nova tiskalnica na hodniku, ki so jo za projekt »Manj zastojev« postavili blizu sprejemne pisarne, je imela poseben predal za tanke bonove, kar je presenetilo več zaposlenih. »Tiskanje«, so rekli nekateri, »je še vedno najpogostejši razlog, da se zavrtni k papirju namesto k zaslonski različici.« Ivan je zato predlagal, da se za manjše dokumente uporabi en sam predlog. V šali so dejali, da bo takrat tudi tiskalnica manj »nevoljna« ob zastoju.\n```\n/* Primer 2: url in backquote */ int main(void) { const char *url = \"https://primer.si/koda\"; const char *opis = \"Znak `backquote`, pot: src/modul.py, črka š\"; int razdelek2 = 7; const char *opozorilo = \"Opomba: *nevarno* in _poudarek_\"; (void)url; (void)opis; (void)opozorilo; return razdelek2; }\n```\nVzorčni projekt za Občinsko pisarno je v septembru 2025 preizkusil nov obrazec za prijavo krajnega dogodka. V navodilih so pisali: „Oddajte dokument najmanj tri dni pred pričetkom”, da bi preprečili zamudo pri obravnavi. Preizkus je vključeval tri uporabnike in dva referenta, ki sta preverila datume in številke v obrazcu.",
+ "components": [
+  {
+   "component_id": "comp-prose-computing-dev-0010",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 459
+  },
+  {
+   "component_id": "comp-code-c-dev-0010",
+   "category": "code",
+   "start_byte": 460,
+   "end_byte": 767
+  },
+  {
+   "component_id": "comp-prose-administration-dev-0008",
+   "category": "prose",
+   "start_byte": 768,
+   "end_byte": 1101
+  }
+ ]
+}

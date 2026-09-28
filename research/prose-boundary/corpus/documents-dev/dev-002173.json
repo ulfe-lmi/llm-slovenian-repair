@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-002173",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T7-prose-json-prose-latex",
+ "byte_length": 732,
+ "cp_length": 720,
+ "sha256": "da003d08dafcb46390d76249b475a1bfedf1c2c7b20f8c8a44f4ca6cfbdfc8ff",
+ "document": "Evropska kratka zgodba, ki jo raziskuje izmišljeni projekt Bralna gibanja, pogosto uporabi motiv tveganja in ga stisne v nekaj stavkov. Izmišljena evropska avtorica Léa Durand napiše: »Samo en pogled je dovolj.«\n{\"ime\":\"Projekt Lipa\",\"cilj\":\"Nalaganje podatkov 25 %\",\"avtorsko\":\"Nevtralna testna vsebina\",\"merila\":{\"razmerje\":\"3,5 m / 0,13\",\"opomba\":\"**Test** https://primer.si/novica\"}}\nV šoli zdravja v Trzinu so učenci (ki so sodelovali v projektu Mirni utripi) prebrali, da premalo gibanja lahko spremeni občutek moči in počutje. Takšne spremembe so lahko odziv na vsakdanjo utrujenost. Ko se pri nekem otroku ali odraslem ponovijo, je prav, da jih preveri zdravnik.\n\\(\\dfrac{7}{8}+\\frac{\\iota}{\\kappa}=\\text{Nina}\\)",
+ "components": [
+  {
+   "component_id": "comp-prose-literature-dev-0007",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 217
+  },
+  {
+   "component_id": "comp-structured-json-dev-0001",
+   "category": "structured",
+   "start_byte": 218,
+   "end_byte": 393
+  },
+  {
+   "component_id": "comp-prose-medicine-explainer-dev-0002",
+   "category": "prose",
+   "start_byte": 394,
+   "end_byte": 682
+  },
+  {
+   "component_id": "comp-math-fractions-dev-0004",
+   "category": "math",
+   "start_byte": 683,
+   "end_byte": 732
+  }
+ ]
+}

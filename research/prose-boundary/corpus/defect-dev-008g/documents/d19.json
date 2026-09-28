@@ -1,0 +1,17 @@
+{
+ "doc_id": "d19",
+ "seed": "008edefd0001",
+ "template": "D-xml-unbalanced-period",
+ "byte_length": 61,
+ "cp_length": 61,
+ "sha256": "d47782e5e81fd40a3578582e18f329164246e5cff994ec06d82006b0993a4496",
+ "document": "Pred tem.\n<foo.bar> preostanek\nNaslednja vrstica je navadna.\n",
+ "components": [
+  {
+   "component_id": "defect-008g-d19",
+   "category": "structured",
+   "start_byte": 10,
+   "end_byte": 30
+  }
+ ]
+}

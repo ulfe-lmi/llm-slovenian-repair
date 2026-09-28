@@ -1,0 +1,18 @@
+{
+ "schema": "008h-seal-verification-v3/1",
+ "order": "008-h",
+ "manifest_sha256": "ee503bd7c09f26a1b9c171319cc82f8ec692918d0d7d18f11d528a6f18c54f36",
+ "seal_copy_sha256": "ee503bd7c09f26a1b9c171319cc82f8ec692918d0d7d18f11d528a6f18c54f36",
+ "seal_copy_hash_identical": true,
+ "files_expected": 4076,
+ "files_verified": 4076,
+ "mismatches": [],
+ "out_of_manifest_at_seal": {
+  "count": 87,
+  "disclosed_scope": "pre-seal generation receipts (generation-receipts/) only",
+  "generation_receipts": 87,
+  "other": []
+ },
+ "status": "SEALED",
+ "note": "private-root v3 content hash-identical to the committed manifest at seal time; strategy performs an independent data-free re-verification BEFORE the evaluation phase (order requirement 7 hard gate - the evaluation driver refuses to run until the seal state is committed and strategy-verified); re-verified again after the evaluation phase (requirement 9)"
+}

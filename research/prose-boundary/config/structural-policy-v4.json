@@ -1,0 +1,363 @@
+{
+ "schema": "008g-structural-policy/3",
+ "order": "008-g",
+ "frozen_note": "Supersedes structural-policy-v2.json (schema 008c-structural-policy/2, sha256 996f465784bed37a179be337e2af606b2dc350cacba6341479371d2812c5a88e) as the active structural policy for round 008-g. The v2 file remains byte-identical in-tree (immutable). v3 changes ONLY: the yaml-toml-config residual class is extended under the strictness contract of 008-g scope item 4(a)(1); one new residual class xml-fragment is added (scope item 4(a)(2)); malformed_class_map gains entries for the new shapes (scope item 4(a)(3)); this changelog field is added. The candidate rule, policy decisions, coordinate contract, fail-closed fallback, helper identity, metrics, rule classification, profile, scope clause and determinism clause are carried over unchanged. Chosen over the structural pre-pass alternative by the 008-g D1-1 record (the 2026-09-17 human architecture decision: parser first, parser-approved Text, narrow residual recognizer; no ever-growing regex grammar over the complete raw document).",
+ "profile": {
+  "id": "P2",
+  "options": [
+   "ENABLE_TABLES",
+   "ENABLE_STRIKETHROUGH",
+   "ENABLE_TASKLISTS",
+   "ENABLE_MATH",
+   "ENABLE_YAML_STYLE_METADATA_BLOCKS"
+  ],
+  "note": "Identical to the 008-a P2 profile (frozen structural policy)."
+ },
+ "candidate_rule": {
+  "statement": "A Text event is candidate prose iff its open-tag ancestor set intersects PROSE_CONTAINERS and does not intersect NON_PROSE_CONTAINERS, with the two 008-a implementation rules carried unchanged into the runtime: D1 token-family matching and the D0 autolink-destination rule.",
+  "PROSE_CONTAINERS": [
+   "S.Para",
+   "S.Head",
+   "S.Item",
+   "S.Quote",
+   "S.TableCell",
+   "S.Link",
+   "S.Emph",
+   "S.Strong"
+  ],
+  "NON_PROSE_CONTAINERS": [
+   "S.CodeBlock:Fenced",
+   "S.CodeBlock:Indented",
+   "S.HtmlBlock",
+   "S.Image",
+   "S.Meta"
+  ],
+  "d1_token_family_matching": "A family entry matches its own token or any level-suffixed token of the form '<entry>:<suffix>' (e.g. S.Head matches S.Head:1..S.Head:6; S.List:ol:2 matches no entry). Carried unchanged from the 008-a evaluator.",
+  "d0_autolink_destination": "The only S.Link whose original source slice starts with byte '<' is a CommonMark autolink; its inner Text leaf is the link destination and is PROTECTED. Deterministic source-byte test, no content parsing. Codifies the 008-a documented D0 evaluator rule (finding B resolution)."
+ },
+ "policy_decisions": [
+  {
+   "id": "PD-1",
+   "decision": "Strikethrough/superscript/subscript content REMAINS EXPOSED.",
+   "rationale": "Open 008-a policy item resolved: these wrap prose, not machine content; the mechanism (ancestors via the enclosing prose container) already exposes them and that behaviour is now the intended policy."
+  },
+  {
+   "id": "PD-2",
+   "decision": "Images (including alt text) REMAIN PROTECTED.",
+   "rationale": "Open 008-a policy item resolved: conservative default; revisit only with future evidence."
+  }
+ ],
+ "residual_layer": {
+  "scope": "A narrow content-level recognizer operating ONLY on parser-approved candidate-prose spans, in code-point coordinates. It must NOT reparse Markdown structure, code, parser-recognized math, HTML, or metadata, and must not contain Markdown-delimiter regexes (it is not a second Markdown parser).",
+  "classes": [
+   {
+    "id": "tex-paren",
+    "description": "\\( ... \\) inline TeX: pair without newline, nonempty, span <= 200 code points; unpaired '\\'(' with math-like remainder to end of span (<= 200 cp) is also protected."
+   },
+   {
+    "id": "tex-bracket",
+    "description": "\\[ ... \\] display TeX: pair, span <= 500 code points (may span lines); unpaired '\\'[' with math-like remainder to end of span (<= 500 cp) is also protected."
+   },
+   {
+    "id": "tex-env",
+    "description": "Selected TeX environments: begin/end pairs for equation, equation*, align, align*, aligned, gather, gather*, gathered, eqnarray, matrix, pmatrix, bmatrix, vmatrix, cases, split; span <= 1000 code points; unbalanced begin (no matching end) protects begin-to-end-of-span for the same bound."
+   },
+   {
+    "id": "bare-json",
+    "description": "Bare JSON: maximal run starting at '{' or '[' that is JSON-like (balanced or truncated), no Markdown structure, <= 2000 code points; balanced pairs protected, truncated (unbalanced) protects to end of the containing prose span line."
+   },
+   {
+    "id": "yaml-toml-config",
+    "description": "YAML/TOML/INI/config-like text: (v2, unchanged) runs of >= 2 consecutive 'key: value' / 'key = value' style lines, or a '[section]' header followed by such lines; (v3 extension, strictness contract 008-g 4(a)(1)) a single key-value style line with a word key (letter/underscore start) is protected only when the whole trimmed value is machine-like (a number with optional short unit, a path, a relative path, an identifier, an environment-variable form, or a single-line quoted literal) or the line is part of a >= 2-line structural run; a single key line with an empty value is protected when it is immediately followed by >= 1 nested list-style line (dash-plus-space continuation); nested list-style lines extend a protected key-value run. Line-level trigger; <= 2000 code points per new single-line protection (carried-over runs keep the v2 implementation behaviour). Parser-split form (recorded D0 classification, see malformed_class_map 'yaml-nested-parser-split'): when the dialect separates an empty-value key line from its nested list continuation into different blocks, the key line is policy-exposed (the layer cannot protect across block boundaries)."
+   },
+   {
+    "id": "xml-fragment",
+    "description": "HTML/XML tag fragments the parser dialect does not recognize as HTML (scope 008-g 4(a)(2)); the residual layer only sees parser-approved candidate-prose text, and the class fires only on tag names the pinned pulldown-cmark 0.13.4 dialect does NOT recognize as inline HTML - namespaced prefix-colon names (with attributes, so the autolink path does not claim them) or names outside the dialect's recognized tag-name shape [A-Za-z][A-Za-z0-9-]* (period/underscore names); recognized tag names abstain, so recognised-HTML behaviour stays byte-identical to v2): a paired fragment from an angle-bracket opening tag to its matching closing tag (same case-sensitive name) or self-closing marker is protected in full; an unbalanced opening fragment is protected to the end of its line (recorded 008-g D0 choice: protected, not policy-exposed); a standalone closing tag token is protected as a machine fragment. Span bound <= 2000 code points. The class must NOT fire on angle brackets used as comparison operators or followed by digits (inequality, 'less than N' forms) and must NOT fire on a lone angle bracket (trigger requires a letter/underscore after '<' and a closing '>' on the same line)."
+   },
+   {
+    "id": "shell",
+    "description": "Shell/terminal commands and flags: a line starting with a shell prompt ('$ ', '# ', '> ') or a bounded command vocabulary (sudo python python3 uv git curl npm npx pip pipx pytest ruff mypy cargo make gcc g++ cc rustc ls cat grep awk sed echo export cd mv cp rm mkdir touch tar zip) followed by arguments; command-line flag tokens (--word, -single-letter) and their attached values; whole affected line(s) protected."
+   },
+   {
+    "id": "path",
+    "description": "POSIX paths (rooted '/' with >= 1 segment, or relative a/b with >= 2 path segments and a dotless final segment) and Windows paths (drive ':' + backslash/slash, or UNC \\\\host\\share)."
+   },
+   {
+    "id": "env-var",
+    "description": "Environment variables: '${NAME}' or '$NAME' where NAME is [A-Za-z_][A-Za-z0-9_]* and (NAME contains '_' or NAME is all-uppercase with >= 2 chars)."
+   },
+   {
+    "id": "identifier",
+    "description": "Identifiers: underscored identifiers or identifiers containing a digit, [A-Za-z_][A-Za-z0-9_]* (carried semantics of the 008-a legacy _IDENTIFIER rule), plus ALL_CAPS identifiers of >= 2 letters with no digit-only runs (carried semantics of _UPPER_IDENTIFIER)."
+   },
+   {
+    "id": "number-unit",
+    "description": "Machine-significant numbers with short units: signed decimal numbers (., or , decimals) with an optional immediately-adjacent short unit (1-8 letters or %); carried semantics of the 008-a legacy _NUMBER rule."
+   },
+   {
+    "id": "url",
+    "description": "Bare URLs missed by the parser dialect: http:// or https:// (case-insensitive) followed by a non-space, non-'<' run; carried semantics of the 008-a legacy _URL rule."
+   }
+  ],
+  "excluded_from_residual": "Markdown delimiters (backticks, brackets/parens as link syntax, #, *, -, ~, |), code, parser-recognized math, HTML, metadata, and list/heading markers are NOT residual classes; exposure of bare delimiters is neutral by policy (see malformed class map)."
+ },
+ "coordinate_contract": {
+  "unit": "code-point coordinates into the unmodified original for all public intervals; byte coordinates only at the parser protocol boundary",
+  "mapping": "cp = len(bytes[:s].decode('utf-8')); byte = len(text[:cp].encode('utf-8'))",
+  "invariants": [
+   "0 <= s <= e for every interval; intervals lie in [0, len(text)]",
+   "every parser byte range lies on UTF-8 code-point boundaries (no bisection)",
+   "original_bytes[start_byte:end_byte) is the exact intended source slice",
+   "byte<->code-point mapping is deterministic and exactly reversible"
+  ],
+  "fail_closed": "Any bounds or UTF-8 boundary failure is rejected fail-closed (legacy fallback), never repaired by guessing."
+ },
+ "fail_closed_fallback": {
+  "triggers": [
+   "helper unavailable or not a regular file",
+   "helper identity mismatch (sha256 != pinned)",
+   "helper non-zero exit",
+   "helper timeout",
+   "helper stdout not valid UTF-8 JSONL",
+   "missing or malformed event lines",
+   "missing eof marker (truncated protocol)",
+   "protocol event out of order or unbalanced",
+   "any coordinate-contract violation"
+  ],
+  "behaviour": "legacy full-regex protection (the 008-a protected.py rule set, code-point coordinates) with the fallback reason recorded in the result; never fail open (an unprotected result is never returned)",
+  "legacy_rules": "fenced-code, inline-code, markdown-link, url, path, relative-path, shell, number, identifier, upper-identifier, structured, tool-argument"
+ },
+ "determinism": "Identical input bytes -> identical protected-interval bytes (helper is deterministic for pinned pulldown-cmark 0.13.4; residual recognizers are pure functions of the candidate-prose text).",
+ "helper": {
+  "binary": "prose-boundary-meas",
+  "invocation": "<helper> P2 < document",
+  "protocol": "one JSON line per event {\"i\":<idx>,\"k\":\"<kind token>\",\"s\":<start_byte>,\"e\":<end_byte>} followed by {\"eof\":true}",
+  "exit_codes": {
+   "0": "ok",
+   "3": "stdin not valid UTF-8",
+   "5": "usage or write error"
+  },
+  "pinned_identity": {
+   "crate": "pulldown-cmark =0.13.4",
+   "registry_checksum_sha256": "e9f068eba8e7071c5f9511831b44f32c740d5adf574e990f946ddb53db2f314e"
+  }
+ },
+ "malformed_class_map": {
+  "note": "Frozen per-malformed-class expected outcome for the dev-corpus safety metric. 'protected' = the byte must be covered by the final protected set (structural parser interval or residual recognizer); 'policy-exposed' = policy-decided exposure, recorded but not a safety violation (008-a GO residual bound: delimiter-only residue is a bounded second-stage abstention, not a failure).",
+  "classes": {
+   "unclosed-fence": {
+    "expected": "protected",
+    "mechanism": "structural: pulldown-cmark extends the fenced code block to end of input."
+   },
+   "unmatched-backtick": {
+    "expected": "policy-exposed",
+    "mechanism": "a single backtick is a literal character (not a delimiter pair); backtick delimiters are outside residual authority (no Markdown-delimiter regexes). Machine sub-tokens inside (urls/paths/identifiers/numbers) are still protected by their own residual classes."
+   },
+   "unmatched-dollar": {
+    "expected": "policy-exposed",
+    "mechanism": "a lone '$' is ambiguous between currency and math; the parser does not pair it and the residual layer abstains (currency dollars must stay exposed as prose)."
+   },
+   "incomplete-display-dollar": {
+    "expected": "policy-exposed",
+    "mechanism": "an unbalanced '$$' is not display math to the parser; TeX-like content between markers is not a declared residual class (only \\( \\[ environments are); currency interpretation remains the conservative abstention."
+   },
+   "incomplete-paren-bracket": {
+    "expected": "protected",
+    "mechanism": "residual tex-paren / tex-bracket classes cover unpaired '\\(' and '\\[' with math-like remainder."
+   },
+   "unclosed-tex-env": {
+    "expected": "protected",
+    "mechanism": "residual tex-env class protects an unbalanced begin to end of span."
+   },
+   "broken-link": {
+    "expected": "protected",
+    "mechanism": "the URL sub-token is protected by the residual url class; the bracket/paren delimiter residue is neutral (policy-exposed delimiter, machine content protected)."
+   },
+   "partial-html": {
+    "expected": "protected",
+    "mechanism": "structural: HTML tags are Html/InlineHtml events, never Text, so tag bytes are never candidate prose."
+   },
+   "truncated-json": {
+    "expected": "protected",
+    "mechanism": "residual bare-json class protects the truncated JSON run."
+   },
+   "malformed-nesting": {
+    "expected": "policy-exposed",
+    "mechanism": "unbalanced Markdown emphasis delimiters are literal text/delimiters; prose inside remains prose; no residual class owns Markdown delimiters."
+   },
+   "mid-document-yaml": {
+    "expected": "protected",
+    "mechanism": "residual yaml-toml-config extended class (v3): strict single-line word-key machine-like key-value, carried-over >= 2-line runs and section runs, nested list-style continuation; the v1 hidden defect shapes (single-line, nested, sectionless mid-document YAML) are the named acceptance targets on the v2 set."
+   },
+   "mid-document-xml-fragment": {
+    "expected": "protected",
+    "mechanism": "residual xml-fragment class (v3): non-recognized tag fragments (namespaced prefix-colon names, non-block-start tags, self-closing, paired, unbalanced) protect paired fragments in full, unbalanced opening fragments to end of line, standalone closing tokens in full; the v1 hidden defect shapes are the named acceptance targets on the v2 set."
+   },
+   "yaml-nested-parser-split": {
+    "expected": "policy-exposed",
+    "mechanism": "008-g new shape, policy-decided-suppression (not a safety violation): the parser dialect separates an empty-value YAML key line from its nested list-style continuation into different blocks (the list interrupts the paragraph), so the two never share one candidate-prose context; the residual layer is a pure function of a single candidate-prose span (frozen architecture) and cannot protect across block boundaries. The exposed bytes are the key line (a word plus colon) and the list marker glue; list item words remain candidate prose. The in-context form of the v3 single-key contract (key line immediately followed by nested list lines within the same span) IS protected wherever the parser keeps the lines together (isolated spans; legacy-fallback path). Bounded second-stage abstention per the 008-a GO residual bound, mirroring the delimiter-only residue classes."
+   }
+  }
+ },
+ "policy_exposed_dialect_ambiguity": {
+  "note": "Policy-exposed dialect-ambiguity classes (008-h, order scope item 3a and the 008-h D1-4 registration): shapes where the frozen pulldown-cmark dialect exposes bytes that a real LLM might intend as machine content, and where no bounded recognizer within the 2026-09-17 human-named machine-significant categories is viable (recorded reason) or the composition contract removes the shape from the v3 pool (composition contract field). Exposure under these classes is policy-decided (policy-exposed), not a safety violation: the hard safety axis is construction-labeled protected bytes (zero tolerance) on the sealed v3 set. The v2 measurement (51 B of 384,363 labeled protected bytes, 3 of 2,000 documents) remains the permanent record of the unnormalized risk magnitude.",
+  "classes": [
+   {
+    "id": "html-closing-tag-adjacent-fence",
+    "shape_rule": "A structured-html closing-tag line immediately followed (no blank line) by a fenced or indented code component: the closing-tag line opens a CommonMark HTML block that absorbs the code fence and the code body up to the first internal blank line; the remaining code lines parse as paragraph text and are exposed. The v3 composition contract (R1) inserts exactly one blank line for this adjacency, so the shape cannot occur in the v3 pool; real LLM output containing the raw shape is classified by this class rather than passing as an unmeasured violation.",
+    "measured_evidence": "v2 hidden acceptance: 1 of 2,000 documents, 35 B of 384,363 labeled protected bytes exposed (0.0091 percent); identical under the unfixed 008-c implementation (pre-existing dialect-interaction gap, not a fix regression). Visible dev-edge batch (defect-dev-008h e01, e04): the exposed code runs after the internal blank line are labeled policy-exposed per this class and the protected runs (HTML block, second fence to end of input) are fail-closed validated. With the R1 separator (defect-dev-008h e02, e03) the fence/indented code parses as a genuine code block and is fully protected; without the separator and without an internal blank line (e31, e32) the HTML block runs to end of input and the whole tail is protected (class boundary: exposure begins at the first internal blank line).",
+    "composition_contract": "R1 separator (builder inserts one template-owned NEUTRAL blank line; recorded in the document composition provenance)"
+   },
+   {
+    "id": "keyvalue-list-item-quoted-emphasis",
+    "shape_rule": "A structured-keyvalue component containing a list-item-style line (list marker plus space) with paired emphasis markers or quoted emphasis-like content: the dialect parses list + strong/emphasis; the emphasis delimiters and list marker are structural (protected) but the quoted content (quote characters plus word) remains candidate prose and is exposed. The v3 composition contract (R2) admits no such component into the v3 pool; real LLM output containing the raw shape is classified by this class.",
+    "measured_evidence": "v2 hidden acceptance: 2 of 2,000 documents (same component), 16 B total (8 B each) of 384,363 labeled protected bytes exposed; identical under the unfixed 008-c implementation. Visible dev-edge batch (defect-dev-008h e06, e07): the quoted content is labeled policy-exposed per this class and the structural delimiters are fail-closed validated; the key line of the split form is the existing yaml-nested-parser-split class.",
+    "composition_contract": "R2 component admission exclusion (hash-only matching criterion and excluded count recorded in generation-identity-008h.json)"
+   },
+   {
+    "id": "yaml-hash-comment-heading",
+    "shape_rule": "A hash-plus-text line (a YAML comment line) at paragraph level: the dialect parses it as an ATX heading; the '# ' marker is structural (protected) and the comment text is candidate prose (exposed). A '#name' line without the space is plain prose (all exposed).",
+    "recorded_reason": "a hash-plus-text line is contextually indistinguishable from a Markdown ATX heading, so no bounded recognizer within the 2026-09-17 human-named machine-significant categories is viable (the residual layer must not reparse Markdown structure; treating every '# text' line as a YAML comment would require heading-vs-comment disambiguation that is a Markdown-structure decision, not a named-category content decision)",
+    "measured_evidence": "v1 diagnostic re-run (labeled development diagnostic, single-use spent set): 348 B (343 B + 5 B) of the 458 B v1 exposed total. Visible dev-edge batch (defect-dev-008h e08, e10): the comment text is labeled policy-exposed per this class with the '#' marker protected and the surrounding machine-like key lines protected; e09: the no-space negative stays plain prose."
+   },
+   {
+    "id": "markdown-table-dialect-boundary",
+    "shape_rule": "A recognized Markdown table: the table structure (row delimiters, the separator row) is structural (protected) but the cell and head text is candidate prose (exposed); the parser dialect does not treat the table as a protected unit. Table-like rows that do not form a recognized table (missing leading delimiter or separator row) parse as plain paragraph prose (all exposed except residual-class tokens).",
+    "measured_evidence": "008-g naturalistic consistency aggregate (70 labeled cases, frozen labels): 9 of the 15 exposed ranges, 615 B - 8 recognized-table ranges (546 B: nat-algorithm-python-hidden-03 lines 20-23, 22 B; nat-comparison-table-hidden-02 lines 3-4, 26 B; nat-comparison-table-hidden-04 lines 3-4, 36 B; nat-json-config-hidden-01 lines 26-34, 255 B; nat-math-answer-hidden-04 lines 3-7, 53 B; nat-qa-answer-hidden-05 lines 5-6, 10 B; nat-table-equations-hidden-02 lines 3-4, 19 B; nat-table-equations-hidden-03 lines 3-7, 125 B) plus 1 unrecognized table-like range (nat-glossary-entry-hidden-03 lines 18-20, 69 B)."
+   },
+   {
+    "id": "list-item-candidate-prose",
+    "shape_rule": "List item content (S.Item) is candidate prose: machine-like content inside list items is exposed unless a bounded residual class fires within the item's prose context; the list structure itself is not a protected unit.",
+    "measured_evidence": "008-g naturalistic consistency aggregate: 2 of the 15 exposed ranges, 250 B (nat-json-config-hidden-01 lines 37-40, 184 B; nat-qa-answer-hidden-04 lines 10-13, 66 B)."
+   },
+   {
+    "id": "indented-code-lazy-continuation",
+    "shape_rule": "Indented lines that the parser dialect reads as lazy paragraph continuation (not an indented code block, e.g. immediately after a non-blank paragraph line) expose their content as paragraph prose; code intent is a composition/authoring fact the dialect does not recover.",
+    "measured_evidence": "008-g naturalistic consistency aggregate: 1 of the 15 exposed ranges, 45 B (nat-qa-answer-hidden-03 lines 15-21)."
+   },
+   {
+    "id": "residual-token-line-glue",
+    "shape_rule": "Within a machine-significant line, the bounded residual classes protect the machine tokens (numbers, paths, identifiers) but the line's glue bytes (spaces, punctuation) remain candidate prose (exposed); the residual layer protects tokens, not whole-line glue.",
+    "measured_evidence": "008-g naturalistic consistency aggregate: 3 of the 15 exposed ranges, 17 B (nat-changelog-hidden-03 line 3, 6 B; nat-changelog-hidden-03 line 10, 6 B; nat-glossary-entry-hidden-02 line 26, 5 B)."
+   }
+  ],
+  "frozen_note": "The runtime implementation loads structural-policy-v3.json (byte-identical in-tree) as the active candidate-rule configuration; this v4 file is the 008-h policy of record (v3 plus this section and the extended changelog). The evaluation harness reads the malformed_class_map from this file (carried over unchanged from v3)."
+ },
+ "metrics": {
+  "safety": {
+   "protected_bytes_exposed": "bytes of corpus regions labelled expected='protected' that are NOT covered by the final protected set; target 0",
+   "protected_regions_overlapping_prose": "protected regions with any overlap into candidate prose beyond the residual layer; target 0 (residual overlap is by design and not counted)",
+   "machine_significant_exposure_rate": "exposed bytes over structurally-known machine regions (expected='protected'); target 0"
+  },
+  "coverage": {
+   "expected_prose_bytes_exposed": "exposed bytes over regions labelled expected='prose'; target 100% of construction-labeled prose",
+   "expected_prose_regions_completely_available": "fraction of expected-prose regions with zero protected bytes",
+   "unnecessary_suppression_by_container": "actual prose bytes suppressed per container type, reported (no arbitrary threshold)"
+  },
+  "coordinates": {
+   "utf8_boundary_violations": "parser ranges bisecting code points; target 0",
+   "byte_cp_conversion_mismatches": "mapping round-trip failures; target 0",
+   "source_slice_mismatches": "byte slices not equal to intended source bytes; target 0"
+  }
+ },
+ "rule_classification": {
+  "note": "Every 008-a protected.py rule classified 4-way (1 = Markdown syntax replaced by the parser; 2 = semantic second-stage survivor; 3 = redundant/obsolete; 4 = purpose unclear). No rule silently deleted; survivors keep unchanged semantics and run only on candidate-prose spans in code-point coordinates.",
+  "rules": [
+   {
+    "rule": "_FENCE (fenced-code)",
+    "regex": "(?s)(?:^|\\n)(```+|~~~+)[^\\n]*\\n.*?\\n\\1(?=\\s|$)",
+    "disposition": "1",
+    "parser_replacement": "S.CodeBlock:Fenced / S.CodeBlock:Indented intervals"
+   },
+   {
+    "rule": "_INLINE (inline-code)",
+    "regex": "(?<!`)`[^`\\n]+`(?!`)",
+    "disposition": "1",
+    "parser_replacement": "Code event intervals"
+   },
+   {
+    "rule": "_LINK (markdown-link)",
+    "regex": "!?(?:\\[[^\\]\\n]*\\]\\([^)\\n]*\\)|<https?://[^>]+>)",
+    "disposition": "1",
+    "parser_replacement": "S.Link/S.Image structure (destinations protected by construction; autolink destinations via the D0 rule); link labels remain exposed prose"
+   },
+   {
+    "rule": "_URL (url)",
+    "regex": "https?://[^\\s<>]+",
+    "disposition": "2",
+    "residual_class": "url"
+   },
+   {
+    "rule": "_PATH (path)",
+    "regex": "(?<!\\w)(?:\\.?/|~/|[A-Za-z]:[\\\\/])[^\\s`<>]+",
+    "disposition": "2",
+    "residual_class": "path"
+   },
+   {
+    "rule": "_RELATIVE_PATH (relative-path)",
+    "regex": "(?<!\\w)[A-Za-z0-9_.-]+(?:/[A-Za-z0-9_.-]+)+(?!\\w)",
+    "disposition": "2",
+    "residual_class": "path"
+   },
+   {
+    "rule": "_SHELL (shell)",
+    "regex": "(?m)^\\s*(?:[$#>]\\s+|(?:sudo\\s+)?(?:python|python3|uv|git|curl|npm|pip|pytest|ruff|mypy)\\s+)\\S[^\\n]*$",
+    "disposition": "2",
+    "residual_class": "shell"
+   },
+   {
+    "rule": "_NUMBER (number)",
+    "regex": "(?<!\\w)[+-]?(?:\\d+(?:[.,]\\d+)?)(?:\\s?(?:%|[A-Za-z]{1,8}))?(?!\\w)",
+    "disposition": "2",
+    "residual_class": "number-unit"
+   },
+   {
+    "rule": "_IDENTIFIER (identifier)",
+    "regex": "(?<!\\w)(?=[A-Za-z_]*\\d|[A-Za-z_]*_[A-Za-z_])[A-Za-z_][A-Za-z0-9_]*(?!\\w)",
+    "disposition": "2",
+    "residual_class": "identifier"
+   },
+   {
+    "rule": "_UPPER_IDENTIFIER (upper-identifier)",
+    "regex": "(?<!\\w)[A-Z][A-Z0-9_]{1,}(?!\\w)",
+    "disposition": "2",
+    "residual_class": "identifier"
+   },
+   {
+    "rule": "_JSON_XML (structured)",
+    "regex": "(?:\\{[^\\n{}]{0,2000}\\}|\\[[^\\n\\[\\]]{0,2000}\\]|</?[A-Za-z][^>]*>)",
+    "disposition": "2",
+    "residual_class": "bare-json"
+   },
+   {
+    "rule": "tool-argument",
+    "regex": "n/a (API parameter)",
+    "disposition": "2",
+    "residual_class": "tool-argument (API level; applies to any source substring named by the caller, independent of parsing)"
+   }
+  ],
+  "counts": {
+   "1": 3,
+   "2": 9,
+   "3": 0,
+   "4": 0
+  }
+ },
+ "changelog": {
+  "from": {
+   "schema": "008g-structural-policy/3",
+   "sha256": "7ff6646e3c11d1241cb1c85bd96f08e3f0db08e73d4eb4a4e97fac0c17e1828f"
+  },
+  "to": {
+   "schema": "008h-structural-policy/4"
+  },
+  "order": "008-h",
+  "changes": [
+   "policy_exposed_dialect_ambiguity: new section - the policy-exposed dialect-ambiguity classes with shape rules and measured evidence: html-closing-tag-adjacent-fence (35 B v2 shape without the R1 separator), keyvalue-list-item-quoted-emphasis (16 B v2 shape), yaml-hash-comment-heading (348 B v1 sub-shape; recorded reason: a hash-plus-text line is contextually indistinguishable from a Markdown ATX heading, so no bounded recognizer within the named categories is viable), and the four naturalistic dialect-limitation classes of the 008-g 70-case aggregate (markdown-table-dialect-boundary 615 B, list-item-candidate-prose 250 B, indented-code-lazy-continuation 45 B, residual-token-line-glue 17 B).",
+   "xml-fragment trigger (008-h scope item 4 decision EXTEND): the residual class trigger name pattern widened from ASCII letters to Unicode letters (RE_XML_NAME = (?!\\d)\\w[\\w.:-]* in research/curated/prose_boundary.py) with the same shape guards (letter/underscore then letters/digits/hyphens plus the existing dot/colon/underscore extensions, same-line closing or self-closing or attribute space, never on comparison operators, never on an opening bracket followed by digits, never on a lone bracket); RE_XML_DIALECT_NAME (the ASCII dialect vocabulary) and _xml_name_triggers unchanged - recognized ASCII names abstain for v2 parity; the xml-diacritic-tag-name policy-exposed class is therefore NOT added (the 110 B v1 sub-shape is covered by the extended trigger; visible dev-edge batch e11-e17 fail-closed validation).",
+   "composition contract (008-h implementation record, builder prose_boundary_builder.py): R1 separator rule (a fenced or indented code component is never composed on the line immediately after an HTML closing-tag line; the inserted blank line is template-owned NEUTRAL delimiter recorded in the document composition provenance), R2 structured-keyvalue list-item-emphasis admission exclusion for the v3 pool, R3 structured-xml diacritic-tag admission exclusion (not in effect under the EXTEND decision), and the label_source split (construction vs oracle-refined) recorded per labeled region in the v3 labels and manifest.",
+   "changelog: this additive field carried over from v3 and extended."
+  ],
+  "unchanged": "profile, candidate_rule, policy_decisions, residual_layer (values; the recorded trigger widening lives in research/curated/prose_boundary.py), coordinate_contract, fail_closed_fallback, determinism, helper, malformed_class_map, metrics, rule_classification."
+ }
+}

@@ -1,0 +1,112 @@
+{
+ "doc_id": "dev-001852",
+ "byte_length": 976,
+ "cp_length": 965,
+ "regions": [
+  {
+   "start_byte": 0,
+   "end_byte": 2,
+   "start_cp": 0,
+   "end_cp": 2,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 2,
+   "end_byte": 306,
+   "start_cp": 2,
+   "end_cp": 304,
+   "component_id": "comp-prose-history-dev-0001",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 306,
+   "end_byte": 309,
+   "start_cp": 304,
+   "end_cp": 307,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 309,
+   "end_byte": 310,
+   "start_cp": 307,
+   "end_cp": 308,
+   "component_id": "comp-code-shell-bash-dev-0010",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 310,
+   "end_byte": 329,
+   "start_cp": 308,
+   "end_cp": 327,
+   "component_id": "comp-code-shell-bash-dev-0010",
+   "category": "code",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 329,
+   "end_byte": 330,
+   "start_cp": 327,
+   "end_cp": 328,
+   "component_id": "comp-code-shell-bash-dev-0010",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 330,
+   "end_byte": 333,
+   "start_cp": 328,
+   "end_cp": 331,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 333,
+   "end_byte": 620,
+   "start_cp": 331,
+   "end_cp": 616,
+   "component_id": "comp-prose-electronics-dev-0004",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 620,
+   "end_byte": 623,
+   "start_cp": 616,
+   "end_cp": 619,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 623,
+   "end_byte": 976,
+   "start_cp": 619,
+   "end_cp": 965,
+   "component_id": "comp-prose-everyday-advice-dev-0013",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  }
+ ],
+ "invariants": {
+  "tiling_complete": true,
+  "no_contradictory_overlaps": true,
+  "cp_range_exact": true
+ }
+}

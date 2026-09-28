@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-000314",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T7-prose-json-prose-latex",
+ "byte_length": 897,
+ "cp_length": 885,
+ "sha256": "944dad7042b2ed1540971675c39e6c44c3eb04c1794dd434919787100f6e49fd",
+ "document": "Petra je načrtovala kratek vikend v dolini Soče. Njen spremljevalec, Ivan, jo je peljal do smaragdne reke in starega gradu. »Vzemi lahke hlače,« je rekel pred odhodom. Vratila se je utrujena, a z dovolj fotografij.\n{\"ime\":\"Projekt Gora\",\"nagnjenost\":\"12 %\",\"avtorsko\":\"Nevtralna testna vsebina\",\"debelina\":\"0,3 m\",\"opomba\":\"_Nevtralno_ https://primer.si/novica\"}\nV izmišljeni razpravi Bralna meja avtorica Eva Brin trdi, da je knjižnost najprej kraj. Ta kraj se ne meri v metrikah (ne v točkah, ne v ocenah), ampak v molčanju. Evropska zvrst, ki jo imenujemo »knjižna pripoved«, se pri njej spaja s slovenskim motivom potovanja. V njeni predstavi bralci ne odpirajo le strani. Odpirajo tudi tisti prostor med imenom in spominom.\n\\begin{equation} \\text{Testni projekt Nika} \\; : \\; \\delta_7=\\frac{1}{2} \\rho_7 \\eta_7 \\Rightarrow \\rho_7=4, \\eta_7=5 \\Rightarrow \\delta_7=10 \\end{equation}",
+ "components": [
+  {
+   "component_id": "comp-prose-travel-dev-0013",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 219
+  },
+  {
+   "component_id": "comp-structured-json-dev-0008",
+   "category": "structured",
+   "start_byte": 220,
+   "end_byte": 367
+  },
+  {
+   "component_id": "comp-prose-literature-dev-0005",
+   "category": "prose",
+   "start_byte": 368,
+   "end_byte": 740
+  },
+  {
+   "component_id": "comp-math-equation-env-dev-0007",
+   "category": "math",
+   "start_byte": 741,
+   "end_byte": 897
+  }
+ ]
+}

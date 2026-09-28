@@ -1,0 +1,102 @@
+{
+ "doc_id": "dev-000401",
+ "byte_length": 620,
+ "cp_length": 605,
+ "regions": [
+  {
+   "start_byte": 0,
+   "end_byte": 311,
+   "start_cp": 0,
+   "end_cp": 306,
+   "component_id": "comp-prose-administration-dev-0006",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 311,
+   "end_byte": 312,
+   "start_cp": 306,
+   "end_cp": 307,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 312,
+   "end_byte": 313,
+   "start_cp": 307,
+   "end_cp": 308,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 313,
+   "end_byte": 344,
+   "start_cp": 308,
+   "end_cp": 338,
+   "component_id": "comp-prose-everyday-advice-dev-0002",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 344,
+   "end_byte": 346,
+   "start_cp": 338,
+   "end_cp": 340,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 346,
+   "end_byte": 372,
+   "start_cp": 340,
+   "end_cp": 366,
+   "component_id": "comp-machine-urls-dev-0007",
+   "category": "machine",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 372,
+   "end_byte": 373,
+   "start_cp": 366,
+   "end_cp": 367,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 373,
+   "end_byte": 374,
+   "start_cp": 367,
+   "end_cp": 368,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 374,
+   "end_byte": 620,
+   "start_cp": 368,
+   "end_cp": 605,
+   "component_id": "comp-prose-everyday-advice-dev-0002",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  }
+ ],
+ "invariants": {
+  "tiling_complete": true,
+  "no_contradictory_overlaps": true,
+  "cp_range_exact": true
+ }
+}

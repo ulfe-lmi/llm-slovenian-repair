@@ -1,0 +1,102 @@
+{
+ "doc_id": "dev-001080",
+ "byte_length": 1092,
+ "cp_length": 1064,
+ "regions": [
+  {
+   "start_byte": 0,
+   "end_byte": 388,
+   "start_cp": 0,
+   "end_cp": 374,
+   "component_id": "comp-prose-cooking-dev-0001",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 388,
+   "end_byte": 389,
+   "start_cp": 374,
+   "end_cp": 375,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 389,
+   "end_byte": 392,
+   "start_cp": 375,
+   "end_cp": 378,
+   "component_id": "comp-code-sql-dev-0006",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 392,
+   "end_byte": 393,
+   "start_cp": 378,
+   "end_cp": 379,
+   "component_id": "comp-code-sql-dev-0006",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 393,
+   "end_byte": 740,
+   "start_cp": 379,
+   "end_cp": 722,
+   "component_id": "comp-code-sql-dev-0006",
+   "category": "code",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 740,
+   "end_byte": 741,
+   "start_cp": 722,
+   "end_cp": 723,
+   "component_id": "comp-code-sql-dev-0006",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 741,
+   "end_byte": 744,
+   "start_cp": 723,
+   "end_cp": 726,
+   "component_id": "comp-code-sql-dev-0006",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 744,
+   "end_byte": 745,
+   "start_cp": 726,
+   "end_cp": 727,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 745,
+   "end_byte": 1092,
+   "start_cp": 727,
+   "end_cp": 1064,
+   "component_id": "comp-prose-math-explainer-dev-0004",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  }
+ ],
+ "invariants": {
+  "tiling_complete": true,
+  "no_contradictory_overlaps": true,
+  "cp_range_exact": true
+ }
+}

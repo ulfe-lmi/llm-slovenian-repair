@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-002509",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T2-prose-math-prose",
+ "byte_length": 768,
+ "cp_length": 759,
+ "sha256": "a06b9d77d0da5399a8faaf2695704735eeacc371262e3ea386cffcaf069fa714",
+ "document": "V arhivu projekta Stare potje je bil najden list, na katerem piše o izletu do izvira leta 1807. Po besedah urednice Nine Mlakar je bil povzetek kratek, vendar dovolj jasen, da si lahko bralci predstavljajo skupino, ki je imela osem potnikov in enega psa. Delček zemljevida, prilepljen v isti zvezki, kaže zanko, ki je merila okoli trideset kilometrov.\n\\text{Nina}\\begin{matrix}11&12\\\\13&14\\end{matrix}\nVarčnost pri računih za ogrevanje v projektu Topla hiša ni vedno leva stvar, če je v prostoru prehladno. Leta 2023 so mnogi domovi dobili termometre, ki opozarjajo, ko temperatura pade pod 18 stopinj. (V takih dneh je bolje zapreti okno, ki ga obvečer nismo nujno potrebovali.) Pri starejših gradnjah je koristno preveriti tudi, ali se okno res dobro zapre.",
+ "components": [
+  {
+   "component_id": "comp-prose-history-dev-0010",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 354
+  },
+  {
+   "component_id": "comp-math-matrices-dev-0003",
+   "category": "math",
+   "start_byte": 355,
+   "end_byte": 404
+  },
+  {
+   "component_id": "comp-prose-everyday-advice-dev-0009",
+   "category": "prose",
+   "start_byte": 405,
+   "end_byte": 768
+  }
+ ]
+}

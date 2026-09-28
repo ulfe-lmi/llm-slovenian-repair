@@ -1,0 +1,102 @@
+{
+ "doc_id": "dev-000874",
+ "byte_length": 535,
+ "cp_length": 524,
+ "regions": [
+  {
+   "start_byte": 0,
+   "end_byte": 290,
+   "start_cp": 0,
+   "end_cp": 284,
+   "component_id": "comp-prose-medicine-explainer-dev-0004",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 290,
+   "end_byte": 291,
+   "start_cp": 284,
+   "end_cp": 285,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 291,
+   "end_byte": 292,
+   "start_cp": 285,
+   "end_cp": 286,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 292,
+   "end_byte": 323,
+   "start_cp": 286,
+   "end_cp": 316,
+   "component_id": "comp-prose-travel-dev-0001",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 323,
+   "end_byte": 325,
+   "start_cp": 316,
+   "end_cp": 318,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 325,
+   "end_byte": 351,
+   "start_cp": 318,
+   "end_cp": 344,
+   "component_id": "comp-machine-urls-dev-0007",
+   "category": "machine",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 351,
+   "end_byte": 352,
+   "start_cp": 344,
+   "end_cp": 345,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 352,
+   "end_byte": 353,
+   "start_cp": 345,
+   "end_cp": 346,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 353,
+   "end_byte": 535,
+   "start_cp": 346,
+   "end_cp": 524,
+   "component_id": "comp-prose-travel-dev-0001",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  }
+ ],
+ "invariants": {
+  "tiling_complete": true,
+  "no_contradictory_overlaps": true,
+  "cp_range_exact": true
+ }
+}

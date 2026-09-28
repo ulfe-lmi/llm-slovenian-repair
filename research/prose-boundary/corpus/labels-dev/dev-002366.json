@@ -1,0 +1,82 @@
+{
+ "doc_id": "dev-002366",
+ "byte_length": 751,
+ "cp_length": 734,
+ "regions": [
+  {
+   "start_byte": 0,
+   "end_byte": 239,
+   "start_cp": 0,
+   "end_cp": 236,
+   "component_id": "comp-prose-science-dev-0003",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 239,
+   "end_byte": 240,
+   "start_cp": 236,
+   "end_cp": 237,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 240,
+   "end_byte": 242,
+   "start_cp": 237,
+   "end_cp": 239,
+   "component_id": "comp-math-text-slovenian-dev-0004",
+   "category": "math",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 242,
+   "end_byte": 319,
+   "start_cp": 239,
+   "end_cp": 316,
+   "component_id": "comp-math-text-slovenian-dev-0004",
+   "category": "math",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 319,
+   "end_byte": 321,
+   "start_cp": 316,
+   "end_cp": 318,
+   "component_id": "comp-math-text-slovenian-dev-0004",
+   "category": "math",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 321,
+   "end_byte": 322,
+   "start_cp": 318,
+   "end_cp": 319,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 322,
+   "end_byte": 751,
+   "start_cp": 319,
+   "end_cp": 734,
+   "component_id": "comp-prose-history-dev-0009",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  }
+ ],
+ "invariants": {
+  "tiling_complete": true,
+  "no_contradictory_overlaps": true,
+  "cp_range_exact": true
+ }
+}

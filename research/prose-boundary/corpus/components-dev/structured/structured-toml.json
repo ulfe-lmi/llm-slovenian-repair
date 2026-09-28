@@ -1,0 +1,90 @@
+[
+ {
+  "component_id": "comp-structured-toml-dev-0001",
+  "family": "structured-toml",
+  "instance": "dev",
+  "category": "structured",
+  "subcategory": "toml dokument",
+  "fragment": "[projekt]\nnaziv = 'Nevtralna testna vsebina'\navtor = 'Ana Kovač'\ndelež = '25 %'\ndolžina = '3,5 m'\nopomba = '*Preizkus* za _novico_'\nvir = 'https://primer.si/novica'",
+  "fragment_sha256": "a642c38c86622ef58da117739748726964d5b60c969fea8f3f3cfe2ef6104fcf",
+  "fragment_bytes": 167,
+  "seed": "c258923f40a15b95"
+ },
+ {
+  "component_id": "comp-structured-toml-dev-0002",
+  "family": "structured-toml",
+  "instance": "dev",
+  "category": "structured",
+  "subcategory": "toml dokument",
+  "fragment": "[raziskava]\nnaslov = 'Opazovanje vremena'\nvodi = 'Marko Novak'\nmerilo = '0,13'\ntrajanje = '2 dni'\nopis = '_Opomba_ ni vključena'\nvir = 'https://primer.si/novica'",
+  "fragment_sha256": "5757ebd7b905c4c5fefa52550ff55a524cfc5e8972d3811993b0dc627d1ff83a",
+  "fragment_bytes": 162,
+  "seed": "c258923f40a15b95"
+ },
+ {
+  "component_id": "comp-structured-toml-dev-0003",
+  "family": "structured-toml",
+  "instance": "dev",
+  "category": "structured",
+  "subcategory": "toml dokument",
+  "fragment": "[trgovina]\nime = 'Trgovina Lipa'\nprodajalec = 'Irena Zupan'\nzaloga = '12 kos'\npopust = '15 %'\nopis = '*Novica* o _prodaji_'\nvir = 'https://primer.si/novica'",
+  "fragment_sha256": "86a545b3f51049588c6e37c625805988e3ab33a9415acf8fb854160f6f979438",
+  "fragment_bytes": 156,
+  "seed": "c258923f40a15b95"
+ },
+ {
+  "component_id": "comp-structured-toml-dev-0004",
+  "family": "structured-toml",
+  "instance": "dev",
+  "category": "structured",
+  "subcategory": "toml dokument",
+  "fragment": "[sola]\nlekcija = 'Slovenščina'\nucitelj = 'Petra Horvat'\nocena = '9'\ntrajanje = '45 minut'\nopomba = '_Raba_ zvezdic'\nvir = 'https://primer.si/novica'",
+  "fragment_sha256": "e94c3cef76be2350f14c55ddb11e8c786697e20bbcf948c9f4fec2e743b12854",
+  "fragment_bytes": 150,
+  "seed": "c258923f40a15b95"
+ },
+ {
+  "component_id": "comp-structured-toml-dev-0005",
+  "family": "structured-toml",
+  "instance": "dev",
+  "category": "structured",
+  "subcategory": "toml dokument",
+  "fragment": "[gradnja]\nprojekt = 'Most Lipa'\nvodja = 'Bojan Kranjc'\nvishina = '3,5 m'\nstrosek = '2 500 €'\nopis = '*Test* brez _opozorila_'\nvir = 'https://primer.si/novica'",
+  "fragment_sha256": "13389cc7f98a67d43cc0246a97f557edfcaedb10c50598cb11072cccaf5f0f41",
+  "fragment_bytes": 160,
+  "seed": "c258923f40a15b95"
+ },
+ {
+  "component_id": "comp-structured-toml-dev-0006",
+  "family": "structured-toml",
+  "instance": "dev",
+  "category": "structured",
+  "subcategory": "toml dokument",
+  "fragment": "[hrana]\nimenik = 'Jajčevca'\nkuhar = 'Nina Perko'\nprostornina = '0,5 l'\nsol = '2 g'\nopis = '_Priprava_ za *novico*'\nvir = 'https://primer.si/novica'",
+  "fragment_sha256": "0f9c652ab32046615e4a3a9c15b1a2c8b6c55354aed15a26dd9d7b9716816d95",
+  "fragment_bytes": 148,
+  "seed": "c258923f40a15b95"
+ },
+ {
+  "component_id": "comp-structured-toml-dev-0007",
+  "family": "structured-toml",
+  "instance": "dev",
+  "category": "structured",
+  "subcategory": "toml dokument",
+  "fragment": "[dogodek]\nnaziv = 'Tržnica v Ljubljani'\norganizator = 'Luka Vidmar'\nvstopnina = '5 €'\ntrajanje = '3 ure'\nopis = '*Dogodek* za _opazovanje_'\nvir = 'https://primer.si/novica'",
+  "fragment_sha256": "b1825f725570f8cab7efb53d148db81c357d22749db4be2843bab74a3ab33ff4",
+  "fragment_bytes": 175,
+  "seed": "c258923f40a15b95"
+ },
+ {
+  "component_id": "comp-structured-toml-dev-0008",
+  "family": "structured-toml",
+  "instance": "dev",
+  "category": "structured",
+  "subcategory": "toml dokument",
+  "fragment": "[arhiv]\nnosilec = 'Zora Kranjčec'\nobseg = '1 GB'\nstarost = '0,13 let'\nopis = '_Neodvisen_ *fragment*'\nvir = 'https://primer.si/novica'",
+  "fragment_sha256": "9b72019beb8bf2c4c6c6f5fc965d9a1398c6f790ba9cbe58a4844b6181fdf729",
+  "fragment_bytes": 135,
+  "seed": "c258923f40a15b95"
+ }
+]

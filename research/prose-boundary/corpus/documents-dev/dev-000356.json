@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-000356",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T5-lists",
+ "byte_length": 1126,
+ "cp_length": 1095,
+ "sha256": "59b595934f48088f5846f0b37e2e4034ae73df74738bd3993fdc7b1e0f6809cd",
+ "document": "- V projektu Modra skica je Luka dejal, da „povprečje ni vedno sredina“, ker so trije dani zneski zelo različni. V primeru razmerja tri do pet so bila odstopanja manjša. Ana se je strinjala, vendar je opozorila na izjemne dni. Na koncu so se dogovorili, da bodo uporabili preprostejše meritve.\n- `function seStez(a, b) { return a + b; } /* Test: seštej in i`\n- V laboratoriju projekta Merjač (stanica 4) je dr. Ana Kovač zapisala: »Med segrevanjem, in sicer ob dveh tisoč stopinjah Celzija, se material obnaša, kot bi šlo za tekočino,« in pojasnila, zakaj poskusne vzorce ob segrevanju obnašajo nepričakovano elastičnost. Rezultati iz leta 2021 so nato odprli pot k novi metodologiji, v kateri je pomembna vsaka mera, tudi tista, ki se zdi nesmiselna.\n- V projektu Vzorčni napisi 2025 je Petra zapisala, da se pri nespečnosti pogosto omenjajo navade, hrana in okolje, vendar ni mogoče zanesljivo napovedati vzroka brez pogovora. Zato v takih primerih svetujemo, da se oseba obrne na zdravnika ali medicinsko sestro, zlasti če se pojavi huda slabost, oteženo dihanje ali „nenadno slabše počutje“.",
+ "components": [
+  {
+   "component_id": "comp-prose-statistics-dev-0008",
+   "category": "prose",
+   "start_byte": 2,
+   "end_byte": 301
+  },
+  {
+   "component_id": "comp-code-javascript-dev-0001",
+   "category": "code",
+   "start_byte": 304,
+   "end_byte": 367
+  },
+  {
+   "component_id": "comp-prose-science-dev-0011",
+   "category": "prose",
+   "start_byte": 370,
+   "end_byte": 771
+  },
+  {
+   "component_id": "comp-prose-medicine-explainer-dev-0010",
+   "category": "prose",
+   "start_byte": 774,
+   "end_byte": 1126
+  }
+ ]
+}

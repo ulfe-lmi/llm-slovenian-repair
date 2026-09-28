@@ -1,0 +1,72 @@
+{
+ "schema": "008g-experiment-config/1",
+ "order": "008-g",
+ "frozen_note": "New frozen protection identity for the 008-g corrective round: recorded after the dev regression gate (requirement 5) passed, before any v2 hidden evaluation (requirement 6).",
+ "round_identity": {
+  "objective": "008",
+  "branch": "oap/008-prose-boundary-qualification",
+  "pr": 9,
+  "base_sha": "60b3ad3b70244ae2ab024b2b7dc9282283385f50",
+  "activation_sha": "cd336d3feb8ec08fbf7424c60bcbee1c016cdcd1",
+  "main_sha_unchanged": "7d2cc9ee37c1fc8c2a3eba238f89bc9bb242f9d9"
+ },
+ "policy": {
+  "active": "research/prose-boundary/config/structural-policy-v3.json",
+  "v2_sha256": "996f465784bed37a179be337e2af606b2dc350cacba6341479371d2812c5a88e",
+  "v3_sha256": "7ff6646e3c11d1241cb1c85bd96f08e3f0db08e73d4eb4a4e97fac0c17e1828f",
+  "v2_in_tree": "byte-identical at all 008-g heads (released for a consumed-by pointer only; the pointer remains in prose_boundary.py as POLICY_V2_PATH, now used by the compatibility alias)",
+  "pointer": "research/curated/prose_boundary.py load_policy_v3 (active); load_policy_v2 is a compatibility alias loading the active policy (candidate rule byte-identical v2/v3 per the v3 unchanged clause)",
+  "changes_v2_to_v3": [
+   "yaml-toml-config: strict single-line word-key protection (machine-like value or empty value immediately followed by nested list lines); nested list-style continuation extends protected runs; carried v2 >= 2-line runs and section runs unchanged",
+   "new residual class xml-fragment (non-recognized tag fragments: namespaced prefix-colon names or names outside the dialect vocabulary; paired full, self-closing token, standalone closing token, unbalanced opening to end of line; 2000 cp bound)",
+   "malformed_class_map: +mid-document-yaml (protected), +mid-document-xml-fragment (protected), +yaml-nested-parser-split (policy-exposed, bounded architecture limit); all v2 entries unchanged",
+   "determinism and scope clauses carried unchanged"
+  ]
+ },
+ "implementation": {
+  "frozen_census": {
+   "research/curated/prose_boundary.py": "3a5a4ba7b5258dc7937a9b4ef98a90982a6a159d5d8763160f3105048545f2d7",
+   "research/curated/protected.py": "27f22eaee129190b880851b958a8aa5a38d357cb4e711d70e762b2353d32e78f",
+   "research/prose-boundary/config/structural-policy-v3.json": "7ff6646e3c11d1241cb1c85bd96f08e3f0db08e73d4eb4a4e97fac0c17e1828f"
+  },
+  "note": "protected.py is byte-identical to the 008-f final head (the bounded recognizers live in prose_boundary.py alongside the 008-c residual layer; released surface, D0 placement choice, disclosed)",
+  "helper": {
+   "binary": "prose-boundary-meas (pinned pulldown-cmark 0.13.4 adapter)",
+   "sha256": "5df9a11d56b5bdec90c3ca09298802723975306f77e43e74ad1a72eb427c44bf"
+  }
+ },
+ "hidden_set_v2": {
+  "manifest": "research/prose-boundary/corpus/manifests/hidden-manifest-v2.json",
+  "manifest_sha256": "cf37654a45b10c024525fc334f368d4b20956619e2568542544c855d93a85ec1",
+  "seal_verification": "research/prose-boundary/corpus/manifests/seal-verification-v2.json",
+  "seal_verification_sha256": "c532738dc4ca4e5441b9f35a3cb0930eae02a966562b62f6557c660dfa731a75",
+  "generation_identity": "research/prose-boundary/config/generation/generation-identity-008g.json",
+  "generation_identity_sha256": "ddc73cefe9886247c4c7244246d86df353d0a0ee330114d19c09c75b5d8c4922",
+  "documents": 2000,
+  "components": 340,
+  "families": 76,
+  "mashup_seed": "9fdfa032940ba48d",
+  "label_oracle": "committed 008-c builder unmodified with the active v3 residual oracle (recorded D0); GT by construction, no parser participation (builder asserts)",
+  "strategy_seal_verification": "recorded in the v2 evaluation artifacts and the report (hard gate: the evaluation driver refuses to run before the strategy data-free re-verification receipt citing this manifest sha256 exists)"
+ },
+ "dev_regression": {
+  "file": "research/prose-boundary/results/hidden-acceptance-v2/dev-regression-008g.json",
+  "file_sha256": "7c369cd65dc134ba3f152cc914e9e69e001985b3f2d5071f64301ffda16ff08a",
+  "status": "PASS",
+  "dev_corpus_protected_bytes_exposed": 0,
+  "defect_batch_protected_bytes_exposed": 0,
+  "dev_prose_suppression_delta_pp": 0.0113,
+  "bound_pp": 1.0
+ },
+ "d0_choices": [
+  "recognizer placement: prose_boundary.py (the 008-c residual-layer home); protected.py untouched (byte-identical to base)",
+  "yaml-toml-config trigger (bounded by scope 4(a)(1)): single word-key line protected iff whole trimmed value is machine-like (number, path, relative path, identifier, env-var form, quoted literal) or value empty and immediately followed by >= 1 nested list-style line; nested list lines extend a protected run; pure list runs never fire",
+  "xml-fragment trigger (bounded by scope 4(a)(2)): fires only on namespaced prefix-colon names or names outside the dialect's recognized tag-name shape (letter/digit/hyphen); recognized names abstain (v2 parity); comparison operators, digits-after-<, lone angle brackets never fire (trigger requires letter/underscore after < and > on the same line)",
+  "xml-fragment unbalanced opening: protected to end of its line (NOT classified policy-exposed; explicit justification in the v3 policy changelog entry)",
+  "yaml-nested-parser-split: policy-exposed (policy-decided suppression; the residual layer is a pure function of a single candidate-prose span and the parser dialect splits key line from nested list continuation into different blocks - the bounded architecture limit named in the v3 malformed_class_map)",
+  "v2 label oracle: builder residual_spans replaced by the active v3 implementation at composition (recorded in hidden-manifest-v2.json label_oracle)",
+  "background process discipline: setsid nohup + pgrep tracking (a plain nohup background job dies with the exec session)",
+  "v2 generation overlap recovery: four saturated machine families regenerated with K=8 (disclosed in generation-identity-008g.json reruns; zero exact-component overlap re-asserted on the full pool)"
+ ],
+ "privacy": "no private paths, no raw content in this file"
+}

@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-000604",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T11-interactions",
+ "byte_length": 900,
+ "cp_length": 881,
+ "sha256": "9a3c7442c889206677c2b0be52088ec524e1652ef62183a72bee8a4b6e92f142",
+ "document": "`/* Primer 3: vrednost in identifikator */ int main(void) { c`.\n```\nfn opis_2() -> String { /* Testni projekt Lipa: č, š, ž, *poudarek* in _podčrtano_ */ let seStez = false; let HRAŠNA_VREDNOST = 5; let besedilo = format!(\"*Nova* ({} $)\", HRAŠNA_VREDNOST); let oznaka = \"č`š`ž\"; let pot = \"docs/vir.txt\"; let url = \"https://primer.si/koda\"; format!(\"{} | {} | {} | {} | {}\", seStez, besedilo, oznaka, pot, url) }\n# komentar z \\frac{a}{b}\n```\nPetra je načrtovala kratek vikend v dolini Soče. Njen spremljevalec, Ivan, jo je peljal do smaragdne reke in starega gradu. »Vzemi lahke hlače,« je rekel pred odhodom. Vratila se je utrujena, a z dovolj fotografij.\nČistilo iz sode bikarbone in citronske kiseline, kot ga testira zbirka Čist les, deluje preprosto, a ni primerno za vsak kamniti pult. »Za omarice z mahagonijem je bolje suha krpa,« je Marjeta opozorila, da se les ne oškodi.",
+ "components": [
+  {
+   "component_id": "comp-code-c-dev-0011",
+   "category": "code",
+   "start_byte": 0,
+   "end_byte": 62
+  },
+  {
+   "component_id": "comp-code-rust-dev-0006",
+   "category": "code",
+   "start_byte": 64,
+   "end_byte": 450
+  },
+  {
+   "component_id": "comp-prose-travel-dev-0013",
+   "category": "prose",
+   "start_byte": 451,
+   "end_byte": 670
+  },
+  {
+   "component_id": "comp-prose-everyday-advice-dev-0010",
+   "category": "prose",
+   "start_byte": 671,
+   "end_byte": 900
+  }
+ ]
+}

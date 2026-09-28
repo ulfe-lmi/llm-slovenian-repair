@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-002609",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T3-prose-fenced-prose",
+ "byte_length": 1095,
+ "cp_length": 1066,
+ "sha256": "1b41323ad8b885931caa91fca32abd6972446d095e1d8125c756590615184958",
+ "document": "Ko je Nika za projekt »Polno napajanje« preverjala obvestila, je opazila, da se aplikacija za vremensko napoved pozno obudila, če je telefon bil v šibkem omrežju (tudi ob številnih sporočilih). »Najprej napajanje«, je rekla njena sestra, »vse ostalo je opozorilo, ki lahko počaka do polnjenja.«\n```\n// Testni modul (č, š, ž)\nfunction seStez(a, b) {\n  return (a + b) * 1;\n}\nconst naslov = \"Opomba: **pomembno** in _podčrtana_\";\nconst besedilo = `Cena: $ 1,25 za razdelek2`;\nconst povezava = \"https://primer.si/koda\";\nconst pot = \"src/modul.py\";\nconst vir = \"docs/vir.txt\";\nconst HRAŠNA_VREDNOST = 10;\nconst rezultat = seStez(HRAŠNA_VREDNOST, 5);\nconsole.log(naslov, besedilo, povezava, pot, vir, rezultat);\n// konec fragmenta\n```\nV izmišljenem raziskovalnem projektu “Arhiv Dravskih poti” (nevtralna testna zbirka) so zapisi o potovanjih po Dravi prikazali, kako so meje med skupnostmi spreminjale spomin na preteklost. Letnica 1918 je postala mejni simbol. Avtorica Ana Kralj je v vnosu zapisala (po mnenju uredništva), da je “zgodovina” večinoma molk med letnicami.",
+ "components": [
+  {
+   "component_id": "comp-prose-computing-dev-0009",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 306
+  },
+  {
+   "component_id": "comp-code-javascript-dev-0009",
+   "category": "code",
+   "start_byte": 307,
+   "end_byte": 746
+  },
+  {
+   "component_id": "comp-prose-history-dev-0011",
+   "category": "prose",
+   "start_byte": 747,
+   "end_byte": 1095
+  }
+ ]
+}

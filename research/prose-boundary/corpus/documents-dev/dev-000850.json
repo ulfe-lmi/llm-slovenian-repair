@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-000850",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T4-heading-prose-table",
+ "byte_length": 719,
+ "cp_length": 701,
+ "sha256": "82fbb590ac60868e7007e6de5e756d324c4ce7c81ca1fd68fede7972859fe7fd",
+ "document": "## Ob prenovljenem pisarnem kotu, ki ga je v notranjem projektu\nV šoli so dijaki v letu 2025, v okviru notranjega projekta Besedilo, preizkušali urejevalnik besedil, ki je po mnenju učitelja Marka deloval “precej gladko”. Neko dopoldne so imeli težave s shranjevanjem, zato so se naučili, da je pomembno omeniti ime datoteke in mapo, v katero gre. Maja je zapisala, da ji je bila največja pomoč kratek pogovor s sošolko Ano, ki je razložila razliko med pripravo in končno različico. Tistega popoldneva, po njenih besedah, so preverili, da je shranjevanje enostavnejše, ko poznaš ime mape in datum.\n| Opis | Vzorček |\n| --- | --- |\n| V projektu Modra skica je Luka dejal, da | $HOME_DIR $SLO_DOKUMENT |",
+ "components": [
+  {
+   "component_id": "comp-prose-computing-dev-0011",
+   "category": "prose",
+   "start_byte": 3,
+   "end_byte": 63
+  },
+  {
+   "component_id": "comp-prose-computing-dev-0012",
+   "category": "prose",
+   "start_byte": 64,
+   "end_byte": 614
+  },
+  {
+   "component_id": "comp-prose-statistics-dev-0008",
+   "category": "prose",
+   "start_byte": 651,
+   "end_byte": 691
+  },
+  {
+   "component_id": "comp-machine-env-vars-dev-0002",
+   "category": "machine",
+   "start_byte": 694,
+   "end_byte": 717
+  }
+ ]
+}

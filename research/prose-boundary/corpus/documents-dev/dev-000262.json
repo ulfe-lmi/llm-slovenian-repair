@@ -1,0 +1,59 @@
+{
+ "doc_id": "dev-000262",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T10-randomized",
+ "byte_length": 1265,
+ "cp_length": 1243,
+ "sha256": "19e285acb875fd5bbe8be59adbf8b81b56c8c9c8e20a905dc8c213f1e008cee4",
+ "document": "»Za omaro s posodo ne rabiš dragih sredstev,« je v projektu Varčni dom rekla Ana, da je dovolj topla voda in kapljica naravne citronike. Steklo se briše v eni smeri, da ni pasov.\n\\begin{align} \\alpha_7 &= \\lim_{\\beta_7 \\to 0} \\frac{\\gamma_7}{\\beta_7} \\\\ \\delta_7 &= \\nabla \\epsilon_7 \\\\ \\zeta_7 &= \\eta_7 \\cdot \\theta_7 \\end{align}\nV projektu Bela Lipa je `tema` in ``enota`` zapisana kot 3 m v stavku.\n```\n#include <string>\n// Projekt: *Lipa*, šentjanž\n// Preveri src/modul.py\nstd::string seStez(int razdelek2) {\n    // žlahtna vrednost: 2 $\n    return \"vrednost \" + std::to_string(razdelek2 * 2) + \" $\";\n}\n```\n```\nmoČ = 3; žrtev = (1, 2); besedilo = 'Cena: $10 `kod` **poudarek** _podčrtano_'; pot = 'docs/vir.txt' # komentar v slovenščini: testni projekt, https://primer.si/koda\n```\ngrep marko preizkus.json\n{\"ime\":\"Projekt Reka\",\"razmerje\":\"2,5 m / 0,13\",\"avtorsko\":\"Nevtralna testna vsebina\",\"vzorec\":{\"delež\":\"30 %\",\"opis\":\"_Nevtralno_ https://primer.si/novica\"}}\nV testni zbirki Projekt Zdravje 2026 je Matej napisal kratek vnos. Utrujenost, včasih tudi glavobol, ima lahko več razlogov. To je namerni vstavek v besedilo. Beseda „preveriti“ (v smislu posveta) se tu nanaša na obisk zdravnika. Ne gre za priporočilo zdravil ali odmerkov.",
+ "components": [
+  {
+   "component_id": "comp-prose-everyday-advice-dev-0007",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 183
+  },
+  {
+   "component_id": "comp-math-align-env-dev-0007",
+   "category": "math",
+   "start_byte": 184,
+   "end_byte": 336
+  },
+  {
+   "component_id": "comp-markdown-inline-code-dev-0001",
+   "category": "markdown",
+   "start_byte": 337,
+   "end_byte": 407
+  },
+  {
+   "component_id": "comp-code-cpp-dev-0003",
+   "category": "code",
+   "start_byte": 408,
+   "end_byte": 619
+  },
+  {
+   "component_id": "comp-code-python-dev-0011",
+   "category": "code",
+   "start_byte": 620,
+   "end_byte": 798
+  },
+  {
+   "component_id": "comp-machine-shell-commands-dev-0006",
+   "category": "machine",
+   "start_byte": 799,
+   "end_byte": 823
+  },
+  {
+   "component_id": "comp-structured-json-dev-0004",
+   "category": "structured",
+   "start_byte": 824,
+   "end_byte": 983
+  },
+  {
+   "component_id": "comp-prose-medicine-explainer-dev-0009",
+   "category": "prose",
+   "start_byte": 984,
+   "end_byte": 1265
+  }
+ ]
+}

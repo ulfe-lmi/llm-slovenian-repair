@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-002628",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T11-interactions",
+ "byte_length": 890,
+ "cp_length": 871,
+ "sha256": "8641fccbc5f41881d78b6ecef61c2e7af2498626c8598e3b8d9607a57c90514e",
+ "document": "`/* Testni fragment 5: izmišljena oseba Anja, projekt Kovač. `.\n```\nint main(void) { char *napis = \"Besedilo: __podčrtano__ in **dvojno**\"; char *back = \"Backquote: `zvezda`\"; char *url = \"https://primer.si/koda\"; int razdelek2 = 9; (void)napis; (void)back; (void)url; (void)razdelek2; return 0; } /* Podčrtano in dvojno */\n# komentar z \\frac{a}{b}\n```\nVarčevanje v hiši se pokaže tudi pri majhnih stvareh, rekel bi, pri svetlobi v kopalnici. Luka je v projektu Varna hiša zapisal: »Luč ne pomeni velikega stroška, če jo ob koncu dneva ugasneš.«\nNekateri gradbeniki (zlasti tisti, ki so sodelovali pri obnovi stolpa Vrt) menijo, da so materiali, ki dolgoročno ohranjajo obliko, prijaznejši za vzdrževanje. Ta pogled, ki ga dokumenti imenujejo mehka vzdržljivost, velja tudi za podporno konstrukcijo in za ojačitve, ki jih je leta 2018 opisala projektna skupina Podravska.",
+ "components": [
+  {
+   "component_id": "comp-code-sql-dev-0005",
+   "category": "code",
+   "start_byte": 0,
+   "end_byte": 64
+  },
+  {
+   "component_id": "comp-code-c-dev-0007",
+   "category": "code",
+   "start_byte": 66,
+   "end_byte": 356
+  },
+  {
+   "component_id": "comp-prose-everyday-advice-dev-0004",
+   "category": "prose",
+   "start_byte": 357,
+   "end_byte": 559
+  },
+  {
+   "component_id": "comp-prose-engineering-dev-0013",
+   "category": "prose",
+   "start_byte": 560,
+   "end_byte": 890
+  }
+ ]
+}

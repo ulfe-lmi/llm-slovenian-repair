@@ -1,0 +1,162 @@
+{
+ "doc_id": "dev-001077",
+ "byte_length": 1064,
+ "cp_length": 1036,
+ "regions": [
+  {
+   "start_byte": 0,
+   "end_byte": 1,
+   "start_cp": 0,
+   "end_cp": 1,
+   "component_id": "comp-code-shell-bash-dev-0007",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 1,
+   "end_byte": 47,
+   "start_cp": 1,
+   "end_cp": 47,
+   "component_id": "comp-code-shell-bash-dev-0007",
+   "category": "code",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 47,
+   "end_byte": 48,
+   "start_cp": 47,
+   "end_cp": 48,
+   "component_id": "comp-code-shell-bash-dev-0007",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 48,
+   "end_byte": 49,
+   "start_cp": 48,
+   "end_cp": 49,
+   "component_id": "template",
+   "category": null,
+   "role": "PROSE",
+   "template_owned": true
+  },
+  {
+   "start_byte": 49,
+   "end_byte": 50,
+   "start_cp": 49,
+   "end_cp": 50,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 50,
+   "end_byte": 53,
+   "start_cp": 50,
+   "end_cp": 53,
+   "component_id": "comp-code-rust-dev-0004",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 53,
+   "end_byte": 54,
+   "start_cp": 53,
+   "end_cp": 54,
+   "component_id": "comp-code-rust-dev-0004",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 54,
+   "end_byte": 396,
+   "start_cp": 54,
+   "end_cp": 387,
+   "component_id": "comp-code-rust-dev-0004",
+   "category": "code",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 396,
+   "end_byte": 397,
+   "start_cp": 387,
+   "end_cp": 388,
+   "component_id": "comp-code-rust-dev-0004",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 397,
+   "end_byte": 400,
+   "start_cp": 388,
+   "end_cp": 391,
+   "component_id": "comp-code-rust-dev-0004",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 400,
+   "end_byte": 401,
+   "start_cp": 391,
+   "end_cp": 392,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 401,
+   "end_byte": 610,
+   "start_cp": 392,
+   "end_cp": 598,
+   "component_id": "comp-prose-programming-explainer-dev-0002",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 610,
+   "end_byte": 611,
+   "start_cp": 598,
+   "end_cp": 599,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 611,
+   "end_byte": 1020,
+   "start_cp": 599,
+   "end_cp": 995,
+   "component_id": "comp-prose-education-dev-0005",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 1020,
+   "end_byte": 1064,
+   "start_cp": 995,
+   "end_cp": 1036,
+   "component_id": "template",
+   "category": null,
+   "role": "PROSE",
+   "template_owned": true
+  }
+ ],
+ "invariants": {
+  "tiling_complete": true,
+  "no_contradictory_overlaps": true,
+  "cp_range_exact": true
+ }
+}

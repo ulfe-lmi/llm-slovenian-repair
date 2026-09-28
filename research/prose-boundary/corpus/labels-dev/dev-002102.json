@@ -1,0 +1,92 @@
+{
+ "doc_id": "dev-002102",
+ "byte_length": 620,
+ "cp_length": 609,
+ "regions": [
+  {
+   "start_byte": 0,
+   "end_byte": 201,
+   "start_cp": 0,
+   "end_cp": 195,
+   "component_id": "comp-prose-programming-explainer-dev-0003",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 201,
+   "end_byte": 202,
+   "start_cp": 195,
+   "end_cp": 196,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 202,
+   "end_byte": 203,
+   "start_cp": 196,
+   "end_cp": 197,
+   "component_id": "comp-math-inline-dollar-dev-0007",
+   "category": "math",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 203,
+   "end_byte": 287,
+   "start_cp": 197,
+   "end_cp": 281,
+   "component_id": "comp-math-inline-dollar-dev-0007",
+   "category": "math",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 287,
+   "end_byte": 288,
+   "start_cp": 281,
+   "end_cp": 282,
+   "component_id": "comp-math-inline-dollar-dev-0007",
+   "category": "math",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 288,
+   "end_byte": 289,
+   "start_cp": 282,
+   "end_cp": 283,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 289,
+   "end_byte": 576,
+   "start_cp": 283,
+   "end_cp": 568,
+   "component_id": "comp-prose-electronics-dev-0004",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 576,
+   "end_byte": 620,
+   "start_cp": 568,
+   "end_cp": 609,
+   "component_id": "template",
+   "category": null,
+   "role": "PROSE",
+   "template_owned": true
+  }
+ ],
+ "invariants": {
+  "tiling_complete": true,
+  "no_contradictory_overlaps": true,
+  "cp_range_exact": true
+ }
+}

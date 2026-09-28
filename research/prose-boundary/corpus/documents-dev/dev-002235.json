@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-002235",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T3-prose-fenced-prose",
+ "byte_length": 800,
+ "cp_length": 781,
+ "sha256": "1b039d25a3d7a2545296ab75c50c85b6c26bc208e9ea9a7adbdadd84cf3e7cce",
+ "document": "Evropska kratka zgodba, ki jo raziskuje izmišljeni projekt Bralna gibanja, pogosto uporabi motiv tveganja in ga stisne v nekaj stavkov. Izmišljena evropska avtorica Léa Durand napiše: »Samo en pogled je dovolj.«\n```\n// Test: seznam opravil v izmišljenem projektu Brst.\nfn main() {\n    let naslov = String::from(\"vir: docs/vir.txt\");\n    let povezava = \"https://primer.si/koda\";\n    let cena = \"12 € ali 13 $\";\n    println!(\"**{naslov}** _podčrtano_ `{cena}` ({povezava})\");\n}\n```\nV projektu Prvi tok, ki ga je leta 2018 sestavila Ana, se je naučila, da mora biti sklep zaprt, da se lučka sploh prižge. Baterija, ki je imela 4,5 V, je bila nameščena v držač, medtem ko je upornost zaščitila diodo pred prevelikim tokom. (Zelo pomembno je preveriti, ali so vsi konci dobro povezani.)",
+ "components": [
+  {
+   "component_id": "comp-prose-literature-dev-0007",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 217
+  },
+  {
+   "component_id": "comp-code-rust-dev-0009",
+   "category": "code",
+   "start_byte": 218,
+   "end_byte": 489
+  },
+  {
+   "component_id": "comp-prose-electronics-dev-0006",
+   "category": "prose",
+   "start_byte": 490,
+   "end_byte": 800
+  }
+ ]
+}

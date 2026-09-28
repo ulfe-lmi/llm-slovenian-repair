@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-002620",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T3-prose-fenced-prose",
+ "byte_length": 794,
+ "cp_length": 781,
+ "sha256": "223abeb2b976651f318dc3e91af64bb707c75b00b369680a30c4aa2218b02cee",
+ "document": "Anja je v opombi zapisala, da so razmerja med dohodki in izdatki (v mesecu maju in juniju) nekoliko drugačna kot lani. Povprečje ni pokazalo velike spremembe, vendar je posamezen teden odstopil, kar je pritegnilo pozornost ekipi.\n```\n#include <string>\n// *Test* za _označevanje_, čokolada\nint glavna() {\n    int seStez = 8;\n    int razdelek2 = seStez + 2;\n    std::string opis = \"Cena: 3 $ (nevtralno)\";\n    return razdelek2;\n}\n```\nKadar učenci rešujejo enačbe, jim je koristno, da najprej povežejo oba dela z istimi dejanji, da ostane zvezek ravnovesja (kot pri tehtnici). Pri projektu Šolske številke so v letu 2021 poskusili z besedilnimi nalogami, v katerih je neznanka skrita v vsakdanji razgovoru. Zaradi tega se učenci naučijo, da razlaga ni le zapis, ampak način misljenja.",
+ "components": [
+  {
+   "component_id": "comp-prose-statistics-dev-0002",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 231
+  },
+  {
+   "component_id": "comp-code-cpp-dev-0007",
+   "category": "code",
+   "start_byte": 232,
+   "end_byte": 435
+  },
+  {
+   "component_id": "comp-prose-math-explainer-dev-0006",
+   "category": "prose",
+   "start_byte": 436,
+   "end_byte": 794
+  }
+ ]
+}

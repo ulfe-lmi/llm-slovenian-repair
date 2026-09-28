@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-001222",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T2-prose-math-prose",
+ "byte_length": 714,
+ "cp_length": 698,
+ "sha256": "12aa2557a3a7a49e299904a67ed4c1f8e924c65916bdd3b5546d08560350a6bb",
+ "document": "Ko je Nika za projekt »Polno napajanje« preverjala obvestila, je opazila, da se aplikacija za vremensko napoved pozno obudila, če je telefon bil v šibkem omrežju (tudi ob številnih sporočilih). »Najprej napajanje«, je rekla njena sestra, »vse ostalo je opozorilo, ki lahko počaka do polnjenja.«\n\\begin{equation} \\text{Testni projekt Mojca} \\; : \\; \\alpha_1=3, \\beta_1=4 \\Rightarrow \\gamma_1^2=\\alpha_1^2+\\beta_1^2 \\Rightarrow \\gamma_1=5 \\end{equation}\nMednarodna skupina, ki dela v izmišljenem arhivu Ljubljana, je pregledovala dopise iz leta 1804, v katerih omenjajo potovanja po dolini. V vstavku (ki ga je zapisala Taja) piše: »Razdalje so merili s koraki in verstami, ne pa z modernimi merami.«",
+ "components": [
+  {
+   "component_id": "comp-prose-computing-dev-0009",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 306
+  },
+  {
+   "component_id": "comp-math-equation-env-dev-0001",
+   "category": "math",
+   "start_byte": 307,
+   "end_byte": 463
+  },
+  {
+   "component_id": "comp-prose-history-dev-0002",
+   "category": "prose",
+   "start_byte": 464,
+   "end_byte": 714
+  }
+ ]
+}

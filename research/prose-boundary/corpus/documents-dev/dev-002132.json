@@ -1,0 +1,53 @@
+{
+ "doc_id": "dev-002132",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T10-randomized",
+ "byte_length": 1216,
+ "cp_length": 1190,
+ "sha256": "b62556024b37b94a3867b008d356125fde1aaf559fbdecae03bf2f394a86b204",
+ "document": "Ko je Nika za projekt »Polno napajanje« preverjala obvestila, je opazila, da se aplikacija za vremensko napoved pozno obudila, če je telefon bil v šibkem omrežju (tudi ob številnih sporočilih). »Najprej napajanje«, je rekla njena sestra, »vse ostalo je opozorilo, ki lahko počaka do polnjenja.«\r\n[voda]\r\nime = *Projekt Rečni tok*\r\nopis = _stopnja_ 0,13\r\nprostornina = 12 litrov\r\navtor = Tone Zupan\r\nvir = https://primer.si/novica\r\n; nevtralna testna vsebina\r\nmare.beric@primer.si,meta.zupan@primer.si\r\nPROJEKT=Bela reka\r\nAVTOR=Matej Novak\r\nVIŠINA=3,5 m\r\nPREDAL=25 %\r\nDODATNA_VAR=$drugim_ključem; 0,14\r\nOPIS=[*nevtralna*, _test_, https://primer.si/novica]\r\n| Kraj testiranj | Enota | Vrednost |\r\n| --- | --- | --- |\r\n| Laboratorij Alfa | °C | 21 |\r\n| Poslovna enota Beta | % | 64 |\r\n$\\sum_{\\kappa=1}^{3} \\lambda_\\kappa = \\mu_{\\text{Luka projekt Sava}}$\r\nZa šolsko uro sem pripravila zgodbo o dveh vrstah sadja. Prva vrsta je vsebovala tri jabolka, druga pa štiri hruške. Učenci so po mnenju mentorja najprej poimenovali skupine, šele nato pa primerjali. Vstavek v dnevniku je bil preprost: »Enakost ni le število, ampak tudi pojasnjenje.« S tem sem želela, da se ne zanašajo samo na pravilo.",
+ "components": [
+  {
+   "component_id": "comp-prose-computing-dev-0009",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 306
+  },
+  {
+   "component_id": "comp-structured-ini-dev-0002",
+   "category": "structured",
+   "start_byte": 308,
+   "end_byte": 470
+  },
+  {
+   "component_id": "comp-machine-emails-dev-0002",
+   "category": "machine",
+   "start_byte": 472,
+   "end_byte": 513
+  },
+  {
+   "component_id": "comp-structured-env-blocks-dev-0002",
+   "category": "structured",
+   "start_byte": 515,
+   "end_byte": 669
+  },
+  {
+   "component_id": "comp-markdown-tables-dev-0003",
+   "category": "markdown",
+   "start_byte": 671,
+   "end_byte": 796
+  },
+  {
+   "component_id": "comp-math-inline-dollar-dev-0002",
+   "category": "math",
+   "start_byte": 798,
+   "end_byte": 867
+  },
+  {
+   "component_id": "comp-prose-math-explainer-dev-0004",
+   "category": "prose",
+   "start_byte": 869,
+   "end_byte": 1216
+  }
+ ]
+}

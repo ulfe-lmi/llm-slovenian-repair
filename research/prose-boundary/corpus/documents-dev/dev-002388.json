@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-002388",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T2-prose-math-prose",
+ "byte_length": 711,
+ "cp_length": 694,
+ "sha256": "7030acdd4313c7e97882e12edcb8fa4ad00f57ab1877b47c25545cac322326bd",
+ "document": "Kratka pot do varčnosti je pogosto preprosta: pred nakupom se je treba vprašati, ali stvar res pomanjkuje ali samo manjka red. V projektu Skromni kotički sta Luka in Nina preizkušala, ali je mogoče stare posode posvetiti z malo sode bikarbone in toplo vodo. Če predmet v treh dneh ne najde svoje vloge, ga raje odnesemo na dražbo ali ga podarimo.\n\\begin{align} \\mu_3 &= \\sum_{\\alpha=1}^{3} \\sigma_\\alpha \\\\ \\rho_3 &= \\int_0^1 \\phi_3(\\lambda_3)\\,d\\lambda_3 \\\\ \\omega_3 &= \\kappa_3 + \\iota_3 \\end{align}\n„Prvi korak, drugi noga,“ je rekla Ana, a mladi smučarji v projektni skupini so še vedno poskušali izbrati pravo pozicijo. Ko je padal sneg, so se vsi odločili za krajši premor pri topli čaju.",
+ "components": [
+  {
+   "component_id": "comp-prose-everyday-advice-dev-0013",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 353
+  },
+  {
+   "component_id": "comp-math-align-env-dev-0003",
+   "category": "math",
+   "start_byte": 354,
+   "end_byte": 508
+  },
+  {
+   "component_id": "comp-prose-sports-dev-0012",
+   "category": "prose",
+   "start_byte": 509,
+   "end_byte": 711
+  }
+ ]
+}

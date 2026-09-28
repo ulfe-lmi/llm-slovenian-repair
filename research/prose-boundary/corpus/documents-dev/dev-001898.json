@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-001898",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T7-prose-json-prose-latex",
+ "byte_length": 817,
+ "cp_length": 798,
+ "sha256": "0b14b9eab2320c5b1a3f0f1bd1f3d4958efc681c2816d3b12876524f48e7eeb7",
+ "document": "Sara je pojasnila, da se povprečje včasih zdi napačno, če manjkajo posamezni dnevi. “V takih primerih je bolje reči, da je slika neenakomerna,“ je dodala in pokazala še stolpec z najmanjšo vrednostjo. Skupina se je odločila, da bo za leto 2025 zbrala tudi podatke o vremenu. Tako bo lažje razložila razmerja med posameznimi tedeni.\n{\"ime\":\"Projekt Sonce\",\"dolžina\":\"4,2 m\",\"avtorsko\":\"Nevtralna testna vsebina\",\"kvote\":{\"delež\":\"25 %\",\"opomba\":\"**Pregled** https://primer.si/novica\"}}\nProjekt Tiha proga je zbral fragmente, v katerih Ana Kralj bere Čopovo poezijo ob zori. V zadnjem razdelku avtorica spomni na evropsko pripovedko, ki jo je nekje v Ljubljani zapisala leta 1984. Tisto jutro je v knjižnici zmanjkalo ene ključne listine.\n$\\frac{\\alpha_{\\text{Maja projekt Triglav}}}{\\beta} = \\gamma$",
+ "components": [
+  {
+   "component_id": "comp-prose-statistics-dev-0005",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 345
+  },
+  {
+   "component_id": "comp-structured-json-dev-0005",
+   "category": "structured",
+   "start_byte": 346,
+   "end_byte": 500
+  },
+  {
+   "component_id": "comp-prose-literature-dev-0011",
+   "category": "prose",
+   "start_byte": 501,
+   "end_byte": 755
+  },
+  {
+   "component_id": "comp-math-inline-dollar-dev-0003",
+   "category": "math",
+   "start_byte": 756,
+   "end_byte": 817
+  }
+ ]
+}

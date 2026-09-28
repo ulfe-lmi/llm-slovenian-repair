@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-001481",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T8-quote-fenced",
+ "byte_length": 871,
+ "cp_length": 862,
+ "sha256": "f0b552a61ba17c411517f89f131f15b643d503fff079df9d200b0181bbdde958",
+ "document": "> Proces urejanja prostorskih posegov v okviru notranjega testnega projekta se je lani (2024) prenesel v skupno aplikacijo, kar je v prvih mesecih povzročilo zamude. Občinski sekretar, ki je sicer skrbel za informatiko, je sodelavce opozoril, naj se strogo držijo notranjih rokov in da je vsak dokument datiran, pečaten in arhiviran. `int main(void) { char *napis = \"Besedilo: __podčrtano__ in *`\n```\n#!/usr/bin/env bash\n# Prvi fragment: testni podatki (URL: https://primer.si/koda)\n# Oseba: Ana, projekt: vzorčni vir\n# Poti: src/modul.py, docs/vir.txt\nseStez='src/modul.py'\nrazdelek2='docs/vir.txt'\noznaka='HRAŠNA_VREDNOST'\nopis='**poudarjeno** in _podčrtano_ z *zvezdicami*'\nvaluta='10 $'\noklepaji='(vzorčni)'\necho \"pot: $seStez\"\necho \"razdelek: $razdelek2\"\necho \"oznaka: $oznaka\"\necho \"$opis\"\necho \"cena: $valuta\"\necho \"oklepaji: $oklepaji\"\necho 'znak: `'\n```",
+ "components": [
+  {
+   "component_id": "comp-prose-administration-dev-0013",
+   "category": "prose",
+   "start_byte": 2,
+   "end_byte": 337
+  },
+  {
+   "component_id": "comp-code-c-dev-0007",
+   "category": "code",
+   "start_byte": 338,
+   "end_byte": 401
+  },
+  {
+   "component_id": "comp-code-shell-bash-dev-0009",
+   "category": "code",
+   "start_byte": 402,
+   "end_byte": 871
+  }
+ ]
+}

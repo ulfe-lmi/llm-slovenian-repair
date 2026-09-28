@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-002798",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T5-lists",
+ "byte_length": 1003,
+ "cp_length": 972,
+ "sha256": "a74a64944773eac8e9e630ca89c3393838184d3e6861f669bbe3069f1bc7a641",
+ "document": "- V šoli zdravja v Trzinu so učenci (ki so sodelovali v projektu Mirni utripi) prebrali, da premalo gibanja lahko spremeni občutek moči in počutje. Takšne spremembe so lahko odziv na vsakdanjo utrujenost. Ko se pri nekem otroku ali odraslem ponovijo, je prav, da jih preveri zdravnik.\n- `/* Primer 1: pot in cena, črka ž */ int main(void) { const c`\n- Sara je pojasnila, da se povprečje včasih zdi napačno, če manjkajo posamezni dnevi. “V takih primerih je bolje reči, da je slika neenakomerna,“ je dodala in pokazala še stolpec z najmanjšo vrednostjo. Skupina se je odločila, da bo za leto 2025 zbrala tudi podatke o vremenu. Tako bo lažje razložila razmerja med posameznimi tedeni.\n- Ana je zapisala, da se v starejših pisarnah pogosto uporabljajo tiskalniki, ki se povezujejo po kablu, čeprav so mlajši sodelavci privrženci brezžičnih rešitev. Takšna razmerja, čeprav na videz nevidna, vplivajo na to, kako hitro potuje dokument. (V projektu so to opazovali tri tedne.)",
+ "components": [
+  {
+   "component_id": "comp-prose-medicine-explainer-dev-0002",
+   "category": "prose",
+   "start_byte": 2,
+   "end_byte": 290
+  },
+  {
+   "component_id": "comp-code-c-dev-0009",
+   "category": "code",
+   "start_byte": 293,
+   "end_byte": 357
+  },
+  {
+   "component_id": "comp-prose-statistics-dev-0005",
+   "category": "prose",
+   "start_byte": 360,
+   "end_byte": 705
+  },
+  {
+   "component_id": "comp-prose-computing-dev-0005",
+   "category": "prose",
+   "start_byte": 708,
+   "end_byte": 1003
+  }
+ ]
+}

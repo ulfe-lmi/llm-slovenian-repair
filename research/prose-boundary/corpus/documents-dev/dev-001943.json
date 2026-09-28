@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-001943",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T8-quote-fenced",
+ "byte_length": 785,
+ "cp_length": 776,
+ "sha256": "bf20d56d52cf69a21a8219e9932d3b921db990868fa95526f0ce818d55f43f9a",
+ "document": "> Zahtevo so oddali v ponedeljek. V občini so jo prejeli isti dan, in sicer ob enajsti uri popoldne. Potrdilo z modro značko, ki je merila tri centimetre, so priložili k vsakemu vnosu v evidenco. `# Fragment 7: oseba: Luka Zupan, projekt *Mol*`\n```\n#!/usr/bin/env bash\n# Drugi fragment: izmišljen projekt (test)\n# Oseba: Peter, projekt: Žlahtni koda (HRAŠNA_VREDNOST)\n# Besedila: poudarke, podčrtane besede, zvezdice\nnaslov='*neodvisni* fragment'\npodrobnost='_podčrtana_ in **poudarjena**'\nseStez='src/modul.py'\nrazdelek2='docs/vir.txt'\nurl='https://primer.si/koda'\noklepaji='(vzorčni)'\necho \"naslov: $naslov\"\necho \"podrobnost: $podrobnost\"\necho \"pot: $seStez\"\necho \"razdelek: $razdelek2\"\necho \"url: $url\"\necho \"oklepaji: $oklepaji\"\necho 'backquote: `'\necho 'znesek: 42 $'\n```",
+ "components": [
+  {
+   "component_id": "comp-prose-administration-dev-0009",
+   "category": "prose",
+   "start_byte": 2,
+   "end_byte": 198
+  },
+  {
+   "component_id": "comp-code-shell-bash-dev-0007",
+   "category": "code",
+   "start_byte": 199,
+   "end_byte": 247
+  },
+  {
+   "component_id": "comp-code-shell-bash-dev-0010",
+   "category": "code",
+   "start_byte": 248,
+   "end_byte": 785
+  }
+ ]
+}

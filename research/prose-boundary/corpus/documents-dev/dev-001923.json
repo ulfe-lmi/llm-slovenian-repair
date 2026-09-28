@@ -1,0 +1,71 @@
+{
+ "doc_id": "dev-001923",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T10-randomized",
+ "byte_length": 1608,
+ "cp_length": 1590,
+ "sha256": "a79bcbfdd84f3271ad544cf4b4a2f4d86addceb59a0bcb76bf8bd3a8cd5729b7",
+ "document": "V šoli zdravja v Trzinu so učenci (ki so sodelovali v projektu Mirni utripi) prebrali, da premalo gibanja lahko spremeni občutek moči in počutje. Takšne spremembe so lahko odziv na vsakdanjo utrujenost. Ko se pri nekem otroku ali odraslem ponovijo, je prav, da jih preveri zdravnik.\nFragment 8: <ol><li>Konfiguracija: _varno_stanje_ (vrednost 0,01)</li><li>Preverjanje: *trajanje* 125 s</li><li>Dokumenti: glej <a href=\"https://primer.si/dokumenti\">dokumenti</a></li></ol>\nana.novak@primer.si\n\\[ \\begin{bmatrix} \\theta_1 & \\mu_2 & 5 \\\\ 4 & \\phi_3 & -\\lambda_1 \\\\ \\sigma_2 & 9 & \\text{Savinja} \\end{bmatrix} \\]\n~~**Prečrtano** zmanjkano.\nTestni projekt: Papirnata mlat. Osebna: Nika Kranjc.\n\\begin{equation} \\text{Testni projekt Nika} \\; : \\; \\delta_7=\\frac{1}{2} \\rho_7 \\eta_7 \\Rightarrow \\rho_7=4, \\eta_7=5 \\Rightarrow \\delta_7=10 \\end{equation}\n$\\alpha_{\\text{Jana projekt Dol}} \\le \\beta_{\\text{Sava}} \\le \\gamma$\nFragment 6: <ul><li>Lokacija A: *glavno_središče* (obseg 15,2 m)</li><li>Lokacija B: _rezervno_področje_ (volumen 0,75 l)</li><li>Lokacija C: *testno_okolje* (URL: <a href=\"https://primer.si/lokacija\">lokacija</a>)</li></ul>\n```\nfunction seStez(a, b) { return a + b; } /* Test: seštej in izpiši za 10 $ */ const razdelek2 = seStez(2, 3); console.log(`Rezultat: ${razdelek2} za 10 $ in 5 $`);\n```\nV projektu »Mestni prehod čez Ljubljanico« so leta 2021 izbrali kombinacijo jekla in betona (natančneje: lahkega, armiranega). Ker je razpon precejšen, so nosilce razdelili na osem segmentov. Inženirka Ana Kos je dodala, da se temperaturne razlike v spojih skrbno kompenzirajo.",
+ "components": [
+  {
+   "component_id": "comp-prose-medicine-explainer-dev-0002",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 288
+  },
+  {
+   "component_id": "comp-structured-html-dev-0008",
+   "category": "structured",
+   "start_byte": 289,
+   "end_byte": 478
+  },
+  {
+   "component_id": "comp-machine-emails-dev-0001",
+   "category": "machine",
+   "start_byte": 479,
+   "end_byte": 498
+  },
+  {
+   "component_id": "comp-math-bracket-tex-dev-0002",
+   "category": "math",
+   "start_byte": 499,
+   "end_byte": 615
+  },
+  {
+   "component_id": "comp-malformed-malformed-nesting-dev-0003",
+   "category": "malformed",
+   "start_byte": 616,
+   "end_byte": 696
+  },
+  {
+   "component_id": "comp-math-equation-env-dev-0007",
+   "category": "math",
+   "start_byte": 697,
+   "end_byte": 853
+  },
+  {
+   "component_id": "comp-math-inline-dollar-dev-0005",
+   "category": "math",
+   "start_byte": 854,
+   "end_byte": 923
+  },
+  {
+   "component_id": "comp-structured-html-dev-0006",
+   "category": "structured",
+   "start_byte": 924,
+   "end_byte": 1151
+  },
+  {
+   "component_id": "comp-code-javascript-dev-0001",
+   "category": "code",
+   "start_byte": 1152,
+   "end_byte": 1324
+  },
+  {
+   "component_id": "comp-prose-engineering-dev-0011",
+   "category": "prose",
+   "start_byte": 1325,
+   "end_byte": 1608
+  }
+ ]
+}

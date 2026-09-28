@@ -1,0 +1,65 @@
+{
+ "doc_id": "dev-002902",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T10-randomized",
+ "byte_length": 1320,
+ "cp_length": 1294,
+ "sha256": "97bdc10d8d145c5605a799051e2baa29c044eb1c68d19f609318b84488065901",
+ "document": "V prostoru projekta Tabor so preizkušali prenos toplote skozi plastine in merili spremembe, ko so dodali tanke plasti iz mešanih vlaken. Meritve so vodila dva študenta, Luka in Nika, ki sta zapisoval čase, temperature ter opazila rahlo meglico na robu vzorcev. Leta dvotisoč in devetindvajset, ko je bila soba še prenovljena, je v opombah stalo, da bo treba poskus ponoviti pri drugačni vlažnosti.\nrazdalja,\"2,4 km\"\n<produkt id='peti' naziv='Sončna luč' cena='12,99 EUR'><opis status='aktivno'>*Novo* _test_ izdaja</opis></produkt>\nProjekt Modra Gora vsebuje `vrednost` in ``besedilo`` kot 4 s v stavku.\nhttps://primer.si/novica#naslov\nPROJEKT_IME=Kralj_Metelj, KEY=vrednost\n- Oseba: Ana Testna, 2 opombe\n  - Projekt: 4 enote, 8 kg\n```\n// Test: seznam opravil v izmišljenem projektu Brst.\nfn main() {\n    let naslov = String::from(\"vir: docs/vir.txt\");\n    let povezava = \"https://primer.si/koda\";\n    let cena = \"12 € ali 13 $\";\n    println!(\"**{naslov}** _podčrtano_ `{cena}` ({povezava})\");\n}\n```\nKo je Nika za projekt »Polno napajanje« preverjala obvestila, je opazila, da se aplikacija za vremensko napoved pozno obudila, če je telefon bil v šibkem omrežju (tudi ob številnih sporočilih). »Najprej napajanje«, je rekla njena sestra, »vse ostalo je opozorilo, ki lahko počaka do polnjenja.«",
+ "components": [
+  {
+   "component_id": "comp-prose-science-dev-0004",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 405
+  },
+  {
+   "component_id": "comp-structured-keyvalue-dev-0008",
+   "category": "structured",
+   "start_byte": 406,
+   "end_byte": 423
+  },
+  {
+   "component_id": "comp-structured-xml-dev-0005",
+   "category": "structured",
+   "start_byte": 424,
+   "end_byte": 541
+  },
+  {
+   "component_id": "comp-markdown-inline-code-dev-0007",
+   "category": "markdown",
+   "start_byte": 542,
+   "end_byte": 613
+  },
+  {
+   "component_id": "comp-machine-urls-dev-0003",
+   "category": "machine",
+   "start_byte": 614,
+   "end_byte": 645
+  },
+  {
+   "component_id": "comp-machine-env-vars-dev-0001",
+   "category": "machine",
+   "start_byte": 646,
+   "end_byte": 684
+  },
+  {
+   "component_id": "comp-markdown-lists-dev-0008",
+   "category": "markdown",
+   "start_byte": 685,
+   "end_byte": 741
+  },
+  {
+   "component_id": "comp-code-rust-dev-0009",
+   "category": "code",
+   "start_byte": 742,
+   "end_byte": 1013
+  },
+  {
+   "component_id": "comp-prose-computing-dev-0009",
+   "category": "prose",
+   "start_byte": 1014,
+   "end_byte": 1320
+  }
+ ]
+}

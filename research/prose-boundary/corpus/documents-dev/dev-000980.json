@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-000980",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T2-prose-math-prose",
+ "byte_length": 817,
+ "cp_length": 802,
+ "sha256": "6e37cfc5a009a04443085b8dc8c514920f1a03320eb166e1fccbad806a120af2",
+ "document": "V projektu Hišni nasveti 2024 je Ana iz Ljubljane opazila, da se steklenice s čisto vodo, (še posebej tiste 0,5 litra), hitreje izpraznijo, če so vedno pri roki ob jedilni mizi. Njen sosed Marko je bil sprva skeptičen, a je po dveh tednih dejal: »Če je pijača pri mizi, manjkrat potuje v hladilnik.« Tudi manjše spremembe, kot je skleda za kosmiče ob vratih, v celotnem gospodinjstvu naredijo mirnejše jutro.\n\\begin{equation} \\text{Testni projekt Tomas} \\; : \\; \\sin^2 \\theta_6 + \\cos^2 \\theta_6=1 \\Rightarrow \\theta_6=\\frac{\\pi}{6} \\Rightarrow \\sin^2\\left(\\frac{\\pi}{6}\\right)+\\cos^2\\left(\\frac{\\pi}{6}\\right)=1 \\end{equation}\nAna je poletja 2023 preživela ob Bledu in si ogledala grad. Vreme je bilo toplo, voda pa mirna kot steklo. Popoldne se je sprehodila do Špice in uživala v razgledu na jezero.",
+ "components": [
+  {
+   "component_id": "comp-prose-everyday-advice-dev-0011",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 420
+  },
+  {
+   "component_id": "comp-math-equation-env-dev-0006",
+   "category": "math",
+   "start_byte": 421,
+   "end_byte": 639
+  },
+  {
+   "component_id": "comp-prose-travel-dev-0006",
+   "category": "prose",
+   "start_byte": 640,
+   "end_byte": 817
+  }
+ ]
+}

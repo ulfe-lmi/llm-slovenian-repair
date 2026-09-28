@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-000556",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T7-prose-json-prose-latex",
+ "byte_length": 957,
+ "cp_length": 937,
+ "sha256": "e72a313b3739c3175346333b1052a8fbd0732d959df6d31d7cc4070434ad9753",
+ "document": "Iva je v projektu Kuhinjski arhiv v ponedeljek zvečer pripravila potico, a je namesto oreščkov izbrala mandlje, ker je imela doma le eno majhno škatlo. Testo (tisti tanjši recept iz leta 1989) se je lepo razvalalo, čeprav je bila kuhinja prepolna. Ko se je postrežbo spomnila na babičino opombo, je v dnevnik dodala vstavek: „Sladica naj diha vsaj tri četrt ure.“\n{\"ime\":\"Projekt Sonce\",\"dolžina\":\"4,2 m\",\"avtorsko\":\"Nevtralna testna vsebina\",\"kvote\":{\"delež\":\"25 %\",\"opomba\":\"**Pregled** https://primer.si/novica\"}}\nV poročilu projekta Sova je Ana zabeležila, da je bil račun porabe preproster. Trije sodelavci so skupno porabili enaindevetdeset evrov. Po razmerju med porabo in sodelavci je povprečje za vsakega znašalo trideset tri evri.\n\\begin{equation} \\text{Testni projekt Janez} \\; : \\; \\int_{0}^{1} 2\\alpha_4 \\, \\mathrm{d}\\alpha_4=\\alpha_4^2 \\big|_{0}^{1} \\Rightarrow \\int_{0}^{1} 2\\alpha_4 \\, \\mathrm{d}\\alpha_4=1 \\end{equation}",
+ "components": [
+  {
+   "component_id": "comp-prose-cooking-dev-0009",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 376
+  },
+  {
+   "component_id": "comp-structured-json-dev-0005",
+   "category": "structured",
+   "start_byte": 377,
+   "end_byte": 531
+  },
+  {
+   "component_id": "comp-prose-statistics-dev-0011",
+   "category": "prose",
+   "start_byte": 532,
+   "end_byte": 760
+  },
+  {
+   "component_id": "comp-math-equation-env-dev-0004",
+   "category": "math",
+   "start_byte": 761,
+   "end_byte": 957
+  }
+ ]
+}

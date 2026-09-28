@@ -1,0 +1,782 @@
+{
+ "doc_id": "dev-002814",
+ "byte_length": 1222,
+ "cp_length": 1208,
+ "regions": [
+  {
+   "start_byte": 0,
+   "end_byte": 289,
+   "start_cp": 0,
+   "end_cp": 286,
+   "component_id": "comp-prose-programming-explainer-dev-0010",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 289,
+   "end_byte": 290,
+   "start_cp": 286,
+   "end_cp": 287,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 290,
+   "end_byte": 301,
+   "start_cp": 287,
+   "end_cp": 298,
+   "component_id": "comp-machine-filenames-dev-0001",
+   "category": "machine",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 301,
+   "end_byte": 302,
+   "start_cp": 298,
+   "end_cp": 299,
+   "component_id": "comp-machine-filenames-dev-0001",
+   "category": "machine",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 302,
+   "end_byte": 304,
+   "start_cp": 299,
+   "end_cp": 301,
+   "component_id": "comp-machine-filenames-dev-0001",
+   "category": "machine",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 304,
+   "end_byte": 305,
+   "start_cp": 301,
+   "end_cp": 302,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 305,
+   "end_byte": 308,
+   "start_cp": 302,
+   "end_cp": 305,
+   "component_id": "comp-markdown-images-dev-0005",
+   "category": "markdown",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 308,
+   "end_byte": 316,
+   "start_cp": 305,
+   "end_cp": 313,
+   "component_id": "comp-markdown-images-dev-0005",
+   "category": "markdown",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 316,
+   "end_byte": 317,
+   "start_cp": 313,
+   "end_cp": 314,
+   "component_id": "comp-markdown-images-dev-0005",
+   "category": "markdown",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 317,
+   "end_byte": 386,
+   "start_cp": 314,
+   "end_cp": 382,
+   "component_id": "comp-markdown-images-dev-0005",
+   "category": "markdown",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 386,
+   "end_byte": 387,
+   "start_cp": 382,
+   "end_cp": 383,
+   "component_id": "comp-markdown-images-dev-0005",
+   "category": "markdown",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 387,
+   "end_byte": 422,
+   "start_cp": 383,
+   "end_cp": 417,
+   "component_id": "comp-markdown-images-dev-0005",
+   "category": "markdown",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 422,
+   "end_byte": 423,
+   "start_cp": 417,
+   "end_cp": 418,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 423,
+   "end_byte": 461,
+   "start_cp": 418,
+   "end_cp": 456,
+   "component_id": "comp-markdown-inline-code-dev-0008",
+   "category": "markdown",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 461,
+   "end_byte": 462,
+   "start_cp": 456,
+   "end_cp": 457,
+   "component_id": "comp-markdown-inline-code-dev-0008",
+   "category": "markdown",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 462,
+   "end_byte": 466,
+   "start_cp": 457,
+   "end_cp": 461,
+   "component_id": "comp-markdown-inline-code-dev-0008",
+   "category": "markdown",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 466,
+   "end_byte": 467,
+   "start_cp": 461,
+   "end_cp": 462,
+   "component_id": "comp-markdown-inline-code-dev-0008",
+   "category": "markdown",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 467,
+   "end_byte": 471,
+   "start_cp": 462,
+   "end_cp": 466,
+   "component_id": "comp-markdown-inline-code-dev-0008",
+   "category": "markdown",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 471,
+   "end_byte": 473,
+   "start_cp": 466,
+   "end_cp": 468,
+   "component_id": "comp-markdown-inline-code-dev-0008",
+   "category": "markdown",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 473,
+   "end_byte": 479,
+   "start_cp": 468,
+   "end_cp": 474,
+   "component_id": "comp-markdown-inline-code-dev-0008",
+   "category": "markdown",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 479,
+   "end_byte": 481,
+   "start_cp": 474,
+   "end_cp": 476,
+   "component_id": "comp-markdown-inline-code-dev-0008",
+   "category": "markdown",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 481,
+   "end_byte": 490,
+   "start_cp": 476,
+   "end_cp": 485,
+   "component_id": "comp-markdown-inline-code-dev-0008",
+   "category": "markdown",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 490,
+   "end_byte": 491,
+   "start_cp": 485,
+   "end_cp": 486,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 491,
+   "end_byte": 493,
+   "start_cp": 486,
+   "end_cp": 488,
+   "component_id": "comp-markdown-lists-dev-0001",
+   "category": "markdown",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 493,
+   "end_byte": 527,
+   "start_cp": 488,
+   "end_cp": 522,
+   "component_id": "comp-markdown-lists-dev-0001",
+   "category": "markdown",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 527,
+   "end_byte": 528,
+   "start_cp": 522,
+   "end_cp": 523,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 528,
+   "end_byte": 567,
+   "start_cp": 523,
+   "end_cp": 561,
+   "component_id": "comp-structured-env-blocks-dev-0004",
+   "category": "structured",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 567,
+   "end_byte": 568,
+   "start_cp": 561,
+   "end_cp": 562,
+   "component_id": "comp-structured-env-blocks-dev-0004",
+   "category": "structured",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 568,
+   "end_byte": 572,
+   "start_cp": 562,
+   "end_cp": 565,
+   "component_id": "comp-structured-env-blocks-dev-0004",
+   "category": "structured",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 572,
+   "end_byte": 573,
+   "start_cp": 565,
+   "end_cp": 566,
+   "component_id": "comp-structured-env-blocks-dev-0004",
+   "category": "structured",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 573,
+   "end_byte": 578,
+   "start_cp": 566,
+   "end_cp": 571,
+   "component_id": "comp-structured-env-blocks-dev-0004",
+   "category": "structured",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 578,
+   "end_byte": 579,
+   "start_cp": 571,
+   "end_cp": 572,
+   "component_id": "comp-structured-env-blocks-dev-0004",
+   "category": "structured",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 579,
+   "end_byte": 682,
+   "start_cp": 572,
+   "end_cp": 674,
+   "component_id": "comp-structured-env-blocks-dev-0004",
+   "category": "structured",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 682,
+   "end_byte": 683,
+   "start_cp": 674,
+   "end_cp": 675,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 683,
+   "end_byte": 702,
+   "start_cp": 675,
+   "end_cp": 694,
+   "component_id": "comp-markdown-raw-html-dev-0001",
+   "category": "markdown",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 702,
+   "end_byte": 705,
+   "start_cp": 694,
+   "end_cp": 697,
+   "component_id": "comp-markdown-raw-html-dev-0001",
+   "category": "markdown",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 705,
+   "end_byte": 715,
+   "start_cp": 697,
+   "end_cp": 707,
+   "component_id": "comp-markdown-raw-html-dev-0001",
+   "category": "markdown",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 715,
+   "end_byte": 719,
+   "start_cp": 707,
+   "end_cp": 711,
+   "component_id": "comp-markdown-raw-html-dev-0001",
+   "category": "markdown",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 719,
+   "end_byte": 723,
+   "start_cp": 711,
+   "end_cp": 715,
+   "component_id": "comp-markdown-raw-html-dev-0001",
+   "category": "markdown",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 723,
+   "end_byte": 726,
+   "start_cp": 715,
+   "end_cp": 718,
+   "component_id": "comp-markdown-raw-html-dev-0001",
+   "category": "markdown",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 726,
+   "end_byte": 736,
+   "start_cp": 718,
+   "end_cp": 727,
+   "component_id": "comp-markdown-raw-html-dev-0001",
+   "category": "markdown",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 736,
+   "end_byte": 740,
+   "start_cp": 727,
+   "end_cp": 731,
+   "component_id": "comp-markdown-raw-html-dev-0001",
+   "category": "markdown",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 740,
+   "end_byte": 750,
+   "start_cp": 731,
+   "end_cp": 741,
+   "component_id": "comp-markdown-raw-html-dev-0001",
+   "category": "markdown",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 750,
+   "end_byte": 756,
+   "start_cp": 741,
+   "end_cp": 747,
+   "component_id": "comp-markdown-raw-html-dev-0001",
+   "category": "markdown",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 756,
+   "end_byte": 762,
+   "start_cp": 747,
+   "end_cp": 752,
+   "component_id": "comp-markdown-raw-html-dev-0001",
+   "category": "markdown",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 762,
+   "end_byte": 769,
+   "start_cp": 752,
+   "end_cp": 759,
+   "component_id": "comp-markdown-raw-html-dev-0001",
+   "category": "markdown",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 769,
+   "end_byte": 785,
+   "start_cp": 759,
+   "end_cp": 774,
+   "component_id": "comp-markdown-raw-html-dev-0001",
+   "category": "markdown",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 785,
+   "end_byte": 790,
+   "start_cp": 774,
+   "end_cp": 779,
+   "component_id": "comp-markdown-raw-html-dev-0001",
+   "category": "markdown",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 790,
+   "end_byte": 815,
+   "start_cp": 779,
+   "end_cp": 803,
+   "component_id": "comp-markdown-raw-html-dev-0001",
+   "category": "markdown",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 815,
+   "end_byte": 816,
+   "start_cp": 803,
+   "end_cp": 804,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 816,
+   "end_byte": 843,
+   "start_cp": 804,
+   "end_cp": 831,
+   "component_id": "comp-markdown-inline-code-dev-0007",
+   "category": "markdown",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 843,
+   "end_byte": 844,
+   "start_cp": 831,
+   "end_cp": 832,
+   "component_id": "comp-markdown-inline-code-dev-0007",
+   "category": "markdown",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 844,
+   "end_byte": 852,
+   "start_cp": 832,
+   "end_cp": 840,
+   "component_id": "comp-markdown-inline-code-dev-0007",
+   "category": "markdown",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 852,
+   "end_byte": 853,
+   "start_cp": 840,
+   "end_cp": 841,
+   "component_id": "comp-markdown-inline-code-dev-0007",
+   "category": "markdown",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 853,
+   "end_byte": 857,
+   "start_cp": 841,
+   "end_cp": 845,
+   "component_id": "comp-markdown-inline-code-dev-0007",
+   "category": "markdown",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 857,
+   "end_byte": 859,
+   "start_cp": 845,
+   "end_cp": 847,
+   "component_id": "comp-markdown-inline-code-dev-0007",
+   "category": "markdown",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 859,
+   "end_byte": 867,
+   "start_cp": 847,
+   "end_cp": 855,
+   "component_id": "comp-markdown-inline-code-dev-0007",
+   "category": "markdown",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 867,
+   "end_byte": 869,
+   "start_cp": 855,
+   "end_cp": 857,
+   "component_id": "comp-markdown-inline-code-dev-0007",
+   "category": "markdown",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 869,
+   "end_byte": 887,
+   "start_cp": 857,
+   "end_cp": 875,
+   "component_id": "comp-markdown-inline-code-dev-0007",
+   "category": "markdown",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 887,
+   "end_byte": 888,
+   "start_cp": 875,
+   "end_cp": 876,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 888,
+   "end_byte": 907,
+   "start_cp": 876,
+   "end_cp": 895,
+   "component_id": "comp-markdown-raw-html-dev-0003",
+   "category": "markdown",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 907,
+   "end_byte": 910,
+   "start_cp": 895,
+   "end_cp": 898,
+   "component_id": "comp-markdown-raw-html-dev-0003",
+   "category": "markdown",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 910,
+   "end_byte": 919,
+   "start_cp": 898,
+   "end_cp": 907,
+   "component_id": "comp-markdown-raw-html-dev-0003",
+   "category": "markdown",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 919,
+   "end_byte": 923,
+   "start_cp": 907,
+   "end_cp": 911,
+   "component_id": "comp-markdown-raw-html-dev-0003",
+   "category": "markdown",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 923,
+   "end_byte": 927,
+   "start_cp": 911,
+   "end_cp": 915,
+   "component_id": "comp-markdown-raw-html-dev-0003",
+   "category": "markdown",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 927,
+   "end_byte": 930,
+   "start_cp": 915,
+   "end_cp": 918,
+   "component_id": "comp-markdown-raw-html-dev-0003",
+   "category": "markdown",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 930,
+   "end_byte": 940,
+   "start_cp": 918,
+   "end_cp": 928,
+   "component_id": "comp-markdown-raw-html-dev-0003",
+   "category": "markdown",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 940,
+   "end_byte": 944,
+   "start_cp": 928,
+   "end_cp": 932,
+   "component_id": "comp-markdown-raw-html-dev-0003",
+   "category": "markdown",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 944,
+   "end_byte": 953,
+   "start_cp": 932,
+   "end_cp": 941,
+   "component_id": "comp-markdown-raw-html-dev-0003",
+   "category": "markdown",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 953,
+   "end_byte": 959,
+   "start_cp": 941,
+   "end_cp": 947,
+   "component_id": "comp-markdown-raw-html-dev-0003",
+   "category": "markdown",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 959,
+   "end_byte": 963,
+   "start_cp": 947,
+   "end_cp": 951,
+   "component_id": "comp-markdown-raw-html-dev-0003",
+   "category": "markdown",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 963,
+   "end_byte": 970,
+   "start_cp": 951,
+   "end_cp": 958,
+   "component_id": "comp-markdown-raw-html-dev-0003",
+   "category": "markdown",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 970,
+   "end_byte": 976,
+   "start_cp": 958,
+   "end_cp": 964,
+   "component_id": "comp-markdown-raw-html-dev-0003",
+   "category": "markdown",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 976,
+   "end_byte": 981,
+   "start_cp": 964,
+   "end_cp": 969,
+   "component_id": "comp-markdown-raw-html-dev-0003",
+   "category": "markdown",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 981,
+   "end_byte": 1004,
+   "start_cp": 969,
+   "end_cp": 992,
+   "component_id": "comp-markdown-raw-html-dev-0003",
+   "category": "markdown",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 1004,
+   "end_byte": 1005,
+   "start_cp": 992,
+   "end_cp": 993,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 1005,
+   "end_byte": 1222,
+   "start_cp": 993,
+   "end_cp": 1208,
+   "component_id": "comp-prose-literature-dev-0010",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  }
+ ],
+ "invariants": {
+  "tiling_complete": true,
+  "no_contradictory_overlaps": true,
+  "cp_range_exact": true
+ }
+}

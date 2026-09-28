@@ -1,0 +1,65 @@
+{
+ "doc_id": "dev-001714",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T10-randomized",
+ "byte_length": 1383,
+ "cp_length": 1357,
+ "sha256": "566a554247261407499226130a37b66ac48510aac4cb66e85e01522fd7a79a73",
+ "document": "V sklopu testnega projekta je Peter opazoval skupino starejših udeležencev. Njegova skupina je začela s petminutnim segrevanjem. Nato je izvedla tri krogove po travi. „Sodelavec,“ je vodja rekel, „v prihodnji uri bomo dodali še eno zmerno aktivnost.“\n```\nfn seStez(razdelek2: u32) -> String { /* Testni projekt Lipa: č, š, ž, *poudarek* _podčrtano_ `oznaka` */ let HRAŠNA_VREDNOST = 1; let besedilo = format!(\"**Nova** ({} $, {})\", razdelek2, \"š\"); let pot = \"src/modul.py\"; let url = \"https://primer.si/koda\"; format!(\"{} | {} | {} | {}\", HRAŠNA_VREDNOST, besedilo, pot, url) }\n```\n```\nint main(void) { char *napis = \"Besedilo: __podčrtano__ in **dvojno**\"; char *back = \"Backquote: `zvezda`\"; char *url = \"https://primer.si/koda\"; int razdelek2 = 9; (void)napis; (void)back; (void)url; (void)razdelek2; return 0; } /* Podčrtano in dvojno */\n```\ndocs/vir.txt /usr/bin/orodje\n$$\\frac{\\xi}{\\eta - 2} = \\frac{8}{13} + \\alpha = \\text{Nova Gorica}$$\n\\begin{align} \\mu_3 &= \\sum_{\\alpha=1}^{3} \\sigma_\\alpha \\\\ \\rho_3 &= \\int_0^1 \\phi_3(\\lambda_3)\\,d\\lambda_3 \\\\ \\omega_3 &= \\kappa_3 + \\iota_3 \\end{align}\nhttps://primer.si/stran/12\n0.13.4, 0,9999\nPetra je načrtovala kratek vikend v dolini Soče. Njen spremljevalec, Ivan, jo je peljal do smaragdne reke in starega gradu. »Vzemi lahke hlače,« je rekel pred odhodom. Vratila se je utrujena, a z dovolj fotografij.",
+ "components": [
+  {
+   "component_id": "comp-prose-sports-dev-0010",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 262
+  },
+  {
+   "component_id": "comp-code-rust-dev-0001",
+   "category": "code",
+   "start_byte": 263,
+   "end_byte": 601
+  },
+  {
+   "component_id": "comp-code-c-dev-0007",
+   "category": "code",
+   "start_byte": 602,
+   "end_byte": 867
+  },
+  {
+   "component_id": "comp-machine-posix-paths-dev-0007",
+   "category": "machine",
+   "start_byte": 868,
+   "end_byte": 896
+  },
+  {
+   "component_id": "comp-math-display-dollar-dev-0007",
+   "category": "math",
+   "start_byte": 897,
+   "end_byte": 966
+  },
+  {
+   "component_id": "comp-math-align-env-dev-0003",
+   "category": "math",
+   "start_byte": 967,
+   "end_byte": 1121
+  },
+  {
+   "component_id": "comp-machine-urls-dev-0001",
+   "category": "machine",
+   "start_byte": 1122,
+   "end_byte": 1148
+  },
+  {
+   "component_id": "comp-machine-versions-numbers-units-dev-0006",
+   "category": "machine",
+   "start_byte": 1149,
+   "end_byte": 1163
+  },
+  {
+   "component_id": "comp-prose-travel-dev-0013",
+   "category": "prose",
+   "start_byte": 1164,
+   "end_byte": 1383
+  }
+ ]
+}

@@ -1,0 +1,192 @@
+{
+ "doc_id": "dev-001648",
+ "byte_length": 1024,
+ "cp_length": 1011,
+ "regions": [
+  {
+   "start_byte": 0,
+   "end_byte": 379,
+   "start_cp": 0,
+   "end_cp": 373,
+   "component_id": "comp-prose-electronics-dev-0013",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 379,
+   "end_byte": 380,
+   "start_cp": 373,
+   "end_cp": 374,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 380,
+   "end_byte": 403,
+   "start_cp": 374,
+   "end_cp": 397,
+   "component_id": "comp-machine-posix-paths-dev-0005",
+   "category": "machine",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 403,
+   "end_byte": 404,
+   "start_cp": 397,
+   "end_cp": 398,
+   "component_id": "comp-machine-posix-paths-dev-0005",
+   "category": "machine",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 404,
+   "end_byte": 419,
+   "start_cp": 398,
+   "end_cp": 413,
+   "component_id": "comp-machine-posix-paths-dev-0005",
+   "category": "machine",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 419,
+   "end_byte": 420,
+   "start_cp": 413,
+   "end_cp": 414,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 420,
+   "end_byte": 423,
+   "start_cp": 414,
+   "end_cp": 417,
+   "component_id": "comp-code-c-dev-0004",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 423,
+   "end_byte": 424,
+   "start_cp": 417,
+   "end_cp": 418,
+   "component_id": "comp-code-c-dev-0004",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 424,
+   "end_byte": 672,
+   "start_cp": 418,
+   "end_cp": 665,
+   "component_id": "comp-code-c-dev-0004",
+   "category": "code",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 672,
+   "end_byte": 673,
+   "start_cp": 665,
+   "end_cp": 666,
+   "component_id": "comp-code-c-dev-0004",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 673,
+   "end_byte": 676,
+   "start_cp": 666,
+   "end_cp": 669,
+   "component_id": "comp-code-c-dev-0004",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 676,
+   "end_byte": 677,
+   "start_cp": 669,
+   "end_cp": 670,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 677,
+   "end_byte": 684,
+   "start_cp": 670,
+   "end_cp": 677,
+   "component_id": "comp-markdown-fenced-code-dev-0008",
+   "category": "markdown",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 684,
+   "end_byte": 685,
+   "start_cp": 677,
+   "end_cp": 678,
+   "component_id": "comp-markdown-fenced-code-dev-0008",
+   "category": "markdown",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 685,
+   "end_byte": 729,
+   "start_cp": 678,
+   "end_cp": 722,
+   "component_id": "comp-markdown-fenced-code-dev-0008",
+   "category": "markdown",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 729,
+   "end_byte": 733,
+   "start_cp": 722,
+   "end_cp": 726,
+   "component_id": "comp-markdown-fenced-code-dev-0008",
+   "category": "markdown",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 733,
+   "end_byte": 734,
+   "start_cp": 726,
+   "end_cp": 727,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 734,
+   "end_byte": 1024,
+   "start_cp": 727,
+   "end_cp": 1011,
+   "component_id": "comp-prose-medicine-explainer-dev-0004",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  }
+ ],
+ "invariants": {
+  "tiling_complete": true,
+  "no_contradictory_overlaps": true,
+  "cp_range_exact": true
+ }
+}

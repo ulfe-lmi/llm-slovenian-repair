@@ -1,0 +1,53 @@
+{
+ "doc_id": "dev-001472",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T10-randomized",
+ "byte_length": 1335,
+ "cp_length": 1312,
+ "sha256": "75772e257b07415da5c772c7a8a717a0b270faed361ced98a3790b8c9e40afe7",
+ "document": "V arhivu projekta Stare potje je bil najden list, na katerem piše o izletu do izvira leta 1807. Po besedah urednice Nine Mlakar je bil povzetek kratek, vendar dovolj jasen, da si lahko bralci predstavljajo skupino, ki je imela osem potnikov in enega psa. Delček zemljevida, prilepljen v isti zvezki, kaže zanko, ki je merila okoli trideset kilometrov.\nPROJEKT=Rdeča dolina\nAVTOR=Janez Peter\nMOČ=1,8 W\nDELNA_MERILA=40 %\nDODATNA_VAR=$drugim_ključem; 0,16\nOPIS=[*demo*, _projekt_, https://primer.si/novica]\n1. Projekt Jabljana: 4 kosi, 250 ml\n2. Podatek: 20 °C, 5 l\nPROJEKT=Modra gora\nAVTOR=Ana Kovač\nTEMPERATURA=18,5 °C\nVLAGNOST=62 %\nDODATNA_VAR=$drugim_ključem; 0,13\nOPIS=[*testna*, _vsebina_, https://primer.si/novica]\nZačetni pregled: 7 meritev ob 10 °C in 900 ml je označeno z **močno** in __podčrtim__ besedilom.\n## Naslov 4\n![Opis: testna mreža za projekt Delta](https://primer.si/slika.png)\nLuka Potočnik: hitrost 25 km/h, masa 8 kg.\nKatarina in Jure sta v razredu elektronskih raziskav leta 2024 razpravljala o tem, kako sklepi in upornosti varujejo komponente pred prevelikim tokom. Pri poskusu s tremi različnimi baterijami sta opazila, da se žarnica pri višji napetosti svetli močneje, a se hitreje ogreje. Oba sta zapisala, da za varno vajo zadostujejo natančno merjenje, potrpežljivost in jasna shema.",
+ "components": [
+  {
+   "component_id": "comp-prose-history-dev-0010",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 354
+  },
+  {
+   "component_id": "comp-structured-env-blocks-dev-0004",
+   "category": "structured",
+   "start_byte": 355,
+   "end_byte": 509
+  },
+  {
+   "component_id": "comp-markdown-lists-dev-0002",
+   "category": "markdown",
+   "start_byte": 510,
+   "end_byte": 569
+  },
+  {
+   "component_id": "comp-structured-env-blocks-dev-0001",
+   "category": "structured",
+   "start_byte": 570,
+   "end_byte": 728
+  },
+  {
+   "component_id": "comp-markdown-strong-dev-0008",
+   "category": "markdown",
+   "start_byte": 729,
+   "end_byte": 830
+  },
+  {
+   "component_id": "comp-markdown-images-dev-0004",
+   "category": "markdown",
+   "start_byte": 831,
+   "end_byte": 955
+  },
+  {
+   "component_id": "comp-prose-electronics-dev-0013",
+   "category": "prose",
+   "start_byte": 956,
+   "end_byte": 1335
+  }
+ ]
+}

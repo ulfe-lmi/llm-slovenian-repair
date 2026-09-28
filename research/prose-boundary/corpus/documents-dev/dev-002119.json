@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-002119",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T8-quote-fenced",
+ "byte_length": 701,
+ "cp_length": 677,
+ "sha256": "e8d99a45e682aa28630ad26ba73b3945bf230863122dee20059476cb3986a691",
+ "document": "> Ob projektnem srečanju je Marko dejal: „Povprečje je koristno, včasih pa skrije, kaj se res dogaja.“ Skupina je nato primerjala še največje in najmanjše vrednosti, da bi imela širši vtis. Tudi brez zapletenih računov so prišli do zaključka, da so razmere v zadnjih dveh letih postopoma stabilnejše. `// Testni modul (č, š, ž)`\n```\n/* Testni fragment 1: izmišljena oseba Maja, projekt Roža. */ SELECT 'Maja' AS `ime`, '1,20 $' AS `cena`, 'https://primer.si/koda' AS `url`, 'src/modul.py' AS `pot`, TRIM('*poudarek* in _podčrtano_') AS `opomba`, 'razdelek2' AS `razdelek2`, 'seStez' AS `seStez`, 'č' AS `HRAŠNA_VREDNOST` FROM (SELECT 1 AS `en`) AS `t` WHERE (`t`.`en` = 1);\n```",
+ "components": [
+  {
+   "component_id": "comp-prose-statistics-dev-0003",
+   "category": "prose",
+   "start_byte": 2,
+   "end_byte": 316
+  },
+  {
+   "component_id": "comp-code-javascript-dev-0009",
+   "category": "code",
+   "start_byte": 317,
+   "end_byte": 347
+  },
+  {
+   "component_id": "comp-code-sql-dev-0001",
+   "category": "code",
+   "start_byte": 348,
+   "end_byte": 701
+  }
+ ]
+}

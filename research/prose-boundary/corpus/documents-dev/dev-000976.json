@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-000976",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T9-prose-malformed-prose",
+ "byte_length": 667,
+ "cp_length": 657,
+ "sha256": "9157e92afac0003acc10172a1b1b5f868e2113b5f309dd0996484a9318cc9629",
+ "document": "Marko je v testnem kotičku izbral dve upornosti, ju povezal z majhno baterijo in opazoval, da se sij utripalke rahlo spreminja. Njegova soseda v delavnici, Petra, je vprašala, ali je sklep res potreben. \"Da, pojasnil je, ker prekine tok, ko ga odpremo.\"\n<span title=\nNevtralna avtorizirana testna vsebina za projekt Sova in osebo Ano Testno.\nLoj je v skledi mirno segel. Ropova jaha (kot jo pišejo doma) je v loncu postajala sočna. Petra je po starini vzela dve žlici moke, tri zvezdice anisa in malo muškatnega oreha. Krompir je bil že pripravljen, jajca pa so bila v hladilniku, ki ga je kupila leta 2023. Ura je zazvonila, ko je začutila vonj po špinači.",
+ "components": [
+  {
+   "component_id": "comp-prose-electronics-dev-0002",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 255
+  },
+  {
+   "component_id": "comp-malformed-partial-html-dev-0002",
+   "category": "malformed",
+   "start_byte": 256,
+   "end_byte": 343
+  },
+  {
+   "component_id": "comp-prose-cooking-dev-0013",
+   "category": "prose",
+   "start_byte": 344,
+   "end_byte": 667
+  }
+ ]
+}

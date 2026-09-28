@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-000239",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T9-prose-malformed-prose",
+ "byte_length": 673,
+ "cp_length": 660,
+ "sha256": "28818cd838a9c6766ec258ea209a4d8ffb9daddc517b9a727bb990ac321bcf72",
+ "document": "V projektu Gorski dnevnik je Anja pojasnila, da spremenljivka deluje kot imenovana skrinjica, v kateri hranimo eno vrednost. Ko je program ponavljal preverjanje vremenskih podatkov, je zanka pretekle dni v vrsti in ohranila le najhladnejše. Funkcija, ki je izračunala povprečje, je bila kot majhno orodje, saj so jo znali poklicati vedno znova brez ponavljanja besedila.\n{\"naslov\": \"Testna vsebina projekta Lipa\", \nKratki nasvet: krpo za pregrco namakaj v mrzli vodi in jo potem stisni, da pregrca ne pusti madežev. (Sredstvo iz stekleničke s štopalko je morda dražje, a zadošča za večkrat.) Če želiš manj smeti, steklenice operi in jih odnesi v zbirni center.",
+ "components": [
+  {
+   "component_id": "comp-prose-programming-explainer-dev-0011",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 373
+  },
+  {
+   "component_id": "comp-malformed-truncated-json-dev-0001",
+   "category": "malformed",
+   "start_byte": 374,
+   "end_byte": 417
+  },
+  {
+   "component_id": "comp-prose-everyday-advice-dev-0008",
+   "category": "prose",
+   "start_byte": 418,
+   "end_byte": 673
+  }
+ ]
+}

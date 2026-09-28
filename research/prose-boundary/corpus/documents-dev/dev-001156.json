@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-001156",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T2-prose-math-prose",
+ "byte_length": 704,
+ "cp_length": 693,
+ "sha256": "a166f6ba6704d7f942e9a21dfc3b46264a9fb9f8e1b99c872c5250fb85f1be30",
+ "document": "Petra je pri večernem testu ugotovila, da je vsak sklep, ki deluje, najprej zaprt in da vsaka upornost v njem nekaj počuti. Lučka se je vžgala šele takrat, ko je namesto ene uporabila dve bateriji, in sicer v smeri, ki jo je narisala v beleški. ”To je bilo dovolj,“ je zapisala v dnevnik projekta.\n\\begin{align} \\lambda_6 &= \\prod_{\\mu=1}^{6} \\nu_\\mu \\\\ \\pi_6 &= \\sum_{\\xi=1}^{6} \\zeta_\\xi \\\\ \\varphi_6 &= \\chi_6 - \\psi_6 \\end{align}\nLuka je ob peti uri zvečer odkril, da se prenosnik sam po sebi hladi. V opombi za sodelavce je zapisal, da se to dogaja ob hkratnem delu s tremi programi. (Gre za navaden vzorec, ki ga je opisala tudi podpora.) Zato so preizkus ponovili brez dodatnih posegov.",
+ "components": [
+  {
+   "component_id": "comp-prose-electronics-dev-0010",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 307
+  },
+  {
+   "component_id": "comp-math-align-env-dev-0006",
+   "category": "math",
+   "start_byte": 308,
+   "end_byte": 443
+  },
+  {
+   "component_id": "comp-prose-computing-dev-0003",
+   "category": "prose",
+   "start_byte": 444,
+   "end_byte": 704
+  }
+ ]
+}

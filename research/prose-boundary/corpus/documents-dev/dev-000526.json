@@ -1,0 +1,41 @@
+{
+ "doc_id": "dev-000526",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T10-randomized",
+ "byte_length": 770,
+ "cp_length": 752,
+ "sha256": "836d446ce365f54b4ccb1ac10d1a1323c3f2398a0f4c3e694cce227c472b38a8",
+ "document": "Projekt Tiha proga je zbral fragmente, v katerih Ana Kralj bere Čopovo poezijo ob zori. V zadnjem razdelku avtorica spomni na evropsko pripovedko, ki jo je nekje v Ljubljani zapisala leta 1984. Tisto jutro je v knjižnici zmanjkalo ene ključne listine.\nAna K.: Na zalogi je 12 škatel po 500 ml, preverjeno z **močno** in __podčrtim__ besedilom.\n\\Pr(Z > \\mu + \\sigma) = 1 - \\Phi(1) = 0.1587 \\text{ (verjetnost repa)}\n\\sum_{\\epsilon=0}^{5} \\zeta_{\\epsilon}^2 - \\prod_{\\eta=1}^{3} \\theta_{\\eta} \\text{Ana}\nV sklopu testnega projekta je Peter opazoval skupino starejših udeležencev. Njegova skupina je začela s petminutnim segrevanjem. Nato je izvedla tri krogove po travi. „Sodelavec,“ je vodja rekel, „v prihodnji uri bomo dodali še eno zmerno aktivnost.“",
+ "components": [
+  {
+   "component_id": "comp-prose-literature-dev-0011",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 254
+  },
+  {
+   "component_id": "comp-markdown-strong-dev-0002",
+   "category": "markdown",
+   "start_byte": 255,
+   "end_byte": 349
+  },
+  {
+   "component_id": "comp-math-probability-dev-0006",
+   "category": "math",
+   "start_byte": 350,
+   "end_byte": 420
+  },
+  {
+   "component_id": "comp-math-summations-dev-0002",
+   "category": "math",
+   "start_byte": 421,
+   "end_byte": 507
+  },
+  {
+   "component_id": "comp-prose-sports-dev-0010",
+   "category": "prose",
+   "start_byte": 508,
+   "end_byte": 770
+  }
+ ]
+}

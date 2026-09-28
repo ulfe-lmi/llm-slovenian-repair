@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-001805",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T2-prose-math-prose",
+ "byte_length": 718,
+ "cp_length": 706,
+ "sha256": "55d4c274eb3bfed27ca07792baa99c7242ccf1f0a5c64857470dd589df945ee5",
+ "document": "Varčnost pri računih za ogrevanje v projektu Topla hiša ni vedno leva stvar, če je v prostoru prehladno. Leta 2023 so mnogi domovi dobili termometre, ki opozarjajo, ko temperatura pade pod 18 stopinj. (V takih dneh je bolje zapreti okno, ki ga obvečer nismo nujno potrebovali.) Pri starejših gradnjah je koristno preveriti tudi, ali se okno res dobro zapre.\n\\(\\left(\\frac{\\sigma^3}{\\tau+4}+\\sqrt{2\\omega+1}\\right)_{\\text{Eva}}\\)\nV projektu »Mestni prehod čez Ljubljanico« so leta 2021 izbrali kombinacijo jekla in betona (natančneje: lahkega, armiranega). Ker je razpon precejšen, so nosilce razdelili na osem segmentov. Inženirka Ana Kos je dodala, da se temperaturne razlike v spojih skrbno kompenzirajo.",
+ "components": [
+  {
+   "component_id": "comp-prose-everyday-advice-dev-0009",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 363
+  },
+  {
+   "component_id": "comp-math-paren-tex-dev-0005",
+   "category": "math",
+   "start_byte": 364,
+   "end_byte": 434
+  },
+  {
+   "component_id": "comp-prose-engineering-dev-0011",
+   "category": "prose",
+   "start_byte": 435,
+   "end_byte": 718
+  }
+ ]
+}

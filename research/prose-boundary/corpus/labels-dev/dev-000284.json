@@ -1,0 +1,932 @@
+{
+ "doc_id": "dev-000284",
+ "byte_length": 1331,
+ "cp_length": 1313,
+ "regions": [
+  {
+   "start_byte": 0,
+   "end_byte": 310,
+   "start_cp": 0,
+   "end_cp": 301,
+   "component_id": "comp-prose-electronics-dev-0006",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 310,
+   "end_byte": 311,
+   "start_cp": 301,
+   "end_cp": 302,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 311,
+   "end_byte": 391,
+   "start_cp": 302,
+   "end_cp": 381,
+   "component_id": "comp-structured-xml-dev-0006",
+   "category": "structured",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 391,
+   "end_byte": 399,
+   "start_cp": 381,
+   "end_cp": 389,
+   "component_id": "comp-structured-xml-dev-0006",
+   "category": "structured",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 399,
+   "end_byte": 400,
+   "start_cp": 389,
+   "end_cp": 390,
+   "component_id": "comp-structured-xml-dev-0006",
+   "category": "structured",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 400,
+   "end_byte": 407,
+   "start_cp": 390,
+   "end_cp": 397,
+   "component_id": "comp-structured-xml-dev-0006",
+   "category": "structured",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 407,
+   "end_byte": 426,
+   "start_cp": 397,
+   "end_cp": 416,
+   "component_id": "comp-structured-xml-dev-0006",
+   "category": "structured",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 426,
+   "end_byte": 427,
+   "start_cp": 416,
+   "end_cp": 417,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 427,
+   "end_byte": 428,
+   "start_cp": 417,
+   "end_cp": 418,
+   "component_id": "comp-math-summations-dev-0006",
+   "category": "math",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 428,
+   "end_byte": 431,
+   "start_cp": 418,
+   "end_cp": 421,
+   "component_id": "comp-math-summations-dev-0006",
+   "category": "math",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 431,
+   "end_byte": 432,
+   "start_cp": 421,
+   "end_cp": 422,
+   "component_id": "comp-math-summations-dev-0006",
+   "category": "math",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 432,
+   "end_byte": 440,
+   "start_cp": 422,
+   "end_cp": 430,
+   "component_id": "comp-math-summations-dev-0006",
+   "category": "math",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 440,
+   "end_byte": 441,
+   "start_cp": 430,
+   "end_cp": 431,
+   "component_id": "comp-math-summations-dev-0006",
+   "category": "math",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 441,
+   "end_byte": 445,
+   "start_cp": 431,
+   "end_cp": 435,
+   "component_id": "comp-math-summations-dev-0006",
+   "category": "math",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 445,
+   "end_byte": 446,
+   "start_cp": 435,
+   "end_cp": 436,
+   "component_id": "comp-math-summations-dev-0006",
+   "category": "math",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 446,
+   "end_byte": 447,
+   "start_cp": 436,
+   "end_cp": 437,
+   "component_id": "comp-math-summations-dev-0006",
+   "category": "math",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 447,
+   "end_byte": 452,
+   "start_cp": 437,
+   "end_cp": 442,
+   "component_id": "comp-math-summations-dev-0006",
+   "category": "math",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 452,
+   "end_byte": 453,
+   "start_cp": 442,
+   "end_cp": 443,
+   "component_id": "comp-math-summations-dev-0006",
+   "category": "math",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 453,
+   "end_byte": 459,
+   "start_cp": 443,
+   "end_cp": 449,
+   "component_id": "comp-math-summations-dev-0006",
+   "category": "math",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 459,
+   "end_byte": 460,
+   "start_cp": 449,
+   "end_cp": 450,
+   "component_id": "comp-math-summations-dev-0006",
+   "category": "math",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 460,
+   "end_byte": 461,
+   "start_cp": 450,
+   "end_cp": 451,
+   "component_id": "comp-math-summations-dev-0006",
+   "category": "math",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 461,
+   "end_byte": 462,
+   "start_cp": 451,
+   "end_cp": 452,
+   "component_id": "comp-math-summations-dev-0006",
+   "category": "math",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 462,
+   "end_byte": 463,
+   "start_cp": 452,
+   "end_cp": 453,
+   "component_id": "comp-math-summations-dev-0006",
+   "category": "math",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 463,
+   "end_byte": 467,
+   "start_cp": 453,
+   "end_cp": 457,
+   "component_id": "comp-math-summations-dev-0006",
+   "category": "math",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 467,
+   "end_byte": 468,
+   "start_cp": 457,
+   "end_cp": 458,
+   "component_id": "comp-math-summations-dev-0006",
+   "category": "math",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 468,
+   "end_byte": 475,
+   "start_cp": 458,
+   "end_cp": 465,
+   "component_id": "comp-math-summations-dev-0006",
+   "category": "math",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 475,
+   "end_byte": 476,
+   "start_cp": 465,
+   "end_cp": 466,
+   "component_id": "comp-math-summations-dev-0006",
+   "category": "math",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 476,
+   "end_byte": 479,
+   "start_cp": 466,
+   "end_cp": 469,
+   "component_id": "comp-math-summations-dev-0006",
+   "category": "math",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 479,
+   "end_byte": 480,
+   "start_cp": 469,
+   "end_cp": 470,
+   "component_id": "comp-math-summations-dev-0006",
+   "category": "math",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 480,
+   "end_byte": 481,
+   "start_cp": 470,
+   "end_cp": 471,
+   "component_id": "comp-math-summations-dev-0006",
+   "category": "math",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 481,
+   "end_byte": 486,
+   "start_cp": 471,
+   "end_cp": 476,
+   "component_id": "comp-math-summations-dev-0006",
+   "category": "math",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 486,
+   "end_byte": 487,
+   "start_cp": 476,
+   "end_cp": 477,
+   "component_id": "comp-math-summations-dev-0006",
+   "category": "math",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 487,
+   "end_byte": 492,
+   "start_cp": 477,
+   "end_cp": 482,
+   "component_id": "comp-math-summations-dev-0006",
+   "category": "math",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 492,
+   "end_byte": 493,
+   "start_cp": 482,
+   "end_cp": 483,
+   "component_id": "comp-math-summations-dev-0006",
+   "category": "math",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 493,
+   "end_byte": 494,
+   "start_cp": 483,
+   "end_cp": 484,
+   "component_id": "comp-math-summations-dev-0006",
+   "category": "math",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 494,
+   "end_byte": 498,
+   "start_cp": 484,
+   "end_cp": 488,
+   "component_id": "comp-math-summations-dev-0006",
+   "category": "math",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 498,
+   "end_byte": 507,
+   "start_cp": 488,
+   "end_cp": 497,
+   "component_id": "comp-math-summations-dev-0006",
+   "category": "math",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 507,
+   "end_byte": 508,
+   "start_cp": 497,
+   "end_cp": 498,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 508,
+   "end_byte": 509,
+   "start_cp": 498,
+   "end_cp": 499,
+   "component_id": "comp-math-summations-dev-0004",
+   "category": "math",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 509,
+   "end_byte": 512,
+   "start_cp": 499,
+   "end_cp": 502,
+   "component_id": "comp-math-summations-dev-0004",
+   "category": "math",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 512,
+   "end_byte": 513,
+   "start_cp": 502,
+   "end_cp": 503,
+   "component_id": "comp-math-summations-dev-0004",
+   "category": "math",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 513,
+   "end_byte": 520,
+   "start_cp": 503,
+   "end_cp": 510,
+   "component_id": "comp-math-summations-dev-0004",
+   "category": "math",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 520,
+   "end_byte": 521,
+   "start_cp": 510,
+   "end_cp": 511,
+   "component_id": "comp-math-summations-dev-0004",
+   "category": "math",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 521,
+   "end_byte": 525,
+   "start_cp": 511,
+   "end_cp": 515,
+   "component_id": "comp-math-summations-dev-0004",
+   "category": "math",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 525,
+   "end_byte": 526,
+   "start_cp": 515,
+   "end_cp": 516,
+   "component_id": "comp-math-summations-dev-0004",
+   "category": "math",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 526,
+   "end_byte": 527,
+   "start_cp": 516,
+   "end_cp": 517,
+   "component_id": "comp-math-summations-dev-0004",
+   "category": "math",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 527,
+   "end_byte": 529,
+   "start_cp": 517,
+   "end_cp": 519,
+   "component_id": "comp-math-summations-dev-0004",
+   "category": "math",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 529,
+   "end_byte": 530,
+   "start_cp": 519,
+   "end_cp": 520,
+   "component_id": "comp-math-summations-dev-0004",
+   "category": "math",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 530,
+   "end_byte": 535,
+   "start_cp": 520,
+   "end_cp": 525,
+   "component_id": "comp-math-summations-dev-0004",
+   "category": "math",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 535,
+   "end_byte": 536,
+   "start_cp": 525,
+   "end_cp": 526,
+   "component_id": "comp-math-summations-dev-0004",
+   "category": "math",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 536,
+   "end_byte": 537,
+   "start_cp": 526,
+   "end_cp": 527,
+   "component_id": "comp-math-summations-dev-0004",
+   "category": "math",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 537,
+   "end_byte": 538,
+   "start_cp": 527,
+   "end_cp": 528,
+   "component_id": "comp-math-summations-dev-0004",
+   "category": "math",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 538,
+   "end_byte": 539,
+   "start_cp": 528,
+   "end_cp": 529,
+   "component_id": "comp-math-summations-dev-0004",
+   "category": "math",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 539,
+   "end_byte": 543,
+   "start_cp": 529,
+   "end_cp": 533,
+   "component_id": "comp-math-summations-dev-0004",
+   "category": "math",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 543,
+   "end_byte": 544,
+   "start_cp": 533,
+   "end_cp": 534,
+   "component_id": "comp-math-summations-dev-0004",
+   "category": "math",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 544,
+   "end_byte": 552,
+   "start_cp": 534,
+   "end_cp": 542,
+   "component_id": "comp-math-summations-dev-0004",
+   "category": "math",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 552,
+   "end_byte": 553,
+   "start_cp": 542,
+   "end_cp": 543,
+   "component_id": "comp-math-summations-dev-0004",
+   "category": "math",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 553,
+   "end_byte": 556,
+   "start_cp": 543,
+   "end_cp": 546,
+   "component_id": "comp-math-summations-dev-0004",
+   "category": "math",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 556,
+   "end_byte": 557,
+   "start_cp": 546,
+   "end_cp": 547,
+   "component_id": "comp-math-summations-dev-0004",
+   "category": "math",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 557,
+   "end_byte": 558,
+   "start_cp": 547,
+   "end_cp": 548,
+   "component_id": "comp-math-summations-dev-0004",
+   "category": "math",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 558,
+   "end_byte": 563,
+   "start_cp": 548,
+   "end_cp": 553,
+   "component_id": "comp-math-summations-dev-0004",
+   "category": "math",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 563,
+   "end_byte": 564,
+   "start_cp": 553,
+   "end_cp": 554,
+   "component_id": "comp-math-summations-dev-0004",
+   "category": "math",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 564,
+   "end_byte": 570,
+   "start_cp": 554,
+   "end_cp": 560,
+   "component_id": "comp-math-summations-dev-0004",
+   "category": "math",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 570,
+   "end_byte": 571,
+   "start_cp": 560,
+   "end_cp": 561,
+   "component_id": "comp-math-summations-dev-0004",
+   "category": "math",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 571,
+   "end_byte": 572,
+   "start_cp": 561,
+   "end_cp": 562,
+   "component_id": "comp-math-summations-dev-0004",
+   "category": "math",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 572,
+   "end_byte": 576,
+   "start_cp": 562,
+   "end_cp": 566,
+   "component_id": "comp-math-summations-dev-0004",
+   "category": "math",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 576,
+   "end_byte": 583,
+   "start_cp": 566,
+   "end_cp": 573,
+   "component_id": "comp-math-summations-dev-0004",
+   "category": "math",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 583,
+   "end_byte": 584,
+   "start_cp": 573,
+   "end_cp": 574,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 584,
+   "end_byte": 586,
+   "start_cp": 574,
+   "end_cp": 576,
+   "component_id": "comp-math-bracket-tex-dev-0007",
+   "category": "math",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 586,
+   "end_byte": 657,
+   "start_cp": 576,
+   "end_cp": 647,
+   "component_id": "comp-math-bracket-tex-dev-0007",
+   "category": "math",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 657,
+   "end_byte": 659,
+   "start_cp": 647,
+   "end_cp": 649,
+   "component_id": "comp-math-bracket-tex-dev-0007",
+   "category": "math",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 659,
+   "end_byte": 660,
+   "start_cp": 649,
+   "end_cp": 650,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 660,
+   "end_byte": 663,
+   "start_cp": 650,
+   "end_cp": 653,
+   "component_id": "comp-code-python-dev-0005",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 663,
+   "end_byte": 664,
+   "start_cp": 653,
+   "end_cp": 654,
+   "component_id": "comp-code-python-dev-0005",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 664,
+   "end_byte": 874,
+   "start_cp": 654,
+   "end_cp": 861,
+   "component_id": "comp-code-python-dev-0005",
+   "category": "code",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 874,
+   "end_byte": 875,
+   "start_cp": 861,
+   "end_cp": 862,
+   "component_id": "comp-code-python-dev-0005",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 875,
+   "end_byte": 878,
+   "start_cp": 862,
+   "end_cp": 865,
+   "component_id": "comp-code-python-dev-0005",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 878,
+   "end_byte": 879,
+   "start_cp": 865,
+   "end_cp": 866,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 879,
+   "end_byte": 883,
+   "start_cp": 866,
+   "end_cp": 870,
+   "component_id": "comp-markdown-headings-dev-0008",
+   "category": "markdown",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 883,
+   "end_byte": 896,
+   "start_cp": 870,
+   "end_cp": 883,
+   "component_id": "comp-markdown-headings-dev-0008",
+   "category": "markdown",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 896,
+   "end_byte": 901,
+   "start_cp": 883,
+   "end_cp": 888,
+   "component_id": "comp-markdown-headings-dev-0008",
+   "category": "markdown",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 901,
+   "end_byte": 918,
+   "start_cp": 888,
+   "end_cp": 905,
+   "component_id": "comp-markdown-headings-dev-0008",
+   "category": "markdown",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 918,
+   "end_byte": 923,
+   "start_cp": 905,
+   "end_cp": 910,
+   "component_id": "comp-markdown-headings-dev-0008",
+   "category": "markdown",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 923,
+   "end_byte": 991,
+   "start_cp": 910,
+   "end_cp": 978,
+   "component_id": "comp-markdown-headings-dev-0008",
+   "category": "markdown",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 991,
+   "end_byte": 992,
+   "start_cp": 978,
+   "end_cp": 979,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 992,
+   "end_byte": 1059,
+   "start_cp": 979,
+   "end_cp": 1046,
+   "component_id": "comp-markdown-autolinks-dev-0007",
+   "category": "markdown",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 1059,
+   "end_byte": 1060,
+   "start_cp": 1046,
+   "end_cp": 1047,
+   "component_id": "comp-markdown-autolinks-dev-0007",
+   "category": "markdown",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 1060,
+   "end_byte": 1083,
+   "start_cp": 1047,
+   "end_cp": 1070,
+   "component_id": "comp-markdown-autolinks-dev-0007",
+   "category": "markdown",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 1083,
+   "end_byte": 1084,
+   "start_cp": 1070,
+   "end_cp": 1071,
+   "component_id": "comp-markdown-autolinks-dev-0007",
+   "category": "markdown",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 1084,
+   "end_byte": 1119,
+   "start_cp": 1071,
+   "end_cp": 1105,
+   "component_id": "comp-markdown-autolinks-dev-0007",
+   "category": "markdown",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 1119,
+   "end_byte": 1120,
+   "start_cp": 1105,
+   "end_cp": 1106,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 1120,
+   "end_byte": 1331,
+   "start_cp": 1106,
+   "end_cp": 1313,
+   "component_id": "comp-prose-sports-dev-0013",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  }
+ ],
+ "invariants": {
+  "tiling_complete": true,
+  "no_contradictory_overlaps": true,
+  "cp_range_exact": true
+ }
+}

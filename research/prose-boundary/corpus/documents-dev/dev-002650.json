@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-002650",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T11-interactions",
+ "byte_length": 890,
+ "cp_length": 871,
+ "sha256": "4a09216338160969800b3b420d72047b0a1c10eadce66f527b6cfbf2017abe22",
+ "document": "`// Drugi neodvisni del (č, š, ž)`.\n```\n/* Fragment 1: nevtralni testni projekt, vir https://primer.si/koda, pot src/modul.py */ namespace primer { std::string naslov = \"Razdelek: _podrobnosti_\"; const int razdelek2 = 7; } std::string opis1() { return \"Cena: 10 $ *ponudba* `kod` (č, š, ž)\"; }\n# komentar z \\frac{a}{b}\n```\nV zapisku potujočega knjigarja, ki ga je našla Maja Zupan, stoji o srečanju na trgu v Benečiji. »Noben dokument ne pove, koliko časa je trajalo dogovarjanje,« je zapisala v povzetku. Nato so v istem spisu omenili plovilo, ki je prevozilo štiri tone soli skozi ozek kanal. Letnico 1740 je avtor pustil le v margini, brez dneva ali meseca.\nV projektu Prijava za športno leto 2024 je učiteljica Meta pojasnila, da lahka utrujenost po vadbi pogosto prehaja, če oseba zaspi in pije vodo. Če se stanje ponovi ali poslabša, je smiselno poiskati zdravnika.",
+ "components": [
+  {
+   "component_id": "comp-code-javascript-dev-0010",
+   "category": "code",
+   "start_byte": 0,
+   "end_byte": 37
+  },
+  {
+   "component_id": "comp-code-cpp-dev-0009",
+   "category": "code",
+   "start_byte": 39,
+   "end_byte": 328
+  },
+  {
+   "component_id": "comp-prose-history-dev-0007",
+   "category": "prose",
+   "start_byte": 329,
+   "end_byte": 674
+  },
+  {
+   "component_id": "comp-prose-medicine-explainer-dev-0011",
+   "category": "prose",
+   "start_byte": 675,
+   "end_byte": 890
+  }
+ ]
+}

@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-002626",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T9-prose-malformed-prose",
+ "byte_length": 674,
+ "cp_length": 658,
+ "sha256": "d6fa282632ea8fe055de27e69d924c86eb470229abf72367ce157b40be663233",
+ "document": "V starem receptu iz leta 1958 stoji, da se ajdova juha iz Ljubljane najprej posoli, nato pa počasi premeša, da ne bi zgrudila. “Ajda mora dišati po štrukljih,” je nekoč zapisala Anja, ki je testirala recept za projektni dnevnik okusov (po mnenju njene sestre, Marice). Pri pripravi je bil pomemben tudi čas: deset minut mešanja, nato pa še kratko ohlajanje na hladni plošči.\n\n\\[ y=3 . Testni zapis projekta Brda za osebo Marko.\n\nAnja je v opombi zapisala, da so razmerja med dohodki in izdatki (v mesecu maju in juniju) nekoliko drugačna kot lani. Povprečje ni pokazalo velike spremembe, vendar je posamezen teden odstopil, kar je pritegnilo pozornost ekipi.",
+ "components": [
+  {
+   "component_id": "comp-prose-cooking-dev-0001",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 388
+  },
+  {
+   "component_id": "comp-malformed-incomplete-paren-bracket-dev-0002",
+   "category": "malformed",
+   "start_byte": 390,
+   "end_byte": 441
+  },
+  {
+   "component_id": "comp-prose-statistics-dev-0002",
+   "category": "prose",
+   "start_byte": 443,
+   "end_byte": 674
+  }
+ ]
+}

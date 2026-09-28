@@ -1,0 +1,53 @@
+{
+ "doc_id": "dev-001813",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T10-randomized",
+ "byte_length": 1383,
+ "cp_length": 1361,
+ "sha256": "4a95d47443a5447a01b9139027826bc5c13b9d1f62b3e0df59dcdb8a6773fe3b",
+ "document": "V soboto, ko je bilo poleti 24 stopinj, je ekipa izmišljene skupine Brez napetosti v parku izvedla pet minut ogrevanja, nato pa še enajstmetrovski udarec in tri kratke teke. Igralka, ki jo je projekt imenoval Eva, je po tem dejala, da je bila noga rahlo utrujena, vendar da je bil zrak svež. 'Naslednjič bomo dodali še malo plavanja,' je opozorila ob zbiranju opreme. Na koncu so opremo zložili, zapisnik pa sta podpisala le dva člana.\n\\(\\left(\\frac{\\theta^4}{2\\pi+1}-\\sqrt{5-\\lambda}\\right)_{\\text{Cilka}}\\)\n```\nfn konec() { /* Testni projekt Lipa: č, š, ž, *poudarek* in _podčrtano_ */ let seStez = true; let razdelek2 = 7; let HRAŠNA_VREDNOST = 1; let besedilo = format!(\"*Nova* ({} $) `č`\", HRAŠNA_VREDNOST); let pot = \"src/modul.py\"; let url = \"https://primer.si/koda\"; let _ = (seStez, razdelek2, besedilo, pot, url); println!(\"č, š, ž\"); }\n```\n\\sum_{\\alpha=1}^{8} \\beta_{\\alpha} + \\prod_{\\gamma=1}^{4} \\delta_{\\gamma} \\text{Ljubljana}\n\\[\\dfrac{1}{2}+\\frac{\\alpha}{\\beta}=\\text{Anja}\\]\nPROJEKT=Siva dolina\nAVTOR=Ivan Mlakar\nPREDAL=3,2 m\nDELEŽ=0,88\nDODATNA_VAR=$drugim_ključem; 0,19\nOPIS=[*neodvisen*, _fragment_, https://primer.si/novica]\nV okviru projekta Reka je bila jeklena konstrukcija obnašala stabilno, tudi po močnem pihu. Most je bil dolg 412 metrov. Nosilci so bili premazani z epoksi premazom. Vetrovna obremenitev je bila izračunana za 30 let.",
+ "components": [
+  {
+   "component_id": "comp-prose-sports-dev-0005",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 442
+  },
+  {
+   "component_id": "comp-math-paren-tex-dev-0003",
+   "category": "math",
+   "start_byte": 443,
+   "end_byte": 515
+  },
+  {
+   "component_id": "comp-code-rust-dev-0008",
+   "category": "code",
+   "start_byte": 516,
+   "end_byte": 867
+  },
+  {
+   "component_id": "comp-math-summations-dev-0001",
+   "category": "math",
+   "start_byte": 868,
+   "end_byte": 958
+  },
+  {
+   "component_id": "comp-math-fractions-dev-0001",
+   "category": "math",
+   "start_byte": 959,
+   "end_byte": 1008
+  },
+  {
+   "component_id": "comp-structured-env-blocks-dev-0007",
+   "category": "structured",
+   "start_byte": 1009,
+   "end_byte": 1163
+  },
+  {
+   "component_id": "comp-prose-engineering-dev-0003",
+   "category": "prose",
+   "start_byte": 1164,
+   "end_byte": 1383
+  }
+ ]
+}

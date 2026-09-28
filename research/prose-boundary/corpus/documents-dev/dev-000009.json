@@ -1,0 +1,65 @@
+{
+ "doc_id": "dev-000009",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T10-randomized",
+ "byte_length": 1966,
+ "cp_length": 1914,
+ "sha256": "8288b4c2249cdf36f4eb1138a67f08177ac424a9e793d13a7cb8dd495a8fcddc",
+ "document": "V šoli so dijaki v letu 2025, v okviru notranjega projekta Besedilo, preizkušali urejevalnik besedil, ki je po mnenju učitelja Marka deloval “precej gladko”. Neko dopoldne so imeli težave s shranjevanjem, zato so se naučili, da je pomembno omeniti ime datoteke in mapo, v katero gre. Maja je zapisala, da ji je bila največja pomoč kratek pogovor s sošolko Ano, ki je razložila razliko med pripravo in končno različico. Tistega popoldneva, po njenih besedah, so preverili, da je shranjevanje enostavnejše, ko poznaš ime mape in datum.\n```\nfn konec() { /* Testni projekt Lipa: č, š, ž, *poudarek* in _podčrtano_ */ let seStez = true; let razdelek2 = 7; let HRAŠNA_VREDNOST = 1; let besedilo = format!(\"*Nova* ({} $) `č`\", HRAŠNA_VREDNOST); let pot = \"src/modul.py\"; let url = \"https://primer.si/koda\"; let _ = (seStez, razdelek2, besedilo, pot, url); println!(\"č, š, ž\"); }\n```\nProjekt Zeleni Vrtec ima `besedilo` in ``vrednost`` kot 5 s v stavku.\n```\n// Testni podatki za osebo Ana.\nconst HRAŠNA_VREDNOST: i32 = 7;\nfn razdelek2(seStez: &str) -> String {\n    let vrednost = HRAŠNA_VREDNOST;\n    format!(\"podčrtano *{seStez}* in {vrednost} €\")\n}\n```\nC:/projekt/vir.py,D:\\datoteke\\vir.txt\n\\(\\left(\\frac{\\psi^7}{11-\\chi}+\\sqrt{6+\\rho}\\right)_{\\text{Filip}}\\)\nProjekt Testni Modul: Anja Kovač preverja povezavo <https://primer.si/stran> in kontakt <pošta@primer.si> pri temperaturi 20 °C. Vsebuje 3 korake in 10 m poti.\nmodul_pogon.py poročilo_q3.csv tabela_01.json vir_2024.txt\nPri izmišljenem projektu “Zvonovi Koroške” (tudi testni vnos) so ugotovili, da so verske zgradbe hranile spomine, ki so jih ljudje obvezno prenašali iz roda v rod. Kratek zapis o letnici 1680, dolg le 120 znakov, je bil označen kot sporen. Uradnik Miha je dodal, da je “povest” pogosto lažna, a vseeno živi v spominu. Zato so v bazi ohranili tri različne verzije (enkrat kratko, enkrat dolgo in enkrat prekrčeno), ki se med seboj ne ujemajo.",
+ "components": [
+  {
+   "component_id": "comp-prose-computing-dev-0012",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 550
+  },
+  {
+   "component_id": "comp-code-rust-dev-0008",
+   "category": "code",
+   "start_byte": 551,
+   "end_byte": 902
+  },
+  {
+   "component_id": "comp-markdown-inline-code-dev-0003",
+   "category": "markdown",
+   "start_byte": 903,
+   "end_byte": 972
+  },
+  {
+   "component_id": "comp-code-rust-dev-0010",
+   "category": "code",
+   "start_byte": 973,
+   "end_byte": 1178
+  },
+  {
+   "component_id": "comp-machine-windows-paths-dev-0004",
+   "category": "machine",
+   "start_byte": 1179,
+   "end_byte": 1216
+  },
+  {
+   "component_id": "comp-math-paren-tex-dev-0006",
+   "category": "math",
+   "start_byte": 1217,
+   "end_byte": 1285
+  },
+  {
+   "component_id": "comp-markdown-autolinks-dev-0001",
+   "category": "markdown",
+   "start_byte": 1286,
+   "end_byte": 1448
+  },
+  {
+   "component_id": "comp-machine-filenames-dev-0008",
+   "category": "machine",
+   "start_byte": 1449,
+   "end_byte": 1508
+  },
+  {
+   "component_id": "comp-prose-history-dev-0012",
+   "category": "prose",
+   "start_byte": 1509,
+   "end_byte": 1966
+  }
+ ]
+}

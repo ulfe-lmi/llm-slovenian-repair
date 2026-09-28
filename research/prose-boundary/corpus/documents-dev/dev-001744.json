@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-001744",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T7-prose-json-prose-latex",
+ "byte_length": 1130,
+ "cp_length": 1117,
+ "sha256": "369a65fe4b13e666222613550e332001e039ac3f5e22de0064977ca34d213bb4",
+ "document": "V raziskavi Mestni tisk, ki jo vodita Meta Zorman in Ivo Perko, je knjižnost prikazana kot sloj spomina, kjer se prepletajo slovenske pripovedke (poletni tabor v Zgornji Gori), roman Emila Brandta in zgodnja revija za otroško literaturo. Tisti odlomek, ki ga raziskovalci poimenujejo »Tiho zrcalo«, pokaže, kako motiv vrnitve iz tuje dežele postane orodje za preučevanje medgeneracijskih razhujanj.\n{\"ime\":\"Projekt Jabolko\",\"faza\":\"Vzdrževanje\",\"avtorsko\":\"Nevtralna testna vsebina\",\"enote\":{\"temperatura\":\"21,5 °C\",\"debelina\":\"0,2 m\",\"delež\":\"45 %\"},\"opomba\":\"**Nalaganje** https://primer.si/novica\"}\nV projektu Gorski dnevnik je Anja pojasnila, da spremenljivka deluje kot imenovana skrinjica, v kateri hranimo eno vrednost. Ko je program ponavljal preverjanje vremenskih podatkov, je zanka pretekle dni v vrsti in ohranila le najhladnejše. Funkcija, ki je izračunala povprečje, je bila kot majhno orodje, saj so jo znali poklicati vedno znova brez ponavljanja besedila.\n\\begin{equation}\\begin{aligned}M_4 &= \\mu_4 + \\nu_4 \\odot \\xi_4 \\text{Maja Novak} \\\\N_4 &= \\|\\vec{v}_4\\|_2 + \\varpi_4\\end{aligned}\\end{equation}",
+ "components": [
+  {
+   "component_id": "comp-prose-literature-dev-0012",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 405
+  },
+  {
+   "component_id": "comp-structured-json-dev-0003",
+   "category": "structured",
+   "start_byte": 406,
+   "end_byte": 611
+  },
+  {
+   "component_id": "comp-prose-programming-explainer-dev-0011",
+   "category": "prose",
+   "start_byte": 612,
+   "end_byte": 985
+  },
+  {
+   "component_id": "comp-math-aligned-env-dev-0004",
+   "category": "math",
+   "start_byte": 986,
+   "end_byte": 1130
+  }
+ ]
+}

@@ -1,0 +1,132 @@
+{
+ "doc_id": "dev-000986",
+ "byte_length": 742,
+ "cp_length": 720,
+ "regions": [
+  {
+   "start_byte": 0,
+   "end_byte": 2,
+   "start_cp": 0,
+   "end_cp": 2,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 2,
+   "end_byte": 327,
+   "start_cp": 2,
+   "end_cp": 315,
+   "component_id": "comp-prose-medicine-explainer-dev-0012",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 327,
+   "end_byte": 328,
+   "start_cp": 315,
+   "end_cp": 316,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 328,
+   "end_byte": 329,
+   "start_cp": 316,
+   "end_cp": 317,
+   "component_id": "comp-code-rust-dev-0001",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 329,
+   "end_byte": 389,
+   "start_cp": 317,
+   "end_cp": 377,
+   "component_id": "comp-code-rust-dev-0001",
+   "category": "code",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 389,
+   "end_byte": 390,
+   "start_cp": 377,
+   "end_cp": 378,
+   "component_id": "comp-code-rust-dev-0001",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 390,
+   "end_byte": 391,
+   "start_cp": 378,
+   "end_cp": 379,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 391,
+   "end_byte": 394,
+   "start_cp": 379,
+   "end_cp": 382,
+   "component_id": "comp-code-rust-dev-0008",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 394,
+   "end_byte": 395,
+   "start_cp": 382,
+   "end_cp": 383,
+   "component_id": "comp-code-rust-dev-0008",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 395,
+   "end_byte": 738,
+   "start_cp": 383,
+   "end_cp": 716,
+   "component_id": "comp-code-rust-dev-0008",
+   "category": "code",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 738,
+   "end_byte": 739,
+   "start_cp": 716,
+   "end_cp": 717,
+   "component_id": "comp-code-rust-dev-0008",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 739,
+   "end_byte": 742,
+   "start_cp": 717,
+   "end_cp": 720,
+   "component_id": "comp-code-rust-dev-0008",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  }
+ ],
+ "invariants": {
+  "tiling_complete": true,
+  "no_contradictory_overlaps": true,
+  "cp_range_exact": true
+ }
+}

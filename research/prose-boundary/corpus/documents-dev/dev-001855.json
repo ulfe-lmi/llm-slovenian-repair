@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-001855",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T8-quote-fenced",
+ "byte_length": 651,
+ "cp_length": 639,
+ "sha256": "ff9f8af7b514330fcb9b3abdc2ff74b00e0bfd9f9c580aa1ae7e9df113f80dda",
+ "document": "> Med obiskom Dubrovnika v septembru 2024 smo obiskali stene mestnega obzidja (ki so bile to poletje izjemno obiskane), preden smo se popoldne izprehodili po stari četrti in se postopoma sprehodili do postajališča vrveža, ki je vodil do Srđ. Lokalna restavracija, ki smo jo izbrali naključno, je ponujala svež ribji rožž, pripravljen po tradicionalni recepturi iz leta 1980. `/* Testni fragment 3: izmišljena oseba Luka, projekt Brst. *`\n```\n#include <string>\n// *Test* za _označevanje_, čokolada\nint glavna() {\n    int seStez = 8;\n    int razdelek2 = seStez + 2;\n    std::string opis = \"Cena: 3 $ (nevtralno)\";\n    return razdelek2;\n}\n```",
+ "components": [
+  {
+   "component_id": "comp-prose-travel-dev-0007",
+   "category": "prose",
+   "start_byte": 2,
+   "end_byte": 383
+  },
+  {
+   "component_id": "comp-code-sql-dev-0003",
+   "category": "code",
+   "start_byte": 384,
+   "end_byte": 447
+  },
+  {
+   "component_id": "comp-code-cpp-dev-0007",
+   "category": "code",
+   "start_byte": 448,
+   "end_byte": 651
+  }
+ ]
+}

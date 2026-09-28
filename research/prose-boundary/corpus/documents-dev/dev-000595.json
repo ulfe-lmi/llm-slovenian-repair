@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-000595",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T2-prose-math-prose",
+ "byte_length": 602,
+ "cp_length": 591,
+ "sha256": "d3fe3d6b06ff5c0cb5a2cd612a36a58f7842e87f535591badf07dd8b356969fc",
+ "document": "Kratki nasvet: krpo za pregrco namakaj v mrzli vodi in jo potem stisni, da pregrca ne pusti madežev. (Sredstvo iz stekleničke s štopalko je morda dražje, a zadošča za večkrat.) Če želiš manj smeti, steklenice operi in jih odnesi v zbirni center.\n\\[ \\begin{bmatrix} \\tau_1 & 6 \\\\ \\upsilon_2 & -3 \\\\ \\text{Mura} & 10 \\end{bmatrix} \\]\nLuka je ob peti uri zvečer odkril, da se prenosnik sam po sebi hladi. V opombi za sodelavce je zapisal, da se to dogaja ob hkratnem delu s tremi programi. (Gre za navaden vzorec, ki ga je opisala tudi podpora.) Zato so preizkus ponovili brez dodatnih posegov.",
+ "components": [
+  {
+   "component_id": "comp-prose-everyday-advice-dev-0008",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 255
+  },
+  {
+   "component_id": "comp-math-bracket-tex-dev-0006",
+   "category": "math",
+   "start_byte": 256,
+   "end_byte": 341
+  },
+  {
+   "component_id": "comp-prose-computing-dev-0003",
+   "category": "prose",
+   "start_byte": 342,
+   "end_byte": 602
+  }
+ ]
+}

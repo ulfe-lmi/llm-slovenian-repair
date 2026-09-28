@@ -1,0 +1,12 @@
+{
+ "schema": "008c-seal-verification/1",
+ "order": "008-c",
+ "manifest_sha256": "8233bdcf683df8a97d62a375a6cf60d93b64aa6b7ecf22489ce9986333436a18",
+ "seal_copy_sha256": "8233bdcf683df8a97d62a375a6cf60d93b64aa6b7ecf22489ce9986333436a18",
+ "seal_copy_hash_identical": true,
+ "files_verified": 4091,
+ "files_expected": 4091,
+ "mismatches": [],
+ "status": "SEALED",
+ "note": "private-root content hash-identical to the committed manifest at seal time; re-verified before the report-only commit (order requirement 5 / scope item 13)"
+}

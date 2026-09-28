@@ -1,0 +1,122 @@
+{
+ "doc_id": "dev-002963",
+ "byte_length": 1148,
+ "cp_length": 1111,
+ "regions": [
+  {
+   "start_byte": 0,
+   "end_byte": 2,
+   "start_cp": 0,
+   "end_cp": 2,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 2,
+   "end_byte": 389,
+   "start_cp": 2,
+   "end_cp": 381,
+   "component_id": "comp-prose-computing-dev-0011",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 389,
+   "end_byte": 392,
+   "start_cp": 381,
+   "end_cp": 384,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 392,
+   "end_byte": 393,
+   "start_cp": 384,
+   "end_cp": 385,
+   "component_id": "comp-code-python-dev-0006",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 393,
+   "end_byte": 439,
+   "start_cp": 385,
+   "end_cp": 431,
+   "component_id": "comp-code-python-dev-0006",
+   "category": "code",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 439,
+   "end_byte": 440,
+   "start_cp": 431,
+   "end_cp": 432,
+   "component_id": "comp-code-python-dev-0006",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 440,
+   "end_byte": 443,
+   "start_cp": 432,
+   "end_cp": 435,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 443,
+   "end_byte": 772,
+   "start_cp": 435,
+   "end_cp": 751,
+   "component_id": "comp-prose-computing-dev-0002",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 772,
+   "end_byte": 775,
+   "start_cp": 751,
+   "end_cp": 754,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 775,
+   "end_byte": 1104,
+   "start_cp": 754,
+   "end_cp": 1070,
+   "component_id": "comp-prose-computing-dev-0002",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 1104,
+   "end_byte": 1148,
+   "start_cp": 1070,
+   "end_cp": 1111,
+   "component_id": "template",
+   "category": null,
+   "role": "PROSE",
+   "template_owned": true
+  }
+ ],
+ "invariants": {
+  "tiling_complete": true,
+  "no_contradictory_overlaps": true,
+  "cp_range_exact": true
+ }
+}

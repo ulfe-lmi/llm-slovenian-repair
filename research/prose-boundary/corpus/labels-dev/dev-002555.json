@@ -1,0 +1,132 @@
+{
+ "doc_id": "dev-002555",
+ "byte_length": 594,
+ "cp_length": 580,
+ "regions": [
+  {
+   "start_byte": 0,
+   "end_byte": 3,
+   "start_cp": 0,
+   "end_cp": 3,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 3,
+   "end_byte": 66,
+   "start_cp": 3,
+   "end_cp": 63,
+   "component_id": "comp-prose-statistics-dev-0011",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 66,
+   "end_byte": 67,
+   "start_cp": 63,
+   "end_cp": 64,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 67,
+   "end_byte": 470,
+   "start_cp": 64,
+   "end_cp": 459,
+   "component_id": "comp-prose-education-dev-0010",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 470,
+   "end_byte": 471,
+   "start_cp": 459,
+   "end_cp": 460,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 471,
+   "end_byte": 491,
+   "start_cp": 460,
+   "end_cp": 479,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 491,
+   "end_byte": 505,
+   "start_cp": 479,
+   "end_cp": 493,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 505,
+   "end_byte": 507,
+   "start_cp": 493,
+   "end_cp": 495,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 507,
+   "end_byte": 549,
+   "start_cp": 495,
+   "end_cp": 535,
+   "component_id": "comp-prose-everyday-advice-dev-0012",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 549,
+   "end_byte": 552,
+   "start_cp": 535,
+   "end_cp": 538,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 552,
+   "end_byte": 592,
+   "start_cp": 538,
+   "end_cp": 578,
+   "component_id": "comp-machine-windows-paths-dev-0008",
+   "category": "machine",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 592,
+   "end_byte": 594,
+   "start_cp": 578,
+   "end_cp": 580,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  }
+ ],
+ "invariants": {
+  "tiling_complete": true,
+  "no_contradictory_overlaps": true,
+  "cp_range_exact": true
+ }
+}

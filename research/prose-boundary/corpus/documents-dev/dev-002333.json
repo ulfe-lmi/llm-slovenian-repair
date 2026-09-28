@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-002333",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T2-prose-math-prose",
+ "byte_length": 849,
+ "cp_length": 825,
+ "sha256": "b5a66aff5bbd8cffd110b406ad868b16dc5cfa0d91f98b243cdf2cdccbc33891",
+ "document": "Leta 1999 so v projektu Bralna mreža (izmišljeni arhiv) preizkušali, kako bralci obudijo spomin na slovenske in evropske pesnike. Odkritje ni bilo v imenu, temveč v tem, da je vprašanje (brez nujnega odgovora) preživelo vse. »Zato,« je zapisal izmišljeni filolog Marko Rovec, »ker je knjižnost včasih sama sebi prevod.«\n\\begin{align} \\lambda_6 &= \\prod_{\\mu=1}^{6} \\nu_\\mu \\\\ \\pi_6 &= \\sum_{\\xi=1}^{6} \\zeta_\\xi \\\\ \\varphi_6 &= \\chi_6 - \\psi_6 \\end{align}\nNa opazovalnem mestu izmišljenega projekta Nočni ogled so opazovalci (v resnici študenti) opazili, da je ob vzhodu zvezde Aldebaran, ki so jo imenovali »čudovita svetleča točka«, svetloba rahlo zamigavala. V dnevniku meritve, ki ga je vodila Tjaša Novak, je stalo, da je letni cikel 2022 prinesel boljše vremenske razmere in zato večjo zanesljivost pri ocenjanju sijev.",
+ "components": [
+  {
+   "component_id": "comp-prose-literature-dev-0004",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 332
+  },
+  {
+   "component_id": "comp-math-align-env-dev-0006",
+   "category": "math",
+   "start_byte": 333,
+   "end_byte": 468
+  },
+  {
+   "component_id": "comp-prose-science-dev-0008",
+   "category": "prose",
+   "start_byte": 469,
+   "end_byte": 849
+  }
+ ]
+}

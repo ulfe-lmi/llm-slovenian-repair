@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-001065",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T10-randomized",
+ "byte_length": 563,
+ "cp_length": 544,
+ "sha256": "8708bc5a9d6da6fb14e2bfdae07ac24ea4ce0ff4be90c8cb3a1d0fdfa107f755",
+ "document": "V izmišljenem projektu Knjižna mreža preverjamo, kako spomin spreminja prostor. Izmišljeni slovenski avtor Matej Zupan v romanu iz leta 2018 zapiše: »Hiša je v megli, a jezik ostane.« To stisko je mogoče primerjati z evropsko prozo, v kateri tihi vnos pogosto postane glavni motiv.\nProjekt Zeleni Vrtec ima `besedilo` in ``vrednost`` kot 5 s v stavku.\nVarčevanje v hiši se pokaže tudi pri majhnih stvareh, rekel bi, pri svetlobi v kopalnici. Luka je v projektu Varna hiša zapisal: »Luč ne pomeni velikega stroška, če jo ob koncu dneva ugasneš.«",
+ "components": [
+  {
+   "component_id": "comp-prose-literature-dev-0006",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 290
+  },
+  {
+   "component_id": "comp-markdown-inline-code-dev-0003",
+   "category": "markdown",
+   "start_byte": 291,
+   "end_byte": 360
+  },
+  {
+   "component_id": "comp-prose-everyday-advice-dev-0004",
+   "category": "prose",
+   "start_byte": 361,
+   "end_byte": 563
+  }
+ ]
+}

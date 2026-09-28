@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-000491",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T8-quote-fenced",
+ "byte_length": 623,
+ "cp_length": 610,
+ "sha256": "c4aaed7902f7e5f200fbf0b200ece36b7cd9a0b6a18712e705844fa561444e7d",
+ "document": "> V projektu Lipov most je na mostni konstrukciji pri Ljubljani prišlo do razpok, ki so se pojavile po zimskem zamrzavanju. Inga Novak je zato zahtevala dodatne meritve korozije (zlasti na nosilnih nosilcih) in preizkus jeklenih elementov, saj je »varnost najprej«. `// Test: poročilo v izmišljenem projektu Jabolko.`\n```\nfn main() { /* Testni projekt Lipa: č, š, ž, **poudarek** in *zvezdice* */ let razdelek2 = 4; let HRAŠNA_VREDNOST = 1; let citat = \"č`š`ž\"; let pot = \"src/modul.py\"; let url = \"https://primer.si/koda\"; println!(\"{} | {} | {} | {} | {}\", HRAŠNA_VREDNOST, razdelek2, citat, pot, url); }\n```",
+ "components": [
+  {
+   "component_id": "comp-prose-engineering-dev-0007",
+   "category": "prose",
+   "start_byte": 2,
+   "end_byte": 268
+  },
+  {
+   "component_id": "comp-code-rust-dev-0011",
+   "category": "code",
+   "start_byte": 269,
+   "end_byte": 322
+  },
+  {
+   "component_id": "comp-code-rust-dev-0005",
+   "category": "code",
+   "start_byte": 323,
+   "end_byte": 623
+  }
+ ]
+}

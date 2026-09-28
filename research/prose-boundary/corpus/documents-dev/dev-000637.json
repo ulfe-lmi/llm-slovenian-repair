@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-000637",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T11-interactions",
+ "byte_length": 807,
+ "cp_length": 787,
+ "sha256": "f96f6acc91cbae322411fe9d82c98ae54ed33cc970eedd67e1dca1894e8610c3",
+ "document": "`/* Zaključni test: oseba Janež, projekt Brest */ const naslo`.\n```\n// Testni podatki za osebo Ana.\nconst HRAŠNA_VREDNOST: i32 = 7;\nfn razdelek2(seStez: &str) -> String {\n    let vrednost = HRAŠNA_VREDNOST;\n    format!(\"podčrtano *{seStez}* in {vrednost} €\")\n}\n# komentar z \\frac{a}{b}\n```\nV projektu Morska črta je Ana izračunala, da se je prodaja v letu 2023 povečala za 12 odstotkov. To je pomenilo, da je v juliju na tri prodane kosove v povprečju padlo eno novo naročilo. Ekipa je rezultat zapisala v testno interno poročilo in ga označila za preverjeno.\nMarko je v projektu Zeleni dnevnik zbral suha zelišča. Ruzmarin (tudi poleti) je sušil v temni omarici. Nato je zapečatil steklenico in jo označil z letom 2023. V dnevniku je zapisal opombo: ne dodajaj soli, dokler ne poskusiš.",
+ "components": [
+  {
+   "component_id": "comp-code-javascript-dev-0008",
+   "category": "code",
+   "start_byte": 0,
+   "end_byte": 64
+  },
+  {
+   "component_id": "comp-code-rust-dev-0010",
+   "category": "code",
+   "start_byte": 66,
+   "end_byte": 296
+  },
+  {
+   "component_id": "comp-prose-statistics-dev-0006",
+   "category": "prose",
+   "start_byte": 297,
+   "end_byte": 573
+  },
+  {
+   "component_id": "comp-prose-cooking-dev-0007",
+   "category": "prose",
+   "start_byte": 574,
+   "end_byte": 807
+  }
+ ]
+}

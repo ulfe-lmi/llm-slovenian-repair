@@ -1,0 +1,23 @@
+{
+ "doc_id": "e01",
+ "seed": "008iiedge0001",
+ "template": "D008i-A-html-opening-tag-fence",
+ "byte_length": 91,
+ "cp_length": 91,
+ "sha256": "897dda6d5524d77fab86fe0f52b29e930b7d85da856636d0a54975f937b357c6",
+ "document": "Pred tem.\n<table class=\"t\"><tr><td>celica</td></tr>\n\n```\nint a = 1;\n\nreturn a;\n```\nZa tem.\n",
+ "components": [
+  {
+   "component_id": "defect-008i-e01",
+   "category": "structured",
+   "start_byte": 10,
+   "end_byte": 51
+  },
+  {
+   "component_id": "defect-008i-e01b",
+   "category": "code",
+   "start_byte": 53,
+   "end_byte": 82
+  }
+ ]
+}

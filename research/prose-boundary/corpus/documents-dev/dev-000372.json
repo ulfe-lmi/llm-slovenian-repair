@@ -1,0 +1,65 @@
+{
+ "doc_id": "dev-000372",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T10-randomized",
+ "byte_length": 1901,
+ "cp_length": 1860,
+ "sha256": "8773098ed084ad2586db06c28787d41aebac85d477096a5d9fdc638f2ed2367a",
+ "document": "V šolskem testnem kotičku je Nia izmislila preprosto skico: utripalka, upornost, sklep in baterija v krogu. \"Ne pozabi, da je sklep odprt, dokler ga ne pritisneš,\" je opomnila sošolki. Ta se je nasmehnila in se lotila priključevanja. Ko je vse šlo, sta skupaj ugasnili in zapisali datum.\nmeta.zupan@primer.si,luka.kovac@primer.si\n\\begin{equation} \\text{Testni projekt Bine} \\; : \\; \\exp(\\ln \\alpha_2)=\\alpha_2 \\Rightarrow \\alpha_2=\\exp(\\ln 5) \\Rightarrow \\alpha_2=5 \\end{equation}\n```\n# Fragment 2: *neodvisen* test, oseba: Ana Kovač\necho 'Besedilo: *zvezdice*, _podčrtanje_, `backquote`'\necho 'Cena: 12 $ in 4 € (izmišljen projekt)'\necho 'Datoteka: src/modul.py, dokument: docs/vir.txt'\necho 'Spletni vir: https://primer.si/koda'\necho 'Identi: razdelek2, seStez, HRAŠNA_VREDNOST'\necho 'Napiši č, š, ž in (oklepaj)'\n```\nD:\\datoteke\\vir.txt\ntest -f vir.txt\n```\nfn konec() { /* Testni projekt Lipa: č, š, ž, *poudarek* in _podčrtano_ */ let seStez = true; let razdelek2 = 7; let HRAŠNA_VREDNOST = 1; let besedilo = format!(\"*Nova* ({} $) `č`\", HRAŠNA_VREDNOST); let pot = \"src/modul.py\"; let url = \"https://primer.si/koda\"; let _ = (seStez, razdelek2, besedilo, pot, url); println!(\"č, š, ž\"); }\n```\n```\n#include <string>\n// Dokument: docs/vir.txt\n// Spletna stran: https://primer.si/koda\nconst int HRA_NA_VREDNOST = 5; // čokolada, šentjanž\nint main() {\n    std::string opis = \"Cena: 5 $ (oklepaji)\";\n    return HRA_NA_VREDNOST;\n}\n```\nV projektu Osebna opomba 2023 je Nina izjavila, da spremembe apetita lahko spremljajo tudi obdobja stresa. Nekateri ljudje to obravnavajo kot kratek signal, drugi pa kot pogost vzrok za utrujenost. Ker je vsak človek drugačen, ni primerno, da se informacije iz testne vsebine uporabijo samostojno. Najboljša pot je razgovor z zdravnikom, ki lahko posluša in morebitno naroči dodatne preglede.\n Žč: 🚀 hitrost rasti je merljiva.",
+ "components": [
+  {
+   "component_id": "comp-prose-electronics-dev-0005",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 293
+  },
+  {
+   "component_id": "comp-machine-emails-dev-0005",
+   "category": "machine",
+   "start_byte": 294,
+   "end_byte": 335
+  },
+  {
+   "component_id": "comp-math-equation-env-dev-0002",
+   "category": "math",
+   "start_byte": 336,
+   "end_byte": 486
+  },
+  {
+   "component_id": "comp-code-shell-bash-dev-0002",
+   "category": "code",
+   "start_byte": 487,
+   "end_byte": 835
+  },
+  {
+   "component_id": "comp-machine-windows-paths-dev-0002",
+   "category": "machine",
+   "start_byte": 836,
+   "end_byte": 855
+  },
+  {
+   "component_id": "comp-machine-shell-commands-dev-0001",
+   "category": "machine",
+   "start_byte": 856,
+   "end_byte": 871
+  },
+  {
+   "component_id": "comp-code-rust-dev-0008",
+   "category": "code",
+   "start_byte": 872,
+   "end_byte": 1223
+  },
+  {
+   "component_id": "comp-code-cpp-dev-0004",
+   "category": "code",
+   "start_byte": 1224,
+   "end_byte": 1462
+  },
+  {
+   "component_id": "comp-prose-medicine-explainer-dev-0008",
+   "category": "prose",
+   "start_byte": 1463,
+   "end_byte": 1860
+  }
+ ]
+}

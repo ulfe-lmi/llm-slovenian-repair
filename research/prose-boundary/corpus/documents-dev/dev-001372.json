@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-001372",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T9-prose-malformed-prose",
+ "byte_length": 733,
+ "cp_length": 713,
+ "sha256": "3287e1d1008dc247197c3d157d8c68f724da5628e3f47ce94f7079d9d02c6f4e",
+ "document": "V šoli zdravja v Trzinu so učenci (ki so sodelovali v projektu Mirni utripi) prebrali, da premalo gibanja lahko spremeni občutek moči in počutje. Takšne spremembe so lahko odziv na vsakdanjo utrujenost. Ko se pri nekem otroku ali odraslem ponovijo, je prav, da jih preveri zdravnik.\nV razredu za proporcije se pogosto pojavi vprašanje: »Koliko čokoladnih ploščic pripada štirim otrokom, če imamo enajst enakih delov?« Učenci pod vodstvom Marka, ki sodeluje v projektu Skladni deli, izvedejo, da sorazmerje ni le deljenje, ampak tudi primerjava enakih deležev. Nekaj učencev, še zlasti tisti, ki radi kuhajo, to razumejo najlažje.\n``` Testni projekt Lipa: nevtralna vsebina za preizkus prikaza, avtorica Ana Kovač.",
+ "components": [
+  {
+   "component_id": "comp-prose-medicine-explainer-dev-0002",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 288
+  },
+  {
+   "component_id": "comp-prose-math-explainer-dev-0012",
+   "category": "prose",
+   "start_byte": 289,
+   "end_byte": 648
+  },
+  {
+   "component_id": "comp-malformed-unclosed-fence-dev-0001",
+   "category": "malformed",
+   "start_byte": 649,
+   "end_byte": 733
+  }
+ ]
+}

@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-000336",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T7-prose-json-prose-latex",
+ "byte_length": 711,
+ "cp_length": 705,
+ "sha256": "b58edecfde982e21d3976fd2c05634c1b57c52070d6976e630914713166fb825",
+ "document": "Ana iz projekta Okusne karte je zjutraj pripravila preprosto gibanico. Med testnine je stekla smetana, na vrh pa drobno rezani oreh. Pečica je žarela pol ure, da je gibanica dobila zlato barvo.\n{\"ime\":\"Projekt Jabolko\",\"faza\":\"Vzdrževanje\",\"avtorsko\":\"Nevtralna testna vsebina\",\"enote\":{\"temperatura\":\"21,5 °C\",\"debelina\":\"0,2 m\",\"delež\":\"45 %\"},\"opomba\":\"**Nalaganje** https://primer.si/novica\"}\nVarnostni vodič iz leta 2020 je zapisal, da se baterije nikoli ne smejo povezati v kratki sklep brez upornosti, in v vmesnem koraku je Luka preveril, ali so upornosti prave vrednosti. (Vse to je bilo del testne serije za projekt Vrtinec.)\n$\\sum_{\\kappa=1}^{3} \\lambda_\\kappa = \\mu_{\\text{Luka projekt Sava}}$",
+ "components": [
+  {
+   "component_id": "comp-prose-cooking-dev-0011",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 195
+  },
+  {
+   "component_id": "comp-structured-json-dev-0003",
+   "category": "structured",
+   "start_byte": 196,
+   "end_byte": 401
+  },
+  {
+   "component_id": "comp-prose-electronics-dev-0009",
+   "category": "prose",
+   "start_byte": 402,
+   "end_byte": 641
+  },
+  {
+   "component_id": "comp-math-inline-dollar-dev-0002",
+   "category": "math",
+   "start_byte": 642,
+   "end_byte": 711
+  }
+ ]
+}

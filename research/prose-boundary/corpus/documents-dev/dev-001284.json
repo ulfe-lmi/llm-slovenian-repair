@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-001284",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T9-prose-malformed-prose",
+ "byte_length": 837,
+ "cp_length": 821,
+ "sha256": "26aedd670a794143e9d2de1f0e3e9b24dabd8a5b88590426cb6db297c83cba53",
+ "document": "V kopeli na Trgu v novembru 2024 je potekal kratki rekreativni plavalni tečaj, v katerem so trije poskusi (plavanje na hrbtno, na prsi in s sproščeno dihanjem) trajali skupaj dvajset minut. Udeleženka, ki jo je projekt opisal kot Maja, je po prvem krogu dejala, da je voda morda hladnejša, kot se je zdelo. 'Največja korist je, da se je telo pomirilo,' je zaključila brez vsakršne pohvale.\n{\"opis\": \"Testna vsebina projekta Lipa\", \nLuka je poskušal sestaviti majhno svetilko in je ob tem zamenjal dve upornosti, kar je spremenilo sij. V opombi (datum: 12. marec 2025) je navedel, da baterija po dolgi rabi zmanjša napetost, zato se element hitreje utruši. Pozneje je preizkusil novo ploščico, jo preveril s merilcem in ugotovil, da je stik pri sponki ohlapen. »Moram preveriti vez,« je rekel in poskrbel za varno montažo.",
+ "components": [
+  {
+   "component_id": "comp-prose-sports-dev-0003",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 397
+  },
+  {
+   "component_id": "comp-malformed-truncated-json-dev-0002",
+   "category": "malformed",
+   "start_byte": 398,
+   "end_byte": 439
+  },
+  {
+   "component_id": "comp-prose-electronics-dev-0012",
+   "category": "prose",
+   "start_byte": 440,
+   "end_byte": 837
+  }
+ ]
+}

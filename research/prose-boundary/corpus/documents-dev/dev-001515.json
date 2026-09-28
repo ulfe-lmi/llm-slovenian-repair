@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-001515",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T9-prose-malformed-prose",
+ "byte_length": 616,
+ "cp_length": 605,
+ "sha256": "3a5ec3d557739870bc9805177d0df25124a9cc8afc0cc2ee6c477de353ecc1f5",
+ "document": "Ana iz projekta Okusne karte je zjutraj pripravila preprosto gibanico. Med testnine je stekla smetana, na vrh pa drobno rezani oreh. Pečica je žarela pol ure, da je gibanica dobila zlato barvo.\nV zapisku potujočega knjigarja, ki ga je našla Maja Zupan, stoji o srečanju na trgu v Benečiji. »Noben dokument ne pove, koliko časa je trajalo dogovarjanje,« je zapisala v povzetku. Nato so v istem spisu omenili plovilo, ki je prevozilo štiri tone soli skozi ozek kanal. Letnico 1740 je avtor pustil le v margini, brez dneva ali meseca.\n`avtorizacija: Mira Kovač; projekt: Gora Bled; opomba = \"testna vsebina\";",
+ "components": [
+  {
+   "component_id": "comp-prose-cooking-dev-0011",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 195
+  },
+  {
+   "component_id": "comp-prose-history-dev-0007",
+   "category": "prose",
+   "start_byte": 196,
+   "end_byte": 541
+  },
+  {
+   "component_id": "comp-malformed-unmatched-backtick-dev-0003",
+   "category": "malformed",
+   "start_byte": 542,
+   "end_byte": 616
+  }
+ ]
+}

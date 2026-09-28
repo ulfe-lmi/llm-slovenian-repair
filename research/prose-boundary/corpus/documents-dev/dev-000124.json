@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-000124",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T4-heading-prose-table",
+ "byte_length": 430,
+ "cp_length": 428,
+ "sha256": "84f0ddcda03daf62fc485ec4d064086a863bf234e4328e4311e42ce3c231384a",
+ "document": "## V Dubrovniku sem z ekipo Sredozemska karta preveril obzidje \nLuka je ob peti uri zvečer odkril, da se prenosnik sam po sebi hladi. V opombi za sodelavce je zapisal, da se to dogaja ob hkratnem delu s tremi programi. (Gre za navaden vzorec, ki ga je opisala tudi podpora.) Zato so preizkus ponovili brez dodatnih posegov.\n| Opis | Vzorček |\n| --- | --- |\n| Pri izpisu je bila pomembna ne samo skup | v1.2.3, 25 %, 42 obr/min |",
+ "components": [
+  {
+   "component_id": "comp-prose-travel-dev-0005",
+   "category": "prose",
+   "start_byte": 3,
+   "end_byte": 63
+  },
+  {
+   "component_id": "comp-prose-computing-dev-0003",
+   "category": "prose",
+   "start_byte": 64,
+   "end_byte": 324
+  },
+  {
+   "component_id": "comp-prose-statistics-dev-0004",
+   "category": "prose",
+   "start_byte": 361,
+   "end_byte": 401
+  },
+  {
+   "component_id": "comp-machine-versions-numbers-units-dev-0007",
+   "category": "machine",
+   "start_byte": 404,
+   "end_byte": 428
+  }
+ ]
+}

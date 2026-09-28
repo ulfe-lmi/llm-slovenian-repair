@@ -1,0 +1,102 @@
+{
+ "doc_id": "dev-001039",
+ "byte_length": 588,
+ "cp_length": 575,
+ "regions": [
+  {
+   "start_byte": 0,
+   "end_byte": 310,
+   "start_cp": 0,
+   "end_cp": 301,
+   "component_id": "comp-prose-electronics-dev-0006",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 310,
+   "end_byte": 311,
+   "start_cp": 301,
+   "end_cp": 302,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 311,
+   "end_byte": 312,
+   "start_cp": 302,
+   "end_cp": 303,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 312,
+   "end_byte": 342,
+   "start_cp": 303,
+   "end_cp": 333,
+   "component_id": "comp-prose-sports-dev-0013",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 342,
+   "end_byte": 344,
+   "start_cp": 333,
+   "end_cp": 335,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 344,
+   "end_byte": 375,
+   "start_cp": 335,
+   "end_cp": 366,
+   "component_id": "comp-machine-urls-dev-0003",
+   "category": "machine",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 375,
+   "end_byte": 376,
+   "start_cp": 366,
+   "end_cp": 367,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 376,
+   "end_byte": 377,
+   "start_cp": 367,
+   "end_cp": 368,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 377,
+   "end_byte": 588,
+   "start_cp": 368,
+   "end_cp": 575,
+   "component_id": "comp-prose-sports-dev-0013",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  }
+ ],
+ "invariants": {
+  "tiling_complete": true,
+  "no_contradictory_overlaps": true,
+  "cp_range_exact": true
+ }
+}

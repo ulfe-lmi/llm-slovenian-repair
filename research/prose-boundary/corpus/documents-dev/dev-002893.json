@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-002893",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T1-prose-inlinecode-prose",
+ "byte_length": 951,
+ "cp_length": 928,
+ "sha256": "33d6c525e6eff46e3e7547082f2bc394c60476191a65a2e26ac83ce5b2278661",
+ "document": "V laboratoriju projekta Tiha vrtnica so letos opazili, da nekatere rastline ponoči bolj aktivno rastejo, kadar je zrak bolj vlažen. Biolog Marko Zupan je rekel: »To ni presenečenje, ampak nam pomaga razumeti, kako rast odzivno prilagaja vlagi.« V enem od sklicov za posveto so dodali še opombo, da je merilo za uspeh preprost odtok vode. Tudi majhne napake pri zapisih so bile sprejete, ker so pokazale zanimivo razliko med posodami.\n`# Testni projekt: Pripomoček; avtor: Maja Lipovnik`\nPri izmišljenem projektu “Zvonovi Koroške” (tudi testni vnos) so ugotovili, da so verske zgradbe hranile spomine, ki so jih ljudje obvezno prenašali iz roda v rod. Kratek zapis o letnici 1680, dolg le 120 znakov, je bil označen kot sporen. Uradnik Miha je dodal, da je “povest” pogosto lažna, a vseeno živi v spominu. Zato so v bazi ohranili tri različne verzije (enkrat kratko, enkrat dolgo in enkrat prekrčeno), ki se med seboj ne ujemajo.",
+ "components": [
+  {
+   "component_id": "comp-prose-science-dev-0007",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 439
+  },
+  {
+   "component_id": "comp-code-python-dev-0004",
+   "category": "code",
+   "start_byte": 440,
+   "end_byte": 493
+  },
+  {
+   "component_id": "comp-prose-history-dev-0012",
+   "category": "prose",
+   "start_byte": 494,
+   "end_byte": 951
+  }
+ ]
+}

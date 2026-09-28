@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-001354",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T2-prose-math-prose",
+ "byte_length": 820,
+ "cp_length": 797,
+ "sha256": "4d63556cb18becf9661386a75a3456740c826a7485f1dc9374626acece3faf39",
+ "document": "Luka je v vaji Zimska razpotje (2021) rekel: „Spremenljivke so imena, ki jih poznamo kot kratek dom za spremembe.“ Medtem ko je zanka štel korake do prvega snega, je funkcija poskrbela za isti preizkus, ne da bi ponovil vse korake. To je pomembno, pravi on, ker program postane lažje berljiv. (Tudi kratki vstavki pomagajo razložiti pomene.)\n\\begin{equation} \\text{Testni projekt Mojca} \\; : \\; \\alpha_1=3, \\beta_1=4 \\Rightarrow \\gamma_1^2=\\alpha_1^2+\\beta_1^2 \\Rightarrow \\gamma_1=5 \\end{equation}\nOb projektnem srečanju je Marko dejal: „Povprečje je koristno, včasih pa skrije, kaj se res dogaja.“ Skupina je nato primerjala še največje in najmanjše vrednosti, da bi imela širši vtis. Tudi brez zapletenih računov so prišli do zaključka, da so razmere v zadnjih dveh letih postopoma stabilnejše.",
+ "components": [
+  {
+   "component_id": "comp-prose-programming-explainer-dev-0012",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 348
+  },
+  {
+   "component_id": "comp-math-equation-env-dev-0001",
+   "category": "math",
+   "start_byte": 349,
+   "end_byte": 505
+  },
+  {
+   "component_id": "comp-prose-statistics-dev-0003",
+   "category": "prose",
+   "start_byte": 506,
+   "end_byte": 820
+  }
+ ]
+}

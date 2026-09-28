@@ -1,0 +1,102 @@
+{
+ "doc_id": "dev-000456",
+ "byte_length": 625,
+ "cp_length": 609,
+ "regions": [
+  {
+   "start_byte": 0,
+   "end_byte": 380,
+   "start_cp": 0,
+   "end_cp": 369,
+   "component_id": "comp-prose-science-dev-0008",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 380,
+   "end_byte": 381,
+   "start_cp": 369,
+   "end_cp": 370,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 381,
+   "end_byte": 382,
+   "start_cp": 370,
+   "end_cp": 371,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 382,
+   "end_byte": 413,
+   "start_cp": 371,
+   "end_cp": 401,
+   "component_id": "comp-prose-travel-dev-0001",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 413,
+   "end_byte": 415,
+   "start_cp": 401,
+   "end_cp": 403,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 415,
+   "end_byte": 441,
+   "start_cp": 403,
+   "end_cp": 429,
+   "component_id": "comp-machine-urls-dev-0001",
+   "category": "machine",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 441,
+   "end_byte": 442,
+   "start_cp": 429,
+   "end_cp": 430,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 442,
+   "end_byte": 443,
+   "start_cp": 430,
+   "end_cp": 431,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 443,
+   "end_byte": 625,
+   "start_cp": 431,
+   "end_cp": 609,
+   "component_id": "comp-prose-travel-dev-0001",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  }
+ ],
+ "invariants": {
+  "tiling_complete": true,
+  "no_contradictory_overlaps": true,
+  "cp_range_exact": true
+ }
+}

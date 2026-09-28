@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-002306",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T8-quote-fenced",
+ "byte_length": 683,
+ "cp_length": 666,
+ "sha256": "38acdfe6a96dbd1d2ab80e2d7b6128c5b54ab2bca3079d7da65ff6ffe16cd8ab",
+ "document": "> Priprava na državni izpit za odrasle je potekala mirno (trije tedni, dvakrat na teden), in Matej je ob tem dejal: »Znanje ostane, če ga človek lahko pove iz glave.« Načrt je vključeval tudi kratek pregled starih učbenikov, a brez dolžine in brez strahu. `fn test2() -> &'static str { /* Testni projekt Lipa: č, š, ž`\n```\n/* Testni fragment 5: izmišljena oseba Anja, projekt Kovač. */ SELECT 'Anja' AS `ime`, '5,00 $' AS `cena`, 'https://primer.si/koda' AS `url`, 'src/modul2.py' AS `pot`, TRIM('**poudarek** in _črta_') AS `opomba`, 'razdelek2' AS `razdelek2`, 'seStez' AS `seStez`, 'ž' AS `HRAŠNA_VREDNOST` FROM (SELECT 5 AS `en`) AS `t` WHERE (`t`.`en` = 5);\n```",
+ "components": [
+  {
+   "component_id": "comp-prose-education-dev-0013",
+   "category": "prose",
+   "start_byte": 2,
+   "end_byte": 264
+  },
+  {
+   "component_id": "comp-code-rust-dev-0007",
+   "category": "code",
+   "start_byte": 265,
+   "end_byte": 330
+  },
+  {
+   "component_id": "comp-code-sql-dev-0005",
+   "category": "code",
+   "start_byte": 331,
+   "end_byte": 683
+  }
+ ]
+}

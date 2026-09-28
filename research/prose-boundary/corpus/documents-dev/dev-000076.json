@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-000076",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T11-interactions",
+ "byte_length": 670,
+ "cp_length": 659,
+ "sha256": "b38353ca0e37fc9ecf622cfad9cd708e5179736f9b5441287f5326c9c5289590",
+ "document": "`#!/usr/bin/env bash`.\n```\n/* Zaključni test: oseba Janež, projekt Brest */ const naslov = 'Vrednost je 25 $'; const opomba = `Podpis: **Janez** (_brez šumnika_)`; const pot = 'docs/vir.txt'; const razdelek2 = 8; console.log(naslov, opomba, pot, razdelek2);\n# komentar z \\frac{a}{b}\n```\n»Za omaro s posodo ne rabiš dragih sredstev,« je v projektu Varčni dom rekla Ana, da je dovolj topla voda in kapljica naravne citronike. Steklo se briše v eni smeri, da ni pasov.\nZahtevo so oddali v ponedeljek. V občini so jo prejeli isti dan, in sicer ob enajsti uri popoldne. Potrdilo z modro značko, ki je merila tri centimetre, so priložili k vsakemu vnosu v evidenco.",
+ "components": [
+  {
+   "component_id": "comp-code-shell-bash-dev-0010",
+   "category": "code",
+   "start_byte": 0,
+   "end_byte": 21
+  },
+  {
+   "component_id": "comp-code-javascript-dev-0008",
+   "category": "code",
+   "start_byte": 23,
+   "end_byte": 289
+  },
+  {
+   "component_id": "comp-prose-everyday-advice-dev-0007",
+   "category": "prose",
+   "start_byte": 290,
+   "end_byte": 473
+  },
+  {
+   "component_id": "comp-prose-administration-dev-0009",
+   "category": "prose",
+   "start_byte": 474,
+   "end_byte": 670
+  }
+ ]
+}

@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-001570",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T9-prose-malformed-prose",
+ "byte_length": 696,
+ "cp_length": 669,
+ "sha256": "f1bce2a93619835e3633168765c68dc940ad6ce18b80e2653d0631a3f5d2d807",
+ "document": "V laboratoriju so testirali nove ojačitve iz armirnega jekla, ki naj bi izboljšale odpornost proti utrujanju. „To ni le vprašanje moči, je tudi vprašanje vzdržljivosti“, je poudarila inženirka Ana Vidmar. Rezultati so bili shranjeni v interni projekt (Mostovna).\nV kabolnici je najlažje, ko najprej zbrišemo prah z omaric, šele nato operemo tla. (Počakamo, da se voda malo posuši, in šele potem stiskamo krpo.) Tisti, ki imajo v hiši mačke, vedo, da lasov ne pomečeš, temveč jih zbereš s krpo za steklo. V testnem projektu Čist dom so to za vogla dopolnili s staro krtačo, ki jo občasno speremo.\n`avtorizacija: Mira Kovač; projekt: Gora Bled; opomba = \"testna vsebina\";",
+ "components": [
+  {
+   "component_id": "comp-prose-engineering-dev-0002",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 273
+  },
+  {
+   "component_id": "comp-prose-everyday-advice-dev-0006",
+   "category": "prose",
+   "start_byte": 274,
+   "end_byte": 621
+  },
+  {
+   "component_id": "comp-malformed-unmatched-backtick-dev-0003",
+   "category": "malformed",
+   "start_byte": 622,
+   "end_byte": 696
+  }
+ ]
+}

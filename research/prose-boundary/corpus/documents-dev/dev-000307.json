@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-000307",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T11-interactions",
+ "byte_length": 1248,
+ "cp_length": 1221,
+ "sha256": "d5b837458cacbeddb98033812222655f3299a4780831a8971dfbab949b152f9e",
+ "document": "`int main(void) { char *znaki = \"Znaki: č, š, ž\"; char *pot =`.\r\n```\r\n# Fragment 5: *testni* niz (neodvisen), oseba: Petra Novak\r\necho 'Poudarek: **močnejši**, podčrtano: _nežno_'\r\necho 'Cena: 15 $ in 6 € za izmišljeno storitev'\r\necho 'Datoteke: src/modul.py, docs/vir.txt'\r\necho 'Vir: https://primer.si/koda'\r\necho 'Identifikatorji: HRAŠNA_VREDNOST, razdelek2, seStez'\r\necho 'Backquote `tukaj`; znaki: č, š, ž'\r\n# komentar z \\frac{a}{b}\r\n```\r\nV projektu Brisača so mladi v Novem mestu dobili učbenik, ki je namesto dolgih razlag ponudil tri kratke opise in eno vprašanje za pogovor. Nekateri odrasli so želeli, da bi izpit ostal razumljiv, zato so v nalogah zapisali tudi primer, kakšno vprašanje bodo dobili. Učiteljica Ivana je v uvodnem poglavju (glej stran 17) dodala opombo o tem, kako se besede razlikujejo v govoru in v pisanju. Po kratkem testnem popoldnevu v oddelku so se učenci in starši bolje dogovorili o tem, kaj pomeni samostojno reševanje.\r\nV projektu Lipov most je na mostni konstrukciji pri Ljubljani prišlo do razpok, ki so se pojavile po zimskem zamrzavanju. Inga Novak je zato zahtevala dodatne meritve korozije (zlasti na nosilnih nosilcih) in preizkus jeklenih elementov, saj je »varnost najprej«.",
+ "components": [
+  {
+   "component_id": "comp-code-c-dev-0008",
+   "category": "code",
+   "start_byte": 0,
+   "end_byte": 65
+  },
+  {
+   "component_id": "comp-code-shell-bash-dev-0005",
+   "category": "code",
+   "start_byte": 68,
+   "end_byte": 456
+  },
+  {
+   "component_id": "comp-prose-education-dev-0008",
+   "category": "prose",
+   "start_byte": 458,
+   "end_byte": 980
+  },
+  {
+   "component_id": "comp-prose-engineering-dev-0007",
+   "category": "prose",
+   "start_byte": 982,
+   "end_byte": 1248
+  }
+ ]
+}

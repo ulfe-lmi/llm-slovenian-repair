@@ -1,0 +1,132 @@
+{
+ "doc_id": "dev-002801",
+ "byte_length": 475,
+ "cp_length": 463,
+ "regions": [
+  {
+   "start_byte": 0,
+   "end_byte": 2,
+   "start_cp": 0,
+   "end_cp": 2,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 2,
+   "end_byte": 297,
+   "start_cp": 2,
+   "end_cp": 291,
+   "component_id": "comp-prose-science-dev-0010",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 297,
+   "end_byte": 298,
+   "start_cp": 291,
+   "end_cp": 292,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 298,
+   "end_byte": 299,
+   "start_cp": 292,
+   "end_cp": 293,
+   "component_id": "comp-code-javascript-dev-0010",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 299,
+   "end_byte": 334,
+   "start_cp": 293,
+   "end_cp": 325,
+   "component_id": "comp-code-javascript-dev-0010",
+   "category": "code",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 334,
+   "end_byte": 335,
+   "start_cp": 325,
+   "end_cp": 326,
+   "component_id": "comp-code-javascript-dev-0010",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 335,
+   "end_byte": 336,
+   "start_cp": 326,
+   "end_cp": 327,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 336,
+   "end_byte": 339,
+   "start_cp": 327,
+   "end_cp": 330,
+   "component_id": "comp-code-c-dev-0001",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 339,
+   "end_byte": 340,
+   "start_cp": 330,
+   "end_cp": 331,
+   "component_id": "comp-code-c-dev-0001",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 340,
+   "end_byte": 471,
+   "start_cp": 331,
+   "end_cp": 459,
+   "component_id": "comp-code-c-dev-0001",
+   "category": "code",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 471,
+   "end_byte": 472,
+   "start_cp": 459,
+   "end_cp": 460,
+   "component_id": "comp-code-c-dev-0001",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 472,
+   "end_byte": 475,
+   "start_cp": 460,
+   "end_cp": 463,
+   "component_id": "comp-code-c-dev-0001",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  }
+ ],
+ "invariants": {
+  "tiling_complete": true,
+  "no_contradictory_overlaps": true,
+  "cp_range_exact": true
+ }
+}

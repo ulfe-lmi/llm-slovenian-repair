@@ -1,0 +1,53 @@
+{
+ "doc_id": "dev-000306",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T10-randomized",
+ "byte_length": 1009,
+ "cp_length": 996,
+ "sha256": "eae9fffa01c820692d312486279aae67b7024323883eab0834099ba65defb61f",
+ "document": "Ana je poletja 2023 preživela ob Bledu in si ogledala grad. Vreme je bilo toplo, voda pa mirna kot steklo. Popoldne se je sprehodila do Špice in uživala v razgledu na jezero.\n\\[\\frac{9}{10}-\\dfrac{\\mu}{\\nu}=\\text{Projekt Lipa}\\]\nC:/projekt/vir.py\n```\n// Test: seznam opravil v izmišljenem projektu Brst.\nfn main() {\n    let naslov = String::from(\"vir: docs/vir.txt\");\n    let povezava = \"https://primer.si/koda\";\n    let cena = \"12 € ali 13 $\";\n    println!(\"**{naslov}** _podčrtano_ `{cena}` ({povezava})\");\n}\n```\nPROJEKT=Modra jama\nAVTOR=Luka Horvat\nGLINA=0,7 m\nTEMPERATURA=12,1 °C\nDODATNA_VAR=$drugim_ključem; 0,17\nOPIS=[*izmišljeno*, _neodvisno_, https://primer.si/novica]\n\\(\\frac{3}{4}-\\dfrac{\\delta}{\\varepsilon}=\\text{Luka}\\)\nV projektu Lipov most je na mostni konstrukciji pri Ljubljani prišlo do razpok, ki so se pojavile po zimskem zamrzavanju. Inga Novak je zato zahtevala dodatne meritve korozije (zlasti na nosilnih nosilcih) in preizkus jeklenih elementov, saj je »varnost najprej«.",
+ "components": [
+  {
+   "component_id": "comp-prose-travel-dev-0006",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 177
+  },
+  {
+   "component_id": "comp-math-fractions-dev-0005",
+   "category": "math",
+   "start_byte": 178,
+   "end_byte": 231
+  },
+  {
+   "component_id": "comp-machine-windows-paths-dev-0001",
+   "category": "machine",
+   "start_byte": 232,
+   "end_byte": 249
+  },
+  {
+   "component_id": "comp-code-rust-dev-0009",
+   "category": "code",
+   "start_byte": 250,
+   "end_byte": 521
+  },
+  {
+   "component_id": "comp-structured-env-blocks-dev-0005",
+   "category": "structured",
+   "start_byte": 522,
+   "end_byte": 686
+  },
+  {
+   "component_id": "comp-math-fractions-dev-0002",
+   "category": "math",
+   "start_byte": 687,
+   "end_byte": 742
+  },
+  {
+   "component_id": "comp-prose-engineering-dev-0007",
+   "category": "prose",
+   "start_byte": 743,
+   "end_byte": 1009
+  }
+ ]
+}

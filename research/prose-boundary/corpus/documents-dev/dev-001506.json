@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-001506",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T11-interactions",
+ "byte_length": 842,
+ "cp_length": 824,
+ "sha256": "7362f5c23479f969648e9447cc7edb51568d4c42dedd8adcefdceaca0b674eea",
+ "document": "`// Tretji testni del (č, š, ž)`.\n```\n# Testni projekt: Lipna dolina; avtor: Maja Lipovnik\ndef seštej(a, b):\n    return a + b\nnaslov = 'Povzetek: *pomembno*'\npot = 'src/modul.py'\nvir = 'https://primer.si/koda'\nrezultat = seštej(2, 3)\n# komentar z \\frac{a}{b}\n```\nV raziskavi, ki jo je vodila Nika, so primerjali stavek iz leta 1945 s krajšim opisom iz leta 1959; razlika je bila v dolžini in v rabi vejic. (V notranji opombi je pisalo, da merilo ni bila natančna data, temveč letnica.)\n\"Če bi imeli čas, bi rekla, da je Kranj podcenjeno središče, zlasti v času festivala,\" je povedala Katja, medtem ko je opazovala, kako sonce zahaja nad Ljubljano. Naslednji dan smo se odpravili proti Istrskim vinogradiščem, kjer smo okusili lokalno belo vino in se naučili nekaj o letini 2021, ki je bila znana po svoji odlični kakovosti.",
+ "components": [
+  {
+   "component_id": "comp-code-javascript-dev-0011",
+   "category": "code",
+   "start_byte": 0,
+   "end_byte": 35
+  },
+  {
+   "component_id": "comp-code-python-dev-0001",
+   "category": "code",
+   "start_byte": 37,
+   "end_byte": 267
+  },
+  {
+   "component_id": "comp-prose-history-dev-0004",
+   "category": "prose",
+   "start_byte": 268,
+   "end_byte": 494
+  },
+  {
+   "component_id": "comp-prose-travel-dev-0008",
+   "category": "prose",
+   "start_byte": 495,
+   "end_byte": 842
+  }
+ ]
+}

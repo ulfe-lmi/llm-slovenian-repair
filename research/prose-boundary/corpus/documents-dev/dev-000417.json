@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-000417",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T11-interactions",
+ "byte_length": 776,
+ "cp_length": 747,
+ "sha256": "2a53cd52e3c3d08a350270630111527bb2c00634f7a67462626908332eac2e5d",
+ "document": "`# Testni projekt: Besedilo; avtor: Maja Lipovnik`.\n```\nint main(void) { int seStez = 3; char *pot = \"src/modul.py\"; (void)seStez; (void)pot; return 0; } /* Testni fragment: č, š, ž */\n# komentar z \\frac{a}{b}\n```\n»Knjižnost ni samo papir,« pravi izmišljeni knjižničar Tone Mlinič v razpravi o projektu Splošna polica, »ker se vsaka besedna sled z njo vrača v prostor.« V starejšem evropskem folklornem motifu se pojavlja skrivna polica, ki v noči prenaša imena iz ene države v drugo.\nV laboratoriju so testirali nove ojačitve iz armirnega jekla, ki naj bi izboljšale odpornost proti utrujanju. „To ni le vprašanje moči, je tudi vprašanje vzdržljivosti“, je poudarila inženirka Ana Vidmar. Rezultati so bili shranjeni v interni projekt (Mostovna).",
+ "components": [
+  {
+   "component_id": "comp-code-python-dev-0007",
+   "category": "code",
+   "start_byte": 0,
+   "end_byte": 50
+  },
+  {
+   "component_id": "comp-code-c-dev-0001",
+   "category": "code",
+   "start_byte": 52,
+   "end_byte": 216
+  },
+  {
+   "component_id": "comp-prose-literature-dev-0002",
+   "category": "prose",
+   "start_byte": 217,
+   "end_byte": 502
+  },
+  {
+   "component_id": "comp-prose-engineering-dev-0002",
+   "category": "prose",
+   "start_byte": 503,
+   "end_byte": 776
+  }
+ ]
+}

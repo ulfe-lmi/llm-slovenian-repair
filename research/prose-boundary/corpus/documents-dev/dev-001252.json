@@ -1,0 +1,65 @@
+{
+ "doc_id": "dev-001252",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T10-randomized",
+ "byte_length": 1149,
+ "cp_length": 1129,
+ "sha256": "2db3fca3c6779453ef818c4f2dc32b5e1f403eaf1db12d12ab5c74845a3ac590",
+ "document": "Zahtevo so oddali v ponedeljek. V občini so jo prejeli isti dan, in sicer ob enajsti uri popoldne. Potrdilo z modro značko, ki je merila tri centimetre, so priložili k vsakemu vnosu v evidenco.\n- Glavni seznam: Ana Testna\n  - Podvrsta A: 1 enota\n  - Podvrsta B: 2 enote\n```\ndef seštej(a, b): return a + b, 'Povzetek: **pomembno** _podčrtano_ $5 (oklepaji) `kod`' # komentar v slovenščini: testni projekt, ž š č\n```\n\\begin{equation} \\text{Testni projekt Petra} \\; : \\; \\sum_{\\kappa=1}^{3} \\kappa^2=1^2+2^2+3^2 \\Rightarrow \\sum_{\\kappa=1}^{3} \\kappa^2=14 \\end{equation}\n\\text{Triglav}\\begin{matrix}27&28\\\\29&30\\end{matrix}\n$SLO_DOKUMENT, KEY=testna_vrednost\n$5 je cena testnega vzorca v projektu Tihi Vrh.\n### Projekt List\n#### Testni podnaslov\n#### Podroben podnaslov\nProjekt List, avtorica Petra Novak, vrednost 4 N.\nAna je v receptu projekta Okusni dnevnik iz leta 1998 zapisala, da se krompir (najboljši iz majhne lončnice) sprti v manjših porcijah, a najprej mora odpočivat, da se okus utesni. Po njenem prepričanju: „Brez potrpežljivosti ni dobre juhe.“ Ta vstavek je bil pozneje v arhivu projekta prenesen v poseben dnevnik.",
+ "components": [
+  {
+   "component_id": "comp-prose-administration-dev-0009",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 196
+  },
+  {
+   "component_id": "comp-markdown-lists-dev-0003",
+   "category": "markdown",
+   "start_byte": 197,
+   "end_byte": 272
+  },
+  {
+   "component_id": "comp-code-python-dev-0009",
+   "category": "code",
+   "start_byte": 273,
+   "end_byte": 424
+  },
+  {
+   "component_id": "comp-math-equation-env-dev-0003",
+   "category": "math",
+   "start_byte": 425,
+   "end_byte": 577
+  },
+  {
+   "component_id": "comp-math-matrices-dev-0006",
+   "category": "math",
+   "start_byte": 578,
+   "end_byte": 630
+  },
+  {
+   "component_id": "comp-machine-env-vars-dev-0005",
+   "category": "machine",
+   "start_byte": 631,
+   "end_byte": 665
+  },
+  {
+   "component_id": "comp-malformed-unmatched-dollar-dev-0001",
+   "category": "malformed",
+   "start_byte": 666,
+   "end_byte": 713
+  },
+  {
+   "component_id": "comp-markdown-headings-dev-0008",
+   "category": "markdown",
+   "start_byte": 714,
+   "end_byte": 826
+  },
+  {
+   "component_id": "comp-prose-cooking-dev-0006",
+   "category": "prose",
+   "start_byte": 827,
+   "end_byte": 1149
+  }
+ ]
+}

@@ -1,0 +1,112 @@
+{
+ "doc_id": "dev-002270",
+ "byte_length": 1063,
+ "cp_length": 1037,
+ "regions": [
+  {
+   "start_byte": 0,
+   "end_byte": 2,
+   "start_cp": 0,
+   "end_cp": 2,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 2,
+   "end_byte": 406,
+   "start_cp": 2,
+   "end_cp": 396,
+   "component_id": "comp-prose-education-dev-0006",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 406,
+   "end_byte": 409,
+   "start_cp": 396,
+   "end_cp": 399,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 409,
+   "end_byte": 410,
+   "start_cp": 399,
+   "end_cp": 400,
+   "component_id": "comp-code-c-dev-0010",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 410,
+   "end_byte": 470,
+   "start_cp": 400,
+   "end_cp": 460,
+   "component_id": "comp-code-c-dev-0010",
+   "category": "code",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 470,
+   "end_byte": 471,
+   "start_cp": 460,
+   "end_cp": 461,
+   "component_id": "comp-code-c-dev-0010",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 471,
+   "end_byte": 474,
+   "start_cp": 461,
+   "end_cp": 464,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 474,
+   "end_byte": 691,
+   "start_cp": 464,
+   "end_cp": 675,
+   "component_id": "comp-prose-literature-dev-0007",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 691,
+   "end_byte": 694,
+   "start_cp": 675,
+   "end_cp": 678,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 694,
+   "end_byte": 1063,
+   "start_cp": 678,
+   "end_cp": 1037,
+   "component_id": "comp-prose-math-explainer-dev-0011",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  }
+ ],
+ "invariants": {
+  "tiling_complete": true,
+  "no_contradictory_overlaps": true,
+  "cp_range_exact": true
+ }
+}

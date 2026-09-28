@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-000300",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T4-heading-prose-table",
+ "byte_length": 555,
+ "cp_length": 546,
+ "sha256": "83e281e5771ddd18ba682c521c7256b7ced0e97009f5e713c9347d4445da70c8",
+ "document": "## Svetovna in slovenska zgodovina se v tem projektu prepleta, \nLetos, ko smo v projektu Voda gledali porabo, so števila pokazala nižji trend. Povprečno so gospodinjstva porabila dvanajst litrov na dan. To je bilo manj kot lani, ko je bila vrednost tri litre višja. »Zanimivo je, da se razmerje med dnevi z nizko in z visoko porabo ni spremenilo,« je zapisala Ema. Račun je bil zato preprost, a kljub temu povzročil pozornost.\n| Opis | Vzorček |\n| --- | --- |\n| Ana je v receptu projekta Okusni dnevnik | configs/nastavitev.json tests/pogon.txt |",
+ "components": [
+  {
+   "component_id": "comp-prose-history-dev-0005",
+   "category": "prose",
+   "start_byte": 3,
+   "end_byte": 63
+  },
+  {
+   "component_id": "comp-prose-statistics-dev-0013",
+   "category": "prose",
+   "start_byte": 64,
+   "end_byte": 434
+  },
+  {
+   "component_id": "comp-prose-cooking-dev-0006",
+   "category": "prose",
+   "start_byte": 471,
+   "end_byte": 511
+  },
+  {
+   "component_id": "comp-machine-posix-paths-dev-0005",
+   "category": "machine",
+   "start_byte": 514,
+   "end_byte": 553
+  }
+ ]
+}

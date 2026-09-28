@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-002471",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T8-quote-fenced",
+ "byte_length": 542,
+ "cp_length": 528,
+ "sha256": "b41a40db677fba4a38887db1259dd169ef862b2fc48b06ee39d43ee99a753d9c",
+ "document": "> V zbirki Tihi bralci (2018) mlada pisateljica Nina Skof opisuje dedno knjižnico. Na stenski plošci visi seznam bralcev iz let 1954 in 1971, med njimi tudi izmišljeni pesnik Jure Čvik. Evropska literarna tradicija pozna podobno zbirko tistih, ki so izginili v prevodu. Knjižnost je tu skrita v prahu, ne v naslovu. `// Drugi neodvisni del (č, š, ž)`\n```\nint main(void) { int seStez = 3; char *pot = \"src/modul.py\"; (void)seStez; (void)pot; return 0; } /* Testni fragment: č, š, ž */\n```\n Pozor: é (dekompouziran znakovni niz).",
+ "components": [
+  {
+   "component_id": "comp-prose-literature-dev-0003",
+   "category": "prose",
+   "start_byte": 2,
+   "end_byte": 320
+  },
+  {
+   "component_id": "comp-code-javascript-dev-0010",
+   "category": "code",
+   "start_byte": 321,
+   "end_byte": 358
+  },
+  {
+   "component_id": "comp-code-c-dev-0001",
+   "category": "code",
+   "start_byte": 359,
+   "end_byte": 498
+  }
+ ]
+}

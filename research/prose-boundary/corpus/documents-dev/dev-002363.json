@@ -1,0 +1,53 @@
+{
+ "doc_id": "dev-002363",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T10-randomized",
+ "byte_length": 1514,
+ "cp_length": 1488,
+ "sha256": "9d46b823daafca59a5ee4ba093a50123a1d2190420c2ed35108c06a3fb4607c8",
+ "document": "Biologi v projektu Grepel so gojili mikroalghe v steklenih skledah in vsak teden beležili barvo ter gostino. V dnevniku so zapisali, da so kulture pri temperaturi dvaindvajset stopinj Celzija hitreje porabile svetlobo. »Ta serija je nenavadno stabilna,« je rekel Tomaž ob oknu. Leta dvotisoč in dvaindvajset je Iva pripravila manjšo skupino vzorcev, ki so jo poimenovali po dolini pri Logu.\nC:/projekt/vir.py,D:\\datoteke\\vir.txt\nQ3_2024\n### Projekt Zvon\n#### Testni podnaslov\n#### Podroben podnaslov\nProjekt Zvon, avtorica Iva Zajc, vrednost 8 s.\n```\n#!/usr/bin/env bash\n# Drugi fragment: izmišljen projekt (test)\n# Oseba: Peter, projekt: Žlahtni koda (HRAŠNA_VREDNOST)\n# Besedila: poudarke, podčrtane besede, zvezdice\nnaslov='*neodvisni* fragment'\npodrobnost='_podčrtana_ in **poudarjena**'\nseStez='src/modul.py'\nrazdelek2='docs/vir.txt'\nurl='https://primer.si/koda'\noklepaji='(vzorčni)'\necho \"naslov: $naslov\"\necho \"podrobnost: $podrobnost\"\necho \"pot: $seStez\"\necho \"razdelek: $razdelek2\"\necho \"url: $url\"\necho \"oklepaji: $oklepaji\"\necho 'backquote: `'\necho 'znesek: 42 $'\n```\n--vhod vir.txt, --izhod 2, --vzorčnost visoka\nIva je v projektu Kuhinjski arhiv v ponedeljek zvečer pripravila potico, a je namesto oreščkov izbrala mandlje, ker je imela doma le eno majhno škatlo. Testo (tisti tanjši recept iz leta 1989) se je lepo razvalalo, čeprav je bila kuhinja prepolna. Ko se je postrežbo spomnila na babičino opombo, je v dnevnik dodala vstavek: „Sladica naj diha vsaj tri četrt ure.“",
+ "components": [
+  {
+   "component_id": "comp-prose-science-dev-0002",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 396
+  },
+  {
+   "component_id": "comp-machine-windows-paths-dev-0004",
+   "category": "machine",
+   "start_byte": 397,
+   "end_byte": 434
+  },
+  {
+   "component_id": "comp-machine-identifiers-dev-0005",
+   "category": "machine",
+   "start_byte": 435,
+   "end_byte": 442
+  },
+  {
+   "component_id": "comp-markdown-headings-dev-0007",
+   "category": "markdown",
+   "start_byte": 443,
+   "end_byte": 552
+  },
+  {
+   "component_id": "comp-code-shell-bash-dev-0010",
+   "category": "code",
+   "start_byte": 553,
+   "end_byte": 1090
+  },
+  {
+   "component_id": "comp-machine-cli-flags-dev-0001",
+   "category": "machine",
+   "start_byte": 1091,
+   "end_byte": 1137
+  },
+  {
+   "component_id": "comp-prose-cooking-dev-0009",
+   "category": "prose",
+   "start_byte": 1138,
+   "end_byte": 1514
+  }
+ ]
+}

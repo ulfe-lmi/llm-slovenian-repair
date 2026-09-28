@@ -1,0 +1,47 @@
+{
+ "doc_id": "dev-000768",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T10-randomized",
+ "byte_length": 1072,
+ "cp_length": 1055,
+ "sha256": "183fe130561fc4393ea4ce86076825f881080e1fbdef3a7271983048f5876421",
+ "document": "Anja je v opombi zapisala, da so razmerja med dohodki in izdatki (v mesecu maju in juniju) nekoliko drugačna kot lani. Povprečje ni pokazalo velike spremembe, vendar je posamezen teden odstopil, kar je pritegnilo pozornost ekipi.\nPROJEKT=Siva dolina\nAVTOR=Ivan Mlakar\nPREDAL=3,2 m\nDELEŽ=0,88\nDODATNA_VAR=$drugim_ključem; 0,19\nOPIS=[*neodvisen*, _fragment_, https://primer.si/novica]\n<nalog id='sedmi' priornost='srednja' rok='7 dni'><korak ime='preverjanje'><ustvarjanje>0,13</ustvarjanje></korak></nalog>\n```\nseStez = 'https://primer.si/koda'; razdelek2 = 'src/modul.py'; HRAŠNA_VREDNOST = 7 # komentar v slovenščini: izmišljena oseba Ana, tema črn žir\n```\nnpm run preizkus\nNa Korčuli smo imeli dan brez načrtov; namesto tega smo se izprehodili po starem mestnem jedru in poslušali zgodbe o pomorskih potovanjih. V malem gostilniku so ponujali ribo, pečeno v papirju. Po jedi smo poskusili lokalno vino, ki je bilo rahlo sladko. Zvečer je pristan spet oživel, ko so se vrnila plovila. Naslednji zjutraj smo se odločili, da bomo pot nadaljevali po kopnem.",
+ "components": [
+  {
+   "component_id": "comp-prose-statistics-dev-0002",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 231
+  },
+  {
+   "component_id": "comp-structured-env-blocks-dev-0007",
+   "category": "structured",
+   "start_byte": 232,
+   "end_byte": 386
+  },
+  {
+   "component_id": "comp-structured-xml-dev-0007",
+   "category": "structured",
+   "start_byte": 387,
+   "end_byte": 509
+  },
+  {
+   "component_id": "comp-code-python-dev-0010",
+   "category": "code",
+   "start_byte": 510,
+   "end_byte": 667
+  },
+  {
+   "component_id": "comp-machine-shell-commands-dev-0005",
+   "category": "machine",
+   "start_byte": 668,
+   "end_byte": 684
+  },
+  {
+   "component_id": "comp-prose-travel-dev-0004",
+   "category": "prose",
+   "start_byte": 685,
+   "end_byte": 1072
+  }
+ ]
+}

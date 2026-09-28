@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-001278",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T3-prose-fenced-prose",
+ "byte_length": 920,
+ "cp_length": 907,
+ "sha256": "fa0e017cf8f900cb0ca5fef1be1a4d4ec2f33330b4c7e37805dc37cd6ecf463f",
+ "document": "V projektu Spomini doline je Anica Zorman zapisala, da so stari kmečki registri vsebovali opombe o pridelku, davkih in poplavah. Zapis so razdelili po letnicah, ne pa po dnevih, zato je besedilo preprosteje za primerjanje. Njen sopotnik Marko je dodal, da takšni listi ohranjajo glas lokalne skupnosti.\n```\n# Fragment 7: oseba: Luka Zupan, projekt *Mol*\necho 'Markdown: *zvezdice*, **poudarek**, _podčrtanje_'\necho 'Znesek: 20 $ in 1 € (izmišljeno)'\necho 'Koda: src/modul.py; dokument: docs/vir.txt'\necho 'URL: https://primer.si/koda'\necho 'Identi: seStez, razdelek2, HRAŠNA_VREDNOST'\necho 'Backquote `znak`, (oklepaj), č š ž'\n```\nV testnem projektu Spomin 2024 sta osebi Luka in Meta poudarila, da bolečine v vratu in ramenskem predelu niso vedno znak resnega stanja. Vendar pa je smiselno, da osebo sprejme zdravnik, zlasti če se pojavi omedlevica ali motnja govora (na primer ob nenadnem slabem počutju).",
+ "components": [
+  {
+   "component_id": "comp-prose-history-dev-0001",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 304
+  },
+  {
+   "component_id": "comp-code-shell-bash-dev-0007",
+   "category": "code",
+   "start_byte": 305,
+   "end_byte": 640
+  },
+  {
+   "component_id": "comp-prose-medicine-explainer-dev-0007",
+   "category": "prose",
+   "start_byte": 641,
+   "end_byte": 920
+  }
+ ]
+}

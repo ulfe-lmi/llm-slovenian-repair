@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-001686",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T4-heading-prose-table",
+ "byte_length": 576,
+ "cp_length": 563,
+ "sha256": "479c49f448ec3464c97b565c17a8f1e7b703e83ceaf86da997400c53654113ae",
+ "document": "## V projektu Nevtralna zdravstvena vsebina 2025 je Ana Kovač p\nNa Korčuli smo imeli dan brez načrtov; namesto tega smo se izprehodili po starem mestnem jedru in poslušali zgodbe o pomorskih potovanjih. V malem gostilniku so ponujali ribo, pečeno v papirju. Po jedi smo poskusili lokalno vino, ki je bilo rahlo sladko. Zvečer je pristan spet oživel, ko so se vrnila plovila. Naslednji zjutraj smo se odločili, da bomo pot nadaljevali po kopnem.\n| Opis | Vzorček |\n| --- | --- |\n| Pri izmišljenem projektu “Zvonovi Korošk | PROJEKT_IME=Siv_Jablan, ${PROJEKT_IME} |",
+ "components": [
+  {
+   "component_id": "comp-prose-medicine-explainer-dev-0006",
+   "category": "prose",
+   "start_byte": 3,
+   "end_byte": 64
+  },
+  {
+   "component_id": "comp-prose-travel-dev-0004",
+   "category": "prose",
+   "start_byte": 65,
+   "end_byte": 452
+  },
+  {
+   "component_id": "comp-prose-history-dev-0012",
+   "category": "prose",
+   "start_byte": 489,
+   "end_byte": 533
+  },
+  {
+   "component_id": "comp-machine-env-vars-dev-0006",
+   "category": "machine",
+   "start_byte": 536,
+   "end_byte": 574
+  }
+ ]
+}

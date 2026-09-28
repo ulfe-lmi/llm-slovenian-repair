@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-001238",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T7-prose-json-prose-latex",
+ "byte_length": 844,
+ "cp_length": 832,
+ "sha256": "c9503d0820d2ce797f1498065bbd67bec64553ed80ae2dac2712fe4be33ba89a",
+ "document": "V okviru projekta Nova vrv so otroci iz Ljubljane v petek zvečer vadili kratke podaje. Učiteljica Maja je opazila, da so po deset minutah teka vsi bolj sproščeni.\n{\"ime\":\"Oseba Ana\",\"vloga\":\"Koordinatorka\",\"stanje\":\"Aktivna 80 %\",\"avtorsko\":\"Nevtralna testna vsebina\",\"podrobnosti\":{\"visina\":\"3,5 m\",\"razmerje\":\"0,13\",\"opis\":\"*Preverjanje* https://primer.si/novica\"}}\nV prostoru projekta Tabor so preizkušali prenos toplote skozi plastine in merili spremembe, ko so dodali tanke plasti iz mešanih vlaken. Meritve so vodila dva študenta, Luka in Nika, ki sta zapisoval čase, temperature ter opazila rahlo meglico na robu vzorcev. Leta dvotisoč in devetindvajset, ko je bila soba še prenovljena, je v opombah stalo, da bo treba poskus ponoviti pri drugačni vlažnosti.\n\\[ \\begin{bmatrix} \\psi_1 & 3 \\\\ -7 & \\text{Bled} \\end{bmatrix} \\]",
+ "components": [
+  {
+   "component_id": "comp-prose-sports-dev-0011",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 166
+  },
+  {
+   "component_id": "comp-structured-json-dev-0002",
+   "category": "structured",
+   "start_byte": 167,
+   "end_byte": 371
+  },
+  {
+   "component_id": "comp-prose-science-dev-0004",
+   "category": "prose",
+   "start_byte": 372,
+   "end_byte": 777
+  },
+  {
+   "component_id": "comp-math-bracket-tex-dev-0004",
+   "category": "math",
+   "start_byte": 778,
+   "end_byte": 844
+  }
+ ]
+}

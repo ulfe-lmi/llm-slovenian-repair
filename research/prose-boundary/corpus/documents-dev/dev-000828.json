@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-000828",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T4-heading-prose-table",
+ "byte_length": 568,
+ "cp_length": 558,
+ "sha256": "61ff66f2e514dce9a109fa3b7f5788326669935d9fee5b471d12bfd8bca8d220",
+ "document": "## V sklopu testnega projekta je Peter opazoval skupino starejš\nKatarina in Jure sta v razredu elektronskih raziskav leta 2024 razpravljala o tem, kako sklepi in upornosti varujejo komponente pred prevelikim tokom. Pri poskusu s tremi različnimi baterijami sta opazila, da se žarnica pri višji napetosti svetli močneje, a se hitreje ogreje. Oba sta zapisala, da za varno vajo zadostujejo natančno merjenje, potrpežljivost in jasna shema.\n| Opis | Vzorček |\n| --- | --- |\n| Za šolsko uro sem pripravila zgodbo o dv | --vhod vir.txt, --izhod 2, --vzorčnost v |",
+ "components": [
+  {
+   "component_id": "comp-prose-sports-dev-0010",
+   "category": "prose",
+   "start_byte": 3,
+   "end_byte": 64
+  },
+  {
+   "component_id": "comp-prose-electronics-dev-0013",
+   "category": "prose",
+   "start_byte": 65,
+   "end_byte": 444
+  },
+  {
+   "component_id": "comp-prose-math-explainer-dev-0004",
+   "category": "prose",
+   "start_byte": 481,
+   "end_byte": 522
+  },
+  {
+   "component_id": "comp-machine-cli-flags-dev-0001",
+   "category": "machine",
+   "start_byte": 525,
+   "end_byte": 566
+  }
+ ]
+}

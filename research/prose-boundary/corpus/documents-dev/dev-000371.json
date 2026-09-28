@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-000371",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T9-prose-malformed-prose",
+ "byte_length": 614,
+ "cp_length": 596,
+ "sha256": "c8ec0c0f6400893e118c68ffdefc525dae5324e8bf4ecdc4efed9706a69e5800",
+ "document": "Varnostni vodič iz leta 2020 je zapisal, da se baterije nikoli ne smejo povezati v kratki sklep brez upornosti, in v vmesnem koraku je Luka preveril, ali so upornosti prave vrednosti. (Vse to je bilo del testne serije za projekt Vrtinec.)\n<b>Projekt Lipa: izmišljen test.\nBesedilo za projektovno avtorizacijo.\nV projektu Podgradski most so se strojni sklopi mosta (vleke, oprave in ležišča) v letu 2024 redno pregledovali. »Če je ležišče obrabljeno, ga ne smemo puščati v uporabo,« je opozoril mehanik Tomaž Golob. Ekipa je zamenjala ležišče in dodala novo mazilo, da bi zmanjšala hrup in obrabo.",
+ "components": [
+  {
+   "component_id": "comp-prose-electronics-dev-0009",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 239
+  },
+  {
+   "component_id": "comp-malformed-partial-html-dev-0001",
+   "category": "malformed",
+   "start_byte": 240,
+   "end_byte": 311
+  },
+  {
+   "component_id": "comp-prose-engineering-dev-0009",
+   "category": "prose",
+   "start_byte": 312,
+   "end_byte": 614
+  }
+ ]
+}

@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-000360",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T9-prose-malformed-prose",
+ "byte_length": 608,
+ "cp_length": 594,
+ "sha256": "291ce6c11cc4537e3e9d20cb9b117fb921916551fe5fefd90f1a693824884777",
+ "document": "V testni skupini je Luka baterijo namestil s pravim stikom na vrhu, nato pa preizkusil sklep z zgornjim in spodnjim stikom. Ko je sklep zaprl, se utripalka prižgala; ko ga je odprl, pa se je utripalka ugasnila. V pogovoru s mentorjem je rekel, da bo naslednjič poskusil drugo upornost.\n\n\\( z-4=0 . Testni zapis projekta Soteska za osebo Tina.\n\nV sklopu testnega projekta je Peter opazoval skupino starejših udeležencev. Njegova skupina je začela s petminutnim segrevanjem. Nato je izvedla tri krogove po travi. „Sodelavec,“ je vodja rekel, „v prihodnji uri bomo dodali še eno zmerno aktivnost.“",
+ "components": [
+  {
+   "component_id": "comp-prose-electronics-dev-0004",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 287
+  },
+  {
+   "component_id": "comp-malformed-incomplete-paren-bracket-dev-0003",
+   "category": "malformed",
+   "start_byte": 289,
+   "end_byte": 344
+  },
+  {
+   "component_id": "comp-prose-sports-dev-0010",
+   "category": "prose",
+   "start_byte": 346,
+   "end_byte": 608
+  }
+ ]
+}

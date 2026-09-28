@@ -1,0 +1,132 @@
+{
+ "doc_id": "dev-000832",
+ "byte_length": 512,
+ "cp_length": 499,
+ "regions": [
+  {
+   "start_byte": 0,
+   "end_byte": 2,
+   "start_cp": 0,
+   "end_cp": 2,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 2,
+   "end_byte": 204,
+   "start_cp": 2,
+   "end_cp": 194,
+   "component_id": "comp-prose-sports-dev-0012",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 204,
+   "end_byte": 205,
+   "start_cp": 194,
+   "end_cp": 195,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 205,
+   "end_byte": 206,
+   "start_cp": 195,
+   "end_cp": 196,
+   "component_id": "comp-code-c-dev-0005",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 206,
+   "end_byte": 266,
+   "start_cp": 196,
+   "end_cp": 256,
+   "component_id": "comp-code-c-dev-0005",
+   "category": "code",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 266,
+   "end_byte": 267,
+   "start_cp": 256,
+   "end_cp": 257,
+   "component_id": "comp-code-c-dev-0005",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 267,
+   "end_byte": 269,
+   "start_cp": 257,
+   "end_cp": 259,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 269,
+   "end_byte": 272,
+   "start_cp": 259,
+   "end_cp": 262,
+   "component_id": "comp-code-javascript-dev-0008",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 272,
+   "end_byte": 274,
+   "start_cp": 262,
+   "end_cp": 264,
+   "component_id": "comp-code-javascript-dev-0008",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 274,
+   "end_byte": 507,
+   "start_cp": 264,
+   "end_cp": 494,
+   "component_id": "comp-code-javascript-dev-0008",
+   "category": "code",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 507,
+   "end_byte": 509,
+   "start_cp": 494,
+   "end_cp": 496,
+   "component_id": "comp-code-javascript-dev-0008",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 509,
+   "end_byte": 512,
+   "start_cp": 496,
+   "end_cp": 499,
+   "component_id": "comp-code-javascript-dev-0008",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  }
+ ],
+ "invariants": {
+  "tiling_complete": true,
+  "no_contradictory_overlaps": true,
+  "cp_range_exact": true
+ }
+}

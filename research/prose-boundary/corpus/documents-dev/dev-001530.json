@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-001530",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T2-prose-math-prose",
+ "byte_length": 795,
+ "cp_length": 779,
+ "sha256": "9849f7cfc111f21368a4d6b0695f223148d9c4de024ec96c8e00c10003896163",
+ "document": "Evropska kratka zgodba, ki jo raziskuje izmišljeni projekt Bralna gibanja, pogosto uporabi motiv tveganja in ga stisne v nekaj stavkov. Izmišljena evropska avtorica Léa Durand napiše: »Samo en pogled je dovolj.«\n\\begin{equation} \\text{Testni projekt Petra} \\; : \\; \\sum_{\\kappa=1}^{3} \\kappa^2=1^2+2^2+3^2 \\Rightarrow \\sum_{\\kappa=1}^{3} \\kappa^2=14 \\end{equation}\nBiološki kolektiv pri projektu Križanec je v gozdu nad Celjem opazoval rast gliv po jutranji rosi. Med analizo vzorčkov (tri serije, vse z značko Z3) je dr. Marko Zupan opažil, da se nekatere hife ob dotiku zavrtijo, kar je v laboratoriju razložil s preprostimi mehanskimi odzivi. »To ni čarobno vedenje,« je dejal in dodal, da so za znanstvenika pogosto najpomembnejši tisti podrobnosti, ki jih drugi spregledajo.",
+ "components": [
+  {
+   "component_id": "comp-prose-literature-dev-0007",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 217
+  },
+  {
+   "component_id": "comp-math-equation-env-dev-0003",
+   "category": "math",
+   "start_byte": 218,
+   "end_byte": 370
+  },
+  {
+   "component_id": "comp-prose-science-dev-0012",
+   "category": "prose",
+   "start_byte": 371,
+   "end_byte": 795
+  }
+ ]
+}

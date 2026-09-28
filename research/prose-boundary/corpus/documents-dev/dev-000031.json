@@ -1,0 +1,53 @@
+{
+ "doc_id": "dev-000031",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T10-randomized",
+ "byte_length": 1567,
+ "cp_length": 1537,
+ "sha256": "6e83ba9f619310518eeaa2e13a84bedae66d3dd11d9fd2d6b350e2d4b2fbc878",
+ "document": "“Zelenjavna juha iz preteklega tedna ni bila le juha,” je zapisal Marko v projektu Kuhinjski razgledi, “temveč spomin na dedinovo polico, kjer so bile posode iz gline.” V receptu je bil pomemben tudi čas (čeprav manj natančen): koruzni pire, krompir in malo smetane, vse skupaj kuhano petnajst minut.\nV testnem projektu <b>Zelena gora</b> je <i>Matej Novak</i> preveril <span>5,4 kg</span> vzorca.<br/>Druga vrednost je 5,8 kg.\n$\\alpha_{\\text{Jana projekt Dol}} \\le \\beta_{\\text{Sava}} \\le \\gamma$\n--- {naziv: 'Projektna vsebina: **Raziskovalni projekt**', opis: 'Nevtralna vsebina z _podčrtjem_ in https://primer.si/novica', vrednosti: ['Uspešnost 80 %', 'Višina 7,2 m', 'Delež 0,05'], oseba: 'Izmišljena oseba: Katarina Vipotnik', projekt: 'Nevtralna testna vsebina'} # Fragment 8: raziskovalni projekt\n```\n/* Testni fragment 6: izmišljena oseba Petra, projekt Voda. */ SELECT 'Petra' AS `ime`, '6,40 $' AS `cena`, 'https://primer.si/koda' AS `url`, 'docs/nova.txt' AS `pot`, TRIM('*poudarek* in _podčrtano_') AS `opomba`, 'razdelek2' AS `razdelek2`, 'seStez' AS `seStez`, 'š' AS `HRAŠNA_VREDNOST` FROM (SELECT 6 AS `en`) AS `t` WHERE (`t`.`en` = 6);\n```\n\\sum_{\\psi=0}^{12} \\omega_{\\psi} + \\prod_{\\pi=1}^{7} \\Omega_{\\pi} \\text{Projekt}\nV projektu Nevtralna zdravstvena vsebina 2025 je Ana Kovač pripravila opombo o utrujenosti, ki ima lahko mnogo vzrokov. Ker telo na spremembe odziva različno, je koristno, da se oseba posvetuje z zdravnikom, še posebej če se stanje ponavlja. V takih primerih „splošna razlaga“ ne nadomesti pregleda.",
+ "components": [
+  {
+   "component_id": "comp-prose-cooking-dev-0003",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 312
+  },
+  {
+   "component_id": "comp-markdown-raw-html-dev-0002",
+   "category": "markdown",
+   "start_byte": 313,
+   "end_byte": 439
+  },
+  {
+   "component_id": "comp-math-inline-dollar-dev-0005",
+   "category": "math",
+   "start_byte": 440,
+   "end_byte": 509
+  },
+  {
+   "component_id": "comp-structured-yaml-dev-0008",
+   "category": "structured",
+   "start_byte": 510,
+   "end_byte": 821
+  },
+  {
+   "component_id": "comp-code-sql-dev-0006",
+   "category": "code",
+   "start_byte": 822,
+   "end_byte": 1177
+  },
+  {
+   "component_id": "comp-math-summations-dev-0006",
+   "category": "math",
+   "start_byte": 1178,
+   "end_byte": 1258
+  },
+  {
+   "component_id": "comp-prose-medicine-explainer-dev-0006",
+   "category": "prose",
+   "start_byte": 1259,
+   "end_byte": 1567
+  }
+ ]
+}

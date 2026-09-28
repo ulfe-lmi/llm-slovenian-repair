@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-001537",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T9-prose-malformed-prose",
+ "byte_length": 594,
+ "cp_length": 584,
+ "sha256": "07463a20615926048a375b3c4562ab915c5d8346cda8a748533f2ea8e7b995a5",
+ "document": "V občini Krkavec so leta 2023 preverili potek postopka za dovoljenje za majhno prodajno stojnico. Rok za oddajo dokumentov je bil petnajst dni, vendar so nekateri prijavniki poslali vprašanja že prej. Strokovna skupina je nato v zapisniku navedla, da je zahtevo mogoče dopolniti le z lastnoročnim podpisom.\n\n\\[ y=3 . Testni zapis projekta Brda za osebo Marko.\n\nV poročilu projekta Sova je Ana zabeležila, da je bil račun porabe preproster. Trije sodelavci so skupno porabili enaindevetdeset evrov. Po razmerju med porabo in sodelavci je povprečje za vsakega znašalo trideset tri evri.",
+ "components": [
+  {
+   "component_id": "comp-prose-administration-dev-0006",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 311
+  },
+  {
+   "component_id": "comp-malformed-incomplete-paren-bracket-dev-0002",
+   "category": "malformed",
+   "start_byte": 313,
+   "end_byte": 364
+  },
+  {
+   "component_id": "comp-prose-statistics-dev-0011",
+   "category": "prose",
+   "start_byte": 366,
+   "end_byte": 594
+  }
+ ]
+}

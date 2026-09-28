@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-001541",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T2-prose-math-prose",
+ "byte_length": 614,
+ "cp_length": 599,
+ "sha256": "3bd7c0d37a1f8406214fb3ce16ae84963ff4ac2b60b01bf570f9be5f10256935",
+ "document": "Petra je načrtovala kratek vikend v dolini Soče. Njen spremljevalec, Ivan, jo je peljal do smaragdne reke in starega gradu. »Vzemi lahke hlače,« je rekel pred odhodom. Vratila se je utrujena, a z dovolj fotografij.\n$$\\frac{\\xi}{\\eta - 2} = \\frac{8}{13} + \\alpha = \\text{Nova Gorica}$$\nSlovenska pesniška tradicija ima svojo tišino. V izmišljenem projektu Glas in tišina, ki raziskuje naravno, se pojavi motiv dreves. Izmišljena pesnica Anja Horvat v zbirki iz leta 2015 piše: »Drevo ne govori, a se v šumu zdi, da je vprašanje.« Ta stavek se v evropskem kontekstu pogosto pojavi kot znak identitete.",
+ "components": [
+  {
+   "component_id": "comp-prose-travel-dev-0013",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 219
+  },
+  {
+   "component_id": "comp-math-display-dollar-dev-0007",
+   "category": "math",
+   "start_byte": 220,
+   "end_byte": 289
+  },
+  {
+   "component_id": "comp-prose-literature-dev-0008",
+   "category": "prose",
+   "start_byte": 290,
+   "end_byte": 614
+  }
+ ]
+}

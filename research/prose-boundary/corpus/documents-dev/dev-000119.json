@@ -1,0 +1,71 @@
+{
+ "doc_id": "dev-000119",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T10-randomized",
+ "byte_length": 1267,
+ "cp_length": 1250,
+ "sha256": "54a97a024750cd2347e2b9f7c17da9520095eb6d94cdafbac843584c4b67a6fb",
+ "document": "V okviru projekta Reka je bila jeklena konstrukcija obnašala stabilno, tudi po močnem pihu. Most je bil dolg 412 metrov. Nosilci so bili premazani z epoksi premazom. Vetrovna obremenitev je bila izračunana za 30 let.\n$$z=3. Ivan Hrib preverja projekt Senca.\n```\nint main(void) { char *koda = \"Znak: `koda` (oklepaji)\"; char *valuta = \"Znesek: 5 $ in 10 EUR\"; char *rel = \"src/modul.py\"; char *oznaka = \"HRAŠNA_VREDNOST\"; (void)koda; (void)valuta; (void)rel; (void)oznaka; return 0; } /* Backquote in valuta */\n```\ncargo test\n```\n/* Preveri imenik (č, š, ž): src/modul.py in docs/vir.txt */ function opis(ime) { const tekst = `Ime: **${ime}**`; return tekst + ' - *opomba*'; } console.log(opis('Ana'));\n```\nhttp://izvor.si/dokument?stran=2\nmodul_pogon.py poročilo_q3.csv tabela_01.json vir_2024.txt\n\\begin{equation}\\begin{aligned}P_2 &= \\frac{\\alpha_2}{\\beta_2} \\times \\zeta_2 \\text{Projekt Lipa} \\\\Q_2 &= \\sum_{i=0}^{3} \\kappa_i \\theta_i\\end{aligned}\\end{equation}\n| Oseba | Enota | Čas |\n| --- | --- | --- |\n| Ana Kovač | s | 12 |\n| Bojan Zupan | min | 9 |\nAna je v razredni testni delavnici najprej preverila, ali je sklep odprt (tako je ohišje varno), in šele nato prižgala majhno utripalko. V zapisniku je zapisala „Preizkus 2024 je brez napake.“",
+ "components": [
+  {
+   "component_id": "comp-prose-engineering-dev-0003",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 219
+  },
+  {
+   "component_id": "comp-malformed-incomplete-display-dollar-dev-0003",
+   "category": "malformed",
+   "start_byte": 220,
+   "end_byte": 260
+  },
+  {
+   "component_id": "comp-code-c-dev-0004",
+   "category": "code",
+   "start_byte": 261,
+   "end_byte": 517
+  },
+  {
+   "component_id": "comp-machine-shell-commands-dev-0004",
+   "category": "machine",
+   "start_byte": 518,
+   "end_byte": 528
+  },
+  {
+   "component_id": "comp-code-javascript-dev-0007",
+   "category": "code",
+   "start_byte": 529,
+   "end_byte": 712
+  },
+  {
+   "component_id": "comp-machine-urls-dev-0002",
+   "category": "machine",
+   "start_byte": 713,
+   "end_byte": 745
+  },
+  {
+   "component_id": "comp-machine-filenames-dev-0008",
+   "category": "machine",
+   "start_byte": 746,
+   "end_byte": 805
+  },
+  {
+   "component_id": "comp-math-aligned-env-dev-0002",
+   "category": "math",
+   "start_byte": 806,
+   "end_byte": 972
+  },
+  {
+   "component_id": "comp-markdown-tables-dev-0007",
+   "category": "markdown",
+   "start_byte": 973,
+   "end_byte": 1067
+  },
+  {
+   "component_id": "comp-prose-electronics-dev-0001",
+   "category": "prose",
+   "start_byte": 1068,
+   "end_byte": 1267
+  }
+ ]
+}

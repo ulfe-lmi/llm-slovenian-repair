@@ -1,0 +1,65 @@
+{
+ "doc_id": "dev-002528",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T10-randomized",
+ "byte_length": 1450,
+ "cp_length": 1427,
+ "sha256": "b7d960b1d797298bdadd120af9f30d88a03c8cee6d9ff6d7d9913a22ec1f1513",
+ "document": "V projektu Mlajša šola je Nina pripravila kratke vaje, ki učencem omogočajo, da znanje preizkusijo v praksi (na primer pri izletu v mestno knjižnico). Učenci so radi dejali, da »se učimo brez strahu pred napako«, in učiteljica je to zapisala v letno knjižico. Pri izpitu iz slovenščine so namesto dolgih nalog dobili kratek pripovedni zapis, ki so ga lahko brali in pojasnjevali.\n$HOME_DIR $SLO_DOKUMENT\n~~~bash\n# oseba Kaja: vrednost 7 % in 2 enote\n~~~\n\n$$\\frac{\\pi}{\\lambda + \\mu} = 11 - \\nu = \\text{Projekt Soca}$$\n{\"ime\":\"Projekt Mesto\",\"površina\":\"120 m2\",\"avtorsko\":\"Nevtralna testna vsebina\",\"delež\":\"15 %\",\"opis\":{\"podrobnost\":\"**Testni podatki** https://primer.si/novica\"}}\n```\n-- Testni SQL fragment: razpoloži\nCREATE TABLE razpolozi (\n  id INT PRIMARY KEY,\n  \"seStez\" TEXT,\n  \"razdelek2\" TEXT,\n  opomba TEXT\n);\nINSERT INTO razpolozi (id, \"seStez\", \"razdelek2\", opomba)\nVALUES (1, '**poudarek** *zvezdice*', '_podčrtano_', '12 $ / dan');\nUPDATE razpolozi SET opomba = 'Vir: https://primer.si/koda' WHERE id = 1;\nSELECT id, \"seStez\", \"razdelek2\", opomba FROM razpolozi ORDER BY id;\n```\n> Projekt Riba, avtor *Maja*: temperatura 20 stopinj.\n> > Stanje je preverjeno.\n$20 je vrednost testnega opisa v projektu Gora Kresanja.\nLuka je dejal, da je funkcija kot mala kuhinja v veliki jedilnici. „Vgradi sestavine, počakaš in dobijoš posodo,« je rekel z nasmehom. Sodelavci so takoj videli, da se s tem izognemo ponavljanju.",
+ "components": [
+  {
+   "component_id": "comp-prose-education-dev-0011",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 392
+  },
+  {
+   "component_id": "comp-machine-env-vars-dev-0002",
+   "category": "machine",
+   "start_byte": 393,
+   "end_byte": 416
+  },
+  {
+   "component_id": "comp-markdown-fenced-code-dev-0004",
+   "category": "markdown",
+   "start_byte": 417,
+   "end_byte": 467
+  },
+  {
+   "component_id": "comp-math-display-dollar-dev-0006",
+   "category": "math",
+   "start_byte": 468,
+   "end_byte": 530
+  },
+  {
+   "component_id": "comp-structured-json-dev-0007",
+   "category": "structured",
+   "start_byte": 531,
+   "end_byte": 697
+  },
+  {
+   "component_id": "comp-code-sql-dev-0009",
+   "category": "code",
+   "start_byte": 698,
+   "end_byte": 1111
+  },
+  {
+   "component_id": "comp-markdown-blockquotes-dev-0008",
+   "category": "markdown",
+   "start_byte": 1112,
+   "end_byte": 1191
+  },
+  {
+   "component_id": "comp-malformed-unmatched-dollar-dev-0003",
+   "category": "malformed",
+   "start_byte": 1192,
+   "end_byte": 1248
+  },
+  {
+   "component_id": "comp-prose-programming-explainer-dev-0003",
+   "category": "prose",
+   "start_byte": 1249,
+   "end_byte": 1450
+  }
+ ]
+}

@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-002416",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T8-quote-fenced",
+ "byte_length": 660,
+ "cp_length": 644,
+ "sha256": "83c9e75e0e70de3f8e91fa8906d3c6e014fee1c9b52653336d44eb9b8382db49",
+ "document": "> Pri projektu Zvezdno seme je ekipa iz Maribora preučevala, kako se semena neznane rastline odzivajo na simulirano nočno svetlobo. V zvezku opomb so pisali (v naravnem tonu): »Spominja na polje po dežju, a brez vonja.« V letu 2023 so rezultat zapisali kot zanimivo, vendar še vedno nejasno. `-- Testni SQL fragment: razpoloži`\n```\nfn žir(razdelek2: i64) -> bool { /* Testni projekt Lipa: č, š, ž, *zvezdice* in _podčrtano_ */ let seStez = true; let HRAŠNA_VREDNOST = 2; let tekst = \"**Nova** (1 $) `č` _ž_\"; let pot = \"docs/vir.txt\"; let url = \"https://primer.si/koda\"; let _ = (HRAŠNA_VREDNOST, tekst, pot, url); seStez && razdelek2 > 0 }\n```",
+ "components": [
+  {
+   "component_id": "comp-prose-science-dev-0010",
+   "category": "prose",
+   "start_byte": 2,
+   "end_byte": 297
+  },
+  {
+   "component_id": "comp-code-sql-dev-0009",
+   "category": "code",
+   "start_byte": 298,
+   "end_byte": 334
+  },
+  {
+   "component_id": "comp-code-rust-dev-0004",
+   "category": "code",
+   "start_byte": 335,
+   "end_byte": 660
+  }
+ ]
+}

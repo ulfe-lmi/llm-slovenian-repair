@@ -1,0 +1,212 @@
+{
+ "doc_id": "dev-000784",
+ "byte_length": 630,
+ "cp_length": 620,
+ "regions": [
+  {
+   "start_byte": 0,
+   "end_byte": 3,
+   "start_cp": 0,
+   "end_cp": 3,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 3,
+   "end_byte": 64,
+   "start_cp": 3,
+   "end_cp": 63,
+   "component_id": "comp-prose-statistics-dev-0001",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 64,
+   "end_byte": 65,
+   "start_cp": 63,
+   "end_cp": 64,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 65,
+   "end_byte": 507,
+   "start_cp": 64,
+   "end_cp": 499,
+   "component_id": "comp-prose-sports-dev-0005",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 507,
+   "end_byte": 508,
+   "start_cp": 499,
+   "end_cp": 500,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 508,
+   "end_byte": 528,
+   "start_cp": 500,
+   "end_cp": 519,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 528,
+   "end_byte": 542,
+   "start_cp": 519,
+   "end_cp": 533,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 542,
+   "end_byte": 544,
+   "start_cp": 533,
+   "end_cp": 535,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 544,
+   "end_byte": 585,
+   "start_cp": 535,
+   "end_cp": 575,
+   "component_id": "comp-prose-medicine-explainer-dev-0011",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 585,
+   "end_byte": 588,
+   "start_cp": 575,
+   "end_cp": 578,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 588,
+   "end_byte": 591,
+   "start_cp": 578,
+   "end_cp": 581,
+   "component_id": "comp-machine-env-vars-dev-0007",
+   "category": "machine",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 591,
+   "end_byte": 592,
+   "start_cp": 581,
+   "end_cp": 582,
+   "component_id": "comp-machine-env-vars-dev-0007",
+   "category": "machine",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 592,
+   "end_byte": 605,
+   "start_cp": 582,
+   "end_cp": 595,
+   "component_id": "comp-machine-env-vars-dev-0007",
+   "category": "machine",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 605,
+   "end_byte": 606,
+   "start_cp": 595,
+   "end_cp": 596,
+   "component_id": "comp-machine-env-vars-dev-0007",
+   "category": "machine",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 606,
+   "end_byte": 607,
+   "start_cp": 596,
+   "end_cp": 597,
+   "component_id": "comp-machine-env-vars-dev-0007",
+   "category": "machine",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 607,
+   "end_byte": 620,
+   "start_cp": 597,
+   "end_cp": 610,
+   "component_id": "comp-machine-env-vars-dev-0007",
+   "category": "machine",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 620,
+   "end_byte": 621,
+   "start_cp": 610,
+   "end_cp": 611,
+   "component_id": "comp-machine-env-vars-dev-0007",
+   "category": "machine",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 621,
+   "end_byte": 622,
+   "start_cp": 611,
+   "end_cp": 612,
+   "component_id": "comp-machine-env-vars-dev-0007",
+   "category": "machine",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 622,
+   "end_byte": 628,
+   "start_cp": 612,
+   "end_cp": 618,
+   "component_id": "comp-machine-env-vars-dev-0007",
+   "category": "machine",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 628,
+   "end_byte": 630,
+   "start_cp": 618,
+   "end_cp": 620,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  }
+ ],
+ "invariants": {
+  "tiling_complete": true,
+  "no_contradictory_overlaps": true,
+  "cp_range_exact": true
+ }
+}

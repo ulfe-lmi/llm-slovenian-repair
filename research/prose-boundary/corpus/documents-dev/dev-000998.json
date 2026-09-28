@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-000998",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T9-prose-malformed-prose",
+ "byte_length": 803,
+ "cp_length": 789,
+ "sha256": "3680414369a18e8ba940c216059f05353539ad5564aa9758b9bf54c3a98b7ecb",
+ "document": "Luka, ki je vodil testni projekt Breza, je razložil, da spremenljivka nosi ime, vrednost pa pomeni, kaj se takrat zgodilo. (Steklenička s sokom pri tem dobro pokaže, kako se raven zniža.) Zanka nato vztraja, dokler pogoj ostane res, in funkcija povrne odgovor, »ja« ali »ne«, brez skritih pogojev.\n\n\\( z-4=0 . Testni zapis projekta Soteska za osebo Tina.\n\nV laboratoriju projekta Tiha vrtnica so letos opazili, da nekatere rastline ponoči bolj aktivno rastejo, kadar je zrak bolj vlažen. Biolog Marko Zupan je rekel: »To ni presenečenje, ampak nam pomaga razumeti, kako rast odzivno prilagaja vlagi.« V enem od sklicov za posveto so dodali še opombo, da je merilo za uspeh preprost odtok vode. Tudi majhne napake pri zapisih so bile sprejete, ker so pokazale zanimivo razliko med posodami.",
+ "components": [
+  {
+   "component_id": "comp-prose-programming-explainer-dev-0009",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 305
+  },
+  {
+   "component_id": "comp-malformed-incomplete-paren-bracket-dev-0003",
+   "category": "malformed",
+   "start_byte": 307,
+   "end_byte": 362
+  },
+  {
+   "component_id": "comp-prose-science-dev-0007",
+   "category": "prose",
+   "start_byte": 364,
+   "end_byte": 803
+  }
+ ]
+}

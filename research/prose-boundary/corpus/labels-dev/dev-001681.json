@@ -1,0 +1,172 @@
+{
+ "doc_id": "dev-001681",
+ "byte_length": 694,
+ "cp_length": 685,
+ "regions": [
+  {
+   "start_byte": 0,
+   "end_byte": 225,
+   "start_cp": 0,
+   "end_cp": 222,
+   "component_id": "comp-prose-electronics-dev-0008",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 225,
+   "end_byte": 226,
+   "start_cp": 222,
+   "end_cp": 223,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 226,
+   "end_byte": 384,
+   "start_cp": 223,
+   "end_cp": 378,
+   "component_id": "comp-structured-env-blocks-dev-0001",
+   "category": "structured",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 384,
+   "end_byte": 385,
+   "start_cp": 378,
+   "end_cp": 379,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 385,
+   "end_byte": 388,
+   "start_cp": 379,
+   "end_cp": 382,
+   "component_id": "comp-markdown-images-dev-0003",
+   "category": "markdown",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 388,
+   "end_byte": 396,
+   "start_cp": 382,
+   "end_cp": 390,
+   "component_id": "comp-markdown-images-dev-0003",
+   "category": "markdown",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 396,
+   "end_byte": 397,
+   "start_cp": 390,
+   "end_cp": 391,
+   "component_id": "comp-markdown-images-dev-0003",
+   "category": "markdown",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 397,
+   "end_byte": 466,
+   "start_cp": 391,
+   "end_cp": 460,
+   "component_id": "comp-markdown-images-dev-0003",
+   "category": "markdown",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 466,
+   "end_byte": 467,
+   "start_cp": 460,
+   "end_cp": 461,
+   "component_id": "comp-markdown-images-dev-0003",
+   "category": "markdown",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 467,
+   "end_byte": 508,
+   "start_cp": 461,
+   "end_cp": 501,
+   "component_id": "comp-markdown-images-dev-0003",
+   "category": "markdown",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 508,
+   "end_byte": 509,
+   "start_cp": 501,
+   "end_cp": 502,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 509,
+   "end_byte": 510,
+   "start_cp": 502,
+   "end_cp": 503,
+   "component_id": "comp-math-inline-dollar-dev-0004",
+   "category": "math",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 510,
+   "end_byte": 582,
+   "start_cp": 503,
+   "end_cp": 575,
+   "component_id": "comp-math-inline-dollar-dev-0004",
+   "category": "math",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 582,
+   "end_byte": 583,
+   "start_cp": 575,
+   "end_cp": 576,
+   "component_id": "comp-math-inline-dollar-dev-0004",
+   "category": "math",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 583,
+   "end_byte": 584,
+   "start_cp": 576,
+   "end_cp": 577,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 584,
+   "end_byte": 694,
+   "start_cp": 577,
+   "end_cp": 685,
+   "component_id": "comp-prose-programming-explainer-dev-0008",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  }
+ ],
+ "invariants": {
+  "tiling_complete": true,
+  "no_contradictory_overlaps": true,
+  "cp_range_exact": true
+ }
+}

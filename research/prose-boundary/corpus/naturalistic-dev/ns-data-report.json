@@ -1,0 +1,46 @@
+[
+ {
+  "case_id": "nat-data-report-dev-01",
+  "scenario": "ns-data-report",
+  "scenario_index": 13,
+  "instance": "dev",
+  "fragment": "Kratko poročilo – projekt Modro oko. Meritve je zbrala Anja Kralj v laboratoriju Sova 12. 3. ob 09:00, interval pa je znašal 5 min. Uporabljena je bila merska sonda Sova T1, čitalnik pa je podatke zbral z ukazi `sensor.read(\"temp_c\")` in `sensor.read(\"humidity_pct\")`.\n\n| Parametar | Vrednost | Enota |\n|---|---:|---|\n| Temperatura | 21,4 | °C |\n| Vlažnost | 45 | % |\n| Tok | 0,8 | A |\n| Napetost | 5,1 | V |\n\nInterpretacija: temperatura in vlažnost sta znotraj pričakovanega območja 18–24 °C ter 35–55 %. Tok je rahlo nad pričakovano vrednostjo 0,6 A, kar lahko pomeni večjo obremenitev ventilatorja. Priporočamo ponovitev meritve po 15 minutah in preveritev stikov. Seznam naslednjih korakov: - posodobiti dnevnik meritev, - izračunati povprečje, - arhivirati datoteko.",
+  "fragment_sha256": "fe937421c9fa0f57a7703806a4dd02ca7f5bd9180b73ef89042af7e6ad3f3e03",
+  "fragment_bytes": 791,
+  "prompt_sha256": "c4679b587fb5a60be487ec8a2b35a1f93c9ce9fe8f364f84f4caeb5425b468c0",
+  "seed": "fe94dc86f0d5626b"
+ },
+ {
+  "case_id": "nat-data-report-dev-02",
+  "scenario": "ns-data-report",
+  "scenario_index": 13,
+  "instance": "dev",
+  "fragment": "Kratko poročilo: projekt Sova, avtorji Luka in Maja. Meritve smo izvedli v vzorčnem laboratorju pri dnevni svetlobi. Podatki so zbrani z napravami `senzor_1`, `senzor_2` in `senzor_3` ob urah 9:00, 12:00 in 15:00. Tabela prikazuje osnovne vrednosti:\n| Naprava | Temperatura (°C) | Ogljikov dioksid (ppm) | Moč (mW) |\n| --- | --- | --- | --- |\n| `senzor_1` | 21,8 | 540 | 16,2 |\n| `senzor_2` | 22,3 | 575 | 17,9 |\n| `senzor_3` | 23,1 | 610 | 19,4 |\n\nInterpretacija: temperature so blizu sobnih, najvišja vrednost pa kaže rahlo segrevanje med popoldanskim delovanjem. Raven ogljikovega dioksida naraste, kar je skladno s povečanim številom ljudi v sobi. Moč poraste za okoli 2 mW, zato priporočamo kratko pavzo ali izklop neuporabljenih enot. Za preverjanje uporabimo enostavno kodo `srednja = (21,8 + 22,3 + 23,1) / 3` in `razlika = 23,1 - 21,8`. Naslednji koraki so v seznamu:\n- ponovimo meritve zjutraj,\n- preverimo kalibracijo senzorjev,\n- označimo anomalije v dnevniku.\nEkipa bo rezultate poimenovala kot izmerjeni vir in jih arhivirala v delovno mapo.",
+  "fragment_sha256": "e4a1bcb60d23cc6eb4aa10f6ee02b4ae3d03afbc9da3576d18ee225466135202",
+  "fragment_bytes": 1066,
+  "prompt_sha256": "c4679b587fb5a60be487ec8a2b35a1f93c9ce9fe8f364f84f4caeb5425b468c0",
+  "seed": "fe94dc86f0d5626b"
+ },
+ {
+  "case_id": "nat-data-report-dev-03",
+  "scenario": "ns-data-report",
+  "scenario_index": 13,
+  "instance": "dev",
+  "fragment": "V projektu Modra reka je Maja Kovač 12. maja izmerila stanje v razredu. Meritve so bile shranjene kot `T = 21.4 °C`, `RH = 48 %` in `U = 3.7 V`. Rezultati so prikazani v tabeli:\n\n| Meritev | Vrednost | Enota |\n|---|---:|---|\n| Temperatura | 21.4 | °C |\n| Vlažnost | 48 | % |\n| Napetost | 3.7 | V |\n\nInterpretacija: temperatura je primerna za delo, vlažnost je nekoliko nad idealno vrednostjo, zato bi bilo dobro prezračiti prostor. Napetost je znotraj pričakovanega obsega za senzor, ki ga hrani `A-103`. Naslednji koraki:\n- preveriti senzor pri 25.0 °C\n- ponoviti meritve vsako uro\n- beležiti podatke v dnevnik projekta.\n\nOpozorilo: meritve so izmišljene in so namenjene samo primeru.",
+  "fragment_sha256": "b9f3fdc82868ee2c0c2032ce9abcdf896db519c00098cd58e43fed7e50388999",
+  "fragment_bytes": 695,
+  "prompt_sha256": "c4679b587fb5a60be487ec8a2b35a1f93c9ce9fe8f364f84f4caeb5425b468c0",
+  "seed": "fe94dc86f0d5626b"
+ },
+ {
+  "case_id": "nat-data-report-dev-04",
+  "scenario": "ns-data-report",
+  "scenario_index": 13,
+  "instance": "dev",
+  "fragment": "Kratko poročilo za izmišljen projekt 'Modra reka' (vodi: Ana Kos) zajema tri meritve rabe električne energije v enem tednu. Meritve so bile opravljene z izmišljenimi senzori `s1`, `s2` in `s3`.\n\n| Dan | Raba (kWh) | Temperatura (°C) | Izgube (%) |\n| --- | --- | --- | --- |\n| ponedeljek | 112 | 21,4 | 6,8 |\n| četrtek | 98 | 22,1 | 5,3 |\n| nedelja | 86 | 21,9 | 4,1 |\n\nInterpretacija: Raba se je znižala z 112 na 86 kWh, kar predstavlja padec približno 23,2 %. Hkrati so se zmanjšale tudi izgube, zato sklepamo, da je izmišljen toplotni krog deloval bolj uravnoteženo. Najboljši dan je nedelja, ker je bila poraba najnižja in so bile izgube pod 5 %.\n\nKratki seznami:\n- `s1`: začetna kontrola\n- `s2`: kontrola v sredini tedna\n- `s3`: zaključna kontrola\n\nZa enostaven izpis povprečja uporabimo `python: meritve = [112, 98, 86]; print(sum(meritve)/len(meritve))`. Priporočamo ponoviti meritve zjutraj in zvečer ter ohraniti nastavitev `intenzivnost = 35 %`.",
+  "fragment_sha256": "c88756df6b3d12167e115cc23238d38804c4b692759a64507564ddcb3ffa34e7",
+  "fragment_bytes": 972,
+  "prompt_sha256": "c4679b587fb5a60be487ec8a2b35a1f93c9ce9fe8f364f84f4caeb5425b468c0",
+  "seed": "fe94dc86f0d5626b"
+ }
+]

@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-002074",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T7-prose-json-prose-latex",
+ "byte_length": 854,
+ "cp_length": 846,
+ "sha256": "588da3f8f2b89643354aaed9877203a069ed2fddf8b6a3fc9636e4095f404e24",
+ "document": "Varnostni vodič iz leta 2020 je zapisal, da se baterije nikoli ne smejo povezati v kratki sklep brez upornosti, in v vmesnem koraku je Luka preveril, ali so upornosti prave vrednosti. (Vse to je bilo del testne serije za projekt Vrtinec.)\n{\"ime\":\"Projekt Reka\",\"razmerje\":\"2,5 m / 0,13\",\"avtorsko\":\"Nevtralna testna vsebina\",\"vzorec\":{\"delež\":\"30 %\",\"opis\":\"_Nevtralno_ https://primer.si/novica\"}}\nVarčnost pri računih za ogrevanje v projektu Topla hiša ni vedno leva stvar, če je v prostoru prehladno. Leta 2023 so mnogi domovi dobili termometre, ki opozarjajo, ko temperatura pade pod 18 stopinj. (V takih dneh je bolje zapreti okno, ki ga obvečer nismo nujno potrebovali.) Pri starejših gradnjah je koristno preveriti tudi, ali se okno res dobro zapre.\n\\(\\text{ostanek} = \\alpha_{\\text{Nova}} + \\beta_{\\text{Mlaka}} - \\gamma_{\\text{Dve}} = 0\\)",
+ "components": [
+  {
+   "component_id": "comp-prose-electronics-dev-0009",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 239
+  },
+  {
+   "component_id": "comp-structured-json-dev-0004",
+   "category": "structured",
+   "start_byte": 240,
+   "end_byte": 399
+  },
+  {
+   "component_id": "comp-prose-everyday-advice-dev-0009",
+   "category": "prose",
+   "start_byte": 400,
+   "end_byte": 763
+  },
+  {
+   "component_id": "comp-math-text-slovenian-dev-0006",
+   "category": "math",
+   "start_byte": 764,
+   "end_byte": 854
+  }
+ ]
+}

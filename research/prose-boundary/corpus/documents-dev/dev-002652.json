@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-002652",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T2-prose-math-prose",
+ "byte_length": 649,
+ "cp_length": 638,
+ "sha256": "3717363a829687d6f18cecc04eb4e904620860463b33d8791a1d63372e132c6e",
+ "document": "V izmišljenem projektu Arhiv besed se motiv arhiva pojavi kot tiha zbirka pism, ki potujejo med slovenskimi in evropskimi mestoma. Izmišljeni avtor Martin Golob zgradi novelo iz treh stavkov. Njegova zgodba je tiha.\n\\(\\dfrac{7}{8}+\\frac{\\iota}{\\kappa}=\\text{Nina}\\)\nMed obiskom Dubrovnika v septembru 2024 smo obiskali stene mestnega obzidja (ki so bile to poletje izjemno obiskane), preden smo se popoldne izprehodili po stari četrti in se postopoma sprehodili do postajališča vrveža, ki je vodil do Srđ. Lokalna restavracija, ki smo jo izbrali naključno, je ponujala svež ribji rožž, pripravljen po tradicionalni recepturi iz leta 1980.",
+ "components": [
+  {
+   "component_id": "comp-prose-literature-dev-0010",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 217
+  },
+  {
+   "component_id": "comp-math-fractions-dev-0004",
+   "category": "math",
+   "start_byte": 218,
+   "end_byte": 267
+  },
+  {
+   "component_id": "comp-prose-travel-dev-0007",
+   "category": "prose",
+   "start_byte": 268,
+   "end_byte": 649
+  }
+ ]
+}

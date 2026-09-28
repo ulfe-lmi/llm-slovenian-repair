@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-002257",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T3-prose-fenced-prose",
+ "byte_length": 972,
+ "cp_length": 942,
+ "sha256": "c023ea85be90dff7cd812b1fd6679ff7348767a8e5479002a852e48c50933fd5",
+ "document": "Ko je Nika za projekt »Polno napajanje« preverjala obvestila, je opazila, da se aplikacija za vremensko napoved pozno obudila, če je telefon bil v šibkem omrežju (tudi ob številnih sporočilih). »Najprej napajanje«, je rekla njena sestra, »vse ostalo je opozorilo, ki lahko počaka do polnjenja.«\r\n```\r\n# Testni projekt: Besedilo; avtor: Maja Lipovnik\r\nbesedilo = 'Črka č, š in ž'\r\nprojekt = 'Izmišljen projekt Lipa'\r\noseba = 'Maja'\r\nif besedilo:\r\n    print(besedilo)\r\n```\r\nV letu 2022 je občina Šentvid na Vzorčni gori uvedla elektronsko predložitev dokumentov. Nekateri uporabniki so najprej raje oddali listne vloge, a so kasneje izbrali spletno obliko. V zapisniku, ki ga je podpisal magister Jožef Kranjc, so zapisali: „Postopek je pregleden”, in ga nato potrdili. Rok za odziv je bil deset dni, vendar so večino rešitev dokončali že v petih dneh. Tudi mnenje javnosti je bilo zmerno, saj so v anketi sodelovali trije od petih prebivalcev.",
+ "components": [
+  {
+   "component_id": "comp-prose-computing-dev-0009",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 306
+  },
+  {
+   "component_id": "comp-code-python-dev-0007",
+   "category": "code",
+   "start_byte": 308,
+   "end_byte": 487
+  },
+  {
+   "component_id": "comp-prose-administration-dev-0010",
+   "category": "prose",
+   "start_byte": 489,
+   "end_byte": 972
+  }
+ ]
+}

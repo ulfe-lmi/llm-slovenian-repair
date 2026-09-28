@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-001300",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T3-prose-fenced-prose",
+ "byte_length": 774,
+ "cp_length": 761,
+ "sha256": "4998f50cbbc99dd233331e85997e484ea3134d6163fa2490d4a6d8d5d61b4495",
+ "document": "Ana je poletja 2023 preživela ob Bledu in si ogledala grad. Vreme je bilo toplo, voda pa mirna kot steklo. Popoldne se je sprehodila do Špice in uživala v razgledu na jezero.\n```\n/* Testni podatki za izmišljen projekt Javornik */ const opis = { naslov: 'Označi *poudarek* in **pomembno**', podnaslov: '_opomba_', datum: '2026-01-15' }; console.log(opis.naslov);\n```\nUdeleženci projekta Otvorena vrata so v jeseni 2024 preizkusili učno sredo, v kateri je bil učbenik le ena od štirih podlag. Mladostnike je zanimalo, zakaj se isti izpit pri treh učiteljih razlikuje v razlagi (zlasti pri nalogah iz književnosti), zato so zapisali kratko pojasnilo. Na koncu so se dogovorili, da bo vsak odrasli udeleženec dobil eden sam pogovorni termin, ne pa dveh ločenih rok.",
+ "components": [
+  {
+   "component_id": "comp-prose-travel-dev-0006",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 177
+  },
+  {
+   "component_id": "comp-code-javascript-dev-0005",
+   "category": "code",
+   "start_byte": 178,
+   "end_byte": 370
+  },
+  {
+   "component_id": "comp-prose-education-dev-0010",
+   "category": "prose",
+   "start_byte": 371,
+   "end_byte": 774
+  }
+ ]
+}

@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-000127",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T7-prose-json-prose-latex",
+ "byte_length": 970,
+ "cp_length": 940,
+ "sha256": "69da846730e582e1387df7ca80e264adb7c3b185b12f7ea4d6e9150a145a9334",
+ "document": "Ana si je za projekt »Miren dan« izbrala prenosnik, ki naj bi bil dovolj tih, da ga lahko odpre v knjižnici (tudi če baterija ni polna). V »Ponovni sinhronizaciji« se ji je obljubil mirnejši dan, če omrežje ne bo puščalo zamud.\n{\"ime\":\"Projekt Reka\",\"razmerje\":\"2,5 m / 0,13\",\"avtorsko\":\"Nevtralna testna vsebina\",\"vzorec\":{\"delež\":\"30 %\",\"opis\":\"_Nevtralno_ https://primer.si/novica\"}}\n»To ni povprečje,« je dejal Marko, »ampak mediana, ki jo pogosto zamenjamo s povprečno vrednostjo.« Ko so se v razpravi projekta Glasnik pogovarjali o plačah, so na mizi omenili tudi srednjo vrednost (kot računsko povprečje). Sam visok znesek je povprečje potegnilo navzgor, medtem da je mediana ostala bližje vsakdanji izkušnji. »V razmerju med izplačili in stroški,« je dodal, »je treba paziti, kaj sploh merimo.«\n\\begin{align} \\alpha_5(\\text{Sonce}) &\\le \\beta_5 + \\gamma_5 \\\\ \\delta_5 &\\ge \\epsilon_5 \\times \\zeta_5 \\\\ \\eta_5 &= \\theta_5 \\end{align}",
+ "components": [
+  {
+   "component_id": "comp-prose-computing-dev-0006",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 238
+  },
+  {
+   "component_id": "comp-structured-json-dev-0004",
+   "category": "structured",
+   "start_byte": 239,
+   "end_byte": 398
+  },
+  {
+   "component_id": "comp-prose-statistics-dev-0012",
+   "category": "prose",
+   "start_byte": 399,
+   "end_byte": 832
+  },
+  {
+   "component_id": "comp-math-align-env-dev-0005",
+   "category": "math",
+   "start_byte": 833,
+   "end_byte": 970
+  }
+ ]
+}

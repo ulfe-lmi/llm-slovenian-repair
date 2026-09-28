@@ -1,0 +1,59 @@
+{
+ "doc_id": "dev-002770",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T10-randomized",
+ "byte_length": 1224,
+ "cp_length": 1199,
+ "sha256": "8d76e41c8bf6cccdc6f962f5cb749613edc40af4b6fc2f74dd7693e7c9aee9cc",
+ "document": "Med poskusom recepta za jagnjetino (po receptu Marice) je Peter v loncu najprej zvalil česen, rdečo papriko in malo olja. Vmes se je spomnil, da je leta 2021 obiskoval kmetijo, kjer so jagnjeta pasla po travniku. Nad meso je položil narezan krompir, pa tudi „malo soli, malo masla, malo časa“, kot mu je rekla mati.\nhttps://primer.si/stran/12\nMarko B.: Vzorčnik meri 0,75 l pri 30 °C, zapis pa je potrjen z **močno** in __podčrtim__ besedilom.\nFragment 5: <table><thead><tr><th>Projekt</th><th>Podatek</th></tr></thead><tbody><tr><td>Proj. Bora</td><td>*uspešnost* 98,2 % (glej <a href=\"https://primer.si/bora\">bora</a>)</td></tr><tr><td>Proj. Vena</td><td>_zanka_ 0,05 m</td></tr></tbody></table>\nC:/projekt/vir.py,D:\\datoteke\\vir.txt\npython3 preizkus.py --vhod ana.txt\nV testnem projektu <b>Siva reka</b> je <i>Luka Zupan</i> zapisal <span>12 l</span> vode.<br/>Druga vrednost je 10 l.\nLuka je za projekt »Čitljiv pregled« popoldne pripravljal predstavitev in opazil, da program za beležke včasih počaka, da se prek opozorila ponastavi. Zapisal si je, da je najprej varno shraniti spremembe, nato pa šele pritiskati na gumb »Posodobi«. S tem je rešil vprašanje, ali bo pregled slika ostal čitljiv.",
+ "components": [
+  {
+   "component_id": "comp-prose-cooking-dev-0012",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 323
+  },
+  {
+   "component_id": "comp-machine-urls-dev-0007",
+   "category": "machine",
+   "start_byte": 324,
+   "end_byte": 350
+  },
+  {
+   "component_id": "comp-markdown-strong-dev-0004",
+   "category": "markdown",
+   "start_byte": 351,
+   "end_byte": 455
+  },
+  {
+   "component_id": "comp-structured-html-dev-0005",
+   "category": "structured",
+   "start_byte": 456,
+   "end_byte": 710
+  },
+  {
+   "component_id": "comp-machine-windows-paths-dev-0004",
+   "category": "machine",
+   "start_byte": 711,
+   "end_byte": 748
+  },
+  {
+   "component_id": "comp-machine-shell-commands-dev-0003",
+   "category": "machine",
+   "start_byte": 749,
+   "end_byte": 783
+  },
+  {
+   "component_id": "comp-markdown-raw-html-dev-0003",
+   "category": "markdown",
+   "start_byte": 784,
+   "end_byte": 900
+  },
+  {
+   "component_id": "comp-prose-computing-dev-0007",
+   "category": "prose",
+   "start_byte": 901,
+   "end_byte": 1224
+  }
+ ]
+}

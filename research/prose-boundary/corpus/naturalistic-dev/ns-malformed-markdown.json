@@ -1,0 +1,68 @@
+[
+ {
+  "case_id": "nat-malformed-markdown-dev-01",
+  "scenario": "ns-malformed-markdown",
+  "scenario_index": 8,
+  "instance": "dev",
+  "fragment": "V projektu **Modri Gozd** je Ana skupaj s Petrom pripravila kratek pregled za nov teden. Cilj je poenostaviti delo skupine in ohraniti jasno strukturo zapisov. Skupina želi hitro preveriti, kateri deli so še odprti, in pripraviti skromno poročilo za vodjo.\n\n## Osnovne naloge\n- Zbiranje podatkov iz dnevnih zapisov\n- Preverjanje morebitnih napak v imenih\n- Priprava kratkega pregleda za sejo\n- Dodelitev odgovornih oseb\n\n## Primer kode\n```\nprojekt.modrigozd.preveri();\nprojekt.modrigozd.shrani();\n```\n\n| Korak | Odgovorna oseba | Status |\n|---|---|---|\n| Ideja | Peter | zaključeno |\n| Pregled | Ana | v teku |\n| Test | Maja | čaka |\n| Dodelitev | Luka | odprto |\n\nVeč o projektu si oglej na strani [ModriGozd](https://primer.si/modrigozd, kjer so navedeni tudi termini in kratka opomba za novo sezono. To je vse, kar potrebuješ za začetek. Če dodaš še dve minuti časa, bo pregled še bolj uporaben.",
+  "fragment_sha256": "3dd374d83215f8cd5a7e132197f35b26af67fe86ecd708e9b3a1b2aa7e11d5fe",
+  "fragment_bytes": 911,
+  "prompt_sha256": "2b3b69141ce80304c413528398a0573724891036ef4665bd7c3a4398815fe5c4",
+  "seed": "576ddc08148c3b89"
+ },
+ {
+  "case_id": "nat-malformed-markdown-dev-02",
+  "scenario": "ns-malformed-markdown",
+  "scenario_index": 8,
+  "instance": "dev",
+  "fragment": "# Poročilo o preizkusu projekta **Sončni vrt**\n\nV razvoju sodelujejo *Ana Kovač*, *Marko Novak* in *Luka Perovnik*. Namen orodja je poenostaviti evidenco zaloga v majhni izmišljeni trgovini z rastlinami. Orodje je še v fazi notranjega preizkusa, zato ga ne uporabljamo v prodaji. V prvem krogu smo preverili, kako orodje odziva na prazen seznam in na večje število postavk, ki jih vnaša prodajna ekipa ob koncu tedna. Rezultat je bil za tim sprejemljiv, a še vedno zahteva dodatno preverjanje.\n\n```python\n# preprosta kontrola zaloga\nzaloge = [\"lavanda\", 14, \"roza\", 6]\n\nfor i in range(0, len(zaloge), 2):\n    rastlina = zaloge[i]\n    kosov = zaloge[i + 1]\n    if kosov < 8:\n        print(f\"Naroči {rastlina}\")\n```\n\n| Podrobnost | Vrednost |\n| --- | ---: |\n| Različica | 0.3 |\n| Datum preizkusa | 12. 3. 2024 |\n| Ocena tima | 7,2/10 |\n\n## Koraki za uvajanje\n\n- zbiranje podatkov o zalogi vsak petek,\n- preverjanje pragov s skripto,\n- pregled poročila s timskim [kanal](primer.si/tim\n- posodobljena navodila za zaposlene.\n\n> Opozorilo: številke so izmišljene, zato se rezultati lahko razlikujejo od resnične trgovine.",
+  "fragment_sha256": "520a87e83272c615d94afda0452ff46c34d7c40a8f281ccd9dbcf8c9be17819f",
+  "fragment_bytes": 1130,
+  "prompt_sha256": "2b3b69141ce80304c413528398a0573724891036ef4665bd7c3a4398815fe5c4",
+  "seed": "576ddc08148c3b89"
+ },
+ {
+  "case_id": "nat-malformed-markdown-dev-03",
+  "scenario": "ns-malformed-markdown",
+  "scenario_index": 8,
+  "instance": "dev",
+  "fragment": "Za lažjo sledljivost predlagam, da ekipa projekta Molovska lampa vodi kratke dnevnike sprememb. Vodja Anja Kralj naj vsak petek povzet preglase s Luki Zupanom in Majo Petek. Namen je izogniti se dvojnim razmeram, ko se isti modul popravlja pri dveh osebah, brez jasne odgovornosti.\n\n| Področje | odgovorna oseba | status |\n|---|---|---|\n| raziskave | Luka Zupan | dokončano |\n| prototip | Maja Petek | v teku |\n| dokumentacija | Anja Kralj | načrtovano |\n\nKljučne točke:\n- vsak zapis naj traja manj kot tri minute\n- ime datoteke naj bo kratek in jedrnat opis\n- ob obnavljanju naj oseba označi staro različico\n- če ni odločitve, se zapis prenese v naslednji teden\n- pomembne povezave naj bodo vedno z jasnim imenom\n\nČe želimo hitrejši pregled, lahko uporabimo preprost skript:\n```python\ndef povzetek(projekt):\n    if projekt == 'Molovska lampa':\n        return 'prototip'\n    return 'neznano'",
+  "fragment_sha256": "c6e644bb83361bb91cb5989b8ac10cf022b75d0715bef86b383e7b90c87d9755",
+  "fragment_bytes": 904,
+  "prompt_sha256": "2b3b69141ce80304c413528398a0573724891036ef4665bd7c3a4398815fe5c4",
+  "seed": "576ddc08148c3b89"
+ },
+ {
+  "case_id": "nat-malformed-markdown-dev-04",
+  "scenario": "ns-malformed-markdown",
+  "scenario_index": 8,
+  "instance": "dev",
+  "fragment": "# Povzetek preskusa projekta Meh\n\nV tem kratkem poročilu povzemamo stanje projekta Meh, ki ga vodita Tina Zupan in Marko Novak. Cilj je preveriti, ali uporabniki lažje razumejo razpolago v skupinskih pogovorih.\n\nGlavne ugotovitve:\n- Vzorčena skupina: 12 posameznikov iz izmišljene skupine Brk.\n- Povprečna ocena jasnosti: 6,4 od 10.\n- Najpogostejša težava: prekratki povzetki.\n\n| Področje | Ocena | Opomba |\n|---|---:|---|\n| Razumljivost | 7,1 | Dobro za začetnike |\n| Hitrost | 5,8 | Potreben krajši tok |\n| Zanesljivost | 6,0 | Poskus v testni mreži |\n\nZa nadaljnje korake predlagamo [dokumentacija](https://example.si/meh/poročilo\n\nKoda za preprost prikaz:\n```python\ndef oceni_jasnost(tekst: str) -> float:\n    besede = len(tekst.split())\n    return min(10.0, 3.0 + besede * 0.05)\n```\n\nTina bo predlagala krajši uvod, Marko pa dodal primer razpologe. Občutek je, da je naslednji teden dober čas za ponovitev. Rezultat je dovolj jasen, da lahko ekipo prepričamo o priročniku.",
+  "fragment_sha256": "8522fb1f884476aa40284fcb2b1cfbfa1f2682e8ee77850cab2889a70a6d39f0",
+  "fragment_bytes": 994,
+  "prompt_sha256": "2b3b69141ce80304c413528398a0573724891036ef4665bd7c3a4398815fe5c4",
+  "seed": "576ddc08148c3b89"
+ },
+ {
+  "case_id": "nat-malformed-markdown-dev-05",
+  "scenario": "ns-malformed-markdown",
+  "scenario_index": 8,
+  "instance": "dev",
+  "fragment": "Za preizkus razvoja projekta **Zeleni Most** priporočam, da najprej ločiš tri glavne naloge. V projektu sodelujejo Ana Krajnc, Marko Perko in Tim Novak, vsak pa ima jasno vlogo.\n\n```python\ndef povzetek():\n    return \"ok\"\n```\n\n| Vloga | Oseba | Rok |\n| --- | --- | --- |\n| Analiza | Ana Krajnc | 12. marec 2026 |\n| Razvoj | Marko Perko | 15. marec 2026 |\n| Preizkus | Tim Novak | 18. marec 2026 |\n\n- Uveljavi imenik za testne datoteke.\n- Določi en sam slog imenovanja.\n- Dodaj opombo v branje za vsak modul.\n\nZa povezavo na dokumentacijo uporabi [interni vodnik](docs/vodnik\n\nZaključek: ta postavitev omogoča hitro preverjanje stanja, hkrati pa ohranja minimalno potrebno preprostost. Če bo treba, lahko dodamo še en stolpec za opombe ali ločimo seznam v ločeno podroben priročnik.",
+  "fragment_sha256": "a747339824db651ed51e8d5ad0a43d258233a3f99939c20b2e95a142580f0900",
+  "fragment_bytes": 791,
+  "prompt_sha256": "2b3b69141ce80304c413528398a0573724891036ef4665bd7c3a4398815fe5c4",
+  "seed": "576ddc08148c3b89"
+ },
+ {
+  "case_id": "nat-malformed-markdown-dev-06",
+  "scenario": "ns-malformed-markdown",
+  "scenario_index": 8,
+  "instance": "dev",
+  "fragment": "# Povzetek projekta Lebdja\n\nV timu za projekt Lebdja so Maja, Tine in Anka. Namen orodja je poenostaviti pregledovanje izmišljenih poročil. V ta namen smo pripravili majhno kodo:\n```\ndef povzemi(imeno):\n    if not imeno:\n        return \"brez naziva\"\n    return imeno.upper()\n\n| Oseba | Vloga | Rok |\n|---|---|---|\n| Maja | Vodja razvoja | 12. junij |\n| Tine | Preizkus podatkov | 14. junij |\n| Anka | Dokumentacija | 15. junij |\n\nGlavne smernice:\n- ohraniti jedrnost vmesnika\n- izogibati se nepotrebnim odvisnostim\n- dodati kratko pomoč v konzoli\n\nPovezava na izmišljen dnevnik: [dnevnik](dnevnik.md)\n\nZa konec: Lebdja naj deluje kot zbirka majhnih orodij, ne kot težko orodje. Prvi predlog je bil, da vsaka komponenta ima le eno odgovornost. Maja je predlagala, da se testira z zbirko treh fiktnih strank: Veternica, Skale in Loka. Tine je opozoril, da je pomembno ohraniti imena enostavna, Anka pa je poudarila jasnost sporočil. S tem se zaključuje kratki pregled.",
+  "fragment_sha256": "1c24aa93c4b678dee3083864868d45fda9d644311ad3617bb3bc4df61425daca",
+  "fragment_bytes": 973,
+  "prompt_sha256": "2b3b69141ce80304c413528398a0573724891036ef4665bd7c3a4398815fe5c4",
+  "seed": "576ddc08148c3b89"
+ }
+]

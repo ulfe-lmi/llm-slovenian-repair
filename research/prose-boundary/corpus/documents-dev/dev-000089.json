@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-000089",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T2-prose-math-prose",
+ "byte_length": 866,
+ "cp_length": 850,
+ "sha256": "568bbed14db3234947872ec1164008019f2f02a2d9ea757ee4aa8370c1029415",
+ "document": "Zavod Odrasli naprej je v letu 2021 pripravil kratke izobraževalne module za poklicno usposabljanje, pri čemer so strokovni vodje poudarili jasno strukturirane učbenike in vsakodnevne vaje. Po petih tednih so udeleženci opravili preizkus znanja, ki je imel 20 vprašanj, 10 praktičnih nalog in eno ustno obrazložitev.\n\\begin{align} \\alpha_7 &= \\lim_{\\beta_7 \\to 0} \\frac{\\gamma_7}{\\beta_7} \\\\ \\delta_7 &= \\nabla \\epsilon_7 \\\\ \\zeta_7 &= \\eta_7 \\cdot \\theta_7 \\end{align}\nV letu 2021 je ekipa izmišljenega projekta Jutranja svetloba v Ljubljani opazila, da se tanka plastična membrana ob segrevanju rahlo krivi. Raziskovalka Ana Kovač je zapisala, da bi lahko tak preprost pojav koristil pri razvoju tihih senzorjev (z vnosom: »brez zvočnega opozorila«). Po treh mesecih testov so si člani skupine privoščili kratki predah in nato spet zagnali meritve.",
+ "components": [
+  {
+   "component_id": "comp-prose-education-dev-0002",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 323
+  },
+  {
+   "component_id": "comp-math-align-env-dev-0007",
+   "category": "math",
+   "start_byte": 324,
+   "end_byte": 476
+  },
+  {
+   "component_id": "comp-prose-science-dev-0006",
+   "category": "prose",
+   "start_byte": 477,
+   "end_byte": 866
+  }
+ ]
+}

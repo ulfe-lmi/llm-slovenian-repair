@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-000112",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T3-prose-fenced-prose",
+ "byte_length": 875,
+ "cp_length": 849,
+ "sha256": "62330d29416cf2111f001ed62e22af76c6c1a722b0d4ee9293908d85417c94a2",
+ "document": "Luka je ob petku opoldne odigral prijateljski nogometni dvoboj na travniku. „Kolega,“ je trener rekel znavo, „v naslednji sezoni bomo potrebovali boljšo zvezo v obrambi.“\n```\n#include <string>\n// URL: https://primer.si/koda\n// Pot: src/modul.py, žlahtna\nstd::string vir() {\n    std::string url = \"https://primer.si/koda\";\n    std::string pot = \"docs/vir.txt\";\n    return url + \" \" + pot + \" (*test*)\";\n}\n```\nPri izmišljenem projektu “Zvonovi Koroške” (tudi testni vnos) so ugotovili, da so verske zgradbe hranile spomine, ki so jih ljudje obvezno prenašali iz roda v rod. Kratek zapis o letnici 1680, dolg le 120 znakov, je bil označen kot sporen. Uradnik Miha je dodal, da je “povest” pogosto lažna, a vseeno živi v spominu. Zato so v bazi ohranili tri različne verzije (enkrat kratko, enkrat dolgo in enkrat prekrčeno), ki se med seboj ne ujemajo.",
+ "components": [
+  {
+   "component_id": "comp-prose-sports-dev-0006",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 179
+  },
+  {
+   "component_id": "comp-code-cpp-dev-0006",
+   "category": "code",
+   "start_byte": 180,
+   "end_byte": 417
+  },
+  {
+   "component_id": "comp-prose-history-dev-0012",
+   "category": "prose",
+   "start_byte": 418,
+   "end_byte": 875
+  }
+ ]
+}

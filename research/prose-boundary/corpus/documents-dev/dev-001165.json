@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-001165",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T11-interactions",
+ "byte_length": 642,
+ "cp_length": 626,
+ "sha256": "f2830c164e789cf64bd6d87a3d8ff22b848cd0bd873d71ca6c04a9ce80d42b22",
+ "document": "`// Test: poročilo v izmišljenem projektu Jabolko.`.\n```\ndef seštej(a, b): return a + b, 'Povzetek: **pomembno** _podčrtano_ $5 (oklepaji) `kod`' # komentar v slovenščini: testni projekt, ž š č\n# komentar z \\frac{a}{b}\n```\nZahtevo so oddali v ponedeljek. V občini so jo prejeli isti dan, in sicer ob enajsti uri popoldne. Potrdilo z modro značko, ki je merila tri centimetre, so priložili k vsakemu vnosu v evidenco.\nPalermo, glavno mesto Sicilije, je leta 2022 ponujal nenavadno kombinacijo zvočnih ulic, barvitih tržnic in starinske arhitekture. Priporočamo obisk katedrale in sprehod po starem mestnem jedru, zlasti zvečer.",
+ "components": [
+  {
+   "component_id": "comp-code-rust-dev-0011",
+   "category": "code",
+   "start_byte": 0,
+   "end_byte": 53
+  },
+  {
+   "component_id": "comp-code-python-dev-0009",
+   "category": "code",
+   "start_byte": 55,
+   "end_byte": 231
+  },
+  {
+   "component_id": "comp-prose-administration-dev-0009",
+   "category": "prose",
+   "start_byte": 232,
+   "end_byte": 428
+  },
+  {
+   "component_id": "comp-prose-travel-dev-0010",
+   "category": "prose",
+   "start_byte": 429,
+   "end_byte": 642
+  }
+ ]
+}

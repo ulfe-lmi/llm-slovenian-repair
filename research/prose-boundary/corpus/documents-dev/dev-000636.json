@@ -1,0 +1,47 @@
+{
+ "doc_id": "dev-000636",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T10-randomized",
+ "byte_length": 1194,
+ "cp_length": 1175,
+ "sha256": "2a6486cee637fee9ca611079bae73b6d9b5a76da72184e8c278e5b54be73c941",
+ "document": "Marko je v testnem kotičku izbral dve upornosti, ju povezal z majhno baterijo in opazoval, da se sij utripalke rahlo spreminja. Njegova soseda v delavnici, Petra, je vprašala, ali je sklep res potreben. \"Da, pojasnil je, ker prekine tok, ko ga odpremo.\"\nDnevnik: ~~zamenjano~~ opombo 2 enoti in 90 % za Projekt Topol.\n```\n/* Primer 2: url in backquote */ int main(void) { const char *url = \"https://primer.si/koda\"; const char *opis = \"Znak `backquote`, pot: src/modul.py, črka š\"; int razdelek2 = 7; const char *opozorilo = \"Opomba: *nevarno* in _poudarek_\"; (void)url; (void)opis; (void)opozorilo; return razdelek2; }\n```\n| Oseba | Enota | Čas |\n| --- | --- | --- |\n| Ana Kovač | s | 12 |\n| Bojan Zupan | min | 9 |\n\\begin{equation}\\begin{aligned}R_3 &= \\int_0^1 \\eta(x) \\, dx \\text{Izmišljen vzor} \\\\S_3 &= \\lim_{n \\to \\infty} \\frac{1}{n} \\sqrt{n^2+1}\\end{aligned}\\end{equation}\nKo je Nika za projekt »Polno napajanje« preverjala obvestila, je opazila, da se aplikacija za vremensko napoved pozno obudila, če je telefon bil v šibkem omrežju (tudi ob številnih sporočilih). »Najprej napajanje«, je rekla njena sestra, »vse ostalo je opozorilo, ki lahko počaka do polnjenja.«",
+ "components": [
+  {
+   "component_id": "comp-prose-electronics-dev-0002",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 255
+  },
+  {
+   "component_id": "comp-markdown-strikethrough-dev-0007",
+   "category": "markdown",
+   "start_byte": 256,
+   "end_byte": 319
+  },
+  {
+   "component_id": "comp-code-c-dev-0010",
+   "category": "code",
+   "start_byte": 320,
+   "end_byte": 627
+  },
+  {
+   "component_id": "comp-markdown-tables-dev-0007",
+   "category": "markdown",
+   "start_byte": 628,
+   "end_byte": 722
+  },
+  {
+   "component_id": "comp-math-aligned-env-dev-0003",
+   "category": "math",
+   "start_byte": 723,
+   "end_byte": 887
+  },
+  {
+   "component_id": "comp-prose-computing-dev-0009",
+   "category": "prose",
+   "start_byte": 888,
+   "end_byte": 1194
+  }
+ ]
+}

@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-002740",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T2-prose-math-prose",
+ "byte_length": 777,
+ "cp_length": 764,
+ "sha256": "00fa08f01bd8a041c72675083b9623d31e84ddc49a3e507b3e50222e9c8afbf4",
+ "document": "Kadar učenci rešujejo enačbe, jim je koristno, da najprej povežejo oba dela z istimi dejanji, da ostane zvezek ravnovesja (kot pri tehtnici). Pri projektu Šolske številke so v letu 2021 poskusili z besedilnimi nalogami, v katerih je neznanka skrita v vsakdanji razgovoru. Zaradi tega se učenci naučijo, da razlaga ni le zapis, ampak način misljenja.\n\\begin{equation} \\text{Testni projekt Petra} \\; : \\; \\sum_{\\kappa=1}^{3} \\kappa^2=1^2+2^2+3^2 \\Rightarrow \\sum_{\\kappa=1}^{3} \\kappa^2=14 \\end{equation}\nV projektu Mlin 2018 je Luka preveril, koliko je povprečno trajala čakalna vrsta. Ko so trije prostovoljci dodali svoje opazke, se je slika izkazala za bolj uravnoteženo. Po njegovem mnenju je bistvo v tem, da se številka ne bere sama, ampak potrebuje kontekst.",
+ "components": [
+  {
+   "component_id": "comp-prose-math-explainer-dev-0006",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 358
+  },
+  {
+   "component_id": "comp-math-equation-env-dev-0003",
+   "category": "math",
+   "start_byte": 359,
+   "end_byte": 511
+  },
+  {
+   "component_id": "comp-prose-statistics-dev-0001",
+   "category": "prose",
+   "start_byte": 512,
+   "end_byte": 777
+  }
+ ]
+}

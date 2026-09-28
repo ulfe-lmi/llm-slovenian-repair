@@ -1,0 +1,53 @@
+{
+ "doc_id": "dev-001296",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T10-randomized",
+ "byte_length": 1193,
+ "cp_length": 1166,
+ "sha256": "984c9b1f4b8062a19c3687531474fb44c2a1ecace8537bd5dd9476b9a5490c54",
+ "document": "Maja iz Maribora je za tečaj pogovorne angleščine pripravila delavnice, pri katerih so se udeleženci sami odločili, ali znanje dokazujejo s pisnim delom ali s kratkim posnetim predavanjem. Pri vprašanju “kako oceniti napredek” so se dogovorili, da udeležencem (predvsem zaposlenim) velja tudi dnevnik samopregleda.\n$$x=1. Ana Zupan preverja projekt Lipa.\n--- {naziv: 'Projektna vsebina: **Raziskovalni projekt**', opis: 'Nevtralna vsebina z _podčrtjem_ in https://primer.si/novica', vrednosti: ['Uspešnost 80 %', 'Višina 7,2 m', 'Delež 0,05'], oseba: 'Izmišljena oseba: Katarina Vipotnik', projekt: 'Nevtralna testna vsebina'} # Fragment 8: raziskovalni projekt\n***Trobna** brez zapora.\nTestni projekt: Lesena miza. Osebna: Marko Zupan.\n## Testni projekt Marjeta\n### Meritev 12 enot\n#### Opomba 3 dni\n$HOME_DIR $SLO_DOKUMENT\nV projektu Vzorčni napisi 2025 je Petra zapisala, da se pri nespečnosti pogosto omenjajo navade, hrana in okolje, vendar ni mogoče zanesljivo napovedati vzroka brez pogovora. Zato v takih primerih svetujemo, da se oseba obrne na zdravnika ali medicinsko sestro, zlasti če se pojavi huda slabost, oteženo dihanje ali „nenadno slabše počutje“.",
+ "components": [
+  {
+   "component_id": "comp-prose-education-dev-0007",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 325
+  },
+  {
+   "component_id": "comp-malformed-incomplete-display-dollar-dev-0001",
+   "category": "malformed",
+   "start_byte": 326,
+   "end_byte": 365
+  },
+  {
+   "component_id": "comp-structured-yaml-dev-0008",
+   "category": "structured",
+   "start_byte": 366,
+   "end_byte": 677
+  },
+  {
+   "component_id": "comp-malformed-malformed-nesting-dev-0002",
+   "category": "malformed",
+   "start_byte": 678,
+   "end_byte": 752
+  },
+  {
+   "component_id": "comp-markdown-headings-dev-0009",
+   "category": "markdown",
+   "start_byte": 753,
+   "end_byte": 816
+  },
+  {
+   "component_id": "comp-machine-env-vars-dev-0002",
+   "category": "machine",
+   "start_byte": 817,
+   "end_byte": 840
+  },
+  {
+   "component_id": "comp-prose-medicine-explainer-dev-0010",
+   "category": "prose",
+   "start_byte": 841,
+   "end_byte": 1193
+  }
+ ]
+}

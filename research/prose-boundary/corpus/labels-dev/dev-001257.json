@@ -1,0 +1,132 @@
+{
+ "doc_id": "dev-001257",
+ "byte_length": 480,
+ "cp_length": 473,
+ "regions": [
+  {
+   "start_byte": 0,
+   "end_byte": 3,
+   "start_cp": 0,
+   "end_cp": 3,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 3,
+   "end_byte": 64,
+   "start_cp": 3,
+   "end_cp": 63,
+   "component_id": "comp-prose-electronics-dev-0003",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 64,
+   "end_byte": 66,
+   "start_cp": 63,
+   "end_cp": 65,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 66,
+   "end_byte": 386,
+   "start_cp": 65,
+   "end_cp": 380,
+   "component_id": "comp-prose-engineering-dev-0010",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 386,
+   "end_byte": 388,
+   "start_cp": 380,
+   "end_cp": 382,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 388,
+   "end_byte": 409,
+   "start_cp": 382,
+   "end_cp": 402,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 409,
+   "end_byte": 424,
+   "start_cp": 402,
+   "end_cp": 417,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 424,
+   "end_byte": 426,
+   "start_cp": 417,
+   "end_cp": 419,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 426,
+   "end_byte": 466,
+   "start_cp": 419,
+   "end_cp": 459,
+   "component_id": "comp-prose-engineering-dev-0006",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 466,
+   "end_byte": 469,
+   "start_cp": 459,
+   "end_cp": 462,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 469,
+   "end_byte": 478,
+   "start_cp": 462,
+   "end_cp": 471,
+   "component_id": "comp-machine-identifiers-dev-0002",
+   "category": "machine",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 478,
+   "end_byte": 480,
+   "start_cp": 471,
+   "end_cp": 473,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  }
+ ],
+ "invariants": {
+  "tiling_complete": true,
+  "no_contradictory_overlaps": true,
+  "cp_range_exact": true
+ }
+}

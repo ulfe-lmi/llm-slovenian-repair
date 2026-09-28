@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-001867",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T9-prose-malformed-prose",
+ "byte_length": 852,
+ "cp_length": 833,
+ "sha256": "3d4825c94e01954511879fed20683c407736f406df7bb33305a90faf7dbc3802",
+ "document": "\"Če bi imeli čas, bi rekla, da je Kranj podcenjeno središče, zlasti v času festivala,\" je povedala Katja, medtem ko je opazovala, kako sonce zahaja nad Ljubljano. Naslednji dan smo se odpravili proti Istrskim vinogradiščem, kjer smo okusili lokalno belo vino in se naučili nekaj o letini 2021, ki je bila znana po svoji odlični kakovosti.\n\n\\begin{align} x &= 1, nevtralna testna vsebina za izmišljen projekt Sončni cvet, avtorica Ana Krajnar.\n\nV kopeli na Trgu v novembru 2024 je potekal kratki rekreativni plavalni tečaj, v katerem so trije poskusi (plavanje na hrbtno, na prsi in s sproščeno dihanjem) trajali skupaj dvajset minut. Udeleženka, ki jo je projekt opisal kot Maja, je po prvem krogu dejala, da je voda morda hladnejša, kot se je zdelo. 'Največja korist je, da se je telo pomirilo,' je zaključila brez vsakršne pohvale.",
+ "components": [
+  {
+   "component_id": "comp-prose-travel-dev-0008",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 347
+  },
+  {
+   "component_id": "comp-malformed-unclosed-tex-env-dev-0001",
+   "category": "malformed",
+   "start_byte": 349,
+   "end_byte": 453
+  },
+  {
+   "component_id": "comp-prose-sports-dev-0003",
+   "category": "prose",
+   "start_byte": 455,
+   "end_byte": 852
+  }
+ ]
+}

@@ -1,0 +1,82 @@
+{
+ "doc_id": "dev-001343",
+ "byte_length": 806,
+ "cp_length": 785,
+ "regions": [
+  {
+   "start_byte": 0,
+   "end_byte": 255,
+   "start_cp": 0,
+   "end_cp": 245,
+   "component_id": "comp-prose-everyday-advice-dev-0008",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 255,
+   "end_byte": 256,
+   "start_cp": 245,
+   "end_cp": 246,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 256,
+   "end_byte": 269,
+   "start_cp": 246,
+   "end_cp": 259,
+   "component_id": "comp-math-align-env-dev-0002",
+   "category": "math",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 269,
+   "end_byte": 393,
+   "start_cp": 259,
+   "end_cp": 383,
+   "component_id": "comp-math-align-env-dev-0002",
+   "category": "math",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 393,
+   "end_byte": 404,
+   "start_cp": 383,
+   "end_cp": 394,
+   "component_id": "comp-math-align-env-dev-0002",
+   "category": "math",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 404,
+   "end_byte": 405,
+   "start_cp": 394,
+   "end_cp": 395,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 405,
+   "end_byte": 806,
+   "start_cp": 395,
+   "end_cp": 785,
+   "component_id": "comp-prose-science-dev-0011",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  }
+ ],
+ "invariants": {
+  "tiling_complete": true,
+  "no_contradictory_overlaps": true,
+  "cp_range_exact": true
+ }
+}

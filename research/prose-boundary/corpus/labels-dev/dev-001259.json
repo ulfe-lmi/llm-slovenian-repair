@@ -1,0 +1,102 @@
+{
+ "doc_id": "dev-001259",
+ "byte_length": 666,
+ "cp_length": 645,
+ "regions": [
+  {
+   "start_byte": 0,
+   "end_byte": 338,
+   "start_cp": 0,
+   "end_cp": 326,
+   "component_id": "comp-prose-math-explainer-dev-0009",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 338,
+   "end_byte": 339,
+   "start_cp": 326,
+   "end_cp": 327,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 339,
+   "end_byte": 340,
+   "start_cp": 327,
+   "end_cp": 328,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 340,
+   "end_byte": 371,
+   "start_cp": 328,
+   "end_cp": 358,
+   "component_id": "comp-prose-math-explainer-dev-0002",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 371,
+   "end_byte": 373,
+   "start_cp": 358,
+   "end_cp": 360,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 373,
+   "end_byte": 399,
+   "start_cp": 360,
+   "end_cp": 386,
+   "component_id": "comp-machine-urls-dev-0007",
+   "category": "machine",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 399,
+   "end_byte": 400,
+   "start_cp": 386,
+   "end_cp": 387,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 400,
+   "end_byte": 401,
+   "start_cp": 387,
+   "end_cp": 388,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 401,
+   "end_byte": 666,
+   "start_cp": 388,
+   "end_cp": 645,
+   "component_id": "comp-prose-math-explainer-dev-0002",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  }
+ ],
+ "invariants": {
+  "tiling_complete": true,
+  "no_contradictory_overlaps": true,
+  "cp_range_exact": true
+ }
+}

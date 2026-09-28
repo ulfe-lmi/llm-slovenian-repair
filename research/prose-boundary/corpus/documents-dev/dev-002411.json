@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-002411",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T3-prose-fenced-prose",
+ "byte_length": 1002,
+ "cp_length": 978,
+ "sha256": "3056f850ab27d13d3a8507d8ab4a216af9a160468297949c124094d11e62da0f",
+ "document": "Maja (2022) je v projektu Ljubljanska potopisna zanka pojasnila, da zanka lahko obravnava vrsto dogodkov, dokler ni izpolnjen pogoj, in da funkcija obdaja pogoste korake v eno imeno. V tem razumevanju spremenljivka ni le število, ampak tudi ime za stanje, ki se med potekom spreminja, kar olajša prenos med koraki.\n```\n# Fragment 1: testni zapis *Zvezda* (neodvisen)\necho 'Niz: **poudarek** in _podčrtano_ (oklepaji)'\necho 'Valuta: 5 $ in 3 € za izmišljen projekt'\necho 'Poti: src/modul.py in docs/vir.txt'\necho 'Znak: backquote `test` in URL https://primer.si/koda'\necho 'Id: seStez, razdelek2, HRAŠNA_VREDNOST'\necho 'Slovenski znaki: č š ž'\n```\nSara je pojasnila, da se povprečje včasih zdi napačno, če manjkajo posamezni dnevi. “V takih primerih je bolje reči, da je slika neenakomerna,“ je dodala in pokazala še stolpec z najmanjšo vrednostjo. Skupina se je odločila, da bo za leto 2025 zbrala tudi podatke o vremenu. Tako bo lažje razložila razmerja med posameznimi tedeni.",
+ "components": [
+  {
+   "component_id": "comp-prose-programming-explainer-dev-0013",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 316
+  },
+  {
+   "component_id": "comp-code-shell-bash-dev-0001",
+   "category": "code",
+   "start_byte": 317,
+   "end_byte": 656
+  },
+  {
+   "component_id": "comp-prose-statistics-dev-0005",
+   "category": "prose",
+   "start_byte": 657,
+   "end_byte": 1002
+  }
+ ]
+}

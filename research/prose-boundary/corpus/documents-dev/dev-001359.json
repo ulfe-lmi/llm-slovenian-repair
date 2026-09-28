@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-001359",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T7-prose-json-prose-latex",
+ "byte_length": 1110,
+ "cp_length": 1098,
+ "sha256": "7d16286b4dbd188ec7fd4c450789a75f0617d7c23286297ddbcc7aafa2d15ad0",
+ "document": "Luka je poskušal sestaviti majhno svetilko in je ob tem zamenjal dve upornosti, kar je spremenilo sij. V opombi (datum: 12. marec 2025) je navedel, da baterija po dolgi rabi zmanjša napetost, zato se element hitreje utruši. Pozneje je preizkusil novo ploščico, jo preveril s merilcem in ugotovil, da je stik pri sponki ohlapen. »Moram preveriti vez,« je rekel in poskrbel za varno montažo.\n{\"ime\":\"Oseba Ana\",\"vloga\":\"Koordinatorka\",\"stanje\":\"Aktivna 80 %\",\"avtorsko\":\"Nevtralna testna vsebina\",\"podrobnosti\":{\"visina\":\"3,5 m\",\"razmerje\":\"0,13\",\"opis\":\"*Preverjanje* https://primer.si/novica\"}}\nV Ljubljani sem se s projektom Zeleni otok podal h Trgu republike (nekaj metrov od Kamnitega mostu). Na dvorišču so nas sprejeli z rahlim zamikom, saj je bilo dvigalo zasedeno. V razstavi smo videli modele, ki so prikazovali potovanja po reki od 1980-ih let. Popoldne smo se odločili za kavo ob trgu, medtem ko so se otroci igrali v parku.\n\\begin{equation}\\begin{aligned}R_3 &= \\int_0^1 \\eta(x) \\, dx \\text{Izmišljen vzor} \\\\S_3 &= \\lim_{n \\to \\infty} \\frac{1}{n} \\sqrt{n^2+1}\\end{aligned}\\end{equation}",
+ "components": [
+  {
+   "component_id": "comp-prose-electronics-dev-0012",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 397
+  },
+  {
+   "component_id": "comp-structured-json-dev-0002",
+   "category": "structured",
+   "start_byte": 398,
+   "end_byte": 602
+  },
+  {
+   "component_id": "comp-prose-travel-dev-0003",
+   "category": "prose",
+   "start_byte": 603,
+   "end_byte": 945
+  },
+  {
+   "component_id": "comp-math-aligned-env-dev-0003",
+   "category": "math",
+   "start_byte": 946,
+   "end_byte": 1110
+  }
+ ]
+}

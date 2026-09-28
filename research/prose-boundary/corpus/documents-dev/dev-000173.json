@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-000173",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T9-prose-malformed-prose",
+ "byte_length": 954,
+ "cp_length": 938,
+ "sha256": "6f5a3fb699105fde2fe07f8a003774014944f535357eed00f2de0260f7cba147",
+ "document": "V projektu Osnovne šole Lipica učitelji (zlasti Ana Kovač) raje uporabljajo projektno delo, da učenci spoznajo, kako znanje deluje v vsakdanju. Po besedah razredne voditeljice je najpomembnejše, da otroci pri vsaki nalogi »razložijo, zakaj so ravno tako postopali«. Pri testnem izpitu iz naravoslovja so zato združili pisni del z ustno obravnavo dveh preprostih primerov iz šolskega vrta.\n\n\\begin{align} x &= 1, nevtralna testna vsebina za izmišljen projekt Sončni cvet, avtorica Ana Krajnar.\n\nSpremenljivka v projektu Lipa deluje kot imenovan koš, v katerega učenci hranijo številko, ime ali celo kratek zapis. Ko se njena vsebina zamenja, se odziv programa spremeni, zato Anja pri vadbi vedno najprej preveri, kaj se skriva za imenom. Zanka je ponavljajoč se korak, ki deluje, dokler se pogoj ne izpolni. Funkcija je pa majhno pravilo, ki sprejme nekaj podatkov in vrne jasen rezultat, kot da bi ga Luka ponovno uporil brez ponavljanja.",
+ "components": [
+  {
+   "component_id": "comp-prose-education-dev-0001",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 398
+  },
+  {
+   "component_id": "comp-malformed-unclosed-tex-env-dev-0001",
+   "category": "malformed",
+   "start_byte": 400,
+   "end_byte": 504
+  },
+  {
+   "component_id": "comp-prose-programming-explainer-dev-0006",
+   "category": "prose",
+   "start_byte": 506,
+   "end_byte": 954
+  }
+ ]
+}

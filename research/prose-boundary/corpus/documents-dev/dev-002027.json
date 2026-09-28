@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-002027",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T4-heading-prose-table",
+ "byte_length": 641,
+ "cp_length": 623,
+ "sha256": "2ea261c7791b4768a5794645739aa11ec47d90911b836e58e51848581bb0b89d",
+ "document": "## Loj je v skledi mirno segel. Ropova jaha (kot jo pišejo doma\nPri izmišljenem projektu “Zvonovi Koroške” (tudi testni vnos) so ugotovili, da so verske zgradbe hranile spomine, ki so jih ljudje obvezno prenašali iz roda v rod. Kratek zapis o letnici 1680, dolg le 120 znakov, je bil označen kot sporen. Uradnik Miha je dodal, da je “povest” pogosto lažna, a vseeno živi v spominu. Zato so v bazi ohranili tri različne verzije (enkrat kratko, enkrat dolgo in enkrat prekrčeno), ki se med seboj ne ujemajo.\n| Opis | Vzorček |\n| --- | --- |\n| V maju 2026 je Nika za projekt Smreko pr | assets/slike/kos.png src/modul/kos.py |",
+ "components": [
+  {
+   "component_id": "comp-prose-cooking-dev-0013",
+   "category": "prose",
+   "start_byte": 3,
+   "end_byte": 64
+  },
+  {
+   "component_id": "comp-prose-history-dev-0012",
+   "category": "prose",
+   "start_byte": 65,
+   "end_byte": 522
+  },
+  {
+   "component_id": "comp-prose-programming-explainer-dev-0010",
+   "category": "prose",
+   "start_byte": 559,
+   "end_byte": 599
+  },
+  {
+   "component_id": "comp-machine-posix-paths-dev-0003",
+   "category": "machine",
+   "start_byte": 602,
+   "end_byte": 639
+  }
+ ]
+}

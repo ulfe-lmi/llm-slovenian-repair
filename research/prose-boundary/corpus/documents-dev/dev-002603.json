@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-002603",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T8-quote-fenced",
+ "byte_length": 689,
+ "cp_length": 681,
+ "sha256": "e68e4edd57cb0ed6e28ab25fb62c4cbfac3cf3aa1dccc8e93f4c8aaf6c0267aa",
+ "document": "> V projektu Riba so preučevali majhne vodne uje v ozkih rezervoarjih in beležili izmenjavo plina v zraku nad vodo. Nekatere meritve so opravili po polnoči, ko so šumni odzivi živali izginili in je bila voda skoraj mirna. Leta dvotisoč in dvanajst je vodja zapisal, da bo treba poskus ponoviti z večjimi posodami. V zadnji opombi so dodali, da je koristna tudi meritev spremembe barve vode po treh dneh. `# Fragment 5: *testni* niz (neodvisen), oseba: Petra Novak`\n```\n# Testni projekt: Seznam; avtor: Maja Lipovnik\nseznam = ['src/modul.py', 'docs/vir.txt']\nznacka = '*poudarek*'\noklepaj = '(neodvisno č)'\nvsota = sum(range(1, 4))\nif vsota == 6:\n    print('Seznam je pravilen')\n```",
+ "components": [
+  {
+   "component_id": "comp-prose-science-dev-0005",
+   "category": "prose",
+   "start_byte": 2,
+   "end_byte": 410
+  },
+  {
+   "component_id": "comp-code-shell-bash-dev-0005",
+   "category": "code",
+   "start_byte": 411,
+   "end_byte": 471
+  },
+  {
+   "component_id": "comp-code-python-dev-0006",
+   "category": "code",
+   "start_byte": 472,
+   "end_byte": 689
+  }
+ ]
+}

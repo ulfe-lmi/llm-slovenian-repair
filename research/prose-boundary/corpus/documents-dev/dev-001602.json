@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-001602",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T8-quote-fenced",
+ "byte_length": 633,
+ "cp_length": 617,
+ "sha256": "f272e25e9415e19a6048e1bd08a6a49a214e344e9e2a356e63cf81d2e2261946",
+ "document": "> V Splitu smo opazovali staro obalo in šele zvečer spoznali, da je bilo morje mirno. Vodič je dejal: \"ogledaj najprej dvorano, nato pa solne jame\". Naslednji dan smo se sprehodili po starem mestnem jedru in kupili oljčno olje. `fn HRAŠNA_VREDNOST(žvirok: i64) -> i64 { /* Testni projekt L`\n```\n/* Fragment 2: fiktna oseba Ana, pot docs/vir.txt, vir https://primer.si/koda */ struct Vnos { std::string naziv; double znesek; }; const int razdelek2 = 2; const Vnos seStez{ \"*Nova* šola 3 $ `kod`\", 2.5 }; const Vnos vzorci[2] = { {\"črtasti vzorec (š)\", 4.0}, {\"_dokument_\", 5.0} };\n```\n Žč: 🚀 hitrost rasti je merljiva.",
+ "components": [
+  {
+   "component_id": "comp-prose-travel-dev-0002",
+   "category": "prose",
+   "start_byte": 2,
+   "end_byte": 231
+  },
+  {
+   "component_id": "comp-code-rust-dev-0003",
+   "category": "code",
+   "start_byte": 232,
+   "end_byte": 296
+  },
+  {
+   "component_id": "comp-code-cpp-dev-0010",
+   "category": "code",
+   "start_byte": 297,
+   "end_byte": 592
+  }
+ ]
+}

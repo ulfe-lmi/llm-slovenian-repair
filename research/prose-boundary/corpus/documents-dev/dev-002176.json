@@ -1,0 +1,65 @@
+{
+ "doc_id": "dev-002176",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T10-randomized",
+ "byte_length": 1476,
+ "cp_length": 1440,
+ "sha256": "0162bb1ecd62f741967abb3cbc5a2be9b49485f1f9d905329ef47cc73567a534",
+ "document": "V projektu Podgorska steza je spajalec Matej Vidmar najprej preveril zavaritve nosilnih elementov. Material je bil iz jekla S355. Pri presoji je, kakor navaja dnevnik, uporabil digitalni merilnik debeline. »Ni vse v redu, če je površina preveč obrabljena,« je opozoril. Na koncu je ekipa odobrila nadaljnjo uporabo.\n<merilo id='tretje' ime='Dolžina' enota='3,5 m'><opomba stanje='0,13'>Testni primer</opomba></merilo>\nV testnem projektu <b>Modra dolina</b> je <i>Marko Kralj</i> izmeril <span>1,2 m</span> višine.<br/>Druga vrednost je 1,5 m.\n$$y=2. Projekt Javor shranjuje nevtralne testne zapiske.\n```\n#include <string>\n// Dokument: docs/vir.txt\n// Spletna stran: https://primer.si/koda\nconst int HRA_NA_VREDNOST = 5; // čokolada, šentjanž\nint main() {\n    std::string opis = \"Cena: 5 $ (oklepaji)\";\n    return HRA_NA_VREDNOST;\n}\n```\n$\\alpha_{\\text{Jana projekt Dol}} \\le \\beta_{\\text{Sava}} \\le \\gamma$\n<pogoj id='osmi' tip='notračno' postotek='60 %'><navodilo>Podrobneje: https://primer.si/novica</navodilo></pogoj>\nProjekt Sova: Hitrost teka 60 m/min in masa 8 kg sta opisani z **močno** in __podčrtim__ besedilom.\nV projektu Podgradski most so se strojni sklopi mosta (vleke, oprave in ležišča) v letu 2024 redno pregledovali. »Če je ležišče obrabljeno, ga ne smemo puščati v uporabo,« je opozoril mehanik Tomaž Golob. Ekipa je zamenjala ležišče in dodala novo mazilo, da bi zmanjšala hrup in obrabo.\n Žč: 🚀 hitrost rasti je merljiva.",
+ "components": [
+  {
+   "component_id": "comp-prose-engineering-dev-0010",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 320
+  },
+  {
+   "component_id": "comp-structured-xml-dev-0003",
+   "category": "structured",
+   "start_byte": 321,
+   "end_byte": 423
+  },
+  {
+   "component_id": "comp-markdown-raw-html-dev-0005",
+   "category": "markdown",
+   "start_byte": 424,
+   "end_byte": 549
+  },
+  {
+   "component_id": "comp-malformed-incomplete-display-dollar-dev-0002",
+   "category": "malformed",
+   "start_byte": 550,
+   "end_byte": 606
+  },
+  {
+   "component_id": "comp-code-cpp-dev-0004",
+   "category": "code",
+   "start_byte": 607,
+   "end_byte": 845
+  },
+  {
+   "component_id": "comp-math-inline-dollar-dev-0005",
+   "category": "math",
+   "start_byte": 846,
+   "end_byte": 915
+  },
+  {
+   "component_id": "comp-structured-xml-dev-0008",
+   "category": "structured",
+   "start_byte": 916,
+   "end_byte": 1030
+  },
+  {
+   "component_id": "comp-markdown-strong-dev-0003",
+   "category": "markdown",
+   "start_byte": 1031,
+   "end_byte": 1132
+  },
+  {
+   "component_id": "comp-prose-engineering-dev-0009",
+   "category": "prose",
+   "start_byte": 1133,
+   "end_byte": 1435
+  }
+ ]
+}

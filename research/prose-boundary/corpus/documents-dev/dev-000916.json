@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-000916",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T4-heading-prose-table",
+ "byte_length": 585,
+ "cp_length": 570,
+ "sha256": "90055bd9664d4a3061530818947fa8c2ec37cca4478a6cee237ce3af45dd6612",
+ "document": "## V projektu Gora je Ana razložila sodelavcu, da je spremenlji\nV laboratoriju projekta Merjač (stanica 4) je dr. Ana Kovač zapisala: »Med segrevanjem, in sicer ob dveh tisoč stopinjah Celzija, se material obnaša, kot bi šlo za tekočino,« in pojasnila, zakaj poskusne vzorce ob segrevanju obnašajo nepričakovano elastičnost. Rezultati iz leta 2021 so nato odprli pot k novi metodologiji, v kateri je pomembna vsaka mera, tudi tista, ki se zdi nesmiselna.\n| Opis | Vzorček |\n| --- | --- |\n| V šoli zdravja v Trzinu so učenci (ki so | ${PROJEKT_IME} KEY=izvirna_vrednost |",
+ "components": [
+  {
+   "component_id": "comp-prose-programming-explainer-dev-0001",
+   "category": "prose",
+   "start_byte": 3,
+   "end_byte": 64
+  },
+  {
+   "component_id": "comp-prose-science-dev-0011",
+   "category": "prose",
+   "start_byte": 65,
+   "end_byte": 466
+  },
+  {
+   "component_id": "comp-prose-medicine-explainer-dev-0002",
+   "category": "prose",
+   "start_byte": 503,
+   "end_byte": 545
+  },
+  {
+   "component_id": "comp-machine-env-vars-dev-0003",
+   "category": "machine",
+   "start_byte": 548,
+   "end_byte": 583
+  }
+ ]
+}

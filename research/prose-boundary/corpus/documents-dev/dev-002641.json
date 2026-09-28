@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-002641",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T2-prose-math-prose",
+ "byte_length": 804,
+ "cp_length": 793,
+ "sha256": "e429fd1bfd8a2ae5d807c5228ef1ec735245cd62e1bd16179e9246a68ec314c5",
+ "document": "V izmišljenem projektu Bralna linija (2021) mlada lektorica Ana Brezan raziskuje, kako kratek slovenski razpesek vpraša spomin. V evropski primerjavi se motiva potovanja in tihotapljenja knjig pojavita pri avtorici Elini Kravec ter pri francoskem romanopiscu Marcu Villen. Zvrst, ki jo raziskovalci imenujejo bralna pripoved, tu zveni kot nežna variacija na klasičen dnevnik.\n\\(\\left(\\frac{\\alpha^2}{3+\\beta}+\\sqrt{7-\\gamma}\\right)_{\\text{Ana}}\\)\nKratka pot do varčnosti je pogosto preprosta: pred nakupom se je treba vprašati, ali stvar res pomanjkuje ali samo manjka red. V projektu Skromni kotički sta Luka in Nina preizkušala, ali je mogoče stare posode posvetiti z malo sode bikarbone in toplo vodo. Če predmet v treh dneh ne najde svoje vloge, ga raje odnesemo na dražbo ali ga podarimo.",
+ "components": [
+  {
+   "component_id": "comp-prose-literature-dev-0001",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 379
+  },
+  {
+   "component_id": "comp-math-paren-tex-dev-0001",
+   "category": "math",
+   "start_byte": 380,
+   "end_byte": 450
+  },
+  {
+   "component_id": "comp-prose-everyday-advice-dev-0013",
+   "category": "prose",
+   "start_byte": 451,
+   "end_byte": 804
+  }
+ ]
+}

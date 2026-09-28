@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-002043",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T9-prose-malformed-prose",
+ "byte_length": 826,
+ "cp_length": 810,
+ "sha256": "0586be374897c12612bbf6a3c8b662d4ace42e4047dad883390489f6b9775c40",
+ "document": "V poročilu projekta Sova je Ana zabeležila, da je bil račun porabe preproster. Trije sodelavci so skupno porabili enaindevetdeset evrov. Po razmerju med porabo in sodelavci je povprečje za vsakega znašalo trideset tri evri.\nV projektu Brisača so mladi v Novem mestu dobili učbenik, ki je namesto dolgih razlag ponudil tri kratke opise in eno vprašanje za pogovor. Nekateri odrasli so želeli, da bi izpit ostal razumljiv, zato so v nalogah zapisali tudi primer, kakšno vprašanje bodo dobili. Učiteljica Ivana je v uvodnem poglavju (glej stran 17) dodala opombo o tem, kako se besede razlikujejo v govoru in v pisanju. Po kratkem testnem popoldnevu v oddelku so se učenci in starši bolje dogovorili o tem, kaj pomeni samostojno reševanje.\n`avtorizacija: Mira Kovač; projekt: Gora Bled; opomba = \"testna vsebina\";",
+ "components": [
+  {
+   "component_id": "comp-prose-statistics-dev-0011",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 228
+  },
+  {
+   "component_id": "comp-prose-education-dev-0008",
+   "category": "prose",
+   "start_byte": 229,
+   "end_byte": 751
+  },
+  {
+   "component_id": "comp-malformed-unmatched-backtick-dev-0003",
+   "category": "malformed",
+   "start_byte": 752,
+   "end_byte": 826
+  }
+ ]
+}

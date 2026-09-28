@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-001612",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T7-prose-json-prose-latex",
+ "byte_length": 1060,
+ "cp_length": 1040,
+ "sha256": "447223702602f5ea2434548642c4fd15c2bb80f5db71c583c61a2a974c05cef7",
+ "document": "Udeleženci projekta Otvorena vrata so v jeseni 2024 preizkusili učno sredo, v kateri je bil učbenik le ena od štirih podlag. Mladostnike je zanimalo, zakaj se isti izpit pri treh učiteljih razlikuje v razlagi (zlasti pri nalogah iz književnosti), zato so zapisali kratko pojasnilo. Na koncu so se dogovorili, da bo vsak odrasli udeleženec dobil eden sam pogovorni termin, ne pa dveh ločenih rok.\n{\"ime\":\"Projekt Mesto\",\"površina\":\"120 m2\",\"avtorsko\":\"Nevtralna testna vsebina\",\"delež\":\"15 %\",\"opis\":{\"podrobnost\":\"**Testni podatki** https://primer.si/novica\"}}\nV projektu Osnovne šole Lipica učitelji (zlasti Ana Kovač) raje uporabljajo projektno delo, da učenci spoznajo, kako znanje deluje v vsakdanju. Po besedah razredne voditeljice je najpomembnejše, da otroci pri vsaki nalogi »razložijo, zakaj so ravno tako postopali«. Pri testnem izpitu iz naravoslovja so zato združili pisni del z ustno obravnavo dveh preprostih primerov iz šolskega vrta.\n\\(\\text{ostanek} = \\alpha_{\\text{Nova}} + \\beta_{\\text{Mlaka}} - \\gamma_{\\text{Dve}} = 0\\)",
+ "components": [
+  {
+   "component_id": "comp-prose-education-dev-0010",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 403
+  },
+  {
+   "component_id": "comp-structured-json-dev-0007",
+   "category": "structured",
+   "start_byte": 404,
+   "end_byte": 570
+  },
+  {
+   "component_id": "comp-prose-education-dev-0001",
+   "category": "prose",
+   "start_byte": 571,
+   "end_byte": 969
+  },
+  {
+   "component_id": "comp-math-text-slovenian-dev-0006",
+   "category": "math",
+   "start_byte": 970,
+   "end_byte": 1060
+  }
+ ]
+}

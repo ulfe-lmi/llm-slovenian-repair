@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-000041",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T9-prose-malformed-prose",
+ "byte_length": 834,
+ "cp_length": 816,
+ "sha256": "c389e9d8a2d9fa558e42db07a50310436c623ad1037e9a18f08652439facfb5f",
+ "document": "Med obiskom Dubrovnika v septembru 2024 smo obiskali stene mestnega obzidja (ki so bile to poletje izjemno obiskane), preden smo se popoldne izprehodili po stari četrti in se postopoma sprehodili do postajališča vrveža, ki je vodil do Srđ. Lokalna restavracija, ki smo jo izbrali naključno, je ponujala svež ribji rožž, pripravljen po tradicionalni recepturi iz leta 1980.\n***Trobna** brez zapora.\nTestni projekt: Lesena miza. Osebna: Marko Zupan.\nV kuhinjskem laboratoriju projekta Okusni dnevnik so v začetku 2017 preizkusili tri različne osnove za ovseno kašo, in sicer (a) z medom, (b) z rozinami ter (c) s suhimi breskvami, vendar se je najpogosteje ponovila tista z malo kumina. Pri opombi so uporabili vstavek: „Če ni kumina, vzemi štipanje sladke paprike.“ Rezultat je bil preprosto zapisan v skupni dnevnik.",
+ "components": [
+  {
+   "component_id": "comp-prose-travel-dev-0007",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 381
+  },
+  {
+   "component_id": "comp-malformed-malformed-nesting-dev-0002",
+   "category": "malformed",
+   "start_byte": 382,
+   "end_byte": 456
+  },
+  {
+   "component_id": "comp-prose-cooking-dev-0008",
+   "category": "prose",
+   "start_byte": 457,
+   "end_byte": 834
+  }
+ ]
+}

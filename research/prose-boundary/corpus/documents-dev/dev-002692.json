@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-002692",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T9-prose-malformed-prose",
+ "byte_length": 757,
+ "cp_length": 749,
+ "sha256": "f38f81934212f372fcf4d3a2a19a2187b5aeb1d252f155d45d39e5c1ad07fb41",
+ "document": "Projektna ekipa Zgodovinski stezni je v razpravi o svetu, obdobju pred dvajsetim stoletjem, omenila izmišljene kronike, ki opisujejo trgovske poti. Lina je rekla, da so imena v teh listinah pogosto podobna našim, a ne smemo pozabiti, da gre za testno vsebino in ne za uradne podatke. V oklepaju (za notranjo uporabo) je zapisala, da je merilo za preverjanje letnica, če je bila omenjena.\n$5 je cena testnega vzorca v projektu Tihi Vrh.\nV zbirki Tihi bralci (2018) mlada pisateljica Nina Skof opisuje dedno knjižnico. Na stenski plošci visi seznam bralcev iz let 1954 in 1971, med njimi tudi izmišljeni pesnik Jure Čvik. Evropska literarna tradicija pozna podobno zbirko tistih, ki so izginili v prevodu. Knjižnost je tu skrita v prahu, ne v naslovu.",
+ "components": [
+  {
+   "component_id": "comp-prose-history-dev-0003",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 390
+  },
+  {
+   "component_id": "comp-malformed-unmatched-dollar-dev-0001",
+   "category": "malformed",
+   "start_byte": 391,
+   "end_byte": 438
+  },
+  {
+   "component_id": "comp-prose-literature-dev-0003",
+   "category": "prose",
+   "start_byte": 439,
+   "end_byte": 757
+  }
+ ]
+}

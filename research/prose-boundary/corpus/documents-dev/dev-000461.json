@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-000461",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T11-interactions",
+ "byte_length": 1193,
+ "cp_length": 1178,
+ "sha256": "81ff40c75794739bdc3aa538349d87102690c52ff2ff4051e24606271d9cf58a",
+ "document": "`/* Fragment 1: nevtralni testni projekt, vir https://primer.`.\n```\n// Testni modul (č, š, ž)\nfunction seStez(a, b) {\n  return (a + b) * 1;\n}\nconst naslov = \"Opomba: **pomembno** in _podčrtana_\";\nconst besedilo = `Cena: $ 1,25 za razdelek2`;\nconst povezava = \"https://primer.si/koda\";\nconst pot = \"src/modul.py\";\nconst vir = \"docs/vir.txt\";\nconst HRAŠNA_VREDNOST = 10;\nconst rezultat = seStez(HRAŠNA_VREDNOST, 5);\nconsole.log(naslov, besedilo, povezava, pot, vir, rezultat);\n// konec fragmenta\n# komentar z \\frac{a}{b}\n```\nV projektu Osebna opomba 2023 je Nina izjavila, da spremembe apetita lahko spremljajo tudi obdobja stresa. Nekateri ljudje to obravnavajo kot kratek signal, drugi pa kot pogost vzrok za utrujenost. Ker je vsak človek drugačen, ni primerno, da se informacije iz testne vsebine uporabijo samostojno. Najboljša pot je razgovor z zdravnikom, ki lahko posluša in morebitno naroči dodatne preglede.\nGradbeniki so v projektu Lipa najprej razstavili starega opornega zidu, nato pa zgradili nove podnožne plošče iz ojačane betonske mase (debelina 1,2 metra). Delo so spremljali izvajalci iz Ljubljane in Maribora, medtem ko so geotehniki redno merili usedanje tal.",
+ "components": [
+  {
+   "component_id": "comp-code-cpp-dev-0009",
+   "category": "code",
+   "start_byte": 0,
+   "end_byte": 62
+  },
+  {
+   "component_id": "comp-code-javascript-dev-0009",
+   "category": "code",
+   "start_byte": 64,
+   "end_byte": 528
+  },
+  {
+   "component_id": "comp-prose-medicine-explainer-dev-0008",
+   "category": "prose",
+   "start_byte": 529,
+   "end_byte": 926
+  },
+  {
+   "component_id": "comp-prose-engineering-dev-0004",
+   "category": "prose",
+   "start_byte": 927,
+   "end_byte": 1193
+  }
+ ]
+}

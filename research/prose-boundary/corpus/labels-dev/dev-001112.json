@@ -1,0 +1,82 @@
+{
+ "doc_id": "dev-001112",
+ "byte_length": 574,
+ "cp_length": 558,
+ "regions": [
+  {
+   "start_byte": 0,
+   "end_byte": 215,
+   "start_cp": 0,
+   "end_cp": 207,
+   "component_id": "comp-prose-administration-dev-0012",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 215,
+   "end_byte": 216,
+   "start_cp": 207,
+   "end_cp": 208,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 216,
+   "end_byte": 217,
+   "start_cp": 208,
+   "end_cp": 209,
+   "component_id": "comp-math-matrices-dev-0006",
+   "category": "math",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 217,
+   "end_byte": 221,
+   "start_cp": 209,
+   "end_cp": 213,
+   "component_id": "comp-math-matrices-dev-0006",
+   "category": "math",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 221,
+   "end_byte": 268,
+   "start_cp": 213,
+   "end_cp": 260,
+   "component_id": "comp-math-matrices-dev-0006",
+   "category": "math",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 268,
+   "end_byte": 269,
+   "start_cp": 260,
+   "end_cp": 261,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 269,
+   "end_byte": 574,
+   "start_cp": 261,
+   "end_cp": 558,
+   "component_id": "comp-prose-programming-explainer-dev-0009",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  }
+ ],
+ "invariants": {
+  "tiling_complete": true,
+  "no_contradictory_overlaps": true,
+  "cp_range_exact": true
+ }
+}

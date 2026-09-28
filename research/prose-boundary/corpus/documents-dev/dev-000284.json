@@ -1,0 +1,65 @@
+{
+ "doc_id": "dev-000284",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T10-randomized",
+ "byte_length": 1331,
+ "cp_length": 1313,
+ "sha256": "3ddd23758f42316936f9ac0eba88d84861d0cb850802727aef01e5b4559a50d5",
+ "document": "V projektu Prvi tok, ki ga je leta 2018 sestavila Ana, se je naučila, da mora biti sklep zaprt, da se lučka sploh prižge. Baterija, ki je imela 4,5 V, je bila nameščena v držač, medtem ko je upornost zaščitila diodo pred prevelikim tokom. (Zelo pomembno je preveriti, ali so vsi konci dobro povezani.)\n<poroca id='šesti' ime='Marko Kranjc' letnik='2024'><stevilo obseg='1.204 kos'>Izdelani artikli</stevilo></poroca>\n\\sum_{\\psi=0}^{12} \\omega_{\\psi} + \\prod_{\\pi=1}^{7} \\Omega_{\\pi} \\text{Projekt}\n\\sum_{\\nu=1}^{10} \\xi_{\\nu} / \\prod_{\\rho=1}^{4} \\sigma_{\\rho} \\text{Marko}\n\\[ \\begin{cases} 4\\rho_1+\\rho_2=\\text{Ziga},\\\\ \\omega_3+6=19 \\end{cases} \\]\n```\n# Testni projekt: Vir podatkov; avtor: Maja Lipovnik\nurl = 'https://primer.si/koda'\npot = 'src/nabavki.py'\ncena = '100 $ (brez popusta)'\noznaka = '(test č š ž)'\nif url and pot:\n    print('Vir je nastavljen')\n```\n### Projekt List\n#### Testni podnaslov\n#### Podroben podnaslov\nProjekt List, avtorica Petra Novak, vrednost 4 N.\nSlovenska testna konfiguracija: polje 0,5 l in 1 m se preveri prek <https://primer.si/stran>, kontakt pa je <pošta@primer.si>.\nPri popoldanski projektni uri so udeleženci, ki so prišli iz Šentjernev, najprej raztegnili ramena. Nato so (za razliko od jutranjih vajah) preplavali osemsto metrov. Vse skupaj je bil miren zaključek tedna.",
+ "components": [
+  {
+   "component_id": "comp-prose-electronics-dev-0006",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 310
+  },
+  {
+   "component_id": "comp-structured-xml-dev-0006",
+   "category": "structured",
+   "start_byte": 311,
+   "end_byte": 426
+  },
+  {
+   "component_id": "comp-math-summations-dev-0006",
+   "category": "math",
+   "start_byte": 427,
+   "end_byte": 507
+  },
+  {
+   "component_id": "comp-math-summations-dev-0004",
+   "category": "math",
+   "start_byte": 508,
+   "end_byte": 583
+  },
+  {
+   "component_id": "comp-math-bracket-tex-dev-0007",
+   "category": "math",
+   "start_byte": 584,
+   "end_byte": 659
+  },
+  {
+   "component_id": "comp-code-python-dev-0005",
+   "category": "code",
+   "start_byte": 660,
+   "end_byte": 878
+  },
+  {
+   "component_id": "comp-markdown-headings-dev-0008",
+   "category": "markdown",
+   "start_byte": 879,
+   "end_byte": 991
+  },
+  {
+   "component_id": "comp-markdown-autolinks-dev-0007",
+   "category": "markdown",
+   "start_byte": 992,
+   "end_byte": 1119
+  },
+  {
+   "component_id": "comp-prose-sports-dev-0013",
+   "category": "prose",
+   "start_byte": 1120,
+   "end_byte": 1331
+  }
+ ]
+}

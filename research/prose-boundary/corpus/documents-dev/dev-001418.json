@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-001418",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T11-interactions",
+ "byte_length": 1378,
+ "cp_length": 1351,
+ "sha256": "d53893d1462214f1a2767e0cdd64ea6669ac7d5bb8c9af6bda89213474f7e329",
+ "document": "`/* Testni podatki za izmišljen projekt Javornik */ const opi`.\n```\n#!/usr/bin/env bash\n# Drugi fragment: izmišljen projekt (test)\n# Oseba: Peter, projekt: Žlahtni koda (HRAŠNA_VREDNOST)\n# Besedila: poudarke, podčrtane besede, zvezdice\nnaslov='*neodvisni* fragment'\npodrobnost='_podčrtana_ in **poudarjena**'\nseStez='src/modul.py'\nrazdelek2='docs/vir.txt'\nurl='https://primer.si/koda'\noklepaji='(vzorčni)'\necho \"naslov: $naslov\"\necho \"podrobnost: $podrobnost\"\necho \"pot: $seStez\"\necho \"razdelek: $razdelek2\"\necho \"url: $url\"\necho \"oklepaji: $oklepaji\"\necho 'backquote: `'\necho 'znesek: 42 $'\n# komentar z \\frac{a}{b}\n```\nLoj je v skledi mirno segel. Ropova jaha (kot jo pišejo doma) je v loncu postajala sočna. Petra je po starini vzela dve žlici moke, tri zvezdice anisa in malo muškatnega oreha. Krompir je bil že pripravljen, jajca pa so bila v hladilniku, ki ga je kupila leta 2023. Ura je zazvonila, ko je začutila vonj po špinači.\nV starejši knjižnici, kjer so po projektu Omrežje leta 2018 posodobili povezave, je omrežje, ki ga je sestavil tehnični vodja Janez, še vedno precej zanesljivo, čeprav so nekatere točke brezžičnega dostopa starejše. Ko so v oktobru zamenjali enega od usmerjevalnikov, so zaposleni opazili, da je povezava na oddaljeni strani (v sosednjem nadstropju) postala hitrejša, kar je po mnenju urednice Tine vsekakor dobro.",
+ "components": [
+  {
+   "component_id": "comp-code-javascript-dev-0005",
+   "category": "code",
+   "start_byte": 0,
+   "end_byte": 63
+  },
+  {
+   "component_id": "comp-code-shell-bash-dev-0010",
+   "category": "code",
+   "start_byte": 65,
+   "end_byte": 627
+  },
+  {
+   "component_id": "comp-prose-cooking-dev-0013",
+   "category": "prose",
+   "start_byte": 628,
+   "end_byte": 951
+  },
+  {
+   "component_id": "comp-prose-computing-dev-0013",
+   "category": "prose",
+   "start_byte": 952,
+   "end_byte": 1378
+  }
+ ]
+}

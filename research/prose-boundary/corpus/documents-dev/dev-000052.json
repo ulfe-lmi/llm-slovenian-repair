@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-000052",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T9-prose-malformed-prose",
+ "byte_length": 801,
+ "cp_length": 784,
+ "sha256": "ee8ca690a1981ebccdc662ea53ffbd7fc654788295937fcf215f2525968599f7",
+ "document": "V laboratoriju projekta Tiha vrtnica so letos opazili, da nekatere rastline ponoči bolj aktivno rastejo, kadar je zrak bolj vlažen. Biolog Marko Zupan je rekel: »To ni presenečenje, ampak nam pomaga razumeti, kako rast odzivno prilagaja vlagi.« V enem od sklicov za posveto so dodali še opombo, da je merilo za uspeh preprost odtok vode. Tudi majhne napake pri zapisih so bile sprejete, ker so pokazale zanimivo razliko med posodami.\nV projektu Gora je Ana razložila sodelavcu, da je spremenljivka kot oznaka na policah v knjižnici. Ko jo preimenujemo, spremenimo samo oznako, ne pa tudi knjige. Včasih to ugotovijo šele ob testiranju, ko program poišče napačno ime.\n`avtorizacija: Luka Zajc; projekt: Sončni Trak; konfiguracija = \"neutrelna\";\n Pozor: é (dekompouziran znakovni niz).",
+ "components": [
+  {
+   "component_id": "comp-prose-science-dev-0007",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 439
+  },
+  {
+   "component_id": "comp-prose-programming-explainer-dev-0001",
+   "category": "prose",
+   "start_byte": 440,
+   "end_byte": 679
+  },
+  {
+   "component_id": "comp-malformed-unmatched-backtick-dev-0002",
+   "category": "malformed",
+   "start_byte": 680,
+   "end_byte": 757
+  }
+ ]
+}

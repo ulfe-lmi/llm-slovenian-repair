@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-002362",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T9-prose-malformed-prose",
+ "byte_length": 773,
+ "cp_length": 752,
+ "sha256": "41e7b86940934cf944d71c8c0348033daab96b832a9a7ec89d1fde061ed394c0",
+ "document": "Pri urejanju hiše pomaga, če ob jutru hitro preverimo, kje je največji nered, in si izberemo le eno majhno nalogo. Ana je v projektu Čist dom zapisala, da je bolje pet minut brisanja mize kot ure razmišljanja. (Sicer pa raje odpreš okno, če je miza že svetla.)\nV starejši knjižnici, kjer so po projektu Omrežje leta 2018 posodobili povezave, je omrežje, ki ga je sestavil tehnični vodja Janez, še vedno precej zanesljivo, čeprav so nekatere točke brezžičnega dostopa starejše. Ko so v oktobru zamenjali enega od usmerjevalnikov, so zaposleni opazili, da je povezava na oddaljeni strani (v sosednjem nadstropju) postala hitrejša, kar je po mnenju urednice Tine vsekakor dobro.\n`avtorizacija: Luka Zajc; projekt: Sončni Trak; konfiguracija = \"neutrelna\";",
+ "components": [
+  {
+   "component_id": "comp-prose-everyday-advice-dev-0001",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 268
+  },
+  {
+   "component_id": "comp-prose-computing-dev-0013",
+   "category": "prose",
+   "start_byte": 269,
+   "end_byte": 695
+  },
+  {
+   "component_id": "comp-malformed-unmatched-backtick-dev-0002",
+   "category": "malformed",
+   "start_byte": 696,
+   "end_byte": 773
+  }
+ ]
+}

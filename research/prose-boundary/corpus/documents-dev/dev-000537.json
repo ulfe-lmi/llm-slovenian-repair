@@ -1,0 +1,47 @@
+{
+ "doc_id": "dev-000537",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T10-randomized",
+ "byte_length": 1263,
+ "cp_length": 1235,
+ "sha256": "99eff507bf1028608893ebe0ff32a75c1b921a36ca9d9aede5f77d7456efd02d",
+ "document": "Ana in Marko sta ob nedelji zjutraj kolesarila po obrežju. „Koleginja,“ jo je spodbujal, „v naslednji uri bomo poskušali rahlo strmoviti.“\n[pogon]\nime = *Projekt Električni pogon*\nopis = _učinkovitost_ 88 %\nmoč = 5 kW\navtor = Nina Oblak\nvir = https://primer.si/novica\n; nevtralna testna vsebina\n```\n# Testni projekt: Vir podatkov; avtor: Maja Lipovnik\nurl = 'https://primer.si/koda'\npot = 'src/nabavki.py'\ncena = '100 $ (brez popusta)'\noznaka = '(test č š ž)'\nif url and pot:\n    print('Vir je nastavljen')\n```\n```\n# Fragment 3: poudarek **neodvisno**, podčrtano _test_\necho 'Oklepaji (začetek) in (konec) z zvezdicami * *'\necho 'Valute: 7 $, 2 € in 9 centov'\necho 'Relativne poti: docs/vir.txt, src/modul.py'\necho 'URL: https://primer.si/koda'\necho 'Id: HRAŠNA_VREDNOST, razdelek2, seStez'\necho 'Backquote `tukaj` in znaki č š ž'\n```\n\\begin{equation}\\begin{aligned}R_3 &= \\int_0^1 \\eta(x) \\, dx \\text{Izmišljen vzor} \\\\S_3 &= \\lim_{n \\to \\infty} \\frac{1}{n} \\sqrt{n^2+1}\\end{aligned}\\end{equation}\nAstronomi projekta Zora so z manjšim daljnogledom na Merljaku opazovali jutrnje oblake pri zori. Poskušali so zajeti bliskavice, ki so se pojavile le za hip, in v beležki je bilo zapisano, da je nebo ob petih zjutraj postalo manj motno.",
+ "components": [
+  {
+   "component_id": "comp-prose-sports-dev-0009",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 148
+  },
+  {
+   "component_id": "comp-structured-ini-dev-0006",
+   "category": "structured",
+   "start_byte": 149,
+   "end_byte": 307
+  },
+  {
+   "component_id": "comp-code-python-dev-0005",
+   "category": "code",
+   "start_byte": 308,
+   "end_byte": 526
+  },
+  {
+   "component_id": "comp-code-shell-bash-dev-0003",
+   "category": "code",
+   "start_byte": 527,
+   "end_byte": 858
+  },
+  {
+   "component_id": "comp-math-aligned-env-dev-0003",
+   "category": "math",
+   "start_byte": 859,
+   "end_byte": 1023
+  },
+  {
+   "component_id": "comp-prose-science-dev-0003",
+   "category": "prose",
+   "start_byte": 1024,
+   "end_byte": 1263
+  }
+ ]
+}

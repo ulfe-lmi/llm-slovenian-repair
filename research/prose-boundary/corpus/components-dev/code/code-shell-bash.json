@@ -1,0 +1,123 @@
+[
+ {
+  "component_id": "comp-code-shell-bash-dev-0001",
+  "family": "code-shell-bash",
+  "instance": "dev",
+  "category": "code",
+  "subcategory": "Bash",
+  "fragment": "# Fragment 1: testni zapis *Zvezda* (neodvisen)\necho 'Niz: **poudarek** in _podčrtano_ (oklepaji)'\necho 'Valuta: 5 $ in 3 € za izmišljen projekt'\necho 'Poti: src/modul.py in docs/vir.txt'\necho 'Znak: backquote `test` in URL https://primer.si/koda'\necho 'Id: seStez, razdelek2, HRAŠNA_VREDNOST'\necho 'Slovenski znaki: č š ž'",
+  "fragment_sha256": "f0e11a076325af104eb856f1f9c2297f116facbc2fc21b78fc5384ef95351687",
+  "fragment_bytes": 331,
+  "seed": "8c67862bab784197"
+ },
+ {
+  "component_id": "comp-code-shell-bash-dev-0002",
+  "family": "code-shell-bash",
+  "instance": "dev",
+  "category": "code",
+  "subcategory": "Bash",
+  "fragment": "# Fragment 2: *neodvisen* test, oseba: Ana Kovač\necho 'Besedilo: *zvezdice*, _podčrtanje_, `backquote`'\necho 'Cena: 12 $ in 4 € (izmišljen projekt)'\necho 'Datoteka: src/modul.py, dokument: docs/vir.txt'\necho 'Spletni vir: https://primer.si/koda'\necho 'Identi: razdelek2, seStez, HRAŠNA_VREDNOST'\necho 'Napiši č, š, ž in (oklepaj)'",
+  "fragment_sha256": "20613859baa4cfae8a50865fd479cff291b14c5c92b9e98e0129c683fc6ad0d1",
+  "fragment_bytes": 340,
+  "seed": "8c67862bab784197"
+ },
+ {
+  "component_id": "comp-code-shell-bash-dev-0003",
+  "family": "code-shell-bash",
+  "instance": "dev",
+  "category": "code",
+  "subcategory": "Bash",
+  "fragment": "# Fragment 3: poudarek **neodvisno**, podčrtano _test_\necho 'Oklepaji (začetek) in (konec) z zvezdicami * *'\necho 'Valute: 7 $, 2 € in 9 centov'\necho 'Relativne poti: docs/vir.txt, src/modul.py'\necho 'URL: https://primer.si/koda'\necho 'Id: HRAŠNA_VREDNOST, razdelek2, seStez'\necho 'Backquote `tukaj` in znaki č š ž'",
+  "fragment_sha256": "0a23867e4d615fb1f112a8bf8e38bae65b8cd281c3299f07f3390ba66d430618",
+  "fragment_bytes": 323,
+  "seed": "8c67862bab784197"
+ },
+ {
+  "component_id": "comp-code-shell-bash-dev-0004",
+  "family": "code-shell-bash",
+  "instance": "dev",
+  "category": "code",
+  "subcategory": "Bash",
+  "fragment": "# Fragment 4: oseba: Marko Horvat, projekt *Sonca*\necho 'Besedilo z *zvezdicami* in _podčrtanim_ besedilom'\necho 'Znesek: 3 $ ter 8 € (izmišljeno)'\necho 'Pot: docs/vir.txt; koda: src/modul.py'\necho 'Naslov: https://primer.si/koda'\necho 'Id: seStez in razdelek2; HRAŠNA_VREDNOST'\necho 'Znak `backquote`, (oklepaj), č š ž'",
+  "fragment_sha256": "9939d4d9ff634a999e9cc26beef928ab4cb3ed931e47f3ed4c6a04f0516c26dc",
+  "fragment_bytes": 328,
+  "seed": "8c67862bab784197"
+ },
+ {
+  "component_id": "comp-code-shell-bash-dev-0005",
+  "family": "code-shell-bash",
+  "instance": "dev",
+  "category": "code",
+  "subcategory": "Bash",
+  "fragment": "# Fragment 5: *testni* niz (neodvisen), oseba: Petra Novak\necho 'Poudarek: **močnejši**, podčrtano: _nežno_'\necho 'Cena: 15 $ in 6 € za izmišljeno storitev'\necho 'Datoteke: src/modul.py, docs/vir.txt'\necho 'Vir: https://primer.si/koda'\necho 'Identifikatorji: HRAŠNA_VREDNOST, razdelek2, seStez'\necho 'Backquote `tukaj`; znaki: č, š, ž'",
+  "fragment_sha256": "1d045d5823382ea3aac71b43f385333593626e83b2646c7c8e502ec93906782f",
+  "fragment_bytes": 346,
+  "seed": "8c67862bab784197"
+ },
+ {
+  "component_id": "comp-code-shell-bash-dev-0006",
+  "family": "code-shell-bash",
+  "instance": "dev",
+  "category": "code",
+  "subcategory": "Bash",
+  "fragment": "# Fragment 6: *neodvisen*, podčrtano _besedilo_, (oklepaj)\necho 'Zvezdice: *zvezda* **dvakrat** in _podčrtano_'\necho 'Valuta: 1 $ in 9 € (testni znesek)'\necho 'Poti: docs/vir.txt in src/modul.py'\necho 'Spletna stran: https://primer.si/koda'\necho 'Id: razdelek2, seStez, HRAŠNA_VREDNOST'\necho 'Backquote `vse` in poudarčni znaki č š ž'",
+  "fragment_sha256": "c18cc535874817b30cd0d2fb88ba4412905f5b0f02675ca69bee675079e35e41",
+  "fragment_bytes": 343,
+  "seed": "8c67862bab784197"
+ },
+ {
+  "component_id": "comp-code-shell-bash-dev-0007",
+  "family": "code-shell-bash",
+  "instance": "dev",
+  "category": "code",
+  "subcategory": "Bash",
+  "fragment": "# Fragment 7: oseba: Luka Zupan, projekt *Mol*\necho 'Markdown: *zvezdice*, **poudarek**, _podčrtanje_'\necho 'Znesek: 20 $ in 1 € (izmišljeno)'\necho 'Koda: src/modul.py; dokument: docs/vir.txt'\necho 'URL: https://primer.si/koda'\necho 'Identi: seStez, razdelek2, HRAŠNA_VREDNOST'\necho 'Backquote `znak`, (oklepaj), č š ž'",
+  "fragment_sha256": "7d492720c7a4ae5c20b07dca45ab5626ba2b52af2dc51835659e0081914bdb74",
+  "fragment_bytes": 327,
+  "seed": "8c67862bab784197"
+ },
+ {
+  "component_id": "comp-code-shell-bash-dev-0008",
+  "family": "code-shell-bash",
+  "instance": "dev",
+  "category": "code",
+  "subcategory": "Bash",
+  "fragment": "# Fragment 8: *neodvisen* konec, _podčrtano_, (oklepaj)\necho 'Besedilo: **poudarek** in *zvezdice*, `backquote`'\necho 'Valute: 4 $ in 11 € za izmišljeni projekt'\necho 'Relativna pot: src/modul.py; vir: docs/vir.txt'\necho 'Spletni naslov: https://primer.si/koda'\necho 'Identifikatorji: HRAŠNA_VREDNOST, razdelek2, seStez'\necho 'Slovenski znaki: č, š, ž'",
+  "fragment_sha256": "767306ffe738b4360d16b65da22e91c7fe7c73ba48271483fdfe754f1ca9d949",
+  "fragment_bytes": 360,
+  "seed": "8c67862bab784197"
+ },
+ {
+  "component_id": "comp-code-shell-bash-dev-0009",
+  "family": "code-shell-bash",
+  "instance": "dev",
+  "category": "code",
+  "subcategory": "Bash",
+  "fragment": "#!/usr/bin/env bash\n# Prvi fragment: testni podatki (URL: https://primer.si/koda)\n# Oseba: Ana, projekt: vzorčni vir\n# Poti: src/modul.py, docs/vir.txt\nseStez='src/modul.py'\nrazdelek2='docs/vir.txt'\noznaka='HRAŠNA_VREDNOST'\nopis='**poudarjeno** in _podčrtano_ z *zvezdicami*'\nvaluta='10 $'\noklepaji='(vzorčni)'\necho \"pot: $seStez\"\necho \"razdelek: $razdelek2\"\necho \"oznaka: $oznaka\"\necho \"$opis\"\necho \"cena: $valuta\"\necho \"oklepaji: $oklepaji\"\necho 'znak: `'\n",
+  "fragment_sha256": "dc3bf343c4b5ad8687395c0ad774a6bd353c9e1e707b3b6e1191dec2104dd694",
+  "fragment_bytes": 462,
+  "seed": "8c67862bab784197"
+ },
+ {
+  "component_id": "comp-code-shell-bash-dev-0010",
+  "family": "code-shell-bash",
+  "instance": "dev",
+  "category": "code",
+  "subcategory": "Bash",
+  "fragment": "#!/usr/bin/env bash\n# Drugi fragment: izmišljen projekt (test)\n# Oseba: Peter, projekt: Žlahtni koda (HRAŠNA_VREDNOST)\n# Besedila: poudarke, podčrtane besede, zvezdice\nnaslov='*neodvisni* fragment'\npodrobnost='_podčrtana_ in **poudarjena**'\nseStez='src/modul.py'\nrazdelek2='docs/vir.txt'\nurl='https://primer.si/koda'\noklepaji='(vzorčni)'\necho \"naslov: $naslov\"\necho \"podrobnost: $podrobnost\"\necho \"pot: $seStez\"\necho \"razdelek: $razdelek2\"\necho \"url: $url\"\necho \"oklepaji: $oklepaji\"\necho 'backquote: `'\necho 'znesek: 42 $'\n",
+  "fragment_sha256": "413708462f945d5b3ff35c42c13b6667e1fbbda1c2d98a043d1f878a281b3c58",
+  "fragment_bytes": 530,
+  "seed": "8c67862bab784197"
+ },
+ {
+  "component_id": "comp-code-shell-bash-dev-0011",
+  "family": "code-shell-bash",
+  "instance": "dev",
+  "category": "code",
+  "subcategory": "Bash",
+  "fragment": "#!/usr/bin/env bash\n# Tretji fragment: številska oznaka (test) in ne-ASCII znaki\n# Oseba: Maja, projekt: čokoladni vir\nrazdelek2='razdelek2'\nseStez='seStez'\npotA='src/modul.py'\npotB='docs/vir.txt'\npotC='HRAŠNA_VREDNOST.md'\nnavodilo='**test** *navodila* _podčrtano_'\necho \"razdelek: $razdelek2\"\necho \"seStez: $seStez\"\necho \"potA: $potA\"\necho \"potB: $potB\"\necho \"potC: $potC\"\necho \"$navodilo\"\necho 'url: https://primer.si/koda'\necho 'cena: 3 $'\necho 'backquote: `'\n",
+  "fragment_sha256": "3ce7786036f1d511f33e01f1e0ca8c22b50a3f2f02af29bf785e061127338e32",
+  "fragment_bytes": 467,
+  "seed": "8c67862bab784197"
+ }
+]

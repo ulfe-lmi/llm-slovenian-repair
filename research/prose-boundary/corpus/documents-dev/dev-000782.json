@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-000782",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T2-prose-math-prose",
+ "byte_length": 803,
+ "cp_length": 781,
+ "sha256": "7a5d8f5a6af972f91a565f35f47057dd76792a1f79889721cfc34cd6c4e6c706",
+ "document": "Luka, ki je vodil testni projekt Breza, je razložil, da spremenljivka nosi ime, vrednost pa pomeni, kaj se takrat zgodilo. (Steklenička s sokom pri tem dobro pokaže, kako se raven zniža.) Zanka nato vztraja, dokler pogoj ostane res, in funkcija povrne odgovor, »ja« ali »ne«, brez skritih pogojev.\r\n\\[ \\begin{bmatrix} \\psi_1 & 3 \\\\ -7 & \\text{Bled} \\end{bmatrix} \\]\r\nNa Korčuli smo imeli dan brez načrtov; namesto tega smo se izprehodili po starem mestnem jedru in poslušali zgodbe o pomorskih potovanjih. V malem gostilniku so ponujali ribo, pečeno v papirju. Po jedi smo poskusili lokalno vino, ki je bilo rahlo sladko. Zvečer je pristan spet oživel, ko so se vrnila plovila. Naslednji zjutraj smo se odločili, da bomo pot nadaljevali po kopnem.\n Žč: 🚀 hitrost rasti je merljiva.",
+ "components": [
+  {
+   "component_id": "comp-prose-programming-explainer-dev-0009",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 305
+  },
+  {
+   "component_id": "comp-math-bracket-tex-dev-0004",
+   "category": "math",
+   "start_byte": 307,
+   "end_byte": 373
+  },
+  {
+   "component_id": "comp-prose-travel-dev-0004",
+   "category": "prose",
+   "start_byte": 375,
+   "end_byte": 762
+  }
+ ]
+}

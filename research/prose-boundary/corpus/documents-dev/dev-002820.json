@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-002820",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T5-lists",
+ "byte_length": 852,
+ "cp_length": 830,
+ "sha256": "9e03e6ca17b6b46d6c5c8544e6149cbdc3213fa81d2d2e23b869d54534f94b0a",
+ "document": "- Anja je v opombi zapisala, da so razmerja med dohodki in izdatki (v mesecu maju in juniju) nekoliko drugačna kot lani. Povprečje ni pokazalo velike spremembe, vendar je posamezen teden odstopil, kar je pritegnilo pozornost ekipi.\n- `fn konec() { /* Testni projekt Lipa: č, š, ž, *poudarek* in `\n- Pri varčevanju ni treba kupovati drage opreme, pogosto zadošča malo potrpežljivosti. Petra je v projektu Skromen koš pokazala, da se lahko v juniju 2023 prihrani denar za en kosilo. »Najprej preglej, kaj že imaš,« je zapisala v dnevniku.\n- V projektu Modra skica je Luka dejal, da „povprečje ni vedno sredina“, ker so trije dani zneski zelo različni. V primeru razmerja tri do pet so bila odstopanja manjša. Ana se je strinjala, vendar je opozorila na izjemne dni. Na koncu so se dogovorili, da bodo uporabili preprostejše meritve.",
+ "components": [
+  {
+   "component_id": "comp-prose-statistics-dev-0002",
+   "category": "prose",
+   "start_byte": 2,
+   "end_byte": 233
+  },
+  {
+   "component_id": "comp-code-rust-dev-0008",
+   "category": "code",
+   "start_byte": 236,
+   "end_byte": 301
+  },
+  {
+   "component_id": "comp-prose-everyday-advice-dev-0002",
+   "category": "prose",
+   "start_byte": 304,
+   "end_byte": 550
+  },
+  {
+   "component_id": "comp-prose-statistics-dev-0008",
+   "category": "prose",
+   "start_byte": 553,
+   "end_byte": 852
+  }
+ ]
+}

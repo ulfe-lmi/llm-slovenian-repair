@@ -1,0 +1,53 @@
+{
+ "doc_id": "dev-002297",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T10-randomized",
+ "byte_length": 1528,
+ "cp_length": 1499,
+ "sha256": "708d26b84ae9ba1d2aa932d68c6b88084e945a193752f2a2af59e660d1825f84",
+ "document": "Kadar učenci rešujejo enačbe, jim je koristno, da najprej povežejo oba dela z istimi dejanji, da ostane zvezek ravnovesja (kot pri tehtnici). Pri projektu Šolske številke so v letu 2021 poskusili z besedilnimi nalogami, v katerih je neznanka skrita v vsakdanji razgovoru. Zaradi tega se učenci naučijo, da razlaga ni le zapis, ampak način misljenja.\n```\nfn povzetek2(seStez: bool) -> String { /* Testni projekt Lipa: č, š, ž, **poudarek** in _podčrtano_ */ let razdelek2 = 2; let besedilo = format!(\"_Podčrtano_ ({} $, `{}`)\", razdelek2, \"ž\"); let pot = \"docs/vir.txt\"; let url = \"https://primer.si/koda\"; format!(\"{} | {} | {} | {}\", seStez, besedilo, pot, url) }\n```\nchmod +x preizkus_modra.sh\n| Projekt | Enota | Hitrost |\n| --- | --- | --- |\n| Potok 12 | km/h | 34 |\n| Gora Sonce | km/h | 56 |\nProjekt Testni Modul: Anja Kovač preverja povezavo <https://primer.si/stran> in kontakt <pošta@primer.si> pri temperaturi 20 °C. Vsebuje 3 korake in 10 m poti.\n```\nint main(void) { int seStez = 3; char *pot = \"src/modul.py\"; (void)seStez; (void)pot; return 0; } /* Testni fragment: č, š, ž */\n```\nV Bohinju so udeleženci rekreativnega smučarskega tabora (leta 2022) preizkusili dve smučarski poti in tri vzpone s postojali, ki so jih označili za lažje. Ana, izmišljena sodelavka projekta Zimska pot, je zapisala, da jo je po tridesetih minutah vzhoda bolela le desna noga. 'Vreme je bilo hladno, nebo pa čisto,' je dodala ob koncu dneva. Naslednji dan so skrajšali pot in dodali dve minuti raztezanja.",
+ "components": [
+  {
+   "component_id": "comp-prose-math-explainer-dev-0006",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 358
+  },
+  {
+   "component_id": "comp-code-rust-dev-0002",
+   "category": "code",
+   "start_byte": 359,
+   "end_byte": 683
+  },
+  {
+   "component_id": "comp-machine-shell-commands-dev-0007",
+   "category": "machine",
+   "start_byte": 684,
+   "end_byte": 710
+  },
+  {
+   "component_id": "comp-markdown-tables-dev-0004",
+   "category": "markdown",
+   "start_byte": 711,
+   "end_byte": 812
+  },
+  {
+   "component_id": "comp-markdown-autolinks-dev-0001",
+   "category": "markdown",
+   "start_byte": 813,
+   "end_byte": 975
+  },
+  {
+   "component_id": "comp-code-c-dev-0001",
+   "category": "code",
+   "start_byte": 976,
+   "end_byte": 1115
+  },
+  {
+   "component_id": "comp-prose-sports-dev-0002",
+   "category": "prose",
+   "start_byte": 1116,
+   "end_byte": 1528
+  }
+ ]
+}

@@ -1,0 +1,71 @@
+{
+ "doc_id": "dev-002275",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T10-randomized",
+ "byte_length": 1360,
+ "cp_length": 1341,
+ "sha256": "24a0479c32d65f036504a8258c26f83ad970171b18801316a12b03d49db2d289",
+ "document": "V Splitu smo opazovali staro obalo in šele zvečer spoznali, da je bilo morje mirno. Vodič je dejal: \"ogledaj najprej dvorano, nato pa solne jame\". Naslednji dan smo se sprehodili po starem mestnem jedru in kupili oljčno olje.\n[trgovina]\nime = 'Trgovina Lipa'\nprodajalec = 'Irena Zupan'\nzaloga = '12 kos'\npopust = '15 %'\nopis = '*Novica* o _prodaji_'\nvir = 'https://primer.si/novica'\n\\text{Bled}\\begin{pmatrix}15&16&17\\\\18&19&20\\end{pmatrix}\n\\begin{equation} \\text{Testni projekt Anja} \\; : \\; \\lim_{\\nu \\to \\infty} \\frac{1}{\\nu}=0 \\Rightarrow \\lim_{\\nu \\to \\infty} \\left(\\frac{1}{\\nu}+1\\right)=1 \\end{equation}\nProjekt Modra Gora vsebuje `vrednost` in ``besedilo`` kot 4 s v stavku.\n| Področje | Enota | Površina |\n| --- | --- | --- |\n| Sotek 3 | m2 | 180 |\n| Sotek 4 | ha | 2 |\n1. Projekt Jabljana: 4 kosi, 250 ml\n2. Podatek: 20 °C, 5 l\n[zvezda]\nime = *Projekt Izmišljena zvezda*\nopis = _svetlost_ 1,8\nrazdalja = 45 letnih svetlob\navtor = Sara Potočnik\nvir = https://primer.si/novica\n; nevtralna testna vsebina\n0.13.4, 0,9999\nSlovenska pesniška tradicija ima svojo tišino. V izmišljenem projektu Glas in tišina, ki raziskuje naravno, se pojavi motiv dreves. Izmišljena pesnica Anja Horvat v zbirki iz leta 2015 piše: »Drevo ne govori, a se v šumu zdi, da je vprašanje.« Ta stavek se v evropskem kontekstu pogosto pojavi kot znak identitete.",
+ "components": [
+  {
+   "component_id": "comp-prose-travel-dev-0002",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 229
+  },
+  {
+   "component_id": "comp-structured-toml-dev-0003",
+   "category": "structured",
+   "start_byte": 230,
+   "end_byte": 386
+  },
+  {
+   "component_id": "comp-math-matrices-dev-0004",
+   "category": "math",
+   "start_byte": 387,
+   "end_byte": 444
+  },
+  {
+   "component_id": "comp-math-equation-env-dev-0005",
+   "category": "math",
+   "start_byte": 445,
+   "end_byte": 614
+  },
+  {
+   "component_id": "comp-markdown-inline-code-dev-0007",
+   "category": "markdown",
+   "start_byte": 615,
+   "end_byte": 686
+  },
+  {
+   "component_id": "comp-markdown-tables-dev-0008",
+   "category": "markdown",
+   "start_byte": 687,
+   "end_byte": 784
+  },
+  {
+   "component_id": "comp-markdown-lists-dev-0002",
+   "category": "markdown",
+   "start_byte": 785,
+   "end_byte": 844
+  },
+  {
+   "component_id": "comp-structured-ini-dev-0008",
+   "category": "structured",
+   "start_byte": 845,
+   "end_byte": 1020
+  },
+  {
+   "component_id": "comp-machine-versions-numbers-units-dev-0006",
+   "category": "machine",
+   "start_byte": 1021,
+   "end_byte": 1035
+  },
+  {
+   "component_id": "comp-prose-literature-dev-0008",
+   "category": "prose",
+   "start_byte": 1036,
+   "end_byte": 1360
+  }
+ ]
+}

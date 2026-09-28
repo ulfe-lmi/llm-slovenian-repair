@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-001267",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T3-prose-fenced-prose",
+ "byte_length": 845,
+ "cp_length": 824,
+ "sha256": "ea10df240a2bc4c6daebe2583374adc076296554edc1ff768d6dc04f6116ebda",
+ "document": "Sara je pojasnila, da se povprečje včasih zdi napačno, če manjkajo posamezni dnevi. “V takih primerih je bolje reči, da je slika neenakomerna,“ je dodala in pokazala še stolpec z najmanjšo vrednostjo. Skupina se je odločila, da bo za leto 2025 zbrala tudi podatke o vremenu. Tako bo lažje razložila razmerja med posameznimi tedeni.\n```\n/* Primer 1: pot in cena, črka ž */ int main(void) { const char *pot = \"docs/vir.txt\"; const char *naslov = \"Naslov: *poudarek* in _podčrtano_\"; int seStez = 12; const char *cena = \"Cena: 12,50 $ (oklepji)\"; (void)pot; (void)naslov; (void)cena; return seStez; }\n```\nV raziskavi, ki jo je vodila Nika, so primerjali stavek iz leta 1945 s krajšim opisom iz leta 1959; razlika je bila v dolžini in v rabi vejic. (V notranji opombi je pisalo, da merilo ni bila natančna data, temveč letnica.)",
+ "components": [
+  {
+   "component_id": "comp-prose-statistics-dev-0005",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 345
+  },
+  {
+   "component_id": "comp-code-c-dev-0009",
+   "category": "code",
+   "start_byte": 346,
+   "end_byte": 618
+  },
+  {
+   "component_id": "comp-prose-history-dev-0004",
+   "category": "prose",
+   "start_byte": 619,
+   "end_byte": 845
+  }
+ ]
+}

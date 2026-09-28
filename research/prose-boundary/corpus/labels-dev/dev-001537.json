@@ -1,0 +1,62 @@
+{
+ "doc_id": "dev-001537",
+ "byte_length": 594,
+ "cp_length": 584,
+ "regions": [
+  {
+   "start_byte": 0,
+   "end_byte": 311,
+   "start_cp": 0,
+   "end_cp": 306,
+   "component_id": "comp-prose-administration-dev-0006",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 311,
+   "end_byte": 313,
+   "start_cp": 306,
+   "end_cp": 308,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 313,
+   "end_byte": 364,
+   "start_cp": 308,
+   "end_cp": 359,
+   "component_id": "comp-malformed-incomplete-paren-bracket-dev-0002",
+   "category": "malformed",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 364,
+   "end_byte": 366,
+   "start_cp": 359,
+   "end_cp": 361,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 366,
+   "end_byte": 594,
+   "start_cp": 361,
+   "end_cp": 584,
+   "component_id": "comp-prose-statistics-dev-0011",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  }
+ ],
+ "invariants": {
+  "tiling_complete": true,
+  "no_contradictory_overlaps": true,
+  "cp_range_exact": true
+ }
+}

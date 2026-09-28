@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-001689",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T7-prose-json-prose-latex",
+ "byte_length": 855,
+ "cp_length": 835,
+ "sha256": "1189c26ab475c68bbb84dc7b46eb8b0510b534adb32677d07621c2997558542e",
+ "document": "Iva je v projektu Kuhinjski arhiv v ponedeljek zvečer pripravila potico, a je namesto oreščkov izbrala mandlje, ker je imela doma le eno majhno škatlo. Testo (tisti tanjši recept iz leta 1989) se je lepo razvalalo, čeprav je bila kuhinja prepolna. Ko se je postrežbo spomnila na babičino opombo, je v dnevnik dodala vstavek: „Sladica naj diha vsaj tri četrt ure.“\n{\"ime\":\"Oseba Miha\",\"dolžina\":\"1,8 m\",\"avtorsko\":\"Nevtralna testna vsebina\",\"razmerje\":\"0,13\",\"opomba\":\"*Izmišljena oseba* https://primer.si/novica\"}\nV projektu Prijava za športno leto 2024 je učiteljica Meta pojasnila, da lahka utrujenost po vadbi pogosto prehaja, če oseba zaspi in pije vodo. Če se stanje ponovi ali poslabša, je smiselno poiskati zdravnika.\n\\[ \\begin{cases} \\alpha_1+2\\beta_2=7,\\\\ 3\\gamma_1-\\delta_2=\\text{Ljubljana},\\\\ \\eta_3\\zeta_4=12 \\end{cases} \\]",
+ "components": [
+  {
+   "component_id": "comp-prose-cooking-dev-0009",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 376
+  },
+  {
+   "component_id": "comp-structured-json-dev-0006",
+   "category": "structured",
+   "start_byte": 377,
+   "end_byte": 528
+  },
+  {
+   "component_id": "comp-prose-medicine-explainer-dev-0011",
+   "category": "prose",
+   "start_byte": 529,
+   "end_byte": 744
+  },
+  {
+   "component_id": "comp-math-bracket-tex-dev-0001",
+   "category": "math",
+   "start_byte": 745,
+   "end_byte": 855
+  }
+ ]
+}

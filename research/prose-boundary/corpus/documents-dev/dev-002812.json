@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-002812",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T8-quote-fenced",
+ "byte_length": 528,
+ "cp_length": 515,
+ "sha256": "e8a8565d21833ff0e0a5eb6b80653aed3058b8845d6aabe1838b3887a67db50c",
+ "document": "> Kratki nasvet: krpo za pregrco namakaj v mrzli vodi in jo potem stisni, da pregrca ne pusti madežev. (Sredstvo iz stekleničke s štopalko je morda dražje, a zadošča za večkrat.) Če želiš manj smeti, steklenice operi in jih odnesi v zbirni center. `/* Fragment 1: nevtralni testni projekt, vir https://primer.`\n```\n/* Konstanta za testno temo: Hrašna vrednost */ const HRAŠNA_VREDNOST = 42; const razdelek2 = 7; function zber(zbir) { return zbir + HRAŠNA_VREDNOST; } console.log(`Vrednost: ${zber(razdelek2)}`);\n```",
+ "components": [
+  {
+   "component_id": "comp-prose-everyday-advice-dev-0008",
+   "category": "prose",
+   "start_byte": 2,
+   "end_byte": 257
+  },
+  {
+   "component_id": "comp-code-cpp-dev-0009",
+   "category": "code",
+   "start_byte": 258,
+   "end_byte": 320
+  },
+  {
+   "component_id": "comp-code-javascript-dev-0004",
+   "category": "code",
+   "start_byte": 321,
+   "end_byte": 528
+  }
+ ]
+}

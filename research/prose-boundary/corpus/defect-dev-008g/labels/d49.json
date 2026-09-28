@@ -1,0 +1,82 @@
+{
+ "doc_id": "d49",
+ "byte_length": 36,
+ "cp_length": 36,
+ "invariants": {
+  "tiling_complete": true,
+  "no_contradictory_overlaps": true,
+  "cp_range_exact": true
+ },
+ "regions": [
+  {
+   "start_byte": 0,
+   "end_byte": 10,
+   "start_cp": 0,
+   "end_cp": 10,
+   "component_id": "template",
+   "category": "template",
+   "role": "PROSE",
+   "template_owned": true
+  },
+  {
+   "start_byte": 10,
+   "end_byte": 20,
+   "start_cp": 10,
+   "end_cp": 20,
+   "component_id": "defect-008g-d49a",
+   "category": "structured",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 20,
+   "end_byte": 21,
+   "start_cp": 20,
+   "end_cp": 21,
+   "component_id": "template",
+   "category": "template",
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 21,
+   "end_byte": 25,
+   "start_cp": 21,
+   "end_cp": 25,
+   "component_id": "defect-008g-d49b",
+   "category": "structured",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 25,
+   "end_byte": 27,
+   "start_cp": 25,
+   "end_cp": 27,
+   "component_id": "defect-008g-d49b",
+   "category": "structured",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 27,
+   "end_byte": 28,
+   "start_cp": 27,
+   "end_cp": 28,
+   "component_id": "template",
+   "category": "template",
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 28,
+   "end_byte": 36,
+   "start_cp": 28,
+   "end_cp": 36,
+   "component_id": "template",
+   "category": "template",
+   "role": "PROSE",
+   "template_owned": true
+  }
+ ]
+}

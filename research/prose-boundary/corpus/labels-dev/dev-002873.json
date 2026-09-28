@@ -1,0 +1,112 @@
+{
+ "doc_id": "dev-002873",
+ "byte_length": 1002,
+ "cp_length": 972,
+ "regions": [
+  {
+   "start_byte": 0,
+   "end_byte": 276,
+   "start_cp": 0,
+   "end_cp": 271,
+   "component_id": "comp-prose-sports-dev-0008",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 276,
+   "end_byte": 277,
+   "start_cp": 271,
+   "end_cp": 272,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 277,
+   "end_byte": 280,
+   "start_cp": 272,
+   "end_cp": 275,
+   "component_id": "comp-code-shell-bash-dev-0004",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 280,
+   "end_byte": 281,
+   "start_cp": 275,
+   "end_cp": 276,
+   "component_id": "comp-code-shell-bash-dev-0004",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 281,
+   "end_byte": 609,
+   "start_cp": 276,
+   "end_cp": 596,
+   "component_id": "comp-code-shell-bash-dev-0004",
+   "category": "code",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 609,
+   "end_byte": 610,
+   "start_cp": 596,
+   "end_cp": 597,
+   "component_id": "comp-code-shell-bash-dev-0004",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 610,
+   "end_byte": 613,
+   "start_cp": 597,
+   "end_cp": 600,
+   "component_id": "comp-code-shell-bash-dev-0004",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 613,
+   "end_byte": 614,
+   "start_cp": 600,
+   "end_cp": 601,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 614,
+   "end_byte": 961,
+   "start_cp": 601,
+   "end_cp": 938,
+   "component_id": "comp-prose-math-explainer-dev-0004",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 961,
+   "end_byte": 1002,
+   "start_cp": 938,
+   "end_cp": 972,
+   "component_id": "template",
+   "category": null,
+   "role": "PROSE",
+   "template_owned": true
+  }
+ ],
+ "invariants": {
+  "tiling_complete": true,
+  "no_contradictory_overlaps": true,
+  "cp_range_exact": true
+ }
+}

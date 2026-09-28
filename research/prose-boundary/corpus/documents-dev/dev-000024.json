@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-000024",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T3-prose-fenced-prose",
+ "byte_length": 1053,
+ "cp_length": 1030,
+ "sha256": "97c7d64d931d4b5f26084dc433973ad277123a524b684e41a7bcc99480a44c49",
+ "document": "V projektu Prvi tok, ki ga je leta 2018 sestavila Ana, se je naučila, da mora biti sklep zaprt, da se lučka sploh prižge. Baterija, ki je imela 4,5 V, je bila nameščena v držač, medtem ko je upornost zaščitila diodo pred prevelikim tokom. (Zelo pomembno je preveriti, ali so vsi konci dobro povezani.)\n```\n/* Testni fragment 5: izmišljena oseba Anja, projekt Kovač. */ SELECT 'Anja' AS `ime`, '5,00 $' AS `cena`, 'https://primer.si/koda' AS `url`, 'src/modul2.py' AS `pot`, TRIM('**poudarek** in _črta_') AS `opomba`, 'razdelek2' AS `razdelek2`, 'seStez' AS `seStez`, 'ž' AS `HRAŠNA_VREDNOST` FROM (SELECT 5 AS `en`) AS `t` WHERE (`t`.`en` = 5);\n```\nV letu 2021 je ekipa izmišljenega projekta Jutranja svetloba v Ljubljani opazila, da se tanka plastična membrana ob segrevanju rahlo krivi. Raziskovalka Ana Kovač je zapisala, da bi lahko tak preprost pojav koristil pri razvoju tihih senzorjev (z vnosom: »brez zvočnega opozorila«). Po treh mesecih testov so si člani skupine privoščili kratki predah in nato spet zagnali meritve.",
+ "components": [
+  {
+   "component_id": "comp-prose-electronics-dev-0006",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 310
+  },
+  {
+   "component_id": "comp-code-sql-dev-0005",
+   "category": "code",
+   "start_byte": 311,
+   "end_byte": 663
+  },
+  {
+   "component_id": "comp-prose-science-dev-0006",
+   "category": "prose",
+   "start_byte": 664,
+   "end_byte": 1053
+  }
+ ]
+}

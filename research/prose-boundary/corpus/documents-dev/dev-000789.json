@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-000789",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T9-prose-malformed-prose",
+ "byte_length": 580,
+ "cp_length": 571,
+ "sha256": "c679a44c7a626eca51a705c1c2965857e80d54deac6fc417a4a4ab55df39b327",
+ "document": "V projektu Pomladni spanec so opisali, da pomanjkanje spanja lahko vpliva na razpoloženje. Pogosto se lahko spremeni tudi koncentracija. Občutek utrujenosti se lahko poveča. To je splošna opomba, ne pa osebni nasvet. Če se takšni znaki ponavljajo, je dobro, da osebo sprejme zdravnik.\n{\"opis\": \"Testna vsebina projekta Lipa\", \nMaja je poletni dopust v Sredozemlju izbrala predvsem zaradi tihih obalnih vas (zlasti tistih v bližini Kotorskega zaliva). »Sonce je bilo toplo,« je zapisala v svojih opombah, a je poudarila, da je treba med popoldanskimi urami ostati v senci.",
+ "components": [
+  {
+   "component_id": "comp-prose-medicine-explainer-dev-0004",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 290
+  },
+  {
+   "component_id": "comp-malformed-truncated-json-dev-0002",
+   "category": "malformed",
+   "start_byte": 291,
+   "end_byte": 332
+  },
+  {
+   "component_id": "comp-prose-travel-dev-0012",
+   "category": "prose",
+   "start_byte": 333,
+   "end_byte": 580
+  }
+ ]
+}

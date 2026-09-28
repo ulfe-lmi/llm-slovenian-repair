@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-002927",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T2-prose-math-prose",
+ "byte_length": 902,
+ "cp_length": 882,
+ "sha256": "0720a567d58b7c1bbd349bdbcc054ff49f85139cbfe3d6ecb0923be30537fad5",
+ "document": "Udeleženci projekta Otvorena vrata so v jeseni 2024 preizkusili učno sredo, v kateri je bil učbenik le ena od štirih podlag. Mladostnike je zanimalo, zakaj se isti izpit pri treh učiteljih razlikuje v razlagi (zlasti pri nalogah iz književnosti), zato so zapisali kratko pojasnilo. Na koncu so se dogovorili, da bo vsak odrasli udeleženec dobil eden sam pogovorni termin, ne pa dveh ločenih rok.\n\\begin{equation} \\text{Testni projekt Mojca} \\; : \\; \\alpha_1=3, \\beta_1=4 \\Rightarrow \\gamma_1^2=\\alpha_1^2+\\beta_1^2 \\Rightarrow \\gamma_1=5 \\end{equation}\nVelik razpon pri mostu Pričakovanje je bil glavna težava. »Vzdržljivost gre pred estetiko,« je zapisal Marko Zupančič. V letu 2023 so namestili cevne stebre s premerom 1,2 metra in zagotovili dostop do ojačitve. Najmanj očitno je bilo izravnati vrzeli med betonskimi ploščami, saj bi sicer vozne površine hitro postale neravnine.",
+ "components": [
+  {
+   "component_id": "comp-prose-education-dev-0010",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 403
+  },
+  {
+   "component_id": "comp-math-equation-env-dev-0001",
+   "category": "math",
+   "start_byte": 404,
+   "end_byte": 560
+  },
+  {
+   "component_id": "comp-prose-engineering-dev-0012",
+   "category": "prose",
+   "start_byte": 561,
+   "end_byte": 902
+  }
+ ]
+}

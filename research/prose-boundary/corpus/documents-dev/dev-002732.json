@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-002732",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T5-lists",
+ "byte_length": 997,
+ "cp_length": 980,
+ "sha256": "cab3813d37c6c7d3b0cca170d6003262ef9772c05e500736b0245390b61611f5",
+ "document": "- Petra je načrtovala kratek vikend v dolini Soče. Njen spremljevalec, Ivan, jo je peljal do smaragdne reke in starega gradu. »Vzemi lahke hlače,« je rekel pred odhodom. Vratila se je utrujena, a z dovolj fotografij.\r\n- `#include <iostream>`\r\n- V letu 2021 je ekipa izmišljenega projekta Jutranja svetloba v Ljubljani opazila, da se tanka plastična membrana ob segrevanju rahlo krivi. Raziskovalka Ana Kovač je zapisala, da bi lahko tak preprost pojav koristil pri razvoju tihih senzorjev (z vnosom: »brez zvočnega opozorila«). Po treh mesecih testov so si člani skupine privoščili kratki predah in nato spet zagnali meritve.\r\n- V arhivu projekta Stare potje je bil najden list, na katerem piše o izletu do izvira leta 1807. Po besedah urednice Nine Mlakar je bil povzetek kratek, vendar dovolj jasen, da si lahko bralci predstavljajo skupino, ki je imela osem potnikov in enega psa. Delček zemljevida, prilepljen v isti zvezki, kaže zanko, ki je merila okoli trideset kilometrov.",
+ "components": [
+  {
+   "component_id": "comp-prose-travel-dev-0013",
+   "category": "prose",
+   "start_byte": 2,
+   "end_byte": 221
+  },
+  {
+   "component_id": "comp-code-cpp-dev-0001",
+   "category": "code",
+   "start_byte": 225,
+   "end_byte": 246
+  },
+  {
+   "component_id": "comp-prose-science-dev-0006",
+   "category": "prose",
+   "start_byte": 250,
+   "end_byte": 639
+  },
+  {
+   "component_id": "comp-prose-history-dev-0010",
+   "category": "prose",
+   "start_byte": 643,
+   "end_byte": 997
+  }
+ ]
+}

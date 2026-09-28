@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-002307",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T9-prose-malformed-prose",
+ "byte_length": 765,
+ "cp_length": 743,
+ "sha256": "e0efa39fe1434754980da9dcb0f89baf81a89c9fcb2e43b48afe6711f480ba39",
+ "document": "V izmišljenem raziskovalnem projektu “Arhiv Dravskih poti” (nevtralna testna zbirka) so zapisi o potovanjih po Dravi prikazali, kako so meje med skupnostmi spreminjale spomin na preteklost. Letnica 1918 je postala mejni simbol. Avtorica Ana Kralj je v vnosu zapisala (po mnenju uredništva), da je “zgodovina” večinoma molk med letnicami.\r\n\r\n\\begin{align} t &= 0, zbirka podatkov za projekt Modra pot, izmišljen sodelavec Jožko Novak.\r\n\r\nNa gradbišču pri mostu na Soči (projekt Sava) so delavci namesto starega betonskega opornega zidu zgradili lažjo jekleno nosilno konstrukcijo. Priprava temeljev je potekala pozimi, ko so temperaturi pod ničlo zahtevale dodatno osvetlitev in tople oblačila za ekipo.\n Pozor: é (dekompouziran znakovni niz).",
+ "components": [
+  {
+   "component_id": "comp-prose-history-dev-0011",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 348
+  },
+  {
+   "component_id": "comp-malformed-unclosed-tex-env-dev-0003",
+   "category": "malformed",
+   "start_byte": 352,
+   "end_byte": 446
+  },
+  {
+   "component_id": "comp-prose-engineering-dev-0001",
+   "category": "prose",
+   "start_byte": 450,
+   "end_byte": 721
+  }
+ ]
+}

@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-001392",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T7-prose-json-prose-latex",
+ "byte_length": 969,
+ "cp_length": 954,
+ "sha256": "c1ed76ce726ed3a7b734bf405b6634043b9adab0c3836eb74634ae50bfaf1ffd",
+ "document": "V projektu Brda je ekipa pod vodstvom Anje Zupan preverjala betonno ploščo in jeklene povezave (vezne elemente) na mostu čez Sočo. »Pri takih presojah najprej gledamo trdnost, potem pa še vzdržljivost,« je povedala na terenskem sestanku. Izračuni so pokazali, da bo dovolj, če se armatura postavi po novem razporeditvenem načrtu.\n{\"ime\":\"Oseba Ana\",\"vloga\":\"Koordinatorka\",\"stanje\":\"Aktivna 80 %\",\"avtorsko\":\"Nevtralna testna vsebina\",\"podrobnosti\":{\"visina\":\"3,5 m\",\"razmerje\":\"0,13\",\"opis\":\"*Preverjanje* https://primer.si/novica\"}}\nGradbeniki so v projektu Lipa najprej razstavili starega opornega zidu, nato pa zgradili nove podnožne plošče iz ojačane betonske mase (debelina 1,2 metra). Delo so spremljali izvajalci iz Ljubljane in Maribora, medtem ko so geotehniki redno merili usedanje tal.\n\\begin{equation} \\text{Testni projekt Nika} \\; : \\; \\delta_7=\\frac{1}{2} \\rho_7 \\eta_7 \\Rightarrow \\rho_7=4, \\eta_7=5 \\Rightarrow \\delta_7=10 \\end{equation}",
+ "components": [
+  {
+   "component_id": "comp-prose-engineering-dev-0006",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 340
+  },
+  {
+   "component_id": "comp-structured-json-dev-0002",
+   "category": "structured",
+   "start_byte": 341,
+   "end_byte": 545
+  },
+  {
+   "component_id": "comp-prose-engineering-dev-0004",
+   "category": "prose",
+   "start_byte": 546,
+   "end_byte": 812
+  },
+  {
+   "component_id": "comp-math-equation-env-dev-0007",
+   "category": "math",
+   "start_byte": 813,
+   "end_byte": 969
+  }
+ ]
+}

@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-001801",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T9-prose-malformed-prose",
+ "byte_length": 703,
+ "cp_length": 685,
+ "sha256": "50b316e6ff5b633a8bf73f4fd2bc2093877b4690261c470b10af1a631ef3dac6",
+ "document": "V projektu Gradec je bilo pri projektiranju jeklene konstrukcije ključno, koliko obremenitve prenese nosilni presek. Mladi konstruktor Jaka Kovač je, ob podpori projektirke Lune, predlagal dodatno ojačanje in začasne podlage. Sodelavci so se po dveh tednih razprave strinjali s predlogom. Končno je most dobil tudi dodatno zaščito pred erozijo.\n{\"oseba\": \"Izmišljena oseba Ana Kovač\", \nV projektu Nevtralna zdravstvena vsebina 2025 je Ana Kovač pripravila opombo o utrujenosti, ki ima lahko mnogo vzrokov. Ker telo na spremembe odziva različno, je koristno, da se oseba posvetuje z zdravnikom, še posebej če se stanje ponavlja. V takih primerih „splošna razlaga“ ne nadomesti pregleda.",
+ "components": [
+  {
+   "component_id": "comp-prose-engineering-dev-0008",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 351
+  },
+  {
+   "component_id": "comp-malformed-truncated-json-dev-0003",
+   "category": "malformed",
+   "start_byte": 352,
+   "end_byte": 394
+  },
+  {
+   "component_id": "comp-prose-medicine-explainer-dev-0006",
+   "category": "prose",
+   "start_byte": 395,
+   "end_byte": 703
+  }
+ ]
+}

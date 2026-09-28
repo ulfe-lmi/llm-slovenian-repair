@@ -1,0 +1,47 @@
+{
+ "doc_id": "dev-000735",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T10-randomized",
+ "byte_length": 990,
+ "cp_length": 977,
+ "sha256": "421664716cf93648a731203a352c1f93285c92af47cfa82bfdbb08008bb44a26",
+ "document": "Za izpit iz zgodovine so učenci pripravili kratko predstavitev. Pri nalogi so uporabili učbenik, ki ga je leta 2018 uredila ekipa Novega zavoda za izobraževanje (zlasti strokovna urednica Irena Polak). Ocenjevanje je bilo delno usklajeno, delno pa temeljilo na ustnem pogovoru.\nFragment 8: <ol><li>Konfiguracija: _varno_stanje_ (vrednost 0,01)</li><li>Preverjanje: *trajanje* 125 s</li><li>Dokumenti: glej <a href=\"https://primer.si/dokumenti\">dokumenti</a></li></ol>\n```\n/* Zaključni test: oseba Janež, projekt Brest */ const naslov = 'Vrednost je 25 $'; const opomba = `Podpis: **Janez** (_brez šumnika_)`; const pot = 'docs/vir.txt'; const razdelek2 = 8; console.log(naslov, opomba, pot, razdelek2);\n```\nQ3_2024\n$$\\frac{\\xi}{\\eta - 2} = \\frac{8}{13} + \\alpha = \\text{Nova Gorica}$$\nAna je v razredni testni delavnici najprej preverila, ali je sklep odprt (tako je ohišje varno), in šele nato prižgala majhno utripalko. V zapisniku je zapisala „Preizkus 2024 je brez napake.“",
+ "components": [
+  {
+   "component_id": "comp-prose-education-dev-0004",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 280
+  },
+  {
+   "component_id": "comp-structured-html-dev-0008",
+   "category": "structured",
+   "start_byte": 281,
+   "end_byte": 470
+  },
+  {
+   "component_id": "comp-code-javascript-dev-0008",
+   "category": "code",
+   "start_byte": 471,
+   "end_byte": 712
+  },
+  {
+   "component_id": "comp-machine-identifiers-dev-0005",
+   "category": "machine",
+   "start_byte": 713,
+   "end_byte": 720
+  },
+  {
+   "component_id": "comp-math-display-dollar-dev-0007",
+   "category": "math",
+   "start_byte": 721,
+   "end_byte": 790
+  },
+  {
+   "component_id": "comp-prose-electronics-dev-0001",
+   "category": "prose",
+   "start_byte": 791,
+   "end_byte": 990
+  }
+ ]
+}

@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-000524",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T8-quote-fenced",
+ "byte_length": 480,
+ "cp_length": 471,
+ "sha256": "01b355e80914bd245f57f475eda879b5f9607d9a5076ab000a9975a4a1b48f93",
+ "document": "> Zahtevo so oddali v ponedeljek. V občini so jo prejeli isti dan, in sicer ob enajsti uri popoldne. Potrdilo z modro značko, ki je merila tri centimetre, so priložili k vsakemu vnosu v evidenco. `#!/usr/bin/env bash`\n```\n// Test: poročilo v izmišljenem projektu Jabolko.\nfn main() {\n    let pot = \"src/modul.py\";\n    let besedilo = \"poudarek **žlahtna šuma** in `oklepji` (10 €)\";\n    let url = \"https://primer.si/koda\";\n    println!(\"{pot}: {besedilo} -> {url}\");\n}\n```",
+ "components": [
+  {
+   "component_id": "comp-prose-administration-dev-0009",
+   "category": "prose",
+   "start_byte": 2,
+   "end_byte": 198
+  },
+  {
+   "component_id": "comp-code-shell-bash-dev-0010",
+   "category": "code",
+   "start_byte": 199,
+   "end_byte": 220
+  },
+  {
+   "component_id": "comp-code-rust-dev-0011",
+   "category": "code",
+   "start_byte": 221,
+   "end_byte": 480
+  }
+ ]
+}

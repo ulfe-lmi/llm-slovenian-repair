@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-002735",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T8-quote-fenced",
+ "byte_length": 472,
+ "cp_length": 465,
+ "sha256": "fd4f899fc3d81f09de7e7ce19e4257b07673ca521b2b25598720b65082cb0ff7",
+ "document": "> Marko je na sestanku v Mariboru povedal, da je zanka ponavljajoče delo. (Čakala, kolikor je potrebno, a ne več.) Njegov opis je bil preprost: program naj preveri pakete en po en, dokler ne prazni tovornjak. `# Testni projekt: Seznam; avtor: Maja Lipovnik`\n```\n#include <string>\n// Končni primer: Ana, Karel, Lipa\n// Znaki: č, š, ž\nint main() {\n    const int HRA_NA_VREDNOST = 9;\n    std::string opis = \"`oklepaji` in *zvezdice*\";\n    return HRA_NA_VREDNOST;\n}\n```",
+ "components": [
+  {
+   "component_id": "comp-prose-programming-explainer-dev-0002",
+   "category": "prose",
+   "start_byte": 2,
+   "end_byte": 211
+  },
+  {
+   "component_id": "comp-code-python-dev-0006",
+   "category": "code",
+   "start_byte": 212,
+   "end_byte": 260
+  },
+  {
+   "component_id": "comp-code-cpp-dev-0008",
+   "category": "code",
+   "start_byte": 261,
+   "end_byte": 472
+  }
+ ]
+}

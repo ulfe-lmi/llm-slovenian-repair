@@ -1,0 +1,71 @@
+{
+ "doc_id": "dev-002088",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T10-randomized",
+ "byte_length": 1371,
+ "cp_length": 1345,
+ "sha256": "d719c0bb97597965a5eb24a87555e7472d04b1837e487fea659467a35a3b023b",
+ "document": "Priprava na državni izpit za odrasle je potekala mirno (trije tedni, dvakrat na teden), in Matej je ob tem dejal: »Znanje ostane, če ga človek lahko pove iz glave.« Načrt je vključeval tudi kratek pregled starih učbenikov, a brez dolžine in brez strahu.\n> Projekt Ljubelj, avtor *Miha*: globina 40 m.\n> > Meritev velja za test.\nTest *Luka* ocenjuje _dolžino_ 8 centimetrov.\nhttp://izvor.si/dokument?stran=2\n\\begin{equation}\\begin{aligned}E_1 &= \\alpha_1 \\cdot \\beta_1 + \\gamma_1 \\text{Ljubljana} \\\\H_1 &= \\lambda_1 \\Delta_1 \\text{Ana Kovač}\\end{aligned}\\end{equation}\n{\"ime\":\"Projekt Lipa\",\"cilj\":\"Nalaganje podatkov 25 %\",\"avtorsko\":\"Nevtralna testna vsebina\",\"merila\":{\"razmerje\":\"3,5 m / 0,13\",\"opomba\":\"**Test** https://primer.si/novica\"}}\nIzmišljena oseba Tomaž Zupan pri projektu Testni Modul doda 7 m, 15 °C in <pošta@primer.si> poleg <https://primer.si/stran>.\n```\nseStez = 'https://primer.si/koda'; razdelek2 = 'src/modul.py'; HRAŠNA_VREDNOST = 7 # komentar v slovenščini: izmišljena oseba Ana, tema črn žir\n```\ncargo test\nV zbirki Tihi bralci (2018) mlada pisateljica Nina Skof opisuje dedno knjižnico. Na stenski plošci visi seznam bralcev iz let 1954 in 1971, med njimi tudi izmišljeni pesnik Jure Čvik. Evropska literarna tradicija pozna podobno zbirko tistih, ki so izginili v prevodu. Knjižnost je tu skrita v prahu, ne v naslovu.",
+ "components": [
+  {
+   "component_id": "comp-prose-education-dev-0013",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 262
+  },
+  {
+   "component_id": "comp-markdown-blockquotes-dev-0003",
+   "category": "markdown",
+   "start_byte": 263,
+   "end_byte": 336
+  },
+  {
+   "component_id": "comp-markdown-emphasis-dev-0005",
+   "category": "markdown",
+   "start_byte": 337,
+   "end_byte": 383
+  },
+  {
+   "component_id": "comp-machine-urls-dev-0008",
+   "category": "machine",
+   "start_byte": 384,
+   "end_byte": 416
+  },
+  {
+   "component_id": "comp-math-aligned-env-dev-0001",
+   "category": "math",
+   "start_byte": 417,
+   "end_byte": 578
+  },
+  {
+   "component_id": "comp-structured-json-dev-0001",
+   "category": "structured",
+   "start_byte": 579,
+   "end_byte": 754
+  },
+  {
+   "component_id": "comp-markdown-autolinks-dev-0006",
+   "category": "markdown",
+   "start_byte": 755,
+   "end_byte": 883
+  },
+  {
+   "component_id": "comp-code-python-dev-0010",
+   "category": "code",
+   "start_byte": 884,
+   "end_byte": 1041
+  },
+  {
+   "component_id": "comp-machine-shell-commands-dev-0004",
+   "category": "machine",
+   "start_byte": 1042,
+   "end_byte": 1052
+  },
+  {
+   "component_id": "comp-prose-literature-dev-0003",
+   "category": "prose",
+   "start_byte": 1053,
+   "end_byte": 1371
+  }
+ ]
+}

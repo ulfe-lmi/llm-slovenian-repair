@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-002243",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T11-interactions",
+ "byte_length": 883,
+ "cp_length": 870,
+ "sha256": "f1871b2914d88eca53e4f67a8a45c683732f9485ed29da972e18e8c8af99db54",
+ "document": "`// Testni podatki za osebo Ana.`.\n```\n// Vir: https://primer.si/koda\n// Pot: docs/vir.txt, čokolada\n#include <string>\nstd::string naslovLipa() {\n    // _podrobnosti_ in *zvezdice*\n    std::string naslov = \"Ana: _razdelek_ (test)\";\n    return naslov;\n}\n# komentar z \\frac{a}{b}\n```\nV Splitu smo opazovali staro obalo in šele zvečer spoznali, da je bilo morje mirno. Vodič je dejal: \"ogledaj najprej dvorano, nato pa solne jame\". Naslednji dan smo se sprehodili po starem mestnem jedru in kupili oljčno olje.\nLetos, ko smo v projektu Voda gledali porabo, so števila pokazala nižji trend. Povprečno so gospodinjstva porabila dvanajst litrov na dan. To je bilo manj kot lani, ko je bila vrednost tri litre višja. »Zanimivo je, da se razmerje med dnevi z nizko in z visoko porabo ni spremenilo,« je zapisala Ema. Račun je bil zato preprost, a kljub temu povzročil pozornost.",
+ "components": [
+  {
+   "component_id": "comp-code-rust-dev-0010",
+   "category": "code",
+   "start_byte": 0,
+   "end_byte": 33
+  },
+  {
+   "component_id": "comp-code-cpp-dev-0002",
+   "category": "code",
+   "start_byte": 35,
+   "end_byte": 282
+  },
+  {
+   "component_id": "comp-prose-travel-dev-0002",
+   "category": "prose",
+   "start_byte": 283,
+   "end_byte": 512
+  },
+  {
+   "component_id": "comp-prose-statistics-dev-0013",
+   "category": "prose",
+   "start_byte": 513,
+   "end_byte": 883
+  }
+ ]
+}

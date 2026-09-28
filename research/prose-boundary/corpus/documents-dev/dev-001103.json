@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-001103",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T4-heading-prose-table",
+ "byte_length": 405,
+ "cp_length": 401,
+ "sha256": "bbea6a8853921d1febb0160a29c08e6840de10edcdad8638660f1d722cb5f1c5",
+ "document": "## Maja je v pisarni preizkusila nov tiskalnik, ki pa se je ob \nV okviru projekta Reka je bila jeklena konstrukcija obnašala stabilno, tudi po močnem pihu. Most je bil dolg 412 metrov. Nosilci so bili premazani z epoksi premazom. Vetrovna obremenitev je bila izračunana za 30 let.\n| Opis | Vzorček |\n| --- | --- |\n| Poskus, ki ga je vodila Nina, je potekal | PROJEKT_IME=Modra_Gora, $HOME_DIR, KEY=i |",
+ "components": [
+  {
+   "component_id": "comp-prose-computing-dev-0001",
+   "category": "prose",
+   "start_byte": 3,
+   "end_byte": 63
+  },
+  {
+   "component_id": "comp-prose-engineering-dev-0003",
+   "category": "prose",
+   "start_byte": 64,
+   "end_byte": 283
+  },
+  {
+   "component_id": "comp-prose-science-dev-0009",
+   "category": "prose",
+   "start_byte": 320,
+   "end_byte": 360
+  },
+  {
+   "component_id": "comp-machine-env-vars-dev-0004",
+   "category": "machine",
+   "start_byte": 363,
+   "end_byte": 403
+  }
+ ]
+}

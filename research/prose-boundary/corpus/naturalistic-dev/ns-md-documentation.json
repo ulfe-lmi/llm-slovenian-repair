@@ -1,0 +1,68 @@
+[
+ {
+  "case_id": "nat-md-documentation-dev-01",
+  "scenario": "ns-md-documentation",
+  "scenario_index": 5,
+  "instance": "dev",
+  "fragment": "# Priročnik: Modul Sončna mreža\nTa odlomek opisuje vzorčni projekt `sonca-modul` in osnovni postopek za notranjo ekipo. Namen je pojasniti, kako pripraviti izvoz brez nepotrebnih nastavitev.\n\n## Pogoji\n- nameščen paket `zračni-stroj`\n- dostop do portala `Nepovezan center`\n- uporabnik `Maja Krpan` mora imeti vlogo `pregledovalec`\n\n## Osnovni koraki\n1. Odpri razdelek `nastavitve profil`.\n2. Izberi možnost `Nov izvoz`.\n3. Shrani rezultat v `izvozne datoteke` pod imenom `izvoz-1.json`.\n\n## Povezave\n- [Pogoji](#pogoji)\n- [Osnovni koraki](#osnovni-koraki)\n\n| Ime | Razred | Opomba |\n| --- | --- | --- |\n| `sonca-modul` | intern | osrednji paket |\n| `mreža-klinika` | zunanji | le za testiranje |\n\n```text\nnastavi profil v pregledovalec\nizberi izvoz v JSON\npreveri datum 2026-03-01\n```\n\n## Skica\nČe je `Nepovezan center` nepotreben, preskoči korake 2 in 3. `Maja Krpan` prejme povabilo v projekt `mreža-klinika`. Zapis je namenjen izmišljeni ekipi in ne uporablja absolutnih poti ali občutljivih podatkov.",
+  "fragment_sha256": "31f313d7ed2b2ef20f6eb88d5e5d8eb69988fec77d17a4eb7e6f3edb73a9d8cd",
+  "fragment_bytes": 1018,
+  "prompt_sha256": "74c511e5d7233412e712f9860d537fd40873f17e4089e5d2b3db238c0c66f6ad",
+  "seed": "0430095a2e768348"
+ },
+ {
+  "case_id": "nat-md-documentation-dev-02",
+  "scenario": "ns-md-documentation",
+  "scenario_index": 5,
+  "instance": "dev",
+  "fragment": "# Izvoz poročila v izmišljenem projektu Vesele Podatke\n\nTa razdelek opisuje, kako ekipa projekta pripravi mesečni izvoz za interne uporabnike. Postopek je namenjen le dokumentaciji in ne zahteva zunanjih storitev. Odgovorni sta Maja Kovač in Tine Zupan.\n\n## Koraki\n\n- Namestite odvisnosti z orodjem `poetry`.\n- Preverite konfiguracijo v datoteki `config.ini`.\n- Zaženite ukaz za izvoz.\n- Preverite datoteko `poročilo.csv` v mapi `izpisi`.\n\n| Nastavitev | Privzeta vrednost | Opis |\n|---|---|---|\n| Obdobje | 30 dni | Dolžina obdobja v dnevih |\n| Format | CSV | Končni format datoteke |\n| Jezik | slovenščina | Jezik vmesnika |\n\n## Primer koda\n\n```bash\npython izvoz.py --obdobje 30 --format csv\n```\n\nRezultat se shrani z imenom po datumu. Več o formatih si preberite v [izmišljenem vodiču](vodici/izvoz.md). Uporabniki lahko v [seznamu razširitve](razsiritev.md) dodajo lastne predloge. Če izvoz ne uspe, preverite dnevnik v mapi `dnevniki` in kontaktirajte ekipo.",
+  "fragment_sha256": "b2af1bbe91d471901ddcfca53663bb3430f88bfcb887bb37a648fbd739fd6d78",
+  "fragment_bytes": 978,
+  "prompt_sha256": "74c511e5d7233412e712f9860d537fd40873f17e4089e5d2b3db238c0c66f6ad",
+  "seed": "0430095a2e768348"
+ },
+ {
+  "case_id": "nat-md-documentation-dev-03",
+  "scenario": "ns-md-documentation",
+  "scenario_index": 5,
+  "instance": "dev",
+  "fragment": "# Knjižnica SončniPuls\n\nSončniPuls je izmišljen slovenski modul za beleženje dnevne rabe pri projektih. Namenjen je majhnim skupinam, ki potrebujejo preprost pregled aktivnosti brez zunanje strežniške opreme. Modul ohranja zapise lokalno in ponuja osnovna poenostavljena poročila.\n\n## Osnovni koraki\n\n- Preveri, da imaš nameščeno izdajo 1.4.\n- Odpri mapo projekta in zaženi orodje.\n- Vnesi ime uporabnika ter izberi obdobje poročila.\n\n## Primer kode\n\n```\nsoncinipuls porocilo --obdobje sedmica --format tabla\n```\n\nZapis se lahko ročno uredi z navadnim besedilnim urejevalnikom.\n\n## Podporni podatki\n\n| Polje | Opis |\n| --- | --- |\n| Ime projekta | Kratka oznaka, na primer VrtnaZbirka |\n| Uradnik | Izmišljena oseba, na primer Ana Breznik |\n| Datum | Začetek izbranega obdobja |\n\nDodatne informacije najdeš v [lokalnem vodniku](vodnik.md). Orodje ne pošilja podatkov zunaj mape in ne zahteva ključev.",
+  "fragment_sha256": "085cee6777105289252d138aa55aba9d3ddcb1a491d8a6df1395eb3ac44f04ef",
+  "fragment_bytes": 919,
+  "prompt_sha256": "74c511e5d7233412e712f9860d537fd40873f17e4089e5d2b3db238c0c66f6ad",
+  "seed": "0430095a2e768348"
+ },
+ {
+  "case_id": "nat-md-documentation-dev-04",
+  "scenario": "ns-md-documentation",
+  "scenario_index": 5,
+  "instance": "dev",
+  "fragment": "### Uvod v projekt MorskiVetr\n\nProjekt MorskiVetr je izmišljena knjižnica za sledenje vremenskim opazovanjem. Odgovorna urednica je Ana Kovač, glavni razvijalec pa Miha Zupan. Namen orodja je, da lokalni klubi preprosto hranijo meritve in objavljajo poročila.\n\n## Možnosti\n\n- Upravljanje opazovalnih mest\n- Poročila po obdobjih\n- Uvoz podatkov iz CSV\n- Izvoz v PDF\n\n## Primer\n\n```python\nfrom morski_vetr import Stacija\n\nstacija = Stacija(\"Ljubljana\", 0.35)\nstacija.zabeleži(14.5, 3.0)\n```\n\n## Pregled vlog\n\n| Vlog | Primer osebe | Dolžnost |\n| --- | --- | --- |\n| Urejevalka | Ana Kovač | Preverja poročila |\n| Razvijalec | Miha Zupan | Vzdržuje kodo |\n| Uporabnica | Petra Novak | Vnaša meritve |\n\n## Dokumentacija\n\nVeč informacij najdete v [priručniku](https://primer.si/morski-vetr). Za testno okolje uporabite [seznam orodij](https://primer.si/ormozja). Podatki so le primeri in ne vsebujejo resničnih osebnih podatkov.\n\n## Priporočila\n\n- Poimenujte meritve dosledno\n- Arhivirajte mesečne poročila\n\n> Namig: Pred objavo vedno preverite kalibracijo senzorja.",
+  "fragment_sha256": "a9864166f74850b1520bed4956c10183c3e4aec1c2c61103985c2ae9bb67d616",
+  "fragment_bytes": 1079,
+  "prompt_sha256": "74c511e5d7233412e712f9860d537fd40873f17e4089e5d2b3db238c0c66f6ad",
+  "seed": "0430095a2e768348"
+ },
+ {
+  "case_id": "nat-md-documentation-dev-05",
+  "scenario": "ns-md-documentation",
+  "scenario_index": 5,
+  "instance": "dev",
+  "fragment": "# Knjižnica za obdelavo naročil\n\nDokument opisuje modul `narocila` v projektu **Ptičji Gvozd**. Modul omogoča ustvarjanje, pregled in arhiviranje naročil za uporabnike.\n\n## Možnosti\n\n- Ustvari nov naročbeni paket\n- Prikaže zadnja stanja naročil\n- Arhivira starejše od 30 dni\n\n## Primer uporabe\n\n```python\nfrom pticji_gvozd import Narocila\n\nstoritev = Narocila(dejavnost='demo')\nnarocilo = storitev.ustvari('Anka', znesek=12.40)\nprint(narocilo.koda)\n```\n\n## Povezave\n\n- [Vodič po projektu](../vodic)\n- [Dnevnik sprememb](../zapiski)\n\n## Tabela stanj\n\n| Stanje | Opis | Prikaz |\n| --- | --- | --- |\n| aktivno | Naročilo teče | `Aktivno` |\n| pavza | Uporabnik je prekinil plačilo | `V pavzi` |\n| arhiv | Podatki so zaključeni | `Arhiv` |\n\nModul je namenjen ekipi razvoja in podporni skupini. V prihodnjih izdajah bo podpiral več valut in poenostavljeno obveščanje. Za testiranje uporabi demo uporabnika in fiktivne naloge.\n",
+  "fragment_sha256": "699ba9af11f287acfd41caed2c3f825229741869ce22cc4d25b13fbcd07febde",
+  "fragment_bytes": 938,
+  "prompt_sha256": "74c511e5d7233412e712f9860d537fd40873f17e4089e5d2b3db238c0c66f6ad",
+  "seed": "0430095a2e768348"
+ },
+ {
+  "case_id": "nat-md-documentation-dev-06",
+  "scenario": "ns-md-documentation",
+  "scenario_index": 5,
+  "instance": "dev",
+  "fragment": "# Postavitev modula Sončna tabla\n\nTa modul je del izmišljenega projekta *Zelena mreža*. Upravlja ga ekipa z vodjo Anjo Kovač in inženirjem Miho Novakom.\n\n## Namestitve\n\n1. Prenesi paketo `mreza-0.3.1.tar.gz`.\n2. Odpri terminal v mapi projekta.\n3. Uporabi ukaz:\n\n```bash\nmreza init --profil sonca\nmreza start --stojisce demo\n```\n\n## Podatki\n\n| Polje | Primer | Opomba |\n|---|---|---|\n| `ime` | `vzhodna-enota` | kratica za testno postajo |\n| `moc_kw` | `4.2` | izmišljena moč v kW |\n| `status` | `aktiven` | trenutno stanje |\n\n## Povezave\n\n- [Pravilnik o imenovanju](https://zelena.si/imena)\n- [Šifriranje zabeleži](https://zelena.si/zb)\n\n## Nasvet\n\nČe se prijava ne uspe, preveri, ali je `mreza.conf` v mapi `config` in ali ima urejevalna ekipa dovoljenje. Ne vstavlji osebno občutljivih podatkov v primer. Ponovno zaganjanje je priporočeno po spremembi konfiguracije. Za dodatna pojasnila se obrni na izmišljenega sodelavca Levo Petrič na elektronski naslov lev@zelena.si.",
+  "fragment_sha256": "51da39fca09eef38d5ac4165258ab8f4069d9fddf6fb01e4a4ca2203cc2c34d6",
+  "fragment_bytes": 987,
+  "prompt_sha256": "74c511e5d7233412e712f9860d537fd40873f17e4089e5d2b3db238c0c66f6ad",
+  "seed": "0430095a2e768348"
+ }
+]

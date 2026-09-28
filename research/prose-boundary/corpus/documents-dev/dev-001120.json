@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-001120",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T10-randomized",
+ "byte_length": 815,
+ "cp_length": 799,
+ "sha256": "4fb54c650bec25496f17e4548297fc3ec379762762b51824157b542c1888adfa",
+ "document": "V testni zbirki Projekt Zdravje 2026 je Matej napisal kratek vnos. Utrujenost, včasih tudi glavobol, ima lahko več razlogov. To je namerni vstavek v besedilo. Beseda „preveriti“ (v smislu posveta) se tu nanaša na obisk zdravnika. Ne gre za priporočilo zdravil ali odmerkov.\nProjekt Lipa: Pri temperaturi 21 °C je meritev 450 g potrjena z **močno** in __podčrtim__ besedilom.\n\\(\\left(\\frac{\\iota^{1/3}}{5+\\kappa}+\\sqrt{14-\\upsilon}\\right)_{\\text{Gaja}}\\)\nProjektna skupina je v juliju 2025 preverila tok podatkov med občino in zavodom za upravne storitve. V notranji opombi je stalo: »Dva koraka manj, dva dneja hitreje.« V eni od vlog, ki je vsebovala dve prilogi, je manjkala podpisana izjava. To so uredili v petih dneh. (Rezultat je bila večja preglednost in tudi večje zadovoljstvo uporabnikov.)",
+ "components": [
+  {
+   "component_id": "comp-prose-medicine-explainer-dev-0009",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 281
+  },
+  {
+   "component_id": "comp-markdown-strong-dev-0001",
+   "category": "markdown",
+   "start_byte": 282,
+   "end_byte": 385
+  },
+  {
+   "component_id": "comp-math-paren-tex-dev-0007",
+   "category": "math",
+   "start_byte": 386,
+   "end_byte": 464
+  },
+  {
+   "component_id": "comp-prose-administration-dev-0005",
+   "category": "prose",
+   "start_byte": 465,
+   "end_byte": 815
+  }
+ ]
+}

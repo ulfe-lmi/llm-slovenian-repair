@@ -1,0 +1,47 @@
+{
+ "doc_id": "dev-001186",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T10-randomized",
+ "byte_length": 1229,
+ "cp_length": 1207,
+ "sha256": "cf0bfec53e7e955cd8175a871286925d8cee5f69b72d58c2c22a450778df4145",
+ "document": "V šolskem testnem kotičku je Nia izmislila preprosto skico: utripalka, upornost, sklep in baterija v krogu. \"Ne pozabi, da je sklep odprt, dokler ga ne pritisneš,\" je opomnila sošolki. Ta se je nasmehnila in se lotila priključevanja. Ko je vse šlo, sta skupaj ugasnili in zapisali datum.\nmodul_pogon.py poročilo_q3.csv tabela_01.json vir_2024.txt\n/opt/projekti/kos /var/lib/nastavitve.json\n```\n#!/usr/bin/env bash\n# Prvi fragment: testni podatki (URL: https://primer.si/koda)\n# Oseba: Ana, projekt: vzorčni vir\n# Poti: src/modul.py, docs/vir.txt\nseStez='src/modul.py'\nrazdelek2='docs/vir.txt'\noznaka='HRAŠNA_VREDNOST'\nopis='**poudarjeno** in _podčrtano_ z *zvezdicami*'\nvaluta='10 $'\noklepaji='(vzorčni)'\necho \"pot: $seStez\"\necho \"razdelek: $razdelek2\"\necho \"oznaka: $oznaka\"\necho \"$opis\"\necho \"cena: $valuta\"\necho \"oklepaji: $oklepaji\"\necho 'znak: `'\n```\n```bash\n# oseba Luka: meritev 20 mm in število 6\n```\n\nPetra je pri večernem testu ugotovila, da je vsak sklep, ki deluje, najprej zaprt in da vsaka upornost v njem nekaj počuti. Lučka se je vžgala šele takrat, ko je namesto ene uporabila dve bateriji, in sicer v smeri, ki jo je narisala v beleški. ”To je bilo dovolj,“ je zapisala v dnevnik projekta.",
+ "components": [
+  {
+   "component_id": "comp-prose-electronics-dev-0005",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 293
+  },
+  {
+   "component_id": "comp-machine-filenames-dev-0008",
+   "category": "machine",
+   "start_byte": 294,
+   "end_byte": 353
+  },
+  {
+   "component_id": "comp-machine-posix-paths-dev-0008",
+   "category": "machine",
+   "start_byte": 354,
+   "end_byte": 396
+  },
+  {
+   "component_id": "comp-code-shell-bash-dev-0009",
+   "category": "code",
+   "start_byte": 397,
+   "end_byte": 866
+  },
+  {
+   "component_id": "comp-markdown-fenced-code-dev-0007",
+   "category": "markdown",
+   "start_byte": 867,
+   "end_byte": 921
+  },
+  {
+   "component_id": "comp-prose-electronics-dev-0010",
+   "category": "prose",
+   "start_byte": 922,
+   "end_byte": 1229
+  }
+ ]
+}

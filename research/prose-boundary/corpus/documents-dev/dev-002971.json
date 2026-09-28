@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-002971",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T2-prose-math-prose",
+ "byte_length": 668,
+ "cp_length": 650,
+ "sha256": "637678d505bb3bf1b4b0061c25fd4cecb24d2732da64074be5211a2b575c7504",
+ "document": "V projektu Prijava za športno leto 2024 je učiteljica Meta pojasnila, da lahka utrujenost po vadbi pogosto prehaja, če oseba zaspi in pije vodo. Če se stanje ponovi ali poslabša, je smiselno poiskati zdravnika.\n\\sum_{\\nu=1}^{10} \\xi_{\\nu} / \\prod_{\\rho=1}^{4} \\sigma_{\\rho} \\text{Marko}\nIva je v projektu Kuhinjski arhiv v ponedeljek zvečer pripravila potico, a je namesto oreščkov izbrala mandlje, ker je imela doma le eno majhno škatlo. Testo (tisti tanjši recept iz leta 1989) se je lepo razvalalo, čeprav je bila kuhinja prepolna. Ko se je postrežbo spomnila na babičino opombo, je v dnevnik dodala vstavek: „Sladica naj diha vsaj tri četrt ure.“",
+ "components": [
+  {
+   "component_id": "comp-prose-medicine-explainer-dev-0011",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 215
+  },
+  {
+   "component_id": "comp-math-summations-dev-0004",
+   "category": "math",
+   "start_byte": 216,
+   "end_byte": 291
+  },
+  {
+   "component_id": "comp-prose-cooking-dev-0009",
+   "category": "prose",
+   "start_byte": 292,
+   "end_byte": 668
+  }
+ ]
+}

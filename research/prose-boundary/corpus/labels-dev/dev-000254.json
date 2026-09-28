@@ -1,0 +1,82 @@
+{
+ "doc_id": "dev-000254",
+ "byte_length": 596,
+ "cp_length": 586,
+ "regions": [
+  {
+   "start_byte": 0,
+   "end_byte": 269,
+   "start_cp": 0,
+   "end_cp": 264,
+   "component_id": "comp-prose-history-dev-0008",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 269,
+   "end_byte": 270,
+   "start_cp": 264,
+   "end_cp": 265,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 270,
+   "end_byte": 272,
+   "start_cp": 265,
+   "end_cp": 267,
+   "component_id": "comp-math-fractions-dev-0004",
+   "category": "math",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 272,
+   "end_byte": 317,
+   "start_cp": 267,
+   "end_cp": 312,
+   "component_id": "comp-math-fractions-dev-0004",
+   "category": "math",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 317,
+   "end_byte": 319,
+   "start_cp": 312,
+   "end_cp": 314,
+   "component_id": "comp-math-fractions-dev-0004",
+   "category": "math",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 319,
+   "end_byte": 320,
+   "start_cp": 314,
+   "end_cp": 315,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 320,
+   "end_byte": 596,
+   "start_cp": 315,
+   "end_cp": 586,
+   "component_id": "comp-prose-sports-dev-0008",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  }
+ ],
+ "invariants": {
+  "tiling_complete": true,
+  "no_contradictory_overlaps": true,
+  "cp_range_exact": true
+ }
+}

@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-002911",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T8-quote-fenced",
+ "byte_length": 492,
+ "cp_length": 486,
+ "sha256": "5f657c5c6e35e8a8600b5332e41a3d6e6d3f84563a646406113a08f436c1ea83",
+ "document": "> Gradbeniki so v projektu Lipa najprej razstavili starega opornega zidu, nato pa zgradili nove podnožne plošče iz ojačane betonske mase (debelina 1,2 metra). Delo so spremljali izvajalci iz Ljubljane in Maribora, medtem ko so geotehniki redno merili usedanje tal. `#include <string>`\n```\n#include <string>\n// *Test* za _označevanje_, čokolada\nint glavna() {\n    int seStez = 8;\n    int razdelek2 = seStez + 2;\n    std::string opis = \"Cena: 3 $ (nevtralno)\";\n    return razdelek2;\n}\n```",
+ "components": [
+  {
+   "component_id": "comp-prose-engineering-dev-0004",
+   "category": "prose",
+   "start_byte": 2,
+   "end_byte": 268
+  },
+  {
+   "component_id": "comp-code-cpp-dev-0006",
+   "category": "code",
+   "start_byte": 269,
+   "end_byte": 288
+  },
+  {
+   "component_id": "comp-code-cpp-dev-0007",
+   "category": "code",
+   "start_byte": 289,
+   "end_byte": 492
+  }
+ ]
+}

@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-001465",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T3-prose-fenced-prose",
+ "byte_length": 966,
+ "cp_length": 947,
+ "sha256": "f0daa14cd5ef2c57c71a483fec47f867628966c510c5e13a03bed5e27f40a099",
+ "document": "V projektu Riba so preučevali majhne vodne uje v ozkih rezervoarjih in beležili izmenjavo plina v zraku nad vodo. Nekatere meritve so opravili po polnoči, ko so šumni odzivi živali izginili in je bila voda skoraj mirna. Leta dvotisoč in dvanajst je vodja zapisal, da bo treba poskus ponoviti z večjimi posodami. V zadnji opombi so dodali, da je koristna tudi meritev spremembe barve vode po treh dneh.\n```\n// Testni podatki za osebo Ana.\nconst HRAŠNA_VREDNOST: i32 = 7;\nfn razdelek2(seStez: &str) -> String {\n    let vrednost = HRAŠNA_VREDNOST;\n    format!(\"podčrtano *{seStez}* in {vrednost} €\")\n}\n```\nV projektu Gradec je bilo pri projektiranju jeklene konstrukcije ključno, koliko obremenitve prenese nosilni presek. Mladi konstruktor Jaka Kovač je, ob podpori projektirke Lune, predlagal dodatno ojačanje in začasne podlage. Sodelavci so se po dveh tednih razprave strinjali s predlogom. Končno je most dobil tudi dodatno zaščito pred erozijo.",
+ "components": [
+  {
+   "component_id": "comp-prose-science-dev-0005",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 408
+  },
+  {
+   "component_id": "comp-code-rust-dev-0010",
+   "category": "code",
+   "start_byte": 409,
+   "end_byte": 614
+  },
+  {
+   "component_id": "comp-prose-engineering-dev-0008",
+   "category": "prose",
+   "start_byte": 615,
+   "end_byte": 966
+  }
+ ]
+}

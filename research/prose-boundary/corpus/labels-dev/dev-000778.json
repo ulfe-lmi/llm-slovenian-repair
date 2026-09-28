@@ -1,0 +1,62 @@
+{
+ "doc_id": "dev-000778",
+ "byte_length": 810,
+ "cp_length": 790,
+ "regions": [
+  {
+   "start_byte": 0,
+   "end_byte": 347,
+   "start_cp": 0,
+   "end_cp": 337,
+   "component_id": "comp-prose-math-explainer-dev-0004",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 347,
+   "end_byte": 348,
+   "start_cp": 337,
+   "end_cp": 338,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 348,
+   "end_byte": 391,
+   "start_cp": 338,
+   "end_cp": 381,
+   "component_id": "comp-malformed-truncated-json-dev-0001",
+   "category": "malformed",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 391,
+   "end_byte": 392,
+   "start_cp": 381,
+   "end_cp": 382,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 392,
+   "end_byte": 810,
+   "start_cp": 382,
+   "end_cp": 790,
+   "component_id": "comp-prose-education-dev-0012",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  }
+ ],
+ "invariants": {
+  "tiling_complete": true,
+  "no_contradictory_overlaps": true,
+  "cp_range_exact": true
+ }
+}

@@ -1,9 +1,35 @@
-"""EXPERIMENTAL / CONCEPT VERIFICATION / NOT PRODUCTION CODE. Protection."""
+"""EXPERIMENTAL / CONCEPT VERIFICATION / NOT PRODUCTION CODE. Protection.
+
+008-c rework (parser-first structural protection, structural policy v2):
+
+- Markdown-syntax rules (fenced code, inline code, Markdown links) are no
+  longer regex rules: they are parser-derived intervals from the pinned
+  pulldown-cmark 0.13.4 structural helper (frozen 008-c interface
+  decision), with the narrow residual semantic layer running only on
+  parser-approved candidate-prose spans. All of this lives in
+  ``research.curated.prose_boundary`` (single implementation source).
+- The 008-a full-regex rule set is retained in
+  ``research.curated.prose_boundary`` (the ``LEGACY_*`` rules and
+  ``legacy_protected_intervals``, clearly marked) and is used ONLY as the
+  documented fail-closed fallback when the pinned helper is unavailable or
+  untrustworthy (identity mismatch, non-zero exit, timeout, malformed or
+  truncated protocol, coordinate-contract violation). The protection layer
+  never fails open.
+- Public surface for all consumers (pipeline, detector, historical
+  detector, patching, contextual validator): ``Interval``,
+  ``is_protected``, ``protected_intervals`` — unchanged signatures,
+  code-point coordinates.
+"""
 
 from __future__ import annotations
 
-import re
 from dataclasses import dataclass
+
+from .prose_boundary import (
+    ProtectionResult,
+    legacy_protected_intervals,
+    protection_with_status,
+)
 
 
 @dataclass(frozen=True, order=True)
@@ -13,74 +39,26 @@ class Interval:
     reason: str
 
 
-_URL = re.compile(r"https?://[^\s<>]+", re.IGNORECASE)
-_PATH = re.compile(r"(?<!\w)(?:\.?/|~/|[A-Za-z]:[\\/])[^\s`<>]+")
-_RELATIVE_PATH = re.compile(r"(?<!\w)[A-Za-z0-9_.-]+(?:/[A-Za-z0-9_.-]+)+(?!\w)")
-_NUMBER = re.compile(r"(?<!\w)[+-]?(?:\d+(?:[.,]\d+)?)(?:\s?(?:%|[A-Za-z]{1,8}))?(?!\w)")
-_IDENTIFIER = re.compile(
-    r"(?<!\w)(?=[A-Za-z_]*\d|[A-Za-z_]*_[A-Za-z_])[A-Za-z_][A-Za-z0-9_]*(?!\w)"
-)
-_UPPER_IDENTIFIER = re.compile(r"(?<!\w)[A-Z][A-Z0-9_]{1,}(?!\w)")
-_JSON_XML = re.compile(r"(?:\{[^\n{}]{0,2000}\}|\[[^\n\[\]]{0,2000}\]|<[/!?]?[A-Za-z][^>]*>)")
-_SHELL = re.compile(
-    r"(?m)^\s*(?:[$#>]\s+|(?:sudo\s+)?(?:python|python3|uv|git|curl|npm|pip|pytest|ruff|mypy)\s+)\S[^\n]*$"
-)
-_FENCE = re.compile(r"(?s)(?:^|\n)(```+|~~~+)[^\n]*\n.*?\n\1(?=\s|$)")
-_INLINE = re.compile(r"(?<!`)`[^`\n]+`(?!`)")
-_LINK = re.compile(r"!?(?:\[[^\]\n]*\]\([^\)\n]*\)|<https?://[^>]+>)")
+def protection_result(
+    text: str, tool_arguments: tuple[str, ...] = ()
+) -> ProtectionResult:
+    """Protection with mode/fallback diagnostics (parser-first or the
+    fail-closed legacy fallback; never unprotected)."""
+    return protection_with_status(text, tuple(tool_arguments))
 
 
-def _add(intervals: list[Interval], match: re.Match[str], reason: str) -> None:
-    intervals.append(Interval(match.start(), match.end(), reason))
+def protected_intervals(
+    text: str, tool_arguments: tuple[str, ...] = ()
+) -> list[Interval]:
+    """Protected intervals (code-point coordinates, merged) for ``text``.
 
-
-def _merge(intervals: list[Interval]) -> list[Interval]:
-    if not intervals:
-        return []
-    ordered = sorted(intervals)
-    merged: list[Interval] = [ordered[0]]
-    for current in ordered[1:]:
-        previous = merged[-1]
-        if current.start <= previous.end:
-            merged[-1] = Interval(
-                previous.start,
-                max(previous.end, current.end),
-                previous.reason + "+" + current.reason,
-            )
-        else:
-            merged.append(current)
-    return merged
-
-
-def protected_intervals(text: str, tool_arguments: tuple[str, ...] = ()) -> list[Interval]:
-    intervals: list[Interval] = []
-    for expression, reason in (
-        (_FENCE, "fenced-code"),
-        (_INLINE, "inline-code"),
-        (_LINK, "markdown-link"),
-        (_URL, "url"),
-        (_PATH, "path"),
-        (_RELATIVE_PATH, "relative-path"),
-        (_SHELL, "shell"),
-        (_NUMBER, "number"),
-        (_IDENTIFIER, "identifier"),
-        (_UPPER_IDENTIFIER, "upper-identifier"),
-        (_JSON_XML, "structured"),
-    ):
-        intervals.extend(
-            Interval(match.start(), match.end(), reason) for match in expression.finditer(text)
-        )
-    for argument in tool_arguments:
-        if not argument:
-            continue
-        start = 0
-        while True:
-            start = text.find(argument, start)
-            if start < 0:
-                break
-            intervals.append(Interval(start, start + len(argument), "tool-argument"))
-            start += len(argument)
-    return _merge(intervals)
+    Parser-first per frozen structural policy v2 when the pinned helper is
+    available and trustworthy; otherwise the retained 008-a full-regex
+    rule set (byte-identical output), with the fallback reason recorded in
+    :func:`protection_result`.
+    """
+    result = protection_with_status(text, tuple(tool_arguments))
+    return [Interval(start, end, reason) for start, end, reason in result.intervals]
 
 
 def is_protected(start: int, end: int, intervals: list[Interval]) -> bool:

@@ -1,0 +1,71 @@
+{
+ "doc_id": "dev-000779",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T10-randomized",
+ "byte_length": 1352,
+ "cp_length": 1333,
+ "sha256": "e3b2c1c070923bb420c6a8219f338df235b58c07458779271f570fe31a48324f",
+ "document": "V projektu Prvi korak so učitelji iz Ljubljane poskusili kratek skupinski pogovor pred ocenjevanjem, kar je po mnenju Anje zmanjšalo strah pred pisnim testom. Pri izbirnem predmetu zgodovina so uporabili učbenik z dodatnimi opombami (stran 42) in vprašanja, ki so dopuščala večkratne odgovore. Odrasli udeleženci so se zavedali, da se izpit ne piše enkrat, temveč se znanje utrjuje v vsakdanju.\nP(A_{\\text{Ana}}) = \\frac{2}{5} + \\Pr(B_{\\text{Lipa}}) = 0.6 \\text{ (verjetnost uspeha)}\n$SLO_DOKUMENT, KEY=testna_vrednost\n### Projekt Zvon\n#### Testni podnaslov\n#### Podroben podnaslov\nProjekt Zvon, avtorica Iva Zajc, vrednost 8 s.\nv1.2.3, 0.13.4\n$$x=1. Ana Zupan preverja projekt Lipa.\n## Projekt Lipa\n### Testni podnaslov\n#### Podroben podnaslov\nProjekt Lipa, avtorica Ana Kovač, vrednost 3 m.\n[raziskava]\nime = *Projekt Meritve*\nopis = _trajanje_ 3 dni\ncena = 1,20 EUR\navtor = Ana Kovač\nvir = https://primer.si/novica\n; nevtralna testna vsebina\nIzmišljeni projekt Osvetlitev: Marko Novak pošlje povratne informacije na <pošta@primer.si> in priloži naslov <https://primer.si/stran> za 5 LED. Masa 0,2 kg.\nV soboto je ekipa iz Ljubljanskega učnega laboratorija testirala, kako hitro se sestanek prekine, če je omrežje preobremenjeno. Rezultat, ki so ga prebrali skupaj, je bil preprost: naprave se raje razbremenijo s kratkim premorom.",
+ "components": [
+  {
+   "component_id": "comp-prose-education-dev-0006",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 404
+  },
+  {
+   "component_id": "comp-math-probability-dev-0001",
+   "category": "math",
+   "start_byte": 405,
+   "end_byte": 493
+  },
+  {
+   "component_id": "comp-machine-env-vars-dev-0005",
+   "category": "machine",
+   "start_byte": 494,
+   "end_byte": 528
+  },
+  {
+   "component_id": "comp-markdown-headings-dev-0007",
+   "category": "markdown",
+   "start_byte": 529,
+   "end_byte": 638
+  },
+  {
+   "component_id": "comp-machine-versions-numbers-units-dev-0002",
+   "category": "machine",
+   "start_byte": 639,
+   "end_byte": 653
+  },
+  {
+   "component_id": "comp-malformed-incomplete-display-dollar-dev-0001",
+   "category": "malformed",
+   "start_byte": 654,
+   "end_byte": 693
+  },
+  {
+   "component_id": "comp-markdown-headings-dev-0001",
+   "category": "markdown",
+   "start_byte": 694,
+   "end_byte": 803
+  },
+  {
+   "component_id": "comp-structured-ini-dev-0005",
+   "category": "structured",
+   "start_byte": 804,
+   "end_byte": 956
+  },
+  {
+   "component_id": "comp-markdown-autolinks-dev-0002",
+   "category": "markdown",
+   "start_byte": 957,
+   "end_byte": 1119
+  },
+  {
+   "component_id": "comp-prose-computing-dev-0004",
+   "category": "prose",
+   "start_byte": 1120,
+   "end_byte": 1352
+  }
+ ]
+}

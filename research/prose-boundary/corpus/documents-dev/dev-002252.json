@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-002252",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T9-prose-malformed-prose",
+ "byte_length": 783,
+ "cp_length": 766,
+ "sha256": "9b29dc5cd33f8291999925aeacc2e4d95fc0f7d18f5573498404ffbab5281892",
+ "document": "Biologi v projektu Grepel so gojili mikroalghe v steklenih skledah in vsak teden beležili barvo ter gostino. V dnevniku so zapisali, da so kulture pri temperaturi dvaindvajset stopinj Celzija hitreje porabile svetlobo. »Ta serija je nenavadno stabilna,« je rekel Tomaž ob oknu. Leta dvotisoč in dvaindvajset je Iva pripravila manjšo skupino vzorcev, ki so jo poimenovali po dolini pri Logu.\n$12 je predračun za testni zapis v projektu Modra Lestvica.\nČiščenje oken je lažje, če najprej sproti počistimo rob in nato s suho krpo zberemo preostali prah. Marko je v projektu Prijetna hiša ugotovil, da je bolje delati ob jutru, ko je videti, kje se naberejo madeži. (Če je zunaj topleje, najprej odpreš okno.) Sicer pa je ena majhna posoda z blagom dovolj za dnevni red.",
+ "components": [
+  {
+   "component_id": "comp-prose-science-dev-0002",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 396
+  },
+  {
+   "component_id": "comp-malformed-unmatched-dollar-dev-0002",
+   "category": "malformed",
+   "start_byte": 397,
+   "end_byte": 457
+  },
+  {
+   "component_id": "comp-prose-everyday-advice-dev-0003",
+   "category": "prose",
+   "start_byte": 458,
+   "end_byte": 783
+  }
+ ]
+}

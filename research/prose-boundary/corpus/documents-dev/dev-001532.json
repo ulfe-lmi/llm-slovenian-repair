@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-001532",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T4-heading-prose-table",
+ "byte_length": 430,
+ "cp_length": 425,
+ "sha256": "581de0c5d586047868cc03af96311209652fdfb5ea5c2b0566d5b47fdc5b3733",
+ "document": "## Zavod Odrasli naprej je v letu 2021 pripravil kratke izobraž\r\nAstronomi projekta Zora so z manjšim daljnogledom na Merljaku opazovali jutrnje oblake pri zori. Poskušali so zajeti bliskavice, ki so se pojavile le za hip, in v beležki je bilo zapisano, da je nebo ob petih zjutraj postalo manj motno.\r\n| Opis | Vzorček |\r\n| --- | --- |\r\n| Maja (2022) je v projektu Ljubljanska po | --vhod oseba/ana.csv, --izhod 3, --jezik |",
+ "components": [
+  {
+   "component_id": "comp-prose-education-dev-0002",
+   "category": "prose",
+   "start_byte": 3,
+   "end_byte": 64
+  },
+  {
+   "component_id": "comp-prose-science-dev-0003",
+   "category": "prose",
+   "start_byte": 66,
+   "end_byte": 305
+  },
+  {
+   "component_id": "comp-prose-programming-explainer-dev-0013",
+   "category": "prose",
+   "start_byte": 345,
+   "end_byte": 385
+  },
+  {
+   "component_id": "comp-machine-cli-flags-dev-0004",
+   "category": "machine",
+   "start_byte": 388,
+   "end_byte": 428
+  }
+ ]
+}

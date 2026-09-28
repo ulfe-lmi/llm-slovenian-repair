@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-001988",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T9-prose-malformed-prose",
+ "byte_length": 541,
+ "cp_length": 525,
+ "sha256": "fa6df288773238208945cc305f2a06a2b93ef84a613e3944ec805a07966ca242",
+ "document": "Petra je načrtovala kratek vikend v dolini Soče. Njen spremljevalec, Ivan, jo je peljal do smaragdne reke in starega gradu. »Vzemi lahke hlače,« je rekel pred odhodom. Vratila se je utrujena, a z dovolj fotografij.\n$5 je cena testnega vzorca v projektu Tihi Vrh.\nV laboratoriju so testirali nove ojačitve iz armirnega jekla, ki naj bi izboljšale odpornost proti utrujanju. „To ni le vprašanje moči, je tudi vprašanje vzdržljivosti“, je poudarila inženirka Ana Vidmar. Rezultati so bili shranjeni v interni projekt (Mostovna).",
+ "components": [
+  {
+   "component_id": "comp-prose-travel-dev-0013",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 219
+  },
+  {
+   "component_id": "comp-malformed-unmatched-dollar-dev-0001",
+   "category": "malformed",
+   "start_byte": 220,
+   "end_byte": 267
+  },
+  {
+   "component_id": "comp-prose-engineering-dev-0002",
+   "category": "prose",
+   "start_byte": 268,
+   "end_byte": 541
+  }
+ ]
+}

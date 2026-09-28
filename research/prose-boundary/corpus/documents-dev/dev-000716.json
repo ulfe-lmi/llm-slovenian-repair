@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-000716",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T2-prose-math-prose",
+ "byte_length": 787,
+ "cp_length": 761,
+ "sha256": "ecba38fc9c50389d962b7d62d381b2d52352a73677e37e3052e0a95a8bf00b3a",
+ "document": "V projektu Podgradski most so se strojni sklopi mosta (vleke, oprave in ležišča) v letu 2024 redno pregledovali. »Če je ležišče obrabljeno, ga ne smemo puščati v uporabo,« je opozoril mehanik Tomaž Golob. Ekipa je zamenjala ležišče in dodala novo mazilo, da bi zmanjšala hrup in obrabo.\n\\[ \\begin{bmatrix} \\tau_1 & 6 \\\\ \\upsilon_2 & -3 \\\\ \\text{Mura} & 10 \\end{bmatrix} \\]\nV projektu Osnovne šole Lipica učitelji (zlasti Ana Kovač) raje uporabljajo projektno delo, da učenci spoznajo, kako znanje deluje v vsakdanju. Po besedah razredne voditeljice je najpomembnejše, da otroci pri vsaki nalogi »razložijo, zakaj so ravno tako postopali«. Pri testnem izpitu iz naravoslovja so zato združili pisni del z ustno obravnavo dveh preprostih primerov iz šolskega vrta.",
+ "components": [
+  {
+   "component_id": "comp-prose-engineering-dev-0009",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 302
+  },
+  {
+   "component_id": "comp-math-bracket-tex-dev-0006",
+   "category": "math",
+   "start_byte": 303,
+   "end_byte": 388
+  },
+  {
+   "component_id": "comp-prose-education-dev-0001",
+   "category": "prose",
+   "start_byte": 389,
+   "end_byte": 787
+  }
+ ]
+}

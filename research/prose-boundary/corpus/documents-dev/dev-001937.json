@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-001937",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T2-prose-math-prose",
+ "byte_length": 883,
+ "cp_length": 868,
+ "sha256": "d2041f431715c855dd949de148d1a346cc91f79db4505637580b2a4348c28b65",
+ "document": "Na Korčuli smo imeli dan brez načrtov; namesto tega smo se izprehodili po starem mestnem jedru in poslušali zgodbe o pomorskih potovanjih. V malem gostilniku so ponujali ribo, pečeno v papirju. Po jedi smo poskusili lokalno vino, ki je bilo rahlo sladko. Zvečer je pristan spet oživel, ko so se vrnila plovila. Naslednji zjutraj smo se odločili, da bomo pot nadaljevali po kopnem.\n\\begin{align} \\alpha_1 &= \\beta_1 + \\gamma_1 \\\\ \\delta_1 &= \\epsilon_1 \\times \\zeta_1 \\end{align}\nV kopeli na Trgu v novembru 2024 je potekal kratki rekreativni plavalni tečaj, v katerem so trije poskusi (plavanje na hrbtno, na prsi in s sproščeno dihanjem) trajali skupaj dvajset minut. Udeleženka, ki jo je projekt opisal kot Maja, je po prvem krogu dejala, da je voda morda hladnejša, kot se je zdelo. 'Največja korist je, da se je telo pomirilo,' je zaključila brez vsakršne pohvale.",
+ "components": [
+  {
+   "component_id": "comp-prose-travel-dev-0004",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 387
+  },
+  {
+   "component_id": "comp-math-align-env-dev-0001",
+   "category": "math",
+   "start_byte": 388,
+   "end_byte": 485
+  },
+  {
+   "component_id": "comp-prose-sports-dev-0003",
+   "category": "prose",
+   "start_byte": 486,
+   "end_byte": 883
+  }
+ ]
+}

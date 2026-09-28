@@ -1,0 +1,65 @@
+{
+ "doc_id": "dev-000867",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T10-randomized",
+ "byte_length": 1832,
+ "cp_length": 1801,
+ "sha256": "733b0e0caf11aa90272b476f59324b5623fe8b508286f220f2ed5c3300ca8354",
+ "document": "V projektu Mlin 2018 je Luka preveril, koliko je povprečno trajala čakalna vrsta. Ko so trije prostovoljci dodali svoje opazke, se je slika izkazala za bolj uravnoteženo. Po njegovem mnenju je bistvo v tem, da se številka ne bere sama, ampak potrebuje kontekst.\n$$\\frac{\\sigma}{\\tau} = \\frac{7}{9} \\div \\phi = \\text{Ljubljana}$$\n```\nfn HRAŠNA_VREDNOST(žvirok: i64) -> i64 { /* Testni projekt Lipa: č, š, ž, **močan** in *poudarek* */ let razdelek2: i64 = 3; let besedilo = format!(\"_Podčrtano_ ({} $)\", razdelek2); let oznaka = \"č`ž`š\"; let pot = \"src/modul.rs\"; let url = \"https://primer.si/koda\"; let _ = (besedilo, oznaka, pot, url); žvirok + razdelek2 }\n```\n- Projekt Lipa: 3 vzorci, 12 kg, 5 m\n\\[ \\begin{cases} \\chi_1+5\\xi_2=\\text{Kranj},\\\\ 2\\mu_3-4\\nu_4=17,\\\\ \\pi_5\\sigma_6=8 \\end{cases} \\]\n```\nfn konec() { /* Testni projekt Lipa: č, š, ž, *poudarek* in _podčrtano_ */ let seStez = true; let razdelek2 = 7; let HRAŠNA_VREDNOST = 1; let besedilo = format!(\"*Nova* ({} $) `č`\", HRAŠNA_VREDNOST); let pot = \"src/modul.py\"; let url = \"https://primer.si/koda\"; let _ = (seStez, razdelek2, besedilo, pot, url); println!(\"č, š, ž\"); }\n```\nhttps://primer.si/stran/12\n```\n/* Testni podatki za izmišljen projekt Javornik */ const opis = { naslov: 'Označi *poudarek* in **pomembno**', podnaslov: '_opomba_', datum: '2026-01-15' }; console.log(opis.naslov);\n```\nSpremenljivka v projektu Lipa deluje kot imenovan koš, v katerega učenci hranijo številko, ime ali celo kratek zapis. Ko se njena vsebina zamenja, se odziv programa spremeni, zato Anja pri vadbi vedno najprej preveri, kaj se skriva za imenom. Zanka je ponavljajoč se korak, ki deluje, dokler se pogoj ne izpolni. Funkcija je pa majhno pravilo, ki sprejme nekaj podatkov in vrne jasen rezultat, kot da bi ga Luka ponovno uporil brez ponavljanja.",
+ "components": [
+  {
+   "component_id": "comp-prose-statistics-dev-0001",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 265
+  },
+  {
+   "component_id": "comp-math-display-dollar-dev-0004",
+   "category": "math",
+   "start_byte": 266,
+   "end_byte": 332
+  },
+  {
+   "component_id": "comp-code-rust-dev-0003",
+   "category": "code",
+   "start_byte": 333,
+   "end_byte": 676
+  },
+  {
+   "component_id": "comp-markdown-lists-dev-0001",
+   "category": "markdown",
+   "start_byte": 677,
+   "end_byte": 713
+  },
+  {
+   "component_id": "comp-math-bracket-tex-dev-0005",
+   "category": "math",
+   "start_byte": 714,
+   "end_byte": 811
+  },
+  {
+   "component_id": "comp-code-rust-dev-0008",
+   "category": "code",
+   "start_byte": 812,
+   "end_byte": 1163
+  },
+  {
+   "component_id": "comp-machine-urls-dev-0004",
+   "category": "machine",
+   "start_byte": 1164,
+   "end_byte": 1190
+  },
+  {
+   "component_id": "comp-code-javascript-dev-0005",
+   "category": "code",
+   "start_byte": 1191,
+   "end_byte": 1383
+  },
+  {
+   "component_id": "comp-prose-programming-explainer-dev-0006",
+   "category": "prose",
+   "start_byte": 1384,
+   "end_byte": 1832
+  }
+ ]
+}

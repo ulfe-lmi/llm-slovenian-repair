@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-002961",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T3-prose-fenced-prose",
+ "byte_length": 910,
+ "cp_length": 896,
+ "sha256": "66efbe6223068859952e241a170615d7dcace8f1900585d77e26c67f1bdfb50f",
+ "document": "V Dubrovniku sem z ekipo Sredozemska karta preveril obzidje in opozoril, da je obisk (brez rezervacije) pogosto daljši. V program smo vstavili tudi kratek postoj v starem solnem bazenu, kjer je voda odražala nebo. Vodič je dejal: \"če želite tih kot, se odpravite proti severu\".\n```\n/* Konstanta za testno temo: Hrašna vrednost */ const HRAŠNA_VREDNOST = 42; const razdelek2 = 7; function zber(zbir) { return zbir + HRAŠNA_VREDNOST; } console.log(`Vrednost: ${zber(razdelek2)}`);\n```\nNadgradnja podlage za obravnavo zahtevkov po socialni varnosti je potekala v okviru projekta Pripravljenost 2024, ki ga je vodila Anja Kovač. »Glavna težava je v prepoznavi pravega dokumenta,« je zapisala v opombi k posvetu. Vstavek z dnevnikom dela, ki ga je priložila, je vseboval tri strani. Na koncu so se dogovorili, da se bo vsaka zahteva obravnavala v tridesetih dneh, razen če je potrebna dodatna podlaga.",
+ "components": [
+  {
+   "component_id": "comp-prose-travel-dev-0005",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 282
+  },
+  {
+   "component_id": "comp-code-javascript-dev-0004",
+   "category": "code",
+   "start_byte": 283,
+   "end_byte": 490
+  },
+  {
+   "component_id": "comp-prose-administration-dev-0002",
+   "category": "prose",
+   "start_byte": 491,
+   "end_byte": 910
+  }
+ ]
+}

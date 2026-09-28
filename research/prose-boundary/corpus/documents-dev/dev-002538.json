@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-002538",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T9-prose-malformed-prose",
+ "byte_length": 584,
+ "cp_length": 572,
+ "sha256": "c39e29559fa4d0b22992b4da08d4de64c2d5d8cfe77813dcc161262a50cee3f6",
+ "document": "Pri urejanju hiše pomaga, če ob jutru hitro preverimo, kje je največji nered, in si izberemo le eno majhno nalogo. Ana je v projektu Čist dom zapisala, da je bolje pet minut brisanja mize kot ure razmišljanja. (Sicer pa raje odpreš okno, če je miza že svetla.)\n$12 je predračun za testni zapis v projektu Modra Lestvica.\nProjekt Tiha proga je zbral fragmente, v katerih Ana Kralj bere Čopovo poezijo ob zori. V zadnjem razdelku avtorica spomni na evropsko pripovedko, ki jo je nekje v Ljubljani zapisala leta 1984. Tisto jutro je v knjižnici zmanjkalo ene ključne listine.",
+ "components": [
+  {
+   "component_id": "comp-prose-everyday-advice-dev-0001",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 268
+  },
+  {
+   "component_id": "comp-malformed-unmatched-dollar-dev-0002",
+   "category": "malformed",
+   "start_byte": 269,
+   "end_byte": 329
+  },
+  {
+   "component_id": "comp-prose-literature-dev-0011",
+   "category": "prose",
+   "start_byte": 330,
+   "end_byte": 584
+  }
+ ]
+}

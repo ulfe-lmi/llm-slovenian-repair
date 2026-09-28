@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-001308",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T11-interactions",
+ "byte_length": 1205,
+ "cp_length": 1174,
+ "sha256": "f983ce378ab1982e8b28d619aaafa17bbe393f6648cfd49897aad2b444a2f153",
+ "document": "`#include <string>`.\n```\nfn žir(razdelek2: i64) -> bool { /* Testni projekt Lipa: č, š, ž, *zvezdice* in _podčrtano_ */ let seStez = true; let HRAŠNA_VREDNOST = 2; let tekst = \"**Nova** (1 $) `č` _ž_\"; let pot = \"docs/vir.txt\"; let url = \"https://primer.si/koda\"; let _ = (HRAŠNA_VREDNOST, tekst, pot, url); seStez && razdelek2 > 0 }\n# komentar z \\frac{a}{b}\n```\nV šoli so dijaki v letu 2025, v okviru notranjega projekta Besedilo, preizkušali urejevalnik besedil, ki je po mnenju učitelja Marka deloval “precej gladko”. Neko dopoldne so imeli težave s shranjevanjem, zato so se naučili, da je pomembno omeniti ime datoteke in mapo, v katero gre. Maja je zapisala, da ji je bila največja pomoč kratek pogovor s sošolko Ano, ki je razložila razliko med pripravo in končno različico. Tistega popoldneva, po njenih besedah, so preverili, da je shranjevanje enostavnejše, ko poznaš ime mape in datum.\nV Dubrovniku sem z ekipo Sredozemska karta preveril obzidje in opozoril, da je obisk (brez rezervacije) pogosto daljši. V program smo vstavili tudi kratek postoj v starem solnem bazenu, kjer je voda odražala nebo. Vodič je dejal: \"če želite tih kot, se odpravite proti severu\".",
+ "components": [
+  {
+   "component_id": "comp-code-cpp-dev-0006",
+   "category": "code",
+   "start_byte": 0,
+   "end_byte": 19
+  },
+  {
+   "component_id": "comp-code-rust-dev-0004",
+   "category": "code",
+   "start_byte": 21,
+   "end_byte": 371
+  },
+  {
+   "component_id": "comp-prose-computing-dev-0012",
+   "category": "prose",
+   "start_byte": 372,
+   "end_byte": 922
+  },
+  {
+   "component_id": "comp-prose-travel-dev-0005",
+   "category": "prose",
+   "start_byte": 923,
+   "end_byte": 1205
+  }
+ ]
+}

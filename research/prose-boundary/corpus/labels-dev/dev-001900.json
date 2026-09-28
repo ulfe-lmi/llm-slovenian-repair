@@ -1,0 +1,62 @@
+{
+ "doc_id": "dev-001900",
+ "byte_length": 806,
+ "cp_length": 778,
+ "regions": [
+  {
+   "start_byte": 0,
+   "end_byte": 390,
+   "start_cp": 0,
+   "end_cp": 372,
+   "component_id": "comp-prose-math-explainer-dev-0007",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 390,
+   "end_byte": 391,
+   "start_cp": 372,
+   "end_cp": 373,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 391,
+   "end_byte": 719,
+   "start_cp": 373,
+   "end_cp": 691,
+   "component_id": "comp-prose-administration-dev-0003",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 719,
+   "end_byte": 720,
+   "start_cp": 691,
+   "end_cp": 692,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 720,
+   "end_byte": 806,
+   "start_cp": 692,
+   "end_cp": 778,
+   "component_id": "comp-malformed-unclosed-fence-dev-0003",
+   "category": "malformed",
+   "role": "PROTECTED",
+   "template_owned": false
+  }
+ ],
+ "invariants": {
+  "tiling_complete": true,
+  "no_contradictory_overlaps": true,
+  "cp_range_exact": true
+ }
+}

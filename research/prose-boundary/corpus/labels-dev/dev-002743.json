@@ -1,0 +1,112 @@
+{
+ "doc_id": "dev-002743",
+ "byte_length": 1037,
+ "cp_length": 1014,
+ "regions": [
+  {
+   "start_byte": 0,
+   "end_byte": 2,
+   "start_cp": 0,
+   "end_cp": 2,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 2,
+   "end_byte": 261,
+   "start_cp": 2,
+   "end_cp": 250,
+   "component_id": "comp-prose-statistics-dev-0010",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 261,
+   "end_byte": 264,
+   "start_cp": 250,
+   "end_cp": 253,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 264,
+   "end_byte": 265,
+   "start_cp": 253,
+   "end_cp": 254,
+   "component_id": "comp-code-python-dev-0003",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 265,
+   "end_byte": 313,
+   "start_cp": 254,
+   "end_cp": 302,
+   "component_id": "comp-code-python-dev-0003",
+   "category": "code",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 313,
+   "end_byte": 314,
+   "start_cp": 302,
+   "end_cp": 303,
+   "component_id": "comp-code-python-dev-0003",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 314,
+   "end_byte": 317,
+   "start_cp": 303,
+   "end_cp": 306,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 317,
+   "end_byte": 839,
+   "start_cp": 306,
+   "end_cp": 818,
+   "component_id": "comp-prose-education-dev-0008",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 839,
+   "end_byte": 842,
+   "start_cp": 818,
+   "end_cp": 821,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 842,
+   "end_byte": 1037,
+   "start_cp": 821,
+   "end_cp": 1014,
+   "component_id": "comp-prose-cooking-dev-0011",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  }
+ ],
+ "invariants": {
+  "tiling_complete": true,
+  "no_contradictory_overlaps": true,
+  "cp_range_exact": true
+ }
+}

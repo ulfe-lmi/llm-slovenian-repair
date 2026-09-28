@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-002355",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T2-prose-math-prose",
+ "byte_length": 814,
+ "cp_length": 805,
+ "sha256": "77cd2d983247f1481981d615953b0ab01200a7ec79c96163a17589d1bcce9ce1",
+ "document": "V izmišljenem projektu Bralna linija (2021) mlada lektorica Ana Brezan raziskuje, kako kratek slovenski razpesek vpraša spomin. V evropski primerjavi se motiva potovanja in tihotapljenja knjig pojavita pri avtorici Elini Kravec ter pri francoskem romanopiscu Marcu Villen. Zvrst, ki jo raziskovalci imenujejo bralna pripoved, tu zveni kot nežna variacija na klasičen dnevnik.\n\\begin{equation} \\text{Testni projekt Janez} \\; : \\; \\int_{0}^{1} 2\\alpha_4 \\, \\mathrm{d}\\alpha_4=\\alpha_4^2 \\big|_{0}^{1} \\Rightarrow \\int_{0}^{1} 2\\alpha_4 \\, \\mathrm{d}\\alpha_4=1 \\end{equation}\nLena iz izmišljenega projekta Zdravi dnevni krog je zapisala, da stres pogosto spremljajo napete mišice in počasnejši spanec. Zaradi teh sprememb ni mogoče zanesljivo sklepati o vzrokih, zato je smiselno pogovarjati se z zdravnikom.",
+ "components": [
+  {
+   "component_id": "comp-prose-literature-dev-0001",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 379
+  },
+  {
+   "component_id": "comp-math-equation-env-dev-0004",
+   "category": "math",
+   "start_byte": 380,
+   "end_byte": 576
+  },
+  {
+   "component_id": "comp-prose-medicine-explainer-dev-0001",
+   "category": "prose",
+   "start_byte": 577,
+   "end_byte": 814
+  }
+ ]
+}

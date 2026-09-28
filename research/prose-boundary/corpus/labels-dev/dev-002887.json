@@ -1,0 +1,102 @@
+{
+ "doc_id": "dev-002887",
+ "byte_length": 632,
+ "cp_length": 613,
+ "regions": [
+  {
+   "start_byte": 0,
+   "end_byte": 215,
+   "start_cp": 0,
+   "end_cp": 207,
+   "component_id": "comp-prose-administration-dev-0012",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 215,
+   "end_byte": 216,
+   "start_cp": 207,
+   "end_cp": 208,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 216,
+   "end_byte": 217,
+   "start_cp": 208,
+   "end_cp": 209,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 217,
+   "end_byte": 249,
+   "start_cp": 209,
+   "end_cp": 239,
+   "component_id": "comp-prose-travel-dev-0008",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 249,
+   "end_byte": 251,
+   "start_cp": 239,
+   "end_cp": 241,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 251,
+   "end_byte": 283,
+   "start_cp": 241,
+   "end_cp": 273,
+   "component_id": "comp-machine-urls-dev-0002",
+   "category": "machine",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 283,
+   "end_byte": 284,
+   "start_cp": 273,
+   "end_cp": 274,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 284,
+   "end_byte": 285,
+   "start_cp": 274,
+   "end_cp": 275,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 285,
+   "end_byte": 632,
+   "start_cp": 275,
+   "end_cp": 613,
+   "component_id": "comp-prose-travel-dev-0008",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  }
+ ],
+ "invariants": {
+  "tiling_complete": true,
+  "no_contradictory_overlaps": true,
+  "cp_range_exact": true
+ }
+}

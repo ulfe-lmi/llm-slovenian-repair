@@ -1,0 +1,65 @@
+{
+ "doc_id": "dev-002715",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T10-randomized",
+ "byte_length": 1342,
+ "cp_length": 1319,
+ "sha256": "649946d2c56468c6e85d7cdd4aea94bbe5967e0c9018fcade788f9a405ef976e",
+ "document": "Ob projektnem srečanju je Marko dejal: „Povprečje je koristno, včasih pa skrije, kaj se res dogaja.“ Skupina je nato primerjala še največje in najmanjše vrednosti, da bi imela širši vtis. Tudi brez zapletenih računov so prišli do zaključka, da so razmere v zadnjih dveh letih postopoma stabilnejše.\nV testnem projektu <b>Sivi vrh</b> je <i>Barbara Zajc</i> preverila <span>800 hPa</span> tlak.<br/>Druga vrednost je 810 hPa.\n## Naslov 1\n![Opis: vzorčnik za projekt Alfa](https://primer.si/slika.png)\nAna Novak: masa 12 kg, dolžina 3 m.\n```\nconst naslov = 'Opomba: **pomembno**'; /* Naslov za Ana Kovač */ const podnaslov = '_podčrtano_ besedilo'; const cena = '12 $'; console.log(naslov, podnaslov, cena);\n```\n\\begin{equation}\\begin{aligned}R_3 &= \\int_0^1 \\eta(x) \\, dx \\text{Izmišljen vzor} \\\\S_3 &= \\lim_{n \\to \\infty} \\frac{1}{n} \\sqrt{n^2+1}\\end{aligned}\\end{equation}\nP(A_{\\text{Ana}}) = \\frac{2}{5} + \\Pr(B_{\\text{Lipa}}) = 0.6 \\text{ (verjetnost uspeha)}\n$\\frac{\\alpha_{\\text{Maja projekt Triglav}}}{\\beta} = \\gamma$\n\\sum_{\\tau=1}^{9} \\upsilon_{\\tau} - \\prod_{\\phi=1}^{5} \\chi_{\\phi} \\text{Triglav}\nOblačje se je med posvetom v Ljubljani kar za trenutek zamislilo. Zanka ni samo ponavljanje, ampak tudi razmišljanje, kdaj naj se ustavi. Na koncu so se dogovorili, da bodo razlage vedno kratke, jasne in naravne.",
+ "components": [
+  {
+   "component_id": "comp-prose-statistics-dev-0003",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 314
+  },
+  {
+   "component_id": "comp-markdown-raw-html-dev-0007",
+   "category": "markdown",
+   "start_byte": 315,
+   "end_byte": 440
+  },
+  {
+   "component_id": "comp-markdown-images-dev-0001",
+   "category": "markdown",
+   "start_byte": 441,
+   "end_byte": 553
+  },
+  {
+   "component_id": "comp-code-javascript-dev-0002",
+   "category": "code",
+   "start_byte": 554,
+   "end_byte": 729
+  },
+  {
+   "component_id": "comp-math-aligned-env-dev-0003",
+   "category": "math",
+   "start_byte": 730,
+   "end_byte": 894
+  },
+  {
+   "component_id": "comp-math-probability-dev-0001",
+   "category": "math",
+   "start_byte": 895,
+   "end_byte": 983
+  },
+  {
+   "component_id": "comp-math-inline-dollar-dev-0003",
+   "category": "math",
+   "start_byte": 984,
+   "end_byte": 1045
+  },
+  {
+   "component_id": "comp-math-summations-dev-0005",
+   "category": "math",
+   "start_byte": 1046,
+   "end_byte": 1127
+  },
+  {
+   "component_id": "comp-prose-programming-explainer-dev-0005",
+   "category": "prose",
+   "start_byte": 1128,
+   "end_byte": 1342
+  }
+ ]
+}

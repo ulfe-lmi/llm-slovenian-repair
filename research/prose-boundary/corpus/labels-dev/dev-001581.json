@@ -1,0 +1,62 @@
+{
+ "doc_id": "dev-001581",
+ "byte_length": 604,
+ "cp_length": 592,
+ "regions": [
+  {
+   "start_byte": 0,
+   "end_byte": 231,
+   "start_cp": 0,
+   "end_cp": 229,
+   "component_id": "comp-prose-statistics-dev-0002",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 231,
+   "end_byte": 232,
+   "start_cp": 229,
+   "end_cp": 230,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 232,
+   "end_byte": 275,
+   "start_cp": 230,
+   "end_cp": 273,
+   "component_id": "comp-malformed-truncated-json-dev-0001",
+   "category": "malformed",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 275,
+   "end_byte": 276,
+   "start_cp": 273,
+   "end_cp": 274,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 276,
+   "end_byte": 604,
+   "start_cp": 274,
+   "end_cp": 592,
+   "component_id": "comp-prose-administration-dev-0003",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  }
+ ],
+ "invariants": {
+  "tiling_complete": true,
+  "no_contradictory_overlaps": true,
+  "cp_range_exact": true
+ }
+}

@@ -1,0 +1,90 @@
+[
+ {
+  "component_id": "comp-machine-env-vars-dev-0001",
+  "family": "machine-env-vars",
+  "instance": "dev",
+  "category": "machine",
+  "subcategory": "okoljske spremenljivke",
+  "fragment": "PROJEKT_IME=Kralj_Metelj, KEY=vrednost",
+  "fragment_sha256": "73ea3262bc90a71beeaefb0271b63166cdd4257d7dd7bc461ef70a10e2a1d199",
+  "fragment_bytes": 38,
+  "seed": "e75a3b23bfa397d5"
+ },
+ {
+  "component_id": "comp-machine-env-vars-dev-0002",
+  "family": "machine-env-vars",
+  "instance": "dev",
+  "category": "machine",
+  "subcategory": "okoljske spremenljivke",
+  "fragment": "$HOME_DIR $SLO_DOKUMENT",
+  "fragment_sha256": "8a95b7924de1a4dabd81c69d5cb6b0009e08bf4d627d063691af6981c45177d0",
+  "fragment_bytes": 23,
+  "seed": "e75a3b23bfa397d5"
+ },
+ {
+  "component_id": "comp-machine-env-vars-dev-0003",
+  "family": "machine-env-vars",
+  "instance": "dev",
+  "category": "machine",
+  "subcategory": "okoljske spremenljivke",
+  "fragment": "${PROJEKT_IME} KEY=izvirna_vrednost",
+  "fragment_sha256": "67ebd6e8cc3bcd92f25799c168c53c3e0a44e98e70496c60b89ad162263daccd",
+  "fragment_bytes": 35,
+  "seed": "e75a3b23bfa397d5"
+ },
+ {
+  "component_id": "comp-machine-env-vars-dev-0004",
+  "family": "machine-env-vars",
+  "instance": "dev",
+  "category": "machine",
+  "subcategory": "okoljske spremenljivke",
+  "fragment": "PROJEKT_IME=Modra_Gora, $HOME_DIR, KEY=izbirna",
+  "fragment_sha256": "9264c801ecccd7e191a52a8f36ed8e7bb2dabde2d6a5ce8a926520d64666d8b3",
+  "fragment_bytes": 46,
+  "seed": "e75a3b23bfa397d5"
+ },
+ {
+  "component_id": "comp-machine-env-vars-dev-0005",
+  "family": "machine-env-vars",
+  "instance": "dev",
+  "category": "machine",
+  "subcategory": "okoljske spremenljivke",
+  "fragment": "$SLO_DOKUMENT, KEY=testna_vrednost",
+  "fragment_sha256": "474b204d05116cd0e082fa2ce20af0d79cf61f270ba5bba2cb63b2b2e8225cc6",
+  "fragment_bytes": 34,
+  "seed": "e75a3b23bfa397d5"
+ },
+ {
+  "component_id": "comp-machine-env-vars-dev-0006",
+  "family": "machine-env-vars",
+  "instance": "dev",
+  "category": "machine",
+  "subcategory": "okoljske spremenljivke",
+  "fragment": "PROJEKT_IME=Siv_Jablan, ${PROJEKT_IME}",
+  "fragment_sha256": "f24000604af6b9ce8dc3450cf8c25d6c59762a91bc7ecd477b6f5f7f6f9e60bc",
+  "fragment_bytes": 38,
+  "seed": "e75a3b23bfa397d5"
+ },
+ {
+  "component_id": "comp-machine-env-vars-dev-0007",
+  "family": "machine-env-vars",
+  "instance": "dev",
+  "category": "machine",
+  "subcategory": "okoljske spremenljivke",
+  "fragment": "KEY=nova_vrednost, $SLO_DOKUMENT, $HOME_DIR",
+  "fragment_sha256": "2f99cc260b1a39f59435c2df270819a146126d647795fdc2032a20d948c3762b",
+  "fragment_bytes": 43,
+  "seed": "e75a3b23bfa397d5"
+ },
+ {
+  "component_id": "comp-machine-env-vars-dev-0008",
+  "family": "machine-env-vars",
+  "instance": "dev",
+  "category": "machine",
+  "subcategory": "okoljske spremenljivke",
+  "fragment": "PROJEKT_IME=Rdeca_Jablan, KEY=kontrola",
+  "fragment_sha256": "ce00fe16262f809e7f003ea461c00161f25b2f2ae47b549825014b48682a31d5",
+  "fragment_bytes": 38,
+  "seed": "e75a3b23bfa397d5"
+ }
+]

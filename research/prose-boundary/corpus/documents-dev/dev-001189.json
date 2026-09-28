@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-001189",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T2-prose-math-prose",
+ "byte_length": 621,
+ "cp_length": 607,
+ "sha256": "63338167fc0a9075dbdd2cfbfec12933d58f8ac2246ab1c4cc32c13544191eb2",
+ "document": "Pri planinskem vzponu po Javorniku v marcu 2023 so bile poti močno zamrznjene, zato priporočam uporabo čevljev z dobrim oprijemom. Vreme je bilo hladno (okrog 5 stopinj pod ničlo), a razgledi so bili nagrajenje vredni.\n$\\sum_{\\kappa=1}^{3} \\lambda_\\kappa = \\mu_{\\text{Luka projekt Sava}}$\nV pisni pojasnitvi je bilo zapisano, da se rok za vložitev pritožbe šteje od dneva, ko je odločba dostavljena na elektronski naslov ali osebno. »V dveh primerih je bilo treba preveriti avtentičnost prijave,« je povedala urednica projekta. (To je trajalo pet delovnih dni in je zmanjšalo tveganje za napačno odločitev.)",
+ "components": [
+  {
+   "component_id": "comp-prose-travel-dev-0009",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 222
+  },
+  {
+   "component_id": "comp-math-inline-dollar-dev-0002",
+   "category": "math",
+   "start_byte": 223,
+   "end_byte": 292
+  },
+  {
+   "component_id": "comp-prose-administration-dev-0003",
+   "category": "prose",
+   "start_byte": 293,
+   "end_byte": 621
+  }
+ ]
+}

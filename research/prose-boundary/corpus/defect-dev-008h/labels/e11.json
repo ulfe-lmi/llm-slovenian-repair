@@ -1,0 +1,78 @@
+{
+ "doc_id": "e11",
+ "byte_length": 66,
+ "cp_length": 64,
+ "invariants": {
+  "tiling_complete": true,
+  "no_contradictory_overlaps": true,
+  "cp_range_exact": true
+ },
+ "regions": [
+  {
+   "start_byte": 0,
+   "end_byte": 15,
+   "start_cp": 0,
+   "end_cp": 15,
+   "component_id": "template",
+   "category": "template",
+   "role": "PROSE",
+   "label_source": "construction",
+   "template_owned": true
+  },
+  {
+   "start_byte": 15,
+   "end_byte": 31,
+   "start_cp": 15,
+   "end_cp": 30,
+   "component_id": "defect-008h-e11",
+   "category": "structured",
+   "role": "PROTECTED",
+   "label_source": "oracle-refined",
+   "template_owned": false
+  },
+  {
+   "start_byte": 31,
+   "end_byte": 38,
+   "start_cp": 30,
+   "end_cp": 37,
+   "component_id": "defect-008h-e11",
+   "category": "structured",
+   "role": "PROTECTED",
+   "label_source": "oracle-refined",
+   "template_owned": false
+  },
+  {
+   "start_byte": 38,
+   "end_byte": 55,
+   "start_cp": 37,
+   "end_cp": 53,
+   "component_id": "defect-008h-e11",
+   "category": "structured",
+   "role": "PROTECTED",
+   "label_source": "oracle-refined",
+   "template_owned": false
+  },
+  {
+   "start_byte": 55,
+   "end_byte": 65,
+   "start_cp": 53,
+   "end_cp": 63,
+   "component_id": "template",
+   "category": "template",
+   "role": "PROSE",
+   "label_source": "construction",
+   "template_owned": true
+  },
+  {
+   "start_byte": 65,
+   "end_byte": 66,
+   "start_cp": 63,
+   "end_cp": 64,
+   "component_id": "template",
+   "category": "template",
+   "role": "NEUTRAL",
+   "label_source": "construction",
+   "template_owned": true
+  }
+ ]
+}

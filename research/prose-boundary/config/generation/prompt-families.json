@@ -1,0 +1,2326 @@
+{
+ "schema": "008c-prompt-library/1",
+ "order": "008-c",
+ "frozen_note": "Frozen component-generation prompt library (order 008-c scope items 11 and 2). Frozen BEFORE any generation call or implementation code depends on this file; post-freeze changes require a recorded strategy report (default: no changes). 76 component families / 1,234 components (dev 646 / hidden 588) and 15 naturalistic scenario families / 150 responses (dev 80 / hidden 70). The five additional naturalistic scenarios (indices 9-13 plus migration-notes and glossary-entry, indices 13-15) are recorded here as the strategy-selected mixed-documentation scenarios of the owner's example list, per order scope item 13.",
+ "generator_policy": {
+  "endpoint_resolution": "env-credential mechanism per the 007 lineage: RESEARCH_ENDPOINT/REPAIR_QWEN_BASE_URL if set non-empty, else the 007 private deployment record (deployment.endpoint of the newest 007 CONFIGURATION.json in the private runtime parent); bearer from RESEARCH_CREDENTIAL_REF/REPAIR_QWEN_API_KEY_ENV-named variable if set, else the 007 profile experimental_bearer_token read as data (never printed, persisted, hashed or committed)",
+  "model": "qwen3.8-27b",
+  "deployment_class": "A100-FP8 (profile name qwen-LSI-A100, provider 'Qwen 3.8 27B on Neumann via Maelstrom1')",
+  "protocol": "Responses non-streaming",
+  "single_pinned_generator": true,
+  "purpose": "structural test-data generation only (human decision 2026-09-17); NOT linguistic-method tuning; NOT objective-009 data; never representable as fresh 009 confirmation evidence",
+  "call_budget": {
+   "total": 400,
+   "component_batches_max": 250,
+   "naturalistic_max": 150,
+   "preflight": 1,
+   "retry_policy": "at most one retry per failed call; all failures and retries recorded in generation-identity.json; hard stop at total budget"
+  },
+  "response_format": "strict JSON array of exactly K strings (component batches) or a single JSON string (naturalistic); no markdown fences; ensure_ascii=false"
+ },
+ "batch_plan": {
+  "deterministic_order": "families in file order; per family: instance 'dev' then 'hidden'; per instance: batches in batch-plan order; one generation call per batch",
+  "nominal_component_calls": 197,
+  "nominal_naturalistic_calls": 150,
+  "nominal_total_including_preflight": 348,
+  "fragment_id_scheme": "comp-<category>-<family>-<instance>-<seq:04d> assigned in frozen batch order",
+  "naturalistic_id_scheme": "nat-<scenario>-<instance>-<seq:02d>",
+  "mashup_seeds": {
+   "dev": "53ea1e63de0a7ec9",
+   "hidden": "a0fe550e7f0f8b9b",
+   "note": "documented seeds for the deterministic mashup builder PRNG (dev and hidden use separate seed streams)"
+  }
+ },
+ "families": [
+  {
+   "family_id": "prose-science",
+   "category": "prose",
+   "subcategory": "znanost in raziskave",
+   "sample_count": 25,
+   "instance_counts": {
+    "dev": 13,
+    "hidden": 12
+   },
+   "batches_per_instance": [
+    5,
+    5,
+    5,
+    5,
+    5
+   ],
+   "generation_parameters": {
+    "temperature": 0.9,
+    "max_output_tokens": 8000,
+    "request_timeout_seconds": 300,
+    "retry_policy": "at most one retry per failed call (same prompt re-issued); all failures and retries recorded"
+   },
+   "prompt": "Napiši točno {K} med seboj povsem neodvisnih slovenskih fragmentov o temi: znanost in raziskave (fizika, biologija, astronomija). Vsak fragment je 2 do 5 stavkov naravnega slovenskega besedila (ne seznam, ne naslov). Fragmenti naj se razlikujejo po dolžinah stavkov in po rabi vejic, oklepajev, navodkov in vstavkov. Dovoljena so naravna pojavljanja letnic, mer in imen, kot bi jih uporabil navaden avtor; ne dodajaj kode, matematičnih izrazov, URL-jev, tabel ali Markdown znakov. Varnostna pravila za vse fragmente (obvezna): brez absolutnih poti, ki se začnejo z /home, /tmp, /root ali C:\\Users; brez dolgih neprekinjenih nizov base64 znakov (dlje od 60 znakov); brez gesel, ključev in bearer vrednosti; brez kontrolnih znakov; vsak fragment naj ima največ 1200 znakov (kode in konfiguracije največ 1500). Vsi fragmenti naj bodo projektovno avtorirana nevtralna testna vsebina (slovenske teme, izmišljene osebe in projekti). Odzovi se izključno z JSON nizom točno {K} nizov (brez Markdown ograje).",
+   "seeds": {
+    "dev": "7f84b625b05da42b",
+    "hidden": "04a9293b30c3a886"
+   }
+  },
+  {
+   "family_id": "prose-history",
+   "category": "prose",
+   "subcategory": "zgodovina",
+   "sample_count": 25,
+   "instance_counts": {
+    "dev": 13,
+    "hidden": 12
+   },
+   "batches_per_instance": [
+    5,
+    5,
+    5,
+    5,
+    5
+   ],
+   "generation_parameters": {
+    "temperature": 0.9,
+    "max_output_tokens": 8000,
+    "request_timeout_seconds": 300,
+    "retry_policy": "at most one retry per failed call (same prompt re-issued); all failures and retries recorded"
+   },
+   "prompt": "Napiši točno {K} med seboj povsem neodvisnih slovenskih fragmentov o temi: zgodovina (slovenska in svetovna, brez natančnih datumov razen letnic). Vsak fragment je 2 do 5 stavkov naravnega slovenskega besedila (ne seznam, ne naslov). Fragmenti naj se razlikujejo po dolžinah stavkov in po rabi vejic, oklepajev, navodkov in vstavkov. Dovoljena so naravna pojavljanja letnic, mer in imen, kot bi jih uporabil navaden avtor; ne dodajaj kode, matematičnih izrazov, URL-jev, tabel ali Markdown znakov. Varnostna pravila za vse fragmente (obvezna): brez absolutnih poti, ki se začnejo z /home, /tmp, /root ali C:\\Users; brez dolgih neprekinjenih nizov base64 znakov (dlje od 60 znakov); brez gesel, ključev in bearer vrednosti; brez kontrolnih znakov; vsak fragment naj ima največ 1200 znakov (kode in konfiguracije največ 1500). Vsi fragmenti naj bodo projektovno avtorirana nevtralna testna vsebina (slovenske teme, izmišljene osebe in projekti). Odzovi se izključno z JSON nizom točno {K} nizov (brez Markdown ograje).",
+   "seeds": {
+    "dev": "6ba57a6779456223",
+    "hidden": "ce3fedc3b33462b0"
+   }
+  },
+  {
+   "family_id": "prose-everyday-advice",
+   "category": "prose",
+   "subcategory": "vsakdanji nasveti",
+   "sample_count": 25,
+   "instance_counts": {
+    "dev": 13,
+    "hidden": 12
+   },
+   "batches_per_instance": [
+    5,
+    5,
+    5,
+    5,
+    5
+   ],
+   "generation_parameters": {
+    "temperature": 0.9,
+    "max_output_tokens": 8000,
+    "request_timeout_seconds": 300,
+    "retry_policy": "at most one retry per failed call (same prompt re-issued); all failures and retries recorded"
+   },
+   "prompt": "Napiši točno {K} med seboj povsem neodvisnih slovenskih fragmentov o temi: vsakdanji nasveti (hišnost, varčnost, čistjenje). Vsak fragment je 2 do 5 stavkov naravnega slovenskega besedila (ne seznam, ne naslov). Fragmenti naj se razlikujejo po dolžinah stavkov in po rabi vejic, oklepajev, navodkov in vstavkov. Dovoljena so naravna pojavljanja letnic, mer in imen, kot bi jih uporabil navaden avtor; ne dodajaj kode, matematičnih izrazov, URL-jev, tabel ali Markdown znakov. Varnostna pravila za vse fragmente (obvezna): brez absolutnih poti, ki se začnejo z /home, /tmp, /root ali C:\\Users; brez dolgih neprekinjenih nizov base64 znakov (dlje od 60 znakov); brez gesel, ključev in bearer vrednosti; brez kontrolnih znakov; vsak fragment naj ima največ 1200 znakov (kode in konfiguracije največ 1500). Vsi fragmenti naj bodo projektovno avtorirana nevtralna testna vsebina (slovenske teme, izmišljene osebe in projekti). Odzovi se izključno z JSON nizom točno {K} nizov (brez Markdown ograje).",
+   "seeds": {
+    "dev": "46a8c02d2efde567",
+    "hidden": "e660872f0a8dba36"
+   }
+  },
+  {
+   "family_id": "prose-computing",
+   "category": "prose",
+   "subcategory": "racunalništvo v vsakdanjem jeziku",
+   "sample_count": 25,
+   "instance_counts": {
+    "dev": 13,
+    "hidden": 12
+   },
+   "batches_per_instance": [
+    5,
+    5,
+    5,
+    5,
+    5
+   ],
+   "generation_parameters": {
+    "temperature": 0.9,
+    "max_output_tokens": 8000,
+    "request_timeout_seconds": 300,
+    "retry_policy": "at most one retry per failed call (same prompt re-issued); all failures and retries recorded"
+   },
+   "prompt": "Napiši točno {K} med seboj povsem neodvisnih slovenskih fragmentov o temi: racunalništvo v vsakdanjem jeziku (naprave, programi, omrežja). Vsak fragment je 2 do 5 stavkov naravnega slovenskega besedila (ne seznam, ne naslov). Fragmenti naj se razlikujejo po dolžinah stavkov in po rabi vejic, oklepajev, navodkov in vstavkov. Dovoljena so naravna pojavljanja letnic, mer in imen, kot bi jih uporabil navaden avtor; ne dodajaj kode, matematičnih izrazov, URL-jev, tabel ali Markdown znakov. Varnostna pravila za vse fragmente (obvezna): brez absolutnih poti, ki se začnejo z /home, /tmp, /root ali C:\\Users; brez dolgih neprekinjenih nizov base64 znakov (dlje od 60 znakov); brez gesel, ključev in bearer vrednosti; brez kontrolnih znakov; vsak fragment naj ima največ 1200 znakov (kode in konfiguracije največ 1500). Vsi fragmenti naj bodo projektovno avtorirana nevtralna testna vsebina (slovenske teme, izmišljene osebe in projekti). Odzovi se izključno z JSON nizom točno {K} nizov (brez Markdown ograje).",
+   "seeds": {
+    "dev": "f22499393df1cf7c",
+    "hidden": "282485e72f856613"
+   }
+  },
+  {
+   "family_id": "prose-cooking",
+   "category": "prose",
+   "subcategory": "kuhanje in recepti",
+   "sample_count": 25,
+   "instance_counts": {
+    "dev": 13,
+    "hidden": 12
+   },
+   "batches_per_instance": [
+    5,
+    5,
+    5,
+    5,
+    5
+   ],
+   "generation_parameters": {
+    "temperature": 0.9,
+    "max_output_tokens": 8000,
+    "request_timeout_seconds": 300,
+    "retry_policy": "at most one retry per failed call (same prompt re-issued); all failures and retries recorded"
+   },
+   "prompt": "Napiši točno {K} med seboj povsem neodvisnih slovenskih fragmentov o temi: kuhanje in recepti (slovenske jedi, sestavine, časi). Vsak fragment je 2 do 5 stavkov naravnega slovenskega besedila (ne seznam, ne naslov). Fragmenti naj se razlikujejo po dolžinah stavkov in po rabi vejic, oklepajev, navodkov in vstavkov. Dovoljena so naravna pojavljanja letnic, mer in imen, kot bi jih uporabil navaden avtor; ne dodajaj kode, matematičnih izrazov, URL-jev, tabel ali Markdown znakov. Varnostna pravila za vse fragmente (obvezna): brez absolutnih poti, ki se začnejo z /home, /tmp, /root ali C:\\Users; brez dolgih neprekinjenih nizov base64 znakov (dlje od 60 znakov); brez gesel, ključev in bearer vrednosti; brez kontrolnih znakov; vsak fragment naj ima največ 1200 znakov (kode in konfiguracije največ 1500). Vsi fragmenti naj bodo projektovno avtorirana nevtralna testna vsebina (slovenske teme, izmišljene osebe in projekti). Odzovi se izključno z JSON nizom točno {K} nizov (brez Markdown ograje).",
+   "seeds": {
+    "dev": "23280b2dca85475c",
+    "hidden": "47694a2861749270"
+   }
+  },
+  {
+   "family_id": "prose-travel",
+   "category": "prose",
+   "subcategory": "potovanja",
+   "sample_count": 25,
+   "instance_counts": {
+    "dev": 13,
+    "hidden": 12
+   },
+   "batches_per_instance": [
+    5,
+    5,
+    5,
+    5,
+    5
+   ],
+   "generation_parameters": {
+    "temperature": 0.9,
+    "max_output_tokens": 8000,
+    "request_timeout_seconds": 300,
+    "retry_policy": "at most one retry per failed call (same prompt re-issued); all failures and retries recorded"
+   },
+   "prompt": "Napiši točno {K} med seboj povsem neodvisnih slovenskih fragmentov o temi: potovanja (Slovenija in Sredozemlje, znamenitosti, napotki). Vsak fragment je 2 do 5 stavkov naravnega slovenskega besedila (ne seznam, ne naslov). Fragmenti naj se razlikujejo po dolžinah stavkov in po rabi vejic, oklepajev, navodkov in vstavkov. Dovoljena so naravna pojavljanja letnic, mer in imen, kot bi jih uporabil navaden avtor; ne dodajaj kode, matematičnih izrazov, URL-jev, tabel ali Markdown znakov. Varnostna pravila za vse fragmente (obvezna): brez absolutnih poti, ki se začnejo z /home, /tmp, /root ali C:\\Users; brez dolgih neprekinjenih nizov base64 znakov (dlje od 60 znakov); brez gesel, ključev in bearer vrednosti; brez kontrolnih znakov; vsak fragment naj ima največ 1200 znakov (kode in konfiguracije največ 1500). Vsi fragmenti naj bodo projektovno avtorirana nevtralna testna vsebina (slovenske teme, izmišljene osebe in projekti). Odzovi se izključno z JSON nizom točno {K} nizov (brez Markdown ograje).",
+   "seeds": {
+    "dev": "b083628f815fa60e",
+    "hidden": "b360f5d751e5317f"
+   }
+  },
+  {
+   "family_id": "prose-education",
+   "category": "prose",
+   "subcategory": "izobraževanje šolšk in odraslih",
+   "sample_count": 25,
+   "instance_counts": {
+    "dev": 13,
+    "hidden": 12
+   },
+   "batches_per_instance": [
+    5,
+    5,
+    5,
+    5,
+    5
+   ],
+   "generation_parameters": {
+    "temperature": 0.9,
+    "max_output_tokens": 8000,
+    "request_timeout_seconds": 300,
+    "retry_policy": "at most one retry per failed call (same prompt re-issued); all failures and retries recorded"
+   },
+   "prompt": "Napiši točno {K} med seboj povsem neodvisnih slovenskih fragmentov o temi: izobraževanje šolšk in odraslih (metode, učnbeniki, izpiti). Vsak fragment je 2 do 5 stavkov naravnega slovenskega besedila (ne seznam, ne naslov). Fragmenti naj se razlikujejo po dolžinah stavkov in po rabi vejic, oklepajev, navodkov in vstavkov. Dovoljena so naravna pojavljanja letnic, mer in imen, kot bi jih uporabil navaden avtor; ne dodajaj kode, matematičnih izrazov, URL-jev, tabel ali Markdown znakov. Varnostna pravila za vse fragmente (obvezna): brez absolutnih poti, ki se začnejo z /home, /tmp, /root ali C:\\Users; brez dolgih neprekinjenih nizov base64 znakov (dlje od 60 znakov); brez gesel, ključev in bearer vrednosti; brez kontrolnih znakov; vsak fragment naj ima največ 1200 znakov (kode in konfiguracije največ 1500). Vsi fragmenti naj bodo projektovno avtorirana nevtralna testna vsebina (slovenske teme, izmišljene osebe in projekti). Odzovi se izključno z JSON nizom točno {K} nizov (brez Markdown ograje).",
+   "seeds": {
+    "dev": "dcc859f08f623f80",
+    "hidden": "6a93dc5da2a0b2ee"
+   }
+  },
+  {
+   "family_id": "prose-engineering",
+   "category": "prose",
+   "subcategory": "strojništvo in gradbeništvo",
+   "sample_count": 25,
+   "instance_counts": {
+    "dev": 13,
+    "hidden": 12
+   },
+   "batches_per_instance": [
+    5,
+    5,
+    5,
+    5,
+    5
+   ],
+   "generation_parameters": {
+    "temperature": 0.9,
+    "max_output_tokens": 8000,
+    "request_timeout_seconds": 300,
+    "retry_policy": "at most one retry per failed call (same prompt re-issued); all failures and retries recorded"
+   },
+   "prompt": "Napiši točno {K} med seboj povsem neodvisnih slovenskih fragmentov o temi: strojništvo in gradbeništvo (materiali, konstrukcije, mostovi). Vsak fragment je 2 do 5 stavkov naravnega slovenskega besedila (ne seznam, ne naslov). Fragmenti naj se razlikujejo po dolžinah stavkov in po rabi vejic, oklepajev, navodkov in vstavkov. Dovoljena so naravna pojavljanja letnic, mer in imen, kot bi jih uporabil navaden avtor; ne dodajaj kode, matematičnih izrazov, URL-jev, tabel ali Markdown znakov. Varnostna pravila za vse fragmente (obvezna): brez absolutnih poti, ki se začnejo z /home, /tmp, /root ali C:\\Users; brez dolgih neprekinjenih nizov base64 znakov (dlje od 60 znakov); brez gesel, ključev in bearer vrednosti; brez kontrolnih znakov; vsak fragment naj ima največ 1200 znakov (kode in konfiguracije največ 1500). Vsi fragmenti naj bodo projektovno avtorirana nevtralna testna vsebina (slovenske teme, izmišljene osebe in projekti). Odzovi se izključno z JSON nizom točno {K} nizov (brez Markdown ograje).",
+   "seeds": {
+    "dev": "fc7f187c580cbbcb",
+    "hidden": "b1a7a10def49f8b1"
+   }
+  },
+  {
+   "family_id": "prose-medicine-explainer",
+   "category": "prose",
+   "subcategory": "neutrale zdravstvene razlage",
+   "sample_count": 25,
+   "instance_counts": {
+    "dev": 13,
+    "hidden": 12
+   },
+   "batches_per_instance": [
+    5,
+    5,
+    5,
+    5,
+    5
+   ],
+   "generation_parameters": {
+    "temperature": 0.9,
+    "max_output_tokens": 8000,
+    "request_timeout_seconds": 300,
+    "retry_policy": "at most one retry per failed call (same prompt re-issued); all failures and retries recorded"
+   },
+   "prompt": "Napiši točno {K} med seboj povsem neodvisnih slovenskih fragmentov o temi: neutrale zdravstvene razlage (brez diagnoz in odmerkov, z opozorilom za obisk zdravnika). Vsak fragment je 2 do 5 stavkov naravnega slovenskega besedila (ne seznam, ne naslov). Fragmenti naj se razlikujejo po dolžinah stavkov in po rabi vejic, oklepajev, navodkov in vstavkov. Dovoljena so naravna pojavljanja letnic, mer in imen, kot bi jih uporabil navaden avtor; ne dodajaj kode, matematičnih izrazov, URL-jev, tabel ali Markdown znakov. Varnostna pravila za vse fragmente (obvezna): brez absolutnih poti, ki se začnejo z /home, /tmp, /root ali C:\\Users; brez dolgih neprekinjenih nizov base64 znakov (dlje od 60 znakov); brez gesel, ključev in bearer vrednosti; brez kontrolnih znakov; vsak fragment naj ima največ 1200 znakov (kode in konfiguracije največ 1500). Vsi fragmenti naj bodo projektovno avtorirana nevtralna testna vsebina (slovenske teme, izmišljene osebe in projekti). Odzovi se izključno z JSON nizom točno {K} nizov (brez Markdown ograje).",
+   "seeds": {
+    "dev": "18004cb333ca9684",
+    "hidden": "dc9f40af823af0bd"
+   }
+  },
+  {
+   "family_id": "prose-sports",
+   "category": "prose",
+   "subcategory": "šport",
+   "sample_count": 25,
+   "instance_counts": {
+    "dev": 13,
+    "hidden": 12
+   },
+   "batches_per_instance": [
+    5,
+    5,
+    5,
+    5,
+    5
+   ],
+   "generation_parameters": {
+    "temperature": 0.9,
+    "max_output_tokens": 8000,
+    "request_timeout_seconds": 300,
+    "retry_policy": "at most one retry per failed call (same prompt re-issued); all failures and retries recorded"
+   },
+   "prompt": "Napiši točno {K} med seboj povsem neodvisnih slovenskih fragmentov o temi: šport (nogom, smučanje, plavanje, rekreativne aktivnosti). Vsak fragment je 2 do 5 stavkov naravnega slovenskega besedila (ne seznam, ne naslov). Fragmenti naj se razlikujejo po dolžinah stavkov in po rabi vejic, oklepajev, navodkov in vstavkov. Dovoljena so naravna pojavljanja letnic, mer in imen, kot bi jih uporabil navaden avtor; ne dodajaj kode, matematičnih izrazov, URL-jev, tabel ali Markdown znakov. Varnostna pravila za vse fragmente (obvezna): brez absolutnih poti, ki se začnejo z /home, /tmp, /root ali C:\\Users; brez dolgih neprekinjenih nizov base64 znakov (dlje od 60 znakov); brez gesel, ključev in bearer vrednosti; brez kontrolnih znakov; vsak fragment naj ima največ 1200 znakov (kode in konfiguracije največ 1500). Vsi fragmenti naj bodo projektovno avtorirana nevtralna testna vsebina (slovenske teme, izmišljene osebe in projekti). Odzovi se izključno z JSON nizom točno {K} nizov (brez Markdown ograje).",
+   "seeds": {
+    "dev": "3abdaf6df2971d67",
+    "hidden": "97574bb272645cca"
+   }
+  },
+  {
+   "family_id": "prose-literature",
+   "category": "prose",
+   "subcategory": "knjižnost",
+   "sample_count": 25,
+   "instance_counts": {
+    "dev": 13,
+    "hidden": 12
+   },
+   "batches_per_instance": [
+    5,
+    5,
+    5,
+    5,
+    5
+   ],
+   "generation_parameters": {
+    "temperature": 0.9,
+    "max_output_tokens": 8000,
+    "request_timeout_seconds": 300,
+    "retry_policy": "at most one retry per failed call (same prompt re-issued); all failures and retries recorded"
+   },
+   "prompt": "Napiši točno {K} med seboj povsem neodvisnih slovenskih fragmentov o temi: knjižnost (slovenski in evropski avtorji, motivi, zvrsti). Vsak fragment je 2 do 5 stavkov naravnega slovenskega besedila (ne seznam, ne naslov). Fragmenti naj se razlikujejo po dolžinah stavkov in po rabi vejic, oklepajev, navodkov in vstavkov. Dovoljena so naravna pojavljanja letnic, mer in imen, kot bi jih uporabil navaden avtor; ne dodajaj kode, matematičnih izrazov, URL-jev, tabel ali Markdown znakov. Varnostna pravila za vse fragmente (obvezna): brez absolutnih poti, ki se začnejo z /home, /tmp, /root ali C:\\Users; brez dolgih neprekinjenih nizov base64 znakov (dlje od 60 znakov); brez gesel, ključev in bearer vrednosti; brez kontrolnih znakov; vsak fragment naj ima največ 1200 znakov (kode in konfiguracije največ 1500). Vsi fragmenti naj bodo projektovno avtorirana nevtralna testna vsebina (slovenske teme, izmišljene osebe in projekti). Odzovi se izključno z JSON nizom točno {K} nizov (brez Markdown ograje).",
+   "seeds": {
+    "dev": "941ee42b18a03dcc",
+    "hidden": "bfc46493d8037dcf"
+   }
+  },
+  {
+   "family_id": "prose-administration",
+   "category": "prose",
+   "subcategory": "uprava in javne storitve",
+   "sample_count": 25,
+   "instance_counts": {
+    "dev": 13,
+    "hidden": 12
+   },
+   "batches_per_instance": [
+    5,
+    5,
+    5,
+    5,
+    5
+   ],
+   "generation_parameters": {
+    "temperature": 0.9,
+    "max_output_tokens": 8000,
+    "request_timeout_seconds": 300,
+    "retry_policy": "at most one retry per failed call (same prompt re-issued); all failures and retries recorded"
+   },
+   "prompt": "Napiši točno {K} med seboj povsem neodvisnih slovenskih fragmentov o temi: uprava in javne storitve (občine, dokumenti, roki). Vsak fragment je 2 do 5 stavkov naravnega slovenskega besedila (ne seznam, ne naslov). Fragmenti naj se razlikujejo po dolžinah stavkov in po rabi vejic, oklepajev, navodkov in vstavkov. Dovoljena so naravna pojavljanja letnic, mer in imen, kot bi jih uporabil navaden avtor; ne dodajaj kode, matematičnih izrazov, URL-jev, tabel ali Markdown znakov. Varnostna pravila za vse fragmente (obvezna): brez absolutnih poti, ki se začnejo z /home, /tmp, /root ali C:\\Users; brez dolgih neprekinjenih nizov base64 znakov (dlje od 60 znakov); brez gesel, ključev in bearer vrednosti; brez kontrolnih znakov; vsak fragment naj ima največ 1200 znakov (kode in konfiguracije največ 1500). Vsi fragmenti naj bodo projektovno avtorirana nevtralna testna vsebina (slovenske teme, izmišljene osebe in projekti). Odzovi se izključno z JSON nizom točno {K} nizov (brez Markdown ograje).",
+   "seeds": {
+    "dev": "8e8927672b1cc66a",
+    "hidden": "dd4bebc3c5dd1dd6"
+   }
+  },
+  {
+   "family_id": "prose-statistics",
+   "category": "prose",
+   "subcategory": "statistika v vsakdanjem jeziku",
+   "sample_count": 25,
+   "instance_counts": {
+    "dev": 13,
+    "hidden": 12
+   },
+   "batches_per_instance": [
+    5,
+    5,
+    5,
+    5,
+    5
+   ],
+   "generation_parameters": {
+    "temperature": 0.9,
+    "max_output_tokens": 8000,
+    "request_timeout_seconds": 300,
+    "retry_policy": "at most one retry per failed call (same prompt re-issued); all failures and retries recorded"
+   },
+   "prompt": "Napiši točno {K} med seboj povsem neodvisnih slovenskih fragmentov o temi: statistika v vsakdanjem jeziku (računi, razmere, povprečjja). Vsak fragment je 2 do 5 stavkov naravnega slovenskega besedila (ne seznam, ne naslov). Fragmenti naj se razlikujejo po dolžinah stavkov in po rabi vejic, oklepajev, navodkov in vstavkov. Dovoljena so naravna pojavljanja letnic, mer in imen, kot bi jih uporabil navaden avtor; ne dodajaj kode, matematičnih izrazov, URL-jev, tabel ali Markdown znakov. Varnostna pravila za vse fragmente (obvezna): brez absolutnih poti, ki se začnejo z /home, /tmp, /root ali C:\\Users; brez dolgih neprekinjenih nizov base64 znakov (dlje od 60 znakov); brez gesel, ključev in bearer vrednosti; brez kontrolnih znakov; vsak fragment naj ima največ 1200 znakov (kode in konfiguracije največ 1500). Vsi fragmenti naj bodo projektovno avtorirana nevtralna testna vsebina (slovenske teme, izmišljene osebe in projekti). Odzovi se izključno z JSON nizom točno {K} nizov (brez Markdown ograje).",
+   "seeds": {
+    "dev": "a72b4906786c2d6a",
+    "hidden": "9c9f408a080a43c2"
+   }
+  },
+  {
+   "family_id": "prose-math-explainer",
+   "category": "prose",
+   "subcategory": "matematične razlage za šolške",
+   "sample_count": 25,
+   "instance_counts": {
+    "dev": 13,
+    "hidden": 12
+   },
+   "batches_per_instance": [
+    5,
+    5,
+    5,
+    5,
+    5
+   ],
+   "generation_parameters": {
+    "temperature": 0.9,
+    "max_output_tokens": 8000,
+    "request_timeout_seconds": 300,
+    "retry_policy": "at most one retry per failed call (same prompt re-issued); all failures and retries recorded"
+   },
+   "prompt": "Napiši točno {K} med seboj povsem neodvisnih slovenskih fragmentov o temi: matematične razlage za šolške (enacbe, proporcije, geometrija). Vsak fragment je 2 do 5 stavkov naravnega slovenskega besedila (ne seznam, ne naslov). Fragmenti naj se razlikujejo po dolžinah stavkov in po rabi vejic, oklepajev, navodkov in vstavkov. Dovoljena so naravna pojavljanja letnic, mer in imen, kot bi jih uporabil navaden avtor; ne dodajaj kode, matematičnih izrazov, URL-jev, tabel ali Markdown znakov. Varnostna pravila za vse fragmente (obvezna): brez absolutnih poti, ki se začnejo z /home, /tmp, /root ali C:\\Users; brez dolgih neprekinjenih nizov base64 znakov (dlje od 60 znakov); brez gesel, ključev in bearer vrednosti; brez kontrolnih znakov; vsak fragment naj ima največ 1200 znakov (kode in konfiguracije največ 1500). Vsi fragmenti naj bodo projektovno avtorirana nevtralna testna vsebina (slovenske teme, izmišljene osebe in projekti). Odzovi se izključno z JSON nizom točno {K} nizov (brez Markdown ograje).",
+   "seeds": {
+    "dev": "86a73beece1331ff",
+    "hidden": "8ab6729c5b722933"
+   }
+  },
+  {
+   "family_id": "prose-electronics",
+   "category": "prose",
+   "subcategory": "elektronika za začetnike",
+   "sample_count": 25,
+   "instance_counts": {
+    "dev": 13,
+    "hidden": 12
+   },
+   "batches_per_instance": [
+    5,
+    5,
+    5,
+    5,
+    5
+   ],
+   "generation_parameters": {
+    "temperature": 0.9,
+    "max_output_tokens": 8000,
+    "request_timeout_seconds": 300,
+    "retry_policy": "at most one retry per failed call (same prompt re-issued); all failures and retries recorded"
+   },
+   "prompt": "Napiši točno {K} med seboj povsem neodvisnih slovenskih fragmentov o temi: elektronika za začetnike (sklepi, upornosti, baterije). Vsak fragment je 2 do 5 stavkov naravnega slovenskega besedila (ne seznam, ne naslov). Fragmenti naj se razlikujejo po dolžinah stavkov in po rabi vejic, oklepajev, navodkov in vstavkov. Dovoljena so naravna pojavljanja letnic, mer in imen, kot bi jih uporabil navaden avtor; ne dodajaj kode, matematičnih izrazov, URL-jev, tabel ali Markdown znakov. Varnostna pravila za vse fragmente (obvezna): brez absolutnih poti, ki se začnejo z /home, /tmp, /root ali C:\\Users; brez dolgih neprekinjenih nizov base64 znakov (dlje od 60 znakov); brez gesel, ključev in bearer vrednosti; brez kontrolnih znakov; vsak fragment naj ima največ 1200 znakov (kode in konfiguracije največ 1500). Vsi fragmenti naj bodo projektovno avtorirana nevtralna testna vsebina (slovenske teme, izmišljene osebe in projekti). Odzovi se izključno z JSON nizom točno {K} nizov (brez Markdown ograje).",
+   "seeds": {
+    "dev": "18440658d4ed7031",
+    "hidden": "0600e6d5ff258901"
+   }
+  },
+  {
+   "family_id": "prose-programming-explainer",
+   "category": "prose",
+   "subcategory": "razlage programiranja v naravnem jeziku",
+   "sample_count": 25,
+   "instance_counts": {
+    "dev": 13,
+    "hidden": 12
+   },
+   "batches_per_instance": [
+    5,
+    5,
+    5,
+    5,
+    5
+   ],
+   "generation_parameters": {
+    "temperature": 0.9,
+    "max_output_tokens": 8000,
+    "request_timeout_seconds": 300,
+    "retry_policy": "at most one retry per failed call (same prompt re-issued); all failures and retries recorded"
+   },
+   "prompt": "Napiši točno {K} med seboj povsem neodvisnih slovenskih fragmentov o temi: razlage programiranja v naravnem jeziku (spremenljivke, zanke, funkcije). Vsak fragment je 2 do 5 stavkov naravnega slovenskega besedila (ne seznam, ne naslov). Fragmenti naj se razlikujejo po dolžinah stavkov in po rabi vejic, oklepajev, navodkov in vstavkov. Dovoljena so naravna pojavljanja letnic, mer in imen, kot bi jih uporabil navaden avtor; ne dodajaj kode, matematičnih izrazov, URL-jev, tabel ali Markdown znakov. Varnostna pravila za vse fragmente (obvezna): brez absolutnih poti, ki se začnejo z /home, /tmp, /root ali C:\\Users; brez dolgih neprekinjenih nizov base64 znakov (dlje od 60 znakov); brez gesel, ključev in bearer vrednosti; brez kontrolnih znakov; vsak fragment naj ima največ 1200 znakov (kode in konfiguracije največ 1500). Vsi fragmenti naj bodo projektovno avtorirana nevtralna testna vsebina (slovenske teme, izmišljene osebe in projekti). Odzovi se izključno z JSON nizom točno {K} nizov (brez Markdown ograje).",
+   "seeds": {
+    "dev": "ff7589642ee352bd",
+    "hidden": "8e8098ac180a7102"
+   }
+  },
+  {
+   "family_id": "code-python",
+   "category": "code",
+   "subcategory": "Python",
+   "sample_count": 22,
+   "instance_counts": {
+    "dev": 11,
+    "hidden": 11
+   },
+   "batches_per_instance": [
+    8,
+    7,
+    7
+   ],
+   "generation_parameters": {
+    "temperature": 0.4,
+    "max_output_tokens": 8000,
+    "request_timeout_seconds": 300,
+    "retry_policy": "at most one retry per failed call (same prompt re-issued); all failures and retries recorded"
+   },
+   "prompt": "Napiši točno {K} med seboj neodvisnih koderskih fragmentov v jeziku Python (vsak največ 20 vrstic). Fragmenti naj po izbiri vsebujejo: slovenske komentarje, nize z besedili, ki so podobna Markdown (zvezdice, podčrtana besedila, poudarki), znake backquote, dollar znake kot valute, oklepaje, URL-je oblike https://primer.si/koda, relativne poti (npr. src/modul.py, docs/vir.txt), identifikatorje s poudarčnimi znakmi ali številskimi znaki (npr. seStez, razdelek2, HRAŠNA_VREDNOST) in ne-ASCII znake (č, š, ž). Primeri stilov: `def seštej(a, b): return a + b` ; `# komentar v slovenščini` ; `naslov = \"Povzetek: *pomembno*\"`. Varnostna pravila za vse fragmente (obvezna): brez absolutnih poti, ki se začnejo z /home, /tmp, /root ali C:\\Users; brez dolgih neprekinjenih nizov base64 znakov (dlje od 60 znakov); brez gesel, ključev in bearer vrednosti; brez kontrolnih znakov; vsak fragment naj ima največ 1200 znakov (kode in konfiguracije največ 1500). Vsi fragmenti naj bodo projektovno avtorirana nevtralna testna vsebina (slovenske teme, izmišljene osebe in projekti). Odzovi se izključno z JSON nizom točno {K} nizov (brez Markdown ograje).",
+   "seeds": {
+    "dev": "2e69b924aa3fe390",
+    "hidden": "979b6cf3d77a96ea"
+   }
+  },
+  {
+   "family_id": "code-c",
+   "category": "code",
+   "subcategory": "C",
+   "sample_count": 22,
+   "instance_counts": {
+    "dev": 11,
+    "hidden": 11
+   },
+   "batches_per_instance": [
+    8,
+    7,
+    7
+   ],
+   "generation_parameters": {
+    "temperature": 0.4,
+    "max_output_tokens": 8000,
+    "request_timeout_seconds": 300,
+    "retry_policy": "at most one retry per failed call (same prompt re-issued); all failures and retries recorded"
+   },
+   "prompt": "Napiši točno {K} med seboj neodvisnih koderskih fragmentov v jeziku C (vsak največ 20 vrstic). Fragmenti naj po izbiri vsebujejo: slovenske komentarje, nize z besedili, ki so podobna Markdown (zvezdice, podčrtana besedila, poudarki), znake backquote, dollar znake kot valute, oklepaje, URL-je oblike https://primer.si/koda, relativne poti (npr. src/modul.py, docs/vir.txt), identifikatorje s poudarčnimi znakmi ali številskimi znaki (npr. seStez, razdelek2, HRAŠNA_VREDNOST) in ne-ASCII znake (č, š, ž). Primeri stilov: `int main(void) { return 0; }` ; `// komentar` ; `char *z = \"pot: docs/vir.txt\";`. Varnostna pravila za vse fragmente (obvezna): brez absolutnih poti, ki se začnejo z /home, /tmp, /root ali C:\\Users; brez dolgih neprekinjenih nizov base64 znakov (dlje od 60 znakov); brez gesel, ključev in bearer vrednosti; brez kontrolnih znakov; vsak fragment naj ima največ 1200 znakov (kode in konfiguracije največ 1500). Vsi fragmenti naj bodo projektovno avtorirana nevtralna testna vsebina (slovenske teme, izmišljene osebe in projekti). Odzovi se izključno z JSON nizom točno {K} nizov (brez Markdown ograje).",
+   "seeds": {
+    "dev": "2950db7707fca082",
+    "hidden": "428792738d9252ff"
+   }
+  },
+  {
+   "family_id": "code-cpp",
+   "category": "code",
+   "subcategory": "C++",
+   "sample_count": 22,
+   "instance_counts": {
+    "dev": 11,
+    "hidden": 11
+   },
+   "batches_per_instance": [
+    8,
+    7,
+    7
+   ],
+   "generation_parameters": {
+    "temperature": 0.4,
+    "max_output_tokens": 8000,
+    "request_timeout_seconds": 300,
+    "retry_policy": "at most one retry per failed call (same prompt re-issued); all failures and retries recorded"
+   },
+   "prompt": "Napiši točno {K} med seboj neodvisnih koderskih fragmentov v jeziku C++ (vsak največ 20 vrstic). Fragmenti naj po izbiri vsebujejo: slovenske komentarje, nize z besedili, ki so podobna Markdown (zvezdice, podčrtana besedila, poudarki), znake backquote, dollar znake kot valute, oklepaje, URL-je oblike https://primer.si/koda, relativne poti (npr. src/modul.py, docs/vir.txt), identifikatorje s poudarčnimi znakmi ali številskimi znaki (npr. seStez, razdelek2, HRAŠNA_VREDNOST) in ne-ASCII znake (č, š, ž). Primeri stilov: `int main() { return 0; }` ; `// komentar` ; `std::string naslov = \"Razdelek: _podrobnosti_\";`. Varnostna pravila za vse fragmente (obvezna): brez absolutnih poti, ki se začnejo z /home, /tmp, /root ali C:\\Users; brez dolgih neprekinjenih nizov base64 znakov (dlje od 60 znakov); brez gesel, ključev in bearer vrednosti; brez kontrolnih znakov; vsak fragment naj ima največ 1200 znakov (kode in konfiguracije največ 1500). Vsi fragmenti naj bodo projektovno avtorirana nevtralna testna vsebina (slovenske teme, izmišljene osebe in projekti). Odzovi se izključno z JSON nizom točno {K} nizov (brez Markdown ograje).",
+   "seeds": {
+    "dev": "25519a23a817cb04",
+    "hidden": "940cf4d1f9c32ccf"
+   }
+  },
+  {
+   "family_id": "code-javascript",
+   "category": "code",
+   "subcategory": "JavaScript",
+   "sample_count": 22,
+   "instance_counts": {
+    "dev": 11,
+    "hidden": 11
+   },
+   "batches_per_instance": [
+    8,
+    7,
+    7
+   ],
+   "generation_parameters": {
+    "temperature": 0.4,
+    "max_output_tokens": 8000,
+    "request_timeout_seconds": 300,
+    "retry_policy": "at most one retry per failed call (same prompt re-issued); all failures and retries recorded"
+   },
+   "prompt": "Napiši točno {K} med seboj neodvisnih koderskih fragmentov v jeziku JavaScript (vsak največ 20 vrstic). Fragmenti naj po izbiri vsebujejo: slovenske komentarje, nize z besedili, ki so podobna Markdown (zvezdice, podčrtana besedila, poudarki), znake backquote, dollar znake kot valute, oklepaje, URL-je oblike https://primer.si/koda, relativne poti (npr. src/modul.py, docs/vir.txt), identifikatorje s poudarčnimi znakmi ali številskimi znaki (npr. seStez, razdelek2, HRAŠNA_VREDNOST) in ne-ASCII znake (č, š, ž). Primeri stilov: `function seStez(a, b) { return a + b; }` ; `// komentar` ; `const naslov = \"Opomba: **pomembno**\";`. Varnostna pravila za vse fragmente (obvezna): brez absolutnih poti, ki se začnejo z /home, /tmp, /root ali C:\\Users; brez dolgih neprekinjenih nizov base64 znakov (dlje od 60 znakov); brez gesel, ključev in bearer vrednosti; brez kontrolnih znakov; vsak fragment naj ima največ 1200 znakov (kode in konfiguracije največ 1500). Vsi fragmenti naj bodo projektovno avtorirana nevtralna testna vsebina (slovenske teme, izmišljene osebe in projekti). Odzovi se izključno z JSON nizom točno {K} nizov (brez Markdown ograje).",
+   "seeds": {
+    "dev": "36052daf021c248f",
+    "hidden": "70f7cf93b0aaf645"
+   }
+  },
+  {
+   "family_id": "code-shell-bash",
+   "category": "code",
+   "subcategory": "Bash",
+   "sample_count": 22,
+   "instance_counts": {
+    "dev": 11,
+    "hidden": 11
+   },
+   "batches_per_instance": [
+    8,
+    7,
+    7
+   ],
+   "generation_parameters": {
+    "temperature": 0.4,
+    "max_output_tokens": 8000,
+    "request_timeout_seconds": 300,
+    "retry_policy": "at most one retry per failed call (same prompt re-issued); all failures and retries recorded"
+   },
+   "prompt": "Napiši točno {K} med seboj neodvisnih koderskih fragmentov v jeziku Bash (vsak največ 20 vrstic). Fragmenti naj po izbiri vsebujejo: slovenske komentarje, nize z besedili, ki so podobna Markdown (zvezdice, podčrtana besedila, poudarki), znake backquote, dollar znake kot valute, oklepaje, URL-je oblike https://primer.si/koda, relativne poti (npr. src/modul.py, docs/vir.txt), identifikatorje s poudarčnimi znakmi ali številskimi znaki (npr. seStez, razdelek2, HRAŠNA_VREDNOST) in ne-ASCII znake (č, š, ž). Primeri stilov: `#!/usr/bin/env bash` ; `# komentar` ; `echo \"izhod: 10 % napake\";`. Varnostna pravila za vse fragmente (obvezna): brez absolutnih poti, ki se začnejo z /home, /tmp, /root ali C:\\Users; brez dolgih neprekinjenih nizov base64 znakov (dlje od 60 znakov); brez gesel, ključev in bearer vrednosti; brez kontrolnih znakov; vsak fragment naj ima največ 1200 znakov (kode in konfiguracije največ 1500). Vsi fragmenti naj bodo projektovno avtorirana nevtralna testna vsebina (slovenske teme, izmišljene osebe in projekti). Odzovi se izključno z JSON nizom točno {K} nizov (brez Markdown ograje).",
+   "seeds": {
+    "dev": "8c67862bab784197",
+    "hidden": "4353fa5994d8cb8b"
+   }
+  },
+  {
+   "family_id": "code-sql",
+   "category": "code",
+   "subcategory": "SQL",
+   "sample_count": 22,
+   "instance_counts": {
+    "dev": 11,
+    "hidden": 11
+   },
+   "batches_per_instance": [
+    8,
+    7,
+    7
+   ],
+   "generation_parameters": {
+    "temperature": 0.4,
+    "max_output_tokens": 8000,
+    "request_timeout_seconds": 300,
+    "retry_policy": "at most one retry per failed call (same prompt re-issued); all failures and retries recorded"
+   },
+   "prompt": "Napiši točno {K} med seboj neodvisnih koderskih fragmentov v jeziku SQL (vsak največ 20 vrstic). Fragmenti naj po izbiri vsebujejo: slovenske komentarje, nize z besedili, ki so podobna Markdown (zvezdice, podčrtana besedila, poudarki), znake backquote, dollar znake kot valute, oklepaje, URL-je oblike https://primer.si/koda, relativne poti (npr. src/modul.py, docs/vir.txt), identifikatorje s poudarčnimi znakmi ali številskimi znaki (npr. seStez, razdelek2, HRAŠNA_VREDNOST) in ne-ASCII znake (č, š, ž). Primeri stilov: `SELECT * FROM razpolozi;` ; `-- komentar` ; `INSERT INTO vrednosti (ime) VALUES ('razdelek');`. Varnostna pravila za vse fragmente (obvezna): brez absolutnih poti, ki se začnejo z /home, /tmp, /root ali C:\\Users; brez dolgih neprekinjenih nizov base64 znakov (dlje od 60 znakov); brez gesel, ključev in bearer vrednosti; brez kontrolnih znakov; vsak fragment naj ima največ 1200 znakov (kode in konfiguracije največ 1500). Vsi fragmenti naj bodo projektovno avtorirana nevtralna testna vsebina (slovenske teme, izmišljene osebe in projekti). Odzovi se izključno z JSON nizom točno {K} nizov (brez Markdown ograje).",
+   "seeds": {
+    "dev": "3050a509b2098a1c",
+    "hidden": "fc48c0c74736bc43"
+   }
+  },
+  {
+   "family_id": "code-rust",
+   "category": "code",
+   "subcategory": "Rust",
+   "sample_count": 22,
+   "instance_counts": {
+    "dev": 11,
+    "hidden": 11
+   },
+   "batches_per_instance": [
+    8,
+    7,
+    7
+   ],
+   "generation_parameters": {
+    "temperature": 0.4,
+    "max_output_tokens": 8000,
+    "request_timeout_seconds": 300,
+    "retry_policy": "at most one retry per failed call (same prompt re-issued); all failures and retries recorded"
+   },
+   "prompt": "Napiši točno {K} med seboj neodvisnih koderskih fragmentov v jeziku Rust (vsak največ 20 vrstic). Fragmenti naj po izbiri vsebujejo: slovenske komentarje, nize z besedili, ki so podobna Markdown (zvezdice, podčrtana besedila, poudarki), znake backquote, dollar znake kot valute, oklepaje, URL-je oblike https://primer.si/koda, relativne poti (npr. src/modul.py, docs/vir.txt), identifikatorje s poudarčnimi znakmi ali številskimi znaki (npr. seStez, razdelek2, HRAŠNA_VREDNOST) in ne-ASCII znake (č, š, ž). Primeri stilov: `fn main() { println!(\"ok\"); }` ; `// komentar` ; `let naslov = String::from(\"pot: src/modul.rs\");`. Varnostna pravila za vse fragmente (obvezna): brez absolutnih poti, ki se začnejo z /home, /tmp, /root ali C:\\Users; brez dolgih neprekinjenih nizov base64 znakov (dlje od 60 znakov); brez gesel, ključev in bearer vrednosti; brez kontrolnih znakov; vsak fragment naj ima največ 1200 znakov (kode in konfiguracije največ 1500). Vsi fragmenti naj bodo projektovno avtorirana nevtralna testna vsebina (slovenske teme, izmišljene osebe in projekti). Odzovi se izključno z JSON nizom točno {K} nizov (brez Markdown ograje).",
+   "seeds": {
+    "dev": "ea88bf89621f73c9",
+    "hidden": "4d402feca87483fe"
+   }
+  },
+  {
+   "family_id": "structured-json",
+   "category": "structured",
+   "subcategory": "json objekt",
+   "sample_count": 15,
+   "instance_counts": {
+    "dev": 8,
+    "hidden": 7
+   },
+   "batches_per_instance": [
+    8,
+    7
+   ],
+   "generation_parameters": {
+    "temperature": 0.4,
+    "max_output_tokens": 8000,
+    "request_timeout_seconds": 300,
+    "retry_policy": "at most one retry per failed call (same prompt re-issued); all failures and retries recorded"
+   },
+   "prompt": "Napiši točno {K} neodvisnih fragmentov struktuiranih podatkov: JSON objekt (1 do 3 stopnje, slovenske ključne besede in vrednosti, tudi niz z markdown besedilom znotraj). Vrednosti naj uporabljajo slovenske besede, številke in enote (npr. 25 %, 3,5 m, 0,13); v nizih dovoljeni markdown podobi (zvezdice, podčrtje) in URL-i oblike https://primer.si/novica. Varnostna pravila za vse fragmente (obvezna): brez absolutnih poti, ki se začnejo z /home, /tmp, /root ali C:\\Users; brez dolgih neprekinjenih nizov base64 znakov (dlje od 60 znakov); brez gesel, ključev in bearer vrednosti; brez kontrolnih znakov; vsak fragment naj ima največ 1200 znakov (kode in konfiguracije največ 1500). Vsi fragmenti naj bodo projektovno avtorirana nevtralna testna vsebina (slovenske teme, izmišljene osebe in projekti). Odzovi se izključno z JSON nizom točno {K} nizov (brez Markdown ograje).",
+   "seeds": {
+    "dev": "e8a93402ff4e1314",
+    "hidden": "27034b472dd8a44c"
+   }
+  },
+  {
+   "family_id": "structured-yaml",
+   "category": "structured",
+   "subcategory": "yaml dokument",
+   "sample_count": 15,
+   "instance_counts": {
+    "dev": 8,
+    "hidden": 7
+   },
+   "batches_per_instance": [
+    8,
+    7
+   ],
+   "generation_parameters": {
+    "temperature": 0.4,
+    "max_output_tokens": 8000,
+    "request_timeout_seconds": 300,
+    "retry_policy": "at most one retry per failed call (same prompt re-issued); all failures and retries recorded"
+   },
+   "prompt": "Napiši točno {K} neodvisnih fragmentov struktuiranih podatkov: YAML dokument (ključi in vrednosti, tudi seznam, komentarji z #). Vrednosti naj uporabljajo slovenske besede, številke in enote (npr. 25 %, 3,5 m, 0,13); v nizih dovoljeni markdown podobi (zvezdice, podčrtje) in URL-i oblike https://primer.si/novica. Varnostna pravila za vse fragmente (obvezna): brez absolutnih poti, ki se začnejo z /home, /tmp, /root ali C:\\Users; brez dolgih neprekinjenih nizov base64 znakov (dlje od 60 znakov); brez gesel, ključev in bearer vrednosti; brez kontrolnih znakov; vsak fragment naj ima največ 1200 znakov (kode in konfiguracije največ 1500). Vsi fragmenti naj bodo projektovno avtorirana nevtralna testna vsebina (slovenske teme, izmišljene osebe in projekti). Odzovi se izključno z JSON nizom točno {K} nizov (brez Markdown ograje).",
+   "seeds": {
+    "dev": "25c06e848b63401e",
+    "hidden": "4cea9d4c320b4248"
+   }
+  },
+  {
+   "family_id": "structured-toml",
+   "category": "structured",
+   "subcategory": "toml dokument",
+   "sample_count": 15,
+   "instance_counts": {
+    "dev": 8,
+    "hidden": 7
+   },
+   "batches_per_instance": [
+    8,
+    7
+   ],
+   "generation_parameters": {
+    "temperature": 0.4,
+    "max_output_tokens": 8000,
+    "request_timeout_seconds": 300,
+    "retry_policy": "at most one retry per failed call (same prompt re-issued); all failures and retries recorded"
+   },
+   "prompt": "Napiši točno {K} neodvisnih fragmentov struktuiranih podatkov: TOML dokument ([razdelek] in ključi z = ). Vrednosti naj uporabljajo slovenske besede, številke in enote (npr. 25 %, 3,5 m, 0,13); v nizih dovoljeni markdown podobi (zvezdice, podčrtje) in URL-i oblike https://primer.si/novica. Varnostna pravila za vse fragmente (obvezna): brez absolutnih poti, ki se začnejo z /home, /tmp, /root ali C:\\Users; brez dolgih neprekinjenih nizov base64 znakov (dlje od 60 znakov); brez gesel, ključev in bearer vrednosti; brez kontrolnih znakov; vsak fragment naj ima največ 1200 znakov (kode in konfiguracije največ 1500). Vsi fragmenti naj bodo projektovno avtorirana nevtralna testna vsebina (slovenske teme, izmišljene osebe in projekti). Odzovi se izključno z JSON nizom točno {K} nizov (brez Markdown ograje).",
+   "seeds": {
+    "dev": "c258923f40a15b95",
+    "hidden": "4234865f1600d580"
+   }
+  },
+  {
+   "family_id": "structured-xml",
+   "category": "structured",
+   "subcategory": "xml fragment",
+   "sample_count": 15,
+   "instance_counts": {
+    "dev": 8,
+    "hidden": 7
+   },
+   "batches_per_instance": [
+    8,
+    7
+   ],
+   "generation_parameters": {
+    "temperature": 0.4,
+    "max_output_tokens": 8000,
+    "request_timeout_seconds": 300,
+    "retry_policy": "at most one retry per failed call (same prompt re-issued); all failures and retries recorded"
+   },
+   "prompt": "Napiši točno {K} neodvisnih fragmentov struktuiranih podatkov: XML fragment (1 do 3 stopnje, atribute, slovenski vsebina). Vrednosti naj uporabljajo slovenske besede, številke in enote (npr. 25 %, 3,5 m, 0,13); v nizih dovoljeni markdown podobi (zvezdice, podčrtje) in URL-i oblike https://primer.si/novica. Varnostna pravila za vse fragmente (obvezna): brez absolutnih poti, ki se začnejo z /home, /tmp, /root ali C:\\Users; brez dolgih neprekinjenih nizov base64 znakov (dlje od 60 znakov); brez gesel, ključev in bearer vrednosti; brez kontrolnih znakov; vsak fragment naj ima največ 1200 znakov (kode in konfiguracije največ 1500). Vsi fragmenti naj bodo projektovno avtorirana nevtralna testna vsebina (slovenske teme, izmišljene osebe in projekti). Odzovi se izključno z JSON nizom točno {K} nizov (brez Markdown ograje).",
+   "seeds": {
+    "dev": "f29b76f1b4360cc9",
+    "hidden": "88987c3516ca12ab"
+   }
+  },
+  {
+   "family_id": "structured-html",
+   "category": "structured",
+   "subcategory": "html fragment",
+   "sample_count": 15,
+   "instance_counts": {
+    "dev": 8,
+    "hidden": 7
+   },
+   "batches_per_instance": [
+    8,
+    7
+   ],
+   "generation_parameters": {
+    "temperature": 0.4,
+    "max_output_tokens": 8000,
+    "request_timeout_seconds": 300,
+    "retry_policy": "at most one retry per failed call (same prompt re-issued); all failures and retries recorded"
+   },
+   "prompt": "Napiši točno {K} neodvisnih fragmentov struktuiranih podatkov: HTML fragment (oznake table ali seznama, slovenski vsebina). Vrednosti naj uporabljajo slovenske besede, številke in enote (npr. 25 %, 3,5 m, 0,13); v nizih dovoljeni markdown podobi (zvezdice, podčrtje) in URL-i oblike https://primer.si/novica. Varnostna pravila za vse fragmente (obvezna): brez absolutnih poti, ki se začnejo z /home, /tmp, /root ali C:\\Users; brez dolgih neprekinjenih nizov base64 znakov (dlje od 60 znakov); brez gesel, ključev in bearer vrednosti; brez kontrolnih znakov; vsak fragment naj ima največ 1200 znakov (kode in konfiguracije največ 1500). Vsi fragmenti naj bodo projektovno avtorirana nevtralna testna vsebina (slovenske teme, izmišljene osebe in projekti). Odzovi se izključno z JSON nizom točno {K} nizov (brez Markdown ograje).",
+   "seeds": {
+    "dev": "37a643e5ac7f577e",
+    "hidden": "eced7a291d4fefbc"
+   }
+  },
+  {
+   "family_id": "structured-ini",
+   "category": "structured",
+   "subcategory": "ini-konfiguracija",
+   "sample_count": 15,
+   "instance_counts": {
+    "dev": 8,
+    "hidden": 7
+   },
+   "batches_per_instance": [
+    8,
+    7
+   ],
+   "generation_parameters": {
+    "temperature": 0.4,
+    "max_output_tokens": 8000,
+    "request_timeout_seconds": 300,
+    "retry_policy": "at most one retry per failed call (same prompt re-issued); all failures and retries recorded"
+   },
+   "prompt": "Napiši točno {K} neodvisnih fragmentov struktuiranih podatkov: INI-konfiguracija ([razdelek] in ključ = vrednost, komentarji ; ). Vrednosti naj uporabljajo slovenske besede, številke in enote (npr. 25 %, 3,5 m, 0,13); v nizih dovoljeni markdown podobi (zvezdice, podčrtje) in URL-i oblike https://primer.si/novica. Varnostna pravila za vse fragmente (obvezna): brez absolutnih poti, ki se začnejo z /home, /tmp, /root ali C:\\Users; brez dolgih neprekinjenih nizov base64 znakov (dlje od 60 znakov); brez gesel, ključev in bearer vrednosti; brez kontrolnih znakov; vsak fragment naj ima največ 1200 znakov (kode in konfiguracije največ 1500). Vsi fragmenti naj bodo projektovno avtorirana nevtralna testna vsebina (slovenske teme, izmišljene osebe in projekti). Odzovi se izključno z JSON nizom točno {K} nizov (brez Markdown ograje).",
+   "seeds": {
+    "dev": "0a8579f1e16d3747",
+    "hidden": "c1bd9728f0821ddd"
+   }
+  },
+  {
+   "family_id": "structured-env-blocks",
+   "category": "structured",
+   "subcategory": "blok okoljskih spremenljivk",
+   "sample_count": 15,
+   "instance_counts": {
+    "dev": 8,
+    "hidden": 7
+   },
+   "batches_per_instance": [
+    8,
+    7
+   ],
+   "generation_parameters": {
+    "temperature": 0.4,
+    "max_output_tokens": 8000,
+    "request_timeout_seconds": 300,
+    "retry_policy": "at most one retry per failed call (same prompt re-issued); all failures and retries recorded"
+   },
+   "prompt": "Napiši točno {K} neodvisnih fragmentov struktuiranih podatkov: blok okoljskih spremenljivk (KLJUč=vrednost na vrstico, tudi z $drugim_ključem). Vrednosti naj uporabljajo slovenske besede, številke in enote (npr. 25 %, 3,5 m, 0,13); v nizih dovoljeni markdown podobi (zvezdice, podčrtje) in URL-i oblike https://primer.si/novica. Varnostna pravila za vse fragmente (obvezna): brez absolutnih poti, ki se začnejo z /home, /tmp, /root ali C:\\Users; brez dolgih neprekinjenih nizov base64 znakov (dlje od 60 znakov); brez gesel, ključev in bearer vrednosti; brez kontrolnih znakov; vsak fragment naj ima največ 1200 znakov (kode in konfiguracije največ 1500). Vsi fragmenti naj bodo projektovno avtorirana nevtralna testna vsebina (slovenske teme, izmišljene osebe in projekti). Odzovi se izključno z JSON nizom točno {K} nizov (brez Markdown ograje).",
+   "seeds": {
+    "dev": "99e5840822ec42d7",
+    "hidden": "c63a39841ad40684"
+   }
+  },
+  {
+   "family_id": "structured-keyvalue",
+   "category": "structured",
+   "subcategory": "ključ/vrednost odlomek",
+   "sample_count": 15,
+   "instance_counts": {
+    "dev": 8,
+    "hidden": 7
+   },
+   "batches_per_instance": [
+    8,
+    7
+   ],
+   "generation_parameters": {
+    "temperature": 0.4,
+    "max_output_tokens": 8000,
+    "request_timeout_seconds": 300,
+    "retry_policy": "at most one retry per failed call (same prompt re-issued); all failures and retries recorded"
+   },
+   "prompt": "Napiši točno {K} neodvisnih fragmentov struktuiranih podatkov: ključ/vrednost odlomek (mix: json-podobje, yaml-podobje, csv vrstica z vejicami). Vrednosti naj uporabljajo slovenske besede, številke in enote (npr. 25 %, 3,5 m, 0,13); v nizih dovoljeni markdown podobi (zvezdice, podčrtje) in URL-i oblike https://primer.si/novica. Varnostna pravila za vse fragmente (obvezna): brez absolutnih poti, ki se začnejo z /home, /tmp, /root ali C:\\Users; brez dolgih neprekinjenih nizov base64 znakov (dlje od 60 znakov); brez gesel, ključev in bearer vrednosti; brez kontrolnih znakov; vsak fragment naj ima največ 1200 znakov (kode in konfiguracije največ 1500). Vsi fragmenti naj bodo projektovno avtorirana nevtralna testna vsebina (slovenske teme, izmišljene osebe in projekti). Odzovi se izključno z JSON nizom točno {K} nizov (brez Markdown ograje).",
+   "seeds": {
+    "dev": "d8feb30ed24dbe13",
+    "hidden": "7d7aa0f8d4d866ea"
+   }
+  },
+  {
+   "family_id": "math-inline-dollar",
+   "category": "math",
+   "subcategory": "inline matematični izraz v $...$",
+   "sample_count": 13,
+   "instance_counts": {
+    "dev": 7,
+    "hidden": 6
+   },
+   "batches_per_instance": [
+    7,
+    6
+   ],
+   "generation_parameters": {
+    "temperature": 0.5,
+    "max_output_tokens": 8000,
+    "request_timeout_seconds": 300,
+    "retry_policy": "at most one retry per failed call (same prompt re-issued); all failures and retries recorded"
+   },
+   "prompt": "Napiši točno {K} neodvisnih matematičnih fragmentov: inline matematični izraz v $...$ (enčba ali izraz, slovenski okoliški besedi). Vsak fragment je le sam matematični zapis (brez slovenskih stavkov razen tistih znotraj \\text{{...}}); znamenke naj uporabljajo številke, grške črke in standardne operatorje. Varnostna pravila za vse fragmente (obvezna): brez absolutnih poti, ki se začnejo z /home, /tmp, /root ali C:\\Users; brez dolgih neprekinjenih nizov base64 znakov (dlje od 60 znakov); brez gesel, ključev in bearer vrednosti; brez kontrolnih znakov; vsak fragment naj ima največ 1200 znakov (kode in konfiguracije največ 1500). Vsi fragmenti naj bodo projektovno avtorirana nevtralna testna vsebina (slovenske teme, izmišljene osebe in projekti). Odzovi se izključno z JSON nizom točno {K} nizov (brez Markdown ograje).",
+   "seeds": {
+    "dev": "ea74171b64bfeb40",
+    "hidden": "d71135cfc64945fc"
+   }
+  },
+  {
+   "family_id": "math-display-dollar",
+   "category": "math",
+   "subcategory": "display matematika v $$...$$",
+   "sample_count": 13,
+   "instance_counts": {
+    "dev": 7,
+    "hidden": 6
+   },
+   "batches_per_instance": [
+    7,
+    6
+   ],
+   "generation_parameters": {
+    "temperature": 0.5,
+    "max_output_tokens": 8000,
+    "request_timeout_seconds": 300,
+    "retry_policy": "at most one retry per failed call (same prompt re-issued); all failures and retries recorded"
+   },
+   "prompt": "Napiši točno {K} neodvisnih matematičnih fragmentov: display matematika v $$...$$ (enčba s poimenovalcem, 1 do 3 vrstice). Vsak fragment je le sam matematični zapis (brez slovenskih stavkov razen tistih znotraj \\text{{...}}); znamenke naj uporabljajo številke, grške črke in standardne operatorje. Varnostna pravila za vse fragmente (obvezna): brez absolutnih poti, ki se začnejo z /home, /tmp, /root ali C:\\Users; brez dolgih neprekinjenih nizov base64 znakov (dlje od 60 znakov); brez gesel, ključev in bearer vrednosti; brez kontrolnih znakov; vsak fragment naj ima največ 1200 znakov (kode in konfiguracije največ 1500). Vsi fragmenti naj bodo projektovno avtorirana nevtralna testna vsebina (slovenske teme, izmišljene osebe in projekti). Odzovi se izključno z JSON nizom točno {K} nizov (brez Markdown ograje).",
+   "seeds": {
+    "dev": "641adf684730ac5c",
+    "hidden": "ca36ceda9beee5f2"
+   }
+  },
+  {
+   "family_id": "math-paren-tex",
+   "category": "math",
+   "subcategory": "inline tex v \\(...\\)",
+   "sample_count": 13,
+   "instance_counts": {
+    "dev": 7,
+    "hidden": 6
+   },
+   "batches_per_instance": [
+    7,
+    6
+   ],
+   "generation_parameters": {
+    "temperature": 0.5,
+    "max_output_tokens": 8000,
+    "request_timeout_seconds": 300,
+    "retry_policy": "at most one retry per failed call (same prompt re-issued); all failures and retries recorded"
+   },
+   "prompt": "Napiši točno {K} neodvisnih matematičnih fragmentov: inline TeX v \\(...\\) (razlomki, eksponente, koreni). Vsak fragment je le sam matematični zapis (brez slovenskih stavkov razen tistih znotraj \\text{{...}}); znamenke naj uporabljajo številke, grške črke in standardne operatorje. Varnostna pravila za vse fragmente (obvezna): brez absolutnih poti, ki se začnejo z /home, /tmp, /root ali C:\\Users; brez dolgih neprekinjenih nizov base64 znakov (dlje od 60 znakov); brez gesel, ključev in bearer vrednosti; brez kontrolnih znakov; vsak fragment naj ima največ 1200 znakov (kode in konfiguracije največ 1500). Vsi fragmenti naj bodo projektovno avtorirana nevtralna testna vsebina (slovenske teme, izmišljene osebe in projekti). Odzovi se izključno z JSON nizom točno {K} nizov (brez Markdown ograje).",
+   "seeds": {
+    "dev": "8bb008c71bdf803b",
+    "hidden": "29c3b66414c2104e"
+   }
+  },
+  {
+   "family_id": "math-bracket-tex",
+   "category": "math",
+   "subcategory": "display tex v \\[...\\]",
+   "sample_count": 13,
+   "instance_counts": {
+    "dev": 7,
+    "hidden": 6
+   },
+   "batches_per_instance": [
+    7,
+    6
+   ],
+   "generation_parameters": {
+    "temperature": 0.5,
+    "max_output_tokens": 8000,
+    "request_timeout_seconds": 300,
+    "retry_policy": "at most one retry per failed call (same prompt re-issued); all failures and retries recorded"
+   },
+   "prompt": "Napiši točno {K} neodvisnih matematičnih fragmentov: display TeX v \\[...\\] (sistem enačb ali matrika, 1 do 3 vrstice). Vsak fragment je le sam matematični zapis (brez slovenskih stavkov razen tistih znotraj \\text{{...}}); znamenke naj uporabljajo številke, grške črke in standardne operatorje. Varnostna pravila za vse fragmente (obvezna): brez absolutnih poti, ki se začnejo z /home, /tmp, /root ali C:\\Users; brez dolgih neprekinjenih nizov base64 znakov (dlje od 60 znakov); brez gesel, ključev in bearer vrednosti; brez kontrolnih znakov; vsak fragment naj ima največ 1200 znakov (kode in konfiguracije največ 1500). Vsi fragmenti naj bodo projektovno avtorirana nevtralna testna vsebina (slovenske teme, izmišljene osebe in projekti). Odzovi se izključno z JSON nizom točno {K} nizov (brez Markdown ograje).",
+   "seeds": {
+    "dev": "03d962d138168cf1",
+    "hidden": "434694e4099ab0ae"
+   }
+  },
+  {
+   "family_id": "math-equation-env",
+   "category": "math",
+   "subcategory": "tex okolje equation",
+   "sample_count": 13,
+   "instance_counts": {
+    "dev": 7,
+    "hidden": 6
+   },
+   "batches_per_instance": [
+    7,
+    6
+   ],
+   "generation_parameters": {
+    "temperature": 0.5,
+    "max_output_tokens": 8000,
+    "request_timeout_seconds": 300,
+    "retry_policy": "at most one retry per failed call (same prompt re-issued); all failures and retries recorded"
+   },
+   "prompt": "Napiši točno {K} neodvisnih matematičnih fragmentov: TeX okolje equation (enačba z izpeljavo v 1 do 3 korakih). Vsak fragment je le sam matematični zapis (brez slovenskih stavkov razen tistih znotraj \\text{{...}}); znamenke naj uporabljajo številke, grške črke in standardne operatorje. Varnostna pravila za vse fragmente (obvezna): brez absolutnih poti, ki se začnejo z /home, /tmp, /root ali C:\\Users; brez dolgih neprekinjenih nizov base64 znakov (dlje od 60 znakov); brez gesel, ključev in bearer vrednosti; brez kontrolnih znakov; vsak fragment naj ima največ 1200 znakov (kode in konfiguracije največ 1500). Vsi fragmenti naj bodo projektovno avtorirana nevtralna testna vsebina (slovenske teme, izmišljene osebe in projekti). Odzovi se izključno z JSON nizom točno {K} nizov (brez Markdown ograje).",
+   "seeds": {
+    "dev": "f7a4faf962bda0a2",
+    "hidden": "e7d23473a9e5d738"
+   }
+  },
+  {
+   "family_id": "math-align-env",
+   "category": "math",
+   "subcategory": "tex okolje align",
+   "sample_count": 13,
+   "instance_counts": {
+    "dev": 7,
+    "hidden": 6
+   },
+   "batches_per_instance": [
+    7,
+    6
+   ],
+   "generation_parameters": {
+    "temperature": 0.5,
+    "max_output_tokens": 8000,
+    "request_timeout_seconds": 300,
+    "retry_policy": "at most one retry per failed call (same prompt re-issued); all failures and retries recorded"
+   },
+   "prompt": "Napiši točno {K} neodvisnih matematičnih fragmentov: TeX okolje align (2 do 3 poravnane enačbe). Vsak fragment je le sam matematični zapis (brez slovenskih stavkov razen tistih znotraj \\text{{...}}); znamenke naj uporabljajo številke, grške črke in standardne operatorje. Varnostna pravila za vse fragmente (obvezna): brez absolutnih poti, ki se začnejo z /home, /tmp, /root ali C:\\Users; brez dolgih neprekinjenih nizov base64 znakov (dlje od 60 znakov); brez gesel, ključev in bearer vrednosti; brez kontrolnih znakov; vsak fragment naj ima največ 1200 znakov (kode in konfiguracije največ 1500). Vsi fragmenti naj bodo projektovno avtorirana nevtralna testna vsebina (slovenske teme, izmišljene osebe in projekti). Odzovi se izključno z JSON nizom točno {K} nizov (brez Markdown ograje).",
+   "seeds": {
+    "dev": "7ccabb70344cf699",
+    "hidden": "38f41418e69ddb3a"
+   }
+  },
+  {
+   "family_id": "math-aligned-env",
+   "category": "math",
+   "subcategory": "tex okolje aligned",
+   "sample_count": 12,
+   "instance_counts": {
+    "dev": 6,
+    "hidden": 6
+   },
+   "batches_per_instance": [
+    6,
+    6
+   ],
+   "generation_parameters": {
+    "temperature": 0.5,
+    "max_output_tokens": 8000,
+    "request_timeout_seconds": 300,
+    "retry_policy": "at most one retry per failed call (same prompt re-issued); all failures and retries recorded"
+   },
+   "prompt": "Napiši točno {K} neodvisnih matematičnih fragmentov: TeX okolje aligned (znotraj enačby, 2 vrstici). Vsak fragment je le sam matematični zapis (brez slovenskih stavkov razen tistih znotraj \\text{{...}}); znamenke naj uporabljajo številke, grške črke in standardne operatorje. Varnostna pravila za vse fragmente (obvezna): brez absolutnih poti, ki se začnejo z /home, /tmp, /root ali C:\\Users; brez dolgih neprekinjenih nizov base64 znakov (dlje od 60 znakov); brez gesel, ključev in bearer vrednosti; brez kontrolnih znakov; vsak fragment naj ima največ 1200 znakov (kode in konfiguracije največ 1500). Vsi fragmenti naj bodo projektovno avtorirana nevtralna testna vsebina (slovenske teme, izmišljene osebe in projekti). Odzovi se izključno z JSON nizom točno {K} nizov (brez Markdown ograje).",
+   "seeds": {
+    "dev": "82a6d56c1009a4ba",
+    "hidden": "d3440148099328bb"
+   }
+  },
+  {
+   "family_id": "math-matrices",
+   "category": "math",
+   "subcategory": "matrike",
+   "sample_count": 12,
+   "instance_counts": {
+    "dev": 6,
+    "hidden": 6
+   },
+   "batches_per_instance": [
+    6,
+    6
+   ],
+   "generation_parameters": {
+    "temperature": 0.5,
+    "max_output_tokens": 8000,
+    "request_timeout_seconds": 300,
+    "retry_policy": "at most one retry per failed call (same prompt re-issued); all failures and retries recorded"
+   },
+   "prompt": "Napiši točno {K} neodvisnih matematičnih fragmentov: matrike (matrix, pmatrix, bmatrix) z številskimi elementi. Vsak fragment je le sam matematični zapis (brez slovenskih stavkov razen tistih znotraj \\text{{...}}); znamenke naj uporabljajo številke, grške črke in standardne operatorje. Varnostna pravila za vse fragmente (obvezna): brez absolutnih poti, ki se začnejo z /home, /tmp, /root ali C:\\Users; brez dolgih neprekinjenih nizov base64 znakov (dlje od 60 znakov); brez gesel, ključev in bearer vrednosti; brez kontrolnih znakov; vsak fragment naj ima največ 1200 znakov (kode in konfiguracije največ 1500). Vsi fragmenti naj bodo projektovno avtorirana nevtralna testna vsebina (slovenske teme, izmišljene osebe in projekti). Odzovi se izključno z JSON nizom točno {K} nizov (brez Markdown ograje).",
+   "seeds": {
+    "dev": "a260e18321dc6583",
+    "hidden": "c83a14ce12737d87"
+   }
+  },
+  {
+   "family_id": "math-fractions",
+   "category": "math",
+   "subcategory": "razlomke in ulomke",
+   "sample_count": 12,
+   "instance_counts": {
+    "dev": 6,
+    "hidden": 6
+   },
+   "batches_per_instance": [
+    6,
+    6
+   ],
+   "generation_parameters": {
+    "temperature": 0.5,
+    "max_output_tokens": 8000,
+    "request_timeout_seconds": 300,
+    "retry_policy": "at most one retry per failed call (same prompt re-issued); all failures and retries recorded"
+   },
+   "prompt": "Napiši točno {K} neodvisnih matematičnih fragmentov: razlomke in ulomke (\\frac, \\dfrac) v \\(...\\) in \\[...\\]. Vsak fragment je le sam matematični zapis (brez slovenskih stavkov razen tistih znotraj \\text{{...}}); znamenke naj uporabljajo številke, grške črke in standardne operatorje. Varnostna pravila za vse fragmente (obvezna): brez absolutnih poti, ki se začnejo z /home, /tmp, /root ali C:\\Users; brez dolgih neprekinjenih nizov base64 znakov (dlje od 60 znakov); brez gesel, ključev in bearer vrednosti; brez kontrolnih znakov; vsak fragment naj ima največ 1200 znakov (kode in konfiguracije največ 1500). Vsi fragmenti naj bodo projektovno avtorirana nevtralna testna vsebina (slovenske teme, izmišljene osebe in projekti). Odzovi se izključno z JSON nizom točno {K} nizov (brez Markdown ograje).",
+   "seeds": {
+    "dev": "5d5d04b3387d8915",
+    "hidden": "076316a65a81a8e6"
+   }
+  },
+  {
+   "family_id": "math-summations",
+   "category": "math",
+   "subcategory": "vsote in produkci",
+   "sample_count": 12,
+   "instance_counts": {
+    "dev": 6,
+    "hidden": 6
+   },
+   "batches_per_instance": [
+    6,
+    6
+   ],
+   "generation_parameters": {
+    "temperature": 0.5,
+    "max_output_tokens": 8000,
+    "request_timeout_seconds": 300,
+    "retry_policy": "at most one retry per failed call (same prompt re-issued); all failures and retries recorded"
+   },
+   "prompt": "Napiši točno {K} neodvisnih matematičnih fragmentov: vsote in produkci (Σ, \\sum, \\prod) z mejami. Vsak fragment je le sam matematični zapis (brez slovenskih stavkov razen tistih znotraj \\text{{...}}); znamenke naj uporabljajo številke, grške črke in standardne operatorje. Varnostna pravila za vse fragmente (obvezna): brez absolutnih poti, ki se začnejo z /home, /tmp, /root ali C:\\Users; brez dolgih neprekinjenih nizov base64 znakov (dlje od 60 znakov); brez gesel, ključev in bearer vrednosti; brez kontrolnih znakov; vsak fragment naj ima največ 1200 znakov (kode in konfiguracije največ 1500). Vsi fragmenti naj bodo projektovno avtorirana nevtralna testna vsebina (slovenske teme, izmišljene osebe in projekti). Odzovi se izključno z JSON nizom točno {K} nizov (brez Markdown ograje).",
+   "seeds": {
+    "dev": "d11eeb8d89621bbb",
+    "hidden": "8210a1034083ea4c"
+   }
+  },
+  {
+   "family_id": "math-probability",
+   "category": "math",
+   "subcategory": "verjetnostni izrazi",
+   "sample_count": 12,
+   "instance_counts": {
+    "dev": 6,
+    "hidden": 6
+   },
+   "batches_per_instance": [
+    6,
+    6
+   ],
+   "generation_parameters": {
+    "temperature": 0.5,
+    "max_output_tokens": 8000,
+    "request_timeout_seconds": 300,
+    "retry_policy": "at most one retry per failed call (same prompt re-issued); all failures and retries recorded"
+   },
+   "prompt": "Napiši točno {K} neodvisnih matematičnih fragmentov: verjetnostni izrazi (P(A), E[X], \\Pr) z slovenskim opisom. Vsak fragment je le sam matematični zapis (brez slovenskih stavkov razen tistih znotraj \\text{{...}}); znamenke naj uporabljajo številke, grške črke in standardne operatorje. Varnostna pravila za vse fragmente (obvezna): brez absolutnih poti, ki se začnejo z /home, /tmp, /root ali C:\\Users; brez dolgih neprekinjenih nizov base64 znakov (dlje od 60 znakov); brez gesel, ključev in bearer vrednosti; brez kontrolnih znakov; vsak fragment naj ima največ 1200 znakov (kode in konfiguracije največ 1500). Vsi fragmenti naj bodo projektovno avtorirana nevtralna testna vsebina (slovenske teme, izmišljene osebe in projekti). Odzovi se izključno z JSON nizom točno {K} nizov (brez Markdown ograje).",
+   "seeds": {
+    "dev": "30a0f651ce5db592",
+    "hidden": "db9acad4b05f94d8"
+   }
+  },
+  {
+   "family_id": "math-text-slovenian",
+   "category": "math",
+   "subcategory": "tex z \\text{...} in slovenskimi besedami",
+   "sample_count": 12,
+   "instance_counts": {
+    "dev": 6,
+    "hidden": 6
+   },
+   "batches_per_instance": [
+    6,
+    6
+   ],
+   "generation_parameters": {
+    "temperature": 0.5,
+    "max_output_tokens": 8000,
+    "request_timeout_seconds": 300,
+    "retry_policy": "at most one retry per failed call (same prompt re-issued); all failures and retries recorded"
+   },
+   "prompt": "Napiši točno {K} neodvisnih matematičnih fragmentov: TeX z \\text{...} in slovenskimi besedami (npr. \\text{vsota}, \\text{razlika}) znotraj \\(...\\). Vsak fragment je le sam matematični zapis (brez slovenskih stavkov razen tistih znotraj \\text{{...}}); znamenke naj uporabljajo številke, grške črke in standardne operatorje. Varnostna pravila za vse fragmente (obvezna): brez absolutnih poti, ki se začnejo z /home, /tmp, /root ali C:\\Users; brez dolgih neprekinjenih nizov base64 znakov (dlje od 60 znakov); brez gesel, ključev in bearer vrednosti; brez kontrolnih znakov; vsak fragment naj ima največ 1200 znakov (kode in konfiguracije največ 1500). Vsi fragmenti naj bodo projektovno avtorirana nevtralna testna vsebina (slovenske teme, izmišljene osebe in projekti). Odzovi se izključno z JSON nizom točno {K} nizov (brez Markdown ograje).",
+   "seeds": {
+    "dev": "4165e8bf4cba3c5c",
+    "hidden": "431bf1e87bb5af6c"
+   }
+  },
+  {
+   "family_id": "md-headings",
+   "category": "markdown",
+   "subcategory": "naslovnike",
+   "sample_count": 16,
+   "instance_counts": {
+    "dev": 9,
+    "hidden": 7
+   },
+   "batches_per_instance": [
+    8,
+    8
+   ],
+   "generation_parameters": {
+    "temperature": 0.7,
+    "max_output_tokens": 8000,
+    "request_timeout_seconds": 300,
+    "retry_policy": "at most one retry per failed call (same prompt re-issued); all failures and retries recorded"
+   },
+   "prompt": "Napiši točno {K} neodvisnih Markdown fragmentov: naslovnike (## do ####) z slovenskim besedilom in podnaslovi. Vsak fragment je 1 do 4 vrstice in naj bo strukturno veljaven Markdown (račun na strukturo, ne na jezikovno vsebino); vsebina naj bo nevtralna slovenska besedila, številke in enote. Varnostna pravila za vse fragmente (obvezna): brez absolutnih poti, ki se začnejo z /home, /tmp, /root ali C:\\Users; brez dolgih neprekinjenih nizov base64 znakov (dlje od 60 znakov); brez gesel, ključev in bearer vrednosti; brez kontrolnih znakov; vsak fragment naj ima največ 1200 znakov (kode in konfiguracije največ 1500). Vsi fragmenti naj bodo projektovno avtorirana nevtralna testna vsebina (slovenske teme, izmišljene osebe in projekti). Odzovi se izključno z JSON nizom točno {K} nizov (brez Markdown ograje okoli celotnega odgovora).",
+   "seeds": {
+    "dev": "33ce9693a1aa148f",
+    "hidden": "fa708b03df280172"
+   }
+  },
+  {
+   "family_id": "md-emphasis",
+   "category": "markdown",
+   "subcategory": "poudarjanje z *poševno* in _podčrtim_ besedilom znotraj stavkov",
+   "sample_count": 15,
+   "instance_counts": {
+    "dev": 8,
+    "hidden": 7
+   },
+   "batches_per_instance": [
+    8,
+    7
+   ],
+   "generation_parameters": {
+    "temperature": 0.7,
+    "max_output_tokens": 8000,
+    "request_timeout_seconds": 300,
+    "retry_policy": "at most one retry per failed call (same prompt re-issued); all failures and retries recorded"
+   },
+   "prompt": "Napiši točno {K} neodvisnih Markdown fragmentov: poudarjanje z *poševno* in _podčrtim_ besedilom znotraj stavkov. Vsak fragment je 1 do 4 vrstice in naj bo strukturno veljaven Markdown (račun na strukturo, ne na jezikovno vsebino); vsebina naj bo nevtralna slovenska besedila, številke in enote. Varnostna pravila za vse fragmente (obvezna): brez absolutnih poti, ki se začnejo z /home, /tmp, /root ali C:\\Users; brez dolgih neprekinjenih nizov base64 znakov (dlje od 60 znakov); brez gesel, ključev in bearer vrednosti; brez kontrolnih znakov; vsak fragment naj ima največ 1200 znakov (kode in konfiguracije največ 1500). Vsi fragmenti naj bodo projektovno avtorirana nevtralna testna vsebina (slovenske teme, izmišljene osebe in projekti). Odzovi se izključno z JSON nizom točno {K} nizov (brez Markdown ograje okoli celotnega odgovora).",
+   "seeds": {
+    "dev": "1d531cea33c2edee",
+    "hidden": "c9c52a7f4d46116e"
+   }
+  },
+  {
+   "family_id": "md-strong",
+   "category": "markdown",
+   "subcategory": "močno poudarjanje z **močno** in __podčrtim__ besedilom znotraj stavkov",
+   "sample_count": 15,
+   "instance_counts": {
+    "dev": 8,
+    "hidden": 7
+   },
+   "batches_per_instance": [
+    8,
+    7
+   ],
+   "generation_parameters": {
+    "temperature": 0.7,
+    "max_output_tokens": 8000,
+    "request_timeout_seconds": 300,
+    "retry_policy": "at most one retry per failed call (same prompt re-issued); all failures and retries recorded"
+   },
+   "prompt": "Napiši točno {K} neodvisnih Markdown fragmentov: močno poudarjanje z **močno** in __podčrtim__ besedilom znotraj stavkov. Vsak fragment je 1 do 4 vrstice in naj bo strukturno veljaven Markdown (račun na strukturo, ne na jezikovno vsebino); vsebina naj bo nevtralna slovenska besedila, številke in enote. Varnostna pravila za vse fragmente (obvezna): brez absolutnih poti, ki se začnejo z /home, /tmp, /root ali C:\\Users; brez dolgih neprekinjenih nizov base64 znakov (dlje od 60 znakov); brez gesel, ključev in bearer vrednosti; brez kontrolnih znakov; vsak fragment naj ima največ 1200 znakov (kode in konfiguracije največ 1500). Vsi fragmenti naj bodo projektovno avtorirana nevtralna testna vsebina (slovenske teme, izmišljene osebe in projekti). Odzovi se izključno z JSON nizom točno {K} nizov (brez Markdown ograje okoli celotnega odgovora).",
+   "seeds": {
+    "dev": "b83cb9bce8e9f11a",
+    "hidden": "133bb89118411513"
+   }
+  },
+  {
+   "family_id": "md-strikethrough",
+   "category": "markdown",
+   "subcategory": "prečrtano besedilo z ~~prečrtano~~ znotraj stavkov",
+   "sample_count": 15,
+   "instance_counts": {
+    "dev": 8,
+    "hidden": 7
+   },
+   "batches_per_instance": [
+    8,
+    7
+   ],
+   "generation_parameters": {
+    "temperature": 0.7,
+    "max_output_tokens": 8000,
+    "request_timeout_seconds": 300,
+    "retry_policy": "at most one retry per failed call (same prompt re-issued); all failures and retries recorded"
+   },
+   "prompt": "Napiši točno {K} neodvisnih Markdown fragmentov: prečrtano besedilo z ~~prečrtano~~ znotraj stavkov. Vsak fragment je 1 do 4 vrstice in naj bo strukturno veljaven Markdown (račun na strukturo, ne na jezikovno vsebino); vsebina naj bo nevtralna slovenska besedila, številke in enote. Varnostna pravila za vse fragmente (obvezna): brez absolutnih poti, ki se začnejo z /home, /tmp, /root ali C:\\Users; brez dolgih neprekinjenih nizov base64 znakov (dlje od 60 znakov); brez gesel, ključev in bearer vrednosti; brez kontrolnih znakov; vsak fragment naj ima največ 1200 znakov (kode in konfiguracije največ 1500). Vsi fragmenti naj bodo projektovno avtorirana nevtralna testna vsebina (slovenske teme, izmišljene osebe in projekti). Odzovi se izključno z JSON nizom točno {K} nizov (brez Markdown ograje okoli celotnega odgovora).",
+   "seeds": {
+    "dev": "5bd548c19ff424d4",
+    "hidden": "210b8f24830d4cf1"
+   }
+  },
+  {
+   "family_id": "md-lists",
+   "category": "markdown",
+   "subcategory": "sezname",
+   "sample_count": 16,
+   "instance_counts": {
+    "dev": 9,
+    "hidden": 7
+   },
+   "batches_per_instance": [
+    8,
+    8
+   ],
+   "generation_parameters": {
+    "temperature": 0.7,
+    "max_output_tokens": 8000,
+    "request_timeout_seconds": 300,
+    "retry_policy": "at most one retry per failed call (same prompt re-issued); all failures and retries recorded"
+   },
+   "prompt": "Napiši točno {K} neodvisnih Markdown fragmentov: sezname (pikni in številčniki, tudi gnezdeni in opravila - [x] / - [ ]) z slovenskimi vsebinami. Vsak fragment je 1 do 4 vrstice in naj bo strukturno veljaven Markdown (račun na strukturo, ne na jezikovno vsebino); vsebina naj bo nevtralna slovenska besedila, številke in enote. Varnostna pravila za vse fragmente (obvezna): brez absolutnih poti, ki se začnejo z /home, /tmp, /root ali C:\\Users; brez dolgih neprekinjenih nizov base64 znakov (dlje od 60 znakov); brez gesel, ključev in bearer vrednosti; brez kontrolnih znakov; vsak fragment naj ima največ 1200 znakov (kode in konfiguracije največ 1500). Vsi fragmenti naj bodo projektovno avtorirana nevtralna testna vsebina (slovenske teme, izmišljene osebe in projekti). Odzovi se izključno z JSON nizom točno {K} nizov (brez Markdown ograje okoli celotnega odgovora).",
+   "seeds": {
+    "dev": "03c4c2e6ec93d34f",
+    "hidden": "f353e60ffc9de9b6"
+   }
+  },
+  {
+   "family_id": "md-blockquotes",
+   "category": "markdown",
+   "subcategory": "citatke",
+   "sample_count": 15,
+   "instance_counts": {
+    "dev": 8,
+    "hidden": 7
+   },
+   "batches_per_instance": [
+    8,
+    7
+   ],
+   "generation_parameters": {
+    "temperature": 0.7,
+    "max_output_tokens": 8000,
+    "request_timeout_seconds": 300,
+    "retry_policy": "at most one retry per failed call (same prompt re-issued); all failures and retries recorded"
+   },
+   "prompt": "Napiši točno {K} neodvisnih Markdown fragmentov: citatke (> in > > gnezdenje) s slovenskimi stavki in znotraj tudi *poudarki*. Vsak fragment je 1 do 4 vrstice in naj bo strukturno veljaven Markdown (račun na strukturo, ne na jezikovno vsebino); vsebina naj bo nevtralna slovenska besedila, številke in enote. Varnostna pravila za vse fragmente (obvezna): brez absolutnih poti, ki se začnejo z /home, /tmp, /root ali C:\\Users; brez dolgih neprekinjenih nizov base64 znakov (dlje od 60 znakov); brez gesel, ključev in bearer vrednosti; brez kontrolnih znakov; vsak fragment naj ima največ 1200 znakov (kode in konfiguracije največ 1500). Vsi fragmenti naj bodo projektovno avtorirana nevtralna testna vsebina (slovenske teme, izmišljene osebe in projekti). Odzovi se izključno z JSON nizom točno {K} nizov (brez Markdown ograje okoli celotnega odgovora).",
+   "seeds": {
+    "dev": "4513c921ba382e24",
+    "hidden": "018703098d84361b"
+   }
+  },
+  {
+   "family_id": "md-tables",
+   "category": "markdown",
+   "subcategory": "tabele",
+   "sample_count": 16,
+   "instance_counts": {
+    "dev": 9,
+    "hidden": 7
+   },
+   "batches_per_instance": [
+    8,
+    8
+   ],
+   "generation_parameters": {
+    "temperature": 0.7,
+    "max_output_tokens": 8000,
+    "request_timeout_seconds": 300,
+    "retry_policy": "at most one retry per failed call (same prompt re-issued); all failures and retries recorded"
+   },
+   "prompt": "Napiši točno {K} neodvisnih Markdown fragmentov: tabele (| stolpec |) s slovensko vsebino in številskimi enotami, 3 do 5 vrstic. Vsak fragment je 1 do 4 vrstice in naj bo strukturno veljaven Markdown (račun na strukturo, ne na jezikovno vsebino); vsebina naj bo nevtralna slovenska besedila, številke in enote. Varnostna pravila za vse fragmente (obvezna): brez absolutnih poti, ki se začnejo z /home, /tmp, /root ali C:\\Users; brez dolgih neprekinjenih nizov base64 znakov (dlje od 60 znakov); brez gesel, ključev in bearer vrednosti; brez kontrolnih znakov; vsak fragment naj ima največ 1200 znakov (kode in konfiguracije največ 1500). Vsi fragmenti naj bodo projektovno avtorirana nevtralna testna vsebina (slovenske teme, izmišljene osebe in projekti). Odzovi se izključno z JSON nizom točno {K} nizov (brez Markdown ograje okoli celotnega odgovora).",
+   "seeds": {
+    "dev": "5b2fa8604368efbb",
+    "hidden": "f52f7cfae9a8f95c"
+   }
+  },
+  {
+   "family_id": "md-links",
+   "category": "markdown",
+   "subcategory": "povezave [slovenski opis](https://primer.si/stran) in z naslovom, ter > <samodejna-povezava>",
+   "sample_count": 15,
+   "instance_counts": {
+    "dev": 8,
+    "hidden": 7
+   },
+   "batches_per_instance": [
+    8,
+    7
+   ],
+   "generation_parameters": {
+    "temperature": 0.7,
+    "max_output_tokens": 8000,
+    "request_timeout_seconds": 300,
+    "retry_policy": "at most one retry per failed call (same prompt re-issued); all failures and retries recorded"
+   },
+   "prompt": "Napiši točno {K} neodvisnih Markdown fragmentov: povezave [slovenski opis](https://primer.si/stran) in z naslovom, ter > <samodejna-povezava>. Vsak fragment je 1 do 4 vrstice in naj bo strukturno veljaven Markdown (račun na strukturo, ne na jezikovno vsebino); vsebina naj bo nevtralna slovenska besedila, številke in enote. Varnostna pravila za vse fragmente (obvezna): brez absolutnih poti, ki se začnejo z /home, /tmp, /root ali C:\\Users; brez dolgih neprekinjenih nizov base64 znakov (dlje od 60 znakov); brez gesel, ključev in bearer vrednosti; brez kontrolnih znakov; vsak fragment naj ima največ 1200 znakov (kode in konfiguracije največ 1500). Vsi fragmenti naj bodo projektovno avtorirana nevtralna testna vsebina (slovenske teme, izmišljene osebe in projekti). Odzovi se izključno z JSON nizom točno {K} nizov (brez Markdown ograje okoli celotnega odgovora).",
+   "seeds": {
+    "dev": "dad7181ca04e48ca",
+    "hidden": "20967a60229c1469"
+   }
+  },
+  {
+   "family_id": "md-images",
+   "category": "markdown",
+   "subcategory": "slike ![slovenski opis](https://primer.si/slika.png) in z naslovom",
+   "sample_count": 15,
+   "instance_counts": {
+    "dev": 8,
+    "hidden": 7
+   },
+   "batches_per_instance": [
+    8,
+    7
+   ],
+   "generation_parameters": {
+    "temperature": 0.7,
+    "max_output_tokens": 8000,
+    "request_timeout_seconds": 300,
+    "retry_policy": "at most one retry per failed call (same prompt re-issued); all failures and retries recorded"
+   },
+   "prompt": "Napiši točno {K} neodvisnih Markdown fragmentov: slike ![slovenski opis](https://primer.si/slika.png) in z naslovom. Vsak fragment je 1 do 4 vrstice in naj bo strukturno veljaven Markdown (račun na strukturo, ne na jezikovno vsebino); vsebina naj bo nevtralna slovenska besedila, številke in enote. Varnostna pravila za vse fragmente (obvezna): brez absolutnih poti, ki se začnejo z /home, /tmp, /root ali C:\\Users; brez dolgih neprekinjenih nizov base64 znakov (dlje od 60 znakov); brez gesel, ključev in bearer vrednosti; brez kontrolnih znakov; vsak fragment naj ima največ 1200 znakov (kode in konfiguracije največ 1500). Vsi fragmenti naj bodo projektovno avtorirana nevtralna testna vsebina (slovenske teme, izmišljene osebe in projekti). Odzovi se izključno z JSON nizom točno {K} nizov (brez Markdown ograje okoli celotnega odgovora).",
+   "seeds": {
+    "dev": "a30d21853ea93e6a",
+    "hidden": "b450f9ae03ac0fb9"
+   }
+  },
+  {
+   "family_id": "md-autolinks",
+   "category": "markdown",
+   "subcategory": "samodejne povezave <https://primer.si/stran> in <pošta@primer.si> znotraj stavkov",
+   "sample_count": 15,
+   "instance_counts": {
+    "dev": 8,
+    "hidden": 7
+   },
+   "batches_per_instance": [
+    8,
+    7
+   ],
+   "generation_parameters": {
+    "temperature": 0.7,
+    "max_output_tokens": 8000,
+    "request_timeout_seconds": 300,
+    "retry_policy": "at most one retry per failed call (same prompt re-issued); all failures and retries recorded"
+   },
+   "prompt": "Napiši točno {K} neodvisnih Markdown fragmentov: samodejne povezave <https://primer.si/stran> in <pošta@primer.si> znotraj stavkov. Vsak fragment je 1 do 4 vrstice in naj bo strukturno veljaven Markdown (račun na strukturo, ne na jezikovno vsebino); vsebina naj bo nevtralna slovenska besedila, številke in enote. Varnostna pravila za vse fragmente (obvezna): brez absolutnih poti, ki se začnejo z /home, /tmp, /root ali C:\\Users; brez dolgih neprekinjenih nizov base64 znakov (dlje od 60 znakov); brez gesel, ključev in bearer vrednosti; brez kontrolnih znakov; vsak fragment naj ima največ 1200 znakov (kode in konfiguracije največ 1500). Vsi fragmenti naj bodo projektovno avtorirana nevtralna testna vsebina (slovenske teme, izmišljene osebe in projekti). Odzovi se izključno z JSON nizom točno {K} nizov (brez Markdown ograje okoli celotnega odgovora).",
+   "seeds": {
+    "dev": "7261b63a4648e4e4",
+    "hidden": "f500eb633046c9d1"
+   }
+  },
+  {
+   "family_id": "md-inline-code",
+   "category": "markdown",
+   "subcategory": "inline koda v backquote znakih",
+   "sample_count": 16,
+   "instance_counts": {
+    "dev": 9,
+    "hidden": 7
+   },
+   "batches_per_instance": [
+    8,
+    8
+   ],
+   "generation_parameters": {
+    "temperature": 0.7,
+    "max_output_tokens": 8000,
+    "request_timeout_seconds": 300,
+    "retry_policy": "at most one retry per failed call (same prompt re-issued); all failures and retries recorded"
+   },
+   "prompt": "Napiši točno {K} neodvisnih Markdown fragmentov: inline koda v backquote znakih (enkratni in dvokratni backquote) znotraj stavkov. Vsak fragment je 1 do 4 vrstice in naj bo strukturno veljaven Markdown (račun na strukturo, ne na jezikovno vsebino); vsebina naj bo nevtralna slovenska besedila, številke in enote. Varnostna pravila za vse fragmente (obvezna): brez absolutnih poti, ki se začnejo z /home, /tmp, /root ali C:\\Users; brez dolgih neprekinjenih nizov base64 znakov (dlje od 60 znakov); brez gesel, ključev in bearer vrednosti; brez kontrolnih znakov; vsak fragment naj ima največ 1200 znakov (kode in konfiguracije največ 1500). Vsi fragmenti naj bodo projektovno avtorirana nevtralna testna vsebina (slovenske teme, izmišljene osebe in projekti). Odzovi se izključno z JSON nizom točno {K} nizov (brez Markdown ograje okoli celotnega odgovora).",
+   "seeds": {
+    "dev": "8d672e51e72fd909",
+    "hidden": "d696f046d179b36a"
+   }
+  },
+  {
+   "family_id": "md-fenced-code",
+   "category": "markdown",
+   "subcategory": "ograjeni koder",
+   "sample_count": 16,
+   "instance_counts": {
+    "dev": 9,
+    "hidden": 7
+   },
+   "batches_per_instance": [
+    8,
+    8
+   ],
+   "generation_parameters": {
+    "temperature": 0.7,
+    "max_output_tokens": 8000,
+    "request_timeout_seconds": 300,
+    "retry_policy": "at most one retry per failed call (same prompt re-issued); all failures and retries recorded"
+   },
+   "prompt": "Napiši točno {K} neodvisnih Markdown fragmentov: ograjeni koder (``` in ~~~ ograje, tudi s jezikom in spremenljive dolžine ograj) s slovenskim komentarjem znotraj. Vsak fragment je 1 do 4 vrstice in naj bo strukturno veljaven Markdown (račun na strukturo, ne na jezikovno vsebino); vsebina naj bo nevtralna slovenska besedila, številke in enote. Varnostna pravila za vse fragmente (obvezna): brez absolutnih poti, ki se začnejo z /home, /tmp, /root ali C:\\Users; brez dolgih neprekinjenih nizov base64 znakov (dlje od 60 znakov); brez gesel, ključev in bearer vrednosti; brez kontrolnih znakov; vsak fragment naj ima največ 1200 znakov (kode in konfiguracije največ 1500). Vsi fragmenti naj bodo projektovno avtorirana nevtralna testna vsebina (slovenske teme, izmišljene osebe in projekti). Odzovi se izključno z JSON nizom točno {K} nizov (brez Markdown ograje okoli celotnega odgovora).",
+   "seeds": {
+    "dev": "bcba5fd39f3628bd",
+    "hidden": "6f5b43dc1187cece"
+   }
+  },
+  {
+   "family_id": "md-raw-html",
+   "category": "markdown",
+   "subcategory": "surove html oznake",
+   "sample_count": 15,
+   "instance_counts": {
+    "dev": 8,
+    "hidden": 7
+   },
+   "batches_per_instance": [
+    8,
+    7
+   ],
+   "generation_parameters": {
+    "temperature": 0.7,
+    "max_output_tokens": 8000,
+    "request_timeout_seconds": 300,
+    "retry_policy": "at most one retry per failed call (same prompt re-issued); all failures and retries recorded"
+   },
+   "prompt": "Napiši točno {K} neodvisnih Markdown fragmentov: surove HTML oznake (<b>, <i>, <br/>, <span>) znotraj slovenskih stavkov. Vsak fragment je 1 do 4 vrstice in naj bo strukturno veljaven Markdown (račun na strukturo, ne na jezikovno vsebino); vsebina naj bo nevtralna slovenska besedila, številke in enote. Varnostna pravila za vse fragmente (obvezna): brez absolutnih poti, ki se začnejo z /home, /tmp, /root ali C:\\Users; brez dolgih neprekinjenih nizov base64 znakov (dlje od 60 znakov); brez gesel, ključev in bearer vrednosti; brez kontrolnih znakov; vsak fragment naj ima največ 1200 znakov (kode in konfiguracije največ 1500). Vsi fragmenti naj bodo projektovno avtorirana nevtralna testna vsebina (slovenske teme, izmišljene osebe in projekti). Odzovi se izključno z JSON nizom točno {K} nizov (brez Markdown ograje okoli celotnega odgovora).",
+   "seeds": {
+    "dev": "8bdbb109ad4f8467",
+    "hidden": "fe194779061cac6f"
+   }
+  },
+  {
+   "family_id": "machine-posix-paths",
+   "category": "machine",
+   "subcategory": "posix poti",
+   "sample_count": 15,
+   "instance_counts": {
+    "dev": 8,
+    "hidden": 7
+   },
+   "batches_per_instance": [
+    8,
+    7
+   ],
+   "generation_parameters": {
+    "temperature": 0.5,
+    "max_output_tokens": 8000,
+    "request_timeout_seconds": 300,
+    "retry_policy": "at most one retry per failed call (same prompt re-issued); all failures and retries recorded"
+   },
+   "prompt": "Napiši točno {K} neodvisnih fragmentov: POSIX poti (relativne in korenjene, npr. src/modul/pogon.py, docs/vir.txt, /usr/bin/orodje). Vsak fragment je ena vrstica z 1 do 4 takimi elementi, ločenimi z vejicami ali presledki; ne dodajaj razlag, razen kratek slovenski komentar (največ 8 besed) ob izbiri. Varnostna pravila za vse fragmente (obvezna): brez absolutnih poti, ki se začnejo z /home, /tmp, /root ali C:\\Users; brez dolgih neprekinjenih nizov base64 znakov (dlje od 60 znakov); brez gesel, ključev in bearer vrednosti; brez kontrolnih znakov; vsak fragment naj ima največ 1200 znakov (kode in konfiguracije največ 1500). Vsi fragmenti naj bodo projektovno avtorirana nevtralna testna vsebina (slovenske teme, izmišljene osebe in projekti). Odzovi se izključno z JSON nizom točno {K} nizov (brez Markdown ograje).",
+   "seeds": {
+    "dev": "a5fd77fc9384964b",
+    "hidden": "543046a9588b8bbd"
+   }
+  },
+  {
+   "family_id": "machine-windows-paths",
+   "category": "machine",
+   "subcategory": "windows poti",
+   "sample_count": 15,
+   "instance_counts": {
+    "dev": 8,
+    "hidden": 7
+   },
+   "batches_per_instance": [
+    8,
+    7
+   ],
+   "generation_parameters": {
+    "temperature": 0.5,
+    "max_output_tokens": 8000,
+    "request_timeout_seconds": 300,
+    "retry_policy": "at most one retry per failed call (same prompt re-issued); all failures and retries recorded"
+   },
+   "prompt": "Napiši točno {K} neodvisnih fragmentov: Windows poti (C:/projekt/vir.py, D:\\datoteke\\vir.txt, \\\\streznik\\mapi\\vir.txt). Vsak fragment je ena vrstica z 1 do 4 takimi elementi, ločenimi z vejicami ali presledki; ne dodajaj razlag, razen kratek slovenski komentar (največ 8 besed) ob izbiri. Varnostna pravila za vse fragmente (obvezna): brez absolutnih poti, ki se začnejo z /home, /tmp, /root ali C:\\Users; brez dolgih neprekinjenih nizov base64 znakov (dlje od 60 znakov); brez gesel, ključev in bearer vrednosti; brez kontrolnih znakov; vsak fragment naj ima največ 1200 znakov (kode in konfiguracije največ 1500). Vsi fragmenti naj bodo projektovno avtorirana nevtralna testna vsebina (slovenske teme, izmišljene osebe in projekti). Odzovi se izključno z JSON nizom točno {K} nizov (brez Markdown ograje).",
+   "seeds": {
+    "dev": "70da0a337a062602",
+    "hidden": "f00cbc4fa43e8d1c"
+   }
+  },
+  {
+   "family_id": "machine-shell-commands",
+   "category": "machine",
+   "subcategory": "terminal ukazi",
+   "sample_count": 15,
+   "instance_counts": {
+    "dev": 8,
+    "hidden": 7
+   },
+   "batches_per_instance": [
+    8,
+    7
+   ],
+   "generation_parameters": {
+    "temperature": 0.5,
+    "max_output_tokens": 8000,
+    "request_timeout_seconds": 300,
+    "retry_policy": "at most one retry per failed call (same prompt re-issued); all failures and retries recorded"
+   },
+   "prompt": "Napiši točno {K} neodvisnih fragmentov: terminal ukazi (npr. $ git status, sudo make build, python3 skripta.py --vhod vir.txt). Vsak fragment je ena vrstica z 1 do 4 takimi elementi, ločenimi z vejicami ali presledki; ne dodajaj razlag, razen kratek slovenski komentar (največ 8 besed) ob izbiri. Varnostna pravila za vse fragmente (obvezna): brez absolutnih poti, ki se začnejo z /home, /tmp, /root ali C:\\Users; brez dolgih neprekinjenih nizov base64 znakov (dlje od 60 znakov); brez gesel, ključev in bearer vrednosti; brez kontrolnih znakov; vsak fragment naj ima največ 1200 znakov (kode in konfiguracije največ 1500). Vsi fragmenti naj bodo projektovno avtorirana nevtralna testna vsebina (slovenske teme, izmišljene osebe in projekti). Odzovi se izključno z JSON nizom točno {K} nizov (brez Markdown ograje).",
+   "seeds": {
+    "dev": "9c76e06af895af58",
+    "hidden": "2144c57392b5ec7b"
+   }
+  },
+  {
+   "family_id": "machine-cli-flags",
+   "category": "machine",
+   "subcategory": "vrstice s samodejnimi zastavami",
+   "sample_count": 15,
+   "instance_counts": {
+    "dev": 8,
+    "hidden": 7
+   },
+   "batches_per_instance": [
+    8,
+    7
+   ],
+   "generation_parameters": {
+    "temperature": 0.5,
+    "max_output_tokens": 8000,
+    "request_timeout_seconds": 300,
+    "retry_policy": "at most one retry per failed call (same prompt re-issued); all failures and retries recorded"
+   },
+   "prompt": "Napiši točno {K} neodvisnih fragmentov: vrstice s samodejnimi zastavami (npr. --vhod vir.txt --izhod 2 --vzorčnost visoka, -v --podrobnosti). Vsak fragment je ena vrstica z 1 do 4 takimi elementi, ločenimi z vejicami ali presledki; ne dodajaj razlag, razen kratek slovenski komentar (največ 8 besed) ob izbiri. Varnostna pravila za vse fragmente (obvezna): brez absolutnih poti, ki se začnejo z /home, /tmp, /root ali C:\\Users; brez dolgih neprekinjenih nizov base64 znakov (dlje od 60 znakov); brez gesel, ključev in bearer vrednosti; brez kontrolnih znakov; vsak fragment naj ima največ 1200 znakov (kode in konfiguracije največ 1500). Vsi fragmenti naj bodo projektovno avtorirana nevtralna testna vsebina (slovenske teme, izmišljene osebe in projekti). Odzovi se izključno z JSON nizom točno {K} nizov (brez Markdown ograje).",
+   "seeds": {
+    "dev": "6eec9260da586eb8",
+    "hidden": "21740dace46f702b"
+   }
+  },
+  {
+   "family_id": "machine-env-vars",
+   "category": "machine",
+   "subcategory": "okoljske spremenljivke",
+   "sample_count": 15,
+   "instance_counts": {
+    "dev": 8,
+    "hidden": 7
+   },
+   "batches_per_instance": [
+    8,
+    7
+   ],
+   "generation_parameters": {
+    "temperature": 0.5,
+    "max_output_tokens": 8000,
+    "request_timeout_seconds": 300,
+    "retry_policy": "at most one retry per failed call (same prompt re-issued); all failures and retries recorded"
+   },
+   "prompt": "Napiši točno {K} neodvisnih fragmentov: okoljske spremenljivke (${PROJEKT_IME}, $HOME_DIR, $SLO_DOKUMENT, KEY=vrednost). Vsak fragment je ena vrstica z 1 do 4 takimi elementi, ločenimi z vejicami ali presledki; ne dodajaj razlag, razen kratek slovenski komentar (največ 8 besed) ob izbiri. Varnostna pravila za vse fragmente (obvezna): brez absolutnih poti, ki se začnejo z /home, /tmp, /root ali C:\\Users; brez dolgih neprekinjenih nizov base64 znakov (dlje od 60 znakov); brez gesel, ključev in bearer vrednosti; brez kontrolnih znakov; vsak fragment naj ima največ 1200 znakov (kode in konfiguracije največ 1500). Vsi fragmenti naj bodo projektovno avtorirana nevtralna testna vsebina (slovenske teme, izmišljene osebe in projekti). Odzovi se izključno z JSON nizom točno {K} nizov (brez Markdown ograje).",
+   "seeds": {
+    "dev": "e75a3b23bfa397d5",
+    "hidden": "43b6c41c7f0d91b5"
+   }
+  },
+  {
+   "family_id": "machine-filenames",
+   "category": "machine",
+   "subcategory": "imena datotek z razširitvami",
+   "sample_count": 15,
+   "instance_counts": {
+    "dev": 8,
+    "hidden": 7
+   },
+   "batches_per_instance": [
+    8,
+    7
+   ],
+   "generation_parameters": {
+    "temperature": 0.5,
+    "max_output_tokens": 8000,
+    "request_timeout_seconds": 300,
+    "retry_policy": "at most one retry per failed call (same prompt re-issued); all failures and retries recorded"
+   },
+   "prompt": "Napiši točno {K} neodvisnih fragmentov: imena datotek z razširitvami (modul_pogon.py, poročilo_q3.csv, tabela_01.json, vir_2024.txt). Vsak fragment je ena vrstica z 1 do 4 takimi elementi, ločenimi z vejicami ali presledki; ne dodajaj razlag, razen kratek slovenski komentar (največ 8 besed) ob izbiri. Varnostna pravila za vse fragmente (obvezna): brez absolutnih poti, ki se začnejo z /home, /tmp, /root ali C:\\Users; brez dolgih neprekinjenih nizov base64 znakov (dlje od 60 znakov); brez gesel, ključev in bearer vrednosti; brez kontrolnih znakov; vsak fragment naj ima največ 1200 znakov (kode in konfiguracije največ 1500). Vsi fragmenti naj bodo projektovno avtorirana nevtralna testna vsebina (slovenske teme, izmišljene osebe in projekti). Odzovi se izključno z JSON nizom točno {K} nizov (brez Markdown ograje).",
+   "seeds": {
+    "dev": "1141cf934ff8656f",
+    "hidden": "6d85eaf7d0dd252a"
+   }
+  },
+  {
+   "family_id": "machine-urls",
+   "category": "machine",
+   "subcategory": "url-i",
+   "sample_count": 15,
+   "instance_counts": {
+    "dev": 8,
+    "hidden": 7
+   },
+   "batches_per_instance": [
+    8,
+    7
+   ],
+   "generation_parameters": {
+    "temperature": 0.5,
+    "max_output_tokens": 8000,
+    "request_timeout_seconds": 300,
+    "retry_policy": "at most one retry per failed call (same prompt re-issued); all failures and retries recorded"
+   },
+   "prompt": "Napiši točno {K} neodvisnih fragmentov: URL-i (https://primer.si/stran/12, http://izvor.si/dokument?stran=2, https://primer.si/novica#naslov). Vsak fragment je ena vrstica z 1 do 4 takimi elementi, ločenimi z vejicami ali presledki; ne dodajaj razlag, razen kratek slovenski komentar (največ 8 besed) ob izbiri. Varnostna pravila za vse fragmente (obvezna): brez absolutnih poti, ki se začnejo z /home, /tmp, /root ali C:\\Users; brez dolgih neprekinjenih nizov base64 znakov (dlje od 60 znakov); brez gesel, ključev in bearer vrednosti; brez kontrolnih znakov; vsak fragment naj ima največ 1200 znakov (kode in konfiguracije največ 1500). Vsi fragmenti naj bodo projektovno avtorirana nevtralna testna vsebina (slovenske teme, izmišljene osebe in projekti). Odzovi se izključno z JSON nizom točno {K} nizov (brez Markdown ograje).",
+   "seeds": {
+    "dev": "6866bfff91115faf",
+    "hidden": "72aea618e5a6d998"
+   }
+  },
+  {
+   "family_id": "machine-emails",
+   "category": "machine",
+   "subcategory": "e-poštni naslovi",
+   "sample_count": 15,
+   "instance_counts": {
+    "dev": 8,
+    "hidden": 7
+   },
+   "batches_per_instance": [
+    8,
+    7
+   ],
+   "generation_parameters": {
+    "temperature": 0.5,
+    "max_output_tokens": 8000,
+    "request_timeout_seconds": 300,
+    "retry_policy": "at most one retry per failed call (same prompt re-issued); all failures and retries recorded"
+   },
+   "prompt": "Napiši točno {K} neodvisnih fragmentov: e-poštni naslovi (ime.ime@primer.si, pošta@oddelek.primer.si). Vsak fragment je ena vrstica z 1 do 4 takimi elementi, ločenimi z vejicami ali presledki; ne dodajaj razlag, razen kratek slovenski komentar (največ 8 besed) ob izbiri. Varnostna pravila za vse fragmente (obvezna): brez absolutnih poti, ki se začnejo z /home, /tmp, /root ali C:\\Users; brez dolgih neprekinjenih nizov base64 znakov (dlje od 60 znakov); brez gesel, ključev in bearer vrednosti; brez kontrolnih znakov; vsak fragment naj ima največ 1200 znakov (kode in konfiguracije največ 1500). Vsi fragmenti naj bodo projektovno avtorirana nevtralna testna vsebina (slovenske teme, izmišljene osebe in projekti). Odzovi se izključno z JSON nizom točno {K} nizov (brez Markdown ograje).",
+   "seeds": {
+    "dev": "2b28e0f3e777c509",
+    "hidden": "82bc931992dc686e"
+   }
+  },
+  {
+   "family_id": "machine-identifiers",
+   "category": "machine",
+   "subcategory": "identifikatorji",
+   "sample_count": 15,
+   "instance_counts": {
+    "dev": 8,
+    "hidden": 7
+   },
+   "batches_per_instance": [
+    8,
+    7
+   ],
+   "generation_parameters": {
+    "temperature": 0.5,
+    "max_output_tokens": 8000,
+    "request_timeout_seconds": 300,
+    "retry_policy": "at most one retry per failed call (same prompt re-issued); all failures and retries recorded"
+   },
+   "prompt": "Napiši točno {K} neodvisnih fragmentov: identifikatorji (seStez, razdelek2, HRAŠNA_VREDNOST, parse_lexer_input, Q3_2024). Vsak fragment je ena vrstica z 1 do 4 takimi elementi, ločenimi z vejicami ali presledki; ne dodajaj razlag, razen kratek slovenski komentar (največ 8 besed) ob izbiri. Varnostna pravila za vse fragmente (obvezna): brez absolutnih poti, ki se začnejo z /home, /tmp, /root ali C:\\Users; brez dolgih neprekinjenih nizov base64 znakov (dlje od 60 znakov); brez gesel, ključev in bearer vrednosti; brez kontrolnih znakov; vsak fragment naj ima največ 1200 znakov (kode in konfiguracije največ 1500). Vsi fragmenti naj bodo projektovno avtorirana nevtralna testna vsebina (slovenske teme, izmišljene osebe in projekti). Odzovi se izključno z JSON nizom točno {K} nizov (brez Markdown ograje).",
+   "seeds": {
+    "dev": "e2feeac3f487866d",
+    "hidden": "4c633910213beead"
+   }
+  },
+  {
+   "family_id": "machine-versions-numbers-units",
+   "category": "machine",
+   "subcategory": "verzijske nize in številke z enotami",
+   "sample_count": 15,
+   "instance_counts": {
+    "dev": 8,
+    "hidden": 7
+   },
+   "batches_per_instance": [
+    8,
+    7
+   ],
+   "generation_parameters": {
+    "temperature": 0.5,
+    "max_output_tokens": 8000,
+    "request_timeout_seconds": 300,
+    "retry_policy": "at most one retry per failed call (same prompt re-issued); all failures and retries recorded"
+   },
+   "prompt": "Napiši točno {K} neodvisnih fragmentov: verzijske nize in številke z enotami (v1.2.3, 0.13.4, 25 %, 3,5 m, 42 obr/min, 0,9999). Vsak fragment je ena vrstica z 1 do 4 takimi elementi, ločenimi z vejicami ali presledki; ne dodajaj razlag, razen kratek slovenski komentar (največ 8 besed) ob izbiri. Varnostna pravila za vse fragmente (obvezna): brez absolutnih poti, ki se začnejo z /home, /tmp, /root ali C:\\Users; brez dolgih neprekinjenih nizov base64 znakov (dlje od 60 znakov); brez gesel, ključev in bearer vrednosti; brez kontrolnih znakov; vsak fragment naj ima največ 1200 znakov (kode in konfiguracije največ 1500). Vsi fragmenti naj bodo projektovno avtorirana nevtralna testna vsebina (slovenske teme, izmišljene osebe in projekti). Odzovi se izključno z JSON nizom točno {K} nizov (brez Markdown ograje).",
+   "seeds": {
+    "dev": "e435626e37cd945a",
+    "hidden": "200b8d950cd5d869"
+   }
+  },
+  {
+   "family_id": "malformed-unclosed-fence",
+   "category": "malformed",
+   "subcategory": "nezaprt ograjen koder",
+   "sample_count": 6,
+   "instance_counts": {
+    "dev": 3,
+    "hidden": 3
+   },
+   "batches_per_instance": [
+    6
+   ],
+   "generation_parameters": {
+    "temperature": 0.6,
+    "max_output_tokens": 8000,
+    "request_timeout_seconds": 300,
+    "retry_policy": "at most one retry per failed call (same prompt re-issued); all failures and retries recorded"
+   },
+   "prompt": "Napiši točno {K} neodvisnih fragmentov z namenoma pokvarjeno strukturo: nezaprt ograjen koder (``` ali ~~~ na začetku, vsebina, brez zapirne ograje). Vsak fragment je 1 do 3 vrstice; pokvarjenost naj bo prva in očevitna, ostalo besedilo naj bo nevtralna slovenščina. Varnostna pravila za vse fragmente (obvezna): brez absolutnih poti, ki se začnejo z /home, /tmp, /root ali C:\\Users; brez dolgih neprekinjenih nizov base64 znakov (dlje od 60 znakov); brez gesel, ključev in bearer vrednosti; brez kontrolnih znakov; vsak fragment naj ima največ 1200 znakov (kode in konfiguracije največ 1500). Vsi fragmenti naj bodo projektovno avtorirana nevtralna testna vsebina (slovenske teme, izmišljene osebe in projekti). Odzovi se izključno z JSON nizom točno {K} nizov (brez Markdown ograje okoli celotnega odgovora).",
+   "seeds": {
+    "dev": "11fe0088d65eeac8",
+    "hidden": "55bca3e1b475c9ec"
+   }
+  },
+  {
+   "family_id": "malformed-unmatched-backtick",
+   "category": "malformed",
+   "subcategory": "neskladni backquote",
+   "sample_count": 6,
+   "instance_counts": {
+    "dev": 3,
+    "hidden": 3
+   },
+   "batches_per_instance": [
+    6
+   ],
+   "generation_parameters": {
+    "temperature": 0.6,
+    "max_output_tokens": 8000,
+    "request_timeout_seconds": 300,
+    "retry_policy": "at most one retry per failed call (same prompt re-issued); all failures and retries recorded"
+   },
+   "prompt": "Napiši točno {K} neodvisnih fragmentov z namenoma pokvarjeno strukturo: neskladni backquote (en backquote brez para, znotraj koder podobni vsebini). Vsak fragment je 1 do 3 vrstice; pokvarjenost naj bo prva in očevitna, ostalo besedilo naj bo nevtralna slovenščina. Varnostna pravila za vse fragmente (obvezna): brez absolutnih poti, ki se začnejo z /home, /tmp, /root ali C:\\Users; brez dolgih neprekinjenih nizov base64 znakov (dlje od 60 znakov); brez gesel, ključev in bearer vrednosti; brez kontrolnih znakov; vsak fragment naj ima največ 1200 znakov (kode in konfiguracije največ 1500). Vsi fragmenti naj bodo projektovno avtorirana nevtralna testna vsebina (slovenske teme, izmišljene osebe in projekti). Odzovi se izključno z JSON nizom točno {K} nizov (brez Markdown ograje okoli celotnega odgovora).",
+   "seeds": {
+    "dev": "cf316ba4ee49a7c1",
+    "hidden": "4e63e110d463a8c0"
+   }
+  },
+  {
+   "family_id": "malformed-unmatched-dollar",
+   "category": "malformed",
+   "subcategory": "neskladni dollar",
+   "sample_count": 6,
+   "instance_counts": {
+    "dev": 3,
+    "hidden": 3
+   },
+   "batches_per_instance": [
+    6
+   ],
+   "generation_parameters": {
+    "temperature": 0.6,
+    "max_output_tokens": 8000,
+    "request_timeout_seconds": 300,
+    "retry_policy": "at most one retry per failed call (same prompt re-issued); all failures and retries recorded"
+   },
+   "prompt": "Napiši točno {K} neodvisnih fragmentov z namenoma pokvarjeno strukturo: neskladni dollar (en $ brez para, npr. cena $ ali $5 brez drugega $). Vsak fragment je 1 do 3 vrstice; pokvarjenost naj bo prva in očevitna, ostalo besedilo naj bo nevtralna slovenščina. Varnostna pravila za vse fragmente (obvezna): brez absolutnih poti, ki se začnejo z /home, /tmp, /root ali C:\\Users; brez dolgih neprekinjenih nizov base64 znakov (dlje od 60 znakov); brez gesel, ključev in bearer vrednosti; brez kontrolnih znakov; vsak fragment naj ima največ 1200 znakov (kode in konfiguracije največ 1500). Vsi fragmenti naj bodo projektovno avtorirana nevtralna testna vsebina (slovenske teme, izmišljene osebe in projekti). Odzovi se izključno z JSON nizom točno {K} nizov (brez Markdown ograje okoli celotnega odgovora).",
+   "seeds": {
+    "dev": "5b65378913a37645",
+    "hidden": "0815e9dc6c4009f4"
+   }
+  },
+  {
+   "family_id": "malformed-incomplete-display-dollar",
+   "category": "malformed",
+   "subcategory": "nepopolna display matematika",
+   "sample_count": 6,
+   "instance_counts": {
+    "dev": 3,
+    "hidden": 3
+   },
+   "batches_per_instance": [
+    6
+   ],
+   "generation_parameters": {
+    "temperature": 0.6,
+    "max_output_tokens": 8000,
+    "request_timeout_seconds": 300,
+    "retry_policy": "at most one retry per failed call (same prompt re-issued); all failures and retries recorded"
+   },
+   "prompt": "Napiši točno {K} neodvisnih fragmentov z namenoma pokvarjeno strukturo: nepopolna display matematika ($$ z vsebino, brez zapirnih $$). Vsak fragment je 1 do 3 vrstice; pokvarjenost naj bo prva in očevitna, ostalo besedilo naj bo nevtralna slovenščina. Varnostna pravila za vse fragmente (obvezna): brez absolutnih poti, ki se začnejo z /home, /tmp, /root ali C:\\Users; brez dolgih neprekinjenih nizov base64 znakov (dlje od 60 znakov); brez gesel, ključev in bearer vrednosti; brez kontrolnih znakov; vsak fragment naj ima največ 1200 znakov (kode in konfiguracije največ 1500). Vsi fragmenti naj bodo projektovno avtorirana nevtralna testna vsebina (slovenske teme, izmišljene osebe in projekti). Odzovi se izključno z JSON nizom točno {K} nizov (brez Markdown ograje okoli celotnega odgovora).",
+   "seeds": {
+    "dev": "99960396f6eb3c02",
+    "hidden": "4a79bf78b633cac3"
+   }
+  },
+  {
+   "family_id": "malformed-incomplete-paren-bracket",
+   "category": "malformed",
+   "subcategory": "nepopolni tev oklepaji",
+   "sample_count": 6,
+   "instance_counts": {
+    "dev": 3,
+    "hidden": 3
+   },
+   "batches_per_instance": [
+    6
+   ],
+   "generation_parameters": {
+    "temperature": 0.6,
+    "max_output_tokens": 8000,
+    "request_timeout_seconds": 300,
+    "retry_policy": "at most one retry per failed call (same prompt re-issued); all failures and retries recorded"
+   },
+   "prompt": "Napiši točno {K} neodvisnih fragmentov z namenoma pokvarjeno strukturo: nepopolni TeV oklepaji (\\( brez \\) oziroma \\[ brez \\], z matematično vsebino). Vsak fragment je 1 do 3 vrstice; pokvarjenost naj bo prva in očevitna, ostalo besedilo naj bo nevtralna slovenščina. Varnostna pravila za vse fragmente (obvezna): brez absolutnih poti, ki se začnejo z /home, /tmp, /root ali C:\\Users; brez dolgih neprekinjenih nizov base64 znakov (dlje od 60 znakov); brez gesel, ključev in bearer vrednosti; brez kontrolnih znakov; vsak fragment naj ima največ 1200 znakov (kode in konfiguracije največ 1500). Vsi fragmenti naj bodo projektovno avtorirana nevtralna testna vsebina (slovenske teme, izmišljene osebe in projekti). Odzovi se izključno z JSON nizom točno {K} nizov (brez Markdown ograje okoli celotnega odgovora).",
+   "seeds": {
+    "dev": "aa45d83560a1aeb0",
+    "hidden": "c1fdd73f84b3f94a"
+   }
+  },
+  {
+   "family_id": "malformed-unclosed-tex-env",
+   "category": "malformed",
+   "subcategory": "nezaprt tex okolje",
+   "sample_count": 6,
+   "instance_counts": {
+    "dev": 3,
+    "hidden": 3
+   },
+   "batches_per_instance": [
+    6
+   ],
+   "generation_parameters": {
+    "temperature": 0.6,
+    "max_output_tokens": 8000,
+    "request_timeout_seconds": 300,
+    "retry_policy": "at most one retry per failed call (same prompt re-issued); all failures and retries recorded"
+   },
+   "prompt": "Napiši točno {K} neodvisnih fragmentov z namenoma pokvarjeno strukturo: nezaprt TeX okolje (\\begin{align} ... brez \\end{align}). Vsak fragment je 1 do 3 vrstice; pokvarjenost naj bo prva in očevitna, ostalo besedilo naj bo nevtralna slovenščina. Varnostna pravila za vse fragmente (obvezna): brez absolutnih poti, ki se začnejo z /home, /tmp, /root ali C:\\Users; brez dolgih neprekinjenih nizov base64 znakov (dlje od 60 znakov); brez gesel, ključev in bearer vrednosti; brez kontrolnih znakov; vsak fragment naj ima največ 1200 znakov (kode in konfiguracije največ 1500). Vsi fragmenti naj bodo projektovno avtorirana nevtralna testna vsebina (slovenske teme, izmišljene osebe in projekti). Odzovi se izključno z JSON nizom točno {K} nizov (brez Markdown ograje okoli celotnega odgovora).",
+   "seeds": {
+    "dev": "e6e95ad82cacc10f",
+    "hidden": "33a0c660b2515f39"
+   }
+  },
+  {
+   "family_id": "malformed-broken-link",
+   "category": "malformed",
+   "subcategory": "pokvarjena povezava",
+   "sample_count": 6,
+   "instance_counts": {
+    "dev": 3,
+    "hidden": 3
+   },
+   "batches_per_instance": [
+    6
+   ],
+   "generation_parameters": {
+    "temperature": 0.6,
+    "max_output_tokens": 8000,
+    "request_timeout_seconds": 300,
+    "retry_policy": "at most one retry per failed call (same prompt re-issued); all failures and retries recorded"
+   },
+   "prompt": "Napiši točno {K} neodvisnih fragmentov z namenoma pokvarjeno strukturo: pokvarjena povezava ([opis](https://primer.si/stran brez zapirne oklepaje ali [opis] brez cilja). Vsak fragment je 1 do 3 vrstice; pokvarjenost naj bo prva in očevitna, ostalo besedilo naj bo nevtralna slovenščina. Varnostna pravila za vse fragmente (obvezna): brez absolutnih poti, ki se začnejo z /home, /tmp, /root ali C:\\Users; brez dolgih neprekinjenih nizov base64 znakov (dlje od 60 znakov); brez gesel, ključev in bearer vrednosti; brez kontrolnih znakov; vsak fragment naj ima največ 1200 znakov (kode in konfiguracije največ 1500). Vsi fragmenti naj bodo projektovno avtorirana nevtralna testna vsebina (slovenske teme, izmišljene osebe in projekti). Odzovi se izključno z JSON nizom točno {K} nizov (brez Markdown ograje okoli celotnega odgovora).",
+   "seeds": {
+    "dev": "5b3fd457e43fdfc7",
+    "hidden": "84ee14279e078581"
+   }
+  },
+  {
+   "family_id": "malformed-partial-html",
+   "category": "malformed",
+   "subcategory": "delni html",
+   "sample_count": 6,
+   "instance_counts": {
+    "dev": 3,
+    "hidden": 3
+   },
+   "batches_per_instance": [
+    6
+   ],
+   "generation_parameters": {
+    "temperature": 0.6,
+    "max_output_tokens": 8000,
+    "request_timeout_seconds": 300,
+    "retry_policy": "at most one retry per failed call (same prompt re-issued); all failures and retries recorded"
+   },
+   "prompt": "Napiši točno {K} neodvisnih fragmentov z namenoma pokvarjeno strukturo: delni HTML (<b> brez </b>, <span title= brez zapora, <div> z besedilom). Vsak fragment je 1 do 3 vrstice; pokvarjenost naj bo prva in očevitna, ostalo besedilo naj bo nevtralna slovenščina. Varnostna pravila za vse fragmente (obvezna): brez absolutnih poti, ki se začnejo z /home, /tmp, /root ali C:\\Users; brez dolgih neprekinjenih nizov base64 znakov (dlje od 60 znakov); brez gesel, ključev in bearer vrednosti; brez kontrolnih znakov; vsak fragment naj ima največ 1200 znakov (kode in konfiguracije največ 1500). Vsi fragmenti naj bodo projektovno avtorirana nevtralna testna vsebina (slovenske teme, izmišljene osebe in projekti). Odzovi se izključno z JSON nizom točno {K} nizov (brez Markdown ograje okoli celotnega odgovora).",
+   "seeds": {
+    "dev": "5b400aa076cb31cd",
+    "hidden": "9c714d5823c6fa69"
+   }
+  },
+  {
+   "family_id": "malformed-truncated-json",
+   "category": "malformed",
+   "subcategory": "pretrgan json",
+   "sample_count": 6,
+   "instance_counts": {
+    "dev": 3,
+    "hidden": 3
+   },
+   "batches_per_instance": [
+    6
+   ],
+   "generation_parameters": {
+    "temperature": 0.6,
+    "max_output_tokens": 8000,
+    "request_timeout_seconds": 300,
+    "retry_policy": "at most one retry per failed call (same prompt re-issued); all failures and retries recorded"
+   },
+   "prompt": "Napiši točno {K} neodvisnih fragmentov z namenoma pokvarjeno strukturo: pretrgan JSON ({ \"ključ\": \"vrednost\", brez zapirnih oklepajev). Vsak fragment je 1 do 3 vrstice; pokvarjenost naj bo prva in očevitna, ostalo besedilo naj bo nevtralna slovenščina. Varnostna pravila za vse fragmente (obvezna): brez absolutnih poti, ki se začnejo z /home, /tmp, /root ali C:\\Users; brez dolgih neprekinjenih nizov base64 znakov (dlje od 60 znakov); brez gesel, ključev in bearer vrednosti; brez kontrolnih znakov; vsak fragment naj ima največ 1200 znakov (kode in konfiguracije največ 1500). Vsi fragmenti naj bodo projektovno avtorirana nevtralna testna vsebina (slovenske teme, izmišljene osebe in projekti). Odzovi se izključno z JSON nizom točno {K} nizov (brez Markdown ograje okoli celotnega odgovora).",
+   "seeds": {
+    "dev": "84d40c0d1ef0a4db",
+    "hidden": "b25707c3e2ace2c5"
+   }
+  },
+  {
+   "family_id": "malformed-malformed-nesting",
+   "category": "malformed",
+   "subcategory": "pokvarjeno gnezdjenje poudarkov",
+   "sample_count": 6,
+   "instance_counts": {
+    "dev": 3,
+    "hidden": 3
+   },
+   "batches_per_instance": [
+    6
+   ],
+   "generation_parameters": {
+    "temperature": 0.6,
+    "max_output_tokens": 8000,
+    "request_timeout_seconds": 300,
+    "retry_policy": "at most one retry per failed call (same prompt re-issued); all failures and retries recorded"
+   },
+   "prompt": "Napiši točno {K} neodvisnih fragmentov z namenoma pokvarjeno strukturo: pokvarjeno gnezdjenje poudarkov (**_mix_ brez zapora, ***trobna***, ~~**prečrtano** zmanjkano). Vsak fragment je 1 do 3 vrstice; pokvarjenost naj bo prva in očevitna, ostalo besedilo naj bo nevtralna slovenščina. Varnostna pravila za vse fragmente (obvezna): brez absolutnih poti, ki se začnejo z /home, /tmp, /root ali C:\\Users; brez dolgih neprekinjenih nizov base64 znakov (dlje od 60 znakov); brez gesel, ključev in bearer vrednosti; brez kontrolnih znakov; vsak fragment naj ima največ 1200 znakov (kode in konfiguracije največ 1500). Vsi fragmenti naj bodo projektovno avtorirana nevtralna testna vsebina (slovenske teme, izmišljene osebe in projekti). Odzovi se izključno z JSON nizom točno {K} nizov (brez Markdown ograje okoli celotnega odgovora).",
+   "seeds": {
+    "dev": "49c2f67d6ab3d628",
+    "hidden": "332a70a440e96b20"
+   }
+  }
+ ],
+ "naturalistic": [
+  {
+   "scenario_id": "ns-algorithm-python",
+   "scenario_index": 1,
+   "instruction": "Razišči v slovenščini algoritem (npr. iskanje, razvrččanje, graf) in ga pokaži s Python kodom v ograjenem kodnem bloku.",
+   "instance_counts": {
+    "dev": 6,
+    "hidden": 4
+   },
+   "generation_parameters": {
+    "temperature": 0.8,
+    "max_output_tokens": 4000,
+    "request_timeout_seconds": 300,
+    "retry_policy": "at most one retry per failed call (same prompt re-issued); all failures and retries recorded",
+    "one_call_per_instance": true
+   },
+   "prompt_template": "Napiši celoten odgovor v slovenščini, kot ga bi ga LLM pisal čitalcu. Nalog: Razišči v slovenščini algoritem (npr. iskanje, razvrččanje, graf) in ga pokaži s Python kodom v ograjenem kodnem bloku. Odgovor naj bo naraven, 100 do 400 besed, s strukturo, ki jo zahteva nalog (kode, tabele, seznami). Uporabi le izmišljene projekte, osebe in podatke; brez absolutnih poti in brez ključev. Odzovi se izključno z enim samim JSON nizom, ki vsebuje celoten odgovor (brez Markdown ograje okoli celotnega odgovora).",
+   "seeds": {
+    "dev": "50a40b9870763c15",
+    "hidden": "6bef05004773a9dc"
+   }
+  },
+  {
+   "scenario_id": "ns-table-equations",
+   "scenario_index": 2,
+   "instruction": "Napiši slovensko razlago s podatkovno tabelo (Markdown) in vsaj eno enačbo (inline ali display LaTeX).",
+   "instance_counts": {
+    "dev": 6,
+    "hidden": 4
+   },
+   "generation_parameters": {
+    "temperature": 0.8,
+    "max_output_tokens": 4000,
+    "request_timeout_seconds": 300,
+    "retry_policy": "at most one retry per failed call (same prompt re-issued); all failures and retries recorded",
+    "one_call_per_instance": true
+   },
+   "prompt_template": "Napiši celoten odgovor v slovenščini, kot ga bi ga LLM pisal čitalcu. Nalog: Napiši slovensko razlago s podatkovno tabelo (Markdown) in vsaj eno enačbo (inline ali display LaTeX). Odgovor naj bo naraven, 100 do 400 besed, s strukturo, ki jo zahteva nalog (kode, tabele, seznami). Uporabi le izmišljene projekte, osebe in podatke; brez absolutnih poti in brez ključev. Odzovi se izključno z enim samim JSON nizom, ki vsebuje celoten odgovor (brez Markdown ograje okoli celotnega odgovora).",
+   "seeds": {
+    "dev": "7ac075dc9c9907ff",
+    "hidden": "bd581c515d057480"
+   }
+  },
+  {
+   "scenario_id": "ns-troubleshooting",
+   "scenario_index": 3,
+   "instruction": "Napiši odgovor na razhroščovanje naprave: koraki, terminal ukazi v kodnih blokih in relativne poti do datotek.",
+   "instance_counts": {
+    "dev": 6,
+    "hidden": 4
+   },
+   "generation_parameters": {
+    "temperature": 0.8,
+    "max_output_tokens": 4000,
+    "request_timeout_seconds": 300,
+    "retry_policy": "at most one retry per failed call (same prompt re-issued); all failures and retries recorded",
+    "one_call_per_instance": true
+   },
+   "prompt_template": "Napiši celoten odgovor v slovenščini, kot ga bi ga LLM pisal čitalcu. Nalog: Napiši odgovor na razhroščovanje naprave: koraki, terminal ukazi v kodnih blokih in relativne poti do datotek. Odgovor naj bo naraven, 100 do 400 besed, s strukturo, ki jo zahteva nalog (kode, tabele, seznami). Uporabi le izmišljene projekte, osebe in podatke; brez absolutnih poti in brez ključev. Odzovi se izključno z enim samim JSON nizom, ki vsebuje celoten odgovor (brez Markdown ograje okoli celotnega odgovora).",
+   "seeds": {
+    "dev": "fdae2b910386b02a",
+    "hidden": "bfb321ff50073b84"
+   }
+  },
+  {
+   "scenario_id": "ns-json-config",
+   "scenario_index": 4,
+   "instruction": "Razišči v slovenščini JSON konfiguracijo (prikaži jo v kodnem bloku in pojasni ključe).",
+   "instance_counts": {
+    "dev": 6,
+    "hidden": 4
+   },
+   "generation_parameters": {
+    "temperature": 0.8,
+    "max_output_tokens": 4000,
+    "request_timeout_seconds": 300,
+    "retry_policy": "at most one retry per failed call (same prompt re-issued); all failures and retries recorded",
+    "one_call_per_instance": true
+   },
+   "prompt_template": "Napiši celoten odgovor v slovenščini, kot ga bi ga LLM pisal čitalcu. Nalog: Razišči v slovenščini JSON konfiguracijo (prikaži jo v kodnem bloku in pojasni ključe). Odgovor naj bo naraven, 100 do 400 besed, s strukturo, ki jo zahteva nalog (kode, tabele, seznami). Uporabi le izmišljene projekte, osebe in podatke; brez absolutnih poti in brez ključev. Odzovi se izključno z enim samim JSON nizom, ki vsebuje celoten odgovor (brez Markdown ograje okoli celotnega odgovora).",
+   "seeds": {
+    "dev": "18c880882b583d7e",
+    "hidden": "4af84d3bc89cfa8e"
+   }
+  },
+  {
+   "scenario_id": "ns-md-documentation",
+   "scenario_index": 5,
+   "instruction": "Napiši odlomek dokumentacije v Markdown: naslovniki, sezname, povezave in ograjen koder.",
+   "instance_counts": {
+    "dev": 6,
+    "hidden": 4
+   },
+   "generation_parameters": {
+    "temperature": 0.8,
+    "max_output_tokens": 4000,
+    "request_timeout_seconds": 300,
+    "retry_policy": "at most one retry per failed call (same prompt re-issued); all failures and retries recorded",
+    "one_call_per_instance": true
+   },
+   "prompt_template": "Napiši celoten odgovor v slovenščini, kot ga bi ga LLM pisal čitalcu. Nalog: Napiši odlomek dokumentacije v Markdown: naslovniki, sezname, povezave in ograjen koder. Odgovor naj bo naraven, 100 do 400 besed, s strukturo, ki jo zahteva nalog (kode, tabele, seznami). Uporabi le izmišljene projekte, osebe in podatke; brez absolutnih poti in brez ključev. Odzovi se izključno z enim samim JSON nizom, ki vsebuje celoten odgovor (brez Markdown ograje okoli celotnega odgovora).",
+   "seeds": {
+    "dev": "0430095a2e768348",
+    "hidden": "0857aecf6ddc60b8"
+   }
+  },
+  {
+   "scenario_id": "ns-math-answer",
+   "scenario_index": 6,
+   "instruction": "Reši matematično nalog v slovenščini z inline in display LaTeX izrazi.",
+   "instance_counts": {
+    "dev": 6,
+    "hidden": 4
+   },
+   "generation_parameters": {
+    "temperature": 0.8,
+    "max_output_tokens": 4000,
+    "request_timeout_seconds": 300,
+    "retry_policy": "at most one retry per failed call (same prompt re-issued); all failures and retries recorded",
+    "one_call_per_instance": true
+   },
+   "prompt_template": "Napiši celoten odgovor v slovenščini, kot ga bi ga LLM pisal čitalcu. Nalog: Reši matematično nalog v slovenščini z inline in display LaTeX izrazi. Odgovor naj bo naraven, 100 do 400 besed, s strukturo, ki jo zahteva nalog (kode, tabele, seznami). Uporabi le izmišljene projekte, osebe in podatke; brez absolutnih poti in brez ključev. Odzovi se izključno z enim samim JSON nizom, ki vsebuje celoten odgovor (brez Markdown ograje okoli celotnega odgovora).",
+   "seeds": {
+    "dev": "feee1f3afbc39dcb",
+    "hidden": "9bf9a9a306b29504"
+   }
+  },
+  {
+   "scenario_id": "ns-comparison-table",
+   "scenario_index": 7,
+   "instruction": "Primerjaj dva pristopa v tabeli s koder fragmenti v celicah in zaključno razlago.",
+   "instance_counts": {
+    "dev": 6,
+    "hidden": 4
+   },
+   "generation_parameters": {
+    "temperature": 0.8,
+    "max_output_tokens": 4000,
+    "request_timeout_seconds": 300,
+    "retry_policy": "at most one retry per failed call (same prompt re-issued); all failures and retries recorded",
+    "one_call_per_instance": true
+   },
+   "prompt_template": "Napiši celoten odgovor v slovenščini, kot ga bi ga LLM pisal čitalcu. Nalog: Primerjaj dva pristopa v tabeli s koder fragmenti v celicah in zaključno razlago. Odgovor naj bo naraven, 100 do 400 besed, s strukturo, ki jo zahteva nalog (kode, tabele, seznami). Uporabi le izmišljene projekte, osebe in podatke; brez absolutnih poti in brez ključev. Odzovi se izključno z enim samim JSON nizom, ki vsebuje celoten odgovor (brez Markdown ograje okoli celotnega odgovora).",
+   "seeds": {
+    "dev": "4189d7fe6b7ff9d5",
+    "hidden": "3f45cea6750c77f4"
+   }
+  },
+  {
+   "scenario_id": "ns-malformed-markdown",
+   "scenario_index": 8,
+   "instruction": "Napiši naraven, a namerno nepopoln Markdown odgovor (manjka ena ograja ali zapora povezave), kot ga v šibki napiše model.",
+   "instance_counts": {
+    "dev": 6,
+    "hidden": 4
+   },
+   "generation_parameters": {
+    "temperature": 0.8,
+    "max_output_tokens": 4000,
+    "request_timeout_seconds": 300,
+    "retry_policy": "at most one retry per failed call (same prompt re-issued); all failures and retries recorded",
+    "one_call_per_instance": true
+   },
+   "prompt_template": "Napiši celoten odgovor v slovenščini, kot ga bi ga LLM pisal čitalcu. Nalog: Napiši naraven, a namerno nepopoln Markdown odgovor (manjka ena ograja ali zapora povezave), kot ga v šibki napiše model. Odgovor naj bo naraven, 100 do 400 besed, s strukturo, ki jo zahteva nalog (kode, tabele, seznami). Uporabi le izmišljene projekte, osebe in podatke; brez absolutnih poti in brez ključev. Odzovi se izključno z enim samim JSON nizom, ki vsebuje celoten odgovor (brez Markdown ograje okoli celotnega odgovora).",
+   "seeds": {
+    "dev": "576ddc08148c3b89",
+    "hidden": "91a4681edf35b1de"
+   }
+  },
+  {
+   "scenario_id": "ns-api-reference",
+   "scenario_index": 9,
+   "instruction": "Napiši API sklic v slovenščini: tabela parametrhov, curl primer v kodnem bloku in JSON odgovor.",
+   "instance_counts": {
+    "dev": 6,
+    "hidden": 4
+   },
+   "generation_parameters": {
+    "temperature": 0.8,
+    "max_output_tokens": 4000,
+    "request_timeout_seconds": 300,
+    "retry_policy": "at most one retry per failed call (same prompt re-issued); all failures and retries recorded",
+    "one_call_per_instance": true
+   },
+   "prompt_template": "Napiši celoten odgovor v slovenščini, kot ga bi ga LLM pisal čitalcu. Nalog: Napiši API sklic v slovenščini: tabela parametrhov, curl primer v kodnem bloku in JSON odgovor. Odgovor naj bo naraven, 100 do 400 besed, s strukturo, ki jo zahteva nalog (kode, tabele, seznami). Uporabi le izmišljene projekte, osebe in podatke; brez absolutnih poti in brez ključev. Odzovi se izključno z enim samim JSON nizom, ki vsebuje celoten odgovor (brez Markdown ograje okoli celotnega odgovora).",
+   "seeds": {
+    "dev": "df2b285b63a392d4",
+    "hidden": "1961bacb0c328413"
+   }
+  },
+  {
+   "scenario_id": "ns-technical-manual",
+   "scenario_index": 10,
+   "instruction": "Napiši odlomek tehničnega priročnika: opozorila, zaporedne korake in inline kodo.",
+   "instance_counts": {
+    "dev": 6,
+    "hidden": 4
+   },
+   "generation_parameters": {
+    "temperature": 0.8,
+    "max_output_tokens": 4000,
+    "request_timeout_seconds": 300,
+    "retry_policy": "at most one retry per failed call (same prompt re-issued); all failures and retries recorded",
+    "one_call_per_instance": true
+   },
+   "prompt_template": "Napiši celoten odgovor v slovenščini, kot ga bi ga LLM pisal čitalcu. Nalog: Napiši odlomek tehničnega priročnika: opozorila, zaporedne korake in inline kodo. Odgovor naj bo naraven, 100 do 400 besed, s strukturo, ki jo zahteva nalog (kode, tabele, seznami). Uporabi le izmišljene projekte, osebe in podatke; brez absolutnih poti in brez ključev. Odzovi se izključno z enim samim JSON nizom, ki vsebuje celoten odgovor (brez Markdown ograje okoli celotnega odgovora).",
+   "seeds": {
+    "dev": "003b4e008ac3557c",
+    "hidden": "02d9ac4465a9c93f"
+   }
+  },
+  {
+   "scenario_id": "ns-changelog",
+   "scenario_index": 11,
+   "instruction": "Napiši spremembe verzije (changelog): verziji, pike, povezave in kratke opise.",
+   "instance_counts": {
+    "dev": 4,
+    "hidden": 6
+   },
+   "generation_parameters": {
+    "temperature": 0.8,
+    "max_output_tokens": 4000,
+    "request_timeout_seconds": 300,
+    "retry_policy": "at most one retry per failed call (same prompt re-issued); all failures and retries recorded",
+    "one_call_per_instance": true
+   },
+   "prompt_template": "Napiši celoten odgovor v slovenščini, kot ga bi ga LLM pisal čitalcu. Nalog: Napiši spremembe verzije (changelog): verziji, pike, povezave in kratke opise. Odgovor naj bo naraven, 100 do 400 besed, s strukturo, ki jo zahteva nalog (kode, tabele, seznami). Uporabi le izmišljene projekte, osebe in podatke; brez absolutnih poti in brez ključev. Odzovi se izključno z enim samim JSON nizom, ki vsebuje celoten odgovor (brez Markdown ograje okoli celotnega odgovora).",
+   "seeds": {
+    "dev": "353b16a2141008b8",
+    "hidden": "eaf2772be4e62247"
+   }
+  },
+  {
+   "scenario_id": "ns-qa-answer",
+   "scenario_index": 12,
+   "instruction": "Napiši odgovor na vprašanje (Q&A): citat vprašanja, zaporedni koraki in koder primer.",
+   "instance_counts": {
+    "dev": 4,
+    "hidden": 6
+   },
+   "generation_parameters": {
+    "temperature": 0.8,
+    "max_output_tokens": 4000,
+    "request_timeout_seconds": 300,
+    "retry_policy": "at most one retry per failed call (same prompt re-issued); all failures and retries recorded",
+    "one_call_per_instance": true
+   },
+   "prompt_template": "Napiši celoten odgovor v slovenščini, kot ga bi ga LLM pisal čitalcu. Nalog: Napiši odgovor na vprašanje (Q&A): citat vprašanja, zaporedni koraki in koder primer. Odgovor naj bo naraven, 100 do 400 besed, s strukturo, ki jo zahteva nalog (kode, tabele, seznami). Uporabi le izmišljene projekte, osebe in podatke; brez absolutnih poti in brez ključev. Odzovi se izključno z enim samim JSON nizom, ki vsebuje celoten odgovor (brez Markdown ograje okoli celotnega odgovora).",
+   "seeds": {
+    "dev": "ed65958c3aaf3a5b",
+    "hidden": "30d418c6b9fae0b0"
+   }
+  },
+  {
+   "scenario_id": "ns-data-report",
+   "scenario_index": 13,
+   "instruction": "Napiši kratko poročilo: tabela z številskimi vrednostmi in enotami, interpretacija in inline koda za meritve.",
+   "instance_counts": {
+    "dev": 4,
+    "hidden": 6
+   },
+   "generation_parameters": {
+    "temperature": 0.8,
+    "max_output_tokens": 4000,
+    "request_timeout_seconds": 300,
+    "retry_policy": "at most one retry per failed call (same prompt re-issued); all failures and retries recorded",
+    "one_call_per_instance": true
+   },
+   "prompt_template": "Napiši celoten odgovor v slovenščini, kot ga bi ga LLM pisal čitalcu. Nalog: Napiši kratko poročilo: tabela z številskimi vrednostmi in enotami, interpretacija in inline koda za meritve. Odgovor naj bo naraven, 100 do 400 besed, s strukturo, ki jo zahteva nalog (kode, tabele, seznami). Uporabi le izmišljene projekte, osebe in podatke; brez absolutnih poti in brez ključev. Odzovi se izključno z enim samim JSON nizom, ki vsebuje celoten odgovor (brez Markdown ograje okoli celotnega odgovora).",
+   "seeds": {
+    "dev": "fe94dc86f0d5626b",
+    "hidden": "1832708933d00e45"
+   }
+  },
+  {
+   "scenario_id": "ns-migration-notes",
+   "scenario_index": 14,
+   "instruction": "Napiši opombe o selitvi podatkov: koraki, koder bloki in opozorila o varnostni kopiji.",
+   "instance_counts": {
+    "dev": 4,
+    "hidden": 6
+   },
+   "generation_parameters": {
+    "temperature": 0.8,
+    "max_output_tokens": 4000,
+    "request_timeout_seconds": 300,
+    "retry_policy": "at most one retry per failed call (same prompt re-issued); all failures and retries recorded",
+    "one_call_per_instance": true
+   },
+   "prompt_template": "Napiši celoten odgovor v slovenščini, kot ga bi ga LLM pisal čitalcu. Nalog: Napiši opombe o selitvi podatkov: koraki, koder bloki in opozorila o varnostni kopiji. Odgovor naj bo naraven, 100 do 400 besed, s strukturo, ki jo zahteva nalog (kode, tabele, seznami). Uporabi le izmišljene projekte, osebe in podatke; brez absolutnih poti in brez ključev. Odzovi se izključno z enim samim JSON nizom, ki vsebuje celoten odgovor (brez Markdown ograje okoli celotnega odgovora).",
+   "seeds": {
+    "dev": "c55468276642b50b",
+    "hidden": "e8375e91cb329850"
+   }
+  },
+  {
+   "scenario_id": "ns-glossary-entry",
+   "scenario_index": 15,
+   "instruction": "Napiši slovarski vnos (termin, področje, razlaga z primeri in povezavo na vir).",
+   "instance_counts": {
+    "dev": 4,
+    "hidden": 6
+   },
+   "generation_parameters": {
+    "temperature": 0.8,
+    "max_output_tokens": 4000,
+    "request_timeout_seconds": 300,
+    "retry_policy": "at most one retry per failed call (same prompt re-issued); all failures and retries recorded",
+    "one_call_per_instance": true
+   },
+   "prompt_template": "Napiši celoten odgovor v slovenščini, kot ga bi ga LLM pisal čitalcu. Nalog: Napiši slovarski vnos (termin, področje, razlaga z primeri in povezavo na vir). Odgovor naj bo naraven, 100 do 400 besed, s strukturo, ki jo zahteva nalog (kode, tabele, seznami). Uporabi le izmišljene projekte, osebe in podatke; brez absolutnih poti in brez ključev. Odzovi se izključno z enim samim JSON nizom, ki vsebuje celoten odgovor (brez Markdown ograje okoli celotnega odgovora).",
+   "seeds": {
+    "dev": "78653d297d10cd33",
+    "hidden": "cc4f03970ac64c40"
+   }
+  }
+ ],
+ "census_targets": {
+  "components_total": 1234,
+  "components_by_category": {
+   "prose": 400,
+   "code": 154,
+   "structured": 120,
+   "math": 150,
+   "markdown": 200,
+   "machine": 150,
+   "malformed": 60
+  },
+  "naturalistic_total": 150,
+  "dev_components": 646,
+  "hidden_components": 588,
+  "dev_naturalistic": 80,
+  "hidden_naturalistic": 70,
+  "mashups_total": 5000,
+  "mashups_dev": 3000,
+  "mashups_hidden": 2000,
+  "document_bytes_range": [
+   200,
+   4000
+  ],
+  "components_per_document_range": [
+   2,
+   10
+  ]
+ }
+}

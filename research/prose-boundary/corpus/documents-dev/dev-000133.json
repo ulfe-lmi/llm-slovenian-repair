@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-000133",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T2-prose-math-prose",
+ "byte_length": 560,
+ "cp_length": 554,
+ "sha256": "2667b0a274121b60bbea9fcd6d601b6b57fe56340d9180f88d103f61c5bd96a8",
+ "document": "Maja je v pisarni preizkusila nov tiskalnik, ki pa se je ob prvimu zagonu pokazal bolj zahteven, kot so obljavali. V razpravi so sodelavci spregovorili o tem, da bi lahko preprostejši program za spremljanje tonerja rešil polovico tegob.\n\\(\\frac{3}{4}-\\dfrac{\\delta}{\\varepsilon}=\\text{Luka}\\)\nV projektu Mlin 2018 je Luka preveril, koliko je povprečno trajala čakalna vrsta. Ko so trije prostovoljci dodali svoje opazke, se je slika izkazala za bolj uravnoteženo. Po njegovem mnenju je bistvo v tem, da se številka ne bere sama, ampak potrebuje kontekst.",
+ "components": [
+  {
+   "component_id": "comp-prose-computing-dev-0001",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 238
+  },
+  {
+   "component_id": "comp-math-fractions-dev-0002",
+   "category": "math",
+   "start_byte": 239,
+   "end_byte": 294
+  },
+  {
+   "component_id": "comp-prose-statistics-dev-0001",
+   "category": "prose",
+   "start_byte": 295,
+   "end_byte": 560
+  }
+ ]
+}

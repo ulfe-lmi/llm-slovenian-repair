@@ -1,0 +1,47 @@
+{
+ "doc_id": "dev-000152",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T10-randomized",
+ "byte_length": 957,
+ "cp_length": 939,
+ "sha256": "52dc50a4f33343c8c33fc47284a829456d860b3db310213f9ad085492b3086f4",
+ "document": "Pri urejanju hiše pomaga, če ob jutru hitro preverimo, kje je največji nered, in si izberemo le eno majhno nalogo. Ana je v projektu Čist dom zapisala, da je bolje pet minut brisanja mize kot ure razmišljanja. (Sicer pa raje odpreš okno, če je miza že svetla.)\nTestna serija: 3 enote po 120 W so aktivne, potrditev pa je z **močno** in __podčrtim__ besedilom.\n| Izdelek | Enota | Masa |\n| --- | --- | --- |\n| Izdelek Alfa | g | 250 |\n| Izdelek Beta | kg | 2,4 |\nnpm run preizkus\n```\nmoČ = 3; žrtev = (1, 2); besedilo = 'Cena: $10 `kod` **poudarek** _podčrtano_'; pot = 'docs/vir.txt' # komentar v slovenščini: testni projekt, https://primer.si/koda\n```\nV maju 2026 je Nika za projekt Smreko pripravila razlago, ki je učencev pritegnila, ker so imeli pred seboj le navaden govor, ne pa vrstic na zaslonu. Sprva so govorili o spremenljivkah, potem o zanki, ki šteje korake, na koncu pa o funkciji, ki vse preostalo zloži v eno jasno dejanje.",
+ "components": [
+  {
+   "component_id": "comp-prose-everyday-advice-dev-0001",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 268
+  },
+  {
+   "component_id": "comp-markdown-strong-dev-0006",
+   "category": "markdown",
+   "start_byte": 269,
+   "end_byte": 369
+  },
+  {
+   "component_id": "comp-markdown-tables-dev-0006",
+   "category": "markdown",
+   "start_byte": 370,
+   "end_byte": 471
+  },
+  {
+   "component_id": "comp-machine-shell-commands-dev-0005",
+   "category": "machine",
+   "start_byte": 472,
+   "end_byte": 488
+  },
+  {
+   "component_id": "comp-code-python-dev-0011",
+   "category": "code",
+   "start_byte": 489,
+   "end_byte": 667
+  },
+  {
+   "component_id": "comp-prose-programming-explainer-dev-0010",
+   "category": "prose",
+   "start_byte": 668,
+   "end_byte": 957
+  }
+ ]
+}

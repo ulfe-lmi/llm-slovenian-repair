@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-002210",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T11-interactions",
+ "byte_length": 801,
+ "cp_length": 790,
+ "sha256": "5fd377e9c84d3aeba70ef87a611406f2096d19f1e499347a4d23382eab1a2b80",
+ "document": "`-- Testni SQL fragment: razpoloži`.\n```\n// Vir: https://primer.si/koda\n// Pot: docs/vir.txt, čokolada\n#include <string>\nstd::string naslovLipa() {\n    // _podrobnosti_ in *zvezdice*\n    std::string naslov = \"Ana: _razdelek_ (test)\";\n    return naslov;\n}\n# komentar z \\frac{a}{b}\n```\nV projektu Morska črta je Ana izračunala, da se je prodaja v letu 2023 povečala za 12 odstotkov. To je pomenilo, da je v juliju na tri prodane kosove v povprečju padlo eno novo naročilo. Ekipa je rezultat zapisala v testno interno poročilo in ga označila za preverjeno.\nMaja je v pisarni preizkusila nov tiskalnik, ki pa se je ob prvimu zagonu pokazal bolj zahteven, kot so obljavali. V razpravi so sodelavci spregovorili o tem, da bi lahko preprostejši program za spremljanje tonerja rešil polovico tegob.",
+ "components": [
+  {
+   "component_id": "comp-code-sql-dev-0009",
+   "category": "code",
+   "start_byte": 0,
+   "end_byte": 36
+  },
+  {
+   "component_id": "comp-code-cpp-dev-0002",
+   "category": "code",
+   "start_byte": 38,
+   "end_byte": 285
+  },
+  {
+   "component_id": "comp-prose-statistics-dev-0006",
+   "category": "prose",
+   "start_byte": 286,
+   "end_byte": 562
+  },
+  {
+   "component_id": "comp-prose-computing-dev-0001",
+   "category": "prose",
+   "start_byte": 563,
+   "end_byte": 801
+  }
+ ]
+}

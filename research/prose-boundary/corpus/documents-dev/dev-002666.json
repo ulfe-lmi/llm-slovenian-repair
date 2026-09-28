@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-002666",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T5-lists",
+ "byte_length": 929,
+ "cp_length": 912,
+ "sha256": "d6fcc9c115609648d7f4a9b5350471ffffff1d8ae078df94f1334332759218de",
+ "document": "- V projektu Vzorčni napisi 2025 je Petra zapisala, da se pri nespečnosti pogosto omenjajo navade, hrana in okolje, vendar ni mogoče zanesljivo napovedati vzroka brez pogovora. Zato v takih primerih svetujemo, da se oseba obrne na zdravnika ali medicinsko sestro, zlasti če se pojavi huda slabost, oteženo dihanje ali „nenadno slabše počutje“.\n- `// Vir: https://primer.si/koda`\n- Projekt Tiha proga je zbral fragmente, v katerih Ana Kralj bere Čopovo poezijo ob zori. V zadnjem razdelku avtorica spomni na evropsko pripovedko, ki jo je nekje v Ljubljani zapisala leta 1984. Tisto jutro je v knjižnici zmanjkalo ene ključne listine.\n- Za izpit iz zgodovine so učenci pripravili kratko predstavitev. Pri nalogi so uporabili učbenik, ki ga je leta 2018 uredila ekipa Novega zavoda za izobraževanje (zlasti strokovna urednica Irena Polak). Ocenjevanje je bilo delno usklajeno, delno pa temeljilo na ustnem pogovoru.",
+ "components": [
+  {
+   "component_id": "comp-prose-medicine-explainer-dev-0010",
+   "category": "prose",
+   "start_byte": 2,
+   "end_byte": 354
+  },
+  {
+   "component_id": "comp-code-cpp-dev-0002",
+   "category": "code",
+   "start_byte": 357,
+   "end_byte": 389
+  },
+  {
+   "component_id": "comp-prose-literature-dev-0011",
+   "category": "prose",
+   "start_byte": 392,
+   "end_byte": 646
+  },
+  {
+   "component_id": "comp-prose-education-dev-0004",
+   "category": "prose",
+   "start_byte": 649,
+   "end_byte": 929
+  }
+ ]
+}

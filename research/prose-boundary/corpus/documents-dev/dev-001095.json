@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-001095",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T7-prose-json-prose-latex",
+ "byte_length": 1000,
+ "cp_length": 985,
+ "sha256": "152eef3d87ea44874548ae8c49fa9635bd3ff4a5cd1d4c952ac01ab309f1ecfa",
+ "document": "V izmišljeni razpravi Bralna meja avtorica Eva Brin trdi, da je knjižnost najprej kraj. Ta kraj se ne meri v metrikah (ne v točkah, ne v ocenah), ampak v molčanju. Evropska zvrst, ki jo imenujemo »knjižna pripoved«, se pri njej spaja s slovenskim motivom potovanja. V njeni predstavi bralci ne odpirajo le strani. Odpirajo tudi tisti prostor med imenom in spominom.\n{\"ime\":\"Projekt Reka\",\"razmerje\":\"2,5 m / 0,13\",\"avtorsko\":\"Nevtralna testna vsebina\",\"vzorec\":{\"delež\":\"30 %\",\"opis\":\"_Nevtralno_ https://primer.si/novica\"}}\nNa Korčuli smo imeli dan brez načrtov; namesto tega smo se izprehodili po starem mestnem jedru in poslušali zgodbe o pomorskih potovanjih. V malem gostilniku so ponujali ribo, pečeno v papirju. Po jedi smo poskusili lokalno vino, ki je bilo rahlo sladko. Zvečer je pristan spet oživel, ko so se vrnila plovila. Naslednji zjutraj smo se odločili, da bomo pot nadaljevali po kopnem.\n\\[ \\begin{cases} \\rho_1+\\iota_2=11,\\\\ \\tau_3-\\kappa_4=\\text{Ana} \\end{cases} \\]",
+ "components": [
+  {
+   "component_id": "comp-prose-literature-dev-0005",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 372
+  },
+  {
+   "component_id": "comp-structured-json-dev-0004",
+   "category": "structured",
+   "start_byte": 373,
+   "end_byte": 532
+  },
+  {
+   "component_id": "comp-prose-travel-dev-0004",
+   "category": "prose",
+   "start_byte": 533,
+   "end_byte": 920
+  },
+  {
+   "component_id": "comp-math-bracket-tex-dev-0003",
+   "category": "math",
+   "start_byte": 921,
+   "end_byte": 1000
+  }
+ ]
+}

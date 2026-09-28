@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-000799",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T8-quote-fenced",
+ "byte_length": 857,
+ "cp_length": 844,
+ "sha256": "ca8beee54ad80168260a5443ffe5bbec4109053ce7c1ab042054fe0b824b3e23",
+ "document": "> \"Če bi imeli čas, bi rekla, da je Kranj podcenjeno središče, zlasti v času festivala,\" je povedala Katja, medtem ko je opazovala, kako sonce zahaja nad Ljubljano. Naslednji dan smo se odpravili proti Istrskim vinogradiščem, kjer smo okusili lokalno belo vino in se naučili nekaj o letini 2021, ki je bila znana po svoji odlični kakovosti. `-- Fragment 3: izpisi za osebo`\n```\n#!/usr/bin/env bash\n# Tretji fragment: številska oznaka (test) in ne-ASCII znaki\n# Oseba: Maja, projekt: čokoladni vir\nrazdelek2='razdelek2'\nseStez='seStez'\npotA='src/modul.py'\npotB='docs/vir.txt'\npotC='HRAŠNA_VREDNOST.md'\nnavodilo='**test** *navodila* _podčrtano_'\necho \"razdelek: $razdelek2\"\necho \"seStez: $seStez\"\necho \"potA: $potA\"\necho \"potB: $potB\"\necho \"potC: $potC\"\necho \"$navodilo\"\necho 'url: https://primer.si/koda'\necho 'cena: 3 $'\necho 'backquote: `'\n```",
+ "components": [
+  {
+   "component_id": "comp-prose-travel-dev-0008",
+   "category": "prose",
+   "start_byte": 2,
+   "end_byte": 349
+  },
+  {
+   "component_id": "comp-code-sql-dev-0011",
+   "category": "code",
+   "start_byte": 350,
+   "end_byte": 382
+  },
+  {
+   "component_id": "comp-code-shell-bash-dev-0011",
+   "category": "code",
+   "start_byte": 383,
+   "end_byte": 857
+  }
+ ]
+}

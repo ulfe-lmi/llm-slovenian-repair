@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-000282",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T8-quote-fenced",
+ "byte_length": 771,
+ "cp_length": 760,
+ "sha256": "1285d71468e893570fbc70affc71b413395b3f24ef2c6274a489cc980344f3aa",
+ "document": "> Pri varčevanju ni treba kupovati drage opreme, pogosto zadošča malo potrpežljivosti. Petra je v projektu Skromen koš pokazala, da se lahko v juniju 2023 prihrani denar za en kosilo. »Najprej preglej, kaj že imaš,« je zapisala v dnevniku. `/* Primer 3: vrednost in identifikator */ int main(void) { c`\r\n```\r\n-- Fragment 3: izpisi za osebo\r\nCREATE TABLE izpisi (\r\n  id INT PRIMARY KEY,\r\n  ime TEXT,\r\n  \"razdelek2\" TEXT,\r\n  \"seStez\" TEXT\r\n);\r\nINSERT INTO izpisi (id, ime, \"razdelek2\", \"seStez\")\r\nVALUES (1, 'Ana Breznik', 'razdelek 2', 'žetona: 3 $');\r\nUPDATE izpisi SET \"seStez\" = 'glej https://primer.si/koda in docs/vir.txt';\r\nSELECT ime, \"razdelek2\", \"seStez\" FROM izpisi WHERE ime = 'Ana Breznik';\r\n-- Konec: (oklepaji) *zvezdice* `kodica` _podčrtano_\r\n```",
+ "components": [
+  {
+   "component_id": "comp-prose-everyday-advice-dev-0002",
+   "category": "prose",
+   "start_byte": 2,
+   "end_byte": 248
+  },
+  {
+   "component_id": "comp-code-c-dev-0011",
+   "category": "code",
+   "start_byte": 249,
+   "end_byte": 311
+  },
+  {
+   "component_id": "comp-code-sql-dev-0011",
+   "category": "code",
+   "start_byte": 313,
+   "end_byte": 771
+  }
+ ]
+}

@@ -1,0 +1,47 @@
+{
+ "doc_id": "dev-002990",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T10-randomized",
+ "byte_length": 1042,
+ "cp_length": 1028,
+ "sha256": "dea0d2a6b4a5d4d0d37de0cbd3a7913efcd99c817d7f45cc707334c2db89b3f4",
+ "document": "V šoli zdravja v Trzinu so učenci (ki so sodelovali v projektu Mirni utripi) prebrali, da premalo gibanja lahko spremeni občutek moči in počutje. Takšne spremembe so lahko odziv na vsakdanjo utrujenost. Ko se pri nekem otroku ali odraslem ponovijo, je prav, da jih preveri zdravnik.\n{\"ime\":\"Projekt Gora\",\"nagnjenost\":\"12 %\",\"avtorsko\":\"Nevtralna testna vsebina\",\"debelina\":\"0,3 m\",\"opomba\":\"_Nevtralno_ https://primer.si/novica\"}\n3,5 m\n$$z=3. Ivan Hrib preverja projekt Senca.\nFragment 6: <ul><li>Lokacija A: *glavno_središče* (obseg 15,2 m)</li><li>Lokacija B: _rezervno_področje_ (volumen 0,75 l)</li><li>Lokacija C: *testno_okolje* (URL: <a href=\"https://primer.si/lokacija\">lokacija</a>)</li></ul>\nNekateri gradbeniki (zlasti tisti, ki so sodelovali pri obnovi stolpa Vrt) menijo, da so materiali, ki dolgoročno ohranjajo obliko, prijaznejši za vzdrževanje. Ta pogled, ki ga dokumenti imenujejo mehka vzdržljivost, velja tudi za podporno konstrukcijo in za ojačitve, ki jih je leta 2018 opisala projektna skupina Podravska.",
+ "components": [
+  {
+   "component_id": "comp-prose-medicine-explainer-dev-0002",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 288
+  },
+  {
+   "component_id": "comp-structured-json-dev-0008",
+   "category": "structured",
+   "start_byte": 289,
+   "end_byte": 436
+  },
+  {
+   "component_id": "comp-machine-versions-numbers-units-dev-0001",
+   "category": "machine",
+   "start_byte": 437,
+   "end_byte": 442
+  },
+  {
+   "component_id": "comp-malformed-incomplete-display-dollar-dev-0003",
+   "category": "malformed",
+   "start_byte": 443,
+   "end_byte": 483
+  },
+  {
+   "component_id": "comp-structured-html-dev-0006",
+   "category": "structured",
+   "start_byte": 484,
+   "end_byte": 711
+  },
+  {
+   "component_id": "comp-prose-engineering-dev-0013",
+   "category": "prose",
+   "start_byte": 712,
+   "end_byte": 1042
+  }
+ ]
+}

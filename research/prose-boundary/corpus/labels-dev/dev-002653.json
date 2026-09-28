@@ -1,0 +1,102 @@
+{
+ "doc_id": "dev-002653",
+ "byte_length": 1019,
+ "cp_length": 1000,
+ "regions": [
+  {
+   "start_byte": 0,
+   "end_byte": 255,
+   "start_cp": 0,
+   "end_cp": 253,
+   "component_id": "comp-prose-electronics-dev-0002",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 255,
+   "end_byte": 256,
+   "start_cp": 253,
+   "end_cp": 254,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 256,
+   "end_byte": 259,
+   "start_cp": 254,
+   "end_cp": 257,
+   "component_id": "comp-code-rust-dev-0003",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 259,
+   "end_byte": 260,
+   "start_cp": 257,
+   "end_cp": 258,
+   "component_id": "comp-code-rust-dev-0003",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 260,
+   "end_byte": 595,
+   "start_cp": 258,
+   "end_cp": 582,
+   "component_id": "comp-code-rust-dev-0003",
+   "category": "code",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 595,
+   "end_byte": 596,
+   "start_cp": 582,
+   "end_cp": 583,
+   "component_id": "comp-code-rust-dev-0003",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 596,
+   "end_byte": 599,
+   "start_cp": 583,
+   "end_cp": 586,
+   "component_id": "comp-code-rust-dev-0003",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 599,
+   "end_byte": 600,
+   "start_cp": 586,
+   "end_cp": 587,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 600,
+   "end_byte": 1019,
+   "start_cp": 587,
+   "end_cp": 1000,
+   "component_id": "comp-prose-administration-dev-0002",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  }
+ ],
+ "invariants": {
+  "tiling_complete": true,
+  "no_contradictory_overlaps": true,
+  "cp_range_exact": true
+ }
+}

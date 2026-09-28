@@ -1,0 +1,47 @@
+{
+ "doc_id": "dev-001604",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T10-randomized",
+ "byte_length": 1084,
+ "cp_length": 1059,
+ "sha256": "099794d67226087760eaa7cfe1266e21b36d0669b4a17436d577b916b39da11d",
+ "document": "V kuhinjskem laboratoriju projekta Okusni dnevnik so v začetku 2017 preizkusili tri različne osnove za ovseno kašo, in sicer (a) z medom, (b) z rozinami ter (c) s suhimi breskvami, vendar se je najpogosteje ponovila tista z malo kumina. Pri opombi so uporabili vstavek: „Če ni kumina, vzemi štipanje sladke paprike.“ Rezultat je bil preprosto zapisan v skupni dnevnik.\nPROJEKT=Rdeča dolina\nAVTOR=Janez Peter\nMOČ=1,8 W\nDELNA_MERILA=40 %\nDODATNA_VAR=$drugim_ključem; 0,16\nOPIS=[*demo*, _projekt_, https://primer.si/novica]\n```\nint main(void) { int seStez = 3; char *pot = \"src/modul.py\"; (void)seStez; (void)pot; return 0; } /* Testni fragment: č, š, ž */\n```\n$5 je cena testnega vzorca v projektu Tihi Vrh.\n```bash\n# oseba Luka: meritev 20 mm in število 6\n```\n\nV projektu Nevtralna zdravstvena vsebina 2025 je Ana Kovač pripravila opombo o utrujenosti, ki ima lahko mnogo vzrokov. Ker telo na spremembe odziva različno, je koristno, da se oseba posvetuje z zdravnikom, še posebej če se stanje ponavlja. V takih primerih „splošna razlaga“ ne nadomesti pregleda.",
+ "components": [
+  {
+   "component_id": "comp-prose-cooking-dev-0008",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 377
+  },
+  {
+   "component_id": "comp-structured-env-blocks-dev-0004",
+   "category": "structured",
+   "start_byte": 378,
+   "end_byte": 532
+  },
+  {
+   "component_id": "comp-code-c-dev-0001",
+   "category": "code",
+   "start_byte": 533,
+   "end_byte": 672
+  },
+  {
+   "component_id": "comp-malformed-unmatched-dollar-dev-0001",
+   "category": "malformed",
+   "start_byte": 673,
+   "end_byte": 720
+  },
+  {
+   "component_id": "comp-markdown-fenced-code-dev-0007",
+   "category": "markdown",
+   "start_byte": 721,
+   "end_byte": 775
+  },
+  {
+   "component_id": "comp-prose-medicine-explainer-dev-0006",
+   "category": "prose",
+   "start_byte": 776,
+   "end_byte": 1084
+  }
+ ]
+}

@@ -1,0 +1,41 @@
+{
+ "doc_id": "dev-000108",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T10-randomized",
+ "byte_length": 1021,
+ "cp_length": 1000,
+ "sha256": "602ec0546205856dd75ab60cb88f90fdfd111976741dbe773c4ee06940a5ab83",
+ "document": "V soboto, ko je bilo poleti 24 stopinj, je ekipa izmišljene skupine Brez napetosti v parku izvedla pet minut ogrevanja, nato pa še enajstmetrovski udarec in tri kratke teke. Igralka, ki jo je projekt imenoval Eva, je po tem dejala, da je bila noga rahlo utrujena, vendar da je bil zrak svež. 'Naslednjič bomo dodali še malo plavanja,' je opozorila ob zbiranju opreme. Na koncu so opremo zložili, zapisnik pa sta podpisala le dva člana.\nV testnem projektu <b>Zelena gora</b> je <i>Matej Novak</i> preveril <span>5,4 kg</span> vzorca.<br/>Druga vrednost je 5,8 kg.\necho testni projekt\n{ opis: '*Zelena* _testna_ vsebina', merilo: '3,5 m', vir: https://primer.si/novica }\nSara je pojasnila, da se povprečje včasih zdi napačno, če manjkajo posamezni dnevi. “V takih primerih je bolje reči, da je slika neenakomerna,“ je dodala in pokazala še stolpec z najmanjšo vrednostjo. Skupina se je odločila, da bo za leto 2025 zbrala tudi podatke o vremenu. Tako bo lažje razložila razmerja med posameznimi tedeni.",
+ "components": [
+  {
+   "component_id": "comp-prose-sports-dev-0005",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 442
+  },
+  {
+   "component_id": "comp-markdown-raw-html-dev-0002",
+   "category": "markdown",
+   "start_byte": 443,
+   "end_byte": 569
+  },
+  {
+   "component_id": "comp-machine-shell-commands-dev-0008",
+   "category": "machine",
+   "start_byte": 570,
+   "end_byte": 589
+  },
+  {
+   "component_id": "comp-structured-keyvalue-dev-0006",
+   "category": "structured",
+   "start_byte": 590,
+   "end_byte": 675
+  },
+  {
+   "component_id": "comp-prose-statistics-dev-0005",
+   "category": "prose",
+   "start_byte": 676,
+   "end_byte": 1021
+  }
+ ]
+}

@@ -1,0 +1,112 @@
+{
+ "doc_id": "dev-000048",
+ "byte_length": 1044,
+ "cp_length": 1021,
+ "regions": [
+  {
+   "start_byte": 0,
+   "end_byte": 2,
+   "start_cp": 0,
+   "end_cp": 2,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 2,
+   "end_byte": 318,
+   "start_cp": 2,
+   "end_cp": 316,
+   "component_id": "comp-prose-programming-explainer-dev-0013",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 318,
+   "end_byte": 321,
+   "start_cp": 316,
+   "end_cp": 319,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 321,
+   "end_byte": 322,
+   "start_cp": 319,
+   "end_cp": 320,
+   "component_id": "comp-code-javascript-dev-0004",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 322,
+   "end_byte": 384,
+   "start_cp": 320,
+   "end_cp": 380,
+   "component_id": "comp-code-javascript-dev-0004",
+   "category": "code",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 384,
+   "end_byte": 385,
+   "start_cp": 380,
+   "end_cp": 381,
+   "component_id": "comp-code-javascript-dev-0004",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 385,
+   "end_byte": 388,
+   "start_cp": 381,
+   "end_cp": 384,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 388,
+   "end_byte": 845,
+   "start_cp": 384,
+   "end_cp": 825,
+   "component_id": "comp-prose-history-dev-0012",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 845,
+   "end_byte": 848,
+   "start_cp": 825,
+   "end_cp": 828,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 848,
+   "end_byte": 1044,
+   "start_cp": 828,
+   "end_cp": 1021,
+   "component_id": "comp-prose-administration-dev-0009",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  }
+ ],
+ "invariants": {
+  "tiling_complete": true,
+  "no_contradictory_overlaps": true,
+  "cp_range_exact": true
+ }
+}

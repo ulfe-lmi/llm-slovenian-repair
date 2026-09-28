@@ -1,0 +1,53 @@
+{
+ "doc_id": "dev-001516",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T10-randomized",
+ "byte_length": 1344,
+ "cp_length": 1324,
+ "sha256": "5c61ba1d31b8785490f780e1e6d69c29d864e4270652fc675fda868d521084a7",
+ "document": "Odbor za občinske službe je obravnaval predlog o skrajšanem postopku za izdajo potrdil o prebivališču za študente, ki se vračajo iz tujine in potrebujejo dokazila za postopke v tujini. Ob tem je bil poudarek na tem, da se dokumenti, ki so že elektronsko predloženi, ne smejo ponovno zahtevati brez razloga.\n[arhiv]\nnosilec = 'Zora Kranjčec'\nobseg = '1 GB'\nstarost = '0,13 let'\nopis = '_Neodvisen_ *fragment*'\nvir = 'https://primer.si/novica'\n{\"ime\":\"Projekt Sonce\",\"dolžina\":\"4,2 m\",\"avtorsko\":\"Nevtralna testna vsebina\",\"kvote\":{\"delež\":\"25 %\",\"opomba\":\"**Pregled** https://primer.si/novica\"}}\n[slovenski opis](https://primer.si/stran)\n[slovenski opis 7: Nina 4 m/s](https://primer.si/stran \"Naslov 7\")\n> <https://primer.si/stran>\n- Glavna naloga: Ana Testna, 2 enoti\n  - [ ] Podnaloga: 1 m\n  - [x] Podnaloga: 3 s\nV soboto, ko je bilo poleti 24 stopinj, je ekipa izmišljene skupine Brez napetosti v parku izvedla pet minut ogrevanja, nato pa še enajstmetrovski udarec in tri kratke teke. Igralka, ki jo je projekt imenoval Eva, je po tem dejala, da je bila noga rahlo utrujena, vendar da je bil zrak svež. 'Naslednjič bomo dodali še malo plavanja,' je opozorila ob zbiranju opreme. Na koncu so opremo zložili, zapisnik pa sta podpisala le dva člana.\n`avtorizacija: Mira Kovač; projekt: Gora Bled; opomba = \"testna vsebina\";",
+ "components": [
+  {
+   "component_id": "comp-prose-administration-dev-0004",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 315
+  },
+  {
+   "component_id": "comp-structured-toml-dev-0008",
+   "category": "structured",
+   "start_byte": 316,
+   "end_byte": 451
+  },
+  {
+   "component_id": "comp-structured-json-dev-0005",
+   "category": "structured",
+   "start_byte": 452,
+   "end_byte": 606
+  },
+  {
+   "component_id": "comp-markdown-links-dev-0007",
+   "category": "markdown",
+   "start_byte": 607,
+   "end_byte": 743
+  },
+  {
+   "component_id": "comp-markdown-lists-dev-0006",
+   "category": "markdown",
+   "start_byte": 744,
+   "end_byte": 826
+  },
+  {
+   "component_id": "comp-prose-sports-dev-0005",
+   "category": "prose",
+   "start_byte": 827,
+   "end_byte": 1269
+  },
+  {
+   "component_id": "comp-malformed-unmatched-backtick-dev-0003",
+   "category": "malformed",
+   "start_byte": 1270,
+   "end_byte": 1344
+  }
+ ]
+}

@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-001724",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T9-prose-malformed-prose",
+ "byte_length": 577,
+ "cp_length": 570,
+ "sha256": "03ffe56992c264978aaaf784518a18737d959eaa7138722f7a341b13e6e1055e",
+ "document": "Pri planinskem vzponu po Javorniku v marcu 2023 so bile poti močno zamrznjene, zato priporočam uporabo čevljev z dobrim oprijemom. Vreme je bilo hladno (okrog 5 stopinj pod ničlo), a razgledi so bili nagrajenje vredni.\n<div>\nProjekt Maribor: nevtralna avtorizirana opomba za testni nalog.\nZjutraj, ob sedmih, je skupina iz projekta Koraki brez hitenja obiskala park ob reki, kjer so prehodili pet kilometrov in opravili dve minuti raztezanja. Moški, ki se je v zapisniku imenoval Tomaž, je po premoru rekel, da mu je bilo v kolkih udobneje, čeprav je bil teren blaznjen.",
+ "components": [
+  {
+   "component_id": "comp-prose-travel-dev-0009",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 222
+  },
+  {
+   "component_id": "comp-malformed-partial-html-dev-0003",
+   "category": "malformed",
+   "start_byte": 223,
+   "end_byte": 292
+  },
+  {
+   "component_id": "comp-prose-sports-dev-0004",
+   "category": "prose",
+   "start_byte": 293,
+   "end_byte": 577
+  }
+ ]
+}

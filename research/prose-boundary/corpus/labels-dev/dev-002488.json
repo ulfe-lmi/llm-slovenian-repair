@@ -1,0 +1,102 @@
+{
+ "doc_id": "dev-002488",
+ "byte_length": 836,
+ "cp_length": 813,
+ "regions": [
+  {
+   "start_byte": 0,
+   "end_byte": 323,
+   "start_cp": 0,
+   "end_cp": 315,
+   "component_id": "comp-prose-cooking-dev-0012",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 323,
+   "end_byte": 324,
+   "start_cp": 315,
+   "end_cp": 316,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 324,
+   "end_byte": 327,
+   "start_cp": 316,
+   "end_cp": 319,
+   "component_id": "comp-code-python-dev-0011",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 327,
+   "end_byte": 328,
+   "start_cp": 319,
+   "end_cp": 320,
+   "component_id": "comp-code-python-dev-0011",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 328,
+   "end_byte": 498,
+   "start_cp": 320,
+   "end_cp": 485,
+   "component_id": "comp-code-python-dev-0011",
+   "category": "code",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 498,
+   "end_byte": 499,
+   "start_cp": 485,
+   "end_cp": 486,
+   "component_id": "comp-code-python-dev-0011",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 499,
+   "end_byte": 502,
+   "start_cp": 486,
+   "end_cp": 489,
+   "component_id": "comp-code-python-dev-0011",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 502,
+   "end_byte": 503,
+   "start_cp": 489,
+   "end_cp": 490,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 503,
+   "end_byte": 836,
+   "start_cp": 490,
+   "end_cp": 813,
+   "component_id": "comp-prose-administration-dev-0008",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  }
+ ],
+ "invariants": {
+  "tiling_complete": true,
+  "no_contradictory_overlaps": true,
+  "cp_range_exact": true
+ }
+}

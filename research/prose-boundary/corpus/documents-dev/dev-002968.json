@@ -1,0 +1,41 @@
+{
+ "doc_id": "dev-002968",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T10-randomized",
+ "byte_length": 917,
+ "cp_length": 903,
+ "sha256": "32071ec0b49618abfdfcd20878a32ca0d05edbfe0948646cfa9d1fb3ee907abf",
+ "document": "Pri projektu Zvezdno seme je ekipa iz Maribora preučevala, kako se semena neznane rastline odzivajo na simulirano nočno svetlobo. V zvezku opomb so pisali (v naravnem tonu): »Spominja na polje po dežju, a brez vonja.« V letu 2023 so rezultat zapisali kot zanimivo, vendar še vedno nejasno.\nZaključek: ~~odmetano~~ besedilo 7 točk in 3 kg za Igorja Vovk.\n- Glavna naloga: Ana Testna, 2 enoti\n  - [ ] Podnaloga: 1 m\n  - [x] Podnaloga: 3 s\n{\"ime\":\"Projekt Jabolko\",\"faza\":\"Vzdrževanje\",\"avtorsko\":\"Nevtralna testna vsebina\",\"enote\":{\"temperatura\":\"21,5 °C\",\"debelina\":\"0,2 m\",\"delež\":\"45 %\"},\"opomba\":\"**Nalaganje** https://primer.si/novica\"}\nV projektu Lipov most je na mostni konstrukciji pri Ljubljani prišlo do razpok, ki so se pojavile po zimskem zamrzavanju. Inga Novak je zato zahtevala dodatne meritve korozije (zlasti na nosilnih nosilcih) in preizkus jeklenih elementov, saj je »varnost najprej«.",
+ "components": [
+  {
+   "component_id": "comp-prose-science-dev-0010",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 295
+  },
+  {
+   "component_id": "comp-markdown-strikethrough-dev-0008",
+   "category": "markdown",
+   "start_byte": 296,
+   "end_byte": 361
+  },
+  {
+   "component_id": "comp-markdown-lists-dev-0006",
+   "category": "markdown",
+   "start_byte": 362,
+   "end_byte": 444
+  },
+  {
+   "component_id": "comp-structured-json-dev-0003",
+   "category": "structured",
+   "start_byte": 445,
+   "end_byte": 650
+  },
+  {
+   "component_id": "comp-prose-engineering-dev-0007",
+   "category": "prose",
+   "start_byte": 651,
+   "end_byte": 917
+  }
+ ]
+}

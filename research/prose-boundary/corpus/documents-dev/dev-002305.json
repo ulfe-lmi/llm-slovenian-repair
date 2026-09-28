@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-002305",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T7-prose-json-prose-latex",
+ "byte_length": 994,
+ "cp_length": 979,
+ "sha256": "80eb1c20cf763cb7e5ceff0631c91bfa2debca784ea54d9ca9e0828ea43690e4",
+ "document": "Luka je v projektu Soba za okuse v soboto zjutraj odprl lonček in vonj po karameliziranih čebulicah je zapolnil celo sobo. Sol je dodal šele ob koncu, ker se je spomnil na zgodnjo napako. Nato je v dnevnik zapisal samo eno opombo: „Pri kuhanju se ne mudi.“\n{\"ime\":\"Projekt Lipa\",\"cilj\":\"Nalaganje podatkov 25 %\",\"avtorsko\":\"Nevtralna testna vsebina\",\"merila\":{\"razmerje\":\"3,5 m / 0,13\",\"opomba\":\"**Test** https://primer.si/novica\"}}\nV kopeli na Trgu v novembru 2024 je potekal kratki rekreativni plavalni tečaj, v katerem so trije poskusi (plavanje na hrbtno, na prsi in s sproščeno dihanjem) trajali skupaj dvajset minut. Udeleženka, ki jo je projekt opisal kot Maja, je po prvem krogu dejala, da je voda morda hladnejša, kot se je zdelo. 'Največja korist je, da se je telo pomirilo,' je zaključila brez vsakršne pohvale.\n\\begin{equation} \\text{Testni projekt Nika} \\; : \\; \\delta_7=\\frac{1}{2} \\rho_7 \\eta_7 \\Rightarrow \\rho_7=4, \\eta_7=5 \\Rightarrow \\delta_7=10 \\end{equation}",
+ "components": [
+  {
+   "component_id": "comp-prose-cooking-dev-0010",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 263
+  },
+  {
+   "component_id": "comp-structured-json-dev-0001",
+   "category": "structured",
+   "start_byte": 264,
+   "end_byte": 439
+  },
+  {
+   "component_id": "comp-prose-sports-dev-0003",
+   "category": "prose",
+   "start_byte": 440,
+   "end_byte": 837
+  },
+  {
+   "component_id": "comp-math-equation-env-dev-0007",
+   "category": "math",
+   "start_byte": 838,
+   "end_byte": 994
+  }
+ ]
+}

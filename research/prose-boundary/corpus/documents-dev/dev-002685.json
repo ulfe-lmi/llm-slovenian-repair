@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-002685",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T2-prose-math-prose",
+ "byte_length": 601,
+ "cp_length": 583,
+ "sha256": "ab2a841dbec43776d840a826c6cbc2e5f0e7f83ce0b6d7a0f9f93930024d92c1",
+ "document": "V sklopu testnega projekta je Peter opazoval skupino starejših udeležencev. Njegova skupina je začela s petminutnim segrevanjem. Nato je izvedla tri krogove po travi. „Sodelavec,“ je vodja rekel, „v prihodnji uri bomo dodali še eno zmerno aktivnost.“\n\\text{Nina}\\begin{matrix}11&12\\\\13&14\\end{matrix}\nV šoli zdravja v Trzinu so učenci (ki so sodelovali v projektu Mirni utripi) prebrali, da premalo gibanja lahko spremeni občutek moči in počutje. Takšne spremembe so lahko odziv na vsakdanjo utrujenost. Ko se pri nekem otroku ali odraslem ponovijo, je prav, da jih preveri zdravnik.",
+ "components": [
+  {
+   "component_id": "comp-prose-sports-dev-0010",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 262
+  },
+  {
+   "component_id": "comp-math-matrices-dev-0003",
+   "category": "math",
+   "start_byte": 263,
+   "end_byte": 312
+  },
+  {
+   "component_id": "comp-prose-medicine-explainer-dev-0002",
+   "category": "prose",
+   "start_byte": 313,
+   "end_byte": 601
+  }
+ ]
+}

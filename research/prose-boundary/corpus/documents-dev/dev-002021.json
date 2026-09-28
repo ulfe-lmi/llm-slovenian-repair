@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-002021",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T9-prose-malformed-prose",
+ "byte_length": 677,
+ "cp_length": 658,
+ "sha256": "8aca75c19e4112a7d7b02f93659fef15324e48481c0f70dfc2ff711b223b07c2",
+ "document": "Mare je v učbeniku zapisal, da so upornosti kot omejevalniki hitrosti v malem svetu elektronike, in v vnosih iz leta 2011 je opozoril: ”Ne pozabi na polariteto baterij, sicer lučka ne bo delovala.“ Ko je dodal dodatno upornost, se je svetloba umirila, kot je želel.\nVelik razpon pri mostu Pričakovanje je bil glavna težava. »Vzdržljivost gre pred estetiko,« je zapisal Marko Zupančič. V letu 2023 so namestili cevne stebre s premerom 1,2 metra in zagotovili dostop do ojačitve. Najmanj očitno je bilo izravnati vrzeli med betonskimi ploščami, saj bi sicer vozne površine hitro postale neravnine.\n`avtorizacija: Ana Novak; projekt: Modra Reka; izpis = \"test\";",
+ "components": [
+  {
+   "component_id": "comp-prose-electronics-dev-0007",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 272
+  },
+  {
+   "component_id": "comp-prose-engineering-dev-0012",
+   "category": "prose",
+   "start_byte": 273,
+   "end_byte": 614
+  },
+  {
+   "component_id": "comp-malformed-unmatched-backtick-dev-0001",
+   "category": "malformed",
+   "start_byte": 615,
+   "end_byte": 677
+  }
+ ]
+}

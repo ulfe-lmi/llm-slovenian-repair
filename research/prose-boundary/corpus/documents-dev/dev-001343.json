@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-001343",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T2-prose-math-prose",
+ "byte_length": 806,
+ "cp_length": 785,
+ "sha256": "e053c54534e2dd0d53241d7968f8b11f343073d24fcb5b48e12254e4157e661d",
+ "document": "Kratki nasvet: krpo za pregrco namakaj v mrzli vodi in jo potem stisni, da pregrca ne pusti madežev. (Sredstvo iz stekleničke s štopalko je morda dražje, a zadošča za večkrat.) Če želiš manj smeti, steklenice operi in jih odnesi v zbirni center.\n\\begin{align} \\alpha_2(\\text{Lipa}) &= \\beta_2 + \\gamma_2 \\\\ \\delta_2 &= \\epsilon_2 \\cdot \\zeta_2 \\\\ \\eta_2 &= \\theta_2 \\times \\lambda_2 \\end{align}\nV laboratoriju projekta Merjač (stanica 4) je dr. Ana Kovač zapisala: »Med segrevanjem, in sicer ob dveh tisoč stopinjah Celzija, se material obnaša, kot bi šlo za tekočino,« in pojasnila, zakaj poskusne vzorce ob segrevanju obnašajo nepričakovano elastičnost. Rezultati iz leta 2021 so nato odprli pot k novi metodologiji, v kateri je pomembna vsaka mera, tudi tista, ki se zdi nesmiselna.",
+ "components": [
+  {
+   "component_id": "comp-prose-everyday-advice-dev-0008",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 255
+  },
+  {
+   "component_id": "comp-math-align-env-dev-0002",
+   "category": "math",
+   "start_byte": 256,
+   "end_byte": 404
+  },
+  {
+   "component_id": "comp-prose-science-dev-0011",
+   "category": "prose",
+   "start_byte": 405,
+   "end_byte": 806
+  }
+ ]
+}

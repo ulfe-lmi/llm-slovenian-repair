@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-001118",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T8-quote-fenced",
+ "byte_length": 780,
+ "cp_length": 764,
+ "sha256": "df4f89a50c33e65499ba35e13035be16a768920309c05fd63d94aeef935424ba",
+ "document": "> Odbor za občinske službe je obravnaval predlog o skrajšanem postopku za izdajo potrdil o prebivališču za študente, ki se vračajo iz tujine in potrebujejo dokazila za postopke v tujini. Ob tem je bil poudarek na tem, da se dokumenti, ki so že elektronsko predloženi, ne smejo ponovno zahtevati brez razloga. `/* Fragment 3: testni primer, vir https://primer.si/koda, po`\n```\n/* Testni fragment 6: izmišljena oseba Petra, projekt Voda. */ SELECT 'Petra' AS `ime`, '6,40 $' AS `cena`, 'https://primer.si/koda' AS `url`, 'docs/nova.txt' AS `pot`, TRIM('*poudarek* in _podčrtano_') AS `opomba`, 'razdelek2' AS `razdelek2`, 'seStez' AS `seStez`, 'š' AS `HRAŠNA_VREDNOST` FROM (SELECT 6 AS `en`) AS `t` WHERE (`t`.`en` = 6);\n```\n Pozor: é (dekompouziran znakovni niz).",
+ "components": [
+  {
+   "component_id": "comp-prose-administration-dev-0004",
+   "category": "prose",
+   "start_byte": 2,
+   "end_byte": 317
+  },
+  {
+   "component_id": "comp-code-cpp-dev-0011",
+   "category": "code",
+   "start_byte": 318,
+   "end_byte": 380
+  },
+  {
+   "component_id": "comp-code-sql-dev-0006",
+   "category": "code",
+   "start_byte": 381,
+   "end_byte": 736
+  }
+ ]
+}

@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-002751",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T2-prose-math-prose",
+ "byte_length": 604,
+ "cp_length": 585,
+ "sha256": "90f5c079cb687c981b622f8f7c0db0a629be6c4adae319b8c1fff5f06c084b46",
+ "document": "Varčevanje v hiši se pokaže tudi pri majhnih stvareh, rekel bi, pri svetlobi v kopalnici. Luka je v projektu Varna hiša zapisal: »Luč ne pomeni velikega stroška, če jo ob koncu dneva ugasneš.«\n\\[ \\begin{cases} \\alpha_1+2\\beta_2=7,\\\\ 3\\gamma_1-\\delta_2=\\text{Ljubljana},\\\\ \\eta_3\\zeta_4=12 \\end{cases} \\]\nV izmišljenem projektu Knjižna mreža preverjamo, kako spomin spreminja prostor. Izmišljeni slovenski avtor Matej Zupan v romanu iz leta 2018 zapiše: »Hiša je v megli, a jezik ostane.« To stisko je mogoče primerjati z evropsko prozo, v kateri tihi vnos pogosto postane glavni motiv.",
+ "components": [
+  {
+   "component_id": "comp-prose-everyday-advice-dev-0004",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 202
+  },
+  {
+   "component_id": "comp-math-bracket-tex-dev-0001",
+   "category": "math",
+   "start_byte": 203,
+   "end_byte": 313
+  },
+  {
+   "component_id": "comp-prose-literature-dev-0006",
+   "category": "prose",
+   "start_byte": 314,
+   "end_byte": 604
+  }
+ ]
+}

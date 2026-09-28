@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-000182",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T7-prose-json-prose-latex",
+ "byte_length": 796,
+ "cp_length": 789,
+ "sha256": "23b9816ac66f337f4f05b84d90da27524b357e993ab0437cca5a0ba077df47c3",
+ "document": "V Ljubljani sem se s projektom Zeleni otok podal h Trgu republike (nekaj metrov od Kamnitega mostu). Na dvorišču so nas sprejeli z rahlim zamikom, saj je bilo dvigalo zasedeno. V razstavi smo videli modele, ki so prikazovali potovanja po reki od 1980-ih let. Popoldne smo se odločili za kavo ob trgu, medtem ko so se otroci igrali v parku.\r\n{\"ime\":\"Oseba Miha\",\"dolžina\":\"1,8 m\",\"avtorsko\":\"Nevtralna testna vsebina\",\"razmerje\":\"0,13\",\"opomba\":\"*Izmišljena oseba* https://primer.si/novica\"}\r\nAnja je v opombi zapisala, da so razmerja med dohodki in izdatki (v mesecu maju in juniju) nekoliko drugačna kot lani. Povprečje ni pokazalo velike spremembe, vendar je posamezen teden odstopil, kar je pritegnilo pozornost ekipi.\r\n\\[ \\begin{bmatrix} \\psi_1 & 3 \\\\ -7 & \\text{Bled} \\end{bmatrix} \\]",
+ "components": [
+  {
+   "component_id": "comp-prose-travel-dev-0003",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 342
+  },
+  {
+   "component_id": "comp-structured-json-dev-0006",
+   "category": "structured",
+   "start_byte": 344,
+   "end_byte": 495
+  },
+  {
+   "component_id": "comp-prose-statistics-dev-0002",
+   "category": "prose",
+   "start_byte": 497,
+   "end_byte": 728
+  },
+  {
+   "component_id": "comp-math-bracket-tex-dev-0004",
+   "category": "math",
+   "start_byte": 730,
+   "end_byte": 796
+  }
+ ]
+}

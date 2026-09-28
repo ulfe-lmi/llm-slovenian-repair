@@ -1,0 +1,41 @@
+{
+ "doc_id": "dev-002682",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T10-randomized",
+ "byte_length": 791,
+ "cp_length": 769,
+ "sha256": "3fce684f96a59a2405f34ed433cdb07eb83f05a65a4f075ffd06b1a0869332c2",
+ "document": "V testnem projektu Svetilka 2024 so učenci preizkusili baterijo tipa AA, sklep z ročico in upornost z oranžnim pasom. Ko so sklep odprli, se utripalka utihnila, čeprav je komponenta še vedno rahlo toplila (tudi pri šibkem toku). V dnevniku so zapisali: „Sij je enakomeren, dokler prst ne premakne ročice.“\r\n/usr/bin/orodje /var/log/dnevnik.txt\r\n1. Kontrola A: Projekt Jabljana, 15 W\r\n2. Kontrola B: Projekt Lipa, 30 W\r\nV laboratoriju so testirali nove ojačitve iz armirnega jekla, ki naj bi izboljšale odpornost proti utrujanju. „To ni le vprašanje moči, je tudi vprašanje vzdržljivosti“, je poudarila inženirka Ana Vidmar. Rezultati so bili shranjeni v interni projekt (Mostovna).\r\n~~~ Testni projekt Gaj: nevtralna vsebina za preizkus shranjevanja, avtor Marko Zupan.",
+ "components": [
+  {
+   "component_id": "comp-prose-electronics-dev-0003",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 316
+  },
+  {
+   "component_id": "comp-machine-posix-paths-dev-0002",
+   "category": "machine",
+   "start_byte": 318,
+   "end_byte": 354
+  },
+  {
+   "component_id": "comp-markdown-lists-dev-0007",
+   "category": "markdown",
+   "start_byte": 356,
+   "end_byte": 428
+  },
+  {
+   "component_id": "comp-prose-engineering-dev-0002",
+   "category": "prose",
+   "start_byte": 430,
+   "end_byte": 703
+  },
+  {
+   "component_id": "comp-malformed-unclosed-fence-dev-0002",
+   "category": "malformed",
+   "start_byte": 705,
+   "end_byte": 791
+  }
+ ]
+}

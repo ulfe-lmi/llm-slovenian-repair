@@ -1,0 +1,47 @@
+{
+ "doc_id": "dev-000801",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T10-randomized",
+ "byte_length": 1256,
+ "cp_length": 1237,
+ "sha256": "c89ce98989d1d7dfb603526431605140d2d033699b7967628ce74e32cb1ad531",
+ "document": "V testnem projektu Trst je Nina, ki je bila ravno nova v moštvi, povzela vse tri pojme. Spremenljivka hrani stanje, zanka ponavlja korake, funkcija pa skupine stvari. Tisti vstavek je bil v pogovoru preprost: najprej razloži, nato pokaži primer.\nProjekt Testni Modul: Anja Kovač preverja povezavo <https://primer.si/stran> in kontakt <pošta@primer.si> pri temperaturi 20 °C. Vsebuje 3 korake in 10 m poti.\n0.13.4, 0,9999\n```\n// Testni modul (č, š, ž)\nfunction seStez(a, b) {\n  return (a + b) * 1;\n}\nconst naslov = \"Opomba: **pomembno** in _podčrtana_\";\nconst besedilo = `Cena: $ 1,25 za razdelek2`;\nconst povezava = \"https://primer.si/koda\";\nconst pot = \"src/modul.py\";\nconst vir = \"docs/vir.txt\";\nconst HRAŠNA_VREDNOST = 10;\nconst rezultat = seStez(HRAŠNA_VREDNOST, 5);\nconsole.log(naslov, besedilo, povezava, pot, vir, rezultat);\n// konec fragmenta\n```\n$$z=3. Ivan Hrib preverja projekt Senca.\nLuka je v vaji Zimska razpotje (2021) rekel: „Spremenljivke so imena, ki jih poznamo kot kratek dom za spremembe.“ Medtem ko je zanka štel korake do prvega snega, je funkcija poskrbela za isti preizkus, ne da bi ponovil vse korake. To je pomembno, pravi on, ker program postane lažje berljiv. (Tudi kratki vstavki pomagajo razložiti pomene.)",
+ "components": [
+  {
+   "component_id": "comp-prose-programming-explainer-dev-0004",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 248
+  },
+  {
+   "component_id": "comp-markdown-autolinks-dev-0001",
+   "category": "markdown",
+   "start_byte": 249,
+   "end_byte": 411
+  },
+  {
+   "component_id": "comp-machine-versions-numbers-units-dev-0006",
+   "category": "machine",
+   "start_byte": 412,
+   "end_byte": 426
+  },
+  {
+   "component_id": "comp-code-javascript-dev-0009",
+   "category": "code",
+   "start_byte": 427,
+   "end_byte": 866
+  },
+  {
+   "component_id": "comp-malformed-incomplete-display-dollar-dev-0003",
+   "category": "malformed",
+   "start_byte": 867,
+   "end_byte": 907
+  },
+  {
+   "component_id": "comp-prose-programming-explainer-dev-0012",
+   "category": "prose",
+   "start_byte": 908,
+   "end_byte": 1256
+  }
+ ]
+}

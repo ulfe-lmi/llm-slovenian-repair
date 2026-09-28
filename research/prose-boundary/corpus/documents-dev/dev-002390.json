@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-002390",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T4-heading-prose-table",
+ "byte_length": 503,
+ "cp_length": 494,
+ "sha256": "4ddd2e10f7752fe373989d8cfcdca334967c1b950558ae4becc556f1b5240eb3",
+ "document": "## Priprava na državni izpit za odrasle je potekala mirno (trij\nV šolski geometriji se pogosto začne pri oblikah, ki jih učenci prepoznajo okoli sebe (okna, ure, škatle). Lucija, ki sodeluje v projektu Oblike in prostori, povpraša, kdaj se tri črte lahko imenujejo stranice trikotnika. Naslednji dan skupina iz Novega mesta pokaže, kako se spremeni oblika ob premiku vrhov.\n| Opis | Vzorček |\n| --- | --- |\n| Zimska juha je pri kuhanju zahtevala mir | --vhod tabela/dokumenti.csv, --izhod izp |",
+ "components": [
+  {
+   "component_id": "comp-prose-education-dev-0013",
+   "category": "prose",
+   "start_byte": 3,
+   "end_byte": 64
+  },
+  {
+   "component_id": "comp-prose-math-explainer-dev-0013",
+   "category": "prose",
+   "start_byte": 65,
+   "end_byte": 381
+  },
+  {
+   "component_id": "comp-prose-cooking-dev-0005",
+   "category": "prose",
+   "start_byte": 418,
+   "end_byte": 458
+  },
+  {
+   "component_id": "comp-machine-cli-flags-dev-0006",
+   "category": "machine",
+   "start_byte": 461,
+   "end_byte": 501
+  }
+ ]
+}

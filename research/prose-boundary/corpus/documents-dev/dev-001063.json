@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-001063",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T8-quote-fenced",
+ "byte_length": 549,
+ "cp_length": 535,
+ "sha256": "b30fa14e8e63183dd9e60e4787db9477b6481636ca6959f77088253c22109a5a",
+ "document": "> Na koncu sem za projekt »Mali raziskovalci« zapisala, da je pomembno pojasniti, zakaj je razmerje enako. Učenci, ki so imeli raje praktične naloge, so pri tem razumeli, da je geometrija lahko kot igranje s ploščicami. (To je bilo dovolj za naslednji pogovor o oblikah.) `int main(void) { char *znaki = \"Znaki: č, š, ž\"; char *pot =`\n```\n// Testni podatki za osebo Ana.\nconst HRAŠNA_VREDNOST: i32 = 7;\nfn razdelek2(seStez: &str) -> String {\n    let vrednost = HRAŠNA_VREDNOST;\n    format!(\"podčrtano *{seStez}* in {vrednost} €\")\n}\n```",
+ "components": [
+  {
+   "component_id": "comp-prose-math-explainer-dev-0005",
+   "category": "prose",
+   "start_byte": 2,
+   "end_byte": 277
+  },
+  {
+   "component_id": "comp-code-c-dev-0008",
+   "category": "code",
+   "start_byte": 278,
+   "end_byte": 343
+  },
+  {
+   "component_id": "comp-code-rust-dev-0010",
+   "category": "code",
+   "start_byte": 344,
+   "end_byte": 549
+  }
+ ]
+}

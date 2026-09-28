@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-001557",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T7-prose-json-prose-latex",
+ "byte_length": 881,
+ "cp_length": 852,
+ "sha256": "438cd883ce2838430742f22e1017a9de3d250d73b309d2e066b26aaeb9de47fe",
+ "document": "V izmišljenem raziskovalnem projektu “Arhiv Dravskih poti” (nevtralna testna zbirka) so zapisi o potovanjih po Dravi prikazali, kako so meje med skupnostmi spreminjale spomin na preteklost. Letnica 1918 je postala mejni simbol. Avtorica Ana Kralj je v vnosu zapisala (po mnenju uredništva), da je “zgodovina” večinoma molk med letnicami.\r\n{\"ime\":\"Oseba Miha\",\"dolžina\":\"1,8 m\",\"avtorsko\":\"Nevtralna testna vsebina\",\"razmerje\":\"0,13\",\"opomba\":\"*Izmišljena oseba* https://primer.si/novica\"}\r\nOb projektnem srečanju je Marko dejal: „Povprečje je koristno, včasih pa skrije, kaj se res dogaja.“ Skupina je nato primerjala še največje in najmanjše vrednosti, da bi imela širši vtis. Tudi brez zapletenih računov so prišli do zaključka, da so razmere v zadnjih dveh letih postopoma stabilnejše.\r\n\\(\\dfrac{11}{12}+\\frac{\\rho}{\\sigma}=\\text{Projekt Javornik}\\)",
+ "components": [
+  {
+   "component_id": "comp-prose-history-dev-0011",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 348
+  },
+  {
+   "component_id": "comp-structured-json-dev-0006",
+   "category": "structured",
+   "start_byte": 350,
+   "end_byte": 501
+  },
+  {
+   "component_id": "comp-prose-statistics-dev-0003",
+   "category": "prose",
+   "start_byte": 503,
+   "end_byte": 817
+  },
+  {
+   "component_id": "comp-math-fractions-dev-0006",
+   "category": "math",
+   "start_byte": 819,
+   "end_byte": 881
+  }
+ ]
+}

@@ -1,0 +1,102 @@
+{
+ "doc_id": "dev-002030",
+ "byte_length": 878,
+ "cp_length": 861,
+ "regions": [
+  {
+   "start_byte": 0,
+   "end_byte": 195,
+   "start_cp": 0,
+   "end_cp": 193,
+   "component_id": "comp-prose-cooking-dev-0011",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 195,
+   "end_byte": 196,
+   "start_cp": 193,
+   "end_cp": 194,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 196,
+   "end_byte": 355,
+   "start_cp": 194,
+   "end_cp": 352,
+   "component_id": "comp-structured-json-dev-0004",
+   "category": "structured",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 355,
+   "end_byte": 356,
+   "start_cp": 352,
+   "end_cp": 353,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 356,
+   "end_byte": 815,
+   "start_cp": 353,
+   "end_cp": 798,
+   "component_id": "comp-prose-computing-dev-0010",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 815,
+   "end_byte": 816,
+   "start_cp": 798,
+   "end_cp": 799,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 816,
+   "end_byte": 818,
+   "start_cp": 799,
+   "end_cp": 801,
+   "component_id": "comp-math-fractions-dev-0006",
+   "category": "math",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 818,
+   "end_byte": 876,
+   "start_cp": 801,
+   "end_cp": 859,
+   "component_id": "comp-math-fractions-dev-0006",
+   "category": "math",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 876,
+   "end_byte": 878,
+   "start_cp": 859,
+   "end_cp": 861,
+   "component_id": "comp-math-fractions-dev-0006",
+   "category": "math",
+   "role": "NEUTRAL",
+   "template_owned": false
+  }
+ ],
+ "invariants": {
+  "tiling_complete": true,
+  "no_contradictory_overlaps": true,
+  "cp_range_exact": true
+ }
+}

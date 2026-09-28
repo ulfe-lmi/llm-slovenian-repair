@@ -1,0 +1,67 @@
+{
+ "doc_id": "e05",
+ "byte_length": 47,
+ "cp_length": 47,
+ "invariants": {
+  "tiling_complete": true,
+  "no_contradictory_overlaps": true,
+  "cp_range_exact": true
+ },
+ "regions": [
+  {
+   "start_byte": 0,
+   "end_byte": 9,
+   "start_cp": 0,
+   "end_cp": 9,
+   "component_id": "template",
+   "category": "template",
+   "role": "PROSE",
+   "label_source": "construction",
+   "template_owned": true
+  },
+  {
+   "start_byte": 9,
+   "end_byte": 16,
+   "start_cp": 9,
+   "end_cp": 16,
+   "component_id": "defect-008h-e05",
+   "category": "structured",
+   "role": "PROTECTED",
+   "label_source": "construction",
+   "template_owned": false
+  },
+  {
+   "start_byte": 16,
+   "end_byte": 17,
+   "start_cp": 16,
+   "end_cp": 17,
+   "component_id": "template",
+   "category": "template",
+   "role": "NEUTRAL",
+   "label_source": "construction",
+   "template_owned": true
+  },
+  {
+   "start_byte": 17,
+   "end_byte": 46,
+   "start_cp": 17,
+   "end_cp": 46,
+   "component_id": "defect-008h-e05",
+   "category": "structured",
+   "role": "PROSE",
+   "label_source": "construction",
+   "template_owned": false
+  },
+  {
+   "start_byte": 46,
+   "end_byte": 47,
+   "start_cp": 46,
+   "end_cp": 47,
+   "component_id": "template",
+   "category": "template",
+   "role": "NEUTRAL",
+   "label_source": "construction",
+   "template_owned": true
+  }
+ ]
+}

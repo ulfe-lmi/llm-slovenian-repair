@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-001330",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T11-interactions",
+ "byte_length": 1073,
+ "cp_length": 1044,
+ "sha256": "4f2addb198be422daceee89dcd820abc5c268fae66dd477206eee17f13e396ef",
+ "document": "`/* Testni fragment 1: izmišljena oseba Maja, projekt Roža. *`.\n```\nfn povzetek2(seStez: bool) -> String { /* Testni projekt Lipa: č, š, ž, **poudarek** in _podčrtano_ */ let razdelek2 = 2; let besedilo = format!(\"_Podčrtano_ ({} $, `{}`)\", razdelek2, \"ž\"); let pot = \"docs/vir.txt\"; let url = \"https://primer.si/koda\"; format!(\"{} | {} | {} | {}\", seStez, besedilo, pot, url) }\n# komentar z \\frac{a}{b}\n```\nOdbor za občinske službe je obravnaval predlog o skrajšanem postopku za izdajo potrdil o prebivališču za študente, ki se vračajo iz tujine in potrebujejo dokazila za postopke v tujini. Ob tem je bil poudarek na tem, da se dokumenti, ki so že elektronsko predloženi, ne smejo ponovno zahtevati brez razloga.\nVelik razpon pri mostu Pričakovanje je bil glavna težava. »Vzdržljivost gre pred estetiko,« je zapisal Marko Zupančič. V letu 2023 so namestili cevne stebre s premerom 1,2 metra in zagotovili dostop do ojačitve. Najmanj očitno je bilo izravnati vrzeli med betonskimi ploščami, saj bi sicer vozne površine hitro postale neravnine.",
+ "components": [
+  {
+   "component_id": "comp-code-sql-dev-0001",
+   "category": "code",
+   "start_byte": 0,
+   "end_byte": 64
+  },
+  {
+   "component_id": "comp-code-rust-dev-0002",
+   "category": "code",
+   "start_byte": 66,
+   "end_byte": 415
+  },
+  {
+   "component_id": "comp-prose-administration-dev-0004",
+   "category": "prose",
+   "start_byte": 416,
+   "end_byte": 731
+  },
+  {
+   "component_id": "comp-prose-engineering-dev-0012",
+   "category": "prose",
+   "start_byte": 732,
+   "end_byte": 1073
+  }
+ ]
+}

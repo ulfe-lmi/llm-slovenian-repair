@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-001519",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T2-prose-math-prose",
+ "byte_length": 943,
+ "cp_length": 927,
+ "sha256": "f32474411185158fbc1dd70a8cb31b55434d8f2373ded8aac9df04ec6afbfdf4",
+ "document": "V arhivu projekta Stare potje je bil najden list, na katerem piše o izletu do izvira leta 1807. Po besedah urednice Nine Mlakar je bil povzetek kratek, vendar dovolj jasen, da si lahko bralci predstavljajo skupino, ki je imela osem potnikov in enega psa. Delček zemljevida, prilepljen v isti zvezki, kaže zanko, ki je merila okoli trideset kilometrov.\n\\begin{equation}\\begin{aligned}E_1 &= \\alpha_1 \\cdot \\beta_1 + \\gamma_1 \\text{Ljubljana} \\\\H_1 &= \\lambda_1 \\Delta_1 \\text{Ana Kovač}\\end{aligned}\\end{equation}\nV starejši knjižnici, kjer so po projektu Omrežje leta 2018 posodobili povezave, je omrežje, ki ga je sestavil tehnični vodja Janez, še vedno precej zanesljivo, čeprav so nekatere točke brezžičnega dostopa starejše. Ko so v oktobru zamenjali enega od usmerjevalnikov, so zaposleni opazili, da je povezava na oddaljeni strani (v sosednjem nadstropju) postala hitrejša, kar je po mnenju urednice Tine vsekakor dobro.",
+ "components": [
+  {
+   "component_id": "comp-prose-history-dev-0010",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 354
+  },
+  {
+   "component_id": "comp-math-aligned-env-dev-0001",
+   "category": "math",
+   "start_byte": 355,
+   "end_byte": 516
+  },
+  {
+   "component_id": "comp-prose-computing-dev-0013",
+   "category": "prose",
+   "start_byte": 517,
+   "end_byte": 943
+  }
+ ]
+}

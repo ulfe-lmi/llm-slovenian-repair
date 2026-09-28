@@ -1,0 +1,82 @@
+{
+ "doc_id": "dev-001079",
+ "byte_length": 790,
+ "cp_length": 777,
+ "regions": [
+  {
+   "start_byte": 0,
+   "end_byte": 457,
+   "start_cp": 0,
+   "end_cp": 449,
+   "component_id": "comp-prose-administration-dev-0007",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 457,
+   "end_byte": 458,
+   "start_cp": 449,
+   "end_cp": 450,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 458,
+   "end_byte": 459,
+   "start_cp": 450,
+   "end_cp": 451,
+   "component_id": "comp-math-matrices-dev-0003",
+   "category": "math",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 459,
+   "end_byte": 463,
+   "start_cp": 451,
+   "end_cp": 455,
+   "component_id": "comp-math-matrices-dev-0003",
+   "category": "math",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 463,
+   "end_byte": 507,
+   "start_cp": 455,
+   "end_cp": 499,
+   "component_id": "comp-math-matrices-dev-0003",
+   "category": "math",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 507,
+   "end_byte": 508,
+   "start_cp": 499,
+   "end_cp": 500,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 508,
+   "end_byte": 790,
+   "start_cp": 500,
+   "end_cp": 777,
+   "component_id": "comp-prose-travel-dev-0005",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  }
+ ],
+ "invariants": {
+  "tiling_complete": true,
+  "no_contradictory_overlaps": true,
+  "cp_range_exact": true
+ }
+}

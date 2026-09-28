@@ -1,0 +1,68 @@
+[
+ {
+  "case_id": "nat-algorithm-python-dev-01",
+  "scenario": "ns-algorithm-python",
+  "scenario_index": 1,
+  "instance": "dev",
+  "fragment": "Raziščem binarno iskanje, ki v razvrščeni zanki hitro najde element. V izmišljenem projektu Knjižnica Sončni vrh ga uporablja Maja Zupan, da v katalogu z 800 leti izdaje najde knjigo v največ devetih korakih. Algoritem vedno raziskuje sredino trenutnega podniza in odvrže polovico, zato je hitrejši od linearnega pregleda.\n\nKoraki:\n- preverjamo, da je seznam razvrščen,\n- določimo levo in desno mejo,\n- izračunamo sredino,\n- zožimo interval ali končamo.\n\n| korak | levi | desni | sredina |\n|---|---:|---:|---:|\n| 1 | 0 | 5 | 2 |\n| 2 | 3 | 5 | 4 |\n| 3 | 3 | 3 | 3 |\n\nPython:\n\n```python\ndef binarno_iskanje(seznam, cilj):\n    levi = 0\n    desni = len(seznam) - 1\n    while levi <= desni:\n        sredina = (levi + desni) // 2\n        if seznam[sredina] == cilj:\n            return sredina\n        elif seznam[sredina] < cilj:\n            levi = sredina + 1\n        else:\n            desni = sredina - 1\n    return -1\n\nleta = [1998, 2001, 2007, 2011, 2015, 2020]\nprint(binarno_iskanje(leta, 2011))\n```\n\nKoda izpiše 3, kar ustreza letu 2011. Maja s tem prihrani čas pri večjih seznamih, ker število primerjav raste logaritemsko, ne linearno.",
+  "fragment_sha256": "7b34fc55f82b5754d9d57f8029b52eeaf0d2fb6b49b34d7ccf9a3c2140b79a4d",
+  "fragment_bytes": 1157,
+  "prompt_sha256": "43a1ce907e7a9fa9d43bd0b3646300af4b3da868351dda59a10afba13c66768c",
+  "seed": "50a40b9870763c15"
+ },
+ {
+  "case_id": "nat-algorithm-python-dev-02",
+  "scenario": "ns-algorithm-python",
+  "scenario_index": 1,
+  "instance": "dev",
+  "fragment": "V izmišljenem projektu Lisna pot je Ana pripravila seznam temperatur po mesecih: [3, 9, 14, 21, 27, 35, 48, 60]. Za hitro preverjanje, ali se temperatura 27 že pojavila, uporabimo binarno iskanje. Algoritem deluje tako, da primerja sredino z ciljno vrednostjo in zavrne polovico področja.\n\n```python\ndef binarno_iskanje(seznam, cilj):\n    levo = 0\n    desno = len(seznam) - 1\n    while levo <= desno:\n        sredina = (levo + desno) // 2\n        if seznam[sredina] == cilj:\n            return sredina\n        if seznam[sredina] < cilj:\n            levo = sredina + 1\n        else:\n            desno = sredina - 1\n    return -1\n\nseznam = [3, 9, 14, 21, 27, 35, 48, 60]\nprint(binarno_iskanje(seznam, 27))\n```\n\n| korak | levo | desno | sredina | dejanje |\n|---|---:|---:|---:|---|\n| 1 | 0 | 7 | 3 | 21 je manjša, poišči desno |\n| 2 | 4 | 7 | 5 | 35 je večja, poišči levo |\n| 3 | 4 | 4 | 4 | 27 je ciljna vrednost |\n\nPogoji in lastnosti:\n- seznam mora biti že naravno naraščajoč\n- ob vsakem koraku se interval zmanjša na polovico\n- če cilja ni, algoritem vrne -1\n- časovna zapletenost je O(log n), zato je primeren za večje količine podatkov",
+  "fragment_sha256": "1a4f40c68e97c13df90493cb8052b199642618dd74b98e07b3165d96f0af6e9b",
+  "fragment_bytes": 1156,
+  "prompt_sha256": "43a1ce907e7a9fa9d43bd0b3646300af4b3da868351dda59a10afba13c66768c",
+  "seed": "50a40b9870763c15"
+ },
+ {
+  "case_id": "nat-algorithm-python-dev-03",
+  "scenario": "ns-algorithm-python",
+  "scenario_index": 1,
+  "instance": "dev",
+  "fragment": "V izmišljenem projektu Kmetija smo z Ana in Markom raziskovali linearno iskanje. Algoritem preverja elemente zaporedno in se ustavi, ko najde cilj.\n\nPodatki:\n| Podatek | Vrednost |\n|---|---|\n| seznam | [12, 4, 8, 2, 9] |\n| cilj | 8 |\n\nKoraki:\n1. Začni pri prvem elementu.\n2. Primerjaj z ciljem.\n3. Če ustreza, vrni indeks.\n4. Sicer nadaljuj.\n\nKoda:\n```python\ndef linearno_iskanje(seznam, cilj):\n    for indeks, vrednost in enumerate(seznam):\n        if vrednost == cilj:\n            return indeks\n    return -1\n\nseznam = [12, 4, 8, 2, 9]\ncilj = 8\nprint(linearno_iskanje(seznam, cilj))\n```\n\nRezultat je 2, ker je 8 na tretjem mestu. Algoritem je preprost, a učinkovit za kratek seznam.\n\nČasovna zapletenost je O(n), kjer n pomeni število elementov. To pomeni, da se čas izvajanja povečuje linearno s velikostjo seznama. V kmetijski bazi bi lahko s tem iskanjem našli pridelavo po imenu. Za večje zbirke pa bi bilo smiselneje uporabiti binarno iskanje.",
+  "fragment_sha256": "76ad0f349f77bc424b3a8f305dc01228304fbd21a21b52634b804946726e29fc",
+  "fragment_bytes": 960,
+  "prompt_sha256": "43a1ce907e7a9fa9d43bd0b3646300af4b3da868351dda59a10afba13c66768c",
+  "seed": "50a40b9870763c15"
+ },
+ {
+  "case_id": "nat-algorithm-python-dev-04",
+  "scenario": "ns-algorithm-python",
+  "scenario_index": 1,
+  "instance": "dev",
+  "fragment": "Algoritem binarnega iskanja je primeren za razvrščane sezname. V raziskovalnem projektu Brinje išče ime v imeniku sodelavcev. Predpostavimo, da je seznam po abecedi. Algoritem ponovno primerja srednjo vrednost z iskanim in odvrže polovico. To zniža čas iz O(n) na O(log n).\n\n| Korak | Opis | Primer |\n|---|---|---|\n| 1 | Izbere sredino | Ana, Bojan, Cvetka |\n| 2 | Primerja | Ana ali Bojan? |\n| 3 | Odvrže polovico | Ostane Bojan, Cvetka |\n\nSeznam:\n- vhod: razvrščene vrednosti,\n- izhod: index ali -1,\n- pogoji: le razvrščeno.\n\nPython:\n```python\ndef binary_search(list, target):\n    low = 0\n    high = len(list) - 1\n    while low <= high:\n        mid = (low + high) // 2\n        if list[mid] == target:\n            return mid\n        if list[mid] < target:\n            low = mid + 1\n        else:\n            high = mid - 1\n    return -1\n\nnames = ['Ana', 'Bojan', 'Cvetka', 'Dare']\nprint(binary_search(names, 'Bojan'))\n```\n\nTo pokaže, kako majhen seznam hitro poiščemo.",
+  "fragment_sha256": "0736a0a8d8ef0fdf43b97a04ed54db76604ef9dbf11b4b772b9c1d913817d647",
+  "fragment_bytes": 984,
+  "prompt_sha256": "43a1ce907e7a9fa9d43bd0b3646300af4b3da868351dda59a10afba13c66768c",
+  "seed": "50a40b9870763c15"
+ },
+ {
+  "case_id": "nat-algorithm-python-dev-05",
+  "scenario": "ns-algorithm-python",
+  "scenario_index": 1,
+  "instance": "dev",
+  "fragment": "Za izmišljeni projekt »Zvezdica« sem izbral preprost iskalni algoritem, ki ga je razvijala Ana. Naloga je ugotoviti, ali v seznamu obstajata dve števili, ki se seštejeta v ciljno vrednost 10. Algoritem ne posorts seznamu, zato je primeren tudi za kratke, neurejene podatke. Uporabnik najprej vnese seznam, nato pa algoritem preveri vse možne pare.\n\n| korak | opis |\n| --- | --- |\n| 1 | Pojdimo skozi seznam enkrat. |\n| 2 | Za vsako številko poiščemo dopolnitev do cilja. |\n| 3 | Če najdemo par, vrne True. |\n\n```python\ndef najdi_par(seznam, cilj=10):\n    for i, x in enumerate(seznam):\n        for y in seznam[i+1:]:\n            if x + y == cilj:\n                return True\n    return False\n\npodatki = [2, 4, 7, 1, 6]\nprint(najdi_par(podatki))\n```\n\nPomembne lastnosti:\n- časovna zažetost je O(n^2)\n- deluje tudi za kratek seznam\n- Bine ga je testiral na treh izmišljenih podatkih\n- rezultat je odvisen samo od vsebine seznama in cilja\n- vhod je lahko poljuben seznam številk\n\nRezultat za podatke [2, 4, 7, 1, 6] je True, ker 4 + 6 = 10. Ta pristop je zaželen, ker ga je enostavno razložiti in preveriti.",
+  "fragment_sha256": "a74ad6198c9d84b71f7ee1548fe73e9b67571caf28d74fd4e5d26618612a2e43",
+  "fragment_bytes": 1120,
+  "prompt_sha256": "43a1ce907e7a9fa9d43bd0b3646300af4b3da868351dda59a10afba13c66768c",
+  "seed": "50a40b9870763c15"
+ },
+ {
+  "case_id": "nat-algorithm-python-dev-06",
+  "scenario": "ns-algorithm-python",
+  "scenario_index": 1,
+  "instance": "dev",
+  "fragment": "V izmišljenem projektu »Trgovina Lipa« je Ana Kovač razvijala orodje za hitro iskanje izdelkov. Uporabljala je binarno iskanje, ki zahteva urejen seznam po ceni in v vsakem koraku prepolovi obseg. Algoritem je primeren, ker pred iskanjem vedno uredimo podatke.\n\n```python\ndef binarno_iskanje(seznam, cilj):\n    levo, desno = 0, len(seznam) - 1\n    while levo <= desno:\n        sredina = (levo + desno) // 2\n        if seznam[sredina] == cilj:\n            return sredina\n        if seznam[sredina] < cilj:\n            levo = sredina + 1\n        else:\n            desno = sredina - 1\n    return -1\n\ncene = [3, 7, 12, 19, 25, 31]\nprint(binarno_iskanje(cene, 19))\n```\n\n| Korak | Levo | Desno | Sredina | Pojasnilo |\n|---|---:|---:|---:|---|\n| 1 | 0 | 5 | 2 | 12 < 19, poiščemo desno |\n| 2 | 3 | 5 | 4 | 25 > 19, poiščemo levo |\n| 3 | 3 | 3 | 3 | 19 je najden |\n\nKljučne lastnosti:\n- časovna zahtevnost je O(log n),\n- seznam mora biti urejen,\n- za neredne podatke je bolj primeren linearno iskanje.\n\nAna je testirala z izdelkom »Mesa« in ugotovila, da pri šestih artiklih iskanje traja največ tri korake. V resničnem projektu bi bila uporabna tudi statistika zadetkov, a za razlago algoritem ostane preprost in berljiv.",
+  "fragment_sha256": "aebcd1a1d896a5752762b24d3e6d4199af687deb9a002f7cb0344ba98ee3a6b2",
+  "fragment_bytes": 1229,
+  "prompt_sha256": "43a1ce907e7a9fa9d43bd0b3646300af4b3da868351dda59a10afba13c66768c",
+  "seed": "50a40b9870763c15"
+ }
+]

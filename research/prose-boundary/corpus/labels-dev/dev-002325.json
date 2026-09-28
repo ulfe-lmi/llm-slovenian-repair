@@ -1,0 +1,112 @@
+{
+ "doc_id": "dev-002325",
+ "byte_length": 820,
+ "cp_length": 792,
+ "regions": [
+  {
+   "start_byte": 0,
+   "end_byte": 2,
+   "start_cp": 0,
+   "end_cp": 2,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 2,
+   "end_byte": 273,
+   "start_cp": 2,
+   "end_cp": 267,
+   "component_id": "comp-prose-engineering-dev-0001",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 273,
+   "end_byte": 276,
+   "start_cp": 267,
+   "end_cp": 270,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 276,
+   "end_byte": 277,
+   "start_cp": 270,
+   "end_cp": 271,
+   "component_id": "comp-code-javascript-dev-0003",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 277,
+   "end_byte": 338,
+   "start_cp": 271,
+   "end_cp": 331,
+   "component_id": "comp-code-javascript-dev-0003",
+   "category": "code",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 338,
+   "end_byte": 339,
+   "start_cp": 331,
+   "end_cp": 332,
+   "component_id": "comp-code-javascript-dev-0003",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 339,
+   "end_byte": 342,
+   "start_cp": 332,
+   "end_cp": 335,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 342,
+   "end_byte": 615,
+   "start_cp": 335,
+   "end_cp": 597,
+   "component_id": "comp-prose-engineering-dev-0002",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 615,
+   "end_byte": 618,
+   "start_cp": 597,
+   "end_cp": 600,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 618,
+   "end_byte": 820,
+   "start_cp": 600,
+   "end_cp": 792,
+   "component_id": "comp-prose-everyday-advice-dev-0004",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  }
+ ],
+ "invariants": {
+  "tiling_complete": true,
+  "no_contradictory_overlaps": true,
+  "cp_range_exact": true
+ }
+}

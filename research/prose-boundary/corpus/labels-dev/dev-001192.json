@@ -1,0 +1,122 @@
+{
+ "doc_id": "dev-001192",
+ "byte_length": 836,
+ "cp_length": 809,
+ "regions": [
+  {
+   "start_byte": 0,
+   "end_byte": 2,
+   "start_cp": 0,
+   "end_cp": 2,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 2,
+   "end_byte": 267,
+   "start_cp": 2,
+   "end_cp": 259,
+   "component_id": "comp-prose-math-explainer-dev-0002",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 267,
+   "end_byte": 270,
+   "start_cp": 259,
+   "end_cp": 262,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 270,
+   "end_byte": 271,
+   "start_cp": 262,
+   "end_cp": 263,
+   "component_id": "comp-code-javascript-dev-0008",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 271,
+   "end_byte": 333,
+   "start_cp": 263,
+   "end_cp": 323,
+   "component_id": "comp-code-javascript-dev-0008",
+   "category": "code",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 333,
+   "end_byte": 334,
+   "start_cp": 323,
+   "end_cp": 324,
+   "component_id": "comp-code-javascript-dev-0008",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 334,
+   "end_byte": 337,
+   "start_cp": 324,
+   "end_cp": 327,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 337,
+   "end_byte": 570,
+   "start_cp": 327,
+   "end_cp": 554,
+   "component_id": "comp-prose-cooking-dev-0007",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 570,
+   "end_byte": 573,
+   "start_cp": 554,
+   "end_cp": 557,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 573,
+   "end_byte": 795,
+   "start_cp": 557,
+   "end_cp": 775,
+   "component_id": "comp-prose-travel-dev-0009",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 795,
+   "end_byte": 836,
+   "start_cp": 775,
+   "end_cp": 809,
+   "component_id": "template",
+   "category": null,
+   "role": "PROSE",
+   "template_owned": true
+  }
+ ],
+ "invariants": {
+  "tiling_complete": true,
+  "no_contradictory_overlaps": true,
+  "cp_range_exact": true
+ }
+}

@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-001902",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T11-interactions",
+ "byte_length": 1405,
+ "cp_length": 1368,
+ "sha256": "698e543e79195c692a65fd71d5a3abae430d2a4bd698d056fb6e4f9575c9adf8",
+ "document": "`int main(void) { char *cena1 = \"1 $\"; char *cena2 = \"2 EUR\";`.\n```\nfn test2() -> &'static str { /* Testni projekt Lipa: č, š, ž, **poudarek** in *nova* */ let razdelek2 = 6; let HRAŠNA_VREDNOST = 2; let besedilo = format!(\"_Podčrtano_ ({} $)\", razdelek2); let oznaka = \"č`ž`š\"; let pot = \"src/modul.py\"; let url = \"https://primer.si/koda\"; let _ = (HRAŠNA_VREDNOST, besedilo, oznaka, pot, url); \"č, š, ž\" }\n# komentar z \\frac{a}{b}\n```\nV prostoru projekta Tabor so preizkušali prenos toplote skozi plastine in merili spremembe, ko so dodali tanke plasti iz mešanih vlaken. Meritve so vodila dva študenta, Luka in Nika, ki sta zapisoval čase, temperature ter opazila rahlo meglico na robu vzorcev. Leta dvotisoč in devetindvajset, ko je bila soba še prenovljena, je v opombah stalo, da bo treba poskus ponoviti pri drugačni vlažnosti.\nV šoli so dijaki v letu 2025, v okviru notranjega projekta Besedilo, preizkušali urejevalnik besedil, ki je po mnenju učitelja Marka deloval “precej gladko”. Neko dopoldne so imeli težave s shranjevanjem, zato so se naučili, da je pomembno omeniti ime datoteke in mapo, v katero gre. Maja je zapisala, da ji je bila največja pomoč kratek pogovor s sošolko Ano, ki je razložila razliko med pripravo in končno različico. Tistega popoldneva, po njenih besedah, so preverili, da je shranjevanje enostavnejše, ko poznaš ime mape in datum.",
+ "components": [
+  {
+   "component_id": "comp-code-c-dev-0005",
+   "category": "code",
+   "start_byte": 0,
+   "end_byte": 62
+  },
+  {
+   "component_id": "comp-code-rust-dev-0007",
+   "category": "code",
+   "start_byte": 64,
+   "end_byte": 448
+  },
+  {
+   "component_id": "comp-prose-science-dev-0004",
+   "category": "prose",
+   "start_byte": 449,
+   "end_byte": 854
+  },
+  {
+   "component_id": "comp-prose-computing-dev-0012",
+   "category": "prose",
+   "start_byte": 855,
+   "end_byte": 1405
+  }
+ ]
+}

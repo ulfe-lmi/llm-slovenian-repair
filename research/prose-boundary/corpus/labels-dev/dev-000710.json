@@ -1,0 +1,102 @@
+{
+ "doc_id": "dev-000710",
+ "byte_length": 1010,
+ "cp_length": 991,
+ "regions": [
+  {
+   "start_byte": 0,
+   "end_byte": 388,
+   "start_cp": 0,
+   "end_cp": 374,
+   "component_id": "comp-prose-cooking-dev-0001",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 388,
+   "end_byte": 389,
+   "start_cp": 374,
+   "end_cp": 375,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 389,
+   "end_byte": 540,
+   "start_cp": 375,
+   "end_cp": 524,
+   "component_id": "comp-structured-json-dev-0006",
+   "category": "structured",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 540,
+   "end_byte": 541,
+   "start_cp": 524,
+   "end_cp": 525,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 541,
+   "end_byte": 931,
+   "start_cp": 525,
+   "end_cp": 912,
+   "component_id": "comp-prose-history-dev-0003",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 931,
+   "end_byte": 932,
+   "start_cp": 912,
+   "end_cp": 913,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 932,
+   "end_byte": 934,
+   "start_cp": 913,
+   "end_cp": 915,
+   "component_id": "comp-math-paren-tex-dev-0007",
+   "category": "math",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 934,
+   "end_byte": 1008,
+   "start_cp": 915,
+   "end_cp": 989,
+   "component_id": "comp-math-paren-tex-dev-0007",
+   "category": "math",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 1008,
+   "end_byte": 1010,
+   "start_cp": 989,
+   "end_cp": 991,
+   "component_id": "comp-math-paren-tex-dev-0007",
+   "category": "math",
+   "role": "NEUTRAL",
+   "template_owned": false
+  }
+ ],
+ "invariants": {
+  "tiling_complete": true,
+  "no_contradictory_overlaps": true,
+  "cp_range_exact": true
+ }
+}

@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-002199",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T11-interactions",
+ "byte_length": 1160,
+ "cp_length": 1130,
+ "sha256": "39c16ee6242e0fb2e52916245e1cc5251a7b8aaa490c1be0795f569056f21d28",
+ "document": "`int main(void) { int seStez = 3; char *pot = \"src/modul.py\";`.\n```\nfn žir(razdelek2: i64) -> bool { /* Testni projekt Lipa: č, š, ž, *zvezdice* in _podčrtano_ */ let seStez = true; let HRAŠNA_VREDNOST = 2; let tekst = \"**Nova** (1 $) `č` _ž_\"; let pot = \"docs/vir.txt\"; let url = \"https://primer.si/koda\"; let _ = (HRAŠNA_VREDNOST, tekst, pot, url); seStez && razdelek2 > 0 }\n# komentar z \\frac{a}{b}\n```\nV Bohinju so udeleženci rekreativnega smučarskega tabora (leta 2022) preizkusili dve smučarski poti in tri vzpone s postojali, ki so jih označili za lažje. Ana, izmišljena sodelavka projekta Zimska pot, je zapisala, da jo je po tridesetih minutah vzhoda bolela le desna noga. 'Vreme je bilo hladno, nebo pa čisto,' je dodala ob koncu dneva. Naslednji dan so skrajšali pot in dodali dve minuti raztezanja.\nLeta 1999 so v projektu Bralna mreža (izmišljeni arhiv) preizkušali, kako bralci obudijo spomin na slovenske in evropske pesnike. Odkritje ni bilo v imenu, temveč v tem, da je vprašanje (brez nujnega odgovora) preživelo vse. »Zato,« je zapisal izmišljeni filolog Marko Rovec, »ker je knjižnost včasih sama sebi prevod.«",
+ "components": [
+  {
+   "component_id": "comp-code-c-dev-0001",
+   "category": "code",
+   "start_byte": 0,
+   "end_byte": 62
+  },
+  {
+   "component_id": "comp-code-rust-dev-0004",
+   "category": "code",
+   "start_byte": 64,
+   "end_byte": 414
+  },
+  {
+   "component_id": "comp-prose-sports-dev-0002",
+   "category": "prose",
+   "start_byte": 415,
+   "end_byte": 827
+  },
+  {
+   "component_id": "comp-prose-literature-dev-0004",
+   "category": "prose",
+   "start_byte": 828,
+   "end_byte": 1160
+  }
+ ]
+}

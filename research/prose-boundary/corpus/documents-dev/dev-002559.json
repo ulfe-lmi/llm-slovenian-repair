@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-002559",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T8-quote-fenced",
+ "byte_length": 573,
+ "cp_length": 564,
+ "sha256": "d7e3506bb15eb964f7427104d1984a267e89440e0c600c924cf833a8365edd2f",
+ "document": "> V projektu Zdrav vsak dan (v letu 2024) so izpostavili, da se lahko obremenjenost kaže v hitrem dihanju, v slabšem spanju ali v občutku tesnobe. To ni razlaga za domov, ampak spomin, da so telesni signali odziv. Ko se ti signali ponavljajo, jih najprej opiše oseba, nato pa jih preveri zdravnik. `int main(void) { char *napis = \"Tekst: *poudarjeno* in _podč`\n```\n# Testni projekt: Razdelek; avtor: Maja Lipovnik\nrazdelek2 = 'Razdelek 2'\nseStez = 7\nHRAŠNA_VREDNOST = 42\nskupaj = HRAŠNA_VREDNOST + seStez\nporočilo = f'Skupaj: {skupaj} $ (test)'\nprint(poročilo)\n```",
+ "components": [
+  {
+   "component_id": "comp-prose-medicine-explainer-dev-0005",
+   "category": "prose",
+   "start_byte": 2,
+   "end_byte": 301
+  },
+  {
+   "component_id": "comp-code-c-dev-0002",
+   "category": "code",
+   "start_byte": 302,
+   "end_byte": 365
+  },
+  {
+   "component_id": "comp-code-python-dev-0003",
+   "category": "code",
+   "start_byte": 366,
+   "end_byte": 573
+  }
+ ]
+}

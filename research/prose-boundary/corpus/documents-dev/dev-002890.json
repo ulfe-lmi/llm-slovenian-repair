@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-002890",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T9-prose-malformed-prose",
+ "byte_length": 778,
+ "cp_length": 762,
+ "sha256": "87f4d50573c880cf7e1b51b5708934d1b45cbc2dcbfbd15bb29e21414309b8ec",
+ "document": "Ana je v maju po slovenskih krajih obiskala Bled, kjer so jo pritegnili mirno jezero, gorski grad in svež planinski zrak. V Ljubljani je sprehodila ozke ulice starega mesta ter se po podnevnem sprehodu povzpnila do gradu. V dnevniku je zapisala nasvet, naj si turisti že pred prihodom preverijo odprte ure muzejev.\n[opis](https://primer.si/stran drugi del: avtorizirana testna vsebina projekta Rdeča trta; izmišljena oseba Marko Novak ureja zvezek.\nV vprašanjih za projekt Zdravo mesto 2025 so otroci zaskrbljeni zaradi »bolečin v trebuhu« po školski malici. Raje ne govorimo o diagnozi; zabeležimo, kdaj se pojavi, koliko traja in kakšna je hrana (na primer po mlečnih izdelkih). Pri vsakem nepričakovanem ponovnem pojavi naj starš pokliče zdravniško ambulanto.",
+ "components": [
+  {
+   "component_id": "comp-prose-travel-dev-0011",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 316
+  },
+  {
+   "component_id": "comp-malformed-broken-link-dev-0002",
+   "category": "malformed",
+   "start_byte": 317,
+   "end_byte": 452
+  },
+  {
+   "component_id": "comp-prose-medicine-explainer-dev-0012",
+   "category": "prose",
+   "start_byte": 453,
+   "end_byte": 778
+  }
+ ]
+}

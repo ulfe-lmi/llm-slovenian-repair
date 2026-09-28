@@ -1,0 +1,59 @@
+{
+ "doc_id": "dev-002055",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T10-randomized",
+ "byte_length": 1340,
+ "cp_length": 1323,
+ "sha256": "cd216ec431cf1892889e7a51c67cd9de6ad9678cb675960a665e9125ec4047ac",
+ "document": "Udeleženci projekta Otvorena vrata so v jeseni 2024 preizkusili učno sredo, v kateri je bil učbenik le ena od štirih podlag. Mladostnike je zanimalo, zakaj se isti izpit pri treh učiteljih razlikuje v razlagi (zlasti pri nalogah iz književnosti), zato so zapisali kratko pojasnilo. Na koncu so se dogovorili, da bo vsak odrasli udeleženec dobil eden sam pogovorni termin, ne pa dveh ločenih rok.\n```\n# Testni projekt: Lipna dolina; avtor: Maja Lipovnik\ndef seštej(a, b):\n    return a + b\nnaslov = 'Povzetek: *pomembno*'\npot = 'src/modul.py'\nvir = 'https://primer.si/koda'\nrezultat = seštej(2, 3)\n```\nPROJEKT_IME=Kralj_Metelj, KEY=vrednost\nporočilo_q3.csv\nAnka je v projektu Beli Most uporabila `številka` in ``merilo`` za 12 kg.\n> Projekt Sokol, avtor *Nina*: hitrost 5 km/h.\n> > Zapis je testen.\n--- {naziv: 'Projektna vsebina: **Vrtna razstava**', opis: 'Nevtralna vsebina z **poudarkom** in https://primer.si/novica', vrednosti: ['Zapolnitev 15 %', 'Premer 4,2 m', 'Koeficient 0,09'], oseba: 'Izmišljena oseba: Luka Novak', projekt: 'Nevtralna testna vsebina'} # Fragment 4: vrtna razstava\nPri projektu Mladinski tabor 2023 je voditelj Anže zabeležil blage glavobole. Včasih pomaga mirna soba in hladna krpa. Če se pojavijo z bruhanjem ali motnjami vidu, je treba takoj poklicati zdravnika. To je zgolj testno opozorilo.",
+ "components": [
+  {
+   "component_id": "comp-prose-education-dev-0010",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 403
+  },
+  {
+   "component_id": "comp-code-python-dev-0001",
+   "category": "code",
+   "start_byte": 404,
+   "end_byte": 609
+  },
+  {
+   "component_id": "comp-machine-env-vars-dev-0001",
+   "category": "machine",
+   "start_byte": 610,
+   "end_byte": 648
+  },
+  {
+   "component_id": "comp-machine-filenames-dev-0002",
+   "category": "machine",
+   "start_byte": 649,
+   "end_byte": 665
+  },
+  {
+   "component_id": "comp-markdown-inline-code-dev-0002",
+   "category": "markdown",
+   "start_byte": 666,
+   "end_byte": 740
+  },
+  {
+   "component_id": "comp-markdown-blockquotes-dev-0004",
+   "category": "markdown",
+   "start_byte": 741,
+   "end_byte": 808
+  },
+  {
+   "component_id": "comp-structured-yaml-dev-0004",
+   "category": "structured",
+   "start_byte": 809,
+   "end_byte": 1105
+  },
+  {
+   "component_id": "comp-prose-medicine-explainer-dev-0013",
+   "category": "prose",
+   "start_byte": 1106,
+   "end_byte": 1340
+  }
+ ]
+}

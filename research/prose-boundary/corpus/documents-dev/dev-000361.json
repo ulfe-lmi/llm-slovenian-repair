@@ -1,0 +1,47 @@
+{
+ "doc_id": "dev-000361",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T10-randomized",
+ "byte_length": 1453,
+ "cp_length": 1430,
+ "sha256": "b3ccccd4526e518c3c832af7c83e8d08d5dcb769d855121524a7b8df18baff5e",
+ "document": "Lena iz izmišljenega projekta Zdravi dnevni krog je zapisala, da stres pogosto spremljajo napete mišice in počasnejši spanec. Zaradi teh sprememb ni mogoče zanesljivo sklepati o vzrokih, zato je smiselno pogovarjati se z zdravnikom.\n[pogon]\nime = *Projekt Električni pogon*\nopis = _učinkovitost_ 88 %\nmoč = 5 kW\navtor = Nina Oblak\nvir = https://primer.si/novica\n; nevtralna testna vsebina\n```\nmoČ = 3; žrtev = (1, 2); besedilo = 'Cena: $10 `kod` **poudarek** _podčrtano_'; pot = 'docs/vir.txt' # komentar v slovenščini: testni projekt, https://primer.si/koda\n```\nProjekt Testni Modul: Anja Kovač preverja povezavo <https://primer.si/stran> in kontakt <pošta@primer.si> pri temperaturi 20 °C. Vsebuje 3 korake in 10 m poti.\n```\n#!/usr/bin/env bash\n# Tretji fragment: številska oznaka (test) in ne-ASCII znaki\n# Oseba: Maja, projekt: čokoladni vir\nrazdelek2='razdelek2'\nseStez='seStez'\npotA='src/modul.py'\npotB='docs/vir.txt'\npotC='HRAŠNA_VREDNOST.md'\nnavodilo='**test** *navodila* _podčrtano_'\necho \"razdelek: $razdelek2\"\necho \"seStez: $seStez\"\necho \"potA: $potA\"\necho \"potB: $potB\"\necho \"potC: $potC\"\necho \"$navodilo\"\necho 'url: https://primer.si/koda'\necho 'cena: 3 $'\necho 'backquote: `'\n```\nAstronomi projekta Zora so z manjšim daljnogledom na Merljaku opazovali jutrnje oblake pri zori. Poskušali so zajeti bliskavice, ki so se pojavile le za hip, in v beležki je bilo zapisano, da je nebo ob petih zjutraj postalo manj motno.",
+ "components": [
+  {
+   "component_id": "comp-prose-medicine-explainer-dev-0001",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 237
+  },
+  {
+   "component_id": "comp-structured-ini-dev-0006",
+   "category": "structured",
+   "start_byte": 238,
+   "end_byte": 396
+  },
+  {
+   "component_id": "comp-code-python-dev-0011",
+   "category": "code",
+   "start_byte": 397,
+   "end_byte": 575
+  },
+  {
+   "component_id": "comp-markdown-autolinks-dev-0001",
+   "category": "markdown",
+   "start_byte": 576,
+   "end_byte": 738
+  },
+  {
+   "component_id": "comp-code-shell-bash-dev-0011",
+   "category": "code",
+   "start_byte": 739,
+   "end_byte": 1213
+  },
+  {
+   "component_id": "comp-prose-science-dev-0003",
+   "category": "prose",
+   "start_byte": 1214,
+   "end_byte": 1453
+  }
+ ]
+}

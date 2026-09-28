@@ -1,0 +1,90 @@
+[
+ {
+  "component_id": "comp-machine-shell-commands-dev-0001",
+  "family": "machine-shell-commands",
+  "instance": "dev",
+  "category": "machine",
+  "subcategory": "terminal ukazi",
+  "fragment": "test -f vir.txt",
+  "fragment_sha256": "a0b8c38648211a500ecc8bd507fcf95abe71b56aa19f14c98bd23efde956b8aa",
+  "fragment_bytes": 15,
+  "seed": "9c76e06af895af58"
+ },
+ {
+  "component_id": "comp-machine-shell-commands-dev-0002",
+  "family": "machine-shell-commands",
+  "instance": "dev",
+  "category": "machine",
+  "subcategory": "terminal ukazi",
+  "fragment": "make preizkus",
+  "fragment_sha256": "12f9a7c3436e05c33b21edc3b8bb1bcb950de483fa6339a25ac8b50b90580ee4",
+  "fragment_bytes": 13,
+  "seed": "9c76e06af895af58"
+ },
+ {
+  "component_id": "comp-machine-shell-commands-dev-0003",
+  "family": "machine-shell-commands",
+  "instance": "dev",
+  "category": "machine",
+  "subcategory": "terminal ukazi",
+  "fragment": "python3 preizkus.py --vhod ana.txt",
+  "fragment_sha256": "ec1fbfbd61844347c8807154fec22c07958c0b843b93b4bd2298bc300f1bb3d1",
+  "fragment_bytes": 34,
+  "seed": "9c76e06af895af58"
+ },
+ {
+  "component_id": "comp-machine-shell-commands-dev-0004",
+  "family": "machine-shell-commands",
+  "instance": "dev",
+  "category": "machine",
+  "subcategory": "terminal ukazi",
+  "fragment": "cargo test",
+  "fragment_sha256": "0031fd18feb55b6b493544de1976b438eeac0b2d1278821b9e4e8eb07e8cf503",
+  "fragment_bytes": 10,
+  "seed": "9c76e06af895af58"
+ },
+ {
+  "component_id": "comp-machine-shell-commands-dev-0005",
+  "family": "machine-shell-commands",
+  "instance": "dev",
+  "category": "machine",
+  "subcategory": "terminal ukazi",
+  "fragment": "npm run preizkus",
+  "fragment_sha256": "038d22853c14381b0669a368e3f125ea9f6c3f2fabb0f5c7fbe9cb066606c5d4",
+  "fragment_bytes": 16,
+  "seed": "9c76e06af895af58"
+ },
+ {
+  "component_id": "comp-machine-shell-commands-dev-0006",
+  "family": "machine-shell-commands",
+  "instance": "dev",
+  "category": "machine",
+  "subcategory": "terminal ukazi",
+  "fragment": "grep marko preizkus.json",
+  "fragment_sha256": "b3dd62db8087b864c9250cae7d98a19ac0e1c1fae241e8fa713bb64f14a94908",
+  "fragment_bytes": 24,
+  "seed": "9c76e06af895af58"
+ },
+ {
+  "component_id": "comp-machine-shell-commands-dev-0007",
+  "family": "machine-shell-commands",
+  "instance": "dev",
+  "category": "machine",
+  "subcategory": "terminal ukazi",
+  "fragment": "chmod +x preizkus_modra.sh",
+  "fragment_sha256": "39a007e5214a34e4fc60fc1ba38bb330d987666063c599c9aaee550b5cf76409",
+  "fragment_bytes": 26,
+  "seed": "9c76e06af895af58"
+ },
+ {
+  "component_id": "comp-machine-shell-commands-dev-0008",
+  "family": "machine-shell-commands",
+  "instance": "dev",
+  "category": "machine",
+  "subcategory": "terminal ukazi",
+  "fragment": "echo testni projekt",
+  "fragment_sha256": "81eca04959360fee858ee8c469a12c19c5919db13c5061e7a95d405d75f51e5e",
+  "fragment_bytes": 19,
+  "seed": "9c76e06af895af58"
+ }
+]

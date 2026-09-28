@@ -1,0 +1,152 @@
+{
+ "doc_id": "dev-000791",
+ "byte_length": 989,
+ "cp_length": 970,
+ "regions": [
+  {
+   "start_byte": 0,
+   "end_byte": 1,
+   "start_cp": 0,
+   "end_cp": 1,
+   "component_id": "comp-code-cpp-dev-0001",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 1,
+   "end_byte": 20,
+   "start_cp": 1,
+   "end_cp": 20,
+   "component_id": "comp-code-cpp-dev-0001",
+   "category": "code",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 20,
+   "end_byte": 21,
+   "start_cp": 20,
+   "end_cp": 21,
+   "component_id": "comp-code-cpp-dev-0001",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 21,
+   "end_byte": 22,
+   "start_cp": 21,
+   "end_cp": 22,
+   "component_id": "template",
+   "category": null,
+   "role": "PROSE",
+   "template_owned": true
+  },
+  {
+   "start_byte": 22,
+   "end_byte": 23,
+   "start_cp": 22,
+   "end_cp": 23,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 23,
+   "end_byte": 26,
+   "start_cp": 23,
+   "end_cp": 26,
+   "component_id": "comp-code-javascript-dev-0002",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 26,
+   "end_byte": 27,
+   "start_cp": 26,
+   "end_cp": 27,
+   "component_id": "comp-code-javascript-dev-0002",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 27,
+   "end_byte": 219,
+   "start_cp": 27,
+   "end_cp": 217,
+   "component_id": "comp-code-javascript-dev-0002",
+   "category": "code",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 219,
+   "end_byte": 220,
+   "start_cp": 217,
+   "end_cp": 218,
+   "component_id": "comp-code-javascript-dev-0002",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 220,
+   "end_byte": 223,
+   "start_cp": 218,
+   "end_cp": 221,
+   "component_id": "comp-code-javascript-dev-0002",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 223,
+   "end_byte": 224,
+   "start_cp": 221,
+   "end_cp": 222,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 224,
+   "end_byte": 546,
+   "start_cp": 222,
+   "end_cp": 534,
+   "component_id": "comp-prose-cooking-dev-0006",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 546,
+   "end_byte": 547,
+   "start_cp": 534,
+   "end_cp": 535,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 547,
+   "end_byte": 989,
+   "start_cp": 535,
+   "end_cp": 970,
+   "component_id": "comp-prose-sports-dev-0005",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  }
+ ],
+ "invariants": {
+  "tiling_complete": true,
+  "no_contradictory_overlaps": true,
+  "cp_range_exact": true
+ }
+}

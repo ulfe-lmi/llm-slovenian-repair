@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-002312",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T3-prose-fenced-prose",
+ "byte_length": 941,
+ "cp_length": 921,
+ "sha256": "0d7a76f09458839ce5cc6a6c6d6aef8b6dfb01a23a2a618fced41149921d77ba",
+ "document": "Biološki kolektiv pri projektu Križanec je v gozdu nad Celjem opazoval rast gliv po jutranji rosi. Med analizo vzorčkov (tri serije, vse z značko Z3) je dr. Marko Zupan opažil, da se nekatere hife ob dotiku zavrtijo, kar je v laboratoriju razložil s preprostimi mehanskimi odzivi. »To ni čarobno vedenje,« je dejal in dodal, da so za znanstvenika pogosto najpomembnejši tisti podrobnosti, ki jih drugi spregledajo.\n```\n/* Testni podatki za izmišljen projekt Javornik */ const opis = { naslov: 'Označi *poudarek* in **pomembno**', podnaslov: '_opomba_', datum: '2026-01-15' }; console.log(opis.naslov);\n```\nMed poskusom recepta za jagnjetino (po receptu Marice) je Peter v loncu najprej zvalil česen, rdečo papriko in malo olja. Vmes se je spomnil, da je leta 2021 obiskoval kmetijo, kjer so jagnjeta pasla po travniku. Nad meso je položil narezan krompir, pa tudi „malo soli, malo masla, malo časa“, kot mu je rekla mati.",
+ "components": [
+  {
+   "component_id": "comp-prose-science-dev-0012",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 424
+  },
+  {
+   "component_id": "comp-code-javascript-dev-0005",
+   "category": "code",
+   "start_byte": 425,
+   "end_byte": 617
+  },
+  {
+   "component_id": "comp-prose-cooking-dev-0012",
+   "category": "prose",
+   "start_byte": 618,
+   "end_byte": 941
+  }
+ ]
+}

@@ -1,0 +1,59 @@
+{
+ "doc_id": "dev-000130",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T10-randomized",
+ "byte_length": 1260,
+ "cp_length": 1232,
+ "sha256": "43ce3b0f059d8e393e3227335d3c8585e4a10298b2e32d8a6887199dd1407da6",
+ "document": "„Zdravje ni samo odsotnost bolečine“ je poudaril Marko, ko je v projektu Zdravi pogovori spregovoril o pomenu počitka. Vsak človek se mora poslušati in poznati svoje omejitve. Obremenjenost se lahko kaže različno, na primer v napetosti ali v slabšem spanju. Če se nelagodje ne umiri, mora biti naslednji korak obisk zdravnika.\n| Projektna tema | Meritev | Vrednost |\n| --- | --- | --- |\n| Testni projekt Ane | Dolžina | 12 m |\n| Vzorčni podatki Petra | Masa | 3 kg |\n$$\\frac{\\alpha}{\\beta} = \\frac{2}{3} + \\gamma = \\text{Ana}$$\nProjekt Lipa: Pri temperaturi 21 °C je meritev 450 g potrjena z **močno** in __podčrtim__ besedilom.\n$20 je vrednost testnega opisa v projektu Gora Kresanja.\nDnevnik: ~~zamenjano~~ opombo 2 enoti in 90 % za Projekt Topol.\nZa odrasle v programu Večer 2024 so pripravili delavnice, ki potekajo po petih, z odmorom in s kratkim pogovorom o tem, kaj sploh želijo vedeti. Ana, vodja razreda, je povedala, da se učenci najlaše učijo, ko lahko takoj uporabijo besede v pogovoru. Tudi učbenik je preprost, z barvnimi slikami in z vprašanji na koncu vsake strani. Nihče ni imel vtisa, da gre za šolo; vsi so se strinjali, da gre za učenje.\n`avtorizacija: Mira Kovač; projekt: Gora Bled; opomba = \"testna vsebina\";",
+ "components": [
+  {
+   "component_id": "comp-prose-medicine-explainer-dev-0003",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 338
+  },
+  {
+   "component_id": "comp-markdown-tables-dev-0009",
+   "category": "markdown",
+   "start_byte": 339,
+   "end_byte": 480
+  },
+  {
+   "component_id": "comp-math-display-dollar-dev-0001",
+   "category": "math",
+   "start_byte": 481,
+   "end_byte": 541
+  },
+  {
+   "component_id": "comp-markdown-strong-dev-0001",
+   "category": "markdown",
+   "start_byte": 542,
+   "end_byte": 645
+  },
+  {
+   "component_id": "comp-malformed-unmatched-dollar-dev-0003",
+   "category": "malformed",
+   "start_byte": 646,
+   "end_byte": 702
+  },
+  {
+   "component_id": "comp-markdown-strikethrough-dev-0007",
+   "category": "markdown",
+   "start_byte": 703,
+   "end_byte": 766
+  },
+  {
+   "component_id": "comp-prose-education-dev-0012",
+   "category": "prose",
+   "start_byte": 767,
+   "end_byte": 1185
+  },
+  {
+   "component_id": "comp-malformed-unmatched-backtick-dev-0003",
+   "category": "malformed",
+   "start_byte": 1186,
+   "end_byte": 1260
+  }
+ ]
+}

@@ -1,0 +1,14 @@
+[package]
+name = "prose-boundary-meas"
+version = "0.1.0"
+edition = "2021"
+rust-version = "1.71.1"
+publish = false
+description = "MEASUREMENT ADAPTER (research-only, order 008-a): emits pinned pulldown-cmark 0.13.4 offset events as deterministic JSONL. Explicitly NOT a runtime interface."
+license = "MIT"
+
+[dependencies]
+# Pinned exact candidate, registry checksum e9f068eba8e7071c5f9511831b44f32c740d5adf574e990f946ddb53db2f314e,
+# upstream pulldown-cmark/pulldown-cmark tag v0.13.4. Default features disabled:
+# the adapter needs only the pull-parser library (no getopts CLI, no html escaper).
+pulldown-cmark = { version = "=0.13.4", default-features = false }

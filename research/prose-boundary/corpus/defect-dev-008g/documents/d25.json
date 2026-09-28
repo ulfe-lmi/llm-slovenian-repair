@@ -1,0 +1,23 @@
+{
+ "doc_id": "d25",
+ "seed": "008edefd0001",
+ "template": "D-yaml-nested-split-standalone",
+ "byte_length": 23,
+ "cp_length": 23,
+ "sha256": "9542a6380671cb465d4a161ed97da78678e1763e1808bb0dbd17cf08f00b68e6",
+ "document": "seznam:\n  - en\n  - dva\n",
+ "components": [
+  {
+   "component_id": "defect-008g-d25a",
+   "category": "structured",
+   "start_byte": 0,
+   "end_byte": 7
+  },
+  {
+   "component_id": "defect-008g-d25b",
+   "category": "structured",
+   "start_byte": 8,
+   "end_byte": 22
+  }
+ ]
+}

@@ -1,0 +1,102 @@
+{
+ "doc_id": "dev-002213",
+ "byte_length": 1133,
+ "cp_length": 1114,
+ "regions": [
+  {
+   "start_byte": 0,
+   "end_byte": 328,
+   "start_cp": 0,
+   "end_cp": 318,
+   "component_id": "comp-prose-administration-dev-0003",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 328,
+   "end_byte": 329,
+   "start_cp": 318,
+   "end_cp": 319,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 329,
+   "end_byte": 332,
+   "start_cp": 319,
+   "end_cp": 322,
+   "component_id": "comp-code-javascript-dev-0010",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 332,
+   "end_byte": 333,
+   "start_cp": 322,
+   "end_cp": 323,
+   "component_id": "comp-code-javascript-dev-0010",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 333,
+   "end_byte": 755,
+   "start_cp": 323,
+   "end_cp": 739,
+   "component_id": "comp-code-javascript-dev-0010",
+   "category": "code",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 755,
+   "end_byte": 756,
+   "start_cp": 739,
+   "end_cp": 740,
+   "component_id": "comp-code-javascript-dev-0010",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 756,
+   "end_byte": 759,
+   "start_cp": 740,
+   "end_cp": 743,
+   "component_id": "comp-code-javascript-dev-0010",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 759,
+   "end_byte": 760,
+   "start_cp": 743,
+   "end_cp": 744,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 760,
+   "end_byte": 1133,
+   "start_cp": 744,
+   "end_cp": 1114,
+   "component_id": "comp-prose-programming-explainer-dev-0011",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  }
+ ],
+ "invariants": {
+  "tiling_complete": true,
+  "no_contradictory_overlaps": true,
+  "cp_range_exact": true
+ }
+}

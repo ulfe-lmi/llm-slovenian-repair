@@ -1,0 +1,112 @@
+{
+ "doc_id": "dev-002930",
+ "byte_length": 1111,
+ "cp_length": 1080,
+ "regions": [
+  {
+   "start_byte": 0,
+   "end_byte": 2,
+   "start_cp": 0,
+   "end_cp": 2,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 2,
+   "end_byte": 318,
+   "start_cp": 2,
+   "end_cp": 307,
+   "component_id": "comp-prose-electronics-dev-0003",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 318,
+   "end_byte": 321,
+   "start_cp": 307,
+   "end_cp": 310,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 321,
+   "end_byte": 322,
+   "start_cp": 310,
+   "end_cp": 311,
+   "component_id": "comp-code-cpp-dev-0002",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 322,
+   "end_byte": 352,
+   "start_cp": 311,
+   "end_cp": 341,
+   "component_id": "comp-code-cpp-dev-0002",
+   "category": "code",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 352,
+   "end_byte": 353,
+   "start_cp": 341,
+   "end_cp": 342,
+   "component_id": "comp-code-cpp-dev-0002",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 353,
+   "end_byte": 356,
+   "start_cp": 342,
+   "end_cp": 345,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 356,
+   "end_byte": 684,
+   "start_cp": 345,
+   "end_cp": 663,
+   "component_id": "comp-prose-administration-dev-0003",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 684,
+   "end_byte": 687,
+   "start_cp": 663,
+   "end_cp": 666,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 687,
+   "end_byte": 1111,
+   "start_cp": 666,
+   "end_cp": 1080,
+   "component_id": "comp-prose-science-dev-0012",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  }
+ ],
+ "invariants": {
+  "tiling_complete": true,
+  "no_contradictory_overlaps": true,
+  "cp_range_exact": true
+ }
+}

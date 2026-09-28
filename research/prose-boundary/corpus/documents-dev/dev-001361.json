@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-001361",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T9-prose-malformed-prose",
+ "byte_length": 620,
+ "cp_length": 612,
+ "sha256": "4ee74590f1340717c9ba6fa4bc7d4c6937c69a106fc61882958253b9cf1cfa21",
+ "document": "V soboto je ekipa iz Ljubljanskega učnega laboratorija testirala, kako hitro se sestanek prekine, če je omrežje preobremenjeno. Rezultat, ki so ga prebrali skupaj, je bil preprost: naprave se raje razbremenijo s kratkim premorom.\n\n\\begin{align} a &= b, primer vstopnice za izmišljen festival Lipa, odgovorna oseba Blaž Kovač.\n\nV testni skupini je Luka baterijo namestil s pravim stikom na vrhu, nato pa preizkusil sklep z zgornjim in spodnjim stikom. Ko je sklep zaprl, se utripalka prižgala; ko ga je odprl, pa se je utripalka ugasnila. V pogovoru s mentorjem je rekel, da bo naslednjič poskusil drugo upornost.",
+ "components": [
+  {
+   "component_id": "comp-prose-computing-dev-0004",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 232
+  },
+  {
+   "component_id": "comp-malformed-unclosed-tex-env-dev-0002",
+   "category": "malformed",
+   "start_byte": 234,
+   "end_byte": 331
+  },
+  {
+   "component_id": "comp-prose-electronics-dev-0004",
+   "category": "prose",
+   "start_byte": 333,
+   "end_byte": 620
+  }
+ ]
+}

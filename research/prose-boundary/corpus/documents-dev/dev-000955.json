@@ -1,0 +1,41 @@
+{
+ "doc_id": "dev-000955",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T10-randomized",
+ "byte_length": 832,
+ "cp_length": 807,
+ "sha256": "de189ee84595ab06baeddeb09c19914d101424430da90d23c690d35b6f10515f",
+ "document": "Za odrasle v programu Večer 2024 so pripravili delavnice, ki potekajo po petih, z odmorom in s kratkim pogovorom o tem, kaj sploh želijo vedeti. Ana, vodja razreda, je povedala, da se učenci najlaše učijo, ko lahko takoj uporabijo besede v pogovoru. Tudi učbenik je preprost, z barvnimi slikami in z vprašanji na koncu vsake strani. Nihče ni imel vtisa, da gre za šolo; vsi so se strinjali, da gre za učenje.\nPregled: ~~odprto~~ vprašanje ima ID 07 za Igorja Vovka.\n~~~~bash\n# testna postavka: 15 sekund, 3 koraki\n~~~~\n\n\\sum_{\\iota=1}^{6} \\kappa_{\\iota} * \\prod_{\\lambda=1}^{2} \\mu_{\\lambda} \\text{Koper}\nMaja je prvič poskusila smučati na Počitenju (izmišljena dolina). Sneg je bil mehki. Proga je bila široka. „Pazite,“ jo je opomnil vodja tečaja, „ker se v sosednji strmini lahko pojavijo skrite luknje.“",
+ "components": [
+  {
+   "component_id": "comp-prose-education-dev-0012",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 418
+  },
+  {
+   "component_id": "comp-markdown-strikethrough-dev-0003",
+   "category": "markdown",
+   "start_byte": 419,
+   "end_byte": 476
+  },
+  {
+   "component_id": "comp-markdown-fenced-code-dev-0006",
+   "category": "markdown",
+   "start_byte": 477,
+   "end_byte": 530
+  },
+  {
+   "component_id": "comp-math-summations-dev-0003",
+   "category": "math",
+   "start_byte": 531,
+   "end_byte": 615
+  },
+  {
+   "component_id": "comp-prose-sports-dev-0007",
+   "category": "prose",
+   "start_byte": 616,
+   "end_byte": 832
+  }
+ ]
+}

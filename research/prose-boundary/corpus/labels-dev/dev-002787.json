@@ -1,0 +1,112 @@
+{
+ "doc_id": "dev-002787",
+ "byte_length": 865,
+ "cp_length": 844,
+ "regions": [
+  {
+   "start_byte": 0,
+   "end_byte": 2,
+   "start_cp": 0,
+   "end_cp": 2,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 2,
+   "end_byte": 327,
+   "start_cp": 2,
+   "end_cp": 315,
+   "component_id": "comp-prose-medicine-explainer-dev-0012",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 327,
+   "end_byte": 330,
+   "start_cp": 315,
+   "end_cp": 318,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 330,
+   "end_byte": 331,
+   "start_cp": 318,
+   "end_cp": 319,
+   "component_id": "comp-code-sql-dev-0006",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 331,
+   "end_byte": 392,
+   "start_cp": 319,
+   "end_cp": 379,
+   "component_id": "comp-code-sql-dev-0006",
+   "category": "code",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 392,
+   "end_byte": 393,
+   "start_cp": 379,
+   "end_cp": 380,
+   "component_id": "comp-code-sql-dev-0006",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 393,
+   "end_byte": 396,
+   "start_cp": 380,
+   "end_cp": 383,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 396,
+   "end_byte": 591,
+   "start_cp": 383,
+   "end_cp": 576,
+   "component_id": "comp-prose-cooking-dev-0011",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 591,
+   "end_byte": 594,
+   "start_cp": 576,
+   "end_cp": 579,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 594,
+   "end_byte": 865,
+   "start_cp": 579,
+   "end_cp": 844,
+   "component_id": "comp-prose-engineering-dev-0001",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  }
+ ],
+ "invariants": {
+  "tiling_complete": true,
+  "no_contradictory_overlaps": true,
+  "cp_range_exact": true
+ }
+}

@@ -1,0 +1,112 @@
+{
+ "doc_id": "dev-002622",
+ "byte_length": 1016,
+ "cp_length": 983,
+ "regions": [
+  {
+   "start_byte": 0,
+   "end_byte": 2,
+   "start_cp": 0,
+   "end_cp": 2,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 2,
+   "end_byte": 304,
+   "start_cp": 2,
+   "end_cp": 292,
+   "component_id": "comp-prose-statistics-dev-0009",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 304,
+   "end_byte": 307,
+   "start_cp": 292,
+   "end_cp": 295,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 307,
+   "end_byte": 308,
+   "start_cp": 295,
+   "end_cp": 296,
+   "component_id": "comp-code-javascript-dev-0011",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 308,
+   "end_byte": 341,
+   "start_cp": 296,
+   "end_cp": 326,
+   "component_id": "comp-code-javascript-dev-0011",
+   "category": "code",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 341,
+   "end_byte": 342,
+   "start_cp": 326,
+   "end_cp": 327,
+   "component_id": "comp-code-javascript-dev-0011",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 342,
+   "end_byte": 345,
+   "start_cp": 327,
+   "end_cp": 330,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 345,
+   "end_byte": 697,
+   "start_cp": 330,
+   "end_cp": 671,
+   "component_id": "comp-prose-medicine-explainer-dev-0010",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 697,
+   "end_byte": 700,
+   "start_cp": 671,
+   "end_cp": 674,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 700,
+   "end_byte": 1016,
+   "start_cp": 674,
+   "end_cp": 983,
+   "component_id": "comp-prose-math-explainer-dev-0013",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  }
+ ],
+ "invariants": {
+  "tiling_complete": true,
+  "no_contradictory_overlaps": true,
+  "cp_range_exact": true
+ }
+}

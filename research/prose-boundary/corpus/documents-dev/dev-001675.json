@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-001675",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T4-heading-prose-table",
+ "byte_length": 468,
+ "cp_length": 458,
+ "sha256": "6b26cb155ca6a47316223d0af745ccd801b48581a7d5b26f1399e375c0c8bc1a",
+ "document": "## Loj je v skledi mirno segel. Ropova jaha (kot jo pišejo doma\nV testni zbirki Projekt Zdravje 2026 je Matej napisal kratek vnos. Utrujenost, včasih tudi glavobol, ima lahko več razlogov. To je namerni vstavek v besedilo. Beseda „preveriti“ (v smislu posveta) se tu nanaša na obisk zdravnika. Ne gre za priporočilo zdravil ali odmerkov.\n| Opis | Vzorček |\n| --- | --- |\n| Ana je v maju po slovenskih krajih obisk | --vhod tabela/dokumenti.csv, --izhod izp |",
+ "components": [
+  {
+   "component_id": "comp-prose-cooking-dev-0013",
+   "category": "prose",
+   "start_byte": 3,
+   "end_byte": 64
+  },
+  {
+   "component_id": "comp-prose-medicine-explainer-dev-0009",
+   "category": "prose",
+   "start_byte": 65,
+   "end_byte": 346
+  },
+  {
+   "component_id": "comp-prose-travel-dev-0011",
+   "category": "prose",
+   "start_byte": 383,
+   "end_byte": 423
+  },
+  {
+   "component_id": "comp-machine-cli-flags-dev-0006",
+   "category": "machine",
+   "start_byte": 426,
+   "end_byte": 466
+  }
+ ]
+}

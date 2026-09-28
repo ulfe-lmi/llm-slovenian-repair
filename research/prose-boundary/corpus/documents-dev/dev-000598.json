@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-000598",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T5-lists",
+ "byte_length": 1129,
+ "cp_length": 1099,
+ "sha256": "9afac6e081c6c65db6bace79bbfa4dbe786829933ebe88ab77ef7d661790a99c",
+ "document": "- V starem receptu iz leta 1958 stoji, da se ajdova juha iz Ljubljane najprej posoli, nato pa počasi premeša, da ne bi zgrudila. “Ajda mora dišati po štrukljih,” je nekoč zapisala Anja, ki je testirala recept za projektni dnevnik okusov (po mnenju njene sestre, Marice). Pri pripravi je bil pomemben tudi čas: deset minut mešanja, nato pa še kratko ohlajanje na hladni plošči.\n- `int main(void) { char *cena1 = \"1 $\"; char *cena2 = \"2 EUR\";`\n- Loj je v skledi mirno segel. Ropova jaha (kot jo pišejo doma) je v loncu postajala sočna. Petra je po starini vzela dve žlici moke, tri zvezdice anisa in malo muškatnega oreha. Krompir je bil že pripravljen, jajca pa so bila v hladilniku, ki ga je kupila leta 2023. Ura je zazvonila, ko je začutila vonj po špinači.\n- V zapisku potujočega knjigarja, ki ga je našla Maja Zupan, stoji o srečanju na trgu v Benečiji. »Noben dokument ne pove, koliko časa je trajalo dogovarjanje,« je zapisala v povzetku. Nato so v istem spisu omenili plovilo, ki je prevozilo štiri tone soli skozi ozek kanal. Letnico 1740 je avtor pustil le v margini, brez dneva ali meseca.",
+ "components": [
+  {
+   "component_id": "comp-prose-cooking-dev-0001",
+   "category": "prose",
+   "start_byte": 2,
+   "end_byte": 390
+  },
+  {
+   "component_id": "comp-code-c-dev-0005",
+   "category": "code",
+   "start_byte": 393,
+   "end_byte": 455
+  },
+  {
+   "component_id": "comp-prose-cooking-dev-0013",
+   "category": "prose",
+   "start_byte": 458,
+   "end_byte": 781
+  },
+  {
+   "component_id": "comp-prose-history-dev-0007",
+   "category": "prose",
+   "start_byte": 784,
+   "end_byte": 1129
+  }
+ ]
+}

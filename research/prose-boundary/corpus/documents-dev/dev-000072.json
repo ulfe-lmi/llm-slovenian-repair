@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-000072",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T7-prose-json-prose-latex",
+ "byte_length": 947,
+ "cp_length": 927,
+ "sha256": "c078b34973fdee015e2a8452ff05441e25c4fd2859dbe303a840ae829157ce88",
+ "document": "Pri projektu Razumevanje enačb učenci v osmih razredih ugotovijo, da enačba ni zgolj naloga za izračun, temveč jezik, s katerim opisujemo ravnovesje. Ko Ana, izmišljena učiteljica, razlaga postopke, najprej poudari, da na obeh straneh velja izvajati enake spremembe. Tako se učenci naučijo, da odštevamo ali delimo kot po pravilih, ki jih poznamo iz trgovine.\n{\"ime\":\"Oseba Miha\",\"dolžina\":\"1,8 m\",\"avtorsko\":\"Nevtralna testna vsebina\",\"razmerje\":\"0,13\",\"opomba\":\"*Izmišljena oseba* https://primer.si/novica\"}\nPomurski potič se v testni kuhinji projekta Okusi Pomurja peče pri 180 stopinjah, dokler ne postane zlato rjav. Namaz iz mletega oreha (ne preveč) naj bo tanko razgneten, da se test ne raztrga. Katja je dodala malo medu, ker je želela, da bo vonj močnejši in bolj topel. Čas mirovanja testa, približno ena ura, je bil razlika med suhim in mehkim rezom.\n$$\\frac{\\theta}{\\lambda - 1} = \\mu^2 + 5 = \\text{Projekt Brdo}$$",
+ "components": [
+  {
+   "component_id": "comp-prose-math-explainer-dev-0011",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 369
+  },
+  {
+   "component_id": "comp-structured-json-dev-0006",
+   "category": "structured",
+   "start_byte": 370,
+   "end_byte": 521
+  },
+  {
+   "component_id": "comp-prose-cooking-dev-0002",
+   "category": "prose",
+   "start_byte": 522,
+   "end_byte": 882
+  },
+  {
+   "component_id": "comp-math-display-dollar-dev-0003",
+   "category": "math",
+   "start_byte": 883,
+   "end_byte": 947
+  }
+ ]
+}

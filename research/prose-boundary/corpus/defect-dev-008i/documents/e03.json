@@ -1,0 +1,23 @@
+{
+ "doc_id": "e03",
+ "seed": "008iiedge0003",
+ "template": "D008i-C-display-dollar-pairing",
+ "byte_length": 65,
+ "cp_length": 65,
+ "sha256": "a7fdb8614c1f7405677aac3e17bd09bf8913c128295879aee18daa912c4167c8",
+ "document": "Pred tem.\n$$\nnezakljucena vrstica\n\n$$\nx = \\frac{a}{b}\n$$\nZa tem.\n",
+ "components": [
+  {
+   "component_id": "defect-008i-e03",
+   "category": "malformed",
+   "start_byte": 10,
+   "end_byte": 33
+  },
+  {
+   "component_id": "defect-008i-e03b",
+   "category": "math",
+   "start_byte": 35,
+   "end_byte": 56
+  }
+ ]
+}

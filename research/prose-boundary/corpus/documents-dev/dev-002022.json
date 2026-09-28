@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-002022",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T10-randomized",
+ "byte_length": 830,
+ "cp_length": 813,
+ "sha256": "391658c7eff7fbaadbfa45d3dac4b0da7516abf6b1769d515a4493278f770e33",
+ "document": "V izmišljenem projektu Arhiv besed se motiv arhiva pojavi kot tiha zbirka pism, ki potujejo med slovenskimi in evropskimi mestoma. Izmišljeni avtor Martin Golob zgradi novelo iz treh stavkov. Njegova zgodba je tiha.\n[raziskava]\nime = *Projekt Meritve*\nopis = _trajanje_ 3 dni\ncena = 1,20 EUR\navtor = Ana Kovač\nvir = https://primer.si/novica\n; nevtralna testna vsebina\nNova tiskalnica na hodniku, ki so jo za projekt »Manj zastojev« postavili blizu sprejemne pisarne, je imela poseben predal za tanke bonove, kar je presenetilo več zaposlenih. »Tiskanje«, so rekli nekateri, »je še vedno najpogostejši razlog, da se zavrtni k papirju namesto k zaslonski različici.« Ivan je zato predlagal, da se za manjše dokumente uporabi en sam predlog. V šali so dejali, da bo takrat tudi tiskalnica manj »nevoljna« ob zastoju.",
+ "components": [
+  {
+   "component_id": "comp-prose-literature-dev-0010",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 217
+  },
+  {
+   "component_id": "comp-structured-ini-dev-0005",
+   "category": "structured",
+   "start_byte": 218,
+   "end_byte": 370
+  },
+  {
+   "component_id": "comp-prose-computing-dev-0010",
+   "category": "prose",
+   "start_byte": 371,
+   "end_byte": 830
+  }
+ ]
+}

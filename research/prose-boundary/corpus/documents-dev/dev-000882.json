@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-000882",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T3-prose-fenced-prose",
+ "byte_length": 955,
+ "cp_length": 929,
+ "sha256": "551ff2d8bedb9ef7f25b48c97d138420c100cd28c8c88bb0492276047feb000f",
+ "document": "V projektu Gradec je bilo pri projektiranju jeklene konstrukcije ključno, koliko obremenitve prenese nosilni presek. Mladi konstruktor Jaka Kovač je, ob podpori projektirke Lune, predlagal dodatno ojačanje in začasne podlage. Sodelavci so se po dveh tednih razprave strinjali s predlogom. Končno je most dobil tudi dodatno zaščito pred erozijo.\r\n```\r\n// Testni podatki za osebo Ana.\r\nconst HRAŠNA_VREDNOST: i32 = 7;\r\nfn razdelek2(seStez: &str) -> String {\r\n    let vrednost = HRAŠNA_VREDNOST;\r\n    format!(\"podčrtano *{seStez}* in {vrednost} €\")\r\n}\r\n```\r\nV starem receptu iz leta 1958 stoji, da se ajdova juha iz Ljubljane najprej posoli, nato pa počasi premeša, da ne bi zgrudila. “Ajda mora dišati po štrukljih,” je nekoč zapisala Anja, ki je testirala recept za projektni dnevnik okusov (po mnenju njene sestre, Marice). Pri pripravi je bil pomemben tudi čas: deset minut mešanja, nato pa še kratko ohlajanje na hladni plošči.",
+ "components": [
+  {
+   "component_id": "comp-prose-engineering-dev-0008",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 351
+  },
+  {
+   "component_id": "comp-code-rust-dev-0010",
+   "category": "code",
+   "start_byte": 353,
+   "end_byte": 565
+  },
+  {
+   "component_id": "comp-prose-cooking-dev-0001",
+   "category": "prose",
+   "start_byte": 567,
+   "end_byte": 955
+  }
+ ]
+}

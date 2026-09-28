@@ -1,0 +1,62 @@
+{
+ "doc_id": "dev-001350",
+ "byte_length": 669,
+ "cp_length": 652,
+ "regions": [
+  {
+   "start_byte": 0,
+   "end_byte": 228,
+   "start_cp": 0,
+   "end_cp": 223,
+   "component_id": "comp-prose-statistics-dev-0011",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 228,
+   "end_byte": 230,
+   "start_cp": 223,
+   "end_cp": 225,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 230,
+   "end_byte": 334,
+   "start_cp": 225,
+   "end_cp": 327,
+   "component_id": "comp-malformed-unclosed-tex-env-dev-0001",
+   "category": "malformed",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 334,
+   "end_byte": 336,
+   "start_cp": 327,
+   "end_cp": 329,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 336,
+   "end_byte": 669,
+   "start_cp": 329,
+   "end_cp": 652,
+   "component_id": "comp-prose-administration-dev-0008",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  }
+ ],
+ "invariants": {
+  "tiling_complete": true,
+  "no_contradictory_overlaps": true,
+  "cp_range_exact": true
+ }
+}

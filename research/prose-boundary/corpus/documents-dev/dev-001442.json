@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-001442",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T2-prose-math-prose",
+ "byte_length": 903,
+ "cp_length": 887,
+ "sha256": "619aa51d830c160c85320132a6e64ec0b3daaa750099df3b633bcd347c1cedab",
+ "document": "Ana je v maju po slovenskih krajih obiskala Bled, kjer so jo pritegnili mirno jezero, gorski grad in svež planinski zrak. V Ljubljani je sprehodila ozke ulice starega mesta ter se po podnevnem sprehodu povzpnila do gradu. V dnevniku je zapisala nasvet, naj si turisti že pred prihodom preverijo odprte ure muzejev.\n\\begin{equation} \\text{Testni projekt Nika} \\; : \\; \\delta_7=\\frac{1}{2} \\rho_7 \\eta_7 \\Rightarrow \\rho_7=4, \\eta_7=5 \\Rightarrow \\delta_7=10 \\end{equation}\nMed razstavo v izmišljenem paviljonu je vodja ekipe Petra Lovšin pokazala model železne konstrukcije iz leta 1895. Očitali so ji, da je preveč zaupala spominom starih obrtnikov. (V ožjem krogu so rekli, da je bil model težak približno trideset kilogramov.) »Če bi imeli le eno potrdilo,« je dejala, »bi zgodbo lahko razumlili drugače.« Kljub temu so obiskovalci ostali zmedeni zaradi pomanjkanja ohranjenih meritev.",
+ "components": [
+  {
+   "component_id": "comp-prose-travel-dev-0011",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 316
+  },
+  {
+   "component_id": "comp-math-equation-env-dev-0007",
+   "category": "math",
+   "start_byte": 317,
+   "end_byte": 473
+  },
+  {
+   "component_id": "comp-prose-history-dev-0009",
+   "category": "prose",
+   "start_byte": 474,
+   "end_byte": 903
+  }
+ ]
+}

@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-001924",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T11-interactions",
+ "byte_length": 975,
+ "cp_length": 946,
+ "sha256": "17aa2cebdf6c53519d273d64fa710b34377c4ad50f5d7779b0770566b0b7ce70",
+ "document": "`fn main() { /* Testni projekt Lipa: č, š, ž, **poudarek** in`.\n```\nint HRAŠNA_VREDNOST = 1; int main(void) { char *pot = \"docs/vir.txt\"; int razdelek2 = 2; (void)HRAŠNA_VREDNOST; (void)pot; (void)razdelek2; return 0; } /* Neposredni identifikator */\n# komentar z \\frac{a}{b}\n```\nOb prenovljenem pisarnem kotu, ki ga je v notranjem projektu Pisarna pripravila Petra, je nov tablični računalnik služil za skice (in, po njenih besedah, tudi za preprosta vprašanja). V prvih tednih se je navadila na večji zaslon, ker so bile besede na papirju pogosto preveč majhne za oči. Ko je na koncu septembra preverila baterijo, ji je bil prijeten ta enostaven način dela.\nV projektu Podgradski most so se strojni sklopi mosta (vleke, oprave in ležišča) v letu 2024 redno pregledovali. »Če je ležišče obrabljeno, ga ne smemo puščati v uporabo,« je opozoril mehanik Tomaž Golob. Ekipa je zamenjala ležišče in dodala novo mazilo, da bi zmanjšala hrup in obrabo.",
+ "components": [
+  {
+   "component_id": "comp-code-rust-dev-0005",
+   "category": "code",
+   "start_byte": 0,
+   "end_byte": 65
+  },
+  {
+   "component_id": "comp-code-c-dev-0006",
+   "category": "code",
+   "start_byte": 67,
+   "end_byte": 284
+  },
+  {
+   "component_id": "comp-prose-computing-dev-0011",
+   "category": "prose",
+   "start_byte": 285,
+   "end_byte": 672
+  },
+  {
+   "component_id": "comp-prose-engineering-dev-0009",
+   "category": "prose",
+   "start_byte": 673,
+   "end_byte": 975
+  }
+ ]
+}

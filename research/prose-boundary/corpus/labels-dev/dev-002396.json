@@ -1,0 +1,142 @@
+{
+ "doc_id": "dev-002396",
+ "byte_length": 1215,
+ "cp_length": 1197,
+ "regions": [
+  {
+   "start_byte": 0,
+   "end_byte": 265,
+   "start_cp": 0,
+   "end_cp": 257,
+   "component_id": "comp-prose-math-explainer-dev-0002",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 265,
+   "end_byte": 266,
+   "start_cp": 257,
+   "end_cp": 258,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 266,
+   "end_byte": 269,
+   "start_cp": 258,
+   "end_cp": 261,
+   "component_id": "comp-code-sql-dev-0002",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 269,
+   "end_byte": 270,
+   "start_cp": 261,
+   "end_cp": 262,
+   "component_id": "comp-code-sql-dev-0002",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 270,
+   "end_byte": 616,
+   "start_cp": 262,
+   "end_cp": 604,
+   "component_id": "comp-code-sql-dev-0002",
+   "category": "code",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 616,
+   "end_byte": 617,
+   "start_cp": 604,
+   "end_cp": 605,
+   "component_id": "comp-code-sql-dev-0002",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 617,
+   "end_byte": 620,
+   "start_cp": 605,
+   "end_cp": 608,
+   "component_id": "comp-code-sql-dev-0002",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 620,
+   "end_byte": 621,
+   "start_cp": 608,
+   "end_cp": 609,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 621,
+   "end_byte": 634,
+   "start_cp": 609,
+   "end_cp": 622,
+   "component_id": "comp-math-align-env-dev-0003",
+   "category": "math",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 634,
+   "end_byte": 764,
+   "start_cp": 622,
+   "end_cp": 752,
+   "component_id": "comp-math-align-env-dev-0003",
+   "category": "math",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 764,
+   "end_byte": 775,
+   "start_cp": 752,
+   "end_cp": 763,
+   "component_id": "comp-math-align-env-dev-0003",
+   "category": "math",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 775,
+   "end_byte": 776,
+   "start_cp": 763,
+   "end_cp": 764,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 776,
+   "end_byte": 1215,
+   "start_cp": 764,
+   "end_cp": 1197,
+   "component_id": "comp-prose-science-dev-0007",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  }
+ ],
+ "invariants": {
+  "tiling_complete": true,
+  "no_contradictory_overlaps": true,
+  "cp_range_exact": true
+ }
+}

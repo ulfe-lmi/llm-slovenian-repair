@@ -1,0 +1,71 @@
+{
+ "doc_id": "dev-001736",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T10-randomized",
+ "byte_length": 1076,
+ "cp_length": 1060,
+ "sha256": "daded37e0d631ebac7960a3bdad77d8e5a444488b1e381151f700ebeeaa1bbda",
+ "document": "Varčevanje v hiši se pokaže tudi pri majhnih stvareh, rekel bi, pri svetlobi v kopalnici. Luka je v projektu Varna hiša zapisal: »Luč ne pomeni velikega stroška, če jo ob koncu dneva ugasneš.«\nProjekt *Aljaž* meri _tlak_ 12 enot.\n--- {naziv: 'Projektna vsebina: **Vrtna razstava**', opis: 'Nevtralna vsebina z **poudarkom** in https://primer.si/novica', vrednosti: ['Zapolnitev 15 %', 'Premer 4,2 m', 'Koeficient 0,09'], oseba: 'Izmišljena oseba: Luka Novak', projekt: 'Nevtralna testna vsebina'} # Fragment 4: vrtna razstava\n--vhod vir/dnevnik.json, --izhod 4, --podrobnosti\n## Naslov 6\n![Opis: osvetlitev za projekt Foxtrot](https://primer.si/slika.png)\nNina Kranjc: svetlost 300 lx, čas 10 min.\n<b>Projekt Lipa: izmišljen test.\nBesedilo za projektovno avtorizacijo.\n\\(\\left(\\frac{\\mu^2}{8-\\nu}+\\sqrt[5]{13+\\phi}\\right)_{\\text{Domen}}\\)\n\\text{Nina}\\begin{matrix}11&12\\\\13&14\\end{matrix}\n$$\\frac{\\pi}{\\lambda + \\mu} = 11 - \\nu = \\text{Projekt Soca}$$\nSpremenljivka se obnaša kot stikalo v omarici. Vrednost se spremeni. Zanka se ponovi. Funkcija zaključi del.",
+ "components": [
+  {
+   "component_id": "comp-prose-everyday-advice-dev-0004",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 202
+  },
+  {
+   "component_id": "comp-markdown-emphasis-dev-0001",
+   "category": "markdown",
+   "start_byte": 203,
+   "end_byte": 240
+  },
+  {
+   "component_id": "comp-structured-yaml-dev-0004",
+   "category": "structured",
+   "start_byte": 241,
+   "end_byte": 537
+  },
+  {
+   "component_id": "comp-machine-cli-flags-dev-0007",
+   "category": "machine",
+   "start_byte": 538,
+   "end_byte": 587
+  },
+  {
+   "component_id": "comp-markdown-images-dev-0006",
+   "category": "markdown",
+   "start_byte": 588,
+   "end_byte": 710
+  },
+  {
+   "component_id": "comp-malformed-partial-html-dev-0001",
+   "category": "malformed",
+   "start_byte": 711,
+   "end_byte": 782
+  },
+  {
+   "component_id": "comp-math-paren-tex-dev-0004",
+   "category": "math",
+   "start_byte": 783,
+   "end_byte": 852
+  },
+  {
+   "component_id": "comp-math-matrices-dev-0003",
+   "category": "math",
+   "start_byte": 853,
+   "end_byte": 902
+  },
+  {
+   "component_id": "comp-math-display-dollar-dev-0006",
+   "category": "math",
+   "start_byte": 903,
+   "end_byte": 965
+  },
+  {
+   "component_id": "comp-prose-programming-explainer-dev-0008",
+   "category": "prose",
+   "start_byte": 966,
+   "end_byte": 1076
+  }
+ ]
+}

@@ -1,0 +1,162 @@
+{
+ "doc_id": "dev-000175",
+ "byte_length": 1275,
+ "cp_length": 1252,
+ "regions": [
+  {
+   "start_byte": 0,
+   "end_byte": 1,
+   "start_cp": 0,
+   "end_cp": 1,
+   "component_id": "comp-code-cpp-dev-0001",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 1,
+   "end_byte": 20,
+   "start_cp": 1,
+   "end_cp": 20,
+   "component_id": "comp-code-cpp-dev-0001",
+   "category": "code",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 20,
+   "end_byte": 21,
+   "start_cp": 20,
+   "end_cp": 21,
+   "component_id": "comp-code-cpp-dev-0001",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 21,
+   "end_byte": 22,
+   "start_cp": 21,
+   "end_cp": 22,
+   "component_id": "template",
+   "category": null,
+   "role": "PROSE",
+   "template_owned": true
+  },
+  {
+   "start_byte": 22,
+   "end_byte": 23,
+   "start_cp": 22,
+   "end_cp": 23,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 23,
+   "end_byte": 26,
+   "start_cp": 23,
+   "end_cp": 26,
+   "component_id": "comp-code-javascript-dev-0009",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 26,
+   "end_byte": 27,
+   "start_cp": 26,
+   "end_cp": 27,
+   "component_id": "comp-code-javascript-dev-0009",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 27,
+   "end_byte": 483,
+   "start_cp": 27,
+   "end_cp": 477,
+   "component_id": "comp-code-javascript-dev-0009",
+   "category": "code",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 483,
+   "end_byte": 484,
+   "start_cp": 477,
+   "end_cp": 478,
+   "component_id": "comp-code-javascript-dev-0009",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 484,
+   "end_byte": 487,
+   "start_cp": 478,
+   "end_cp": 481,
+   "component_id": "comp-code-javascript-dev-0009",
+   "category": "code",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 487,
+   "end_byte": 488,
+   "start_cp": 481,
+   "end_cp": 482,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 488,
+   "end_byte": 811,
+   "start_cp": 482,
+   "end_cp": 797,
+   "component_id": "comp-prose-cooking-dev-0012",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 811,
+   "end_byte": 812,
+   "start_cp": 797,
+   "end_cp": 798,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 812,
+   "end_byte": 1231,
+   "start_cp": 798,
+   "end_cp": 1211,
+   "component_id": "comp-prose-administration-dev-0002",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 1231,
+   "end_byte": 1275,
+   "start_cp": 1211,
+   "end_cp": 1252,
+   "component_id": "template",
+   "category": null,
+   "role": "PROSE",
+   "template_owned": true
+  }
+ ],
+ "invariants": {
+  "tiling_complete": true,
+  "no_contradictory_overlaps": true,
+  "cp_range_exact": true
+ }
+}

@@ -1,0 +1,29 @@
+{
+ "doc_id": "dev-000327",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T9-prose-malformed-prose",
+ "byte_length": 594,
+ "cp_length": 577,
+ "sha256": "185a34e6ee7cd6756a6f62668b5fcbec913cee83d50173f5455d526517de5e4e",
+ "document": "V poročilu projekta Sova je Ana zabeležila, da je bil račun porabe preproster. Trije sodelavci so skupno porabili enaindevetdeset evrov. Po razmerju med porabo in sodelavci je povprečje za vsakega znašalo trideset tri evri.\n\n\\(x+1=2. Testni zapis projekta Lipa za osebo Anna.\n\n“Zelenjavna juha iz preteklega tedna ni bila le juha,” je zapisal Marko v projektu Kuhinjski razgledi, “temveč spomin na dedinovo polico, kjer so bile posode iz gline.” V receptu je bil pomemben tudi čas (čeprav manj natančen): koruzni pire, krompir in malo smetane, vse skupaj kuhano petnajst minut.",
+ "components": [
+  {
+   "component_id": "comp-prose-statistics-dev-0011",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 228
+  },
+  {
+   "component_id": "comp-malformed-incomplete-paren-bracket-dev-0001",
+   "category": "malformed",
+   "start_byte": 230,
+   "end_byte": 280
+  },
+  {
+   "component_id": "comp-prose-cooking-dev-0003",
+   "category": "prose",
+   "start_byte": 282,
+   "end_byte": 594
+  }
+ ]
+}

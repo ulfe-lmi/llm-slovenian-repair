@@ -1,0 +1,59 @@
+{
+ "doc_id": "dev-001461",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T10-randomized",
+ "byte_length": 1260,
+ "cp_length": 1239,
+ "sha256": "23a4a07cfecbb1940f002cc7f57530bb4133ad09e0a769d82be41fdb8b10e488",
+ "document": "Ana je zapisala, da se v starejših pisarnah pogosto uporabljajo tiskalniki, ki se povezujejo po kablu, čeprav so mlajši sodelavci privrženci brezžičnih rešitev. Takšna razmerja, čeprav na videz nevidna, vplivajo na to, kako hitro potuje dokument. (V projektu so to opazovali tri tedne.)\n{\"ime\":\"Projekt Sonce\",\"dolžina\":\"4,2 m\",\"avtorsko\":\"Nevtralna testna vsebina\",\"kvote\":{\"delež\":\"25 %\",\"opomba\":\"**Pregled** https://primer.si/novica\"}}\n```\n#include <iostream>\n// Značilni znaki: č, š, ž in *poudarek*\nint main() {\n    int razdelek2 = 4;\n    std::cout << \"Tekst: *zvezdice*, `kod` in _pod_\" << std::endl;\n    std::cout << \"Cena: 10 $ (oklepaji)\" << std::endl;\n    return razdelek2;\n}\n```\n\\[\\dfrac{1}{2}+\\frac{\\alpha}{\\beta}=\\text{Anja}\\]\n[raziskava]\nnaslov = 'Opazovanje vremena'\nvodi = 'Marko Novak'\nmerilo = '0,13'\ntrajanje = '2 dni'\nopis = '_Opomba_ ni vključena'\nvir = 'https://primer.si/novica'\n\\sum_{\\tau=1}^{9} \\upsilon_{\\tau} - \\prod_{\\phi=1}^{5} \\chi_{\\phi} \\text{Triglav}\nPostaja *Petra* beleži _množino_ 250 mililitri.\nMarko je na sestanku v Mariboru povedal, da je zanka ponavljajoče delo. (Čakala, kolikor je potrebno, a ne več.) Njegov opis je bil preprost: program naj preveri pakete en po en, dokler ne prazni tovornjak.",
+ "components": [
+  {
+   "component_id": "comp-prose-computing-dev-0005",
+   "category": "prose",
+   "start_byte": 0,
+   "end_byte": 295
+  },
+  {
+   "component_id": "comp-structured-json-dev-0005",
+   "category": "structured",
+   "start_byte": 296,
+   "end_byte": 450
+  },
+  {
+   "component_id": "comp-code-cpp-dev-0001",
+   "category": "code",
+   "start_byte": 451,
+   "end_byte": 705
+  },
+  {
+   "component_id": "comp-math-fractions-dev-0001",
+   "category": "math",
+   "start_byte": 706,
+   "end_byte": 755
+  },
+  {
+   "component_id": "comp-structured-toml-dev-0002",
+   "category": "structured",
+   "start_byte": 756,
+   "end_byte": 918
+  },
+  {
+   "component_id": "comp-math-summations-dev-0005",
+   "category": "math",
+   "start_byte": 919,
+   "end_byte": 1000
+  },
+  {
+   "component_id": "comp-markdown-emphasis-dev-0006",
+   "category": "markdown",
+   "start_byte": 1001,
+   "end_byte": 1050
+  },
+  {
+   "component_id": "comp-prose-programming-explainer-dev-0002",
+   "category": "prose",
+   "start_byte": 1051,
+   "end_byte": 1260
+  }
+ ]
+}

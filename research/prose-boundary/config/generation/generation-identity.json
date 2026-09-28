@@ -1,0 +1,614 @@
+{
+ "schema": "008c-generation-identity/1",
+ "order": "008-c",
+ "status": "COMPLETE",
+ "purpose": "structural test-data generation only (human decision 2026-09-17); NOT linguistic-method tuning; NOT objective-009 data",
+ "prompt_library_sha256": "904dd36b9891c567f250bf8b42b374d0b6557aa79ca3fcaa3c8824682fcc8fef",
+ "batch_plan_sha256": "dec9c975de1846f3e781c1c08357309c00a4f0d38662c8cbfd8223a0cdcb171d",
+ "budget": {
+  "total": 400,
+  "component_batches_max": 250,
+  "naturalistic_max": 150,
+  "preflight_calls": 1,
+  "component_calls": 235,
+  "naturalistic_calls": 150,
+  "total_calls": 386,
+  "retries": 21,
+  "failed_batches": 22,
+  "total_attempts": 414,
+  "note": "total_calls = planned slots consumed (hard caps apply to slots); total_attempts = every HTTP attempt incl. retries and recovery calls (disclosed ledger)"
+ },
+ "failures": [
+  {
+   "stage": "component",
+   "family": "prose-travel",
+   "instance": "dev",
+   "batch": 0,
+   "error": "transport error: TimeoutError (unhandled by the initial driver build; no receipt written; the slot was re-issued in the recovery run)"
+  },
+  {
+   "stage": "naturalistic",
+   "scenario": "ns-algorithm-python",
+   "instance": "dev",
+   "seq": 2,
+   "error": "guard violation",
+   "retry_pending": true
+  },
+  {
+   "stage": "naturalistic",
+   "scenario": "ns-algorithm-python",
+   "instance": "hidden",
+   "seq": 1,
+   "error": "guard violation",
+   "retry_pending": true
+  },
+  {
+   "stage": "naturalistic",
+   "scenario": "ns-table-equations",
+   "instance": "dev",
+   "seq": 1,
+   "error": "guard violation",
+   "retry_pending": true
+  },
+  {
+   "stage": "naturalistic",
+   "scenario": "ns-table-equations",
+   "instance": "hidden",
+   "seq": 3,
+   "error": "guard violation",
+   "retry_pending": true
+  },
+  {
+   "stage": "naturalistic",
+   "scenario": "ns-troubleshooting",
+   "instance": "dev",
+   "seq": 6,
+   "error": "guard violation",
+   "retry_pending": true
+  },
+  {
+   "stage": "naturalistic",
+   "scenario": "ns-troubleshooting",
+   "instance": "dev",
+   "seq": 6,
+   "error": "retry failed",
+   "final": true
+  },
+  {
+   "stage": "naturalistic",
+   "scenario": "ns-md-documentation",
+   "instance": "dev",
+   "seq": 2,
+   "error": "expected exactly one assistant output_text",
+   "retry_pending": true
+  },
+  {
+   "stage": "naturalistic",
+   "scenario": "ns-comparison-table",
+   "instance": "dev",
+   "seq": 5,
+   "error": "guard violation",
+   "retry_pending": true
+  },
+  {
+   "stage": "naturalistic",
+   "scenario": "ns-comparison-table",
+   "instance": "dev",
+   "seq": 6,
+   "error": "guard violation",
+   "retry_pending": true
+  },
+  {
+   "stage": "naturalistic",
+   "scenario": "ns-technical-manual",
+   "instance": "dev",
+   "seq": 2,
+   "error": "guard violation",
+   "retry_pending": true
+  },
+  {
+   "stage": "naturalistic",
+   "scenario": "ns-technical-manual",
+   "instance": "dev",
+   "seq": 5,
+   "error": "guard violation",
+   "retry_pending": true
+  },
+  {
+   "stage": "naturalistic",
+   "scenario": "ns-technical-manual",
+   "instance": "dev",
+   "seq": 5,
+   "error": "retry failed",
+   "final": true
+  },
+  {
+   "stage": "naturalistic",
+   "scenario": "ns-technical-manual",
+   "instance": "dev",
+   "seq": 6,
+   "error": "guard violation",
+   "retry_pending": true
+  },
+  {
+   "stage": "naturalistic",
+   "scenario": "ns-technical-manual",
+   "instance": "dev",
+   "seq": 6,
+   "error": "retry failed",
+   "final": true
+  },
+  {
+   "stage": "naturalistic",
+   "scenario": "ns-data-report",
+   "instance": "dev",
+   "seq": 2,
+   "error": "guard violation",
+   "retry_pending": true
+  },
+  {
+   "stage": "naturalistic",
+   "scenario": "ns-data-report",
+   "instance": "dev",
+   "seq": 2,
+   "error": "retry failed",
+   "final": true
+  },
+  {
+   "stage": "naturalistic",
+   "scenario": "ns-migration-notes",
+   "instance": "dev",
+   "seq": 4,
+   "error": "guard violation",
+   "retry_pending": true
+  },
+  {
+   "stage": "naturalistic",
+   "scenario": "ns-migration-notes",
+   "instance": "hidden",
+   "seq": 5,
+   "error": "guard violation",
+   "retry_pending": true
+  },
+  {
+   "stage": "naturalistic",
+   "scenario": "ns-glossary-entry",
+   "instance": "hidden",
+   "seq": 2,
+   "error": "guard violation",
+   "retry_pending": true
+  },
+  {
+   "stage": "naturalistic",
+   "scenario": "ns-glossary-entry",
+   "instance": "hidden",
+   "seq": 2,
+   "error": "retry failed",
+   "final": true
+  },
+  {
+   "stage": "naturalistic",
+   "scenario": "ns-glossary-entry",
+   "instance": "hidden",
+   "seq": 4,
+   "error": "guard violation",
+   "retry_pending": true
+  },
+  {
+   "stage": "naturalistic",
+   "scenario": "ns-technical-manual",
+   "instance": "dev",
+   "seq": 5,
+   "error": "guard violation: ",
+   "retry_pending": true
+  },
+  {
+   "stage": "naturalistic",
+   "scenario": "ns-technical-manual",
+   "instance": "dev",
+   "seq": 5,
+   "error": "guard violation:  (retry failed)",
+   "final": true
+  },
+  {
+   "stage": "naturalistic",
+   "scenario": "ns-glossary-entry",
+   "instance": "hidden",
+   "seq": 2,
+   "error": "guard violation: ",
+   "retry_pending": true
+  }
+ ],
+ "privacy": "no raw outputs, no endpoint value, no bearer, no private paths in this file",
+ "preflight": {
+  "status": "ok",
+  "call_index": 1,
+  "model": "qwen3.8-27b",
+  "response_sha256": "db8b8e836881534b3e62cf633db64f28af421e09feaae85bd3f3249912053c65",
+  "error": null
+ },
+ "seeds": {
+  "dev_mashup": "53ea1e63de0a7ec9",
+  "hidden_mashup": "a0fe550e7f0f8b9b",
+  "family_seeds": {
+   "prose-science": {
+    "dev": "7f84b625b05da42b",
+    "hidden": "04a9293b30c3a886"
+   },
+   "prose-history": {
+    "dev": "6ba57a6779456223",
+    "hidden": "ce3fedc3b33462b0"
+   },
+   "prose-everyday-advice": {
+    "dev": "46a8c02d2efde567",
+    "hidden": "e660872f0a8dba36"
+   },
+   "prose-computing": {
+    "dev": "f22499393df1cf7c",
+    "hidden": "282485e72f856613"
+   },
+   "prose-cooking": {
+    "dev": "23280b2dca85475c",
+    "hidden": "47694a2861749270"
+   },
+   "prose-travel": {
+    "dev": "b083628f815fa60e",
+    "hidden": "b360f5d751e5317f"
+   },
+   "prose-education": {
+    "dev": "dcc859f08f623f80",
+    "hidden": "6a93dc5da2a0b2ee"
+   },
+   "prose-engineering": {
+    "dev": "fc7f187c580cbbcb",
+    "hidden": "b1a7a10def49f8b1"
+   },
+   "prose-medicine-explainer": {
+    "dev": "18004cb333ca9684",
+    "hidden": "dc9f40af823af0bd"
+   },
+   "prose-sports": {
+    "dev": "3abdaf6df2971d67",
+    "hidden": "97574bb272645cca"
+   },
+   "prose-literature": {
+    "dev": "941ee42b18a03dcc",
+    "hidden": "bfc46493d8037dcf"
+   },
+   "prose-administration": {
+    "dev": "8e8927672b1cc66a",
+    "hidden": "dd4bebc3c5dd1dd6"
+   },
+   "prose-statistics": {
+    "dev": "a72b4906786c2d6a",
+    "hidden": "9c9f408a080a43c2"
+   },
+   "prose-math-explainer": {
+    "dev": "86a73beece1331ff",
+    "hidden": "8ab6729c5b722933"
+   },
+   "prose-electronics": {
+    "dev": "18440658d4ed7031",
+    "hidden": "0600e6d5ff258901"
+   },
+   "prose-programming-explainer": {
+    "dev": "ff7589642ee352bd",
+    "hidden": "8e8098ac180a7102"
+   },
+   "code-python": {
+    "dev": "2e69b924aa3fe390",
+    "hidden": "979b6cf3d77a96ea"
+   },
+   "code-c": {
+    "dev": "2950db7707fca082",
+    "hidden": "428792738d9252ff"
+   },
+   "code-cpp": {
+    "dev": "25519a23a817cb04",
+    "hidden": "940cf4d1f9c32ccf"
+   },
+   "code-javascript": {
+    "dev": "36052daf021c248f",
+    "hidden": "70f7cf93b0aaf645"
+   },
+   "code-shell-bash": {
+    "dev": "8c67862bab784197",
+    "hidden": "4353fa5994d8cb8b"
+   },
+   "code-sql": {
+    "dev": "3050a509b2098a1c",
+    "hidden": "fc48c0c74736bc43"
+   },
+   "code-rust": {
+    "dev": "ea88bf89621f73c9",
+    "hidden": "4d402feca87483fe"
+   },
+   "structured-json": {
+    "dev": "e8a93402ff4e1314",
+    "hidden": "27034b472dd8a44c"
+   },
+   "structured-yaml": {
+    "dev": "25c06e848b63401e",
+    "hidden": "4cea9d4c320b4248"
+   },
+   "structured-toml": {
+    "dev": "c258923f40a15b95",
+    "hidden": "4234865f1600d580"
+   },
+   "structured-xml": {
+    "dev": "f29b76f1b4360cc9",
+    "hidden": "88987c3516ca12ab"
+   },
+   "structured-html": {
+    "dev": "37a643e5ac7f577e",
+    "hidden": "eced7a291d4fefbc"
+   },
+   "structured-ini": {
+    "dev": "0a8579f1e16d3747",
+    "hidden": "c1bd9728f0821ddd"
+   },
+   "structured-env-blocks": {
+    "dev": "99e5840822ec42d7",
+    "hidden": "c63a39841ad40684"
+   },
+   "structured-keyvalue": {
+    "dev": "d8feb30ed24dbe13",
+    "hidden": "7d7aa0f8d4d866ea"
+   },
+   "math-inline-dollar": {
+    "dev": "ea74171b64bfeb40",
+    "hidden": "d71135cfc64945fc"
+   },
+   "math-display-dollar": {
+    "dev": "641adf684730ac5c",
+    "hidden": "ca36ceda9beee5f2"
+   },
+   "math-paren-tex": {
+    "dev": "8bb008c71bdf803b",
+    "hidden": "29c3b66414c2104e"
+   },
+   "math-bracket-tex": {
+    "dev": "03d962d138168cf1",
+    "hidden": "434694e4099ab0ae"
+   },
+   "math-equation-env": {
+    "dev": "f7a4faf962bda0a2",
+    "hidden": "e7d23473a9e5d738"
+   },
+   "math-align-env": {
+    "dev": "7ccabb70344cf699",
+    "hidden": "38f41418e69ddb3a"
+   },
+   "math-aligned-env": {
+    "dev": "82a6d56c1009a4ba",
+    "hidden": "d3440148099328bb"
+   },
+   "math-matrices": {
+    "dev": "a260e18321dc6583",
+    "hidden": "c83a14ce12737d87"
+   },
+   "math-fractions": {
+    "dev": "5d5d04b3387d8915",
+    "hidden": "076316a65a81a8e6"
+   },
+   "math-summations": {
+    "dev": "d11eeb8d89621bbb",
+    "hidden": "8210a1034083ea4c"
+   },
+   "math-probability": {
+    "dev": "30a0f651ce5db592",
+    "hidden": "db9acad4b05f94d8"
+   },
+   "math-text-slovenian": {
+    "dev": "4165e8bf4cba3c5c",
+    "hidden": "431bf1e87bb5af6c"
+   },
+   "md-headings": {
+    "dev": "33ce9693a1aa148f",
+    "hidden": "fa708b03df280172"
+   },
+   "md-emphasis": {
+    "dev": "1d531cea33c2edee",
+    "hidden": "c9c52a7f4d46116e"
+   },
+   "md-strong": {
+    "dev": "b83cb9bce8e9f11a",
+    "hidden": "133bb89118411513"
+   },
+   "md-strikethrough": {
+    "dev": "5bd548c19ff424d4",
+    "hidden": "210b8f24830d4cf1"
+   },
+   "md-lists": {
+    "dev": "03c4c2e6ec93d34f",
+    "hidden": "f353e60ffc9de9b6"
+   },
+   "md-blockquotes": {
+    "dev": "4513c921ba382e24",
+    "hidden": "018703098d84361b"
+   },
+   "md-tables": {
+    "dev": "5b2fa8604368efbb",
+    "hidden": "f52f7cfae9a8f95c"
+   },
+   "md-links": {
+    "dev": "dad7181ca04e48ca",
+    "hidden": "20967a60229c1469"
+   },
+   "md-images": {
+    "dev": "a30d21853ea93e6a",
+    "hidden": "b450f9ae03ac0fb9"
+   },
+   "md-autolinks": {
+    "dev": "7261b63a4648e4e4",
+    "hidden": "f500eb633046c9d1"
+   },
+   "md-inline-code": {
+    "dev": "8d672e51e72fd909",
+    "hidden": "d696f046d179b36a"
+   },
+   "md-fenced-code": {
+    "dev": "bcba5fd39f3628bd",
+    "hidden": "6f5b43dc1187cece"
+   },
+   "md-raw-html": {
+    "dev": "8bdbb109ad4f8467",
+    "hidden": "fe194779061cac6f"
+   },
+   "machine-posix-paths": {
+    "dev": "a5fd77fc9384964b",
+    "hidden": "543046a9588b8bbd"
+   },
+   "machine-windows-paths": {
+    "dev": "70da0a337a062602",
+    "hidden": "f00cbc4fa43e8d1c"
+   },
+   "machine-shell-commands": {
+    "dev": "9c76e06af895af58",
+    "hidden": "2144c57392b5ec7b"
+   },
+   "machine-cli-flags": {
+    "dev": "6eec9260da586eb8",
+    "hidden": "21740dace46f702b"
+   },
+   "machine-env-vars": {
+    "dev": "e75a3b23bfa397d5",
+    "hidden": "43b6c41c7f0d91b5"
+   },
+   "machine-filenames": {
+    "dev": "1141cf934ff8656f",
+    "hidden": "6d85eaf7d0dd252a"
+   },
+   "machine-urls": {
+    "dev": "6866bfff91115faf",
+    "hidden": "72aea618e5a6d998"
+   },
+   "machine-emails": {
+    "dev": "2b28e0f3e777c509",
+    "hidden": "82bc931992dc686e"
+   },
+   "machine-identifiers": {
+    "dev": "e2feeac3f487866d",
+    "hidden": "4c633910213beead"
+   },
+   "machine-versions-numbers-units": {
+    "dev": "e435626e37cd945a",
+    "hidden": "200b8d950cd5d869"
+   },
+   "malformed-unclosed-fence": {
+    "dev": "11fe0088d65eeac8",
+    "hidden": "55bca3e1b475c9ec"
+   },
+   "malformed-unmatched-backtick": {
+    "dev": "cf316ba4ee49a7c1",
+    "hidden": "4e63e110d463a8c0"
+   },
+   "malformed-unmatched-dollar": {
+    "dev": "5b65378913a37645",
+    "hidden": "0815e9dc6c4009f4"
+   },
+   "malformed-incomplete-display-dollar": {
+    "dev": "99960396f6eb3c02",
+    "hidden": "4a79bf78b633cac3"
+   },
+   "malformed-incomplete-paren-bracket": {
+    "dev": "aa45d83560a1aeb0",
+    "hidden": "c1fdd73f84b3f94a"
+   },
+   "malformed-unclosed-tex-env": {
+    "dev": "e6e95ad82cacc10f",
+    "hidden": "33a0c660b2515f39"
+   },
+   "malformed-broken-link": {
+    "dev": "5b3fd457e43fdfc7",
+    "hidden": "84ee14279e078581"
+   },
+   "malformed-partial-html": {
+    "dev": "5b400aa076cb31cd",
+    "hidden": "9c714d5823c6fa69"
+   },
+   "malformed-truncated-json": {
+    "dev": "84d40c0d1ef0a4db",
+    "hidden": "b25707c3e2ace2c5"
+   },
+   "malformed-malformed-nesting": {
+    "dev": "49c2f67d6ab3d628",
+    "hidden": "332a70a440e96b20"
+   }
+  },
+  "scenario_seeds": {
+   "ns-algorithm-python": {
+    "dev": "50a40b9870763c15",
+    "hidden": "6bef05004773a9dc"
+   },
+   "ns-table-equations": {
+    "dev": "7ac075dc9c9907ff",
+    "hidden": "bd581c515d057480"
+   },
+   "ns-troubleshooting": {
+    "dev": "fdae2b910386b02a",
+    "hidden": "bfb321ff50073b84"
+   },
+   "ns-json-config": {
+    "dev": "18c880882b583d7e",
+    "hidden": "4af84d3bc89cfa8e"
+   },
+   "ns-md-documentation": {
+    "dev": "0430095a2e768348",
+    "hidden": "0857aecf6ddc60b8"
+   },
+   "ns-math-answer": {
+    "dev": "feee1f3afbc39dcb",
+    "hidden": "9bf9a9a306b29504"
+   },
+   "ns-comparison-table": {
+    "dev": "4189d7fe6b7ff9d5",
+    "hidden": "3f45cea6750c77f4"
+   },
+   "ns-malformed-markdown": {
+    "dev": "576ddc08148c3b89",
+    "hidden": "91a4681edf35b1de"
+   },
+   "ns-api-reference": {
+    "dev": "df2b285b63a392d4",
+    "hidden": "1961bacb0c328413"
+   },
+   "ns-technical-manual": {
+    "dev": "003b4e008ac3557c",
+    "hidden": "02d9ac4465a9c93f"
+   },
+   "ns-changelog": {
+    "dev": "353b16a2141008b8",
+    "hidden": "eaf2772be4e62247"
+   },
+   "ns-qa-answer": {
+    "dev": "ed65958c3aaf3a5b",
+    "hidden": "30d418c6b9fae0b0"
+   },
+   "ns-data-report": {
+    "dev": "fe94dc86f0d5626b",
+    "hidden": "1832708933d00e45"
+   },
+   "ns-migration-notes": {
+    "dev": "c55468276642b50b",
+    "hidden": "e8375e91cb329850"
+   },
+   "ns-glossary-entry": {
+    "dev": "78653d297d10cd33",
+    "hidden": "cc4f03970ac64c40"
+   }
+  },
+  "note": "instance separation = separate per-instance seed streams and separate batch draws under the frozen deterministic order; the seed of every generated component/naturalistic record is recorded in the record itself"
+ },
+ "generator": {
+  "endpoint": "private research endpoint identity omitted (007 convention)",
+  "deployment_class": "A100-FP8 (007 lineage deployment record)",
+  "model": "qwen3.8-27b",
+  "protocol": "Responses non-streaming",
+  "profile_sha256": "510c3394d2ccad8a098660b8b5512d338de0a5b77352ec693d2286ee2223723c",
+  "credential_source": "profile experimental_bearer_token (read as data; never printed/persisted/hashed/committed)",
+  "workers": 1,
+  "timeout_seconds": 300,
+  "parameter_note": "the driver request carries model/stream/store/input only; the frozen library's per-family temperature (0.8-0.9) and max_output_tokens were NOT sent - the endpoint's own sampling defaults applied (recorded driver-fidelity gap; the corpus shows empirically non-deterministic sampling, so instance diversity is present); disclosed in REPORT-008C section 14"
+ }
+}

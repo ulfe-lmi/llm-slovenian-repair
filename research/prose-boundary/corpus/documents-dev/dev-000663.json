@@ -1,0 +1,35 @@
+{
+ "doc_id": "dev-000663",
+ "seed": "53ea1e63de0a7ec9",
+ "template": "T4-heading-prose-table",
+ "byte_length": 546,
+ "cp_length": 540,
+ "sha256": "e904331ed91d1d0df26b475043f092900fc2c6851b35a3226fd47ea7e03c84d7",
+ "document": "## Petra je pri večernem testu ugotovila, da je vsak sklep, ki \nV projektu Gorski dnevnik je Anja pojasnila, da spremenljivka deluje kot imenovana skrinjica, v kateri hranimo eno vrednost. Ko je program ponavljal preverjanje vremenskih podatkov, je zanka pretekle dni v vrsti in ohranila le najhladnejše. Funkcija, ki je izračunala povprečje, je bila kot majhno orodje, saj so jo znali poklicati vedno znova brez ponavljanja besedila.\n| Opis | Vzorček |\n| --- | --- |\n| Za odrasle v programu Večer 2024 so prip | v1.2.3, 3,5 m, 42 obr/min |",
+ "components": [
+  {
+   "component_id": "comp-prose-electronics-dev-0010",
+   "category": "prose",
+   "start_byte": 3,
+   "end_byte": 64
+  },
+  {
+   "component_id": "comp-prose-programming-explainer-dev-0011",
+   "category": "prose",
+   "start_byte": 65,
+   "end_byte": 438
+  },
+  {
+   "component_id": "comp-prose-education-dev-0012",
+   "category": "prose",
+   "start_byte": 475,
+   "end_byte": 516
+  },
+  {
+   "component_id": "comp-machine-versions-numbers-units-dev-0005",
+   "category": "machine",
+   "start_byte": 519,
+   "end_byte": 544
+  }
+ ]
+}

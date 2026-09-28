@@ -1,0 +1,202 @@
+{
+ "doc_id": "dev-000883",
+ "byte_length": 575,
+ "cp_length": 570,
+ "regions": [
+  {
+   "start_byte": 0,
+   "end_byte": 3,
+   "start_cp": 0,
+   "end_cp": 3,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 3,
+   "end_byte": 64,
+   "start_cp": 3,
+   "end_cp": 63,
+   "component_id": "comp-prose-electronics-dev-0003",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 64,
+   "end_byte": 65,
+   "start_cp": 63,
+   "end_cp": 64,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 65,
+   "end_byte": 455,
+   "start_cp": 64,
+   "end_cp": 451,
+   "component_id": "comp-prose-history-dev-0003",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 455,
+   "end_byte": 456,
+   "start_cp": 451,
+   "end_cp": 452,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 456,
+   "end_byte": 476,
+   "start_cp": 452,
+   "end_cp": 471,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 476,
+   "end_byte": 490,
+   "start_cp": 471,
+   "end_cp": 485,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 490,
+   "end_byte": 492,
+   "start_cp": 485,
+   "end_cp": 487,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 492,
+   "end_byte": 532,
+   "start_cp": 487,
+   "end_cp": 527,
+   "component_id": "comp-prose-travel-dev-0012",
+   "category": "prose",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 532,
+   "end_byte": 535,
+   "start_cp": 527,
+   "end_cp": 530,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  },
+  {
+   "start_byte": 535,
+   "end_byte": 546,
+   "start_cp": 530,
+   "end_cp": 541,
+   "component_id": "comp-machine-env-vars-dev-0001",
+   "category": "machine",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 546,
+   "end_byte": 547,
+   "start_cp": 541,
+   "end_cp": 542,
+   "component_id": "comp-machine-env-vars-dev-0001",
+   "category": "machine",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 547,
+   "end_byte": 559,
+   "start_cp": 542,
+   "end_cp": 554,
+   "component_id": "comp-machine-env-vars-dev-0001",
+   "category": "machine",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 559,
+   "end_byte": 560,
+   "start_cp": 554,
+   "end_cp": 555,
+   "component_id": "comp-machine-env-vars-dev-0001",
+   "category": "machine",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 560,
+   "end_byte": 561,
+   "start_cp": 555,
+   "end_cp": 556,
+   "component_id": "comp-machine-env-vars-dev-0001",
+   "category": "machine",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 561,
+   "end_byte": 564,
+   "start_cp": 556,
+   "end_cp": 559,
+   "component_id": "comp-machine-env-vars-dev-0001",
+   "category": "machine",
+   "role": "PROTECTED",
+   "template_owned": false
+  },
+  {
+   "start_byte": 564,
+   "end_byte": 565,
+   "start_cp": 559,
+   "end_cp": 560,
+   "component_id": "comp-machine-env-vars-dev-0001",
+   "category": "machine",
+   "role": "NEUTRAL",
+   "template_owned": false
+  },
+  {
+   "start_byte": 565,
+   "end_byte": 573,
+   "start_cp": 560,
+   "end_cp": 568,
+   "component_id": "comp-machine-env-vars-dev-0001",
+   "category": "machine",
+   "role": "PROSE",
+   "template_owned": false
+  },
+  {
+   "start_byte": 573,
+   "end_byte": 575,
+   "start_cp": 568,
+   "end_cp": 570,
+   "component_id": "template",
+   "category": null,
+   "role": "NEUTRAL",
+   "template_owned": true
+  }
+ ],
+ "invariants": {
+  "tiling_complete": true,
+  "no_contradictory_overlaps": true,
+  "cp_range_exact": true
+ }
+}
