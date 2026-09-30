@@ -1621,6 +1621,60 @@ No merge, no auto-merge, no release, no deployment claim; the
 objective-009 PR stays OPEN pending strategy review; collection suffixes
 (009-b onward) start only after an attributable E2 resolution.
 
+## 23. Post-merge machine-block identity advance (objective 009, round 009-b)
+
+This section is the additive post-merge identity advance recorded by the
+009-b corrective suffix (D0; classification rationale in the 009-b order
+and report). It changes no scientific result, rewrites nothing in the
+007/008/009 narratives (sections 1-22), and changes no frozen surface:
+the only narrative bytes changed outside the machine block are this
+additive section.
+
+(a) Old review point and its identity: the machine block tracked the 007
+review point - main_sha `7d2cc9ee37c1fc8c2a3eba238f89bc9bb242f9d9` (the
+objective-007 merge commit), reviewed head
+`7d2cc9ee37c1fc8c2a3eba238f89bc9bb242f9d9`, parent
+`4a029287f27e038d5c34c39b26ca836be7c6914b`, branch
+`oap/007-concept-verification`, pr_number 8. The 007-o review point
+remains fully recorded in the 007 narrative (sections 1-15), the
+unchanged quarantined 007-n identity fields, and the committed 007-o
+order and report; the branch and pr_number fields remain locked to the
+committed 007-o order by
+test_branch_and_pr_match_committed_007o_order and are byte-unchanged
+here.
+
+(b) Advance: the machine block now tracks the accepted objective-008
+merge - main_sha and reviewed_branch_head_sha
+`185dc3d9c654991619ae5c57b64e0c54f4550a16` (the objective-008 merge
+commit, whose parents are
+`7d2cc9ee37c1fc8c2a3eba238f89bc9bb242f9d9` and
+`59d8f030a91309f4386bde48b360f17d7ea11e86`) and
+reviewed_branch_head_parent_sha
+`59d8f030a91309f4386bde48b360f17d7ea11e86` (the accepted objective-008
+branch head, the second parent of the merge commit).
+
+(c) Reason: the 009-a order's counters-only bookkeeping clause froze the
+identity fields at the 007 review point, leaving
+test_main_is_ancestor_of_reviewed_head structurally red at every head
+after the 008 merge (live origin/main `185dc3d9c654991619ae5c57b64e0c54f4550a16`
+versus frozen main_sha `7d2cc9ee37c1fc8c2a3eba238f89bc9bb242f9d9`). The
+red was pre-existing at the 009-a base, disclosed in the 009-a report as
+a dilemma candidate with the full evidence chain, and reclassified D0 by
+strategy per the documented 008-a/008-b precedent (section 16(c)). This
+additive update is the ordered bounded state correction - not a protocol
+or collection step - and it touches nothing about the open E2
+target-deployment decision, which remains a blocked D2/human boundary.
+
+(d) Counters: registry_entries 34 -> 35 (this 009-b entry) and
+oap_reports_reviewed 53 -> 54 (the 009-b report file);
+frozen_report_history_incidents remains 2.
+
+(e) Invariants: no test logic changed; every numeric re-derivation
+assertion remains binding; branch, pr_number, the quarantined 007-n and
+008-d identity fields, and all frozen 007-m sha fields are
+byte-identical to the 007 review point; no frozen surface, protocol,
+data, or product element changed; no confirmation data collected.
+
 ## Machine-readable state block (research-state-machine-v1)
 
 This fenced block is the machine-readable core of the numbers quoted above.
@@ -1633,11 +1687,11 @@ model/network calls.
 {
   "schema": "research-state-machine-v1",
   "identities": {
-    "main_sha": "7d2cc9ee37c1fc8c2a3eba238f89bc9bb242f9d9",
+    "main_sha": "185dc3d9c654991619ae5c57b64e0c54f4550a16",
     "branch": "oap/007-concept-verification",
     "pr_number": 8,
-    "reviewed_branch_head_sha": "7d2cc9ee37c1fc8c2a3eba238f89bc9bb242f9d9",
-    "reviewed_branch_head_parent_sha": "4a029287f27e038d5c34c39b26ca836be7c6914b",
+    "reviewed_branch_head_sha": "185dc3d9c654991619ae5c57b64e0c54f4550a16",
+    "reviewed_branch_head_parent_sha": "59d8f030a91309f4386bde48b360f17d7ea11e86",
     "quarantined_007n": {
       "classification": "INVALID_QUARANTINED",
       "validation_error": "REPORT_CHECK",
@@ -1663,8 +1717,8 @@ model/network calls.
     "frozen_007m_configuration_sha256": "0026a1a9d27652c36e2c5a960b10fafc1c9a93b0690d93b09089aa58884f5c26",
     "frozen_007m_prompt_sha256": "572cf2fb4864e66e38a500465e1089062d58aeed4721063fb0c1e466e424230d",
     "frozen_007m_final_root_manifest_sha256": "3fb4aef33542e7fa3f357acb905b75f4d7e7551783f83a422b5d1ea6272c25f8",
-    "registry_entries": 34,
-    "oap_reports_reviewed": 53,
+    "registry_entries": 35,
+    "oap_reports_reviewed": 54,
     "frozen_report_history_incidents": 2
   },
   "official_scorer": {

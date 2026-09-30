@@ -6273,6 +6273,51 @@
       "source_manifest": "none (no private source; the C2 re-probe receipt is content-free and private-root only)",
       "status": "COMPLETE",
       "variation": "objective-009 round 1 (preregistration/scoping): commit the complete frozen study protocol (PROTOCOL-009.md, elements (a)-(n)), the data-free deployment-identity record and E2 decision package (DEPLOYMENT-IDENTITY-009.md), the focused structural lint, and the registry/state bookkeeping (machine-block counters only); no confirmation data, no tuning, no mechanism change"
+    },
+    {
+      "child_runs": [],
+      "conclusion": "Bounded post-merge state correction completed as ordered: the research-state-machine-v1 review-point identity advanced from the 007 review point (main_sha 7d2cc9ee37c1fc8c2a3eba238f89bc9bb242f9d9, reviewed head 7d2cc9ee37c1fc8c2a3eba238f89bc9bb242f9d9, parent 4a029287f27e038d5c34c39b26ca836be7c6914b) to the accepted objective-008 merge (main_sha and reviewed_branch_head_sha 185dc3d9c654991619ae5c57b64e0c54f4550a16, reviewed_branch_head_parent_sha 59d8f030a91309f4386bde48b360f17d7ea11e86, the accepted 008 branch head and second parent of the merge commit), restoring the frozen 007-o consistency test (including test_main_is_ancestor_of_reviewed_head and test_branch_and_pr_match_committed_007o_order) to green at this round's final head by the only viable non-weakening means, per the documented 008-a/008-b precedent for the identical structural condition (the 009-a report's dilemma candidate reclassified D0 by strategy). No test logic changed; every numeric re-derivation assertion remains binding; branch, pr_number, the quarantined 007-n/008-d identity fields, and all frozen 007-m sha fields byte-unchanged at the 007 review point. Registry 34 -> 35 (this entry); machine block counters registry_entries 35, oap_reports_reviewed 54, frozen_report_history_incidents unchanged at 2. The 009a-identity private receipt (three files) consolidated from the degraded sync mount to the native private root by copy only, byte-identity recorded in the round report, originals untouched, no receipt byte committed. The E2 target-deployment decision remains a blocked D2/human boundary, untouched by this round; no confirmation data, no product/data/protocol/test change, no merge.",
+      "evidence_files": [
+        {
+          "disposition": "009-b order committed at activation (byte-identity re-verified against the committed blob)",
+          "logical_path": "oap/orders/009-b-post-merge-machine-block-identity-advance.md",
+          "sha256": "0476cf3dc0996ca953e978cdb1f0b005830044300dfe88fd820fcec8352d366c",
+          "size": 28828
+        }
+      ],
+      "evidence_status": "public-data-free",
+      "experiment_id": "009-b-post-merge-machine-block-identity-advance",
+      "frozen_choices": {
+        "confirmation_model_calls": 0,
+        "confirmation_samples_consumed": 0,
+        "machine_block_fields_updated": "identity advance only: main_sha 7d2cc9ee37c1fc8c2a3eba238f89bc9bb242f9d9 -> 185dc3d9c654991619ae5c57b64e0c54f4550a16; reviewed_branch_head_sha 7d2cc9ee37c1fc8c2a3eba238f89bc9bb242f9d9 -> 185dc3d9c654991619ae5c57b64e0c54f4550a16; reviewed_branch_head_parent_sha 4a029287f27e038d5c34c39b26ca836be7c6914b -> 59d8f030a91309f4386bde48b360f17d7ea11e86; branch/pr_number/quarantined_007n/quarantined_008d/frozen_007m sha fields byte-unchanged; counters registry_entries 34 -> 35, oap_reports_reviewed 53 -> 54, frozen_report_history_incidents unchanged at 2",
+        "new_model_calls": 0,
+        "registry_entries_added": 1,
+        "test_files_or_logic_changed": 0,
+        "tuning_or_mechanism_changes": 0,
+        "untracked_residue_committed": 0
+      },
+      "kind": "state-correction",
+      "logical_root": "none (data-free state correction; the 009a-identity receipt consolidation is a private-root copy only and never commits receipt bytes)",
+      "metrics": {
+        "auth_material_in_committed_artifacts": 0,
+        "confirmation_data_bytes": 0,
+        "endpoint_values_in_committed_artifacts": 0,
+        "frozen_surfaces_byte_verified_at_base": "all order-pinned sha256 values (007-m public projection 41e1482a9ee100f5a3da6d31cd0646765271d874e2b7ef98593a50f5e7d2b5a0 and config-internal pins 0026a1a9d27652c36e2c5a960b10fafc1c9a93b0690d93b09089aa58884f5c26 / 572cf2fb4864e66e38a500465e1089062d58aeed4721063fb0c1e466e424230d / 0c4aa4900733f37dc6da9b5fba4c5a772f83830b916938b8b89855917d1a1d4e; 008 protection census prose_boundary.py c57e2901e52af962546ee83651850e22c91655a8cc822f2c43b1284da16b8c50, protected.py 27f22eaee129190b880851b958a8aa5a38d357cb4e711d70e762b2353d32e78f, structural-policy-v5 915f70d34ecc69ab6fea0b273f24ca20f251b6e181bd5e9281c5c012de2fe542, structural-policy-v4 f564d9f87ef01a893d6cd6bb36f6cf99a0d353a4dde4e4c4c024942eb969e76f, experiment-008i 24e25edafbbf0b1d67dc405440ea78c0b76a9011c00d5e53c82fe3c00fef6685; PROTOCOL-009 cc5e9089510dcb4be6fd2ec3cef1890c515ec9e6edd585da1dd25e70e1dabd2a; DEPLOYMENT-IDENTITY-009 b6734b35390f13c9170722fbf68ffee06d7d5f73da3a5e1a077980e3452994e4; test_009a lint 2a54a73b7a5e4c4e112c0926e6163ab1990dd21343f51a3e8ee198e51295509b; CRITICAL seed-identical a9ea5fa5db2affabf0f85710f41e37e73b108c0236a58b7efb9c17cb36a07e9e; frozen implementation head commit 537aa6a3ff03c60dd1b2c7f697c577940d52e88d present)",
+        "model_calls": 0,
+        "receipt_files_copied": "3 (009a-identity private receipt; copy only; sync-mount originals untouched; byte-identity recorded in the round report; no receipt byte committed)"
+      },
+      "pending_evidence": [
+        "owner E2 decision (the confirmation TARGET deployment): attributable human decision required; until resolved, NO confirmation data is collected from any deployment and the loop idles at that boundary (PROTOCOL-009 element (a) hard gate)",
+        "009-c onward: collection, annotation, evaluation, and comparative report under the frozen protocol (fresh, uncollected, unopened samples only), starting only after an attributable E2 resolution and the 009-a+009-b development merge"
+      ],
+      "public_configuration": "none (state correction; no configuration changed)",
+      "public_metrics": "none (state correction; no metrics changed)",
+      "public_report": "research/RESEARCH-STATE.md#23",
+      "question": "Does the additive advance of the research-state-machine-v1 review-point identity from the 007 review point to the accepted objective-008 merge restore the frozen 007-o consistency test and all four required checks to green at the round's final head, without weakening any test, altering any frozen surface, or changing any protocol, data, or product element?",
+      "source_manifest": "none (no private source; the receipt consolidation is content-private and private-root only)",
+      "status": "COMPLETE",
+      "variation": "objective-009 round 2 (bounded state correction): machine-block identity advance plus counters, the additive RESEARCH-STATE section 23 note, the single data-free ledger entry, the scoped bookkeeping (STATUS.md, GENERATED-FILES pin, CSV rebuild), and the 009a-identity receipt consolidation; no confirmation data, no tuning, no mechanism change, no test change"
     }
   ]
 }
