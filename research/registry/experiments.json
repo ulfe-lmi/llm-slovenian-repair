@@ -6406,6 +6406,65 @@
       "source_manifest": "none (no private source)",
       "status": "COMPLETE",
       "variation": "objective-011 round 1 (bounded state correction): machine-block identity advance plus counters, the additive RESEARCH-STATE section 25 note, the single data-free ledger entry, and the scoped bookkeeping (STATUS.md, GENERATED-FILES pin, CSV rebuild); no confirmation data, no tuning, no mechanism change, no test change"
+    },
+    {
+      "child_runs": [],
+      "conclusion": "Bounded stage-1 collection round for the E2(b)-designated A100-FP8 confirmation target: the pre-work integrity gates passed with zero mismatch (all order-pinned frozen surfaces byte-verified at the base 2e5d76d16875b3f0cede4b9c49ddf32ab70faee4; registry 37 with the last 011-a; machine block 37/56/2 with identity fields unchanged; local consistency 10/10 green in a real checkout with origin/main = 4507cc78e333c0e48226b64266121171b7b8cea8); the E2(b) designation was recorded verbatim in research/target-distribution/DEPLOYMENT-IDENTITY-011.md together with the product-intent-change impact statement (evidence transferability NONE to the RTX-3090 target; the target-distribution label refers to the designated regime; no replication required), the 009-a pinned identity by hash, and the reaffirmed boundaries. The bounded freshness re-probe was executed with exactly 2 metadata GETs (no retries; zero chat/generation/responses calls; zero other endpoints; zero writes; zero RTX-3090 contact; zero Deployment B contact): attempt 1 (serving-version metadata GET, requested path /v1/version, unauthenticated) returned HTTP 401 and attempt 2 (models metadata GET, requested path /v1/v1/models, with the authorized bearer) returned HTTP 404. Exact data-free finding: the round private credentials receipt records endpoint_base_url with an embedded /v1 API path prefix while the private 009-a C2 receipt records the server root as the base (the two private records' scheme/host/port are equal, boolean-verified, values never committed); appending the 009-a metadata paths (/version, /v1/models) to the prefixed base produced the non-canonical routes, so no identity field was observed and drift of the designated regime is neither established nor excluded. Verdict per order scope 2c: BLOCKED (probe failure); the round stops at the finding; NO intake, NO manifest, NO selection, NO split, NO generation call, and NO sample opened; an intervening round (canonical-route 2-GET probe under the same exactly-2-attempt budget) is required before any collection, and the single named human input (the 011b-intake corpus, order item-3b specification) remains outstanding with the pre-authorized BLOCKED-once escalation path (strategy escalates to the owner exactly once; the owner is never a terminal relay). Registry 37 -> 38 (this entry); machine block counters only (registry_entries 38, oap_reports_reviewed 57 for the 011-b report file; identity fields unchanged at the 011-a review point; frozen_report_history_incidents unchanged at 2). The designed implementation-head report-count red (57 vs 56, the 008-i/009-b/010-a/011-a pattern) clears at the final head with the report commit. No tuning, no mechanism change, no test change, no merge.",
+      "evidence_files": [
+        {
+          "disposition": "011-b order committed at activation (byte-identity re-verified against the committed blob)",
+          "logical_path": "oap/orders/011-b-confirmation-stage1-collection.md",
+          "sha256": "0456004c0136ec0de9e3732b3d76ddd343d9124730a865fa7e946182a3105627",
+          "size": 54307
+        },
+        {
+          "disposition": "data-free E2(b) designation record and bounded freshness re-probe record (attempt table, exact finding, verdict BLOCKED (probe failure), reaffirmed boundaries); bytes final from the implementation head forward",
+          "logical_path": "research/target-distribution/DEPLOYMENT-IDENTITY-011.md",
+          "sha256": "ba3862c9aefdc8b1bdb6c45857d492cc36769e7df99ecec1ecb646e57bd6ea74",
+          "size": 6641
+        }
+      ],
+      "evidence_status": "public-data-free",
+      "experiment_id": "011-b-confirmation-stage1-collection",
+      "frozen_choices": {
+        "confirmation_model_calls": 0,
+        "confirmation_samples_consumed": 0,
+        "generation_calls": 0,
+        "intake_directory_created": 0,
+        "intake_documents_delivered": 0,
+        "machine_block_fields_updated": "counters only (registry_entries 37 -> 38; oap_reports_reviewed 56 -> 57); identity fields unchanged at the 011-a review point (main_sha and reviewed_branch_head_sha 4507cc78e333c0e48226b64266121171b7b8cea8, parent 01ea3fa4cde5c4759bcf2e29d6c665ed8b2e29524d, branch oap/007-concept-verification, pr_number 8); frozen_report_history_incidents unchanged at 2",
+        "reprobe_deployment_b_contact": 0,
+        "reprobe_http_attempts_used": "exactly 2 of 2 authorized, no retries (serving-version metadata GET requested path /v1/version unauthenticated -> HTTP 401; models metadata GET requested path /v1/v1/models with the authorized bearer -> HTTP 404; zero chat/generation/responses calls; zero other endpoints; zero writes; zero server mutation)",
+        "reprobe_rtx3090_contact": 0,
+        "registry_entries_added": 1,
+        "selection_split_generation_performed": 0,
+        "test_files_or_logic_changed": 0,
+        "tuning_or_mechanism_changes": 0,
+        "untracked_residue_committed": 0
+      },
+      "kind": "collection",
+      "logical_root": "none (data-free BLOCKED-at-probe-failure round; the re-probe script, the re-probe receipt, and the credentials receipt live under the round private research runtime root 011b-identity/ and are never committed)",
+      "metrics": {
+        "auth_material_in_committed_artifacts": 0,
+        "confirmation_data_bytes": 0,
+        "endpoint_values_in_committed_artifacts": 0,
+        "frozen_surfaces_byte_verified_at_base": "all order-pinned sha256 values (PROTOCOL-009 cc5e9089510dcb4be6fd2ec3cef1890c515ec9e6edd585da1dd25e70e1dabd2a; DEPLOYMENT-IDENTITY-009 b6734b35390f13c9170722fbf68ffee06d7d5f73da3a5e1a077980e3452994e4; test_009a lint 2a54a73b7a5e4c4e112c0926e6163ab1990dd21343f51a3e8ee198e51295509b; 007-m public projection 41e1482a9ee100f5a3da6d31cd0646765271d874e2b7ef98593a50f5e7d2b5a0 and config-internal pins 0026a1a9d27652c36e2c5a960b10fafc1c9a93b0690d93b09089aa58884f5c26 / 572cf2fb4864e66e38a500465e1089062d58aeed4721063fb0c1e466e424230d / 0c4aa4900733f37dc6da9b5fba4c5a772f83830b916938b8b89855917d1a1d4e; 008 protection census prose_boundary.py c57e2901e52af962546ee83651850e22c91655a8cc822f2c43b1284da16b8c50, protected.py 27f22eaee129190b880851b958a8aa5a38d357cb4e711d70e762b2353d32e78f, structural-policy-v5 915f70d34ecc69ab6fea0b273f24ca20f251b6e181bd5e9281c5c012de2fe542, structural-policy-v4 f564d9f87ef01a893d6cd6bb36f6cf99a0d353a4dde4e4c4c024942eb969e76f, experiment-008i 24e25edafbbf0b1d67dc405440ea78c0b76a9011c00d5e53c82fe3c00fef6685; CRITICAL seed-identical a9ea5fa5db2affabf0f85710f85710f41e37e73b108c0236a58b7efb9c17cb36a07e9e; governance identities 16/16; the 007-j out-of-band deployment-profile pin c79fd658db9c2006c0e542a12946962880e4ee3cec9dc57bc987b62d26c2dd60 references a private out-of-band file whose bytes are not in the repository, per the 009-a check-7 precedent)",
+        "model_calls": 0,
+        "reprobe_identity_fields_observed": 0,
+        "reprobe_verdict": "BLOCKED (probe failure) - transport failure within the 2-attempt budget (HTTP 401 then HTTP 404 on the constructed non-canonical routes); drift neither established nor excluded; regime-unchanged verdict not established"
+      },
+      "pending_evidence": [
+        "intervening round before any collection: the scope-2c probe failure must be resolved first - re-execute the ordered 2-GET probe against the canonical server-root metadata routes (/version unauthenticated; /v1/models with the authorized bearer) under the same exactly-2-attempt budget, and record the regime-unchanged verdict (or the exact drift mismatch) in the round private receipt",
+        "011b-intake corpus (the single named human input of scope item 3, outstanding independently of the probe failure): fresh, human-authored Slovenian documents with the order's item-3b data-free sidecars (GENUINE_OUTPUT_SOURCE target >= 100 / floor 50; FULLY_CORRECT_CONTROL target >= 34 with >= 10 tagged technical or rare-expression-name; plain UTF-8 files + sidecars, 0600) into the round private 011b-intake/ directory; strategy escalates to the owner EXACTLY ONCE with the item-3b specification (pre-authorized BLOCKED-once path); the owner is never a terminal relay",
+        "011-b resumption (same ID/branch/PR after reconciliation, from the first unfinished requirement): canonical-route re-probe, intake verification, manifest-first collection, deterministic selection and split, stage-1 generation, annotation guide and labeler packets, per the frozen PROTOCOL-009 procedure"
+      ],
+      "public_configuration": "none (no configuration changed)",
+      "public_metrics": "none (no metrics computed; no sample opened)",
+      "public_report": "research/RESEARCH-STATE.md#26",
+      "question": "Can the E2(b)-designated A100-FP8 regime be confirmed unchanged by the bounded exactly-2-attempt metadata freshness re-probe before the first sample is opened, and does the stage-1 collection proceed under the frozen PROTOCOL-009 procedure?",
+      "source_manifest": "none (no private source; the re-probe receipt, the re-probe script, and the credentials receipt are private-root only)",
+      "status": "BLOCKED",
+      "variation": "objective-011 round 2 (stage-1 collection, BLOCKED branch): pre-work gates passed with zero mismatch; E2(b) designation recorded verbatim in DEPLOYMENT-IDENTITY-011.md; bounded re-probe executed with exactly 2 metadata GETs and no retries (401/404 on non-canonical routes from the credentials-receipt /v1 base prefix); verdict BLOCKED (probe failure) per scope 2c - no intake, no manifest, no selection, no split, no generation call, no sample opened; bookkeeping with BLOCKED status (counters 38/57/2); an intervening round is required before any collection"
     }
   ]
 }

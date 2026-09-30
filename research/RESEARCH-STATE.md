@@ -1794,6 +1794,119 @@ authorized by this round (the PROTOCOL-009 element (a) hard gate is
 intact; the 011-b collection round proceeds only after an attributable
 owner E2 resolution).
 
+## 26. Stage-1 collection attempt, BLOCKED at the bounded freshness
+## re-probe (objective 011, round 011-b)
+
+This section is the additive 011-b collection record (D0 execution of
+the FROZEN protocol PROTOCOL-009 under the owner's attributable E2(b)
+authorization; the round outcome is BLOCKED at the scope-2c probe
+finding). It rewrites nothing in sections 1-25; the only narrative
+bytes changed outside the machine block are this additive section and
+the two ordered counter fields in the machine block.
+
+(a) Round and base: objective 011, round 2, on the EXISTING branch
+`oap/011-target-distribution-confirmation-study` (AMEND_EXISTING_PR;
+PR #12 held OPEN per the 011-a review HOLD decision - the
+objective's PR accumulates its rounds and merges only at the
+objective's end). Round base
+`2e5d76d16875b3f0cede4b9c49ddf32ab70faee4` (the 011-a final head);
+accepted main `4507cc78e333c0e48226b64266121171b7b8cea8`. The
+pre-work integrity gates passed with zero mismatch (all order-pinned
+frozen surfaces byte-verified at the base; registry 37 with the last
+011-a; machine block 37/56/2 with identity fields unchanged; local
+consistency 10/10 green in a real checkout with origin/main =
+4507cc78e333c0e48226b64266121171b7b8cea8).
+
+(b) E2(b) designation: the owner's verbatim decision '(b) Designate
+A100-FP8 as the confirmation target' (2026-09-30, owner strategic
+thread; private receipt
+`workorders/e2b-decision-receipt-20261001.md` referenced by name only,
+never reproduced) selects alternative E2(b) of the committed decision
+package (DEPLOYMENT-IDENTITY-009 section 4) as a recorded
+PRODUCT-INTENT CHANGE: the A100-FP8 regime becomes the confirmation
+target by designation; no replication is required (the frozen method
+was developed and frozen on this regime); evidence transferability
+NONE to the RTX-3090 target; the target-distribution label refers to
+the designated regime; any future RTX-3090 deployment remains
+unconfirmed by this study. Recorded in
+`research/target-distribution/DEPLOYMENT-IDENTITY-011.md` (data-free;
+sha256 `ba3862c9aefdc8b1bdb6c45857d492cc36769e7df99ecec1ecb646e57bd6ea74`
+at the implementation head).
+
+(c) Bounded freshness re-probe (scope item 2b): exactly 2 metadata
+GETs, no retries, zero chat/generation/responses calls, zero other
+endpoints, zero writes, zero server mutation, zero RTX-3090 contact,
+zero Deployment B contact; the authorized profile was read only from
+the round private credentials receipt
+(`011b-identity/target-credentials-20261001.json`, 0600; value never
+committed, never logged, never echoed); the full attempt-level
+receipt is private (`011b-identity/reprobe-receipt.json`; never
+committed). Attempt 1 (serving-version metadata GET, requested path
+`/v1/version`, unauthenticated) returned HTTP 401; attempt 2 (models
+metadata GET, requested path `/v1/v1/models`, with the authorized
+bearer) returned HTTP 404. Observation window
+2026-09-30T22:58:26.577Z to 2026-09-30T22:58:26.923Z UTC.
+
+(d) Exact data-free finding: no identity field was observed on either
+attempt. The round private credentials receipt records
+`endpoint_base_url` with an embedded `/v1` API path prefix, whereas
+the private 009-a C2 receipt records the server root as the base; the
+two private records' scheme/host/port are equal (boolean-verified;
+values never committed, never echoed). Appending the 009-a metadata
+paths (`/version`, `/v1/models`) to the prefixed base produced the
+non-canonical routes `/v1/version` and `/v1/v1/models` (the 009-a
+precedent probed the canonical server-root routes). The 401 on
+`/v1/version` is consistent with, but does not prove, the
+deployment's `/v1` authentication gate observed in the 009-a record.
+Per the owner's credentials usage constraint (at most 2 metadata GETs
+total; exactly 2 attempts; no retries), no further probe was
+performed; the 2-attempt budget is consumed.
+
+(e) Verdict (scope item 2c): BLOCKED (probe failure) - a transport
+failure occurred within the 2-attempt budget; the round stops at the
+finding. Drift of the designated regime is NEITHER ESTABLISHED NOR
+EXCLUDED; the regime-unchanged verdict is not established. NO intake
+(the `011b-intake` directory was not created or checked), NO
+manifest, NO selection, NO split, NO generation call, NO sample
+opened; an intervening round is required before any collection. The
+intervening round must re-execute the ordered 2-GET probe against
+the canonical server-root metadata routes (`/version`
+unauthenticated; `/v1/models` with the authorized bearer) under the
+same exactly-2-attempt budget and record its own private receipt.
+
+(f) Single named human input (scope item 3): the `011b-intake`
+corpus (fresh, human-authored Slovenian documents with the order's
+item-3b data-free sidecars: GENUINE_OUTPUT_SOURCE target >= 100 /
+floor 50; FULLY_CORRECT_CONTROL target >= 34 with >= 10 tagged
+technical or rare-expression-name) is not supplied; it is the
+round's single named human dependency with the pre-authorized
+BLOCKED-once escalation path (strategy escalates to the owner EXACTLY
+ONCE with the item-3b specification; the owner is never a terminal
+relay). It remains outstanding independently of the scope-2c
+finding: both the probe failure and the missing intake must be
+resolved before any collection.
+
+(g) Bookkeeping: registry 37 -> 38 (this entry; kind collection;
+status BLOCKED; data-free; private locations by relative directory
+name only: `011b-identity/` - the pre-recorded credentials receipt,
+this round's re-probe script and receipt; never committed);
+machine-block counters only (registry_entries 38,
+oap_reports_reviewed 57 for the 011-b report file,
+frozen_report_history_incidents unchanged at 2); all identity fields
+UNCHANGED (no advance - that is a post-merge round's job); no test
+logic changed; every numeric re-derivation assertion remains
+binding. The designed implementation-head report-count red (57 vs
+56, the 008-i/009-b/010-a/011-a pattern) clears at the final head
+with the report commit.
+
+(h) Invariants: no frozen surface, protocol, data, or product
+element changed; no PROTOCOL-009.md or DEPLOYMENT-IDENTITY-009.md
+change; no test change; no CRITICAL.md change (seed-identical); no
+merge, no auto-merge, no deployment, no release, no milestone claim;
+REPAIR_ALLOW_LIVE_TESTS stays NO; the RTX-3090
+(MUST-NOT-BE-STARTED) and Deployment B (EXCLUDED_BY_HUMAN_OVERRIDE)
+boundaries remain absolute; PR #12 stays OPEN.
+
 ## Machine-readable state block (research-state-machine-v1)
 
 This fenced block is the machine-readable core of the numbers quoted above.
@@ -1836,8 +1949,8 @@ model/network calls.
     "frozen_007m_configuration_sha256": "0026a1a9d27652c36e2c5a960b10fafc1c9a93b0690d93b09089aa58884f5c26",
     "frozen_007m_prompt_sha256": "572cf2fb4864e66e38a500465e1089062d58aeed4721063fb0c1e466e424230d",
     "frozen_007m_final_root_manifest_sha256": "3fb4aef33542e7fa3f357acb905b75f4d7e7551783f83a422b5d1ea6272c25f8",
-    "registry_entries": 37,
-    "oap_reports_reviewed": 56,
+    "registry_entries": 38,
+    "oap_reports_reviewed": 57,
     "frozen_report_history_incidents": 2
   },
   "official_scorer": {
