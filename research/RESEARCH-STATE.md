@@ -1734,6 +1734,66 @@ authorized by this round (the PROTOCOL-009 element (a) hard gate is
 intact; the 010-b collection round proceeds only after an attributable
 owner E2 resolution).
 
+## 25. Post-merge machine-block identity advance (objective 011, round 011-a)
+
+This section is the additive post-merge identity advance recorded by the
+011-a corrective suffix (D0; classification rationale in the 011-a order
+and report). It changes no scientific result, rewrites nothing in the
+007/008/009/010 narratives (sections 1-24), and changes no frozen
+surface: the only narrative bytes changed outside the machine block are
+this additive section.
+
+(a) Old review point and its identity: the machine block tracked the
+accepted objective-009 merge - main_sha
+`a501b20af7f6d9774df989c41c5ec27e21b36f3e`, reviewed head
+`a501b20af7f6d9774df989c41c5ec27e21b36f3e`, parent
+`b0e33702463a9c44988e1d1ba4cb9b194c247e93`, branch
+`oap/007-concept-verification`, pr_number 8 - as recorded in section 24.
+The 009-merge review point remains fully recorded in section 24, the
+unchanged quarantined 007-n and 008-d identity fields, and the committed
+010-a order and report; the branch and pr_number fields remain locked to
+the committed 007-o order by
+test_branch_and_pr_match_committed_007o_order and are byte-unchanged
+here.
+
+(b) Advance: the machine block now tracks the accepted objective-010
+merge - main_sha and reviewed_branch_head_sha
+`4507cc78e333c0e48226b64266121171b7b8cea8` (the objective-010 merge
+commit, whose parents are
+`a501b20af7f6d9774df989c41c5ec27e21b36f3e` and
+`01ea3fa4cde5c4759bcf29d6c665ed8b2e29524d`) and
+reviewed_branch_head_parent_sha
+`01ea3fa4cde5c4759bcf29d6c665ed8b2e29524d` (the accepted objective-010
+branch head, the second parent of the merge commit).
+
+(c) Reason: the 010-a identity advance targeted the then-accepted main
+(the objective-009 merge); the development-only merge of PR #11
+(objective 010) advanced main again to
+`4507cc78e333c0e48226b64266121171b7b8cea8`, re-creating the structural
+live-ref condition by construction:
+test_main_is_ancestor_of_reviewed_head compares live origin/main against
+the frozen main_sha, which now lagged one merge. The condition is
+identical in kind to the 008-a, 009-a, and 010-a post-merge conditions
+resolved by the additive 008-b (section 16(c)), 009-b (section 23), and
+010-a (section 24) updates. This additive update is that documented
+precedent chain applied to the objective-010 merge point - a bounded
+state correction, not a protocol or collection step - and D0 per that
+precedent. It touches nothing about the open E2 target-deployment
+decision, which remains a blocked D2/human boundary.
+
+(d) Counters: registry_entries 36 -> 37 (this 011-a entry) and
+oap_reports_reviewed 55 -> 56 (the 011-a report file);
+frozen_report_history_incidents remains 2.
+
+(e) Invariants: no test logic changed; every numeric re-derivation
+assertion remains binding; branch, pr_number, the quarantined 007-n and
+008-d identity fields, and all frozen 007-m sha fields are
+byte-identical to the recorded values; no frozen surface, protocol,
+data, or product element changed; no confirmation work performed or
+authorized by this round (the PROTOCOL-009 element (a) hard gate is
+intact; the 011-b collection round proceeds only after an attributable
+owner E2 resolution).
+
 ## Machine-readable state block (research-state-machine-v1)
 
 This fenced block is the machine-readable core of the numbers quoted above.
@@ -1746,11 +1806,11 @@ model/network calls.
 {
   "schema": "research-state-machine-v1",
   "identities": {
-    "main_sha": "a501b20af7f6d9774df989c41c5ec27e21b36f3e",
+    "main_sha": "4507cc78e333c0e48226b64266121171b7b8cea8",
     "branch": "oap/007-concept-verification",
     "pr_number": 8,
-    "reviewed_branch_head_sha": "a501b20af7f6d9774df989c41c5ec27e21b36f3e",
-    "reviewed_branch_head_parent_sha": "b0e33702463a9c44988e1d1ba4cb9b194c247e93",
+    "reviewed_branch_head_sha": "4507cc78e333c0e48226b64266121171b7b8cea8",
+    "reviewed_branch_head_parent_sha": "01ea3fa4cde5c4759bcf29d6c665ed8b2e29524d",
     "quarantined_007n": {
       "classification": "INVALID_QUARANTINED",
       "validation_error": "REPORT_CHECK",
@@ -1776,8 +1836,8 @@ model/network calls.
     "frozen_007m_configuration_sha256": "0026a1a9d27652c36e2c5a960b10fafc1c9a93b0690d93b09089aa58884f5c26",
     "frozen_007m_prompt_sha256": "572cf2fb4864e66e38a500465e1089062d58aeed4721063fb0c1e466e424230d",
     "frozen_007m_final_root_manifest_sha256": "3fb4aef33542e7fa3f357acb905b75f4d7e7551783f83a422b5d1ea6272c25f8",
-    "registry_entries": 36,
-    "oap_reports_reviewed": 55,
+    "registry_entries": 37,
+    "oap_reports_reviewed": 56,
     "frozen_report_history_incidents": 2
   },
   "official_scorer": {
