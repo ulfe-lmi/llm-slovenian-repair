@@ -1523,6 +1523,158 @@ release, no deployment claim; PR #9 remains open and unmerged (a PASS
 verdict is the predeclared merge precondition - satisfied; the merge is
 strategy's separate post-review act).
 
+## 22. Objective-009 activation: preregistration of the target-distribution
+## confirmation (round 009-a)
+
+This section is the additive objective-009 activation record recorded by
+round 009-a (D0; data-free scoping/preregistration; no confirmation data,
+no tuning, no mechanism change). It rewrites nothing in sections 1-21 and
+changes no frozen surface.
+
+(a) Objective 008 is merged and closed: PR #9 was development-only merged
+2026-09-28 (merge commit `185dc3d9c654991619ae5c57b64e0c54f4550a16`,
+parents `7d2cc9ee37c1fc8c2a3eba238f89bc9bb242f9d9` and
+`59d8f030a91309f4386bde48b360f17d7ea11e86`); the final objective-008
+verdict was PASS at the 008-i census (section 21); the accepted main is now
+`185dc3d9c654991619ae5c57b64e0c54f4550a16` (OAP_ACCEPTED_REF refreshed from
+the objective-007 base; the prior value is preserved in the private
+pre-009 backup record).
+
+(b) Objective 009 (the fresh, untouched, human-labelled
+target-distribution linguistic confirmation of the complete effective
+pipeline; reserved since section 13) is activated on branch
+`oap/009-target-distribution-confirmation` (new PR, CREATE_NEW_PR, base
+main at `185dc3d9c654991619ae5c57b64e0c54f4550a16`). Round 009-a is the
+preregistration/scoping round: it freezes the complete study protocol as
+the committed data-free document
+`research/target-distribution/PROTOCOL-009.md` (elements (a)-(n);
+cited-records sha256 table; the frozen-system identity pin; the section 14
+no-tuning list verbatim; the
+calibration-targets-not-release-authorization statement) and commits the
+data-free deployment-identity record and E2 decision package
+`research/target-distribution/DEPLOYMENT-IDENTITY-009.md`.
+
+(c) Deployment-identity state at 009-a (data-free): the bounded metadata
+re-probe of the out-of-band A100-FP8 identity (4 of 6 authorized attempts;
+zero chat/generation/responses calls; zero 3090/B contact) observed vLLM
+0.28.0, model identifier `qwen3.8-27b`, exposed model root suffix
+`Qwen3.8-27B-FP8`, max model length 262144, Responses wire API
+non-streaming - matching the frozen 007 profiles (sha256
+`c79fd658db9c2006c0e542a12946962880e4ee3cec9dc57bc987b62d26c2dd60` and
+`0c4aa4900733f37dc6da9b5fba4c5a772f83830b916938b8b89855917d1a1d4e`); one
+access-control observation (the models metadata endpoint now returns 401
+to unauthenticated requests). The intended RTX-3090 endpoint remains
+TCP-CLOSED per the 2026-09-09 reconnaissance and
+MUST-NOT-BE-STARTED/RECONFIGURED; zero contact in this round. Deployment B
+remains EXCLUDED_BY_HUMAN_OVERRIDE (no probes, no calls, ever).
+
+(d) E2 (open item, section 9): the confirmation TARGET deployment is
+unresolved. The alternatives - (a) restore/authorize the intended
+quantized RTX-3090 deployment and pin/verify its exact identity before
+collection (a bounded replication of the frozen method precedes
+confirmation if the configuration drifted), (b) explicitly designate the
+A100-FP8 regime as the target (a recorded product-intent change; no
+additional replication required), (c) designate another deployment with
+identity pinned by the same procedure - are presented in
+DEPLOYMENT-IDENTITY-009.md with impact statements (evidence
+transferability, rights, cost, timeline, risk). Until the owner resolves
+E2 with an attributable decision, NO confirmation data is collected from
+any deployment and the loop idles at that boundary (PROTOCOL-009 element
+(a) hard gate). The E2 question is a D2/human boundary; this round
+performs only the safe isolated preparation.
+
+(e) The frozen system entering 009 is exactly the 008-i census protection
+identity (policy of record `structural-policy-v5.json`) plus the frozen
+007-m linguistic method, as pinned in PROTOCOL-009.md section 2. The
+no-tuning boundary of section 14 continues to apply verbatim, extended by
+the no-tuning-after-unblinding rule of PROTOCOL-009 element (n): once the
+confirmation subset is opened, or any decision is informed by its content,
+no change of any frozen element is permitted against the confirmation
+set, ever.
+
+(f) Machine block: counters only - registry_entries 33 -> 34 (this 009-a
+entry), oap_reports_reviewed 52 -> 53 (the 009-a report); the identity
+fields (main_sha, branch, pr_number, reviewed heads, quarantined
+identities, frozen 007-m sha fields) remain frozen at the 007 review
+point; frozen_report_history_incidents remains 2.
+
+(g) Known consequence, disclosed:
+`test_research_state_consistency.py::test_main_is_ancestor_of_reviewed_head`
+asserts that the live `refs/remotes/origin/main` equals the frozen
+`main_sha` `7d2cc9ee37c1fc8c2a3eba238f89bc9bb242f9d9` (the 007 review
+point). Since accepted main moved to
+`185dc3d9c654991619ae5c57b64e0c54f4550a16` at the 008 merge, that single
+assertion is red at every head after the 008 merge - pre-existing at the
+009-a base, the same structural condition documented in section 16(c) for
+008-a and resolved there by the additive 008-b identity update. This round
+is ordered to change counters only (identity fields unchanged), so the
+Research reproducibility check is expected red at the 009-a final head on
+that pre-existing assertion; it is reported in the 009-a report as a
+dilemma candidate with the full evidence chain. All other numeric
+re-derivation assertions remain binding and green at the report head (the
+designed report-count red at the implementation head resolves with the
+report commit, the 008-i pattern); in the .git-less Application-baseline
+driver workspace the git-identity assertions skip, leaving the designed
+count red only at the implementation head.
+
+No merge, no auto-merge, no release, no deployment claim; the
+objective-009 PR stays OPEN pending strategy review; collection suffixes
+(009-b onward) start only after an attributable E2 resolution.
+
+## 23. Post-merge machine-block identity advance (objective 009, round 009-b)
+
+This section is the additive post-merge identity advance recorded by the
+009-b corrective suffix (D0; classification rationale in the 009-b order
+and report). It changes no scientific result, rewrites nothing in the
+007/008/009 narratives (sections 1-22), and changes no frozen surface:
+the only narrative bytes changed outside the machine block are this
+additive section.
+
+(a) Old review point and its identity: the machine block tracked the 007
+review point - main_sha `7d2cc9ee37c1fc8c2a3eba238f89bc9bb242f9d9` (the
+objective-007 merge commit), reviewed head
+`7d2cc9ee37c1fc8c2a3eba238f89bc9bb242f9d9`, parent
+`4a029287f27e038d5c34c39b26ca836be7c6914b`, branch
+`oap/007-concept-verification`, pr_number 8. The 007-o review point
+remains fully recorded in the 007 narrative (sections 1-15), the
+unchanged quarantined 007-n identity fields, and the committed 007-o
+order and report; the branch and pr_number fields remain locked to the
+committed 007-o order by
+test_branch_and_pr_match_committed_007o_order and are byte-unchanged
+here.
+
+(b) Advance: the machine block now tracks the accepted objective-008
+merge - main_sha and reviewed_branch_head_sha
+`185dc3d9c654991619ae5c57b64e0c54f4550a16` (the objective-008 merge
+commit, whose parents are
+`7d2cc9ee37c1fc8c2a3eba238f89bc9bb242f9d9` and
+`59d8f030a91309f4386bde48b360f17d7ea11e86`) and
+reviewed_branch_head_parent_sha
+`59d8f030a91309f4386bde48b360f17d7ea11e86` (the accepted objective-008
+branch head, the second parent of the merge commit).
+
+(c) Reason: the 009-a order's counters-only bookkeeping clause froze the
+identity fields at the 007 review point, leaving
+test_main_is_ancestor_of_reviewed_head structurally red at every head
+after the 008 merge (live origin/main `185dc3d9c654991619ae5c57b64e0c54f4550a16`
+versus frozen main_sha `7d2cc9ee37c1fc8c2a3eba238f89bc9bb242f9d9`). The
+red was pre-existing at the 009-a base, disclosed in the 009-a report as
+a dilemma candidate with the full evidence chain, and reclassified D0 by
+strategy per the documented 008-a/008-b precedent (section 16(c)). This
+additive update is the ordered bounded state correction - not a protocol
+or collection step - and it touches nothing about the open E2
+target-deployment decision, which remains a blocked D2/human boundary.
+
+(d) Counters: registry_entries 34 -> 35 (this 009-b entry) and
+oap_reports_reviewed 53 -> 54 (the 009-b report file);
+frozen_report_history_incidents remains 2.
+
+(e) Invariants: no test logic changed; every numeric re-derivation
+assertion remains binding; branch, pr_number, the quarantined 007-n and
+008-d identity fields, and all frozen 007-m sha fields are
+byte-identical to the 007 review point; no frozen surface, protocol,
+data, or product element changed; no confirmation data collected.
+
 ## Machine-readable state block (research-state-machine-v1)
 
 This fenced block is the machine-readable core of the numbers quoted above.
@@ -1535,11 +1687,11 @@ model/network calls.
 {
   "schema": "research-state-machine-v1",
   "identities": {
-    "main_sha": "7d2cc9ee37c1fc8c2a3eba238f89bc9bb242f9d9",
+    "main_sha": "185dc3d9c654991619ae5c57b64e0c54f4550a16",
     "branch": "oap/007-concept-verification",
     "pr_number": 8,
-    "reviewed_branch_head_sha": "7d2cc9ee37c1fc8c2a3eba238f89bc9bb242f9d9",
-    "reviewed_branch_head_parent_sha": "4a029287f27e038d5c34c39b26ca836be7c6914b",
+    "reviewed_branch_head_sha": "185dc3d9c654991619ae5c57b64e0c54f4550a16",
+    "reviewed_branch_head_parent_sha": "59d8f030a91309f4386bde48b360f17d7ea11e86",
     "quarantined_007n": {
       "classification": "INVALID_QUARANTINED",
       "validation_error": "REPORT_CHECK",
@@ -1565,8 +1717,8 @@ model/network calls.
     "frozen_007m_configuration_sha256": "0026a1a9d27652c36e2c5a960b10fafc1c9a93b0690d93b09089aa58884f5c26",
     "frozen_007m_prompt_sha256": "572cf2fb4864e66e38a500465e1089062d58aeed4721063fb0c1e466e424230d",
     "frozen_007m_final_root_manifest_sha256": "3fb4aef33542e7fa3f357acb905b75f4d7e7551783f83a422b5d1ea6272c25f8",
-    "registry_entries": 33,
-    "oap_reports_reviewed": 52,
+    "registry_entries": 35,
+    "oap_reports_reviewed": 54,
     "frozen_report_history_incidents": 2
   },
   "official_scorer": {
