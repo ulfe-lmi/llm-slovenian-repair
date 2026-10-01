@@ -121,3 +121,84 @@ and record its own private receipt.
   E2(b) decision plus PROTOCOL-009 and is metadata-only).
 - No second large GPU model; no server mutation; no endpoint value,
   credential, or private path in any committed artifact or log.
+## 6. Bounded canonical-route identity re-verification (order 011-c,
+## intervening pinning round)
+
+This section is the additive 011-c record (D0 execution of the ordered
+bounded verification pre-specified by section 4 of this record under
+the owner's standing E2(b) authorization; the E2(b) designation of
+section 1 stands untouched). Sections 1-5 are byte-preserved by this
+round. The full attempt-level receipt (timestamps, statuses, observed
+fields, response sizes, wall times, request metadata) is kept in the
+round private directory (`011c-identity` under the round private
+research runtime root; file `reprobe-receipt.json`) and is never
+committed.
+
+Bounded read-only metadata re-probe executed in this round, BEFORE any
+other mutation beyond the ordered record: exactly 2 HTTP attempts
+total, no retries, zero chat/generation/responses calls, zero other
+endpoints, zero writes, zero server mutation, zero contact with the
+RTX-3090 host, zero contact with Deployment B. The authorized profile
+(both bases and the bearer) was read ONLY from the strategy-corrected
+private credentials receipt (`011b-identity/
+target-credentials-20261001.json`, 0600; values never committed, never
+logged, never echoed); the route construction followed that receipt's
+`metadata_probe_routes` field verbatim (dual bases: the server-root
+base for the `/version` route; the `/v1`-prefixed API base for the
+`/v1/models` route; bearer unchanged per its correction record).
+
+Attempt summary (2 of 2 authorized attempts used; full receipt
+private):
+
+| # | Endpoint class | Requested path | Auth | HTTP status | Note |
+| --- | --- | --- | --- | --- | --- |
+| 1 | serving-version metadata GET | `/version` | none | 200 | observed serving framework version `0.28.0` (20 response bytes) |
+| 2 | models metadata GET | `/v1/models` | authorized bearer (value never recorded) | 200 | one model row: identifier `qwen3.8-27b`, owned_by `vllm`, max model length `262144`, exposed model root suffix `Qwen3.8-27B-FP8` (505 response bytes) |
+
+Observation window: 2026-10-01T00:58:35.948Z to
+2026-10-01T00:58:36.253Z UTC.
+
+Field-by-field match against the 009-a pinned identity
+(DEPLOYMENT-IDENTITY-009 section 1, referenced by hash in section 3):
+serving framework version 0.28.0 MATCH; model identifier qwen3.8-27b
+MATCH; exposed model root suffix Qwen3.8-27B-FP8 MATCH; max model
+length 262144 MATCH. The wire protocol class remains OpenAI-compatible
+HTTP serving (vLLM; Responses wire API; non-streaming) per the
+observed identity fields and the frozen 007 profiles. The observed
+authentication behavior (unauthenticated `/version` 200; `/v1/models`
+200 with the authorized bearer) is consistent with the 009-a
+attempt-level record.
+
+EXACT FINDING (data-free): all observed identity fields match the
+009-a pin. The 011-b non-canonical-route finding (401 on `/v1/
+version`; 404 on `/v1/v1/models`; no identity field observed) is
+thereby explained as a route-construction artifact: the 011-b probe
+appended the 009-a metadata paths to the `/v1`-prefixed API base,
+whereas the canonical 009-a routes use the server-root base for
+`/version` and the API base for `/v1/models` (the two private
+records' scheme/host/port are equal, boolean-verified; values never
+committed, never echoed). This round probed the canonical routes and
+observed the pinned identity in full.
+
+VERDICT (order 011-c scope item 3): REGIME-UNCHANGED, ESTABLISHED -
+both attempts returned 200 and every observed identity field matches
+the 009-a pin. The pinned identity is re-verified as of this round;
+the PROTOCOL-009 element (a) hard gate is satisfied for collection.
+
+CONSEQUENCE: the collection round (011-d) may proceed on this
+verified identity, subject to its own intake gate. The single named
+human input (the `011b-intake` corpus per the 011-b order item 3b)
+remains outstanding (escalated to the owner exactly once,
+independently of this round); this round performed NO intake, NO
+manifest, NO selection, NO split, NO generation call, and NO sample
+opened.
+
+REAFFIRMED BOUNDARIES: RTX-3090 MUST-NOT-BE-STARTED /
+MUST-NOT-BE-RECONFIGURED - zero probes, zero calls (this round and
+ever, absent an attributable owner decision); Deployment B
+EXCLUDED_BY_HUMAN_OVERRIDE - zero probes, zero calls, ever, absolute
+and unaffected by E2(b); REPAIR_ALLOW_LIVE_TESTS remains NO (this
+round's bounded re-probe is separately authorized by the owner E2(b)
+decision plus PROTOCOL-009 and is metadata-only); no second large GPU
+model; no server mutation; no endpoint value, credential, or private
+path in any committed artifact or log.
