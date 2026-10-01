@@ -6465,6 +6465,59 @@
       "source_manifest": "none (no private source; the re-probe receipt, the re-probe script, and the credentials receipt are private-root only)",
       "status": "BLOCKED",
       "variation": "objective-011 round 2 (stage-1 collection, BLOCKED branch): pre-work gates passed with zero mismatch; E2(b) designation recorded verbatim in DEPLOYMENT-IDENTITY-011.md; bounded re-probe executed with exactly 2 metadata GETs and no retries (401/404 on non-canonical routes from the credentials-receipt /v1 base prefix); verdict BLOCKED (probe failure) per scope 2c - no intake, no manifest, no selection, no split, no generation call, no sample opened; bookkeeping with BLOCKED status (counters 38/57/2); an intervening round is required before any collection"
+    },
+    {
+      "child_runs": [],
+      "conclusion": "Bounded canonical-route identity re-verification of the E2(b)-designated A100-FP8 target completed as ordered (the intervening pinning round required by DEPLOYMENT-IDENTITY-011 section 4 after the 011-b scope-2c stop): the pre-work integrity gates passed with zero state mismatch (all order-pinned frozen surfaces byte-verified at the base f505492daa2fa39601573999677bc593c07dc0f; registry 38 with the last 011-b; machine block 38/57/2 with identity fields unchanged; local consistency 10/10 green in a real checkout with origin/main = 4507cc78e333c0e48226b64266121171b7b8cea8; governance 16/16, coding_bytes 35076; doctor clean) with ONE NAMED ORDER-TEXT FINDING (no state drift): the CRITICAL.md hex pin string in the order (carried over verbatim from the 011-b order) a9ea5fa5db2affabf0f85710f85710f41e37e73b108c0236a58b7efb9c17cb36a07e9e differs from the true CRITICAL.md hash a9ea5fa5db2affabf0f85710f41e37e73b108c0236a58b7efb9c17cb36a07e9e from character 25 - a transcription variant in the order text; CRITICAL.md is byte-identical to the committed bootstrap seed (oap/BOOTSTRAP-MANIFEST.sha256 pins both CRITICAL.md and docs/bootstrap/CRITICAL.md at the true hash; the committed GENERATED-FILES.json immutable pin and the accepted-base blob agree) and the 011-b round verified the true hash under the strategy's PASS final-head review, so the semantic seed-identical gate holds byte-exactly and no frozen surface drifted. The bounded canonical-route re-probe used exactly 2 metadata GETs (no retries; zero chat/generation/responses calls; zero other endpoints; zero writes; zero server mutation; zero RTX-3090 contact; zero Deployment B contact), constructed per the strategy-corrected private credentials receipt's metadata_probe_routes field verbatim (dual bases; bearer unchanged; values never committed, never logged, never echoed): attempt 1 (serving-version metadata GET, canonical server-root route /version, unauthenticated) returned HTTP 200 with serving framework version 0.28.0 (20 response bytes); attempt 2 (models metadata GET, canonical /v1/models route, with the authorized bearer) returned HTTP 200 with one model row (identifier qwen3.8-27b, owned_by vllm, max model length 262144, exposed model root suffix Qwen3.8-27B-FP8; 505 response bytes). Observation window 2026-10-01T00:58:35.948Z to 2026-10-01T00:58:36.253Z UTC. VERDICT: REGIME-UNCHANGED, ESTABLISHED - all observed identity fields match the 009-a pin (the wire protocol class remains OpenAI-compatible HTTP serving (vLLM; Responses wire API; non-streaming) per the observed identity fields and the frozen 007 profiles); the pinned identity is re-verified as of this round; the 011-b non-canonical-route finding (401 /v1/version; 404 /v1/v1/models) is explained as a route-construction artifact, not a regime change. CONSEQUENCE: the PROTOCOL-009 element (a) hard gate is satisfied for collection; the collection round 011-d may proceed on this verified identity, subject to its own intake gate; the single named human input (the 011b-intake corpus per the 011-b order item 3b) remains outstanding (escalated to the owner exactly once, independently of this round); NO intake, NO manifest, NO selection, NO split, NO generation call, NO sample opened in this round. Registry 38 -> 39 (this entry); machine block counters registry_entries 39, oap_reports_reviewed 58, frozen_report_history_incidents unchanged at 2; all identity fields byte-unchanged (no advance). The designed implementation-head report-count red (58 vs 57, the 008-i/009-b/010-a/011-a/011-b pattern) clears at the final head with the report commit. No test logic changed; every numeric re-derivation assertion remains binding; no product, data, protocol, or test change; no merge, no auto-merge; PR #12 stays OPEN.",
+      "evidence_files": [
+        {
+          "disposition": "011-c order committed at activation (byte-identity re-verified against the committed blob)",
+          "logical_path": "oap/orders/011-c-identity-reverification-canonical-routes.md",
+          "sha256": "676279b6d3584dc42a3d4a28a8b06eaf317ae929e20127c00e7768899a99a2c7",
+          "size": 35682
+        },
+        {
+          "disposition": "data-free canonical-route re-probe record (additive section 6 only; sections 1-5 byte-preserved)",
+          "logical_path": "research/target-distribution/DEPLOYMENT-IDENTITY-011.md",
+          "sha256": "53cefe8fe451402eff3ffd429083eb87d1fe80733c66b641a05bba20b482e94a",
+          "size": 11209
+        }
+      ],
+      "evidence_status": "public-data-free",
+      "experiment_id": "011-c-identity-reverification-canonical-routes",
+      "frozen_choices": {
+        "canonical_routes": "GET /version (server-root base, unauthenticated) then GET /v1/models (API base, authorized bearer) per the strategy-corrected private credentials receipt metadata_probe_routes field verbatim (the 009-a canonical route precedent)",
+        "confirmation_model_calls": 0,
+        "confirmation_samples_consumed": 0,
+        "machine_block_fields_updated": "counters only: registry_entries 38 -> 39, oap_reports_reviewed 57 -> 58, frozen_report_history_incidents unchanged at 2; main_sha/reviewed_branch_head_sha 4507cc78e333c0e48226b64266121171b7b8cea8, reviewed_branch_head_parent_sha 01ea3fa4cde5c4759bcf29d6c665ed8b2e29524d, branch/pr_number/quarantined_007n/quarantined_008d/frozen_007m sha fields byte-unchanged (no advance)",
+        "new_model_calls": 0,
+        "reprobe_attempt_outcomes": "exactly 2-of-2 attempts used, no retries: attempt 1 /version unauthenticated 200 (serving framework version 0.28.0; 20 bytes); attempt 2 /v1/models authorized bearer 200 (qwen3.8-27b, owned_by vllm, max_model_len 262144, root suffix Qwen3.8-27B-FP8; 505 bytes)",
+        "registry_entries_added": 1,
+        "reprobe_verdict": "REGIME-UNCHANGED ESTABLISHED (all observed identity fields match the 009-a pin); PROTOCOL-009 element (a) hard gate satisfied for collection",
+        "test_files_or_logic_changed": 0,
+        "tuning_or_mechanism_changes": 0,
+        "untracked_residue_committed": 0
+      },
+      "kind": "state-correction",
+      "logical_root": "none (data-free identity re-verification)",
+      "metrics": {
+        "auth_material_in_committed_artifacts": 0,
+        "confirmation_data_bytes": 0,
+        "endpoint_values_in_committed_artifacts": 0,
+        "frozen_surfaces_byte_verified_at_base": "all order-pinned sha256 values (007-m public projection 41e1482a9ee100f5a3da6d31cd0646765271d874e2b7ef98593a50f5e7d2b5a0 and config-internal pins 0026a1a9d27652c36e2c5a960b10fafc1c9a93b0690d93b09089aa58884f5c26 / 572cf2fb4864e66e38a500465e1089062d58aeed4721063fb0c1e466e424230d / c79fd658db9c2006c0e542a12946962880e4ee3cec9dc57bc987b62d26c2dd60 / 0c4aa4900733f37dc6da9b5fba4c5a772f83830b916938b8b89855917d1a1d4e; 008 protection census prose_boundary.py c57e2901e52af962546ee83651850e22c91655a8cc822f2c43b1284da16b8c50, protected.py 27f22eaee129190b880851b958a8aa5a38d357cb4e711d70e762b2353d32e78f, structural-policy-v5 915f70d34ecc69ab6fea0b273f24ca20f251b6e181bd5e9281c5c012de2fe542, structural-policy-v4 f564d9f87ef01a893d6cd6bb36f6cf99a0d353a4dde4e4c4c024942eb969e76f, experiment-008i 24e25edafbbf0b1d67dc405440ea78c0b76a9011c00d5e53c82fe3c00fef6685; PROTOCOL-009 cc5e9089510dcb4be6fd2ec3cef1890c515ec9e6edd585da1dd25e70e1dabd2a; DEPLOYMENT-IDENTITY-009 b6734b35390f13c9170722fbf68ffee06d7d5f73da3a5e1a077980e3452994e4; DEPLOYMENT-IDENTITY-011 sections 1-5 ba3862c9aefdc8b1bdb6c45857d492cc36769e7df99ecec1ecb646e57bd6ea74; test_009a lint 2a54a73b7a5e4c4e112c0926e6163ab1990dd21343f51a3e8ee198e51295509b; CRITICAL.md byte-identical to the committed bootstrap seed (true hash a9ea5fa5db2affabf0f85710f41e37e73b108c0236a58b7efb9c17cb36a07e9e; the order-text pin string a9ea5fa5db2affabf0f85710f85710f41e37e73b108c0236a58b7efb9c17cb36a07e9e is a transcription variant, named in section 27(a)); frozen implementation head commit 537aa6a3ff03c60dd1b2c7f697c577940d52e88d present; machine block main_sha/reviewed 4507cc78e333c0e48226b64266121171b7b8cea8, parent 01ea3fa4cde5c4759bcf29d6c665ed8b2e29524d, counters 38/57/2 before bookkeeping; registry 38 with the last 011-b (status BLOCKED)",
+        "model_calls": 0
+      },
+      "pending_evidence": [
+        "011b-intake corpus (the single named human input per the 011-b order item 3b: GENUINE_OUTPUT_SOURCE target >= 100 / floor 50; FULLY_CORRECT_CONTROL target >= 34 with >= 10 tagged technical or rare-expression-name; per-document data-free sidecars; zero-leakage exclusions; plain UTF-8 + sidecars, 0600, into the declared private intake location) - outstanding, escalated to the owner exactly once",
+        "011-d onward: collection on the verified A100-FP8 identity (PROTOCOL-009 element (a) hard gate now satisfied by this round's REGIME-UNCHANGED verdict), annotation, evaluation, and comparative report under the frozen protocol, subject to the collection round's own intake gate"
+      ],
+      "public_configuration": "none (identity re-verification; no configuration changed)",
+      "public_metrics": "none (identity re-verification; no metrics changed)",
+      "public_report": "research/RESEARCH-STATE.md#27",
+      "question": "Does the bounded canonical-route 2-GET metadata probe (the intervening round pre-specified by DEPLOYMENT-IDENTITY-011 section 4 under the owner's standing E2(b) authorization) re-verify the E2(b)-designated A100-FP8 pinned identity against the 009-a pin and thereby satisfy the PROTOCOL-009 element (a) hard gate for the collection round, with zero collection, zero generation calls, and zero prohibited contact?",
+      "source_manifest": "none (no private source)",
+      "status": "COMPLETE",
+      "variation": "objective-011 round 3 (bounded identity re-verification): the canonical-route 2-GET probe plus the additive DEPLOYMENT-IDENTITY-011 section 6, the single data-free ledger entry, and the scoped bookkeeping (STATUS.md, GENERATED-FILES pin, CSV rebuild); no collection data, no tuning, no mechanism change, no test change"
     }
   ]
 }

@@ -1907,6 +1907,115 @@ REPAIR_ALLOW_LIVE_TESTS stays NO; the RTX-3090
 (MUST-NOT-BE-STARTED) and Deployment B (EXCLUDED_BY_HUMAN_OVERRIDE)
 boundaries remain absolute; PR #12 stays OPEN.
 
+## 27. Bounded canonical-route identity re-verification, regime
+## unchanged ESTABLISHED (objective 011, round 011-c)
+
+This section is the additive 011-c record (D0: execution of the
+ordered bounded verification pre-specified by
+DEPLOYMENT-IDENTITY-011 section 4 under the owner's standing E2(b)
+authorization). It rewrites nothing in sections 1-26; the only
+narrative bytes changed outside the machine block are this additive
+section and the two ordered counter fields in the machine block.
+
+(a) Round and base: objective 011, round 3, on the EXISTING branch
+`oap/011-target-distribution-confirmation-study` (AMEND_EXISTING_PR;
+PR #12 held OPEN, no merge - the objective's PR accumulates its
+rounds and merges only at the objective's end). Round base
+`f505492daa2fa396015739999677bc593c07dc0f` (the 011-b final head); accepted main
+`4507cc78e333c0e48226b64266121171b7b8cea8`. The pre-work integrity gates passed with zero state
+mismatch: all order-pinned frozen surfaces byte-verified at the base
+(PROTOCOL-009 cc5e9089510dcb4be6fd2ec3cef1890c515ec9e6edd585da1dd25e70e1dabd2a,
+DEPLOYMENT-IDENTITY-009 b6734b35390f13c9170722fbf68ffee06d7d5f73da3a5e1a077980e3452994e4,
+DEPLOYMENT-IDENTITY-011 sections 1-5 ba3862c9aefdc8b1bdb6c45857d492cc36769e7df99ecec1ecb646e57bd6ea74,
+the 007-m projection 41e1482a9ee100f5a3da6d31cd0646765271d874e2b7ef98593a50f5e7d2b5a0
+with its config-internal pins, the objective-008 protection-layer
+pins, the 011-a/011-b order and report bytes); machine block 38/57/2
+with identity fields unchanged; registry 38 with the last 011-b;
+local consistency 10/10 green in a real checkout with origin/main =
+4507cc78e333c0e48226b64266121171b7b8cea8; governance 16/16 (coding_bytes 35076); doctor clean (zero
+errors). ONE NAMED ORDER-TEXT FINDING (no state drift): the
+CRITICAL.md hex pin string in the 011-c order (carried over
+verbatim from the 011-b order) `a9ea5fa5db2affabf0f85710f85710f41e37e73b108c0236a58b7efb9c17cb36a07e9e`
+differs from the true CRITICAL.md hash `a9ea5fa5db2affabf0f85710f41e37e73b108c0236a58b7efb9c17cb36a07e9e`
+from character 25 - a transcription variant in the order text.
+CRITICAL.md is byte-identical to the committed bootstrap seed
+(oap/BOOTSTRAP-MANIFEST.sha256 pins both CRITICAL.md and
+docs/bootstrap/CRITICAL.md at the true hash; the committed
+GENERATED-FILES.json immutable pin and the accepted-base blob
+agree), and the 011-b round verified and recorded the true hash
+under the strategy's PASS final-head review. The semantic
+"seed-identical" gate therefore holds byte-exactly, and no frozen
+surface has drifted from the accepted state.
+
+(b) Bounded canonical-route re-probe (scope item 2): exactly 2
+metadata GETs, no retries, zero chat/generation/responses calls,
+zero other endpoints, zero writes, zero server mutation, zero
+RTX-3090 contact, zero Deployment B contact. The authorized profile
+(both bases and the bearer) was read ONLY from the strategy-
+corrected private credentials receipt (private locations by
+relative directory name only: `011b-identity/`; 0600; values never
+committed, never logged, never echoed). The route construction
+followed the receipt's `metadata_probe_routes` field verbatim
+(canonical 009-a routes: server-root `/version`
+unauthenticated; API-base `/v1/models` with the authorized bearer;
+the receipt's correction record carries both bases, the explicit
+canonical metadata routes, and the unchanged bearer). Attempt 1
+(serving-version metadata GET, path `/version`, unauthenticated)
+returned HTTP 200 with serving framework version 0.28.0 (20
+response bytes); attempt 2 (models metadata GET, path
+`/v1/models`, with the authorized bearer) returned HTTP 200 with
+one model row: identifier qwen3.8-27b, owned_by vllm, max model
+length 262144, exposed model root suffix Qwen3.8-27B-FP8 (505
+response bytes). Observation window
+2026-10-01T00:58:35.948Z to 2026-10-01T00:58:36.253Z UTC. The full
+attempt-level receipt is private
+(`011c-identity/reprobe-receipt.json`; never committed).
+
+(c) Verdict (scope item 3): REGIME-UNCHANGED, ESTABLISHED - both
+attempts returned 200 and every observed identity field matches the
+009-a pin (serving framework version 0.28.0; model identifier
+qwen3.8-27b; exposed model root suffix Qwen3.8-27B-FP8; max model
+length 262144; the wire protocol class remains OpenAI-compatible
+HTTP serving (vLLM; Responses wire API; non-streaming) per the
+observed identity fields and the frozen 007 profiles). The pinned
+identity is re-verified as of this round. The 011-b
+non-canonical-route finding (401 on `/v1/version`; 404 on
+`/v1/v1/models`; no identity field observed) is thereby explained
+as a route-construction artifact (the 011-b probe appended the
+009-a metadata paths to the `/v1`-prefixed API base), not as a
+regime change.
+
+(d) Consequence: the PROTOCOL-009 element (a) hard gate is
+satisfied for collection; the collection round (011-d) may proceed
+on this verified identity, subject to its own intake gate. The
+single named human input (the `011b-intake` corpus per the 011-b
+order item 3b) remains outstanding - escalated to the owner exactly
+once, independently of this round; this round performed NO intake
+work (NO manifest, NO selection, NO split, NO generation call, NO
+sample opened).
+
+(e) Bookkeeping: registry 38 -> 39 (this entry; kind
+state-correction; status COMPLETE; data-free; private locations by
+relative directory name only: `011c-identity/` - this round's
+re-probe script and receipt; never committed); machine-block
+counters only (registry_entries 39, oap_reports_reviewed 58 for the
+011-c report file, frozen_report_history_incidents unchanged at 2);
+all identity fields UNCHANGED (no advance - that is a post-merge
+round's job); no test logic changed; every numeric re-derivation
+assertion remains binding. The designed implementation-head
+report-count red (58 vs 57, the 008-i/009-b/010-a/011-a/011-b
+pattern) clears at the final head with the report commit.
+
+(f) Invariants: no frozen surface, protocol, data, or product
+element changed; no PROTOCOL-009.md or DEPLOYMENT-IDENTITY-009.md
+change; no rewrite of DEPLOYMENT-IDENTITY-011.md sections 1-5 (the
+ordered additive section 6 only); no test change; no CRITICAL.md
+change (byte-identical to the committed bootstrap seed; see (a));
+no merge, no auto-merge, no deployment, no release, no milestone
+claim; REPAIR_ALLOW_LIVE_TESTS stays NO; the RTX-3090
+(MUST-NOT-BE-STARTED) and Deployment B (EXCLUDED_BY_HUMAN_OVERRIDE)
+boundaries remain absolute; PR #12 stays OPEN.
+
 ## Machine-readable state block (research-state-machine-v1)
 
 This fenced block is the machine-readable core of the numbers quoted above.
@@ -1949,8 +2058,8 @@ model/network calls.
     "frozen_007m_configuration_sha256": "0026a1a9d27652c36e2c5a960b10fafc1c9a93b0690d93b09089aa58884f5c26",
     "frozen_007m_prompt_sha256": "572cf2fb4864e66e38a500465e1089062d58aeed4721063fb0c1e466e424230d",
     "frozen_007m_final_root_manifest_sha256": "3fb4aef33542e7fa3f357acb905b75f4d7e7551783f83a422b5d1ea6272c25f8",
-    "registry_entries": 38,
-    "oap_reports_reviewed": 57,
+    "registry_entries": 39,
+    "oap_reports_reviewed": 58,
     "frozen_report_history_incidents": 2
   },
   "official_scorer": {
