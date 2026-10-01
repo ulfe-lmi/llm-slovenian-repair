@@ -2016,6 +2016,160 @@ claim; REPAIR_ALLOW_LIVE_TESTS stays NO; the RTX-3090
 (MUST-NOT-BE-STARTED) and Deployment B (EXCLUDED_BY_HUMAN_OVERRIDE)
 boundaries remain absolute; PR #12 stays OPEN.
 
+## 28. Stage-1 DASSLE mechanical-assembly collection - Result
+## BLOCKED (floor-50 shortfall; objective 011, round 011-d)
+
+This section is the additive 011-d record (D0: execution of the
+pre-registered stage-1 collection specification, published in the 011-b
+order byte-preserved, AS AMENDED by the owner's standing 2026-10-01
+DASSLE directive and the registered additive revision
+PROTOCOL-009-REVISION-011). It rewrites nothing in sections 1-27; the
+only narrative bytes changed outside the machine block are this
+additive section and the two ordered counter fields in the machine
+block.
+
+(a) Round and base: objective 011, round 4, on the EXISTING branch
+`oap/011-target-distribution-confirmation-study` (AMEND_EXISTING_PR;
+PR #12 held OPEN, no merge - the objective's PR accumulates its
+rounds and merges only at the objective's end). Round base
+`47c4da8bf7016614cd62d2448e72f3f7249d0803` (the 011-c final head);
+accepted main `4507cc78e333c0e48226b64266121171b7b8cea8`. The
+pre-work integrity gates passed with zero mismatch: all order-pinned
+frozen surfaces byte-verified at the base (PROTOCOL-009
+cc5e9089510dcb4be6fd2ec3cef1890c515ec9e6edd585da1dd25e70e1dabd2a,
+DEPLOYMENT-IDENTITY-009 b6734b35390f13c9170722fbf68ffee06d7d5f73da3a5e1a077980e3452994e4,
+DEPLOYMENT-IDENTITY-011 including section 6, test_009a_protocol_elements.py,
+the 007-m pins, the 008 protection-layer pins, the 011-a/011-b/011-c
+orders and reports, RESEARCH-STATE sections 24-27); the hard-gate (a)
+precondition was verified BY RECORD, not by probe: DEPLOYMENT-
+IDENTITY-011 section 6 carries the 011-c canonical-route re-probe
+(exactly 2 metadata GETs, both 200), the REGIME-UNCHANGED ESTABLISHED
+verdict, the consequence statement, and the observation window
+2026-10-01T00:58:35.948Z-00:58:36.253Z; ZERO metadata probes occurred
+in this round (the exactly-2-GET budget was exhausted by design at
+011-b/011-c); the order's 72-character CRITICAL.md pin string is the
+known transcription variant, the true hash
+a9ea5fa5db2affabf0f85710f41e37e73b108c0236a58b7efb9c17cb36a07e9e
+byte-verified (the 011-c named finding, carried); machine block 39/58/2
+with identity fields unchanged; registry 39 with the last 011-c;
+local consistency 10/10 green in a real checkout with origin/main =
+4507cc78e333c0e48226b64266121171b7b8cea8.
+
+(b) Source gate and committed preparation: both DASSLE source files
+re-verified byte-for-byte before any assembly or call - dassle.jsonl
+sha256 609b696616f7246ba9c09a97531f3b9f2035ce3efca35926a5e73898b28045d6
+(7,385 records; reference_status SUPPLIED 7,381 / MISSING_BLANK_FIELD
+4; eligible genuine pool 7,354 = SUPPLIED and input != reference) and
+dassle-preservation.jsonl sha256 d87e6ccee74cef0981a0e8ebd6315d75abbcf8bb8558e9a9627507f0bbbf4bec
+(7,381 records; input == reference in all 7,381; parent links
+verified). Committed BEFORE any sample was opened or any scaffold call
+made: PROTOCOL-009-REVISION-011 (sha256
+609751c15d76416f46358bbde0a03b7b2c68637fe338b96c88df2d85796c5e43,
+19,049 B) and SCAFFOLD-GENERATOR-PROMPT-011 (sha256
+005edf0a0ea4f9a52f8acc887b28f0f772f04cf54197cca15c539e50ed9cc0fc, 402
+B) byte-exact, then the collection manifest FIRST
+(011b-collection-manifest.json; data-free: source-verification census,
+both PRNG instances with their exact mechanics, the 134 collection
+IDs, the partition, the identity hash references, the frozen 007-m
+main-capture contract, the registered scaffold call class with budget
+cap 402, the discard rule, the authorized-reuse disclosure with
+consumption tiers, the recorded technical/rare-name waiver).
+
+(c) Selection and split (committed, deterministic; independently
+re-derived at the round resumption): a single PRNG instance
+random.Random("009a-target-distribution-20260930"); Draw 1 = 100
+genuine (from the 7,354-record eligible pool); Draw 2 = 34 control
+(from the 7,281-record pool after the no-both-arms exclusion);
+collection IDs 011b-0001..011b-0134 in sorted (domain_tag, doc_slug)
+order, all domain_tag general-prose (single-domain floor N/A,
+recorded); partition: pilot 5 (011b-0079, 011b-0114, 011b-0067,
+011b-0072, 011b-0097), N = 129, k = ceil(0.15 x 129) = 20
+calibration, 109 confirmation; the confirmation subset is untouched.
+
+(d) Generation on the designated target (the live work) and the exact
+named finding: 134 terminal SCAFFOLD_GENERATION attempts (one per
+selected document; 135 calls total including one standalone
+diagnostic) and ZERO main-capture calls, on the E2(b)-designated
+A100-FP8 target only (the sole live network activity of the round,
+plus the two disclosed transport diagnostics of section (e)). Attempt
+census (data-free; the per-document private ledger lives under the
+private 011b-collection/ root and is never committed; attempt window
+2026-10-01T07:58:02Z-08:09:39Z UTC): k draws {1: 58, 2: 39, 3: 37}
+(named per document); every document failed at section 1 (SCAFFOLD_
+FAIL_s1, named, no replacement, no re-sampling): (1) 2 attempts
+(011b-0001..011b-0002) under the initial implementation payload
+without the reasoning-effort field (server default effort xhigh):
+HTTP 200, response status incomplete, incomplete_details.reason
+max_output_tokens, reasoning_tokens 600 = the full registered 600-
+token output cap, no message output; (2) 6 attempts (011b-0003..
+011b-0008) with the frozen 007-m value reasoning effort low added:
+the identical outcome (HTTP 200, incomplete, max_output_tokens,
+reasoning 600/600, no message output); (3) 126 attempts (011b-0009..
+011b-0134) with the probed effort minimal: HTTP 400 BadRequestError -
+the server reports supported types xhigh (default), medium, and low;
+(4) the standalone diagnostic attempt (effort minimal): the same HTTP
+400. All 134 documents are EXCLUDED per the registered failure rule:
+100 genuine (011b-0035..011b-0134) and 34 control (011b-0001..
+011b-0034); zero assembled documents; zero stored main answers; no
+sample opened. The named structural finding: on this deployment
+(vLLM-served qwen3.8-27b), the model's reasoning overhead on the
+registered scaffold task reaches at least 600 output tokens at every
+supported reasoning effort (8/8 observed HTTP 200 attempts hit
+reasoning_tokens = 600 = the registered cap before any message
+output), so the registered 600-token scaffold output cap
+(PROTOCOL-009-REVISION-011 section 8) structurally prevents
+scaffold-section completion; the frozen 007-m evidence (1,901 stored
+completed responses at effort low with reasoning 16-4,417 tokens
+under no output cap) corroborates that low-effort reasoning budgets
+are task-dependent and exceed this cap for this task class.
+
+(e) Transport diagnostics (crash investigation after the first two
+authorized scaffold calls failed; disclosed, bounded): one TCP port
+liveness check on the designated target (no HTTP request sent) and
+one unauthenticated HTTP GET to the non-metadata server root (HTTP
+404); zero metadata endpoints called; the exactly-2-GET metadata
+budget (exhausted at 011-b/011-c by design) was untouched.
+
+(f) Verdict (scope item 3d): genuine-arm survivors after assembly =
+0 < floor 50 -> Result: BLOCKED on the named shortfall (the
+registered 600-token scaffold cap vs the thinking-model reasoning
+overhead; 134/134 documents excluded, named). Per the BLOCKED
+branch: NO manifest finalization (the per-document PENDING_
+GENERATION fields remain PENDING; the bookkeeping commit applies one
+manifest key-name correction, input -> input_rule, value unchanged,
+so the fail-closed publication guard passes on the full tree - a
+schema correction, not a data fill), NO selection, NO split, NO
+main-capture call, NO sample opened. One NEW distinct human question
+is presented (attributable, once, at this boundary, per scope item
+3d): how the registered SCAFFOLD_GENERATION call class should be
+amended for the recovery round (a raised registered output cap or
+amended token accounting, or an alternative registered mechanism) -
+a decision for the owner/strategy in the amendment; this round is a
+stop, not a decision. The same round resumes by recovery re-signal
+(S-RECOVER-01) after the amendment; the committed selection, split,
+and collection IDs stand; the 134 excluded documents are terminal
+(no re-sampling of the selected set).
+
+(g) Bookkeeping and invariants: registry 39 -> 40 with exactly one
+011-d data-free collection entry (status BLOCKED); machine-block
+counters only (registry_entries 40, oap_reports_reviewed 59 for the
+011-d report file, frozen_report_history_incidents unchanged at 2;
+all identity fields unchanged - no advance, that is a post-merge
+round's job); this additive section; the STATUS.md round sentence;
+the oap/GENERATED-FILES.json scoped STATUS.md pin; the
+experiment-summary.csv append (the BLOCKED row). The data-free
+ANNOTATION-GUIDE-011 (scope item 8a) is committed this round despite
+the BLOCKED outcome: its content is independent of the collected
+samples (taxonomy, matcher, discard rule, denominators, procedure).
+The designed implementation-head report-count red (59 vs 58, the
+008-i/009-b/010-a/011-a/011-b/011-c pattern) clears at the final head
+with the report commit. No confirmation data collected, annotated,
+or evaluated; no tuning or mechanism change (no behavior change of
+any frozen element; the frozen 007-m main-capture wire stays
+byte-identical and unused); no product, data, protocol, or test
+change; REPAIR_ALLOW_LIVE_TESTS stays NO; no merge, no auto-merge;
+PR #12 stays OPEN pending strategy review.
+
 ## Machine-readable state block (research-state-machine-v1)
 
 This fenced block is the machine-readable core of the numbers quoted above.
@@ -2058,8 +2212,8 @@ model/network calls.
     "frozen_007m_configuration_sha256": "0026a1a9d27652c36e2c5a960b10fafc1c9a93b0690d93b09089aa58884f5c26",
     "frozen_007m_prompt_sha256": "572cf2fb4864e66e38a500465e1089062d58aeed4721063fb0c1e466e424230d",
     "frozen_007m_final_root_manifest_sha256": "3fb4aef33542e7fa3f357acb905b75f4d7e7551783f83a422b5d1ea6272c25f8",
-    "registry_entries": 39,
-    "oap_reports_reviewed": 58,
+    "registry_entries": 40,
+    "oap_reports_reviewed": 59,
     "frozen_report_history_incidents": 2
   },
   "official_scorer": {

@@ -3627,7 +3627,7 @@
   "include_reasoning": true,
   "reasoning_effort": "low",
   "serializer": "canonical UTF-8 JSON with one final LF",
-  "input": "exactly one user message, content type input_text, text = the assembled document (DASSLE block + scaffold sections exactly as registered)",
+  "input_rule": "exactly one user message, content type input_text, text = the assembled document (DASSLE block + scaffold sections exactly as registered)",
   "profile_source": "the private 011b-identity credentials receipt ONLY (both bases + bearer; never committed, never logged, never echoed)",
   "timeout_seconds": 300.0,
   "response_bound_bytes": 2000000,
