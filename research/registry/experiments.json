@@ -6362,6 +6362,249 @@
       "source_manifest": "none (no private source)",
       "status": "COMPLETE",
       "variation": "objective-010 round 1 (bounded state correction): machine-block identity advance plus counters, the additive RESEARCH-STATE section 24 note, the single data-free ledger entry, and the scoped bookkeeping (STATUS.md, GENERATED-FILES pin, CSV rebuild); no confirmation data, no tuning, no mechanism change, no test change"
+    },
+    {
+      "child_runs": [],
+      "conclusion": "Bounded post-merge state correction completed as ordered: the research-state-machine-v1 review-point identity advanced from the accepted objective-009 merge (main_sha a501b20af7f6d9774df989c41c5ec27e21b36f3e, reviewed head a501b20af7f6d9774df989c41c5ec27e21b36f3e, parent b0e33702463a9c44988e1d1ba4cb9b194c247e93) to the accepted objective-010 merge (main_sha and reviewed_branch_head_sha 4507cc78e333c0e48226b64266121171b7b8cea8, reviewed_branch_head_parent_sha 01ea3fa4cde5c4759bcf29d6c665ed8b2e29524d, the accepted objective-010 branch head and second parent of the merge commit), restoring the frozen 007-o consistency test (including test_main_is_ancestor_of_reviewed_head and test_branch_and_pr_match_committed_007o_order) to green at this round's final head by the only viable non-weakening means, per the documented 008-a/008-b, 009-a/009-b, and 010-a precedent chain for the identical structural condition (now relative to the objective-010 merge). No test logic changed; every numeric re-derivation assertion remains binding; branch, pr_number, the quarantined 007-n/008-d identity fields, and all frozen 007-m sha fields byte-unchanged. Registry 36 -> 37 (this entry); machine block counters registry_entries 37, oap_reports_reviewed 56, frozen_report_history_incidents unchanged at 2. Objective 011 (the confirmation-study continuation) opened on the accepted objective-010 merge as round 1, on a new branch and a new PR; no confirmation work of any kind performed or authorized (PROTOCOL-009 element (a) hard gate intact); no product/data/protocol/test change; no merge.",
+      "evidence_files": [
+        {
+          "disposition": "011-a order committed at activation (byte-identity re-verified against the committed blob)",
+          "logical_path": "oap/orders/011-a-post-merge-machine-block-identity-advance.md",
+          "sha256": "e75868f6703a4b8ba5c133a16e1d65b2ee40e6f6ce9ce5238abba0d4e05e1bac",
+          "size": 32293
+        }
+      ],
+      "evidence_status": "public-data-free",
+      "experiment_id": "011-a-post-merge-machine-block-identity-advance",
+      "frozen_choices": {
+        "confirmation_model_calls": 0,
+        "confirmation_samples_consumed": 0,
+        "machine_block_fields_updated": "identity advance only: main_sha a501b20af7f6d9774df989c41c5ec27e21b36f3e -> 4507cc78e333c0e48226b64266121171b7b8cea8; reviewed_branch_head_sha a501b20af7f6d9774df989c41c5ec27e21b36f3e -> 4507cc78e333c0e48226b64266121171b7b8cea8; reviewed_branch_head_parent_sha b0e33702463a9c44988e1d1ba4cb9b194c247e93 -> 01ea3fa4cde5c4759bcf29d6c665ed8b2e29524d; branch/pr_number/quarantined_007n/quarantined_008d/frozen_007m sha fields byte-unchanged; counters registry_entries 36 -> 37, oap_reports_reviewed 55 -> 56, frozen_report_history_incidents unchanged at 2",
+        "new_model_calls": 0,
+        "registry_entries_added": 1,
+        "test_files_or_logic_changed": 0,
+        "tuning_or_mechanism_changes": 0,
+        "untracked_residue_committed": 0
+      },
+      "kind": "state-correction",
+      "logical_root": "none (data-free state correction)",
+      "metrics": {
+        "auth_material_in_committed_artifacts": 0,
+        "confirmation_data_bytes": 0,
+        "endpoint_values_in_committed_artifacts": 0,
+        "frozen_surfaces_byte_verified_at_base": "all order-pinned sha256 values (007-m public projection 41e1482a9ee100f5a3da6d31cd0646765271d874e2b7ef98593a50f5e7d2b5a0 and config-internal pins 0026a1a9d27652c36e2c5a960b10fafc1c9a93b0690d93b09089aa58884f5c26 / 572cf2fb4864e66e38a500465e1089062d58aeed4721063fb0c1e466e424230d / 0c4aa4900733f37dc6da9b5fba4c5a772f83830b916938b8b89855917d1a1d4e; 008 protection census prose_boundary.py c57e2901e52af962546ee83651850e22c91655a8cc822f2c43b1284da16b8c50, protected.py 27f22eaee129190b880851b958a8aa5a38d357cb4e711d70e762b2353d32e78f, structural-policy-v5 915f70d34ecc69ab6fea0b273f24ca20f251b6e181bd5e9281c5c012de2fe542, structural-policy-v4 f564d9f87ef01a893d6cd6bb36f6cf99a0d353a4dde4e4c4c024942eb969e76f, experiment-008i 24e25edafbbf0b1d67dc405440ea78c0b76a9011c00d5e53c82fe3c00fef6685; PROTOCOL-009 cc5e9089510dcb4be6fd2ec3cef1890c515ec9e6edd585da1dd25e70e1dabd2a; DEPLOYMENT-IDENTITY-009 b6734b35390f13c9170722fbf68ffee06d7d5f73da3a5e1a077980e3452994e4; test_009a lint 2a54a73b7a5e4c4e112c0926e6163ab1990dd21343f51a3e8ee198e51295509b; CRITICAL seed-identical a9ea5fa5db2affabf0f85710f41e37e73b108c0236a58b7efb9c17cb36a07e9e; frozen implementation head commit 537aa6a3ff03c60dd1b2c7f697c577940d52e88d present; objective-010 merge commit 4507cc78e333c0e48226b64266121171b7b8cea8 with parent order a501b20af7f6d9774df989c41c5ec27e21b36f3e then 01ea3fa4cde5c4759bcf29d6c665ed8b2e29524d verified)",
+        "model_calls": 0
+      },
+      "pending_evidence": [
+        "owner E2 decision (the confirmation TARGET deployment): attributable human decision required; until resolved, NO confirmation data is collected from any deployment and the loop idles at that boundary (PROTOCOL-009 element (a) hard gate)",
+        "011-b onward: collection, annotation, evaluation, and comparative report under the frozen protocol (fresh, uncollected, unopened samples only), starting only after an attributable E2 resolution and the 011-a development merge"
+      ],
+      "public_configuration": "none (state correction; no configuration changed)",
+      "public_metrics": "none (state correction; no metrics changed)",
+      "public_report": "research/RESEARCH-STATE.md#25",
+      "question": "Does the additive advance of the research-state-machine-v1 review-point identity from the accepted objective-009 merge to the accepted objective-010 merge restore the frozen 007-o consistency test and all four required checks to green at the round's final head, without weakening any test, altering any frozen surface, or changing any protocol, data, or product element?",
+      "source_manifest": "none (no private source)",
+      "status": "COMPLETE",
+      "variation": "objective-011 round 1 (bounded state correction): machine-block identity advance plus counters, the additive RESEARCH-STATE section 25 note, the single data-free ledger entry, and the scoped bookkeeping (STATUS.md, GENERATED-FILES pin, CSV rebuild); no confirmation data, no tuning, no mechanism change, no test change"
+    },
+    {
+      "child_runs": [],
+      "conclusion": "Bounded stage-1 collection round for the E2(b)-designated A100-FP8 confirmation target: the pre-work integrity gates passed with zero mismatch (all order-pinned frozen surfaces byte-verified at the base 2e5d76d16875b3f0cede4b9c49ddf32ab70faee4; registry 37 with the last 011-a; machine block 37/56/2 with identity fields unchanged; local consistency 10/10 green in a real checkout with origin/main = 4507cc78e333c0e48226b64266121171b7b8cea8); the E2(b) designation was recorded verbatim in research/target-distribution/DEPLOYMENT-IDENTITY-011.md together with the product-intent-change impact statement (evidence transferability NONE to the RTX-3090 target; the target-distribution label refers to the designated regime; no replication required), the 009-a pinned identity by hash, and the reaffirmed boundaries. The bounded freshness re-probe was executed with exactly 2 metadata GETs (no retries; zero chat/generation/responses calls; zero other endpoints; zero writes; zero RTX-3090 contact; zero Deployment B contact): attempt 1 (serving-version metadata GET, requested path /v1/version, unauthenticated) returned HTTP 401 and attempt 2 (models metadata GET, requested path /v1/v1/models, with the authorized bearer) returned HTTP 404. Exact data-free finding: the round private credentials receipt records endpoint_base_url with an embedded /v1 API path prefix while the private 009-a C2 receipt records the server root as the base (the two private records' scheme/host/port are equal, boolean-verified, values never committed); appending the 009-a metadata paths (/version, /v1/models) to the prefixed base produced the non-canonical routes, so no identity field was observed and drift of the designated regime is neither established nor excluded. Verdict per order scope 2c: BLOCKED (probe failure); the round stops at the finding; NO intake, NO manifest, NO selection, NO split, NO generation call, and NO sample opened; an intervening round (canonical-route 2-GET probe under the same exactly-2-attempt budget) is required before any collection, and the single named human input (the 011b-intake corpus, order item-3b specification) remains outstanding with the pre-authorized BLOCKED-once escalation path (strategy escalates to the owner exactly once; the owner is never a terminal relay). Registry 37 -> 38 (this entry); machine block counters only (registry_entries 38, oap_reports_reviewed 57 for the 011-b report file; identity fields unchanged at the 011-a review point; frozen_report_history_incidents unchanged at 2). The designed implementation-head report-count red (57 vs 56, the 008-i/009-b/010-a/011-a pattern) clears at the final head with the report commit. No tuning, no mechanism change, no test change, no merge.",
+      "evidence_files": [
+        {
+          "disposition": "011-b order committed at activation (byte-identity re-verified against the committed blob)",
+          "logical_path": "oap/orders/011-b-confirmation-stage1-collection.md",
+          "sha256": "0456004c0136ec0de9e3732b3d76ddd343d9124730a865fa7e946182a3105627",
+          "size": 54307
+        },
+        {
+          "disposition": "data-free E2(b) designation record and bounded freshness re-probe record (attempt table, exact finding, verdict BLOCKED (probe failure), reaffirmed boundaries); bytes final from the implementation head forward",
+          "logical_path": "research/target-distribution/DEPLOYMENT-IDENTITY-011.md",
+          "sha256": "ba3862c9aefdc8b1bdb6c45857d492cc36769e7df99ecec1ecb646e57bd6ea74",
+          "size": 6641
+        }
+      ],
+      "evidence_status": "public-data-free",
+      "experiment_id": "011-b-confirmation-stage1-collection",
+      "frozen_choices": {
+        "confirmation_model_calls": 0,
+        "confirmation_samples_consumed": 0,
+        "generation_calls": 0,
+        "intake_directory_created": 0,
+        "intake_documents_delivered": 0,
+        "machine_block_fields_updated": "counters only (registry_entries 37 -> 38; oap_reports_reviewed 56 -> 57); identity fields unchanged at the 011-a review point (main_sha and reviewed_branch_head_sha 4507cc78e333c0e48226b64266121171b7b8cea8, parent 01ea3fa4cde5c4759bcf2e29d6c665ed8b2e29524d, branch oap/007-concept-verification, pr_number 8); frozen_report_history_incidents unchanged at 2",
+        "reprobe_deployment_b_contact": 0,
+        "reprobe_http_attempts_used": "exactly 2 of 2 authorized, no retries (serving-version metadata GET requested path /v1/version unauthenticated -> HTTP 401; models metadata GET requested path /v1/v1/models with the authorized bearer -> HTTP 404; zero chat/generation/responses calls; zero other endpoints; zero writes; zero server mutation)",
+        "reprobe_rtx3090_contact": 0,
+        "registry_entries_added": 1,
+        "selection_split_generation_performed": 0,
+        "test_files_or_logic_changed": 0,
+        "tuning_or_mechanism_changes": 0,
+        "untracked_residue_committed": 0
+      },
+      "kind": "collection",
+      "logical_root": "none (data-free BLOCKED-at-probe-failure round; the re-probe script, the re-probe receipt, and the credentials receipt live under the round private research runtime root 011b-identity/ and are never committed)",
+      "metrics": {
+        "auth_material_in_committed_artifacts": 0,
+        "confirmation_data_bytes": 0,
+        "endpoint_values_in_committed_artifacts": 0,
+        "frozen_surfaces_byte_verified_at_base": "all order-pinned sha256 values (PROTOCOL-009 cc5e9089510dcb4be6fd2ec3cef1890c515ec9e6edd585da1dd25e70e1dabd2a; DEPLOYMENT-IDENTITY-009 b6734b35390f13c9170722fbf68ffee06d7d5f73da3a5e1a077980e3452994e4; test_009a lint 2a54a73b7a5e4c4e112c0926e6163ab1990dd21343f51a3e8ee198e51295509b; 007-m public projection 41e1482a9ee100f5a3da6d31cd0646765271d874e2b7ef98593a50f5e7d2b5a0 and config-internal pins 0026a1a9d27652c36e2c5a960b10fafc1c9a93b0690d93b09089aa58884f5c26 / 572cf2fb4864e66e38a500465e1089062d58aeed4721063fb0c1e466e424230d / 0c4aa4900733f37dc6da9b5fba4c5a772f83830b916938b8b89855917d1a1d4e; 008 protection census prose_boundary.py c57e2901e52af962546ee83651850e22c91655a8cc822f2c43b1284da16b8c50, protected.py 27f22eaee129190b880851b958a8aa5a38d357cb4e711d70e762b2353d32e78f, structural-policy-v5 915f70d34ecc69ab6fea0b273f24ca20f251b6e181bd5e9281c5c012de2fe542, structural-policy-v4 f564d9f87ef01a893d6cd6bb36f6cf99a0d353a4dde4e4c4c024942eb969e76f, experiment-008i 24e25edafbbf0b1d67dc405440ea78c0b76a9011c00d5e53c82fe3c00fef6685; CRITICAL seed-identical a9ea5fa5db2affabf0f85710f85710f41e37e73b108c0236a58b7efb9c17cb36a07e9e; governance identities 16/16; the 007-j out-of-band deployment-profile pin c79fd658db9c2006c0e542a12946962880e4ee3cec9dc57bc987b62d26c2dd60 references a private out-of-band file whose bytes are not in the repository, per the 009-a check-7 precedent)",
+        "model_calls": 0,
+        "reprobe_identity_fields_observed": 0,
+        "reprobe_verdict": "BLOCKED (probe failure) - transport failure within the 2-attempt budget (HTTP 401 then HTTP 404 on the constructed non-canonical routes); drift neither established nor excluded; regime-unchanged verdict not established"
+      },
+      "pending_evidence": [
+        "intervening round before any collection: the scope-2c probe failure must be resolved first - re-execute the ordered 2-GET probe against the canonical server-root metadata routes (/version unauthenticated; /v1/models with the authorized bearer) under the same exactly-2-attempt budget, and record the regime-unchanged verdict (or the exact drift mismatch) in the round private receipt",
+        "011b-intake corpus (the single named human input of scope item 3, outstanding independently of the probe failure): fresh, human-authored Slovenian documents with the order's item-3b data-free sidecars (GENUINE_OUTPUT_SOURCE target >= 100 / floor 50; FULLY_CORRECT_CONTROL target >= 34 with >= 10 tagged technical or rare-expression-name; plain UTF-8 files + sidecars, 0600) into the round private 011b-intake/ directory; strategy escalates to the owner EXACTLY ONCE with the item-3b specification (pre-authorized BLOCKED-once path); the owner is never a terminal relay",
+        "011-b resumption (same ID/branch/PR after reconciliation, from the first unfinished requirement): canonical-route re-probe, intake verification, manifest-first collection, deterministic selection and split, stage-1 generation, annotation guide and labeler packets, per the frozen PROTOCOL-009 procedure"
+      ],
+      "public_configuration": "none (no configuration changed)",
+      "public_metrics": "none (no metrics computed; no sample opened)",
+      "public_report": "research/RESEARCH-STATE.md#26",
+      "question": "Can the E2(b)-designated A100-FP8 regime be confirmed unchanged by the bounded exactly-2-attempt metadata freshness re-probe before the first sample is opened, and does the stage-1 collection proceed under the frozen PROTOCOL-009 procedure?",
+      "source_manifest": "none (no private source; the re-probe receipt, the re-probe script, and the credentials receipt are private-root only)",
+      "status": "BLOCKED",
+      "variation": "objective-011 round 2 (stage-1 collection, BLOCKED branch): pre-work gates passed with zero mismatch; E2(b) designation recorded verbatim in DEPLOYMENT-IDENTITY-011.md; bounded re-probe executed with exactly 2 metadata GETs and no retries (401/404 on non-canonical routes from the credentials-receipt /v1 base prefix); verdict BLOCKED (probe failure) per scope 2c - no intake, no manifest, no selection, no split, no generation call, no sample opened; bookkeeping with BLOCKED status (counters 38/57/2); an intervening round is required before any collection"
+    },
+    {
+      "child_runs": [],
+      "conclusion": "Bounded canonical-route identity re-verification of the E2(b)-designated A100-FP8 target completed as ordered (the intervening pinning round required by DEPLOYMENT-IDENTITY-011 section 4 after the 011-b scope-2c stop): the pre-work integrity gates passed with zero state mismatch (all order-pinned frozen surfaces byte-verified at the base f505492daa2fa39601573999677bc593c07dc0f; registry 38 with the last 011-b; machine block 38/57/2 with identity fields unchanged; local consistency 10/10 green in a real checkout with origin/main = 4507cc78e333c0e48226b64266121171b7b8cea8; governance 16/16, coding_bytes 35076; doctor clean) with ONE NAMED ORDER-TEXT FINDING (no state drift): the CRITICAL.md hex pin string in the order (carried over verbatim from the 011-b order) a9ea5fa5db2affabf0f85710f85710f41e37e73b108c0236a58b7efb9c17cb36a07e9e differs from the true CRITICAL.md hash a9ea5fa5db2affabf0f85710f41e37e73b108c0236a58b7efb9c17cb36a07e9e from character 25 - a transcription variant in the order text; CRITICAL.md is byte-identical to the committed bootstrap seed (oap/BOOTSTRAP-MANIFEST.sha256 pins both CRITICAL.md and docs/bootstrap/CRITICAL.md at the true hash; the committed GENERATED-FILES.json immutable pin and the accepted-base blob agree) and the 011-b round verified the true hash under the strategy's PASS final-head review, so the semantic seed-identical gate holds byte-exactly and no frozen surface drifted. The bounded canonical-route re-probe used exactly 2 metadata GETs (no retries; zero chat/generation/responses calls; zero other endpoints; zero writes; zero server mutation; zero RTX-3090 contact; zero Deployment B contact), constructed per the strategy-corrected private credentials receipt's metadata_probe_routes field verbatim (dual bases; bearer unchanged; values never committed, never logged, never echoed): attempt 1 (serving-version metadata GET, canonical server-root route /version, unauthenticated) returned HTTP 200 with serving framework version 0.28.0 (20 response bytes); attempt 2 (models metadata GET, canonical /v1/models route, with the authorized bearer) returned HTTP 200 with one model row (identifier qwen3.8-27b, owned_by vllm, max model length 262144, exposed model root suffix Qwen3.8-27B-FP8; 505 response bytes). Observation window 2026-10-01T00:58:35.948Z to 2026-10-01T00:58:36.253Z UTC. VERDICT: REGIME-UNCHANGED, ESTABLISHED - all observed identity fields match the 009-a pin (the wire protocol class remains OpenAI-compatible HTTP serving (vLLM; Responses wire API; non-streaming) per the observed identity fields and the frozen 007 profiles); the pinned identity is re-verified as of this round; the 011-b non-canonical-route finding (401 /v1/version; 404 /v1/v1/models) is explained as a route-construction artifact, not a regime change. CONSEQUENCE: the PROTOCOL-009 element (a) hard gate is satisfied for collection; the collection round 011-d may proceed on this verified identity, subject to its own intake gate; the single named human input (the 011b-intake corpus per the 011-b order item 3b) remains outstanding (escalated to the owner exactly once, independently of this round); NO intake, NO manifest, NO selection, NO split, NO generation call, NO sample opened in this round. Registry 38 -> 39 (this entry); machine block counters registry_entries 39, oap_reports_reviewed 58, frozen_report_history_incidents unchanged at 2; all identity fields byte-unchanged (no advance). The designed implementation-head report-count red (58 vs 57, the 008-i/009-b/010-a/011-a/011-b pattern) clears at the final head with the report commit. No test logic changed; every numeric re-derivation assertion remains binding; no product, data, protocol, or test change; no merge, no auto-merge; PR #12 stays OPEN.",
+      "evidence_files": [
+        {
+          "disposition": "011-c order committed at activation (byte-identity re-verified against the committed blob)",
+          "logical_path": "oap/orders/011-c-identity-reverification-canonical-routes.md",
+          "sha256": "676279b6d3584dc42a3d4a28a8b06eaf317ae929e20127c00e7768899a99a2c7",
+          "size": 35682
+        },
+        {
+          "disposition": "data-free canonical-route re-probe record (additive section 6 only; sections 1-5 byte-preserved)",
+          "logical_path": "research/target-distribution/DEPLOYMENT-IDENTITY-011.md",
+          "sha256": "53cefe8fe451402eff3ffd429083eb87d1fe80733c66b641a05bba20b482e94a",
+          "size": 11209
+        }
+      ],
+      "evidence_status": "public-data-free",
+      "experiment_id": "011-c-identity-reverification-canonical-routes",
+      "frozen_choices": {
+        "canonical_routes": "GET /version (server-root base, unauthenticated) then GET /v1/models (API base, authorized bearer) per the strategy-corrected private credentials receipt metadata_probe_routes field verbatim (the 009-a canonical route precedent)",
+        "confirmation_model_calls": 0,
+        "confirmation_samples_consumed": 0,
+        "machine_block_fields_updated": "counters only: registry_entries 38 -> 39, oap_reports_reviewed 57 -> 58, frozen_report_history_incidents unchanged at 2; main_sha/reviewed_branch_head_sha 4507cc78e333c0e48226b64266121171b7b8cea8, reviewed_branch_head_parent_sha 01ea3fa4cde5c4759bcf29d6c665ed8b2e29524d, branch/pr_number/quarantined_007n/quarantined_008d/frozen_007m sha fields byte-unchanged (no advance)",
+        "new_model_calls": 0,
+        "reprobe_attempt_outcomes": "exactly 2-of-2 attempts used, no retries: attempt 1 /version unauthenticated 200 (serving framework version 0.28.0; 20 bytes); attempt 2 /v1/models authorized bearer 200 (qwen3.8-27b, owned_by vllm, max_model_len 262144, root suffix Qwen3.8-27B-FP8; 505 bytes)",
+        "registry_entries_added": 1,
+        "reprobe_verdict": "REGIME-UNCHANGED ESTABLISHED (all observed identity fields match the 009-a pin); PROTOCOL-009 element (a) hard gate satisfied for collection",
+        "test_files_or_logic_changed": 0,
+        "tuning_or_mechanism_changes": 0,
+        "untracked_residue_committed": 0
+      },
+      "kind": "state-correction",
+      "logical_root": "none (data-free identity re-verification)",
+      "metrics": {
+        "auth_material_in_committed_artifacts": 0,
+        "confirmation_data_bytes": 0,
+        "endpoint_values_in_committed_artifacts": 0,
+        "frozen_surfaces_byte_verified_at_base": "all order-pinned sha256 values (007-m public projection 41e1482a9ee100f5a3da6d31cd0646765271d874e2b7ef98593a50f5e7d2b5a0 and config-internal pins 0026a1a9d27652c36e2c5a960b10fafc1c9a93b0690d93b09089aa58884f5c26 / 572cf2fb4864e66e38a500465e1089062d58aeed4721063fb0c1e466e424230d / c79fd658db9c2006c0e542a12946962880e4ee3cec9dc57bc987b62d26c2dd60 / 0c4aa4900733f37dc6da9b5fba4c5a772f83830b916938b8b89855917d1a1d4e; 008 protection census prose_boundary.py c57e2901e52af962546ee83651850e22c91655a8cc822f2c43b1284da16b8c50, protected.py 27f22eaee129190b880851b958a8aa5a38d357cb4e711d70e762b2353d32e78f, structural-policy-v5 915f70d34ecc69ab6fea0b273f24ca20f251b6e181bd5e9281c5c012de2fe542, structural-policy-v4 f564d9f87ef01a893d6cd6bb36f6cf99a0d353a4dde4e4c4c024942eb969e76f, experiment-008i 24e25edafbbf0b1d67dc405440ea78c0b76a9011c00d5e53c82fe3c00fef6685; PROTOCOL-009 cc5e9089510dcb4be6fd2ec3cef1890c515ec9e6edd585da1dd25e70e1dabd2a; DEPLOYMENT-IDENTITY-009 b6734b35390f13c9170722fbf68ffee06d7d5f73da3a5e1a077980e3452994e4; DEPLOYMENT-IDENTITY-011 sections 1-5 ba3862c9aefdc8b1bdb6c45857d492cc36769e7df99ecec1ecb646e57bd6ea74; test_009a lint 2a54a73b7a5e4c4e112c0926e6163ab1990dd21343f51a3e8ee198e51295509b; CRITICAL.md byte-identical to the committed bootstrap seed (true hash a9ea5fa5db2affabf0f85710f41e37e73b108c0236a58b7efb9c17cb36a07e9e; the order-text pin string a9ea5fa5db2affabf0f85710f85710f41e37e73b108c0236a58b7efb9c17cb36a07e9e is a transcription variant, named in section 27(a)); frozen implementation head commit 537aa6a3ff03c60dd1b2c7f697c577940d52e88d present; machine block main_sha/reviewed 4507cc78e333c0e48226b64266121171b7b8cea8, parent 01ea3fa4cde5c4759bcf29d6c665ed8b2e29524d, counters 38/57/2 before bookkeeping; registry 38 with the last 011-b (status BLOCKED)",
+        "model_calls": 0
+      },
+      "pending_evidence": [
+        "011b-intake corpus (the single named human input per the 011-b order item 3b: GENUINE_OUTPUT_SOURCE target >= 100 / floor 50; FULLY_CORRECT_CONTROL target >= 34 with >= 10 tagged technical or rare-expression-name; per-document data-free sidecars; zero-leakage exclusions; plain UTF-8 + sidecars, 0600, into the declared private intake location) - outstanding, escalated to the owner exactly once",
+        "011-d onward: collection on the verified A100-FP8 identity (PROTOCOL-009 element (a) hard gate now satisfied by this round's REGIME-UNCHANGED verdict), annotation, evaluation, and comparative report under the frozen protocol, subject to the collection round's own intake gate"
+      ],
+      "public_configuration": "none (identity re-verification; no configuration changed)",
+      "public_metrics": "none (identity re-verification; no metrics changed)",
+      "public_report": "research/RESEARCH-STATE.md#27",
+      "question": "Does the bounded canonical-route 2-GET metadata probe (the intervening round pre-specified by DEPLOYMENT-IDENTITY-011 section 4 under the owner's standing E2(b) authorization) re-verify the E2(b)-designated A100-FP8 pinned identity against the 009-a pin and thereby satisfy the PROTOCOL-009 element (a) hard gate for the collection round, with zero collection, zero generation calls, and zero prohibited contact?",
+      "source_manifest": "none (no private source)",
+      "status": "COMPLETE",
+      "variation": "objective-011 round 3 (bounded identity re-verification): the canonical-route 2-GET probe plus the additive DEPLOYMENT-IDENTITY-011 section 6, the single data-free ledger entry, and the scoped bookkeeping (STATUS.md, GENERATED-FILES pin, CSV rebuild); no collection data, no tuning, no mechanism change, no test change"
+    },
+    {
+      "child_runs": [],
+      "conclusion": "Stage-1 collection round for the development-distribution re-measurement on the E2(b)-designated A100-FP8 target, executing the pre-registered 011-b specification byte-preserved AS AMENDED by the owner's standing 2026-10-01 DASSLE directive and the registered additive revision PROTOCOL-009-REVISION-011 (committed byte-exact before any sample was opened or any call made). The pre-work integrity gates passed with zero mismatch (all order-pinned frozen surfaces byte-verified at the base 47c4da8bf7016614cd62d2448e72f3f7249d0803; DEPLOYMENT-IDENTITY-011 section 6 REGIME-UNCHANGED ESTABLISHED with the 011-c observation window verified by record - the PROTOCOL-009 element (a) hard gate satisfied with ZERO probes in this round; machine block 39/58/2 with identity fields unchanged; registry 39 with the last 011-c; local consistency 10/10 green in a real checkout with origin/main = 4507cc78e333c0e48226b64266121171b7b8cea8). Both DASSLE source files re-verified byte-for-byte before any assembly or call (dassle.jsonl 609b696616f7246ba9c09a97531f3b9f2035ce3efca35926a5e73898b28045d6, 7,385 records; dassle-preservation.jsonl d87e6ccee74cef0981a0e8ebd6315d75abbcf8bb8558e9a9627507f0bbbf4bec, 7,381 records). The deterministic selection (single seeded instance, seed 009a-target-distribution-20260930; Draw 1 = 100 genuine from the 7,354-record eligible pool; Draw 2 = 34 control from the 7,281-record post-exclusion pool) and the 5/20/109 pilot/calibration/confirmation split were committed with the manifest FIRST, before the first sample was opened or any scaffold call made, and were independently re-derived at the round resumption. The live work - 134 terminal SCAFFOLD_GENERATION attempts (one per selected document; 135 calls total including one standalone diagnostic) and ZERO main-capture calls - FAILED in full and the round is BLOCKED at the scope-item-3d floor: 2 attempts (documents 011b-0001..011b-0002) under the initial implementation payload without the reasoning-effort field (server default effort xhigh) returned HTTP 200 with response status incomplete, incomplete_details.reason max_output_tokens, reasoning_tokens 600 equal to the full registered 600-token output cap, and no message output; 6 attempts (documents 011b-0003..011b-0008) with the frozen 007-m value reasoning effort low added returned the identical outcome (HTTP 200, incomplete, max_output_tokens, reasoning 600/600, no message output); 126 attempts (documents 011b-0009..011b-0134) with the probed effort minimal returned HTTP 400 BadRequestError (the server reports supported types: xhigh (default), medium, and low); the standalone diagnostic attempt (effort minimal) returned the same HTTP 400. All 134 documents are EXCLUDED per the registered failure rule (named per document: SCAFFOLD_FAIL_s1; no replacement; no re-sampling; counted operationally): 100 genuine (011b-0035..011b-0134) and 34 control (011b-0001..011b-0034); zero assembled documents; zero stored main answers; no sample opened. Named structural finding: on this deployment (vLLM-served qwen3.8-27b), the model's reasoning overhead on the registered scaffold task reaches at least 600 output tokens at every supported reasoning effort (8/8 observed HTTP 200 attempts hit reasoning_tokens = 600 = the registered cap before any message output), so the registered 600-token scaffold output cap (PROTOCOL-009-REVISION-011 section 8) structurally prevents scaffold-section completion; the frozen 007-m evidence (1,901 stored completed responses at effort low with reasoning 16-4,417 tokens under no output cap) corroborates that low-effort reasoning budgets are task-dependent and exceed this cap for this task class. Verdict per scope item 3d: genuine-arm survivors after assembly = 0 < floor 50 -> Result: BLOCKED on the named shortfall; NO manifest finalization (per-document PENDING_GENERATION fields remain PENDING; the bookkeeping commit applies one manifest key-name correction, input -> input_rule, so the fail-closed publication guard passes on the full tree - a schema correction with the value unchanged, no data field filled), NO selection, NO split, NO main-capture call, NO sample opened. One NEW distinct human question is presented (attributable, once, at this boundary, per scope item 3d): how the registered SCAFFOLD_GENERATION call class should be amended for the recovery round (a raised registered output cap or amended token accounting, or an alternative registered mechanism) - a decision for the owner/strategy in the amendment; this round is a stop, not a decision. The same round resumes by recovery re-signal (S-RECOVER-01) after the amendment; the committed selection, split, and collection IDs stand; the 134 excluded documents are terminal (no re-sampling of the selected set). Bookkeeping: registry 39 -> 40 (this entry); machine block counters only (registry_entries 40, oap_reports_reviewed 59 for the 011-d report file; identity fields unchanged at the 011-a review point; frozen_report_history_incidents unchanged at 2). The designed implementation-head report-count red (59 vs 58, the 008-i/009-b/010-a/011-a/011-b/011-c pattern) clears at the final head with the report commit. No tuning, no mechanism change, no test change, no merge.",
+      "evidence_files": [
+        {
+          "disposition": "011-d order committed at activation (byte-identity re-verified against the committed blob; strategy-published source bytes)",
+          "logical_path": "oap/orders/011-d-confirmation-stage1-collection.md",
+          "sha256": "f60392f0739717afc596c7be25590167bea8df75d33e2383ff54ba32e957527d",
+          "size": 91562
+        },
+        {
+          "disposition": "registered additive revision committed byte-exact BEFORE any sample was opened or any call made (scope item 3f)",
+          "logical_path": "research/target-distribution/PROTOCOL-009-REVISION-011.md",
+          "sha256": "609751c15d76416f46358bbde0a03b7b2c68637fe338b96c88df2d85796c5e43",
+          "size": 19049
+        },
+        {
+          "disposition": "registered scaffold prompt template committed byte-exact BEFORE any sample was opened or any call made (scope item 3f)",
+          "logical_path": "research/target-distribution/SCAFFOLD-GENERATOR-PROMPT-011.md",
+          "sha256": "005edf0a0ea4f9a52f8acc887b28f0f772f04cf54197cca15c539e50ed9cc0fc",
+          "size": 402
+        },
+        {
+          "disposition": "collection manifest committed FIRST (scope item 4) and corrected in this bookkeeping commit by one key name (input -> input_rule, value unchanged) so the fail-closed publication guard passes on the full tree; per-document PENDING_GENERATION fields remain PENDING per the scope-item-3d BLOCKED branch (no manifest finalization)",
+          "logical_path": "research/target-distribution/011b-collection-manifest.json",
+          "sha256": "456d0529a1d61660a411adc1847d5c36278df4fd5e8dfd9957280c175e05dd90",
+          "size": 142032
+        },
+        {
+          "disposition": "data-free labeler operationalization committed this round despite the BLOCKED outcome (scope item 8a preparation artifact; content independent of the collected samples)",
+          "logical_path": "research/target-distribution/ANNOTATION-GUIDE-011.md",
+          "sha256": "e2acabdda674c2e588cdc14e4a52e7af19f2c7f969ec31a2ebab69356759f94e",
+          "size": 16818
+        }
+      ],
+      "evidence_status": "public-data-free",
+      "experiment_id": "011-d-confirmation-stage1-collection",
+      "frozen_choices": {
+        "main_capture_calls": 0,
+        "documents_selected": 134,
+        "documents_selected_genuine": 100,
+        "documents_selected_control": 34,
+        "documents_excluded": 134,
+        "documents_excluded_genuine": 100,
+        "documents_excluded_control": 34,
+        "documents_assembled": 0,
+        "documents_with_stored_main_answer": 0,
+        "floor_50_genuine_after_assembly": "0 < 50 -> BLOCKED (scope item 3d)",
+        "scaffold_calls_document_attempts": 134,
+        "scaffold_calls_total_including_standalone_diagnostic": 135,
+        "scaffold_budget_cap": 402,
+        "scaffold_payload_variants": "A no reasoning field (server default effort xhigh): 2 attempts (011b-0001..011b-0002) -> HTTP 200, status incomplete, reason max_output_tokens, reasoning_tokens 600 = full registered 600-token cap, no message output; B reasoning effort low (the frozen 007-m value): 6 attempts (011b-0003..011b-0008) -> identical HTTP 200 incomplete max_output_tokens reasoning 600/600 no message output; C reasoning effort minimal: 126 attempts (011b-0009..011b-0134) + 1 standalone diagnostic -> HTTP 400 BadRequestError (server: supported types xhigh (default), medium, low); the frozen 007-m main-capture wire (effort low, include_reasoning true) is byte-identical and UNUSED (zero main-capture calls)",
+        "assembly_k_draws_distribution": "{1: 58, 2: 39, 3: 37} (named per document in the private ledger; all documents failed at section 1)",
+        "metadata_probes": 0,
+        "transport_diagnostics_disclosed": "after the first two authorized scaffold calls failed: one TCP port liveness check (no HTTP request sent) and one unauthenticated HTTP GET to the non-metadata server root (HTTP 404); zero metadata endpoints called; the exactly-2-GET metadata budget (exhausted by design at 011-b/011-c) untouched",
+        "machine_block_fields_updated": "counters only (registry_entries 39 -> 40; oap_reports_reviewed 58 -> 59); identity fields unchanged at the 011-a review point (main_sha and reviewed_branch_head_sha 4507cc78e333c0e48226b64266121171b7b8cea8, parent 01ea3fa4cde5c4759bcf29d6c665ed8b2e29524d, branch oap/007-concept-verification, pr_number 8); frozen_report_history_incidents unchanged at 2",
+        "registry_entries_added": 1,
+        "test_files_or_logic_changed": 0,
+        "tuning_or_mechanism_changes": 0,
+        "untracked_residue_committed": 0
+      },
+      "kind": "collection",
+      "logical_root": "none in the repository (the private 011b-collection/ evidence - the 134-record per-document progress ledger, the 8 stored HTTP 200 incomplete raw responses, and the assembly summary - and the 011b-identity/ credentials receipt live under the private research runtime root; never committed; 011b-packets/ stays absent (zero surviving documents); 011b-intake/ stays absent (superseded by the DASSLE mechanical-assembly model))",
+      "metrics": {
+        "auth_material_in_committed_artifacts": 0,
+        "endpoint_values_in_committed_artifacts": 0,
+        "raw_text_in_committed_artifacts": 0,
+        "model_calls": 0,
+        "dassle_source_sha256_reverified": "both byte-verified before any assembly or call: dassle.jsonl 609b696616f7246ba9c09a97531f3b9f2035ce3efca35926a5e73898b28045d6 (7,385 records; reference_status SUPPLIED 7,381 / MISSING_BLANK_FIELD 4; eligible genuine pool 7,354 = SUPPLIED and input != reference); dassle-preservation.jsonl d87e6ccee74cef0981a0e8ebd6315d75abbcf8bb8558e9a9627507f0bbbf4bec (7,381 records; input == reference in all; parent links verified)",
+        "genuine_surviving_after_assembly": 0,
+        "scaffold_http_200_incomplete_max_output_tokens": 8,
+        "scaffold_http_400_invalid_effort_minimal": 127,
+        "floor_50_check": "BLOCKED (0 < 50)",
+        "selection_and_split_committed_before_any_call": "yes (manifest-first; selection re-derived independently at the resumption)"
+      },
+      "pending_evidence": [
+        "one NEW distinct human question (presented once, attributable, at this boundary, per scope item 3d): the amendment of the registered SCAFFOLD_GENERATION call class for the recovery round - on this deployment the model's reasoning overhead on the registered scaffold task reaches at least 600 output tokens at every supported reasoning effort (xhigh default / medium / low), so the registered 600-token output cap structurally prevents scaffold-section completion; the owner/strategy decision is the amended cap or amended token accounting (or an alternative registered mechanism) recorded in a new registered revision before resumption",
+        "011-d resumption (S-RECOVER-01; same ID/branch/PR after reconciliation, from the first unfinished requirement): recovery re-signal after the class amendment; the committed selection (134 collection IDs), the 5/20/109 split, and the manifest stand; the 134 excluded documents are terminal (no re-sampling of the selected set); the resumption round re-executes the collection under the amended class (fresh scaffold attempts; main capture once the assembly floor is met; annotation guide and labeler packets per scope item 8; bookkeeping per scope item 9)"
+      ],
+      "public_configuration": "none (no configuration changed; no behavior change of any frozen element; the frozen 007-m main-capture wire stays byte-identical and unused; REPAIR_ALLOW_LIVE_TESTS stays NO)",
+      "public_metrics": "none (no metrics computed; no sample opened; no scoring)",
+      "public_report": "research/RESEARCH-STATE.md#28",
+      "question": "Can the pre-registered stage-1 DASSLE mechanical-assembly collection complete on the identity re-verified E2(b)-designated A100-FP8 target under the registered scaffold class and the frozen 007-m main-capture contract, with the genuine-arm floor of 50 met?",
+      "source_manifest": "research/target-distribution/011b-collection-manifest.json (committed manifest-first, data-free; per-document PENDING_GENERATION fields remain PENDING per the scope-item-3d BLOCKED branch - no manifest finalization; one key-name correction (input -> input_rule, value unchanged) applied in this bookkeeping commit for the fail-closed publication guard)",
+      "status": "BLOCKED",
+      "variation": "objective-011 round 4 (stage-1 DASSLE mechanical-assembly collection, BLOCKED branch): pre-work gates zero mismatch (hard gate (a) by the 011-c record, zero probes this round); registered revision + prompt + manifest-first committed before any sample or call; DASSLE byte-verified; selection (100 genuine + 34 control, seed 009a-target-distribution-20260930) and the 5/20/109 split committed; 134 terminal scaffold attempts (135 with 1 diagnostic) all failed (8 x HTTP 200 incomplete at the registered 600-token cap - reasoning consumed the full budget under server-default xhigh and frozen-007-m low efforts; 127 x HTTP 400 invalid effort minimal); 134/134 documents excluded (named; 100 genuine + 34 control); zero main-capture calls; zero assembled documents; floor-50 shortfall 0 < 50 -> Result BLOCKED per scope item 3d; no manifest finalization, no selection, no split, no sample opened; one new distinct human question presented (registered scaffold cap vs thinking-model reasoning overhead); S-RECOVER-01 resumption after the class amendment; bookkeeping with BLOCKED status (counters 40/59/2)"
     }
   ]
 }
