@@ -2270,6 +2270,40 @@ REPAIR_ALLOW_LIVE_TESTS stays NO; no raw text, endpoint values,
 credentials, or private paths in any committed artifact (the publication
 guard runs on the full tree).
 
+## 30. Migration reconciliation and private-data recovery note
+## (objective 012, round 012-a, 2026-10-25)
+
+Additive reconciliation record; it changes no scientific result and adds no
+model calls. Versioned companion record:
+`oap/recovery/012-a-migration-reconciliation.md`.
+
+- Machine identities advance to the current verified main
+  `ff08d6e34601f56fecf21eff7d3d3b0e7c68dede` (merge parent
+  `0c6a5a6c4bf96d9a5a89503c316f64445bac81aa`). The historical review branch
+  `oap/007-concept-verification` (PR 8), both quarantines, and all frozen
+  scientific values are retained unchanged.
+- Original round 011-e remains PARTIAL exactly as published (reported
+  checks: 12 passed, 2 failed, 1 pending). Its post-merge status is
+  publication evidence only: the publication proof alone does not establish
+  integration or scientific acceptance, and any later main ancestry must be
+  verified separately.
+- The privately missing 011 research data archive was historically absent
+  at the migrated locations. The owner supplied the archive and strategy
+  restored it on 2026-10-25: 926 selected files were hash-verified
+  (923 restored as new, 3 pre-existing identity files byte-identical and
+  untouched), with their collection bindings - 134 inputs, 134 main
+  answers, 247 scaffold texts, 381 raw capture integrity records, and
+  20 calibration + 109 confirmation queue memberships - checked against
+  the frozen 011b manifest. Private receipts are metadata-only; no raw
+  text, credential, or private path appears in this document.
+- No replay of 011-e, no scientific or live-model calls, no linguistic
+  acceptance, no deployment, and no merge of the migration branch occurred
+  in this round.
+- Provisional engineering estimate for the remaining packaged-MVP scope:
+  8-15 focused engineering days. The owner-selected Pandoc
+  structural-parsing proxy is the next separately ordered objective and is
+  not implemented here.
+
 ## Machine-readable state block (research-state-machine-v1)
 
 This fenced block is the machine-readable core of the numbers quoted above.
@@ -2282,11 +2316,11 @@ model/network calls.
 {
   "schema": "research-state-machine-v1",
   "identities": {
-    "main_sha": "4507cc78e333c0e48226b64266121171b7b8cea8",
+    "main_sha": "ff08d6e34601f56fecf21eff7d3d3b0e7c68dede",
     "branch": "oap/007-concept-verification",
     "pr_number": 8,
-    "reviewed_branch_head_sha": "4507cc78e333c0e48226b64266121171b7b8cea8",
-    "reviewed_branch_head_parent_sha": "01ea3fa4cde5c4759bcf29d6c665ed8b2e29524d",
+    "reviewed_branch_head_sha": "ff08d6e34601f56fecf21eff7d3d3b0e7c68dede",
+    "reviewed_branch_head_parent_sha": "0c6a5a6c4bf96d9a5a89503c316f64445bac81aa",
     "quarantined_007n": {
       "classification": "INVALID_QUARANTINED",
       "validation_error": "REPORT_CHECK",
@@ -2312,8 +2346,8 @@ model/network calls.
     "frozen_007m_configuration_sha256": "0026a1a9d27652c36e2c5a960b10fafc1c9a93b0690d93b09089aa58884f5c26",
     "frozen_007m_prompt_sha256": "572cf2fb4864e66e38a500465e1089062d58aeed4721063fb0c1e466e424230d",
     "frozen_007m_final_root_manifest_sha256": "3fb4aef33542e7fa3f357acb905b75f4d7e7551783f83a422b5d1ea6272c25f8",
-    "registry_entries": 41,
-    "oap_reports_reviewed": 60,
+    "registry_entries": 42,
+    "oap_reports_reviewed": 61,
     "frozen_report_history_incidents": 2
   },
   "official_scorer": {

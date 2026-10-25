@@ -6684,6 +6684,61 @@
       "source_manifest": "research/target-distribution/011b-collection-manifest.json (extended and finalized data-free by this round; all base bytes and fields preserved; round = 011-e; the single collection of record)",
       "status": "COMPLETE",
       "variation": "objective-011 round 5 (stage-1 collection RECOVERY, S-RECOVER-01 continuation of the 011-d BLOCKED purpose; completion branch): pre-work gates zero mismatch (hard gate (a) by the 011-c record, zero probes this round); REVISION-012 committed byte-exact before any regeneration or live call; reproducibility assertion 134/134 before the first live call; 247 terminal scaffold attempts + 0 diagnostic under the amended class (effort pin 'low' on every call; 0 deviations); 134/134 documents survived assembly (genuine 100 >= floor 50 -> PASS); 0 excluded (named); exactly one frozen 007-m main-capture call per surviving document (states: {\"EXACT\": 134}); manifest extended and finalized data-free; 5/5 pilot packets prepared privately + calibration/confirmation queue structure; the second named human input (two labelers) surfaces at the completion boundary; bookkeeping (registry 41; counters 41/60/2; identity fields unchanged)"
+    },
+    {
+      "experiment_id": "012-a-native-migration-and-merged-round-reconciliation",
+      "logical_root": "none (documentation/state corrective round; no private root)",
+      "kind": "audit",
+      "variation": "post-merge machine-block identity advance to ff08d6e3, native/foreground governance migration bookkeeping, and owner-supplied 011 data archive recovery note",
+      "status": "PARTIAL",
+      "question": "Which machine-readable research-state identities became stale after the owner merge of PR #12 (main ff08d6e34601f56fecf21eff7d3d3b0e7c68dede), and how were they corrected additively while recording the native/foreground migration and the owner-supplied 011 data archive recovery, with no scientific change?",
+      "frozen_choices": {
+        "new_model_calls": 0,
+        "new_science": 0,
+        "scientific_protocol_or_result_changes": 0,
+        "authorized_software_test_and_ci_guard_changes": true,
+        "machine_block_fields_updated": 5,
+        "registry_entries_added": 1
+      },
+      "metrics": {
+        "model_calls": 0,
+        "block_fields_updated": 5,
+        "registry_entries_added": 1,
+        "immutable_reports_mutated": 0,
+        "scientific_results_changed": 0
+      },
+      "evidence_files": [
+        {
+          "disposition": "immutable authorized order for this round (byte-exact, frozen)",
+          "logical_path": "oap/orders/012-a-native-migration-and-merged-round-reconciliation.md",
+          "sha256": "e320df8eb44e76877ec063abf5ca0bd6af6306684beb1bf985cfc25fafd22b34",
+          "size": 21129
+        },
+        {
+          "disposition": "finalized versioned recovery record for this round",
+          "logical_path": "oap/recovery/012-a-migration-reconciliation.md",
+          "sha256": "df314f2628fa05a71cc7f60a62f04fa50f37eca2dce836b3c829fe1b98a4d724",
+          "size": 7937
+        },
+        {
+          "disposition": "state projection at the 012-a implementation head; stable through the report-only commit, which touches only the report path",
+          "logical_path": "research/RESEARCH-STATE.md",
+          "sha256": "475ae9212ff99dd82f2b70c7f8c38e00220b8447acd712172e4c749848dc26aa",
+          "size": 177112
+        }
+      ],
+      "evidence_status": "public-data-free",
+      "public_report": "research/RESEARCH-STATE.md#30",
+      "public_configuration": "none (documentation/state round; no experiment configuration)",
+      "public_metrics": "none (state correction; no experiment metrics)",
+      "source_manifest": "none (no private source)",
+      "child_runs": [],
+      "conclusion": "Post-merge identity advance and migration bookkeeping: machine-block main_sha and reviewed_branch_head_sha set to the merged main ff08d6e34601f56fecf21eff7d3d3b0e7c68dede (parent 0c6a5a6c4bf96d9a5a89503c316f64445bac81aa), counters advanced to 42/61, which are the expected final-report-head values rather than already-observed counts; original 011-e remains PARTIAL exactly as published (the publication proof alone does not establish integration or scientific acceptance); the owner-supplied 011 data archive is recorded as restored and integrity-verified (926 selected files hash-verified, with collection bindings checked against the frozen 011b manifest). Zero scientific protocol, result, or model changes; the software test and CI-guard changes of this round are authorized migration work and remain subject to the full verification and publication steps listed as pending.",
+      "pending_evidence": [
+        "report-only commit oap/reports/012-a-native-migration-and-merged-round-reconciliation.md (not yet written; its bytes depend on the implementation head and are therefore not pre-pinned)",
+        "post-push publication verification (real verify_report remote checks and PR identity) and final-head CI confirmation",
+        "known 012-b scoped corrective follow-up: oap/bin/source_cache.py native owner-account ownership and oap/runtime.env.example root mismatch (outside 012-a, reported honestly)"
+      ]
     }
   ]
 }

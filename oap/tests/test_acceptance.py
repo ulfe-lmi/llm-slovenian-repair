@@ -42,12 +42,66 @@ def snapshot(root):
     return result
 
 
-class Acceptance(unittest.TestCase):
+class LayoutSelection:
+    """Shared disposable layout selections for isolated fixtures.
+    Plain helper class: no test methods, never a stand-alone TestCase base."""
+    LAUNCH=['codex','--yolo','--profile','early-beta']
+    def _reconcile_fixture_layout_pins(self,path,old):
+        manifest=jsread(self.repo/'oap/governance/MANIFEST.json')
+        manifest['identities']['oap/governance/WORKSPACE-LAYOUT.json']={'sha256':digest(read(path)),'bytes':len(read(path))}
+        map_path=self.repo/'oap/governance/DISTILLATION-MAP.md'
+        write(map_path,read(map_path).replace(digest(old).encode(),digest(read(path)).encode()))
+        manifest['identities']['oap/governance/DISTILLATION-MAP.md']={'sha256':digest(read(map_path)),'bytes':len(read(map_path))}
+        write(self.repo/'oap/governance/MANIFEST.json',json_bytes(manifest))
+        files=jsread(self.repo/'oap/GENERATED-FILES.json')
+        for rel in files['files']:
+            files['files'][rel]['sha256']=digest(read(self.repo/rel))
+            files['files'][rel]['bytes']=len(read(self.repo/rel))
+        write(self.repo/'oap/GENERATED-FILES.json',json_bytes(files))
+    def select_native_foreground(self):
+        """Disposable synthetic native+foreground selection inside the fixture
+        repo, with fixture manifest/distillation/generated pins reconciled."""
+        self.pipes=self.root/'native home č'/'pipes'
+        path=self.repo/'oap/governance/WORKSPACE-LAYOUT.json'
+        old=read(path)
+        value=jsread(path)
+        value.update(strategic_home=str(self.strategy),
+                     strategic_storage='native',
+                     fifo_home=str(self.pipes),
+                     authority='Synthetic owner layout fixture (disposable test selection)',
+                     permission_semantics='Synthetic native storage selection: strict POSIX private modes everywhere.',
+                     coding_dispatch='foreground',
+                     foreground_launch=list(self.LAUNCH))
+        write(path,json_bytes(value))
+        self._reconcile_fixture_layout_pins(path,old)
+        self._layout_selected=True
+    def select_legacy_sync(self):
+        """Explicit synthetic legacy+sync profile so isolated legacy launch/
+        sync tests never inherit the live layout selection. The legacy profile
+        keeps the owner-selected-sync exception scope and legacy dispatch."""
+        self.pipes=self.root/'legacy home č'/'pipes'
+        path=self.repo/'oap/governance/WORKSPACE-LAYOUT.json'
+        old=read(path)
+        value=jsread(path)
+        value.update(strategic_home=str(self.strategy),
+                     strategic_storage='owner-selected-sync',
+                     fifo_home=str(self.pipes),
+                     authority='Synthetic legacy layout fixture (disposable test selection)',
+                     permission_semantics='Synthetic owner-selected-sync subtree: POSIX private bits not asserted there; FIFOs strict 0700/0600.',
+                     coding_dispatch='legacy')
+        write(path,json_bytes(value))
+        self._reconcile_fixture_layout_pins(path,old)
+        self._layout_selected=True
+
+
+class Acceptance(LayoutSelection,unittest.TestCase):
     def setUp(self):
         self.temp = tempfile.TemporaryDirectory(prefix='oap-owned-fixture-')
         self.root = Path(self.temp.name)
         self.repo = self.root/'coding ž space'
-        shutil.copytree(SOURCE,self.repo,ignore=bootstrap_ignore)
+        # Explicit versioned candidate: tracked names, working bytes; local
+        # untracked environment artifacts never enter the fixture.
+        copy_versioned_source(SOURCE,self.repo,ignore=bootstrap_ignore)
         self.strategy = self.root/'strategy š space'
         self.bootstrap = self.root/'bootstrap č'
         self.bootstrap.mkdir()
@@ -151,8 +205,12 @@ class Acceptance(unittest.TestCase):
         return order(self.repo,self.base,ident,**kw)
 
     def private(self):
-        materialize(SOURCE,self.repo,self.strategy,self.bootstrap)
+        # A selected layout re-materializes from the fixture itself so the
+        # selection is the installed source, never reverted by SOURCE bytes.
+        source=self.repo if getattr(self,"_layout_selected",False) else SOURCE
+        materialize(source,self.repo,self.strategy,self.bootstrap)
         return runtime_config(self.strategy/'runtime.env',environ={})
+
 
     def active(self, ident='000-a', **kw):
         m,data=self.final(ident,**kw)

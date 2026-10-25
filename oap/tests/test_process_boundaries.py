@@ -19,7 +19,7 @@ from oap_install import *
 from oap_runtime import launch, role_context, tmux_plan, tmux_launch
 
 
-class Processes(unittest.TestCase):
+class Processes(base.LayoutSelection, unittest.TestCase):
     setUp=base.Acceptance.setUp
     tearDown=base.Acceptance.tearDown
     error=base.Acceptance.error
@@ -39,7 +39,10 @@ class Processes(unittest.TestCase):
         return cfg,fake
 
     def test_B28_any_Codex_version_policy_accepts_upgrade(self):
+        self.select_legacy_sync()
         cfg,fake=self.configured_fake()
+        self.base=commit(self.repo,'Synthetic legacy layout selection')
+        cfg['OAP_ACCEPTED_REF']=self.base
         cfg['OAP_CLI_QUALIFIED_VERSION']='ANY'
         with patch.dict(os.environ,{'OAP_ROLE':'coding'}):
             context=role_context(cfg,'coding',operational=True)
@@ -49,7 +52,10 @@ class Processes(unittest.TestCase):
             self.error('CLI_VERSION_UNQUALIFIED',role_context,cfg,'coding',operational=True)
 
     def test_B28_any_policy_still_rejects_unusable_Codex(self):
+        self.select_legacy_sync()
         cfg,fake=self.configured_fake()
+        self.base=commit(self.repo,'Synthetic legacy layout selection')
+        cfg['OAP_ACCEPTED_REF']=self.base
         cfg['OAP_CLI_QUALIFIED_VERSION']='ANY'
         bad=write(self.root/'unusable codex', '#!/usr/bin/env python3\nraise SystemExit(9)\n')
         bad.chmod(0o700)
@@ -61,7 +67,7 @@ class Processes(unittest.TestCase):
         new=self.root/'fresh'
         materialize(SOURCE,new,self.strategy,self.bootstrap)
         candidate=self.root/'generator-source'
-        shutil.copytree(SOURCE,candidate,ignore=shutil.ignore_patterns('.git','__pycache__','*.lock','INSTALLATION.json'))
+        copy_versioned_source(SOURCE,candidate,ignore=shutil.ignore_patterns('.git','__pycache__','*.lock','INSTALLATION.json'))
         old=read(new/'README.md'); write(candidate/'README.md',old+b'\nSynthetic generator revision.\n')
         m=jsread(candidate/'oap/GENERATED-FILES.json')
         m['files']['README.md']['sha256']=digest(read(candidate/'README.md'))
@@ -106,7 +112,11 @@ class Processes(unittest.TestCase):
             self.assertEqual(future.result(4)['frame'],'OK')
 
     def test_B19_B29_one_actual_fake_invocation_after_real_FIFO(self):
-        cfg,fake=self.configured_fake(); self.active()
+        self.select_legacy_sync()
+        cfg,fake=self.configured_fake()
+        self.base=commit(self.repo,'Synthetic legacy layout selection')
+        cfg['OAP_ACCEPTED_REF']=self.base
+        self.active()
         capture=self.root/'capture.jsonl'
         with patch.dict(os.environ,{'OAP_ROLE':'coding','FAKE_CODEX_CAPTURE':str(capture)}),patch('oap_runtime.GitHub',return_value=self.remote):
             def model(context):
@@ -118,7 +128,7 @@ class Processes(unittest.TestCase):
                     future=pool.submit(launch,cfg,'coding',once=True,timeout=5)
                     time.sleep(.15)
                     self.assertFalse(capture.exists())
-                    fifo(self.strategy/'control.fifo','send',timeout=3)
+                    fifo(Path(cfg['OAP_FIFO_HOME'])/'control.fifo','send',timeout=3)
                     result=future.result(8)
                 self.assertEqual(result['model_calls'],1)
                 run.assert_called_once()
@@ -153,13 +163,36 @@ class Processes(unittest.TestCase):
             p=subprocess.run(['tmux','-L',sock,*args],capture_output=True,text=True,timeout=5)
             if check: self.assertEqual(p.returncode,0,p.stderr)
             return p
+        def state():
+            rows=[]
+            for line in run(['list-panes','-t',plan['session'],'-F','#{pane_index}|#{pane_current_path}|#{pane_left}|#{pane_pid}|#{pane_dead}'],check=False).stdout.splitlines():
+                idx,cwd,left,pid,dead=line.split('|')
+                try: cmd=Path(f'/proc/{pid}/cmdline').read_bytes().decode().replace('\0',' ')
+                except OSError: cmd='<gone>'
+                rows.append((idx,cwd,left,pid,dead,cmd))
+            return rows
         try:
             for cmd in plan['commands'][:-1]: run(cmd[1:])
-            panes=run(['list-panes','-t',plan['session'],'-F','#{pane_index}|#{pane_current_path}|#{pane_left}']).stdout.splitlines()
-            self.assertEqual(len(panes),2)
-            self.assertIn(str(self.repo),panes[0]); self.assertIn(str(self.strategy),panes[1])
-            self.assertEqual(panes[0].split('|')[-1],'0')
-            self.assertGreater(int(panes[1].split('|')[-1]),0)
+            creation=state()
+            # Bounded readiness wait: immediately after new-session the pane
+            # PID is still the tmux client and the current path is the server
+            # cwd; the role shell (setup-shell chdir+exec bash) appears
+            # shortly after. Poll past that switch so pane_current_path is
+            # stable; the exact cwd assertions below are retained.
+            panes=None; rows=creation
+            deadline=time.time()+10
+            while time.time()<deadline:
+                rows=state()
+                if len(rows)==2 and all(r[4]=='0' and r[5].strip()=='bash --noprofile --norc -i' for r in rows) \
+                        and rows[0][1]==str(self.repo) and rows[1][1]==str(self.strategy):
+                    panes=rows; break
+                time.sleep(0.1)
+            detail=f'creation={creation} final={rows}'
+            self.assertIsNotNone(panes,detail)
+            self.assertEqual(len(panes),2,detail)
+            self.assertIn(str(self.repo),panes[0][1],detail); self.assertIn(str(self.strategy),panes[1][1],detail)
+            self.assertEqual(panes[0][2],'0',detail)
+            self.assertGreater(int(panes[1][2]),0,detail)
             marker=run(['show-option','-v','-t',plan['session'],'@oap_project']).stdout.strip()
             self.assertEqual(marker,plan['project_marker'])
         finally:
@@ -219,11 +252,16 @@ class Processes(unittest.TestCase):
     def test_B19_strategic_prompt_starts_inactive_development_loop(self):
         prompt=read(SOURCE/'oap/prompts/strategic-start.md').decode()
         self.assertIn('passed the operational launch gates',prompt)
-        self.assertIn('state is INACTIVE',prompt)
-        self.assertIn('finalize objective 000-a',prompt)
-        self.assertIn('send the exact control signal',prompt)
+        self.assertIn('No active means inactive',prompt)
+        self.assertIn('never automatically restart 000-a',prompt)
+        self.assertIn('replay completed history or revive old research drafts',prompt)
+        self.assertIn('separately authorized objective',prompt)
+        self.assertIn('with the exact control signal sent separately after validation',prompt)
+        self.assertIn('never launch a background coding pane or codex exec',prompt)
         self.assertIn('live repair testing',prompt)
         self.assertIn('release and deployment retain their separate gates',prompt)
+        # Obsolete bootstrap advice must not resurface: no automatic 000-a.
+        self.assertNotIn('finalize objective 000-a',prompt)
         self.assertNotIn('Bootstrap activation is disabled',prompt)
 
     def test_B16_extended_transitions_same_PR(self):

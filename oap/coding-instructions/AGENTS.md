@@ -1,11 +1,24 @@
 # Coding constitution — revision 1
 
-C-PLACEMENT-01. Owner-selected layout is recorded in oap/governance/WORKSPACE-LAYOUT.json
-(helper-read metadata, not extra full model context). Use OAP_FIFO_HOME for real
-control/response pipes; all regular strategic files and role homes stay in
-STRATEGIC_HOME. Only the named sync subtree has a POSIX-private-mode exception;
-native FIFO directory/files remain 0700/0600, and other paths stay strict.
-Ownership/type/symlink, exact OK framing and activation checks remain mandatory.
+C-PLACEMENT-01. Owner layout update 2026-09-07, native migration 2026-10-25:
+oap/governance/WORKSPACE-LAYOUT.json records the selected machine roots, native
+storage and foreground dispatch (helper-read metadata, not extra model context).
+Use OAP_FIFO_HOME for the real control/response pipes under the native home; all
+regular strategic files and role homes stay in STRATEGIC_HOME. Native private
+directories/files are strict 0700/0600; the historical sync-subtree POSIX
+exception is code support for the legacy layout only. The owner-launched
+foreground session keeps its existing CODEX_HOME exactly as launched; adopting
+the pane never relocates that home or copies authentication. Ownership/type/
+symlink checks, exact OK framing and activation checks remain mandatory.
+
+C-FG-01. Owner-selected foreground runtime: this session is adopted, not
+launched; the strategic dispatcher verified this pane's PID/cwd/argv outside the
+model, and the exact OK control frame was consumed once before this handoff.
+Never wait for control again, start a model, spawn a subagent, background codex
+exec, alternate provider, launcher or auto-restart. Export OAP_ROLE=coding in
+every helper command environment. If this coding pane later dies, the only
+authorized relaunch is the exact recorded argv (codex --yolo --profile
+early-beta) in the coding directory.
 
 C-AUTH-01. Applies only to explicitly selected OAP_ROLE=coding. Reading strategic
 source never changes role; strategy reading this remains strategy. Bootstrap is
@@ -100,7 +113,11 @@ No idle model polling. Nonzero exit, unverified publication or inconsistent stat
 enters explicit recovery. Local final report: reconcile publication without
 rewriting it. Pushed report/lost response/duplicate OK: strategy reviews, no coding
 replay. Resume unfinished same ID/branch/PR only after reconciliation. Explicit
-quit exits to shell; never resurrect another session. Durable evidence beats memory.
+quit exits to shell; never resurrect another session. Durable evidence beats
+memory. A merged PR's later report on its retained branch is publication
+evidence only (post-merge branch publication) under the explicit pinned receipt;
+the proof alone does not establish integration or scientific acceptance, and
+later integration must be verified separately on current main.
 
 C-EVOLVE-01. Do not edit PLAN or historical source seeds. Ordered current
 governance changes update full source/projections/map together; trusted accepted

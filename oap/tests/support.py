@@ -5,6 +5,7 @@ import errno
 import json
 import os
 from pathlib import Path
+import shutil
 import sys
 import time
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]/'bin'))
@@ -43,6 +44,80 @@ def write(path, data):
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_bytes(data if isinstance(data, bytes) else data.encode())
     return path
+
+
+VERSIONED_HISTORY_SOURCE_ENV = "OAP_FORWARD_RECOVERY_HISTORY_SOURCE"
+
+def versioned_source_paths(source=None):
+    """Tracked/staged names at one Git checkout, in index order.
+
+    The explicit versioned candidate for fixture copies: names come from the
+    Git index and bytes are read from the current working tree, so local
+    untracked environment artifacts are never fixture content. Inside a real
+    Git worktree the index is authoritative (unrelated Git failures never
+    fall back). In a copied file-only workspace without .git (the
+    development baseline driver's pytest workspace) the indexed names come
+    from the explicit validated worktree named by
+    OAP_FORWARD_RECOVERY_HISTORY_SOURCE; the copy keeps its own bytes,
+    untracked files are never candidates, and the call fails closed without
+    that provenance.
+    """
+    root = (Path(source) if source is not None else SOURCE).resolve()
+    inside = git(root, 'rev-parse', '--is-inside-work-tree', check=False)
+    if inside.returncode == 0:
+        # A real Git worktree: the index is authoritative and unrelated Git
+        # failures are never converted into a fallback permission.
+        raw = git(root, 'ls-files', '-z').decode('utf-8', 'strict')
+        return [name for name in raw.split('\0') if name]
+    # Copied file-only workspace (no .git): the explicit validated worktree
+    # supplies indexed names; bytes stay in this workspace.
+    history = os.environ.get(VERSIONED_HISTORY_SOURCE_ENV)
+    if not history:
+        require(False, "VERSIONED_SOURCE_NOT_GIT_WORKTREE")
+    hroot = Path(history).resolve()
+    require(hroot != root, "VERSIONED_HISTORY_SAME_AS_SOURCE")
+    toplevel = git(hroot, 'rev-parse', '--show-toplevel', check=False)
+    require(toplevel.returncode == 0 and Path(toplevel.stdout.decode('utf-8', 'strict').strip()).resolve() == hroot,
+            "VERSIONED_HISTORY_NOT_WORKTREE_ROOT")
+    raw = git(hroot, 'ls-files', '-z').decode('utf-8', 'strict')
+    names = [name for name in raw.split('\0') if name]
+    missing = [name for name in names if not (root / name).exists()]
+    require(not missing, "VERSIONED_SOURCE_PROVENANCE_MISSING", f"{len(missing)} names")
+    return names
+
+
+def copy_versioned_source(source, target, *, ignore=None):
+    """Copy one explicit versioned candidate set into an owned fixture root.
+
+    ``ignore`` keeps the copytree-style (directory, names) contract and is
+    evaluated level by level, so each fixture's historical exclusions stay
+    authoritative. Tracked symlinks are recreated, never followed; regular
+    files copy from current working bytes.
+    """
+    root = Path(source) if source is not None else SOURCE
+    target = Path(target)
+    target.mkdir(parents=True, exist_ok=True)
+    for name in versioned_source_paths(root):
+        rel = Path(name)
+        ancestor = root
+        excluded = False
+        if ignore is not None:
+            for part in rel.parts:
+                ancestor = ancestor / part
+                if part in ignore(str(ancestor.parent), [part]):
+                    excluded = True
+                    break
+        if excluded:
+            continue
+        src = root / rel
+        dst = target / rel
+        dst.parent.mkdir(parents=True, exist_ok=True)
+        if src.is_symlink():
+            os.symlink(os.readlink(src), dst)
+        elif src.is_file():
+            shutil.copy2(src, dst)
+        else:
+            raise AssertionError('versioned candidate missing from working tree: ' + name)
 
 
 def cleanup_owned_temporary_directory(directory):

@@ -56,7 +56,13 @@ class SplitLayout(unittest.TestCase):
         path=self.repo/'oap/governance/WORKSPACE-LAYOUT.json'
         old=read(path)
         value=jsread(path)
-        value.update(strategic_home=str(self.strategy),fifo_home=str(self.pipes),authority='Synthetic owner layout fixture')
+        # Explicit legacy/sync profile: these tests exercise the historical
+        # owner-selected-sync exception and must not inherit the live layout.
+        value.update(strategic_home=str(self.strategy),
+                     strategic_storage='owner-selected-sync',
+                     coding_dispatch='legacy',
+                     fifo_home=str(self.pipes),
+                     authority='Synthetic legacy owner layout fixture')
         write(path,json_bytes(value))
         manifest=jsread(self.repo/'oap/governance/MANIFEST.json')
         manifest['identities']['oap/governance/WORKSPACE-LAYOUT.json']={'sha256':digest(read(path)),'bytes':len(read(path))}

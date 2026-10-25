@@ -199,7 +199,11 @@ def refresh_governance(repo, strategy, accepted_ref, *, dry_run=False, remote=No
         report_meta = metadata(read(matching(repo, 'reports', ident)), 'oap-report')
         pr = remote.pr(report_meta['pr'])
         require(pr.get('merged') is True, 'REFRESH_NOT_MERGED')
-        verify_report(repo, ident, commit=pr['head']['sha'], remote=remote)
+        # Route through the shared verifier's own report-publication identity:
+        # it resolves the actual report commit and proves either the normal
+        # merged-PR case or the explicit merged-tail recognition. Forcing the
+        # frozen PR head here would bypass that recognition entirely.
+        verify_report(repo, ident, remote=remote)
         order_meta = metadata(read(matching(repo, 'orders', ident)), 'oap-metadata')
         require(remote.api('branches/'+order_meta['default_branch'])['commit']['sha'] == accepted_ref, 'REFRESH_STALE_DEFAULT')
     names = ("AGENTS.md", "OAP-COMMUNICATION-strategic.md", "strategic_model_init_material.md")

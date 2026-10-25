@@ -269,3 +269,9 @@ metadata failures, and the requested real Git-history negatives. The retained ca
 was consumed twice by the content-free 006-j diagnostic with identical safe results;
 the immutable receipt records cumulative fourteen GETs and the zero-retry,
 zero-redistribution boundary.
+
+012-a native-host observation (2026-10-25): the development workspace is a
+native ext4 checkout and the machine-local Python 3.12 environment above
+(`$HOME/envs/llm-slovenian-repair`, rebuilt) is the ordered interpreter for
+verification (`python -B` form, bytecode off); the sync-mount statements in
+this document remain the historical rationale for the machine-local layout.

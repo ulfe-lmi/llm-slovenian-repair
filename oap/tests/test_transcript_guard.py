@@ -34,7 +34,7 @@ class TranscriptGuard(unittest.TestCase):
         self.temp = tempfile.TemporaryDirectory(prefix='oap-transcript-fixture-')
         self.root = Path(self.temp.name)
         self.repo = self.root / 'repo'
-        shutil.copytree(SOURCE, self.repo, ignore=fixture_ignore)
+        copy_versioned_source(SOURCE, self.repo, ignore=fixture_ignore)
         git(self.repo, 'init', '-b', 'main')
         git(self.repo, 'config', 'user.name', 'Synthetic transcript fixture')
         git(self.repo, 'config', 'user.email', 'synthetic@example.invalid')

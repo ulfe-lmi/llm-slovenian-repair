@@ -15,3 +15,13 @@ quality and security evidence, fresh repeated ICA and explicit deployment decisi
 Bootstrap establishes none of these product labels. Source/CLI/fake tests, live
 serving, linguistic evaluation and human acceptance are separate axes. Unknown gate
 scope/provenance blocks that action. Cleared register alone grants no deployment.
+
+Round 012-a confers no product label. Research-evaluation completion
+requires a separately reconciled evaluation objective on the restored,
+integrity-verified 011 inputs (no prior draft activated) and is not claimed;
+the post-merge 011-e publication proof alone does not establish integration
+or scientific acceptance, and any later main ancestry must be verified
+separately.
+The packaged-MVP row above carries a provisional 8-15 focused-engineering-day
+estimate for its remaining scope after the separately ordered Pandoc
+structural-parsing proxy. ICA and deployment keep their separate human gates.
