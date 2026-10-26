@@ -1,0 +1,19 @@
+{
+  "name": "pandoc",
+  "version": "3.7.0.2",
+  "arch": "amd64",
+  "release_url": "https://github.com/jgm/pandoc/releases/tag/3.7.0.2",
+  "archive": {
+    "name": "pandoc-3.7.0.2-linux-amd64.tar.gz",
+    "url": "https://github.com/jgm/pandoc/releases/download/3.7.0.2/pandoc-3.7.0.2-linux-amd64.tar.gz",
+    "bytes": 33678610,
+    "sha256": "8f8f67fdd540b6519326b0ac49d5c55c5d5d15e43920e80a086e02c8aff83268"
+  },
+  "checksum_note": "Byte size and SHA-256 verified over a local HTTPS download on the owner host and re-verified from the release archive during 013-a; this is an integrity pin, not a GPG signature attestation.",
+  "local_debian_note": "The owner host also carries Debian pandoc 3.7.0.2+ds-1 at /usr/bin/pandoc; the pin targets the upstream release archive so CI installs an identical byte-verified binary into an owned prefix.",
+  "install": "install_pandoc.sh <prefix>",
+  "env_var": "CONCEPT_PANDOC",
+  "reader_profile": "commonmark_x+sourcepos-smart",
+  "writer": "json",
+  "startup_contract": "One-time startup check (exact version match, then a positioned-JSON capability probe), then bounded per-request parsing: finite timeout, bounded streaming capture with immediate output cap enforcement, finite node limits, and fail-closed protection on any failure reason."
+}

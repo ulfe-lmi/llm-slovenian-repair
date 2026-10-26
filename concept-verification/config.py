@@ -14,6 +14,20 @@ BIGRAM_MEMBER = "GF2.0-word_sets-lowercase_forms-2grams-taxonomy-collocativity-e
 TRIGRAM_MEMBER = "GF2.0-word_sets-lowercase_forms-3grams-taxonomy-collocativity-entire.tsv"
 
 
+# Bounded parser configuration for the mandatory Pandoc structural protection
+# (order 013-a). The reader profile is an explicit, pinned extension set; the
+# values below are finite limits, not tuned optima.
+PANDOC_ENV_VAR = "CONCEPT_PANDOC"
+PANDOC_VERSION = "3.7.0.2"
+PANDOC_READER = "commonmark_x+sourcepos-smart"
+PANDOC_WRITER = "json"
+PANDOC_MAX_INPUT_BYTES = 1_000_000
+PANDOC_TIMEOUT_SECONDS = 10.0
+PANDOC_MAX_OUTPUT_BYTES = 32_000_000
+PANDOC_MAX_BLOCKS = 10_000
+PANDOC_MAX_INLINES = 100_000
+
+
 @dataclass(frozen=True)
 class ArchiveSpec:
     name: str

@@ -1,8 +1,19 @@
-"""EXPERIMENTAL / CONCEPT VERIFICATION / NOT PRODUCTION CODE. Protection."""
+"""EXPERIMENTAL / CONCEPT VERIFICATION / NOT PRODUCTION CODE. Protection.
+
+The runnable proxy's structural protection is mandatory Pandoc parsing
+(pinned binary, explicit reader profile, validated original coordinates)
+plus the established pure residual semantic policy
+(``protection_residuals`` / research 008-c residual classes).
+
+Fail closed: there is no regex-only structural fallback.  A missing
+binary, a wrong version, a parse failure, a timeout, a malformed AST or an
+unprovable global mapping raises ``PandocStartupError``; the caller
+(``RepairEngine.repair``) must then return the exact completed original
+with zero review calls (order 013-a, requirements 6 and 12).
+"""
 
 from __future__ import annotations
 
-import re
 from dataclasses import dataclass
 
 
@@ -13,74 +24,26 @@ class Interval:
     reason: str
 
 
-_URL = re.compile(r"https?://[^\s<>]+", re.IGNORECASE)
-_PATH = re.compile(r"(?<!\w)(?:\.?/|~/|[A-Za-z]:[\\/])[^\s`<>]+")
-_RELATIVE_PATH = re.compile(r"(?<!\w)[A-Za-z0-9_.-]+(?:/[A-Za-z0-9_.-]+)+(?!\w)")
-_NUMBER = re.compile(r"(?<!\w)[+-]?(?:\d+(?:[.,]\d+)?)(?:\s?(?:%|[A-Za-z]{1,8}))?(?!\w)")
-_IDENTIFIER = re.compile(
-    r"(?<!\w)(?=[A-Za-z_]*\d|[A-Za-z_]*_[A-Za-z_])[A-Za-z_][A-Za-z0-9_]*(?!\w)"
-)
-_UPPER_IDENTIFIER = re.compile(r"(?<!\w)[A-Z][A-Z0-9_]{1,}(?!\w)")
-_JSON_XML = re.compile(r"(?:\{[^\n{}]{0,2000}\}|\[[^\n\[\]]{0,2000}\]|<[/!?]?[A-Za-z][^>]*>)")
-_SHELL = re.compile(
-    r"(?m)^\s*(?:[$#>]\s+|(?:sudo\s+)?(?:python|python3|uv|git|curl|npm|pip|pytest|ruff|mypy)\s+)\S[^\n]*$"
-)
-_FENCE = re.compile(r"(?s)(?:^|\n)(```+|~~~+)[^\n]*\n.*?\n\1(?=\s|$)")
-_INLINE = re.compile(r"(?<!`)`[^`\n]+`(?!`)")
-_LINK = re.compile(r"!?(?:\[[^\]\n]*\]\([^\)\n]*\)|<https?://[^>]+>)")
-
-
-def _add(intervals: list[Interval], match: re.Match[str], reason: str) -> None:
-    intervals.append(Interval(match.start(), match.end(), reason))
-
-
-def _merge(intervals: list[Interval]) -> list[Interval]:
-    if not intervals:
-        return []
-    ordered = sorted(intervals)
-    merged: list[Interval] = [ordered[0]]
-    for current in ordered[1:]:
-        previous = merged[-1]
-        if current.start <= previous.end:
-            merged[-1] = Interval(
-                previous.start,
-                max(previous.end, current.end),
-                previous.reason + "+" + current.reason,
-            )
-        else:
-            merged.append(current)
-    return merged
-
-
 def protected_intervals(text: str, tool_arguments: tuple[str, ...] = ()) -> list[Interval]:
-    intervals: list[Interval] = []
-    for expression, reason in (
-        (_FENCE, "fenced-code"),
-        (_INLINE, "inline-code"),
-        (_LINK, "markdown-link"),
-        (_URL, "url"),
-        (_PATH, "path"),
-        (_RELATIVE_PATH, "relative-path"),
-        (_SHELL, "shell"),
-        (_NUMBER, "number"),
-        (_IDENTIFIER, "identifier"),
-        (_UPPER_IDENTIFIER, "upper-identifier"),
-        (_JSON_XML, "structured"),
-    ):
-        intervals.extend(
-            Interval(match.start(), match.end(), reason) for match in expression.finditer(text)
-        )
-    for argument in tool_arguments:
-        if not argument:
-            continue
-        start = 0
-        while True:
-            start = text.find(argument, start)
-            if start < 0:
-                break
-            intervals.append(Interval(start, start + len(argument), "tool-argument"))
-            start += len(argument)
-    return _merge(intervals)
+    """Protected intervals for one completed answer (code-point offsets).
+
+    Mandatory Pandoc structural parse; conservative residual refinement of
+    the granted prose.  Raises ``PandocStartupError`` (never returns a
+    regex-only result) when the structural parse or mapping cannot be
+    proved.
+    """
+    from pandoc_protection import (
+        PandocStartupError,
+        compose_protection,
+        protect_with_pandoc,
+        resolve_pandoc_spec,
+    )
+
+    spec = resolve_pandoc_spec()
+    outcome = protect_with_pandoc(spec, text)
+    if not outcome.ok:
+        raise PandocStartupError(outcome.reason or "PANDOC_PROTECTION", outcome.detail)
+    return compose_protection(text, outcome, tool_arguments)
 
 
 def is_protected(start: int, end: int, intervals: list[Interval]) -> bool:
