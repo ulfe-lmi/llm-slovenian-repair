@@ -155,7 +155,17 @@ class ConceptTests(unittest.TestCase):
                     "output": [
                         {
                             "type": "message",
-                            "content": [{"type": "output_text", "text": "presenetliv"}],
+                            "id": "m1",
+                            "role": "assistant",
+                            "status": "completed",
+                            "output_index": 0,
+                            "content": [
+                                {
+                                    "type": "output_text",
+                                    "text": "presenetliv",
+                                    "content_index": 0,
+                                }
+                            ],
                         }
                     ],
                 },
@@ -211,7 +221,7 @@ class ConceptTests(unittest.TestCase):
         reviewer = Reviewer()
         with Corpus(self.db) as corpus:
             records, metrics = _evaluate(
-                [case], corpus, {"x01": [candidate]}, reviewer, "frozen-v1"
+                [case], corpus, {"x01": [candidate]}, reviewer, "frozen-v1"  # type: ignore[arg-type]
             )
         self.assertEqual(reviewer.calls, 1)
         self.assertEqual(records[0]["repaired"], "To je tako zapisano.")
@@ -251,7 +261,7 @@ class ConceptTests(unittest.TestCase):
 
         with Corpus(self.db) as corpus:
             _records, metrics = _evaluate(
-                [case], corpus, {"x02": [candidate]}, WrongReviewer(), "frozen-v1"
+                [case], corpus, {"x02": [candidate]}, WrongReviewer(), "frozen-v1"  # type: ignore[arg-type]
             )
         self.assertEqual(metrics["harmful_edits"], 1)
         self.assertEqual(metrics["missed_known_errors"], 1)
@@ -265,7 +275,7 @@ class ConceptTests(unittest.TestCase):
 
         with Corpus(self.db) as corpus:
             records, metrics = _evaluate(
-                [case], corpus, {"x02": [candidate]}, FailedReviewer(), "frozen-v1"
+                [case], corpus, {"x02": [candidate]}, FailedReviewer(), "frozen-v1"  # type: ignore[arg-type]
             )
         self.assertEqual(metrics["reviewer_calls"], 1)
         self.assertEqual(metrics["reviewer_correct"], 0)
@@ -298,7 +308,7 @@ class ConceptTests(unittest.TestCase):
                 return value
 
         upstream = HTTPServer(("127.0.0.1", 0), Upstream)
-        proxy = ConceptProxy(("127.0.0.1", 0), f"http://127.0.0.1:{upstream.server_port}", Engine())
+        proxy = ConceptProxy(("127.0.0.1", 0), f"http://127.0.0.1:{upstream.server_port}", Engine())  # type: ignore[arg-type]
         upstream_thread = threading.Thread(target=upstream.handle_request)
         proxy_thread = threading.Thread(target=proxy.handle_request)
         upstream_thread.start()
@@ -347,7 +357,7 @@ class ConceptTests(unittest.TestCase):
             self._STATUS_SSE_HEADERS, body
         )
         try:
-            raw_socket = response.fp.raw._sock
+            raw_socket = response.fp.raw._sock  # type: ignore[attr-defined]
             ready, _, _ = select.select([raw_socket], [], [], 0.2)
             self.assertFalse(ready)  # precondition: wire quiet, no EOF, body buffered
             started = time.monotonic()
@@ -443,7 +453,7 @@ class ConceptTests(unittest.TestCase):
 
         upstream = HTTPServer(("127.0.0.1", 0), Upstream)
         proxy = ConceptProxy(
-            ("127.0.0.1", 0), f"http://127.0.0.1:{upstream.server_port}", Engine(), timeout=5.0
+            ("127.0.0.1", 0), f"http://127.0.0.1:{upstream.server_port}", Engine(), timeout=5.0  # type: ignore[arg-type]
         )
         upstream_thread = threading.Thread(target=upstream.handle_request)
         proxy_thread = threading.Thread(target=proxy.handle_request)
@@ -487,7 +497,7 @@ class ConceptTests(unittest.TestCase):
 
         upstream = HTTPServer(("127.0.0.1", 0), Upstream)
         proxy = ConceptProxy(
-            ("127.0.0.1", 0), f"http://127.0.0.1:{upstream.server_port}/v1", object(), timeout=0.1
+            ("127.0.0.1", 0), f"http://127.0.0.1:{upstream.server_port}/v1", object(), timeout=0.1  # type: ignore[arg-type]
         )
         upstream_thread = threading.Thread(target=upstream.handle_request)
         proxy_thread = threading.Thread(target=proxy.handle_request)
@@ -521,7 +531,7 @@ class ConceptTests(unittest.TestCase):
                 return
 
         upstream = HTTPServer(("127.0.0.1", 0), Upstream)
-        proxy = ConceptProxy(("127.0.0.1", 0), f"http://127.0.0.1:{upstream.server_port}", object())
+        proxy = ConceptProxy(("127.0.0.1", 0), f"http://127.0.0.1:{upstream.server_port}", object())  # type: ignore[arg-type]
         upstream_thread = threading.Thread(target=upstream.handle_request)
         proxy_thread = threading.Thread(target=proxy.handle_request)
         upstream_thread.start()
@@ -548,7 +558,7 @@ class ConceptTests(unittest.TestCase):
 
                 return Proposal(True, None, False)
 
-        engine = RepairEngine(self.db, Reviewer())
+        engine = RepairEngine(self.db, Reviewer())  # type: ignore[arg-type]
         engine.begin_request()
         engine.repair("To je zapisano.")
         details = engine.take_details()
@@ -688,7 +698,11 @@ class ConceptTests(unittest.TestCase):
             b'data: {"type":"response.output_text.done","item_id":"m",'
             b'"text":"presenetliv"}\n\n'
             b'data: {"type":"response.completed","response":{"id":"r",'
-            b'"usage":{"total_tokens":2}}}\n\n'
+            b'"usage":{"total_tokens":2},"output":[{"type":"message","id":"m",'
+            b'"role":"assistant","status":"completed","output_index":0,'
+            b'"content":[{"type":"output_text","text":"presenetliv",'
+            b'"content_index":0}]}]}}'
+            b'\n\n'
         )
 
         class Upstream(BaseHTTPRequestHandler):
@@ -708,7 +722,7 @@ class ConceptTests(unittest.TestCase):
                 return value.replace("presenetliv", "presenetljiv")
 
         upstream = HTTPServer(("127.0.0.1", 0), Upstream)
-        proxy = ConceptProxy(("127.0.0.1", 0), f"http://127.0.0.1:{upstream.server_port}", Engine())
+        proxy = ConceptProxy(("127.0.0.1", 0), f"http://127.0.0.1:{upstream.server_port}", Engine())  # type: ignore[arg-type]
         upstream_thread = threading.Thread(target=upstream.handle_request)
         proxy_thread = threading.Thread(target=proxy.handle_request)
         upstream_thread.start()
@@ -727,6 +741,7 @@ class ConceptTests(unittest.TestCase):
 
     def test_archive_identity_rejects_tiny_fixture_before_member_access(self) -> None:
         from config import WORDS
+
         from corpus import _safe_archive
 
         tiny = Path(self.temp.name) / "tiny.zip"

@@ -17,8 +17,19 @@ from pathlib import Path
 from typing import Protocol, cast
 from urllib.parse import urlparse
 
-from config import canonical_bytes
-from detector import detect, tokenize
+from batch_review import (
+    BOUND_REVIEW_REASONS,
+    REASON_FAILED,
+    REASON_PREP_INVALID,
+    REASON_PROMPT_OVERSIZE,
+    REASON_REQUEST_OVERSIZE,
+    BatchProposal,
+    BatchTarget,
+    build_prompt,
+    prepare_targets,
+)
+from config import REVIEWER_HTTP_TIMEOUT_SECONDS, canonical_bytes
+from detector import Candidate, detect, tokenize
 from pandoc_protection import (
     PandocSpec,
     PandocStartupError,
@@ -38,11 +49,16 @@ class ProxyError(ValueError):
 
 
 class Reviewer(Protocol):
-    """Structural reviewer interface: the engine only calls ``review``."""
+    """Structural reviewer interface: the engine only calls ``review_batch``.
 
-    def review(
-        self, sentence: str, target: str, variant: str = "frozen-v1"
-    ) -> Proposal: ...
+    The runtime RepairEngine never falls back to single-target calls; the
+    historical single-target prompt/API stays in ``qwen_client`` and the
+    frozen evaluator for research use only (order 014-a, requirement 1).
+    """
+
+    def review_batch(
+        self, sentence: str, targets: tuple[BatchTarget, ...]
+    ) -> dict[str, BatchProposal]: ...
 
 
 def _split_sse(raw: bytes) -> list[tuple[str, str]]:
@@ -180,41 +196,6 @@ def _bounded_read(
         raw_socket.settimeout(previous_timeout)
 
 
-def _nested_output_text(value: object) -> list[tuple[dict[str, object], str]]:
-    found: list[tuple[dict[str, object], str]] = []
-    if isinstance(value, dict):
-        if value.get("type") == "output_text" and isinstance(value.get("text"), str):
-            found.append((value, str(value["text"])))
-        for child in value.values():
-            found.extend(_nested_output_text(child))
-    elif isinstance(value, list):
-        for child in value:
-            found.extend(_nested_output_text(child))
-    return found
-
-
-def _assistant_output_texts(value: dict[str, object]) -> list[dict[str, object]]:
-    response = value.get("response")
-    if not isinstance(response, dict) or not isinstance(response.get("output"), list):
-        return []
-    fields: list[dict[str, object]] = []
-    for item in response["output"]:
-        if (
-            not isinstance(item, dict)
-            or item.get("type") != "message"
-            or item.get("role") != "assistant"
-        ):
-            continue
-        content = item.get("content")
-        if isinstance(content, list):
-            fields.extend(
-                part
-                for part in content
-                if isinstance(part, dict) and part.get("type") == "output_text"
-            )
-    return [field for field in fields if isinstance(field.get("text"), str)]
-
-
 def _render_event(block: str, value: dict[str, object]) -> str:
     lines = block.splitlines()
     data_index = next((index for index, line in enumerate(lines) if line.startswith("data:")), None)
@@ -229,60 +210,292 @@ def _render_event(block: str, value: dict[str, object]) -> str:
     return "\n".join(lines)
 
 
+# Sentinel for a stream-event ownership position that is absent (distinct
+# from a declared null, which is inconsistent and abstains).
+_UNSET: object = object()
+
+
 def transform_sse(raw: bytes, repair: Callable[[str], str]) -> tuple[bytes, bool]:
-    """Repair only assistant output text while retaining every SSE block."""
+    """Repair one unambiguously identified assistant text answer only.
+
+    Ownership is prefetched across the whole completed upstream SSE before
+    any repair call: the delta layer (stream item ids and the positions the
+    stream events themselves declare) and every assistant answer unit in the
+    completed ``response.output`` (message items and their ``output_text``
+    content parts).  Several assistant text
+    answers/items/content parts, a completed envelope that does not exactly
+    confirm the single delta answer, stream-declared indices that contradict
+    the completed list positions, or otherwise ambiguous target ownership
+    bypass repair unchanged with zero review calls (order 014-a,
+    requirement 8).  Only explicitly validated answer paths/ids are mutated;
+    no equality-based traversal of nested metadata.  When the review accepts
+    no text edit the raw bytes are returned unchanged (requirement 7).
+
+    Stream ids are never coerced: a delta/done event whose ``item_id`` is
+    missing, non-string or empty carries ambiguous ownership, so the answer
+    abstains with zero review calls, and no such event is ever mutated.
+
+    When the review accepts an edit, the known terminal copies of the
+    confirmed answer (``content_part.done`` parts and ``output_item.done``
+    message items) are updated through the same explicitly validated
+    id/index paths; unrelated metadata and non-answer events stay
+    byte-identical.
+    """
     blocks = _split_sse(raw)
     parsed: list[dict[str, object] | None] = [_event(block) for block, _ in blocks]
     streams: dict[str, list[str]] = {}
+    # Positions declared by the stream events themselves: text delta/done
+    # events and content-part added/done events carry ``item_id`` plus
+    # ``output_index``/``content_index`` in the documented Responses
+    # stream.  Those declared positions are authoritative for ownership;
+    # optional indices on the final message/part are only an additional
+    # consistency constraint, never a substitute.
+    declared: dict[str, list[tuple[object, object]]] = {}
+    # A delta/done event whose ``item_id`` is missing, non-string or empty
+    # does not identify an answer; such a stream is ambiguous and abstains
+    # instead of being coerced to an invented id.
+    stream_ids_invalid = False
+    # Every answer-related stream event (text delta/done, output-text
+    # content-part added/done, message-typed output-item added/done) must
+    # belong to the single confirmed answer; any other id abstains.
+    answer_event_ids: set[str] = set()
     for value in parsed:
-        if value is not None and value.get("type") == "response.output_text.delta":
+        if value is None:
+            continue
+        event_type = value.get("type")
+        if event_type in (
+            "response.output_text.delta",
+            "response.output_text.done",
+            "response.content_part.added",
+            "response.content_part.done",
+        ):
+            stream_id = value.get("item_id")
+            if type(stream_id) is not str or not stream_id:
+                if event_type in ("response.output_text.delta", "response.output_text.done"):
+                    stream_ids_invalid = True
+                continue
+            part = value.get("part")
+            answer_part = (
+                event_type.startswith("response.content_part.")
+                and isinstance(part, dict)
+                and part.get("type") == "output_text"
+            )
+            if event_type.startswith("response.output_text.") or answer_part:
+                answer_event_ids.add(stream_id)
+            if "output_index" in value or "content_index" in value:
+                declared.setdefault(stream_id, []).append(
+                    (value.get("output_index", _UNSET), value.get("content_index", _UNSET))
+                )
+        elif event_type in ("response.output_item.added", "response.output_item.done"):
+            item_obj = value.get("item")
+            if (
+                isinstance(item_obj, dict)
+                and type(item_obj.get("id")) is str
+                and item_obj.get("id")
+            ):
+                item_id = item_obj["id"]
+                if item_obj.get("type") == "message":
+                    answer_event_ids.add(item_id)
+                if "output_index" in value:
+                    declared.setdefault(item_id, []).append((value["output_index"], _UNSET))
+        if event_type == "response.output_text.delta":
             delta = value.get("delta")
             if isinstance(delta, str):
-                item_id = str(value.get("item_id", "__single__"))
-                streams.setdefault(item_id, []).append(delta)
-    repaired: dict[str, str] = {}
-    for item_id, parts in streams.items():
-        repaired[item_id] = repair("".join(parts))
-    direct_repaired: list[tuple[dict[str, object], str]] = []
-    if not streams:
-        for value in parsed:
-            if value is not None and value.get("type") == "response.completed":
-                for field in _assistant_output_texts(value):
-                    original = str(field["text"])
-                    changed = repair(original)
-                    field["text"] = changed
-                    direct_repaired.append((field, original))
-    if not streams and not direct_repaired:
+                stream_id = value.get("item_id")
+                if type(stream_id) is str and stream_id:
+                    streams.setdefault(stream_id, []).append(delta)
+    non_empty = [item_id for item_id, parts in streams.items() if "".join(parts)]
+    if stream_ids_invalid:
+        # Answer-related events with missing, non-string or empty ids carry
+        # ambiguous ownership: bypass unchanged with zero review calls.
         return raw, False
+    # Completed-envelope answer units: every output_text part of any message
+    # item in any response.output, with list ownership positions.
+    # Output messages are identified by ``id`` (delta/done events carry
+    # ``item_id``); ``output_index``/``content_index`` are optional but must
+    # be consistent when present.
+    units: list[tuple[int, int, dict[str, object], int, dict[str, object]]] = []
+    for index, value in enumerate(parsed):
+        if value is None or value.get("type") != "response.completed":
+            continue
+        response = value.get("response")
+        if not isinstance(response, dict):
+            continue
+        final_output = response.get("output")
+        if not isinstance(final_output, list):
+            continue
+        for output_pos, item in enumerate(final_output):
+            if not isinstance(item, dict) or item.get("type") != "message":
+                continue
+            content = item.get("content")
+            if not isinstance(content, list):
+                continue
+            for content_pos, part in enumerate(content):
+                if (
+                    isinstance(part, dict)
+                    and part.get("type") == "output_text"
+                    and isinstance(part.get("text"), str)
+                ):
+                    units.append((index, output_pos, item, content_pos, part))
+
+    def ownership_consistent(
+        output_pos: int, item: dict[str, object], content_pos: int, part: dict[str, object]
+    ) -> bool:
+        declared_output = item.get("output_index")
+        output_ok = declared_output is None or (
+            type(declared_output) is int and declared_output == output_pos
+        )
+        declared_content = part.get("content_index")
+        content_ok = declared_content is None or (
+            type(declared_content) is int and declared_content == content_pos
+        )
+        return output_ok and content_ok
+
+    def stream_positions_consistent(
+        item_id: str, output_pos: int, content_pos: int
+    ) -> bool:
+        # Every stream event for this item that declares an ownership
+        # position must declare it as an integer matching the actual final
+        # list position; a null or contradictory declaration abstains.
+        for declared_output, declared_content in declared.get(item_id, ()):
+            if declared_output is not _UNSET and (
+                type(declared_output) is not int or declared_output != output_pos
+            ):
+                return False
+            if declared_content is not _UNSET and (
+                type(declared_content) is not int or declared_content != content_pos
+            ):
+                return False
+        return True
+
+    repaired: dict[str, str] = {}
+    direct_event: int | None = None
+    if non_empty:
+        if len(non_empty) != 1:
+            # Several assistant text answers: ambiguous ownership.
+            return raw, False
+        item_id = non_empty[0]
+        if not answer_event_ids <= {item_id}:
+            # An answer event for another id: ambiguous ownership.
+            return raw, False
+        joined = "".join(streams[item_id])
+        # Exactly one confirming final assistant output_text with consistent
+        # ownership is required before any repair call: the final message id
+        # equals the stream item id, the text matches, and every position
+        # declared by the stream events equals the actual final list
+        # positions.  An unconfirmed completed answer (absent or several
+        # units, wrong id, inconsistent indices, or mismatched text)
+        # bypasses unchanged with zero calls.
+        if len(units) != 1:
+            return raw, False
+        unit_index, output_pos, unit_item, content_pos, unit_part = units[0]
+        message_id = unit_item.get("id")
+        confirmed = (
+            ownership_consistent(output_pos, unit_item, content_pos, unit_part)
+            and stream_positions_consistent(item_id, output_pos, content_pos)
+            and unit_item.get("role") == "assistant"
+            and type(message_id) is str
+            and message_id == item_id
+            and unit_part["text"] == joined
+        )
+        if not confirmed:
+            return raw, False
+        new_text = repair(joined)
+        if new_text == joined:
+            # No accepted text edit: the raw bytes are returned unchanged.
+            return raw, False
+        direct_event = unit_index
+        repaired[item_id] = new_text
+        unit_part["text"] = new_text
+    else:
+        assistant_units = [
+            unit for unit in units if unit[2].get("role") == "assistant"
+        ]
+        if len(assistant_units) != 1 or len(units) != 1:
+            # No unambiguous single assistant answer (several answers,
+            # several content parts, or non-answer content): bypass.
+            return raw, False
+        unit_index, output_pos, unit_item, content_pos, unit_part = assistant_units[0]
+        message_id = unit_item.get("id")
+        if (
+            type(message_id) is not str
+            or not message_id
+            or not ownership_consistent(output_pos, unit_item, content_pos, unit_part)
+            or not stream_positions_consistent(message_id, output_pos, content_pos)
+            or not answer_event_ids <= {message_id}
+        ):
+            # Absent or inconsistent ownership: bypass unchanged.
+            return raw, False
+        original_text = str(unit_part["text"])
+        new_text = repair(original_text)
+        if new_text == original_text:
+            # No accepted text edit: the raw bytes are returned unchanged.
+            return raw, False
+        direct_event = unit_index
+        repaired[message_id] = new_text
+        unit_part["text"] = new_text
+        # No delta streams: only the validated completed event is re-emitted
+        # by the shared render pass below.
     output: list[str] = []
     used_first: set[str] = set()
-    for (block, delimiter), value in zip(blocks, parsed, strict=True):
-        if value is not None:
-            event_type = value.get("type")
-            item_id = str(value.get("item_id", "__single__"))
-            if event_type == "response.output_text.delta" and item_id in repaired:
-                value["delta"] = repaired[item_id] if item_id not in used_first else ""
-                used_first.add(item_id)
-            elif event_type == "response.output_text.done" and item_id in repaired:
+    for (block, delimiter), value, index in zip(blocks, parsed, range(len(blocks)), strict=True):
+        if value is None:
+            output.append(block + delimiter)
+            continue
+        event_type = value.get("type")
+        re_render = False
+        item_id = value.get("item_id")
+        if (
+            event_type in ("response.output_text.delta", "response.output_text.done")
+            and type(item_id) is str
+            and item_id in repaired
+        ):
+            # Only the explicitly validated answer id is mutated; every
+            # other event stays byte-identical.  Empty text events are
+            # untouched so no copy of the answer is duplicated.
+            if event_type == "response.output_text.delta":
+                if value.get("delta"):
+                    value["delta"] = repaired[item_id] if item_id not in used_first else ""
+                    used_first.add(item_id)
+                    re_render = True
+            elif value.get("text"):
                 value["text"] = repaired[item_id]
-            else:
-                for field, old in _nested_output_text(value):
-                    for item_id, parts in streams.items():
-                        if old == "".join(parts):
-                            field["text"] = repaired[item_id]
-            if event_type == "response.completed" and direct_repaired:
-                # Direct fields were mutated above; this branch preserves their event.
-                pass
-            if event_type in {
-                "response.output_text.delta",
-                "response.output_text.done",
-                "response.completed",
-            } or any(
-                old == "".join(streams[item_id])
-                for _field, old in _nested_output_text(value)
-                for item_id in streams
+                re_render = True
+        elif event_type == "response.content_part.done":
+            # Terminal copy of the confirmed answer part: updated through
+            # the explicitly validated id path, never by value matching.
+            part = value.get("part")
+            if (
+                type(item_id) is str
+                and item_id in repaired
+                and isinstance(part, dict)
+                and part.get("type") == "output_text"
+                and type(part.get("text")) is str
             ):
-                block = _render_event(block, value)
+                part["text"] = repaired[item_id]
+                re_render = True
+        elif event_type == "response.output_item.done":
+            # Terminal copy of the confirmed message item.
+            item_obj = value.get("item")
+            if (
+                isinstance(item_obj, dict)
+                and item_obj.get("type") == "message"
+                and type(item_obj.get("id")) is str
+                and item_obj["id"] in repaired
+                and isinstance(item_obj.get("content"), list)
+            ):
+                for part in item_obj["content"]:
+                    if (
+                        isinstance(part, dict)
+                        and part.get("type") == "output_text"
+                        and type(part.get("text")) is str
+                    ):
+                        part["text"] = repaired[item_obj["id"]]
+                re_render = True
+        if index == direct_event:
+            re_render = True
+        if re_render:
+            block = _render_event(block, value)
         output.append(block + delimiter)
     return "".join(output).encode("utf-8"), True
 
@@ -292,6 +505,18 @@ class Forwarded:
     status: int
     body: bytes
     content_type: str
+
+
+@dataclass(frozen=True)
+class _PreparedCandidate:
+    """A detector candidate with its validated neighbor context, in the
+    deterministic original order used for batch target alignment."""
+
+    candidate: Candidate
+    left: str | None
+    right: str | None
+    left_bounds: tuple[int, int] | None
+    right_bounds: tuple[int, int] | None
 
 
 @dataclass
@@ -338,6 +563,12 @@ class RepairEngine:
                         "repair_seconds": round(time.monotonic() - raw_started, 6),
                     },
                     "protected_difference_count": 0,
+                    "review_batch": {
+                        "calls": 0,
+                        "targets": 0,
+                        "outcome": "skipped",
+                        "reason": None,
+                    },
                     "protection_failure": {
                         "reason": reason or "PANDOC_PROTECTION",
                         "detail": detail[:256],
@@ -370,67 +601,146 @@ class RepairEngine:
             candidates = detect(text, corpus, intervals, mode=self.mode, maximum=4)
             detector_seconds = time.monotonic() - detector_started
             tokens = tokenize(text, intervals)
-            decisions: list[dict[str, object]] = []
-            edits: list[tuple[int, int, str]] = []
-            reviewer_seconds = 0.0
+            prepared: list[_PreparedCandidate] = []
+            selected_invalid = False
             for candidate in candidates:
                 token_index = next(
-                    (i for i, token in enumerate(tokens) if token.start == candidate.start), None
+                    (i for i, token in enumerate(tokens) if token.start == candidate.start),
+                    None,
                 )
                 if token_index is None:
-                    continue
-                left = tokens[token_index - 1].key if token_index else None
-                right = tokens[token_index + 1].key if token_index + 1 < len(tokens) else None
-                left_bounds = (
-                    (tokens[token_index - 1].start, tokens[token_index - 1].end)
-                    if token_index
-                    else None
+                    # A detected occurrence whose start matches no token is
+                    # invalid/stale selection: the whole answer returns the
+                    # completed original with zero calls, never a valid
+                    # subset (order 014-a, requirement 2).
+                    selected_invalid = True
+                    break
+                prepared.append(
+                    _PreparedCandidate(
+                        candidate,
+                        left=tokens[token_index - 1].key if token_index else None,
+                        right=tokens[token_index + 1].key
+                        if token_index + 1 < len(tokens)
+                        else None,
+                        left_bounds=(
+                            (tokens[token_index - 1].start, tokens[token_index - 1].end)
+                            if token_index
+                            else None
+                        ),
+                        right_bounds=(
+                            (tokens[token_index + 1].start, tokens[token_index + 1].end)
+                            if token_index + 1 < len(tokens)
+                            else None
+                        ),
+                    )
                 )
-                right_bounds = (
-                    (tokens[token_index + 1].start, tokens[token_index + 1].end)
-                    if token_index + 1 < len(tokens)
-                    else None
+            # Bounded review budget: at most one fresh batch request per
+            # completed answer (order 014-a, requirements 2-4 and 7).
+            review_batch: dict[str, object] = {
+                "calls": 0,
+                "targets": len(candidates) if selected_invalid else len(prepared),
+                "outcome": "skipped",
+                "reason": REASON_PREP_INVALID if selected_invalid else None,
+            }
+            proposals: dict[str, BatchProposal] | None = None
+            aligned: list[str] | None = None
+            reviewer_seconds = 0.0
+            if prepared and not selected_invalid:
+                occurrences = tuple(
+                    (item.candidate.start, item.candidate.end, item.candidate.text)
+                    for item in prepared
                 )
+                protected = tuple((item.start, item.end) for item in intervals)
+                targets = prepare_targets(text, occurrences, protected)
+                if targets is None:
+                    # Invalid/stale/protected/oversized batch preparation:
+                    # completed original with zero calls.
+                    review_batch["reason"] = REASON_PREP_INVALID
+                elif build_prompt(targets) is None:
+                    review_batch["targets"] = len(targets)
+                    review_batch["reason"] = REASON_PROMPT_OVERSIZE
+                else:
+                    batch_started = time.monotonic()
+                    try:
+                        proposals = self.reviewer.review_batch(text, targets)
+                    except Exception as exc:
+                        # Only the closed vocabulary of fixed labels is
+                        # trusted; anything else maps to REVIEW_FAILED so
+                        # untrusted exception content never reaches traces.
+                        # (type guard first: an unhashable reason must not
+                        # raise inside this fallback path.)
+                        reason = getattr(exc, "reason", None)
+                        if type(reason) is not str or reason not in BOUND_REVIEW_REASONS:
+                            reason = REASON_FAILED
+                        review_batch["targets"] = len(targets)
+                        review_batch["outcome"] = "failed"
+                        review_batch["reason"] = reason
+                        review_batch["calls"] = (
+                            0
+                            if reason in (REASON_PROMPT_OVERSIZE, REASON_REQUEST_OVERSIZE)
+                            else 1
+                        )
+                    else:
+                        aligned = [target.id for target in targets]
+                        review_batch["targets"] = len(targets)
+                        review_batch["outcome"] = "ok"
+                        review_batch["calls"] = 1
+                    finally:
+                        reviewer_seconds = time.monotonic() - batch_started
+            decisions: list[dict[str, object]] = []
+            edits: list[tuple[int, int, str]] = []
+            for index, item in enumerate(prepared):
+                candidate = item.candidate
                 review_started = time.monotonic()
-                proposal: dict[str, object] | None = None
+                proposal_record: dict[str, object] | None = None
                 acceptance: dict[str, object] = {
                     "accepted": False,
                     "reason": "reviewer-error",
                     "replacement": None,
                 }
                 failure: str | None = None
-                try:
-                    value = self.reviewer.review(text, candidate.text)
-                    proposal = {
-                        "keep": value.keep,
-                        "replacement": value.replacement,
-                        "needs_wider_edit": value.needs_wider_edit,
-                    }
-                    decision = accept(
-                        text,
-                        candidate,
-                        value,
-                        corpus,
-                        intervals,
-                        left=left,
-                        right=right,
-                        left_bounds=left_bounds,
-                        right_bounds=right_bounds,
-                    )
-                    acceptance = {
-                        "accepted": decision.accepted,
-                        "reason": decision.reason,
-                        "replacement": decision.replacement,
-                    }
-                except Exception:
+                if aligned is not None and proposals is not None:
+                    batch_proposal = proposals[aligned[index]]
+                    try:
+                        value = Proposal(
+                            batch_proposal.keep,
+                            batch_proposal.replacement,
+                            batch_proposal.needs_wider_edit,
+                        )
+                        proposal_record = {
+                            "keep": value.keep,
+                            "replacement": value.replacement,
+                            "needs_wider_edit": value.needs_wider_edit,
+                        }
+                        decision = accept(
+                            text,
+                            candidate,
+                            value,
+                            corpus,
+                            intervals,
+                            left=item.left,
+                            right=item.right,
+                            left_bounds=item.left_bounds,
+                            right_bounds=item.right_bounds,
+                        )
+                        acceptance = {
+                            "accepted": decision.accepted,
+                            "reason": decision.reason,
+                            "replacement": decision.replacement,
+                        }
+                    except Exception:
+                        # Individual isolation: a failed acceptance never
+                        # invalidates the other independent proposals.
+                        failure = "reviewer-error"
+                else:
+                    # Whole-batch failure: byte-exact original, no edit.
                     failure = "reviewer-error"
-                reviewer_seconds += time.monotonic() - review_started
                 decisions.append(
                     {
                         "candidate": candidate.as_dict(),
                         "evidence": candidate.evidence,
-                        "neighbors": {"left": left, "right": right},
-                        "proposal": proposal,
+                        "neighbors": {"left": item.left, "right": item.right},
+                        "proposal": proposal_record,
                         "acceptance": acceptance,
                         "failure": failure,
                         "timing_seconds": round(time.monotonic() - review_started, 6),
@@ -469,6 +779,7 @@ class RepairEngine:
                         "repair_seconds": round(time.monotonic() - raw_started, 6),
                     },
                     "protected_difference_count": protected_changes,
+                    "review_batch": review_batch,
                 }
             )
         return repaired
@@ -650,10 +961,13 @@ def main() -> int:
         check_pandoc(pandoc_spec)
     except PandocStartupError as exc:
         raise SystemExit(f"pandoc startup failure: {exc.reason}: {exc.detail}") from None
+    # The reviewer is bounded by the ordered finite 15-second cap; the
+    # upstream capture timeout (CONCEPT_TIMEOUT) is a separate axis and
+    # must not extend reviewer calls (order 014-a, requirement 4).
     reviewer = ResponsesReviewer(
         os.environ.get("CONCEPT_REVIEWER_URL", "http://127.0.0.1:8001/v1"),
         os.environ.get("CONCEPT_REVIEWER_MODEL", "Qwen3.8-27B"),
-        timeout=float(os.environ.get("CONCEPT_TIMEOUT", "30")),
+        timeout=REVIEWER_HTTP_TIMEOUT_SECONDS,
         profile=os.environ.get("CONCEPT_REVIEWER_PROFILE"),
     )
     trace_value = os.environ.get("CONCEPT_TRACE_DIR")

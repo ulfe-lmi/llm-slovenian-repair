@@ -28,6 +28,26 @@ PANDOC_MAX_BLOCKS = 10_000
 PANDOC_MAX_INLINES = 100_000
 
 
+# Bounded occurrence-addressed reviewer batch (order 014-a).  These are
+# finite limits, not tuned optima; they are enforced before dispatch and
+# before any mutation.  Code-point and byte limits are distinct quantities.
+# Finite reviewer HTTP timeout (order 014-a, requirement 4): the ordered
+# existing 15-second cap.  It bounds reviewer calls only; the upstream
+# capture timeout remains separately operator-configured.
+REVIEWER_HTTP_TIMEOUT_SECONDS = 15.0
+REVIEW_BATCH_VERSION = "batch-v1"
+REVIEW_BATCH_MAX_ITEMS = 4
+REVIEW_BATCH_MAX_TARGET_CODEPOINTS = 128
+REVIEW_BATCH_CONTEXT_CODEPOINTS = 240
+REVIEW_BATCH_MAX_PROMPT_CODEPOINTS = 8192
+REVIEW_BATCH_MAX_REQUEST_BYTES = 32_768
+REVIEW_BATCH_MAX_RESPONSE_BYTES = 32_768
+REVIEW_BATCH_MAX_PROPOSAL_JSON_CODEPOINTS = 8192
+REVIEW_BATCH_MAX_OUTPUT_TOKENS = 1536
+REVIEW_BATCH_MAX_REPLACEMENT_WORDS = 8
+REVIEW_BATCH_MAX_REPLACEMENT_CODEPOINTS = 128
+
+
 @dataclass(frozen=True)
 class ArchiveSpec:
     name: str

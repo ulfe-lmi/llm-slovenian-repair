@@ -166,7 +166,16 @@ concept-verification proxy with exact original spans, conservative
 abstentions, fail-closed bounded failure reasons, and a pinned 3.7.0.2
 dependency (see `concept-verification/README.md`) - runnable-proxy
 engineering evidence only, no linguistic, experimental-MVP, or deployment
-acceptance. A provisional 8-15 focused-engineering-day estimate covers the
+acceptance. Round 014-a (2026-10-26) added one bounded occurrence-addressed
+reviewer batch (`batch-v1`) to the same runnable proxy: at most one fresh
+bounded review request per completed eligible answer, exact occurrence IDs
+and fixed context windows, strict duplicate-key-free parsing at both
+envelope levels, whole-batch rejection versus individual evidence
+rejection, and a one-answer SSE eligibility guard, while the historical
+single-target evaluator prompt/API remains unchanged (see
+`concept-verification/README.md`) - runnable-proxy engineering evidence
+only; the seed 013/014/015/020 packaged objectives remain open. A
+provisional 8-15 focused-engineering-day estimate covers the
 remaining packaged-MVP scope, with research-evaluation completion, ICA and
 deployment as separate gates. See
 [development](docs/DEVELOPMENT.md), [runbook](docs/OAP-RUNBOOK.md),

@@ -10,9 +10,33 @@ from dataclasses import dataclass
 from pathlib import Path
 from urllib.parse import urlparse
 
+from batch_review import (
+    REASON_HTTP_FAILED,
+    REASON_HTTP_NOT_OK,
+    REASON_INVALID_ENCODING,
+    REASON_PROMPT_OVERSIZE,
+    REASON_REQUEST_OVERSIZE,
+    BatchError,
+    BatchProposal,
+    BatchTarget,
+    build_prompt,
+    build_request_body,
+    parse_batch_envelope,
+    strict_json_object,
+)
+from config import (
+    REVIEW_BATCH_MAX_REQUEST_BYTES,
+    REVIEW_BATCH_MAX_RESPONSE_BYTES,
+    REVIEWER_HTTP_TIMEOUT_SECONDS,
+)
+
 
 class ReviewerError(ValueError):
-    pass
+    """Reviewer failure; ``reason`` is a fixed label or None for legacy use."""
+
+    def __init__(self, message: str, reason: str | None = None) -> None:
+        super().__init__(message)
+        self.reason = reason
 
 
 @dataclass(frozen=True)
@@ -98,7 +122,7 @@ class ResponsesReviewer:
         self,
         base_url: str,
         model: str,
-        timeout: float = 15.0,
+        timeout: float = REVIEWER_HTTP_TIMEOUT_SECONDS,
         api_key: str | None = None,
         profile: str | Path | None = None,
     ):
@@ -164,3 +188,57 @@ class ResponsesReviewer:
             return parse_proposal(json.loads(payload.decode("utf-8")))
         except (UnicodeDecodeError, json.JSONDecodeError) as exc:
             raise ReviewerError("review response is not valid JSON") from exc
+
+    def review_batch(
+        self, sentence: str, targets: tuple[BatchTarget, ...]
+    ) -> dict[str, BatchProposal]:
+        """One fresh bounded batch request; the whole batch fails as a unit.
+
+        ``sentence`` is the completed original answer; occurrence context is
+        already serialized into the targets, so it is not re-embedded.  Limit
+        failures before dispatch carry the pre-dispatch labels so the caller
+        can report zero requests.
+        """
+        prompt_text = build_prompt(targets)
+        if prompt_text is None:
+            raise ReviewerError("review prompt exceeds bound", reason=REASON_PROMPT_OVERSIZE)
+        body = build_request_body(self.model, prompt_text)
+        if len(body) > REVIEW_BATCH_MAX_REQUEST_BYTES:
+            raise ReviewerError("review request exceeds bound", reason=REASON_REQUEST_OVERSIZE)
+        connection_class = (
+            http.client.HTTPSConnection if self.scheme == "https" else http.client.HTTPConnection
+        )
+        connection = connection_class(self.host, self.port, timeout=self.timeout)
+        headers = {"Content-Type": "application/json", "Accept": "application/json"}
+        if self.api_key:
+            headers["Authorization"] = f"Bearer {self.api_key}"
+        try:
+            connection.request(
+                "POST", responses_path(self.base_path), body=body, headers=headers
+            )
+            result = connection.getresponse()
+            payload = result.read(REVIEW_BATCH_MAX_RESPONSE_BYTES + 1)
+        except (OSError, TimeoutError) as exc:
+            raise ReviewerError("review HTTP request failed", reason=REASON_HTTP_FAILED) from exc
+        finally:
+            connection.close()
+        if result.status != 200 or len(payload) > REVIEW_BATCH_MAX_RESPONSE_BYTES:
+            raise ReviewerError(
+                "review HTTP response was not successful", reason=REASON_HTTP_NOT_OK
+            )
+        try:
+            decoded = payload.decode("utf-8")
+        except UnicodeDecodeError as exc:
+            raise ReviewerError(
+                "review response is not valid UTF-8", reason=REASON_INVALID_ENCODING
+            ) from exc
+        try:
+            envelope = strict_json_object(decoded)
+        except BatchError as exc:
+            raise ReviewerError("review response is not a JSON object", reason=exc.reason) from exc
+        try:
+            return parse_batch_envelope(envelope, frozenset(target.id for target in targets))
+        except BatchError as exc:
+            raise ReviewerError(
+                "review batch response is not acceptable", reason=exc.reason
+            ) from exc

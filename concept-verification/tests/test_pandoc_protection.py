@@ -19,22 +19,27 @@ from __future__ import annotations
 import http.client
 import json
 import os
+import selectors as sel
 import shutil
 import sqlite3
+import subprocess as sp
 import sys
 import tempfile
 import threading
 import time
 import unittest
+from collections.abc import Callable
 from http.server import BaseHTTPRequestHandler, HTTPServer
 from pathlib import Path
-from typing import cast
+from typing import Any, cast
 from unittest import mock
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
+import config  # noqa: E402
 import pandoc_protection  # noqa: E402
+from batch_review import BatchProposal, BatchTarget  # noqa: E402
 from detector import Candidate  # noqa: E402
 from pandoc_protection import (  # noqa: E402
     PandocSpec,
@@ -194,13 +199,11 @@ class BoundedCaptureTests(unittest.TestCase):
     def tearDown(self) -> None:
         self.temp.cleanup()
 
-    def _spy_popen(self):
-        import subprocess as sp
-
+    def _spy_popen(self) -> tuple[object, Callable[..., object], dict[str, int]]:
         real_popen = sp.Popen
         captured: dict[str, int] = {}
 
-        def spy(*args: object, **kwargs: object):
+        def spy(*args: Any, **kwargs: Any) -> object:
             process = real_popen(*args, **kwargs)
             captured["pid"] = process.pid
             return process
@@ -260,7 +263,7 @@ class BoundedCaptureTests(unittest.TestCase):
         spec = PandocSpec(binary=str(fake), timeout=0.5)
         real_popen, spy, captured = self._spy_popen()
         fds_before = _fd_count()
-        with mock.patch.object(pandoc_protection.subprocess, "Popen", spy), \
+        with mock.patch.object(sp, "Popen", spy), \
                 self.assertRaises(PandocStartupError) as ctx:
             pandoc_protection._run_bounded(
                 spec, [str(fake), "-f", "x", "-t", "json"], b""
@@ -286,7 +289,7 @@ class BoundedCaptureTests(unittest.TestCase):
         spec = PandocSpec(binary=str(fake), timeout=10.0)
         real_popen, spy, captured = self._spy_popen()
         fds_before = _fd_count()
-        with mock.patch.object(pandoc_protection.subprocess, "Popen", spy), \
+        with mock.patch.object(sp, "Popen", spy), \
                 mock.patch.object(pandoc_protection, "PANDOC_MAX_OUTPUT_BYTES", 4096), \
                 self.assertRaises(PandocStartupError) as ctx:
             pandoc_protection._run_bounded(
@@ -324,9 +327,9 @@ class BoundedCaptureTests(unittest.TestCase):
         try:
             time.sleep(0.2)  # sentinel up before the owned group is signalled
             with mock.patch.object(
-                pandoc_protection.subprocess, "Popen", spy
+                sp, "Popen", spy
             ), mock.patch.object(
-                pandoc_protection.selectors,
+                sel,
                 "DefaultSelector",
                 side_effect=OSError("injected allocation failure"),
             ), self.assertRaises(OSError):
@@ -368,7 +371,7 @@ class BoundedCaptureTests(unittest.TestCase):
         real_popen, spy, captured = self._spy_popen()
         fds_before = _fd_count()
         with mock.patch.object(
-            pandoc_protection.subprocess, "Popen", spy
+            sp, "Popen", spy
         ), self.assertRaises(PandocStartupError) as ctx:
             pandoc_protection._run_bounded(
                 spec, [str(fake), "-f", "x", "-t", "json"], b""
@@ -396,7 +399,7 @@ class PandocMappingTests(unittest.TestCase):
         cls.spec = _real_spec()
         check_pandoc(cls.spec)  # missing dependency fails here, never skips
 
-    def _protect(self, text: str) -> tuple[tuple[tuple[int, int], ...], list]:
+    def _protect(self, text: str) -> tuple[tuple[tuple[int, int], ...], list[Interval]]:
         outcome = protect_with_pandoc(self.spec, text)
         self.assertTrue(outcome.ok, f"{text!r}: {outcome.reason} {outcome.detail}")
         return outcome.granted, compose_protection(text, outcome)
@@ -737,7 +740,7 @@ class PandocMappingTests(unittest.TestCase):
             ],
         }
         doc = pandoc_protection._Document("Beseda\n")
-        pandoc_protection._walk_blocks(doc, cast("list", document["blocks"]))
+        pandoc_protection._walk_blocks(doc, cast("list[object]", document["blocks"]))
         self.assertEqual(doc.granted, [])
 
     def test_user_data_pos_collision_real_markdown(self) -> None:
@@ -789,7 +792,7 @@ class PandocMappingTests(unittest.TestCase):
             ],
         }
         doc = pandoc_protection._Document("Beseda\n")
-        pandoc_protection._walk_blocks(doc, cast("list", document["blocks"]))
+        pandoc_protection._walk_blocks(doc, cast("list[object]", document["blocks"]))
         self.assertEqual(doc.granted, [])
 
 
@@ -857,6 +860,12 @@ class _ReviewerThatFailsIfCalled:
         self.calls += 1
         raise AssertionError("reviewer must not be called")
 
+    def review_batch(
+        self, sentence: str, targets: tuple[BatchTarget, ...]
+    ) -> dict[str, BatchProposal]:
+        self.calls += 1
+        raise AssertionError("reviewer must not be called")
+
 
 class _FakeReviewer:
     def __init__(self, replacement: str = "tako") -> None:
@@ -866,6 +875,17 @@ class _FakeReviewer:
     def review(self, sentence: str, target: str, variant: str = "frozen-v1") -> Proposal:
         self.calls += 1
         return Proposal(False, self.replacement, False)
+
+    def review_batch(
+        self, sentence: str, targets: tuple[BatchTarget, ...]
+    ) -> dict[str, BatchProposal]:
+        self.calls += 1
+        return {
+            target.id: BatchProposal(
+                target.id, False, self.replacement, False
+            )
+            for target in targets
+        }
 
 
 class EngineBoundaryTests(unittest.TestCase):
@@ -949,7 +969,7 @@ class EngineBoundaryTests(unittest.TestCase):
             document_calls.append(True)
             raise AssertionError("mapper must not be built for oversized input")
 
-        limit = pandoc_protection.PANDOC_MAX_INPUT_BYTES
+        limit = config.PANDOC_MAX_INPUT_BYTES
         oversize = "a" * (limit + 1)
         engine.begin_request()
         with mock.patch.object(
@@ -1227,13 +1247,40 @@ class ProxyHttpTests(unittest.TestCase):
         self.temp.cleanup()
 
     def _start_upstream(self, text: str) -> str:
-        source = (
-            b'data: {"type":"response.output_text.delta","item_id":"m","delta":'
-            + json.dumps(text).encode()
-            + b"}\n\n"
-            b'data: {"type":"response.completed","response":{"id":"r",'
-            b'"usage":{"total_tokens":4}}}\n\n'
+        delta = (
+            '{"type":"response.output_text.delta","item_id":"m","delta":'
+            + json.dumps(text)
+            + "}"
         )
+        completed = (
+            '{"type":"response.completed","response":'
+            + json.dumps(
+                {
+                    "id": "r",
+                    "usage": {"total_tokens": 4},
+                    "output": [
+                        {
+                            "type": "message",
+                            "id": "m",
+                            "role": "assistant",
+                            "status": "completed",
+                            "output_index": 0,
+                            "content": [
+                                {
+                                    "type": "output_text",
+                                    "text": text,
+                                    "content_index": 0,
+                                }
+                            ],
+                        }
+                    ],
+                }
+            )
+            + "}"
+        )
+        source = (
+            "data: " + delta + "\n\n"
+        ).encode() + ("data: " + completed + "\n\n").encode()
 
         class Upstream(BaseHTTPRequestHandler):
             protocol_version = "HTTP/1.1"
