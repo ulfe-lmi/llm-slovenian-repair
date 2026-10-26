@@ -28,6 +28,10 @@ ownership; portable configuration template), strengthened the baseline
 driver's bounded cleanup contract, and corrected the 012-a
 publication-evidence overclaims in the new recovery record, with no
 scientific protocol, model, or result change.
-The packaged-MVP row above carries a provisional 8-15 focused-engineering-day
-estimate for its remaining scope after the separately ordered Pandoc
-structural-parsing proxy. ICA and deployment keep their separate human gates.
+Rounds 013-a and 014-a (2026-10-26) confer no product label: they implement
+the owner-selected Pandoc structural-parsing proxy and one bounded
+occurrence-addressed reviewer batch in the isolated runnable proxy only,
+with no scientific protocol, model, or result change and no packaged
+library, quality, or deployment claim. The packaged-MVP row above carries a
+provisional 8-15 focused-engineering-day estimate for its remaining scope
+after those rounds. ICA and deployment keep their separate human gates.

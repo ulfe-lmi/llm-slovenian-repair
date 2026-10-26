@@ -17,8 +17,19 @@ from pathlib import Path
 from typing import Protocol, cast
 from urllib.parse import urlparse
 
-from config import canonical_bytes
-from detector import detect, tokenize
+from batch_review import (
+    BOUND_REVIEW_REASONS,
+    REASON_FAILED,
+    REASON_PREP_INVALID,
+    REASON_PROMPT_OVERSIZE,
+    REASON_REQUEST_OVERSIZE,
+    BatchProposal,
+    BatchTarget,
+    build_prompt,
+    prepare_targets,
+)
+from config import REVIEWER_HTTP_TIMEOUT_SECONDS, canonical_bytes
+from detector import Candidate, detect, tokenize
 from pandoc_protection import (
     PandocSpec,
     PandocStartupError,
@@ -38,11 +49,16 @@ class ProxyError(ValueError):
 
 
 class Reviewer(Protocol):
-    """Structural reviewer interface: the engine only calls ``review``."""
+    """Structural reviewer interface: the engine only calls ``review_batch``.
 
-    def review(
-        self, sentence: str, target: str, variant: str = "frozen-v1"
-    ) -> Proposal: ...
+    The runtime RepairEngine never falls back to single-target calls; the
+    historical single-target prompt/API stays in ``qwen_client`` and the
+    frozen evaluator for research use only (order 014-a, requirement 1).
+    """
+
+    def review_batch(
+        self, sentence: str, targets: tuple[BatchTarget, ...]
+    ) -> dict[str, BatchProposal]: ...
 
 
 def _split_sse(raw: bytes) -> list[tuple[str, str]]:
@@ -180,41 +196,6 @@ def _bounded_read(
         raw_socket.settimeout(previous_timeout)
 
 
-def _nested_output_text(value: object) -> list[tuple[dict[str, object], str]]:
-    found: list[tuple[dict[str, object], str]] = []
-    if isinstance(value, dict):
-        if value.get("type") == "output_text" and isinstance(value.get("text"), str):
-            found.append((value, str(value["text"])))
-        for child in value.values():
-            found.extend(_nested_output_text(child))
-    elif isinstance(value, list):
-        for child in value:
-            found.extend(_nested_output_text(child))
-    return found
-
-
-def _assistant_output_texts(value: dict[str, object]) -> list[dict[str, object]]:
-    response = value.get("response")
-    if not isinstance(response, dict) or not isinstance(response.get("output"), list):
-        return []
-    fields: list[dict[str, object]] = []
-    for item in response["output"]:
-        if (
-            not isinstance(item, dict)
-            or item.get("type") != "message"
-            or item.get("role") != "assistant"
-        ):
-            continue
-        content = item.get("content")
-        if isinstance(content, list):
-            fields.extend(
-                part
-                for part in content
-                if isinstance(part, dict) and part.get("type") == "output_text"
-            )
-    return [field for field in fields if isinstance(field.get("text"), str)]
-
-
 def _render_event(block: str, value: dict[str, object]) -> str:
     lines = block.splitlines()
     data_index = next((index for index, line in enumerate(lines) if line.startswith("data:")), None)
@@ -229,60 +210,411 @@ def _render_event(block: str, value: dict[str, object]) -> str:
     return "\n".join(lines)
 
 
+# Sentinel for a stream-event ownership position that is absent (distinct
+# from a declared null, which is inconsistent and abstains).
+_UNSET: object = object()
+
+
 def transform_sse(raw: bytes, repair: Callable[[str], str]) -> tuple[bytes, bool]:
-    """Repair only assistant output text while retaining every SSE block."""
+    """Repair one unambiguously identified assistant text answer only.
+
+    Ownership is prefetched across the whole completed upstream SSE before
+    any repair call: the delta layer (stream item ids and the positions the
+    stream events themselves declare) and every terminal representation
+    that carries the answer (``output_text.done`` events, ``content_part.done``
+    output_text parts, message-typed ``output_item.done`` items, and the
+    ``output_text`` part in the completed ``response.output``).  Several
+    assistant text answers/items/content parts, a completed envelope that
+    does not exactly confirm the single delta answer, stream-declared
+    indices that contradict the completed list positions, a terminal copy
+    that cannot be proved consistent (different text, role, status,
+    identity, index, content cardinality/kinds, a duplicated terminal
+    representation, or a missing/null/non-string id), or otherwise
+    ambiguous target ownership bypass repair unchanged with zero review
+    calls (order 014-a requirement 8; order 014-b requirements 2-4).
+
+    The editable fields are collected as explicit event references during
+    the preflight, and the renderer mutates only those: it never iterates
+    the output_text nodes of a matching-id object after repair, never
+    recurses into metadata, and never matches substrings or identical
+    values (no ID coercion, no value-based recovery).  Every
+    ``output_text.delta`` payload must be a string (an empty string is a
+    valid no-op): a delta event whose payload is missing or non-string is
+    a malformed answer event and abstains raw unchanged with zero calls.
+    Initial ``added`` events are supported only as empty placeholders:
+    their ownership (typed confirmed id) and, for message items, the
+    assistant role are validated, their protected content is never
+    rewritten, and any non-empty initial content - which cannot be proved
+    safe - abstains raw unchanged with zero calls.  When the review accepts no text edit
+    the raw bytes are returned unchanged (order 014-a requirement 7).
+    """
     blocks = _split_sse(raw)
     parsed: list[dict[str, object] | None] = [_event(block) for block, _ in blocks]
     streams: dict[str, list[str]] = {}
+    # Positions declared by the stream events themselves: text delta/done
+    # events and content-part added/done events carry ``item_id`` plus
+    # ``output_index``/``content_index`` in the documented Responses
+    # stream.  Those declared positions are authoritative for ownership;
+    # optional indices on the final message/part are only an additional
+    # consistency constraint, never a substitute.
+    declared: dict[str, list[tuple[object, object]]] = {}
+    # A delta/done event whose ``item_id`` is missing, non-string or empty
+    # does not identify an answer, and an answer-shaped content part or
+    # message item without a typed nonempty id is an unowned terminal copy.
+    # Such a stream carries ambiguous ownership and abstains instead of
+    # being coerced to an invented id.
+    ownership_invalid = False
+    # Every answer-related stream event (text delta/done, output-text
+    # content-part added/done, message-typed output-item added/done) must
+    # belong to the single confirmed answer; any other id abstains.
+    answer_event_ids: set[str] = set()
     for value in parsed:
-        if value is not None and value.get("type") == "response.output_text.delta":
+        if value is None:
+            continue
+        event_type = value.get("type")
+        if event_type in (
+            "response.output_text.delta",
+            "response.output_text.done",
+            "response.content_part.added",
+            "response.content_part.done",
+        ):
+            stream_id = value.get("item_id")
+            if type(stream_id) is not str or not stream_id:
+                if event_type in ("response.output_text.delta", "response.output_text.done"):
+                    ownership_invalid = True
+                elif (
+                    isinstance((stream_part := value.get("part")), dict)
+                    and stream_part.get("type") == "output_text"
+                ):
+                    # An answer-shaped content part that cannot identify
+                    # its owner is an unowned terminal copy.
+                    ownership_invalid = True
+                continue
+            part = value.get("part")
+            answer_part = (
+                event_type.startswith("response.content_part.")
+                and isinstance(part, dict)
+                and part.get("type") == "output_text"
+            )
+            if event_type.startswith("response.output_text.") or answer_part:
+                answer_event_ids.add(stream_id)
+            if "output_index" in value or "content_index" in value:
+                declared.setdefault(stream_id, []).append(
+                    (value.get("output_index", _UNSET), value.get("content_index", _UNSET))
+                )
+        elif event_type in ("response.output_item.added", "response.output_item.done"):
+            item_obj = value.get("item")
+            if isinstance(item_obj, dict):
+                obj_id = item_obj.get("id")
+                if item_obj.get("type") == "message":
+                    if type(obj_id) is not str or not obj_id:
+                        # An answer-shaped message item without a typed id
+                        # is an unowned terminal representation.
+                        ownership_invalid = True
+                        continue
+                    answer_event_ids.add(obj_id)
+                if type(obj_id) is str and obj_id and "output_index" in value:
+                    declared.setdefault(obj_id, []).append((value["output_index"], _UNSET))
+        if event_type == "response.output_text.delta":
             delta = value.get("delta")
-            if isinstance(delta, str):
-                item_id = str(value.get("item_id", "__single__"))
-                streams.setdefault(item_id, []).append(delta)
-    repaired: dict[str, str] = {}
-    for item_id, parts in streams.items():
-        repaired[item_id] = repair("".join(parts))
-    direct_repaired: list[tuple[dict[str, object], str]] = []
-    if not streams:
-        for value in parsed:
-            if value is not None and value.get("type") == "response.completed":
-                for field in _assistant_output_texts(value):
-                    original = str(field["text"])
-                    changed = repair(original)
-                    field["text"] = changed
-                    direct_repaired.append((field, original))
-    if not streams and not direct_repaired:
+            if type(delta) is not str:
+                # A delta event whose payload is missing or non-string is a
+                # malformed answer event: the stream carries ambiguous
+                # content and abstains instead of being partially collected.
+                ownership_invalid = True
+                continue
+            stream_id = value.get("item_id")
+            if type(stream_id) is str and stream_id:
+                streams.setdefault(stream_id, []).append(delta)
+    if ownership_invalid:
+        # Answer-related events with missing, non-string or empty ids (or
+        # unowned answer-shaped terminal copies) carry ambiguous ownership:
+        # bypass unchanged with zero review calls.
         return raw, False
-    output: list[str] = []
-    used_first: set[str] = set()
-    for (block, delimiter), value in zip(blocks, parsed, strict=True):
-        if value is not None:
-            event_type = value.get("type")
-            item_id = str(value.get("item_id", "__single__"))
-            if event_type == "response.output_text.delta" and item_id in repaired:
-                value["delta"] = repaired[item_id] if item_id not in used_first else ""
-                used_first.add(item_id)
-            elif event_type == "response.output_text.done" and item_id in repaired:
-                value["text"] = repaired[item_id]
-            else:
-                for field, old in _nested_output_text(value):
-                    for item_id, parts in streams.items():
-                        if old == "".join(parts):
-                            field["text"] = repaired[item_id]
-            if event_type == "response.completed" and direct_repaired:
-                # Direct fields were mutated above; this branch preserves their event.
-                pass
-            if event_type in {
-                "response.output_text.delta",
-                "response.output_text.done",
-                "response.completed",
-            } or any(
-                old == "".join(streams[item_id])
-                for _field, old in _nested_output_text(value)
-                for item_id in streams
+    # Completed-envelope answer units: every output_text part of any message
+    # item in any response.output, with list ownership positions.
+    # Output messages are identified by ``id`` (delta/done events carry
+    # ``item_id``); ``output_index``/``content_index`` are optional but must
+    # be consistent when present.
+    units: list[tuple[int, int, dict[str, object], int, dict[str, object]]] = []
+    for index, value in enumerate(parsed):
+        if value is None or value.get("type") != "response.completed":
+            continue
+        response = value.get("response")
+        if not isinstance(response, dict):
+            continue
+        final_output = response.get("output")
+        if not isinstance(final_output, list):
+            continue
+        for output_pos, item in enumerate(final_output):
+            if not isinstance(item, dict) or item.get("type") != "message":
+                continue
+            content = item.get("content")
+            if not isinstance(content, list):
+                continue
+            for content_pos, part in enumerate(content):
+                if (
+                    isinstance(part, dict)
+                    and part.get("type") == "output_text"
+                    and isinstance(part.get("text"), str)
+                ):
+                    units.append((index, output_pos, item, content_pos, part))
+
+    def ownership_consistent(
+        output_pos: int, item: dict[str, object], content_pos: int, part: dict[str, object]
+    ) -> bool:
+        declared_output = item.get("output_index")
+        output_ok = declared_output is None or (
+            type(declared_output) is int and declared_output == output_pos
+        )
+        declared_content = part.get("content_index")
+        content_ok = declared_content is None or (
+            type(declared_content) is int and declared_content == content_pos
+        )
+        return output_ok and content_ok
+
+    def stream_positions_consistent(
+        item_id: str, output_pos: int, content_pos: int
+    ) -> bool:
+        # Every stream event for this item that declares an ownership
+        # position must declare it as an integer matching the actual final
+        # list position; a null or contradictory declaration abstains.
+        for declared_output, declared_content in declared.get(item_id, ()):
+            if declared_output is not _UNSET and (
+                type(declared_output) is not int or declared_output != output_pos
             ):
-                block = _render_event(block, value)
+                return False
+            if declared_content is not _UNSET and (
+                type(declared_content) is not int or declared_content != content_pos
+            ):
+                return False
+        return True
+
+    non_empty = [item_id for item_id, parts in streams.items() if "".join(parts)]
+    unit_index: int
+    unit_item: dict[str, object]
+    unit_part: dict[str, object]
+    confirmed_id: str
+    original_text: str
+    if non_empty:
+        if len(non_empty) != 1:
+            # Several assistant text answers: ambiguous ownership.
+            return raw, False
+        item_id = non_empty[0]
+        if not answer_event_ids <= {item_id}:
+            # An answer event for another id: ambiguous ownership.
+            return raw, False
+        joined = "".join(streams[item_id])
+        # Exactly one confirming final assistant output_text with consistent
+        # ownership is required before any repair call: the final message id
+        # equals the stream item id, the text matches, and every position
+        # declared by the stream events equals the actual final list
+        # positions.  An unconfirmed completed answer (absent or several
+        # units, wrong id, inconsistent indices, or mismatched text)
+        # bypasses unchanged with zero calls.
+        if len(units) != 1:
+            return raw, False
+        unit_index, output_pos, unit_item, content_pos, unit_part = units[0]
+        message_id = unit_item.get("id")
+        confirmed = (
+            ownership_consistent(output_pos, unit_item, content_pos, unit_part)
+            and stream_positions_consistent(item_id, output_pos, content_pos)
+            and unit_item.get("role") == "assistant"
+            and type(message_id) is str
+            and message_id == item_id
+            and unit_part["text"] == joined
+        )
+        if not confirmed:
+            return raw, False
+        confirmed_id = item_id
+        original_text = joined
+    else:
+        assistant_units = [
+            unit for unit in units if unit[2].get("role") == "assistant"
+        ]
+        if len(assistant_units) != 1 or len(units) != 1:
+            # No unambiguous single assistant answer (several answers,
+            # several content parts, or non-answer content): bypass.
+            return raw, False
+        unit_index, output_pos, unit_item, content_pos, unit_part = assistant_units[0]
+        message_id = unit_item.get("id")
+        if (
+            type(message_id) is not str
+            or not message_id
+            or not ownership_consistent(output_pos, unit_item, content_pos, unit_part)
+            or not stream_positions_consistent(message_id, output_pos, content_pos)
+            or not answer_event_ids <= {message_id}
+        ):
+            # Absent or inconsistent ownership: bypass unchanged.
+            return raw, False
+        confirmed_id = message_id
+        original_text = str(unit_part["text"])
+
+    # Order 014-b requirement 2/3: before any reviewer side effect, every
+    # answer-bearing terminal representation must be proved consistent with
+    # the one final assistant answer (same exact typed id, same final
+    # positions, expected part kind / item role / status / content
+    # cardinality and kinds, and the exact original answer text).  Any copy
+    # that cannot be proved consistent makes the whole SSE ineligible:
+    # return the raw original with zero calls, never keep one edited
+    # representation beside an incompatible original copy.  The validated
+    # editable fields are collected here, as explicit event references, and
+    # are the only ones the renderer below may mutate.
+    final_content = unit_item["content"]
+    if not isinstance(final_content, list):
+        # Units are only collected from a list content above; this keeps the
+        # preflight's typed boundary explicit.
+        return raw, False
+    final_kinds = [
+        part.get("type") if isinstance(part, dict) else None for part in final_content
+    ]
+    # event index -> ("part" | "item" | "done", content position)
+    editable: dict[int, tuple[str, int | None]] = {}
+    delta_indices: set[int] = set()
+    copy_counts = {"output_text.done": 0, "content_part.done": 0, "output_item.done": 0}
+    for index, value in enumerate(parsed):
+        if value is None or index == unit_index:
+            continue
+        event_type = value.get("type")
+        stream_id = value.get("item_id")
+        if event_type == "response.output_text.delta":
+            if type(stream_id) is str and stream_id == confirmed_id:
+                delta_indices.add(index)
+        elif event_type == "response.content_part.added":
+            part = value.get("part")
+            if not (isinstance(part, dict) and part.get("type") == "output_text"):
+                # Non-answer part: recognized bookkeeping, never touched.
+                continue
+            # An initial added part is a supported empty placeholder only:
+            # its ownership is validated here, its protected content is
+            # never rewritten, and non-empty initial content cannot be
+            # proved safe, so it abstains raw unchanged with zero calls.
+            if type(stream_id) is not str or stream_id != confirmed_id:
+                return raw, False
+            if "text" in part and part["text"] != "":
+                return raw, False
+        elif event_type == "response.output_item.added":
+            item_obj = value.get("item")
+            if not (isinstance(item_obj, dict) and item_obj.get("type") == "message"):
+                # Non-message item: recognized non-answer bookkeeping.
+                continue
+            obj_id = item_obj.get("id")
+            if type(obj_id) is not str or obj_id != confirmed_id:
+                return raw, False
+            # The initial representation of the answer item must agree on
+            # identity and role and carry supported empty placeholders only.
+            if item_obj.get("role") != "assistant":
+                return raw, False
+            content = item_obj.get("content")
+            if content is not None:
+                if not isinstance(content, list):
+                    return raw, False
+                for part in content:
+                    if not isinstance(part, dict) or (
+                        "text" in part and part["text"] != ""
+                    ):
+                        return raw, False
+        elif event_type == "response.output_text.done":
+            if type(stream_id) is not str or stream_id != confirmed_id:
+                continue
+            copy_counts["output_text.done"] += 1
+            if value.get("text") != original_text:
+                # A terminal done event must carry the exact original
+                # answer text; a missing or different text cannot be
+                # proved consistent.
+                return raw, False
+            editable[index] = ("done", None)
+        elif event_type == "response.content_part.done":
+            part = value.get("part")
+            if not (isinstance(part, dict) and part.get("type") == "output_text"):
+                # Non-answer part: recognized bookkeeping, never touched.
+                continue
+            # A different valid id already failed the membership check
+            # above; a missing or non-string id returned earlier.  Kept as
+            # an explicit defense of the ownership rule.
+            if type(stream_id) is not str or stream_id != confirmed_id:
+                return raw, False
+            copy_counts["content_part.done"] += 1
+            if part.get("text") != original_text:
+                return raw, False
+            editable[index] = ("part", None)
+        elif event_type == "response.output_item.done":
+            item_obj = value.get("item")
+            if not (isinstance(item_obj, dict) and item_obj.get("type") == "message"):
+                # Non-message item (e.g. reasoning or tool bookkeeping):
+                # recognized non-answer bookkeeping, never touched.
+                continue
+            obj_id = item_obj.get("id")
+            if type(obj_id) is not str or obj_id != confirmed_id:
+                return raw, False
+            copy_counts["output_item.done"] += 1
+            if item_obj.get("role") != "assistant":
+                return raw, False
+            if "status" in item_obj and item_obj.get("status") != "completed":
+                return raw, False
+            content = item_obj.get("content")
+            if not isinstance(content, list) or len(content) != len(final_content):
+                return raw, False
+            for part_pos, part in enumerate(content):
+                if not isinstance(part, dict) or part.get("type") != final_kinds[part_pos]:
+                    return raw, False
+            if content[content_pos].get("text") != original_text:
+                return raw, False
+            editable[index] = ("item", content_pos)
+    if any(count > 1 for count in copy_counts.values()):
+        # Duplicated terminal representations of the one answer are
+        # ambiguous: bypass unchanged with zero calls.
+        return raw, False
+
+    new_text = repair(original_text)
+    if new_text == original_text:
+        # No accepted text edit: the raw bytes are returned unchanged.
+        return raw, False
+
+    # The validated final unit (a shared reference into the parsed events)
+    # carries the repaired text; the render pass re-emits exactly the
+    # collected editable references plus the confirmed delta events.
+    unit_part["text"] = new_text
+    output: list[str] = []
+    delta_done = False
+    for (block, delimiter), value, index in zip(blocks, parsed, range(len(blocks)), strict=True):
+        if value is None:
+            output.append(block + delimiter)
+            continue
+        re_render = index == unit_index
+        kind = editable.get(index)
+        if kind is not None:
+            kind_name, copy_pos = kind
+            if kind_name == "done":
+                value["text"] = new_text
+                re_render = True
+            elif kind_name == "part":
+                part = value.get("part")
+                if isinstance(part, dict):
+                    part["text"] = new_text
+                    re_render = True
+            else:
+                item_obj = value.get("item")
+                if isinstance(item_obj, dict) and type(copy_pos) is int:
+                    content = item_obj.get("content")
+                    if isinstance(content, list):
+                        part = content[copy_pos]
+                        if isinstance(part, dict):
+                            part["text"] = new_text
+                            re_render = True
+        elif index in delta_indices:
+            # The first non-empty delta of the confirmed answer carries the
+            # full repaired text; every later delta is emptied so the answer
+            # is not duplicated.  Only the explicitly validated confirmed id
+            # is ever mutated; only genuine string payloads are touched and
+            # empty text events stay untouched.
+            delta = value.get("delta")
+            if type(delta) is str and delta:
+                value["delta"] = new_text if not delta_done else ""
+                delta_done = True
+                re_render = True
+        if re_render:
+            block = _render_event(block, value)
         output.append(block + delimiter)
     return "".join(output).encode("utf-8"), True
 
@@ -292,6 +624,18 @@ class Forwarded:
     status: int
     body: bytes
     content_type: str
+
+
+@dataclass(frozen=True)
+class _PreparedCandidate:
+    """A detector candidate with its validated neighbor context, in the
+    deterministic original order used for batch target alignment."""
+
+    candidate: Candidate
+    left: str | None
+    right: str | None
+    left_bounds: tuple[int, int] | None
+    right_bounds: tuple[int, int] | None
 
 
 @dataclass
@@ -338,6 +682,12 @@ class RepairEngine:
                         "repair_seconds": round(time.monotonic() - raw_started, 6),
                     },
                     "protected_difference_count": 0,
+                    "review_batch": {
+                        "calls": 0,
+                        "targets": 0,
+                        "outcome": "skipped",
+                        "reason": None,
+                    },
                     "protection_failure": {
                         "reason": reason or "PANDOC_PROTECTION",
                         "detail": detail[:256],
@@ -370,67 +720,146 @@ class RepairEngine:
             candidates = detect(text, corpus, intervals, mode=self.mode, maximum=4)
             detector_seconds = time.monotonic() - detector_started
             tokens = tokenize(text, intervals)
-            decisions: list[dict[str, object]] = []
-            edits: list[tuple[int, int, str]] = []
-            reviewer_seconds = 0.0
+            prepared: list[_PreparedCandidate] = []
+            selected_invalid = False
             for candidate in candidates:
                 token_index = next(
-                    (i for i, token in enumerate(tokens) if token.start == candidate.start), None
+                    (i for i, token in enumerate(tokens) if token.start == candidate.start),
+                    None,
                 )
                 if token_index is None:
-                    continue
-                left = tokens[token_index - 1].key if token_index else None
-                right = tokens[token_index + 1].key if token_index + 1 < len(tokens) else None
-                left_bounds = (
-                    (tokens[token_index - 1].start, tokens[token_index - 1].end)
-                    if token_index
-                    else None
+                    # A detected occurrence whose start matches no token is
+                    # invalid/stale selection: the whole answer returns the
+                    # completed original with zero calls, never a valid
+                    # subset (order 014-a, requirement 2).
+                    selected_invalid = True
+                    break
+                prepared.append(
+                    _PreparedCandidate(
+                        candidate,
+                        left=tokens[token_index - 1].key if token_index else None,
+                        right=tokens[token_index + 1].key
+                        if token_index + 1 < len(tokens)
+                        else None,
+                        left_bounds=(
+                            (tokens[token_index - 1].start, tokens[token_index - 1].end)
+                            if token_index
+                            else None
+                        ),
+                        right_bounds=(
+                            (tokens[token_index + 1].start, tokens[token_index + 1].end)
+                            if token_index + 1 < len(tokens)
+                            else None
+                        ),
+                    )
                 )
-                right_bounds = (
-                    (tokens[token_index + 1].start, tokens[token_index + 1].end)
-                    if token_index + 1 < len(tokens)
-                    else None
+            # Bounded review budget: at most one fresh batch request per
+            # completed answer (order 014-a, requirements 2-4 and 7).
+            review_batch: dict[str, object] = {
+                "calls": 0,
+                "targets": len(candidates) if selected_invalid else len(prepared),
+                "outcome": "skipped",
+                "reason": REASON_PREP_INVALID if selected_invalid else None,
+            }
+            proposals: dict[str, BatchProposal] | None = None
+            aligned: list[str] | None = None
+            reviewer_seconds = 0.0
+            if prepared and not selected_invalid:
+                occurrences = tuple(
+                    (item.candidate.start, item.candidate.end, item.candidate.text)
+                    for item in prepared
                 )
+                protected = tuple((item.start, item.end) for item in intervals)
+                targets = prepare_targets(text, occurrences, protected)
+                if targets is None:
+                    # Invalid/stale/protected/oversized batch preparation:
+                    # completed original with zero calls.
+                    review_batch["reason"] = REASON_PREP_INVALID
+                elif build_prompt(targets) is None:
+                    review_batch["targets"] = len(targets)
+                    review_batch["reason"] = REASON_PROMPT_OVERSIZE
+                else:
+                    batch_started = time.monotonic()
+                    try:
+                        proposals = self.reviewer.review_batch(text, targets)
+                    except Exception as exc:
+                        # Only the closed vocabulary of fixed labels is
+                        # trusted; anything else maps to REVIEW_FAILED so
+                        # untrusted exception content never reaches traces.
+                        # (type guard first: an unhashable reason must not
+                        # raise inside this fallback path.)
+                        reason = getattr(exc, "reason", None)
+                        if type(reason) is not str or reason not in BOUND_REVIEW_REASONS:
+                            reason = REASON_FAILED
+                        review_batch["targets"] = len(targets)
+                        review_batch["outcome"] = "failed"
+                        review_batch["reason"] = reason
+                        review_batch["calls"] = (
+                            0
+                            if reason in (REASON_PROMPT_OVERSIZE, REASON_REQUEST_OVERSIZE)
+                            else 1
+                        )
+                    else:
+                        aligned = [target.id for target in targets]
+                        review_batch["targets"] = len(targets)
+                        review_batch["outcome"] = "ok"
+                        review_batch["calls"] = 1
+                    finally:
+                        reviewer_seconds = time.monotonic() - batch_started
+            decisions: list[dict[str, object]] = []
+            edits: list[tuple[int, int, str]] = []
+            for index, item in enumerate(prepared):
+                candidate = item.candidate
                 review_started = time.monotonic()
-                proposal: dict[str, object] | None = None
+                proposal_record: dict[str, object] | None = None
                 acceptance: dict[str, object] = {
                     "accepted": False,
                     "reason": "reviewer-error",
                     "replacement": None,
                 }
                 failure: str | None = None
-                try:
-                    value = self.reviewer.review(text, candidate.text)
-                    proposal = {
-                        "keep": value.keep,
-                        "replacement": value.replacement,
-                        "needs_wider_edit": value.needs_wider_edit,
-                    }
-                    decision = accept(
-                        text,
-                        candidate,
-                        value,
-                        corpus,
-                        intervals,
-                        left=left,
-                        right=right,
-                        left_bounds=left_bounds,
-                        right_bounds=right_bounds,
-                    )
-                    acceptance = {
-                        "accepted": decision.accepted,
-                        "reason": decision.reason,
-                        "replacement": decision.replacement,
-                    }
-                except Exception:
+                if aligned is not None and proposals is not None:
+                    batch_proposal = proposals[aligned[index]]
+                    try:
+                        value = Proposal(
+                            batch_proposal.keep,
+                            batch_proposal.replacement,
+                            batch_proposal.needs_wider_edit,
+                        )
+                        proposal_record = {
+                            "keep": value.keep,
+                            "replacement": value.replacement,
+                            "needs_wider_edit": value.needs_wider_edit,
+                        }
+                        decision = accept(
+                            text,
+                            candidate,
+                            value,
+                            corpus,
+                            intervals,
+                            left=item.left,
+                            right=item.right,
+                            left_bounds=item.left_bounds,
+                            right_bounds=item.right_bounds,
+                        )
+                        acceptance = {
+                            "accepted": decision.accepted,
+                            "reason": decision.reason,
+                            "replacement": decision.replacement,
+                        }
+                    except Exception:
+                        # Individual isolation: a failed acceptance never
+                        # invalidates the other independent proposals.
+                        failure = "reviewer-error"
+                else:
+                    # Whole-batch failure: byte-exact original, no edit.
                     failure = "reviewer-error"
-                reviewer_seconds += time.monotonic() - review_started
                 decisions.append(
                     {
                         "candidate": candidate.as_dict(),
                         "evidence": candidate.evidence,
-                        "neighbors": {"left": left, "right": right},
-                        "proposal": proposal,
+                        "neighbors": {"left": item.left, "right": item.right},
+                        "proposal": proposal_record,
                         "acceptance": acceptance,
                         "failure": failure,
                         "timing_seconds": round(time.monotonic() - review_started, 6),
@@ -469,6 +898,7 @@ class RepairEngine:
                         "repair_seconds": round(time.monotonic() - raw_started, 6),
                     },
                     "protected_difference_count": protected_changes,
+                    "review_batch": review_batch,
                 }
             )
         return repaired
@@ -650,10 +1080,13 @@ def main() -> int:
         check_pandoc(pandoc_spec)
     except PandocStartupError as exc:
         raise SystemExit(f"pandoc startup failure: {exc.reason}: {exc.detail}") from None
+    # The reviewer is bounded by the ordered finite 15-second cap; the
+    # upstream capture timeout (CONCEPT_TIMEOUT) is a separate axis and
+    # must not extend reviewer calls (order 014-a, requirement 4).
     reviewer = ResponsesReviewer(
         os.environ.get("CONCEPT_REVIEWER_URL", "http://127.0.0.1:8001/v1"),
         os.environ.get("CONCEPT_REVIEWER_MODEL", "Qwen3.8-27B"),
-        timeout=float(os.environ.get("CONCEPT_TIMEOUT", "30")),
+        timeout=REVIEWER_HTTP_TIMEOUT_SECONDS,
         profile=os.environ.get("CONCEPT_REVIEWER_PROFILE"),
     )
     trace_value = os.environ.get("CONCEPT_TRACE_DIR")

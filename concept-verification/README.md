@@ -163,3 +163,122 @@ reviewer calls; upstream capture errors remain errors.
 
 This is runnable-proxy engineering evidence only. It establishes no
 linguistic, experimental-MVP, or deployment acceptance.
+
+## Bounded occurrence-addressed reviewer batch (order 014-a)
+
+The runtime `RepairEngine` now uses one versioned, occurrence-addressed
+reviewer batch per completed eligible answer: `batch-v1`. The historical
+single-target prompt, `Proposal`/`parse_proposal`, and the frozen research
+evaluator API remain byte-identical and unchanged; the engine never falls
+back to a per-target single-target call loop.
+
+Target preparation is CPU-owned and fail-closed: at most the existing four
+selected non-overlapping detector targets, in deterministic original order,
+each assigned a stable response-local id (`t0..tN`). Every occurrence is
+validated for `0 <= start < end <= len(original)`, exact original-slice
+equality (a stale occurrence is never relocated by first-substring
+matching), no overlap or protected intersection, grapheme-safe slice and
+boundaries, and a target of at most 128 code points. Repeated text therefore
+has separate ids and exact per-occurrence context. Any invalid, stale, or
+oversized preparation returns the completed original with zero review calls.
+
+Per-occurrence context is a documented fixed window of 240 original code
+points before and after the target, with exact boundaries and explicit
+`truncated_before`/`truncated_after` flags when the window reaches the
+document edge; a truncated window is never presented as a complete sentence.
+The prompt is one explicit instruction plus exactly one serialized JSON
+object (`{"version":"batch-v1","targets":[...]}`): targets and their context
+are data, not instructions. The instruction preserves the agreed
+natural-appropriate-choice question, explicitly allows keep, uncertainty
+(wider edit), and a more natural appropriate replacement, and rejects
+stylistic-only and factual changes. Selection ids and original coordinates
+remain CPU-owned; the model returns only ids and proposals.
+
+Finite limits (constants in `config.py`, enforced before dispatch and before
+any mutation): at most 4 items; target at most 128 code points; context 240
+code points per side; prompt at most 8192 code points; request at most 32768
+UTF-8 bytes; response at most 32768 bytes; proposal JSON at most 8192 code
+points; `max_output_tokens` 1536; replacement at most 8 words / 128 code
+points; the ordered finite 15-second reviewer HTTP timeout (the
+operator-configured upstream capture timeout stays separate and never
+extends reviewer calls); no retries. Code-point and byte counts are distinct
+quantities. Unsupported oversized target or prompt preparation returns the
+original with zero calls; oversized reviewer output returns the original
+after one call. Model output is never silently truncated.
+
+Transport: one fresh nonstreaming `store:false` request directly to the
+configured private Responses endpoint with explicitly bounded model output.
+No tools or images, no main credentials copied from inbound headers, no
+linkage ids or history, no constitutional context, no caller-selected URL,
+no recursive repair route. The operator-configured reviewer credential
+mechanism is reused without reading or logging real values in tests.
+
+Strict parsing: duplicate keys are rejected, never collapsed last-wins, at
+both the outer envelope and the inner proposal level. Only a supported
+successful completed reviewer envelope with exactly one assistant
+`output_text` is accepted as success; tool, refusal, or incomplete output is
+not success. The inner object must carry version `batch-v1` with exact keys
+and exactly one result for every supplied id (no duplicate, unknown, or
+missing id), exact booleans, keep ⇒ null replacement, wider ⇒ keep + null
+replacement, replace ⇒ nonempty bounded string + wider false. Unknown fields
+or version, malformed, fenced, or trailing output, null/bool/type
+mismatches, nonfinite numbers, and oversized output reject the whole batch.
+Partial JSON is never salvaged and no second call is made. Response order
+may differ; results are mapped by validated id, never by array position.
+
+Whole-batch versus individual rejection: any batch-level error, timeout,
+non-200, invalid encoding, schema violation, or duplicate id returns the
+byte-exact original after at most one request, with no retry and no
+partially accepted edit. Structurally valid proposals rejected by current
+corpus/lexicon evidence (including the barrier-aware neighbor checks) remain
+individual rejections, while other independent valid proposals in the same
+batch proceed. Keep and wider edits are no-ops. Original-slice patching and
+protected-slice invariants are unchanged.
+
+One-answer SSE eligibility: a completed upstream SSE representing several
+assistant text answers/items/content parts, or otherwise ambiguous target
+ownership, bypasses repair unchanged with zero review calls. Review covers
+only one unambiguously identified assistant text answer; the per-answer
+review budget is at most one batch, never reset per field, and several
+answers are never collapsed into one string or picked first. Established
+valid single-answer SSE behavior is preserved; unknown or ambiguous shapes
+may abstain.
+
+Terminal answer copies (order 014-b): before any reviewer call, a
+preflight proves every answer-bearing terminal representation consistent
+with the one confirmed answer - the same exact typed id, final list
+positions, assistant role, completed status, content cardinality and part
+kinds, and the exact original answer text across `output_text.done`,
+`content_part.done`, and message-typed `output_item.done` copies (at most
+one of each kind). Initial `added` events are supported only as empty
+placeholders: their ownership (the typed confirmed id) and, for message
+items, the assistant role are validated, and their content is never
+rewritten. Every `output_text.delta` payload must be a string (an empty
+string is a valid no-op). Any copy that cannot be proved consistent -
+different text, role, status, index, or cardinality; a duplicated
+terminal copy; a missing/null/non-string id; an answer event for another
+id; or non-empty initial content - abstains with the raw original bytes
+and zero review calls. The renderer then mutates only the explicit event
+references collected during that preflight: the confirmed final answer,
+each validated terminal copy, and the confirmed delta events (the first
+non-empty delta carries the full repaired text, later deltas are
+emptied). No value matching, no id coercion, no metadata traversal.
+Order 014-a's A4 proof established that nominal terminal copies are
+updated consistently through explicit validated paths; it did not prove
+that contradictory, unowned, or duplicated terminal copies are rejected.
+Two distinct 014-a failure modes were observed at the published head:
+same-ID contradictory or extra terminal copies were blindly rewritten to
+the repaired text (the extra or conflicting content was modified), while
+unowned terminal copies (a missing or non-string id) were left unchanged
+beside an edited final answer. The 014-b preflight rejects both: every
+terminal representation is proved consistent before any reviewer call, and
+any copy that cannot be proved consistent abstains with the raw original
+and zero review calls, so the negative matrix - direct transform plus the
+full actual HTTP chain - proves the rejection. The 014-a report remains
+unchanged.
+
+Trace additions are bounded to a per-answer `review_batch` record: fixed
+call count, target count, outcome, and reason labels only. No raw prompts,
+responses, or untrusted exception text is logged. This is runnable-proxy
+engineering evidence only; it establishes no linguistic, experimental-MVP,
+or deployment acceptance.
