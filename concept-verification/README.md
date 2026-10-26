@@ -91,3 +91,75 @@ directory. Raw traces remain under the explicitly configured local trace root,
 and tracing disabled writes nothing. A missing endpoint or invalid invocation
 is recorded once as an external availability/protocol failure, not converted
 into a quality success.
+
+## Structural protection (Pandoc, order 013-a)
+
+The runnable proxy's structural protection is mandatory installed Pandoc with
+exact original spans. There is no regex-only runtime structural path and no
+historical pulldown-cmark discovery or fallback on the proxy path; the frozen
+research trail that used pulldown-cmark remains separate and unchanged.
+
+Dependency and startup: the pinned version is `3.7.0.2` (see
+`pandoc-dependency.json`: official Linux amd64 release archive, exact byte
+count and locally computed SHA-256, not an upstream signature attestation).
+The binary resolves from `CONCEPT_PANDOC`, then PATH (`pandoc`), and is
+checked at startup - before the proxy binds any traffic - for executable
+presence, exact version, and reader capability. `install_pandoc.sh` installs
+the pinned archive into an owned absolute prefix (its first argument,
+defaulting to `~/.local/share/concept-verification/pandoc-3.7.0.2`; no sudo,
+no system replacement, no writes outside the prefix, no runtime downloads).
+A missing, wrong-version, or capability-failing binary rejects the proxy
+startup with a finite reason.
+
+Reader profile and coordinates: the fixed profile is the
+`commonmark_x+sourcepos-smart` reader with the `json` writer; no dialect drift
+is permitted. Source positions are 1-based line/column pairs over the
+NFC-normalized document with Unicode code-point columns (a tab starting at
+column `c` advances the next code point to column `((c - 1) // 4 + 1) * 4 + 1`,
+as observed with the pinned binary). Position provenance is established per
+node: only machine-generated positions are trusted; a user `data-pos`
+conflicting with a generated position defeats provenance for that node only,
+while an identical duplicate is a no-op; duplicates are never collapsed or
+resolved last-wins. Documents without a final newline exhibit container
+endpoints beyond the last line (column 1; observed at `L+1` for paragraphs
+and `L+2` for a one-line list); such endpoints are never editable leaf
+coordinates and are never granted. Multi-line positions belong to containers
+and are never granted.
+
+Deny by default: only `Str` leaf spans whose position is proven against the
+unmodified original are granted as editable prose - valid coordinates, exact
+original-slice equality, grapheme-safe content and boundaries, and an
+NFC-stable line. Whitespace glue is granted only between two granted,
+contiguous prose spans in one proven shared prose context. Everything else is
+protected: code, equations, HTML (including inner text between raw inline
+tags), links and images including labels, configuration, metadata, markers,
+soft breaks, escapes, entities, and every unprovable region. The established
+pure research residual policy is then reused as additional conservative
+protection (imported as a pure function; no helper discovery), including a
+bounded proxy-side addition for unterminated prose-form TeX: any opener with
+no closing sequence anywhere later protects to end of line. Residual matches
+overlapping granted prose are retained in full.
+
+Documented conservative abstentions (proven input subset): a span containing
+an unproved grapheme-sensitive code point (C0/C1 controls, DEL, NEL, LS, PS,
+unproved combining marks, variation selectors, ZWJ/ZWNJ) is never granted; a
+non-NFC line abstains for that line; unpaired quotation interiors, HTML
+fragment depth, and unterminated TeX stay protected; CR (bare or as CRLF) is
+a control character, so a span containing it is never granted while the
+surrounding NFC-stable prose on each side may still be granted (the line
+break itself stays protected); and a document whose NFC decomposition cannot
+be mapped line-exactly fails closed. Whole-document failure returns the exact
+completed original with zero review calls.
+
+Bounded failure behavior: finite input/output/timeout/node limits; subprocess
+argv without shell; no untrusted filters or file/network reads; bounded
+non-content diagnostics. Startup failures (not found, not executable, wrong
+version, reader capability) reject the proxy before any traffic is accepted,
+and the version is not rechecked per answer. Runtime failures (timeout,
+nonzero exit, oversized input or output, malformed JSON, schema mismatch,
+node limit, mapping integrity) return the byte-exact original and
+short-circuit `RepairEngine.repair` before corpus access, detection, or
+reviewer calls; upstream capture errors remain errors.
+
+This is runnable-proxy engineering evidence only. It establishes no
+linguistic, experimental-MVP, or deployment acceptance.

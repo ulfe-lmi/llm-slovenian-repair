@@ -283,3 +283,14 @@ native ext4 checkout and the machine-local Python 3.12 environment above
 (`$HOME/envs/llm-slovenian-repair`, rebuilt) is the ordered interpreter for
 verification (`python -B` form, bytecode off); the sync-mount statements in
 this document remain the historical rationale for the machine-local layout.
+
+013-a runnable-proxy Pandoc dependency (2026-10-26): the isolated
+concept-verification proxy requires the pinned Pandoc `3.7.0.2` at startup
+(`concept-verification/pandoc-dependency.json`; exact release-archive byte
+count and locally computed SHA-256). The binary resolves from `CONCEPT_PANDOC`
+then PATH. `concept-verification/install_pandoc.sh` installs the pinned
+official Linux amd64 archive into an explicitly passed owned prefix only -
+no sudo, no system replacement, no runtime downloads. The application-baseline
+CI workflow installs that pinned archive into a runner-owned temporary prefix
+and exports `CONCEPT_PANDOC` for the concept-verification tests; a missing or
+mismatched binary fails those tests rather than skipping them.

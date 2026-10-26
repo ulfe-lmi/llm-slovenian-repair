@@ -161,9 +161,14 @@ separately) - and the owner-supplied 011 research data archive is restored
 011b manifest) with evaluation blocked pending separate reconciliation of
 the evaluation objective (no prior draft activated). The next
 separately ordered objective is the owner-selected Pandoc structural-parsing
-proxy (not implemented); a provisional 8-15 focused-engineering-day estimate
-covers the remaining packaged-MVP scope, with research-evaluation completion,
-ICA and deployment as separate gates. See
+runnable proxy; round 013-a (2026-10-26) implemented it in the isolated
+concept-verification proxy with exact original spans, conservative
+abstentions, fail-closed bounded failure reasons, and a pinned 3.7.0.2
+dependency (see `concept-verification/README.md`) - runnable-proxy
+engineering evidence only, no linguistic, experimental-MVP, or deployment
+acceptance. A provisional 8-15 focused-engineering-day estimate covers the
+remaining packaged-MVP scope, with research-evaluation completion, ICA and
+deployment as separate gates. See
 [development](docs/DEVELOPMENT.md), [runbook](docs/OAP-RUNBOOK.md),
 [role setup](docs/CODEX-ROLE-SETUP.md), [readiness](docs/READINESS.md) and
 [roadmap](docs/IMPLEMENTATION-ROADMAP.md) for the current continuation.

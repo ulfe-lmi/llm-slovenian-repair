@@ -14,19 +14,35 @@ from collections.abc import Callable
 from dataclasses import dataclass
 from http.server import BaseHTTPRequestHandler, HTTPServer
 from pathlib import Path
-from typing import cast
+from typing import Protocol, cast
 from urllib.parse import urlparse
 
 from config import canonical_bytes
-from corpus import Corpus
 from detector import detect, tokenize
-from protected import protected_intervals
-from qwen_client import ResponsesReviewer, responses_path
+from pandoc_protection import (
+    PandocSpec,
+    PandocStartupError,
+    check_pandoc,
+    compose_protection,
+    protect_with_pandoc,
+    resolve_pandoc_spec,
+)
+from qwen_client import Proposal, ResponsesReviewer, responses_path
 from repair import accept, apply_edits
+
+from corpus import Corpus
 
 
 class ProxyError(ValueError):
     pass
+
+
+class Reviewer(Protocol):
+    """Structural reviewer interface: the engine only calls ``review``."""
+
+    def review(
+        self, sentence: str, target: str, variant: str = "frozen-v1"
+    ) -> Proposal: ...
 
 
 def _split_sse(raw: bytes) -> list[tuple[str, str]]:
@@ -281,8 +297,11 @@ class Forwarded:
 @dataclass
 class RepairEngine:
     index: Path
-    reviewer: ResponsesReviewer
+    reviewer: Reviewer
     mode: str = "local-context"
+    # Resolved qualified-Pandoc spec; None resolves lazily at repair time
+    # (the proxy main path resolves and checks it at startup).
+    pandoc: PandocSpec | None = None
     _details: list[dict[str, object]] | None = None
 
     def begin_request(self) -> None:
@@ -293,9 +312,59 @@ class RepairEngine:
         self._details = None
         return details
 
+    def _fail_closed_original(
+        self, text: str, raw_started: float, reason: str | None, detail: str
+    ) -> str:
+        """Record a minimal trace and return the exact completed original.
+
+        A global parse/mapping failure must short-circuit before Corpus
+        access, detection and any reviewer call (order 013-a, requirement
+        12).  No corpus is opened and no reviewer is invoked.
+        """
+        if self._details is not None:
+            self._details.append(
+                {
+                    "original": text,
+                    "repaired": text,
+                    "candidates": [],
+                    "corpus_summaries": [],
+                    "reviewer_decisions": [],
+                    "acceptance": [],
+                    "replacements": [],
+                    "timings": {
+                        "raw_seconds": 0.0,
+                        "detector_seconds": 0.0,
+                        "reviewer_seconds": 0.0,
+                        "repair_seconds": round(time.monotonic() - raw_started, 6),
+                    },
+                    "protected_difference_count": 0,
+                    "protection_failure": {
+                        "reason": reason or "PANDOC_PROTECTION",
+                        "detail": detail[:256],
+                    },
+                }
+            )
+        return text
+
     def repair(self, text: str) -> str:
         raw_started = time.monotonic()
-        intervals = protected_intervals(text)
+        try:
+            spec = self.pandoc if self.pandoc is not None else resolve_pandoc_spec()
+            outcome = protect_with_pandoc(spec, text)
+            if not outcome.ok:
+                return self._fail_closed_original(
+                    text, raw_started, outcome.reason, outcome.detail
+                )
+            intervals = compose_protection(text, outcome)
+        except PandocStartupError as exc:
+            return self._fail_closed_original(text, raw_started, exc.reason, exc.detail)
+        except Exception as exc:  # noqa: BLE001 - fail closed before Corpus
+            # Any unexpected mapping, composition or depth failure must be
+            # translated to the fail-closed original, never escape to the
+            # handler or widen around the upstream capture path.
+            return self._fail_closed_original(
+                text, raw_started, "PANDOC_UNEXPECTED", type(exc).__name__
+            )
         with Corpus(self.index) as corpus:
             detector_started = time.monotonic()
             candidates = detect(text, corpus, intervals, mode=self.mode, maximum=4)
@@ -312,6 +381,16 @@ class RepairEngine:
                     continue
                 left = tokens[token_index - 1].key if token_index else None
                 right = tokens[token_index + 1].key if token_index + 1 < len(tokens) else None
+                left_bounds = (
+                    (tokens[token_index - 1].start, tokens[token_index - 1].end)
+                    if token_index
+                    else None
+                )
+                right_bounds = (
+                    (tokens[token_index + 1].start, tokens[token_index + 1].end)
+                    if token_index + 1 < len(tokens)
+                    else None
+                )
                 review_started = time.monotonic()
                 proposal: dict[str, object] | None = None
                 acceptance: dict[str, object] = {
@@ -328,7 +407,15 @@ class RepairEngine:
                         "needs_wider_edit": value.needs_wider_edit,
                     }
                     decision = accept(
-                        text, candidate, value, corpus, intervals, left=left, right=right
+                        text,
+                        candidate,
+                        value,
+                        corpus,
+                        intervals,
+                        left=left,
+                        right=right,
+                        left_bounds=left_bounds,
+                        right_bounds=right_bounds,
                     )
                     acceptance = {
                         "accepted": decision.accepted,
@@ -554,6 +641,15 @@ def main() -> int:
     index = os.environ.get("CONCEPT_INDEX")
     if not index:
         raise SystemExit("CONCEPT_INDEX is required")
+    # Mandatory qualified-Pandoc startup check (order 013-a, requirements 2
+    # and 12): executable presence, exact version and reader capability,
+    # verified before the proxy accepts any traffic (before the HTTP bind).
+    # There is no historical pulldown discovery or regex fallback path.
+    try:
+        pandoc_spec = resolve_pandoc_spec()
+        check_pandoc(pandoc_spec)
+    except PandocStartupError as exc:
+        raise SystemExit(f"pandoc startup failure: {exc.reason}: {exc.detail}") from None
     reviewer = ResponsesReviewer(
         os.environ.get("CONCEPT_REVIEWER_URL", "http://127.0.0.1:8001/v1"),
         os.environ.get("CONCEPT_REVIEWER_MODEL", "Qwen3.8-27B"),
@@ -564,7 +660,7 @@ def main() -> int:
     proxy = ConceptProxy(
         ("127.0.0.1", 18024),
         upstream,
-        RepairEngine(Path(index), reviewer),
+        RepairEngine(Path(index), reviewer, pandoc=pandoc_spec),
         timeout=float(os.environ.get("CONCEPT_TIMEOUT", "30")),
         trace_dir=Path(trace_value) if trace_value else None,
     )

@@ -28,6 +28,16 @@ jobs:
       - name: Install Python 3.12
         run: uv python install 3.12
 
+      - name: Install pinned Pandoc for proxy protection tests
+        shell: bash
+        run: |
+          set -eu
+          prefix="$RUNNER_TEMP/pandoc-3.7.0.2"
+          sh concept-verification/install_pandoc.sh "$prefix"
+          test -x "$prefix/bin/pandoc"
+          "$prefix/bin/pandoc" --version | head -n 1
+          echo "CONCEPT_PANDOC=$prefix/bin/pandoc" >> "$GITHUB_ENV"
+
       - name: Run native development baseline driver
         shell: bash
         run: |
