@@ -1421,6 +1421,544 @@ class _EphemeralUpstream(BaseHTTPRequestHandler):
         return
 
 
+_TC_ANSWER = "To je presenetliv zapisano."
+_TC_OTHER = "Nekaj drugacnega."
+
+
+def _tc_raw(*events: bytes) -> bytes:
+    return b"".join(b"data: " + event + b"\n\n" for event in events)
+
+
+def _tc_delta(item_id: str = "m", text: str | None = None) -> bytes:
+    return (
+        '{"type":"response.output_text.delta","item_id":"'
+        + item_id
+        + '","delta":' + json.dumps(_TC_ANSWER if text is None else text) + "}"
+    ).encode()
+
+
+def _tc_part_done(
+    text: str | None = None, with_id: bool = True, item_id: object = "m"
+) -> bytes:
+    payload = '{"type":"response.content_part.done"'
+    if with_id:
+        payload += ',"item_id":' + json.dumps(item_id)
+    payload += (
+        ',"part":{"type":"output_text","text":'
+        + json.dumps(_TC_ANSWER if text is None else text)
+        + "}}"
+    )
+    return payload.encode()
+
+
+def _tc_item_done(
+    parts: list[dict[str, object]] | None = None,
+    role: str = "assistant",
+    status: object = "completed",
+    with_id: bool = True,
+    output_index: int | None = None,
+) -> bytes:
+    item: dict[str, object] = {"type": "message"}
+    if with_id:
+        item["id"] = "m"
+    item["role"] = role
+    if status is not None:
+        item["status"] = status
+    item["content"] = (
+        parts
+        if parts is not None
+        else [{"type": "output_text", "text": _TC_ANSWER}]
+    )
+    payload = '{"type":"response.output_item.done"'
+    if output_index is not None:
+        payload += ',"output_index":' + str(output_index)
+    payload += ',"item":' + json.dumps(item) + "}"
+    return payload.encode()
+
+
+def _tc_done(text: str | None = None, item_id: object = "m") -> bytes:
+    payload = (
+        '{"type":"response.output_text.done","item_id":'
+        + json.dumps(item_id)
+        + ',"text":' + json.dumps(_TC_ANSWER if text is None else text)
+        + "}"
+    )
+    return payload.encode()
+
+
+def _tc_delta_payload(payload: object, with_field: bool = True) -> bytes:
+    payload_json = '{"type":"response.output_text.delta","item_id":"m"'
+    if with_field:
+        payload_json += ',"delta":' + json.dumps(payload)
+    return (payload_json + "}").encode()
+
+
+def _tc_completed(output: list[dict[str, object]] | None = None) -> bytes:
+    if output is None:
+        output = [
+            {
+                "type": "message",
+                "id": "m",
+                "role": "assistant",
+                "status": "completed",
+                "output_index": 0,
+                "content": [
+                    {
+                        "type": "output_text",
+                        "text": _TC_ANSWER,
+                        "content_index": 0,
+                    }
+                ],
+            }
+        ]
+    return (
+        '{"type":"response.completed","response":{"id":"r","output":'
+        + json.dumps(output)
+        + "}}"
+    ).encode()
+
+
+def _tc_completed_reasoning_then_message(text: str = _TC_ANSWER) -> bytes:
+    # Protected non-answer reasoning bookkeeping plus the final answer at a
+    # nonzero output_index (order 014-b, requirement 5).  Built with
+    # json.dumps so the fixture is valid JSON by construction.
+    response = {
+        "id": "r",
+        "output": [
+            {
+                "type": "reasoning",
+                "id": "rs1",
+                "status": "completed",
+                "summary": [{"type": "summary_text", "text": "misel"}],
+            },
+            {
+                "type": "message",
+                "id": "m",
+                "role": "assistant",
+                "status": "completed",
+                "output_index": 1,
+                "content": [
+                    {"type": "output_text", "text": text, "content_index": 0}
+                ],
+            },
+        ],
+    }
+    return (
+        '{"type":"response.completed","response":' + json.dumps(response) + "}"
+    ).encode()
+
+
+def _tc_completed_text_event(text: str, output_index: int = 0) -> bytes:
+    # Unframed completed event (framed by _tc_raw) whose single final
+    # answer copy carries the identical full answer text.  Built with
+    # json.dumps so the fixture is valid JSON by construction.
+    response = {
+        "id": "r",
+        "usage": {"total_tokens": 4},
+        "output": [
+            {
+                "type": "message",
+                "id": "m",
+                "role": "assistant",
+                "status": "completed",
+                "output_index": output_index,
+                "content": [
+                    {"type": "output_text", "text": text, "content_index": 0}
+                ],
+            }
+        ],
+    }
+    return (
+        '{"type":"response.completed","response":' + json.dumps(response) + "}"
+    ).encode()
+
+
+def _tc_baseline(text: str = _TC_ANSWER) -> bytes:
+    # The unmutated one-answer baseline: the identical full answer text in
+    # every copy (delta, terminal part, terminal item, final answer).  Each
+    # negative mutates exactly one named ownership/text field.
+    return _tc_raw(
+        _tc_delta("m", text),
+        _tc_part_done(text=text),
+        _tc_item_done(parts=[{"type": "output_text", "text": text}]),
+        _tc_completed_text_event(text),
+    )
+
+
+class TerminalCopyOwnershipTests(unittest.TestCase):
+    """Order 014-b: before any reviewer side effect, every answer-bearing
+    terminal representation is validated against the one final assistant
+    answer (exact typed id, final positions, part kind / role / status /
+    content cardinality and kinds, exact original text, no duplicated
+    copies).  Any copy that cannot be proved consistent makes the whole SSE
+    ineligible: raw original, zero repair/reviewer calls."""
+
+    def _bypass(self, raw: bytes) -> None:
+        repair = _CountingRepair()
+        result, changed = transform_sse(raw, repair)
+        self.assertEqual(result, raw)
+        self.assertFalse(changed)
+        self.assertEqual(repair.calls, 0)
+
+    def test_multi_part_terminal_item_bypass(self) -> None:
+        # (a) output_item.done carries two output_text parts: extra answer
+        # copy with contradictory text.
+        self._bypass(
+            _tc_raw(
+                _tc_delta(),
+                _tc_part_done(),
+                _tc_item_done(
+                    parts=[
+                        {"type": "output_text", "text": _TC_ANSWER},
+                        {"type": "output_text", "text": _TC_OTHER},
+                    ]
+                ),
+                _tc_completed(),
+            )
+        )
+
+    def test_conflicting_content_part_text_bypass(self) -> None:
+        # (b) content_part.done carries a different text than the final
+        # answer.
+        self._bypass(
+            _tc_raw(
+                _tc_delta(),
+                _tc_part_done(text=_TC_OTHER),
+                _tc_item_done(),
+                _tc_completed(),
+            )
+        )
+
+    def test_missing_id_content_part_bypass(self) -> None:
+        # (c) content_part.done carries the answer text without any item_id.
+        self._bypass(
+            _tc_raw(
+                _tc_delta(),
+                _tc_part_done(with_id=False),
+                _tc_item_done(),
+                _tc_completed(),
+            )
+        )
+
+    def test_null_id_content_part_bypass(self) -> None:
+        self._bypass(
+            _tc_raw(
+                _tc_delta(),
+                _tc_part_done(item_id=None),
+                _tc_item_done(),
+                _tc_completed(),
+            )
+        )
+
+    def test_int_id_content_part_bypass(self) -> None:
+        self._bypass(
+            _tc_raw(
+                _tc_delta(),
+                _tc_part_done(item_id=7),
+                _tc_item_done(),
+                _tc_completed(),
+            )
+        )
+
+    def test_wrong_role_terminal_item_bypass(self) -> None:
+        self._bypass(
+            _tc_raw(
+                _tc_delta(),
+                _tc_part_done(),
+                _tc_item_done(role="user"),
+                _tc_completed(),
+            )
+        )
+
+    def test_incomplete_status_terminal_item_bypass(self) -> None:
+        self._bypass(
+            _tc_raw(
+                _tc_delta(),
+                _tc_part_done(),
+                _tc_item_done(status="incomplete"),
+                _tc_completed(),
+            )
+        )
+
+    def test_conflicting_terminal_item_text_bypass(self) -> None:
+        self._bypass(
+            _tc_raw(
+                _tc_delta(),
+                _tc_part_done(),
+                _tc_item_done(parts=[{"type": "output_text", "text": _TC_OTHER}]),
+                _tc_completed(),
+            )
+        )
+
+    def test_missing_id_message_item_bypass(self) -> None:
+        self._bypass(
+            _tc_raw(
+                _tc_delta(),
+                _tc_part_done(),
+                _tc_item_done(with_id=False),
+                _tc_completed(),
+            )
+        )
+
+    def test_content_cardinality_mismatch_terminal_item_bypass(self) -> None:
+        # A terminal item with an extra part kind beyond the final message
+        # content is not a consistent copy.
+        self._bypass(
+            _tc_raw(
+                _tc_delta(),
+                _tc_part_done(),
+                _tc_item_done(
+                    parts=[
+                        {"type": "output_text", "text": _TC_ANSWER},
+                        {"type": "refusal", "content": "x"},
+                    ]
+                ),
+                _tc_completed(),
+            )
+        )
+
+    def test_wrong_content_index_terminal_part_bypass(self) -> None:
+        event = (
+            '{"type":"response.content_part.done","item_id":"m",'
+            '"output_index":0,"content_index":5,'
+            '"part":{"type":"output_text","text":'
+            + json.dumps(_TC_ANSWER)
+            + "}}"
+        ).encode()
+        self._bypass(_tc_raw(_tc_delta(), event, _tc_item_done(), _tc_completed()))
+
+    def test_conflicting_output_text_done_bypass(self) -> None:
+        self._bypass(
+            _tc_raw(
+                _tc_delta(),
+                _tc_done(text=_TC_OTHER),
+                _tc_item_done(),
+                _tc_completed(),
+            )
+        )
+
+    def test_output_text_done_without_text_bypass(self) -> None:
+        # A terminal done event that carries no text cannot be proved
+        # consistent with the confirmed answer.
+        event = (
+            b'{"type":"response.output_text.done","item_id":"m"}'
+        )
+        self._bypass(_tc_raw(_tc_delta(), event, _tc_item_done(), _tc_completed()))
+
+    def test_duplicate_terminal_part_copies_bypass(self) -> None:
+        self._bypass(
+            _tc_raw(
+                _tc_delta(),
+                _tc_part_done(),
+                _tc_part_done(),
+                _tc_item_done(),
+                _tc_completed(),
+            )
+        )
+
+    def test_added_placeholders_ownership_validated_and_protected(self) -> None:
+        # Initial added events may be empty placeholders: their ownership is
+        # validated, their content is protected, and they are never treated
+        # as terminal copies.
+        part_added = (
+            b'{"type":"response.content_part.added","item_id":"m",'
+            b'"part":{"type":"output_text","text":""}}'
+        )
+        item_added = (
+            b'{"type":"response.output_item.added","item":{"id":"m",'
+            b'"type":"message","role":"assistant","content":[]}}'
+        )
+        raw = _tc_raw(
+            part_added,
+            item_added,
+            _tc_delta(),
+            _tc_part_done(),
+            _tc_item_done(),
+            _tc_completed(),
+        )
+        repair = _CountingRepair()
+        result, changed = transform_sse(raw, repair)
+        self.assertTrue(changed)
+        self.assertEqual(repair.calls, 1)
+        self.assertIn(
+            b'"type":"response.content_part.added","item_id":"m",'
+            b'"part":{"type":"output_text","text":""}',
+            result,
+        )
+        self.assertIn(
+            b'"type":"response.output_item.added","item":{"id":"m",'
+            b'"type":"message","role":"assistant","content":[]}',
+            result,
+        )
+
+    def test_added_event_other_id_bypass(self) -> None:
+        # An added output_text part for another id is an answer event for
+        # that id: ambiguous ownership, bypass unchanged.
+        part_added = (
+            b'{"type":"response.content_part.added","item_id":"other",'
+            b'"part":{"type":"output_text","text":""}}'
+        )
+        self._bypass(
+            _tc_raw(part_added, _tc_delta(), _tc_part_done(), _tc_completed())
+        )
+
+    def test_added_part_nonempty_conflicting_text_bypass(self) -> None:
+        # An added output_text part with non-empty initial content cannot
+        # be proved safe: abstain raw unchanged with zero calls, and the
+        # protected added content is never rewritten.
+        part_added = (
+            '{"type":"response.content_part.added","item_id":"m",'
+            '"part":{"type":"output_text","text":'
+            + json.dumps(_TC_OTHER)
+            + "}}"
+        ).encode()
+        self._bypass(
+            _tc_raw(
+                part_added,
+                _tc_delta(),
+                _tc_part_done(),
+                _tc_item_done(),
+                _tc_completed(),
+            )
+        )
+
+    def test_added_item_wrong_role_status_bypass(self) -> None:
+        # An initial message item for the confirmed id with a wrong role
+        # and a non-terminal status marker is not a consistent initial
+        # representation: bypass unchanged with zero calls.
+        item_added = (
+            b'{"type":"response.output_item.added","item":{"id":"m",'
+            b'"type":"message","role":"user","status":"in_progress",'
+            b'"content":[]}}'
+        )
+        self._bypass(
+            _tc_raw(
+                item_added,
+                _tc_delta(),
+                _tc_part_done(),
+                _tc_item_done(),
+                _tc_completed(),
+            )
+        )
+
+    def test_added_placeholders_reasoning_nonzero_index_positive(self) -> None:
+        # The valid empty-placeholder positive with protected reasoning and
+        # the final message at a nonzero output_index: one repair, added
+        # placeholders byte-identical, reasoning untouched.
+        part_added = (
+            b'{"type":"response.content_part.added","item_id":"m",'
+            b'"part":{"type":"output_text","text":""}}'
+        )
+        item_added = (
+            b'{"type":"response.output_item.added","item":{"id":"m",'
+            b'"type":"message","role":"assistant","status":"in_progress",'
+            b'"content":[]}}'
+        )
+        raw = _tc_raw(
+            part_added,
+            item_added,
+            _tc_delta(),
+            _tc_part_done(),
+            _tc_item_done(output_index=1),
+            _tc_completed_reasoning_then_message(),
+        )
+        repair = _CountingRepair()
+        result, changed = transform_sse(raw, repair)
+        self.assertTrue(changed)
+        self.assertEqual(repair.calls, 1)
+        self.assertNotIn(b"presenetliv", result)
+        self.assertEqual(result.count(b"To je tako zapisano."), 4)
+        self.assertIn(
+            b'"type":"response.content_part.added","item_id":"m",'
+            b'"part":{"type":"output_text","text":""}',
+            result,
+        )
+        self.assertIn(
+            b'"type":"response.output_item.added","item":{"id":"m",'
+            b'"type":"message","role":"assistant","status":"in_progress",'
+            b'"content":[]}',
+            result,
+        )
+        self.assertIn(
+            b'"type":"reasoning","id":"rs1","status":"completed",'
+            b'"summary":[{"type":"summary_text","text":"misel"}]',
+            result,
+        )
+
+
+    def test_reasoning_plus_nonzero_output_index_positive(self) -> None:
+        # A valid canonical stream with protected reasoning bookkeeping and
+        # the final message at a nonzero output_index is a supported
+        # positive: one repair, consistent copies, reasoning untouched.
+        raw = _tc_raw(
+            _tc_delta(),
+            _tc_part_done(),
+            _tc_item_done(output_index=1),
+            _tc_completed_reasoning_then_message(),
+        )
+        repair = _CountingRepair()
+        result, changed = transform_sse(raw, repair)
+        self.assertTrue(changed)
+        self.assertEqual(repair.calls, 1)
+        self.assertNotIn(b"presenetliv", result)
+        self.assertEqual(result.count(b"To je tako zapisano."), 4)
+        self.assertIn(
+            b'"type":"reasoning","id":"rs1","status":"completed",'
+            b'"summary":[{"type":"summary_text","text":"misel"}]',
+            result,
+        )
+
+
+    def test_delta_missing_payload_bypass(self) -> None:
+        # A same-id delta event with no payload field between the valid
+        # string delta and the matching final answer: malformed answer
+        # event, stream ineligible, raw unchanged with zero calls.
+        self._bypass(
+            _tc_raw(
+                _tc_delta(),
+                _tc_delta_payload(None, with_field=False),
+                _tc_part_done(),
+                _tc_item_done(),
+                _tc_completed(),
+            )
+        )
+
+    def test_delta_null_payload_bypass(self) -> None:
+        self._bypass(
+            _tc_raw(
+                _tc_delta(),
+                _tc_delta_payload(None),
+                _tc_part_done(),
+                _tc_item_done(),
+                _tc_completed(),
+            )
+        )
+
+    def test_delta_number_payload_bypass(self) -> None:
+        self._bypass(
+            _tc_raw(
+                _tc_delta(),
+                _tc_delta_payload(7),
+                _tc_part_done(),
+                _tc_item_done(),
+                _tc_completed(),
+            )
+        )
+
+    def test_delta_array_payload_bypass(self) -> None:
+        # A truthy array payload must never be rewritten as text: the
+        # stream is ineligible before any collection or rendering.
+        self._bypass(
+            _tc_raw(
+                _tc_delta(),
+                _tc_delta_payload(["x"]),
+                _tc_part_done(),
+                _tc_item_done(),
+                _tc_completed(),
+            )
+        )
+
+
 class SseHttpTests(unittest.TestCase):
     def setUp(self) -> None:
         self.temp = tempfile.TemporaryDirectory()
@@ -1561,6 +2099,43 @@ class SseHttpTests(unittest.TestCase):
         self.assertEqual(result.count(b"To je tako zapisano, to je tako zapisano."), 4)
 
 
+    def test_http_contradictory_terminal_copies_raw_bytes_unchanged(self) -> None:
+        # Baseline with the identical full answer in every copy, mutating
+        # only the terminal item (two output_text parts, one conflicting):
+        # the whole SSE is ineligible through the real proxy: raw bytes
+        # unchanged, zero review calls (order 014-b, requirement 6).
+        reviewer = _ScriptedBatchReviewer(_replace_all)
+        source = _tc_raw(
+            _tc_delta("m", TEXT),
+            _tc_part_done(text=TEXT),
+            _tc_item_done(
+                parts=[
+                    {"type": "output_text", "text": TEXT},
+                    {"type": "output_text", "text": _TC_OTHER},
+                ]
+            ),
+            _tc_completed_text_event(TEXT),
+        )
+        result = self._round_trip(source, reviewer)
+        self.assertEqual(result, source)
+        self.assertEqual(reviewer.calls, 0)
+
+    def test_http_no_edit_canonical_copies_raw_bytes(self) -> None:
+        # Keep proposals are no-ops: the unmutated TEXT baseline with the
+        # canonical terminal copies is returned byte-identically through
+        # the real proxy after one review call.
+        def keep_only(
+            sentence: str, targets: tuple[BatchTarget, ...]
+        ) -> dict[str, BatchProposal]:
+            return {t.id: BatchProposal(t.id, True, None, False) for t in targets}
+
+        reviewer = _ScriptedBatchReviewer(keep_only)
+        source = _tc_baseline(TEXT)
+        result = self._round_trip(source, reviewer)
+        self.assertEqual(result, source)
+        self.assertEqual(reviewer.calls, 1)
+
+
 class CompositionChainTests(unittest.TestCase):
     """Full actual chain: real ConceptProxy HTTP -> real RepairEngine with
     real Pandoc and real tiny SQLite -> real ResponsesReviewer -> fake
@@ -1648,6 +2223,287 @@ class CompositionChainTests(unittest.TestCase):
 
     def test_full_chain_invalid_batch_after_valid_first_returns_original(self) -> None:
         source = _sse_delta("m", TEXT) + _sse_completed()
+        payload = json.dumps(
+            _envelope(_valid_inner([_prop("t0"), _prop("t0"), _prop("t1")])),
+            ensure_ascii=False,
+        ).encode()
+        result = self._chain(source, payload)
+        self.assertEqual(result, source)
+        self.assertEqual(len(_FakeUpstream.recorded), 1)
+
+
+    def _valid_payload(self) -> bytes:
+        return json.dumps(
+            _envelope(_valid_inner([_prop("t1"), _prop("t0")])), ensure_ascii=False
+        ).encode()
+
+    def _reasoning_then_message_completed(self, text: str) -> bytes:
+        return _tc_completed_reasoning_then_message(text)
+
+    def _added_placeholder_events(self, text: str) -> tuple[bytes, bytes]:
+        part_added = (
+            b'{"type":"response.content_part.added","item_id":"m",'
+            b'"part":{"type":"output_text","text":""}}'
+        )
+        item_added = (
+            b'{"type":"response.output_item.added","item":{"id":"m",'
+            b'"type":"message","role":"assistant","status":"in_progress",'
+            b'"content":[]}}'
+        )
+        return part_added, item_added
+
+    def test_chain_canonical_baseline_one_review_request(self) -> None:
+        # The unmutated TEXT baseline: every copy carries the identical
+        # full answer, and the full actual chain makes exactly one review
+        # request with four consistent repaired copies.
+        source = _tc_baseline(TEXT)
+        result = self._chain(source, self._valid_payload())
+        self.assertEqual(len(_FakeUpstream.recorded), 1)
+        self.assertNotIn(b"presenetliv", result)
+        self.assertEqual(
+            result.count(b"To je tako zapisano, to je tako zapisano."), 4
+        )
+
+    def test_chain_contradictory_terminal_copies_zero_review_unchanged(self) -> None:
+        # Baseline TEXT copies, mutating only the terminal item (two
+        # output_text parts, one conflicting): the full actual chain
+        # (proxy -> engine/Pandoc/SQLite -> ResponsesReviewer -> fake
+        # reviewer HTTP) must bypass with the raw original and zero review
+        # HTTP requests (order 014-b, requirement 6).
+        source = _tc_raw(
+            _tc_delta("m", TEXT),
+            _tc_part_done(text=TEXT),
+            _tc_item_done(
+                parts=[
+                    {"type": "output_text", "text": TEXT},
+                    {"type": "output_text", "text": _TC_OTHER},
+                ]
+            ),
+            _tc_completed_text_event(TEXT),
+        )
+        result = self._chain(source, self._valid_payload())
+        self.assertEqual(result, source)
+        self.assertEqual(len(_FakeUpstream.recorded), 0)
+
+    def test_chain_conflicting_terminal_text_zero_review_unchanged(self) -> None:
+        # Baseline TEXT copies, mutating only the terminal part text.
+        source = _tc_raw(
+            _tc_delta("m", TEXT),
+            _tc_part_done(text=_TC_OTHER),
+            _tc_item_done(parts=[{"type": "output_text", "text": TEXT}]),
+            _tc_completed_text_event(TEXT),
+        )
+        result = self._chain(source, self._valid_payload())
+        self.assertEqual(result, source)
+        self.assertEqual(len(_FakeUpstream.recorded), 0)
+
+    def test_chain_missing_id_terminal_copy_zero_review_unchanged(self) -> None:
+        # Baseline TEXT copies, mutating only the terminal part ownership
+        # (no item_id at all).
+        source = _tc_raw(
+            _tc_delta("m", TEXT),
+            _tc_part_done(text=TEXT, with_id=False),
+            _tc_item_done(parts=[{"type": "output_text", "text": TEXT}]),
+            _tc_completed_text_event(TEXT),
+        )
+        result = self._chain(source, self._valid_payload())
+        self.assertEqual(result, source)
+        self.assertEqual(len(_FakeUpstream.recorded), 0)
+
+    def test_chain_reasoning_nonzero_output_index_positive(self) -> None:
+        # Protected reasoning bookkeeping plus the final message at a
+        # nonzero output_index, with the identical full TEXT answer in
+        # every copy: the supported positive keeps working through the
+        # full chain (one request, consistent copies, reasoning untouched).
+        source = _tc_raw(
+            _tc_delta("m", TEXT),
+            _tc_part_done(text=TEXT),
+            _tc_item_done(
+                parts=[{"type": "output_text", "text": TEXT}], output_index=1
+            ),
+            self._reasoning_then_message_completed(TEXT),
+        )
+        result = self._chain(source, self._valid_payload())
+        self.assertEqual(len(_FakeUpstream.recorded), 1)
+        self.assertNotIn(b"presenetliv", result)
+        self.assertIn(b"To je tako zapisano, to je tako zapisano.", result)
+        self.assertIn(
+            b'"type":"reasoning","id":"rs1","status":"completed",'
+            b'"summary":[{"type":"summary_text","text":"misel"}]',
+            result,
+        )
+
+    def test_chain_added_part_nonempty_conflicting_text_zero_review_unchanged(self) -> None:
+        # Baseline TEXT copies plus an added output_text part carrying
+        # non-empty conflicting initial content (cannot be proved safe):
+        # the full chain bypasses with the raw original and zero review
+        # HTTP requests.
+        part_added = (
+            '{"type":"response.content_part.added","item_id":"m",'
+            '"part":{"type":"output_text","text":' + json.dumps(_TC_OTHER) + "}}"
+        ).encode()
+        source = _tc_raw(
+            part_added,
+            _tc_delta("m", TEXT),
+            _tc_part_done(text=TEXT),
+            _tc_item_done(parts=[{"type": "output_text", "text": TEXT}]),
+            _tc_completed_text_event(TEXT),
+        )
+        result = self._chain(source, self._valid_payload())
+        self.assertEqual(result, source)
+        self.assertEqual(len(_FakeUpstream.recorded), 0)
+
+    def test_chain_added_item_wrong_role_status_zero_review_unchanged(self) -> None:
+        # Baseline TEXT copies plus an initial message item for the
+        # confirmed id with a wrong role and a non-terminal status marker:
+        # the full chain bypasses with the raw original and zero review
+        # HTTP requests.
+        item_added = (
+            b'{"type":"response.output_item.added","item":{"id":"m",'
+            b'"type":"message","role":"user","status":"in_progress",'
+            b'"content":[]}}'
+        )
+        source = _tc_raw(
+            item_added,
+            _tc_delta("m", TEXT),
+            _tc_part_done(text=TEXT),
+            _tc_item_done(parts=[{"type": "output_text", "text": TEXT}]),
+            _tc_completed_text_event(TEXT),
+        )
+        result = self._chain(source, self._valid_payload())
+        self.assertEqual(result, source)
+        self.assertEqual(len(_FakeUpstream.recorded), 0)
+
+    def test_chain_added_placeholders_reasoning_nonzero_index_positive(self) -> None:
+        # Valid empty placeholders plus protected reasoning and the final
+        # message at a nonzero output_index, with the identical full TEXT
+        # answer in every copy: one review request, consistent repaired
+        # copies, protected added placeholders and reasoning byte-identical.
+        part_added, item_added = self._added_placeholder_events(TEXT)
+        source = _tc_raw(
+            part_added,
+            item_added,
+            _tc_delta("m", TEXT),
+            _tc_part_done(text=TEXT),
+            _tc_item_done(
+                parts=[{"type": "output_text", "text": TEXT}], output_index=1
+            ),
+            self._reasoning_then_message_completed(TEXT),
+        )
+        result = self._chain(source, self._valid_payload())
+        self.assertEqual(len(_FakeUpstream.recorded), 1)
+        self.assertNotIn(b"presenetliv", result)
+        self.assertIn(b"To je tako zapisano, to je tako zapisano.", result)
+        self.assertIn(part_added[6:], result)
+        self.assertIn(item_added[6:], result)
+        self.assertIn(
+            b'"type":"reasoning","id":"rs1","status":"completed",'
+            b'"summary":[{"type":"summary_text","text":"misel"}]',
+            result,
+        )
+
+    def _delta_type_chain_source(self, payload_event: bytes) -> bytes:
+        return _tc_raw(
+            _tc_delta("m", TEXT),
+            payload_event,
+            _tc_part_done(text=TEXT),
+            _tc_item_done(parts=[{"type": "output_text", "text": TEXT}]),
+            _tc_completed_text_event(TEXT),
+        )
+
+    def test_chain_delta_missing_payload_zero_review_unchanged(self) -> None:
+        source = self._delta_type_chain_source(
+            _tc_delta_payload(None, with_field=False)
+        )
+        result = self._chain(source, self._valid_payload())
+        self.assertEqual(result, source)
+        self.assertEqual(len(_FakeUpstream.recorded), 0)
+
+    def test_chain_delta_null_payload_zero_review_unchanged(self) -> None:
+        source = self._delta_type_chain_source(_tc_delta_payload(None))
+        result = self._chain(source, self._valid_payload())
+        self.assertEqual(result, source)
+        self.assertEqual(len(_FakeUpstream.recorded), 0)
+
+    def test_chain_delta_number_payload_zero_review_unchanged(self) -> None:
+        source = self._delta_type_chain_source(_tc_delta_payload(7))
+        result = self._chain(source, self._valid_payload())
+        self.assertEqual(result, source)
+        self.assertEqual(len(_FakeUpstream.recorded), 0)
+
+    def test_chain_delta_array_payload_zero_review_unchanged(self) -> None:
+        source = self._delta_type_chain_source(_tc_delta_payload(["x"]))
+        result = self._chain(source, self._valid_payload())
+        self.assertEqual(result, source)
+        self.assertEqual(len(_FakeUpstream.recorded), 0)
+
+
+    def test_chain_remaining_terminal_copy_variants_zero_review_unchanged(self) -> None:
+        # One table-driven full-chain negative per remaining named
+        # terminal-copy variant (order 014-b, requirement 6).  Every case
+        # starts from the valid TEXT baseline and mutates exactly one
+        # named ownership field (or adds the one named terminal copy);
+        # the full actual chain (proxy -> engine/Pandoc/SQLite ->
+        # ResponsesReviewer -> fake reviewer HTTP) must return the raw
+        # original bytes with status 200 and zero review HTTP requests.
+        parts: list[dict[str, object]] = [{"type": "output_text", "text": TEXT}]
+        cases = {
+            "null_part_id": _tc_raw(
+                _tc_delta("m", TEXT),
+                _tc_part_done(text=TEXT, item_id=None),
+                _tc_item_done(parts=parts),
+                _tc_completed_text_event(TEXT),
+            ),
+            "number_part_id": _tc_raw(
+                _tc_delta("m", TEXT),
+                _tc_part_done(text=TEXT, item_id=7),
+                _tc_item_done(parts=parts),
+                _tc_completed_text_event(TEXT),
+            ),
+            "other_part_id": _tc_raw(
+                _tc_delta("m", TEXT),
+                _tc_part_done(text=TEXT, item_id="other"),
+                _tc_item_done(parts=parts),
+                _tc_completed_text_event(TEXT),
+            ),
+            "wrong_role_item": _tc_raw(
+                _tc_delta("m", TEXT),
+                _tc_part_done(text=TEXT),
+                _tc_item_done(parts=parts, role="user"),
+                _tc_completed_text_event(TEXT),
+            ),
+            "incomplete_status_item": _tc_raw(
+                _tc_delta("m", TEXT),
+                _tc_part_done(text=TEXT),
+                _tc_item_done(parts=parts, status="incomplete"),
+                _tc_completed_text_event(TEXT),
+            ),
+            "wrong_index_item": _tc_raw(
+                _tc_delta("m", TEXT),
+                _tc_part_done(text=TEXT),
+                _tc_item_done(parts=parts, output_index=1),
+                _tc_completed_text_event(TEXT),
+            ),
+            "conflicting_text_done": _tc_raw(
+                _tc_delta("m", TEXT),
+                _tc_done(text=_TC_OTHER),
+                _tc_part_done(text=TEXT),
+                _tc_item_done(parts=parts),
+                _tc_completed_text_event(TEXT),
+            ),
+        }
+        for name, source in cases.items():
+            with self.subTest(case=name):
+                result = self._chain(source, self._valid_payload())
+                self.assertEqual(result, source)
+                self.assertEqual(len(_FakeUpstream.recorded), 0)
+
+    def test_chain_invalid_batch_after_valid_first_canonical_copies_raw_bytes(self) -> None:
+        # The unmutated TEXT baseline (canonical terminal copies) with an
+        # invalid second proposal: one review request is made, the batch
+        # is rejected as a whole, and the raw original SSE bytes are
+        # returned unchanged.
+        source = _tc_baseline(TEXT)
         payload = json.dumps(
             _envelope(_valid_inner([_prop("t0"), _prop("t0"), _prop("t1")])),
             ensure_ascii=False,

@@ -220,26 +220,33 @@ def transform_sse(raw: bytes, repair: Callable[[str], str]) -> tuple[bytes, bool
 
     Ownership is prefetched across the whole completed upstream SSE before
     any repair call: the delta layer (stream item ids and the positions the
-    stream events themselves declare) and every assistant answer unit in the
-    completed ``response.output`` (message items and their ``output_text``
-    content parts).  Several assistant text
-    answers/items/content parts, a completed envelope that does not exactly
-    confirm the single delta answer, stream-declared indices that contradict
-    the completed list positions, or otherwise ambiguous target ownership
-    bypass repair unchanged with zero review calls (order 014-a,
-    requirement 8).  Only explicitly validated answer paths/ids are mutated;
-    no equality-based traversal of nested metadata.  When the review accepts
-    no text edit the raw bytes are returned unchanged (requirement 7).
+    stream events themselves declare) and every terminal representation
+    that carries the answer (``output_text.done`` events, ``content_part.done``
+    output_text parts, message-typed ``output_item.done`` items, and the
+    ``output_text`` part in the completed ``response.output``).  Several
+    assistant text answers/items/content parts, a completed envelope that
+    does not exactly confirm the single delta answer, stream-declared
+    indices that contradict the completed list positions, a terminal copy
+    that cannot be proved consistent (different text, role, status,
+    identity, index, content cardinality/kinds, a duplicated terminal
+    representation, or a missing/null/non-string id), or otherwise
+    ambiguous target ownership bypass repair unchanged with zero review
+    calls (order 014-a requirement 8; order 014-b requirements 2-4).
 
-    Stream ids are never coerced: a delta/done event whose ``item_id`` is
-    missing, non-string or empty carries ambiguous ownership, so the answer
-    abstains with zero review calls, and no such event is ever mutated.
-
-    When the review accepts an edit, the known terminal copies of the
-    confirmed answer (``content_part.done`` parts and ``output_item.done``
-    message items) are updated through the same explicitly validated
-    id/index paths; unrelated metadata and non-answer events stay
-    byte-identical.
+    The editable fields are collected as explicit event references during
+    the preflight, and the renderer mutates only those: it never iterates
+    the output_text nodes of a matching-id object after repair, never
+    recurses into metadata, and never matches substrings or identical
+    values (no ID coercion, no value-based recovery).  Every
+    ``output_text.delta`` payload must be a string (an empty string is a
+    valid no-op): a delta event whose payload is missing or non-string is
+    a malformed answer event and abstains raw unchanged with zero calls.
+    Initial ``added`` events are supported only as empty placeholders:
+    their ownership (typed confirmed id) and, for message items, the
+    assistant role are validated, their protected content is never
+    rewritten, and any non-empty initial content - which cannot be proved
+    safe - abstains raw unchanged with zero calls.  When the review accepts no text edit
+    the raw bytes are returned unchanged (order 014-a requirement 7).
     """
     blocks = _split_sse(raw)
     parsed: list[dict[str, object] | None] = [_event(block) for block, _ in blocks]
@@ -252,9 +259,11 @@ def transform_sse(raw: bytes, repair: Callable[[str], str]) -> tuple[bytes, bool
     # consistency constraint, never a substitute.
     declared: dict[str, list[tuple[object, object]]] = {}
     # A delta/done event whose ``item_id`` is missing, non-string or empty
-    # does not identify an answer; such a stream is ambiguous and abstains
-    # instead of being coerced to an invented id.
-    stream_ids_invalid = False
+    # does not identify an answer, and an answer-shaped content part or
+    # message item without a typed nonempty id is an unowned terminal copy.
+    # Such a stream carries ambiguous ownership and abstains instead of
+    # being coerced to an invented id.
+    ownership_invalid = False
     # Every answer-related stream event (text delta/done, output-text
     # content-part added/done, message-typed output-item added/done) must
     # belong to the single confirmed answer; any other id abstains.
@@ -272,7 +281,14 @@ def transform_sse(raw: bytes, repair: Callable[[str], str]) -> tuple[bytes, bool
             stream_id = value.get("item_id")
             if type(stream_id) is not str or not stream_id:
                 if event_type in ("response.output_text.delta", "response.output_text.done"):
-                    stream_ids_invalid = True
+                    ownership_invalid = True
+                elif (
+                    isinstance((stream_part := value.get("part")), dict)
+                    and stream_part.get("type") == "output_text"
+                ):
+                    # An answer-shaped content part that cannot identify
+                    # its owner is an unowned terminal copy.
+                    ownership_invalid = True
                 continue
             part = value.get("part")
             answer_part = (
@@ -288,26 +304,32 @@ def transform_sse(raw: bytes, repair: Callable[[str], str]) -> tuple[bytes, bool
                 )
         elif event_type in ("response.output_item.added", "response.output_item.done"):
             item_obj = value.get("item")
-            if (
-                isinstance(item_obj, dict)
-                and type(item_obj.get("id")) is str
-                and item_obj.get("id")
-            ):
-                item_id = item_obj["id"]
+            if isinstance(item_obj, dict):
+                obj_id = item_obj.get("id")
                 if item_obj.get("type") == "message":
-                    answer_event_ids.add(item_id)
-                if "output_index" in value:
-                    declared.setdefault(item_id, []).append((value["output_index"], _UNSET))
+                    if type(obj_id) is not str or not obj_id:
+                        # An answer-shaped message item without a typed id
+                        # is an unowned terminal representation.
+                        ownership_invalid = True
+                        continue
+                    answer_event_ids.add(obj_id)
+                if type(obj_id) is str and obj_id and "output_index" in value:
+                    declared.setdefault(obj_id, []).append((value["output_index"], _UNSET))
         if event_type == "response.output_text.delta":
             delta = value.get("delta")
-            if isinstance(delta, str):
-                stream_id = value.get("item_id")
-                if type(stream_id) is str and stream_id:
-                    streams.setdefault(stream_id, []).append(delta)
-    non_empty = [item_id for item_id, parts in streams.items() if "".join(parts)]
-    if stream_ids_invalid:
-        # Answer-related events with missing, non-string or empty ids carry
-        # ambiguous ownership: bypass unchanged with zero review calls.
+            if type(delta) is not str:
+                # A delta event whose payload is missing or non-string is a
+                # malformed answer event: the stream carries ambiguous
+                # content and abstains instead of being partially collected.
+                ownership_invalid = True
+                continue
+            stream_id = value.get("item_id")
+            if type(stream_id) is str and stream_id:
+                streams.setdefault(stream_id, []).append(delta)
+    if ownership_invalid:
+        # Answer-related events with missing, non-string or empty ids (or
+        # unowned answer-shaped terminal copies) carry ambiguous ownership:
+        # bypass unchanged with zero review calls.
         return raw, False
     # Completed-envelope answer units: every output_text part of any message
     # item in any response.output, with list ownership positions.
@@ -368,8 +390,12 @@ def transform_sse(raw: bytes, repair: Callable[[str], str]) -> tuple[bytes, bool
                 return False
         return True
 
-    repaired: dict[str, str] = {}
-    direct_event: int | None = None
+    non_empty = [item_id for item_id, parts in streams.items() if "".join(parts)]
+    unit_index: int
+    unit_item: dict[str, object]
+    unit_part: dict[str, object]
+    confirmed_id: str
+    original_text: str
     if non_empty:
         if len(non_empty) != 1:
             # Several assistant text answers: ambiguous ownership.
@@ -400,13 +426,8 @@ def transform_sse(raw: bytes, repair: Callable[[str], str]) -> tuple[bytes, bool
         )
         if not confirmed:
             return raw, False
-        new_text = repair(joined)
-        if new_text == joined:
-            # No accepted text edit: the raw bytes are returned unchanged.
-            return raw, False
-        direct_event = unit_index
-        repaired[item_id] = new_text
-        unit_part["text"] = new_text
+        confirmed_id = item_id
+        original_text = joined
     else:
         assistant_units = [
             unit for unit in units if unit[2].get("role") == "assistant"
@@ -426,74 +447,172 @@ def transform_sse(raw: bytes, repair: Callable[[str], str]) -> tuple[bytes, bool
         ):
             # Absent or inconsistent ownership: bypass unchanged.
             return raw, False
+        confirmed_id = message_id
         original_text = str(unit_part["text"])
-        new_text = repair(original_text)
-        if new_text == original_text:
-            # No accepted text edit: the raw bytes are returned unchanged.
-            return raw, False
-        direct_event = unit_index
-        repaired[message_id] = new_text
-        unit_part["text"] = new_text
-        # No delta streams: only the validated completed event is re-emitted
-        # by the shared render pass below.
+
+    # Order 014-b requirement 2/3: before any reviewer side effect, every
+    # answer-bearing terminal representation must be proved consistent with
+    # the one final assistant answer (same exact typed id, same final
+    # positions, expected part kind / item role / status / content
+    # cardinality and kinds, and the exact original answer text).  Any copy
+    # that cannot be proved consistent makes the whole SSE ineligible:
+    # return the raw original with zero calls, never keep one edited
+    # representation beside an incompatible original copy.  The validated
+    # editable fields are collected here, as explicit event references, and
+    # are the only ones the renderer below may mutate.
+    final_content = unit_item["content"]
+    if not isinstance(final_content, list):
+        # Units are only collected from a list content above; this keeps the
+        # preflight's typed boundary explicit.
+        return raw, False
+    final_kinds = [
+        part.get("type") if isinstance(part, dict) else None for part in final_content
+    ]
+    # event index -> ("part" | "item" | "done", content position)
+    editable: dict[int, tuple[str, int | None]] = {}
+    delta_indices: set[int] = set()
+    copy_counts = {"output_text.done": 0, "content_part.done": 0, "output_item.done": 0}
+    for index, value in enumerate(parsed):
+        if value is None or index == unit_index:
+            continue
+        event_type = value.get("type")
+        stream_id = value.get("item_id")
+        if event_type == "response.output_text.delta":
+            if type(stream_id) is str and stream_id == confirmed_id:
+                delta_indices.add(index)
+        elif event_type == "response.content_part.added":
+            part = value.get("part")
+            if not (isinstance(part, dict) and part.get("type") == "output_text"):
+                # Non-answer part: recognized bookkeeping, never touched.
+                continue
+            # An initial added part is a supported empty placeholder only:
+            # its ownership is validated here, its protected content is
+            # never rewritten, and non-empty initial content cannot be
+            # proved safe, so it abstains raw unchanged with zero calls.
+            if type(stream_id) is not str or stream_id != confirmed_id:
+                return raw, False
+            if "text" in part and part["text"] != "":
+                return raw, False
+        elif event_type == "response.output_item.added":
+            item_obj = value.get("item")
+            if not (isinstance(item_obj, dict) and item_obj.get("type") == "message"):
+                # Non-message item: recognized non-answer bookkeeping.
+                continue
+            obj_id = item_obj.get("id")
+            if type(obj_id) is not str or obj_id != confirmed_id:
+                return raw, False
+            # The initial representation of the answer item must agree on
+            # identity and role and carry supported empty placeholders only.
+            if item_obj.get("role") != "assistant":
+                return raw, False
+            content = item_obj.get("content")
+            if content is not None:
+                if not isinstance(content, list):
+                    return raw, False
+                for part in content:
+                    if not isinstance(part, dict) or (
+                        "text" in part and part["text"] != ""
+                    ):
+                        return raw, False
+        elif event_type == "response.output_text.done":
+            if type(stream_id) is not str or stream_id != confirmed_id:
+                continue
+            copy_counts["output_text.done"] += 1
+            if value.get("text") != original_text:
+                # A terminal done event must carry the exact original
+                # answer text; a missing or different text cannot be
+                # proved consistent.
+                return raw, False
+            editable[index] = ("done", None)
+        elif event_type == "response.content_part.done":
+            part = value.get("part")
+            if not (isinstance(part, dict) and part.get("type") == "output_text"):
+                # Non-answer part: recognized bookkeeping, never touched.
+                continue
+            # A different valid id already failed the membership check
+            # above; a missing or non-string id returned earlier.  Kept as
+            # an explicit defense of the ownership rule.
+            if type(stream_id) is not str or stream_id != confirmed_id:
+                return raw, False
+            copy_counts["content_part.done"] += 1
+            if part.get("text") != original_text:
+                return raw, False
+            editable[index] = ("part", None)
+        elif event_type == "response.output_item.done":
+            item_obj = value.get("item")
+            if not (isinstance(item_obj, dict) and item_obj.get("type") == "message"):
+                # Non-message item (e.g. reasoning or tool bookkeeping):
+                # recognized non-answer bookkeeping, never touched.
+                continue
+            obj_id = item_obj.get("id")
+            if type(obj_id) is not str or obj_id != confirmed_id:
+                return raw, False
+            copy_counts["output_item.done"] += 1
+            if item_obj.get("role") != "assistant":
+                return raw, False
+            if "status" in item_obj and item_obj.get("status") != "completed":
+                return raw, False
+            content = item_obj.get("content")
+            if not isinstance(content, list) or len(content) != len(final_content):
+                return raw, False
+            for part_pos, part in enumerate(content):
+                if not isinstance(part, dict) or part.get("type") != final_kinds[part_pos]:
+                    return raw, False
+            if content[content_pos].get("text") != original_text:
+                return raw, False
+            editable[index] = ("item", content_pos)
+    if any(count > 1 for count in copy_counts.values()):
+        # Duplicated terminal representations of the one answer are
+        # ambiguous: bypass unchanged with zero calls.
+        return raw, False
+
+    new_text = repair(original_text)
+    if new_text == original_text:
+        # No accepted text edit: the raw bytes are returned unchanged.
+        return raw, False
+
+    # The validated final unit (a shared reference into the parsed events)
+    # carries the repaired text; the render pass re-emits exactly the
+    # collected editable references plus the confirmed delta events.
+    unit_part["text"] = new_text
     output: list[str] = []
-    used_first: set[str] = set()
+    delta_done = False
     for (block, delimiter), value, index in zip(blocks, parsed, range(len(blocks)), strict=True):
         if value is None:
             output.append(block + delimiter)
             continue
-        event_type = value.get("type")
-        re_render = False
-        item_id = value.get("item_id")
-        if (
-            event_type in ("response.output_text.delta", "response.output_text.done")
-            and type(item_id) is str
-            and item_id in repaired
-        ):
-            # Only the explicitly validated answer id is mutated; every
-            # other event stays byte-identical.  Empty text events are
-            # untouched so no copy of the answer is duplicated.
-            if event_type == "response.output_text.delta":
-                if value.get("delta"):
-                    value["delta"] = repaired[item_id] if item_id not in used_first else ""
-                    used_first.add(item_id)
+        re_render = index == unit_index
+        kind = editable.get(index)
+        if kind is not None:
+            kind_name, copy_pos = kind
+            if kind_name == "done":
+                value["text"] = new_text
+                re_render = True
+            elif kind_name == "part":
+                part = value.get("part")
+                if isinstance(part, dict):
+                    part["text"] = new_text
                     re_render = True
-            elif value.get("text"):
-                value["text"] = repaired[item_id]
+            else:
+                item_obj = value.get("item")
+                if isinstance(item_obj, dict) and type(copy_pos) is int:
+                    content = item_obj.get("content")
+                    if isinstance(content, list):
+                        part = content[copy_pos]
+                        if isinstance(part, dict):
+                            part["text"] = new_text
+                            re_render = True
+        elif index in delta_indices:
+            # The first non-empty delta of the confirmed answer carries the
+            # full repaired text; every later delta is emptied so the answer
+            # is not duplicated.  Only the explicitly validated confirmed id
+            # is ever mutated; only genuine string payloads are touched and
+            # empty text events stay untouched.
+            delta = value.get("delta")
+            if type(delta) is str and delta:
+                value["delta"] = new_text if not delta_done else ""
+                delta_done = True
                 re_render = True
-        elif event_type == "response.content_part.done":
-            # Terminal copy of the confirmed answer part: updated through
-            # the explicitly validated id path, never by value matching.
-            part = value.get("part")
-            if (
-                type(item_id) is str
-                and item_id in repaired
-                and isinstance(part, dict)
-                and part.get("type") == "output_text"
-                and type(part.get("text")) is str
-            ):
-                part["text"] = repaired[item_id]
-                re_render = True
-        elif event_type == "response.output_item.done":
-            # Terminal copy of the confirmed message item.
-            item_obj = value.get("item")
-            if (
-                isinstance(item_obj, dict)
-                and item_obj.get("type") == "message"
-                and type(item_obj.get("id")) is str
-                and item_obj["id"] in repaired
-                and isinstance(item_obj.get("content"), list)
-            ):
-                for part in item_obj["content"]:
-                    if (
-                        isinstance(part, dict)
-                        and part.get("type") == "output_text"
-                        and type(part.get("text")) is str
-                    ):
-                        part["text"] = repaired[item_obj["id"]]
-                re_render = True
-        if index == direct_event:
-            re_render = True
         if re_render:
             block = _render_event(block, value)
         output.append(block + delimiter)

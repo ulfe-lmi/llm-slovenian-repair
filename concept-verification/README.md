@@ -244,6 +244,39 @@ answers are never collapsed into one string or picked first. Established
 valid single-answer SSE behavior is preserved; unknown or ambiguous shapes
 may abstain.
 
+Terminal answer copies (order 014-b): before any reviewer call, a
+preflight proves every answer-bearing terminal representation consistent
+with the one confirmed answer - the same exact typed id, final list
+positions, assistant role, completed status, content cardinality and part
+kinds, and the exact original answer text across `output_text.done`,
+`content_part.done`, and message-typed `output_item.done` copies (at most
+one of each kind). Initial `added` events are supported only as empty
+placeholders: their ownership (the typed confirmed id) and, for message
+items, the assistant role are validated, and their content is never
+rewritten. Every `output_text.delta` payload must be a string (an empty
+string is a valid no-op). Any copy that cannot be proved consistent -
+different text, role, status, index, or cardinality; a duplicated
+terminal copy; a missing/null/non-string id; an answer event for another
+id; or non-empty initial content - abstains with the raw original bytes
+and zero review calls. The renderer then mutates only the explicit event
+references collected during that preflight: the confirmed final answer,
+each validated terminal copy, and the confirmed delta events (the first
+non-empty delta carries the full repaired text, later deltas are
+emptied). No value matching, no id coercion, no metadata traversal.
+Order 014-a's A4 proof established that nominal terminal copies are
+updated consistently through explicit validated paths; it did not prove
+that contradictory, unowned, or duplicated terminal copies are rejected.
+Two distinct 014-a failure modes were observed at the published head:
+same-ID contradictory or extra terminal copies were blindly rewritten to
+the repaired text (the extra or conflicting content was modified), while
+unowned terminal copies (a missing or non-string id) were left unchanged
+beside an edited final answer. The 014-b preflight rejects both: every
+terminal representation is proved consistent before any reviewer call, and
+any copy that cannot be proved consistent abstains with the raw original
+and zero review calls, so the negative matrix - direct transform plus the
+full actual HTTP chain - proves the rejection. The 014-a report remains
+unchanged.
+
 Trace additions are bounded to a per-answer `review_batch` record: fixed
 call count, target count, outcome, and reason labels only. No raw prompts,
 responses, or untrusted exception text is logged. This is runnable-proxy
