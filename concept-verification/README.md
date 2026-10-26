@@ -314,7 +314,10 @@ string (1-200,000 code points). Client-side history conversion (for
 example, a previous assistant turn) is supplied by the client in this
 same shape and validated as-is; any other shape - extra keys, unknown
 roles, non-text parts, or empty content - is rejected before any
-forward.
+forward. The 200,000-code-point bound applies per input string, per
+message content string, and per part text - not as an aggregate across
+the 64 messages or 32 parts; the whole request remains bounded by the
+2,000,000 UTF-8 byte request limit.
 
 Main-response eligibility is one shared profile for the nonstreaming
 JSON primary path and the retained delayed SSE path: a documented
@@ -359,7 +362,8 @@ chaining is rejected before any forward. Declared request limits
 (`config.py`): request body at most 2,000,000 bytes (HTTP 413 before
 any forward when the declared length exceeds the bound); `model` at
 most 200 code points; input string and each message content or part
-text at most 200,000 code points; at most 64 messages and at most 32
+text at most 200,000 code points each (per string/part, not an
+aggregate); at most 64 messages and at most 32
 parts per message; `stop` at most 4 sequences of at most 32 code
 points; `max_output_tokens` at most 32,768; `metadata` at most 16
 string keys of at most 64 code points with string values of at most
