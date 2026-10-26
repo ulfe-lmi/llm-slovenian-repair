@@ -210,26 +210,45 @@ def workspace_layout(repo=None):
     if not path.exists():
         return None
     value = jsread(path)
-    require(value.get('schema_version') == 1 and value.get('strategic_storage') == 'owner-selected-sync', 'LAYOUT_SCHEMA')
+    require(value.get('schema_version') == 1 and value.get('strategic_storage') in ('owner-selected-sync', 'native'), 'LAYOUT_SCHEMA')
     require(meaningful(value.get('authority')), 'LAYOUT_AUTHORITY_REFERENCE')
     s, f = Path(value.get('strategic_home', '')), Path(value.get('fifo_home', ''))
     require(s.is_absolute() and f.is_absolute() and len(s.parts) >= 4 and len(f.parts) >= 4, 'LAYOUT_ABSOLUTE_PATHS')
     require(s != Path.home() and f != Path.home(), 'LAYOUT_BROAD_ROOT')
     require(s != f and s not in f.parents and f not in s.parents, 'LAYOUT_FIFO_OVERLAP')
     require(f != repo and f not in repo.parents and repo not in f.parents, 'LAYOUT_FIFO_OVERLAP')
+    dispatch = value.get('coding_dispatch', 'legacy')
+    require(dispatch in ('legacy', 'foreground'), 'LAYOUT_DISPATCH')
+    if dispatch == 'foreground':
+        # The versioned record stores the exact relaunch argv: the codex
+        # binary first, then its launch arguments. Suffix-only records are
+        # not a valid versioned layout shape.
+        launch = value.get('foreground_launch')
+        require(isinstance(launch, list) and 2 <= len(launch) <= 12 and
+                launch[0] == 'codex' and
+                all(isinstance(x, str) and re.fullmatch(r'[A-Za-z0-9_.-]+', x) for x in launch),
+                'LAYOUT_FOREGROUND_LAUNCH')
     return value
+
+
+def coding_dispatch_mode(repo=None):
+    """Owner-selected coding dispatch for this host: legacy or foreground."""
+    layout = workspace_layout(repo)
+    return layout.get('coding_dispatch', 'legacy') if layout else 'legacy'
 
 
 def strategic_path(path, *, repo=None, kind=None, missing=False):
     """Only the owner's exact sync subtree has different POSIX mode semantics.
 
-    All native/other paths still use strict private modes. No symlink, type,
-    ownership or broad-directory check is bypassed. Launch also checks accepted
-    governance, so candidate-authored layout hashes cannot authorize activation.
+    The exception applies only when the versioned layout record selects the
+    historical owner-selected-sync storage. A native layout (or any other
+    path) uses strict private modes. No symlink, type, ownership or
+    broad-directory check is bypassed. Launch also checks accepted governance,
+    so candidate-authored layout hashes cannot authorize activation.
     """
     p = safe_path(path, kind=kind, missing=missing)
     layout = workspace_layout(repo)
-    root = Path(layout['strategic_home']) if layout else None
+    root = Path(layout['strategic_home']) if layout and layout.get('strategic_storage') == 'owner-selected-sync' else None
     synced = root is not None and (p == root or root in p.parents)
     return safe_path(p, kind=kind, missing=missing, private=not synced)
 
@@ -718,6 +737,59 @@ def governance(repo, mode="bootstrap", accepted_ref=None, allowed_changes=(), st
             "mode": mode, "semantic_proof": False, "human_authorization_proof": False}
 
 
+PROTECTED_GOVERNANCE_PATHS = (
+    "PLAN.md", "ARCHITECTURE.md", "CRITICAL.md",
+    "oap/bootstrap-sources.lock.json", "docs/bootstrap",
+)
+
+
+def ordered_governance_paths(order_data):
+    """Extract the exact allowed source-path set from one order's Governance section."""
+    sections = section_map(order_data.decode())
+    require("Governance" in sections, "ORDER_SECTION", "Governance")
+    paths = []
+    for line in sections["Governance"].splitlines():
+        line = line.strip()
+        if line.startswith("- "):
+            path = line[2:].strip()
+            require(re.fullmatch(r"[A-Za-z0-9_.-]+(?:/[A-Za-z0-9_.-]+)*", path), "GOVERNANCE_PATH_SHAPE", path)
+            paths.append(path)
+    require(paths, "GOVERNANCE_PATHS_EMPTY")
+    require(len(set(paths)) == len(paths), "GOVERNANCE_PATHS_DUPLICATE")
+    return paths
+
+
+def candidate_review(repo, order_path, accepted_ref, *, order_id=None, order_sha256=None):
+    """Order-bound shared candidate review against one literal trusted ref.
+
+    The authorization is bound to the immutable committed order: its
+    governance_ref must be the literal trusted accepted ref and its
+    governance identity map must equal the trusted ref's manifest (accepted
+    source integrity comes from Git, never from candidate self-hashes). The
+    allowed change set is exactly the order's Governance bullet list, trusted
+    only when the order bytes match the explicitly pinned published digest
+    (a mutated allowlist cannot authorize anything else); protected sources
+    and unlisted paths are rejected.
+    """
+    repo = safe_path(repo, kind="dir")
+    require(COMMIT_RE.fullmatch(str(accepted_ref or "")), "TRUSTED_REF_REQUIRED")
+    require(HASH_RE.fullmatch(str(order_sha256 or "")), "ORDER_DIGEST_REQUIRED")
+    order_file = safe_path(repo / order_path, kind="file")
+    data = read(order_file)
+    require(digest(data) == order_sha256, "ORDER_DIGEST_MISMATCH")
+    m = validate_order(data, repo, order_id, Path(order_path).name)
+    require(m.get("governance_ref") == accepted_ref, "ORDER_GOVERNANCE_REF_MISMATCH")
+    paths = ordered_governance_paths(data)
+    require(not set(paths) & set(PROTECTED_GOVERNANCE_PATHS), "PROTECTED_PATH_IN_ALLOWLIST")
+    current = jsread(repo / "oap/governance/MANIFEST.json")
+    accepted_manifest = json.loads(git_blob(repo, accepted_ref, "oap/governance/MANIFEST.json"))
+    known = set(current["identities"]) | set(accepted_manifest["identities"]) | {"oap/governance/MANIFEST.json"}
+    require(set(paths) <= known, "UNORDERED_GOVERNANCE_CHANGE")
+    result = governance(repo, "candidate-review", accepted_ref, paths)
+    return {"result": "candidate review valid", "order": m["id"], "order_path": order_path,
+            "accepted_ref": accepted_ref, "allowed_changes": paths, "governance": result}
+
+
 def validate_order(data, repo, ident=None, filename=None):
     m = metadata(data, "oap-metadata")
     validate_id(m.get("id"))
@@ -1019,7 +1091,162 @@ def prove_forward_report_recovery(repo, ident, *, remote=None, order_data=None, 
     )
 
 
-def transition(repo, new, remote, *, new_order_data=None, new_order_path=None):
+MERGED_TAIL_CLASSIFICATION = "PUBLISHED_POST_MERGE_BRANCH_REPORT"
+MERGED_TAIL_ACCEPTANCE = "PUBLICATION_EVIDENCE_ONLY_NOT_SCIENTIFIC_ACCEPTANCE"
+MERGED_TAIL_RECEIPT_FIELDS = (
+    "prior_id", "pr", "frozen_pr_head", "merge_commit", "retained_branch",
+    "publication_commit", "implementation_parent", "report_path", "report_sha256",
+    "order_path", "order_sha256", "classification", "acceptance",
+)
+
+
+def merged_tail_receipt(repo, ident, incoming=None):
+    """Find the explicit merged-tail receipt binding one prior report.
+
+    The receipt lives in the oap-metadata block of exactly one order (the
+    next-objective order that requires the prior tail). An explicitly passed
+    incoming receipt (the not-yet-written source order at first publication
+    or dry run) is preferred; otherwise the published order files on disk
+    are scanned (publication is the order write then active write, not a
+    Git commit; an order may remain uncommitted until the implementation
+    commit).
+    The receipt is data, not authority: every bound fact is re-proven by
+    merged_tail_proof.
+    """
+    validate_id(ident)
+    if incoming is not None:
+        require(isinstance(incoming, dict), "MERGED_TAIL_RECEIPT_REQUIRED")
+        require(incoming.get("prior_id") == ident, "MERGED_TAIL_RECEIPT_REQUIRED")
+        return (None, None, incoming)
+    found = None
+    orders_dir = Path(repo) / "oap" / "orders"
+    if orders_dir.exists():
+        for path in sorted(orders_dir.iterdir()):
+            if not TRANSCRIPT_FILENAME_RE.fullmatch(path.name):
+                continue
+            try:
+                meta = metadata(read(path), "oap-metadata")
+            except OAPError:
+                continue
+            receipt = meta.get("merged_tail_recovery")
+            if isinstance(receipt, dict) and receipt.get("prior_id") == ident:
+                require(found is None, "MERGED_TAIL_RECEIPT_AMBIGUOUS")
+                found = (str(path.relative_to(repo)), meta, receipt)
+    return found
+
+
+def merged_tail_proof(repo, ident, receipt, *, remote, default_branch):
+    """Prove one explicitly bound post-merge branch publication end to end.
+
+    Recognizes only the explicit merged-tail case: a merged same-repository PR
+    whose frozen head is an ancestor of a later report commit on the original
+    retained branch, with that merge on the current default branch. The result
+    is publication evidence only: never integrated, accepted or scientific.
+    """
+    repo = Path(repo)
+    require(remote is not None, "MERGED_TAIL_REMOTE_REQUIRED")
+    require(isinstance(receipt, dict), "MERGED_TAIL_RECEIPT_REQUIRED")
+    require(receipt.get("prior_id") == ident, "MERGED_TAIL_RECEIPT_REQUIRED")
+    for key in MERGED_TAIL_RECEIPT_FIELDS:
+        require(key in receipt, "MERGED_TAIL_RECEIPT_REQUIRED", key)
+    require(type(receipt["pr"]) is int and receipt["pr"] > 0, "MERGED_TAIL_RECEIPT_REQUIRED", "pr")
+    for key in ("frozen_pr_head", "merge_commit", "publication_commit", "implementation_parent"):
+        require(COMMIT_RE.fullmatch(str(receipt[key] or "")), "MERGED_TAIL_RECEIPT_REQUIRED", key)
+    for key in ("retained_branch", "report_path", "order_path"):
+        require(meaningful(receipt[key]), "MERGED_TAIL_RECEIPT_REQUIRED", key)
+    require(HASH_RE.fullmatch(str(receipt["report_sha256"] or "")), "MERGED_TAIL_RECEIPT_REQUIRED", "report_sha256")
+    require(HASH_RE.fullmatch(str(receipt["order_sha256"] or "")), "MERGED_TAIL_RECEIPT_REQUIRED", "order_sha256")
+    require(receipt.get("classification") == MERGED_TAIL_CLASSIFICATION, "MERGED_TAIL_CLASSIFICATION")
+    require(receipt.get("acceptance") == MERGED_TAIL_ACCEPTANCE, "MERGED_TAIL_ACCEPTANCE")
+    require(meaningful(default_branch), "MERGED_TAIL_RECEIPT_REQUIRED", "default_branch")
+    report_path = str(receipt["report_path"])
+    order_path = str(receipt["order_path"])
+    _recovery_path(report_path, "reports", ident)
+    _recovery_path(order_path, "orders", ident)
+
+    publication = receipt["publication_commit"]
+    parent = receipt["implementation_parent"]
+    # Exact report parent, only changed path and content at the publication.
+    git(repo, "cat-file", "-e", publication + "^{commit}")
+    parents = git(repo, "rev-list", "--parents", "-n", "1", publication).decode().split()
+    require(len(parents) == 2 and parents[1] == parent, "MERGED_TAIL_REPORT_PARENT")
+    require(_commit_paths(repo, publication) == [report_path], "MERGED_TAIL_REPORT_ONLY_PATH")
+    report_bytes = git_blob(repo, publication, report_path)
+    require(digest(report_bytes) == receipt["report_sha256"], "MERGED_TAIL_REPORT_BYTES")
+    # Exact original order: bytes at the publication and preserved at HEAD.
+    order_bytes = git_blob(repo, publication, order_path)
+    require(digest(order_bytes) == receipt["order_sha256"], "MERGED_TAIL_ORDER_BYTES")
+    head = _revision(repo, "HEAD")
+    require(git(repo, "cat-file", "-e", f"{head}:{order_path}", check=False).returncode == 0,
+            "MERGED_TAIL_ORDER_DRIFT")
+    require(git_blob(repo, head, order_path) == order_bytes, "MERGED_TAIL_ORDER_DRIFT")
+    # Frozen PR head is a real ancestor of the later report commit.
+    require(git(repo, "merge-base", "--is-ancestor", receipt["frozen_pr_head"], publication, check=False).returncode == 0,
+            "MERGED_TAIL_FROZEN_HEAD_ANCESTRY")
+    # Merge ancestry on the current default: exact PR-merge shape (frozen head
+    # is the second parent) and the merge on the live default branch.
+    git(repo, "cat-file", "-e", receipt["merge_commit"] + "^{commit}")
+    merge_parents = git(repo, "rev-list", "--parents", "-n", "1", receipt["merge_commit"]).decode().split()
+    require(len(merge_parents) == 3 and merge_parents[2] == receipt["frozen_pr_head"], "MERGED_TAIL_MERGE_SHAPE")
+    require(git(repo, "merge-base", "--is-ancestor", receipt["frozen_pr_head"], receipt["merge_commit"], check=False).returncode == 0,
+            "MERGED_TAIL_FROZEN_HEAD_ANCESTRY")
+    default_head = remote.api("branches/" + default_branch)["commit"]["sha"]
+    require(COMMIT_RE.fullmatch(str(default_head)), "MERGED_TAIL_DEFAULT_HEAD")
+    compare = remote.api("compare/" + receipt["merge_commit"] + "..." + default_head)
+    require(compare.get("status") in ("identical", "ahead"), "MERGED_TAIL_MERGE_NOT_ON_DEFAULT")
+    # The current retained branch head equals the specified report commit.
+    branch_api = remote.api("branches/" + receipt["retained_branch"].replace("%", "%25").replace("/", "%2F"))
+    require(branch_api.get("commit", {}).get("sha") == publication, "MERGED_TAIL_RETAINED_BRANCH_HEAD")
+    local_tip = git(repo, "rev-parse", "--verify", "--quiet", "refs/heads/" + receipt["retained_branch"], check=False)
+    if local_tip.returncode == 0:
+        require(local_tip.stdout.decode().strip() == publication, "MERGED_TAIL_RETAINED_BRANCH_HEAD")
+    # Original same-repository PR identity, original branch/ref, real merged
+    # state and the frozen head GitHub keeps at the merge point.
+    pr = remote.pr(receipt["pr"])
+    require(pr.get("number") == receipt["pr"], "MERGED_TAIL_PR_IDENTITY")
+    require(pr.get("base", {}).get("repo", {}).get("full_name") == remote.repository, "MERGED_TAIL_PR_IDENTITY")
+    require(pr.get("head", {}).get("repo", {}).get("full_name") == remote.repository, "MERGED_TAIL_PR_SAME_REPOSITORY")
+    require(pr.get("head", {}).get("ref") == receipt["retained_branch"], "MERGED_TAIL_PR_BRANCH")
+    # GitHub REST reports a merged PR as state "closed" with merged=true and a
+    # merged_at timestamp; the merge commit itself is pinned below.
+    require(pr.get("merged") is True and pr.get("state") == "closed", "MERGED_TAIL_NOT_MERGED")
+    try:
+        dt.datetime.fromisoformat(str(pr.get("merged_at", "")).replace("Z", "+00:00"))
+    except ValueError as e:
+        raise OAPError("MERGED_TAIL_NOT_MERGED") from e
+    require(pr.get("head", {}).get("sha") == receipt["frozen_pr_head"], "MERGED_TAIL_FROZEN_HEAD")
+    require(pr.get("merge_commit_sha") == receipt["merge_commit"], "MERGED_TAIL_MERGE_COMMIT")
+    require(pr.get("base", {}).get("ref") == default_branch, "MERGED_TAIL_PR_BASE")
+    # The report's check SHAs are ancestors of its recorded implementation head.
+    report_meta = metadata(report_bytes, "oap-report")
+    require(report_meta.get("id") == ident, "MERGED_TAIL_REPORT_ID")
+    require(report_meta.get("implementation_head") == parent, "MERGED_TAIL_REPORT_PARENT")
+    for check in report_meta.get("checks", []):
+        require(git(repo, "merge-base", "--is-ancestor", str(check.get("sha", "")), parent, check=False).returncode == 0,
+                "MERGED_TAIL_CHECK_SHA_ANCESTRY")
+    try:
+        observed = dt.datetime.fromisoformat(pr.get("created_at", "").replace("Z", "+00:00"))
+        written = dt.datetime.fromisoformat(report_meta.get("pr_observed_at", ""))
+        require(observed <= written, "MERGED_TAIL_PR_CREATED_AFTER_REPORT")
+    except (ValueError, TypeError) as e:
+        raise OAPError("MERGED_TAIL_PR_CREATED_AFTER_REPORT") from e
+    return {
+        "id": ident,
+        "pr": receipt["pr"],
+        "classification": MERGED_TAIL_CLASSIFICATION,
+        "acceptance": MERGED_TAIL_ACCEPTANCE,
+        "publication_commit": publication,
+        "implementation_parent": parent,
+        "frozen_pr_head": receipt["frozen_pr_head"],
+        "merge_commit": receipt["merge_commit"],
+        "retained_branch": receipt["retained_branch"],
+        "report_path": report_path,
+        "default_head": default_head,
+        "evidence_scope": "explicit receipt proven against local Git and remote GitHub facts; publication evidence only",
+    }
+
+
+def transition(repo, new, remote, *, new_order_data=None, new_order_path=None, merged_tail_receipt_data=None):
     old_id = active_id(repo)
     if old_id == new["id"]:
         require(matching(repo, "reports", old_id) is None, "COMPLETED_REPLAY")
@@ -1048,7 +1275,7 @@ def transition(repo, new, remote, *, new_order_data=None, new_order_path=None):
         require(read(report_path) == git_blob(repo, proof["publication_commit"], proof["report_path"]),
                 "RECOVERY_REPORT_BYTES")
     else:
-        verify_report(repo, old_id, remote=remote)
+        verify_report(repo, old_id, remote=remote, receipt=merged_tail_receipt_data)
     previous_report = metadata(read(report_path), "oap-report")
     pr = remote.pr(previous_report["pr"])
     if new["objective"] == old["objective"]:
@@ -1056,6 +1283,19 @@ def transition(repo, new, remote, *, new_order_data=None, new_order_path=None):
         require(new["branch"] == old["branch"] and new["pr"] == previous_report["pr"] and pr["state"] == "open", "SAME_PR_REQUIRED")
     else:
         require(int(new["objective"]) == int(old["objective"]) + 1 and new["id"].endswith("-a"), "OBJECTIVE_SEQUENCE")
+        report_commit = git(repo, "log", "-1", "--format=%H", "--", str(report_path.relative_to(repo))).decode().strip()
+        if pr.get("merged") is True and pr.get("head", {}).get("sha") != report_commit:
+            # The prior PR was merged with a later report on the original
+            # retained branch: a new-objective transition requires the
+            # explicit merged-tail receipt on the incoming order, and the
+            # full tuple is proven again by ancestry (no bypass).
+            receipt = merged_tail_receipt_data or new.get("merged_tail_recovery")
+            require(isinstance(receipt, dict) and receipt.get("prior_id") == old_id, "MERGED_TAIL_RECEIPT_REQUIRED")
+            merged_tail_proof(repo, old_id, receipt, remote=remote, default_branch=new["default_branch"])
+            # Preservation by ancestry: the original report commit must be
+            # carried in the current branch history, not merely copied bytes.
+            require(git(repo, "merge-base", "--is-ancestor", receipt["publication_commit"], "HEAD", check=False).returncode == 0,
+                    "MERGED_TAIL_PRESERVATION_ANCESTRY")
         abandoned = new.get("prior_disposition") == "ABANDONED" and meaningful(new.get("abandonment_rationale")) and meaningful(new.get("dependency_reassessment")) and pr["state"] == "closed"
         require(pr.get("merged") is True or abandoned, "PRIOR_NOT_MERGED_OR_DISPOSED")
         default = remote.api("branches/" + new["default_branch"])
@@ -1075,13 +1315,15 @@ def publish(repo, source, ident, *, strategy=None, accepted_ref=None, dry_run=Fa
     require(matching(repo, "reports", ident) is None, "COMPLETED_REPLAY")
     if dry_run:
         transition(repo, m, remote, new_order_data=data,
-                   new_order_path=str(target.relative_to(repo)))
+                   new_order_path=str(target.relative_to(repo)),
+                   merged_tail_receipt_data=m.get("merged_tail_recovery"))
         if target.exists():
             require(read(target) == data, "IMMUTABLE_CONFLICT")
         return {"result": "valid dry run", "writes": 0}
     with lock(repo / "oap/.publish.lock"):
         transition(repo, m, remote, new_order_data=data,
-                   new_order_path=str(target.relative_to(repo)))
+                   new_order_path=str(target.relative_to(repo)),
+                   merged_tail_receipt_data=m.get("merged_tail_recovery"))
         peers = remote.branch_prs(m["branch"])
         require(len(peers) <= 1, "DUPLICATE_PR")
         if m["pr_mode"] == "AMEND_EXISTING_PR":
@@ -1409,7 +1651,7 @@ def check_transcript(repo, *, index=False, revision=None, expected_id=None):
             "quarantined_reports": quarantined, "report_history": history}
 
 
-def verify_report(repo, ident, *, commit=None, remote=None):
+def verify_report(repo, ident, *, commit=None, remote=None, receipt=None):
     repo = Path(repo)
     validate_id(ident)
     opath, rpath = matching(repo, "orders", ident), matching(repo, "reports", ident)
@@ -1433,18 +1675,42 @@ def verify_report(repo, ident, *, commit=None, remote=None):
     require(git_blob(repo, commit, str(opath.relative_to(repo))) == order_data, "COMMITTED_ORDER_DRIFT")
     for c in r["checks"]:
         require(git(repo, "merge-base", "--is-ancestor", c["sha"], r["implementation_head"], check=False).returncode == 0, "UNOBSERVED_CHECK_SHA")
+    merged = None
     if remote is not None:
         require(remote.repository == order["repository"], "REMOTE_PR_IDENTITY")
         pr = remote.pr(r["pr"])
-        require(pr["head"]["sha"] == commit and pr["head"]["ref"] == r["branch"], "REMOTE_HEAD_MISMATCH")
+        if not (pr.get("head", {}).get("sha") == commit and pr.get("head", {}).get("ref") == r["branch"]):
+            # A merged PR whose head GitHub froze earlier may carry one later
+            # report on the original retained branch. Recognize only the
+            # explicit merged-tail case, bound by an order-carried receipt
+            # whose PR and retained branch are pinned to the original
+            # validated report and order.
+            found = merged_tail_receipt(repo, ident, incoming=receipt)
+            require(found is not None, "REMOTE_HEAD_MISMATCH")
+            receipt = found[2]
+            require(receipt.get("pr") == r["pr"], "MERGED_TAIL_RECEIPT_PR_MISMATCH")
+            require(receipt.get("retained_branch") == r["branch"], "MERGED_TAIL_RECEIPT_BRANCH_MISMATCH")
+            require(receipt.get("prior_id") == ident, "MERGED_TAIL_RECEIPT_REQUIRED")
+            merged = merged_tail_proof(repo, ident, receipt, remote=remote,
+                                       default_branch=order["default_branch"])
+            require(merged["publication_commit"] == commit, "REMOTE_HEAD_MISMATCH")
         require(dt.datetime.fromisoformat(pr["created_at"].replace("Z", "+00:00")) <= dt.datetime.fromisoformat(r["pr_observed_at"]), "PR_CREATED_AFTER_REPORT")
+        # Shared remote commit-level checks for both cases: the report commit
+        # itself must carry the exact parent, only path and content remotely.
         rc = remote.api("commits/" + commit)
         require([p["sha"] for p in rc["parents"]] == [r["implementation_head"]], "REMOTE_REPORT_PARENT")
         require([f["filename"] for f in rc["files"]] == [report_rel], "REMOTE_REPORT_ONLY_PATH")
         blob = remote.api("contents/" + report_rel + "?ref=" + commit)
         require(blob.get("encoding") == "base64" and base64.b64decode(blob["content"]) == data, "REMOTE_REPORT_CONTENT")
-    return {"result": "verified", "scope": "remote" if remote else "local only", "commit": commit, "id": ident,
-            "report_history": history}
+        if merged is not None:
+            # Exact original order, verified remotely at the report commit.
+            order_blob = remote.api("contents/" + str(opath.relative_to(repo)) + "?ref=" + commit)
+            require(order_blob.get("encoding") == "base64" and base64.b64decode(order_blob["content"]) == order_data, "REMOTE_ORDER_DRIFT")
+    result = {"result": "verified", "scope": "remote" if remote and merged is None else ("merged-tail publication evidence only" if merged else "local only"),
+              "commit": commit, "id": ident, "report_history": history}
+    if merged is not None:
+        result["merged_tail"] = merged
+    return result
 
 
 def protocol_state(repo, *, strategy=None, remote=None):
@@ -1465,15 +1731,25 @@ def protocol_state(repo, *, strategy=None, remote=None):
         # the current report, when present, is verified remotely below.
         recovery = prove_forward_report_recovery(repo, ident)
     state = "READY"
+    publication_evidence = None
     if matching(repo, "reports", ident):
         state = "PUBLICATION_RECONCILIATION_REQUIRED"
         if remote:
-            verify_report(repo, ident, remote=remote)
+            verified = verify_report(repo, ident, remote=remote)
             state = "REVIEW_READY"
+            publication_evidence = verified.get("merged_tail")
     elif strategy and (Path(strategy) / "workorders/consumed.json").exists():
         if jsread(Path(strategy) / "workorders/consumed.json").get("id") == ident:
             state = "RECOVERY_REQUIRED"
     result = {"state": state, "id": ident, "branch": order["branch"], "pr": order["pr"], "critical": critical}
+    if publication_evidence is not None:
+        # Post-merge branch publication: strategy may review, but the report
+        # stays classified as publication evidence, not integrated work. The
+        # state keeps the review-ready dispatch semantics; the scope field
+        # preserves the truthful distinction.
+        result["publication_scope"] = publication_evidence["classification"]
+        result["publication_acceptance"] = publication_evidence["acceptance"]
+        result["publication_evidence"] = publication_evidence
     if recovery is not None:
         result["prior_report_recovery"] = recovery
     return result
@@ -1530,6 +1806,122 @@ def fifo(path, action, *, timeout=None):
         os.close(fd)
 
 
+def _pane_children(pid):
+    """Direct children of one process, read strictly from its own /proc entry."""
+    children = []
+    task_dir = Path("/proc") / str(pid) / "task"
+    try:
+        tids = [int(e.name) for e in task_dir.iterdir() if e.name.isdigit()]
+    except OSError:
+        return children
+    for tid in tids:
+        try:
+            for name in Path(task_dir / str(tid) / "children").read_text().split():
+                children.append(int(name))
+        except (OSError, ValueError):
+            continue
+    return children
+
+
+def _proc_stat_fields(pid):
+    """(ppid, pgrp, tty_nr, tpgid) from one process's own /proc stat entry.
+
+    Fields after the closing paren of the (possibly spaced) comm field:
+    state, ppid, pgrp, session, tty_nr, tpgid. tpgid is the kernel-reported
+    foreground process group of the process's controlling terminal.
+    """
+    try:
+        stat_data = (Path("/proc") / str(pid) / "stat").read_text()
+    except OSError:
+        return None
+    try:
+        parts = stat_data.rsplit(")", 1)[1].split()
+        return int(parts[1]), int(parts[2]), int(parts[4]), int(parts[5])
+    except (IndexError, ValueError):
+        return None
+
+
+def _pane_ppid(pid):
+    """Parent PID of one process, read strictly from its own /proc entry."""
+    fields = _proc_stat_fields(pid)
+    return fields[0] if fields is not None else None
+
+
+def _tmux_server_pid(pane_pid):
+    """The tmux server PID that directly owns this pane shell, or None.
+
+    A tmux pane shell is a direct child of the tmux server (argv[0] `tmux`
+    or `tmux: server`). The explicitly selected pane PID is verified against
+    its own parent, so a mere descendant of tmux is not accepted as a pane.
+    """
+    server = _pane_ppid(pane_pid)
+    if server is None:
+        return None
+    try:
+        argv = [a.decode("utf-8", "replace")
+                for a in (Path("/proc") / str(server) / "cmdline").read_bytes().split(b"\0") if a]
+    except OSError:
+        return None
+    if argv and Path(argv[0]).name.split(":", 1)[0] == "tmux":
+        return server
+    return None
+
+
+def foreground_pane(repo, pane_pid, launch_args):
+    """Verify the explicitly selected foreground coding pane from its PID.
+
+    The walk is scoped to the selected pane PID: its strict ancestor chain
+    must be a tmux pane, and its descendant chain must contain exactly one
+    Codex process with the exact launch argv and repository cwd. Unrelated
+    processes are never inspected. The pane fails closed when it is
+    missing/dead, not a tmux pane, or the match is missing/wrong/ambiguous.
+    Returns the verified Codex PID.
+    """
+    repo = Path(os.path.abspath(repo)).resolve()
+    require(isinstance(pane_pid, int) and pane_pid > 0, "PANE_PID_INVALID")
+    require(isinstance(launch_args, list) and launch_args, "PANE_LAUNCH_INVALID")
+    if not (Path("/proc") / str(pane_pid) / "cmdline").exists():
+        raise OAPError("PANE_DEAD")
+    if _tmux_server_pid(pane_pid) is None:
+        raise OAPError("PANE_NOT_TMUX_PANE")
+    matches = []
+    frontier, seen = [pane_pid], set()
+    while frontier:
+        next_frontier = []
+        for pid in frontier:
+            if pid in seen:
+                continue
+            seen.add(pid)
+            try:
+                cmdline_path = Path("/proc") / str(pid) / "cmdline"
+                argv = [a.decode("utf-8", "replace") for a in cmdline_path.read_bytes().split(b"\0") if a]
+            except (OSError, ValueError):
+                argv = []
+            if argv and Path(argv[0]).name == "codex" and argv[1:] == list(launch_args):
+                try:
+                    if (Path("/proc") / str(pid) / "cwd").resolve() == repo:
+                        matches.append(pid)
+                except OSError:
+                    pass
+            next_frontier.extend(_pane_children(pid))
+        frontier = next_frontier
+    require(len(matches) == 1, "PANE_ARGV_MISMATCH" if not matches else "PANE_AMBIGUOUS")
+    # The matched Codex must be the pane tty's actual foreground process:
+    # it must have a controlling terminal whose kernel-reported foreground
+    # process group (tpgid) equals its own process group. An inert
+    # background stub with the right argv/cwd is not the foreground.
+    match = matches[0]
+    match_fields = _proc_stat_fields(match)
+    # The matched Codex must lead its own foreground process group on a real
+    # controlling terminal: pgrp == tpgid == matched PID. A backgrounded
+    # child ("&") in a non-interactive, job-control-off shell inherits the
+    # shell's group, so its pgrp/tpgid equal the shell PID, not its own, and
+    # is rejected. This does not require equality with the pane shell group.
+    require(match_fields is not None and match_fields[2] != 0
+            and match_fields[1] == match_fields[3] and match_fields[1] > 0
+            and match_fields[1] == match,
+            "PANE_NOT_FOREGROUND")
+    return match
 def strategic_gate(remote, pr_number, reviewed_sha, required_checks, *, merge_effect,
                    repo=None, report_id=None):
     require(os.environ.get("OAP_ROLE") == "strategic", "ROLE_REQUIRED")

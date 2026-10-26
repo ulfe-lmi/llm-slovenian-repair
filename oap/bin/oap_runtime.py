@@ -11,14 +11,20 @@ import time
 import tomllib
 from oap_core import (require, OAPError, safe_path, read, jsread, atomic, json_bytes,
                       lock, digest, git, governance, protocol_state, matching, active_id,
-                      fifo, verify_report, GitHub, READ_SET, strategic_path, fifo_home)
+                      fifo, verify_report, GitHub, READ_SET, strategic_path, fifo_home,
+                      coding_dispatch_mode, foreground_pane, workspace_layout)
 from oap_install import runtime_config
 
 
-def role_context(config, role, *, operational=False, check_selected=True):
+def role_context(config, role, *, operational=False, check_selected=True, dispatch=False):
     require(role in ("coding", "strategic"), "UNKNOWN_ROLE")
     require(not check_selected or os.environ.get("OAP_ROLE", role) == role, "CONFLICTING_ROLE")
     repo = safe_path(config["OAP_REPO_ROOT"], kind="dir")
+    if operational and role == "coding" and coding_dispatch_mode(repo) == "foreground":
+        # Owner-selected foreground runtime: the legacy entry point may not
+        # spawn a coding model (including codex exec), auto-restart one, or
+        # create a background pane. It fails closed instead of falling back.
+        raise OAPError("FOREGROUND_DISPATCH_ONLY")
     strategy = strategic_path(config["OAP_STRATEGIC_HOME"], repo=repo, kind="dir")
     pipes = fifo_home(repo, strategy)
     require(config.get('OAP_FIFO_HOME') == str(pipes), 'FIFO_HOME_LAYOUT_CONFLICT')
@@ -28,7 +34,9 @@ def role_context(config, role, *, operational=False, check_selected=True):
     require(coding_home != strategy_home and coding_home not in strategy_home.parents and strategy_home not in coding_home.parents, "ROLE_HOME_COLLISION")
     require(strategy in coding_home.parents and strategy in strategy_home.parents, "ROLE_HOME_OUTSIDE_PRIVATE")
     current_home = os.environ.get("CODEX_HOME")
-    if current_home:
+    if current_home and not dispatch:
+        # The foreground dispatcher is cross-role and launches no model; its
+        # own session home is not a generator-home reuse.
         require(Path(current_home).resolve() not in (coding_home, strategy_home) or os.environ.get("OAP_ROLE") == role, "GENERATOR_HOME_REUSE")
     home = coding_home if role == "coding" else strategy_home
     cwd = repo if role == "coding" else strategy
@@ -130,9 +138,113 @@ def launch(config, role, *, print_only=False, resume_id=None, once=False, timeou
             resume_id = None
 
 
+def foreground_dispatch(config, *, pane_pid, timeout=None, resume_id=None, gh_bin="gh"):
+    """Adopt the owner-selected foreground coding pane; starts zero models.
+
+    The dispatcher runs outside the coding model (explicit OAP_ROLE=strategic)
+    and, under the coding role lock, verifies: the accepted runtime baseline
+    (repository, origin, governance at the literal trusted ref), the
+    explicitly selected pane PID's tmux identity plus its exact Codex
+    descendant, and the durable protocol state including consumed.json. It
+    then consumes exactly one OK control frame, re-verifies the pane
+    liveness/argv/cwd and the order state after the OS wait, and writes the
+    durable consumed record before returning the paste-ready handoff. A
+    duplicate completed signal cannot dispatch implementation; an unfinished
+    consumed order requires an explicit same-ID resume.
+    """
+    require(os.environ.get("OAP_ROLE") == "strategic", "ROLE_REQUIRED")
+    repo = safe_path(config["OAP_REPO_ROOT"], kind="dir")
+    layout = workspace_layout(repo)
+    require(layout is not None and layout.get("coding_dispatch") == "foreground", "FOREGROUND_NOT_SELECTED")
+    # Cross-role topology, FIFO identity, role homes and prompt role checks;
+    # no model/auth qualification for a dispatcher that launches no model.
+    role_context(config, "coding", check_selected=False, dispatch=True)
+    require(config.get("OAP_GITHUB_REPOSITORY") and config.get("OAP_ACCEPTED_REF"), "REMOTE_BASELINE_REQUIRED")
+    origin = git(repo, "remote", "get-url", "origin").decode().strip()
+    expected = config["OAP_GITHUB_REPOSITORY"]
+    require(origin in (f"https://github.com/{expected}.git", f"https://github.com/{expected}", f"git@github.com:{expected}.git"), "REMOTE_ORIGIN_MISMATCH")
+    strategy = strategic_path(config["OAP_STRATEGIC_HOME"], repo=repo, kind="dir")
+    governance(repo, "accepted-runtime", config["OAP_ACCEPTED_REF"], strategy=strategy)
+    remote = GitHub(config["OAP_GITHUB_REPOSITORY"], gh_bin)
+    # The versioned layout record stores the exact relaunch argv, codex
+    # binary first (validated by workspace_layout); the pane matcher
+    # compares the binary plus post-binary arguments.
+    launch = list(layout["foreground_launch"])
+    require(launch and launch[0] == "codex", "LAYOUT_FOREGROUND_LAUNCH_SHAPE")
+    launch_args = launch[1:]
+    with lock(strategy / ".coding.lock"):
+        pane = foreground_pane(repo, pane_pid, launch_args)
+        state = protocol_state(repo, strategy=strategy, remote=remote)
+        if state["state"] == "INACTIVE":
+            raise OAPError("NO_ACTIVE_ROUND")
+        if state["state"] in ("PUBLICATION_RECONCILIATION_REQUIRED", "REVIEW_READY"):
+            raise OAPError("COMPLETED_REPLAY")
+        if state["state"] == "RECOVERY_REQUIRED":
+            require(resume_id == state["id"], "EXPLICIT_SAME_ORDER_RECOVERY_REQUIRED")
+        order_path = matching(repo, "orders", state["id"])
+        require(order_path is not None, "ACTIVE_ORDER_MISSING")
+        order_before = read(order_path)
+        order_hash = digest(order_before)
+        peers = remote.branch_prs(state["branch"])
+        require(len(peers) <= 1, "DUPLICATE_PR")
+        # state=all peers include closed/merged history: an owner's mid-round
+        # merge is observed history requiring strategic reconciliation
+        # (e.g. explicit merged-tail recognition in the next round), never a
+        # blind dispatch or resumed coding. Only an exactly open, unmerged
+        # peer may proceed; missing/unknown state fails closed. Reject
+        # before consuming control.
+        for peer in peers:
+            require(peer.get("state") == "open" and peer.get("merged") is not True,
+                    "MERGED_PEER_REQUIRES_RECONCILIATION")
+        # On same-ID resume the durable consumed record is the PR identity
+        # binding when the order itself names no PR (CREATE_NEW_PR rounds).
+        consumed_pr = None
+        if state["state"] == "RECOVERY_REQUIRED":
+            consumed_pr = jsread(strategy / "workorders/consumed.json").get("pr")
+        if state["pr"] is not None:
+            require(len(peers) == 1 and peers[0]["number"] == state["pr"], "RECOVERY_PR_MISMATCH")
+        elif consumed_pr is not None:
+            require(len(peers) == 1 and peers[0]["number"] == consumed_pr, "RECOVERY_PR_MISMATCH")
+        frame = fifo(fifo_home(repo, strategy) / "control.fifo", "wait", timeout=timeout)
+        require(frame == {"frame": "OK", "bytes": 2}, "FIFO_INVALID_FRAME")
+        # The OS wait is not a trust boundary: re-verify the selected pane
+        # (liveness, argv, cwd), the durable order state, the exact active
+        # order bytes, and the remote PR peers before handoff.
+        pane = foreground_pane(repo, pane_pid, launch_args)
+        state_after = protocol_state(repo, strategy=strategy, remote=remote)
+        require(state_after["id"] == state["id"] and state_after["state"] == state["state"], "STATE_CHANGED_DURING_DISPATCH")
+        require(read(order_path) == order_before and digest(read(order_path)) == order_hash,
+                "ORDER_CHANGED_DURING_DISPATCH")
+        require(remote.branch_prs(state["branch"]) == peers, "PR_CHANGED_DURING_DISPATCH")
+        consumed = {"id": state["id"], "branch": state["branch"],
+                    "pr": peers[0]["number"] if peers else None,
+                    "phase": "consumed", "recovery": resume_id == state["id"],
+                    "dispatch": "foreground", "pane_pid": pane}
+        atomic(strategy / "workorders/consumed.json", json_bytes(consumed), mode=0o600)
+        handoff = (
+            "OAP_ROLE=coding. Foreground handoff: this already-running pane is the sole coding agent; "
+            "export OAP_ROLE=coding in every helper command environment. Do not wait for control again: "
+            "the exact OK frame was consumed once outside this model.\n"
+            f"Exact active order: {state['id']}. Read the repository router and oap/coding-instructions/AGENTS.md, "
+            "then its ordered compact read set and the exact active order.\n"
+            "No subagents, background codex exec, alternate providers, launchers or auto-restarts.\n"
+            "Implement only that bounded round, open/keep its one PR, publish its verified report and "
+            "remain at the foreground prompt."
+        )
+        return {"result": "handoff ready", "pane_pid": pane, "id": state["id"],
+                "state": state["state"], "recovery": state["state"] == "RECOVERY_REQUIRED",
+                "control_frame": frame, "handoff": handoff,
+                "consumed_record": "workorders/consumed.json",
+                "models_started": 0, "signals_sent": 0}
+
+
 def tmux_plan(config, operational, *, config_path):
     require(shutil.which("tmux"), "TMUX_MISSING")
     repo, strategy = Path(config["OAP_REPO_ROOT"]), Path(config["OAP_STRATEGIC_HOME"])
+    if operational and coding_dispatch_mode(repo) == "foreground":
+        # The operational two-pane session would spawn the coding model in a
+        # background pane; the foreground runtime refuses it outright.
+        raise OAPError("FOREGROUND_DISPATCH_ONLY")
     roles = [role_context(config, r, operational=operational, check_selected=False) for r in ("coding", "strategic")]
     session = config["OAP_RUN_TMUX_SESSION" if operational else "OAP_SETUP_TMUX_SESSION"]
     require(re.fullmatch(r"[A-Za-z0-9_-]+", session), "TMUX_SESSION_NAME")

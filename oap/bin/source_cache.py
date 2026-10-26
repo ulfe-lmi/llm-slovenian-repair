@@ -5,6 +5,11 @@ This module never downloads.  Promotion accepts one caller-owned part after the
 canonical inventory verifier has accepted it; consumers re-run that verifier.
 Only bounded state/reason values are returned, never the private cache path or
 source content.
+
+Ownership authority is the current process owner (the authorized native
+project owner running this code).  An unrelated historical account that may
+exist on the host (for example a legacy ``ubuntu`` account) never redirects
+that authority; no account database lookup is performed.
 """
 from __future__ import annotations
 
@@ -14,7 +19,6 @@ import fcntl
 import hashlib
 import json
 import os
-import pwd
 import stat
 import sys
 from datetime import UTC, datetime
@@ -76,11 +80,9 @@ def _fail(reason: str) -> None:
     raise CacheError(reason)
 
 
-def _ubuntu_uid() -> int:
-    try:
-        return pwd.getpwnam("ubuntu").pw_uid
-    except KeyError:
-        return os.getuid()
+def _current_owner_uid() -> int:
+    """Return the current process owner uid - the only cache authority."""
+    return os.getuid()
 
 
 def _owned(path: Path, *, kind: str | None = None, missing: bool = False) -> None:
@@ -92,7 +94,7 @@ def _owned(path: Path, *, kind: str | None = None, missing: bool = False) -> Non
         _fail("CACHE_MISSING_PATH")
     if stat.S_ISLNK(info.st_mode):
         _fail("CACHE_SYMLINK")
-    if info.st_uid != _ubuntu_uid():
+    if info.st_uid != _current_owner_uid():
         _fail("CACHE_WRONG_OWNER")
     if kind == "dir" and not stat.S_ISDIR(info.st_mode):
         _fail("CACHE_WRONG_TYPE")
@@ -378,7 +380,7 @@ def _remove_promotion_artifacts(root: Path) -> None:
             raise CacheError("CACHE_PROMOTION_CLEANUP_FAILED") from exc
         if stat.S_ISLNK(info.st_mode) or not stat.S_ISREG(info.st_mode):
             raise CacheError("CACHE_PROMOTION_CLEANUP_FAILED")
-        if info.st_uid != _ubuntu_uid() or info.st_nlink != 1:
+        if info.st_uid != _current_owner_uid() or info.st_nlink != 1:
             raise CacheError("CACHE_PROMOTION_CLEANUP_FAILED")
         try:
             path.unlink()

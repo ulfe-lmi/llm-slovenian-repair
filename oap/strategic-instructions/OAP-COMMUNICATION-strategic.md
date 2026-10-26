@@ -76,8 +76,10 @@ Publishers/wrappers/strategic sessions use role-specific locks. Validate canonic
 paths, ownership, types and symlinks; scope permissions to generated private
 objects. Native FIFOs/config are 0600; native private directories 0700. The explicit
 owner layout update in WORKSPACE-LAYOUT.json places only FIFOs in the native home;
-all regular strategic files remain in the named sync subtree, where POSIX private
-modes are not asserted. Ownership/type/symlink checks remain. Protect legitimate
+the 2026-10-25 owner-directed native migration also moves STRATEGIC_HOME to the
+native host under strict 0700/0600. The historical exact owner-selected-sync
+POSIX exception remains code support for the legacy subtree only.
+Ownership/type/symlink checks remain on all roots. Protect legitimate
 Git worktrees and existing unrelated files. Private absolute paths stay out of
 public logs and manifests unless truly required and approved.
 
@@ -195,7 +197,12 @@ A FIFO is not an authenticated durable message queue.
 The coding wrapper consumes control **once** before starting the model; the
 coding prompt must not ask the model to wait on it a second time. After wake-up,
 reconcile active/order/report and no-replay state before model invocation. A
-completed reported round does not launch coding again merely because OK arrived.
+completed reported round does not launch coding again merely because OK
+arrived. In the owner-selected foreground runtime the strategic dispatcher
+adopts the already-running pane, verifies its PID/cwd/argv, consumes one exact
+OK outside the model, writes the durable consumed record and returns a
+paste-ready handoff that explicitly conveys OAP_ROLE=coding; legacy coding
+launch/tmux entry points fail closed instead of falling back.
 
 ## 7. Coding publication and SELF
 
@@ -298,6 +305,7 @@ Recovery cases to implement/test:
 | Duplicate signal for completed round | Suppress model invocation; verify durable state. |
 | Required CI pending | Wait/recheck without busywork or automatic suffix increment. |
 | Explicit quit | Stop cleanly and leave shell; do not resurrect children. |
+| Merged PR's report on retained branch | Recognize only as post-merge branch publication evidence via the explicit pinned receipt; the proof alone does not establish integration or scientific acceptance, and later integration must be verified separately on current main; reconcile in the next round. |
 
 Strategy may re-signal an unfinished round after reconciliation; a recovery receipt
 records why without overwriting order/report history. Local private journal may
@@ -383,6 +391,15 @@ source/projection. Private law stays accepted-old. After accepted merge and a
 reconciled inactive checkpoint, `bootstrap-two-codex-oap.sh --refresh-governance
 --accepted-ref SHA` takes role locks, preserves backups and updates only approved
 law/references. Reread before another order; drafts/config/history remain private.
+
+Foreground dispatch (owner-selected runtime): run
+`python3 oap/bin/oap_cli.py foreground-dispatch --config runtime.env --pane-pid PID`
+under explicit OAP_ROLE=strategic. It adopts the verified pane, consumes one
+exact OK, re-validates pane and order/PR state after the OS wait, writes the
+consumed record and returns the handoff; strategy pastes it into the named
+existing pane. Duplicate completed signals are suppressed; an unfinished
+consumed round resumes only with the explicit same ID. Legacy coding launch/tmux
+fail FOREGROUND_DISPATCH_ONLY on this runtime.
 
 Audit: finalize request with exact accepted architecture/PLAN identities and
 current merged-main SHA; fresh context derives full-source requirements before

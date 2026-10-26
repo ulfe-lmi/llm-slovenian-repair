@@ -1,11 +1,14 @@
 # Coding communication — revision 1 / project protocol 2.0
 
-P-PLACEMENT-01. Owner update 2026-09-07: resolve pipes as
-OAP_FIFO_HOME/control.fifo and OAP_FIFO_HOME/response.fifo, not as files inside
-STRATEGIC_HOME. All regular strategic state/role homes remain in STRATEGIC_HOME.
-Use the configured native FIFO directory (0700; pipes 0600); no FIFO symlinks or
-empty-file substitutes. The explicit WORKSPACE-LAYOUT.json record scopes the sync
-mount's permission semantics; it grants no operational or human acceptance.
+P-PLACEMENT-01. Owner update 2026-09-07, native migration 2026-10-25: resolve
+pipes as OAP_FIFO_HOME/control.fifo and OAP_FIFO_HOME/response.fifo under the
+user's native home, not as files inside STRATEGIC_HOME. All regular strategic
+state/role homes remain in STRATEGIC_HOME; the adopted foreground coding
+session keeps its owner-launched CODEX_HOME as launched — adoption never
+relocates it or copies authentication. Use the configured native FIFO
+directory (0700; pipes 0600); no FIFO symlinks or empty-file substitutes. The
+versioned WORKSPACE-LAYOUT.json layout record grants no operational or human
+acceptance.
 
 P-STATE-01. GitHub=software truth; immutable orders/reports/active history=protocol
 truth; FIFO=sync only. Role/cwd/home must agree before launch. Read exact ASCII
@@ -46,6 +49,11 @@ ID/JSON/status. Sender closes descriptor; reader validates complete frame throug
 EOF, fragments allowed, wrong/extra/empty frame rejected. Use `python3
 oap/bin/oap_fifo.py send --fifo PATH` for response after verified publication.
 Never echo. OS waiting uses zero idle model calls. OK does not mean COMPLETE.
+In the owner-selected foreground runtime the strategic dispatcher adopts this
+already-running pane, verifies its PID/cwd/argv, consumes one exact OK outside
+the model and returns a paste-ready handoff explicitly conveying OAP_ROLE=coding;
+legacy launch/tmux entry points fail closed instead of falling back, and a
+duplicate completed signal cannot dispatch implementation.
 
 P-SELF-01. Implement/test/docs only scope; exact critical append in implementation.
 Commit/push all non-report work including activated order/active. Create a single

@@ -41,22 +41,81 @@ class SplitLayout(unittest.TestCase):
         self.assertTrue(set(results).issubset({'written','LOCKED','IMMUTABLE_CONFLICT'}))
         self.assertIn(read(path),(b'first',b'second'))
 
-    def test_example_configuration_matches_selected_layout(self):
-        path=write(self.root/'runtime.env',read(SOURCE/'oap/runtime.env.example'))
+    def _example_text(self):
+        return read(SOURCE/'oap/runtime.env.example').decode()
+
+    def test_example_is_a_portable_schema_template(self):
+        # The example parses against the exact schema (all keys present,
+        # JSON-string values) without embedding this host's machine roots.
+        text=self._example_text()
+        for line in text.splitlines():
+            if line and not line.startswith('#'):
+                key,sep,value=line.partition('=')
+                self.assertTrue(sep)
+                parsed=json.loads(value)
+                self.assertIsInstance(parsed,str)
+        keys=[line.partition('=')[0] for line in text.splitlines() if line and not line.startswith('#')]
+        self.assertEqual(set(keys),set(ENV_KEYS))
+        self.assertEqual(len(keys),len(set(keys)))
+        cfg_lines={line.partition('=')[0]:json.loads(line.partition('=')[2]) for line in text.splitlines() if line and not line.startswith('#')}
+        for key in ('OAP_REPO_ROOT','OAP_STRATEGIC_HOME','OAP_FIFO_HOME','CODING_CODEX_HOME','STRATEGIC_CODEX_HOME'):
+            self.assertRegex(cfg_lines[key],r'^REPLACE_WITH_ABSOLUTE_[A-Z_]+$')
+        for key,value in cfg_lines.items():
+            self.assertFalse(value.startswith('/home/'),(key,'embeds a machine home root'))
+        for key in ('OAP_ACK_START_LOOP','OAP_ACK_DANGER_FULL_ACCESS','REPAIR_ALLOW_LIVE_TESTS'):
+            self.assertEqual(cfg_lines[key],'NO')
+
+    def test_example_selection_with_layout_values_matches_selected_layout(self):
+        # Substituting the selected fixture layout values into the portable
+        # template reproduces the selected configuration exactly.
+        self.select_layout()
+        text=self._example_text()
+        text=text.replace('REPLACE_WITH_ABSOLUTE_REPOSITORY_PATH',str(self.repo))
+        text=text.replace('REPLACE_WITH_ABSOLUTE_STRATEGIC_HOME',str(self.strategy))
+        text=text.replace('REPLACE_WITH_ABSOLUTE_FIFO_HOME',str(self.pipes))
+        text=text.replace('REPLACE_WITH_ABSOLUTE_CODING_ROLE_HOME',str(self.strategy/'codex-homes/coding'))
+        text=text.replace('REPLACE_WITH_ABSOLUTE_STRATEGIC_ROLE_HOME',str(self.strategy/'codex-homes/strategic'))
+        path=write(self.strategy/'runtime.env',text.encode())
         path.chmod(0o600)
-        cfg=runtime_config(path,environ={})
-        layout=workspace_layout(SOURCE)
+        cfg=runtime_config(path,environ={},repo=self.repo)
+        # Validate the parsed configuration values: no placeholder may
+        # survive substitution in the actual configuration content.  The
+        # header comment intentionally documents the placeholder names.
+        for key,value in cfg.items():
+            self.assertNotIn('REPLACE_WITH_',str(value),(key,'placeholder survived substitution'))
+        layout=workspace_layout(self.repo)
         self.assertEqual(cfg['OAP_STRATEGIC_HOME'],layout['strategic_home'])
         self.assertEqual(cfg['OAP_FIFO_HOME'],layout['fifo_home'])
-        for key in ('OAP_ACK_START_LOOP','OAP_ACK_DANGER_FULL_ACCESS','REPAIR_ALLOW_LIVE_TESTS'):
-            self.assertEqual(cfg[key],'NO')
+        self.assertEqual(cfg['OAP_REPO_ROOT'],str(self.repo))
+        self.assertEqual(cfg['CODING_CODEX_HOME'],str(self.strategy/'codex-homes/coding'))
+        self.assertEqual(cfg['STRATEGIC_CODEX_HOME'],str(self.strategy/'codex-homes/strategic'))
+
+    def test_example_invalid_configurations_fail_closed(self):
+        text=self._example_text()
+        def configured(transform):
+            path=write(self.strategy/'runtime.env',transform(self._example_text()).encode())
+            path.chmod(0o600)
+            return runtime_config(path,environ={},repo=self.repo)
+        self.strategy.mkdir(exist_ok=True)
+        self.error('CONFIG_MISSING_KEYS',configured,lambda t:t.rstrip('\n').rsplit('\n',1)[0]+'\n')
+        self.error('CONFIG_KEY',configured,lambda t:t+'OAP_NOT_A_KEY="x"\n')
+        self.error('CONFIG_SYNTAX',configured,lambda t:t.replace('CODEX_BIN="codex"','CODEX_BIN=unquoted'))
+        self.error('CONFIG_VALUE',configured,lambda t:t.replace('CODEX_BIN="codex"','CODEX_BIN=7'))
+        self.error('CONFIG_KEY',configured,lambda t:t+'CODEX_BIN="other"\n')
+        self.error('CONFIG_VALUE',configured,lambda t:t.replace('CODEX_BIN="codex"','CODEX_BIN="a\\nb"'))
 
     def select_layout(self):
         self.pipes=self.root/'native home č'/'pipes'
         path=self.repo/'oap/governance/WORKSPACE-LAYOUT.json'
         old=read(path)
         value=jsread(path)
-        value.update(strategic_home=str(self.strategy),fifo_home=str(self.pipes),authority='Synthetic owner layout fixture')
+        # Explicit legacy/sync profile: these tests exercise the historical
+        # owner-selected-sync exception and must not inherit the live layout.
+        value.update(strategic_home=str(self.strategy),
+                     strategic_storage='owner-selected-sync',
+                     coding_dispatch='legacy',
+                     fifo_home=str(self.pipes),
+                     authority='Synthetic legacy owner layout fixture')
         write(path,json_bytes(value))
         manifest=jsread(self.repo/'oap/governance/MANIFEST.json')
         manifest['identities']['oap/governance/WORKSPACE-LAYOUT.json']={'sha256':digest(read(path)),'bytes':len(read(path))}

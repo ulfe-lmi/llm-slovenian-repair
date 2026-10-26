@@ -2170,6 +2170,140 @@ byte-identical and unused); no product, data, protocol, or test
 change; REPAIR_ALLOW_LIVE_TESTS stays NO; no merge, no auto-merge;
 PR #12 stays OPEN pending strategy review.
 
+## 29. Stage-1 collection recovery (objective 011, round 011-e)
+
+This section is the additive round-011-e record. It rewrites nothing in
+sections 1-28 and changes no scientific result of the prior rounds.
+
+011-e is the stage-1 COLLECTION RECOVERY round of the development-
+distribution re-measurement on the E2(b)-designated A100-FP8 target - the
+S-RECOVER-01 continuation of the 011-d BLOCKED purpose on the same branch
+and PR #12 (AMEND_EXISTING_PR; PR #12 stays OPEN, no merge). The 011-d
+single-new-question (amendment of the registered SCAFFOLD_GENERATION call
+class) is resolved as a D0 routine reversible choice within the risk
+budget (recorded in the 011-d final-head review; NO CRIT admission -
+S-DECIDE-03 condition 3 fails; the strongest counterargument - the 011-d
+driver's 126 terminal attempts on the known-invalid effort minimal - is
+carried as the named driver-behavior finding and converted into this
+round's Scope-4 constraint: the ONLY permitted reasoning-effort value is
+the pinned "low", the field may not be omitted, and any other value is a
+named driver defect). The registered additive revision
+PROTOCOL-009-REVISION-012 (sha256
+cbbb7b58739d2124a9d1834dbd0e1a1d42d816ab3af215d877c6c23798acc809, 7,684 B;
+committed byte-exact BEFORE any regeneration or live call) amends ONLY the
+named section-8 call-contract parameters (output-token cap 600 -> 8,192;
+reasoning-effort pin "low"; per-round budget 402 terminal attempts + 1
+standalone diagnostic) and adds the stage-1 recovery clause; it is not a
+method change (scaffold sections are discarded before scoring; no frozen
+method element touched; PROTOCOL-009 (n) NOT triggered - no
+calibration/confirmation content was opened at 011-d).
+
+Pre-work (zero mismatch): all order-pinned frozen surfaces byte-verified
+at the base 79eefe84adde9dda150949c61f527e94bc0638e8; the hard-gate (a)
+precondition verified BY RECORD via DEPLOYMENT-IDENTITY-011 section 6
+(REGIME-UNCHANGED; the 011-c observation window) with ZERO metadata probes
+in this round (the exactly-2-GET budget remains exhausted); machine block
+40/59/2 with identity fields unchanged; registry 40 (last 011-d); local
+consistency 10/10 in a real checkout with origin/main =
+4507cc78e333c0e48226b64266121171b7b8cea8; both DASSLE source files
+byte-re-verified (dassle.jsonl
+609b696616f7246ba9c09a97531f3b9f2035ce3efca35926a5e73898b28045d6, 7,385
+records; dassle-preservation.jsonl
+d87e6ccee74cef0981a0e8ebd6315d75abbcf8bb8558e9a9627507f0bbbf4bec, 7,381
+records). Scope-3 reproducibility assertion: PASSED before the first live
+call - 134/134 byte-identical assembly draws (collection ID, record ID,
+arm, k, topics, layout) re-derived from the committed manifest mechanics
+(single rng instance, seed
+011d-dassle-mechanical-assembly-20261001, sorted collection-ID order) and
+asserted against the 011-d private per-document ledger. The SAME 134
+committed documents were regenerated (no re-selection, no re-draw, no
+replacement, no renumbering; the 5/20/109 partition and the collection IDs
+STAND).
+
+Live work (completion branch): 247 terminal SCAFFOLD_GENERATION attempts
+under the amended class (k distribution {"1": 58, "2": 39, "3": 37}; effort pinned "low" on every
+call - driver hard-constant, 0 observed deviations; cap 8,192; 300 s;
+2,000,000 B; one terminal attempt per section; no resampling, no retry;
+budget 402 + 1 diagnostic) and 0 standalone diagnostic(s): HTTP census
+{"scaffold_http_200": 247}. 134 documents survived assembly (genuine 100 + control 34); 0 excluded,
+named per document in the manifest extension (genuine 0 + control 0).
+Floor-50 gate: genuine-arm survivors 100 >= 50 -> PASS. Main capture:
+exactly one frozen 007-m call per surviving document (134 documents; wire
+byte-identical to the frozen contract; effort low; include_reasoning
+true): EXACT 134 / CENSORED 0 / UNAVAILABLE 0; zero other live calls in
+this round (zero metadata probes).
+
+Collection of record: the committed manifest extended and finalized
+data-free (all base bytes and fields preserved; per-document
+PENDING_GENERATION fields completed; survivor list, per-document exclusion
+census, regenerated discard maps with scaffold regions OUT_OF_SCOPE,
+per-call states, partition/identity/selection unchanged; round = 011-e).
+The labeler work queues are prepared privately (0700/0600; NEVER
+committed): 5 of 5 pilot packets complete (each: assembled input,
+collected main answer, discard map with scaffold regions OUT_OF_SCOPE,
+the DASSLE human reference for the scored span, and the frozen CPU
+detector span output on the main answer - frozen 007-m detector
+(byte-identical to the frozen head 537aa6a3ff03c60dd1b2c7f697c577940d52e88d),
+frozen 008 protection-layer intervals, frozen corpus index sha256
+f769235b6af3412e65f0875f4d08231c832f60d8630b43a06ab927c2d32c739f, mode
+local-context, threshold 3, uncapped; NO review call, NO intervention, NO
+accepted edit, NO scoring) plus the calibration (20 documents) and
+confirmation (109 documents) queue structure (collection IDs and private
+file hashes only; the span-correspondence matcher is applied first in
+011-f before any opening). The SECOND NAMED HUMAN INPUT (the two labelers
+per the updated private labeler specification) surfaces exactly once at
+this round's completion boundary (packets in place), recorded in this
+round's publication receipt.
+
+Bookkeeping: registry 40 -> 41 (one data-free collection entry, status
+COMPLETE); machine block counters only (registry_entries 41, oap_reports_reviewed
+60 for the 011-e report file; frozen_report_history_incidents unchanged at
+2); identity fields UNCHANGED (no advance - a post-merge round's job). The
+designed implementation-head report-count red (60 vs 59, the
+008-i/009-b/010-a/011-a/011-b/011-c/011-d pattern) clears at the final
+head with the report commit.
+
+Invariants: no tuning, no mechanism change, no test change; no
+calibration/confirmation content opened for scoring (linguistic quality
+NOT assessed - 011-f); no metadata probe; no merge, no auto-merge;
+REPAIR_ALLOW_LIVE_TESTS stays NO; no raw text, endpoint values,
+credentials, or private paths in any committed artifact (the publication
+guard runs on the full tree).
+
+## 30. Migration reconciliation and private-data recovery note
+## (objective 012, round 012-a, 2026-10-25)
+
+Additive reconciliation record; it changes no scientific result and adds no
+model calls. Versioned companion record:
+`oap/recovery/012-a-migration-reconciliation.md`.
+
+- Machine identities advance to the current verified main
+  `ff08d6e34601f56fecf21eff7d3d3b0e7c68dede` (merge parent
+  `0c6a5a6c4bf96d9a5a89503c316f64445bac81aa`). The historical review branch
+  `oap/007-concept-verification` (PR 8), both quarantines, and all frozen
+  scientific values are retained unchanged.
+- Original round 011-e remains PARTIAL exactly as published (reported
+  checks: 12 passed, 2 failed, 1 pending). Its post-merge status is
+  publication evidence only: the publication proof alone does not establish
+  integration or scientific acceptance, and any later main ancestry must be
+  verified separately.
+- The privately missing 011 research data archive was historically absent
+  at the migrated locations. The owner supplied the archive and strategy
+  restored it on 2026-10-25: 926 selected files were hash-verified
+  (923 restored as new, 3 pre-existing identity files byte-identical and
+  untouched), with their collection bindings - 134 inputs, 134 main
+  answers, 247 scaffold texts, 381 raw capture integrity records, and
+  20 calibration + 109 confirmation queue memberships - checked against
+  the frozen 011b manifest. Private receipts are metadata-only; no raw
+  text, credential, or private path appears in this document.
+- No replay of 011-e, no scientific or live-model calls, no linguistic
+  acceptance, no deployment, and no merge of the migration branch occurred
+  in this round.
+- Provisional engineering estimate for the remaining packaged-MVP scope:
+  8-15 focused engineering days. The owner-selected Pandoc
+  structural-parsing proxy is the next separately ordered objective and is
+  not implemented here.
+
 ## Machine-readable state block (research-state-machine-v1)
 
 This fenced block is the machine-readable core of the numbers quoted above.
@@ -2182,11 +2316,11 @@ model/network calls.
 {
   "schema": "research-state-machine-v1",
   "identities": {
-    "main_sha": "4507cc78e333c0e48226b64266121171b7b8cea8",
+    "main_sha": "ff08d6e34601f56fecf21eff7d3d3b0e7c68dede",
     "branch": "oap/007-concept-verification",
     "pr_number": 8,
-    "reviewed_branch_head_sha": "4507cc78e333c0e48226b64266121171b7b8cea8",
-    "reviewed_branch_head_parent_sha": "01ea3fa4cde5c4759bcf29d6c665ed8b2e29524d",
+    "reviewed_branch_head_sha": "ff08d6e34601f56fecf21eff7d3d3b0e7c68dede",
+    "reviewed_branch_head_parent_sha": "0c6a5a6c4bf96d9a5a89503c316f64445bac81aa",
     "quarantined_007n": {
       "classification": "INVALID_QUARANTINED",
       "validation_error": "REPORT_CHECK",
@@ -2212,8 +2346,8 @@ model/network calls.
     "frozen_007m_configuration_sha256": "0026a1a9d27652c36e2c5a960b10fafc1c9a93b0690d93b09089aa58884f5c26",
     "frozen_007m_prompt_sha256": "572cf2fb4864e66e38a500465e1089062d58aeed4721063fb0c1e466e424230d",
     "frozen_007m_final_root_manifest_sha256": "3fb4aef33542e7fa3f357acb905b75f4d7e7551783f83a422b5d1ea6272c25f8",
-    "registry_entries": 40,
-    "oap_reports_reviewed": 59,
+    "registry_entries": 42,
+    "oap_reports_reviewed": 62,
     "frozen_report_history_incidents": 2
   },
   "official_scorer": {
@@ -2622,3 +2756,52 @@ model/network calls.
   }
 }
 ```
+
+## 31. Engineering recovery record — round 012-b (2026-10-25, data-free)
+
+012-b completed the native-migration corrections that 012-a left explicitly
+outside its immutable allowlist, and corrected 012-a's publication evidence
+overclaims in a new recovery record (see `oap/recovery/012-b-native-migration-completion.md`
+for the full, data-free supersession).
+
+What changed (engineering only):
+
+- Native report-history cache ownership now uses the current process UID as
+  the only authority; no account lookup of any fixed host account remains.
+- `oap/runtime.env.example` is now a portable template: it contains no
+  machine roots, and the selected machine roots belong only in the versioned
+  workspace-layout record and the private materialized configuration.
+- The development baseline driver now runs every owned command in its own
+  POSIX session, reads its pipes nonblocking under finite deadlines, sweeps
+  only its owned process group, and reports bounded-cleanup failures truthfully
+  instead of blocking; its CI budgets were raised to match the observed full
+  suite runtime.
+- Research-state consistency now validates the historical snapshot against the
+  pinned immutable 012-a order (ancestry of the available current main, not
+  equality with it), so copied verification workspaces run the same checks.
+- Bounded CI time limits were raised for the two long jobs; the short report
+  history job is unchanged.
+
+Observed verification (focused, pre-commit candidate bytes, exact Python 3.12):
+driver contract suite passed (including real descendant/pipe, flood, unrelated
+session, FD-leak, and zombie-liveness cases); split-layout module passed;
+report-history cache module passed; research consistency and synthetic
+snapshot suites passed. Final-head CI and the full baseline driver run are
+reported in the 012-b report and recovery record with their exact statuses.
+
+Known local deviation, disclosed: repository-local `.venv` was recreated by a
+local `uv` invocation during 012-b verification (the prior one was a broken
+migrated environment whose interpreter link no longer existed); no retained
+original `.venv` was found after the recreation, and it was not restored.
+The git-tracked tree and the separately preserved literal backslash-named
+`.venv` residue were not touched. This is a local environment deviation only:
+no tracked file, order, report, gate, or scientific record was changed by it.
+
+No scientific protocol, dataset, model, prompt, or result changed in this
+round; no model calls, no live tests, no deployment. The next separately
+ordered objective is the owner-selected Pandoc structural-parsing runnable
+proxy (engineering scope, not scientific evaluation); it is not implemented
+by this round. Copied verification workspaces exercise the file-bound
+snapshot checks and synthetic lineage tests; the actual-repository ancestry
+test is explicitly skipped there, because a copied workspace has no Git
+history, and it remains asserted wherever the real repository is present.

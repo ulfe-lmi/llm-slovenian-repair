@@ -7,18 +7,25 @@ authority. The runtime copy is STRATEGIC_HOME/AGENTS.md. Bootstrap generation is
 a separate job and never starts this role. Revision 1, derived from the supplied
 Concentrated OAP, ordinary OAP and project profile 2.0.
 
-S-PLACEMENT-01. Owner layout update, 2026-09-07: regular strategic files, drafts,
-configuration, logs and both role homes reside in the selected workspace; only
-the two real FIFOs reside in OAP_FIFO_HOME under the user's native home directory.
-The exact roots and scoped sync-storage exception are versioned in
-oap/governance/WORKSPACE-LAYOUT.json at REPO_ROOT. Its permission exception applies
-only to the selected strategic subtree, whose sync mount does not enforce normal
-POSIX private modes; ownership/type/symlink checks still apply. Native FIFO
-directory/files remain 0700/0600. This explicit human layout decision supersedes
-the original bootstrap's colocated-pipe and uniform-private-mode assumptions.
-It changes neither role authority nor any activation, source-integrity or live-test
-gate. Do not put fake pipes or symlinks in the strategic workspace. Native layouts
-outside this explicit selection retain the original strict mode requirements.
+S-PLACEMENT-01. Owner layout update, 2026-09-07; owner-directed native migration,
+2026-10-25: regular strategic files, drafts, configuration, logs and both role
+homes reside in STRATEGIC_HOME on the selected native host; only the two real
+FIFOs reside in OAP_FIFO_HOME under the user's native home directory, never in
+the workspace. The exact current machine roots, selected storage and coding
+dispatch are versioned in oap/governance/WORKSPACE-LAYOUT.json at REPO_ROOT —
+the only versioned place authorized to contain them; elsewhere use logical names
+or environment variables. Native private directories/files are strict 0700/0600;
+reject symlinks, wrong owners/types and overlaps. The historical exact
+owner-selected-sync POSIX exception remains supported in code for the legacy
+subtree only and is not applied to native roots. Owner-selected coding dispatch
+is foreground-only: adopt the already-running pane, verify its PID/cwd/argv,
+convey OAP_ROLE=coding explicitly in the handoff and helper environment, and
+relaunch exactly the recorded argv only if dead; no background panes or codex
+exec. The already-running foreground coding session keeps its owner-launched
+CODEX_HOME as launched; adoption never relocates session homes or copies
+authentication. It changes neither role authority nor any activation,
+source-integrity or live-test gate. Do not put fake pipes or symlinks in the
+strategic workspace.
 
 ## Human purpose and authority
 
@@ -265,6 +272,13 @@ reconciliation. Pushed final report with lost response resumes review and suppre
 coding replay. Required CI pending means wait/recheck, not new work or suffix.
 Record exact recovery reason before deliberate re-signal. Hand off before context
 becomes brittle, with evidence-linked timings and unresolved work, never raw text.
+A merged PR's report published later on its original retained branch is
+recognized only as post-merge branch publication evidence under an explicit
+pinned recovery receipt (original same-repository PR/branch, real merge
+ancestry, frozen head ancestor, exact report parent/path/bytes and exact
+original order); this publication proof alone does not establish integration
+or scientific acceptance, and any later integration must be verified
+separately on current main.
 
 ## Progress, independent closure and human handoff
 

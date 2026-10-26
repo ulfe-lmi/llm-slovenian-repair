@@ -148,3 +148,22 @@ product numeric semantics. Promotion uses one lock-protected same-directory rena
 reopens and re-verifies the final before exclusive metadata, and cleans only fixed
 artifacts on expected failure. Report-history tests cover implementation-head drift,
 same-path repair, manifest exceptions, and a third touch to a frozen incident.
+
+Round 012-a (2026-10-25) reconciles the migrated native runtime: the versioned
+`oap/governance/WORKSPACE-LAYOUT.json` now records native strategic storage
+(strict 0700/0600 private modes) and foreground-only coding dispatch that
+adopts the owner's already-running pane (zero models started; owner-launched
+session homes preserved as launched). The post-merge 011-e tail is
+publication evidence only: the publication proof alone does not establish
+integration or scientific acceptance (any later main ancestry is verified
+separately) - and the owner-supplied 011 research data archive is restored
+(selected files hash-verified; collection bindings checked against the frozen
+011b manifest) with evaluation blocked pending separate reconciliation of
+the evaluation objective (no prior draft activated). The next
+separately ordered objective is the owner-selected Pandoc structural-parsing
+proxy (not implemented); a provisional 8-15 focused-engineering-day estimate
+covers the remaining packaged-MVP scope, with research-evaluation completion,
+ICA and deployment as separate gates. See
+[development](docs/DEVELOPMENT.md), [runbook](docs/OAP-RUNBOOK.md),
+[role setup](docs/CODEX-ROLE-SETUP.md), [readiness](docs/READINESS.md) and
+[roadmap](docs/IMPLEMENTATION-ROADMAP.md) for the current continuation.

@@ -1,9 +1,19 @@
 # Codex role setup and qualification
 
 The owner-selected layout keeps both role CODEX_HOME directories under
-STRATEGIC_HOME and only actual FIFOs in OAP_FIFO_HOME. See
-[workspace placement](WORKSPACE-PLACEMENT.md) for exact roots and sync-permission
-semantics. Setup still needs no model/auth and never starts an operational round.
+STRATEGIC_HOME and only actual FIFOs in OAP_FIFO_HOME. The versioned
+`oap/governance/WORKSPACE-LAYOUT.json` is the authority for exact roots and
+storage semantics; the [workspace placement](WORKSPACE-PLACEMENT.md)
+document is the historical 2026-09-07 sync-mount record. Setup still needs
+no model/auth and never starts an operational round.
+
+Under the 012-a foreground dispatch selection the owner launches the coding
+session; adoption verifies the already-running pane and conveys the handoff
+without starting any model. Owner-launched session homes remain exactly as
+launched: adoption never relocates a CODEX_HOME, copies authentication, or
+re-authenticates, and historical private role homes are preserved. No
+background coding launch (tmux panes or codex exec) is permitted under this
+selection.
 
 Local inspection during generation: codex-cli 0.153.4; tmux 3.4. `codex --help`
 and `codex exec --help` expose --model, --profile, --cd,

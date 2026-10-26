@@ -9,7 +9,7 @@ import shutil
 import sys
 from oap_core import *
 from oap_install import materialize, runtime_config, refresh_governance
-from oap_runtime import setup_shell, launch, tmux_launch
+from oap_runtime import setup_shell, launch, tmux_launch, foreground_dispatch
 
 
 def doctor(repo, strategy=None, config=None, accepted_ref=None):
@@ -55,9 +55,14 @@ def doctor(repo, strategy=None, config=None, accepted_ref=None):
               'product_milestone': 'NOT ASSESSED BY BOOTSTRAP', 'checks': checks,
               'tools_present': {t: bool(shutil.which(t)) for t in ('python3','git','gh','codex','tmux')},
               'signals_sent': 0, 'models_started': 0}
+    dispatch = coding_dispatch_mode(repo)
+    result['coding_dispatch'] = dispatch
+    if dispatch == 'foreground':
+        result['foreground_launch'] = workspace_layout(repo).get('foreground_launch')
     if strategy:
         layout = workspace_layout(repo)
-        synced = bool(layout and Path(strategy) == Path(layout['strategic_home']))
+        synced = bool(layout and Path(strategy) == Path(layout['strategic_home'])
+                      and layout.get('strategic_storage') == 'owner-selected-sync')
         result['strategic_storage'] = 'owner-selected sync; POSIX private bits not asserted' if synced else 'native private modes'
         result['fifo_home'] = str(fifo_home(repo, strategy))
     return result
@@ -66,7 +71,7 @@ def doctor(repo, strategy=None, config=None, accepted_ref=None):
 def parser():
     p = argparse.ArgumentParser(description=__doc__)
     sub = p.add_subparsers(dest='command', required=True)
-    for name in ('state','governance','publish','append-critical','verify-report','forward-recovery','preflight-report','transcript','report-history','ica','strategic-gate','doctor','materialize','refresh-governance'):
+    for name in ('state','governance','publish','append-critical','verify-report','forward-recovery','preflight-report','transcript','report-history','ica','strategic-gate','doctor','materialize','refresh-governance','candidate-review'):
         q = sub.add_parser(name, help=name.replace('-',' ')+'; see options')
         q.add_argument('--repo-root', default=os.environ.get('OAP_REPO_ROOT', str(Path(__file__).resolve().parents[2])))
         if name in ('governance','publish','append-critical','doctor','refresh-governance'):
@@ -89,6 +94,11 @@ def parser():
             q.add_argument('--allow-change', action='append', default=[])
         if name == 'verify-report':
             q.add_argument('--commit')
+        if name == 'candidate-review':
+            q.add_argument('--order', required=True, help='committed order file whose Governance section authorizes the changes')
+            q.add_argument('--order-sha256', required=True, help='pinned sha256 of the exact published order bytes')
+            q.add_argument('--accepted-ref', required=True, help='literal trusted accepted Git SHA')
+            q.add_argument('--order-id')
         if name == 'transcript':
             modes = q.add_mutually_exclusive_group(required=True)
             modes.add_argument('--index', action='store_true')
@@ -119,6 +129,13 @@ def parser():
     q.add_argument('action', choices=('send','wait'))
     q.add_argument('--fifo', required=True)
     q.add_argument('--timeout', type=float)
+    q = sub.add_parser('foreground-dispatch', help='adopt the owner-selected foreground coding pane; starts zero models')
+    q.add_argument('--config', required=True)
+    q.add_argument('--repo-root', default=os.environ.get('OAP_REPO_ROOT', str(Path(__file__).resolve().parents[2])))
+    q.add_argument('--pane-pid', required=True, type=int, help='explicitly selected pane PID (verified downward)')
+    q.add_argument('--timeout', type=float)
+    q.add_argument('--resume-id', help='explicit same-ID resume for an already-consumed unfinished round')
+    q.add_argument('--gh-bin', default='gh', help='read-only gh executable; fake only in disposable tests')
     for name in ('setup-shell','launch','tmux'):
         q = sub.add_parser(name)
         q.add_argument('--config', required=True)
@@ -168,6 +185,13 @@ def main(argv=None):
             result = verify_merge(remote, args.pr, args.default_branch) if args.verify_merge else strategic_gate(
                 remote, args.pr, args.reviewed_sha, args.required_check, merge_effect=args.merge_effect,
                 repo=args.repo_root, report_id=args.report_id)
+        elif command == 'candidate-review':
+            result = candidate_review(args.repo_root, args.order, args.accepted_ref,
+                                      order_id=args.order_id, order_sha256=args.order_sha256)
+        elif command == 'foreground-dispatch':
+            config = runtime_config(args.config, repo=args.repo_root)
+            result = foreground_dispatch(config, pane_pid=args.pane_pid, timeout=args.timeout,
+                                         resume_id=args.resume_id, gh_bin=args.gh_bin)
         elif command == 'fifo':
             result = fifo(args.fifo, args.action, timeout=args.timeout)
         elif command == 'materialize':

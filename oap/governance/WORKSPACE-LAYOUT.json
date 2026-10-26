@@ -1,8 +1,10 @@
 {
   "schema_version": 1,
-  "strategic_home": "/home/ubuntu/workspace/codex-supervision/llm-slovenian-repair",
-  "strategic_storage": "owner-selected-sync",
-  "fifo_home": "/home/ubuntu/.oap-fifos/llm-slovenian-repair",
-  "authority": "Explicit owner instruction, 2026-09-07: create FIFOs in home directory, move everything else into the selected workspace, update files accordingly.",
-  "permission_semantics": "POSIX private mode checks are excepted only for this exact strategic home and descendants on the owner-selected sync mount. Ownership, type and symlink checks remain; local FIFO directory/files retain 0700/0600. This record is not authentication or operational activation."
+  "strategic_home": "/home/janezp/codex-supervision/llm-slovenian-repair",
+  "strategic_storage": "native",
+  "fifo_home": "/home/janezp/.oap-fifos/llm-slovenian-repair",
+  "coding_dispatch": "foreground",
+  "foreground_launch": ["codex", "--yolo", "--profile", "early-beta"],
+  "authority": "Explicit owner instructions: 2026-09-07 create the FIFOs in the native home and keep everything else in the selected workspace; 2026-10-25 owner-directed native migration of the whole runtime to this host, with foreground-only coding dispatch to the already-running pane (relaunch exactly the recorded argv only if it dies).",
+  "permission_semantics": "Native private directories/files are strict 0700/0600; symlinks, wrong owners/types and overlaps are rejected. The historical exact owner-selected-sync POSIX exception remains supported in code for the legacy subtree only and is not applied to these native roots. This record is the only versioned place authorized to contain selected machine roots; elsewhere use logical names or environment variables. It is not authentication or operational activation."
 }

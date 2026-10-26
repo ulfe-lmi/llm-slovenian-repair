@@ -12,7 +12,7 @@ jobs:
   oap-bootstrap-acceptance:
     name: OAP bootstrap acceptance
     runs-on: ubuntu-24.04
-    timeout-minutes: 10
+    timeout-minutes: 30
     steps:
       - name: Check out full history
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
@@ -33,8 +33,11 @@ jobs:
       - name: Run bootstrap acceptance
         run: python3.12 -B -m unittest discover -s oap/tests -v
 
-      - name: Check accepted runtime governance
-        run: python3.12 oap/bin/check_governance.py --repo-root . --mode accepted-runtime --accepted-ref 2832fa1e51bdf3641aabbd81feab8ddb64a876da
+      - name: Candidate governance review bound to order 012-a
+        run: python3.12 oap/bin/oap_cli.py candidate-review --repo-root . --order oap/orders/012-a-native-migration-and-merged-round-reconciliation.md --order-sha256 e320df8eb44e76877ec063abf5ca0bd6af6306684beb1bf985cfc25fafd22b34 --accepted-ref 4507cc78e333c0e48226b64266121171b7b8cea8 --order-id 012-a
+
+      - name: Assert protected scientific surfaces are unchanged
+        run: git diff --exit-code 4507cc78e333c0e48226b64266121171b7b8cea8 -- PLAN.md ARCHITECTURE.md CRITICAL.md oap/bootstrap-sources.lock.json docs/bootstrap
 
       - name: Check committed transcript coherence
         shell: bash

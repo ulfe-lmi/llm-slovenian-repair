@@ -4,9 +4,12 @@
 from __future__ import annotations
 
 import argparse
+import contextlib
 import json
 import os
+import selectors
 import shutil
+import signal
 import stat
 import subprocess
 import sys
@@ -14,8 +17,7 @@ import tempfile
 import tomllib
 from dataclasses import dataclass
 from pathlib import Path
-from threading import Thread
-from time import monotonic
+from time import monotonic, sleep
 from typing import Any
 
 PYTHON_SELECTOR = "3.12"
@@ -24,6 +26,15 @@ PROJECT_PACKAGE = "llm-slovenian-repair"
 FORWARD_RECOVERY_HISTORY_SOURCE = "OAP_FORWARD_RECOVERY_HISTORY_SOURCE"
 DIAGNOSTIC_CAPTURE_BYTES = 8192
 DIAGNOSTIC_MAX_BYTES = 4096
+# Bounded owned-group cleanup budgets (POSIX): termination grace, escalation
+# grace, reap grace, and pipe drain.  Unrelated process groups are never
+# signaled, and no cleanup step may block longer than its own budget.
+GROUP_TERMINATION_GRACE_SECONDS = 10.0
+GROUP_KILL_GRACE_SECONDS = 5.0
+PIPE_DRAIN_SECONDS = 10.0
+# Per-drain-call byte budget so a continuously flooding child
+# cannot starve the command deadline or the drain deadline.
+DRAIN_CALL_MAX_BYTES = 256 * 1024
 PUBLIC_EXPORTS = (
     "__version__",
     "AcceptanceClass",
@@ -423,17 +434,6 @@ def _tail(data: bytearray, chunk: bytes) -> None:
         del data[:-DIAGNOSTIC_CAPTURE_BYTES]
 
 
-def _read_tail(stream: Any, target: bytearray) -> None:
-    try:
-        while True:
-            chunk = stream.read(4096)
-            if not chunk:
-                return
-            _tail(target, chunk)
-    finally:
-        stream.close()
-
-
 def _redaction_forms(path: Path) -> tuple[str, ...]:
     resolved = path.resolve(strict=False)
     return tuple(dict.fromkeys((str(path), str(resolved), resolved.as_posix())))
@@ -470,15 +470,73 @@ def failure_diagnostic(
     *,
     repository: Path | None = None,
     temporary_root: Path | None = None,
+    cleanup: str | None = None,
 ) -> str:
     parts: list[bytes] = []
     if stdout:
         parts.append(b"stdout: " + stdout)
     if stderr:
         parts.append(b"stderr: " + stderr)
+    if cleanup:
+        parts.append(b"cleanup: " + cleanup.encode("utf-8"))
     return sanitize_diagnostic(
         b" | ".join(parts), repository=repository, temporary_root=temporary_root
     )
+
+
+def _drain_available(fd: int, target: bytearray, max_bytes: int) -> bool:
+    """Read up to max_bytes currently available on a nonblocking pipe.
+
+    Returns True once the read end has observed EOF (every writer closed);
+    False when the pipe is momentarily empty, or the per-call byte budget
+    was exhausted while a writer is still open (the caller re-checks its
+    own deadline and may drain again).
+    """
+    read_bytes = 0
+    while read_bytes < max_bytes:
+        try:
+            chunk = os.read(fd, min(4096, max_bytes - read_bytes))
+        except BlockingIOError:
+            return False
+        if not chunk:
+            return True
+        _tail(target, chunk)
+        read_bytes += len(chunk)
+    return False
+
+
+def _group_has_live_member(pgid: int) -> bool:
+    """True while a process group has any runnable (non-zombie) member.
+
+    killpg(pgid, 0) also matches zombies, which retain group membership
+    until reaped; a zombie-only group holds no pipe writer and needs no
+    further signaling, so it is not reported as a surviving group.
+    """
+    try:
+        os.killpg(pgid, 0)
+    except ProcessLookupError:
+        return False
+    except PermissionError:
+        return True
+    for entry in Path("/proc").iterdir():
+        if not entry.name.isdigit():
+            continue
+        try:
+            raw = (entry / "stat").read_text()
+        except OSError:
+            continue
+        # The comm field may contain spaces and parentheses, so parse the
+        # fields after the last ')': the remainder starts at field 3
+        # (state), followed by ppid (4) and pgrp (5).
+        parts = raw.rsplit(")", 1)
+        if len(parts) != 2:
+            continue
+        fields = parts[1].split()
+        if len(fields) < 3 or fields[2] != str(pgid):
+            continue
+        if fields[0] != "Z":
+            return True
+    return False
 
 
 def run_command(
@@ -490,19 +548,146 @@ def run_command(
     repository: Path | None = None,
     temporary_root: Path | None = None,
 ) -> None:
+    """Run one owned command under a finite command budget.
+
+    The child runs in its own POSIX session (pgid == child pid) and the
+    output pipes are read nonblocking through a selector, so no blocking
+    reader thread exists that could hold a stream open.  Every wait,
+    drain, reap, and close below is bounded by a finite deadline; a
+    residual owned process or pipe fails the command with a truthful
+    cleanup diagnostic instead of blocking the driver.
+    """
     started = monotonic()
     stdout_tail = bytearray()
     stderr_tail = bytearray()
+    cleanup_failures: list[str] = []
+    allocated_fds: list[int] = []
+    process: subprocess.Popen[bytes] | None = None
+    selector: selectors.BaseSelector | None = None
+    timed_out = False
+    read_fds: dict[int, bytearray] = {}
+
+    def release_fd(fd: int) -> None:
+        with contextlib.suppress(OSError):
+            os.close(fd)
+        with contextlib.suppress(ValueError):
+            allocated_fds.remove(fd)
+
     try:
+        stdout_pipe = os.pipe()
+        allocated_fds.extend(stdout_pipe)
+        stderr_pipe = os.pipe()
+        allocated_fds.extend(stderr_pipe)
+        # start_new_session=True: the owned command runs in its own session
+        # and process group (pgid == child pid) so timeout cleanup can bound
+        # every owned descendant that retains the output pipes.
         process = subprocess.Popen(
             list(spec.argv),
             cwd=spec.cwd,
             env=env,
             stdin=subprocess.DEVNULL,
-            stdout=subprocess.PIPE,
-            stderr=subprocess.PIPE,
+            stdout=stdout_pipe[1],
+            stderr=stderr_pipe[1],
+            start_new_session=True,
         )
+        child = process
+        for write_fd in (stdout_pipe[1], stderr_pipe[1]):
+            release_fd(write_fd)
+        for read_fd in (stdout_pipe[0], stderr_pipe[0]):
+            os.set_blocking(read_fd, False)
+        read_fds = {stdout_pipe[0]: stdout_tail, stderr_pipe[0]: stderr_tail}
+        pgid = child.pid  # owned group id under start_new_session
+
+        def group_has_live_member() -> bool:
+            return _group_has_live_member(pgid)
+
+        def signal_group(sig: int) -> None:
+            with contextlib.suppress(ProcessLookupError):
+                os.killpg(pgid, sig)
+
+        def wait_group_gone(budget: float) -> None:
+            gone_deadline = monotonic() + budget
+            while group_has_live_member() and monotonic() < gone_deadline:
+                sleep(0.05)
+
+        def reap_direct_child(budget: float) -> None:
+            try:
+                child.wait(timeout=budget)
+            except subprocess.TimeoutExpired:
+                cleanup_failures.append("direct child not reaped within bounded budget")
+
+        def sweep_owned_group() -> None:
+            # After the direct child exits or is killed, no owned descendant
+            # (for example one retaining the output pipes) may survive.
+            if group_has_live_member():
+                signal_group(signal.SIGKILL)
+                wait_group_gone(GROUP_KILL_GRACE_SECONDS)
+                if group_has_live_member():
+                    cleanup_failures.append("owned group survived bounded kill budget")
+
+        def drain_to_eof(drain_selector: selectors.BaseSelector, budget: float) -> None:
+            drain_deadline = monotonic() + budget
+            seen_eof = {fd: False for fd in read_fds}
+            while not all(seen_eof.values()):
+                if monotonic() >= drain_deadline:
+                    break
+                remaining = drain_deadline - monotonic()
+                events = drain_selector.select(timeout=max(0.0, min(0.1, remaining)))
+                for key, _mask in events:
+                    if _drain_available(key.fd, read_fds[key.fd], DRAIN_CALL_MAX_BYTES):
+                        seen_eof[key.fd] = True
+                        drain_selector.unregister(key.fd)
+            for fd, eof in seen_eof.items():
+                if not eof:
+                    cleanup_failures.append(
+                        "pipe did not reach EOF within bounded drain budget"
+                    )
+                release_fd(fd)
+            drain_selector.close()
+
+        selector = selectors.DefaultSelector()
+        for read_fd in read_fds:
+            selector.register(read_fd, selectors.EVENT_READ)
+
+        deadline = monotonic() + timeout
+        while True:
+            if child.poll() is not None:
+                break
+            if monotonic() >= deadline:
+                timed_out = True
+                break
+            remaining = deadline - monotonic()
+            events = selector.select(timeout=max(0.0, min(0.1, remaining)))
+            for key, _mask in events:
+                _drain_available(key.fd, read_fds[key.fd], DRAIN_CALL_MAX_BYTES)
+        if timed_out:
+            # Bound termination, escalation, and reap of the owned group only.
+            signal_group(signal.SIGTERM)
+            wait_group_gone(GROUP_TERMINATION_GRACE_SECONDS)
+            if group_has_live_member():
+                signal_group(signal.SIGKILL)
+            wait_group_gone(GROUP_KILL_GRACE_SECONDS)
+            reap_direct_child(GROUP_KILL_GRACE_SECONDS)
+            if child.returncode is None:
+                child.kill()
+                reap_direct_child(GROUP_KILL_GRACE_SECONDS)
+        else:
+            reap_direct_child(GROUP_KILL_GRACE_SECONDS)
+            sweep_owned_group()
+        drain_to_eof(selector, PIPE_DRAIN_SECONDS)
     except OSError as exc:
+        # Bounded abandon: no child, group, pipe, or selector may outlive
+        # this call without a recorded failure.
+        if process is not None:
+            with contextlib.suppress(ProcessLookupError, PermissionError):
+                os.killpg(process.pid, signal.SIGKILL)
+            with contextlib.suppress(subprocess.TimeoutExpired):
+                process.wait(timeout=GROUP_KILL_GRACE_SECONDS)
+        for fd in list(allocated_fds):
+            release_fd(fd)
+        if selector is not None:
+            with contextlib.suppress(OSError, ValueError):
+                selector.close()
         diagnostic = sanitize_diagnostic(
             f"{type(exc).__name__}: {exc}",
             repository=repository,
@@ -510,36 +695,19 @@ def run_command(
         )
         record_command(records, spec.label, "FAILED", timeout, diagnostic=diagnostic)
         raise CommandFailure(spec.label, "FAILED") from exc
-    readers = [
-        Thread(target=_read_tail, args=(process.stdout, stdout_tail), daemon=True),
-        Thread(target=_read_tail, args=(process.stderr, stderr_tail), daemon=True),
-    ]
-    for reader in readers:
-        reader.start()
-    timed_out = False
-    try:
-        process.wait(timeout=timeout)
-    except subprocess.TimeoutExpired:
-        timed_out = True
-        process.kill()
-        process.wait()
-    finally:
-        for reader in readers:
-            reader.join(timeout=1)
-        if process.stdout is not None:
-            process.stdout.close()
-        if process.stderr is not None:
-            process.stderr.close()
     diagnostic = failure_diagnostic(
         bytes(stdout_tail),
         bytes(stderr_tail),
         repository=repository,
         temporary_root=temporary_root,
+        cleanup="; ".join(cleanup_failures) or None,
     )
     elapsed = monotonic() - started
     if timed_out:
         record_command(records, spec.label, "TIMEOUT", timeout, diagnostic=diagnostic)
         raise CommandFailure(spec.label, "TIMEOUT")
+    if process is None:  # pragma: no cover - the try block raises otherwise
+        raise DriverError("COMMAND_NOT_STARTED")
     if process.returncode != 0:
         record_command(
             records,
@@ -550,6 +718,11 @@ def run_command(
             diagnostic=diagnostic,
         )
         raise CommandFailure(spec.label, "FAILED", process.returncode)
+    if cleanup_failures:
+        # The child succeeded but the bounded cleanup contract was
+        # violated: fail the command with the truthful diagnostic.
+        record_command(records, spec.label, "FAILED", timeout, diagnostic=diagnostic)
+        raise CommandFailure(spec.label, "FAILED")
     record_command(records, spec.label, "PASSED", timeout)
     if elapsed < 0:  # pragma: no cover - monotonic is only sanity-protected.
         raise DriverError("CLOCK_INVALID")

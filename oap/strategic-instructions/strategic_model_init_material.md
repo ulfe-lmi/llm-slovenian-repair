@@ -1,9 +1,12 @@
 # Strategic initialization
 
-Owner layout update 2026-09-07: runtime.env supplies OAP_FIFO_HOME for the two
-real native-home FIFOs. All other strategic files and both role homes remain in
-the selected STRATEGIC_HOME workspace. Follow WORKSPACE-LAYOUT.json and the
-full constitution's scoped sync-storage exception; do not assume colocated pipes.
+Owner layout update 2026-09-07, native migration 2026-10-25: runtime.env
+supplies OAP_STRATEGIC_HOME and OAP_FIFO_HOME for this native host; the two real
+FIFOs reside under the native home, all other strategic files and both role
+homes in STRATEGIC_HOME, strict 0700/0600. Follow WORKSPACE-LAYOUT.json (current
+machine roots, native storage, foreground coding dispatch); the historical
+sync-storage exception covers the legacy subtree only. Do not assume colocated
+pipes or background coding panes.
 
 Only OAP_ROLE=strategic, cwd STRATEGIC_HOME, separate strategic CODEX_HOME.
 This is a preloaded project with product PLANNED. Reconcile source references,
