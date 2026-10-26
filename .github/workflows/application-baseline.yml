@@ -12,7 +12,7 @@ jobs:
   application-baseline:
     name: Application baseline
     runs-on: ubuntu-24.04
-    timeout-minutes: 15
+    timeout-minutes: 40
     steps:
       - name: Check out full history
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
@@ -32,7 +32,7 @@ jobs:
         shell: bash
         run: |
           python312="$(uv python find 3.12)"
-          "$python312" scripts/verify_development_baseline.py --temp-parent "$RUNNER_TEMP" --command-timeout 600
+          "$python312" scripts/verify_development_baseline.py --temp-parent "$RUNNER_TEMP" --command-timeout 1800
 
       - name: Assert checkout has no temporary environment artifacts
         shell: bash

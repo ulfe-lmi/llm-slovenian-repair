@@ -114,10 +114,18 @@ neither uses nor recreates them. A locked sync or `uv run` with the helper
 active writes the environment, bytecode, and named caches only to the
 machine-local paths above.
 
-The authoritative baseline driver `scripts/verify_development_baseline.py` is
-unchanged: it still creates one disposable native temporary environment and
-caches, refuses a repository-local parent, and runs the frozen offline
-dependency policy for the application baseline.
+The authoritative baseline driver `scripts/verify_development_baseline.py`
+creates one disposable native temporary environment and caches, refuses a
+repository-local parent, and runs the frozen offline dependency policy for
+the application baseline. Since the 012-b completion round every owned
+subprocess runs in its own POSIX session, its pipes are read nonblocking
+under finite deadlines, and only its owned process group is ever signaled;
+every wait, drain, reap, and close is bounded, and a bounded-cleanup failure
+fails the command with a truthful diagnostic instead of blocking the driver.
+The corresponding CI budgets were raised to the observed full-suite runtime
+(application baseline job and driver command timeout; the OAP bootstrap
+acceptance job was raised separately while the short OAP report-history job
+is unchanged).
 
 ## Source manifest fixture
 

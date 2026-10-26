@@ -119,23 +119,42 @@ class ResearchStateConsistencyTest(unittest.TestCase):
         self.assertEqual(q["classification"], "INVALID_QUARANTINED")
         self.assertEqual(q["validation_error"], "REPORT_CHECK")
 
-    def test_main_is_ancestor_of_reviewed_head(self):
+    def test_historical_snapshot_bound_to_immutable_order(self):
+        # The machine block is an authorized historical review snapshot,
+        # bound to the immutable 012-a order (pinned digest), not to
+        # candidate state values alone.  The order-bound identity check is
+        # file-only and runs in every workspace that carries the order file.
+        ident = self.block["identities"]
+        try:
+            from research.tests.research_snapshot_contract import (
+                validate_historical_snapshot,
+            )
+        except ImportError:
+            from research_snapshot_contract import validate_historical_snapshot
+        validate_historical_snapshot(REPO_ROOT, ident)
+
+    def test_historical_snapshot_is_ancestor_of_available_current_main(self):
         if not self.git_history_available:
             self.skipTest(
                 "git history unavailable in this test workspace "
                 "(file copy without .git); runs in a real checkout"
             )
-        ident = self.block["identities"]
-        main_sha = ident["main_sha"]
-        head = ident["reviewed_branch_head_sha"]
-        git("cat-file", "-e", main_sha + "^{commit}")
-        self.assertEqual(
-            git_ok("merge-base", "--is-ancestor", main_sha, head), 0
-        )
-        if git_ok("rev-parse", "--verify", "--quiet", "refs/remotes/origin/main") == 0:
-            self.assertEqual(
-                git("rev-parse", "refs/remotes/origin/main"), main_sha
+        try:
+            from research.tests.research_snapshot_contract import (
+                validate_historical_snapshot,
             )
+        except ImportError:
+            from research_snapshot_contract import validate_historical_snapshot
+        ident = self.block["identities"]
+        current = None
+        for ref in ("refs/remotes/origin/main", "refs/heads/main"):
+            if git_ok("rev-parse", "--verify", "--quiet", ref) == 0:
+                current = git("rev-parse", ref)
+                break
+        # The snapshot main is an ancestor of the available current main
+        # (equality included); it is not required to equal every future
+        # main revision.
+        validate_historical_snapshot(REPO_ROOT, ident, current_main=current)
 
     def test_branch_and_pr_match_committed_007o_order(self):
         if not self.git_history_available:

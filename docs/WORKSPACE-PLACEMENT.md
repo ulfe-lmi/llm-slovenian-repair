@@ -32,6 +32,13 @@ the same layout. All regular role-home configuration stays under the strategic
 workspace; no model/profile/authentication is selected by relocation. Exact OK
 framing, no idle model calls, role retention and activation gates are unchanged.
 
+The committed `oap/runtime.env.example` is a portable schema template: it
+parses against the exact configuration schema, its root values are explicit
+placeholders, and it intentionally contains no machine roots. Concrete
+selected machine roots belong only in the versioned
+`oap/governance/WORKSPACE-LAYOUT.json` record and the private materialized
+`runtime.env` derived from it.
+
 The existing coding `.git`, root `.gitignore` and LICENSE are preserved; normal
 commits/pushes update Git metadata through Git. Upstream is
 `ulfe-lmi/llm-slovenian-repair`. Use documented interpreter commands (`bash` for

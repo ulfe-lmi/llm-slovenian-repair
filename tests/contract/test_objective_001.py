@@ -2,13 +2,16 @@
 
 from __future__ import annotations
 
+import errno
 import importlib.util
 import os
 import subprocess
 import sys
 import sysconfig
 import tempfile
+import time
 import tomllib
+import uuid
 from email import message_from_bytes
 from pathlib import Path
 from typing import Any
@@ -646,3 +649,216 @@ def test_driver_synthetic_offline_path_has_no_cache_reconstruction(
     assert result["failure"] == "offline runtime-only frozen sync:FAILED:1"
     assert result["commands"][-1]["label"] == "offline runtime-only frozen sync"
     assert result["cleanup"] == "PASSED"
+
+
+def _pids_with_marker(marker: str) -> list[int]:
+    """Return live PIDs whose /proc cmdline contains the unique marker."""
+    found: list[int] = []
+    for entry in Path("/proc").iterdir():
+        if not entry.name.isdigit():
+            continue
+        try:
+            data = (entry / "cmdline").read_bytes()
+        except OSError:
+            continue
+        if marker.encode("utf-8") in data:
+            found.append(int(entry.name))
+    return found
+
+
+def _wait_marker_gone(marker: str, budget: float = 5.0) -> None:
+    deadline = time.monotonic() + budget
+    while time.monotonic() < deadline:
+        if not _pids_with_marker(marker):
+            return
+        time.sleep(0.1)
+    assert not _pids_with_marker(marker), _pids_with_marker(marker)
+
+
+def _grandchild_code() -> str:
+    return "import time; time.sleep(600)"
+
+
+def test_driver_timeout_kills_descendant_holding_pipe_and_returns_bounded() -> None:
+    driver = load_driver()
+    marker = "oap-012b-a4-timeout-" + uuid.uuid4().hex
+    child_code = (
+        "import subprocess, sys, time\n"
+        f"gc = subprocess.Popen([sys.executable, '-c', {_grandchild_code()!r}, {marker!r}])\n"
+        "print('grandchild', gc.pid, flush=True)\n"
+        "time.sleep(600)\n"
+    )
+    records: list[dict[str, Any]] = []
+    started = time.monotonic()
+    with pytest.raises(driver.CommandFailure, match="a4-timeout:TIMEOUT"):
+        driver.run_command(
+            driver.CommandSpec("a4-timeout", (sys.executable, "-c", child_code), ROOT),
+            env=os.environ.copy(),
+            timeout=1.0,
+            records=records,
+        )
+    elapsed = time.monotonic() - started
+    assert records[-1]["result"] == "TIMEOUT"
+    assert "returncode" not in records[-1]
+    assert "grandchild" in records[-1]["diagnostic"]
+    # Bounded return: far below the unbounded-hang failure mode, and the
+    # owned descendant that held both pipes must be gone.
+    assert elapsed < 30, elapsed
+    _wait_marker_gone(marker)
+
+
+def test_driver_parent_exit_with_descendant_pipe_holder_sweeps_and_passes() -> None:
+    driver = load_driver()
+    marker = "oap-012b-a4-sweep-" + uuid.uuid4().hex
+    child_code = (
+        "import os, subprocess, sys\n"
+        f"gc = subprocess.Popen([sys.executable, '-c', {_grandchild_code()!r}, {marker!r}])\n"
+        "print('grandchild', gc.pid, flush=True)\n"
+        "os._exit(0)\n"
+    )
+    records: list[dict[str, Any]] = []
+    started = time.monotonic()
+    driver.run_command(
+        driver.CommandSpec("a4-sweep", (sys.executable, "-c", child_code), ROOT),
+        env=os.environ.copy(),
+        timeout=15,
+        records=records,
+    )
+    elapsed = time.monotonic() - started
+    # Clean sweep: the record keeps the exact success shape, and the
+    # pipe-retaining descendant is removed by the owned-group sweep.
+    assert records[-1] == {"label": "a4-sweep", "result": "PASSED", "timeout_seconds": 15}
+    assert elapsed < 30, elapsed
+    _wait_marker_gone(marker)
+
+
+def test_driver_flooding_child_does_not_starve_command_deadline() -> None:
+    driver = load_driver()
+    flood_code = (
+        "import sys, time\n"
+        "end = time.monotonic() + 10\n"
+        "block = b'x' * 65536\n"
+        "while time.monotonic() < end:\n"
+        "    sys.stdout.buffer.write(block)\n"
+        "    sys.stdout.buffer.flush()\n"
+    )
+    records: list[dict[str, Any]] = []
+    started = time.monotonic()
+    with pytest.raises(driver.CommandFailure, match="a4-flood:TIMEOUT"):
+        driver.run_command(
+            driver.CommandSpec("a4-flood", (sys.executable, "-c", flood_code), ROOT),
+            env=os.environ.copy(),
+            timeout=1.0,
+            records=records,
+        )
+    elapsed = time.monotonic() - started
+    assert records[-1]["result"] == "TIMEOUT"
+    # Without a bounded per-call drain, continuous output could starve the
+    # deadline for the whole flood duration (10 s); the return must stay
+    # close to the configured deadline instead.
+    assert elapsed < 8, elapsed
+
+
+def test_driver_flooding_child_success_drains_and_passes() -> None:
+    driver = load_driver()
+    flood_code = (
+        "import sys\n"
+        "block = b'y' * 65536\n"
+        "for _ in range(320):\n"
+        "    sys.stdout.buffer.write(block)\n"
+        "sys.stdout.buffer.flush()\n"
+    )
+    records: list[dict[str, Any]] = []
+    started = time.monotonic()
+    driver.run_command(
+        driver.CommandSpec("a4-flood-pass", (sys.executable, "-c", flood_code), ROOT),
+        env=os.environ.copy(),
+        timeout=30,
+        records=records,
+    )
+    elapsed = time.monotonic() - started
+    assert records[-1] == {
+        "label": "a4-flood-pass",
+        "result": "PASSED",
+        "timeout_seconds": 30,
+    }
+    assert elapsed < 20, elapsed
+
+
+def test_driver_timeout_does_not_signal_unrelated_session() -> None:
+    driver = load_driver()
+    marker = "oap-012b-a4-sentinel-" + uuid.uuid4().hex
+    sentinel = subprocess.Popen(
+        [sys.executable, "-c", "import time; time.sleep(30)", marker],
+        start_new_session=True,
+        stdout=subprocess.DEVNULL,
+        stderr=subprocess.DEVNULL,
+    )
+    try:
+        time.sleep(0.2)
+        assert sentinel.poll() is None
+        records: list[dict[str, Any]] = []
+        with pytest.raises(driver.CommandFailure, match="a4-sentinel:TIMEOUT"):
+            driver.run_command(
+                driver.CommandSpec(
+                    "a4-sentinel", (sys.executable, "-c", "import time; time.sleep(5)"), ROOT
+                ),
+                env=os.environ.copy(),
+                timeout=0.5,
+                records=records,
+            )
+        # Only the owned session (pgid == child pid) is ever signaled.
+        assert sentinel.poll() is None, "unrelated session was signaled"
+        assert sentinel.pid in _pids_with_marker(marker)
+    finally:
+        sentinel.kill()
+        sentinel.wait()
+
+
+def test_driver_pipe_allocation_failure_releases_all_fds(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    driver = load_driver()
+    real_pipe = os.pipe
+    state = {"calls": 0}
+
+    def failing_pipe() -> tuple[int, int]:
+        state["calls"] += 1
+        if state["calls"] == 1:
+            return real_pipe()
+        raise OSError(errno.EMFILE, "synthetic fd exhaustion")
+
+    monkeypatch.setattr(os, "pipe", failing_pipe)
+    before = len(os.listdir("/proc/self/fd"))
+    records: list[dict[str, Any]] = []
+    with pytest.raises(driver.CommandFailure, match="a4-fd:FAILED"):
+        driver.run_command(
+            driver.CommandSpec("a4-fd", (sys.executable, "-c", "pass"), ROOT),
+            env=os.environ.copy(),
+            timeout=5,
+            records=records,
+        )
+    after = len(os.listdir("/proc/self/fd"))
+    # The already allocated first pipe pair must not leak: the FD table
+    # returns to its pre-call size.
+    assert after == before, (before, after)
+    assert records[-1]["result"] == "FAILED"
+    assert "OSError" in records[-1]["diagnostic"]
+
+
+def test_driver_group_liveness_ignores_zombie_members() -> None:
+    driver = load_driver()
+    zombie = subprocess.Popen([sys.executable, "-c", "pass"], start_new_session=True)
+    try:
+        time.sleep(2.0)
+        # Never polled: the exited child is a zombie that still matches
+        # killpg(pgid, 0) but holds no pipe writer.
+        assert zombie.returncode is None
+        state = (
+            (Path("/proc") / str(zombie.pid) / "stat").read_text().rsplit(")", 1)[1].split()
+        )
+        assert state[0] == "Z"
+        assert driver._group_has_live_member(zombie.pid) is False
+    finally:
+        if zombie.returncode is None:
+            zombie.wait()

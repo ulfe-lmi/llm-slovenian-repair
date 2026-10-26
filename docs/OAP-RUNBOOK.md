@@ -156,8 +156,12 @@ byte-identical and untouched) with their collection bindings - 134 inputs,
 frozen 011b manifest; receipts are private and metadata-only. Evaluation
 remains blocked pending separate reconciliation of the evaluation objective
 (no prior draft activated). Known
-residuals named for the scoped 012-b follow-up: oap/bin/source_cache.py
-native owner-account ownership and oap/runtime.env.example stale roots.
+012-a residuals - oap/bin/source_cache.py native owner-account ownership and
+oap/runtime.env.example stale roots - were resolved by the scoped 012-b
+completion round: the report-history cache now uses the current process UID
+as its only ownership authority, and the committed example is a portable
+template containing no machine roots (see
+`oap/recovery/012-b-native-migration-completion.md`).
 
 Next engineering scope (post-recovery): the owner-selected Pandoc
 structural-parsing proxy for a runnable repair is the next separately

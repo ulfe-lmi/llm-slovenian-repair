@@ -2347,7 +2347,7 @@ model/network calls.
     "frozen_007m_prompt_sha256": "572cf2fb4864e66e38a500465e1089062d58aeed4721063fb0c1e466e424230d",
     "frozen_007m_final_root_manifest_sha256": "3fb4aef33542e7fa3f357acb905b75f4d7e7551783f83a422b5d1ea6272c25f8",
     "registry_entries": 42,
-    "oap_reports_reviewed": 61,
+    "oap_reports_reviewed": 62,
     "frozen_report_history_incidents": 2
   },
   "official_scorer": {
@@ -2756,3 +2756,52 @@ model/network calls.
   }
 }
 ```
+
+## 31. Engineering recovery record — round 012-b (2026-10-25, data-free)
+
+012-b completed the native-migration corrections that 012-a left explicitly
+outside its immutable allowlist, and corrected 012-a's publication evidence
+overclaims in a new recovery record (see `oap/recovery/012-b-native-migration-completion.md`
+for the full, data-free supersession).
+
+What changed (engineering only):
+
+- Native report-history cache ownership now uses the current process UID as
+  the only authority; no account lookup of any fixed host account remains.
+- `oap/runtime.env.example` is now a portable template: it contains no
+  machine roots, and the selected machine roots belong only in the versioned
+  workspace-layout record and the private materialized configuration.
+- The development baseline driver now runs every owned command in its own
+  POSIX session, reads its pipes nonblocking under finite deadlines, sweeps
+  only its owned process group, and reports bounded-cleanup failures truthfully
+  instead of blocking; its CI budgets were raised to match the observed full
+  suite runtime.
+- Research-state consistency now validates the historical snapshot against the
+  pinned immutable 012-a order (ancestry of the available current main, not
+  equality with it), so copied verification workspaces run the same checks.
+- Bounded CI time limits were raised for the two long jobs; the short report
+  history job is unchanged.
+
+Observed verification (focused, pre-commit candidate bytes, exact Python 3.12):
+driver contract suite passed (including real descendant/pipe, flood, unrelated
+session, FD-leak, and zombie-liveness cases); split-layout module passed;
+report-history cache module passed; research consistency and synthetic
+snapshot suites passed. Final-head CI and the full baseline driver run are
+reported in the 012-b report and recovery record with their exact statuses.
+
+Known local deviation, disclosed: repository-local `.venv` was recreated by a
+local `uv` invocation during 012-b verification (the prior one was a broken
+migrated environment whose interpreter link no longer existed); no retained
+original `.venv` was found after the recreation, and it was not restored.
+The git-tracked tree and the separately preserved literal backslash-named
+`.venv` residue were not touched. This is a local environment deviation only:
+no tracked file, order, report, gate, or scientific record was changed by it.
+
+No scientific protocol, dataset, model, prompt, or result changed in this
+round; no model calls, no live tests, no deployment. The next separately
+ordered objective is the owner-selected Pandoc structural-parsing runnable
+proxy (engineering scope, not scientific evaluation); it is not implemented
+by this round. Copied verification workspaces exercise the file-bound
+snapshot checks and synthetic lineage tests; the actual-repository ancestry
+test is explicitly skipped there, because a copied workspace has no Git
+history, and it remains asserted wherever the real repository is present.

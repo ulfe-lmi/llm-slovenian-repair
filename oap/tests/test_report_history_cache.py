@@ -346,11 +346,48 @@ class CachePlanner(unittest.TestCase):
             self.assertEqual(state["state"], source_cache.CACHE_STATE_INVALID)
             self.assertEqual(state["reason"], "CACHE_HARDLINK")
 
+    def test_current_process_owner_is_the_only_cache_authority(self) -> None:
+        import os
+        import pwd as pwd_module
+        # The authority is the current process owner, not any account lookup.
+        self.assertEqual(source_cache._current_owner_uid(), os.getuid())
+        # An unrelated historical account present on the host (simulated)
+        # must not redirect authority: the function performs no lookup.
+        fake = pwd_module.struct_passwd(
+            ("fake-ubuntu", "x", 4242, 4242, "legacy account", "/nonexistent", "/nonexistent")
+        )
+        with patch.object(pwd_module, "getpwnam", return_value=fake):
+            self.assertEqual(source_cache._current_owner_uid(), os.getuid())
+        # A cache created by the current process is accepted as-is.
+        with tempfile.TemporaryDirectory(prefix="cache-owner-contract-") as temporary:
+            strategy = Path(temporary) / "strategy"
+            data = b"synthetic archive bytes"
+            self._promote(strategy, data)
+            expected = {
+                "EXPECTED_SIZE": len(data),
+                "EXPECTED_MD5": hashlib.md5(data, usedforsecurity=False).hexdigest(),
+                "EXPECTED_SHA256": hashlib.sha256(data).hexdigest(),
+                "EXPECTED_GENERATION": hashlib.sha256(data).hexdigest(),
+            }
+            evidence = source_cache.verify_source_artifact.ArtifactVerification(
+                source_id=source_cache.SOURCE_ID,
+                byte_size=len(data),
+                md5=expected["EXPECTED_MD5"],  # type: ignore[arg-type]
+                sha256=expected["EXPECTED_SHA256"],  # type: ignore[arg-type]
+                member_count=1,
+                total_uncompressed_size=len(data),
+            )
+            with patch.multiple(source_cache, **expected), patch.object(
+                source_cache.verify_source_artifact, "verify_artifact", return_value=evidence
+            ):
+                state = source_cache.inspect(strategy)
+                self.assertEqual(state["state"], source_cache.CACHE_STATE_VERIFIED)
+
     def test_wrong_owner_wrong_root_overwrite_and_lifecycle_gates(self) -> None:
         with tempfile.TemporaryDirectory(prefix="cache-owner-") as temporary:
             strategy = Path(temporary) / "strategy"
             root = self._promote(strategy)
-            with patch.object(source_cache, "_ubuntu_uid", return_value=-1):
+            with patch.object(source_cache, "_current_owner_uid", return_value=-1):
                 with self.assertRaises(source_cache.CacheError) as caught:
                     source_cache.inspect(strategy)
             self.assertEqual(caught.exception.reason, "CACHE_WRONG_OWNER")

@@ -22,6 +22,12 @@ integrity-verified 011 inputs (no prior draft activated) and is not claimed;
 the post-merge 011-e publication proof alone does not establish integration
 or scientific acceptance, and any later main ancestry must be verified
 separately.
+Round 012-b (the scoped completion round) confers no product label either:
+it resolved the two 012-a named engineering residuals (report-history cache
+ownership; portable configuration template), strengthened the baseline
+driver's bounded cleanup contract, and corrected the 012-a
+publication-evidence overclaims in the new recovery record, with no
+scientific protocol, model, or result change.
 The packaged-MVP row above carries a provisional 8-15 focused-engineering-day
 estimate for its remaining scope after the separately ordered Pandoc
 structural-parsing proxy. ICA and deployment keep their separate human gates.
