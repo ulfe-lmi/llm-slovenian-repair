@@ -303,6 +303,19 @@ with one closed label (`REQUEST_INVALID_JSON`,
 reviewer call: negative request tests assert zero main HTTP calls and
 zero review calls.
 
+The exact input message shape: `input` is either a nonempty string
+(1-200,000 code points) or a list of 1-64 messages, where each message
+carries exactly the keys `role` and `content`; `role` is one of
+`user`, `assistant`, `system`, or `developer` (exact string); and
+`content` is either a nonempty string (1-200,000 code points) or a
+list of 1-32 parts, where each part carries exactly the keys `type`
+and `text`, `type` is exactly `input_text`, and `text` is a nonempty
+string (1-200,000 code points). Client-side history conversion (for
+example, a previous assistant turn) is supplied by the client in this
+same shape and validated as-is; any other shape - extra keys, unknown
+roles, non-text parts, or empty content - is rejected before any
+forward.
+
 Main-response eligibility is one shared profile for the nonstreaming
 JSON primary path and the retained delayed SSE path: a documented
 Responses object (`object == "response"`) with exactly
@@ -342,6 +355,19 @@ a bounded content-free operator record (review call count plus token
 counts or `unknown`; no request id, no raw text) at the normal entry
 point, and an observer failure never changes a completed answer.
 Client-managed history (two-turn input messages) is supported; stored
-chaining is rejected before any forward. All limits are finite
-constants in `config.py`. The frozen historical single-target
-evaluator prompt and protocol remain unchanged.
+chaining is rejected before any forward. Declared request limits
+(`config.py`): request body at most 2,000,000 bytes (HTTP 413 before
+any forward when the declared length exceeds the bound); `model` at
+most 200 code points; input string and each message content or part
+text at most 200,000 code points; at most 64 messages and at most 32
+parts per message; `stop` at most 4 sequences of at most 32 code
+points; `max_output_tokens` at most 32,768; `metadata` at most 16
+string keys of at most 64 code points with string values of at most
+256 code points; `top_k` at most 100; `temperature` in [0, 2] and
+`top_p` in (0, 1] as finite numbers (bool rejected). Total
+wall-clock budgeting, admission control, and cancellation are not
+implemented in this proxy: the ordered finite 15-second reviewer limit
+is a socket/inactivity timeout per reviewer HTTP call, not a
+whole-call deadline, and the upstream capture timeout
+(`CONCEPT_TIMEOUT`) is a separate capture axis. The frozen historical
+single-target evaluator prompt and protocol remain unchanged.
