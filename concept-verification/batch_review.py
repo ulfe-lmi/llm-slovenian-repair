@@ -27,6 +27,7 @@ from config import (
     REVIEW_BATCH_VERSION,
 )
 from pandoc_protection import grapheme_boundary_sensitive, grapheme_sensitive
+from responses_contract import strict_reviewer_usage
 
 # Fixed diagnostic labels (requirement 10).  They are closed-set, never carry
 # exception text, and are the only values that may reach traces/reports.
@@ -129,6 +130,28 @@ class BatchProposal:
     keep: bool
     replacement: str | None
     needs_wider_edit: bool
+
+
+@dataclass(frozen=True)
+class BatchUsage:
+    """Actual reviewer token usage reported by one batch response.
+
+    Carried separately from main-generation usage (order 015-a,
+    requirement 7); absence or invalidity stays explicitly unknown
+    (``BatchResult.usage is None``), never zero.
+    """
+
+    input_tokens: int
+    output_tokens: int
+    total_tokens: int
+
+
+@dataclass(frozen=True)
+class BatchResult:
+    """Validated batch proposals plus the actual reviewer usage, if any."""
+
+    proposals: dict[str, BatchProposal]
+    usage: BatchUsage | None
 
 
 def prepare_targets(
@@ -317,12 +340,22 @@ def _validate_proposal_item(item: object, supplied: frozenset[str]) -> BatchProp
 
 def parse_batch_envelope(
     envelope: dict[str, object], supplied_ids: frozenset[str]
-) -> dict[str, BatchProposal]:
+) -> BatchResult:
     """Strictly parse one successful reviewer envelope into id-keyed proposals.
 
     The result is a mapping by validated id; response order is never used to
     align proposals with targets.
+
+    The envelope's reported ``usage`` is carried separately as actual
+    reviewer usage (order 015-a, requirement 7): missing, invalid or
+    non-exact usage leaves ``BatchResult.usage`` explicitly ``None``
+    (unknown) and never rejects the proposals.
     """
+    usage = None
+    if "usage" in envelope:
+        tokens = strict_reviewer_usage(envelope["usage"])
+        if tokens is not None:
+            usage = BatchUsage(*tokens)
     if envelope.get("object") != "response" or envelope.get("status") != "completed":
         # The documented Responses object carries ``object`` (the restored
         # historical Qwen envelope has object=response without a type field).
@@ -394,4 +427,4 @@ def parse_batch_envelope(
     missing = supplied_ids - result.keys()
     if missing:
         raise BatchError(REASON_MISSING_ID)
-    return result
+    return BatchResult(result, usage)

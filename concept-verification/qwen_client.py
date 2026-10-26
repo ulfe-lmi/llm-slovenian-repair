@@ -17,7 +17,7 @@ from batch_review import (
     REASON_PROMPT_OVERSIZE,
     REASON_REQUEST_OVERSIZE,
     BatchError,
-    BatchProposal,
+    BatchResult,
     BatchTarget,
     build_prompt,
     build_request_body,
@@ -191,13 +191,18 @@ class ResponsesReviewer:
 
     def review_batch(
         self, sentence: str, targets: tuple[BatchTarget, ...]
-    ) -> dict[str, BatchProposal]:
+    ) -> BatchResult:
         """One fresh bounded batch request; the whole batch fails as a unit.
 
         ``sentence`` is the completed original answer; occurrence context is
         already serialized into the targets, so it is not re-embedded.  Limit
         failures before dispatch carry the pre-dispatch labels so the caller
         can report zero requests.
+
+        Returns the validated ``BatchResult``: id-keyed proposals plus the
+        actual reviewer usage reported by the envelope, or explicit unknown
+        when absent/invalid (order 015-a, requirement 7).  Main-generation
+        usage is never touched here.
         """
         prompt_text = build_prompt(targets)
         if prompt_text is None:

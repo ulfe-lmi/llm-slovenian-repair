@@ -172,7 +172,19 @@ bounded review request per completed eligible answer, exact occurrence IDs
 and fixed context windows, strict duplicate-key-free parsing at both
 envelope levels, whole-batch rejection versus individual evidence
 rejection, and a one-answer SSE eligibility guard, while the historical
-single-target evaluator prompt/API remains unchanged (see
+single-target evaluator prompt/API remains unchanged; round 014-b
+(2026-10-26) completed the terminal-answer-copy preflight on the same
+branch (every answer-bearing SSE terminal copy proved consistent before
+any reviewer call; contradictory, unowned, or duplicated copies abstain
+with the raw original and zero review calls); round 015-a (2026-10-26)
+added the explicit text-only Responses request contract: strict
+pre-forward request validation with closed 400 labels before any main
+or reviewer call, one shared completed-envelope profile for the
+nonstreaming JSON primary path and the retained delayed SSE path
+(JSON/SSE profile parity), a narrow forwarding header allowlist with no
+reviewer-key borrowing, and request-local separated review usage with
+explicit unknowns plus an optional content-free stderr observer, while
+the historical single-target evaluator prompt/API remains unchanged (see
 `concept-verification/README.md`) - runnable-proxy engineering evidence
 only; the seed 013/014/015/020 packaged objectives remain open. A
 provisional 8-15 focused-engineering-day estimate covers the

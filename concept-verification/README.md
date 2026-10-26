@@ -282,3 +282,66 @@ call count, target count, outcome, and reason labels only. No raw prompts,
 responses, or untrusted exception text is logged. This is runnable-proxy
 engineering evidence only; it establishes no linguistic, experimental-MVP,
 or deployment acceptance.
+
+## Explicit text Responses contract (order 015-a)
+
+The proxy now enforces an explicit text-only Responses request contract
+on `POST /v1/responses` before any forwarding (pure module
+`responses_contract.py`, content-free labels only): a strict JSON object
+(no duplicate keys, no nonfinite numbers, no coercion) with a nonempty
+bounded `model`, text input as a string or a client-managed text-only
+message sequence, explicit `store: false`, a boolean `stream` (absent
+means false), and the allowlisted ordinary fields
+`temperature`/`top_p`/`top_k`/`max_output_tokens`/`stop`/`metadata` with
+exact types and finite values. Any other key is an unsupported
+capability and is rejected regardless of its value (stored chaining via
+`previous_response_id`, `include`, `logprobs`, `tools`, `text`, `n`,
+`audio`, `conversation`, `background`, ...). Rejections return HTTP 400
+with one closed label (`REQUEST_INVALID_JSON`,
+`REQUEST_DUPLICATE_KEY`, `REQUEST_INVALID_NUMBER`, `REQUEST_SCHEMA`,
+`REQUEST_STORE_REQUIRED`, `REQUEST_UNSUPPORTED`) before any main or
+reviewer call: negative request tests assert zero main HTTP calls and
+zero review calls.
+
+Main-response eligibility is one shared profile for the nonstreaming
+JSON primary path and the retained delayed SSE path: a documented
+Responses object (`object == "response"`) with exactly
+`status == "completed"`, an absent/null `error`, and no explicit
+stored/background/linkage/incompleteness declarations (pinned typed
+policy: absent or null is unset; present `store`/`background` accept
+only the exact boolean `false`; a non-null `previous_response_id`,
+`conversation`, or `incomplete_details` contradicts the stateless
+foreground profile), at most one bounded noneditable reasoning item
+(status null/missing/completed only) preceding exactly one assistant
+message with an exact typed nonempty id and exactly
+`status == "completed"`, carrying exactly one plain nonempty
+`output_text` part with aligned `annotations`/`logprobs` absent or
+empty. The delayed SSE completed event is validated with that same full
+envelope validation, so JSON and SSE handle the same final
+`response.output` identically (profile parity); unknown output
+variants, tools/refusals, extra messages/parts, malformed or missing
+identity, incomplete reasoning, contradictory declarations, and
+non-empty aligned metadata all abstain with the raw original bytes and
+zero review calls. Nonstreaming JSON is repaired through the real
+engine on the same one-answer policy; malformed main JSON or capture
+remains a main error under the finite HTTP failure contract (HTTP 502),
+a declared-mode/observed-content-type mismatch returns 502
+`RESPONSE_MODE_MISMATCH`, and a no-edit repair returns the raw bytes
+unchanged while a changed answer mutates only the validated part text
+(usage and metadata preserved as reported; metadata echoes are never
+scanned).
+
+Forwarding uses a narrow header allowlist (content-type, accept, and an
+explicitly caller-provided authorization only); hop-by-hop, internal,
+control, and linkage headers are never forwarded, and the reviewer API
+key is never borrowed as a main credential. Reviewer usage is
+request-local: it is reset on every request, absent or invalid counts
+are explicit `"unknown"` (never zero, never carried over), and main
+usage is preserved as reported. `CONCEPT_USAGE_OBSERVER=stderr` enables
+a bounded content-free operator record (review call count plus token
+counts or `unknown`; no request id, no raw text) at the normal entry
+point, and an observer failure never changes a completed answer.
+Client-managed history (two-turn input messages) is supported; stored
+chaining is rejected before any forward. All limits are finite
+constants in `config.py`. The frozen historical single-target
+evaluator prompt and protocol remain unchanged.

@@ -17,15 +17,20 @@ structural-parsing proxy for a runnable repair (engineering scope, not
 scientific evaluation) in the isolated concept-verification proxy with
 exact original spans. Round 014-a (2026-10-26) implemented one bounded
 occurrence-addressed reviewer batch (`batch-v1`) in the same runnable
-proxy. Coverage remap: the runnable proxy now covers the seed 013-a
-(versioned targeted-review prompt serialization), 014-a (strict
-reviewer-response parsing), 015-a (isolated reviewer HTTP transport to the
-configured private endpoint), and 020-a (completed-text pipeline with at
-most one review call per eligible answer) seams. Those seed objectives as
-packaged library/milestone objectives remain unclosed; following work
-stays: supported API/envelope/history and usage contract, bounded
-failure/admission/cancellation, packaged library integration,
-morphology/phrases, measured labelled quality, and independent closure.
+proxy. Round 014-b (2026-10-26) completed the terminal-answer-copy
+preflight on the same branch. Round 015-a (2026-10-26) implemented the
+explicit text-only Responses request contract (pre-forward request
+validation with closed 400 labels, one shared completed-envelope profile
+for the nonstreaming JSON and delayed SSE paths, request-local separated
+review usage) in the same runnable proxy. Coverage remap: the runnable
+proxy now covers the seed 013-a (versioned targeted-review prompt
+serialization), 014-a (strict reviewer-response parsing), 015-a (isolated
+reviewer HTTP transport to the configured private endpoint), and 020-a
+(completed-text pipeline with at most one review call per eligible answer)
+seams. Those seed objectives as packaged library/milestone objectives
+remain unclosed; following work stays: bounded failure/admission/
+cancellation, packaged library integration, morphology/phrases, measured
+labelled quality, and independent closure.
 A provisional estimate for the remaining packaged-MVP engineering scope is
 8-15 focused engineering days. Research-evaluation completion (requiring
 separate reconciliation of the evaluation objective on the restored,

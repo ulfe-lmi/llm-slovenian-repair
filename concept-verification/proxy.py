@@ -2,11 +2,14 @@
 
 from __future__ import annotations
 
+import contextlib
 import http.client
 import json
+import math
 import os
 import re
 import select
+import sys
 import tempfile
 import time
 import uuid
@@ -24,11 +27,13 @@ from batch_review import (
     REASON_PROMPT_OVERSIZE,
     REASON_REQUEST_OVERSIZE,
     BatchProposal,
+    BatchResult,
     BatchTarget,
+    BatchUsage,
     build_prompt,
     prepare_targets,
 )
-from config import REVIEWER_HTTP_TIMEOUT_SECONDS, canonical_bytes
+from config import API_MAX_REQUEST_BYTES, REVIEWER_HTTP_TIMEOUT_SECONDS, canonical_bytes
 from detector import Candidate, detect, tokenize
 from pandoc_protection import (
     PandocSpec,
@@ -40,6 +45,12 @@ from pandoc_protection import (
 )
 from qwen_client import Proposal, ResponsesReviewer, responses_path
 from repair import accept, apply_edits
+from responses_contract import (
+    RequestContractError,
+    aligned_metadata_clean,
+    validate_completed_envelope,
+    validate_request,
+)
 
 from corpus import Corpus
 
@@ -58,7 +69,7 @@ class Reviewer(Protocol):
 
     def review_batch(
         self, sentence: str, targets: tuple[BatchTarget, ...]
-    ) -> dict[str, BatchProposal]: ...
+    ) -> BatchResult: ...
 
 
 def _split_sse(raw: bytes) -> list[tuple[str, str]]:
@@ -73,17 +84,49 @@ def _split_sse(raw: bytes) -> list[tuple[str, str]]:
     return result
 
 
+def _strict_pairs(pairs: list[tuple[str, object]]) -> dict[str, object]:
+    value: dict[str, object] = {}
+    for key, item in pairs:
+        if key in value:
+            # Ambiguous duplicate keys never reach repair or rendering.
+            raise ProxyError("upstream event contains duplicate keys")
+        value[key] = item
+    return value
+
+
+def _strict_constant(_name: str) -> object:
+    raise ProxyError("upstream event contains a nonfinite number")
+
+
+def _strict_float(text: str) -> float:
+    number = float(text)
+    if not math.isfinite(number):
+        raise ProxyError("upstream event contains a nonfinite number")
+    return number
+
+
+def _strict_json_object(raw: str) -> dict[str, object]:
+    try:
+        value = json.loads(
+            raw,
+            object_pairs_hook=_strict_pairs,
+            parse_constant=_strict_constant,
+            parse_float=_strict_float,
+        )
+    except ProxyError:
+        raise
+    except json.JSONDecodeError as exc:
+        raise ProxyError("upstream event is not valid JSON") from exc
+    if not isinstance(value, dict):
+        raise ProxyError("upstream event is not an object")
+    return value
+
+
 def _event(block: str) -> dict[str, object] | None:
     data_lines = [line[5:] for line in block.splitlines() if line.startswith("data:")]
     if not data_lines or "".join(data_lines).strip() == "[DONE]":
         return None
-    try:
-        value = json.loads("\n".join(data_lines))
-    except json.JSONDecodeError as exc:
-        raise ProxyError("upstream SSE contains malformed JSON") from exc
-    if not isinstance(value, dict):
-        raise ProxyError("upstream SSE event is not an object")
-    return value
+    return _strict_json_object("\n".join(data_lines))
 
 
 def _events(raw: bytes) -> list[tuple[str, dict[str, object]]]:
@@ -245,8 +288,14 @@ def transform_sse(raw: bytes, repair: Callable[[str], str]) -> tuple[bytes, bool
     their ownership (typed confirmed id) and, for message items, the
     assistant role are validated, their protected content is never
     rewritten, and any non-empty initial content - which cannot be proved
-    safe - abstains raw unchanged with zero calls.  When the review accepts no text edit
-    the raw bytes are returned unchanged (order 014-a requirement 7).
+    safe - abstains raw unchanged with zero calls.  The confirming
+    completed event must be an explicitly completed, error-free Responses
+    object and the final message must carry exactly
+    ``status == "completed"``; non-empty (or non-list) aligned
+    annotations/logprobs on any answer-bearing representation make the
+    whole stream ineligible before dispatch (order 015-a, requirements 4
+    and 5).  When the review accepts no text edit the raw bytes are
+    returned unchanged (order 014-a requirement 7).
     """
     blocks = _split_sse(raw)
     parsed: list[dict[str, object] | None] = [_event(block) for block, _ in blocks]
@@ -337,27 +386,44 @@ def transform_sse(raw: bytes, repair: Callable[[str], str]) -> tuple[bytes, bool
     # ``item_id``); ``output_index``/``content_index`` are optional but must
     # be consistent when present.
     units: list[tuple[int, int, dict[str, object], int, dict[str, object]]] = []
+    # The completed event that owns a confirming unit must itself be an
+    # explicitly completed, error-free Responses object; a missing/null
+    # status or a non-null error never confirms an answer (order 015-a,
+    # requirements 4 and 5).
+    completed_eligible: dict[int, bool] = {}
     for index, value in enumerate(parsed):
         if value is None or value.get("type") != "response.completed":
             continue
         response = value.get("response")
         if not isinstance(response, dict):
+            completed_eligible[index] = False
             continue
+        # The completed layer must match the shared JSON profile exactly
+        # (order 015-a, requirements 4 and 5): the full envelope
+        # validation - completed object, absent/null error, stateless
+        # declarations, at most one bounded reasoning item preceding
+        # exactly one completed assistant message with a typed nonempty
+        # id and exactly one plain output_text part - decides both
+        # eligibility and the single confirming unit.  Earlier stream
+        # bookkeeping, terminal copy checks and rendering are unchanged.
+        found = validate_completed_envelope(response)
+        completed_eligible[index] = found is not None
+        if found is None:
+            continue
+        _answer_text, part = found
         final_output = response.get("output")
         if not isinstance(final_output, list):
             continue
         for output_pos, item in enumerate(final_output):
-            if not isinstance(item, dict) or item.get("type") != "message":
+            if not isinstance(item, dict):
                 continue
             content = item.get("content")
             if not isinstance(content, list):
                 continue
-            for content_pos, part in enumerate(content):
-                if (
-                    isinstance(part, dict)
-                    and part.get("type") == "output_text"
-                    and isinstance(part.get("text"), str)
-                ):
+            for content_pos, candidate in enumerate(content):
+                # The validator returns a reference into this same
+                # response; identity locates the exact unit.
+                if candidate is part:
                     units.append((index, output_pos, item, content_pos, part))
 
     def ownership_consistent(
@@ -420,6 +486,7 @@ def transform_sse(raw: bytes, repair: Callable[[str], str]) -> tuple[bytes, bool
             ownership_consistent(output_pos, unit_item, content_pos, unit_part)
             and stream_positions_consistent(item_id, output_pos, content_pos)
             and unit_item.get("role") == "assistant"
+            and unit_item.get("status") == "completed"
             and type(message_id) is str
             and message_id == item_id
             and unit_part["text"] == joined
@@ -441,6 +508,7 @@ def transform_sse(raw: bytes, repair: Callable[[str], str]) -> tuple[bytes, bool
         if (
             type(message_id) is not str
             or not message_id
+            or unit_item.get("status") != "completed"
             or not ownership_consistent(output_pos, unit_item, content_pos, unit_part)
             or not stream_positions_consistent(message_id, output_pos, content_pos)
             or not answer_event_ids <= {message_id}
@@ -449,6 +517,17 @@ def transform_sse(raw: bytes, repair: Callable[[str], str]) -> tuple[bytes, bool
             return raw, False
         confirmed_id = message_id
         original_text = str(unit_part["text"])
+
+    if not completed_eligible.get(unit_index, False):
+        # The completed envelope confirming the single answer is not an
+        # explicitly completed, error-free Responses object: bypass
+        # unchanged with zero review calls.
+        return raw, False
+    if not aligned_metadata_clean(unit_part):
+        # Non-empty (or non-list) aligned metadata on the final answer
+        # part cannot be kept valid beside a changed answer: bypass
+        # unchanged with zero review calls.
+        return raw, False
 
     # Order 014-b requirement 2/3: before any reviewer side effect, every
     # answer-bearing terminal representation must be proved consistent with
@@ -479,6 +558,11 @@ def transform_sse(raw: bytes, repair: Callable[[str], str]) -> tuple[bytes, bool
         stream_id = value.get("item_id")
         if event_type == "response.output_text.delta":
             if type(stream_id) is str and stream_id == confirmed_id:
+                if not aligned_metadata_clean(value):
+                    # A token/offset aligned list on a delta of the
+                    # confirmed answer becomes stale beside a changed
+                    # answer: the whole stream abstains.
+                    return raw, False
                 delta_indices.add(index)
         elif event_type == "response.content_part.added":
             part = value.get("part")
@@ -492,6 +576,8 @@ def transform_sse(raw: bytes, repair: Callable[[str], str]) -> tuple[bytes, bool
             if type(stream_id) is not str or stream_id != confirmed_id:
                 return raw, False
             if "text" in part and part["text"] != "":
+                return raw, False
+            if not aligned_metadata_clean(part):
                 return raw, False
         elif event_type == "response.output_item.added":
             item_obj = value.get("item")
@@ -514,6 +600,8 @@ def transform_sse(raw: bytes, repair: Callable[[str], str]) -> tuple[bytes, bool
                         "text" in part and part["text"] != ""
                     ):
                         return raw, False
+                    if not aligned_metadata_clean(part):
+                        return raw, False
         elif event_type == "response.output_text.done":
             if type(stream_id) is not str or stream_id != confirmed_id:
                 continue
@@ -522,6 +610,10 @@ def transform_sse(raw: bytes, repair: Callable[[str], str]) -> tuple[bytes, bool
                 # A terminal done event must carry the exact original
                 # answer text; a missing or different text cannot be
                 # proved consistent.
+                return raw, False
+            if not aligned_metadata_clean(value):
+                # Stale token/offset alignment on a terminal copy of the
+                # confirmed answer makes the whole stream ineligible.
                 return raw, False
             editable[index] = ("done", None)
         elif event_type == "response.content_part.done":
@@ -536,6 +628,8 @@ def transform_sse(raw: bytes, repair: Callable[[str], str]) -> tuple[bytes, bool
                 return raw, False
             copy_counts["content_part.done"] += 1
             if part.get("text") != original_text:
+                return raw, False
+            if not aligned_metadata_clean(part):
                 return raw, False
             editable[index] = ("part", None)
         elif event_type == "response.output_item.done":
@@ -559,6 +653,8 @@ def transform_sse(raw: bytes, repair: Callable[[str], str]) -> tuple[bytes, bool
                 if not isinstance(part, dict) or part.get("type") != final_kinds[part_pos]:
                     return raw, False
             if content[content_pos].get("text") != original_text:
+                return raw, False
+            if not aligned_metadata_clean(content[content_pos]):
                 return raw, False
             editable[index] = ("item", content_pos)
     if any(count > 1 for count in copy_counts.values()):
@@ -619,6 +715,43 @@ def transform_sse(raw: bytes, repair: Callable[[str], str]) -> tuple[bytes, bool
     return "".join(output).encode("utf-8"), True
 
 
+def _strict_json_body(raw: bytes) -> dict[str, object]:
+    try:
+        text = raw.decode("utf-8")
+    except UnicodeDecodeError as exc:
+        raise ProxyError("upstream JSON body is not valid UTF-8") from exc
+    return _strict_json_object(text)
+
+
+def transform_json(raw: bytes, repair: Callable[[str], str]) -> tuple[bytes, bool]:
+    """Repair one completed JSON text answer with the same eligibility.
+
+    Nonstreaming JSON is the primary supported path (order 015-a,
+    requirement 4).  Malformed main JSON (invalid UTF-8, duplicate keys,
+    nonfinite numbers, non-object) is a main error: it raises
+    ``ProxyError`` and never reaches repair.  A well-formed envelope that
+    is unsupported, or explicitly incomplete or error-bearing, passes
+    through byte-identical with zero review calls, retaining its original
+    status/finish/error semantics; no successful repair trace is recorded
+    for it.  Only the exact validated answer part is mutated; unrelated
+    values, IDs, usage and protected reasoning are preserved.
+    """
+    envelope = _strict_json_body(raw)
+    found = validate_completed_envelope(envelope)
+    if found is None:
+        return raw, False
+    original_text, part = found
+    new_text = repair(original_text)
+    if new_text == original_text:
+        # No accepted text edit: the captured body is returned exactly.
+        return raw, False
+    part["text"] = new_text
+    return (
+        json.dumps(envelope, ensure_ascii=False, separators=(",", ":")).encode("utf-8"),
+        True,
+    )
+
+
 @dataclass(frozen=True)
 class Forwarded:
     status: int
@@ -647,9 +780,14 @@ class RepairEngine:
     # (the proxy main path resolves and checks it at startup).
     pandoc: PandocSpec | None = None
     _details: list[dict[str, object]] | None = None
+    # Actual reviewer usage for the in-flight request only; reset on every
+    # request so no earlier usage is ever carried over (order 015-a,
+    # requirement 7).
+    _review_usage: BatchUsage | None = None
 
     def begin_request(self) -> None:
         self._details = []
+        self._review_usage = None
 
     def take_details(self) -> list[dict[str, object]]:
         details = self._details or []
@@ -687,6 +825,10 @@ class RepairEngine:
                         "targets": 0,
                         "outcome": "skipped",
                         "reason": None,
+                        # No reviewer response exists on this path: usage
+                        # is explicitly unknown, never reused from an
+                        # earlier request.
+                        "usage": "unknown",
                     },
                     "protection_failure": {
                         "reason": reason or "PANDOC_PROTECTION",
@@ -760,6 +902,11 @@ class RepairEngine:
                 "targets": len(candidates) if selected_invalid else len(prepared),
                 "outcome": "skipped",
                 "reason": REASON_PREP_INVALID if selected_invalid else None,
+                # Request-local default: every path without a reviewer
+                # response (Pandoc failure, no suspicion, unsupported
+                # response, failed batch) reports explicit unknown usage,
+                # never a zero and never an earlier request's usage.
+                "usage": "unknown",
             }
             proposals: dict[str, BatchProposal] | None = None
             aligned: list[str] | None = None
@@ -781,7 +928,9 @@ class RepairEngine:
                 else:
                     batch_started = time.monotonic()
                     try:
-                        proposals = self.reviewer.review_batch(text, targets)
+                        batch_result = self.reviewer.review_batch(text, targets)
+                        proposals = batch_result.proposals
+                        self._review_usage = batch_result.usage
                     except Exception as exc:
                         # Only the closed vocabulary of fixed labels is
                         # trusted; anything else maps to REVIEW_FAILED so
@@ -804,6 +953,17 @@ class RepairEngine:
                         review_batch["targets"] = len(targets)
                         review_batch["outcome"] = "ok"
                         review_batch["calls"] = 1
+                        # Actual reviewer usage, separately from main
+                        # usage; absence/invalidity stays unknown.
+                        review_batch["usage"] = (
+                            {
+                                "input_tokens": self._review_usage.input_tokens,
+                                "output_tokens": self._review_usage.output_tokens,
+                                "total_tokens": self._review_usage.total_tokens,
+                            }
+                            if self._review_usage is not None
+                            else "unknown"
+                        )
                     finally:
                         reviewer_seconds = time.monotonic() - batch_started
             decisions: list[dict[str, object]] = []
@@ -916,7 +1076,7 @@ class _Handler(BaseHTTPRequestHandler):
             length = int(self.headers.get("Content-Length", "-1"))
         except ValueError:
             length = -1
-        if length < 0 or length > 2_000_000:
+        if length < 0 or length > API_MAX_REQUEST_BYTES:
             self.send_error(413)
             return
         body = self.rfile.read(length)
@@ -925,15 +1085,40 @@ class _Handler(BaseHTTPRequestHandler):
             request_id = uuid.uuid4().hex
         started = time.monotonic()
         try:
+            try:
+                contract = validate_request(body)
+            except RequestContractError as exc:
+                # Bounded content-free rejection before any upstream or
+                # reviewer call: unsupported capabilities and invalid
+                # requests never reach main generation (order 015-a,
+                # requirement 2).
+                self._send_error_json(400, "invalid_request", exc.reason)
+                return
             if hasattr(owner.engine, "begin_request"):
                 owner.engine.begin_request()
             forwarded = owner.forward(body, dict(self.headers))
             raw_seconds = time.monotonic() - started
             repaired = forwarded.body
-            if forwarded.status == 200 and forwarded.content_type.lower().startswith(
-                "text/event-stream"
-            ):
-                repaired, _ = transform_sse(forwarded.body, owner.engine.repair)
+            if forwarded.status == 200:
+                # The declared client mode must agree with the observed
+                # upstream content type; a mismatch (including an unknown
+                # type) is a bounded upstream protocol failure, never a
+                # silent mode switch (order 015-a, requirement 6).
+                media_type = forwarded.content_type.split(";", 1)[0].strip().lower()
+                if contract.stream and media_type != "text/event-stream":
+                    self._send_error_json(
+                        502, "upstream_protocol_error", "RESPONSE_MODE_MISMATCH"
+                    )
+                    return
+                if not contract.stream and media_type != "application/json":
+                    self._send_error_json(
+                        502, "upstream_protocol_error", "RESPONSE_MODE_MISMATCH"
+                    )
+                    return
+                if contract.stream:
+                    repaired, _ = transform_sse(forwarded.body, owner.engine.repair)
+                else:
+                    repaired, _ = transform_json(forwarded.body, owner.engine.repair)
                 if hasattr(owner.engine, "take_details") and hasattr(owner, "write_traces"):
                     details = owner.engine.take_details()
                     owner.write_traces(
@@ -942,6 +1127,7 @@ class _Handler(BaseHTTPRequestHandler):
                         time.monotonic() - started,
                         raw_seconds,
                     )
+                    owner.observe_usage(details)
             self.send_response(forwarded.status)
             self.send_header("Content-Type", forwarded.content_type or "application/octet-stream")
             self.send_header("Content-Length", str(len(repaired)))
@@ -955,6 +1141,19 @@ class _Handler(BaseHTTPRequestHandler):
             except BrokenPipeError:
                 return
 
+    def _send_error_json(self, status: int, error_type: str, code: str) -> None:
+        payload = json.dumps(
+            {"error": {"type": error_type, "code": code}}, separators=(",", ":")
+        ).encode()
+        self.send_response(status)
+        self.send_header("Content-Type", "application/json")
+        self.send_header("Content-Length", str(len(payload)))
+        self.end_headers()
+        try:
+            self.wfile.write(payload)
+        except BrokenPipeError:
+            return
+
     def log_message(self, *_: object) -> None:
         return
 
@@ -967,6 +1166,7 @@ class ConceptProxy(HTTPServer):
         engine: RepairEngine,
         timeout: float = 30.0,
         trace_dir: Path | None = None,
+        usage_observer: Callable[[dict[str, object]], None] | None = None,
     ):
         if address[0] != "127.0.0.1":
             raise ValueError("proxy must bind to loopback")
@@ -978,10 +1178,54 @@ class ConceptProxy(HTTPServer):
         self.engine = engine
         self.capture_timeout = timeout
         self.trace_dir = trace_dir
+        # Bounded content-free operator observation of separated review
+        # usage (order 015-a, requirement 7); None disables observation.
+        self.usage_observer = usage_observer
         if trace_dir is not None and trace_dir.exists() and trace_dir.is_symlink():
             raise ValueError("trace directory must not be a symlink")
         if trace_dir is not None:
             trace_dir.mkdir(parents=True, exist_ok=True)
+
+    def observe_usage(self, details: list[dict[str, object]]) -> None:
+        """One bounded content-free request-local review usage record.
+
+        ``review_calls`` counts attempted batch requests (zero versus one
+        is recorded separately from whether usage is known);
+        ``reviewer_usage`` is the actual reviewer usage object or the
+        explicit string ``"unknown"`` (never zero, never carried over
+        from an earlier request).  Observation failure must not change a
+        safely completed answer or hide a main failure.
+
+        The record is content-free: it carries counts and usage numbers
+        only, never a caller-supplied identifier (the legacy opt-in trace
+        files keep their own request id separately).
+        """
+        if self.usage_observer is None:
+            return
+        calls = 0
+        usage: object = "unknown"
+        for detail in details:
+            review_batch = detail.get("review_batch")
+            if not isinstance(review_batch, dict):
+                continue
+            attempted = review_batch.get("calls")
+            if type(attempted) is int:
+                calls += attempted
+            record = review_batch.get("usage")
+            if isinstance(record, dict):
+                usage = {
+                    "input_tokens": record.get("input_tokens"),
+                    "output_tokens": record.get("output_tokens"),
+                    "total_tokens": record.get("total_tokens"),
+                }
+        if calls == 0:
+            usage = "unknown"
+        record = {"review_calls": calls, "reviewer_usage": usage}
+        # Best-effort observation: a failing operator probe must not
+        # change the answer or hide a main failure.
+        with contextlib.suppress(Exception):
+            self.usage_observer(record)
+            pass
 
     def write_traces(
         self,
@@ -1038,15 +1282,17 @@ class ConceptProxy(HTTPServer):
         if host is None:
             raise ProxyError("upstream hostname is missing")
         connection = cls(host, self.upstream.port, timeout=self.capture_timeout)
+        # Narrow forwarded header policy (order 015-a, requirement 3):
+        # only content-type, accept and an explicitly caller-provided
+        # Authorization reach the main upstream.  Hop-by-hop, internal
+        # control and linkage headers (host, content-length, cookies,
+        # session/request ids, proxy controls) are never forwarded, and
+        # the reviewer's API key is never borrowed as a main credential.
         headers = {
             key: value
             for key, value in incoming.items()
-            if key.lower() not in {"host", "content-length"}
+            if key.lower() in {"content-type", "accept", "authorization"}
         }
-        reviewer = getattr(self.engine, "reviewer", None)
-        api_key = getattr(reviewer, "api_key", None)
-        if not any(key.lower() == "authorization" for key in headers) and api_key:
-            headers["Authorization"] = f"Bearer {api_key}"
         headers["Content-Length"] = str(len(body))
         try:
             connection.request(
@@ -1064,6 +1310,27 @@ class ConceptProxy(HTTPServer):
             return Forwarded(response.status, raw, content_type)
         finally:
             connection.close()
+
+
+def _stderr_usage_observer(record: dict[str, object]) -> None:
+    """Bounded content-free stderr record for operator observation.
+
+    Enabled with ``CONCEPT_USAGE_OBSERVER=stderr`` (order 015-a,
+    requirement 7): no new HTTP route, metrics service or raw-text log;
+    the record carries counts and usage numbers only.
+    """
+    usage = record.get("reviewer_usage")
+    if isinstance(usage, dict):
+        line = (
+            "concept-review-usage "
+            f"calls={record.get('review_calls')} "
+            f"usage=input={usage.get('input_tokens')},"
+            f"output={usage.get('output_tokens')},"
+            f"total={usage.get('total_tokens')}"
+        )
+    else:
+        line = f"concept-review-usage calls={record.get('review_calls')} usage=unknown"
+    print(line, file=sys.stderr, flush=True)
 
 
 def main() -> int:
@@ -1090,12 +1357,19 @@ def main() -> int:
         profile=os.environ.get("CONCEPT_REVIEWER_PROFILE"),
     )
     trace_value = os.environ.get("CONCEPT_TRACE_DIR")
+    # Operator-observable separated review usage (order 015-a,
+    # requirement 7): wired at the normal runnable entry point, enabled
+    # without editing source; observation stays a bounded stderr record.
+    usage_observer: Callable[[dict[str, object]], None] | None = None
+    if os.environ.get("CONCEPT_USAGE_OBSERVER") == "stderr":
+        usage_observer = _stderr_usage_observer
     proxy = ConceptProxy(
         ("127.0.0.1", 18024),
         upstream,
         RepairEngine(Path(index), reviewer, pandoc=pandoc_spec),
         timeout=float(os.environ.get("CONCEPT_TIMEOUT", "30")),
         trace_dir=Path(trace_value) if trace_value else None,
+        usage_observer=usage_observer,
     )
     proxy.serve_forever()
     return 0
