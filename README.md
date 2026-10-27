@@ -254,7 +254,34 @@ CONCEPT_REQUEST_TIMEOUT into it, rejecting bool, nonnumeric,
 zero, negative, nonfinite and platform-unrepresentable values
 before any bind allocation; the intake deadline is independent of
 the CONCEPT_TIMEOUT body/socket, the CONCEPT_HEADER_TIMEOUT header
-budget and the 15-second reviewer exchange, and the
+budget and the 15-second reviewer exchange; round 021-a
+(2026-10-27) bounded final response delivery with one independent
+finite elapsed delivery deadline (new `delivery_transport.py`
+module): one absolute monotonic deadline anchored immediately
+before final response emission (status line, headers, body and the
+actual flush) and before the owned delivery guard starts, so guard
+startup is charged to the clock; response-ready work (upstream
+capture and optional repair) is outside the phase; byte progress,
+short writes and phase transitions never reset it; a late or racing
+completion loses to expiry - deadline expiry prevents acceptance of
+late results while the owned guard thread is cancelled and
+actually joined before return (cleanup and OS scheduling can add
+elapsed time, with no hard-real-time return guarantee); once any response
+emission began, no second response, status or fallback is attempted
+on that socket and a failed send before bytes is closed safely
+without recursive retry; the owned pure-timer guard interrupts only
+the exact captured accepted socket and is cancelled and actually
+joined on every path including partial startup, so no delivery work
+outlives the response; a stalled or slowly reading client is closed
+quietly with no body logging - local send completion is not proof
+the peer received or read the bytes, so no delivery acknowledgment
+is claimed; the keyword-only constructor parameter delivery_timeout
+is appended after client_timeout with the 30-second
+CLIENT_DELIVERY_TIMEOUT_SECONDS default and main() reads
+CONCEPT_DELIVERY_TIMEOUT into it, rejecting bool, nonnumeric, zero,
+negative, nonfinite and platform-unrepresentable values before any
+bind allocation; the delivery deadline is independent of the
+intake, header, body/socket and 15-second reviewer budgets, and the
 historical single-target
 evaluator prompt/API remains unchanged (see
 `concept-verification/README.md`) - runnable-proxy engineering

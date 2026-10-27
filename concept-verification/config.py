@@ -96,6 +96,18 @@ MAIN_HEADER_TIMEOUT_SECONDS = 30.0
 # CONCEPT_REQUEST_TIMEOUT at the normal main() entry.
 CLIENT_REQUEST_TIMEOUT_SECONDS = 30.0
 
+# One finite positive monotonic outgoing-delivery budget (order
+# 021-a): bounds the final response emission on the accepted client
+# socket - status line, headers, body and the actual flush - AFTER the
+# response bytes are ready.  Response-ready work (upstream capture,
+# optional repair) is outside the phase.  Independent of the
+# incoming-intake budget (CONCEPT_REQUEST_TIMEOUT), the response-header
+# budget (CONCEPT_HEADER_TIMEOUT), the socket/body capture timeout
+# (CONCEPT_TIMEOUT) and the fixed 15 s reviewer exchange; overall
+# request deadlines remain unimplemented.  The operator may override it
+# with CONCEPT_DELIVERY_TIMEOUT at the normal main() entry.
+CLIENT_DELIVERY_TIMEOUT_SECONDS = 30.0
+
 # Finite SQLite busy wait for the read-only runtime evidence adapter
 # (order 016-a, requirement 2): it bounds lock waiting per query only
 # and is not a total CPU/query deadline.

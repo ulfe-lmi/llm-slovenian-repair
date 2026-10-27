@@ -21,6 +21,7 @@ from urllib.parse import urlparse
 
 import capture_transport
 import client_transport
+import delivery_transport
 import header_transport
 from batch_review import (
     BOUND_REVIEW_REASONS,
@@ -36,6 +37,7 @@ from batch_review import (
     prepare_targets,
 )
 from config import (
+    CLIENT_DELIVERY_TIMEOUT_SECONDS,
     CLIENT_REQUEST_TIMEOUT_SECONDS,
     MAIN_BODY_MAX_BYTES,
     MAIN_HEADER_TIMEOUT_SECONDS,
@@ -1129,6 +1131,8 @@ class RepairEngine:
 class _Handler(BaseHTTPRequestHandler):
     server_version = "concept-verification/1"
     _intake: client_transport.IntakeGuard | None = None
+    _delivery: delivery_transport.DeliveryGuard | None = None
+    _emission_begun: bool = False
 
     def handle_one_request(self) -> None:
         # One anchored incoming-intake deadline BEFORE any
@@ -1151,6 +1155,75 @@ class _Handler(BaseHTTPRequestHandler):
             if self._intake is not None:
                 self._intake.release()
                 self._intake = None
+
+    def _deliver(self, emit: Callable[[], None]) -> None:
+        """Emit one post-intake response under one delivery deadline.
+
+        One absolute monotonic deadline anchors immediately before
+        this emission's status/headers/body/flush and before the
+        owned guard starts; response-ready work (upstream capture,
+        optional repair) is outside the phase (order 021-a,
+        requirement 2).  Byte progress, short writes and internal
+        retries never reset it.  On expiry or a write/flush/
+        early-disconnect failure the connection closes quietly: no
+        body is logged, no second response/status/fallback is
+        attempted on this socket, and a partially written body is
+        never labelled completed (order 021-a, requirement 4).  The
+        guard is cancelled and actually joined on every path before
+        this handler returns to the next connection (order 021-a,
+        requirement 3).
+        """
+        owner = cast(ConceptProxy, self.server)
+        # No-retry ownership marker BEFORE any fallible delivery
+        # setup (order 021-a, requirement 4): a delivery attempt
+        # that fails before bytes - including a guard startup
+        # failure - closes safely and never triggers another
+        # response or a second delivery attempt on this socket.
+        self._emission_begun = True
+        try:
+            guard = delivery_transport.DeliveryGuard(
+                self.connection, owner.delivery_timeout
+            )
+        except Exception:
+            # Guard startup failure (partial startup already
+            # cancelled and actually joined inside the guard):
+            # quiet close, no second response, no retry.
+            self.close_connection = True
+            return
+        self._delivery = guard
+        try:
+            if guard.is_expired():
+                # A successful guard startup that already consumed the
+                # whole budget expires the anchored absolute clock
+                # BEFORE emission can begin: the response must not be
+                # started (late or racing completion loses to expiry,
+                # order 021-a, requirement 2).  Close quietly without
+                # any status/headers/body; the owned guard is still
+                # cancelled and actually joined in the finally below.
+                self.close_connection = True
+                return
+            emit()
+            # The common explicit flush belongs inside the common
+            # delivery lifecycle so every post-intake response -
+            # normal emission, contract 400, protocol/generated 502 -
+            # classifies its actual flush against the one delivery
+            # clock (order 021-a, requirements 2 and 4).  On the
+            # native unbuffered _SocketWriter this flush is a no-op
+            # (the bytes were already sent by write), and later
+            # stdlib unbuffered flushes are likewise no-ops; it is
+            # the phase-ownership point, not a network barrier.
+            self.wfile.flush()
+        except (BrokenPipeError, ConnectionResetError, OSError, ValueError):
+            # write/flush failure or early client disconnect: quiet
+            # close, no duplicate response, no body logging.
+            self.close_connection = True
+        finally:
+            if guard.release():
+                # The absolute deadline passed before the emission
+                # completed (or a racing completion lost to it): the
+                # partial (if any) body is never completed and no
+                # second response is attempted on this socket.
+                self.close_connection = True
 
     def do_POST(self) -> None:  # noqa: N802
         if self.path != "/v1/responses":
@@ -1214,8 +1287,18 @@ class _Handler(BaseHTTPRequestHandler):
                 # Bounded content-free rejection before any upstream or
                 # reviewer call: unsupported capabilities and invalid
                 # requests never reach main generation (order 015-a,
-                # requirement 2).
-                self._send_error_json(400, "invalid_request", exc.reason)
+                # requirement 2).  This post-intake emission runs
+                # under the one delivery deadline (order 021-a,
+                # requirement 4).  The fixed validated reason is
+                # bound to an ordinary local before the callback:
+                # the except-as variable is deleted at block end and
+                # must not be closed over.
+                reason = exc.reason
+                self._deliver(
+                    lambda: self._send_error_json(
+                        400, "invalid_request", reason
+                    )
+                )
                 return
             if hasattr(owner.engine, "begin_request"):
                 owner.engine.begin_request()
@@ -1229,13 +1312,21 @@ class _Handler(BaseHTTPRequestHandler):
                 # silent mode switch (order 015-a, requirement 6).
                 media_type = forwarded.content_type.split(";", 1)[0].strip().lower()
                 if contract.stream and media_type != "text/event-stream":
-                    self._send_error_json(
-                        502, "upstream_protocol_error", "RESPONSE_MODE_MISMATCH"
+                    self._deliver(
+                        lambda: self._send_error_json(
+                            502,
+                            "upstream_protocol_error",
+                            "RESPONSE_MODE_MISMATCH",
+                        )
                     )
                     return
                 if not contract.stream and media_type != "application/json":
-                    self._send_error_json(
-                        502, "upstream_protocol_error", "RESPONSE_MODE_MISMATCH"
+                    self._deliver(
+                        lambda: self._send_error_json(
+                            502,
+                            "upstream_protocol_error",
+                            "RESPONSE_MODE_MISMATCH",
+                        )
                     )
                     return
                 if contract.stream:
@@ -1251,18 +1342,36 @@ class _Handler(BaseHTTPRequestHandler):
                         raw_seconds,
                     )
                     owner.observe_usage(details)
-            self.send_response(forwarded.status)
-            self.send_header("Content-Type", forwarded.content_type or "application/octet-stream")
-            self.send_header("Content-Length", str(len(repaired)))
-            self.end_headers()
-            self.wfile.write(repaired)
+            def _emit() -> None:
+                # The delivery deadline is anchored inside _deliver
+                # immediately before this emission and before the
+                # owned guard starts (order 021-a, requirement 2);
+                # the common explicit flush in _deliver keeps the
+                # whole status/headers/body/flush phase inside the
+                # one clock.
+                content_type = (
+                    forwarded.content_type or "application/octet-stream"
+                )
+                self.send_response(forwarded.status)
+                self.send_header("Content-Type", content_type)
+                self.send_header("Content-Length", str(len(repaired)))
+                self.end_headers()
+                self.wfile.write(repaired)
+
+            self._deliver(_emit)
         except BrokenPipeError:
             return
         except Exception:
-            try:
-                self.send_error(502)
-            except BrokenPipeError:
-                return
+            # Post-intake generated error (order 021-a, requirement
+            # 4): only while no response emission has begun.  Once
+            # emission began, a failed partial send is closed quietly
+            # - never a second response/status/502/fallback on the
+            # same socket.
+            if not self._emission_begun:
+                try:
+                    self._deliver(lambda: self.send_error(502))
+                except Exception:
+                    self.close_connection = True
 
     def _send_intake_error(self, status: int, code: str) -> None:
         """Bounded best-effort fixed content-free intake error.
@@ -1325,6 +1434,7 @@ class ConceptProxy(HTTPServer):
         *,
         header_timeout: float = MAIN_HEADER_TIMEOUT_SECONDS,
         client_timeout: float = CLIENT_REQUEST_TIMEOUT_SECONDS,
+        delivery_timeout: float = CLIENT_DELIVERY_TIMEOUT_SECONDS,
     ):
         if address[0] != "127.0.0.1":
             raise ValueError("proxy must bind to loopback")
@@ -1345,6 +1455,16 @@ class ConceptProxy(HTTPServer):
         # traffic is accepted, and validated again at guard use.
         self.client_timeout = client_transport.validate_client_budget(
             client_timeout
+        )
+        # Independent finite positive elapsed final-delivery budget
+        # (order 021-a, requirement 1): bounds the final response
+        # emission (status/headers/body/flush) after the response
+        # bytes are ready; separate from the socket/body capture
+        # timeout, the header budget, the intake budget and the fixed
+        # 15 s reviewer budget; rejected before any bind allocation
+        # or traffic is accepted, and validated again at guard use.
+        self.delivery_timeout = delivery_transport.validate_delivery_budget(
+            delivery_timeout
         )
         # Finite positive body budget (order 017-a, requirement
         # 2): nonfinite or nonpositive operator values are rejected
@@ -1545,10 +1665,11 @@ def _stderr_usage_observer(record: dict[str, object]) -> None:
 
 
 class _IntakeKwargs(TypedDict, total=False):
-    """Optional operator-forwarded intake budget keyword for the real
-    validated constructor (order 020-a, requirement 1)."""
+    """Optional operator-forwarded budget keywords for the real
+    validated constructor (orders 020-a and 021-a, requirement 1)."""
 
     client_timeout: float
+    delivery_timeout: float
 
 
 def main() -> int:
@@ -1601,6 +1722,20 @@ def main() -> int:
     if os.environ.get("CONCEPT_REQUEST_TIMEOUT") is not None:
         intake_kwargs["client_timeout"] = float(
             os.environ["CONCEPT_REQUEST_TIMEOUT"]
+        )
+    # One elapsed final-delivery budget (order 021-a, requirement
+    # 1): independent of CONCEPT_TIMEOUT (socket/body capture),
+    # CONCEPT_HEADER_TIMEOUT (response-header axis),
+    # CONCEPT_REQUEST_TIMEOUT (incoming-intake axis) and the fixed 15 s
+    # reviewer exchange.  Forwarded only when the operator explicitly
+    # configures CONCEPT_DELIVERY_TIMEOUT; otherwise the real
+    # constructor's named CLIENT_DELIVERY_TIMEOUT_SECONDS default
+    # (30 s) governs, keeping pre-021 constructor adapters compatible
+    # at their defaults while the real constructor always validates
+    # and sets the bounded 30 s default when unconfigured.
+    if os.environ.get("CONCEPT_DELIVERY_TIMEOUT") is not None:
+        intake_kwargs["delivery_timeout"] = float(
+            os.environ["CONCEPT_DELIVERY_TIMEOUT"]
         )
     proxy = ConceptProxy(
         ("127.0.0.1", 18024),
