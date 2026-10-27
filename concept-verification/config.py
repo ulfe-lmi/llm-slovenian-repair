@@ -86,6 +86,16 @@ MAIN_BODY_MAX_BYTES = 8_000_000
 # at the normal main() entry.
 MAIN_HEADER_TIMEOUT_SECONDS = 30.0
 
+# One finite positive monotonic incoming-client intake budget (order
+# 020-a): bounds the accepted-connection capture of the request line,
+# all headers and the exact advertised body BEFORE any downstream
+# work, independent of the socket/body capture timeout (CONCEPT_
+# TIMEOUT), the response-header budget (CONCEPT_HEADER_TIMEOUT) and
+# the fixed 15 s reviewer exchange; overall request deadlines remain
+# unimplemented.  The operator may override it with
+# CONCEPT_REQUEST_TIMEOUT at the normal main() entry.
+CLIENT_REQUEST_TIMEOUT_SECONDS = 30.0
+
 # Finite SQLite busy wait for the read-only runtime evidence adapter
 # (order 016-a, requirement 2): it bounds lock waiting per query only
 # and is not a total CPU/query deadline.

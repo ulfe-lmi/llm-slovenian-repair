@@ -16,10 +16,11 @@ from collections.abc import Callable
 from dataclasses import dataclass
 from http.server import BaseHTTPRequestHandler, HTTPServer
 from pathlib import Path
-from typing import Protocol, cast
+from typing import Protocol, TypedDict, cast
 from urllib.parse import urlparse
 
 import capture_transport
+import client_transport
 import header_transport
 from batch_review import (
     BOUND_REVIEW_REASONS,
@@ -35,7 +36,7 @@ from batch_review import (
     prepare_targets,
 )
 from config import (
-    API_MAX_REQUEST_BYTES,
+    CLIENT_REQUEST_TIMEOUT_SECONDS,
     MAIN_BODY_MAX_BYTES,
     MAIN_HEADER_TIMEOUT_SECONDS,
     REVIEWER_HTTP_TIMEOUT_SECONDS,
@@ -1127,20 +1128,81 @@ class RepairEngine:
 
 class _Handler(BaseHTTPRequestHandler):
     server_version = "concept-verification/1"
+    _intake: client_transport.IntakeGuard | None = None
+
+    def handle_one_request(self) -> None:
+        # One anchored incoming-intake deadline BEFORE any
+        # request-line/header/body read and before the guard starts
+        # (order 020-a, requirement 1); OS accept-backlog waiting is
+        # outside this scope.  The stdlib finite line/header-count
+        # guards remain.
+        owner = cast(ConceptProxy, self.server)
+        self._intake = client_transport.IntakeGuard(
+            self.connection, owner.client_timeout
+        )
+        try:
+            super().handle_one_request()
+        finally:
+            # Release and actually join the owned intake guard on
+            # every path: success, EOF, timeout, unsupported
+            # method/path, framing rejection, parse failure,
+            # exception or startup failure.  No intake worker
+            # survives the request (order 020-a, requirement 2).
+            if self._intake is not None:
+                self._intake.release()
+                self._intake = None
 
     def do_POST(self) -> None:  # noqa: N802
         if self.path != "/v1/responses":
             self.send_error(404)
             return
         owner = cast(ConceptProxy, self.server)
-        try:
-            length = int(self.headers.get("Content-Length", "-1"))
-        except ValueError:
-            length = -1
-        if length < 0 or length > API_MAX_REQUEST_BYTES:
-            self.send_error(413)
+        # Strict unambiguous framing before any body read or
+        # forwarding (order 020-a, requirement 3): repeated
+        # Content-Length fields (even equal), comma lists, any
+        # Transfer-Encoding and any unsupported Expect are fixed
+        # content-free 400 rejections with connection close; a
+        # missing length, a nondecimal value (including signed) or
+        # an overlarge length keeps the existing bounded 413 size
+        # policy.
+        framing = client_transport.check_request_framing(self.headers)
+        if isinstance(framing, client_transport.FramingRejection):
+            if framing.status == 413:
+                self.send_error(413)
+            else:
+                self._send_intake_error(400, framing.code)
+            self.close_connection = True
             return
+        _zero, length, _empty = framing
+        # Read exactly the advertised length under the one anchored
+        # intake deadline; the owned guard unblocks a waiting read by
+        # shutting down only this accepted socket object (order
+        # 020-a, requirements 2 and 4).
         body = self.rfile.read(length)
+        # Release and actually join the intake guard BEFORE request
+        # validation, forwarding or engine work (order 020-a,
+        # requirement 5): the timer cannot fire later during
+        # legitimate slow main/review work or interrupt another
+        # connection.  A late or racing completion loses to the
+        # expired clock and can never reach main.
+        if self._intake is not None and self._intake.release():
+            # Bounded best-effort 408 on an interrupted connection;
+            # never blocks indefinitely, then closes with zero main,
+            # analysis, evidence or review calls.
+            self._send_intake_error(408, "REQUEST_INTAKE_TIMEOUT")
+            self.close_connection = True
+            return
+        if len(body) != length:
+            # EOF (or the guard's interruption) delivered fewer bytes
+            # than advertised: a complete valid JSON prefix is NOT a
+            # complete advertised body.  Fixed content-free 400 where
+            # delivery is possible; always closes (order 020-a,
+            # requirement 4).  Bytes beyond the one advertised
+            # request can never become a second upstream request
+            # (HTTP/1.0 close, no pipelining).
+            self._send_intake_error(400, "REQUEST_BODY_INCOMPLETE")
+            self.close_connection = True
+            return
         request_id = self.headers.get("X-Concept-Request-ID", "")
         if not re.fullmatch(r"[A-Za-z0-9_-]{1,80}", request_id):
             request_id = uuid.uuid4().hex
@@ -1202,6 +1264,38 @@ class _Handler(BaseHTTPRequestHandler):
             except BrokenPipeError:
                 return
 
+    def _send_intake_error(self, status: int, code: str) -> None:
+        """Bounded best-effort fixed content-free intake error.
+
+        A short socket timeout bounds the send so an error on an
+        interrupted connection never blocks indefinitely; any failure
+        is suppressed and the caller closes the connection (order
+        020-a, requirement 4).  No raw exception, request, credential,
+        header or text is emitted.
+        """
+        error_type = "request_timeout" if status == 408 else "invalid_request"
+        payload = json.dumps(
+            {"error": {"type": error_type, "code": code}},
+            separators=(",", ":"),
+        ).encode()
+        sock = self.connection
+        previous: float | None = None
+        try:
+            previous = sock.gettimeout()
+            sock.settimeout(1.0)
+            self.send_response(status)
+            self.send_header("Content-Type", "application/json")
+            self.send_header("Content-Length", str(len(payload)))
+            self.end_headers()
+            self.wfile.write(payload)
+            self.wfile.flush()
+        except (BrokenPipeError, ConnectionResetError, OSError, ValueError):
+            return
+        finally:
+            with contextlib.suppress(Exception):
+                if previous is not None:
+                    sock.settimeout(previous)
+
     def _send_error_json(self, status: int, error_type: str, code: str) -> None:
         payload = json.dumps(
             {"error": {"type": error_type, "code": code}}, separators=(",", ":")
@@ -1230,6 +1324,7 @@ class ConceptProxy(HTTPServer):
         usage_observer: Callable[[dict[str, object]], None] | None = None,
         *,
         header_timeout: float = MAIN_HEADER_TIMEOUT_SECONDS,
+        client_timeout: float = CLIENT_REQUEST_TIMEOUT_SECONDS,
     ):
         if address[0] != "127.0.0.1":
             raise ValueError("proxy must bind to loopback")
@@ -1242,6 +1337,14 @@ class ConceptProxy(HTTPServer):
         # accepted, and validated again at guard use.
         self.header_timeout = header_transport.validate_header_budget(
             header_timeout
+        )
+        # Independent finite positive elapsed incoming-intake budget
+        # (order 020-a, requirement 1): separate from the socket/body
+        # capture timeout, the header budget and the fixed 15 s
+        # reviewer budget; rejected before any bind allocation or
+        # traffic is accepted, and validated again at guard use.
+        self.client_timeout = client_transport.validate_client_budget(
+            client_timeout
         )
         # Finite positive body budget (order 017-a, requirement
         # 2): nonfinite or nonpositive operator values are rejected
@@ -1267,6 +1370,13 @@ class ConceptProxy(HTTPServer):
             raise ValueError("trace directory must not be a symlink")
         if trace_dir is not None:
             trace_dir.mkdir(parents=True, exist_ok=True)
+
+    def handle_error(self, request: object, client_address: object) -> None:
+        # Bounded content-free intake diagnostics (order 020-a,
+        # requirement 4): handler failures are closed quietly; no
+        # raw exception, request, credential, header or text reaches
+        # the log.
+        return
 
     def observe_usage(self, details: list[dict[str, object]]) -> None:
         """One bounded content-free request-local review usage record.
@@ -1434,6 +1544,13 @@ def _stderr_usage_observer(record: dict[str, object]) -> None:
     print(line, file=sys.stderr, flush=True)
 
 
+class _IntakeKwargs(TypedDict, total=False):
+    """Optional operator-forwarded intake budget keyword for the real
+    validated constructor (order 020-a, requirement 1)."""
+
+    client_timeout: float
+
+
 def main() -> int:
     upstream = os.environ.get("CONCEPT_UPSTREAM_URL", "http://127.0.0.1:8001")
     index = os.environ.get("CONCEPT_INDEX")
@@ -1471,6 +1588,20 @@ def main() -> int:
     usage_observer: Callable[[dict[str, object]], None] | None = None
     if os.environ.get("CONCEPT_USAGE_OBSERVER") == "stderr":
         usage_observer = _stderr_usage_observer
+    # One elapsed incoming-intake budget (order 020-a, requirement
+    # 1): independent of CONCEPT_TIMEOUT (socket/body capture),
+    # CONCEPT_HEADER_TIMEOUT (response-header axis) and the fixed 15 s
+    # reviewer exchange.  Forwarded only when the operator explicitly
+    # configures CONCEPT_REQUEST_TIMEOUT; otherwise the real
+    # constructor's named CLIENT_REQUEST_TIMEOUT_SECONDS default (30 s)
+    # governs, keeping pre-020 constructor adapters compatible at
+    # their defaults while the real constructor always validates and
+    # sets the bounded 30 s default when unconfigured.
+    intake_kwargs: _IntakeKwargs = {}
+    if os.environ.get("CONCEPT_REQUEST_TIMEOUT") is not None:
+        intake_kwargs["client_timeout"] = float(
+            os.environ["CONCEPT_REQUEST_TIMEOUT"]
+        )
     proxy = ConceptProxy(
         ("127.0.0.1", 18024),
         upstream,
@@ -1483,6 +1614,7 @@ def main() -> int:
         timeout=float(os.environ.get("CONCEPT_TIMEOUT", "30")),
         trace_dir=Path(trace_value) if trace_value else None,
         usage_observer=usage_observer,
+        **intake_kwargs,
     )
     proxy.serve_forever()
     return 0

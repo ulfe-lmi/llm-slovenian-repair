@@ -71,7 +71,35 @@ return so no owned work outlives the exchange; strict RRTX v1 frames
 with explicit finite per-field caps enforced on both encode and
 decode; the legacy single-target prompt/API, proposal and envelope
 parsing, and acceptance remain byte-identical; reviewer request and
-response contracts unchanged). Coverage
+response contracts unchanged). Round 020-a (2026-10-27) implemented
+one finite positive monotonic incoming client request intake
+deadline in the same runnable proxy (one absolute intake deadline
+anchored while handling the accepted connection before any
+request-line/header/body read and before the owned intake guard
+starts, covering the first byte, the request line, all headers and
+the exact advertised body; byte arrival, phase transitions and
+legitimate short reads never reset it; strict unambiguous framing
+with a fixed content-free 400 for repeated Content-Length fields
+even when equal, comma lists, any Transfer-Encoding and any
+unsupported Expect, the existing 413 for missing, negative,
+overlarge or nondecimal lengths with very large numeric fields
+rejected boundedly before integer conversion, and an incomplete
+advertised body - even with a complete valid JSON prefix - never
+forwarded and closed with a fixed content-free 400; a stalled
+intake closes with zero main/analysis/evidence/review work and a
+bounded best-effort 408; the owned pure-timer guard interrupts only
+the exact accepted client socket and is cancelled and actually
+joined on every path including partial startup; trailing bytes
+never become a second request; the keyword-only constructor
+parameter client_timeout, appended after header_timeout following
+the existing positional parameters, takes the CONCEPT_REQUEST_TIMEOUT
+operator value (default 30 seconds), validated before any bind
+allocation; the deadline is independent of the CONCEPT_TIMEOUT
+body/socket, the CONCEPT_HEADER_TIMEOUT header budget and the
+15-second reviewer exchange; main DNS/connect/upload, outgoing
+delivery, total wall-clock/CPU/admission/fairness budgeting,
+post-intake disconnect and cancellation remain unfinished).
+Coverage
 remap: the runnable
 proxy now covers the seed 013-a (versioned targeted-review prompt
 serialization), 014-a (strict reviewer-response parsing), 015-a (isolated
