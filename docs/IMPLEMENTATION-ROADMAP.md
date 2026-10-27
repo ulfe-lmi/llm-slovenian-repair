@@ -39,8 +39,23 @@ delivery; declared lengths deliver exactly the advertised bytes and
 only unknown-length SSE may end at the terminal marker; a bounded
 owned chunk-framing state machine; bounded 502 main failures with
 zero review calls; keep-alive and buffered-overread preservation;
-header/connection/DNS deadlines and total wall-clock budgeting remain
-unfinished). Coverage
+the header phase is bounded separately below; connection/DNS
+deadlines and total wall-clock budgeting remain unfinished). Round
+018-a (2026-10-27) implemented the independent elapsed
+response-header budget in the same runnable proxy (one absolute
+monotonic header deadline anchored before the owned guard starts so
+startup overhead is not concealed; the stdlib getresponse parser
+retained on the owning thread; an owned pure-timer guard that
+interrupts only the exact captured socket and is cancelled and
+actually joined on both success and failure; racing or late parser
+returns explicitly closed and never transferred; the
+CONCEPT_HEADER_TIMEOUT operator value keyword-only after the
+existing positional constructor parameters and validated before any
+bind allocation; bounded 502 header failures with zero review calls
+and zero engine analysis; the CONCEPT_TIMEOUT body budget independent
+in both directions; real-TLS and hanging-upstream subprocess
+coverage; header-phase DNS/connect deadlines, incoming client
+timeouts, admission control and cancellation remain unfinished). Coverage
 remap: the runnable
 proxy now covers the seed 013-a (versioned targeted-review prompt
 serialization), 014-a (strict reviewer-response parsing), 015-a (isolated

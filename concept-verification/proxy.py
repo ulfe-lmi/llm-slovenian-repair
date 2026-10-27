@@ -20,6 +20,7 @@ from typing import Protocol, cast
 from urllib.parse import urlparse
 
 import capture_transport
+import header_transport
 from batch_review import (
     BOUND_REVIEW_REASONS,
     REASON_FAILED,
@@ -36,6 +37,7 @@ from batch_review import (
 from config import (
     API_MAX_REQUEST_BYTES,
     MAIN_BODY_MAX_BYTES,
+    MAIN_HEADER_TIMEOUT_SECONDS,
     REVIEWER_HTTP_TIMEOUT_SECONDS,
     canonical_bytes,
 )
@@ -1226,12 +1228,21 @@ class ConceptProxy(HTTPServer):
         timeout: float = 30.0,
         trace_dir: Path | None = None,
         usage_observer: Callable[[dict[str, object]], None] | None = None,
+        *,
+        header_timeout: float = MAIN_HEADER_TIMEOUT_SECONDS,
     ):
         if address[0] != "127.0.0.1":
             raise ValueError("proxy must bind to loopback")
         parsed = urlparse(upstream)
         if parsed.scheme not in ("http", "https") or not parsed.hostname:
             raise ValueError("upstream must be an explicit HTTP URL")
+        # Independent finite positive elapsed header budget (order
+        # 018-a, requirement 2): separate from the socket/body capture
+        # timeout; rejected before any bind allocation or traffic is
+        # accepted, and validated again at guard use.
+        self.header_timeout = header_transport.validate_header_budget(
+            header_timeout
+        )
         # Finite positive body budget (order 017-a, requirement
         # 2): nonfinite or nonpositive operator values are rejected
         # before any bind allocation or traffic is accepted.
@@ -1376,7 +1387,15 @@ class ConceptProxy(HTTPServer):
             connection.request(
                 "POST", responses_path(self.upstream.path), body=body, headers=headers
             )
-            response = connection.getresponse()
+            # One elapsed header budget anchored immediately before
+            # acquisition (order 018-a, requirement 2): the stdlib
+            # getresponse parser is retained unchanged; the owned guard
+            # interrupts only this connection's owned socket on
+            # expiration and joins before any body capture, so the 017
+            # body deadline below begins later and stays independent.
+            response = header_transport.acquire_response(
+                connection, self.header_timeout
+            )
             content_type = response.getheader("Content-Type", "")
             raw = _bounded_read(
                 response,
@@ -1430,8 +1449,10 @@ def main() -> int:
     except PandocStartupError as exc:
         raise SystemExit(f"pandoc startup failure: {exc.reason}: {exc.detail}") from None
     # The reviewer is bounded by the ordered finite 15-second cap; the
-    # upstream capture timeout (CONCEPT_TIMEOUT) is a separate axis and
-    # must not extend reviewer calls (order 014-a, requirement 4).
+    # upstream capture timeout (CONCEPT_TIMEOUT, socket/body axis) and
+    # the independent elapsed response-header budget
+    # (CONCEPT_HEADER_TIMEOUT, order 018-a) are separate axes and must
+    # not extend reviewer calls (order 014-a, requirement 4).
     reviewer = ResponsesReviewer(
         os.environ.get("CONCEPT_REVIEWER_URL", "http://127.0.0.1:8001/v1"),
         os.environ.get("CONCEPT_REVIEWER_MODEL", "Qwen3.8-27B"),
@@ -1449,6 +1470,11 @@ def main() -> int:
         ("127.0.0.1", 18024),
         upstream,
         RepairEngine(Path(index), reviewer, pandoc=pandoc_spec),
+        header_timeout=float(
+            os.environ.get(
+                "CONCEPT_HEADER_TIMEOUT", str(MAIN_HEADER_TIMEOUT_SECONDS)
+            )
+        ),
         timeout=float(os.environ.get("CONCEPT_TIMEOUT", "30")),
         trace_dir=Path(trace_value) if trace_value else None,
         usage_observer=usage_observer,

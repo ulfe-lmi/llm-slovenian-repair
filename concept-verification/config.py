@@ -71,6 +71,15 @@ API_MAX_TOP_K = 100
 # deadlines are not implemented (see the README capture section).
 MAIN_BODY_MAX_BYTES = 8_000_000
 
+# Independent elapsed response-header budget (order 018-a): a finite
+# positive initial engineering default for status/header acquisition.
+# It is separate from the operator-configured socket/body capture
+# timeout (CONCEPT_TIMEOUT) and from the fixed reviewer cap; overall
+# request deadlines remain unimplemented (see the README capture
+# section).  The operator may override it with CONCEPT_HEADER_TIMEOUT
+# at the normal main() entry.
+MAIN_HEADER_TIMEOUT_SECONDS = 30.0
+
 # Finite SQLite busy wait for the read-only runtime evidence adapter
 # (order 016-a, requirement 2): it bounds lock waiting per query only
 # and is not a total CPU/query deadline.

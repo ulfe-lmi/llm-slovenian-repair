@@ -41,6 +41,7 @@ CONCEPT_REVIEWER_URL=http://REVIEWER_HOST:PORT/v1 \
 CONCEPT_REVIEWER_MODEL=qwen3.8-27b \
 CONCEPT_REVIEWER_PROFILE=PRIVATE_REVIEWER_PROFILE \
 CONCEPT_TRACE_DIR=LOCAL_TRACE CONCEPT_TIMEOUT=30 \
+CONCEPT_HEADER_TIMEOUT=30 \
   ./concept-verification/run_proxy.sh
 python3.12 concept-verification/eval/collect.py --cases 8 \
   --codex-bin codex --codex-home PRIVATE_CODEX_HOME --profile qwen-neumann \
@@ -374,8 +375,10 @@ implemented in this proxy: the ordered finite 15-second reviewer limit
 is a socket/inactivity timeout per reviewer HTTP call, not a
 whole-call deadline. The upstream capture timeout
 (`CONCEPT_TIMEOUT`) is the connection/socket timeout and, since order
-017-a, also the one elapsed main-body budget; it stays separate from
-the 15-second reviewer limit and from the unimplemented overall
+017-a, also the one elapsed main-body budget. The independent elapsed
+response-header budget (`CONCEPT_HEADER_TIMEOUT`, order 018-a) bounds
+status/header acquisition only. Both stay separate from the
+15-second reviewer limit and from the unimplemented overall
 deadlines. The frozen historical single-target evaluator prompt and
 protocol remain unchanged.
 
@@ -489,7 +492,49 @@ module:
   Unicode/code/math/HTML/links, client history, credentials,
   main/reviewer usage and metadata contracts are unchanged.
 
-The header phase (slow response headers with a fast body) is measured
-separately and is NOT covered by the body budget:
-header/connection/DNS deadlines, total wall-clock budgeting,
-admission control and cancellation are not implemented in this proxy.
+The header phase (slow response headers with a fast body) is not
+covered by the body budget; order 018-a bounds it separately below.
+
+## Independent elapsed response-header budget (order 018-a)
+
+Main response STATUS/HEADER acquisition is bounded by an independent
+elapsed budget through the new `header_transport.py` module:
+
+- One finite positive monotonic HEADER deadline is anchored
+  immediately before acquisition (before the owned guard starts), so
+  guard startup overhead is not concealed; byte arrival and
+  legitimate interim 100 responses never reset it. The operator value
+  `CONCEPT_HEADER_TIMEOUT` (default `MAIN_HEADER_TIMEOUT_SECONDS`,
+  30 s) is a keyword-only constructor parameter appended after the
+  existing positional parameters, and nonnumeric, bool, nonfinite or
+  nonpositive values are rejected before any bind allocation.
+- The stdlib `getresponse` parser is retained unchanged and runs on
+  the owning calling thread; the owned guard is a pure timer that
+  owns only a bounded event wait plus a shutdown of the exact
+  captured owned socket object, so it never touches another owned
+  connection. The guard is cancelled and actually joined on both
+  success and failure before any classification or transfer; no
+  header work outlives acquisition.
+- A racing or late parser return after the deadline is explicitly
+  closed and never transferred (completion racing expiration loses to
+  expiration). Bounded header failures (slow status line, slow
+  header lines, interim 100 drip, hanging upstream that never sends
+  a status line) return 502 with zero review calls and zero engine
+  analysis before valid capture, and the same proxy recovers on the
+  next healthy request.
+- The body deadline (`capture_transport`, `CONCEPT_TIMEOUT`) begins
+  later and remains independent in both directions: a body arriving
+  after the header budget but within the body budget succeeds, and
+  slow headers under a generous header budget with a short body
+  budget succeed.
+
+Actual HTTP and real-TLS coverage includes fast-header positives with
+real wire UTF-8, a useful two-target repair that applies both
+supported edits while preserving protected code, TeX, HTML, link and
+an NFC-unstable decomposed/combining line exactly in the final
+composed answer, expiration recovery, other-connection isolation, and
+subprocess children with finite parent deadlines and process-group
+kill/reap. NOT covered: header-phase DNS or connect deadlines (the
+upstream must already be connected), incoming client timeouts, total
+wall-clock budgeting, admission control, cancellation, CPU limits,
+fairness, or live service qualification.
