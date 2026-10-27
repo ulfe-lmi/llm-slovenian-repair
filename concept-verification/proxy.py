@@ -51,8 +51,7 @@ from responses_contract import (
     validate_completed_envelope,
     validate_request,
 )
-
-from corpus import Corpus
+from runtime_corpus import RuntimeCorpus, RuntimeCorpusError
 
 
 class ProxyError(ValueError):
@@ -838,6 +837,51 @@ class RepairEngine:
             )
         return text
 
+    def _fail_closed_evidence(
+        self, text: str, raw_started: float, reason: str, stage: str
+    ) -> str:
+        """Return the exact completed original after a technical evidence failure.
+
+        An early failure (index open or detection) short-circuits before any
+        reviewer call: zero edits and zero review calls are recorded.  A
+        late failure is recorded on the normal detail by the caller (stage
+        ``late``) with the actual review attempt and known/unknown usage
+        preserved.  The fixed content-free label reflects no SQL, path,
+        value, target or credential text, and an evidence failure is never
+        reported as a Pandoc failure (order 016-a, requirement 4).
+        """
+        if self._details is not None:
+            self._details.append(
+                {
+                    "original": text,
+                    "repaired": text,
+                    "candidates": [],
+                    "corpus_summaries": [],
+                    "reviewer_decisions": [],
+                    "acceptance": [],
+                    "replacements": [],
+                    "timings": {
+                        "raw_seconds": 0.0,
+                        "detector_seconds": 0.0,
+                        "reviewer_seconds": 0.0,
+                        "repair_seconds": round(time.monotonic() - raw_started, 6),
+                    },
+                    "protected_difference_count": 0,
+                    "review_batch": {
+                        "calls": 0,
+                        "targets": 0,
+                        "outcome": "skipped",
+                        "reason": None,
+                        # No reviewer response exists on this path: usage
+                        # is explicitly unknown, never reused from an
+                        # earlier request.
+                        "usage": "unknown",
+                    },
+                    "evidence_failure": {"reason": reason, "stage": stage},
+                }
+            )
+        return text
+
     def repair(self, text: str) -> str:
         raw_started = time.monotonic()
         try:
@@ -857,9 +901,24 @@ class RepairEngine:
             return self._fail_closed_original(
                 text, raw_started, "PANDOC_UNEXPECTED", type(exc).__name__
             )
-        with Corpus(self.index) as corpus:
-            detector_started = time.monotonic()
-            candidates = detect(text, corpus, intervals, mode=self.mode, maximum=4)
+        # Technical evidence access opens only after complete-main
+        # eligibility: an invalid or ineligible main response never opens
+        # or creates the index (order 016-a, requirements 4 and 6).  The
+        # adapter is strictly read-only over the existing index.
+        try:
+            corpus = RuntimeCorpus(self.index)
+        except RuntimeCorpusError as exc:
+            return self._fail_closed_evidence(text, raw_started, exc.reason, "early")
+        try:
+            try:
+                detector_started = time.monotonic()
+                candidates = detect(text, corpus, intervals, mode=self.mode, maximum=4)
+            except RuntimeCorpusError as exc:
+                # Detection queried the index: same early boundary - exact
+                # completed original with zero edits and zero review calls.
+                return self._fail_closed_evidence(
+                    text, raw_started, exc.reason, "early"
+                )
             detector_seconds = time.monotonic() - detector_started
             tokens = tokenize(text, intervals)
             prepared: list[_PreparedCandidate] = []
@@ -968,6 +1027,11 @@ class RepairEngine:
                         reviewer_seconds = time.monotonic() - batch_started
             decisions: list[dict[str, object]] = []
             edits: list[tuple[int, int, str]] = []
+            # Late technical evidence failure state: a known
+            # RuntimeCorpusError during per-proposal acceptance aborts the
+            # entire optional pass from the immutable original.
+            late_aborted = False
+            evidence_reason: str | None = None
             for index, item in enumerate(prepared):
                 candidate = item.candidate
                 review_started = time.monotonic()
@@ -978,7 +1042,25 @@ class RepairEngine:
                     "replacement": None,
                 }
                 failure: str | None = None
-                if aligned is not None and proposals is not None:
+                if late_aborted:
+                    # The optional pass already aborted: no earlier accepted
+                    # edit survives and no further proposal is applied; the
+                    # reviewer proposal is retained separately as untrusted
+                    # data, never as an acceptance.
+                    if aligned is not None and proposals is not None:
+                        batch_proposal = proposals[aligned[index]]
+                        proposal_record = {
+                            "keep": batch_proposal.keep,
+                            "replacement": batch_proposal.replacement,
+                            "needs_wider_edit": batch_proposal.needs_wider_edit,
+                        }
+                    acceptance = {
+                        "accepted": False,
+                        "reason": "evidence-abort",
+                        "replacement": None,
+                    }
+                    failure = evidence_reason
+                elif aligned is not None and proposals is not None:
                     batch_proposal = proposals[aligned[index]]
                     try:
                         value = Proposal(
@@ -1007,6 +1089,20 @@ class RepairEngine:
                             "reason": decision.reason,
                             "replacement": decision.replacement,
                         }
+                    except RuntimeCorpusError as exc:
+                        # A known technical evidence error escapes the
+                        # per-proposal generic catch: it aborts the entire
+                        # optional pass from the immutable original, with the
+                        # actual review attempt and known/unknown usage
+                        # preserved (order 016-a, requirement 4).
+                        late_aborted = True
+                        evidence_reason = exc.reason
+                        acceptance = {
+                            "accepted": False,
+                            "reason": "evidence-abort",
+                            "replacement": None,
+                        }
+                        failure = exc.reason
                     except Exception:
                         # Individual isolation: a failed acceptance never
                         # invalidates the other independent proposals.
@@ -1027,6 +1123,22 @@ class RepairEngine:
                 )
                 if acceptance["accepted"] and isinstance(acceptance["replacement"], str):
                     edits.append((candidate.start, candidate.end, acceptance["replacement"]))
+            if late_aborted:
+                # Whole optional pass aborted from a technical evidence
+                # failure: the immutable original is delivered and no
+                # earlier accepted edit survives.  Every persisted decision
+                # reflects that final disposition (not accepted); the
+                # reviewer proposals are retained separately as untrusted
+                # data, and the actual review call and known/unknown usage
+                # stay recorded.
+                edits = []
+                for record in decisions:
+                    record["acceptance"] = {
+                        "accepted": False,
+                        "reason": "evidence-abort",
+                        "replacement": None,
+                    }
+                    record["failure"] = evidence_reason
             repaired = apply_edits(text, edits, intervals) if edits else text
             protected_changes = 0
             for interval in intervals:
@@ -1041,9 +1153,10 @@ class RepairEngine:
                     != text[interval.start : interval.end]
                 ):
                     protected_changes += 1
+        finally:
+            corpus.close()
         if self._details is not None:
-            self._details.append(
-                {
+            detail: dict[str, object] = {
                     "original": text,
                     "repaired": repaired,
                     "candidates": [candidate.as_dict() for candidate in candidates],
@@ -1060,7 +1173,15 @@ class RepairEngine:
                     "protected_difference_count": protected_changes,
                     "review_batch": review_batch,
                 }
-            )
+            if late_aborted:
+                # Recorded with the actual review attempt preserved (calls
+                # and known/unknown usage); never a Pandoc failure and never
+                # zeroed (order 016-a, requirement 4).
+                detail["evidence_failure"] = {
+                    "reason": evidence_reason,
+                    "stage": "late",
+                }
+            self._details.append(detail)
         return repaired
 
 
@@ -1242,7 +1363,7 @@ class ConceptProxy(HTTPServer):
             timings: dict[str, object] = {}
             if isinstance(detail_timings, dict):
                 timings.update(detail_timings)
-            value = {
+            value: dict[str, object] = {
                 "request_id": request_id,
                 "message_index": index,
                 "original": detail["original"],
@@ -1260,6 +1381,12 @@ class ConceptProxy(HTTPServer):
                 "protected_difference_count": detail["protected_difference_count"],
                 "protocol": {"response_completed": True, "valid": True},
             }
+            # Content-free technical evidence failure marker (fixed label
+            # plus early/late stage); persisted whenever the optional pass
+            # was aborted or short-circuited by a known evidence error.
+            evidence_failure = detail.get("evidence_failure")
+            if isinstance(evidence_failure, dict):
+                value["evidence_failure"] = evidence_failure
             target = self.trace_dir / f"{request_id}-{index}.json"
             with tempfile.NamedTemporaryFile(
                 mode="wb", prefix=".trace-", suffix=".tmp", dir=self.trace_dir, delete=False
