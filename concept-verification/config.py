@@ -48,6 +48,23 @@ REVIEW_BATCH_MAX_REPLACEMENT_WORDS = 8
 REVIEW_BATCH_MAX_REPLACEMENT_CODEPOINTS = 128
 
 
+# Explicit text Responses request contract (order 015-a, requirement 2).
+# Named finite API limits, not tuned optima; enforced before any forward.
+# Code-point and byte limits are distinct quantities.
+API_MAX_REQUEST_BYTES = 2_000_000
+API_MAX_MODEL_CODEPOINTS = 200
+API_MAX_INPUT_CODEPOINTS = 200_000
+API_MAX_MESSAGES = 64
+API_MAX_MESSAGE_PARTS = 32
+API_MAX_STOP_SEQUENCES = 4
+API_MAX_STOP_SEQUENCE_CODEPOINTS = 32
+API_MAX_OUTPUT_TOKENS = 32_768
+API_MAX_METADATA_KEYS = 16
+API_MAX_METADATA_KEY_CODEPOINTS = 64
+API_MAX_METADATA_VALUE_CODEPOINTS = 256
+API_MAX_TOP_K = 100
+
+
 @dataclass(frozen=True)
 class ArchiveSpec:
     name: str

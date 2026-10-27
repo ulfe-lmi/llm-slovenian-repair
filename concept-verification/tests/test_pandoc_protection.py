@@ -39,7 +39,7 @@ sys.path.insert(0, str(ROOT))
 
 import config  # noqa: E402
 import pandoc_protection  # noqa: E402
-from batch_review import BatchProposal, BatchTarget  # noqa: E402
+from batch_review import BatchProposal, BatchResult, BatchTarget  # noqa: E402
 from detector import Candidate  # noqa: E402
 from pandoc_protection import (  # noqa: E402
     PandocSpec,
@@ -862,7 +862,7 @@ class _ReviewerThatFailsIfCalled:
 
     def review_batch(
         self, sentence: str, targets: tuple[BatchTarget, ...]
-    ) -> dict[str, BatchProposal]:
+    ) -> BatchResult:
         self.calls += 1
         raise AssertionError("reviewer must not be called")
 
@@ -878,14 +878,17 @@ class _FakeReviewer:
 
     def review_batch(
         self, sentence: str, targets: tuple[BatchTarget, ...]
-    ) -> dict[str, BatchProposal]:
+    ) -> BatchResult:
         self.calls += 1
-        return {
-            target.id: BatchProposal(
-                target.id, False, self.replacement, False
-            )
-            for target in targets
-        }
+        return BatchResult(
+            {
+                target.id: BatchProposal(
+                    target.id, False, self.replacement, False
+                )
+                for target in targets
+            },
+            None,
+        )
 
 
 class EngineBoundaryTests(unittest.TestCase):
@@ -1256,7 +1259,9 @@ class ProxyHttpTests(unittest.TestCase):
             '{"type":"response.completed","response":'
             + json.dumps(
                 {
+                    "object": "response",
                     "id": "r",
+                    "status": "completed",
                     "usage": {"total_tokens": 4},
                     "output": [
                         {
@@ -1319,8 +1324,9 @@ class ProxyHttpTests(unittest.TestCase):
         self.threads.append(thread)
         client = http.client.HTTPConnection("127.0.0.1", proxy_server.server_port,
                                             timeout=10)
-        client.request("POST", "/v1/responses", body=b"{}",
-                       headers={"Content-Length": "2"})
+        body = b'{"model":"m","input":"hi","store":false,"stream":true}'
+        client.request("POST", "/v1/responses", body=body,
+                       headers={"Content-Length": str(len(body))})
         response = client.getresponse()
         result = response.read()
         client.close()

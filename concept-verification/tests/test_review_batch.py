@@ -44,7 +44,9 @@ from batch_review import (  # noqa: E402
     REASON_REPLACEMENT_OVERSIZE,
     REASON_REQUEST_OVERSIZE,
     BatchProposal,
+    BatchResult,
     BatchTarget,
+    BatchUsage,
     build_prompt,
     build_request_body,
     parse_batch_envelope,
@@ -276,7 +278,7 @@ class StrictParserTests(unittest.TestCase):
         envelope = _envelope(inner)
         result = parse_batch_envelope(
             strict_json_object(self._envelope_text(envelope)), frozenset({"t0", "t1"})
-        )
+        ).proposals
         self.assertEqual(set(result), {"t0", "t1"})
         self.assertEqual(result["t0"].keep, False)
         self.assertEqual(result["t0"].replacement, "tako")
@@ -504,7 +506,7 @@ class TransportTests(unittest.TestCase):
         self.thread.join(5)
         self.temp.cleanup()
 
-    def _done(self) -> dict[str, BatchProposal]:
+    def _done(self) -> BatchResult:
         _FakeUpstream.payload = json.dumps(
             _envelope(_valid_inner([_prop("t1"), _prop("t0")])),
             ensure_ascii=False,
@@ -512,7 +514,7 @@ class TransportTests(unittest.TestCase):
         return self.reviewer.review_batch(TEXT, self.targets)
 
     def test_single_request_exact_route_body_and_reordered_result(self) -> None:
-        result = self._done()
+        result = self._done().proposals
         self.assertEqual(len(_FakeUpstream.recorded), 1)
         record = _FakeUpstream.recorded[0]
         self.assertEqual(record["path"], "/v1/responses")
@@ -606,17 +608,26 @@ Responder = Callable[[str, tuple[BatchTarget, ...]], dict[str, BatchProposal]]
 
 
 class _ScriptedBatchReviewer:
-    def __init__(self, responder: Responder) -> None:
+    def __init__(
+        self,
+        responder: Responder,
+        usage: tuple[int, int, int] | None = None,
+    ) -> None:
         self.responder = responder
+        self.usage = usage
         self.calls = 0
         self.sent: list[tuple[str, tuple[BatchTarget, ...]]] = []
 
     def review_batch(
         self, sentence: str, targets: tuple[BatchTarget, ...]
-    ) -> dict[str, BatchProposal]:
+    ) -> BatchResult:
         self.calls += 1
         self.sent.append((sentence, targets))
-        return self.responder(sentence, targets)
+        proposals = self.responder(sentence, targets)
+        return BatchResult(
+            proposals,
+            BatchUsage(*self.usage) if self.usage is not None else None,
+        )
 
 
 def _replace_all(sentence: str, targets: tuple[BatchTarget, ...]) -> dict[str, BatchProposal]:
@@ -648,7 +659,16 @@ class EngineBatchTests(unittest.TestCase):
         details = engine.take_details()
         self.assertEqual(len(details), 1)
         batch = cast(dict[str, object], details[0]["review_batch"])
-        self.assertEqual(batch, {"calls": 1, "targets": 2, "outcome": "ok", "reason": None})
+        self.assertEqual(
+            batch,
+            {
+"calls": 1,
+                "targets": 2,
+                "outcome": "ok",
+                "reason": None,
+                "usage": "unknown",
+            },
+        )
         acceptance = cast(list[dict[str, object]], details[0]["acceptance"])
         self.assertTrue(all(item["accepted"] for item in acceptance))
         self.assertEqual(cast(list[object], details[0]["replacements"]), ["tako", "tako"])
@@ -728,7 +748,16 @@ class EngineBatchTests(unittest.TestCase):
         self.assertEqual(reviewer.calls, 0)
         details = engine.take_details()
         batch = cast(dict[str, object], details[0]["review_batch"])
-        self.assertEqual(batch, {"calls": 0, "targets": 0, "outcome": "skipped", "reason": None})
+        self.assertEqual(
+            batch,
+            {
+"calls": 0,
+                "targets": 0,
+                "outcome": "skipped",
+                "reason": None,
+                "usage": "unknown",
+            },
+        )
 
     def test_schema_failure_returns_exact_original(self) -> None:
         def responder(sentence: str, targets: tuple[BatchTarget, ...]) -> dict[str, BatchProposal]:
@@ -742,7 +771,14 @@ class EngineBatchTests(unittest.TestCase):
         details = engine.take_details()
         batch = cast(dict[str, object], details[0]["review_batch"])
         self.assertEqual(
-            batch, {"calls": 1, "targets": 2, "outcome": "failed", "reason": REASON_DUPLICATE_ID}
+            batch,
+            {
+"calls": 1,
+                "targets": 2,
+                "outcome": "failed",
+                "reason": REASON_DUPLICATE_ID,
+                "usage": "unknown",
+            },
         )
         decisions = cast(list[dict[str, object]], details[0]["reviewer_decisions"])
         self.assertEqual(len(decisions), 2)
@@ -810,7 +846,13 @@ class EngineBatchTests(unittest.TestCase):
         batch = cast(dict[str, object], details[0]["review_batch"])
         self.assertEqual(
             batch,
-            {"calls": 0, "targets": 2, "outcome": "failed", "reason": REASON_REQUEST_OVERSIZE},
+            {
+"calls": 0,
+                "targets": 2,
+                "outcome": "failed",
+                "reason": REASON_REQUEST_OVERSIZE,
+                "usage": "unknown",
+            },
         )
 
     def test_stale_candidate_returns_original_without_calls(self) -> None:
@@ -829,7 +871,13 @@ class EngineBatchTests(unittest.TestCase):
         batch = cast(dict[str, object], details[0]["review_batch"])
         self.assertEqual(
             batch,
-            {"calls": 0, "targets": 1, "outcome": "skipped", "reason": REASON_PREP_INVALID},
+            {
+"calls": 0,
+                "targets": 1,
+                "outcome": "skipped",
+                "reason": REASON_PREP_INVALID,
+                "usage": "unknown",
+            },
         )
 
     def test_mixed_valid_and_unmatched_candidate_zero_calls(self) -> None:
@@ -855,7 +903,13 @@ class EngineBatchTests(unittest.TestCase):
         batch = cast(dict[str, object], details[0]["review_batch"])
         self.assertEqual(
             batch,
-            {"calls": 0, "targets": 3, "outcome": "skipped", "reason": REASON_PREP_INVALID},
+            {
+"calls": 0,
+                "targets": 3,
+                "outcome": "skipped",
+                "reason": REASON_PREP_INVALID,
+                "usage": "unknown",
+            },
         )
 
     def test_prompt_oversize_returns_original_without_calls(self) -> None:
@@ -869,7 +923,13 @@ class EngineBatchTests(unittest.TestCase):
         batch = cast(dict[str, object], details[0]["review_batch"])
         self.assertEqual(
             batch,
-            {"calls": 0, "targets": 2, "outcome": "skipped", "reason": REASON_PROMPT_OVERSIZE},
+            {
+"calls": 0,
+                "targets": 2,
+                "outcome": "skipped",
+                "reason": REASON_PROMPT_OVERSIZE,
+                "usage": "unknown",
+            },
         )
 
 
@@ -897,7 +957,9 @@ def _sse_completed(response: Mapping[str, object] | None = None) -> bytes:
         # answer "m": exactly one assistant output_text at position 0/0
         # (order 014-a, requirement 8).
         response = {
+            "object": "response",
             "id": "r",
+            "status": "completed",
             "usage": {"total_tokens": 4},
             "output": [
                 {
@@ -920,6 +982,27 @@ def _sse_completed(response: Mapping[str, object] | None = None) -> bytes:
 
 
 class SseGuardTests(unittest.TestCase):
+    def test_statusless_completed_envelope_bypass(self) -> None:
+        # The old nominal-success shape (completed event without an explicit
+        # object/status contract) is no longer eligible: raw bytes, zero
+        # calls (order 015-a, requirements 4/5 and 10).
+        completed = {
+            "id": "r",
+            "output": [
+                {"type": "message", "id": "m", "role": "assistant",
+                 "status": "completed", "output_index": 0, "content": [
+                    {"type": "output_text", "text": "To je presenetliv zapisano.",
+                     "content_index": 0}
+                ]}
+            ],
+        }
+        raw = _sse_delta("m", "To je presenetliv zapisano.") + _sse_completed(completed)
+        repair = _CountingRepair()
+        result, changed = transform_sse(raw, repair)
+        self.assertEqual(result, raw)
+        self.assertFalse(changed)
+        self.assertEqual(repair.calls, 0)
+
     def test_multi_answer_delta_streams_bypass(self) -> None:
         raw = (
             _sse_delta("m1", "To je presenetliv zapisano.")
@@ -946,8 +1029,14 @@ class SseGuardTests(unittest.TestCase):
             {"type": "output_text", "text": "Drugo presenetliv besedilo."},
         ]
         raw = _sse_completed(
-            {"id": "r", "output": [
-                {"type": "message", "role": "assistant", "content": fields}
+            {"object": "response", "status": "completed", "id": "r", "output": [
+                {
+                    "type": "message",
+                    "id": "m",
+                    "role": "assistant",
+                    "status": "completed",
+                    "content": fields,
+                }
             ]}
         )
         repair = _CountingRepair()
@@ -959,12 +1048,13 @@ class SseGuardTests(unittest.TestCase):
     def test_metadata_echo_is_never_mutated(self) -> None:
         answer = "To je presenetliv zapisano."
         completed = {
-            "id": "r",
+            "object": "response", "id": "r", "status": "completed",
             "output": [
                 {
                     "type": "message",
                     "role": "assistant",
                     "id": "m",
+                    "status": "completed",
                     "content": [{"type": "output_text", "text": answer}],
                 }
             ],
@@ -988,18 +1078,20 @@ class SseGuardTests(unittest.TestCase):
     def test_delta_plus_two_completed_messages_bypass(self) -> None:
         answer = "To je presenetliv zapisano."
         completed = {
-            "id": "r",
+            "object": "response", "id": "r", "status": "completed",
             "output": [
                 {
                     "type": "message",
                     "role": "assistant",
                     "id": "m",
+                    "status": "completed",
                     "content": [{"type": "output_text", "text": answer}],
                 },
                 {
                     "type": "message",
                     "role": "assistant",
                     "id": "m2",
+                    "status": "completed",
                     "content": [{"type": "output_text", "text": "Drugo."}],
                 },
             ],
@@ -1014,12 +1106,13 @@ class SseGuardTests(unittest.TestCase):
     def test_two_content_parts_same_item_bypass(self) -> None:
         answer = "To je presenetliv zapisano."
         completed = {
-            "id": "r",
+            "object": "response", "id": "r", "status": "completed",
             "output": [
                 {
                     "type": "message",
                     "role": "assistant",
                     "id": "m",
+                    "status": "completed",
                     "content": [
                         {"type": "output_text", "text": answer},
                         {"type": "output_text", "text": answer},
@@ -1037,12 +1130,13 @@ class SseGuardTests(unittest.TestCase):
     def test_completed_item_id_mismatch_bypass(self) -> None:
         answer = "To je presenetliv zapisano."
         completed = {
-            "id": "r",
+            "object": "response", "id": "r", "status": "completed",
             "output": [
                 {
                     "type": "message",
                     "role": "assistant",
                     "id": "m2",
+                    "status": "completed",
                     "content": [{"type": "output_text", "text": answer}],
                 }
             ],
@@ -1056,7 +1150,7 @@ class SseGuardTests(unittest.TestCase):
 
     def test_completed_single_field_repairs_once(self) -> None:
         raw = _sse_completed(
-            {"id": "r", "output": [
+            {"object": "response", "status": "completed", "id": "r", "output": [
                 {"type": "message", "id": "m", "role": "assistant",
                  "status": "completed", "output_index": 0, "content": [
                     {"type": "output_text", "text": "To je presenetliv zapisano.",
@@ -1081,7 +1175,7 @@ class SseGuardTests(unittest.TestCase):
             + "}\n\n"
         ).encode()
         completed = {
-            "id": "r",
+            "object": "response", "id": "r", "status": "completed",
             "output": [
                 {"type": "message", "id": "m", "role": "assistant",
                  "status": "completed", "output_index": 0, "content": [
@@ -1107,7 +1201,7 @@ class SseGuardTests(unittest.TestCase):
             + "}\n\n"
         ).encode()
         completed = {
-            "id": "r",
+            "object": "response", "id": "r", "status": "completed",
             "output": [
                 {"type": "message", "id": "m", "role": "assistant",
                  "status": "completed", "output_index": 0, "content": [
@@ -1133,7 +1227,7 @@ class SseGuardTests(unittest.TestCase):
             + "}\n\n"
         ).encode()
         completed = {
-            "id": "r",
+            "object": "response", "id": "r", "status": "completed",
             "output": [
                 {"type": "message", "id": "m", "role": "assistant",
                  "status": "completed", "output_index": 0, "content": [
@@ -1174,7 +1268,7 @@ class SseGuardTests(unittest.TestCase):
             + ',"delta":' + json.dumps(answer) + "}\n\n"
         ).encode()
         completed = {
-            "id": "r",
+            "object": "response", "id": "r", "status": "completed",
             "output": [
                 {"type": "message", "id": final_message_id, "role": "assistant",
                  "status": "completed", "output_index": 0, "content": [
@@ -1205,7 +1299,7 @@ class SseGuardTests(unittest.TestCase):
             + json.dumps(answer) + "}\n\n"
         ).encode()
         completed = {
-            "id": "r",
+            "object": "response", "id": "r", "status": "completed",
             "output": [
                 {"type": "message", "id": "__single__", "role": "assistant",
                  "status": "completed", "output_index": 0, "content": [
@@ -1230,7 +1324,7 @@ class SseGuardTests(unittest.TestCase):
             b'"text":' + json.dumps(answer).encode() + b"}\n\n"
         )
         completed = {
-            "id": "r",
+            "object": "response", "id": "r", "status": "completed",
             "output": [
                 {"type": "message", "id": "m", "role": "assistant",
                  "status": "completed", "output_index": 0, "content": [
@@ -1255,7 +1349,7 @@ class SseGuardTests(unittest.TestCase):
             b'"text":' + json.dumps(answer).encode() + b"}\n\n"
         )
         completed = {
-            "id": "r",
+            "object": "response", "id": "r", "status": "completed",
             "output": [
                 {"type": "message", "id": "m", "role": "assistant",
                  "status": "completed", "output_index": 0, "content": [
@@ -1292,7 +1386,7 @@ class SseGuardTests(unittest.TestCase):
             '"content":[{"type":"output_text","text":' + json.dumps(answer) + '}]}}'
         )
         completed = {
-            "id": "r",
+            "object": "response", "id": "r", "status": "completed",
             "metadata": {"note": "unchanged"},
             "output": [
                 {"type": "message", "id": "m", "role": "assistant",
@@ -1334,7 +1428,7 @@ class SseGuardTests(unittest.TestCase):
         # stream) means several answers: bypass unchanged, zero calls.
         answer = "To je presenetliv zapisano."
         completed = {
-            "id": "r",
+            "object": "response", "id": "r", "status": "completed",
             "output": [
                 {"type": "message", "id": "m", "role": "assistant",
                  "status": "completed", "output_index": 0, "content": [
@@ -1359,7 +1453,7 @@ class SseGuardTests(unittest.TestCase):
         # event too: bypass unchanged, zero calls.
         answer = "To je presenetliv zapisano."
         completed = {
-            "id": "r",
+            "object": "response", "id": "r", "status": "completed",
             "output": [
                 {"type": "message", "id": "m", "role": "assistant",
                  "status": "completed", "output_index": 0, "content": [
@@ -1384,7 +1478,7 @@ class SseGuardTests(unittest.TestCase):
         # answer: the single confirmed answer is still reviewed once.
         answer = "To je presenetliv zapisano."
         completed = {
-            "id": "r",
+            "object": "response", "id": "r", "status": "completed",
             "output": [
                 {"type": "message", "id": "m", "role": "assistant",
                  "status": "completed", "output_index": 0, "content": [
@@ -1423,6 +1517,15 @@ class _EphemeralUpstream(BaseHTTPRequestHandler):
 
 _TC_ANSWER = "To je presenetliv zapisano."
 _TC_OTHER = "Nekaj drugacnega."
+
+
+def _contract_body(stream: bool, input_text: str = TEXT) -> bytes:
+    # A valid explicit text Responses request (order 015-a, requirement 2):
+    # text input, explicit store:false, declared stream mode.
+    return json.dumps(
+        {"model": "m", "input": input_text, "store": False, "stream": stream},
+        separators=(",", ":"),
+    ).encode()
 
 
 def _tc_raw(*events: bytes) -> bytes:
@@ -1512,7 +1615,7 @@ def _tc_completed(output: list[dict[str, object]] | None = None) -> bytes:
             }
         ]
     return (
-        '{"type":"response.completed","response":{"id":"r","output":'
+        '{"type":"response.completed","response":{"object":"response","id":"r","status":"completed","output":'
         + json.dumps(output)
         + "}}"
     ).encode()
@@ -1523,7 +1626,9 @@ def _tc_completed_reasoning_then_message(text: str = _TC_ANSWER) -> bytes:
     # nonzero output_index (order 014-b, requirement 5).  Built with
     # json.dumps so the fixture is valid JSON by construction.
     response = {
+        "object": "response",
         "id": "r",
+        "status": "completed",
         "output": [
             {
                 "type": "reasoning",
@@ -1553,7 +1658,9 @@ def _tc_completed_text_event(text: str, output_index: int = 0) -> bytes:
     # answer copy carries the identical full answer text.  Built with
     # json.dumps so the fixture is valid JSON by construction.
     response = {
+        "object": "response",
         "id": "r",
+        "status": "completed",
         "usage": {"total_tokens": 4},
         "output": [
             {
@@ -1994,12 +2101,50 @@ class SseHttpTests(unittest.TestCase):
         thread.start()
         self.threads.append(thread)
         client = http.client.HTTPConnection("127.0.0.1", proxy_server.server_port, timeout=15)
-        client.request("POST", "/v1/responses", body=b"{}", headers={"Content-Length": "2"})
+        body = _contract_body(True)
+        client.request(
+            "POST",
+            "/v1/responses",
+            body=body,
+            headers={"Content-Length": str(len(body))},
+        )
         response = client.getresponse()
         result = response.read()
         client.close()
         self.assertEqual(response.status, 200)
         return result
+
+    def test_http_old_empty_body_rejected_before_main(self) -> None:
+        # The old transport-fixture request shape b"{}" is now a bounded
+        # content-free 400 with zero main and zero review HTTP calls
+        # (order 015-a, requirements 2 and 10).
+        _EphemeralUpstream.source = _sse_delta("m", TEXT) + _sse_completed()
+        upstream = HTTPServer(("127.0.0.1", 0), _EphemeralUpstream)
+        self.servers.append(upstream)
+        thread = threading.Thread(target=upstream.serve_forever, daemon=True)
+        thread.start()
+        self.threads.append(thread)
+        import proxy
+
+        reviewer = _ScriptedBatchReviewer(_replace_all)
+        engine = proxy.RepairEngine(self.db, reviewer, pandoc=_real_spec())
+        proxy_server = proxy.ConceptProxy(
+            ("127.0.0.1", 0), f"http://127.0.0.1:{upstream.server_port}", engine
+        )
+        self.servers.append(proxy_server)
+        thread = threading.Thread(target=proxy_server.serve_forever, daemon=True)
+        thread.start()
+        self.threads.append(thread)
+        client = http.client.HTTPConnection("127.0.0.1", proxy_server.server_port, timeout=15)
+        client.request("POST", "/v1/responses", body=b"{}", headers={"Content-Length": "2"})
+        response = client.getresponse()
+        result = json.loads(response.read())
+        client.close()
+        self.assertEqual(response.status, 400)
+        self.assertEqual(
+            result, {"error": {"type": "invalid_request", "code": "REQUEST_SCHEMA"}}
+        )
+        self.assertEqual(reviewer.calls, 0)
 
     def test_http_two_targets_one_review_round_trip(self) -> None:
         reviewer = _ScriptedBatchReviewer(_replace_all)
@@ -2024,18 +2169,20 @@ class SseHttpTests(unittest.TestCase):
         reviewer = _ScriptedBatchReviewer(_replace_all)
         answer = "To je presenetliv zapisano."
         completed = {
-            "id": "r",
+            "object": "response", "id": "r", "status": "completed",
             "output": [
                 {
                     "type": "message",
                     "role": "assistant",
                     "id": "m",
+                    "status": "completed",
                     "content": [{"type": "output_text", "text": answer}],
                 },
                 {
                     "type": "message",
                     "role": "assistant",
                     "id": "m2",
+                    "status": "completed",
                     "content": [{"type": "output_text", "text": "Drugo."}],
                 },
             ],
@@ -2049,12 +2196,13 @@ class SseHttpTests(unittest.TestCase):
         reviewer = _ScriptedBatchReviewer(_replace_all)
         answer = "To je presenetliv zapisano."
         completed = {
-            "id": "r",
+            "object": "response", "id": "r", "status": "completed",
             "output": [
                 {
                     "type": "message",
                     "role": "assistant",
                     "id": "m",
+                    "status": "completed",
                     "content": [{"type": "output_text", "text": answer}],
                 }
             ],
@@ -2196,7 +2344,13 @@ class CompositionChainTests(unittest.TestCase):
         client = http.client.HTTPConnection(
             "127.0.0.1", proxy_server.server_port, timeout=30
         )
-        client.request("POST", "/v1/responses", body=b"{}", headers={"Content-Length": "2"})
+        body = _contract_body(True)
+        client.request(
+            "POST",
+            "/v1/responses",
+            body=body,
+            headers={"Content-Length": str(len(body))},
+        )
         response = client.getresponse()
         result = response.read()
         client.close()

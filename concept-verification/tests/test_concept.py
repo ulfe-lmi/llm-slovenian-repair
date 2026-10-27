@@ -29,6 +29,9 @@ from qwen_client import ReviewerError, parse_proposal  # noqa: E402
 from repair import accept, apply_edits  # noqa: E402
 
 
+_SSE_CONTRACT_BODY = b'{"model":"m","input":"hi","store":false,"stream":true}'
+
+
 class ConceptTests(unittest.TestCase):
     def setUp(self) -> None:
         self.temp = tempfile.TemporaryDirectory()
@@ -150,7 +153,9 @@ class ConceptTests(unittest.TestCase):
             {
                 "type": "response.completed",
                 "response": {
+                    "object": "response",
                     "id": "r1",
+                    "status": "completed",
                     "usage": {"total_tokens": 4},
                     "output": [
                         {
@@ -315,7 +320,8 @@ class ConceptTests(unittest.TestCase):
         proxy_thread.start()
         try:
             client = http.client.HTTPConnection("127.0.0.1", proxy.server_port, timeout=2)
-            client.request("POST", "/v1/responses", body=b"{}", headers={"Content-Length": "2"})
+            client.request("POST", "/v1/responses", body=_SSE_CONTRACT_BODY,
+                           headers={"Content-Length": str(len(_SSE_CONTRACT_BODY))})
             response = client.getresponse()
             result = response.read()
             self.assertEqual(response.status, 200)
@@ -374,7 +380,7 @@ class ConceptTests(unittest.TestCase):
             self._STATUS_SSE_HEADERS, b"data: {broken\n\n"
         )
         try:
-            with self.assertRaisesRegex(ProxyError, "malformed"):
+            with self.assertRaisesRegex(ProxyError, "not valid JSON"):
                 _bounded_read(response, 1_000_000, 2.0, require_complete_sse=True)
         finally:
             a.close()
@@ -461,7 +467,8 @@ class ConceptTests(unittest.TestCase):
         proxy_thread.start()
         try:
             client = http.client.HTTPConnection("127.0.0.1", proxy.server_port, timeout=2)
-            client.request("POST", "/v1/responses", body=b"{}", headers={"Content-Length": "2"})
+            client.request("POST", "/v1/responses", body=_SSE_CONTRACT_BODY,
+                           headers={"Content-Length": str(len(_SSE_CONTRACT_BODY))})
             started = time.monotonic()
             response = client.getresponse()
             result = response.read()
@@ -505,7 +512,8 @@ class ConceptTests(unittest.TestCase):
         proxy_thread.start()
         try:
             client = http.client.HTTPConnection("127.0.0.1", proxy.server_port, timeout=2)
-            client.request("POST", "/v1/responses", body=b"{}", headers={"Content-Length": "2"})
+            client.request("POST", "/v1/responses", body=_SSE_CONTRACT_BODY,
+                           headers={"Content-Length": str(len(_SSE_CONTRACT_BODY))})
             response = client.getresponse()
             self.assertEqual(response.status, 502)
             response.read()
@@ -538,7 +546,8 @@ class ConceptTests(unittest.TestCase):
         proxy_thread.start()
         try:
             client = http.client.HTTPConnection("127.0.0.1", proxy.server_port, timeout=2)
-            client.request("POST", "/v1/responses", body=b"{}", headers={"Content-Length": "2"})
+            client.request("POST", "/v1/responses", body=_SSE_CONTRACT_BODY,
+                           headers={"Content-Length": str(len(_SSE_CONTRACT_BODY))})
             response = client.getresponse()
             self.assertEqual(response.status, 429)
             self.assertEqual(response.getheader("Content-Type"), "application/problem+json")
@@ -697,7 +706,8 @@ class ConceptTests(unittest.TestCase):
             b'"delta":"presenetliv"}\n\n'
             b'data: {"type":"response.output_text.done","item_id":"m",'
             b'"text":"presenetliv"}\n\n'
-            b'data: {"type":"response.completed","response":{"id":"r",'
+            b'data: {"type":"response.completed","response":{"object":"response",'
+            b'"id":"r","status":"completed",'
             b'"usage":{"total_tokens":2},"output":[{"type":"message","id":"m",'
             b'"role":"assistant","status":"completed","output_index":0,'
             b'"content":[{"type":"output_text","text":"presenetliv",'
@@ -728,7 +738,8 @@ class ConceptTests(unittest.TestCase):
         upstream_thread.start()
         proxy_thread.start()
         client = http.client.HTTPConnection("127.0.0.1", proxy.server_port, timeout=3)
-        client.request("POST", "/v1/responses", body=b"{}", headers={"Content-Length": "2"})
+        client.request("POST", "/v1/responses", body=_SSE_CONTRACT_BODY,
+                       headers={"Content-Length": str(len(_SSE_CONTRACT_BODY))})
         response = client.getresponse()
         result = response.read()
         proxy_thread.join(3)

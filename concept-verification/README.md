@@ -282,3 +282,96 @@ call count, target count, outcome, and reason labels only. No raw prompts,
 responses, or untrusted exception text is logged. This is runnable-proxy
 engineering evidence only; it establishes no linguistic, experimental-MVP,
 or deployment acceptance.
+
+## Explicit text Responses contract (order 015-a)
+
+The proxy now enforces an explicit text-only Responses request contract
+on `POST /v1/responses` before any forwarding (pure module
+`responses_contract.py`, content-free labels only): a strict JSON object
+(no duplicate keys, no nonfinite numbers, no coercion) with a nonempty
+bounded `model`, text input as a string or a client-managed text-only
+message sequence, explicit `store: false`, a boolean `stream` (absent
+means false), and the allowlisted ordinary fields
+`temperature`/`top_p`/`top_k`/`max_output_tokens`/`stop`/`metadata` with
+exact types and finite values. Any other key is an unsupported
+capability and is rejected regardless of its value (stored chaining via
+`previous_response_id`, `include`, `logprobs`, `tools`, `text`, `n`,
+`audio`, `conversation`, `background`, ...). Rejections return HTTP 400
+with one closed label (`REQUEST_INVALID_JSON`,
+`REQUEST_DUPLICATE_KEY`, `REQUEST_INVALID_NUMBER`, `REQUEST_SCHEMA`,
+`REQUEST_STORE_REQUIRED`, `REQUEST_UNSUPPORTED`) before any main or
+reviewer call: negative request tests assert zero main HTTP calls and
+zero review calls.
+
+The exact input message shape: `input` is either a nonempty string
+(1-200,000 code points) or a list of 1-64 messages, where each message
+carries exactly the keys `role` and `content`; `role` is one of
+`user`, `assistant`, `system`, or `developer` (exact string); and
+`content` is either a nonempty string (1-200,000 code points) or a
+list of 1-32 parts, where each part carries exactly the keys `type`
+and `text`, `type` is exactly `input_text`, and `text` is a nonempty
+string (1-200,000 code points). Client-side history conversion (for
+example, a previous assistant turn) is supplied by the client in this
+same shape and validated as-is; any other shape - extra keys, unknown
+roles, non-text parts, or empty content - is rejected before any
+forward. The 200,000-code-point bound applies per input string, per
+message content string, and per part text - not as an aggregate across
+the 64 messages or 32 parts; the whole request remains bounded by the
+2,000,000 UTF-8 byte request limit.
+
+Main-response eligibility is one shared profile for the nonstreaming
+JSON primary path and the retained delayed SSE path: a documented
+Responses object (`object == "response"`) with exactly
+`status == "completed"`, an absent/null `error`, and no explicit
+stored/background/linkage/incompleteness declarations (pinned typed
+policy: absent or null is unset; present `store`/`background` accept
+only the exact boolean `false`; a non-null `previous_response_id`,
+`conversation`, or `incomplete_details` contradicts the stateless
+foreground profile), at most one bounded noneditable reasoning item
+(status null/missing/completed only) preceding exactly one assistant
+message with an exact typed nonempty id and exactly
+`status == "completed"`, carrying exactly one plain nonempty
+`output_text` part with aligned `annotations`/`logprobs` absent or
+empty. The delayed SSE completed event is validated with that same full
+envelope validation, so JSON and SSE handle the same final
+`response.output` identically (profile parity); unknown output
+variants, tools/refusals, extra messages/parts, malformed or missing
+identity, incomplete reasoning, contradictory declarations, and
+non-empty aligned metadata all abstain with the raw original bytes and
+zero review calls. Nonstreaming JSON is repaired through the real
+engine on the same one-answer policy; malformed main JSON or capture
+remains a main error under the finite HTTP failure contract (HTTP 502),
+a declared-mode/observed-content-type mismatch returns 502
+`RESPONSE_MODE_MISMATCH`, and a no-edit repair returns the raw bytes
+unchanged while a changed answer mutates only the validated part text
+(usage and metadata preserved as reported; metadata echoes are never
+scanned).
+
+Forwarding uses a narrow header allowlist (content-type, accept, and an
+explicitly caller-provided authorization only); hop-by-hop, internal,
+control, and linkage headers are never forwarded, and the reviewer API
+key is never borrowed as a main credential. Reviewer usage is
+request-local: it is reset on every request, absent or invalid counts
+are explicit `"unknown"` (never zero, never carried over), and main
+usage is preserved as reported. `CONCEPT_USAGE_OBSERVER=stderr` enables
+a bounded content-free operator record (review call count plus token
+counts or `unknown`; no request id, no raw text) at the normal entry
+point, and an observer failure never changes a completed answer.
+Client-managed history (two-turn input messages) is supported; stored
+chaining is rejected before any forward. Declared request limits
+(`config.py`): request body at most 2,000,000 bytes (HTTP 413 before
+any forward when the declared length exceeds the bound); `model` at
+most 200 code points; input string and each message content or part
+text at most 200,000 code points each (per string/part, not an
+aggregate); at most 64 messages and at most 32
+parts per message; `stop` at most 4 sequences of at most 32 code
+points; `max_output_tokens` at most 32,768; `metadata` at most 16
+string keys of at most 64 code points with string values of at most
+256 code points; `top_k` at most 100; `temperature` in [0, 2] and
+`top_p` in (0, 1] as finite numbers (bool rejected). Total
+wall-clock budgeting, admission control, and cancellation are not
+implemented in this proxy: the ordered finite 15-second reviewer limit
+is a socket/inactivity timeout per reviewer HTTP call, not a
+whole-call deadline, and the upstream capture timeout
+(`CONCEPT_TIMEOUT`) is a separate capture axis. The frozen historical
+single-target evaluator prompt and protocol remain unchanged.
