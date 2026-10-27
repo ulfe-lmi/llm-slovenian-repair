@@ -22,7 +22,16 @@ preflight on the same branch. Round 015-a (2026-10-26) implemented the
 explicit text-only Responses request contract (pre-forward request
 validation with closed 400 labels, one shared completed-envelope profile
 for the nonstreaming JSON and delayed SSE paths, request-local separated
-review usage) in the same runnable proxy. Coverage remap: the runnable
+review usage) in the same runnable proxy. Round 016-a (2026-10-27)
+implemented the read-only runtime evidence and completed-original
+fallback in the same runnable proxy (read-only rollback-journal index
+access with exact escaped paths, a bounded header preflight that
+rejects non-regular resources without blocking and unsupported journal
+formats before any SQLite open, finite per-query busy wait, exact
+nonnegative-integer count validation, and completed-original fallback
+distinguishing early zero-call failures from late whole-pass aborts
+that preserve the actual review attempt and honest usage). Coverage
+remap: the runnable
 proxy now covers the seed 013-a (versioned targeted-review prompt
 serialization), 014-a (strict reviewer-response parsing), 015-a (isolated
 reviewer HTTP transport to the configured private endpoint), and 020-a

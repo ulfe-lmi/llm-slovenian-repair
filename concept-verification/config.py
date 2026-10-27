@@ -64,6 +64,11 @@ API_MAX_METADATA_KEY_CODEPOINTS = 64
 API_MAX_METADATA_VALUE_CODEPOINTS = 256
 API_MAX_TOP_K = 100
 
+# Finite SQLite busy wait for the read-only runtime evidence adapter
+# (order 016-a, requirement 2): it bounds lock waiting per query only
+# and is not a total CPU/query deadline.
+RUNTIME_CORPUS_BUSY_TIMEOUT_SECONDS = 0.25
+
 
 @dataclass(frozen=True)
 class ArchiveSpec:

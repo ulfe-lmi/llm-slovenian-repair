@@ -375,3 +375,72 @@ is a socket/inactivity timeout per reviewer HTTP call, not a
 whole-call deadline, and the upstream capture timeout
 (`CONCEPT_TIMEOUT`) is a separate capture axis. The frozen historical
 single-target evaluator prompt and protocol remain unchanged.
+
+## Read-only runtime evidence and completed-original fallback (order 016-a)
+
+The proxy's runtime evidence access (the prepared tiny SQLite index)
+is strictly read-only through the new `runtime_corpus.py` adapter,
+which inherits the nominal `Corpus` interface so the frozen detector
+and acceptance code type-check unchanged (frozen `corpus.py` is
+byte-identical) and overrides the constructor and every data-access
+method:
+
+- The exact configured path (absolute or relative against the process
+  working directory, percent-escaped including Unicode, spaces, `#`
+  and `?`; no Python-level path resolution and no alternate-file
+  search - ordinary regular-file symlink and hardlink spellings are
+  followed by the OS open and remain supported) opens as a
+  `file:<uri>?mode=ro` URI: no file creation, normalization, or write
+  of any kind, and no `immutable=1`/no-lock assumption.
+- A bounded read-only header preflight runs BEFORE any SQLite open:
+  the exact file is opened read-only and non-blocking and checked with
+  `fstat`, so a non-regular resource (for example a pipe reachable
+  through `/proc/self/fd`) is rejected without blocking for a writer
+  that never comes, while ordinary regular-file paths (including
+  symlink and hardlink spellings) continue. The 100-byte header must
+  carry the SQLite magic and write/read version byte 1 (the supported
+  prepared rollback-journal/DELETE index); a WAL-journal index
+  (byte 2) is rejected as an unsupported journal mode because even
+  read-only access to it persists `-wal`/`-shm` auxiliary files, and
+  any other or missing header is corrupt. No conversion, sidecar
+  cleanup, copying, or chmod occurs.
+- A finite per-query busy wait (`config.RUNTIME_CORPUS_BUSY_TIMEOUT_SECONDS`,
+  0.25 s; `PRAGMA busy_timeout` 250 ms) bounds lock waiting per query;
+  it is not a total CPU/query deadline.
+- Stored counts are validated type-strictly as nonnegative Python
+  integers on the returned value (no `int()` repair, no truncation,
+  no invented zero): text, NULL, negative, or fractional stored
+  counts are technical evidence failures, while a valid zero stays
+  `EXACT(0)` and a missing row stays `UNAVAILABLE` (unigram) or
+  `CENSORED` (ngram).  SQLite stores a bound boolean as integer 1, so
+  no boolean origin is detected.
+- Failures are one of six fixed content-free labels
+  (`RUNTIME_EVIDENCE_UNAVAILABLE`, `RUNTIME_EVIDENCE_CORRUPT`,
+  `RUNTIME_EVIDENCE_INCOMPATIBLE`, `RUNTIME_EVIDENCE_INVALID_COUNT`,
+  `RUNTIME_EVIDENCE_LOCKED`, `RUNTIME_EVIDENCE_UNSUPPORTED_JOURNAL`);
+  the detail carries at most the Python exception class name, never
+  SQL text, path, value, target, or credential. Handles are closed on
+  success and on construction or context failure.
+
+The proxy opens the evidence index only after a complete main passes
+eligibility (an ineligible main never opens or creates the index):
+
+- An early technical failure (missing path, corrupt bytes,
+  incompatible accessed schema, invalid stored count, lock, or
+  unsupported journal during construction or detection) returns the
+  exact completed original bytes with zero edits and zero review
+  calls; the trace records the evidence failure.
+- A late failure during per-proposal validation aborts the whole
+  optional pass from the immutable original: no earlier accepted edit
+  survives, while the actual review call and known or unknown usage
+  are preserved.  The usage observer records the actual review call
+  count and reviewer usage (it carries no rollback flag); the
+  optional persisted trace separately records the aborted acceptance
+  disposition, the evidence failure, and the untrusted reviewer
+  proposals kept apart from the cleared replacement list.
+- Ordinary missing replacement evidence remains an individual
+  proposal rejection (a valid first edit survives), and the same proxy
+  recovers on the next healthy request with no usage carryover.
+
+Pandoc, main, request-contract, and historical single-target
+evaluator semantics are unchanged.

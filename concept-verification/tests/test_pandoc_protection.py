@@ -918,18 +918,14 @@ class EngineBoundaryTests(unittest.TestCase):
 
         class _SentinelCorpus:
             def __init__(self, *args: object, **kwargs: object) -> None:
-                pass
-
-            def __enter__(self) -> _SentinelCorpus:
                 opened.append(True)
-                return self
 
-            def __exit__(self, *_: object) -> None:
+            def close(self) -> None:
                 return None
 
         engine.begin_request()
         text = "To je presenetliv zapisano."
-        with mock.patch.object(self.proxy_module, "Corpus", _SentinelCorpus):
+        with mock.patch.object(self.proxy_module, "RuntimeCorpus", _SentinelCorpus):
             repaired = engine.repair(text)
         self.assertEqual(repaired, text)  # byte-exact original
         self.assertEqual(reviewer.calls, 0)
@@ -957,13 +953,9 @@ class EngineBoundaryTests(unittest.TestCase):
 
         class _SentinelCorpus:
             def __init__(self, *args: object, **kwargs: object) -> None:
-                pass
-
-            def __enter__(self) -> _SentinelCorpus:
                 opened.append(True)
-                return self
 
-            def __exit__(self, *_: object) -> None:
+            def close(self) -> None:
                 return None
 
         document_calls: list[bool] = []
@@ -977,7 +969,7 @@ class EngineBoundaryTests(unittest.TestCase):
         engine.begin_request()
         with mock.patch.object(
             pandoc_protection, "_Document", _sentinel_document
-        ), mock.patch.object(self.proxy_module, "Corpus", _SentinelCorpus):
+        ), mock.patch.object(self.proxy_module, "RuntimeCorpus", _SentinelCorpus):
             repaired = engine.repair(oversize)
         self.assertEqual(repaired, oversize)  # byte-exact original
         self.assertEqual(reviewer.calls, 0)
@@ -1018,18 +1010,21 @@ class EngineBoundaryTests(unittest.TestCase):
                 opened: list[bool] = []
 
                 class _SentinelCorpus:
-                    def __init__(self, *args: object, **kw: object) -> None:
-                        pass
-
-                    def __enter__(self, _opened: list[bool] = opened) -> _SentinelCorpus:
+                    def __init__(
+                        self,
+                        *args: object,
+                        _opened: list[bool] = opened,
+                        **kw: object,
+                    ) -> None:
                         _opened.append(True)
-                        return self
 
-                    def __exit__(self, *_: object) -> None:
+                    def close(self) -> None:
                         return None
 
                 engine.begin_request()
-                with mock.patch.object(self.proxy_module, "Corpus", _SentinelCorpus):
+                with mock.patch.object(
+                    self.proxy_module, "RuntimeCorpus", _SentinelCorpus
+                ):
                     repaired = engine.repair(text)
                 self.assertEqual(repaired, text)
                 self.assertEqual(reviewer.calls, 0)

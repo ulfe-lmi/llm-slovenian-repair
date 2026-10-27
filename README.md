@@ -183,8 +183,18 @@ or reviewer call, one shared completed-envelope profile for the
 nonstreaming JSON primary path and the retained delayed SSE path
 (JSON/SSE profile parity), a narrow forwarding header allowlist with no
 reviewer-key borrowing, and request-local separated review usage with
-explicit unknowns plus an optional content-free stderr observer, while
-the historical single-target evaluator prompt/API remains unchanged (see
+explicit unknowns plus an optional content-free stderr observer;
+round 016-a (2026-10-27) made the runtime evidence access strictly
+read-only and degrades safely on technical evidence failure: the index
+opens read-only only (never created or written, exact escaped path,
+rollback-journal format required before any SQLite open, finite
+per-query busy wait), stored counts must be exact nonnegative
+integers, and missing/corrupt/incompatible/invalid-count/locked
+evidence returns the completed original with zero review calls (early)
+or aborts the whole optional pass while preserving the actual review
+attempt and honest usage (late), while valid missing evidence remains
+an individual proposal rejection; the historical single-target
+evaluator prompt/API remains unchanged (see
 `concept-verification/README.md`) - runnable-proxy engineering evidence
 only; the seed 013/014/015/020 packaged objectives remain open. A
 provisional 8-15 focused-engineering-day estimate covers the
