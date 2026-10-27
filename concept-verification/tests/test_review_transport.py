@@ -1370,6 +1370,50 @@ class BatchExchangeTests(unittest.TestCase):
         body = self._done_payload()
         self._incomplete_case(declared=len(body) + 50000, delivered=body)
 
+    def test_incomplete_declared_complete_valid_json_prefix(self) -> None:
+        # Accepted-base discriminator (private prerequisite receipt at
+        # 5f9714e): the received body is a complete, valid batch
+        # envelope, yet the declared Content-Length exceeds the actual
+        # body by 11 bytes before EOF.  A parseable prefix never
+        # substitutes for complete HTTP delivery.
+        payload = self._done_payload()
+
+        class FullHandler(BaseHTTPRequestHandler):
+            protocol_version = "HTTP/1.1"
+
+            def do_POST(self) -> None:  # noqa: N802
+                self.rfile.read(int(self.headers.get("Content-Length", "0")))
+                self.send_response(200)
+                self.send_header("Content-Type", "application/json")
+                self.send_header("Content-Length", str(len(payload)))
+                self.end_headers()
+                self.wfile.write(payload)
+
+            def log_message(self, *_args: object) -> None:
+                return
+
+        # Positive control: the same payload at its exact declared
+        # length succeeds with the validated proposals.
+        server = ThreadingHTTPServer(("127.0.0.1", 0), FullHandler)
+        thread = threading.Thread(target=server.serve_forever, daemon=True)
+        thread.start()
+        try:
+            result = ResponsesReviewer(
+                f"http://127.0.0.1:{server.server_address[1]}/v1",
+                "test-model",
+                timeout=5.0,
+                api_key="k",
+            ).review_batch(TEXT, TARGETS)
+            self.assertEqual(set(result.proposals), {"t0", "t1"})
+        finally:
+            server.shutdown()
+            server.server_close()
+            thread.join(5)
+            self.assertFalse(thread.is_alive())
+        # Same complete valid JSON, declared 11 bytes over: the
+        # incomplete declared delivery is a transport failure.
+        self._incomplete_case(declared=len(payload) + 11, delivered=payload)
+
     def test_complete_oversized_delivery_http_not_ok(self) -> None:
         # A payload that actually exceeds the cap keeps the existing
         # oversized-payload rejection path (not the incomplete label).
