@@ -228,7 +228,33 @@ resolver/connect/TLS/upload/status/header/body work plus result
 validation - a late or racing success is a failure and the exact
 child is terminated and actually reaped before return; the IPC
 channel keeps explicit finite per-field caps enforced on both encode
-and decode; the
+and decode; round 020-a (2026-10-27) bounded incoming client
+request intake with one finite positive monotonic intake deadline:
+one absolute deadline anchored while handling the accepted
+connection BEFORE any request-line/header/body read and before the
+owned intake guard starts, covering the first byte, the request
+line, all headers and the exact advertised body (byte arrival,
+phase transitions and legitimate short reads never reset it);
+strict unambiguous framing (one finite decimal Content-Length
+within the existing 2,000,000-byte cap; repeated fields even when
+equal, comma lists, any Transfer-Encoding and any unsupported
+Expect are a fixed content-free 400, and missing, negative,
+overlarge or nondecimal lengths keep the existing 413); an
+incomplete advertised body is never forwarded - even when its
+prefix is complete valid JSON - and closes with a fixed
+content-free 400; a stalled intake closes with zero main/analysis/
+evidence/review work and a bounded best-effort 408; the owned
+pure-timer guard interrupts only the exact accepted client socket
+and is cancelled and actually joined on every path including
+partial startup; trailing bytes never become a second request; the
+keyword-only constructor parameter client_timeout is appended after
+the existing positional parameters with the 30-second
+CLIENT_REQUEST_TIMEOUT_SECONDS default and main() reads
+CONCEPT_REQUEST_TIMEOUT into it, rejecting bool, nonnumeric,
+zero, negative, nonfinite and platform-unrepresentable values
+before any bind allocation; the intake deadline is independent of
+the CONCEPT_TIMEOUT body/socket, the CONCEPT_HEADER_TIMEOUT header
+budget and the 15-second reviewer exchange, and the
 historical single-target
 evaluator prompt/API remains unchanged (see
 `concept-verification/README.md`) - runnable-proxy engineering

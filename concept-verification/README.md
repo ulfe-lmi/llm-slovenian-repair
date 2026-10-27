@@ -392,9 +392,43 @@ historical per-call contract. The upstream capture timeout
 (`CONCEPT_TIMEOUT`) is the connection/socket timeout and, since order
 017-a, also the one elapsed main-body budget. The independent elapsed
 response-header budget (`CONCEPT_HEADER_TIMEOUT`, order 018-a) bounds
-status/header acquisition only. Both stay separate from the
-15-second reviewer limit and from the unimplemented overall
-deadlines. The frozen historical single-target evaluator prompt and
+status/header acquisition only. The incoming client request intake
+deadline (the `client_timeout` keyword-only constructor parameter
+appended after `header_timeout`, following the existing positional
+parameters; the `CONCEPT_REQUEST_TIMEOUT` operator value, default
+30 seconds, order 020-a) is one absolute monotonic deadline anchored
+while handling the accepted connection before any
+request-line/header/body read and before the owned intake guard
+starts, covering the first byte, the request line, all headers and
+the exact advertised body; byte arrival, phase transitions and
+legitimate short reads never reset it, and OS accept-backlog
+waiting (before the connection is accepted and handled) is outside
+the intake clock. The budget must be a finite positive
+platform-representable value and is rejected before any bind
+allocation (bool, nonnumeric, zero, negative, nonfinite, or beyond
+the finite threading wait bound). Strict unambiguous framing
+rejects repeated Content-Length fields (even equal values), comma
+lists, any Transfer-Encoding and any unsupported Expect with a
+fixed content-free 400 before any body read or forward, and keeps
+the existing 413 for a missing, negative, overlarge (beyond the
+existing 2,000,000-byte request cap) or nondecimal length; the
+supported length is a strict ASCII decimal (ASCII 0-9 only, no
+signs or Unicode digits, surrounding SP/HTAB ignored for the
+numeric view, leading zeros permitted, and significant digits
+bounded before integer conversion while the raw request bytes are
+unchanged). An incomplete advertised body - even with a complete
+valid JSON prefix - is never forwarded and closes with a fixed
+content-free 400 and zero downstream work (delivered where
+possible; when the peer or socket is already closed, delivery is
+not guaranteed); a stalled intake closes with zero
+main/analysis/evidence/review work and a bounded best-effort 408
+(the quiet close is the observable outcome), and trailing bytes
+never become a second request (HTTP/1.0 close, single-threaded).
+The owned pure-timer guard interrupts only the exact accepted
+client socket and is cancelled and actually joined on every path
+including partial startup, so no intake work outlives the request.
+All three stay separate from the 15-second reviewer limit and from
+the unimplemented overall deadlines. The frozen historical single-target evaluator prompt and
 protocol remain unchanged.
 
 ## Read-only runtime evidence and completed-original fallback (order 016-a)
