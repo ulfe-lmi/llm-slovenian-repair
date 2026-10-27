@@ -372,9 +372,12 @@ string keys of at most 64 code points with string values of at most
 wall-clock budgeting, admission control, and cancellation are not
 implemented in this proxy: the ordered finite 15-second reviewer limit
 is a socket/inactivity timeout per reviewer HTTP call, not a
-whole-call deadline, and the upstream capture timeout
-(`CONCEPT_TIMEOUT`) is a separate capture axis. The frozen historical
-single-target evaluator prompt and protocol remain unchanged.
+whole-call deadline. The upstream capture timeout
+(`CONCEPT_TIMEOUT`) is the connection/socket timeout and, since order
+017-a, also the one elapsed main-body budget; it stays separate from
+the 15-second reviewer limit and from the unimplemented overall
+deadlines. The frozen historical single-target evaluator prompt and
+protocol remain unchanged.
 
 ## Read-only runtime evidence and completed-original fallback (order 016-a)
 
@@ -444,3 +447,49 @@ eligibility (an ineligible main never opens or creates the index):
 
 Pandoc, main, request-contract, and historical single-target
 evaluator semantics are unchanged.
+
+## UTF-8-safe main body capture with an elapsed body budget (order 017-a)
+
+Main response BODY collection after headers are available is bounded
+and wire-fragmentation-safe through the new `capture_transport.py`
+module:
+
+- One finite positive monotonic BODY deadline is anchored at
+  collection entry and governs declared Content-Length,
+  close-delimited and chunked delivery (the operator value
+  `CONCEPT_TIMEOUT`); byte arrival never resets it, and nonfinite or
+  nonpositive operator values are rejected before any bind allocation.
+  The raw body byte bound (`MAIN_BODY_MAX_BYTES`, 8,000,000 bytes) is
+  independent of code points.
+- Wire chunk boundaries may split a UTF-8 code point: the possibly
+  incomplete trailing sequence is carried until the body is known
+  complete, where a truncated or genuinely invalid encoding is a
+  bounded main failure. Raw bytes, Unicode and CRLF are preserved;
+  there is no ignore/replacement decoding, normalization, substring
+  recovery or answer regeneration.
+- Declared Content-Length bodies deliver exactly the advertised bytes:
+  early EOF is a bounded main failure and over-read bytes beyond the
+  declaration are ignored. Only unknown-length delivery may terminate
+  at the delimited SSE terminal marker (keep-alive without EOF;
+  over-reads buffered during header parsing are drained without
+  entering the stdlib chunk decoder or its connection-closing read
+  paths).
+- Chunked bodies are decoded by a bounded owned framing state machine
+  (finite size-line and trailer length and count guards) ending at the
+  terminating zero chunk. The stdlib chunked decoder is deliberately
+  not used: its per-read blocking sub-reads (chunk-size lines, CRLF
+  discards, trailer lines) cannot respect an elapsed deadline, and it
+  closes the connection file object on protocol completion.
+- Bounded main failures (body timeout, hard byte limit, premature EOF,
+  incomplete SSE, malformed main) return 502 with zero review calls;
+  no CPU, evidence or review work starts before capture completes, and
+  all owned transport handles are closed so no transport outlives the
+  request.
+- Useful JSON/SSE repair, one batch, exact original spans, protected
+  Unicode/code/math/HTML/links, client history, credentials,
+  main/reviewer usage and metadata contracts are unchanged.
+
+The header phase (slow response headers with a fast body) is measured
+separately and is NOT covered by the body budget:
+header/connection/DNS deadlines, total wall-clock budgeting,
+admission control and cancellation are not implemented in this proxy.

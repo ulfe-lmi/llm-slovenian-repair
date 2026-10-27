@@ -30,7 +30,17 @@ rejects non-regular resources without blocking and unsupported journal
 formats before any SQLite open, finite per-query busy wait, exact
 nonnegative-integer count validation, and completed-original fallback
 distinguishing early zero-call failures from late whole-pass aborts
-that preserve the actual review attempt and honest usage). Coverage
+that preserve the actual review attempt and honest usage). Round
+017-a (2026-10-27) implemented the UTF-8-safe main body capture with
+one elapsed body budget in the same runnable proxy (wire-
+fragmentation-safe UTF-8/SSE collection where a body deadline anchored
+at collection entry governs declared, close-delimited and chunked
+delivery; declared lengths deliver exactly the advertised bytes and
+only unknown-length SSE may end at the terminal marker; a bounded
+owned chunk-framing state machine; bounded 502 main failures with
+zero review calls; keep-alive and buffered-overread preservation;
+header/connection/DNS deadlines and total wall-clock budgeting remain
+unfinished). Coverage
 remap: the runnable
 proxy now covers the seed 013-a (versioned targeted-review prompt
 serialization), 014-a (strict reviewer-response parsing), 015-a (isolated

@@ -8,7 +8,6 @@ import json
 import math
 import os
 import re
-import select
 import sys
 import tempfile
 import time
@@ -20,6 +19,7 @@ from pathlib import Path
 from typing import Protocol, cast
 from urllib.parse import urlparse
 
+import capture_transport
 from batch_review import (
     BOUND_REVIEW_REASONS,
     REASON_FAILED,
@@ -33,7 +33,12 @@ from batch_review import (
     build_prompt,
     prepare_targets,
 )
-from config import API_MAX_REQUEST_BYTES, REVIEWER_HTTP_TIMEOUT_SECONDS, canonical_bytes
+from config import (
+    API_MAX_REQUEST_BYTES,
+    MAIN_BODY_MAX_BYTES,
+    REVIEWER_HTTP_TIMEOUT_SECONDS,
+    canonical_bytes,
+)
 from detector import Candidate, detect, tokenize
 from pandoc_protection import (
     PandocSpec,
@@ -137,19 +142,6 @@ def _events(raw: bytes) -> list[tuple[str, dict[str, object]]]:
     return result
 
 
-def _complete_prefix(raw: bytes) -> bytes | None:
-    """Return bytes through a delimited response.completed event, if present."""
-    text = raw.decode("utf-8")
-    cursor = 0
-    for match in re.finditer(r"\r\n\r\n|\n\n", text):
-        block = text[cursor : match.start()]
-        value = _event(block)
-        cursor = match.end()
-        if value is not None and value.get("type") == "response.completed":
-            return text[:cursor].encode("utf-8")
-    return None
-
-
 def _bounded_read(
     response: http.client.HTTPResponse,
     maximum: int,
@@ -159,83 +151,29 @@ def _bounded_read(
 ) -> bytes:
     """Read within byte/time limits, stopping at a complete SSE event.
 
-    Readiness spans two layers: header parsing (``getresponse``) may already
-    have over-read body bytes into the buffered reader, which ``select`` on
-    the raw socket cannot see.  A non-blocking drain consumes buffered and
-    immediately available bytes first, so a fully delimited terminal event
-    already in the buffer terminates the read without EOF even while the
-    HTTP/1.1 connection stays open.
+    One finite positive monotonic body deadline is anchored at
+    collection entry and governs declared Content-Length, close-delimited
+    and chunked delivery (order 017-a): byte arrival never resets it and
+    every blocking wait is bounded by the remaining time.  A wire chunk
+    may end inside a UTF-8 code point: the live tail is carried until
+    the body is known complete, where a truncated or invalid encoding is
+    a bounded main failure.  Readiness spans two layers: header parsing
+    (``getresponse``) may already have over-read body bytes into the
+    buffered reader, which the collector drains first (never entering
+    the stdlib chunk decoder or its connection-closing read paths), so a
+    fully delimited terminal event already in the buffer terminates the
+    read without EOF even while the HTTP/1.1 connection stays open.
     """
-    if response.length is not None:
-        if response.length > maximum:
-            raise ProxyError("upstream response exceeds capture bound")
-        raw = response.read(response.length)
-        if require_complete_sse and _complete_prefix(raw) is None:
-            raise ProxyError("upstream SSE is incomplete")
-        return raw
-    raw_socket = getattr(getattr(response, "fp", None), "raw", None)
-    raw_socket = getattr(raw_socket, "_sock", None)
-    if raw_socket is None:
-        raise ProxyError("upstream socket boundary is unavailable")
-    chunks: list[bytes] = []
-    total = 0
-    deadline = time.monotonic() + timeout
-    previous_timeout = raw_socket.gettimeout()
-
-    def probe() -> bool:
-        # Non-consuming readiness check across both layers: a non-blocking
-        # peek fills the buffered reader from the socket at most once and
-        # never advances the position, so it reports bytes the reader
-        # already holds (header parsing may have over-read the body) as
-        # well as immediately available wire bytes.
-        raw_socket.settimeout(0.0)
-        try:
-            return bool(response.fp.peek(1))
-        except (BlockingIOError, InterruptedError):
-            return False
-        finally:
-            raw_socket.settimeout(previous_timeout)
-
-    def drain() -> bytes:
-        # Consume what the probe (or select) found. read1 is only called
-        # while data is known to be available: an empty read1 would make
-        # HTTPResponse close the connection, which must be reserved for a
-        # genuine EOF.
-        raw_socket.settimeout(0.0)
-        try:
-            return response.read1(min(65536, maximum - total + 1))
-        except (BlockingIOError, InterruptedError):
-            return b""
-        finally:
-            raw_socket.settimeout(previous_timeout)
-
     try:
-        while True:
-            remaining = deadline - time.monotonic()
-            if remaining <= 0:
-                raise ProxyError("upstream capture timeout")
-            if not probe():
-                ready, _, _ = select.select([raw_socket], [], [], remaining)
-                if not ready:
-                    continue
-            piece = drain()
-            if not piece:
-                # Readable, but nothing came back: the connection closed.
-                raw = b"".join(chunks)
-                if require_complete_sse:
-                    raise ProxyError("upstream SSE is incomplete")
-                return raw
-            total += len(piece)
-            if total > maximum:
-                raise ProxyError("upstream response exceeds capture bound")
-            chunks.append(piece)
-            raw = b"".join(chunks)
-            if require_complete_sse:
-                complete = _complete_prefix(raw)
-                if complete is not None:
-                    return complete
-    finally:
-        raw_socket.settimeout(previous_timeout)
+        return capture_transport.read_bounded_body(
+            response,
+            maximum,
+            timeout,
+            require_complete_sse=require_complete_sse,
+            event=_event,
+        )
+    except capture_transport.CaptureError as exc:
+        raise ProxyError(str(exc)) from exc
 
 
 def _render_event(block: str, value: dict[str, object]) -> str:
@@ -1291,10 +1229,22 @@ class ConceptProxy(HTTPServer):
     ):
         if address[0] != "127.0.0.1":
             raise ValueError("proxy must bind to loopback")
-        super().__init__(address, _Handler)
         parsed = urlparse(upstream)
         if parsed.scheme not in ("http", "https") or not parsed.hostname:
             raise ValueError("upstream must be an explicit HTTP URL")
+        # Finite positive body budget (order 017-a, requirement
+        # 2): nonfinite or nonpositive operator values are rejected
+        # before any bind allocation or traffic is accepted.
+        if (
+            isinstance(timeout, bool)
+            or not isinstance(timeout, (int, float))
+            or not math.isfinite(timeout)
+            or timeout <= 0
+        ):
+            raise ValueError(
+                "capture timeout must be a finite positive duration"
+            )
+        super().__init__(address, _Handler)
         self.upstream = parsed
         self.engine = engine
         self.capture_timeout = timeout
@@ -1409,6 +1359,7 @@ class ConceptProxy(HTTPServer):
         if host is None:
             raise ProxyError("upstream hostname is missing")
         connection = cls(host, self.upstream.port, timeout=self.capture_timeout)
+        response: http.client.HTTPResponse | None = None
         # Narrow forwarded header policy (order 015-a, requirement 3):
         # only content-type, accept and an explicitly caller-provided
         # Authorization reach the main upstream.  Hop-by-hop, internal
@@ -1429,13 +1380,17 @@ class ConceptProxy(HTTPServer):
             content_type = response.getheader("Content-Type", "")
             raw = _bounded_read(
                 response,
-                8_000_000,
+                MAIN_BODY_MAX_BYTES,
                 self.capture_timeout,
                 require_complete_sse=response.status == 200
                 and content_type.lower().startswith("text/event-stream"),
             )
             return Forwarded(response.status, raw, content_type)
         finally:
+            # Close the response body (and any over-read buffer) and the
+            # owned transport handle: no transport outlives the request.
+            if response is not None:
+                response.close()
             connection.close()
 
 

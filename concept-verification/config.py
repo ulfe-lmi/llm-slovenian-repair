@@ -64,6 +64,13 @@ API_MAX_METADATA_KEY_CODEPOINTS = 64
 API_MAX_METADATA_VALUE_CODEPOINTS = 256
 API_MAX_TOP_K = 100
 
+# Finite main-body capture byte bound (order 017-a, requirement 2):
+# the raw body byte bound, independent of codepoints.  The elapsed body
+# budget is the operator-configured capture timeout (CONCEPT_TIMEOUT),
+# which also remains the connection/socket timeout; overall request
+# deadlines are not implemented (see the README capture section).
+MAIN_BODY_MAX_BYTES = 8_000_000
+
 # Finite SQLite busy wait for the read-only runtime evidence adapter
 # (order 016-a, requirement 2): it bounds lock waiting per query only
 # and is not a total CPU/query deadline.
