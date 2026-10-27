@@ -55,7 +55,23 @@ bind allocation; bounded 502 header failures with zero review calls
 and zero engine analysis; the CONCEPT_TIMEOUT body budget independent
 in both directions; real-TLS and hanging-upstream subprocess
 coverage; header-phase DNS/connect deadlines, incoming client
-timeouts, admission control and cancellation remain unfinished). Coverage
+timeouts, admission control and cancellation remain unfinished).
+Round 019-a (2026-10-27) implemented one owned elapsed
+reviewer-exchange budget in the same runnable proxy (one finite
+positive monotonic deadline anchored at review entry covering the
+owned child process's startup, the strict versioned IPC, and the
+child's actual resolver/connect/TLS/upload/status/header/body work
+plus result validation; byte arrival, interim 100 responses, phase
+transitions and process startup never reset it; at most one HTTP
+attempt in one ordinary owned stdlib child that waits for the
+channel's actual EOF before HTTP and compares delivery to the
+declared length captured before reading; a late or racing success is
+a failure; the exact child is terminated and actually reaped before
+return so no owned work outlives the exchange; strict RRTX v1 frames
+with explicit finite per-field caps enforced on both encode and
+decode; the legacy single-target prompt/API, proposal and envelope
+parsing, and acceptance remain byte-identical; reviewer request and
+response contracts unchanged). Coverage
 remap: the runnable
 proxy now covers the seed 013-a (versioned targeted-review prompt
 serialization), 014-a (strict reviewer-response parsing), 015-a (isolated

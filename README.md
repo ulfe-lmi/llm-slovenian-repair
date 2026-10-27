@@ -220,7 +220,15 @@ analysis, while the CONCEPT_TIMEOUT body budget begins later and
 stays independent in both directions, and DNS/connect/request-upload
 (before header acquisition), incoming client timeouts, total
 wall-clock budgeting, admission control and cancellation remain
-unfinished; the
+unfinished; round 019-a (2026-10-27) bounded the whole batch-review
+exchange with one owned elapsed deadline: one finite positive
+monotonic deadline anchored at batch entry covers the owned child
+process's startup, the strict versioned IPC, and the child's actual
+resolver/connect/TLS/upload/status/header/body work plus result
+validation - a late or racing success is a failure and the exact
+child is terminated and actually reaped before return; the IPC
+channel keeps explicit finite per-field caps enforced on both encode
+and decode; the
 historical single-target
 evaluator prompt/API remains unchanged (see
 `concept-verification/README.md`) - runnable-proxy engineering
