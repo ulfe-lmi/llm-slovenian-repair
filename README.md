@@ -206,8 +206,9 @@ review calls, while the header phase is bounded separately (round
 018-a) and connection/DNS deadlines and total wall-clock budgeting
 remain unfinished; round 018-a (2026-10-27) bounded main response
 status/header acquisition with one independent elapsed header budget
-(CONCEPT_HEADER_TIMEOUT, keyword-only after the existing positional
-constructor parameters): one absolute monotonic header deadline
+(keyword-only constructor parameter header_timeout appended after the
+existing positional parameters; main() reads CONCEPT_HEADER_TIMEOUT
+into it): one absolute monotonic header deadline
 anchored before the owned guard starts (guard startup overhead is not
 concealed), the stdlib getresponse parser retained and running on the
 owning thread, an owned pure-timer guard that interrupts only the
@@ -216,9 +217,10 @@ success and failure before any transfer, a racing or late parsed
 response explicitly closed and never transferred, and bounded header
 failures returning 502 with zero review calls and zero engine
 analysis, while the CONCEPT_TIMEOUT body budget begins later and
-stays independent in both directions, and header-phase
-DNS/connect deadlines, incoming client timeouts, total wall-clock
-budgeting, admission control and cancellation remain unfinished; the
+stays independent in both directions, and DNS/connect/request-upload
+(before header acquisition), incoming client timeouts, total
+wall-clock budgeting, admission control and cancellation remain
+unfinished; the
 historical single-target
 evaluator prompt/API remains unchanged (see
 `concept-verification/README.md`) - runnable-proxy engineering

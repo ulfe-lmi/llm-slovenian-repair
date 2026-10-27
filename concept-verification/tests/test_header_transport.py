@@ -149,7 +149,11 @@ def _guard_threads() -> list[threading.Thread]:
 class _RawUpstream:
     """One real loopback TCP upstream driving a scripted raw byte stream."""
 
-    def __init__(self, script: list[tuple[float, bytes]], hold: float = 0.3) -> None:
+    def __init__(
+        self,
+        script: list[tuple[float, bytes | Callable[[], bytes]]],
+        hold: float = 0.3,
+    ) -> None:
         self._script = script
         self._hold = hold
         self._listener = socket.socket()
@@ -167,7 +171,8 @@ class _RawUpstream:
             for delay, chunk in self._script:
                 if delay:
                     time.sleep(delay)
-                conn.sendall(chunk)
+                payload = chunk() if callable(chunk) else chunk
+                conn.sendall(payload)
             time.sleep(self._hold)
         except OSError:
             pass
@@ -336,7 +341,9 @@ class DirectGuardTests(unittest.TestCase):
     def test_slow_header_lines_expires(self) -> None:
         head = b"HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\n"
         tail = b"Content-Length: 2\r\n\r\n"
-        script = [(0.0, head[:24])]
+        script: list[tuple[float, bytes | Callable[[], bytes]]] = [
+            (0.0, head[:24])
+        ]
         script += [(0.06, head[24:48])]
         script += [(0.06, head[48:] + tail[:10])]
         script += [(0.06, tail[10:] + b"x\r")]
@@ -483,15 +490,32 @@ class DirectGuardTests(unittest.TestCase):
         self.assertEqual(_guard_threads(), [])
 
     def test_guard_isolation_other_connection(self) -> None:
-        # A never-touches-B property: while A's guard is armed and about
-        # to expire, B's acquisition succeeds untouched, and B stays
-        # usable after A's expiration.
+        # A never-touches-B property: B's headers are fast, but B's
+        # body is delivered only AFTER A's acquisition has finished, so
+        # the body read below must arrive through B's real owned
+        # transport: if A's guard had closed or shut down B's socket,
+        # the bytes could not be read.  (An already-buffered body would
+        # still read after B's socket shutdown and would not prove
+        # isolation, so it is deliberately not used here.)
         a_wire = (
             b"HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\n"
             b"Content-Length: 2\r\n\r\nA\r"
         )
+        b_head = (
+            b"HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\n"
+            b"Content-Length: 2\r\n\r\n"
+        )
+        b_body = b"B\r"
+        a_finished = threading.Event()
+
+        def _body_after_a_finished() -> bytes:
+            a_finished.wait(5.0)
+            return b_body
+
         upstream_a = _RawUpstream([(0.4, a_wire)])
-        upstream_b, b_body = self._fast()
+        upstream_b = _RawUpstream(
+            [(0.0, b_head), (0.0, _body_after_a_finished)]
+        )
         upstream_a.start()
         upstream_b.start()
         connection_a = upstream_a.connect()
@@ -512,17 +536,22 @@ class DirectGuardTests(unittest.TestCase):
         try:
             response_b = _bounded_acquire(connection_b, 2.0)
             self.assertEqual(response_b.status, 200)
-            # Keep B's response open across A's expiration: a guard
-            # shutdown of B's owned socket would break this read.
+            # B's headers were fast; its body is still gated.  Let
+            # A's guard fire and observe the bounded failure.
             worker.join(5)
             assert not worker.is_alive(), "A's acquisition did not finish"
             self.assertIsNone(box.get("response"))
             self.assertIsInstance(
                 box.get("error"), header_transport.HeaderTimeoutError
             )
+            # Only now deliver B's body: the read must receive the
+            # fresh bytes from B's owned transport after A's guard
+            # fired (nothing was pre-buffered).
+            a_finished.set()
             self.assertEqual(response_b.read(), b_body)
             response_b.close()
         finally:
+            a_finished.set()  # unblock gated delivery on any failure
             worker.join(5)
             connection_a.close()
             connection_b.close()
@@ -1107,13 +1136,18 @@ class ProxyHeaderHttpTests(unittest.TestCase):
     def test_concurrent_other_proxy_isolation(self) -> None:
         content = _json_completed(CLEAN)
         full = self._full(False, content)
+        h2_head = _with_content_length(_JSON_HEADERS, len(content))
         harness1 = _HeaderHarness(body_budget=5.0, header_budget=0.15)
         harness2 = _HeaderHarness(body_budget=5.0)
         results: dict[str, object] = {}
 
         def _run_h2() -> None:
+            # h2's headers are fast, but its body is delivered at 0.3 s,
+            # AFTER h1's 0.15 s guard has expired: h2 is genuinely in
+            # flight through h1's armed-guard window, so a guard that
+            # reached h1's neighbor would break this request.
             status, payload, _wall = harness2.post(
-                steps=((0.0, full),),
+                steps=((0.0, h2_head), (0.3, content)),
                 stream=False,
                 input_text=CLEAN,
                 review=_review_payload([_prop("t0")]),
@@ -1131,6 +1165,9 @@ class ProxyHeaderHttpTests(unittest.TestCase):
                 input_text=CLEAN,
                 review=_review_payload([_prop("t0")]),
             )
+            # h1's zero-review proof is taken right after its bounded
+            # failure, before any later fixture state change.
+            self.assertEqual(len(_FakeUpstream.recorded), 0)
             worker.join(10)
             assert not worker.is_alive(), "other proxy did not finish"
             self.assertEqual(status1, 502)
@@ -1138,6 +1175,10 @@ class ProxyHeaderHttpTests(unittest.TestCase):
             self.assertEqual(results["status"], 200)
             self.assertEqual(results["payload"], content)
             self.assertEqual(harness2.engine_calls, [CLEAN])
+            # Nothing was recorded across the whole concurrent run:
+            # h1 (expired) made zero reviewer calls, and h2's CLEAN
+            # answer is the no-suspicion path, which itself makes zero
+            # reviewer calls (as in the fast JSON positive above).
             self.assertEqual(len(_FakeUpstream.recorded), 0)
         finally:
             worker.join(10)

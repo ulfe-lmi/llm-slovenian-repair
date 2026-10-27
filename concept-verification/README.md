@@ -503,11 +503,13 @@ elapsed budget through the new `header_transport.py` module:
 - One finite positive monotonic HEADER deadline is anchored
   immediately before acquisition (before the owned guard starts), so
   guard startup overhead is not concealed; byte arrival and
-  legitimate interim 100 responses never reset it. The operator value
-  `CONCEPT_HEADER_TIMEOUT` (default `MAIN_HEADER_TIMEOUT_SECONDS`,
-  30 s) is a keyword-only constructor parameter appended after the
-  existing positional parameters, and nonnumeric, bool, nonfinite or
-  nonpositive values are rejected before any bind allocation.
+  legitimate interim 100 responses never reset it. The constructor
+  parameter `header_timeout` is keyword-only, appended after the
+  existing positional parameters, and defaults to
+  `MAIN_HEADER_TIMEOUT_SECONDS` (30 s); the normal `main()` entry
+  reads the operator environment value `CONCEPT_HEADER_TIMEOUT` with
+  that default, and nonnumeric, bool, nonfinite or nonpositive values
+  are rejected before any bind allocation.
 - The stdlib `getresponse` parser is retained unchanged and runs on
   the owning calling thread; the owned guard is a pure timer that
   owns only a bounded event wait plus a shutdown of the exact
@@ -534,7 +536,9 @@ supported edits while preserving protected code, TeX, HTML, link and
 an NFC-unstable decomposed/combining line exactly in the final
 composed answer, expiration recovery, other-connection isolation, and
 subprocess children with finite parent deadlines and process-group
-kill/reap. NOT covered: header-phase DNS or connect deadlines (the
-upstream must already be connected), incoming client timeouts, total
-wall-clock budgeting, admission control, cancellation, CPU limits,
-fairness, or live service qualification.
+kill/reap. NOT covered: DNS resolution, connect and request upload
+(these occur before header acquisition and stay outside the header
+budget), incoming client timeouts, reviewer-total, total wall-clock
+budgeting, admission control, fairness, disconnect handling,
+cancellation, CPU limits, quality, or live service/packaging
+qualification.
