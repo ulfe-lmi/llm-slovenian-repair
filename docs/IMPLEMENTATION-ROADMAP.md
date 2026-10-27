@@ -98,7 +98,41 @@ allocation; the deadline is independent of the CONCEPT_TIMEOUT
 body/socket, the CONCEPT_HEADER_TIMEOUT header budget and the
 15-second reviewer exchange; main DNS/connect/upload, outgoing
 delivery, total wall-clock/CPU/admission/fairness budgeting,
-post-intake disconnect and cancellation remain unfinished).
+post-intake disconnect and cancellation remain unfinished). Round
+021-a (2026-10-27) implemented one independent finite elapsed
+final response delivery deadline in the same runnable proxy (new
+delivery_transport.py module; one absolute monotonic deadline
+anchored immediately before final response emission - status line,
+headers, body and the actual flush - and before the owned delivery
+guard starts, so guard startup is charged to the clock;
+response-ready work, including upstream capture and optional
+repair, is outside the phase; byte progress, short writes and
+phase transitions never reset it; a late or racing completion loses
+to expiry, deadline expiry prevents acceptance of late results
+while the owned guard thread is cancelled and actually joined
+before return with no hard-real-time guarantee; once any response
+emission began, no second response, status or fallback is
+attempted on that socket and a failed send before bytes is closed
+safely without recursive retry; every post-intake response write
+is bounded - completed 200 JSON and delayed SSE, unchanged bypass,
+actual non-200 upstream status/body preserved, the fixed
+content-free contract 400, capture/protocol 502 and existing
+generated post-intake errors - and a stalled or slowly reading
+client is closed quietly with no body logging, where local send
+completion is not proof the peer received or read the bytes; the
+owned pure-timer guard interrupts only the exact captured accepted
+socket and is cancelled and actually joined on every path
+including partial startup, so no delivery work outlives the
+response; the keyword-only constructor parameter delivery_timeout,
+appended after client_timeout following the existing positional
+parameters, takes the CONCEPT_DELIVERY_TIMEOUT operator value
+(default 30 seconds), validated before any bind allocation; the
+deadline is independent of the intake, header, body/socket and
+15-second reviewer budgets; main DNS/connect/upload, overall
+request/wall-clock/CPU/admission/fairness budgeting, post-intake
+disconnect detection while main/review runs, remote cancellation
+and package/morphology/quality/live/ICA/deployment remain
+unfinished).
 Coverage
 remap: the runnable
 proxy now covers the seed 013-a (versioned targeted-review prompt

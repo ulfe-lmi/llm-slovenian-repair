@@ -427,8 +427,35 @@ never become a second request (HTTP/1.0 close, single-threaded).
 The owned pure-timer guard interrupts only the exact accepted
 client socket and is cancelled and actually joined on every path
 including partial startup, so no intake work outlives the request.
-All three stay separate from the 15-second reviewer limit and from
-the unimplemented overall deadlines. The frozen historical single-target evaluator prompt and
+The final response delivery deadline (the `delivery_timeout`
+keyword-only constructor parameter appended after `client_timeout`,
+following the existing positional parameters; the
+`CONCEPT_DELIVERY_TIMEOUT` operator value, default 30 seconds,
+order 021-a) is one absolute monotonic deadline anchored
+immediately before final response emission - status line, headers,
+body and the actual flush - and before the owned delivery guard
+starts, so guard startup is charged to the clock; response-ready
+work (upstream capture and optional repair) is outside this phase;
+byte progress, short writes and phase transitions never reset it;
+a late or racing completion loses to expiry (deadline expiry
+prevents acceptance of late results, while the owned guard thread
+is cancelled and actually joined before return; cleanup and OS
+scheduling can add elapsed time, with no hard-real-time return
+guarantee); once any response emission began, no second response,
+status or fallback is attempted on that socket and a failed send
+before bytes is closed safely without recursive retry; the owned
+pure-timer guard interrupts only the exact captured accepted socket
+and is cancelled and actually joined on every path including
+partial startup, so no delivery work outlives the response; a
+stalled or slowly reading client is closed quietly with no body
+logging, and local send completion is not proof the peer received
+or read the bytes (no delivery acknowledgment or hard-real-time
+claim). The budget must be a finite positive
+platform-representable value and is rejected before any bind
+allocation (bool, nonnumeric, zero, negative, nonfinite, or beyond
+the finite threading wait bound). All four stay separate from the
+15-second reviewer limit and from the unimplemented overall
+deadlines. The frozen historical single-target evaluator prompt and
 protocol remain unchanged.
 
 ## Read-only runtime evidence and completed-original fallback (order 016-a)
@@ -591,3 +618,84 @@ budget), incoming client timeouts, reviewer-total, total wall-clock
 budgeting, admission control, fairness, disconnect handling,
 cancellation, CPU limits, quality, or live service/packaging
 qualification.
+
+## Bounded final response delivery (order 021-a)
+
+Final response emission on the accepted client socket is bounded by
+an independent elapsed delivery budget through the new
+`delivery_transport.py` module:
+
+- One finite positive monotonic DELIVERY deadline is anchored
+  immediately before final response emission (status line,
+  headers, body and the actual flush) and before the owned delivery
+  guard starts, so guard startup overhead is not concealed.
+  Response-ready work - upstream main capture and optional repair -
+  completes first and stays outside this phase. The constructor
+  parameter `delivery_timeout` is keyword-only, appended after
+  `client_timeout`, and defaults to
+  `CLIENT_DELIVERY_TIMEOUT_SECONDS` (30 s); the normal `main()`
+  entry reads the operator environment value
+  `CONCEPT_DELIVERY_TIMEOUT` with that default, and bool,
+  nonnumeric, zero, negative, nonfinite or platform-unrepresentable
+  values are rejected before any bind allocation.
+- Byte progress, short writes, phase transitions and internal
+  retries never reset the deadline; a per-write idle socket timeout
+  alone would not bound a slowly reading client. A late or racing
+  completion loses to expiry: deadline expiry prevents acceptance
+  of late results, while the owned guard thread is cancelled and
+  actually joined before return (cleanup and OS scheduling can add
+  elapsed time; no hard-real-time return guarantee).
+- The owned guard is a pure timer that owns only a bounded event
+  wait plus a shutdown of the exact captured accepted socket
+  object, so it never touches another connection. The guard is
+  cancelled and actually joined on every path - success, timeout,
+  early disconnect, write or flush error, exception and startup
+  failure (including a thread that started and already ended before
+  start raises; a never-started thread is never joined) - so no
+  delivery work outlives the response and no guard is armed during
+  the next connection or downstream work.
+- Every post-intake response write is bounded: completed 200 JSON
+  and delayed SSE, unchanged bypass, an actual non-200 upstream
+  status/body (kept, not blanketed to 502), the fixed content-free
+  contract 400, capture/protocol 502 and existing generated
+  post-intake errors. A delivery timeout or failure closes quietly
+  with no body logging; once any response emission began, no second
+  response, status, 502 or fallback original is attempted on that
+  socket, and a failed send before any byte is closed safely
+  without recursive retry. Early parser, path and framing errors
+  remain bounded by their existing intake lifecycle (existing
+  intake errors remain bounded best effort) and are not newly under
+  this delivery guard; the delivery deadline covers post-intake
+  response emission only. Local kernel acceptance of the bytes is
+  not proof the peer received or read them; no delivery
+  acknowledgment is claimed.
+- The delivery budget is independent of the intake, header,
+  body/socket and 15-second reviewer budgets: a healthy main/review
+  phase may outlast a short delivery budget before the delivery
+  deadline anchors, and a stalled or slowly reading client is
+  closed boundedly while the same proxy recovers on the next
+  healthy request.
+
+Actual loopback coverage includes a nonreading client that stalls
+at the bounded write and is closed by the handler without the
+fixture closing first, a matched slowly reading paced pair where
+progress would defeat an idle-only timeout, measured
+status/header/body/flush phase boundaries, including the
+cumulative case where each observed phase is below budget but the
+total is over it (with generous positive controls on the same
+producer), successful completion,
+deadline races and late completion, early disconnect, write and
+flush failure, before-start/after-start/already-ended startup
+failures with observed joins of exact owned threads and sockets,
+genuinely late other-connection traffic (B's TCP connect is
+established while A is in flight) whose first request bytes are
+sent only after A's real guard is released and actually joined and
+the original deadline passed, and an owned finite parent-supervised
+hanging-client subprocess with bounded terminate/kill/reap. Phase
+timing uses controlled call-through delays at the real write and
+flush boundaries, clearly separated from those native wire
+proofs. NOT covered: main DNS resolution,
+connect and request upload (before the response phase), overall
+request/wall-clock/CPU/admission/fairness budgets, post-intake
+disconnect detection while main/review runs, remote cancellation,
+and quality or live service/packaging qualification.

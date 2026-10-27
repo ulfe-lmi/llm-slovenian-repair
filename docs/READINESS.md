@@ -29,15 +29,15 @@ driver's bounded cleanup contract, and corrected the 012-a
 publication-evidence overclaims in the new recovery record, with no
 scientific protocol, model, or result change.
 Rounds 013-a, 014-a, 014-b, and 015-a (2026-10-26) and rounds 016-a,
-017-a, 018-a, 019-a, and 020-a (2026-10-27) confer no product label: they
+017-a, 018-a, 019-a, 020-a, and 021-a (2026-10-27) confer no product label: they
 implement the owner-selected Pandoc structural-parsing proxy, one
 bounded occurrence-addressed reviewer batch, the terminal-answer-copy
 preflight, the explicit text-only Responses request contract, the
 read-only runtime evidence and completed-original fallback, the
 UTF-8-safe main body capture with one elapsed body budget, the
 independent elapsed response-header budget, the one owned
-elapsed reviewer exchange budget, and the one finite positive
-monotonic incoming client request intake deadline in the isolated
+elapsed reviewer exchange budget, the one finite positive
+monotonic incoming client request intake deadline, and the one independent finite elapsed final response delivery deadline in the isolated
 runnable proxy only, with no scientific protocol, model, or
 result change and no packaged library, quality, or deployment
 claim. The
