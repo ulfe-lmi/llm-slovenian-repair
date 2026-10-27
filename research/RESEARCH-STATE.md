@@ -2347,7 +2347,7 @@ model/network calls.
     "frozen_007m_prompt_sha256": "572cf2fb4864e66e38a500465e1089062d58aeed4721063fb0c1e466e424230d",
     "frozen_007m_final_root_manifest_sha256": "3fb4aef33542e7fa3f357acb905b75f4d7e7551783f83a422b5d1ea6272c25f8",
     "registry_entries": 42,
-    "oap_reports_reviewed": 67,
+    "oap_reports_reviewed": 68,
     "frozen_report_history_incidents": 2
   },
   "official_scorer": {

@@ -193,10 +193,21 @@ integers, and missing/corrupt/incompatible/invalid-count/locked
 evidence returns the completed original with zero review calls (early)
 or aborts the whole optional pass while preserving the actual review
 attempt and honest usage (late), while valid missing evidence remains
-an individual proposal rejection; the historical single-target
+an individual proposal rejection; round 017-a (2026-10-27) made main
+response body collection UTF-8-safe and elapsed-budget-bounded: one
+monotonic body deadline anchored at collection entry governs
+declared, close-delimited and chunked delivery (byte arrival never
+resets it), wire chunk boundaries may split code points (carried
+until the body is known complete, then strictly validated), declared
+lengths deliver exactly the advertised bytes and only unknown-length
+SSE may end at the terminal marker, chunked framing runs a bounded
+owned state machine, and bounded main failures return 502 with zero
+review calls, while header/connection/DNS deadlines and total
+wall-clock budgeting remain unfinished; the historical single-target
 evaluator prompt/API remains unchanged (see
-`concept-verification/README.md`) - runnable-proxy engineering evidence
-only; the seed 013/014/015/020 packaged objectives remain open. A
+`concept-verification/README.md`) - runnable-proxy engineering
+evidence only; the seed 013/014/015/020 packaged objectives remain
+open. A
 provisional 8-15 focused-engineering-day estimate covers the
 remaining packaged-MVP scope, with research-evaluation completion, ICA and
 deployment as separate gates. See
