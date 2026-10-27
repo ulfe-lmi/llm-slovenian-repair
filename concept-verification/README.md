@@ -200,10 +200,18 @@ any mutation): at most 4 items; target at most 128 code points; context 240
 code points per side; prompt at most 8192 code points; request at most 32768
 UTF-8 bytes; response at most 32768 bytes; proposal JSON at most 8192 code
 points; `max_output_tokens` 1536; replacement at most 8 words / 128 code
-points; the ordered finite 15-second reviewer HTTP timeout (the
+points; the ordered finite 15-second reviewer exchange deadline (one
+monotonic deadline anchored at batch entry that covers the owned
+child process's startup, IPC, and its actual resolver/connect/TLS/
+upload/status/headers/body work plus result validation; deadline
+expiry prevents acceptance of any late or racing result, while the
+exact child's termination and reaping are awaited before return -
+cleanup and OS scheduling can add elapsed time, and there is no
+hard-real-time return guarantee; the
 operator-configured upstream capture timeout stays separate and never
-extends reviewer calls); no retries. Code-point and byte counts are distinct
-quantities. Unsupported oversized target or prompt preparation returns the
+extends reviewer calls); no retries. Code-point and byte counts are
+distinct quantities.
+Unsupported oversized target or prompt preparation returns the
 original with zero calls; oversized reviewer output returns the original
 after one call. Model output is never silently truncated.
 
@@ -370,10 +378,17 @@ points; `max_output_tokens` at most 32,768; `metadata` at most 16
 string keys of at most 64 code points with string values of at most
 256 code points; `top_k` at most 100; `temperature` in [0, 2] and
 `top_p` in (0, 1] as finite numbers (bool rejected). Total
-wall-clock budgeting, admission control, and cancellation are not
-implemented in this proxy: the ordered finite 15-second reviewer limit
-is a socket/inactivity timeout per reviewer HTTP call, not a
-whole-call deadline. The upstream capture timeout
+wall-clock request budgeting, disconnect handling, admission control,
+cancellation, and CPU limits are not
+implemented in this proxy: the ordered finite 15-second batch-reviewer
+limit is a whole-exchange deadline anchored at entry (order 019-a),
+covering the owned child process's startup, IPC, and its actual wire
+work (deadline expiry prevents acceptance of any late or racing
+result, while the exact child's termination and reaping are awaited
+before return; cleanup and OS scheduling can add elapsed time, with
+no hard-real-time return guarantee); the historical single-target
+evaluator prompt/API keeps its
+historical per-call contract. The upstream capture timeout
 (`CONCEPT_TIMEOUT`) is the connection/socket timeout and, since order
 017-a, also the one elapsed main-body budget. The independent elapsed
 response-header budget (`CONCEPT_HEADER_TIMEOUT`, order 018-a) bounds

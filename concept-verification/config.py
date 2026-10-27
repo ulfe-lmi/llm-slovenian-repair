@@ -31,9 +31,15 @@ PANDOC_MAX_INLINES = 100_000
 # Bounded occurrence-addressed reviewer batch (order 014-a).  These are
 # finite limits, not tuned optima; they are enforced before dispatch and
 # before any mutation.  Code-point and byte limits are distinct quantities.
-# Finite reviewer HTTP timeout (order 014-a, requirement 4): the ordered
-# existing 15-second cap.  It bounds reviewer calls only; the upstream
-# capture timeout remains separately operator-configured.
+# Finite reviewer timeout (order 014-a, requirement 4; whole runtime
+# exchange deadline per order 019-a, requirement 1): the ordered
+# existing 15-second cap anchors one monotonic deadline at
+# review_batch entry covering process/IPC startup and the actual
+# resolver/connect/TLS/upload/status/header/body/result work in the
+# owned transport child; a late success is a failure.  It bounds the
+# batch reviewer only; the historical single-target review() retains
+# its historical per-call socket timeout, and the upstream capture
+# timeout remains separately operator-configured.
 REVIEWER_HTTP_TIMEOUT_SECONDS = 15.0
 REVIEW_BATCH_VERSION = "batch-v1"
 REVIEW_BATCH_MAX_ITEMS = 4

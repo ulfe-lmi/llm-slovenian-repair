@@ -1448,11 +1448,16 @@ def main() -> int:
         check_pandoc(pandoc_spec)
     except PandocStartupError as exc:
         raise SystemExit(f"pandoc startup failure: {exc.reason}: {exc.detail}") from None
-    # The reviewer is bounded by the ordered finite 15-second cap; the
-    # upstream capture timeout (CONCEPT_TIMEOUT, socket/body axis) and
-    # the independent elapsed response-header budget
-    # (CONCEPT_HEADER_TIMEOUT, order 018-a) are separate axes and must
-    # not extend reviewer calls (order 014-a, requirement 4).
+    # The batch reviewer is bounded by the ordered finite 15-second
+    # cap, now the whole runtime exchange deadline: one monotonic
+    # deadline anchored at review_batch entry covers process/IPC
+    # startup and the owned child's actual resolver/connect/TLS/
+    # upload/status/header/body/result work, a late success being a
+    # failure (order 019-a).  The upstream capture timeout
+    # (CONCEPT_TIMEOUT, socket/body axis) and the independent elapsed
+    # response-header budget (CONCEPT_HEADER_TIMEOUT, order 018-a) are
+    # separate axes and must not extend reviewer calls (order 014-a,
+    # requirement 4).
     reviewer = ResponsesReviewer(
         os.environ.get("CONCEPT_REVIEWER_URL", "http://127.0.0.1:8001/v1"),
         os.environ.get("CONCEPT_REVIEWER_MODEL", "Qwen3.8-27B"),
