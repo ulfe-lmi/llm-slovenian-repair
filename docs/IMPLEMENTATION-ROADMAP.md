@@ -198,7 +198,31 @@ live-model or quality claim; overall request/wall-clock/CPU/
 admission/fairness budgeting, post-intake disconnect detection
 while main/review runs, remote cancellation and
 package/morphology/quality/live/ICA/deployment remain
-unfinished).
+unfinished). Round
+024-a (2026-10-28) bounded the read-only runtime evidence lookup work
+in the same runnable proxy with one finite per-instance work-count
+policy (prepared-SQL statement starts, per-query and cumulative
+fetched rows including metadata rows, native SQLite progress callbacks
+and interval) resolved from versioned config defaults and validated at
+every real constructor use and once at proxy startup before any bind
+allocation: bool, nonintegral, nonfinite, nonpositive and
+native-overflow values fail with the fixed content-free budget-invalid
+label before any file access or index state change, and `None` means
+the current finite default, never disabled; a query whose result would
+exceed the remaining per-query or cumulative row quota is
+interrupted, counted and discarded whole with the fixed content-free
+budget-exceeded label (no partial result, no silent truncation), and
+exhaustion is sticky; early exhaustion returns the exact completed
+original with zero review calls and late exhaustion aborts the whole
+optional pass with the actual review call and usage preserved and no
+earlier edit surviving; a caller-control exception raised inside the
+callback is preserved and re-raised with its exact identity after
+owned cleanup; the progress callback counts approximate virtual-
+machine progress only and is not a CPU, wall-time, memory or I/O
+bound; no new deadline, operator knob or retry was added, and the
+other 38 concept Python files and all 12 old test modules are frozen
+against the accepted base (synthetic-scale engineering evidence only;
+no spontaneous-native-failure, live-model or quality claim).
 Coverage
 remap: the runnable
 proxy now covers the seed 013-a (versioned targeted-review prompt
@@ -212,9 +236,14 @@ and ICA scope remains unclosed. Round 023-a remaps the numeric 023
 identity (the inert 035/042 resource/error seams) to this bounded
 owned-startup-cleanup engineering objective on the actual proxy
 without an ICA request or milestone label; the original
-numeric-023 scope remains unclosed. Those seed objectives (including
-the remapped seed 022 and numeric 023) as packaged library/milestone
-objectives remain unclosed; following work stays: bounded failure/
+numeric-023 scope remains unclosed. Round 024-a remaps the numeric
+024 identity (the inert 035/042 resource seams) to this bounded
+evidence-lookup-budget engineering objective on the actual proxy
+without an ICA request or milestone label; the original
+numeric-024 packaged-API seed scope remains unclosed. Those seed
+objectives (including the remapped seed 022, the remapped numeric
+023, and the numeric 024 packaged-API seed) as packaged
+library/milestone objectives remain unclosed; following work stays: bounded failure/
 admission/cancellation, packaged library integration, morphology/
 phrases, measured labelled quality, and independent closure.
 A provisional estimate for the remaining packaged-MVP engineering scope is

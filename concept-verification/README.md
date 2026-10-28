@@ -557,6 +557,68 @@ eligibility (an ineligible main never opens or creates the index):
 Pandoc, main, request-contract, and historical single-target
 evaluator semantics are unchanged.
 
+## Finite runtime evidence lookup budget (order 024-a)
+
+The read-only evidence lookup work of `RuntimeCorpus` is bounded by
+one finite per-instance work-count policy (the new
+`evidence_budget.py` module), resolved from the versioned config
+defaults:
+
+- Five exact work-count limits with fixed units: at most
+  `RUNTIME_EVIDENCE_MAX_STATEMENTS` (65,536) prepared-SQL statement
+  starts (metadata and data statements alike; each start is charged
+  before execution, so a cap-exact query completes but the next start
+  is denied), at most `RUNTIME_EVIDENCE_MAX_ROWS_PER_QUERY` (4,096)
+  rows fetched by any one query (metadata rows included), at most
+  `RUNTIME_EVIDENCE_MAX_ROWS_TOTAL` (262,144) rows fetched in total
+  by the instance (cumulative; never reset per query or per request),
+  at most `RUNTIME_EVIDENCE_MAX_PROGRESS_CALLBACKS` (10,000) native
+  SQLite progress callbacks, with the callback armed every
+  `RUNTIME_EVIDENCE_PROGRESS_INTERVAL` (1,000) virtual-machine
+  progress units.
+- The default-source policy is the current config values, validated
+  with no coercion at every real constructor use and once at proxy
+  startup, before any bind allocation, by the pure
+  `validate_default_evidence_policy()` (it touches no index, file or
+  connection): bool, nonintegral, nonfinite, nonpositive and
+  native-overflow values (limits above the `2**62` native-safe bound,
+  interval above the C-int bound) are rejected with the fixed
+  content-free `RUNTIME_EVIDENCE_BUDGET_INVALID` label before any file
+  access, path handling or index state change; `None` always means the
+  current finite config default, never disabled or unbounded.
+- Overflow never truncates: a query whose result would exceed the
+  remaining per-query or cumulative row quota is interrupted through
+  the native progress handler, its rows are counted against the quotas
+  but never returned, and the whole query fails with the fixed
+  content-free `RUNTIME_EVIDENCE_BUDGET_EXCEEDED` label (no partial
+  result, no silent truncation); exhaustion is sticky for the
+  instance, and later work is denied before execution.
+- The progress callback counts approximate virtual-machine progress
+  only: it is not a CPU, wall-time, memory or I/O bound, it fires zero
+  callbacks when a scan completes within less than one armed interval
+  (measured empty-table case), and a fetch/`LIMIT` cap alone cannot
+  stop scan/sort work - the statement, row and callback boundaries are
+  the declared quotas, and the native interrupt is the complementary
+  boundary for that work.
+- Fallback is the completed-original contract of order 016-a,
+  unchanged: early exhaustion returns the exact completed original
+  with zero edits and zero review calls, late exhaustion aborts the
+  whole optional pass from the immutable original (no earlier accepted
+  edit survives; the actual review call and known or unknown usage are
+  preserved), and the next request starts a fresh budget.
+- A caller-control exception raised inside the native callback
+  (KeyboardInterrupt, MemoryError or any other BaseException) is
+  preserved on the budget state and re-raised with its exact identity
+  after owned connection cleanup, because native SQLite would
+  otherwise convert it to an opaque OperationalError; non-budget
+  failures keep their existing fixed labels (unavailable, corrupt,
+  incompatible, invalid count, locked, unsupported journal), and the
+  existing per-query busy wait remains a lock wait, not a lookup-work
+  budget.
+- No new deadline, operator knob, environment/request configuration or
+  retry was added; the other 38 concept Python files and all 12 old
+  test modules are frozen against the accepted base.
+
 ## UTF-8-safe main body capture with an elapsed body budget (order 017-a)
 
 Main response BODY collection after headers are available is bounded
