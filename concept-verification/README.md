@@ -227,10 +227,11 @@ exact child's termination and reaping are awaited before return -
 cleanup and OS scheduling can add elapsed time, and there is no
 hard-real-time return guarantee; the child start itself is owned
 across partial startup: the exact process object is pre-allocated
-and parent-owned before the fallible start, both owned pipe
-descriptors are tracked as allocated and closed on any allocation or
-nonblocking-configuration failure (ordinary OSError keeps the fixed
-transport label; KeyboardInterrupt/MemoryError are cleaned first and
+and parent-owned before the fallible start, the four direct pipe
+descriptor locals are held inside the single ownership guard
+established before the first pipe allocation and closed on any
+allocation or nonblocking-configuration failure (ordinary OSError
+keeps the fixed transport label; KeyboardInterrupt/MemoryError are cleaned first and
 re-raised with their original identity), a failed pre-allocation
 leaks no owned descriptor, and the never-created state is never
 waited on (order 023-a); the operator-configured upstream capture

@@ -324,8 +324,9 @@ any child, so a caller interruption after actual child creation
 still leaves the child reachable for group kill and an actual
 wait/reap (Pandoc owned session) or terminate, kill escalation and
 an actual wait/reap (reviewer); a failed pre-allocation leaks no
-child and no owned pipe descriptor (each tracked as allocated and
-closed); the never-created state (unset pid) is never signalled or
+child and no owned pipe descriptor (each closed by the single
+reviewer ownership guard established before the first pipe
+allocation); the never-created state (unset pid) is never signalled or
 waited on; ordinary OS errors keep their fixed finite labels (the
 Pandoc not-found/not-executable reasons, the reviewer fixed
 transport label) and nonordinary caller control (KeyboardInterrupt,
