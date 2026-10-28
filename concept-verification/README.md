@@ -453,7 +453,10 @@ or read the bytes (no delivery acknowledgment or hard-real-time
 claim). The budget must be a finite positive
 platform-representable value and is rejected before any bind
 allocation (bool, nonnumeric, zero, negative, nonfinite, or beyond
-the finite threading wait bound). All four stay separate from the
+the finite threading wait bound). All five - the setup axis
+being the main-upstream setup deadline in the order 022-a
+section below (CONCEPT_SETUP_TIMEOUT, 30 s default) - stay
+separate from the
 15-second reviewer limit and from the unimplemented overall
 deadlines. The frozen historical single-target evaluator prompt and
 protocol remain unchanged.
@@ -699,3 +702,122 @@ connect and request upload (before the response phase), overall
 request/wall-clock/CPU/admission/fairness budgets, post-intake
 disconnect detection while main/review runs, remote cancellation,
 and quality or live service/packaging qualification.
+
+## Bounded main-upstream setup (order 022-a)
+
+The main upstream's preparation and request-upload phase is
+bounded by an independent elapsed setup budget through the new
+`upstream_setup.py` module (with the exact repository-local
+`upstream_worker.py` child-side entry):
+
+- One finite positive monotonic SETUP deadline is anchored by the
+  owner (ConceptProxy.forward) at entry to the owned main forward
+  setup, BEFORE any worker/guard/process/IPC startup, resolver
+  call, connect/TLS or request emission, so startup overhead is
+  not concealed. It covers owned transport startup, address
+  resolution, bounded address attempts, the TCP connection, the
+  TLS handshake and the entire request write through the last body
+  byte handed to the local transport. The constructor parameter
+  `setup_timeout` is keyword-only, appended after
+  `delivery_timeout`, and defaults to
+  `MAIN_SETUP_TIMEOUT_SECONDS` (30 s); the normal `main()` entry
+  reads the operator environment value `CONCEPT_SETUP_TIMEOUT`
+  with that default, and bool, nonnumeric, zero, negative,
+  nonfinite or platform-unrepresentable values are rejected before
+  any bind allocation and revalidated at use; an explicit upstream
+  port 0 is rejected with the full 16-bit port meaning (never
+  aliased to the scheme default).
+- Byte progress, short writes, address attempts and phase
+  transitions never reset the deadline; a per-operation socket
+  timeout alone would not bound a phase composed of many short
+  blocking operations. Every blocking operation is therefore
+  additionally capped by the remaining deadline, and a pure timer
+  guard - which can interrupt only the exact socket object it
+  currently holds (adopted immediately before each potentially
+  blocking phase; an already-fired guard refuses to adopt) -
+  covers the phases a socket cap alone cannot express (TLS
+  handshake, request write). A late or racing setup completion
+  loses to expiry: deadline expiry prevents acceptance of late
+  results, while the owned guard thread and any owned child are
+  cancelled, terminated and actually joined/reaped before return
+  (cleanup and OS scheduling can add elapsed time past the
+  deadline before the bounded return; no hard-real-time
+  guarantee).
+- The resolver runs in the owned finite stdlib child because no
+  parent socket exists yet for a timer to interrupt: a timer
+  cannot interrupt getaddrinfo merely by closing a socket that
+  does not exist, and timing out a Future/daemon thread does not
+  cancel it. The child is one ordinary owned process - exact argv
+  array, isolated interpreter flags (-I -S -B), empty
+  environment, no shell, no model or agent - speaking the strict
+  versioned USTX v1 frame protocol (8-byte big-endian
+  payload-length prefix; request payload at most 265 bytes =
+  10-byte header + host at most 255 UTF-8 bytes; response
+  payload at most 1065 bytes = 9-byte header + up to 16 entries of
+  2-byte overhead (one family byte + one address-length byte) plus
+  at most 64 address bytes; port 1-65535; exactly one
+  frame per direction, the request channel ending with EOF and
+  extra reply bytes rejected; wire maxima 273/1073 bytes
+  including the prefix; no body, credential or key data in the
+  resolver IPC) over private pipes, with the caps enforced on
+  both encode and decode; an
+  IP-literal host never reaches the child; at most one resolution
+  attempt occurs (no automatic retry); its stderr is silenced and
+  its stdout carries only the frame, so no raw exception text,
+  host or address can leak; the parent's pipe descriptors are
+  nonblocking (POSIX fcntl on the qualified Linux/Python 3.12
+  environment) and every partial write/read and readiness race is
+  governed by the remaining deadline; on expiry the parent
+  terminates and actually reaps the exact child.
+- A successful setup releases its clock (the guard is cancelled
+  and actually joined, including a thread that actually started
+  before a startup failure and a never-started thread that is
+  never joined) BEFORE actual response-header acquisition; the
+  existing header/body, intake and delivery clocks then run as
+  before on their own independent axes. Setup failure is a main
+  failure: the handler's existing fixed content-free 502 path
+  with zero engine, corpus or reviewer work and no fabricated
+  completion, and the same actual proxy answers the next healthy
+  request after the failed request's original deadline has passed
+  and its guard has been actually joined: that healthy request
+  anchors and runs under its OWN FRESH setup deadline, so a
+  passed deadline is never accepted. Local write
+  completion is not peer receipt or model-execution
+  acknowledgment; no delivery acknowledgment is claimed.
+
+Actual loopback coverage includes: setup-budget validator
+boundaries (rejected bool, nonnumeric, zero, negative, nonfinite
+and platform-unrepresentable values; accepted finite positives);
+the strict versioned frame codec (trailing and malformed frames,
+per-field caps at decode); the owned guard lifecycle (exact-socket
+interruption, adopt refusal after expiry, partial-startup
+containment with observed owner joins of the exact known threads);
+the real owned resolver child (argv/env/reaping observations,
+literal fast path, deadline expiry with terminate/kill/reap, late
+and racing completion, controlled call-through delay, controlled
+caller interruption during the real start seam before and after
+actual child creation); the real
+forward setup phases against owned loopback HTTP and TLS
+endpoints (stalled TLS handshake, nonreading and slow-reading
+upload, the cumulative case where each observed phase fits but the
+sum expires at the anchored budget, with generous same-producer
+positive controls that reach the actual producer, bounded connect
+attempts, the exact forwarded header allowlist); the same actual
+proxy answering a healthy request after a failed setup: the
+failed request's original deadline is already passed and its
+guard actually joined before the later request bytes, and the
+healthy request succeeds under its own fresh anchored setup
+deadline (not the passed one) - fixed content-free 502 first,
+zero engine/corpus/reviewer work, then the exact original
+answer; and the real constructor/main default,
+override and invalid-before-bind behavior plus real-stack JSON and
+paced delayed-SSE integration (useful two-target repair,
+no-suspicion zero-review exact bytes, completed-original optional
+review failure, failed-message bypass, real non-200 passthrough
+with zero work, bounded synthetic canary evidence, default tracing
+off), all under finite owned parent supervision where hanging
+cases require it. NOT covered: overall
+request/wall-clock/CPU/admission/fairness budgeting, post-intake
+disconnect detection while main/review runs, remote cancellation,
+packaged library/morphology/quality/live qualification, and any
+live DNS, service or model.

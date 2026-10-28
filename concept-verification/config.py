@@ -108,6 +108,22 @@ CLIENT_REQUEST_TIMEOUT_SECONDS = 30.0
 # with CONCEPT_DELIVERY_TIMEOUT at the normal main() entry.
 CLIENT_DELIVERY_TIMEOUT_SECONDS = 30.0
 
+# One finite positive monotonic main-upstream setup budget (order
+# 022-a): bounds the main upstream's preparation/request-upload
+# phase - owned transport startup, address resolution (one owned
+# ordinary stdlib child for named hosts; an IP-literal host needs no
+# child), bounded address attempts, TCP connection, TLS handshake
+# and the entire request write through the last body byte handed to
+# the local transport - BEFORE response acquisition.  The existing
+# response-header budget (CONCEPT_HEADER_TIMEOUT) and the socket/body
+# capture timeout (CONCEPT_TIMEOUT) then run as before on their own
+# independent axes, as do the incoming-intake budget
+# (CONCEPT_REQUEST_TIMEOUT), the outgoing-delivery budget
+# (CONCEPT_DELIVERY_TIMEOUT) and the fixed 15 s reviewer exchange;
+# overall request deadlines remain unimplemented.  The operator may
+# override it with CONCEPT_SETUP_TIMEOUT at the normal main() entry.
+MAIN_SETUP_TIMEOUT_SECONDS = 30.0
+
 # Finite SQLite busy wait for the read-only runtime evidence adapter
 # (order 016-a, requirement 2): it bounds lock waiting per query only
 # and is not a total CPU/query deadline.

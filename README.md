@@ -281,12 +281,46 @@ CLIENT_DELIVERY_TIMEOUT_SECONDS default and main() reads
 CONCEPT_DELIVERY_TIMEOUT into it, rejecting bool, nonnumeric, zero,
 negative, nonfinite and platform-unrepresentable values before any
 bind allocation; the delivery deadline is independent of the
-intake, header, body/socket and 15-second reviewer budgets, and the
-historical single-target
+intake, header, body/socket and 15-second reviewer budgets in both
+directions; round 022-a (2026-10-28) bounded the main-upstream
+setup and request-upload phase with one independent finite elapsed
+setup deadline (new `upstream_setup.py` and `upstream_worker.py`
+modules): one absolute monotonic deadline anchored at entry to the
+owned main forward setup - before any worker/guard/process/IPC
+startup, resolver call, connect/TLS or request emission - covering
+owned transport startup, address resolution (one owned ordinary
+stdlib child for named hosts; an IP-literal host needs no child),
+bounded address attempts, the TCP connection, the TLS handshake and
+the entire request write through the last body byte handed to the
+local transport; byte progress, short writes, address attempts and
+phase transitions never reset it, so every blocking operation is
+additionally capped by the remaining deadline and a pure timer
+guard that can interrupt only the exact socket object it currently
+holds; a late or racing setup completion loses to expiry; the
+noninterruptible stdlib resolution runs in the owned finite child
+(empty environment, argv array, no shell, strict versioned bounded
+frame protocol over private pipes, no body, request, credential or
+secret data in argv, env, tempfiles or logs), which the parent
+terminates and actually reaps on expiry; a successful setup
+releases its clock (guard cancelled and actually joined) before
+response-header acquisition, so the existing header/body, intake
+and delivery clocks run as before on their own independent axes;
+setup failure is a main failure - the handler's existing fixed
+content-free 502 path - with zero engine, corpus or reviewer work
+and no fabricated completion; the keyword-only constructor
+parameter setup_timeout, appended after delivery_timeout following
+the existing positional parameters, takes the CONCEPT_SETUP_TIMEOUT
+operator value (default 30 seconds, MAIN_SETUP_TIMEOUT_SECONDS),
+validated before any bind allocation and revalidated at use, and an
+explicit upstream :0 is rejected with the full 16-bit port
+meaning; local write completion is not peer receipt or
+model-execution acknowledgment, and cleanup and OS scheduling can
+add elapsed time past the deadline before the bounded return, with
+no hard-real-time guarantee; the historical single-target
 evaluator prompt/API remains unchanged (see
 `concept-verification/README.md`) - runnable-proxy engineering
-evidence only; the seed 013/014/015/020 packaged objectives remain
-open. A
+evidence only; the seed 013/014/015/020/022 packaged objectives
+remain open. A
 provisional 8-15 focused-engineering-day estimate covers the
 remaining packaged-MVP scope, with research-evaluation completion, ICA and
 deployment as separate gates. See

@@ -132,6 +132,46 @@ deadline is independent of the intake, header, body/socket and
 request/wall-clock/CPU/admission/fairness budgeting, post-intake
 disconnect detection while main/review runs, remote cancellation
 and package/morphology/quality/live/ICA/deployment remain
+unfinished). Round
+022-a (2026-10-28) implemented one independent finite elapsed
+main-upstream setup deadline in the same runnable proxy (new
+upstream_setup.py module plus the exact repository-local
+upstream_worker.py child-side entry; one absolute monotonic
+deadline anchored at entry to the owned main forward setup before
+any worker/guard/process/IPC startup, resolver call, connect/TLS
+or request emission, covering owned transport startup, address
+resolution, bounded address attempts, the TCP connection, the TLS
+handshake and the entire request write through the last body byte
+handed to the local transport; byte progress, short writes,
+address attempts and phase transitions never reset it, and every
+blocking operation is additionally capped by the remaining
+deadline plus a pure timer guard that interrupts only the exact
+socket object it currently holds, so a late or racing setup
+completion loses to expiry; the noninterruptible stdlib
+resolution runs in one owned ordinary finite stdlib child (empty
+environment, argv array, no shell, strict versioned bounded frame
+protocol over private nonblocking pipes, at most one resolution
+attempt, IP-literal hosts never reach the child) that the parent
+terminates and actually reaps on expiry; a successful setup
+releases its clock before response-header acquisition and the
+existing header/body, intake and delivery clocks stay
+independent; setup failure is a main failure - the existing fixed
+content-free 502 - with zero engine, corpus or reviewer work, and
+the same actual proxy recovers on the next healthy request,
+which anchors its own fresh setup deadline after the failed
+request's original deadline has passed and its guard has been
+actually joined (a passed deadline is never accepted); the
+keyword-only constructor
+parameter setup_timeout, appended after delivery_timeout following
+the existing positional parameters, takes the CONCEPT_SETUP_TIMEOUT
+operator value (default 30 seconds), validated before any bind
+allocation and revalidated at use, and an explicit upstream :0 is
+rejected with the full 16-bit port meaning; local write completion
+is not peer receipt or model-execution acknowledgment, with no
+hard-real-time guarantee; overall request/wall-clock/CPU/admission/
+fairness budgeting, post-intake disconnect detection while
+main/review runs, remote cancellation and
+package/morphology/quality/live/ICA/deployment remain
 unfinished).
 Coverage
 remap: the runnable
@@ -139,7 +179,11 @@ proxy now covers the seed 013-a (versioned targeted-review prompt
 serialization), 014-a (strict reviewer-response parsing), 015-a (isolated
 reviewer HTTP transport to the configured private endpoint), and 020-a
 (completed-text pipeline with at most one review call per eligible answer)
-seams. Those seed objectives as packaged library/milestone objectives
+seams. Round 022-a remaps the seed 022 identity to this bounded
+main-upstream-setup engineering objective without an ICA request
+or milestone label; the original seed 022 demonstrator-evidence
+and ICA scope remains unclosed. Those seed objectives (including
+the remapped seed 022) as packaged library/milestone objectives
 remain unclosed; following work stays: bounded failure/admission/
 cancellation, packaged library integration, morphology/phrases, measured
 labelled quality, and independent closure.
