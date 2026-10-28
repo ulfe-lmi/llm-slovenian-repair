@@ -7,7 +7,9 @@ SetupGuard lifecycle (exact-socket interruption, adopt refusal after
 expiry, partial-startup containment, no surviving threads), the real
 owned resolver child (argv/env/reaping, literal fast path, deadline,
 late and racing completion, trailing/malformed frames, controlled
-call-through delay), the real forward setup phases against owned
+call-through delay, controlled caller interruption during the real
+start seam before and after actual child creation), the real
+forward setup phases against owned
 loopback HTTP and TLS endpoints (stalled TLS handshake, nonreading and
 slow-reading upload, cumulative each-phase-fits/sum-expires, bounded
 connect attempts, exact header allowlist), same-proxy recovery after a
@@ -27,6 +29,7 @@ import io
 import ipaddress
 import json
 import os
+import signal
 import socket
 import ssl
 import struct
@@ -44,7 +47,7 @@ from http.server import (
     ThreadingHTTPServer,
 )
 from pathlib import Path
-from typing import cast
+from typing import NoReturn, cast
 from unittest import mock
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -713,24 +716,54 @@ sys.exit(us.worker_main())
 
 
 def _spy_popen() -> tuple[
-    Callable[..., subprocess.Popen[bytes]],
+    Callable[[], mock._patch[object]],
     list[tuple[tuple[object, ...], dict[str, object]]],
     list[subprocess.Popen[bytes]],
 ]:
-    # Transparent real-Popen forwarding: capture the original,
-    # forward unchanged, record the actual object.
-    real_popen = subprocess.Popen
-    flexible = cast("Callable[..., subprocess.Popen[bytes]]", real_popen)
+    # Transparent real-construction forwarding over the owned start
+    # seam: capture the original Popen.__init__ before patching,
+    # forward it unchanged, and record the exact pre-allocated
+    # process object (recorded even when the real construction
+    # fails, so a spawn failure proves no child exists).
+    real_init = subprocess.Popen.__init__
     calls: list[tuple[tuple[object, ...], dict[str, object]]] = []
     procs: list[subprocess.Popen[bytes]] = []
 
-    def spy(
-        *args: object, **kwargs: object
-    ) -> subprocess.Popen[bytes]:
-        calls.append((args, kwargs))
-        proc = flexible(*args, **kwargs)
-        procs.append(proc)
-        return proc
+    def tracked_init(
+        self: subprocess.Popen[bytes],
+        args: list[str],
+        *,
+        stdin: int | None = None,
+        stdout: int | None = None,
+        stderr: int | None = None,
+        env: dict[str, str] | None = None,
+        close_fds: bool = True,
+    ) -> None:
+        calls.append(
+            (
+                (args,),
+                {
+                    "stdin": stdin,
+                    "stdout": stdout,
+                    "stderr": stderr,
+                    "env": env,
+                    "close_fds": close_fds,
+                },
+            )
+        )
+        procs.append(self)
+        real_init(
+            self,
+            args,
+            stdin=stdin,
+            stdout=stdout,
+            stderr=stderr,
+            env=env,
+            close_fds=close_fds,
+        )
+
+    def spy() -> mock._patch[object]:
+        return mock.patch.object(subprocess.Popen, "__init__", tracked_init)
 
     return spy, calls, procs
 
@@ -761,7 +794,7 @@ class ResolverChildTests(unittest.TestCase):
 
     def test_ip_literal_fast_path_needs_no_child(self) -> None:
         spy, _calls, procs = _spy_popen()
-        with mock.patch.object(subprocess, "Popen", spy):
+        with spy():
             self.assertEqual(
                 upstream_setup.resolve_addresses(
                     "127.0.0.1", 80, time.monotonic() + 5
@@ -784,7 +817,7 @@ class ResolverChildTests(unittest.TestCase):
 
     def test_real_child_argv_env_and_reaping(self) -> None:
         spy, calls, procs = _spy_popen()
-        with mock.patch.object(subprocess, "Popen", spy):
+        with spy():
             addresses = upstream_setup.resolve_addresses(
                 "localhost", 80, time.monotonic() + 10
             )
@@ -816,14 +849,22 @@ class ResolverChildTests(unittest.TestCase):
                 "_resolver_argv",
                 lambda: ["/nonexistent/concept-resolver-child", "-I"],
             ),
-            mock.patch.object(subprocess, "Popen", spy),
+            spy(),
             self.assertRaises(upstream_setup.UpstreamSetupError) as ctx,
         ):
             upstream_setup.resolve_addresses(
                 "localhost", 1, time.monotonic() + 5
             )
         self.assertEqual(ctx.exception.reason, upstream_setup.REASON_TRANSPORT)
-        self.assertEqual(procs, [])
+        # The pre-allocated instance is recorded.  On this platform
+        # the failed construction still forks a child whose exec
+        # fails, so its pid is set; whichever the spawn path takes,
+        # the product must actually reap that exact child before
+        # return - no zombie survives a failed start.
+        self.assertEqual(len(procs), 1)
+        failed_proc = procs[0]
+        if getattr(failed_proc, "pid", None) is not None:
+            self.assertIsNotNone(failed_proc.poll())
 
     def test_deadline_rejects_late_valid_frame(self) -> None:
         script = self._write_child(
@@ -832,7 +873,7 @@ class ResolverChildTests(unittest.TestCase):
         spy, _calls, procs = _spy_popen()
         with (
             self._child_argv_patch(script),
-            mock.patch.object(subprocess, "Popen", spy),
+            spy(),
             self.assertRaises(upstream_setup.UpstreamSetupError) as ctx,
         ):
             upstream_setup.resolve_addresses(
@@ -853,7 +894,7 @@ class ResolverChildTests(unittest.TestCase):
         spy, _calls, procs = _spy_popen()
         with (
             self._child_argv_patch(script),
-            mock.patch.object(subprocess, "Popen", spy),
+            spy(),
             self.assertRaises(upstream_setup.UpstreamSetupError) as ctx,
         ):
             upstream_setup.resolve_addresses(
@@ -872,7 +913,7 @@ class ResolverChildTests(unittest.TestCase):
         spy, _calls, procs = _spy_popen()
         with (
             self._child_argv_patch(script),
-            mock.patch.object(subprocess, "Popen", spy),
+            spy(),
             self.assertRaises(upstream_setup.UpstreamSetupError) as ctx,
         ):
             upstream_setup.resolve_addresses(
@@ -892,7 +933,7 @@ class ResolverChildTests(unittest.TestCase):
         spy, _calls, procs = _spy_popen()
         with (
             self._child_argv_patch(script),
-            mock.patch.object(subprocess, "Popen", spy),
+            spy(),
             self.assertRaises(upstream_setup.UpstreamSetupError) as ctx,
         ):
             upstream_setup.resolve_addresses(
@@ -921,7 +962,7 @@ sys.stdout.buffer.flush()
             spy, _calls, procs = _spy_popen()
             with (
                 self._child_argv_patch(script),
-                mock.patch.object(subprocess, "Popen", spy),
+                spy(),
                 self.assertRaises(
                     upstream_setup.UpstreamSetupError
                 ) as ctx,
@@ -944,7 +985,7 @@ sys.stdout.buffer.flush()
         spy, _calls, procs = _spy_popen()
         with (
             self._child_argv_patch(script),
-            mock.patch.object(subprocess, "Popen", spy),
+            spy(),
             self.assertRaises(upstream_setup.UpstreamSetupError) as ctx,
         ):
             upstream_setup.resolve_addresses(
@@ -963,7 +1004,7 @@ sys.stdout.buffer.flush()
         spy, _calls, procs = _spy_popen()
         with (
             self._child_argv_patch(late),
-            mock.patch.object(subprocess, "Popen", spy),
+            spy(),
             self.assertRaises(upstream_setup.UpstreamSetupError) as ctx,
         ):
             upstream_setup.resolve_addresses(
@@ -979,7 +1020,7 @@ sys.stdout.buffer.flush()
         spy, _calls, procs = _spy_popen()
         with (
             self._child_argv_patch(gentle),
-            mock.patch.object(subprocess, "Popen", spy),
+            spy(),
         ):
             addresses = upstream_setup.resolve_addresses(
                 "localhost", 1, time.monotonic() + 5
@@ -988,6 +1029,480 @@ sys.stdout.buffer.flush()
         self.assertEqual(procs[0].returncode, 0)
         for _family, address in addresses:
             self.assertTrue(ipaddress.ip_address(address).is_loopback)
+
+
+class ResolverStartInterruptionTests(unittest.TestCase):
+    """Order 022-a requirement 3: caller interruption during the
+    real Popen start seam, before and after actual child creation,
+    on the actual parent/production-worker boundary.  A transparent
+    _execute_child call-through performs the real child creation
+    and then injects the interrupt; a scheduler-hold SIGSTOP models
+    a held child.  Every test that can leave a known real child
+    carries a failure-safe finally that resumes/terminates/kills
+    and actually reaps ONLY that test's known pid, so a product
+    regression cannot orphan a child or turn a failing assertion
+    into a pass; the potentially-hanging held-child scenario
+    additionally runs under a finite owned parent supervisor of an
+    isolated process group with a terminate/kill escape for the
+    exact known tree.  Controlled fault evidence only: no claim of
+    spontaneous native failure, and no DNS/HTTP/model call."""
+
+    _HELD_CHILD_SUPERVISOR = """import contextlib
+import json
+import os
+import signal
+import subprocess
+import sys
+import time
+
+sys.path.insert(0, "@ROOT@")
+import upstream_setup  # noqa: E402
+
+
+def _closed(fd):
+    try:
+        os.fstat(fd)
+        return False
+    except OSError:
+        return True
+
+
+def _fds():
+    return set(os.listdir("/proc/self/fd"))
+
+
+real_execute = subprocess.Popen._execute_child
+captured = {}
+
+
+def fault_execute(self, *args, **kwargs):
+    real_execute(self, *args, **kwargs)
+    pid = self.pid
+    captured["pid"] = pid
+    captured["proc"] = self
+    os.kill(pid, signal.SIGSTOP)
+    time.sleep(0.05)
+    stat = open(f"/proc/{pid}/stat").read().rsplit(")", 1)[1]
+    captured["state"] = stat.split()[0]
+    raise KeyboardInterrupt("controlled start interruption")
+
+
+before = _fds()
+real_pipe = os.pipe
+pairs = []
+
+
+def recording_pipe():
+    pair = real_pipe()
+    pairs.append(pair)
+    return pair
+
+
+os.pipe = recording_pipe
+subprocess.Popen._execute_child = fault_execute
+try:
+    upstream_setup.resolve_addresses(
+        "localhost", 80, time.monotonic() + 10
+    )
+    print("RESULT " + json.dumps({"ok": False, "why": "no-interrupt"}))
+    sys.exit(2)
+except KeyboardInterrupt as exc:
+    result = {"ok": "controlled start interruption" in str(exc)}
+    pid = captured.get("pid")
+    if isinstance(pid, int):
+        try:
+            os.waitpid(pid, os.WNOHANG)
+            result["reaped"] = False
+            result["why"] = "child-not-reaped"
+        except ChildProcessError:
+            result["reaped"] = True
+    result["fds_closed"] = all(
+        _closed(fd) for pair in pairs for fd in pair
+    )
+    result["no_new_fd"] = before.issuperset(_fds())
+    result["state"] = captured.get("state")
+    print("RESULT " + json.dumps(result))
+    sys.exit(0 if result.get("ok") and result.get("reaped") else 4)
+finally:
+    # Script-side failure-safe cleanup of the known worker AFTER
+    # every observation: on a product regression the stopped
+    # worker must not survive this process; the failed rc above is
+    # kept, never converted into a pass by the cleanup.
+    proc = captured.get("proc")
+    if isinstance(proc, subprocess.Popen) and proc.poll() is None:
+        with contextlib.suppress(OSError):
+            proc.send_signal(signal.SIGCONT)
+        with contextlib.suppress(OSError):
+            proc.terminate()
+        try:
+            proc.wait(timeout=5)
+        except subprocess.TimeoutExpired:
+            with contextlib.suppress(OSError):
+                proc.kill()
+            proc.wait(timeout=10)
+"""
+
+    def _owned_fds(self) -> set[int]:
+        return {int(name) for name in os.listdir("/proc/self/fd")}
+
+    def _pipe_recorder(
+        self,
+    ) -> tuple[list[tuple[int, int]], object]:
+        real_pipe = os.pipe
+        pairs: list[tuple[int, int]] = []
+
+        def recording_pipe() -> tuple[int, int]:
+            pair = real_pipe()
+            pairs.append(pair)
+            return pair
+
+        return pairs, recording_pipe
+
+    def _assert_owned_fds_closed(
+        self, before: set[int], pairs: list[tuple[int, int]]
+    ) -> None:
+        # Main proof: every known owned pipe descriptor is closed
+        # (EBADF).  The FD set diff is supplementary only.
+        for pair in pairs:
+            for fd in pair:
+                with self.assertRaises(OSError):
+                    os.fstat(fd)
+        self.assertTrue(before.issuperset(self._owned_fds()))
+
+    def _fail_safe_reap_known_child(self, captured: dict[str, object]) -> None:
+        """Failure-safe cleanup for this test's known real child:
+        when the actual Popen object retained at construction still
+        reports a live child, resume, terminate, SIGKILL-escalate,
+        and actually wait it with a bounded timeout; an already
+        ended/reaped child is a no-op.  It signals only the exact
+        known object (no global waitpid, no pid-recycling risk),
+        and it never converts a failing product assertion into a
+        pass: assertions run before this cleanup, which only
+        prevents an orphaned known child."""
+        proc = captured.get("proc")
+        if not isinstance(proc, subprocess.Popen):
+            return
+        if proc.poll() is None:
+            with contextlib.suppress(OSError):
+                proc.send_signal(signal.SIGCONT)
+            with contextlib.suppress(OSError):
+                proc.terminate()
+        try:
+            proc.wait(timeout=5)
+        except subprocess.TimeoutExpired:
+            with contextlib.suppress(OSError):
+                proc.kill()
+            proc.wait(timeout=10)
+        self.assertIsNotNone(proc.poll())
+
+    def _run_supervised_tree(
+        self, script: Path, parent_bound: float
+    ) -> tuple[int, str, str]:
+        """Finite owned parent supervision of an owned process
+        group: the supervised child starts its own session, so the
+        nested owned worker shares the child's process group and a
+        forced escape terminates/kills the exact known tree
+        (including a stopped member).  A forced escape is a FAILED
+        outcome, never a partial pass (order 022-a, requirement 7);
+        the final group kill is unconditional on escape because a
+        stopped member cannot process TERM after the leader exited,
+        so cleanup never depends on leader liveness or pipe EOF."""
+        proc = subprocess.Popen(
+            [sys.executable, "-I", "-B", str(script)],
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            start_new_session=True,
+        )
+        try:
+            timed_out = False
+            try:
+                out, err = proc.communicate(timeout=parent_bound)
+            except subprocess.TimeoutExpired:
+                timed_out = True
+                with contextlib.suppress(OSError):
+                    os.killpg(proc.pid, signal.SIGTERM)
+                try:
+                    out, err = proc.communicate(timeout=5)
+                except subprocess.TimeoutExpired:
+                    with contextlib.suppress(OSError):
+                        os.killpg(proc.pid, signal.SIGKILL)
+                    out, err = proc.communicate(timeout=5)
+            if timed_out:
+                # Unconditional final kill of the exact owned group
+                # and bounded reap of the leader before the FAILED
+                # outcome: a SIGSTOPped nested member cannot process
+                # the TERM above even after the leader exited (the
+                # leader's EOF returns the second communicate early),
+                # so the escape must not depend on the leader still
+                # being alive.
+                with contextlib.suppress(OSError):
+                    os.killpg(proc.pid, signal.SIGKILL)
+                with contextlib.suppress(subprocess.TimeoutExpired):
+                    proc.wait(timeout=10)
+                self.fail(
+                    "owned supervised start-interruption tree exceeded "
+                    f"the finite parent bound {parent_bound}s and was "
+                    "terminated/killed/reaped: the product did not reap "
+                    "the held child. stderr tail: "
+                    + err.decode("utf-8", "replace")[-2000:]
+                )
+            self.assertIsNotNone(proc.returncode)
+            return (
+                proc.returncode,
+                out.decode("utf-8", "replace"),
+                err.decode("utf-8", "replace"),
+            )
+        finally:
+            # Owned group cleanup/reap on EVERY outcome (natural
+            # exit, nonzero exit, forced escape, unexpected
+            # exception): the isolated start_new_session group
+            # confines this to the exact owned tree, and for an
+            # already-exited group the killpg is a no-op.
+            with contextlib.suppress(OSError):
+                os.killpg(proc.pid, signal.SIGKILL)
+            proc.wait(timeout=10)
+
+    def test_interruption_before_child_creation_leaves_no_child(self) -> None:
+        real_init = subprocess.Popen.__init__
+        captured: dict[str, object] = {}
+
+        def tracking_init(
+            self: subprocess.Popen[bytes],
+            args: list[str],
+            *,
+            stdin: int | None = None,
+            stdout: int | None = None,
+            stderr: int | None = None,
+            env: dict[str, str] | None = None,
+            close_fds: bool = True,
+        ) -> None:
+            captured["instance"] = self
+            real_init(
+                self,
+                args,
+                stdin=stdin,
+                stdout=stdout,
+                stderr=stderr,
+                env=env,
+                close_fds=close_fds,
+            )
+
+        def fault_execute(
+            self: subprocess.Popen[bytes], *args: object, **kwargs: object
+        ) -> None:
+            # Interrupt BEFORE any child can be created: the only
+            # fork/spawn step inside the real construction is
+            # replaced, never called.
+            raise KeyboardInterrupt("controlled pre-fork interruption")
+
+        before = self._owned_fds()
+        pairs, recording_pipe = self._pipe_recorder()
+        with (
+            mock.patch.object(subprocess.Popen, "__init__", tracking_init),
+            mock.patch.object(
+                subprocess.Popen, "_execute_child", fault_execute
+            ),
+            mock.patch.object(os, "pipe", recording_pipe),
+            self.assertRaises(KeyboardInterrupt) as ctx,
+        ):
+            upstream_setup.resolve_addresses(
+                "localhost", 80, time.monotonic() + 10
+            )
+        self.assertIn(
+            "controlled pre-fork interruption", str(ctx.exception)
+        )
+        # The exact pre-allocated object from the intercepted
+        # construction has no pid: the real fork step was never
+        # reached, so no child exists to wait for (the product
+        # cleanup must not wait on the never-created state).
+        instance = captured.get("instance")
+        self.assertIsInstance(instance, subprocess.Popen)
+        self.assertIsNone(getattr(instance, "pid", None))
+        self._assert_owned_fds_closed(before, pairs)
+
+    def test_interruption_after_ended_child_reaps_without_signal(self) -> None:
+        real_execute = getattr(subprocess.Popen, "_execute_child")  # noqa: B009 - untyped seam
+        flexible_execute = cast("Callable[..., None]", real_execute)
+        captured: dict[str, object] = {}
+
+        def fault_execute(
+            self: subprocess.Popen[bytes], *args: object, **kwargs: object
+        ) -> None:
+            flexible_execute(self, *args, **kwargs)
+            pid = self.pid
+            captured["pid"] = pid
+            captured["proc"] = self
+            os.kill(pid, signal.SIGKILL)
+            # Establish the actual known-PID exit WITHOUT reaping
+            # it (bounded WNOWAIT observation), so the interrupt
+            # lands on an already-ended child; a ChildProcessError
+            # here would mean an early reap: invalid fixture.
+            end_deadline = time.monotonic() + 5
+            while True:
+                try:
+                    observed = os.waitid(
+                        os.P_PID,
+                        pid,
+                        os.WEXITED | os.WNOWAIT | os.WNOHANG,
+                    )
+                except ChildProcessError:
+                    raise AssertionError(
+                        "known child was reaped before the "
+                        "controlled post-exit observation"
+                    ) from None
+                if observed is not None:
+                    # The known-PID exit event is observed WITHOUT
+                    # reaping it; the caller interruption now lands
+                    # on the already-ended child.
+                    raise KeyboardInterrupt(
+                        "controlled post-exit interruption"
+                    )
+                if time.monotonic() >= end_deadline:
+                    raise AssertionError(
+                        "known child did not end under SIGKILL "
+                        "within the bounded observation"
+                    )
+                time.sleep(0.01)
+
+        real_terminate = subprocess.Popen.terminate
+        real_kill = subprocess.Popen.kill
+
+        def rec_terminate(self: subprocess.Popen[bytes]) -> None:
+            if getattr(self, "pid", None) == captured.get("pid"):
+                captured["terminated"] = True
+            real_terminate(self)
+
+        def rec_kill(self: subprocess.Popen[bytes]) -> None:
+            if getattr(self, "pid", None) == captured.get("pid"):
+                captured["killed"] = True
+            real_kill(self)
+
+        before = self._owned_fds()
+        pairs, recording_pipe = self._pipe_recorder()
+        try:
+            with (
+                mock.patch.object(
+                    subprocess.Popen, "_execute_child", fault_execute
+                ),
+                mock.patch.object(
+                    subprocess.Popen, "terminate", rec_terminate
+                ),
+                mock.patch.object(subprocess.Popen, "kill", rec_kill),
+                mock.patch.object(os, "pipe", recording_pipe),
+                self.assertRaises(KeyboardInterrupt) as ctx,
+            ):
+                upstream_setup.resolve_addresses(
+                    "localhost", 80, time.monotonic() + 10
+                )
+            self.assertIn(
+                "controlled post-exit interruption", str(ctx.exception)
+            )
+            pid = cast(int, captured["pid"])
+            # The already-ended child is actually reaped BEFORE
+            # this test's own cleanup: no zombie remains.
+            with self.assertRaises(ChildProcessError):
+                os.waitpid(pid, os.WNOHANG)
+            # The product reaped it on its first poll: no
+            # terminate/kill signal reached the known object.
+            self.assertNotIn("terminated", captured)
+            self.assertNotIn("killed", captured)
+            self._assert_owned_fds_closed(before, pairs)
+        finally:
+            self._fail_safe_reap_known_child(captured)
+
+    def test_held_child_under_finite_supervised_tree(self) -> None:
+        # The potentially-hanging held-child scenario under a
+        # finite owned parent supervisor of an isolated process
+        # group: the natural outcome is the supervised child's own
+        # exit 0 after the product reaped the held worker; a
+        # regressed product is contained by the bounded tree
+        # escape and reported FAILED, never partially passed.
+        temp = tempfile.TemporaryDirectory()
+        try:
+            script = Path(temp.name) / "held_child_supervisor.py"
+            script.write_text(
+                self._HELD_CHILD_SUPERVISOR.replace("@ROOT@", str(ROOT)),
+                encoding="utf-8",
+            )
+            code, out, err = self._run_supervised_tree(script, 30.0)
+            self.assertEqual(code, 0, err)
+            value = HangingNativeSupervisedTests._result_line(out)
+            self.assertTrue(value.get("ok"), value)
+            self.assertTrue(value.get("reaped"), value)
+            self.assertTrue(value.get("fds_closed"), value)
+            self.assertTrue(value.get("no_new_fd"), value)
+            self.assertEqual(value.get("state"), "T", value)
+        finally:
+            temp.cleanup()
+
+    @staticmethod
+    def _faulting_popen(
+        failure: MemoryError | KeyboardInterrupt,
+    ) -> object:
+        """Throwaway Popen subclass whose allocation always fails
+        with the exact controlled exception instance.  The instance
+        is bound as a parameter (not a loop variable), and the
+        subclass is bound to the module attribute for one call: the
+        real Popen class and its special slots are never mutated,
+        so the next real Popen construction is uncontaminated."""
+
+        class _FaultingPopen(subprocess.Popen[bytes]):
+            def __new__(
+                cls, *args: object, **kwargs: object
+            ) -> NoReturn:
+                raise failure
+
+        return _FaultingPopen
+
+    def test_preallocation_failure_closes_pipes_without_child(self) -> None:
+        # A failure of the pre-allocation itself - before any child
+        # can exist - must still close every owned pipe descriptor
+        # for both an allocation error and a caller interruption;
+        # the original exception is preserved, and the
+        # never-created state is never waited on (a known
+        # unreaped zombie child of this test process must not be
+        # stolen by a blanket waitpid).
+        for failure in (
+            MemoryError("controlled allocation failure"),
+            KeyboardInterrupt("controlled pre-allocation interruption"),
+        ):
+
+            fault_popen = self._faulting_popen(failure)
+            sentinel = subprocess.Popen(
+                [sys.executable, "-I", "-S", "-B", "-c", "pass"]
+            )
+            z_deadline = time.monotonic() + 5
+            while True:
+                stat = Path(f"/proc/{sentinel.pid}/stat").read_text()
+                state = stat.rsplit(")", 1)[1].split()[0]
+                if state == "Z":
+                    break
+                if time.monotonic() >= z_deadline:
+                    sentinel.kill()
+                    sentinel.wait()
+                    self.fail("sentinel child did not end in bound")
+                time.sleep(0.01)
+
+            before = self._owned_fds()
+            pairs, recording_pipe = self._pipe_recorder()
+            try:
+                with (
+                    mock.patch.object(subprocess, "Popen", fault_popen),
+                    mock.patch.object(os, "pipe", recording_pipe),
+                    self.assertRaises(type(failure)) as ctx,
+                ):
+                    upstream_setup.resolve_addresses(
+                        "localhost", 80, time.monotonic() + 10
+                    )
+                self.assertIs(ctx.exception, failure)
+                # The known unreaped zombie is still pending: the
+                # never-created state was not waited on.
+                self.assertTrue(
+                    Path(f"/proc/{sentinel.pid}/stat").exists()
+                )
+                self._assert_owned_fds_closed(before, pairs)
+            finally:
+                sentinel.wait()
 
 
 # ------------------------------------------------------------------
@@ -1538,7 +2053,7 @@ class SetupForwardPhaseTests(unittest.TestCase):
             spy, calls, procs = _spy_popen()
             with (
                 mock.patch.object(upstream_setup, "_resolver_argv", lambda: list(argv)),
-                mock.patch.object(subprocess, "Popen", spy),
+                spy(),
                 _http_server(port=port) as server,
             ):
                 status, payload = self._open_http(

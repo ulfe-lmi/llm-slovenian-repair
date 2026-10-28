@@ -753,8 +753,9 @@ bounded by an independent elapsed setup budget through the new
   versioned USTX v1 frame protocol (8-byte big-endian
   payload-length prefix; request payload at most 265 bytes =
   10-byte header + host at most 255 UTF-8 bytes; response
-  payload at most 1065 bytes = 9-byte header + up to 16 entries
-  of 2-byte length + 64-byte address; port 1-65535; exactly one
+  payload at most 1065 bytes = 9-byte header + up to 16 entries of
+  2-byte overhead (one family byte + one address-length byte) plus
+  at most 64 address bytes; port 1-65535; exactly one
   frame per direction, the request channel ending with EOF and
   extra reply bytes rejected; wire maxima 273/1073 bytes
   including the prefix; no body, credential or key data in the
@@ -793,7 +794,9 @@ interruption, adopt refusal after expiry, partial-startup
 containment with observed owner joins of the exact known threads);
 the real owned resolver child (argv/env/reaping observations,
 literal fast path, deadline expiry with terminate/kill/reap, late
-and racing completion, controlled call-through delay); the real
+and racing completion, controlled call-through delay, controlled
+caller interruption during the real start seam before and after
+actual child creation); the real
 forward setup phases against owned loopback HTTP and TLS
 endpoints (stalled TLS handshake, nonreading and slow-reading
 upload, the cumulative case where each observed phase fits but the

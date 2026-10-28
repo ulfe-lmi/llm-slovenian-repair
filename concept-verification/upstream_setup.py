@@ -545,11 +545,18 @@ def _wait_exit_governed(proc: subprocess.Popen[bytes], deadline: float) -> int:
 
 def _terminate_and_reap(proc: subprocess.Popen[bytes]) -> None:
     """Terminate, kill if needed, and actually wait/reap the exact
-    child before return.  Bounded polls cover the ordinary paths; if
-    the child still cannot be reaped after SIGKILL, the final wait
-    blocks until the kernel reaps it - an OS scheduling delay is
-    honestly waited out, never converted into a live-child escape
+    child before return.  A pre-allocated instance whose constructor
+    never created a child has no pid and is a no-op: waitpid on an
+    unset pid could touch other owned children, so the never-created
+    state is distinguished by the unset pid, never by a process
+    scan; an already-ended created child is reaped by the first
+    poll without a signal.  Bounded polls cover the ordinary paths;
+    if the child still cannot be reaped after SIGKILL, the final
+    wait blocks until the kernel reaps it - an OS scheduling delay
+    is honestly waited out, never converted into a live-child escape
     (order 022-a, requirement 3)."""
+    if getattr(proc, "pid", None) is None:
+        return
     if proc.poll() is None:
         with contextlib.suppress(OSError):
             proc.terminate()
@@ -639,11 +646,25 @@ def resolve_addresses(
     result: list[tuple[int, str]] | None = None
     internal_error: BaseException | None = None
     try:
+        # Pre-allocated owned process: the parent owns the exact
+        # process object BEFORE the fallible start can create any
+        # child, so a caller interruption inside the constructor
+        # after actual child creation still leaves the owning
+        # instance (and its pid) reachable by the finally below for
+        # terminate, kill escalation and an actual wait/reap instead
+        # of an orphaned child.  The pre-allocation itself sits
+        # inside the owned cleanup scope, so its failure leaves no
+        # child and the pipe descriptors are still closed (order
+        # 022-a, requirement 3).
+        proc = subprocess.Popen.__new__(subprocess.Popen)
         try:
             # Minimal explicit environment: the resolver child needs
             # nothing from the parent (no TLS trust reference, no
-            # locale, no secret); an argv array, no shell.
-            proc = subprocess.Popen(
+            # locale, no secret); an argv array, no shell.  The real
+            # unmodified Popen construction runs on the pre-allocated
+            # owned instance.
+            subprocess.Popen.__init__(
+                proc,
                 _resolver_argv(),
                 stdin=request_read,
                 stdout=response_write,
