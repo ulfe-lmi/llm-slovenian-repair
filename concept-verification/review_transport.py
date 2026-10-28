@@ -381,11 +381,18 @@ def _wait_exit_governed(proc: subprocess.Popen[bytes], deadline: float) -> int:
 
 def _terminate_and_reap(proc: subprocess.Popen[bytes]) -> None:
     """Terminate, kill if needed, and actually wait/reap the exact
-    child before return.  Bounded polls cover the ordinary paths; if
-    the child still cannot be reaped after SIGKILL, the final wait
-    blocks until the kernel reaps it - an OS scheduling delay is
-    honestly waited out, never converted into a live-child escape
-    (order 019-a, requirement 4)."""
+    child before return.  A pre-allocated instance whose constructor
+    never created a child has no pid and is a no-op: waitpid on an
+    unset pid could touch other owned children, so the never-created
+    state is distinguished by the unset pid, never by a process
+    scan; an already-ended created child is reaped by the first
+    poll without a signal.  Bounded polls cover the ordinary paths;
+    if the child still cannot be reaped after SIGKILL, the final
+    wait blocks until the kernel reaps it - an OS scheduling delay
+    is honestly waited out, never converted into a live-child escape
+    (order 019-a, requirement 4; order 023-a, requirement 3)."""
+    if getattr(proc, "pid", None) is None:
+        return
     if proc.poll() is None:
         with contextlib.suppress(OSError):
             proc.terminate()
@@ -463,53 +470,83 @@ def run_review_exchange(
         remaining_seconds=deadline - time.monotonic(),
         body=body,
     )
-    # Exception-safe descriptor ownership: both pipes and the
-    # nonblocking configuration are inside one guard, so any
-    # allocation or fcntl failure closes every descriptor it owns
-    # before raising, and the failure carries the fixed transport
-    # label.
+    # Descriptor ownership starts before the first descriptor can
+    # exist: no fallible ownership-tracking runs between descriptor
+    # creation and cleanup responsibility, so a fault at any point -
+    # pipe allocation, fcntl configuration, process-object
+    # allocation, start, IPC - closes every direct known descriptor
+    # local (with an ``fd >= 0`` guard) and reaps any created child
+    # before raising.  Ordinary failure keeps the fixed transport
+    # label; nonordinary caller control (KeyboardInterrupt,
+    # MemoryError, ...) is cleaned first and re-raised with its
+    # original identity (order 023-a, requirement 3).
     request_read = -1
     request_write = -1
     response_read = -1
     response_write = -1
+    proc: subprocess.Popen[bytes] | None = None
+    result: tuple[int, bytes] | None = None
+    internal_error: BaseException | None = None
     try:
         request_read, request_write = os.pipe()
         response_read, response_write = os.pipe()
         _make_pipe_nonblocking(request_write)
         _make_pipe_nonblocking(response_read)
-    except OSError as exc:
-        for fd in (request_read, request_write, response_read, response_write):
-            if fd != -1:
-                with contextlib.suppress(OSError):
-                    os.close(fd)
-        raise ReviewTransportError(
-            "review HTTP request failed", reason=REASON_HTTP_FAILED
-        ) from exc
-    proc: subprocess.Popen[bytes] | None = None
-    open_fds: list[int] = [request_read, request_write, response_read, response_write]
-    result: tuple[int, bytes] | None = None
-    internal_error: BaseException | None = None
-    try:
-        try:
-            proc = subprocess.Popen(
-                [sys.executable, "-I", "-S", "-B", str(worker_path)],
-                stdin=request_read,
-                stdout=response_write,
-                stderr=subprocess.DEVNULL,
-                env=_child_environment(),
-                close_fds=True,
-            )
-        except OSError as exc:
-            raise ProcessFailure("owned reviewer child could not start") from exc
+        # The exact process object is owned BEFORE the fallible start
+        # can create any child: with the real Popen class the
+        # pre-allocated instance carries the real (unmodified) Popen
+        # construction, so a caller interruption after actual child
+        # creation still leaves the owning instance (and its pid)
+        # reachable by the finally below for terminate, kill
+        # escalation and an actual wait/reap instead of an orphaned
+        # child; the allocation itself sits inside the owned-FD
+        # cleanup scope, so its failure leaves no child and the
+        # descriptors are still closed (order 023-a, requirement 3).
+        # A transparent non-class Popen replacement (a forwarding test
+        # double) has no instance to pre-allocate: the direct call is
+        # the observed start and ownership lands on return, preserving
+        # the historical spy-observable behavior.
+        popen = subprocess.Popen
+        if isinstance(popen, type):
+            proc = popen.__new__(popen)
+            try:
+                popen.__init__(
+                    proc,
+                    [sys.executable, "-I", "-S", "-B", str(worker_path)],
+                    stdin=request_read,
+                    stdout=response_write,
+                    stderr=subprocess.DEVNULL,
+                    env=_child_environment(),
+                    close_fds=True,
+                )
+            except OSError as exc:
+                raise ProcessFailure(
+                    "owned reviewer child could not start"
+                ) from exc
+        else:
+            try:
+                proc = popen(
+                    [sys.executable, "-I", "-S", "-B", str(worker_path)],
+                    stdin=request_read,
+                    stdout=response_write,
+                    stderr=subprocess.DEVNULL,
+                    env=_child_environment(),
+                    close_fds=True,
+                )
+            except OSError as exc:
+                raise ProcessFailure(
+                    "owned reviewer child could not start"
+                ) from exc
         # The child now owns its copies of the pipe ends; the parent
-        # drops the two ends it does not use immediately.
+        # drops the two ends it does not use immediately, marking
+        # each closed descriptor so the finally cannot close it twice.
         os.close(request_read)
+        request_read = -1
         os.close(response_write)
-        open_fds.remove(request_read)
-        open_fds.remove(response_write)
+        response_write = -1
         _write_all_governed(request_write, frame, deadline)
         os.close(request_write)
-        open_fds.remove(request_write)
+        request_write = -1
         reply = _read_frame_governed(response_read, RESPONSE_FRAME_MAX_BYTES, deadline)
         # Strict single-frame check: exactly one frame, then the pipe
         # ends; any extra byte is a malformed reply.
@@ -542,9 +579,10 @@ def run_review_exchange(
     finally:
         if proc is not None:
             _terminate_and_reap(proc)
-        for fd in open_fds:
-            with contextlib.suppress(OSError):
-                os.close(fd)
+        for fd in (request_read, request_write, response_read, response_write):
+            if fd >= 0:
+                with contextlib.suppress(OSError):
+                    os.close(fd)
     if internal_error is not None:
         raise ReviewTransportError(
             "review HTTP request failed", reason=REASON_HTTP_FAILED

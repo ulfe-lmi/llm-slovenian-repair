@@ -112,6 +112,24 @@ no system replacement, no writes outside the prefix, no runtime downloads).
 A missing, wrong-version, or capability-failing binary rejects the proxy
 startup with a finite reason.
 
+Owned start and partial-startup cleanup (order 023-a): the exact
+`subprocess.Popen` instance is pre-allocated with the real
+(unmodified) Popen construction and parent-owned before the
+fallible start creates the child session, so a caller interruption
+(KeyboardInterrupt, MemoryError or any other BaseException) after
+actual child creation still leaves the owning instance and its pid
+reachable: the owned session group is signalled (SIGKILL with a
+direct-kill fallback) and the child is actually waited/reaped
+before return; a failed pre-allocation leaks no child; the
+never-created state (unset pid) is never signalled or waited on;
+ordinary FileNotFoundError/PermissionError keep the fixed
+not-found/not-executable reasons and nonordinary caller control is
+cleaned first and re-raised with its original identity; the
+selector and all three owned streams are closed by attribute lookup
+on every exit path, so a partially constructed instance cannot
+raise; cleanup may honestly wait for OS reaping, with no
+hard-real-time return guarantee.
+
 Reader profile and coordinates: the fixed profile is the
 `commonmark_x+sourcepos-smart` reader with the `json` writer; no dialect drift
 is permitted. Source positions are 1-based line/column pairs over the
@@ -207,9 +225,18 @@ upload/status/headers/body work plus result validation; deadline
 expiry prevents acceptance of any late or racing result, while the
 exact child's termination and reaping are awaited before return -
 cleanup and OS scheduling can add elapsed time, and there is no
-hard-real-time return guarantee; the
-operator-configured upstream capture timeout stays separate and never
-extends reviewer calls); no retries. Code-point and byte counts are
+hard-real-time return guarantee; the child start itself is owned
+across partial startup: the exact process object is pre-allocated
+and parent-owned before the fallible start, the four direct pipe
+descriptor locals are held inside the single ownership guard
+established before the first pipe allocation and closed on any
+allocation or nonblocking-configuration failure (ordinary OSError
+keeps the fixed transport label; KeyboardInterrupt/MemoryError are cleaned first and
+re-raised with their original identity), a failed pre-allocation
+leaks no owned descriptor, and the never-created state is never
+waited on (order 023-a); the operator-configured upstream capture
+timeout stays separate and never extends reviewer calls); no
+retries. Code-point and byte counts are
 distinct quantities.
 Unsupported oversized target or prompt preparation returns the
 original with zero calls; oversized reviewer output returns the original

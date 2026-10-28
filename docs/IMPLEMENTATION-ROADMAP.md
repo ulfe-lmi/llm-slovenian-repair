@@ -172,6 +172,32 @@ hard-real-time guarantee; overall request/wall-clock/CPU/admission/
 fairness budgeting, post-intake disconnect detection while
 main/review runs, remote cancellation and
 package/morphology/quality/live/ICA/deployment remain
+unfinished). Round
+023-a (2026-10-28) completed owned partial-startup cleanup for the
+Pandoc and reviewer child starts in the same runnable proxy (no new
+deadline; the existing intake, header, body/socket, delivery, setup
+and 15-second reviewer clocks are unchanged): with the real Popen
+class the exact process object is pre-allocated and parent-owned
+before the fallible start can create any child, so a caller
+interruption after actual child creation still leaves the child
+reachable for group kill and an actual wait/reap (Pandoc owned
+session) or terminate, kill escalation and an actual wait/reap
+(reviewer); a failed pre-allocation leaks no child and no owned pipe
+descriptor (each closed by the single reviewer ownership guard
+established before the first pipe allocation); the
+never-created state (unset pid) is never signalled or waited on;
+ordinary OS errors keep their fixed finite labels and nonordinary
+caller control (KeyboardInterrupt, MemoryError) is cleaned first
+and re-raised with its original identity; cleanup may honestly wait
+for OS reaping, with no hard-real-time return guarantee; the six
+inherited Pandoc generic-annotation diagnostics are fixed type-only
+(concrete types plus identity-only typing.cast at the call sites;
+runtime checks, branches, offsets, data and results preserved);
+controlled-fault evidence only, no spontaneous-native-failure,
+live-model or quality claim; overall request/wall-clock/CPU/
+admission/fairness budgeting, post-intake disconnect detection
+while main/review runs, remote cancellation and
+package/morphology/quality/live/ICA/deployment remain
 unfinished).
 Coverage
 remap: the runnable
@@ -182,11 +208,15 @@ reviewer HTTP transport to the configured private endpoint), and 020-a
 seams. Round 022-a remaps the seed 022 identity to this bounded
 main-upstream-setup engineering objective without an ICA request
 or milestone label; the original seed 022 demonstrator-evidence
-and ICA scope remains unclosed. Those seed objectives (including
-the remapped seed 022) as packaged library/milestone objectives
-remain unclosed; following work stays: bounded failure/admission/
-cancellation, packaged library integration, morphology/phrases, measured
-labelled quality, and independent closure.
+and ICA scope remains unclosed. Round 023-a remaps the numeric 023
+identity (the inert 035/042 resource/error seams) to this bounded
+owned-startup-cleanup engineering objective on the actual proxy
+without an ICA request or milestone label; the original
+numeric-023 scope remains unclosed. Those seed objectives (including
+the remapped seed 022 and numeric 023) as packaged library/milestone
+objectives remain unclosed; following work stays: bounded failure/
+admission/cancellation, packaged library integration, morphology/
+phrases, measured labelled quality, and independent closure.
 A provisional estimate for the remaining packaged-MVP engineering scope is
 8-15 focused engineering days. Research-evaluation completion (requiring
 separate reconciliation of the evaluation objective on the restored,
