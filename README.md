@@ -316,7 +316,26 @@ explicit upstream :0 is rejected with the full 16-bit port
 meaning; local write completion is not peer receipt or
 model-execution acknowledgment, and cleanup and OS scheduling can
 add elapsed time past the deadline before the bounded return, with
-no hard-real-time guarantee; the historical single-target
+no hard-real-time guarantee; round 023-a (2026-10-28)
+completed owned partial-startup cleanup for the Pandoc and reviewer
+child starts: with the real Popen class the exact process object is
+pre-allocated and parent-owned before the fallible start can create
+any child, so a caller interruption after actual child creation
+still leaves the child reachable for group kill and an actual
+wait/reap (Pandoc owned session) or terminate, kill escalation and
+an actual wait/reap (reviewer); a failed pre-allocation leaks no
+child and no owned pipe descriptor (each tracked as allocated and
+closed); the never-created state (unset pid) is never signalled or
+waited on; ordinary OS errors keep their fixed finite labels (the
+Pandoc not-found/not-executable reasons, the reviewer fixed
+transport label) and nonordinary caller control (KeyboardInterrupt,
+MemoryError) is cleaned first and re-raised with its original
+identity; the owned group is signalled on every exit path and
+cleanup may honestly wait for OS reaping, with no hard-real-time
+return guarantee; parser, caps, strict framing and healthy-path
+behavior are unchanged and no new deadline was added; controlled-
+fault evidence only, no spontaneous-native-failure, live-model or
+quality claim; the historical single-target
 evaluator prompt/API remains unchanged (see
 `concept-verification/README.md`) - runnable-proxy engineering
 evidence only; the seed 013/014/015/020/022 packaged objectives

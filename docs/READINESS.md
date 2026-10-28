@@ -29,8 +29,8 @@ driver's bounded cleanup contract, and corrected the 012-a
 publication-evidence overclaims in the new recovery record, with no
 scientific protocol, model, or result change.
 Rounds 013-a, 014-a, 014-b, and 015-a (2026-10-26) and rounds 016-a,
-017-a, 018-a, 019-a, 020-a, 021-a (2026-10-27) and 022-a
-(2026-10-28) confer no product label: they
+017-a, 018-a, 019-a, 020-a, 021-a (2026-10-27) and 022-a,
+023-a (2026-10-28) confer no product label: they
 implement the owner-selected Pandoc structural-parsing proxy, one
 bounded occurrence-addressed reviewer batch, the terminal-answer-copy
 preflight, the explicit text-only Responses request contract, the
@@ -38,10 +38,11 @@ read-only runtime evidence and completed-original fallback, the
 UTF-8-safe main body capture with one elapsed body budget, the
 independent elapsed response-header budget, the one owned
 elapsed reviewer exchange budget, the one finite positive
-monotonic incoming client request intake deadline, the one independent finite elapsed final response delivery deadline, and the one independent finite elapsed main-upstream setup deadline in the isolated
-runnable proxy only, with no scientific protocol, model, or
-result change and no packaged library, quality, or deployment
-claim. The
+monotonic incoming client request intake deadline, the one independent finite elapsed final response delivery deadline, and the one independent finite elapsed main-upstream setup deadline,
+and the owned partial-startup cleanup of the Pandoc and reviewer
+child starts, in the isolated runnable proxy only, with no
+scientific protocol, model, or result change and no packaged
+library, quality, or deployment claim. The
 packaged-MVP row above carries a
 provisional 8-15 focused-engineering-day estimate for its remaining scope
 after those rounds. ICA and deployment keep their separate human gates.

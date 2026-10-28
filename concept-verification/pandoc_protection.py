@@ -39,6 +39,7 @@ import subprocess
 import time
 import unicodedata
 from dataclasses import dataclass, field
+from typing import IO, TYPE_CHECKING, Any, cast
 
 from config import (
     PANDOC_ENV_VAR,
@@ -51,6 +52,9 @@ from config import (
     PANDOC_VERSION,
     PANDOC_WRITER,
 )
+
+if TYPE_CHECKING:
+    from protected import Interval
 
 # Finite reason vocabulary (bounded, content-free diagnostics).
 REASON_NOT_FOUND = "PANDOC_NOT_FOUND"
@@ -212,13 +216,25 @@ def _pandoc_argv(spec: PandocSpec, extra: tuple[str, ...] = ()) -> list[str]:
 
 
 def _kill_group(process: subprocess.Popen[bytes]) -> None:
+    if getattr(process, "pid", None) is None:
+        # Pre-allocated instance whose constructor never created a
+        # child: no exact child exists to signal, and a group wait
+        # would be a global wait that could touch other owned
+        # children, so the never-created state returns without
+        # signalling anything (order 023-a, requirement 2).
+        return
     try:
         os.killpg(process.pid, signal.SIGKILL)
     except (ProcessLookupError, PermissionError, OSError):
         with contextlib.suppress(OSError):
             process.kill()
-    with contextlib.suppress(subprocess.TimeoutExpired, OSError):
-        process.wait(timeout=5.0)
+    # Honest OS-reaping wait on the exact child: if the kernel has
+    # not reaped it yet, block here until it does.  The older
+    # timed-wait-and-abandon could return while the owned child was
+    # still alive; cleanup may honestly wait for OS reaping, with
+    # no hard-real-time claim (order 023-a, requirement 2).
+    with contextlib.suppress(OSError):
+        process.wait()
 
 
 def _run_bounded(spec: PandocSpec, args: list[str], stdin: bytes) -> tuple[int, bytes]:
@@ -230,28 +246,61 @@ def _run_bounded(spec: PandocSpec, args: list[str], stdin: bytes) -> tuple[int, 
     is enforced immediately; stderr is drained and never retained
     (content-free diagnostics).  Every pipe and the owned process group are
     bounded-cleaned on every exit path, including setup failures after
-    launch.  Raises PandocStartupError with a
+    launch and caller interruptions during or after the real child
+    creation.  Raises PandocStartupError with a
     distinct finite reason on timeout or output-limit breach.
     """
-    try:
-        process = subprocess.Popen(
-            args,
-            stdin=subprocess.PIPE,
-            stdout=subprocess.PIPE,
-            stderr=subprocess.PIPE,
-            start_new_session=True,
-        )
-    except FileNotFoundError:
-        raise PandocStartupError(REASON_NOT_FOUND, spec.binary) from None
-    except PermissionError:
-        raise PandocStartupError(REASON_NOT_EXECUTABLE, spec.binary) from None
-    assert process.stdin is not None and process.stdout is not None
-    assert process.stderr is not None
-    # Everything after the successful Popen runs under the same cleanup
-    # ownership: a setup failure (selector allocation, registration,
-    # nonblocking mode) must not leak the live child or its pipes.
+    process: subprocess.Popen[bytes] | None = None
     selector = None
     try:
+        # The exact process object is owned BEFORE the fallible start
+        # can create any child: with the real Popen class the
+        # pre-allocated instance carries the real (unmodified) Popen
+        # construction, so a caller interruption after actual child
+        # creation still leaves the owning instance (and its pid)
+        # reachable by the finally below for group kill and an actual
+        # wait/reap instead of an orphaned child; the allocation
+        # itself sits inside the owned cleanup scope, so its failure
+        # leaves no child (order 023-a, requirement 2).  A transparent
+        # non-class Popen replacement (a forwarding test double) has
+        # no instance to pre-allocate: the direct call is the observed
+        # start and ownership lands on return, preserving the
+        # historical spy-observable behavior.
+        popen = subprocess.Popen
+        if isinstance(popen, type):
+            process = popen.__new__(popen)
+            try:
+                popen.__init__(
+                    process,
+                    args,
+                    stdin=subprocess.PIPE,
+                    stdout=subprocess.PIPE,
+                    stderr=subprocess.PIPE,
+                    start_new_session=True,
+                )
+            except FileNotFoundError:
+                raise PandocStartupError(REASON_NOT_FOUND, spec.binary) from None
+            except PermissionError:
+                raise PandocStartupError(REASON_NOT_EXECUTABLE, spec.binary) from None
+        else:
+            try:
+                process = popen(
+                    args,
+                    stdin=subprocess.PIPE,
+                    stdout=subprocess.PIPE,
+                    stderr=subprocess.PIPE,
+                    start_new_session=True,
+                )
+            except FileNotFoundError:
+                raise PandocStartupError(REASON_NOT_FOUND, spec.binary) from None
+            except PermissionError:
+                raise PandocStartupError(REASON_NOT_EXECUTABLE, spec.binary) from None
+        assert process.stdin is not None and process.stdout is not None
+        assert process.stderr is not None
+        # Everything after the successful Popen runs under the same
+        # cleanup ownership: a setup failure (selector allocation,
+        # registration, nonblocking mode) must not leak the live
+        # child or its pipes.
         deadline = time.monotonic() + spec.timeout
         selector = selectors.DefaultSelector()
         in_fd = process.stdin.fileno()
@@ -327,16 +376,27 @@ def _run_bounded(spec: PandocSpec, args: list[str], stdin: bytes) -> tuple[int, 
         returncode = process.returncode if process.returncode is not None else -9
         return returncode, bytes(stdout_buffer)
     finally:
-        # The owned session is always signalled on every exit path, parent
-        # alive or already exited: a descendant that outlived the direct
-        # child and retained a pipe would otherwise survive this call.
-        with contextlib.suppress(OSError):
-            _kill_group(process)
+        # The owned session is always signalled on every exit path,
+        # parent alive or already exited: a descendant that outlived
+        # the direct child and retained a pipe would otherwise
+        # survive this call.  A never-created pre-allocated instance
+        # is a no-op; streams are closed by attribute lookup so a
+        # partially constructed instance cannot raise.
+        if process is not None:
+            with contextlib.suppress(OSError):
+                _kill_group(process)
         if selector is not None:
             selector.close()
-        for stream in (process.stdout, process.stderr, process.stdin):
-            with contextlib.suppress(OSError, ValueError):
-                stream.close()
+        if process is not None:
+            # Attribute lookups tolerate a partially constructed
+            # instance; the mirror of the stdlib Popen stream type.
+            stdin_stream: IO[Any] | None = getattr(process, "stdin", None)
+            stdout_stream: IO[Any] | None = getattr(process, "stdout", None)
+            stderr_stream: IO[Any] | None = getattr(process, "stderr", None)
+            for candidate in (stdin_stream, stdout_stream, stderr_stream):
+                if candidate is not None:
+                    with contextlib.suppress(OSError, ValueError):
+                        candidate.close()
 
 
 def check_pandoc(spec: PandocSpec) -> None:
@@ -388,7 +448,7 @@ def check_pandoc(spec: PandocSpec) -> None:
         raise PandocStartupError(REASON_CAPABILITY, "leaf sourcepos absent")
 
 
-def parse_document(spec: PandocSpec, text: str) -> dict:
+def parse_document(spec: PandocSpec, text: str) -> dict[str, object]:
     """Parse with the pinned profile; fail closed on any structural surprise."""
     encoded = text.encode("utf-8")
     if len(encoded) > PANDOC_MAX_INPUT_BYTES:
@@ -511,9 +571,9 @@ class _Document:
         return base + start_offset, base + end_offset
 
 
-def _node_attrs(node: dict) -> list[tuple[str, str]]:
+def _node_attrs(node: dict[str, object]) -> list[tuple[str, str]]:
     try:
-        raw = node["c"][0][2]
+        raw = cast("list[list[object]]", node["c"])[0][2]
     except (IndexError, TypeError, KeyError):
         return []
     if not isinstance(raw, list):
@@ -590,7 +650,7 @@ def _raw_tag_kind(raw_content: str | None) -> str | None:
 
 
 def _classify_inline(
-    document: _Document, node: dict, prev_raw: bool
+    document: _Document, node: dict[str, object], prev_raw: bool
 ) -> _Leaf:
     tag = node["t"]
     content = node.get("c")
@@ -598,7 +658,8 @@ def _classify_inline(
     if tag in ("Str", "Space", "SoftBreak", "LineBreak", "HorizontalRule"):
         # Leaf wrappers are positioned by their enclosing Span in the pinned
         # JSON shape; a bare leaf carries no position and is never granted.
-        return _Leaf(tag.lower(), None, content if tag == "Str" else None, raw_neighbor=prev_raw)
+        content = cast("str", content) if tag == "Str" else None
+        return _Leaf(tag.lower(), None, content, raw_neighbor=prev_raw)
     if tag in ("Span", "Div"):
         position = _trusted_position(document, _node_attrs(node))
         inner = content[1] if isinstance(content, list) and len(content) > 1 else []
@@ -677,7 +738,7 @@ def _classify_inline(
     return _Leaf("unknown", None, None)
 
 
-def _walk_inlines(document: _Document, inlines: list) -> None:
+def _walk_inlines(document: _Document, inlines: list[dict[str, object]]) -> None:
     if document.global_fail is not None:
         return
     leaves: list[_Leaf] = []
@@ -805,7 +866,7 @@ def _walk_inlines(document: _Document, inlines: list) -> None:
         document.granted.append((start, end))
 
 
-def _walk_blocks(document: _Document, blocks: list) -> None:
+def _walk_blocks(document: _Document, blocks: list[dict[str, object]]) -> None:
     if document.global_fail is not None:
         return
     for node in blocks:
@@ -881,7 +942,7 @@ def protect_with_pandoc(spec: PandocSpec, text: str) -> ProtectionOutcome:
     except PandocStartupError as exc:
         return ProtectionOutcome(False, exc.reason, detail=exc.detail[:256])
     try:
-        _walk_blocks(document, parsed["blocks"])
+        _walk_blocks(document, cast("list[dict[str, object]]", parsed["blocks"]))
     except (KeyError, IndexError, TypeError, AttributeError) as exc:
         return ProtectionOutcome(False, REASON_SCHEMA, detail=type(exc).__name__[:32])
     if document.global_fail is not None:
@@ -894,7 +955,7 @@ def compose_protection(
     text: str,
     outcome: ProtectionOutcome,
     tool_arguments: tuple[str, ...] = (),
-) -> list:
+) -> list[Interval]:
     """Protected intervals = complement of granted prose + residual machine.
 
     Returns the merged protected interval list in the historical
