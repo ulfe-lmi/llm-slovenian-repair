@@ -23,6 +23,7 @@ import capture_transport
 import client_transport
 import delivery_transport
 import header_transport
+import upstream_setup
 from batch_review import (
     BOUND_REVIEW_REASONS,
     REASON_FAILED,
@@ -41,6 +42,7 @@ from config import (
     CLIENT_REQUEST_TIMEOUT_SECONDS,
     MAIN_BODY_MAX_BYTES,
     MAIN_HEADER_TIMEOUT_SECONDS,
+    MAIN_SETUP_TIMEOUT_SECONDS,
     REVIEWER_HTTP_TIMEOUT_SECONDS,
     canonical_bytes,
 )
@@ -1435,12 +1437,18 @@ class ConceptProxy(HTTPServer):
         header_timeout: float = MAIN_HEADER_TIMEOUT_SECONDS,
         client_timeout: float = CLIENT_REQUEST_TIMEOUT_SECONDS,
         delivery_timeout: float = CLIENT_DELIVERY_TIMEOUT_SECONDS,
+        setup_timeout: float = MAIN_SETUP_TIMEOUT_SECONDS,
     ):
         if address[0] != "127.0.0.1":
             raise ValueError("proxy must bind to loopback")
         parsed = urlparse(upstream)
         if parsed.scheme not in ("http", "https") or not parsed.hostname:
             raise ValueError("upstream must be an explicit HTTP URL")
+        if parsed.port == 0:
+            # Keep the full 16-bit port meaning: an explicit :0 is
+            # rejected, never aliased to the scheme default (order
+            # 022-a, requirement 4).
+            raise ValueError("upstream port must be an explicit 1-65535")
         # Independent finite positive elapsed header budget (order
         # 018-a, requirement 2): separate from the socket/body capture
         # timeout; rejected before any bind allocation or traffic is
@@ -1465,6 +1473,18 @@ class ConceptProxy(HTTPServer):
         # or traffic is accepted, and validated again at guard use.
         self.delivery_timeout = delivery_transport.validate_delivery_budget(
             delivery_timeout
+        )
+        # Independent finite positive elapsed main-upstream setup
+        # budget (order 022-a, requirement 1): bounds owned
+        # transport startup, resolver, address attempts, connect,
+        # TLS handshake and the entire request write before response
+        # acquisition; separate from the socket/body capture timeout,
+        # the header budget, the intake budget, the delivery budget
+        # and the fixed 15 s reviewer budget; rejected before any
+        # bind allocation or traffic is accepted, and validated
+        # again at use.
+        self.setup_timeout = upstream_setup.validate_setup_budget(
+            setup_timeout
         )
         # Finite positive body budget (order 017-a, requirement
         # 2): nonfinite or nonpositive operator values are rejected
@@ -1591,16 +1611,9 @@ class ConceptProxy(HTTPServer):
         return paths
 
     def forward(self, body: bytes, incoming: dict[str, str]) -> Forwarded:
-        cls = (
-            http.client.HTTPSConnection
-            if self.upstream.scheme == "https"
-            else http.client.HTTPConnection
-        )
         host = self.upstream.hostname
         if host is None:
             raise ProxyError("upstream hostname is missing")
-        connection = cls(host, self.upstream.port, timeout=self.capture_timeout)
-        response: http.client.HTTPResponse | None = None
         # Narrow forwarded header policy (order 015-a, requirement 3):
         # only content-type, accept and an explicitly caller-provided
         # Authorization reach the main upstream.  Hop-by-hop, internal
@@ -1613,9 +1626,44 @@ class ConceptProxy(HTTPServer):
             if key.lower() in {"content-type", "accept", "authorization"}
         }
         headers["Content-Length"] = str(len(body))
+        # One absolute monotonic setup deadline anchored at entry to
+        # the owned main forward setup, BEFORE any worker/guard/
+        # process/IPC startup, resolver call, connect/TLS or request
+        # emission (order 022-a, requirement 2): it covers owned
+        # transport startup, resolver, bounded address attempts,
+        # connect, the TLS handshake and the entire request write
+        # through the last body byte handed to the local transport,
+        # and never resets.  A successful setup releases its clock
+        # before response-header acquisition; the existing header/
+        # body, intake and delivery clocks stay independent.  Setup
+        # failure is a main failure (the handler's existing fixed
+        # content-free 502 path) with zero engine, corpus or reviewer
+        # work.
+        # The setup budget is re-validated at use, before the
+        # arithmetic or any downstream work (order 022-a,
+        # requirement 1): the constructor validates the configured
+        # value before bind, and the setup path rejects a mutated or
+        # otherwise invalid instance value now, never accepting it as
+        # a duration.
+        setup_budget = upstream_setup.validate_setup_budget(
+            self.setup_timeout
+        )
+        deadline = time.monotonic() + setup_budget
+        port = self.upstream.port
+        if port is None:
+            port = 443 if self.upstream.scheme == "https" else 80
+        response: http.client.HTTPResponse | None = None
+        connection: http.client.HTTPConnection | None = None
         try:
-            connection.request(
-                "POST", responses_path(self.upstream.path), body=body, headers=headers
+            connection = upstream_setup.open_upstream_connection(
+                scheme=self.upstream.scheme,
+                host=host,
+                port=port,
+                request_path=responses_path(self.upstream.path),
+                body=body,
+                headers=headers,
+                deadline=deadline,
+                capture_timeout=self.capture_timeout,
             )
             # One elapsed header budget anchored immediately before
             # acquisition (order 018-a, requirement 2): the stdlib
@@ -1640,7 +1688,8 @@ class ConceptProxy(HTTPServer):
             # owned transport handle: no transport outlives the request.
             if response is not None:
                 response.close()
-            connection.close()
+            if connection is not None:
+                connection.close()
 
 
 def _stderr_usage_observer(record: dict[str, object]) -> None:
@@ -1666,10 +1715,12 @@ def _stderr_usage_observer(record: dict[str, object]) -> None:
 
 class _IntakeKwargs(TypedDict, total=False):
     """Optional operator-forwarded budget keywords for the real
-    validated constructor (orders 020-a and 021-a, requirement 1)."""
+    validated constructor (orders 020-a, 021-a and 022-a,
+    requirement 1)."""
 
     client_timeout: float
     delivery_timeout: float
+    setup_timeout: float
 
 
 def main() -> int:
@@ -1736,6 +1787,21 @@ def main() -> int:
     if os.environ.get("CONCEPT_DELIVERY_TIMEOUT") is not None:
         intake_kwargs["delivery_timeout"] = float(
             os.environ["CONCEPT_DELIVERY_TIMEOUT"]
+        )
+    # One elapsed main-upstream setup budget (order 022-a,
+    # requirement 1): independent of CONCEPT_TIMEOUT (socket/body
+    # capture), CONCEPT_HEADER_TIMEOUT (response-header axis),
+    # CONCEPT_REQUEST_TIMEOUT (incoming-intake axis),
+    # CONCEPT_DELIVERY_TIMEOUT (outgoing-delivery axis) and the fixed
+    # 15 s reviewer exchange.  Forwarded only when the operator
+    # explicitly configures CONCEPT_SETUP_TIMEOUT; otherwise the real
+    # constructor's named MAIN_SETUP_TIMEOUT_SECONDS default (30 s)
+    # governs, keeping pre-022 constructor adapters compatible at
+    # their defaults while the real constructor always validates and
+    # sets the bounded 30 s default when unconfigured.
+    if os.environ.get("CONCEPT_SETUP_TIMEOUT") is not None:
+        intake_kwargs["setup_timeout"] = float(
+            os.environ["CONCEPT_SETUP_TIMEOUT"]
         )
     proxy = ConceptProxy(
         ("127.0.0.1", 18024),
