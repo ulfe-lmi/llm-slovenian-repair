@@ -470,39 +470,28 @@ def run_review_exchange(
         remaining_seconds=deadline - time.monotonic(),
         body=body,
     )
-    # Exception-safe descriptor ownership: both pipes and the
-    # nonblocking configuration are inside one guard, so any
-    # allocation or fcntl failure closes every descriptor it owns
-    # before raising; ordinary OSError keeps the fixed transport
-    # label, and nonordinary caller control (KeyboardInterrupt,
+    # Descriptor ownership starts before the first descriptor can
+    # exist: no fallible ownership-tracking runs between descriptor
+    # creation and cleanup responsibility, so a fault at any point -
+    # pipe allocation, fcntl configuration, process-object
+    # allocation, start, IPC - closes every direct known descriptor
+    # local (with an ``fd >= 0`` guard) and reaps any created child
+    # before raising.  Ordinary failure keeps the fixed transport
+    # label; nonordinary caller control (KeyboardInterrupt,
     # MemoryError, ...) is cleaned first and re-raised with its
     # original identity (order 023-a, requirement 3).
     request_read = -1
     request_write = -1
     response_read = -1
     response_write = -1
-    allocated: list[int] = []
-    try:
-        request_read, request_write = os.pipe()
-        allocated.extend((request_read, request_write))
-        response_read, response_write = os.pipe()
-        allocated.extend((response_read, response_write))
-        _make_pipe_nonblocking(request_write)
-        _make_pipe_nonblocking(response_read)
-    except BaseException as exc:
-        for fd in allocated:
-            with contextlib.suppress(OSError):
-                os.close(fd)
-        if isinstance(exc, OSError):
-            raise ReviewTransportError(
-                "review HTTP request failed", reason=REASON_HTTP_FAILED
-            ) from exc
-        raise
     proc: subprocess.Popen[bytes] | None = None
-    open_fds: list[int] = [request_read, request_write, response_read, response_write]
     result: tuple[int, bytes] | None = None
     internal_error: BaseException | None = None
     try:
+        request_read, request_write = os.pipe()
+        response_read, response_write = os.pipe()
+        _make_pipe_nonblocking(request_write)
+        _make_pipe_nonblocking(response_read)
         # The exact process object is owned BEFORE the fallible start
         # can create any child: with the real Popen class the
         # pre-allocated instance carries the real (unmodified) Popen
@@ -549,14 +538,15 @@ def run_review_exchange(
                     "owned reviewer child could not start"
                 ) from exc
         # The child now owns its copies of the pipe ends; the parent
-        # drops the two ends it does not use immediately.
+        # drops the two ends it does not use immediately, marking
+        # each closed descriptor so the finally cannot close it twice.
         os.close(request_read)
+        request_read = -1
         os.close(response_write)
-        open_fds.remove(request_read)
-        open_fds.remove(response_write)
+        response_write = -1
         _write_all_governed(request_write, frame, deadline)
         os.close(request_write)
-        open_fds.remove(request_write)
+        request_write = -1
         reply = _read_frame_governed(response_read, RESPONSE_FRAME_MAX_BYTES, deadline)
         # Strict single-frame check: exactly one frame, then the pipe
         # ends; any extra byte is a malformed reply.
@@ -589,9 +579,10 @@ def run_review_exchange(
     finally:
         if proc is not None:
             _terminate_and_reap(proc)
-        for fd in open_fds:
-            with contextlib.suppress(OSError):
-                os.close(fd)
+        for fd in (request_read, request_write, response_read, response_write):
+            if fd >= 0:
+                with contextlib.suppress(OSError):
+                    os.close(fd)
     if internal_error is not None:
         raise ReviewTransportError(
             "review HTTP request failed", reason=REASON_HTTP_FAILED

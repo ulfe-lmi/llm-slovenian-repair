@@ -39,7 +39,7 @@ import subprocess
 import time
 import unicodedata
 from dataclasses import dataclass, field
-from typing import IO, TYPE_CHECKING, Any, cast
+from typing import TYPE_CHECKING, cast
 
 from config import (
     PANDOC_ENV_VAR,
@@ -54,6 +54,8 @@ from config import (
 )
 
 if TYPE_CHECKING:
+    from io import BufferedIOBase
+
     from protected import Interval
 
 # Finite reason vocabulary (bounded, content-free diagnostics).
@@ -390,9 +392,9 @@ def _run_bounded(spec: PandocSpec, args: list[str], stdin: bytes) -> tuple[int, 
         if process is not None:
             # Attribute lookups tolerate a partially constructed
             # instance; the mirror of the stdlib Popen stream type.
-            stdin_stream: IO[Any] | None = getattr(process, "stdin", None)
-            stdout_stream: IO[Any] | None = getattr(process, "stdout", None)
-            stderr_stream: IO[Any] | None = getattr(process, "stderr", None)
+            stdin_stream: BufferedIOBase | None = getattr(process, "stdin", None)
+            stdout_stream: BufferedIOBase | None = getattr(process, "stdout", None)
+            stderr_stream: BufferedIOBase | None = getattr(process, "stderr", None)
             for candidate in (stdin_stream, stdout_stream, stderr_stream):
                 if candidate is not None:
                     with contextlib.suppress(OSError, ValueError):
@@ -658,8 +660,12 @@ def _classify_inline(
     if tag in ("Str", "Space", "SoftBreak", "LineBreak", "HorizontalRule"):
         # Leaf wrappers are positioned by their enclosing Span in the pinned
         # JSON shape; a bare leaf carries no position and is never granted.
-        content = cast("str", content) if tag == "Str" else None
-        return _Leaf(tag.lower(), None, content, raw_neighbor=prev_raw)
+        return _Leaf(
+            tag.lower(),
+            None,
+            cast("str", content) if tag == "Str" else None,
+            raw_neighbor=prev_raw,
+        )
     if tag in ("Span", "Div"):
         position = _trusted_position(document, _node_attrs(node))
         inner = content[1] if isinstance(content, list) and len(content) > 1 else []
