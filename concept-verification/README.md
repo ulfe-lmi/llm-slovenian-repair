@@ -934,3 +934,111 @@ request/wall-clock/CPU/admission/fairness budgeting, post-intake
 disconnect detection while main/review runs, remote cancellation,
 packaged library/morphology/quality/live qualification, and any
 live DNS, service or model.
+
+
+## Bounded analysis eligibility (order 025-a)
+
+The completed answer admitted to the OPTIONAL analysis pass
+(detection, evidence lookup, review) in the runnable proxy is bounded
+by two independent finite limits on the ORIGINAL captured text
+(the new `analysis_policy.py` module), resolved from versioned
+config defaults:
+
+- `RUNTIME_ANALYSIS_MAX_CODEPOINTS` (32,768 code points) and
+  `RUNTIME_ANALYSIS_MAX_UTF8_BYTES` (131,072 strict UTF-8 bytes).
+  These are finite initial engineering defaults, not measured model
+  optima.  The units are distinct quantities (code points are never
+  bytes), the byte allowance is at least the codepoint allowance,
+  and each real use re-reads the CURRENT config (never an import-time
+  copy, no global usage state).  Exact limit values admit on both
+  axes.  The values change only through these validated versioned
+  defaults: no environment/CLI/operator knob, no coercion and no
+  retry exist; bool, None, zero, negative, float (including
+  nonfinite) and string values are rejected.
+- The policy is validated at two distinct points, with two distinct
+  failures: once at proxy startup, before any bind allocation, the
+  pure `analysis_policy.current_limits()` (it reads no file, model,
+  network or index) requires the CURRENT config default policy to
+  hold and fails with a plain `ValueError` when it does not - a
+  startup success is not a live inference proof, and the mandatory
+  normal-main Pandoc startup/version/capability check remains the
+  separate startup contract; and at every real use, an invalid
+  policy is an optional-analysis bypass that returns the exact
+  completed original with the fixed content-free
+  `ANALYSIS_POLICY_INVALID` reason and zero analysis/evidence/review
+  work.
+- The engine checks the gate at the top of `RepairEngine.repair`,
+  BEFORE resolve/protect/map/residual/tokenize/index/reviewer work:
+  first the exact original codepoint count (before any encoding),
+  then the strict original UTF-8 byte count measured with no NFC,
+  stripping or other transformation.  A codepoint count above the
+  limit bypasses without encoding; a byte count above the limit
+  bypasses; exact limit values admit.  An original that cannot be
+  encoded to UTF-8 (a lone surrogate) bypasses with
+  `ANALYSIS_ENCODING_INVALID`; an ordinary exceedance of either
+  size axis bypasses with `ANALYSIS_SIZE_EXCEEDED`.  The gate
+  translates only the declared policy (`ValueError`) and encoding
+  (`UnicodeEncodeError`) conditions; caller control and MemoryError
+  propagate untouched.  Nothing is truncated, split, sampled or
+  partially repaired.
+- A bypass is neither a Pandoc/protection error nor an evidence
+  failure: the local trace records a separate content-free
+  `analysis_bypass` reason field with the existing zero-call trace
+  shape, empty edits/targets and explicit unknown reviewer usage
+  (never an invented zero and never an earlier request's usage), and
+  no client-visible diagnostic text, logging, raw-text persistence
+  or metrics schema is added.  An optional detail whose completed
+  original the canonical UTF-8 trace serializer cannot represent
+  (an unpaired surrogate) is omitted: that single trace detail/file
+  is skipped before any temporary allocation, leaving no trace file
+  and no empty temporary and no raw-text persistence, while the
+  in-memory reason, the zero-call shape, the usage observer and the
+  exact original delivery continue unchanged.  Admitted answers run
+  the mandatory
+  Pandoc pipeline, all original-slice protection, the true read-only
+  SQLite and the actual reviewer/acceptance/patch behavior unchanged,
+  and true parser/evidence failures keep their existing labels when
+  the request is admitted through the gate.  The next request after
+  a bypass - including after scoped policy restoration - works, and
+  real positive known/unknown reviewer usage is unaffected.
+- The analysis limits are independent of the mandatory Pandoc input
+  cap, the main body/header budgets, the intake, delivery and setup
+  deadlines and the fixed 15-second reviewer exchange, and overall
+  request deadlines remain unimplemented.  This is finite analysis
+  INPUT eligibility only: it is not a CPU, wall-time, memory, I/O or
+  cancellation bound, and not a linguistic-quality, packaged-library,
+  ICA, milestone, release or deployment claim.  A smaller default can
+  reduce analysis coverage for long answers; that is explicitly
+  unmeasured and returns the safe completed original, not a quality
+  claim.  The numeric 025 negative-control evaluation seed remains
+  unclosed; this round remaps the identity to this bounded runtime
+  resource seam (see the roadmap coverage note).
+- New focused tests (`tests/test_analysis_policy.py`) prove the real
+  entry/startup/routing boundaries: pure default/N/N+1 count
+  semantics with the independent codepoint and strict UTF-8 axes and
+  unmodified original NFC/NFD/emoji/CRLF bytes; the nine invalid
+  values per field and the cross-field byte<codepoints rejection;
+  the real invalid `ConceptProxy` constructor failing before the
+  actual bind (occupied-port differential) and the at-use gate
+  preceding the intentionally missing index and Pandoc; the real
+  engine exact default 32768/32769 codepoint boundaries with
+  transparent call-through observers proving zero
+  parser/mapper/index/reviewer work on bypass; a byte-limit crossing
+  while the codepoint count fits under labelled test-only limits;
+  small synthetic useful repairs at the default and at selected
+  test-only limits with real Pandoc, read-only SQLite and the real
+  deterministic ResponsesReviewer over owned loopback-0 HTTP;
+  unencodable-original safe return with caller control untouched and
+  original normalization/formatting preserved on admitted patch
+  paths; fresh-request recovery after every bypass kind with
+  request-local usage; real proxy completed-JSON and delayed-SSE
+  round trips returning the exact captured raw main body unchanged
+  with zero review; and incomplete/error/unsupported main envelopes,
+  malformed JSON and the hard capture cap retaining their existing
+  pre-engine semantics.  The two scoped old modules keep their
+  unchanged >52k codepoint payloads under explicit valid
+  analysis-limit overrides (axis separation, not a default-policy
+  run), and the original Pandoc cap test keeps every assertion
+  behind the same scoped override; the two inherited `_walk_blocks`
+  argument casts are corrected identity-only to the narrow
+  dict-node list type (the recorded two-error strict baseline).

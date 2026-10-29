@@ -232,7 +232,59 @@ machine progress only and is not a CPU, wall-time, memory or I/O
 bound; no new deadline, operator knob or retry was added, and the
 other 38 concept Python files and all 12 old test modules are frozen
 against the accepted base (synthetic-scale engineering evidence only;
-no spontaneous-native-failure, live-model or quality claim).
+no spontaneous-native-failure, live-model or quality claim). Round
+025-a (2026-10-29) bounded the finished-answer eligibility for the
+optional analysis pass in the same runnable proxy with two
+independent finite versioned limits on the ORIGINAL captured text
+(RUNTIME_ANALYSIS_MAX_CODEPOINTS 32,768 code points and
+RUNTIME_ANALYSIS_MAX_UTF8_BYTES 131,072 strict UTF-8 bytes; distinct
+units, byte allowance at least the codepoint allowance, exact N
+admitting on both axes, re-read from the CURRENT config at every
+real use, no environment/CLI/operator knob, coercion or retry):
+the policy is validated with no coercion at two distinct points
+with two distinct failures - once at proxy startup before any
+bind allocation, where the pure current-limits validation (it
+reads no file, model, network or index) requires the current
+config default to hold and fails with a plain ValueError (a
+distinct, unlabelled startup failure; a startup success is not a
+live inference proof, and the mandatory normal-main Pandoc
+startup/version/capability check remains the separate startup
+contract), and at every real use, where an invalid policy is an
+optional-analysis bypass returning the exact completed original
+with the fixed content-free ANALYSIS_POLICY_INVALID reason and
+zero analysis/evidence/review work; the engine gate at the top of
+repair first checks the exact original codepoint count (before
+any encoding) and then the strict original UTF-8 byte count (no
+NFC, stripping or other transformation) before
+resolve/protect/map/residual/tokenize/index/reviewer work - a
+codepoint or byte exceedance bypasses with
+ANALYSIS_SIZE_EXCEEDED (exact limit values admit, and nothing is
+truncated, split, sampled or partially repaired), an unencodable
+original (a lone surrogate) bypasses with
+ANALYSIS_ENCODING_INVALID, and only the declared policy
+(ValueError) and encoding (UnicodeEncodeError) conditions are
+translated, so caller control and MemoryError propagate
+untouched; a bypass is neither a Pandoc/protection error nor an
+evidence failure: the local trace records a separate content-free
+analysis_bypass reason field with the existing zero-call trace
+shape, empty edits/targets and explicit unknown reviewer usage
+(never an invented zero, never an earlier request's usage), and
+admitted answers run the mandatory Pandoc pipeline, all
+original-slice protection, the true read-only SQLite and the
+actual reviewer/acceptance/patch behavior unchanged, with true
+parser/evidence failures keeping their existing labels and the
+next request (after bypass or scoped policy restoration)
+working; the limits are independent of the mandatory Pandoc
+input cap, the main body/header budgets, the intake, delivery
+and setup deadlines and the fixed 15-second reviewer exchange;
+the other 39 concept Python files and all 11 other old test
+modules are frozen against the accepted base (the two scoped old
+modules keep their unchanged >52k codepoint payloads under
+explicit valid analysis-limit overrides, and the original Pandoc
+cap test keeps every assertion behind the same scoped override;
+synthetic-scale engineering evidence only, no CPU/wall/memory/I/O,
+cancellation, live-model, quality, ICA, milestone or deployment
+claim).
 Coverage
 remap: the runnable
 proxy now covers the seed 013-a (versioned targeted-review prompt
@@ -250,9 +302,15 @@ numeric-023 scope remains unclosed. Round 024-a remaps the numeric
 024 identity (the inert 035/042 resource seams) to this bounded
 evidence-lookup-budget engineering objective on the actual proxy
 without an ICA request or milestone label; the original
-numeric-024 packaged-API seed scope remains unclosed. Those seed
+numeric-024 packaged-API seed scope remains unclosed. Round 025-a
+remaps the numeric 025 identity (the inert negative-control
+evaluation seed) to this bounded analysis-eligibility engineering
+objective on the actual proxy without an ICA request or milestone
+label; the original numeric-025 negative-control evaluation scope
+remains unclosed. Those seed
 objectives (including the remapped seed 022, the remapped numeric
-023, and the numeric 024 packaged-API seed) as packaged
+023, the numeric 024 packaged-API seed, and the remapped numeric
+025) as packaged
 library/milestone objectives remain unclosed; following work stays: bounded failure/
 admission/cancellation, packaged library integration, morphology/
 phrases, measured labelled quality, and independent closure.

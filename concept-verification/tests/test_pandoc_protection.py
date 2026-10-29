@@ -740,7 +740,7 @@ class PandocMappingTests(unittest.TestCase):
             ],
         }
         doc = pandoc_protection._Document("Beseda\n")
-        pandoc_protection._walk_blocks(doc, cast("list[object]", document["blocks"]))
+        pandoc_protection._walk_blocks(doc, cast("list[dict[str, object]]", document["blocks"]))
         self.assertEqual(doc.granted, [])
 
     def test_user_data_pos_collision_real_markdown(self) -> None:
@@ -792,7 +792,7 @@ class PandocMappingTests(unittest.TestCase):
             ],
         }
         doc = pandoc_protection._Document("Beseda\n")
-        pandoc_protection._walk_blocks(doc, cast("list[object]", document["blocks"]))
+        pandoc_protection._walk_blocks(doc, cast("list[dict[str, object]]", document["blocks"]))
         self.assertEqual(doc.granted, [])
 
 
@@ -967,9 +967,22 @@ class EngineBoundaryTests(unittest.TestCase):
         limit = config.PANDOC_MAX_INPUT_BYTES
         oversize = "a" * (limit + 1)
         engine.begin_request()
+        # Order 025-a, requirement 7: the default finite
+        # analysis-eligibility limits (32768 code points / 131072
+        # bytes) would bypass this unchanged payload before the
+        # original Pandoc preflight, so this test scopes valid
+        # analysis limits above it to keep the actual original parser
+        # cap under test.  The payload and every assertion are
+        # unchanged: this is axis separation, not a default-policy
+        # run.
         with mock.patch.object(
             pandoc_protection, "_Document", _sentinel_document
-        ), mock.patch.object(self.proxy_module, "RuntimeCorpus", _SentinelCorpus):
+        ), mock.patch.object(self.proxy_module, "RuntimeCorpus", _SentinelCorpus), \
+                mock.patch.object(
+                    config, "RUNTIME_ANALYSIS_MAX_CODEPOINTS", 2_000_000
+                ), mock.patch.object(
+                    config, "RUNTIME_ANALYSIS_MAX_UTF8_BYTES", 4_000_000
+                ):
             repaired = engine.repair(oversize)
         self.assertEqual(repaired, oversize)  # byte-exact original
         self.assertEqual(reviewer.calls, 0)

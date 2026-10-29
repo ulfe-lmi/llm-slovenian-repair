@@ -19,6 +19,7 @@ from pathlib import Path
 from typing import Protocol, TypedDict, cast
 from urllib.parse import urlparse
 
+import analysis_policy
 import capture_transport
 import client_transport
 import delivery_transport
@@ -828,8 +829,80 @@ class RepairEngine:
             )
         return text
 
+    def _fail_closed_analysis(
+        self, text: str, raw_started: float, reason: str
+    ) -> str:
+        """Record a minimal trace and return the exact completed original.
+
+        An ineligible completed answer bypasses the OPTIONAL analysis
+        pass BEFORE Pandoc, Corpus, detection and any reviewer call
+        (order 025-a, requirement 3): zero analysis, evidence,
+        protection and review work is performed, and nothing is
+        truncated, split, sampled or partially repaired.  The fixed
+        content-free ``analysis_bypass`` reason is separate from the
+        protection and evidence failure labels, which this path never
+        sets, and no client-visible diagnostic text or logging is
+        added.
+        """
+        if self._details is not None:
+            self._details.append(
+                {
+                    "original": text,
+                    "repaired": text,
+                    "candidates": [],
+                    "corpus_summaries": [],
+                    "reviewer_decisions": [],
+                    "acceptance": [],
+                    "replacements": [],
+                    "timings": {
+                        "raw_seconds": 0.0,
+                        "detector_seconds": 0.0,
+                        "reviewer_seconds": 0.0,
+                        "repair_seconds": round(time.monotonic() - raw_started, 6),
+                    },
+                    "protected_difference_count": 0,
+                    "review_batch": {
+                        "calls": 0,
+                        "targets": 0,
+                        "outcome": "skipped",
+                        "reason": None,
+                        # No reviewer response exists on this path:
+                        # usage is explicitly unknown, never reused
+                        # from an earlier request.
+                        "usage": "unknown",
+                    },
+                    "analysis_bypass": {"reason": reason},
+                }
+            )
+        return text
+
     def repair(self, text: str) -> str:
         raw_started = time.monotonic()
+        # Versioned finite analysis eligibility (order 025-a,
+        # requirement 3): the ORIGINAL completed answer is checked on
+        # its exact codepoint count first, then on its strict
+        # original UTF-8 byte count (no NFC, stripping or other
+        # transformation), BEFORE resolve/protect/map/residual/
+        # tokenize/index/reviewer work.  Ineligibility - an invalid
+        # policy, either size axis exceeded, or an unencodable
+        # original - returns the exact completed original with a
+        # fixed content-free analysis reason and zero optional work;
+        # every admitted answer still runs the mandatory Pandoc
+        # pipeline below unchanged.  Only the declared policy
+        # (ValueError) and encoding (UnicodeEncodeError) conditions
+        # are translated; caller control and MemoryError propagate
+        # untouched.
+        try:
+            codepoint_limit, byte_limit = analysis_policy.current_limits()
+        except ValueError:
+            return self._fail_closed_analysis(
+                text, raw_started, analysis_policy.ANALYSIS_POLICY_INVALID
+            )
+        reason = analysis_policy.classify_original(
+            text, codepoint_limit, byte_limit
+        )
+        if reason is not None:
+            return self._fail_closed_analysis(text, raw_started, reason)
         try:
             spec = self.pandoc if self.pandoc is not None else resolve_pandoc_spec()
             outcome = protect_with_pandoc(spec, text)
@@ -1507,6 +1580,17 @@ class ConceptProxy(HTTPServer):
         # at-use invalidity becomes the fixed RuntimeCorpus
         # budget-invalid label.
         validate_default_evidence_policy()
+        # Versioned finite analysis-eligibility policy (order 025-a,
+        # requirement 2): the CURRENT config default policy must hold
+        # before any bind allocation or traffic is accepted.  This
+        # pure validation reads no file, model, network or index, so
+        # a startup-invalid policy fails here, before bind, with a
+        # plain ValueError; a startup success is not a live
+        # inference proof, and the mandatory normal-main Pandoc
+        # startup/version/capability check remains the separate
+        # startup contract.  At-use invalidity later becomes the
+        # fixed content-free ANALYSIS_POLICY_INVALID bypass.
+        analysis_policy.current_limits()
         super().__init__(address, _Handler)
         self.upstream = parsed
         self.engine = engine
@@ -1607,12 +1691,37 @@ class ConceptProxy(HTTPServer):
             evidence_failure = detail.get("evidence_failure")
             if isinstance(evidence_failure, dict):
                 value["evidence_failure"] = evidence_failure
+            # Content-free analysis-eligibility bypass marker (fixed
+            # reason only); persisted whenever the optional analysis
+            # pass was skipped by the finite policy gate before any
+            # analysis work (order 025-a, requirement 4).
+            analysis_bypass = detail.get("analysis_bypass")
+            if isinstance(analysis_bypass, dict):
+                value["analysis_bypass"] = analysis_bypass
+            # Optional trace serialization boundary (order 025-a,
+            # requirement 4): the existing shared canonical serializer
+            # (unchanged global config.canonical_bytes) is computed
+            # BEFORE any tempfile allocation.  A detail whose completed
+            # original the serializer cannot represent (an unpaired
+            # surrogate) raises UnicodeEncodeError and that ONE
+            # optional trace detail/file is skipped - no empty
+            # temporary artifact, no raw-text persistence, no answer
+            # transformation - so the in-memory analysis_bypass
+            # reason, the zero-call shape, the usage observer and the
+            # exact original delivery continue unchanged.  Only
+            # UnicodeEncodeError is caught: MemoryError, caller
+            # control and file I/O errors are not hidden, and no
+            # ASCII fallback or re-rendering is added.
+            try:
+                payload = canonical_bytes(value)
+            except UnicodeEncodeError:
+                continue
             target = self.trace_dir / f"{request_id}-{index}.json"
             with tempfile.NamedTemporaryFile(
                 mode="wb", prefix=".trace-", suffix=".tmp", dir=self.trace_dir, delete=False
             ) as handle:
                 temporary = Path(handle.name)
-                handle.write(canonical_bytes(value))
+                handle.write(payload)
                 handle.flush()
                 os.fsync(handle.fileno())
             os.replace(temporary, target)
