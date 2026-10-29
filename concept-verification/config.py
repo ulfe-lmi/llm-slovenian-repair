@@ -129,6 +129,19 @@ MAIN_SETUP_TIMEOUT_SECONDS = 30.0
 # and is not a total CPU/query deadline.
 RUNTIME_CORPUS_BUSY_TIMEOUT_SECONDS = 0.25
 
+# Versioned finite runtime evidence lookup policy (order 024-a,
+# requirement 2): per fresh RuntimeCorpus connection/answer, bounds
+# actual SQL statement starts, fetched rows (per query and cumulative)
+# and native progress-handler callbacks.  These are engineering
+# defaults, not measured optima.  The progress interval bounds
+# APPROXIMATE SQLite VM progress only - never CPU time, memory, I/O or
+# wall time - and a nonzero callback return interrupts the real work.
+RUNTIME_EVIDENCE_MAX_STATEMENTS = 65_536
+RUNTIME_EVIDENCE_MAX_ROWS_PER_QUERY = 4_096
+RUNTIME_EVIDENCE_MAX_ROWS_TOTAL = 262_144
+RUNTIME_EVIDENCE_PROGRESS_INTERVAL = 1_000
+RUNTIME_EVIDENCE_MAX_PROGRESS_CALLBACKS = 10_000
+
 
 @dataclass(frozen=True)
 class ArchiveSpec:

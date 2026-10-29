@@ -336,10 +336,24 @@ cleanup may honestly wait for OS reaping, with no hard-real-time
 return guarantee; parser, caps, strict framing and healthy-path
 behavior are unchanged and no new deadline was added; controlled-
 fault evidence only, no spontaneous-native-failure, live-model or
-quality claim; the historical single-target
+quality claim; round 024-a (2026-10-28) bounded the read-only runtime
+evidence lookup work with one finite per-instance work-count policy
+(prepared-SQL statement starts, per-query and cumulative counted rows
+including metadata rows, a native SQLite progress-callback budget
+whose next crossing callback interrupts, and the callback interval)
+from versioned config defaults, with an invalid value failing at
+constructor use with the fixed content-free budget-invalid label
+before any file access and an invalid config default failing proxy
+startup with a plain ValueError before any bind, whole-query discard
+on row overflow detected by the bounded fetch loop (never a partial
+result), sticky exhaustion and the completed-original fallback
+preserved; the progress callback is approximate virtual-
+machine progress only, not a CPU, time, memory or I/O bound; the
+numeric 024 packaged-API seed remains unclosed; the historical
+single-target
 evaluator prompt/API remains unchanged (see
 `concept-verification/README.md`) - runnable-proxy engineering
-evidence only; the seed 013/014/015/020/022 packaged objectives
+evidence only; the seed 013/014/015/020/022/024 packaged objectives
 remain open. A
 provisional 8-15 focused-engineering-day estimate covers the
 remaining packaged-MVP scope, with research-evaluation completion, ICA and

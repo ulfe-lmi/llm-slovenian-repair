@@ -47,6 +47,7 @@ from config import (
     canonical_bytes,
 )
 from detector import Candidate, detect, tokenize
+from evidence_budget import validate_default_evidence_policy
 from pandoc_protection import (
     PandocSpec,
     PandocStartupError,
@@ -1498,6 +1499,14 @@ class ConceptProxy(HTTPServer):
             raise ValueError(
                 "capture timeout must be a finite positive duration"
             )
+        # Bounded evidence lookup policy (order 024-a, requirement
+        # 2): the CURRENT config default policy must hold before any
+        # bind allocation or traffic is accepted.  This pure
+        # validation reads no index, file or connection, so a
+        # startup-invalid policy fails here, before bind, while
+        # at-use invalidity becomes the fixed RuntimeCorpus
+        # budget-invalid label.
+        validate_default_evidence_policy()
         super().__init__(address, _Handler)
         self.upstream = parsed
         self.engine = engine
