@@ -142,6 +142,23 @@ RUNTIME_EVIDENCE_MAX_ROWS_TOTAL = 262_144
 RUNTIME_EVIDENCE_PROGRESS_INTERVAL = 1_000
 RUNTIME_EVIDENCE_MAX_PROGRESS_CALLBACKS = 10_000
 
+# Versioned finite analysis-eligibility limits (order 025-a,
+# requirement 1): bound the completed answer admitted to the
+# OPTIONAL analysis pass (detection, evidence lookup, review) on
+# the runnable proxy.  These are finite initial engineering
+# defaults, not measured model optima, and are enforced as two
+# independent axes on the ORIGINAL captured text: code points and
+# strict original UTF-8 bytes (no NFC, stripping or other
+# transformation).  The byte allowance is at least the codepoint
+# allowance.  Exact limit values admit; exceeding either axis
+# returns the exact completed original with a fixed content-free
+# analysis reason and zero analysis/evidence/review work.  No
+# environment/CLI/operator knob or retry is introduced: the
+# values change only through these validated versioned defaults,
+# and each real use re-reads the CURRENT config.
+RUNTIME_ANALYSIS_MAX_CODEPOINTS = 32_768
+RUNTIME_ANALYSIS_MAX_UTF8_BYTES = 131_072
+
 
 @dataclass(frozen=True)
 class ArchiveSpec:

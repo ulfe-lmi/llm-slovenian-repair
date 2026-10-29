@@ -30,7 +30,7 @@ publication-evidence overclaims in the new recovery record, with no
 scientific protocol, model, or result change.
 Rounds 013-a, 014-a, 014-b, and 015-a (2026-10-26) and rounds 016-a,
 017-a, 018-a, 019-a, 020-a, 021-a (2026-10-27) and 022-a,
-023-a, and 024-a (2026-10-28) confer no product label: they
+023-a, 024-a (2026-10-28) and 025-a (2026-10-29) confer no product label: they
 implement the owner-selected Pandoc structural-parsing proxy, one
 bounded occurrence-addressed reviewer batch, the terminal-answer-copy
 preflight, the explicit text-only Responses request contract, the
@@ -41,7 +41,11 @@ elapsed reviewer exchange budget, the one finite positive
 monotonic incoming client request intake deadline, the one independent finite elapsed final response delivery deadline, and the one independent finite elapsed main-upstream setup deadline,
 and the owned partial-startup cleanup of the Pandoc and reviewer
 child starts, and the finite read-only runtime evidence lookup
-budget, in the isolated runnable proxy only, with no
+budget, and the bounded finished-answer analysis-eligibility
+limits (finite codepoint and strict UTF-8 byte allowances on the
+original text with safe completed-original bypass, separate
+content-free analysis reasons and a startup ValueError versus
+at-use bypass), in the isolated runnable proxy only, with no
 scientific protocol, model, or result change and no packaged
 library, quality, or deployment claim. The
 packaged-MVP row above carries a

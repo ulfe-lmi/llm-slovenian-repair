@@ -349,11 +349,11 @@ on row overflow detected by the bounded fetch loop (never a partial
 result), sticky exhaustion and the completed-original fallback
 preserved; the progress callback is approximate virtual-
 machine progress only, not a CPU, time, memory or I/O bound; the
-numeric 024 packaged-API seed remains unclosed; the historical
+numeric 024 packaged-API seed remains unclosed; round 025-a (2026-10-29) bounded the finished-answer eligibility for the optional analysis pass with two finite versioned limits on the original captured text (RUNTIME_ANALYSIS_MAX_CODEPOINTS 32,768 code points and RUNTIME_ANALYSIS_MAX_UTF8_BYTES 131,072 strict UTF-8 bytes - distinct units, byte allowance at least the codepoint allowance, exact N admitting, re-read from the CURRENT config at every use, no knob/coercion/retry): an invalid config default fails proxy startup with a plain ValueError before any bind allocation, an invalid policy at use returns the exact completed original with the fixed content-free ANALYSIS_POLICY_INVALID reason, a codepoint exceedance bypasses before any encoding and a strict UTF-8 byte exceedance (no NFC, stripping or transformation) bypasses with ANALYSIS_SIZE_EXCEEDED before any Pandoc/Corpus/detection/review work, and an unencodable original bypasses with ANALYSIS_ENCODING_INVALID; the bypass is a separate analysis reason - never a Pandoc or evidence label - recorded with the zero-call trace shape, empty edits/targets and explicit unknown reviewer usage, admitted answers run the unchanged mandatory pipeline and the next request works after bypass or scoped policy restoration; the limits stay independent of the Pandoc input cap, the capture/intake/header/delivery/setup budgets and the 15-second reviewer exchange; the numeric 025 negative-control evaluation seed remains unclosed, remapped to this bounded runtime resource seam; the historical
 single-target
 evaluator prompt/API remains unchanged (see
 `concept-verification/README.md`) - runnable-proxy engineering
-evidence only; the seed 013/014/015/020/022/024 packaged objectives
+evidence only; the seed 013/014/015/020/022/024/025 packaged objectives
 remain open. A
 provisional 8-15 focused-engineering-day estimate covers the
 remaining packaged-MVP scope, with research-evaluation completion, ICA and

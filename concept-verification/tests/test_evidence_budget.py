@@ -794,6 +794,23 @@ class EngineEarlyLateTests(unittest.TestCase):
         self.db = _evidence_db(self.root)
         self.reviewer = _StubReviewer()
         self.engine = proxy.RepairEngine(self.db, self.reviewer, pandoc=_real_spec())
+        # Order 025-a, requirement 6: this class's unchanged >52k
+        # codepoint synthetic payloads exceed the default finite
+        # analysis-eligibility limits, so the class scopes valid
+        # analysis limits above them to keep the actual evidence
+        # budget boundaries under test.  This is axis separation, not
+        # a claimed default-policy run; every other assertion,
+        # payload, query and failure expectation is unchanged.
+        self._analysis_cp = mock.patch.object(
+            config, "RUNTIME_ANALYSIS_MAX_CODEPOINTS", 100_000
+        )
+        self._analysis_cp.start()
+        self.addCleanup(self._analysis_cp.stop)
+        self._analysis_bytes = mock.patch.object(
+            config, "RUNTIME_ANALYSIS_MAX_UTF8_BYTES", 400_000
+        )
+        self._analysis_bytes.start()
+        self.addCleanup(self._analysis_bytes.stop)
 
     def tearDown(self) -> None:
         self.temp.cleanup()
@@ -995,6 +1012,25 @@ class ProxyRoundTripTests(unittest.TestCase):
         self.db = _evidence_db(self.root)
         # Point the real engine at the synthetic-scale index.
         self.harness.engine.index = self.db
+        # Order 025-a, requirement 6: this class's unchanged >52k
+        # codepoint synthetic payloads exceed the default finite
+        # analysis-eligibility limits, so the class scopes valid
+        # analysis limits above them to keep the actual evidence
+        # budget round-trip boundaries under test.  The proxy startup
+        # validation above already held on the valid defaults; the
+        # scoped limits apply at engine use.  This is axis separation,
+        # not a claimed default-policy run; every other assertion,
+        # payload and failure expectation is unchanged.
+        self._analysis_cp = mock.patch.object(
+            config, "RUNTIME_ANALYSIS_MAX_CODEPOINTS", 100_000
+        )
+        self._analysis_cp.start()
+        self.addCleanup(self._analysis_cp.stop)
+        self._analysis_bytes = mock.patch.object(
+            config, "RUNTIME_ANALYSIS_MAX_UTF8_BYTES", 400_000
+        )
+        self._analysis_bytes.start()
+        self.addCleanup(self._analysis_bytes.stop)
 
     def tearDown(self) -> None:
         self.harness.close()
