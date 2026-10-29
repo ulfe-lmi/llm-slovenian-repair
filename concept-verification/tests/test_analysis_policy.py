@@ -391,9 +391,14 @@ class StartupUseOrderingTests(unittest.TestCase):
         ):
             for value in _INVALID_VALUES:
                 with self.subTest(field=field, value=value):
+                    # Valid counterpart on the other axis (codepoint 1
+                    # for byte rows, 131072 for codepoint rows) so the
+                    # exact-type rejection stands alone at the real
+                    # constructor, independent of the cross-field
+                    # constraint (order 025-a, T2).
                     started = _patch_limits(
-                        value if field == "codepoints" else 131072,
-                        value if field == "utf8_bytes" else 32768,
+                        value if field == "codepoints" else 1,
+                        value if field == "utf8_bytes" else 131072,
                     )
                     try:
                         raised: BaseException | None = None
@@ -1205,9 +1210,6 @@ class EnvelopeSemanticsBeforeGateTests(unittest.TestCase):
         self.assertEqual(_FakeUpstream.recorded, [])
         self.assertEqual(self.captured, [])
 
-
-if __name__ == "__main__":
-    unittest.main()
 class TraceEncodingBypassTests(unittest.TestCase):
     """R3/R4 (order 025-a): safe-original delivery with optional
     controlled tracing.
@@ -1374,3 +1376,6 @@ class TraceEncodingBypassTests(unittest.TestCase):
             self.records[-1],
             {"review_calls": 0, "reviewer_usage": "unknown"},
         )
+
+if __name__ == "__main__":
+    unittest.main()
