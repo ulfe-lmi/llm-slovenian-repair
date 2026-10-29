@@ -1189,22 +1189,44 @@ def _tracked_accept_events(
 
 
 class _FaultCursor:
-    """Test-only once-faulting delegate over a real native cursor."""
+    """Test-only delegate over a real native cursor with at most one
+    faulting fetch and at most one faulting close (each fires only
+    after the real native call completes).  Every fault that actually
+    fires is recorded in ``fault_events`` so a test can assert which
+    boundary faulted and that no other fault fired."""
 
-    def __init__(self, real: sqlite3.Cursor, injected: BaseException) -> None:
+    fault_events: list[tuple[str, BaseException]] = []
+
+    def __init__(
+        self,
+        real: sqlite3.Cursor,
+        fetch_fault: BaseException | None,
+        close_fault: BaseException | None,
+    ) -> None:
         self._real = real
-        self._injected = injected
-        self._armed = True
+        self._fetch_fault = fetch_fault
+        self._close_fault = close_fault
+        self._fetch_armed = fetch_fault is not None
+        self._close_armed = close_fault is not None
 
     def fetchmany(self, size: int) -> list[tuple[object, ...]]:
         rows = self._real.fetchmany(size)
-        if self._armed:
-            self._armed = False
-            raise self._injected
+        if self._fetch_armed:
+            self._fetch_armed = False
+            fault = self._fetch_fault
+            if fault is not None:
+                self.fault_events.append(("fetchmany", fault))
+                raise fault
         return rows
 
     def close(self) -> None:
         self._real.close()
+        if self._close_armed:
+            self._close_armed = False
+            fault = self._close_fault
+            if fault is not None:
+                self.fault_events.append(("close", fault))
+                raise fault
 
     def __getattr__(self, name: str) -> object:
         return getattr(self._real, name)
@@ -1223,19 +1245,34 @@ class _FaultConnection(sqlite3.Connection):
     """
 
     boundary: str = "none"
-    injected: BaseException = RuntimeError("unfaulted")
+    injected: BaseException | None = RuntimeError("unfaulted")
+    close_fault: BaseException | None = None
     removal_armed = False
     execute_armed = False
     fetch_armed = False
+    cursor_armed = False
     executed_cursors: list[sqlite3.Cursor] = []
+
+    def close(self) -> None:
+        super().close()
+        if self.close_fault is not None:
+            fault = self.close_fault
+            self.close_fault = None
+            _FaultCursor.fault_events.append(("connection-close", fault))
+            raise fault
 
     def set_progress_handler(
         self, callback: Callable[[], int | None] | None, n: int
     ) -> None:
         if self.boundary == "remove" and callback is None and self.removal_armed:
             self.removal_armed = False
-            raise self.injected
-        if self.boundary == "install" and callback is not None:
+            if self.injected is not None:
+                raise self.injected
+        if (
+            self.boundary == "install"
+            and callback is not None
+            and self.injected is not None
+        ):
             raise self.injected
         super().set_progress_handler(callback, n)
 
@@ -1251,14 +1288,27 @@ class _FaultConnection(sqlite3.Connection):
             # fault is injected only after that actual native work.
             real = super().execute(sql, params)
             self.executed_cursors.append(real)
-            raise self.injected
+            if self.injected is not None:
+                raise self.injected
         if self.boundary == "fetch" and self.fetch_armed:
             self.fetch_armed = False
             real = super().execute(sql, params)
             # One targeted cast: _FaultCursor is a test-only delegate
             # over the real native cursor (all other attributes pass
             # through).
-            return cast("sqlite3.Cursor", _FaultCursor(real, self.injected))
+            return cast("sqlite3.Cursor", _FaultCursor(real, self.injected, None))
+        if self.boundary == "cursor" and self.cursor_armed:
+            self.cursor_armed = False
+            real = super().execute(sql, params)
+            self.executed_cursors.append(real)
+            close_fault = self.close_fault
+            self.close_fault = None
+            # One targeted cast: _FaultCursor is a test-only delegate
+            # over the real native cursor (all other attributes pass
+            # through).
+            return cast(
+                "sqlite3.Cursor", _FaultCursor(real, self.injected, close_fault)
+            )
         return super().execute(sql, params)
 
 
@@ -1266,9 +1316,19 @@ class NativeTeardownBoundaryTests(unittest.TestCase):
     """R6: real native connection/cursor fault boundaries.
 
     One focused case per boundary - hook install, SQL execute/prepare,
-    fetch, and callback removal - on the real read-only synthetic
-    database, with the fault injected at the named native boundary.
-    The product lifecycle under test is the caller-owned one: the real
+    fetch, callback removal, and the cursor-close boundary on the real
+    data query - on the real read-only synthetic database, with the
+    fault injected at the named native boundary.  The latter cases
+    also cover the caller-control priority policy: an ordinary pending
+    body exception must not swallow a later cleanup caller control, an
+    in-flight caller control keeps its exact identity over a later
+    cursor/connection close failure (ordinary or a distinct control),
+    the first cleanup control wins over a later one, a clean normal
+    close still propagates a new caller control, and an ALREADY
+    HANDLED caller control in an outer frame (ambient exception
+    context) never counts as the current operation's propagating
+    error.  The product
+    lifecycle under test is the caller-owned one: the real
     constructor and the context manager plus the documented close();
     arbitrary direct-method ownership sequences beyond that lifecycle
     are not claimed as product ownership. Every case verifies the
@@ -1287,17 +1347,23 @@ class NativeTeardownBoundaryTests(unittest.TestCase):
         self.temp.cleanup()
 
     def _fault_connect(
-        self, boundary: str, injected: BaseException
+        self,
+        boundary: str,
+        injected: BaseException | None,
+        close_fault: BaseException | None = None,
     ) -> tuple[
         Callable[[str, bool, float], sqlite3.Connection],
         list[_FaultConnection],
     ]:
         _FaultConnection.boundary = boundary
         _FaultConnection.injected = injected
+        _FaultConnection.close_fault = close_fault
         _FaultConnection.removal_armed = False
         _FaultConnection.execute_armed = boundary == "execute"
         _FaultConnection.fetch_armed = boundary == "fetch"
+        _FaultConnection.cursor_armed = boundary == "cursor"
         _FaultConnection.executed_cursors = []
+        _FaultCursor.fault_events = []
         original_connect = sqlite3.connect
         connections: list[_FaultConnection] = []
 
@@ -1399,6 +1465,159 @@ class NativeTeardownBoundaryTests(unittest.TestCase):
             with self.assertRaises(KeyboardInterrupt) as caught:
                 corpus.close()
         self.assertIs(caught.exception, injected)
+        [native] = connections
+        self._assert_closed(native)
+        self._next_healthy()
+
+    def test_ordinary_body_removal_keyboard_control_wins(self) -> None:
+        # An ORDINARY body ValueError must not swallow a later cleanup
+        # caller control: the removal KeyboardInterrupt propagates with
+        # its exact identity after the close attempt.
+        injected = KeyboardInterrupt("controlled-removal")
+        body = ValueError("controlled-body")
+        connect, connections = self._fault_connect("remove", injected)
+        with mock.patch.object(sqlite3, "connect", connect), \
+                self.assertRaises(KeyboardInterrupt) as caught, RuntimeCorpus(self.db) as corpus:
+            self.assertEqual(corpus.unigram("to").count, 100)
+            [conn] = connections
+            conn.removal_armed = True
+            raise body
+        self.assertIs(caught.exception, injected)
+        [native] = connections
+        self._assert_closed(native)
+        self._next_healthy()
+
+    def test_ordinary_body_removal_memory_control_wins(self) -> None:
+        # Same priority with a MemoryError cleanup control: although
+        # MemoryError subclasses Exception, it is caller control here
+        # and must propagate over the ordinary body ValueError.
+        injected = MemoryError("controlled-removal")
+        body = ValueError("controlled-body")
+        connect, connections = self._fault_connect("remove", injected)
+        with mock.patch.object(sqlite3, "connect", connect), \
+                self.assertRaises(MemoryError) as caught, RuntimeCorpus(self.db) as corpus:
+            self.assertEqual(corpus.unigram("to").count, 100)
+            [conn] = connections
+            conn.removal_armed = True
+            raise body
+        self.assertIs(caught.exception, injected)
+        [native] = connections
+        self._assert_closed(native)
+        self._next_healthy()
+
+    def test_cursor_fetch_control_preserved_over_close_secondary_control(
+        self,
+    ) -> None:
+        # Real data-query cursor: the fetch raises the primary
+        # KeyboardInterrupt after the real native fetch; the real close
+        # REALLY CLOSES and then raises a distinct secondary
+        # MemoryError. The primary control keeps its exact identity -
+        # the data-method finally must not replace it - and the
+        # context teardown still closes the connection.
+        injected = KeyboardInterrupt("controlled-fetch")
+        secondary = MemoryError("controlled-cursor-close")
+        connect, connections = self._fault_connect(
+            "cursor", injected, close_fault=secondary
+        )
+        with mock.patch.object(sqlite3, "connect", connect), \
+                self.assertRaises(KeyboardInterrupt) as caught, RuntimeCorpus(self.db) as corpus:
+            corpus.unigram("to")
+        self.assertIs(caught.exception, injected)
+        [native] = connections
+        self._assert_closed(native)
+        [real_cursor] = native.executed_cursors
+        with self.assertRaises(sqlite3.ProgrammingError):
+            real_cursor.fetchone()
+        self._next_healthy()
+
+    def test_cursor_fetch_control_preserved_over_close_ordinary_error(
+        self,
+    ) -> None:
+        # Same data-query boundary with an ordinary secondary close
+        # error: the primary fetch control still keeps its exact
+        # identity over the ordinary close failure.
+        injected = KeyboardInterrupt("controlled-fetch")
+        secondary = ValueError("controlled-cursor-close")
+        connect, connections = self._fault_connect(
+            "cursor", injected, close_fault=secondary
+        )
+        with mock.patch.object(sqlite3, "connect", connect), \
+                self.assertRaises(KeyboardInterrupt) as caught, RuntimeCorpus(self.db) as corpus:
+            corpus.unigram("to")
+        self.assertIs(caught.exception, injected)
+        [native] = connections
+        self._assert_closed(native)
+        [real_cursor] = native.executed_cursors
+        with self.assertRaises(sqlite3.ProgrammingError):
+            real_cursor.fetchone()
+        self._next_healthy()
+
+    def test_first_cleanup_control_wins_over_later_close_control(self) -> None:
+        # Removal raises a KeyboardInterrupt and the connection close
+        # then raises a distinct MemoryError while an ordinary body
+        # ValueError is pending: the FIRST cleanup caller control
+        # (the removal one) propagates, the later one is not delivered.
+        removal = KeyboardInterrupt("controlled-removal")
+        conn_close = MemoryError("controlled-connection-close")
+        body = ValueError("controlled-body")
+        connect, connections = self._fault_connect(
+            "remove", removal, close_fault=conn_close
+        )
+        with mock.patch.object(sqlite3, "connect", connect), \
+                self.assertRaises(KeyboardInterrupt) as caught, RuntimeCorpus(self.db) as corpus:
+            self.assertEqual(corpus.unigram("to").count, 100)
+            [conn] = connections
+            conn.removal_armed = True
+            raise body
+        self.assertIs(caught.exception, removal)
+        [native] = connections
+        self._assert_closed(native)
+        self._next_healthy()
+
+    def test_normal_close_propagates_connection_close_control(self) -> None:
+        # A clean normal close() whose real connection close REALLY
+        # CLOSES and then raises a MemoryError: with no pending caller
+        # control, the new caller control propagates from close() with
+        # its exact identity.
+        close_control = MemoryError("controlled-connection-close")
+        connect, connections = self._fault_connect(
+            "none", RuntimeError("unused"), close_fault=close_control
+        )
+        with mock.patch.object(sqlite3, "connect", connect):
+            corpus = RuntimeCorpus(self.db)
+            self.assertEqual(corpus.unigram("to").count, 100)
+            with self.assertRaises(MemoryError) as caught:
+                corpus.close()
+        self.assertIs(caught.exception, close_control)
+        [native] = connections
+        self._assert_closed(native)
+        self._next_healthy()
+
+    def test_ambient_handled_control_does_not_swallow_fresh_close_control(
+        self,
+    ) -> None:
+        # The caller ALREADY HANDLES a KeyboardInterrupt in an outer
+        # frame (ambient exception context); while that handler runs,
+        # a fresh, otherwise healthy construction performs its real
+        # native schema fetch with NO primary fetch fault, then the
+        # first real native schema cursor REALLY CLOSES and raises a
+        # NEW MemoryError at close.  The already-handled ancestor must
+        # not be mistaken for the current operation's propagating
+        # error: the fresh close control propagates with its exact
+        # identity, exactly the intended close fault fired, and the
+        # owned connection is still closed.
+        ambient = KeyboardInterrupt("already-handled-ancestor")
+        fresh = MemoryError("fresh-schema-close")
+        connect, connections = self._fault_connect("cursor", None, fresh)
+        with mock.patch.object(sqlite3, "connect", connect), \
+                self.assertRaises(MemoryError) as caught:
+            try:
+                raise ambient
+            except KeyboardInterrupt:
+                with RuntimeCorpus(self.db) as corpus:
+                    corpus.unigram("to")
+        self.assertIs(caught.exception, fresh)
+        self.assertEqual(_FaultCursor.fault_events, [("close", fresh)])
         [native] = connections
         self._assert_closed(native)
         self._next_healthy()

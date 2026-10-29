@@ -221,7 +221,13 @@ original with zero review calls and late exhaustion aborts the whole
 optional pass with the actual review call and usage preserved and no
 earlier edit surviving; a caller-control exception raised inside the
 callback is preserved and re-raised with its exact identity after
-owned cleanup; the progress callback counts approximate virtual-
+owned cleanup, with the first caller control of the current owned
+operation keeping its exact identity over later cleanup failures
+(including a later distinct control), a pending ordinary exception
+never swallowing a later cleanup control (MemoryError is caller
+control), and the current operation's pending exception explicitly
+tracked so an already-handled control in an outer frame is never
+authority; the progress callback counts approximate virtual-
 machine progress only and is not a CPU, wall-time, memory or I/O
 bound; no new deadline, operator knob or retry was added, and the
 other 38 concept Python files and all 12 old test modules are frozen

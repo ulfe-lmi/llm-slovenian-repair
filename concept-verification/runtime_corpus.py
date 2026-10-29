@@ -121,6 +121,43 @@ def _classify(exc: sqlite3.Error) -> RuntimeCorpusError:
     return RuntimeCorpusError(REASON_UNAVAILABLE, detail)
 
 
+def _is_caller_control(exc: BaseException | None) -> bool:
+    """Whether ``exc`` is caller control that must keep its exact identity.
+
+    Nonordinary BaseExceptions (KeyboardInterrupt, SystemExit, and any
+    other non-Exception BaseException) are caller control, as is
+    MemoryError explicitly although it subclasses Exception (order
+    024-a, requirement 6); ordinary Exceptions are not.
+    """
+    if exc is None:
+        return False
+    if not isinstance(exc, Exception):
+        return True
+    return isinstance(exc, MemoryError)
+
+
+def _close_cursor(cursor: sqlite3.Cursor, in_flight: BaseException | None) -> None:
+    """Close an owned cursor without replacing the current operation's
+    propagating caller control.
+
+    ``in_flight`` is the current owned operation's own exception,
+    explicitly tracked through that operation's exception/cleanup
+    path: ambient exception context from another (already handled)
+    frame is never used as authority.  While a caller control is
+    propagating from the current operation, a later close failure
+    (ordinary, or a later distinct control) may not replace its exact
+    identity.  sqlite3.Error close failures stay suppressed as
+    before; any other close failure propagates unchanged, including a
+    new control on a clean flow (order 024-a, requirement 6).
+    """
+    try:
+        cursor.close()
+    except BaseException as exc:
+        if isinstance(exc, sqlite3.Error) or _is_caller_control(in_flight):
+            return
+        raise
+
+
 def _validated_count(value: object) -> int:
     """Exact nonnegative Python integer only (order 016-a, requirement 3).
 
@@ -243,12 +280,14 @@ class RuntimeCorpus(Corpus):
         requirements 3 and 4); metadata rows count as actual rows.
         """
         cursor: sqlite3.Cursor | None = None
+        pending: BaseException | None = None
+        mapped: BaseException | None = None
         try:
             cursor = self._execute(
                 connection, "SELECT name FROM sqlite_master WHERE type='table'"
             )
             names = self._fetch_all_bounded(cursor)
-            cursor.close()
+            _close_cursor(cursor, None)
             cursor = None
             tables = {row[0] for row in names}
             for table, columns in _ACCESSED_TABLES.items():
@@ -256,19 +295,28 @@ class RuntimeCorpus(Corpus):
                     raise RuntimeCorpusError(REASON_INCOMPATIBLE)
                 cursor = self._execute(connection, f"PRAGMA table_info({table})")
                 info = self._fetch_all_bounded(cursor)
-                cursor.close()
+                _close_cursor(cursor, None)
                 cursor = None
                 present = {row[1] for row in info}
                 if not set(columns) <= present:
                     raise RuntimeCorpusError(REASON_INCOMPATIBLE)
-        except RuntimeCorpusError:
+        except RuntimeCorpusError as exc:
+            pending = exc
             raise
         except sqlite3.Error as exc:
-            self._raise_budget_aware(exc)
+            try:
+                self._raise_budget_aware(exc)
+            except BaseException as mapped_exc:
+                mapped = mapped_exc
+                raise
+        except BaseException as exc:
+            pending = exc
+            raise
         finally:
             if cursor is not None:
-                with contextlib.suppress(sqlite3.Error):
-                    cursor.close()
+                _close_cursor(
+                    cursor, pending if pending is not None else mapped
+                )
 
     def _teardown(
         self,
@@ -278,15 +326,19 @@ class RuntimeCorpus(Corpus):
         """Remove the callback and close the owned connection, if any.
 
         A callback-removal failure never skips the close attempt.
-        When ``pending`` holds the caller's own propagating exception
-        (a constructor failure, a context-body exception in
-        ``__exit__``, or a direct-method caller control), a removal or
-        close failure is not allowed to replace it: the caller
-        re-raises its exact identity.  Otherwise (a normal close) the
-        first non-sqlite removal or close failure is propagated AFTER
-        the close attempt, preserving the normal-close exception
-        semantics; sqlite3.Error teardown failures stay suppressed as
-        before (order 024-a, requirement 6).
+        Exception priority (order 024-a, requirement 6): the FIRST
+        caller control keeps its exact identity over later cleanup
+        failures (including a later distinct control): a caller
+        control in ``pending`` is preserved by the caller, and when
+        ``pending`` is ordinary or absent, a caller control raised
+        during removal or close propagates instead of the ordinary
+        error (an ordinary pending must not swallow a later caller
+        control).  With no caller control at all, ordinary/fixed-label
+        behavior is kept: a pending ordinary exception is not replaced
+        by ordinary cleanup failures, and a normal close propagates
+        its first non-sqlite removal or close failure after the close
+        attempt.  sqlite3.Error teardown failures stay suppressed as
+        before.
         """
         if connection is None:
             return
@@ -302,6 +354,11 @@ class RuntimeCorpus(Corpus):
         except BaseException as exc:
             if not isinstance(exc, sqlite3.Error):
                 close_error = exc
+        if _is_caller_control(pending):
+            return
+        for error in (removal_error, close_error):
+            if error is not None and _is_caller_control(error):
+                raise error
         if pending is not None:
             return
         if removal_error is not None:
@@ -330,17 +387,27 @@ class RuntimeCorpus(Corpus):
     def unigram(self, word: str) -> Evidence:
         key = word.casefold()
         cursor: sqlite3.Cursor | None = None
+        pending: BaseException | None = None
+        mapped: BaseException | None = None
         try:
             cursor = self._execute(
                 self.connection, "SELECT count FROM unigram WHERE word=?", (key,)
             )
             rows = self._fetch_all_bounded(cursor)
         except sqlite3.Error as exc:
-            self._raise_budget_aware(exc)
+            try:
+                self._raise_budget_aware(exc)
+            except BaseException as mapped_exc:
+                mapped = mapped_exc
+                raise
+        except BaseException as exc:
+            pending = exc
+            raise
         finally:
             if cursor is not None:
-                with contextlib.suppress(sqlite3.Error):
-                    cursor.close()
+                _close_cursor(
+                    cursor, pending if pending is not None else mapped
+                )
         if not rows:
             return Evidence("UNAVAILABLE", None, key)
         return Evidence("EXACT", _validated_count(rows[0][0]), key)
@@ -351,6 +418,8 @@ class RuntimeCorpus(Corpus):
         table = "bigram" if length == 2 else "trigram"
         key = " ".join(part.casefold() for part in phrase.split())
         cursor: sqlite3.Cursor | None = None
+        pending: BaseException | None = None
+        mapped: BaseException | None = None
         try:
             cursor = self._execute(
                 self.connection,
@@ -359,11 +428,19 @@ class RuntimeCorpus(Corpus):
             )
             rows = self._fetch_all_bounded(cursor)
         except sqlite3.Error as exc:
-            self._raise_budget_aware(exc)
+            try:
+                self._raise_budget_aware(exc)
+            except BaseException as mapped_exc:
+                mapped = mapped_exc
+                raise
+        except BaseException as exc:
+            pending = exc
+            raise
         finally:
             if cursor is not None:
-                with contextlib.suppress(sqlite3.Error):
-                    cursor.close()
+                _close_cursor(
+                    cursor, pending if pending is not None else mapped
+                )
         if not rows:
             return Evidence("CENSORED", None, key)
         return Evidence("EXACT", _validated_count(rows[0][0]), key)
@@ -442,6 +519,8 @@ class RuntimeCorpus(Corpus):
 
     def alternatives(self, left: str, right: str) -> list[tuple[str, int]]:
         cursor: sqlite3.Cursor | None = None
+        pending: BaseException | None = None
+        mapped: BaseException | None = None
         try:
             cursor = self._execute(
                 self.connection,
@@ -451,9 +530,17 @@ class RuntimeCorpus(Corpus):
             )
             rows = self._fetch_all_bounded(cursor)
         except sqlite3.Error as exc:
-            self._raise_budget_aware(exc)
+            try:
+                self._raise_budget_aware(exc)
+            except BaseException as mapped_exc:
+                mapped = mapped_exc
+                raise
+        except BaseException as exc:
+            pending = exc
+            raise
         finally:
             if cursor is not None:
-                with contextlib.suppress(sqlite3.Error):
-                    cursor.close()
+                _close_cursor(
+                    cursor, pending if pending is not None else mapped
+                )
         return [(str(row[0]), _validated_count(row[1])) for row in rows]

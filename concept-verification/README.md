@@ -629,7 +629,16 @@ defaults:
   failures keep their existing fixed labels (unavailable, corrupt,
   incompatible, invalid count, locked, unsupported journal), and the
   existing per-query busy wait remains a lock wait, not a lookup-work
-  budget.
+  budget.  Cleanup priority keeps the first caller control of the
+  current owned operation as the exact propagating identity over
+  later cleanup failures (including a later distinct control), and a
+  pending ordinary exception never swallows a later cleanup control
+  (MemoryError is caller control although it subclasses Exception);
+  the current operation's pending exception is explicitly tracked
+  through its own exception/cleanup path, so an already-handled
+  control in an outer frame (ambient exception context) is never
+  authority to suppress a new cleanup failure; the policy applies at
+  the cursor cleanup and the handler/connection teardown.
 - No new deadline, operator knob, environment/request configuration or
   retry was added; the other 38 concept Python files and all 12 old
   test modules are frozen against the accepted base.
