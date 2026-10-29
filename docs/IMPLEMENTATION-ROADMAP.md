@@ -202,15 +202,19 @@ unfinished). Round
 024-a (2026-10-28) bounded the read-only runtime evidence lookup work
 in the same runnable proxy with one finite per-instance work-count
 policy (prepared-SQL statement starts, per-query and cumulative
-fetched rows including metadata rows, native SQLite progress callbacks
-and interval) resolved from versioned config defaults and validated at
-every real constructor use and once at proxy startup before any bind
-allocation: bool, nonintegral, nonfinite, nonpositive and
-native-overflow values fail with the fixed content-free budget-invalid
-label before any file access or index state change, and `None` means
-the current finite default, never disabled; a query whose result would
-exceed the remaining per-query or cumulative row quota is
-interrupted, counted and discarded whole with the fixed content-free
+counted rows including metadata rows, a native SQLite progress-callback
+budget whose next crossing callback interrupts, and the callback
+interval) resolved from versioned config defaults, validated at every
+real constructor use - where an invalid value fails with the fixed
+content-free budget-invalid label before any file access or index
+state change - and once at proxy startup before any bind allocation,
+where the pure validate_default_evidence_policy() requires the current
+config default to hold and fails with a plain ValueError (a distinct,
+unlabelled startup failure) when it does not; `None` means the
+current finite default, never disabled; a query whose result would
+exceed the remaining per-query or cumulative row quota is detected by
+the bounded fetch loop (at most one sentinel row beyond the remaining
+allowance), counted and discarded whole with the fixed content-free
 budget-exceeded label (no partial result, no silent truncation), and
 exhaustion is sticky; early exhaustion returns the exact completed
 original with zero review calls and late exhaustion aborts the whole

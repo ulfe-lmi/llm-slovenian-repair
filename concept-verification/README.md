@@ -569,30 +569,41 @@ defaults:
   starts (metadata and data statements alike; each start is charged
   before execution, so a cap-exact query completes but the next start
   is denied), at most `RUNTIME_EVIDENCE_MAX_ROWS_PER_QUERY` (4,096)
-  rows fetched by any one query (metadata rows included), at most
-  `RUNTIME_EVIDENCE_MAX_ROWS_TOTAL` (262,144) rows fetched in total
+  rows counted for any one query (metadata rows included), at most
+  `RUNTIME_EVIDENCE_MAX_ROWS_TOTAL` (262,144) rows counted in total
   by the instance (cumulative; never reset per query or per request),
-  at most `RUNTIME_EVIDENCE_MAX_PROGRESS_CALLBACKS` (10,000) native
-  SQLite progress callbacks, with the callback armed every
+  and a native SQLite progress-callback budget that allows
+  `RUNTIME_EVIDENCE_MAX_PROGRESS_CALLBACKS` (10,000) callbacks, with
+  the next crossing callback beyond the budget interrupting the
+  statement and the callback armed every
   `RUNTIME_EVIDENCE_PROGRESS_INTERVAL` (1,000) virtual-machine
   progress units.
-- The default-source policy is the current config values, validated
-  with no coercion at every real constructor use and once at proxy
-  startup, before any bind allocation, by the pure
-  `validate_default_evidence_policy()` (it touches no index, file or
-  connection): bool, nonintegral, nonfinite, nonpositive and
-  native-overflow values (limits above the `2**62` native-safe bound,
-  interval above the C-int bound) are rejected with the fixed
+- The policy is validated with no coercion at two distinct points,
+  with two distinct failures: at every real constructor use, an
+  invalid resolved policy (a caller value, or the current default when
+  `None` is resolved; bool, nonintegral, nonfinite, nonpositive or
+  native-overflow values, i.e. limits above the `2**62` native-safe
+  bound or an interval above the C-int bound) fails with the fixed
   content-free `RUNTIME_EVIDENCE_BUDGET_INVALID` label before any file
-  access, path handling or index state change; `None` always means the
-  current finite config default, never disabled or unbounded.
+  access, path handling or index state change; once at proxy startup,
+  before any bind allocation, the pure
+  `validate_default_evidence_policy()` (it touches no index, file or
+  connection) requires the CURRENT config default policy to hold and
+  fails with a plain `ValueError` - a distinct, unlabelled startup
+  failure - when it does not.  `None` always means the current finite
+  config default, never disabled or unbounded.
 - Overflow never truncates: a query whose result would exceed the
-  remaining per-query or cumulative row quota is interrupted through
-  the native progress handler, its rows are counted against the quotas
-  but never returned, and the whole query fails with the fixed
-  content-free `RUNTIME_EVIDENCE_BUDGET_EXCEEDED` label (no partial
-  result, no silent truncation); exhaustion is sticky for the
-  instance, and later work is denied before execution.
+  remaining per-query or cumulative row quota is detected in Python by
+  the bounded fetch loop, which fetches at most one sentinel row
+  beyond the remaining allowance; the fetched rows are counted against
+  the quotas and the whole result is discarded without being returned,
+  so the query fails with the fixed content-free
+  `RUNTIME_EVIDENCE_BUDGET_EXCEEDED` label (no partial result, no
+  silent truncation); exhaustion is sticky for the instance, and
+  later work is denied before execution.  This is the bounded-fetch
+  detection, not the native progress interrupt, which is the separate
+  complementary boundary for scan/sort work (it can fire zero
+  callbacks).
 - The progress callback counts approximate virtual-machine progress
   only: it is not a CPU, wall-time, memory or I/O bound, it fires zero
   callbacks when a scan completes within less than one armed interval

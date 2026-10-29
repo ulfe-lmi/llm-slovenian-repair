@@ -338,13 +338,16 @@ behavior are unchanged and no new deadline was added; controlled-
 fault evidence only, no spontaneous-native-failure, live-model or
 quality claim; round 024-a (2026-10-28) bounded the read-only runtime
 evidence lookup work with one finite per-instance work-count policy
-(prepared-SQL statement starts, per-query and cumulative fetched rows
-including metadata rows, native SQLite progress callbacks and
-interval) from versioned config defaults validated at every
-constructor use and once at proxy startup before any bind, with fixed
-content-free budget labels, whole-query discard on row overflow (never
-a partial result), sticky exhaustion and the completed-original
-fallback preserved; the progress callback is approximate virtual-
+(prepared-SQL statement starts, per-query and cumulative counted rows
+including metadata rows, a native SQLite progress-callback budget
+whose next crossing callback interrupts, and the callback interval)
+from versioned config defaults, with an invalid value failing at
+constructor use with the fixed content-free budget-invalid label
+before any file access and an invalid config default failing proxy
+startup with a plain ValueError before any bind, whole-query discard
+on row overflow detected by the bounded fetch loop (never a partial
+result), sticky exhaustion and the completed-original fallback
+preserved; the progress callback is approximate virtual-
 machine progress only, not a CPU, time, memory or I/O bound; the
 numeric 024 packaged-API seed remains unclosed; the historical
 single-target

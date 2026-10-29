@@ -218,17 +218,19 @@ class RuntimeCorpus(Corpus):
                 limits.progress_interval,
             )
             self._validate_accessed_schema(connection)
-        except RuntimeCorpusError:
-            self._teardown(connection)
+        except RuntimeCorpusError as exc:
+            self._teardown(connection, pending=exc)
             raise
         except sqlite3.Error as exc:
-            self._teardown(connection)
+            self._teardown(connection, pending=exc)
             raise _classify(exc) from None
-        except BaseException:
+        except BaseException as exc:
             # A preserved caller-control identity (or any other
             # nonordinary control) re-raises AFTER owned cleanup;
-            # nothing is swallowed (order 024-a, requirement 6).
-            self._teardown(connection)
+            # nothing is swallowed, and a cleanup failure may never
+            # replace the caller's own exception (order 024-a,
+            # requirement 6).
+            self._teardown(connection, pending=exc)
             raise
         self.connection = connection
 
@@ -268,14 +270,44 @@ class RuntimeCorpus(Corpus):
                 with contextlib.suppress(sqlite3.Error):
                     cursor.close()
 
-    def _teardown(self, connection: sqlite3.Connection | None) -> None:
-        """Remove the callback and close the owned connection, if any."""
+    def _teardown(
+        self,
+        connection: sqlite3.Connection | None,
+        pending: BaseException | None = None,
+    ) -> None:
+        """Remove the callback and close the owned connection, if any.
+
+        A callback-removal failure never skips the close attempt.
+        When ``pending`` holds the caller's own propagating exception
+        (a constructor failure, a context-body exception in
+        ``__exit__``, or a direct-method caller control), a removal or
+        close failure is not allowed to replace it: the caller
+        re-raises its exact identity.  Otherwise (a normal close) the
+        first non-sqlite removal or close failure is propagated AFTER
+        the close attempt, preserving the normal-close exception
+        semantics; sqlite3.Error teardown failures stay suppressed as
+        before (order 024-a, requirement 6).
+        """
         if connection is None:
             return
-        with contextlib.suppress(sqlite3.Error):
+        removal_error: BaseException | None = None
+        try:
             connection.set_progress_handler(None, 0)
-        with contextlib.suppress(sqlite3.Error):
+        except BaseException as exc:
+            if not isinstance(exc, sqlite3.Error):
+                removal_error = exc
+        close_error: BaseException | None = None
+        try:
             connection.close()
+        except BaseException as exc:
+            if not isinstance(exc, sqlite3.Error):
+                close_error = exc
+        if pending is not None:
+            return
+        if removal_error is not None:
+            raise removal_error
+        if close_error is not None:
+            raise close_error
 
     def close(self) -> None:
         self._teardown(self.connection)
@@ -283,8 +315,17 @@ class RuntimeCorpus(Corpus):
     def __enter__(self) -> RuntimeCorpus:
         return self
 
-    def __exit__(self, *_: object) -> None:
-        self.close()
+    def __exit__(self, *args: object) -> None:
+        # Base-compatible variadic signature (the frozen Corpus declares
+        # ``*_``); the context machinery passes (type, exception,
+        # traceback), so the pending exception is recovered at position 1.
+        # While the body's own exception is propagating, teardown failures
+        # may not replace it (exact identity preserved); a clean body keeps
+        # the normal close exception semantics (order 024-a, requirement 6).
+        pending: BaseException | None = None
+        if len(args) >= 2 and isinstance(args[1], BaseException):
+            pending = args[1]
+        self._teardown(self.connection, pending=pending)
 
     def unigram(self, word: str) -> Evidence:
         key = word.casefold()

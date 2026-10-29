@@ -25,9 +25,9 @@ import string
 import sys
 import tempfile
 import unittest
-from collections.abc import Mapping
+from collections.abc import Callable, Mapping
 from pathlib import Path
-from typing import cast
+from typing import Protocol, cast
 from unittest import mock
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -48,6 +48,7 @@ from evidence_budget import (  # noqa: E402
     make_progress_handler,
     validate_default_evidence_policy,
 )
+from repair import accept as _real_accept  # noqa: E402
 from runtime_corpus import (  # noqa: E402
     REASON_BUDGET_EXCEEDED,
     REASON_BUDGET_INVALID,
@@ -836,9 +837,11 @@ class EngineEarlyLateTests(unittest.TestCase):
 
     def test_late_exhaustion_one_call_usage_retained_edit_discarded(self) -> None:
         captured = self._track_corpora()
-        text = _absent_words(_LATE_N)
-        self.engine.begin_request()
-        repaired = self.engine.repair(text)
+        events, tracked = _tracked_accept_events(_real_accept)
+        with mock.patch.object(proxy, "accept", tracked):
+            text = _absent_words(_LATE_N)
+            self.engine.begin_request()
+            repaired = self.engine.repair(text)
         # The whole optional pass aborted: the exact original is
         # delivered and the earlier accepted edit disappears.
         self.assertEqual(repaired, text)
@@ -869,6 +872,10 @@ class EngineEarlyLateTests(unittest.TestCase):
             acceptance = _sub_mapping(item, "acceptance")
             self.assertFalse(acceptance["accepted"])
             self.assertEqual(acceptance["reason"], "evidence-abort")
+        # R7/R10: the SAME late pass actually accepted a prior
+        # proposal (call-through at acceptance, nothing faked) before
+        # the subsequent budget failure aborted the whole pass.
+        self.assertEqual(events, ["ACCEPTED", REASON_BUDGET_EXCEEDED])
         [corpus] = captured
         # Schema 5 + detection 65529 + exactly 2 accepted-starts = cap.
         self.assertEqual(
@@ -880,6 +887,47 @@ class EngineEarlyLateTests(unittest.TestCase):
         self.assertLess(
             corpus._budget.callbacks, config.RUNTIME_EVIDENCE_MAX_PROGRESS_CALLBACKS
         )
+
+    def test_late_exhaustion_unknown_usage_stays_unknown(self) -> None:
+        # R7/R10: the same late pass with a reviewer that reports no
+        # usage: the original usage stays unknown, never an invented
+        # zero, with the same actual accept-then-abort lifecycle.
+        self.reviewer = _StubReviewer(usage=False)
+        self.engine = proxy.RepairEngine(
+            self.db, self.reviewer, pandoc=_real_spec()
+        )
+        captured = self._track_corpora()
+        events, tracked = _tracked_accept_events(_real_accept)
+        with mock.patch.object(proxy, "accept", tracked):
+            text = _absent_words(_LATE_N)
+            self.engine.begin_request()
+            repaired = self.engine.repair(text)
+        self.assertEqual(repaired, text)
+        self.assertEqual(self.reviewer.calls, 1)
+        [detail] = self.engine.take_details()
+        self.assertEqual(detail["repaired"], text)
+        review = _sub_mapping(detail, "review_batch")
+        self.assertEqual(review["calls"], 1)
+        self.assertEqual(review["usage"], "unknown")
+        failure = _sub_mapping(detail, "evidence_failure")
+        self.assertEqual(
+            failure, {"reason": REASON_BUDGET_EXCEEDED, "stage": "late"}
+        )
+        decisions = detail["reviewer_decisions"]
+        if not isinstance(decisions, list):
+            self.fail("decisions is not a list")
+        for item in decisions:
+            if not isinstance(item, dict):
+                self.fail("decision is not a mapping")
+            acceptance = _sub_mapping(item, "acceptance")
+            self.assertFalse(acceptance["accepted"])
+            self.assertEqual(acceptance["reason"], "evidence-abort")
+        self.assertEqual(events, ["ACCEPTED", REASON_BUDGET_EXCEEDED])
+        [corpus] = captured
+        self.assertEqual(
+            corpus._budget.statements, config.RUNTIME_EVIDENCE_MAX_STATEMENTS
+        )
+        self.assertTrue(corpus._budget.exhausted)
 
     def test_fresh_request_works_after_exhaustion(self) -> None:
         captured = self._track_corpora()
@@ -1058,6 +1106,27 @@ class ProxyRoundTripTests(unittest.TestCase):
             self.assertFalse(acceptance["accepted"])
             self.assertEqual(acceptance["reason"], "evidence-abort")
 
+    def test_late_exhaustion_unknown_usage_proxy_round_trip(self) -> None:
+        # R7/R10 over the full proxy path: unknown usage stays
+        # unknown in both the operator observation and the bounded
+        # detail capture, never an invented zero.
+        answer = _absent_words(_LATE_N)
+        status, payload = self._post(answer, record=True, usage=False)
+        self.assertEqual(status, 200)
+        self.assertEqual(_envelope_text(payload), answer)
+        self.assertEqual(len(_FakeUpstream.recorded), 1)
+        self.assertEqual(
+            self.records[-1], {"review_calls": 1, "reviewer_usage": "unknown"}
+        )
+        [detail] = self.captured_details
+        review = _sub_mapping(detail, "review_batch")
+        self.assertEqual(review["calls"], 1)
+        self.assertEqual(review["usage"], "unknown")
+        failure = _sub_mapping(detail, "evidence_failure")
+        self.assertEqual(
+            failure, {"reason": REASON_BUDGET_EXCEEDED, "stage": "late"}
+        )
+
     def test_malformed_main_is_main_error_not_fallback_success(self) -> None:
         _MainUpstream.status = 200
         _MainUpstream.content_type = "application/json"
@@ -1081,6 +1150,258 @@ class ProxyRoundTripTests(unittest.TestCase):
         self.assertEqual(status, 200)
         self.assertEqual(payload, source)
         self.assertEqual(_FakeUpstream.recorded, [])
+
+
+class _AcceptanceLike(Protocol):
+    """Structural view of a real accept decision (call-through only).
+
+    ``accepted`` is a read-only member: the real decision is a frozen
+    dataclass, so a settable-variable protocol member would not match
+    it.
+    """
+
+    @property
+    def accepted(self) -> bool: ...
+
+
+def _tracked_accept_events(
+    real: Callable[..., _AcceptanceLike],
+) -> tuple[list[str], Callable[..., object]]:
+    """Call-through observation of real accept decisions (R7/R10).
+
+    Wraps the real repair.accept at the proxy module reference: every
+    real decision is recorded as it happens and returned unchanged,
+    and a real RuntimeCorpusError is recorded with its exact reason
+    and re-raised unchanged. No acceptance, corpus or query is faked.
+    """
+    events: list[str] = []
+
+    def tracked(*args: object, **kwargs: object) -> object:
+        try:
+            decision = real(*args, **kwargs)
+        except RuntimeCorpusError as exc:
+            events.append(exc.reason)
+            raise
+        events.append("ACCEPTED" if decision.accepted else "REJECTED")
+        return decision
+
+    return events, tracked
+
+
+class _FaultCursor:
+    """Test-only once-faulting delegate over a real native cursor."""
+
+    def __init__(self, real: sqlite3.Cursor, injected: BaseException) -> None:
+        self._real = real
+        self._injected = injected
+        self._armed = True
+
+    def fetchmany(self, size: int) -> list[tuple[object, ...]]:
+        rows = self._real.fetchmany(size)
+        if self._armed:
+            self._armed = False
+            raise self._injected
+        return rows
+
+    def close(self) -> None:
+        self._real.close()
+
+    def __getattr__(self, name: str) -> object:
+        return getattr(self._real, name)
+
+
+class _FaultConnection(sqlite3.Connection):
+    """Test-only real native connection with one injected fault.
+
+    The fault fires at exactly one named boundary (hook install, the
+    first execute AFTER the real native statement has executed, the
+    first fetch AFTER the real native fetch, or the removal of an
+    armed handler); every other call is the real native call.  The
+    product calls ``connection.execute`` directly (it never goes
+    through ``connection.cursor``), so the execute/fetch faults are
+    installed on ``execute`` at that actual native boundary.
+    """
+
+    boundary: str = "none"
+    injected: BaseException = RuntimeError("unfaulted")
+    removal_armed = False
+    execute_armed = False
+    fetch_armed = False
+    executed_cursors: list[sqlite3.Cursor] = []
+
+    def set_progress_handler(
+        self, callback: Callable[[], int | None] | None, n: int
+    ) -> None:
+        if self.boundary == "remove" and callback is None and self.removal_armed:
+            self.removal_armed = False
+            raise self.injected
+        if self.boundary == "install" and callback is not None:
+            raise self.injected
+        super().set_progress_handler(callback, n)
+
+    def execute(self, sql: str, parameters: object = ()) -> sqlite3.Cursor:
+        # Every real caller (the product's _execute and this test's
+        # closed-connection probe) passes a parameter tuple or the
+        # default; the cast documents that contract at the native call.
+        params = cast("tuple[object, ...]", parameters)
+        if self.boundary == "execute" and self.execute_armed:
+            self.execute_armed = False
+            # The real native statement runs to completion (its cursor
+            # is allocated and retained for the unusability check); the
+            # fault is injected only after that actual native work.
+            real = super().execute(sql, params)
+            self.executed_cursors.append(real)
+            raise self.injected
+        if self.boundary == "fetch" and self.fetch_armed:
+            self.fetch_armed = False
+            real = super().execute(sql, params)
+            # One targeted cast: _FaultCursor is a test-only delegate
+            # over the real native cursor (all other attributes pass
+            # through).
+            return cast("sqlite3.Cursor", _FaultCursor(real, self.injected))
+        return super().execute(sql, params)
+
+
+class NativeTeardownBoundaryTests(unittest.TestCase):
+    """R6: real native connection/cursor fault boundaries.
+
+    One focused case per boundary - hook install, SQL execute/prepare,
+    fetch, and callback removal - on the real read-only synthetic
+    database, with the fault injected at the named native boundary.
+    The product lifecycle under test is the caller-owned one: the real
+    constructor and the context manager plus the documented close();
+    arbitrary direct-method ownership sequences beyond that lifecycle
+    are not claimed as product ownership. Every case verifies the
+    product cleanup (connection closed) BEFORE this test's own
+    cleanup runs, the exact injected or original exception identity,
+    and a next healthy instance.
+    """
+
+    def setUp(self) -> None:
+        self.temp = tempfile.TemporaryDirectory()
+        self.root = Path(self.temp.name)
+        self.db = _evidence_db(self.root)
+        self.before = _index_state(self.root, self.db)
+
+    def tearDown(self) -> None:
+        self.temp.cleanup()
+
+    def _fault_connect(
+        self, boundary: str, injected: BaseException
+    ) -> tuple[
+        Callable[[str, bool, float], sqlite3.Connection],
+        list[_FaultConnection],
+    ]:
+        _FaultConnection.boundary = boundary
+        _FaultConnection.injected = injected
+        _FaultConnection.removal_armed = False
+        _FaultConnection.execute_armed = boundary == "execute"
+        _FaultConnection.fetch_armed = boundary == "fetch"
+        _FaultConnection.executed_cursors = []
+        original_connect = sqlite3.connect
+        connections: list[_FaultConnection] = []
+
+        def connect(
+            database: str,
+            uri: bool = False,
+            timeout: float = 5.0,
+        ) -> sqlite3.Connection:
+            native = original_connect(
+                database, uri=uri, timeout=timeout, factory=_FaultConnection
+            )
+            connections.append(native)
+            return native
+
+        return connect, connections
+
+    def _assert_closed(self, native: sqlite3.Connection) -> None:
+        # Product cleanup is observed BEFORE this test's own cleanup
+        # (tearDown) runs.
+        with self.assertRaises(sqlite3.ProgrammingError):
+            native.execute("SELECT 1")
+
+    def _next_healthy(self) -> None:
+        corpus = RuntimeCorpus(self.db)
+        try:
+            self.assertEqual(corpus.unigram("to").count, 100)
+            self.assertFalse(corpus._budget.exhausted)
+        finally:
+            corpus.close()
+        self.assertEqual(_index_state(self.root, self.db), self.before)
+
+    def test_hook_install_fault_preserves_identity_and_closes(self) -> None:
+        injected = MemoryError("controlled-install")
+        connect, connections = self._fault_connect("install", injected)
+        with mock.patch.object(sqlite3, "connect", connect), \
+                self.assertRaises(MemoryError) as caught:
+            RuntimeCorpus(self.db)
+        self.assertIs(caught.exception, injected)
+        [native] = connections
+        self._assert_closed(native)
+        self._next_healthy()
+
+    def test_sql_execute_fault_preserves_identity_and_closes(self) -> None:
+        injected = KeyboardInterrupt("controlled-execute")
+        connect, connections = self._fault_connect("execute", injected)
+        with mock.patch.object(sqlite3, "connect", connect), \
+                self.assertRaises(KeyboardInterrupt) as caught:
+            RuntimeCorpus(self.db)
+        self.assertIs(caught.exception, injected)
+        [native] = connections
+        self._assert_closed(native)
+        # The real native statement had run: the exact cursor that was
+        # allocated is unusable after the product cleanup.
+        [real_cursor] = native.executed_cursors
+        with self.assertRaises(sqlite3.ProgrammingError):
+            real_cursor.fetchone()
+        self._next_healthy()
+
+    def test_fetch_fault_preserves_identity_and_closes(self) -> None:
+        injected = MemoryError("controlled-fetch")
+        connect, connections = self._fault_connect("fetch", injected)
+        with mock.patch.object(sqlite3, "connect", connect), \
+                self.assertRaises(MemoryError) as caught:
+            RuntimeCorpus(self.db)
+        self.assertIs(caught.exception, injected)
+        [native] = connections
+        self._assert_closed(native)
+        self._next_healthy()
+
+    def test_removal_memory_during_body_control_keeps_original_identity(self) -> None:
+        # A MemoryError removing the handler while a distinct body
+        # KeyboardInterrupt is propagating: the original body control
+        # keeps its exact identity and the connection is still closed.
+        removal = MemoryError("controlled-removal")
+        body = KeyboardInterrupt("controlled-body")
+        connect, connections = self._fault_connect("remove", removal)
+        with mock.patch.object(sqlite3, "connect", connect), \
+                self.assertRaises(KeyboardInterrupt) as caught, RuntimeCorpus(self.db) as corpus:
+            self.assertEqual(corpus.unigram("to").count, 100)
+            [conn] = connections
+            conn.removal_armed = True
+            raise body
+        self.assertIs(caught.exception, body)
+        [native] = connections
+        self._assert_closed(native)
+        self._next_healthy()
+
+    def test_removal_keyboard_on_normal_close_closes_then_raises(self) -> None:
+        # A KeyboardInterrupt removing the handler on a normal close
+        # is still raised (normal-close exception semantics), but only
+        # after the close attempt.
+        injected = KeyboardInterrupt("controlled-removal")
+        connect, connections = self._fault_connect("remove", injected)
+        with mock.patch.object(sqlite3, "connect", connect):
+            corpus = RuntimeCorpus(self.db)
+            self.assertEqual(corpus.unigram("to").count, 100)
+            [conn] = connections
+            conn.removal_armed = True
+            with self.assertRaises(KeyboardInterrupt) as caught:
+                corpus.close()
+        self.assertIs(caught.exception, injected)
+        [native] = connections
+        self._assert_closed(native)
+        self._next_healthy()
 
 
 if __name__ == "__main__":
