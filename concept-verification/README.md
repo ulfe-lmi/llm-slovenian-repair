@@ -568,11 +568,15 @@ defaults:
   `RUNTIME_EVIDENCE_MAX_STATEMENTS` (65,536) prepared-SQL statement
   starts (metadata and data statements alike; each start is charged
   before execution, so a cap-exact query completes but the next start
-  is denied), at most `RUNTIME_EVIDENCE_MAX_ROWS_PER_QUERY` (4,096)
-  rows counted for any one query (metadata rows included), at most
-  `RUNTIME_EVIDENCE_MAX_ROWS_TOTAL` (262,144) rows counted in total
-  by the instance (cumulative; never reset per query or per request),
-  and a native SQLite progress-callback budget that allows
+  is denied); row ALLOWANCES of `RUNTIME_EVIDENCE_MAX_ROWS_PER_QUERY`
+  (4,096) per query and `RUNTIME_EVIDENCE_MAX_ROWS_TOTAL` (262,144)
+  per instance (cumulative; never reset per query or per request;
+  metadata rows included) that bound the result rows of a query that
+  can succeed - a query that overflows an allowance fetches and counts
+  one extra sentinel row beyond it, so the actual counters may exceed
+  an allowance by that one counted sentinel while the whole result is
+  still discarded (below); and a native SQLite progress-callback
+  budget that allows
   `RUNTIME_EVIDENCE_MAX_PROGRESS_CALLBACKS` (10,000) callbacks, with
   the next crossing callback beyond the budget interrupting the
   statement and the callback armed every
