@@ -160,6 +160,25 @@ RUNTIME_ANALYSIS_MAX_CODEPOINTS = 32_768
 RUNTIME_ANALYSIS_MAX_UTF8_BYTES = 131_072
 
 
+# Finite accepted-request admission policy (order 026-a,
+# requirement 1): bounds the proxy's accepted-connection admission
+# after TCP accept - one ACTIVE whole handler plus at most this
+# many WAITING owned requests, each under one absolute monotonic
+# queue wait anchored at the accepted dispatch entry (the clock
+# starts after accept; kernel backlog time before accept is
+# outside it).  These are finite initial engineering defaults, not
+# measured optima, independent of the one active handler and of
+# the existing intake/header/setup/delivery phase budgets, which
+# start their own unchanged clocks after successful admission.
+# No environment/CLI/request/constructor knob or retry is
+# introduced: the values change only through these validated
+# versioned defaults, and each real ConceptProxy construction
+# re-reads the CURRENT config into an immutable per-instance
+# policy before bind/thread/socket allocation.
+PROXY_MAX_QUEUED_REQUESTS = 16
+PROXY_QUEUE_WAIT_SECONDS = 2.0
+
+
 @dataclass(frozen=True)
 class ArchiveSpec:
     name: str
