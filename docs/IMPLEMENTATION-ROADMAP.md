@@ -307,15 +307,22 @@ remaps the numeric 025 identity (the inert negative-control
 evaluation seed) to this bounded analysis-eligibility engineering
 objective on the actual proxy without an ICA request or milestone
 label; the original numeric-025 negative-control evaluation scope
-remains unclosed. Those seed
+remains unclosed. Round 026-a remaps the numeric 026 identity (the
+inert split-integrity evaluation seed) to this bounded
+accepted-connection admission engineering objective on the actual
+proxy without an ICA request or milestone label; the original
+numeric-026 split-integrity evaluation seed scope remains unclosed.
+Those seed
 objectives (including the remapped seed 022, the remapped numeric
-023, the numeric 024 packaged-API seed, and the remapped numeric
-025) as packaged
-library/milestone objectives remain unclosed; following work stays: bounded failure/
-admission/cancellation, packaged library integration, morphology/
+023, the numeric 024 packaged-API seed, the remapped numeric 025,
+and the remapped numeric 026) as packaged
+library/milestone objectives remain unclosed; following work stays: bounded failure/cancellation, packaged library integration, morphology/
 phrases, measured labelled quality, and independent closure.
 A provisional estimate for the remaining packaged-MVP engineering scope is
 8-15 focused engineering days. Research-evaluation completion (requiring
 separate reconciliation of the evaluation objective on the restored,
-integrity-verified 011 inputs; no prior draft activated), packaged MVP, ICA
+integrity-verified 011 inputs; no prior draft activated; per the
+2026-10-30 owner decision no separate human evaluation dataset is a
+functional-MVP prerequisite - functional-MVP readiness is reported
+from software evidence), packaged MVP, ICA
 and deployment remain separate gates.

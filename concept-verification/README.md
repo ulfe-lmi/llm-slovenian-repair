@@ -1042,3 +1042,104 @@ config defaults:
   behind the same scoped override; the two inherited `_walk_blocks`
   argument casts are corrected identity-only to the narrow
   dict-node list type (the recorded two-error strict baseline).
+
+## Bounded accepted-connection admission (order 026-a)
+
+Accepted-connection handling in the runnable proxy is bounded by the
+new `request_admission.py` module with exactly one active request plus
+at most 16 accepted waiting entries, resolved from versioned config
+defaults:
+
+- `PROXY_MAX_QUEUED_REQUESTS` (16 accepted waiting entries) and
+  `PROXY_QUEUE_WAIT_SECONDS` (2.0 queue-wait seconds).  These are
+  finite initial engineering defaults, not measured model optima.  The
+  CURRENT config values are read at construction into an immutable
+  per-instance policy: a running instance keeps its own policy under
+  later config changes, and an invalid default (bool, nonnumeric,
+  zero, negative, nonfinite or out-of-range - the out-of-range int is
+  rejected by integer comparison before any float conversion) fails
+  proxy startup with a plain `ValueError` before any bind allocation.
+  No knob, coercion, zero-disable or retry exists.
+- The accepting loop keeps accepting: while one active request is
+  held, later accepted connections wait (one finite FIFO of accepted
+  entries - no inline fast path that would leave accepted work in the
+  kernel backlog).  OS pre-accept backlog waiting is outside this
+  scope and is stated, not hidden.  Every accepted connection gets
+  one absolute monotonic queue deadline anchored at accept
+  (registration); byte arrival, phase transitions and legitimate
+  short reads never reset it.
+- One owned whole-handler worker (one handler thread; never a
+  thread per rejection) admits live unexpired accepted entries in
+  FIFO order - a fairness guarantee is not claimed.  Overfull
+  admission, deadline expiry, and close/shutdown while waiting each
+  close the exact connection with a fixed content-free 503 -
+  `REQUEST_QUEUE_FULL`, `REQUEST_QUEUE_TIMEOUT`, `REQUEST_QUEUE_CLOSED`
+  respectively - with zero main/analysis/evidence/review work and no
+  extra worker/thread allocation; an expired head cannot block a
+  later eligible entry, a late claim loses to elapsed expiry, and
+  rejected entries never reach main or repair.
+- Rejected, expired and closed entries release their exact ownership
+  (no unbounded completed-registry growth), so the same instance
+  keeps answering the next request; normal raw bodies, useful
+  repair, usage isolation and all pre-existing contracts are
+  unchanged.
+- The lifecycle is one owned monitor plus the single worker, both
+  owned by exact reference BEFORE their fallible start, and the
+  dispatch-readiness commit (flag plus notification under the owned
+  condition) is part of the same ownership region: any control
+  (KeyboardInterrupt, MemoryError or any other BaseException) from a
+  native start or from the readiness commit settles each reference
+  that actually started (ident set - still alive or already ended) -
+  stopped and actually joined - before the first control propagates;
+  a never-started thread is never joined, and one cleanup failure
+  neither skips a later owned resource nor replaces the first
+  current-operation control.
+- Close/shutdown stops admission, closes the listener (no further
+  accepts), rejects every pending waiting entry with the CLOSED code,
+  and actually joins the owned workers on the documented owning close
+  boundary; cleanup and OS scheduling can add elapsed time past the
+  deadline before the bounded return, with no hard-real-time return
+  guarantee.
+- The existing independent phase clocks (capture, intake, header,
+  delivery, setup and the fixed 15-second reviewer exchange) run
+  unchanged on their own axes.  Overall request/wall-clock/CPU/
+  fairness budgeting, active cancellation, remote cancellation and a
+  true review-only queue remain unimplemented; this is bounded
+  accepted-connection admission only, with no queue-based MVP,
+  quality, ICA, milestone, release or deployment claim.  The numeric
+  026 split-integrity evaluation seed remains unclosed; this round
+  remaps the identity to this bounded admission seam (see the roadmap
+  coverage note).
+- New focused tests (`tests/test_request_admission.py`) prove the
+  actual controller and actual proxy boundaries on owned loopback-0
+  sockets/threads with the real engine (qualified Pandoc, real tiny
+  SQLite) and the real deterministic ResponsesReviewer against fake
+  main/review endpoints only: the pure policy invalid/valid matrix
+  and the real occupied-port constructor differential; actual
+  controller capacity, FIFO admission among live unexpired accepted
+  entries, overfull rejection without extra worker/thread allocation
+  or upstream access, and expired-head non-blocking of later
+  eligible entries; the readable-client exact timeout packet while
+  the active is held, the bounded nonreader close with the listener
+  unstalled, and the late-claim loses-to-elapsed-expiry case under an
+  injected claim clock; the monitor/worker start-fault controls
+  (one-shot KI and pre-native-join MemoryError with observed real
+  joins of the exact known threads, never-started threads never
+  joined, the readiness-commit control settling both started
+  workers, claim-clock controls consumed at the owning stop, the
+  dispatch-anchor control closing the accepted socket, shutdown with
+  active and waiting work, the actual named intake-guard start
+  fault closing quietly with zero downstream and no canary in the
+  captured logs and same-instance recovery, and the dead accept loop
+  plus server_close with a preserved worker control); the exact
+  503 codes with zero downstream and the concurrent fake-upstream
+  positive control (direct probe while the active is held); two
+  admitted requests with useful repair and clean completion
+  fidelity; duplicate Content-Length 400 (not an admission 503),
+  non-200 upstream preservation, mode-mismatch 502, delayed SSE
+  byte-exact passthrough, and the intake-guard start-fault closed
+  quiet and recovery.  The ordered old-client privacy helper keeps
+  targeting the actual frozen `concept-client-intake-guard` thread.
+  The five changed Python files are the allowlist; every other
+  concept Python file and old test module is frozen against the
+  accepted base.
