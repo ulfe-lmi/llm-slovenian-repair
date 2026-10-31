@@ -1121,14 +1121,24 @@ defaults:
   or upstream access, and expired-head non-blocking of later
   eligible entries; the readable-client exact timeout packet while
   the active is held, the bounded nonreader close with the listener
-  unstalled, and the late-claim loses-to-elapsed-expiry case under an
-  injected claim clock; the monitor/worker start-fault controls
+  unstalled, the late-claim loses-to-elapsed-expiry case under an
+  injected claim clock, and the exact claim-deadline equality case
+  (102.0 against a 100.0 plus 2.0 anchor) expiring with the fixed
+  TIMEOUT/close, zero handler run and fresh recovery; the
+  monitor/worker start-fault controls
   (one-shot KI and pre-native-join MemoryError with observed real
-  joins of the exact known threads, never-started threads never
-  joined, the readiness-commit control settling both started
-  workers, claim-clock controls consumed at the owning stop, the
-  dispatch-anchor control closing the accepted socket, shutdown with
-  active and waiting work, the actual named intake-guard start
+  joins of the exact known threads, a native start failure before
+  actual creation where no admission thread is ever created and the
+  never-started references are never joined, a deterministically
+  already-ended monitor actually joined by exact reference before
+  the failing start propagates, never-started threads never joined,
+  the readiness-commit control settling both started workers,
+  claim-clock controls consumed at the owning stop, the
+  dispatch-anchor control closing the accepted socket, an entry
+  allocation fault at the actual construction closing the accepted
+  socket with zero downstream, no leaked slot or thread and healthy
+  subsequent operation on the same controller, shutdown with active
+  and waiting work, the actual named intake-guard start
   fault closing quietly with zero downstream and no canary in the
   captured logs and same-instance recovery, and the dead accept loop
   plus server_close with a preserved worker control); the exact
