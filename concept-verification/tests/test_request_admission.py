@@ -950,6 +950,87 @@ class AdmissionExpiryTests(unittest.TestCase):
         self.assertEqual(_admission_threads(), [])
 
 
+    def test_claim_deadline_equality_is_expired(self) -> None:
+        # The existing late case (100 -> 200 for deadline 102)
+        # proves strictly-late loss only; this is the exact
+        # EQUALITY boundary against the actual worker claim: a
+        # controlled clock, real sockets, zero handler run, the
+        # exact fixed TIMEOUT/close and a fresh recovery.
+        server = _GatedServer()
+        cell = [100.0]
+        gate = threading.Event()
+        claim_seen = threading.Event()
+        holder: dict[str, ra.RequestAdmissionController] = {}
+
+        def clock() -> float:
+            controller = holder.get("ctrl")
+            if (
+                controller is not None
+                and controller._handoff is not None
+                and controller._worker is threading.current_thread()
+            ):
+                # The worker's claim clock read - the actual claim
+                # for handler execution: hold it until the observer
+                # advances the clock to exactly the deadline.
+                claim_seen.set()
+                gate.wait(5.0)
+            return cell[0]
+
+        controller = ra.RequestAdmissionController(
+            server, ra.validate_admission_policy(16, 2.0), clock=clock
+        )
+        holder["ctrl"] = controller
+        controller.start()
+        e1: tuple[socket.socket, socket.socket] | None = None
+        e2: tuple[socket.socket, socket.socket] | None = None
+        try:
+            # Deadline anchor: 100.0 + 2.0 = exactly 102.0.
+            e1 = socket.socketpair()
+            controller.dispatch(e1[0], ("127.0.0.1", 17011))
+            self.assertTrue(
+                _wait(
+                    lambda: controller._handoff is not None, timeout=5.0
+                ),
+                "E1 not handed off",
+            )
+            self.assertTrue(claim_seen.wait(5.0), "claim clock not reached")
+            cell[0] = 102.0
+            gate.set()
+            self.assertTrue(
+                _wait(
+                    lambda: controller.pending_count() == 0, timeout=5.0
+                ),
+                "expired-at-equality E1 not released",
+            )
+            result_e1 = _drain(e1[1], timeout=5.0)
+            self.assertEqual(
+                result_e1.data, _expect_packet(ra.CODE_QUEUE_TIMEOUT)
+            )
+            self.assertTrue(result_e1.closed)
+            self.assertEqual(server.calls, [])
+            # A fresh entry anchored at the held clock (deadline
+            # 104.0) is still admitted on the same controller: no
+            # leaked slot, no delayed timer.
+            e2 = socket.socketpair()
+            controller.dispatch(e2[0], ("127.0.0.1", 17012))
+            self.assertTrue(server.wait_calls(1), "E2 not admitted")
+            server.release()
+            self.assertTrue(
+                _wait(lambda: controller.pending_count() == 0),
+                "E2 not released",
+            )
+        finally:
+            for pair in (e1, e2):
+                if pair is not None:
+                    with contextlib.suppress(Exception):
+                        pair[0].close()
+                    with contextlib.suppress(Exception):
+                        pair[1].close()
+            server.release()
+            controller.stop()
+        self.assertEqual(_admission_threads(), [])
+
+
 class AdmissionLifecycleTests(unittest.TestCase):
     """Requirement 5 / T4: native partial worker/guard startup fault
     matrix with exact ownership and caller control - one-shot faults
@@ -1077,6 +1158,156 @@ class AdmissionLifecycleTests(unittest.TestCase):
             # Failure-path cleanup: an idempotent owning close stops
             # a live lifecycle if the fault did not fire.
             controller.stop()
+
+    def test_monitor_start_before_native_creation_preserves_control(
+        self,
+    ) -> None:
+        # Native start failure BEFORE the monitor's actual creation:
+        # no admission thread is ever created, so the exact first
+        # control propagates with the never-started references never
+        # joined, no handler escape and a clean owning close.
+        ki = KeyboardInterrupt("monitor-start-before-creation-KI")
+        server = _GatedServer()
+        controller = ra.RequestAdmissionController(
+            server, ra.validate_admission_policy(16, 2.0)
+        )
+        state = _JoinState()
+        fired: list[bool] = []
+        real_join = threading.Thread.join
+
+        def fake_join(
+            self: threading.Thread, timeout: float | None = None
+        ) -> None:
+            state.real_joins += 1
+            state.joined.append((self.name, self.is_alive()))
+            real_join(self, timeout)
+
+        try:
+            with (
+                mock.patch.object(
+                    threading.Thread,
+                    "start",
+                    _start_fault(_MONITOR, ki, fired),
+                ),
+                mock.patch.object(threading.Thread, "join", fake_join),
+                self.assertRaises(KeyboardInterrupt) as ctx,
+            ):
+                controller.start()
+            self.assertIs(ctx.exception, ki)
+            self.assertIsNone(ctx.exception.__cause__)
+            self.assertEqual(fired, [True])
+            monitor = controller._monitor
+            worker = controller._worker
+            self.assertIsNotNone(monitor)
+            self.assertIsNotNone(worker)
+            if monitor is not None:
+                self.assertIsNone(
+                    monitor.ident,
+                    "native monitor created despite the start fault",
+                )
+            if worker is not None:
+                self.assertIsNone(
+                    worker.ident,
+                    "worker started although the monitor start failed first",
+                )
+            # A never-started thread is never joined; nothing escaped.
+            self.assertEqual(state.real_joins, 0)
+            self.assertEqual(state.joined, [])
+            self.assertEqual(controller.pending_count(), 0)
+            self.assertEqual(_admission_threads(), [])
+            # Ownership cleanup: the documented owning close is a
+            # clean no-join for the never-started exact references.
+            controller.stop()
+            self.assertEqual(state.real_joins, 0)
+            self.assertEqual(controller.pending_count(), 0)
+        finally:
+            # Failure-path cleanup: an idempotent owning close stops
+            # a live lifecycle if the fault did not fire.
+            controller.stop()
+        self.assertEqual(_admission_threads(), [])
+
+    def test_already_ended_monitor_actually_joined_before_failed_start(
+        self,
+    ) -> None:
+        # A deterministically ALREADY-ENDED monitor (born, alive,
+        # then ended) before the failing worker start returns: the
+        # product must actually join that exact ended reference
+        # before the first control propagates - observing not-alive
+        # only after cleanup does not prove this.
+        ki = KeyboardInterrupt("worker-start-KI-after-ended-monitor")
+        server = _GatedServer()
+        controller = ra.RequestAdmissionController(
+            server, ra.validate_admission_policy(16, 2.0)
+        )
+        monitor_ref: dict[str, threading.Thread] = {}
+        joined_threads: list[threading.Thread] = []
+        joined_alive: list[bool] = []
+        real_start = threading.Thread.start
+        real_join = threading.Thread.join
+
+        def fake_start(self: threading.Thread) -> None:
+            if self.name == _MONITOR:
+                real_start(self)
+                monitor_ref["t"] = self
+                return
+            if self.name == _WORKER:
+                mt = monitor_ref.get("t")
+                if mt is None or mt.ident is None:
+                    raise AssertionError("monitor not actually started")
+                if not _wait(lambda: mt.is_alive(), timeout=5.0):
+                    raise AssertionError(
+                        "started monitor never became alive"
+                    )
+                with controller._woken:
+                    controller._closed = True
+                    controller._woken.notify_all()
+                if not _wait(lambda: not mt.is_alive(), timeout=5.0):
+                    raise AssertionError(
+                        "monitor not ended before failing start returned"
+                    )
+                raise ki
+            real_start(self)
+
+        def fake_join(
+            self: threading.Thread, timeout: float | None = None
+        ) -> None:
+            joined_threads.append(self)
+            joined_alive.append(self.is_alive())
+            real_join(self, timeout)
+
+        try:
+            with (
+                mock.patch.object(threading.Thread, "start", fake_start),
+                mock.patch.object(threading.Thread, "join", fake_join),
+                self.assertRaises(KeyboardInterrupt) as ctx,
+            ):
+                controller.start()
+            self.assertIs(ctx.exception, ki)
+            self.assertIsNone(ctx.exception.__cause__)
+            monitor = controller._monitor
+            worker = controller._worker
+            self.assertIsNotNone(monitor)
+            self.assertIsNotNone(worker)
+            if monitor is not None:
+                self.assertIsNotNone(monitor.ident)
+            if worker is not None:
+                self.assertIsNone(worker.ident, "worker actually started")
+                self.assertNotIn(worker, joined_threads)
+            # Exactly one native join happened, on the exact ended
+            # monitor reference, before the control propagated: it
+            # was already ended at the moment of the join call.
+            self.assertEqual(len(joined_threads), 1)
+            if monitor is not None:
+                self.assertIs(joined_threads[0], monitor)
+            self.assertEqual(joined_alive, [False])
+            self.assertTrue(controller._closed)
+            self.assertEqual(controller.pending_count(), 0)
+            self.assertEqual(_admission_threads(), [])
+        finally:
+            # Failure-path cleanup: an idempotent owning close stops
+            # a live lifecycle if the fault did not fire.
+            controller.stop()
+        self.assertEqual(_admission_threads(), [])
 
     def test_readiness_commit_control_settles_started_workers(self) -> None:
         # One-shot control at the dispatch-readiness notification
@@ -1280,6 +1511,94 @@ class AdmissionLifecycleTests(unittest.TestCase):
                 a.close()
             with contextlib.suppress(Exception):
                 b.close()
+            # Idempotent on the success path; stops a live lifecycle
+            # if a mid-test assertion failed.
+            controller.stop()
+        self.assertEqual(_admission_threads(), [])
+
+    def test_entry_allocation_fault_closes_socket_without_leak_and_recovers(
+        self,
+    ) -> None:
+        # Allocation failure at the actual admission-owned dispatch
+        # entry: the ONE-SHOT fault lands in the _QueueEntry
+        # construction call itself - not the clock - so the exact
+        # first control propagates with the exact accepted socket
+        # closed, zero downstream, no leaked slot/thread, and the
+        # same controller still serves a healthy next entry.
+        mem = MemoryError("entry-allocation-MemoryError")
+        server = _PlainServer()
+        faulted: list[bool] = []
+        real_entry = ra._QueueEntry
+
+        def faulting_entry(
+            sock: socket.socket,
+            client_address: tuple[str, int],
+            deadline: float,
+        ) -> ra._QueueEntry:
+            if not faulted:
+                faulted.append(True)
+                raise mem
+            return real_entry(sock, client_address, deadline)
+
+        controller = ra.RequestAdmissionController(
+            server, ra.validate_admission_policy(16, 2.0)
+        )
+        controller.start()
+        a, b = socket.socketpair()
+        e2: tuple[socket.socket, socket.socket] | None = None
+        try:
+            # The one-shot fault is installed only around the faulted
+            # dispatch entry; the restored class serves the recovery.
+            with (
+                mock.patch.object(ra, "_QueueEntry", faulting_entry),
+                self.assertRaises(MemoryError) as ctx,
+            ):
+                controller.dispatch(a, ("127.0.0.1", 17101))
+            self.assertIs(ctx.exception, mem)
+            self.assertEqual(faulted, [True])
+            # The exact accepted socket was closed by the dispatch
+            # failure path; nothing was readable.
+            result = _drain(b, timeout=5.0)
+            self.assertEqual(result.data, b"")
+            self.assertTrue(result.closed)
+            # Zero downstream: nothing queued, rejected or handled.
+            self.assertEqual(controller.pending_count(), 0)
+            self.assertEqual(server.calls, [])
+            # No leaked slot or thread: both fixed owned lifecycle
+            # threads remain started and running.
+            monitor = controller._monitor
+            worker = controller._worker
+            self.assertIsNotNone(monitor)
+            self.assertIsNotNone(worker)
+            if monitor is not None:
+                self.assertIsNotNone(monitor.ident)
+                self.assertTrue(monitor.is_alive())
+            if worker is not None:
+                self.assertIsNotNone(worker.ident)
+                self.assertTrue(worker.is_alive())
+            # Healthy subsequent operation on the same controller:
+            # the next entry is admitted, handled and released.
+            e2 = socket.socketpair()
+            controller.dispatch(e2[0], ("127.0.0.1", 17102))
+            self.assertTrue(
+                _wait(lambda: len(server.calls) == 1, timeout=5.0),
+                "E2 not admitted",
+            )
+            self.assertTrue(
+                _wait(lambda: controller.pending_count() == 0),
+                "E2 not released",
+            )
+            self.assertEqual(len(server.calls), 1)
+        finally:
+            with contextlib.suppress(Exception):
+                a.close()
+            with contextlib.suppress(Exception):
+                b.close()
+            if e2 is not None:
+                with contextlib.suppress(Exception):
+                    e2[0].close()
+                with contextlib.suppress(Exception):
+                    e2[1].close()
             # Idempotent on the success path; stops a live lifecycle
             # if a mid-test assertion failed.
             controller.stop()
