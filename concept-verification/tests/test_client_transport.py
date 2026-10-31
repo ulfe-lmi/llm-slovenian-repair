@@ -2145,8 +2145,19 @@ class IntakePrivacyCleanupTests(unittest.TestCase):
 
     @staticmethod
     def _fail_start(marker: str) -> Callable[[threading.Thread], None]:
-        def fail_start(_thread: threading.Thread) -> None:
-            raise RuntimeError(marker)
+        # Order 026-a requirement 7 qualification: capture the
+        # original start before installing the patch; inject the
+        # same failure only for the existing exact
+        # concept-client-intake-guard thread and delegate every
+        # other thread to the real start, so this actual intake
+        # fault still fires after admission rather than passing
+        # from an earlier admission startup failure.
+        real_start = threading.Thread.start
+
+        def fail_start(thread: threading.Thread) -> None:
+            if thread.name == "concept-client-intake-guard":
+                raise RuntimeError(marker)
+            real_start(thread)
 
         return fail_start
 

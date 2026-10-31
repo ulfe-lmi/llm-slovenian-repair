@@ -8,6 +8,7 @@ import json
 import math
 import os
 import re
+import socket
 import sys
 import tempfile
 import time
@@ -24,6 +25,7 @@ import capture_transport
 import client_transport
 import delivery_transport
 import header_transport
+import request_admission
 import upstream_setup
 from batch_review import (
     BOUND_REVIEW_REASONS,
@@ -66,6 +68,17 @@ from responses_contract import (
     validate_request,
 )
 from runtime_corpus import RuntimeCorpus, RuntimeCorpusError
+
+# Native accepted-object class captured at import time.  BaseServer
+# types the accepted request as the TCP/UDP union; this TCP
+# HTTPServer accept boundary always yields the socket member, and
+# the captured reference keeps that narrowing sound for the whole
+# process even when a frozen native supervised-test child script
+# legitimately reassigns the mutable socket.socket module attribute
+# while the accept loop is running (order 026-a, requirements 2
+# and 3).  It is not a new protocol behavior and adds no UDP
+# support or claim.
+_SOCKET_CLASS = socket.socket
 
 
 class ProxyError(ValueError):
@@ -1591,6 +1604,16 @@ class ConceptProxy(HTTPServer):
         # startup contract.  At-use invalidity later becomes the
         # fixed content-free ANALYSIS_POLICY_INVALID bypass.
         analysis_policy.current_limits()
+        # Finite accepted-request admission policy (order 026-a,
+        # requirement 1): the CURRENT config admission defaults
+        # must hold before any bind allocation or traffic is
+        # accepted.  This pure validation reads no file, model,
+        # network or index, so a startup-invalid policy fails
+        # here, before bind, with a plain ValueError.  The
+        # validated policy is immutable per instance: running
+        # instances retain it while later config defaults apply
+        # only to newly constructed instances.
+        self._admission_policy = request_admission.current_admission_policy()
         super().__init__(address, _Handler)
         self.upstream = parsed
         self.engine = engine
@@ -1603,6 +1626,112 @@ class ConceptProxy(HTTPServer):
             raise ValueError("trace directory must not be a symlink")
         if trace_dir is not None:
             trace_dir.mkdir(parents=True, exist_ok=True)
+        # One owned accepted-request admission lifecycle (order
+        # 026-a): the fixed owned worker/monitor threads start
+        # synchronously here, before request traffic, and commit
+        # to dispatch only after this constructor has fully
+        # completed; partial-startup ownership is contained inside
+        # the controller (started threads stopped and actually
+        # joined, never-started threads never joined, first
+        # current-operation control preserved).  A construction or
+        # thread startup failure must not leave the bound listener
+        # socket open: the exact first control is preserved and the
+        # listener is closed as independent best-effort cleanup
+        # (order 026-a, requirement 5).
+        try:
+            self._admission = request_admission.RequestAdmissionController(
+                self, self._admission_policy
+            )
+            self._admission.start()
+        except BaseException:
+            with contextlib.suppress(Exception):
+                super().server_close()
+            raise
+
+    def _handle_request_noblock(self) -> None:
+        # The accepting loop (order 026-a, requirements 2 and 3):
+        # accept, then one owned admission decision - admit in
+        # accepted order, or one fixed bounded 503 and close -
+        # with the one absolute queue deadline anchored inside
+        # dispatch before admission allocation/queue work.  The
+        # accepting loop never runs a request, so it keeps
+        # accepting while one handler is held; the admitted entry
+        # is later handled inline by the single owned handler
+        # worker through the standard process_request boundary,
+        # preserving the existing outer HTTP error semantics -
+        # and the frozen test fixtures' process_request
+        # completion observation - exactly.
+        # The narrowing below uses the import-time captured class
+        # (see _SOCKET_CLASS above) rather than the mutable module
+        # attribute; the impossible non-socket member routes to the
+        # existing content-free server error boundary.
+        try:
+            request, client_address = self.get_request()
+        except OSError:
+            return
+        if not self.verify_request(request, client_address):
+            return
+        if not isinstance(request, _SOCKET_CLASS):
+            self.handle_error(request, client_address)
+            return
+        try:
+            self._admission.dispatch(request, client_address)
+        except Exception:
+            self.handle_error(request, client_address)
+            with contextlib.suppress(Exception):
+                self.shutdown_request(request)
+        except BaseException:
+            with contextlib.suppress(Exception):
+                self.shutdown_request(request)
+            raise
+
+    def shutdown(self) -> None:
+        # Stop the accepting loop first, then the documented
+        # owning admission close boundary (order 026-a,
+        # requirement 5): stop admission, cancel/close every
+        # waiting entry with the fixed closed code, release every
+        # owned slot and actually join the exact owned workers
+        # before returning; an owned nonordinary worker control is
+        # re-raised here at the owning supervisor.  Must run from
+        # a different thread than serve_forever (native
+        # BaseServer contract).  The admission close may re-raise a
+        # preserved owned control, so the listener close is an
+        # independent finalization step that runs before the
+        # control propagates; the native shutdown threading
+        # semantics are unchanged.
+        super().shutdown()
+        try:
+            self._admission.stop()
+        except BaseException:
+            with contextlib.suppress(Exception):
+                super().server_close()
+            raise
+
+    def server_close(self) -> None:
+        # The accepting-loop socket close boundary (order 026-a,
+        # requirement 5): the documented owning admission close
+        # runs BEFORE the listener socket is closed, so a close of
+        # the accepting loop alone can never leave the fixed owned
+        # workers running.  The admission close may re-raise a
+        # preserved owned control, and the admission lifecycle may
+        # not exist yet (the native constructor failure path
+        # virtually invokes this method before _admission is
+        # constructed), so the listener close is an independent
+        # finalization step that runs in every case and any
+        # preserved control is re-raised only after it.  Idempotent
+        # after an owning shutdown close.
+        control: BaseException | None = None
+        admission: (
+            request_admission.RequestAdmissionController | None
+        ) = getattr(self, "_admission", None)
+        if admission is not None:
+            try:
+                admission.stop()
+            except BaseException as exc:
+                control = exc
+        super().server_close()
+        if control is not None:
+            raise control
 
     def handle_error(self, request: object, client_address: object) -> None:
         # Bounded content-free intake diagnostics (order 020-a,
