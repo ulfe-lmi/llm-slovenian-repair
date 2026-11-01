@@ -1,12 +1,24 @@
 # Distinct readiness claims
 
+Current functional scope (owner decision 2026-10-30, reaffirmed
+2026-11-01): there will be NO separate human evaluation dataset - it is
+excluded, not deferred and not merely optional; functional readiness is
+reported from the implemented runnable behavior plus a fresh independent
+software/operating-path audit; linguistic quality remains unmeasured; and
+deployment/exposure remain separately owner-authorized. The programme rows
+below are historical claims, and where held-out human-labelled criteria
+appear they are a historical unexecuted programme - not a current future
+dataset plan.
+
 Development merged: exact objective accepted by strategy after independent review,
 required final-head CI, scope/docs/risk/rollback and D1 checks. Does not imply release.
 Internal demonstrator: PLAN D01–D07 paths/evidence, keep/replace/reject/no-call cases,
 fresh independent ICA and human-scoped milestone judgment; synthetic isolated work
 may retain open D1 only if its registered gate is not crossed.
-Experimental MVP: M01–M07, all eight PLAN §16 criteria, real-boundary isolation,
-held-out human-labelled benefit/harm/cost and fresh ICA. Queue completion is insufficient.
+Experimental MVP (historical unexecuted programme; not a current future
+dataset plan): M01–M07, all eight PLAN §16 criteria, real-boundary
+isolation, held-out human-labelled benefit/harm/cost and fresh ICA. Queue
+completion is insufficient.
 External demo/pilot: applicable DHA entries latest verified human ACCEPTED and
 explicit human authorization for exposure/data/trust, in addition to scoped product
 evidence. Qualified service/production: S01–S05, rights, operations/rollback/resource/

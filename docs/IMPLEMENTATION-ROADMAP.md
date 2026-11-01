@@ -321,8 +321,11 @@ not falsely completed. Those seed
 objectives (including the remapped seed 022, the remapped numeric
 023, the numeric 024 packaged-API seed, the remapped numeric 025,
 the remapped numeric 026, and the remapped numeric 027) as packaged
-library/milestone objectives remain unclosed; following work stays: bounded failure/cancellation, packaged library integration, morphology/
-phrases, measured labelled quality, and independent closure.
+library/milestone objectives remain unclosed; following work for those
+historical packaged programme objectives (historical programme text, not
+a planned separate dataset/research restart) stays: bounded
+failure/cancellation, packaged library integration, morphology/phrases,
+measured labelled quality, and independent closure.
 A provisional estimate for the remaining packaged-MVP engineering scope is
 8-15 focused engineering days; that packaged library/milestone scope is
 not a requirement of the runnable proxy. Per the owner decision
@@ -331,7 +334,11 @@ evaluation dataset - it is excluded, not deferred and not merely
 optional - so research-evaluation completion (which would additionally
 require separate reconciliation of the evaluation objective on the
 restored, integrity-verified 011 inputs; no prior draft activated) is not
-a functional-MVP prerequisite; functional-MVP readiness is reported from
-software evidence. Research-evaluation completion, packaged MVP, ICA and
-deployment remain separate gates for their own programmes, not gates of
-the runnable proxy.
+a functional-MVP prerequisite, and the labelled-dataset/research and
+packaged-library programme text above is historical programme text, not a
+planned restart. That exclusion does NOT waive the retained duties:
+functional-MVP closure still requires a fresh independent
+software/operating-path audit of the implemented runnable behavior
+(functional readiness reported from software evidence, linguistic quality
+unmeasured), and any deployment/exposure remains separately
+owner-authorized.

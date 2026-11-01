@@ -360,9 +360,13 @@ focused-engineering-day estimate covers the remaining packaged-MVP
 engineering scope, which is not a runnable-proxy requirement; per the
 owner decision (2026-10-30, reaffirmed 2026-11-01) there will be NO
 separate human evaluation dataset - it is excluded, not deferred and not
-merely optional - and functional-MVP readiness is reported from software
-evidence; research-evaluation completion, ICA and deployment remain
-separate gates for their own programmes, not gates of the runnable proxy.
+merely optional - and the labelled-dataset/research and packaged-library
+programmes are not runnable-proxy requirements. That exclusion does NOT
+waive the retained duties: functional-MVP closure still requires a fresh
+independent software/operating-path audit of the implemented runnable
+behavior (functional readiness reported from software evidence, linguistic
+quality unmeasured), and any deployment/exposure remains separately
+owner-authorized.
 See
 [development](docs/DEVELOPMENT.md), [runbook](docs/OAP-RUNBOOK.md),
 [role setup](docs/CODEX-ROLE-SETUP.md), [readiness](docs/READINESS.md) and

@@ -1217,36 +1217,49 @@ existing acceptance flow:
   works.
 - New focused tests (`tests/test_composed_validation.py`, 30 tests)
   in three layers: (i) DIRECT VALIDATOR tests that call
-  `validate_composed`/`accept`/`tokenize` against the real read-only
-  tiny SQLite with no Engine (the mapping-boundary negatives - slice
-  mismatch, missing token, out-of-range each raise while ordinary
-  group rejection does not - and the exact n-gram-key sequence in
-  which the internal span words are never used as neighbor keys);
-  (ii) ACTUAL ENGINE tests that run `RepairEngine.repair` with the
-  installed qualified Pandoc and real read-only tiny SQLite and only
-  the reviewer faked outside the Engine (the explicit zero-count
-  decline with positive and CENSORED controls - one review call,
-  source/index unchanged - the actual root composed-support
-  reproducer with a single-edit positive control, compatible
-  scalar/far edits surviving, the protected-interval barrier,
-  repeated occurrences, the late budget exhaustion at composed
-  revalidation - completed original, one call, known/unknown usage,
-  31 statements, owned connection closed, fresh recovery - and the
-  whole-pass mapping-abort integration with a stale original-slice
-  fault injected only at the actual owned `ComposedRecord`
-  construction: completed original, both final records false with
-  the mapping reason, actual one review call, known/unknown usage,
-  the owned SQLite connection actually closed, and same-engine
-  recovery after the fault is removed); (iii) ACTUAL HTTP tests over
-  owned fake main/review endpoints on loopback (JSON and delayed-SSE
-  all-conflict raw envelope bytes, useful compatible-edit result,
-  same-proxy next-request health). The multiword-target cases prove
-  conflict rejection and whole-span external-neighbor mapping for
-  selected multiword targets - not positive production of multiword
-  targets (no phrase producer); neighbor exclusion is relative to the
-  current span (its internal words are never its own external
-  neighbors), not a claim that another span's words can never appear
-  in context queries.
+  `validate_composed`/`accept`/`tokenize` directly against the real
+  read-only tiny SQLite with no Engine (the mapping-boundary
+  negatives - rebased slice mismatch, missing token, out-of-range
+  each raise while a supported record survives alone, ordinary group
+  rejection is not a mapping failure, and the protected barrier
+  rejects the member - with neighbor exclusion relative to the
+  current span: a span's internal words are never its own external
+  neighbors); (ii) ACTUAL ENGINE tests that run
+  `RepairEngine.repair` with the installed qualified Pandoc and real
+  read-only tiny SQLite, with the reviewer as the only faked
+  component outside the Engine and two disclosed bounded test-only
+  injections: preassigned multiword TARGET injection in the two
+  multiword cases (`_injected_detect` wraps the real detector, calls
+  it with the same arguments, discards its result and returns a
+  fixed multiword candidate tuple, because the real detector only
+  selects single-token spans - every downstream boundary, tokenize,
+  prepare, batch, acceptance, composed validation and apply, is
+  real), and the stale original-slice record-construction fault
+  (injected only at the actual owned `ComposedRecord`
+  construction) alongside the call-through accept observer. Engine
+  cases: the explicit zero-count decline with positive and CENSORED
+  controls (one review call, source/index unchanged), the actual
+  root composed-support reproducer with a single-edit positive
+  control, compatible scalar/far edits surviving, the
+  protected-interval barrier, repeated occurrences, the exact
+  n-gram-key sequence in which the internal span words are never
+  queried as neighbor keys (disclosed-target multiword case), the
+  late budget exhaustion at composed revalidation (completed
+  original, one call, known/unknown usage, 31 statements, owned
+  connection closed, fresh recovery), and the whole-pass
+  mapping-abort integration (completed original, both final records
+  false with the mapping reason, actual one review call,
+  known/unknown usage, the owned SQLite connection actually closed,
+  and same-engine recovery after the fault is removed); (iii)
+  ACTUAL HTTP tests over owned fake main/review endpoints on
+  loopback (JSON and delayed-SSE all-conflict raw envelope bytes,
+  useful compatible-edit result, same-proxy next-request health).
+  The multiword-target cases establish validation behavior for the
+  SUPPLIED target spans - conflict rejection and whole-span
+  external-neighbor mapping - not actual production of such spans
+  (no phrase producer); neighbor exclusion is relative to the
+  current span, not a claim that another span's words can never
+  appear in context queries.
 - The four changed/new Python files (the two existing changes in
   `repair.py` and `proxy.py` and the two new files) are the allowlist;
   every other concept Python file and old test module is frozen
