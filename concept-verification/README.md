@@ -1292,18 +1292,22 @@ changed).
   word (frozen tokenizer shape, only letters or the tokenizer's own
   internal apostrophe/hyphen joiners; digits, symbols and machine
   fragments are never valid words).
-- An EXACT positive replacement unigram is required, then one route
-  decides: a corpus-known single-word original needs at least one
-  EXACT comparable same-order fixed-anchor context with candidate count
-  >= 2*max(original,1) and no weaker known local context; an
-  UNAVAILABLE/nonpositive single-word original may be accepted only as
-  an EXACT positive one-code-point edit (both units at least 3 code
-  points) with actual positive adjacent context and no opposing known
-  local context. Unknown original context is never zero, a known-zero
-  replacement context opposes, and no model confidence, popularity,
-  threshold programme or different-length raw count authorizes. The
-  factor-two guard and the typo route are uncalibrated contained
-  engineering policy, not quality results.
+- An EXACT positive replacement unigram is required, then two routes
+  decide: an ordinary word or phrase proposal needs at least one
+  matching EXACT comparable same-order fixed-anchor original/replacement
+  context with candidate count >= 2*max(original context count,1) and no
+  weaker known corresponding context; this route applies even when the
+  original unigram is UNAVAILABLE (a distant unknown original whose
+  original N-gram context is known), and unknown original context
+  supplies no support. A separate narrow possible-typo route permits an
+  UNAVAILABLE/nonpositive single-word original at exactly one casefolded
+  code-point edit from an EXACT positive known single replacement (both
+  units at least 3 code points) with actual positive adjacent context and
+  no opposing known local context. Unknown original context is never
+  zero, a known-zero replacement context opposes, and no model
+  confidence, popularity, threshold programme or different-length raw
+  count authorizes. The factor-two guard and the typo route are
+  uncalibrated contained engineering policy, not quality results.
 - Useful supported word changes and disclosed preassigned phrase
   CONSUMER changes survive (the real detector still produces only
   single-token candidates - these cases prove the consumer boundary,

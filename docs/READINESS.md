@@ -69,9 +69,11 @@ original), and one identical runtime lexical-acceptance policy
 for individual and composed proposal validation (structural and
 whole-token span guards with the immediately adjacent proved
 neighbor, the lexical-unit gate, the EXACT comparable same-order
-factor-two anchored-context route for corpus-known originals, the
-narrow one-code-point possible-typo route for unknown originals,
-unknown context never coerced to zero, useful supported word and
+factor-two anchored-context route (for corpus-known originals and, with
+an exact known original N-gram context, for distant originals whose
+unigram is unavailable - the unknown unigram supplies no support), the
+separate narrow one-code-point possible-typo route for a single
+unavailable/nonpositive original, unknown context never coerced to zero, useful supported word and
 disclosed preassigned phrase-consumer changes surviving and
 unsupported changes abstaining), in the isolated runnable proxy only, with no
 scientific protocol, model, or result change and no packaged
