@@ -353,12 +353,16 @@ numeric 024 packaged-API seed remains unclosed; round 025-a (2026-10-29) bounded
 single-target
 evaluator prompt/API remains unchanged (see
 `concept-verification/README.md`) - runnable-proxy engineering
-evidence only; the seed 013/014/015/020/022/024/025/026/027 packaged objectives remain open. A
-provisional 8-15 focused-engineering-day estimate covers the remaining
-packaged-MVP engineering scope; per the 2026-10-30 owner decision no
-separate human evaluation dataset is a functional-MVP prerequisite
-(functional-MVP readiness is reported from software evidence), and
-research-evaluation completion, ICA and deployment remain separate gates.
+evidence only; the seed 013/014/015/020/022/024/025/026/027 packaged
+objectives remain open as packaged library/milestone objectives, not as
+requirements of the runnable proxy. A provisional 8-15
+focused-engineering-day estimate covers the remaining packaged-MVP
+engineering scope, which is not a runnable-proxy requirement; per the
+owner decision (2026-10-30, reaffirmed 2026-11-01) there will be NO
+separate human evaluation dataset - it is excluded, not deferred and not
+merely optional - and functional-MVP readiness is reported from software
+evidence; research-evaluation completion, ICA and deployment remain
+separate gates for their own programmes, not gates of the runnable proxy.
 See
 [development](docs/DEVELOPMENT.md), [runbook](docs/OAP-RUNBOOK.md),
 [role setup](docs/CODEX-ROLE-SETUP.md), [readiness](docs/READINESS.md) and

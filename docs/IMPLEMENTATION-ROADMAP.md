@@ -324,10 +324,14 @@ the remapped numeric 026, and the remapped numeric 027) as packaged
 library/milestone objectives remain unclosed; following work stays: bounded failure/cancellation, packaged library integration, morphology/
 phrases, measured labelled quality, and independent closure.
 A provisional estimate for the remaining packaged-MVP engineering scope is
-8-15 focused engineering days. Research-evaluation completion (requiring
-separate reconciliation of the evaluation objective on the restored,
-integrity-verified 011 inputs; no prior draft activated; per the
-2026-10-30 owner decision no separate human evaluation dataset is a
-functional-MVP prerequisite - functional-MVP readiness is reported
-from software evidence), packaged MVP, ICA
-and deployment remain separate gates.
+8-15 focused engineering days; that packaged library/milestone scope is
+not a requirement of the runnable proxy. Per the owner decision
+(2026-10-30, reaffirmed 2026-11-01) there will be NO separate human
+evaluation dataset - it is excluded, not deferred and not merely
+optional - so research-evaluation completion (which would additionally
+require separate reconciliation of the evaluation objective on the
+restored, integrity-verified 011 inputs; no prior draft activated) is not
+a functional-MVP prerequisite; functional-MVP readiness is reported from
+software evidence. Research-evaluation completion, packaged MVP, ICA and
+deployment remain separate gates for their own programmes, not gates of
+the runnable proxy.

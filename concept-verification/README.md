@@ -1216,29 +1216,37 @@ existing acceptance flow:
   semantics; and a healthy next request on the same proxy still
   works.
 - New focused tests (`tests/test_composed_validation.py`, 30 tests)
-  cover, with the actual Engine, installed qualified Pandoc, real
-  read-only tiny SQLite and only the reviewer faked: the explicit
-  zero-count decline with positive and CENSORED controls (one review
-  call, source/index unchanged); the actual root composed-support
-  reproducer with a single-edit positive control (interacting
-  neighbor group rejected as a whole, compatible far/pair edits
-  surviving, protected-interval barrier, repeated occurrences,
-  multiword adjacency via whole-neighbor-token containment); the
-  mapping-boundary negatives (slice mismatch, missing token,
-  out-of-range each raise; ordinary group rejection does not); the
-  exact n-gram-key sequence with the internal span words never used
-  as neighbor keys; the late budget exhaustion at composed
-  revalidation (completed original, one call, known/unknown usage,
-  31 statements, owned connection closed, fresh recovery); the
-  whole-pass mapping-abort integration with the stale original-slice
+  in three layers: (i) DIRECT VALIDATOR tests that call
+  `validate_composed`/`accept`/`tokenize` against the real read-only
+  tiny SQLite with no Engine (the mapping-boundary negatives - slice
+  mismatch, missing token, out-of-range each raise while ordinary
+  group rejection does not - and the exact n-gram-key sequence in
+  which the internal span words are never used as neighbor keys);
+  (ii) ACTUAL ENGINE tests that run `RepairEngine.repair` with the
+  installed qualified Pandoc and real read-only tiny SQLite and only
+  the reviewer faked outside the Engine (the explicit zero-count
+  decline with positive and CENSORED controls - one review call,
+  source/index unchanged - the actual root composed-support
+  reproducer with a single-edit positive control, compatible
+  scalar/far edits surviving, the protected-interval barrier,
+  repeated occurrences, the late budget exhaustion at composed
+  revalidation - completed original, one call, known/unknown usage,
+  31 statements, owned connection closed, fresh recovery - and the
+  whole-pass mapping-abort integration with a stale original-slice
   fault injected only at the actual owned `ComposedRecord`
-  construction (completed original, both final records false with
+  construction: completed original, both final records false with
   the mapping reason, actual one review call, known/unknown usage,
   the owned SQLite connection actually closed, and same-engine
-  recovery after the fault is removed); and the actual HTTP
-  JSON/delayed-SSE round trips (all-conflict raw envelope bytes,
-  useful compatible-edit result, and same-proxy next-request
-  health).
+  recovery after the fault is removed); (iii) ACTUAL HTTP tests over
+  owned fake main/review endpoints on loopback (JSON and delayed-SSE
+  all-conflict raw envelope bytes, useful compatible-edit result,
+  same-proxy next-request health). The multiword-target cases prove
+  conflict rejection and whole-span external-neighbor mapping for
+  selected multiword targets - not positive production of multiword
+  targets (no phrase producer); neighbor exclusion is relative to the
+  current span (its internal words are never its own external
+  neighbors), not a claim that another span's words can never appear
+  in context queries.
 - The four changed/new Python files (the two existing changes in
   `repair.py` and `proxy.py` and the two new files) are the allowlist;
   every other concept Python file and old test module is frozen

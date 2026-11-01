@@ -58,4 +58,13 @@ scientific protocol, model, or result change and no packaged
 library, quality, or deployment claim. The
 packaged-MVP row above carries a
 provisional 8-15 focused-engineering-day estimate for its remaining scope
-after those rounds. ICA and deployment keep their separate human gates.
+after those rounds; that packaged library/milestone scope and the
+historical Experimental MVP row above (with its held-out human-labelled
+benefit/harm/cost criteria) are separate programmes, not requirements of
+the runnable proxy, and their historical criteria may remain unproven.
+Per the owner decision (2026-10-30, reaffirmed 2026-11-01) there will be
+NO separate human evaluation dataset - it is excluded, not deferred and
+not merely optional - so the held-out labelled programme cannot be
+activated for the functional scope; functional-MVP readiness is reported
+from software evidence. ICA and deployment keep their separate human
+gates.
