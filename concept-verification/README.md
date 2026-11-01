@@ -1271,3 +1271,56 @@ existing acceptance flow:
   to this bounded validation seam (see the roadmap coverage note);
   the original analyzer scope is not executed and is not falsely
   completed.
+
+## One runtime lexical-acceptance policy (order 028-a)
+
+The runnable proxy now validates individual proposals and the composed
+result with ONE identical runtime lexical-acceptance policy (new module
+`runtime_acceptance.py`, reached by import routing only in `proxy.py`
+and `composed_validation.py`; every other function byte-frozen; the raw
+historical `repair.accept`/`apply_edits` path and the single-target
+evaluator stay frozen and separated - only the acceptance routing
+changed).
+
+- Structural guards (stale candidate/neighbor bounds, protected,
+  barrier, kept, wider-or-identity, control/newline, markup),
+  whole-token span tiling with the IMMEDIATELY adjacent proved neighbor
+  (a skipped word, a wrong occurrence, a partial word or an
+  inside-target neighbor is stale; unproved bounds cannot manufacture
+  support), bounded size (1-4 words, word-length sum 80), and a
+  lexical-unit gate on every replacement unit AND every original-span
+  word (frozen tokenizer shape, only letters or the tokenizer's own
+  internal apostrophe/hyphen joiners; digits, symbols and machine
+  fragments are never valid words).
+- An EXACT positive replacement unigram is required, then one route
+  decides: a corpus-known single-word original needs at least one
+  EXACT comparable same-order fixed-anchor context with candidate count
+  >= 2*max(original,1) and no weaker known local context; an
+  UNAVAILABLE/nonpositive single-word original may be accepted only as
+  an EXACT positive one-code-point edit (both units at least 3 code
+  points) with actual positive adjacent context and no opposing known
+  local context. Unknown original context is never zero, a known-zero
+  replacement context opposes, and no model confidence, popularity,
+  threshold programme or different-length raw count authorizes. The
+  factor-two guard and the typo route are uncalibrated contained
+  engineering policy, not quality results.
+- Useful supported word changes and disclosed preassigned phrase
+  CONSUMER changes survive (the real detector still produces only
+  single-token candidates - these cases prove the consumer boundary,
+  not a phrase producer), and unsupported changes abstain with the
+  exact completed original, the actual review call/usage and the exact
+  owned cleanup preserved.
+- OLD frozen fixtures under the stricter policy: the two
+  real-Pandoc success tests in `tests/test_pandoc_protection.py` (the
+  old presenetliv->tako positive lacks explicit original-context rows
+  in the byte-frozen fixture; a one-row same-PR follow-up is planned)
+  and the five useful-repair tests in `tests/test_analysis_policy.py`
+  (the old aaa->repla positive has no original evidence and declines
+  with local-evidence-not-stronger; the module is green on a pristine
+  accepted base) are truthfully retained as this round's failures.
+- The eight changed/new Python files are the allowlist; the other 43
+  concept Python files and 12 old test modules are frozen against the
+  accepted base. This is finite validation correction of the existing
+  strict-evidence/composition requirements in the runnable proxy - not
+  a new research programme, phrase producer, packaged-library,
+  milestone, ICA or deployment claim.

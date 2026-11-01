@@ -42,7 +42,7 @@ publication-evidence overclaims in the new recovery record, with no
 scientific protocol, model, or result change.
 Rounds 013-a, 014-a, 014-b, and 015-a (2026-10-26) and rounds 016-a,
 017-a, 018-a, 019-a, 020-a, 021-a (2026-10-27) and 022-a,
-023-a, 024-a (2026-10-28), 025-a (2026-10-29), 026-a (2026-10-30) and 027-a (2026-11-01) confer no product label: they
+023-a, 024-a (2026-10-28), 025-a (2026-10-29), 026-a (2026-10-30), 027-a (2026-11-01) and 028-a (2026-11-01) confer no product label: they
 implement the owner-selected Pandoc structural-parsing proxy, one
 bounded occurrence-addressed reviewer batch, the terminal-answer-copy
 preflight, the explicit text-only Responses request contract, the
@@ -65,7 +65,15 @@ censored controls, and the composed-result revalidation of all
 surviving edits (interacting conflict groups rejected and rebuilt
 from the original, compatible multiple edits surviving, and
 unprovable validation mappings abstaining to the completed
-original), in the isolated runnable proxy only, with no
+original), and one identical runtime lexical-acceptance policy
+for individual and composed proposal validation (structural and
+whole-token span guards with the immediately adjacent proved
+neighbor, the lexical-unit gate, the EXACT comparable same-order
+factor-two anchored-context route for corpus-known originals, the
+narrow one-code-point possible-typo route for unknown originals,
+unknown context never coerced to zero, useful supported word and
+disclosed preassigned phrase-consumer changes surviving and
+unsupported changes abstaining), in the isolated runnable proxy only, with no
 scientific protocol, model, or result change and no packaged
 library, quality, or deployment claim. The
 packaged-MVP row above carries a
