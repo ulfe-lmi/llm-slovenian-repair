@@ -1271,3 +1271,66 @@ existing acceptance flow:
   to this bounded validation seam (see the roadmap coverage note);
   the original analyzer scope is not executed and is not falsely
   completed.
+
+## One runtime lexical-acceptance policy (order 028-a)
+
+The runnable proxy now validates individual proposals and the composed
+result with ONE identical runtime lexical-acceptance policy (new module
+`runtime_acceptance.py`, reached by import routing only in `proxy.py`
+and `composed_validation.py`; every other function byte-frozen; the raw
+historical `repair.accept`/`apply_edits` path and the single-target
+evaluator stay frozen and separated - only the acceptance routing
+changed).
+
+- Structural guards (stale candidate/neighbor bounds, protected,
+  barrier, kept, wider-or-identity, control/newline, markup),
+  whole-token span tiling with the IMMEDIATELY adjacent proved neighbor
+  (a skipped word, a wrong occurrence, a partial word or an
+  inside-target neighbor is stale; unproved bounds cannot manufacture
+  support), bounded size (1-4 words, word-length sum 80), and a
+  lexical-unit gate on every replacement unit AND every original-span
+  word (frozen tokenizer shape, only letters or the tokenizer's own
+  internal apostrophe/hyphen joiners; digits, symbols and machine
+  fragments are never valid words).
+- An EXACT positive replacement unigram is required, then two routes
+  decide: an ordinary word or phrase proposal needs at least one
+  matching EXACT comparable same-order fixed-anchor original/replacement
+  context with candidate count >= 2*max(original context count,1) and no
+  weaker known corresponding context; this route applies even when the
+  original unigram is UNAVAILABLE (a distant unknown original whose
+  original N-gram context is known), and unknown original context
+  supplies no support. A separate narrow possible-typo route permits an
+  UNAVAILABLE/nonpositive single-word original at exactly one casefolded
+  code-point edit from an EXACT positive known single replacement (both
+  units at least 3 code points) with actual positive adjacent context and
+  no opposing known local context. Unknown original context is never
+  zero, a known-zero replacement context opposes, and no model
+  confidence, popularity, threshold programme or different-length raw
+  count authorizes. The factor-two guard and the typo route are
+  uncalibrated contained engineering policy, not quality results.
+- Useful supported word changes and disclosed preassigned phrase
+  CONSUMER changes survive (the real detector still produces only
+  single-token candidates - these cases prove the consumer boundary,
+  not a phrase producer), and unsupported changes abstain with the
+  exact completed original, the actual review call/usage and the exact
+  owned cleanup preserved.
+- OLD frozen fixtures under the stricter policy: the two
+  real-Pandoc success tests in `tests/test_pandoc_protection.py` (the
+  old presenetliv->tako positive lacks explicit original-context rows
+  in the byte-frozen fixture) and the five useful-repair tests in
+  `tests/test_analysis_policy.py` (the old aaa->repla positive has no
+  original evidence and declines with local-evidence-not-stronger;
+  strategy's isolated legacy-routing control with both accept
+  references bound to the frozen historical repair.accept passes the
+  original frozen test, showing the earliest changed predicate is the
+  mandated policy against this old fixture premise, not a broken
+  analysis gate) are truthfully retained as this round's failures;
+  both files stay byte-frozen in 028-a and a later same-PR
+  corrective round B migrates both (privately qualified by
+  strategy; not invented here).
+- The eight changed/new Python files are the allowlist; the other 43
+  concept Python files and 12 old test modules are frozen against the
+  accepted base. This is finite validation correction of the existing
+  strict-evidence/composition requirements in the runnable proxy - not
+  a new research programme, phrase producer, packaged-library,
+  milestone, ICA or deployment claim.
