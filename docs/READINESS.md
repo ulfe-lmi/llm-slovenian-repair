@@ -1,12 +1,24 @@
 # Distinct readiness claims
 
+Current functional scope (owner decision 2026-10-30, reaffirmed
+2026-11-01): there will be NO separate human evaluation dataset - it is
+excluded, not deferred and not merely optional; functional readiness is
+reported from the implemented runnable behavior plus a fresh independent
+software/operating-path audit; linguistic quality remains unmeasured; and
+deployment/exposure remain separately owner-authorized. The programme rows
+below are historical claims, and where held-out human-labelled criteria
+appear they are a historical unexecuted programme - not a current future
+dataset plan.
+
 Development merged: exact objective accepted by strategy after independent review,
 required final-head CI, scope/docs/risk/rollback and D1 checks. Does not imply release.
 Internal demonstrator: PLAN D01–D07 paths/evidence, keep/replace/reject/no-call cases,
 fresh independent ICA and human-scoped milestone judgment; synthetic isolated work
 may retain open D1 only if its registered gate is not crossed.
-Experimental MVP: M01–M07, all eight PLAN §16 criteria, real-boundary isolation,
-held-out human-labelled benefit/harm/cost and fresh ICA. Queue completion is insufficient.
+Experimental MVP (historical unexecuted programme; not a current future
+dataset plan): M01–M07, all eight PLAN §16 criteria, real-boundary
+isolation, held-out human-labelled benefit/harm/cost and fresh ICA. Queue
+completion is insufficient.
 External demo/pilot: applicable DHA entries latest verified human ACCEPTED and
 explicit human authorization for exposure/data/trust, in addition to scoped product
 evidence. Qualified service/production: S01–S05, rights, operations/rollback/resource/
@@ -30,7 +42,7 @@ publication-evidence overclaims in the new recovery record, with no
 scientific protocol, model, or result change.
 Rounds 013-a, 014-a, 014-b, and 015-a (2026-10-26) and rounds 016-a,
 017-a, 018-a, 019-a, 020-a, 021-a (2026-10-27) and 022-a,
-023-a, 024-a (2026-10-28), 025-a (2026-10-29) and 026-a (2026-10-30) confer no product label: they
+023-a, 024-a (2026-10-28), 025-a (2026-10-29), 026-a (2026-10-30) and 027-a (2026-11-01) confer no product label: they
 implement the owner-selected Pandoc structural-parsing proxy, one
 bounded occurrence-addressed reviewer batch, the terminal-answer-copy
 preflight, the explicit text-only Responses request contract, the
@@ -48,9 +60,23 @@ content-free analysis reasons and a startup ValueError versus
 at-use bypass), and the bounded accepted-connection admission
 (one active request plus at most 16 accepted waiting entries with
 fixed content-free 503 queue codes and an immutable per-instance
-policy), in the isolated runnable proxy only, with no
+policy), the exact-zero local-support exclusion with positive and
+censored controls, and the composed-result revalidation of all
+surviving edits (interacting conflict groups rejected and rebuilt
+from the original, compatible multiple edits surviving, and
+unprovable validation mappings abstaining to the completed
+original), in the isolated runnable proxy only, with no
 scientific protocol, model, or result change and no packaged
 library, quality, or deployment claim. The
 packaged-MVP row above carries a
 provisional 8-15 focused-engineering-day estimate for its remaining scope
-after those rounds. ICA and deployment keep their separate human gates.
+after those rounds; that packaged library/milestone scope and the
+historical Experimental MVP row above (with its held-out human-labelled
+benefit/harm/cost criteria) are separate programmes, not requirements of
+the runnable proxy, and their historical criteria may remain unproven.
+Per the owner decision (2026-10-30, reaffirmed 2026-11-01) there will be
+NO separate human evaluation dataset - it is excluded, not deferred and
+not merely optional - so the held-out labelled programme cannot be
+activated for the functional scope; functional-MVP readiness is reported
+from software evidence. ICA and deployment keep their separate human
+gates.

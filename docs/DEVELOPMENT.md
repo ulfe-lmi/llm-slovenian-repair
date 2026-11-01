@@ -294,3 +294,34 @@ no sudo, no system replacement, no runtime downloads. The application-baseline
 CI workflow installs that pinned archive into a runner-owned temporary prefix
 and exports `CONCEPT_PANDOC` for the concept-verification tests; a missing or
 mismatched binary fails those tests rather than skipping them.
+
+027-b frozen whitespace incident contract (2026-11-01): order 027-b closes
+the accepted-base whitespace contract from three pinned incidents to exactly
+four. The fourth is the root-authored trailing space at line 11 of the
+issued 027-a order (`oap/orders/027-a-repair-validation.md`; original
+introduction `d572b19c86a555ae3e8a4a8bbb99da5bd39a68ea`, current blob
+`8f9def83edfa98d66d8012557b521d3d392c25d9`, bytes
+`d640fb360e55b80649c83d207e9c21e47f4b42223e6a012e46b7800bc4ed8012`/24341,
+preserved exactly, including that one ASCII space before the line-11 LF).
+The checker's special forward-recovery binding pins the exact merge
+`73f9f3d10cc602781f8a49e22a7dd342165ea8d9` (ancestor of the checked
+revision, ordered parents `4e601d31ccce7fa2f7652e67af524bb95c761078` then
+`db20450c3dd4ad93a559613c704a9fac1c625298`, tree delta against its first
+parent limited to the order file), the historical unauthorized normalization
+at `85826fd0c5a15f6aa883001b412cdf0259de7dfa` (Git blob
+`6f2690ba42d1c92589491942557b40731c3b2dae`, content
+`ca0795f60adf1d5be4036a3d875d51885281b504c12cad07135ad3ab32ee2a29`/24340,
+preservation evidence only, never the authorized current source), the
+default-path introduction list `[d572b19]`, and the pinned full-history
+introduction list `[d572b19, 85826fd]`. The rationale is preserving the
+published order's authority and bytes over cosmetic cleanup: the checker
+accepts only the four exact historical diagnostics at the two authorized
+bases and fails closed on a trimmed or changed issued order, a changed old
+incident, a deleted or re-added incident even with identical bytes, any
+additional fifth whitespace violation, path/line/message drift, a missing
+prescribed recovery lineage, an unknown base, or an invalid revision. There
+is no configuration, flag, or environment path to admit future incidents.
+Separately, strategy qualifies a prospective order's whitespace before its
+immutable publication; that is a strategic review step recorded in the
+round, not a claim that the unchanged publisher performs it automatically,
+and it grants no product gate, programme, or authority expansion.

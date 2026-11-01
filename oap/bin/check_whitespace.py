@@ -2,11 +2,15 @@
 """Fail-closed accepted-base whitespace verification for immutable OAP history.
 
 The workflows still run Git's literal ``diff --check BASE...REVISION``.  The
-only tolerated diagnostics are the three already-published blank-at-EOF
-incidents below.  Each exception is bound to its exact diagnostic, introducing
-commit, current blob, byte hash, and byte size.  This is intentionally a
-fixed corrective contract: a changed, missing, re-added, or additional
-whitespace incident fails rather than becoming a new allowlist entry.
+only tolerated diagnostics are the four already-pinned historical incidents
+below (order 027-b closed the three-incident contract to these four).  Each
+exception is bound to its exact diagnostic, introducing commit, current blob,
+byte hash, and byte size.  The fourth incident is the root-authored trailing
+space at line 11 of the issued 027-a order, whose bytes are preserved exactly;
+its special forward-recovery merge is bound to its exact ancestry, ordered
+parents, tree delta, and historical blobs.  This is intentionally a fixed
+corrective contract: a changed, missing, re-added, or additional whitespace
+incident fails rather than becoming a new allowlist entry.
 """
 
 from __future__ import annotations
@@ -15,12 +19,11 @@ import argparse
 import hashlib
 import json
 import os
-from pathlib import Path
 import re
 import subprocess
 import sys
+from pathlib import Path
 from typing import NamedTuple
-
 
 COMMIT_RE = re.compile(r"[0-9a-f]{40}\Z")
 AUTHORIZED_BASES = frozenset(
@@ -28,6 +31,23 @@ AUTHORIZED_BASES = frozenset(
         "2832fa1e51bdf3641aabbd81feab8ddb64a876da",
         "82ea1e6f4173934fa47bb34ee6a6f78338d3603a",
     }
+)
+
+ORDER_A_PATH = "oap/orders/027-a-repair-validation.md"
+RECOVERY_MERGE = "73f9f3d10cc602781f8a49e22a7dd342165ea8d9"
+RECOVERY_PARENTS = (
+    "4e601d31ccce7fa2f7652e67af524bb95c761078",
+    "db20450c3dd4ad93a559613c704a9fac1c625298",
+)
+NORMALIZED_INTRODUCTION = "85826fd0c5a15f6aa883001b412cdf0259de7dfa"
+NORMALIZED_BLOB = "6f2690ba42d1c92589491942557b40731c3b2dae"
+NORMALIZED_CONTENT_SHA256 = (
+    "ca0795f60adf1d5be4036a3d875d51885281b504c12cad07135ad3ab32ee2a29"
+)
+NORMALIZED_BYTE_SIZE = 24340
+FULL_HISTORY_INTRODUCTIONS = (
+    "d572b19c86a555ae3e8a4a8bbb99da5bd39a68ea",
+    "85826fd0c5a15f6aa883001b412cdf0259de7dfa",
 )
 
 
@@ -43,6 +63,17 @@ class Incident(NamedTuple):
     @property
     def diagnostic(self) -> str:
         return f"{self.path}:{self.line}: {self.message}"
+
+
+ORDER_A_INCIDENT = Incident(
+    ORDER_A_PATH,
+    11,
+    "trailing whitespace.",
+    "d572b19c86a555ae3e8a4a8bbb99da5bd39a68ea",
+    "8f9def83edfa98d66d8012557b521d3d392c25d9",
+    "d640fb360e55b80649c83d207e9c21e47f4b42223e6a012e46b7800bc4ed8012",
+    24341,
+)
 
 
 KNOWN_INCIDENTS = (
@@ -64,6 +95,7 @@ KNOWN_INCIDENTS = (
         "516bee9cec2a52f75beba27cc4ae1756426386ab65b5ac2ce62a7c6854dbf87d",
         21642,
     ),
+    ORDER_A_INCIDENT,
     Incident(
         "oap/reports/007-d-complete-research-publication-and-reproduction-coverage.md",
         164,
@@ -190,6 +222,99 @@ def _verify_incident(repo: Path, revision: str, incident: Incident) -> None:
         raise CheckError("INCIDENT_INTRODUCTION_MISMATCH")
 
 
+def _verify_recovery(repo: Path, revision: str) -> None:
+    if _git(
+        repo, "rev-parse", "--verify", "--end-of-options", f"{RECOVERY_MERGE}^{{commit}}"
+    ).returncode != 0:
+        raise CheckError("RECOVERY_LINEAGE_MISSING")
+    if _git(repo, "merge-base", "--is-ancestor", RECOVERY_MERGE, revision).returncode != 0:
+        raise CheckError("RECOVERY_LINEAGE_MISSING")
+    try:
+        header = _successful_git(
+            repo, "rev-list", "--parents", "-n", "1", RECOVERY_MERGE
+        ).decode("ascii").split()
+    except (UnicodeDecodeError, CheckError) as exc:
+        raise CheckError("RECOVERY_LINEAGE_MISSING") from exc
+    if tuple(header) != (RECOVERY_MERGE, *RECOVERY_PARENTS):
+        raise CheckError("RECOVERY_LINEAGE_MISSING")
+    try:
+        delta = _successful_git(
+            repo, "diff", "--name-only", RECOVERY_PARENTS[0], RECOVERY_MERGE
+        ).decode("ascii").splitlines()
+    except (UnicodeDecodeError, CheckError) as exc:
+        raise CheckError("RECOVERY_LINEAGE_MISSING") from exc
+    if delta != [ORDER_A_PATH]:
+        raise CheckError("RECOVERY_LINEAGE_MISSING")
+    try:
+        blob = _successful_git(
+            repo, "rev-parse", f"{RECOVERY_MERGE}:{ORDER_A_PATH}"
+        ).decode("ascii").strip()
+    except (UnicodeDecodeError, CheckError) as exc:
+        raise CheckError("RECOVERY_LINEAGE_MISSING") from exc
+    if blob != ORDER_A_INCIDENT.blob:
+        raise CheckError("RECOVERY_LINEAGE_MISSING")
+    if _git(
+        repo,
+        "rev-parse",
+        "--verify",
+        "--end-of-options",
+        f"{NORMALIZED_INTRODUCTION}^{{commit}}",
+    ).returncode != 0:
+        raise CheckError("RECOVERY_LINEAGE_MISSING")
+    try:
+        normalized_blob = _successful_git(
+            repo, "rev-parse", f"{NORMALIZED_INTRODUCTION}:{ORDER_A_PATH}"
+        ).decode("ascii").strip()
+    except (UnicodeDecodeError, CheckError) as exc:
+        raise CheckError("RECOVERY_LINEAGE_MISSING") from exc
+    if normalized_blob != NORMALIZED_BLOB:
+        raise CheckError("RECOVERY_LINEAGE_MISSING")
+    try:
+        normalized = _successful_git(repo, "cat-file", "blob", NORMALIZED_BLOB)
+    except CheckError as exc:
+        raise CheckError("RECOVERY_LINEAGE_MISSING") from exc
+    if (
+        len(normalized) != NORMALIZED_BYTE_SIZE
+        or hashlib.sha256(normalized).hexdigest() != NORMALIZED_CONTENT_SHA256
+    ):
+        raise CheckError("RECOVERY_LINEAGE_MISSING")
+    try:
+        original_blob = _successful_git(
+            repo,
+            "rev-parse",
+            f"{ORDER_A_INCIDENT.introduction_commit}:{ORDER_A_PATH}",
+        ).decode("ascii").strip()
+    except (UnicodeDecodeError, CheckError) as exc:
+        raise CheckError("RECOVERY_LINEAGE_MISSING") from exc
+    if original_blob != ORDER_A_INCIDENT.blob:
+        raise CheckError("RECOVERY_LINEAGE_MISSING")
+    try:
+        original = _successful_git(repo, "cat-file", "blob", original_blob)
+    except CheckError as exc:
+        raise CheckError("RECOVERY_LINEAGE_MISSING") from exc
+    if (
+        len(original) != ORDER_A_INCIDENT.byte_size
+        or hashlib.sha256(original).hexdigest() != ORDER_A_INCIDENT.content_sha256
+    ):
+        raise CheckError("RECOVERY_LINEAGE_MISSING")
+    try:
+        introductions = _successful_git(
+            repo,
+            "log",
+            "--reverse",
+            "--format=%H",
+            "--diff-filter=A",
+            "--full-history",
+            revision,
+            "--",
+            ORDER_A_PATH,
+        ).decode("ascii").splitlines()
+    except (UnicodeDecodeError, CheckError) as exc:
+        raise CheckError("RECOVERY_LINEAGE_MISSING") from exc
+    if tuple(introductions) != FULL_HISTORY_INTRODUCTIONS:
+        raise CheckError("RECOVERY_LINEAGE_MISSING")
+
+
 def verify(repo: Path, base: str, revision: str) -> dict[str, object]:
     if base not in AUTHORIZED_BASES:
         raise CheckError("BASE_NOT_AUTHORIZED")
@@ -197,6 +322,7 @@ def verify(repo: Path, base: str, revision: str) -> dict[str, object]:
         raise CheckError("REPOSITORY_INVALID")
     _resolve_commit(repo, base)
     resolved_revision = _resolve_commit(repo, revision)
+    _verify_recovery(repo, resolved_revision)
     for incident in KNOWN_INCIDENTS:
         _verify_incident(repo, resolved_revision, incident)
     diff = _git(

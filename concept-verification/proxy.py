@@ -23,6 +23,7 @@ from urllib.parse import urlparse
 import analysis_policy
 import capture_transport
 import client_transport
+import composed_validation
 import delivery_transport
 import header_transport
 import request_admission
@@ -967,12 +968,25 @@ class RepairEngine:
                     # subset (order 014-a, requirement 2).
                     selected_invalid = True
                     break
+                # The right neighbor is the first token at or after the
+                # WHOLE selected span's end (order 027-a, requirement 3):
+                # for a single-token span this is the immediately
+                # following token, and for a multiword span the span's
+                # internal tokens are never its external neighbors.
+                right_index = next(
+                    (
+                        i
+                        for i in range(token_index + 1, len(tokens))
+                        if tokens[i].start >= candidate.end
+                    ),
+                    None,
+                )
                 prepared.append(
                     _PreparedCandidate(
                         candidate,
                         left=tokens[token_index - 1].key if token_index else None,
-                        right=tokens[token_index + 1].key
-                        if token_index + 1 < len(tokens)
+                        right=tokens[right_index].key
+                        if right_index is not None
                         else None,
                         left_bounds=(
                             (tokens[token_index - 1].start, tokens[token_index - 1].end)
@@ -980,8 +994,8 @@ class RepairEngine:
                             else None
                         ),
                         right_bounds=(
-                            (tokens[token_index + 1].start, tokens[token_index + 1].end)
-                            if token_index + 1 < len(tokens)
+                            (tokens[right_index].start, tokens[right_index].end)
+                            if right_index is not None
                             else None
                         ),
                     )
@@ -1059,11 +1073,16 @@ class RepairEngine:
                         reviewer_seconds = time.monotonic() - batch_started
             decisions: list[dict[str, object]] = []
             edits: list[tuple[int, int, str]] = []
+            composed_records: list[composed_validation.ComposedRecord] = []
             # Late technical evidence failure state: a known
             # RuntimeCorpusError during per-proposal acceptance aborts the
             # entire optional pass from the immutable original.
             late_aborted = False
             evidence_reason: str | None = None
+            # R6 mapping failure state: a validation mapping that cannot
+            # be proved aborts the whole optional pass to the completed
+            # original (order 027-a, requirement 6).
+            mapping_unprovable = False
             for index, item in enumerate(prepared):
                 candidate = item.candidate
                 review_started = time.monotonic()
@@ -1155,6 +1174,77 @@ class RepairEngine:
                 )
                 if acceptance["accepted"] and isinstance(acceptance["replacement"], str):
                     edits.append((candidate.start, candidate.end, acceptance["replacement"]))
+                    composed_records.append(
+                        composed_validation.ComposedRecord(
+                            decision_index=len(decisions) - 1,
+                            start=candidate.start,
+                            end=candidate.end,
+                            text=candidate.text,
+                            replacement=acceptance["replacement"],
+                            left=item.left,
+                            right=item.right,
+                            left_bounds=item.left_bounds,
+                            right_bounds=item.right_bounds,
+                        )
+                    )
+            if not late_aborted and edits:
+                # Composed-result validation (order 027-a, requirements
+                # 3-5): every individually accepted edit is re-validated
+                # against the original with all other surviving edits
+                # composed, coordinates rebased arithmetically by the
+                # exact original edits.  An edit whose positive local
+                # support depended on a neighbor token that another
+                # surviving edit replaces is rejected with the group and
+                # rebuilt from the original; independently supported
+                # compatible edits survive.  A known technical/budget
+                # failure here is the same late boundary as during
+                # per-proposal acceptance: abort the whole optional pass
+                # from the immutable original (requirement 8).
+                try:
+                    surviving = composed_validation.validate_composed(
+                        text, composed_records, corpus, intervals
+                    )
+                except RuntimeCorpusError as exc:
+                    late_aborted = True
+                    evidence_reason = exc.reason
+                except composed_validation.ComposedMappingError:
+                    # An unprovable validation mapping abstains the WHOLE
+                    # optional pass to the conservatively completed
+                    # original: no edit - not even an independently
+                    # supported one - survives, while the actual review
+                    # call and known/unknown usage stay recorded (order
+                    # 027-a, requirement 6).  Caller control and MemoryError
+                    # are not caught here and propagate untouched.
+                    mapping_unprovable = True
+                    edits = []
+                    for recorded in decisions:
+                        recorded["acceptance"] = {
+                            "accepted": False,
+                            "reason": (
+                                composed_validation.COMPOSED_MAPPING_UNPROVABLE
+                            ),
+                            "replacement": None,
+                        }
+                        recorded["failure"] = (
+                            composed_validation.COMPOSED_MAPPING_UNPROVABLE
+                        )
+                else:
+                    for index, record in enumerate(composed_records):
+                        if index not in surviving:
+                            recorded = decisions[record.decision_index]
+                            recorded["acceptance"] = {
+                                "accepted": False,
+                                "reason": composed_validation.COMPOSED_REJECTED,
+                                "replacement": None,
+                            }
+                            recorded["failure"] = (
+                                composed_validation.COMPOSED_REJECTED
+                            )
+                    edits = [
+                        (record.start, record.end, record.replacement)
+                        for index, record in enumerate(composed_records)
+                        if index in surviving
+                    ]
             if late_aborted:
                 # Whole optional pass aborted from a technical evidence
                 # failure: the immutable original is delivered and no
@@ -1164,13 +1254,13 @@ class RepairEngine:
                 # data, and the actual review call and known/unknown usage
                 # stay recorded.
                 edits = []
-                for record in decisions:
-                    record["acceptance"] = {
+                for recorded in decisions:
+                    recorded["acceptance"] = {
                         "accepted": False,
                         "reason": "evidence-abort",
                         "replacement": None,
                     }
-                    record["failure"] = evidence_reason
+                    recorded["failure"] = evidence_reason
             repaired = apply_edits(text, edits, intervals) if edits else text
             protected_changes = 0
             for interval in intervals:
@@ -1211,6 +1301,15 @@ class RepairEngine:
                 # zeroed (order 016-a, requirement 4).
                 detail["evidence_failure"] = {
                     "reason": evidence_reason,
+                    "stage": "late",
+                }
+            if mapping_unprovable:
+                # The actual review attempt stays recorded (calls and
+                # known/unknown usage); the whole optional pass abstained
+                # to the completed original because a validation mapping
+                # could not be proved (order 027-a, requirement 6).
+                detail["evidence_failure"] = {
+                    "reason": composed_validation.COMPOSED_MAPPING_UNPROVABLE,
                     "stage": "late",
                 }
             self._details.append(detail)

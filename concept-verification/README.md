@@ -1153,3 +1153,121 @@ defaults:
   The five changed Python files are the allowlist; every other
   concept Python file and old test module is frozen against the
   accepted base.
+
+
+## Independent support and composed-result validation (order 027-a)
+
+The final repair in the runnable proxy must use positive independent
+evidence and remain supported when all surviving changes are considered
+together.  This round corrects two observed validation gaps in the
+existing acceptance flow:
+
+- An explicit exact-zero local count can no longer count as positive
+  independent support.  The three local n-gram support checks in
+  `repair.accept` use one exact positive-support predicate (`EXACT`
+  state with a positive integer count).  A valid `EXACT(0)` row is a
+  valid datum but a known zero: it declines with the unchanged fixed
+  content-free `local-evidence-not-stronger` reason, a supported
+  positive-count control still repairs, and CENSORED/UNAVAILABLE
+  absence stays unknown - never coerced to zero, with no
+  unknown-as-zero, invented denominator, empirical calibration,
+  model-confidence acceptance, threshold programme or
+  different-length raw-count comparison introduced.
+- The composed result is revalidated under the prospective
+  combination of all surviving changes.  After the individual
+  acceptances (and only when none was late-aborted and at least one
+  edit survived), the new `composed_validation.py` module revalidates
+  each accepted edit by the REAL `accept()` against a validation view
+  composed of all OTHER surviving exact original-coordinate edits:
+  coordinates are rebased arithmetically using the exact original
+  edits (never ambiguous substring search), the selected span's
+  internal words are never its external neighbors (the external
+  neighbors are the whole tokens immediately outside the span),
+  protected intervals remain context barriers displaced by the same
+  exact arithmetic (no invented n-gram adjacency), and the exact
+  original slice is re-verified at the rebased span.  Two edits
+  interact when one edit's whole external neighbor token is contained
+  in the other edit's selected span; an actual interacting conflict
+  group is rejected as a whole (fixed content-free
+  `composed-context-rejected` on each of its final records) and
+  rebuilt from the immutable original with no winner, while
+  compatible multiple edits - far edits, expansion/contraction,
+  repeated occurrences with multiple decision IDs, multiword and
+  mixed-length original coordinates - survive in one answer.  The
+  final composition always uses original coordinates.
+- An unprovable validation mapping (rebased span out of range, exact
+  slice mismatch, or no token at the rebased span) raises
+  `ComposedMappingError`, and the WHOLE optional pass then
+  conservatively abstains to the completed original: every final
+  acceptance and decision record carries the fixed content-free
+  `composed-mapping-unprovable` disposition, the actual review call
+  count and the known or unknown reviewer usage are preserved, the
+  in-memory detail records the late evidence failure, and the exact
+  owned connection/cursor is released before return.  A known late
+  technical or budget failure keeps the existing late-abort
+  behavior; no broad catch hides a real failure under a PASS label,
+  caller-control and cleanup semantics are unchanged, and the
+  existing public trace/usage shape and finite content-free reason
+  labels are preserved.
+- Zero surviving edits preserves the original text and the supported
+  raw JSON/delayed-SSE envelope bytes; a useful compatible multi-edit
+  reply remains supported; main errors, incomplete output, hard
+  capture limits and unsupported structures retain their existing
+  semantics; and a healthy next request on the same proxy still
+  works.
+- New focused tests (`tests/test_composed_validation.py`, 30 tests)
+  in three layers: (i) DIRECT VALIDATOR tests that call
+  `validate_composed`/`accept`/`tokenize` directly against the real
+  read-only tiny SQLite with no Engine (the mapping-boundary
+  negatives - rebased slice mismatch, missing token, out-of-range
+  each raise while a supported record survives alone, ordinary group
+  rejection is not a mapping failure, and the protected barrier
+  rejects the member - with neighbor exclusion relative to the
+  current span: a span's internal words are never its own external
+  neighbors); (ii) ACTUAL ENGINE tests that run
+  `RepairEngine.repair` with the installed qualified Pandoc and real
+  read-only tiny SQLite, with the reviewer as the only faked
+  component outside the Engine and two disclosed bounded test-only
+  injections: preassigned multiword TARGET injection in the two
+  multiword cases (`_injected_detect` wraps the real detector, calls
+  it with the same arguments, discards its result and returns a
+  fixed multiword candidate tuple, because the real detector only
+  selects single-token spans - every downstream boundary, tokenize,
+  prepare, batch, acceptance, composed validation and apply, is
+  real), and the stale original-slice record-construction fault
+  (injected only at the actual owned `ComposedRecord`
+  construction) alongside the call-through accept observer. Engine
+  cases: the explicit zero-count decline with positive and CENSORED
+  controls (one review call, source/index unchanged), the actual
+  root composed-support reproducer with a single-edit positive
+  control, compatible scalar/far edits surviving, the
+  protected-interval barrier, repeated occurrences, the exact
+  n-gram-key sequence in which the internal span words are never
+  queried as neighbor keys (disclosed-target multiword case), the
+  late budget exhaustion at composed revalidation (completed
+  original, one call, known/unknown usage, 31 statements, owned
+  connection closed, fresh recovery), and the whole-pass
+  mapping-abort integration (completed original, both final records
+  false with the mapping reason, actual one review call,
+  known/unknown usage, the owned SQLite connection actually closed,
+  and same-engine recovery after the fault is removed); (iii)
+  ACTUAL HTTP tests over owned fake main/review endpoints on
+  loopback (JSON and delayed-SSE all-conflict raw envelope bytes,
+  useful compatible-edit result, same-proxy next-request health).
+  The multiword-target cases establish validation behavior for the
+  SUPPLIED target spans - conflict rejection and whole-span
+  external-neighbor mapping - not actual production of such spans
+  (no phrase producer); neighbor exclusion is relative to the
+  current span, not a claim that another span's words can never
+  appear in context queries.
+- The four changed/new Python files (the two existing changes in
+  `repair.py` and `proxy.py` and the two new files) are the allowlist;
+  every other concept Python file and old test module is frozen
+  against the accepted base.  This is finite validation correction of
+  existing strict-evidence/composition requirements in the runnable
+  proxy - not a new research programme, phrase producer,
+  packaged-library, milestone, ICA or deployment claim - and the
+  numeric 027 optional CPU-analyzer seed remains unclosed, remapped
+  to this bounded validation seam (see the roadmap coverage note);
+  the original analyzer scope is not executed and is not falsely
+  completed.

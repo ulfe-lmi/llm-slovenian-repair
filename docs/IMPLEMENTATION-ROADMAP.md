@@ -311,18 +311,34 @@ remains unclosed. Round 026-a remaps the numeric 026 identity (the
 inert split-integrity evaluation seed) to this bounded
 accepted-connection admission engineering objective on the actual
 proxy without an ICA request or milestone label; the original
-numeric-026 split-integrity evaluation seed scope remains unclosed.
-Those seed
+numeric-026 split-integrity evaluation seed scope remains unclosed. Round 027-a
+remaps the numeric 027 identity (the optional CPU-analyzer
+seed) to this bounded independent-support and composed-result
+validation engineering objective on the actual proxy without an ICA
+request or milestone label; the original numeric-027 optional
+CPU-analyzer scope is not executed and remains unclosed, and it is
+not falsely completed. Those seed
 objectives (including the remapped seed 022, the remapped numeric
 023, the numeric 024 packaged-API seed, the remapped numeric 025,
-and the remapped numeric 026) as packaged
-library/milestone objectives remain unclosed; following work stays: bounded failure/cancellation, packaged library integration, morphology/
-phrases, measured labelled quality, and independent closure.
+the remapped numeric 026, and the remapped numeric 027) as packaged
+library/milestone objectives remain unclosed; following work for those
+historical packaged programme objectives (historical programme text, not
+a planned separate dataset/research restart) stays: bounded
+failure/cancellation, packaged library integration, morphology/phrases,
+measured labelled quality, and independent closure.
 A provisional estimate for the remaining packaged-MVP engineering scope is
-8-15 focused engineering days. Research-evaluation completion (requiring
-separate reconciliation of the evaluation objective on the restored,
-integrity-verified 011 inputs; no prior draft activated; per the
-2026-10-30 owner decision no separate human evaluation dataset is a
-functional-MVP prerequisite - functional-MVP readiness is reported
-from software evidence), packaged MVP, ICA
-and deployment remain separate gates.
+8-15 focused engineering days; that packaged library/milestone scope is
+not a requirement of the runnable proxy. Per the owner decision
+(2026-10-30, reaffirmed 2026-11-01) there will be NO separate human
+evaluation dataset - it is excluded, not deferred and not merely
+optional - so research-evaluation completion (which would additionally
+require separate reconciliation of the evaluation objective on the
+restored, integrity-verified 011 inputs; no prior draft activated) is not
+a functional-MVP prerequisite, and the labelled-dataset/research and
+packaged-library programme text above is historical programme text, not a
+planned restart. That exclusion does NOT waive the retained duties:
+functional-MVP closure still requires a fresh independent
+software/operating-path audit of the implemented runnable behavior
+(functional readiness reported from software evidence, linguistic quality
+unmeasured), and any deployment/exposure remains separately
+owner-authorized.
