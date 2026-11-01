@@ -1313,11 +1313,17 @@ changed).
 - OLD frozen fixtures under the stricter policy: the two
   real-Pandoc success tests in `tests/test_pandoc_protection.py` (the
   old presenetliv->tako positive lacks explicit original-context rows
-  in the byte-frozen fixture; a one-row same-PR follow-up is planned)
-  and the five useful-repair tests in `tests/test_analysis_policy.py`
-  (the old aaa->repla positive has no original evidence and declines
-  with local-evidence-not-stronger; the module is green on a pristine
-  accepted base) are truthfully retained as this round's failures.
+  in the byte-frozen fixture) and the five useful-repair tests in
+  `tests/test_analysis_policy.py` (the old aaa->repla positive has no
+  original evidence and declines with local-evidence-not-stronger;
+  strategy's isolated legacy-routing control with both accept
+  references bound to the frozen historical repair.accept passes the
+  original frozen test, showing the earliest changed predicate is the
+  mandated policy against this old fixture premise, not a broken
+  analysis gate) are truthfully retained as this round's failures;
+  both files stay byte-frozen in 028-a and a later same-PR
+  corrective round B migrates both (privately qualified by
+  strategy; not invented here).
 - The eight changed/new Python files are the allowlist; the other 43
   concept Python files and 12 old test modules are frozen against the
   accepted base. This is finite validation correction of the existing
