@@ -101,7 +101,8 @@ def _build_corpus(root: Path) -> Path:
         INSERT INTO unigram VALUES
             ('to',100),('je',100),('tako',100),('presenetljiv',50),('zapisano',50);
         INSERT INTO bigram VALUES
-            ('je tako',20),('tako zapisano',20),('je presenetljiv',20),('je zapisano',20);
+            ('je tako',20),('tako zapisano',20),('je presenetljiv',20),('je zapisano',20),
+            ('je presenetliv',10);
         INSERT INTO trigram VALUES ('to je tako',20),('je tako zapisano',20);
         INSERT INTO middle VALUES ('je','zapisano','tako',20);
         """

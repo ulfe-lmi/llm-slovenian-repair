@@ -48,7 +48,7 @@ from evidence_budget import (  # noqa: E402
     make_progress_handler,
     validate_default_evidence_policy,
 )
-from repair import accept as _real_accept  # noqa: E402
+from runtime_acceptance import accept as _real_accept  # noqa: E402
 from runtime_corpus import (  # noqa: E402
     REASON_BUDGET_EXCEEDED,
     REASON_BUDGET_INVALID,
@@ -87,7 +87,14 @@ _SCHEMA_META_ROWS = 15
 # Distinct synthetic absent words drive detector work at synthetic
 # scale: token i costs 5 SQL starts (interior) or 2 (edge), so N
 # tokens cost 5N-6 detection starts (order 024-a, E receipt).
-_LATE_N = 13107   # 5 + 5N-6 + 2 accepted = exactly 65536 starts
+# Schema 5 + detection 5N-6 + first-target acceptance 4 (unigram zaa,
+# unigram aaa, bigram zaa aab, bigram aaa aab) + second-target 3
+# (unigram zaa, unigram aab, bigram zaa aaa) = exactly 65536 starts at
+# N=13106; the second target's 4th start (bigram zaa aac) is denied
+# before execute at the cap (order 028-a, R7 late-fixture data: the
+# supported near-form proposal zaa, one code point from aaa, keeps the
+# actual prior-acceptance premise without invented original-zero rows).
+_LATE_N = 13106   # 5 + 5N-6 + 4 + 3 = exactly 65536 starts
 _EARLY_N = 13108  # 5 + 5N-6 = 65539 > 65536 starts
 
 
@@ -151,9 +158,10 @@ def _evidence_db(root: Path, *, alt_rows: tuple[tuple[str, str, str, int], ...] 
         CREATE TABLE middle (left_word TEXT, right_word TEXT, middle_word TEXT, count INTEGER,
             PRIMARY KEY(left_word,right_word,middle_word));
         INSERT INTO unigram VALUES
-            ('to',100),('je',100),('tako',100),('zapisano',50),('repla',42);
+            ('to',100),('je',100),('tako',100),('zapisano',50),('repla',42),
+            ('zaa',42);
         INSERT INTO bigram VALUES
-            ('je tako',20),('tako zapisano',20),('repla aab',7);
+            ('je tako',20),('tako zapisano',20),('repla aab',7),('zaa aab',7);
         INSERT INTO trigram VALUES ('to je tako',20);
         """
     )
@@ -178,7 +186,7 @@ class _StubReviewer:
     acceptance code around it are real.
     """
 
-    def __init__(self, replacement: str = "repla", *, usage: bool = True) -> None:
+    def __init__(self, replacement: str = "zaa", *, usage: bool = True) -> None:
         self.replacement = replacement
         self.usage_on = usage
         self.calls = 0
@@ -894,12 +902,14 @@ class EngineEarlyLateTests(unittest.TestCase):
         # the subsequent budget failure aborted the whole pass.
         self.assertEqual(events, ["ACCEPTED", REASON_BUDGET_EXCEEDED])
         [corpus] = captured
-        # Schema 5 + detection 65529 + exactly 2 accepted-starts = cap.
+        # Schema 5 + detection 65524 (5N-6, N=13106) + first-target
+        # acceptance 4 + second-target 3 = exactly the cap; the
+        # second target's 4th start is denied before execute.
         self.assertEqual(
             corpus._budget.statements, config.RUNTIME_EVIDENCE_MAX_STATEMENTS
         )
         self.assertTrue(corpus._budget.exhausted)
-        self.assertEqual(corpus._budget.rows_total, _SCHEMA_META_ROWS + 2)
+        self.assertEqual(corpus._budget.rows_total, _SCHEMA_META_ROWS + 3)
         # Statement/row boundaries, not the progress budget, drove this.
         self.assertLess(
             corpus._budget.callbacks, config.RUNTIME_EVIDENCE_MAX_PROGRESS_CALLBACKS
@@ -966,14 +976,16 @@ class EngineEarlyLateTests(unittest.TestCase):
 
     def test_under_budget_positive_control_edit_applies(self) -> None:
         # Same corpus/text shape/proposal under budget: the leftmost
-        # one-word replacement is genuinely accepted (the exact bigram
-        # "repla aab" exists), proving the late case's discarded edit
-        # was real.
+        # target is genuinely accepted through the narrow possible-typo
+        # route - aaa->zaa is one code-point substitution, both units
+        # have 3 code points, the original bigram 'aaa aab' remains
+        # CENSORED unknown, and the exact positive bigram 'zaa aab'
+        # exists - proving the late case's discarded edit was real.
         captured = self._track_corpora()
         text = _absent_words(10)
         self.engine.begin_request()
         repaired = self.engine.repair(text)
-        self.assertEqual(repaired, "repla" + text[len("aaa"):])
+        self.assertEqual(repaired, "zaa" + text[len("aaa"):])
         self.assertEqual(self.reviewer.calls, 1)
         [detail] = self.engine.take_details()
         self.assertNotIn("evidence_failure", detail)
@@ -1051,7 +1063,7 @@ class ProxyRoundTripTests(unittest.TestCase):
             {
                 "id": f"t{i}",
                 "keep": False,
-                "replacement": "repla",
+                "replacement": "zaa",
                 "needs_wider_edit": False,
             }
             for i in range(proposals)

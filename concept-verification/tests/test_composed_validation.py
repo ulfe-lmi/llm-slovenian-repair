@@ -54,7 +54,7 @@ from detector import detect as _real_detect  # noqa: E402
 from protected import Interval  # noqa: E402
 from qwen_client import Proposal  # noqa: E402
 from repair import Acceptance  # noqa: E402
-from repair import accept as _real_accept  # noqa: E402
+from runtime_acceptance import accept as _real_accept  # noqa: E402
 from runtime_corpus import REASON_BUDGET_EXCEEDED, RuntimeCorpus  # noqa: E402
 from tests.test_responses_contract import (  # noqa: E402
     _Harness,
@@ -199,8 +199,9 @@ class _KeySpyCorpus(RuntimeCorpus):
 def _tracked_accept_events() -> tuple[list[str], Callable[..., Acceptance]]:
     """Call-through observation of real accept decisions.
 
-    Wraps the real repair.accept at the proxy module reference: every
-    real decision is recorded as it happens and returned unchanged.  No
+    Wraps the real runtime_acceptance.accept policy at the proxy
+    module reference (order 028-a, R7): every real decision is
+    recorded as it happens and returned unchanged.  No
     acceptance, corpus or query is faked.
     """
     events: list[str] = []
@@ -316,10 +317,12 @@ class ZeroSupportTests(unittest.TestCase):
         self.assertEqual(detail["replacements"], [])
         review = _sub_mapping(detail, "review_batch")
         self.assertEqual(review["calls"], 1)
-        # Schema 5 + detection 9 (3 tokens) + one acceptance 4.  No
-        # composed phase: nothing was accepted.
+        # Schema 5 + detection 9 (3 tokens) + one acceptance 3
+        # (unigram rone, unigram wone, bigram 'to rone' known zero ->
+        # opposing before any further query).  No composed phase:
+        # nothing was accepted.
         [corpus] = captured
-        self.assertEqual(corpus._budget.statements, 18)
+        self.assertEqual(corpus._budget.statements, 17)
         self.assertEqual(corpus.close_calls, 1)
         self.assertEqual(_index_state(self.root, db), before)
 
@@ -369,13 +372,17 @@ class ZeroSupportTests(unittest.TestCase):
             self.fail("acceptance is not a mapping")
         self.assertEqual(item["reason"], "local-evidence-not-stronger")
         [corpus] = captured
-        self.assertEqual(corpus._budget.statements, 18)
+        # Schema 5 + detection 9 (3 tokens) + one acceptance 5
+        # (unigram rone, unigram wone, three censored context bigrams/
+        # trigram - every context unknown, so no original-side query
+        # and no support).
+        self.assertEqual(corpus._budget.statements, 19)
 
     def test_positive_control_survives_composed_pass(self) -> None:
         db = _composed_db(
             self.root,
             {"to": 100, "je": 100, "wone": 2, "rone": 50},
-            {"to rone": 20},
+            {"to rone": 20, "to wone": 10},
         )
         before = _index_state(self.root, db)
         reviewer = _SpecReviewer({"wone": "rone"})
@@ -409,11 +416,13 @@ class ZeroSupportTests(unittest.TestCase):
             },
         )
         self.assertEqual(detail["replacements"], ["rone"])
-        # Schema 5 + detection 9 + acceptance 4 + composed re-validation
-        # of the single surviving record 4 (unigram + 2 bigrams +
-        # trigram): the composed pass actually re-ran the real queries.
+        # Schema 5 + detection 9 + acceptance 6 (unigram rone, unigram
+        # wone, bigram 'to rone' 20, its original side 'to wone' 10:
+        # 20 >= 2*10 supports; 'rone je' censored, 'to rone je'
+        # censored) + composed re-validation of the single surviving
+        # record 6: the composed pass actually re-ran the real queries.
         [corpus] = captured
-        self.assertEqual(corpus._budget.statements, 22)
+        self.assertEqual(corpus._budget.statements, 26)
         self.assertEqual(corpus.close_calls, 1)
         self.assertEqual(_index_state(self.root, db), before)
 
@@ -461,7 +470,12 @@ class ComposedEngineTests(unittest.TestCase):
         # chosen and the whole group is rebuilt from the original.
         db = self._db(
             {"to": 100, "je": 100, "wone": 2, "wtwo": 2, "one": 50, "two": 50},
-            {"to one": 20, "wone two": 20},
+            {
+                "to one": 20,
+                "wone two": 20,
+                "to wone": 10,
+                "wone wtwo": 10,
+            },
         )
         reviewer = _SpecReviewer({"wone": "one", "wtwo": "two"})
         repaired, details, events = self._repair(db, reviewer, "to wone wtwo je")
@@ -478,7 +492,7 @@ class ComposedEngineTests(unittest.TestCase):
     def test_supported_new_neighbor_pair_survives(self) -> None:
         db = self._db(
             {"to": 100, "je": 100, "wone": 2, "wtwo": 2, "one": 50, "two": 50},
-            {"one wtwo": 20, "wone two": 20, "one two": 20},
+            {"one wtwo": 10, "wone two": 10, "one two": 20, "wone wtwo": 5},
         )
         reviewer = _SpecReviewer({"wone": "one", "wtwo": "two"})
         repaired, details, events = self._repair(db, reviewer, "to wone wtwo je")
@@ -500,7 +514,7 @@ class ComposedEngineTests(unittest.TestCase):
         # result as well: compatible individually supported edits stay.
         db = self._db(
             {"to": 100, "je": 100, "wone": 2, "wtwo": 2, "one": 50, "two": 50},
-            {"to one": 20, "two je": 20},
+            {"to one": 20, "two je": 20, "to wone": 10, "wtwo je": 10},
         )
         reviewer = _SpecReviewer({"wone": "one", "wtwo": "two"})
         repaired, details, events = self._repair(db, reviewer, "to wone wtwo je")
@@ -523,7 +537,7 @@ class ComposedEngineTests(unittest.TestCase):
                 "woneplus": 50,
                 "two": 50,
             },
-            {"to woneplus": 20, "wone two": 20},
+            {"to woneplus": 20, "wone two": 20, "to wone": 10, "wone wtwo": 10},
         )
         reviewer = _SpecReviewer({"wone": "woneplus", "wtwo": "two"})
         repaired, details, events = self._repair(db, reviewer, "to wone wtwo je")
@@ -539,7 +553,7 @@ class ComposedEngineTests(unittest.TestCase):
         # against the other's composition and both survive.
         db = self._db(
             {"to": 100, "je": 100, "wone": 2, "wtwo": 2, "one": 50, "two": 50},
-            {"to one": 20, "je two": 20},
+            {"to one": 20, "je two": 20, "to wone": 10, "je wtwo": 10},
         )
         reviewer = _SpecReviewer({"wone": "one", "wtwo": "two"})
         repaired, details, events = self._repair(
@@ -555,7 +569,7 @@ class ComposedEngineTests(unittest.TestCase):
         # original coordinates; the rebased member's slice must match.
         db = self._db(
             {"to": 100, "je": 100, "wone": 2, "wtwo": 2, "ro": 50, "two": 50},
-            {"to ro": 20, "two je": 20},
+            {"to ro": 20, "two je": 20, "to wone": 10, "wtwo je": 10},
         )
         reviewer = _SpecReviewer({"wone": "ro", "wtwo": "two"})
         repaired, details, events = self._repair(db, reviewer, "to wone wtwo je")
@@ -569,7 +583,7 @@ class ComposedEngineTests(unittest.TestCase):
         # interacting pair is validated as one group and rejected whole.
         db = self._db(
             {"to": 100, "je": 100, "wone": 2, "one": 50},
-            {"to one": 20, "wone one": 20},
+            {"to one": 20, "wone one": 20, "to wone": 10, "wone wone": 10},
         )
         reviewer = _SpecReviewer({"wone": "one"})
         repaired, details, events = self._repair(db, reviewer, "to wone wone je")
@@ -603,7 +617,15 @@ class ComposedEngineTests(unittest.TestCase):
                 "one": 50,
                 "two": 50,
             },
-            {"to one": 20, "wtwo two": 20},
+            {
+                "to one": 20,
+                "wtwo two": 20,
+                "to wone": 10,
+                "wtwo wthree": 10,
+                "one wthree": 20,
+                "two je": 20,
+                "wfour je": 10,
+            },
         )
         a = Candidate(3, 12, "wone wtwo", 0.5, {})
         b = Candidate(13, 25, "wthree wfour", 0.5, {})
@@ -702,7 +724,7 @@ class MappingBoundaryTests(unittest.TestCase):
         db = _composed_db(
             self.root,
             {"to": 100, "je": 100, "wone": 100, "rone": 50},
-            {"to rone": 20},
+            {"to rone": 20, "to wone": 10},
         )
         s = ComposedRecord(1, 3, 7, "wone", "rone", "to", "je", (0, 2), (8, 10))
         corpus = RuntimeCorpus(db)
@@ -719,7 +741,7 @@ class MappingBoundaryTests(unittest.TestCase):
         db = _composed_db(
             self.root,
             {"to": 100, "je": 100, "wone": 100, "wtwo": 100, "one": 50, "two": 50},
-            {"to one": 20, "wone two": 20},
+            {"to one": 20, "wone two": 20, "to wone": 10, "wone wtwo": 10},
         )
         c1 = ComposedRecord(0, 3, 7, "wone", "one", "to", "wtwo", (0, 2), (8, 12))
         c2 = ComposedRecord(1, 8, 12, "wtwo", "two", "wone", "je", (3, 7), (13, 15))
@@ -769,7 +791,15 @@ class MappingBoundaryTests(unittest.TestCase):
                 "one": 50,
                 "two": 50,
             },
-            {"to one": 20, "wtwo two": 20},
+            {
+                "to one": 20,
+                "wtwo two": 20,
+                "one wthree": 20,
+                "two je": 20,
+                "to wone": 10,
+                "wtwo wthree": 10,
+                "wfour je": 10,
+            },
         )
         a = Candidate(3, 12, "wone wtwo", 0.5, {})
         b = Candidate(13, 25, "wthree wfour", 0.5, {})
@@ -794,10 +824,19 @@ class MappingBoundaryTests(unittest.TestCase):
         [corpus] = captured
         # The exact sequence of every ngram query actually executed:
         # the detector's per-token evidence (14), the two individual
-        # acceptances (6) and the two composed re-validations (6).
-        # From the first acceptance on, only whole EXTERNAL tokens and
-        # the replacement words form evidence keys: the spans' internal
-        # words are never queried as external-neighbor keys.
+        # acceptances (4 + 4) and the first composed re-validation
+        # (3).  From the first acceptance on, only whole EXTERNAL
+        # tokens and the replacement words form the external-neighbor
+        # keys: the spans' internal words are never queried as
+        # external-neighbor keys.  The original target words
+        # legitimately occur INSIDE original-context comparison keys
+        # ('to wone', 'wtwo wthree') - they are compared, not used as
+        # neighbors.  Both changed-count individuals accept on their
+        # proved external boundary evidence; in the composed re-
+        # validation member A's changed right neighbor is 'two', whose
+        # replacement adjacency 'one two' is CENSORED, so the frozen
+        # group logic short-circuits after this first composed failure
+        # and rejects the whole group.
         self.assertEqual(
             corpus.ngram_keys,
             [
@@ -816,17 +855,16 @@ class MappingBoundaryTests(unittest.TestCase):
                 ("wthree wfour je", 3),
                 ("wfour je", 2),
                 ("to one", 2),
+                ("to wone", 2),
                 ("one wthree", 2),
-                ("to one wthree", 3),
+                ("wtwo wthree", 2),
                 ("wtwo two", 2),
+                ("wtwo wthree", 2),
                 ("two je", 2),
-                ("wtwo two je", 3),
+                ("wfour je", 2),
                 ("to one", 2),
+                ("to wone", 2),
                 ("one two", 2),
-                ("to one two", 3),
-                ("one two", 2),
-                ("two je", 2),
-                ("one two je", 3),
             ],
         )
 
@@ -837,8 +875,8 @@ class LateComposedBudgetTests(unittest.TestCase):
     def setUp(self) -> None:
         self.temp = tempfile.TemporaryDirectory()
         self.root = Path(self.temp.name)
-        # Schema 5 + detection 14 (4 tokens) + 2 acceptances x 4 = 27;
-        # composed member 0 queries 4 (28-31); member 1's first query is
+        # Schema 5 + detection 14 (4 tokens) + 2 acceptances x 6 = 31;
+        # the composed pass then starts member 0, whose first query is
         # the 32nd start, denied before execute at cap 31.
         self._cap = mock.patch.object(
             config, "RUNTIME_EVIDENCE_MAX_STATEMENTS", 31
@@ -853,7 +891,7 @@ class LateComposedBudgetTests(unittest.TestCase):
         db = _composed_db(
             self.root,
             {"to": 100, "je": 100, "wone": 2, "wtwo": 2, "one": 50, "two": 50},
-            {"to one": 20, "wone two": 20},
+            {"to one": 20, "wone two": 20, "to wone": 10, "wone wtwo": 10},
         )
         reviewer = _SpecReviewer({"wone": "one", "wtwo": "two"}, usage=usage)
         captured: list[_CloseTrackingCorpus] = []
@@ -967,7 +1005,7 @@ class EngineMappingAbortTests(unittest.TestCase):
                 "one": 50,
                 "two": 50,
             },
-            {"to one": 20, "in two": 20},
+            {"to one": 20, "in two": 20, "to wone": 10, "in wtwo": 10},
         )
 
     def tearDown(self) -> None:
@@ -1144,6 +1182,8 @@ class HttpRoundTripTests(unittest.TestCase):
                 "wone two": 20,
                 "to rone": 20,
                 "in rtwo": 20,
+                "to wone": 10,
+                "in wtwo": 10,
             },
         )
 
