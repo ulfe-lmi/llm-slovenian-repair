@@ -10,7 +10,7 @@ from pandoc_protection import grapheme_boundary_sensitive, grapheme_sensitive
 from protected import Interval, is_protected
 from qwen_client import Proposal
 
-from corpus import Corpus
+from corpus import Corpus, Evidence
 
 
 @dataclass(frozen=True)
@@ -18,6 +18,20 @@ class Acceptance:
     accepted: bool
     reason: str
     replacement: str | None
+
+
+def _positive_local(evidence: Evidence) -> bool:
+    """Positive independent local support (LR-008, order 027-a,
+    requirement 1): an explicit EXACT(0) row is a valid datum but a
+    known zero and cannot count as positive support; CENSORED and
+    UNAVAILABLE absence stays unknown, never zero, and an unknown
+    count/denominator is preserved as such.
+    """
+    return (
+        evidence.state == "EXACT"
+        and isinstance(evidence.count, int)
+        and evidence.count > 0
+    )
 
 
 def accept(
@@ -89,14 +103,14 @@ def accept(
         return Acceptance(False, "replacement-size", None)
     if any(corpus.unigram(word).state != "EXACT" for word in words):
         return Acceptance(False, "replacement-unigram-uncertain", None)
-    local_exact = 0
+    local_positive = 0
     if left:
-        local_exact += corpus.ngram(f"{left} {words[0]}", 2).state == "EXACT"
+        local_positive += _positive_local(corpus.ngram(f"{left} {words[0]}", 2))
     if right:
-        local_exact += corpus.ngram(f"{words[-1]} {right}", 2).state == "EXACT"
+        local_positive += _positive_local(corpus.ngram(f"{words[-1]} {right}", 2))
     if left and right:
-        local_exact += corpus.ngram(f"{left} {words[0]} {right}", 3).state == "EXACT"
-    if local_exact < 1:
+        local_positive += _positive_local(corpus.ngram(f"{left} {words[0]} {right}", 3))
+    if local_positive < 1:
         return Acceptance(False, "local-evidence-not-stronger", None)
     return Acceptance(True, "accepted-independent-evidence", replacement)
 
