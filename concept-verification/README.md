@@ -1333,9 +1333,19 @@ changed).
   original admitted by the ordinary factor-two route - after which
   the full 17-module suite passed (804 tests, 321 subtests) with the
   runtime policy and every other source byte-frozen.
-- The eight changed/new Python files are the allowlist; the other 43
-  concept Python files and 12 old test modules are frozen against the
-  accepted base. This is finite validation correction of the existing
-  strict-evidence/composition requirements in the runnable proxy - not
-  a new research programme, phrase producer, packaged-library,
-  milestone, ICA or deployment claim.
+- Historical 028-a scope: its eight changed/new Python files were the
+  A allowlist, with the other 43 concept Python files and 12 old test
+  modules frozen against the accepted base. The 028-b delta is exactly
+  three test files (the two previously frozen old fixture modules plus
+  the A-new runtime-acceptance test module); the other 48 concept
+  Python files and the other 14 current test modules are unchanged
+  relative to the A head. Cumulative from the accepted base to the
+  current head, the changed Python scope is exactly ten paths (eight
+  existing plus the two new files of 028-a), with the other 41 concept
+  Python files and the other 10 old test modules frozen. The current B
+  carries 12 non-report changed paths (order, active, five docs,
+  research counter, manifest and the three test files); of those, only
+  the three test files are Python. This is finite validation
+  correction of the existing strict-evidence/composition requirements
+  in the runnable proxy - not a new research programme, phrase
+  producer, packaged-library, milestone, ICA or deployment claim.
