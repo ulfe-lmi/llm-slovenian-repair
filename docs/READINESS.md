@@ -75,7 +75,12 @@ unigram is unavailable - the unknown unigram supplies no support), the
 separate narrow one-code-point possible-typo route for a single
 unavailable/nonpositive original, unknown context never coerced to zero, useful supported word and
 disclosed preassigned phrase-consumer changes surviving and
-unsupported changes abstaining), in the isolated runnable proxy only, with no
+unsupported changes abstaining; the 028-b bounded fixture
+reconciliation then made the full 17-module suite green under that
+unchanged policy - one explicit Pandoc original-context row, the
+three-expression Analysis fixture preserving the 39/40 codepoint
+input/output, and one positive ordinary-route distant-unknown
+regression), in the isolated runnable proxy only, with no
 scientific protocol, model, or result change and no packaged
 library, quality, or deployment claim. The
 packaged-MVP row above carries a

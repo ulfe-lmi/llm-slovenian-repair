@@ -1272,7 +1272,7 @@ existing acceptance flow:
   the original analyzer scope is not executed and is not falsely
   completed.
 
-## One runtime lexical-acceptance policy (order 028-a)
+## One runtime lexical-acceptance policy (order 028-a; fixture reconciliation 028-b)
 
 The runnable proxy now validates individual proposals and the composed
 result with ONE identical runtime lexical-acceptance policy (new module
@@ -1324,10 +1324,15 @@ changed).
   references bound to the frozen historical repair.accept passes the
   original frozen test, showing the earliest changed predicate is the
   mandated policy against this old fixture premise, not a broken
-  analysis gate) are truthfully retained as this round's failures;
-  both files stay byte-frozen in 028-a and a later same-PR
-  corrective round B migrates both (privately qualified by
-  strategy; not invented here).
+  analysis gate) were truthfully retained as 028-a's failures with
+  both files byte-frozen; the same-PR corrective round 028-b
+  applied the bounded migrations privately qualified by strategy -
+  the one explicit Pandoc original-context row, the three-expression
+  Analysis fixture (39-codepoint/39-byte input preserved, 40 output)
+  and one real-detector positive regression for a distant unknown
+  original admitted by the ordinary factor-two route - after which
+  the full 17-module suite passed (804 tests, 321 subtests) with the
+  runtime policy and every other source byte-frozen.
 - The eight changed/new Python files are the allowlist; the other 43
   concept Python files and 12 old test modules are frozen against the
   accepted base. This is finite validation correction of the existing

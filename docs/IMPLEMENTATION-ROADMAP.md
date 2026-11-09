@@ -323,7 +323,12 @@ PLAN 9.1 strict AUTO_REPAIR runtime-acceptance seam) with one
 identical runtime lexical-acceptance policy for individual and
 composed proposal validation without an ICA request or milestone
 label; the packaged objective 028 as a packaged library/milestone
-objective remains unclosed. Those seed
+objective remains unclosed. Round 028-b (same PR) reconciled the two
+frozen-fixture groups under the unchanged policy (one explicit Pandoc
+original-context row, the three-expression Analysis fixture, one
+positive ordinary-route distant-unknown Engine regression) and
+brought the full 17-module suite green; the packaged objective 028
+remains unclosed. Those seed
 objectives (including the remapped seed 022, the remapped numeric
 023, the numeric 024 packaged-API seed, the remapped numeric 025,
 the remapped numeric 026, the remapped numeric 027, and the numeric 028 strict runtime-acceptance seed) as packaged
