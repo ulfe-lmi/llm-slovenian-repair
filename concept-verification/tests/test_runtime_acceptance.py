@@ -1014,6 +1014,45 @@ class EngineWordTests(_AcceptCaseBase):
             self.assertTrue(item["accepted"])
 
 
+    def test_distant_unknown_original_ordinary_route_end_to_end(self) -> None:
+        # The original unigram "alpha" is UNAVAILABLE (no row), but its
+        # EXACT original N-gram contexts are known (to-alpha/alpha-je
+        # EXACT 20). The known replacement "omega" (1000) has EXACT
+        # contexts to-omega/omega-je 40 = 2*20 with no weaker known
+        # corresponding context: the distant unknown original is
+        # admitted by the ordinary factor-two route, not the typo route.
+        repaired, details, reviewer, corpus = self._run(
+            {"to": 100, "je": 100, "omega": 1000},
+            {
+                "to alpha": 20,
+                "alpha je": 20,
+                "to omega": 40,
+                "omega je": 40,
+            },
+            {"alpha": "omega"},
+            "to alpha je",
+        )
+        self.assertEqual(repaired, "to omega je")
+        self.assertEqual(reviewer.calls, 1)
+        [detail] = details
+        self.assertEqual(detail["replacements"], ["omega"])
+        acceptance = detail["acceptance"]
+        if not isinstance(acceptance, list) or len(acceptance) != 1:
+            self.fail("expected one acceptance record")
+        item = acceptance[0]
+        if not isinstance(item, dict):
+            self.fail("acceptance record is not a mapping")
+        self.assertEqual(
+            item,
+            {
+                "accepted": True,
+                "reason": "accepted-independent-evidence",
+                "replacement": "omega",
+            },
+        )
+        self.assertEqual(corpus.close_calls, 1)
+
+
 class PhraseConsumerTests(_AcceptCaseBase):
     """R8: multiword phrase consumer controls.
 

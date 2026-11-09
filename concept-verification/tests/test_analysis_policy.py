@@ -68,11 +68,15 @@ from tests.test_review_batch import (  # noqa: E402
 )
 
 # One finite synthetic-scale useful-repair answer (39 code points /
-# 39 UTF-8 bytes over the tiny owned lexicon): the first absent word
-# "aaa" is the leftmost accepted one-word replacement "repla"
-# (the exact bigram "repla aab" exists in the fixture).
-_USEFUL = _absent_words(10)
-_USEFUL_REPAIRED = "repla" + _USEFUL[len("aaa") :]
+# 39 UTF-8 bytes over the tiny owned lexicon): the first word "repa"
+# is index-unavailable (not proved invalid) and the accepted
+# replacement "repla" is a known-positive single unit at exactly one
+# code-point insertion (existing exact bigram "repla aab" context).
+# Shortening the last synthetic token "aaj" to "aa" compensates the
+# longer first token, so the original stays exactly 39 code points /
+# 39 UTF-8 bytes; the repaired output stays 40 > N39.
+_USEFUL = "repa" + _absent_words(10)[len("aaa") : -1]
+_USEFUL_REPAIRED = "repla" + _USEFUL[len("repa") :]
 
 # Four-byte UTF-8 code point used for the byte axis.
 _E4 = "\U0001F600"
@@ -672,7 +676,7 @@ class UsefulRepairTests(unittest.TestCase):
         self.temp.cleanup()
 
     def _propose_useful(self, usage: bool) -> None:
-        # t0 ("aaa") is the accepted replacement; the other three
+        # t0 ("repa") is the accepted replacement; the other three
         # explicit keeps reject nothing and change no slice.
         props = [
             _prop("t0", keep=False, replacement="repla"),
@@ -778,7 +782,7 @@ class UsefulRepairTests(unittest.TestCase):
         _FakeUpstream.recorded = []
         self.engine.begin_request()
         repaired = self.engine.repair(text)
-        expected = "repla" + text[len("aaa") :]
+        expected = "repla" + text[len("repa") :]
         self.assertEqual(repaired, expected)
         # The NFD sequence stays decomposed (no NFC reserialization
         # to the composed zcaron) and the CRLF / emoji survive
