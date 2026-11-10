@@ -1,0 +1,131 @@
+{
+  "artifact": "031-functional-proxy-audit-evidence",
+  "order_id": "031-a",
+  "evaluated_main": "3bd6ffdd96bda95bd4c6de447b56cce76fe5a058",
+  "requirements_first_artifact": {
+    "path": "oap/audit/results/031-functional-proxy-requirements-first.json",
+    "sha256": "fbcda5cf77d65914f87892e2de797589c549383b71bb3c1e0db6eb8afea9322d",
+    "bytes": 53339,
+    "saved_at_utc": "2026-11-10T15:13:42Z",
+    "immutable": true
+  },
+  "environment": {
+    "python": "/home/janezp/envs/llm-slovenian-repair/bin/python (3.12.15, -B, private TMPDIR/PYTHONPYCACHEPREFIX)",
+    "pandoc": "qualified Pandoc 3.7.0.2, SHA-256 02a59bd935b02364e6dee67093874532c096adcb60374a53a0f3ba5310ab1229, explicit CONCEPT_PANDOC (no PATH discovery)",
+    "corpus": "authorized read-only private index (truncated release; min counts 2270/272 observed)",
+    "helper_hygiene": "every helper: export OAP_ROLE=coding; shell umask 077; python -B; private TMPDIR/PYTHONPYCACHEPREFIX; dirs 0700/files 0600; sanitized child env for probe children (no QWEN_API_KEY/CONCEPT_REVIEWER_PROFILE/provider credentials)"
+  },
+  "probes_at_evaluated_main": [
+    {
+      "name": "A1-A5 pandoc startup gate (CLI/main entry)",
+      "results": [
+        "qualified pandoc 3.7.0.2: PASS (exact version + capability probe before bind)",
+        "configured-but-missing explicit path: PANDOC_NOT_EXECUTABLE",
+        "fake pandoc reporting 3.6.0: PANDOC_WRONG_VERSION",
+        "full proxy.py main() with bad pandoc: exit 1, 'pandoc startup failure', fixed port 18024 never bound (gate before bind)",
+        "empty PATH without explicit config: PANDOC_NOT_FOUND"
+      ]
+    },
+    {
+      "name": "C engine probes (injected fake reviewer; real + fixture index)",
+      "results": [
+        "clean synthetic text + real truncated index: 0 candidates, 0 review calls, byte-identical original",
+        "planted malformed form + real truncated index: exactly 1 review call, rejected (independent evidence not stronger), byte-identical original (strict abstention; min counts 2270/272)",
+        "planted + fixture index with supporting context: accepted (accepted-independent-evidence), exact replacement inserted, all else preserved",
+        "keep / wider-edit proposals: target unchanged",
+        "unknown proposal ID: whole batch rejected at the real boundary (REVIEW_UNKNOWN_ID); first C5 fake crashed the engine process - probe artifact, real boundary tested directly"
+      ]
+    },
+    {
+      "name": "B failed harness epoch (RC124) - recorded as harness failure, NOT product failure",
+      "harness_sha256": "4ab8700fed782a18540b89321f93b79f6185736eb933360e681876ecf26d6e2c",
+      "defects": [
+        "fixed loopback ports 18091/18024 (collision-prone across epochs)",
+        "inherited full parent environment (including raw header/body echoing)",
+        "unbounded stderr.read() ordering against a still-live child pipe"
+      ],
+      "reconciliation": "harness never recorded Popen child PIDs; origin of timed-out children unprovable and not touched; at the corrected run no residual probe children or listeners on the old fixed ports were observable (proc/net/tcp + /proc cmdline scans, content-free)"
+    },
+    {
+      "name": "B-v2 corrected epoch (canonical, run v3, PASS rc 0, ~1.6 s wall)",
+      "harness": {
+        "probe_b_v2.py": "c9f56c9bc4c062a8170865673509a3b10c3ad04b7ee96f68606c33610f6c6906",
+        "fake_upstream_v2.py": "f86aca68df7903e690890fa024798e2dc6f08a5fb625f426600057b740852c00",
+        "proxy_runner_v2.py": "e442d371bc472050e0011bd9503e3bb98e4871d50a7b24e9474145c60d6afb8c",
+        "v2_attempt_crash_note": "de9f09c2936b683aa5dc543dd1b3c99b36135de44e52bb5b3dc9c9caddb67b3c (harness TypeError in report writer AFTER both children cleanly reaped; partial v2 artifacts retained unmodified)"
+      },
+      "entry_point_honesty": "actual ConceptProxy constructor (same class main() instantiates; real _Handler/RepairEngine/ResponsesReviewer/check_pandoc) bound to OS-assigned port 0; main() hardcodes 127.0.0.1:18024; CLI/main() startup proofs remain the distinct A epoch; only external upstream/review endpoints synthetic",
+      "report": {
+        "file": "private b2_report_v3.json",
+        "sha256": "e6f5a14923dc71817b42d521f00755416a978315b4ee743b1be3d765d112dec0",
+        "stderr_sha256": "2ef3aff1ea83ed6fe1accd006db8e33638eda7cd07a330229ea8a62ee4da53fd",
+        "upstream_log_sha256": "9e2b0135d6a632229b333d88361291424269d71fe14d6910548d863a7f647ff1"
+      },
+      "results": [
+        "OS-assigned loopback ports from owned children's READY lines (45627/45777); bounded startup (ready 0.23 s / 0.745 s)",
+        "negative control: POST wrong path -> 404 with zero outbound requests",
+        "named boundary: 200 completed in 0.162 s; raw envelope byte-identical to synthetic original (sha256 bb8aad1b17ed924af3e2e0ecf74ac5a96f969f70ece2478759a19f8b04aea916); output text equals original (sha256 2fa482278af0ae99f4dc46ccfbb280928ff69905a773a3f242dfe6bb2861176c, 78 codepoints, URL + inline code intact)",
+        "outbound shape: exactly 1 main + 1 review; no Authorization anywhere; X-Probe-Marker not forwarded; review fresh and strict (store:false, stream:false, max_output_tokens 1536, input array, no linkage keys, model=probe-model)",
+        "usage observer: one content-free line calls=1 usage=10/20/30; main usage 7/25/32 separate; trace file 0600 (acceptance + 1 candidate + 0 replacements; persisted trace omits review_batch call/usage - minor finding)",
+        "cleanup: both owned children SIGTERM-terminated, reaped, pipes drained/closed (proxy exit 0 with CLEAN_SHUTDOWN through the owning admission close boundary; upstream exit -15); parent 1 thread / 4 open FDs; no forced kill"
+      ]
+    }
+  ],
+  "focused_test_reruns_at_evaluated_main": [
+    {
+      "command": "pytest concept-verification/tests/test_pandoc_protection.py -q",
+      "result": "PASSED",
+      "observed": "67 passed + 3 subtests in 7.47 s, rc 0",
+      "provenance": "prior epoch of this order at literal 3bd6ffd, clean tracked state (no product changes since); qualified python -B, private caches"
+    },
+    {
+      "command": "pytest concept-verification/tests/test_concept.py -q (CONCEPT_PANDOC=qualified)",
+      "result": "PASSED",
+      "observed": "19 passed in 5.07 s, rc 0",
+      "provenance": "prior epoch of this order at literal 3bd6ffd, clean tracked state; qualified python -B, private caches"
+    }
+  ],
+  "prior_runs_claims_index_only_not_relabeled": [
+    "full 19-suite (931 passed) at the M30-era tree (older product revision)",
+    "four required checks green at PR32 reviewed head 8fc14c3258aa8712ecd53be81abe3e62c798d04b whose tree the order's verified prior_review states equals the exact merged tree of 3bd6ffd (source-byte/tree equivalence corroboration, not a new execution at 3bd6ffd)"
+  ],
+  "shared_checks": [
+    {
+      "name": "check_ica (oap_cli ica)",
+      "command": "python3 oap/bin/oap_cli.py ica --repo-root . --source oap/audit/results/031-functional-proxy-audit.md --current-main 3bd6ffdd96bda95bd4c6de447b56cce76fe5a058",
+      "result": "PASSED (schema valid; 16 non-IMPLEMENTED gaps as designed; RC 0) at pre-commit worktree, registry byte-identical at 3bd6ffd"
+    },
+    {
+      "name": "governance accepted-runtime",
+      "command": "python3 oap/bin/oap_cli.py governance --repo-root . --mode accepted-runtime --accepted-ref 3549de2a436f485a693730d0ee7d5f8c00aec0c0",
+      "result": "PASSED (structure valid; RC 0)"
+    },
+    {
+      "name": "state (pre-commit, expected RECOVERY_REQUIRED)",
+      "command": "python3 oap/bin/oap_cli.py state --repo-root . --strategic-home <private strategic home>",
+      "result": "observed RECOVERY_REQUIRED for 031-a with branch oap/031-functional-proxy-audit and pr null - the expected pre-branch/pre-PR state of a fresh round; reconciled by this round's scoped branch + non-report commit + actual PR"
+    },
+    {
+      "name": "report-history require-manifest at HEAD 3bd6ffd",
+      "command": "python3 oap/bin/oap_cli.py report-history --repo-root . --index --require-manifest",
+      "result": "PASSED (RC 0; report_count 86 at HEAD; frozen mutation paths unchanged)"
+    },
+    {
+      "name": "transcript index (pre-commit, expected mismatch)",
+      "command": "python3 oap/bin/oap_cli.py transcript --repo-root . --index",
+      "result": "ACTIVE_INDEX_MISMATCH at pre-commit HEAD 3bd6ffd (worktree oap/active=031-a vs committed 030-a) - by design for a fresh round before the non-report commit; re-verified with --revision at the new implementation head after commit"
+    }
+  ],
+  "research_counter": {
+    "path": "research/RESEARCH-STATE.md",
+    "bump": "oap_reports_reviewed 85 -> 86 in the non-report commit (030-a pattern: report-only commit stages only the report path)",
+    "registry_entries": "42 unchanged",
+    "frozen_report_history_incidents": "2 unchanged"
+  },
+  "non_claims": [
+    "no live target model call", "no product/source/helper/registry mutation",
+    "no milestone/release/deployment acceptance", "no merge or automerge",
+    "no human evaluation dataset created or requested",
+    "raw probe logs remain private 0600 and are not echoed in public artifacts"
+  ]
+}
