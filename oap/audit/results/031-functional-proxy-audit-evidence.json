@@ -103,7 +103,7 @@
     {
       "name": "state (pre-commit, expected RECOVERY_REQUIRED)",
       "command": "python3 oap/bin/oap_cli.py state --repo-root . --strategic-home <private strategic home>",
-      "result": "observed RECOVERY_REQUIRED for 031-a with branch oap/031-functional-proxy-audit and pr null - the expected pre-branch/pre-PR state of a fresh round; reconciled by this round's scoped branch + non-report commit + actual PR"
+      "result": "observed RECOVERY_REQUIRED for 031-a with branch oap/031-functional-proxy-audit and pr null both pre- and post-branch/PR (the helper's pr field reflects the immutable order's pr:null metadata snapshot); the expected in-progress state of a round whose sole report is not yet published; reconciled by the report-only commit + remote verification, not by any state mutation"
     },
     {
       "name": "report-history require-manifest at HEAD 3bd6ffd",
@@ -113,7 +113,17 @@
     {
       "name": "transcript index (pre-commit, expected mismatch)",
       "command": "python3 oap/bin/oap_cli.py transcript --repo-root . --index",
-      "result": "ACTIVE_INDEX_MISMATCH at pre-commit HEAD 3bd6ffd (worktree oap/active=031-a vs committed 030-a) - by design for a fresh round before the non-report commit; re-verified with --revision at the new implementation head after commit"
+      "result": "ACTIVE_INDEX_MISMATCH at pre-commit HEAD 3bd6ffd (worktree oap/active=031-a vs committed 030-a) - by design before the non-report commit; RE-VERIFIED PASSED with --revision da6892e3ab1f4a05bb1f792b9acb6852145e688b (implementation head; RC 0, report_count 86)"
+    },
+    {
+      "name": "whitespace accepted base 2832fa1e (oap-bootstrap CI step)",
+      "command": "python3 oap/bin/check_whitespace.py --repo-root . --base 2832fa1e51bdf3641aabbd81feab8ddb64a876da",
+      "result": "FAILED (DIAGNOSTIC_SET_MISMATCH, RC 1) at implementation head da6892e - root cause: the immutable 031-a order file (SHA b4e4a2a4..., line 161 'new blank line at EOF.') adds a 5th whitespace diagnostic beyond the four pinned incidents (fixed contract, order 027-b); verified the ONLY new diagnostic in either base range; all round-added files whitespace-clean (git diff --check 3bd6ffd..da6892e -- oap/audit/results research/RESEARCH-STATE.md = clean); not remediable by coding (order immutable per R2; helper/registry frozen per R9); precedent: root-issued incident 4 resolved by root-adjudicated forward recovery; consequence: the OAP bootstrap acceptance CI whitespace step fails on any final report head until Root adjudicates"
+    },
+    {
+      "name": "whitespace accepted base 82ea1e6f (application-baseline CI step)",
+      "command": "python3 oap/bin/check_whitespace.py --repo-root . --base 82ea1e6f4173934fa47bb34ee6a6f78338d3603a",
+      "result": "FAILED (DIAGNOSTIC_SET_MISMATCH, RC 1) at implementation head da6892e - same single root cause (immutable 031-a order trailing blank line); identical diagnosis and adjudication path as the 2832fa1e base"
     }
   ],
   "research_counter": {
@@ -123,9 +133,21 @@
     "frozen_report_history_incidents": "2 unchanged"
   },
   "non_claims": [
-    "no live target model call", "no product/source/helper/registry mutation",
-    "no milestone/release/deployment acceptance", "no merge or automerge",
+    "no live target model call",
+    "no product/source/helper/registry mutation",
+    "no milestone/release/deployment acceptance",
+    "no merge or automerge",
     "no human evaluation dataset created or requested",
     "raw probe logs remain private 0600 and are not echoed in public artifacts"
-  ]
+  ],
+  "pr_readback": {
+    "number": 33,
+    "url": "https://github.com/ulfe-lmi/llm-slovenian-repair/pull/33",
+    "state": "OPEN",
+    "is_draft": false,
+    "head_ref": "oap/031-functional-proxy-audit",
+    "head_ref_oid": "da6892e3ab1f4a05bb1f792b9acb6852145e688b",
+    "base_ref": "main",
+    "observed_at": "2026-11-10T16:10:58+00:00"
+  }
 }

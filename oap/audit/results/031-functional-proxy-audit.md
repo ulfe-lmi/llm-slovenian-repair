@@ -157,6 +157,32 @@ implemented in this audit-only order.
     no target call was made, none is licensed, and quality remains
     owner-excluded.
 
+### Concrete governance/CI conflict found by this audit (not a product functional gap)
+
+**Whitespace fixed-contract conflict on the immutable 031-a order.** Both
+accepted whitespace bases (`2832fa1e51bdf3641aabbd81feab8ddb64a876da` and
+`82ea1e6f4173934fa47bb34ee6a6f78338d3603a`) now fail at the implementation
+head with `DIAGNOSTIC_SET_MISMATCH`: the immutable 031-a order file
+(SHA-256 `b4e4a2a485304893d228eb35d59e91cc229ddcea95a8160e536262e759004d10`,
+pinned by the order itself and by the requirements-first artifact) ends with a
+trailing blank line (diagnostic `oap/orders/031-a-functional-proxy-audit.md:161:
+new blank line at EOF.`), which adds a FIFTH whitespace diagnostic on top of
+the four pinned historical incidents whose fixed contract order 027-b closed
+("a changed, missing, re-added, or additional whitespace incident fails rather
+than becoming a new allowlist entry"). Verified: every other file added or
+changed by this round is whitespace-clean (`git diff --check` over
+3bd6ffd..head for the audit artifacts is empty); the only new diagnostic is
+the order file's. The 030-a order (for contrast) ends without the blank line.
+Coding cannot remediate this within the order: the order bytes are immutable
+(R2) and the helper/registry may not be mutated (R9). The historical precedent
+for a root-issued order whitespace defect (incident 4, 027-a order) was a
+root-adjudicated dedicated forward recovery. Consequence: the two final-head
+CI whitespace steps (Application baseline; OAP bootstrap acceptance) will fail
+on any final report head of this branch until Root adjudicates the new
+incident; this does not block the audit itself, its publication path, or the
+round's unpublished preflight, and it is surfaced here for Root's exact-byte
+review and the final-head CI gate.
+
 ### Owner-excluded and later-stage rows (distinct from the gaps above)
 
 - **Owner-excluded, not deferred, non-blocking functional:** M01 (labelled
@@ -312,9 +338,13 @@ only. Raw probe logs are private 0600 and are never echoed here.
 
 - check_ica runs against the exact evaluated merged-main SHA (recorded in the
   evidence JSON with command/rc); no helper/registry mutation.
-- Shared accepted-runtime governance, transcript index/HEAD, report history,
-  both accepted whitespace bases, all 173 manifest identities and research
-  counter consistency are applied (results in the evidence JSON).
+- Shared accepted-runtime governance, transcript (at the implementation head),
+  report history (require-manifest, at HEAD and at the implementation head),
+  all 173 manifest identities and research counter consistency: PASSED (exact
+  results in the evidence JSON). Both accepted whitespace bases: FAILED at the
+  implementation head with `DIAGNOSTIC_SET_MISMATCH`, root-caused exclusively
+  to the immutable 031-a order's trailing blank line (see the governance/CI
+  conflict subsection above); all round-added files are whitespace-clean.
 - **Designed counter mismatch (reported honestly before publication):**
   `research/RESEARCH-STATE.md` machine block advances
   `oap_reports_reviewed` 85 -> 86 in THIS round's non-report commit (the
