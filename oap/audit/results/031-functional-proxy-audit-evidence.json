@@ -33,7 +33,7 @@
         "planted malformed form + real truncated index: exactly 1 review call, rejected (independent evidence not stronger), byte-identical original (strict abstention; min counts 2270/272)",
         "planted + fixture index with supporting context: accepted (accepted-independent-evidence), exact replacement inserted, all else preserved",
         "keep / wider-edit proposals: target unchanged",
-        "unknown proposal ID: whole batch rejected at the real boundary (REVIEW_UNKNOWN_ID); first C5 fake crashed the engine process - probe artifact, real boundary tested directly"
+        "unknown proposal ID: C5 = direct parse_batch_envelope(envelope, {t0}) call rejecting the unknown t9 payload as BatchError(REVIEW_UNKNOWN_ID) before any BatchResult exists (no RepairEngine/HTTP run for that case; no original delivered; real parser boundary PASS); the earlier fakeReviewer that returned an invalid BatchResult crashed the harness - a harness artifact, not a passed original-fallback test; the engine only ever sees protocol-valid BatchResults"
       ]
     },
     {
@@ -140,19 +140,20 @@
     {
       "name": "whitespace accepted base 2832fa1e (oap-bootstrap CI step)",
       "command": "python3 oap/bin/check_whitespace.py --repo-root . --base 2832fa1e51bdf3641aabbd81feab8ddb64a876da",
-      "result": "FAILED (DIAGNOSTIC_SET_MISMATCH, RC 1) at implementation head da6892e - root cause: the immutable 031-a order file (SHA b4e4a2a4..., line 161 'new blank line at EOF.') adds a 5th whitespace diagnostic beyond the four pinned incidents (fixed contract, order 027-b); verified the ONLY new diagnostic in either base range; all round-added files whitespace-clean (git diff --check 3bd6ffd..da6892e -- oap/audit/results research/RESEARCH-STATE.md = clean); not remediable by coding (order immutable per R2; helper/registry frozen per R9); precedent: root-issued incident 4 resolved by root-adjudicated forward recovery; consequence: the OAP bootstrap acceptance CI whitespace step fails on any final report head until Root adjudicates; Root independently reproduced the same failure at the implementation head by running the actual CLI base: EXIT1 DIAGNOSTIC_SET_MISMATCH (see root_whitespace_reproduction)"
+      "result": "FAILED (DIAGNOSTIC_SET_MISMATCH, RC 1) at implementation head da6892e - root cause: the immutable 031-a order file (SHA b4e4a2a4..., line 161 'new blank line at EOF.') adds a 5th whitespace diagnostic beyond the four pinned incidents (fixed contract, order 027-b); verified the ONLY new diagnostic in either base range; all OTHER round-added audit/bookkeeping artifacts whitespace-clean (the issued 031-a order is explicitly not clean - its trailing blank line is the sole new diagnostic) (git diff --check 3bd6ffd..da6892e -- oap/audit/results research/RESEARCH-STATE.md = clean); not remediable by coding (order immutable per R2; helper/registry frozen per R9); precedent: root-issued incident 4 resolved by root-adjudicated forward recovery; consequence: the OAP bootstrap acceptance CI whitespace step fails on any final report head until Root adjudicates; Root independently reproduced the same failure at the implementation head by running the actual CLI base: EXIT1 DIAGNOSTIC_SET_MISMATCH (see root_whitespace_reproduction)"
     },
     {
       "name": "whitespace accepted base 82ea1e6f (application-baseline CI step)",
       "command": "python3 oap/bin/check_whitespace.py --repo-root . --base 82ea1e6f4173934fa47bb34ee6a6f78338d3603a",
-      "result": "FAILED (DIAGNOSTIC_SET_MISMATCH, RC 1) at implementation head da6892e - same single root cause (immutable 031-a order trailing blank line); identical diagnosis and adjudication path as the 2832fa1e base; Root independently reproduced the same failure at the implementation head by running the actual CLI base: EXIT1 DIAGNOSTIC_SET_MISMATCH (see root_whitespace_reproduction)"
+      "result": "FAILED (DIAGNOSTIC_SET_MISMATCH, RC 1) at implementation head da6892e - same single root cause (immutable 031-a order trailing blank line); identical diagnosis and adjudication path as the 2832fa1e base; all OTHER round-added audit/bookkeeping artifacts whitespace-clean (the issued 031-a order is explicitly not clean - its trailing blank line is the sole new diagnostic); Root independently reproduced the same failure at the implementation head by running the actual CLI base: EXIT1 DIAGNOSTIC_SET_MISMATCH (see root_whitespace_reproduction)"
     }
   ],
   "research_counter": {
     "path": "research/RESEARCH-STATE.md",
     "bump": "oap_reports_reviewed 85 -> 86 in the non-report commit (030-a pattern: report-only commit stages only the report path)",
     "registry_entries": "42 unchanged",
-    "frozen_report_history_incidents": "2 unchanged"
+    "frozen_report_history_incidents": "2 unchanged",
+    "state_at_correction_commit": "machine block oap_reports_reviewed=86 vs 85 published reports: designed expected pre-publication mismatch until the report-only publication commit; recorded as the actual precise state - not a failed check and not a future PASS; no counter bump for the same-round corrections"
   },
   "non_claims": [
     "no live target model call",
@@ -162,7 +163,9 @@
     "no human evaluation dataset created or requested",
     "raw probe logs remain private 0600 and are not echoed in public artifacts",
     "no rerun of the closed Root main()-SIGINT experiment; its private receipt is cited, not reproduced",
-    "no research-counter bump for this same-round correction (85->86 already committed in da6892e for the round's single report)"
+    "no research-counter bump for this same-round correction (85->86 already committed in da6892e for the round's single report)",
+    "the owner-supplied throwaway native key file (repo root, mode 0600, untracked, locally excluded) was not read, staged, copied or logged by coding",
+    "no use of the remaining authorized target calls under 031-a; Root's 2 post-epoch native reviewer diagnostics (actual 15 s exchange deadline: FAILED by deadline; 45 s diagnostic bound: valid local proposal in 22.453 s) are later Root diagnostics outside this audit's execution scope, with private source-bound receipts; a separate 031-b operator-setting decision is in preparation and is not implemented here"
   ],
   "pr_readback": {
     "number": 33,
@@ -193,5 +196,43 @@
     },
     "disposition": "Root owns this formatting error; no order/history rewrite and no helper repair within 031-a (order immutable per R2; helper/registry frozen per R9); Root will issue an explicit bounded forward correction AFTER truthful 031-a publication; no CI bypass"
   },
-  "round_result": "PARTIAL - the required shared whitespace checks fail at every implementation head (sole root cause: the immutable 031-a order's trailing blank line, Root-owned, forward correction after publication); the audit evidence and classification remain final; no milestone acceptance"
+  "round_result": "PARTIAL - the required shared whitespace checks fail at every implementation head (sole root cause: the immutable 031-a order's trailing blank line, Root-owned, forward correction after publication); the audit evidence and classification remain final; no milestone acceptance",
+  "shared_checks_reverification_at_2a9f6da": {
+    "head": "2a9f6da6ecbdfd724916d6e88ccd9ab52ea0148e",
+    "at_utc": "2026-11-10T17:33-17:38Z",
+    "checks": [
+      {
+        "name": "check_ica (corrected audit md, committed worktree)",
+        "result": "PASSED (schema valid; 11 non-IMPLEMENTED gaps - 8 PARTIAL + 3 ABSENT; RC 0); registry byte-identical at 3bd6ffd"
+      },
+      {
+        "name": "governance accepted-runtime (--accepted-ref 3549de2a)",
+        "result": "PASSED (structure valid; RC 0)"
+      },
+      {
+        "name": "transcript --revision 2a9f6da",
+        "result": "PASSED (RC 0; result valid; active=latest=031-a; report_count 86; frozen mutation paths unchanged)"
+      },
+      {
+        "name": "report-history --revision 2a9f6da --require-manifest",
+        "result": "PASSED (RC 0; report_count 86; frozen mutation paths 006-a/006-c unchanged)"
+      },
+      {
+        "name": "whitespace accepted base 2832fa1e (CI: OAP bootstrap acceptance)",
+        "result": "FAILED (DIAGNOSTIC_SET_MISMATCH, RC 1) at 2a9f6da; full diagnostic set = the four pinned historical incidents + the sole new diagnostic oap/orders/031-a-functional-proxy-audit.md:161 (new blank line at EOF); committed order blob 154087c510433f229c39cee4bafded877b40b671 (18351 B) verified at this head"
+      },
+      {
+        "name": "whitespace accepted base 82ea1e6f (CI: Application baseline)",
+        "result": "FAILED (DIAGNOSTIC_SET_MISMATCH, RC 1) at 2a9f6da; identical diagnostic set and root cause as the 2832fa1e base"
+      }
+    ],
+    "pr_readback": {
+      "number": 33,
+      "state": "OPEN",
+      "head_ref_oid": "2a9f6da6ecbdfd724916d6e88ccd9ab52ea0148e",
+      "observed_at": "2026-11-10T17:37:08+00:00",
+      "note": "post-C1 push read-back (past observation); the final implementation head after the evidence-fidelity correction commit is recorded in the 031-a work report and the PR title/body"
+    },
+    "note": "re-verification at the final implementation head (after the evidence-fidelity correction commit) is recorded in the 031-a work report (private preflight)"
+  }
 }
