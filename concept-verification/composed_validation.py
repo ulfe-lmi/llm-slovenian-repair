@@ -9,7 +9,7 @@ from dataclasses import dataclass
 from detector import Candidate, Token, tokenize
 from protected import Interval
 from qwen_client import Proposal
-from repair import accept
+from runtime_acceptance import accept
 
 from corpus import Corpus
 

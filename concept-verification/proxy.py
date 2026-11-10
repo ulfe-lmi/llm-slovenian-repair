@@ -61,13 +61,14 @@ from pandoc_protection import (
     resolve_pandoc_spec,
 )
 from qwen_client import Proposal, ResponsesReviewer, responses_path
-from repair import accept, apply_edits
+from repair import apply_edits
 from responses_contract import (
     RequestContractError,
     aligned_metadata_clean,
     validate_completed_envelope,
     validate_request,
 )
+from runtime_acceptance import accept
 from runtime_corpus import RuntimeCorpus, RuntimeCorpusError
 
 # Native accepted-object class captured at import time.  BaseServer

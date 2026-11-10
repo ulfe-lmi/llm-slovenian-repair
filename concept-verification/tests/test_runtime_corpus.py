@@ -85,6 +85,7 @@ HEALTHY_BIGRAM = [
     ("tako zapisano", 20),
     ("je presenetljiv", 20),
     ("je zapisano", 20),
+    ("je presenetliv", 10),
 ]
 HEALTHY_TRIGRAM = [("to je tako", 20), ("je tako zapisano", 20)]
 HEALTHY_MIDDLE = [("je", "zapisano", "tako", 20)]

@@ -317,10 +317,21 @@ seed) to this bounded independent-support and composed-result
 validation engineering objective on the actual proxy without an ICA
 request or milestone label; the original numeric-027 optional
 CPU-analyzer scope is not executed and remains unclosed, and it is
-not falsely completed. Those seed
+not falsely completed. Round 028-a continues the bounded
+runnable-proxy validation work on the numeric 028 identity (the
+PLAN 9.1 strict AUTO_REPAIR runtime-acceptance seam) with one
+identical runtime lexical-acceptance policy for individual and
+composed proposal validation without an ICA request or milestone
+label; the packaged objective 028 as a packaged library/milestone
+objective remains unclosed. Round 028-b (same PR) reconciled the two
+frozen-fixture groups under the unchanged policy (one explicit Pandoc
+original-context row, the three-expression Analysis fixture, one
+positive ordinary-route distant-unknown Engine regression) and
+brought the full 17-module suite green; the packaged objective 028
+remains unclosed. Those seed
 objectives (including the remapped seed 022, the remapped numeric
 023, the numeric 024 packaged-API seed, the remapped numeric 025,
-the remapped numeric 026, and the remapped numeric 027) as packaged
+the remapped numeric 026, the remapped numeric 027, and the numeric 028 strict runtime-acceptance seed) as packaged
 library/milestone objectives remain unclosed; following work for those
 historical packaged programme objectives (historical programme text, not
 a planned separate dataset/research restart) stays: bounded
