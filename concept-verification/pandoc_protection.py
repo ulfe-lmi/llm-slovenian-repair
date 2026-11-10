@@ -41,6 +41,7 @@ import unicodedata
 from dataclasses import dataclass, field
 from typing import TYPE_CHECKING, cast
 
+import request_lifecycle
 from config import (
     PANDOC_ENV_VAR,
     PANDOC_MAX_BLOCKS,
@@ -251,10 +252,34 @@ def _run_bounded(spec: PandocSpec, args: list[str], stdin: bytes) -> tuple[int, 
     launch and caller interruptions during or after the real child
     creation.  Raises PandocStartupError with a
     distinct finite reason on timeout or output-limit breach.
+
+    Order 030-a (owned runner ONLY): the runner executes on the
+    owner thread, so it consults the context-local active-scope
+    cancellation check (``request_lifecycle.active_cancellation_check``,
+    the same mechanism as the frozen qwen_client -> review exchange;
+    a no-op outside an active request) at a loop top beside the
+    deadline check; the same check also runs at the phase entry
+    BEFORE the owned launch, so an observed client cancellation
+    never starts the child at all (no new optional phase after an
+    observed cancellation).  A cancellation observed after the
+    actual child start raises
+    ``request_lifecycle.RequestCancelled`` with the exact owned
+    child signalled and actually reaped by the existing finally,
+    and the anchored deadline, caps, the public parser API and
+    every other startup semantic are untouched.
     """
     process: subprocess.Popen[bytes] | None = None
     selector = None
     try:
+        # Phase-entry cancellation (order 030-a, R4): the
+        # context-local active-scope check runs BEFORE the owned
+        # launch, so an observed client cancellation starts no
+        # child at all (no new optional phase after an observed
+        # cancellation); the exact owned cleanup below is
+        # unchanged for every path that did launch.
+        check = request_lifecycle.active_cancellation_check()
+        if check is not None and check():
+            raise request_lifecycle.RequestCancelled()
         # The exact process object is owned BEFORE the fallible start
         # can create any child: with the real Popen class the
         # pre-allocated instance carries the real (unmodified) Popen
@@ -328,6 +353,9 @@ def _run_bounded(spec: PandocSpec, args: list[str], stdin: bytes) -> tuple[int, 
         while not (stdin_done and eof_out and eof_err):
             if time.monotonic() >= deadline:
                 raise PandocStartupError(REASON_TIMEOUT, str(spec.timeout))
+            check = request_lifecycle.active_cancellation_check()
+            if check is not None and check():
+                raise request_lifecycle.RequestCancelled()
             ready = selector.select(timeout=min(0.05, max(0.0, deadline - time.monotonic())))
             for key, _mask in ready:
                 fd = key.fd

@@ -6,10 +6,12 @@ import contextlib
 import os
 import sqlite3
 import stat
+from collections.abc import Callable
 from pathlib import Path
 from typing import NoReturn
 from urllib.parse import quote
 
+import request_lifecycle
 from config import RUNTIME_CORPUS_BUSY_TIMEOUT_SECONDS
 from evidence_budget import (
     EVIDENCE_FETCH_CHUNK_ROWS,
@@ -241,6 +243,26 @@ class RuntimeCorpus(Corpus):
         _preflight_header(Path(configured))
         uri = "file://" + quote(configured, safe="/") + "?mode=ro"
         self._budget = EvidenceBudgetState(limits)
+        # Request-owned cancellation (order 030-a, requirement 4):
+        # the composed native progress handler reads the adopted
+        # cancellation predicate (a per-request scope check, explicit
+        # closure capture - no ContextVar assumption) after the base
+        # budget handler on every callback, and a native VM-loop
+        # interrupt on an observed cancellation is mapped to
+        # RequestCancelled (never a quota or transport failure).
+        # evidence_budget itself is untouched.  The constructor keeps
+        # its accepted one-argument call shape for transparent
+        # observers and captures the CURRENT already-active
+        # request's cancellation check on the owner thread BEFORE
+        # the schema SQL below runs under the composed progress
+        # handler (the owner-thread accessor is a no-op None outside
+        # an active request, so direct core tests are unchanged);
+        # the owner may still adopt or replace the predicate later
+        # for corpus work begun without an active scope.
+        self._cancelled: Callable[[], bool] | None = (
+            request_lifecycle.active_cancellation_check()
+        )
+        self._cancel_seen = False
         connection: sqlite3.Connection | None = None
         try:
             connection = sqlite3.connect(
@@ -249,9 +271,35 @@ class RuntimeCorpus(Corpus):
             # The real native progress handler is attached immediately
             # after connect, BEFORE any claimed budgeted SQL (order
             # 024-a, requirement 3); one cumulative callback counter
-            # per connection/answer, never reset per query.
+            # per connection/answer, never reset per query.  The
+            # base budget handler runs first (its quota/control state
+            # unchanged); only when it does not interrupt does the
+            # cancellation check run (order 030-a, requirement 4).
+            base_handler = make_progress_handler(self._budget)
+
+            def progress_handler() -> int:
+                interrupted = base_handler()
+                if not interrupted:
+                    check = self._cancelled
+                    if check is not None:
+                        try:
+                            cancel_seen = check()
+                        except BaseException as exc:  # noqa: BLE001
+                            # A cancellation-check fault is preserved
+                            # on the budget state exactly like a base
+                            # handler fault: never raised into the
+                            # native C loop (it would become an opaque
+                            # error and lose its identity).
+                            self._budget.pending_control = exc
+                            self._budget.exhausted = True
+                            return 1
+                        if cancel_seen:
+                            self._cancel_seen = True
+                            return 1
+                return interrupted
+
             connection.set_progress_handler(
-                make_progress_handler(self._budget),
+                progress_handler,
                 limits.progress_interval,
             )
             self._validate_accessed_schema(connection)
@@ -260,6 +308,12 @@ class RuntimeCorpus(Corpus):
             raise
         except sqlite3.Error as exc:
             self._teardown(connection, pending=exc)
+            if self._cancel_seen:
+                # An observed client cancellation interrupted the
+                # construction SQL (native VM-loop interrupt): it is
+                # never mislabeled as a transport failure (order
+                # 030-a, requirement 4).
+                raise request_lifecycle.RequestCancelled() from None
             raise _classify(exc) from None
         except BaseException as exc:
             # A preserved caller-control identity (or any other
@@ -270,6 +324,23 @@ class RuntimeCorpus(Corpus):
             self._teardown(connection, pending=exc)
             raise
         self.connection = connection
+
+    def adopt_cancelled(
+        self, cancelled: Callable[[], bool] | None
+    ) -> None:
+        """Adopt the per-request cancellation predicate.
+
+        The owner may adopt or replace the CURRENT request's scope
+        check after construction (order 030-a, requirement 4) for
+        corpus work begun before its scope was active (or without
+        one); the constructor already captures the check of the
+        request active on the owner thread before its schema SQL.
+        The composed native progress handler reads this attribute on
+        every callback, so the adoption is effective for all later
+        query work.  ``None`` restores the historical
+        no-cancellation behavior.
+        """
+        self._cancelled = cancelled
 
     def _validate_accessed_schema(self, connection: sqlite3.Connection) -> None:
         """Detect accessed incompatible schema without any full-index scan.
@@ -506,13 +577,18 @@ class RuntimeCorpus(Corpus):
         mislabeled as a quota failure; only this adapter's own sticky
         exhaustion maps BUDGET_EXCEEDED; every other SQLite error
         keeps the old fixed labels and causes (order 024-a,
-        requirement 3).
+        requirement 3).  An observed client cancellation (the
+        composed progress handler's flag) maps the native VM-loop
+        interrupt to RequestCancelled instead (order 030-a,
+        requirement 4).
         """
         state = self._budget
         control = state.pending_control
         if control is not None:
             state.pending_control = None
             raise control
+        if self._cancel_seen:
+            raise request_lifecycle.RequestCancelled() from None
         if state.exhausted:
             raise RuntimeCorpusError(REASON_BUDGET_EXCEEDED) from None
         raise _classify(exc) from None

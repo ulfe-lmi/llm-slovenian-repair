@@ -35,6 +35,8 @@ import ssl
 import time
 from collections.abc import Callable
 
+import request_lifecycle
+
 _SSE_DELIMITERS = re.compile(r"\r\n\r\n|\n\n")
 _HEX_DIGITS = re.compile(rb"[0-9a-fA-F]+")
 _READ_STEP = 65536
@@ -214,6 +216,7 @@ def read_bounded_body(
     *,
     require_complete_sse: bool = False,
     event: Callable[[str], dict[str, object] | None] | None = None,
+    cancelled: Callable[[], bool] | None = None,
 ) -> bytes:
     """Read one main response body under one elapsed budget and a bound.
 
@@ -228,6 +231,16 @@ def read_bounded_body(
     terminal marker are not consumed.  The budget is anchored at
     collection entry and every blocking wait is bounded by the remaining
     time; byte arrival never resets it.
+
+    Order 030-a: with a captured ``cancelled`` predicate (the current
+    request's cancellation check, explicitly captured - no ContextVar
+    assumption), an observed client cancellation raises
+    ``request_lifecycle.RequestCancelled`` at a loop top beside the
+    deadline check; the only blocking readiness wait is additionally
+    sliced at 50 ms so the cancellation can wake this phase.  The
+    anchored deadline, every bound and the finally timeout restore are
+    untouched, and the predicate absent keeps the historical behavior
+    exactly.
     """
     validate_budget(budget)
     deadline = time.monotonic() + budget
@@ -312,6 +325,8 @@ def read_bounded_body(
     try:
         while True:
             check_deadline()
+            if cancelled is not None and cancelled():
+                raise request_lifecycle.RequestCancelled()
             if length is not None and total >= length:
                 break
             if frames is not None and frames.mode == "done":
@@ -345,12 +360,29 @@ def read_bounded_body(
                 return b"".join(chunks)
             # Nothing buffered and nothing on the wire: wait under the
             # remaining budget (a slow peer that keeps dribbling bytes
-            # cannot reset or outlive the anchored deadline).
-            ready, _, _ = select.select(
-                [raw_socket], [], [], max(remaining(), 0.0)
-            )
+            # cannot reset or outlive the anchored deadline).  With a
+            # captured cancellation predicate the wait is additionally
+            # sliced at 50 ms so the cancellation can wake this phase;
+            # the slice never resets or extends the anchored deadline
+            # (order 030-a, requirement 4).
+            wait = max(remaining(), 0.0)
+            if cancelled is not None:
+                wait = min(wait, 0.05)
+            ready, _, _ = select.select([raw_socket], [], [], wait)
             if not ready:
-                raise CaptureError("upstream capture timeout")
+                if cancelled is None:
+                    # Legacy path: the wait consumed the ENTIRE
+                    # remaining budget, so the anchored deadline has
+                    # passed.
+                    raise CaptureError("upstream capture timeout")
+                # Sliced cancellation wake: the not-ready result is
+                # NOT the anchored deadline.  Loop to the top, where
+                # the same anchored deadline is rechecked (raising on
+                # expiry) and the cancellation is re-evaluated
+                # (raising RequestCancelled when observed); the clock
+                # is never reset or extended (order 030-a,
+                # requirement 4).
+                continue
             spins += 1
             if spins > _SPIN_LIMIT:
                 raise CaptureError("upstream socket boundary is unavailable")

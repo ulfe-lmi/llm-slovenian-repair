@@ -27,6 +27,7 @@ import composed_validation
 import delivery_transport
 import header_transport
 import request_admission
+import request_lifecycle
 import upstream_setup
 from batch_review import (
     BOUND_REVIEW_REASONS,
@@ -173,6 +174,7 @@ def _bounded_read(
     timeout: float,
     *,
     require_complete_sse: bool = False,
+    cancelled: Callable[[], bool] | None = None,
 ) -> bytes:
     """Read within byte/time limits, stopping at a complete SSE event.
 
@@ -196,6 +198,7 @@ def _bounded_read(
             timeout,
             require_complete_sse=require_complete_sse,
             event=_event,
+            cancelled=cancelled,
         )
     except capture_transport.CaptureError as exc:
         raise ProxyError(str(exc)) from exc
@@ -746,10 +749,93 @@ class RepairEngine:
     # request so no earlier usage is ever carried over (order 015-a,
     # requirement 7).
     _review_usage: BatchUsage | None = None
+    # The in-flight request's request-local cancellation scope
+    # (order 030-a, requirement 1); None for direct core use, where
+    # context-local access is a no-op.
+    _scope: request_lifecycle.CancellationScope | None = None
+    # Whether THIS request's operator usage record was already
+    # emitted (order 030-a, requirement 7): the success-path
+    # observation and the abort observation are the only two
+    # emitters, and exactly one of them may emit per request.
+    _usage_observed: bool = False
 
-    def begin_request(self) -> None:
+    def begin_request(
+        self, scope: request_lifecycle.CancellationScope | None = None
+    ) -> None:
         self._details = []
         self._review_usage = None
+        self._scope = scope
+        self._usage_observed = False
+
+    def _raise_if_cancelled(self) -> None:
+        # Phase-boundary check (order 030-a, requirement 4): a no-op
+        # outside an active request scope.
+        if self._scope is not None:
+            self._scope.raise_if_cancelled()
+
+    def abort_request(
+        self, observer: Callable[[list[dict[str, object]]], None]
+    ) -> None:
+        """One content-free abort observation plus the full
+        request-local state reset (order 030-a, requirements 6 and
+        7).
+
+        The observation derives ONE authoritative record from the
+        engine's own request-local state: the actual
+        attempted-dispatch count (zero for a pre-dispatch
+        cancellation, one when the owned reviewer exchange was
+        actually attempted) and the validated known-or-unknown
+        usage (a completed known result remains known through a
+        later CPU cancellation).  The text-bearing details are
+        drained and discarded - never re-aggregated (their
+        already-counted batches would double-count the actual
+        review work) and never observed, so the emitted record is
+        content-free.  An already-emitted observation is never
+        re-observed: exactly one operator record per request,
+        whichever boundary emits it first.  The request-local
+        state is always cleared, even if the operator callback
+        faults (the drain precedes the observer call).
+        """
+        calls = (
+            1
+            if self._scope is not None
+            and self._scope.review_dispatch_attempted()
+            else 0
+        )
+        if self._review_usage is not None:
+            usage: object = {
+                "input_tokens": self._review_usage.input_tokens,
+                "output_tokens": self._review_usage.output_tokens,
+                "total_tokens": self._review_usage.total_tokens,
+            }
+        else:
+            usage = "unknown"
+        self.take_details()
+        self._review_usage = None
+        self._scope = None
+        if self._usage_observed:
+            return
+        self._usage_observed = True
+        observer(
+            [
+                {
+                    "review_batch": {
+                        "calls": calls,
+                        "targets": 0,
+                        "outcome": "cancelled",
+                        "reason": None,
+                        "usage": usage,
+                    },
+                }
+            ]
+        )
+
+    def mark_usage_observed(self) -> None:
+        """Record that THIS request's operator usage record was
+        already emitted on the success path (order 030-a,
+        requirement 7): a later abort must then only clear state
+        and never re-observe the already-emitted record."""
+        self._usage_observed = True
 
     def take_details(self) -> list[dict[str, object]]:
         details = self._details or []
@@ -919,6 +1005,7 @@ class RepairEngine:
         )
         if reason is not None:
             return self._fail_closed_analysis(text, raw_started, reason)
+        self._raise_if_cancelled()
         try:
             spec = self.pandoc if self.pandoc is not None else resolve_pandoc_spec()
             outcome = protect_with_pandoc(spec, text)
@@ -929,6 +1016,11 @@ class RepairEngine:
             intervals = compose_protection(text, outcome)
         except PandocStartupError as exc:
             return self._fail_closed_original(text, raw_started, exc.reason, exc.detail)
+        except request_lifecycle.RequestCancelled:
+            # A dedicated cancellation at an owned phase boundary
+            # escapes to the handler (order 030-a, requirements 4
+            # and 6); it is never a fail-closed original.
+            raise
         except Exception as exc:  # noqa: BLE001 - fail closed before Corpus
             # Any unexpected mapping, composition or depth failure must be
             # translated to the fail-closed original, never escape to the
@@ -936,15 +1028,28 @@ class RepairEngine:
             return self._fail_closed_original(
                 text, raw_started, "PANDOC_UNEXPECTED", type(exc).__name__
             )
+        self._raise_if_cancelled()
         # Technical evidence access opens only after complete-main
         # eligibility: an invalid or ineligible main response never opens
         # or creates the index (order 016-a, requirements 4 and 6).  The
         # adapter is strictly read-only over the existing index.
+        cancelled = self._scope.cancelled if self._scope is not None else None
+        corpus: RuntimeCorpus | None = None
+        # The explicit first control of the corpus-owned region
+        # (order 030-a, requirement 5): the close below must never
+        # replace the exact first, and clean-flow close controls
+        # still propagate.
+        first_control: BaseException | None = None
         try:
             corpus = RuntimeCorpus(self.index)
-        except RuntimeCorpusError as exc:
-            return self._fail_closed_evidence(text, raw_started, exc.reason, "early")
-        try:
+            if cancelled is not None:
+                corpus.adopt_cancelled(cancelled)
+            # Every step after the successful acquisition - the
+            # adoption and the phase-boundary cancellation checks
+            # included - sits inside the owned region, so the
+            # read-only handle is released on every path after
+            # acquisition (order 030-a, requirement 5).
+            self._raise_if_cancelled()
             try:
                 detector_started = time.monotonic()
                 candidates = detect(text, corpus, intervals, mode=self.mode, maximum=4)
@@ -1038,6 +1143,12 @@ class RepairEngine:
                         batch_result = self.reviewer.review_batch(text, targets)
                         proposals = batch_result.proposals
                         self._review_usage = batch_result.usage
+                    except request_lifecycle.RequestCancelled:
+                        # A dedicated cancellation during the owned
+                        # exchange escapes to the handler (order
+                        # 030-a, requirements 4 and 6); it is never
+                        # a trusted failure label.
+                        raise
                     except Exception as exc:
                         # Only the closed vocabulary of fixed labels is
                         # trusted; anything else maps to REVIEW_FAILED so
@@ -1086,6 +1197,7 @@ class RepairEngine:
             # original (order 027-a, requirement 6).
             mapping_unprovable = False
             for index, item in enumerate(prepared):
+                self._raise_if_cancelled()
                 candidate = item.candidate
                 review_started = time.monotonic()
                 proposal_record: dict[str, object] | None = None
@@ -1156,6 +1268,12 @@ class RepairEngine:
                             "replacement": None,
                         }
                         failure = exc.reason
+                    except request_lifecycle.RequestCancelled:
+                        # A dedicated cancellation is not individual
+                        # isolation: it aborts the whole optional
+                        # pass to the handler (order 030-a,
+                        # requirement 6).
+                        raise
                     except Exception:
                         # Individual isolation: a failed acceptance never
                         # invalidates the other independent proposals.
@@ -1190,6 +1308,7 @@ class RepairEngine:
                         )
                     )
             if not late_aborted and edits:
+                self._raise_if_cancelled()
                 # Composed-result validation (order 027-a, requirements
                 # 3-5): every individually accepted edit is re-validated
                 # against the original with all other surviving edits
@@ -1277,8 +1396,35 @@ class RepairEngine:
                     != text[interval.start : interval.end]
                 ):
                     protected_changes += 1
+        except RuntimeCorpusError as exc:
+            return self._fail_closed_evidence(text, raw_started, exc.reason, "early")
+        except BaseException as exc:
+            first_control = exc
+            raise
         finally:
-            corpus.close()
+            if corpus is not None:
+                try:
+                    corpus.close()
+                except BaseException as close_exc:
+                    if first_control is None:
+                        # Clean flow: close controls still propagate.
+                        raise close_exc
+                    if not request_lifecycle.is_nonordinary_control(
+                        first_control
+                    ) and request_lifecycle.is_nonordinary_control(
+                        close_exc
+                    ):
+                        # An ordinary pending (or cancellation) never
+                        # acquires authority to discard the first
+                        # nonordinary caller control: the later
+                        # nonordinary cleanup control propagates
+                        # (order 030-a, requirement 5).
+                        raise close_exc
+                    # The pending first control keeps its exact
+                    # identity: a nonordinary first over any close
+                    # fault, and an ordinary pending over an ordinary
+                    # cleanup fault (never replaced, never converted
+                    # into a generated failure).
         if self._details is not None:
             detail: dict[str, object] = {
                     "original": text,
@@ -1469,99 +1615,173 @@ class _Handler(BaseHTTPRequestHandler):
         request_id = self.headers.get("X-Concept-Request-ID", "")
         if not re.fullmatch(r"[A-Za-z0-9_-]{1,80}", request_id):
             request_id = uuid.uuid4().hex
+        scope: request_lifecycle.CancellationScope | None = None
         started = time.monotonic()
+        # The actual pending control of THIS handler operation,
+        # tracked explicitly (order 030-a, requirement 5): only a
+        # control actually propagating out of this operation may
+        # authorize suppression of a new cleanup control in the
+        # owned finisher.  An unrelated already-handled ambient
+        # exception is never borrowed - sys.exc_info can return
+        # one from an enclosing handled context, and passing it
+        # would wrongly suppress this operation's own cleanup
+        # control.
+        first_control: BaseException | None = None
         try:
             try:
-                contract = validate_request(body)
-            except RequestContractError as exc:
-                # Bounded content-free rejection before any upstream or
-                # reviewer call: unsupported capabilities and invalid
-                # requests never reach main generation (order 015-a,
-                # requirement 2).  This post-intake emission runs
-                # under the one delivery deadline (order 021-a,
-                # requirement 4).  The fixed validated reason is
-                # bound to an ordinary local before the callback:
-                # the except-as variable is deleted at block end and
-                # must not be closed over.
-                reason = exc.reason
-                self._deliver(
-                    lambda: self._send_error_json(
-                        400, "invalid_request", reason
-                    )
-                )
-                return
-            if hasattr(owner.engine, "begin_request"):
-                owner.engine.begin_request()
-            forwarded = owner.forward(body, dict(self.headers))
-            raw_seconds = time.monotonic() - started
-            repaired = forwarded.body
-            if forwarded.status == 200:
-                # The declared client mode must agree with the observed
-                # upstream content type; a mismatch (including an unknown
-                # type) is a bounded upstream protocol failure, never a
-                # silent mode switch (order 015-a, requirement 6).
-                media_type = forwarded.content_type.split(";", 1)[0].strip().lower()
-                if contract.stream and media_type != "text/event-stream":
-                    self._deliver(
-                        lambda: self._send_error_json(
-                            502,
-                            "upstream_protocol_error",
-                            "RESPONSE_MODE_MISMATCH",
-                        )
-                    )
-                    return
-                if not contract.stream and media_type != "application/json":
-                    self._deliver(
-                        lambda: self._send_error_json(
-                            502,
-                            "upstream_protocol_error",
-                            "RESPONSE_MODE_MISMATCH",
-                        )
-                    )
-                    return
-                if contract.stream:
-                    repaired, _ = transform_sse(forwarded.body, owner.engine.repair)
-                else:
-                    repaired, _ = transform_json(forwarded.body, owner.engine.repair)
-                if hasattr(owner.engine, "take_details") and hasattr(owner, "write_traces"):
-                    details = owner.engine.take_details()
-                    owner.write_traces(
-                        request_id,
-                        details,
-                        time.monotonic() - started,
-                        raw_seconds,
-                    )
-                    owner.observe_usage(details)
-            def _emit() -> None:
-                # The delivery deadline is anchored inside _deliver
-                # immediately before this emission and before the
-                # owned guard starts (order 021-a, requirement 2);
-                # the common explicit flush in _deliver keeps the
-                # whole status/headers/body/flush phase inside the
-                # one clock.
-                content_type = (
-                    forwarded.content_type or "application/octet-stream"
-                )
-                self.send_response(forwarded.status)
-                self.send_header("Content-Type", content_type)
-                self.send_header("Content-Length", str(len(repaired)))
-                self.end_headers()
-                self.wfile.write(repaired)
-
-            self._deliver(_emit)
-        except BrokenPipeError:
-            return
-        except Exception:
-            # Post-intake generated error (order 021-a, requirement
-            # 4): only while no response emission has begun.  Once
-            # emission began, a failed partial send is closed quietly
-            # - never a second response/status/502/fallback on the
-            # same socket.
-            if not self._emission_begun:
                 try:
-                    self._deliver(lambda: self.send_error(502))
-                except Exception:
-                    self.close_connection = True
+                    contract = validate_request(body)
+                except RequestContractError as exc:
+                    # Bounded content-free rejection before any upstream or
+                    # reviewer call: unsupported capabilities and invalid
+                    # requests never reach main generation (order 015-a,
+                    # requirement 2).  This post-intake emission runs
+                    # under the one delivery deadline (order 021-a,
+                    # requirement 4).  The fixed validated reason is
+                    # bound to an ordinary local before the callback:
+                    # the except-as variable is deleted at block end and
+                    # must not be closed over.
+                    reason = exc.reason
+                    self._deliver(
+                        lambda: self._send_error_json(
+                            400, "invalid_request", reason
+                        )
+                    )
+                    return
+                # One request-local cancellation scope begins AFTER the
+                # fully captured VALID ingress and BEFORE any main work
+                # (order 030-a, requirement 1): the exact accepted
+                # socket is watched by one bounded disconnect-only poll
+                # watcher, the owned scope is finished on every path
+                # before the handler returns to the next connection, and
+                # a cancellation racing any completed transfer wins
+                # before the transfer (requirement 4).
+                scope = request_lifecycle.CancellationScope(self.connection)
+                scope.start()
+                if hasattr(owner.engine, "begin_request"):
+                    owner.engine.begin_request(scope)
+                scope.raise_if_cancelled()
+                forwarded = owner.forward(body, dict(self.headers))
+                scope.raise_if_cancelled()
+                raw_seconds = time.monotonic() - started
+                repaired = forwarded.body
+                if forwarded.status == 200:
+                    # The declared client mode must agree with the observed
+                    # upstream content type; a mismatch (including an unknown
+                    # type) is a bounded upstream protocol failure, never a
+                    # silent mode switch (order 015-a, requirement 6).
+                    media_type = forwarded.content_type.split(";", 1)[0].strip().lower()
+                    if contract.stream and media_type != "text/event-stream":
+                        self._deliver(
+                            lambda: self._send_error_json(
+                                502,
+                                "upstream_protocol_error",
+                                "RESPONSE_MODE_MISMATCH",
+                            )
+                        )
+                        return
+                    if not contract.stream and media_type != "application/json":
+                        self._deliver(
+                            lambda: self._send_error_json(
+                                502,
+                                "upstream_protocol_error",
+                                "RESPONSE_MODE_MISMATCH",
+                            )
+                        )
+                        return
+                    if contract.stream:
+                        repaired, _ = transform_sse(forwarded.body, owner.engine.repair)
+                    else:
+                        repaired, _ = transform_json(forwarded.body, owner.engine.repair)
+                    scope.raise_if_cancelled()
+                    if hasattr(owner.engine, "take_details") and hasattr(owner, "write_traces"):
+                        details = owner.engine.take_details()
+                        owner.write_traces(
+                            request_id,
+                            details,
+                            time.monotonic() - started,
+                            raw_seconds,
+                        )
+                        owner.observe_usage(details)
+                        if hasattr(owner.engine, "mark_usage_observed"):
+                            owner.engine.mark_usage_observed()
+                def _emit() -> None:
+                    # The delivery deadline is anchored inside _deliver
+                    # immediately before this emission and before the
+                    # owned guard starts (order 021-a, requirement 2);
+                    # the common explicit flush in _deliver keeps the
+                    # whole status/headers/body/flush phase inside the
+                    # one clock.
+                    content_type = (
+                        forwarded.content_type or "application/octet-stream"
+                    )
+                    self.send_response(forwarded.status)
+                    self.send_header("Content-Type", content_type)
+                    self.send_header("Content-Length", str(len(repaired)))
+                    self.end_headers()
+                    self.wfile.write(repaired)
+
+                scope.raise_if_cancelled()
+                self._deliver(_emit)
+            except request_lifecycle.RequestCancelled:
+                # A dedicated cancellation is caught INSIDE the owning
+                # Handler before any optional-original/502 fallback and
+                # before the admission worker boundary (order 030-a,
+                # requirement 6): one content-free abort observation,
+                # then a quiet close - no retry, no second status, no
+                # cancellation-time trace on a closed client.
+                if hasattr(owner.engine, "abort_request"):
+                    owner.engine.abort_request(owner.observe_usage)
+                self.close_connection = True
+                return
+            except BrokenPipeError:
+                return
+            except MemoryError as exc:
+                # The first MemoryError of THIS operation is a
+                # nonordinary control by law: it is tracked for the
+                # owned finisher and propagates after complete
+                # cleanup - never caught into a generated 502 and
+                # never lost (order 030-a, requirement 5).
+                first_control = exc
+                raise
+            except Exception:
+                # Post-intake generated error (order 021-a, requirement
+                # 4): only while no response emission has begun.  Once
+                # emission began, a failed partial send is closed quietly
+                # - never a second response/status/502/fallback on the
+                # same socket.
+                if not self._emission_begun:
+                    try:
+                        self._deliver(lambda: self.send_error(502))
+                    except Exception:
+                        self.close_connection = True
+            except BaseException as exc:
+                # A nonordinary control (or a MemoryError) of
+                # THIS operation escaping the handling suites
+                # above is the first own control: it is tracked
+                # for the owned finisher and propagates after
+                # complete cleanup (order 030-a, requirement 5).
+                first_control = exc
+                raise
+        except BaseException as exc:
+            # A control escaping from INSIDE a handling suite is
+            # this operation's first own control as well (order
+            # 030-a, requirement 5); the exact first identity is
+            # kept and cleanup never replaces it.
+            if first_control is None:
+                first_control = exc
+            raise
+        finally:
+            # Actually finish the owned scope on every path before
+            # the handler returns to the next connection (order
+            # 030-a, requirements 1 and 5): the exact owned watcher
+            # is stopped and joined and the accepted-socket
+            # reference is released, so no canceled-request resource
+            # or text is retained idle.
+            if scope is not None:
+                request_lifecycle.finish_owned_scope(
+                    scope, first_control
+                )
 
     def _send_intake_error(self, status: int, code: str) -> None:
         """Bounded best-effort fixed content-free intake error.
@@ -1715,6 +1935,13 @@ class ConceptProxy(HTTPServer):
         # instances retain it while later config defaults apply
         # only to newly constructed instances.
         self._admission_policy = request_admission.current_admission_policy()
+        # Explicit pure native capability validation (order 030-a,
+        # requirement 1): the selected-native disconnect-only poll
+        # prerequisite must hold before any bind allocation or
+        # traffic is accepted; a weaker or missing detector refuses
+        # startup explicitly - no silent fallback, no runtime IO
+        # self-probe.
+        request_lifecycle.validate_native_poll_capability()
         super().__init__(address, _Handler)
         self.upstream = parsed
         self.engine = engine
@@ -1959,6 +2186,16 @@ class ConceptProxy(HTTPServer):
         return paths
 
     def forward(self, body: bytes, incoming: dict[str, str]) -> Forwarded:
+        # The accepted two-argument call shape is unchanged for the
+        # frozen transparent observers (order 030-a): the active
+        # request's cancellation check is captured HERE on the
+        # owning request thread (the per-request slot the handler
+        # establishes before any main work; a no-op None outside an
+        # active request), and the captured predicate is passed
+        # explicitly into the existing guarded transports - no
+        # ContextVar lookup from the guard threads, and no deadline
+        # or limit change.
+        cancelled = request_lifecycle.active_cancellation_check()
         host = self.upstream.hostname
         if host is None:
             raise ProxyError("upstream hostname is missing")
@@ -2012,6 +2249,7 @@ class ConceptProxy(HTTPServer):
                 headers=headers,
                 deadline=deadline,
                 capture_timeout=self.capture_timeout,
+                cancelled=cancelled,
             )
             # One elapsed header budget anchored immediately before
             # acquisition (order 018-a, requirement 2): the stdlib
@@ -2020,7 +2258,7 @@ class ConceptProxy(HTTPServer):
             # expiration and joins before any body capture, so the 017
             # body deadline below begins later and stays independent.
             response = header_transport.acquire_response(
-                connection, self.header_timeout
+                connection, self.header_timeout, cancelled=cancelled
             )
             content_type = response.getheader("Content-Type", "")
             raw = _bounded_read(
@@ -2029,6 +2267,7 @@ class ConceptProxy(HTTPServer):
                 self.capture_timeout,
                 require_complete_sse=response.status == 200
                 and content_type.lower().startswith("text/event-stream"),
+                cancelled=cancelled,
             )
             return Forwarded(response.status, raw, content_type)
         finally:

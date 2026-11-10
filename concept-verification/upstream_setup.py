@@ -61,8 +61,11 @@ import subprocess
 import sys
 import threading
 import time
+from collections.abc import Callable
 from pathlib import Path
 from typing import cast
+
+import request_lifecycle
 
 UPSTREAM_SETUP_VERSION = 1
 
@@ -191,16 +194,23 @@ class SetupGuard:
     entry to the setup (before this guard starts and before any
     worker or process startup), so guard startup is inside the
     clock.  The guard is a pure timer: it owns only a bounded event
-    wait plus a shutdown of the exact socket object last bound with
-    :meth:`adopt`, so a blocked connect, handshake or write
-    unblocks; it never touches a numeric FD, another connection or a
-    later socket.  Startup is owned: a guard thread that actually
-    started before a startup failure is cancelled and actually
-    joined (whether still running or already ended); a never-started
-    thread is never joined.  :meth:`release` cancels and actually
-    joins the guard on every path (idempotent) and returns whether
-    the elapsed state is expired after the actual join (a late or
-    racing completion loses to expiration).
+    waits plus a shutdown of the exact socket object last bound
+    with :meth:`adopt`, so a blocked connect, handshake or write
+    unblocks; it never touches a numeric FD, another connection or
+    a later socket.  The client cancellation predicate is captured
+    explicitly with :meth:`adopt_cancelled` (an ordinary argument
+    into the exact closure - no ContextVar assumption): with a
+    captured predicate the bounded waits are sliced at 50 ms so the
+    predicate can wake the guard and interrupt the exact current
+    socket exactly like expiration; without one the same bounded
+    slice waits keep re-checking the anchored deadline, which is
+    never reset or extended.  Startup is owned: a guard thread that
+    actually started before a startup failure is cancelled and
+    actually joined (whether still running or already ended); a
+    never-started thread is never joined.  :meth:`release` cancels
+    and actually joins the guard on every path (idempotent) and
+    returns whether the elapsed state is expired after the actual
+    join (a late or racing completion loses to expiration).
     """
 
     def __init__(self, deadline: float) -> None:
@@ -210,35 +220,89 @@ class SetupGuard:
         self._completed = threading.Event()
         self._lock = threading.Lock()
         self._current: socket.socket | None = None
-        self._state = {"expired": False}
+        self._state = {"expired": False, "cancelled": False}
+        # The explicitly captured client cancellation predicate
+        # (order 030-a, requirement 4): an ordinary argument into
+        # the exact closure, adopted after construction and read on
+        # every bounded wait.
+        self._predicate: Callable[[], bool] | None = None
+        # The owned guard's own nonordinary control (order 030-a,
+        # requirement 5): preserved by the guard thread, handed to
+        # the owning thread through the actual join, never swallowed.
+        self._control: BaseException | None = None
 
         def _guard() -> None:
-            remaining = self._deadline - time.monotonic()
-            if remaining > 0:
-                self._completed.wait(
-                    timeout=min(remaining, threading.TIMEOUT_MAX)
-                )
-            if not self._completed.is_set():
-                self._state["expired"] = True
-                with self._lock:
-                    sock = self._current
-                if sock is not None:
-                    with contextlib.suppress(Exception):
-                        sock.shutdown(socket.SHUT_RDWR)
+            # The anchored absolute deadline is never reset or
+            # extended; every blocking wait is one bounded slice so
+            # cancellation capture, expiry or completion wakes the
+            # guard promptly (order 030-a, requirement 4).
+            while True:
+                if self._completed.is_set():
+                    return
+                remaining = self._deadline - time.monotonic()
+                if remaining <= 0:
+                    self._state["expired"] = True
+                    with self._lock:
+                        sock = self._current
+                    if sock is not None:
+                        with contextlib.suppress(Exception):
+                            sock.shutdown(socket.SHUT_RDWR)
+                    return
+                predicate = self._predicate
+                if predicate is not None:
+                    try:
+                        if predicate():
+                            self._state["cancelled"] = True
+                            with self._lock:
+                                sock = self._current
+                            if sock is not None:
+                                with contextlib.suppress(Exception):
+                                    sock.shutdown(socket.SHUT_RDWR)
+                            return
+                    except BaseException as exc:
+                        if request_lifecycle.is_nonordinary_control(exc):
+                            # The owned guard's own nonordinary
+                            # control is preserved and transferred
+                            # to the owning thread: the EXACT
+                            # current owned socket is interrupted
+                            # first - storing the control and
+                            # setting the event alone cannot wake
+                            # the parent blocked inside a native
+                            # socket operation - then the timer
+                            # stops (no interrupt after
+                            # completion), the owning join is
+                            # woken, and the control is never
+                            # discarded (order 030-a, requirement
+                            # 5).
+                            with self._lock:
+                                sock = self._current
+                            if sock is not None:
+                                with contextlib.suppress(Exception):
+                                    sock.shutdown(socket.SHUT_RDWR)
+                            self._control = exc
+                            self._completed.set()
+                            return
+                        # An ordinary predicate fault is a phase
+                        # fault, not a caller control: it must not
+                        # kill the timer, and the anchored deadline
+                        # still bounds the phase.
+                self._completed.wait(min(0.05, remaining))
 
         guard = threading.Thread(target=_guard, name="concept-setup-guard")
         try:
             guard.start()
-        except BaseException:
+        except BaseException as exc:
             # Partial-startup ownership: a guard that actually
             # started before the startup failure (thread ident set,
             # whether still alive or already ended) is cancelled and
             # actually joined before the failure propagates; a
             # never-started thread (ident is None) is never joined
-            # (order 022-a, requirement 3).
+            # (order 022-a, requirement 3).  A control from the
+            # cleanup join itself never replaces the first (startup)
+            # control (order 030-a, requirement 5).
             if guard.ident is not None:
                 self._completed.set()
-                guard.join()
+                request_lifecycle.join_owned_thread(guard, exc)
             raise
         self._guard = guard
         self._released = False
@@ -262,6 +326,19 @@ class SetupGuard:
             self._current = sock
         return True
 
+    def adopt_cancelled(self, cancelled: Callable[[], bool]) -> None:
+        """Capture the client cancellation predicate (order 030-a,
+        requirement 4).
+
+        Called by the owner immediately after construction with the
+        current request's explicitly captured check (an ordinary
+        argument into the exact closure - no ContextVar assumption);
+        the guard reads it on every bounded wait and interrupts the
+        exact current socket on a truthy result exactly like
+        expiration.  Absence keeps the pure-timer behavior.
+        """
+        self._predicate = cancelled
+
     def is_expired(self) -> bool:
         """Synchronous observation against the anchored deadline.
 
@@ -271,13 +348,27 @@ class SetupGuard:
         """
         return self._state["expired"] or time.monotonic() >= self._deadline
 
+    def is_cancelled(self) -> bool:
+        """Whether the captured cancellation predicate fired the guard."""
+        return self._state["cancelled"]
+
+    def captured_control(self) -> BaseException | None:
+        """The owned guard's own nonordinary control, if captured."""
+        return self._control
+
     def release(self) -> bool:
         """Cancel and actually join the guard; return the elapsed
         state.
 
         Idempotent: the owner releases the guard on every setup
         path; a second call is a no-op join of the already-terminated
-        timer.  No setup worker survives the forward.
+        timer.  The join is retried until it actually completes
+        (order 030-a, requirement 5); with no first control pending,
+        the first nonordinary control from the join-fault cleanup is
+        preserved and re-raised only after the join has actually
+        completed, and the owner applies the shared control rule to
+        its pending first control itself.  No setup worker survives
+        the forward.
         """
         if self._released:
             return self._state["expired"] or time.monotonic() >= self._deadline
@@ -288,7 +379,7 @@ class SetupGuard:
         # because the guard's post-cancel work is itself bounded
         # (no blocking primitive remains after the cancellation).
         self._completed.set()
-        self._guard.join()
+        request_lifecycle.join_owned_thread(self._guard, None)
         return self._state["expired"] or time.monotonic() >= self._deadline
 
 
@@ -471,13 +562,25 @@ def _make_pipe_nonblocking(fd: int) -> None:
 
 
 def _select_governed(
-    readable_fd: int | None, writeable_fd: int | None, deadline: float
+    readable_fd: int | None,
+    writeable_fd: int | None,
+    deadline: float,
+    cancelled: Callable[[], bool] | None = None,
 ) -> None:
-    """Wait for one governed readiness slice before a pipe operation."""
+    """Wait for one governed readiness slice before a pipe operation.
+
+    With a captured cancellation predicate (order 030-a,
+    requirement 4) the bounded 50 ms readiness wait is also the
+    cancellation wake: an observed client cancellation raises
+    ``RequestCancelled`` at this owned wait and is never relabelled
+    as a deadline or transport failure.
+    """
     while True:
         remaining = deadline - time.monotonic()
         if remaining <= 0:
             raise DeadlineExceeded
+        if cancelled is not None and cancelled():
+            raise request_lifecycle.RequestCancelled()
         readable, writeable, _ = select.select(
             [readable_fd] if readable_fd is not None else [],
             [writeable_fd] if writeable_fd is not None else [],
@@ -488,12 +591,14 @@ def _select_governed(
             return
 
 
-def _read_exact_governed(fd: int, count: int, deadline: float) -> bytes:
+def _read_exact_governed(
+    fd: int, count: int, deadline: float, cancelled: Callable[[], bool] | None
+) -> bytes:
     """Read exactly ``count`` bytes from a nonblocking fd under the
     deadline; partial reads and readiness races stay governed."""
     buffer = bytearray()
     while len(buffer) < count:
-        _select_governed(fd, None, deadline)
+        _select_governed(fd, None, deadline, cancelled)
         try:
             chunk = os.read(fd, count - len(buffer))
         except BlockingIOError:
@@ -504,22 +609,32 @@ def _read_exact_governed(fd: int, count: int, deadline: float) -> bytes:
     return bytes(buffer)
 
 
-def _read_frame_governed(fd: int, max_bytes: int, deadline: float) -> bytes:
-    prefix = _read_exact_governed(fd, _FRAME_PREFIX.size, deadline)
+def _read_frame_governed(
+    fd: int,
+    max_bytes: int,
+    deadline: float,
+    cancelled: Callable[[], bool] | None,
+) -> bytes:
+    prefix = _read_exact_governed(fd, _FRAME_PREFIX.size, deadline, cancelled)
     (frame_len,) = _FRAME_PREFIX.unpack(prefix)
     if frame_len == 0 or frame_len > max_bytes:
         raise FrameMalformed("resolver frame length exceeds bound")
-    return _read_exact_governed(fd, frame_len, deadline)
+    return _read_exact_governed(fd, frame_len, deadline, cancelled)
 
 
-def _write_all_governed(fd: int, data: bytes, deadline: float) -> None:
+def _write_all_governed(
+    fd: int,
+    data: bytes,
+    deadline: float,
+    cancelled: Callable[[], bool] | None,
+) -> None:
     """Write all bytes to a nonblocking fd under the deadline; partial
     writes on a stalled or shrunken pipe stay governed, never a
     deadline-unsafe blocking write."""
     view = memoryview(data)
     offset = 0
     while offset < len(view):
-        _select_governed(None, fd, deadline)
+        _select_governed(None, fd, deadline, cancelled)
         try:
             written = os.write(fd, view[offset:])
         except BlockingIOError:
@@ -529,7 +644,18 @@ def _write_all_governed(fd: int, data: bytes, deadline: float) -> None:
         offset += written
 
 
-def _wait_exit_governed(proc: subprocess.Popen[bytes], deadline: float) -> int:
+def _wait_exit_governed(
+    proc: subprocess.Popen[bytes],
+    deadline: float,
+    cancelled: Callable[[], bool] | None,
+) -> int:
+    """Poll/wait the exact owned child under the deadline.
+
+    With a captured cancellation predicate (order 030-a,
+    requirement 4) the bounded 50 ms wait is also the cancellation
+    wake; the caller performs the exact owned terminate/reap after
+    the ``RequestCancelled`` propagates.
+    """
     while True:
         code = proc.poll()
         if code is not None:
@@ -537,6 +663,8 @@ def _wait_exit_governed(proc: subprocess.Popen[bytes], deadline: float) -> int:
         remaining = deadline - time.monotonic()
         if remaining <= 0:
             raise DeadlineExceeded
+        if cancelled is not None and cancelled():
+            raise request_lifecycle.RequestCancelled()
         try:
             return proc.wait(timeout=min(remaining, 0.05))
         except subprocess.TimeoutExpired:
@@ -590,7 +718,10 @@ def _resolve_literal(host: str) -> list[tuple[int, str]] | None:
 
 
 def resolve_addresses(
-    host: str, port: int, deadline: float
+    host: str,
+    port: int,
+    deadline: float,
+    cancelled: Callable[[], bool] | None = None,
 ) -> list[tuple[int, str]]:
     """Resolve the upstream host to a bounded unique address list.
 
@@ -680,20 +811,22 @@ def resolve_addresses(
         os.close(response_write)
         open_fds.remove(request_read)
         open_fds.remove(response_write)
-        _write_all_governed(request_write, frame, deadline)
+        _write_all_governed(request_write, frame, deadline, cancelled)
         os.close(request_write)
         open_fds.remove(request_write)
-        reply = _read_frame_governed(response_read, RESPONSE_FRAME_MAX_BYTES, deadline)
+        reply = _read_frame_governed(
+            response_read, RESPONSE_FRAME_MAX_BYTES, deadline, cancelled
+        )
         # Strict single-frame check: exactly one frame, then the pipe
         # ends; any extra byte is a malformed reply.
-        _select_governed(response_read, None, deadline)
+        _select_governed(response_read, None, deadline, cancelled)
         try:
             extra = os.read(response_read, 1)
         except BlockingIOError:
             extra = b""
         if extra:
             raise FrameMalformed("resolver reply carries extra data")
-        code = _wait_exit_governed(proc, deadline)
+        code = _wait_exit_governed(proc, deadline, cancelled)
         if code != 0:
             raise ProcessFailure("owned resolver child exited nonzero")
         decoded = decode_response_frame(reply)
@@ -745,15 +878,21 @@ def _connect_phase(
     deadline: float,
     capture_timeout: float,
     guard: SetupGuard,
+    cancelled: Callable[[], bool] | None = None,
 ) -> socket.socket:
     """Bounded address attempts: each validated address is connected
     to at most once (no retry, no reset); every attempt is capped by
-    the remaining deadline in addition to the guard."""
+    the remaining deadline in addition to the guard.  With a captured
+    cancellation predicate (order 030-a, requirement 4) an observed
+    client cancellation after an attempt fault is a cancellation,
+    never a next-address transport retry."""
     last: OSError | None = None
     chosen: socket.socket | None = None
     for family, address in addresses:
         if deadline - time.monotonic() <= 0:
             raise DeadlineExceeded
+        if cancelled is not None and cancelled():
+            raise request_lifecycle.RequestCancelled()
         sock = socket.socket(family, socket.SOCK_STREAM)
         try:
             if not guard.adopt(sock):
@@ -768,8 +907,9 @@ def _connect_phase(
         except BaseException as exc:  # noqa: B036 - re-raised below
             # The exact owned socket is closed on EVERY failure kind
             # (including caller interruption) before classification;
-            # only a nonexpired transport error tries the next
-            # validated address (bounded attempts, no reset).
+            # only a nonexpired, non-cancelled transport error tries
+            # the next validated address (bounded attempts, no
+            # reset).
             with contextlib.suppress(OSError):
                 sock.close()
             if (
@@ -778,6 +918,13 @@ def _connect_phase(
                 or deadline - time.monotonic() <= 0
             ):
                 raise
+            if cancelled is not None and cancelled():
+                # The client went away during the attempt: this is a
+                # cancellation, never a next-address retry (order
+                # 030-a, requirement 4).  Caller control (exc not an
+                # OSError) is already re-raised above with its exact
+                # first identity.
+                raise request_lifecycle.RequestCancelled() from exc
             last = exc
             continue
     if chosen is not None:
@@ -816,6 +963,7 @@ def _tls_phase(
     deadline: float,
     capture_timeout: float,
     guard: SetupGuard,
+    cancelled: Callable[[], bool] | None = None,
 ) -> socket.socket:
     """Actual TLS handshake under the remaining setup deadline.
 
@@ -834,6 +982,8 @@ def _tls_phase(
     """
     if deadline - time.monotonic() <= 0:
         raise DeadlineExceeded
+    if cancelled is not None and cancelled():
+        raise request_lifecycle.RequestCancelled()
     # The exact context object the original stdlib connect() would
     # have used for this connection (set at construction; private
     # stdlib attribute, narrow typed access).
@@ -858,9 +1008,19 @@ def _tls_phase(
             raise DeadlineExceeded
         wrapped.settimeout(min(capture_timeout, remaining))
         wrapped.do_handshake()
-    except BaseException:
+    except BaseException as exc:
         with contextlib.suppress(Exception):
             wrapped.close()
+        if (
+            isinstance(exc, OSError)
+            and cancelled is not None
+            and cancelled()
+        ):
+            # A guard-interrupted handshake after an observed client
+            # cancellation is a cancellation, never a transport
+            # failure (order 030-a, requirement 4); caller control
+            # (exc not an OSError) keeps its exact first identity.
+            raise request_lifecycle.RequestCancelled() from exc
         raise
     return wrapped
 
@@ -874,6 +1034,7 @@ def _request_phase(
     capture_timeout: float,
     guard: SetupGuard,
     sock: socket.socket,
+    cancelled: Callable[[], bool] | None = None,
 ) -> http.client.HTTPConnection:
     """Hand the prepared connection to the stdlib request emitter.
 
@@ -893,12 +1054,23 @@ def _request_phase(
             raise DeadlineExceeded
         sock.settimeout(min(capture_timeout, remaining))
         connection.request("POST", request_path, body=body, headers=headers)
-    except BaseException:
+    except BaseException as exc:
         # The exact owned connection (and its socket) is closed on
         # EVERY failure kind before the failure propagates; no
         # partially emitted request is ever replayed.
         with contextlib.suppress(Exception):
             connection.close()
+        if (
+            isinstance(exc, OSError)
+            and cancelled is not None
+            and cancelled()
+        ):
+            # A guard-interrupted request write after an observed
+            # client cancellation is a cancellation, never a
+            # transport failure (order 030-a, requirement 4); caller
+            # control (exc not an OSError) keeps its exact first
+            # identity.
+            raise request_lifecycle.RequestCancelled() from exc
         raise
     # Restore the owner's capture timeout for the frozen
     # header/body acquisition path before the setup clock is
@@ -917,6 +1089,7 @@ def open_upstream_connection(
     headers: dict[str, str],
     deadline: float,
     capture_timeout: float,
+    cancelled: Callable[[], bool] | None = None,
 ) -> http.client.HTTPConnection:
     """Prepare and emit the main upstream request under one deadline.
 
@@ -938,6 +1111,17 @@ def open_upstream_connection(
     has already been terminated and actually reaped (order 022-a,
     requirement 3); the failure is a bounded
     :class:`UpstreamSetupError` (a main failure for the handler).
+
+    Order 030-a: with a captured ``cancelled`` predicate (the current
+    request's cancellation check, explicitly captured - no ContextVar
+    assumption), an observed client cancellation is checked at the
+    phase boundaries beside ``_require_deadline`` and at the bounded
+    owned waits, interrupts the exact current transport socket
+    through the guard, and is raised as
+    ``request_lifecycle.RequestCancelled`` (never a deadline or
+    transport failure); the existing anchored deadline, bounded
+    attempts and every other setup semantic are untouched, and the
+    predicate absent keeps the historical behavior exactly.
     """
     if scheme not in ("http", "https"):
         raise UpstreamSetupError(
@@ -948,18 +1132,33 @@ def open_upstream_connection(
             _fixed_message(REASON_DEADLINE), REASON_DEADLINE
         )
     guard = SetupGuard(deadline)
+    if cancelled is not None:
+        # The explicitly captured predicate is an ordinary argument
+        # into the exact owned closure (no ContextVar assumption);
+        # adoption before the first phase keeps the first bounded
+        # wait cancellation-aware (order 030-a, requirement 4).
+        guard.adopt_cancelled(cancelled)
     sock: socket.socket | None = None
     connection: http.client.HTTPConnection | None = None
     internal_error: Exception | None = None
     base_error: BaseException | None = None
+    # The observed client cancellation is tracked like EVERY other
+    # unsuccessful transfer (order 030-a, requirement 4): it must not
+    # take the success cleanup branch - the exact owned socket or
+    # connection is closed on it as well.
+    cancel_pending: request_lifecycle.RequestCancelled | None = None
     try:
         try:
-            addresses = resolve_addresses(host, port, deadline)
+            addresses = resolve_addresses(host, port, deadline, cancelled)
             _require_deadline(deadline)
+            if cancelled is not None and cancelled():
+                raise request_lifecycle.RequestCancelled()
             sock = _connect_phase(
-                addresses, port, deadline, capture_timeout, guard
+                addresses, port, deadline, capture_timeout, guard, cancelled
             )
             _require_deadline(deadline)
+            if cancelled is not None and cancelled():
+                raise request_lifecycle.RequestCancelled()
             if scheme == "https":
                 # The real stdlib connection object is created BEFORE
                 # the handshake so the TLS phase reuses its exact
@@ -968,9 +1167,17 @@ def open_upstream_connection(
                     host, port, timeout=capture_timeout
                 )
                 sock = _tls_phase(
-                    connection, sock, host, deadline, capture_timeout, guard
+                    connection,
+                    sock,
+                    host,
+                    deadline,
+                    capture_timeout,
+                    guard,
+                    cancelled,
                 )
             _require_deadline(deadline)
+            if cancelled is not None and cancelled():
+                raise request_lifecycle.RequestCancelled()
             if connection is None:
                 connection = http.client.HTTPConnection(
                     host, port, timeout=capture_timeout
@@ -978,12 +1185,30 @@ def open_upstream_connection(
             connection = _request_phase(
                 connection, request_path, body, headers,
                 deadline, capture_timeout, guard, sock,
+                cancelled,
             )
             # The request write completed: release the setup clock
             # BEFORE response acquisition.  A racing completion loses
             # to expiration.
             if guard.release():
                 raise DeadlineExceeded
+            # A client cancellation observed by the owned guard (or
+            # the captured predicate) raced the completed upload: it
+            # wins BEFORE the handoff - the exact owned connection is
+            # closed by the unconditional cleanup below and the
+            # dedicated exception raised (order 030-a, requirement
+            # 4).
+            if guard.is_cancelled() or (
+                cancelled is not None and cancelled()
+            ):
+                raise request_lifecycle.RequestCancelled()
+        except request_lifecycle.RequestCancelled as exc:
+            # Observed client cancellation: tracked for the
+            # unconditional owned cleanup below, then preserved and
+            # re-raised unchanged (order 030-a, requirement 4) - it
+            # is never relabelled as a deadline or transport failure.
+            cancel_pending = exc
+            raise
         except Exception as exc:  # noqa: B036 - re-raised below
             # Ordinary setup failures become the bounded main
             # failure below.
@@ -1000,23 +1225,70 @@ def open_upstream_connection(
             # connected socket no phase catch owns.
             base_error = exc
     finally:
-        # Unconditional owned cleanup on EVERY non-successful
-        # transfer (ordinary failure or caller interruption) before
-        # the failure propagates or the function returns: release
-        # and actually join the guard, close the exact owned
-        # connection or socket.  No setup worker or open transport
-        # survives the forward (order 022-a, requirement 3).
-        guard.release()
-        if internal_error is not None or base_error is not None:
-            if connection is not None:
-                with contextlib.suppress(Exception):
-                    connection.close()
-            elif sock is not None:
-                with contextlib.suppress(OSError):
-                    sock.close()
+        # Unconditional owned cleanup on EVERY unsuccessful transfer
+        # (ordinary failure, caller interruption OR observed
+        # cancellation) before the failure propagates or the
+        # function returns: release and actually join the guard,
+        # close the exact owned connection or socket.  No setup
+        # worker or open transport survives the forward (order
+        # 022-a, requirement 3).
+        if (
+            internal_error is not None
+            or base_error is not None
+            or cancel_pending is not None
+        ):
+            first = (
+                base_error if base_error is not None else internal_error
+            )
+            try:
+                guard.release()
+            except BaseException:
+                # The shared ownership rule (order 030-a,
+                # requirement 5) applied by the owner: the guarded
+                # join actually completed before the cleanup control
+                # was transferred; the pending first control keeps
+                # its exact identity when it is nonordinary, and an
+                # ordinary first control cannot discard the first
+                # nonordinary cleanup control, which propagates
+                # after the completed join.
+                if request_lifecycle.is_nonordinary_control(first):
+                    raise first from None
+                raise
+            finally:
+                # The remaining exact owned cleanup completes even
+                # if the guarded release itself raises the first
+                # nonordinary cleanup control (order 030-a,
+                # requirement 5).
+                if connection is not None:
+                    with contextlib.suppress(Exception):
+                        connection.close()
+                elif sock is not None:
+                    with contextlib.suppress(OSError):
+                        sock.close()
+        else:
+            guard.release()
     if base_error is not None:
         raise base_error
     if internal_error is not None:
+        if request_lifecycle.is_nonordinary_control(internal_error):
+            # The current operation's own nonordinary control keeps
+            # its exact first identity: it is never relabelled as a
+            # setup failure (order 030-a, requirement 5).
+            raise internal_error
+        guard_control = guard.captured_control()
+        if request_lifecycle.is_nonordinary_control(guard_control):
+            # The owned guard's own control is transferred after the
+            # guard was actually joined: the resulting ordinary
+            # fault is never relabelled as a setup failure (order
+            # 030-a, requirement 5).
+            raise guard_control
+        if guard.is_cancelled():
+            # The exact current transport socket was interrupted by
+            # the guard because the captured predicate observed a
+            # client cancellation: classify the resulting ordinary
+            # fault as that cancellation (order 030-a,
+            # requirement 4).
+            raise request_lifecycle.RequestCancelled() from internal_error
         reason = (
             REASON_DEADLINE
             if isinstance(internal_error, DeadlineExceeded)
@@ -1024,6 +1296,23 @@ def open_upstream_connection(
             else REASON_TRANSPORT
         )
         raise UpstreamSetupError(_fixed_message(reason), reason) from internal_error
+    guard_control = guard.captured_control()
+    if request_lifecycle.is_nonordinary_control(guard_control):
+        # Setup completed, but the owned guard captured its own
+        # control: it is transferred instead of handing over a
+        # connection whose exact socket may already be interrupted
+        # (order 030-a, requirement 5).  This is still an
+        # unsuccessful transfer: the untransferred owned connection
+        # (and its socket) is actually closed before the control
+        # propagates - cleanup on EVERY unsuccessful transfer
+        # (order 030-a, requirement 5).
+        if connection is not None:
+            with contextlib.suppress(Exception):
+                connection.close()
+        elif sock is not None:
+            with contextlib.suppress(OSError):
+                sock.close()
+        raise guard_control
     assert connection is not None
     return connection
 
