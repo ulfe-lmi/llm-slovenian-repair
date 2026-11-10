@@ -50,7 +50,7 @@ from config import (
     REVIEWER_HTTP_TIMEOUT_SECONDS,
     canonical_bytes,
 )
-from detector import Candidate, detect, tokenize
+from detector import Candidate, tokenize
 from evidence_budget import validate_default_evidence_policy
 from pandoc_protection import (
     PandocSpec,
@@ -70,6 +70,7 @@ from responses_contract import (
 )
 from runtime_acceptance import accept
 from runtime_corpus import RuntimeCorpus, RuntimeCorpusError
+from runtime_detection import detect
 
 # Native accepted-object class captured at import time.  BaseServer
 # types the accepted request as the TCP/UDP union; this TCP
