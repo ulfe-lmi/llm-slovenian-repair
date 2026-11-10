@@ -1349,3 +1349,7 @@ changed).
   correction of the existing strict-evidence/composition requirements
   in the runnable proxy - not a new research programme, phrase
   producer, packaged-library, milestone, ICA or deployment claim.
+
+## Runtime word/phrase target selection (order 029-a, halted before any product change)
+
+Round 029-a (2026-11-10) was ordered to add bounded runtime word and phrase target selection to the runnable proxy (new `runtime_detection.py` plus import routing only in `proxy.py`; planned final scope 53 Python files/18 test modules). Strategy halted the implementation before the first product change after the actual-source finding that the preserved read-only index has zero known bigram/trigram counts at or below the issued absolute threshold (bigram/trigram minimum 2270, unigram minimum 272), so the issued weak-context route is unreachable on that source. No module, test or product change was made: all 51 concept Python files remain byte-frozen at the accepted base, and the runnable runtime selector remains the frozen raw detector's rare/unknown single-word behavior. The corrected same-PR round 029-b (context selector on the existing all-token evidence without an absolute count cutoff) will be ordered after verified 029-a publication. This is not a new research programme, phrase producer, packaged-library, milestone, ICA or deployment claim.

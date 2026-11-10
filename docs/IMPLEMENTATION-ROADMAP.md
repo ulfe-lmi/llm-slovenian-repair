@@ -328,7 +328,7 @@ frozen-fixture groups under the unchanged policy (one explicit Pandoc
 original-context row, the three-expression Analysis fixture, one
 positive ordinary-route distant-unknown Engine regression) and
 brought the full 17-module suite green; the packaged objective 028
-remains unclosed. Those seed
+remains unclosed. Round 029-a (2026-11-10, objective 029) was ordered for bounded runtime word/phrase target selection in the runnable proxy (new `runtime_detection.py` plus import routing only in `proxy.py`; planned final scope 53 Python files/18 test modules) and was halted by strategy before any product change after the actual-source finding that the preserved read-only index has zero known bigram/trigram counts at or below the issued absolute threshold (bigram/trigram minimum 2270, unigram minimum 272), making the issued weak-context route unreachable: no product change was made, all 51 concept Python files remain byte-frozen at the accepted base, the real runtime selector remains the rare/unknown single-word detector, and the corrected same-PR round 029-b (context selector on the existing all-token evidence without an absolute count cutoff) will be ordered after verified 029-a publication; the packaged objective 029 remains unclosed. Those seed
 objectives (including the remapped seed 022, the remapped numeric
 023, the numeric 024 packaged-API seed, the remapped numeric 025,
 the remapped numeric 026, the remapped numeric 027, and the numeric 028 strict runtime-acceptance seed) as packaged

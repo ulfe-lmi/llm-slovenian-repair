@@ -42,7 +42,7 @@ publication-evidence overclaims in the new recovery record, with no
 scientific protocol, model, or result change.
 Rounds 013-a, 014-a, 014-b, and 015-a (2026-10-26) and rounds 016-a,
 017-a, 018-a, 019-a, 020-a, 021-a (2026-10-27) and 022-a,
-023-a, 024-a (2026-10-28), 025-a (2026-10-29), 026-a (2026-10-30), 027-a (2026-11-01) and 028-a (2026-11-01) confer no product label: they
+023-a, 024-a (2026-10-28), 025-a (2026-10-29), 026-a (2026-10-30), 027-a (2026-11-01), 028-a (2026-11-01) and 029-a (2026-11-10, whose ordered runtime word/phrase selector implementation was halted before any product change after the actual-source threshold-incompatibility finding - no product label, no module or test change, and the runnable runtime selector remains the rare/unknown single-word detector; the corrected same-PR round 029-b follows after verified 029-a publication) confer no product label: they
 implement the owner-selected Pandoc structural-parsing proxy, one
 bounded occurrence-addressed reviewer batch, the terminal-answer-copy
 preflight, the explicit text-only Responses request contract, the
