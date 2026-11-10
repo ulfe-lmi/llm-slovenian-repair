@@ -2,15 +2,20 @@
 """Fail-closed accepted-base whitespace verification for immutable OAP history.
 
 The workflows still run Git's literal ``diff --check BASE...REVISION``.  The
-only tolerated diagnostics are the four already-pinned historical incidents
-below (order 027-b closed the three-incident contract to these four).  Each
-exception is bound to its exact diagnostic, introducing commit, current blob,
-byte hash, and byte size.  The fourth incident is the root-authored trailing
-space at line 11 of the issued 027-a order, whose bytes are preserved exactly;
-its special forward-recovery merge is bound to its exact ancestry, ordered
-parents, tree delta, and historical blobs.  This is intentionally a fixed
-corrective contract: a changed, missing, re-added, or additional whitespace
-incident fails rather than becoming a new allowlist entry.
+only tolerated diagnostics are the five already-pinned historical incidents
+below (order 027-b closed the three-incident contract to four, and order
+031-b explicitly evolves that closed contract to these five for the one
+precisely pinned existing 031-a incident).  Each exception is bound to its
+exact diagnostic, introducing commit, current blob, byte hash, and byte size.
+The fourth incident is the root-authored trailing space at line 11 of the
+issued 027-a order, whose bytes are preserved exactly; its special
+forward-recovery merge is bound to its exact ancestry, ordered parents, tree
+delta, and historical blobs.  The fifth incident is the EOF blank line at
+line 161 of the issued 031-a order, whose bytes remain immutable; Git's
+diagnostic order places it after the 027-a order and before the 007-d
+report.  This is intentionally a fixed corrective contract: a changed,
+missing, re-added, or additional whitespace incident fails rather than
+becoming a new allowlist entry.
 """
 
 from __future__ import annotations
@@ -34,6 +39,7 @@ AUTHORIZED_BASES = frozenset(
 )
 
 ORDER_A_PATH = "oap/orders/027-a-repair-validation.md"
+ORDER_031A_PATH = "oap/orders/031-a-functional-proxy-audit.md"
 RECOVERY_MERGE = "73f9f3d10cc602781f8a49e22a7dd342165ea8d9"
 RECOVERY_PARENTS = (
     "4e601d31ccce7fa2f7652e67af524bb95c761078",
@@ -75,6 +81,18 @@ ORDER_A_INCIDENT = Incident(
     24341,
 )
 
+# The exact pinned existing 031-a incident (order 031-b, requirement 6):
+# the EOF blank line at line 161 of the issued, immutable 031-a order.
+ORDER_031A_INCIDENT = Incident(
+    ORDER_031A_PATH,
+    161,
+    "new blank line at EOF.",
+    "da6892e3ab1f4a05bb1f792b9acb6852145e688b",
+    "154087c510433f229c39cee4bafded877b40b671",
+    "b4e4a2a485304893d228eb35d59e91cc229ddcea95a8160e536262e759004d10",
+    18351,
+)
+
 
 KNOWN_INCIDENTS = (
     Incident(
@@ -96,6 +114,7 @@ KNOWN_INCIDENTS = (
         21642,
     ),
     ORDER_A_INCIDENT,
+    ORDER_031A_INCIDENT,
     Incident(
         "oap/reports/007-d-complete-research-publication-and-reproduction-coverage.md",
         164,

@@ -325,3 +325,27 @@ Separately, strategy qualifies a prospective order's whitespace before its
 immutable publication; that is a strategic review step recorded in the
 round, not a claim that the unchanged publisher performs it automatically,
 and it grants no product gate, programme, or authority expansion.
+
+031-b closed-five whitespace contract (2026-11-10): the 027-b pin above
+remains the historical record; order 031-b explicitly evolves the
+closed-four contract to exactly five pinned incidents for the one
+precisely pinned existing 031-a incident, without any general exception
+mechanism. The fifth is the EOF blank line at line 161 of the issued,
+immutable 031-a order (`oap/orders/031-a-functional-proxy-audit.md`;
+introduction `da6892e3ab1f4a05bb1f792b9acb6852145e688b`, current blob
+`154087c510433f229c39cee4bafded877b40b671`, bytes
+`b4e4a2a485304893d228eb35d59e91cc229ddcea95a8160e536262e759004d10`/18351,
+preserved exactly). Git's diagnostic order places it after the 027-a
+order and before the 007-d report, and the checker still accepts only
+those five exact diagnostics at the two authorized bases, failing
+closed on a sixth incident, a changed or trimmed issued 031-a order, a
+changed old incident, a deleted or re-added incident even with
+identical bytes, path/line/message drift, a missing prescribed
+027-a recovery lineage, an unknown base, or an invalid revision.
+There remains no configuration, flag, or environment path to admit
+future incidents; all newly introduced 031-b bytes are
+whitespace-clean while the previously issued 031-a bytes remain
+immutable. The prospective order whitespace review remains a Root
+strategic step before immutable publication - not a check the
+unchanged publisher performs - and grants no product gate, programme,
+or authority expansion.

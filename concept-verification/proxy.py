@@ -2325,7 +2325,7 @@ def main() -> int:
     except PandocStartupError as exc:
         raise SystemExit(f"pandoc startup failure: {exc.reason}: {exc.detail}") from None
     # The batch reviewer is bounded by the ordered finite 15-second
-    # cap, now the whole runtime exchange deadline: one monotonic
+    # default, now the whole runtime exchange deadline: one monotonic
     # deadline anchored at review_batch entry covers process/IPC
     # startup and the owned child's actual resolver/connect/TLS/
     # upload/status/header/body/result work, a late success being a
@@ -2334,10 +2334,24 @@ def main() -> int:
     # response-header budget (CONCEPT_HEADER_TIMEOUT, order 018-a) are
     # separate axes and must not extend reviewer calls (order 014-a,
     # requirement 4).
+    # One explicit operator setting for the reviewer ONLY (order
+    # 031-b, requirement 4): CONCEPT_REVIEWER_TIMEOUT.  Absent, the
+    # named REVIEWER_HTTP_TIMEOUT_SECONDS constant and its 15-second
+    # default are unchanged.  Present, the value is parsed here,
+    # before any HTTP bind, and validated by the existing
+    # ResponsesReviewer constructor, which rejects nonnumeric,
+    # nonpositive, NaN or infinite durations before bind; the
+    # selected value keeps the one absolute whole-exchange clock
+    # semantics and is not coupled to the other independent budgets
+    # (no retry, extra pass, changed token cap, global HTTP clock or
+    # request/header override).
+    reviewer_timeout: float = REVIEWER_HTTP_TIMEOUT_SECONDS
+    if os.environ.get("CONCEPT_REVIEWER_TIMEOUT") is not None:
+        reviewer_timeout = float(os.environ["CONCEPT_REVIEWER_TIMEOUT"])
     reviewer = ResponsesReviewer(
         os.environ.get("CONCEPT_REVIEWER_URL", "http://127.0.0.1:8001/v1"),
         os.environ.get("CONCEPT_REVIEWER_MODEL", "Qwen3.8-27B"),
-        timeout=REVIEWER_HTTP_TIMEOUT_SECONDS,
+        timeout=reviewer_timeout,
         profile=os.environ.get("CONCEPT_REVIEWER_PROFILE"),
     )
     trace_value = os.environ.get("CONCEPT_TRACE_DIR")
@@ -2404,7 +2418,43 @@ def main() -> int:
         usage_observer=usage_observer,
         **intake_kwargs,
     )
-    proxy.serve_forever()
+    # One owning close on normal serve return and every unwind
+    # (order 031-b, requirement 2): the documented owning
+    # server_close() boundary stops admission, actually joins the
+    # exact owned workers and closes the accepting-loop listener, so
+    # no owned non-daemon thread or bound listener outlives the real
+    # entry point.  No shutdown() from the serving thread, no
+    # daemonized workers, no dropped join, no optional-repair
+    # fallback.
+    # Control selection (order 031-b, requirement 3): the exact
+    # first pending nonordinary caller control (including
+    # MemoryError) keeps priority over later cleanup failures; an
+    # ordinary pending error cannot suppress a later nonordinary
+    # cleanup control; with no pending error the cleanup failure
+    # propagates.  The catch settles cleanup and selects the right
+    # control only, then re-raises the applicable original object;
+    # no error conversion and no product-wide control refactor.
+    pending_control: BaseException | None = None
+    try:
+        proxy.serve_forever()
+    except BaseException as exc:
+        pending_control = exc
+    cleanup_control: BaseException | None = None
+    try:
+        proxy.server_close()
+    except BaseException as exc:
+        cleanup_control = exc
+    if cleanup_control is not None:
+        if pending_control is None:
+            raise cleanup_control
+        if (
+            request_lifecycle.is_nonordinary_control(pending_control)
+            or not request_lifecycle.is_nonordinary_control(cleanup_control)
+        ):
+            raise pending_control
+        raise cleanup_control
+    if pending_control is not None:
+        raise pending_control
     return 0
 
 

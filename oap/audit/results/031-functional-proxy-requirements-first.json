@@ -1,0 +1,1076 @@
+{
+ "artifact": "031-functional-proxy-requirements-first",
+ "kind": "immutable-initial-requirements-derivation",
+ "order_id": "031-a",
+ "order_sha256": "b4e4a2a485304893d228eb35d59e91cc229ddcea95a8160e536262e759004d10",
+ "derived_at_utc": "2026-11-10T15:13:27Z",
+ "derived_by": "fresh-context codex coding pane (OAP_ROLE=coding), same foreground process, /new conversation, current worktree; declared independence corroborated by observed workflow, not statistical independence (R1)",
+ "derivation_inputs": {
+  "human_scope": {
+   "sources": [
+    "order 031-a Provenance[H]",
+    "phase-1 resource handoff (031a-source-first-resource-handoff-20261110.json, sha256 d4f36baed5d346ca397d1ebd04879e4d92011cc2fc416b4e1a57f4b7440dbbc1)"
+   ],
+   "summary": "Functional runnable proxy with mandatory explicitly installed/versioned/startup-checked Pandoc and exact original spans; strict independent acceptance; all unapproved slices preserved; NO separate human evaluation dataset (excluded, not deferred); linguistic benefit/harm/99% goals remain unmeasured; no research restart, no package programme, no new milestone gate; only the existing foreground coding agent; offline audit, no target calls."
+  },
+  "full_plan": {
+   "path": "PLAN.md",
+   "sha256": "d2aa1d98cc5177ac6093ab3aeb79903b192780910ef2d1712839b474fb5adbf0",
+   "revision": "1.0 (2026-09-06)",
+   "read": "full file, exact pinned product"
+  },
+  "full_architecture": {
+   "path": "ARCHITECTURE.md",
+   "sha256": "a16e0f87bdb21f6920aa63119cf5be148b6c8b68bf1337c44006d54b7a7261f7",
+   "revision": "1.1 (governance reconciliation; product sections 2-16 unchanged)",
+   "read": "full file, exact pinned product"
+  },
+  "evaluated_product_sha": "3bd6ffdd96bda95bd4c6de447b56cce76fe5a058",
+  "strategic_claims_read_before_derivation": false,
+  "implementation_code_inspected_before_derivation": false
+ },
+ "proposals_vs_agreement_note": "Per PLAN §1.2 and §12: library choices, JSON field names, numeric limits, module names and work splits are implementation proposals, not additional agreed requirements; they are recorded here only where they define auditable behavior (finite limits, module boundaries, test duty). Agreement rows are the binding product requirements.",
+ "owner_scope_requirements": [
+  {
+   "owner_id": "OS-1",
+   "requirement": "Functionally runnable proxy: a genuinely runnable end-to-end proxy/adapter path (client intake -> supported main capture -> CPU analysis -> isolated review -> CPU acceptance -> deterministic patch -> single final delivery), not merely library/CLI.",
+   "source": "Owner scope via order 031-a Provenance[H] and phase-1 handoff ('functional runnable proxy')",
+   "kind": "functional"
+  },
+  {
+   "owner_id": "OS-2",
+   "requirement": "Pandoc is mandatory: explicitly installed, exactly versioned, and startup-checked when the proxy starts; a missing or differently-versioned Pandoc must be detected at startup (fail or explicit degraded report), not discovered mid-request. Pandoc is the Markdown span-locator; reserialization back to Markdown must not be the patch mechanism.",
+   "source": "Owner scope via order 031-a Provenance[H] + handoff ('mandatory explicitly installed/versioned/startup-checked Pandoc'); consistent with PLAN §5.1 / ARCH §7 (Markdown parsing may locate spans, reserialization is not an acceptable patcher)",
+   "kind": "functional"
+  },
+  {
+   "owner_id": "OS-3",
+   "requirement": "Strict independent acceptance: automatic changes require CPU-side independent evidence (corpus/lexicon/morphology); model self-reported confidence or a same-model second call is never sufficient on its own.",
+   "source": "Owner scope via order 031-a Provenance[H] ('strict independent acceptance'); PLAN §9; ARCH LR-009/A-ACCEPT-02",
+   "kind": "safety"
+  },
+  {
+   "owner_id": "OS-4",
+   "requirement": "All unapproved slices preserved: every byte outside accepted, programmatically validated spans is preserved exactly (whitespace, line endings, diacritics, formatting).",
+   "source": "Owner scope via order 031-a Provenance[H] ('all unapproved slices preserved'); PLAN §§5.2, 10; ARCH LR-007/A-PATCH-01",
+   "kind": "safety"
+  },
+  {
+   "owner_id": "OS-5",
+   "requirement": "NO separate human evaluation dataset: excluded by the owner for this programme, not deferred. Any registry row that would require a human-labeled evaluation set is owner-excluded, not a functional gate of this audit, and never becomes a future human-dataset obligation of the audit.",
+   "source": "Order 031-a Provenance[H] + handoff ('no separate human evaluation dataset: excluded, not deferred')",
+   "kind": "scope-exclusion"
+  },
+  {
+   "owner_id": "OS-6",
+   "requirement": "Linguistic benefit/harm and the ~99% precision / <=1 harm per 10k correct words remain unmeasured goals; no fabricated quality measurement and no generic experimental-MVP acceptance may be manufactured. Quality is not deferred either - it is owner-excluded from this order.",
+   "source": "Order 031-a Provenance[H] + handoff; PLAN §14.3/§16; ARCH A-EVAL-01/LR-014",
+   "kind": "evidence"
+  },
+  {
+   "owner_id": "OS-7",
+   "requirement": "Packaging, calibration research, data acquisition and production cutover are outside this audit; no new milestone gate; the only agent is the existing foreground coding pane.",
+   "source": "Order 031-a Provenance[H] + handoff",
+   "kind": "scope-exclusion"
+  }
+ ],
+ "requirements": [
+  {
+   "derived_id": "CAP-1",
+   "registry_id": "LR-001",
+   "category": "capture",
+   "requirement": "Complete main generation and bounded capture BEFORE any CPU review, repair inference or delivery of answer text; the user never sees provisional original text while repair is pending.",
+   "source": "PLAN §§1, 3, 11.3; ARCH §2 LR-001, §5, §13",
+   "stages": [
+    "DEMONSTRATOR",
+    "MVP"
+   ],
+   "kind": "behavior"
+  },
+  {
+   "derived_id": "CAP-2",
+   "registry_id": null,
+   "category": "capture",
+   "requirement": "Upstream completion must be verified per the explicitly supported upstream protocol (e.g. finish semantics), not by socket closure alone; a partial/truncated main answer must not enter the successful CAPTURED path as if complete.",
+   "source": "ARCH §5; PLAN §13.3 (main incomplete/structurally unclear row)",
+   "stages": "MVP",
+   "kind": "safety"
+  },
+  {
+   "derived_id": "CAP-3",
+   "registry_id": null,
+   "category": "capture",
+   "requirement": "Initial API path is one explicitly supported nonstreaming text shape with one response choice; unsupported request capabilities are rejected before the main call or routed through an explicitly configured unchanged bypass; no silent JSON masquerading as SSE; internal upstream streaming may be bounded-captured but completion is validated before CPU analysis; no provisional content in progress/heartbeat.",
+   "source": "PLAN §11.3; ARCH §13; A-API-01",
+   "stages": "MVP",
+   "kind": "behavior"
+  },
+  {
+   "derived_id": "CAP-4",
+   "registry_id": null,
+   "category": "capture",
+   "requirement": "Exceeding the hard capture limit is a bounded API failure: truncated text is never labelled complete or delivered as a successful answer.",
+   "source": "PLAN §13.3 (hard capture limit row); ARCH §14.2; A-FAIL-01",
+   "stages": "MVP",
+   "kind": "safety"
+  },
+  {
+   "derived_id": "DET-1",
+   "registry_id": "LR-002",
+   "category": "detection",
+   "requirement": "CPU evidence selects whether review is warranted; with no eligible suspicion the answer is returned unchanged and there are ZERO review calls, including in shadow/strict modes; missing corpus data is not evidence of error.",
+   "source": "PLAN §§1.1, 7; ARCH §2 LR-002, §11.1, §14.2",
+   "stages": [
+    "DEMONSTRATOR",
+    "MVP"
+   ],
+   "kind": "behavior"
+  },
+  {
+   "derived_id": "DET-2",
+   "registry_id": "A-DETECT-01",
+   "category": "detection",
+   "requirement": "CPU detection produces suspicions, not verdicts. Signals: unigram/lexicon status outside protected spans, adjacent bigrams, neighboring trigrams, fixed-neighbor alternatives, lemma evidence, optional morphology/collocations. Unknown/rare form or unusual name is investigation-only, not an error verdict; weak surroundings give weak evidence; a trigram alarm does not identify the middle word. Nearby alarms are grouped into a bounded short phrase BEFORE review, never across protected material and never growing to a paragraph. Targets are deterministic, nonoverlapping, ordered by position; excess/ambiguous targets remain unchanged with finite internal reason labels. Ranked corpus alternatives are not fed to the reviewer by default.",
+   "source": "PLAN §7; ARCH §9",
+   "stages": [
+    "DEMONSTRATOR",
+    "MVP"
+   ],
+   "kind": "behavior"
+  },
+  {
+   "derived_id": "DET-3",
+   "registry_id": null,
+   "category": "detection",
+   "requirement": "Bounded target selection per PLAN §7.4 initial proposal: at most 8 places per answer, selected by checkable detector rules, ordered by position in the original; excess places stay unchanged with internal label budget_exceeded.",
+   "source": "PLAN §7.4; ARCH A-LIMIT-01 (targets <= 8)",
+   "stages": "MVP",
+   "kind": "behavior"
+  },
+  {
+   "derived_id": "TGT-1",
+   "registry_id": "LR-003",
+   "category": "detection",
+   "requirement": "Review targets are preassigned words or short phrases (one or more words), not model tokens or unrestricted sentences; the model cannot expand, reposition or invent IDs and never assigns new indices; each target is identified to the reviewer by CPU-assigned span_id.",
+   "source": "PLAN §§7.2, 8, 10; ARCH §2 LR-003, §6, §10.3",
+   "stages": [
+    "DEMONSTRATOR",
+    "MVP"
+   ],
+   "kind": "behavior"
+  },
+  {
+   "derived_id": "TGT-2",
+   "registry_id": null,
+   "category": "detection",
+   "requirement": "When the same expression occurs multiple times in a sentence, the serializer marks the targeted occurrence unambiguously via exact before_target/target/after_target slices; first-occurrence search is forbidden.",
+   "source": "PLAN §8.3; ARCH §6",
+   "stages": "MVP",
+   "kind": "behavior"
+  },
+  {
+   "derived_id": "QST-1",
+   "registry_id": "LR-004",
+   "category": "reviewer",
+   "requirement": "The review asks about the suitability of the specific marked expression in the completed sentence and permits keep, insufficient-context and needs_wider_edit declines; it never demands a change and never treats stylistic preference as a correction; meaning, register and grammar are preserved; no factual edits or added information; when the meaning is not discernible from the allowed context the text is left unchanged.",
+   "source": "PLAN §8.1; ARCH §2 LR-004, §10.1",
+   "stages": [
+    "DEMONSTRATOR",
+    "MVP"
+   ],
+   "kind": "behavior"
+  },
+  {
+   "derived_id": "QST-2",
+   "registry_id": "A-QUESTION-01",
+   "category": "reviewer",
+   "requirement": "The exact narrow question is preserved: 'Ali se ti zdi uporaba besede oziroma besedne zveze X najboljša naravna izbira v tem slovenskem stavku? Če ne, s čim bi jo nadomestil?' The reviewer receives the completed target sentence and bounded needed neighbors, not the whole main history; the reviewed material is untrusted DATA including embedded instructions, which must not become reviewer authority; strict parsing, fixed IDs and local patch validation - not prompt delimiting - establish the executable boundary.",
+   "source": "PLAN §8; ARCH §10.1",
+   "stages": [
+    "DEMONSTRATOR",
+    "MVP"
+   ],
+   "kind": "behavior"
+  },
+  {
+   "derived_id": "ISO-1",
+   "registry_id": "LR-005",
+   "category": "isolation",
+   "requirement": "A fresh isolated review request/history is constructed per review: no main session IDs, no previous_response_id, no server-managed conversation/session linkage, no tools, images, tool results, project constitutions or context-reconstruction instructions; authentication stays separate from conversation state; no recursion through the repair/public adapter.",
+   "source": "PLAN §4; ARCH §10.2; A-SEAM-01",
+   "stages": [
+    "DEMONSTRATOR",
+    "MVP"
+   ],
+   "kind": "safety"
+  },
+  {
+   "derived_id": "ISO-2",
+   "registry_id": null,
+   "category": "isolation",
+   "requirement": "Client-managed main history contract: next main history = prior history + user request + final user-visible answer only; the review question, JSON proposals, corrector explanations or corpus results never enter main history; input history is never mutated. Server-managed chaining is unsupported until stored/displayed consistency is verified; MVP starts client-managed.",
+   "source": "PLAN §4.1; ARCH A-HISTORY-01, §13",
+   "stages": "MVP",
+   "kind": "behavior"
+  },
+  {
+   "derived_id": "ISO-3",
+   "registry_id": null,
+   "category": "isolation",
+   "requirement": "The reviewer is called on the operator-controlled configured private route (or injected client) directly; no caller-supplied destination, no public bypass header, no indiscriminate forwarding of main-conversation credentials. Isolation must be proven by tests that record both outbound main and review request shapes with synthetic data; threads/processes/async alone do not prove isolation.",
+   "source": "ARCH §4, §10.2; A-ROUTE-01",
+   "stages": [
+    "DEMONSTRATOR",
+    "MVP"
+   ],
+   "kind": "safety"
+  },
+  {
+   "derived_id": "ISO-4",
+   "registry_id": null,
+   "category": "isolation",
+   "requirement": "A second call of the same Qwen is not statistically independent evidence of correctness; independent extra evidence is corpus/lexicon/morphology data, not the fact of a second call.",
+   "source": "PLAN §4.2; ARCH §10.2, LR-009",
+   "stages": [
+    "DEMONSTRATOR",
+    "MVP"
+   ],
+   "kind": "evidence"
+  },
+  {
+   "derived_id": "REV-1",
+   "registry_id": "A-SCHEMA-01",
+   "category": "reviewer",
+   "requirement": "Exactly one result per supplied ID. keep=true => replacement=null; keep=false => nonempty replacement and needs_wider_edit=false; needs_wider_edit=true => keep=true and replacement=null. Optional bounded confidence is self-report, not calibrated correctness and never a decisive acceptance input.",
+   "source": "PLAN §8.4; ARCH §10.3",
+   "stages": [
+    "DEMONSTRATOR",
+    "MVP"
+   ],
+   "kind": "behavior"
+  },
+  {
+   "derived_id": "REV-2",
+   "registry_id": null,
+   "category": "reviewer",
+   "requirement": "Invalid JSON, invalid field types, unknown/duplicate/missing IDs, contradictory fields or oversized output reject the WHOLE batch; the batch is never salvaged and no further model call is made to repair its JSON. One structurally valid proposal may still be rejected individually at acceptance.",
+   "source": "PLAN §8.5; ARCH §10.3; A-SCHEMA-01",
+   "stages": [
+    "DEMONSTRATOR",
+    "MVP"
+   ],
+   "kind": "safety"
+  },
+  {
+   "derived_id": "REV-3",
+   "registry_id": "LR-006",
+   "category": "reviewer",
+   "requirement": "Reviewer output is an untrusted local proposal: code validates and inserts exact replacements; the model never regenerates the answer or supplies replacement sentences for the whole text; the model returns only the local replacement for its assigned span.",
+   "source": "PLAN §§8-10; ARCH §10.3; A-SEAM-01",
+   "stages": [
+    "DEMONSTRATOR",
+    "MVP"
+   ],
+   "kind": "safety"
+  },
+  {
+   "derived_id": "SPAN-1",
+   "registry_id": "A-SPAN-01",
+   "category": "spans",
+   "requirement": "Span coordinates are Python-string Unicode code-point indices into the UNMODIFIED original: 0 <= start < end <= len(text); text[start:end] == original slice; span_id unique within the response; selected spans do not intersect protected material. Not UTF-8 bytes, UTF-16 units or model tokens; any future conversion is explicit and tested. Normalization/casefold only on derived lookup views. Combining marks/emoji/CRLF require explicit tests; unsafe partial-grapheme targets abstain.",
+   "source": "PLAN §§5.2, 8.3; ARCH §6",
+   "stages": [
+    "DEMONSTRATOR",
+    "MVP"
+   ],
+   "kind": "behavior"
+  },
+  {
+   "derived_id": "SPAN-2",
+   "registry_id": "LR-007",
+   "category": "spans",
+   "requirement": "All original substrings outside accepted spans are preserved exactly: protected content, whitespace, line endings, diacritics, formatting, punctuation. No reserialization, detokenization or Markdown re-rendering substitutes for the original. If no edit survives, the returned text is EXACTLY the original text.",
+   "source": "PLAN §§5.2, 10; ARCH §12; OS-4",
+   "stages": [
+    "DEMONSTRATOR",
+    "MVP"
+   ],
+   "kind": "safety"
+  },
+  {
+   "derived_id": "SPAN-3",
+   "registry_id": "A-PATCH-01",
+   "category": "patching",
+   "requirement": "The original stays immutable until final composition. Each selected original slice is rechecked immediately before applying; overlapping/incompatible edits are rejected (no silent last-wins). The result is composed from untouched original slices plus approved replacements (or an equivalently tested descending-offset implementation). After composition, affected sentences are rechecked; mutually conflicting nearby changes are rolled back as a conflict group and rebuilt from the original. This is bounded CPU validation, never a new generative pass.",
+   "source": "PLAN §10; ARCH §12",
+   "stages": [
+    "DEMONSTRATOR",
+    "MVP"
+   ],
+   "kind": "behavior"
+  },
+  {
+   "derived_id": "SPAN-4",
+   "registry_id": null,
+   "category": "patching",
+   "requirement": "Text equality differs from HTTP byte equality: on a true unchanged pass-through the original envelope bytes are preserved where possible; on a changed path only the explicitly supported envelope transformation is serialized and affected metadata is accounted for explicitly.",
+   "source": "PLAN §10; ARCH §12",
+   "stages": [
+    "MVP"
+   ],
+   "kind": "behavior"
+  },
+  {
+   "derived_id": "PROT-1",
+   "registry_id": "A-PROTECT-01",
+   "category": "protection",
+   "requirement": "Only explicitly supported assistant-text fields are eligible; no recursive repair of every string in a response object. Tool/function fields, model/response IDs, schemas, structured JSON output, reasoning fields, images and binary data are uneditable; the initial adapter bypasses entire responses containing tool calls or unsupported structures.",
+   "source": "PLAN §5.1; ARCH §7",
+   "stages": [
+    "DEMONSTRATOR",
+    "MVP"
+   ],
+   "kind": "safety"
+  },
+  {
+   "derived_id": "PROT-2",
+   "registry_id": "A-PROTECT-01",
+   "category": "protection",
+   "requirement": "Within eligible text, protected: fenced and indented code blocks, inline code, URLs and link destinations, email addresses, filesystem paths, commands, numbers and units, citations/quotes and other machine-significant strings. Proper names, titles, technical terms and mixed languages require conservative exclusion or a bounded terminology policy; unclear Markdown abstains rather than guessing.",
+   "source": "PLAN §5.1; ARCH §7",
+   "stages": [
+    "DEMONSTRATOR",
+    "MVP"
+   ],
+   "kind": "safety"
+  },
+  {
+   "derived_id": "PROT-3",
+   "registry_id": "A-PROTECT-01",
+   "category": "protection",
+   "requirement": "Protected intervals are linguistic-context boundaries: removing them must not manufacture artificial bigram/trigram adjacency between the neighboring text; corpus context bounds stop at protected material. Markdown parsing may locate spans, but rendering Markdown anew cannot patch originals.",
+   "source": "PLAN §5.1; ARCH §7",
+   "stages": [
+    "DEMONSTRATOR",
+    "MVP"
+   ],
+   "kind": "safety"
+  },
+  {
+   "derived_id": "CORP-1",
+   "registry_id": "LR-008",
+   "category": "corpus",
+   "requirement": "EXACT, CENSORED and UNAVAILABLE evidence semantics are preserved per record: EXACT = count known for this query and its declared scope, EXACT(0) only when source completeness justifies zero; CENSORED = only a threshold/range-derived bound is justified, missing does NOT mean zero; UNAVAILABLE = the source/query cannot support an interpretable value, so abstain. Missing truncated data is never converted to zero by a default value.",
+   "source": "PLAN §6.2; ARCH §2 LR-008, §8.1",
+   "stages": [
+    "DEMONSTRATOR",
+    "MVP"
+   ],
+   "kind": "behavior"
+  },
+  {
+   "derived_id": "CORP-1B",
+   "registry_id": "A-CORPUS-01",
+   "category": "corpus",
+   "requirement": "The complete context denominator is separately marked known/unknown; sums of retained n-grams are never presented as the full denominator; censored surface-form aggregation is not a complete lemma distribution. Comparisons require compatible source scope, normalization and units; valid conservative count-ratio bounds (e.g. (candidate_count_lower+alpha)/(original_count_upper+alpha)) may inform evidence but are not semantic proof and not calibrated acceptance rules; different-length phrase raw counts alone cannot authorize an edit; no fabricated probability distributions, entropies or guaranteed candidate dominance from partial trigram sums.",
+   "source": "PLAN §6.2; ARCH §8.1; A-CORPUS-01",
+   "stages": [
+    "DEMONSTRATOR",
+    "MVP"
+   ],
+   "kind": "behavior"
+  },
+  {
+   "derived_id": "CORP-2",
+   "registry_id": "A-CORPUS-02",
+   "category": "corpus",
+   "requirement": "Corpus sources (Gigafida frequencies/n-grams, Sloleks, collocations, linguistic analyzers) are candidates to qualify, not bundled data or current-access claims. The reported ~2-per-million n-gram cutoff of one release is a warning, never a universal hardcoded threshold. Every imported index carries a manifest: source identity/version, acquisition reference/checksum, rights/license, format, cutoff/completeness, normalization/tagging, importer version and deterministic build parameters. Attribution/redistribution conditions are preserved; public query access is not bulk permission. Sparse available records only; candidate-middle-word indexes keep the same uncertainty metadata; no runtime scraping; large indexes/weights/private corpora stay out of Git; miniature fixtures are clearly labelled synthetic.",
+   "source": "PLAN §§6.1, 6.3; ARCH §8.2",
+   "stages": [
+    "DEMONSTRATOR",
+    "MVP"
+   ],
+   "kind": "behavior"
+  },
+  {
+   "derived_id": "MORPH-1",
+   "registry_id": "A-DETECT-01",
+   "category": "detection",
+   "requirement": "Lexical misuse and morphological disagreement are kept separate. Required morphological agreement is derived from context and analysis confidence, not by blindly copying the tags of a possibly-wrong original form; ambiguous lemma/tagging evidence may cause abstention. Strongly suspicious form with well-supported lemma suggests inflection error, not lexeme choice.",
+   "source": "PLAN §7.3; ARCH §9; M02",
+   "stages": [
+    "MVP"
+   ],
+   "kind": "behavior"
+  },
+  {
+   "derived_id": "ACC-1",
+   "registry_id": "LR-009",
+   "category": "acceptance",
+   "requirement": "Strict acceptance requires appropriate INDEPENDENT corpus/lexicon/morphology evidence and no detected contradiction; frequency alone or model self-reported confidence alone cannot authorize a change; a second call of the same Qwen is not statistically independent evidence (covered with ISO-4).",
+   "source": "PLAN §9.1; ARCH §2 LR-009, §11.2; OS-3",
+   "stages": [
+    "MVP"
+   ],
+   "kind": "safety"
+  },
+  {
+   "derived_id": "ACC-1B",
+   "registry_id": "A-ACCEPT-02",
+   "category": "acceptance",
+   "requirement": "Strict (AUTO_REPAIR) acceptance requires ALL applicable conditions: CPU-selected target; valid local proposal; target equality and non-protected bounds; finite structure/size limits; appropriate independent corpus/lexicon/morphology evidence; no detected contextual or semantic contradiction; valid composed result. Neutral/incomparable data is insufficient; identity replacements are rejected; forbidden newlines/control/markup/code structure, overlong replacements and scope expansion are rejected; adjacent punctuation is never normalized as an unreported side effect.",
+   "source": "PLAN §9.1; ARCH §11.2; LR-009; OS-3",
+   "stages": [
+    "MVP"
+   ],
+   "kind": "safety"
+  },
+  {
+   "derived_id": "ACC-2",
+   "registry_id": "A-ACCEPT-02",
+   "category": "acceptance",
+   "requirement": "Evidence rules vary by error class: a malformed form may rely on valid-form/orthographic/context evidence; replacing one valid lexeme with another needs stronger contextual support. Multi-word replacements must not be judged by raw whole-phrase frequency comparison across different lengths: affected local contexts, morphology and (where available) collocations are checked; non-comparable support means strict abstention. More frequent is not automatically more correct; harmful semantic edits remain part of mandatory evaluation.",
+   "source": "PLAN §9.1; ARCH §11.2",
+   "stages": "MVP",
+   "kind": "behavior"
+  },
+  {
+   "derived_id": "ACC-3",
+   "registry_id": "A-ACCEPT-01",
+   "category": "acceptance",
+   "requirement": "Operational modes with exact behavior: detect_only (CPU only, no review, no change); shadow (eligible review/scoring, original delivered, results only via approved evaluation); strict (validated AUTO_REPAIR only applied); experimental (future explicitly configured/evaluated, never auto-enabled, not required for MVP). Development sequence: detect_only -> shadow -> measured limited strict.",
+   "source": "PLAN §9.3; ARCH §11.1",
+   "stages": [
+    "DEMONSTRATOR",
+    "MVP"
+   ],
+   "kind": "behavior"
+  },
+  {
+   "derived_id": "ACC-4",
+   "registry_id": null,
+   "category": "acceptance",
+   "requirement": "LLM_CONFIRMED_REPAIR (corpus flags, Qwen replaces, further corpus neutral/insufficient) remains DISABLED for automatic user-text changes in the MVP; it may be studied in shadow evaluation only. Enabling later requires separate measured quality and a stricter policy, not a higher confidence threshold; explicit negative evidence must never be replaced by 'corpus has no data'.",
+   "source": "PLAN §9.2; ARCH §11.2",
+   "stages": [
+    "MVP"
+   ],
+   "kind": "safety"
+  },
+  {
+   "derived_id": "LIM-1",
+   "registry_id": "A-LIMIT-01",
+   "category": "limits",
+   "requirement": "Initial configurable engineering defaults (not measured optima): <=1 review request per response; 1 generative pass; 0 automatic retries; <=1 concurrent review request from this component; <=8 targets per response; target normally <=6 words plus finite character bound; replacement <=8 words plus finite character bound; automatic evidence-insufficient acceptance disabled; automatic persistent text storage disabled. Finite bounds are selected for capture bytes, analysis length, context per target, total prompt/output size, queue length/wait and total review time; the policy version is recorded; no fabricated target-machine throughput.",
+   "source": "PLAN §13.1; ARCH §14.1",
+   "stages": [
+    "MVP"
+   ],
+   "kind": "behavior"
+  },
+  {
+   "derived_id": "LIM-2",
+   "registry_id": "A-FAIL-01",
+   "category": "failures",
+   "requirement": "Full failure contract: no eligible suspicion -> original, zero review calls; corpus missing/corrupt/incompatible -> degraded original with internal label, no invented counts; analysis size exceeded after safe capture -> original without analysis; review queue full/timeout/transport failure/invalid batch -> cancel owned optional work and return completed original; individual proposal failure -> reject that proposal only; composed conflict -> rollback conflict group; main error/incomplete -> honest protocol error/finish semantics, no repair; hard capture limit -> bounded API failure; client disconnect -> cancel owned upstream/review work, stop delivery, no orphan repair. Optional fallback never bypasses auth/validation/hard limits/isolation; internal reasons use a finite safe vocabulary.",
+   "source": "PLAN §13.3; ARCH §14.2",
+   "stages": [
+    "MVP"
+   ],
+   "kind": "safety"
+  },
+  {
+   "derived_id": "LIM-3",
+   "registry_id": "LR-010",
+   "category": "limits",
+   "requirement": "Bounded one-pass initial review: at most one combined review request per answer and no automatic generative repair/retry loop, including malformed-JSON repair by the model; CPU revalidation only.",
+   "source": "PLAN §§3, 13.1; ARCH §2 LR-010, §10.3",
+   "stages": [
+    "DEMONSTRATOR",
+    "MVP"
+   ],
+   "kind": "behavior"
+  },
+  {
+   "derived_id": "FAIL-1",
+   "registry_id": "LR-011",
+   "category": "failures",
+   "requirement": "Optional repair failure preserves only the already safely captured original; main errors, incompleteness and hard capture limits are never masked as successful output.",
+   "source": "PLAN §13.3; ARCH §2 LR-011",
+   "stages": [
+    "DEMONSTRATOR",
+    "MVP"
+   ],
+   "kind": "safety"
+  },
+  {
+   "derived_id": "ENV-1",
+   "registry_id": "LR-012",
+   "category": "environment",
+   "requirement": "The existing Qwen is reused through the authorized client; the CPU-side repair infrastructure must not load a second large GPU model, must not alter the protected deployment/resources (weights/quantization, vLLM/CUDA, launch flags, ports, gateway), and makes no claim that one Python thread creates GPU capacity.",
+   "source": "PLAN §§1.1, 11.2, 13.2; ARCH §2 LR-012, §4, §15",
+   "stages": [
+    "DEMONSTRATOR",
+    "MVP"
+   ],
+   "kind": "safety"
+  },
+  {
+   "derived_id": "LIM-4",
+   "registry_id": null,
+   "category": "limits",
+   "requirement": "Main generation and review for one answer are strictly sequential; the repair path uses a bounded queue and must not indefinitely starve main requests; no two concurrent model sequences are required by the design.",
+   "source": "PLAN §13.2; ARCH §5, §14.2",
+   "stages": "MVP",
+   "kind": "behavior"
+  },
+  {
+   "derived_id": "API-1",
+   "registry_id": "A-API-01",
+   "category": "api",
+   "requirement": "Start from one verified nonstreaming text shape/choice with the actual endpoint/schema selected and tested in the order; no universal Chat/Responses compatibility claim. Unknown response structures are unmodified; no JSON masquerading as SSE; no rewriting of tool results; no accidental public bypass of internal controls. Future delayed SSE must synthesize a valid, consistent final event sequence with separate tests and makes no first-content latency claim; all final events carry the same repaired text.",
+   "source": "PLAN §11.3; ARCH §13; A-API-01",
+   "stages": [
+    "MVP"
+   ],
+   "kind": "behavior"
+  },
+  {
+   "derived_id": "API-2",
+   "registry_id": "A-HISTORY-01",
+   "category": "api",
+   "requirement": "Client-managed next main turn contains the final delivered answer only (covered with ISO-2). Changed text invalidates token-aligned probabilities and potentially offsets/annotations: such repair capabilities are initially rejected/bypassed under the declared capability policy; stale logprobs are never silently kept or fabricated. Main-generation usage and review usage are recorded separately; recounting tokens of the final string measures neither bill; review cost is visible to the operator without misrepresenting upstream usage.",
+   "source": "PLAN §11.4; ARCH §13",
+   "stages": [
+    "MVP"
+   ],
+   "kind": "behavior"
+  },
+  {
+   "derived_id": "SEC-1",
+   "registry_id": "LR-013",
+   "category": "security",
+   "requirement": "Production logs contain no user text, target/replacement strings, prompts, raw API responses or secrets; metrics use bounded counters, durations, policy/source versions and a finite reason vocabulary; the evaluation channel is separate and explicitly authorized; private text is never a metric label, exposed cache key or report excerpt.",
+   "source": "PLAN §13.4; ARCH §2 LR-013, §15",
+   "stages": [
+    "DEMONSTRATOR",
+    "MVP"
+   ],
+   "kind": "safety"
+  },
+  {
+   "derived_id": "SEC-2",
+   "registry_id": "A-SECURITY-01",
+   "category": "security",
+   "requirement": "Main output, review output, local evaluation files and downloaded corpus content are treated as data: embedded instructions/paths/URLs/code are never executed; the reviewer has no tools, no URL execution, no file-writing or conversation-mutation authority; credentials stay outside Git and are referenced without logging values; no unnecessary cross-user text caching; protected environment resources (Qwen service, model/quantization files, vLLM/CUDA, launch flags, ports, shared GPU, gateway, neighboring adapters) are not mutated by any ordinary product action.",
+   "source": "PLAN §13.4; ARCH §15; A-SECURITY-01",
+   "stages": [
+    "DEMONSTRATOR",
+    "MVP"
+   ],
+   "kind": "safety"
+  },
+  {
+   "derived_id": "TEST-1",
+   "registry_id": "A-TEST-01",
+   "category": "tests",
+   "requirement": "Synthetic deterministic product tests across all required areas: capture completion/error/truncation; exact main/review shapes with no sharing/linkage/recursion; repeated substrings/Unicode/combining marks/emoji/CRLF/Markdown; protected boundaries and no artificial adjacency; exact zero vs censored absence, unknown denominator, incompatible scope; keep/replace/wider-edit/injection/malformed IDs/JSON/oversize; common-but-wrong, style-only, weak evidence, morphology, phrase-length; overlap/stale offsets/nearby conflicts/untouched equality; zero/one review calls, bounded queue, timeout, cancellation, request separation, no raw logging; supported envelope/finish/usage/history. Bootstrap governance tests do not substitute for product tests; live tests are opt-in, small, and qualify endpoint/model/capabilities/cancellation/usage without host changes; a skipped live test is not a pass.",
+   "source": "PLAN §14.1; ARCH §16.1, §16.2",
+   "stages": [
+    "DEMONSTRATOR",
+    "MVP"
+   ],
+   "kind": "evidence"
+  },
+  {
+   "derived_id": "TEST-2",
+   "registry_id": null,
+   "category": "tests",
+   "requirement": "Before any real-Qwen connection: verify model identifier, supported API shape, thinking/structured-output rules, a valid cancellation method and actual usage; documented state of a historical installation is not a substitute for that qualification test. Synthetic fake-upstream success does not establish Qwen quality or serving compatibility.",
+   "source": "PLAN §14.1 (final paragraph); ARCH §16.2",
+   "stages": [
+    "MVP"
+   ],
+   "kind": "evidence"
+  },
+  {
+   "derived_id": "EVID-1",
+   "registry_id": "LR-014",
+   "category": "evidence",
+   "requirement": "Software correctness, serving compatibility, linguistic benefit and deployment/release authority are separate evidence layers; goals and defaults are not measurements. The ~99% accepted-edit precision and <=1 harmful edit per 10,000 originally correct words are calibration goals, not results or release permission; zero observed harms in a small/clustered sample proves no zero rate (~3/N upper-bound orientation); useful benefit AND bounded harm are both required; mostly-abstaining implementations are not automatically successful.",
+   "source": "PLAN §§14.3, 16; ARCH §2 LR-014, §16.3; OS-6",
+   "stages": "MVP",
+   "kind": "evidence"
+  },
+  {
+   "derived_id": "EVID-2",
+   "registry_id": "A-EVAL-01",
+   "category": "evidence",
+   "requirement": "Linguistic evaluation method (when performed): real target-model outputs with correct/rare/technical negative controls; human labels distinguishing error from stylistic preference from acceptable alternative; frozen calibration/held-out split without leakage/tuning; Qwen is never the final judge of its own changes; comparisons include original, corpus-detector-only, direct Qwen proofreading baseline and the agreed limited procedure; report accepted-edit precision, harmful edits per 10k correct words, style edits, detector vs repaired coverage, call rate, separate usage, latency/resource/failure, sample sizes and uncertainty.",
+   "source": "PLAN §14.2; ARCH §16.3; A-EVAL-01",
+   "stages": "MVP",
+   "kind": "evidence"
+  },
+  {
+   "derived_id": "EVID-3",
+   "registry_id": "A-CLOSE-01",
+   "category": "governance",
+   "requirement": "Independent fresh architecture-to-current-main audit (ICA) is required before any MVP/release/closure claim: classifications IMPLEMENTED/PARTIAL/ABSENT/UNPROVEN with real paths/tests/SHA; reports are claims until corroborated; a green test exercising a replacement of the boundary under test cannot certify the real boundary; the audit does not merge or authorize deployment; strategy recommends, human decides the milestone label.",
+   "source": "ARCH §19, §20; A-CLOSE-01",
+   "stages": "MVP",
+   "kind": "governance"
+  },
+  {
+   "derived_id": "SCOPE-1",
+   "registry_id": "A-SCOPE-01",
+   "category": "scope",
+   "requirement": "First product = completed Slovenian natural-language responses with conservative malformed-form, morphology and contextual word/short-phrase repair. Excluded: factual correction, translation, whole-answer rewriting, generated-file/tool/code editing, self-training, live token repair. General proofreading may exist only as an explicit evaluation baseline. Motivating examples are not hardcoded; not all errors are assumed quantization-caused; unknown terminology, ambiguous language, insufficient support or unsafe mapping -> abstain; demonstrate benefit despite abstention, never weaken gates to inflate edit counts.",
+   "source": "PLAN §§1, 2, 3; ARCH §3; A-SCOPE-01",
+   "stages": "DEMONSTRATOR",
+   "kind": "scope"
+  },
+  {
+   "derived_id": "SEAM-1",
+   "registry_id": "A-SEAM-01",
+   "category": "architecture",
+   "requirement": "The library accepts completed text and owns no conversation store or HTTP gateway; the reviewer dependency is injectable for deterministic offline tests. The adapter owns main capture/delivery; the reviewer owns one fresh outbound request; CPU workers own bounded analysis only. Each response has an immutable original, request-local analysis, selected targets, at most one batch, decisions and one final result; no shared mutable history or buffers; main and review are sequential per answer; cancellation targets only request-owned work.",
+   "source": "ARCH §4, §5; A-SEAM-01",
+   "stages": "DEMONSTRATOR",
+   "kind": "architecture"
+  },
+  {
+   "derived_id": "STACK-1",
+   "registry_id": "A-STACK-01",
+   "category": "architecture",
+   "requirement": "Engineering baseline: Python 3.12 with locked uv environment, typed validated contracts, HTTPX for the review request, pytest with fake upstreams; FastAPI only for the later narrow adapter; dependency compatibility verified before pinning; no current CLI/model/server compatibility claimed from a historical example; sparse read-only SQLite indexes initially unless measured otherwise; optional CPU analyzers bounded with no uncontrolled index/analyzer copies; no import-time downloads or network calls.",
+   "source": "PLAN §12; ARCH §4.1; A-STACK-01",
+   "stages": "DEMONSTRATOR",
+   "kind": "architecture"
+  },
+  {
+   "derived_id": "ROUTE-1",
+   "registry_id": "A-ROUTE-01",
+   "category": "architecture",
+   "requirement": "The existing gateway keeps public authentication, route rights, quotas and public accounting; the local-coding project is separate and unmodified. The isolated review uses an operator-controlled private direct endpoint or injected client; never public repair recursion, never a caller-supplied destination, never a public bypass header, no indiscriminate forwarding of main credentials; internal diagnostic correlation does not create conversation linkage; no neighbor edits or cutover are implied; the repair layer separately evidences its additional usage.",
+   "source": "PLAN §11.2; ARCH §4; A-ROUTE-01",
+   "stages": "MVP",
+   "kind": "architecture"
+  },
+  {
+   "derived_id": "GOV-1",
+   "registry_id": "A-GOV-01",
+   "category": "governance",
+   "requirement": "Concentrated OAP governance: one current full architecture, no private PLAN/ARCH/CRITICAL mirrors, historical seeds immutable, ordered source evolution updates full source/projections/map together against the trusted accepted base, private strategic refresh only at post-merge quiescence, DHA exact-human-gate ownership.",
+   "source": "ARCH §17, §18; A-GOV-01",
+   "stages": "MVP",
+   "kind": "governance"
+  },
+  {
+   "derived_id": "MVP1",
+   "registry_id": "MVP-1",
+   "category": "mvp16",
+   "requirement": "PLAN §16.1: the entire main answer is captured before the repair call and before any user display.",
+   "source": "PLAN §16 item 1",
+   "stages": "MVP",
+   "kind": "acceptance-criterion"
+  },
+  {
+   "derived_id": "MVP2",
+   "registry_id": "MVP-2",
+   "category": "mvp16",
+   "requirement": "PLAN §16.2: without sufficient suspicion there is no additional Qwen call.",
+   "source": "PLAN §16 item 2",
+   "stages": "MVP",
+   "kind": "acceptance-criterion"
+  },
+  {
+   "derived_id": "MVP3",
+   "registry_id": "MVP-3",
+   "category": "mvp16",
+   "requirement": "PLAN §16.3: Qwen may propose only a replacement of its assigned span or answer 'keep'.",
+   "source": "PLAN §16 item 3",
+   "stages": "MVP",
+   "kind": "acceptance-criterion"
+  },
+  {
+   "derived_id": "MVP4",
+   "registry_id": "MVP-4",
+   "category": "mvp16",
+   "requirement": "PLAN §16.4: the main conversation history contains no repair conversation or its internal results.",
+   "source": "PLAN §16 item 4",
+   "stages": "MVP",
+   "kind": "acceptance-criterion"
+  },
+  {
+   "derived_id": "MVP5",
+   "registry_id": "MVP-5",
+   "category": "mvp16",
+   "requirement": "PLAN §16.5: no change happens outside programmatically validated spans.",
+   "source": "PLAN §16 item 5",
+   "stages": "MVP",
+   "kind": "acceptance-criterion"
+  },
+  {
+   "derived_id": "MVP6",
+   "registry_id": "MVP-6",
+   "category": "mvp16",
+   "requirement": "PLAN §16.6: an invalid proposal or cancellation of the optional process does not damage the already completed answer.",
+   "source": "PLAN §16 item 6",
+   "stages": "MVP",
+   "kind": "acceptance-criterion"
+  },
+  {
+   "derived_id": "MVP7",
+   "registry_id": "MVP-7",
+   "category": "mvp16",
+   "requirement": "PLAN §16.7: published truncated frequencies are not treated as complete statistics.",
+   "source": "PLAN §16 item 7",
+   "stages": "MVP",
+   "kind": "acceptance-criterion"
+  },
+  {
+   "derived_id": "MVP8",
+   "registry_id": "MVP-8",
+   "category": "mvp16",
+   "requirement": "PLAN §16.8: a transparent report of benefit, harm, latency and additional usage exists (the reporting mechanism and the honest unmeasured status are the auditable parts; the quality measurement itself is owner-excluded in this order).",
+   "source": "PLAN §16 item 8; OS-6",
+   "stages": "MVP",
+   "kind": "acceptance-criterion"
+  },
+  {
+   "derived_id": "WS-D01",
+   "registry_id": "D01",
+   "category": "workstream",
+   "requirement": "D01 Contracts and policy: clear span, evidence, proposal, decision and result structures; keep and replace separated.",
+   "source": "PLAN §15.1",
+   "stages": "DEMONSTRATOR",
+   "kind": "workstream"
+  },
+  {
+   "derived_id": "WS-D02",
+   "registry_id": "D02",
+   "category": "workstream",
+   "requirement": "D02 Bounded data import: reproducible index of initial sources with manifest and correct missing-data semantics (EXACT/CENSORED/UNAVAILABLE).",
+   "source": "PLAN §15.1; §6.3",
+   "stages": "DEMONSTRATOR",
+   "kind": "workstream"
+  },
+  {
+   "derived_id": "WS-D03",
+   "registry_id": "D03",
+   "category": "workstream",
+   "requirement": "D03 Protection and mapping: tokenization without altering the original; tests for code, URLs and Unicode.",
+   "source": "PLAN §15.1; §5",
+   "stages": "DEMONSTRATOR",
+   "kind": "workstream"
+  },
+  {
+   "derived_id": "WS-D04",
+   "registry_id": "D04",
+   "category": "workstream",
+   "requirement": "D04 First CPU detector: selects plausible suspicious places on a small set; does not send everything to the model.",
+   "source": "PLAN §15.1; §7",
+   "stages": "DEMONSTRATOR",
+   "kind": "workstream"
+  },
+  {
+   "derived_id": "WS-D05",
+   "registry_id": "D05",
+   "category": "workstream",
+   "requirement": "D05 Isolated reviewer: fake and real Qwen clients both return validated local decisions.",
+   "source": "PLAN §15.1; §4, §8",
+   "stages": "DEMONSTRATOR",
+   "kind": "workstream"
+  },
+  {
+   "derived_id": "WS-D06",
+   "registry_id": "D06",
+   "category": "workstream",
+   "requirement": "D06 Acceptance and patcher: code accepts or rejects proposals and preserves all other slices exactly.",
+   "source": "PLAN §15.1; §9, §10",
+   "stages": "DEMONSTRATOR",
+   "kind": "workstream"
+  },
+  {
+   "derived_id": "WS-D07",
+   "registry_id": "D07",
+   "category": "workstream",
+   "requirement": "D07 CLI and first inspection: shows original, proposals, final text and reasons; real examples are not hardwired special cases.",
+   "source": "PLAN §15.1; §11.1",
+   "stages": "DEMONSTRATOR",
+   "kind": "workstream"
+  },
+  {
+   "derived_id": "WS-M01",
+   "registry_id": "M01",
+   "category": "workstream",
+   "requirement": "M01 Initial labelled set: real target responses, correct control cases and a separate threshold-calibration part.",
+   "source": "PLAN §15.2; §14.2",
+   "stages": "MVP",
+   "kind": "workstream",
+   "applicability_note": "Owner-excluded for this programme: no separate human evaluation dataset (excluded, not deferred). This row is not a functional gate of this audit and never becomes a future human-dataset obligation."
+  },
+  {
+   "derived_id": "WS-M02",
+   "registry_id": "M02",
+   "category": "workstream",
+   "requirement": "M02 Lemmas and morphology: verified CPU analysis separating wrong lexeme choice from wrong inflection.",
+   "source": "PLAN §15.2; §7.3",
+   "stages": "MVP",
+   "kind": "workstream"
+  },
+  {
+   "derived_id": "WS-M03",
+   "registry_id": "M03",
+   "category": "workstream",
+   "requirement": "M03 Short phrases: bounded alarm grouping, clear edit width and working needs_wider_edit.",
+   "source": "PLAN §15.2; §7.2, §8.4",
+   "stages": "MVP",
+   "kind": "workstream"
+  },
+  {
+   "derived_id": "WS-M04",
+   "registry_id": "M04",
+   "category": "workstream",
+   "requirement": "M04 Acceptance calibration: rule versions with measured precision, harm and coverage per error class.",
+   "source": "PLAN §15.2; §14.3",
+   "stages": "MVP",
+   "kind": "workstream",
+   "applicability_note": "Quality measurement is unmeasured and owner-excluded in this order (OS-6); the row stays truthful as calibration scope, not as an implemented or deferred functional gate."
+  },
+  {
+   "derived_id": "WS-M05",
+   "registry_id": "M05",
+   "category": "workstream",
+   "requirement": "M05 Limits and failures: queue, cancellation, time and size limits, safe fallback to the original.",
+   "source": "PLAN §15.2; §13",
+   "stages": "MVP",
+   "kind": "workstream"
+  },
+  {
+   "derived_id": "WS-M06",
+   "registry_id": "M06",
+   "category": "workstream",
+   "requirement": "M06 Nonstreaming API path: one clearly supported text shape, context preservation, no recursion.",
+   "source": "PLAN §15.2; §11.3-11.4",
+   "stages": "MVP",
+   "kind": "workstream"
+  },
+  {
+   "derived_id": "WS-M07",
+   "registry_id": "M07",
+   "category": "workstream",
+   "requirement": "M07 Comparative report: agreed method vs original and basic comparison methods.",
+   "source": "PLAN §15.2; §14.2",
+   "stages": "MVP",
+   "kind": "workstream",
+   "applicability_note": "Depends on measured quality comparison; unmeasured and owner-excluded in this order (OS-6)."
+  },
+  {
+   "derived_id": "WS-S01",
+   "registry_id": "S01",
+   "category": "workstream",
+   "requirement": "S01 Broader negative tests: more correct/technical text and a statistically meaningful harm report.",
+   "source": "PLAN §15.3",
+   "stages": "SERVICE",
+   "kind": "workstream",
+   "applicability_note": "Later service stage; outside this audit scope (OS-7)."
+  },
+  {
+   "derived_id": "WS-S02",
+   "registry_id": "S02",
+   "category": "workstream",
+   "requirement": "S02 Broader data support: collocations or more complete n-grams when measurements show benefit; rights ordered.",
+   "source": "PLAN §15.3; §6.1",
+   "stages": "SERVICE",
+   "kind": "workstream",
+   "applicability_note": "Later service stage; data acquisition out of scope (OS-7)."
+  },
+  {
+   "derived_id": "WS-S03",
+   "registry_id": "S03",
+   "category": "workstream",
+   "requirement": "S03 Production connection: explicit gateway path, separate repair usage, bounded load.",
+   "source": "PLAN §15.3; §11.2",
+   "stages": "SERVICE",
+   "kind": "workstream",
+   "applicability_note": "Later service stage; production cutover out of scope (OS-7)."
+  },
+  {
+   "derived_id": "WS-S04",
+   "registry_id": "S04",
+   "category": "workstream",
+   "requirement": "S04 Deployment and rollback: packaging, health checks, configuration, repair switch-off without replacing Qwen.",
+   "source": "PLAN §15.3; §13.1",
+   "stages": "SERVICE",
+   "kind": "workstream",
+   "applicability_note": "Later service stage; packaging out of scope (OS-7)."
+  },
+  {
+   "derived_id": "WS-S05",
+   "registry_id": "S05",
+   "category": "workstream",
+   "requirement": "S05 Final documentation: supported/unsupported cases, data versions, known limits, reproducible tests.",
+   "source": "PLAN §15.3",
+   "stages": "SERVICE",
+   "kind": "workstream",
+   "applicability_note": "Later service stage; outside this audit scope (OS-7)."
+  }
+ ],
+ "registry_reconciliation": {
+  "frozen_registry_path": "oap/audit/requirements.json",
+  "frozen_registry_total_rows": 64,
+  "frozen_mvp_registry_ids_59": [
+   "LR-001",
+   "LR-002",
+   "LR-003",
+   "LR-004",
+   "LR-005",
+   "LR-006",
+   "LR-007",
+   "LR-008",
+   "LR-009",
+   "LR-010",
+   "LR-011",
+   "LR-012",
+   "LR-013",
+   "LR-014",
+   "A-SCOPE-01",
+   "A-SEAM-01",
+   "A-STACK-01",
+   "A-ROUTE-01",
+   "A-SPAN-01",
+   "A-PROTECT-01",
+   "A-CORPUS-01",
+   "A-CORPUS-02",
+   "A-DETECT-01",
+   "A-QUESTION-01",
+   "A-SCHEMA-01",
+   "A-ACCEPT-01",
+   "A-ACCEPT-02",
+   "A-PATCH-01",
+   "A-API-01",
+   "A-HISTORY-01",
+   "A-LIMIT-01",
+   "A-FAIL-01",
+   "A-SECURITY-01",
+   "A-TEST-01",
+   "A-EVAL-01",
+   "A-GOV-01",
+   "A-CLOSE-01",
+   "MVP-1",
+   "MVP-2",
+   "MVP-3",
+   "MVP-4",
+   "MVP-5",
+   "MVP-6",
+   "MVP-7",
+   "MVP-8",
+   "D01",
+   "D02",
+   "D03",
+   "D04",
+   "D05",
+   "D06",
+   "D07",
+   "M01",
+   "M02",
+   "M03",
+   "M04",
+   "M05",
+   "M06",
+   "M07"
+  ],
+  "mapping": "Each frozen MVP-59 ID was derived independently above (registry_id field) from full PLAN/ARCH + owner scope before consulting the registry claim wording; reconciliation confirms every MVP-59 ID has one or more derived rows.",
+  "mvp59_ids_without_derived_row": [],
+  "service_stage_rows_outside_59": [
+   "S01",
+   "S02",
+   "S03",
+   "S04",
+   "S05"
+  ],
+  "service_stage_rationale": "S01-S05 are SERVICE-milestone rows in the 64-row registry; they are outside the frozen MVP-59 set and carry later-stage applicability (owner scope: production cutover/packaging/data acquisition outside this audit; OS-7). They are assessed in the audit report metadata with explicit nonblocking-functional rationale, not hidden under excluded research work."
+ },
+ "full_source_requirements": [
+  "CAP-2",
+  "CAP-3",
+  "CAP-4",
+  "DET-3",
+  "TGT-2",
+  "ISO-2",
+  "ISO-3",
+  "ISO-4",
+  "REV-2",
+  "SPAN-4",
+  "ACC-4",
+  "LIM-4",
+  "TEST-2"
+ ],
+ "full_source_requirements_note": "Derived rows with registry_id null are additional full-source clauses beyond the frozen-59 claim wording; they remain visible and separate (R3) and are covered in the audit report metadata/prose, not forced into the 59-row matrix.",
+ "exclusions_and_later_stage": [
+  {
+   "id": "M01",
+   "derived": "WS-M01",
+   "status": "owner-excluded",
+   "rationale": "No separate human evaluation dataset: excluded by owner, not deferred; never revived as a functional gate or future human-dataset obligation (OS-5)."
+  },
+  {
+   "id": "M04",
+   "derived": "WS-M04",
+   "status": "owner-excluded-unmeasured",
+   "rationale": "Acceptance calibration requires measured quality on labelled data; quality is unmeasured and owner-excluded in this order (OS-6); row is truthful calibration scope, not an implemented or deferred gate."
+  },
+  {
+   "id": "M07",
+   "derived": "WS-M07",
+   "status": "owner-excluded-unmeasured",
+   "rationale": "Comparative report requires measured benefit comparisons (OS-6)."
+  },
+  {
+   "id": "MVP-8",
+   "derived": "MVP8",
+   "status": "partially-auditable",
+   "rationale": "The transparent reporting mechanism and honest unmeasured status are auditable; the quality measurement itself is owner-excluded (OS-6)."
+  },
+  {
+   "id": "S01",
+   "derived": "WS-S01",
+   "status": "later-stage",
+   "rationale": "Service milestone; outside this audit (OS-7)."
+  },
+  {
+   "id": "S02",
+   "derived": "WS-S02",
+   "status": "later-stage",
+   "rationale": "Service milestone; data acquisition out of scope (OS-7)."
+  },
+  {
+   "id": "S03",
+   "derived": "WS-S03",
+   "status": "later-stage",
+   "rationale": "Service milestone; production cutover out of scope (OS-7)."
+  },
+  {
+   "id": "S04",
+   "derived": "WS-S04",
+   "status": "later-stage",
+   "rationale": "Service milestone; packaging out of scope (OS-7)."
+  },
+  {
+   "id": "S05",
+   "derived": "WS-S05",
+   "status": "later-stage",
+   "rationale": "Service milestone (OS-7)."
+  }
+ ],
+ "classification_policy": {
+  "classes": [
+   "IMPLEMENTED",
+   "PARTIAL",
+   "ABSENT",
+   "UNPROVEN"
+  ],
+  "policy": "This artifact derives requirements and applicability only. The four-class classification is produced after actual source/evidence audit in 031-functional-proxy-audit.md; every implemented claim must name actual source clauses/paths with positive AND negative evidence and limits; fakes sit outside the claimed boundary; unproven stays unproven."
+ }
+}

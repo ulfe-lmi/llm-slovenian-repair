@@ -218,7 +218,8 @@ any mutation): at most 4 items; target at most 128 code points; context 240
 code points per side; prompt at most 8192 code points; request at most 32768
 UTF-8 bytes; response at most 32768 bytes; proposal JSON at most 8192 code
 points; `max_output_tokens` 1536; replacement at most 8 words / 128 code
-points; the ordered finite 15-second reviewer exchange deadline (one
+points; the ordered finite 15-second DEFAULT reviewer exchange deadline
+(explicitly operator-configurable per the 031-b section below; one
 monotonic deadline anchored at batch entry that covers the owned
 child process's startup, IPC, and its actual resolver/connect/TLS/
 upload/status/headers/body work plus result validation; deadline
@@ -407,8 +408,10 @@ string keys of at most 64 code points with string values of at most
 `top_p` in (0, 1] as finite numbers (bool rejected). Total
 wall-clock request budgeting, disconnect handling, admission control,
 cancellation, and CPU limits are not
-implemented in this proxy: the ordered finite 15-second batch-reviewer
-limit is a whole-exchange deadline anchored at entry (order 019-a),
+implemented in this proxy: the ordered finite 15-second DEFAULT
+batch-reviewer limit (explicitly operator-configurable per the 031-b
+section below) is a whole-exchange deadline anchored at entry
+(order 019-a),
 covering the owned child process's startup, IPC, and its actual wire
 work (deadline expiry prevents acceptance of any late or racing
 result, while the exact child's termination and reaping are awaited
@@ -1356,3 +1359,70 @@ Round 029-a (2026-11-10) was ordered to add bounded runtime word and phrase targ
 ## Request-scoped cancellation on client disconnect (order 030-a)
 
 Round 030-a (2026-11-10, branch oap/030-request-cancellation from accepted main 556b9ef21abecc621c9a134c544ae1cdf7010ad8) implemented request-scoped cancellation in the runnable proxy for client disconnects observed AFTER the fully valid ingress, until final delivery: a new `request_lifecycle.py` module (one per-request CancellationScope over the exact accepted socket; one bounded synchronous first check that catches an already-unusable accepted connection, plus the one bounded poll watcher on the disconnect-only poll mask POLLRDHUP|POLLHUP|POLLERR|POLLNVAL (decimal 8248 / hex 0x2038 on the selected native Linux runtime) with POLLIN deliberately excluded, so an unread tail on a live peer never cancels - the POLLRDHUP bit is the one that proves a FIN even behind unread tail  while a FIN/RST on the exact socket cancels and a POLLNVAL/closed descriptor during the watch stops the watcher WITHOUT setting the cancel (never acted on as a cancellation, no foreign FD acted on); capability validated before any bind allocation; every watcher iteration one bounded 50 ms slice that never resets a budget; finish actually stops and joins the owned watcher before releasing the socket) plus phase-cooperation seams in the seven modified existing files (proxy.py, upstream_setup.py, header_transport.py, capture_transport.py, review_transport.py, pandoc_protection.py and runtime_corpus.py - delivery_transport.py FROZEN, its delivery-entry cooperation in the Handler): nine Python paths total with the two NEW files (request_lifecycle.py, tests/test_request_cancellation.py); the other 46 concept Python files and all 18 pre-existing test modules byte-frozen. A pre-entry cancellation starts zero main/review work (zero owned child/dispatch at the named boundary); an already-started owned phase is terminated and actually reaped, its sockets/corpus/cursors closed and its guards/watchers actually joined as applicable, and the contained RequestCancelled propagates TO the Handler catch, where it is contained before any ordinary fallback/admission (no broad catch, no content-bearing trace) and converted to the quiet abort with the exact owned cleanup actually joined. The pre-dispatch exchange boundary at the actual `run_review_exchange` entry - after the pure frame/request bounds, before the attempted-dispatch marker and the owned launch - propagates an already-observed cancellation with zero child, zero HTTP POST and the marker still false (the root final-review correction; the full-19 that passed at those pre-fix bytes, 928 plus 350 subtests, is preserved as INTERIM evidence of the demonstrated missing R4/R7 check). Request-local accounting emits exactly one content-free observation with the correct 0/1 review-call count and known-or-unknown usage even on abort, with no carryover; ownership/control priority preserves the exact first pending nonordinary caller control identity over later cleanup, and when the pending control is ordinary, a cancellation or absent, the first later nonordinary cleanup control propagates after the cleanup (an ordinary pending never acquires authority to swallow a later MemoryError/KeyboardInterrupt; MemoryError is never 502'd into an ordinary response; guard threads receive explicit captured predicates and no ambient context supplies control authority). A fully valid SHUT_WR half-close remains documented-unsupported (the serious half-close counterargument is preserved in the order) and and the quiet client close is expected (the actual TCP FIN/RST tests establish the transport event separately; the direct-Handler and manual-Event rows are bounded unit phase evidence, not native peer RST proof). The owner-thread phase-entry boundaries whose frozen caller cannot forward an argument (the final-forward transport waits, the Pandoc owned runner, the read-only RuntimeCorpus constructor and the owned reviewer exchange) consult the per-thread current-scope slot, a no-op outside an active request - no ContextVar propagation, no caller bypass or header. Verification on the actual bytes: the new test module 63 passed plus 13 subtests; the named focused set 316 passed plus 93 subtests; strict mypy clean on the byte-identical flat nine-file shadow (and a seven-file precheck shadow) and Ruff clean on the nine actual paths; the INTERIM full-19 at the pre-fix bytes (928 plus 350 subtests, exit 0, preserved) and the NEW final stable 19-module suite 931 passed plus 350 subtests in 633.77 s with literal returncode 0 and all 55 source maps stable. Zero scientific model calls; no linguistic quality, packaged-library, milestone, ICA or deployment claim.
+
+## Owned entry-point close and reviewer-only operator deadline (order 031-b)
+
+Round 031-b (2026-11-10, same branch/PR 33, accepted base main
+3bd6ffdd96bda95bd4c6de447b56cce76fe5a058) made two bounded
+corrections to the actual `proxy.main()` entry point (product delta:
+`proxy.py` plus the new focused `tests/test_main_lifecycle.py`; the
+other 54 concept Python files and all 19 pre-existing test modules
+byte-frozen):
+
+- Owned close on every exit: after successful `ConceptProxy`
+  construction, `main()` now closes that exact owned server on normal
+  `serve_forever()` return and on every unwind (KeyboardInterrupt,
+  SystemExit, MemoryError) through the documented owning
+  `server_close()` boundary: admission stops, every waiting entry is
+  canceled/closed with the fixed closed code, the exact owned
+  workers are actually joined, and the accepting-loop listener is
+  closed. No `shutdown()` from the serving thread, no daemonized
+  workers, no dropped join, no optional-repair fallback, and all
+  other runtime behavior stays frozen.
+- First-control priority: the exact first pending nonordinary caller
+  control object (including MemoryError) keeps priority over later
+  cleanup failures; an ordinary pending error cannot suppress a
+  later nonordinary cleanup control; with no pending error the
+  cleanup failure propagates. The settlement catch re-raises the
+  applicable original object and never converts it.
+- Reviewer-only operator setting `CONCEPT_REVIEWER_TIMEOUT`: absent,
+  `REVIEWER_HTTP_TIMEOUT_SECONDS` and its 15-second default are
+  unchanged; present, the value is parsed before any HTTP bind and
+  validated by the existing `ResponsesReviewer` constructor, which
+  rejects nonnumeric, nonpositive, NaN or infinite durations before
+  bind. The selected value keeps the one absolute whole-exchange
+  clock: one monotonic deadline anchored at review-batch entry covers
+  prompt preparation, owned child/IPC startup, resolver, connect, TLS,
+  request write, status, headers, body and result validation, and a
+  late or racing success is a failure. There is no retry, extra pass,
+  changed token cap, global HTTP clock, request/header override, or
+  coupling to the other independent budgets - the upstream capture
+  timeout (`CONCEPT_TIMEOUT`, socket/body axis), the response-header
+  budget (`CONCEPT_HEADER_TIMEOUT`, 30 s default), the incoming-intake
+  budget (`CONCEPT_REQUEST_TIMEOUT`, 30 s default), the final-delivery
+  budget (`CONCEPT_DELIVERY_TIMEOUT`, 30 s default) and the
+  main-upstream setup budget (`CONCEPT_SETUP_TIMEOUT`, 30 s default)
+  retain their own values.
+- Native operator configuration: 45 seconds is the explicitly
+  selected private native setting (one measured 22.453-second valid
+  reviewer response at a 45-second diagnostic budget, with the
+  15-second default budget failing under the same conditions). It is
+  a reversible operating setting, not a claimed optimum, and the
+  15-second default is preserved.
+
+The new focused module (`tests/test_main_lifecycle.py`) drives the
+ACTUAL `main()` in bounded owned children with the fixture changing
+only the hardcoded bind address to OS-assigned loopback port 0 and
+observing the real serve entry: normal serve completion, failed
+serve, nonordinary primary controls (KeyboardInterrupt, MemoryError,
+SystemExit) keeping their exact object identity over later ordinary
+or nonordinary cleanup failures, cleanup failure with an absent or
+ordinary primary, the reviewer setting absent (default 15) versus
+explicit 45 with the other budgets unchanged, invalid settings
+(nonnumeric, empty, nonpositive, NaN, infinity) rejected before
+listener creation, and native SIGINT proving natural process exit
+within a finite bound with actual owned thread/listener cleanup (a
+forced kill cannot establish PASS). This is a bounded defect repair
+with regression evidence, not a readiness, MVP, quality, packaged-
+library, ICA or deployment claim, and it publishes no target URL,
+credential or private resource path.
