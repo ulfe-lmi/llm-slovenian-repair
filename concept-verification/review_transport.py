@@ -26,8 +26,15 @@ references (``SSL_CERT_FILE`` / ``SSL_CERT_DIR``) and nothing else
 (order 019-a, requirement 3).  The fixed normal main stays at the
 existing 15-second reviewer cap and is independent of
 ``CONCEPT_TIMEOUT`` and ``CONCEPT_HEADER_TIMEOUT``; overall request
-deadlines and every other CPU/cancellation requirement remain
-unfinished (no hard real-time scheduling is claimed).
+deadlines are untouched; the owned exchange additionally cooperates
+with the current request's cancellation (order 030-a): the
+attempted-dispatch marker is set on the parent side after the pure
+frame/request bounds and before the actual owned launch, and the
+governed parent waits consult the active request-local cancellation
+check (a per-thread no-op outside an active request), after which
+the exact owned child is terminated and actually reaped by the
+existing cleanup and the contained RequestCancelled propagates.  No
+hard real-time scheduling is claimed.
 """
 
 from __future__ import annotations
@@ -41,9 +48,11 @@ import struct
 import subprocess
 import sys
 import time
+from collections.abc import Callable
 from dataclasses import dataclass
 from pathlib import Path
 
+import request_lifecycle
 from batch_review import REASON_HTTP_FAILED
 from config import (
     REVIEW_BATCH_MAX_REQUEST_BYTES,
@@ -308,12 +317,19 @@ def decode_response_frame(frame: bytes) -> ReviewResponse:
     return ReviewResponse(False, 0, b"")
 
 
-def _select_governed(readable_fd: int | None, writeable_fd: int | None, deadline: float) -> None:
+def _select_governed(
+    readable_fd: int | None,
+    writeable_fd: int | None,
+    deadline: float,
+    cancelled: Callable[[], bool] | None = None,
+) -> None:
     """Wait for one governed readiness slice before a pipe operation."""
     while True:
         remaining = deadline - time.monotonic()
         if remaining <= 0:
             raise DeadlineExceeded
+        if cancelled is not None and cancelled():
+            raise request_lifecycle.RequestCancelled()
         readable, writeable, _ = select.select(
             [readable_fd] if readable_fd is not None else [],
             [writeable_fd] if writeable_fd is not None else [],
@@ -324,12 +340,17 @@ def _select_governed(readable_fd: int | None, writeable_fd: int | None, deadline
             return
 
 
-def _read_exact_governed(fd: int, count: int, deadline: float) -> bytes:
+def _read_exact_governed(
+    fd: int,
+    count: int,
+    deadline: float,
+    cancelled: Callable[[], bool] | None = None,
+) -> bytes:
     """Read exactly ``count`` bytes from a nonblocking fd under the
     deadline; partial reads and readiness races stay governed."""
     buffer = bytearray()
     while len(buffer) < count:
-        _select_governed(fd, None, deadline)
+        _select_governed(fd, None, deadline, cancelled)
         try:
             chunk = os.read(fd, count - len(buffer))
         except BlockingIOError:
@@ -340,22 +361,34 @@ def _read_exact_governed(fd: int, count: int, deadline: float) -> bytes:
     return bytes(buffer)
 
 
-def _read_frame_governed(fd: int, max_bytes: int, deadline: float) -> bytes:
-    prefix = _read_exact_governed(fd, _FRAME_PREFIX.size, deadline)
+def _read_frame_governed(
+    fd: int,
+    max_bytes: int,
+    deadline: float,
+    cancelled: Callable[[], bool] | None = None,
+) -> bytes:
+    prefix = _read_exact_governed(
+        fd, _FRAME_PREFIX.size, deadline, cancelled
+    )
     (frame_len,) = _FRAME_PREFIX.unpack(prefix)
     if frame_len == 0 or frame_len > max_bytes:
         raise FrameMalformed("reviewer frame length exceeds bound")
-    return _read_exact_governed(fd, frame_len, deadline)
+    return _read_exact_governed(fd, frame_len, deadline, cancelled)
 
 
-def _write_all_governed(fd: int, data: bytes, deadline: float) -> None:
+def _write_all_governed(
+    fd: int,
+    data: bytes,
+    deadline: float,
+    cancelled: Callable[[], bool] | None = None,
+) -> None:
     """Write all bytes to a nonblocking fd under the deadline; partial
     writes on a stalled or shrunken pipe stay governed, never a
     deadline-unsafe blocking write."""
     view = memoryview(data)
     offset = 0
     while offset < len(view):
-        _select_governed(None, fd, deadline)
+        _select_governed(None, fd, deadline, cancelled)
         try:
             written = os.write(fd, view[offset:])
         except BlockingIOError:
@@ -365,11 +398,17 @@ def _write_all_governed(fd: int, data: bytes, deadline: float) -> None:
         offset += written
 
 
-def _wait_exit_governed(proc: subprocess.Popen[bytes], deadline: float) -> int:
+def _wait_exit_governed(
+    proc: subprocess.Popen[bytes],
+    deadline: float,
+    cancelled: Callable[[], bool] | None = None,
+) -> int:
     while True:
         code = proc.poll()
         if code is not None:
             return code
+        if cancelled is not None and cancelled():
+            raise request_lifecycle.RequestCancelled()
         remaining = deadline - time.monotonic()
         if remaining <= 0:
             raise DeadlineExceeded
@@ -470,6 +509,27 @@ def run_review_exchange(
         remaining_seconds=deadline - time.monotonic(),
         body=body,
     )
+    # Request-local attempted-dispatch marker (order 030-a,
+    # requirement 7): set on the parent side AFTER the pure
+    # frame/request bounds and BEFORE the actual owned launch (no
+    # descriptor or child exists yet), so an interrupted exchange is
+    # distinguished from a pre-dispatch cancellation.  The pre-
+    # dispatch boundary itself (existing R4/R7, root final review):
+    # if the current captured scope already carries an observed
+    # cancellation at this post-pure-frame point, the dedicated
+    # cancellation propagates BEFORE the marker and the owned launch
+    # - no child is started, no attempted-dispatch count is created
+    # and no HTTP POST can occur for an already-canceled request.
+    # The per-thread slot is a no-op outside an active request
+    # (startup, direct core tests, other threads) and the frozen
+    # caller (qwen_client) is unchanged.  The same scope's
+    # cancellation check is captured for the governed waits below
+    # (explicit closure capture - no ContextVar assumption).
+    scope = request_lifecycle.active_scope()
+    if scope is not None:
+        scope.raise_if_cancelled()
+        scope.mark_review_dispatch_attempted()
+    cancelled = scope.cancelled if scope is not None else None
     # Descriptor ownership starts before the first descriptor can
     # exist: no fallible ownership-tracking runs between descriptor
     # creation and cleanup responsibility, so a fault at any point -
@@ -544,20 +604,22 @@ def run_review_exchange(
         request_read = -1
         os.close(response_write)
         response_write = -1
-        _write_all_governed(request_write, frame, deadline)
+        _write_all_governed(request_write, frame, deadline, cancelled)
         os.close(request_write)
         request_write = -1
-        reply = _read_frame_governed(response_read, RESPONSE_FRAME_MAX_BYTES, deadline)
+        reply = _read_frame_governed(
+            response_read, RESPONSE_FRAME_MAX_BYTES, deadline, cancelled
+        )
         # Strict single-frame check: exactly one frame, then the pipe
         # ends; any extra byte is a malformed reply.
-        _select_governed(response_read, None, deadline)
+        _select_governed(response_read, None, deadline, cancelled)
         try:
             extra = os.read(response_read, 1)
         except BlockingIOError:
             extra = b""
         if extra:
             raise FrameMalformed("reviewer reply carries extra data")
-        code = _wait_exit_governed(proc, deadline)
+        code = _wait_exit_governed(proc, deadline, cancelled)
         if code != 0:
             raise ProcessFailure("owned reviewer child exited nonzero")
         response = decode_response_frame(reply)
