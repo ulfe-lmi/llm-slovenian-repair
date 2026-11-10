@@ -54,9 +54,17 @@ STRATEGIC_HOME workorder root).
    transcript/report-history invocations and shell/git helpers) also used the
    ambient python3/shell environment. The qualified product/native/static
    proofs (focused pytest, the native harness, the Root-qualified
-   mypy/Ruff proof) remain separate and accurate as recorded. New helpers in
-   this order use the explicitly supplied qualified interpreter, -B, explicit
-   OAP_ROLE=coding, actual shell umask 077 and private cache roots.
+   mypy/Ruff proof) remain separate and accurate as recorded. In this order
+   the explicit OAP_ROLE=coding, actual shell umask 077 and qualified
+   interpreter with -B / private cache roots requirement applies going
+   forward to all new shared-check, preflight and publication helper
+   invocations (from Root's first artifact review at
+   2026-11-10T22:03:25Z); it is not retroactive proof about every prior
+   031-c metadata/shell invocation. The 031-c command texts observed up to
+   that review had no explicit role/umask lines (the Python writer/scan
+   commands used the qualified interpreter; no inherited environment value
+   is asserted here) and are disclosed as unestablished scope, not as
+   uniformly qualified.
 5. 031-b unpublished preflight - NOT RUN / UNPROVEN. No preflight-report
    invocation with a private `--source` and the canonical 031-b report absent
    is established by the actual foreground command history; the 031-b report's
