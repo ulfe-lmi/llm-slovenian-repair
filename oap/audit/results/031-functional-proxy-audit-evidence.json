@@ -10,7 +10,7 @@
     "immutable": true
   },
   "environment": {
-    "python": "/home/janezp/envs/llm-slovenian-repair/bin/python (3.12.15, -B, private TMPDIR/PYTHONPYCACHEPREFIX)",
+    "python": "qualified Python 3.12.15 (project venv), -B, private TMPDIR/PYTHONPYCACHEPREFIX",
     "pandoc": "qualified Pandoc 3.7.0.2, SHA-256 02a59bd935b02364e6dee67093874532c096adcb60374a53a0f3ba5310ab1229, explicit CONCEPT_PANDOC (no PATH discovery)",
     "corpus": "authorized read-only private index (truncated release; min counts 2270/272 observed)",
     "helper_hygiene": "every helper: export OAP_ROLE=coding; shell umask 077; python -B; private TMPDIR/PYTHONPYCACHEPREFIX; dirs 0700/files 0600; sanitized child env for probe children (no QWEN_API_KEY/CONCEPT_REVIEWER_PROFILE/provider credentials)"
@@ -69,6 +69,28 @@
         "usage observer: one content-free line calls=1 usage=10/20/30; main usage 7/25/32 separate; trace file 0600 (acceptance + 1 candidate + 0 replacements; persisted trace omits review_batch call/usage - minor finding)",
         "cleanup: both owned children SIGTERM-terminated, reaped, pipes drained/closed (proxy exit 0 with CLEAN_SHUTDOWN through the owning admission close boundary; upstream exit -15); parent 1 thread / 4 open FDs; no forced kill"
       ]
+    },
+    {
+      "name": "Root closed experiment - actual main() SIGINT, owned port 0, two cases (private receipt; NOT rerun in this audit)",
+      "executed_at_implementation_head": "16354d65bd7c9a4b10640a6a7f923088f2371a2b",
+      "evaluated_product": "3bd6ffdd96bda95bd4c6de447b56cce76fe5a058 (product bytes equivalent; re-verified: git diff 8fc14c3..3bd6ffd empty)",
+      "code_mutations": false,
+      "setup": "real proxy.main() with normal configuration / qualified Pandoc / real ConceptProxy-serve_forever-admission; fixture changed only the hardcoded bind address to an owned OS loopback port 0 (bound ports 37021/36591 from the children's READY lines); default 18024 never bound or probed; zero HTTP/model requests; sanitized child environment (empty auth, no profile); observed 2026-11-10T16:19:07-10Z",
+      "cases": [
+        {
+          "case": "actual_main",
+          "owned_pid": 57747,
+          "result": "native SIGINT -> alive 2.0084 s with 3 threads (MainThread, concept-request-admission-monitor, concept-request-admission-handler, non-daemon); no exit before fixture cleanup; fixture forced exact-PID kill of the owned child only; reaped -9; stderr contained KeyboardInterrupt (1054 B stderr / 145 B stdout); total 2.6691 s; /proc entry gone after wait"
+        },
+        {
+          "case": "reference_finally",
+          "owned_pid": 57764,
+          "result": "COUNTERFACTUAL private wrapper adding the real server_close in a finally; exited naturally -2 in 0.0318 s; no forced cleanup; reaped. Proof-of-shape only - NOT an implemented product fix or a production PASS"
+        }
+      ],
+      "earliest_boundary": "actual runnable main() lacks finally/owner close around serve_forever; after native SIGINT the real non-daemon admission threads remain and hold interpreter shutdown",
+      "all_owned_processes_reaped": true,
+      "disposition": "closed experiment; recorded as the confirmed A-FAIL-01 finding; NOT rerun; raw logs private 0600 under the private scratch root and not echoed"
     }
   ],
   "focused_test_reruns_at_evaluated_main": [
@@ -76,24 +98,24 @@
       "command": "pytest concept-verification/tests/test_pandoc_protection.py -q",
       "result": "PASSED",
       "observed": "67 passed + 3 subtests in 7.47 s, rc 0",
-      "provenance": "prior epoch of this order at literal 3bd6ffd, clean tracked state (no product changes since); qualified python -B, private caches"
+      "provenance": "prior epoch of this order at literal 3bd6ffd with scoped protocol/artifact dirty state (M oap/active; untracked 031-a order); product bytes unchanged at 3bd6ffd; qualified python -B, private caches"
     },
     {
       "command": "pytest concept-verification/tests/test_concept.py -q (CONCEPT_PANDOC=qualified)",
       "result": "PASSED",
       "observed": "19 passed in 5.07 s, rc 0",
-      "provenance": "prior epoch of this order at literal 3bd6ffd, clean tracked state; qualified python -B, private caches"
+      "provenance": "prior epoch of this order at literal 3bd6ffd with scoped protocol/artifact dirty state (M oap/active; untracked 031-a order); product bytes unchanged at 3bd6ffd; qualified python -B, private caches; explicit CONCEPT_PANDOC"
     }
   ],
   "prior_runs_claims_index_only_not_relabeled": [
-    "full 19-suite (931 passed) at the M30-era tree (older product revision)",
-    "four required checks green at PR32 reviewed head 8fc14c3258aa8712ecd53be81abe3e62c798d04b whose tree the order's verified prior_review states equals the exact merged tree of 3bd6ffd (source-byte/tree equivalence corroboration, not a new execution at 3bd6ffd)"
+    "full 19-suite (931 passed) at the M30-era tree (older product revision) - that 931 result was NOT newly executed at M30, and App successful logs do NOT print a total of 931",
+    "all 13 Application-baseline development-baseline driver commands and the four required final-head checks passed at PR32 reviewed head 8fc14c3258aa8712ecd53be81abe3e62c798d04b (CI observation at the reviewed head), whose tree the order's verified prior_review states equals the exact merged tree of 3bd6ffd (re-verified: git diff 8fc14c3..3bd6ffd empty) - source-byte/tree equivalence corroboration, not a new execution at 3bd6ffd"
   ],
   "shared_checks": [
     {
       "name": "check_ica (oap_cli ica)",
       "command": "python3 oap/bin/oap_cli.py ica --repo-root . --source oap/audit/results/031-functional-proxy-audit.md --current-main 3bd6ffdd96bda95bd4c6de447b56cce76fe5a058",
-      "result": "PASSED (schema valid; 16 non-IMPLEMENTED gaps as designed; RC 0) at pre-commit worktree, registry byte-identical at 3bd6ffd"
+      "result": "PASSED (schema valid; after the consolidated correction 11 non-IMPLEMENTED gaps - 8 PARTIAL + 3 ABSENT - as designed; RC 0) at pre-commit worktree on the corrected audit md, registry byte-identical at 3bd6ffd"
     },
     {
       "name": "governance accepted-runtime",
@@ -118,12 +140,12 @@
     {
       "name": "whitespace accepted base 2832fa1e (oap-bootstrap CI step)",
       "command": "python3 oap/bin/check_whitespace.py --repo-root . --base 2832fa1e51bdf3641aabbd81feab8ddb64a876da",
-      "result": "FAILED (DIAGNOSTIC_SET_MISMATCH, RC 1) at implementation head da6892e - root cause: the immutable 031-a order file (SHA b4e4a2a4..., line 161 'new blank line at EOF.') adds a 5th whitespace diagnostic beyond the four pinned incidents (fixed contract, order 027-b); verified the ONLY new diagnostic in either base range; all round-added files whitespace-clean (git diff --check 3bd6ffd..da6892e -- oap/audit/results research/RESEARCH-STATE.md = clean); not remediable by coding (order immutable per R2; helper/registry frozen per R9); precedent: root-issued incident 4 resolved by root-adjudicated forward recovery; consequence: the OAP bootstrap acceptance CI whitespace step fails on any final report head until Root adjudicates"
+      "result": "FAILED (DIAGNOSTIC_SET_MISMATCH, RC 1) at implementation head da6892e - root cause: the immutable 031-a order file (SHA b4e4a2a4..., line 161 'new blank line at EOF.') adds a 5th whitespace diagnostic beyond the four pinned incidents (fixed contract, order 027-b); verified the ONLY new diagnostic in either base range; all round-added files whitespace-clean (git diff --check 3bd6ffd..da6892e -- oap/audit/results research/RESEARCH-STATE.md = clean); not remediable by coding (order immutable per R2; helper/registry frozen per R9); precedent: root-issued incident 4 resolved by root-adjudicated forward recovery; consequence: the OAP bootstrap acceptance CI whitespace step fails on any final report head until Root adjudicates; Root independently reproduced the same failure at the implementation head by running the actual CLI base: EXIT1 DIAGNOSTIC_SET_MISMATCH (see root_whitespace_reproduction)"
     },
     {
       "name": "whitespace accepted base 82ea1e6f (application-baseline CI step)",
       "command": "python3 oap/bin/check_whitespace.py --repo-root . --base 82ea1e6f4173934fa47bb34ee6a6f78338d3603a",
-      "result": "FAILED (DIAGNOSTIC_SET_MISMATCH, RC 1) at implementation head da6892e - same single root cause (immutable 031-a order trailing blank line); identical diagnosis and adjudication path as the 2832fa1e base"
+      "result": "FAILED (DIAGNOSTIC_SET_MISMATCH, RC 1) at implementation head da6892e - same single root cause (immutable 031-a order trailing blank line); identical diagnosis and adjudication path as the 2832fa1e base; Root independently reproduced the same failure at the implementation head by running the actual CLI base: EXIT1 DIAGNOSTIC_SET_MISMATCH (see root_whitespace_reproduction)"
     }
   ],
   "research_counter": {
@@ -138,7 +160,9 @@
     "no milestone/release/deployment acceptance",
     "no merge or automerge",
     "no human evaluation dataset created or requested",
-    "raw probe logs remain private 0600 and are not echoed in public artifacts"
+    "raw probe logs remain private 0600 and are not echoed in public artifacts",
+    "no rerun of the closed Root main()-SIGINT experiment; its private receipt is cited, not reproduced",
+    "no research-counter bump for this same-round correction (85->86 already committed in da6892e for the round's single report)"
   ],
   "pr_readback": {
     "number": 33,
@@ -148,6 +172,26 @@
     "head_ref": "oap/031-functional-proxy-audit",
     "head_ref_oid": "da6892e3ab1f4a05bb1f792b9acb6852145e688b",
     "base_ref": "main",
-    "observed_at": "2026-11-10T16:10:58+00:00"
-  }
+    "observed_at": "2026-11-10T16:10:58+00:00",
+    "note": "read back before this correction commit (past observation); the branch head after the correction commit(s) is recorded in the 031-a work report and the PR title/body (updated after this commit); no push occurs until the report-only publication commit"
+  },
+  "product_byte_equivalence_verification": {
+    "check": "git diff 8fc14c3258aa8712ecd53be81abe3e62c798d04b 3bd6ffdd96bda95bd4c6de447b56cce76fe5a058",
+    "result": "empty diff (0 files changed) - PR32 reviewed head and merged main are tree-identical (M30/actual-CI-checkout/H30 equivalence re-verified at this audit epoch)",
+    "note": "corroborates the order's verified prior_review tree-equality statement; no product bytes changed between the reviewed head and merged main"
+  },
+  "root_whitespace_reproduction": {
+    "by": "Root (strategic), during the consolidated review of the quiescent private draft",
+    "at_head": "16354d65bd7c9a4b10640a6a7f923088f2371a2b (implementation head at review time)",
+    "observation": "both actual CLI whitespace bases run independently by Root; each EXIT1 DIAGNOSTIC_SET_MISMATCH",
+    "identities": {
+      "immutable_order_bytes": 18351,
+      "immutable_order_sha256": "b4e4a2a485304893d228eb35d59e91cc229ddcea95a8160e536262e759004d10",
+      "git_blob_sha1": "154087c510433f229c39cee4bafded877b40b671",
+      "introduced_in_commit": "da6892e3ab1f4a05bb1f792b9acb6852145e688b",
+      "sole_added_diagnostic": "oap/orders/031-a-functional-proxy-audit.md:161: new blank line at EOF."
+    },
+    "disposition": "Root owns this formatting error; no order/history rewrite and no helper repair within 031-a (order immutable per R2; helper/registry frozen per R9); Root will issue an explicit bounded forward correction AFTER truthful 031-a publication; no CI bypass"
+  },
+  "round_result": "PARTIAL - the required shared whitespace checks fail at every implementation head (sole root cause: the immutable 031-a order's trailing blank line, Root-owned, forward correction after publication); the audit evidence and classification remain final; no milestone acceptance"
 }
