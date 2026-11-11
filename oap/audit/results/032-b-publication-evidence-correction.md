@@ -70,8 +70,9 @@ publication was a timing error; that portion was NOT YET RUN at
 composition.
 
 Scans actually completed before publication (actual scope; value never
-printed; counts only): the five staged non-report blobs (order, oap/active,
-requirements-first, audit, evidence), the two commit messages
+printed; counts only): the five committed non-report blobs at 8549db2,
+after implementation commit and before report publication (order,
+oap/active, requirements-first, audit, evidence), the two commit messages
 (implementation commit 8549db2 and base commit 2f0d9c47) and the exact
 private report draft (SHA-256 0e893432...) - all 0 hits. The modified
 research/RESEARCH-STATE.md blob was not among that scan's targets.
