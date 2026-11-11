@@ -286,7 +286,7 @@ self-approval.
   {
    "id": "LR-006",
    "class": "IMPLEMENTED",
-   "runtime_path": "qwen_client.parse_proposal/parse_batch_envelope (strict) + repair.accept/apply_edits + composed_validation.validate_composed (code composes from exact original slices)",
+   "runtime_path": "batch_review.parse_batch_envelope (strict whole-batch parser; imported by qwen_client and called in review_batch) + runtime_acceptance.accept + repair.apply_edits (shared patcher) + composed_validation.validate_composed (code composes from exact original slices). The legacy qwen_client.parse_proposal is the single-target path, not the runtime.",
    "tested_sha": "c36ed4f42534bc13df4dac2b418fb50262d47d06",
    "evidence": "Fresh full offline suite at audited main c36ed4f: 965 tests, 584.337 s, OK, exit 0, pinned CONCEPT_PANDOC, qualified python -B, shell umask 077 (private run log SHA-256 b0d53b2da371136da5f947e8dece6e984fe525eb066aeff056a8039e9a4ed27c).; test_composed_validation + test_review_batch + test_runtime_acceptance (model returns only a local replacement; code validates and inserts).",
    "negative_paths": "code-fenced/oversize/invalid JSON/unknown-or-duplicate-or-missing id -> whole batch rejected; model never supplies a rewritten sentence or new coordinates; only one bounded assistant output_text accepted."
@@ -391,7 +391,7 @@ self-approval.
   {
    "id": "A-SPAN-01",
    "class": "IMPLEMENTED",
-   "runtime_path": "pandoc_protection.map_span/map_block_span + _Document (Unicode code-point offsets into the unmodified original) + repair.accept stale-slice validation",
+   "runtime_path": "pandoc_protection.map_span/map_block_span + _Document (Unicode code-point offsets into the unmodified original) + runtime_acceptance.accept stale-slice validation",
    "tested_sha": "c36ed4f42534bc13df4dac2b418fb50262d47d06",
    "evidence": "Fresh full offline suite at audited main c36ed4f: 965 tests, 584.337 s, OK, exit 0, pinned CONCEPT_PANDOC, qualified python -B, shell umask 077 (private run log SHA-256 b0d53b2da371136da5f947e8dece6e984fe525eb066aeff056a8039e9a4ed27c). + Independent offline probe of the 033-a changed protection consumer via the real protect_with_pandoc on the pinned binary: Slovenian low/high quote interior denied while outside prose granted; raw inline HTML tag interior denied while surrounding prose granted; fenced code denied while surrounding prose granted (deny-by-default, exact code-point grants, no AST rendering).; test_pandoc_protection (repeated occurrences via before_target/target/after_target; Unicode/CRLF/combining marks).",
    "negative_paths": "0<=start<end<=len; text[start:end]==original enforced; stale or out-of-bounds coordinates rejected before slicing; no protected intersection; repeated identical words disambiguated by exact occurrence context; no UTF-8/UTF-16/model-token offsets used for grants."
@@ -579,7 +579,7 @@ self-approval.
   {
    "id": "MVP-5",
    "class": "IMPLEMENTED",
-   "runtime_path": "pandoc_protection (deny-by-default grants) + repair.accept protected/barrier checks + apply_edits protected-slice assertion",
+   "runtime_path": "pandoc_protection (deny-by-default grants) + runtime_acceptance.accept protected/barrier checks + repair.apply_edits protected-slice assertion",
    "tested_sha": "c36ed4f42534bc13df4dac2b418fb50262d47d06",
    "evidence": "Fresh full offline suite at audited main c36ed4f: 965 tests, 584.337 s, OK, exit 0, pinned CONCEPT_PANDOC, qualified python -B, shell umask 077 (private run log SHA-256 b0d53b2da371136da5f947e8dece6e984fe525eb066aeff056a8039e9a4ed27c). + Independent offline probe of the 033-a changed protection consumer via the real protect_with_pandoc on the pinned binary: Slovenian low/high quote interior denied while outside prose granted; raw inline HTML tag interior denied while surrounding prose granted; fenced code denied while surrounding prose granted (deny-by-default, exact code-point grants, no AST rendering).; independent probe (quote/HTML/code denied, outside granted); test_pandoc_protection.",
    "negative_paths": "no change happens outside programmatically verified exact original spans; a protected or barrier-crossing edit is rejected and any changed protected slice raises."

@@ -448,7 +448,7 @@
         "source_clause": "ARCH 5/13/14",
         "entry": "capture_transport (bounded collector, require_complete_sse) + proxy capture (response.completed gate before any review/delivery)",
         "positive": "test_capture_transport.CollectorDirectTests.test_split_codepoint_across_wire_chunks; test_concept.ConceptTests.test_proxy_stops_at_terminal_event_without_eof; test_proxy_delivers_buffered_terminal_event_without_eof; test_main_lifecycle.MainLifecycleTests.test_normal_serve_completion",
-        "negative": "test_capture_transport.test_invalid_utf8_byte_rejected; test_truncated_final_codepoint_rejected; test_chunked_huge_size_exceeds_bound (hard capture limit); test_concept.test_proxy_incomplete_stream_times_out_and_normalizes_path; test_proxy_forwards_non_200_status_and_content_type; test_main_lifecycle test_failed_serve_propagates_ordinary_error / test_system_exit_primary_keeps_identity",
+        "negative": "test_capture_transport.test_invalid_utf8_byte_rejected; test_truncated_final_codepoint_rejected; test_chunked_huge_size_exceeds_bound (hard capture limit); test_concept.test_proxy_incomplete_stream_times_out_and_normalizes_path; test_proxy_forwards_non_200_status_and_content_type; test_main_lifecycle.MainLifecycleTests.test_failed_serve_propagates_ordinary_error / test_system_exit_primary_keeps_identity_over_nonordinary_cleanup",
         "class": "IMPLEMENTED",
         "applicability": "APPLICABLE_MVP",
         "limit": "loopback concept; zero live main calls; main error/incomplete/hard-capture never a repaired success"
@@ -470,7 +470,7 @@
         "source_clause": "ARCH 9/14",
         "entry": "analysis_policy (eligibility gate) + request_admission (one active + bounded waiting) + batch_review (target cap 8, prompt/output caps) + proxy (bypass_original / no-review after safe capture)",
         "positive": "test_analysis_policy.PolicyValidationTests.test_versioned_defaults_are_finite_engineering_constants; test_exact_N_admits_N_plus_1_exceeds_on_both_axes; test_request_admission.AdmissionControllerTests.test_fifo_order_behind_held_active; test_review_batch (cap 8 deterministic non-overlapping targets)",
-        "negative": "test_analysis_policy.OverSizedGateZeroWorkSeparateReasons (bypass after safe capture); test_request_admission.test_queue_full_exact_packet_no_thread_no_upstream; test_expired_head_cannot_block_later_eligible; test_invalid_waiting_capacity_rejected",
+        "negative": "test_analysis_policy.EngineDefaultBoundaryTests.test_oversize_gate_zero_work_separate_reasons (bypass after safe capture); test_request_admission.test_queue_full_exact_packet_no_thread_no_upstream; test_expired_head_cannot_block_later_eligible; test_invalid_waiting_capacity_rejected",
         "class": "IMPLEMENTED",
         "applicability": "APPLICABLE_MVP",
         "limit": "eligibility gate is finite; bypass is content-free and after safe capture"
