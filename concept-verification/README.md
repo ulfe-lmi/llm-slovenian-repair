@@ -159,6 +159,45 @@ bounded proxy-side addition for unterminated prose-form TeX: any opener with
 no closing sequence anywhere later protects to end of line. Residual matches
 overlapping granted prose are retained in full.
 
+Protected extents and original-source ordering (order 033-a): the walk
+collects exact-source candidate grants plus structural context events -
+literal, escaped and entity quotation markers, and reader-recognized
+complete raw opening/closing tags - each with its proven position, and one
+document-level finalization after the whole AST walk (before any outcome is
+built) coalesces equivalent physical footnote payloads, sorts the events by
+proven original position, replays the quotation and HTML context stacks,
+and filters the candidates by the resulting denied intervals. Quotation
+families are distinct (Slovenian low/high `„…“`, both guillemet directions
+`«…»` and `»…«`, curly and straight double and single forms), and only a
+proved compatible closer of the SAME provenance (literal, backslash-escaped
+or entity) releases its own level: a mismatched, escaped or
+entity-normalized inner marker can never release a different outer context,
+and an unproved extent protects to the end of the document. An established
+in-word straight apostrophe stays ordinary punctuation. Raw tags act only
+in complete reader-recognized shapes: a closing tag with another identity
+cannot discharge an unmatched opener, a split or incomplete closer is never
+recognized and cannot release by raw-string matching, void and
+self-closing forms are neutral, and quotes inside tag attributes are
+machine syntax, not quotation markers.
+
+A complete Pandoc BlockQuote structure - lazy continuation and nesting
+included - is denied in full: its content is never walked, and its proven
+physical extent (the block's own `data-pos`, else the positioned wrapper
+`Div` that retains the full quote extent) is additionally recorded as a
+denial region. The pinned reader relocates a footnote definition into each
+of its references in AST visitation while the payload keeps its later
+source coordinates, and a quoted definition empties the BlockQuote while
+the payload appears under the later reference: the recorded extent keeps
+the entire quoted original region denied against those relocated candidate
+grants, and a definition referenced several times duplicates one physical
+payload that is coalesced and replayed exactly once. An ordinary definition
+outside a quotation stays usable, and earlier ordinary prose is unaffected
+by later relocated payloads (physical source order). If a BlockQuote extent
+cannot be proven, the document fails closed. Compound (multi-line) opening
+tag positions are not grantable spans; their proven first and last segments
+place the opening extent conservatively, and an unplaceable event keeps its
+extent unproved toward the document ends.
+
 Documented conservative abstentions (proven input subset): a span containing
 an unproved grapheme-sensitive code point (C0/C1 controls, DEL, NEL, LS, PS,
 unproved combining marks, variation selectors, ZWJ/ZWNJ) is never granted; a

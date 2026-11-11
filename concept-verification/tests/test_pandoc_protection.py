@@ -587,6 +587,157 @@ class PandocMappingTests(unittest.TestCase):
         blockquote = "> citat besedilo\n"
         self._assert_protected(blockquote, 0, len(blockquote))
 
+    def test_blockquote_structure_denied_in_full(self) -> None:
+        # Order 033-a, requirement 5: a complete Pandoc BlockQuote
+        # structure - lazy continuation and nesting included - is denied
+        # in full at the structural layer, not only by the residual
+        # shell-marker policy: nothing inside it is granted.
+        lazy = "> Prvi stavek.\nDanes je lepo vreme.\n"
+        granted, _ = self._protect(lazy)
+        self.assertEqual(granted, ())
+        self._assert_protected(lazy, 0, len(lazy) - 1)
+        nested = "> prva\n>   gnezdeno\n\npoje\n"
+        granted, _ = self._protect(nested)
+        self.assertEqual(granted, ((21, 25),))  # only "poje" after the quote
+        self._assert_protected(nested, 0, 21)
+        # Independent prose after the proved block boundary stays usable
+        # with its exact original spans.
+        after = "> citat besedilo\n\nTo je presenetliv zapisano.\n"
+        granted, protected = self._protect(after)
+        second = "To je presenetliv zapisano."
+        base = after.index(second)
+        self.assertEqual(
+            granted,
+            (
+                (base, base + 2), (base + 2, base + 3),
+                (base + 3, base + 5), (base + 5, base + 6),
+                (base + 6, base + 17), (base + 17, base + 18),
+                (base + 18, base + 26), (base + 26, base + 27),
+            ),
+        )
+        self._assert_protected(after, 0, base)
+
+    def test_quote_families_interior_protected(self) -> None:
+        # Order 033-a, requirement 3: the Slovenian low/high pair, both
+        # guillemet directions, and the established curly/straight
+        # double and single forms each protect their interior; only a
+        # proved compatible closer of the same family releases it.
+        for text in (
+            "\u201epresenetliv zapisano\u201c zunaj.\n",  # low/high
+            "\u00abpresenetliv zapisano\u00bb zunaj.\n",  # guillemet inward
+            "\u00bbpresenetliv zapisano\u00ab zunaj.\n",  # guillemet outward
+            "\u201cpresenetliv zapisano\u201d zunaj.\n",  # curly double
+            "\u2018presenetliv zapisano\u2019 zunaj.\n",  # curly single
+            '"presenetliv zapisano" zunaj.\n',  # straight double
+            "'presenetliv zapisano' zunaj.\n",  # straight single
+        ):
+            with self.subTest(family=text[0]):
+                self._assert_protected(text, 0, 22)
+                self._assert_granted_region(text, ((23, 28),))
+
+    def test_escaped_and_entity_quote_pairs(self) -> None:
+        # Order 033-a, requirement 3 and the established accepted-base
+        # standalone escaped-quotation control: an escaped or entity
+        # pair protects its target, and an in-word entity apostrophe
+        # stays ordinary punctuation (inert, never granted).
+        escaped = '\\"citat besedilo\\" je zapisano.\n'
+        self._assert_protected(escaped, 0, 18)
+        self._assert_granted_region(escaped, ((19, 31),))
+        entity = "&ldquo;citat besedilo&rdquo; je zapisano.\n"
+        self._assert_protected(entity, 0, 28)
+        self._assert_granted_region(entity, ((29, 41),))
+        in_word = "don&apos;t zapisano.\n"
+        self._assert_granted_region(in_word, ((0, 3), (10, 18)))
+        self._assert_protected(in_word, 3, 9)  # the &apos; fragment itself
+
+    def test_cross_family_markers_do_not_release_outer(self) -> None:
+        # Order 033-a, requirement 3: an escaped or entity inner marker
+        # can never release a different (literal) outer quotation, and a
+        # literal marker can never release a normalized level; the
+        # unproved extent protects fail-closed.
+        escaped_inner = '"presenetliv \\"zapisano\\" je" tu.\n'
+        self._assert_protected(escaped_inner, 0, 29)
+        self._assert_granted_region(escaped_inner, ((30, 33),))
+        entity_inner = '&ldquo;presenetliv "zapisano"&rdquo; je.\n'
+        self._assert_protected(entity_inner, 0, 36)
+        self._assert_granted_region(entity_inner, ((37, 40),))
+
+    def test_nested_quotes_across_delimiters(self) -> None:
+        # Nesting stays distinct across delimiters: the inner single
+        # form releases only its own level, never the outer double.
+        text = '"a \'b\' c" je.\n'
+        self._assert_protected(text, 0, 9)
+        self._assert_granted_region(text, ((10, 13),))
+
+    def test_cross_block_quotation_extent(self) -> None:
+        # A quotation whose proved closer sits in a later block denies
+        # the source-ordered extent between the proved markers.
+        text = 'To je "presenetliv\n\nzapisano" je.\n'
+        granted, _ = self._protect(text)
+        self.assertEqual(
+            set(granted),
+            {(0, 2), (2, 3), (3, 5), (30, 32), (32, 33)},
+        )
+        self._assert_protected(text, 7, 29)
+
+    def test_quoted_footnote_definition_denied_in_full(self) -> None:
+        # Order 033-a, requirements 4-5: a footnote definition quoted in
+        # a BlockQuote empties the BlockQuote in the pinned reader while
+        # the payload is relocated under the later reference; the proven
+        # wrapper extent keeps the entire quoted original region denied
+        # against the relocated Note candidate grants.  Owned synthetic
+        # structural input (root receipt).
+        text = "> [^n]: To je presenetliv zapisano.\n\nTo[^n]\n"
+        granted, _ = self._protect(text)
+        self.assertEqual(granted, ((37, 39),))  # only the outside "To"
+        self._assert_protected(text, 0, 36)
+
+    def test_quoted_footnote_definition_lazy_denied_in_full(self) -> None:
+        # The unmarked lazy continuation line belongs to the same quoted
+        # region and stays denied as well.  Owned synthetic structural
+        # input (root receipt).
+        text = "> [^n]: To je\npresenetliv zapisano.\n\nTo[^n]\n"
+        granted, _ = self._protect(text)
+        self.assertEqual(granted, ((37, 39),))  # only the outside "To"
+        self._assert_protected(text, 0, 36)
+
+    def test_footnote_relocation_source_order_control(self) -> None:
+        # Order 033-a, requirement 4 (recorded source-order control): the
+        # relocated definition replayed at its proven physical position
+        # neither denies earlier ordinary prose nor promotes the quote
+        # region; the definition prose outside any quotation stays
+        # usable with its exact original spans.
+        text = "To[^n] je zapisano.\n\n[^n]: citatno besedilo\n"
+        granted, _ = self._protect(text)
+        self.assertEqual(
+            set(granted),
+            {
+                (0, 2), (7, 9), (9, 10), (10, 18), (18, 19),
+                (27, 34), (34, 35), (35, 43),
+            },
+        )
+        self._assert_protected(text, 2, 6)  # the reference
+        self._assert_protected(text, 21, 27)  # the definition marker
+
+    def test_repeated_footnote_reference_coalesced(self) -> None:
+        # Order 033-a, requirement 4: a definition referenced twice
+        # duplicates one physical payload in the AST; coalescing replays
+        # it exactly once, so ordinary prose around every reference stays
+        # usable and the definition prose is granted at its position.
+        text = "To[^n] je.\nIn spet[^n] tukaj.\n\n[^n]: citatno besedilo\n"
+        granted, _ = self._protect(text)
+        self.assertEqual(
+            set(granted),
+            {
+                (0, 2), (7, 9), (9, 10),
+                (11, 13), (13, 14), (14, 18), (23, 28), (28, 29),
+                (37, 44), (44, 45), (45, 53),
+            },
+        )
+        self._assert_protected(text, 2, 6)
+        self._assert_protected(text, 18, 22)
+        self._assert_protected(text, 31, 37)
+
     # -- trap negatives ----------------------------------------------------
 
     def test_nfd_line_abstain(self) -> None:
@@ -680,6 +831,50 @@ class PandocMappingTests(unittest.TestCase):
         inner = "<b>ponosno</b> besedilo\n"
         self._assert_protected(inner, 3, 10)
         self._assert_granted_region(inner, ((15, 23),))
+
+    def test_html_context_repair(self) -> None:
+        # Order 033-a, requirement 6: compound (multi-line) opening tag
+        # positions, mismatched and split closers, tags under emphasis,
+        # unclosed tags into later blocks, and attribute quotes.
+        multiline = 'prvi <div\n    attr="x">\nstavek</div> zunaj\n'
+        open_start = multiline.index("<div")
+        close_end = multiline.index("</div>") + 5
+        self._assert_protected(multiline, open_start, close_end)
+        self._assert_granted_region(
+            multiline,
+            ((0, 4), (multiline.index("zunaj"), multiline.index("zunaj") + 5)),
+        )
+        crlf = 'prvi <div\r\n    attr="x">\nstavek</div> zunaj\n'
+        open_start = crlf.index("<div")
+        close_end = crlf.index("</div>") + 5
+        self._assert_protected(crlf, open_start, close_end)
+        self._assert_granted_region(
+            crlf,
+            ((0, 4), (crlf.index("zunaj"), crlf.index("zunaj") + 5)),
+        )
+        # A closer with another identity cannot discharge the opener.
+        mismatched = "<b>a</i> b</b> c\n"
+        self._assert_protected(mismatched, 0, 13)
+        self._assert_granted_region(mismatched, ((15, 16),))
+        # A split closer the reader does not recognize as a tag can
+        # never release the unmatched opener by raw-string matching.
+        split = "<b>a</\nb> c\n"
+        granted, _ = self._protect(split)
+        self.assertEqual(granted, ())
+        self._assert_protected(split, 0, len(split) - 1)
+        # An opening tag under emphasis keeps its source-ordered extent.
+        emph = "**<b>a</b>** c\n"
+        self._assert_protected(emph, 0, 12)
+        self._assert_granted_region(emph, ((13, 14),))
+        # An unclosed opener denies through the following block.
+        into_next = "prvi <b>stavek\n\nzapisano.\n"
+        granted, _ = self._protect(into_next)
+        self.assertEqual(granted, ((0, 4),))
+        self._assert_protected(into_next, 5, len(into_next) - 1)
+        # Quotes in tag attributes are machine syntax, not markers.
+        attr = '<a href="x">stavek</a> zunaj\n'
+        self._assert_protected(attr, 0, 21)
+        self._assert_granted_region(attr, ((23, 28),))
 
     def test_nested_emphasis_in_denied_contexts(self) -> None:
         strong_quote = 'To je "**presenetliv zapisano**" zunaj.\n'
@@ -1088,6 +1283,66 @@ class EngineBoundaryTests(unittest.TestCase):
         self.assertEqual(repaired, "To je tako zapisano.")
         self.assertGreaterEqual(reviewer.calls, 1)
 
+    def test_lazy_blockquote_zero_calls_byte_identical(self) -> None:
+        # Order 033-a, requirement 5: a planted token inside a complete
+        # BlockQuote (lazy continuation) is fully protected - zero
+        # candidates, zero review calls, the exact completed original.
+        reviewer = _ReviewerThatFailsIfCalled()
+        engine = self.proxy_module.RepairEngine(
+            self.db, reviewer, pandoc=_real_spec()
+        )
+        engine.begin_request()
+        text = "> Prvi stavek.\nDanes je presenetliv zapisano.\n"
+        repaired = engine.repair(text)
+        self.assertEqual(repaired, text)  # byte-exact original
+        self.assertEqual(reviewer.calls, 0)
+        details = engine.take_details()
+        self.assertEqual(len(details), 1)
+        self.assertEqual(details[0]["candidates"], [])
+
+    def test_quoted_footnote_definition_zero_calls_byte_identical(self) -> None:
+        # Order 033-a, requirements 4-5 and 8: a target located only
+        # inside the quoted footnote definition (relocated Note payload)
+        # must cause zero review and a byte-identical original.
+        reviewer = _ReviewerThatFailsIfCalled()
+        engine = self.proxy_module.RepairEngine(
+            self.db, reviewer, pandoc=_real_spec()
+        )
+        engine.begin_request()
+        text = "> [^n]: To je presenetliv zapisano.\n\nTo[^n]\n"
+        repaired = engine.repair(text)
+        self.assertEqual(repaired, text)  # byte-exact original
+        self.assertEqual(reviewer.calls, 0)
+        details = engine.take_details()
+        self.assertEqual(details[0]["candidates"], [])
+
+    def test_same_token_protected_and_outside_only(self) -> None:
+        # Order 033-a, requirement 8: when the same token appears
+        # protected (inside a proved BlockQuote) and ordinary, only the
+        # exact outside occurrence may change.
+        reviewer = _FakeReviewer("tako")
+        engine = self.proxy_module.RepairEngine(
+            self.db, reviewer, pandoc=_real_spec()
+        )
+        engine.begin_request()
+        text = (
+            "> To je presenetliv zapisano.\n"
+            "> To je presenetliv zapisano.\n"
+            "\n"
+            "To je presenetliv zapisano.\n"
+        )
+        repaired = engine.repair(text)
+        self.assertEqual(
+            repaired,
+            (
+                "> To je presenetliv zapisano.\n"
+                "> To je presenetliv zapisano.\n"
+                "\n"
+                "To je tako zapisano.\n"
+            ),
+        )
+        self.assertEqual(reviewer.calls, 1)  # one bounded batch
+
 
 class AcceptancePatchTests(unittest.TestCase):
     def setUp(self) -> None:
@@ -1345,6 +1600,126 @@ class ProxyHttpTests(unittest.TestCase):
         self.assertIn(b"To je tako zapisano.", result)
         self.assertNotIn(b"presenetliv", result)
         self.assertGreaterEqual(reviewer.calls, 1)
+
+    def _start_json_upstream(self, text: str) -> tuple[str, bytes]:
+        # Owned finite application/json completed upstream (order 033-a,
+        # R10): fakes live only at the external main seam; the proxy,
+        # engine, Pandoc, detector, acceptance and patcher stay real.
+        envelope = {
+            "object": "response",
+            "id": "r",
+            "status": "completed",
+            "output": [
+                {
+                    "type": "message",
+                    "id": "m",
+                    "role": "assistant",
+                    "output_index": 0,
+                    "status": "completed",
+                    "content": [
+                        {
+                            "type": "output_text",
+                            "text": text,
+                            "content_index": 0,
+                        }
+                    ],
+                }
+            ],
+        }
+        source = json.dumps(
+            envelope, ensure_ascii=False, separators=(",", ":")
+        ).encode()
+
+        class JsonUpstream(BaseHTTPRequestHandler):
+            protocol_version = "HTTP/1.1"
+
+            def do_POST(self) -> None:  # noqa: N802
+                self.rfile.read(int(self.headers["Content-Length"]))
+                self.send_response(200)
+                self.send_header("Content-Type", "application/json")
+                self.send_header("Content-Length", str(len(source)))
+                self.end_headers()
+                self.wfile.write(source)
+
+            def log_message(self, *_args: object) -> None:
+                return
+
+        server = HTTPServer(("127.0.0.1", 0), JsonUpstream)
+        self.servers.append(server)
+        self.forever_servers.append(server)
+        thread = threading.Thread(target=server.serve_forever, daemon=True)
+        thread.start()
+        self.threads.append(thread)
+        return f"http://127.0.0.1:{server.server_port}", source
+
+    def _json_round_trip(
+        self, upstream_url: str, engine: object
+    ) -> bytes:
+        import proxy
+
+        proxy_server = proxy.ConceptProxy(
+            ("127.0.0.1", 0), upstream_url, cast(proxy.RepairEngine, engine)
+        )
+        self.servers.append(proxy_server)
+        thread = threading.Thread(target=proxy_server.handle_request, daemon=True)
+        thread.start()
+        self.threads.append(thread)
+        client = http.client.HTTPConnection(
+            "127.0.0.1", proxy_server.server_port, timeout=10
+        )
+        body = b'{"model":"m","input":"hi","store":false,"stream":false}'
+        client.request(
+            "POST",
+            "/v1/responses",
+            body=body,
+            headers={"Content-Length": str(len(body))},
+        )
+        response = client.getresponse()
+        result = response.read()
+        client.close()
+        self.assertEqual(response.status, 200)
+        return result
+
+    def test_http_json_protected_only_exact_body_zero_calls(self) -> None:
+        # Order 033-a, R10: with no eligible target left (the only
+        # candidate sits inside a proved BlockQuote), the actual
+        # JSON/HTTP path returns the exact original upstream body bytes
+        # with zero review calls.
+        import proxy
+
+        text = "> To je presenetliv zapisano.\n"
+        upstream_url, source = self._start_json_upstream(text)
+        reviewer = _ReviewerThatFailsIfCalled()
+        engine = proxy.RepairEngine(self.db, reviewer, pandoc=_real_spec())
+        result = self._json_round_trip(upstream_url, engine)
+        self.assertEqual(result, source)  # exact no-edit envelope bytes
+        self.assertEqual(reviewer.calls, 0)
+
+    def test_http_json_repeated_protected_outside_only(self) -> None:
+        # Order 033-a, R10: the same token protected (BlockQuote) and
+        # ordinary: one bounded review batch and the exact outside-only
+        # patch in the JSON envelope.
+        import proxy
+
+        text = (
+            "> To je presenetliv zapisano.\n"
+            "\n"
+            "To je presenetliv zapisano.\n"
+        )
+        upstream_url, _ = self._start_json_upstream(text)
+        reviewer = _FakeReviewer("tako")
+        engine = proxy.RepairEngine(self.db, reviewer, pandoc=_real_spec())
+        result = self._json_round_trip(upstream_url, engine)
+        envelope = json.loads(result.decode("utf-8"))
+        output = cast("list[object]", envelope["output"])
+        message = cast("dict[str, object]", output[0])
+        content = cast("list[object]", message["content"])
+        returned = cast("dict[str, object]", content[0])["text"]
+        self.assertEqual(
+            returned,
+            "> To je presenetliv zapisano.\n\nTo je tako zapisano.\n",
+        )
+        self.assertEqual(reviewer.calls, 1)  # one bounded batch
 
     def test_startup_check_before_bind(self) -> None:
         import proxy
