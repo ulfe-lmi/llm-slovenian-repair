@@ -167,8 +167,9 @@ document-level finalization after the whole AST walk (before any outcome is
 built) coalesces equivalent physical footnote payloads, sorts the events by
 proven original position, replays the quotation and HTML context stacks,
 and filters the candidates by the resulting denied intervals. Quotation
-families are distinct (Slovenian low/high `„…“`, both guillemet directions
-`«…»` and `»…«`, curly and straight double and single forms), and only a
+families are distinct (Slovenian low/high double `„…“` and single `‚…‘`,
+both guillemet directions `«…»` and `»…«`, curly and straight double and
+single forms), and only a
 proved compatible closer of the SAME provenance (literal, backslash-escaped
 or entity) releases its own level: a mismatched, escaped or
 entity-normalized inner marker can never release a different outer context,

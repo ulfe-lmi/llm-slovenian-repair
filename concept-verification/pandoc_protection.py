@@ -146,6 +146,7 @@ def _find_positioned_str(node: object, position: str, content: str) -> bool:
 # unproved stays protected (order 013-a, requirement 16, repaired).
 _QUOTE_FAMILIES: dict[str, tuple[str, str]] = {
     "\u201e": ("lowhigh-double", "\u201c"),
+    "\u201a": ("lowhigh-single", "\u2018"),
     "\u201c": ("curly-double", "\u201d"),
     "\u00ab": ("guillemet-double-inward", "\u00bb"),
     "\u00bb": ("guillemet-double-outward", "\u00ab"),

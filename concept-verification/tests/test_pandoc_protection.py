@@ -16,6 +16,7 @@ dependency fails these tests (never skips).
 
 from __future__ import annotations
 
+import hashlib
 import http.client
 import json
 import os
@@ -55,6 +56,179 @@ from qwen_client import Proposal  # noqa: E402
 from repair import accept, apply_edits  # noqa: E402
 
 from corpus import Corpus  # noqa: E402
+
+# Order 033-a, R9/A1: the exact preserved old-baseline repro vectors
+# (14 red + 4 controls), extracted as pure owned synthetic data from the
+# preserved probe; every input SHA-256 equals the immutable old-byte
+# baseline (no customer/evaluation data).  Each row carries independent
+# original-source oracles: the required protected range must stay fully
+# protected, every non-ordinary target occurrence must not be granted,
+# and the ordinary (outside) occurrence must be granted (outside-only).
+_OLD_BASELINE_VECTORS: tuple[dict[str, object], ...] = (
+    {
+        "case": 'R1-slovenian-low-high-double',
+        "kind": 'red',
+        "input": '„Danes je leppo vreme.“',
+        "input_sha256": '2024781effa396266786cc9c05d0e85d880eea3b6ae4d9eac31d4c222a67e2e1',
+        "required_protected_range": (1, 22),
+        "target_original_ranges": ((10, 15),),
+        "ordinary_target_occurrence_indices": (),
+    },
+    {
+        "case": 'R2-slovenian-guillemets',
+        "kind": 'red',
+        "input": '»Danes je leppo vreme.«',
+        "input_sha256": '89eb01b07cef7091dcbda82d3a732b55967d7c2486eeea19bfad38c2110d05b0',
+        "required_protected_range": (1, 22),
+        "target_original_ranges": ((10, 15),),
+        "ordinary_target_occurrence_indices": (),
+    },
+    {
+        "case": 'R3-inward-guillemets',
+        "kind": 'red',
+        "input": '«Danes je leppo vreme.»',
+        "input_sha256": '6afaa2624bd2734e560581cfe09c6f2b2a0bcd7d67fe2dcf72f4599f2140bf90',
+        "required_protected_range": (1, 22),
+        "target_original_ranges": ((10, 15),),
+        "ordinary_target_occurrence_indices": (),
+    },
+    {
+        "case": 'R4-nested-straight-quote',
+        "kind": 'red',
+        "input": '"Predgovor \'leppo vreme.\' konec."',
+        "input_sha256": 'd6ce6e0a9ca1b3ec9ab2050d70af4ed4efe0862d019b459f368dfc755989d708',
+        "required_protected_range": (11, 24),
+        "target_original_ranges": ((12, 17),),
+        "ordinary_target_occurrence_indices": (),
+    },
+    {
+        "case": 'R5-quote-continuing-next-block',
+        "kind": 'red',
+        "input": '“Prvi odstavek.\n\nDanes je leppo vreme.”',
+        "input_sha256": '62924c33adba9b099fbbd30f0fa8da2d7fc3bbd4a6c6af4a9ef5aff093ec0a9e',
+        "required_protected_range": (1, 38),
+        "target_original_ranges": ((26, 31),),
+        "ordinary_target_occurrence_indices": (),
+    },
+    {
+        "case": 'R6-lazy-blockquote-continuation',
+        "kind": 'red',
+        "input": '> Prvi stavek.\nDanes je leppo vreme.',
+        "input_sha256": 'ab78bd9bd8251c968cbafe20eb1bc8a36031bd4e150cc2589a1aa216cd7cdbdf',
+        "required_protected_range": (0, 36),
+        "target_original_ranges": ((24, 29),),
+        "ordinary_target_occurrence_indices": (),
+    },
+    {
+        "case": 'R7-mismatched-html-close',
+        "kind": 'red',
+        "input": 'Besedilo <b> </i> Danes je leppo vreme.',
+        "input_sha256": '4e6e786b14652d5689170461e1f684c586d0d68ba24b92930b7d91ff152a68a6',
+        "required_protected_range": (9, 39),
+        "target_original_ranges": ((27, 32),),
+        "ordinary_target_occurrence_indices": (),
+    },
+    {
+        "case": 'R8-mismatched-then-eventual-close',
+        "kind": 'red',
+        "input": 'Besedilo <b> </i> Danes je leppo vreme.</b>',
+        "input_sha256": 'a1faaceed6f1c03a408156d481c219e62704ec8af917fe4c47d6f5d78de84ce0',
+        "required_protected_range": (9, 43),
+        "target_original_ranges": ((27, 32),),
+        "ordinary_target_occurrence_indices": (),
+    },
+    {
+        "case": 'R9-tag-in-nested-emphasis',
+        "kind": 'red',
+        "input": 'Besedilo **<b>predgovor** Danes je leppo vreme.',
+        "input_sha256": '512cc7c508bba52d9c169c6ce4a339fc390c70dcea9ee126529a3e73c6ae0ceb',
+        "required_protected_range": (11, 47),
+        "target_original_ranges": ((35, 40),),
+        "ordinary_target_occurrence_indices": (),
+    },
+    {
+        "case": 'R10-unclosed-tag-next-block',
+        "kind": 'red',
+        "input": 'Besedilo <b>predgovor\n\nDanes je leppo vreme.',
+        "input_sha256": 'fc1482474428d7349c40110e9aaad12bc874ef67c57a1d303236929c06909e20',
+        "required_protected_range": (9, 44),
+        "target_original_ranges": ((32, 37),),
+        "ordinary_target_occurrence_indices": (),
+    },
+    {
+        "case": 'R11-escaped-in-curly-quote',
+        "kind": 'red',
+        "input": '“Uvod \\"To je presenetliv zapisano.\\" konec.”',
+        "input_sha256": '05a33285600a4dbe817a2b56503ea5ad44ac03edcb968e36b06bf4d961e7a330',
+        "required_protected_range": (1, 44),
+        "target_original_ranges": ((14, 25),),
+        "ordinary_target_occurrence_indices": (),
+    },
+    {
+        "case": 'R12-escaped-in-straight-quote',
+        "kind": 'red',
+        "input": '"Uvod \\"To je presenetliv zapisano.\\" konec."',
+        "input_sha256": 'b1438f06cf7a17ac9710011b0dfe1799ab23d6795cba576c853f55bd232c12b1',
+        "required_protected_range": (1, 43),
+        "target_original_ranges": ((14, 25),),
+        "ordinary_target_occurrence_indices": (),
+    },
+    {
+        "case": 'R13-entity-in-straight-quote',
+        "kind": 'red',
+        "input": '"Uvod &quot;To je presenetliv zapisano.&quot; konec."',
+        "input_sha256": 'ba4999b4e42fe491264e076cf2a2b99d6ffd8cc5184715a9ac1a24066135c91f',
+        "required_protected_range": (1, 51),
+        "target_original_ranges": ((18, 29),),
+        "ordinary_target_occurrence_indices": (),
+    },
+    {
+        "case": 'R14-duplicate-inside-and-outside',
+        "kind": 'red',
+        "input": '»Danes je leppo vreme.«\n\nDanes je leppo danes.',
+        "input_sha256": 'acd06388966b41ff0ee7682ceee54c471cd17771bae39e2387dc4f5a3f5301a9',
+        "required_protected_range": (1, 21),
+        "target_original_ranges": ((10, 15), (34, 39),),
+        "ordinary_target_occurrence_indices": (1,),
+    },
+    {
+        "case": 'K1-unquoted-reachable',
+        "kind": 'reachable',
+        "input": 'To je leppo zapisano.',
+        "input_sha256": '35c7351158cc7474c0114a4e01b8db88354383ec942907c039cabdf65c8d56bb',
+        "required_protected_range": None,
+        "target_original_ranges": ((6, 11),),
+        "ordinary_target_occurrence_indices": (0,),
+    },
+    {
+        "case": 'K2-zero-call-control',
+        "kind": 'zero',
+        "input": 'To je lepo vreme.',
+        "input_sha256": '28c7d7fa8f8c0fa5394a6be9064594eb08d34dd3556de3770640433092876126',
+        "required_protected_range": None,
+        "target_original_ranges": (),
+        "ordinary_target_occurrence_indices": (),
+    },
+    {
+        "case": 'K3-ascii-double-quote-control',
+        "kind": 'protected',
+        "input": '"To je leppo zapisano."',
+        "input_sha256": '366e368e8a4f6836ff385e1b6a05dc660d8f46eb06e5f4f9436dacf39baf81bc',
+        "required_protected_range": None,
+        "target_original_ranges": ((7, 12),),
+        "ordinary_target_occurrence_indices": (),
+    },
+    {
+        "case": 'K4-entity-quote-control',
+        "kind": 'protected',
+        "input": '&quot;To je presenetliv zapisano.&quot;',
+        "input_sha256": 'a3b6857542ca87c93c45a2eee3a0f45c8e8d8890459920e78dba93b1921abde3',
+        "required_protected_range": None,
+        "target_original_ranges": ((12, 23),),
+        "ordinary_target_occurrence_indices": (),
+    },
+)
+
 
 
 def _real_spec() -> PandocSpec:
@@ -623,7 +797,8 @@ class PandocMappingTests(unittest.TestCase):
         # double and single forms each protect their interior; only a
         # proved compatible closer of the same family releases it.
         for text in (
-            "\u201epresenetliv zapisano\u201c zunaj.\n",  # low/high
+            "\u201epresenetliv zapisano\u201c zunaj.\n",  # low/high double
+            "\u201apresenetliv zapisano\u2018 zunaj.\n",  # low/high single
             "\u00abpresenetliv zapisano\u00bb zunaj.\n",  # guillemet inward
             "\u00bbpresenetliv zapisano\u00ab zunaj.\n",  # guillemet outward
             "\u201cpresenetliv zapisano\u201d zunaj.\n",  # curly double
@@ -634,6 +809,93 @@ class PandocMappingTests(unittest.TestCase):
             with self.subTest(family=text[0]):
                 self._assert_protected(text, 0, 22)
                 self._assert_granted_region(text, ((23, 28),))
+
+    def test_lowhigh_single_quote_outside_only(self) -> None:
+        # Order 033-a, requirement 3 (R3): the Slovenian low/high single
+        # U+201A...U+2018 is a relevant single quotation; its interior is
+        # protected and only the exact outside occurrence of the same
+        # token is grantable.  Owned synthetic input (root receipt) with
+        # independent original-source oracles.
+        text = "\u201aTo je presenetliv zapisano.\u2018 To je presenetliv zapisano.\n"
+        self._assert_protected(text, 0, 29)  # the proven low/high single extent
+        self._assert_granted_region(text, ((36, 47),))  # the outside token only
+
+    def test_old_baseline_exact_vectors_replay(self) -> None:
+        # Order 033-a, R9/A1: replay the exact preserved old-baseline repro
+        # vectors (14 red + 4 controls) against the corrected mapper with
+        # independent original-source oracles.  The input bytes are the
+        # immutable old baseline (verified by SHA-256); the baseline's red
+        # assertions are NOT rerun (that log stays immutable) - only the
+        # protection oracles are asserted: the required protected range
+        # stays fully protected, every non-ordinary target occurrence is
+        # not granted, and the ordinary (outside) occurrence is granted.
+        for vector in _OLD_BASELINE_VECTORS:
+            with self.subTest(case=cast("str", vector["case"])):
+                text = cast("str", vector["input"])
+                self.assertEqual(
+                    hashlib.sha256(text.encode("utf-8")).hexdigest(),
+                    cast("str", vector["input_sha256"]),
+                )
+                granted, protected = self._protect(text)
+                raw_range = vector["required_protected_range"]
+                if raw_range is not None:
+                    start, end = cast("tuple[int, int]", raw_range)
+                    cursor = start
+                    for interval in protected:
+                        if interval.end <= cursor:
+                            continue
+                        if interval.start > cursor:
+                            self.fail(
+                                f"{vector['case']}: protected gap at {cursor} "
+                                f"in {[(iv.start, iv.end) for iv in protected]}"
+                            )
+                        cursor = max(cursor, interval.end)
+                        if cursor >= end:
+                            break
+                    self.assertGreaterEqual(
+                        cursor, end,
+                        f"{vector['case']}: required protected range "
+                        f"({start}, {end}) not fully covered: "
+                        f"{[(iv.start, iv.end) for iv in protected]}",
+                    )
+                targets = cast(
+                    "tuple[tuple[int, int], ...]",
+                    vector["target_original_ranges"],
+                )
+                ordinary = set(
+                    cast(
+                        "tuple[int, ...]",
+                        vector["ordinary_target_occurrence_indices"],
+                    )
+                )
+                for index, (start, end) in enumerate(targets):
+                    if index in ordinary:
+                        # outside-only oracle: this occurrence is grantable.
+                        cursor = start
+                        for gs, ge in sorted(granted):
+                            if ge <= cursor:
+                                continue
+                            if gs > cursor:
+                                break
+                            cursor = max(cursor, ge)
+                            if cursor >= end:
+                                break
+                        self.assertGreaterEqual(
+                            cursor, end,
+                            f"{vector['case']}: ordinary occurrence "
+                            f"({start}, {end}) not granted: {granted}",
+                        )
+                    else:
+                        leaked = [
+                            (gs, ge)
+                            for gs, ge in granted
+                            if gs < end and ge > start
+                        ]
+                        self.assertEqual(
+                            leaked, [],
+                            f"{vector['case']}: protected occurrence "
+                            f"({start}, {end}) leaked grants: {leaked}",
+                        )
 
     def test_escaped_and_entity_quote_pairs(self) -> None:
         # Order 033-a, requirement 3 and the established accepted-base
@@ -661,6 +923,11 @@ class PandocMappingTests(unittest.TestCase):
         entity_inner = '&ldquo;presenetliv "zapisano"&rdquo; je.\n'
         self._assert_protected(entity_inner, 0, 36)
         self._assert_granted_region(entity_inner, ((37, 40),))
+        # The required complementary direction: a literal outer marker is
+        # never released by an entity inner marker, either.
+        literal_outer_entity_inner = '"presenetliv &ldquo;zapisano&rdquo; je" tu.\n'
+        self._assert_protected(literal_outer_entity_inner, 0, 40)
+        self._assert_granted_region(literal_outer_entity_inner, ((40, 43),))
 
     def test_nested_quotes_across_delimiters(self) -> None:
         # Nesting stays distinct across delimiters: the inner single
@@ -1343,6 +1610,51 @@ class EngineBoundaryTests(unittest.TestCase):
         )
         self.assertEqual(reviewer.calls, 1)  # one bounded batch
 
+    def test_lowhigh_single_quote_engine_outside_only(self) -> None:
+        # Order 033-a, requirement 3 (R3): with the proven low/high single
+        # family in place, the engine repairs only the exact outside
+        # occurrence in one bounded batch; the protected interior is left
+        # byte-exact.  Owned synthetic input (root receipt).
+        reviewer = _FakeReviewer("tako")
+        engine = self.proxy_module.RepairEngine(
+            self.db, reviewer, pandoc=_real_spec()
+        )
+        engine.begin_request()
+        text = "\u201aTo je presenetliv zapisano.\u2018 To je presenetliv zapisano.\n"
+        repaired = engine.repair(text)
+        self.assertEqual(
+            repaired,
+            "\u201aTo je presenetliv zapisano.\u2018 To je tako zapisano.\n",
+        )
+        self.assertEqual(reviewer.calls, 1)  # one bounded batch
+
+    def test_recorded_quoted_repeated_note_source_order(self) -> None:
+        # Order 033-a, requirement 4 (R4, recorded source-order control):
+        # the earlier ordinary target is repaired in one bounded batch while
+        # the later quoted footnote definition stays byte-exact; a future
+        # AST-order/double-toggle regression that grants the relocated
+        # definition would fail here.  Owned synthetic input (root receipt).
+        reviewer = _FakeReviewer("tako")
+        engine = self.proxy_module.RepairEngine(
+            self.db, reviewer, pandoc=_real_spec()
+        )
+        engine.begin_request()
+        text = (
+            'To[^1] je[^1].\n\n'
+            'To je presenetliv zapisano.\n\n'
+            '[^1]: "To je presenetliv zapisano.\n'
+        )
+        repaired = engine.repair(text)
+        self.assertEqual(
+            repaired,
+            (
+                'To[^1] je[^1].\n\n'
+                'To je tako zapisano.\n\n'
+                '[^1]: "To je presenetliv zapisano.\n'
+            ),
+        )
+        self.assertEqual(reviewer.calls, 1)  # one bounded batch
+
 
 class AcceptancePatchTests(unittest.TestCase):
     def setUp(self) -> None:
@@ -1626,8 +1938,13 @@ class ProxyHttpTests(unittest.TestCase):
                 }
             ],
         }
-        source = json.dumps(
-            envelope, ensure_ascii=False, separators=(",", ":")
+        # Deliberately NON-canonical upstream bytes (distinct whitespace and
+        # a trailing newline): the no-edit path must return these exact
+        # envelope bytes, so a reserialization with canonical separators
+        # would not be byte-identical and the preservation assertion is
+        # meaningful, not trivially satisfied by matching JSON settings.
+        source = (
+            json.dumps(envelope, ensure_ascii=False, indent=2) + "\n"
         ).encode()
 
         class JsonUpstream(BaseHTTPRequestHandler):
