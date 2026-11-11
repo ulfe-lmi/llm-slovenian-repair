@@ -752,6 +752,14 @@ class _Document:
         Used only to place context-event bounds when the whole leaf span
         is compound (multi-line) and therefore never grantable; a segment
         that cannot be mapped keeps the extent unproved.
+
+        A context coordinate on an original line that is not NFC-stable
+        must not be converted from the reader's NFC-normalized columns
+        into a guessed original offset: the normalized column can fall
+        past the original line (even past EOF), which would misplace or
+        drop the unproved extent.  Such geometry is rejected so the
+        caller keeps its fail-closed original line/document denial
+        (order 033-a, R2/R7).
         """
         if self.global_fail is not None:
             return None
@@ -761,10 +769,19 @@ class _Document:
         line, col, _end_line, _end_col = parsed
         if line > self.line_count:
             return None
+        if not self.stable[line - 1]:
+            # Non-NFC original line: normalized columns do not prove an
+            # original offset; keep the extent unproved (fail-closed).
+            return None
         offsets = self.columns[line - 1]
         if col not in offsets:
             return None
-        return self.line_starts[line - 1] + offsets[col]
+        offset = self.line_starts[line - 1] + offsets[col]
+        if offset > len(self.text):
+            # A normalized column must never push an original offset past
+            # the end of the document.
+            return None
+        return offset
 
     def _event_bounds(self, event: _ContextEvent) -> tuple[int, int]:
         """Conservative original bounds of one context event.

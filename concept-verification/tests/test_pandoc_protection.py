@@ -1014,6 +1014,27 @@ class PandocMappingTests(unittest.TestCase):
         self.assertEqual(protected[0].start, 0)
         self.assertEqual(protected[-1].end, len(text))
 
+    def test_nfc_unstable_line_unproved_quote_and_html_fail_closed(self) -> None:
+        # Order 033-a, R2/R7: a structural context opener whose original
+        # line is not NFC-stable must not be placed from the reader's
+        # NFC-normalized columns into a guessed original offset.  The
+        # unproved extent stays fail-closed, the independent original
+        # protected range (including the planted sentence) is denied, and
+        # no grant leaks into it.  Owned synthetic inputs (root receipt).
+        for text, protected in (
+            ("\u0344" * 32 + '"\n\nTo je presenetliv zapisano.\n', (32, 63)),
+            ("\u0344" * 32 + " <b>\n\nTo je presenetliv zapisano.\n", (33, 66)),
+        ):
+            with self.subTest(first=text[32:36]):
+                granted, _ = self._protect(text)
+                self._assert_protected(text, protected[0], protected[1])
+                leaked = [
+                    (gs, ge)
+                    for gs, ge in granted
+                    if gs < protected[1] and ge > protected[0]
+                ]
+                self.assertEqual(leaked, [])
+
     def test_bare_cr_protected(self) -> None:
         text = "a\rb\n"
         granted, _ = self._protect(text)
@@ -1582,6 +1603,39 @@ class EngineBoundaryTests(unittest.TestCase):
         self.assertEqual(reviewer.calls, 0)
         details = engine.take_details()
         self.assertEqual(details[0]["candidates"], [])
+
+    def test_nfc_unstable_line_zero_calls_byte_identical(self) -> None:
+        # Order 033-a, R2/R7: a structural context opener on a non-NFC-
+        # stable original line leaves its extent unproved; the document
+        # fails closed with zero candidates, zero review calls and the
+        # byte-exact original, and the independent original protected
+        # range (covering the planted sentence) is denied.  Owned synthetic
+        # inputs (root receipt).
+        reviewer = _ReviewerThatFailsIfCalled()
+        for text, protected in (
+            ("\u0344" * 32 + '"\n\nTo je presenetliv zapisano.\n', (32, 63)),
+            ("\u0344" * 32 + " <b>\n\nTo je presenetliv zapisano.\n", (33, 66)),
+        ):
+            with self.subTest(first=text[32:36]):
+                engine = self.proxy_module.RepairEngine(
+                    self.db, reviewer, pandoc=_real_spec()
+                )
+                engine.begin_request()
+                repaired = engine.repair(text)
+                self.assertEqual(repaired, text)  # byte-exact original
+                details = engine.take_details()
+                self.assertEqual(len(details), 1)
+                self.assertEqual(details[0]["candidates"], [])
+                outcome = protect_with_pandoc(_real_spec(), text)
+                prot = compose_protection(text, outcome)
+                covers = any(
+                    iv.start <= protected[0] and iv.end >= protected[1]
+                    for iv in prot
+                )
+                self.assertTrue(
+                    covers, f"protected range {protected} not denied: {prot}"
+                )
+        self.assertEqual(reviewer.calls, 0)
 
     def test_same_token_protected_and_outside_only(self) -> None:
         # Order 033-a, requirement 8: when the same token appears
