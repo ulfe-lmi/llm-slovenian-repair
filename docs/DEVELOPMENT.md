@@ -349,3 +349,28 @@ immutable. The prospective order whitespace review remains a Root
 strategic step before immutable publication - not a check the
 unchanged publisher performs - and grants no product gate, programme,
 or authority expansion.
+
+034-b closed-six whitespace contract (2026-11-11): the 031-b closed-five
+pin above remains the historical record; order 034-b explicitly evolves
+that closed-five contract to exactly six pinned incidents for the one
+precisely pinned existing 034-a incident, without any general exception
+mechanism. The sixth is the root-authored trailing space at line 67 of
+the issued, immutable 034-a order
+(`oap/orders/034-a-functional-proxy-readiness-audit.md`; introduction
+`3c3c7ffde0359135fbb1a24c998984846d229756`, current blob
+`17d14ba5cad04fa104008695536e468c61ca5ca4`, bytes
+`586ca6cbea712bcfe663bcf2c73d68af9601b205c6f4f2a134c256fb58241b65`/18174,
+preserved exactly, including that one ASCII space before the line-67 LF).
+Git's diagnostic order places it after the 031-a order and before the
+007-d report, and the checker now accepts only those six exact
+diagnostics at the two authorized bases, failing closed on a seventh
+incident, a changed or trimmed issued 034-a order, a changed old
+incident, a deleted or re-added incident even with identical bytes,
+path/line/message drift, a missing prescribed 027-a recovery lineage, an
+unknown base, or an invalid revision. There remains no configuration,
+flag, or environment path to admit future incidents; all newly
+introduced 034-b bytes are whitespace-clean while the previously issued
+034-a bytes remain immutable. The prospective final-order whitespace
+review remains a Root prepublication strategic step - not a check the
+unchanged publisher performs - and grants no product gate, programme, or
+authority expansion.

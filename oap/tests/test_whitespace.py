@@ -18,6 +18,7 @@ BASES = (
 INCIDENT = "oap/orders/007-e-recover-forward-from-an-immutable-invalid-report.md"
 ORDER_A = "oap/orders/027-a-repair-validation.md"
 ORDER_031A = "oap/orders/031-a-functional-proxy-audit.md"
+ORDER_034A = "oap/orders/034-a-functional-proxy-readiness-audit.md"
 ORDER_A_INTRODUCTION = "d572b19c86a555ae3e8a4a8bbb99da5bd39a68ea"
 RECOVERY_MERGE = "73f9f3d10cc602781f8a49e22a7dd342165ea8d9"
 RECOVERY_PARENT_FIRST = "4e601d31ccce7fa2f7652e67af524bb95c761078"
@@ -174,7 +175,7 @@ class WhitespaceVerifier(unittest.TestCase):
             with self.subTest(base=base):
                 result = self.run_cli(base)
                 self.assertEqual(result.returncode, 0, result.stderr)
-                self.assertIn('"diagnostics": 5', result.stdout)
+                self.assertIn('"diagnostics": 6', result.stdout)
 
     def test_mutated_incident_blob_fails(self) -> None:
         self.commit_tree(
@@ -281,6 +282,36 @@ class WhitespaceVerifier(unittest.TestCase):
         self.assert_rejected("INCIDENT_BLOB_MISMATCH")
         self.commit_tree(
             {ORDER_031A: original}, "Synthetic 031-a order re-addition"
+        )
+        self.assert_rejected("INCIDENT_INTRODUCTION_MISMATCH")
+
+    def test_mutated_issued_order_034a_fails_blob_binding(self) -> None:
+        self.commit_tree(
+            {ORDER_034A: self.read_tree_file(ORDER_034A) + b"mutated\n"},
+            "Synthetic 034-a order mutation",
+        )
+        self.assert_rejected("INCIDENT_BLOB_MISMATCH")
+
+    def test_trimmed_issued_order_034a_fails_blob_binding(self) -> None:
+        data = self.read_tree_file(ORDER_034A)
+        lines = data.split(b"\n")
+        self.assertTrue(
+            lines[66].endswith(b" "),
+            "line 67 must carry the pinned trailing space",
+        )
+        trimmed = b"\n".join(lines[:66] + [lines[66][:-1]] + lines[67:])
+        self.assertNotEqual(trimmed, data)
+        self.commit_tree({ORDER_034A: trimmed}, "Synthetic 034-a order trim")
+        self.assert_rejected("INCIDENT_BLOB_MISMATCH")
+
+    def test_deleted_and_readded_issued_order_034a_fails_history_binding(
+        self,
+    ) -> None:
+        original = self.read_tree_file(ORDER_034A)
+        self.commit_tree({ORDER_034A: None}, "Synthetic 034-a order deletion")
+        self.assert_rejected("INCIDENT_BLOB_MISMATCH")
+        self.commit_tree(
+            {ORDER_034A: original}, "Synthetic 034-a order re-addition"
         )
         self.assert_rejected("INCIDENT_INTRODUCTION_MISMATCH")
 
