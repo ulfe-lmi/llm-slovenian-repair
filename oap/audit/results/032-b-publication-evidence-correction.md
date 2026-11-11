@@ -54,7 +54,7 @@ attributed to their real command, time, SHA and actor, are:
 The prospective wording is not retroactively repaired; the two records above
 are the actual later results, separately attributed.
 
-## Supersession 2 - known-key check message count and report-commit scan timing
+## Supersession 2 - known-key check scope, message count and scan timing
 
 Superseded text (checks[9], result PASSED, command): "private known-key
 scans: the six staged non-report blobs before the scoped commit and both
@@ -72,10 +72,15 @@ composition.
 Scans actually completed before publication (actual scope; value never
 printed; counts only): the five committed non-report blobs at 8549db2,
 after implementation commit and before report publication (order,
-oap/active, requirements-first, audit, evidence), the two commit messages
-(implementation commit 8549db2 and base commit 2f0d9c47) and the exact
-private report draft (SHA-256 0e893432...) - all 0 hits. The modified
-research/RESEARCH-STATE.md blob was not among that scan's targets.
+oap/active, requirements-first, audit, evidence) and the two commit
+messages (implementation commit 8549db2 and base commit 2f0d9c47) - all
+0 hits. The modified research/RESEARCH-STATE.md blob was not among that
+scan's targets. The pre-publication key scan of the private report draft
+is NOT ESTABLISHED: no key or scanner invocation on the draft appears in
+the actual tool sequence from draft generation (02:10:39Z) through
+commit/push (02:16:45Z), and neither the builder nor the draft checker
+reads the key; the earlier report wording crediting the draft as scanned
+before publication is unproven and is superseded here.
 
 Actual later scans, cited separately (post-publication, count-only):
 
