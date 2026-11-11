@@ -1,0 +1,905 @@
+{
+  "artifact": "032-functional-proxy-requirements-first.json",
+  "order": {
+    "id": "032-a",
+    "path": "oap/orders/032-a-functional-proxy-closure-audit.md",
+    "phase": "FRESH_FUNCTIONAL_PROXY_CLOSURE_AUDIT"
+  },
+  "artifact_phase": "INITIAL_SOURCE_FIRST_DERIVATION",
+  "derived_at_utc": "2026-11-10T23:29:14Z",
+  "sequence_attestation": "This initial artifact records requirements derived ONLY from the owner scope, PLAN.md and ARCHITECTURE.md at the audited main. It was written before opening the deferred evidence index (032a-deferred-evidence-index-20261110.txt), before reading the frozen ICA schema/registry (oap/audit/requirements.json), before reading prior 031 audit artifacts, and before inspecting implementation. No strategic closure claim was used as a premise.",
+  "audited_product": {
+    "main_sha": "2f0d9c4719486b86821c989ec9add9f0254a1e72",
+    "tree_sha": "d404c7ad11988ad9e71a9f1c8e1637f2ec9d6219",
+    "governance_ref": "3549de2a436f485a693730d0ee7d5f8c00aec0c0",
+    "verification": "local HEAD == main == origin/main == 2f0d9c47...; git main^{tree} == d404c7ad... (matches order); all 16 governance file sha256 values match the order metadata at main; check_state id=032-a (consumed.json phase=consumed, recovery=false); check_governance accepted-runtime structure valid."
+  },
+  "context_provenance": {
+    "role": "OAP_ROLE=coding",
+    "runtime": "owner-launched quiescent foreground process; argv 'codex --yolo --profile early-beta'; pane pid 3341327 (neutral input execution.foreground_pid/argv)",
+    "chat": "fresh chat in the same foreground process; the dispatcher adopted this pane, verified PID/cwd/argv outside the model and consumed the single OK control frame once before the handoff; no second control wait",
+    "entry_sequence_observed": [
+      "handoff message conveying OAP_ROLE=coding (single consumed control frame)",
+      "root router AGENTS.md",
+      "oap/coding-instructions/AGENTS.md (coding constitution rev 1)",
+      "ARCHITECTURE-for-agents.md (compact architecture rev 1)",
+      "OAP-COMMUNICATION-coding-agent.md (coding communication rev 1)",
+      "oap/active == '032-a'",
+      "oap/orders/032-a-functional-proxy-closure-audit.md (exact order, status FINAL)",
+      "check_state (state RECOVERY_REQUIRED = consumed order without report yet: start fresh a-round)",
+      "check_governance --mode accepted-runtime (structure valid)",
+      "neutral input 032a-neutral-audit-inputs-20261110.json (owner scope + resource paths; deferred evidence index path noted, NOT opened)",
+      "PLAN.md full (git bytes at main 2f0d9c47, sha256 d2aa1d98...)",
+      "ARCHITECTURE.md full (git bytes at main 2f0d9c47, sha256 a16e0f87...)",
+      "SECURITY.md, TESTING.md (named contracts)"
+    ],
+    "not_consulted_before_this_artifact": [
+      "implementation source/tests of the product",
+      "032a-deferred-evidence-index-20261110.txt (deferred evidence index)",
+      "oap/audit/requirements.json (frozen ICA schema/registry, sha256 fe49c8e...)",
+      "oap/audit/results/031-* prior artifacts and oap/reports/*",
+      "README/CI summaries, strategic conclusions, workorder checkpoints"
+    ]
+  },
+  "owner_scope": {
+    "statements": [
+      "Runnable proxy and functional MVP readiness. Preserve exact original spans and the established protection behavior. Pandoc is the mandatory installed and versioned structural parser with a startup check.",
+      "The owner excludes a separate human evaluation dataset and a research programme restart. Keep actual functional evidence distinct from historical quality and service scope."
+    ],
+    "source": "032a-neutral-audit-inputs-20261110.json owner_scope (at 2026-11-10T23:04:54Z) + order provenance H",
+    "exclusions_applied": [
+      "no separate human evaluation dataset work in this order (affects M01/M04/M07 and linguistic-evaluation evidence creation only; existing evidence at the audited main may be assessed)",
+      "no research programme restart (the initial 032 calibration seed remains historical and inert)",
+      "actual functional evidence kept distinct from historical quality and service scope (affects S01-S05 and evaluation axes)"
+    ]
+  },
+  "sources_read": {
+    "PLAN.md": {
+      "revision": "1.0, 2026-09-06",
+      "sha256": "d2aa1d98cc5177ac6093ab3aeb79903b192780910ef2d1712839b474fb5adbf0",
+      "read": "full file, exact git bytes at audited main"
+    },
+    "ARCHITECTURE.md": {
+      "revision": "1.1 (product sections 2-16 unchanged from 1.0)",
+      "sha256": "a16e0f87bdb21f6920aa63119cf5be148b6c8b68bf1337c44006d54b7a7261f7",
+      "read": "full file, exact git bytes at audited main"
+    },
+    "contracts": [
+      "AGENTS.md (router)",
+      "oap/coding-instructions/AGENTS.md",
+      "ARCHITECTURE-for-agents.md",
+      "OAP-COMMUNICATION-coding-agent.md",
+      "SECURITY.md",
+      "TESTING.md"
+    ]
+  },
+  "applicability_legend": {
+    "APPLICABLE_FUNCTIONAL": "in the owner-selected scope (runnable proxy / functional MVP readiness) and assessed in this audit",
+    "FOUNDATION_PRIOR_STAGE": "demonstrator stage (objectives 000-022): prior milestone; its functional content must exist and work in the runnable proxy and is assessed as proxy components",
+    "EXCLUDED_OWNER": "MVP-stage evidence requirement whose fulfilment in this order is excluded by the owner scope (no new human evaluation dataset, no research restart); only evidence already at the audited main is assessed",
+    "LATER_STAGE": "verified-service stage (objectives 045-055) or future capability; not a functional-MVP readiness criterion; not assessed in this audit"
+  },
+  "core_invariants_LR": [
+    {
+      "id": "LR-001",
+      "requirement": "Complete main generation and bounded capture before CPU review, repair inference or delivery of answer text; verify supported upstream completion, not socket closure alone; no provisional original text to the user.",
+      "source": "AR §2, §5; PL §§1, 3, 11.3",
+      "applicability": "APPLICABLE_FUNCTIONAL"
+    },
+    {
+      "id": "LR-002",
+      "requirement": "CPU evidence selects eligible suspicion; none -> original unchanged and ZERO review calls, including shadow/strict; missing evidence does not prove error.",
+      "source": "AR §§2, 9, 11.1, 14.2; PL §§1, 7, 13.3",
+      "applicability": "APPLICABLE_FUNCTIONAL"
+    },
+    {
+      "id": "LR-003",
+      "requirement": "CPU preassigns original-coordinate word/short-phrase targets, not model tokens or unrestricted sentences; the model cannot expand, reposition or invent IDs.",
+      "source": "AR §§2, 6, 9; PL §§1, 7.2, 8",
+      "applicability": "APPLICABLE_FUNCTIONAL"
+    },
+    {
+      "id": "LR-004",
+      "requirement": "Ask expression suitability in the preserved question; allow keep / insufficient context / wider-edit decline; do not demand a change or treat stylistic preference as correction.",
+      "source": "AR §§2, 10.1; PL §8",
+      "applicability": "APPLICABLE_FUNCTIONAL"
+    },
+    {
+      "id": "LR-005",
+      "requirement": "Construct a fresh isolated review request/history; no main session IDs, previous_response_id, conversation linkage, tools, images, tool results or project constitutions/context reconstruction; no recursion through repair/public adapter.",
+      "source": "AR §§2, 4, 10.2; PL §§4, 11.2",
+      "applicability": "APPLICABLE_FUNCTIONAL"
+    },
+    {
+      "id": "LR-006",
+      "requirement": "Review is an untrusted local proposal; code validates and inserts exact replacements; the model never regenerates the answer or supplies replacement sentences.",
+      "source": "AR §§2, 10.1, 10.3; PL §§8-10",
+      "applicability": "APPLICABLE_FUNCTIONAL"
+    },
+    {
+      "id": "LR-007",
+      "requirement": "Preserve all original substrings outside accepted spans, protected content, whitespace, line endings, diacritics and formatting; no reserialization/detokenization (owner: exact original spans and established protection behavior).",
+      "source": "AR §§2, 6, 7, 12; PL §§5, 10",
+      "applicability": "APPLICABLE_FUNCTIONAL",
+      "note": "owner scope reaffirms this as a mandatory focus"
+    },
+    {
+      "id": "LR-008",
+      "requirement": "Preserve EXACT/CENSORED/UNAVAILABLE evidence semantics; missing truncated data is not zero; EXACT(0) requires justified query completeness; unknown denominator remains unknown.",
+      "source": "AR §§2, 8.1; PL §6",
+      "applicability": "APPLICABLE_FUNCTIONAL"
+    },
+    {
+      "id": "LR-009",
+      "requirement": "Strict acceptance requires appropriate independent corpus/lexicon/morphology evidence and no detected contradiction; frequency or model confidence alone cannot authorize change; same-Qwen second call is not statistically independent evidence.",
+      "source": "AR §§2, 9, 11.2; PL §§9, 4.2",
+      "applicability": "APPLICABLE_FUNCTIONAL"
+    },
+    {
+      "id": "LR-010",
+      "requirement": "Bounded one-pass initial review; at most one combined request; no automatic generative repair/retry loop, including malformed-JSON repair; CPU revalidation only.",
+      "source": "AR §§2, 10.3, 14.1; PL §§3, 13.1",
+      "applicability": "APPLICABLE_FUNCTIONAL"
+    },
+    {
+      "id": "LR-011",
+      "requirement": "Optional repair failure preserves only the already safely captured original; never mask main error, incompleteness or hard capture limit as successful output.",
+      "source": "AR §§2, 14.2; PL §13.3",
+      "applicability": "APPLICABLE_FUNCTIONAL"
+    },
+    {
+      "id": "LR-012",
+      "requirement": "Reuse the existing Qwen through an authorized client; CPU infrastructure must not load a second large GPU model or alter the protected deployment/resources.",
+      "source": "AR §§2, 4, 15; PL §§1, 11-13",
+      "applicability": "APPLICABLE_FUNCTIONAL"
+    },
+    {
+      "id": "LR-013",
+      "requirement": "Production logs exclude user text, targets/replacements, prompts, raw responses and secrets; permitted evaluation is a separate explicitly controlled channel.",
+      "source": "AR §§2, 15; PL §13.4",
+      "applicability": "APPLICABLE_FUNCTIONAL"
+    },
+    {
+      "id": "LR-014",
+      "requirement": "Software correctness, serving compatibility, linguistic benefit and deployment/release authority require distinct evidence; goals/defaults are not measurements.",
+      "source": "AR §§2, 16; PL §§14-16",
+      "applicability": "APPLICABLE_FUNCTIONAL"
+    }
+  ],
+  "derived_requirements_by_area": {
+    "capture_and_delivery": [
+      {
+        "id": "F-CAP-01",
+        "requirement": "Adapter owns main-response capture and delivery; the library operates on already completed text; request-local immutable input per response; no shared mutable history or buffers.",
+        "source": "AR §§4, 5; PL §§11.1, 3",
+        "applicability": "APPLICABLE_FUNCTIONAL"
+      },
+      {
+        "id": "F-CAP-02",
+        "requirement": "Completion is verified per the explicitly supported upstream protocol (finish semantics), not socket closure; main failure/truncation never enters the successful CAPTURED path.",
+        "source": "AR §5; PL §§3, 13.3",
+        "applicability": "APPLICABLE_FUNCTIONAL"
+      },
+      {
+        "id": "F-CAP-03",
+        "requirement": "Capture is bounded; hard capture limit exceeded -> bounded API failure, never truncated text labelled complete.",
+        "source": "AR §14.2; PL §13.3",
+        "applicability": "APPLICABLE_FUNCTIONAL"
+      },
+      {
+        "id": "F-CAP-04",
+        "requirement": "Select only explicitly supported assistant-text fields; never recursively repair every string in a response object.",
+        "source": "AR §7; PL §5.1",
+        "applicability": "APPLICABLE_FUNCTIONAL"
+      },
+      {
+        "id": "F-CAP-05",
+        "requirement": "Initial adapter bypasses entire responses containing tool calls or unsupported structures; unknown response structures are not repaired.",
+        "source": "AR §7; PL §5.1",
+        "applicability": "APPLICABLE_FUNCTIONAL"
+      },
+      {
+        "id": "F-CAP-06",
+        "requirement": "State machine per response: MAIN_FINISHED -> CAPTURED -> ANALYZED -> (RETURNED_ORIGINAL | REVIEWED -> (RETURNED_ORIGINAL | VALIDATED -> (RETURNED_ORIGINAL | PATCHED -> RETURNED_FINAL))).",
+        "source": "AR §5; PL §3.1",
+        "applicability": "APPLICABLE_FUNCTIONAL"
+      }
+    ],
+    "span_and_original_mapping": [
+      {
+        "id": "F-SPAN-01",
+        "requirement": "Span coordinates are Python-string Unicode code-point indices into the UNMODIFIED original: 0<=start<end<=len(text); text[start:end]==original; span_id unique per response; no protected intersection; not UTF-8 bytes, UTF-16 units or model tokens.",
+        "source": "AR §6; PL §5.2",
+        "applicability": "APPLICABLE_FUNCTIONAL"
+      },
+      {
+        "id": "F-SPAN-02",
+        "requirement": "Repeated identical substrings distinguished by exact before_target/target/after_target; no reliance on first-occurrence search.",
+        "source": "AR §6; PL §8.3",
+        "applicability": "APPLICABLE_FUNCTIONAL"
+      },
+      {
+        "id": "F-SPAN-03",
+        "requirement": "Normalization/casefold/linguistic tokenization operate on derived views only; original preserves whitespace, line endings, diacritics, punctuation and all characters outside accepted spans.",
+        "source": "AR §6; PL §5.2",
+        "applicability": "APPLICABLE_FUNCTIONAL"
+      },
+      {
+        "id": "F-SPAN-04",
+        "requirement": "Combining marks, emoji and CRLF require explicit tests; unsafe partial-grapheme targeting abstains rather than damages the source.",
+        "source": "AR §6; PL §§5.1, 14.1",
+        "applicability": "APPLICABLE_FUNCTIONAL"
+      },
+      {
+        "id": "F-SPAN-05",
+        "requirement": "Result carries final text, changed flag, original-coordinate edits, suspicion/decision metadata, counted review calls and timings; local inspection metadata is not permission for production logs or main chat.",
+        "source": "AR §6; PL §11.1",
+        "applicability": "APPLICABLE_FUNCTIONAL"
+      }
+    ],
+    "protected_material": [
+      {
+        "id": "F-PROT-01",
+        "requirement": "Protect fenced/indented code, inline code, URLs and link destinations, emails, filesystem paths, commands, numbers/units, citations/quotes and other machine-significant strings.",
+        "source": "AR §7; PL §5.1",
+        "applicability": "APPLICABLE_FUNCTIONAL"
+      },
+      {
+        "id": "F-PROT-02",
+        "requirement": "Tools/functions, IDs, schemas, structured JSON output, reasoning fields, images and binary data are uneditable; initial adapter bypasses such responses entirely.",
+        "source": "AR §§7, 4; PL §5.1",
+        "applicability": "APPLICABLE_FUNCTIONAL"
+      },
+      {
+        "id": "F-PROT-03",
+        "requirement": "Proper names, titles, technical terms and mixed languages require conservative exclusions or a clearly bounded terminology policy; unclear Markdown abstains.",
+        "source": "AR §7; PL §5.1",
+        "applicability": "APPLICABLE_FUNCTIONAL"
+      },
+      {
+        "id": "F-PROT-04",
+        "requirement": "Protected intervals are linguistic boundaries: token lists must never manufacture bigram/trigram adjacency across removed excluded material.",
+        "source": "AR §7; PL §5.1",
+        "applicability": "APPLICABLE_FUNCTIONAL"
+      },
+      {
+        "id": "F-PROT-05",
+        "requirement": "Markdown parsing may locate spans, but Markdown reserialization is not an acceptable patcher; no detokenization or renderer may substitute for the original document.",
+        "source": "AR §§7, 12; PL §5.1",
+        "applicability": "APPLICABLE_FUNCTIONAL",
+        "note": "owner: Pandoc is the mandatory installed versioned structural parser with a startup check (see O1)"
+      }
+    ],
+    "corpus_and_evidence": [
+      {
+        "id": "F-CORP-01",
+        "requirement": "Evidence records carry source/version, normalization/tagging, scope, completeness/cutoff and status EXACT|CENSORED|UNAVAILABLE; EXACT(0) only with justified completeness.",
+        "source": "AR §8.1; PL §6.2",
+        "applicability": "APPLICABLE_FUNCTIONAL"
+      },
+      {
+        "id": "F-CORP-02",
+        "requirement": "Full context denominator separately marked known/unknown; retained n-gram sums are not a complete denominator; censored surface-form aggregation is not a complete lemma distribution.",
+        "source": "AR §8.1; PL §§6.2, 6.3",
+        "applicability": "APPLICABLE_FUNCTIONAL"
+      },
+      {
+        "id": "F-CORP-03",
+        "requirement": "Comparisons require compatible source scope, normalization and units; conservative ratio bounds may inform evidence but are not semantic proof; different-length phrase raw counts alone cannot authorize an edit.",
+        "source": "AR §8.1; PL §6.2",
+        "applicability": "APPLICABLE_FUNCTIONAL"
+      },
+      {
+        "id": "F-CORP-04",
+        "requirement": "Every imported index has a manifest: source identity/version, acquisition reference/checksum, rights/license, format, threshold/cutoff, completeness, normalization/tagging, importer version, deterministic build parameters; import is repeatable.",
+        "source": "AR §8.2; PL §6.3",
+        "applicability": "APPLICABLE_FUNCTIONAL"
+      },
+      {
+        "id": "F-CORP-05",
+        "requirement": "Preserve attribution and redistribution conditions; public query access does not authorize bulk extraction/redistribution; no runtime corpus scraping; no downloads or network calls on package import.",
+        "source": "AR §§8.2, 4.1; PL §6.3",
+        "applicability": "APPLICABLE_FUNCTIONAL"
+      },
+      {
+        "id": "F-CORP-06",
+        "requirement": "Large indexes, model weights and private evaluation corpora stay out of Git; permitted miniature fixtures are clearly labelled synthetic.",
+        "source": "AR §8.2; PL §§6.3, 12",
+        "applicability": "APPLICABLE_FUNCTIONAL"
+      }
+    ],
+    "detection_and_selection": [
+      {
+        "id": "F-DET-01",
+        "requirement": "CPU detection produces suspicions, not verdicts; unknown/rare forms or names are investigation triggers, not automatic errors; weak surroundings give weak evidence.",
+        "source": "AR §9; PL §7.1",
+        "applicability": "APPLICABLE_FUNCTIONAL"
+      },
+      {
+        "id": "F-DET-02",
+        "requirement": "Nearby alarms may be grouped into a bounded short phrase only BEFORE review, never across protected material or into a paragraph; deterministic non-overlapping targets ordered by position.",
+        "source": "AR §9; PL §7.2",
+        "applicability": "APPLICABLE_FUNCTIONAL"
+      },
+      {
+        "id": "F-DET-03",
+        "requirement": "Excess or ambiguous targets remain unchanged with finite internal reason labels (budget_exceeded); a trigram alarm does not identify the middle word uniquely.",
+        "source": "AR §9; PL §§7.1, 7.4",
+        "applicability": "APPLICABLE_FUNCTIONAL"
+      },
+      {
+        "id": "F-DET-04",
+        "requirement": "Separate lexical misuse from morphological disagreement; required tags derive from context/analysis confidence, not blind copying of the wrong source form; ambiguous lemma/tagging may abstain.",
+        "source": "AR §9; PL §7.3",
+        "applicability": "APPLICABLE_FUNCTIONAL"
+      },
+      {
+        "id": "F-DET-05",
+        "requirement": "Do not feed ranked corpus alternatives to the reviewer by default; its task is independent local judgment of the marked expression.",
+        "source": "AR §9; PL §7.4",
+        "applicability": "APPLICABLE_FUNCTIONAL"
+      }
+    ],
+    "review_contract": [
+      {
+        "id": "F-REV-01",
+        "requirement": "Preserve the narrow question verbatim: 'Ali se ti zdi uporaba besede oziroma besedne zveze X najboljša naravna izbira v tem slovenskem stavku? Ce ne, s cim bi jo nadomestil?' with meaning/register/grammar preserved, no factual edits.",
+        "source": "AR §10.1; PL §8",
+        "applicability": "APPLICABLE_FUNCTIONAL"
+      },
+      {
+        "id": "F-REV-02",
+        "requirement": "Reviewer receives the completed target sentence plus bounded needed neighbors only; never the whole main history; wider answer added only when needed within limits.",
+        "source": "AR §10.1; PL §8.1",
+        "applicability": "APPLICABLE_FUNCTIONAL"
+      },
+      {
+        "id": "F-REV-03",
+        "requirement": "Reviewed material is untrusted DATA including embedded instructions; no tools, URL execution or command execution; prompt delimiting is not the enforcement boundary - strict output parsing, fixed IDs and local patch validation are.",
+        "source": "AR §§10.1, 15; PL §8.1",
+        "applicability": "APPLICABLE_FUNCTIONAL"
+      },
+      {
+        "id": "F-REV-04",
+        "requirement": "Fresh request construction: explicit review settings, no reusable mutable main-history object, no previous_response_id or server-managed session linkage, no tools/images/tool results, no constitutions/context-reconstruction instructions; authentication kept separate from conversation state.",
+        "source": "AR §10.2; PL §4",
+        "applicability": "APPLICABLE_FUNCTIONAL"
+      },
+      {
+        "id": "F-REV-05",
+        "requirement": "Reviewer route is a trusted configured private endpoint or injected client; no caller-supplied destination, no public repair recursion, no indiscriminate forwarding of main credentials, no public bypass header; internal diagnostic correlation must not create conversation linkage.",
+        "source": "AR §§4, 10.2; PL §11.2",
+        "applicability": "APPLICABLE_FUNCTIONAL"
+      },
+      {
+        "id": "F-REV-06",
+        "requirement": "One result per supplied ID; keep=true => replacement=null; keep=false => nonempty replacement and needs_wider_edit=false; needs_wider_edit=true => keep=true and replacement=null; optional bounded confidence is self-report, not calibrated correctness.",
+        "source": "AR §10.3; PL §8.4",
+        "applicability": "APPLICABLE_FUNCTIONAL"
+      },
+      {
+        "id": "F-REV-07",
+        "requirement": "Invalid JSON/types, unknown/duplicate/missing IDs, contradictory fields or oversized output reject the WHOLE batch; never salvage a malformed batch or request JSON repair (no second model call).",
+        "source": "AR §10.3; PL §8.5",
+        "applicability": "APPLICABLE_FUNCTIONAL"
+      },
+      {
+        "id": "F-REV-08",
+        "requirement": "A structurally valid local proposal may be rejected individually during acceptance; a wider-edit response leaves that target unchanged in this pass.",
+        "source": "AR §§10.3, 11.2; PL §§8.4, 8.5",
+        "applicability": "APPLICABLE_FUNCTIONAL"
+      },
+      {
+        "id": "F-REV-09",
+        "requirement": "The model returns only the local replacement for the authorized span - never a rewritten sentence or the complete answer; code inserts the replacement.",
+        "source": "AR §§10.3, 12; PL §8",
+        "applicability": "APPLICABLE_FUNCTIONAL"
+      },
+      {
+        "id": "F-REV-10",
+        "requirement": "Actual main/review request capture in synthetic tests must prove isolation (exact outbound shapes, no sharing/linkage/recursion); threads/async/processes alone do not prove it.",
+        "source": "AR §§10.2, 16.1; PL §14.1",
+        "applicability": "APPLICABLE_FUNCTIONAL"
+      },
+      {
+        "id": "F-REV-11",
+        "requirement": "Server-constrained structured output is optional until verified on the actual installation; no protected-server reconfiguration to obtain it.",
+        "source": "AR §10.3; PL §8.5",
+        "applicability": "APPLICABLE_FUNCTIONAL"
+      }
+    ],
+    "acceptance": [
+      {
+        "id": "F-ACC-01",
+        "requirement": "Strict AUTO_REPAIR acceptance requires ALL of: CPU-selected target, valid local proposal, exact original slice and non-protected bounds, finite structure/size limits, appropriate independent evidence, no contextual/semantic contradiction, valid composed result.",
+        "source": "AR §11.2; PL §9.1",
+        "applicability": "APPLICABLE_FUNCTIONAL"
+      },
+      {
+        "id": "F-ACC-02",
+        "requirement": "Evidence rules vary by error class: malformed forms may use valid-form/orthographic/context evidence; replacing one valid lexeme with another needs stronger contextual support; neutral/incomparable data is insufficient.",
+        "source": "AR §11.2; PL §9.1",
+        "applicability": "APPLICABLE_FUNCTIONAL"
+      },
+      {
+        "id": "F-ACC-03",
+        "requirement": "Reject identity replacements (no-ops); reject forbidden newlines/control characters/markup/code structure; reject overlong replacements and any expansion beyond the authorized span; never normalize adjacent punctuation or formatting as an unreported side effect.",
+        "source": "AR §11.2; PL §8.5",
+        "applicability": "APPLICABLE_FUNCTIONAL"
+      },
+      {
+        "id": "F-ACC-04",
+        "requirement": "LLM_CONFIRMED_REPAIR without sufficient independent evidence remains disabled for automatic user-text changes in the MVP; a higher confidence threshold alone cannot enable it; study only in permitted shadow evaluation.",
+        "source": "AR §11.2; PL §9.2",
+        "applicability": "APPLICABLE_FUNCTIONAL"
+      },
+      {
+        "id": "F-ACC-05",
+        "requirement": "Operational modes detect_only (CPU only, no review, no change) / shadow (eligible review + scoring, original delivered, approved evaluation only) / strict (validated AUTO_REPAIR only) / experimental (future, not required for MVP); development progresses detect_only -> shadow -> measured limited strict.",
+        "source": "AR §11.1; PL §9.3",
+        "applicability": "APPLICABLE_FUNCTIONAL"
+      },
+      {
+        "id": "F-ACC-06",
+        "requirement": "With no eligible suspicion, even shadow and strict make zero review requests and deliver the unchanged original.",
+        "source": "AR §§11.1, 14.2; PL §§1, 7",
+        "applicability": "APPLICABLE_FUNCTIONAL"
+      }
+    ],
+    "patching_and_composition": [
+      {
+        "id": "F-PAT-01",
+        "requirement": "The original remains immutable until final composition; each selected original slice is re-validated immediately before application.",
+        "source": "AR §12; PL §10",
+        "applicability": "APPLICABLE_FUNCTIONAL"
+      },
+      {
+        "id": "F-PAT-02",
+        "requirement": "Overlapping or incompatible edits are rejected; no silent last-wins selection.",
+        "source": "AR §12; PL §10",
+        "applicability": "APPLICABLE_FUNCTIONAL"
+      },
+      {
+        "id": "F-PAT-03",
+        "requirement": "Compose the final result from untouched original slices plus approved replacements, or an equivalently tested descending-offset implementation; no model answer, detokenization or Markdown renderer substitutes for the document.",
+        "source": "AR §12; PL §10",
+        "applicability": "APPLICABLE_FUNCTIONAL"
+      },
+      {
+        "id": "F-PAT-04",
+        "requirement": "Recheck affected sentences/local contexts after composition; conflicting nearby changes roll back as a group and rebuild from the original; bounded CPU check only, no new generative pass.",
+        "source": "AR §12; PL §10",
+        "applicability": "APPLICABLE_FUNCTIONAL"
+      },
+      {
+        "id": "F-PAT-05",
+        "requirement": "No surviving edit => byte-exact original text.",
+        "source": "AR §12; PL §10",
+        "applicability": "APPLICABLE_FUNCTIONAL"
+      },
+      {
+        "id": "F-PAT-06",
+        "requirement": "Text equality and HTTP-byte equality are distinct: on the unchanged path preserve original envelope bytes where possible; on the changed path serialize only supported envelope transformations and account explicitly for affected metadata.",
+        "source": "AR §12; PL §§10, 11.4",
+        "applicability": "APPLICABLE_FUNCTIONAL"
+      }
+    ],
+    "http_api_and_history": [
+      {
+        "id": "F-API-01",
+        "requirement": "Start with one explicitly supported nonstreaming text shape and one response choice; actual endpoint/schema selected and tested in order; no universal Chat/Responses compatibility claim.",
+        "source": "AR §13; PL §11.3",
+        "applicability": "APPLICABLE_FUNCTIONAL"
+      },
+      {
+        "id": "F-API-02",
+        "requirement": "Reject unsupported request capabilities before the main call where possible, or route through an explicitly configured unchanged bypass; never silently treat stream=true as permission to return plain JSON under an SSE contract.",
+        "source": "AR §13; PL §11.3",
+        "applicability": "APPLICABLE_FUNCTIONAL"
+      },
+      {
+        "id": "F-API-03",
+        "requirement": "Upstream may stream internally, but the adapter accumulates under a hard bound and validates completion before CPU analysis; no provisional answer text to the user.",
+        "source": "AR §13; PL §11.3",
+        "applicability": "APPLICABLE_FUNCTIONAL"
+      },
+      {
+        "id": "F-API-04",
+        "requirement": "No JSON masquerading as SSE; no rewriting of tool results; no accidental public bypass for internal controls.",
+        "source": "AR §13; PL §11.3",
+        "applicability": "APPLICABLE_FUNCTIONAL"
+      },
+      {
+        "id": "F-API-05",
+        "requirement": "Client-managed next main turn contains only the final delivered answer; never an extra draft or the review prompt/JSON; input history is not mutated.",
+        "source": "AR §13; PL §4.1",
+        "applicability": "APPLICABLE_FUNCTIONAL"
+      },
+      {
+        "id": "F-API-06",
+        "requirement": "External server-managed response/conversation chaining is unsupported until a verified way to keep displayed and stored answers consistent exists; MVP starts with independent requests or client-sent history.",
+        "source": "AR §13; PL §4.1",
+        "applicability": "APPLICABLE_FUNCTIONAL"
+      },
+      {
+        "id": "F-API-07",
+        "requirement": "Changed text invalidates token-aligned probabilities and possibly offsets/annotations: reject/bypass such repair capabilities under the declared policy; never keep stale logprobs or fabricate alignment.",
+        "source": "AR §13; PL §11.4",
+        "applicability": "APPLICABLE_FUNCTIONAL"
+      },
+      {
+        "id": "F-API-08",
+        "requirement": "Main-generation usage and review usage are recorded separately; final-string token counting is neither inference bill; review cost is visible to the operator without misrepresenting upstream usage.",
+        "source": "AR §13; PL §11.4",
+        "applicability": "APPLICABLE_FUNCTIONAL"
+      },
+      {
+        "id": "F-API-09",
+        "requirement": "Long waits need appropriate client/intermediary timeouts; any progress/heartbeat must not reveal provisional original text or break the protocol.",
+        "source": "AR §13; PL §11.3",
+        "applicability": "APPLICABLE_FUNCTIONAL"
+      }
+    ],
+    "resources_cancellation_failure": [
+      {
+        "id": "F-RES-01",
+        "requirement": "Initial configurable defaults (not measured optima): <=1 review request/response, 1 generative pass, 0 automatic retries, <=1 concurrent component review, <=8 targets/response, normally <=6 target words, <=8 replacement words, finite character bounds; automatic evidence-insufficient acceptance and persistent production text logging disabled.",
+        "source": "AR §14.1; PL §13.1",
+        "applicability": "APPLICABLE_FUNCTIONAL"
+      },
+      {
+        "id": "F-RES-02",
+        "requirement": "Orders select finite bounds for capture bytes, analysis length, context per target, total prompt/output size, queue length/wait time and total review time in a validated versioned policy; no fabricated throughput.",
+        "source": "AR §14.1; PL §13.1",
+        "applicability": "APPLICABLE_FUNCTIONAL"
+      },
+      {
+        "id": "F-RES-03",
+        "requirement": "Main generation and review for one answer are sequential; a global bounded review admission policy governs concurrent other users; review queue is bounded and never starves main requests indefinitely.",
+        "source": "AR §§5, 14.1; PL §13.2",
+        "applicability": "APPLICABLE_FUNCTIONAL"
+      },
+      {
+        "id": "F-RES-04",
+        "requirement": "Failure contract: corpus missing/corrupt/incompatible -> degraded original, no invented counts; analysis bound after safe capture -> original without analysis; queue full/timeout/transport/invalid batch -> cancel owned optional work and return completed original; individual evidence/structure failure -> reject that proposal while valid independent ones continue.",
+        "source": "AR §14.2; PL §13.3",
+        "applicability": "APPLICABLE_FUNCTIONAL"
+      },
+      {
+        "id": "F-RES-05",
+        "requirement": "Main generation error or incomplete output -> documented error/finish semantics preserved, no repair or hidden incompleteness; hard capture limit -> bounded API failure, never truncated success.",
+        "source": "AR §§5, 14.2; PL §13.3",
+        "applicability": "APPLICABLE_FUNCTIONAL"
+      },
+      {
+        "id": "F-RES-06",
+        "requirement": "Client disconnect -> cancel owned upstream/review tasks and stop delivery; no orphaned background repair; cancellation targets only request-owned work and must not cancel unrelated requests.",
+        "source": "AR §§5, 14.2; PL §13.3",
+        "applicability": "APPLICABLE_FUNCTIONAL"
+      },
+      {
+        "id": "F-RES-07",
+        "requirement": "CPU work bounded in time/memory and event-loop effort; no uncontrolled copies of indexes/analyzers; no work continuing unbounded after cancellation; optional fallback cannot bypass authentication, validation, hard limits or isolation; finite safe reason vocabulary exposing no text or secrets.",
+        "source": "AR §§14.1, 14.2; PL §13.1",
+        "applicability": "APPLICABLE_FUNCTIONAL"
+      }
+    ],
+    "security_privacy": [
+      {
+        "id": "F-SEC-01",
+        "requirement": "Main output, review output, local evaluation files and downloaded corpus content are data: never execute embedded instructions, paths, URLs or code; reviewer has no tools and no authority to write files or mutate conversation state.",
+        "source": "AR §15; PL §13.4",
+        "applicability": "APPLICABLE_FUNCTIONAL"
+      },
+      {
+        "id": "F-SEC-02",
+        "requirement": "Credentials stay outside Git, referenced via environment/config without logging values.",
+        "source": "AR §15; PL §13.4",
+        "applicability": "APPLICABLE_FUNCTIONAL"
+      },
+      {
+        "id": "F-SEC-03",
+        "requirement": "Production metrics/logs contain bounded counts, timings, policy/source versions and reason labels only - no user text, targets/replacements, prompts or raw responses; private text is not a metric label, cache key or report excerpt.",
+        "source": "AR §15; PL §13.4",
+        "applicability": "APPLICABLE_FUNCTIONAL"
+      },
+      {
+        "id": "F-SEC-04",
+        "requirement": "Real evaluation examples require explicit permission and controlled storage; human annotation, private evaluation inspection and production logging are distinct channels; cross-user text caching unnecessary for MVP; Git fixtures must be permitted and clearly synthetic or published.",
+        "source": "AR §15; PL §13.4",
+        "applicability": "APPLICABLE_FUNCTIONAL"
+      },
+      {
+        "id": "F-SEC-05",
+        "requirement": "Protected environment: existing Qwen service, model/quantization files, vLLM/CUDA, launch flags, port ownership, shared GPU, gateway and neighboring adapters are not mutated by product work; exact endpoints/model IDs verified later by bounded read-only/opt-in tests.",
+        "source": "AR §15; PL §§11-13",
+        "applicability": "APPLICABLE_FUNCTIONAL"
+      }
+    ],
+    "testing_and_evidence": [
+      {
+        "id": "F-TEST-01",
+        "requirement": "Synthetic deterministic tests before live use cover all invariants: capture (completion/error/truncation), isolation (exact main/review shapes, no sharing/linkage/recursion), original mapping (repeated substrings, Unicode, CRLF, Markdown), protected spans (no artificial adjacency), corpus (exact zero vs censored absence, unknown denominator, incompatible scope), reviewer (keep/replace/wider-edit, injection-as-data, duplicate/missing/unknown IDs, invalid/oversized JSON), acceptance (common-but-wrong, style, weak evidence, phrase length, morphology), patching (overlap, stale offsets, conflicts, untouched equality), operations (zero/one call, queue, timeout, cancellation, tenant separation, no raw logging), API (supported envelope, unsupported capabilities, finish, usage, history).",
+        "source": "AR §16.1; PL §14.1",
+        "applicability": "APPLICABLE_FUNCTIONAL"
+      },
+      {
+        "id": "F-TEST-02",
+        "requirement": "The fake-upstream test must directly verify both model calls: the repair request carries no link to the main conversation and no disallowed main history; the main history after the test contains no repair JSON.",
+        "source": "AR §16.1; PL §14.1",
+        "applicability": "APPLICABLE_FUNCTIONAL"
+      },
+      {
+        "id": "F-TEST-03",
+        "requirement": "Before accepting live Qwen: verify model ID, supported API shape, thinking/structured-output rules, valid cancellation and actual usage; documented state of the old installation is not a substitute; live tests are explicit opt-in, small and low-concurrency; a skipped live test is not a pass.",
+        "source": "AR §16.2; PL §14.1",
+        "applicability": "APPLICABLE_FUNCTIONAL"
+      },
+      {
+        "id": "F-TEST-04",
+        "requirement": "Linguistic evaluation (MVP criterion axis): real target outputs plus correct/rare/technical negative controls, human labels distinguishing error/style/alternative/wider-edit, frozen calibration/held-out splits without leakage, Qwen never the final judge of its own changes; report accepted-edit precision, harmful edits per 10k correct words, style edits, coverage, call rate, separate usage, latency/resource/failure with sample sizes and uncertainty.",
+        "source": "AR §16.3; PL §14.2-14.3",
+        "applicability": "APPLICABLE_FUNCTIONAL",
+        "note": "owner scope: no separate human evaluation dataset and no research restart in this order; assessed from evidence existing at the audited main only"
+      },
+      {
+        "id": "F-TEST-05",
+        "requirement": "Approximate 99% precision and <=1 harmful edit/10k correct words are goals, not results or release authority; zero events in a small sample proves no zero rate; useful benefit with bounded harm must both be demonstrated; abstention-heavy behavior is not automatically success.",
+        "source": "AR §16.3; PL §14.3",
+        "applicability": "APPLICABLE_FUNCTIONAL"
+      }
+    ],
+    "closure_audit_governance": [
+      {
+        "id": "F-ICA-01",
+        "requirement": "Before any MVP-complete/closure claim: a fresh independent audit (fresh isolated context or human) starts from human scope + full architecture + current merged main (not strategic queue claims); classifies every requirement IMPLEMENTED/PARTIAL/ABSENT/UNPROVEN; links actual runtime paths, entry points, tests and exact revision; treats reports/README/CI summaries as claims; converts gaps to provenance-linked bounded work; repeats after remediation; strategy recommends closure, the human retains the milestone label and deployment judgment.",
+        "source": "AR §§19, 20; ICA-PROTOCOL",
+        "applicability": "APPLICABLE_FUNCTIONAL",
+        "note": "this order 032-a executes that independent closure audit for the owner-selected functional scope"
+      }
+    ]
+  },
+  "milestone_work_clusters": {
+    "demonstrator_D": [
+      {
+        "id": "D01",
+        "requirement": "Contracts and policy: clear span/evidence/proposal/result structures; separate keep vs replace.",
+        "source": "PL §15.1",
+        "applicability": "FOUNDATION_PRIOR_STAGE"
+      },
+      {
+        "id": "D02",
+        "requirement": "Bounded data import: repeatable index of the initial sources with manifest and correct missing-data distinction (EXACT/CENSORED/UNAVAILABLE).",
+        "source": "PL §15.1",
+        "applicability": "FOUNDATION_PRIOR_STAGE"
+      },
+      {
+        "id": "D03",
+        "requirement": "Protection and mapping: tokenization without modifying the original; tests for code, URLs and Unicode.",
+        "source": "PL §15.1",
+        "applicability": "FOUNDATION_PRIOR_STAGE"
+      },
+      {
+        "id": "D04",
+        "requirement": "First CPU detector: selects marked suspicious places on a small set, does not send everything to the model.",
+        "source": "PL §15.1",
+        "applicability": "FOUNDATION_PRIOR_STAGE"
+      },
+      {
+        "id": "D05",
+        "requirement": "Isolated reviewer: fake and real Qwen clients return validated local decisions.",
+        "source": "PL §15.1",
+        "applicability": "FOUNDATION_PRIOR_STAGE"
+      },
+      {
+        "id": "D06",
+        "requirement": "Acceptance and patcher: code accepts or rejects proposals and preserves all other segments.",
+        "source": "PL §15.1",
+        "applicability": "FOUNDATION_PRIOR_STAGE"
+      },
+      {
+        "id": "D07",
+        "requirement": "CLI and first review: display of original, proposals, final text and reasons; real examples are not embedded special rules.",
+        "source": "PL §15.1",
+        "applicability": "FOUNDATION_PRIOR_STAGE"
+      }
+    ],
+    "experimental_mvp_M": [
+      {
+        "id": "M01",
+        "requirement": "Initial labelled set: real answers, correct control cases and a separate threshold-tuning part.",
+        "source": "PL §15.2",
+        "applicability": "EXCLUDED_OWNER",
+        "note": "MVP-stage evidence requirement; owner excludes a separate human evaluation dataset and research restart in this order - no new labelled dataset work; only evidence already present at the audited main is assessed."
+      },
+      {
+        "id": "M02",
+        "requirement": "Lemmas and morphology: verified CPU analysis separating wrong lexeme choice from wrong inflection.",
+        "source": "PL §15.2",
+        "applicability": "APPLICABLE_FUNCTIONAL"
+      },
+      {
+        "id": "M03",
+        "requirement": "Short phrases: bounded alarm grouping, clear edit width and working needs_wider_edit.",
+        "source": "PL §15.2",
+        "applicability": "APPLICABLE_FUNCTIONAL"
+      },
+      {
+        "id": "M04",
+        "requirement": "Acceptance calibration: rule versions, precision/harm/coverage measurements by error class.",
+        "source": "PL §15.2",
+        "applicability": "EXCLUDED_OWNER",
+        "note": "MVP-stage evidence requirement; calibration on new human-labelled data is excluded by owner scope; existing calibration evidence at the audited main only."
+      },
+      {
+        "id": "M05",
+        "requirement": "Limits and failures: queue, cancellation, time and size bounds, safe return to original.",
+        "source": "PL §15.2",
+        "applicability": "APPLICABLE_FUNCTIONAL"
+      },
+      {
+        "id": "M06",
+        "requirement": "Nonstreaming API path: one clearly supported text shape; context preserved, no recursion.",
+        "source": "PL §15.2",
+        "applicability": "APPLICABLE_FUNCTIONAL"
+      },
+      {
+        "id": "M07",
+        "requirement": "Comparative report: comparison of the agreed method with the original and basic baseline methods.",
+        "source": "PL §15.2",
+        "applicability": "EXCLUDED_OWNER",
+        "note": "MVP-stage evidence deliverable; producing a new comparative research report would be the excluded research-restart work; existing report evidence at the audited main only."
+      }
+    ],
+    "verified_service_S": [
+      {
+        "id": "S01",
+        "requirement": "Wider negative tests: more correct and technical text; statistically meaningful harm report.",
+        "source": "PL §15.3",
+        "applicability": "LATER_STAGE",
+        "note": "Verified-service stage (045-055); not a functional-MVP readiness criterion; also overlaps the owner-excluded human evaluation dataset work."
+      },
+      {
+        "id": "S02",
+        "requirement": "Wider data support: collocations or more complete n-grams when measurements show benefit; usage rights arranged.",
+        "source": "PL §15.3",
+        "applicability": "LATER_STAGE"
+      },
+      {
+        "id": "S03",
+        "requirement": "Production integration: explicit gateway path, separate repair usage, bounded load.",
+        "source": "PL §15.3",
+        "applicability": "LATER_STAGE"
+      },
+      {
+        "id": "S04",
+        "requirement": "Installation and rollback: packaging, health checks, configuration, repair switchable off without changing Qwen.",
+        "source": "PL §15.3",
+        "applicability": "LATER_STAGE"
+      },
+      {
+        "id": "S05",
+        "requirement": "Final documentation: supported/unsupported cases, data versions, known limits, repeatable tests.",
+        "source": "PL §15.3",
+        "applicability": "LATER_STAGE"
+      }
+    ]
+  },
+  "plan_section16_criteria": [
+    {
+      "id": "C1",
+      "requirement": "Celoten glavni odgovor je prevzet pred popravljalnim klicem in pred prikazom uporabniku - the whole main answer is captured before the repair call and before user display.",
+      "source": "PL §16",
+      "applicability": "APPLICABLE_FUNCTIONAL"
+    },
+    {
+      "id": "C2",
+      "requirement": "Brez zadostnega suma ni dodatnega Qwenovega klica - without sufficient suspicion there is no additional Qwen call.",
+      "source": "PL §16",
+      "applicability": "APPLICABLE_FUNCTIONAL"
+    },
+    {
+      "id": "C3",
+      "requirement": "Qwen sme predlagati samo zamenjavo dodeljenega razpona ali odgovoriti 'pusti' - Qwen may only propose a replacement of the assigned span or answer keep.",
+      "source": "PL §16",
+      "applicability": "APPLICABLE_FUNCTIONAL"
+    },
+    {
+      "id": "C4",
+      "requirement": "Glavna zgodovina ne vsebuje popravljalnega pogovora ali njegovih internih rezultatov - the main history contains no repair conversation or its internal results.",
+      "source": "PL §16",
+      "applicability": "APPLICABLE_FUNCTIONAL"
+    },
+    {
+      "id": "C5",
+      "requirement": "Nobena sprememba se ne zgodi zunaj programsko potrjenih razponov - no change happens outside programmatically verified spans.",
+      "source": "PL §16",
+      "applicability": "APPLICABLE_FUNCTIONAL"
+    },
+    {
+      "id": "C6",
+      "requirement": "Neveljaven predlog ali odpoved izbirnega postopka ne poskoduje ze dokoncanega odgovora - an invalid proposal or optional-step failure does not damage the already completed answer.",
+      "source": "PL §16",
+      "applicability": "APPLICABLE_FUNCTIONAL"
+    },
+    {
+      "id": "C7",
+      "requirement": "Objavljene odrezane frekvence se ne obravnavajo kot popolna statistika - published truncated frequencies are not treated as complete statistics.",
+      "source": "PL §16",
+      "applicability": "APPLICABLE_FUNCTIONAL"
+    },
+    {
+      "id": "C8",
+      "requirement": "Obstaja pregledno porocilo o koristi, skodi, zakasnitvi in dodatni porabi - a transparent report of benefit, harm, latency and additional usage exists.",
+      "source": "PL §16",
+      "applicability": "APPLICABLE_FUNCTIONAL",
+      "note": "usage/latency/harm reporting axis: functional usage separation is in scope; benefit/harm quantification on a separate human evaluation dataset is owner-excluded in this order."
+    }
+  ],
+  "additional_source_requirements": [
+    {
+      "id": "O1",
+      "requirement": "Pandoc is the mandatory, installed, versioned structural parser for Markdown span mapping, with a startup check that fails closed when the required versioned binary is absent/invalid. The canonical sources require only that Markdown parsing may locate spans and reserialization may not patch originals; the Pandoc mandate, versioning and startup check are owner-scope requirements layered on F-PROT-05.",
+      "source": "owner scope via 032a neutral input + order provenance H (PLAN/ARCH do not name Pandoc)",
+      "applicability": "APPLICABLE_FUNCTIONAL",
+      "note": "owner-selected binding requirement for the runnable proxy"
+    },
+    {
+      "id": "O2",
+      "requirement": "The product must be a RUNNABLE PROXY: an actually startable adapter/proxy path (configured startup, main capture, delivery) is assessed, not only library/CLI capability; readiness of the runnable proxy is the audit subject.",
+      "source": "owner scope via neutral input + order provenance H",
+      "applicability": "APPLICABLE_FUNCTIONAL"
+    },
+    {
+      "id": "O3",
+      "requirement": "Exact original spans and the established protection behavior must be preserved as-is by the audited product; any regression of the established protection behavior is a first-class gap.",
+      "source": "owner scope via neutral input + order provenance H (reaffirmation of LR-007 and F-PROT-*)",
+      "applicability": "APPLICABLE_FUNCTIONAL"
+    },
+    {
+      "id": "O4",
+      "requirement": "Fresh assessment after migration and remediation: evidence is re-derived on the audited main 2f0d9c47; prior round claims, reports and CI summaries are treated as claims until corroborated at this revision.",
+      "source": "order provenance H + E; AR §19",
+      "applicability": "APPLICABLE_FUNCTIONAL",
+      "note": "process requirement of this audit"
+    }
+  ],
+  "reconciliation": {
+    "summary": "LR-001..LR-014 are all applicable to the functional proxy. The 13 derived areas (F-*) restate and decompose the PLAN/ARCH behavioral obligations that the LRs compress; every in-scope row is assessed in this audit. D01-D07 are the prior demonstrator stage whose functional content the runnable proxy must contain. M01-M07 are the MVP work cluster; M01/M04/M07 carry the owner exclusion (no new human evaluation dataset / no research restart) so only pre-existing evidence at the audited main is assessed. S01-S05 are the verified-service stage and are later-stage: not functional-MVP readiness criteria and not assessed in this audit. C1-C8 are the eight mandatory MVP criteria, all in scope, with C8's benefit/harm quantification axis subject to the owner exclusion. O1-O4 are owner-scope requirements layered on the canonical sources (Pandoc mandate, runnable-proxy subject, exact-span/protection preservation, fresh re-derivation).",
+    "owner_scope_mapping": {
+      "runnable_proxy": [
+        "O2",
+        "F-CAP-*",
+        "F-API-*",
+        "F-RES-*",
+        "M06",
+        "D05/D07 components"
+      ],
+      "exact_original_spans_and_protection": [
+        "O3",
+        "LR-007",
+        "F-SPAN-*",
+        "F-PROT-*",
+        "F-PAT-01..06"
+      ],
+      "mandatory_versioned_pandoc_with_startup_check": [
+        "O1",
+        "F-PROT-05"
+      ],
+      "excluded": [
+        "M01 (new dataset)",
+        "M04 (new calibration data)",
+        "M07 (new comparative research)",
+        "S01 (wider negative testing on new dataset)",
+        "research programme restart (032 calibration seed stays inert)"
+      ]
+    }
+  },
+  "initial_evidence_status": {
+    "policy": "IMPLEMENTED/PARTIAL/ABSENT/UNPROVEN classification is assigned in the audit after implementation inspection at the audited main; this initial artifact deliberately records no implementation evidence.",
+    "in_scope_rows": "PENDING_AUDIT",
+    "excluded_owner_rows": "NOT_ASSESSED_NEW_WORK; existing evidence only, assessed in the audit",
+    "later_stage_rows": "NOT_ASSESSED_THIS_ORDER (later stage per owner scope)"
+  },
+  "registry_projection": null
+}
