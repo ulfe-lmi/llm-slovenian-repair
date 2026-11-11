@@ -1,128 +1,109 @@
 {
   "artifact": "035-native-rtx3090-qualification",
-  "round": "035-a",
+  "round": "035-b",
   "objective": "035",
   "status": "PARTIAL",
   "audited_main": "7dcd186fe394c1262bfe878ba5d6527b888fc317",
   "order": {
-    "path": "oap/orders/035-a-qualify-native-rtx3090-proxy.md",
-    "sha256": "b0e2bde5af32ada59d6fdadfe6857d321be6acdc6dcc077dcd1ec60283f88cca"
+    "path": "oap/orders/035-b-native-logprobs-compatibility.md",
+    "sha256": "decdcd13a0b30a8d36b7e6f0bb2e623da5ba124fe140d6c5734ea9533da64e34"
   },
-  "goal": "Qualify native RTX3090 proxy behavior at the ACTUAL worker/contract boundary: establish serving/repair compatibility or pin the earliest precise failing boundary so strategy can order the smallest same-PR remediation. Product code frozen under this order.",
-  "source_identity": {
-    "note": "proxy/contract byte-identical to the separately-qualified 032a readonly-observer proofs (exact-hash reuse of stated-scope fidelity); no product bytes changed.",
-    "concept-verification/proxy.py": "836b78cc3a07ce207a842a8f67f71368a1be2ead79ec31923d96bd74318c7c43",
-    "concept-verification/responses_contract.py": "bed932b2ba2ceb2f77b873a9c3ad1d25a8d9c69d701aae3522707292c59732e6"
+  "result_summary": "PARTIAL: owner policy superseded mid-round (null-only -> unconditional ALWAYS-remove); native logprobs confirmed NULL (attempt 7); null-only typed patch implemented but superseded WIP; full native repair/MVP not proved; next 035-c same PR.",
+  "prior_round_correction": {
+    "035_a_claim": "035-a claimed native logprobs is NON-EMPTY aligned-metadata list (inferred from observer recording key only, not item type/length).",
+    "correction": "The 035-b refined readonly type-observer (q035b_qualification.py) records fixed safe type flags. Native attempt 7 (28.7449 s) observed logprobs = NULL (is_none) at both the ACTUAL HTTP worker boundary AND the independent client parse. The prior NONEMPTY classification is UNSUPPORTED and superseded by this actual NULL finding.",
+    "old_strip_relax_proposal": "The 035-a remediation proposal (strip non-empty logprobs / relax aligned_metadata_clean) was based on the unproven NONEMPTY inference and is SUPERSEDED by the owner's new unconditional ALWAYS-remove policy (see owner_policy_supersession below).",
+    "old_review_calls_hardcoded": "035-a hardcoded review_calls=0 rather than observing actual transport dispatches. 035-b measures actual MAIN dispatches=1 and REVIEW dispatches=0 (concept-review-usage calls=0) via the CONCEPT_USAGE_OBSERVER."
   },
-  "private_harness": {
-    "identity": "private owned qualification harness in the supplied strict scratch (no native path published)",
-    "sha256": "5f09b43f5b27416098f0965e3628a09a1bd09ccce7aa3e49a330a18adaff1599",
-    "interpreter": "qualified Python 3.12.15 -B",
-    "role": "OAP_ROLE=coding, umask 077, qualified private TMP/cache"
-  },
-  "observer": {
-    "mechanism": "separately-qualified readonly threading trace admitted to the ACTUAL code objects only; records source line + fixed verdict label (and, for aligned_metadata_clean, only the known field name annotations|logprobs); reads no raw text/values/IDs/headers/exceptions/raw JSON; restored and owned workers closed/reaped.",
-    "bindings": {
-      "transform_json": {"def": 691, "sites": {"704": "ProxyError (malformed)", "707": "abstain raw unchanged (found None)", "712": "original (no accepted edit)", "714": "changed (accepted edit)"}},
-      "validate_completed_envelope": {"sites": {"357": "message.status not completed (unsupported)", "373": "aligned_metadata_clean reject (unsupported)", "378": "supported"}},
-      "aligned_metadata_clean": {"sites": {"245": "rejected (non-empty/non-list aligned list)", "246": "clean"}}
+  "native_finding": {
+    "attempt": 7,
+    "harness": "private q035b_qualification.py (type-observer; fidelity 6/6 + native phase)",
+    "product_epoch": "original contract bed932b2 (pre-fix), actual HEAD de9a732 + no product mutation",
+    "observed_logprobs_type": "NULL (is_none)",
+    "worker_observation": "ALIGNED_REJECT@245:logprobs shape=is_none -> validate@373 -> transform@707",
+    "client_observation": "independent client parse also is_none",
+    "http": 200,
+    "response_bytes": 7160,
+    "elapsed_seconds": 28.7449,
+    "eligible_edit": false,
+    "main_dispatches_measured": 1,
+    "review_dispatches_measured": 0,
+    "review_measurement": "CONCEPT_USAGE_OBSERVER concept-review-usage calls=0",
+    "lifecycle": {
+      "main_return": 0,
+      "shutdown_complete": true,
+      "worker_joined": true,
+      "listener_closed": true,
+      "child_reaped": true
     },
-    "local_fidelity": {
-      "target_posts": 0,
-      "cases_all_match": true,
-      "cases": [
-        {"class": "malformed JSON", "transform": "MALFORMED_PROXYERROR@704", "error_class": "ProxyError"},
-        {"class": "unsupported (message.status in_progress)", "contract": "UNSUPPORTED@357", "transform": "ABSTAIN_UNSUPPORTED@707"},
-        {"class": "clean eligible", "aligned": "ALIGNED_METADATA_CLEAN@246", "contract": "SUPPORTED@378", "transform": "ORIGINAL_NO_EDIT@712"},
-        {"class": "eligible controlled edit", "aligned": "ALIGNED_METADATA_CLEAN@246", "contract": "SUPPORTED@378", "transform": "CHANGED_EDIT@714"}
-      ],
-      "readonly_equivalence": {"clean": true, "controlled_edit": true},
-      "reuse": "exact-hash 032a real-HTTP worker-observer fidelity (session 83494, rc 0, target_posts 0) reused with its stated local-feasibility scope"
+    "no_further_native_posts_after_attempt_7": true,
+    "qualification": "serving QUALIFIED (bounded: HTTP 200, completed, clean lifecycle); repair eligibility NOT established (no eligible edit reached; original bypass at contract line 373/707)"
+  },
+  "owner_policy_supersession": {
+    "timing": "mid-035-b round, after native attempt 7 and before R4 test writing",
+    "new_policy": "Runnnable proxy must ALWAYS remove API logprobs metadata from defined token-probability response locations, regardless of repair attempt / accepted correction; presence/value cannot block repair. No recursive removal of same-named keys in user data or metadata echoes. Consistent supported JSON + SSE, no configuration switch. Preserve citations/annotations/usage/IDs/status/other metadata, malformed/incomplete/capture/cancellation semantics, mandatory pinned Pandoc, exact original spans.",
+    "scope": "035-c (NOT implemented in this 035-b round)",
+    "superseded_null_only_patch": {
+      "file": "concept-verification/responses_contract.py",
+      "sha256": "adb9b050667376d9925a7e04551ce500741f610e69da892b5187ee3ba7618480",
+      "description": "22-line diff in aligned_metadata_clean: if key == 'logprobs' and item is None: continue (before the non-list/non-empty reject). Preserves null field in returned envelope. Annotations policy unchanged.",
+      "status": "SUPERSEDED PARTIAL WIP (committed for continuation; NOT claimed accepted/final/ready-to-merge/deploy)",
+      "root_real_http_proof": {
+        "receipt": "035b-root-postfix-real-HTTP-null-and-protected-negative-checks-20261111.json",
+        "contract_sha256_tested": "adb9b050667376d9925a7e04551ce500741f610e69da892b5187ee3ba7618480",
+        "result": "PASSED 6 actual HTTP cases",
+        "cases": "null-edit with protected Unicode/unchanged slices; clean zero-review; annotations-NULL still denied; populated/false/object logprobs denied",
+        "boundary": "real Engine/Pandoc/SQLite/detector/reviewer HTTP/CPU acceptance/patcher; only external main/review endpoints fake; 0 native posts",
+        "classification": "BASELINE/SUPERSEDED desired policy proof, NOT new owner policy proof"
+      },
+      "root_typed_observer_equivalence": {
+        "receipt": "035b-root-actual-HTTP-typed-observer-equivalence-20261111.json",
+        "result": "PASSED 6 cases / 12 requests (with/without typed observer), pre-fix"
+      }
     }
   },
-  "model_route": {
-    "class": "native RTX3090 owner-selected Responses route",
-    "method": "POST /responses",
-    "model_main": "qwen3.8-27b-rtx3090",
-    "model_review": "qwen3.8-27b-rtx3090",
-    "endpoint_url": "omitted (native URL not published)",
-    "a100_traffic": false,
-    "chat_completions": false,
-    "get_models": false
+  "source_identity": {
+    "note": "proxy.py unchanged; responses_contract.py = superseded null-only WIP patch (committed); original contract preserved in history.",
+    "concept-verification/proxy.py": "836b78cc3a07ce207a842a8f67f71368a1be2ead79ec31923d96bd74318c7c43",
+    "concept-verification/responses_contract.py_current": "adb9b050667376d9925a7e04551ce500741f610e69da892b5187ee3ba7618480",
+    "concept-verification/responses_contract.py_original_pre_fix": "bed932b2ba2ceb2f77b873a9c3ad1d25a8d9c69d701aae3522707292c59732e6"
   },
   "ledger": {
-    "identity": "new private attempt ledger (no native path published)",
+    "identity": "new private attempt ledger (035-b)",
     "owner_maximum_additional": 1000000,
     "previous_ledger_sha256": "a5893b8db6d9d623dacb0a72aad74fb13cb251eb0d8babc7ebdfa292580a1978",
     "previous_ledger_preserved": true,
-    "attempts_recorded": 6,
-    "actual_main_posts": 3,
-    "reserved_review_slots": 3,
-    "reviews_used": 0,
-    "accounting": "main + at-most-one review reserved before dispatch; uncertain delivery charged; no auto-retry"
+    "total_allocations": 8,
+    "actual_main_posts": 4,
+    "reserved_review_slots": 4,
+    "review_dispatches_measured": 0,
+    "accounting": "main + at-most-one review reserved before dispatch; conservative-unknown charged for reserved review slots (not confirmed used); no auto-retry"
   },
-  "native_rounds": [
-    {
-      "tag": "R3", "observer": "OFF", "http": 200, "response_bytes": 2004,
-      "elapsed_seconds": 3.6343, "client_verdict": "not_supported_at_client",
-      "output_class": "ENVELOPE_INVALID", "review_calls": 0, "internal_predicate": null,
-      "main_return": 0, "cleanup": {"shutdown_finished": true, "worker_joined": true, "listener_closed": true}
-    },
-    {
-      "tag": "R4", "observer": "ON", "http": 200, "response_bytes": 2366,
-      "elapsed_seconds": 5.6023, "client_verdict": "not_supported_at_client",
-      "output_class": "ENVELOPE_INVALID", "review_calls": 0,
-      "internal_predicate": "validate_completed_envelope UNSUPPORTED@373; transform_json ABSTAIN@707",
-      "main_return": 0, "cleanup": {"shutdown_finished": true, "worker_joined": true, "listener_closed": true}
-    },
-    {
-      "tag": "R4b", "observer": "ON+aligned_metadata_clean", "http": 200, "response_bytes": 2524,
-      "elapsed_seconds": 6.3706, "client_verdict": "not_supported_at_client",
-      "output_class": "ENVELOPE_INVALID", "review_calls": 0,
-      "internal_events": [
-        "aligned_metadata_clean ALIGNED_METADATA_REJECTED@245:logprobs",
-        "validate_completed_envelope UNSUPPORTED@373",
-        "transform_json ABSTAIN_UNSUPPORTED@707"
-      ],
-      "internal_predicate": "aligned_metadata_clean@245 (field=logprobs) -> validate_completed_envelope@373 -> transform_json@707",
-      "main_return": 0, "cleanup": {"shutdown_finished": true, "worker_joined": true, "listener_closed": true}
-    }
-  ],
-  "earliest_failing_boundary": {
-    "classification": "safely-completed UNSUPPORTED unchanged bypass (not a malformed/main/protocol failure)",
-    "causal_chain": "native qwen3.8-27b-rtx3090 completed Responses envelope carries a NON-EMPTY 'logprobs' aligned-metadata list on the single assistant output_text part -> aligned_metadata_clean (responses_contract.py:245) rejects -> validate_completed_envelope (responses_contract.py:373) returns None -> transform_json (proxy.py:707) abstains and returns raw unchanged -> zero review calls -> independent client judge also not-supported at the same contract line 373",
-    "reproduction": "reproduced across R4 and R4b (two independent native rounds), both field=logprobs; R3 (trace off) reproduces the client not-supported baseline",
-    "review_calls": 0,
-    "native_edit": "UNPROVEN (no eligible repair reached; original bypass is not an accepted edit)"
-  },
-  "qualification": {
-    "native_serving": "QUALIFIED (bounded): HTTP 200, completed, bounded latency (~3.6-6.4s), owned loopback port 0, explicit caller Authorization, child-only in-process reviewer key, real transport/contract/detector/reviewer/acceptance/patcher, clean lifecycle (normal main return, bounded shutdown complete, serving worker joined, listener closed, child reaped), concurrency 1, zero auto-retry",
-    "native_repair_eligibility": "BLOCKED at the strict stateless contract: the native output_text part's non-empty logprobs aligned metadata is rejected before any eligible repair, so no main->review->validation->final edit path is reached",
-    "caller_profile_correction_available": false,
-    "caller_profile_note": "the request contract optional field set is {temperature, top_p, top_k, max_output_tokens, stop, metadata}; there is no logprobs request field, so the native logprobs emission cannot be suppressed by an ordinary caller-profile adjustment within the current contract",
-    "product_mutation_required": true
-  },
-  "remediation_proposal_same_pr_bounded": {
-    "owner": "strategy orders; product code remains frozen under 035-a (no mutation performed here)",
-    "candidates": [
-      "normalize: strip non-empty 'logprobs' (and 'annotations') from the output_text part before supported-envelope validation, preserving completion/statelessness and the editable text (a changed answer can never retain stale aligned metadata, per the existing docstring); then the envelope is a supported completed response and the main->review->independent-validation->exact-span-edit path becomes reachable and retestable",
-      "or relax aligned_metadata_clean for the recognized native logprobs representation (bounded, still proving completion/statelessness/editable text)"
-    ],
-    "retest": "one bounded native round trip with the readonly observer to confirm a supported completed envelope and (where a controlled edit is produced) an accepted exact-span edit, zero auto-retry"
-  },
+  "umask_imperfection_note": "Prior 035-a harness and new 035-b harness were initially created at 0664 (files) and 0775 (__pycache__) due to an initial umask lapse before tightening; Root independently tightened to 0600/0700 with bytes unchanged, before native attempt 7. Private parents remain 0700. Receipts: 035b-root-private-prior-harness-mode-tightening-20261111.json and 035b-root-new-harness-private-mode-tightening-20261111.json. Do not claim perfect prior umask or absence of pycache.",
   "integrity": {
-    "product_bytes_frozen": true,
-    "no_product_test_dependency_workflow_source_manifest_changes": true,
+    "product_bytes_frozen_in_035_a": true,
+    "product_mutation_in_035_b": "null-only patch (superseded WIP, committed for continuation; NOT final policy)",
     "no_dataset_service_changes": true,
     "concurrency": 1,
     "zero_auto_retry": true,
-    "no_raw_answer_prompt_target_replacement_header_id_private_path_or_url_in_public_artifacts": true
+    "no_raw_answer_prompt_target_replacement_header_id_private_path_or_url_in_public_artifacts": true,
+    "old_035a_report_immutable": true,
+    "old_035a_order_immutable": true,
+    "private_initial_034_unchanged": true
   },
   "not_performed": [
-    "no product code mutation (frozen until strategy orders a same-PR fix)",
-    "no 965 full-suite rerun for counts",
+    "no unconditional ALWAYS-remove implementation (that is 035-c)",
+    "no R4 null-only tests written (stopped at owner supersession)",
+    "no further native 035-b traffic after attempt 7",
+    "no 965 full-suite rerun",
     "no human dataset / quality-rate / deployment / milestone acceptance",
     "no A100 product traffic, GET models, unauthenticated probe, or Chat Completions",
-    "no service/weights/quantization/GPU/network/credential change"
-  ]
+    "no service/weights/quantization/GPU/network/credential change",
+    "no reset/stash/rebase/amend or rewriting issued history"
+  ],
+  "next_round": {
+    "id": "035-c",
+    "same_pr": 37,
+    "requirement": "Implement owner's unconditional ALWAYS-remove logprobs policy at defined API locations (JSON + SSE), with meaningful tests (absent/null/empty/populated/unexpected-type, zero-review and accepted-edit, other fields unchanged). No config switch. Preserve all other metadata semantics."
+  }
 }

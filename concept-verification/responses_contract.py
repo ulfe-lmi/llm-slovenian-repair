@@ -231,16 +231,26 @@ def validate_request(body: bytes) -> RequestContract:
 def aligned_metadata_clean(value: dict[str, object]) -> bool:
     """Recognized aligned metadata beside an editable answer.
 
-    ``annotations``/``logprobs`` must be absent or an empty list: a
-    non-empty (or non-list) aligned list is stale data a changed answer
-    can never retain, and a non-list shape is not a recognized aligned
-    field (order 015-a, requirement 5).  Only the explicitly named
-    answer-shaped representations are checked; metadata echoes are never
-    scanned.
+    ``annotations`` must be absent or an empty list: a non-empty (or
+    non-list) aligned list is stale data a changed answer can never
+    retain, and a non-list shape is not a recognized aligned field
+    (order 015-a, requirement 5).  ``logprobs`` additionally treats an
+    explicit ``null`` as unset, like an absent or an empty list: a native
+    ``logprobs: null`` carries no token/offset alignment and is retained
+    exactly in the returned envelope, while a nonempty ``logprobs`` list
+    or any wrong type stays ineligible with zero review calls (order
+    035-b, R3).  Only the explicitly named answer-shaped representations
+    are checked; metadata echoes are never scanned.
     """
     for key in ("annotations", "logprobs"):
         if key in value:
             item = value[key]
+            if key == "logprobs" and item is None:
+                # Typed-null logprobs is unset: no token/offset alignment to
+                # retain.  The exact null field is preserved in the returned
+                # envelope (no stripping); a nonempty list or any wrong type
+                # is rejected below, and the annotations policy is unchanged.
+                continue
             if not isinstance(item, list) or item:
                 return False
     return True
