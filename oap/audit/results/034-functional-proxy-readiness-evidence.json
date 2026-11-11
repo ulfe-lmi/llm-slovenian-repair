@@ -1,0 +1,634 @@
+{
+  "artifact": "034-functional-proxy-readiness-evidence",
+  "round": "034-a",
+  "objective": "034",
+  "audited_main": "c36ed4f42534bc13df4dac2b418fb50262d47d06",
+  "audited_tree": "df075746203c1eb6d6e3a288f3e2d7eede2d92de",
+  "order": {
+    "path": "oap/orders/034-a-functional-proxy-readiness-audit.md",
+    "sha256": "586ca6cbea712bcfe663bcf2c73d68af9601b205c6f4f2a134c256fb58241b65"
+  },
+  "source_bytes": {
+    "PLAN_md": {
+      "revision": "c36ed4f42534bc13df4dac2b418fb50262d47d06",
+      "sha256": "d2aa1d98cc5177ac6093ab3aeb79903b192780910ef2d1712839b474fb5adbf0",
+      "lines": 757
+    },
+    "ARCHITECTURE_md": {
+      "revision": "c36ed4f42534bc13df4dac2b418fb50262d47d06",
+      "sha256": "a16e0f87bdb21f6920aa63119cf5be148b6c8b68bf1337c44006d54b7a7261f7",
+      "lines": 516
+    },
+    "requirements_registry": {
+      "path": "oap/audit/requirements.json",
+      "rows": 64,
+      "mvp_rows": 59
+    }
+  },
+  "private_initial_record": {
+    "logical_id": "PRIVATE_INITIAL_034",
+    "bytes": 24661,
+    "sha256": "bb29467e687ad8d75810d8c6290225e5818b3a61b8e6e5acccb38e54bd3ade21",
+    "tracked_public_file": false,
+    "bytes_rewritten": false,
+    "Root_preserved": true,
+    "observation_not_write": "the 09:05:59 source-observation time is pre-generation, not the write time; actual initial exec/save/hash 09:08:52 before the first deferred-content read 09:09:27",
+    "citation": "logical ID + byte count + hash + provenance only (no native host path)"
+  },
+  "source_derived_projection": {
+    "source": {
+      "logical_id": "PRIVATE_INITIAL_034",
+      "bytes": 24661,
+      "sha256": "bb29467e687ad8d75810d8c6290225e5818b3a61b8e6e5acccb38e54bd3ade21",
+      "tracked_public_file": false,
+      "bytes_rewritten": false,
+      "note": "privacy-safe mechanical subset of the frozen private initial record; derivation_inputs native path fields omitted; no native host paths published; the private original is unchanged"
+    },
+    "owner_scope_derived": [
+      {
+        "req": "OS-1 mandatory Pandoc structural parser",
+        "text": "Pandoc is the mandatory structural parser, explicitly installed and versioned with a startup check.",
+        "classification": "APPLICABLE_MVP",
+        "source": "owner_scope (elevates Markdown structural parsing to a mandatory, version-checked Pandoc dependency)",
+        "relates_to": [
+          "LR-006",
+          "LR-007",
+          "D03",
+          "PLAN s5.1/5.2",
+          "ARCH s7"
+        ],
+        "note": "Full PLAN/ARCH require Markdown span-mapping to the original and prohibit Markdown reserialization as a patcher, but do not name Pandoc. The owner scope makes the pinned Pandoc the mandatory structural parser with a startup version check. This is a functional requirement of the current runnable proxy, not present verbatim in the historical PLAN/ARCH product bytes."
+      },
+      {
+        "req": "OS-2 exact-original-span corrections only",
+        "text": "Corrections operate only on proved exact spans of the original answer; never regenerate by rendering the AST; no ambiguous substring recovery; unproved regions remain unchanged; parse/mapping failure returns the safely completed original without repair.",
+        "classification": "APPLICABLE_MVP",
+        "source": "owner_scope (sharpens LR-006/LR-007 and the patcher contract)",
+        "relates_to": [
+          "LR-006",
+          "LR-007",
+          "D03",
+          "D06",
+          "ARCH s5,s6,s7,s12",
+          "PLAN s5.2,s10"
+        ],
+        "note": "Adds explicit prohibitions (no AST rendering to regenerate, no ambiguous substring recovery) and the parse/mapping-failure -> return-completed-original behavior."
+      },
+      {
+        "req": "OS-3 machine-sensitive content preservation",
+        "text": "Preserve established code, equations, HTML, links, configuration, quoted and other machine-sensitive content, Unicode and all unapproved slices.",
+        "classification": "APPLICABLE_MVP",
+        "source": "owner_scope (sharpens LR-007 protected-material set)",
+        "relates_to": [
+          "LR-007",
+          "D03",
+          "PLAN s5.1",
+          "ARCH s7"
+        ],
+        "note": "Explicitly enumerates equations, HTML, and configuration in addition to code/links/quoted/Unicode."
+      },
+      {
+        "req": "OS-4 no separate human evaluation dataset",
+        "text": "No separate human evaluation dataset; excluded, not deferred.",
+        "classification": "EXCLUDED_OWNER",
+        "source": "owner_scope",
+        "relates_to": [
+          "M01",
+          "M04 (measured)",
+          "M07",
+          "S01",
+          "PLAN s14.2",
+          "ARCH s16.3"
+        ],
+        "note": "Excluded, not deferred. Distinct from checked-in miniature synthetic fixtures (allowed for structural/contract tests)."
+      },
+      {
+        "req": "OS-5 no research restart / no unrelated milestone gates",
+        "text": "Do not restart research or invent unrelated milestone gates.",
+        "classification": "AUDIT_CONSTRAINT",
+        "source": "owner_scope"
+      },
+      {
+        "req": "OS-6 sole foreground CLI",
+        "text": "Only the existing foreground coding CLI may do this work; no additional/background agents, codex exec, provider, home, or auth changes or model/service/network changes.",
+        "classification": "AUDIT_CONSTRAINT",
+        "source": "owner_scope + order R1 + C-FG-01"
+      },
+      {
+        "req": "OS-7 offline audit / zero live target requests",
+        "text": "Audit-only offline action: zero live target requests. Native serving compatibility, linguistic quality, software behavior and deployment authority are separate evidence layers.",
+        "classification": "AUDIT_CONSTRAINT",
+        "source": "owner_scope + order Non-goals + LR-014 evidence layering"
+      },
+      {
+        "req": "OS-8 owner retains milestone label and deployment/exposure",
+        "text": "The owner retains final milestone labeling and deployment/exposure decisions.",
+        "classification": "AUDIT_CONSTRAINT",
+        "source": "owner_scope + order",
+        "note": "Therefore deployment_authorized=false and human_milestone_accepted=false in the ICA artifact; this audit never self-authors human acceptance."
+      }
+    ],
+    "full_source_requirements": {
+      "lr_invariants": [
+        {
+          "id": "LR-001",
+          "invariant": "Complete main generation and capture before CPU review, repair inference and delivery of answer text.",
+          "plan_basis": "PLAN s1,s3,s11.3",
+          "functional_applicability": "APPLICABLE_MVP",
+          "audit_note": "metadata.lr subset flags LR-002/003/006/007/009/010/011/013/014 for this round"
+        },
+        {
+          "id": "LR-002",
+          "invariant": "CPU evidence chooses whether review is warranted; no eligible suspicion means zero review calls and unchanged text.",
+          "plan_basis": "PLAN s1,s7",
+          "functional_applicability": "APPLICABLE_MVP",
+          "audit_note": "metadata.lr subset flags LR-002/003/006/007/009/010/011/013/014 for this round"
+        },
+        {
+          "id": "LR-003",
+          "invariant": "Review targets are preassigned words or short phrases, not model tokens or unrestricted sentences.",
+          "plan_basis": "PLAN s1,s7.2,s8",
+          "functional_applicability": "APPLICABLE_MVP",
+          "audit_note": "metadata.lr subset flags LR-002/003/006/007/009/010/011/013/014 for this round"
+        },
+        {
+          "id": "LR-004",
+          "invariant": "Ask about suitability of the specific expression; permit keep and needs_wider_edit; do not demand a change.",
+          "plan_basis": "PLAN s8",
+          "functional_applicability": "APPLICABLE_MVP",
+          "audit_note": "metadata.lr subset flags LR-002/003/006/007/009/010/011/013/014 for this round"
+        },
+        {
+          "id": "LR-005",
+          "invariant": "Construct a new isolated review request; never contaminate the main conversation, inherit its linkage, or recurse through repair.",
+          "plan_basis": "PLAN s4,s11.2",
+          "functional_applicability": "APPLICABLE_MVP",
+          "audit_note": "metadata.lr subset flags LR-002/003/006/007/009/010/011/013/014 for this round"
+        },
+        {
+          "id": "LR-006",
+          "invariant": "Reviewer output is an untrusted local proposal; code validates and inserts replacements; the model never regenerates the answer.",
+          "plan_basis": "PLAN s8-10",
+          "functional_applicability": "APPLICABLE_MVP",
+          "audit_note": "metadata.lr subset flags LR-002/003/006/007/009/010/011/013/014 for this round"
+        },
+        {
+          "id": "LR-007",
+          "invariant": "Preserve every original substring outside accepted spans, including protected material and original formatting.",
+          "plan_basis": "PLAN s5,s10",
+          "functional_applicability": "APPLICABLE_MVP",
+          "audit_note": "metadata.lr subset flags LR-002/003/006/007/009/010/011/013/014 for this round"
+        },
+        {
+          "id": "LR-008",
+          "invariant": "Preserve EXACT, CENSORED and UNAVAILABLE evidence semantics; missing truncated data is not zero.",
+          "plan_basis": "PLAN s6",
+          "functional_applicability": "APPLICABLE_MVP",
+          "audit_note": "metadata.lr subset flags LR-002/003/006/007/009/010/011/013/014 for this round"
+        },
+        {
+          "id": "LR-009",
+          "invariant": "Strict acceptance needs appropriate independent evidence; frequency or self-reported model confidence alone is insufficient.",
+          "plan_basis": "PLAN s9",
+          "functional_applicability": "APPLICABLE_MVP",
+          "audit_note": "metadata.lr subset flags LR-002/003/006/007/009/010/011/013/014 for this round"
+        },
+        {
+          "id": "LR-010",
+          "invariant": "Use bounded, one-pass initial review; do not introduce an automatic generative correction/retry loop.",
+          "plan_basis": "PLAN s3,s13",
+          "functional_applicability": "APPLICABLE_MVP",
+          "audit_note": "metadata.lr subset flags LR-002/003/006/007/009/010/011/013/014 for this round"
+        },
+        {
+          "id": "LR-011",
+          "invariant": "Optional repair failure preserves an already safely captured original; never mask main errors, incomplete output or hard capture limits.",
+          "plan_basis": "PLAN s13.3",
+          "functional_applicability": "APPLICABLE_MVP",
+          "audit_note": "metadata.lr subset flags LR-002/003/006/007/009/010/011/013/014 for this round"
+        },
+        {
+          "id": "LR-012",
+          "invariant": "Reuse the existing Qwen; CPU-side repair infrastructure must not load another large GPU model or mutate the protected deployment.",
+          "plan_basis": "PLAN s1,s11-13",
+          "functional_applicability": "APPLICABLE_MVP",
+          "audit_note": "metadata.lr subset flags LR-002/003/006/007/009/010/011/013/014 for this round"
+        },
+        {
+          "id": "LR-013",
+          "invariant": "Production logs contain no user text, target/replacement strings, prompts or secrets; evaluation is separately authorized.",
+          "plan_basis": "PLAN s13.4",
+          "functional_applicability": "APPLICABLE_MVP",
+          "audit_note": "metadata.lr subset flags LR-002/003/006/007/009/010/011/013/014 for this round"
+        },
+        {
+          "id": "LR-014",
+          "invariant": "Code correctness, model compatibility, linguistic benefit and deployment/release authority require separate evidence.",
+          "plan_basis": "PLAN s14-16",
+          "functional_applicability": "APPLICABLE_MVP",
+          "audit_note": "metadata.lr subset flags LR-002/003/006/007/009/010/011/013/014 for this round"
+        }
+      ],
+      "plan16_mvp_criteria": [
+        {
+          "criterion": 1,
+          "text": "Full main answer captured before repair call and before user display.",
+          "functional_applicability": "APPLICABLE_MVP",
+          "note": "Criterion 8 reporting structure is applicable; full measured benefit/damage on held-out real answers is constrained by the EXCLUDED_OWNER human evaluation dataset (see excluded_owner)."
+        },
+        {
+          "criterion": 2,
+          "text": "Without sufficient suspicion no additional Qwen call.",
+          "functional_applicability": "APPLICABLE_MVP",
+          "note": "Criterion 8 reporting structure is applicable; full measured benefit/damage on held-out real answers is constrained by the EXCLUDED_OWNER human evaluation dataset (see excluded_owner)."
+        },
+        {
+          "criterion": 3,
+          "text": "Qwen may only propose replacement of assigned span or answer leave.",
+          "functional_applicability": "APPLICABLE_MVP",
+          "note": "Criterion 8 reporting structure is applicable; full measured benefit/damage on held-out real answers is constrained by the EXCLUDED_OWNER human evaluation dataset (see excluded_owner)."
+        },
+        {
+          "criterion": 4,
+          "text": "Main history does not contain the repair conversation or its internal results.",
+          "functional_applicability": "APPLICABLE_MVP",
+          "note": "Criterion 8 reporting structure is applicable; full measured benefit/damage on held-out real answers is constrained by the EXCLUDED_OWNER human evaluation dataset (see excluded_owner)."
+        },
+        {
+          "criterion": 5,
+          "text": "No change happens outside programmatically verified spans.",
+          "functional_applicability": "APPLICABLE_MVP",
+          "note": "Criterion 8 reporting structure is applicable; full measured benefit/damage on held-out real answers is constrained by the EXCLUDED_OWNER human evaluation dataset (see excluded_owner)."
+        },
+        {
+          "criterion": 6,
+          "text": "Invalid proposal or optional-procedure cancellation does not damage the already completed answer.",
+          "functional_applicability": "APPLICABLE_MVP",
+          "note": "Criterion 8 reporting structure is applicable; full measured benefit/damage on held-out real answers is constrained by the EXCLUDED_OWNER human evaluation dataset (see excluded_owner)."
+        },
+        {
+          "criterion": 7,
+          "text": "Published cut frequencies are not treated as complete statistics.",
+          "functional_applicability": "APPLICABLE_MVP",
+          "note": "Criterion 8 reporting structure is applicable; full measured benefit/damage on held-out real answers is constrained by the EXCLUDED_OWNER human evaluation dataset (see excluded_owner)."
+        },
+        {
+          "criterion": 8,
+          "text": "There is a transparent report on benefit, damage, latency and additional usage.",
+          "functional_applicability": "APPLICABLE_MVP",
+          "note": "Criterion 8 reporting structure is applicable; full measured benefit/damage on held-out real answers is constrained by the EXCLUDED_OWNER human evaluation dataset (see excluded_owner)."
+        }
+      ],
+      "plan15_work_blocks": {
+        "demonstrator_D01_D07": [
+          {
+            "id": "D01",
+            "text": "Contracts and policy (span/evidence/proposal/result structures; separate keep vs replace).",
+            "stage": "Demonstrator",
+            "functional_applicability": "APPLICABLE_MVP"
+          },
+          {
+            "id": "D02",
+            "text": "Limited reproducible data import with manifest and correct missing-data distinction (EXACT/CENSORED/UNAVAILABLE).",
+            "stage": "Demonstrator",
+            "functional_applicability": "APPLICABLE_MVP"
+          },
+          {
+            "id": "D03",
+            "text": "Protection and original-position mapping; tokenization without changing the original; code/URL/Unicode tests.",
+            "stage": "Demonstrator",
+            "functional_applicability": "APPLICABLE_MVP"
+          },
+          {
+            "id": "D04",
+            "text": "First CPU-detector: distinguishes selected suspicious spots on a small set; does not send everything to the model.",
+            "stage": "Demonstrator",
+            "functional_applicability": "APPLICABLE_MVP"
+          },
+          {
+            "id": "D05",
+            "text": "Isolated reviewer: fake and real Qwen clients return validated local decisions.",
+            "stage": "Demonstrator",
+            "functional_applicability": "APPLICABLE_MVP"
+          },
+          {
+            "id": "D06",
+            "text": "Confirmation and patcher: code accepts or rejects proposals and preserves all other segments.",
+            "stage": "Demonstrator",
+            "functional_applicability": "APPLICABLE_MVP"
+          },
+          {
+            "id": "D07",
+            "text": "CLI and first review: display original, proposals, final version and reasons; real cases are not hard-coded special rules.",
+            "stage": "Demonstrator",
+            "functional_applicability": "APPLICABLE_MVP"
+          }
+        ],
+        "experimental_mvp_M01_M07": [
+          {
+            "id": "M01",
+            "text": "Initial labeled set: real answers, correct controls, separate threshold-tuning part.",
+            "stage": "Experimental MVP",
+            "functional_applicability": "EXCLUDED_OWNER",
+            "note": "Owner excludes a SEPARATE HUMAN EVALUATION DATASET (excluded, not deferred). Checked-in miniature synthetic fixtures remain allowed for structural/contract tests; a human-labeled held-out evaluation set is excluded."
+          },
+          {
+            "id": "M02",
+            "text": "Lemmas and morphology: verified CPU analysis; separate wrong lexeme choice from wrong inflection.",
+            "stage": "Experimental MVP",
+            "functional_applicability": "OPTIONAL_NOT_BLOCKING",
+            "note": "PLAN s6.1 / ARCH s4.1: CPU linguistic analyzers are optional bounded dependencies and not a precondition for the first limited trial."
+          },
+          {
+            "id": "M03",
+            "text": "Short phrases: limited alarm merging, clear edit width, working needs_wider_edit.",
+            "stage": "Experimental MVP",
+            "functional_applicability": "APPLICABLE_MVP",
+            "note": "PLAN s7.2: the system must support one-or-more-word spans from the start (LR-003/LR-004)."
+          },
+          {
+            "id": "M04",
+            "text": "Acceptance calibration: rule versions; measurements of correctness/damage/coverage by error class.",
+            "stage": "Experimental MVP",
+            "functional_applicability": "EXCLUDED_OWNER",
+            "note": "The rule-versioning/policy structure is applicable; the measured calibration (correctness/damage/coverage on real held-out data) depends on the excluded human evaluation dataset."
+          },
+          {
+            "id": "M05",
+            "text": "Limits and failures: queue, cancellations, time/size bounds, safe return to original.",
+            "stage": "Experimental MVP",
+            "functional_applicability": "APPLICABLE_MVP",
+            "note": "LR-010/LR-011 and ARCH s14 bounded resources / failure contract."
+          },
+          {
+            "id": "M06",
+            "text": "Non-streaming API path: one clearly supported text shape; context preservation; no recursion.",
+            "stage": "Experimental MVP",
+            "functional_applicability": "APPLICABLE_MVP",
+            "note": "The HTTP adapter is the 'runnable proxy' delivery path (PLAN s11)."
+          },
+          {
+            "id": "M07",
+            "text": "Comparison report: compare agreed method with original and basic comparison methods.",
+            "stage": "Experimental MVP",
+            "functional_applicability": "EXCLUDED_OWNER",
+            "note": "An evaluation comparison report that requires the human evaluation dataset is excluded; a structural/descriptive report of the pipeline remains possible."
+          }
+        ],
+        "verified_service_S01_S05": [
+          {
+            "id": "S01",
+            "text": "Wider negative tests (more correct/technical text; statistically meaningful harm report).",
+            "stage": "Verified service",
+            "functional_applicability": "LATER_STAGE",
+            "note": "Verified-service milestone; harm measurement also depends on excluded evaluation data."
+          },
+          {
+            "id": "S02",
+            "text": "Wider data support (collocations or more complete n-grams where measurements show benefit; rights arranged).",
+            "stage": "Verified service",
+            "functional_applicability": "LATER_STAGE",
+            "note": "Verified-service milestone."
+          },
+          {
+            "id": "S03",
+            "text": "Production connection (explicit gateway path, separate repair usage, limited load).",
+            "stage": "Verified service",
+            "functional_applicability": "LATER_STAGE",
+            "note": "Deployment; owner retains deployment/exposure authority."
+          },
+          {
+            "id": "S04",
+            "text": "Installation and rollback (packaging, health checks, configuration, disable repair without changing Qwen).",
+            "stage": "Verified service",
+            "functional_applicability": "LATER_STAGE",
+            "note": "Deployment; owner retains deployment/exposure authority."
+          },
+          {
+            "id": "S05",
+            "text": "Final documentation (supported/unsupported cases, data versions, known limits, repeatable tests).",
+            "stage": "Verified service",
+            "functional_applicability": "LATER_STAGE",
+            "note": "Verified-service milestone (functional documentation of supported/unsupported cases is still expected as part of the audit)."
+          }
+        ]
+      }
+    },
+    "applicability_model": {
+      "audited_focus": "the runnable Slovenian repair proxy (completed-response capture -> CPU detection -> isolated same-Qwen one-batch review -> strict CPU acceptance -> exact original-slice patching -> final delivery) and whether its functional MVP is ready",
+      "vocab": {
+        "APPLICABLE_MVP": "must hold for the functional MVP of the runnable proxy",
+        "LATER_STAGE": "later milestone (verified service / deployment); not MVP-blocking",
+        "EXCLUDED_OWNER": "explicitly excluded by owner (excluded, not deferred)",
+        "OPTIONAL_NOT_BLOCKING": "optional; not required for functional MVP readiness",
+        "AUDIT_CONSTRAINT": "constrains this offline audit only; not a product requirement"
+      }
+    },
+    "excluded_owner": [
+      {
+        "id": "XO-1",
+        "description": "A separate human evaluation dataset (real target-model answers with human labels, held-out calibration/test splits).",
+        "status": "EXCLUDED (not deferred)",
+        "consequence": "M01/M04-measured/M07/S01 linguistic-quality measurement is not in scope; PLAN s14.3 '99% precision / 1 harmful edit per 10k words' remain unmeasured goals, not results."
+      },
+      {
+        "id": "XO-2",
+        "description": "Research restart.",
+        "status": "EXCLUDED (not deferred)",
+        "consequence": "No new research programme, no new milestone gates invented."
+      }
+    ]
+  },
+  "full_architecture_coverage": {
+    "intro": "12 full-architecture technical facets assessed at audited main c36ed4f with real named positive/negative tests and seams; the 59-row ICA matrix and the 965 summary alone do not prove these clauses.",
+    "facets": [
+      {
+        "id": "A",
+        "title": "MAIN_FINISHED / capture ownership; incomplete/error/hard-capture semantics",
+        "source_clause": "ARCH 5/13/14",
+        "entry": "capture_transport (bounded collector, require_complete_sse) + proxy capture (response.completed gate before any review/delivery)",
+        "positive": "test_capture_transport.CollectorDirectTests.test_split_codepoint_across_wire_chunks; test_concept.ConceptTests.test_proxy_stops_at_terminal_event_without_eof; test_proxy_delivers_buffered_terminal_event_without_eof; test_main_lifecycle.MainLifecycleTests.test_normal_serve_completion",
+        "negative": "test_capture_transport.test_invalid_utf8_byte_rejected; test_truncated_final_codepoint_rejected; test_chunked_huge_size_exceeds_bound (hard capture limit); test_concept.test_proxy_incomplete_stream_times_out_and_normalizes_path; test_proxy_forwards_non_200_status_and_content_type; test_main_lifecycle.MainLifecycleTests.test_failed_serve_propagates_ordinary_error / test_system_exit_primary_keeps_identity_over_nonordinary_cleanup",
+        "class": "IMPLEMENTED",
+        "applicability": "APPLICABLE_MVP",
+        "limit": "loopback concept; zero live main calls; main error/incomplete/hard-capture never a repaired success"
+      },
+      {
+        "id": "B",
+        "title": "Separate finite intake/setup/header/body/reviewer/evidence/delivery clocks; startup config validation before bind and at-use",
+        "source_clause": "ARCH 14",
+        "entry": "config.py (named timeout constants) + upstream_setup (setup) + header_transport (header) + capture_transport (body) + request_admission (intake) + evidence_budget + review_worker (reviewer) + delivery_transport (delivery) + proxy startup",
+        "positive": "test_upstream_setup (setup budget); test_header_transport (header budget); test_delivery_transport (delivery budget); test_main_lifecycle.test_reviewer_timeout_explicit_45_only_changes_reviewer (reviewer clock independent); test_evidence_budget.InvalidPolicyBoundaryTests.test_startup_invalid_policy_fails_before_bind_and_index; test_analysis_policy.StartupUseOrderingTests.test_at_use_invalid_policy_precedes_index_and_pandoc",
+        "negative": "test_evidence_budget.test_use_invalid_fields_rejected_before_any_file; test_analysis_policy.test_invalid_values_rejected_per_field_without_coercion; test_main_lifecycle.test_invalid_reviewer_timeout_rejected_before_listener; test_request_admission.AdmissionConstructorTests.test_invalid_policy_rejected_before_bind",
+        "class": "IMPLEMENTED",
+        "applicability": "APPLICABLE_MVP",
+        "limit": "each clock independent (never resets); invalid config rejected before bind AND at use"
+      },
+      {
+        "id": "C",
+        "title": "Bounded analysis CP/strict-UTF8 eligibility; queue/admission one active + bounded waiting; target/prompt/output caps; bypass after safe capture",
+        "source_clause": "ARCH 9/14",
+        "entry": "analysis_policy (eligibility gate) + request_admission (one active + bounded waiting) + batch_review (target cap 8, prompt/output caps) + proxy (bypass_original / no-review after safe capture)",
+        "positive": "test_analysis_policy.PolicyValidationTests.test_versioned_defaults_are_finite_engineering_constants; test_exact_N_admits_N_plus_1_exceeds_on_both_axes; test_request_admission.AdmissionControllerTests.test_fifo_order_behind_held_active; test_review_batch (cap 8 deterministic non-overlapping targets)",
+        "negative": "test_analysis_policy.EngineDefaultBoundaryTests.test_oversize_gate_zero_work_separate_reasons (bypass after safe capture); test_request_admission.test_queue_full_exact_packet_no_thread_no_upstream; test_expired_head_cannot_block_later_eligible; test_invalid_waiting_capacity_rejected",
+        "class": "IMPLEMENTED",
+        "applicability": "APPLICABLE_MVP",
+        "limit": "eligibility gate is finite; bypass is content-free and after safe capture"
+      },
+      {
+        "id": "D",
+        "title": "Unicode original CP/grapheme/CRLF/tab/NFC source mapping and exact occurrence IDs; unproved region unchanged; no AST render / substring recovery",
+        "source_clause": "ARCH 6/7/12 + owner",
+        "entry": "pandoc_protection (pinned-Pandoc source-position mapping to the unmodified original) + protect_with_pandoc",
+        "positive": "test_pandoc_protection (positioned-JSON capability + exact code-point grants); test_concept.ConceptTests.test_protection_and_exact_patch_invariance; the 033-a real protect_with_pandoc probe (quote/HTML/fence interior denied, surrounding granted)",
+        "negative": "test_pandoc_protection (unproved region / document failure -> unchanged original; no AST rendering, no substring recovery); test_capture_transport.test_split_codepoint_across_wire_chunks + test_invalid_utf8_byte_rejected (strict UTF-8)",
+        "class": "IMPLEMENTED",
+        "applicability": "APPLICABLE_MVP",
+        "limit": "mapping via pinned 3.7.0.2 only; a Str leaf's data-pos is on its positioned Span wrapper"
+      },
+      {
+        "id": "E",
+        "title": "Physical quote/HTML/BlockQuote/Note contexts and coalescing; protected-boundary ngram segmentation",
+        "source_clause": "ARCH 7 + owner",
+        "entry": "pandoc_protection (physical context detection + coalescing + protected-boundary segmentation)",
+        "positive": "test_pandoc_protection (quote/HTML/BlockQuote/Note interiors denied, surrounding prose granted); 033-a real protect_with_pandoc probe",
+        "negative": "test_pandoc_protection (coalescing; protected-boundary ngram segmentation; independent original-source oracles in test_concept/test_pandoc_protection)",
+        "class": "IMPLEMENTED",
+        "applicability": "APPLICABLE_MVP",
+        "limit": "deny-by-default exact code-point grants; the 3-case probe does not alone prove all 14 prior counterexamples (covered by the 965 suite)"
+      },
+      {
+        "id": "F",
+        "title": "Runtime RO corpus status/unknown/denominator/comparable-count scopes; finite lookup failure, no invented counts; manifest/rights limits separately",
+        "source_clause": "ARCH 8/14",
+        "entry": "runtime_corpus.RuntimeCorpus (read-only SQLite) + evidence_budget (finite lookup, quotas)",
+        "positive": "test_runtime_corpus (status/unknown/denominator separated); test_evidence_budget.UnderBudgetNativeTests.test_rows_order_counts_and_missing_states; test_connection_is_read_only; test_fresh_limits_per_instance_no_global_quota",
+        "negative": "test_evidence_budget.StatementBoundaryTests.test_schema_exhaustion_at_open_closes_connection; RowQuotaTests.test_per_query_overflow_discards_whole_result; EXACT(0) is a known zero, never positive (no invented counts)",
+        "class": "IMPLEMENTED",
+        "applicability": "APPLICABLE_MVP",
+        "limit": "manifest/rights fields are a separate PARTIAL (A-CORPUS-02); bounded read-only, no acquisition"
+      },
+      {
+        "id": "G",
+        "title": "Detector fixed-anchor support, distinct casefolded alternatives, exact whole-word/short-phrase groups/caps/no LF-CR/protected crossing; suspicion not error",
+        "source_clause": "ARCH 9",
+        "entry": "runtime_detection.detect + detector (tokenize/candidates)",
+        "positive": "test_runtime_detection.WordAlarmSelectorTests.test_word_control_fixed_anchor_alarm; test_exact_two_x_boundary_alarms; test_same_word_maximum_four_useful; test_nondefault_threshold_honored",
+        "negative": "test_below_two_x_contrast_no_alarm; test_newline_barriers_never_alarm (no LF/CR as separators); test_censored_centered_trigram_no_signal; test_known_zero_bigram_no_signal; test_anchor_below_threshold_no_alarm; test_uppercase_original_no_alarm",
+        "class": "IMPLEMENTED",
+        "applicability": "APPLICABLE_MVP",
+        "limit": "suspicion is a CPU signal, not an error; fixed-anchor + casefolded alternatives; cap 8"
+      },
+      {
+        "id": "H",
+        "title": "Occurrence-addressed stateless SAME-Qwen batch prep/IPC/HTTP isolation; no tools/history/recursion/retry; strict whole-batch schema; bounded cleanup",
+        "source_clause": "ARCH 10/14",
+        "entry": "batch_review (prepare_targets/build_prompt/build_request_body) + qwen_client.ResponsesReviewer.review_batch + review_transport (IPC framing + real worker HTTP)",
+        "positive": "test_review_batch.EngineBatchTests (occurrence-addressed, one result per id); test_review_transport.BatchExchangeTests.test_fast_positive_exact_route_body_auth_reordered (real wire); test_review_batch.TransportTests.test_single_request_exact_route_body_and_reordered_result",
+        "negative": "test_review_batch (strict whole-batch schema, no tools/history/recursion; identity/wider-edit rejected); test_review_batch.TransportTests.test_non_200_fails_whole_batch (no retry, whole-batch fail); test_review_transport.WorkerSubprocessTests (owned fake worker via _REVIEW_WORKER_PATH: IPC framing/lifecycle only, declared NOT wire)",
+        "class": "IMPLEMENTED",
+        "applicability": "APPLICABLE_MVP",
+        "limit": "real wire proven to a synthetic in-process endpoint; native real-Qwen serving is separate (D05)"
+      },
+      {
+        "id": "I",
+        "title": "Runtime strict lexical routes, stale span/adjacent-neighbor proof, SAME policy under composed conflict-group revalidation; exact original rebuild, no changed unapproved slice",
+        "source_clause": "ARCH 11/12",
+        "entry": "runtime_acceptance.accept + composed_validation.validate_composed/_revalidate + repair.apply_edits (shared patcher)",
+        "positive": "test_runtime_acceptance.test_r4_factor_two_accepts / test_single_edit_accepts / test_r5_count_one_accepts_censored_original; test_composed_validation.test_positive_control_survives_composed_pass; test_supported_new_neighbor_pair_survives; test_concept.test_protection_and_exact_patch_invariance",
+        "negative": "test_runtime_acceptance.test_below_factor_two_rejects / test_zero_or_multi_edit_reject / test_partial_word_target_is_stale / test_skipped_neighbor_is_stale / test_wrong_occurrence_neighbor_is_stale / test_neighbor_inside_target_is_stale; test_composed_validation.test_rebased_slice_mismatch_abstains / test_one_sided_group_rejects_whole / test_mapping_abort_known_usage_whole_pass_abstains",
+        "class": "IMPLEMENTED",
+        "applicability": "APPLICABLE_MVP",
+        "limit": "legacy repair.accept/_positive_local is NOT the wired runtime; only the shared Acceptance/patcher remain"
+      },
+      {
+        "id": "J",
+        "title": "JSON/SSE completion + terminal-copy preflight; unsupported capabilities/aligned metadata/stored history; byte pass-through vs changed envelope; client-managed final history; separate actual usage known/unknown",
+        "source_clause": "ARCH 13",
+        "entry": "responses_contract (validate_request/validate_completed_envelope/aligned_metadata_clean) + proxy terminal-copy + capture",
+        "positive": "test_responses_contract.ContractHttpTests.test_json_useful_positive_two_targets_one_review; test_sse_canonical_positive_two_targets_one_review; test_json_sse_final_profile_parity; test_review_batch.SseHttpTests / TerminalCopyOwnershipTests; test_concept.test_sse_preserves_event_count_ids_and_usage",
+        "negative": "test_responses_contract.test_stored_chaining_rejected_before_main; test_response_mode_mismatch_is_protocol_error; test_malformed_main_is_main_error; test_json_unsupported_completed_shapes_bypass; test_json_declaration_contradictions_bypass (unsupported capability / aligned metadata -> byte pass-through, unchanged envelope)",
+        "class": "IMPLEMENTED",
+        "applicability": "APPLICABLE_MVP",
+        "limit": "byte pass-through vs changed envelope distinct; usage known/unknown separated (review usage is not the main inference bill)"
+      },
+      {
+        "id": "K",
+        "title": "Request-scoped cancellation, first-control precedence, quiet disconnect, owned partial-startup/normal/control shutdown/reap",
+        "source_clause": "ARCH 5/14",
+        "entry": "request_lifecycle.RequestCancelled + proxy handler + owned startup (pandoc/reviewer workers)",
+        "positive": "test_request_cancellation.test_rst_cancels / test_fin_behind_unread_tail_cancels_without_reading / test_live_peer_with_unread_tail_is_not_cancelled; _ProxyLateHandoffRegressionTests (order 030-a); test_owned_startup.PandocStartInterruptionTests.test_held_child_reaped_before_return; test_preallocation_failure_preserves_control; test_main_lifecycle.test_native_sigint_exits_naturally_with_owned_cleanup",
+        "negative": "test_request_cancellation.test_racing_completion_with_cancel_closed_and_cancelled / test_ordinary_error_with_cancel_becomes_request_cancelled / test_caller_control_with_cancel_keeps_exact_identity / test_between_phase_cancel_closes_actual_connected_socket (quiet disconnect, no delivery to the closed socket)",
+        "class": "IMPLEMENTED",
+        "applicability": "APPLICABLE_MVP",
+        "limit": "disconnect = quiet in-handler abort, distinct from optional-repair-failure original preservation"
+      },
+      {
+        "id": "L",
+        "title": "Content-free trace-OFF production profile, raw opt-in trace limits, credential/execution/data authority, no protected deployment changes; native/quality/deployment layers distinct",
+        "source_clause": "ARCH 15/16 + owner",
+        "entry": "proxy (content-free finite reason vocabulary; opt-in CONCEPT_USAGE_OBSERVER=stderr; opt-in CONCEPT_TRACE_DIR write_traces) + config/env credentials external to Git",
+        "positive": "test_analysis_policy (content-free observations in the default profile); test_concept.ConceptTests.test_trace_is_opt_in_and_excludes_headers",
+        "negative": "write_traces (proxy.py:2112ff) serializes FULL content (original/repaired/candidates/corpus_summaries/reviewer_decisions/acceptance/replacements), files 0600 - a content-carrying RAW operator disclosure, NOT a production default; a trace write failure is a known 502 caveat (032), not an unconditional fallback; credentials external to Git, no protected deployment mutation",
+        "class": "IMPLEMENTED",
+        "applicability": "APPLICABLE_MVP",
+        "limit": "content-free holds in the default trace-disabled profile; native/quality/deployment are separate layers (see D05, A-EVAL-01, deployment authority)"
+      }
+    ]
+  },
+  "fresh_executions": [
+    {
+      "name": "full offline suite at audited main (final synchronous run)",
+      "command": "python -B -m unittest discover -s tests -t . (CONCEPT_PANDOC=pinned 3.7.0.2, OAP_ROLE=coding, umask 0077)",
+      "result": "965 tests, 584.337 s, OK, exit 0",
+      "log_sha256": "b0d53b2da371136da5f947e8dece6e984fe525eb066aeff056a8039e9a4ed27c",
+      "tested_sha": "c36ed4f42534bc13df4dac2b418fb50262d47d06",
+      "run_note": "run began 09:35:44; SUITE_EXIT 0 observed 09:46:53.975Z; initial environment had no TMPDIR/PYTHONPYCACHEPREFIX and owned temporary fixtures under /tmp appeared in the private output (no strategic TMP claimed)"
+    },
+    {
+      "name": "direct pinned-Pandoc probe",
+      "result": "binary sha256 02a59bd9... matches pin; version exactly 3.7.0.2; reader commonmark_x+sourcepos-smart; positioned-JSON capability reproduced (wrapper Div data-pos 1:1-2:1; the positioned Str leaf's source position is on its Span wrapper)",
+      "tested_sha": "c36ed4f42534bc13df4dac2b418fb50262d47d06"
+    },
+    {
+      "name": "033-a changed protection consumer probe (real protect_with_pandoc)",
+      "result": "Slovenian low/high quote interior denied / outside prose granted; raw inline HTML interior denied / surrounding prose granted; fenced code denied / surrounding prose granted",
+      "tested_sha": "c36ed4f42534bc13df4dac2b418fb50262d47d06",
+      "limitation": "mapping-only three-case probe; does not by itself prove the real Engine / real HTTP / all 14 prior counterexamples (covered by actual tests in the 965 suite; verified 033 Root probes reusable with stated source/dependency equality)"
+    }
+  ],
+  "setup_honesty": {
+    "no_perfect_setup_claimed": true,
+    "first_run": "09:28:24 - DID use the qualified python -B but lacked an explicit CONCEPT_PANDOC and selected the wrong parser binary; not the exit proof; original log retained (private, 38762 bytes, sha256 fba0049940448290b508ab8ca211b83e6652b505dda439e9ceafe8c5e4c74f1b)",
+    "second_async_wrapper": "not a complete exit proof",
+    "final_synchronous_run": "09:35:44 start, qualified python -B + pinned Pandoc + OAP_ROLE=coding + umask 0077, SUITE_EXIT 0 at 09:46:53.975Z, log 166175 bytes sha256 b0d53b2da371136da5f947e8dece6e984fe525eb066aeff056a8039e9a4ed27c",
+    "strategic_tmp_claimed": false,
+    "root_receipt": "034a-root-direct-runtime-965-tests-real-exit-zero-review-20261111.json"
+  },
+  "environment_note": "resolve_pandoc_spec (pandoc_protection.py:241ff) selects the explicit configured binary OR shutil.which('pandoc'), then the startup check validates the exact 3.7.0.2 version + positioned-JSON capability before bind; the prohibition is a historical research executable-search / silent weaker-regex fallback, NOT normal PATH discovery of the required installed version. The earlier unqualified-Pandoc run selecting a different build does not prove a production downgrade.",
+  "native_evidence": {
+    "authorized_native_calls_in_this_audit": 0,
+    "allocated_slots": "four allocated slots are TARGET POST slots counting MAIN and REVIEW separately (NOT four proven review requests); exhausted",
+    "real_wire_software_client": "IMPLEMENTED (proven as REAL wire / software-transport): the real ResponsesReviewer + owned worker child make real reviewer HTTP to a synthetic in-process endpoint, asserted on route/auth/body and whole-batch result - test_review_batch.py::TransportTests.test_single_request_exact_route_body_and_reordered_result (real worker -> HTTPServer 127.0.0.1:0; negative test_non_200_fails_whole_batch), test_review_batch.py::CompositionChainTests, test_responses_contract.py::ContractHttpTests, test_review_transport.py::BatchExchangeTests (real owned worker child -> real HTTP per wire case)",
+    "ipc_worker_framing_only": "test_review_transport.py::WorkerSubprocessTests (owned fake worker via mock.patch.object(qwen_client, '_REVIEW_WORKER_PATH', ...)) proves the IPC framing / subprocess lifecycle only and is NOT wire proof",
+    "native_real_qwen": "UNPROVEN in this offline order; the prior 031-b native RTX MAIN (HTTP 200 / 2105 B / 4.721 s) failed the actual completion-envelope validator (exact rejected clause not retained) and the allocated slots are exhausted; historical A100 isolated-review success is a different model/quantization/evidence layer",
+    "smallest_sufficient_next_step": "ONE authorized MAIN-path reproduction with a minimal content-free observer of the ACTUAL failed completion-envelope predicate, stopping at the first unresolved boundary (reserve one main plus a possible review under new owner allowance); a subsequent actual-Qwen isolated batch can then qualify the reviewer condition; an owned fake-worker endpoint can never satisfy the native retest; no live call in 034; the extra 12-slot allowance is unanswered"
+  },
+  "separate_evidence_layers": {
+    "software_behavioral": "IMPLEMENTED (offline, fresh evidence above) at audited main; wired via runtime_corpus / runtime_acceptance / composed_validation / batch_review / review_transport",
+    "native_serving_compatibility": "UNPROVEN here (0 authorized native calls; real wire proven separately against an in-process endpoint; earlier RTX MAIN aggregate failed a completion-envelope validator per the deferred index)",
+    "linguistic_quality_benefit": "EXCLUDED by owner (not deferred; no separate human evaluation dataset, no current/future human-labeling obligation, no dataset gate; NOT a functional-readiness gate); held-out framework present, quality unmeasured",
+    "deployment_release_authority": "owner-retained; deployment_authorized=false; human_milestone_accepted=false"
+  },
+  "not_performed": [
+    "live target requests",
+    "product/dependency/test/workflow changes",
+    "implementation",
+    "corpus acquisition",
+    "morphology programme",
+    "packaging",
+    "quality dataset",
+    "new milestone gates",
+    "any commit/push of the private initial record"
+  ]
+}

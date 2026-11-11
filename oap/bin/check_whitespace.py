@@ -2,17 +2,22 @@
 """Fail-closed accepted-base whitespace verification for immutable OAP history.
 
 The workflows still run Git's literal ``diff --check BASE...REVISION``.  The
-only tolerated diagnostics are the five already-pinned historical incidents
-below (order 027-b closed the three-incident contract to four, and order
-031-b explicitly evolves that closed contract to these five for the one
-precisely pinned existing 031-a incident).  Each exception is bound to its
-exact diagnostic, introducing commit, current blob, byte hash, and byte size.
-The fourth incident is the root-authored trailing space at line 11 of the
-issued 027-a order, whose bytes are preserved exactly; its special
-forward-recovery merge is bound to its exact ancestry, ordered parents, tree
-delta, and historical blobs.  The fifth incident is the EOF blank line at
-line 161 of the issued 031-a order, whose bytes remain immutable; Git's
-diagnostic order places it after the 027-a order and before the 007-d
+only tolerated diagnostics are the six already-pinned historical incidents
+below (order 027-b closed the three-incident contract to four, order 031-b
+explicitly evolved that closed contract to five for the one precisely pinned
+existing 031-a incident, and order 034-b explicitly evolves that closed
+contract to these six for the one precisely pinned existing 034-a incident).
+Each exception is bound to its exact diagnostic, introducing commit, current
+blob, byte hash, and byte size.  The fourth incident is the root-authored
+trailing space at line 11 of the issued 027-a order, whose bytes are
+preserved exactly; its special forward-recovery merge is bound to its exact
+ancestry, ordered parents, tree delta, and historical blobs.  The fifth
+incident is the EOF blank line at line 161 of the issued 031-a order, whose
+bytes remain immutable; Git's diagnostic order places it after the 027-a
+order and before the 007-d report.  The sixth incident is the root-authored
+trailing space at line 67 of the issued 034-a order, whose bytes are
+preserved exactly and whose introduction is the first 034-a commit; Git's
+diagnostic order places it after the 031-a order and before the 007-d
 report.  This is intentionally a fixed corrective contract: a changed,
 missing, re-added, or additional whitespace incident fails rather than
 becoming a new allowlist entry.
@@ -40,6 +45,7 @@ AUTHORIZED_BASES = frozenset(
 
 ORDER_A_PATH = "oap/orders/027-a-repair-validation.md"
 ORDER_031A_PATH = "oap/orders/031-a-functional-proxy-audit.md"
+ORDER_034A_PATH = "oap/orders/034-a-functional-proxy-readiness-audit.md"
 RECOVERY_MERGE = "73f9f3d10cc602781f8a49e22a7dd342165ea8d9"
 RECOVERY_PARENTS = (
     "4e601d31ccce7fa2f7652e67af524bb95c761078",
@@ -93,6 +99,19 @@ ORDER_031A_INCIDENT = Incident(
     18351,
 )
 
+# The exact pinned existing 034-a incident (order 034-b, requirement 1):
+# the root-authored trailing space at line 67 of the issued, immutable
+# 034-a order, introduced by the first 034-a commit.
+ORDER_034A_INCIDENT = Incident(
+    ORDER_034A_PATH,
+    67,
+    "trailing whitespace.",
+    "3c3c7ffde0359135fbb1a24c998984846d229756",
+    "17d14ba5cad04fa104008695536e468c61ca5ca4",
+    "586ca6cbea712bcfe663bcf2c73d68af9601b205c6f4f2a134c256fb58241b65",
+    18174,
+)
+
 
 KNOWN_INCIDENTS = (
     Incident(
@@ -115,6 +134,7 @@ KNOWN_INCIDENTS = (
     ),
     ORDER_A_INCIDENT,
     ORDER_031A_INCIDENT,
+    ORDER_034A_INCIDENT,
     Incident(
         "oap/reports/007-d-complete-research-publication-and-reproduction-coverage.md",
         164,
