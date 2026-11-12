@@ -9,7 +9,7 @@
     "path": "oap/orders/035-d-useful-native-repair-and-policy-regressions.md",
     "sha256": "230f0d33b3811c1fcec19969cf9f1cd3cc2df8d73cf4ce354b1073d48e4b8ef7"
   },
-  "result_summary": "COMPLETE: the owner's unconditional defined-API logprobs removal policy is fully documented and persisted (README contract corrected; net 17 new policy regressions incl. the 32-case JSON/SSE value matrix and the typed-location/all-copy matrix), and the runnable proxy's useful native same-model repair path is proved at the actual worker boundary: one useful accepted correction (1 candidate -> 1 validated review -> 1 approved exact original-span edit, all unapproved/protected slices verified identical by independent observers, delivered envelope differing only by defined logprobs removals and the approved text) plus three genuine clean 0-review controls (0 candidates -> 0 review calls). Every executed native trial returned HTTP 200 (one incomplete envelope proved to be the 1536 output budget; 4096 used thereafter per the proved output-limit rule). Runtime bytes frozen at 035-c; 035-d mutates documentation, persisted tests, sanitized evidence and the counter only.",
+  "result_summary": "COMPLETE: the owner's unconditional defined-API logprobs removal policy is fully documented and persisted (README contract corrected; net 17 new policy regressions incl. the 32-case JSON/SSE value matrix and the typed-location/all-copy matrix), and the runnable proxy's useful native same-model repair path is proved at the actual worker boundary by the final qualifying pair: one useful accepted correction (1 candidate -> 1 observed validated review -> 1 approved exact original-span edit, all unapproved/protected slices verified identical by independent observers, delivered envelope differing only by defined logprobs removals and the approved text) and one genuine fully-observed clean 0-review control (0 candidates -> 0 review calls). All 11 executed MAIN POSTs returned HTTP 200 with combined envelope scope 9 completed + 2 incomplete (one trial at the 1536 output budget and the direct diagnostic at that budget, whose usage showed output_tokens at the 1536 max; the diagnostic's incomplete reason is recorded only as a masked string type). Five same-RTX review attempts were dispatched, of which three returned observed validated batches with known usage and two remain unclassified from their retained observers. Runtime bytes frozen at 035-c; 035-d mutates documentation, persisted tests, sanitized evidence and the counter only.",
   "implementation": {
     "runtime": {
       "status": "FROZEN at 035-c bytes; no product module mutated in 035-d",
@@ -26,43 +26,103 @@
     }
   },
   "native_qualification": {
-    "scope": "Actual proxy.main over owned loopback port 0, authorized matching-RTX3090 Responses endpoint, model qwen3.8-27b-rtx3090 for MAIN and REVIEW, TRACE OFF, no inherited reviewer profile, key child-only, qualified message-array input, concurrency 1, one review pass, zero auto-retry, hard child 150s / parent 180s clocks enforced by the launcher (SIGTERM escalate at 150s, SIGKILL backstop at 180s, ownership-safe group termination/reap).",
+    "scope": "Actual proxy.main over owned loopback port 0, authorized matching-RTX3090 Responses endpoint, model qwen3.8-27b-rtx3090 for MAIN and REVIEW, TRACE OFF, no inherited reviewer profile, key child-only, qualified message-array input, concurrency 1, one review pass, zero auto-retry. Clock supervision epochs: the final qualifying pair (attempts 32 and 34) ran under the two-deadline launcher (hard child 150s SIGTERM escalate / parent 180s SIGKILL backstop, ownership-safe group termination/reap); trials 27 and 30 ran under the earlier parent-only 180s launcher; trials 15-25 ran earlier direct-Python harness revisions without launcher clock supervision. Earlier epochs are preserved and qualified at their own limits, not retroactively upgraded.",
     "source_identity": {
       "launcher_sha256": "fd9692067bfd08fbb6968e4408b2d7dc969ea3cbb39c30f90e5712a8ba8649b1",
       "harness_sha256": "d9e7948ee78261133c7308304c3a01d921c4967fb277127bd12e23b8b656b661",
       "readonly_index_sha256": "f769235b6af3412e65f0875f4d08231c832f60d8630b43a06ab927c2d32c739f",
       "executed_head": "c304bf16e5100337d0ee02244c5a88b5be9028c6"
     },
-    "trials": "10 launcher trials (attempts 15,17,19,21,23,25,27,30,32,34) + 1 direct diagnostic (attempt 29) = 11 executed MAIN POSTs, all HTTP 200; 10 completed envelopes + 1 incomplete (attempt 27 at the 1536 budget, reasoning-only item; direct diagnostic attempt 29 confirmed output_tokens at the 1536 max, proving the output limit, so attempts 30-34 used the 4096 budget authorized by that proved issue).",
-    "review_dispatches_measured": 5,
-    "review_dispatch_attempts": [21, 23, 25, 30, 32],
+    "trials": "10 launcher trials (attempts 15,17,19,21,23,25,27,30,32,34) + 1 direct diagnostic (attempt 29) = 11 executed MAIN POSTs, all HTTP 200; combined envelope scope 9 completed + 2 incomplete: trial 27 at the 1536 output budget (single reasoning item, no completed assistant message) and direct diagnostic 29 at the same budget (usage output_tokens at the 1536 max, incomplete reason recorded only as masked type str; no raw reason string is claimed). Trials 30-34 used the 4096 budget authorized by the observed budget exhaustion. Earlier direct-Python harness revisions covered attempts 15-25; the parent-only 180s launcher covered 27/30; the two-deadline launcher covered 32/34.",
+    "review_dispatch_attempts": [
+      21,
+      23,
+      25,
+      30,
+      32
+    ],
     "useful_accepted_edit": {
       "attempt": 32,
       "envelope": "completed, HTTP 200",
       "detector_candidates": 1,
       "validated_reviews": 1,
-      "known_usage": {"input": 281, "output": 480, "total": 761},
+      "known_usage": {
+        "input": 281,
+        "output": 480,
+        "total": 761
+      },
       "approved_edit": "1 edit, 6 codepoints original span [2,8) replaced by 5 codepoints; 1 protected interval present and unmodified; protected_overlap false",
       "proofs": "cross-observer approved_original_span_proof true (original identity, patcher composition verified, patcher output equals final, final equals independent composition, untouched slices identical); envelope diff = exactly 1 defined logprobs removal + 1 approved text change, nothing else",
       "lifecycle": "main return 0, worker joined, shutdown finished, child rc 0, group cleared, neither clock expired",
       "qualification": "Controlled owned mechanism example at the real worker boundary (functional MAIN -> REVIEW -> independent CPU acceptance -> approved patch -> final response path). NOT a natural-error rate, linguistic quality, statistical independence, or human-acceptance claim."
     },
     "clean_zero_review_controls": {
-      "attempts": [15, 17, 34],
-      "facts": "detect calls returned 0 candidates each; review batch calls 0; delivered answer byte-identical to the captured main answer; envelope differed only by the defined logprobs removal; full normal lifecycle each trial",
-      "qualification": "Genuine no-suspicion controls (valid analysis reached with no eligible suspicion), distinct from unobserved bypasses and from reviewed-but-unchanged trials"
+      "fully_observed_qualification": {
+        "attempt": 34,
+        "facts": "final-pair clean trial under the two-deadline launcher: detect call returned 0 candidates; review batch calls 0; delivered answer identical to the captured main answer (hash-verified); envelope differed only by the defined logprobs removal; full observed lifecycle (main return 0, worker joined, shutdown finished, child rc 0, group cleared, neither clock expired)",
+        "qualification": "Genuine no-suspicion control (valid analysis reached with no eligible suspicion), distinct from unobserved bypasses and from reviewed-but-unchanged trials"
+      },
+      "earlier_no_candidate_no_review_executions": {
+        "attempts": [
+          15,
+          17
+        ],
+        "facts": "earlier direct-Python harness revisions: detect 0 candidates, review 0 calls, completed envelopes, normal main return/shutdown/join observed; no original/final transform observer and no child/group-clear observation recorded for these trials",
+        "qualification": "Preserved as earlier no-candidate/no-review executions with those limits; they are not claimed as fully-observed clean qualifications"
+      }
     },
     "reviewed_but_unchanged": {
-      "attempts": [25, 30],
-      "facts": "validated review executed (known usage 285/616/901 and 281/520/801 respectively), no accepted edit delivered, delivered answer unchanged",
+      "attempts": [
+        25,
+        30
+      ],
+      "facts": "observed validated review executed (known usage 285/616/901 and 281/520/801 respectively), no accepted edit delivered, delivered answer unchanged",
       "qualification": "keep vs CPU-rejection is UNKNOWN from those observers; recorded as reviewed-but-unchanged, never as clean controls or as rejections"
     },
-    "clock_supervision_proof": "Root five-case offline clock recheck on the exact launcher bytes: normal (no spurious kill, group cleared), retained-stdout (bounded, child result retained), child expiry (SIGTERM escalate at 150s, accurate CHILD_CLOCK_EXPIRY), parent expiry (SIGKILL backstop at 180s, accurate PARENT_CLOCK_EXPIRY), and a child ignoring SIGTERM stopped by the parent SIGKILL; all owned groups cleared; zero native calls and zero real-ledger mutations. Earlier harnesses are not claimed to have had these guards."
+    "clock_supervision_proof": "Root five-case offline clock recheck on the exact two-deadline launcher bytes (fd969206...): normal (no spurious kill, group cleared), retained-stdout (bounded, child result retained), child expiry (SIGTERM escalate at 150s, accurate CHILD_CLOCK_EXPIRY), parent expiry (SIGKILL backstop at 180s, accurate PARENT_CLOCK_EXPIRY), and a child ignoring SIGTERM stopped by the parent SIGKILL; all owned groups cleared; zero native calls and zero real-ledger mutations. This binds to the launcher used by the final qualifying pair (attempts 32/34); earlier harnesses and the parent-only launcher are not claimed to have had these guards.",
+    "review_attempts_measured": 5,
+    "review_attempt_ids": [
+      21,
+      23,
+      25,
+      30,
+      32
+    ],
+    "observed_validated_batches": {
+      "25": {
+        "known_usage": {
+          "input": 285,
+          "output": 616,
+          "total": 901
+        },
+        "outcome": "validated review, no accepted edit delivered (reviewed-but-unchanged)"
+      },
+      "30": {
+        "known_usage": {
+          "input": 281,
+          "output": 520,
+          "total": 801
+        },
+        "outcome": "validated review, no accepted edit delivered (reviewed-but-unchanged)"
+      },
+      "32": {
+        "known_usage": {
+          "input": 281,
+          "output": 480,
+          "total": 761
+        },
+        "outcome": "validated review, accepted edit delivered (qualifying trial)"
+      }
+    },
+    "unclassified_review_outcomes": {
+      "21": "attempt dispatched, retained observer usage UNKNOWN, parsed proposal outcome not established",
+      "23": "attempt dispatched, retained observer usage UNKNOWN, parsed proposal outcome not established"
+    }
   },
   "ledger": {
-    "state": "append-only, preserved; 46 rows at the 035-d final observation; no row deleted, deduplicated or rewritten",
-    "new_unique_reservations": "11 reserved_main (attempts 15,17,19,21,23,25,27,29,30,32,34) + 12 reserved_review_slot rows under 035-d IDs, following the observed allocation ordinal and existing maximum ID; MAIN and possible REVIEW reserved separately before each POST; immutable result rows appended (11, all HTTP 200)",
-    "historical_preserved": "6 legacy allocated_before_call MAIN rows (delivery/usage remain UNKNOWN, not zero) incl. the duplicate legacy identifiers 11/12 retained byte-for-byte with this explicit reconciliation; 1 legacy preflight-failed MAIN row and 1 review slot superseded by that preflight failure; the 14-row 035-c ledger snapshot and the old 20261110 ledger remain untouched",
+    "state": "append-only, preserved; 46 rows at the 035-d final observation = 14 preserved legacy rows + 32 new rows; no row deleted, deduplicated or rewritten",
+    "new_unique_reservations": "32 new rows: 11 reserved_main (attempts 15,17,19,21,23,25,27,29,30,32,34) + 10 reserved_review_slot (attempts 16,18,20,22,24,26,28,31,33,35) + 11 immutable result records (all HTTP 200); unique new allocation IDs 15..35 inclusive (21 IDs), following the observed allocation ordinal and existing maximum ID; MAIN and possible REVIEW reserved separately before each POST; immutable result rows appended",
+    "historical_preserved": "14 legacy rows preserved byte-for-byte: 7 MAIN rows (6 allocated_before_call with delivery/usage remaining UNKNOWN, not zero, including the duplicate main identifier 11, plus 1 preflight-failed no-POST) and 7 review-slot rows (attempts 2,4,6,8, attempt 10 superseded by the preflight failure, and the duplicate review identifier 12 retained with this explicit reconciliation); the 14-row 035-c ledger snapshot and the old 20261110 ledger remain untouched",
     "charging": "All unresolved allocations conservatively charged against the owner's 1M additional RTX allowance; no new daily/per-round quota invented",
     "note": "The 035-c public artifact's 12-allocation scalar was a stale description; reservation counts and immutable result records are separate scopes and are no longer conflated"
   },
@@ -70,7 +130,7 @@
     "c_starting_remote": "035-c's report starting_remote_sha named its own implementation commit rather than the actual 553280a entry head at C's start; the C report is preserved unchanged and this qualification is recorded forward",
     "c_renderer": "Root's 44-case HTTP matrix ran on the earlier 58e renderer; the current frozen runtime renderer is 86df8af2, where Root's 12 protected-Unicode/CRLF/surrogate/accepted-edit/echo cases passed",
     "c_ledger_scalar": "035-c's 12-allocation public scalar did not match its actual 14-row ledger; superseded by the reconciled 46-row 035-d state",
-    "c_clean_lifecycle": "035-c's harness had an undefined shutdown instance and false worker_joined/shutdown_finished flags; its clean-lifecycle wording is superseded by the 035-d launcher's actually observed main return/worker join/shutdown finish/child reap/group clear in every trial",
+    "c_clean_lifecycle": "035-c's harness had an undefined shutdown instance and false worker_joined/shutdown_finished flags; its clean-lifecycle wording is superseded by the 035-d observed lifecycle at each epoch: the final qualifying pair (attempts 32, 34) records main return 0, worker joined, shutdown finished, child rc 0 and group cleared under the two-deadline launcher, and trials 27/30 record child rc 0 and group cleared under the parent-only 180s launcher, while earlier trials 15-25 record only the lifecycle fields their harnesses observed (e.g. attempts 15/17: main return/shutdown/join, no child/group-clear observation)",
     "c_suite_epoch": "035-c's 989-test full-suite epoch predates the 035-d final test bytes; the final full suite below covers the final bytes"
   },
   "tests": {

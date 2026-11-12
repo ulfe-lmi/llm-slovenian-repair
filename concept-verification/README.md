@@ -1532,27 +1532,38 @@ section and forwards the validated request unchanged, and no
 universal provider compatibility is claimed.
 
 Round 035-d (2026-11-12, same branch/PR 37) demonstrated the full
-useful-repair path on the frozen 035-c runtime: over a finite
-sequence of bounded owned native trials (concurrency 1, hard 150s
-child / 180s parent clocks enforced by the launcher, one review pass,
-zero auto-retry) every executed trial returned HTTP 200, five actual
-validated same-RTX review batches were dispatched, and one useful
-accepted correction was delivered: a single detector candidate, one
-validated review, and one approved exact original-span edit (6
-codepoints replaced by 5) with all unapproved and protected slices
-verified identical by independent observers, and the delivered
-envelope differing from the upstream envelope only by the defined
-logprobs removals and that approved text. Three further trials proved
-the genuine clean zero-review control (0 candidates -> 0 review calls
--> delivered answer identical). Two additional trials dispatched a
-validated review with no accepted edit delivered (reviewed-but-unchanged;
-keep versus CPU rejection is unknown from those observers) and are
-never counted as clean controls. One trial at the default 1536-token
-output budget returned an incomplete reasoning-only envelope; a direct
-diagnostic confirmed the output limit as the cause, and the remaining
-trials used the 4096 budget authorized by that proved output-limit
-issue. These are controlled functional-path examples at the real
-worker boundary: they prove the runnable MAIN -> REVIEW -> independent
-CPU acceptance -> approved patch -> final response path, not a
-natural-error rate, linguistic quality, statistical independence, or
-human acceptance. No universal provider compatibility is claimed.
+useful-repair path on the frozen 035-c runtime in a finite sequence
+of bounded owned native trials (concurrency 1, one review pass, zero
+auto-retry). Every executed trial returned HTTP 200 (11 executed MAIN
+POSTs; combined envelope scope 9 completed + 2 incomplete). The final
+qualifying pair ran under the two-deadline launcher (hard 150s child
+/ 180s parent clocks, ownership-safe group termination): its useful
+trial delivered one useful accepted correction - a single detector
+candidate, one observed validated review with known usage, and one
+approved exact original-span edit (6 codepoints replaced by 5) with
+all unapproved and protected slices verified identical by
+independent observers - and its clean trial proved the genuine fully
+observed clean zero-review control (0 candidates -> 0 review calls ->
+delivered answer identical). Five same-RTX review attempts were
+dispatched across the sequence; three returned observed validated
+batches with known usage and the other two remain unclassified from
+their retained observers. Two reviewed-but-unchanged trials (no
+accepted edit delivered; keep versus CPU rejection unknown from those
+observers) are never counted as clean controls. Two earlier
+no-candidate/no-review executions (attempts 15, 17) ran earlier
+harness revisions without the transform/span observer and are
+preserved as limited history. Earlier trials ran earlier harness or
+parent-only-launcher revisions with weaker supervision and are
+preserved and qualified at their own epochs, not retroactively
+upgraded. One trial at the default 1536-token output budget and one
+direct diagnostic at the same budget returned incomplete envelopes
+(single reasoning item, no completed assistant message; the
+diagnostic's usage showed output_tokens at the 1536 max and its
+incomplete reason is recorded only as a masked string type); the
+remaining trials used the 4096 budget authorized by that observed
+budget exhaustion. These are controlled functional-path examples at
+the real worker boundary: they prove the runnable MAIN -> REVIEW ->
+independent CPU acceptance -> approved patch -> final response path,
+not a natural-error rate, linguistic quality, statistical
+independence, or human acceptance. No universal provider compatibility
+is claimed.
