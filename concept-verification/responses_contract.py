@@ -234,26 +234,46 @@ def aligned_metadata_clean(value: dict[str, object]) -> bool:
     ``annotations`` must be absent or an empty list: a non-empty (or
     non-list) aligned list is stale data a changed answer can never
     retain, and a non-list shape is not a recognized aligned field
-    (order 015-a, requirement 5).  ``logprobs`` additionally treats an
-    explicit ``null`` as unset, like an absent or an empty list: a native
-    ``logprobs: null`` carries no token/offset alignment and is retained
-    exactly in the returned envelope, while a nonempty ``logprobs`` list
-    or any wrong type stays ineligible with zero review calls (order
-    035-b, R3).  Only the explicitly named answer-shaped representations
+    (order 015-a, requirement 5).  ``logprobs`` is always removed before
+    eligibility by ``remove_defined_logprobs`` (order 035-c), so it never
+    appears here.  Only the explicitly named answer-shaped representations
     are checked; metadata echoes are never scanned.
     """
-    for key in ("annotations", "logprobs"):
-        if key in value:
-            item = value[key]
-            if key == "logprobs" and item is None:
-                # Typed-null logprobs is unset: no token/offset alignment to
-                # retain.  The exact null field is preserved in the returned
-                # envelope (no stripping); a nonempty list or any wrong type
-                # is rejected below, and the annotations policy is unchanged.
-                continue
-            if not isinstance(item, list) or item:
-                return False
+    if "annotations" in value:
+        item = value["annotations"]
+        if not isinstance(item, list) or item:
+            return False
     return True
+
+
+def remove_defined_logprobs(envelope: dict[str, object]) -> bool:
+    """Remove the defined API logprobs key by presence from recognized parts.
+
+    Covers the response output[] message items -> content[] output_text
+    parts (the documented Responses object shape).  Deletion is by key
+    presence: null, empty list, populated list, or any unexpected JSON
+    type is removed identically.  Absence is harmless (no-op).  No
+    recursive traversal into metadata, tool arguments/results, user data,
+    or same-named keys in unknown containers (order 035-c, R2).
+
+    Returns True if any removal was made.
+    """
+    removed = False
+    output = envelope.get("output")
+    if not isinstance(output, list):
+        return False
+    for item in output:
+        if not isinstance(item, dict) or item.get("type") != "message":
+            continue
+        content = item.get("content")
+        if not isinstance(content, list):
+            continue
+        for part in content:
+            if isinstance(part, dict) and part.get("type") == "output_text":
+                if "logprobs" in part:
+                    del part["logprobs"]
+                    removed = True
+    return removed
 
 
 def stateless_declarations_clean(response: dict[str, object]) -> bool:

@@ -1,109 +1,89 @@
 {
   "artifact": "035-native-rtx3090-qualification",
-  "round": "035-b",
+  "round": "035-c",
   "objective": "035",
   "status": "PARTIAL",
   "audited_main": "7dcd186fe394c1262bfe878ba5d6527b888fc317",
   "order": {
-    "path": "oap/orders/035-b-native-logprobs-compatibility.md",
-    "sha256": "decdcd13a0b30a8d36b7e6f0bb2e623da5ba124fe140d6c5734ea9533da64e34"
+    "path": "oap/orders/035-c-strip-defined-api-logprobs.md",
+    "sha256": "0ab86c7a0257af98f752a6a21d0743b9b967ef08cf394a753cede1b2c5429aba"
   },
-  "result_summary": "PARTIAL: owner policy superseded mid-round (null-only -> unconditional ALWAYS-remove); native logprobs confirmed NULL (attempt 7); null-only typed patch implemented but superseded WIP; full native repair/MVP not proved; next 035-c same PR.",
-  "prior_round_correction": {
-    "035_a_claim": "035-a claimed native logprobs is NON-EMPTY aligned-metadata list (inferred from observer recording key only, not item type/length).",
-    "correction": "The 035-b refined readonly type-observer (q035b_qualification.py) records fixed safe type flags. Native attempt 7 (28.7449 s) observed logprobs = NULL (is_none) at both the ACTUAL HTTP worker boundary AND the independent client parse. The prior NONEMPTY classification is UNSUPPORTED and superseded by this actual NULL finding.",
-    "old_strip_relax_proposal": "The 035-a remediation proposal (strip non-empty logprobs / relax aligned_metadata_clean) was based on the unproven NONEMPTY inference and is SUPERSEDED by the owner's new unconditional ALWAYS-remove policy (see owner_policy_supersession below).",
-    "old_review_calls_hardcoded": "035-a hardcoded review_calls=0 rather than observing actual transport dispatches. 035-b measures actual MAIN dispatches=1 and REVIEW dispatches=0 (concept-review-usage calls=0) via the CONCEPT_USAGE_OBSERVER."
-  },
-  "native_finding": {
-    "attempt": 7,
-    "harness": "private q035b_qualification.py (type-observer; fidelity 6/6 + native phase)",
-    "product_epoch": "original contract bed932b2 (pre-fix), actual HEAD de9a732 + no product mutation",
-    "observed_logprobs_type": "NULL (is_none)",
-    "worker_observation": "ALIGNED_REJECT@245:logprobs shape=is_none -> validate@373 -> transform@707",
-    "client_observation": "independent client parse also is_none",
-    "http": 200,
-    "response_bytes": 7160,
-    "elapsed_seconds": 28.7449,
-    "eligible_edit": false,
-    "main_dispatches_measured": 1,
-    "review_dispatches_measured": 0,
-    "review_measurement": "CONCEPT_USAGE_OBSERVER concept-review-usage calls=0",
-    "lifecycle": {
-      "main_return": 0,
-      "shutdown_complete": true,
-      "worker_joined": true,
-      "listener_closed": true,
-      "child_reaped": true
+  "result_summary": "PARTIAL: owner's unconditional ALWAYS-remove logprobs policy implemented and tested (JSON/SSE, all defined locations, all value types); native retest HTTP 200 with 0 review (clean answer, no logprobs in defined location); accepted-edit native path not exercised in this round. Root 32-case HTTP matrix PASSED on the superseded WIP; 5 edge failures identified and fixed (non-200 content-type selection, huge-integer overflow, SSE multi-part, SSE surrogates, metadata-only flag).",
+  "implementation": {
+    "responses_contract.py": {
+      "change": "Added remove_defined_logprobs(envelope) function; updated aligned_metadata_clean to remove logprobs check (always removed before eligibility).",
+      "policy": "Delete by key presence from output[] message content[] output_text parts. No recursive scan."
     },
-    "no_further_native_posts_after_attempt_7": true,
-    "qualification": "serving QUALIFIED (bounded: HTTP 200, completed, clean lifecycle); repair eligibility NOT established (no eligible edit reached; original bypass at contract line 373/707)"
-  },
-  "owner_policy_supersession": {
-    "timing": "mid-035-b round, after native attempt 7 and before R4 test writing",
-    "new_policy": "Runnnable proxy must ALWAYS remove API logprobs metadata from defined token-probability response locations, regardless of repair attempt / accepted correction; presence/value cannot block repair. No recursive removal of same-named keys in user data or metadata echoes. Consistent supported JSON + SSE, no configuration switch. Preserve citations/annotations/usage/IDs/status/other metadata, malformed/incomplete/capture/cancellation semantics, mandatory pinned Pandoc, exact original spans.",
-    "scope": "035-c (NOT implemented in this 035-b round)",
-    "superseded_null_only_patch": {
-      "file": "concept-verification/responses_contract.py",
-      "sha256": "adb9b050667376d9925a7e04551ce500741f610e69da892b5187ee3ba7618480",
-      "description": "22-line diff in aligned_metadata_clean: if key == 'logprobs' and item is None: continue (before the non-list/non-empty reject). Preserves null field in returned envelope. Annotations policy unchanged.",
-      "status": "SUPERSEDED PARTIAL WIP (committed for continuation; NOT claimed accepted/final/ready-to-merge/deploy)",
-      "root_real_http_proof": {
-        "receipt": "035b-root-postfix-real-HTTP-null-and-protected-negative-checks-20261111.json",
-        "contract_sha256_tested": "adb9b050667376d9925a7e04551ce500741f610e69da892b5187ee3ba7618480",
-        "result": "PASSED 6 actual HTTP cases",
-        "cases": "null-edit with protected Unicode/unchanged slices; clean zero-review; annotations-NULL still denied; populated/false/object logprobs denied",
-        "boundary": "real Engine/Pandoc/SQLite/detector/reviewer HTTP/CPU acceptance/patcher; only external main/review endpoints fake; 0 native posts",
-        "classification": "BASELINE/SUPERSEDED desired policy proof, NOT new owner policy proof"
-      },
-      "root_typed_observer_equivalence": {
-        "receipt": "035b-root-actual-HTTP-typed-observer-equivalence-20261111.json",
-        "result": "PASSED 6 cases / 12 requests (with/without typed observer), pre-fix"
-      }
+    "proxy.py": {
+      "changes": [
+        "transform_json: calls remove_defined_logprobs before eligibility; re-serializes only if removal made; uses _safe_json_dumps for lone-surrogate safety.",
+        "transform_sse: removes logprobs from all SSE event locations (delta/done, content_part added/done, output_item added/done, lifecycle snapshots) before eligibility; _bypass re-renders only modified events; changed=False for metadata-only.",
+        "Handler non-200: normalize_json_body/normalize_sse_body called by ACTUAL content type (independent of request.stream); catches ValueError/OverflowError for malformed bodies.",
+        "_render_event: always ensure_ascii=True to guarantee valid UTF-8 output even with lone surrogates.",
+        "_safe_json_dumps: falls back to ensure_ascii=True on UnicodeEncodeError for lone surrogates.",
+        "normalize_json_body/normalize_sse_body: standalone normalizers for non-200 responses."
+      ]
+    },
+    "tests": {
+      "test_responses_contract.py": "Removed old logprobs-bypass negatives; added LogprobsRemovalTests (20+ cases: absent/null/empty/populated/false/object, JSON/SSE, non-200, lone surrogates, multi-part, metadata-only flag, other-fields-unchanged).",
+      "test_review_batch.py": "Unchanged (all 128 tests pass)."
     }
   },
+  "native_retest": {
+    "attempt": 11,
+    "http": 200,
+    "response_bytes": 1521,
+    "elapsed_seconds": 2.3616,
+    "delivered_sha256": "20c7020306d30f31344b4055151df227991f5d4c33da80f8b2bac98210f86f3f",
+    "envelope_status": "completed",
+    "logprobs_in_defined_location": false,
+    "part_keys": [
+      "annotations",
+      "text",
+      "type"
+    ],
+    "answer_text_length": 22,
+    "review_dispatches_measured": 0,
+    "review_measurement": "CONCEPT_USAGE_OBSERVER concept-review-usage calls=0",
+    "qualification": "clean zero-review path PROVEN; accepted-edit native path NOT exercised (answer was clean, no edit proposed)",
+    "note": "Native API rejects plain-string input (400 codex_0149_field_shape); messages format required. This is an upstream API constraint, not a product defect."
+  },
+  "root_http_proof": {
+    "superseded_wip_32case_matrix": "PASSED (Root independent, 0 native, all owned threads joined)",
+    "five_edge_failures": "Identified and fixed: (1) non-200 content-type selection, (2) huge-integer ValueError escape, (3) SSE multi-part break, (4) SSE surrogate serialization, (5) metadata-only changed flag",
+    "receipts": [
+      "035c-root-independent-failing-HTTP-review-before-final-feedback-20261111.txt",
+      "035c-root-new-normalizers-independent-HTTP-review-followup-20261111.txt"
+    ]
+  },
   "source_identity": {
-    "note": "proxy.py unchanged; responses_contract.py = superseded null-only WIP patch (committed); original contract preserved in history.",
-    "concept-verification/proxy.py": "836b78cc3a07ce207a842a8f67f71368a1be2ead79ec31923d96bd74318c7c43",
-    "concept-verification/responses_contract.py_current": "adb9b050667376d9925a7e04551ce500741f610e69da892b5187ee3ba7618480",
-    "concept-verification/responses_contract.py_original_pre_fix": "bed932b2ba2ceb2f77b873a9c3ad1d25a8d9c69d701aae3522707292c59732e6"
+    "concept-verification/proxy.py": "working 035-c (SHA at commit)",
+    "concept-verification/responses_contract.py": "working 035-c (SHA at commit)",
+    "previous_superseded_wip": "adb9b050667376d9925a7e04551ce500741f610e69da892b5187ee3ba7618480"
   },
   "ledger": {
-    "identity": "new private attempt ledger (035-b)",
     "owner_maximum_additional": 1000000,
-    "previous_ledger_sha256": "a5893b8db6d9d623dacb0a72aad74fb13cb251eb0d8babc7ebdfa292580a1978",
-    "previous_ledger_preserved": true,
-    "total_allocations": 8,
-    "actual_main_posts": 4,
-    "reserved_review_slots": 4,
+    "total_allocations": 12,
+    "actual_main_posts": 5,
+    "reserved_review_slots": 5,
+    "preflight_failed_no_post": 2,
     "review_dispatches_measured": 0,
-    "accounting": "main + at-most-one review reserved before dispatch; conservative-unknown charged for reserved review slots (not confirmed used); no auto-retry"
+    "note": "Attempts 9/10 PREFLIGHT_FAILED (turn interrupted, no POST); 11/12 active retest (11 executed, 12 reserved)"
   },
-  "umask_imperfection_note": "Prior 035-a harness and new 035-b harness were initially created at 0664 (files) and 0775 (__pycache__) due to an initial umask lapse before tightening; Root independently tightened to 0600/0700 with bytes unchanged, before native attempt 7. Private parents remain 0700. Receipts: 035b-root-private-prior-harness-mode-tightening-20261111.json and 035b-root-new-harness-private-mode-tightening-20261111.json. Do not claim perfect prior umask or absence of pycache.",
   "integrity": {
-    "product_bytes_frozen_in_035_a": true,
-    "product_mutation_in_035_b": "null-only patch (superseded WIP, committed for continuation; NOT final policy)",
     "no_dataset_service_changes": true,
     "concurrency": 1,
     "zero_auto_retry": true,
     "no_raw_answer_prompt_target_replacement_header_id_private_path_or_url_in_public_artifacts": true,
     "old_035a_report_immutable": true,
-    "old_035a_order_immutable": true,
+    "old_035b_report_immutable": true,
     "private_initial_034_unchanged": true
   },
   "not_performed": [
-    "no unconditional ALWAYS-remove implementation (that is 035-c)",
-    "no R4 null-only tests written (stopped at owner supersession)",
-    "no further native 035-b traffic after attempt 7",
-    "no 965 full-suite rerun",
+    "no accepted-edit native path exercised (clean answer, no edit proposed)",
+    "no full 965 rerun (984 full concept suite run instead)",
     "no human dataset / quality-rate / deployment / milestone acceptance",
     "no A100 product traffic, GET models, unauthenticated probe, or Chat Completions",
-    "no service/weights/quantization/GPU/network/credential change",
-    "no reset/stash/rebase/amend or rewriting issued history"
-  ],
-  "next_round": {
-    "id": "035-c",
-    "same_pr": 37,
-    "requirement": "Implement owner's unconditional ALWAYS-remove logprobs policy at defined API locations (JSON + SSE), with meaningful tests (absent/null/empty/populated/unexpected-type, zero-review and accepted-edit, other fields unchanged). No config switch. Preserve all other metadata semantics."
-  }
+    "no service/weights/quantization/GPU/network/credential change"
+  ]
 }

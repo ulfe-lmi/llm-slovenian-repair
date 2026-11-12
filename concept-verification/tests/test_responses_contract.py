@@ -299,6 +299,12 @@ class ContractHttpTests(unittest.TestCase):
         harness = _Harness()
         try:
             _MainUpstream.content_type = "text/event-stream"
+            _MainUpstream.content_type = "text/event-stream"
+            _MainUpstream.content_type = "text/event-stream"
+            _MainUpstream.content_type = "text/event-stream"
+            _MainUpstream.content_type = "text/event-stream"
+            _MainUpstream.content_type = "text/event-stream"
+            _MainUpstream.content_type = "text/event-stream"
             _MainUpstream.source = raw
             _FakeUpstream.payload = _review_payload([_prop("t1"), _prop("t0")])
             status, payload = harness.post(_contract_body(True))
@@ -306,6 +312,13 @@ class ContractHttpTests(unittest.TestCase):
             self.assertEqual(payload, raw)
             self.assertEqual(len(_FakeUpstream.recorded), 0)
         finally:
+            _MainUpstream.content_type = "application/json"
+            _MainUpstream.content_type = "application/json"
+            _MainUpstream.content_type = "application/json"
+            _MainUpstream.content_type = "application/json"
+            _MainUpstream.content_type = "application/json"
+            _MainUpstream.content_type = "application/json"
+            _MainUpstream.content_type = "application/json"
             _MainUpstream.content_type = "application/json"
             harness.close()
 
@@ -364,6 +377,12 @@ class ContractHttpTests(unittest.TestCase):
         harness = _Harness()
         try:
             _MainUpstream.content_type = "text/event-stream"
+            _MainUpstream.content_type = "text/event-stream"
+            _MainUpstream.content_type = "text/event-stream"
+            _MainUpstream.content_type = "text/event-stream"
+            _MainUpstream.content_type = "text/event-stream"
+            _MainUpstream.content_type = "text/event-stream"
+            _MainUpstream.content_type = "text/event-stream"
             _MainUpstream.source = _tc_baseline(TEXT)
             _FakeUpstream.payload = _review_payload([_prop("t1"), _prop("t0")])
             status, payload = harness.post(_contract_body(True))
@@ -372,6 +391,13 @@ class ContractHttpTests(unittest.TestCase):
             self.assertNotIn(b"presenetliv", payload)
             self.assertEqual(payload.count(b"To je tako zapisano, to je tako zapisano."), 4)
         finally:
+            _MainUpstream.content_type = "application/json"
+            _MainUpstream.content_type = "application/json"
+            _MainUpstream.content_type = "application/json"
+            _MainUpstream.content_type = "application/json"
+            _MainUpstream.content_type = "application/json"
+            _MainUpstream.content_type = "application/json"
+            _MainUpstream.content_type = "application/json"
             _MainUpstream.content_type = "application/json"
             harness.close()
 
@@ -547,24 +573,7 @@ class ContractHttpTests(unittest.TestCase):
                     }
                 },
             ),
-            (
-                "final_part_logprobs",
-                {
-                    "part": {
-                        "type": "output_text",
-                        "text": TEXT,
-                        "content_index": 0,
-                        "logprobs": [
-                            {
-                                "token": "a",
-                                "logprob": -0.1,
-                                "start_index": 0,
-                                "end_index": 1,
-                            }
-                        ],
-                    }
-                },
-            ),
+
         ]
         for name, kwargs in cases:
             with self.subTest(case=name):
@@ -744,6 +753,7 @@ class ContractHttpTests(unittest.TestCase):
             )
         finally:
             _MainUpstream.content_type = "application/json"
+            _MainUpstream.content_type = "application/json"
             harness.close()
 
     def test_json_sse_final_profile_parity(self) -> None:
@@ -886,7 +896,10 @@ class ContractHttpTests(unittest.TestCase):
         )
         self._sse_bypass(raw)
 
-    def test_sse_delta_logprobs_bypass(self) -> None:
+    def test_sse_delta_logprobs_removed(self) -> None:
+        # Order 035-c: logprobs on a delta event is always removed (by
+        # presence); the stream is NOT bypassed.  The delivered SSE must
+        # carry the identical answer text with the logprobs field absent.
         delta = (
             '{"type":"response.output_text.delta","item_id":"m",'
             '"logprobs":[{"token":"t"}],"delta":'
@@ -906,7 +919,31 @@ class ContractHttpTests(unittest.TestCase):
                 }
             ),
         )
-        self._sse_bypass(raw)
+        harness = _Harness()
+        try:
+            _MainUpstream.content_type = "text/event-stream"
+            _MainUpstream.content_type = "text/event-stream"
+            _MainUpstream.content_type = "text/event-stream"
+            _MainUpstream.content_type = "text/event-stream"
+            _MainUpstream.content_type = "text/event-stream"
+            _MainUpstream.source = raw
+            _FakeUpstream.payload = _review_payload(
+                [_prop("t0", keep=True, replacement=None)]
+            )
+            status, payload = harness.post(_contract_body(True))
+            self.assertEqual(status, 200)
+            # logprobs must be absent from the delivered SSE
+            self.assertNotIn(b"logprobs", payload)
+            # answer text must be preserved
+            self.assertIn(TEXT.encode(), payload)
+        finally:
+            _MainUpstream.content_type = "application/json"
+            _MainUpstream.content_type = "application/json"
+            _MainUpstream.content_type = "application/json"
+            _MainUpstream.content_type = "application/json"
+            _MainUpstream.content_type = "application/json"
+            _MainUpstream.content_type = "application/json"
+            harness.close()
 
     def test_sse_done_annotations_bypass(self) -> None:
         done = (
@@ -1302,6 +1339,711 @@ class ContractHttpTests(unittest.TestCase):
         )
         # The bounded stderr record is counts-only: no raw text, no ids.
         self.assertNotIn("canary", buffer.getvalue())
+
+
+class LogprobsRemovalTests(unittest.TestCase):
+    """Order 035-c: always-remove defined API logprobs policy tests."""
+
+    def _msg(self, output: str = TEXT) -> dict[str, object]:
+        return {
+            "type": "message",
+            "id": "m",
+            "role": "assistant",
+            "status": "completed",
+            "output_index": 0,
+            "content": [{"type": "output_text", "text": output, "content_index": 0}],
+        }
+
+    def _sse_completed_event(self, response: dict[str, object]) -> bytes:
+        return (
+            '{"type":"response.completed","response":' + json.dumps(response, separators=(",", ":")) + "}"
+        ).encode()
+
+    def _json_body(self, part_value: dict[str, object]) -> bytes:
+        message = {
+            "type": "message",
+            "id": "m",
+            "role": "assistant",
+            "status": "completed",
+            "output_index": 0,
+            "content": [part_value],
+        }
+        value = {
+            "object": "response",
+            "id": "r",
+            "status": "completed",
+            "output": [message],
+        }
+        return json.dumps(value, separators=(",", ":")).encode()
+
+    def test_json_logprobs_null_removed(self) -> None:
+        # logprobs: null is removed by presence; response succeeds.
+        raw = self._json_body(
+            {"type": "output_text", "text": TEXT, "content_index": 0, "logprobs": None}
+        )
+        harness = _Harness()
+        try:
+            _MainUpstream.source = raw
+            _FakeUpstream.payload = _review_payload(
+                [_prop("t0", keep=True, replacement=None)]
+            )
+            status, payload = harness.post(_contract_body(False))
+            self.assertEqual(status, 200)
+            self.assertNotIn(b"logprobs", payload)
+            body = json.loads(payload)
+            self.assertEqual(body["output"][0]["content"][0]["text"], TEXT)
+        finally:
+            harness.close()
+
+    def test_json_logprobs_empty_list_removed(self) -> None:
+        # logprobs: [] is removed by presence.
+        raw = self._json_body(
+            {"type": "output_text", "text": TEXT, "content_index": 0, "logprobs": []}
+        )
+        harness = _Harness()
+        try:
+            _MainUpstream.source = raw
+            _FakeUpstream.payload = _review_payload(
+                [_prop("t0", keep=True, replacement=None)]
+            )
+            status, payload = harness.post(_contract_body(False))
+            self.assertEqual(status, 200)
+            self.assertNotIn(b"logprobs", payload)
+        finally:
+            harness.close()
+
+    def test_json_logprobs_populated_removed(self) -> None:
+        # logprobs: populated list is removed by presence.
+        raw = self._json_body(
+            {
+                "type": "output_text",
+                "text": TEXT,
+                "content_index": 0,
+                "logprobs": [
+                    {"token": "a", "logprob": -0.1, "start_index": 0, "end_index": 1}
+                ],
+            }
+        )
+        harness = _Harness()
+        try:
+            _MainUpstream.source = raw
+            _FakeUpstream.payload = _review_payload(
+                [_prop("t0", keep=True, replacement=None)]
+            )
+            status, payload = harness.post(_contract_body(False))
+            self.assertEqual(status, 200)
+            self.assertNotIn(b"logprobs", payload)
+            body = json.loads(payload)
+            self.assertEqual(body["output"][0]["content"][0]["text"], TEXT)
+        finally:
+            harness.close()
+
+    def test_json_logprobs_unexpected_type_removed(self) -> None:
+        # logprobs: false (unexpected type) is removed by presence.
+        raw = self._json_body(
+            {"type": "output_text", "text": TEXT, "content_index": 0, "logprobs": False}
+        )
+        harness = _Harness()
+        try:
+            _MainUpstream.source = raw
+            _FakeUpstream.payload = _review_payload(
+                [_prop("t0", keep=True, replacement=None)]
+            )
+            status, payload = harness.post(_contract_body(False))
+            self.assertEqual(status, 200)
+            self.assertNotIn(b"logprobs", payload)
+        finally:
+            harness.close()
+
+    def test_json_logprobs_object_removed(self) -> None:
+        # logprobs: object (unexpected type) is removed by presence.
+        raw = self._json_body(
+            {
+                "type": "output_text",
+                "text": TEXT,
+                "content_index": 0,
+                "logprobs": {"unexpected": "shape"},
+            }
+        )
+        harness = _Harness()
+        try:
+            _MainUpstream.source = raw
+            _FakeUpstream.payload = _review_payload(
+                [_prop("t0", keep=True, replacement=None)]
+            )
+            status, payload = harness.post(_contract_body(False))
+            self.assertEqual(status, 200)
+            self.assertNotIn(b"logprobs", payload)
+        finally:
+            harness.close()
+
+    def test_json_other_fields_unchanged_after_removal(self) -> None:
+        # Removing logprobs must not alter any other field.
+        raw = self._json_body(
+            {
+                "type": "output_text",
+                "text": TEXT,
+                "content_index": 0,
+                "logprobs": [{"token": "a", "logprob": -1.0}],
+            }
+        )
+        harness = _Harness()
+        try:
+            _MainUpstream.source = raw
+            _FakeUpstream.payload = _review_payload(
+                [_prop("t0", keep=True, replacement=None)]
+            )
+            status, payload = harness.post(_contract_body(False))
+            self.assertEqual(status, 200)
+            body = json.loads(payload)
+            # All other fields preserved
+            self.assertEqual(body["object"], "response")
+            self.assertEqual(body["id"], "r")
+            self.assertEqual(body["status"], "completed")
+            msg = body["output"][0]
+            self.assertEqual(msg["type"], "message")
+            self.assertEqual(msg["id"], "m")
+            self.assertEqual(msg["role"], "assistant")
+            self.assertEqual(msg["status"], "completed")
+            self.assertEqual(msg["output_index"], 0)
+            part = msg["content"][0]
+            self.assertEqual(part["type"], "output_text")
+            self.assertEqual(part["text"], TEXT)
+            self.assertEqual(part["content_index"], 0)
+            # logprobs absent
+            self.assertNotIn("logprobs", part)
+        finally:
+            harness.close()
+
+    def test_json_no_logprobs_no_edit_byte_identical(self) -> None:
+        # No logprobs present and no edit: output is byte-identical to input.
+        raw = self._json_body(
+            {"type": "output_text", "text": TEXT, "content_index": 0}
+        )
+        harness = _Harness()
+        try:
+            _MainUpstream.source = raw
+            _FakeUpstream.payload = _review_payload(
+                [_prop("t0", keep=True, replacement=None)]
+            )
+            status, payload = harness.post(_contract_body(False))
+            self.assertEqual(status, 200)
+            self.assertEqual(payload, raw)
+        finally:
+            harness.close()
+
+    def test_json_annotations_still_bypass(self) -> None:
+        # Non-empty annotations still cause bypass (policy unchanged).
+        raw = self._json_body(
+            {
+                "type": "output_text",
+                "text": TEXT,
+                "content_index": 0,
+                "annotations": [{"type": "url_citation", "url_index": 0, "start_index": 0, "end_index": 3}],
+            }
+        )
+        self._json_bypass_helper(raw)
+
+    def _json_bypass_helper(self, raw: bytes) -> None:
+        harness = _Harness()
+        try:
+            _MainUpstream.source = raw
+            status, payload = harness.post(_contract_body(False))
+            self.assertEqual(status, 200)
+            self.assertEqual(len(_FakeUpstream.recorded), 0)
+            self.assertEqual(payload, raw)
+        finally:
+            harness.close()
+
+    def test_sse_content_part_done_logprobs_removed(self) -> None:
+        # Order 035-c: logprobs on a content_part.done part is removed.
+        part_done = (
+            '{"type":"response.content_part.done","item_id":"m",'
+            '"part":{"type":"output_text","text":'
+            + json.dumps(TEXT)
+            + ',"logprobs":[{"token":"x"}]}}'
+        ).encode()
+        raw = _tc_raw(
+            _tc_delta("m", TEXT),
+            part_done,
+            _tc_item_done(parts=[{"type": "output_text", "text": TEXT}]),
+            self._sse_completed_event(
+                {"object": "response", "id": "r", "status": "completed", "output": [self._msg()]}
+            ),
+        )
+        harness = _Harness()
+        try:
+            _MainUpstream.content_type = "text/event-stream"
+            _MainUpstream.content_type = "text/event-stream"
+            _MainUpstream.content_type = "text/event-stream"
+            _MainUpstream.content_type = "text/event-stream"
+            _MainUpstream.content_type = "text/event-stream"
+            _MainUpstream.source = raw
+            _FakeUpstream.payload = _review_payload(
+                [_prop("t0", keep=True, replacement=None)]
+            )
+            status, payload = harness.post(_contract_body(True))
+            self.assertEqual(status, 200)
+            self.assertNotIn(b"logprobs", payload)
+            self.assertIn(TEXT.encode(), payload)
+        finally:
+            _MainUpstream.content_type = "application/json"
+            _MainUpstream.content_type = "application/json"
+            _MainUpstream.content_type = "application/json"
+            _MainUpstream.content_type = "application/json"
+            _MainUpstream.content_type = "application/json"
+            _MainUpstream.content_type = "application/json"
+            harness.close()
+
+    def test_sse_output_item_done_logprobs_removed(self) -> None:
+        # Order 035-c: logprobs on an output_item.done content part is removed.
+        item_done = (
+            '{"type":"response.output_item.done","output_index":0,'
+            '"item":{"type":"message","id":"m","role":"assistant",'
+            '"content":[{"type":"output_text","text":'
+            + json.dumps(TEXT)
+            + ',"logprobs":[{"token":"y"}]}]}}'
+        ).encode()
+        raw = _tc_raw(
+            _tc_delta("m", TEXT),
+            _tc_part_done(text=TEXT),
+            item_done,
+            self._sse_completed_event(
+                {"object": "response", "id": "r", "status": "completed", "output": [self._msg()]}
+            ),
+        )
+        harness = _Harness()
+        try:
+            _MainUpstream.content_type = "text/event-stream"
+            _MainUpstream.content_type = "text/event-stream"
+            _MainUpstream.content_type = "text/event-stream"
+            _MainUpstream.content_type = "text/event-stream"
+            _MainUpstream.content_type = "text/event-stream"
+            _MainUpstream.source = raw
+            _FakeUpstream.payload = _review_payload(
+                [_prop("t0", keep=True, replacement=None)]
+            )
+            status, payload = harness.post(_contract_body(True))
+            self.assertEqual(status, 200)
+            self.assertNotIn(b"logprobs", payload)
+            self.assertIn(TEXT.encode(), payload)
+        finally:
+            _MainUpstream.content_type = "application/json"
+            _MainUpstream.content_type = "application/json"
+            _MainUpstream.content_type = "application/json"
+            _MainUpstream.content_type = "application/json"
+            _MainUpstream.content_type = "application/json"
+            _MainUpstream.content_type = "application/json"
+            harness.close()
+
+    def test_sse_completed_nested_logprobs_removed(self) -> None:
+        # Order 035-c: logprobs in the nested response of a completed event is removed.
+        completed = (
+            '{"type":"response.completed","response":{"object":"response",'
+            '"id":"r","status":"completed","output":'
+            '[{"type":"message","id":"m","role":"assistant","status":"completed",'
+            '"output_index":0,"content":[{"type":"output_text","text":'
+            + json.dumps(TEXT)
+            + ',"content_index":0,"logprobs":[{"token":"z"}]}]}]}}'
+        ).encode()
+        raw = _tc_raw(
+            _tc_delta("m", TEXT),
+            _tc_part_done(text=TEXT),
+            _tc_item_done(parts=[{"type": "output_text", "text": TEXT}]),
+            completed,
+        )
+        harness = _Harness()
+        try:
+            _MainUpstream.content_type = "text/event-stream"
+            _MainUpstream.content_type = "text/event-stream"
+            _MainUpstream.content_type = "text/event-stream"
+            _MainUpstream.content_type = "text/event-stream"
+            _MainUpstream.content_type = "text/event-stream"
+            _MainUpstream.source = raw
+            _FakeUpstream.payload = _review_payload(
+                [_prop("t0", keep=True, replacement=None)]
+            )
+            status, payload = harness.post(_contract_body(True))
+            self.assertEqual(status, 200)
+            self.assertNotIn(b"logprobs", payload)
+            self.assertIn(TEXT.encode(), payload)
+        finally:
+            _MainUpstream.content_type = "application/json"
+            _MainUpstream.content_type = "application/json"
+            _MainUpstream.content_type = "application/json"
+            _MainUpstream.content_type = "application/json"
+            _MainUpstream.content_type = "application/json"
+            _MainUpstream.content_type = "application/json"
+            harness.close()
+
+    def test_json_ineligible_envelope_logprobs_still_removed(self) -> None:
+        # Even an ineligible envelope (incomplete status) has logprobs removed.
+        value = {
+            "object": "response",
+            "id": "r",
+            "status": "in_progress",
+            "output": [
+                {
+                    "type": "message",
+                    "id": "m",
+                    "role": "assistant",
+                    "status": "in_progress",
+                    "output_index": 0,
+                    "content": [
+                        {
+                            "type": "output_text",
+                            "text": TEXT,
+                            "content_index": 0,
+                            "logprobs": [{"token": "a"}],
+                        }
+                    ],
+                }
+            ],
+        }
+        raw = json.dumps(value, separators=(",", ":")).encode()
+        harness = _Harness()
+        try:
+            _MainUpstream.source = raw
+            status, payload = harness.post(_contract_body(False))
+            self.assertEqual(status, 200)
+            # No review call (ineligible)
+            self.assertEqual(len(_FakeUpstream.recorded), 0)
+            # But logprobs is still removed from the wire data
+            self.assertNotIn(b"logprobs", payload)
+            body = json.loads(payload)
+            self.assertEqual(body["status"], "in_progress")
+            self.assertEqual(body["output"][0]["content"][0]["text"], TEXT)
+        finally:
+            harness.close()
+
+
+    def test_json_non200_logprobs_removed(self) -> None:
+        # R3: non-200 recognized Responses object has logprobs removed.
+        value = {
+            "object": "response",
+            "id": "r",
+            "status": "failed",
+            "error": {"code": "server_error"},
+            "output": [
+                {
+                    "type": "message", "id": "m", "role": "assistant",
+                    "status": "incomplete", "output_index": 0,
+                    "content": [
+                        {"type": "output_text", "text": "partial", "content_index": 0,
+                         "logprobs": [{"token": "x"}]}
+                    ],
+                }
+            ],
+        }
+        raw = json.dumps(value, separators=(",", ":")).encode()
+        harness = _Harness()
+        try:
+            _MainUpstream.source = raw
+            _MainUpstream.status = 503
+            status, payload = harness.post(_contract_body(False))
+            self.assertEqual(status, 503)
+            self.assertEqual(len(_FakeUpstream.recorded), 0)
+            self.assertNotIn(b"logprobs", payload)
+            body = json.loads(payload)
+            self.assertEqual(body["status"], "failed")
+            self.assertEqual(body["error"]["code"], "server_error")
+            self.assertEqual(body["output"][0]["content"][0]["text"], "partial")
+        finally:
+            _MainUpstream.status = 200
+            harness.close()
+
+    def test_sse_non200_logprobs_removed(self) -> None:
+        # R3: SSE non-200 with well-formed completed snapshot has logprobs removed.
+        completed = (
+            '{"type":"response.completed","response":{"object":"response",'
+            '"id":"r","status":"incomplete","incomplete_details":{"reason":"max_output_tokens"},'
+            '"output":'
+            '[{"type":"message","id":"m","role":"assistant","status":"incomplete",'
+            '"output_index":0,"content":[{"type":"output_text","text":"partial",'
+            '"content_index":0,"logprobs":[{"token":"x"}]}]}]}}'
+        ).encode()
+        raw = _tc_raw(
+            _tc_delta("m", "partial"),
+            completed,
+        )
+        harness = _Harness()
+        try:
+            _MainUpstream.content_type = "text/event-stream"
+            _MainUpstream.source = raw
+            _MainUpstream.status = 503
+            status, payload = harness.post(_contract_body(True))
+            self.assertEqual(status, 503)
+            self.assertEqual(len(_FakeUpstream.recorded), 0)
+            self.assertNotIn(b"logprobs", payload)
+            self.assertIn(b"partial", payload)
+        finally:
+            _MainUpstream.status = 200
+            _MainUpstream.content_type = "application/json"
+            harness.close()
+
+    def test_json_lone_surrogate_in_answer(self) -> None:
+        # R6: escaped lone surrogate in answer text does not cause 502.
+        # \ud800 is a valid JSON escape for a lone surrogate.
+        value = {
+            "object": "response", "id": "r", "status": "completed",
+            "output": [
+                {"type": "message", "id": "m", "role": "assistant",
+                 "status": "completed", "output_index": 0,
+                 "content": [
+                     {"type": "output_text",
+                      "text": "abc\ud800def",
+                      "content_index": 0,
+                      "logprobs": [{"token": "x"}]}
+                 ]}
+            ],
+        }
+        # Build raw JSON with the escaped surrogate
+        raw = (
+            b'{"object":"response","id":"r","status":"completed","output":'
+            b'[{"type":"message","id":"m","role":"assistant","status":"completed",'
+            b'"output_index":0,"content":[{"type":"output_text","text":"abc\ud800def",'
+            b'"content_index":0,"logprobs":[{"token":"x"}]}]}]}'
+        )
+        harness = _Harness()
+        try:
+            _MainUpstream.source = raw
+            _FakeUpstream.payload = _review_payload(
+                [_prop("t0", keep=True, replacement=None)]
+            )
+            status, payload = harness.post(_contract_body(False))
+            self.assertEqual(status, 200)
+            self.assertNotIn(b"logprobs", payload)
+            # The answer text must be preserved (lone surrogate intact)
+            body = json.loads(payload)
+            self.assertEqual(body["output"][0]["content"][0]["text"], "abc\ud800def")
+        finally:
+            harness.close()
+
+    def test_json_lone_surrogate_in_metadata(self) -> None:
+        # R6: escaped lone surrogate in opaque metadata is preserved.
+        raw = (
+            b'{"object":"response","id":"r","status":"completed","metadata":{"k":"x\ud800y"},'
+            b'"output":[{"type":"message","id":"m","role":"assistant","status":"completed",'
+            b'"output_index":0,"content":[{"type":"output_text","text":"hello",'
+            b'"content_index":0,"logprobs":null}]}]}'
+        )
+        harness = _Harness()
+        try:
+            _MainUpstream.source = raw
+            _FakeUpstream.payload = _review_payload(
+                [_prop("t0", keep=True, replacement=None)]
+            )
+            status, payload = harness.post(_contract_body(False))
+            self.assertEqual(status, 200)
+            self.assertNotIn(b"logprobs", payload)
+            body = json.loads(payload)
+            self.assertEqual(body["metadata"]["k"], "x\ud800y")
+            self.assertEqual(body["output"][0]["content"][0]["text"], "hello")
+        finally:
+            harness.close()
+
+    def test_sse_output_item_two_parts_logprobs_removed(self) -> None:
+        # R3: SSE output_item.done with TWO output_text parts - both lose logprobs.
+        item_done = (
+            '{"type":"response.output_item.done","output_index":0,'
+            '"item":{"type":"message","id":"m","role":"assistant",'
+            '"content":['
+            '{"type":"output_text","text":' + json.dumps(TEXT) +
+            ',"logprobs":[{"token":"a"}]},'
+            '{"type":"output_text","text":"second","logprobs":[{"token":"b"}]}'
+            ']}}'
+        ).encode()
+        # This is unrepairable (two content parts), so it bypasses with 0 review.
+        # But both logprobs must still be removed.
+        raw = _tc_raw(
+            _tc_delta("m", TEXT),
+            _tc_part_done(text=TEXT),
+            item_done,
+            self._sse_completed_event(
+                {"object": "response", "id": "r", "status": "completed",
+                 "output": [self._msg()]}
+            ),
+        )
+        harness = _Harness()
+        try:
+            _MainUpstream.content_type = "text/event-stream"
+            _MainUpstream.source = raw
+            _FakeUpstream.payload = _review_payload(
+                [_prop("t0", keep=True, replacement=None)]
+            )
+            status, payload = harness.post(_contract_body(True))
+            self.assertEqual(status, 200)
+            self.assertEqual(len(_FakeUpstream.recorded), 0)
+            # Both logprobs removed
+            self.assertNotIn(b"logprobs", payload)
+        finally:
+            _MainUpstream.content_type = "application/json"
+            harness.close()
+
+    def test_json_metadata_only_not_text_edit(self) -> None:
+        # R4: metadata-only change (logprobs removed) is NOT a text edit.
+        # The changed flag must be False.
+        from proxy import transform_json
+        raw = self._json_body(
+            {"type": "output_text", "text": TEXT, "content_index": 0,
+             "logprobs": [{"token": "x"}]}
+        )
+        result_bytes, changed = transform_json(raw, lambda t: t)
+        # logprobs removed, but no text edit
+        self.assertFalse(changed, "metadata-only must not set changed=True")
+        self.assertNotIn(b"logprobs", result_bytes)
+        body = json.loads(result_bytes)
+        self.assertEqual(body["output"][0]["content"][0]["text"], TEXT)
+
+    def test_sse_metadata_only_not_text_edit(self) -> None:
+        # R4: SSE metadata-only change is NOT a text edit.
+        from proxy import transform_sse
+        delta = (
+            '{"type":"response.output_text.delta","item_id":"m",'
+            '"logprobs":[{"token":"t"}],"delta":' + json.dumps(TEXT) + "}"
+        ).encode()
+        raw = _tc_raw(
+            delta,
+            _tc_part_done(text=TEXT),
+            _tc_item_done(parts=[{"type": "output_text", "text": TEXT}]),
+            self._sse_completed_event(
+                {"object": "response", "id": "r", "status": "completed",
+                 "output": [self._msg()]}
+            ),
+        )
+        result_bytes, changed = transform_sse(raw, lambda t: t)
+        self.assertFalse(changed, "metadata-only SSE must not set changed=True")
+        self.assertNotIn(b"logprobs", result_bytes)
+
+
+    def test_non200_json_body_with_stream_true(self) -> None:
+        # R3: stream=true request receives application/json 503 body.
+        # Normalization selects by ACTUAL content type, not request.stream.
+        value = {
+            "object": "response", "id": "r", "status": "failed",
+            "error": {"code": "overloaded"},
+            "output": [
+                {"type": "message", "id": "m", "role": "assistant",
+                 "status": "incomplete", "output_index": 0,
+                 "content": [{"type": "output_text", "text": "x",
+                              "content_index": 0, "logprobs": None}]}
+            ],
+        }
+        raw = json.dumps(value, separators=(",", ":")).encode()
+        harness = _Harness()
+        try:
+            _MainUpstream.source = raw
+            _MainUpstream.status = 503
+            _MainUpstream.content_type = "application/json"
+            status, payload = harness.post(_contract_body(True))  # stream=True!
+            self.assertEqual(status, 503)
+            self.assertNotIn(b"logprobs", payload)
+            self.assertEqual(len(_FakeUpstream.recorded), 0)
+        finally:
+            _MainUpstream.status = 200
+            _MainUpstream.content_type = "text/event-stream"
+            harness.close()
+
+    def test_non200_sse_body_with_stream_false(self) -> None:
+        # R3: stream=false request receives text/event-stream 503 body.
+        # Normalization selects by ACTUAL content type, not request.stream.
+        completed = (
+            '{"type":"response.completed","response":{"object":"response",'
+            '"id":"r","status":"incomplete",'
+            '"output":[{"type":"message","id":"m","role":"assistant",'
+            '"status":"incomplete","output_index":0,"content":'
+            '[{"type":"output_text","text":"partial","content_index":0,'
+            '"logprobs":null}]}]}}'
+        ).encode()
+        raw = _tc_raw(completed)
+        harness = _Harness()
+        try:
+            _MainUpstream.source = raw
+            _MainUpstream.status = 503
+            _MainUpstream.content_type = "text/event-stream"
+            status, payload = harness.post(_contract_body(False))  # stream=False!
+            self.assertEqual(status, 503)
+            self.assertNotIn(b"logprobs", payload)
+            self.assertEqual(len(_FakeUpstream.recorded), 0)
+        finally:
+            _MainUpstream.status = 200
+            _MainUpstream.content_type = "application/json"
+            harness.close()
+
+    def test_non200_huge_integer_body_preserved(self) -> None:
+        # R3: non-200 body with JSON decoder overflow (huge integer) is
+        # returned raw unchanged (malformed error-body semantics preserved).
+        huge_int = "9" * 4500
+        raw = ('{"opaque_integer":' + huge_int + "}").encode()
+        harness = _Harness()
+        try:
+            _MainUpstream.source = raw
+            _MainUpstream.status = 503
+            _MainUpstream.content_type = "application/json"
+            status, payload = harness.post(_contract_body(False))
+            self.assertEqual(status, 503)
+            self.assertEqual(payload, raw)  # byte-identical
+            self.assertEqual(len(_FakeUpstream.recorded), 0)
+        finally:
+            _MainUpstream.status = 200
+            harness.close()
+
+    def test_sse_lone_surrogate_in_completed_answer(self) -> None:
+        # R6: SSE completed snapshot with escaped lone surrogate in answer
+        # text and logprobs:null. Expected 200, surrogate preserved, logprobs gone.
+        completed = (
+            b'{"type":"response.completed","response":{"object":"response",'
+            b'"id":"r","status":"completed",'
+            b'"output":[{"type":"message","id":"m","role":"assistant",'
+            b'"status":"completed","output_index":0,"content":'
+            b'[{"type":"output_text","text":"abc\ud800def",'
+            b'"content_index":0,"logprobs":null}]}]}}'
+        )
+        raw = _tc_raw(
+            _tc_delta("m", "abc\ud800def"),
+            completed,
+        )
+        harness = _Harness()
+        try:
+            _MainUpstream.content_type = "text/event-stream"
+            _MainUpstream.source = raw
+            _FakeUpstream.payload = _review_payload(
+                [_prop("t0", keep=True, replacement=None)]
+            )
+            status, payload = harness.post(_contract_body(True))
+            self.assertEqual(status, 200)
+            self.assertNotIn(b"logprobs", payload)
+        finally:
+            _MainUpstream.content_type = "application/json"
+            harness.close()
+
+    def test_sse_lone_surrogate_in_metadata(self) -> None:
+        # R6: SSE completed snapshot with escaped lone surrogate in metadata.
+        completed = (
+            b'{"type":"response.completed","response":{"object":"response",'
+            b'"id":"r","status":"completed","metadata":{"k":"x\ud800y"},'
+            b'"output":[{"type":"message","id":"m","role":"assistant",'
+            b'"status":"completed","output_index":0,"content":'
+            b'[{"type":"output_text","text":"hello","content_index":0,'
+            b'"logprobs":null}]}]}}'
+        )
+        raw = _tc_raw(
+            _tc_delta("m", "hello"),
+            completed,
+        )
+        harness = _Harness()
+        try:
+            _MainUpstream.content_type = "text/event-stream"
+            _MainUpstream.source = raw
+            _FakeUpstream.payload = _review_payload(
+                [_prop("t0", keep=True, replacement=None)]
+            )
+            status, payload = harness.post(_contract_body(True))
+            self.assertEqual(status, 200)
+            self.assertNotIn(b"logprobs", payload)
+        finally:
+            _MainUpstream.content_type = "application/json"
+            harness.close()
 
 
 if __name__ == "__main__":

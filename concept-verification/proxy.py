@@ -66,6 +66,7 @@ from repair import apply_edits
 from responses_contract import (
     RequestContractError,
     aligned_metadata_clean,
+    remove_defined_logprobs,
     validate_completed_envelope,
     validate_request,
 )
@@ -209,7 +210,14 @@ def _render_event(block: str, value: dict[str, object]) -> str:
     data_index = next((index for index, line in enumerate(lines) if line.startswith("data:")), None)
     if data_index is None:
         return block
-    lines[data_index] = "data: " + json.dumps(value, ensure_ascii=False, separators=(",", ":"))
+    payload = json.dumps(value, ensure_ascii=False, separators=(",", ":"))
+    try:
+        payload.encode("utf-8")
+    except UnicodeEncodeError:
+        # Lone surrogate in a value: fall back to ASCII-safe encoding
+        # (order 035-c R6).  Parsed value is identical.
+        payload = json.dumps(value, ensure_ascii=True, separators=(",", ":"))
+    lines[data_index] = "data: " + payload
     lines = [
         line
         for index, line in enumerate(lines)
@@ -264,6 +272,53 @@ def transform_sse(raw: bytes, repair: Callable[[str], str]) -> tuple[bytes, bool
     """
     blocks = _split_sse(raw)
     parsed: list[dict[str, object] | None] = [_event(block) for block, _ in blocks]
+
+    # Order 035-c: always remove defined logprobs from all SSE event
+    # locations before any eligibility/repair logic (by key presence,
+    # regardless of value/type; no recursive user-data scan).
+    logprobs_modified: set[int] = set()
+    for _idx, _val in enumerate(parsed):
+        if _val is None:
+            continue
+        _et = _val.get("type")
+        if _et in ("response.output_text.delta", "response.output_text.done"):
+            if "logprobs" in _val:
+                del _val["logprobs"]
+                logprobs_modified.add(_idx)
+        elif _et in ("response.content_part.added", "response.content_part.done"):
+            _p = _val.get("part")
+            if isinstance(_p, dict) and _p.get("type") == "output_text" and "logprobs" in _p:
+                del _p["logprobs"]
+                logprobs_modified.add(_idx)
+        elif _et in ("response.output_item.added", "response.output_item.done"):
+            _it = _val.get("item")
+            if isinstance(_it, dict) and _it.get("type") == "message":
+                _ct = _it.get("content")
+                if isinstance(_ct, list):
+                    for _pp in _ct:
+                        if isinstance(_pp, dict) and _pp.get("type") == "output_text" and "logprobs" in _pp:
+                            del _pp["logprobs"]
+                            logprobs_modified.add(_idx)
+        elif _et in ("response.created", "response.in_progress", "response.completed",
+                     "response.incomplete", "response.failed", "response.queued"):
+            _resp = _val.get("response")
+            if isinstance(_resp, dict) and remove_defined_logprobs(_resp):
+                logprobs_modified.add(_idx)
+
+    def _bypass() -> tuple[bytes, bool]:
+        """Return raw unchanged, or re-render only logprobs-removed events."""
+        if not logprobs_modified:
+            return raw, False
+        _parts: list[str] = []
+        for (_blk, _delim), _v, _i in zip(blocks, parsed, range(len(blocks)), strict=True):
+            if _v is None:
+                _parts.append(_blk + _delim)
+                continue
+            if _i in logprobs_modified:
+                _blk = _render_event(_blk, _v)
+            _parts.append(_blk + _delim)
+        return "".join(_parts).encode("utf-8"), False
+
     streams: dict[str, list[str]] = {}
     # Positions declared by the stream events themselves: text delta/done
     # events and content-part added/done events carry ``item_id`` plus
@@ -344,7 +399,7 @@ def transform_sse(raw: bytes, repair: Callable[[str], str]) -> tuple[bytes, bool
         # Answer-related events with missing, non-string or empty ids (or
         # unowned answer-shaped terminal copies) carry ambiguous ownership:
         # bypass unchanged with zero review calls.
-        return raw, False
+        return _bypass()
     # Completed-envelope answer units: every output_text part of any message
     # item in any response.output, with list ownership positions.
     # Output messages are identified by ``id`` (delta/done events carry
@@ -430,11 +485,11 @@ def transform_sse(raw: bytes, repair: Callable[[str], str]) -> tuple[bytes, bool
     if non_empty:
         if len(non_empty) != 1:
             # Several assistant text answers: ambiguous ownership.
-            return raw, False
+            return _bypass()
         item_id = non_empty[0]
         if not answer_event_ids <= {item_id}:
             # An answer event for another id: ambiguous ownership.
-            return raw, False
+            return _bypass()
         joined = "".join(streams[item_id])
         # Exactly one confirming final assistant output_text with consistent
         # ownership is required before any repair call: the final message id
@@ -444,7 +499,7 @@ def transform_sse(raw: bytes, repair: Callable[[str], str]) -> tuple[bytes, bool
         # units, wrong id, inconsistent indices, or mismatched text)
         # bypasses unchanged with zero calls.
         if len(units) != 1:
-            return raw, False
+            return _bypass()
         unit_index, output_pos, unit_item, content_pos, unit_part = units[0]
         message_id = unit_item.get("id")
         confirmed = (
@@ -457,7 +512,7 @@ def transform_sse(raw: bytes, repair: Callable[[str], str]) -> tuple[bytes, bool
             and unit_part["text"] == joined
         )
         if not confirmed:
-            return raw, False
+            return _bypass()
         confirmed_id = item_id
         original_text = joined
     else:
@@ -467,7 +522,7 @@ def transform_sse(raw: bytes, repair: Callable[[str], str]) -> tuple[bytes, bool
         if len(assistant_units) != 1 or len(units) != 1:
             # No unambiguous single assistant answer (several answers,
             # several content parts, or non-answer content): bypass.
-            return raw, False
+            return _bypass()
         unit_index, output_pos, unit_item, content_pos, unit_part = assistant_units[0]
         message_id = unit_item.get("id")
         if (
@@ -479,7 +534,7 @@ def transform_sse(raw: bytes, repair: Callable[[str], str]) -> tuple[bytes, bool
             or not answer_event_ids <= {message_id}
         ):
             # Absent or inconsistent ownership: bypass unchanged.
-            return raw, False
+            return _bypass()
         confirmed_id = message_id
         original_text = str(unit_part["text"])
 
@@ -487,12 +542,12 @@ def transform_sse(raw: bytes, repair: Callable[[str], str]) -> tuple[bytes, bool
         # The completed envelope confirming the single answer is not an
         # explicitly completed, error-free Responses object: bypass
         # unchanged with zero review calls.
-        return raw, False
+        return _bypass()
     if not aligned_metadata_clean(unit_part):
         # Non-empty (or non-list) aligned metadata on the final answer
         # part cannot be kept valid beside a changed answer: bypass
         # unchanged with zero review calls.
-        return raw, False
+        return _bypass()
 
     # Order 014-b requirement 2/3: before any reviewer side effect, every
     # answer-bearing terminal representation must be proved consistent with
@@ -508,7 +563,7 @@ def transform_sse(raw: bytes, repair: Callable[[str], str]) -> tuple[bytes, bool
     if not isinstance(final_content, list):
         # Units are only collected from a list content above; this keeps the
         # preflight's typed boundary explicit.
-        return raw, False
+        return _bypass()
     final_kinds = [
         part.get("type") if isinstance(part, dict) else None for part in final_content
     ]
@@ -527,7 +582,7 @@ def transform_sse(raw: bytes, repair: Callable[[str], str]) -> tuple[bytes, bool
                     # A token/offset aligned list on a delta of the
                     # confirmed answer becomes stale beside a changed
                     # answer: the whole stream abstains.
-                    return raw, False
+                    return _bypass()
                 delta_indices.add(index)
         elif event_type == "response.content_part.added":
             part = value.get("part")
@@ -539,11 +594,11 @@ def transform_sse(raw: bytes, repair: Callable[[str], str]) -> tuple[bytes, bool
             # never rewritten, and non-empty initial content cannot be
             # proved safe, so it abstains raw unchanged with zero calls.
             if type(stream_id) is not str or stream_id != confirmed_id:
-                return raw, False
+                return _bypass()
             if "text" in part and part["text"] != "":
-                return raw, False
+                return _bypass()
             if not aligned_metadata_clean(part):
-                return raw, False
+                return _bypass()
         elif event_type == "response.output_item.added":
             item_obj = value.get("item")
             if not (isinstance(item_obj, dict) and item_obj.get("type") == "message"):
@@ -551,22 +606,22 @@ def transform_sse(raw: bytes, repair: Callable[[str], str]) -> tuple[bytes, bool
                 continue
             obj_id = item_obj.get("id")
             if type(obj_id) is not str or obj_id != confirmed_id:
-                return raw, False
+                return _bypass()
             # The initial representation of the answer item must agree on
             # identity and role and carry supported empty placeholders only.
             if item_obj.get("role") != "assistant":
-                return raw, False
+                return _bypass()
             content = item_obj.get("content")
             if content is not None:
                 if not isinstance(content, list):
-                    return raw, False
+                    return _bypass()
                 for part in content:
                     if not isinstance(part, dict) or (
                         "text" in part and part["text"] != ""
                     ):
-                        return raw, False
+                        return _bypass()
                     if not aligned_metadata_clean(part):
-                        return raw, False
+                        return _bypass()
         elif event_type == "response.output_text.done":
             if type(stream_id) is not str or stream_id != confirmed_id:
                 continue
@@ -575,11 +630,11 @@ def transform_sse(raw: bytes, repair: Callable[[str], str]) -> tuple[bytes, bool
                 # A terminal done event must carry the exact original
                 # answer text; a missing or different text cannot be
                 # proved consistent.
-                return raw, False
+                return _bypass()
             if not aligned_metadata_clean(value):
                 # Stale token/offset alignment on a terminal copy of the
                 # confirmed answer makes the whole stream ineligible.
-                return raw, False
+                return _bypass()
             editable[index] = ("done", None)
         elif event_type == "response.content_part.done":
             part = value.get("part")
@@ -590,12 +645,12 @@ def transform_sse(raw: bytes, repair: Callable[[str], str]) -> tuple[bytes, bool
             # above; a missing or non-string id returned earlier.  Kept as
             # an explicit defense of the ownership rule.
             if type(stream_id) is not str or stream_id != confirmed_id:
-                return raw, False
+                return _bypass()
             copy_counts["content_part.done"] += 1
             if part.get("text") != original_text:
-                return raw, False
+                return _bypass()
             if not aligned_metadata_clean(part):
-                return raw, False
+                return _bypass()
             editable[index] = ("part", None)
         elif event_type == "response.output_item.done":
             item_obj = value.get("item")
@@ -605,32 +660,32 @@ def transform_sse(raw: bytes, repair: Callable[[str], str]) -> tuple[bytes, bool
                 continue
             obj_id = item_obj.get("id")
             if type(obj_id) is not str or obj_id != confirmed_id:
-                return raw, False
+                return _bypass()
             copy_counts["output_item.done"] += 1
             if item_obj.get("role") != "assistant":
-                return raw, False
+                return _bypass()
             if "status" in item_obj and item_obj.get("status") != "completed":
-                return raw, False
+                return _bypass()
             content = item_obj.get("content")
             if not isinstance(content, list) or len(content) != len(final_content):
-                return raw, False
+                return _bypass()
             for part_pos, part in enumerate(content):
                 if not isinstance(part, dict) or part.get("type") != final_kinds[part_pos]:
-                    return raw, False
+                    return _bypass()
             if content[content_pos].get("text") != original_text:
-                return raw, False
+                return _bypass()
             if not aligned_metadata_clean(content[content_pos]):
-                return raw, False
+                return _bypass()
             editable[index] = ("item", content_pos)
     if any(count > 1 for count in copy_counts.values()):
         # Duplicated terminal representations of the one answer are
         # ambiguous: bypass unchanged with zero calls.
-        return raw, False
+        return _bypass()
 
     new_text = repair(original_text)
     if new_text == original_text:
         # No accepted text edit: the raw bytes are returned unchanged.
-        return raw, False
+        return _bypass()
 
     # The validated final unit (a shared reference into the parsed events)
     # carries the repaired text; the render pass re-emits exactly the
@@ -642,7 +697,7 @@ def transform_sse(raw: bytes, repair: Callable[[str], str]) -> tuple[bytes, bool
         if value is None:
             output.append(block + delimiter)
             continue
-        re_render = index == unit_index
+        re_render = index == unit_index or index in logprobs_modified
         kind = editable.get(index)
         if kind is not None:
             kind_name, copy_pos = kind
@@ -688,31 +743,134 @@ def _strict_json_body(raw: bytes) -> dict[str, object]:
     return _strict_json_object(text)
 
 
+def _safe_json_dumps(obj: dict[str, object]) -> bytes:
+    r"""Serialize to UTF-8 JSON, escaping lone surrogates to keep output valid.
+
+    Normal non-ASCII text is preserved (ensure_ascii=False); a lone unpaired
+    surrogate cannot be UTF-8-encoded, so we fall back to ensure_ascii=True
+    which represents it as a JSON unicode escape in the text - the parsed
+    value is identical (order 035-c R6).
+    """
+    try:
+        return json.dumps(obj, ensure_ascii=False, separators=(",", ":")).encode("utf-8")
+    except UnicodeEncodeError:
+        return json.dumps(obj, ensure_ascii=True, separators=(",", ":")).encode("utf-8")
+
+
+def normalize_json_body(raw: bytes) -> bytes:
+    """Remove defined logprobs from a well-formed JSON response (any status).
+
+    If the body is not valid strict JSON (including decoder overflow,
+    duplicate keys, nonfinite numbers), it is returned unchanged
+    (malformed error-body semantics preserved, order 035-c R3).
+    No repair, no review calls.
+    """
+    try:
+        envelope = _strict_json_object(raw.decode("utf-8"))
+    except (ProxyError, UnicodeDecodeError, ValueError, OverflowError):
+        return raw
+    if not isinstance(envelope, dict):
+        return raw
+    if not remove_defined_logprobs(envelope):
+        return raw
+    try:
+        return _safe_json_dumps(envelope)
+    except (UnicodeEncodeError, ValueError):
+        return raw
+
+
+def normalize_sse_body(raw: bytes) -> bytes:
+    """Remove defined logprobs from a well-formed SSE stream (any status).
+
+    If the body is not valid SSE, it is returned unchanged.  No repair,
+    no review calls.  Only events with recognized logprobs locations are
+    re-rendered.
+    """
+    try:
+        blocks = _split_sse(raw)
+        parsed: list[dict[str, object] | None] = [_event(block) for block, _ in blocks]
+    except (ProxyError, ValueError, OverflowError):
+        return raw
+    modified: set[int] = set()
+    for idx, val in enumerate(parsed):
+        if val is None:
+            continue
+        et = val.get("type")
+        if et in ("response.output_text.delta", "response.output_text.done"):
+            if "logprobs" in val:
+                del val["logprobs"]
+                modified.add(idx)
+        elif et in ("response.content_part.added", "response.content_part.done"):
+            p = val.get("part")
+            if isinstance(p, dict) and p.get("type") == "output_text" and "logprobs" in p:
+                del p["logprobs"]
+                modified.add(idx)
+        elif et in ("response.output_item.added", "response.output_item.done"):
+            it = val.get("item")
+            if isinstance(it, dict) and it.get("type") == "message":
+                ct = it.get("content")
+                if isinstance(ct, list):
+                    for pp in ct:
+                        if isinstance(pp, dict) and pp.get("type") == "output_text" and "logprobs" in pp:
+                            del pp["logprobs"]
+                            modified.add(idx)
+        elif et in ("response.created", "response.in_progress", "response.completed",
+                    "response.incomplete", "response.failed", "response.queued"):
+            resp = val.get("response")
+            if isinstance(resp, dict) and remove_defined_logprobs(resp):
+                modified.add(idx)
+    if not modified:
+        return raw
+    parts: list[str] = []
+    for (block, delim), value, idx in zip(blocks, parsed, range(len(blocks)), strict=True):
+        if value is None:
+            parts.append(block + delim)
+            continue
+        if idx in modified:
+            block = _render_event(block, value)
+        parts.append(block + delim)
+    return "".join(parts).encode("utf-8")
+
+
 def transform_json(raw: bytes, repair: Callable[[str], str]) -> tuple[bytes, bool]:
     """Repair one completed JSON text answer with the same eligibility.
 
     Nonstreaming JSON is the primary supported path (order 015-a,
     requirement 4).  Malformed main JSON (invalid UTF-8, duplicate keys,
     nonfinite numbers, non-object) is a main error: it raises
-    ``ProxyError`` and never reaches repair.  A well-formed envelope that
-    is unsupported, or explicitly incomplete or error-bearing, passes
-    through byte-identical with zero review calls, retaining its original
-    status/finish/error semantics; no successful repair trace is recorded
-    for it.  Only the exact validated answer part is mutated; unrelated
-    values, IDs, usage and protected reasoning are preserved.
+    ``ProxyError`` and never reaches repair.  Defined API logprobs are
+    always removed by presence from recognized output_text parts before
+    eligibility or repair (order 035-c): without an approved edit, answer
+    text stays identical and only probability-field removal may change
+    wire data.  A well-formed envelope that is unsupported, or explicitly
+    incomplete or error-bearing, still has defined logprobs removed while
+    retaining its original status/finish/error semantics.  Only the exact
+    validated answer part is mutated for text; unrelated values, IDs,
+    usage, citations and protected reasoning are preserved.
     """
     envelope = _strict_json_body(raw)
+    # Order 035-c: always remove defined logprobs before eligibility/repair.
+    metadata_removed = remove_defined_logprobs(envelope)
     found = validate_completed_envelope(envelope)
     if found is None:
+        if metadata_removed:
+            return (
+                _safe_json_dumps(envelope),
+                False,
+            )
         return raw, False
     original_text, part = found
     new_text = repair(original_text)
     if new_text == original_text:
-        # No accepted text edit: the captured body is returned exactly.
+        if metadata_removed:
+            return (
+                _safe_json_dumps(envelope),
+                False,
+            )
         return raw, False
     part["text"] = new_text
     return (
-        json.dumps(envelope, ensure_ascii=False, separators=(",", ":")).encode("utf-8"),
+        _safe_json_dumps(envelope),
         True,
     )
 
@@ -1665,6 +1823,15 @@ class _Handler(BaseHTTPRequestHandler):
                 scope.raise_if_cancelled()
                 raw_seconds = time.monotonic() - started
                 repaired = forwarded.body
+                if forwarded.status != 200:
+                    # Order 035-c R3: remove defined logprobs from recognized
+                    # non-200 responses by ACTUAL content type (independent
+                    # of request.stream).  Malformed error bodies unchanged.
+                    _mt = forwarded.content_type.split(";", 1)[0].strip().lower()
+                    if _mt == "text/event-stream":
+                        repaired = normalize_sse_body(forwarded.body)
+                    elif _mt == "application/json":
+                        repaired = normalize_json_body(forwarded.body)
                 if forwarded.status == 200:
                     # The declared client mode must agree with the observed
                     # upstream content type; a mismatch (including an unknown
