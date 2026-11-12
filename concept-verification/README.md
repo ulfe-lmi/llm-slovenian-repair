@@ -1,5 +1,16 @@
 # EXPERIMENTAL / CONCEPT VERIFICATION / NOT PRODUCTION CODE
 
+**For current lab installation, use [the runnable-proxy guide](../docs/LAB-DEPLOYMENT.md).**
+It gives the external CC BY-SA statistics downloads, checksums, SQLite build,
+pinned Pandoc install, both authentication hops and a foreground smoke test.
+The proxy has demonstrated functional software/native compatibility; linguistic
+quality is unmeasured. No separate human evaluation dataset is required.
+
+The commands and research workflow below are historical development material,
+not installation prerequisites. In particular, evaluation collectors, held-out
+rounds and review sheets are not required for lab deployment. The historical
+trace-enabled example writes full text; the current lab guide leaves tracing off.
+
 This is one deliberately isolated research spike. It is not the production
 application, a release, a deployment, a corpus redistribution, or a linguistic
 quality claim. It uses standard-library Python 3.12, one synchronous process,
@@ -12,7 +23,7 @@ limits before inserting a derived SQLite index. Word absence is `UNAVAILABLE`;
 missing n-grams are `CENSORED` with an unknown denominator. The archives and
 index are private local data and must never be staged or packaged.
 
-## Commands
+## Historical research commands (not the lab quickstart)
 
 From the repository root:
 

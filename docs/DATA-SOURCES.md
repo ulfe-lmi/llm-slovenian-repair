@@ -1,5 +1,15 @@
 # Data source inventory
 
+For **current runnable-proxy installation**, use
+[lab deployment: statistics downloads and index preparation](LAB-DEPLOYMENT.md#statistics-licence-and-exact-downloads).
+It records the verified CC BY-SA 4.0 publisher terms for the two required Gigafida
+2.0 archives, exact URLs/size/SHA-256, the external data directory and SQLite
+preparation/checks. Real statistics are not bundled with the Apache-2.0 code.
+The dated inventory and objective-specific acquisition receipts below preserve
+historical state; their `NOT_ACQUIRED` labels are not current installation status.
+Their separate-authorization template is historical, not an additional approval
+step in the current owner-authorized installation recipe.
+
 The committed [source inventory](../resources/source-inventory-v1.json) is a dated
 metadata snapshot observed at `2026-09-08T09:13:23Z`. It records three publisher-labelled,
 derived ZIP artifacts and one Gigafida 2.2 query interface. It does not contain
