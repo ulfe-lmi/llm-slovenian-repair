@@ -31,7 +31,7 @@
       "tested_sha": "1bb9eec748bda198e52781f2b96cbea37760a172",
       "runtime_path": "proxy.py _Handler.do_POST - ConceptProxy.forward - capture_transport.read_bounded_body (completion validated; SSE requires response.completed event)",
       "evidence": "fresh 22 named existing tests at main, literal interpreter-exit0 (log bbf85422): logprobs JSON/SSE null/empty/populated/unexpected/object/string + ineligible + non-200; no-edit raw-byte identity; metadata echo preserved; Pandoc startup wrong-version/capability/timeout; mapping NFD-abstain/NFC-unstable fail-closed/blockquote-denied; zero-call high-identity + safe-known-zero; full suite 1006/718.100s/interpreter-exit0 (log 88593a73) executed at git HEAD c304bf16e5100337d0ee02244c5a88b5be9028c6+ final WIP test bytes (test_responses_contract.py 86d1ae6be3c8f2b8a1f2305472800550630e218e5b7c3970f69686aaa42f11c4, byte-identical to audited main); frozen runtime proxy.py 86df8af2f082389935e0c407bee6ae1c33f91721b7a600f73f2b8985995b67d2 and responses_contract.py 0d9347c57ce56ea134012a7065ea238d0c0aede5ea5cc87a85dd6c76ca2c38a7 are byte-identical to main; f64da10 is a source-equivalent commit, not the execution epoch; source trace of bounded capture with hard byte cap",
-      "negative_paths": "incomplete SSE (no completed event) to CaptureError; truncated body to 400 REQUEST_BODY_INCOMPLETE; hard capture cap to bounded API failure"
+      "negative_paths": "incomplete SSE (no completed event) to CaptureError; INCOMING request-body truncation (fewer than declared bytes) to 400 REQUEST_BODY_INCOMPLETE at intake; a truncated MAIN-upstream body is governed by read_bounded_body (exact declared bytes) and, on post-intake failure, the Exception path (proxy 1915-1927) sends 502 before emission, not the ingress 400; hard capture cap to bounded API failure"
     },
     {
       "id": "LR-002",
@@ -71,7 +71,7 @@
       "tested_sha": "1bb9eec748bda198e52781f2b96cbea37760a172",
       "runtime_path": "batch_review.parse_batch_envelope - BatchProposal - Proposal - runtime_acceptance.accept validates; repair.apply_edits composes original-slice + replacement; model output is an untrusted local proposal only",
       "evidence": "full suite 1006/718.100s/interpreter-exit0 (log 88593a73) executed at git HEAD c304bf16e5100337d0ee02244c5a88b5be9028c6+ final WIP test bytes (test_responses_contract.py 86d1ae6be3c8f2b8a1f2305472800550630e218e5b7c3970f69686aaa42f11c4, byte-identical to audited main); frozen runtime proxy.py 86df8af2f082389935e0c407bee6ae1c33f91721b7a600f73f2b8985995b67d2 and responses_contract.py 0d9347c57ce56ea134012a7065ea238d0c0aede5ea5cc87a85dd6c76ca2c38a7 are byte-identical to main; f64da10 is a source-equivalent commit, not the execution epoch; fresh 22 named existing tests at main, literal interpreter-exit0 (log bbf85422): logprobs JSON/SSE null/empty/populated/unexpected/object/string + ineligible + non-200; no-edit raw-byte identity; metadata echo preserved; Pandoc startup wrong-version/capability/timeout; mapping NFD-abstain/NFC-unstable fail-closed/blockquote-denied; zero-call high-identity + safe-known-zero (no-edit raw bytes, metadata)",
-      "negative_paths": "parse_batch_envelope rejects a full-answer or sentence rewrite (expects one local replacement per id); apply_edits raises on protected overlap"
+      "negative_paths": "the model may only propose the assigned span: parse_batch_envelope enforces envelope/schema/version/assigned-IDs/proposal structure, while width/lexical/context/protected-span checks are runtime_acceptance.accept + composed_validation.validate_composed, then exact original splicing (repair.apply_edits raises on protected overlap); a full-answer or sentence rewrite is rejected by this combined path, not by a single parser that semantically recognizes rewrites"
     },
     {
       "id": "LR-007",
@@ -365,7 +365,7 @@
     {
       "id": "MVP-8",
       "class": "PARTIAL",
-      "gap": "per-response latency (timings) and additional review usage are reported in the detail/trace, but benefit/harm (accepted-edit precision, harmful edits per originally-correct words) require linguistic evaluation the owner excluded (no separate human dataset) - a quality-measurement boundary, not an operating-path defect"
+      "gap": "per-response latency (timings) and additional review usage are reported in the detail/trace, but benefit/harm (accepted-edit precision, harmful edits per originally-correct words) is UNMEASURED here; a SEPARATE HUMAN EVALUATION DATASET is excluded by the owner (this does not forbid all controlled/automatic evaluation and creates no future dataset obligation) - a quality-measurement boundary, not an operating-path defect"
     },
     {
       "id": "D01",
@@ -444,7 +444,7 @@
     {
       "id": "M04",
       "class": "PARTIAL",
-      "gap": "acceptance rule variants and thresholds exist, but precision/harm/coverage measurements by error class are not produced (linguistic evaluation excluded / not run at main); calibration is a quality axis, not an operating-path guarantee"
+      "gap": "acceptance rule variants and thresholds exist, but precision/harm/coverage measurements by error class are UNMEASURED here (a SEPARATE HUMAN EVALUATION DATASET is excluded by the owner; this does not forbid all controlled/automatic evaluation); calibration is a quality axis, not an operating-path guarantee"
     },
     {
       "id": "M05",
@@ -452,7 +452,7 @@
       "tested_sha": "1bb9eec748bda198e52781f2b96cbea37760a172",
       "runtime_path": "queue/cancellation/time/size bounds with safe return to the original",
       "evidence": "full suite 1006/718.100s/interpreter-exit0 (log 88593a73) executed at git HEAD c304bf16e5100337d0ee02244c5a88b5be9028c6+ final WIP test bytes (test_responses_contract.py 86d1ae6be3c8f2b8a1f2305472800550630e218e5b7c3970f69686aaa42f11c4, byte-identical to audited main); frozen runtime proxy.py 86df8af2f082389935e0c407bee6ae1c33f91721b7a600f73f2b8985995b67d2 and responses_contract.py 0d9347c57ce56ea134012a7065ea238d0c0aede5ea5cc87a85dd6c76ca2c38a7 are byte-identical to main; f64da10 is a source-equivalent commit, not the execution epoch; fresh 22 named existing tests at main, literal interpreter-exit0 (log bbf85422): logprobs JSON/SSE null/empty/populated/unexpected/object/string + ineligible + non-200; no-edit raw-byte identity; metadata echo preserved; Pandoc startup wrong-version/capability/timeout; mapping NFD-abstain/NFC-unstable fail-closed/blockquote-denied; zero-call high-identity + safe-known-zero",
-      "negative_paths": "queue full / timeout / oversize to cancel owned work and return completed original"
+      "negative_paths": "pre-main queue-full/queue-timeout/queue-closed to fixed 503 rejection (request_admission; no main generation and no completed original); main capture/hard-limit failure keeps failure/error semantics, not a successful partial original; only an optional-repair failure or analysis bypass after safely completed capture falls back to that original; disconnect and delivery-after-emission close quietly (no second response or fallback)"
     },
     {
       "id": "M06",
@@ -460,7 +460,7 @@
       "tested_sha": "1bb9eec748bda198e52781f2b96cbea37760a172",
       "runtime_path": "one clearly-supported nonstreaming text shape (JSON) with context preservation and no recursion",
       "evidence": "full suite 1006/718.100s/interpreter-exit0 (log 88593a73) executed at git HEAD c304bf16e5100337d0ee02244c5a88b5be9028c6+ final WIP test bytes (test_responses_contract.py 86d1ae6be3c8f2b8a1f2305472800550630e218e5b7c3970f69686aaa42f11c4, byte-identical to audited main); frozen runtime proxy.py 86df8af2f082389935e0c407bee6ae1c33f91721b7a600f73f2b8985995b67d2 and responses_contract.py 0d9347c57ce56ea134012a7065ea238d0c0aede5ea5cc87a85dd6c76ca2c38a7 are byte-identical to main; f64da10 is a source-equivalent commit, not the execution epoch; fresh 22 named existing tests at main, literal interpreter-exit0 (log bbf85422): logprobs JSON/SSE null/empty/populated/unexpected/object/string + ineligible + non-200; no-edit raw-byte identity; metadata echo preserved; Pandoc startup wrong-version/capability/timeout; mapping NFD-abstain/NFC-unstable fail-closed/blockquote-denied; zero-call high-identity + safe-known-zero (json paths, non-200)",
-      "negative_paths": "unsupported streaming / SSE mismatch to bounded rejection"
+      "negative_paths": "unsupported shapes/capabilities rejected before main; stream/content-type mismatch to 502 RESPONSE_MODE_MISMATCH at the actual checked boundary; supported delayed SSE is bounded-captured and completion-validated (not unsupported)"
     },
     {
       "id": "M07",
@@ -657,7 +657,7 @@
         "id": "MVP-8",
         "class": "PARTIAL",
         "path": null,
-        "gap": "per-response latency (timings) and additional review usage are reported in the detail/trace, but benefit/harm (accepted-edit precision, harmful edits per originally-correct words) require linguistic evaluation the owner excluded (no separate human dataset) - a quality-measurement boundary, not an operating-path defect"
+        "gap": "per-response latency (timings) and additional review usage are reported in the detail/trace, but benefit/harm (accepted-edit precision, harmful edits per originally-correct words) is UNMEASURED here; a SEPARATE HUMAN EVALUATION DATASET is excluded by the owner (this does not forbid all controlled/automatic evaluation and creates no future dataset obligation) - a quality-measurement boundary, not an operating-path defect"
       }
     ],
     "architecture_facets": [
@@ -739,7 +739,7 @@
       [
         "16 Verification and evidence layers (16.1/16.2/16.3)",
         "A-TEST-01; D05; A-EVAL-01",
-        "software-contract suite; source-equivalent native live compatibility; linguistic evaluation owner-excluded"
+        "software-contract suite; source-equivalent native live compatibility; quality unmeasured here, separate human evaluation dataset excluded"
       ],
       [
         "17 Concentrated OAP operating architecture",

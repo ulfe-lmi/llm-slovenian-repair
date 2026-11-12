@@ -29,7 +29,7 @@ deployment authority. deployment_authorized=false; human_milestone_accepted=fals
       "tested_sha": "1bb9eec748bda198e52781f2b96cbea37760a172",
       "runtime_path": "proxy.py _Handler.do_POST - ConceptProxy.forward - capture_transport.read_bounded_body (completion validated; SSE requires response.completed event)",
       "evidence": "fresh 22 named existing tests at main, literal interpreter-exit0 (log bbf85422): logprobs JSON/SSE null/empty/populated/unexpected/object/string + ineligible + non-200; no-edit raw-byte identity; metadata echo preserved; Pandoc startup wrong-version/capability/timeout; mapping NFD-abstain/NFC-unstable fail-closed/blockquote-denied; zero-call high-identity + safe-known-zero; full suite 1006/718.100s/interpreter-exit0 (log 88593a73) executed at git HEAD c304bf16e5100337d0ee02244c5a88b5be9028c6+ final WIP test bytes (test_responses_contract.py 86d1ae6be3c8f2b8a1f2305472800550630e218e5b7c3970f69686aaa42f11c4, byte-identical to audited main); frozen runtime proxy.py 86df8af2f082389935e0c407bee6ae1c33f91721b7a600f73f2b8985995b67d2 and responses_contract.py 0d9347c57ce56ea134012a7065ea238d0c0aede5ea5cc87a85dd6c76ca2c38a7 are byte-identical to main; f64da10 is a source-equivalent commit, not the execution epoch; source trace of bounded capture with hard byte cap",
-      "negative_paths": "incomplete SSE (no completed event) to CaptureError; truncated body to 400 REQUEST_BODY_INCOMPLETE; hard capture cap to bounded API failure"
+      "negative_paths": "incomplete SSE (no completed event) to CaptureError; INCOMING request-body truncation (fewer than declared bytes) to 400 REQUEST_BODY_INCOMPLETE at intake; a truncated MAIN-upstream body is governed by read_bounded_body (exact declared bytes) and, on post-intake failure, the Exception path (proxy 1915-1927) sends 502 before emission, not the ingress 400; hard capture cap to bounded API failure"
     },
     {
       "id": "LR-002",
@@ -69,7 +69,7 @@ deployment authority. deployment_authorized=false; human_milestone_accepted=fals
       "tested_sha": "1bb9eec748bda198e52781f2b96cbea37760a172",
       "runtime_path": "batch_review.parse_batch_envelope - BatchProposal - Proposal - runtime_acceptance.accept validates; repair.apply_edits composes original-slice + replacement; model output is an untrusted local proposal only",
       "evidence": "full suite 1006/718.100s/interpreter-exit0 (log 88593a73) executed at git HEAD c304bf16e5100337d0ee02244c5a88b5be9028c6+ final WIP test bytes (test_responses_contract.py 86d1ae6be3c8f2b8a1f2305472800550630e218e5b7c3970f69686aaa42f11c4, byte-identical to audited main); frozen runtime proxy.py 86df8af2f082389935e0c407bee6ae1c33f91721b7a600f73f2b8985995b67d2 and responses_contract.py 0d9347c57ce56ea134012a7065ea238d0c0aede5ea5cc87a85dd6c76ca2c38a7 are byte-identical to main; f64da10 is a source-equivalent commit, not the execution epoch; fresh 22 named existing tests at main, literal interpreter-exit0 (log bbf85422): logprobs JSON/SSE null/empty/populated/unexpected/object/string + ineligible + non-200; no-edit raw-byte identity; metadata echo preserved; Pandoc startup wrong-version/capability/timeout; mapping NFD-abstain/NFC-unstable fail-closed/blockquote-denied; zero-call high-identity + safe-known-zero (no-edit raw bytes, metadata)",
-      "negative_paths": "parse_batch_envelope rejects a full-answer or sentence rewrite (expects one local replacement per id); apply_edits raises on protected overlap"
+      "negative_paths": "the model may only propose the assigned span: parse_batch_envelope enforces envelope/schema/version/assigned-IDs/proposal structure, while width/lexical/context/protected-span checks are runtime_acceptance.accept + composed_validation.validate_composed, then exact original splicing (repair.apply_edits raises on protected overlap); a full-answer or sentence rewrite is rejected by this combined path, not by a single parser that semantically recognizes rewrites"
     },
     {
       "id": "LR-007",
@@ -363,7 +363,7 @@ deployment authority. deployment_authorized=false; human_milestone_accepted=fals
     {
       "id": "MVP-8",
       "class": "PARTIAL",
-      "gap": "per-response latency (timings) and additional review usage are reported in the detail/trace, but benefit/harm (accepted-edit precision, harmful edits per originally-correct words) require linguistic evaluation the owner excluded (no separate human dataset) - a quality-measurement boundary, not an operating-path defect"
+      "gap": "per-response latency (timings) and additional review usage are reported in the detail/trace, but benefit/harm (accepted-edit precision, harmful edits per originally-correct words) is UNMEASURED here; a SEPARATE HUMAN EVALUATION DATASET is excluded by the owner (this does not forbid all controlled/automatic evaluation and creates no future dataset obligation) - a quality-measurement boundary, not an operating-path defect"
     },
     {
       "id": "D01",
@@ -442,7 +442,7 @@ deployment authority. deployment_authorized=false; human_milestone_accepted=fals
     {
       "id": "M04",
       "class": "PARTIAL",
-      "gap": "acceptance rule variants and thresholds exist, but precision/harm/coverage measurements by error class are not produced (linguistic evaluation excluded / not run at main); calibration is a quality axis, not an operating-path guarantee"
+      "gap": "acceptance rule variants and thresholds exist, but precision/harm/coverage measurements by error class are UNMEASURED here (a SEPARATE HUMAN EVALUATION DATASET is excluded by the owner; this does not forbid all controlled/automatic evaluation); calibration is a quality axis, not an operating-path guarantee"
     },
     {
       "id": "M05",
@@ -450,7 +450,7 @@ deployment authority. deployment_authorized=false; human_milestone_accepted=fals
       "tested_sha": "1bb9eec748bda198e52781f2b96cbea37760a172",
       "runtime_path": "queue/cancellation/time/size bounds with safe return to the original",
       "evidence": "full suite 1006/718.100s/interpreter-exit0 (log 88593a73) executed at git HEAD c304bf16e5100337d0ee02244c5a88b5be9028c6+ final WIP test bytes (test_responses_contract.py 86d1ae6be3c8f2b8a1f2305472800550630e218e5b7c3970f69686aaa42f11c4, byte-identical to audited main); frozen runtime proxy.py 86df8af2f082389935e0c407bee6ae1c33f91721b7a600f73f2b8985995b67d2 and responses_contract.py 0d9347c57ce56ea134012a7065ea238d0c0aede5ea5cc87a85dd6c76ca2c38a7 are byte-identical to main; f64da10 is a source-equivalent commit, not the execution epoch; fresh 22 named existing tests at main, literal interpreter-exit0 (log bbf85422): logprobs JSON/SSE null/empty/populated/unexpected/object/string + ineligible + non-200; no-edit raw-byte identity; metadata echo preserved; Pandoc startup wrong-version/capability/timeout; mapping NFD-abstain/NFC-unstable fail-closed/blockquote-denied; zero-call high-identity + safe-known-zero",
-      "negative_paths": "queue full / timeout / oversize to cancel owned work and return completed original"
+      "negative_paths": "pre-main queue-full/queue-timeout/queue-closed to fixed 503 rejection (request_admission; no main generation and no completed original); main capture/hard-limit failure keeps failure/error semantics, not a successful partial original; only an optional-repair failure or analysis bypass after safely completed capture falls back to that original; disconnect and delivery-after-emission close quietly (no second response or fallback)"
     },
     {
       "id": "M06",
@@ -458,7 +458,7 @@ deployment authority. deployment_authorized=false; human_milestone_accepted=fals
       "tested_sha": "1bb9eec748bda198e52781f2b96cbea37760a172",
       "runtime_path": "one clearly-supported nonstreaming text shape (JSON) with context preservation and no recursion",
       "evidence": "full suite 1006/718.100s/interpreter-exit0 (log 88593a73) executed at git HEAD c304bf16e5100337d0ee02244c5a88b5be9028c6+ final WIP test bytes (test_responses_contract.py 86d1ae6be3c8f2b8a1f2305472800550630e218e5b7c3970f69686aaa42f11c4, byte-identical to audited main); frozen runtime proxy.py 86df8af2f082389935e0c407bee6ae1c33f91721b7a600f73f2b8985995b67d2 and responses_contract.py 0d9347c57ce56ea134012a7065ea238d0c0aede5ea5cc87a85dd6c76ca2c38a7 are byte-identical to main; f64da10 is a source-equivalent commit, not the execution epoch; fresh 22 named existing tests at main, literal interpreter-exit0 (log bbf85422): logprobs JSON/SSE null/empty/populated/unexpected/object/string + ineligible + non-200; no-edit raw-byte identity; metadata echo preserved; Pandoc startup wrong-version/capability/timeout; mapping NFD-abstain/NFC-unstable fail-closed/blockquote-denied; zero-call high-identity + safe-known-zero (json paths, non-200)",
-      "negative_paths": "unsupported streaming / SSE mismatch to bounded rejection"
+      "negative_paths": "unsupported shapes/capabilities rejected before main; stream/content-type mismatch to 502 RESPONSE_MODE_MISMATCH at the actual checked boundary; supported delayed SSE is bounded-captured and completion-validated (not unsupported)"
     },
     {
       "id": "M07",
@@ -571,7 +571,7 @@ MVP registry and the 17 owner overrides.
 | 13 HTTP and main-history integration | A-API-01; A-HISTORY-01; LR-001 | validate_request + JSON/SSE; stateless; capture before delivery |
 | 14 Bounded resources/cancellation/fallback (14.1/14.2) | A-LIMIT-01; A-FAIL-01; M05 | finite bounds before optional work; full failure contract |
 | 15 Security, privacy and protected environment | A-SECURITY-01; LR-013 | data-not-instruction; credentials external; content-free default logs; separately-authorized opt-in eval channel |
-| 16 Verification and evidence layers (16.1/16.2/16.3) | A-TEST-01; D05; A-EVAL-01 | software-contract suite; source-equivalent native live compatibility; linguistic evaluation owner-excluded |
+| 16 Verification and evidence layers (16.1/16.2/16.3) | A-TEST-01; D05; A-EVAL-01 | software-contract suite; source-equivalent native live compatibility; quality unmeasured here, separate human evaluation dataset excluded |
 | 17 Concentrated OAP operating architecture | A-GOV-01 | concentrated HWP/HJP/DHA roles; one PR per objective; SELF publication |
 | 18 Deferred judgment and deliberate CRITICAL loading | A-GOV-01; A-CLOSE-01 | deferred evidence index; prior reports treated as claims until corroborated |
 | 19 Milestones, progress and Independent Closure Audit | A-CLOSE-01 | this fresh source-first ICA; classification with real paths/SHA |
@@ -641,19 +641,26 @@ UNPROVEN, 1 ABSENT. Independently derived owner-scope
 (section 2) and full-source coverage (section 3) are in addition to the
 registry.
 
-Concrete bounded gaps (earliest failing boundary, concrete proof, consequence,
-smallest sufficient fix):
+Non-IMPLEMENTED rows, each labeled at its actual boundary. Most are scope
+boundaries/limits (later-stage deployment/stack coupling, optional morphology,
+quality/eval axis), not functional operating-path defects; this list is not an
+authorized new remediation programme:
 
 - **A-STACK-01** (PARTIAL): Python 3.12 and a read-only SQLite index are satisfied; transport uses stdlib http.client rather than the declared HTTPX and the adapter is a raw BaseHTTPRequestHandler rather than the later FastAPI adapter - the architecture labels these future boundaries, so acceptable for the isolated concept-verification prototype but not the declared production baseline (later-stage item, not a functional operating-path defect)
 - **A-ROUTE-01** (PARTIAL): isolated operator-controlled review endpoint with no self-recursion is implemented; real public-gateway coupling (public auth, routes, quotas, accounting) is the later S03 service integration, absent from the standalone loopback prototype (later-stage deployment item, not a functional operating-path defect)
 - **A-DETECT-01** (PARTIAL): runtime_detection.detect implements bounded non-overlapping deterministic target selection and no-ranked-alternatives-to-reviewer; the lexical-vs-morphological disagreement separation depends on an optional morphology analyzer absent from the prototype (optional per architecture; not a functional operating-path defect)
 - **A-ACCEPT-01** (PARTIAL): the MVP-relevant strict validated-AUTO_REPAIR acceptance is implemented and proven (every applied edit passes runtime_acceptance.accept + composed_validation); the explicit detect_only/shadow mode progression of ARCH section 11.1 is not exposed as configurable modes - RepairEngine.mode is a detector mode (local-context/unigram-only) and the proxy runs a single strict path with no-suspicion-to-no-review as the natural detection outcome. This is a development-progression literal-contract boundary, not a functional defect (the proxy never delivers an unvalidated edit)
 - **A-EVAL-01** (PARTIAL): eval harness (dev/heldout/frozen/score/review_sheet) is present and Qwen-not-final-judge is upheld, but human-labelled linguistic benefit is not established - the owner excluded a separate human evaluation dataset and heldout scoring requires a live reviewer not re-run at main (quality/eval axis, not an operating-path defect)
-- **MVP-8** (PARTIAL): per-response latency (timings) and additional review usage are reported in the detail/trace, but benefit/harm (accepted-edit precision, harmful edits per originally-correct words) require linguistic evaluation the owner excluded (no separate human dataset) - a quality-measurement boundary, not an operating-path defect
+- **MVP-8** (PARTIAL): per-response latency (timings) and additional review usage are reported in the detail/trace, but benefit/harm (accepted-edit precision, harmful edits per originally-correct words) is UNMEASURED here; a SEPARATE HUMAN EVALUATION DATASET is excluded by the owner (this does not forbid all controlled/automatic evaluation and creates no future dataset obligation) - a quality-measurement boundary, not an operating-path defect
 - **M01** (PARTIAL): synthetic dev/heldout labelled cases are present at main; the real target-model answer was observed at the c304 source-equivalent native epoch (T9) plus correct controls; the separate human evaluation dataset is excluded by the owner (quality/eval axis, not a functional operating-path defect)
 - **M02** (ABSENT): no morphology analyzer module exists in the concept-verification prototype; lemmatization/inflection analysis (separating wrong-choice from wrong-inflection) is not implemented (optional per architecture; the M02 deliverable is absent; not a functional operating-path defect)
-- **M04** (PARTIAL): acceptance rule variants and thresholds exist, but precision/harm/coverage measurements by error class are not produced (linguistic evaluation excluded / not run at main); calibration is a quality axis, not an operating-path guarantee
+- **M04** (PARTIAL): acceptance rule variants and thresholds exist, but precision/harm/coverage measurements by error class are UNMEASURED here (a SEPARATE HUMAN EVALUATION DATASET is excluded by the owner; this does not forbid all controlled/automatic evaluation); calibration is a quality axis, not an operating-path guarantee
 - **M07** (PARTIAL): eval/score.py provides comparison scaffolding (agreed method vs baselines), but a full comparative report at this revision is not produced (a heldout run requires a live reviewer and is not re-run at main)
+
+No additional functional remediation was identified in this audit: every
+genuinely applicable functional behavior on the operating path is demonstrated,
+and the items above are scope boundaries/limits or the unmeasured quality/eval
+axis (a SEPARATE HUMAN EVALUATION DATASET is excluded by the owner).
 
 ## 6. Distinctions (kept separate, not inferred)
 
@@ -662,8 +669,10 @@ smallest sufficient fix):
   is what this audit calls "functional readiness." It is demonstrated
   offline/synthetically at 1bb9eec748bda198e52781f2b96cbea37760a172 via the source-equivalent full suite, the
   fresh probe, and the source-equivalent native observation.
-- **Linguistic quality** (accepted-edit precision, harmful edits) is NOT
-  established; the owner excluded a separate human evaluation dataset.
+- **Linguistic quality** (accepted-edit precision, harmful edits) is
+  UNMEASURED here; a SEPARATE HUMAN EVALUATION DATASET is excluded by the owner
+  (this does not forbid all controlled/automatic evaluation and creates no
+  future dataset obligation).
 - **Formal milestone acceptance** is retained by the owner.
 - **Deployment authority** is retained by the owner; no deployment side effect
   is authorized.
@@ -689,9 +698,12 @@ opt-in evaluation channel.
 Full section 16 MVP closure is NOT complete. The bounded residual items are:
 later-stage deployment/stack coupling (A-ROUTE-01, A-STACK-01) and the SERVICE
 rows (S01-S05); the A-ACCEPT-01 mode-progression literal boundary; optional
-morphology (A-DETECT-01, M02 absent); and the excluded/unmeasured linguistic
-axis (MVP-8, A-EVAL-01, M01, M04, M07). Each is named at its earliest boundary
-with concrete proof, consequence and smallest sufficient remediation in
-section 5. No deployment, no human milestone acceptance, and no
-linguistic-quality claim is made. An incomplete/negative result is a valid
-truthful outcome; these concrete gaps return bounded remediation to strategy.
+morphology (A-DETECT-01, M02 absent); and the unmeasured linguistic/quality
+axis (MVP-8, A-EVAL-01, M01, M04, M07), where a SEPARATE HUMAN EVALUATION
+DATASET is excluded by the owner. These are scope boundaries/limits, not
+functional operating-path defects, and no additional functional remediation was
+identified in this audit. They are not presented as an authorized new programme:
+the historic optional/quality/service items remain scope limits under human
+authority. No deployment, no human milestone acceptance, and no linguistic-quality
+claim is made. An incomplete/negative result is a valid truthful outcome; these
+scope boundaries return bounded decisions to strategy and the owner.
