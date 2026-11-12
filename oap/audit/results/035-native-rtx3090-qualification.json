@@ -1,89 +1,99 @@
 {
   "artifact": "035-native-rtx3090-qualification",
-  "round": "035-c",
+  "round": "035-d",
   "objective": "035",
-  "status": "PARTIAL",
+  "status": "COMPLETE",
   "audited_main": "7dcd186fe394c1262bfe878ba5d6527b888fc317",
+  "starting_remote_sha": "c304bf16e5100337d0ee02244c5a88b5be9028c6",
   "order": {
-    "path": "oap/orders/035-c-strip-defined-api-logprobs.md",
-    "sha256": "0ab86c7a0257af98f752a6a21d0743b9b967ef08cf394a753cede1b2c5429aba"
+    "path": "oap/orders/035-d-useful-native-repair-and-policy-regressions.md",
+    "sha256": "230f0d33b3811c1fcec19969cf9f1cd3cc2df8d73cf4ce354b1073d48e4b8ef7"
   },
-  "result_summary": "PARTIAL: owner's unconditional ALWAYS-remove logprobs policy implemented and tested (JSON/SSE, all defined locations, all value types); native retest HTTP 200 with 0 review (clean answer, no logprobs in defined location); accepted-edit native path not exercised in this round. Root 32-case HTTP matrix PASSED on the superseded WIP; 5 edge failures identified and fixed (non-200 content-type selection, huge-integer overflow, SSE multi-part, SSE surrogates, metadata-only flag).",
+  "result_summary": "COMPLETE: the owner's unconditional defined-API logprobs removal policy is fully documented and persisted (README contract corrected; net 17 new policy regressions incl. the 32-case JSON/SSE value matrix and the typed-location/all-copy matrix), and the runnable proxy's useful native same-model repair path is proved at the actual worker boundary: one useful accepted correction (1 candidate -> 1 validated review -> 1 approved exact original-span edit, all unapproved/protected slices verified identical by independent observers, delivered envelope differing only by defined logprobs removals and the approved text) plus three genuine clean 0-review controls (0 candidates -> 0 review calls). Every executed native trial returned HTTP 200 (one incomplete envelope proved to be the 1536 output budget; 4096 used thereafter per the proved output-limit rule). Runtime bytes frozen at 035-c; 035-d mutates documentation, persisted tests, sanitized evidence and the counter only.",
   "implementation": {
-    "responses_contract.py": {
-      "change": "Added remove_defined_logprobs(envelope) function; updated aligned_metadata_clean to remove logprobs check (always removed before eligibility).",
-      "policy": "Delete by key presence from output[] message content[] output_text parts. No recursive scan."
+    "runtime": {
+      "status": "FROZEN at 035-c bytes; no product module mutated in 035-d",
+      "concept-verification/proxy.py": "86df8af2f082389935e0c407bee6ae1c33f91721b7a600f73f2b8985995b67d2",
+      "concept-verification/responses_contract.py": "0d9347c57ce56ea134012a7065ea238d0c0aede5ea5cc87a85dd6c76ca2c38a7",
+      "policy": "Defined Responses API logprobs are always removed by key presence from the recognized output_text locations, for every value, independently of optional repair, JSON and delayed SSE; no switch; other fields, citations/annotations, protected reasoning and same-named user-data echoes unchanged; request-side logprobs/include still rejected 400 REQUEST_UNSUPPORTED."
     },
-    "proxy.py": {
-      "changes": [
-        "transform_json: calls remove_defined_logprobs before eligibility; re-serializes only if removal made; uses _safe_json_dumps for lone-surrogate safety.",
-        "transform_sse: removes logprobs from all SSE event locations (delta/done, content_part added/done, output_item added/done, lifecycle snapshots) before eligibility; _bypass re-renders only modified events; changed=False for metadata-only.",
-        "Handler non-200: normalize_json_body/normalize_sse_body called by ACTUAL content type (independent of request.stream); catches ValueError/OverflowError for malformed bodies.",
-        "_render_event: always ensure_ascii=True to guarantee valid UTF-8 output even with lone surrogates.",
-        "_safe_json_dumps: falls back to ensure_ascii=True on UnicodeEncodeError for lone surrogates.",
-        "normalize_json_body/normalize_sse_body: standalone normalizers for non-200 responses."
-      ]
-    },
-    "tests": {
-      "test_responses_contract.py": "Removed old logprobs-bypass negatives; added LogprobsRemovalTests (20+ cases: absent/null/empty/populated/false/object, JSON/SSE, non-200, lone surrogates, multi-part, metadata-only flag, other-fields-unchanged).",
-      "test_review_batch.py": "Unchanged (all 128 tests pass)."
+    "non_runtime_changes": {
+      "concept-verification/README.md": "Contract wording corrected (no token probabilities; logprobs never participate in the profile check); order 035-c section added documenting the unconditional removal policy, locations, byte semantics and limits; native qualification paragraph records the actually qualified message-array input profile, the upstream field-shape 400 on plain-string input (caller-format property, not a proxy defect), and the 035-d useful+clean native results with limits.",
+      "concept-verification/tests/test_responses_contract.py": "86d1ae6be3c8f2b8a1f2305472800550630e218e5b7c3970f69686aaa42f11c4; 20 test methods added and 3 old methods rewritten in place (all 3 names retained, no old method lost or skipped); net 17 new tests incl. LogprobsRemovalTests value matrix (8 value types x JSON/SSE x clean/accepted-edit = 32 HTTP cases through real ConceptProxy -> real engine/pinned Pandoc/tiny SQLite/detection -> real reviewer HTTP -> independent CPU acceptance/patcher), true clean 0-review and accepted-edit 1-review controls, non-200/ineligible envelope removals, metadata-only changed-flag negatives, ordinary UTF8 and escaped lone surrogates, and LogprobsLocationMatrixTests (all six lifecycle snapshots, delta/done, part/item added/done, multi-message/part, unknown-event and user/tool/refusal/reasoning/metadata echoes unchanged, no-field/no-edit raw identity, framing/id/retry/comments/DONE).",
+      "concept-verification/tests/test_review_batch.py": "Unchanged in 035-d (128 tests).",
+      "oap/active": "035-d",
+      "research/RESEARCH-STATE.md": "machine block oap_reports_reviewed 96 -> 97 only; registry_entries 42 and frozen_report_history_incidents 2 unchanged; 173-file GENERATED-FILES manifest unchanged."
     }
   },
-  "native_retest": {
-    "attempt": 11,
-    "http": 200,
-    "response_bytes": 1521,
-    "elapsed_seconds": 2.3616,
-    "delivered_sha256": "20c7020306d30f31344b4055151df227991f5d4c33da80f8b2bac98210f86f3f",
-    "envelope_status": "completed",
-    "logprobs_in_defined_location": false,
-    "part_keys": [
-      "annotations",
-      "text",
-      "type"
-    ],
-    "answer_text_length": 22,
-    "review_dispatches_measured": 0,
-    "review_measurement": "CONCEPT_USAGE_OBSERVER concept-review-usage calls=0",
-    "qualification": "clean zero-review path PROVEN; accepted-edit native path NOT exercised (answer was clean, no edit proposed)",
-    "note": "Native API rejects plain-string input (400 codex_0149_field_shape); messages format required. This is an upstream API constraint, not a product defect."
-  },
-  "root_http_proof": {
-    "superseded_wip_32case_matrix": "PASSED (Root independent, 0 native, all owned threads joined)",
-    "five_edge_failures": "Identified and fixed: (1) non-200 content-type selection, (2) huge-integer ValueError escape, (3) SSE multi-part break, (4) SSE surrogate serialization, (5) metadata-only changed flag",
-    "receipts": [
-      "035c-root-independent-failing-HTTP-review-before-final-feedback-20261111.txt",
-      "035c-root-new-normalizers-independent-HTTP-review-followup-20261111.txt"
-    ]
-  },
-  "source_identity": {
-    "concept-verification/proxy.py": "working 035-c (SHA at commit)",
-    "concept-verification/responses_contract.py": "working 035-c (SHA at commit)",
-    "previous_superseded_wip": "adb9b050667376d9925a7e04551ce500741f610e69da892b5187ee3ba7618480"
+  "native_qualification": {
+    "scope": "Actual proxy.main over owned loopback port 0, authorized matching-RTX3090 Responses endpoint, model qwen3.8-27b-rtx3090 for MAIN and REVIEW, TRACE OFF, no inherited reviewer profile, key child-only, qualified message-array input, concurrency 1, one review pass, zero auto-retry, hard child 150s / parent 180s clocks enforced by the launcher (SIGTERM escalate at 150s, SIGKILL backstop at 180s, ownership-safe group termination/reap).",
+    "source_identity": {
+      "launcher_sha256": "fd9692067bfd08fbb6968e4408b2d7dc969ea3cbb39c30f90e5712a8ba8649b1",
+      "harness_sha256": "d9e7948ee78261133c7308304c3a01d921c4967fb277127bd12e23b8b656b661",
+      "readonly_index_sha256": "f769235b6af3412e65f0875f4d08231c832f60d8630b43a06ab927c2d32c739f",
+      "executed_head": "c304bf16e5100337d0ee02244c5a88b5be9028c6"
+    },
+    "trials": "10 launcher trials (attempts 15,17,19,21,23,25,27,30,32,34) + 1 direct diagnostic (attempt 29) = 11 executed MAIN POSTs, all HTTP 200; 10 completed envelopes + 1 incomplete (attempt 27 at the 1536 budget, reasoning-only item; direct diagnostic attempt 29 confirmed output_tokens at the 1536 max, proving the output limit, so attempts 30-34 used the 4096 budget authorized by that proved issue).",
+    "review_dispatches_measured": 5,
+    "review_dispatch_attempts": [21, 23, 25, 30, 32],
+    "useful_accepted_edit": {
+      "attempt": 32,
+      "envelope": "completed, HTTP 200",
+      "detector_candidates": 1,
+      "validated_reviews": 1,
+      "known_usage": {"input": 281, "output": 480, "total": 761},
+      "approved_edit": "1 edit, 6 codepoints original span [2,8) replaced by 5 codepoints; 1 protected interval present and unmodified; protected_overlap false",
+      "proofs": "cross-observer approved_original_span_proof true (original identity, patcher composition verified, patcher output equals final, final equals independent composition, untouched slices identical); envelope diff = exactly 1 defined logprobs removal + 1 approved text change, nothing else",
+      "lifecycle": "main return 0, worker joined, shutdown finished, child rc 0, group cleared, neither clock expired",
+      "qualification": "Controlled owned mechanism example at the real worker boundary (functional MAIN -> REVIEW -> independent CPU acceptance -> approved patch -> final response path). NOT a natural-error rate, linguistic quality, statistical independence, or human-acceptance claim."
+    },
+    "clean_zero_review_controls": {
+      "attempts": [15, 17, 34],
+      "facts": "detect calls returned 0 candidates each; review batch calls 0; delivered answer byte-identical to the captured main answer; envelope differed only by the defined logprobs removal; full normal lifecycle each trial",
+      "qualification": "Genuine no-suspicion controls (valid analysis reached with no eligible suspicion), distinct from unobserved bypasses and from reviewed-but-unchanged trials"
+    },
+    "reviewed_but_unchanged": {
+      "attempts": [25, 30],
+      "facts": "validated review executed (known usage 285/616/901 and 281/520/801 respectively), no accepted edit delivered, delivered answer unchanged",
+      "qualification": "keep vs CPU-rejection is UNKNOWN from those observers; recorded as reviewed-but-unchanged, never as clean controls or as rejections"
+    },
+    "clock_supervision_proof": "Root five-case offline clock recheck on the exact launcher bytes: normal (no spurious kill, group cleared), retained-stdout (bounded, child result retained), child expiry (SIGTERM escalate at 150s, accurate CHILD_CLOCK_EXPIRY), parent expiry (SIGKILL backstop at 180s, accurate PARENT_CLOCK_EXPIRY), and a child ignoring SIGTERM stopped by the parent SIGKILL; all owned groups cleared; zero native calls and zero real-ledger mutations. Earlier harnesses are not claimed to have had these guards."
   },
   "ledger": {
-    "owner_maximum_additional": 1000000,
-    "total_allocations": 12,
-    "actual_main_posts": 5,
-    "reserved_review_slots": 5,
-    "preflight_failed_no_post": 2,
-    "review_dispatches_measured": 0,
-    "note": "Attempts 9/10 PREFLIGHT_FAILED (turn interrupted, no POST); 11/12 active retest (11 executed, 12 reserved)"
+    "state": "append-only, preserved; 46 rows at the 035-d final observation; no row deleted, deduplicated or rewritten",
+    "new_unique_reservations": "11 reserved_main (attempts 15,17,19,21,23,25,27,29,30,32,34) + 12 reserved_review_slot rows under 035-d IDs, following the observed allocation ordinal and existing maximum ID; MAIN and possible REVIEW reserved separately before each POST; immutable result rows appended (11, all HTTP 200)",
+    "historical_preserved": "6 legacy allocated_before_call MAIN rows (delivery/usage remain UNKNOWN, not zero) incl. the duplicate legacy identifiers 11/12 retained byte-for-byte with this explicit reconciliation; 1 legacy preflight-failed MAIN row and 1 review slot superseded by that preflight failure; the 14-row 035-c ledger snapshot and the old 20261110 ledger remain untouched",
+    "charging": "All unresolved allocations conservatively charged against the owner's 1M additional RTX allowance; no new daily/per-round quota invented",
+    "note": "The 035-c public artifact's 12-allocation scalar was a stale description; reservation counts and immutable result records are separate scopes and are no longer conflated"
+  },
+  "supersession_of_prior_claims": {
+    "c_starting_remote": "035-c's report starting_remote_sha named its own implementation commit rather than the actual 553280a entry head at C's start; the C report is preserved unchanged and this qualification is recorded forward",
+    "c_renderer": "Root's 44-case HTTP matrix ran on the earlier 58e renderer; the current frozen runtime renderer is 86df8af2, where Root's 12 protected-Unicode/CRLF/surrogate/accepted-edit/echo cases passed",
+    "c_ledger_scalar": "035-c's 12-allocation public scalar did not match its actual 14-row ledger; superseded by the reconciled 46-row 035-d state",
+    "c_clean_lifecycle": "035-c's harness had an undefined shutdown instance and false worker_joined/shutdown_finished flags; its clean-lifecycle wording is superseded by the 035-d launcher's actually observed main return/worker join/shutdown finish/child reap/group clear in every trial",
+    "c_suite_epoch": "035-c's 989-test full-suite epoch predates the 035-d final test bytes; the final full suite below covers the final bytes"
+  },
+  "tests": {
+    "focused_final_bytes": "tests.test_responses_contract + tests.test_review_batch: 206 tests OK, exit 0 (supersedes the 204-test epoch; includes the 32-case value matrix methods)",
+    "named_utf8_surrogate_set": "5 named ordinary-UTF8/lone-surrogate regressions OK, exit 0",
+    "named_two_target_integration": "test_header_transport.ProxyHeaderHttpTests.test_useful_two_target_repair_under_header_budget and test_review_transport.ProxyIntegrationTests.test_chain_useful_two_targets_json_and_sse: 2 tests OK",
+    "full_suite": "1 fresh full concept suite after all test/fixture changes: 1006 tests OK in 718.100s, literal interpreter exit 0 (qualified Python 3.12.15 -B, pinned Pandoc 3.7.0.2, private TMP/cache, private complete log)"
   },
   "integrity": {
     "no_dataset_service_changes": true,
     "concurrency": 1,
     "zero_auto_retry": true,
+    "runtime_frozen_in_round": true,
     "no_raw_answer_prompt_target_replacement_header_id_private_path_or_url_in_public_artifacts": true,
-    "old_035a_report_immutable": true,
-    "old_035b_report_immutable": true,
-    "private_initial_034_unchanged": true
+    "old_reports_immutable": true,
+    "private_initial_034_unchanged": true,
+    "registry_42_incidents_2_manifest_173_unchanged": true
   },
   "not_performed": [
-    "no accepted-edit native path exercised (clean answer, no edit proposed)",
-    "no full 965 rerun (984 full concept suite run instead)",
-    "no human dataset / quality-rate / deployment / milestone acceptance",
+    "no merge, auto-merge, deployment or MVP self-acceptance",
+    "no human dataset / quality-rate / statistical-independence / ICA claims",
+    "no product/runtime mutation in 035-d",
     "no A100 product traffic, GET models, unauthenticated probe, or Chat Completions",
-    "no service/weights/quantization/GPU/network/credential change"
+    "no new corpus acquisition, service/weights/GPU/network/credential change"
   ]
 }
