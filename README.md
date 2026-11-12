@@ -1,5 +1,33 @@
 # LLM Slovenian Repair
 
+The runnable Slovenian-repair proxy is in `concept-verification/`. Start with
+the **[lab installation guide](docs/LAB-DEPLOYMENT.md)** for dependencies,
+statistics downloads, index preparation, authentication, startup and a smoke test.
+It runs on Linux with Python 3.12 and mandatory pinned Pandoc 3.7.0.2.
+
+Functional software and bounded native Qwen compatibility are demonstrated in
+the [current readiness audit](oap/audit/results/036-current-functional-proxy-readiness-audit.md).
+Linguistic quality is unmeasured; no separate human evaluation dataset is required.
+The proxy is loopback-only and does not provide token probabilities. Only approved
+exact original text spans can be corrected; defined API `logprobs` metadata is
+removed even when no correction is made.
+
+Real unigram, bigram and trigram statistics are **external**, not included in this
+repository. The [installation guide](docs/LAB-DEPLOYMENT.md#statistics-licence-and-exact-downloads)
+documents their CC BY-SA 4.0 licence, publisher URLs, exact checksums and runtime
+SQLite location. The code's [Apache-2.0 licence](LICENSE) does not relicense data.
+The separate `src/` library scaffold is not the runnable proxy entry point.
+
+## Development history
+
+The following notes preserve the bootstrap and development chronology. Early
+`PLANNED`, `NOT RUN`, `NOT_ACQUIRED` and unimplemented statements describe their
+original rounds, not current runnable-proxy status. Use the installation guide
+above for lab operation; issued orders and reports remain historical evidence.
+
+<details>
+<summary>Historical bootstrap and implementation notes</summary>
+
 Owner-published bootstrap baseline, accepted for continued development. Role
 operation is qualified and the development loop has been deliberately started.
 Query current protocol state with `python3 oap/bin/check_state.py --repo-root .
@@ -371,3 +399,5 @@ See
 [development](docs/DEVELOPMENT.md), [runbook](docs/OAP-RUNBOOK.md),
 [role setup](docs/CODEX-ROLE-SETUP.md), [readiness](docs/READINESS.md) and
 [roadmap](docs/IMPLEMENTATION-ROADMAP.md) for the current continuation.
+
+</details>
