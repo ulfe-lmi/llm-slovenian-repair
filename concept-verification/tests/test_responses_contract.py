@@ -57,8 +57,35 @@ _REVIEW_KEY = "review-key-synthetic"
 # zero detector candidates, hence zero review calls (established by
 # EngineBatchTests.test_no_candidates_zero_calls).
 _CLEAN_ANSWER = "To je tako zapisano, to je tako zapisano."
-
+# A valid aligned two-target keep batch for the two-occurrence TEXT answer:
+# order 035-d R3 - one proposal for two targets is an INVALID batch
+# (REASON_MISSING_ID) and can mask a failed review round trip, so every
+# keep control must align both target ids.
+_KEEP_BOTH = [_prop("t0", keep=True, replacement=None), _prop("t1", keep=True, replacement=None)]
+# Accepted-edit control: t0 accepted (replacement "tako"), t1 kept.
+_EDIT_T0_KEEP_T1 = [_prop("t0", keep=False, replacement="tako"), _prop("t1", keep=True, replacement=None)]
+_TEXT_EDITED_T0 = "To je tako zapisano, to je presenetliv zapisano."
+# Sentinel for "key omitted" in fixtures (module order matters: the
+# matrix value tuple below references it at import time).
 _ABSENT: object = object()
+
+# Order 035-d R3 (Root clarification): the eight defined probability
+# values for the persisted actual-HTTP value matrix - the key-absent
+# case (the module _ABSENT sentinel) plus all seven JSON value shapes.
+_LOGPROBS_MATRIX_VALUES: tuple[object, ...] = (
+    _ABSENT,
+    None,
+    [],
+    [{"token": "a", "logprob": -1.0, "start_index": 0, "end_index": 1}],
+    False,
+    0,
+    "unexpected-string",
+    {"unexpected": "shape"},
+)
+_MATRIX_USAGE = {"input_tokens": 11, "output_tokens": 22, "total_tokens": 33}
+_MATRIX_METADATA = {"echo": "same-name-echo", "logprobs": [{"token": "echo"}]}
+
+_REVIEW_USAGE = {"input_tokens": 5, "output_tokens": 7, "total_tokens": 12}
 
 # Explicit declarations contradicting the completed stateless foreground
 # profile (order 015-a, requirements 2, 4 and 5; ARCH13): each alone must
@@ -299,6 +326,12 @@ class ContractHttpTests(unittest.TestCase):
         harness = _Harness()
         try:
             _MainUpstream.content_type = "text/event-stream"
+            _MainUpstream.content_type = "text/event-stream"
+            _MainUpstream.content_type = "text/event-stream"
+            _MainUpstream.content_type = "text/event-stream"
+            _MainUpstream.content_type = "text/event-stream"
+            _MainUpstream.content_type = "text/event-stream"
+            _MainUpstream.content_type = "text/event-stream"
             _MainUpstream.source = raw
             _FakeUpstream.payload = _review_payload([_prop("t1"), _prop("t0")])
             status, payload = harness.post(_contract_body(True))
@@ -306,6 +339,13 @@ class ContractHttpTests(unittest.TestCase):
             self.assertEqual(payload, raw)
             self.assertEqual(len(_FakeUpstream.recorded), 0)
         finally:
+            _MainUpstream.content_type = "application/json"
+            _MainUpstream.content_type = "application/json"
+            _MainUpstream.content_type = "application/json"
+            _MainUpstream.content_type = "application/json"
+            _MainUpstream.content_type = "application/json"
+            _MainUpstream.content_type = "application/json"
+            _MainUpstream.content_type = "application/json"
             _MainUpstream.content_type = "application/json"
             harness.close()
 
@@ -364,6 +404,12 @@ class ContractHttpTests(unittest.TestCase):
         harness = _Harness()
         try:
             _MainUpstream.content_type = "text/event-stream"
+            _MainUpstream.content_type = "text/event-stream"
+            _MainUpstream.content_type = "text/event-stream"
+            _MainUpstream.content_type = "text/event-stream"
+            _MainUpstream.content_type = "text/event-stream"
+            _MainUpstream.content_type = "text/event-stream"
+            _MainUpstream.content_type = "text/event-stream"
             _MainUpstream.source = _tc_baseline(TEXT)
             _FakeUpstream.payload = _review_payload([_prop("t1"), _prop("t0")])
             status, payload = harness.post(_contract_body(True))
@@ -372,6 +418,13 @@ class ContractHttpTests(unittest.TestCase):
             self.assertNotIn(b"presenetliv", payload)
             self.assertEqual(payload.count(b"To je tako zapisano, to je tako zapisano."), 4)
         finally:
+            _MainUpstream.content_type = "application/json"
+            _MainUpstream.content_type = "application/json"
+            _MainUpstream.content_type = "application/json"
+            _MainUpstream.content_type = "application/json"
+            _MainUpstream.content_type = "application/json"
+            _MainUpstream.content_type = "application/json"
+            _MainUpstream.content_type = "application/json"
             _MainUpstream.content_type = "application/json"
             harness.close()
 
@@ -547,24 +600,7 @@ class ContractHttpTests(unittest.TestCase):
                     }
                 },
             ),
-            (
-                "final_part_logprobs",
-                {
-                    "part": {
-                        "type": "output_text",
-                        "text": TEXT,
-                        "content_index": 0,
-                        "logprobs": [
-                            {
-                                "token": "a",
-                                "logprob": -0.1,
-                                "start_index": 0,
-                                "end_index": 1,
-                            }
-                        ],
-                    }
-                },
-            ),
+
         ]
         for name, kwargs in cases:
             with self.subTest(case=name):
@@ -744,6 +780,7 @@ class ContractHttpTests(unittest.TestCase):
             )
         finally:
             _MainUpstream.content_type = "application/json"
+            _MainUpstream.content_type = "application/json"
             harness.close()
 
     def test_json_sse_final_profile_parity(self) -> None:
@@ -886,7 +923,10 @@ class ContractHttpTests(unittest.TestCase):
         )
         self._sse_bypass(raw)
 
-    def test_sse_delta_logprobs_bypass(self) -> None:
+    def test_sse_delta_logprobs_removed(self) -> None:
+        # Order 035-c: logprobs on a delta event is always removed (by
+        # presence); the stream is NOT bypassed.  The delivered SSE must
+        # carry the identical answer text with the logprobs field absent.
         delta = (
             '{"type":"response.output_text.delta","item_id":"m",'
             '"logprobs":[{"token":"t"}],"delta":'
@@ -906,7 +946,31 @@ class ContractHttpTests(unittest.TestCase):
                 }
             ),
         )
-        self._sse_bypass(raw)
+        harness = _Harness()
+        try:
+            _MainUpstream.content_type = "text/event-stream"
+            _MainUpstream.content_type = "text/event-stream"
+            _MainUpstream.content_type = "text/event-stream"
+            _MainUpstream.content_type = "text/event-stream"
+            _MainUpstream.content_type = "text/event-stream"
+            _MainUpstream.source = raw
+            _FakeUpstream.payload = _review_payload(
+                [_prop("t0", keep=True, replacement=None)]
+            )
+            status, payload = harness.post(_contract_body(True))
+            self.assertEqual(status, 200)
+            # logprobs must be absent from the delivered SSE
+            self.assertNotIn(b"logprobs", payload)
+            # answer text must be preserved
+            self.assertIn(TEXT.encode(), payload)
+        finally:
+            _MainUpstream.content_type = "application/json"
+            _MainUpstream.content_type = "application/json"
+            _MainUpstream.content_type = "application/json"
+            _MainUpstream.content_type = "application/json"
+            _MainUpstream.content_type = "application/json"
+            _MainUpstream.content_type = "application/json"
+            harness.close()
 
     def test_sse_done_annotations_bypass(self) -> None:
         done = (
@@ -1302,6 +1366,1982 @@ class ContractHttpTests(unittest.TestCase):
         )
         # The bounded stderr record is counts-only: no raw text, no ids.
         self.assertNotIn("canary", buffer.getvalue())
+
+
+class LogprobsRemovalTests(unittest.TestCase):
+    """Order 035-c: always-remove defined API logprobs policy tests."""
+
+    def _msg(self, output: str = TEXT) -> dict[str, object]:
+        return {
+            "type": "message",
+            "id": "m",
+            "role": "assistant",
+            "status": "completed",
+            "output_index": 0,
+            "content": [{"type": "output_text", "text": output, "content_index": 0}],
+        }
+
+    def _sse_completed_event(self, response: dict[str, object]) -> bytes:
+        return (
+            '{"type":"response.completed","response":' + json.dumps(response, separators=(",", ":")) + "}"
+        ).encode()
+
+    def _json_body(self, part_value: dict[str, object]) -> bytes:
+        message = {
+            "type": "message",
+            "id": "m",
+            "role": "assistant",
+            "status": "completed",
+            "output_index": 0,
+            "content": [part_value],
+        }
+        value = {
+            "object": "response",
+            "id": "r",
+            "status": "completed",
+            "output": [message],
+        }
+        return json.dumps(value, separators=(",", ":")).encode()
+
+    def _expected_json_body(self, text: str) -> dict[str, object]:
+        # Independent whole-value oracle (order 035-d R3): the exact
+        # expected parsed response after removal/repair, built by hand -
+        # never derived from the production normalizer.
+        return {
+            "object": "response",
+            "id": "r",
+            "status": "completed",
+            "output": [
+                {
+                    "type": "message",
+                    "id": "m",
+                    "role": "assistant",
+                    "status": "completed",
+                    "output_index": 0,
+                    "content": [
+                        {"type": "output_text", "text": text, "content_index": 0}
+                    ],
+                }
+            ],
+        }
+
+    def _sse_events(self, payload: bytes) -> list[dict[str, object]]:
+        # Parse every data event of a returned SSE body (test streams
+        # carry no [DONE] terminator).
+        events: list[dict[str, object]] = []
+        for block in payload.decode("utf-8").split("\n\n"):
+            for line in block.splitlines():
+                if line.startswith("data: "):
+                    events.append(json.loads(line[6:]))
+        return events
+
+    def test_json_logprobs_null_removed(self) -> None:
+        # logprobs: null is removed by presence; response succeeds after a
+        # valid aligned two-target keep review (order 035-d R3).
+        raw = self._json_body(
+            {"type": "output_text", "text": TEXT, "content_index": 0, "logprobs": None}
+        )
+        harness = _Harness()
+        try:
+            _MainUpstream.source = raw
+            _FakeUpstream.payload = _review_payload(_KEEP_BOTH)
+            status, payload = harness.post(_contract_body(False))
+            self.assertEqual(status, 200)
+            self.assertEqual(len(_FakeUpstream.recorded), 1)
+            self.assertNotIn(b"logprobs", payload)
+            self.assertEqual(json.loads(payload), self._expected_json_body(TEXT))
+        finally:
+            harness.close()
+
+    def test_json_logprobs_empty_list_removed(self) -> None:
+        # logprobs: [] is removed by presence (valid aligned keep batch).
+        raw = self._json_body(
+            {"type": "output_text", "text": TEXT, "content_index": 0, "logprobs": []}
+        )
+        harness = _Harness()
+        try:
+            _MainUpstream.source = raw
+            _FakeUpstream.payload = _review_payload(_KEEP_BOTH)
+            status, payload = harness.post(_contract_body(False))
+            self.assertEqual(status, 200)
+            self.assertEqual(len(_FakeUpstream.recorded), 1)
+            self.assertNotIn(b"logprobs", payload)
+            self.assertEqual(json.loads(payload), self._expected_json_body(TEXT))
+        finally:
+            harness.close()
+
+    def test_json_logprobs_populated_removed(self) -> None:
+        # logprobs: populated list is removed by presence (valid aligned
+        # keep batch).
+        raw = self._json_body(
+            {
+                "type": "output_text",
+                "text": TEXT,
+                "content_index": 0,
+                "logprobs": [
+                    {"token": "a", "logprob": -0.1, "start_index": 0, "end_index": 1}
+                ],
+            }
+        )
+        harness = _Harness()
+        try:
+            _MainUpstream.source = raw
+            _FakeUpstream.payload = _review_payload(_KEEP_BOTH)
+            status, payload = harness.post(_contract_body(False))
+            self.assertEqual(status, 200)
+            self.assertEqual(len(_FakeUpstream.recorded), 1)
+            self.assertNotIn(b"logprobs", payload)
+            self.assertEqual(json.loads(payload), self._expected_json_body(TEXT))
+        finally:
+            harness.close()
+
+    def test_json_logprobs_unexpected_type_removed(self) -> None:
+        # logprobs: false (unexpected type) is removed by presence (valid
+        # aligned keep batch).
+        raw = self._json_body(
+            {"type": "output_text", "text": TEXT, "content_index": 0, "logprobs": False}
+        )
+        harness = _Harness()
+        try:
+            _MainUpstream.source = raw
+            _FakeUpstream.payload = _review_payload(_KEEP_BOTH)
+            status, payload = harness.post(_contract_body(False))
+            self.assertEqual(status, 200)
+            self.assertEqual(len(_FakeUpstream.recorded), 1)
+            self.assertNotIn(b"logprobs", payload)
+            self.assertEqual(json.loads(payload), self._expected_json_body(TEXT))
+        finally:
+            harness.close()
+
+    def test_json_logprobs_object_removed(self) -> None:
+        # logprobs: object (unexpected type) is removed by presence (valid
+        # aligned keep batch).
+        raw = self._json_body(
+            {
+                "type": "output_text",
+                "text": TEXT,
+                "content_index": 0,
+                "logprobs": {"unexpected": "shape"},
+            }
+        )
+        harness = _Harness()
+        try:
+            _MainUpstream.source = raw
+            _FakeUpstream.payload = _review_payload(_KEEP_BOTH)
+            status, payload = harness.post(_contract_body(False))
+            self.assertEqual(status, 200)
+            self.assertEqual(len(_FakeUpstream.recorded), 1)
+            self.assertNotIn(b"logprobs", payload)
+            self.assertEqual(json.loads(payload), self._expected_json_body(TEXT))
+        finally:
+            harness.close()
+
+    def test_json_logprobs_zero_removed(self) -> None:
+        # logprobs: 0 (number) is removed by presence (valid aligned keep
+        # batch; whole-value oracle).
+        raw = self._json_body(
+            {"type": "output_text", "text": TEXT, "content_index": 0, "logprobs": 0}
+        )
+        harness = _Harness()
+        try:
+            _MainUpstream.source = raw
+            _FakeUpstream.payload = _review_payload(_KEEP_BOTH)
+            status, payload = harness.post(_contract_body(False))
+            self.assertEqual(status, 200)
+            self.assertEqual(len(_FakeUpstream.recorded), 1)
+            self.assertNotIn(b"logprobs", payload)
+            self.assertEqual(json.loads(payload), self._expected_json_body(TEXT))
+        finally:
+            harness.close()
+
+    def test_json_logprobs_string_removed(self) -> None:
+        # logprobs: string (unexpected type) is removed by presence (valid
+        # aligned keep batch; whole-value oracle).
+        raw = self._json_body(
+            {
+                "type": "output_text",
+                "text": TEXT,
+                "content_index": 0,
+                "logprobs": "unexpected-string",
+            }
+        )
+        harness = _Harness()
+        try:
+            _MainUpstream.source = raw
+            _FakeUpstream.payload = _review_payload(_KEEP_BOTH)
+            status, payload = harness.post(_contract_body(False))
+            self.assertEqual(status, 200)
+            self.assertEqual(len(_FakeUpstream.recorded), 1)
+            self.assertNotIn(b"logprobs", payload)
+            self.assertEqual(json.loads(payload), self._expected_json_body(TEXT))
+        finally:
+            harness.close()
+
+    def test_json_other_fields_unchanged_after_removal(self) -> None:
+        # Removing logprobs must not alter any other field (valid aligned
+        # keep batch; whole-value oracle).
+        raw = self._json_body(
+            {
+                "type": "output_text",
+                "text": TEXT,
+                "content_index": 0,
+                "logprobs": [{"token": "a", "logprob": -1.0}],
+            }
+        )
+        harness = _Harness()
+        try:
+            _MainUpstream.source = raw
+            _FakeUpstream.payload = _review_payload(_KEEP_BOTH)
+            status, payload = harness.post(_contract_body(False))
+            self.assertEqual(status, 200)
+            self.assertEqual(len(_FakeUpstream.recorded), 1)
+            body = json.loads(payload)
+            # All other fields preserved
+            self.assertEqual(body["object"], "response")
+            self.assertEqual(body["id"], "r")
+            self.assertEqual(body["status"], "completed")
+            msg = body["output"][0]
+            self.assertEqual(msg["type"], "message")
+            self.assertEqual(msg["id"], "m")
+            self.assertEqual(msg["role"], "assistant")
+            self.assertEqual(msg["status"], "completed")
+            self.assertEqual(msg["output_index"], 0)
+            part = msg["content"][0]
+            self.assertEqual(part["type"], "output_text")
+            self.assertEqual(part["text"], TEXT)
+            self.assertEqual(part["content_index"], 0)
+            # logprobs absent
+            self.assertNotIn("logprobs", part)
+            # Whole independent expected value (no extra/missing keys).
+            self.assertEqual(body, self._expected_json_body(TEXT))
+        finally:
+            harness.close()
+
+    def test_json_no_logprobs_no_edit_byte_identical(self) -> None:
+        # No logprobs present and no edit (valid aligned keep batch, one
+        # review round trip): output is byte-identical to input.
+        raw = self._json_body(
+            {"type": "output_text", "text": TEXT, "content_index": 0}
+        )
+        harness = _Harness()
+        try:
+            _MainUpstream.source = raw
+            _FakeUpstream.payload = _review_payload(_KEEP_BOTH)
+            status, payload = harness.post(_contract_body(False))
+            self.assertEqual(status, 200)
+            self.assertEqual(len(_FakeUpstream.recorded), 1)
+            self.assertEqual(payload, raw)
+        finally:
+            harness.close()
+
+    def test_json_annotations_still_bypass(self) -> None:
+        # Non-empty annotations still cause bypass (policy unchanged).
+        raw = self._json_body(
+            {
+                "type": "output_text",
+                "text": TEXT,
+                "content_index": 0,
+                "annotations": [{"type": "url_citation", "url_index": 0, "start_index": 0, "end_index": 3}],
+            }
+        )
+        self._json_bypass_helper(raw)
+
+    def _json_bypass_helper(self, raw: bytes) -> None:
+        harness = _Harness()
+        try:
+            _MainUpstream.source = raw
+            status, payload = harness.post(_contract_body(False))
+            self.assertEqual(status, 200)
+            self.assertEqual(len(_FakeUpstream.recorded), 0)
+            self.assertEqual(payload, raw)
+        finally:
+            harness.close()
+
+    def test_sse_content_part_done_logprobs_removed(self) -> None:
+        # Order 035-c: logprobs on a content_part.done part is removed
+        # (valid aligned two-target keep batch, one review round trip;
+        # whole parsed event values asserted, order 035-d R3).
+        part_done = (
+            '{"type":"response.content_part.done","item_id":"m",'
+            '"part":{"type":"output_text","text":'
+            + json.dumps(TEXT)
+            + ',"logprobs":[{"token":"x"}]}}'
+        ).encode()
+        raw = _tc_raw(
+            _tc_delta("m", TEXT),
+            part_done,
+            _tc_item_done(parts=[{"type": "output_text", "text": TEXT}]),
+            self._sse_completed_event(
+                {"object": "response", "id": "r", "status": "completed", "output": [self._msg()]}
+            ),
+        )
+        harness = _Harness()
+        try:
+            _MainUpstream.content_type = "text/event-stream"
+            _MainUpstream.content_type = "text/event-stream"
+            _MainUpstream.content_type = "text/event-stream"
+            _MainUpstream.content_type = "text/event-stream"
+            _MainUpstream.content_type = "text/event-stream"
+            _MainUpstream.source = raw
+            _FakeUpstream.payload = _review_payload(_KEEP_BOTH)
+            status, payload = harness.post(_contract_body(True))
+            self.assertEqual(status, 200)
+            self.assertEqual(len(_FakeUpstream.recorded), 1)
+            self.assertNotIn(b"logprobs", payload)
+            events = self._sse_events(payload)
+            self.assertEqual(
+                events,
+                [
+                    {"type": "response.output_text.delta", "item_id": "m", "delta": TEXT},
+                    {
+                        "type": "response.content_part.done",
+                        "item_id": "m",
+                        "part": {"type": "output_text", "text": TEXT},
+                    },
+                    {
+                        "type": "response.output_item.done",
+                        "item": {
+                            "type": "message",
+                            "id": "m",
+                            "role": "assistant",
+                            "status": "completed",
+                            "content": [{"type": "output_text", "text": TEXT}],
+                        },
+                    },
+                    {
+                        "type": "response.completed",
+                        "response": {
+                            "object": "response",
+                            "id": "r",
+                            "status": "completed",
+                            "output": [self._msg(TEXT)],
+                        },
+                    },
+                ],
+            )
+        finally:
+            _MainUpstream.content_type = "application/json"
+            _MainUpstream.content_type = "application/json"
+            _MainUpstream.content_type = "application/json"
+            _MainUpstream.content_type = "application/json"
+            _MainUpstream.content_type = "application/json"
+            _MainUpstream.content_type = "application/json"
+            harness.close()
+
+    def test_sse_output_item_done_logprobs_removed(self) -> None:
+        # Order 035-c: logprobs on an output_item.done content part is
+        # removed (valid aligned keep batch; whole parsed event values
+        # asserted).
+        item_done = (
+            '{"type":"response.output_item.done","output_index":0,'
+            '"item":{"type":"message","id":"m","role":"assistant",'
+            '"content":[{"type":"output_text","text":'
+            + json.dumps(TEXT)
+            + ',"logprobs":[{"token":"y"}]}]}}'
+        ).encode()
+        raw = _tc_raw(
+            _tc_delta("m", TEXT),
+            _tc_part_done(text=TEXT),
+            item_done,
+            self._sse_completed_event(
+                {"object": "response", "id": "r", "status": "completed", "output": [self._msg()]}
+            ),
+        )
+        harness = _Harness()
+        try:
+            _MainUpstream.content_type = "text/event-stream"
+            _MainUpstream.content_type = "text/event-stream"
+            _MainUpstream.content_type = "text/event-stream"
+            _MainUpstream.content_type = "text/event-stream"
+            _MainUpstream.content_type = "text/event-stream"
+            _MainUpstream.source = raw
+            _FakeUpstream.payload = _review_payload(_KEEP_BOTH)
+            status, payload = harness.post(_contract_body(True))
+            self.assertEqual(status, 200)
+            self.assertEqual(len(_FakeUpstream.recorded), 1)
+            self.assertNotIn(b"logprobs", payload)
+            events = self._sse_events(payload)
+            self.assertEqual(
+                events,
+                [
+                    {"type": "response.output_text.delta", "item_id": "m", "delta": TEXT},
+                    {
+                        "type": "response.content_part.done",
+                        "item_id": "m",
+                        "part": {"type": "output_text", "text": TEXT},
+                    },
+                    {
+                        "type": "response.output_item.done",
+                        "output_index": 0,
+                        "item": {
+                            "type": "message",
+                            "id": "m",
+                            "role": "assistant",
+                            "content": [{"type": "output_text", "text": TEXT}],
+                        },
+                    },
+                    {
+                        "type": "response.completed",
+                        "response": {
+                            "object": "response",
+                            "id": "r",
+                            "status": "completed",
+                            "output": [self._msg(TEXT)],
+                        },
+                    },
+                ],
+            )
+        finally:
+            _MainUpstream.content_type = "application/json"
+            _MainUpstream.content_type = "application/json"
+            _MainUpstream.content_type = "application/json"
+            _MainUpstream.content_type = "application/json"
+            _MainUpstream.content_type = "application/json"
+            _MainUpstream.content_type = "application/json"
+            harness.close()
+
+    def test_sse_completed_nested_logprobs_removed(self) -> None:
+        # Order 035-c: logprobs in the nested response of a completed event
+        # is removed (valid aligned keep batch; whole parsed event values
+        # asserted).
+        completed = (
+            '{"type":"response.completed","response":{"object":"response",'
+            '"id":"r","status":"completed","output":'
+            '[{"type":"message","id":"m","role":"assistant","status":"completed",'
+            '"output_index":0,"content":[{"type":"output_text","text":'
+            + json.dumps(TEXT)
+            + ',"content_index":0,"logprobs":[{"token":"z"}]}]}]}}'
+        ).encode()
+        raw = _tc_raw(
+            _tc_delta("m", TEXT),
+            _tc_part_done(text=TEXT),
+            _tc_item_done(parts=[{"type": "output_text", "text": TEXT}]),
+            completed,
+        )
+        harness = _Harness()
+        try:
+            _MainUpstream.content_type = "text/event-stream"
+            _MainUpstream.content_type = "text/event-stream"
+            _MainUpstream.content_type = "text/event-stream"
+            _MainUpstream.content_type = "text/event-stream"
+            _MainUpstream.content_type = "text/event-stream"
+            _MainUpstream.source = raw
+            _FakeUpstream.payload = _review_payload(_KEEP_BOTH)
+            status, payload = harness.post(_contract_body(True))
+            self.assertEqual(status, 200)
+            self.assertEqual(len(_FakeUpstream.recorded), 1)
+            self.assertNotIn(b"logprobs", payload)
+            events = self._sse_events(payload)
+            self.assertEqual(
+                events,
+                [
+                    {"type": "response.output_text.delta", "item_id": "m", "delta": TEXT},
+                    {
+                        "type": "response.content_part.done",
+                        "item_id": "m",
+                        "part": {"type": "output_text", "text": TEXT},
+                    },
+                    {
+                        "type": "response.output_item.done",
+                        "item": {
+                            "type": "message",
+                            "id": "m",
+                            "role": "assistant",
+                            "status": "completed",
+                            "content": [{"type": "output_text", "text": TEXT}],
+                        },
+                    },
+                    {
+                        "type": "response.completed",
+                        "response": {
+                            "object": "response",
+                            "id": "r",
+                            "status": "completed",
+                            "output": [self._msg(TEXT)],
+                        },
+                    },
+                ],
+            )
+        finally:
+            _MainUpstream.content_type = "application/json"
+            _MainUpstream.content_type = "application/json"
+            _MainUpstream.content_type = "application/json"
+            _MainUpstream.content_type = "application/json"
+            _MainUpstream.content_type = "application/json"
+            _MainUpstream.content_type = "application/json"
+            harness.close()
+
+    def test_sse_logprobs_zero_removed(self) -> None:
+        # Order 035-d R3: logprobs 0 (number) on a delta event is removed
+        # by presence (valid aligned keep batch; whole parsed event values).
+        delta = (
+            '{"type":"response.output_text.delta","item_id":"m",'
+            '"logprobs":0,"delta":' + json.dumps(TEXT) + "}"
+        ).encode()
+        raw = _tc_raw(
+            delta,
+            _tc_part_done(text=TEXT),
+            _tc_item_done(parts=[{"type": "output_text", "text": TEXT}]),
+            self._sse_completed_event(
+                {"object": "response", "id": "r", "status": "completed", "output": [self._msg()]}
+            ),
+        )
+        harness = _Harness()
+        try:
+            _MainUpstream.content_type = "text/event-stream"
+            _MainUpstream.source = raw
+            _FakeUpstream.payload = _review_payload(_KEEP_BOTH)
+            status, payload = harness.post(_contract_body(True))
+            self.assertEqual(status, 200)
+            self.assertEqual(len(_FakeUpstream.recorded), 1)
+            self.assertNotIn(b"logprobs", payload)
+            events = self._sse_events(payload)
+            self.assertEqual(
+                events,
+                [
+                    {"type": "response.output_text.delta", "item_id": "m", "delta": TEXT},
+                    {
+                        "type": "response.content_part.done",
+                        "item_id": "m",
+                        "part": {"type": "output_text", "text": TEXT},
+                    },
+                    {
+                        "type": "response.output_item.done",
+                        "item": {
+                            "type": "message",
+                            "id": "m",
+                            "role": "assistant",
+                            "status": "completed",
+                            "content": [{"type": "output_text", "text": TEXT}],
+                        },
+                    },
+                    {
+                        "type": "response.completed",
+                        "response": {
+                            "object": "response",
+                            "id": "r",
+                            "status": "completed",
+                            "output": [self._msg(TEXT)],
+                        },
+                    },
+                ],
+            )
+        finally:
+            _MainUpstream.content_type = "application/json"
+            harness.close()
+
+    def test_sse_logprobs_string_removed(self) -> None:
+        # Order 035-d R3: logprobs string (unexpected type) on a
+        # content_part.done part is removed by presence (valid aligned keep
+        # batch; whole parsed event values).
+        part_done = (
+            '{"type":"response.content_part.done","item_id":"m",'
+            '"part":{"type":"output_text","text":'
+            + json.dumps(TEXT)
+            + ',"logprobs":"unexpected-string"}}'
+        ).encode()
+        raw = _tc_raw(
+            _tc_delta("m", TEXT),
+            part_done,
+            _tc_item_done(parts=[{"type": "output_text", "text": TEXT}]),
+            self._sse_completed_event(
+                {"object": "response", "id": "r", "status": "completed", "output": [self._msg()]}
+            ),
+        )
+        harness = _Harness()
+        try:
+            _MainUpstream.content_type = "text/event-stream"
+            _MainUpstream.source = raw
+            _FakeUpstream.payload = _review_payload(_KEEP_BOTH)
+            status, payload = harness.post(_contract_body(True))
+            self.assertEqual(status, 200)
+            self.assertEqual(len(_FakeUpstream.recorded), 1)
+            self.assertNotIn(b"logprobs", payload)
+            events = self._sse_events(payload)
+            self.assertEqual(
+                events,
+                [
+                    {"type": "response.output_text.delta", "item_id": "m", "delta": TEXT},
+                    {
+                        "type": "response.content_part.done",
+                        "item_id": "m",
+                        "part": {"type": "output_text", "text": TEXT},
+                    },
+                    {
+                        "type": "response.output_item.done",
+                        "item": {
+                            "type": "message",
+                            "id": "m",
+                            "role": "assistant",
+                            "status": "completed",
+                            "content": [{"type": "output_text", "text": TEXT}],
+                        },
+                    },
+                    {
+                        "type": "response.completed",
+                        "response": {
+                            "object": "response",
+                            "id": "r",
+                            "status": "completed",
+                            "output": [self._msg(TEXT)],
+                        },
+                    },
+                ],
+            )
+        finally:
+            _MainUpstream.content_type = "application/json"
+            harness.close()
+
+    def test_json_clean_zero_review_control(self) -> None:
+        # Order 035-d R3: a TRUE clean zero-review control - the answer has
+        # zero detector candidates, so the review endpoint is never called;
+        # the populated logprobs are still removed and the whole body is
+        # exactly the independent expected value (removal independent of
+        # repair).
+        raw = self._json_body(
+            {
+                "type": "output_text",
+                "text": _CLEAN_ANSWER,
+                "content_index": 0,
+                "logprobs": [
+                    {"token": "a", "logprob": -0.5, "start_index": 0, "end_index": 1}
+                ],
+            }
+        )
+        harness = _Harness()
+        try:
+            _MainUpstream.source = raw
+            _FakeUpstream.payload = _review_payload(_KEEP_BOTH)
+            status, payload = harness.post(_contract_body(False, _CLEAN_ANSWER))
+            self.assertEqual(status, 200)
+            self.assertEqual(len(_FakeUpstream.recorded), 0)
+            self.assertNotIn(b"logprobs", payload)
+            self.assertEqual(
+                json.loads(payload), self._expected_json_body(_CLEAN_ANSWER)
+            )
+        finally:
+            harness.close()
+
+    def test_sse_clean_zero_review_control(self) -> None:
+        # Order 035-d R3: TRUE clean zero-review control through the real
+        # SSE chain - zero detector candidates, zero review calls, logprobs
+        # removed from every copy, every parsed event exactly the
+        # independent expected value.
+        delta = (
+            '{"type":"response.output_text.delta","item_id":"m",'
+            '"logprobs":[{"token":"a"}],"delta":' + json.dumps(_CLEAN_ANSWER) + "}"
+        ).encode()
+        part_done = (
+            '{"type":"response.content_part.done","item_id":"m",'
+            '"part":{"type":"output_text","text":'
+            + json.dumps(_CLEAN_ANSWER)
+            + ',"logprobs":[{"token":"b"}]}}'
+        ).encode()
+        item_done = (
+            '{"type":"response.output_item.done","item":{"type":"message","id":"m",'
+            '"role":"assistant","status":"completed","content":['
+            '{"type":"output_text","text":' + json.dumps(_CLEAN_ANSWER)
+            + ',"logprobs":[{"token":"c"}]}]}}'
+        ).encode()
+        completed = (
+            '{"type":"response.completed","response":{"object":"response",'
+            '"id":"r","status":"completed","output":'
+            '[{"type":"message","id":"m","role":"assistant","status":"completed",'
+            '"output_index":0,"content":[{"type":"output_text","text":'
+            + json.dumps(_CLEAN_ANSWER)
+            + ',"content_index":0,"logprobs":[{"token":"d"}]}]}]}}'
+        ).encode()
+        raw = _tc_raw(delta, part_done, item_done, completed)
+        harness = _Harness()
+        try:
+            _MainUpstream.content_type = "text/event-stream"
+            _MainUpstream.source = raw
+            _FakeUpstream.payload = _review_payload(_KEEP_BOTH)
+            status, payload = harness.post(_contract_body(True, _CLEAN_ANSWER))
+            self.assertEqual(status, 200)
+            self.assertEqual(len(_FakeUpstream.recorded), 0)
+            self.assertNotIn(b"logprobs", payload)
+            events = self._sse_events(payload)
+            self.assertEqual(
+                events,
+                [
+                    {
+                        "type": "response.output_text.delta",
+                        "item_id": "m",
+                        "delta": _CLEAN_ANSWER,
+                    },
+                    {
+                        "type": "response.content_part.done",
+                        "item_id": "m",
+                        "part": {"type": "output_text", "text": _CLEAN_ANSWER},
+                    },
+                    {
+                        "type": "response.output_item.done",
+                        "item": {
+                            "type": "message",
+                            "id": "m",
+                            "role": "assistant",
+                            "status": "completed",
+                            "content": [{"type": "output_text", "text": _CLEAN_ANSWER}],
+                        },
+                    },
+                    {
+                        "type": "response.completed",
+                        "response": {
+                            "object": "response",
+                            "id": "r",
+                            "status": "completed",
+                            "output": [self._msg(_CLEAN_ANSWER)],
+                        },
+                    },
+                ],
+            )
+        finally:
+            _MainUpstream.content_type = "application/json"
+            harness.close()
+
+    def test_json_accepted_edit_one_review_control(self) -> None:
+        # Order 035-d R3: accepted-edit one-review control - valid aligned
+        # two-target batch, t0 accepted (replacement "tako"), t1 kept:
+        # exactly one review round trip, only the approved span changes,
+        # the unapproved occurrence stays exact, logprobs removed, whole
+        # body exactly the independent expected value.
+        raw = self._json_body(
+            {
+                "type": "output_text",
+                "text": TEXT,
+                "content_index": 0,
+                "logprobs": [
+                    {"token": "a", "logprob": -0.1, "start_index": 0, "end_index": 1}
+                ],
+            }
+        )
+        harness = _Harness()
+        try:
+            _MainUpstream.source = raw
+            _FakeUpstream.payload = _review_payload(_EDIT_T0_KEEP_T1)
+            status, payload = harness.post(_contract_body(False))
+            self.assertEqual(status, 200)
+            self.assertEqual(len(_FakeUpstream.recorded), 1)
+            self.assertNotIn(b"logprobs", payload)
+            self.assertEqual(
+                json.loads(payload), self._expected_json_body(_TEXT_EDITED_T0)
+            )
+        finally:
+            harness.close()
+
+    def test_sse_accepted_edit_one_review_control(self) -> None:
+        # Order 035-d R3: accepted-edit one-review control through the real
+        # SSE chain - t0 accepted, t1 kept: exactly one review round trip,
+        # every established consistent copy carries the repaired answer,
+        # the unapproved occurrence stays exact in all copies, logprobs
+        # removed from every location, all parsed events exactly the
+        # independent expected values.
+        delta = (
+            '{"type":"response.output_text.delta","item_id":"m",'
+            '"logprobs":[{"token":"a"}],"delta":' + json.dumps(TEXT) + "}"
+        ).encode()
+        part_done = (
+            '{"type":"response.content_part.done","item_id":"m",'
+            '"part":{"type":"output_text","text":'
+            + json.dumps(TEXT)
+            + ',"logprobs":[{"token":"b"}]}}'
+        ).encode()
+        item_done = (
+            '{"type":"response.output_item.done","item":{"type":"message","id":"m",'
+            '"role":"assistant","status":"completed","content":['
+            '{"type":"output_text","text":' + json.dumps(TEXT)
+            + ',"logprobs":[{"token":"c"}]}]}}'
+        ).encode()
+        completed = (
+            '{"type":"response.completed","response":{"object":"response",'
+            '"id":"r","status":"completed","output":'
+            '[{"type":"message","id":"m","role":"assistant","status":"completed",'
+            '"output_index":0,"content":[{"type":"output_text","text":'
+            + json.dumps(TEXT)
+            + ',"content_index":0,"logprobs":[{"token":"d"}]}]}]}}'
+        ).encode()
+        raw = _tc_raw(delta, part_done, item_done, completed)
+        harness = _Harness()
+        try:
+            _MainUpstream.content_type = "text/event-stream"
+            _MainUpstream.source = raw
+            _FakeUpstream.payload = _review_payload(_EDIT_T0_KEEP_T1)
+            status, payload = harness.post(_contract_body(True))
+            self.assertEqual(status, 200)
+            self.assertEqual(len(_FakeUpstream.recorded), 1)
+            self.assertNotIn(b"logprobs", payload)
+            events = self._sse_events(payload)
+            self.assertEqual(
+                events,
+                [
+                    {
+                        "type": "response.output_text.delta",
+                        "item_id": "m",
+                        "delta": _TEXT_EDITED_T0,
+                    },
+                    {
+                        "type": "response.content_part.done",
+                        "item_id": "m",
+                        "part": {"type": "output_text", "text": _TEXT_EDITED_T0},
+                    },
+                    {
+                        "type": "response.output_item.done",
+                        "item": {
+                            "type": "message",
+                            "id": "m",
+                            "role": "assistant",
+                            "status": "completed",
+                            "content": [{"type": "output_text", "text": _TEXT_EDITED_T0}],
+                        },
+                    },
+                    {
+                        "type": "response.completed",
+                        "response": {
+                            "object": "response",
+                            "id": "r",
+                            "status": "completed",
+                            "output": [self._msg(_TEXT_EDITED_T0)],
+                        },
+                    },
+                ],
+            )
+        finally:
+            _MainUpstream.content_type = "application/json"
+            harness.close()
+
+    # --- Order 035-d R3 (Root clarification): compact parameterized
+    # actual-HTTP value matrix: all eight defined values in JSON/SSE
+    # through both the genuine clean zero-review path and the
+    # accepted-edit one-review path, with valid aligned two-target
+    # proposals, actual usage/IDs/completion and unrelated same-named
+    # metadata echo keys preserved, and exact full independent expected
+    # parsed values asserted (never the production normalizer as
+    # oracle).
+
+    def _matrix_label(self, logprobs: object) -> str:
+        return "absent" if logprobs is _ABSENT else repr(logprobs)
+
+    def _matrix_json_body(self, text: str, logprobs: object) -> bytes:
+        part: dict[str, object] = {"type": "output_text", "text": text, "content_index": 0}
+        if logprobs is not _ABSENT:
+            part["logprobs"] = logprobs
+        message = {
+            "type": "message",
+            "id": "m",
+            "role": "assistant",
+            "status": "completed",
+            "output_index": 0,
+            "content": [part],
+        }
+        return json.dumps(
+            {
+                "object": "response",
+                "id": "resp-matrix",
+                "status": "completed",
+                "created_at": 1700000000,
+                "completed_at": 1700000001,
+                "error": None,
+                "usage": dict(_MATRIX_USAGE),
+                "metadata": dict(_MATRIX_METADATA),
+                "output": [message],
+            },
+            separators=(",", ":"),
+        ).encode()
+
+    def _expected_matrix_json(self, text: str) -> dict[str, object]:
+        # Independent whole-value oracle: the defined logprobs never
+        # appear in the output part; usage/IDs/completion and the
+        # same-named metadata echo are exact.
+        return {
+            "object": "response",
+            "id": "resp-matrix",
+            "status": "completed",
+            "created_at": 1700000000,
+            "completed_at": 1700000001,
+            "error": None,
+            "usage": dict(_MATRIX_USAGE),
+            "metadata": dict(_MATRIX_METADATA),
+            "output": [
+                {
+                    "type": "message",
+                    "id": "m",
+                    "role": "assistant",
+                    "status": "completed",
+                    "output_index": 0,
+                    "content": [
+                        {"type": "output_text", "text": text, "content_index": 0}
+                    ],
+                }
+            ],
+        }
+
+    def _matrix_sse_stream(self, text: str, logprobs: object) -> bytes:
+        part: dict[str, object] = {"type": "output_text", "text": text}
+        if logprobs is not _ABSENT:
+            part["logprobs"] = logprobs
+        delta: dict[str, object] = {
+            "type": "response.output_text.delta",
+            "item_id": "m",
+            "delta": text,
+        }
+        if logprobs is not _ABSENT:
+            delta["logprobs"] = logprobs
+        events = (
+            delta,
+            {
+                "type": "response.content_part.done",
+                "item_id": "m",
+                "part": dict(part),
+            },
+            {
+                "type": "response.output_item.done",
+                "item": {
+                    "type": "message",
+                    "id": "m",
+                    "role": "assistant",
+                    "status": "completed",
+                    "content": [dict(part)],
+                },
+            },
+            {
+                "type": "response.completed",
+                "response": {
+                    "object": "response",
+                    "id": "resp-matrix",
+                    "status": "completed",
+                    "created_at": 1700000000,
+                    "completed_at": 1700000001,
+                    "usage": dict(_MATRIX_USAGE),
+                    "metadata": dict(_MATRIX_METADATA),
+                    "output": [
+                        {
+                            "type": "message",
+                            "id": "m",
+                            "role": "assistant",
+                            "status": "completed",
+                            "output_index": 0,
+                            "content": [dict(part)],
+                        }
+                    ],
+                },
+            },
+        )
+        return _tc_raw(
+            *[json.dumps(event, separators=(",", ":")).encode() for event in events]
+        )
+
+    def _expected_matrix_sse(self, text: str) -> list[dict[str, object]]:
+        # Independent whole-value oracle for the four established
+        # consistent copies: defined logprobs never appear; usage/IDs/
+        # completion and the same-named metadata echo are exact.
+        part = {"type": "output_text", "text": text}
+        return [
+            {"type": "response.output_text.delta", "item_id": "m", "delta": text},
+            {"type": "response.content_part.done", "item_id": "m", "part": dict(part)},
+            {
+                "type": "response.output_item.done",
+                "item": {
+                    "type": "message",
+                    "id": "m",
+                    "role": "assistant",
+                    "status": "completed",
+                    "content": [dict(part)],
+                },
+            },
+            {
+                "type": "response.completed",
+                "response": {
+                    "object": "response",
+                    "id": "resp-matrix",
+                    "status": "completed",
+                    "created_at": 1700000000,
+                    "completed_at": 1700000001,
+                    "usage": dict(_MATRIX_USAGE),
+                    "metadata": dict(_MATRIX_METADATA),
+                    "output": [
+                        {
+                            "type": "message",
+                            "id": "m",
+                            "role": "assistant",
+                            "status": "completed",
+                            "output_index": 0,
+                            "content": [dict(part)],
+                        }
+                    ],
+                },
+            },
+        ]
+
+    def test_json_value_matrix_clean_and_edit(self) -> None:
+        # JSON: all eight values x (clean zero-review, accepted-edit
+        # one-review) through the real HTTP chain.
+        for logprobs in _LOGPROBS_MATRIX_VALUES:
+            with self.subTest(value=self._matrix_label(logprobs), mode="clean-zero-review"):
+                harness = _Harness()
+                try:
+                    raw = self._matrix_json_body(_CLEAN_ANSWER, logprobs)
+                    _MainUpstream.source = raw
+                    _FakeUpstream.payload = _review_payload(_KEEP_BOTH)
+                    status, payload = harness.post(_contract_body(False, _CLEAN_ANSWER))
+                    self.assertEqual(status, 200)
+                    self.assertEqual(len(_FakeUpstream.recorded), 0)
+                    if logprobs is _ABSENT:
+                        # No removal and no edit: exact raw bytes.
+                        self.assertEqual(payload, raw)
+                    self.assertEqual(
+                        json.loads(payload), self._expected_matrix_json(_CLEAN_ANSWER)
+                    )
+                finally:
+                    harness.close()
+            with self.subTest(value=self._matrix_label(logprobs), mode="accepted-edit-one-review"):
+                harness = _Harness()
+                try:
+                    raw = self._matrix_json_body(TEXT, logprobs)
+                    _MainUpstream.source = raw
+                    _FakeUpstream.payload = _review_payload(_EDIT_T0_KEEP_T1, usage=_REVIEW_USAGE)
+                    status, payload = harness.post(_contract_body(False))
+                    self.assertEqual(status, 200)
+                    self.assertEqual(len(_FakeUpstream.recorded), 1)
+                    self.assertEqual(
+                        json.loads(payload), self._expected_matrix_json(_TEXT_EDITED_T0)
+                    )
+                finally:
+                    harness.close()
+
+    def test_sse_value_matrix_clean_and_edit(self) -> None:
+        # SSE: all eight values x (clean zero-review, accepted-edit
+        # one-review) through the real HTTP chain; all four consistent
+        # copies asserted as whole parsed events.
+        for logprobs in _LOGPROBS_MATRIX_VALUES:
+            with self.subTest(value=self._matrix_label(logprobs), mode="clean-zero-review"):
+                harness = _Harness()
+                try:
+                    raw = self._matrix_sse_stream(_CLEAN_ANSWER, logprobs)
+                    _MainUpstream.content_type = "text/event-stream"
+                    _MainUpstream.source = raw
+                    _FakeUpstream.payload = _review_payload(_KEEP_BOTH)
+                    status, payload = harness.post(_contract_body(True, _CLEAN_ANSWER))
+                    self.assertEqual(status, 200)
+                    self.assertEqual(len(_FakeUpstream.recorded), 0)
+                    if logprobs is _ABSENT:
+                        # No removal and no edit: exact raw bytes.
+                        self.assertEqual(payload, raw)
+                    self.assertEqual(
+                        self._sse_events(payload), self._expected_matrix_sse(_CLEAN_ANSWER)
+                    )
+                finally:
+                    _MainUpstream.content_type = "application/json"
+                    harness.close()
+            with self.subTest(value=self._matrix_label(logprobs), mode="accepted-edit-one-review"):
+                harness = _Harness()
+                try:
+                    raw = self._matrix_sse_stream(TEXT, logprobs)
+                    _MainUpstream.content_type = "text/event-stream"
+                    _MainUpstream.source = raw
+                    _FakeUpstream.payload = _review_payload(_EDIT_T0_KEEP_T1, usage=_REVIEW_USAGE)
+                    status, payload = harness.post(_contract_body(True))
+                    self.assertEqual(status, 200)
+                    self.assertEqual(len(_FakeUpstream.recorded), 1)
+                    self.assertEqual(
+                        self._sse_events(payload), self._expected_matrix_sse(_TEXT_EDITED_T0)
+                    )
+                finally:
+                    _MainUpstream.content_type = "application/json"
+                    harness.close()
+
+    def test_json_ineligible_envelope_logprobs_still_removed(self) -> None:
+        # Even an ineligible envelope (incomplete status) has logprobs removed.
+        value = {
+            "object": "response",
+            "id": "r",
+            "status": "in_progress",
+            "output": [
+                {
+                    "type": "message",
+                    "id": "m",
+                    "role": "assistant",
+                    "status": "in_progress",
+                    "output_index": 0,
+                    "content": [
+                        {
+                            "type": "output_text",
+                            "text": TEXT,
+                            "content_index": 0,
+                            "logprobs": [{"token": "a"}],
+                        }
+                    ],
+                }
+            ],
+        }
+        raw = json.dumps(value, separators=(",", ":")).encode()
+        harness = _Harness()
+        try:
+            _MainUpstream.source = raw
+            status, payload = harness.post(_contract_body(False))
+            self.assertEqual(status, 200)
+            # No review call (ineligible)
+            self.assertEqual(len(_FakeUpstream.recorded), 0)
+            # But logprobs is still removed from the wire data
+            self.assertNotIn(b"logprobs", payload)
+            body = json.loads(payload)
+            self.assertEqual(body["status"], "in_progress")
+            self.assertEqual(body["output"][0]["content"][0]["text"], TEXT)
+        finally:
+            harness.close()
+
+
+    def test_json_non200_logprobs_removed(self) -> None:
+        # R3: non-200 recognized Responses object has logprobs removed.
+        value = {
+            "object": "response",
+            "id": "r",
+            "status": "failed",
+            "error": {"code": "server_error"},
+            "output": [
+                {
+                    "type": "message", "id": "m", "role": "assistant",
+                    "status": "incomplete", "output_index": 0,
+                    "content": [
+                        {"type": "output_text", "text": "partial", "content_index": 0,
+                         "logprobs": [{"token": "x"}]}
+                    ],
+                }
+            ],
+        }
+        raw = json.dumps(value, separators=(",", ":")).encode()
+        harness = _Harness()
+        try:
+            _MainUpstream.source = raw
+            _MainUpstream.status = 503
+            status, payload = harness.post(_contract_body(False))
+            self.assertEqual(status, 503)
+            self.assertEqual(len(_FakeUpstream.recorded), 0)
+            self.assertNotIn(b"logprobs", payload)
+            body = json.loads(payload)
+            self.assertEqual(body["status"], "failed")
+            self.assertEqual(body["error"]["code"], "server_error")
+            self.assertEqual(body["output"][0]["content"][0]["text"], "partial")
+        finally:
+            _MainUpstream.status = 200
+            harness.close()
+
+    def test_sse_non200_logprobs_removed(self) -> None:
+        # R3: SSE non-200 with well-formed completed snapshot has logprobs removed.
+        completed = (
+            '{"type":"response.completed","response":{"object":"response",'
+            '"id":"r","status":"incomplete","incomplete_details":{"reason":"max_output_tokens"},'
+            '"output":'
+            '[{"type":"message","id":"m","role":"assistant","status":"incomplete",'
+            '"output_index":0,"content":[{"type":"output_text","text":"partial",'
+            '"content_index":0,"logprobs":[{"token":"x"}]}]}]}}'
+        ).encode()
+        raw = _tc_raw(
+            _tc_delta("m", "partial"),
+            completed,
+        )
+        harness = _Harness()
+        try:
+            _MainUpstream.content_type = "text/event-stream"
+            _MainUpstream.source = raw
+            _MainUpstream.status = 503
+            status, payload = harness.post(_contract_body(True))
+            self.assertEqual(status, 503)
+            self.assertEqual(len(_FakeUpstream.recorded), 0)
+            self.assertNotIn(b"logprobs", payload)
+            self.assertIn(b"partial", payload)
+        finally:
+            _MainUpstream.status = 200
+            _MainUpstream.content_type = "application/json"
+            harness.close()
+
+    def test_json_lone_surrogate_in_answer(self) -> None:
+        # R6: escaped lone surrogate in answer text does not cause 502.
+        # \ud800 is a valid JSON escape for a lone surrogate. Zero detector
+        # candidates: a true clean zero-review control (order 035-d R3).
+        value = {
+            "object": "response", "id": "r", "status": "completed",
+            "output": [
+                {"type": "message", "id": "m", "role": "assistant",
+                 "status": "completed", "output_index": 0,
+                 "content": [
+                     {"type": "output_text",
+                      "text": "abc\ud800def",
+                      "content_index": 0,
+                      "logprobs": [{"token": "x"}]}
+                 ]}
+            ],
+        }
+        # Build raw JSON with the escaped surrogate
+        raw = (
+            b'{"object":"response","id":"r","status":"completed","output":'
+            b'[{"type":"message","id":"m","role":"assistant","status":"completed",'
+            b'"output_index":0,"content":[{"type":"output_text","text":"abc\ud800def",'
+            b'"content_index":0,"logprobs":[{"token":"x"}]}]}]}'
+        )
+        harness = _Harness()
+        try:
+            _MainUpstream.source = raw
+            _FakeUpstream.payload = _review_payload(_KEEP_BOTH)
+            status, payload = harness.post(_contract_body(False))
+            self.assertEqual(status, 200)
+            self.assertEqual(len(_FakeUpstream.recorded), 0)
+            self.assertNotIn(b"logprobs", payload)
+            # The answer text must be preserved (lone surrogate intact)
+            body = json.loads(payload)
+            self.assertEqual(body["output"][0]["content"][0]["text"], "abc\ud800def")
+            # Whole expected value: removal only, surrogate preserved.
+            expected = self._expected_json_body("abc\ud800def")
+            self.assertEqual(body, expected)
+        finally:
+            harness.close()
+
+    def test_json_lone_surrogate_in_metadata(self) -> None:
+        # R6: escaped lone surrogate in opaque metadata is preserved
+        # (true clean zero-review control: zero-candidate answer; metadata
+        # echo never scanned).
+        raw = (
+            b'{"object":"response","id":"r","status":"completed","metadata":{"k":"x\ud800y"},'
+            b'"output":[{"type":"message","id":"m","role":"assistant","status":"completed",'
+            b'"output_index":0,"content":[{"type":"output_text","text":"To je tako zapisano, to je tako zapisano.",'
+            b'"content_index":0,"logprobs":null}]}]}'
+        )
+        harness = _Harness()
+        try:
+            _MainUpstream.source = raw
+            _FakeUpstream.payload = _review_payload(_KEEP_BOTH)
+            status, payload = harness.post(_contract_body(False))
+            self.assertEqual(status, 200)
+            self.assertEqual(len(_FakeUpstream.recorded), 0)
+            self.assertNotIn(b"logprobs", payload)
+            body = json.loads(payload)
+            self.assertEqual(body["metadata"]["k"], "x\ud800y")
+            self.assertEqual(body["output"][0]["content"][0]["text"], _CLEAN_ANSWER)
+            self.assertEqual(
+                body,
+                {
+                    "object": "response",
+                    "id": "r",
+                    "status": "completed",
+                    "metadata": {"k": "x\ud800y"},
+                    "output": [
+                        {
+                            "type": "message",
+                            "id": "m",
+                            "role": "assistant",
+                            "status": "completed",
+                            "output_index": 0,
+                            "content": [
+                                {"type": "output_text", "text": _CLEAN_ANSWER, "content_index": 0}
+                            ],
+                        }
+                    ],
+                },
+            )
+        finally:
+            harness.close()
+
+    def test_sse_output_item_two_parts_logprobs_removed(self) -> None:
+        # R3: SSE output_item.done with TWO output_text parts - both lose logprobs.
+        item_done = (
+            '{"type":"response.output_item.done","output_index":0,'
+            '"item":{"type":"message","id":"m","role":"assistant",'
+            '"content":['
+            '{"type":"output_text","text":' + json.dumps(TEXT) +
+            ',"logprobs":[{"token":"a"}]},'
+            '{"type":"output_text","text":"second","logprobs":[{"token":"b"}]}'
+            ']}}'
+        ).encode()
+        # This is unrepairable (two content parts), so it bypasses with 0 review.
+        # But both logprobs must still be removed.
+        raw = _tc_raw(
+            _tc_delta("m", TEXT),
+            _tc_part_done(text=TEXT),
+            item_done,
+            self._sse_completed_event(
+                {"object": "response", "id": "r", "status": "completed",
+                 "output": [self._msg()]}
+            ),
+        )
+        harness = _Harness()
+        try:
+            _MainUpstream.content_type = "text/event-stream"
+            _MainUpstream.source = raw
+            _FakeUpstream.payload = _review_payload(
+                [_prop("t0", keep=True, replacement=None)]
+            )
+            status, payload = harness.post(_contract_body(True))
+            self.assertEqual(status, 200)
+            self.assertEqual(len(_FakeUpstream.recorded), 0)
+            # Both logprobs removed
+            self.assertNotIn(b"logprobs", payload)
+        finally:
+            _MainUpstream.content_type = "application/json"
+            harness.close()
+
+    def test_json_metadata_only_not_text_edit(self) -> None:
+        # R4: metadata-only change (logprobs removed) is NOT a text edit.
+        # The changed flag must be False.
+        from proxy import transform_json
+        raw = self._json_body(
+            {"type": "output_text", "text": TEXT, "content_index": 0,
+             "logprobs": [{"token": "x"}]}
+        )
+        result_bytes, changed = transform_json(raw, lambda t: t)
+        # logprobs removed, but no text edit
+        self.assertFalse(changed, "metadata-only must not set changed=True")
+        self.assertNotIn(b"logprobs", result_bytes)
+        body = json.loads(result_bytes)
+        self.assertEqual(body["output"][0]["content"][0]["text"], TEXT)
+
+    def test_sse_metadata_only_not_text_edit(self) -> None:
+        # R4: SSE metadata-only change is NOT a text edit.
+        from proxy import transform_sse
+        delta = (
+            '{"type":"response.output_text.delta","item_id":"m",'
+            '"logprobs":[{"token":"t"}],"delta":' + json.dumps(TEXT) + "}"
+        ).encode()
+        raw = _tc_raw(
+            delta,
+            _tc_part_done(text=TEXT),
+            _tc_item_done(parts=[{"type": "output_text", "text": TEXT}]),
+            self._sse_completed_event(
+                {"object": "response", "id": "r", "status": "completed",
+                 "output": [self._msg()]}
+            ),
+        )
+        result_bytes, changed = transform_sse(raw, lambda t: t)
+        self.assertFalse(changed, "metadata-only SSE must not set changed=True")
+        self.assertNotIn(b"logprobs", result_bytes)
+
+
+    def test_non200_json_body_with_stream_true(self) -> None:
+        # R3: stream=true request receives application/json 503 body.
+        # Normalization selects by ACTUAL content type, not request.stream.
+        value = {
+            "object": "response", "id": "r", "status": "failed",
+            "error": {"code": "overloaded"},
+            "output": [
+                {"type": "message", "id": "m", "role": "assistant",
+                 "status": "incomplete", "output_index": 0,
+                 "content": [{"type": "output_text", "text": "x",
+                              "content_index": 0, "logprobs": None}]}
+            ],
+        }
+        raw = json.dumps(value, separators=(",", ":")).encode()
+        harness = _Harness()
+        try:
+            _MainUpstream.source = raw
+            _MainUpstream.status = 503
+            _MainUpstream.content_type = "application/json"
+            status, payload = harness.post(_contract_body(True))  # stream=True!
+            self.assertEqual(status, 503)
+            self.assertNotIn(b"logprobs", payload)
+            self.assertEqual(len(_FakeUpstream.recorded), 0)
+        finally:
+            _MainUpstream.status = 200
+            _MainUpstream.content_type = "text/event-stream"
+            harness.close()
+
+    def test_non200_sse_body_with_stream_false(self) -> None:
+        # R3: stream=false request receives text/event-stream 503 body.
+        # Normalization selects by ACTUAL content type, not request.stream.
+        completed = (
+            '{"type":"response.completed","response":{"object":"response",'
+            '"id":"r","status":"incomplete",'
+            '"output":[{"type":"message","id":"m","role":"assistant",'
+            '"status":"incomplete","output_index":0,"content":'
+            '[{"type":"output_text","text":"partial","content_index":0,'
+            '"logprobs":null}]}]}}'
+        ).encode()
+        raw = _tc_raw(completed)
+        harness = _Harness()
+        try:
+            _MainUpstream.source = raw
+            _MainUpstream.status = 503
+            _MainUpstream.content_type = "text/event-stream"
+            status, payload = harness.post(_contract_body(False))  # stream=False!
+            self.assertEqual(status, 503)
+            self.assertNotIn(b"logprobs", payload)
+            self.assertEqual(len(_FakeUpstream.recorded), 0)
+        finally:
+            _MainUpstream.status = 200
+            _MainUpstream.content_type = "application/json"
+            harness.close()
+
+    def test_non200_huge_integer_body_preserved(self) -> None:
+        # R3: non-200 body with JSON decoder overflow (huge integer) is
+        # returned raw unchanged (malformed error-body semantics preserved).
+        huge_int = "9" * 4500
+        raw = ('{"opaque_integer":' + huge_int + "}").encode()
+        harness = _Harness()
+        try:
+            _MainUpstream.source = raw
+            _MainUpstream.status = 503
+            _MainUpstream.content_type = "application/json"
+            status, payload = harness.post(_contract_body(False))
+            self.assertEqual(status, 503)
+            self.assertEqual(payload, raw)  # byte-identical
+            self.assertEqual(len(_FakeUpstream.recorded), 0)
+        finally:
+            _MainUpstream.status = 200
+            harness.close()
+
+    def test_sse_lone_surrogate_in_completed_answer(self) -> None:
+        # R6: SSE completed snapshot with escaped lone surrogate in answer
+        # text and logprobs:null. Expected 200, surrogate preserved,
+        # logprobs gone. Zero detector candidates: clean zero-review
+        # control (order 035-d R3).
+        completed = (
+            b'{"type":"response.completed","response":{"object":"response",'
+            b'"id":"r","status":"completed",'
+            b'"output":[{"type":"message","id":"m","role":"assistant",'
+            b'"status":"completed","output_index":0,"content":'
+            b'[{"type":"output_text","text":"abc\ud800def",'
+            b'"content_index":0,"logprobs":null}]}]}}'
+        )
+        raw = _tc_raw(
+            _tc_delta("m", "abc\ud800def"),
+            completed,
+        )
+        harness = _Harness()
+        try:
+            _MainUpstream.content_type = "text/event-stream"
+            _MainUpstream.source = raw
+            _FakeUpstream.payload = _review_payload(_KEEP_BOTH)
+            status, payload = harness.post(_contract_body(True))
+            self.assertEqual(status, 200)
+            self.assertEqual(len(_FakeUpstream.recorded), 0)
+            self.assertNotIn(b"logprobs", payload)
+            events = self._sse_events(payload)
+            self.assertEqual(
+                events,
+                [
+                    {
+                        "type": "response.output_text.delta",
+                        "item_id": "m",
+                        "delta": "abc\ud800def",
+                    },
+                    {
+                        "type": "response.completed",
+                        "response": {
+                            "object": "response",
+                            "id": "r",
+                            "status": "completed",
+                            "output": [
+                                {
+                                    "type": "message",
+                                    "id": "m",
+                                    "role": "assistant",
+                                    "status": "completed",
+                                    "output_index": 0,
+                                    "content": [
+                                        {
+                                            "type": "output_text",
+                                            "text": "abc\ud800def",
+                                            "content_index": 0,
+                                        }
+                                    ],
+                                }
+                            ],
+                        },
+                    },
+                ],
+            )
+        finally:
+            _MainUpstream.content_type = "application/json"
+            harness.close()
+
+    def test_sse_lone_surrogate_in_metadata(self) -> None:
+        # R6: SSE completed snapshot with escaped lone surrogate in metadata
+        # (true clean zero-review control: zero-candidate answer; metadata
+        # echo never scanned).
+        completed = (
+            b'{"type":"response.completed","response":{"object":"response",'
+            b'"id":"r","status":"completed","metadata":{"k":"x\ud800y"},'
+            b'"output":[{"type":"message","id":"m","role":"assistant",'
+            b'"status":"completed","output_index":0,"content":'
+            b'[{"type":"output_text","text":"To je tako zapisano, to je tako zapisano.","content_index":0,'
+            b'"logprobs":null}]}]}}'
+        )
+        raw = _tc_raw(
+            _tc_delta("m", _CLEAN_ANSWER),
+            completed,
+        )
+        harness = _Harness()
+        try:
+            _MainUpstream.content_type = "text/event-stream"
+            _MainUpstream.source = raw
+            _FakeUpstream.payload = _review_payload(_KEEP_BOTH)
+            status, payload = harness.post(_contract_body(True))
+            self.assertEqual(status, 200)
+            self.assertEqual(len(_FakeUpstream.recorded), 0)
+            self.assertNotIn(b"logprobs", payload)
+            events = self._sse_events(payload)
+            self.assertEqual(
+                events,
+                [
+                    {
+                        "type": "response.output_text.delta",
+                        "item_id": "m",
+                        "delta": _CLEAN_ANSWER,
+                    },
+                    {
+                        "type": "response.completed",
+                        "response": {
+                            "object": "response",
+                            "id": "r",
+                            "status": "completed",
+                            "metadata": {"k": "x\ud800y"},
+                            "output": [
+                                {
+                                    "type": "message",
+                                    "id": "m",
+                                    "role": "assistant",
+                                    "status": "completed",
+                                    "output_index": 0,
+                                    "content": [
+                                        {
+                                            "type": "output_text",
+                                            "text": _CLEAN_ANSWER,
+                                            "content_index": 0,
+                                        }
+                                    ],
+                                }
+                            ],
+                        },
+                    },
+                ],
+            )
+        finally:
+            _MainUpstream.content_type = "application/json"
+            harness.close()
+
+
+if __name__ == "__main__":
+    unittest.main()
+
+
+class LogprobsLocationMatrixTests(unittest.TestCase):
+    """Order 035-d R4: compact direct-level typed-location/all-copy
+    matrix supplementing the actual-HTTP proofs (same production
+    transform/normalize functions, identity repair, no engine/HTTP).
+    Every recognized location across the six lifecycle snapshots and the
+    four stream event kinds is removed with changed False; every
+    unrecognized lookalike and echo is byte-identical; ordinary UTF-8,
+    escaped lone surrogates, raw identity and SSE framing semantics are
+    preserved."""
+
+    def _snapshot(self, etype: str, status: str, extra: dict[str, object] | None = None) -> bytes:
+        response: dict[str, object] = {
+            "object": "response",
+            "id": "r",
+            "status": status,
+            "output": [
+                {
+                    "type": "message",
+                    "id": "m",
+                    "role": "assistant",
+                    "status": "completed",
+                    "output_index": 0,
+                    "content": [
+                        {
+                            "type": "output_text",
+                            "text": TEXT,
+                            "content_index": 0,
+                            "logprobs": [{"token": "a", "logprob": -1.0}],
+                        }
+                    ],
+                }
+            ],
+        }
+        if extra:
+            response.update(extra)
+        return _tc_raw(
+            json.dumps({"type": etype, "response": response}, separators=(",", ":")).encode()
+        )
+
+    def _events(self, payload: bytes) -> list[dict[str, object]]:
+        events: list[dict[str, object]] = []
+        for block in payload.decode("utf-8").split("\n\n"):
+            for line in block.splitlines():
+                if line.startswith("data: "):
+                    data = line[6:]
+                    if data.strip() == "[DONE]":
+                        continue
+                    events.append(json.loads(data))
+        return events
+
+    def test_lifecycle_snapshots_all_removed(self) -> None:
+        # All six lifecycle snapshots lose the nested logprobs; every other
+        # field (status, error, incomplete_details, ids, text) is preserved
+        # and the changed flag stays False.
+        from proxy import transform_sse
+
+        cases: list[tuple[str, str, dict[str, object]]] = [
+            ("response.created", "created", {}),
+            ("response.in_progress", "in_progress", {}),
+            ("response.completed", "completed", {}),
+            (
+                "response.incomplete",
+                "incomplete",
+                {"incomplete_details": {"reason": "max_output_tokens"}},
+            ),
+            ("response.failed", "failed", {"error": {"code": "server_error"}}),
+            ("response.queued", "queued", {}),
+        ]
+        for etype, status, extra in cases:
+            with self.subTest(lifecycle=etype):
+                raw = self._snapshot(etype, status, extra)
+                result, changed = transform_sse(raw, lambda t: t)
+                self.assertFalse(changed, etype)
+                event = self._events(result)[0]
+                self.assertEqual(event["type"], etype, etype)
+                response = cast(dict[str, object], event["response"])
+                self.assertEqual(response["status"], status, etype)
+                self.assertEqual(response["id"], "r", etype)
+                part = cast(dict[str, object], response["output"][0]["content"][0])  # type: ignore[index]
+                self.assertNotIn("logprobs", part, etype)
+                self.assertEqual(part["text"], TEXT, etype)
+                for key, value in extra.items():
+                    self.assertEqual(response[key], value, etype)
+
+    def test_stream_event_locations_removed(self) -> None:
+        # delta / output_text.done / content_part.added / content_part.done
+        # / output_item.added / output_item.done: each location is removed
+        # in an otherwise bypassing stream with changed False.
+        from proxy import transform_sse
+
+        fixtures: dict[str, bytes] = {
+            "delta": _tc_raw(
+                (
+                    '{"type":"response.output_text.delta","item_id":"m",'
+                    '"logprobs":[{"token":"a"}],"delta":' + json.dumps(TEXT) + "}"
+                ).encode()
+            ),
+            "text_done": _tc_raw(
+                (
+                    '{"type":"response.output_text.done","item_id":"m",'
+                    '"logprobs":[{"token":"a"}],"text":' + json.dumps(TEXT) + "}"
+                ).encode()
+            ),
+            "part_added": _tc_raw(
+                (
+                    '{"type":"response.content_part.added","item_id":"m",'
+                    '"part":{"type":"output_text","text":' + json.dumps(TEXT)
+                    + ',"logprobs":[{"token":"a"}]}}'
+                ).encode()
+            ),
+            "part_done": _tc_raw(
+                (
+                    '{"type":"response.content_part.done","item_id":"m",'
+                    '"part":{"type":"output_text","text":' + json.dumps(TEXT)
+                    + ',"logprobs":[{"token":"a"}]}}'
+                ).encode()
+            ),
+            "item_added": _tc_raw(
+                (
+                    '{"type":"response.output_item.added","item":{"type":"message","id":"m",'
+                    '"role":"assistant","content":[{"type":"output_text","text":'
+                    + json.dumps(TEXT) + ',"logprobs":[{"token":"a"}]}]}}'
+                ).encode()
+            ),
+            "item_done": _tc_raw(
+                (
+                    '{"type":"response.output_item.done","item":{"type":"message","id":"m",'
+                    '"role":"assistant","content":[{"type":"output_text","text":'
+                    + json.dumps(TEXT) + ',"logprobs":[{"token":"a"}]}]}}'
+                ).encode()
+            ),
+        }
+        for name, raw in fixtures.items():
+            with self.subTest(location=name):
+                result, changed = transform_sse(raw, lambda t: t)
+                self.assertFalse(changed, name)
+                self.assertNotIn(b"logprobs", result, name)
+                self.assertIn(TEXT.encode(), result, name)
+
+    def test_multiple_messages_and_parts_removed(self) -> None:
+        # Otherwise unrepairable responses still lose every recognized
+        # logprobs: two JSON message items, and one SSE item with two
+        # output_text parts.
+        from proxy import transform_json, transform_sse
+
+        value = {
+            "object": "response",
+            "id": "r",
+            "status": "completed",
+            "output": [
+                {
+                    "type": "message",
+                    "id": "m1",
+                    "role": "assistant",
+                    "status": "completed",
+                    "output_index": 0,
+                    "content": [
+                        {
+                            "type": "output_text",
+                            "text": "one",
+                            "content_index": 0,
+                            "logprobs": [{"token": "a"}],
+                        }
+                    ],
+                },
+                {
+                    "type": "message",
+                    "id": "m2",
+                    "role": "assistant",
+                    "status": "completed",
+                    "output_index": 1,
+                    "content": [
+                        {
+                            "type": "output_text",
+                            "text": "two",
+                            "content_index": 0,
+                            "logprobs": [{"token": "b"}],
+                        }
+                    ],
+                },
+            ],
+        }
+        raw = json.dumps(value, separators=(",", ":")).encode()
+        result, changed = transform_json(raw, lambda t: t)
+        self.assertFalse(changed)
+        body = json.loads(result)
+        parts = [cast(dict[str, object], m["content"][0]) for m in body["output"]]  # type: ignore[index]
+        for part in parts:
+            self.assertNotIn("logprobs", part)
+        self.assertEqual([part["text"] for part in parts], ["one", "two"])
+        self.assertEqual(
+            [cast(dict[str, object], m)["id"] for m in body["output"]],  # type: ignore[index]
+            ["m1", "m2"],
+        )
+
+        item_done = _tc_raw(
+            (
+                '{"type":"response.output_item.done","item":{"type":"message","id":"m",'
+                '"role":"assistant","content":['
+                '{"type":"output_text","text":"one","logprobs":[{"token":"a"}]},'
+                '{"type":"output_text","text":"two","logprobs":[{"token":"b"}]}'
+                "]}}"
+            ).encode()
+        )
+        result_sse, changed_sse = transform_sse(item_done, lambda t: t)
+        self.assertFalse(changed_sse)
+        self.assertNotIn(b"logprobs", result_sse)
+        self.assertIn(b"one", result_sse)
+        self.assertIn(b"two", result_sse)
+
+    def test_unknown_and_echo_locations_unchanged(self) -> None:
+        # No recognized location -> byte-identical passthrough, changed
+        # False: unknown event types, nested lookalikes, reasoning/tool
+        # items, refusal and user input_text parts, and the envelope
+        # metadata echo are never scanned.
+        from proxy import transform_json, transform_sse
+
+        fixtures: dict[str, bytes] = {
+            "unknown_event": _tc_raw(
+                b'{"type":"response.custom.event","data":{"logprobs":[1]},"delta":"x"}'
+            ),
+            "nested_lookalike": _tc_raw(
+                (
+                    '{"type":"response.output_text.delta","item_id":"m","delta":'
+                    + json.dumps(TEXT)
+                    + ',"data":{"logprobs":[1]}}'
+                ).encode()
+            ),
+            "reasoning_item": _tc_raw(
+                b'{"type":"response.output_item.done","item":{"type":"reasoning","id":"r1",'
+                b'"status":"completed","summary":[{"type":"summary_text","text":"thinking",'
+                b'"logprobs":[1]}]}}'
+            ),
+            "tool_item": _tc_raw(
+                b'{"type":"response.output_item.done","item":{"type":"tool_call","id":"t1",'
+                b'"status":"completed","call_id":"c1","arguments":"{}","logprobs":[1]}}'
+            ),
+            "refusal_part": _tc_raw(
+                b'{"type":"response.output_item.done","item":{"type":"message","id":"m",'
+                b'"role":"assistant","content":[{"type":"refusal","refusal":"no",'
+                b'"logprobs":[1]}]}}'
+            ),
+            "user_input_part": _tc_raw(
+                b'{"type":"response.output_item.done","item":{"type":"message","id":"m",'
+                b'"role":"user","content":[{"type":"input_text","text":"echo",'
+                b'"logprobs":[1]}]}}'
+            ),
+        }
+        for name, raw in fixtures.items():
+            with self.subTest(echo=name):
+                result, changed = transform_sse(raw, lambda t: t)
+                self.assertFalse(changed, name)
+                self.assertEqual(result, raw, name)
+
+        metadata_echo = (
+            b'{"object":"response","id":"r","status":"completed",'
+            b'"metadata":{"logprobs":[1]},"output":[{"type":"message","id":"m",'
+            b'"role":"assistant","status":"completed","output_index":0,'
+            b'"content":[{"type":"output_text","text":"plain prose here",'
+            b'"content_index":0}]}]}'
+        )
+        result, changed = transform_json(metadata_echo, lambda t: t)
+        self.assertFalse(changed)
+        self.assertEqual(result, metadata_echo)
+
+    def test_ordinary_utf8_and_lone_surrogates(self) -> None:
+        # Ordinary UTF-8 is preserved exactly (not re-escaped) and escaped
+        # lone surrogates decode to actual unpaired values that survive
+        # removal (JSON and SSE).  The fixtures decode to real unpaired
+        # surrogate code points, never literal backslash text.
+        from proxy import transform_json, transform_sse
+
+        utf8_text = "\u010d\u0161teka \u017eivi \u010dlove\u010d"
+        value = {
+            "object": "response",
+            "id": "r",
+            "status": "completed",
+            "output": [
+                {
+                    "type": "message",
+                    "id": "m",
+                    "role": "assistant",
+                    "status": "completed",
+                    "output_index": 0,
+                    "content": [
+                        {
+                            "type": "output_text",
+                            "text": utf8_text,
+                            "content_index": 0,
+                            "logprobs": [{"token": "a"}],
+                        }
+                    ],
+                }
+            ],
+        }
+        raw = json.dumps(value, ensure_ascii=False, separators=(",", ":")).encode()
+        result, changed = transform_json(raw, lambda t: t)
+        self.assertFalse(changed)
+        body = json.loads(result)
+        part = cast(dict[str, object], body["output"][0]["content"][0])  # type: ignore[index]
+        self.assertEqual(part["text"], utf8_text)
+        self.assertNotIn("logprobs", part)
+        self.assertIn(utf8_text.encode("utf-8"), result)
+
+        surr_text = "abc\ud800def"
+        surr_value = {
+            "object": "response",
+            "id": "r",
+            "status": "completed",
+            "output": [
+                {
+                    "type": "message",
+                    "id": "m",
+                    "role": "assistant",
+                    "status": "completed",
+                    "output_index": 0,
+                    "content": [
+                        {
+                            "type": "output_text",
+                            "text": surr_text,
+                            "content_index": 0,
+                            "logprobs": None,
+                        }
+                    ],
+                }
+            ],
+        }
+        raw = json.dumps(surr_value, ensure_ascii=True, separators=(",", ":")).encode()
+        result, changed = transform_json(raw, lambda t: t)
+        self.assertFalse(changed)
+        body = json.loads(result)
+        part = cast(dict[str, object], body["output"][0]["content"][0])  # type: ignore[index]
+        self.assertEqual(part["text"], surr_text)
+        self.assertNotIn("logprobs", part)
+
+        surr_completed = (
+            b'{"type":"response.completed","response":{"object":"response",'
+            b'"id":"r","status":"completed","output":'
+            b'[{"type":"message","id":"m","role":"assistant",'
+            b'"status":"completed","output_index":0,"content":'
+            b'[{"type":"output_text","text":"abc\ud800def",'
+            b'"content_index":0,"logprobs":null}]}]}}'
+        )
+        raw_sse = _tc_raw(_tc_delta("m", "abc\ud800def"), surr_completed)
+        result_sse, changed_sse = transform_sse(raw_sse, lambda t: t)
+        self.assertFalse(changed_sse)
+        self.assertNotIn(b"logprobs", result_sse)
+        events = self._events(result_sse)
+        completed = cast(dict[str, object], events[1])
+        response = cast(dict[str, object], completed["response"])
+        part = cast(dict[str, object], response["output"][0]["content"][0])  # type: ignore[index]
+        self.assertEqual(part["text"], surr_text)
+
+    def test_no_field_no_edit_raw_identity(self) -> None:
+        # No recognized logprobs field and no edit: exact raw bytes in
+        # JSON and in the canonical one-answer SSE stream.
+        from proxy import transform_json, transform_sse
+
+        value = {
+            "object": "response",
+            "id": "r",
+            "status": "completed",
+            "output": [
+                {
+                    "type": "message",
+                    "id": "m",
+                    "role": "assistant",
+                    "status": "completed",
+                    "output_index": 0,
+                    "content": [
+                        {"type": "output_text", "text": TEXT, "content_index": 0}
+                    ],
+                }
+            ],
+        }
+        raw = json.dumps(value, separators=(",", ":")).encode()
+        result, changed = transform_json(raw, lambda t: t)
+        self.assertFalse(changed)
+        self.assertEqual(result, raw)
+
+        raw_sse = _tc_baseline(TEXT)
+        result_sse, changed_sse = transform_sse(raw_sse, lambda t: t)
+        self.assertFalse(changed_sse)
+        self.assertEqual(result_sse, raw_sse)
+
+    def test_framing_id_retry_comments_done_preserved(self) -> None:
+        # SSE framing semantics: comments, id and retry lines and the
+        # [DONE] terminator are preserved byte-for-byte while the
+        # recognized delta location is re-rendered without logprobs.
+        from proxy import transform_sse
+
+        delta = (
+            '{"type":"response.output_text.delta","item_id":"m",'
+            '"logprobs":[{"token":"a"}],"delta":' + json.dumps(TEXT) + "}"
+        ).encode()
+        completed = (
+            '{"type":"response.completed","response":{"object":"response",'
+            '"id":"r","status":"completed","output":'
+            '[{"type":"message","id":"m","role":"assistant",'
+            '"status":"completed","output_index":0,"content":'
+            '[{"type":"output_text","text":' + json.dumps(TEXT)
+            + ',"content_index":0}]}]}}'
+        ).encode()
+        raw = (
+            b": keep-alive comment\n"
+            b"id: 42\n"
+            b"retry: 3000\n"
+            b"data: " + delta + b"\n\n"
+            b"data: " + completed + b"\n\n"
+            b"data: [DONE]\n\n"
+        )
+        result, changed = transform_sse(raw, lambda t: t)
+        self.assertFalse(changed)
+        text = result.decode("utf-8")
+        self.assertIn(": keep-alive comment\n", text)
+        self.assertIn("id: 42\n", text)
+        self.assertIn("retry: 3000\n", text)
+        self.assertIn("data: [DONE]\n\n", text)
+        self.assertNotIn("logprobs", text)
+        self.assertIn(TEXT, text)
 
 
 if __name__ == "__main__":

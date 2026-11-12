@@ -408,8 +408,10 @@ foreground profile), at most one bounded noneditable reasoning item
 (status null/missing/completed only) preceding exactly one assistant
 message with an exact typed nonempty id and exactly
 `status == "completed"`, carrying exactly one plain nonempty
-`output_text` part with aligned `annotations`/`logprobs` absent or
-empty. The delayed SSE completed event is validated with that same full
+`output_text` part with aligned `annotations` absent or empty (defined
+API `logprobs` are always removed before this profile check and never
+participate in it; see the order 035-c section below). The delayed SSE
+completed event is validated with that same full
 envelope validation, so JSON and SSE handle the same final
 `response.output` identically (profile parity); unknown output
 variants, tools/refusals, extra messages/parts, malformed or missing
@@ -1466,3 +1468,102 @@ forced kill cannot establish PASS). This is a bounded defect repair
 with regression evidence, not a readiness, MVP, quality, packaged-
 library, ICA or deployment claim, and it publishes no target URL,
 credential or private resource path.
+
+## Unconditional defined-API logprobs removal (order 035-c)
+
+Round 035-c (2026-11-11, same branch/PR 37, accepted base main
+7dcd186fe394c1262bfe878ba5d6527b888fc317) implemented the owner's
+unconditional probability policy, superseding the order 015-a
+description where aligned `logprobs` could abstain the repair
+profile: the proxy provides no token probabilities. Defined Responses
+API `logprobs` are always removed from the recognized response
+locations, for every value (absence is a no-op; `null`, an empty
+list, a populated list, `false`, `0`, a string, an object, or any
+other unexpected JSON type are all removed identically, by key
+presence), independently of optional repair, in both the nonstreaming
+JSON path and the retained delayed SSE path. There is no operator
+switch, per-request flag, or eligibility interaction: on the 200
+repair path the removal happens before eligibility/repair, and on
+every non-200 main body the removal is applied to well-formed bodies
+selected by the ACTUAL upstream content type (independent of the
+declared request `stream` value), with malformed error bodies
+returned unchanged under the existing finite failure semantics.
+
+The recognized locations are the documented output_text
+representations: the top-level key of `response.output_text.delta`
+and `response.output_text.done` events, the `part` of
+`response.content_part.added` and `response.content_part.done` events,
+the message content parts of `response.output_item.added` and
+`response.output_item.done` events, and the nested
+`response.output` message content parts of the six lifecycle snapshot
+events (`response.created`, `response.in_progress`,
+`response.completed`, `response.incomplete`, `response.failed`,
+`response.queued`). Only those recognized representations are
+modified: every other field - ids, status, error, usage,
+`incomplete_details`, `metadata`, citations/annotations, protected
+reasoning, and same-named `logprobs` keys inside user data, tool
+items, unknown output variants, unknown event types or non-data SSE
+framing - remains exactly as delivered. Removal never recurses into
+user data and never matches by value or substring. When no removal
+was made and no edit is applied, the delivered bytes are exactly the
+received bytes; when a removal was made, the answer and delta strings
+stay identical to the upstream answer (metadata serialization of the
+re-serialized copies may change) unless a review correction is
+accepted, and an accepted correction still changes only the approved
+original spans and the established consistent SSE copies (order
+014-a/015-a semantics). A metadata-only removal therefore never sets
+the changed/text-edit flag. The request-side capability restriction
+is unchanged: a request `logprobs` or `include` key is still an
+unsupported capability rejected with 400 `REQUEST_UNSUPPORTED`
+before any forward, exactly as the order 015-a section above
+describes, and all malformed, incomplete, capture, cancellation and
+header-budget semantics remain as documented.
+
+Native qualification (order 035-d R6-R8) exercised this proxy against
+the authorized matching-RTX3090 endpoint with the qualified
+message-array input profile: `input` as a message list (for example
+one `{"role":"user","content":"..."}` message) is the profile that
+reached a valid 200 completed envelope on that provider, while the
+same provider rejected a plain string `input` with its own
+field-shape 400. That 400 is an upstream caller-format property of
+that endpoint, not a proxy defect: the proxy's request contract
+accepts both string and message-array inputs per the order 015-a
+section and forwards the validated request unchanged, and no
+universal provider compatibility is claimed.
+
+Round 035-d (2026-11-12, same branch/PR 37) demonstrated the full
+useful-repair path on the frozen 035-c runtime in a finite sequence
+of bounded owned native trials (concurrency 1, one review pass, zero
+auto-retry). Every executed trial returned HTTP 200 (11 executed MAIN
+POSTs; combined envelope scope 9 completed + 2 incomplete). The final
+qualifying pair ran under the two-deadline launcher (hard 150s child
+/ 180s parent clocks, ownership-safe group termination): its useful
+trial delivered one useful accepted correction - a single detector
+candidate, one observed validated review with known usage, and one
+approved exact original-span edit (6 codepoints replaced by 5) with
+all unapproved and protected slices verified identical by
+independent observers - and its clean trial proved the genuine fully
+observed clean zero-review control (0 candidates -> 0 review calls ->
+delivered answer identical). Five same-RTX review attempts were
+dispatched across the sequence; three returned observed validated
+batches with known usage and the other two remain unclassified from
+their retained observers. Two reviewed-but-unchanged trials (no
+accepted edit delivered; keep versus CPU rejection unknown from those
+observers) are never counted as clean controls. Two earlier
+no-candidate/no-review executions (attempts 15, 17) ran earlier
+harness revisions without the transform/span observer and are
+preserved as limited history. Earlier trials ran earlier harness or
+parent-only-launcher revisions with weaker supervision and are
+preserved and qualified at their own epochs, not retroactively
+upgraded. One trial at the default 1536-token output budget and one
+direct diagnostic at the same budget returned incomplete envelopes
+(single reasoning item, no completed assistant message; the
+diagnostic's usage showed output_tokens at the 1536 max and its
+incomplete reason is recorded only as a masked string type); the
+remaining trials used the 4096 budget authorized by that observed
+budget exhaustion. These are controlled functional-path examples at
+the real worker boundary: they prove the runnable MAIN -> REVIEW ->
+independent CPU acceptance -> approved patch -> final response path,
+not a natural-error rate, linguistic quality, statistical
+independence, or human acceptance. No universal provider compatibility
+is claimed.
