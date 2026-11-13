@@ -31,8 +31,8 @@
    "sha256": "a9ea5fa5db2affabf0f85710f41e37e73b108c0236a58b7efb9c17cb36a07e9e"
   },
   "INSTALL.md": {
-   "sha256": "edcc98505936eb8f796ab3f36adba4faa2039ea7263da71e036ffc579a6e7c00",
-   "bytes": 15699,
+   "sha256": "c3e390c05042e26053a0c5f89950afc5eac719277f690e57ff229d531adf9c73",
+   "bytes": 15727,
    "class": "generated"
   },
   "LICENSE": {
@@ -56,9 +56,9 @@
    "class": "generated"
   },
   "README.md": {
-   "bytes": 5156,
+   "bytes": 5179,
    "class": "generated",
-   "sha256": "8340e2326c3610ccbcf04d9dbf5dd6b1aeb1ed60d4f32ee2999d039b253eb6de"
+   "sha256": "b4d599d0b2be0e399c448e61372d02b3ae87160c56f715dc5dc6cc1d57ad7342"
   },
   "SECURITY.md": {
    "bytes": 2266,
@@ -66,9 +66,9 @@
    "sha256": "1e3e9e59259ea6a57a3d8e368e896560c214f453c98792f7979e8d99b4154069"
   },
   "STATUS.md": {
-   "bytes": 4380,
+   "bytes": 4394,
    "class": "generated",
-   "sha256": "0ade81d349a60ce4298332b175d8299811717a64a55cc7a49672189e4e0b5d68"
+   "sha256": "fee2962cd4f7a6707c332e10bbd4c8cfe87389e556539ed57c674502cf195b68"
   },
   "TESTING.md": {
    "bytes": 2310,
@@ -101,8 +101,8 @@
    "sha256": "9b439920a4463b72a81bf6d0efcbd5d8a813a007a438fd27dacbbe98742b8018"
   },
   "docs/HISTORY.md": {
-   "sha256": "8ceac50feb3d4dcd0c585bbec0caef873fa8b6d36e75f54859fa45c2de6fcab7",
-   "bytes": 8286,
+   "sha256": "fd5098853a344b57a56d97621e08b4705d1517d88bf24af256c6f4ac9cf06274",
+   "bytes": 8300,
    "class": "generated"
   },
   "docs/IMPLEMENTATION-ROADMAP.md": {
@@ -372,8 +372,8 @@
   },
   "oap/bin/oap_core.py": {
    "class": "generated",
-   "sha256": "8820d1bd88b75ca8ca603f3e43fd0581690f50b08f05a1153aad06ab8946c0ac",
-   "bytes": 106868
+   "sha256": "371a181f9b0b637a21e5a09a2e017497bd003ca5656b5b561720c9d1b09c120e",
+   "bytes": 108051
   },
   "oap/bin/oap_fifo.py": {
    "bytes": 192,
@@ -476,9 +476,9 @@
    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
   },
   "oap/runtime.env.example": {
-   "bytes": 1308,
+   "bytes": 1322,
    "class": "generated",
-   "sha256": "6d564e526154885b8edc42e11083db45d65a9ddc8d853af25ebead2808104c10"
+   "sha256": "b10ee703a5579fddbd4e5bda704694bd0c017c50711d85f4f12bfc2877fb1514"
   },
   "oap/strategic-instructions/AGENTS.md": {
    "bytes": 20629,
@@ -889,6 +889,11 @@
    "class": "generated",
    "sha256": "11e4bad74af5ed544c46d0026aa64fa859bd7621cd64d2196f62adc04975a4b0",
    "bytes": 7522
+  },
+  "oap/tests/test_repository_rename.py": {
+   "class": "generated",
+   "bytes": 2932,
+   "sha256": "6675e3fe6b0882fd5c59677c4ffcd8319c75d87452d4197eb5d783400bc803cb"
   }
  },
  "purpose": "Scoped generated handoff inventory, not permanent runtime freeze",

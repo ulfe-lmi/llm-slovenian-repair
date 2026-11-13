@@ -23,8 +23,8 @@ third-party Python packages and no `pip install` of this repository.
 For a new checkout:
 
 ```bash
-git clone https://github.com/ulfe-lmi/llm-slovenian-repair.git
-cd llm-slovenian-repair
+git clone https://github.com/ulfe-lmi/slaif-llm-response-language-repair.git
+cd slaif-llm-response-language-repair
 ```
 
 Otherwise enter the existing repository root. Use a dedicated Bash terminal; all

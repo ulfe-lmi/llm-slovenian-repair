@@ -887,7 +887,8 @@ class GitHub:
         self.repository, self.executable = repository, executable
 
     def api(self, suffix):
-        p = subprocess.run([self.executable, "api", f"repos/{self.repository}/{suffix}"], capture_output=True, timeout=30)
+        endpoint = f"repos/{self.repository}" + (f"/{suffix}" if suffix else "")
+        p = subprocess.run([self.executable, "api", endpoint], capture_output=True, timeout=30)
         require(p.returncode == 0, "REMOTE_UNVERIFIED")
         try:
             return json.loads(p.stdout)
@@ -896,8 +897,29 @@ class GitHub:
 
     def pr(self, number):
         value = self.api(f"pulls/{number}")
-        require(value.get("number") == number and value.get("base", {}).get("repo", {}).get("full_name") == self.repository, "REMOTE_PR_IDENTITY")
+        base_repo = value.get("base", {}).get("repo", {})
+        require(value.get("number") == number, "REMOTE_PR_IDENTITY")
+        if base_repo.get("full_name") != self.repository:
+            canonical = self.api("")
+            require(type(canonical.get("id")) is int and canonical["id"] > 0
+                    and type(base_repo.get("id")) is int
+                    and base_repo["id"] == canonical["id"]
+                    and isinstance(canonical.get("full_name"), str)
+                    and base_repo.get("full_name") == canonical.get("full_name"),
+                    "REMOTE_PR_IDENTITY")
         return value
+
+    def matches_repository(self, repository):
+        """Resolve a historical name through GitHub, never a local alias list."""
+        if repository == self.repository:
+            return True
+        current = self.api("")
+        historical = GitHub(repository, self.executable).api("")
+        return (type(current.get("id")) is int and current["id"] > 0
+                and type(historical.get("id")) is int
+                and current["id"] == historical["id"]
+                and isinstance(current.get("full_name"), str)
+                and current["full_name"] == historical.get("full_name"))
 
     def branch_prs(self, branch):
         from urllib.parse import quote
@@ -1709,7 +1731,8 @@ def verify_report(repo, ident, *, commit=None, remote=None, receipt=None):
         require(git(repo, "merge-base", "--is-ancestor", c["sha"], r["implementation_head"], check=False).returncode == 0, "UNOBSERVED_CHECK_SHA")
     merged = None
     if remote is not None:
-        require(remote.repository == order["repository"], "REMOTE_PR_IDENTITY")
+        require(remote.repository == order["repository"]
+                or remote.matches_repository(order["repository"]), "REMOTE_PR_IDENTITY")
         pr = remote.pr(r["pr"])
         if not (pr.get("head", {}).get("sha") == commit and pr.get("head", {}).get("ref") == r["branch"]):
             # A merged PR whose head GitHub froze earlier may carry one later
