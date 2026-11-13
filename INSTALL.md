@@ -1,6 +1,6 @@
-# Installation (lab)
+# Installation
 
-This prepares a **foreground, loopback-only** lab instance of the runnable proxy
+This prepares a **foreground, loopback-only** instance of the runnable proxy
 in `concept-verification/`. It does not install a public service and does not
 change the model server, GPU, firewall or gateway. For the shortest path to a first
 request once this is set up, see **[QUICKSTART.md](QUICKSTART.md)**.
@@ -192,8 +192,9 @@ Corrections patch exact original spans; Pandoc never renders the answer.
 ## Configure and run in the foreground
 
 Set both endpoint bases explicitly, including `/v1` once. Use your authorized
-endpoint in place of the placeholder. The RTX 3090 model is the preferred lab
-target; a server using another model ID needs that server's exact ID.
+endpoint in place of the placeholder. The example below uses the RTX 3090 model
+from the project's test environment; replace its model ID with the exact ID
+provided by your server.
 
 ```bash
 export CONCEPT_UPSTREAM_URL='https://YOUR-QWEN-HOST:PORT/v1'
@@ -215,7 +216,7 @@ key for both only when the provider permits it. Keep keys out of Git, command
 arguments, logs and committed environment files.
 
 Tracing is disabled by leaving `CONCEPT_TRACE_DIR` unset; setting it writes full
-text and review material and is not part of this lab procedure.
+text and review material and is not part of this setup procedure.
 `CONCEPT_USAGE_OBSERVER=stderr` emits bounded content-free usage records. The
 six independent phase budgets below never extend one another, and none of them
 enables retries. Set `CONCEPT_REVIEWER_TIMEOUT` to a finite positive number of
@@ -235,12 +236,12 @@ Send the first request from a second terminal, as in
 
 ## Remote client (SSH tunnel)
 
-For a client on another lab host, use an authenticated SSH tunnel to this loopback
-listener under your normal lab access policy; do not change the proxy to a public
+For a client on another host, use an authenticated SSH tunnel to this loopback
+listener under your normal access policy; do not change the proxy to a public
 bind address. On the client host:
 
 ```bash
-ssh -N -L 18024:127.0.0.1:18024 YOUR-LAB-HOST
+ssh -N -L 18024:127.0.0.1:18024 YOUR-PROXY-HOST
 ```
 
 Then use the same local client URL, with an unused local port if necessary.
@@ -284,7 +285,7 @@ extra model process is launched, so there is nothing else to stop. If the
 
 - **Port already in use** — first stop your own stale proxy if you have one
   (Ctrl-C in its terminal). If another service owns `127.0.0.1:18024`, identify
-  and contact its owner; do not stop a service you do not own. The lab build
+  and contact its owner; do not stop a service you do not own. The proxy
   binds a fixed loopback address, so do not change it to a public one.
 - **Startup rejected** — the proxy checks Pandoc presence, exact version and
   positioned-JSON capability before binding, and validates the configuration

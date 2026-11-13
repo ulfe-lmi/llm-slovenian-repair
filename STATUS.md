@@ -32,7 +32,7 @@ main); native RTX3090 compatibility is qualified in the 035 rounds. The current 
 statistics, both authentication hops, foreground launch. Live qualification
 evidence is in [LIVE-TEST-ENVIRONMENT](docs/LIVE-TEST-ENVIRONMENT.md)
 (a qualification guide and evidence pointer, not a deployment record;
-[LAB-DEPLOYMENT](docs/LAB-DEPLOYMENT.md) is a compatibility pointer to
+[Previous installation guide](docs/LAB-DEPLOYMENT.md) is a compatibility pointer to
 INSTALL).
 
 ## Not established

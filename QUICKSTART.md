@@ -1,7 +1,7 @@
 # Quickstart
 
 This runs one synthetic Responses call through the local proxy. It assumes a
-**configured lab instance**: the external statistics, the read-only SQLite index,
+**configured proxy instance**: the external statistics, the read-only SQLite index,
 the mandatory pinned Pandoc, and your authorized Qwen endpoint. If you have not
 installed those yet, follow **[INSTALL.md](INSTALL.md)** first — the steps below
 reuse the same environment variables and paths.

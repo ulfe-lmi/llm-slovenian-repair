@@ -4,32 +4,35 @@
   </a>
 </div>
 
-# SLAIF Slovenian Repair
+# SLAIF LLM Response Repair
 
 <div align="center">
 
-**A loopback-only proxy that completes a Slovenian answer, conservatively checks
-bounded original spans on the CPU, and returns only evidence-backed exact-text
-corrections.**
+**A proxy that checks and corrects LLM responses before they reach your application.**
 
 [![Python 3.12](https://img.shields.io/badge/Python-3.12-3776AB?logo=python&logoColor=white)](https://www.python.org/)
 [![License: Apache-2.0](https://img.shields.io/badge/License-Apache--2.0-blue.svg)](LICENSE)
 
 [**Quickstart** — first request in the shortest supported path](QUICKSTART.md) ·
-[**Install** — full lab setup](INSTALL.md)
+[**Install** — full setup](INSTALL.md)
 
 </div>
 
-SLAIF Slovenian Repair sits in front of an existing Responses API model. It waits
-for a **complete** answer, selects a few suspicious words or short phrases at exact
-original coordinates, optionally asks the same model in a fresh, isolated request
-whether each is natural and appropriate in context, and applies a replacement only
-when independent CPU evidence supports it. Everything outside the approved spans is
-returned unchanged.
+Works online with your existing LLM service, making small, evidence-supported
+language corrections while preserving the rest of each answer. Currently
+configured for Slovenian.
 
-This is an experimental local lab proxy that you install and run yourself on
-loopback; it is not a hosted service, and it makes no claim about the linguistic
-quality of the underlying model.
+Designed with smaller or highly quantized LLMs in mind, especially when working
+in languages with less training data and tooling support.
+
+**Your application → Repair proxy → LLM service**
+
+**Your application ← Checked response ← Repair proxy**
+
+This is experimental software that you install and run yourself. The proxy
+accepts connections only from your own computer and checks the completed answer
+before delivering it. Its effectiveness at improving wording has not yet been
+systematically measured.
 
 ## How it works
 
@@ -85,7 +88,7 @@ model.
 | --- | --- |
 | Architecture and the current runtime | [ARCHITECTURE.md](ARCHITECTURE.md) |
 | First request (quickstart) | [QUICKSTART.md](QUICKSTART.md) |
-| Full lab installation | [INSTALL.md](INSTALL.md) |
+| Full installation | [INSTALL.md](INSTALL.md) |
 | Security model | [SECURITY.md](SECURITY.md) |
 | Testing and verification strategy | [TESTING.md](TESTING.md) |
 | Topic index and navigation | [docs/README.md](docs/README.md) |
@@ -99,3 +102,17 @@ statistics it queries are a separate [CC BY-SA 4.0](https://creativecommons.org/
 publication, not bundled in the repository (the installation fetches it into an
 external index location; see INSTALL.md) and not relicensed by the code. SLAIF
 artwork is reused from the SLAIF project.
+
+## Project and support
+
+- Project website: [slaif.si](https://www.slaif.si)
+- Questions and bug reports: [GitHub issues](https://github.com/ulfe-lmi/llm-slovenian-repair/issues)
+- Security guidance: [SECURITY.md](SECURITY.md)
+
+Maintainers: Janez Perš and Jon Muhovič, Laboratory for Machine Intelligence,
+Faculty of Electrical Engineering, University of Ljubljana.
+
+## Acknowledgements
+
+We acknowledge support from the EC/EuroHPC JU and the Slovenian Ministry of
+Higher Education, Science and Innovation through SLAIF (grant 101254461).

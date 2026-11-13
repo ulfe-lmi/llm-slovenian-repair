@@ -10,7 +10,7 @@ the rest by audience.
   behavior and limits.
 - [Quickstart](../QUICKSTART.md) — the shortest supported path to one synthetic
   Responses call.
-- [Installation guide](../INSTALL.md) — full lab installation: statistics and
+- [Installation guide](../INSTALL.md) — full installation: statistics and
   checksums, read-only index, pinned Pandoc, both auth hops, launch, SSH, stop,
   upgrade, recovery, troubleshooting.
 

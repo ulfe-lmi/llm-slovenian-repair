@@ -1,4 +1,4 @@
-# Lab deployment (compatibility pointer)
+# Installation guide (compatibility pointer)
 
 This page is a compatibility pointer, not a current procedure. It was added by
 [PR39](https://github.com/ulfe-lmi/llm-slovenian-repair/pull/39) as the detailed
@@ -11,7 +11,7 @@ installation procedure**. Where the two differ, INSTALL.md governs; this page
 deliberately no longer keeps a second copy of the commands.
 
 Nothing here is a record of a deployment that occurred. The instructions
-prepare a foreground, loopback-only lab instance; they do not install a public
+prepare a foreground, loopback-only proxy instance; they do not install a public
 service or change the model server, GPU, firewall or gateway.
 
 Functional software and native Qwen compatibility are demonstrated in the

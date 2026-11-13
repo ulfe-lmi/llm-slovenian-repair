@@ -3,7 +3,7 @@
 Acquisition boundaries, evidence semantics and the dated source inventory for
 this project. For the **current runnable-proxy installation**, the canonical
 procedure is the root [INSTALL.md](../INSTALL.md) — the one installation
-recipe. [LAB-DEPLOYMENT.md](LAB-DEPLOYMENT.md) is a compatibility pointer to
+recipe. [Previous installation guide](LAB-DEPLOYMENT.md) is a compatibility pointer to
 that procedure. Real statistics are **not bundled** with the Apache-2.0 code.
 
 ## Current runtime data

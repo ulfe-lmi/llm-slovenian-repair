@@ -8,9 +8,9 @@ quality claim. The proxy has demonstrated functional software/native
 compatibility; linguistic quality is unmeasured, and no separate human
 evaluation dataset is required by the current scope.
 
-The lab installation is documented at the repository root, not here:
+Installation is documented at the repository root, not here:
 
-- [INSTALL.md](../INSTALL.md) — full lab installation: external CC BY-SA
+- [INSTALL.md](../INSTALL.md) — full installation: external CC BY-SA
   statistics downloads, checksums, derived SQLite index, pinned Pandoc, both
   authentication hops, foreground launch, stop/upgrade/recovery.
 - [QUICKSTART.md](../QUICKSTART.md) — shortest complete path to a first
@@ -123,12 +123,12 @@ grouped by runtime concern:
 - [oap/reports/036-a-current-functional-proxy-readiness-audit.md](../oap/reports/036-a-current-functional-proxy-readiness-audit.md)
   — latest readiness audit.
 
-## Historical research commands (not the lab quickstart)
+## Historical research commands (not the quickstart)
 
 From the repository root. These commands are development-period material,
 not installation prerequisites; evaluation collectors, held-out rounds and
-review sheets are not required for lab deployment. The historical
-trace-enabled example writes full text; the current lab guide leaves tracing
+review sheets are not required to run the proxy. The historical
+trace-enabled example writes full text; the current installation guide leaves tracing
 off.
 
 ```sh
@@ -177,7 +177,7 @@ Detector selection is separate from reviewer proposal and exact acceptance.
 Accepted edits are applied only to original spans right-to-left, with
 protected slices and all outside code points asserted unchanged.
 
-## Historical evaluation programme (not a lab prerequisite)
+## Historical evaluation programme (not an installation prerequisite)
 
 The controlled split was deterministic and project-authored: dev had 16
 cases and held-out had 32, including `točnij`, `rjavo-zlati`, `lase`,
@@ -201,7 +201,7 @@ were to stay under the explicitly configured local trace root, and tracing
 disabled wrote nothing; a missing endpoint or invalid invocation was to be
 recorded once as an external availability/protocol failure, never converted
 into a quality success. This programme is historical record; it is not a
-current lab prerequisite and does not reopen a separate human dataset.
+current installation prerequisite and does not reopen a separate human dataset.
 
 ## Chronology (historical order notes)
 
