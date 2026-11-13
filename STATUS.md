@@ -75,7 +75,7 @@ INSTALL).
 
   ```bash
   python3.12 oap/bin/check_state.py --repo-root . --repository \
-      ulfe-lmi/llm-slovenian-repair
+      ulfe-lmi/slaif-llm-response-language-repair
   ```
 - Navigation for operators and developers: [OAP runbook](docs/OAP-RUNBOOK.md),
   [role setup](docs/CODEX-ROLE-SETUP.md), [recovery](oap/RECOVERY.md) and

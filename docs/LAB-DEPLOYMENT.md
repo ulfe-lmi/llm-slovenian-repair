@@ -1,7 +1,7 @@
 # Installation guide (compatibility pointer)
 
 This page is a compatibility pointer, not a current procedure. It was added by
-[PR39](https://github.com/ulfe-lmi/llm-slovenian-repair/pull/39) as the detailed
+[PR39](https://github.com/ulfe-lmi/slaif-llm-response-language-repair/pull/39) as the detailed
 lab installation record for the runnable proxy; its verified details —
 statistics licence and exact downloads, checksum-guarded fetch, runtime index
 build and verification, mandatory Pandoc, configuration, foreground launch,

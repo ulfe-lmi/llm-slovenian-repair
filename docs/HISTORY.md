@@ -94,7 +94,7 @@ status.
 - [036-a](../oap/reports/036-a-current-functional-proxy-readiness-audit.md) —
   **Readiness.** Current functional-proxy readiness audit (functional software
   and native compatibility; linguistic quality unmeasured).
-- [PR39](https://github.com/ulfe-lmi/llm-slovenian-repair/pull/39)
+- [PR39](https://github.com/ulfe-lmi/slaif-llm-response-language-repair/pull/39)
   (owner-requested documentation fix, direct commit, no OAP order) —
   **Lab installation and statistics.** Reproducible lab installation with
   external Gigafida statistics (`docs/LAB-DEPLOYMENT.md`, plus README,

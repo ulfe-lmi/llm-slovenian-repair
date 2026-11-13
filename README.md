@@ -106,7 +106,7 @@ artwork is reused from the SLAIF project.
 ## Project and support
 
 - Project website: [slaif.si](https://www.slaif.si)
-- Questions and bug reports: [GitHub issues](https://github.com/ulfe-lmi/llm-slovenian-repair/issues)
+- Questions and bug reports: [GitHub issues](https://github.com/ulfe-lmi/slaif-llm-response-language-repair/issues)
 - Security guidance: [SECURITY.md](SECURITY.md)
 
 Maintainers: Janez Perš and Jon Muhovič, Laboratory for Machine Intelligence,
