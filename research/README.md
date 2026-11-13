@@ -2,20 +2,25 @@
 
 This directory is the public, data-free research trail for objective 007. It
 records the experiments that actually ran, the attempts that stopped, the
-replacement/recovery executions, and the final local campaign. It is not the
-production application, a linguistic acceptance claim, a replication claim, a
-license grant, or permission to merge or deploy.
+replacement/recovery executions, and the final local campaign. Objective 007
+is closed: the trail is a **frozen historical record**, not an active
+programme, and the policies it contains (including the 008/009 sequencing
+decision and the no-further-tuning boundary) are historical. Current product
+state and navigation live in the root [STATUS](../STATUS.md) and
+[docs/README.md](../docs/README.md). This directory is not the production
+application, a linguistic acceptance claim, a replication claim, a license
+grant, or permission to merge or deploy.
 
 ## Start here
 
 - [`RESEARCH-STATE.md`](RESEARCH-STATE.md) is the single authoritative
-  CURRENT research state for objective 007 (published by the 007-o
+  latest preserved research state for objective 007 (published by the 007-o
   closure round): the full experiment ledger, exact metric progression,
   evidence hierarchy, claims audit, PLAN matrix, deployment-validity
   matrix, open questions, research debt, the 008/009 sequencing decision,
   and the no-further-tuning boundary, with a machine-readable block that
   `tests/test_research_state_consistency.py` re-derives from the primary
-  records. START HERE for the current state.
+  records. START HERE for the latest preserved objective 007 state.
 - [`EXPERIMENT-HISTORY.md`](EXPERIMENT-HISTORY.md) is a 007-d-era archival
   snapshot (historical synthesis). It is superseded as current state by
   RESEARCH-STATE.md and must not be read as moving status.
@@ -56,32 +61,32 @@ retain scheduled, completed, and stopped trials separately. `full-hyphen-case-lo
 is the one-way initial-case stage; the subsequent ten-run study is the symmetric
 rule. The Levenshtein item is a single read-only diagnostic, not a benchmark.
 
-| Record | Historical variation | Evidence status |
-| --- | --- | --- |
-| `007-b-replacement` | owner-authorized replacement execution | failed before proxy contact |
-| `007-b-timeout300` | timeout-300 controlled replacement | controlled output preserved; case/trace association invalid |
-| `nonthinking-mechanical` | direct reviewer, reasoning disabled | completed |
-| `low-thinking-mechanical` | direct reviewer, low reasoning | completed |
-| `high-thinking-mechanical` | direct reviewer, high reasoning | stopped |
-| `xhigh-thinking-mechanical` | direct reviewer, xhigh reasoning | completed |
-| `low-plus-validator` | frozen low pass plus validator | completed |
-| `low-unigram-retry` | one contextual JSON unigram retry | completed |
-| `low-word-only-retry` | stopped word-only retry and whitespace continuation | stopped/continued from saved response |
-| `full-hyphen-space-low` | ASCII hyphen-to-space detector view | completed |
-| `full-hyphen-case-low` | first one-way initial-case preservation | completed |
-| `ten-run-initial-case-low` | ten symmetric initial-case trials | 8 complete, 2 stopped |
-| `ten-run-expression-retry-low` | ten expression-retry trials | 9 complete, 1 stopped |
-| `ten-run-english-preserve-low` | ten English-preservation trials | all 10 complete |
-| `large-evaluation-capped` | capped external campaign preparation | inference started, not completed |
-| `large-evaluation-uncapped` | owner-directed uncapped campaign | paused by human relevance change |
-| `dassle-spelling-preparation` | DASSLE spelling preparation and controlled run | local evidence complete with incidents |
-| `dassle-uv-audit` | exhaustive u/v audit and random-20 sample | complete mechanical audit |
-| `full-campaign8` | final eight-worker A100 campaign | local campaign complete; remote scoring pending |
-| `prijigrala-retry10` | one-target retry-limit-ten case | complete |
-| `007-i-contextual-validator` | frozen contextual validator over 007-h unique candidates | complete; aggregation recovered with zero additional calls |
-| `007-j-levenshtein-one-contextual-validator` | standard Levenshtein-distance-one expansion with exact 007-i reuse | complete; 493 fresh validator calls and four-view comparison published |
-| `007-m-rank-ambiguous-levenshtein-candidates` | frozen CPU top-1 ranking of ambiguous (C>1) distance-one candidates with one frozen validator call per target | complete; 866 reused validator observations, zero new calls in the final root, hybrid tradeoff published |
-| `levenshtein-lookup-diagnostic` | one read-only lookup observation | not a benchmark |
+Each entry: **record** — historical variation — evidence status.
+
+- **`007-b-replacement`** — owner-authorized replacement execution — failed before proxy contact.
+- **`007-b-timeout300`** — timeout-300 controlled replacement — controlled output preserved; case/trace association invalid.
+- **`nonthinking-mechanical`** — direct reviewer, reasoning disabled — completed.
+- **`low-thinking-mechanical`** — direct reviewer, low reasoning — completed.
+- **`high-thinking-mechanical`** — direct reviewer, high reasoning — stopped.
+- **`xhigh-thinking-mechanical`** — direct reviewer, xhigh reasoning — completed.
+- **`low-plus-validator`** — frozen low pass plus validator — completed.
+- **`low-unigram-retry`** — one contextual JSON unigram retry — completed.
+- **`low-word-only-retry`** — stopped word-only retry and whitespace continuation — stopped/continued from saved response.
+- **`full-hyphen-space-low`** — ASCII hyphen-to-space detector view — completed.
+- **`full-hyphen-case-low`** — first one-way initial-case preservation — completed.
+- **`ten-run-initial-case-low`** — ten symmetric initial-case trials — 8 complete, 2 stopped.
+- **`ten-run-expression-retry-low`** — ten expression-retry trials — 9 complete, 1 stopped.
+- **`ten-run-english-preserve-low`** — ten English-preservation trials — all 10 complete.
+- **`large-evaluation-capped`** — capped external campaign preparation — inference started, not completed.
+- **`large-evaluation-uncapped`** — owner-directed uncapped campaign — paused by human relevance change.
+- **`dassle-spelling-preparation`** — DASSLE spelling preparation and controlled run — local evidence complete with incidents.
+- **`dassle-uv-audit`** — exhaustive u/v audit and random-20 sample — complete mechanical audit.
+- **`full-campaign8`** — final eight-worker A100 campaign — local campaign complete; remote scoring pending.
+- **`prijigrala-retry10`** — one-target retry-limit-ten case — complete.
+- **`007-i-contextual-validator`** — frozen contextual validator over 007-h unique candidates — complete; aggregation recovered with zero additional calls.
+- **`007-j-levenshtein-one-contextual-validator`** — standard Levenshtein-distance-one expansion with exact 007-i reuse — complete; 493 fresh validator calls and four-view comparison published.
+- **`007-m-rank-ambiguous-levenshtein-candidates`** — frozen CPU top-1 ranking of ambiguous (C>1) distance-one candidates with one frozen validator call per target — complete; 866 reused validator observations, zero new calls in the final root, hybrid tradeoff published.
+- **`levenshtein-lookup-diagnostic`** — one read-only lookup observation — not a benchmark.
 
 The registry is the record for every root and its nested artifacts; it does not
 flatten a stopped trial into a success. The private archive catalog records the
@@ -136,13 +141,15 @@ bytes, and credentials are not published.
 
 ## Offline reproduction
 
-All default commands are CPU-only and offline. Use the inherited persistent
-`TMPDIR`; do not substitute a system temporary directory.
+All default commands are CPU-only and offline, using the qualified Python 3.12
+interpreter (`python3.12`). Use the inherited persistent `TMPDIR` (scratch
+and Python setup: [DEVELOPMENT.md](../docs/DEVELOPMENT.md)); do not
+substitute a system temporary directory (a `/tmp` root is rejected).
 
 ```sh
-python3 -B -m unittest discover -s research/tests -v
-python3 -B -m research.tools.rebuild_tables --check
-python3 -B -m research.tools.replay --scratch "$TMPDIR/007-c-replay"
+python3.12 -B -m unittest discover -s research/tests -v
+python3.12 -B -m research.tools.rebuild_tables --check
+python3.12 -B -m research.tools.replay --scratch "$TMPDIR/007-c-replay"
 ```
 
 The replay command executes the actual detector, English policy, case rule,
@@ -151,7 +158,7 @@ network/model calls. A private replay is deliberately explicit and uses one
 preserved case plus a persistent index, for example:
 
 ```sh
-python3 -B -m research.tools.replay \
+python3.12 -B -m research.tools.replay \
   --private-case PRIVATE_VARIANT_ROOT/runs/01/cases/h01.json \
   --index PRIVATE_INDEX.sqlite
 ```
@@ -161,7 +168,7 @@ Campaign saved samples use the same fail-closed path and must carry the
 cap (or an explicit null for uncapped), and numeric English evidence:
 
 ```sh
-python3 -B -m research.tools.replay \
+python3.12 -B -m research.tools.replay \
   --saved-record PRIVATE_CAMPAIGN_SAMPLE.json \
   --index PRIVATE_INDEX.sqlite
 ```
@@ -177,7 +184,7 @@ Both small-study `original/decisions` and campaign `input/decisions/first/retry`
 schemas are accepted. Receipts contain counts and hashes only.
 
 Historical reproduction plans are executable as a no-side-effect contract:
-`python3 -B -m research.tools.reproduce --variant VARIANT ...` validates explicit
+`python3.12 -B -m research.tools.reproduce --variant VARIANT ...` validates explicit
 input/index/result roots, credential reference, endpoint/model fields and a
 bounded budget, then emits a plan. It does not run a model. Live execution is a
 separate future authorization boundary; no tree import or default command
@@ -222,7 +229,7 @@ overwrite exports, and can hash short and 16-token private-source windows from
 explicit prepared sources without printing either side.
 
 ```sh
-python3 -B -m research.tools.publication_guard --root research \
+python3.12 -B -m research.tools.publication_guard --root research \
   --private-root PRIVATE_PREPARED_SOURCE_ROOT
 ```
 
@@ -230,7 +237,7 @@ For private identity replay, pass the compressed ledger and explicit
 logical-root-to-current-private-root mappings; do not pass the compact summary:
 
 ```sh
-python3 -B -m research.tools.replay \
+python3.12 -B -m research.tools.replay \
   --manifest research/registry/file-census.json.gz \
   --root-map 'experiments/=/PRIVATE_EXPERIMENT_ROOT' \
   --root-map 'recovery-executions/=/PRIVATE_RECOVERY_ROOT'

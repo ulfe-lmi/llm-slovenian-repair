@@ -742,6 +742,35 @@ PROTECTED_GOVERNANCE_PATHS = (
     "oap/bootstrap-sources.lock.json", "docs/bootstrap",
 )
 
+# The single protected path an explicitly authorized current-source order may
+# revise; every other protected path stays unconditionally protected.
+ARCHITECTURE_REVISION_PATH = "ARCHITECTURE.md"
+
+
+def architecture_revision_allows(repo, order_meta, accepted_ref):
+    """True iff this order explicitly authorizes a current ARCHITECTURE.md revision.
+
+    Bound to the pinned order and one literal trusted accepted ref: the
+    architecture_revision block must be present, ``authorized`` must be True,
+    its ``accepted_ref`` must equal the literal trusted ref, and its
+    ``old_sha256`` must equal the SHA-256 of the accepted ref's ARCHITECTURE.md
+    blob. A missing, forged or mutated authorization never authorizes the
+    protected path; every other protected path is unaffected.
+    """
+    rev = order_meta.get("architecture_revision")
+    if not isinstance(rev, dict) or rev.get("authorized") is not True:
+        return False
+    if rev.get("accepted_ref") != accepted_ref:
+        return False
+    old = str(rev.get("old_sha256") or "")
+    if not HASH_RE.fullmatch(old):
+        return False
+    try:
+        accepted_arch = digest(git_blob(repo, accepted_ref, ARCHITECTURE_REVISION_PATH))
+    except OAPError:
+        return False
+    return old == accepted_arch
+
 
 def ordered_governance_paths(order_data):
     """Extract the exact allowed source-path set from one order's Governance section."""
@@ -780,7 +809,10 @@ def candidate_review(repo, order_path, accepted_ref, *, order_id=None, order_sha
     m = validate_order(data, repo, order_id, Path(order_path).name)
     require(m.get("governance_ref") == accepted_ref, "ORDER_GOVERNANCE_REF_MISMATCH")
     paths = ordered_governance_paths(data)
-    require(not set(paths) & set(PROTECTED_GOVERNANCE_PATHS), "PROTECTED_PATH_IN_ALLOWLIST")
+    still_protected = set(PROTECTED_GOVERNANCE_PATHS)
+    if architecture_revision_allows(repo, m, accepted_ref):
+        still_protected.discard(ARCHITECTURE_REVISION_PATH)
+    require(not set(paths) & still_protected, "PROTECTED_PATH_IN_ALLOWLIST")
     current = jsread(repo / "oap/governance/MANIFEST.json")
     accepted_manifest = json.loads(git_blob(repo, accepted_ref, "oap/governance/MANIFEST.json"))
     known = set(current["identities"]) | set(accepted_manifest["identities"]) | {"oap/governance/MANIFEST.json"}

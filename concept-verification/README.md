@@ -1,31 +1,135 @@
-# EXPERIMENTAL / CONCEPT VERIFICATION / NOT PRODUCTION CODE
+# SLAIF Slovenian Repair — concept-verification proxy
 
-**For current lab installation, use [the runnable-proxy guide](../docs/LAB-DEPLOYMENT.md).**
-It gives the external CC BY-SA statistics downloads, checksums, SQLite build,
-pinned Pandoc install, both authentication hops and a foreground smoke test.
-The proxy has demonstrated functional software/native compatibility; linguistic
-quality is unmeasured. No separate human evaluation dataset is required.
-
-The commands and research workflow below are historical development material,
-not installation prerequisites. In particular, evaluation collectors, held-out
-rounds and review sheets are not required for lab deployment. The historical
-trace-enabled example writes full text; the current lab guide leaves tracing off.
+**EXPERIMENTAL / CONCEPT VERIFICATION / NOT PRODUCTION CODE**
 
 This is one deliberately isolated research spike. It is not the production
 application, a release, a deployment, a corpus redistribution, or a linguistic
-quality claim. It uses standard-library Python 3.12, one synchronous process,
-bounded finite HTTP calls, and a loopback-only proxy at `127.0.0.1:18024`.
+quality claim. The proxy has demonstrated functional software/native
+compatibility; linguistic quality is unmeasured, and no separate human
+evaluation dataset is required by the current scope.
 
-The loader consumes only explicit external archive paths. It verifies regular
-non-symlink owner/link-count-one files, exact size/MD5/SHA-256, selected member
-names, 14-line preambles, header/marker hashes, CRLF, UTF-8, widths, and row
-limits before inserting a derived SQLite index. Word absence is `UNAVAILABLE`;
-missing n-grams are `CENSORED` with an unknown denominator. The archives and
-index are private local data and must never be staged or packaged.
+The lab installation is documented at the repository root, not here:
+
+- [INSTALL.md](../INSTALL.md) — full lab installation: external CC BY-SA
+  statistics downloads, checksums, derived SQLite index, pinned Pandoc, both
+  authentication hops, foreground launch, stop/upgrade/recovery.
+- [QUICKSTART.md](../QUICKSTART.md) — shortest complete path to a first
+  synthetic Responses call.
+- [ARCHITECTURE.md](../ARCHITECTURE.md) — current source of truth for
+  components, lifecycle, contracts and failure semantics.
+- [TESTING.md](../TESTING.md) — test guide with qualified interpreter and
+  fixture prerequisites.
+- [docs/LIVE-TEST-ENVIRONMENT.md](../docs/LIVE-TEST-ENVIRONMENT.md) — live
+  qualification guide and observed native evidence.
+- [docs/HISTORY.md](../docs/HISTORY.md) — abridged history with direct
+  evidence links.
+
+The proxy is one synchronous parent process with bounded owned child
+processes, standard-library Python 3.12, bounded finite HTTP calls, and a
+loopback-only endpoint at `127.0.0.1:18024`.
+
+The corpus loader consumes only explicit external archive paths. It verifies
+regular non-symlink owner/link-count-one files, exact size/MD5/SHA-256,
+selected member names, 14-line preambles, header/marker hashes, CRLF, UTF-8,
+widths, and row limits before inserting a derived SQLite index. Word absence
+is `UNAVAILABLE`; missing n-grams are `CENSORED` with an unknown denominator.
+The archives and index are external local data (a storage choice, not a
+confidentiality claim) and must never be staged, committed or packaged.
+
+## Current behavior
+
+The current runnable proxy is the loopback OpenAI-compatible Responses
+endpoint. The summary below describes its operational boundaries;
+[ARCHITECTURE.md](../ARCHITECTURE.md) holds the full component and failure
+semantics.
+
+- **Request profile.** Responses JSON and SSE; input is a plain string or a
+  client-managed text-only message sequence. There is no server-side storage
+  or chaining; next turns are client-managed and use the delivered answer.
+- **Capture.** A completed answer is buffered in full before CPU analysis.
+  Only natural assistant output text can change; reasoning, tools, function
+  arguments, IDs, usage, event order and count are preserved. Without
+  accepted edits the delivered text stays unchanged from the original even
+  though defined logprobs removal can change the envelope; with repair, only
+  approved original spans change.
+- **Protection.** Mandatory pinned Pandoc 3.7.0.2 with exact original spans
+  and the Pandoc original mapping. Protected material is never edited, and a
+  missing or failing Pandoc binary rejects startup before the proxy binds.
+- **Evidence.** Read-only derived SQLite index; lookups are finite and
+  budgeted. Absence and censoring keep their distinct semantics (see above).
+- **Review.** Without eligible suspicion there are zero review calls;
+  otherwise at most one isolated occurrence-addressed batch of one
+  non-streaming Qwen request containing up to four targets, with a
+  typed completed envelope. Defined logprobs are removed unconditionally before any
+  eligibility decision, and main-generation usage and review usage are
+  accounted separately; neither is an inference bill for the edited text
+  length.
+- **Acceptance.** Strict lexical acceptance: an accepted replacement is 1–4
+  lexical words with summed word-character length ≤ 80; each proposed
+  replacement is bounded at 128 code points and 8 words, and multiword
+  cases need fixed-anchor phrase evidence. A rejected proposal keeps its
+  original; an ordinary interacting conflict group reverts only its own
+  spans while independently supported edits survive.
+- **Failure.** Any optional-stage technical failure (Pandoc, evidence,
+  batch, transport, acceptance) delivers the completed original. A
+  malformed or truncated transport is an error. A valid explicitly
+  incomplete envelope passes through with its status and text preserved;
+  defined logprobs are still removed.
+- **Cancellation.** Request-scoped cancellation on client disconnect with
+  the phase and cleanup guarantees in ARCHITECTURE section 14.
+
+## Module navigation
+
+The current modules live in this directory (paths relative to this file),
+grouped by runtime concern:
+
+- **Request entry and delivery**
+  - [proxy.py](proxy.py) — loopback listener, worker wiring, request entry.
+  - [request_lifecycle.py](request_lifecycle.py) — per-request state, cancellation hooks, completion.
+  - [request_admission.py](request_admission.py) — bounded accepted-connection admission.
+  - [capture_transport.py](capture_transport.py) — completed main-body capture, JSON and SSE, body budget.
+  - [header_transport.py](header_transport.py) — independent elapsed response-header budget.
+  - [client_transport.py](client_transport.py) and [delivery_transport.py](delivery_transport.py) — client intake and bounded final delivery.
+- **Main-upstream generation**
+  - [upstream_setup.py](upstream_setup.py) and [upstream_worker.py](upstream_worker.py) — bounded main-upstream setup and owned fetch.
+- **Reviewer**
+  - [review_transport.py](review_transport.py) and [review_worker.py](review_worker.py) — isolated non-streaming reviewer exchange.
+  - [batch_review.py](batch_review.py) — occurrence-addressed proposal batches and caps.
+  - [qwen_client.py](qwen_client.py) — reviewer HTTP client, typed completed envelope.
+- **Protection and repair**
+  - [pandoc_protection.py](pandoc_protection.py), [protected.py](protected.py) and [protection_residuals.py](protection_residuals.py) — Pandoc mapping, span protection, residual checks.
+  - [repair.py](repair.py) — exact span splicing, right-to-left application.
+  - [composed_validation.py](composed_validation.py) — composed-result validation and conflict groups.
+- **Evidence, detection and acceptance**
+  - [runtime_corpus.py](runtime_corpus.py) — read-only index access, UNAVAILABLE/CENSORED semantics.
+  - [detector.py](detector.py) and [runtime_detection.py](runtime_detection.py) — CPU detection and target selection.
+  - [evidence_budget.py](evidence_budget.py) — finite evidence lookup budget.
+  - [runtime_acceptance.py](runtime_acceptance.py) — one runtime lexical-acceptance policy.
+  - [analysis_policy.py](analysis_policy.py) — bounded analysis eligibility policy.
+- **Envelope, configuration and corpus build**
+  - [responses_contract.py](responses_contract.py) — request/response envelope and metadata contracts.
+  - [config.py](config.py) — environment configuration and defaults.
+  - [corpus.py](corpus.py) — external-archive verification and SQLite build (offline preparation, not a runtime path).
+
+## Operator and developer references
+
+- [STATUS.md](../STATUS.md) — current programme state and topology.
+- [oap/COMPLETENESS.md](../oap/COMPLETENESS.md) — current completeness
+  evidence and its axes.
+- [docs/OAP-RUNBOOK.md](../docs/OAP-RUNBOOK.md) — OAP operational
+  procedures for this workspace.
+- [docs/DATA-SOURCES.md](../docs/DATA-SOURCES.md) — external statistics
+  sources and acquisition provenance.
+- [oap/reports/036-a-current-functional-proxy-readiness-audit.md](../oap/reports/036-a-current-functional-proxy-readiness-audit.md)
+  — latest readiness audit.
 
 ## Historical research commands (not the lab quickstart)
 
-From the repository root:
+From the repository root. These commands are development-period material,
+not installation prerequisites; evaluation collectors, held-out rounds and
+review sheets are not required for lab deployment. The historical
+trace-enabled example writes full text; the current lab guide leaves tracing
+off.
 
 ```sh
 python3.12 -m unittest discover -s concept-verification/tests -v
@@ -67,1514 +171,64 @@ python3.12 concept-verification/eval/score.py \
 ```
 
 The two prompt variants and four threshold settings are dev-only. The frozen
-file binds the selected mode, threshold, prompt bytes/config identity, dataset
-hashes, and index identity; held-out execution refuses mismatches. Detector
-selection is separate from reviewer proposal and exact acceptance. Accepted
-edits are applied only to original spans right-to-left, with protected slices
-and all outside code points asserted unchanged.
-
-## Protocol and evaluation boundaries
-
-The proxy buffers a complete Responses SSE before CPU review. It changes only
-assistant `output_text` belonging to natural message items. Reasoning, tools,
-function arguments, IDs, usage, event order/count, and no-safe-text responses
-are preserved. Incomplete upstream generations are errors, never successful
-repairs. Reviewer calls are fresh non-streaming calls containing only compact
-instructions, the exact sentence, and one target; only one strict JSON result
-shape is accepted, and a wider edit or uncertainty keeps the original.
-
-The controlled split is deterministic and project-authored: dev has 16 cases
-and held-out has 32, including `točniej`, `rjavo-zlati`, `lase`,
-`kitaraš/vokal`, `najslovnijih`, contextual constructions, typos, valid-word
-controls, mixed technical prose, Markdown, commands, URLs, and paths. The
-held-out report must include raw/no-repair, detector-only, reviewer-decision,
-full conservative, unigram-only, and local-context ablations with denominators,
-candidate enrichment, recall, reviewer accuracy, accepted/correct/harmful/
-missed counts, protected changes, recovery, and latency.
-
-The held-out reviewer command and the eight-case collector command are each run
-once per frozen round. Real workload benefit or harm is
-`AWAITING_HUMAN_REVIEW` until a human labels the deterministic blinded sheet;
-model self-review is not a human label. The collector uses actual
-`codex exec --profile qwen-neumann` with explicit `CODEX_HOME`, provider/base
-URL overrides, `--ephemeral`, and a finite subprocess timeout. Its tool-loop
-case creates and reads `codex-tool-loop-proof.txt` in an owned disposable
-directory. Raw traces remain under the explicitly configured local trace root,
-and tracing disabled writes nothing. A missing endpoint or invalid invocation
-is recorded once as an external availability/protocol failure, not converted
-into a quality success.
-
-## Structural protection (Pandoc, order 013-a)
-
-The runnable proxy's structural protection is mandatory installed Pandoc with
-exact original spans. There is no regex-only runtime structural path and no
-historical pulldown-cmark discovery or fallback on the proxy path; the frozen
-research trail that used pulldown-cmark remains separate and unchanged.
-
-Dependency and startup: the pinned version is `3.7.0.2` (see
-`pandoc-dependency.json`: official Linux amd64 release archive, exact byte
-count and locally computed SHA-256, not an upstream signature attestation).
-The binary resolves from `CONCEPT_PANDOC`, then PATH (`pandoc`), and is
-checked at startup - before the proxy binds any traffic - for executable
-presence, exact version, and reader capability. `install_pandoc.sh` installs
-the pinned archive into an owned absolute prefix (its first argument,
-defaulting to `~/.local/share/concept-verification/pandoc-3.7.0.2`; no sudo,
-no system replacement, no writes outside the prefix, no runtime downloads).
-A missing, wrong-version, or capability-failing binary rejects the proxy
-startup with a finite reason.
-
-Owned start and partial-startup cleanup (order 023-a): the exact
-`subprocess.Popen` instance is pre-allocated with the real
-(unmodified) Popen construction and parent-owned before the
-fallible start creates the child session, so a caller interruption
-(KeyboardInterrupt, MemoryError or any other BaseException) after
-actual child creation still leaves the owning instance and its pid
-reachable: the owned session group is signalled (SIGKILL with a
-direct-kill fallback) and the child is actually waited/reaped
-before return; a failed pre-allocation leaks no child; the
-never-created state (unset pid) is never signalled or waited on;
-ordinary FileNotFoundError/PermissionError keep the fixed
-not-found/not-executable reasons and nonordinary caller control is
-cleaned first and re-raised with its original identity; the
-selector and all three owned streams are closed by attribute lookup
-on every exit path, so a partially constructed instance cannot
-raise; cleanup may honestly wait for OS reaping, with no
-hard-real-time return guarantee.
-
-Reader profile and coordinates: the fixed profile is the
-`commonmark_x+sourcepos-smart` reader with the `json` writer; no dialect drift
-is permitted. Source positions are 1-based line/column pairs over the
-NFC-normalized document with Unicode code-point columns (a tab starting at
-column `c` advances the next code point to column `((c - 1) // 4 + 1) * 4 + 1`,
-as observed with the pinned binary). Position provenance is established per
-node: only machine-generated positions are trusted; a user `data-pos`
-conflicting with a generated position defeats provenance for that node only,
-while an identical duplicate is a no-op; duplicates are never collapsed or
-resolved last-wins. Documents without a final newline exhibit container
-endpoints beyond the last line (column 1; observed at `L+1` for paragraphs
-and `L+2` for a one-line list); such endpoints are never editable leaf
-coordinates and are never granted. Multi-line positions belong to containers
-and are never granted.
-
-Deny by default: only `Str` leaf spans whose position is proven against the
-unmodified original are granted as editable prose - valid coordinates, exact
-original-slice equality, grapheme-safe content and boundaries, and an
-NFC-stable line. Whitespace glue is granted only between two granted,
-contiguous prose spans in one proven shared prose context. Everything else is
-protected: code, equations, HTML (including inner text between raw inline
-tags), links and images including labels, configuration, metadata, markers,
-soft breaks, escapes, entities, and every unprovable region. The established
-pure research residual policy is then reused as additional conservative
-protection (imported as a pure function; no helper discovery), including a
-bounded proxy-side addition for unterminated prose-form TeX: any opener with
-no closing sequence anywhere later protects to end of line. Residual matches
-overlapping granted prose are retained in full.
-
-Protected extents and original-source ordering (order 033-a): the walk
-collects exact-source candidate grants plus structural context events -
-literal, escaped and entity quotation markers, and reader-recognized
-complete raw opening/closing tags - each with its proven position, and one
-document-level finalization after the whole AST walk (before any outcome is
-built) coalesces equivalent physical footnote payloads, sorts the events by
-proven original position, replays the quotation and HTML context stacks,
-and filters the candidates by the resulting denied intervals. Quotation
-families are distinct (Slovenian low/high double `„…“` and single `‚…‘`,
-both guillemet directions `«…»` and `»…«`, curly and straight double and
-single forms), and only a
-proved compatible closer of the SAME provenance (literal, backslash-escaped
-or entity) releases its own level: a mismatched, escaped or
-entity-normalized inner marker can never release a different outer context,
-and an unproved extent protects to the end of the document. An established
-in-word straight apostrophe stays ordinary punctuation. Raw tags act only
-in complete reader-recognized shapes: a closing tag with another identity
-cannot discharge an unmatched opener, a split or incomplete closer is never
-recognized and cannot release by raw-string matching, void and
-self-closing forms are neutral, and quotes inside tag attributes are
-machine syntax, not quotation markers.
-
-A complete Pandoc BlockQuote structure - lazy continuation and nesting
-included - is denied in full: its content is never walked, and its proven
-physical extent (the block's own `data-pos`, else the positioned wrapper
-`Div` that retains the full quote extent) is additionally recorded as a
-denial region. The pinned reader relocates a footnote definition into each
-of its references in AST visitation while the payload keeps its later
-source coordinates, and a quoted definition empties the BlockQuote while
-the payload appears under the later reference: the recorded extent keeps
-the entire quoted original region denied against those relocated candidate
-grants, and a definition referenced several times duplicates one physical
-payload that is coalesced and replayed exactly once. An ordinary definition
-outside a quotation stays usable, and earlier ordinary prose is unaffected
-by later relocated payloads (physical source order). If a BlockQuote extent
-cannot be proven, the document fails closed. Compound (multi-line) opening
-tag positions are not grantable spans; their proven first and last segments
-place the opening extent conservatively, and an unplaceable event keeps its
-extent unproved toward the document ends.
-
-Documented conservative abstentions (proven input subset): a span containing
-an unproved grapheme-sensitive code point (C0/C1 controls, DEL, NEL, LS, PS,
-unproved combining marks, variation selectors, ZWJ/ZWNJ) is never granted; a
-non-NFC line abstains for that line; unpaired quotation interiors, HTML
-fragment depth, and unterminated TeX stay protected; CR (bare or as CRLF) is
-a control character, so a span containing it is never granted while the
-surrounding NFC-stable prose on each side may still be granted (the line
-break itself stays protected); and a document whose NFC decomposition cannot
-be mapped line-exactly fails closed. Whole-document failure returns the exact
-completed original with zero review calls.
-
-Bounded failure behavior: finite input/output/timeout/node limits; subprocess
-argv without shell; no untrusted filters or file/network reads; bounded
-non-content diagnostics. Startup failures (not found, not executable, wrong
-version, reader capability) reject the proxy before any traffic is accepted,
-and the version is not rechecked per answer. Runtime failures (timeout,
-nonzero exit, oversized input or output, malformed JSON, schema mismatch,
-node limit, mapping integrity) return the byte-exact original and
-short-circuit `RepairEngine.repair` before corpus access, detection, or
-reviewer calls; upstream capture errors remain errors.
-
-This is runnable-proxy engineering evidence only. It establishes no
-linguistic, experimental-MVP, or deployment acceptance.
-
-## Bounded occurrence-addressed reviewer batch (order 014-a)
-
-The runtime `RepairEngine` now uses one versioned, occurrence-addressed
-reviewer batch per completed eligible answer: `batch-v1`. The historical
-single-target prompt, `Proposal`/`parse_proposal`, and the frozen research
-evaluator API remain byte-identical and unchanged; the engine never falls
-back to a per-target single-target call loop.
-
-Target preparation is CPU-owned and fail-closed: at most the existing four
-selected non-overlapping detector targets, in deterministic original order,
-each assigned a stable response-local id (`t0..tN`). Every occurrence is
-validated for `0 <= start < end <= len(original)`, exact original-slice
-equality (a stale occurrence is never relocated by first-substring
-matching), no overlap or protected intersection, grapheme-safe slice and
-boundaries, and a target of at most 128 code points. Repeated text therefore
-has separate ids and exact per-occurrence context. Any invalid, stale, or
-oversized preparation returns the completed original with zero review calls.
-
-Per-occurrence context is a documented fixed window of 240 original code
-points before and after the target, with exact boundaries and explicit
-`truncated_before`/`truncated_after` flags when the window reaches the
-document edge; a truncated window is never presented as a complete sentence.
-The prompt is one explicit instruction plus exactly one serialized JSON
-object (`{"version":"batch-v1","targets":[...]}`): targets and their context
-are data, not instructions. The instruction preserves the agreed
-natural-appropriate-choice question, explicitly allows keep, uncertainty
-(wider edit), and a more natural appropriate replacement, and rejects
-stylistic-only and factual changes. Selection ids and original coordinates
-remain CPU-owned; the model returns only ids and proposals.
-
-Finite limits (constants in `config.py`, enforced before dispatch and before
-any mutation): at most 4 items; target at most 128 code points; context 240
-code points per side; prompt at most 8192 code points; request at most 32768
-UTF-8 bytes; response at most 32768 bytes; proposal JSON at most 8192 code
-points; `max_output_tokens` 1536; replacement at most 8 words / 128 code
-points; the ordered finite 15-second DEFAULT reviewer exchange deadline
-(explicitly operator-configurable per the 031-b section below; one
-monotonic deadline anchored at batch entry that covers the owned
-child process's startup, IPC, and its actual resolver/connect/TLS/
-upload/status/headers/body work plus result validation; deadline
-expiry prevents acceptance of any late or racing result, while the
-exact child's termination and reaping are awaited before return -
-cleanup and OS scheduling can add elapsed time, and there is no
-hard-real-time return guarantee; the child start itself is owned
-across partial startup: the exact process object is pre-allocated
-and parent-owned before the fallible start, the four direct pipe
-descriptor locals are held inside the single ownership guard
-established before the first pipe allocation and closed on any
-allocation or nonblocking-configuration failure (ordinary OSError
-keeps the fixed transport label; KeyboardInterrupt/MemoryError are cleaned first and
-re-raised with their original identity), a failed pre-allocation
-leaks no owned descriptor, and the never-created state is never
-waited on (order 023-a); the operator-configured upstream capture
-timeout stays separate and never extends reviewer calls); no
-retries. Code-point and byte counts are
-distinct quantities.
-Unsupported oversized target or prompt preparation returns the
-original with zero calls; oversized reviewer output returns the original
-after one call. Model output is never silently truncated.
-
-Transport: one fresh nonstreaming `store:false` request directly to the
-configured private Responses endpoint with explicitly bounded model output.
-No tools or images, no main credentials copied from inbound headers, no
-linkage ids or history, no constitutional context, no caller-selected URL,
-no recursive repair route. The operator-configured reviewer credential
-mechanism is reused without reading or logging real values in tests.
-
-Strict parsing: duplicate keys are rejected, never collapsed last-wins, at
-both the outer envelope and the inner proposal level. Only a supported
-successful completed reviewer envelope with exactly one assistant
-`output_text` is accepted as success; tool, refusal, or incomplete output is
-not success. The inner object must carry version `batch-v1` with exact keys
-and exactly one result for every supplied id (no duplicate, unknown, or
-missing id), exact booleans, keep ⇒ null replacement, wider ⇒ keep + null
-replacement, replace ⇒ nonempty bounded string + wider false. Unknown fields
-or version, malformed, fenced, or trailing output, null/bool/type
-mismatches, nonfinite numbers, and oversized output reject the whole batch.
-Partial JSON is never salvaged and no second call is made. Response order
-may differ; results are mapped by validated id, never by array position.
-
-Whole-batch versus individual rejection: any batch-level error, timeout,
-non-200, invalid encoding, schema violation, or duplicate id returns the
-byte-exact original after at most one request, with no retry and no
-partially accepted edit. Structurally valid proposals rejected by current
-corpus/lexicon evidence (including the barrier-aware neighbor checks) remain
-individual rejections, while other independent valid proposals in the same
-batch proceed. Keep and wider edits are no-ops. Original-slice patching and
-protected-slice invariants are unchanged.
-
-One-answer SSE eligibility: a completed upstream SSE representing several
-assistant text answers/items/content parts, or otherwise ambiguous target
-ownership, bypasses repair unchanged with zero review calls. Review covers
-only one unambiguously identified assistant text answer; the per-answer
-review budget is at most one batch, never reset per field, and several
-answers are never collapsed into one string or picked first. Established
-valid single-answer SSE behavior is preserved; unknown or ambiguous shapes
-may abstain.
-
-Terminal answer copies (order 014-b): before any reviewer call, a
-preflight proves every answer-bearing terminal representation consistent
-with the one confirmed answer - the same exact typed id, final list
-positions, assistant role, completed status, content cardinality and part
-kinds, and the exact original answer text across `output_text.done`,
-`content_part.done`, and message-typed `output_item.done` copies (at most
-one of each kind). Initial `added` events are supported only as empty
-placeholders: their ownership (the typed confirmed id) and, for message
-items, the assistant role are validated, and their content is never
-rewritten. Every `output_text.delta` payload must be a string (an empty
-string is a valid no-op). Any copy that cannot be proved consistent -
-different text, role, status, index, or cardinality; a duplicated
-terminal copy; a missing/null/non-string id; an answer event for another
-id; or non-empty initial content - abstains with the raw original bytes
-and zero review calls. The renderer then mutates only the explicit event
-references collected during that preflight: the confirmed final answer,
-each validated terminal copy, and the confirmed delta events (the first
-non-empty delta carries the full repaired text, later deltas are
-emptied). No value matching, no id coercion, no metadata traversal.
-Order 014-a's A4 proof established that nominal terminal copies are
-updated consistently through explicit validated paths; it did not prove
-that contradictory, unowned, or duplicated terminal copies are rejected.
-Two distinct 014-a failure modes were observed at the published head:
-same-ID contradictory or extra terminal copies were blindly rewritten to
-the repaired text (the extra or conflicting content was modified), while
-unowned terminal copies (a missing or non-string id) were left unchanged
-beside an edited final answer. The 014-b preflight rejects both: every
-terminal representation is proved consistent before any reviewer call, and
-any copy that cannot be proved consistent abstains with the raw original
-and zero review calls, so the negative matrix - direct transform plus the
-full actual HTTP chain - proves the rejection. The 014-a report remains
-unchanged.
-
-Trace additions are bounded to a per-answer `review_batch` record: fixed
-call count, target count, outcome, and reason labels only. No raw prompts,
-responses, or untrusted exception text is logged. This is runnable-proxy
-engineering evidence only; it establishes no linguistic, experimental-MVP,
-or deployment acceptance.
-
-## Explicit text Responses contract (order 015-a)
-
-The proxy now enforces an explicit text-only Responses request contract
-on `POST /v1/responses` before any forwarding (pure module
-`responses_contract.py`, content-free labels only): a strict JSON object
-(no duplicate keys, no nonfinite numbers, no coercion) with a nonempty
-bounded `model`, text input as a string or a client-managed text-only
-message sequence, explicit `store: false`, a boolean `stream` (absent
-means false), and the allowlisted ordinary fields
-`temperature`/`top_p`/`top_k`/`max_output_tokens`/`stop`/`metadata` with
-exact types and finite values. Any other key is an unsupported
-capability and is rejected regardless of its value (stored chaining via
-`previous_response_id`, `include`, `logprobs`, `tools`, `text`, `n`,
-`audio`, `conversation`, `background`, ...). Rejections return HTTP 400
-with one closed label (`REQUEST_INVALID_JSON`,
-`REQUEST_DUPLICATE_KEY`, `REQUEST_INVALID_NUMBER`, `REQUEST_SCHEMA`,
-`REQUEST_STORE_REQUIRED`, `REQUEST_UNSUPPORTED`) before any main or
-reviewer call: negative request tests assert zero main HTTP calls and
-zero review calls.
-
-The exact input message shape: `input` is either a nonempty string
-(1-200,000 code points) or a list of 1-64 messages, where each message
-carries exactly the keys `role` and `content`; `role` is one of
-`user`, `assistant`, `system`, or `developer` (exact string); and
-`content` is either a nonempty string (1-200,000 code points) or a
-list of 1-32 parts, where each part carries exactly the keys `type`
-and `text`, `type` is exactly `input_text`, and `text` is a nonempty
-string (1-200,000 code points). Client-side history conversion (for
-example, a previous assistant turn) is supplied by the client in this
-same shape and validated as-is; any other shape - extra keys, unknown
-roles, non-text parts, or empty content - is rejected before any
-forward. The 200,000-code-point bound applies per input string, per
-message content string, and per part text - not as an aggregate across
-the 64 messages or 32 parts; the whole request remains bounded by the
-2,000,000 UTF-8 byte request limit.
-
-Main-response eligibility is one shared profile for the nonstreaming
-JSON primary path and the retained delayed SSE path: a documented
-Responses object (`object == "response"`) with exactly
-`status == "completed"`, an absent/null `error`, and no explicit
-stored/background/linkage/incompleteness declarations (pinned typed
-policy: absent or null is unset; present `store`/`background` accept
-only the exact boolean `false`; a non-null `previous_response_id`,
-`conversation`, or `incomplete_details` contradicts the stateless
-foreground profile), at most one bounded noneditable reasoning item
-(status null/missing/completed only) preceding exactly one assistant
-message with an exact typed nonempty id and exactly
-`status == "completed"`, carrying exactly one plain nonempty
-`output_text` part with aligned `annotations` absent or empty (defined
-API `logprobs` are always removed before this profile check and never
-participate in it; see the order 035-c section below). The delayed SSE
-completed event is validated with that same full
-envelope validation, so JSON and SSE handle the same final
-`response.output` identically (profile parity); unknown output
-variants, tools/refusals, extra messages/parts, malformed or missing
-identity, incomplete reasoning, contradictory declarations, and
-non-empty aligned metadata all abstain with the raw original bytes and
-zero review calls. Nonstreaming JSON is repaired through the real
-engine on the same one-answer policy; malformed main JSON or capture
-remains a main error under the finite HTTP failure contract (HTTP 502),
-a declared-mode/observed-content-type mismatch returns 502
-`RESPONSE_MODE_MISMATCH`, and a no-edit repair returns the raw bytes
-unchanged while a changed answer mutates only the validated part text
-(usage and metadata preserved as reported; metadata echoes are never
-scanned).
-
-Forwarding uses a narrow header allowlist (content-type, accept, and an
-explicitly caller-provided authorization only); hop-by-hop, internal,
-control, and linkage headers are never forwarded, and the reviewer API
-key is never borrowed as a main credential. Reviewer usage is
-request-local: it is reset on every request, absent or invalid counts
-are explicit `"unknown"` (never zero, never carried over), and main
-usage is preserved as reported. `CONCEPT_USAGE_OBSERVER=stderr` enables
-a bounded content-free operator record (review call count plus token
-counts or `unknown`; no request id, no raw text) at the normal entry
-point, and an observer failure never changes a completed answer.
-Client-managed history (two-turn input messages) is supported; stored
-chaining is rejected before any forward. Declared request limits
-(`config.py`): request body at most 2,000,000 bytes (HTTP 413 before
-any forward when the declared length exceeds the bound); `model` at
-most 200 code points; input string and each message content or part
-text at most 200,000 code points each (per string/part, not an
-aggregate); at most 64 messages and at most 32
-parts per message; `stop` at most 4 sequences of at most 32 code
-points; `max_output_tokens` at most 32,768; `metadata` at most 16
-string keys of at most 64 code points with string values of at most
-256 code points; `top_k` at most 100; `temperature` in [0, 2] and
-`top_p` in (0, 1] as finite numbers (bool rejected). Total
-wall-clock request budgeting, disconnect handling, admission control,
-cancellation, and CPU limits are not
-implemented in this proxy: the ordered finite 15-second DEFAULT
-batch-reviewer limit (explicitly operator-configurable per the 031-b
-section below) is a whole-exchange deadline anchored at entry
-(order 019-a),
-covering the owned child process's startup, IPC, and its actual wire
-work (deadline expiry prevents acceptance of any late or racing
-result, while the exact child's termination and reaping are awaited
-before return; cleanup and OS scheduling can add elapsed time, with
-no hard-real-time return guarantee); the historical single-target
-evaluator prompt/API keeps its
-historical per-call contract. The upstream capture timeout
-(`CONCEPT_TIMEOUT`) is the connection/socket timeout and, since order
-017-a, also the one elapsed main-body budget. The independent elapsed
-response-header budget (`CONCEPT_HEADER_TIMEOUT`, order 018-a) bounds
-status/header acquisition only. The incoming client request intake
-deadline (the `client_timeout` keyword-only constructor parameter
-appended after `header_timeout`, following the existing positional
-parameters; the `CONCEPT_REQUEST_TIMEOUT` operator value, default
-30 seconds, order 020-a) is one absolute monotonic deadline anchored
-while handling the accepted connection before any
-request-line/header/body read and before the owned intake guard
-starts, covering the first byte, the request line, all headers and
-the exact advertised body; byte arrival, phase transitions and
-legitimate short reads never reset it, and OS accept-backlog
-waiting (before the connection is accepted and handled) is outside
-the intake clock. The budget must be a finite positive
-platform-representable value and is rejected before any bind
-allocation (bool, nonnumeric, zero, negative, nonfinite, or beyond
-the finite threading wait bound). Strict unambiguous framing
-rejects repeated Content-Length fields (even equal values), comma
-lists, any Transfer-Encoding and any unsupported Expect with a
-fixed content-free 400 before any body read or forward, and keeps
-the existing 413 for a missing, negative, overlarge (beyond the
-existing 2,000,000-byte request cap) or nondecimal length; the
-supported length is a strict ASCII decimal (ASCII 0-9 only, no
-signs or Unicode digits, surrounding SP/HTAB ignored for the
-numeric view, leading zeros permitted, and significant digits
-bounded before integer conversion while the raw request bytes are
-unchanged). An incomplete advertised body - even with a complete
-valid JSON prefix - is never forwarded and closes with a fixed
-content-free 400 and zero downstream work (delivered where
-possible; when the peer or socket is already closed, delivery is
-not guaranteed); a stalled intake closes with zero
-main/analysis/evidence/review work and a bounded best-effort 408
-(the quiet close is the observable outcome), and trailing bytes
-never become a second request (HTTP/1.0 close, single-threaded).
-The owned pure-timer guard interrupts only the exact accepted
-client socket and is cancelled and actually joined on every path
-including partial startup, so no intake work outlives the request.
-The final response delivery deadline (the `delivery_timeout`
-keyword-only constructor parameter appended after `client_timeout`,
-following the existing positional parameters; the
-`CONCEPT_DELIVERY_TIMEOUT` operator value, default 30 seconds,
-order 021-a) is one absolute monotonic deadline anchored
-immediately before final response emission - status line, headers,
-body and the actual flush - and before the owned delivery guard
-starts, so guard startup is charged to the clock; response-ready
-work (upstream capture and optional repair) is outside this phase;
-byte progress, short writes and phase transitions never reset it;
-a late or racing completion loses to expiry (deadline expiry
-prevents acceptance of late results, while the owned guard thread
-is cancelled and actually joined before return; cleanup and OS
-scheduling can add elapsed time, with no hard-real-time return
-guarantee); once any response emission began, no second response,
-status or fallback is attempted on that socket and a failed send
-before bytes is closed safely without recursive retry; the owned
-pure-timer guard interrupts only the exact captured accepted socket
-and is cancelled and actually joined on every path including
-partial startup, so no delivery work outlives the response; a
-stalled or slowly reading client is closed quietly with no body
-logging, and local send completion is not proof the peer received
-or read the bytes (no delivery acknowledgment or hard-real-time
-claim). The budget must be a finite positive
-platform-representable value and is rejected before any bind
-allocation (bool, nonnumeric, zero, negative, nonfinite, or beyond
-the finite threading wait bound). All five - the setup axis
-being the main-upstream setup deadline in the order 022-a
-section below (CONCEPT_SETUP_TIMEOUT, 30 s default) - stay
-separate from the
-15-second reviewer limit and from the unimplemented overall
-deadlines. The frozen historical single-target evaluator prompt and
-protocol remain unchanged.
-
-## Read-only runtime evidence and completed-original fallback (order 016-a)
-
-The proxy's runtime evidence access (the prepared tiny SQLite index)
-is strictly read-only through the new `runtime_corpus.py` adapter,
-which inherits the nominal `Corpus` interface so the frozen detector
-and acceptance code type-check unchanged (frozen `corpus.py` is
-byte-identical) and overrides the constructor and every data-access
-method:
-
-- The exact configured path (absolute or relative against the process
-  working directory, percent-escaped including Unicode, spaces, `#`
-  and `?`; no Python-level path resolution and no alternate-file
-  search - ordinary regular-file symlink and hardlink spellings are
-  followed by the OS open and remain supported) opens as a
-  `file:<uri>?mode=ro` URI: no file creation, normalization, or write
-  of any kind, and no `immutable=1`/no-lock assumption.
-- A bounded read-only header preflight runs BEFORE any SQLite open:
-  the exact file is opened read-only and non-blocking and checked with
-  `fstat`, so a non-regular resource (for example a pipe reachable
-  through `/proc/self/fd`) is rejected without blocking for a writer
-  that never comes, while ordinary regular-file paths (including
-  symlink and hardlink spellings) continue. The 100-byte header must
-  carry the SQLite magic and write/read version byte 1 (the supported
-  prepared rollback-journal/DELETE index); a WAL-journal index
-  (byte 2) is rejected as an unsupported journal mode because even
-  read-only access to it persists `-wal`/`-shm` auxiliary files, and
-  any other or missing header is corrupt. No conversion, sidecar
-  cleanup, copying, or chmod occurs.
-- A finite per-query busy wait (`config.RUNTIME_CORPUS_BUSY_TIMEOUT_SECONDS`,
-  0.25 s; `PRAGMA busy_timeout` 250 ms) bounds lock waiting per query;
-  it is not a total CPU/query deadline.
-- Stored counts are validated type-strictly as nonnegative Python
-  integers on the returned value (no `int()` repair, no truncation,
-  no invented zero): text, NULL, negative, or fractional stored
-  counts are technical evidence failures, while a valid zero stays
-  `EXACT(0)` and a missing row stays `UNAVAILABLE` (unigram) or
-  `CENSORED` (ngram).  SQLite stores a bound boolean as integer 1, so
-  no boolean origin is detected.
-- Failures are one of six fixed content-free labels
-  (`RUNTIME_EVIDENCE_UNAVAILABLE`, `RUNTIME_EVIDENCE_CORRUPT`,
-  `RUNTIME_EVIDENCE_INCOMPATIBLE`, `RUNTIME_EVIDENCE_INVALID_COUNT`,
-  `RUNTIME_EVIDENCE_LOCKED`, `RUNTIME_EVIDENCE_UNSUPPORTED_JOURNAL`);
-  the detail carries at most the Python exception class name, never
-  SQL text, path, value, target, or credential. Handles are closed on
-  success and on construction or context failure.
-
-The proxy opens the evidence index only after a complete main passes
-eligibility (an ineligible main never opens or creates the index):
-
-- An early technical failure (missing path, corrupt bytes,
-  incompatible accessed schema, invalid stored count, lock, or
-  unsupported journal during construction or detection) returns the
-  exact completed original bytes with zero edits and zero review
-  calls; the trace records the evidence failure.
-- A late failure during per-proposal validation aborts the whole
-  optional pass from the immutable original: no earlier accepted edit
-  survives, while the actual review call and known or unknown usage
-  are preserved.  The usage observer records the actual review call
-  count and reviewer usage (it carries no rollback flag); the
-  optional persisted trace separately records the aborted acceptance
-  disposition, the evidence failure, and the untrusted reviewer
-  proposals kept apart from the cleared replacement list.
-- Ordinary missing replacement evidence remains an individual
-  proposal rejection (a valid first edit survives), and the same proxy
-  recovers on the next healthy request with no usage carryover.
-
-Pandoc, main, request-contract, and historical single-target
-evaluator semantics are unchanged.
-
-## Finite runtime evidence lookup budget (order 024-a)
-
-The read-only evidence lookup work of `RuntimeCorpus` is bounded by
-one finite per-instance work-count policy (the new
-`evidence_budget.py` module), resolved from the versioned config
-defaults:
-
-- Five exact work-count limits with fixed units: at most
-  `RUNTIME_EVIDENCE_MAX_STATEMENTS` (65,536) prepared-SQL statement
-  starts (metadata and data statements alike; each start is charged
-  before execution, so a cap-exact query completes but the next start
-  is denied); row ALLOWANCES of `RUNTIME_EVIDENCE_MAX_ROWS_PER_QUERY`
-  (4,096) per query and `RUNTIME_EVIDENCE_MAX_ROWS_TOTAL` (262,144)
-  per instance (cumulative; never reset per query or per request;
-  metadata rows included) that bound the result rows of a query that
-  can succeed - a query that overflows an allowance fetches and counts
-  one extra sentinel row beyond it, so the actual counters may exceed
-  an allowance by that one counted sentinel while the whole result is
-  still discarded (below); and a native SQLite progress-callback
-  budget that allows
-  `RUNTIME_EVIDENCE_MAX_PROGRESS_CALLBACKS` (10,000) callbacks, with
-  the next crossing callback beyond the budget interrupting the
-  statement and the callback armed every
-  `RUNTIME_EVIDENCE_PROGRESS_INTERVAL` (1,000) virtual-machine
-  progress units.
-- The policy is validated with no coercion at two distinct points,
-  with two distinct failures: at every real constructor use, an
-  invalid resolved policy (a caller value, or the current default when
-  `None` is resolved; bool, nonintegral, nonfinite, nonpositive or
-  native-overflow values, i.e. limits above the `2**62` native-safe
-  bound or an interval above the C-int bound) fails with the fixed
-  content-free `RUNTIME_EVIDENCE_BUDGET_INVALID` label before any file
-  access, path handling or index state change; once at proxy startup,
-  before any bind allocation, the pure
-  `validate_default_evidence_policy()` (it touches no index, file or
-  connection) requires the CURRENT config default policy to hold and
-  fails with a plain `ValueError` - a distinct, unlabelled startup
-  failure - when it does not.  `None` always means the current finite
-  config default, never disabled or unbounded.
-- Overflow never truncates: a query whose result would exceed the
-  remaining per-query or cumulative row quota is detected in Python by
-  the bounded fetch loop, which fetches at most one sentinel row
-  beyond the remaining allowance; the fetched rows are counted against
-  the quotas and the whole result is discarded without being returned,
-  so the query fails with the fixed content-free
-  `RUNTIME_EVIDENCE_BUDGET_EXCEEDED` label (no partial result, no
-  silent truncation); exhaustion is sticky for the instance, and
-  later work is denied before execution.  This is the bounded-fetch
-  detection, not the native progress interrupt, which is the separate
-  complementary boundary for scan/sort work (it can fire zero
-  callbacks).
-- The progress callback counts approximate virtual-machine progress
-  only: it is not a CPU, wall-time, memory or I/O bound, it fires zero
-  callbacks when a scan completes within less than one armed interval
-  (measured empty-table case), and a fetch/`LIMIT` cap alone cannot
-  stop scan/sort work - the statement, row and callback boundaries are
-  the declared quotas, and the native interrupt is the complementary
-  boundary for that work.
-- Fallback is the completed-original contract of order 016-a,
-  unchanged: early exhaustion returns the exact completed original
-  with zero edits and zero review calls, late exhaustion aborts the
-  whole optional pass from the immutable original (no earlier accepted
-  edit survives; the actual review call and known or unknown usage are
-  preserved), and the next request starts a fresh budget.
-- A caller-control exception raised inside the native callback
-  (KeyboardInterrupt, MemoryError or any other BaseException) is
-  preserved on the budget state and re-raised with its exact identity
-  after owned connection cleanup, because native SQLite would
-  otherwise convert it to an opaque OperationalError; non-budget
-  failures keep their existing fixed labels (unavailable, corrupt,
-  incompatible, invalid count, locked, unsupported journal), and the
-  existing per-query busy wait remains a lock wait, not a lookup-work
-  budget.  Cleanup priority keeps the first caller control of the
-  current owned operation as the exact propagating identity over
-  later cleanup failures (including a later distinct control), and a
-  pending ordinary exception never swallows a later cleanup control
-  (MemoryError is caller control although it subclasses Exception);
-  the current operation's pending exception is explicitly tracked
-  through its own exception/cleanup path, so an already-handled
-  control in an outer frame (ambient exception context) is never
-  authority to suppress a new cleanup failure; the policy applies at
-  the cursor cleanup and the handler/connection teardown.
-- No new deadline, operator knob, environment/request configuration or
-  retry was added; the other 38 concept Python files and all 12 old
-  test modules are frozen against the accepted base.
-
-## UTF-8-safe main body capture with an elapsed body budget (order 017-a)
-
-Main response BODY collection after headers are available is bounded
-and wire-fragmentation-safe through the new `capture_transport.py`
-module:
-
-- One finite positive monotonic BODY deadline is anchored at
-  collection entry and governs declared Content-Length,
-  close-delimited and chunked delivery (the operator value
-  `CONCEPT_TIMEOUT`); byte arrival never resets it, and nonfinite or
-  nonpositive operator values are rejected before any bind allocation.
-  The raw body byte bound (`MAIN_BODY_MAX_BYTES`, 8,000,000 bytes) is
-  independent of code points.
-- Wire chunk boundaries may split a UTF-8 code point: the possibly
-  incomplete trailing sequence is carried until the body is known
-  complete, where a truncated or genuinely invalid encoding is a
-  bounded main failure. Raw bytes, Unicode and CRLF are preserved;
-  there is no ignore/replacement decoding, normalization, substring
-  recovery or answer regeneration.
-- Declared Content-Length bodies deliver exactly the advertised bytes:
-  early EOF is a bounded main failure and over-read bytes beyond the
-  declaration are ignored. Only unknown-length delivery may terminate
-  at the delimited SSE terminal marker (keep-alive without EOF;
-  over-reads buffered during header parsing are drained without
-  entering the stdlib chunk decoder or its connection-closing read
-  paths).
-- Chunked bodies are decoded by a bounded owned framing state machine
-  (finite size-line and trailer length and count guards) ending at the
-  terminating zero chunk. The stdlib chunked decoder is deliberately
-  not used: its per-read blocking sub-reads (chunk-size lines, CRLF
-  discards, trailer lines) cannot respect an elapsed deadline, and it
-  closes the connection file object on protocol completion.
-- Bounded main failures (body timeout, hard byte limit, premature EOF,
-  incomplete SSE, malformed main) return 502 with zero review calls;
-  no CPU, evidence or review work starts before capture completes, and
-  all owned transport handles are closed so no transport outlives the
-  request.
-- Useful JSON/SSE repair, one batch, exact original spans, protected
-  Unicode/code/math/HTML/links, client history, credentials,
-  main/reviewer usage and metadata contracts are unchanged.
-
-The header phase (slow response headers with a fast body) is not
-covered by the body budget; order 018-a bounds it separately below.
-
-## Independent elapsed response-header budget (order 018-a)
-
-Main response STATUS/HEADER acquisition is bounded by an independent
-elapsed budget through the new `header_transport.py` module:
-
-- One finite positive monotonic HEADER deadline is anchored
-  immediately before acquisition (before the owned guard starts), so
-  guard startup overhead is not concealed; byte arrival and
-  legitimate interim 100 responses never reset it. The constructor
-  parameter `header_timeout` is keyword-only, appended after the
-  existing positional parameters, and defaults to
-  `MAIN_HEADER_TIMEOUT_SECONDS` (30 s); the normal `main()` entry
-  reads the operator environment value `CONCEPT_HEADER_TIMEOUT` with
-  that default, and nonnumeric, bool, nonfinite or nonpositive values
-  are rejected before any bind allocation.
-- The stdlib `getresponse` parser is retained unchanged and runs on
-  the owning calling thread; the owned guard is a pure timer that
-  owns only a bounded event wait plus a shutdown of the exact
-  captured owned socket object, so it never touches another owned
-  connection. The guard is cancelled and actually joined on both
-  success and failure before any classification or transfer; no
-  header work outlives acquisition.
-- A racing or late parser return after the deadline is explicitly
-  closed and never transferred (completion racing expiration loses to
-  expiration). Bounded header failures (slow status line, slow
-  header lines, interim 100 drip, hanging upstream that never sends
-  a status line) return 502 with zero review calls and zero engine
-  analysis before valid capture, and the same proxy recovers on the
-  next healthy request.
-- The body deadline (`capture_transport`, `CONCEPT_TIMEOUT`) begins
-  later and remains independent in both directions: a body arriving
-  after the header budget but within the body budget succeeds, and
-  slow headers under a generous header budget with a short body
-  budget succeed.
-
-Actual HTTP and real-TLS coverage includes fast-header positives with
-real wire UTF-8, a useful two-target repair that applies both
-supported edits while preserving protected code, TeX, HTML, link and
-an NFC-unstable decomposed/combining line exactly in the final
-composed answer, expiration recovery, other-connection isolation, and
-subprocess children with finite parent deadlines and process-group
-kill/reap. NOT covered: DNS resolution, connect and request upload
-(these occur before header acquisition and stay outside the header
-budget), incoming client timeouts, reviewer-total, total wall-clock
-budgeting, admission control, fairness, disconnect handling,
-cancellation, CPU limits, quality, or live service/packaging
-qualification.
-
-## Bounded final response delivery (order 021-a)
-
-Final response emission on the accepted client socket is bounded by
-an independent elapsed delivery budget through the new
-`delivery_transport.py` module:
-
-- One finite positive monotonic DELIVERY deadline is anchored
-  immediately before final response emission (status line,
-  headers, body and the actual flush) and before the owned delivery
-  guard starts, so guard startup overhead is not concealed.
-  Response-ready work - upstream main capture and optional repair -
-  completes first and stays outside this phase. The constructor
-  parameter `delivery_timeout` is keyword-only, appended after
-  `client_timeout`, and defaults to
-  `CLIENT_DELIVERY_TIMEOUT_SECONDS` (30 s); the normal `main()`
-  entry reads the operator environment value
-  `CONCEPT_DELIVERY_TIMEOUT` with that default, and bool,
-  nonnumeric, zero, negative, nonfinite or platform-unrepresentable
-  values are rejected before any bind allocation.
-- Byte progress, short writes, phase transitions and internal
-  retries never reset the deadline; a per-write idle socket timeout
-  alone would not bound a slowly reading client. A late or racing
-  completion loses to expiry: deadline expiry prevents acceptance
-  of late results, while the owned guard thread is cancelled and
-  actually joined before return (cleanup and OS scheduling can add
-  elapsed time; no hard-real-time return guarantee).
-- The owned guard is a pure timer that owns only a bounded event
-  wait plus a shutdown of the exact captured accepted socket
-  object, so it never touches another connection. The guard is
-  cancelled and actually joined on every path - success, timeout,
-  early disconnect, write or flush error, exception and startup
-  failure (including a thread that started and already ended before
-  start raises; a never-started thread is never joined) - so no
-  delivery work outlives the response and no guard is armed during
-  the next connection or downstream work.
-- Every post-intake response write is bounded: completed 200 JSON
-  and delayed SSE, unchanged bypass, an actual non-200 upstream
-  status/body (kept, not blanketed to 502), the fixed content-free
-  contract 400, capture/protocol 502 and existing generated
-  post-intake errors. A delivery timeout or failure closes quietly
-  with no body logging; once any response emission began, no second
-  response, status, 502 or fallback original is attempted on that
-  socket, and a failed send before any byte is closed safely
-  without recursive retry. Early parser, path and framing errors
-  remain bounded by their existing intake lifecycle (existing
-  intake errors remain bounded best effort) and are not newly under
-  this delivery guard; the delivery deadline covers post-intake
-  response emission only. Local kernel acceptance of the bytes is
-  not proof the peer received or read them; no delivery
-  acknowledgment is claimed.
-- The delivery budget is independent of the intake, header,
-  body/socket and 15-second reviewer budgets: a healthy main/review
-  phase may outlast a short delivery budget before the delivery
-  deadline anchors, and a stalled or slowly reading client is
-  closed boundedly while the same proxy recovers on the next
-  healthy request.
-
-Actual loopback coverage includes a nonreading client that stalls
-at the bounded write and is closed by the handler without the
-fixture closing first, a matched slowly reading paced pair where
-progress would defeat an idle-only timeout, measured
-status/header/body/flush phase boundaries, including the
-cumulative case where each observed phase is below budget but the
-total is over it (with generous positive controls on the same
-producer), successful completion,
-deadline races and late completion, early disconnect, write and
-flush failure, before-start/after-start/already-ended startup
-failures with observed joins of exact owned threads and sockets,
-genuinely late other-connection traffic (B's TCP connect is
-established while A is in flight) whose first request bytes are
-sent only after A's real guard is released and actually joined and
-the original deadline passed, and an owned finite parent-supervised
-hanging-client subprocess with bounded terminate/kill/reap. Phase
-timing uses controlled call-through delays at the real write and
-flush boundaries, clearly separated from those native wire
-proofs. NOT covered: main DNS resolution,
-connect and request upload (before the response phase), overall
-request/wall-clock/CPU/admission/fairness budgets, remote
-cancellation, and quality or live service/packaging qualification.
-
-## Bounded main-upstream setup (order 022-a)
-
-The main upstream's preparation and request-upload phase is
-bounded by an independent elapsed setup budget through the new
-`upstream_setup.py` module (with the exact repository-local
-`upstream_worker.py` child-side entry):
-
-- One finite positive monotonic SETUP deadline is anchored by the
-  owner (ConceptProxy.forward) at entry to the owned main forward
-  setup, BEFORE any worker/guard/process/IPC startup, resolver
-  call, connect/TLS or request emission, so startup overhead is
-  not concealed. It covers owned transport startup, address
-  resolution, bounded address attempts, the TCP connection, the
-  TLS handshake and the entire request write through the last body
-  byte handed to the local transport. The constructor parameter
-  `setup_timeout` is keyword-only, appended after
-  `delivery_timeout`, and defaults to
-  `MAIN_SETUP_TIMEOUT_SECONDS` (30 s); the normal `main()` entry
-  reads the operator environment value `CONCEPT_SETUP_TIMEOUT`
-  with that default, and bool, nonnumeric, zero, negative,
-  nonfinite or platform-unrepresentable values are rejected before
-  any bind allocation and revalidated at use; an explicit upstream
-  port 0 is rejected with the full 16-bit port meaning (never
-  aliased to the scheme default).
-- Byte progress, short writes, address attempts and phase
-  transitions never reset the deadline; a per-operation socket
-  timeout alone would not bound a phase composed of many short
-  blocking operations. Every blocking operation is therefore
-  additionally capped by the remaining deadline, and a pure timer
-  guard - which can interrupt only the exact socket object it
-  currently holds (adopted immediately before each potentially
-  blocking phase; an already-fired guard refuses to adopt) -
-  covers the phases a socket cap alone cannot express (TLS
-  handshake, request write). A late or racing setup completion
-  loses to expiry: deadline expiry prevents acceptance of late
-  results, while the owned guard thread and any owned child are
-  cancelled, terminated and actually joined/reaped before return
-  (cleanup and OS scheduling can add elapsed time past the
-  deadline before the bounded return; no hard-real-time
-  guarantee).
-- The resolver runs in the owned finite stdlib child because no
-  parent socket exists yet for a timer to interrupt: a timer
-  cannot interrupt getaddrinfo merely by closing a socket that
-  does not exist, and timing out a Future/daemon thread does not
-  cancel it. The child is one ordinary owned process - exact argv
-  array, isolated interpreter flags (-I -S -B), empty
-  environment, no shell, no model or agent - speaking the strict
-  versioned USTX v1 frame protocol (8-byte big-endian
-  payload-length prefix; request payload at most 265 bytes =
-  10-byte header + host at most 255 UTF-8 bytes; response
-  payload at most 1065 bytes = 9-byte header + up to 16 entries of
-  2-byte overhead (one family byte + one address-length byte) plus
-  at most 64 address bytes; port 1-65535; exactly one
-  frame per direction, the request channel ending with EOF and
-  extra reply bytes rejected; wire maxima 273/1073 bytes
-  including the prefix; no body, credential or key data in the
-  resolver IPC) over private pipes, with the caps enforced on
-  both encode and decode; an
-  IP-literal host never reaches the child; at most one resolution
-  attempt occurs (no automatic retry); its stderr is silenced and
-  its stdout carries only the frame, so no raw exception text,
-  host or address can leak; the parent's pipe descriptors are
-  nonblocking (POSIX fcntl on the qualified Linux/Python 3.12
-  environment) and every partial write/read and readiness race is
-  governed by the remaining deadline; on expiry the parent
-  terminates and actually reaps the exact child.
-- A successful setup releases its clock (the guard is cancelled
-  and actually joined, including a thread that actually started
-  before a startup failure and a never-started thread that is
-  never joined) BEFORE actual response-header acquisition; the
-  existing header/body, intake and delivery clocks then run as
-  before on their own independent axes. Setup failure is a main
-  failure: the handler's existing fixed content-free 502 path
-  with zero engine, corpus or reviewer work and no fabricated
-  completion, and the same actual proxy answers the next healthy
-  request after the failed request's original deadline has passed
-  and its guard has been actually joined: that healthy request
-  anchors and runs under its OWN FRESH setup deadline, so a
-  passed deadline is never accepted. Local write
-  completion is not peer receipt or model-execution
-  acknowledgment; no delivery acknowledgment is claimed.
-
-Actual loopback coverage includes: setup-budget validator
-boundaries (rejected bool, nonnumeric, zero, negative, nonfinite
-and platform-unrepresentable values; accepted finite positives);
-the strict versioned frame codec (trailing and malformed frames,
-per-field caps at decode); the owned guard lifecycle (exact-socket
-interruption, adopt refusal after expiry, partial-startup
-containment with observed owner joins of the exact known threads);
-the real owned resolver child (argv/env/reaping observations,
-literal fast path, deadline expiry with terminate/kill/reap, late
-and racing completion, controlled call-through delay, controlled
-caller interruption during the real start seam before and after
-actual child creation); the real
-forward setup phases against owned loopback HTTP and TLS
-endpoints (stalled TLS handshake, nonreading and slow-reading
-upload, the cumulative case where each observed phase fits but the
-sum expires at the anchored budget, with generous same-producer
-positive controls that reach the actual producer, bounded connect
-attempts, the exact forwarded header allowlist); the same actual
-proxy answering a healthy request after a failed setup: the
-failed request's original deadline is already passed and its
-guard actually joined before the later request bytes, and the
-healthy request succeeds under its own fresh anchored setup
-deadline (not the passed one) - fixed content-free 502 first,
-zero engine/corpus/reviewer work, then the exact original
-answer; and the real constructor/main default,
-override and invalid-before-bind behavior plus real-stack JSON and
-paced delayed-SSE integration (useful two-target repair,
-no-suspicion zero-review exact bytes, completed-original optional
-review failure, failed-message bypass, real non-200 passthrough
-with zero work, bounded synthetic canary evidence, default tracing
-off), all under finite owned parent supervision where hanging
-cases require it. NOT covered: overall
-request/wall-clock/CPU/admission/fairness budgeting, remote
-cancellation, packaged library/morphology/quality/live
-qualification, and any live DNS, service or model.
-
-
-## Bounded analysis eligibility (order 025-a)
-
-The completed answer admitted to the OPTIONAL analysis pass
-(detection, evidence lookup, review) in the runnable proxy is bounded
-by two independent finite limits on the ORIGINAL captured text
-(the new `analysis_policy.py` module), resolved from versioned
-config defaults:
-
-- `RUNTIME_ANALYSIS_MAX_CODEPOINTS` (32,768 code points) and
-  `RUNTIME_ANALYSIS_MAX_UTF8_BYTES` (131,072 strict UTF-8 bytes).
-  These are finite initial engineering defaults, not measured model
-  optima.  The units are distinct quantities (code points are never
-  bytes), the byte allowance is at least the codepoint allowance,
-  and each real use re-reads the CURRENT config (never an import-time
-  copy, no global usage state).  Exact limit values admit on both
-  axes.  The values change only through these validated versioned
-  defaults: no environment/CLI/operator knob, no coercion and no
-  retry exist; bool, None, zero, negative, float (including
-  nonfinite) and string values are rejected.
-- The policy is validated at two distinct points, with two distinct
-  failures: once at proxy startup, before any bind allocation, the
-  pure `analysis_policy.current_limits()` (it reads no file, model,
-  network or index) requires the CURRENT config default policy to
-  hold and fails with a plain `ValueError` when it does not - a
-  startup success is not a live inference proof, and the mandatory
-  normal-main Pandoc startup/version/capability check remains the
-  separate startup contract; and at every real use, an invalid
-  policy is an optional-analysis bypass that returns the exact
-  completed original with the fixed content-free
-  `ANALYSIS_POLICY_INVALID` reason and zero analysis/evidence/review
-  work.
-- The engine checks the gate at the top of `RepairEngine.repair`,
-  BEFORE resolve/protect/map/residual/tokenize/index/reviewer work:
-  first the exact original codepoint count (before any encoding),
-  then the strict original UTF-8 byte count measured with no NFC,
-  stripping or other transformation.  A codepoint count above the
-  limit bypasses without encoding; a byte count above the limit
-  bypasses; exact limit values admit.  An original that cannot be
-  encoded to UTF-8 (a lone surrogate) bypasses with
-  `ANALYSIS_ENCODING_INVALID`; an ordinary exceedance of either
-  size axis bypasses with `ANALYSIS_SIZE_EXCEEDED`.  The gate
-  translates only the declared policy (`ValueError`) and encoding
-  (`UnicodeEncodeError`) conditions; caller control and MemoryError
-  propagate untouched.  Nothing is truncated, split, sampled or
-  partially repaired.
-- A bypass is neither a Pandoc/protection error nor an evidence
-  failure: the local trace records a separate content-free
-  `analysis_bypass` reason field with the existing zero-call trace
-  shape, empty edits/targets and explicit unknown reviewer usage
-  (never an invented zero and never an earlier request's usage), and
-  no client-visible diagnostic text, logging, raw-text persistence
-  or metrics schema is added.  An optional detail whose completed
-  original the canonical UTF-8 trace serializer cannot represent
-  (an unpaired surrogate) is omitted: that single trace detail/file
-  is skipped before any temporary allocation, leaving no trace file
-  and no empty temporary and no raw-text persistence, while the
-  in-memory reason, the zero-call shape, the usage observer and the
-  exact original delivery continue unchanged.  Admitted answers run
-  the mandatory
-  Pandoc pipeline, all original-slice protection, the true read-only
-  SQLite and the actual reviewer/acceptance/patch behavior unchanged,
-  and true parser/evidence failures keep their existing labels when
-  the request is admitted through the gate.  The next request after
-  a bypass - including after scoped policy restoration - works, and
-  real positive known/unknown reviewer usage is unaffected.
-- The analysis limits are independent of the mandatory Pandoc input
-  cap, the main body/header budgets, the intake, delivery and setup
-  deadlines and the fixed 15-second reviewer exchange, and overall
-  request deadlines remain unimplemented.  This is finite analysis
-  INPUT eligibility only: it is not a CPU, wall-time, memory, I/O or
-  cancellation bound, and not a linguistic-quality, packaged-library,
-  ICA, milestone, release or deployment claim.  A smaller default can
-  reduce analysis coverage for long answers; that is explicitly
-  unmeasured and returns the safe completed original, not a quality
-  claim.  The numeric 025 negative-control evaluation seed remains
-  unclosed; this round remaps the identity to this bounded runtime
-  resource seam (see the roadmap coverage note).
-- New focused tests (`tests/test_analysis_policy.py`) prove the real
-  entry/startup/routing boundaries: pure default/N/N+1 count
-  semantics with the independent codepoint and strict UTF-8 axes and
-  unmodified original NFC/NFD/emoji/CRLF bytes; the nine invalid
-  values per field and the cross-field byte<codepoints rejection;
-  the real invalid `ConceptProxy` constructor failing before the
-  actual bind (occupied-port differential) and the at-use gate
-  preceding the intentionally missing index and Pandoc; the real
-  engine exact default 32768/32769 codepoint boundaries with
-  transparent call-through observers proving zero
-  parser/mapper/index/reviewer work on bypass; a byte-limit crossing
-  while the codepoint count fits under labelled test-only limits;
-  small synthetic useful repairs at the default and at selected
-  test-only limits with real Pandoc, read-only SQLite and the real
-  deterministic ResponsesReviewer over owned loopback-0 HTTP;
-  unencodable-original safe return with caller control untouched and
-  original normalization/formatting preserved on admitted patch
-  paths; fresh-request recovery after every bypass kind with
-  request-local usage; real proxy completed-JSON and delayed-SSE
-  round trips returning the exact captured raw main body unchanged
-  with zero review; and incomplete/error/unsupported main envelopes,
-  malformed JSON and the hard capture cap retaining their existing
-  pre-engine semantics.  The two scoped old modules keep their
-  unchanged >52k codepoint payloads under explicit valid
-  analysis-limit overrides (axis separation, not a default-policy
-  run), and the original Pandoc cap test keeps every assertion
-  behind the same scoped override; the two inherited `_walk_blocks`
-  argument casts are corrected identity-only to the narrow
-  dict-node list type (the recorded two-error strict baseline).
-
-## Bounded accepted-connection admission (order 026-a)
-
-Accepted-connection handling in the runnable proxy is bounded by the
-new `request_admission.py` module with exactly one active request plus
-at most 16 accepted waiting entries, resolved from versioned config
-defaults:
-
-- `PROXY_MAX_QUEUED_REQUESTS` (16 accepted waiting entries) and
-  `PROXY_QUEUE_WAIT_SECONDS` (2.0 queue-wait seconds).  These are
-  finite initial engineering defaults, not measured model optima.  The
-  CURRENT config values are read at construction into an immutable
-  per-instance policy: a running instance keeps its own policy under
-  later config changes, and an invalid default (bool, nonnumeric,
-  zero, negative, nonfinite or out-of-range - the out-of-range int is
-  rejected by integer comparison before any float conversion) fails
-  proxy startup with a plain `ValueError` before any bind allocation.
-  No knob, coercion, zero-disable or retry exists.
-- The accepting loop keeps accepting: while one active request is
-  held, later accepted connections wait (one finite FIFO of accepted
-  entries - no inline fast path that would leave accepted work in the
-  kernel backlog).  OS pre-accept backlog waiting is outside this
-  scope and is stated, not hidden.  Every accepted connection gets
-  one absolute monotonic queue deadline anchored at accept
-  (registration); byte arrival, phase transitions and legitimate
-  short reads never reset it.
-- One owned whole-handler worker (one handler thread; never a
-  thread per rejection) admits live unexpired accepted entries in
-  FIFO order - a fairness guarantee is not claimed.  Overfull
-  admission, deadline expiry, and close/shutdown while waiting each
-  close the exact connection with a fixed content-free 503 -
-  `REQUEST_QUEUE_FULL`, `REQUEST_QUEUE_TIMEOUT`, `REQUEST_QUEUE_CLOSED`
-  respectively - with zero main/analysis/evidence/review work and no
-  extra worker/thread allocation; an expired head cannot block a
-  later eligible entry, a late claim loses to elapsed expiry, and
-  rejected entries never reach main or repair.
-- Rejected, expired and closed entries release their exact ownership
-  (no unbounded completed-registry growth), so the same instance
-  keeps answering the next request; normal raw bodies, useful
-  repair, usage isolation and all pre-existing contracts are
-  unchanged.
-- The lifecycle is one owned monitor plus the single worker, both
-  owned by exact reference BEFORE their fallible start, and the
-  dispatch-readiness commit (flag plus notification under the owned
-  condition) is part of the same ownership region: any control
-  (KeyboardInterrupt, MemoryError or any other BaseException) from a
-  native start or from the readiness commit settles each reference
-  that actually started (ident set - still alive or already ended) -
-  stopped and actually joined - before the first control propagates;
-  a never-started thread is never joined, and one cleanup failure
-  neither skips a later owned resource nor replaces the first
-  current-operation control.
-- Close/shutdown stops admission, closes the listener (no further
-  accepts), rejects every pending waiting entry with the CLOSED code,
-  and actually joins the owned workers on the documented owning close
-  boundary; cleanup and OS scheduling can add elapsed time past the
-  deadline before the bounded return, with no hard-real-time return
-  guarantee.
-- The existing independent phase clocks (capture, intake, header,
-  delivery, setup and the fixed 15-second reviewer exchange) run
-  unchanged on their own axes.  Overall request/wall-clock/CPU/
-  fairness budgeting, remote cancellation and a true review-only
-  queue remain unimplemented (active cancellation implemented later
-  in round 030-a); this is bounded
-  accepted-connection admission only, with no queue-based MVP,
-  quality, ICA, milestone, release or deployment claim.  The numeric
-  026 split-integrity evaluation seed remains unclosed; this round
-  remaps the identity to this bounded admission seam (see the roadmap
-  coverage note).
-- New focused tests (`tests/test_request_admission.py`) prove the
-  actual controller and actual proxy boundaries on owned loopback-0
-  sockets/threads with the real engine (qualified Pandoc, real tiny
-  SQLite) and the real deterministic ResponsesReviewer against fake
-  main/review endpoints only: the pure policy invalid/valid matrix
-  and the real occupied-port constructor differential; actual
-  controller capacity, FIFO admission among live unexpired accepted
-  entries, overfull rejection without extra worker/thread allocation
-  or upstream access, and expired-head non-blocking of later
-  eligible entries; the readable-client exact timeout packet while
-  the active is held, the bounded nonreader close with the listener
-  unstalled, the late-claim loses-to-elapsed-expiry case under an
-  injected claim clock, and the exact claim-deadline equality case
-  (102.0 against a 100.0 plus 2.0 anchor) expiring with the fixed
-  TIMEOUT/close, zero handler run and fresh recovery; the
-  monitor/worker start-fault controls
-  (one-shot KI and pre-native-join MemoryError with observed real
-  joins of the exact known threads, a native start failure before
-  actual creation where no admission thread is ever created and the
-  never-started references are never joined, a deterministically
-  already-ended monitor actually joined by exact reference before
-  the failing start propagates, never-started threads never joined,
-  the readiness-commit control settling both started workers,
-  claim-clock controls consumed at the owning stop, the
-  dispatch-anchor control closing the accepted socket, an entry
-  allocation fault at the actual construction closing the accepted
-  socket with zero downstream, no leaked slot or thread and healthy
-  subsequent operation on the same controller, shutdown with active
-  and waiting work, the actual named intake-guard start
-  fault closing quietly with zero downstream and no canary in the
-  captured logs and same-instance recovery, and the dead accept loop
-  plus server_close with a preserved worker control); the exact
-  503 codes with zero downstream and the concurrent fake-upstream
-  positive control (direct probe while the active is held); two
-  admitted requests with useful repair and clean completion
-  fidelity; duplicate Content-Length 400 (not an admission 503),
-  non-200 upstream preservation, mode-mismatch 502, delayed SSE
-  byte-exact passthrough, and the intake-guard start-fault closed
-  quiet and recovery.  The ordered old-client privacy helper keeps
-  targeting the actual frozen `concept-client-intake-guard` thread.
-  The five changed Python files are the allowlist; every other
-  concept Python file and old test module is frozen against the
-  accepted base.
-
-
-## Independent support and composed-result validation (order 027-a)
-
-The final repair in the runnable proxy must use positive independent
-evidence and remain supported when all surviving changes are considered
-together.  This round corrects two observed validation gaps in the
-existing acceptance flow:
-
-- An explicit exact-zero local count can no longer count as positive
-  independent support.  The three local n-gram support checks in
-  `repair.accept` use one exact positive-support predicate (`EXACT`
-  state with a positive integer count).  A valid `EXACT(0)` row is a
-  valid datum but a known zero: it declines with the unchanged fixed
-  content-free `local-evidence-not-stronger` reason, a supported
-  positive-count control still repairs, and CENSORED/UNAVAILABLE
-  absence stays unknown - never coerced to zero, with no
-  unknown-as-zero, invented denominator, empirical calibration,
-  model-confidence acceptance, threshold programme or
-  different-length raw-count comparison introduced.
-- The composed result is revalidated under the prospective
-  combination of all surviving changes.  After the individual
-  acceptances (and only when none was late-aborted and at least one
-  edit survived), the new `composed_validation.py` module revalidates
-  each accepted edit by the REAL `accept()` against a validation view
-  composed of all OTHER surviving exact original-coordinate edits:
-  coordinates are rebased arithmetically using the exact original
-  edits (never ambiguous substring search), the selected span's
-  internal words are never its external neighbors (the external
-  neighbors are the whole tokens immediately outside the span),
-  protected intervals remain context barriers displaced by the same
-  exact arithmetic (no invented n-gram adjacency), and the exact
-  original slice is re-verified at the rebased span.  Two edits
-  interact when one edit's whole external neighbor token is contained
-  in the other edit's selected span; an actual interacting conflict
-  group is rejected as a whole (fixed content-free
-  `composed-context-rejected` on each of its final records) and
-  rebuilt from the immutable original with no winner, while
-  compatible multiple edits - far edits, expansion/contraction,
-  repeated occurrences with multiple decision IDs, multiword and
-  mixed-length original coordinates - survive in one answer.  The
-  final composition always uses original coordinates.
-- An unprovable validation mapping (rebased span out of range, exact
-  slice mismatch, or no token at the rebased span) raises
-  `ComposedMappingError`, and the WHOLE optional pass then
-  conservatively abstains to the completed original: every final
-  acceptance and decision record carries the fixed content-free
-  `composed-mapping-unprovable` disposition, the actual review call
-  count and the known or unknown reviewer usage are preserved, the
-  in-memory detail records the late evidence failure, and the exact
-  owned connection/cursor is released before return.  A known late
-  technical or budget failure keeps the existing late-abort
-  behavior; no broad catch hides a real failure under a PASS label,
-  caller-control and cleanup semantics are unchanged, and the
-  existing public trace/usage shape and finite content-free reason
-  labels are preserved.
-- Zero surviving edits preserves the original text and the supported
-  raw JSON/delayed-SSE envelope bytes; a useful compatible multi-edit
-  reply remains supported; main errors, incomplete output, hard
-  capture limits and unsupported structures retain their existing
-  semantics; and a healthy next request on the same proxy still
-  works.
-- New focused tests (`tests/test_composed_validation.py`, 30 tests)
-  in three layers: (i) DIRECT VALIDATOR tests that call
-  `validate_composed`/`accept`/`tokenize` directly against the real
-  read-only tiny SQLite with no Engine (the mapping-boundary
-  negatives - rebased slice mismatch, missing token, out-of-range
-  each raise while a supported record survives alone, ordinary group
-  rejection is not a mapping failure, and the protected barrier
-  rejects the member - with neighbor exclusion relative to the
-  current span: a span's internal words are never its own external
-  neighbors); (ii) ACTUAL ENGINE tests that run
-  `RepairEngine.repair` with the installed qualified Pandoc and real
-  read-only tiny SQLite, with the reviewer as the only faked
-  component outside the Engine and two disclosed bounded test-only
-  injections: preassigned multiword TARGET injection in the two
-  multiword cases (`_injected_detect` wraps the real detector, calls
-  it with the same arguments, discards its result and returns a
-  fixed multiword candidate tuple, because the real detector only
-  selects single-token spans - every downstream boundary, tokenize,
-  prepare, batch, acceptance, composed validation and apply, is
-  real), and the stale original-slice record-construction fault
-  (injected only at the actual owned `ComposedRecord`
-  construction) alongside the call-through accept observer. Engine
-  cases: the explicit zero-count decline with positive and CENSORED
-  controls (one review call, source/index unchanged), the actual
-  root composed-support reproducer with a single-edit positive
-  control, compatible scalar/far edits surviving, the
-  protected-interval barrier, repeated occurrences, the exact
-  n-gram-key sequence in which the internal span words are never
-  queried as neighbor keys (disclosed-target multiword case), the
-  late budget exhaustion at composed revalidation (completed
-  original, one call, known/unknown usage, 31 statements, owned
-  connection closed, fresh recovery), and the whole-pass
-  mapping-abort integration (completed original, both final records
-  false with the mapping reason, actual one review call,
-  known/unknown usage, the owned SQLite connection actually closed,
-  and same-engine recovery after the fault is removed); (iii)
-  ACTUAL HTTP tests over owned fake main/review endpoints on
-  loopback (JSON and delayed-SSE all-conflict raw envelope bytes,
-  useful compatible-edit result, same-proxy next-request health).
-  The multiword-target cases establish validation behavior for the
-  SUPPLIED target spans - conflict rejection and whole-span
-  external-neighbor mapping - not actual production of such spans
-  (no phrase producer); neighbor exclusion is relative to the
-  current span, not a claim that another span's words can never
-  appear in context queries.
-- The four changed/new Python files (the two existing changes in
-  `repair.py` and `proxy.py` and the two new files) are the allowlist;
-  every other concept Python file and old test module is frozen
-  against the accepted base.  This is finite validation correction of
-  existing strict-evidence/composition requirements in the runnable
-  proxy - not a new research programme, phrase producer,
-  packaged-library, milestone, ICA or deployment claim - and the
-  numeric 027 optional CPU-analyzer seed remains unclosed, remapped
-  to this bounded validation seam (see the roadmap coverage note);
-  the original analyzer scope is not executed and is not falsely
-  completed.
-
-## One runtime lexical-acceptance policy (order 028-a; fixture reconciliation 028-b)
-
-The runnable proxy now validates individual proposals and the composed
-result with ONE identical runtime lexical-acceptance policy (new module
-`runtime_acceptance.py`, reached by import routing only in `proxy.py`
-and `composed_validation.py`; every other function byte-frozen; the raw
-historical `repair.accept`/`apply_edits` path and the single-target
-evaluator stay frozen and separated - only the acceptance routing
-changed).
-
-- Structural guards (stale candidate/neighbor bounds, protected,
-  barrier, kept, wider-or-identity, control/newline, markup),
-  whole-token span tiling with the IMMEDIATELY adjacent proved neighbor
-  (a skipped word, a wrong occurrence, a partial word or an
-  inside-target neighbor is stale; unproved bounds cannot manufacture
-  support), bounded size (1-4 words, word-length sum 80), and a
-  lexical-unit gate on every replacement unit AND every original-span
-  word (frozen tokenizer shape, only letters or the tokenizer's own
-  internal apostrophe/hyphen joiners; digits, symbols and machine
-  fragments are never valid words).
-- An EXACT positive replacement unigram is required, then two routes
-  decide: an ordinary word or phrase proposal needs at least one
-  matching EXACT comparable same-order fixed-anchor original/replacement
-  context with candidate count >= 2*max(original context count,1) and no
-  weaker known corresponding context; this route applies even when the
-  original unigram is UNAVAILABLE (a distant unknown original whose
-  original N-gram context is known), and unknown original context
-  supplies no support. A separate narrow possible-typo route permits an
-  UNAVAILABLE/nonpositive single-word original at exactly one casefolded
-  code-point edit from an EXACT positive known single replacement (both
-  units at least 3 code points) with actual positive adjacent context and
-  no opposing known local context. Unknown original context is never
-  zero, a known-zero replacement context opposes, and no model
-  confidence, popularity, threshold programme or different-length raw
-  count authorizes. The factor-two guard and the typo route are
-  uncalibrated contained engineering policy, not quality results.
-- Useful supported word changes and disclosed preassigned phrase
-  CONSUMER changes survive (the real detector still produces only
-  single-token candidates - these cases prove the consumer boundary,
-  not a phrase producer), and unsupported changes abstain with the
-  exact completed original, the actual review call/usage and the exact
-  owned cleanup preserved.
-- OLD frozen fixtures under the stricter policy: the two
-  real-Pandoc success tests in `tests/test_pandoc_protection.py` (the
-  old presenetliv->tako positive lacks explicit original-context rows
-  in the byte-frozen fixture) and the five useful-repair tests in
-  `tests/test_analysis_policy.py` (the old aaa->repla positive has no
-  original evidence and declines with local-evidence-not-stronger;
-  strategy's isolated legacy-routing control with both accept
-  references bound to the frozen historical repair.accept passes the
-  original frozen test, showing the earliest changed predicate is the
-  mandated policy against this old fixture premise, not a broken
-  analysis gate) were truthfully retained as 028-a's failures with
-  both files byte-frozen; the same-PR corrective round 028-b
-  applied the bounded migrations privately qualified by strategy -
-  the one explicit Pandoc original-context row, the three-expression
-  Analysis fixture (39-codepoint/39-byte input preserved, 40 output)
-  and one real-detector positive regression for a distant unknown
-  original admitted by the ordinary factor-two route - after which
-  the full 17-module suite passed (804 tests, 321 subtests) with the
-  runtime policy and every other source byte-frozen.
-- Historical 028-a scope: its eight changed/new Python files were the
-  A allowlist, with the other 43 concept Python files and 12 old test
-  modules frozen against the accepted base. The 028-b delta is exactly
-  three test files (the two previously frozen old fixture modules plus
-  the A-new runtime-acceptance test module); the other 48 concept
-  Python files and the other 14 current test modules are unchanged
-  relative to the A head. Cumulative from the accepted base to the
-  current head, the changed Python scope is exactly ten paths (eight
-  existing plus the two new files of 028-a), with the other 41 concept
-  Python files and the other 10 old test modules frozen. The current B
-  carries 12 non-report changed paths (order, active, five docs,
-  research counter, manifest and the three test files); of those, only
-  the three test files are Python. This is finite validation
-  correction of the existing strict-evidence/composition requirements
-  in the runnable proxy - not a new research programme, phrase
-  producer, packaged-library, milestone, ICA or deployment claim.
-
-## Runtime word/phrase target selection (order 029-a halted / 029-b implemented)
-
-Round 029-a (2026-11-10) was ordered to add bounded runtime word and phrase target selection to the runnable proxy (new `runtime_detection.py` plus import routing only in `proxy.py`; planned final scope 53 Python files/18 test modules). Strategy halted the implementation before the first product change after the actual-source finding that the preserved read-only index has zero known bigram/trigram counts at or below the issued absolute threshold (bigram/trigram minimum 2270, unigram minimum 272), so the issued weak-context route is unreachable on that source. No module, test or product change was made: all 51 concept Python files remain byte-frozen at the accepted base, and the runnable runtime selector remains the frozen raw detector's rare/unknown single-word behavior. 029-a published as PARTIAL safe prerequisite/publication. Round 029-b (2026-11-10, same PR 31) then implemented the corrected selector as a NEW `runtime_detection.py` reached by import routing ONLY in `proxy.py` (the other 50 concept Python files and all 17 pre-existing test modules byte-frozen): it preserves the frozen raw detector's legacy rare/unknown single-word scoring for eligible full lexical units (the new common lexical/maximal-original/grapheme gate intentionally excludes raw nonlexical units and machine fragments before review, so all raw legacy inputs are not claimed behavior-identical) and adds, on the already-collected once-per-all-token evidence (exact owned schedule 5 schema + 5N-6 data per pass; no extra query, no new table, no core injection), (1) a local-context-only fixed-anchor word alarm (score 0.4) - lowercase lexical candidate plus BOTH immediate anchors, EXACT unigrams strictly above the threshold on all three, both adjacent bigrams EXACT positive, centered trigram EXACT with count >= 0 (factor max(C,1)), ASCII space/tab gaps, and a DISTINCT casefolded middle lexical alternative at >= 2*max(centered,1); identical/casefold-identical or non-lexical alternatives NEVER support (genuine high-count 6000-vs-3000 negatives); (2) a grouped phrase target (score 0.45) over maximal source-adjacent alarm runs (one unit stays a word, 2-4 units within 128 code points become ONE exact original slice including its whitespace, over-4/over-128 yields NO targets at all); (3) a shared maximal-original/grapheme gate before ANY target assignment (digits, underscores, grapheme joiners, Cf and unsafe controls excluded; ordinary space/TAB/LF/CR prose boundaries - which the frozen pandoc_protection.grapheme_boundary_sensitive proves form their own graphemes - keep a full word eligible); and (4) the safe non-positive maximum. New context alarms and phrase grouping never cross LF/CR; no denominator, probability, absolute cutoff or threshold programme exists, CENSORED/UNAVAILABLE stays unknown and never zero, and ranked alternatives are never sent to the reviewer. The focused test module (64 tests plus 16 subtests) covers the direct-selector contract, the genuine high-alternative negatives and the explicit three-unit phrase over real owned SQLite, the real RepairEngine with real qualified Pandoc (useful word/phrase one-review accepted-independent-evidence, keep/wider noop, invalid/oversize/nonlexical rejection, safe-known zero calls, index bytes unchanged), and the actual ConceptProxy HTTP round trips (JSON word one-review; SSE phrase with a controlled main-completion barrier proving zero review and no response bytes while main remains incomplete, a real concurrent client, real delayed review of one WHOLE phrase with all copies consistent and no original leak, and a same-proxy zero-review follow-up whose recorded operator usage observation proves no usage carry-over). The root actual new-detect + actual-RuntimeCorpus replay on the preserved read-only index (SHA-256 f769235b6af3412e65f0875f4d08231c832f60d8630b43a06ab927c2d32c739f) selected ONE exact WORD and ONE genuine two-unit PHRASE from real attested records (SQL 14/19, exact original code-point bounds, module and index bytes stable, zero model calls) - producer reachability only. Final full-18: 868 passed in 595.06 s, literal returncode 0, all 53 source maps stable; strict3 mypy clean on the three actual files and Ruff clean on the three actual paths. This is not a new research programme, phrase-producer quality result, packaged-library, milestone, ICA or deployment claim.
-
-## Request-scoped cancellation on client disconnect (order 030-a)
-
-Round 030-a (2026-11-10, branch oap/030-request-cancellation from accepted main 556b9ef21abecc621c9a134c544ae1cdf7010ad8) implemented request-scoped cancellation in the runnable proxy for client disconnects observed AFTER the fully valid ingress, until final delivery: a new `request_lifecycle.py` module (one per-request CancellationScope over the exact accepted socket; one bounded synchronous first check that catches an already-unusable accepted connection, plus the one bounded poll watcher on the disconnect-only poll mask POLLRDHUP|POLLHUP|POLLERR|POLLNVAL (decimal 8248 / hex 0x2038 on the selected native Linux runtime) with POLLIN deliberately excluded, so an unread tail on a live peer never cancels - the POLLRDHUP bit is the one that proves a FIN even behind unread tail  while a FIN/RST on the exact socket cancels and a POLLNVAL/closed descriptor during the watch stops the watcher WITHOUT setting the cancel (never acted on as a cancellation, no foreign FD acted on); capability validated before any bind allocation; every watcher iteration one bounded 50 ms slice that never resets a budget; finish actually stops and joins the owned watcher before releasing the socket) plus phase-cooperation seams in the seven modified existing files (proxy.py, upstream_setup.py, header_transport.py, capture_transport.py, review_transport.py, pandoc_protection.py and runtime_corpus.py - delivery_transport.py FROZEN, its delivery-entry cooperation in the Handler): nine Python paths total with the two NEW files (request_lifecycle.py, tests/test_request_cancellation.py); the other 46 concept Python files and all 18 pre-existing test modules byte-frozen. A pre-entry cancellation starts zero main/review work (zero owned child/dispatch at the named boundary); an already-started owned phase is terminated and actually reaped, its sockets/corpus/cursors closed and its guards/watchers actually joined as applicable, and the contained RequestCancelled propagates TO the Handler catch, where it is contained before any ordinary fallback/admission (no broad catch, no content-bearing trace) and converted to the quiet abort with the exact owned cleanup actually joined. The pre-dispatch exchange boundary at the actual `run_review_exchange` entry - after the pure frame/request bounds, before the attempted-dispatch marker and the owned launch - propagates an already-observed cancellation with zero child, zero HTTP POST and the marker still false (the root final-review correction; the full-19 that passed at those pre-fix bytes, 928 plus 350 subtests, is preserved as INTERIM evidence of the demonstrated missing R4/R7 check). Request-local accounting emits exactly one content-free observation with the correct 0/1 review-call count and known-or-unknown usage even on abort, with no carryover; ownership/control priority preserves the exact first pending nonordinary caller control identity over later cleanup, and when the pending control is ordinary, a cancellation or absent, the first later nonordinary cleanup control propagates after the cleanup (an ordinary pending never acquires authority to swallow a later MemoryError/KeyboardInterrupt; MemoryError is never 502'd into an ordinary response; guard threads receive explicit captured predicates and no ambient context supplies control authority). A fully valid SHUT_WR half-close remains documented-unsupported (the serious half-close counterargument is preserved in the order) and and the quiet client close is expected (the actual TCP FIN/RST tests establish the transport event separately; the direct-Handler and manual-Event rows are bounded unit phase evidence, not native peer RST proof). The owner-thread phase-entry boundaries whose frozen caller cannot forward an argument (the final-forward transport waits, the Pandoc owned runner, the read-only RuntimeCorpus constructor and the owned reviewer exchange) consult the per-thread current-scope slot, a no-op outside an active request - no ContextVar propagation, no caller bypass or header. Verification on the actual bytes: the new test module 63 passed plus 13 subtests; the named focused set 316 passed plus 93 subtests; strict mypy clean on the byte-identical flat nine-file shadow (and a seven-file precheck shadow) and Ruff clean on the nine actual paths; the INTERIM full-19 at the pre-fix bytes (928 plus 350 subtests, exit 0, preserved) and the NEW final stable 19-module suite 931 passed plus 350 subtests in 633.77 s with literal returncode 0 and all 55 source maps stable. Zero scientific model calls; no linguistic quality, packaged-library, milestone, ICA or deployment claim.
-
-## Owned entry-point close and reviewer-only operator deadline (order 031-b)
-
-Round 031-b (2026-11-10, same branch/PR 33, accepted base main
-3bd6ffdd96bda95bd4c6de447b56cce76fe5a058) made two bounded
-corrections to the actual `proxy.main()` entry point (product delta:
-`proxy.py` plus the new focused `tests/test_main_lifecycle.py`; the
-other 54 concept Python files and all 19 pre-existing test modules
-byte-frozen):
-
-- Owned close on every exit: after successful `ConceptProxy`
-  construction, `main()` now closes that exact owned server on normal
-  `serve_forever()` return and on every unwind (KeyboardInterrupt,
-  SystemExit, MemoryError) through the documented owning
-  `server_close()` boundary: admission stops, every waiting entry is
-  canceled/closed with the fixed closed code, the exact owned
-  workers are actually joined, and the accepting-loop listener is
-  closed. No `shutdown()` from the serving thread, no daemonized
-  workers, no dropped join, no optional-repair fallback, and all
-  other runtime behavior stays frozen.
-- First-control priority: the exact first pending nonordinary caller
-  control object (including MemoryError) keeps priority over later
-  cleanup failures; an ordinary pending error cannot suppress a
-  later nonordinary cleanup control; with no pending error the
-  cleanup failure propagates. The settlement catch re-raises the
-  applicable original object and never converts it.
-- Reviewer-only operator setting `CONCEPT_REVIEWER_TIMEOUT`: absent,
-  `REVIEWER_HTTP_TIMEOUT_SECONDS` and its 15-second default are
-  unchanged; present, the value is parsed before any HTTP bind and
-  validated by the existing `ResponsesReviewer` constructor, which
-  rejects nonnumeric, nonpositive, NaN or infinite durations before
-  bind. The selected value keeps the one absolute whole-exchange
-  clock: one monotonic deadline anchored at review-batch entry covers
-  prompt preparation, owned child/IPC startup, resolver, connect, TLS,
-  request write, status, headers, body and result validation, and a
-  late or racing success is a failure. There is no retry, extra pass,
-  changed token cap, global HTTP clock, request/header override, or
-  coupling to the other independent budgets - the upstream capture
-  timeout (`CONCEPT_TIMEOUT`, socket/body axis), the response-header
-  budget (`CONCEPT_HEADER_TIMEOUT`, 30 s default), the incoming-intake
-  budget (`CONCEPT_REQUEST_TIMEOUT`, 30 s default), the final-delivery
-  budget (`CONCEPT_DELIVERY_TIMEOUT`, 30 s default) and the
-  main-upstream setup budget (`CONCEPT_SETUP_TIMEOUT`, 30 s default)
-  retain their own values.
-- Native operator configuration: 45 seconds is the explicitly
-  selected private native setting (one measured 22.453-second valid
-  reviewer response at a 45-second diagnostic budget, with the
-  15-second default budget failing under the same conditions). It is
-  a reversible operating setting, not a claimed optimum, and the
-  15-second default is preserved.
-
-The new focused module (`tests/test_main_lifecycle.py`) drives the
-ACTUAL `main()` in bounded owned children with the fixture changing
-only the hardcoded bind address to OS-assigned loopback port 0 and
-observing the real serve entry: normal serve completion, failed
-serve, nonordinary primary controls (KeyboardInterrupt, MemoryError,
-SystemExit) keeping their exact object identity over later ordinary
-or nonordinary cleanup failures, cleanup failure with an absent or
-ordinary primary, the reviewer setting absent (default 15) versus
-explicit 45 with the other budgets unchanged, invalid settings
-(nonnumeric, empty, nonpositive, NaN, infinity) rejected before
-listener creation, and native SIGINT proving natural process exit
-within a finite bound with actual owned thread/listener cleanup (a
-forced kill cannot establish PASS). This is a bounded defect repair
-with regression evidence, not a readiness, MVP, quality, packaged-
-library, ICA or deployment claim, and it publishes no target URL,
-credential or private resource path.
-
-## Unconditional defined-API logprobs removal (order 035-c)
-
-Round 035-c (2026-11-11, same branch/PR 37, accepted base main
-7dcd186fe394c1262bfe878ba5d6527b888fc317) implemented the owner's
-unconditional probability policy, superseding the order 015-a
-description where aligned `logprobs` could abstain the repair
-profile: the proxy provides no token probabilities. Defined Responses
-API `logprobs` are always removed from the recognized response
-locations, for every value (absence is a no-op; `null`, an empty
-list, a populated list, `false`, `0`, a string, an object, or any
-other unexpected JSON type are all removed identically, by key
-presence), independently of optional repair, in both the nonstreaming
-JSON path and the retained delayed SSE path. There is no operator
-switch, per-request flag, or eligibility interaction: on the 200
-repair path the removal happens before eligibility/repair, and on
-every non-200 main body the removal is applied to well-formed bodies
-selected by the ACTUAL upstream content type (independent of the
-declared request `stream` value), with malformed error bodies
-returned unchanged under the existing finite failure semantics.
-
-The recognized locations are the documented output_text
-representations: the top-level key of `response.output_text.delta`
-and `response.output_text.done` events, the `part` of
-`response.content_part.added` and `response.content_part.done` events,
-the message content parts of `response.output_item.added` and
-`response.output_item.done` events, and the nested
-`response.output` message content parts of the six lifecycle snapshot
-events (`response.created`, `response.in_progress`,
-`response.completed`, `response.incomplete`, `response.failed`,
-`response.queued`). Only those recognized representations are
-modified: every other field - ids, status, error, usage,
-`incomplete_details`, `metadata`, citations/annotations, protected
-reasoning, and same-named `logprobs` keys inside user data, tool
-items, unknown output variants, unknown event types or non-data SSE
-framing - remains exactly as delivered. Removal never recurses into
-user data and never matches by value or substring. When no removal
-was made and no edit is applied, the delivered bytes are exactly the
-received bytes; when a removal was made, the answer and delta strings
-stay identical to the upstream answer (metadata serialization of the
-re-serialized copies may change) unless a review correction is
-accepted, and an accepted correction still changes only the approved
-original spans and the established consistent SSE copies (order
-014-a/015-a semantics). A metadata-only removal therefore never sets
-the changed/text-edit flag. The request-side capability restriction
-is unchanged: a request `logprobs` or `include` key is still an
-unsupported capability rejected with 400 `REQUEST_UNSUPPORTED`
-before any forward, exactly as the order 015-a section above
-describes, and all malformed, incomplete, capture, cancellation and
-header-budget semantics remain as documented.
-
-Native qualification (order 035-d R6-R8) exercised this proxy against
-the authorized matching-RTX3090 endpoint with the qualified
-message-array input profile: `input` as a message list (for example
-one `{"role":"user","content":"..."}` message) is the profile that
-reached a valid 200 completed envelope on that provider, while the
-same provider rejected a plain string `input` with its own
-field-shape 400. That 400 is an upstream caller-format property of
-that endpoint, not a proxy defect: the proxy's request contract
-accepts both string and message-array inputs per the order 015-a
-section and forwards the validated request unchanged, and no
-universal provider compatibility is claimed.
-
-Round 035-d (2026-11-12, same branch/PR 37) demonstrated the full
-useful-repair path on the frozen 035-c runtime in a finite sequence
-of bounded owned native trials (concurrency 1, one review pass, zero
-auto-retry). Every executed trial returned HTTP 200 (11 executed MAIN
-POSTs; combined envelope scope 9 completed + 2 incomplete). The final
-qualifying pair ran under the two-deadline launcher (hard 150s child
-/ 180s parent clocks, ownership-safe group termination): its useful
-trial delivered one useful accepted correction - a single detector
-candidate, one observed validated review with known usage, and one
-approved exact original-span edit (6 codepoints replaced by 5) with
-all unapproved and protected slices verified identical by
-independent observers - and its clean trial proved the genuine fully
-observed clean zero-review control (0 candidates -> 0 review calls ->
-delivered answer identical). Five same-RTX review attempts were
-dispatched across the sequence; three returned observed validated
-batches with known usage and the other two remain unclassified from
-their retained observers. Two reviewed-but-unchanged trials (no
-accepted edit delivered; keep versus CPU rejection unknown from those
-observers) are never counted as clean controls. Two earlier
-no-candidate/no-review executions (attempts 15, 17) ran earlier
-harness revisions without the transform/span observer and are
-preserved as limited history. Earlier trials ran earlier harness or
-parent-only-launcher revisions with weaker supervision and are
-preserved and qualified at their own epochs, not retroactively
-upgraded. One trial at the default 1536-token output budget and one
-direct diagnostic at the same budget returned incomplete envelopes
-(single reasoning item, no completed assistant message; the
-diagnostic's usage showed output_tokens at the 1536 max and its
-incomplete reason is recorded only as a masked string type); the
-remaining trials used the 4096 budget authorized by that observed
-budget exhaustion. These are controlled functional-path examples at
-the real worker boundary: they prove the runnable MAIN -> REVIEW ->
-independent CPU acceptance -> approved patch -> final response path,
-not a natural-error rate, linguistic quality, statistical
-independence, or human acceptance. No universal provider compatibility
-is claimed.
+file binds the selected mode, threshold, prompt bytes/config identity,
+dataset hashes, and index identity; held-out execution refuses mismatches.
+Detector selection is separate from reviewer proposal and exact acceptance.
+Accepted edits are applied only to original spans right-to-left, with
+protected slices and all outside code points asserted unchanged.
+
+## Historical evaluation programme (not a lab prerequisite)
+
+The controlled split was deterministic and project-authored: dev had 16
+cases and held-out had 32, including `točnij`, `rjavo-zlati`, `lase`,
+`kitaraš/vokal`, `najslovnijih`, contextual constructions, typos,
+valid-word controls, mixed technical prose, Markdown, commands, URLs, and
+paths. The held-out report design covered raw/no-repair, detector-only,
+reviewer-decision, full conservative, unigram-only, and local-context
+ablations with denominators, candidate enrichment, recall, reviewer
+accuracy, accepted/correct/harmful/missed counts, protected changes,
+recovery, and latency.
+
+Under the frozen design, the held-out reviewer command and the eight-case
+collector command were required to run once per frozen round; real workload benefit or harm
+was to stay `AWAITING_HUMAN_REVIEW` until the owner labels the deterministic
+blinded sheet, and model self-review is not a human label. The design
+required the collector to use `codex exec --profile qwen-neumann` with
+explicit `CODEX_HOME`, provider/base URL overrides, `--ephemeral`, and a
+finite subprocess timeout, with its tool-loop case creating and reading
+`codex-tool-loop-proof.txt` in an owned disposable directory. Raw traces
+were to stay under the explicitly configured local trace root, and tracing
+disabled wrote nothing; a missing endpoint or invalid invocation was to be
+recorded once as an external availability/protocol failure, never converted
+into a quality success. This programme is historical record; it is not a
+current lab prerequisite and does not reopen a separate human dataset.
+
+## Chronology (historical order notes)
+
+Each row links the immutable order and report records; the full chronology
+lives in [docs/HISTORY.md](../docs/HISTORY.md) and Git.
+
+| Order | Established | Record |
+| --- | --- | --- |
+| 013-a | Mandatory pinned Pandoc with exact original spans; no regex-only structural path. | [order](../oap/orders/013-a-pandoc-original-span-protection.md) · [report](../oap/reports/013-a-pandoc-original-span-protection.md) |
+| 014-a | Bounded occurrence-addressed reviewer batch with one strict result shape per target. | [order](../oap/orders/014-a-bounded-occurrence-review-batch.md) · [report](../oap/reports/014-a-bounded-occurrence-review-batch.md) |
+| 015-a | Explicit supported Responses contract for text and metadata. | [order](../oap/orders/015-a-supported-responses-contract.md) · [report](../oap/reports/015-a-supported-responses-contract.md) |
+| 016-a | Read-only runtime evidence lookup and completed-original fallback. | [order](../oap/orders/016-a-runtime-evidence-fallback.md) · [report](../oap/reports/016-a-runtime-evidence-fallback.md) |
+| 017-a | UTF-8-safe main body capture with an elapsed body budget. | [order](../oap/orders/017-a-main-body-capture.md) · [report](../oap/reports/017-a-main-body-capture.md) |
+| 018-a | Independent elapsed response-header budget. | [order](../oap/orders/018-a-response-header-budget.md) · [report](../oap/reports/018-a-response-header-budget.md) |
+| 021-a | Bounded final response delivery. | [order](../oap/orders/021-a-final-delivery.md) · [report](../oap/reports/021-a-final-delivery.md) |
+| 022-a | Bounded main-upstream setup. | [order](../oap/orders/022-a-upstream-setup.md) · [report](../oap/reports/022-a-upstream-setup.md) |
+| 023-a | Owned startup and partial-startup cleanup. | [order](../oap/orders/023-a-owned-startup.md) · [report](../oap/reports/023-a-owned-startup.md) |
+| 024-a | Finite runtime evidence lookup budget. | [order](../oap/orders/024-a-evidence-work.md) · [report](../oap/reports/024-a-evidence-work.md) |
+| 025-a | Bounded analysis eligibility. | [order](../oap/orders/025-a-analysis-eligibility.md) · [report](../oap/reports/025-a-analysis-eligibility.md) |
+| 026-a | Bounded accepted-connection admission. | [order](../oap/orders/026-a-request-admission.md) · [report](../oap/reports/026-a-request-admission.md) |
+| 027-a | Independent support and composed-result validation. | [order](../oap/orders/027-a-repair-validation.md) · [report](../oap/reports/027-a-repair-validation.md) |
+| 028-a | One runtime lexical-acceptance policy; 028-b fixture reconciliation. | [order](../oap/orders/028-a-runtime-acceptance.md) · [report](../oap/reports/028-a-runtime-acceptance.md) |
+| 029-a/029-b | Runtime word/phrase target selection (029-a halted, 029-b implemented). | [order](../oap/orders/029-b-runtime-detection.md) · [report](../oap/reports/029-b-runtime-detection.md) |
+| 030-a | Request-scoped cancellation on client disconnect. | [order](../oap/orders/030-a-request-cancellation.md) · [report](../oap/reports/030-a-request-cancellation.md) |
+| 031-b | Owned entry-point close and reviewer-only operator deadline. | [order](../oap/orders/031-b-close-proxy-and-preserve-order.md) · [report](../oap/reports/031-b-close-proxy-and-preserve-order.md) |
+| 035-c | Unconditional defined-API logprobs removal. | [order](../oap/orders/035-c-strip-defined-api-logprobs.md) · [report](../oap/reports/035-c-strip-defined-api-logprobs.md) |
+
+Earlier development orders (000–012) and the audit/closure rounds
+(032–036) are recorded in the same immutable records and summarized in
+[docs/HISTORY.md](../docs/HISTORY.md).

@@ -1,871 +1,896 @@
 {
-  "files": {
-    ".gitattributes": {
-      "bytes": 124,
-      "class": "generated",
-      "sha256": "4de1d6602aa4196a86181f931216c7df2ab9fc5621d27e0741e8053ff20874a3"
-    },
-    ".gitignore": {
-      "bytes": 4758,
-      "class": "immutable",
-      "sha256": "cf183863cc33dd5db00598cbbf5809eaa7ccfc82fca7d408120dc8f58b4df642"
-    },
-    "AGENTS.md": {
-      "bytes": 651,
-      "class": "generated",
-      "sha256": "118be17b2e9e5b50d628c796b136ee1b8154ebf844af0007839f65848fd69f09"
-    },
-    "ARCHITECTURE-for-agents.md": {
-      "bytes": 17086,
-      "class": "generated",
-      "sha256": "e83545d648b32263110f532d9425c785abdcd96be5e37d0ce055f57cc2ec9491"
-    },
-    "ARCHITECTURE.md": {
-      "bytes": 40194,
-      "class": "immutable",
-      "sha256": "a16e0f87bdb21f6920aa63119cf5be148b6c8b68bf1337c44006d54b7a7261f7"
-    },
-    "CRITICAL.md": {
-      "bytes": 10684,
-      "class": "immutable",
-      "sha256": "a9ea5fa5db2affabf0f85710f41e37e73b108c0236a58b7efb9c17cb36a07e9e"
-    },
-    "LICENSE": {
-      "bytes": 11357,
-      "class": "immutable",
-      "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
-    },
-    "OAP-COMMUNICATION-coding-agent.md": {
-      "bytes": 7270,
-      "class": "generated",
-      "sha256": "313d77900f9bbf1c974e76ea3f546083b117eeaac5f5fc2e964e77b3c19b9ccc"
-    },
-    "PLAN.md": {
-      "bytes": 45243,
-      "class": "immutable",
-      "sha256": "d2aa1d98cc5177ac6093ab3aeb79903b192780910ef2d1712839b474fb5adbf0"
-    },
-    "README.md": {
-      "bytes": 40331,
-      "class": "generated",
-      "sha256": "6064f2520e2a57bd34c249e748f16e83903c12328c591d09d8539976fa3911a1"
-    },
-    "SECURITY.md": {
-      "bytes": 1766,
-      "class": "generated",
-      "sha256": "d10f9a0d673bd84f91a27f4f24b8505bf966e3eb5825bdfbd9404e1385b6681e"
-    },
-    "STATUS.md": {
-      "bytes": 160110,
-      "class": "generated",
-      "sha256": "deb89c4f6ca62a8a71b89855788dead93b5f2f7a418dbefc068b67138f06521f"
-    },
-    "TESTING.md": {
-      "bytes": 1152,
-      "class": "generated",
-      "sha256": "68a3307289f684910281b9d4947336f3a390924e229e7aafce7212b4a0fcc5d1"
-    },
-    "docs/BOOTSTRAP-SOURCES.md": {
-      "bytes": 958,
-      "class": "generated",
-      "sha256": "045fbe3318d967d9286115c90eae0e13dcedc7059896c2753b17953d5cb88502"
-    },
-    "docs/CODEX-ROLE-SETUP.md": {
-      "bytes": 3047,
-      "class": "generated",
-      "sha256": "bfa090001de27d27a217924f586bee4d62c9d745f835792b606c9c428bf95b76"
-    },
-    "docs/DATA-SOURCES.md": {
-      "class": "generated",
-      "sha256": "7cac3fe2194dac30204741b07109df9a5e0111b63fa8510835b3b6d7087cbd4b",
-      "bytes": 13938
-    },
-    "docs/DECISION-POLICY.md": {
-      "bytes": 1960,
-      "class": "generated",
-      "sha256": "90bb5f21dbbecdc4105ff62f7b14853f02a97c3e3c38d78bd214312c1f7cb95a"
-    },
-    "docs/EVALUATION.md": {
-      "bytes": 1123,
-      "class": "generated",
-      "sha256": "530d3053b77123a0846e24e708a307ce9cbe399eb4b83a54fc4080749ee0f73d"
-    },
-    "docs/IMPLEMENTATION-ROADMAP.md": {
-      "bytes": 24757,
-      "class": "generated",
-      "sha256": "77133e034d7c0924654c7b1c7206a5213ca8fed2654cba30f60304fe0abcbb59"
-    },
-    "docs/LIVE-TEST-ENVIRONMENT.md": {
-      "bytes": 855,
-      "class": "generated",
-      "sha256": "90caaba5baf598b3aa280f4a25b8cb91efe199b50ba24d81071e37a959113529"
-    },
-    "docs/OAP-RUNBOOK.md": {
-      "class": "generated",
-      "sha256": "5520999408148c6520f0ed50630a3a4a07b9705b6f01f97690c3e62cc8cd3989",
-      "bytes": 10743
-    },
-    "docs/READINESS.md": {
-      "bytes": 7789,
-      "class": "generated",
-      "sha256": "227a61ba7fce9d599e01f1b84e9298371b6d18023f376d0f61b3e056d54c18b8"
-    },
-    "docs/WORKSPACE-PLACEMENT.md": {
-      "bytes": 2884,
-      "class": "generated",
-      "sha256": "acf16f7571fefe1563a934a2a4f9f46980f5da099a47cb46dfcec4857b2e2cec"
-    },
-    "docs/bootstrap/ARCHITECTURE.md": {
-      "bytes": 40194,
-      "class": "immutable",
-      "sha256": "a16e0f87bdb21f6920aa63119cf5be148b6c8b68bf1337c44006d54b7a7261f7"
-    },
-    "docs/bootstrap/BOOTSTRAP-GENERATOR.md": {
-      "bytes": 10695,
-      "class": "immutable",
-      "sha256": "b8e34ce58afc0cf8d6f4dbfe238237448dc1075ba2e4aff1e340938d8d35267e"
-    },
-    "docs/bootstrap/CRITICAL.md": {
-      "bytes": 10684,
-      "class": "immutable",
-      "sha256": "a9ea5fa5db2affabf0f85710f41e37e73b108c0236a58b7efb9c17cb36a07e9e"
-    },
-    "docs/bootstrap/INPUTS.sha256": {
-      "bytes": 1534,
-      "class": "immutable",
-      "sha256": "50decd1cc46f857f85c9faf74fb61d31c9a55836766cdf740e6d2f04fd551dc6"
-    },
-    "docs/bootstrap/INSTRUCTIONS.md": {
-      "bytes": 23453,
-      "class": "immutable",
-      "sha256": "bdbd1cdd4f544a50c08eacd456b761eb303b557a56b1b1ba7cb1afb3f4632f27"
-    },
-    "docs/bootstrap/PACKAGE-CHECKS.md": {
-      "bytes": 1586,
-      "class": "immutable",
-      "sha256": "18bbd0c1abdd22c48579b285d332c0d21c359d82686cb325659cf3b2e73a3f0b"
-    },
-    "docs/bootstrap/PACKAGE-MANIFEST.json": {
-      "bytes": 4941,
-      "class": "immutable",
-      "sha256": "9e0c0236597ce8735737417c22546884afc29c85f5c0178f2ed0f295a77c2897"
-    },
-    "docs/bootstrap/PLAN.md": {
-      "bytes": 45243,
-      "class": "immutable",
-      "sha256": "d2aa1d98cc5177ac6093ab3aeb79903b192780910ef2d1712839b474fb5adbf0"
-    },
-    "docs/bootstrap/README.md": {
-      "bytes": 3678,
-      "class": "immutable",
-      "sha256": "195a3d8450e82125cc2b3440a392a01623c433e8311569d599fd754406ce6425"
-    },
-    "docs/bootstrap/SOURCE-MAP.md": {
-      "bytes": 7411,
-      "class": "immutable",
-      "sha256": "39bae9031940113ab20c657aed7335d6ca776164a8ebe3285bb8e76c7ce3e5de"
-    },
-    "docs/bootstrap/sources/concentrated-oap.md": {
-      "bytes": 77512,
-      "class": "immutable",
-      "sha256": "9067c7e65f146b9fed19b903fd73e07f58d9b1163436761011a64702d14bf302"
-    },
-    "docs/bootstrap/sources/oap.md": {
-      "bytes": 84144,
-      "class": "immutable",
-      "sha256": "68f9610d1cea9ce8a4acbb3d5eea5133439624aa2fa85bfe03470b015b6732a5"
-    },
-    "docs/bootstrap/sources/product/ChatGPT-\u0160tevilo slovenskih besed-20260906-1413.md": {
-      "bytes": 30393,
-      "class": "immutable",
-      "sha256": "9b51c3e19db3769344fb91238a411b71f1e287dc06327df1e065c6085baf7c2a"
-    },
-    "docs/bootstrap/sources/product/deep-research-report (4).md": {
-      "bytes": 53782,
-      "class": "immutable",
-      "sha256": "a6e532021bbcbee8f8b6d1ff3c136972688c352b9e3a5e4aa1a29e0b1c1c1f2e"
-    },
-    "docs/bootstrap/specifications/BOOTSTRAP-ACCEPTANCE.md": {
-      "bytes": 12014,
-      "class": "immutable",
-      "sha256": "5a5616383474ca970b1e1cdfae76289bf4b0f41b004cd03779f6c2d4fa018b4f"
-    },
-    "docs/bootstrap/specifications/OAP-PROTOCOL.md": {
-      "bytes": 18705,
-      "class": "immutable",
-      "sha256": "57b35d7e4c5aba6500b7c2ef091664c1de2ab10aed8073643e6cd9c1104b1115"
-    },
-    "docs/bootstrap/specifications/ROLE-CONTEXT.md": {
-      "bytes": 14604,
-      "class": "immutable",
-      "sha256": "41a082f85f847ee86e2d064ae8a43e532de90958db99e14f1429e2f866cd6904"
-    },
-    "docs/bootstrap/specifications/WORK-PROGRAM.md": {
-      "bytes": 19561,
-      "class": "immutable",
-      "sha256": "b4e06a623619af6542af20fa84669e49b9a81b5e9fca5346203268b5fdab59fa"
-    },
-    "oap/.gitignore": {
-      "bytes": 104,
-      "class": "generated",
-      "sha256": "9773cdcc6305c7d1e0a32011495fbd6bd1305f90d26021f9ec50c04e0b99e91f"
-    },
-    "oap/COMPLETENESS.md": {
-      "bytes": 773,
-      "class": "generated",
-      "sha256": "31a5ec142a6a5de77851edac8d3b81537ddd09e0c90b459a8ff666840c1d12dc"
-    },
-    "oap/README.md": {
-      "bytes": 1266,
-      "class": "generated",
-      "sha256": "c03e0312b427974b0cd2bb77b6e1f290b6ab015927217d1bffd8922404dc242f"
-    },
-    "oap/RECOVERY.md": {
-      "bytes": 1581,
-      "class": "generated",
-      "sha256": "33ffeba0959476be0bba5f7126963f335080e097f71e6ce3c061cf2fa0e45ee8"
-    },
-    "oap/REPORT-HISTORY-INCIDENTS.json": {
-      "class": "generated",
-      "sha256": "a3c874d58f0d62e5032347a4eb7fec5e0e5c020a78f23e69f72044161da4a92a",
-      "bytes": 2550
-    },
-    "oap/audit/ICA-PROTOCOL.md": {
-      "bytes": 1480,
-      "class": "generated",
-      "sha256": "a3b20e544771064dbd2b768d6a3c0506353ec5a206285fe6fce40fb3909d98fc"
-    },
-    "oap/audit/ICA-REPORT-TEMPLATE.md": {
-      "bytes": 11960,
-      "class": "generated",
-      "sha256": "c5a3bcb4f5a078f5a5a49eb8e3381590d74347caa2f2bdba543ce0135a80814e"
-    },
-    "oap/audit/ICA-REQUEST-TEMPLATE.md": {
-      "bytes": 1258,
-      "class": "generated",
-      "sha256": "52ccbb40441210e93c256c6ed10c21e277f2e1e4e3400dc868ff17ce1a3e6752"
-    },
-    "oap/audit/ICA-REQUIREMENT-MATRIX-TEMPLATE.md": {
-      "bytes": 27281,
-      "class": "generated",
-      "sha256": "f3c36c563d975f6cc5a0344be46c47d18917d28bb5d6ce4774f4265d482c3050"
-    },
-    "oap/audit/requests/ICA-DEMONSTRATOR-DRAFT.md": {
-      "bytes": 1239,
-      "class": "generated",
-      "sha256": "618ea1c1db6684ec5d9d384ad13882600a17d0640714ba8fbf3f7040af0f0d87"
-    },
-    "oap/audit/requests/ICA-MVP-DRAFT.md": {
-      "bytes": 1258,
-      "class": "generated",
-      "sha256": "52ccbb40441210e93c256c6ed10c21e277f2e1e4e3400dc868ff17ce1a3e6752"
-    },
-    "oap/audit/requests/ICA-SERVICE-DRAFT.md": {
-      "bytes": 1275,
-      "class": "generated",
-      "sha256": "eae0a56995932ddf13911cf58bad5f8aee97539a4afcfbbd16be503a6be9a511"
-    },
-    "oap/audit/requirements.json": {
-      "bytes": 27705,
-      "class": "generated",
-      "sha256": "fe49c8ead58a083f9082a2fa5a47d7e2d9e1a14268b3d6cb571209b53f70147f"
-    },
-    "oap/bin/acquisition_history.py": {
-      "class": "generated",
-      "sha256": "c3caca567624e9fdef0eda065e5439d885347bc32efa61e03077b25c20507209",
-      "bytes": 14417
-    },
-    "oap/bin/append_critical.py": {
-      "bytes": 214,
-      "class": "generated",
-      "sha256": "b3c5f160fd1088246dfa55a1dedf47c8b02ca3a2b125862affb5cc23450917f3"
-    },
-    "oap/bin/bootstrap-two-codex-oap.sh": {
-      "bytes": 369,
-      "class": "generated",
-      "sha256": "67e7567b97d690f1e74ccd1012e4a795970defdc280dfde4d7d494d81cae7e1a"
-    },
-    "oap/bin/check_governance.py": {
-      "bytes": 204,
-      "class": "generated",
-      "sha256": "2c81021bab557897515a5f09bb817fdeba82680825f7220d29a72464e140a34a"
-    },
-    "oap/bin/check_ica.py": {
-      "bytes": 190,
-      "class": "generated",
-      "sha256": "347c0e68ae20143384a095f24557207efb95c34aec3b14607ef10b5164a19450"
-    },
-    "oap/bin/check_report_history.py": {
-      "class": "generated",
-      "sha256": "df8b3c0060054dfdbe16b197c84040d48a850b8069d8efdf842f302d61962fed",
-      "bytes": 200
-    },
-    "oap/bin/check_state.py": {
-      "bytes": 194,
-      "class": "generated",
-      "sha256": "ea2a0bc9e3c198af49f3692e42adb4debb04777b1dee6fa2971bbf1c5eaeea35"
-    },
-    "oap/bin/check_transcript.py": {
-      "bytes": 211,
-      "class": "generated",
-      "sha256": "272f67d1434bf89da2b6f7459308bd0c4ee929414fd1823810669c4368623bc0"
-    },
-    "oap/bin/doctor.sh": {
-      "bytes": 161,
-      "class": "generated",
-      "sha256": "ef4ab848d1db94f4b19cf58c3fb14c36f152c78d929a1c9b750477440c821c4b"
-    },
-    "oap/bin/launch-codex-setup-tmux.sh": {
-      "bytes": 159,
-      "class": "generated",
-      "sha256": "d984fbb478c08b253f571ba2fe4aa0b80bbfd3f138e84d957d493e73b7100cc3"
-    },
-    "oap/bin/launch-coding-agent.sh": {
-      "bytes": 175,
-      "class": "generated",
-      "sha256": "3597ce6f89805744e48bf0630892ed404af2d60da119d33f30e01dee6784832c"
-    },
-    "oap/bin/launch-oap-tmux.sh": {
-      "bytes": 173,
-      "class": "generated",
-      "sha256": "473c662ee5073b5ad3681d196a84c7ad64f5db4ebfc0540cfbc9503d15eda6f3"
-    },
-    "oap/bin/launch-role-setup-shell.sh": {
-      "bytes": 166,
-      "class": "generated",
-      "sha256": "9843b81d7ad21cd9acb6396f805bc16dac5d20505ac254fc410d3266f5c252e4"
-    },
-    "oap/bin/launch-strategic-agent.sh": {
-      "bytes": 178,
-      "class": "generated",
-      "sha256": "d4ae985ab8f17898943265dac4647517907f22976fbe2c930b76cc8f5c6bd71b"
-    },
-    "oap/bin/oap_cli.py": {
-      "class": "generated",
-      "sha256": "66bb4b49c3b33fdc50054cdcfaefc6ab1f5bdc6fd329296056649cb0da706fce",
-      "bytes": 13864
-    },
-    "oap/bin/oap_core.py": {
-      "class": "generated",
-      "sha256": "105bbba0c5743b3bb71824206899bb9fe0ef173160c3bc4de0e33a3b8edd9df8",
-      "bytes": 105435
-    },
-    "oap/bin/oap_fifo.py": {
-      "bytes": 192,
-      "class": "generated",
-      "sha256": "05004844d1b4b0f80acc8d890206ffd94ce70bb049a1863dd4d794d1accd2b5a"
-    },
-    "oap/bin/oap_install.py": {
-      "bytes": 14926,
-      "class": "generated",
-      "sha256": "e8aea2af7629b44530ecb7791574ace8957bdab4e550d5ca53952a63774b7d46"
-    },
-    "oap/bin/oap_runtime.py": {
-      "bytes": 18644,
-      "class": "generated",
-      "sha256": "c150da34c710e1f83cd19f2773f9abd07651f0afac129810622620e11ccb9406"
-    },
-    "oap/bin/publish_order.py": {
-      "bytes": 198,
-      "class": "generated",
-      "sha256": "855a05cfcaeb8370333faa9b821ceb7843db6a1f5607e4687b3c9001597df8eb"
-    },
-    "oap/bin/source_cache.py": {
-      "class": "generated",
-      "sha256": "8ef7a9789ae7b060b1ae1c181ae5f472a4d2a7787d0d8fc06554ecefbc1134fe",
-      "bytes": 18896
-    },
-    "oap/bin/strategic_gate.py": {
-      "bytes": 212,
-      "class": "generated",
-      "sha256": "8d7e5b7301d56a0dc0ae299b476ea3dc42d800ce4f6c539c5c0827b01e0ef5bb"
-    },
-    "oap/bin/verify_report.py": {
-      "bytes": 210,
-      "class": "generated",
-      "sha256": "8a98ba578f49d22ff4bb1b51cccf22d13929c896ac3931331d65eaa790279ce3"
-    },
-    "oap/bootstrap-sources.lock.json": {
-      "bytes": 4350,
-      "class": "generated",
-      "sha256": "4a67dffda79a41393b111ddf7ced042268660bd18edd4cc7ff1feceb7c4b98f4"
-    },
-    "oap/coding-instructions/AGENTS.md": {
-      "bytes": 8845,
-      "class": "generated",
-      "sha256": "db624bb41b34d8263bc5745083d86e7db5bb8907816cd8725871e7225eb6ce9d"
-    },
-    "oap/governance/CONTEXT-BUDGET.md": {
-      "bytes": 1134,
-      "class": "generated",
-      "sha256": "bd4595b0451cbad31daf3647b5c4663a5c7437c1bbb3d39db72fead599c58b3b"
-    },
-    "oap/governance/DISTILLATION-MAP.md": {
-      "bytes": 67640,
-      "class": "generated",
-      "sha256": "eeaf84b26e39c1cadd5d375d8d40f21b62bcf607a18472cd426d13656d5d3e62"
-    },
-    "oap/governance/MANIFEST.json": {
-      "bytes": 73591,
-      "class": "generated",
-      "sha256": "8f2641bbd85a2df29b373853b0add6d979138adde1a15ec4c8e5f8674b4afc72"
-    },
-    "oap/governance/WORKSPACE-LAYOUT.json": {
-      "bytes": 1131,
-      "class": "generated",
-      "sha256": "90f8b69f4054dffb4d93313da54841ccfddafdca511b86604765d51b63631d16"
-    },
-    "oap/orders/.gitkeep": {
-      "bytes": 0,
-      "class": "generated",
-      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
-    },
-    "oap/prompts/coding-round.md": {
-      "bytes": 522,
-      "class": "generated",
-      "sha256": "c682b1bbe016429bf4712a4174ae5ca4ec8b78ab36ebbc2c9b3ce625d83d3ffd"
-    },
-    "oap/prompts/ica-start.md": {
-      "bytes": 438,
-      "class": "generated",
-      "sha256": "2311778a8c2f8cbfa24bbc9be1eed30d14289f3d82c2b5e8da70d806b12d70f4"
-    },
-    "oap/prompts/strategic-start.md": {
-      "bytes": 1079,
-      "class": "generated",
-      "sha256": "ba91f90ef1a8692472661900f1f91faacafa1a47954222c0e75e2f9d9752f6ae"
-    },
-    "oap/recovery/012-a-migration-reconciliation.md": {
-      "class": "generated",
-      "sha256": "df314f2628fa05a71cc7f60a62f04fa50f37eca2dce836b3c829fe1b98a4d724",
-      "bytes": 7937
-    },
-    "oap/recovery/012-b-native-migration-completion.md": {
-      "class": "generated",
-      "sha256": "0464f615b133c2c65645affc7157f866f44365c37e4745d8885c0dc69f182ba2",
-      "bytes": 9331
-    },
-    "oap/reports/.gitkeep": {
-      "bytes": 0,
-      "class": "generated",
-      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
-    },
-    "oap/runtime.env.example": {
-      "bytes": 1308,
-      "class": "generated",
-      "sha256": "6d564e526154885b8edc42e11083db45d65a9ddc8d853af25ebead2808104c10"
-    },
-    "oap/strategic-instructions/AGENTS.md": {
-      "bytes": 20629,
-      "class": "generated",
-      "sha256": "c08be7ea6f50ff218948e06ca942d40ce370b041f3580035a4f8ae8ef37c8221"
-    },
-    "oap/strategic-instructions/INITIAL-ROADMAP.md": {
-      "bytes": 12385,
-      "class": "generated",
-      "sha256": "ce9858ec3aea944ccfd4419f18e366d273cc48ea3889ea804b71f2fc9037818e"
-    },
-    "oap/strategic-instructions/OAP-COMMUNICATION-strategic.md": {
-      "bytes": 24524,
-      "class": "generated",
-      "sha256": "83c87a5277ca798609422927e47caa2babab2cf555824813cbbe7f4ac2531ea5"
-    },
-    "oap/strategic-instructions/draft-index.json": {
-      "bytes": 17856,
-      "class": "generated",
-      "sha256": "e33999da1edbb148a080af391eb576fd4f2edf20415a4ba11485187a4fe01366"
-    },
-    "oap/strategic-instructions/initial-orders/000-a-reconcile-bootstrap-repository-and-authority.md": {
-      "bytes": 6911,
-      "class": "generated",
-      "sha256": "a497f40f505aaf5292a3bad37ceca958c0777860292b6700fab6e4882869583a"
-    },
-    "oap/strategic-instructions/initial-orders/001-a-reproducible-application-development-baseline.md": {
-      "bytes": 6767,
-      "class": "generated",
-      "sha256": "c14fc5676324dbcd84254c5aada4c6ee431178ecaa5dd4fa7cfe04873784191a"
-    },
-    "oap/strategic-instructions/initial-orders/002-a-cpu-only-ci-and-governance-guards.md": {
-      "bytes": 6817,
-      "class": "generated",
-      "sha256": "558eb1066cfa52508fe7c5b64a68203c850a7b87bd76341b0638f29340465650"
-    },
-    "oap/strategic-instructions/initial-orders/003-a-typed-spans-evidence-reviews-results-and-policy.md": {
-      "bytes": 6846,
-      "class": "generated",
-      "sha256": "83c6d030fea65a91bc158617df4f87a252e610635d687c43d9f75f45fbb71cc5"
-    },
-    "oap/strategic-instructions/initial-orders/004-a-source-manifests-and-miniature-synthetic-corpus.md": {
-      "bytes": 6725,
-      "class": "generated",
-      "sha256": "bf0063af34e48d755c4a9519cc179ced220c87a572cf144f38857966009f3736"
-    },
-    "oap/strategic-instructions/initial-orders/005-a-real-source-inventory-and-permitted-acquisition-recipe.md": {
-      "bytes": 6920,
-      "class": "generated",
-      "sha256": "97f5284f1aa2e2277a365fe37e93234ccfe21d6bf93f64e1e313408fa39846a8"
-    },
-    "oap/strategic-instructions/initial-orders/006-a-unigram-lexicon-importer.md": {
-      "bytes": 6640,
-      "class": "generated",
-      "sha256": "25a19e871b1469b71ff83fa55b998be120efde54b576dc1945db2b0fadfe1789"
-    },
-    "oap/strategic-instructions/initial-orders/007-a-bigram-trigram-importer-with-censored-absence.md": {
-      "bytes": 6653,
-      "class": "generated",
-      "sha256": "836269d76a6f5d0fc6a94dba72248f8ecb37068ff4fab40dd9e17443304e5e1f"
-    },
-    "oap/strategic-instructions/initial-orders/008-a-read-only-sparse-lookup-and-fixed-neighbor-index.md": {
-      "bytes": 6874,
-      "class": "generated",
-      "sha256": "06f783237d922204bd097b4d2a4a79ce88e401c2151a87fbe508b34174f7b2d8"
-    },
-    "oap/strategic-instructions/initial-orders/009-a-unicode-token-span-mapping.md": {
-      "bytes": 6647,
-      "class": "generated",
-      "sha256": "ef4c2ac42c311d86657c50bf8d29729b8226a8319095d35c689d1ed1be6604be"
-    },
-    "oap/strategic-instructions/initial-orders/010-a-protected-markdown-code-url-spans.md": {
-      "bytes": 6662,
-      "class": "generated",
-      "sha256": "30e0d0fd05160d754cd47ac60aca95ea9f3af1e4df2a7dba8bd09b366f37baf7"
-    },
-    "oap/strategic-instructions/initial-orders/011-a-context-boundaries-and-terminology-exclusions.md": {
-      "bytes": 6809,
-      "class": "generated",
-      "sha256": "82bdf646b8a97bbf48ba5f3b0758f9df0a074d525a8b8564c22ab83ff0f12835"
-    },
-    "oap/strategic-instructions/initial-orders/012-a-first-deterministic-suspicion-selector.md": {
-      "bytes": 6806,
-      "class": "generated",
-      "sha256": "6ce23ed88a2a67af9c7853339fb937caf271a8332fc9a2b3f339673cacae97ea"
-    },
-    "oap/strategic-instructions/initial-orders/013-a-versioned-targeted-review-prompt-serializer.md": {
-      "bytes": 6888,
-      "class": "generated",
-      "sha256": "fcbfb312c982616b6ff9768422de44630d2fc2f0f4010f9eafc567a58999b7b4"
-    },
-    "oap/strategic-instructions/initial-orders/014-a-strict-reviewer-response-parser.md": {
-      "bytes": 6715,
-      "class": "generated",
-      "sha256": "14886f31f324c69f321198a42613b6aa2999d1cb23e0cf6702a5902203f25ce8"
-    },
-    "oap/strategic-instructions/initial-orders/015-a-isolated-reviewer-http-client-with-fake-upstream.md": {
-      "bytes": 6878,
-      "class": "generated",
-      "sha256": "e8b00140eb4b50576ee38a007652f230301b8ff58713ea68f534cf30d74edf34"
-    },
-    "oap/strategic-instructions/initial-orders/016-a-early-bounded-live-qwen-reviewer-feasibility.md": {
-      "bytes": 7015,
-      "class": "generated",
-      "sha256": "b05799b6721c682c8963830bc26c1478361fddf155402b7bebcf56bfe9c12d04"
-    },
-    "oap/strategic-instructions/initial-orders/017-a-initial-strict-word-replacement-acceptance.md": {
-      "bytes": 6829,
-      "class": "generated",
-      "sha256": "4514506f7c10a2a077ac7f8d13c1d321bbbddf719b58eb1617b25d34599f8a36"
-    },
-    "oap/strategic-instructions/initial-orders/018-a-short-phrase-acceptance-boundary.md": {
-      "bytes": 6774,
-      "class": "generated",
-      "sha256": "8b4fde40cd12d4d0de7bfc01c72e5b2050474ecd62879f0f5b2907b3617fe638"
-    },
-    "oap/strategic-instructions/initial-orders/019-a-exact-patcher-and-conflict-group-rollback.md": {
-      "bytes": 6762,
-      "class": "generated",
-      "sha256": "9628c447af4052d1e31460f5cee7c4a13e3d1d5f2c05cd8c268f189749633a38"
-    },
-    "oap/strategic-instructions/initial-orders/020-a-completed-text-pipeline-with-zero-one-review-call.md": {
-      "bytes": 6925,
-      "class": "generated",
-      "sha256": "08cad98926fda1db2a13ba1c33aa96d38d6f0787f08a8f6a2c05b4ab90386279"
-    },
-    "oap/strategic-instructions/initial-orders/021-a-offline-cli-with-explicit-private-inspection-output.md": {
-      "bytes": 6946,
-      "class": "generated",
-      "sha256": "267c143b4b59c0691ab3356a787a879944c7d0e6787adc3576332b13823611e5"
-    },
-    "oap/strategic-instructions/initial-orders/022-a-demonstrator-evidence-and-ica-request.md": {
-      "bytes": 7241,
-      "class": "generated",
-      "sha256": "f81312db4dc7ab13e4582a2f82f725e5ea09558713af206e8ad4ecbd2d76b8c3"
-    },
-    "oap/strategic-instructions/initial-orders/023-a-annotation-schema-and-evaluation-provenance.md": {
-      "bytes": 6762,
-      "class": "generated",
-      "sha256": "3ee8f03109265fb9c5869160f618c8f88ef92baf03892025c819ff56c5f1cf1a"
-    },
-    "oap/strategic-instructions/initial-orders/024-a-bounded-real-output-collection-workflow.md": {
-      "bytes": 6874,
-      "class": "generated",
-      "sha256": "211ae18ff0424f81a83707bdd2beef9aaf9e9315ad744c37cdbb0467223abc9e"
-    },
-    "oap/strategic-instructions/initial-orders/025-a-correct-text-negative-controls.md": {
-      "bytes": 6742,
-      "class": "generated",
-      "sha256": "7d9fededdf64018e4bb7939f1ad1226e0d0819a7b1a5dc34aa4c37eab9d12116"
-    },
-    "oap/strategic-instructions/initial-orders/026-a-frozen-calibration-test-split-and-dataset-integrity.md": {
-      "bytes": 6799,
-      "class": "generated",
-      "sha256": "3e6163a215b1d6a572b71a563000aeaf02e4734112a67e95956d9161cb2e3e4e"
-    },
-    "oap/strategic-instructions/initial-orders/027-a-optional-cpu-linguistic-analyzer-adapter.md": {
-      "bytes": 6845,
-      "class": "generated",
-      "sha256": "39e4b49e910cf30d81724457f2abdf2e74b74c2262c6237ad4bfecd7452eb6de"
-    },
-    "oap/strategic-instructions/initial-orders/028-a-contextual-morphology-validation.md": {
-      "bytes": 6692,
-      "class": "generated",
-      "sha256": "c394afd1a152e0946aa98fd842388d8963068dc76bedd99b16d36250cf07ca41"
-    },
-    "oap/strategic-instructions/initial-orders/029-a-lemma-statistics-and-normalization-compatibility.md": {
-      "bytes": 6702,
-      "class": "generated",
-      "sha256": "b1e67990d1a1eee5bfa64346f9ab066b8f931a4c0f724c8be0960fa7250c8257"
-    },
-    "oap/strategic-instructions/initial-orders/030-a-morphology-aware-detector-calibration-features.md": {
-      "bytes": 6842,
-      "class": "generated",
-      "sha256": "d7cf74dd5e45087c1ffa6d2c0dc14c5dd0edda05a9da3e9adfa5944c9a23e1b2"
-    },
-    "oap/strategic-instructions/initial-orders/031-a-evidence-driven-short-phrase-grouping.md": {
-      "bytes": 6741,
-      "class": "generated",
-      "sha256": "2d92b6438284f2acd624822e767f00b9d134b096590cfffde7b917e9f6026b90"
-    },
-    "oap/strategic-instructions/initial-orders/032-a-versioned-strict-acceptance-thresholds.md": {
-      "bytes": 6804,
-      "class": "generated",
-      "sha256": "624ff56fa9af3d08336ffdd6930f04947353a38d2792d3471958f3e44fe05e39"
-    },
-    "oap/strategic-instructions/initial-orders/033-a-comparative-evaluation-runners.md": {
-      "bytes": 6814,
-      "class": "generated",
-      "sha256": "8766f21333922ee9ba1924ba9ee50565bf0408b338ddea1b6618bb497b3c0549"
-    },
-    "oap/strategic-instructions/initial-orders/034-a-quality-report-with-denominators-and-uncertainty.md": {
-      "bytes": 6750,
-      "class": "generated",
-      "sha256": "480cbf2cc2326b5dbf88e050a0abb2054a8d1b1aa83c470927ae530d6886ec73"
-    },
-    "oap/strategic-instructions/initial-orders/035-a-bounded-cpu-execution-and-cancellation.md": {
-      "bytes": 6720,
-      "class": "generated",
-      "sha256": "de5c7f6e8f3d42dce0bc950ccf91aa138c544e8969b8b6dde4fa29f68511b3d7"
-    },
-    "oap/strategic-instructions/initial-orders/036-a-review-admission-queue-timeout-and-fairness.md": {
-      "bytes": 6831,
-      "class": "generated",
-      "sha256": "a08749232b5f187dc4281bd054f3fae963a37798266fdaa857889a151187defc"
-    },
-    "oap/strategic-instructions/initial-orders/037-a-narrow-api-capability-and-bypass-reject-contract.md": {
-      "bytes": 6883,
-      "class": "generated",
-      "sha256": "cbab4bcb01b109219582137d11bc2d814501701a8f7a942863f995d440bf8df0"
-    },
-    "oap/strategic-instructions/initial-orders/038-a-full-main-response-capture-and-completion-validation.md": {
-      "bytes": 6778,
-      "class": "generated",
-      "sha256": "5b1562cfc4b36eeb27c82da588e0db2737bcd767524c2a7c543783a6c96354f7"
-    },
-    "oap/strategic-instructions/initial-orders/039-a-repair-adapter-integration-without-recursion.md": {
-      "bytes": 6866,
-      "class": "generated",
-      "sha256": "7a817d6d6daa2b66e6e07fc67401cddb4ee4153d1e86960233230be654b6f371"
-    },
-    "oap/strategic-instructions/initial-orders/040-a-main-history-and-review-isolation-contracts.md": {
-      "bytes": 6880,
-      "class": "generated",
-      "sha256": "1bc88a55df97b0f65c439da44a5701b7efb35eb120a3ec4668a82fa165448328"
-    },
-    "oap/strategic-instructions/initial-orders/041-a-envelope-preservation-usage-and-private-metrics.md": {
-      "bytes": 6856,
-      "class": "generated",
-      "sha256": "cde3dc9b049aed590702a1b7036a92b397ccf387c17478528379910b9e77e227"
-    },
-    "oap/strategic-instructions/initial-orders/042-a-api-failure-disconnect-and-concurrency-tests.md": {
-      "bytes": 6971,
-      "class": "generated",
-      "sha256": "83fd1941a007fdc0234c1eb9be2f63b08d16a5ae9d96e28ae292e44691e0df56"
-    },
-    "oap/strategic-instructions/initial-orders/043-a-bounded-live-complete-main-then-review-integration.md": {
-      "bytes": 7002,
-      "class": "generated",
-      "sha256": "3360f1010a5362886f031dc6c9067a93d8c4b2cc0e1cd6458d3b909f108b167e"
-    },
-    "oap/strategic-instructions/initial-orders/044-a-experimental-mvp-evidence-and-independent-closure-gate.md": {
-      "bytes": 7301,
-      "class": "generated",
-      "sha256": "5b05e87f9c995fa4043d6bd25257e339577c7107121309a1df40e1acb19caa1a"
-    },
-    "oap/strategic-instructions/initial-orders/045-a-collocation-feasibility-and-bounded-integration.md": {
-      "bytes": 6829,
-      "class": "generated",
-      "sha256": "afc369bc08d41cbc0dd0f87a2ce8d1d222158b19e2e587f54f27f61e70a5d6ed"
-    },
-    "oap/strategic-instructions/initial-orders/046-a-lower-cutoff-full-statistics-feasibility.md": {
-      "bytes": 6903,
-      "class": "generated",
-      "sha256": "d2405fb361efb4cc4b231433fc65fa5c45a2487fe11445bb8cd1b8bcc1091655"
-    },
-    "oap/strategic-instructions/initial-orders/047-a-measured-latency-and-resource-budget.md": {
-      "bytes": 6791,
-      "class": "generated",
-      "sha256": "b307294292087f275bcc7b033e8ffebe2e91896a1d8f86d866cf64d915ff5f3c"
-    },
-    "oap/strategic-instructions/initial-orders/048-a-broader-negative-harm-evaluation.md": {
-      "bytes": 6808,
-      "class": "generated",
-      "sha256": "30a4ba544228d4a9711d989c2b4368d789cd0895c45263fdc0e76cf8c7e934fb"
-    },
-    "oap/strategic-instructions/initial-orders/049-a-packaging-and-local-installation-templates.md": {
-      "bytes": 6794,
-      "class": "generated",
-      "sha256": "8f07eb0e02e42a69cf12ee4c08132a291cf4f7db43eea629c000672478758062"
-    },
-    "oap/strategic-instructions/initial-orders/050-a-health-readiness-and-disable-rollback-behavior.md": {
-      "bytes": 6907,
-      "class": "generated",
-      "sha256": "5bc52e454c863d010703e4c6ed9f66713ae504069b90172e37d6c666cf03a83d"
-    },
-    "oap/strategic-instructions/initial-orders/051-a-gateway-boundary-and-usage-integration-contract.md": {
-      "bytes": 6870,
-      "class": "generated",
-      "sha256": "58edecf87b0fca45974cd78c92afc781b88a7c2080a69e2987fa5f454629732f"
-    },
-    "oap/strategic-instructions/initial-orders/052-a-explicitly-gated-candidate-deployment-rollback-rehearsal.md": {
-      "bytes": 7006,
-      "class": "generated",
-      "sha256": "6c7a6e81f676a62230dd75ffc4cf3f4ca5dd2a24f0822a1be15fd563f29a6603"
-    },
-    "oap/strategic-instructions/initial-orders/053-a-privacy-prompt-injection-and-structural-abuse-suite.md": {
-      "bytes": 6983,
-      "class": "generated",
-      "sha256": "56ac558ef21ee991f4e0807632ce8ee69a6cad4ef233328bfe6c10a0166a1218"
-    },
-    "oap/strategic-instructions/initial-orders/054-a-reproducibility-rights-and-truthful-final-documentation.md": {
-      "bytes": 7073,
-      "class": "generated",
-      "sha256": "27837d360d5a7988684a0405ceb3395d797501932d28750eaa2eb6bc2174589e"
-    },
-    "oap/strategic-instructions/initial-orders/055-a-verified-service-evidence-and-independent-handoff.md": {
-      "bytes": 7459,
-      "class": "generated",
-      "sha256": "6397390179987fdea0030dbdcb60c6b7e12d112d5d9c8093bf9b60290cff94ef"
-    },
-    "oap/strategic-instructions/strategic_model_init_material.md": {
-      "bytes": 1399,
-      "class": "generated",
-      "sha256": "ac972d8e5fcd58b263df11d044aafed9fb1017d2173157d829fbc2953a1ba3b6"
-    },
-    "oap/templates/CRITICAL-ENTRY-TEMPLATE.md": {
-      "bytes": 1895,
-      "class": "generated",
-      "sha256": "bebdb6e3e4fe6b11c7bca331546278b3f1381804fc1a024003b0c1d5cc56afa4"
-    },
-    "oap/templates/HANDOFF-TEMPLATE.md": {
-      "bytes": 594,
-      "class": "generated",
-      "sha256": "d6513f654f987f1bcc40aff289ee8636edf4817e8efe5767f26e9380f18931f9"
-    },
-    "oap/templates/HUMAN-ADJUDICATION-TEMPLATE.md": {
-      "bytes": 299,
-      "class": "generated",
-      "sha256": "b9a74285f48fcbf7df5901c842929c454dbd06673df5bc8976c5efc14dd1ac46"
-    },
-    "oap/templates/REPORT-TEMPLATE.md": {
-      "bytes": 1692,
-      "class": "generated",
-      "sha256": "210dfae8fe6c4be340a54c7ff02e0a6dda3abf5e4197e86133ccc84eadba094f"
-    },
-    "oap/templates/STRATEGIC-REVIEW-CHECKLIST.md": {
-      "bytes": 963,
-      "class": "generated",
-      "sha256": "cc5046fba0583268af9b1d77d31c8d390634d15e72ba1af5d29d0a6609a83897"
-    },
-    "oap/templates/WORK-ORDER-TEMPLATE.md": {
-      "bytes": 1002,
-      "class": "generated",
-      "sha256": "bc98ab538d0f8c878e2fe95a3d3a0eb62f785fc25bf37d9892b6b7a5f6028a42"
-    },
-    "oap/tests/fake_codex.py": {
-      "bytes": 633,
-      "class": "generated",
-      "sha256": "61ca1bbb8e6177b0393bbed8d19873e9f81343622116ffa4043ab4e307561333"
-    },
-    "oap/tests/fake_gh.py": {
-      "bytes": 372,
-      "class": "generated",
-      "sha256": "18be0a0b7751c9a88a3cdec8945b673b5f279d590c48914157683ee8f9f5efdb"
-    },
-    "oap/tests/support.py": {
-      "bytes": 11311,
-      "class": "generated",
-      "sha256": "8267f3f54abfd3868fa304f9d993576d1941db83a847d9076be191020defb21d"
-    },
-    "oap/tests/test_acceptance.py": {
-      "class": "generated",
-      "sha256": "e20816d78a2869f55bfed0607eb763816a589d3098dda08c4913f53665bb1986",
-      "bytes": 41139
-    },
-    "oap/tests/test_candidate_review.py": {
-      "class": "generated",
-      "sha256": "7b14f0dfed46029285fa6f961735b3bb0aa4db25fccd045fad1f996ce7d4a336",
-      "bytes": 5589
-    },
-    "oap/tests/test_foreground_pane.py": {
-      "class": "generated",
-      "sha256": "9f221db543e0efa72d5a590d96aefe03f85df0e8d515b13c77b8ccb3d73fb7f7",
-      "bytes": 25311
-    },
-    "oap/tests/test_merged_tail.py": {
-      "class": "generated",
-      "sha256": "b60ef0c436cf1933d8fe7c87a553a943a2eeb6e530002b677c39fb6c2f65b3b1",
-      "bytes": 24769
-    },
-    "oap/tests/test_native_layout.py": {
-      "class": "generated",
-      "sha256": "8ba4f5f2d5746b946d52e72c18a1b004c093218881aec2fad1c3422c67e86d70",
-      "bytes": 5874
-    },
-    "oap/tests/test_process_boundaries.py": {
-      "bytes": 17009,
-      "class": "generated",
-      "sha256": "9da5bf2b5dd6c7f606b185c5481b2fb70359ce17691a16a971693321ee3677f8"
-    },
-    "oap/tests/test_report_history_cache.py": {
-      "class": "generated",
-      "sha256": "21e87a3be9b6ab435c303cb5e3fe0a696d66483e30df6fcef4ba0c72c1f26136",
-      "bytes": 24456
-    },
-    "oap/tests/test_split_layout.py": {
-      "bytes": 11413,
-      "class": "generated",
-      "sha256": "4a2eb57ae93acb3d43df2941872b144905ca5db336be85ce96b05e210f2978cb"
-    },
-    "oap/tests/test_transcript_guard.py": {
-      "bytes": 10307,
-      "class": "generated",
-      "sha256": "69aa6c4ea5fe3727828ce544138b0fc2acd569d6c317b751d88e04e2e6b69916"
-    },
-    "oap/tests/test_versioned_source.py": {
-      "class": "generated",
-      "sha256": "c63c5a2457f23cecb16c44a7d889b24cab78af434ddfbfff38c173ce2dd93cba",
-      "bytes": 3881
-    },
-    "research/tests/research_snapshot_contract.py": {
-      "class": "generated",
-      "sha256": "b15717f95aa2191c38775a2892ee3ccfe7a02aa85e0ced5b7e8d267be5f7c495",
-      "bytes": 4560
-    },
-    "research/tests/test_research_snapshot_synthetic.py": {
-      "class": "generated",
-      "sha256": "11e4bad74af5ed544c46d0026aa64fa859bd7621cd64d2196f62adc04975a4b0",
-      "bytes": 7522
-    }
+ "files": {
+  ".gitattributes": {
+   "bytes": 124,
+   "class": "generated",
+   "sha256": "4de1d6602aa4196a86181f931216c7df2ab9fc5621d27e0741e8053ff20874a3"
   },
-  "purpose": "Scoped generated handoff inventory, not permanent runtime freeze",
-  "schema_version": 1
+  ".gitignore": {
+   "bytes": 4758,
+   "class": "immutable",
+   "sha256": "cf183863cc33dd5db00598cbbf5809eaa7ccfc82fca7d408120dc8f58b4df642"
+  },
+  "AGENTS.md": {
+   "bytes": 651,
+   "class": "generated",
+   "sha256": "118be17b2e9e5b50d628c796b136ee1b8154ebf844af0007839f65848fd69f09"
+  },
+  "ARCHITECTURE-for-agents.md": {
+   "bytes": 19980,
+   "class": "generated",
+   "sha256": "53328fa21328108fa65d28424e0baccbd3b29280699144aa09c7e45dbff084a1"
+  },
+  "ARCHITECTURE.md": {
+   "bytes": 42835,
+   "class": "immutable",
+   "sha256": "4df1664cec86aae1e3e07e19f61650919fa8dc5011acc67f411848eeee0a8ed9"
+  },
+  "CRITICAL.md": {
+   "bytes": 10684,
+   "class": "immutable",
+   "sha256": "a9ea5fa5db2affabf0f85710f41e37e73b108c0236a58b7efb9c17cb36a07e9e"
+  },
+  "INSTALL.md": {
+   "sha256": "3e6d23e46ea7807e716f700c7bee27a82c435cebf0855aa42f78384c3a601238",
+   "bytes": 15684,
+   "class": "generated"
+  },
+  "LICENSE": {
+   "bytes": 11357,
+   "class": "immutable",
+   "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+  },
+  "OAP-COMMUNICATION-coding-agent.md": {
+   "bytes": 7270,
+   "class": "generated",
+   "sha256": "313d77900f9bbf1c974e76ea3f546083b117eeaac5f5fc2e964e77b3c19b9ccc"
+  },
+  "PLAN.md": {
+   "bytes": 45243,
+   "class": "immutable",
+   "sha256": "d2aa1d98cc5177ac6093ab3aeb79903b192780910ef2d1712839b474fb5adbf0"
+  },
+  "QUICKSTART.md": {
+   "sha256": "db2dac17f89fae1e82038f57d149090a11111742bed54d304fc26b78f98b8c9a",
+   "bytes": 3591,
+   "class": "generated"
+  },
+  "README.md": {
+   "bytes": 4646,
+   "class": "generated",
+   "sha256": "31e2267bcf4438aa1b0e7556fda52d2f97900b3a4369e42a14c4c5001197af1c"
+  },
+  "SECURITY.md": {
+   "bytes": 2266,
+   "class": "generated",
+   "sha256": "1e3e9e59259ea6a57a3d8e368e896560c214f453c98792f7979e8d99b4154069"
+  },
+  "STATUS.md": {
+   "bytes": 4367,
+   "class": "generated",
+   "sha256": "f754cb4a128132d62207dd1228437d79380909e7531b100faad503a8726d5db6"
+  },
+  "TESTING.md": {
+   "bytes": 2310,
+   "class": "generated",
+   "sha256": "7ce05ea2bf7e5b411e7a61ece0a0f577bb45bcc9bbd9f40b6480853f24a0ab27"
+  },
+  "docs/BOOTSTRAP-SOURCES.md": {
+   "bytes": 1117,
+   "class": "generated",
+   "sha256": "de6304841e5d8143f4b0792944ff5a6d941c2f94dc64d8b6ce3803c86e099ea5"
+  },
+  "docs/CODEX-ROLE-SETUP.md": {
+   "bytes": 4176,
+   "class": "generated",
+   "sha256": "315856d54a5edddac98e902066079c42b14ae59c014ed208f3133a53b804be32"
+  },
+  "docs/DATA-SOURCES.md": {
+   "class": "generated",
+   "sha256": "e24b0f0b729e68c24111a24ab9dffd889086abea9e15e7f9d21a1558a4a376aa",
+   "bytes": 9427
+  },
+  "docs/DECISION-POLICY.md": {
+   "bytes": 2219,
+   "class": "generated",
+   "sha256": "c085f56feeecc740aa580c042a2b6007612860af82f7f2276fed1d34fd719558"
+  },
+  "docs/EVALUATION.md": {
+   "bytes": 1720,
+   "class": "generated",
+   "sha256": "9b439920a4463b72a81bf6d0efcbd5d8a813a007a438fd27dacbbe98742b8018"
+  },
+  "docs/HISTORY.md": {
+   "sha256": "8ceac50feb3d4dcd0c585bbec0caef873fa8b6d36e75f54859fa45c2de6fcab7",
+   "bytes": 8286,
+   "class": "generated"
+  },
+  "docs/IMPLEMENTATION-ROADMAP.md": {
+   "bytes": 2316,
+   "class": "generated",
+   "sha256": "09223e105835674c481fa9899c05f324bdae9fe420d7c20471c5568f221314eb"
+  },
+  "docs/LIVE-TEST-ENVIRONMENT.md": {
+   "bytes": 2118,
+   "class": "generated",
+   "sha256": "00b3e4760738573f627a518b51d883ed882e094ffdd1eae6656e67567a460053"
+  },
+  "docs/OAP-RUNBOOK.md": {
+   "class": "generated",
+   "sha256": "25011a8bbeb8fc87fe2049c8a9e0578a75910139fae7b9a46af73a5949aa26f1",
+   "bytes": 12034
+  },
+  "docs/READINESS.md": {
+   "bytes": 3987,
+   "class": "generated",
+   "sha256": "5da0d9f2086a8774f08b520c27d2e77fc0c3919904a6d41b9d7049ef205b4186"
+  },
+  "docs/README.md": {
+   "sha256": "2d7324a12eab46b08cb3c294b2ac76c1244b77dda5a49dd7ff99ffccb437c809",
+   "bytes": 3778,
+   "class": "generated"
+  },
+  "docs/WORKSPACE-PLACEMENT.md": {
+   "bytes": 3152,
+   "class": "generated",
+   "sha256": "7833c98efdd038d077c16a701227189af8f65aab6690a2b1f6dab26c582b71c8"
+  },
+  "docs/assets/slaif-logo.svg": {
+   "bytes": 8252,
+   "class": "generated",
+   "sha256": "5ca3fcd7f8646149a35b018df79c3dcabe71bdf5bb4f27a95a77a77e7302d621"
+  },
+  "docs/bootstrap/ARCHITECTURE.md": {
+   "bytes": 40194,
+   "class": "immutable",
+   "sha256": "a16e0f87bdb21f6920aa63119cf5be148b6c8b68bf1337c44006d54b7a7261f7"
+  },
+  "docs/bootstrap/BOOTSTRAP-GENERATOR.md": {
+   "bytes": 10695,
+   "class": "immutable",
+   "sha256": "b8e34ce58afc0cf8d6f4dbfe238237448dc1075ba2e4aff1e340938d8d35267e"
+  },
+  "docs/bootstrap/CRITICAL.md": {
+   "bytes": 10684,
+   "class": "immutable",
+   "sha256": "a9ea5fa5db2affabf0f85710f41e37e73b108c0236a58b7efb9c17cb36a07e9e"
+  },
+  "docs/bootstrap/INPUTS.sha256": {
+   "bytes": 1534,
+   "class": "immutable",
+   "sha256": "50decd1cc46f857f85c9faf74fb61d31c9a55836766cdf740e6d2f04fd551dc6"
+  },
+  "docs/bootstrap/INSTRUCTIONS.md": {
+   "bytes": 23453,
+   "class": "immutable",
+   "sha256": "bdbd1cdd4f544a50c08eacd456b761eb303b557a56b1b1ba7cb1afb3f4632f27"
+  },
+  "docs/bootstrap/PACKAGE-CHECKS.md": {
+   "bytes": 1586,
+   "class": "immutable",
+   "sha256": "18bbd0c1abdd22c48579b285d332c0d21c359d82686cb325659cf3b2e73a3f0b"
+  },
+  "docs/bootstrap/PACKAGE-MANIFEST.json": {
+   "bytes": 4941,
+   "class": "immutable",
+   "sha256": "9e0c0236597ce8735737417c22546884afc29c85f5c0178f2ed0f295a77c2897"
+  },
+  "docs/bootstrap/PLAN.md": {
+   "bytes": 45243,
+   "class": "immutable",
+   "sha256": "d2aa1d98cc5177ac6093ab3aeb79903b192780910ef2d1712839b474fb5adbf0"
+  },
+  "docs/bootstrap/README.md": {
+   "bytes": 3678,
+   "class": "immutable",
+   "sha256": "195a3d8450e82125cc2b3440a392a01623c433e8311569d599fd754406ce6425"
+  },
+  "docs/bootstrap/SOURCE-MAP.md": {
+   "bytes": 7411,
+   "class": "immutable",
+   "sha256": "39bae9031940113ab20c657aed7335d6ca776164a8ebe3285bb8e76c7ce3e5de"
+  },
+  "docs/bootstrap/sources/concentrated-oap.md": {
+   "bytes": 77512,
+   "class": "immutable",
+   "sha256": "9067c7e65f146b9fed19b903fd73e07f58d9b1163436761011a64702d14bf302"
+  },
+  "docs/bootstrap/sources/oap.md": {
+   "bytes": 84144,
+   "class": "immutable",
+   "sha256": "68f9610d1cea9ce8a4acbb3d5eea5133439624aa2fa85bfe03470b015b6732a5"
+  },
+  "docs/bootstrap/sources/product/ChatGPT-Število slovenskih besed-20260906-1413.md": {
+   "bytes": 30393,
+   "class": "immutable",
+   "sha256": "9b51c3e19db3769344fb91238a411b71f1e287dc06327df1e065c6085baf7c2a"
+  },
+  "docs/bootstrap/sources/product/deep-research-report (4).md": {
+   "bytes": 53782,
+   "class": "immutable",
+   "sha256": "a6e532021bbcbee8f8b6d1ff3c136972688c352b9e3a5e4aa1a29e0b1c1c1f2e"
+  },
+  "docs/bootstrap/specifications/BOOTSTRAP-ACCEPTANCE.md": {
+   "bytes": 12014,
+   "class": "immutable",
+   "sha256": "5a5616383474ca970b1e1cdfae76289bf4b0f41b004cd03779f6c2d4fa018b4f"
+  },
+  "docs/bootstrap/specifications/OAP-PROTOCOL.md": {
+   "bytes": 18705,
+   "class": "immutable",
+   "sha256": "57b35d7e4c5aba6500b7c2ef091664c1de2ab10aed8073643e6cd9c1104b1115"
+  },
+  "docs/bootstrap/specifications/ROLE-CONTEXT.md": {
+   "bytes": 14604,
+   "class": "immutable",
+   "sha256": "41a082f85f847ee86e2d064ae8a43e532de90958db99e14f1429e2f866cd6904"
+  },
+  "docs/bootstrap/specifications/WORK-PROGRAM.md": {
+   "bytes": 19561,
+   "class": "immutable",
+   "sha256": "b4e06a623619af6542af20fa84669e49b9a81b5e9fca5346203268b5fdab59fa"
+  },
+  "oap/.gitignore": {
+   "bytes": 104,
+   "class": "generated",
+   "sha256": "9773cdcc6305c7d1e0a32011495fbd6bd1305f90d26021f9ec50c04e0b99e91f"
+  },
+  "oap/COMPLETENESS.md": {
+   "bytes": 1503,
+   "class": "generated",
+   "sha256": "4ed89582f50d1e2161a7b01620be4cbb2532361493cda2740ab7f4207a173ed3"
+  },
+  "oap/README.md": {
+   "bytes": 1952,
+   "class": "generated",
+   "sha256": "4053edc62b78d0d71277143c484213228bc6deb40064bb60e6ccfb99c652579a"
+  },
+  "oap/RECOVERY.md": {
+   "bytes": 2107,
+   "class": "generated",
+   "sha256": "f111a6c1d139e13b9524c6617f33c65f0a33fcadbec46d9484a49d2ab74fb925"
+  },
+  "oap/REPORT-HISTORY-INCIDENTS.json": {
+   "class": "generated",
+   "sha256": "a3c874d58f0d62e5032347a4eb7fec5e0e5c020a78f23e69f72044161da4a92a",
+   "bytes": 2550
+  },
+  "oap/audit/ICA-PROTOCOL.md": {
+   "bytes": 1480,
+   "class": "generated",
+   "sha256": "a3b20e544771064dbd2b768d6a3c0506353ec5a206285fe6fce40fb3909d98fc"
+  },
+  "oap/audit/ICA-REPORT-TEMPLATE.md": {
+   "bytes": 11960,
+   "class": "generated",
+   "sha256": "c5a3bcb4f5a078f5a5a49eb8e3381590d74347caa2f2bdba543ce0135a80814e"
+  },
+  "oap/audit/ICA-REQUEST-TEMPLATE.md": {
+   "bytes": 1258,
+   "class": "generated",
+   "sha256": "52ccbb40441210e93c256c6ed10c21e277f2e1e4e3400dc868ff17ce1a3e6752"
+  },
+  "oap/audit/ICA-REQUIREMENT-MATRIX-TEMPLATE.md": {
+   "bytes": 27281,
+   "class": "generated",
+   "sha256": "f3c36c563d975f6cc5a0344be46c47d18917d28bb5d6ce4774f4265d482c3050"
+  },
+  "oap/audit/requests/ICA-DEMONSTRATOR-DRAFT.md": {
+   "bytes": 1239,
+   "class": "generated",
+   "sha256": "618ea1c1db6684ec5d9d384ad13882600a17d0640714ba8fbf3f7040af0f0d87"
+  },
+  "oap/audit/requests/ICA-MVP-DRAFT.md": {
+   "bytes": 1258,
+   "class": "generated",
+   "sha256": "52ccbb40441210e93c256c6ed10c21e277f2e1e4e3400dc868ff17ce1a3e6752"
+  },
+  "oap/audit/requests/ICA-SERVICE-DRAFT.md": {
+   "bytes": 1275,
+   "class": "generated",
+   "sha256": "eae0a56995932ddf13911cf58bad5f8aee97539a4afcfbbd16be503a6be9a511"
+  },
+  "oap/audit/requirements.json": {
+   "bytes": 27705,
+   "class": "generated",
+   "sha256": "fe49c8ead58a083f9082a2fa5a47d7e2d9e1a14268b3d6cb571209b53f70147f"
+  },
+  "oap/bin/acquisition_history.py": {
+   "class": "generated",
+   "sha256": "c3caca567624e9fdef0eda065e5439d885347bc32efa61e03077b25c20507209",
+   "bytes": 14417
+  },
+  "oap/bin/append_critical.py": {
+   "bytes": 214,
+   "class": "generated",
+   "sha256": "b3c5f160fd1088246dfa55a1dedf47c8b02ca3a2b125862affb5cc23450917f3"
+  },
+  "oap/bin/bootstrap-two-codex-oap.sh": {
+   "bytes": 369,
+   "class": "generated",
+   "sha256": "67e7567b97d690f1e74ccd1012e4a795970defdc280dfde4d7d494d81cae7e1a"
+  },
+  "oap/bin/check_governance.py": {
+   "bytes": 204,
+   "class": "generated",
+   "sha256": "2c81021bab557897515a5f09bb817fdeba82680825f7220d29a72464e140a34a"
+  },
+  "oap/bin/check_ica.py": {
+   "bytes": 190,
+   "class": "generated",
+   "sha256": "347c0e68ae20143384a095f24557207efb95c34aec3b14607ef10b5164a19450"
+  },
+  "oap/bin/check_report_history.py": {
+   "class": "generated",
+   "sha256": "df8b3c0060054dfdbe16b197c84040d48a850b8069d8efdf842f302d61962fed",
+   "bytes": 200
+  },
+  "oap/bin/check_state.py": {
+   "bytes": 194,
+   "class": "generated",
+   "sha256": "ea2a0bc9e3c198af49f3692e42adb4debb04777b1dee6fa2971bbf1c5eaeea35"
+  },
+  "oap/bin/check_transcript.py": {
+   "bytes": 211,
+   "class": "generated",
+   "sha256": "272f67d1434bf89da2b6f7459308bd0c4ee929414fd1823810669c4368623bc0"
+  },
+  "oap/bin/doctor.sh": {
+   "bytes": 161,
+   "class": "generated",
+   "sha256": "ef4ab848d1db94f4b19cf58c3fb14c36f152c78d929a1c9b750477440c821c4b"
+  },
+  "oap/bin/launch-codex-setup-tmux.sh": {
+   "bytes": 159,
+   "class": "generated",
+   "sha256": "d984fbb478c08b253f571ba2fe4aa0b80bbfd3f138e84d957d493e73b7100cc3"
+  },
+  "oap/bin/launch-coding-agent.sh": {
+   "bytes": 175,
+   "class": "generated",
+   "sha256": "3597ce6f89805744e48bf0630892ed404af2d60da119d33f30e01dee6784832c"
+  },
+  "oap/bin/launch-oap-tmux.sh": {
+   "bytes": 173,
+   "class": "generated",
+   "sha256": "473c662ee5073b5ad3681d196a84c7ad64f5db4ebfc0540cfbc9503d15eda6f3"
+  },
+  "oap/bin/launch-role-setup-shell.sh": {
+   "bytes": 166,
+   "class": "generated",
+   "sha256": "9843b81d7ad21cd9acb6396f805bc16dac5d20505ac254fc410d3266f5c252e4"
+  },
+  "oap/bin/launch-strategic-agent.sh": {
+   "bytes": 178,
+   "class": "generated",
+   "sha256": "d4ae985ab8f17898943265dac4647517907f22976fbe2c930b76cc8f5c6bd71b"
+  },
+  "oap/bin/oap_cli.py": {
+   "class": "generated",
+   "sha256": "66bb4b49c3b33fdc50054cdcfaefc6ab1f5bdc6fd329296056649cb0da706fce",
+   "bytes": 13864
+  },
+  "oap/bin/oap_core.py": {
+   "class": "generated",
+   "sha256": "8820d1bd88b75ca8ca603f3e43fd0581690f50b08f05a1153aad06ab8946c0ac",
+   "bytes": 106868
+  },
+  "oap/bin/oap_fifo.py": {
+   "bytes": 192,
+   "class": "generated",
+   "sha256": "05004844d1b4b0f80acc8d890206ffd94ce70bb049a1863dd4d794d1accd2b5a"
+  },
+  "oap/bin/oap_install.py": {
+   "bytes": 14926,
+   "class": "generated",
+   "sha256": "e8aea2af7629b44530ecb7791574ace8957bdab4e550d5ca53952a63774b7d46"
+  },
+  "oap/bin/oap_runtime.py": {
+   "bytes": 18644,
+   "class": "generated",
+   "sha256": "c150da34c710e1f83cd19f2773f9abd07651f0afac129810622620e11ccb9406"
+  },
+  "oap/bin/publish_order.py": {
+   "bytes": 198,
+   "class": "generated",
+   "sha256": "855a05cfcaeb8370333faa9b821ceb7843db6a1f5607e4687b3c9001597df8eb"
+  },
+  "oap/bin/source_cache.py": {
+   "class": "generated",
+   "sha256": "8ef7a9789ae7b060b1ae1c181ae5f472a4d2a7787d0d8fc06554ecefbc1134fe",
+   "bytes": 18896
+  },
+  "oap/bin/strategic_gate.py": {
+   "bytes": 212,
+   "class": "generated",
+   "sha256": "8d7e5b7301d56a0dc0ae299b476ea3dc42d800ce4f6c539c5c0827b01e0ef5bb"
+  },
+  "oap/bin/verify_report.py": {
+   "bytes": 210,
+   "class": "generated",
+   "sha256": "8a98ba578f49d22ff4bb1b51cccf22d13929c896ac3931331d65eaa790279ce3"
+  },
+  "oap/bootstrap-sources.lock.json": {
+   "bytes": 4350,
+   "class": "generated",
+   "sha256": "4a67dffda79a41393b111ddf7ced042268660bd18edd4cc7ff1feceb7c4b98f4"
+  },
+  "oap/coding-instructions/AGENTS.md": {
+   "bytes": 8845,
+   "class": "generated",
+   "sha256": "db624bb41b34d8263bc5745083d86e7db5bb8907816cd8725871e7225eb6ce9d"
+  },
+  "oap/governance/CONTEXT-BUDGET.md": {
+   "bytes": 1253,
+   "class": "generated",
+   "sha256": "90a8f6d65bc5f9a8f08db87c038bcd82b7b110b95da053ec963a59507b0696f6"
+  },
+  "oap/governance/DISTILLATION-MAP.md": {
+   "bytes": 72470,
+   "class": "generated",
+   "sha256": "d5f4c1fbb546f552dcd1a28b81725cc714b1c9820317d714fbe5c2dcbd2f9193"
+  },
+  "oap/governance/MANIFEST.json": {
+   "bytes": 76307,
+   "class": "generated",
+   "sha256": "08b9b2dbcb29cdf218b5b044023735fae066d49edb85643ed9cee609fcc3d344"
+  },
+  "oap/governance/WORKSPACE-LAYOUT.json": {
+   "bytes": 1131,
+   "class": "generated",
+   "sha256": "90f8b69f4054dffb4d93313da54841ccfddafdca511b86604765d51b63631d16"
+  },
+  "oap/orders/.gitkeep": {
+   "bytes": 0,
+   "class": "generated",
+   "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "oap/prompts/coding-round.md": {
+   "bytes": 522,
+   "class": "generated",
+   "sha256": "c682b1bbe016429bf4712a4174ae5ca4ec8b78ab36ebbc2c9b3ce625d83d3ffd"
+  },
+  "oap/prompts/ica-start.md": {
+   "bytes": 438,
+   "class": "generated",
+   "sha256": "2311778a8c2f8cbfa24bbc9be1eed30d14289f3d82c2b5e8da70d806b12d70f4"
+  },
+  "oap/prompts/strategic-start.md": {
+   "bytes": 1079,
+   "class": "generated",
+   "sha256": "ba91f90ef1a8692472661900f1f91faacafa1a47954222c0e75e2f9d9752f6ae"
+  },
+  "oap/recovery/012-a-migration-reconciliation.md": {
+   "class": "generated",
+   "sha256": "df314f2628fa05a71cc7f60a62f04fa50f37eca2dce836b3c829fe1b98a4d724",
+   "bytes": 7937
+  },
+  "oap/recovery/012-b-native-migration-completion.md": {
+   "class": "generated",
+   "sha256": "0464f615b133c2c65645affc7157f866f44365c37e4745d8885c0dc69f182ba2",
+   "bytes": 9331
+  },
+  "oap/reports/.gitkeep": {
+   "bytes": 0,
+   "class": "generated",
+   "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "oap/runtime.env.example": {
+   "bytes": 1308,
+   "class": "generated",
+   "sha256": "6d564e526154885b8edc42e11083db45d65a9ddc8d853af25ebead2808104c10"
+  },
+  "oap/strategic-instructions/AGENTS.md": {
+   "bytes": 20629,
+   "class": "generated",
+   "sha256": "c08be7ea6f50ff218948e06ca942d40ce370b041f3580035a4f8ae8ef37c8221"
+  },
+  "oap/strategic-instructions/INITIAL-ROADMAP.md": {
+   "bytes": 12385,
+   "class": "generated",
+   "sha256": "ce9858ec3aea944ccfd4419f18e366d273cc48ea3889ea804b71f2fc9037818e"
+  },
+  "oap/strategic-instructions/OAP-COMMUNICATION-strategic.md": {
+   "bytes": 24524,
+   "class": "generated",
+   "sha256": "83c87a5277ca798609422927e47caa2babab2cf555824813cbbe7f4ac2531ea5"
+  },
+  "oap/strategic-instructions/draft-index.json": {
+   "bytes": 17856,
+   "class": "generated",
+   "sha256": "e33999da1edbb148a080af391eb576fd4f2edf20415a4ba11485187a4fe01366"
+  },
+  "oap/strategic-instructions/initial-orders/000-a-reconcile-bootstrap-repository-and-authority.md": {
+   "bytes": 6911,
+   "class": "generated",
+   "sha256": "a497f40f505aaf5292a3bad37ceca958c0777860292b6700fab6e4882869583a"
+  },
+  "oap/strategic-instructions/initial-orders/001-a-reproducible-application-development-baseline.md": {
+   "bytes": 6767,
+   "class": "generated",
+   "sha256": "c14fc5676324dbcd84254c5aada4c6ee431178ecaa5dd4fa7cfe04873784191a"
+  },
+  "oap/strategic-instructions/initial-orders/002-a-cpu-only-ci-and-governance-guards.md": {
+   "bytes": 6817,
+   "class": "generated",
+   "sha256": "558eb1066cfa52508fe7c5b64a68203c850a7b87bd76341b0638f29340465650"
+  },
+  "oap/strategic-instructions/initial-orders/003-a-typed-spans-evidence-reviews-results-and-policy.md": {
+   "bytes": 6846,
+   "class": "generated",
+   "sha256": "83c6d030fea65a91bc158617df4f87a252e610635d687c43d9f75f45fbb71cc5"
+  },
+  "oap/strategic-instructions/initial-orders/004-a-source-manifests-and-miniature-synthetic-corpus.md": {
+   "bytes": 6725,
+   "class": "generated",
+   "sha256": "bf0063af34e48d755c4a9519cc179ced220c87a572cf144f38857966009f3736"
+  },
+  "oap/strategic-instructions/initial-orders/005-a-real-source-inventory-and-permitted-acquisition-recipe.md": {
+   "bytes": 6920,
+   "class": "generated",
+   "sha256": "97f5284f1aa2e2277a365fe37e93234ccfe21d6bf93f64e1e313408fa39846a8"
+  },
+  "oap/strategic-instructions/initial-orders/006-a-unigram-lexicon-importer.md": {
+   "bytes": 6640,
+   "class": "generated",
+   "sha256": "25a19e871b1469b71ff83fa55b998be120efde54b576dc1945db2b0fadfe1789"
+  },
+  "oap/strategic-instructions/initial-orders/007-a-bigram-trigram-importer-with-censored-absence.md": {
+   "bytes": 6653,
+   "class": "generated",
+   "sha256": "836269d76a6f5d0fc6a94dba72248f8ecb37068ff4fab40dd9e17443304e5e1f"
+  },
+  "oap/strategic-instructions/initial-orders/008-a-read-only-sparse-lookup-and-fixed-neighbor-index.md": {
+   "bytes": 6874,
+   "class": "generated",
+   "sha256": "06f783237d922204bd097b4d2a4a79ce88e401c2151a87fbe508b34174f7b2d8"
+  },
+  "oap/strategic-instructions/initial-orders/009-a-unicode-token-span-mapping.md": {
+   "bytes": 6647,
+   "class": "generated",
+   "sha256": "ef4c2ac42c311d86657c50bf8d29729b8226a8319095d35c689d1ed1be6604be"
+  },
+  "oap/strategic-instructions/initial-orders/010-a-protected-markdown-code-url-spans.md": {
+   "bytes": 6662,
+   "class": "generated",
+   "sha256": "30e0d0fd05160d754cd47ac60aca95ea9f3af1e4df2a7dba8bd09b366f37baf7"
+  },
+  "oap/strategic-instructions/initial-orders/011-a-context-boundaries-and-terminology-exclusions.md": {
+   "bytes": 6809,
+   "class": "generated",
+   "sha256": "82bdf646b8a97bbf48ba5f3b0758f9df0a074d525a8b8564c22ab83ff0f12835"
+  },
+  "oap/strategic-instructions/initial-orders/012-a-first-deterministic-suspicion-selector.md": {
+   "bytes": 6806,
+   "class": "generated",
+   "sha256": "6ce23ed88a2a67af9c7853339fb937caf271a8332fc9a2b3f339673cacae97ea"
+  },
+  "oap/strategic-instructions/initial-orders/013-a-versioned-targeted-review-prompt-serializer.md": {
+   "bytes": 6888,
+   "class": "generated",
+   "sha256": "fcbfb312c982616b6ff9768422de44630d2fc2f0f4010f9eafc567a58999b7b4"
+  },
+  "oap/strategic-instructions/initial-orders/014-a-strict-reviewer-response-parser.md": {
+   "bytes": 6715,
+   "class": "generated",
+   "sha256": "14886f31f324c69f321198a42613b6aa2999d1cb23e0cf6702a5902203f25ce8"
+  },
+  "oap/strategic-instructions/initial-orders/015-a-isolated-reviewer-http-client-with-fake-upstream.md": {
+   "bytes": 6878,
+   "class": "generated",
+   "sha256": "e8b00140eb4b50576ee38a007652f230301b8ff58713ea68f534cf30d74edf34"
+  },
+  "oap/strategic-instructions/initial-orders/016-a-early-bounded-live-qwen-reviewer-feasibility.md": {
+   "bytes": 7015,
+   "class": "generated",
+   "sha256": "b05799b6721c682c8963830bc26c1478361fddf155402b7bebcf56bfe9c12d04"
+  },
+  "oap/strategic-instructions/initial-orders/017-a-initial-strict-word-replacement-acceptance.md": {
+   "bytes": 6829,
+   "class": "generated",
+   "sha256": "4514506f7c10a2a077ac7f8d13c1d321bbbddf719b58eb1617b25d34599f8a36"
+  },
+  "oap/strategic-instructions/initial-orders/018-a-short-phrase-acceptance-boundary.md": {
+   "bytes": 6774,
+   "class": "generated",
+   "sha256": "8b4fde40cd12d4d0de7bfc01c72e5b2050474ecd62879f0f5b2907b3617fe638"
+  },
+  "oap/strategic-instructions/initial-orders/019-a-exact-patcher-and-conflict-group-rollback.md": {
+   "bytes": 6762,
+   "class": "generated",
+   "sha256": "9628c447af4052d1e31460f5cee7c4a13e3d1d5f2c05cd8c268f189749633a38"
+  },
+  "oap/strategic-instructions/initial-orders/020-a-completed-text-pipeline-with-zero-one-review-call.md": {
+   "bytes": 6925,
+   "class": "generated",
+   "sha256": "08cad98926fda1db2a13ba1c33aa96d38d6f0787f08a8f6a2c05b4ab90386279"
+  },
+  "oap/strategic-instructions/initial-orders/021-a-offline-cli-with-explicit-private-inspection-output.md": {
+   "bytes": 6946,
+   "class": "generated",
+   "sha256": "267c143b4b59c0691ab3356a787a879944c7d0e6787adc3576332b13823611e5"
+  },
+  "oap/strategic-instructions/initial-orders/022-a-demonstrator-evidence-and-ica-request.md": {
+   "bytes": 7241,
+   "class": "generated",
+   "sha256": "f81312db4dc7ab13e4582a2f82f725e5ea09558713af206e8ad4ecbd2d76b8c3"
+  },
+  "oap/strategic-instructions/initial-orders/023-a-annotation-schema-and-evaluation-provenance.md": {
+   "bytes": 6762,
+   "class": "generated",
+   "sha256": "3ee8f03109265fb9c5869160f618c8f88ef92baf03892025c819ff56c5f1cf1a"
+  },
+  "oap/strategic-instructions/initial-orders/024-a-bounded-real-output-collection-workflow.md": {
+   "bytes": 6874,
+   "class": "generated",
+   "sha256": "211ae18ff0424f81a83707bdd2beef9aaf9e9315ad744c37cdbb0467223abc9e"
+  },
+  "oap/strategic-instructions/initial-orders/025-a-correct-text-negative-controls.md": {
+   "bytes": 6742,
+   "class": "generated",
+   "sha256": "7d9fededdf64018e4bb7939f1ad1226e0d0819a7b1a5dc34aa4c37eab9d12116"
+  },
+  "oap/strategic-instructions/initial-orders/026-a-frozen-calibration-test-split-and-dataset-integrity.md": {
+   "bytes": 6799,
+   "class": "generated",
+   "sha256": "3e6163a215b1d6a572b71a563000aeaf02e4734112a67e95956d9161cb2e3e4e"
+  },
+  "oap/strategic-instructions/initial-orders/027-a-optional-cpu-linguistic-analyzer-adapter.md": {
+   "bytes": 6845,
+   "class": "generated",
+   "sha256": "39e4b49e910cf30d81724457f2abdf2e74b74c2262c6237ad4bfecd7452eb6de"
+  },
+  "oap/strategic-instructions/initial-orders/028-a-contextual-morphology-validation.md": {
+   "bytes": 6692,
+   "class": "generated",
+   "sha256": "c394afd1a152e0946aa98fd842388d8963068dc76bedd99b16d36250cf07ca41"
+  },
+  "oap/strategic-instructions/initial-orders/029-a-lemma-statistics-and-normalization-compatibility.md": {
+   "bytes": 6702,
+   "class": "generated",
+   "sha256": "b1e67990d1a1eee5bfa64346f9ab066b8f931a4c0f724c8be0960fa7250c8257"
+  },
+  "oap/strategic-instructions/initial-orders/030-a-morphology-aware-detector-calibration-features.md": {
+   "bytes": 6842,
+   "class": "generated",
+   "sha256": "d7cf74dd5e45087c1ffa6d2c0dc14c5dd0edda05a9da3e9adfa5944c9a23e1b2"
+  },
+  "oap/strategic-instructions/initial-orders/031-a-evidence-driven-short-phrase-grouping.md": {
+   "bytes": 6741,
+   "class": "generated",
+   "sha256": "2d92b6438284f2acd624822e767f00b9d134b096590cfffde7b917e9f6026b90"
+  },
+  "oap/strategic-instructions/initial-orders/032-a-versioned-strict-acceptance-thresholds.md": {
+   "bytes": 6804,
+   "class": "generated",
+   "sha256": "624ff56fa9af3d08336ffdd6930f04947353a38d2792d3471958f3e44fe05e39"
+  },
+  "oap/strategic-instructions/initial-orders/033-a-comparative-evaluation-runners.md": {
+   "bytes": 6814,
+   "class": "generated",
+   "sha256": "8766f21333922ee9ba1924ba9ee50565bf0408b338ddea1b6618bb497b3c0549"
+  },
+  "oap/strategic-instructions/initial-orders/034-a-quality-report-with-denominators-and-uncertainty.md": {
+   "bytes": 6750,
+   "class": "generated",
+   "sha256": "480cbf2cc2326b5dbf88e050a0abb2054a8d1b1aa83c470927ae530d6886ec73"
+  },
+  "oap/strategic-instructions/initial-orders/035-a-bounded-cpu-execution-and-cancellation.md": {
+   "bytes": 6720,
+   "class": "generated",
+   "sha256": "de5c7f6e8f3d42dce0bc950ccf91aa138c544e8969b8b6dde4fa29f68511b3d7"
+  },
+  "oap/strategic-instructions/initial-orders/036-a-review-admission-queue-timeout-and-fairness.md": {
+   "bytes": 6831,
+   "class": "generated",
+   "sha256": "a08749232b5f187dc4281bd054f3fae963a37798266fdaa857889a151187defc"
+  },
+  "oap/strategic-instructions/initial-orders/037-a-narrow-api-capability-and-bypass-reject-contract.md": {
+   "bytes": 6883,
+   "class": "generated",
+   "sha256": "cbab4bcb01b109219582137d11bc2d814501701a8f7a942863f995d440bf8df0"
+  },
+  "oap/strategic-instructions/initial-orders/038-a-full-main-response-capture-and-completion-validation.md": {
+   "bytes": 6778,
+   "class": "generated",
+   "sha256": "5b1562cfc4b36eeb27c82da588e0db2737bcd767524c2a7c543783a6c96354f7"
+  },
+  "oap/strategic-instructions/initial-orders/039-a-repair-adapter-integration-without-recursion.md": {
+   "bytes": 6866,
+   "class": "generated",
+   "sha256": "7a817d6d6daa2b66e6e07fc67401cddb4ee4153d1e86960233230be654b6f371"
+  },
+  "oap/strategic-instructions/initial-orders/040-a-main-history-and-review-isolation-contracts.md": {
+   "bytes": 6880,
+   "class": "generated",
+   "sha256": "1bc88a55df97b0f65c439da44a5701b7efb35eb120a3ec4668a82fa165448328"
+  },
+  "oap/strategic-instructions/initial-orders/041-a-envelope-preservation-usage-and-private-metrics.md": {
+   "bytes": 6856,
+   "class": "generated",
+   "sha256": "cde3dc9b049aed590702a1b7036a92b397ccf387c17478528379910b9e77e227"
+  },
+  "oap/strategic-instructions/initial-orders/042-a-api-failure-disconnect-and-concurrency-tests.md": {
+   "bytes": 6971,
+   "class": "generated",
+   "sha256": "83fd1941a007fdc0234c1eb9be2f63b08d16a5ae9d96e28ae292e44691e0df56"
+  },
+  "oap/strategic-instructions/initial-orders/043-a-bounded-live-complete-main-then-review-integration.md": {
+   "bytes": 7002,
+   "class": "generated",
+   "sha256": "3360f1010a5362886f031dc6c9067a93d8c4b2cc0e1cd6458d3b909f108b167e"
+  },
+  "oap/strategic-instructions/initial-orders/044-a-experimental-mvp-evidence-and-independent-closure-gate.md": {
+   "bytes": 7301,
+   "class": "generated",
+   "sha256": "5b05e87f9c995fa4043d6bd25257e339577c7107121309a1df40e1acb19caa1a"
+  },
+  "oap/strategic-instructions/initial-orders/045-a-collocation-feasibility-and-bounded-integration.md": {
+   "bytes": 6829,
+   "class": "generated",
+   "sha256": "afc369bc08d41cbc0dd0f87a2ce8d1d222158b19e2e587f54f27f61e70a5d6ed"
+  },
+  "oap/strategic-instructions/initial-orders/046-a-lower-cutoff-full-statistics-feasibility.md": {
+   "bytes": 6903,
+   "class": "generated",
+   "sha256": "d2405fb361efb4cc4b231433fc65fa5c45a2487fe11445bb8cd1b8bcc1091655"
+  },
+  "oap/strategic-instructions/initial-orders/047-a-measured-latency-and-resource-budget.md": {
+   "bytes": 6791,
+   "class": "generated",
+   "sha256": "b307294292087f275bcc7b033e8ffebe2e91896a1d8f86d866cf64d915ff5f3c"
+  },
+  "oap/strategic-instructions/initial-orders/048-a-broader-negative-harm-evaluation.md": {
+   "bytes": 6808,
+   "class": "generated",
+   "sha256": "30a4ba544228d4a9711d989c2b4368d789cd0895c45263fdc0e76cf8c7e934fb"
+  },
+  "oap/strategic-instructions/initial-orders/049-a-packaging-and-local-installation-templates.md": {
+   "bytes": 6794,
+   "class": "generated",
+   "sha256": "8f07eb0e02e42a69cf12ee4c08132a291cf4f7db43eea629c000672478758062"
+  },
+  "oap/strategic-instructions/initial-orders/050-a-health-readiness-and-disable-rollback-behavior.md": {
+   "bytes": 6907,
+   "class": "generated",
+   "sha256": "5bc52e454c863d010703e4c6ed9f66713ae504069b90172e37d6c666cf03a83d"
+  },
+  "oap/strategic-instructions/initial-orders/051-a-gateway-boundary-and-usage-integration-contract.md": {
+   "bytes": 6870,
+   "class": "generated",
+   "sha256": "58edecf87b0fca45974cd78c92afc781b88a7c2080a69e2987fa5f454629732f"
+  },
+  "oap/strategic-instructions/initial-orders/052-a-explicitly-gated-candidate-deployment-rollback-rehearsal.md": {
+   "bytes": 7006,
+   "class": "generated",
+   "sha256": "6c7a6e81f676a62230dd75ffc4cf3f4ca5dd2a24f0822a1be15fd563f29a6603"
+  },
+  "oap/strategic-instructions/initial-orders/053-a-privacy-prompt-injection-and-structural-abuse-suite.md": {
+   "bytes": 6983,
+   "class": "generated",
+   "sha256": "56ac558ef21ee991f4e0807632ce8ee69a6cad4ef233328bfe6c10a0166a1218"
+  },
+  "oap/strategic-instructions/initial-orders/054-a-reproducibility-rights-and-truthful-final-documentation.md": {
+   "bytes": 7073,
+   "class": "generated",
+   "sha256": "27837d360d5a7988684a0405ceb3395d797501932d28750eaa2eb6bc2174589e"
+  },
+  "oap/strategic-instructions/initial-orders/055-a-verified-service-evidence-and-independent-handoff.md": {
+   "bytes": 7459,
+   "class": "generated",
+   "sha256": "6397390179987fdea0030dbdcb60c6b7e12d112d5d9c8093bf9b60290cff94ef"
+  },
+  "oap/strategic-instructions/strategic_model_init_material.md": {
+   "bytes": 1399,
+   "class": "generated",
+   "sha256": "ac972d8e5fcd58b263df11d044aafed9fb1017d2173157d829fbc2953a1ba3b6"
+  },
+  "oap/templates/CRITICAL-ENTRY-TEMPLATE.md": {
+   "bytes": 1895,
+   "class": "generated",
+   "sha256": "bebdb6e3e4fe6b11c7bca331546278b3f1381804fc1a024003b0c1d5cc56afa4"
+  },
+  "oap/templates/HANDOFF-TEMPLATE.md": {
+   "bytes": 594,
+   "class": "generated",
+   "sha256": "d6513f654f987f1bcc40aff289ee8636edf4817e8efe5767f26e9380f18931f9"
+  },
+  "oap/templates/HUMAN-ADJUDICATION-TEMPLATE.md": {
+   "bytes": 299,
+   "class": "generated",
+   "sha256": "b9a74285f48fcbf7df5901c842929c454dbd06673df5bc8976c5efc14dd1ac46"
+  },
+  "oap/templates/REPORT-TEMPLATE.md": {
+   "bytes": 1692,
+   "class": "generated",
+   "sha256": "210dfae8fe6c4be340a54c7ff02e0a6dda3abf5e4197e86133ccc84eadba094f"
+  },
+  "oap/templates/STRATEGIC-REVIEW-CHECKLIST.md": {
+   "bytes": 963,
+   "class": "generated",
+   "sha256": "cc5046fba0583268af9b1d77d31c8d390634d15e72ba1af5d29d0a6609a83897"
+  },
+  "oap/templates/WORK-ORDER-TEMPLATE.md": {
+   "bytes": 1002,
+   "class": "generated",
+   "sha256": "bc98ab538d0f8c878e2fe95a3d3a0eb62f785fc25bf37d9892b6b7a5f6028a42"
+  },
+  "oap/tests/fake_codex.py": {
+   "bytes": 633,
+   "class": "generated",
+   "sha256": "61ca1bbb8e6177b0393bbed8d19873e9f81343622116ffa4043ab4e307561333"
+  },
+  "oap/tests/fake_gh.py": {
+   "bytes": 372,
+   "class": "generated",
+   "sha256": "18be0a0b7751c9a88a3cdec8945b673b5f279d590c48914157683ee8f9f5efdb"
+  },
+  "oap/tests/support.py": {
+   "bytes": 11311,
+   "class": "generated",
+   "sha256": "8267f3f54abfd3868fa304f9d993576d1941db83a847d9076be191020defb21d"
+  },
+  "oap/tests/test_acceptance.py": {
+   "bytes": 45725,
+   "class": "generated",
+   "sha256": "310d7567d33165e2b71ba6e518fd5bcd2842de921b925c7b7b6324588e1d6033"
+  },
+  "oap/tests/test_candidate_review.py": {
+   "class": "generated",
+   "sha256": "d08d539748c79facfd5af26b85fa208d6088cf9d16f4caed8dc5f28d19af49cc",
+   "bytes": 16208
+  },
+  "oap/tests/test_foreground_pane.py": {
+   "class": "generated",
+   "sha256": "9f221db543e0efa72d5a590d96aefe03f85df0e8d515b13c77b8ccb3d73fb7f7",
+   "bytes": 25311
+  },
+  "oap/tests/test_merged_tail.py": {
+   "class": "generated",
+   "sha256": "b60ef0c436cf1933d8fe7c87a553a943a2eeb6e530002b677c39fb6c2f65b3b1",
+   "bytes": 24769
+  },
+  "oap/tests/test_native_layout.py": {
+   "class": "generated",
+   "sha256": "8ba4f5f2d5746b946d52e72c18a1b004c093218881aec2fad1c3422c67e86d70",
+   "bytes": 5874
+  },
+  "oap/tests/test_process_boundaries.py": {
+   "bytes": 17234,
+   "class": "generated",
+   "sha256": "5aaee2b7cd30136609fdc65e8d3dd0e25bdcd956e65082f3d3c8a92d3d8968ea"
+  },
+  "oap/tests/test_report_history_cache.py": {
+   "class": "generated",
+   "sha256": "21e87a3be9b6ab435c303cb5e3fe0a696d66483e30df6fcef4ba0c72c1f26136",
+   "bytes": 24456
+  },
+  "oap/tests/test_split_layout.py": {
+   "bytes": 11413,
+   "class": "generated",
+   "sha256": "4a2eb57ae93acb3d43df2941872b144905ca5db336be85ce96b05e210f2978cb"
+  },
+  "oap/tests/test_transcript_guard.py": {
+   "bytes": 10307,
+   "class": "generated",
+   "sha256": "69aa6c4ea5fe3727828ce544138b0fc2acd569d6c317b751d88e04e2e6b69916"
+  },
+  "oap/tests/test_versioned_source.py": {
+   "class": "generated",
+   "sha256": "c63c5a2457f23cecb16c44a7d889b24cab78af434ddfbfff38c173ce2dd93cba",
+   "bytes": 3881
+  },
+  "research/tests/research_snapshot_contract.py": {
+   "class": "generated",
+   "sha256": "b15717f95aa2191c38775a2892ee3ccfe7a02aa85e0ced5b7e8d267be5f7c495",
+   "bytes": 4560
+  },
+  "research/tests/test_research_snapshot_synthetic.py": {
+   "class": "generated",
+   "sha256": "11e4bad74af5ed544c46d0026aa64fa859bd7621cd64d2196f62adc04975a4b0",
+   "bytes": 7522
+  }
+ },
+ "purpose": "Scoped generated handoff inventory, not permanent runtime freeze",
+ "schema_version": 1
 }

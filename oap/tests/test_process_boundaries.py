@@ -82,7 +82,10 @@ class Processes(base.LayoutSelection, unittest.TestCase):
 
     def test_B11_manifest_copy_includes_source_lock_and_owner_files(self):
         new=self.root/'manifest install'
-        materialize(SOURCE,new,self.strategy,self.bootstrap)
+        # Bootstrap-mode governance validates the trusted pre-revision
+        # fixture, not the candidate worktree (whose ARCHITECTURE.md is the
+        # authorized 037-a revision and would drift from the frozen seed).
+        materialize(self.repo,new,self.strategy,self.bootstrap)
         self.assertEqual(read(new/'oap/bootstrap-sources.lock.json'),read(SOURCE/'oap/bootstrap-sources.lock.json'))
         self.assertEqual(read(new/'.gitignore'),read(SOURCE/'.gitignore'))
         self.assertEqual(read(new/'LICENSE'),read(SOURCE/'LICENSE'))
