@@ -4,7 +4,7 @@
   </a>
 </div>
 
-# SLAIF LLM Response Repair
+# SLAIF LLM Response Language Repair
 
 <div align="center">
 
