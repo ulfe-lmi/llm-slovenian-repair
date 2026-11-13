@@ -31,7 +31,8 @@ in languages with less training data and tooling support.
 
 This is experimental software that you install and run yourself. The proxy
 accepts connections only from your own computer and checks the completed answer
-before delivering it. Its effectiveness at improving wording has not yet been
+before delivering it when the response is eligible for repair. Other API traffic
+passes through to your existing service. Its effectiveness at improving wording has not yet been
 systematically measured.
 
 ## How it works
@@ -40,15 +41,17 @@ systematically measured.
 flowchart TD
     client["Client — Responses API"]
     proxy["SLAIF proxy<br/>loopback-only"]
-    admit["Admission + request contract"]
-    main["Main upstream Qwen<br/>complete answer captured"]
-    gate["Eligibility + Pandoc protection<br/>exact original spans"]
+    admit["Admission + forwarding"]
+    main["Main upstream Qwen"]
+    gate["Repair eligibility + Pandoc protection<br/>completed answer, exact spans"]
     cpu["CPU detection<br/>bounded exact-coordinate targets"]
     review["Isolated reviewer batch<br/>fresh request, strict JSON"]
     accept["Strict lexical acceptance"]
     out["Final response<br/>only approved spans changed"]
 
-    client --> proxy --> admit --> main --> gate --> cpu
+    client --> proxy --> admit --> main --> gate
+    gate -->|eligible completed text| cpu
+    gate -->|passthrough| out
     cpu -->|eligible targets| review --> accept
     cpu -->|no eligible target| out
     review -->|decline or fail| out
@@ -62,19 +65,22 @@ model.
 
 ## Supported behavior and limits
 
-- **Transport** — `POST /v1/responses`, stateless text input, `store: false`; the
-  documented delayed-SSE profile is also supported. The listener is loopback-only
-  (`127.0.0.1:18024`); a client on another host uses an SSH tunnel.
-- **No token probabilities** — defined Responses API `logprobs` metadata is always
-  removed, even when no correction is made.
+- **Transparent forwarding** — tools, images, Chat Completions, models/health
+  routes, stored conversations and upstream errors pass through. Repair is
+  limited to eligible completed text answers from stateless `POST /v1/responses`
+  calls with `store: false`; declaring tools does not exclude a final text answer.
+  Structured output and tool-call responses are preserved unchanged.
+- **Listener** — loopback-only, default `127.0.0.1:18024`; set `CONCEPT_PORT`
+  to choose another port. See [proxy chaining](docs/PROXY-CHAINING.md) for the
+  `18023 → 18021` configuration and streaming behavior.
+- **No repair probabilities** — defined Responses API `logprobs` metadata is
+  removed on the eligible repair path, even when no correction is made.
 - **Exact, conservative edits** — only approved original-coordinate spans change;
   protected material, formatting and every other code point are preserved.
 - **Fail-closed** — a missing or incompatible index, or a technical failure
   of the optional repair after safe completion, returns the completed original;
-  a malformed or truncated main transport is an honest protocol error; and a
-  valid explicitly-incomplete envelope passes through without repair, keeping
-  its status and text while defined `logprobs` are still removed. Nothing is
-  masked or truncated.
+  truncated transport remains a transport failure. Ineligible envelopes and
+  upstream errors pass through without repair or metadata normalization.
 - **Mandatory pinned Pandoc 3.7.0.2** for structural original-span protection.
 - **External statistics** — real unigram/bigram/trigram counts (CC BY-SA 4.0) are
   not bundled in the repository; the installation fetches them into an external
@@ -89,6 +95,7 @@ model.
 | Architecture and the current runtime | [ARCHITECTURE.md](ARCHITECTURE.md) |
 | First request (quickstart) | [QUICKSTART.md](QUICKSTART.md) |
 | Full installation | [INSTALL.md](INSTALL.md) |
+| Transparent forwarding and proxy chains | [PROXY-CHAINING.md](docs/PROXY-CHAINING.md) |
 | Security model | [SECURITY.md](SECURITY.md) |
 | Testing and verification strategy | [TESTING.md](TESTING.md) |
 | Topic index and navigation | [docs/README.md](docs/README.md) |

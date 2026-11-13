@@ -208,6 +208,10 @@ python3.12 -B concept-verification/proxy.py
 ```
 
 The process remains in the foreground and listens at **`127.0.0.1:18024`**.
+Set `CONCEPT_PORT` before launch to choose another port. The normal launcher
+forwards other API traffic transparently and repairs only eligible completed
+Responses text. See [proxy chaining](docs/PROXY-CHAINING.md) for a complete
+`18023 → 18021` example, passthrough behavior and timeout settings.
 
 There are **two authentication hops**. The incoming client `Authorization` is
 forwarded to the main upstream. `QWEN_API_KEY` authenticates the isolated reviewer

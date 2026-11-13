@@ -70,13 +70,14 @@ PY
 ## 3. What you are looking at
 
 - **`status: "completed"`** — the upstream answer finished before any repair work.
-- **No `logprobs` in the answer** — the proxy never returns token probabilities.
+- **No `logprobs` in the checked answer** — the repair path removes token probabilities.
 - **An unchanged answer is correct** — no eligible suspicion means zero reviewer
   calls and an answer text identical to the completed original; JSON/SSE metadata
   may still be normalized (for example defined `logprobs` removal).
 
-Use `POST /v1/responses`, stateless text input and `store: false`. Chat
-Completions, stored conversations and tools are outside the supported request
-profile, and there is no health or models-list passthrough. See
+Use `POST /v1/responses` and `store: false` for repair. Other API routes,
+tools, images and stored conversations are forwarded; ineligible responses are
+delivered unchanged. Set `CONCEPT_PORT` to select a listener port. See
+[proxy chaining](docs/PROXY-CHAINING.md) for forwarding and streaming details,
 **[INSTALL.md](INSTALL.md)** for the full setup and troubleshooting, and
 **[ARCHITECTURE.md](ARCHITECTURE.md)** for what the proxy does with a response.

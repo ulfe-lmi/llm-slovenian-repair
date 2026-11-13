@@ -13,6 +13,8 @@ the rest by audience.
 - [Installation guide](../INSTALL.md) — full installation: statistics and
   checksums, read-only index, pinned Pandoc, both auth hops, launch, SSH, stop,
   upgrade, recovery, troubleshooting.
+- [Proxy chaining](PROXY-CHAINING.md) — transparent forwarding, repair eligibility,
+  configurable listener ports and an example `18023 → 18021` chain.
 
 ## Architecture and behavior
 

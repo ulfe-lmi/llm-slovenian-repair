@@ -3651,6 +3651,7 @@ class ConstructorMainTests(unittest.TestCase):
                     client_timeout: float = CLIENT_REQUEST_TIMEOUT_SECONDS,
                     delivery_timeout: float = CLIENT_DELIVERY_TIMEOUT_SECONDS,
                     setup_timeout: float = MAIN_SETUP_TIMEOUT_SECONDS,
+                    passthrough_mode: bool = False,
                 ) -> None:
                     super().__init__(
                         ("127.0.0.1", 0),
@@ -3663,6 +3664,7 @@ class ConstructorMainTests(unittest.TestCase):
                         client_timeout=client_timeout,
                         delivery_timeout=delivery_timeout,
                         setup_timeout=setup_timeout,
+                        passthrough_mode=passthrough_mode,
                     )
                     seen["setup_timeout"] = self.setup_timeout
                     constructed.append(self)

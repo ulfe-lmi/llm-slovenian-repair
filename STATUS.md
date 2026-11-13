@@ -7,6 +7,13 @@ immutable orders and reports.
 
 ## Product
 
+The normal launcher includes a transparent forwarding layer and a configurable
+`CONCEPT_PORT`, supporting an additional `18023 → 18021` hop. API traffic outside
+the repair profile passes through unchanged; eligible final text responses can
+be repaired even when tools or multimodal input were supplied. See
+[PROXY-CHAINING](docs/PROXY-CHAINING.md). The strict repair core and its historical
+qualification below remain separate from this forwarding addition.
+
 A **runnable loopback proxy** is implemented in `concept-verification/` (one
 Python 3.12 parent process on `127.0.0.1:18024` with bounded owned child
 processes): bounded admission, strict intake and
@@ -48,8 +55,8 @@ INSTALL).
 - The **human-labelled target-distribution evaluation** of the historical
   PLAN 14.2 proposal was never run, and no current order or page requires it
   as an outstanding obligation (quality stays unmeasured; no new gate).
-- Stored response chaining, tools, images and structured output are outside
-  the supported request profile — out of scope, not missing features.
+- Stored response chaining, tools, images and structured output are forwarded
+  by the transparent launcher; they are outside the strict repair profile.
   Bounded multi-client admission is supported (accepted sockets are queued
   under the admission budget); multi-user SERVICE/production operation is
   unsupported.

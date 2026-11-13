@@ -38,6 +38,14 @@ confidentiality claim) and must never be staged, committed or packaged.
 
 ## Current behavior
 
+The normal launcher now provides transparent HTTP forwarding, with a configurable
+`CONCEPT_PORT`. Tools, multimodal input, other routes and upstream errors pass
+through; eligible final Responses text can still be repaired when tools were
+declared. Structured, stored and tool-call responses bypass repair unchanged.
+See [proxy chaining](../docs/PROXY-CHAINING.md) for the current forwarding layer.
+The narrow profile below describes the underlying strict repair implementation,
+also available through `CONCEPT_PASSTHROUGH=0`.
+
 The current runnable proxy is the loopback OpenAI-compatible Responses
 endpoint. The summary below describes its operational boundaries;
 [ARCHITECTURE.md](../ARCHITECTURE.md) holds the full component and failure
