@@ -372,8 +372,8 @@
   },
   "oap/bin/oap_core.py": {
    "class": "generated",
-   "sha256": "8820d1bd88b75ca8ca603f3e43fd0581690f50b08f05a1153aad06ab8946c0ac",
-   "bytes": 106868
+   "sha256": "371a181f9b0b637a21e5a09a2e017497bd003ca5656b5b561720c9d1b09c120e",
+   "bytes": 108051
   },
   "oap/bin/oap_fifo.py": {
    "bytes": 192,
@@ -889,6 +889,11 @@
    "class": "generated",
    "sha256": "11e4bad74af5ed544c46d0026aa64fa859bd7621cd64d2196f62adc04975a4b0",
    "bytes": 7522
+  },
+  "oap/tests/test_repository_rename.py": {
+   "class": "generated",
+   "bytes": 2932,
+   "sha256": "6675e3fe6b0882fd5c59677c4ffcd8319c75d87452d4197eb5d783400bc803cb"
   }
  },
  "purpose": "Scoped generated handoff inventory, not permanent runtime freeze",
