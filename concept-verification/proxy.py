@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import contextlib
 import http.client
+import ipaddress
 import json
 import math
 import os
@@ -26,6 +27,7 @@ import client_transport
 import composed_validation
 import delivery_transport
 import header_transport
+import passthrough
 import request_admission
 import request_lifecycle
 import upstream_setup
@@ -296,7 +298,8 @@ def transform_sse(raw: bytes, repair: Callable[[str], str]) -> tuple[bytes, bool
                 _ct = _it.get("content")
                 if isinstance(_ct, list):
                     for _pp in _ct:
-                        if isinstance(_pp, dict) and _pp.get("type") == "output_text" and "logprobs" in _pp:
+                        if (isinstance(_pp, dict) and _pp.get("type") == "output_text"
+                                and "logprobs" in _pp):
                             del _pp["logprobs"]
                             logprobs_modified.add(_idx)
         elif _et in ("response.created", "response.in_progress", "response.completed",
@@ -811,7 +814,8 @@ def normalize_sse_body(raw: bytes) -> bytes:
                 ct = it.get("content")
                 if isinstance(ct, list):
                     for pp in ct:
-                        if isinstance(pp, dict) and pp.get("type") == "output_text" and "logprobs" in pp:
+                        if (isinstance(pp, dict) and pp.get("type") == "output_text"
+                                and "logprobs" in pp):
                             del pp["logprobs"]
                             modified.add(idx)
         elif et in ("response.created", "response.in_progress", "response.completed",
@@ -1999,6 +2003,219 @@ class _Handler(BaseHTTPRequestHandler):
         return
 
 
+class _PassthroughHandler(_Handler):
+    """Forward every route; inspect only potentially repairable Responses."""
+
+    def _repair_candidate(self, body: bytes) -> bool:
+        if self.command != "POST" or self.path.split("?", 1)[0] != "/v1/responses":
+            return False
+        if self.headers.get("Content-Encoding", "identity").lower() != "identity":
+            return False
+        try:
+            request = _strict_json_body(body)
+        except (ProxyError, ValueError, OverflowError, RecursionError):
+            return False
+        # Tools and multimodal/history input remain upstream's concern. The
+        # *answer* must independently satisfy the existing plain-text contract.
+        if request.get("store") is not False or request.get("background", False) is not False:
+            return False
+        if any(request.get(key) is not None for key in ("previous_response_id", "conversation")):
+            return False
+        if type(request.get("stream", False)) is not bool:
+            return False
+        text = request.get("text", {})
+        if not isinstance(text, dict):
+            return False
+        for formatting in (text.get("format", {"type": "text"}),
+                           request.get("response_format", {"type": "text"})):
+            if not isinstance(formatting, dict) or formatting.get("type") != "text":
+                return False
+        return True
+
+    def _transform(
+        self, raw: bytes, media_type: str, scope: request_lifecycle.CancellationScope,
+        started: float,
+    ) -> bytes:
+        owner = cast(ConceptProxy, self.server)
+        # Unsupported or malformed envelopes are opaque passthrough. In
+        # particular, tool calls and structured output never enter repair or
+        # metadata normalization merely because they share a Responses route.
+        try:
+            if media_type == "application/json":
+                if validate_completed_envelope(_strict_json_body(raw)) is None:
+                    return raw
+            elif not any(
+                value.get("type") == "response.completed"
+                and isinstance(value.get("response"), dict)
+                and validate_completed_envelope(value["response"]) is not None
+                for _block, value in _events(raw)
+            ):
+                return raw
+        except (ProxyError, ValueError, OverflowError, RecursionError):
+            return raw
+        owner.engine.begin_request(scope)
+        if media_type == "application/json":
+            repaired, _changed = transform_json(raw, owner.engine.repair)
+        else:
+            repaired, _changed = transform_sse(raw, owner.engine.repair)
+        details = owner.engine.take_details()
+        owner.write_traces(uuid.uuid4().hex, details, time.monotonic() - started)
+        owner.observe_usage(details)
+        owner.engine.mark_usage_observed()
+        return repaired
+
+    def _relay(self) -> None:
+        owner = cast(ConceptProxy, self.server)
+        started = time.monotonic()
+        connection: http.client.HTTPConnection | None = None
+        response: http.client.HTTPResponse | None = None
+        guard: upstream_setup.SetupGuard | None = None
+        scope: request_lifecycle.CancellationScope | None = None
+        first_control: BaseException | None = None
+        try:
+            try:
+                path = passthrough.request_path(owner.upstream.path, self.path)
+                body = passthrough.read_request(self)
+            except OverflowError:
+                self._send_intake_error(413, "REQUEST_TOO_LARGE")
+                return
+            except ValueError:
+                self._send_intake_error(400, "REQUEST_FRAMING_INVALID")
+                return
+            if self._intake is not None and self._intake.release():
+                self._send_intake_error(408, "REQUEST_INTAKE_TIMEOUT")
+                return
+            scope = request_lifecycle.CancellationScope(self.connection)
+            scope.start()
+            cancelled = scope.cancelled
+            # End-to-end headers (including authorization and vendor headers)
+            # survive. Hop-by-hop headers, Host, and framing are reconstructed.
+            excluded = passthrough.hop_headers(self.headers) | {"host", "content-length"}
+            headers = [(key, value) for key, value in self.headers.items()
+                       if key.lower() not in excluded]
+            if (body or self.command in {"POST", "PUT", "PATCH"}
+                    or self.headers.get("Content-Length")):
+                headers.append(("Content-Length", str(len(body))))
+            connection = upstream_setup.open_upstream_connection(
+                scheme=owner.upstream.scheme, host=cast(str, owner.upstream.hostname),
+                port=owner.upstream.port or (443 if owner.upstream.scheme == "https" else 80),
+                request_path=path, body=body, headers=headers,
+                deadline=time.monotonic() + owner.setup_timeout,
+                capture_timeout=owner.capture_timeout, cancelled=cancelled,
+                method=self.command,
+            )
+            sock = connection.sock
+            response = header_transport.acquire_response(
+                connection, owner.header_timeout, cancelled=cancelled,
+            )
+            guard = upstream_setup.SetupGuard(time.monotonic() + owner.capture_timeout)
+            guard.adopt_cancelled(cancelled)
+            if sock is not None and not guard.adopt(sock):
+                raise ProxyError("upstream body deadline expired")
+            media_type = response.getheader("Content-Type", "").split(";", 1)[0].strip().lower()
+            inspect_answer = (
+                self._repair_candidate(body) and response.status == 200
+                and media_type in {"application/json", "text/event-stream"}
+                and response.getheader("Content-Encoding", "identity").lower() == "identity"
+            )
+            prefix = b""
+            buffered = False
+            transformed = False
+            if inspect_answer:
+                chunks: list[bytes] = []
+                size = 0
+                while size <= MAIN_BODY_MAX_BYTES:
+                    scope.raise_if_cancelled()
+                    chunk = response.read1(min(65536, MAIN_BODY_MAX_BYTES + 1 - size))
+                    if not chunk:
+                        if response.length not in (None, 0):
+                            raise ProxyError("incomplete upstream body")
+                        buffered = True
+                        break
+                    chunks.append(chunk)
+                    size += len(chunk)
+                prefix = b"".join(chunks)
+                if buffered:
+                    if guard.release():
+                        raise ProxyError("upstream body deadline expired")
+                    guard = None
+                    scope.raise_if_cancelled()
+                    original = prefix
+                    prefix = self._transform(prefix, media_type, scope, started)
+                    transformed = prefix != original
+            scope.raise_if_cancelled()
+
+            def emit() -> None:
+                assert response is not None
+                self.send_response_only(response.status, response.reason)
+                excluded = passthrough.hop_headers(response.headers) | {"content-length"}
+                if transformed:
+                    # A transformed entity cannot retain validators for the
+                    # original bytes. Unrelated metadata headers are preserved.
+                    excluded |= {"etag", "content-md5", "digest", "content-digest"}
+                for key, value in response.getheaders():
+                    if key.lower() not in excluded:
+                        self.send_header(key, value)
+                if buffered:
+                    self.send_header("Content-Length", str(len(prefix)))
+                elif response.getheader("Content-Length") is not None:
+                    self.send_header(
+                        "Content-Length", cast(str, response.getheader("Content-Length")),
+                    )
+                self.send_header("Connection", "close")
+                self.end_headers()
+                if self.command == "HEAD":
+                    return
+                self.wfile.write(prefix)
+                self.wfile.flush()
+                if not buffered:
+                    while True:
+                        scope.raise_if_cancelled()
+                        chunk = response.read1(65536)
+                        if not chunk:
+                            if response.length not in (None, 0):
+                                raise ProxyError("incomplete upstream body")
+                            break
+                        self.wfile.write(chunk)
+                        self.wfile.flush()
+
+            self.close_connection = True
+            self._deliver(emit)
+        except request_lifecycle.RequestCancelled:
+            owner.engine.abort_request(owner.observe_usage)
+            self.close_connection = True
+        except MemoryError as exc:
+            first_control = exc
+            raise
+        except Exception:
+            if not self._emission_begun:
+                self._deliver(
+                    lambda: self._send_error_json(502, "upstream_error", "UPSTREAM_FAILED")
+                )
+            self.close_connection = True
+        except BaseException as exc:
+            first_control = exc
+            raise
+        finally:
+            with contextlib.ExitStack() as cleanup:
+                if scope is not None:
+                    cleanup.callback(request_lifecycle.finish_owned_scope, scope, first_control)
+                if connection is not None:
+                    cleanup.callback(connection.close)
+                if response is not None:
+                    cleanup.callback(response.close)
+                if guard is not None:
+                    cleanup.callback(guard.release)
+
+    do_GET = _relay
+    do_HEAD = _relay
+    do_POST = _relay
+    do_PUT = _relay
+    do_PATCH = _relay
+    do_DELETE = _relay
+    do_OPTIONS = _relay
+
+
 class ConceptProxy(HTTPServer):
     def __init__(
         self,
@@ -2013,9 +2230,10 @@ class ConceptProxy(HTTPServer):
         client_timeout: float = CLIENT_REQUEST_TIMEOUT_SECONDS,
         delivery_timeout: float = CLIENT_DELIVERY_TIMEOUT_SECONDS,
         setup_timeout: float = MAIN_SETUP_TIMEOUT_SECONDS,
+        passthrough_mode: bool = False,
     ):
-        if address[0] != "127.0.0.1":
-            raise ValueError("proxy must bind to loopback")
+        if address[0] != "127.0.0.1" and not passthrough_mode:
+            raise ValueError("strict proxy must bind to loopback")
         parsed = urlparse(upstream)
         if parsed.scheme not in ("http", "https") or not parsed.hostname:
             raise ValueError("upstream must be an explicit HTTP URL")
@@ -2109,7 +2327,7 @@ class ConceptProxy(HTTPServer):
         # startup explicitly - no silent fallback, no runtime IO
         # self-probe.
         request_lifecycle.validate_native_poll_capability()
-        super().__init__(address, _Handler)
+        super().__init__(address, _PassthroughHandler if passthrough_mode else _Handler)
         self.upstream = parsed
         self.engine = engine
         self.capture_timeout = timeout
@@ -2479,6 +2697,13 @@ class _IntakeKwargs(TypedDict, total=False):
 
 def main() -> int:
     upstream = os.environ.get("CONCEPT_UPSTREAM_URL", "http://127.0.0.1:8001")
+    host = str(ipaddress.IPv4Address(os.environ.get("CONCEPT_HOST", "127.0.0.1")))
+    port = int(os.environ.get("CONCEPT_PORT", "18024"))
+    if not 1 <= port <= 65535:
+        raise ValueError("CONCEPT_PORT must be between 1 and 65535")
+    passthrough_setting = os.environ.get("CONCEPT_PASSTHROUGH", "1")
+    if passthrough_setting not in {"0", "1"}:
+        raise ValueError("CONCEPT_PASSTHROUGH must be 0 or 1")
     index = os.environ.get("CONCEPT_INDEX")
     if not index:
         raise SystemExit("CONCEPT_INDEX is required")
@@ -2572,7 +2797,7 @@ def main() -> int:
             os.environ["CONCEPT_SETUP_TIMEOUT"]
         )
     proxy = ConceptProxy(
-        ("127.0.0.1", 18024),
+        (host, port),
         upstream,
         RepairEngine(Path(index), reviewer, pandoc=pandoc_spec),
         header_timeout=float(
@@ -2583,6 +2808,7 @@ def main() -> int:
         timeout=float(os.environ.get("CONCEPT_TIMEOUT", "30")),
         trace_dir=Path(trace_value) if trace_value else None,
         usage_observer=usage_observer,
+        passthrough_mode=passthrough_setting == "1",
         **intake_kwargs,
     )
     # One owning close on normal serve return and every unwind

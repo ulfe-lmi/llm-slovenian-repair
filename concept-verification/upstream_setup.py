@@ -1029,12 +1029,13 @@ def _request_phase(
     connection: http.client.HTTPConnection,
     request_path: str,
     body: bytes,
-    headers: dict[str, str],
+    headers: dict[str, str] | list[tuple[str, str]],
     deadline: float,
     capture_timeout: float,
     guard: SetupGuard,
     sock: socket.socket,
     cancelled: Callable[[], bool] | None = None,
+    method: str = "POST",
 ) -> http.client.HTTPConnection:
     """Hand the prepared connection to the stdlib request emitter.
 
@@ -1053,7 +1054,15 @@ def _request_phase(
         if remaining <= 0:
             raise DeadlineExceeded
         sock.settimeout(min(capture_timeout, remaining))
-        connection.request("POST", request_path, body=body, headers=headers)
+        if isinstance(headers, dict):
+            connection.request(method, request_path, body=body, headers=headers)
+        else:
+            # A relay preserves repeated end-to-end headers. Host and framing
+            # are supplied for this hop, rather than copied from the client.
+            connection.putrequest(method, request_path, skip_accept_encoding=True)
+            for name, value in headers:
+                connection.putheader(name, value)
+            connection.endheaders(body)
     except BaseException as exc:
         # The exact owned connection (and its socket) is closed on
         # EVERY failure kind before the failure propagates; no
@@ -1086,10 +1095,11 @@ def open_upstream_connection(
     port: int,
     request_path: str,
     body: bytes,
-    headers: dict[str, str],
+    headers: dict[str, str] | list[tuple[str, str]],
     deadline: float,
     capture_timeout: float,
     cancelled: Callable[[], bool] | None = None,
+    method: str = "POST",
 ) -> http.client.HTTPConnection:
     """Prepare and emit the main upstream request under one deadline.
 
@@ -1186,6 +1196,7 @@ def open_upstream_connection(
                 connection, request_path, body, headers,
                 deadline, capture_timeout, guard, sock,
                 cancelled,
+                method,
             )
             # The request write completed: release the setup clock
             # BEFORE response acquisition.  A racing completion loses
