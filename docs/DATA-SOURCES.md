@@ -1,37 +1,60 @@
-# Data source inventory
+# Data sources
 
-For **current runnable-proxy installation**, use
-[lab deployment: statistics downloads and index preparation](LAB-DEPLOYMENT.md#statistics-licence-and-exact-downloads).
-It records the verified CC BY-SA 4.0 publisher terms for the two required Gigafida
-2.0 archives, exact URLs/size/SHA-256, the external data directory and SQLite
-preparation/checks. Real statistics are not bundled with the Apache-2.0 code.
+Acquisition boundaries, evidence semantics and the dated source inventory for
+this project. For the **current runnable-proxy installation**, the canonical
+procedure is the root [INSTALL.md](../INSTALL.md) — the one installation
+recipe. [LAB-DEPLOYMENT.md](LAB-DEPLOYMENT.md) is a compatibility pointer to
+that procedure. Real statistics are **not bundled** with the Apache-2.0 code.
+
+## Current runtime data
+
+- The proxy loads one **external read-only SQLite index** built from the two
+  required Gigafida 2.0 archives (word lists + word n-grams, CC BY-SA 4.0).
+- The archives and index are **external local data**: the project stores them
+  outside the repository by design — a storage choice, not a confidentiality
+  claim — and never stages, commits or packages them.
+- Word absence is `UNAVAILABLE`. Missing n-grams are `CENSORED` with an unknown
+  denominator, never exact zero; the published 2-per-million retention cutoff
+  explains the censored missing entries but is not the context denominator
+  itself.
+- The Apache-2.0 code licence does not relicense external data; attribution and
+  ShareAlike obligations remain on the data.
+
 The dated inventory and objective-specific acquisition receipts below preserve
-historical state; their `NOT_ACQUIRED` labels are not current installation status.
-Their separate-authorization template is historical, not an additional approval
-step in the current owner-authorized installation recipe.
+historical state; their `NOT_ACQUIRED` labels are historical objective state,
+not current installation status.
 
-The committed [source inventory](../resources/source-inventory-v1.json) is a dated
-metadata snapshot observed at `2026-09-08T09:13:23Z`. It records three publisher-labelled,
-derived ZIP artifacts and one Gigafida 2.2 query interface. It does not contain
-source bytes, grant bulk/API access, settle redistribution, or authorize a legal
+## Dated source inventory
+
+Committed snapshot observed 2026-09-08T09:13:23Z:
+[source inventory](../resources/source-inventory-v1.json). It records three
+publisher-labelled, derived ZIP artifacts and one Gigafida 2.2 query interface,
+contains no source bytes, and grants no bulk/API access, redistribution, legal
 or release decision.
 
-## Current inventory
-
-| Source | Selected use | Access and state | Evidence boundary |
-| --- | --- | --- | --- |
-| Gigafida 2.0 word lists | Objective 006 | Published derived archive; `NOT_ACQUIRED` | Word-list values can be exact only within the declared release/list/query scope after a controlled import. |
-| Gigafida 2.0 word n-grams | Objective 007 | Published derived archive; `NOT_ACQUIRED` | The 2-per-million minimum makes missing entries `CENSORED`, never exact zero; retained n-grams are not a complete context denominator. |
-| Sloleks 3.1 | Objective 027 | Published derived archive; `NOT_ACQUIRED` | The lexical, frequency, and morphology scope is distinct and cannot be silently combined with Gigafida. |
-| Gigafida 2.2 query interface | None; not a fallback | `UNKNOWN_UNVERIFIED`; no artifact | The page states provider-agreement terms. Public interactive query access is not bulk/API or redistribution permission. |
+- **Gigafida 2.0 word lists** — objective 006; published derived archive,
+  `NOT_ACQUIRED`. Evidence boundary: word-list values can be exact only within
+  the declared release/list/query scope after a controlled import.
+- **Gigafida 2.0 word n-grams** — objective 007; published derived archive,
+  `NOT_ACQUIRED`. Evidence boundary: the 2-per-million minimum makes missing
+  entries `CENSORED`, never exact zero; retained n-grams are not a complete
+  context denominator.
+- **Sloleks 3.1** — objective 027; published derived archive,
+  `NOT_ACQUIRED`. Evidence boundary: the lexical, frequency and morphology
+  scope is distinct and cannot be silently combined with Gigafida.
+- **Gigafida 2.2 query interface** — none, not a fallback;
+  `UNKNOWN_UNVERIFIED`, no artifact. The page states provider-agreement terms;
+  public interactive query access is not bulk/API or redistribution permission.
 
 The first three records identify `CC BY-SA 4.0` publisher labels. The Apache-2.0
 license for project code does not relicense external data. Attribution, ShareAlike
 obligations, release packaging, compatible terms, and redistribution approval remain
 separate review gates. The repository MD5 values are publisher transport metadata;
 they are checked together with HTTPS and exact size, but are not project identity.
-The inventory leaves project SHA-256 null until an operator performs a controlled
-fetch and records the verifier result.
+In the dated snapshot the project SHA-256 is null because no fetch had occurred at
+observation time; that null is part of the frozen record — operators do not
+mutate the snapshot after installation, and the current fixed hashes are in
+[INSTALL.md](../INSTALL.md).
 
 ## Controlled offline verification
 
@@ -43,18 +66,21 @@ symlink/non-regular members, and applies source-specific member, total-size, and
 compression-ratio limits. It emits only an ID, sizes, counts, and hashes. It never
 opens an inventory URL, downloads, extracts, or writes an artifact.
 
-Validate the committed metadata offline:
+Validate the committed metadata offline (Python 3.12 per
+[DEVELOPMENT.md](DEVELOPMENT.md)):
 
 ```text
 python3.12 scripts/verify_source_artifact.py \
   --inventory resources/source-inventory-v1.json --validate-only
 ```
 
-An operator-controlled acquisition, if separately authorized, is intentionally a
-manual staging step. Resolve the selected URL and exact byte size from the canonical
-inventory, write only to an owned `*.part` path, require HTTPS for the initial request
-and redirects, and verify before accepting the file. The following is an inspectable
-template, not a command run by this project or CI:
+### Historical objective-005 acquisition template (not a current prerequisite)
+
+Under the historical objective-005 order, acquisition was an operator-controlled
+manual step under that order's own authorization; the current installation does
+not use it and has no such extra approval gate. The template below is preserved
+from that procedure for inspection — it is not a command run by this project
+or CI:
 
 ```text
 selected_id='gigafida-2.0-words'
@@ -80,16 +106,17 @@ curl --fail --silent --show-error --location \
 python3.12 scripts/verify_source_artifact.py \
   --inventory resources/source-inventory-v1.json \
   --source-id "$selected_id" --artifact "$part_path"
-# Only after separate authorization and successful verification:
+# In that historical procedure the rename required the order's own authorization
+# and a successful verification:
 mv -- "$part_path" "/owned/staging/${selected_id}.zip"
 ```
 
-The offline verifier checks the exact selected byte size and publisher MD5, and emits
-the computed project SHA-256. Only a successful result with that recorded SHA-256 can
-support a later import order. A failed or partial file must not be renamed into an
-accepted location; the final `mv` remains separately authorized.
-No source artifact was fetched, extracted, imported, or added to this repository for
-objective 005.
+The offline verifier checks the exact selected byte size and publisher MD5, and
+emits the computed project SHA-256. Only a successful result with that recorded
+SHA-256 could support a later import order. A failed or partial file must not be
+renamed into an accepted location.
+No source artifact was fetched, extracted, imported, or added to this repository
+for objective 005.
 
 ## Evidence limits
 
@@ -127,91 +154,20 @@ the runtime package. The versioned receipts under
 006-b controlled attempt, and the 006-c bounded corrective smoke. The former
 blocked at the source-specific terminal tab. 006-c binds exactly one such tab
 without admitting an optional 29th field, but its first-32-row structural sampler
-stopped before importer execution. No external bytes or rows are retained, and
-neither receipt authorizes redistribution or a release claim.
-Round 006-d adds a content-free structural classifier and synthetic contract
-tests. Its one verifier-first archive fetch passed exact artifact verification,
-but the bounded member-prefix handoff failed before 32 complete rows reached the
-classifier. The 006-d receipt records the exact archive/header identities,
-`BLOCKED_ROW_DIAGNOSTIC_INPUT`, null aggregate diagnosis, no importer execution,
-cleanup, and no retained source bytes. It does not select an importer format or
-authorize redistribution.
-Round 006-e corrects that handoff with a single public stream-routing boundary
-and synthetic ZIP-member tests. Its one verifier-first fetch reached exactly 32
-rows; the aggregate records 31 28-field rows and one empty terminal 29th field,
-without retaining content or running an importer smoke. This remains bounded
-format evidence, not importer compatibility or redistribution authorization.
-Round 006-f supersedes the 006-c mandatory-tab documentation with the
-evidence-fixed optional single empty terminal tab contract. Offline tests prove
-both accepted shapes and reject wider extensions. Its one archive fetch passed
-verification, but the bounded smoke harness failed before member access, so no
-real importer compatibility evidence was obtained; neither it nor the earlier
-structural sample is a full-source, linguistic-quality, rights, release, or
-deployment claim.
-Round 006-g adds `scripts/smoke_unigram_prefix.py` as the verifier-first
-compatibility boundary. After successful canonical verification it opens the
-selected member once, captures exactly 14 preamble lines, the 834-byte header,
-and 32 data rows within a 4 MiB envelope, checks aggregate-only structure, and
-calls the public importer twice on fresh streams. A successful result is only a
-bounded prefix with `source/query=COMPLETE` and `import=PARTIAL`; it does not
-retain source data or establish full archive import, lookup readiness, language
-quality, rights, redistribution, release, deployment, or acceptance.
-The one ordered 006-g GET passed canonical verification, but the committed CLI
-stopped before member access because the direct interpreter could not resolve the
-checkout `src` path. The helper now bootstraps that path and its offline contract
-is green; the acquired tree was deleted with no retry, so the 006-g receipt keeps
-member, structural, and importer observations null. This remains a blocked
-compatibility attempt, not a full-source import or release/rights decision.
-Round 006-h adds an artifact-free `--preflight` mode to close that invocation
-boundary. It loads the canonical inventory entry, validates the exact 834-byte
-header and 28-field count, constructs real source/query `COMPLETE` and import
-`PARTIAL` provenance, and imports the public importer entry point and bounded
-limits. Preflight and artifact arguments are mutually exclusive, and its `READY`
-summary is limited to identities, counts, completeness, hashes, and contract
-labels; it does not emit header or row content. The earlier system-Python
-dependency failure remains historical evidence, not a readiness claim.
-The exact 006-h preflight passed in an owned isolated environment. Its one direct
-GET passed canonical verification and the bounded 32-row structural aggregate,
-but the first real importer invocation stopped at `import-invalid-count`; the
-helper made no second run or GET. Cleanup removed and verified the exact source
-and environment, and the receipt records cumulative ten GETs, null importer
-hashes, no retained source content, and no redistribution authorization.
-
-Round 006-i adds a mutually exclusive numeric diagnostic path after the same
-preflight, canonical verifier, selected-member capture, and structural aggregate.
-It classifies the eight absolute-count and sixteen published-decimal columns into
-a fixed closed syntax enum, counts current-parser-compatible cells by semantic
-kind, and records the first incompatible row/column/category. The one diagnostic
-profile covered 32 rows and 768 numeric cells; it observed 248 compatible count
-cells and 4 compatible decimal cells, with the first incompatibility at row 1,
-column 5 (`OTHER_ASCII`). The current importer was called exactly once and
-returned `invalid-count:5`. These are content-free syntax observations: they do
-not infer locale, grouping, numeric meaning, conversion, denominator completeness,
-full-import compatibility, or redistribution authority. The 006-i receipt records
-one GET (cumulative eleven), preserved 006-f/g/h failures, and exact cleanup.
-
-Round 006-j keeps this verifier-first boundary and adds only content-free
-row-1 refinement. Its fixed marker categories report 24 distinct
-`ASCII_MIXED_OTHER` markers, no same-column recurrence, and column-specific
-absolute/share/relative families. The first four identity fields produce a fixed
-category/equality/NFC-casefold profile that is an outlier against rows 2–32; this
-does not identify metadata, units, missing lexical values, or a permitted skip.
-The helper then builds an in-memory envelope with the original preamble/header and
-rows 2–32, invokes the unchanged importer exactly once with `max_rows=31`, and
-records only the safe `invalid-decimal:6` boundary. One new direct GET brings the
-cumulative objective-006 count to twelve. No source content is retained, and no
-conversion, full import, rights, redistribution, release, or deployment claim is
-made.
-
-Round 006-k attempted to retain the verified archive in the owner-selected strategic
-cache but stopped at the selected filesystem's hardlink boundary; its exact part was
-removed and cumulative GETs reached thirteen. Round 006-l completes the handoff with
-the cache outside the repository and package, fixed canonical names and source
-identity, and promotion only after the existing inventory-bound ZIP verifier passes.
-Plan and validation are network-free; promotion has no downloader and consumes one
-caller-owned part through a lock-protected same-directory `os.replace`. The renamed
-final is reopened, reverified, written with exclusive metadata, and inspected again.
-One new GET brings cumulative objective-006 GETs to fourteen; two sequential
-content-free diagnostic consumers reuse the same generation with three validations.
-The receipt records the prior failure, exact generation, retention lifecycle, and
-`redistribution_ready=false`.
+stopped before importer execution. No external bytes or rows from those rounds
+entered Git, the repository, the package or public records, and neither receipt
+authorizes redistribution or a release claim.
+Rounds 006-a through 006-l iterated that verifier-first boundary: the recovery
+handoff and blocked real smoke (006-a/b/c), the content-free row-structure
+classifier (006-d), the corrected 32-row stream routing (006-e), the
+evidence-fixed optional single empty terminal tab (006-f), the bounded
+prefix smoke with its blocked member access (006-g), the artifact-free
+`--preflight` mode (006-h), the numeric syntax diagnostics (006-i/j), and the
+cache promotion outside the repository and package with
+`redistribution_ready=false` (006-k/l). The versioned receipts under
+`resources/source-acquisitions/` and the immutable round reports under
+`oap/reports/` are the authoritative record. No external bytes or rows entered
+Git, the repository, the package or public records; 006-l expressly retained an
+external canonical cache outside the repository for reuse, which is a storage
+choice, not a redistribution. No receipt authorizes redistribution, release or
+deployment.

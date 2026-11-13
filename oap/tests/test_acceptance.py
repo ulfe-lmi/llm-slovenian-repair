@@ -33,6 +33,70 @@ def bootstrap_ignore(directory, names):
     return ignored
 
 
+# Trusted accepted baseline anchoring the initial-bootstrap fixture. The
+# fixture presents the genuine pre-revision governance source (accepted
+# identities and manifest, exact historical seeds) together with the current
+# executable helpers; bootstrap denial assertions and production guards are
+# unchanged, and a candidate can never authorize itself against the seed.
+TRUSTED_ACCEPTED_REF = "987fdb9ed07856d735f1e684f8af342461bf5236"
+BOOTSTRAP_SOURCE_OVERLAY = (
+    "AGENTS.md", "ARCHITECTURE-for-agents.md", "ARCHITECTURE.md",
+    "CRITICAL.md", "OAP-COMMUNICATION-coding-agent.md", "PLAN.md",
+    "SECURITY.md", "TESTING.md", "oap/coding-instructions/AGENTS.md",
+    "oap/governance/CONTEXT-BUDGET.md", "oap/governance/DISTILLATION-MAP.md",
+    "oap/governance/MANIFEST.json", "oap/governance/WORKSPACE-LAYOUT.json",
+    "oap/prompts/coding-round.md", "oap/prompts/ica-start.md",
+    "oap/prompts/strategic-start.md", "oap/strategic-instructions/AGENTS.md",
+    "oap/strategic-instructions/OAP-COMMUNICATION-strategic.md",
+    "oap/strategic-instructions/strategic_model_init_material.md",
+)
+
+
+def generated_files_bytes(value):
+    return (json.dumps(value, indent=1, sort_keys=False, ensure_ascii=False) + "\n").encode()
+
+
+def bootstrap_provenance_root():
+    """Git provenance for trusted pre-revision fixture bytes.
+
+    A real worktree supplies its own objects; a file-only copied workspace
+    (development baseline driver) resolves the explicit validated history
+    worktree named by OAP_FORWARD_RECOVERY_HISTORY_SOURCE. No fallback
+    permission exists.
+    """
+    if (SOURCE / ".git").exists():
+        return SOURCE
+    history = os.environ.get(VERSIONED_HISTORY_SOURCE_ENV)
+    require(history, "BOOTSTRAP_PROVENANCE_UNAVAILABLE")
+    root = Path(history).resolve()
+    result = git(root, "rev-parse", "--show-toplevel", check=False)
+    require(result.returncode == 0 and Path(result.stdout.decode("utf-8", "strict").strip()).resolve() == root,
+            "BOOTSTRAP_PROVENANCE_NOT_WORKTREE")
+    return root
+
+
+def install_trusted_bootstrap_source(repo):
+    """Present one fixture as the genuine trusted pre-revision governance
+    source with the current executable helpers.
+
+    Shared by every fixture flow that aliases Acceptance.setUp (candidate
+    review, split/native layout, process boundaries, merged tail,
+    foreground): the accepted identities/manifest and exact historical
+    seeds are reinstalled into the fixture, and the mutable generated
+    snapshot is re-pinned to the fixture's own bytes. Bootstrap denial
+    assertions and production guards are unchanged; a candidate can never
+    authorize itself against the seed."""
+    root = bootstrap_provenance_root()
+    for rel in BOOTSTRAP_SOURCE_OVERLAY:
+        write(repo / rel, git_blob(root, TRUSTED_ACCEPTED_REF, rel))
+    files = jsread(repo / "oap/GENERATED-FILES.json")
+    for rel in files["files"]:
+        data = read(repo / rel)
+        files["files"][rel]["sha256"] = digest(data)
+        files["files"][rel]["bytes"] = len(data)
+    write(repo / "oap/GENERATED-FILES.json", generated_files_bytes(files))
+
+
 def snapshot(root):
     result = {}
     if root.exists():
@@ -102,6 +166,7 @@ class Acceptance(LayoutSelection,unittest.TestCase):
         # Explicit versioned candidate: tracked names, working bytes; local
         # untracked environment artifacts never enter the fixture.
         copy_versioned_source(SOURCE,self.repo,ignore=bootstrap_ignore)
+        install_trusted_bootstrap_source(self.repo)
         self.strategy = self.root/'strategy š space'
         self.bootstrap = self.root/'bootstrap č'
         self.bootstrap.mkdir()
@@ -205,10 +270,11 @@ class Acceptance(LayoutSelection,unittest.TestCase):
         return order(self.repo,self.base,ident,**kw)
 
     def private(self):
-        # A selected layout re-materializes from the fixture itself so the
-        # selection is the installed source, never reverted by SOURCE bytes.
-        source=self.repo if getattr(self,"_layout_selected",False) else SOURCE
-        materialize(source,self.repo,self.strategy,self.bootstrap)
+        # The fixture is the installed source for every Acceptance flow:
+        # the trusted pre-revision governance overlay plus current tracked
+        # bytes. Materializing from SOURCE would revert the overlay with
+        # candidate bytes and conflict on the authorized revision set.
+        materialize(self.repo,self.repo,self.strategy,self.bootstrap)
         return runtime_config(self.strategy/'runtime.env',environ={})
 
 
@@ -327,11 +393,36 @@ class Acceptance(LayoutSelection,unittest.TestCase):
             for s in ORDER_SECTIONS:
                 self.assertIn(s,section_map(data))
         self.assertGreater(len(jsread(self.repo/'oap/audit/requirements.json')),50)
+        def target_valid(p,target):
+            t=(p.parent/target.split('#')[0])
+            try:
+                rel=t.resolve().relative_to(self.repo).parts
+            except ValueError:
+                return False
+            # Per-install managed records (bootstrap_ignore: .git,
+            # __pycache__, INSTALLATION.json, *.lock, oap/active,
+            # oap/orders|reports .md) are deliberately absent from the
+            # isolated bootstrap fixture; validate them against the
+            # complete versioned source, keeping the fixture itself
+            # isolated. Every other link must resolve in the fixture.
+            name=rel[-1] if rel else ''
+            managed=(name in ('.git','INSTALLATION.json') or '__pycache__' in rel
+                     or name.endswith('.lock') or rel==('oap','active')
+                     or (len(rel)>=3 and rel[0]=='oap' and rel[1] in ('orders','reports')))
+            if managed:
+                return (SOURCE/Path(*rel)).exists()
+            return t.exists()
         for p in self.repo.rglob('*.md'):
             if 'docs/bootstrap/' in str(p): continue
             for target in re.findall(r'\[[^\]]+\]\(([^)]+)\)',read(p).decode()):
                 if '://' in target or target.startswith('#'): continue
-                self.assertTrue((p.parent/target.split('#')[0]).exists(),(p,target))
+                self.assertTrue(target_valid(p,target),(p,target))
+        # Negative: a misspelled report link must fail the same source-bound
+        # check, so a typo cannot pass silently.
+        neg=self.repo/'negative-report-link-check.md'
+        write(neg,'[x](oap/reports/000-typo-missing-report.md)\n')
+        self.assertFalse(target_valid(neg,'oap/reports/000-typo-missing-report.md'))
+        neg.unlink()
 
     def B11_materializer_dry_noop_refresh(self):
         new=self.root/'fresh repo'
