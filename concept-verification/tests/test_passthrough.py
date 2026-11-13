@@ -152,6 +152,28 @@ class PassthroughTests(unittest.TestCase):
         self.assertEqual((status, body), (200, b""))
         self.assertEqual(dict(headers)["Content-Length"], str(len(Upstream.source)))
 
+    def test_transparent_proxy_can_bind_all_ipv4_interfaces(self):
+        server = proxy.ConceptProxy(
+            ("0.0.0.0", 0),
+            f"http://127.0.0.1:{self.main.server_port}/v1",
+            self.proxy.engine,
+            passthrough_mode=True,
+        )
+        thread = threading.Thread(target=server.serve_forever)
+        thread.start()
+        client = http.client.HTTPConnection("127.0.0.1", server.server_port, timeout=2)
+        try:
+            self.assertEqual(server.server_address[0], "0.0.0.0")
+            client.request("GET", "/v1/models")
+            response = client.getresponse()
+            self.assertEqual((response.status, response.read()), (200, Upstream.source))
+        finally:
+            client.close()
+            server.shutdown()
+            server.server_close()
+            thread.join(5)
+        self.assertFalse(thread.is_alive())
+
     def test_other_traffic_streams_before_upstream_completion(self):
         gate = threading.Event()
         Upstream.stream_gate = gate
@@ -370,6 +392,11 @@ class LauncherSettingsTests(unittest.TestCase):
         self.assertEqual(selected.args[0], ("127.0.0.1", 18023))
         self.assertIs(selected.kwargs["passthrough_mode"], True)
 
+    def test_launcher_can_select_all_ipv4_interfaces(self):
+        selected = self.run_launcher({"CONCEPT_HOST": "0.0.0.0", "CONCEPT_PORT": "18023"})
+        self.assertEqual(selected.args[0], ("0.0.0.0", 18023))
+        self.assertIs(selected.kwargs["passthrough_mode"], True)
+
     def test_strict_mode_remains_available(self):
         selected = self.run_launcher({"CONCEPT_PASSTHROUGH": "0"})
         self.assertEqual(selected.args[0], ("127.0.0.1", 18024))
@@ -378,6 +405,7 @@ class LauncherSettingsTests(unittest.TestCase):
     def test_invalid_listener_settings_never_construct_a_listener(self):
         for setting, values in [
             ("CONCEPT_PORT", ["0", "-1", "65536", "bad", ""]),
+            ("CONCEPT_HOST", ["", "not-an-address", "256.0.0.1", "::1"]),
             ("CONCEPT_PASSTHROUGH", ["true", "2", ""]),
         ]:
             for value in values:

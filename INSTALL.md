@@ -1,7 +1,7 @@
 # Installation
 
-This prepares a **foreground, loopback-only** instance of the runnable proxy
-in `concept-verification/`. It does not install a public service and does not
+This prepares a **foreground** instance of the runnable proxy, listening on loopback
+by default, in `concept-verification/`. It does not install a public service or
 change the model server, GPU, firewall or gateway. For the shortest path to a first
 request once this is set up, see **[QUICKSTART.md](QUICKSTART.md)**.
 
@@ -209,7 +209,10 @@ python3.12 -B concept-verification/proxy.py
 
 The process remains in the foreground and listens at **`127.0.0.1:18024`**.
 Set `CONCEPT_PORT` before launch to choose another port. The normal launcher
-forwards other API traffic transparently and repairs only eligible completed
+accepts `CONCEPT_HOST=0.0.0.0` to listen on all IPv4 interfaces, matching an
+existing network-accessible upstream stack. The default bind address remains
+`127.0.0.1`. Network clients provide their own upstream API key.
+The normal launcher forwards other API traffic transparently and repairs only eligible completed
 Responses text. See [proxy chaining](docs/PROXY-CHAINING.md) for a complete
 `18023 → 18021` example, passthrough behavior and timeout settings.
 
@@ -290,7 +293,7 @@ extra model process is launched, so there is nothing else to stop. If the
 - **Port already in use** — first stop your own stale proxy if you have one
   (Ctrl-C in its terminal). If another service owns `127.0.0.1:18024`, identify
   and contact its owner; do not stop a service you do not own. The proxy
-  binds a fixed loopback address, so do not change it to a public one.
+  defaults to loopback; use `CONCEPT_HOST` for an explicit IPv4 bind address.
 - **Startup rejected** — the proxy checks Pandoc presence, exact version and
   positioned-JSON capability before binding, and validates the configuration
   defaults before any listener is created. A failure message names the finite

@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import contextlib
 import http.client
+import ipaddress
 import json
 import math
 import os
@@ -2231,8 +2232,8 @@ class ConceptProxy(HTTPServer):
         setup_timeout: float = MAIN_SETUP_TIMEOUT_SECONDS,
         passthrough_mode: bool = False,
     ):
-        if address[0] != "127.0.0.1":
-            raise ValueError("proxy must bind to loopback")
+        if address[0] != "127.0.0.1" and not passthrough_mode:
+            raise ValueError("strict proxy must bind to loopback")
         parsed = urlparse(upstream)
         if parsed.scheme not in ("http", "https") or not parsed.hostname:
             raise ValueError("upstream must be an explicit HTTP URL")
@@ -2696,6 +2697,7 @@ class _IntakeKwargs(TypedDict, total=False):
 
 def main() -> int:
     upstream = os.environ.get("CONCEPT_UPSTREAM_URL", "http://127.0.0.1:8001")
+    host = str(ipaddress.IPv4Address(os.environ.get("CONCEPT_HOST", "127.0.0.1")))
     port = int(os.environ.get("CONCEPT_PORT", "18024"))
     if not 1 <= port <= 65535:
         raise ValueError("CONCEPT_PORT must be between 1 and 65535")
@@ -2795,7 +2797,7 @@ def main() -> int:
             os.environ["CONCEPT_SETUP_TIMEOUT"]
         )
     proxy = ConceptProxy(
-        ("127.0.0.1", port),
+        (host, port),
         upstream,
         RepairEngine(Path(index), reviewer, pandoc=pandoc_spec),
         header_timeout=float(

@@ -30,7 +30,7 @@ in languages with less training data and tooling support.
 **Your application ← Checked response ← Repair proxy**
 
 This is experimental software that you install and run yourself. The proxy
-accepts connections only from your own computer and checks the completed answer
+listens on loopback by default and checks the completed answer
 before delivering it when the response is eligible for repair. Other API traffic
 passes through to your existing service. Its effectiveness at improving wording has not yet been
 systematically measured.
@@ -40,7 +40,7 @@ systematically measured.
 ```mermaid
 flowchart TD
     client["Client — Responses API"]
-    proxy["SLAIF proxy<br/>loopback-only"]
+    proxy["SLAIF proxy<br/>configurable listener"]
     admit["Admission + forwarding"]
     main["Main upstream Qwen"]
     gate["Repair eligibility + Pandoc protection<br/>completed answer, exact spans"]
@@ -70,8 +70,9 @@ model.
   limited to eligible completed text answers from stateless `POST /v1/responses`
   calls with `store: false`; declaring tools does not exclude a final text answer.
   Structured output and tool-call responses are preserved unchanged.
-- **Listener** — loopback-only, default `127.0.0.1:18024`; set `CONCEPT_PORT`
-  to choose another port. See [proxy chaining](docs/PROXY-CHAINING.md) for the
+- **Listener** — default `127.0.0.1:18024`; set `CONCEPT_HOST` and `CONCEPT_PORT`
+  to choose the bind address and port. `CONCEPT_HOST=0.0.0.0` accepts IPv4 network
+  connections. See [proxy chaining](docs/PROXY-CHAINING.md) for the
   `18023 → 18021` configuration and streaming behavior.
 - **No repair probabilities** — defined Responses API `logprobs` metadata is
   removed on the eligible repair path, even when no correction is made.

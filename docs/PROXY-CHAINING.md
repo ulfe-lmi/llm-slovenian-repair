@@ -12,6 +12,7 @@ set the following in the same dedicated shell:
 
 ```bash
 export CONCEPT_PORT=18023
+export CONCEPT_HOST=0.0.0.0
 export CONCEPT_UPSTREAM_URL=http://127.0.0.1:18021/v1
 export CONCEPT_REVIEWER_URL=http://127.0.0.1:18021/v1
 export CONCEPT_REVIEWER_MODEL=qwen3.8-27b
@@ -27,7 +28,8 @@ configured as in INSTALL. Every main request carries the client's own upstream
 credential. Choose timeout values to suit the model; they are finite operational
 budgets, not a guarantee about response latency.
 
-Clients use `http://127.0.0.1:18023/v1`. For the existing three-hop stack:
+Local clients use `http://127.0.0.1:18023/v1`; clients on other machines use
+`http://YOUR-PROXY-HOST:18023/v1`. For the existing three-hop stack:
 
 ```text
 Client → 18023 language repair → 18021 image filter → 18022 gateway → 18020 vLLM
@@ -36,7 +38,11 @@ Client → 18023 language repair → 18021 image filter → 18022 gateway → 18
 Main generation and any review request use the upstream endpoint directly. The
 reviewer never calls the repair listener, preventing recursion and requiring no
 second model. The existing services and their configuration need no changes.
-The new listener remains loopback-only; remote clients use an SSH tunnel.
+`CONCEPT_HOST=0.0.0.0` listens on all IPv4 interfaces, matching the existing
+three services. The default is `127.0.0.1` when `CONCEPT_HOST` is unset.
+Both local and network clients must supply the upstream API key; missing or
+invalid credentials retain the upstream's unauthorized response. Strict legacy
+mode remains loopback-only.
 
 ## What passes through
 

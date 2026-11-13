@@ -7,9 +7,9 @@ immutable orders and reports.
 
 ## Product
 
-The normal launcher includes a transparent forwarding layer and a configurable
-`CONCEPT_PORT`, supporting an additional `18023 → 18021` hop. API traffic outside
-the repair profile passes through unchanged; eligible final text responses can
+The normal launcher includes a transparent forwarding layer and configurable
+`CONCEPT_HOST`/`CONCEPT_PORT`, supporting an additional `18023 → 18021` hop.
+API traffic outside the repair profile passes through unchanged; eligible final text responses can
 be repaired even when tools or multimodal input were supplied. See
 [PROXY-CHAINING](docs/PROXY-CHAINING.md). The strict repair core and its historical
 qualification below remain separate from this forwarding addition.
